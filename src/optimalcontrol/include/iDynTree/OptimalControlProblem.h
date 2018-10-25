@@ -23,6 +23,8 @@
 
 #include <iDynTree/Core/Utils.h>
 #include <iDynTree/SparsityStructure.h>
+#include <iDynTree/TimeVaryingObject.h>
+
 
 namespace iDynTree {
 
@@ -160,25 +162,39 @@ namespace iDynTree {
 
             bool setStateLowerBound(const VectorDynSize& minState);
 
+            bool setStateLowerBound(std::shared_ptr<TimeVaryingVector> minState);
+
             bool setStateUpperBound(const VectorDynSize& maxState);
+
+            bool setStateUpperBound(std::shared_ptr<TimeVaryingVector> maxState);
 
             bool setControlLowerBound(const VectorDynSize& minControl);
 
+            bool setControlLowerBound(std::shared_ptr<TimeVaryingVector> minControl);
+
             bool setControlUpperBound(const VectorDynSize& maxControl);
 
+            bool setControlUpperBound(std::shared_ptr<TimeVaryingVector> maxControl);
+
             bool setStateBoxConstraints(const VectorDynSize& minState,
-                                        const VectorDynSize& maxState);
+                                        const VectorDynSize& maxState);            
+
+            bool setStateBoxConstraints(std::shared_ptr<TimeVaryingVector> minState,
+                                        std::shared_ptr<TimeVaryingVector> maxState);
 
             bool setControlBoxConstraints(const VectorDynSize& minControl,
                                           const VectorDynSize& maxControl);
 
-            bool getStateLowerBound(VectorDynSize& minState) const;  //return false if the corresponding bound is not set
+            bool setControlBoxConstraints(std::shared_ptr<TimeVaryingVector> minControl,
+                                          std::shared_ptr<TimeVaryingVector> maxControl);
 
-            bool getStateUpperBound(VectorDynSize& maxState) const;  //return false if the corresponding bound is not set
+            bool getStateLowerBound(double time, VectorDynSize& minState);  //return false if the corresponding bound is not set
 
-            bool getControlLowerBound(VectorDynSize& minControl) const;  //return false if the corresponding bound is not set
+            bool getStateUpperBound(double time, VectorDynSize& maxState);  //return false if the corresponding bound is not set
 
-            bool getControlUpperBound(VectorDynSize& maxControl) const;  //return false if the corresponding bound is not set
+            bool getControlLowerBound(double time, VectorDynSize& minControl);  //return false if the corresponding bound is not set
+
+            bool getControlUpperBound(double time, VectorDynSize& maxControl);  //return false if the corresponding bound is not set
 
             bool costsEvaluation(double time, const VectorDynSize& state, const VectorDynSize& control, double& costValue);
 

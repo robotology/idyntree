@@ -75,7 +75,7 @@ namespace iDynTree {
             VectorDynSize costStateJacobianBuffer, costControlJacobianBuffer;
             MatrixDynSize costStateHessianBuffer, costControlHessianBuffer, costMixedHessianBuffer;
             bool stateLowerBounded, stateUpperBounded, controlLowerBounded, controlUpperBounded;
-            VectorDynSize stateLowerBound, stateUpperBound, controlLowerBound, controlUpperBound; //if they are empty is like there is no bound
+            std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingVector> stateLowerBound, stateUpperBound, controlLowerBound, controlUpperBound; //if they are empty is like there is no bound
             SparsityStructure stateSparsity;
             SparsityStructure controlSparsity;
             std::vector<std::string> mayerCostnames;
@@ -663,7 +663,26 @@ namespace iDynTree {
                 return false;
             }
             m_pimpl->stateLowerBounded = true;
+            m_pimpl->stateLowerBound = std::make_shared<TimeInvariantVector>(minState);
+
+            return true;
+        }
+
+        bool OptimalControlProblem::setStateLowerBound(std::shared_ptr<TimeVaryingVector> minState)
+        {
+            if (!(m_pimpl->dynamicalSystem)){
+                reportError("OptimalControlProblem", "setStateLowerBound", "First a dynamical system has to be set.");
+                return false;
+            }
+
+            if (!minState) {
+                reportError("OptimalControlProblem", "setStateLowerBound", "Empty minState pointer.");
+                return false;
+            }
+
+            m_pimpl->stateLowerBounded = true;
             m_pimpl->stateLowerBound = minState;
+
             return true;
         }
 
@@ -679,7 +698,26 @@ namespace iDynTree {
                 return false;
             }
             m_pimpl->stateUpperBounded = true;
+            m_pimpl->stateUpperBound = std::make_shared<TimeInvariantVector>(maxState);
+
+            return true;
+        }
+
+        bool OptimalControlProblem::setStateUpperBound(std::shared_ptr<TimeVaryingVector> maxState)
+        {
+            if (!(m_pimpl->dynamicalSystem)){
+                reportError("OptimalControlProblem", "setStateUpperBound", "First a dynamical system has to be set.");
+                return false;
+            }
+
+            if (!maxState) {
+                reportError("OptimalControlProblem", "setStateUpperBound", "Empty maxState pointer.");
+                return false;
+            }
+
+            m_pimpl->stateUpperBounded = true;
             m_pimpl->stateUpperBound = maxState;
+
             return true;
         }
 
@@ -694,8 +732,28 @@ namespace iDynTree {
                 reportError("OptimalControlProblem", "setControlLowerBound", "The dimension of minControl does not coincide with the control dimension.");
                 return false;
             }
+
+            m_pimpl->controlLowerBounded = true;
+            m_pimpl->controlLowerBound = std::make_shared<TimeInvariantVector>(minControl);
+
+            return true;
+        }
+
+        bool OptimalControlProblem::setControlLowerBound(std::shared_ptr<TimeVaryingVector> minControl)
+        {
+            if (!(m_pimpl->dynamicalSystem)){
+                reportError("OptimalControlProblem", "setControlLowerBound", "First a dynamical system has to be set.");
+                return false;
+            }
+
+            if (!minControl) {
+                reportError("OptimalControlProblem", "setControlLowerBound", "Empty minControl pointer.");
+                return false;
+            }
+
             m_pimpl->controlLowerBounded = true;
             m_pimpl->controlLowerBound = minControl;
+
             return true;
         }
 
@@ -710,12 +768,37 @@ namespace iDynTree {
                 reportError("OptimalControlProblem", "setControlUpperBound", "The dimension of maxControl does not coincide with the control dimension.");
                 return false;
             }
+
+            m_pimpl->controlUpperBounded = true;
+            m_pimpl->controlUpperBound = std::make_shared<TimeInvariantVector>(maxControl);
+
+            return true;
+        }
+
+        bool OptimalControlProblem::setControlUpperBound(std::shared_ptr<TimeVaryingVector> maxControl)
+        {
+            if (!(m_pimpl->dynamicalSystem)){
+                reportError("OptimalControlProblem", "setControlUpperBound", "First a dynamical system has to be set.");
+                return false;
+            }
+
+            if (!maxControl) {
+                reportError("OptimalControlProblem", "setControlUpperBound", "Empty maxControl pointer.");
+                return false;
+            }
+
             m_pimpl->controlUpperBounded = true;
             m_pimpl->controlUpperBound = maxControl;
+
             return true;
         }
 
         bool OptimalControlProblem::setStateBoxConstraints(const VectorDynSize &minState, const VectorDynSize &maxState)
+        {
+            return setStateLowerBound(minState) && setStateUpperBound(maxState);
+        }
+
+        bool OptimalControlProblem::setStateBoxConstraints(std::shared_ptr<TimeVaryingVector> minState, std::shared_ptr<TimeVaryingVector> maxState)
         {
             return setStateLowerBound(minState) && setStateUpperBound(maxState);
         }
@@ -725,37 +808,46 @@ namespace iDynTree {
             return setControlLowerBound(minControl) && setControlUpperBound(maxControl);
         }
 
-        bool OptimalControlProblem::getStateLowerBound(VectorDynSize &minState) const
+        bool OptimalControlProblem::setControlBoxConstraints(std::shared_ptr<TimeVaryingVector> minControl, std::shared_ptr<TimeVaryingVector> maxControl)
+        {
+            return setControlLowerBound(minControl) && setControlUpperBound(maxControl);
+        }
+
+        bool OptimalControlProblem::getStateLowerBound(double time, VectorDynSize &minState)
         {
             if (m_pimpl->stateLowerBounded){
-                minState = m_pimpl->stateLowerBound;
-                return true;
+                bool isValid = false;
+                minState = m_pimpl->stateLowerBound->get(time, isValid);
+                return isValid;
             }
             return false;
         }
 
-        bool OptimalControlProblem::getStateUpperBound(VectorDynSize &maxState) const
+        bool OptimalControlProblem::getStateUpperBound(double time, VectorDynSize &maxState)
         {
             if (m_pimpl->stateUpperBounded){
-                maxState = m_pimpl->stateUpperBound;
-                return true;
+                bool isValid = false;
+                maxState = m_pimpl->stateUpperBound->get(time, isValid);
+                return isValid;
             }
             return false;
         }
 
-        bool OptimalControlProblem::getControlLowerBound(VectorDynSize &minControl) const
+        bool OptimalControlProblem::getControlLowerBound(double time, VectorDynSize &minControl)
         {
             if (m_pimpl->controlLowerBounded){
-                minControl = m_pimpl->controlLowerBound;
+                bool isValid = false;
+                minControl = m_pimpl->controlLowerBound->get(time, isValid);
                 return true;
             }
             return false;
         }
 
-        bool OptimalControlProblem::getControlUpperBound(VectorDynSize &maxControl) const
+        bool OptimalControlProblem::getControlUpperBound(double time, VectorDynSize &maxControl)
         {
             if (m_pimpl->controlUpperBounded){
-                maxControl = m_pimpl->controlUpperBound;
+                bool isValid = false;
+                maxControl = m_pimpl->controlUpperBound->get(time, isValid);
                 return true;
             }
             return false;

@@ -1298,24 +1298,9 @@ namespace iDynTree {
 
             virtual bool getVariablesUpperBound(VectorDynSize& variablesUpperBound) override {
 
-                bool stateBounded = true, controlBounded = true;
-
                 Eigen::Map<Eigen::VectorXd> stateBufferMap = toEigen(m_stateBuffer);
                 Eigen::Map<Eigen::VectorXd> controlBufferMap = toEigen(m_controlBuffer);
 
-                if (!(m_ocproblem->getStateUpperBound(m_stateBuffer))) {
-                    stateBounded = false;
-                    stateBufferMap.setConstant(m_plusInfinity);
-                }
-
-                if (!(m_ocproblem->getControlUpperBound(m_controlBuffer))) {
-                    controlBounded = false;
-                    controlBufferMap.setConstant(m_plusInfinity);
-                }
-
-                if (!controlBounded && !stateBounded) {
-                    return false;
-                }
 
                 if (variablesUpperBound.size() != m_numberOfVariables) {
                     variablesUpperBound.resize(numberOfVariables());
@@ -1326,15 +1311,43 @@ namespace iDynTree {
                 Eigen::Index nu = static_cast<Eigen::Index>(m_nu);
 
                 MeshPointOrigin first = MeshPointOrigin::FirstPoint();
+                bool isBounded;
                 for (auto mesh = m_meshPoints.begin(); mesh != m_meshPointsEnd; ++mesh){
                     if (mesh->origin == first){
                         upperBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx).setConstant(m_plusInfinity); //avoiding setting bounds on the initial state
-                        upperBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = controlBufferMap;
+
+                        isBounded = m_ocproblem->getControlUpperBound(mesh->time, m_controlBuffer);
+                        if (isBounded) {
+                            upperBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = controlBufferMap;
+                        } else {
+                            upperBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu).setConstant(m_plusInfinity);
+                        }
+
                     } else if (mesh->type == MeshPointType::Control) {
-                        upperBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = controlBufferMap;
-                        upperBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = stateBufferMap;
+
+                        isBounded = m_ocproblem->getControlUpperBound(mesh->time, m_controlBuffer);
+                        if (isBounded) {
+                            upperBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = controlBufferMap;
+                        } else {
+                            upperBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu).setConstant(m_plusInfinity);
+                        }
+
+                        isBounded = m_ocproblem->getStateUpperBound(mesh->time, m_stateBuffer);
+                        if (isBounded) {
+                            upperBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = stateBufferMap;
+                        } else {
+                            upperBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx).setConstant(m_plusInfinity);
+                        }
+
                     } else if (mesh->type == MeshPointType::State) {
-                        upperBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = stateBufferMap;
+
+                        isBounded = m_ocproblem->getStateUpperBound(mesh->time, m_stateBuffer);
+                        if (isBounded) {
+                            upperBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = stateBufferMap;
+                        } else {
+                            upperBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx).setConstant(m_plusInfinity);
+                        }
+
                     }
                 }
                 return true;
@@ -1342,26 +1355,11 @@ namespace iDynTree {
 
             virtual bool getVariablesLowerBound(VectorDynSize& variablesLowerBound) override {
 
-                bool stateBounded = true, controlBounded = true;
-
                 Eigen::Map<Eigen::VectorXd> stateBufferMap = toEigen(m_stateBuffer);
                 Eigen::Map<Eigen::VectorXd> controlBufferMap = toEigen(m_controlBuffer);
 
-                if (!(m_ocproblem->getStateLowerBound(m_stateBuffer))) {
-                    stateBounded = false;
-                    stateBufferMap.setConstant(m_minusInfinity);
-                }
 
-                if (!(m_ocproblem->getControlLowerBound(m_controlBuffer))) {
-                    controlBounded = false;
-                    controlBufferMap.setConstant(m_minusInfinity);
-                }
-
-                if (!controlBounded && !stateBounded) {
-                    return false;
-                }
-
-                if (variablesLowerBound.size() != numberOfVariables()) {
+                if (variablesLowerBound.size() != m_numberOfVariables) {
                     variablesLowerBound.resize(numberOfVariables());
                 }
                 Eigen::Map<Eigen::VectorXd> lowerBoundMap = toEigen(variablesLowerBound);
@@ -1370,15 +1368,43 @@ namespace iDynTree {
                 Eigen::Index nu = static_cast<Eigen::Index>(m_nu);
 
                 MeshPointOrigin first = MeshPointOrigin::FirstPoint();
+                bool isBounded;
                 for (auto mesh = m_meshPoints.begin(); mesh != m_meshPointsEnd; ++mesh){
                     if (mesh->origin == first){
                         lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx).setConstant(m_minusInfinity); //avoiding setting bounds on the initial state
-                        lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = controlBufferMap;
+
+                        isBounded = m_ocproblem->getControlLowerBound(mesh->time, m_controlBuffer);
+                        if (isBounded) {
+                            lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = controlBufferMap;
+                        } else {
+                            lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu).setConstant(m_minusInfinity);
+                        }
+
                     } else if (mesh->type == MeshPointType::Control) {
-                        lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = controlBufferMap;
-                        lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = stateBufferMap;
+
+                        isBounded = m_ocproblem->getControlLowerBound(mesh->time, m_controlBuffer);
+                        if (isBounded) {
+                            lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = controlBufferMap;
+                        } else {
+                            lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu).setConstant(m_minusInfinity);
+                        }
+
+                        isBounded = m_ocproblem->getStateLowerBound(mesh->time, m_stateBuffer);
+                        if (isBounded) {
+                            lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = stateBufferMap;
+                        } else {
+                            lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx).setConstant(m_minusInfinity);
+                        }
+
                     } else if (mesh->type == MeshPointType::State) {
-                        lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = stateBufferMap;
+
+                        isBounded = m_ocproblem->getStateLowerBound(mesh->time, m_stateBuffer);
+                        if (isBounded) {
+                            lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = stateBufferMap;
+                        } else {
+                            lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx).setConstant(m_minusInfinity);
+                        }
+
                     }
                 }
                 return true;
