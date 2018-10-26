@@ -62,6 +62,7 @@ namespace iDynTree {
 
             m_initTime = init;
             m_endTime = end;
+            m_anyTime = false;
 
             return true;
         }
