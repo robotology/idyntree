@@ -14,20 +14,25 @@
 namespace iDynTree
 {
 
-Environment::Environment(): m_sceneManager(0),
-                            m_rootFrameNode(0),
-                            m_floorGridNode(0)
+Environment::Environment(): m_sceneManager(nullptr),
+                            m_rootFrameNode(nullptr),
+                            m_floorGridNode(nullptr)
 {
 
 }
 
 void Environment::close()
 {
+    if (m_floorGridNode){
+        m_floorGridNode->drop();
+        m_floorGridNode = nullptr;
+    }
+
     for(size_t i=0; i < m_lights.size(); i++)
     {
         m_lights[i]->removeLight();
         delete m_lights[i];
-        m_lights[i] = 0;
+        m_lights[i] = nullptr;
     }
 
     m_lights.resize(0);
@@ -108,7 +113,7 @@ bool Environment::addLight(const std::string& lightName)
         }
     }
 
-    int lightIdx = m_lights.size();
+    size_t lightIdx = m_lights.size();
 
     // Add a new light
     m_lights.push_back(new Light());
@@ -141,7 +146,7 @@ bool Environment::removeLight(const std::string& lightName)
         {
             m_lights[i]->removeLight();
             delete m_lights[i];
-            m_lights[i] = 0;
+            m_lights[i] = nullptr;
             std::vector<Light*>::iterator it;
             std::advance(it,i);
             m_lights.erase(it);

@@ -160,6 +160,8 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
 
         geomNode = smgr->addMeshSceneNode(boxMesh,linkNode);
 
+        boxMesh->drop();
+
     }
 
     if (geom->isSphere())
@@ -283,6 +285,8 @@ inline irr::scene::ISceneNode * addFrameAxes(irr::scene::ISceneManager* smgr,
     zArrow->setRotation(irr::core::vector3df(90.0,0.0,0.0));
     zArrow->getMaterial(0) = transBlue;
     zArrow->getMaterial(1) = transBlue;
+
+    arrowMesh->drop();
 
     return frameNode;
 }

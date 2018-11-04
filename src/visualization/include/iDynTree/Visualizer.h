@@ -14,6 +14,7 @@
 #include <string>
 
 #include <iDynTree/Core/Direction.h>
+#include <iDynTree/Core/Position.h>
 
 #include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/LinkState.h>
@@ -293,6 +294,70 @@ public:
     virtual bool setJetsIntensity(const VectorDynSize & jetsIntensity) = 0;
 };
 
+/**
+ * Interface to the visualization of vectors.
+ */
+class IVectorsVisualization
+{
+public:
+    /**
+     * Denstructor
+     */
+    virtual ~IVectorsVisualization() = 0;
+
+    /**
+     * @brief Add a vector in the visualization
+     * @return The vector index.
+     */
+    virtual size_t addVector(const Position & origin, const Direction & direction, double modulus) = 0;
+
+    /**
+     * @brief Add a vector in the visualization
+     * @return The vector index.
+     */
+    virtual size_t addVector(const Position & origin, const Vector3 & components) = 0;
+
+    /**
+     * Get the number of visualized vectors.
+     *
+     */
+    virtual size_t getNrOfVectors() const = 0;
+
+    /**
+     * Get vector properties.
+     */
+    virtual bool getVector(size_t vectorIndex, Position & currentOrigin,
+                           Direction & currentDirection, double & currentModulus) const = 0;
+
+    /**
+     * Get vector properties.
+     */
+    virtual bool getVector(size_t vectorIndex, Position & currentOrigin, Vector3 & components) const = 0;
+
+    /**
+     * Update Vector
+     */
+    virtual bool updateVector(size_t vectorIndex, const Position & origin, const Direction & direction, double modulus) = 0;
+
+    /**
+     * Update Vector
+     */
+    virtual bool updateVector(size_t vectorIndex, const Position & origin, const Vector3& components) = 0;
+
+    /**
+     * Set vector color.
+     */
+    virtual bool setVectorColor(size_t vectorIndex, const ColorViz & vectorColor) = 0;
+
+    /**
+     * @brief Determines the dimension of the visualized arrows
+     * @param zeroModulusRadius Constant offset for the arrow radius.
+     * @param modulusMultiplier Multiplies the modulus and adds up to the zeroModulusRadius to get the total arrow radius.
+     * @return true if successfull, false in case of negative numbers.
+     */
+    virtual bool setVectorsAspect(double zeroModulusRadius, double modulusMultiplier, double heightScale) = 0;
+};
+
 
 /**
  * Interface to the visualization of a model istance.
@@ -484,6 +549,11 @@ public:
      * Return an interface to manipulate the visualization environment.
      */
     IEnvironment& enviroment();
+
+    /**
+     * Get a reference to the internal IVectorsVisualization interface.
+     */
+    IVectorsVisualization& vectors();
 
     /**
      * Wrap the run method of the Irrlicht device.
