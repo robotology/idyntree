@@ -40,8 +40,6 @@ public:
 
     void addDenseBlock(size_t startRow, size_t startColumn, size_t numberOfRows, size_t numberOfColumns);
 
-    bool addDenseBlock(long startRow, long startColumn, long numberOfRows, long numberOfColumns);
-
     bool addDenseBlock(const iDynTree::IndexRange& rowsRange, const iDynTree::IndexRange& columnsRange);
 
     void addIdentityBlock(size_t startRow, size_t startColumn, size_t dimension);

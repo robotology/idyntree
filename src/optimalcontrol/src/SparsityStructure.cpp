@@ -47,35 +47,6 @@ void iDynTree::optimalcontrol::SparsityStructure::addDenseBlock(size_t startRow,
     }
 }
 
-bool iDynTree::optimalcontrol::SparsityStructure::addDenseBlock(long startRow, long startColumn, long numberOfRows, long numberOfColumns)
-{
-    if (startRow < 0) {
-        reportError("SparsityStructure", "addDenseBlock", "The startRow is negative.");
-        return false;
-    }
-
-    if (startColumn < 0) {
-        reportError("SparsityStructure", "addDenseBlock", "The startColumn is negative.");
-        return false;
-    }
-
-    if (numberOfRows < 0) {
-        reportError("SparsityStructure", "addDenseBlock", "The numberOfRows is negative.");
-        return false;
-    }
-
-    if (numberOfColumns < 0) {
-        reportError("SparsityStructure", "addDenseBlock", "The numberOfColumns is negative.");
-        return false;
-    }
-
-    addDenseBlock(static_cast<size_t>(startRow),
-                  static_cast<size_t>(startColumn),
-                  static_cast<size_t>(numberOfRows),
-                  static_cast<size_t>(numberOfColumns));
-    return true;
-}
-
 bool iDynTree::optimalcontrol::SparsityStructure::addDenseBlock(const iDynTree::IndexRange &rowsRange, const iDynTree::IndexRange &columnsRange)
 {
     if (!rowsRange.isValid()) {
@@ -88,7 +59,10 @@ bool iDynTree::optimalcontrol::SparsityStructure::addDenseBlock(const iDynTree::
         return false;
     }
 
-    addDenseBlock(rowsRange.offset, columnsRange.offset, rowsRange.size, columnsRange.size);
+    addDenseBlock(static_cast<size_t>(rowsRange.offset),
+                  static_cast<size_t>(columnsRange.offset),
+                  static_cast<size_t>(rowsRange.size),
+                  static_cast<size_t>(columnsRange.size));
 
     return true;
 }
