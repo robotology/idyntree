@@ -60,7 +60,7 @@ namespace iDynTree {
             double rho;
 
 
-            AlglibInterfaceImplementation() {
+            AlglibInterfaceImplementation(){
                 nlpData = new(SharedData);
                 assert(nlpData);
                 nlpData->problem = nullptr;
@@ -69,13 +69,6 @@ namespace iDynTree {
                 maxits = 0;
                 outerits = 5;
                 rho = 1000;
-            }
-
-            ~AlglibInterfaceImplementation() {
-                if (nlpData){
-                    delete nlpData;
-                    nlpData = nullptr;
-                }
             }
 
         };
@@ -157,6 +150,14 @@ namespace iDynTree {
 
         AlglibInterface::~AlglibInterface()
         {
+            if (m_pimpl){
+                if (m_pimpl->nlpData){
+                    delete m_pimpl->nlpData;
+                    m_pimpl->nlpData = nullptr;
+                }
+                delete m_pimpl;
+                m_pimpl = nullptr;
+            }
 
         }
 

@@ -18,7 +18,6 @@
 #define IDYNTREE_OPTIMALCONTROL_ALGLIBINTERFACE_H
 
 #include <iDynTree/Optimizer.h>
-#include <memory>
 
 namespace iDynTree {
 
@@ -34,7 +33,7 @@ namespace iDynTree {
         class AlglibInterface : public Optimizer {
 
             class AlglibInterfaceImplementation;
-            std::unique_ptr<AlglibInterfaceImplementation> m_pimpl;
+            AlglibInterfaceImplementation *m_pimpl;
 
         public:
 
