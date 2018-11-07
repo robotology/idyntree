@@ -41,7 +41,9 @@ namespace iDynTree {
                 toEigen(m_identity) = iDynTreeEigenMatrix::Identity(nx, nx);
 
                 m_stateJacBuffer.resize(nx, nx);
+                m_stateJacBuffer.zero();
                 m_controlJacBuffer.resize(nx,nu);
+                m_controlJacBuffer.zero();
                 m_zeroBuffer.resize(nx,nu);
                 m_zeroBuffer.zero();
 
