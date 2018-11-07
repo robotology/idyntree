@@ -74,30 +74,6 @@ void iDynTree::optimalcontrol::SparsityStructure::addIdentityBlock(size_t startR
     }
 }
 
-bool iDynTree::optimalcontrol::SparsityStructure::addIdentityBlock(long startRow, long startColumn, long dimension)
-{
-    if (startRow < 0) {
-        reportError("SparsityStructure", "addIdentityBlock", "The startRow is negative.");
-        return false;
-    }
-
-    if (startColumn < 0) {
-        reportError("SparsityStructure", "addIdentityBlock", "The startColumn is negative.");
-        return false;
-    }
-
-    if (dimension < 0) {
-        reportError("SparsityStructure", "addIdentityBlock", "The dimension is negative.");
-        return false;
-    }
-
-    addIdentityBlock(static_cast<size_t>(startRow),
-                     static_cast<size_t>(startColumn),
-                     static_cast<size_t>(dimension)
-                     );
-    return true;
-}
-
 void iDynTree::optimalcontrol::SparsityStructure::addNonZeroIfNotPresent(size_t newRow, size_t newCol)
 {
     if (!isValuePresent(newRow, newCol)) {

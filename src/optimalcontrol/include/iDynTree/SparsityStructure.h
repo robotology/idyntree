@@ -44,8 +44,6 @@ public:
 
     void addIdentityBlock(size_t startRow, size_t startColumn, size_t dimension);
 
-    bool addIdentityBlock(long startRow, long startColumn, long dimension);
-
     void addNonZeroIfNotPresent(size_t newRow, size_t newCol);
 
     bool isValuePresent(size_t row, size_t col) const;
