@@ -99,7 +99,6 @@ void VectorsVisualization::close()
     for (auto& vector: m_vectors) {
         if (vector.visualizationNode) {
             vector.visualizationNode->removeAll();
-            //vector.visualizationNode->drop();
             vector.visualizationNode = nullptr;
         }
     }
