@@ -89,6 +89,19 @@ public:
     virtual bool setJetsIntensity(const VectorDynSize & ) { return false; };
 };
 
+class DummyVectorsVisualization : public IVectorsVisualization {
+public:
+    virtual ~DummyVectorsVisualization() override { }
+    virtual size_t addVector(const Position &, const Direction &, double) override { return 0; }
+    virtual size_t addVector(const Position &, const Vector3 &) override { return 0; }
+    virtual size_t getNrOfVectors() const override { return 0; }
+    virtual bool getVector(size_t, Position &, Direction &, double &) const override { return false; }
+    virtual bool getVector(size_t, Position &, Vector3 &) const override { return false; }
+    virtual bool updateVector(size_t , const Position &, const Direction &, double) override { return false; }
+    virtual bool updateVector(size_t, const Position &, const Vector3&) override { return false; }
+    virtual bool setVectorColor(size_t , const ColorViz &) override { return false; }
+    virtual bool setVectorsAspect(double, double, double) override { return false; }
+};
 
 /**
  * Dummy model visualization.

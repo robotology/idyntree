@@ -18,6 +18,7 @@
 #include "Camera.h"
 #include "Environment.h"
 #include "ModelVisualization.h"
+#include "VectorsVisualization.h"
 #endif
 
 #include "DummyImplementations.h"
@@ -40,6 +41,9 @@ IJetsVisualization::~IJetsVisualization()
 
 }
 
+IVectorsVisualization::~IVectorsVisualization()
+{
+}
 
 IModelVisualization::~IModelVisualization()
 {
@@ -112,9 +116,15 @@ struct Visualizer::VisualizerPimpl
      */
     Environment m_environment;
 
+    /**
+     * Vectors visualization
+     */
+    VectorsVisualization m_vectors;
+
 #else
     DummyCamera m_camera;
     DummyEnvironment m_environment;
+    DummyVectorsVisualization m_invalidVectors;
 #endif
 
     VisualizerPimpl()
@@ -221,6 +231,8 @@ bool Visualizer::init(const VisualizerOptions options)
     sun.setAmbientColor(iDynTree::ColorViz(0.1,0.1,0.1,1.0));
 
     pimpl->m_camera.setIrrlichtCamera(addVizCamera(pimpl->m_irrSmgr));
+
+    pimpl->m_vectors.init(pimpl->m_irrSmgr);
 
     pimpl->m_isInitialized = true;
     pimpl->lastFPS         = -1;
@@ -421,6 +433,19 @@ IEnvironment& Visualizer::enviroment()
     return pimpl->m_environment;
 }
 
+IVectorsVisualization &Visualizer::vectors()
+{
+#ifdef IDYNTREE_USES_IRRLICHT
+    if( !this->pimpl->m_isInitialized )
+    {
+        init();
+    }
+    return this->pimpl->m_vectors;
+#else
+    return this->pimpl->m_invalidVectors;
+#endif
+}
+
 bool Visualizer::run()
 {
 #ifdef IDYNTREE_USES_IRRLICHT
@@ -432,7 +457,7 @@ bool Visualizer::run()
 
     return pimpl->m_irrDevice->run();
 #else
-    reportError("Visualizer","init","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
+    reportError("Visualizer","run","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
     return false;
 #endif
 }
@@ -445,11 +470,12 @@ void Visualizer::close()
         return;
     }
 
+    pimpl->m_vectors.close();
     pimpl->m_environment.close();
 
     pimpl->m_irrDevice->closeDevice();
     pimpl->m_irrDevice->drop();
-    pimpl->m_irrDevice = 0;
+    pimpl->m_irrDevice = nullptr;
     pimpl->m_isInitialized = false;
 
     for(size_t mdl=0; mdl < pimpl->m_modelViz.size(); mdl++)
@@ -457,7 +483,7 @@ void Visualizer::close()
         if( pimpl->m_modelViz[mdl] )
         {
             delete pimpl->m_modelViz[mdl];
-            pimpl->m_modelViz[mdl] = 0;
+            pimpl->m_modelViz[mdl] = nullptr;
         }
     }
 

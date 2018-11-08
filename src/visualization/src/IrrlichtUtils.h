@@ -23,6 +23,8 @@
 
 #include "FloorGridSceneNode.h"
 
+#include <cmath>
+
 namespace iDynTree
 {
 
@@ -39,7 +41,7 @@ inline iDynTree::ColorViz  irrlicht2idyntree(irr::video::SColorf color)
 
 inline irr::core::vector3df idyntree2irr_rpy(const iDynTree::Vector3 & vecId)
 {
-    const double kRad2deg = 180/M_PI;
+    double kRad2deg = 180/M_PI;
     return irr::core::vector3df(kRad2deg*vecId(0),kRad2deg*vecId(1),kRad2deg*vecId(2));
 }
 
@@ -55,7 +57,7 @@ inline  iDynTree::Position irr2idyntree_pos(const irr::core::vector3df & vecIrr)
 
 inline iDynTree::Vector3 irr2idyntree_rpy(const irr::core::vector3df & vecIrr)
 {
-    const double kDeg2rad = M_PI/180;
+    double kDeg2rad = M_PI/180;
     iDynTree::Vector3 ret;
     ret(0) = kDeg2rad*vecIrr.X;
     ret(1) = kDeg2rad*vecIrr.Y;
@@ -159,6 +161,8 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
         irr::scene::IMesh* boxMesh = smgr->getGeometryCreator()->createCubeMesh(irr::core::vector3df(box->x,box->y,box->z));
 
         geomNode = smgr->addMeshSceneNode(boxMesh,linkNode);
+
+        boxMesh->drop();
 
     }
 
@@ -283,6 +287,8 @@ inline irr::scene::ISceneNode * addFrameAxes(irr::scene::ISceneManager* smgr,
     zArrow->setRotation(irr::core::vector3df(90.0,0.0,0.0));
     zArrow->getMaterial(0) = transBlue;
     zArrow->getMaterial(1) = transBlue;
+
+    arrowMesh->drop();
 
     return frameNode;
 }
