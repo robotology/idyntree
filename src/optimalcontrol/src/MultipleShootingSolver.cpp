@@ -1474,8 +1474,6 @@ namespace iDynTree {
                 bool isValid = false;
                 for (auto mesh = m_meshPoints.begin(); mesh != m_meshPointsEnd; ++mesh){
                     if (mesh->origin == first){
-                        guessMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) =
-                                toEigen(m_ocproblem->dynamicalSystem().lock()->initialState());
 
                         const iDynTree::VectorDynSize &controlGuess = m_controlGuesses->get(mesh->time, isValid);
 
