@@ -313,6 +313,7 @@ namespace optimalcontrol {
                     reportError("ConstraintsGroup", "evaluateConstraints", errorMsg.str().c_str());
                     return false;
                 }
+                return true;
             }
 
             if (constraints.size() < m_pimpl->maxConstraintSize) {
@@ -401,7 +402,29 @@ namespace optimalcontrol {
         bool ConstraintsGroup::constraintJacobianWRTState(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &jacobian)
         {
             if (isAnyTimeGroup()) {
-                return m_pimpl->group.begin()->second.get()->constraint->constraintJacobianWRTState(time, state, control, jacobian);
+                TimedConstraint_ptr loneConstraint = m_pimpl->group.begin()->second;
+                if (!(loneConstraint->constraint->constraintJacobianWRTState(time, state, control, jacobian))) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Failed to evaluate "<< loneConstraint->constraint->name() << std::endl;
+                    reportError("ConstraintsGroup", "constraintJacobianWRTState", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (jacobian.rows() != loneConstraint->constraint->constraintSize()) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The state jacobian of constraint "<< loneConstraint->constraint->name() << " has a number of rows different from the size of the constraint." << std::endl;
+                    reportError("ConstraintsGroup", "constraintJacobianWRTState", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (jacobian.cols() != state.size()) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The state jacobian of constraint "<< loneConstraint->constraint->name() << " has a number of columns different from the state size." << std::endl;
+                    reportError("ConstraintsGroup", "constraintJacobianWRTState", errorMsg.str().c_str());
+                    return false;
+                }
+
+                return true;
             }
 
             if ((jacobian.rows() != m_pimpl->maxConstraintSize)||(jacobian.cols() != state.size())) {
@@ -455,28 +478,28 @@ namespace optimalcontrol {
         {
             if (isAnyTimeGroup()){
                 TimedConstraint_ptr loneConstraint = m_pimpl->group.begin()->second;
-                if (!(loneConstraint->constraint->constraintJacobianWRTControl(time, state, control, loneConstraint->controlJacobianBuffer))) {
+                if (!(loneConstraint->constraint->constraintJacobianWRTControl(time, state, control, jacobian))) {
                     std::ostringstream errorMsg;
                     errorMsg << "Failed to evaluate "<< loneConstraint->constraint->name() << std::endl;
                     reportError("ConstraintsGroup", "constraintJacobianWRTControl", errorMsg.str().c_str());
                     return false;
                 }
 
-                if (loneConstraint->controlJacobianBuffer.rows() != loneConstraint->constraint->constraintSize()) {
+                if (jacobian.rows() != loneConstraint->constraint->constraintSize()) {
                     std::ostringstream errorMsg;
                     errorMsg << "The control jacobian of constraint "<< loneConstraint->constraint->name() << " has a number of rows different from the size of the constraint." << std::endl;
                     reportError("ConstraintsGroup", "constraintJacobianWRTControl", errorMsg.str().c_str());
                     return false;
                 }
 
-                if (loneConstraint->controlJacobianBuffer.cols() != control.size()) {
+                if (jacobian.cols() != control.size()) {
                     std::ostringstream errorMsg;
                     errorMsg << "The control jacobian of constraint "<< loneConstraint->constraint->name() << " has a number of columns different from the control size." << std::endl;
                     reportError("ConstraintsGroup", "constraintJacobianWRTControl", errorMsg.str().c_str());
                     return false;
                 }
 
-                jacobian = m_pimpl->group.begin()->second.get()->controlJacobianBuffer;
+                return true;
             }
 
             if ((jacobian.rows() != m_pimpl->maxConstraintSize)||(jacobian.cols() != control.size())) {
