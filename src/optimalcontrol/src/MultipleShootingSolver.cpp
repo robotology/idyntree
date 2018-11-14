@@ -991,7 +991,7 @@ namespace iDynTree {
 
                 m_constraintsPerInstant = m_ocproblem->getConstraintsDimension();
                 size_t nc = m_constraintsPerInstant;
-                m_numberOfConstraints = (m_totalMeshes) * nx + (m_constraintsPerInstant) * (m_totalMeshes); //dynamical constraints (plus identity constraint for the initial state) and normal constraints
+                m_numberOfConstraints = (m_totalMeshes - 1) * nx + (m_constraintsPerInstant) * (m_totalMeshes); //dynamical constraints (plus identity constraint for the initial state) and normal constraints
 
                 //Determine problem type
                 m_infoData->hasLinearConstraints = (m_ocproblem->countLinearConstraints() != 0) || m_ocproblem->systemIsLinear();
@@ -1039,11 +1039,6 @@ namespace iDynTree {
                         mesh->previousControlIndex = index;
                         index += nu;
                         previousControlMesh = mesh;
-
-                        lowerBoundMap.segment(static_cast<Eigen::Index>(constraintIndex), static_cast<Eigen::Index>(nx)) = toEigen(m_ocproblem->dynamicalSystem().lock()->initialState());
-                        upperBoundMap.segment(static_cast<Eigen::Index>(constraintIndex), static_cast<Eigen::Index>(nx)) = toEigen(m_ocproblem->dynamicalSystem().lock()->initialState());
-                        addIdentityJacobianBlock(constraintIndex, mesh->stateIndex, nx);
-                        constraintIndex += nx;
 
                         //Saving constraints bounds
                         if (!(m_ocproblem->getConstraintsLowerBound(mesh->time, m_minusInfinity, m_constraintsBuffer))){
@@ -1314,7 +1309,7 @@ namespace iDynTree {
                 bool isBounded;
                 for (auto mesh = m_meshPoints.begin(); mesh != m_meshPointsEnd; ++mesh){
                     if (mesh->origin == first){
-                        upperBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx).setConstant(m_plusInfinity); //avoiding setting bounds on the initial state
+                        upperBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = toEigen(m_ocproblem->dynamicalSystem().lock()->initialState());
 
                         isBounded = m_ocproblem->getControlUpperBound(mesh->time, m_controlBuffer);
                         if (isBounded) {
@@ -1371,8 +1366,7 @@ namespace iDynTree {
                 bool isBounded;
                 for (auto mesh = m_meshPoints.begin(); mesh != m_meshPointsEnd; ++mesh){
                     if (mesh->origin == first){
-                        lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx).setConstant(m_minusInfinity); //avoiding setting bounds on the initial state
-
+                        lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = toEigen(m_ocproblem->dynamicalSystem().lock()->initialState());
                         isBounded = m_ocproblem->getControlLowerBound(mesh->time, m_controlBuffer);
                         if (isBounded) {
                             lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = controlBufferMap;
@@ -1733,10 +1727,7 @@ namespace iDynTree {
                     currentControl  = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu);
                     previousControl = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->previousControlIndex), nu);
 
-                    if (mesh->origin == first) {
-                        constraintsMap.segment(constraintIndex, nx) = currentState; //identity constraint for the initial state
-                        constraintIndex += nx;
-                    } else {
+                    if (mesh->origin != first) {
                         previousState = variablesBuffer.segment(static_cast<Eigen::Index>((mesh - 1)->stateIndex), nx);
                         dT = mesh->time - (mesh - 1)->time;
                         if (!(m_integrator->evaluateCollocationConstraint(mesh->time, m_collocationStateBuffer, m_collocationControlBuffer, dT, m_stateBuffer))){
@@ -1802,12 +1793,7 @@ namespace iDynTree {
                     currentControl  = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu);
                     previousControl = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->previousControlIndex), nu);
 
-                    if (mesh->origin == first) {
-
-                        jacobianMap.block(constraintIndex, static_cast<Eigen::Index>(mesh->stateIndex), nx, nx).setIdentity();
-                        constraintIndex += nx;
-
-                    } else {
+                    if (mesh->origin != first) {
                         previousState = variablesBuffer.segment(static_cast<Eigen::Index>((mesh - 1)->stateIndex), nx);
                         dT = mesh->time - (mesh - 1)->time;
                         if (!(m_integrator->evaluateCollocationConstraintJacobian(mesh->time, m_collocationStateBuffer, m_collocationControlBuffer, dT, m_collocationStateJacBuffer, m_collocationControlJacBuffer))){
