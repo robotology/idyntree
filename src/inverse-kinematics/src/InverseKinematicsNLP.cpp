@@ -86,13 +86,13 @@ namespace kinematics {
 
     bool SparsityHelper::addConstraintSparsityPattern(const iDynTree::MatrixDynSize& newConstraint)
     {
-        return addConstraintSparsityPattern(newConstraint, {0, newConstraint.rows()});
+        return addConstraintSparsityPattern(newConstraint, {0, static_cast<ptrdiff_t>(newConstraint.rows())});
     }
 
     template<unsigned int nRows, unsigned int nCols>
     bool SparsityHelper::addConstraintSparsityPattern(const iDynTree::MatrixFixSize<nRows, nCols>& newConstraint)
     {
-        return addConstraintSparsityPattern(newConstraint, {0, newConstraint.rows()});
+        return addConstraintSparsityPattern(newConstraint, {0, static_cast<ptrdiff_t>(newConstraint.rows())});
     }
 
     bool SparsityHelper::addConstraintSparsityPattern(const iDynTree::MatrixDynSize& newConstraint,
@@ -1226,7 +1226,7 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
                     iDynTree::toEigen(comInfo.projectedComJacobian) =
                             iDynTree::toEigen(m_data.m_comHullConstraint.A) * iDynTree::toEigen(m_data.m_comHullConstraint.Pdirection) * iDynTree::toEigen(comInfo.comJacobianAnalytical);
 
-                    m_jacobianSparsityHelper.assignActualMatrixValues({constraintIndex, comInfo.projectedComJacobian.rows()},
+                    m_jacobianSparsityHelper.assignActualMatrixValues({constraintIndex, static_cast<ptrdiff_t>(comInfo.projectedComJacobian.rows())},
                                                                       comInfo.projectedComJacobian, 0,
                                                                       values);
 
@@ -1234,7 +1234,7 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
                 }
                 
                 if (m_data.isCoMTargetActive()) {
-                    m_jacobianSparsityHelper.assignActualMatrixValues({constraintIndex, comInfo.comJacobianAnalytical.rows()},
+                    m_jacobianSparsityHelper.assignActualMatrixValues({constraintIndex, static_cast<ptrdiff_t>(comInfo.comJacobianAnalytical.rows())},
                                                                       comInfo.comJacobianAnalytical, 0,
                                                                       values);
                     constraintIndex += 3;

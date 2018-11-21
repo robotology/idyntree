@@ -39,7 +39,7 @@ namespace iDynTree {
         InverseKinematicsRotationParametrizationRollPitchYaw, /*!< Roll Pitch Yaw parametrization */
     };
 
-    inline unsigned sizeOfRotationParametrization(enum InverseKinematicsRotationParametrization rotationParametrization)
+    inline int sizeOfRotationParametrization(enum InverseKinematicsRotationParametrization rotationParametrization)
     {
         switch (rotationParametrization) {
             case InverseKinematicsRotationParametrizationQuaternion:
