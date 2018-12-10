@@ -35,6 +35,7 @@ int main(int argc, char *argv[])
     if (rf.check("help"))
     {
         cout<<"Options"<<endl;
+        cout<<"\t--name                   <name>: prefix of the yarprobotstatepublisher ports"<<endl;
         cout<<"\t--prefix                 <prefix-name>: prefix of the published TFs"<<endl;
         cout<<"\t--model                  <file-name>: file name of the model to load at startup"<<endl;
         cout<<"\t--base-frame             <frame-name>: specify the base frame of the published tf tree"<<endl;
