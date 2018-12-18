@@ -70,36 +70,36 @@ stage_osx:
 # BUILD JOBS FROM STAGES
 # ======================
 
-jobs:
-  include:
+#jobs:
+#  include:
     # ---------
     # STAGE OSX
     # ---------
-    - &osx_template
-      stage: osx
-      os: osx
-      osx_image: xcode9.4
-      before_install: skip
-      install: *osx_install
-      before_script: skip
-      script: *osx_script
-      after_failure: skip
-      after_success: skip
-      after_script: skip
-      env:
-        TRAVIS_CMAKE_GENERATOR="Xcode"
-        TRAVIS_BUILD_TYPE="Debug"
-        VALGRIND_TESTS="OFF"
-        COMPILE_BINDINGS="OFF"
-        FULL_DEPS="OFF"
-    - <<: *osx_template
-      compiler: clang
-      env:
-        TRAVIS_CMAKE_GENERATOR="Unix Makefiles"
-        TRAVIS_BUILD_TYPE="Debug"
-        VALGRIND_TESTS="OFF"
-        COMPILE_BINDINGS="OFF"
-        FULL_DEPS="OFF"
+#    - &osx_template
+#      stage: osx
+#      os: osx
+#      osx_image: xcode9.4
+#      before_install: skip
+#      install: *osx_install
+#      before_script: skip
+#      script: *osx_script
+#      after_failure: skip
+#      after_success: skip
+#      after_script: skip
+#      env:
+#        TRAVIS_CMAKE_GENERATOR="Xcode"
+#        TRAVIS_BUILD_TYPE="Debug"
+#        VALGRIND_TESTS="OFF"
+#        COMPILE_BINDINGS="OFF"
+#        FULL_DEPS="OFF"
+#    - <<: *osx_template
+#      compiler: clang
+#      env:
+#        TRAVIS_CMAKE_GENERATOR="Unix Makefiles"
+#        TRAVIS_BUILD_TYPE="Debug"
+#        VALGRIND_TESTS="OFF"
+#        COMPILE_BINDINGS="OFF"
+#        FULL_DEPS="OFF"
 
 
 notifications:
