@@ -11,7 +11,7 @@ cache:
 
 stages:
   - test # Default stage with job matrix
-  - osx
+#  - osx
 
 compiler:
   - gcc
