@@ -78,6 +78,7 @@ jobs:
     - &osx_template
       stage: osx
       os: osx
+      services:
       osx_image: xcode9.4
       before_install: skip
       install: *osx_install
