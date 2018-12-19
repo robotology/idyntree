@@ -60,7 +60,7 @@ stage_osx:
     - brew install ccache
     - export PATH="/usr/local/opt/ccache/libexec:$PATH"
     # Install dependencies
-    - brew install ace eigen boost tinyxml swig qt5 gsl pkg-config jpeg sqlite tinyxml
+    - brew install ace eigen tinyxml swig qt5 gsl pkg-config jpeg tinyxml
     - export Qt5_DIR=/usr/local/opt/qt5/lib/cmake/Qt5
   script: &osx_script
     - cd $TRAVIS_BUILD_DIR/.ci
