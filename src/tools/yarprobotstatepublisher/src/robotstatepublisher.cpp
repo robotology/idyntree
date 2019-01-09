@@ -62,13 +62,22 @@ YARPRobotStatePublisherModule::YARPRobotStatePublisherModule(): m_iframetrans(nu
 bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
 {
     string name="yarprobotstatepublisher";
-    m_rosNode = new yarp::os::Node("/yarprobotstatepublisher");
+    string namePrefix = rf.check("namePrefix",Value("")).asString();
+    if (!namePrefix.empty()) {
+        m_rosNode = new yarp::os::Node("/"+namePrefix+"/yarprobotstatepublisher");
+    }
+    else m_rosNode = new yarp::os::Node("/yarprobotstatepublisher");
+
     string modelFileName=rf.check("model",Value("model.urdf")).asString();
     m_period=rf.check("period",Value(0.010)).asDouble();
 
     Property pTransformclient_cfg;
     pTransformclient_cfg.put("device", "transformClient");
-    pTransformclient_cfg.put("local", "/"+name+"/transformClient");
+    if (!namePrefix.empty()) {
+        pTransformclient_cfg.put("local", "/"+namePrefix+"/"+name+"/transformClient");
+    }
+    else pTransformclient_cfg.put("local", "/"+name+"/transformClient");
+
     pTransformclient_cfg.put("remote", "/transformServer");
 
     m_tfPrefix = rf.check("tfPrefix",Value("")).asString();
