@@ -5,5 +5,5 @@ build/*
 **/build/*
 
 .DS_Store
-*.txt.user
+*.txt.user*
 .idea/*
