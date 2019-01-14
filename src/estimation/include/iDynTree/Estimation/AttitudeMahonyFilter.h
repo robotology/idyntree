@@ -12,19 +12,19 @@
 #define ATTITUDE_MAHONY_FILTER_H
 
 #include <iDynTree/Estimation/AttitudeEstimator.h>
+#include <iDynTree/Estimation/AttitudeEstimatorUtils.h>
 #include <iDynTree/Core/Direction.h>
-#include <iDynTree/Core/EigenHelpers.h>
 
 namespace iDynTree 
 {
     
 struct AttitudeMahonyFilterParameters {
     //TODO: add default values and docs
-    double timeStepInSeconds{0.001};
+    double time_step_in_seconds{0.001};
     double kp{10.0};
     double ki{10.0}; 
-    bool useMagnetoMeterMeasurements{false};
-    double confidenceMagnetometerMeasurements{0.0};    
+    bool use_magnetometer_measurements{false};
+    double confidence_magnetometer_measurements{0.0};    
     
 };
 
@@ -39,7 +39,8 @@ public:
     void setConfidenceForMagnetometerMeasurements(double confidence);
     void setGainkp(double kp);
     void setGainki(double ki);
-    void setTimeStampInSeconds(double timestampInSeconds);
+    void setTimeStepInSeconds(double timestepInSeconds);
+    void setGravityDirection(const iDynTree::Direction& gravity_dir);
     
     
     // TODO: specify if this resets also the internal state
@@ -70,7 +71,8 @@ public:
 private:
     AttitudeMahonyFilterParameters m_params;
     struct {
-        iDynTree::Quaternion m_orientation; 
+        iDynTree::Quaternion m_orientation;
+        iDynTree::Vector3 m_angular_velocity;
         iDynTree::Vector3 m_gyroscope_bias; 
     } m_state, m_initial_state;
     
