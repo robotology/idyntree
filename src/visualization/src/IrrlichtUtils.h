@@ -103,6 +103,18 @@ inline irr::video::SMaterial idyntree2irr(const iDynTree::ColorViz & rgbaMateria
     return idyntree2irr(vec4);
 }
 
+inline iDynTree::Transform irr2idyntree_trans(const irr::core::matrix4 & transIrr)
+{
+    iDynTree::Matrix4x4 trans;
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            trans(i, j) = transIrr(i, j);
+        }
+    }
+    return iDynTree::Transform(trans);
+}
 
 /**
  * Get a rotation matrix whose z column is the provided direction.

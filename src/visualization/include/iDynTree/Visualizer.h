@@ -406,8 +406,21 @@ public:
     /**
      * Reset the colors of the model.
      */
-    virtual void resetModelColor() = 0;
-
+    virtual void resetModelColor() = 0;    
+    
+    /**
+     * Set the color of all the geometries of the given link.
+     *
+     * This will overwrite the material of the link, but it can be
+     * reset by resetLinkColor.
+     */
+    virtual bool setLinkColor(const LinkIndex& linkIndex, const ColorViz& linkColor) = 0;
+    
+    /**
+     * Reset the colors of given link.
+     */
+    virtual bool resetLinkColor(const LinkIndex& linkIndex) = 0;
+    
     /**
      * Get the name of the link in the model.
      */
@@ -437,8 +450,20 @@ public:
      * Get a reference to the internal IJetsVisualization interface.
      */
     virtual IJetsVisualization& jets() = 0;
-
-
+        
+    /**
+     * Get the transformation of the model (root link) with respect to visualizer world \f$ w_H_{root}\f$
+     * The obtained transformation matrix can be used to map any homogeneous vector from the
+     * model's root link frame to the visualizer world frame.
+     */
+    virtual Transform getWorldModelTransform() = 0;
+    
+    /**
+     * Get the transformation of given link with respect to visualizer world \f$ w_H_{link}\f$
+     * The obtained transformation matrix can be used to map any homogeneous vector from the
+     * given link frame to the visualizer world frame.
+     */
+    virtual Transform getWorldLinkTransform(const LinkIndex& linkIndex) = 0;
 };
 
 /**
