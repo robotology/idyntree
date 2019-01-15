@@ -33,7 +33,7 @@ iDynTree::Matrix3x3 getAngVelSkewSymmetricMatrixFromMeasurements(iDynTree::Vecto
 bool iDynTree::AttitudeMahonyFilter::updateFilterWithMeasurements(const iDynTree::LinearAccelerometerMeasurements& linAccMeas, const iDynTree::GyroscopeMeasurements& gyroMeas)
 {
     std::cout << "Lin acc: " << linAccMeas.toString() << " Ang vel: " << gyroMeas.toString() << std::endl;
-    iDynTree::Matrix3x3 S_acc = getAngVelSkewSymmetricMatrixFromMeasurements(linAccMeas, m_gravity_direction.reverse(), 1-m_params.confidence_magnetometer_measurements, m_orientationInSO3);
+    iDynTree::Matrix3x3 S_acc = getAngVelSkewSymmetricMatrixFromMeasurements(linAccMeas, m_gravity_direction, 1-m_params.confidence_magnetometer_measurements, m_orientationInSO3);
     iDynTree::toEigen(m_omega_mes) = -iDynTree::toEigen(mapso3ToR3(S_acc));
     m_Omega_y = gyroMeas;
     std::cout << "Vectorial : " << m_omega_mes.toString() << std::endl;
@@ -48,7 +48,7 @@ bool iDynTree::AttitudeMahonyFilter::updateFilterWithMeasurements(const iDynTree
         return updateFilterWithMeasurements(linAccMeas, gyroMeas);
     }
 
-    iDynTree::Matrix3x3 S_acc = getAngVelSkewSymmetricMatrixFromMeasurements(linAccMeas, m_gravity_direction.reverse(), 1-m_params.confidence_magnetometer_measurements, m_orientationInSO3);
+    iDynTree::Matrix3x3 S_acc = getAngVelSkewSymmetricMatrixFromMeasurements(linAccMeas, m_gravity_direction, 1-m_params.confidence_magnetometer_measurements, m_orientationInSO3);
     iDynTree::Matrix3x3 S_mag = getAngVelSkewSymmetricMatrixFromMeasurements(magMeas, m_earth_magnetic_field_direction, m_params.confidence_magnetometer_measurements, m_orientationInSO3);
     iDynTree::Matrix3x3 S_meas;
     iDynTree::toEigen(S_meas) = iDynTree::toEigen(S_acc) + iDynTree::toEigen(S_mag);

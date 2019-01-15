@@ -196,11 +196,114 @@ bool iDynTree::AttitudeQuaternionEKF::updateFilterWithMeasurements(const iDynTre
 
 bool iDynTree::AttitudeQuaternionEKF::computejacobianF(iDynTree::VectorDynSize& x, iDynTree::MatrixDynSize& F)
 {
+    if (x.size() != m_state_size)
+    {
+        reportError("AttitudeQuaternionEKF", "computejacobianF", "state size mismatch");
+        return false;
+    }
+
+    if (F.rows() != m_state_size || F.cols() != m_state_size)
+    {
+        reportError("AttitudeQuaternionEKF", "computejacobianF", "jacobian matrix size mismatch");
+        return false;
+    }
+
+    F.zero();
+
+    iDynTree::Quaternion q;
+    iDynTree::Vector3 ang_vel, gyro_bias;
+    iDynTree::toEigen(q) = iDynTree::toEigen(x).block<4,1>(0, 0);
+    iDynTree::toEigen(ang_vel) = iDynTree::toEigen(x).block<3,1>(4, 0);
+    iDynTree::toEigen(gyro_bias) = iDynTree::toEigen(x).block<3,1>(7, 0);
+
+    iDynTree::Matrix4x4 dfq_by_dq;
+    dfq_by_dq(0,0) = dfq_by_dq(1, 1) = dfq_by_dq(2, 2) = dfq_by_dq(3, 3) = (2.0/m_params.time_step_in_seconds);
+    dfq_by_dq(1, 0) = dfq_by_dq(2, 3) = ang_vel(0);
+    dfq_by_dq(2, 0) = dfq_by_dq(3, 1) = ang_vel(1);
+    dfq_by_dq(3, 0) = dfq_by_dq(1, 2) = ang_vel(2);
+    dfq_by_dq(0, 1) = dfq_by_dq(3, 2) = -ang_vel(0);
+    dfq_by_dq(0, 2) = dfq_by_dq(1, 3) = -ang_vel(1);
+    dfq_by_dq(0, 3) = dfq_by_dq(2, 1) = -ang_vel(2);
+    iDynTree::toEigen(dfq_by_dq) *= (m_params.time_step_in_seconds/2.0);
+
+    iDynTree::MatrixDynSize dfq_by_dangvel;
+    dfq_by_dangvel.resize(4, 3);
+    dfq_by_dangvel(0, 0) = dfq_by_dangvel(2, 2) = -q(1);
+    dfq_by_dangvel(0, 1) = dfq_by_dangvel(3, 0) = -q(2);
+    dfq_by_dangvel(0, 2) = dfq_by_dangvel(1, 1) = -q(3);
+    dfq_by_dangvel(2, 0) = q(3);
+    dfq_by_dangvel(1, 2) = q(2);
+    dfq_by_dangvel(3, 1) = q(1);
+    dfq_by_dangvel(1, 0) = dfq_by_dangvel(2, 1) = dfq_by_dangvel(3, 2) = -q(0);
+    iDynTree::toEigen(dfq_by_dangvel) *= (m_params.time_step_in_seconds/2.0);
+
+    iDynTree::Matrix3x3 dfangvel_by_dgyrobias(m_Id3);
+    iDynTree::toEigen(dfangvel_by_dgyrobias) *= -1;
+
+    iDynTree::Matrix3x3 dfgyrobias_by_dgyrobias(m_Id3);
+    iDynTree::toEigen(dfgyrobias_by_dgyrobias) *= (1 - (m_params.bias_correlation_time_factor*m_params.time_step_in_seconds));
+
+    iDynTree::toEigen(F).block<4,4>(0,0) = iDynTree::toEigen(dfq_by_dq);
+    iDynTree::toEigen(F).block<4,3>(0,4) = iDynTree::toEigen(dfq_by_dangvel);
+    iDynTree::toEigen(F).block<3,3>(4,7) = iDynTree::toEigen(dfangvel_by_dgyrobias);
+    iDynTree::toEigen(F).block<3,3>(7,7) = iDynTree::toEigen(dfgyrobias_by_dgyrobias);
+
     return true;
 }
 
 bool iDynTree::AttitudeQuaternionEKF::computejacobianH(iDynTree::VectorDynSize& x, iDynTree::MatrixDynSize& H)
 {
+    if (x.size() != m_state_size)
+    {
+        reportError("AttitudeQuaternionEKF", "computejacobianH", "state size mismatch");
+        return false;
+    }
+
+    if (H.rows() != m_output_size || H.cols() != m_state_size)
+    {
+        reportError("AttitudeQuaternionEKF", "computejacobianH", "jacobian matrix size mismatch");
+        return false;
+    }
+
+    H.zero();
+    iDynTree::Quaternion q;
+    iDynTree::toEigen(q) = iDynTree::toEigen(x).block<4,1>(0, 0);
+
+    iDynTree::MatrixDynSize dhacc_by_dq;
+    dhacc_by_dq.resize(3, 4);
+    dhacc_by_dq(0, 0) = dhacc_by_dq(2, 2) = q(2);
+    dhacc_by_dq(0, 1) = dhacc_by_dq(1, 2) = -q(3);
+    dhacc_by_dq(0, 3) = dhacc_by_dq(1, 0) = -q(1);
+    dhacc_by_dq(0, 0) = dhacc_by_dq(2, 2) = q(2);
+    dhacc_by_dq(1, 1) = dhacc_by_dq(2, 0) = -q(0);
+    dhacc_by_dq(0, 2) = q(0);
+    dhacc_by_dq(1, 3) = -q(2);
+    dhacc_by_dq(2, 1) = q(1);
+    dhacc_by_dq(2, 3) = -q(3);
+    iDynTree::toEigen(dhacc_by_dq) *= 2;
+
+    iDynTree::toEigen(H).block<3, 4>(0, 0) = iDynTree::toEigen(dhacc_by_dq);
+
+    if (m_output_size == output_dimensions_with_magnetometer)
+    {
+        double q0q3{q(0)*q(3)};
+        double q1q2{q(1)*q(2)};
+        double q2squared{q(2)*q(2)};
+        double q3squared{q(3)*q(3)};
+        double common_factor{(1 - 2*(q2squared + q3squared))};
+        double common_factorSquared{common_factor*common_factor};
+        double q0q3plusq1q2Squared{((q0q3+q1q2)*(q0q3+q1q2))};
+        double denominator{(4*q0q3plusq1q2Squared) + (common_factorSquared)};
+
+        double multiple{(2*common_factor/denominator)};
+        double factor{(-8*(q0q3 + q1q2))/denominator};
+
+        H(3, 0) = q(3)*multiple;
+        H(3, 1) = q(2)*multiple;
+        H(3, 1) = (q(1)*multiple) - (q(2)*factor);
+        H(3, 2) = (q(0)*multiple) - (q(3)*factor);
+    }
+
     return true;
 }
 
@@ -260,14 +363,14 @@ bool iDynTree::AttitudeQuaternionEKF::h(const iDynTree::VectorDynSize& xhat_k_pl
 
     iDynTree::Quaternion q;
     iDynTree::toEigen(q) = iDynTree::toEigen(xhat_k_plus_one).block<4,1>(0, 0);
-    double q1q3 = q(1)*q(3);
-    double q0q2 = q(0)*q(2);
-    double q2q3 = q(2)*q(3);
-    double q0q1 = q(0)*q(1);
-    double q0squared = q(0)*q(0);
-    double q1squared = q(1)*q(1);
-    double q2squared = q(2)*q(2);
-    double q3squared = q(3)*q(3);
+    double q1q3{q(1)*q(3)};
+    double q0q2{q(0)*q(2)};
+    double q2q3{q(2)*q(3)};
+    double q0q1{q(0)*q(1)};
+    double q0squared{q(0)*q(0)};
+    double q1squared{q(1)*q(1)};
+    double q2squared{q(2)*q(2)};
+    double q3squared{q(3)*q(3)};
 
     zhat_k_plus_one(0) = -2*(q1q3 - q0q2);
     zhat_k_plus_one(1) = -2*(q2q3 + q0q1);
@@ -275,8 +378,8 @@ bool iDynTree::AttitudeQuaternionEKF::h(const iDynTree::VectorDynSize& xhat_k_pl
 
     if (m_output_size == output_dimensions_with_magnetometer)
     {
-        double q0q3 = q(0)*q(3);
-        double q1q2 = q(1)*q(2);
+        double q0q3{q(0)*q(3)};
+        double q1q2{q(1)*q(2)};
         zhat_k_plus_one(3) = atan2(2*(q0q3+q1q2), 1 - 2*(q2squared + q3squared));
     }
 
