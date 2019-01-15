@@ -120,13 +120,16 @@ public:
     virtual std::string getInstanceName() { return "dummyModelVisualizationInstance"; }
     virtual void setModelVisibility(const bool) {}
     virtual void setModelColor(const ColorViz & ) {}
-    virtual void resetModelColor() {}
+    virtual void resetModelColor() {}   
+    virtual bool setLinkColor(const LinkIndex &, const ColorViz &) { return false; }
+    virtual bool resetLinkColor(const LinkIndex &) { return false; }
     virtual std::vector< std::string > getLinkNames() { return std::vector<std::string>(); };
     virtual bool setLinkVisibility(const std::string &, bool) { return false; }
     virtual std::vector<std::string> getFeatures() { return std::vector<std::string>(); }
     virtual bool setFeatureVisibility(const std::string& , bool) { return false; }
     virtual IJetsVisualization& jets() { return m_dummyJets;  }
-
+    virtual Transform getWorldModelTransform() { return iDynTree::Transform::Identity(); }
+    virtual Transform getWorldLinkTransform(const LinkIndex &) { return iDynTree::Transform::Identity(); }
 };
 
 }

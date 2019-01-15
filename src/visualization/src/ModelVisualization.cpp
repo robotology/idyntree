@@ -80,7 +80,6 @@ struct ModelVisualization::ModelVisualizationPimpl
     }
 };
 
-
 /**
  * Add  iDynTree::ModelGeometries to an irr::scene::ISceneManager*
  * We create a SceneGraph for the URDF model of this type: the root object
@@ -213,6 +212,29 @@ Model& ModelVisualization::model()
     return this->pimpl->m_model;
 }
 
+Transform ModelVisualization::getWorldModelTransform()
+{
+    Transform w_H_b;
+    irr::core::matrix4 relativeTransform(this->pimpl->modelNode->getRelativeTransformation());    
+    w_H_b = irr2idyntree_trans(relativeTransform);
+    return w_H_b;
+}
+
+Transform ModelVisualization::getWorldLinkTransform(const LinkIndex& linkIndex)
+{
+    if (linkIndex < 0 || linkIndex >= pimpl->geomNodes.size())
+    {
+        reportError("ModelVisualization","getWorldToLinkTransorm", "invalid link index. returning identity transform");
+        return Transform::Identity();
+    }
+    
+    Transform w_H_link;
+    irr::core::matrix4 relativeLinkTransform(this->pimpl->linkNodes[linkIndex]->getRelativeTransformation());
+    w_H_link = irr2idyntree_trans(relativeLinkTransform);
+    return w_H_link;
+}
+
+
 bool ModelVisualization::setPositions(const Transform& world_H_base, const VectorDynSize& jointPos)
 {
     if( (jointPos.size() != model().getNrOfPosCoords()) )
@@ -265,44 +287,100 @@ void ModelVisualization::setModelVisibility(const bool isVisible)
     }
 }
 
-void ModelVisualization::setModelColor(const ColorViz& modelColor)
+bool ModelVisualization::setLinkColor(const LinkIndex& linkIndex, const ColorViz& linkColor)
 {
-    irr::video::SColor col = idyntree2irrlicht(modelColor).toSColor();
-
-    for(size_t linkIdx=0; linkIdx < pimpl->geomNodes.size(); linkIdx++)
+    if (linkIndex < 0 || linkIndex >= pimpl->geomNodes.size())
     {
-        for(size_t geom=0; geom < pimpl->geomNodes[linkIdx].size(); geom++)
+        reportError("ModelVisualization","setLinkColor", "invalid link index");
+        return false;
+    }
+        
+    irr::video::SColor col = idyntree2irrlicht(linkColor).toSColor();
+    for(size_t geom=0; geom < pimpl->geomNodes[linkIndex].size(); geom++)
+    {
+        if( pimpl->geomNodes[linkIndex][geom] )
         {
-            if( pimpl->geomNodes[linkIdx][geom] )
+            irr::scene::ISceneNode * geomNode = pimpl->geomNodes[linkIndex][geom];
+
+            for( size_t mat = 0; mat < geomNode->getMaterialCount(); mat++)
             {
-                irr::scene::ISceneNode * geomNode = pimpl->geomNodes[linkIdx][geom];
+                irr::video::SMaterial geomMat = geomNode->getMaterial(mat);
 
-                for( size_t mat = 0; mat < geomNode->getMaterialCount(); mat++)
-                {
-                    irr::video::SMaterial geomMat = geomNode->getMaterial(mat);
+                // R
+                geomMat.AmbientColor.setRed(col.getRed());
+                geomMat.DiffuseColor.setRed(col.getRed());
+                geomMat.SpecularColor.setRed(col.getRed());
+                geomMat.EmissiveColor.setRed(col.getRed());
 
-                    // R
-                    geomMat.AmbientColor.setRed(col.getRed());
-                    geomMat.DiffuseColor.setRed(col.getRed());
-                    geomMat.SpecularColor.setRed(col.getRed());
-                    geomMat.EmissiveColor.setRed(col.getRed());
+                // G
+                geomMat.AmbientColor.setGreen(col.getGreen());
+                geomMat.DiffuseColor.setGreen(col.getGreen());
+                geomMat.SpecularColor.setGreen(col.getGreen());
+                geomMat.EmissiveColor.setGreen(col.getGreen());
 
-                    // G
-                    geomMat.AmbientColor.setGreen(col.getGreen());
-                    geomMat.DiffuseColor.setGreen(col.getGreen());
-                    geomMat.SpecularColor.setGreen(col.getGreen());
-                    geomMat.EmissiveColor.setGreen(col.getGreen());
+                // B
+                geomMat.AmbientColor.setBlue(col.getBlue());
+                geomMat.DiffuseColor.setBlue(col.getBlue());
+                geomMat.SpecularColor.setBlue(col.getBlue());
+                geomMat.EmissiveColor.setBlue(col.getBlue());
 
-                    // B
-                    geomMat.AmbientColor.setBlue(col.getBlue());
-                    geomMat.DiffuseColor.setBlue(col.getBlue());
-                    geomMat.SpecularColor.setBlue(col.getBlue());
-                    geomMat.EmissiveColor.setBlue(col.getBlue());
-
-                    geomNode->getMaterial(mat) = geomMat;
-                }
+                geomNode->getMaterial(mat) = geomMat;
             }
         }
+    }
+    return true;
+}
+
+bool ModelVisualization::resetLinkColor(const LinkIndex& linkIndex)
+{
+    if (linkIndex < 0 || linkIndex >= pimpl->geomNodes.size())
+    {
+        reportError("ModelVisualization","resetLinkColor", "invalid link index");
+        return false;
+    }
+    
+    for(size_t geom=0; geom < pimpl->geomNodes[linkIndex].size(); geom++)
+    {
+        if( pimpl->geomNodes[linkIndex][geom] )
+        {
+            irr::scene::ISceneNode * geomNode = pimpl->geomNodes[linkIndex][geom];
+            std::vector< irr::video::SMaterial > & materialCache = pimpl->geomNodesNotTransparentMaterialCache[linkIndex][geom];
+
+            for( size_t mat = 0; mat < geomNode->getMaterialCount(); mat++)
+            {
+                irr::video::SMaterial geomMat = geomNode->getMaterial(mat);
+
+                // R
+                geomMat.AmbientColor.setRed(materialCache[mat].AmbientColor.getRed());
+                geomMat.DiffuseColor.setRed(materialCache[mat].DiffuseColor.getRed());
+                geomMat.SpecularColor.setRed(materialCache[mat].SpecularColor.getRed());
+                geomMat.EmissiveColor.setRed(materialCache[mat].EmissiveColor.getRed());
+
+                // G
+                geomMat.AmbientColor.setGreen(materialCache[mat].AmbientColor.getGreen());
+                geomMat.DiffuseColor.setGreen(materialCache[mat].DiffuseColor.getGreen());
+                geomMat.SpecularColor.setGreen(materialCache[mat].SpecularColor.getGreen());
+                geomMat.EmissiveColor.setGreen(materialCache[mat].EmissiveColor.getGreen());
+
+                // B
+                geomMat.AmbientColor.setBlue(materialCache[mat].AmbientColor.getBlue());
+                geomMat.DiffuseColor.setBlue(materialCache[mat].DiffuseColor.getBlue());
+                geomMat.SpecularColor.setBlue(materialCache[mat].SpecularColor.getBlue());
+                geomMat.EmissiveColor.setBlue(materialCache[mat].EmissiveColor.getBlue());
+
+                geomNode->getMaterial(mat) = geomMat;
+            }
+        }
+    }
+   return true; 
+}
+
+
+void ModelVisualization::setModelColor(const ColorViz& modelColor)
+{
+    for(size_t linkIdx=0; linkIdx < pimpl->geomNodes.size(); linkIdx++)
+    {
+        this->setLinkColor(linkIdx, modelColor);
     }
 }
 
@@ -310,39 +388,7 @@ void ModelVisualization::resetModelColor()
 {
     for(size_t linkIdx=0; linkIdx < pimpl->geomNodes.size(); linkIdx++)
     {
-        for(size_t geom=0; geom < pimpl->geomNodes[linkIdx].size(); geom++)
-        {
-            if( pimpl->geomNodes[linkIdx][geom] )
-            {
-                irr::scene::ISceneNode * geomNode = pimpl->geomNodes[linkIdx][geom];
-                std::vector< irr::video::SMaterial > & materialCache = pimpl->geomNodesNotTransparentMaterialCache[linkIdx][geom];
-
-                for( size_t mat = 0; mat < geomNode->getMaterialCount(); mat++)
-                {
-                    irr::video::SMaterial geomMat = geomNode->getMaterial(mat);
-
-                    // R
-                    geomMat.AmbientColor.setRed(materialCache[mat].AmbientColor.getRed());
-                    geomMat.DiffuseColor.setRed(materialCache[mat].DiffuseColor.getRed());
-                    geomMat.SpecularColor.setRed(materialCache[mat].SpecularColor.getRed());
-                    geomMat.EmissiveColor.setRed(materialCache[mat].EmissiveColor.getRed());
-
-                    // G
-                    geomMat.AmbientColor.setGreen(materialCache[mat].AmbientColor.getGreen());
-                    geomMat.DiffuseColor.setGreen(materialCache[mat].DiffuseColor.getGreen());
-                    geomMat.SpecularColor.setGreen(materialCache[mat].SpecularColor.getGreen());
-                    geomMat.EmissiveColor.setGreen(materialCache[mat].EmissiveColor.getGreen());
-
-                    // B
-                    geomMat.AmbientColor.setBlue(materialCache[mat].AmbientColor.getBlue());
-                    geomMat.DiffuseColor.setBlue(materialCache[mat].DiffuseColor.getBlue());
-                    geomMat.SpecularColor.setBlue(materialCache[mat].SpecularColor.getBlue());
-                    geomMat.EmissiveColor.setBlue(materialCache[mat].EmissiveColor.getBlue());
-
-                    geomNode->getMaterial(mat) = geomMat;
-                }
-            }
-        }
+        this->resetLinkColor(linkIdx);
     }
 }
 
