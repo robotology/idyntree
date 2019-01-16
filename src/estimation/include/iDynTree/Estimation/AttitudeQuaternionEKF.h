@@ -14,6 +14,7 @@
 #include <iDynTree/Estimation/AttitudeEstimator.h>
 #include <iDynTree/Estimation/ExtendedKalmanFilter.h>
 #include <iDynTree/Estimation/AttitudeEstimatorUtils.h>
+#include <iDynTree/Core/Direction.h>
 
 namespace iDynTree
 {
@@ -49,6 +50,7 @@ namespace iDynTree
 
         void getParams(AttitudeQuaternionEKFParameters& params) {params = m_params;}
         void setParams(const AttitudeQuaternionEKFParameters& params) {m_params = params;}
+        void setGravityDirection(const iDynTree::Direction& gravity_dir);
 
         void setTimeStepInSeconds(double time_step_in_seconds) {m_params.time_step_in_seconds = time_step_in_seconds; }
         void setBiasCorrelationTimeFactor(double bias_correlation_time_factor) { m_params.bias_correlation_time_factor = bias_correlation_time_factor; }
@@ -160,6 +162,7 @@ namespace iDynTree
 
         iDynTree::Matrix4x4 m_Id4;
         iDynTree::Matrix3x3 m_Id3;
+        iDynTree::Direction m_gravity_direction; ///< used for accelerometer measurement model
     };
 
 }

@@ -78,6 +78,9 @@ iDynTree::AttitudeQuaternionEKF::AttitudeQuaternionEKF()
       m_Omega_y.zero();
       m_Acc_y.zero();
 
+      m_gravity_direction.zero();
+      m_gravity_direction(2) = 1;
+
       iDynTree::toEigen(m_Id4).setIdentity();
       iDynTree::toEigen(m_Id3).setIdentity();
 }
@@ -308,13 +311,25 @@ bool iDynTree::AttitudeQuaternionEKF::computejacobianH(iDynTree::VectorDynSize& 
     dhacc_by_dq(0, 0) = dhacc_by_dq(2, 2) = q(2);
     dhacc_by_dq(0, 1) = dhacc_by_dq(1, 2) = -q(3);
     dhacc_by_dq(0, 3) = dhacc_by_dq(1, 0) = -q(1);
-    dhacc_by_dq(0, 0) = dhacc_by_dq(2, 2) = q(2);
     dhacc_by_dq(1, 1) = dhacc_by_dq(2, 0) = -q(0);
     dhacc_by_dq(0, 2) = q(0);
     dhacc_by_dq(1, 3) = -q(2);
     dhacc_by_dq(2, 1) = q(1);
     dhacc_by_dq(2, 3) = -q(3);
-    iDynTree::toEigen(dhacc_by_dq) *= 2;
+
+    if (m_gravity_direction(2) == -1)
+    {
+        iDynTree::toEigen(dhacc_by_dq) *= 2;
+    }
+    else if (m_gravity_direction(2) == 1)
+    {
+        iDynTree::toEigen(dhacc_by_dq) *= -2;
+    }
+    else
+    {
+        reportError("AttitudeQuaternionEKF", "computejacobianH", "filter assumes gravity pointing upward or downward only");
+        return false;
+    }
 
     iDynTree::toEigen(H).block<3, 4>(0, 0) = iDynTree::toEigen(dhacc_by_dq);
 
@@ -395,6 +410,7 @@ bool iDynTree::AttitudeQuaternionEKF::h(const iDynTree::VectorDynSize& xhat_k_pl
         // do nothing
     }
 
+    // following computation is the same as R^T e_3
     iDynTree::Quaternion q;
     iDynTree::toEigen(q) = iDynTree::toEigen(xhat_k_plus_one).block<4,1>(0, 0);
     double q1q3{q(1)*q(3)};
@@ -409,7 +425,21 @@ bool iDynTree::AttitudeQuaternionEKF::h(const iDynTree::VectorDynSize& xhat_k_pl
     zhat_k_plus_one(0) = -2*(q1q3 - q0q2);
     zhat_k_plus_one(1) = -2*(q2q3 + q0q1);
     zhat_k_plus_one(2) = -(q0squared - q1squared - q2squared + q3squared);
+    if (m_gravity_direction(2) == -1)
+    {
+        // have same zhat
+    }
+    else if (m_gravity_direction(2) == 1)
+    {
+        iDynTree::toEigen(zhat_k_plus_one) *= -1;
+    }
+    else
+    {
+        reportError("AttitudeQuaternionEKF", "h", "filter assumes gravity pointing upward or downward only");
+        return false;
+    }
 
+    // magnetometer measurement gives us yaw
     if (m_output_size == output_dimensions_with_magnetometer)
     {
         double q0q3{q(0)*q(3)};
@@ -553,3 +583,9 @@ bool iDynTree::AttitudeQuaternionEKF::useMagnetometerMeasurements(bool use_magen
     ok = setInternalState(x_span) && ok;
     return ok;
 }
+
+void iDynTree::AttitudeQuaternionEKF::setGravityDirection(const iDynTree::Direction& gravity_dir)
+{
+    m_gravity_direction = gravity_dir;
+}
+
