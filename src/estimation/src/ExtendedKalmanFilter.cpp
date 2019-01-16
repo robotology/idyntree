@@ -15,6 +15,16 @@ iDynTree::DiscreteExtendedKalmanFilter::DiscreteExtendedKalmanFilter()
 
 }
 
+void iDynTree::DiscreteExtendedKalmanFilter::ekfReset()
+{
+    m_is_initialized = false;
+    m_measurement_updated = false;
+    m_input_updated = false;
+    m_initial_state_set = false;
+    m_initial_state_covariance_set = false;
+}
+
+
 bool iDynTree::DiscreteExtendedKalmanFilter::ekfInit()
 {
     if (m_dim_X == 0 || m_dim_Y == 0 || m_dim_U == 0)
@@ -82,8 +92,7 @@ bool iDynTree::DiscreteExtendedKalmanFilter::ekfPredict()
 
     f(m_x, m_u, m_w, m_xhat); // xhat_k+1 = f(x_k, u_k) + w_k
     computejacobianF(m_x, m_F); // F at x = x_k
-    iDynTree::toEigen(m_Phat) = iDynTree::toEigen(m_F)*iDynTree::toEigen(m_P)*iDynTree::toEigen(m_F).transpose() + iDynTree::toEigen(m_Q); // Phat_k+1 = F_k P_k (F_k)^T + Q
-
+    iDynTree::toEigen(m_Phat) = iDynTree::toEigen(m_F)*iDynTree::toEigen(m_P)*(iDynTree::toEigen(m_F).transpose()) + iDynTree::toEigen(m_Q); // Phat_k+1 = F_k P_k (F_k)^T + Q
     m_input_updated = false;
     return true;
 }
@@ -120,7 +129,6 @@ bool iDynTree::DiscreteExtendedKalmanFilter::ekfUpdate()
     computejacobianH(m_xhat, m_H); // H at x = xhat_k+1
     iDynTree::toEigen(m_S) = iDynTree::toEigen(m_H)*iDynTree::toEigen(m_Phat)*iDynTree::toEigen(m_H).transpose() + iDynTree::toEigen(m_R); // S = H_k+1 Phat_k+1 (H_k+1)^T + R
     iDynTree::toEigen(m_K) = iDynTree::toEigen(m_Phat)*iDynTree::toEigen(m_H).transpose()*iDynTree::toEigen(m_S).inverse(); // K_k+1 = Phat_k+1 (H_k+1)^T (S^{-1})
-
     iDynTree::toEigen(m_P) = iDynTree::toEigen(m_Phat) - (iDynTree::toEigen(m_K)*iDynTree::toEigen(m_S)*iDynTree::toEigen(m_K).transpose()); // P_k+1 = Phat_k+1 - K_k+1 S (K_k+1)^T
     iDynTree::toEigen(m_x) = iDynTree::toEigen(m_xhat) + iDynTree::toEigen(m_K)*(iDynTree::toEigen(m_y)-iDynTree::toEigen(z)); // x_k+1 = xhat_k+1 + K_k+1(y_k+1 - z_k+1)
 
@@ -189,7 +197,6 @@ bool iDynTree::DiscreteExtendedKalmanFilter::ekfSetStateCovariance(const iDynTre
     }
 
     m_P = iDynTree::MatrixDynSize(P.data(), m_dim_X, m_dim_X);
-
     m_initial_state_covariance_set = true;
     return true;
 }
@@ -214,7 +221,6 @@ bool iDynTree::DiscreteExtendedKalmanFilter::ekfSetSystemNoiseMeanAndCovariance(
     }
 
     m_Q = iDynTree::MatrixDynSize(Q.data(), m_dim_X, m_dim_X);
-
     return true;
 }
 
@@ -239,7 +245,6 @@ bool iDynTree::DiscreteExtendedKalmanFilter::ekfSetMeasurementNoiseMeanAndCovari
     }
 
     m_R = iDynTree::MatrixDynSize(R.data(), m_dim_Y, m_dim_Y);
-
     return true;
 }
 

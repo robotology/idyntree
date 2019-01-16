@@ -23,7 +23,6 @@ iDynTree::Matrix3x3 getAngVelSkewSymmetricMatrixFromMeasurements(iDynTree::Vecto
     iDynTree::Direction va_hat = R.inverse().changeCoordFrameOf(vectorDir);
     iDynTree::Vector3 vectorial_estimate = iDynTree::Vector3(va_hat.data(), 3);
     iDynTree::toEigen(meas).normalize();
-    std::cout << "measurement vectorial: " << meas.toString() << " estimate vectorial: " << vectorial_estimate.toString() << std::endl;
     iDynTree::Matrix3x3 A_acc = getMatrixFromVectorVectorMultiplication(meas, vectorial_estimate);
     iDynTree::Matrix3x3 S_acc;
     iDynTree::toEigen(S_acc) = (iDynTree::toEigen(A_acc) - iDynTree::toEigen(A_acc).transpose())*(confidenceMeas*0.5);
@@ -32,11 +31,9 @@ iDynTree::Matrix3x3 getAngVelSkewSymmetricMatrixFromMeasurements(iDynTree::Vecto
 
 bool iDynTree::AttitudeMahonyFilter::updateFilterWithMeasurements(const iDynTree::LinearAccelerometerMeasurements& linAccMeas, const iDynTree::GyroscopeMeasurements& gyroMeas)
 {
-    std::cout << "Lin acc: " << linAccMeas.toString() << " Ang vel: " << gyroMeas.toString() << std::endl;
     iDynTree::Matrix3x3 S_acc = getAngVelSkewSymmetricMatrixFromMeasurements(linAccMeas, m_gravity_direction, 1-m_params.confidence_magnetometer_measurements, m_orientationInSO3);
     iDynTree::toEigen(m_omega_mes) = -iDynTree::toEigen(mapso3ToR3(S_acc));
     m_Omega_y = gyroMeas;
-    std::cout << "Vectorial : " << m_omega_mes.toString() << std::endl;
     return true;
 }
 
@@ -62,19 +59,16 @@ bool iDynTree::AttitudeMahonyFilter::propagateStates()
 {
     iDynTree::Vector3 gyroUpdate;
     iDynTree::toEigen(gyroUpdate) = iDynTree::toEigen(m_Omega_y) - iDynTree::toEigen(m_state.m_gyroscope_bias) + (iDynTree::toEigen(m_omega_mes)*m_params.kp);
-    std::cout << "gyro bias: " << m_state.m_gyroscope_bias.toString() << std::endl;
-    std::cout << "correction: " << gyroUpdate.toString() << std::endl;
+
     iDynTree::Quaternion correction = pureQuaternion(gyroUpdate);
     iDynTree::toEigen(m_state.m_orientation) = iDynTree::toEigen(m_state.m_orientation) + iDynTree::toEigen((composeQuaternion2(m_state.m_orientation, correction)))*(m_params.time_step_in_seconds*0.5);
     iDynTree::toEigen(m_state.m_orientation).normalize();
-    std::cout << "Estimated quaternion: " << m_state.m_orientation.toString() << std::endl;
     iDynTree::toEigen(m_state.m_angular_velocity) = iDynTree::toEigen(m_Omega_y) - iDynTree::toEigen(m_state.m_gyroscope_bias);
     iDynTree::toEigen(m_state.m_gyroscope_bias) = iDynTree::toEigen(m_state.m_gyroscope_bias) - ((iDynTree::toEigen(m_omega_mes)*m_params.ki)*(m_params.time_step_in_seconds));
 
     m_orientationInSO3 = iDynTree::Rotation::RotationFromQuaternion(m_state.m_orientation);
     //m_orientationInRPY = quaternion2eulerRPY(m_state.m_orientation);
     m_orientationInRPY = iDynTree::Rotation::RotationFromQuaternion(m_state.m_orientation).asRPY();
-    std::cout << "Estimated orientation in rpy: " << m_orientationInRPY.toString() << std::endl;
     return true;
 }
 

@@ -21,7 +21,7 @@ namespace iDynTree
     // naive implementation of discrete EKF with additive Gaussian noise
     class DiscreteExtendedKalmanFilter
     {
-    public:
+    protected:
         DiscreteExtendedKalmanFilter();
         virtual bool f(const iDynTree::VectorDynSize& x_k,
                        const iDynTree::VectorDynSize& u_k,
@@ -39,6 +39,8 @@ namespace iDynTree
         bool ekfPredict();
         bool ekfUpdate();
         bool ekfInit();
+
+        void ekfReset();
 
         bool ekfSetMeasurementVector(const iDynTree::Span<double>& y);
         bool ekfSetInputVector(const iDynTree::Span<double>& u);

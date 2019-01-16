@@ -34,6 +34,10 @@ namespace iDynTree
     double gyroscope_noise_variance{0.001};
     double gyro_bias_noise_variance{0.0001};
 
+    double initial_orientation_error_variance{100};
+    double initial_ang_vel_error_variance{100};
+    double initial_gyro_bias_error_variance{100};
+
     bool use_magenetometer_measurements{false};
     };
 
@@ -48,13 +52,13 @@ namespace iDynTree
 
         void setTimeStepInSeconds(double time_step_in_seconds) {m_params.time_step_in_seconds = time_step_in_seconds; }
         void setBiasCorrelationTimeFactor(double bias_correlation_time_factor) { m_params.bias_correlation_time_factor = bias_correlation_time_factor; }
-        void useMagnetometerMeasurements(bool use_magenetometer_measurements);
+        bool useMagnetometerMeasurements(bool use_magenetometer_measurements);
 
         // measurement noise depends only on accelerometer xyz and magnetometer z
-        void setMeasurementNoiseVariance(double acc, double mag);
+        bool setMeasurementNoiseVariance(double acc, double mag);
         // process noise depends on gyro measurement and gyro bias estimate - since gyro measurement is passed as input
-        void setSystemNoiseVariance(double gyro, double gyro_bias);
-        void setInitialStateCovariance(double orientation_var, double ang_vel_var, double gyro_bias_var);
+        bool setSystemNoiseVariance(double gyro, double gyro_bias);
+        bool setInitialStateCovariance(double orientation_var, double ang_vel_var, double gyro_bias_var);
 
         bool initializeFilter();
 

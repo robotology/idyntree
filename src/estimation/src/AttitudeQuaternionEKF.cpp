@@ -54,12 +54,13 @@ void iDynTree::AttitudeQuaternionEKF::prepareMeasurementNoiseCovarianceMatrix(iD
     if (R.rows() != m_output_size && R.cols() != m_output_size)
     {
         R.resize(m_output_size, m_output_size);
+        R.zero();
     }
 
     iDynTree::toEigen(R).block<3, 3>(0, 0) = iDynTree::toEigen(m_Id3)*m_params.accelerometer_noise_variance;
     if (m_params.use_magenetometer_measurements)
     {
-        iDynTree::toEigen(R).block<1, 1>(3, 3) = iDynTree::toEigen(m_params.magnetometer_noise_variance);
+        R(3, 3) = m_params.magnetometer_noise_variance;
     }
 }
 
@@ -77,13 +78,14 @@ iDynTree::AttitudeQuaternionEKF::AttitudeQuaternionEKF()
       m_Omega_y.zero();
       m_Acc_y.zero();
 
-      iDynTree::toEigen(m_Id4).Identity();
-      iDynTree::toEigen(m_Id3).Identity();
+      iDynTree::toEigen(m_Id4).setIdentity();
+      iDynTree::toEigen(m_Id3).setIdentity();
 }
 
 bool iDynTree::AttitudeQuaternionEKF::initializeFilter()
 {
-    m_state_size = getInternalStateSize();
+    m_state_size = this->getInternalStateSize();
+
     if (m_params.use_magenetometer_measurements)
     {
         m_output_size = output_dimensions_with_magnetometer;
@@ -92,36 +94,67 @@ bool iDynTree::AttitudeQuaternionEKF::initializeFilter()
     {
         m_output_size = output_dimensions_without_magnetometer;
     }
+
     ekfSetStateSize(m_state_size);
+    m_x.resize(m_state_size);
+    m_w.resize(m_state_size);
     serializeStateVector();
     ekfSetOutputSize(m_output_size);
-    m_input_size = input_dimensions;
-    ekfSetInputSize(m_input_size);
+
     m_y.resize(m_output_size);
     m_v.resize(m_output_size);
-    m_w.resize(m_state_size);
+    m_input_size = input_dimensions;
+    ekfSetInputSize(m_input_size);
+    m_u.resize(m_input_size);
 
-    setSystemNoiseVariance(m_params.gyroscope_noise_variance,
-                            m_params.gyro_bias_noise_variance);
-
-    setMeasurementNoiseVariance(m_params.accelerometer_noise_variance,
-                                m_params.magnetometer_noise_variance);
-
+    // ekfinit resizes and initializes the filter matrices and vectors to zero - dont move it frome here
     if (!ekfInit())
     {
         return false;
     }
 
+    // once the buffers are resized and zeroed, setup the matrices
+    if (!setInitialStateCovariance(m_params.initial_orientation_error_variance,
+                                   m_params.initial_ang_vel_error_variance,
+                                   m_params.initial_gyro_bias_error_variance))
+    {
+        return false;
+    }
+
+    if (!setSystemNoiseVariance(m_params.gyroscope_noise_variance,
+                            m_params.gyro_bias_noise_variance))
+    {
+        return false;
+    }
+
+    if (!setMeasurementNoiseVariance(m_params.accelerometer_noise_variance,
+                                m_params.magnetometer_noise_variance))
+    {
+        return false;
+    }
+
+    m_initialized = true;
     return m_initialized;
 }
 
 bool iDynTree::AttitudeQuaternionEKF::propagateStates()
 {
     iDynTree::Span<double> Omega_y_span(m_Omega_y.data(), m_Omega_y.size());
-    ekfSetInputVector(Omega_y_span);
-    ekfPredict();
-
-    return true;
+    bool ok  = ekfSetInputVector(Omega_y_span);
+    ok = ekfPredict() && ok;
+    iDynTree::Span<double> x_span(m_x.data(), m_x.size());
+    if (ekfGetStates(x_span))
+    {
+        deserializeStateVector();
+        m_orientationInSO3 = iDynTree::Rotation::RotationFromQuaternion(m_state.m_orientation);
+        m_orientationInRPY = m_orientationInSO3.asRPY();
+    }
+    else
+    {
+        iDynTree::reportError("AttitudeQuaternionEKF", "updateFilterWithMeasurements", "could not get recent state estimate");
+        return false;
+    }
+    return ok;
 }
 
 void iDynTree::AttitudeQuaternionEKF::serializeMeasurementVector()
@@ -134,7 +167,7 @@ void iDynTree::AttitudeQuaternionEKF::serializeMeasurementVector()
     iDynTree::toEigen(m_y).block<3, 1>(0, 0) = iDynTree::toEigen(m_Acc_y);
     if (m_params.use_magenetometer_measurements)
     {
-        iDynTree::toEigen(m_y).block<1, 1>(3, 0) = iDynTree::toEigen(m_Mag_y);
+        m_y(3) = m_Mag_y;
     }
 }
 
@@ -142,20 +175,22 @@ bool iDynTree::AttitudeQuaternionEKF::callEkfUpdate()
 {
     serializeMeasurementVector();
     iDynTree::Span<double> y_span(m_y.data(), m_y.size());
-    ekfSetMeasurementVector(y_span);
-    ekfUpdate();
+    bool ok = ekfSetMeasurementVector(y_span);
+    ok = ekfUpdate() && ok;
 
     iDynTree::Span<double> x_span(m_x.data(), m_x.size());
     if (ekfGetStates(x_span))
     {
         deserializeStateVector();
+        m_orientationInSO3 = iDynTree::Rotation::RotationFromQuaternion(m_state.m_orientation);
+        m_orientationInRPY = m_orientationInSO3.asRPY();
     }
     else
     {
         iDynTree::reportError("AttitudeQuaternionEKF", "updateFilterWithMeasurements", "could not get recent state estimate");
         return false;
     }
-    return true;
+    return ok;
 }
 
 
@@ -177,7 +212,6 @@ bool iDynTree::AttitudeQuaternionEKF::updateFilterWithMeasurements(const iDynTre
     m_Mag_y = atan2(-modified_mag_meas_in_body_frame(1), modified_mag_meas_in_body_frame(0));
 
     // set accelerometer and magnetometer measurement
-
     if (!callEkfUpdate())
     {
         return false;
@@ -190,8 +224,8 @@ bool iDynTree::AttitudeQuaternionEKF::updateFilterWithMeasurements(const iDynTre
 {
     iDynTree::MagnetometerMeasurements magMeas;
     magMeas.zero();
-    updateFilterWithMeasurements(linAccMeas, gyroMeas, magMeas);
-    return true;
+    bool ok = updateFilterWithMeasurements(linAccMeas, gyroMeas, magMeas);
+    return ok;
 }
 
 bool iDynTree::AttitudeQuaternionEKF::computejacobianF(iDynTree::VectorDynSize& x, iDynTree::MatrixDynSize& F)
@@ -315,7 +349,7 @@ bool iDynTree::AttitudeQuaternionEKF::f(const iDynTree::VectorDynSize& x_k, cons
         return false;
     }
 
-    if (x_k.size() != m_u.size())
+    if (u_k.size() != m_u.size())
     {
         reportError("AttitudeQuaternionEKF", "f", "input size mismatch");
         return false;
@@ -386,19 +420,21 @@ bool iDynTree::AttitudeQuaternionEKF::h(const iDynTree::VectorDynSize& xhat_k_pl
     return true;
 }
 
-void iDynTree::AttitudeQuaternionEKF::setMeasurementNoiseVariance(double acc, double mag)
+bool iDynTree::AttitudeQuaternionEKF::setMeasurementNoiseVariance(double acc, double mag)
 {
     m_params.accelerometer_noise_variance = acc;
     m_params.magnetometer_noise_variance = mag;
 
     iDynTree::MatrixDynSize R = iDynTree::MatrixDynSize(m_output_size, m_output_size);
     prepareMeasurementNoiseCovarianceMatrix(R);
+
     iDynTree::Span<double> R_span(R.data(), R.capacity());
     iDynTree::Span<double> v_span(m_v.data(), m_v.size());
-    ekfSetSystemNoiseMeanAndCovariance(v_span, R_span);
+    bool ok = ekfSetMeasurementNoiseMeanAndCovariance(v_span, R_span);
+    return ok;
 }
 
-void iDynTree::AttitudeQuaternionEKF::setSystemNoiseVariance(double gyro, double gyro_bias)
+bool iDynTree::AttitudeQuaternionEKF::setSystemNoiseVariance(double gyro, double gyro_bias)
 {
     m_params.gyroscope_noise_variance = gyro;
     m_params.gyro_bias_noise_variance = gyro_bias;
@@ -407,10 +443,11 @@ void iDynTree::AttitudeQuaternionEKF::setSystemNoiseVariance(double gyro, double
     prepareSystemNoiseCovarianceMatrix(Q);
     iDynTree::Span<double> Q_span(Q.data(), Q.capacity());
     iDynTree::Span<double> w_span(m_w.data(), m_w.size());
-    ekfSetSystemNoiseMeanAndCovariance(w_span, Q_span);
+    bool ok = ekfSetSystemNoiseMeanAndCovariance(w_span, Q_span);
+    return ok;
 }
 
-void iDynTree::AttitudeQuaternionEKF::setInitialStateCovariance(double orientation_var, double ang_vel_var, double gyro_bias_var)
+bool iDynTree::AttitudeQuaternionEKF::setInitialStateCovariance(double orientation_var, double ang_vel_var, double gyro_bias_var)
 {
     iDynTree::MatrixDynSize P(m_state_size, m_state_size);
     iDynTree::toEigen(P).block<4,4>(0,0) = iDynTree::toEigen(m_Id4)*orientation_var;
@@ -418,7 +455,8 @@ void iDynTree::AttitudeQuaternionEKF::setInitialStateCovariance(double orientati
     iDynTree::toEigen(P).block<3,3>(7,7) = iDynTree::toEigen(m_Id3)*gyro_bias_var;
 
     iDynTree::Span<double> P_span(P.data(), P.capacity());
-    ekfSetStateCovariance(P_span);
+    bool ok = ekfSetStateCovariance(P_span);
+    return ok;
 }
 
 
@@ -458,6 +496,7 @@ std::size_t iDynTree::AttitudeQuaternionEKF::getInternalStateSize() const
     size += m_state.m_orientation.size();
     size += m_state.m_angular_velocity.size();
     size += m_state.m_gyroscope_bias.size();
+
     return size;
 }
 
@@ -500,19 +539,17 @@ bool iDynTree::AttitudeQuaternionEKF::setInternalState(iDynTree::Span< double >&
     m_initial_state = m_state;
     serializeStateVector();
     iDynTree::Span<double> x0_span(m_x.data(), m_x.size());
-    ekfSetInitialState(x0_span);
-    return true;
+    bool ok = ekfSetInitialState(x0_span);
+    return ok;
 }
 
-void iDynTree::AttitudeQuaternionEKF::useMagnetometerMeasurements(bool use_magenetometer_measurements)
+bool iDynTree::AttitudeQuaternionEKF::useMagnetometerMeasurements(bool use_magenetometer_measurements)
 {
     m_params.use_magenetometer_measurements = use_magenetometer_measurements;
-    if (m_params.use_magenetometer_measurements)
-    {
-        m_output_size = output_dimensions_with_magnetometer;
-    }
-    else
-    {
-        m_output_size = output_dimensions_without_magnetometer;
-    }
+    ekfReset();
+
+    bool ok = initializeFilter();
+    iDynTree::Span<double> x_span(m_x.data(), m_x.size());
+    ok = setInternalState(x_span) && ok;
+    return ok;
 }
