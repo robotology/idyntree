@@ -40,6 +40,11 @@ but you can manually make sure that iDynTree searches or ignores a given depende
 - [YARP](https://github.com/robotology/yarp)
 - [ICUB](https://github.com/robotology/icub-main)
 
+##### Optional for the optimal control part
+- [ALGLIB](https://github.com/S-Dafarra/alglib-cmake)
+- [OSQP](https://github.com/robotology/osqp-eigen)
+- [WORHP](https://worhp.de/)
+
 ##### Deprecated
 - [Kinematics and Dynamics Library](https://github.com/orocos/orocos_kinematics_dynamics)
 - [urdfdom](https://github.com/ros/urdfdom)
@@ -177,7 +182,7 @@ The documentation for the complete API of iDynTree is automatically extracted fr
 and is available at the URL : [http://robotology.gitlab.io/docs/idyntree/master/](http://robotology.gitlab.io/docs/idyntree/master/).
 The documentation generated from the `devel` branch is available at the URL : [http://robotology.gitlab.io/docs/idyntree/devel/](http://robotology.gitlab.io/docs/idyntree/devel/).
 
-## Announcements 
+## Announcements
 Announcements on new releases, API changes or other news are done on [`robotology/QA` GitHub repository](https://github.com/robotology/QA). You can watch that repository to get all the iDynTree-related announcements, that will always tagged with the `announcement` tag.
 
 ## Developer Documentation
@@ -209,8 +214,8 @@ The initial development of iDynTree was supported by the FP7 EU projects [CoDyCo
 
 The development is now supported by the [Dynamic Interaction Control research line](https://www.iit.it/research/lines/dynamic-interaction-control) at the [Italian Institute of Technology](https://www.iit.it/).
 
-## License 
-iDynTree is licensed under either the GNU Lesser General Public License v3.0 : 
+## License
+iDynTree is licensed under either the GNU Lesser General Public License v3.0 :
 
 https://www.gnu.org/licenses/lgpl-3.0.html
 

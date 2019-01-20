@@ -794,10 +794,10 @@ namespace iDynTree {
                         return false;
                     }
                     if (first){
-                        partialDerivative = m_pimpl->costStateJacobianBuffer;
+                        toEigen(partialDerivative) = cost.second.weight * toEigen(m_pimpl->costStateJacobianBuffer);
                         first = false;
                     } else {
-                        toEigen(partialDerivative) += toEigen(m_pimpl->costStateJacobianBuffer);
+                        toEigen(partialDerivative) += cost.second.weight * toEigen(m_pimpl->costStateJacobianBuffer);
                     }
                 }
             }
@@ -831,10 +831,10 @@ namespace iDynTree {
                         return false;
                     }
                     if (first){
-                        partialDerivative = m_pimpl->costControlJacobianBuffer;
+                        toEigen(partialDerivative) = cost.second.weight * toEigen(m_pimpl->costControlJacobianBuffer);
                         first = false;
                     } else {
-                        toEigen(partialDerivative) += toEigen(m_pimpl->costControlJacobianBuffer);
+                        toEigen(partialDerivative) += cost.second.weight * toEigen(m_pimpl->costControlJacobianBuffer);
                     }
                 }
             }
@@ -869,10 +869,10 @@ namespace iDynTree {
                         return false;
                     }
                     if (first){
-                        partialDerivative = m_pimpl->costStateHessianBuffer;
+                        toEigen(partialDerivative) = cost.second.weight * toEigen(m_pimpl->costStateHessianBuffer);
                         first = false;
                     } else {
-                        toEigen(partialDerivative) += toEigen(m_pimpl->costStateHessianBuffer);
+                        toEigen(partialDerivative) += cost.second.weight * toEigen(m_pimpl->costStateHessianBuffer);
                     }
                 }
             }
@@ -908,10 +908,10 @@ namespace iDynTree {
                     }
 
                     if (first){
-                        partialDerivative = m_pimpl->costControlHessianBuffer;
+                        toEigen(partialDerivative) = cost.second.weight * toEigen(m_pimpl->costControlHessianBuffer);
                         first = false;
                     } else {
-                        toEigen(partialDerivative) += toEigen(m_pimpl->costControlHessianBuffer);
+                        toEigen(partialDerivative) += cost.second.weight * toEigen(m_pimpl->costControlHessianBuffer);
                     }
                 }
             }
@@ -947,10 +947,10 @@ namespace iDynTree {
                     }
 
                     if (first){
-                        partialDerivative = m_pimpl->costMixedHessianBuffer;
+                        toEigen(partialDerivative) = cost.second.weight * toEigen(m_pimpl->costMixedHessianBuffer);
                         first = false;
                     } else {
-                        toEigen(partialDerivative) += toEigen(m_pimpl->costMixedHessianBuffer);
+                        toEigen(partialDerivative) += cost.second.weight * toEigen(m_pimpl->costMixedHessianBuffer);
                     }
                 }
             }
