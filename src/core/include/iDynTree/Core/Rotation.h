@@ -164,7 +164,7 @@ namespace iDynTree
          /**
          * Get a roll, pitch and yaw corresponding to this rotation.
          *
-         * Get \f$ (r,p,y) \in (-π, π] \times (-π/2, π/2) \times (-π, π] \bigcap  \{0\} \times \{-π/2,π/2\} \times (-π,π)\f$
+         * Get \f$ (r,p,y) \in ( (-π, π] \times (-π/2, π/2) \times (-π, π] ) \cup ( \{0\} \times \{-π/2\} \times (-π,π) ) \cup ( \{0\} \times \{π/2\} \times (-π,π) )\f$
          * such that
          * *this == RotZ(y)*RotY(p)*RotX(r)
          *
