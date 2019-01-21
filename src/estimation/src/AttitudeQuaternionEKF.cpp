@@ -206,7 +206,10 @@ bool iDynTree::AttitudeQuaternionEKF::updateFilterWithMeasurements(const iDynTre
     m_Acc_y = linAccMeas;
     iDynTree::toEigen(m_Acc_y).normalize();
     m_Omega_y = gyroMeas;
-    // compute yaw angle from magnetometer measurements
+
+    // compute yaw angle from magnetometer measurements by limiting the vertical influence of magentometer
+    // to do this first rotate the measurement to inertial frame, set z-component to zero.
+    // convert back to body frame and compute the yaw using atan2(y, x)
     iDynTree::Vector3 mag_meas_in_inertial_frame;
     iDynTree::toEigen(mag_meas_in_inertial_frame) = iDynTree::toEigen(m_orientationInSO3) * iDynTree::toEigen(magMeas);
     mag_meas_in_inertial_frame(2) = 0; // to limit the vertical influence of magnetometer A^m_z = 0

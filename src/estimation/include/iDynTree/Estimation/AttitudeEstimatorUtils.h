@@ -115,7 +115,7 @@ iDynTree::Quaternion pureQuaternion(const iDynTree::Vector3& bodyFixedFrameVeloc
  *
  * First rotate about x (roll), then y(pitch) and z(yaw)
  * characterized by the matrix multiplication
- * R = Rz*Ry*Rx
+ * \f$ R = R_z R_y R_x \f$
  *
  * @param[in] q quaternion
  * @return iDynTree::RPY
