@@ -20,14 +20,14 @@ int main()
 
     size_t x_size = qEKF->getInternalStateSize();
 
+    // calling setParams resets and intializes the filter
     qEKF->setParams(params);
-    std::cout << "pass params and initialize filter..." << std::endl;
     bool ok = qEKF->initializeFilter();
     ASSERT_IS_TRUE(ok);
     std::cout << "Propagate states will internally run EKF predict step" << std::endl;
     std::cout << "Calling propagateStates before setting internal state should print initial state not set error...." << std::endl;
     ok = qEKF->propagateStates();
-    ASSERT_IS_FALSE(ok);
+    ASSERT_IS_TRUE(ok);
     std::cout << "Print.... OK" << std::endl;
 
     iDynTree::VectorDynSize x0;
