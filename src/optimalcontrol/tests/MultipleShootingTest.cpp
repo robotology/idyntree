@@ -78,7 +78,7 @@ public:
         return true;
     }
 
-    virtual bool dynamicsStateFirstDerivativeSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity) override{
+    virtual bool dynamicsStateFirstDerivativeSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity) override {
         iDynTree::optimalcontrol::SparsityStructure sparsity;
         sparsity.addIdentityBlock(0ul, 0, 2);
         stateSparsity = sparsity;
