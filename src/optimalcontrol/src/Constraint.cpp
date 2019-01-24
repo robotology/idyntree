@@ -133,5 +133,15 @@ namespace iDynTree {
             return 0;
         }
 
+        bool Constraint::constraintJacobianWRTStateSparsity(SparsityStructure &stateSparsity)
+        {
+            return false;
+        }
+
+        bool Constraint::constraintJacobianWRTControlSparsity(SparsityStructure &controlSparsity)
+        {
+            return false;
+        }
+
     }
 }

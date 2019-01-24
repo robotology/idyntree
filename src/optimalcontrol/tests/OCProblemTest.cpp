@@ -73,6 +73,23 @@ public:
         dynamicsDerivative(1, 2) = 2.0;
         return true;
     }
+
+    virtual bool dynamicsStateFirstDerivativeSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity) override {
+        iDynTree::optimalcontrol::SparsityStructure sparsity;
+        sparsity.addIdentityBlock(0ul, 0, 2);
+        stateSparsity = sparsity;
+        return true;
+    }
+
+    virtual bool dynamicsControlFirstDerivativeSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) override {
+        iDynTree::optimalcontrol::SparsityStructure sparsity;
+        sparsity.addNonZeroIfNotPresent(0, 0);
+        sparsity.addNonZeroIfNotPresent(0, 1);
+        sparsity.addNonZeroIfNotPresent(1, 0);
+        sparsity.addNonZeroIfNotPresent(1, 2);
+        controlSparsity = sparsity;
+        return true;
+    }
 };
 TestSystem::~TestSystem(){};
 
@@ -137,6 +154,18 @@ public:
 
     virtual size_t expectedControlSpaceSize() const override {
         return 3;
+    }
+
+    virtual bool constraintJacobianWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity) override {
+        stateSparsity.clear();
+        return true;
+    }
+
+    virtual bool constraintJacobianWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) override {
+        iDynTree::optimalcontrol::SparsityStructure sparsity;
+        sparsity.addNonZeroIfNotPresent(0,0);
+        controlSparsity = sparsity;
+        return true;
     }
 };
 TestConstraint::~TestConstraint(){}
@@ -359,6 +388,34 @@ int main() {
     testControl(0) = 6.0;
     ASSERT_IS_TRUE(problem.isFeasiblePoint(3.0, testState, testControl));
     ASSERT_IS_FALSE(problem.isFeasiblePoint(4.0, testState, testControl));
+
+    iDynTree::optimalcontrol::SparsityStructure stateSparsity, controlSparsity;
+    ASSERT_IS_TRUE(problem.constraintJacobianWRTStateSparsity(stateSparsity));
+    ASSERT_IS_TRUE(problem.constraintJacobianWRTControlSparsity(controlSparsity));
+    iDynTree::MatrixDynSize stateSparsityCheck, controlSparsityCheck, stateZeroCheck, controlZeroCheck;
+    stateSparsityCheck = obtainedStatejac;
+    stateZeroCheck = stateSparsityCheck;
+    stateZeroCheck.zero();
+    controlSparsityCheck = obtainedControlJac;
+    controlZeroCheck = controlSparsityCheck;
+    controlZeroCheck.zero();
+
+    for(size_t i = 0; i < stateSparsity.size(); ++i) {
+        unsigned int row = static_cast<unsigned int>(stateSparsity.nonZeroElementRows[i]);
+        unsigned int col = static_cast<unsigned int>(stateSparsity.nonZeroElementColumns[i]);
+        stateSparsityCheck(row, col) = 0.0;
+    }
+
+    ASSERT_EQUAL_MATRIX(stateSparsityCheck, stateZeroCheck);
+
+    for(size_t i = 0; i < controlSparsity.size(); ++i) {
+        unsigned int row = static_cast<unsigned int>(controlSparsity.nonZeroElementRows[i]);
+        unsigned int col = static_cast<unsigned int>(controlSparsity.nonZeroElementColumns[i]);
+        controlSparsityCheck(row, col) = 0.0;
+    }
+
+    ASSERT_EQUAL_MATRIX(controlSparsityCheck, controlZeroCheck);
+
 
     return EXIT_SUCCESS;
 }

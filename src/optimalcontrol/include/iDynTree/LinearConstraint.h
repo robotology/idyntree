@@ -18,8 +18,11 @@
 #define IDYNTREE_OPTIMALCONTROL_LINEARCONSTRAINT_H
 
 #include <iDynTree/Constraint.h>
-#include <string>
 #include <iDynTree/Core/MatrixDynSize.h>
+#include <iDynTree/TimeVaryingObject.h>
+#include <iDynTree/SparsityStructure.h>
+#include <string>
+#include <memory>
 
 namespace iDynTree {
     namespace optimalcontrol {
@@ -42,11 +45,19 @@ namespace iDynTree {
 
             LinearConstraint(size_t size, const std::string name);
 
+            LinearConstraint(size_t size, const std::string name,
+                             const SparsityStructure& stateSparsity,
+                             const SparsityStructure& controlSparsity);
+
             virtual ~LinearConstraint() override;
 
             bool setStateConstraintMatrix(const MatrixDynSize& constraintMatrix);
 
             bool setControlConstraintMatrix(const MatrixDynSize& constraintMatrix);
+
+            bool setStateConstraintMatrix(std::shared_ptr<TimeVaryingMatrix> constraintMatrix);
+
+            bool setControlConstraintMatrix(std::shared_ptr<TimeVaryingMatrix> constraintMatrix);
 
             virtual bool evaluateConstraint(double time,
                                             const VectorDynSize& state,
@@ -63,11 +74,13 @@ namespace iDynTree {
                                                       const VectorDynSize& control,
                                                       MatrixDynSize& jacobian) final;
 
+            virtual bool constraintJacobianWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity) final;
+
+            virtual bool constraintJacobianWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) final;
+
         private:
-            bool m_constrainsState, m_constrainsControl;
-            iDynTree::MatrixDynSize m_stateConstraintMatrix;
-            iDynTree::MatrixDynSize m_controlConstraintMatrix;
-            iDynTree::VectorDynSize m_stateConstraintsBuffer, m_controlConstraintsBuffer;
+            class LinearConstraintImplementation;
+            LinearConstraintImplementation* m_pimpl;
         };
 
     }

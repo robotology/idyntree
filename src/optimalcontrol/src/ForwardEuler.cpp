@@ -41,9 +41,34 @@ namespace iDynTree {
                 toEigen(m_identity) = iDynTreeEigenMatrix::Identity(nx, nx);
 
                 m_stateJacBuffer.resize(nx, nx);
+                m_stateJacBuffer.zero();
                 m_controlJacBuffer.resize(nx,nu);
+                m_controlJacBuffer.zero();
                 m_zeroBuffer.resize(nx,nu);
                 m_zeroBuffer.zero();
+
+                m_stateJacobianSparsity.resize(2);
+                m_controlJacobianSparsity.resize(2);
+
+                if (m_dynamicalSystem_ptr->dynamicsStateFirstDerivativeSparsity(m_stateJacobianSparsity[0])) {
+                    m_stateJacobianSparsity[1].nonZeroElementRows.clear();
+                    m_stateJacobianSparsity[1].nonZeroElementColumns.clear();
+
+                    for (size_t i = 0; i < m_dynamicalSystem_ptr->stateSpaceSize(); ++i) {
+                        m_stateJacobianSparsity[0].addNonZeroIfNotPresent(i, i);
+                        m_stateJacobianSparsity[1].nonZeroElementRows.push_back(i);
+                        m_stateJacobianSparsity[1].nonZeroElementColumns.push_back(i);
+                    }
+
+                    m_hasStateSparsity = true;
+                }
+
+                if (m_dynamicalSystem_ptr->dynamicsControlFirstDerivativeSparsity(m_controlJacobianSparsity[0])) {
+                    m_controlJacobianSparsity[1].nonZeroElementRows.clear();
+                    m_controlJacobianSparsity[1].nonZeroElementColumns.clear();
+
+                    m_hasControlSparsity = true;
+                }
 
                 return true;
             }
@@ -216,6 +241,26 @@ namespace iDynTree {
 
                 controlJacobianValues[1] = m_zeroBuffer;
 
+                return true;
+            }
+
+            bool ForwardEuler::getCollocationConstraintJacobianStateSparsity(std::vector<SparsityStructure> &stateJacobianSparsity)
+            {
+                if (!m_hasStateSparsity) {
+                    return false;
+                }
+
+                stateJacobianSparsity = m_stateJacobianSparsity;
+                return true;
+            }
+
+            bool ForwardEuler::getCollocationConstraintJacobianControlSparsity(std::vector<SparsityStructure> &controlJacobianSparsity)
+            {
+                if (!m_hasControlSparsity) {
+                    return false;
+                }
+
+                controlJacobianSparsity = m_controlJacobianSparsity;
                 return true;
             }
         }

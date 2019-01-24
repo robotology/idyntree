@@ -55,4 +55,5 @@ idyntree_handle_dependency(IPOPT)
 idyntree_handle_dependency(Irrlicht)
 idyntree_handle_dependency(Qt5 COMPONENTS Qml Quick Widgets)
 idyntree_handle_dependency(OsqpEigen)
-
+idyntree_handle_dependency(ALGLIB 3.14.0)
+idyntree_handle_dependency(WORHP)

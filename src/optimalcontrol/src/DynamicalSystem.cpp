@@ -90,6 +90,16 @@ namespace iDynTree {
                                                              MatrixDynSize& dynamicsDerivative)
         { return false; }
 
+        bool DynamicalSystem::dynamicsStateFirstDerivativeSparsity(SparsityStructure &stateSparsity)
+        {
+            return false;
+        }
+
+        bool DynamicalSystem::dynamicsControlFirstDerivativeSparsity(SparsityStructure &controlSparsity)
+        {
+            return false;
+        }
+
 //        bool DynamicalSystem::setController(std::shared_ptr<Controller> controllerPointer){
 //            if (controllerPointer->controlSpaceSize() != m_controlSize){
 //                reportError("DynamicalSystem", "setController", "The controller dimension is not coherent with the controlSpaceSize.");
