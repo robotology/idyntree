@@ -16,6 +16,7 @@
 
 #include <iDynTree/OCSolvers/MultipleShootingSolver.h>
 
+#include <iDynTree/SparsityStructure.h>
 #include <iDynTree/OptimalControlProblem.h>
 #include <iDynTree/DynamicalSystem.h>
 #include <iDynTree/Integrator.h>
@@ -97,6 +98,9 @@ namespace iDynTree {
             double m_minStepSize, m_maxStepSize, m_controlPeriod;
             size_t m_nx, m_nu, m_numberOfVariables, m_constraintsPerInstant, m_numberOfConstraints;
             std::vector<size_t> m_jacobianNZRows, m_jacobianNZCols, m_hessianNZRows, m_hessianNZCols;
+            SparsityStructure m_ocStateSparsity, m_ocControlSparsity;
+            std::vector<SparsityStructure> m_collocationStateNZ, m_collocationControlNZ;
+            SparsityStructure m_mergedCollocationControlNZ;
             size_t m_jacobianNonZeros, m_hessianNonZeros;
             double m_plusInfinity, m_minusInfinity;
             VectorDynSize m_constraintsLowerBound, m_constraintsUpperBound;
@@ -184,6 +188,14 @@ namespace iDynTree {
                 }
             }
 
+            void addJacobianBlock(size_t initRow, size_t initCol, const SparsityStructure& sparsity){
+                for (size_t i = 0; i < sparsity.size(); ++i) {
+                    addNonZero(m_jacobianNZRows, m_jacobianNonZeros, initRow + sparsity.nonZeroElementRows[i]);
+                    addNonZero(m_jacobianNZCols, m_jacobianNonZeros, initCol + sparsity.nonZeroElementColumns[i]);
+                    m_jacobianNonZeros++;
+                }
+            }
+
             void addIdentityJacobianBlock(size_t initRow, size_t initCol, size_t dimension){
                 for (size_t i = 0; i < dimension; ++i){
                     addNonZero(m_jacobianNZRows, m_jacobianNonZeros, initRow + i);
@@ -200,6 +212,30 @@ namespace iDynTree {
                         m_hessianNonZeros++;
                     }
                 }
+            }
+
+            void mergeSparsityVectors(const std::vector<SparsityStructure>& original, SparsityStructure& merged) {
+                const std::vector<size_t>& firstRows = original[0].nonZeroElementRows;
+                const std::vector<size_t>& firstCols = original[0].nonZeroElementColumns;
+                const std::vector<size_t>& secondRows = original[1].nonZeroElementRows;
+                const std::vector<size_t>& secondCols = original[1].nonZeroElementColumns;
+                size_t mergedNonZeros = 0;
+                for (size_t i = 0; i < firstRows.size(); ++i) {
+                    addNonZero(merged.nonZeroElementRows, mergedNonZeros, firstRows[i]);
+                    addNonZero(merged.nonZeroElementColumns, mergedNonZeros, firstCols[i]);
+                    mergedNonZeros++;
+                }
+
+                for (size_t j = 0; j < secondRows.size(); ++j) {
+                    bool duplicate = original[0].isValuePresent(secondRows[j], secondCols[j]);
+
+                    if (!duplicate) {
+                        addNonZero(merged.nonZeroElementRows, mergedNonZeros, secondRows[j]);
+                        addNonZero(merged.nonZeroElementColumns, mergedNonZeros, secondCols[j]);
+                        mergedNonZeros++;
+                    }
+                }
+                merged.resize(mergedNonZeros);
             }
 
             void allocateBuffers(){
@@ -955,7 +991,7 @@ namespace iDynTree {
 
                 m_constraintsPerInstant = m_ocproblem->getConstraintsDimension();
                 size_t nc = m_constraintsPerInstant;
-                m_numberOfConstraints = (m_totalMeshes) * nx + (m_constraintsPerInstant) * (m_totalMeshes); //dynamical constraints (plus identity constraint for the initial state) and normal constraints
+                m_numberOfConstraints = (m_totalMeshes - 1) * nx + (m_constraintsPerInstant) * (m_totalMeshes); //dynamical constraints (plus identity constraint for the initial state) and normal constraints
 
                 //Determine problem type
                 m_infoData->hasLinearConstraints = (m_ocproblem->countLinearConstraints() != 0) || m_ocproblem->systemIsLinear();
@@ -972,6 +1008,23 @@ namespace iDynTree {
                 Eigen::Map<Eigen::VectorXd> lowerBoundMap = toEigen(m_constraintsLowerBound);
                 Eigen::Map<Eigen::VectorXd> upperBoundMap = toEigen(m_constraintsUpperBound);
 
+                bool ocHasStateSparsisty = m_ocproblem->constraintJacobianWRTStateSparsity(m_ocStateSparsity);
+                if (!ocHasStateSparsisty) {
+                    reportWarning("MultipleShootingTranscription", "prepare", "Failed to retrieve state sparsity of optimal control problem constraints. Assuming dense matrix.");
+                }
+
+                bool ocHasControlSparsisty = m_ocproblem->constraintJacobianWRTControlSparsity(m_ocControlSparsity);
+                if (!ocHasControlSparsisty) {
+                    reportWarning("MultipleShootingTranscription", "prepare", "Failed to retrieve control sparsity of optimal control problem constraints. Assuming dense matrix.");
+                }
+
+                bool systemHasStateSparsity = m_integrator->getCollocationConstraintJacobianStateSparsity(m_collocationStateNZ);
+                bool systemHasControlSparsity = m_integrator->getCollocationConstraintJacobianControlSparsity(m_collocationControlNZ);
+
+                if (systemHasControlSparsity) {
+                    mergeSparsityVectors(m_collocationControlNZ, m_mergedCollocationControlNZ);
+                }
+
                 resetNonZerosCount();
 
                 std::vector<MeshPoint>::iterator mesh = m_meshPoints.begin(), previousControlMesh = mesh;
@@ -986,11 +1039,6 @@ namespace iDynTree {
                         mesh->previousControlIndex = index;
                         index += nu;
                         previousControlMesh = mesh;
-
-                        lowerBoundMap.segment(static_cast<Eigen::Index>(constraintIndex), static_cast<Eigen::Index>(nx)) = toEigen(m_ocproblem->dynamicalSystem().lock()->initialState());
-                        upperBoundMap.segment(static_cast<Eigen::Index>(constraintIndex), static_cast<Eigen::Index>(nx)) = toEigen(m_ocproblem->dynamicalSystem().lock()->initialState());
-                        addIdentityJacobianBlock(constraintIndex, mesh->stateIndex, nx);
-                        constraintIndex += nx;
 
                         //Saving constraints bounds
                         if (!(m_ocproblem->getConstraintsLowerBound(mesh->time, m_minusInfinity, m_constraintsBuffer))){
@@ -1015,8 +1063,12 @@ namespace iDynTree {
                             }
                         }
 
-                        //Saving the jacobian structure due to the constraints
-                        addJacobianBlock(constraintIndex, nc, mesh->controlIndex, nu);
+                        //Saving the jacobian structure due to the constraints (state should not be constrained here)
+                        if (ocHasControlSparsisty) {
+                            addJacobianBlock(constraintIndex, mesh->controlIndex, m_ocControlSparsity);
+                        } else {
+                            addJacobianBlock(constraintIndex, nc, mesh->controlIndex, nu);
+                        }
                         constraintIndex += nc;
 
                         //Saving the hessian structure
@@ -1045,10 +1097,21 @@ namespace iDynTree {
                         upperBoundMap.segment(static_cast<Eigen::Index>(constraintIndex), static_cast<Eigen::Index>(nx)).setZero();
 
                         //Saving the jacobian structure due to the dynamical constraints
-                        addJacobianBlock(constraintIndex, nx, mesh->previousControlIndex, nu);
-                        addJacobianBlock(constraintIndex, nx, mesh->controlIndex, nu);
-                        addJacobianBlock(constraintIndex, nx, mesh->stateIndex, nx);
-                        addJacobianBlock(constraintIndex, nx, (mesh - 1)->stateIndex, nx);
+                        if (systemHasControlSparsity) {
+                            addJacobianBlock(constraintIndex, mesh->controlIndex, m_collocationControlNZ[1]);
+                            addJacobianBlock(constraintIndex, mesh->previousControlIndex, m_collocationControlNZ[0]);
+                        } else {
+                            addJacobianBlock(constraintIndex, nx, mesh->controlIndex, nu);
+                            addJacobianBlock(constraintIndex, nx, mesh->previousControlIndex, nu);
+                        }
+
+                        if (systemHasStateSparsity) {
+                            addJacobianBlock(constraintIndex, mesh->stateIndex, m_collocationStateNZ[1]);
+                            addJacobianBlock(constraintIndex, (mesh - 1)->stateIndex, m_collocationStateNZ[0]);
+                        } else {
+                            addJacobianBlock(constraintIndex, nx, mesh->stateIndex, nx);
+                            addJacobianBlock(constraintIndex, nx, (mesh - 1)->stateIndex, nx);
+                        }
 
                         constraintIndex += nx;
 
@@ -1076,8 +1139,16 @@ namespace iDynTree {
                         }
 
                         //Saving the jacobian structure due to the constraints
-                        addJacobianBlock(constraintIndex, nc, mesh->stateIndex, nx);
-                        addJacobianBlock(constraintIndex, nc, mesh->controlIndex, nu);
+                        if (ocHasStateSparsisty) {
+                            addJacobianBlock(constraintIndex, mesh->stateIndex, m_ocStateSparsity);
+                        } else {
+                            addJacobianBlock(constraintIndex, nc, mesh->stateIndex, nx);
+                        }
+                        if (ocHasControlSparsisty) {
+                            addJacobianBlock(constraintIndex, mesh->controlIndex, m_ocControlSparsity);
+                        } else {
+                            addJacobianBlock(constraintIndex, nc, mesh->controlIndex, nu);
+                        }
                         constraintIndex += nc;
 
                         //Saving the hessian structure
@@ -1109,9 +1180,19 @@ namespace iDynTree {
                         upperBoundMap.segment(static_cast<Eigen::Index>(constraintIndex), static_cast<Eigen::Index>(nx)).setZero();
 
                         //Saving the jacobian structure due to the dynamical constraints
-                        addJacobianBlock(constraintIndex, nx, mesh->controlIndex, nu);
-                        addJacobianBlock(constraintIndex, nx, mesh->stateIndex, nx);
-                        addJacobianBlock(constraintIndex, nx, (mesh - 1)->stateIndex, nx);
+                        if (systemHasControlSparsity) {
+                            addJacobianBlock(constraintIndex, mesh->controlIndex, m_mergedCollocationControlNZ);
+                        } else {
+                            addJacobianBlock(constraintIndex, nx, mesh->controlIndex, nu);
+                        }
+
+                        if (systemHasStateSparsity) {
+                            addJacobianBlock(constraintIndex, mesh->stateIndex, m_collocationStateNZ[1]);
+                            addJacobianBlock(constraintIndex, (mesh - 1)->stateIndex, m_collocationStateNZ[0]);
+                        } else {
+                            addJacobianBlock(constraintIndex, nx, mesh->stateIndex, nx);
+                            addJacobianBlock(constraintIndex, nx, (mesh - 1)->stateIndex, nx);
+                        }
                         constraintIndex += nx;
 
                         //Saving constraints bounds
@@ -1137,8 +1218,16 @@ namespace iDynTree {
                             }
                         }
 
-                        addJacobianBlock(constraintIndex, nc, mesh->stateIndex, nx);
-                        addJacobianBlock(constraintIndex, nc, mesh->controlIndex, nu);
+                        if (ocHasStateSparsisty) {
+                            addJacobianBlock(constraintIndex, mesh->stateIndex, m_ocStateSparsity);
+                        } else {
+                            addJacobianBlock(constraintIndex, nc, mesh->stateIndex, nx);
+                        }
+                        if (ocHasControlSparsisty) {
+                            addJacobianBlock(constraintIndex, mesh->controlIndex, m_ocControlSparsity);
+                        } else {
+                            addJacobianBlock(constraintIndex, nc, mesh->controlIndex, nu);
+                        }
                         constraintIndex += nc;
 
                         //Saving the hessian structure
@@ -1204,24 +1293,9 @@ namespace iDynTree {
 
             virtual bool getVariablesUpperBound(VectorDynSize& variablesUpperBound) override {
 
-                bool stateBounded = true, controlBounded = true;
-
                 Eigen::Map<Eigen::VectorXd> stateBufferMap = toEigen(m_stateBuffer);
                 Eigen::Map<Eigen::VectorXd> controlBufferMap = toEigen(m_controlBuffer);
 
-                if (!(m_ocproblem->getStateUpperBound(m_stateBuffer))) {
-                    stateBounded = false;
-                    stateBufferMap.setConstant(m_plusInfinity);
-                }
-
-                if (!(m_ocproblem->getControlUpperBound(m_controlBuffer))) {
-                    controlBounded = false;
-                    controlBufferMap.setConstant(m_plusInfinity);
-                }
-
-                if (!controlBounded && !stateBounded) {
-                    return false;
-                }
 
                 if (variablesUpperBound.size() != m_numberOfVariables) {
                     variablesUpperBound.resize(numberOfVariables());
@@ -1232,15 +1306,43 @@ namespace iDynTree {
                 Eigen::Index nu = static_cast<Eigen::Index>(m_nu);
 
                 MeshPointOrigin first = MeshPointOrigin::FirstPoint();
+                bool isBounded;
                 for (auto mesh = m_meshPoints.begin(); mesh != m_meshPointsEnd; ++mesh){
                     if (mesh->origin == first){
-                        upperBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx).setConstant(m_plusInfinity); //avoiding setting bounds on the initial state
-                        upperBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = controlBufferMap;
+                        upperBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = toEigen(m_ocproblem->dynamicalSystem().lock()->initialState());
+
+                        isBounded = m_ocproblem->getControlUpperBound(mesh->time, m_controlBuffer);
+                        if (isBounded) {
+                            upperBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = controlBufferMap;
+                        } else {
+                            upperBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu).setConstant(m_plusInfinity);
+                        }
+
                     } else if (mesh->type == MeshPointType::Control) {
-                        upperBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = controlBufferMap;
-                        upperBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = stateBufferMap;
+
+                        isBounded = m_ocproblem->getControlUpperBound(mesh->time, m_controlBuffer);
+                        if (isBounded) {
+                            upperBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = controlBufferMap;
+                        } else {
+                            upperBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu).setConstant(m_plusInfinity);
+                        }
+
+                        isBounded = m_ocproblem->getStateUpperBound(mesh->time, m_stateBuffer);
+                        if (isBounded) {
+                            upperBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = stateBufferMap;
+                        } else {
+                            upperBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx).setConstant(m_plusInfinity);
+                        }
+
                     } else if (mesh->type == MeshPointType::State) {
-                        upperBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = stateBufferMap;
+
+                        isBounded = m_ocproblem->getStateUpperBound(mesh->time, m_stateBuffer);
+                        if (isBounded) {
+                            upperBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = stateBufferMap;
+                        } else {
+                            upperBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx).setConstant(m_plusInfinity);
+                        }
+
                     }
                 }
                 return true;
@@ -1248,26 +1350,11 @@ namespace iDynTree {
 
             virtual bool getVariablesLowerBound(VectorDynSize& variablesLowerBound) override {
 
-                bool stateBounded = true, controlBounded = true;
-
                 Eigen::Map<Eigen::VectorXd> stateBufferMap = toEigen(m_stateBuffer);
                 Eigen::Map<Eigen::VectorXd> controlBufferMap = toEigen(m_controlBuffer);
 
-                if (!(m_ocproblem->getStateLowerBound(m_stateBuffer))) {
-                    stateBounded = false;
-                    stateBufferMap.setConstant(m_minusInfinity);
-                }
 
-                if (!(m_ocproblem->getControlLowerBound(m_controlBuffer))) {
-                    controlBounded = false;
-                    controlBufferMap.setConstant(m_minusInfinity);
-                }
-
-                if (!controlBounded && !stateBounded) {
-                    return false;
-                }
-
-                if (variablesLowerBound.size() != numberOfVariables()) {
+                if (variablesLowerBound.size() != m_numberOfVariables) {
                     variablesLowerBound.resize(numberOfVariables());
                 }
                 Eigen::Map<Eigen::VectorXd> lowerBoundMap = toEigen(variablesLowerBound);
@@ -1276,15 +1363,42 @@ namespace iDynTree {
                 Eigen::Index nu = static_cast<Eigen::Index>(m_nu);
 
                 MeshPointOrigin first = MeshPointOrigin::FirstPoint();
+                bool isBounded;
                 for (auto mesh = m_meshPoints.begin(); mesh != m_meshPointsEnd; ++mesh){
                     if (mesh->origin == first){
-                        lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx).setConstant(m_minusInfinity); //avoiding setting bounds on the initial state
-                        lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = controlBufferMap;
+                        lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = toEigen(m_ocproblem->dynamicalSystem().lock()->initialState());
+                        isBounded = m_ocproblem->getControlLowerBound(mesh->time, m_controlBuffer);
+                        if (isBounded) {
+                            lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = controlBufferMap;
+                        } else {
+                            lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu).setConstant(m_minusInfinity);
+                        }
+
                     } else if (mesh->type == MeshPointType::Control) {
-                        lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = controlBufferMap;
-                        lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = stateBufferMap;
+
+                        isBounded = m_ocproblem->getControlLowerBound(mesh->time, m_controlBuffer);
+                        if (isBounded) {
+                            lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu) = controlBufferMap;
+                        } else {
+                            lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu).setConstant(m_minusInfinity);
+                        }
+
+                        isBounded = m_ocproblem->getStateLowerBound(mesh->time, m_stateBuffer);
+                        if (isBounded) {
+                            lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = stateBufferMap;
+                        } else {
+                            lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx).setConstant(m_minusInfinity);
+                        }
+
                     } else if (mesh->type == MeshPointType::State) {
-                        lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = stateBufferMap;
+
+                        isBounded = m_ocproblem->getStateLowerBound(mesh->time, m_stateBuffer);
+                        if (isBounded) {
+                            lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) = stateBufferMap;
+                        } else {
+                            lowerBoundMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx).setConstant(m_minusInfinity);
+                        }
+
                     }
                 }
                 return true;
@@ -1354,8 +1468,6 @@ namespace iDynTree {
                 bool isValid = false;
                 for (auto mesh = m_meshPoints.begin(); mesh != m_meshPointsEnd; ++mesh){
                     if (mesh->origin == first){
-                        guessMap.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx) =
-                                toEigen(m_ocproblem->dynamicalSystem().lock()->initialState());
 
                         const iDynTree::VectorDynSize &controlGuess = m_controlGuesses->get(mesh->time, isValid);
 
@@ -1615,10 +1727,7 @@ namespace iDynTree {
                     currentControl  = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu);
                     previousControl = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->previousControlIndex), nu);
 
-                    if (mesh->origin == first) {
-                        constraintsMap.segment(constraintIndex, nx) = currentState; //identity constraint for the initial state
-                        constraintIndex += nx;
-                    } else {
+                    if (mesh->origin != first) {
                         previousState = variablesBuffer.segment(static_cast<Eigen::Index>((mesh - 1)->stateIndex), nx);
                         dT = mesh->time - (mesh - 1)->time;
                         if (!(m_integrator->evaluateCollocationConstraint(mesh->time, m_collocationStateBuffer, m_collocationControlBuffer, dT, m_stateBuffer))){
@@ -1631,7 +1740,14 @@ namespace iDynTree {
                         constraintIndex += nx;
                     }
 
-                    if (!(m_ocproblem->constraintsEvaluation(mesh->time, m_collocationStateBuffer[1], m_collocationControlBuffer[1], m_constraintsBuffer))){
+                    bool okConstraint = true;
+                    if (mesh->origin == first) {
+                        okConstraint = m_ocproblem->constraintsEvaluation(mesh->time, m_integrator->dynamicalSystem().lock()->initialState(), m_collocationControlBuffer[1], m_constraintsBuffer);
+
+                    } else {
+                        okConstraint = m_ocproblem->constraintsEvaluation(mesh->time, m_collocationStateBuffer[1], m_collocationControlBuffer[1], m_constraintsBuffer);
+                    }
+                    if (!okConstraint){
                         std::ostringstream errorMsg;
                         errorMsg << "Error while evaluating the constraints at time " << mesh->time << ".";
                         reportError("MultipleShootingTranscription", "evaluateConstraints", errorMsg.str().c_str());
@@ -1677,12 +1793,7 @@ namespace iDynTree {
                     currentControl  = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu);
                     previousControl = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->previousControlIndex), nu);
 
-                    if (mesh->origin == first) {
-
-                        jacobianMap.block(constraintIndex, static_cast<Eigen::Index>(mesh->stateIndex), nx, nx).setIdentity();
-                        constraintIndex += nx;
-
-                    } else {
+                    if (mesh->origin != first) {
                         previousState = variablesBuffer.segment(static_cast<Eigen::Index>((mesh - 1)->stateIndex), nx);
                         dT = mesh->time - (mesh - 1)->time;
                         if (!(m_integrator->evaluateCollocationConstraintJacobian(mesh->time, m_collocationStateBuffer, m_collocationControlBuffer, dT, m_collocationStateJacBuffer, m_collocationControlJacBuffer))){
@@ -1707,23 +1818,38 @@ namespace iDynTree {
                         constraintIndex += nx;
                     }
 
-                    if (!(m_ocproblem->constraintsJacobianWRTState(mesh->time, m_collocationStateBuffer[1], m_collocationControlBuffer[1], m_constraintsStateJacBuffer))){
-                        std::ostringstream errorMsg;
-                        errorMsg << "Error while evaluating the constraints state jacobian at time " << mesh->time << ".";
-                        reportError("MultipleShootingTranscription", "evaluateConstraintsJacobian", errorMsg.str().c_str());
-                        return false;
+
+                    if (mesh->origin == first) {
+
+                        if (!(m_ocproblem->constraintsJacobianWRTControl(mesh->time, m_integrator->dynamicalSystem().lock()->initialState(), m_collocationControlBuffer[1], m_constraintsControlJacBuffer))){
+                            std::ostringstream errorMsg;
+                            errorMsg << "Error while evaluating the constraints control jacobian at time " << mesh->time << ".";
+                            reportError("MultipleShootingTranscription", "evaluateConstraintsJacobian", errorMsg.str().c_str());
+                            return false;
+                        }
+
+                        jacobianMap.block(constraintIndex, static_cast<Eigen::Index>(mesh->controlIndex), nc, nu) = toEigen(m_constraintsControlJacBuffer);
+
+                    } else {
+
+                        if (!(m_ocproblem->constraintsJacobianWRTState(mesh->time, m_collocationStateBuffer[1], m_collocationControlBuffer[1], m_constraintsStateJacBuffer))){
+                            std::ostringstream errorMsg;
+                            errorMsg << "Error while evaluating the constraints state jacobian at time " << mesh->time << ".";
+                            reportError("MultipleShootingTranscription", "evaluateConstraintsJacobian", errorMsg.str().c_str());
+                            return false;
+                        }
+
+                        jacobianMap.block(constraintIndex, static_cast<Eigen::Index>(mesh->stateIndex), nc, nx) = toEigen(m_constraintsStateJacBuffer);
+
+                        if (!(m_ocproblem->constraintsJacobianWRTControl(mesh->time, m_collocationStateBuffer[1], m_collocationControlBuffer[1], m_constraintsControlJacBuffer))){
+                            std::ostringstream errorMsg;
+                            errorMsg << "Error while evaluating the constraints control jacobian at time " << mesh->time << ".";
+                            reportError("MultipleShootingTranscription", "evaluateConstraintsJacobian", errorMsg.str().c_str());
+                            return false;
+                        }
+
+                        jacobianMap.block(constraintIndex, static_cast<Eigen::Index>(mesh->controlIndex), nc, nu) = toEigen(m_constraintsControlJacBuffer);
                     }
-
-                        jacobianMap.block(constraintIndex, static_cast<Eigen::Index>(mesh->stateIndex), nc, nx) = toEigen(m_constraintsStateJacBuffer);                    
-
-                    if (!(m_ocproblem->constraintsJacobianWRTControl(mesh->time, m_collocationStateBuffer[1], m_collocationControlBuffer[1], m_constraintsControlJacBuffer))){
-                        std::ostringstream errorMsg;
-                        errorMsg << "Error while evaluating the constraints control jacobian at time " << mesh->time << ".";
-                        reportError("MultipleShootingTranscription", "evaluateConstraintsJacobian", errorMsg.str().c_str());
-                        return false;
-                    }
-
-                    jacobianMap.block(constraintIndex, static_cast<Eigen::Index>(mesh->controlIndex), nc, nu) = toEigen(m_constraintsControlJacBuffer);
                     constraintIndex += nc;
                 }
                 assert(static_cast<size_t>(constraintIndex) == m_numberOfConstraints);

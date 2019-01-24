@@ -62,6 +62,7 @@ namespace iDynTree {
 
             m_initTime = init;
             m_endTime = end;
+            m_anyTime = false;
 
             return true;
         }
@@ -125,7 +126,7 @@ namespace iDynTree {
 
         bool TimeRange::isValid() const
         {
-            return !(m_initTime >= m_endTime);
+            return (m_initTime <= m_endTime);
         }
 
         bool TimeRange::isInRange(double time) const

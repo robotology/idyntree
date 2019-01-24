@@ -19,6 +19,7 @@
 
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
+#include <iDynTree/SparsityStructure.h>
 #include <vector>
 #include <string>
 #include <memory>
@@ -51,7 +52,6 @@ namespace optimalcontrol {
                  */
                 double time;
             };
-
 
             class IntegratorInfoData {
             protected:
@@ -206,7 +206,8 @@ namespace optimalcontrol {
                 /**
                  * @brief Evaluate the collocation constraint.
                  *
-                 * In some optimal control solvers, like the MultipleShootingSolver, we need to discretize the dynamical system associated to the optimal control problem. This function evaluates the discretization error according to specified integration method. The Integrator, when integrating a dynamical system, is performing the following discretization:
+                 * In some optimal control solvers, like the MultipleShootingSolver, we need to discretize the dynamical system associated to the optimal control problem.
+                 * This function evaluates the discretization error according to specified integration method. The Integrator, when integrating a dynamical system, is performing the following discretization:
                  * \f[
                  * x_{k+1} = \phi(x_k, x_{k+1}, u_k, u_{k+1}, t)
                  * \f]
@@ -232,6 +233,11 @@ namespace optimalcontrol {
                                                                    const std::vector<VectorDynSize>& controlInputs, double dT,
                                                                    std::vector<MatrixDynSize>& stateJacobianValues,
                                                                    std::vector<MatrixDynSize>& controlJacobianValues);
+
+                virtual bool getCollocationConstraintJacobianStateSparsity(std::vector<SparsityStructure>& stateJacobianSparsity);
+
+                virtual bool getCollocationConstraintJacobianControlSparsity(std::vector<SparsityStructure>& controlJacobianSparsity);
+
 
                 const IntegratorInfo& info() const;
 

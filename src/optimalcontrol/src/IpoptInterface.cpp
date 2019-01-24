@@ -108,6 +108,7 @@ namespace iDynTree {
 
                 if (constraintMultipliers.size() != numberOfConstraints) {
                     constraintMultipliers.resize(numberOfConstraints);
+                    constraintMultipliers.zero();
                 }
 
                 if ((m_jacobianBuffer.rows() != numberOfConstraints) || (m_jacobianBuffer.cols() != numberOfVariables)) {

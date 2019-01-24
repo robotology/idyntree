@@ -36,7 +36,8 @@ set(PUBLIC_HEADERS include/iDynTree/OptimalControl.h
                    include/iDynTree/ConstraintsGroup.h
                    include/iDynTree/OptimizationProblem.h
                    include/iDynTree/Optimizer.h
-                   include/iDynTree/TimeVaryingObject.h)
+                   include/iDynTree/TimeVaryingObject.h
+                   include/iDynTree/SparsityStructure.h)
 set(INTEGRATORS_PUBLIC_HEADERS include/iDynTree/Integrators/FixedStepIntegrator.h
                                include/iDynTree/Integrators/RK4.h
                                include/iDynTree/Integrators/ImplicitTrapezoidal.h
@@ -71,7 +72,8 @@ set(SOURCES src/DynamicalSystem.cpp
             src/OptimizationProblem.cpp
             src/Optimizer.cpp
             src/ForwardEuler.cpp
-            src/TimeVaryingObject.cpp)
+            src/TimeVaryingObject.cpp
+            src/SparsityStructure.cpp)
 
 list(APPEND OPTIMIZERS_HEADERS include/iDynTree/Optimizers/IpoptInterface.h)
 if (IDYNTREE_USES_IPOPT)

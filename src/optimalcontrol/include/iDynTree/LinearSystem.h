@@ -19,6 +19,7 @@
 
 #include <iDynTree/DynamicalSystem.h>
 #include <iDynTree/TimeVaryingObject.h>
+#include <iDynTree/SparsityStructure.h>
 #include <memory>
 
 namespace iDynTree {
@@ -38,6 +39,10 @@ namespace iDynTree {
         public:
 
             LinearSystem(size_t stateSize, size_t controlSize);
+
+            LinearSystem(size_t stateSize, size_t controlSize,
+                         const iDynTree::optimalcontrol::SparsityStructure& stateSparsity,
+                         const iDynTree::optimalcontrol::SparsityStructure& controlSparsity);
 
             LinearSystem(const LinearSystem& other) = delete;
 
@@ -64,6 +69,10 @@ namespace iDynTree {
             virtual bool dynamicsControlFirstDerivative(const VectorDynSize& state,
                                                         double time,
                                                         MatrixDynSize& dynamicsDerivative) final;
+
+            virtual bool dynamicsStateFirstDerivativeSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity) final;
+
+            virtual bool dynamicsControlFirstDerivativeSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) final;
 
 
         private:

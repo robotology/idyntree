@@ -48,10 +48,15 @@ namespace optimalcontrol {
         public:
             GroupOfConstraintsMap group;
             std::vector<TimedConstraint_ptr> orderedIntervals;
+            SparsityStructure groupStateSparsity;
+            SparsityStructure groupControlSparsity;
             std::string name;
             unsigned int maxConstraintSize;
             std::vector<TimeRange> timeRanges;
             bool isLinearGroup = true;
+            bool stateSparsityProvided = true;
+            bool controlSparsityProvided = true;
+
 
             std::vector<TimedConstraint_ptr>::reverse_iterator findActiveConstraint(double time){
                 return std::find_if(orderedIntervals.rbegin(),
@@ -117,6 +122,36 @@ namespace optimalcontrol {
 
                 orderedIntervals.push_back(result.first->second); //register the time range in order to have the constraints ordered by init time. result.first->second is the TimedConstraint_ptr of the newly inserted TimedConstraint.
                 std::sort(orderedIntervals.begin(), orderedIntervals.end(), [](const TimedConstraint_ptr&a, const TimedConstraint_ptr&b) { return a->timeRange < b->timeRange;}); //reorder the vector
+
+                SparsityStructure newConstraintStateSparsity, newConstraintControlSparsity;
+
+                if (stateSparsityProvided
+                        && constraint->constraintJacobianWRTStateSparsity(newConstraintStateSparsity)) {
+
+                    if (!newConstraintStateSparsity.isValid()) {
+                        reportError("ConstraintsGroup", "addConstraint", "The state sparsity is provided but the dimension of the two vectors do not match.");
+                        return false;
+                    }
+
+                    groupStateSparsity.merge(newConstraintStateSparsity);
+
+                } else {
+                    stateSparsityProvided = false;
+                }
+
+                if (controlSparsityProvided
+                        && constraint->constraintJacobianWRTControlSparsity(newConstraintControlSparsity)) {
+
+                    if (!newConstraintControlSparsity.isValid()) {
+                        reportError("ConstraintsGroup", "addConstraint", "The control sparsity is provided but the dimension of the two vectors do not match.");
+                        return false;
+                    }
+
+                    groupControlSparsity.merge(newConstraintControlSparsity);
+
+                } else {
+                    controlSparsityProvided = false;
+                }
 
                 return true;
             }
@@ -245,7 +280,7 @@ namespace optimalcontrol {
             }
 
             size_t i=0;
-            for (auto constraint : m_pimpl->group) {
+            for (auto& constraint : m_pimpl->group) {
                 m_pimpl->timeRanges[i] = constraint.second->timeRange;
                 ++i;
             }
@@ -278,6 +313,7 @@ namespace optimalcontrol {
                     reportError("ConstraintsGroup", "evaluateConstraints", errorMsg.str().c_str());
                     return false;
                 }
+                return true;
             }
 
             if (constraints.size() < m_pimpl->maxConstraintSize) {
@@ -366,7 +402,29 @@ namespace optimalcontrol {
         bool ConstraintsGroup::constraintJacobianWRTState(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &jacobian)
         {
             if (isAnyTimeGroup()) {
-                return m_pimpl->group.begin()->second.get()->constraint->constraintJacobianWRTState(time, state, control, jacobian);
+                TimedConstraint_ptr loneConstraint = m_pimpl->group.begin()->second;
+                if (!(loneConstraint->constraint->constraintJacobianWRTState(time, state, control, jacobian))) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Failed to evaluate "<< loneConstraint->constraint->name() << std::endl;
+                    reportError("ConstraintsGroup", "constraintJacobianWRTState", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (jacobian.rows() != loneConstraint->constraint->constraintSize()) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The state jacobian of constraint "<< loneConstraint->constraint->name() << " has a number of rows different from the size of the constraint." << std::endl;
+                    reportError("ConstraintsGroup", "constraintJacobianWRTState", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (jacobian.cols() != state.size()) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The state jacobian of constraint "<< loneConstraint->constraint->name() << " has a number of columns different from the state size." << std::endl;
+                    reportError("ConstraintsGroup", "constraintJacobianWRTState", errorMsg.str().c_str());
+                    return false;
+                }
+
+                return true;
             }
 
             if ((jacobian.rows() != m_pimpl->maxConstraintSize)||(jacobian.cols() != state.size())) {
@@ -404,7 +462,7 @@ namespace optimalcontrol {
             if (constraintIterator->get()->constraint->constraintSize() < m_pimpl->maxConstraintSize) {
                 toEigen(jacobian).block(0, 0, constraintIterator->get()->stateJacobianBuffer.rows(), state.size()) =
                         toEigen(constraintIterator->get()->stateJacobianBuffer);
-                int nMissing = m_pimpl->maxConstraintSize - constraintIterator->get()->constraint->constraintSize();
+                unsigned int nMissing = m_pimpl->maxConstraintSize - static_cast<unsigned int>(constraintIterator->get()->constraint->constraintSize());
                 toEigen(jacobian).block(constraintIterator->get()->stateJacobianBuffer.rows(), 0, nMissing, state.size()).setZero();
             } else {
                 jacobian = constraintIterator->get()->stateJacobianBuffer;
@@ -420,28 +478,28 @@ namespace optimalcontrol {
         {
             if (isAnyTimeGroup()){
                 TimedConstraint_ptr loneConstraint = m_pimpl->group.begin()->second;
-                if (!(loneConstraint->constraint->constraintJacobianWRTControl(time, state, control, loneConstraint->controlJacobianBuffer))) {
+                if (!(loneConstraint->constraint->constraintJacobianWRTControl(time, state, control, jacobian))) {
                     std::ostringstream errorMsg;
                     errorMsg << "Failed to evaluate "<< loneConstraint->constraint->name() << std::endl;
                     reportError("ConstraintsGroup", "constraintJacobianWRTControl", errorMsg.str().c_str());
                     return false;
                 }
 
-                if (loneConstraint->controlJacobianBuffer.rows() != loneConstraint->constraint->constraintSize()) {
+                if (jacobian.rows() != loneConstraint->constraint->constraintSize()) {
                     std::ostringstream errorMsg;
                     errorMsg << "The control jacobian of constraint "<< loneConstraint->constraint->name() << " has a number of rows different from the size of the constraint." << std::endl;
                     reportError("ConstraintsGroup", "constraintJacobianWRTControl", errorMsg.str().c_str());
                     return false;
                 }
 
-                if (loneConstraint->controlJacobianBuffer.cols() != control.size()) {
+                if (jacobian.cols() != control.size()) {
                     std::ostringstream errorMsg;
                     errorMsg << "The control jacobian of constraint "<< loneConstraint->constraint->name() << " has a number of columns different from the control size." << std::endl;
                     reportError("ConstraintsGroup", "constraintJacobianWRTControl", errorMsg.str().c_str());
                     return false;
                 }
 
-                jacobian = m_pimpl->group.begin()->second.get()->controlJacobianBuffer;
+                return true;
             }
 
             if ((jacobian.rows() != m_pimpl->maxConstraintSize)||(jacobian.cols() != control.size())) {
@@ -479,11 +537,33 @@ namespace optimalcontrol {
             if (constraintIterator->get()->constraint->constraintSize() < m_pimpl->maxConstraintSize) {
                 toEigen(jacobian).block(0, 0, constraintIterator->get()->controlJacobianBuffer.rows(), state.size()) =
                         toEigen(constraintIterator->get()->controlJacobianBuffer);
-                int nMissing = m_pimpl->maxConstraintSize - constraintIterator->get()->constraint->constraintSize();
+                unsigned int nMissing = m_pimpl->maxConstraintSize - static_cast<unsigned int>(constraintIterator->get()->constraint->constraintSize());
                 toEigen(jacobian).block(constraintIterator->get()->controlJacobianBuffer.rows(), 0, nMissing, state.size()).setZero();
             } else {
                 jacobian = constraintIterator->get()->controlJacobianBuffer;
             }
+
+            return true;
+        }
+
+        bool ConstraintsGroup::constraintJacobianWRTStateSparsity(SparsityStructure &stateSparsity) const
+        {
+            if (!(m_pimpl->stateSparsityProvided)) {
+                return false;
+            }
+
+            stateSparsity = m_pimpl->groupStateSparsity;
+
+            return true;
+        }
+
+        bool ConstraintsGroup::constraintJacobianWRTControlSparsity(SparsityStructure &controlSparsity) const
+        {
+            if (!(m_pimpl->controlSparsityProvided)) {
+                return false;
+            }
+
+            controlSparsity = m_pimpl->groupControlSparsity;
 
             return true;
         }
@@ -498,13 +578,13 @@ namespace optimalcontrol {
 
         unsigned int ConstraintsGroup::numberOfConstraints() const
         {
-            return m_pimpl->group.size();
+            return static_cast<unsigned int>(m_pimpl->group.size());
         }
 
         const std::vector<std::string> ConstraintsGroup::listConstraints() const
         {
             std::vector<std::string> output;
-            for (auto constraint: m_pimpl->group) {
+            for (auto& constraint: m_pimpl->group) {
                 output.push_back(constraint.second->constraint->name()); //MEMORY ALLOCATION
             }
             return output;

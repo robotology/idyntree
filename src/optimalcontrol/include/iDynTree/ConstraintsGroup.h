@@ -20,6 +20,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <iDynTree/SparsityStructure.h>
 
 namespace iDynTree {
 
@@ -80,7 +81,7 @@ namespace iDynTree {
 
             /**
              * @brief Add a linear constraint to the group
-             * @param[in] constraint Shared pointer to the user defined constraint.
+             * @param[in] linearConstraint Shared pointer to a linear constraint.
              * @param[in] timeRange Time range in which the constraint will be enabled.
              * @return True if successfull. Posible causes of failures are: empty pointer, dimension bigger than maxConstraintSize, invalid TimeRange.
              */
@@ -96,6 +97,8 @@ namespace iDynTree {
 
             /**
              * @brief Remove a previously added constraint.
+             *
+             * Note: the sparsity pattern is not updated.
              * @param[in] name The name of the constraint that has to be removed
              * @return True if successfull. Possible causes of failure: a constraint does not exist with the specified name.
              */
@@ -188,6 +191,20 @@ namespace iDynTree {
                                               const VectorDynSize& state,
                                               const VectorDynSize& control,
                                               MatrixDynSize& jacobian);
+
+            /**
+             * @brief Returns the set of nonzeros elements in terms of row and colun index, in the state jacobian
+             * @param stateSparsity Sparsity structure of the partial derivative of the jacobian wrt state variables.
+             * @return true if the sparsity is available. False otherwise.
+             */
+            bool constraintJacobianWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity) const;
+
+            /**
+             * @brief Returns the set of nonzeros elements in terms of row and colun index, in the control jacobian
+             * @param controlSparsity Sparsity structure of the partial derivative of the jacobian wrt control variables.
+             * @return true if the sparsity is available. False otherwise.
+             */
+            bool constraintJacobianWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) const;
 
             /**
              * @brief Flag returning true if the group is an "AnyTime" group.

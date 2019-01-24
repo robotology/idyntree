@@ -77,6 +77,23 @@ public:
         dynamicsDerivative(1, 2) = 2.0;
         return true;
     }
+
+    virtual bool dynamicsStateFirstDerivativeSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity) override {
+        iDynTree::optimalcontrol::SparsityStructure sparsity;
+        sparsity.addIdentityBlock(0ul, 0, 2);
+        stateSparsity = sparsity;
+        return true;
+    }
+
+    virtual bool dynamicsControlFirstDerivativeSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) override {
+        iDynTree::optimalcontrol::SparsityStructure sparsity;
+        sparsity.addNonZeroIfNotPresent(0, 0);
+        sparsity.addNonZeroIfNotPresent(0, 1);
+        sparsity.addNonZeroIfNotPresent(1, 0);
+        sparsity.addNonZeroIfNotPresent(1, 2);
+        controlSparsity = sparsity;
+        return true;
+    }
 };
 TestSystem::~TestSystem(){};
 
@@ -141,6 +158,18 @@ public:
 
     virtual size_t expectedControlSpaceSize() const override {
         return 3;
+    }
+
+    virtual bool constraintJacobianWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity) override {
+        stateSparsity.clear();
+        return true;
+    }
+
+    virtual bool constraintJacobianWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) override {
+        iDynTree::optimalcontrol::SparsityStructure sparsity;
+        sparsity.addNonZeroIfNotPresent(0,0);
+        controlSparsity = sparsity;
+        return true;
     }
 };
 TestConstraint::~TestConstraint(){}

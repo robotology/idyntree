@@ -20,6 +20,7 @@
 #include <cstddef>
 #include <string>
 #include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/SparsityStructure.h>
 
 namespace iDynTree {
 
@@ -161,6 +162,24 @@ namespace iDynTree {
              * @return The expected dimension of the control vectors.
              */
             virtual size_t expectedControlSpaceSize() const;
+
+            /**
+             * @brief Returns the set of nonzeros elements in terms of row and colun index, in the state jacobian
+             *
+             * @warning No check is performed in the indeces. They need to be in the range [0, constraintDimension) and [0, stateDimension) respectively.
+             * @param stateSparsity Sparsity structure of the partial derivative of the jacobian wrt state variables.
+             * @return true if the sparsity is available. False otherwise.
+             */
+            virtual bool constraintJacobianWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity);
+
+            /**
+             * @brief Returns the set of nonzeros elements in terms of row and colun index, in the control jacobian
+             *
+             * @warning No check is performed in the indeces. They need to be in the range [0, constraintDimension) and [0, controlDimension) respectively.
+             * @param controlSparsity Sparsity structure of the partial derivative of the jacobian wrt control variables.
+             * @return true if the sparsity is available. False otherwise.
+             */
+            virtual bool constraintJacobianWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity);
 
 
         private:
