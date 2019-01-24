@@ -42,7 +42,7 @@ namespace iDynTree
      * initial state covariance \f$ \sigma_{\omega_0}^{2} \f$ of angular velocity, default value: \f$ 10 \f$
      * @var AttitudeQuaternionEKFParameters::initial_gyro_bias_error_variance
      * measurement noise covariance \f$ \sigma_{acc}^{2} \f$ of gyroscope bias, default value: \f$ 10 \f$
-     * @var AttitudeQuaternionEKFParameters::use_magenetometer_measurements
+     * @var AttitudeQuaternionEKFParameters::use_magnetometer_measurements
      * flag to enable the use of magnetometer measurement for yaw correction, default value: false
      */
     struct AttitudeQuaternionEKFParameters {
@@ -61,7 +61,7 @@ namespace iDynTree
     double initial_ang_vel_error_variance{10};
     double initial_gyro_bias_error_variance{10};
 
-    bool use_magenetometer_measurements{false};
+    bool use_magnetometer_measurements{false};
     };
 
     /**
@@ -70,10 +70,11 @@ namespace iDynTree
      *
      * It follows the implementation detailed in
      * <a href="https://wuecampus2.uni-wuerzburg.de/moodle/pluginfile.php/1109745/mod_resource/content/1/QEKF_Floatsat_WS16.pdf">Quaternion Based Extended Kalman Filter, slides by Michael Stohmeier</a>
-     * The filter is used to estimate the states \f$ X = \begin{bmatrix} q \\ \Omega \\ b \end{bmatrix}^T \f$
-     * where \f$ q \f$  is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame ,
-     * \f$ \Omega \f$  is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and
-     * \f$ b \f$  is the gyroscope bias expressed in the body frame.
+     * The filter is used to estimate the states \f$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T \f$
+     * where \f$ {^A}q_B \in \mathbb{R}^4 \f$  is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame ,
+     *       \f$ {^B}\Omega_{A,B} \in \mathbb{R}^3 \f$  is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and
+     *       \f$ {^B}b \in \mathbb{R}^3 \f$  is the gyroscope bias expressed in the body frame.
+     * @note: we will drop the subscripts and superscripts in the rest of the documentation for convenience
      *
      * Discretized dynamics during the prediction step,
      * \f[ \hat{{x}}_{k+1} = \begin{bmatrix} q_k + \Delta t. \frac{1}{2}q_k  \circ \begin{bmatrix} 0 \\ \omega^b_{k+1} \end{bmatrix} \\ y_{gyro_{k}} - b_{k} \\ (1 - \lambda_{b} \Delta t)b_k \end{bmatrix} \f]
@@ -111,7 +112,7 @@ namespace iDynTree
      *
      */
     class AttitudeQuaternionEKF : public IAttitudeEstimator,
-                                  public DiscreteExtendedKalmanFilter
+                                  public DiscreteExtendedKalmanFilterHelper
     {
     public:
         AttitudeQuaternionEKF();
@@ -120,7 +121,7 @@ namespace iDynTree
          * @brief Get filter parameters as a struct.
          * @param[out] params object of AttitudeQuaternionEKFParameters passed as reference
          */
-        void getParams(AttitudeQuaternionEKFParameters& params) {params = m_params;}
+        void getParameters(AttitudeQuaternionEKFParameters& params) {params = m_params;}
 
         /**
           * @brief Set filter parameters with the struct members.
@@ -128,10 +129,10 @@ namespace iDynTree
           * @param[in] params object of AttitudeQuaternionEKFParameters passed as a const reference
           * @return true/false if successful/not
           */
-        void setParams(const AttitudeQuaternionEKFParameters& params)
+        void setParameters(const AttitudeQuaternionEKFParameters& params)
         {
             m_params = params;
-            useMagnetometerMeasurements(params.use_magenetometer_measurements);
+            useMagnetometerMeasurements(params.use_magnetometer_measurements);
         }
 
         /**
@@ -155,10 +156,10 @@ namespace iDynTree
 
         /**
          * @brief set flag to use magnetometer measurements
-         * @param[in] use_magenetometer_measurements enable/disable magnetometer measurements
+         * @param[in] use_magnetometer_measurements enable/disable magnetometer measurements
          * @note calling this method will reset the filter, reinitialize the filter and set the previous state as filter's initial state
          */
-        bool useMagnetometerMeasurements(bool use_magenetometer_measurements);
+        bool useMagnetometerMeasurements(bool use_magnetometer_measurements);
 
         /**
          * @brief prepares the measurement noise covariance matrix and calls ekfSetMeasurementNoiseMeanAndCovariance()
@@ -209,12 +210,13 @@ namespace iDynTree
                                           const iDynTree::MagnetometerMeasurements& magMeas) override;
         bool propagateStates() override;
         bool getOrientationEstimateAsRotationMatrix(iDynTree::Rotation& rot) override;
-        bool getOrientationEstimateAsQuaternion(iDynTree::Quaternion& q) override;
+        bool getOrientationEstimateAsQuaternion(iDynTree::UnitQuaternion& q) override;
         bool getOrientationEstimateAsRPY(iDynTree::RPY& rpy) override;
         size_t getInternalStateSize() const override;
-        bool getInternalState(iDynTree::Span<double> & stateBuffer) const override;
-        bool getInternalInitialState(iDynTree::Span<double> & stateBuffer) const override;
-        bool setInternalState(iDynTree::Span<double> & stateBuffer) override;
+        bool getInternalState(const iDynTree::Span<double> & stateBuffer) const override;
+        bool getDefaultInternalInitialState(const iDynTree::Span<double> & stateBuffer) const override;
+        bool setInternalState(const iDynTree::Span<double> & stateBuffer) override;
+        bool setInternalStateInitialOrientation(const iDynTree::Span<double>& orientationBuffer) override;
 
     private:
         /**
@@ -223,9 +225,8 @@ namespace iDynTree
          * \f$ u = \begin{bmatrix} y_{gyro}_x & y_{gyro}_y & y_{gyro}_z \end{bmatrix}^T \f$
          * \f$ f(X, u) = \begin{bmatrix} q + \Delta t. \frac{1}{2}q \circ \begin{bmatrix} 0 \\ \omega^b \end{bmatrix} \\ y_{gyro} - b \\ (1 - \lambda_{b} \Delta t)b \end{bmatrix}\f$
          */
-        bool f(const iDynTree::VectorDynSize& x_k,
+        bool ekf_f(const iDynTree::VectorDynSize& x_k,
                const iDynTree::VectorDynSize& u_k,
-               const iDynTree::VectorDynSize& w_k,
                iDynTree::VectorDynSize& xhat_k_plus_one) override;
 
         /**
@@ -234,13 +235,26 @@ namespace iDynTree
          * \f$ h_{acc}(X) = R^T \begin{bmatrix} 0 \\  0 \\ -1 \end{bmatrix} \f$
          * \f$ h_{mag}(X) = atan2(tan(yaw))\f$
          */
-        bool h(const iDynTree::VectorDynSize& xhat_k_plus_one,
-               const iDynTree::VectorDynSize& v_k_plus_one,
+        bool ekf_h(const iDynTree::VectorDynSize& xhat_k_plus_one,
                iDynTree::VectorDynSize& zhat_k_plus_one) override;
 
+        /**
+         * @brief Describes the system Jacobian necessary for the propagation of predicted state covariance
+         *        The analytical Jacobian describing the partial derivative of the system propagation with respect to the state
+         * @param[in] x system state
+         * @param[out] F system Jacobian
+         * @return bool true/false if successful or not
+         */
+        bool ekfComputeJacobianF(iDynTree::VectorDynSize& x, iDynTree::MatrixDynSize& F) override;
 
-        bool computejacobianF(iDynTree::VectorDynSize& x, iDynTree::MatrixDynSize& F) override;
-        bool computejacobianH(iDynTree::VectorDynSize& x, iDynTree::MatrixDynSize& H) override;
+        /**
+         * @brief Describes the measurement Jacobian necessary for computing Kalman gain and updating the predicted state and its covariance
+         *        The analytical Jacobian describing the partial derivative of the measurement model with respect to the state
+         * @param[in] x system state
+         * @param[out] H measurement Jacobian
+         * @return bool true/false if successful or not
+         */
+        bool ekfComputeJacobianH(iDynTree::VectorDynSize& x, iDynTree::MatrixDynSize& H) override;
 
         /** @brief prepares the system noise covariance matrix using internal struct params
          * system  model is as good as gyroscope measurement and bias estimate
@@ -299,32 +313,30 @@ namespace iDynTree
          * gyroscope bias estimate in \f$ \mathbb{R}^3 \f$
          */
         struct {
-            iDynTree::Quaternion m_orientation;
+            iDynTree::UnitQuaternion m_orientation;
             iDynTree::Vector3 m_angular_velocity;
             iDynTree::Vector3 m_gyroscope_bias;
         } m_state, m_initial_state;
 
-        iDynTree::Rotation m_orientationInSO3;                    ///< orinetation estimate as rotation matrix
-        iDynTree::RPY m_orientationInRPY;                         ///< orientation estimate in RPY representation
+        iDynTree::Rotation m_orientationInSO3;                   ///< orientation estimate as rotation matrix \f$ {^A}R_B \f$ where \f$ A \f$ is inertial frame and \f$ B \f$ is the frame attached to the body
+        iDynTree::RPY m_orientationInRPY;                        ///< orientation estimate as a 3D vector in RPY representation, where \f$ {^A}R_B = Rot_z(yaw)Rot_y(pitch)Rot_x(roll) \f$
 
-        iDynTree::GyroscopeMeasurements m_Omega_y;                ///< 3d gyroscope measurement
-        iDynTree::LinearAccelerometerMeasurements m_Acc_y;        ///< 3d accelerometer measurement
-        double m_Mag_y;                                           ///< magnetometer yaw measurement
+        iDynTree::GyroscopeMeasurements m_Omega_y;               ///< 3d gyroscope measurement giving angular velocity of body wrt inertial frame, expressed in body frame
+        iDynTree::LinearAccelerometerMeasurements m_Acc_y;       ///< 3d accelerometer measurement giving proper classical acceleration expressed in body frame
+        double m_Mag_y;                                          ///< magnetometer yaw measurement expressed in body frame
 
-        iDynTree::VectorDynSize m_x;             ///< state vector - orientation, angular velocity, gyro bias
-        iDynTree::VectorDynSize m_y;             ///< measurement vector - accelerometer (and magnetometer yaw)
-        iDynTree::VectorDynSize m_u;             ///< input vector - gyroscope measurement
-        iDynTree::VectorDynSize m_v;             ///< zero mean measurement noise (set to zero)
-        iDynTree::VectorDynSize m_w;             ///< zero mean process noise (set to zero)
+        iDynTree::VectorDynSize m_x;                             ///< state vector for the EKF - orientation, angular velocity, gyro bias
+        iDynTree::VectorDynSize m_y;                             ///< measurement vector for the EKF - accelerometer (and magnetometer yaw)
+        iDynTree::VectorDynSize m_u;                             ///< input vector for the EKF - gyroscope measurement
 
-        size_t m_state_size;                     ///< state dimensions
-        size_t m_output_size;                    ///< output dimensions
-        size_t m_input_size;                     ///< input dimensions
-        bool m_initialized{false};               ///< flag to check if QEKF is initialized
+        size_t m_state_size;                                     ///< state dimensions
+        size_t m_output_size;                                    ///< output dimensions
+        size_t m_input_size;                                     ///< input dimensions
+        bool m_initialized{false};                               ///< flag to check if QEKF is initialized
 
-        iDynTree::Matrix4x4 m_Id4;               ///< \f$ 4 \times 4 \f$  identity matrix
-        iDynTree::Matrix3x3 m_Id3;               ///< \f$ 3 \times 3 \f$  identity matrix
-        iDynTree::Direction m_gravity_direction; ///< gravity direction used for accelerometer measurement model
+        iDynTree::Matrix4x4 m_Id4;                               ///< \f$ 4 \times 4 \f$  identity matrix
+        iDynTree::Matrix3x3 m_Id3;                               ///< \f$ 3 \times 3 \f$  identity matrix
+        iDynTree::Direction m_gravity_direction;                 ///< direction of the gravity vector expressed in the inertial frame denoted by \f$ A \f$, default set to \f$ e_3 = \begin{bmatrix} 0 & 0 & 1.0 \end{bmatrix}^T \f$
     };
 
 }

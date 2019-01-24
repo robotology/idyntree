@@ -44,10 +44,11 @@ struct AttitudeMahonyFilterParameters {
  * @class AttitudeMahonyFilter Implements an explicit passive complementary filter on quaternion groups
  * described in the paper <a href="https://hal.archives-ouvertes.fr/hal-00488376/document">Non-linear complementary filters on SO3 groups</a>
  *
- * The filter is used to estimate the states \f$ X = \begin{bmatrix} q \\ \Omega \\ b \end{bmatrix}^T \f$
- * where \f$ q \f$  is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame ,
- * \f$ \Omega \f$  is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and
- * \f$ b \f$  is the gyroscope bias expressed in the body frame.
+ * The filter is used to estimate the states \f$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T \f$
+ * where \f$ {^A}q_B \in \mathbb{R}^4 \f$  is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame ,
+ *       \f$ {^B}\Omega_{A,B} \in \mathbb{R}^3 \f$  is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and
+ *       \f$ {^B}b \in \mathbb{R}^3 \f$  is the gyroscope bias expressed in the body frame.
+ * @note: we will drop the subscripts and superscripts in the rest of the documentation for convenience
  *
  * The discretized dynamics of the filter is implemented in the propagateStates() method and is described by the following equations,
  * \f$ q_{k+1} = q_{k} + \Delta t \frac{1}{2}q_{k} \circ \begin{bmatrix} 0 \\ \Omega_y_{k+1} - b_k + K_p \omega_{mes_{k+1}}\end{bmatrix}\f$
@@ -81,7 +82,7 @@ public:
 
     /**
      * @brief set the confidence weights on magenetometer measurements, if used
-     * @param[in] condifence can take values between \f$ [0, 1] \f$
+     * @param[in] confidence can take values between \f$ [0, 1] \f$
      */
     void setConfidenceForMagnetometerMeasurements(double confidence);
 
@@ -115,13 +116,17 @@ public:
      * @param[in] params object of AttitudeMahonyFilterParameters passed as a const reference
      * @return true/false if successful/not
      */
-    bool setParameters(const AttitudeMahonyFilterParameters& params);
+    bool setParameters(const AttitudeMahonyFilterParameters& params)
+    {
+        m_params = params;
+        return true;
+    }
 
     /**
      * @brief Get filter parameters as a struct.
      * @param[out] params object of AttitudeMahonyFilterParameters passed as reference
      */
-    void getParameters(AttitudeMahonyFilterParameters& params);
+    void getParameters(AttitudeMahonyFilterParameters& params) {params = m_params;}
 
     bool updateFilterWithMeasurements(const iDynTree::LinearAccelerometerMeasurements& linAccMeas,
                                       const iDynTree::GyroscopeMeasurements& gyroMeas) override;
@@ -130,15 +135,16 @@ public:
                                       const iDynTree::MagnetometerMeasurements& magMeas) override;
     bool propagateStates() override;
     bool getOrientationEstimateAsRotationMatrix(iDynTree::Rotation& rot) override;
-    bool getOrientationEstimateAsQuaternion(iDynTree::Quaternion& q) override;
+    bool getOrientationEstimateAsQuaternion(iDynTree::UnitQuaternion& q) override;
     bool getOrientationEstimateAsRPY(iDynTree::RPY& rpy) override;
     size_t getInternalStateSize() const override;
-    bool getInternalState(iDynTree::Span<double> & stateBuffer) const override;
-    bool getInternalInitialState(iDynTree::Span<double> & stateBuffer) const override;
-    bool setInternalState(iDynTree::Span<double> & stateBuffer) override;
+    bool getInternalState(const iDynTree::Span<double> & stateBuffer) const override;
+    bool getDefaultInternalInitialState(const iDynTree::Span<double> & stateBuffer) const override;
+    bool setInternalState(const iDynTree::Span<double> & stateBuffer) override;
+    bool setInternalStateInitialOrientation(const iDynTree::Span<double>& orientationBuffer) override;
 
 private:
-    AttitudeMahonyFilterParameters m_params;   ///< struct holding the Mahony filter parameters
+    AttitudeMahonyFilterParameters m_params;              ///< struct holding the Mahony filter parameters
 
     /** @struct state internal state of the estimator
      * @var state::m_orientation
@@ -149,19 +155,19 @@ private:
      * gyroscope bias estimate in \f$ \mathbb{R}^3 \f$
      */
     struct {
-        iDynTree::Quaternion m_orientation;
+        iDynTree::UnitQuaternion m_orientation;
         iDynTree::Vector3 m_angular_velocity;
         iDynTree::Vector3 m_gyroscope_bias;
     } m_state, m_initial_state;
 
-    iDynTree::Rotation m_orientationInSO3; ///< Rotation object to hold orientation estimate as rotation matrix
-    iDynTree::RPY m_orientationInRPY;      ///< RPY object to hold orientation estimate in Euler angles roll-pitch-yaw representation
+    iDynTree::Rotation m_orientationInSO3;                ///< orientation estimate as rotation matrix \f$ {^A}R_B \f$ where \f$ A \f$ is inertial frame and \f$ B \f$ is the frame attached to the body
+    iDynTree::RPY m_orientationInRPY;                     ///< orientation estimate as a 3D vector in RPY representation, where \f$ {^A}R_B = Rot_z(yaw)Rot_y(pitch)Rot_x(roll) \f$
 
-    iDynTree::Vector3 m_omega_mes; ///< vectorial estimate from accelerometer and magnetometer measurements, \f$ \omega_{mes} \in \mathbb{R}^3 \f$, notation from the paper Non linear complementary filters on the special orthogonal group
-    iDynTree::GyroscopeMeasurements m_Omega_y; ///< gyroscope measurement, \f$ \Omega_{y} \in \mathbb{R}^3 \f$, notation from the paper Non linear complementary filters on the special orthogonal group
+    iDynTree::Vector3 m_omega_mes;                        ///< vectorial estimate from accelerometer and magnetometer measurements, \f$ \omega_{mes} \in \mathbb{R}^3 \f$, notation from the paper Non linear complementary filters on the special orthogonal group
+    iDynTree::GyroscopeMeasurements m_Omega_y;            ///< gyroscope measurement, \f$ \Omega_{y} \in \mathbb{R}^3 \f$, notation from the paper Non linear complementary filters on the special orthogonal group
 
-    iDynTree::Direction m_gravity_direction; ///< direction of the gravity vector, default set to e3
-    iDynTree::Direction m_earth_magnetic_field_direction; ///< direction of absolute magnetic field, denoted by m_A
+    iDynTree::Direction m_gravity_direction;              ///< direction of the gravity vector expressed in the inertial frame denoted by \f$ A \f$, default set to \f$ e_3 = \begin{bmatrix} 0 & 0 & 1.0 \end{bmatrix}^T \f$
+    iDynTree::Direction m_earth_magnetic_field_direction; ///< direction of absolute magnetic field expressed in the inertial frame denoted by \f$ A \f$, default set to \f$ {^A}m = \begin{bmatrix} 0 & 0 & 1.0 \end{bmatrix}^T \f$
 };
 
 }

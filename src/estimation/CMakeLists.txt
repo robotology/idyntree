@@ -19,11 +19,10 @@ set(IDYNTREE_ESTIMATION_HEADERS include/iDynTree/Estimation/BerdyHelper.h
                                 include/iDynTree/Estimation/GravityCompensationHelpers.h
                                 include/iDynTree/Estimation/ExtendedKalmanFilter.h
                                 include/iDynTree/Estimation/AttitudeEstimator.h
-                                include/iDynTree/Estimation/AttitudeEstimatorUtils.h
                                 include/iDynTree/Estimation/AttitudeMahonyFilter.h
                                 include/iDynTree/Estimation/AttitudeQuaternionEKF.h)
 
-set(IDYNTREE_ESTIMATION_PRIVATE_INCLUDES )
+set(IDYNTREE_ESTIMATION_PRIVATE_INCLUDES include/iDynTree/Estimation/AttitudeEstimatorUtils.h)
 
 set(IDYNTREE_ESTIMATION_SOURCES src/BerdyHelper.cpp
                                 src/ExternalWrenchesEstimation.cpp

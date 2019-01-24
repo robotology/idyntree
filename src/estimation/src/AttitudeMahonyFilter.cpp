@@ -13,32 +13,50 @@
 
 iDynTree::Matrix3x3 getMatrixFromVectorVectorMultiplication(iDynTree::Vector3 a, iDynTree::Vector3 b)
 {
+    using iDynTree::toEigen;
     iDynTree::Matrix3x3 out;
-    iDynTree::toEigen(out) = iDynTree::toEigen(a)*iDynTree::toEigen(b).transpose();
+
+    toEigen(out) = toEigen(a)*toEigen(b).transpose(); // to be read as out = a*(b.transpose())
+
     return out;
 }
 
 iDynTree::Matrix3x3 getAngVelSkewSymmetricMatrixFromMeasurements(iDynTree::Vector3 meas, const iDynTree::Direction& vectorDir, double confidenceMeas, const iDynTree::Rotation& R)
 {
+    using iDynTree::toEigen;
+
+    ///< compute \f$ {{^A}{\hat{R}}_B}^T e_3 \f$ where \f$ e_3 \f$ is the vectorDir
     iDynTree::Direction va_hat = R.inverse().changeCoordFrameOf(vectorDir);
     iDynTree::Vector3 vectorial_estimate = iDynTree::Vector3(va_hat.data(), 3);
-    iDynTree::toEigen(meas).normalize();
-    iDynTree::Matrix3x3 A_acc = getMatrixFromVectorVectorMultiplication(meas, vectorial_estimate);
-    iDynTree::Matrix3x3 S_acc;
-    iDynTree::toEigen(S_acc) = (iDynTree::toEigen(A_acc) - iDynTree::toEigen(A_acc).transpose())*(confidenceMeas*0.5);
-    return S_acc;
+
+    ///< compute vectorial direction from the measurement normalized
+    toEigen(meas).normalize();
+
+    iDynTree::Matrix3x3 Adyn = getMatrixFromVectorVectorMultiplication(meas, vectorial_estimate);
+    iDynTree::Matrix3x3 Sdyn;
+    auto A(toEigen(Adyn));
+    auto S(toEigen(Sdyn));
+
+    S = (A - A.transpose())*(confidenceMeas*0.5);
+
+    return Sdyn;
 }
 
 bool iDynTree::AttitudeMahonyFilter::updateFilterWithMeasurements(const iDynTree::LinearAccelerometerMeasurements& linAccMeas, const iDynTree::GyroscopeMeasurements& gyroMeas)
 {
+    using iDynTree::toEigen;
+
     iDynTree::Matrix3x3 S_acc = getAngVelSkewSymmetricMatrixFromMeasurements(linAccMeas, m_gravity_direction, 1-m_params.confidence_magnetometer_measurements, m_orientationInSO3);
-    iDynTree::toEigen(m_omega_mes) = -iDynTree::toEigen(mapso3ToR3(S_acc));
+    toEigen(m_omega_mes) = -toEigen(mapso3ToR3(S_acc));
     m_Omega_y = gyroMeas;
+
     return true;
 }
 
 bool iDynTree::AttitudeMahonyFilter::updateFilterWithMeasurements(const iDynTree::LinearAccelerometerMeasurements& linAccMeas, const iDynTree::GyroscopeMeasurements& gyroMeas, const iDynTree::MagnetometerMeasurements& magMeas)
 {
+    using iDynTree::toEigen;
+
     if (m_params.use_magnetometer_measurements == false)
     {
         iDynTree::reportWarning("AttitudeMahonyFilter", "updateFilterWithMeasurements", "useMagnetoMeterMeasurements set to false, using only accelerometer measurements");
@@ -48,26 +66,36 @@ bool iDynTree::AttitudeMahonyFilter::updateFilterWithMeasurements(const iDynTree
     iDynTree::Matrix3x3 S_acc = getAngVelSkewSymmetricMatrixFromMeasurements(linAccMeas, m_gravity_direction, 1-m_params.confidence_magnetometer_measurements, m_orientationInSO3);
     iDynTree::Matrix3x3 S_mag = getAngVelSkewSymmetricMatrixFromMeasurements(magMeas, m_earth_magnetic_field_direction, m_params.confidence_magnetometer_measurements, m_orientationInSO3);
     iDynTree::Matrix3x3 S_meas;
-    iDynTree::toEigen(S_meas) = iDynTree::toEigen(S_acc) + iDynTree::toEigen(S_mag);
 
-    iDynTree::toEigen(m_omega_mes) = -iDynTree::toEigen(mapso3ToR3(S_meas));
+    toEigen(S_meas) = toEigen(S_acc) + toEigen(S_mag);
+    toEigen(m_omega_mes) = -toEigen(mapso3ToR3(S_meas));
     m_Omega_y = gyroMeas;
     return true;
 }
 
 bool iDynTree::AttitudeMahonyFilter::propagateStates()
 {
-    iDynTree::Vector3 gyroUpdate;
-    iDynTree::toEigen(gyroUpdate) = iDynTree::toEigen(m_Omega_y) - iDynTree::toEigen(m_state.m_gyroscope_bias) + (iDynTree::toEigen(m_omega_mes)*m_params.kp);
+    using iDynTree::toEigen;
+    iDynTree::Vector3 gyro_update_dyn;
+    auto q(toEigen(m_state.m_orientation));
+    auto Omega(toEigen(m_state.m_angular_velocity));
+    auto b(toEigen(m_state.m_gyroscope_bias));
+    auto gyroUpdate(toEigen(gyro_update_dyn));
+    auto Omega_y(toEigen(m_Omega_y));
+    auto omega_mes(toEigen(m_omega_mes));
 
-    iDynTree::Quaternion correction = pureQuaternion(gyroUpdate);
-    iDynTree::toEigen(m_state.m_orientation) = iDynTree::toEigen(m_state.m_orientation) + iDynTree::toEigen((composeQuaternion2(m_state.m_orientation, correction)))*(m_params.time_step_in_seconds*0.5);
-    iDynTree::toEigen(m_state.m_orientation).normalize();
-    iDynTree::toEigen(m_state.m_angular_velocity) = iDynTree::toEigen(m_Omega_y) - iDynTree::toEigen(m_state.m_gyroscope_bias);
-    iDynTree::toEigen(m_state.m_gyroscope_bias) = iDynTree::toEigen(m_state.m_gyroscope_bias) - ((iDynTree::toEigen(m_omega_mes)*m_params.ki)*(m_params.time_step_in_seconds));
+    // compute the correction from the measurements
+    gyroUpdate = Omega_y - b + (omega_mes*m_params.kp);
+    iDynTree::UnitQuaternion correction = pureQuaternion(gyro_update_dyn);
+    auto dq(toEigen(composeQuaternion2(m_state.m_orientation, correction)));
+
+    // system dynamics equations
+    q = q + (dq*(m_params.time_step_in_seconds*0.5));
+    q.normalize();
+    Omega = Omega_y - b;
+    b = b - (omega_mes*m_params.ki)*(m_params.time_step_in_seconds);
 
     m_orientationInSO3 = iDynTree::Rotation::RotationFromQuaternion(m_state.m_orientation);
-    //m_orientationInRPY = quaternion2eulerRPY(m_state.m_orientation);
     m_orientationInRPY = iDynTree::Rotation::RotationFromQuaternion(m_state.m_orientation).asRPY();
     return true;
 }
@@ -94,7 +122,6 @@ iDynTree::AttitudeMahonyFilter::AttitudeMahonyFilter()
     m_earth_magnetic_field_direction(2) = 1.0;
 
     m_orientationInSO3.fromQuaternion(m_state.m_orientation);
-    //m_orientationInRPY = quaternion2eulerRPY(m_state.m_orientation);
     m_orientationInRPY = iDynTree::Rotation::RotationFromQuaternion(m_state.m_orientation).asRPY();
 
     m_omega_mes.zero();
@@ -143,7 +170,7 @@ void iDynTree::AttitudeMahonyFilter::setGravityDirection(const iDynTree::Directi
 }
 
 
-bool iDynTree::AttitudeMahonyFilter::getInternalInitialState(iDynTree::Span< double >& stateBuffer) const
+bool iDynTree::AttitudeMahonyFilter::getDefaultInternalInitialState(const iDynTree::Span< double >& stateBuffer) const
 {
     stateBuffer(0) = m_initial_state.m_orientation(0);
     stateBuffer(1) = m_initial_state.m_orientation(1);
@@ -158,7 +185,7 @@ bool iDynTree::AttitudeMahonyFilter::getInternalInitialState(iDynTree::Span< dou
     return true;
 }
 
-bool iDynTree::AttitudeMahonyFilter::getInternalState(iDynTree::Span< double >& stateBuffer) const
+bool iDynTree::AttitudeMahonyFilter::getInternalState(const iDynTree::Span< double >& stateBuffer) const
 {
     stateBuffer(0) = m_state.m_orientation(0);
     stateBuffer(1) = m_state.m_orientation(1);
@@ -182,7 +209,7 @@ size_t iDynTree::AttitudeMahonyFilter::getInternalStateSize() const
     return size;
 }
 
-bool iDynTree::AttitudeMahonyFilter::getOrientationEstimateAsQuaternion(iDynTree::Quaternion& q)
+bool iDynTree::AttitudeMahonyFilter::getOrientationEstimateAsQuaternion(iDynTree::UnitQuaternion& q)
 {
     q = m_state.m_orientation;
     return true;
@@ -200,12 +227,7 @@ bool iDynTree::AttitudeMahonyFilter::getOrientationEstimateAsRPY(iDynTree::RPY& 
     return true;
 }
 
-void iDynTree::AttitudeMahonyFilter::getParameters(iDynTree::AttitudeMahonyFilterParameters& params)
-{
-    params = m_params;
-}
-
-bool iDynTree::AttitudeMahonyFilter::setInternalState(iDynTree::Span< double >& stateBuffer)
+bool iDynTree::AttitudeMahonyFilter::setInternalState(const iDynTree::Span< double >& stateBuffer)
 {
     if ((size_t)stateBuffer.size() != getInternalStateSize())
     {
@@ -225,7 +247,17 @@ bool iDynTree::AttitudeMahonyFilter::setInternalState(iDynTree::Span< double >& 
     return true;
 }
 
-bool iDynTree::AttitudeMahonyFilter::setParameters(const iDynTree::AttitudeMahonyFilterParameters& params)
-{   m_params = params;
+bool iDynTree::AttitudeMahonyFilter::setInternalStateInitialOrientation(const iDynTree::Span< double >& orientationBuffer)
+{
+    if ((size_t)orientationBuffer.size() != m_state.m_orientation.size())
+    {
+        iDynTree::reportError("AttitudeMahonyFilter", "setInternalStateInitialOrientation", "orientation size mismatch, using default state");
+        return false;
+    }
+    m_state.m_orientation(0) = orientationBuffer(0);
+    m_state.m_orientation(1) = orientationBuffer(1);
+    m_state.m_orientation(2) = orientationBuffer(2);
+    m_state.m_orientation(3) = orientationBuffer(3);
+
     return true;
 }

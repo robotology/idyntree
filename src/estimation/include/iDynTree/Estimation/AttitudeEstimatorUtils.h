@@ -13,7 +13,9 @@
 
 #include <iDynTree/Estimation/AttitudeEstimator.h>
 #include <iDynTree/Core/EigenHelpers.h>
-
+#define _USE_MATH_DEFINES
+#include <cmath>
+#include <vector>
 
 /**
  *
@@ -64,7 +66,7 @@ double innerProduct(const iDynTree::Vector3 a, const iDynTree::Vector3& b);
  * @param[in] q 4d vector or quaternion
  * @return double
  */
-double realPartOfQuaternion(const iDynTree::Quaternion& q);
+double realPartOfQuaternion(const iDynTree::UnitQuaternion& q);
 
 /**
  * @brief imaginary part of quaternion
@@ -72,24 +74,24 @@ double realPartOfQuaternion(const iDynTree::Quaternion& q);
  * @param[in] q 4d vector or quaternion
  * @return iDynTree::Vector3
  */
-iDynTree::Vector3 imaginaryPartOfQuaternion(const iDynTree::Quaternion &q);
+iDynTree::Vector3 imaginaryPartOfQuaternion(const iDynTree::UnitQuaternion& q);
 
 /**
  * @brief composition operator - quaternion multiplication
  *
  * @param[in] q1 4d vector or quaternion
  * @param[in] q2 4d vector or quaternion
- * @return iDynTree::Quaternion
+ * @return iDynTree::UnitQuaternion
  */
-iDynTree::Quaternion composeQuaternion(const iDynTree::Quaternion &q1, const iDynTree::Quaternion &q2);
+iDynTree::UnitQuaternion composeQuaternion(const iDynTree::UnitQuaternion& q1, const iDynTree::UnitQuaternion& q2);
 
 /**
- * @brief computes the matrix map of quaternion left multiplication q1q2
- *
+ * @brief computes the matrix map of quaternion left multiplication \f$ q1 \circ q2 = q1q2 \f$
+ *        in opposition to the right multiplication \f$ q1 \circ q2 = q2q1 \f$
  * @param[in] x 4d vector or quaternion q1
  * @return iDynTree::Matrix4x4
  */
-iDynTree::Matrix4x4 mapofYQuaternionToXYQuaternion(const iDynTree::Quaternion &x);
+iDynTree::Matrix4x4 mapofYQuaternionToXYQuaternion(const iDynTree::UnitQuaternion &x);
 
 
 /**
@@ -97,29 +99,17 @@ iDynTree::Matrix4x4 mapofYQuaternionToXYQuaternion(const iDynTree::Quaternion &x
  *        this method is faster than composeQuaternion()
  * @param[in] q1 4d vector or quaternion
  * @param[in] q2 4d vector or quaternion
- * @return iDynTree::Quaternion
+ * @return iDynTree::UnitQuaternion
  */
-iDynTree::Quaternion composeQuaternion2(const iDynTree::Quaternion &q1, const iDynTree::Quaternion &q2);
+iDynTree::UnitQuaternion composeQuaternion2(const iDynTree::UnitQuaternion &q1, const iDynTree::UnitQuaternion &q2);
 
 
 /**
  * @brief computes pure quaternion given a 3d vector (uually angular velocity)
  *
  * @param[in] bodyFixedFrameVelocityInInertialFrame 3d vector
- * @return iDynTree::Quaternion
+ * @return iDynTree::UnitQuaternion
  */
-iDynTree::Quaternion pureQuaternion(const iDynTree::Vector3& bodyFixedFrameVelocityInInertialFrame);
-
-/**
- * @brief get RPY euler angles from quaternion
- *
- * First rotate about x (roll), then y(pitch) and z(yaw)
- * characterized by the matrix multiplication
- * \f$ R = R_z R_y R_x \f$
- *
- * @param[in] q quaternion
- * @return iDynTree::RPY
- */
-iDynTree::RPY quaternion2eulerRPY(const iDynTree::Quaternion &q);
+iDynTree::UnitQuaternion pureQuaternion(const iDynTree::Vector3& bodyFixedFrameVelocityInInertialFrame);
 
 #endif

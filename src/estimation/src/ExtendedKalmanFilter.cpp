@@ -10,12 +10,12 @@
 
 #include <iDynTree/Estimation/ExtendedKalmanFilter.h>
 
-iDynTree::DiscreteExtendedKalmanFilter::DiscreteExtendedKalmanFilter()
+iDynTree::DiscreteExtendedKalmanFilterHelper::DiscreteExtendedKalmanFilterHelper()
 {
 
 }
 
-void iDynTree::DiscreteExtendedKalmanFilter::ekfReset()
+void iDynTree::DiscreteExtendedKalmanFilterHelper::ekfReset()
 {
     m_is_initialized = false;
     m_measurement_updated = false;
@@ -25,11 +25,11 @@ void iDynTree::DiscreteExtendedKalmanFilter::ekfReset()
 }
 
 
-bool iDynTree::DiscreteExtendedKalmanFilter::ekfInit()
+bool iDynTree::DiscreteExtendedKalmanFilterHelper::ekfInit()
 {
     if (m_dim_X == 0 || m_dim_Y == 0 || m_dim_U == 0)
     {
-        iDynTree::reportError("DiscreteExtendedKalmanFilter", "init", "state or input or output size not set, exiting.");
+        iDynTree::reportError("DiscreteExtendedKalmanFilterHelper", "init", "state or input or output size not set, exiting.");
         return false;
     }
 
@@ -38,9 +38,6 @@ bool iDynTree::DiscreteExtendedKalmanFilter::ekfInit()
     m_xhat.resize(m_dim_X); m_xhat.zero();
     m_u.resize(m_dim_U); m_u.zero();
     m_y.resize(m_dim_Y); m_y.zero();
-
-    m_w.resize(m_dim_X); m_w.zero();
-    m_v.resize(m_dim_Y); m_v.zero();
 
     m_F.resize(m_dim_X, m_dim_X);
     m_F.zero();
@@ -62,85 +59,105 @@ bool iDynTree::DiscreteExtendedKalmanFilter::ekfInit()
 
     m_is_initialized = true;
     return m_is_initialized;
-
 }
 
-bool iDynTree::DiscreteExtendedKalmanFilter::ekfPredict()
+bool iDynTree::DiscreteExtendedKalmanFilterHelper::ekfPredict()
 {
     if (!m_is_initialized)
     {
-        iDynTree::reportError("DiscreteExtendedKalmanFilter", "ekfPredict", "filter not initialized.");
+        iDynTree::reportError("DiscreteExtendedKalmanFilterHelper", "ekfPredict", "filter not initialized.");
         return false;
     }
 
     if (!m_initial_state_set)
     {
-        iDynTree::reportError("DiscreteExtendedKalmanFilter", "ekfPredict", "initial state not set.");
+        iDynTree::reportError("DiscreteExtendedKalmanFilterHelper", "ekfPredict", "initial state not set.");
         return false;
     }
 
     if (!m_initial_state_covariance_set)
     {
-        iDynTree::reportError("DiscreteExtendedKalmanFilter", "ekfPredict", "initial state covariance not set.");
+        iDynTree::reportError("DiscreteExtendedKalmanFilterHelper", "ekfPredict", "initial state covariance not set.");
         return false;
     }
 
     if (!m_input_updated)
     {
-        iDynTree::reportWarning("DiscreteExtendedKalmanFilter", "ekfPredict", "input not updated. using old input");
+        iDynTree::reportWarning("DiscreteExtendedKalmanFilterHelper", "ekfPredict", "input not updated. using old input");
     }
 
-    f(m_x, m_u, m_w, m_xhat); // xhat_k+1 = f(x_k, u_k) + w_k
-    computejacobianF(m_x, m_F); // F at x = x_k
-    iDynTree::toEigen(m_Phat) = iDynTree::toEigen(m_F)*iDynTree::toEigen(m_P)*(iDynTree::toEigen(m_F).transpose()) + iDynTree::toEigen(m_Q); // Phat_k+1 = F_k P_k (F_k)^T + Q
+    // propagate states and compute jacobian
+    ekf_f(m_x, m_u, m_xhat);                      ///< \f$ \hat{x}_{k+1} = f(x_k, u_k) \f$
+    ekfComputeJacobianF(m_x, m_F);               ///< \f$ F \mid_{x = x_k} \f$
+
+    using iDynTree::toEigen;
+    auto P(toEigen(m_P));
+    auto Phat(toEigen(m_Phat));
+    auto F(toEigen(m_F));
+    auto Q(toEigen(m_Q));
+
+    // propagate covariance
+    Phat = F*P*(F.transpose()) + Q;           ///< \f$ \hat{P}_{k+1} = F_k P_k F_k^T + Q \f$
     m_input_updated = false;
     return true;
 }
 
-bool iDynTree::DiscreteExtendedKalmanFilter::ekfUpdate()
+bool iDynTree::DiscreteExtendedKalmanFilterHelper::ekfUpdate()
 {
     if (!m_is_initialized)
     {
-        iDynTree::reportError("DiscreteExtendedKalmanFilter", "ekfUpdate", "filter not initialized.");
+        iDynTree::reportError("DiscreteExtendedKalmanFilterHelper", "ekfUpdate", "filter not initialized.");
         return false;
     }
 
     if (!m_initial_state_set)
     {
-        iDynTree::reportError("DiscreteExtendedKalmanFilter", "ekfUpdate", "initial state not set.");
+        iDynTree::reportError("DiscreteExtendedKalmanFilterHelper", "ekfUpdate", "initial state not set.");
         return false;
     }
 
     if (!m_initial_state_covariance_set)
     {
-        iDynTree::reportError("DiscreteExtendedKalmanFilter", "ekfUpdate", "initial state covariance not set.");
+        iDynTree::reportError("DiscreteExtendedKalmanFilterHelper", "ekfUpdate", "initial state covariance not set.");
         return false;
     }
 
     if (!m_measurement_updated)
     {
-        iDynTree::reportError("DiscreteExtendedKalmanFilter", "ekfUpdate", "measurements not updated.");
+        iDynTree::reportError("DiscreteExtendedKalmanFilterHelper", "ekfUpdate", "measurements not updated.");
         return false;
     }
 
     iDynTree::VectorDynSize z;
     z.resize(m_dim_Y);
-    h(m_xhat, m_v, z); // z_k+1 = h(xhat_k+1, v_k+1)
-    computejacobianH(m_xhat, m_H); // H at x = xhat_k+1
-    iDynTree::toEigen(m_S) = iDynTree::toEigen(m_H)*iDynTree::toEigen(m_Phat)*iDynTree::toEigen(m_H).transpose() + iDynTree::toEigen(m_R); // S = H_k+1 Phat_k+1 (H_k+1)^T + R
-    iDynTree::toEigen(m_K) = iDynTree::toEigen(m_Phat)*iDynTree::toEigen(m_H).transpose()*iDynTree::toEigen(m_S).inverse(); // K_k+1 = Phat_k+1 (H_k+1)^T (S^{-1})
-    iDynTree::toEigen(m_P) = iDynTree::toEigen(m_Phat) - (iDynTree::toEigen(m_K)*iDynTree::toEigen(m_S)*iDynTree::toEigen(m_K).transpose()); // P_k+1 = Phat_k+1 - K_k+1 S (K_k+1)^T
-    iDynTree::toEigen(m_x) = iDynTree::toEigen(m_xhat) + iDynTree::toEigen(m_K)*(iDynTree::toEigen(m_y)-iDynTree::toEigen(z)); // x_k+1 = xhat_k+1 + K_k+1(y_k+1 - z_k+1)
+    ekf_h(m_xhat, z);                             ///< \f$ z_{k+1} = h(\hat{x}_{k+1}) \f$
+    ekfComputeJacobianH(m_xhat, m_H);            ///< \f$ H \mid_{x = \hat{x}_{k+1}} \f$
+
+    using iDynTree::toEigen;
+    auto P(toEigen(m_P));
+    auto Phat(toEigen(m_Phat));
+    auto S(toEigen(m_S));
+    auto K(toEigen(m_K));
+    auto H(toEigen(m_H));
+    auto R(toEigen(m_R));
+    auto x(toEigen(m_x));
+    auto xhat(toEigen(m_xhat));
+    auto y(toEigen(m_y) - toEigen(z));        ///< innovation \f$ \tilde{y}_{k+1} = y_{k+1} - z_{k+1} \f$
+
+    S = H*Phat*H.transpose() + R;             ///< \f$ S_{k+1} = H_{k+1} \hat{P}_{k+1} H_{k+1}^T + R \f$
+    K = Phat*H.transpose()*S.inverse();       ///< \f$ K_{k+1} = \hat{P}_{k+1} H_{k+1}^T S_{k+1}^{-1} \f$
+    P = Phat - (K*H*Phat);                    ///< \f$ P_{k+1} = \hat{P}_{k+1} - (K_{k+1} H \hat{P}_{k+1}) \f$
+    x = xhat + K*y;                           ///< \f$ x_{k+1} = \hat{x}_{k+1} + K_{k+1} \tilde{y}_{k+1} \f$
 
     m_measurement_updated = false;
     return true;
 }
 
-bool iDynTree::DiscreteExtendedKalmanFilter::ekfSetInitialState(const iDynTree::Span< double >& x0)
+bool iDynTree::DiscreteExtendedKalmanFilterHelper::ekfSetInitialState(const iDynTree::Span< double >& x0)
 {
     if ((size_t)x0.size() != m_dim_X)
     {
-        iDynTree::reportError("DiscreteExtendedKalmanFilter", "setInitialState", "state size mismatch");
+        iDynTree::reportError("DiscreteExtendedKalmanFilterHelper", "setInitialState", "state size mismatch");
         return false;
     }
 
@@ -153,11 +170,11 @@ bool iDynTree::DiscreteExtendedKalmanFilter::ekfSetInitialState(const iDynTree::
     return true;
 }
 
-bool iDynTree::DiscreteExtendedKalmanFilter::ekfSetInputVector(const iDynTree::Span< double >& u)
+bool iDynTree::DiscreteExtendedKalmanFilterHelper::ekfSetInputVector(const iDynTree::Span< double >& u)
 {
     if ((size_t)u.size() != m_dim_U)
     {
-        iDynTree::reportError("DiscreteExtendedKalmanFilter", "ekfSetInputVector", "input size mismatch");
+        iDynTree::reportError("DiscreteExtendedKalmanFilterHelper", "ekfSetInputVector", "input size mismatch");
         return false;
     }
 
@@ -170,12 +187,11 @@ bool iDynTree::DiscreteExtendedKalmanFilter::ekfSetInputVector(const iDynTree::S
     return true;
 }
 
-
-bool iDynTree::DiscreteExtendedKalmanFilter::ekfSetMeasurementVector(const iDynTree::Span< double >& y)
+bool iDynTree::DiscreteExtendedKalmanFilterHelper::ekfSetMeasurementVector(const iDynTree::Span< double >& y)
 {
     if ((size_t)y.size() != m_dim_Y)
     {
-        iDynTree::reportError("DiscreteExtendedKalmanFilter", "ekfSetMeasurementVector", "measurement size mismatch");
+        iDynTree::reportError("DiscreteExtendedKalmanFilterHelper", "ekfSetMeasurementVector", "measurement size mismatch");
         return false;
     }
 
@@ -188,11 +204,11 @@ bool iDynTree::DiscreteExtendedKalmanFilter::ekfSetMeasurementVector(const iDynT
     return true;
 }
 
-bool iDynTree::DiscreteExtendedKalmanFilter::ekfSetStateCovariance(const iDynTree::Span< double >& P)
+bool iDynTree::DiscreteExtendedKalmanFilterHelper::ekfSetStateCovariance(const iDynTree::Span< double >& P)
 {
     if ((size_t)P.size() != m_dim_X*m_dim_X)
     {
-        iDynTree::reportError("DiscreteExtendedKalmanFilter", "setSystemCovariance", "state covariance matrix size mismatch");
+        iDynTree::reportError("DiscreteExtendedKalmanFilterHelper", "setSystemCovariance", "state covariance matrix size mismatch");
         return false;
     }
 
@@ -201,22 +217,11 @@ bool iDynTree::DiscreteExtendedKalmanFilter::ekfSetStateCovariance(const iDynTre
     return true;
 }
 
-bool iDynTree::DiscreteExtendedKalmanFilter::ekfSetSystemNoiseMeanAndCovariance(const iDynTree::Span< double >& w_mean, const iDynTree::Span< double >& Q)
+bool iDynTree::DiscreteExtendedKalmanFilterHelper::ekfSetSystemNoiseCovariance(const iDynTree::Span< double >& Q)
 {
-    if ((size_t)w_mean.size() != m_dim_X)
-    {
-        iDynTree::reportError("DiscreteExtendedKalmanFilter", "setSystemNoiseMeanAndCovariance", "noise vector size mismatch");
-        return false;
-    }
-
-    for (int i = 0; i < w_mean.size(); i++)
-    {
-        m_w = w_mean;
-    }
-
     if ((size_t)Q.size() != m_dim_X*m_dim_X)
     {
-        iDynTree::reportError("DiscreteExtendedKalmanFilter", "setSystemNoiseMeanAndCovariance", "noise covariance matrix size mismatch");
+        iDynTree::reportError("DiscreteExtendedKalmanFilterHelper", "setSystemNoiseMeanAndCovariance", "noise covariance matrix size mismatch");
         return false;
     }
 
@@ -225,22 +230,11 @@ bool iDynTree::DiscreteExtendedKalmanFilter::ekfSetSystemNoiseMeanAndCovariance(
 }
 
 
-bool iDynTree::DiscreteExtendedKalmanFilter::ekfSetMeasurementNoiseMeanAndCovariance(const iDynTree::Span< double >& v_mean, const iDynTree::Span< double >& R)
+bool iDynTree::DiscreteExtendedKalmanFilterHelper::ekfSetMeasurementNoiseCovariance(const iDynTree::Span< double >& R)
 {
-    if ((size_t)v_mean.size() != m_dim_Y)
-    {
-        iDynTree::reportError("DiscreteExtendedKalmanFilter", "setMeasurementNoiseMeanAndCovariance", "noise vector size mismatch");
-        return false;
-    }
-
-    for (int i = 0; i < v_mean.size(); i++)
-    {
-        m_v = v_mean;
-    }
-
     if ((size_t)R.size() != m_dim_Y*m_dim_Y)
     {
-        iDynTree::reportError("DiscreteExtendedKalmanFilter", "setMeasurementNoiseMeanAndCovariance", "noise covariance matrix size mismatch");
+        iDynTree::reportError("DiscreteExtendedKalmanFilterHelper", "setMeasurementNoiseMeanAndCovariance", "noise covariance matrix size mismatch");
         return false;
     }
 
@@ -248,11 +242,11 @@ bool iDynTree::DiscreteExtendedKalmanFilter::ekfSetMeasurementNoiseMeanAndCovari
     return true;
 }
 
-bool iDynTree::DiscreteExtendedKalmanFilter::ekfGetStates(iDynTree::Span< double >& x) const
+bool iDynTree::DiscreteExtendedKalmanFilterHelper::ekfGetStates(const iDynTree::Span< double >& x) const
 {
     if ((size_t)x.size() != m_dim_X)
     {
-        iDynTree::reportError("DiscreteExtendedKalmanFilter", "ekfGetStates", "state size mismatch");
+        iDynTree::reportError("DiscreteExtendedKalmanFilterHelper", "ekfGetStates", "state size mismatch");
         return false;
     }
 
@@ -262,3 +256,31 @@ bool iDynTree::DiscreteExtendedKalmanFilter::ekfGetStates(iDynTree::Span< double
     }
     return true;
 }
+
+bool iDynTree::DiscreteExtendedKalmanFilterHelper::ekfGetStateCovariance(const iDynTree::Span< double >& P) const
+{
+    if ((size_t)P.size() != m_P.capacity())
+    {
+        iDynTree::reportError("DiscreteExtendedKalmanFilterHelper", "ekfGetStateCovariance", "state covariance size mismatch");
+        return false;
+    }
+
+    // TODO: replace this really bad way of copying a matrix to a span
+    std::vector<double> temp;
+    temp.resize(P.size());
+    for (size_t i = 0; i < m_P.rows(); i++)
+    {
+        for (size_t j = 0; j < m_P.cols(); j++)
+        {
+            temp.push_back(m_P(i, j));
+        }
+    }
+
+    for (size_t k = 0; k < temp.size(); k++)
+    {
+        P(k) = temp[k];
+    }
+
+    return true;
+}
+

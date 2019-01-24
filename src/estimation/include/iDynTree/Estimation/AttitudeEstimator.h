@@ -22,7 +22,7 @@ namespace iDynTree
     typedef iDynTree::Vector3 GyroscopeMeasurements;
     typedef iDynTree::Vector3 MagnetometerMeasurements;
 
-    typedef iDynTree::Vector4 Quaternion;
+    typedef iDynTree::Vector4 UnitQuaternion;
     typedef iDynTree::Vector3 RPY;
 
     /**
@@ -40,6 +40,12 @@ namespace iDynTree
      *     - propagate the states
      *
      * However, additional methods to set and get parameters for the filter might be available with respect to the filters.
+     *
+     * The internal state of the estimator is described as \f$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T \f$
+     * \f$ {^A}q_B \in \mathbb{R}^4 \f$  is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame ,
+     * \f$ {^B}\Omega_{A,B} \in \mathbb{R}^3 \f$  is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and
+     * \f$ {^B}b \in \mathbb{R}^3 \f$  is the gyroscope bias expressed in the body frame.
+     *
      */
     class IAttitudeEstimator
     {
@@ -49,23 +55,25 @@ namespace iDynTree
         /**
          * @brief Update the filter with accelerometer and gyroscope measurements
          *
-         * @param[in] linAccMeas left trivialized 3D vector of linear proper sensor acceleration measuements
-         * @param[in] gyroMeas left trivialized 3D vector of angular velocity measurements
+         * @param[in] linAccMeas proper (body acceleration - gravity) classical acceleration of the origin of the body frame B expressed in frame B
+         * @param[in] gyroMeas angular velocity of body frame B with respect to an inertial fram A, expressed in frame B
          *
-         * @note left trivialized angular velocity means the angular velocity of body frame B with respect to an inertial fram A, expressed in frame B
+         * @note consider the current behavior of our system does not use magnetometer measurements and is calling this method to update measurements.
+         *       Then, if we decide to turn the flag use_magnetometer_measurements to true, this will not guarantee that the magnetometer measurements
+         *       will be used. The magnetometer measurements will be used only if we replace this function call with the other overlaoded function considering
+         *       the magnetometer measurements.
+         *
          * @return true/false if successful/not
          */
         virtual bool updateFilterWithMeasurements(const iDynTree::LinearAccelerometerMeasurements& linAccMeas,
-                                          const iDynTree::GyroscopeMeasurements& gyroMeas) = 0;
+                                                  const iDynTree::GyroscopeMeasurements& gyroMeas) = 0;
 
         /**
          * @brief Update the filter with accelerometer, gyroscope and magnetometer measurements
          *
-         * @param[in] linAccMeas left trivialized 3D vector of linear proper sensor acceleration measuements
-         * @param[in] gyroMeas left trivialized 3D vector of angular velocity measurements
-         * @param[in] magMeas left trivialized 3D vector of magnetometer measurements
-         *
-         * @note left trivialized angular velocity means the angular velocity of body frame B with respect to an inertial fram A, expressed in frame B
+         * @param[in] linAccMeas proper (body acceleration - gravity) classical acceleration of the origin of the body frame B expressed in frame B
+         * @param[in] gyroMeas angular velocity of body frame B with respect to an inertial fram A, expressed in frame B
+         * @param[in] magMeas magnetometer measurements expressed in frame B
          *
          * @return true/false if successful/not
          */
@@ -83,24 +91,35 @@ namespace iDynTree
 
         /**
          * @brief Get orientation of the body with respect to inertial frame, in rotation matrix form
-         *
+         *        If we denote \f$ A \f$ as inertial frame and \f$ B \f$ as the frame attached to the body,
+         *        then this method gives us \f$ {^A}R_B \f$ as the rotation matrix
          * @param[out] rot Rotation matrix
          * @return true/false if successful/not
          */
         virtual bool getOrientationEstimateAsRotationMatrix(iDynTree::Rotation& rot) = 0;
 
         /**
-         * @brief Get orientation of the body with respect to inertial frame, in quaternion form
+         * @brief Get orientation of the body with respect to inertial frame, in unit quaternion form
+         *        If we denote \f$ A \f$ as inertial frame and \f$ B \f$ as the frame attached to the body,
+         *        then this method gives us \f$ {^A}q_B as the quaternion \f$
          *
          * @note quaternion has the form (real, imaginary) and is normalized
+         * @note Usually a rotation matrix can be described using two quaternions due to its double-connectedness property
+         *       Depending on the specific filter, the initial state and the trajectory of the system, we could obtain
+         *       one quaternion or the other(opposite spin), depending on the system dynamics.
          *
-         * @param[out] q Quaternion
+         * @param[out] q UnitQuaternion
          * @return true/false if successful/not
          */
-        virtual bool getOrientationEstimateAsQuaternion(iDynTree::Quaternion& q) = 0;
+        virtual bool getOrientationEstimateAsQuaternion(iDynTree::UnitQuaternion& q) = 0;
 
         /**
          * @brief Get orientation of the body with respect to inertial frame, in Euler's RPY form
+         *        If we denote \f$ A \f$ as inertial frame and \f$ B \f$ as the frame attached to the body,
+         *        then this method gives us the RPY 3d vector of Euler Angles when composed together gives us \f$ {^A}R_B \f$ as the rotation matrix
+         *        where \f$ {^A}R_B = Rot_z(yaw)Rot_y(pitch)Rot_x(roll)\f$.
+         *        For more details about the range of the RPY Euler angles, please refer the documentation of
+         *   <a href="https://github.com/robotology/idyntree/blob/c8bf721b771fa4b1e7c3a940632e121060719a19/src/core/include/iDynTree/Core/Rotation.h#L167">GetRPY()</a>
          *
          * @param[out] rpy 3D vector containing roll pitch yaw angles
          * @return true/false if successful/not
@@ -115,27 +134,47 @@ namespace iDynTree
 
         /**
          * @brief Get internal state of the estimator
-         *
+         *        The internal state of the estimator is described as \f$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T \f$
+         *        \f$ {^A}q_B \in \mathbb{R}^4 \f$  is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame ,
+         *        \f$ {^B}\Omega_{A,B} \in \mathbb{R}^3 \f$  is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and
+         *        \f$ {^B}b \in \mathbb{R}^3 \f$  is the gyroscope bias expressed in the body frame.
+         *        The default internal state of the estimator would be \f$ X = \begin{bmatrix} 1.0 \\ 0_{1 \times 3} \\ 0_{1 \times 3} \\ 0_{1 \times 3} \end{bmatrix}^T \f$
          * @param[out] stateBuffer Span object as reference of the container where state vector should be copied to
          * @return true/false if successful/not
          */
-        virtual bool getInternalState(iDynTree::Span<double> & stateBuffer) const = 0;
+        virtual bool getInternalState(const iDynTree::Span<double> & stateBuffer) const = 0;
 
         /**
          * @brief Get initial internal state of the estimator
-         *
+         *        The internal state of the estimator is described as \f$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T \f$
+         *        \f$ {^A}q_B \in \mathbb{R}^4 \f$  is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame ,
+         *        \f$ {^B}\Omega_{A,B} \in \mathbb{R}^3 \f$  is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and
+         *        \f$ {^B}b \in \mathbb{R}^3 \f$  is the gyroscope bias expressed in the body frame.
+         *        The default internal state of the estimator would be \f$ X = \begin{bmatrix} 1.0 \\ 0_{1 \times 3} \\ 0_{1 \times 3} \\ 0_{1 \times 3} \end{bmatrix}^T \f$
          * @param[out] stateBuffer Span object as reference of the container where state vector should be copied to
          * @return true/false if successful/not
          */
-        virtual bool getInternalInitialState(iDynTree::Span<double> & stateBuffer) const = 0;
+        virtual bool getDefaultInternalInitialState(const iDynTree::Span<double> & stateBuffer) const = 0;
 
         /**
-         * @brief set internal state of the estimator
-         *
-         * @param[in] stateBuffer Span object as reference of the container from which the internal state vector should be assigned
+         * @brief set internal state of the estimator.
+         *        The internal state of the estimator is described as \f$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T \f$
+         *        \f$ {^A}q_B \in \mathbb{R}^4 \f$  is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame ,
+         *        \f$ {^B}\Omega_{A,B} \in \mathbb{R}^3 \f$  is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and
+         *        \f$ {^B}b \in \mathbb{R}^3 \f$  is the gyroscope bias expressed in the body frame.
+         * @param[in] stateBuffer Span object as reference of the container from which the internal state vector should be assigned. The size of the buffer should be 10.
          * @return true/false if successful/not
          */
-        virtual bool setInternalState(iDynTree::Span<double> & stateBuffer) = 0;
+        virtual bool setInternalState(const iDynTree::Span<double> & stateBuffer) = 0;
+
+        /**
+         * @brief set the initial orientation for the internal state of the estimator.
+         *        The initial orientation for the internal state of the estimator is described as \f$ {^A}q_B \f$
+         *        \f$ {^A}q_B \in \mathbb{R}^4 \f$  is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame ,
+         * @param[in] stateBuffer Span object as reference of the container from which the inital orientaiton for internal state vector should be assigned. The size of the buffer should be 4.
+         * @return true/false if successful/not
+         */
+        virtual bool setInternalStateInitialOrientation(const iDynTree::Span<double>& orientationBuffer) = 0;
     };
 
 }

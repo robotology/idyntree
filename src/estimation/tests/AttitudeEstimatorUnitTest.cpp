@@ -9,7 +9,20 @@
  */
 
 #include <iDynTree/Estimation/AttitudeQuaternionEKF.h>
+#include <iDynTree/Estimation/AttitudeMahonyFilter.h>
 #include <iDynTree/Core/TestUtils.h>
+#include <iostream>
+
+void run(iDynTree::IAttitudeEstimator* estimator,
+         const iDynTree::LinAcceleration& acc,
+         const iDynTree::GyroscopeMeasurements& gyro,
+         const iDynTree::MagnetometerMeasurements& mag)
+{
+    std::cout << "Propagating states..." << std::endl;
+    estimator->propagateStates();
+    std::cout << "Update measurements..." << std::endl;
+    estimator->updateFilterWithMeasurements(acc, gyro, mag);
+}
 
 int main()
 {
@@ -21,11 +34,11 @@ int main()
     size_t x_size = qEKF->getInternalStateSize();
 
     // calling setParams resets and intializes the filter
-    qEKF->setParams(params);
+    qEKF->setParameters(params);
     bool ok = qEKF->initializeFilter();
     ASSERT_IS_TRUE(ok);
     std::cout << "Propagate states will internally run EKF predict step" << std::endl;
-    std::cout << "Calling propagateStates before setting internal state should print initial state not set error...." << std::endl;
+    std::cout << "if setParams() was not called before, calling propagateStates before setting internal state will throw initial state not set error...." << std::endl;
     ok = qEKF->propagateStates();
     ASSERT_IS_TRUE(ok);
     std::cout << "Print.... OK" << std::endl;
@@ -61,6 +74,11 @@ int main()
     ok = qEKF->updateFilterWithMeasurements(linAcc, gyro);
     ASSERT_IS_TRUE(ok);
 
+    iDynTree::IAttitudeEstimator* qekf_(qEKF.get());
+    for ( ; ; )
+    {
+        run(qekf_, linAcc, gyro, mag);
+    }
 
     return EXIT_SUCCESS;
 }
