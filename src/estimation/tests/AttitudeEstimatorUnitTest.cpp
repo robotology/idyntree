@@ -75,7 +75,7 @@ int main()
     ASSERT_IS_TRUE(ok);
 
     iDynTree::IAttitudeEstimator* qekf_(qEKF.get());
-    for ( ; ; )
+    for (int i = 0; i <10 ; i++ )
     {
         run(qekf_, linAcc, gyro, mag);
     }
