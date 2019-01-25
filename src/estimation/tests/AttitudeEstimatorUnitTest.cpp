@@ -12,7 +12,7 @@
 #include <iDynTree/Estimation/AttitudeMahonyFilter.h>
 #include <iDynTree/Core/TestUtils.h>
 #include <iostream>
-
+#include <memory>
 void run(iDynTree::IAttitudeEstimator* estimator,
          const iDynTree::LinAcceleration& acc,
          const iDynTree::GyroscopeMeasurements& gyro,
