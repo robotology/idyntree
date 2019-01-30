@@ -9,6 +9,7 @@
  */
 
 #include <iDynTree/Estimation/AttitudeQuaternionEKF.h>
+#include <iDynTree/Estimation/AttitudeEstimatorUtils.h>
 
 void iDynTree::AttitudeQuaternionEKF::serializeStateVector()
 {
