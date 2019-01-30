@@ -9,6 +9,7 @@
  */
 
 #include <iDynTree/Estimation/AttitudeMahonyFilter.h>
+#include <iDynTree/Estimation/AttitudeEstimatorUtils.h>
 #include <ctime>
 
 iDynTree::Matrix3x3 getMatrixFromVectorVectorMultiplication(iDynTree::Vector3 a, iDynTree::Vector3 b)

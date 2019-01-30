@@ -13,7 +13,6 @@
 
 #include <iDynTree/Estimation/AttitudeEstimator.h>
 #include <iDynTree/Estimation/ExtendedKalmanFilter.h>
-#include <iDynTree/Estimation/AttitudeEstimatorUtils.h>
 #include <iDynTree/Core/Direction.h>
 
 namespace iDynTree
