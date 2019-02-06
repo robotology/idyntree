@@ -115,26 +115,37 @@ namespace iDynTree {
                 m_solution.clear();
             }
 
-            bool Integrator::evaluateCollocationConstraint(double time, const std::vector<VectorDynSize> &collocationPoints,
-                                                           const std::vector<VectorDynSize> &controlInputs, double dT, VectorDynSize &constraintValue)
+            bool Integrator::evaluateCollocationConstraint(double /*time*/, const std::vector<VectorDynSize> &/*collocationPoints*/,
+                                                           const std::vector<VectorDynSize> &/*controlInputs*/, double /*dT*/, VectorDynSize &/*constraintValue*/)
             {
                 return false;
             }
 
-            bool Integrator::evaluateCollocationConstraintJacobian(double time, const std::vector<VectorDynSize> &collocationPoints,
-                                                                   const std::vector<VectorDynSize> &controlInputs, double dT,
-                                                                   std::vector<MatrixDynSize> &stateJacobianValues,
-                                                                   std::vector<MatrixDynSize> &controlJacobianValues)
+            bool Integrator::evaluateCollocationConstraintJacobian(double /*time*/, const std::vector<VectorDynSize> &/*collocationPoints*/,
+                                                                   const std::vector<VectorDynSize> &/*controlInputs*/, double /*dT*/,
+                                                                   std::vector<MatrixDynSize> &/*stateJacobianValues*/,
+                                                                   std::vector<MatrixDynSize> &/*controlJacobianValues*/)
             {
                 return false;
             }
 
-            bool Integrator::getCollocationConstraintJacobianStateSparsity(std::vector<SparsityStructure> &stateJacobianSparsity)
+            bool Integrator::getCollocationConstraintJacobianStateSparsity(std::vector<SparsityStructure> &/*stateJacobianSparsity*/)
             {
                 return false;
             }
 
-            bool Integrator::getCollocationConstraintJacobianControlSparsity(std::vector<SparsityStructure> &controlJacobianSparsity)
+            bool Integrator::getCollocationConstraintJacobianControlSparsity(std::vector<SparsityStructure> &/*controlJacobianSparsity*/)
+            {
+                return false;
+            }
+
+            bool iDynTree::optimalcontrol::integrators::Integrator::evaluateCollocationConstraintSecondDerivatives(double /*time*/,
+                                                                                                                   const std::vector<VectorDynSize> &/*collocationPoints*/,
+                                                                                                                   const std::vector<VectorDynSize> &/*controlInputs*/,
+                                                                                                                   double /*dT*/, const VectorDynSize &/*lambda*/,
+                                                                                                                   CollocationHessianMap &/*stateSecondDerivative*/,
+                                                                                                                   CollocationHessianMap &/*controlSecondDerivative*/,
+                                                                                                                   CollocationHessianMap &/*stateControlSecondDerivative*/)
             {
                 return false;
             }
@@ -170,6 +181,16 @@ namespace iDynTree {
             bool IntegratorInfo::isExplicit() const {return m_data->isExplicit;}
 
             size_t IntegratorInfo::numberOfStages() const {return m_data->numberOfStages;}
+
+            CollocationHessianIndex::CollocationHessianIndex(size_t first, size_t second)
+                : m_first(first)
+                  , m_second(second)
+            { }
+
+            bool CollocationHessianIndex::operator< (const CollocationHessianIndex& rhs) const {
+
+                return (m_first < rhs.m_first) || ((m_first == rhs.m_first) && (m_second < rhs.m_second));
+            }
 
         }
 

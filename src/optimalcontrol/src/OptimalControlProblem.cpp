@@ -45,6 +45,7 @@ namespace iDynTree {
             std::shared_ptr<ConstraintsGroup> group_ptr;
             VectorDynSize constraintsBuffer;
             MatrixDynSize stateJacobianBuffer, controlJacobianBuffer;
+            VectorDynSize lambdaBuffer;
             SparsityStructure stateSparsity;
             SparsityStructure controlSparsity;
             bool hasStateSparsity = false;
@@ -74,6 +75,7 @@ namespace iDynTree {
             CostsMap costs;
             VectorDynSize costStateJacobianBuffer, costControlJacobianBuffer;
             MatrixDynSize costStateHessianBuffer, costControlHessianBuffer, costMixedHessianBuffer;
+            MatrixDynSize constraintsStateHessianBuffer, constraintsControlHessianBuffer, constraintsMixedHessianBuffer;
             bool stateLowerBounded, stateUpperBounded, controlLowerBounded, controlUpperBounded;
             std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingVector> stateLowerBound, stateUpperBound, controlLowerBound, controlUpperBound; //if they are empty is like there is no bound
             SparsityStructure stateSparsity;
@@ -212,6 +214,7 @@ namespace iDynTree {
                 newGroup->stateJacobianBuffer.resize(groupOfConstraints->constraintsDimension(), static_cast<unsigned int>(m_pimpl->dynamicalSystem->stateSpaceSize()));
                 newGroup->controlJacobianBuffer.resize(groupOfConstraints->constraintsDimension(), static_cast<unsigned int>(m_pimpl->dynamicalSystem->controlSpaceSize()));
             }
+            newGroup->lambdaBuffer.resize(groupOfConstraints->constraintsDimension());
 
             newGroup->hasStateSparsity = groupOfConstraints->constraintJacobianWRTStateSparsity(newGroup->stateSparsity); //needed to allocate memory in advance
             newGroup->hasControlSparsity = groupOfConstraints->constraintJacobianWRTControlSparsity(newGroup->controlSparsity); //needed to allocate memory in advance
@@ -1310,6 +1313,119 @@ namespace iDynTree {
 
             controlSparsity = m_pimpl->controlSparsity;
 
+            return true;
+        }
+
+        bool OptimalControlProblem::constraintSecondPartialDerivativeWRTState(double time, const VectorDynSize &state, const VectorDynSize &control, const VectorDynSize &lambda, MatrixDynSize &hessian)
+        {
+            if ((hessian.rows() != state.size()) || (hessian.cols() != state.size())) {
+                hessian.resize(state.size(), state.size());
+            }
+
+            if ((m_pimpl->constraintsStateHessianBuffer.rows() != state.size()) || (m_pimpl->constraintsStateHessianBuffer.cols() != state.size())) {
+                m_pimpl->constraintsStateHessianBuffer.resize(state.size(), state.size());
+            }
+
+            if (m_pimpl->constraintsGroups.size() == 0) {
+                hessian.zero();
+                return true;
+            }
+
+            bool first = true;
+            Eigen::Index offset = 0;
+
+            for (auto& group : m_pimpl->constraintsGroups){
+                toEigen(group.second->lambdaBuffer) = toEigen(lambda).segment(offset, group.second->group_ptr->constraintsDimension());
+                if (! group.second->group_ptr->constraintSecondPartialDerivativeWRTState(time, state, control, group.second->lambdaBuffer, m_pimpl->constraintsStateHessianBuffer)){
+                    std::ostringstream errorMsg;
+                    errorMsg << "Error while evaluating constraint " << group.second->group_ptr->name() <<".";
+                    reportError("OptimalControlProblem", "constraintSecondPartialDerivativeWRTState", errorMsg.str().c_str());
+                    return false;
+                }
+                if (first){
+                    toEigen(hessian) = toEigen(m_pimpl->constraintsStateHessianBuffer);
+                    first = false;
+                } else {
+                    toEigen(hessian) += toEigen(m_pimpl->constraintsStateHessianBuffer);
+                }
+                offset += group.second->group_ptr->constraintsDimension();
+            }
+
+            return true;
+        }
+
+        bool OptimalControlProblem::constraintSecondPartialDerivativeWRTControl(double time, const VectorDynSize &state, const VectorDynSize &control, const VectorDynSize &lambda, MatrixDynSize &hessian)
+        {
+            if ((hessian.rows() != control.size()) || (hessian.cols() != control.size())) {
+                hessian.resize(control.size(), control.size());
+            }
+
+            if ((m_pimpl->constraintsControlHessianBuffer.rows() != control.size()) || (m_pimpl->constraintsControlHessianBuffer.cols() != control.size())) {
+                m_pimpl->constraintsControlHessianBuffer.resize(control.size(), control.size());
+            }
+
+            if (m_pimpl->constraintsGroups.size() == 0) {
+                hessian.zero();
+                return true;
+            }
+
+            bool first = true;
+            Eigen::Index offset = 0;
+
+            for (auto& group : m_pimpl->constraintsGroups){
+                toEigen(group.second->lambdaBuffer) = toEigen(lambda).segment(offset, group.second->group_ptr->constraintsDimension());
+                if (! group.second->group_ptr->constraintSecondPartialDerivativeWRTControl(time, state, control, group.second->lambdaBuffer, m_pimpl->constraintsControlHessianBuffer)){
+                    std::ostringstream errorMsg;
+                    errorMsg << "Error while evaluating constraint " << group.second->group_ptr->name() <<".";
+                    reportError("OptimalControlProblem", "constraintSecondPartialDerivativeWRTControl", errorMsg.str().c_str());
+                    return false;
+                }
+                if (first){
+                    toEigen(hessian) = toEigen(m_pimpl->constraintsControlHessianBuffer);
+                    first = false;
+                } else {
+                    toEigen(hessian) += toEigen(m_pimpl->constraintsControlHessianBuffer);
+                }
+                offset += group.second->group_ptr->constraintsDimension();
+            }
+            return true;
+        }
+
+        bool OptimalControlProblem::constraintSecondPartialDerivativeWRTStateControl(double time, const VectorDynSize &state, const VectorDynSize &control, const VectorDynSize &lambda, MatrixDynSize &hessian)
+        {
+            if ((hessian.rows() != state.size()) || (hessian.cols() != control.size())) {
+                hessian.resize(state.size(), control.size());
+            }
+
+            if ((m_pimpl->constraintsMixedHessianBuffer.rows() != state.size()) || (m_pimpl->constraintsMixedHessianBuffer.cols() != control.size())) {
+                m_pimpl->constraintsMixedHessianBuffer.resize(state.size(), control.size());
+            }
+
+            if (m_pimpl->constraintsGroups.size() == 0) {
+                hessian.zero();
+                return true;
+            }
+
+            bool first = true;
+            Eigen::Index offset = 0;
+
+            for (auto& group : m_pimpl->constraintsGroups){
+                toEigen(group.second->lambdaBuffer) = toEigen(lambda).segment(offset, group.second->group_ptr->constraintsDimension());
+
+                if (! group.second->group_ptr->constraintSecondPartialDerivativeWRTStateControl(time, state, control, group.second->lambdaBuffer, m_pimpl->constraintsMixedHessianBuffer)){
+                    std::ostringstream errorMsg;
+                    errorMsg << "Error while evaluating constraint " << group.second->group_ptr->name() <<".";
+                    reportError("OptimalControlProblem", "constraintSecondPartialDerivativeWRTStateControl", errorMsg.str().c_str());
+                    return false;
+                }
+                if (first){
+                    toEigen(hessian) = toEigen(m_pimpl->constraintsMixedHessianBuffer);
+                    first = false;
+                } else {
+                    toEigen(hessian) += toEigen(m_pimpl->constraintsMixedHessianBuffer);
+                }
+                offset += group.second->group_ptr->constraintsDimension();
+            }
             return true;
         }
 

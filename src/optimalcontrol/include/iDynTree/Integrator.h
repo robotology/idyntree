@@ -23,6 +23,7 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include <map>
 
 namespace iDynTree {
 
@@ -104,6 +105,22 @@ namespace optimalcontrol {
                  */
                 size_t numberOfStages() const;
             };
+
+
+            class CollocationHessianIndex {
+                size_t m_first;
+                size_t m_second;
+
+            public:
+
+                CollocationHessianIndex() = delete;
+
+                CollocationHessianIndex(size_t first, size_t second);
+
+                bool operator< (const CollocationHessianIndex& rhs) const;
+            };
+
+            using CollocationHessianMap = std::map<CollocationHessianIndex, MatrixDynSize>;
 
             /**
              * @warning This class is still in active development, and so API interface can change between iDynTree versions.
@@ -238,6 +255,13 @@ namespace optimalcontrol {
 
                 virtual bool getCollocationConstraintJacobianControlSparsity(std::vector<SparsityStructure>& controlJacobianSparsity);
 
+
+                virtual bool evaluateCollocationConstraintSecondDerivatives(double time, const std::vector<VectorDynSize>& collocationPoints,
+                                                                            const std::vector<VectorDynSize>& controlInputs, double dT,
+                                                                            const VectorDynSize& lambda,
+                                                                            CollocationHessianMap& stateSecondDerivative,
+                                                                            CollocationHessianMap& controlSecondDerivative,
+                                                                            CollocationHessianMap& stateControlSecondDerivative);
 
                 const IntegratorInfo& info() const;
 

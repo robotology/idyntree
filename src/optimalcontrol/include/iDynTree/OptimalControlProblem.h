@@ -246,6 +246,24 @@ namespace iDynTree {
 
             bool constraintJacobianWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity);
 
+            bool constraintSecondPartialDerivativeWRTState(double time,
+                                                           const VectorDynSize& state,
+                                                           const VectorDynSize& control,
+                                                           const VectorDynSize& lambda,
+                                                           MatrixDynSize& hessian);
+
+            bool constraintSecondPartialDerivativeWRTControl(double time,
+                                                             const VectorDynSize& state,
+                                                             const VectorDynSize& control,
+                                                             const VectorDynSize& lambda,
+                                                             MatrixDynSize& hessian);
+
+            bool constraintSecondPartialDerivativeWRTStateControl(double time,
+                                                                  const VectorDynSize& state,
+                                                                  const VectorDynSize& control,
+                                                                  const VectorDynSize& lambda,
+                                                                  MatrixDynSize& hessian);
+
         private:
             class OptimalControlProblemPimpl;
             OptimalControlProblemPimpl* m_pimpl;

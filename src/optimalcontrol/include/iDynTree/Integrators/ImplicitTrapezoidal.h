@@ -35,6 +35,9 @@ namespace iDynTree {
 
                 VectorDynSize m_computationBuffer, m_computationBuffer2;
                 MatrixDynSize m_identity, m_stateJacBuffer, m_controlJacBuffer;
+                MatrixDynSize m_zeroNxNxBuffer, m_zeroNuNuBuffer, m_zeroNxNuBuffer;
+                MatrixDynSize m_stateHessianBuffer, m_controlHessianBuffer, m_mixedHessianBuffer;
+                VectorDynSize m_lambda;
                 bool m_hasStateSparsity = false;
                 bool m_hasControlSparsity = false;
                 std::vector<SparsityStructure> m_stateJacobianSparsity;
@@ -64,6 +67,13 @@ namespace iDynTree {
                 virtual bool getCollocationConstraintJacobianStateSparsity(std::vector<SparsityStructure>& stateJacobianSparsity) override;
 
                 virtual bool getCollocationConstraintJacobianControlSparsity(std::vector<SparsityStructure>& controlJacobianSparsity) override;
+
+                virtual bool evaluateCollocationConstraintSecondDerivatives(double time, const std::vector<VectorDynSize>& collocationPoints,
+                                                                            const std::vector<VectorDynSize>& controlInputs, double dT,
+                                                                            const VectorDynSize& lambda,
+                                                                            CollocationHessianMap& stateSecondDerivative,
+                                                                            CollocationHessianMap& controlSecondDerivative,
+                                                                            CollocationHessianMap& stateControlSecondDerivative) override;
 
             };
 

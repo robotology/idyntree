@@ -50,6 +50,19 @@ namespace iDynTree {
                 m_stateJacobianSparsity.resize(2);
                 m_controlJacobianSparsity.resize(2);
 
+                m_zeroNxNxBuffer.resize(nx,nx);
+                m_zeroNxNxBuffer.zero();
+                m_zeroNxNuBuffer.resize(nx,nu);
+                m_zeroNxNuBuffer.zero();
+                m_zeroNuNuBuffer.resize(nu,nu);
+                m_zeroNuNuBuffer.zero();
+
+                m_stateHessianBuffer.resize(nx, nx);
+                m_controlHessianBuffer.resize(nu, nu);
+                m_mixedHessianBuffer.resize(nx, nu);
+
+                m_lambda.resize(nx);
+
                 if (m_dynamicalSystem_ptr->dynamicsStateFirstDerivativeSparsity(m_stateJacobianSparsity[0])) {
 
                     for (size_t i = 0; i < m_dynamicalSystem_ptr->stateSpaceSize(); ++i) {
@@ -269,6 +282,100 @@ namespace iDynTree {
                 }
 
                 controlJacobianSparsity = m_controlJacobianSparsity;
+                return true;
+            }
+
+            bool ImplicitTrapezoidal::evaluateCollocationConstraintSecondDerivatives(double time, const std::vector<VectorDynSize> &collocationPoints,
+                                                                                     const std::vector<VectorDynSize> &controlInputs, double dT, const VectorDynSize &lambda,
+                                                                                     iDynTree::optimalcontrol::integrators::CollocationHessianMap &stateSecondDerivative,
+                                                                                     iDynTree::optimalcontrol::integrators::CollocationHessianMap &controlSecondDerivative,
+                                                                                     iDynTree::optimalcontrol::integrators::CollocationHessianMap &stateControlSecondDerivative)
+            {
+                if (!m_dynamicalSystem_ptr){
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintSecondDerivatives", "Dynamical system not set.");
+                    return false;
+                }
+
+                if (collocationPoints.size() != 2){
+                    std::ostringstream errorMsg;
+                    errorMsg << "The size of the matrix containing the collocation point does not match the expected one. Input = ";
+                    errorMsg << collocationPoints.size() << ", Expected = 2.";
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintSecondDerivatives", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (controlInputs.size() != 2){
+                    std::ostringstream errorMsg;
+                    errorMsg << "The size of the matrix containing the control inputs does not match the expected one. Input = ";
+                    errorMsg << controlInputs.size() << ", Expected = 2.";
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintSecondDerivatives", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (!((m_dynamicalSystem_ptr->setControlInput(controlInputs[0])))){
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintJacobian", "Error while setting the control input.");
+                    return false;
+                }
+
+                toEigen(m_lambda) = 0.5 * dT * toEigen(lambda);
+
+                if (!(m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTState(time, collocationPoints[0], controlInputs[0], m_lambda, m_stateHessianBuffer))) {
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintSecondDerivatives",
+                                "Error while evaluating the dynamical system state second derivative.");
+                    return false;
+                }
+
+                stateSecondDerivative[CollocationHessianIndex(0, 0)] = m_stateHessianBuffer;
+
+                stateSecondDerivative[CollocationHessianIndex(0, 1)] = m_zeroNxNxBuffer;
+
+                if (!(m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTState(time + dT, collocationPoints[1], controlInputs[1], m_lambda, m_stateHessianBuffer))) {
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintSecondDerivatives",
+                                "Error while evaluating the dynamical system state second derivative.");
+                    return false;
+                }
+
+                stateSecondDerivative[CollocationHessianIndex(1, 1)] = m_stateHessianBuffer;
+
+                if (!(m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTControl(time, collocationPoints[0], controlInputs[0], m_lambda, m_controlHessianBuffer))) {
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintSecondDerivatives",
+                                "Error while evaluating the dynamical system control second derivative.");
+                    return false;
+                }
+
+                controlSecondDerivative[CollocationHessianIndex(0, 0)] = m_controlHessianBuffer;
+
+                controlSecondDerivative[CollocationHessianIndex(0, 1)] = m_zeroNuNuBuffer;
+
+                if (!(m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTControl(time + dT, collocationPoints[1], controlInputs[1], m_lambda, m_controlHessianBuffer))) {
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintSecondDerivatives",
+                                "Error while evaluating the dynamical system control second derivative.");
+                    return false;
+                }
+
+                controlSecondDerivative[CollocationHessianIndex(1, 1)] = m_controlHessianBuffer;
+
+
+                if (!(m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTStateControl(time, collocationPoints[0], controlInputs[0], m_lambda, m_mixedHessianBuffer))) {
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintSecondDerivatives",
+                                "Error while evaluating the dynamical system second derivative wrt state and control.");
+                    return false;
+                }
+
+                stateControlSecondDerivative[CollocationHessianIndex(0, 0)] = m_mixedHessianBuffer;
+
+                stateControlSecondDerivative[CollocationHessianIndex(0, 1)] = m_zeroNxNuBuffer;
+
+                stateControlSecondDerivative[CollocationHessianIndex(1, 0)] = m_zeroNxNuBuffer;
+
+                if (!(m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTStateControl(time + dT, collocationPoints[1], controlInputs[1], m_lambda, m_mixedHessianBuffer))) {
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintSecondDerivatives",
+                                "Error while evaluating the dynamical system second derivative wrt state and control.");
+                    return false;
+                }
+
+                stateControlSecondDerivative[CollocationHessianIndex(1, 1)] = m_mixedHessianBuffer;
+
                 return true;
             }
 

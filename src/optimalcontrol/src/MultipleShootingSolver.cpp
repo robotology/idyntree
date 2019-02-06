@@ -34,6 +34,7 @@
 #include <cmath>
 #include <string>
 #include <sstream>
+#include <map>
 
 namespace iDynTree {
     namespace optimalcontrol
@@ -85,6 +86,35 @@ namespace iDynTree {
         } MeshPoint;
 
         //MARK: Transcription implementation
+        class HessianBlocksMap {
+            std::map<CollocationHessianIndex, bool> m_map;
+
+        public:
+
+            HessianBlocksMap () { }
+
+            bool& operator()(size_t row, size_t col) {
+                CollocationHessianIndex indices(row, col);
+                auto it = m_map.find(indices);
+
+                if (it == m_map.end()) {
+                    m_map[indices] = false;
+                }
+                return m_map[indices];
+            }
+
+            void clear() {
+                m_map.clear();
+            }
+
+            void reset() {
+                for (auto& it : m_map) {
+                    it.second = false;
+                }
+            }
+
+        };
+
 
         class MultipleShootingSolver::MultipleShootingTranscription : public optimization::OptimizationProblem {
 
@@ -109,6 +139,10 @@ namespace iDynTree {
             std::vector<VectorDynSize> m_collocationStateBuffer, m_collocationControlBuffer;
             std::vector<MatrixDynSize> m_collocationStateJacBuffer, m_collocationControlJacBuffer;
             MatrixDynSize m_constraintsStateJacBuffer, m_constraintsControlJacBuffer;
+            VectorDynSize m_lambdaConstraints, m_lambdaCollocation;
+            MatrixDynSize m_stateHessianBuffer, m_controlHessianBuffer, m_stateControlHessianBuffer;
+            CollocationHessianMap m_stateCollocationHessians, m_controlCollocationHessians, m_stateControCollocationlHessians;
+            HessianBlocksMap m_hessianBlocksSet;
             VectorDynSize m_solution;
             std::shared_ptr<TimeVaryingVector> m_stateGuesses, m_controlGuesses;
             bool m_solved;
@@ -205,13 +239,54 @@ namespace iDynTree {
             }
 
             void addHessianBlock(size_t initRow, size_t rows, size_t initCol, size_t cols){
-                for (size_t i = 0; i < rows; ++i){
-                    for (size_t j = 0; j < cols; ++j){
-                        addNonZero(m_hessianNZRows, m_hessianNonZeros, initRow + i);
-                        addNonZero(m_hessianNZCols, m_hessianNonZeros, initCol + j);
-                        m_hessianNonZeros++;
+                if (!m_hessianBlocksSet(initRow, initCol)) {
+                    for (size_t i = 0; i < rows; ++i){
+                        for (size_t j = 0; j < cols; ++j){
+                            addNonZero(m_hessianNZRows, m_hessianNonZeros, initRow + i);
+                            addNonZero(m_hessianNZCols, m_hessianNonZeros, initCol + j);
+                            m_hessianNonZeros++;
+                        }
                     }
+
+                    m_hessianBlocksSet(initRow, initCol) = true;
                 }
+
+                //add also the transpose
+
+                if (!m_hessianBlocksSet(initCol, initRow)) {
+                    for (size_t i = 0; i < cols; ++i){
+                        for (size_t j = 0; j < rows; ++j){
+                            addNonZero(m_hessianNZRows, m_hessianNonZeros, initCol + i);
+                            addNonZero(m_hessianNZCols, m_hessianNonZeros, initRow + j);
+                            m_hessianNonZeros++;
+                        }
+                    }
+
+                    m_hessianBlocksSet(initCol, initRow) = true;
+                }
+
+            }
+
+            void setHessianBlock(MatrixDynSize& hessian, const MatrixDynSize& block, size_t startRow, size_t startCol) {
+                if (m_hessianBlocksSet(startRow, startCol)) {
+                    toEigen(hessian).block(static_cast<Eigen::Index>(startRow), static_cast<unsigned int>(startCol), block.rows(), block.cols()) += toEigen(block);
+                } else {
+                    toEigen(hessian).block(static_cast<Eigen::Index>(startRow), static_cast<unsigned int>(startCol), block.rows(), block.cols()) = toEigen(block);
+                    m_hessianBlocksSet(startRow, startCol) = true;
+                }
+            }
+
+            void setHessianBlockAndItsTranspose(MatrixDynSize& hessian, const MatrixDynSize& block, size_t startRow, size_t startCol) {
+                setHessianBlock(hessian, block, startRow, startCol);
+
+                if (m_hessianBlocksSet(startCol, startRow)) {
+                    toEigen(hessian).block(static_cast<Eigen::Index>(startCol), static_cast<unsigned int>(startRow), block.cols(), block.rows()) += toEigen(block).transpose();
+                } else {
+                    toEigen(hessian).block(static_cast<Eigen::Index>(startCol), static_cast<unsigned int>(startRow), block.cols(), block.rows()) = toEigen(block).transpose();
+                    m_hessianBlocksSet(startCol, startRow) = true;
+                }
+
+
             }
 
             void mergeSparsityVectors(const std::vector<SparsityStructure>& original, SparsityStructure& merged) {
@@ -335,6 +410,23 @@ namespace iDynTree {
                 if ((m_constraintsControlJacBuffer.rows() != m_constraintsPerInstant) || (m_constraintsControlJacBuffer.cols() != m_nu)) {
                     m_constraintsStateJacBuffer.resize(static_cast<unsigned int>(m_constraintsPerInstant), static_cast<unsigned int>(m_nu));
                 }
+
+                m_lambdaCollocation.resize(static_cast<unsigned int>(m_nx));
+                m_lambdaConstraints.resize(static_cast<unsigned int>(m_constraintsPerInstant));
+                m_stateHessianBuffer.resize(static_cast<unsigned int>(m_nx), static_cast<unsigned int>(m_nx));
+                m_controlHessianBuffer.resize(static_cast<unsigned int>(m_nu), static_cast<unsigned int>(m_nu));
+                m_stateControlHessianBuffer.resize(static_cast<unsigned int>(m_nx), static_cast<unsigned int>(m_nu));
+                m_stateCollocationHessians[CollocationHessianIndex(0,0)] = m_stateHessianBuffer;
+                m_stateCollocationHessians[CollocationHessianIndex(0,1)] = m_stateHessianBuffer;
+                m_stateCollocationHessians[CollocationHessianIndex(1,1)] = m_stateHessianBuffer;
+                m_controlCollocationHessians[CollocationHessianIndex(0,0)] = m_controlHessianBuffer;
+                m_controlCollocationHessians[CollocationHessianIndex(0,1)] = m_controlHessianBuffer;
+                m_controlCollocationHessians[CollocationHessianIndex(1,1)] = m_controlHessianBuffer;
+                m_stateControCollocationlHessians[CollocationHessianIndex(0,0)] = MatrixDynSize(static_cast<unsigned int>(m_nx), static_cast<unsigned int>(m_nu));
+                m_stateControCollocationlHessians[CollocationHessianIndex(0,1)] = MatrixDynSize(static_cast<unsigned int>(m_nx), static_cast<unsigned int>(m_nu));
+                m_stateControCollocationlHessians[CollocationHessianIndex(1,0)] = MatrixDynSize(static_cast<unsigned int>(m_nx), static_cast<unsigned int>(m_nu));
+                m_stateControCollocationlHessians[CollocationHessianIndex(1,1)] = MatrixDynSize(static_cast<unsigned int>(m_nx), static_cast<unsigned int>(m_nu));
+
             }
 
 
@@ -1001,7 +1093,7 @@ namespace iDynTree {
                 m_infoData->costIsNonLinear = !(m_ocproblem->hasOnlyLinearCosts()) && !(m_ocproblem->hasOnlyQuadraticCosts());
                 m_infoData->hasSparseHessian = true;
                 m_infoData->hasSparseConstraintJacobian = true;
-                m_infoData->hessianIsProvided = !(m_infoData->hasNonLinearConstraints);
+                m_infoData->hessianIsProvided = true;
 
                 allocateBuffers();
 
@@ -1026,6 +1118,7 @@ namespace iDynTree {
                 }
 
                 resetNonZerosCount();
+                m_hessianBlocksSet.clear();
 
                 std::vector<MeshPoint>::iterator mesh = m_meshPoints.begin(), previousControlMesh = mesh;
                 size_t index = 0, constraintIndex = 0;
@@ -1072,16 +1165,11 @@ namespace iDynTree {
                         constraintIndex += nc;
 
                         //Saving the hessian structure
-                        //Saving the hessian structure
-                        if (!m_info.costIsLinear() && m_info.hasLinearConstraints()) {
+                        if (!m_info.costIsLinear() || m_info.hasNonLinearConstraints()) {
                             addHessianBlock(mesh->controlIndex, nu, mesh->controlIndex, nu); //assume that a cost/constraint depends on the square of u
                             addHessianBlock(mesh->stateIndex, nx, mesh->stateIndex, nx); //assume that a cost/constraint depends on the square of x
 
                             addHessianBlock(mesh->controlIndex, nu, mesh->stateIndex, nx); //assume that a cost/constraint depends on the product of x-u
-                            addHessianBlock(mesh->stateIndex, nx, mesh->controlIndex, nu);
-
-                            addHessianBlock(mesh->previousControlIndex, nu, mesh->stateIndex, nx); //assume that due to the dynamics we have a cross relation between x and u-1
-                            addHessianBlock(mesh->stateIndex, nx, mesh->previousControlIndex, nu);
                         }
 
                     } else if (mesh->type == MeshPointType::Control) {
@@ -1152,20 +1240,29 @@ namespace iDynTree {
                         constraintIndex += nc;
 
                         //Saving the hessian structure
-                        if (!m_info.costIsLinear() && m_info.hasLinearConstraints()) {
+                        if (!m_info.costIsLinear() || m_info.hasNonLinearConstraints()) {
                             addHessianBlock(mesh->controlIndex, nu, mesh->controlIndex, nu); //assume that a cost/constraint depends on the square of u
+
                             addHessianBlock(mesh->stateIndex, nx, mesh->stateIndex, nx); //assume that a cost/constraint depends on the square of x
 
                             addHessianBlock(mesh->controlIndex, nu, mesh->stateIndex, nx); //assume that a cost/constraint depends on the product of x-u
-                            addHessianBlock(mesh->stateIndex, nx, mesh->controlIndex, nu);
 
-                            addHessianBlock(mesh->previousControlIndex, nu, mesh->stateIndex, nx); //assume that due to the dynamics we have a cross relation between x and u-1
-                            addHessianBlock(mesh->stateIndex, nx, mesh->previousControlIndex, nu);
                         }
 
-                        if (!(m_ocproblem->systemIsLinear())) {
-                            addHessianBlock((mesh - 1)->stateIndex, nx, mesh->stateIndex, nx); //assume that due to the dynamics we have a cross relation between x and x-1
+                        if (!(m_ocproblem->systemIsLinear())) { //if the system is not linear, automatically the above if is true
+
+                            addHessianBlock(mesh->previousControlIndex, nu, mesh->previousControlIndex, nu);
+                            addHessianBlock((mesh-1)->stateIndex, nx, (mesh-1)->stateIndex, nx);
+
                             addHessianBlock(mesh->stateIndex, nx, (mesh - 1)->stateIndex, nx);
+
+                            addHessianBlock(mesh->stateIndex, nx, mesh->previousControlIndex, nu);
+
+                            addHessianBlock(mesh->controlIndex, nu, mesh->previousControlIndex, nu);
+
+                            addHessianBlock(mesh->controlIndex, nu, (mesh - 1)->stateIndex, nx);
+
+                            addHessianBlock(mesh->previousControlIndex, nu, (mesh - 1)->stateIndex, nx);
                         }
 
 
@@ -1231,17 +1328,24 @@ namespace iDynTree {
                         constraintIndex += nc;
 
                         //Saving the hessian structure
-                        if (!m_info.costIsLinear() && m_info.hasLinearConstraints()) {
+                        if (!m_info.costIsLinear() || m_info.hasNonLinearConstraints()) {
                             addHessianBlock(mesh->controlIndex, nu, mesh->controlIndex, nu); //assume that a cost/constraint depends on the square of u
+
                             addHessianBlock(mesh->stateIndex, nx, mesh->stateIndex, nx); //assume that a cost/constraint depends on the square of x
 
                             addHessianBlock(mesh->controlIndex, nu, mesh->stateIndex, nx); //assume that a cost/constraint depends on the product of x-u
-                            addHessianBlock(mesh->stateIndex, nx, mesh->controlIndex, nu);
+
                         }
 
-                        if (!(m_ocproblem->systemIsLinear())) {
-                            addHessianBlock((mesh - 1)->stateIndex, nx, mesh->stateIndex, nx); //assume that due to the dynamics we have a cross relation between x and x-1
+                        if (!(m_ocproblem->systemIsLinear())) { //if the system is not linear, automatically the above if is true
+
+                            addHessianBlock((mesh-1)->stateIndex, nx, (mesh-1)->stateIndex, nx);
+
                             addHessianBlock(mesh->stateIndex, nx, (mesh - 1)->stateIndex, nx);
+
+                            addHessianBlock(mesh->controlIndex, nu, (mesh - 1)->stateIndex, nx);
+
+                            //some blocks are missing since the previous control index and controlIndex coincide
                         }
 
                     }
@@ -1857,13 +1961,139 @@ namespace iDynTree {
             }
 
             virtual bool evaluateConstraintsHessian(const VectorDynSize& constraintsMultipliers, MatrixDynSize& hessian) override {
-                if (m_info.hasNonLinearConstraints()) {
-                    if (!(toEigen(constraintsMultipliers).isZero(0))){
-                        reportError("MultipleShootingTranscription", "evaluateConstraintsHessian", "The constraints hessian is currently unavailable.");
-                        return false;
-                    }
+
+                if (!(m_prepared)){
+                    reportError("MultipleShootingTranscription", "evaluateConstraints", "First you need to call the prepare method");
+                    return false;
                 }
-                hessian.zero();
+
+                if (!m_info.hasNonLinearConstraints()) {
+                    hessian.resize(static_cast<unsigned int>(m_numberOfVariables), static_cast<unsigned int>(m_numberOfVariables));
+                    hessian.zero();
+                    return true;
+                }
+
+                Eigen::Map<Eigen::VectorXd> variablesBuffer = toEigen(m_variablesBuffer);
+                Eigen::Map<Eigen::VectorXd> currentState = toEigen(m_collocationStateBuffer[1]);
+                Eigen::Map<Eigen::VectorXd> previousState = toEigen(m_collocationStateBuffer[0]);
+                Eigen::Map<Eigen::VectorXd> currentControl = toEigen(m_collocationControlBuffer[1]);
+                Eigen::Map<Eigen::VectorXd> previousControl = toEigen(m_collocationControlBuffer[0]);
+                Eigen::Map<Eigen::VectorXd> lambdaCollocation = toEigen(m_lambdaCollocation);
+                Eigen::Map<Eigen::VectorXd> lambdaConstraints = toEigen(m_lambdaConstraints);
+                Eigen::Map<const Eigen::VectorXd> fullLambda = toEigen(constraintsMultipliers);
+
+
+                Eigen::Index nx = static_cast<Eigen::Index>(m_nx);
+                Eigen::Index nu = static_cast<Eigen::Index>(m_nu);
+                Eigen::Index nc = static_cast<Eigen::Index>(m_constraintsPerInstant);
+
+                if ((hessian.rows() != numberOfVariables()) || (hessian.cols() != numberOfVariables())) {
+                    hessian.resize(static_cast<unsigned int>(numberOfVariables()), static_cast<unsigned int>(numberOfVariables()));
+                }
+
+                m_hessianBlocksSet.reset();
+
+                MeshPointOrigin first = MeshPointOrigin::FirstPoint();
+                Eigen::Index constraintIndex = 0;
+                double dT = 0;
+                for (auto mesh = m_meshPoints.begin(); mesh != m_meshPointsEnd; ++mesh){
+
+                    currentState = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx);
+                    currentControl  = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->controlIndex), nu);
+                    previousControl = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->previousControlIndex), nu);
+
+                    if (mesh->origin != first) {
+                        previousState = variablesBuffer.segment(static_cast<Eigen::Index>((mesh - 1)->stateIndex), nx);
+                        lambdaCollocation = fullLambda.segment(constraintIndex, nx);
+                        dT = mesh->time - (mesh - 1)->time;
+
+                        if (!(m_integrator->evaluateCollocationConstraintSecondDerivatives(mesh->time, m_collocationStateBuffer, m_collocationControlBuffer, dT,
+                                                                                           m_lambdaCollocation, m_stateCollocationHessians,
+                                                                                           m_controlCollocationHessians, m_stateControCollocationlHessians))){
+                            std::ostringstream errorMsg;
+                            errorMsg << "Error while evaluating the collocation constraint hessian at time " << mesh->time << ".";
+                            reportError("MultipleShootingTranscription", "evaluateConstraintsHessian", errorMsg.str().c_str());
+                            return false;
+                        }
+
+                        setHessianBlock(hessian, m_stateCollocationHessians[CollocationHessianIndex(0, 0)], (mesh-1)->stateIndex, (mesh-1)->stateIndex);
+                        setHessianBlockAndItsTranspose(hessian, m_stateCollocationHessians[CollocationHessianIndex(0, 1)], (mesh-1)->stateIndex, mesh->stateIndex);
+                        setHessianBlock(hessian, m_stateCollocationHessians[CollocationHessianIndex(1, 1)], mesh->stateIndex, mesh->stateIndex);
+
+                        setHessianBlock(hessian, m_controlCollocationHessians[CollocationHessianIndex(0,0)], mesh->previousControlIndex, mesh->previousControlIndex);
+                        setHessianBlockAndItsTranspose(hessian, m_controlCollocationHessians[CollocationHessianIndex(0,1)], mesh->previousControlIndex, mesh->controlIndex);
+                        setHessianBlock(hessian, m_controlCollocationHessians[CollocationHessianIndex(1,1)], mesh->controlIndex, mesh->controlIndex);
+
+                        setHessianBlockAndItsTranspose(hessian, m_stateControCollocationlHessians[CollocationHessianIndex(0,0)], (mesh-1)->stateIndex, mesh->previousControlIndex);
+                        setHessianBlockAndItsTranspose(hessian, m_stateControCollocationlHessians[CollocationHessianIndex(0,1)], (mesh-1)->stateIndex, mesh->controlIndex);
+                        setHessianBlockAndItsTranspose(hessian, m_stateControCollocationlHessians[CollocationHessianIndex(1,0)], mesh->stateIndex, mesh->previousControlIndex);
+                        setHessianBlockAndItsTranspose(hessian, m_stateControCollocationlHessians[CollocationHessianIndex(1,1)], mesh->stateIndex, mesh->controlIndex);
+
+                        constraintIndex += nx;
+                    }
+
+
+                    if (nc != 0) {
+                        if (mesh->origin == first) {
+
+                            lambdaConstraints = fullLambda.segment(constraintIndex, nc);
+
+                            if (!(m_ocproblem->constraintSecondPartialDerivativeWRTStateControl(mesh->time, m_integrator->dynamicalSystem().lock()->initialState(), m_collocationControlBuffer[1], m_lambdaConstraints, m_stateControlHessianBuffer))){
+                                std::ostringstream errorMsg;
+                                errorMsg << "Error while evaluating the constraints hessian wrt state and control at time " << mesh->time << ".";
+                                reportError("MultipleShootingTranscription", "evaluateConstraintsHessian", errorMsg.str().c_str());
+                                return false;
+                            }
+
+                            setHessianBlockAndItsTranspose(hessian, m_stateControlHessianBuffer, mesh->stateIndex, mesh->controlIndex);
+
+                            if (!(m_ocproblem->constraintSecondPartialDerivativeWRTControl(mesh->time, m_integrator->dynamicalSystem().lock()->initialState(), m_collocationControlBuffer[1], m_lambdaConstraints, m_controlHessianBuffer))){
+                                std::ostringstream errorMsg;
+                                errorMsg << "Error while evaluating the constraints hessian wrt control at time " << mesh->time << ".";
+                                reportError("MultipleShootingTranscription", "evaluateConstraintsHessian", errorMsg.str().c_str());
+                                return false;
+                            }
+
+                            setHessianBlock(hessian, m_controlHessianBuffer, mesh->controlIndex, mesh->controlIndex);
+
+                        } else {
+
+                            lambdaConstraints = fullLambda.segment(constraintIndex, nc);
+
+                            if (!(m_ocproblem->constraintSecondPartialDerivativeWRTState(mesh->time, m_collocationStateBuffer[1], m_collocationControlBuffer[1], m_lambdaConstraints, m_stateHessianBuffer))){
+                                std::ostringstream errorMsg;
+                                errorMsg << "Error while evaluating the constraints hessian wrt state at time " << mesh->time << ".";
+                                reportError("MultipleShootingTranscription", "evaluateConstraintsHessian", errorMsg.str().c_str());
+                                return false;
+                            }
+
+                            setHessianBlock(hessian, m_stateHessianBuffer, mesh->stateIndex, mesh->stateIndex);
+
+                            if (!(m_ocproblem->constraintSecondPartialDerivativeWRTStateControl(mesh->time, m_collocationStateBuffer[1], m_collocationControlBuffer[1], m_lambdaConstraints, m_stateControlHessianBuffer))){
+                                std::ostringstream errorMsg;
+                                errorMsg << "Error while evaluating the constraints hessian wrt state and control at time " << mesh->time << ".";
+                                reportError("MultipleShootingTranscription", "evaluateConstraintsHessian", errorMsg.str().c_str());
+                                return false;
+                            }
+
+                            setHessianBlockAndItsTranspose(hessian, m_stateControlHessianBuffer, mesh->stateIndex, mesh->controlIndex);
+
+                            if (!(m_ocproblem->constraintSecondPartialDerivativeWRTControl(mesh->time, m_collocationStateBuffer[1], m_collocationControlBuffer[1], m_lambdaConstraints, m_controlHessianBuffer))){
+                                std::ostringstream errorMsg;
+                                errorMsg << "Error while evaluating the constraints hessian wrt control at time " << mesh->time << ".";
+                                reportError("MultipleShootingTranscription", "evaluateConstraintsHessian", errorMsg.str().c_str());
+                                return false;
+                            }
+
+                            setHessianBlock(hessian, m_controlHessianBuffer, mesh->controlIndex, mesh->controlIndex);
+
+                        }
+                        constraintIndex += nc;
+                    }
+
+                }
+                assert(static_cast<size_t>(constraintIndex) == m_numberOfConstraints);
+
                 return true;
             }
         };

@@ -185,6 +185,58 @@ namespace optimalcontrol {
          */
         virtual bool dynamicsControlFirstDerivativeSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity);
 
+        /**
+         * @brief Evaluate the dynamics second partial derivative wrt the state variables
+         *
+         * It is the result of \f$\frac{\partial^2 f(t, x, u)}{\partial x^2}\f$
+         * @param[in] time The time at which the partial derivative is computed.
+         * @param[in] state The state value at which the partial derivative is computed.
+         * @param[in] control The control value at which the partial derivative is computed.
+         * @param[in] lambda The associated lagrange multipliers
+         * @param[out] partialDerivative The output partial derivative.
+         * @return True if successfull, false otherwise (or if not implemented).
+         */
+        virtual bool dynamicsSecondPartialDerivativeWRTState(double time,
+                                                             const iDynTree::VectorDynSize& state,
+                                                             const iDynTree::VectorDynSize& control,
+                                                             const VectorDynSize& lambda,
+                                                             iDynTree::MatrixDynSize& partialDerivative);
+
+        /**
+         * @brief Evaluate the dynamics second partial derivative wrt the control
+         *
+         * It is the result of \f$\frac{\partial^2 f(t, x, u)}{\partial u^2}\f$
+         * @param[in] time The time at which the partial derivative is computed.
+         * @param[in] state The state value at which the partial derivative is computed.
+         * @param[in] control The control value at which the partial derivative is computed.
+         * @param[in] lambda The associated lagrange multipliers
+         * @param[out] partialDerivative The output partial derivative.
+         * @return True if successfull, false otherwise (or if not implemented).
+         */
+        virtual bool dynamicsSecondPartialDerivativeWRTControl(double time,
+                                                               const iDynTree::VectorDynSize& state,
+                                                               const iDynTree::VectorDynSize& control,
+                                                               const VectorDynSize& lambda,
+                                                               iDynTree::MatrixDynSize& partialDerivative);
+
+        /**
+         * @brief Evaluate the dynamics second partial derivative wrt the state and control
+         *
+         * It is the result of \f$\frac{\partial^2 f(t, x, u)}{\partial x \partial u}\f$,
+         * thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs.
+         * @param[in] time The time at which the partial derivative is computed.
+         * @param[in] state The state value at which the partial derivative is computed.
+         * @param[in] control The control value at which the partial derivative is computed.
+         * @param[in] lambda The associated lagrange multipliers
+         * @param[out] partialDerivative The output partial derivative.
+         * @return True if successfull, false otherwise (or if not implemented).
+         */
+        virtual bool dynamicsSecondPartialDerivativeWRTStateControl(double time,
+                                                                    const iDynTree::VectorDynSize& state,
+                                                                    const iDynTree::VectorDynSize& control,
+                                                                    const VectorDynSize& lambda,
+                                                                    iDynTree::MatrixDynSize& partialDerivative);
+
     private:
         size_t m_stateSize;
         size_t m_controlSize;

@@ -38,6 +38,7 @@ namespace optimalcontrol {
             VectorDynSize constraintBuffer;
             MatrixDynSize stateJacobianBuffer;
             MatrixDynSize controlJacobianBuffer;
+            VectorDynSize lambdaBuffer;
         }TimedConstraint;
 
         typedef std::shared_ptr<TimedConstraint> TimedConstraint_ptr;
@@ -109,6 +110,8 @@ namespace optimalcontrol {
                 newConstraint->constraintBuffer.resize(static_cast<unsigned int>(constraint->constraintSize()));
                 newConstraint->stateJacobianBuffer.resize(static_cast<unsigned int>(constraint->constraintSize()), static_cast<unsigned int>(constraint->expectedStateSpaceSize()));
                 newConstraint->controlJacobianBuffer.resize(static_cast<unsigned int>(constraint->constraintSize()), static_cast<unsigned int>(constraint->expectedControlSpaceSize()));
+                newConstraint->lambdaBuffer.resize(static_cast<unsigned int>(constraint->constraintSize()));
+
 
                 std::pair< GroupOfConstraintsMap::iterator, bool> result;
                 result = group.insert(GroupOfConstraintsMap::value_type(constraint->name(), newConstraint));
@@ -564,6 +567,192 @@ namespace optimalcontrol {
             }
 
             controlSparsity = m_pimpl->groupControlSparsity;
+
+            return true;
+        }
+
+        bool ConstraintsGroup::constraintSecondPartialDerivativeWRTState(double time, const VectorDynSize &state, const VectorDynSize &control, const VectorDynSize &lambda, MatrixDynSize &hessian)
+        {
+            if (isAnyTimeGroup()){
+                TimedConstraint_ptr loneConstraint = m_pimpl->group.begin()->second;
+                if (!(loneConstraint->constraint->constraintSecondPartialDerivativeWRTState(time, state, control, lambda, hessian))) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Failed to evaluate "<< loneConstraint->constraint->name() << std::endl;
+                    reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTState", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (hessian.rows() != state.size()) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The second partial derivative WRT the state of constraint "<< loneConstraint->constraint->name() << " has a number of rows different from the size of the state." << std::endl;
+                    reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTState", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (hessian.cols() != state.size()) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The second partial derivative WRT the state of constraint "<< loneConstraint->constraint->name() << " has a number of columns different from the size of the state." << std::endl;
+                    reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTState", errorMsg.str().c_str());
+                    return false;
+                }
+
+                return true;
+            }
+
+            hessian.resize(state.size(), state.size());
+
+            std::vector< TimedConstraint_ptr >::reverse_iterator constraintIterator = m_pimpl->findActiveConstraint(time);
+            if (constraintIterator == m_pimpl->orderedIntervals.rend()){ //no active constraint
+                toEigen(hessian).setZero();
+                return true;
+            }
+
+            toEigen(constraintIterator->get()->lambdaBuffer) = toEigen(lambda).topRows(constraintIterator->get()->lambdaBuffer.size());
+
+            if (!(constraintIterator->get()->constraint->constraintSecondPartialDerivativeWRTState(time, state, control, lambda, hessian))) {
+                std::ostringstream errorMsg;
+                errorMsg << "Failed to evaluate "<< constraintIterator->get()->constraint->name() << std::endl;
+                reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTState", errorMsg.str().c_str());
+                return false;
+            }
+
+            if (hessian.rows() != state.size()) {
+                std::ostringstream errorMsg;
+                errorMsg << "The second partial derivative WRT the state of constraint "<< constraintIterator->get()->constraint->name() << " has a number of rows different from the size of the state." << std::endl;
+                reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTState", errorMsg.str().c_str());
+                return false;
+            }
+
+            if (hessian.cols() != state.size()) {
+                std::ostringstream errorMsg;
+                errorMsg << "The second partial derivative WRT the state of constraint "<< constraintIterator->get()->constraint->name() << " has a number of columns different from the size of the state." << std::endl;
+                reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTState", errorMsg.str().c_str());
+                return false;
+            }
+
+            return true;
+        }
+
+        bool ConstraintsGroup::constraintSecondPartialDerivativeWRTControl(double time, const VectorDynSize &state, const VectorDynSize &control, const VectorDynSize &lambda, MatrixDynSize &hessian)
+        {
+            if (isAnyTimeGroup()){
+                TimedConstraint_ptr loneConstraint = m_pimpl->group.begin()->second;
+                if (!(loneConstraint->constraint->constraintSecondPartialDerivativeWRTControl(time, state, control, lambda, hessian))) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Failed to evaluate "<< loneConstraint->constraint->name() << std::endl;
+                    reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTControl", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (hessian.rows() != control.size()) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The second partial derivative WRT the control of constraint "<< loneConstraint->constraint->name() << " has a number of rows different from the size of the control." << std::endl;
+                    reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTControl", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (hessian.cols() != control.size()) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The second partial derivative WRT the control of constraint "<< loneConstraint->constraint->name() << " has a number of columns different from the size of the control." << std::endl;
+                    reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTControl", errorMsg.str().c_str());
+                    return false;
+                }
+
+                return true;
+            }
+
+            hessian.resize(control.size(), control.size());
+
+            std::vector< TimedConstraint_ptr >::reverse_iterator constraintIterator = m_pimpl->findActiveConstraint(time);
+            if (constraintIterator == m_pimpl->orderedIntervals.rend()){ //no active constraint
+                toEigen(hessian).setZero();
+                return true;
+            }
+
+            toEigen(constraintIterator->get()->lambdaBuffer) = toEigen(lambda).topRows(constraintIterator->get()->lambdaBuffer.size());
+
+            if (!(constraintIterator->get()->constraint->constraintSecondPartialDerivativeWRTControl(time, state, control, lambda, hessian))) {
+                std::ostringstream errorMsg;
+                errorMsg << "Failed to evaluate "<< constraintIterator->get()->constraint->name() << std::endl;
+                reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTControl", errorMsg.str().c_str());
+                return false;
+            }
+
+            if (hessian.rows() != control.size()) {
+                std::ostringstream errorMsg;
+                errorMsg << "The second partial derivative WRT the control of constraint "<< constraintIterator->get()->constraint->name() << " has a number of rows different from the size of the control." << std::endl;
+                reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTControl", errorMsg.str().c_str());
+                return false;
+            }
+
+            if (hessian.cols() != control.size()) {
+                std::ostringstream errorMsg;
+                errorMsg << "The second partial derivative WRT the control of constraint "<< constraintIterator->get()->constraint->name() << " has a number of columns different from the size of the control." << std::endl;
+                reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTControl", errorMsg.str().c_str());
+                return false;
+            }
+
+            return true;
+        }
+
+        bool ConstraintsGroup::constraintSecondPartialDerivativeWRTStateControl(double time, const VectorDynSize &state, const VectorDynSize &control, const VectorDynSize &lambda, MatrixDynSize &hessian)
+        {
+            if (isAnyTimeGroup()){
+                TimedConstraint_ptr loneConstraint = m_pimpl->group.begin()->second;
+                if (!(loneConstraint->constraint->constraintSecondPartialDerivativeWRTStateControl(time, state, control, lambda, hessian))) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Failed to evaluate "<< loneConstraint->constraint->name() << std::endl;
+                    reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTStateControl", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (hessian.rows() != state.size()) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The second partial derivative WRT state/control of constraint "<< loneConstraint->constraint->name() << " has a number of rows different from the size of the state." << std::endl;
+                    reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTStateControl", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (hessian.cols() != control.size()) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The second partial derivative WRT state/control of constraint "<< loneConstraint->constraint->name() << " has a number of columns different from the size of the control." << std::endl;
+                    reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTStateControl", errorMsg.str().c_str());
+                    return false;
+                }
+
+                return true;
+            }
+
+            hessian.resize(state.size(), state.size());
+
+            std::vector< TimedConstraint_ptr >::reverse_iterator constraintIterator = m_pimpl->findActiveConstraint(time);
+            if (constraintIterator == m_pimpl->orderedIntervals.rend()){ //no active constraint
+                toEigen(hessian).setZero();
+                return true;
+            }
+
+            toEigen(constraintIterator->get()->lambdaBuffer) = toEigen(lambda).topRows(constraintIterator->get()->lambdaBuffer.size());
+
+            if (!(constraintIterator->get()->constraint->constraintSecondPartialDerivativeWRTStateControl(time, state, control, lambda, hessian))) {
+                std::ostringstream errorMsg;
+                errorMsg << "Failed to evaluate "<< constraintIterator->get()->constraint->name() << std::endl;
+                reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTStateControl", errorMsg.str().c_str());
+                return false;
+            }
+
+            if (hessian.rows() != state.size()) {
+                std::ostringstream errorMsg;
+                errorMsg << "The second partial derivative WRT state/control of constraint "<< constraintIterator->get()->constraint->name() << " has a number of rows different from the size of the state." << std::endl;
+                reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTStateControl", errorMsg.str().c_str());
+                return false;
+            }
+
+            if (hessian.cols() != control.size()) {
+                std::ostringstream errorMsg;
+                errorMsg << "The second partial derivative WRT state/control of constraint "<< constraintIterator->get()->constraint->name() << " has a number of columns different from the size of the control." << std::endl;
+                reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTStateControl", errorMsg.str().c_str());
+                return false;
+            }
 
             return true;
         }

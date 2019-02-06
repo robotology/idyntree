@@ -181,6 +181,60 @@ namespace iDynTree {
              */
             virtual bool constraintJacobianWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity);
 
+            /**
+             * @brief Evaluate constraint second partial derivative wrt the state variables
+             *
+             * It is the result of \f$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial x^2}\f$
+             * @param[in] time The time at which the partial derivative is computed.
+             * @param[in] state The state value at which the partial derivative is computed.
+             * @param[in] control The control value at which the partial derivative is computed..
+             * @param[in] lambda The lagrange multipliers
+             * @param[out] hessian The output partial derivative.
+             * @return True if successfull, false otherwise (or if not implemented).
+             */
+            virtual bool constraintSecondPartialDerivativeWRTState(double time,
+                                                                   const VectorDynSize& state,
+                                                                   const VectorDynSize& control,
+                                                                   const VectorDynSize& lambda,
+                                                                   MatrixDynSize& hessian);
+
+
+            /**
+             * @brief Evaluate constraint second partial derivative wrt the control
+             *
+             * It is the result of \f$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial u^2}\f$
+             * @param[in] time The time at which the partial derivative is computed.
+             * @param[in] state The state value at which the partial derivative is computed.
+             * @param[in] control The control value at which the partial derivative is computed.
+             * @param[in] lambda The lagrange multipliers
+             * @param[out] hessian The output partial derivative.
+             * @return True if successfull, false otherwise (or if not implemented).
+             */
+            virtual bool constraintSecondPartialDerivativeWRTControl(double time,
+                                                                     const VectorDynSize& state,
+                                                                     const VectorDynSize& control,
+                                                                     const VectorDynSize& lambda,
+                                                                     MatrixDynSize& hessian);
+
+
+            /**
+             * @brief Evaluate constraint second partial derivative wrt the state and control
+             *
+             * It is the result of \f$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial x \partial u}\f$,
+             * thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs.
+             * @param[in] time The time at which the partial derivative is computed.
+             * @param[in] state The state value at which the partial derivative is computed.
+             * @param[in] control The control value at which the partial derivative is computed.
+             * @param[in] lambda The lagrange multipliers
+             * @param[out] hessian The output partial derivative.
+             * @return True if successfull, false otherwise (or if not implemented).
+             */
+            virtual bool constraintSecondPartialDerivativeWRTStateControl(double time,
+                                                                          const VectorDynSize& state,
+                                                                          const VectorDynSize& control,
+                                                                          const VectorDynSize& lambda,
+                                                                          MatrixDynSize& hessian);
+
 
         private:
             size_t m_constraintSize;
