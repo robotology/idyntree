@@ -65,6 +65,8 @@ namespace iDynTree {
 
             virtual double plusInfinity() override;
 
+            void useApproximatedHessians(bool useApproximatedHessian = true);
+
             bool setIpoptOption(const std::string &tag, const std::string &value);
 
             bool setIpoptOption(const std::string &tag, double value);

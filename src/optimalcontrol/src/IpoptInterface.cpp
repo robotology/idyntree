@@ -462,6 +462,7 @@ namespace iDynTree {
             Ipopt::SmartPtr<Ipopt::IpoptApplication> loader;
             unsigned int previousNumberOfVariables, previousNumberOfConstraints;
             size_t previousJacobianNonZeros, previousHessianNonZeros;
+            bool useApproximatedHessian;
 
             IpoptInterfaceImplementation()
             : nlpPointer(new NLPImplementation())
@@ -470,6 +471,7 @@ namespace iDynTree {
             , previousNumberOfConstraints(0)
             , previousJacobianNonZeros(0)
             , previousHessianNonZeros(0)
+            , useApproximatedHessian(false)
             {
             }
 
@@ -532,7 +534,7 @@ namespace iDynTree {
 
             m_pimpl->nlpPointer->numberOfConstraints = m_problem->numberOfConstraints();
 
-            if (!(m_problem->info().hessianIsProvided())) {
+            if (!(m_problem->info().hessianIsProvided()) || (m_pimpl->useApproximatedHessian)) {
                 m_pimpl->loader->Options()->SetStringValue("hessian_approximation", "limited-memory");
             }
 
@@ -694,6 +696,11 @@ namespace iDynTree {
                 return Optimizer::plusInfinity();
             }
             return static_cast<double>(output);
+        }
+
+        void IpoptInterface::useApproximatedHessians(bool useApproximatedHessian)
+        {
+            m_pimpl->useApproximatedHessian = useApproximatedHessian;
         }
 
         bool IpoptInterface::setIpoptOption(const std::string &tag, const std::string &value)

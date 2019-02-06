@@ -83,6 +83,11 @@ double IpoptInterface::plusInfinity()
     return Optimizer::plusInfinity();
 }
 
+void IpoptInterface::useApproximatedHessians(bool useApproximatedHessian)
+{
+    reportError("IpoptInterface", "useApproximatedHessians", "IpoptInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");
+}
+
 bool IpoptInterface::setIpoptOption(const std::string &tag, const std::string &value)
 {
     reportError("IpoptInterface", "setIpoptOption", "IpoptInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_IPOPT set to ON?");

@@ -63,6 +63,8 @@ namespace iDynTree {
 
             virtual double plusInfinity() override;
 
+            void useApproximatedHessians(bool useApproximatedHessian = true);
+
             bool setWorhpParam(const std::string &paramName, bool value);
 
             bool setWorhpParam(const std::string &paramName, double value);

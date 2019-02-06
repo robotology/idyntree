@@ -84,6 +84,11 @@ double WorhpInterface::plusInfinity()
     return Optimizer::plusInfinity();
 }
 
+void WorhpInterface::useApproximatedHessians(bool useApproximatedHessian)
+{
+    reportError("WorhpInterface", "useApproximatedHessians", "WorhpInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_WORHP set to ON?");
+}
+
 bool WorhpInterface::setWorhpParam(const std::string &paramName, bool value)
 {
     reportError("WorhpInterface", "setWorhpParam", "WorhpInterface not implemented. Have you compiled iDynTree with the IDYNTREE_USES_WORHP set to ON?");

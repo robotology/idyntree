@@ -95,12 +95,13 @@ namespace iDynTree {
 
             bool& operator()(size_t row, size_t col) {
                 CollocationHessianIndex indices(row, col);
-                auto it = m_map.find(indices);
+                std::map<CollocationHessianIndex, bool>::iterator it = m_map.find(indices);
 
                 if (it == m_map.end()) {
-                    m_map[indices] = false;
+                    std::pair<std::map<CollocationHessianIndex, bool>::iterator, bool> result = m_map.insert(std::make_pair(indices, false));
+                    it = result.first;
                 }
-                return m_map[indices];
+                return it->second;
             }
 
             void clear() {

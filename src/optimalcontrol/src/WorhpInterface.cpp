@@ -71,6 +71,7 @@ public:
     bool sparseJacobian, sparseHessian;
     bool previouslySolved;
     bool firstTime;
+    bool useApproximatedHessian;
 
 
     void resizeBuffers(unsigned int numberOfVariables, unsigned int numberOfConstraints) {
@@ -120,6 +121,7 @@ WorhpInterface::WorhpInterface()
     CHECK_WORHP_VERSION;
     m_pimpl->previouslySolved = false;
     m_pimpl->firstTime = true;
+    m_pimpl->useApproximatedHessian = false;
     /*
     * Parameter initialisation routine
     */
@@ -202,7 +204,7 @@ bool WorhpInterface::solve()
         m_pimpl->sparseJacobian = false;
     }
 
-    if (!(m_problem->info().hessianIsProvided())) {
+    if (!(m_problem->info().hessianIsProvided()) || (m_pimpl->useApproximatedHessian)) {
         if (!setWorhpParam("UserHM", false)) {
             reportError("WorhpInterface", "solve", "Failed to set UserHM option.");
             m_pimpl->previouslySolved = false;
@@ -774,6 +776,11 @@ double WorhpInterface::minusInfinity()
 double WorhpInterface::plusInfinity()
 {
     return m_pimpl->worhp.par.Infty;
+}
+
+void WorhpInterface::useApproximatedHessians(bool useApproximatedHessian)
+{
+    m_pimpl->useApproximatedHessian = useApproximatedHessian;
 }
 
 bool WorhpInterface::setWorhpParam(const std::string &paramName, bool value)
