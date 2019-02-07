@@ -723,7 +723,7 @@ namespace optimalcontrol {
                 return true;
             }
 
-            hessian.resize(state.size(), state.size());
+            hessian.resize(state.size(), control.size());
 
             std::vector< TimedConstraint_ptr >::reverse_iterator constraintIterator = m_pimpl->findActiveConstraint(time);
             if (constraintIterator == m_pimpl->orderedIntervals.rend()){ //no active constraint

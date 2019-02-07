@@ -78,6 +78,25 @@ namespace iDynTree {
 
             virtual bool constraintJacobianWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) final;
 
+            virtual bool constraintSecondPartialDerivativeWRTState(double time,
+                                                                   const VectorDynSize& state,
+                                                                   const VectorDynSize& control,
+                                                                   const VectorDynSize& lambda,
+                                                                   MatrixDynSize& hessian) final;
+
+            virtual bool constraintSecondPartialDerivativeWRTControl(double time,
+                                                                     const VectorDynSize& state,
+                                                                     const VectorDynSize& control,
+                                                                     const VectorDynSize& lambda,
+                                                                     MatrixDynSize& hessian) final;
+
+
+            virtual bool constraintSecondPartialDerivativeWRTStateControl(double time,
+                                                                          const VectorDynSize& state,
+                                                                          const VectorDynSize& control,
+                                                                          const VectorDynSize& lambda,
+                                                                          MatrixDynSize& hessian) final;
+
         private:
             class LinearConstraintImplementation;
             LinearConstraintImplementation* m_pimpl;

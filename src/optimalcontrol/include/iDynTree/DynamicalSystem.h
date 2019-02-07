@@ -199,7 +199,7 @@ namespace optimalcontrol {
         virtual bool dynamicsSecondPartialDerivativeWRTState(double time,
                                                              const iDynTree::VectorDynSize& state,
                                                              const iDynTree::VectorDynSize& control,
-                                                             const VectorDynSize& lambda,
+                                                             const iDynTree::VectorDynSize& lambda,
                                                              iDynTree::MatrixDynSize& partialDerivative);
 
         /**
@@ -216,7 +216,7 @@ namespace optimalcontrol {
         virtual bool dynamicsSecondPartialDerivativeWRTControl(double time,
                                                                const iDynTree::VectorDynSize& state,
                                                                const iDynTree::VectorDynSize& control,
-                                                               const VectorDynSize& lambda,
+                                                               const iDynTree::VectorDynSize& lambda,
                                                                iDynTree::MatrixDynSize& partialDerivative);
 
         /**
@@ -234,7 +234,7 @@ namespace optimalcontrol {
         virtual bool dynamicsSecondPartialDerivativeWRTStateControl(double time,
                                                                     const iDynTree::VectorDynSize& state,
                                                                     const iDynTree::VectorDynSize& control,
-                                                                    const VectorDynSize& lambda,
+                                                                    const iDynTree::VectorDynSize& lambda,
                                                                     iDynTree::MatrixDynSize& partialDerivative);
 
     private:

@@ -37,7 +37,7 @@ public:
     TestSystem() : iDynTree::optimalcontrol::DynamicalSystem(2,3) {}
     ~TestSystem() override;
 
-    virtual bool dynamics(const iDynTree::VectorDynSize &state, double time, iDynTree::VectorDynSize &stateDynamics) override {
+    virtual bool dynamics(const iDynTree::VectorDynSize &state, double /*time*/, iDynTree::VectorDynSize &stateDynamics) override {
         if (state.size() != 2)
             return false;
 
@@ -49,7 +49,7 @@ public:
     }
 
     virtual bool dynamicsStateFirstDerivative(const iDynTree::VectorDynSize& state,
-                                              double time,
+                                              double /*time*/,
                                               iDynTree::MatrixDynSize& dynamicsDerivative) override {
         if (state.size() != 2)
             return false;
@@ -63,7 +63,7 @@ public:
     }
 
     virtual bool dynamicsControlFirstDerivative(const iDynTree::VectorDynSize& state,
-                                                double time,
+                                                double /*time*/,
                                                 iDynTree::MatrixDynSize& dynamicsDerivative) override {
         if (state.size() != 2)
             return false;
@@ -94,6 +94,36 @@ public:
         controlSparsity = sparsity;
         return true;
     }
+
+    virtual bool dynamicsSecondPartialDerivativeWRTState(double /*time*/,
+                                                         const iDynTree::VectorDynSize& state,
+                                                         const iDynTree::VectorDynSize& /*control*/,
+                                                         const iDynTree::VectorDynSize& /*lambda*/,
+                                                         iDynTree::MatrixDynSize& partialDerivative) override {
+        partialDerivative.resize(state.size(), state.size());
+        partialDerivative.zero();
+        return true;
+    }
+
+    virtual bool dynamicsSecondPartialDerivativeWRTControl(double /*time*/,
+                                                           const iDynTree::VectorDynSize& /*state*/,
+                                                           const iDynTree::VectorDynSize& control,
+                                                           const iDynTree::VectorDynSize& /*lambda*/,
+                                                           iDynTree::MatrixDynSize& partialDerivative) override {
+        partialDerivative.resize(control.size(), control.size());
+        partialDerivative.zero();
+        return true;
+    }
+
+    virtual bool dynamicsSecondPartialDerivativeWRTStateControl(double /*time*/,
+                                                                const iDynTree::VectorDynSize& state,
+                                                                const iDynTree::VectorDynSize& control,
+                                                                const iDynTree::VectorDynSize& /*lambda*/,
+                                                                iDynTree::MatrixDynSize& partialDerivative) override {
+        partialDerivative.resize(state.size(), control.size());
+        partialDerivative.zero();
+        return true;
+    }
 };
 TestSystem::~TestSystem(){};
 
@@ -115,7 +145,7 @@ public:
     }
     virtual ~TestConstraint() override;
 
-    virtual bool evaluateConstraint(double time,
+    virtual bool evaluateConstraint(double /*time*/,
                                     const iDynTree::VectorDynSize& state,
                                     const iDynTree::VectorDynSize& control,
                                     iDynTree::VectorDynSize& constraint) override {
@@ -132,18 +162,18 @@ public:
         return true;
     }
 
-    virtual bool constraintJacobianWRTState(double time,
-                                            const iDynTree::VectorDynSize& state,
-                                            const iDynTree::VectorDynSize& control,
+    virtual bool constraintJacobianWRTState(double /*time*/,
+                                            const iDynTree::VectorDynSize& /*state*/,
+                                            const iDynTree::VectorDynSize& /*control*/,
                                             iDynTree::MatrixDynSize& jacobian) override {
         ASSERT_IS_TRUE((jacobian.rows() == 1) && (jacobian.cols() == 2));
         jacobian.zero();
         return true;
     }
 
-    virtual bool constraintJacobianWRTControl(double time,
-                                              const iDynTree::VectorDynSize& state,
-                                              const iDynTree::VectorDynSize& control,
+    virtual bool constraintJacobianWRTControl(double /*time*/,
+                                              const iDynTree::VectorDynSize& /*state*/,
+                                              const iDynTree::VectorDynSize& /*control*/,
                                               iDynTree::MatrixDynSize& jacobian) override {
         ASSERT_IS_TRUE((jacobian.rows() == 1) && (jacobian.cols() == 3));
         jacobian.zero();
@@ -171,6 +201,36 @@ public:
         controlSparsity = sparsity;
         return true;
     }
+
+    virtual bool constraintSecondPartialDerivativeWRTState(double /*time*/,
+                                                           const iDynTree::VectorDynSize& state,
+                                                           const iDynTree::VectorDynSize& /*control*/,
+                                                           const iDynTree::VectorDynSize& /*lambda*/,
+                                                           iDynTree::MatrixDynSize& hessian) override {
+        hessian.resize(state.size(), state.size());
+        hessian.zero();
+        return true;
+    }
+
+    virtual bool constraintSecondPartialDerivativeWRTControl(double /*time*/,
+                                                             const iDynTree::VectorDynSize& /*state*/,
+                                                             const iDynTree::VectorDynSize& control,
+                                                             const iDynTree::VectorDynSize& /*lambda*/,
+                                                             iDynTree::MatrixDynSize& hessian) override {
+        hessian.resize(control.size(), control.size());
+        hessian.zero();
+        return true;
+    }
+
+    virtual bool constraintSecondPartialDerivativeWRTStateControl(double /*time*/,
+                                                                  const iDynTree::VectorDynSize& state,
+                                                                  const iDynTree::VectorDynSize& control,
+                                                                  const iDynTree::VectorDynSize& /*lambda*/,
+                                                                  iDynTree::MatrixDynSize& hessian) override {
+        hessian.resize(state.size(), control.size());
+        hessian.zero();
+        return true;
+    }
 };
 TestConstraint::~TestConstraint(){}
 
@@ -184,9 +244,9 @@ public:
         :iDynTree::optimalcontrol::Cost(name)
     {}
 
-    virtual ~TestCost();
+    virtual ~TestCost() override;
 
-    virtual bool costEvaluation(double time,
+    virtual bool costEvaluation(double /*time*/,
                                 const iDynTree::VectorDynSize& state,
                                 const iDynTree::VectorDynSize& control,
                                 double& costValue) override {
@@ -199,7 +259,7 @@ public:
         return true;
     }
 
-    virtual bool costFirstPartialDerivativeWRTState(double time,
+    virtual bool costFirstPartialDerivativeWRTState(double /*time*/,
                                                     const iDynTree::VectorDynSize& state,
                                                     const iDynTree::VectorDynSize& control,
                                                     iDynTree::VectorDynSize& partialDerivative) override {
@@ -216,7 +276,7 @@ public:
         return true;
     }
 
-    virtual bool costFirstPartialDerivativeWRTControl(double time,
+    virtual bool costFirstPartialDerivativeWRTControl(double /*time*/,
                                                       const iDynTree::VectorDynSize& state,
                                                       const iDynTree::VectorDynSize& control,
                                                       iDynTree::VectorDynSize& partialDerivative) override {
@@ -234,7 +294,7 @@ public:
         return true;
     }
 
-    virtual bool costSecondPartialDerivativeWRTState(double time,
+    virtual bool costSecondPartialDerivativeWRTState(double /*time*/,
                                                      const iDynTree::VectorDynSize& state,
                                                      const iDynTree::VectorDynSize& control,
                                                      iDynTree::MatrixDynSize& partialDerivative) override {
@@ -251,7 +311,7 @@ public:
         return true;
     }
 
-    virtual bool costSecondPartialDerivativeWRTControl(double time,
+    virtual bool costSecondPartialDerivativeWRTControl(double /*time*/,
                                                        const iDynTree::VectorDynSize& state,
                                                        const iDynTree::VectorDynSize& control,
                                                        iDynTree::MatrixDynSize& partialDerivative) override {
@@ -269,7 +329,7 @@ public:
           return true;
     }
 
-    virtual bool costSecondPartialDerivativeWRTStateControl(double time,
+    virtual bool costSecondPartialDerivativeWRTStateControl(double /*time*/,
                                                             const iDynTree::VectorDynSize& state,
                                                             const iDynTree::VectorDynSize& control,
                                                             iDynTree::MatrixDynSize& partialDerivative) override {
@@ -292,7 +352,7 @@ class OptimizerTest : public iDynTree::optimization::Optimizer {
 public:
     OptimizerTest() {}
 
-    virtual ~OptimizerTest() override {}
+    virtual ~OptimizerTest() override;
 
     virtual bool isAvailable() const override{
         return true;
@@ -328,13 +388,13 @@ public:
         dummyMatrix.zero();
 
         for (size_t i =0; i < nnzeroRows.size(); ++i){
-            jacobian(nnzeroRows[i], nnzeroCols[i]) = 0;
+            jacobian(static_cast<unsigned int>(nnzeroRows[i]), static_cast<unsigned int>(nnzeroCols[i])) = 0;
         }
 
         ASSERT_EQUAL_MATRIX_TOL(dummyMatrix, jacobian, iDynTree::DEFAULT_TOL); //check the sparsity structure
 //        std::cerr << "Cost Jacobian" << std::endl << dummyMatrix.toString() << std::endl << std::endl;
-        //not evaluating the constraint hessian for the moment
-
+        iDynTree::MatrixDynSize dummyHessian;
+        ASSERT_IS_TRUE(m_problem->evaluateConstraintsHessian(dummy1, dummyHessian));
         return true;
     }
 
@@ -367,6 +427,8 @@ public:
         return true;
     }
 };
+OptimizerTest::~OptimizerTest() {}
+
 
 
 int main(){
