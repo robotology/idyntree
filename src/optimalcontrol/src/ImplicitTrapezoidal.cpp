@@ -58,8 +58,11 @@ namespace iDynTree {
                 m_zeroNuNuBuffer.zero();
 
                 m_stateHessianBuffer.resize(nx, nx);
+                m_stateHessianBuffer.zero();
                 m_controlHessianBuffer.resize(nu, nu);
+                m_controlHessianBuffer.zero();
                 m_mixedHessianBuffer.resize(nx, nu);
+                m_mixedHessianBuffer.zero();
 
                 m_lambda.resize(nx);
 

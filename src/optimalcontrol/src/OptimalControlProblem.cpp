@@ -176,6 +176,29 @@ namespace iDynTree {
                 return false;
             }
             m_pimpl->dynamicalSystem = dynamicalSystem;
+
+            unsigned int nx = static_cast<unsigned int>(m_pimpl->dynamicalSystem->stateSpaceSize());
+            unsigned int nu = static_cast<unsigned int>(m_pimpl->dynamicalSystem->controlSpaceSize());
+
+            m_pimpl->costStateHessianBuffer.resize(nx, nx);
+            m_pimpl->costStateHessianBuffer.zero();
+
+            m_pimpl->costControlHessianBuffer.resize(nu, nu);
+            m_pimpl->costControlHessianBuffer.zero();
+
+            m_pimpl->costMixedHessianBuffer.resize(nx, nu);
+            m_pimpl->costMixedHessianBuffer.zero();
+
+
+            m_pimpl->constraintsStateHessianBuffer.resize(nx, nx);
+            m_pimpl->constraintsStateHessianBuffer.zero();
+
+            m_pimpl->constraintsControlHessianBuffer.resize(nu, nu);
+            m_pimpl->constraintsControlHessianBuffer.zero();
+
+            m_pimpl->constraintsMixedHessianBuffer.resize(nx, nu);
+            m_pimpl->constraintsMixedHessianBuffer.zero();
+
             return true;
         }
 
@@ -187,6 +210,29 @@ namespace iDynTree {
             }
             m_pimpl->dynamicalSystem = linearSystem;
             m_pimpl->systemIsLinear = true;
+
+            unsigned int nx = static_cast<unsigned int>(m_pimpl->dynamicalSystem->stateSpaceSize());
+            unsigned int nu = static_cast<unsigned int>(m_pimpl->dynamicalSystem->controlSpaceSize());
+
+            m_pimpl->costStateHessianBuffer.resize(nx, nx);
+            m_pimpl->costStateHessianBuffer.zero();
+
+            m_pimpl->costControlHessianBuffer.resize(nu, nu);
+            m_pimpl->costControlHessianBuffer.zero();
+
+            m_pimpl->costMixedHessianBuffer.resize(nx, nu);
+            m_pimpl->costMixedHessianBuffer.zero();
+
+
+            m_pimpl->constraintsStateHessianBuffer.resize(nx, nx);
+            m_pimpl->constraintsStateHessianBuffer.zero();
+
+            m_pimpl->constraintsControlHessianBuffer.resize(nu, nu);
+            m_pimpl->constraintsControlHessianBuffer.zero();
+
+            m_pimpl->constraintsMixedHessianBuffer.resize(nx, nu);
+            m_pimpl->constraintsMixedHessianBuffer.zero();
+
             return true;
         }
 
@@ -955,10 +1001,6 @@ namespace iDynTree {
                 partialDerivative.resize(state.size(), state.size());
             }
 
-            if ((m_pimpl->costStateHessianBuffer.rows() != state.size()) || (m_pimpl->costStateHessianBuffer.cols() != state.size())) {
-                m_pimpl->costStateHessianBuffer.resize(state.size(), state.size());
-            }
-
             bool first = true;
 
             for (auto& cost : m_pimpl->costs){
@@ -991,10 +1033,6 @@ namespace iDynTree {
         {
             if ((partialDerivative.rows() != control.size()) || (partialDerivative.cols() != control.size())) {
                 partialDerivative.resize(control.size(), control.size());
-            }
-
-            if ((m_pimpl->costControlHessianBuffer.rows() != control.size()) || (m_pimpl->costControlHessianBuffer.cols() != control.size())) {
-                m_pimpl->costControlHessianBuffer.resize(control.size(), control.size());
             }
 
             bool first = true;
@@ -1030,10 +1068,6 @@ namespace iDynTree {
         {
             if ((partialDerivative.rows() != state.size()) || (partialDerivative.cols() != control.size())) {
                 partialDerivative.resize(state.size(), control.size());
-            }
-
-            if ((m_pimpl->costMixedHessianBuffer.rows() != state.size()) || (m_pimpl->costMixedHessianBuffer.cols() != control.size())) {
-                m_pimpl->costMixedHessianBuffer.resize(state.size(), control.size());
             }
 
             bool first = true;
@@ -1322,10 +1356,6 @@ namespace iDynTree {
                 hessian.resize(state.size(), state.size());
             }
 
-            if ((m_pimpl->constraintsStateHessianBuffer.rows() != state.size()) || (m_pimpl->constraintsStateHessianBuffer.cols() != state.size())) {
-                m_pimpl->constraintsStateHessianBuffer.resize(state.size(), state.size());
-            }
-
             if (m_pimpl->constraintsGroups.size() == 0) {
                 hessian.zero();
                 return true;
@@ -1360,10 +1390,6 @@ namespace iDynTree {
                 hessian.resize(control.size(), control.size());
             }
 
-            if ((m_pimpl->constraintsControlHessianBuffer.rows() != control.size()) || (m_pimpl->constraintsControlHessianBuffer.cols() != control.size())) {
-                m_pimpl->constraintsControlHessianBuffer.resize(control.size(), control.size());
-            }
-
             if (m_pimpl->constraintsGroups.size() == 0) {
                 hessian.zero();
                 return true;
@@ -1395,10 +1421,6 @@ namespace iDynTree {
         {
             if ((hessian.rows() != state.size()) || (hessian.cols() != control.size())) {
                 hessian.resize(state.size(), control.size());
-            }
-
-            if ((m_pimpl->constraintsMixedHessianBuffer.rows() != state.size()) || (m_pimpl->constraintsMixedHessianBuffer.cols() != control.size())) {
-                m_pimpl->constraintsMixedHessianBuffer.resize(state.size(), control.size());
             }
 
             if (m_pimpl->constraintsGroups.size() == 0) {
