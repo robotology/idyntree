@@ -100,17 +100,17 @@ namespace iDynTree {
             return false;
         }
 
-        bool DynamicalSystem::dynamicsSecondPartialDerivativeWRTState(double /*time*/, const VectorDynSize &/*state*/, const VectorDynSize &/*control*/, const iDynTree::VectorDynSize &/*lambda*/, iDynTree::MatrixDynSize &/*partialDerivative*/)
+        bool DynamicalSystem::dynamicsSecondPartialDerivativeWRTState(double /*time*/, const VectorDynSize &/*state*/, const iDynTree::VectorDynSize &/*lambda*/, iDynTree::MatrixDynSize &/*partialDerivative*/)
         {
             return false;
         }
 
-        bool DynamicalSystem::dynamicsSecondPartialDerivativeWRTControl(double /*time*/, const VectorDynSize &/*state*/, const VectorDynSize &/*control*/, const iDynTree::VectorDynSize &/*lambda*/, iDynTree::MatrixDynSize &/*partialDerivative*/)
+        bool DynamicalSystem::dynamicsSecondPartialDerivativeWRTControl(double /*time*/, const VectorDynSize &/*state*/, const iDynTree::VectorDynSize &/*lambda*/, iDynTree::MatrixDynSize &/*partialDerivative*/)
         {
             return false;
         }
 
-        bool DynamicalSystem::dynamicsSecondPartialDerivativeWRTStateControl(double /*time*/, const VectorDynSize &/*state*/, const VectorDynSize &/*control*/, const iDynTree::VectorDynSize &/*lambda*/, iDynTree::MatrixDynSize &/*partialDerivative*/)
+        bool DynamicalSystem::dynamicsSecondPartialDerivativeWRTStateControl(double /*time*/, const VectorDynSize &/*state*/, const iDynTree::VectorDynSize &/*lambda*/, iDynTree::MatrixDynSize &/*partialDerivative*/)
         {
             return false;
         }

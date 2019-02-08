@@ -304,13 +304,13 @@ namespace iDynTree {
                 }
 
                 if (!((m_dynamicalSystem_ptr->setControlInput(controlInputs[0])))){
-                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintJacobian", "Error while setting the control input.");
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintSecondDerivatives", "Error while setting the control input.");
                     return false;
                 }
 
                 toEigen(m_lambda) = dT * toEigen(lambda);
 
-                if (!(m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTState(time, collocationPoints[0], controlInputs[0], m_lambda, m_stateHessianBuffer))) {
+                if (!(m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTState(time, collocationPoints[0], m_lambda, m_stateHessianBuffer))) {
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraintSecondDerivatives",
                                 "Error while evaluating the dynamical system state second derivative.");
                     return false;
@@ -322,7 +322,7 @@ namespace iDynTree {
 
                 stateSecondDerivative[CollocationHessianIndex(1, 1)] = m_zeroNxNxBuffer;
 
-                if (!(m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTControl(time, collocationPoints[0], controlInputs[0], m_lambda, m_controlHessianBuffer))) {
+                if (!(m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTControl(time, collocationPoints[0], m_lambda, m_controlHessianBuffer))) {
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraintSecondDerivatives",
                                 "Error while evaluating the dynamical system control second derivative.");
                     return false;
@@ -335,7 +335,7 @@ namespace iDynTree {
                 controlSecondDerivative[CollocationHessianIndex(1, 1)] = m_zeroNuNuBuffer;
 
 
-                if (!(m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTStateControl(time, collocationPoints[0], controlInputs[0], m_lambda, m_mixedHessianBuffer))) {
+                if (!(m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTStateControl(time, collocationPoints[0], m_lambda, m_mixedHessianBuffer))) {
                     reportError(m_info.name().c_str(), "evaluateCollocationConstraintSecondDerivatives",
                                 "Error while evaluating the dynamical system second derivative wrt state and control.");
                     return false;

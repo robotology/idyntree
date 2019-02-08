@@ -97,7 +97,6 @@ public:
 
     virtual bool dynamicsSecondPartialDerivativeWRTState(double /*time*/,
                                                          const iDynTree::VectorDynSize& state,
-                                                         const iDynTree::VectorDynSize& /*control*/,
                                                          const iDynTree::VectorDynSize& /*lambda*/,
                                                          iDynTree::MatrixDynSize& partialDerivative) override {
         partialDerivative.resize(state.size(), state.size());
@@ -107,20 +106,18 @@ public:
 
     virtual bool dynamicsSecondPartialDerivativeWRTControl(double /*time*/,
                                                            const iDynTree::VectorDynSize& /*state*/,
-                                                           const iDynTree::VectorDynSize& control,
                                                            const iDynTree::VectorDynSize& /*lambda*/,
                                                            iDynTree::MatrixDynSize& partialDerivative) override {
-        partialDerivative.resize(control.size(), control.size());
+        partialDerivative.resize(controlInput().size(), controlInput().size());
         partialDerivative.zero();
         return true;
     }
 
     virtual bool dynamicsSecondPartialDerivativeWRTStateControl(double /*time*/,
                                                                 const iDynTree::VectorDynSize& state,
-                                                                const iDynTree::VectorDynSize& control,
                                                                 const iDynTree::VectorDynSize& /*lambda*/,
                                                                 iDynTree::MatrixDynSize& partialDerivative) override {
-        partialDerivative.resize(state.size(), control.size());
+        partialDerivative.resize(state.size(), controlInput().size());
         partialDerivative.zero();
         return true;
     }

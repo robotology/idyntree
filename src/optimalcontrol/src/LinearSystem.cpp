@@ -243,23 +243,23 @@ namespace iDynTree {
             return true;
         }
 
-        bool LinearSystem::dynamicsSecondPartialDerivativeWRTState(double /*time*/, const VectorDynSize &state, const VectorDynSize &/*control*/, const VectorDynSize &/*lambda*/, MatrixDynSize &partialDerivative)
+        bool LinearSystem::dynamicsSecondPartialDerivativeWRTState(double /*time*/, const VectorDynSize &state, const VectorDynSize &/*lambda*/, MatrixDynSize &partialDerivative)
         {
             partialDerivative.resize(state.size(), state.size());
             partialDerivative.zero();
             return true;
         }
 
-        bool LinearSystem::dynamicsSecondPartialDerivativeWRTControl(double /*time*/, const VectorDynSize &/*state*/, const VectorDynSize &control, const VectorDynSize &/*lambda*/, MatrixDynSize &partialDerivative)
+        bool LinearSystem::dynamicsSecondPartialDerivativeWRTControl(double /*time*/, const VectorDynSize &/*state*/, const VectorDynSize &/*lambda*/, MatrixDynSize &partialDerivative)
         {
-            partialDerivative.resize(control.size(), control.size());
+            partialDerivative.resize(controlInput().size(), controlInput().size());
             partialDerivative.zero();
             return true;
         }
 
-        bool LinearSystem::dynamicsSecondPartialDerivativeWRTStateControl(double /*time*/, const VectorDynSize &state, const VectorDynSize &control, const VectorDynSize &/*lambda*/, MatrixDynSize &partialDerivative)
+        bool LinearSystem::dynamicsSecondPartialDerivativeWRTStateControl(double /*time*/, const VectorDynSize &state, const VectorDynSize &/*lambda*/, MatrixDynSize &partialDerivative)
         {
-            partialDerivative.resize(state.size(), control.size());
+            partialDerivative.resize(state.size(), controlInput().size());
             partialDerivative.zero();
             return true;
         }
