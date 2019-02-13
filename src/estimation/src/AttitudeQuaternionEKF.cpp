@@ -231,7 +231,11 @@ bool iDynTree::AttitudeQuaternionEKF::updateFilterWithMeasurements(const iDynTre
         m_y.resize(m_output_size);
     }
     m_Acc_y = linAccMeas;
-    toEigen(m_Acc_y).normalize();
+    if (toEigen(m_Acc_y).norm() != 0)
+    {
+        // to avoid nan
+        toEigen(m_Acc_y).normalize();
+    }
     m_Omega_y = gyroMeas;
 
     // compute yaw angle from magnetometer measurements by limiting the vertical influence of magentometer

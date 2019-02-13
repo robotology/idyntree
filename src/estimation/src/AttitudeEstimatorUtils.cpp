@@ -93,7 +93,11 @@ iDynTree::UnitQuaternion composeQuaternion(const iDynTree::UnitQuaternion &q1, c
     out(1) = imagOut(0);
     out(2) = imagOut(1);
     out(3) = imagOut(2);
-    toEigen(out).normalize();
+    if (toEigen(out).norm() != 0)
+    {
+        // to avoid nan
+        toEigen(out).normalize();
+    }
 
     return out;
 }
@@ -115,7 +119,11 @@ iDynTree::UnitQuaternion composeQuaternion2(const iDynTree::UnitQuaternion &q1, 
 
     iDynTree::UnitQuaternion out;
     toEigen(out) = toEigen(mapofYQuaternionToXYQuaternion(q1))*toEigen(q2); // to be read as out = mapofYQuaternionToXYQuaternion(q1)*q2
-    toEigen(out).normalize();
+    if (toEigen(out).norm() != 0)
+    {
+        // to avoid nan
+        toEigen(out).normalize();
+    }
 
     return out;
 }

@@ -31,7 +31,10 @@ iDynTree::Matrix3x3 getAngVelSkewSymmetricMatrixFromMeasurements(iDynTree::Vecto
     iDynTree::Vector3 vectorial_estimate = iDynTree::Vector3(va_hat.data(), 3);
 
     ///< compute vectorial direction from the measurement normalized
-    toEigen(meas).normalize();
+    if (toEigen(meas).norm() != 0)
+    {
+        toEigen(meas).normalize();
+    }
 
     iDynTree::Matrix3x3 Adyn = getMatrixFromVectorVectorMultiplication(meas, vectorial_estimate);
     iDynTree::Matrix3x3 Sdyn;
@@ -92,7 +95,10 @@ bool iDynTree::AttitudeMahonyFilter::propagateStates()
 
     // system dynamics equations
     q = q + (dq*(m_params.time_step_in_seconds*0.5));
-    q.normalize();
+    if (q.norm() != 0)
+    {
+        q.normalize();
+    }
     Omega = Omega_y - b;
     b = b - (omega_mes*m_params.ki)*(m_params.time_step_in_seconds);
 
