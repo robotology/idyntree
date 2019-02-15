@@ -123,7 +123,12 @@ bool iDynTree::AttitudeMahonyFilter::propagateStates()
 
     // system dynamics equations
     q = q + (dq*(m_params.time_step_in_seconds*0.5));
-    if (q.norm() != 0 || q.norm() != 1)
+    if (q.norm() == 0)
+    {
+        reportError("AttitudeMahonyFilter", "propagateStates", "invalid quaternion with zero norm");
+        return false;
+    }
+    if (q.norm() != 1)
     {
         q.normalize();
     }

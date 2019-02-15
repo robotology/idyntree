@@ -239,7 +239,7 @@ bool iDynTree::AttitudeQuaternionEKF::updateFilterWithMeasurements(const iDynTre
     iDynTree::Vector3 linAccMeasUnitVector;
     if (!getUnitVector(linAccMeas, linAccMeasUnitVector))
     {
-        iDynTree::reportError("AttitudeMahonyFilter", "updateFilterWithMeasurements", "Cannot retrieve unit vector from linear acceleration measuremnts.");
+        iDynTree::reportError("AttitudeQuaternionEKF", "updateFilterWithMeasurements", "Cannot retrieve unit vector from linear acceleration measuremnts.");
         return false;
     }
 
@@ -254,7 +254,7 @@ bool iDynTree::AttitudeQuaternionEKF::updateFilterWithMeasurements(const iDynTre
     iDynTree::Vector3 magMeasUnitVector;
     if (!getUnitVector(magMeas, magMeasUnitVector))
     {
-        iDynTree::reportError("AttitudeMahonyFilter", "updateFilterWithMeasurements", "Cannot retrieve unit vector from magnetometer measuremnts.");
+        iDynTree::reportError("AttitudeQuaternionEKF", "updateFilterWithMeasurements", "Cannot retrieve unit vector from magnetometer measuremnts.");
         return false;
     }
 
@@ -420,13 +420,13 @@ bool iDynTree::AttitudeQuaternionEKF::ekf_f(const iDynTree::VectorDynSize& x_k, 
 {
     if (x_k.size() != m_x.size() || xhat_k_plus_one.size() != m_x.size())
     {
-        reportError("AttitudeQuaternionEKF", "f", "state size mismatch");
+        reportError("AttitudeQuaternionEKF", "ekf_f", "state size mismatch");
         return false;
     }
 
     if (u_k.size() != m_u.size())
     {
-        reportError("AttitudeQuaternionEKF", "f", "input size mismatch");
+        reportError("AttitudeQuaternionEKF", "ekf_f", "input size mismatch");
         return false;
     }
 
@@ -449,7 +449,12 @@ bool iDynTree::AttitudeQuaternionEKF::ekf_f(const iDynTree::VectorDynSize& x_k, 
     auto dq(toEigen(composeQuaternion2(orientation, correction)));
 
     x_hat_plus.block<4,1>(0, 0) = q + (dq*(m_params.time_step_in_seconds*0.5));
-    if (q.norm() != 0 || q.norm() != 1)
+    if (x_hat_plus.block<4,1>(0, 0).norm() == 0)
+    {
+        reportError("AttitudeQuaternionEKF", "ekf_f", "invalid quaternion");
+        return false;
+    }
+    if (q.norm() != 1)
     {
         q.normalize();
     }

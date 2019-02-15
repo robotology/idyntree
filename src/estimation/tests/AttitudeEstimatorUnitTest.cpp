@@ -22,6 +22,9 @@ void run(iDynTree::IAttitudeEstimator* estimator,
     estimator->propagateStates();
     std::cout << "Update measurements..." << std::endl;
     estimator->updateFilterWithMeasurements(acc, gyro, mag);
+    iDynTree::RPY rpy;
+    estimator->getOrientationEstimateAsRPY(rpy);
+    std::cout << "Estimated orientation in RPY: " << rpy.toString() << std::endl;
 }
 
 int main()
@@ -30,6 +33,17 @@ int main()
 
     qEKF = std::make_unique<iDynTree::AttitudeQuaternionEKF>();
     iDynTree::AttitudeQuaternionEKFParameters params;
+
+    params.time_step_in_seconds = 0.010;
+    params.accelerometer_noise_variance = 0.03;
+    params.magnetometer_noise_variance = 0.0;
+    params.gyroscope_noise_variance = 0.5;
+    params.gyro_bias_noise_variance = 10e-11;
+    params.initial_orientation_error_variance = 10e-6;
+    params.initial_ang_vel_error_variance = 10e-1;
+    params.initial_gyro_bias_error_variance = 10e-11;
+    params.bias_correlation_time_factor = 10e-3;
+    params.use_magnetometer_measurements = false;
 
     size_t x_size = qEKF->getInternalStateSize();
 
@@ -46,10 +60,10 @@ int main()
     iDynTree::VectorDynSize x0;
     x0.resize(10);
     x0.zero();
-    x0(0) = 0.5;
-    x0(1) = -0.5;
-    x0(2) = 0.5;
-    x0(3) = -0.5;
+    x0(0) = 1.0;
+    x0(1) = 0.0;
+    x0(2) = 0.0;
+    x0(3) = 0.0;
 
     iDynTree::Span<double> x0_span(x0.data(), x0.size());
     std::cout << "Setting initial internal state" << std::endl;
@@ -65,6 +79,10 @@ int main()
     iDynTree::LinAcceleration linAcc; linAcc.zero();
     iDynTree::GyroscopeMeasurements gyro; gyro.zero();
     iDynTree::MagnetometerMeasurements mag; mag.zero();
+    ok = qEKF->updateFilterWithMeasurements(linAcc, gyro, mag);
+    ASSERT_IS_FALSE(ok);
+    linAcc(2) = 1.0;
+    mag(2) = 1.0;
     std::cout << "Update measurements will internally run EKF update step" << std::endl;
     ok = qEKF->updateFilterWithMeasurements(linAcc, gyro, mag);
     ASSERT_IS_TRUE(ok);
@@ -74,11 +92,29 @@ int main()
     ok = qEKF->updateFilterWithMeasurements(linAcc, gyro);
     ASSERT_IS_TRUE(ok);
 
+    x0(0) = 1.0;
+    x0(1) = 0.0;
+    x0(2) = 0.0;
+    x0(3) = 0.0;
+    iDynTree::Span<double> x1_span(x0.data(), x0.size());
+    std::cout << "Setting initial internal state" << std::endl;
+    ok = qEKF->setInternalState(x1_span);
+
     iDynTree::IAttitudeEstimator* qekf_(qEKF.get());
     for (int i = 0; i <10 ; i++ )
     {
         run(qekf_, linAcc, gyro, mag);
     }
+
+    linAcc.zero();
+    linAcc(1) = 1;
+    gyro(1) = 0.05;
+
+    for (int i = 0; i <10 ; i++ )
+    {
+        run(qekf_, linAcc, gyro, mag);
+    }
+
 
     return EXIT_SUCCESS;
 }

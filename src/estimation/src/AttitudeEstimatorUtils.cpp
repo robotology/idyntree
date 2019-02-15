@@ -14,26 +14,24 @@
 
 bool checkValidMeasurement(const iDynTree::Vector3& in, const std::string& measurement_type, bool check_also_zero_vector)
 {
-    bool valid{false};
     if (check_also_zero_vector)
     {
-        if (!isZeroVector(in))
+        if (isZeroVector(in))
         {
-            valid = true;
+            iDynTree::reportError("AttitudeMahonyFilter", "checkValidMeasurement",
+                                  (measurement_type + " measurements are invalid. Expecting a non-zero vector.").c_str());
+            return false;
         }
     }
 
     if (isVectorNaN(in))
     {
-        valid = false;
+        iDynTree::reportError("AttitudeMahonyFilter", "checkValidMeasurement",
+                              (measurement_type + " measurements are invalid. Has NaN elements.").c_str());
+        return false;
     }
 
-    if (!valid)
-    {
-        iDynTree::reportError("AttitudeMahonyFilter", "checkValidMeasurement",  (measurement_type + " measurements are invalid.").c_str());
-    }
-
-    return valid;
+    return true;
 }
 
 
