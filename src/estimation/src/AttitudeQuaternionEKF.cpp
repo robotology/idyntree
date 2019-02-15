@@ -104,6 +104,7 @@ iDynTree::AttitudeQuaternionEKF::AttitudeQuaternionEKF()
 
     m_Omega_y.zero();
     m_Acc_y.zero();
+    m_Acc_y(2) = 1; // TODO: validate this assumption at initial step
 
     m_gravity_direction.zero();
     m_gravity_direction(2) = 1;
@@ -230,12 +231,19 @@ bool iDynTree::AttitudeQuaternionEKF::updateFilterWithMeasurements(const iDynTre
     {
         m_y.resize(m_output_size);
     }
-    m_Acc_y = linAccMeas;
-    if (toEigen(m_Acc_y).norm() != 0)
+
+    if (!checkValidMeasurement(linAccMeas, "linear acceleration", true)) { return false; }
+    if (!checkValidMeasurement(gyroMeas, "gyroscope", false)) { return false; }
+    if (!checkValidMeasurement(magMeas, "magnetometer", true)) { return false; }
+
+    iDynTree::Vector3 linAccMeasUnitVector;
+    if (!getUnitVector(linAccMeas, linAccMeasUnitVector))
     {
-        // to avoid nan
-        toEigen(m_Acc_y).normalize();
+        iDynTree::reportError("AttitudeMahonyFilter", "updateFilterWithMeasurements", "Cannot retrieve unit vector from linear acceleration measuremnts.");
+        return false;
     }
+
+    m_Acc_y = linAccMeasUnitVector;
     m_Omega_y = gyroMeas;
 
     // compute yaw angle from magnetometer measurements by limiting the vertical influence of magentometer
@@ -243,11 +251,17 @@ bool iDynTree::AttitudeQuaternionEKF::updateFilterWithMeasurements(const iDynTre
     // convert back to body frame and compute the yaw using atan2(y, x)
     iDynTree::Vector3 mag_meas_in_inertial_frame;
     iDynTree::Vector3 modified_mag_meas_in_body_frame;
+    iDynTree::Vector3 magMeasUnitVector;
+    if (!getUnitVector(magMeas, magMeasUnitVector))
+    {
+        iDynTree::reportError("AttitudeMahonyFilter", "updateFilterWithMeasurements", "Cannot retrieve unit vector from magnetometer measuremnts.");
+        return false;
+    }
 
     using iDynTree::toEigen;
     auto m_A(toEigen(mag_meas_in_inertial_frame));
     auto m_B_modified(toEigen(modified_mag_meas_in_body_frame));
-    auto m_yB(toEigen(magMeas));
+    auto m_yB(toEigen(magMeasUnitVector));
     auto A_R_B(toEigen(m_orientationInSO3));
 
     m_A = A_R_B * m_yB;
@@ -266,8 +280,9 @@ bool iDynTree::AttitudeQuaternionEKF::updateFilterWithMeasurements(const iDynTre
 
 bool iDynTree::AttitudeQuaternionEKF::updateFilterWithMeasurements(const iDynTree::LinearAccelerometerMeasurements& linAccMeas, const iDynTree::GyroscopeMeasurements& gyroMeas)
 {
-    iDynTree::MagnetometerMeasurements magMeas;
+    iDynTree::MagnetometerMeasurements magMeas; // dummy measurement
     magMeas.zero();
+    magMeas(2) = 1;
     bool ok = updateFilterWithMeasurements(linAccMeas, gyroMeas, magMeas);
     return ok;
 }
@@ -434,6 +449,10 @@ bool iDynTree::AttitudeQuaternionEKF::ekf_f(const iDynTree::VectorDynSize& x_k, 
     auto dq(toEigen(composeQuaternion2(orientation, correction)));
 
     x_hat_plus.block<4,1>(0, 0) = q + (dq*(m_params.time_step_in_seconds*0.5));
+    if (q.norm() != 0 || q.norm() != 1)
+    {
+        q.normalize();
+    }
     x_hat_plus.block<3,1>(4, 0) = u - b;
     x_hat_plus.block<3,1>(7, 0) = b*(1 - (m_params.bias_correlation_time_factor*m_params.time_step_in_seconds));
 

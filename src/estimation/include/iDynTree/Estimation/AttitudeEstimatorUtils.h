@@ -17,6 +17,41 @@
 #include <cmath>
 #include <vector>
 
+
+/**
+ *
+ * @brief check a valid measurement
+ * @param[in] a vector3
+ * @return bool true/false
+ */
+bool checkValidMeasurement(const iDynTree::Vector3& in, const std::string& measurement_type, bool check_also_zero_vector);
+
+/**
+ *
+ * @brief get unit vector
+ * @param[in] a vector3
+ * @return bool false if input vector has zero norm
+ */
+bool getUnitVector(const iDynTree::Vector3& in, iDynTree::Vector3& out);
+
+/**
+ *
+ * @brief checks if vector has NaN values
+ * any element of vector is NaN implies a NaN vector
+ * @param[in] vec vector3
+ * @return bool true/false
+ */
+bool isVectorNaN(const iDynTree::Vector3& vec);
+
+/**
+ *
+ * @brief checks if vector is a zero vector
+ *  all elements of vector are zero implies a zero vector
+ * @param[in] vec vector3
+ * @return bool true/false
+ */
+bool isZeroVector(const iDynTree::Vector3& vec);
+
 /**
  *
  * @brief computes the cross vector of two 3D vectors

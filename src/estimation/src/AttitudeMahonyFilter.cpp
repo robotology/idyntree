@@ -31,7 +31,7 @@ iDynTree::Matrix3x3 getAngVelSkewSymmetricMatrixFromMeasurements(iDynTree::Vecto
     iDynTree::Vector3 vectorial_estimate = iDynTree::Vector3(va_hat.data(), 3);
 
     ///< compute vectorial direction from the measurement normalized
-    if (toEigen(meas).norm() != 0)
+    if (toEigen(meas).norm() != 1)
     {
         toEigen(meas).normalize();
     }
@@ -50,7 +50,17 @@ bool iDynTree::AttitudeMahonyFilter::updateFilterWithMeasurements(const iDynTree
 {
     using iDynTree::toEigen;
 
-    iDynTree::Matrix3x3 S_acc = getAngVelSkewSymmetricMatrixFromMeasurements(linAccMeas, m_gravity_direction, 1-m_params.confidence_magnetometer_measurements, m_orientationInSO3);
+    if (!checkValidMeasurement(linAccMeas, "linear acceleration", true)) { return false; }
+    if (!checkValidMeasurement(gyroMeas, "gyroscope", false)) { return false; }
+
+    iDynTree::Vector3 linAccMeasUnitVector;
+    if (!getUnitVector(linAccMeas, linAccMeasUnitVector))
+    {
+        iDynTree::reportError("AttitudeMahonyFilter", "updateFilterWithMeasurements", "Cannot retrieve unit vector from linear acceleration measuremnts.");
+        return false;
+    }
+
+    iDynTree::Matrix3x3 S_acc = getAngVelSkewSymmetricMatrixFromMeasurements(linAccMeasUnitVector, m_gravity_direction, 1-m_params.confidence_magnetometer_measurements, m_orientationInSO3);
     toEigen(m_omega_mes) = -toEigen(mapso3ToR3(S_acc));
     m_Omega_y = gyroMeas;
 
@@ -67,8 +77,26 @@ bool iDynTree::AttitudeMahonyFilter::updateFilterWithMeasurements(const iDynTree
         return updateFilterWithMeasurements(linAccMeas, gyroMeas);
     }
 
-    iDynTree::Matrix3x3 S_acc = getAngVelSkewSymmetricMatrixFromMeasurements(linAccMeas, m_gravity_direction, 1-m_params.confidence_magnetometer_measurements, m_orientationInSO3);
-    iDynTree::Matrix3x3 S_mag = getAngVelSkewSymmetricMatrixFromMeasurements(magMeas, m_earth_magnetic_field_direction, m_params.confidence_magnetometer_measurements, m_orientationInSO3);
+    if (!checkValidMeasurement(linAccMeas, "linear acceleration", true)) { return false; }
+    if (!checkValidMeasurement(gyroMeas, "gyroscope", false)) { return false; }
+    if (!checkValidMeasurement(magMeas, "magnetometer", true)) { return false; }
+
+    iDynTree::Vector3 linAccMeasUnitVector;
+    if (!getUnitVector(linAccMeas, linAccMeasUnitVector))
+    {
+        iDynTree::reportError("AttitudeMahonyFilter", "updateFilterWithMeasurements", "Cannot retrieve unit vector from linear acceleration measuremnts.");
+        return false;
+    }
+
+    iDynTree::Vector3 magMeasUnitVector;
+    if (!getUnitVector(magMeas, magMeasUnitVector))
+    {
+        iDynTree::reportError("AttitudeMahonyFilter", "updateFilterWithMeasurements", "Cannot retrieve unit vector from magnetometer measuremnts.");
+        return false;
+    }
+
+    iDynTree::Matrix3x3 S_acc = getAngVelSkewSymmetricMatrixFromMeasurements(linAccMeasUnitVector, m_gravity_direction, 1-m_params.confidence_magnetometer_measurements, m_orientationInSO3);
+    iDynTree::Matrix3x3 S_mag = getAngVelSkewSymmetricMatrixFromMeasurements(magMeasUnitVector, m_earth_magnetic_field_direction, m_params.confidence_magnetometer_measurements, m_orientationInSO3);
     iDynTree::Matrix3x3 S_meas;
 
     toEigen(S_meas) = toEigen(S_acc) + toEigen(S_mag);
@@ -95,7 +123,7 @@ bool iDynTree::AttitudeMahonyFilter::propagateStates()
 
     // system dynamics equations
     q = q + (dq*(m_params.time_step_in_seconds*0.5));
-    if (q.norm() != 0)
+    if (q.norm() != 0 || q.norm() != 1)
     {
         q.normalize();
     }
