@@ -52,9 +52,9 @@ int main()
     bool ok = qEKF->initializeFilter();
     ASSERT_IS_TRUE(ok);
     std::cout << "Propagate states will internally run EKF predict step" << std::endl;
-    std::cout << "if setParams() was not called before, calling propagateStates before setting internal state will throw initial state not set error...." << std::endl;
+    std::cout << "calling propagateStates before setting internal state will throw initial state not set error...." << std::endl;
     ok = qEKF->propagateStates();
-    ASSERT_IS_TRUE(ok);
+    ASSERT_IS_FALSE(ok);
     std::cout << "Print.... OK" << std::endl;
 
     iDynTree::VectorDynSize x0;

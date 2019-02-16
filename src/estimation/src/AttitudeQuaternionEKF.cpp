@@ -664,12 +664,32 @@ bool iDynTree::AttitudeQuaternionEKF::setInternalStateInitialOrientation(const i
 
 bool iDynTree::AttitudeQuaternionEKF::useMagnetometerMeasurements(bool use_magnetometer_measurements)
 {
+    if (use_magnetometer_measurements == m_params.use_magnetometer_measurements)
+    {
+        return true;
+    }
+
+    // store current state estimate and variance
+    iDynTree::VectorDynSize x(m_x);
+    iDynTree::MatrixDynSize P(m_x.size(), m_x.size());
+    iDynTree::Span<double> P_span(P.data(), P.capacity());
+    if (!ekfGetStateCovariance(P_span))
+    {
+        return false;
+    }
+
+    // get variances
+    double orientation_var{P(0,0)};
+    double ang_vel_var{P(4,4)};
+    double gyro_bias_var{P(7,7)};
+
     m_params.use_magnetometer_measurements = use_magnetometer_measurements;
     ekfReset();
 
     bool ok = initializeFilter();
-    iDynTree::Span<double> x_span(m_x.data(), m_x.size());
+    iDynTree::Span<double> x_span(x.data(), x.size());
     ok = setInternalState(x_span) && ok;
+    ok = setInitialStateCovariance(orientation_var, ang_vel_var, gyro_bias_var) && ok;
     return ok;
 }
 

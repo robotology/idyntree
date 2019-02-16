@@ -124,7 +124,8 @@ namespace iDynTree
 
         /**
           * @brief Set filter parameters with the struct members.
-          * This resets filter since it also calls useMagnetometerMeasurements().
+          * This resets filter since it also calls useMagnetometerMeasurements(flag)
+          * (if the use_magnetometer_measurements flag has been toggled).
           * @param[in] params object of AttitudeQuaternionEKFParameters passed as a const reference
           * @return true/false if successful/not
           */
@@ -156,7 +157,9 @@ namespace iDynTree
         /**
          * @brief set flag to use magnetometer measurements
          * @param[in] use_magnetometer_measurements enable/disable magnetometer measurements
-         * @note calling this method will reset the filter, reinitialize the filter and set the previous state as filter's initial state
+         * @note calling this method with the flag same as current flag value will not change anything,
+         *  meanwhile a new flag setting will reset the filter, reinitialize the filter and
+         *  set the previous state as filter's initial state and previous state covariance as filter's intial state covariance
          */
         bool useMagnetometerMeasurements(bool use_magnetometer_measurements);
 

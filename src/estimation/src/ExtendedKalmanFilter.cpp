@@ -265,20 +265,9 @@ bool iDynTree::DiscreteExtendedKalmanFilterHelper::ekfGetStateCovariance(const i
         return false;
     }
 
-    // TODO: replace this really bad way of copying a matrix to a span
-    std::vector<double> temp;
-    temp.resize(P.size());
-    for (size_t i = 0; i < m_P.rows(); i++)
+    for (size_t i = 0; i < m_P.capacity(); i++)
     {
-        for (size_t j = 0; j < m_P.cols(); j++)
-        {
-            temp.push_back(m_P(i, j));
-        }
-    }
-
-    for (size_t k = 0; k < temp.size(); k++)
-    {
-        P(k) = temp[k];
+        P(i) = m_P.data()[i];
     }
 
     return true;

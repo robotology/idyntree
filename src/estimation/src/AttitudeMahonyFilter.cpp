@@ -73,7 +73,6 @@ bool iDynTree::AttitudeMahonyFilter::updateFilterWithMeasurements(const iDynTree
 
     if (m_params.use_magnetometer_measurements == false)
     {
-        iDynTree::reportWarning("AttitudeMahonyFilter", "updateFilterWithMeasurements", "useMagnetoMeterMeasurements set to false, using only accelerometer measurements");
         return updateFilterWithMeasurements(linAccMeas, gyroMeas);
     }
 
