@@ -1,3 +1,3 @@
 function v = NR_OF_SENSOR_TYPES()
-  v = iDynTreeMEX(1262);
+  v = iDynTreeMEX(1286);
 end

@@ -5,48 +5,48 @@ classdef ILight < SwigRef
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1720, self);
+        iDynTreeMEX(1857, self);
         self.SwigClear();
       end
     end
     function varargout = getName(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1721, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1858, self, varargin{:});
     end
     function varargout = setType(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1722, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1859, self, varargin{:});
     end
     function varargout = getType(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1723, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1860, self, varargin{:});
     end
     function varargout = setPosition(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1724, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1861, self, varargin{:});
     end
     function varargout = getPosition(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1725, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1862, self, varargin{:});
     end
     function varargout = setDirection(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1726, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1863, self, varargin{:});
     end
     function varargout = getDirection(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1727, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1864, self, varargin{:});
     end
     function varargout = setAmbientColor(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1728, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1865, self, varargin{:});
     end
     function varargout = getAmbientColor(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1729, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1866, self, varargin{:});
     end
     function varargout = setSpecularColor(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1730, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1867, self, varargin{:});
     end
     function varargout = getSpecularColor(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1731, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1868, self, varargin{:});
     end
     function varargout = setDiffuseColor(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1732, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1869, self, varargin{:});
     end
     function varargout = getDiffuseColor(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1733, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1870, self, varargin{:});
     end
     function self = ILight(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
