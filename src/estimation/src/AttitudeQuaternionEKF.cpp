@@ -653,10 +653,11 @@ bool iDynTree::AttitudeQuaternionEKF::setInternalStateInitialOrientation(const i
         iDynTree::reportError("AttitudeQuaternionEKF", "setInternalStateInitialOrientation", "orientation size mismatch, using default state");
         return false;
     }
-    m_state.m_orientation(0) = orientationBuffer(0);
-    m_state.m_orientation(1) = orientationBuffer(1);
-    m_state.m_orientation(2) = orientationBuffer(2);
-    m_state.m_orientation(3) = orientationBuffer(3);
+
+    m_state.m_orientation(0) = orientationBuffer.getVal(0);
+    m_state.m_orientation(1) = orientationBuffer.getVal(1);
+    m_state.m_orientation(2) = orientationBuffer.getVal(2);
+    m_state.m_orientation(3) = orientationBuffer.getVal(3);
 
     return true;
 }
