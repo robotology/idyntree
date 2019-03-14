@@ -253,7 +253,6 @@ bool iDynTree::DiscreteExtendedKalmanFilterHelper::ekfGetStates(const iDynTree::
     for (size_t i = 0; i < m_dim_X; i++)
     {
         double temp{m_x(i)};
-//         x.setVal(i, temp);
         x(i) = m_x(i);
     }
     return true;

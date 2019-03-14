@@ -25,6 +25,21 @@ namespace iDynTree
     typedef iDynTree::Vector4 UnitQuaternion;
     typedef iDynTree::Vector3 RPY;
 
+    /** @struct state internal state of the estimator
+         * @var state::m_orientation
+         * orientation estimate in \f$ \mathbb{R}^4 \f$ quaternion representation
+         * @var state::m_orientation
+         * angular velocity estimate in \f$ \mathbb{R}^3 \f$
+         * @var state::m_orientation
+         * gyroscope bias estimate in \f$ \mathbb{R}^3 \f$
+         */
+        struct AttitudeEstimatorState
+        {
+            iDynTree::UnitQuaternion m_orientation;
+            iDynTree::Vector3 m_angular_velocity;
+            iDynTree::Vector3 m_gyroscope_bias;
+        };
+
     /**
      * @class IAttitudeEstimator generic interface for attitude estimator classes
      *

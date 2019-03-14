@@ -5,18 +5,18 @@ classdef ICamera < SwigRef
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1843, self);
+        iDynTreeMEX(1851, self);
         self.SwigClear();
       end
     end
     function varargout = setPosition(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1844, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1852, self, varargin{:});
     end
     function varargout = setTarget(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1845, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1853, self, varargin{:});
     end
     function varargout = setUpVector(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1846, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1854, self, varargin{:});
     end
     function self = ICamera(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
