@@ -249,11 +249,16 @@ public:
      * \note this method works only for link, not for arbitrary frames.
      */
     iDynTree::Transform getWorldLinkTransform(const LinkIndex frame_index);
+
+    /**
+     * Get the world_H_link transform for an arbitrary link.
+     *
+     * \note this method works also for arbitrary frames.
+     */
+    iDynTree::Transform getWorldFrameTransform(const LinkIndex frame_index);
 };
 
 
 } // End namespace iDynTree
 
 #endif // IDYNTREE_SIMPLE_LEGGED_ODOMETRY2_
-
-

@@ -297,6 +297,27 @@ Transform SimpleLeggedOdometry::getWorldLinkTransform(const LinkIndex link_index
     return m_world_H_fixedLink*base_H_fixed.inverse()*base_H_link;
 }
 
+Transform SimpleLeggedOdometry::getWorldFrameTransform(const LinkIndex frame_index)
+{
+    if( !this->m_kinematicsUpdated || !this->m_isOdometryInitialized  )
+    {
+        reportError("SimpleLeggedOdometry",
+                    "getWorldFrameTransform",
+                    "getWorldLinkTransform was called, but the kinematics update or the odometry init was never setted.");
+        return Transform::Identity();
+    }
 
+    if( !this->m_model.isValidFrameIndex(frame_index) )
+    {
+        reportError("SimpleLeggedOdometry",
+                    "getWorldFrameTransform",
+                    "getWorldLinkTransform was called, but the request linkindex is not part of the model");
+        return Transform::Identity();
+    }
+
+    LinkIndex linkIndex = this->m_model.getFrameLink(frame_index);
+    Transform fixedLink_H_fixedFrame = m_model.getFrameTransform(frame_index);
+    return getWorldLinkTransform(linkIndex) * fixedLink_H_fixedFrame;
 }
 
+}
