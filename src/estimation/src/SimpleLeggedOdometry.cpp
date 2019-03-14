@@ -257,6 +257,48 @@ bool SimpleLeggedOdometry::changeFixedFrame(const FrameIndex newFixedFrame)
     return true;
 }
 
+bool SimpleLeggedOdometry::changeFixedFrame(const FrameIndex newFixedFrame, const Transform & world_H_newFixedFrame)
+{
+    if( !this->m_kinematicsUpdated )
+    {
+        reportError("SimpleLeggedOdometry",
+                    "changeFixedFrame",
+                    "changeFixedFrame was called, but the kinematics info was never setted.");
+        return false;
+    }
+
+    LinkIndex newFixedLink = this->m_model.getFrameLink(newFixedFrame);
+
+    if( newFixedLink == LINK_INVALID_INDEX )
+    {
+        reportError("SimpleLeggedOdometry",
+                    "changeFixedFrame",
+                    "changeFixedFrame was called, but the provided new fixed frame is unknown.");
+        return false;
+    }
+
+    Transform newFixedFrame_H_newFixedLink = m_model.getFrameTransform(newFixedFrame).inverse();
+    this->m_world_H_fixedLink = world_H_newFixedFrame * newFixedFrame_H_newFixedLink;
+    this->m_fixedLinkIndex = newFixedLink;
+
+    return true;
+}
+
+bool SimpleLeggedOdometry::changeFixedFrame(const std::string& newFixedFrame, const Transform & world_H_newFixedFrame)
+{
+    iDynTree::FrameIndex newFixedFrameIndex = this->m_model.getFrameIndex(newFixedFrame);
+
+    if( newFixedFrameIndex == FRAME_INVALID_INDEX )
+    {
+        reportError("SimpleLeggedOdometry",
+                    "changeFixedFrame",
+                    "changeFixedFrame was called, but the provided new fixed frame is unknown.");
+        return false;
+    }
+
+    return this->changeFixedFrame(newFixedFrameIndex, world_H_newFixedFrame);
+}
+
 bool SimpleLeggedOdometry::changeFixedFrame(const std::string& newFixedFrame)
 {
     iDynTree::FrameIndex newFixedFrameIndex = this->m_model.getFrameIndex(newFixedFrame);
