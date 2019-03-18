@@ -339,7 +339,7 @@ Transform SimpleLeggedOdometry::getWorldLinkTransform(const LinkIndex link_index
     return m_world_H_fixedLink*base_H_fixed.inverse()*base_H_link;
 }
 
-Transform SimpleLeggedOdometry::getWorldFrameTransform(const LinkIndex frame_index)
+Transform SimpleLeggedOdometry::getWorldFrameTransform(const FrameIndex frame_index)
 {
     if( !this->m_kinematicsUpdated || !this->m_isOdometryInitialized  )
     {

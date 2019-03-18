@@ -269,11 +269,11 @@ public:
     iDynTree::Transform getWorldLinkTransform(const LinkIndex frame_index);
 
     /**
-     * Get the world_H_link transform for an arbitrary link.
+     * Get the world_H_frame transform for an arbitrary frame.
      *
      * \note this method works also for arbitrary frames.
      */
-    iDynTree::Transform getWorldFrameTransform(const LinkIndex frame_index);
+    iDynTree::Transform getWorldFrameTransform(const FrameIndex frame_index);
 };
 
 
