@@ -358,8 +358,8 @@ Transform SimpleLeggedOdometry::getWorldFrameTransform(const LinkIndex frame_ind
     }
 
     LinkIndex linkIndex = this->m_model.getFrameLink(frame_index);
-    Transform fixedLink_H_fixedFrame = m_model.getFrameTransform(frame_index);
-    return getWorldLinkTransform(linkIndex) * fixedLink_H_fixedFrame;
+    Transform link_H_frame = m_model.getFrameTransform(frame_index);
+    return getWorldLinkTransform(linkIndex) * link_H_frame;
 }
 
 }
