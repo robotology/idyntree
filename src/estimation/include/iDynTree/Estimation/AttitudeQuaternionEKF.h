@@ -120,17 +120,18 @@ namespace iDynTree
          * @brief Get filter parameters as a struct.
          * @param[out] params object of AttitudeQuaternionEKFParameters passed as reference
          */
-        void getParameters(AttitudeQuaternionEKFParameters& params) {params = m_params;}
+        void getParameters(AttitudeQuaternionEKFParameters& params) {params = m_params_qekf;}
 
         /**
           * @brief Set filter parameters with the struct members.
-          * This resets filter since it also calls useMagnetometerMeasurements().
+          * This resets filter since it also calls useMagnetometerMeasurements(flag)
+          * (if the use_magnetometer_measurements flag has been toggled).
           * @param[in] params object of AttitudeQuaternionEKFParameters passed as a const reference
           * @return true/false if successful/not
           */
         void setParameters(const AttitudeQuaternionEKFParameters& params)
         {
-            m_params = params;
+            m_params_qekf = params;
             useMagnetometerMeasurements(params.use_magnetometer_measurements);
         }
 
@@ -145,18 +146,20 @@ namespace iDynTree
          * @brief set discretization time step in seconds
          * @param[in] time_step_in_seconds time step
          */
-        void setTimeStepInSeconds(double time_step_in_seconds) {m_params.time_step_in_seconds = time_step_in_seconds; }
+        void setTimeStepInSeconds(double time_step_in_seconds) {m_params_qekf.time_step_in_seconds = time_step_in_seconds; }
 
         /**
          * @brief set bias correlation time factor
          * @param[in] bias_correlation_time_factor time factor for bias evolution
          */
-        void setBiasCorrelationTimeFactor(double bias_correlation_time_factor) { m_params.bias_correlation_time_factor = bias_correlation_time_factor; }
+        void setBiasCorrelationTimeFactor(double bias_correlation_time_factor) { m_params_qekf.bias_correlation_time_factor = bias_correlation_time_factor; }
 
         /**
          * @brief set flag to use magnetometer measurements
          * @param[in] use_magnetometer_measurements enable/disable magnetometer measurements
-         * @note calling this method will reset the filter, reinitialize the filter and set the previous state as filter's initial state
+         * @note calling this method with the flag same as current flag value will not change anything,
+         *  meanwhile a new flag setting will reset the filter, reinitialize the filter and
+         *  set the previous state as filter's initial state and previous state covariance as filter's intial state covariance
          */
         bool useMagnetometerMeasurements(bool use_magnetometer_measurements);
 
@@ -216,6 +219,11 @@ namespace iDynTree
         bool getDefaultInternalInitialState(const iDynTree::Span<double> & stateBuffer) const override;
         bool setInternalState(const iDynTree::Span<double> & stateBuffer) override;
         bool setInternalStateInitialOrientation(const iDynTree::Span<double>& orientationBuffer) override;
+
+    protected:
+        AttitudeEstimatorState m_state_qekf, m_initial_state_qekf;
+        AttitudeQuaternionEKFParameters m_params_qekf;   ///< struct holding the QEKF parameters
+
 
     private:
         /**
@@ -300,22 +308,6 @@ namespace iDynTree
          * @return true/false, if successful/not
          */
         bool callEkfUpdate();
-
-        AttitudeQuaternionEKFParameters m_params;   ///< struct holding the QEKF parameters
-
-        /** @struct state internal state of the estimator
-         * @var state::m_orientation
-         * orientation estimate in \f$ \mathbb{R}^4 \f$ quaternion representation
-         * @var state::m_orientation
-         * angular velocity estimate in \f$ \mathbb{R}^3 \f$
-         * @var state::m_orientation
-         * gyroscope bias estimate in \f$ \mathbb{R}^3 \f$
-         */
-        struct {
-            iDynTree::UnitQuaternion m_orientation;
-            iDynTree::Vector3 m_angular_velocity;
-            iDynTree::Vector3 m_gyroscope_bias;
-        } m_state, m_initial_state;
 
         iDynTree::Rotation m_orientationInSO3;                   ///< orientation estimate as rotation matrix \f$ {^A}R_B \f$ where \f$ A \f$ is inertial frame and \f$ B \f$ is the frame attached to the body
         iDynTree::RPY m_orientationInRPY;                        ///< orientation estimate as a 3D vector in RPY representation, where \f$ {^A}R_B = Rot_z(yaw)Rot_y(pitch)Rot_x(roll) \f$

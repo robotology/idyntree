@@ -117,7 +117,7 @@ public:
      */
     bool setParameters(const AttitudeMahonyFilterParameters& params)
     {
-        m_params = params;
+        m_params_mahony = params;
         return true;
     }
 
@@ -125,7 +125,7 @@ public:
      * @brief Get filter parameters as a struct.
      * @param[out] params object of AttitudeMahonyFilterParameters passed as reference
      */
-    void getParameters(AttitudeMahonyFilterParameters& params) {params = m_params;}
+    void getParameters(AttitudeMahonyFilterParameters& params) {params = m_params_mahony;}
 
     bool updateFilterWithMeasurements(const iDynTree::LinearAccelerometerMeasurements& linAccMeas,
                                       const iDynTree::GyroscopeMeasurements& gyroMeas) override;
@@ -142,23 +142,10 @@ public:
     bool setInternalState(const iDynTree::Span<double> & stateBuffer) override;
     bool setInternalStateInitialOrientation(const iDynTree::Span<double>& orientationBuffer) override;
 
+protected:
+    AttitudeMahonyFilterParameters m_params_mahony;              ///< struct holding the Mahony filter parameters
+    AttitudeEstimatorState m_state_mahony, m_initial_state_mahony;
 private:
-    AttitudeMahonyFilterParameters m_params;              ///< struct holding the Mahony filter parameters
-
-    /** @struct state internal state of the estimator
-     * @var state::m_orientation
-     * orientation estimate in \f$ \mathbb{R}^4 \f$ quaternion representation
-     * @var state::m_orientation
-     * angular velocity estimate in \f$ \mathbb{R}^3 \f$
-     * @var state::m_orientation
-     * gyroscope bias estimate in \f$ \mathbb{R}^3 \f$
-     */
-    struct {
-        iDynTree::UnitQuaternion m_orientation;
-        iDynTree::Vector3 m_angular_velocity;
-        iDynTree::Vector3 m_gyroscope_bias;
-    } m_state, m_initial_state;
-
     iDynTree::Rotation m_orientationInSO3;                ///< orientation estimate as rotation matrix \f$ {^A}R_B \f$ where \f$ A \f$ is inertial frame and \f$ B \f$ is the frame attached to the body
     iDynTree::RPY m_orientationInRPY;                     ///< orientation estimate as a 3D vector in RPY representation, where \f$ {^A}R_B = Rot_z(yaw)Rot_y(pitch)Rot_x(roll) \f$
 

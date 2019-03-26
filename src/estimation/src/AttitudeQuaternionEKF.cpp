@@ -15,9 +15,9 @@ void iDynTree::AttitudeQuaternionEKF::serializeStateVector()
 {
     using iDynTree::toEigen;
     auto x(toEigen(m_x));
-    auto q(toEigen(m_state.m_orientation));
-    auto Omega(toEigen(m_state.m_angular_velocity));
-    auto b(toEigen(m_state.m_gyroscope_bias));
+    auto q(toEigen(m_state_qekf.m_orientation));
+    auto Omega(toEigen(m_state_qekf.m_angular_velocity));
+    auto b(toEigen(m_state_qekf.m_gyroscope_bias));
 
     if (m_x.size() != m_state_size)
     {
@@ -33,13 +33,13 @@ void iDynTree::AttitudeQuaternionEKF::deserializeStateVector()
 {
     using iDynTree::toEigen;
     auto x(toEigen(m_x));
-    auto q(toEigen(m_state.m_orientation));
-    auto Omega(toEigen(m_state.m_angular_velocity));
-    auto b(toEigen(m_state.m_gyroscope_bias));
+    auto q(toEigen(m_state_qekf.m_orientation));
+    auto Omega(toEigen(m_state_qekf.m_angular_velocity));
+    auto b(toEigen(m_state_qekf.m_gyroscope_bias));
 
     q = x.block<4, 1>(0, 0);
     Omega = x.block<3, 1>(4, 0);
-    b = x.block<3, 1>(4, 0);
+    b = x.block<3, 1>(7, 0);
 }
 
 void iDynTree::AttitudeQuaternionEKF::prepareSystemNoiseCovarianceMatrix(iDynTree::MatrixDynSize &Q)
@@ -52,7 +52,7 @@ void iDynTree::AttitudeQuaternionEKF::prepareSystemNoiseCovarianceMatrix(iDynTre
     }
 
 
-    iDynTree::MatrixDynSize Fu_dyn(m_state_size, m_input_size + m_state.m_gyroscope_bias.size());
+    iDynTree::MatrixDynSize Fu_dyn(m_state_size, m_input_size + m_state_qekf.m_gyroscope_bias.size());
     Fu_dyn.zero();
     iDynTree::Matrix6x6 U_dyn;
     U_dyn.zero();
@@ -65,8 +65,8 @@ void iDynTree::AttitudeQuaternionEKF::prepareSystemNoiseCovarianceMatrix(iDynTre
     F_u.block<3, 3>(4, 0) = Id3;
     F_u.block<3,3>(7, 3) = Id3;
 
-    U.block<3, 3>(0, 0) = Id3*m_params.gyroscope_noise_variance;
-    U.block<3, 3>(3, 3) = Id3*m_params.gyro_bias_noise_variance;
+    U.block<3, 3>(0, 0) = Id3*m_params_qekf.gyroscope_noise_variance;
+    U.block<3, 3>(3, 3) = Id3*m_params_qekf.gyro_bias_noise_variance;
 
     Q_ = F_u*U*F_u.transpose();
 }
@@ -84,26 +84,27 @@ void iDynTree::AttitudeQuaternionEKF::prepareMeasurementNoiseCovarianceMatrix(iD
     auto R_(toEigen(R));
     auto Id3(toEigen(m_Id3));
 
-    R_.block<3, 3>(0, 0) = Id3*m_params.accelerometer_noise_variance;
-    if (m_params.use_magnetometer_measurements)
+    R_.block<3, 3>(0, 0) = Id3*m_params_qekf.accelerometer_noise_variance;
+    if (m_params_qekf.use_magnetometer_measurements)
     {
-        R_(3, 3) = m_params.magnetometer_noise_variance;
+        R_(3, 3) = m_params_qekf.magnetometer_noise_variance;
     }
 }
 
 iDynTree::AttitudeQuaternionEKF::AttitudeQuaternionEKF()
 {
-    m_state.m_orientation.zero();
-    m_state.m_orientation(0) = 1.0;
-    m_state.m_angular_velocity.zero();
-    m_state.m_gyroscope_bias.zero();
+    m_state_qekf.m_orientation.zero();
+    m_state_qekf.m_orientation(0) = 1.0;
+    m_state_qekf.m_angular_velocity.zero();
+    m_state_qekf.m_gyroscope_bias.zero();
 
-    m_initial_state = m_state;
-    m_orientationInSO3.fromQuaternion(m_state.m_orientation);
+    m_initial_state_qekf = m_state_qekf;
+    m_orientationInSO3.fromQuaternion(m_state_qekf.m_orientation);
     m_orientationInRPY = m_orientationInSO3.asRPY();
 
     m_Omega_y.zero();
     m_Acc_y.zero();
+    m_Acc_y(2) = 1; // TODO: validate this assumption at initial step
 
     m_gravity_direction.zero();
     m_gravity_direction(2) = 1;
@@ -117,7 +118,7 @@ bool iDynTree::AttitudeQuaternionEKF::initializeFilter()
 {
     m_state_size = this->getInternalStateSize();
 
-    if (m_params.use_magnetometer_measurements)
+    if (m_params_qekf.use_magnetometer_measurements)
     {
         m_output_size = output_dimensions_with_magnetometer;
     }
@@ -143,21 +144,21 @@ bool iDynTree::AttitudeQuaternionEKF::initializeFilter()
     }
 
     // once the buffers are resized and zeroed, setup the matrices
-    if (!setInitialStateCovariance(m_params.initial_orientation_error_variance,
-                                   m_params.initial_ang_vel_error_variance,
-                                   m_params.initial_gyro_bias_error_variance))
+    if (!setInitialStateCovariance(m_params_qekf.initial_orientation_error_variance,
+                                   m_params_qekf.initial_ang_vel_error_variance,
+                                   m_params_qekf.initial_gyro_bias_error_variance))
     {
         return false;
     }
 
-    if (!setSystemNoiseVariance(m_params.gyroscope_noise_variance,
-                            m_params.gyro_bias_noise_variance))
+    if (!setSystemNoiseVariance(m_params_qekf.gyroscope_noise_variance,
+                            m_params_qekf.gyro_bias_noise_variance))
     {
         return false;
     }
 
-    if (!setMeasurementNoiseVariance(m_params.accelerometer_noise_variance,
-                                m_params.magnetometer_noise_variance))
+    if (!setMeasurementNoiseVariance(m_params_qekf.accelerometer_noise_variance,
+                                m_params_qekf.magnetometer_noise_variance))
     {
         return false;
     }
@@ -175,7 +176,7 @@ bool iDynTree::AttitudeQuaternionEKF::propagateStates()
     if (ekfGetStates(x_span))
     {
         deserializeStateVector();
-        m_orientationInSO3 = iDynTree::Rotation::RotationFromQuaternion(m_state.m_orientation);
+        m_orientationInSO3 = iDynTree::Rotation::RotationFromQuaternion(m_state_qekf.m_orientation);
         m_orientationInRPY = m_orientationInSO3.asRPY();
     }
     else
@@ -195,7 +196,7 @@ void iDynTree::AttitudeQuaternionEKF::serializeMeasurementVector()
     }
 
     toEigen(m_y).block<3, 1>(0, 0) = toEigen(m_Acc_y);
-    if (m_params.use_magnetometer_measurements)
+    if (m_params_qekf.use_magnetometer_measurements)
     {
         m_y(3) = m_Mag_y;
     }
@@ -212,7 +213,7 @@ bool iDynTree::AttitudeQuaternionEKF::callEkfUpdate()
     if (ekfGetStates(x_span))
     {
         deserializeStateVector();
-        m_orientationInSO3 = iDynTree::Rotation::RotationFromQuaternion(m_state.m_orientation);
+        m_orientationInSO3 = iDynTree::Rotation::RotationFromQuaternion(m_state_qekf.m_orientation);
         m_orientationInRPY = m_orientationInSO3.asRPY();
     }
     else
@@ -230,8 +231,19 @@ bool iDynTree::AttitudeQuaternionEKF::updateFilterWithMeasurements(const iDynTre
     {
         m_y.resize(m_output_size);
     }
-    m_Acc_y = linAccMeas;
-    toEigen(m_Acc_y).normalize();
+
+    if (!checkValidMeasurement(linAccMeas, "linear acceleration", true)) { return false; }
+    if (!checkValidMeasurement(gyroMeas, "gyroscope", false)) { return false; }
+    if (!checkValidMeasurement(magMeas, "magnetometer", true)) { return false; }
+
+    iDynTree::Vector3 linAccMeasUnitVector;
+    if (!getUnitVector(linAccMeas, linAccMeasUnitVector))
+    {
+        iDynTree::reportError("AttitudeQuaternionEKF", "updateFilterWithMeasurements", "Cannot retrieve unit vector from linear acceleration measuremnts.");
+        return false;
+    }
+
+    m_Acc_y = linAccMeasUnitVector;
     m_Omega_y = gyroMeas;
 
     // compute yaw angle from magnetometer measurements by limiting the vertical influence of magentometer
@@ -239,11 +251,17 @@ bool iDynTree::AttitudeQuaternionEKF::updateFilterWithMeasurements(const iDynTre
     // convert back to body frame and compute the yaw using atan2(y, x)
     iDynTree::Vector3 mag_meas_in_inertial_frame;
     iDynTree::Vector3 modified_mag_meas_in_body_frame;
+    iDynTree::Vector3 magMeasUnitVector;
+    if (!getUnitVector(magMeas, magMeasUnitVector))
+    {
+        iDynTree::reportError("AttitudeQuaternionEKF", "updateFilterWithMeasurements", "Cannot retrieve unit vector from magnetometer measuremnts.");
+        return false;
+    }
 
     using iDynTree::toEigen;
     auto m_A(toEigen(mag_meas_in_inertial_frame));
     auto m_B_modified(toEigen(modified_mag_meas_in_body_frame));
-    auto m_yB(toEigen(magMeas));
+    auto m_yB(toEigen(magMeasUnitVector));
     auto A_R_B(toEigen(m_orientationInSO3));
 
     m_A = A_R_B * m_yB;
@@ -262,8 +280,9 @@ bool iDynTree::AttitudeQuaternionEKF::updateFilterWithMeasurements(const iDynTre
 
 bool iDynTree::AttitudeQuaternionEKF::updateFilterWithMeasurements(const iDynTree::LinearAccelerometerMeasurements& linAccMeas, const iDynTree::GyroscopeMeasurements& gyroMeas)
 {
-    iDynTree::MagnetometerMeasurements magMeas;
+    iDynTree::MagnetometerMeasurements magMeas; // dummy measurement
     magMeas.zero();
+    magMeas(2) = 1;
     bool ok = updateFilterWithMeasurements(linAccMeas, gyroMeas, magMeas);
     return ok;
 }
@@ -293,14 +312,14 @@ bool iDynTree::AttitudeQuaternionEKF::ekfComputeJacobianF(iDynTree::VectorDynSiz
     toEigen(gyro_bias) = toEigen(x).block<3,1>(7, 0);
 
     iDynTree::Matrix4x4 dfq_by_dq;
-    dfq_by_dq(0,0) = dfq_by_dq(1, 1) = dfq_by_dq(2, 2) = dfq_by_dq(3, 3) = (2.0/m_params.time_step_in_seconds);
+    dfq_by_dq(0,0) = dfq_by_dq(1, 1) = dfq_by_dq(2, 2) = dfq_by_dq(3, 3) = (2.0/m_params_qekf.time_step_in_seconds);
     dfq_by_dq(1, 0) = dfq_by_dq(2, 3) = ang_vel(0);
     dfq_by_dq(2, 0) = dfq_by_dq(3, 1) = ang_vel(1);
     dfq_by_dq(3, 0) = dfq_by_dq(1, 2) = ang_vel(2);
     dfq_by_dq(0, 1) = dfq_by_dq(3, 2) = -ang_vel(0);
     dfq_by_dq(0, 2) = dfq_by_dq(1, 3) = -ang_vel(1);
     dfq_by_dq(0, 3) = dfq_by_dq(2, 1) = -ang_vel(2);
-    toEigen(dfq_by_dq) *= (m_params.time_step_in_seconds/2.0);
+    toEigen(dfq_by_dq) *= (m_params_qekf.time_step_in_seconds/2.0);
 
     iDynTree::MatrixDynSize dfq_by_dangvel;
     dfq_by_dangvel.resize(4, 3);
@@ -311,13 +330,13 @@ bool iDynTree::AttitudeQuaternionEKF::ekfComputeJacobianF(iDynTree::VectorDynSiz
     dfq_by_dangvel(1, 2) = q(2);
     dfq_by_dangvel(3, 1) = q(1);
     dfq_by_dangvel(1, 0) = dfq_by_dangvel(2, 1) = dfq_by_dangvel(3, 2) = -q(0);
-    toEigen(dfq_by_dangvel) *= (m_params.time_step_in_seconds/2.0);
+    toEigen(dfq_by_dangvel) *= (m_params_qekf.time_step_in_seconds/2.0);
 
     iDynTree::Matrix3x3 dfangvel_by_dgyrobias(m_Id3);
     toEigen(dfangvel_by_dgyrobias) *= -1;
 
     iDynTree::Matrix3x3 dfgyrobias_by_dgyrobias(m_Id3);
-    toEigen(dfgyrobias_by_dgyrobias) *= (1 - (m_params.bias_correlation_time_factor*m_params.time_step_in_seconds));
+    toEigen(dfgyrobias_by_dgyrobias) *= (1 - (m_params_qekf.bias_correlation_time_factor*m_params_qekf.time_step_in_seconds));
 
     toEigen(F).block<4,4>(0,0) = toEigen(dfq_by_dq);
     toEigen(F).block<4,3>(0,4) = toEigen(dfq_by_dangvel);
@@ -401,13 +420,13 @@ bool iDynTree::AttitudeQuaternionEKF::ekf_f(const iDynTree::VectorDynSize& x_k, 
 {
     if (x_k.size() != m_x.size() || xhat_k_plus_one.size() != m_x.size())
     {
-        reportError("AttitudeQuaternionEKF", "f", "state size mismatch");
+        reportError("AttitudeQuaternionEKF", "ekf_f", "state size mismatch");
         return false;
     }
 
     if (u_k.size() != m_u.size())
     {
-        reportError("AttitudeQuaternionEKF", "f", "input size mismatch");
+        reportError("AttitudeQuaternionEKF", "ekf_f", "input size mismatch");
         return false;
     }
 
@@ -429,9 +448,18 @@ bool iDynTree::AttitudeQuaternionEKF::ekf_f(const iDynTree::VectorDynSize& x_k, 
     iDynTree::UnitQuaternion correction = pureQuaternion(ang_vel);
     auto dq(toEigen(composeQuaternion2(orientation, correction)));
 
-    x_hat_plus.block<4,1>(0, 0) = q + (dq*(m_params.time_step_in_seconds*0.5));
+    x_hat_plus.block<4,1>(0, 0) = q + (dq*(m_params_qekf.time_step_in_seconds*0.5));
+    if (x_hat_plus.block<4,1>(0, 0).norm() == 0)
+    {
+        reportError("AttitudeQuaternionEKF", "ekf_f", "invalid quaternion");
+        return false;
+    }
+    if (q.norm() != 1)
+    {
+        q.normalize();
+    }
     x_hat_plus.block<3,1>(4, 0) = u - b;
-    x_hat_plus.block<3,1>(7, 0) = b*(1 - (m_params.bias_correlation_time_factor*m_params.time_step_in_seconds));
+    x_hat_plus.block<3,1>(7, 0) = b*(1 - (m_params_qekf.bias_correlation_time_factor*m_params_qekf.time_step_in_seconds));
 
     return true;
 }
@@ -492,8 +520,8 @@ bool iDynTree::AttitudeQuaternionEKF::ekf_h(const iDynTree::VectorDynSize& xhat_
 
 bool iDynTree::AttitudeQuaternionEKF::setMeasurementNoiseVariance(double acc, double mag)
 {
-    m_params.accelerometer_noise_variance = acc;
-    m_params.magnetometer_noise_variance = mag;
+    m_params_qekf.accelerometer_noise_variance = acc;
+    m_params_qekf.magnetometer_noise_variance = mag;
 
     iDynTree::MatrixDynSize R = iDynTree::MatrixDynSize(m_output_size, m_output_size);
     prepareMeasurementNoiseCovarianceMatrix(R);
@@ -505,8 +533,8 @@ bool iDynTree::AttitudeQuaternionEKF::setMeasurementNoiseVariance(double acc, do
 
 bool iDynTree::AttitudeQuaternionEKF::setSystemNoiseVariance(double gyro, double gyro_bias)
 {
-    m_params.gyroscope_noise_variance = gyro;
-    m_params.gyro_bias_noise_variance = gyro_bias;
+    m_params_qekf.gyroscope_noise_variance = gyro;
+    m_params_qekf.gyro_bias_noise_variance = gyro_bias;
 
     iDynTree::MatrixDynSize Q = iDynTree::MatrixDynSize(m_state_size, m_state_size);
     prepareSystemNoiseCovarianceMatrix(Q);
@@ -537,47 +565,47 @@ bool iDynTree::AttitudeQuaternionEKF::setInitialStateCovariance(double orientati
 
 bool iDynTree::AttitudeQuaternionEKF::getDefaultInternalInitialState(const iDynTree::Span< double >& stateBuffer) const
 {
-    stateBuffer(0) = m_initial_state.m_orientation(0);
-    stateBuffer(1) = m_initial_state.m_orientation(1);
-    stateBuffer(2) = m_initial_state.m_orientation(2);
-    stateBuffer(3) = m_initial_state.m_orientation(3);
-    stateBuffer(4) = m_initial_state.m_angular_velocity(0);
-    stateBuffer(5) = m_initial_state.m_angular_velocity(1);
-    stateBuffer(6) = m_initial_state.m_angular_velocity(2);
-    stateBuffer(7) = m_initial_state.m_gyroscope_bias(0);
-    stateBuffer(8) = m_initial_state.m_gyroscope_bias(1);
-    stateBuffer(9) = m_initial_state.m_gyroscope_bias(2);
+    stateBuffer(0) = m_initial_state_qekf.m_orientation(0);
+    stateBuffer(1) = m_initial_state_qekf.m_orientation(1);
+    stateBuffer(2) = m_initial_state_qekf.m_orientation(2);
+    stateBuffer(3) = m_initial_state_qekf.m_orientation(3);
+    stateBuffer(4) = m_initial_state_qekf.m_angular_velocity(0);
+    stateBuffer(5) = m_initial_state_qekf.m_angular_velocity(1);
+    stateBuffer(6) = m_initial_state_qekf.m_angular_velocity(2);
+    stateBuffer(7) = m_initial_state_qekf.m_gyroscope_bias(0);
+    stateBuffer(8) = m_initial_state_qekf.m_gyroscope_bias(1);
+    stateBuffer(9) = m_initial_state_qekf.m_gyroscope_bias(2);
     return true;
 }
 
 bool iDynTree::AttitudeQuaternionEKF::getInternalState(const iDynTree::Span< double >& stateBuffer) const
 {
-    stateBuffer(0) = m_state.m_orientation(0);
-    stateBuffer(1) = m_state.m_orientation(1);
-    stateBuffer(2) = m_state.m_orientation(2);
-    stateBuffer(3) = m_state.m_orientation(3);
-    stateBuffer(4) = m_state.m_angular_velocity(0);
-    stateBuffer(5) = m_state.m_angular_velocity(1);
-    stateBuffer(6) = m_state.m_angular_velocity(2);
-    stateBuffer(7) = m_state.m_gyroscope_bias(0);
-    stateBuffer(8) = m_state.m_gyroscope_bias(1);
-    stateBuffer(9) = m_state.m_gyroscope_bias(2);
+    stateBuffer(0) = m_state_qekf.m_orientation(0);
+    stateBuffer(1) = m_state_qekf.m_orientation(1);
+    stateBuffer(2) = m_state_qekf.m_orientation(2);
+    stateBuffer(3) = m_state_qekf.m_orientation(3);
+    stateBuffer(4) = m_state_qekf.m_angular_velocity(0);
+    stateBuffer(5) = m_state_qekf.m_angular_velocity(1);
+    stateBuffer(6) = m_state_qekf.m_angular_velocity(2);
+    stateBuffer(7) = m_state_qekf.m_gyroscope_bias(0);
+    stateBuffer(8) = m_state_qekf.m_gyroscope_bias(1);
+    stateBuffer(9) = m_state_qekf.m_gyroscope_bias(2);
     return true;
 }
 
 std::size_t iDynTree::AttitudeQuaternionEKF::getInternalStateSize() const
 {
     size_t size = 0;
-    size += m_state.m_orientation.size();
-    size += m_state.m_angular_velocity.size();
-    size += m_state.m_gyroscope_bias.size();
+    size += m_state_qekf.m_orientation.size();
+    size += m_state_qekf.m_angular_velocity.size();
+    size += m_state_qekf.m_gyroscope_bias.size();
 
     return size;
 }
 
 bool iDynTree::AttitudeQuaternionEKF::getOrientationEstimateAsQuaternion(iDynTree::UnitQuaternion& q)
 {
-    q = m_state.m_orientation;
+    q = m_state_qekf.m_orientation;
     return true;
 }
 
@@ -600,18 +628,18 @@ bool iDynTree::AttitudeQuaternionEKF::setInternalState(const iDynTree::Span< dou
         iDynTree::reportError("AttitudeQuaternionEKF", "setInternalState", "state size mismatch, using default state");
         return false;
     }
-    m_state.m_orientation(0) = stateBuffer(0);
-    m_state.m_orientation(1) = stateBuffer(1);
-    m_state.m_orientation(2) = stateBuffer(2);
-    m_state.m_orientation(3) = stateBuffer(3);
-    m_state.m_angular_velocity(0) = stateBuffer(4);
-    m_state.m_angular_velocity(1) = stateBuffer(5);
-    m_state.m_angular_velocity(2) = stateBuffer(6);
-    m_state.m_gyroscope_bias(0) = stateBuffer(7);
-    m_state.m_gyroscope_bias(1) = stateBuffer(8);
-    m_state.m_gyroscope_bias(2) = stateBuffer(9);
+    m_state_qekf.m_orientation(0) = stateBuffer(0);
+    m_state_qekf.m_orientation(1) = stateBuffer(1);
+    m_state_qekf.m_orientation(2) = stateBuffer(2);
+    m_state_qekf.m_orientation(3) = stateBuffer(3);
+    m_state_qekf.m_angular_velocity(0) = stateBuffer(4);
+    m_state_qekf.m_angular_velocity(1) = stateBuffer(5);
+    m_state_qekf.m_angular_velocity(2) = stateBuffer(6);
+    m_state_qekf.m_gyroscope_bias(0) = stateBuffer(7);
+    m_state_qekf.m_gyroscope_bias(1) = stateBuffer(8);
+    m_state_qekf.m_gyroscope_bias(2) = stateBuffer(9);
 
-    m_initial_state = m_state;
+    m_initial_state_qekf = m_state_qekf;
     serializeStateVector();
     iDynTree::Span<double> x0_span(m_x.data(), m_x.size());
     bool ok = ekfSetInitialState(x0_span);
@@ -620,28 +648,54 @@ bool iDynTree::AttitudeQuaternionEKF::setInternalState(const iDynTree::Span< dou
 
 bool iDynTree::AttitudeQuaternionEKF::setInternalStateInitialOrientation(const iDynTree::Span< double >& orientationBuffer)
 {
-    if ((size_t)orientationBuffer.size() != m_state.m_orientation.size())
+    if ((size_t)orientationBuffer.size() != m_state_qekf.m_orientation.size())
     {
         iDynTree::reportError("AttitudeQuaternionEKF", "setInternalStateInitialOrientation", "orientation size mismatch, using default state");
         return false;
     }
-    m_state.m_orientation(0) = orientationBuffer(0);
-    m_state.m_orientation(1) = orientationBuffer(1);
-    m_state.m_orientation(2) = orientationBuffer(2);
-    m_state.m_orientation(3) = orientationBuffer(3);
 
-    return true;
+    m_state_qekf.m_orientation(0) = orientationBuffer(0);
+    m_state_qekf.m_orientation(1) = orientationBuffer(1);
+    m_state_qekf.m_orientation(2) = orientationBuffer(2);
+    m_state_qekf.m_orientation(3) = orientationBuffer(3);
+
+    m_initial_state_qekf = m_state_qekf;
+    serializeStateVector();
+    iDynTree::Span<double> x0_span(m_x.data(), m_x.size());
+    bool ok = ekfSetInitialState(x0_span);
+
+    return ok;
 }
 
 
 bool iDynTree::AttitudeQuaternionEKF::useMagnetometerMeasurements(bool use_magnetometer_measurements)
 {
-    m_params.use_magnetometer_measurements = use_magnetometer_measurements;
+    if (use_magnetometer_measurements == m_params_qekf.use_magnetometer_measurements)
+    {
+        return true;
+    }
+
+    // store current state estimate and variance
+    iDynTree::VectorDynSize x(m_x);
+    iDynTree::MatrixDynSize P(m_x.size(), m_x.size());
+    iDynTree::Span<double> P_span(P.data(), P.capacity());
+    if (!ekfGetStateCovariance(P_span))
+    {
+        return false;
+    }
+
+    // get variances
+    double orientation_var{P(0,0)};
+    double ang_vel_var{P(4,4)};
+    double gyro_bias_var{P(7,7)};
+
+    m_params_qekf.use_magnetometer_measurements = use_magnetometer_measurements;
     ekfReset();
 
     bool ok = initializeFilter();
-    iDynTree::Span<double> x_span(m_x.data(), m_x.size());
+    iDynTree::Span<double> x_span(x.data(), x.size());
     ok = setInternalState(x_span) && ok;
+    ok = setInitialStateCovariance(orientation_var, ang_vel_var, gyro_bias_var) && ok;
     return ok;
 }
 

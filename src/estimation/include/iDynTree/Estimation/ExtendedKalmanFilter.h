@@ -60,7 +60,7 @@ namespace iDynTree
      */
     class DiscreteExtendedKalmanFilterHelper
     {
-    protected:
+    public:
         DiscreteExtendedKalmanFilterHelper();
 
         /**

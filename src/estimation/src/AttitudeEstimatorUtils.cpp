@@ -10,6 +10,69 @@
 
 #include <iDynTree/Estimation/AttitudeEstimatorUtils.h>
 #include <vector>
+#include <cmath>
+
+bool checkValidMeasurement(const iDynTree::Vector3& in, const std::string& measurement_type, bool check_also_zero_vector)
+{
+    if (check_also_zero_vector)
+    {
+        if (isZeroVector(in))
+        {
+            iDynTree::reportError("AttitudeMahonyFilter", "checkValidMeasurement",
+                                  (measurement_type + " measurements are invalid. Expecting a non-zero vector.").c_str());
+            return false;
+        }
+    }
+
+    if (isVectorNaN(in))
+    {
+        iDynTree::reportError("AttitudeMahonyFilter", "checkValidMeasurement",
+                              (measurement_type + " measurements are invalid. Has NaN elements.").c_str());
+        return false;
+    }
+
+    return true;
+}
+
+
+bool getUnitVector(const iDynTree::Vector3& in, iDynTree::Vector3& out)
+{
+    using iDynTree::toEigen;
+
+    double norm{toEigen(in).norm()};
+    if (norm == 0)
+    {
+        return false;
+    }
+
+    out = in;
+    toEigen(out).normalize();
+    return true;
+}
+
+bool isVectorNaN(const iDynTree::Vector3& vec)
+{
+    for (size_t i = 0; i < vec.size(); i++)
+    {
+        if (std::isnan(vec(i)))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool isZeroVector(const iDynTree::Vector3& vec)
+{
+    for (size_t i = 0; i < vec.size(); i++)
+    {
+        if (vec(i) != 0)
+        {
+            return false;
+        }
+    }
+    return true;
+}
 
 iDynTree::Vector3 crossVector(const iDynTree::Vector3& a, const iDynTree::Vector3& b)
 {
@@ -93,7 +156,6 @@ iDynTree::UnitQuaternion composeQuaternion(const iDynTree::UnitQuaternion &q1, c
     out(1) = imagOut(0);
     out(2) = imagOut(1);
     out(3) = imagOut(2);
-    toEigen(out).normalize();
 
     return out;
 }
@@ -115,7 +177,6 @@ iDynTree::UnitQuaternion composeQuaternion2(const iDynTree::UnitQuaternion &q1, 
 
     iDynTree::UnitQuaternion out;
     toEigen(out) = toEigen(mapofYQuaternionToXYQuaternion(q1))*toEigen(q2); // to be read as out = mapofYQuaternionToXYQuaternion(q1)*q2
-    toEigen(out).normalize();
 
     return out;
 }
