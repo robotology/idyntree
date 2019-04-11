@@ -207,8 +207,8 @@ void YARPRobotStatePublisherModule::onRead(yarp::rosmsg::sensor_msgs::JointState
         return;
     }
 
-    // Check size
-    if (v.name.size() != m_jointPos.size())
+    // Check if joint states contain at least as many joints of the model
+    if (v.name.size() < m_jointPos.size())
     {
         yError() << "Size mismatch. Model has " << m_jointPos.size()
                  << " joints, while the received JointState message has " << v.name.size() << " joints.";
@@ -220,9 +220,18 @@ void YARPRobotStatePublisherModule::onRead(yarp::rosmsg::sensor_msgs::JointState
     //        * Add a map string --> indeces
     // Fill the buffer of joints positions
     const iDynTree::Model& model = m_kinDynComp.model();
+    iDynTree::JointIndex jntIndex;
     for (size_t i=0; i < v.name.size(); i++)
     {
-        iDynTree::JointIndex jntIndex = model.getJointIndex(v.name[i]);
+        for (size_t j=0; j < model.getNrOfDOFs(); j++)
+        {
+            if (v.name[i] == model.getJointName(j))
+            {
+                jntIndex = model.getJointIndex(v.name[i]);
+                break;
+            }
+        }
+
         if (jntIndex == iDynTree::JOINT_INVALID_INDEX)
             continue;
 
