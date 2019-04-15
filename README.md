@@ -190,7 +190,7 @@ They are a collection of Matlab/Octave functions that wraps the functionalities 
                                0,  0,  0,  1]; 
 ```
 
-The purpose of the high-level wrappers is therefore to provide a simpler and easy-to-use interface for Matlab/Octave users who want to use iDyntree inside Matlab/Octave, also helping in designing code which is less error-prone and easier to debug (e.g. in case the interface of an iDyntree function will change in the future). More details and a complete list of the wrappers can be found in the [wrappers README](bindings/matlab/+iDynTreeWrappers/README). **Usage**: the wrappers package is installed together with the iDyntree bindings when compiling iDyntree with option `IDYNTREE_USES_MATLAB` or `IDYNTREE_USES_OCTAVE` set to `ON`. The functions can be called from Matlab/Octave using the namespace `iDynTreeWrappers`, i.e. `iDynTreeWrappers.name_of_the_corresponding_iDynTree_method`.
+The purpose of the high-level wrappers is therefore to provide a simpler and easy-to-use interface for Matlab/Octave users who want to use iDyntree inside Matlab/Octave, also helping in designing code which is less error-prone and easier to debug (e.g. in case the interface of an iDyntree function will change in the future). More details and a complete list of the wrappers can be found in the [wrappers README](/bindings/matlab/+iDynTreeWrappers/README.md). **Usage**: the wrappers package is installed together with the iDyntree bindings when compiling iDyntree with option `IDYNTREE_USES_MATLAB` or `IDYNTREE_USES_OCTAVE` set to `ON`. The functions can be called from Matlab/Octave using the namespace `iDynTreeWrappers`, i.e. `iDynTreeWrappers.name_of_the_corresponding_iDynTree_method`.
 
 ## Tutorials
 | Topic  | C++ | Matlab | Python |
