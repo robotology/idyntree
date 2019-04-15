@@ -167,6 +167,30 @@ for example because you modified some iDynTree classes, you can install the expe
 version of Swig with Matlab support from https://github.com/robotology-dependencies/swig/ (branch `matlab`) and then enable Matlab bindings generation with the `IDYNTREE_GENERATE_MATLAB` options.
 For more info on how to modify the matlab bindings, see https://github.com/robotology/idyntree/blob/master/doc/dev/faqs.md#how-to-add-wrap-a-new-class-or-function-with-swig .
 
+##### Matlab/Octave high level wrappers
+They are a collection of Matlab/Octave functions that wraps the functionalities of (mainly) the iDyntree class `KinDynComputations` into functions with a typical Matlab/Octave interface. In fact for the user it may be sometimes counterintuitive to use C++ based formalism inside Matlab/Octave. Furthermore, there are common iDyntree functions that require several lines of code in order to be used correctly. E.g. see the `getRobotState` method:
+
+```
+    basePose_iDyntree     = iDynTree.Transform();
+    jointPos_iDyntree     = iDynTree.VectorDynSize(KinDynModel.NDOF);
+    baseVel_iDyntree      = iDynTree.Twist();
+    jointVel_iDyntree     = iDynTree.VectorDynSize(KinDynModel.NDOF);
+    gravityVec_iDyntree   = iDynTree.Vector3();
+
+    KinDynModel.kinDynComp.getRobotState(basePose_iDyntree,jointPos_iDyntree,baseVel_iDyntree,jointVel_iDyntree,gravityVec_iDyntree);
+
+    baseRotation_iDyntree = basePose_iDyntree.getRotation;
+    baseOrigin_iDyntree   = basePose_iDyntree.getPosition;
+    baseRotation          = baseRotation_iDyntree.toMatlab;
+    baseOrigin            = baseOrigin_iDyntree.toMatlab;
+    jointPos              = jointPos_iDyntree.toMatlab;
+    baseVel               = baseVel_iDyntree.toMatlab;
+    jointVel              = jointVel_iDyntree.toMatlab; 
+    basePose              = [baseRotation, baseOrigin;
+                               0,  0,  0,  1]; 
+```
+
+The purpose of the high-level wrappers is therefore to provide a simpler and easy-to-use interface for Matlab/Octave users who want to use iDyntree inside Matlab/Octave, also helping in designing code which is less error-prone and easier to debug (e.g. in case the interface of an iDyntree function will change in the future). More details and a complete list of the wrappers can be found in the [wrappers README](bindings/matlab/+iDynTreeWrappers/README). **Usage**: the wrappers package is installed together with the iDyntree bindings when compiling iDyntree with option `IDYNTREE_USES_MATLAB` or `IDYNTREE_USES_OCTAVE` set to `ON`. The functions can be called from Matlab/Octave using the namespace `iDynTreeWrappers`, i.e. `iDynTreeWrappers.name_of_the_corresponding_iDynTree_method`.
 
 ## Tutorials
 | Topic  | C++ | Matlab | Python |

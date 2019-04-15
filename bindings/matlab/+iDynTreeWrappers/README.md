@@ -1,10 +1,10 @@
 # idyntree high-level-wrappers
 
-A collection of Matlab functions that wraps the functionalities of (mainly) the iDyntree class `KinDynComputations`. For further information on the single wrapper, refer to the description included in each function.
+A collection of Matlab/Octave functions that wraps the functionalities of (mainly) the iDyntree class `KinDynComputations`. For further information on the single wrapper, refer to the description included in each function.
 
 ## Motivations
 
-For a Matlab user, it may be sometimes counterintuitive to use C++ based formalism inside Matlab. Furthermore, there are common iDyntree functions that require several lines of code in order to be used correctly. E.g. see the `getRobotState` function:
+For a Matlab/Octave user, it may be sometimes counterintuitive to use C++ based formalism inside Matlab/Octave. Furthermore, there are common iDyntree functions that require several lines of code in order to be used correctly. E.g. see the `getRobotState` function:
 
 ```
     basePose_iDyntree   = iDynTree.Transform();
@@ -27,7 +27,7 @@ For a Matlab user, it may be sometimes counterintuitive to use C++ based formali
                        0,  0,  0,  1]; 
 ```
 
-The purpose of the wrapper is therefore to provide a simpler and easy-to-use interface for Matlab users who wants to use iDyntree inside Matlab, also helping in designing code which is less error-prone and easier to debug (e.g. in case the interface of an iDyntree function will change in the future).
+The purpose of the wrapper is therefore to provide a simpler and easy-to-use interface for Matlab/Octave users who wants to use iDyntree inside Matlab/Octave, also helping in designing code which is less error-prone and easier to debug (e.g. in case the interface of an iDyntree function will change in the future).
 
 ## KinDynComputations class
 
