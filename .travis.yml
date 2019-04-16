@@ -13,9 +13,6 @@ stages:
   - test # Default stage with job matrix
   - osx
 
-compiler:
-  - gcc
-
 env:
   global:
     - TRAVIS_CMAKE_GENERATOR="Unix Makefiles"
