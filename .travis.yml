@@ -13,9 +13,6 @@ stages:
   - test # Default stage with job matrix
   - osx
 
-compiler:
-  - gcc
-
 env:
   global:
     - TRAVIS_CMAKE_GENERATOR="Unix Makefiles"
@@ -87,13 +84,6 @@ jobs:
       after_failure: skip
       after_success: skip
       after_script: skip
-      env:
-        TRAVIS_CMAKE_GENERATOR="Xcode"
-        TRAVIS_BUILD_TYPE="Debug"
-        VALGRIND_TESTS="OFF"
-        COMPILE_BINDINGS="OFF"
-        FULL_DEPS="OFF"
-    - <<: *osx_template
       compiler: clang
       env:
         TRAVIS_CMAKE_GENERATOR="Unix Makefiles"
