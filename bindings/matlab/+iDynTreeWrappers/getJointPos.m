@@ -3,7 +3,7 @@ function jointPos = getJointPos(KinDynModel)
     % GETJOINTPOS retrieves the joints configuration from the reduced model.
     %
     % This matlab function wraps a functionality of the iDyntree library.                     
-    % For further info see also: http://wiki.icub.org/codyco/dox/html/idyntree/html/
+    % For further info see also: https://github.com/robotology/idyntree
     %
     % FORMAT:  jointPos = getJointPos(KinDynModel)
     %
@@ -12,7 +12,10 @@ function jointPos = getJointPos(KinDynModel)
     % OUTPUTS: - jointPos: [ndof x 1] vector of joint positions.
     %
     % Author : Gabriele Nava (gabriele.nava@iit.it)
-    % Genova, Nov 2018
+    %
+    % Copyright (C) 2019 Istituto Italiano di Tecnologia (IIT). All rights reserved.
+    % This software may be modified and distributed under the terms of the
+    % GNU Lesser General Public License v2.1 or any later version.
 
     %% ------------Initialization----------------
     

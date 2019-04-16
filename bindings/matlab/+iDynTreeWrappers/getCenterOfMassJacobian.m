@@ -3,16 +3,19 @@ function J_CoM = getCenterOfMassJacobian(KinDynModel)
     % GETCENTEROFMASSJACOBIAN retrieves the CoM jacobian.
     %
     % This matlab function wraps a functionality of the iDyntree library.                     
-    % For further info see also: http://wiki.icub.org/codyco/dox/html/idyntree/html/
+    % For further info see also: https://github.com/robotology/idyntree
     %
     % FORMAT:  J_CoM = getCenterOfMassJacobian(KinDynModel)
     %
     % INPUTS:  - KinDynModel: a structure containing the loaded model and additional info.
     %
-    % OUTPUTS: - J_CoM: [3 x ndof+6] CoM free floating Jacobian.
+    % OUTPUTS: - J_CoM: [3 x 6+ndof] CoM free floating Jacobian.
     %
     % Author : Gabriele Nava (gabriele.nava@iit.it)
-    % Genova, Nov 2018
+    %
+    % Copyright (C) 2019 Istituto Italiano di Tecnologia (IIT). All rights reserved.
+    % This software may be modified and distributed under the terms of the
+    % GNU Lesser General Public License v2.1 or any later version.
 
     %% ------------Initialization----------------
     
