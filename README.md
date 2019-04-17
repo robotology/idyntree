@@ -167,6 +167,10 @@ for example because you modified some iDynTree classes, you can install the expe
 version of Swig with Matlab support from https://github.com/robotology-dependencies/swig/ (branch `matlab`) and then enable Matlab bindings generation with the `IDYNTREE_GENERATE_MATLAB` options.
 For more info on how to modify the matlab bindings, see https://github.com/robotology/idyntree/blob/master/doc/dev/faqs.md#how-to-add-wrap-a-new-class-or-function-with-swig .
 
+##### Matlab/Octave high level wrappers
+They are a collection of Matlab/Octave functions that wraps the functionalities of (mainly) the iDyntree class `KinDynComputations` into functions with a typical Matlab/Octave interface. The purpose of the high-level wrappers is to provide a simpler and easy-to-use interface for Matlab/Octave users who want to use iDyntree inside Matlab/Octave, also helping in designing code which is less error-prone and easier to debug (e.g. in case the interface of an iDyntree function will change in the future). More details and a complete list of the wrappers can be found in the [wrappers README](/bindings/matlab/+iDynTreeWrappers/README.md).
+
+**Usage**: the wrappers package is installed together with the iDyntree bindings when compiling iDyntree with option `IDYNTREE_USES_MATLAB` or `IDYNTREE_USES_OCTAVE` set to `ON`. The functions can be called from Matlab/Octave using the namespace `iDynTreeWrappers`, i.e. `iDynTreeWrappers.name_of_the_corresponding_iDynTree_method`.
 
 ## Tutorials
 | Topic  | C++ | Matlab | Python |
