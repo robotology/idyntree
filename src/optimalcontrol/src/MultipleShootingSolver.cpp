@@ -2039,15 +2039,6 @@ namespace iDynTree {
 
                             lambdaConstraints = fullLambda.segment(constraintIndex, nc);
 
-                            if (!(m_ocproblem->constraintSecondPartialDerivativeWRTStateControl(mesh->time, m_integrator->dynamicalSystem().lock()->initialState(), m_collocationControlBuffer[1], m_lambdaConstraints, m_stateControlHessianBuffer))){
-                                std::ostringstream errorMsg;
-                                errorMsg << "Error while evaluating the constraints hessian wrt state and control at time " << mesh->time << ".";
-                                reportError("MultipleShootingTranscription", "evaluateConstraintsHessian", errorMsg.str().c_str());
-                                return false;
-                            }
-
-                            setHessianBlockAndItsTranspose(hessian, m_stateControlHessianBuffer, mesh->stateIndex, mesh->controlIndex);
-
                             if (!(m_ocproblem->constraintSecondPartialDerivativeWRTControl(mesh->time, m_integrator->dynamicalSystem().lock()->initialState(), m_collocationControlBuffer[1], m_lambdaConstraints, m_controlHessianBuffer))){
                                 std::ostringstream errorMsg;
                                 errorMsg << "Error while evaluating the constraints hessian wrt control at time " << mesh->time << ".";
