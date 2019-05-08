@@ -18,6 +18,13 @@
 #include <iDynTree/Core/Utils.h>
 #include <cassert>
 
+void iDynTree::optimalcontrol::SparsityStructure::addNonZero(size_t row, size_t col)
+{
+    m_nonZeroElementRows.push_back(row);
+    m_nonZeroElementColumns.push_back(col);
+    m_register.insert(std::to_string(row) + "_" + std::to_string(col));
+}
+
 iDynTree::optimalcontrol::SparsityStructure::SparsityStructure()
 { }
 
@@ -31,8 +38,8 @@ bool iDynTree::optimalcontrol::SparsityStructure::merge(const iDynTree::optimalc
         return false;
     }
 
-    for (size_t i = 0; i < other.nonZeroElementRows.size(); ++i) {
-        addNonZeroIfNotPresent(other.nonZeroElementRows[i], other.nonZeroElementColumns[i]);
+    for (size_t i = 0; i < other.size(); ++i) {
+        add(other.nonZeroElementRows()[i], other.nonZeroElementColumns()[i]);
     }
 
     return true;
@@ -42,7 +49,7 @@ void iDynTree::optimalcontrol::SparsityStructure::addDenseBlock(size_t startRow,
 {
     for (size_t i = 0; i < numberOfRows; ++i) {
         for (size_t j = 0; j < numberOfColumns; ++j) {
-            addNonZeroIfNotPresent(startRow + i, startColumn + j);
+            add(startRow + i, startColumn + j);
         }
     }
 }
@@ -70,7 +77,7 @@ bool iDynTree::optimalcontrol::SparsityStructure::addDenseBlock(const iDynTree::
 void iDynTree::optimalcontrol::SparsityStructure::addIdentityBlock(size_t startRow, size_t startColumn, size_t dimension)
 {
     for (size_t i = 0; i < dimension; ++i) {
-        addNonZeroIfNotPresent(startRow + i, startColumn + i);
+        add(startRow + i, startColumn + i);
     }
 }
 
@@ -82,49 +89,70 @@ bool iDynTree::optimalcontrol::SparsityStructure::addBlock(size_t startRow, size
     }
 
     for (size_t i = 0; i < other.size(); ++i) {
-        addNonZeroIfNotPresent(startRow + other.nonZeroElementRows[i], startColumn + other.nonZeroElementColumns[i]);
+        add(startRow + other.nonZeroElementRows()[i], startColumn + other.nonZeroElementColumns()[i]);
     }
 
     return true;
 }
 
-void iDynTree::optimalcontrol::SparsityStructure::addNonZeroIfNotPresent(size_t newRow, size_t newCol)
+void iDynTree::optimalcontrol::SparsityStructure::add(size_t newRow, size_t newCol)
 {
     if (!isValuePresent(newRow, newCol)) {
-        nonZeroElementRows.push_back(newRow);
-        nonZeroElementColumns.push_back(newCol);
+        addNonZero(newRow, newCol);
+    }
+}
+
+void iDynTree::optimalcontrol::SparsityStructure::add(NonZero newElement)
+{
+    if (!isValuePresent(newElement.row, newElement.col)) {
+        addNonZero(newElement.row, newElement.col);
     }
 }
 
 bool iDynTree::optimalcontrol::SparsityStructure::isValuePresent(size_t row, size_t col) const
 {
-    for (size_t i = 0; i < nonZeroElementRows.size(); ++i) {
-        if ((row == nonZeroElementRows[i]) && (col == nonZeroElementColumns[i])) {
-            return true;
-        }
-    }
-    return false;
+    return (m_register.find(std::to_string(row) + "_" + std::to_string(col)) != m_register.end());
 }
 
-void iDynTree::optimalcontrol::SparsityStructure::resize(size_t newSize)
+void iDynTree::optimalcontrol::SparsityStructure::reserve(size_t newSize)
 {
-    nonZeroElementRows.resize(newSize);
-    nonZeroElementColumns.resize(newSize);
+    m_nonZeroElementRows.reserve(newSize);
+    m_nonZeroElementColumns.reserve(newSize);
+    m_register.reserve(newSize);
 }
 
 void iDynTree::optimalcontrol::SparsityStructure::clear()
 {
-    nonZeroElementRows.clear();
-    nonZeroElementColumns.clear();
+    m_register.clear();
+    m_nonZeroElementRows.clear();
+    m_nonZeroElementColumns.clear();
 }
 
 size_t iDynTree::optimalcontrol::SparsityStructure::size() const
 {
     assert(isValid());
-    return nonZeroElementRows.size();
+    return m_nonZeroElementRows.size();
 }
 
 bool iDynTree::optimalcontrol::SparsityStructure::isValid() const
 {
-    return (nonZeroElementColumns.size() == nonZeroElementRows.size());
+    return (m_nonZeroElementColumns.size() == m_nonZeroElementRows.size());
+}
+
+iDynTree::optimalcontrol::NonZero iDynTree::optimalcontrol::SparsityStructure::operator[](size_t index) const
+{
+    NonZero element;
+    element.row = m_nonZeroElementRows[index];
+    element.col = m_nonZeroElementColumns[index];
+    return element;
+}
+
+const std::vector<size_t> &iDynTree::optimalcontrol::SparsityStructure::nonZeroElementRows() const
+{
+    return m_nonZeroElementRows;
+}
+
+const std::vector<size_t> &iDynTree::optimalcontrol::SparsityStructure::nonZeroElementColumns() const
+{
+    return m_nonZeroElementColumns;
 }

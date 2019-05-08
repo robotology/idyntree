@@ -69,7 +69,7 @@ namespace iDynTree {
                 if (m_dynamicalSystem_ptr->dynamicsStateFirstDerivativeSparsity(m_stateJacobianSparsity[0])) {
 
                     for (size_t i = 0; i < m_dynamicalSystem_ptr->stateSpaceSize(); ++i) {
-                        m_stateJacobianSparsity[0].addNonZeroIfNotPresent(i, i);
+                        m_stateJacobianSparsity[0].add(i, i);
                     }
                     m_stateJacobianSparsity[1] = m_stateJacobianSparsity[0];
 

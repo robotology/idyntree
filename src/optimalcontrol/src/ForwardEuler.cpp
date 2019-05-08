@@ -64,21 +64,18 @@ namespace iDynTree {
                 m_controlJacobianSparsity.resize(2);
 
                 if (m_dynamicalSystem_ptr->dynamicsStateFirstDerivativeSparsity(m_stateJacobianSparsity[0])) {
-                    m_stateJacobianSparsity[1].nonZeroElementRows.clear();
-                    m_stateJacobianSparsity[1].nonZeroElementColumns.clear();
+                    m_stateJacobianSparsity[1].clear();
 
                     for (size_t i = 0; i < m_dynamicalSystem_ptr->stateSpaceSize(); ++i) {
-                        m_stateJacobianSparsity[0].addNonZeroIfNotPresent(i, i);
-                        m_stateJacobianSparsity[1].nonZeroElementRows.push_back(i);
-                        m_stateJacobianSparsity[1].nonZeroElementColumns.push_back(i);
+                        m_stateJacobianSparsity[0].add(i, i);
+                        m_stateJacobianSparsity[1].add(i, i);
                     }
 
                     m_hasStateJacobianSparsity = true;
                 }
 
                 if (m_dynamicalSystem_ptr->dynamicsControlFirstDerivativeSparsity(m_controlJacobianSparsity[0])) {
-                    m_controlJacobianSparsity[1].nonZeroElementRows.clear();
-                    m_controlJacobianSparsity[1].nonZeroElementColumns.clear();
+                    m_controlJacobianSparsity[1].clear();
 
                     m_hasControlJacobianSparsity = true;
                 }

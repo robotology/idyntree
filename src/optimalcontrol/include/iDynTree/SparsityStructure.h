@@ -20,17 +20,28 @@
 #include <iDynTree/Core/Utils.h>
 #include <vector>
 #include <cstddef>
+#include <unordered_set>
 
 namespace iDynTree {
     namespace optimalcontrol {
         class SparsityStructure;
+
+        struct NonZero {
+            size_t row;
+            size_t col;
+        };
     }
 }
 
 class iDynTree::optimalcontrol::SparsityStructure {
+    std::unordered_set<std::string> m_register;
+
+    void addNonZero(size_t row, size_t col);
+
+    std::vector<size_t> m_nonZeroElementRows;
+    std::vector<size_t> m_nonZeroElementColumns;
+
 public:
-    std::vector<size_t> nonZeroElementRows;
-    std::vector<size_t> nonZeroElementColumns;
 
     SparsityStructure();
 
@@ -46,17 +57,25 @@ public:
 
     bool addBlock(size_t startRow, size_t startColumn, const SparsityStructure& other);
 
-    void addNonZeroIfNotPresent(size_t newRow, size_t newCol);
+    void add(size_t newRow, size_t newCol);
+
+    void add(NonZero newElement);
 
     bool isValuePresent(size_t row, size_t col) const;
 
-    void resize(size_t newSize);
+    void reserve(size_t newSize);
 
     void clear();
 
     size_t size() const;
 
     bool isValid() const;
+
+    NonZero operator[](size_t index) const;
+
+    const std::vector<size_t>& nonZeroElementRows() const;
+
+    const std::vector<size_t>& nonZeroElementColumns() const;
 };
 
 #endif // IDYNTREE_OPTIMALCONTROL_SPARSITYSTRUCTURE_H

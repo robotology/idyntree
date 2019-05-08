@@ -252,8 +252,8 @@ namespace iDynTree {
 
             void addJacobianBlock(size_t initRow, size_t initCol, const SparsityStructure& sparsity){
                 for (size_t i = 0; i < sparsity.size(); ++i) {
-                    addNonZero(m_jacobianNZRows, m_jacobianNonZeros, initRow + sparsity.nonZeroElementRows[i]);
-                    addNonZero(m_jacobianNZCols, m_jacobianNonZeros, initCol + sparsity.nonZeroElementColumns[i]);
+                    addNonZero(m_jacobianNZRows, m_jacobianNonZeros, initRow + sparsity[i].row);
+                    addNonZero(m_jacobianNZCols, m_jacobianNonZeros, initCol + sparsity[i].col);
                     m_jacobianNonZeros++;
                 }
             }
@@ -285,7 +285,7 @@ namespace iDynTree {
                 SparsityStructure& transposeSparsity = m_hessianBlocks.blockSparsity(initCol, initRow);
 
                 for (size_t i = 0; i < sparsity.size(); ++i){
-                    transposeSparsity.addNonZeroIfNotPresent(sparsity.nonZeroElementColumns[i], sparsity.nonZeroElementRows[i]);
+                    transposeSparsity.add(sparsity[i]);
                 }
             }
 
@@ -318,27 +318,9 @@ namespace iDynTree {
             }
 
             void mergeSparsityVectors(const std::vector<SparsityStructure>& original, SparsityStructure& merged) {
-                const std::vector<size_t>& firstRows = original[0].nonZeroElementRows;
-                const std::vector<size_t>& firstCols = original[0].nonZeroElementColumns;
-                const std::vector<size_t>& secondRows = original[1].nonZeroElementRows;
-                const std::vector<size_t>& secondCols = original[1].nonZeroElementColumns;
-                size_t mergedNonZeros = 0;
-                for (size_t i = 0; i < firstRows.size(); ++i) {
-                    addNonZero(merged.nonZeroElementRows, mergedNonZeros, firstRows[i]);
-                    addNonZero(merged.nonZeroElementColumns, mergedNonZeros, firstCols[i]);
-                    mergedNonZeros++;
-                }
-
-                for (size_t j = 0; j < secondRows.size(); ++j) {
-                    bool duplicate = original[0].isValuePresent(secondRows[j], secondCols[j]);
-
-                    if (!duplicate) {
-                        addNonZero(merged.nonZeroElementRows, mergedNonZeros, secondRows[j]);
-                        addNonZero(merged.nonZeroElementColumns, mergedNonZeros, secondCols[j]);
-                        mergedNonZeros++;
-                    }
-                }
-                merged.resize(mergedNonZeros);
+                merged.clear();
+                merged = original[0];
+                merged.merge(original[1]);
             }
 
             void allocateBuffers(){
@@ -1629,8 +1611,8 @@ namespace iDynTree {
                     return false;
                 }
 
-                nonZeroElementRows = m_fullHessianSparsity.nonZeroElementRows;
-                nonZeroElementColumns = m_fullHessianSparsity.nonZeroElementColumns;
+                nonZeroElementRows = m_fullHessianSparsity.nonZeroElementRows();
+                nonZeroElementColumns = m_fullHessianSparsity.nonZeroElementColumns();
 
                 return true;
             }

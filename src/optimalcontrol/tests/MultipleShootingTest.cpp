@@ -87,10 +87,10 @@ public:
 
     virtual bool dynamicsControlFirstDerivativeSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) override {
         iDynTree::optimalcontrol::SparsityStructure sparsity;
-        sparsity.addNonZeroIfNotPresent(0, 0);
-        sparsity.addNonZeroIfNotPresent(0, 1);
-        sparsity.addNonZeroIfNotPresent(1, 0);
-        sparsity.addNonZeroIfNotPresent(1, 2);
+        sparsity.add(0, 0);
+        sparsity.add(0, 1);
+        sparsity.add(1, 0);
+        sparsity.add(1, 2);
         controlSparsity = sparsity;
         return true;
     }
@@ -194,7 +194,7 @@ public:
 
     virtual bool constraintJacobianWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) override {
         iDynTree::optimalcontrol::SparsityStructure sparsity;
-        sparsity.addNonZeroIfNotPresent(0,0);
+        sparsity.add(0,0);
         controlSparsity = sparsity;
         return true;
     }
