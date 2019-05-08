@@ -224,6 +224,12 @@ namespace iDynTree {
                                                              const VectorDynSize& control,
                                                              MatrixDynSize& partialDerivative);
 
+            bool costsSecondPartialDerivativeWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity); //returns false if something goes wrong
+
+            bool costsSecondPartialDerivativeWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity); //returns false if something goes wrong
+
+            bool costsSecondPartialDerivativeWRTStateControlSparsity(iDynTree::optimalcontrol::SparsityStructure& stateControlSparsity); //returns false if something goes wrong
+
             bool constraintsEvaluation(double time, const VectorDynSize& state, const VectorDynSize& control, VectorDynSize& constraintsValue);
 
             bool getConstraintsUpperBound(double time, double infinity, VectorDynSize& upperBound); //returns false if something goes wrong
@@ -242,27 +248,33 @@ namespace iDynTree {
                                                const VectorDynSize& control,
                                                MatrixDynSize& jacobian);
 
-            bool constraintJacobianWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity);
+            bool constraintsJacobianWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity); //returns false if something goes wrong
 
-            bool constraintJacobianWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity);
+            bool constraintsJacobianWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity); //returns false if something goes wrong
 
-            bool constraintSecondPartialDerivativeWRTState(double time,
+            bool constraintsSecondPartialDerivativeWRTState(double time,
                                                            const VectorDynSize& state,
                                                            const VectorDynSize& control,
                                                            const VectorDynSize& lambda,
                                                            MatrixDynSize& hessian);
 
-            bool constraintSecondPartialDerivativeWRTControl(double time,
+            bool constraintsSecondPartialDerivativeWRTControl(double time,
                                                              const VectorDynSize& state,
                                                              const VectorDynSize& control,
                                                              const VectorDynSize& lambda,
                                                              MatrixDynSize& hessian);
 
-            bool constraintSecondPartialDerivativeWRTStateControl(double time,
+            bool constraintsSecondPartialDerivativeWRTStateControl(double time,
                                                                   const VectorDynSize& state,
                                                                   const VectorDynSize& control,
                                                                   const VectorDynSize& lambda,
                                                                   MatrixDynSize& hessian);
+
+            bool constraintsSecondPartialDerivativeWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity); //returns false if something goes wrong
+
+            bool constraintsSecondPartialDerivativeWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity); //returns false if something goes wrong
+
+            bool constraintsSecondPartialDerivativeWRTStateControlSparsity(iDynTree::optimalcontrol::SparsityStructure& stateControlSparsity); //returns false if something goes wrong
 
         private:
             class OptimalControlProblemPimpl;

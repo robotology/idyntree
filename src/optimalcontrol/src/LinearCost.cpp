@@ -22,7 +22,11 @@ namespace iDynTree {
 
         LinearCost::LinearCost(const std::string &costName)
             : QuadraticLikeCost(costName)
-        { }
+        {
+            m_hasSecondPartialDerivativeWRTStateSparsity = true;
+            m_hasSecondPartialDerivativeWRTControlSparsity = true;
+            m_hasSecondPartialDerivativeWRTStateControlSparsity = true;
+        }
 
         LinearCost::~LinearCost()
         { }

@@ -118,9 +118,15 @@ namespace optimalcontrol {
                 CollocationHessianIndex(size_t first, size_t second);
 
                 bool operator< (const CollocationHessianIndex& rhs) const;
+
+                size_t first() const;
+
+                size_t second() const;
             };
 
             using CollocationHessianMap = std::map<CollocationHessianIndex, MatrixDynSize>;
+
+            using CollocationHessianSparsityMap = std::map<CollocationHessianIndex, SparsityStructure>;
 
             /**
              * @warning This class is still in active development, and so API interface can change between iDynTree versions.
@@ -262,6 +268,12 @@ namespace optimalcontrol {
                                                                             CollocationHessianMap& stateSecondDerivative,
                                                                             CollocationHessianMap& controlSecondDerivative,
                                                                             CollocationHessianMap& stateControlSecondDerivative);
+
+                virtual bool getCollocationConstraintSecondDerivativeWRTStateSparsity(CollocationHessianSparsityMap& stateDerivativeSparsity);
+
+                virtual bool getCollocationConstraintSecondDerivativeWRTControlSparsity(CollocationHessianSparsityMap& controlDerivativeSparsity);
+
+                virtual bool getCollocationConstraintSecondDerivativeWRTStateControlSparsity(CollocationHessianSparsityMap& stateControlDerivativeSparsity);
 
                 const IntegratorInfo& info() const;
 

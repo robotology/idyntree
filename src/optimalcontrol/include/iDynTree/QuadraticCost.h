@@ -53,6 +53,11 @@ namespace iDynTree {
 
            bool setCostBias(std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingDouble> timeVaryingStateCostBias,
                             std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingDouble> timeVaryingControlCostBias);
+
+           bool setStateHessianSparsity(const SparsityStructure& stateSparsity);
+
+           bool setControlHessianSparsity(const SparsityStructure& controlSparsity);
+
        };
     }
 }

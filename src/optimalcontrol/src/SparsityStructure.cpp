@@ -74,6 +74,20 @@ void iDynTree::optimalcontrol::SparsityStructure::addIdentityBlock(size_t startR
     }
 }
 
+bool iDynTree::optimalcontrol::SparsityStructure::addBlock(size_t startRow, size_t startColumn, const iDynTree::optimalcontrol::SparsityStructure &other)
+{
+    if (!other.isValid()) {
+        reportError("SparsityStructure", "addBlock", "The other SparsityStructure vectors have different size.");
+        return false;
+    }
+
+    for (size_t i = 0; i < other.size(); ++i) {
+        addNonZeroIfNotPresent(startRow + other.nonZeroElementRows[i], startColumn + other.nonZeroElementColumns[i]);
+    }
+
+    return true;
+}
+
 void iDynTree::optimalcontrol::SparsityStructure::addNonZeroIfNotPresent(size_t newRow, size_t newCol)
 {
     if (!isValuePresent(newRow, newCol)) {

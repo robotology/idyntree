@@ -38,10 +38,16 @@ namespace iDynTree {
                 MatrixDynSize m_identity, m_zeroNxNxBuffer, m_zeroNuNuBuffer, m_zeroNxNuBuffer;
                 MatrixDynSize m_stateHessianBuffer, m_controlHessianBuffer, m_mixedHessianBuffer;
                 VectorDynSize m_lambda;
-                bool m_hasStateSparsity = false;
-                bool m_hasControlSparsity = false;
+                bool m_hasStateJacobianSparsity = false;
+                bool m_hasControlJacobianSparsity = false;
                 std::vector<SparsityStructure> m_stateJacobianSparsity;
                 std::vector<SparsityStructure> m_controlJacobianSparsity;
+                bool m_hasStateHessianSparsity = false;
+                bool m_hasStateControlHessianSparsity = false;
+                bool m_hasControlHessianSparsity = false;
+                CollocationHessianSparsityMap m_stateHessianSparsity;
+                CollocationHessianSparsityMap m_stateControlHessianSparsity;
+                CollocationHessianSparsityMap m_controlHessianSparsity;
 
                 bool allocateBuffers() override;
 
@@ -74,6 +80,12 @@ namespace iDynTree {
                                                                             CollocationHessianMap& stateSecondDerivative,
                                                                             CollocationHessianMap& controlSecondDerivative,
                                                                             CollocationHessianMap& stateControlSecondDerivative) override;
+
+                virtual bool getCollocationConstraintSecondDerivativeWRTStateSparsity(CollocationHessianSparsityMap& stateDerivativeSparsity) override;
+
+                virtual bool getCollocationConstraintSecondDerivativeWRTControlSparsity(CollocationHessianSparsityMap& controlDerivativeSparsity) override;
+
+                virtual bool getCollocationConstraintSecondDerivativeWRTStateControlSparsity(CollocationHessianSparsityMap& stateControlDerivativeSparsity) override;
 
             };
         }

@@ -160,5 +160,20 @@ namespace iDynTree {
             return false;
         }
 
+        bool Constraint::constraintSecondPartialDerivativeWRTStateSparsity(SparsityStructure &/*stateSparsity*/)
+        {
+            return false;
+        }
+
+        bool Constraint::constraintSecondPartialDerivativeWRTStateControlSparsity(SparsityStructure &/*stateControlSparsity*/)
+        {
+            return false;
+        }
+
+        bool Constraint::constraintSecondPartialDerivativeWRTControlSparsity(SparsityStructure &/*controlSparsity*/)
+        {
+            return false;
+        }
+
     }
 }

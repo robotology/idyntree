@@ -264,5 +264,23 @@ namespace iDynTree {
             return true;
         }
 
+        bool LinearSystem::dynamicsSecondPartialDerivativeWRTStateSparsity(SparsityStructure &stateSparsity)
+        {
+            stateSparsity.clear();
+            return true;
+        }
+
+        bool LinearSystem::dynamicsSecondPartialDerivativeWRTStateControlSparsity(SparsityStructure &stateControlSparsity)
+        {
+            stateControlSparsity.clear();
+            return true;
+        }
+
+        bool LinearSystem::dynamicsSecondPartialDerivativeWRTControlSparsity(SparsityStructure &controlSparsity)
+        {
+            controlSparsity.clear();
+            return true;
+        }
+
     }
 }

@@ -25,7 +25,9 @@ namespace iDynTree {
 
         QuadraticCost::QuadraticCost(const std::string &costName)
             : QuadraticLikeCost(costName)
-        { }
+        {
+            m_hasSecondPartialDerivativeWRTStateControlSparsity = true;
+        }
 
         QuadraticCost::~QuadraticCost()
         { }
@@ -124,6 +126,28 @@ namespace iDynTree {
 
             m_timeVaryingStateCostBias = timeVaryingStateCostBias;
             m_timeVaryingControlCostBias = timeVaryingControlCostBias;
+            return true;
+        }
+
+        bool iDynTree::optimalcontrol::QuadraticCost::setStateHessianSparsity(const SparsityStructure &stateSparsity)
+        {
+            if (!stateSparsity.isValid()) {
+                reportError("QuadraticCost", "setStateHessianSparsity", "The sparsity vectors have different number of entries.");
+                return false;
+            }
+            m_hasSecondPartialDerivativeWRTStateSparsity = true;
+            m_secondPartialDerivativeWRTStateSparsity = stateSparsity;
+            return true;
+        }
+
+        bool QuadraticCost::setControlHessianSparsity(const SparsityStructure &controlSparsity)
+        {
+            if (!controlSparsity.isValid()) {
+                reportError("QuadraticCost", "setControlHessianSparsity", "The sparsity vectors have different number of entries.");
+                return false;
+            }
+            m_hasSecondPartialDerivativeWRTControlSparsity = true;
+            m_secondPartialDerivativeWRTControlSparsity = controlSparsity;
             return true;
         }
 

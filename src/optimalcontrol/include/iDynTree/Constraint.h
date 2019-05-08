@@ -167,7 +167,7 @@ namespace iDynTree {
              * @brief Returns the set of nonzeros elements in terms of row and colun index, in the state jacobian
              *
              * @warning No check is performed in the indeces. They need to be in the range [0, constraintDimension) and [0, stateDimension) respectively.
-             * @param stateSparsity Sparsity structure of the partial derivative of the jacobian wrt state variables.
+             * @param stateSparsity Sparsity structure of the partial derivative of the constraint wrt state variables.
              * @return true if the sparsity is available. False otherwise.
              */
             virtual bool constraintJacobianWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity);
@@ -176,7 +176,7 @@ namespace iDynTree {
              * @brief Returns the set of nonzeros elements in terms of row and colun index, in the control jacobian
              *
              * @warning No check is performed in the indeces. They need to be in the range [0, constraintDimension) and [0, controlDimension) respectively.
-             * @param controlSparsity Sparsity structure of the partial derivative of the jacobian wrt control variables.
+             * @param controlSparsity Sparsity structure of the partial derivative of the constraint wrt control variables.
              * @return true if the sparsity is available. False otherwise.
              */
             virtual bool constraintJacobianWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity);
@@ -234,6 +234,33 @@ namespace iDynTree {
                                                                           const VectorDynSize& control,
                                                                           const VectorDynSize& lambda,
                                                                           MatrixDynSize& hessian);
+
+            /**
+             * @brief Returns the set of nonzeros elements in terms of row and colun index, in the state hessian
+             *
+             * @warning No check is performed in the indeces. They need to be in the range [0, stateDimension) and [0, stateDimension) respectively.
+             * @param stateSparsity Sparsity structure of the partial derivative of the jacobian wrt state variables.
+             * @return true if the sparsity is available. False otherwise.
+             */
+            virtual bool constraintSecondPartialDerivativeWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity);
+
+            /**
+             * @brief Returns the set of nonzeros elements in terms of row and colun index, in the mixed hessian
+             *
+             * @warning No check is performed in the indeces. They need to be in the range [0, stateDimension) and [0, controlDimension) respectively.
+             * @param stateControlSparsity Sparsity structure of the partial derivative of the jacobian wrt state and control variables.
+             * @return true if the sparsity is available. False otherwise.
+             */
+            virtual bool constraintSecondPartialDerivativeWRTStateControlSparsity(iDynTree::optimalcontrol::SparsityStructure& stateControlSparsity);
+
+            /**
+             * @brief Returns the set of nonzeros elements in terms of row and colun index, in the control hessian
+             *
+             * @warning No check is performed in the indeces. They need to be in the range [0, constraintDimension) and [0, controlDimension) respectively.
+             * @param controlSparsity Sparsity structure of the partial derivative of the jacobian wrt control variables.
+             * @return true if the sparsity is available. False otherwise.
+             */
+            virtual bool constraintSecondPartialDerivativeWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity);
 
 
         private:

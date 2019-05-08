@@ -277,5 +277,23 @@ namespace iDynTree {
             return true;
         }
 
+        bool LinearConstraint::constraintSecondPartialDerivativeWRTStateSparsity(SparsityStructure &stateSparsity)
+        {
+            stateSparsity.clear();
+            return true;
+        }
+
+        bool LinearConstraint::constraintSecondPartialDerivativeWRTStateControlSparsity(SparsityStructure &stateControlSparsity)
+        {
+            stateControlSparsity.clear();
+            return true;
+        }
+
+        bool LinearConstraint::constraintSecondPartialDerivativeWRTControlSparsity(SparsityStructure &controlSparsity)
+        {
+            controlSparsity.clear();
+            return true;
+        }
+
     }
 }

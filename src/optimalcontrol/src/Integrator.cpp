@@ -150,6 +150,21 @@ namespace iDynTree {
                 return false;
             }
 
+            bool Integrator::getCollocationConstraintSecondDerivativeWRTStateSparsity(CollocationHessianSparsityMap &/*stateDerivativeSparsity*/)
+            {
+                return false;
+            }
+
+            bool Integrator::getCollocationConstraintSecondDerivativeWRTControlSparsity(CollocationHessianSparsityMap &/*controlDerivativeSparsity*/)
+            {
+                return false;
+            }
+
+            bool Integrator::getCollocationConstraintSecondDerivativeWRTStateControlSparsity(CollocationHessianSparsityMap &/*stateControlDerivativeSparsity*/)
+            {
+                return false;
+            }
+
             const IntegratorInfo &Integrator::info() const
             {
                 return m_info;
@@ -190,6 +205,16 @@ namespace iDynTree {
             bool CollocationHessianIndex::operator< (const CollocationHessianIndex& rhs) const {
 
                 return (m_first < rhs.m_first) || ((m_first == rhs.m_first) && (m_second < rhs.m_second));
+            }
+
+            size_t CollocationHessianIndex::first() const
+            {
+                return m_first;
+            }
+
+            size_t CollocationHessianIndex::second() const
+            {
+                return m_second;
             }
 
         }

@@ -73,14 +73,36 @@ namespace iDynTree {
                         m_stateJacobianSparsity[1].nonZeroElementColumns.push_back(i);
                     }
 
-                    m_hasStateSparsity = true;
+                    m_hasStateJacobianSparsity = true;
                 }
 
                 if (m_dynamicalSystem_ptr->dynamicsControlFirstDerivativeSparsity(m_controlJacobianSparsity[0])) {
                     m_controlJacobianSparsity[1].nonZeroElementRows.clear();
                     m_controlJacobianSparsity[1].nonZeroElementColumns.clear();
 
-                    m_hasControlSparsity = true;
+                    m_hasControlJacobianSparsity = true;
+                }
+
+                if (m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTStateSparsity(m_stateHessianSparsity[CollocationHessianIndex(0, 0)])) {
+                    m_stateHessianSparsity[CollocationHessianIndex(0, 1)].clear();
+                    m_stateHessianSparsity[CollocationHessianIndex(1, 1)].clear();
+
+                    m_hasStateHessianSparsity = true;
+                }
+
+                if (m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTStateControlSparsity(m_stateControlHessianSparsity[CollocationHessianIndex(0, 0)])) {
+                    m_stateControlHessianSparsity[CollocationHessianIndex(0, 1)].clear();
+                    m_stateControlHessianSparsity[CollocationHessianIndex(1, 0)].clear();
+                    m_stateControlHessianSparsity[CollocationHessianIndex(1, 1)].clear();
+
+                    m_hasStateControlHessianSparsity = true;
+                }
+
+                if (m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTControlSparsity(m_controlHessianSparsity[CollocationHessianIndex(0, 0)])) {
+                    m_controlHessianSparsity[CollocationHessianIndex(0, 1)].clear();
+                    m_controlHessianSparsity[CollocationHessianIndex(1, 1)].clear();
+
+                    m_hasControlHessianSparsity = true;
                 }
 
                 return true;
@@ -259,7 +281,7 @@ namespace iDynTree {
 
             bool ForwardEuler::getCollocationConstraintJacobianStateSparsity(std::vector<SparsityStructure> &stateJacobianSparsity)
             {
-                if (!m_hasStateSparsity) {
+                if (!m_hasStateJacobianSparsity) {
                     return false;
                 }
 
@@ -269,7 +291,7 @@ namespace iDynTree {
 
             bool ForwardEuler::getCollocationConstraintJacobianControlSparsity(std::vector<SparsityStructure> &controlJacobianSparsity)
             {
-                if (!m_hasControlSparsity) {
+                if (!m_hasControlJacobianSparsity) {
                     return false;
                 }
 
@@ -350,6 +372,36 @@ namespace iDynTree {
                 stateControlSecondDerivative[CollocationHessianIndex(1, 1)] = m_zeroNxNuBuffer;
 
 
+                return true;
+            }
+
+            bool ForwardEuler::getCollocationConstraintSecondDerivativeWRTStateSparsity(CollocationHessianSparsityMap &stateDerivativeSparsity)
+            {
+                if (!m_hasStateHessianSparsity) {
+                    return false;
+                }
+
+                stateDerivativeSparsity = m_stateHessianSparsity;
+                return true;
+            }
+
+            bool ForwardEuler::getCollocationConstraintSecondDerivativeWRTControlSparsity(CollocationHessianSparsityMap &controlDerivativeSparsity)
+            {
+                if (!m_hasControlHessianSparsity) {
+                    return false;
+                }
+
+                controlDerivativeSparsity = m_controlHessianSparsity;
+                return true;
+            }
+
+            bool ForwardEuler::getCollocationConstraintSecondDerivativeWRTStateControlSparsity(CollocationHessianSparsityMap &stateControlDerivativeSparsity)
+            {
+                if (!m_hasStateControlHessianSparsity) {
+                    return false;
+                }
+
+                stateControlDerivativeSparsity = m_stateControlHessianSparsity;
                 return true;
             }
         }

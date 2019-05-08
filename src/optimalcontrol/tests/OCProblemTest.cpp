@@ -390,8 +390,8 @@ int main() {
     ASSERT_IS_FALSE(problem.isFeasiblePoint(4.0, testState, testControl));
 
     iDynTree::optimalcontrol::SparsityStructure stateSparsity, controlSparsity;
-    ASSERT_IS_TRUE(problem.constraintJacobianWRTStateSparsity(stateSparsity));
-    ASSERT_IS_TRUE(problem.constraintJacobianWRTControlSparsity(controlSparsity));
+    ASSERT_IS_TRUE(problem.constraintsJacobianWRTStateSparsity(stateSparsity));
+    ASSERT_IS_TRUE(problem.constraintsJacobianWRTControlSparsity(controlSparsity));
     iDynTree::MatrixDynSize stateSparsityCheck, controlSparsityCheck, stateZeroCheck, controlZeroCheck;
     stateSparsityCheck = obtainedStatejac;
     stateZeroCheck = stateSparsityCheck;

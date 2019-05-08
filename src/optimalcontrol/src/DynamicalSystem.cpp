@@ -115,6 +115,21 @@ namespace iDynTree {
             return false;
         }
 
+        bool DynamicalSystem::dynamicsSecondPartialDerivativeWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure &/*stateSparsity*/)
+        {
+            return false;
+        }
+
+        bool DynamicalSystem::dynamicsSecondPartialDerivativeWRTStateControlSparsity(SparsityStructure &/*stateControlSparsity*/)
+        {
+            return false;
+        }
+
+        bool DynamicalSystem::dynamicsSecondPartialDerivativeWRTControlSparsity(SparsityStructure &/*controlSparsity*/)
+        {
+            return false;
+        }
+
 
 
     }

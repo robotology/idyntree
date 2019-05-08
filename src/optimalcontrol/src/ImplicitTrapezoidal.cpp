@@ -73,21 +73,43 @@ namespace iDynTree {
                     }
                     m_stateJacobianSparsity[1] = m_stateJacobianSparsity[0];
 
-                    m_hasStateSparsity = true;
+                    m_hasStateJacobianSparsity = true;
                 }
 
                 if (m_dynamicalSystem_ptr->dynamicsControlFirstDerivativeSparsity(m_controlJacobianSparsity[0])) {
 
                     m_controlJacobianSparsity[1] = m_controlJacobianSparsity[0];
 
-                    m_hasControlSparsity = true;
+                    m_hasControlJacobianSparsity = true;
 
+                }
+
+                if (m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTStateSparsity(m_stateHessianSparsity[CollocationHessianIndex(0, 0)])) {
+                    m_stateHessianSparsity[CollocationHessianIndex(0, 1)].clear();
+                    m_stateHessianSparsity[CollocationHessianIndex(1, 1)] = m_stateHessianSparsity[CollocationHessianIndex(0, 0)];
+
+                    m_hasStateHessianSparsity = true;
+                }
+
+                if (m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTStateControlSparsity(m_stateControlHessianSparsity[CollocationHessianIndex(0, 0)])) {
+                    m_stateControlHessianSparsity[CollocationHessianIndex(0, 1)].clear();
+                    m_stateControlHessianSparsity[CollocationHessianIndex(1, 0)].clear();
+                    m_stateControlHessianSparsity[CollocationHessianIndex(1, 1)] = m_stateControlHessianSparsity[CollocationHessianIndex(0, 0)];
+
+                    m_hasStateControlHessianSparsity = true;
+                }
+
+                if (m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTControlSparsity(m_controlHessianSparsity[CollocationHessianIndex(0, 0)])) {
+                    m_controlHessianSparsity[CollocationHessianIndex(0, 1)].clear();
+                    m_controlHessianSparsity[CollocationHessianIndex(1, 1)] = m_controlHessianSparsity[CollocationHessianIndex(0, 0)];
+
+                    m_hasControlHessianSparsity = true;
                 }
 
                 return true;
             }
 
-            bool ImplicitTrapezoidal::oneStepIntegration(double t0, double dT, const iDynTree::VectorDynSize &x0, iDynTree::VectorDynSize &x)
+            bool ImplicitTrapezoidal::oneStepIntegration(double /*t0*/, double /*dT*/, const iDynTree::VectorDynSize &/*x0*/, iDynTree::VectorDynSize &/*x*/)
             {
                 reportError(m_info.name().c_str(), "oneStepIntegration", "The ImplicitTrapezoidal method has not been implemented to integrate a dynamical system yet.");
                 return false;
@@ -270,7 +292,7 @@ namespace iDynTree {
 
             bool ImplicitTrapezoidal::getCollocationConstraintJacobianStateSparsity(std::vector<SparsityStructure> &stateJacobianSparsity)
             {
-                if (!m_hasStateSparsity) {
+                if (!m_hasStateJacobianSparsity) {
                     return false;
                 }
 
@@ -280,7 +302,7 @@ namespace iDynTree {
 
             bool ImplicitTrapezoidal::getCollocationConstraintJacobianControlSparsity(std::vector<SparsityStructure> &controlJacobianSparsity)
             {
-                if (!m_hasControlSparsity) {
+                if (!m_hasControlJacobianSparsity) {
                     return false;
                 }
 
@@ -386,6 +408,36 @@ namespace iDynTree {
 
                 stateControlSecondDerivative[CollocationHessianIndex(1, 1)] = m_mixedHessianBuffer;
 
+                return true;
+            }
+
+            bool ImplicitTrapezoidal::getCollocationConstraintSecondDerivativeWRTStateSparsity(CollocationHessianSparsityMap &stateDerivativeSparsity)
+            {
+                if (!m_hasStateHessianSparsity) {
+                    return false;
+                }
+
+                stateDerivativeSparsity = m_stateHessianSparsity;
+                return true;
+            }
+
+            bool ImplicitTrapezoidal::getCollocationConstraintSecondDerivativeWRTControlSparsity(CollocationHessianSparsityMap &controlDerivativeSparsity)
+            {
+                if (!m_hasControlHessianSparsity) {
+                    return false;
+                }
+
+                controlDerivativeSparsity = m_controlHessianSparsity;
+                return true;
+            }
+
+            bool ImplicitTrapezoidal::getCollocationConstraintSecondDerivativeWRTStateControlSparsity(CollocationHessianSparsityMap &stateControlDerivativeSparsity)
+            {
+                if (!m_hasStateControlHessianSparsity) {
+                    return false;
+                }
+
+                stateControlDerivativeSparsity = m_stateControlHessianSparsity;
                 return true;
             }
 

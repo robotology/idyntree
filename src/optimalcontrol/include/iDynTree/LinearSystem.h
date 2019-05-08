@@ -89,6 +89,12 @@ namespace iDynTree {
                                                                         const iDynTree::VectorDynSize& lambda,
                                                                         iDynTree::MatrixDynSize& partialDerivative) final;
 
+            virtual bool dynamicsSecondPartialDerivativeWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity) final;
+
+            virtual bool dynamicsSecondPartialDerivativeWRTStateControlSparsity(iDynTree::optimalcontrol::SparsityStructure& stateControlSparsity) final;
+
+            virtual bool dynamicsSecondPartialDerivativeWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) final;
+
 
         private:
             class LinearSystemPimpl;

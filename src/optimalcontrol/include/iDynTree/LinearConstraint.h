@@ -97,6 +97,12 @@ namespace iDynTree {
                                                                           const VectorDynSize& lambda,
                                                                           MatrixDynSize& hessian) final;
 
+            virtual bool constraintSecondPartialDerivativeWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity) final;
+
+            virtual bool constraintSecondPartialDerivativeWRTStateControlSparsity(iDynTree::optimalcontrol::SparsityStructure& stateControlSparsity) final;
+
+            virtual bool constraintSecondPartialDerivativeWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) final;
+
         private:
             class LinearConstraintImplementation;
             LinearConstraintImplementation* m_pimpl;

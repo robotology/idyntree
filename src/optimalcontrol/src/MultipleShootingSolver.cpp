@@ -88,6 +88,7 @@ namespace iDynTree {
         //MARK: Transcription implementation
         class HessianBlocksMap {
             std::map<CollocationHessianIndex, bool> m_map;
+            std::map<CollocationHessianIndex, SparsityStructure> m_sparsity;
 
         public:
 
@@ -104,8 +105,28 @@ namespace iDynTree {
                 return it->second;
             }
 
+            SparsityStructure& blockSparsity(size_t row, size_t col) {
+                CollocationHessianIndex indices(row, col);
+                std::map<CollocationHessianIndex, SparsityStructure>::iterator it = m_sparsity.find(indices);
+
+                if (it == m_sparsity.end()) {
+                    std::pair<std::map<CollocationHessianIndex, SparsityStructure>::iterator, bool> result = m_sparsity.insert(std::make_pair(indices, SparsityStructure()));
+                    it = result.first;
+                }
+                return it->second;
+            }
+
+            void getFullSparsity(SparsityStructure& sparsity) {
+                sparsity.clear();
+
+                for (auto& block : m_sparsity) {
+                    sparsity.addBlock(block.first.first(), block.first.second(), block.second);
+                }
+            }
+
             void clear() {
                 m_map.clear();
+                m_sparsity.clear();
             }
 
             void reset() {
@@ -128,11 +149,11 @@ namespace iDynTree {
             std::vector<MeshPoint>::iterator m_meshPointsEnd;
             double m_minStepSize, m_maxStepSize, m_controlPeriod;
             size_t m_nx, m_nu, m_numberOfVariables, m_constraintsPerInstant, m_numberOfConstraints;
-            std::vector<size_t> m_jacobianNZRows, m_jacobianNZCols, m_hessianNZRows, m_hessianNZCols;
-            SparsityStructure m_ocStateSparsity, m_ocControlSparsity;
-            std::vector<SparsityStructure> m_collocationStateNZ, m_collocationControlNZ;
-            SparsityStructure m_mergedCollocationControlNZ;
-            size_t m_jacobianNonZeros, m_hessianNonZeros;
+            std::vector<size_t> m_jacobianNZRows, m_jacobianNZCols/*, m_hessianNZRows, m_hessianNZCols*/;
+            SparsityStructure m_ocStateJacobianSparsity, m_ocControlJacobianSparsity;
+            std::vector<SparsityStructure> m_collocationStateJacobianNZ, m_collocationControlJacobianNZ;
+            SparsityStructure m_mergedCollocationControlJacobianNZ;
+            size_t m_jacobianNonZeros/*, m_hessianNonZeros*/;
             double m_plusInfinity, m_minusInfinity;
             VectorDynSize m_constraintsLowerBound, m_constraintsUpperBound;
             VectorDynSize m_constraintsBuffer, m_stateBuffer, m_controlBuffer, m_variablesBuffer, m_guessBuffer, m_costStateGradientBuffer, m_costControlGradientBuffer;
@@ -143,10 +164,16 @@ namespace iDynTree {
             VectorDynSize m_lambdaConstraints, m_lambdaCollocation;
             MatrixDynSize m_stateHessianBuffer, m_controlHessianBuffer, m_stateControlHessianBuffer;
             CollocationHessianMap m_stateCollocationHessians, m_controlCollocationHessians, m_stateControCollocationlHessians;
-            HessianBlocksMap m_hessianBlocksSet;
+            HessianBlocksMap m_hessianBlocks;
             VectorDynSize m_solution;
             std::shared_ptr<TimeVaryingVector> m_stateGuesses, m_controlGuesses;
             bool m_solved;
+
+            SparsityStructure m_constraintsStateHessianSparsity, m_constraintsControlHessianSparsity, m_constraintsMixedHessianSparsity;
+            SparsityStructure m_costsStateHessianSparsity, m_costsControlHessianSparsity, m_costsMixedHessianSparsity;
+            CollocationHessianSparsityMap m_systemStateHessianSparsity, m_systemControlHessianSparsity, m_systemMixedHessianSparsity;
+            SparsityStructure m_fullHessianSparsity;
+
 
             friend class MultipleShootingSolver;
 
@@ -201,7 +228,7 @@ namespace iDynTree {
 
             void resetNonZerosCount(){
                 m_jacobianNonZeros = 0;
-                m_hessianNonZeros = 0;
+                m_hessianBlocks.clear();
             }
 
             void addNonZero(std::vector<size_t>& input, size_t position, size_t toBeAdded){
@@ -240,54 +267,54 @@ namespace iDynTree {
             }
 
             void addHessianBlock(size_t initRow, size_t rows, size_t initCol, size_t cols){
-                if (!m_hessianBlocksSet(initRow, initCol)) {
-                    for (size_t i = 0; i < rows; ++i){
-                        for (size_t j = 0; j < cols; ++j){
-                            addNonZero(m_hessianNZRows, m_hessianNonZeros, initRow + i);
-                            addNonZero(m_hessianNZCols, m_hessianNonZeros, initCol + j);
-                            m_hessianNonZeros++;
-                        }
-                    }
 
-                    m_hessianBlocksSet(initRow, initCol) = true;
-                }
+                m_hessianBlocks.blockSparsity(initRow, initCol).addDenseBlock(0, 0, rows, cols);
 
                 //add also the transpose
 
-                if (!m_hessianBlocksSet(initCol, initRow)) {
-                    for (size_t i = 0; i < cols; ++i){
-                        for (size_t j = 0; j < rows; ++j){
-                            addNonZero(m_hessianNZRows, m_hessianNonZeros, initCol + i);
-                            addNonZero(m_hessianNZCols, m_hessianNonZeros, initRow + j);
-                            m_hessianNonZeros++;
-                        }
-                    }
-
-                    m_hessianBlocksSet(initCol, initRow) = true;
-                }
+                m_hessianBlocks.blockSparsity(initCol, initRow).addDenseBlock(0, 0, cols, rows);
 
             }
 
+            void addHessianBlock(size_t initRow, size_t initCol, const SparsityStructure& sparsity){
+
+                m_hessianBlocks.blockSparsity(initRow, initCol).merge(sparsity);
+
+                //add also the transpose
+
+                SparsityStructure& transposeSparsity = m_hessianBlocks.blockSparsity(initCol, initRow);
+
+                for (size_t i = 0; i < sparsity.size(); ++i){
+                    transposeSparsity.addNonZeroIfNotPresent(sparsity.nonZeroElementColumns[i], sparsity.nonZeroElementRows[i]);
+                }
+            }
+
             void setHessianBlock(MatrixDynSize& hessian, const MatrixDynSize& block, size_t startRow, size_t startCol) {
-                if (m_hessianBlocksSet(startRow, startCol)) {
+                if (m_hessianBlocks(startRow, startCol)) {
                     toEigen(hessian).block(static_cast<Eigen::Index>(startRow), static_cast<unsigned int>(startCol), block.rows(), block.cols()) += toEigen(block);
                 } else {
                     toEigen(hessian).block(static_cast<Eigen::Index>(startRow), static_cast<unsigned int>(startCol), block.rows(), block.cols()) = toEigen(block);
-                    m_hessianBlocksSet(startRow, startCol) = true;
+                    m_hessianBlocks(startRow, startCol) = true;
                 }
             }
 
             void setHessianBlockAndItsTranspose(MatrixDynSize& hessian, const MatrixDynSize& block, size_t startRow, size_t startCol) {
                 setHessianBlock(hessian, block, startRow, startCol);
 
-                if (m_hessianBlocksSet(startCol, startRow)) {
+                if (m_hessianBlocks(startCol, startRow)) {
                     toEigen(hessian).block(static_cast<Eigen::Index>(startCol), static_cast<unsigned int>(startRow), block.cols(), block.rows()) += toEigen(block).transpose();
                 } else {
                     toEigen(hessian).block(static_cast<Eigen::Index>(startCol), static_cast<unsigned int>(startRow), block.cols(), block.rows()) = toEigen(block).transpose();
-                    m_hessianBlocksSet(startCol, startRow) = true;
+                    m_hessianBlocks(startCol, startRow) = true;
                 }
+            }
 
-
+            void addHessianSparsityBlock(bool isSparse, size_t row, size_t numberOfRows, size_t col, size_t numberOfCols, const SparsityStructure& sparsity) {
+                if (isSparse) {
+                    this->addHessianBlock(row, col, sparsity);
+                } else {
+                    this->addHessianBlock(row, numberOfRows, col, numberOfCols);
+                }
             }
 
             void mergeSparsityVectors(const std::vector<SparsityStructure>& original, SparsityStructure& merged) {
@@ -1101,25 +1128,55 @@ namespace iDynTree {
                 Eigen::Map<Eigen::VectorXd> lowerBoundMap = toEigen(m_constraintsLowerBound);
                 Eigen::Map<Eigen::VectorXd> upperBoundMap = toEigen(m_constraintsUpperBound);
 
-                bool ocHasStateSparsisty = m_ocproblem->constraintJacobianWRTStateSparsity(m_ocStateSparsity);
-                if (!ocHasStateSparsisty) {
-                    reportWarning("MultipleShootingTranscription", "prepare", "Failed to retrieve state sparsity of optimal control problem constraints. Assuming dense matrix.");
+                bool ocHasStateJacobianSparsisty = m_ocproblem->constraintsJacobianWRTStateSparsity(m_ocStateJacobianSparsity);
+                if (!ocHasStateJacobianSparsisty) {
+                    reportWarning("MultipleShootingTranscription", "prepare", "Failed to retrieve state sparsity of optimal control problem constraints jacobian. Assuming dense matrix.");
                 }
 
-                bool ocHasControlSparsisty = m_ocproblem->constraintJacobianWRTControlSparsity(m_ocControlSparsity);
-                if (!ocHasControlSparsisty) {
-                    reportWarning("MultipleShootingTranscription", "prepare", "Failed to retrieve control sparsity of optimal control problem constraints. Assuming dense matrix.");
+                bool ocHasControlJacobianSparsisty = m_ocproblem->constraintsJacobianWRTControlSparsity(m_ocControlJacobianSparsity);
+                if (!ocHasControlJacobianSparsisty) {
+                    reportWarning("MultipleShootingTranscription", "prepare", "Failed to retrieve control sparsity of optimal control problem constraints jacobian. Assuming dense matrix.");
                 }
 
-                bool systemHasStateSparsity = m_integrator->getCollocationConstraintJacobianStateSparsity(m_collocationStateNZ);
-                bool systemHasControlSparsity = m_integrator->getCollocationConstraintJacobianControlSparsity(m_collocationControlNZ);
+                bool systemHasStateJacobianSparsity = m_integrator->getCollocationConstraintJacobianStateSparsity(m_collocationStateJacobianNZ);
 
-                if (systemHasControlSparsity) {
-                    mergeSparsityVectors(m_collocationControlNZ, m_mergedCollocationControlNZ);
+                bool systemHasControlJacobianSparsity = m_integrator->getCollocationConstraintJacobianControlSparsity(m_collocationControlJacobianNZ);
+
+                if (systemHasControlJacobianSparsity) {
+                    mergeSparsityVectors(m_collocationControlJacobianNZ, m_mergedCollocationControlJacobianNZ);
                 }
+
+                auto printError = [](bool ok, const std::string& hessianName, const std::string& variableType) {
+                    if (!ok) {
+                        reportWarning("MultipleShootingTranscription", "prepare", ("Failed to retrieve " + variableType+ " sparsity of optimal control problem " +
+                                                                                   hessianName + " hessian. Assuming dense matrix.").c_str());
+                    }
+                };
+
+                bool constraintsHaveStateHessianSparsity = m_ocproblem->constraintsSecondPartialDerivativeWRTStateSparsity(m_constraintsStateHessianSparsity);
+                printError(constraintsHaveStateHessianSparsity, "constraints", "state");
+
+                bool constraintsHaveControlHessianSparsity = m_ocproblem->constraintsSecondPartialDerivativeWRTControlSparsity(m_constraintsControlHessianSparsity);
+                printError(constraintsHaveControlHessianSparsity, "constraints", "control");
+
+                bool constraintsHaveMixedHessianSparsity = m_ocproblem->constraintsSecondPartialDerivativeWRTStateControlSparsity(m_constraintsMixedHessianSparsity);
+                printError(constraintsHaveMixedHessianSparsity, "constraints", "state/control");
+
+
+                bool costsHaveStateHessianSparsity = m_ocproblem->costsSecondPartialDerivativeWRTStateSparsity(m_costsStateHessianSparsity);
+                printError(costsHaveStateHessianSparsity, "costs", "state");
+
+                bool costsHaveControlHessianSparsity = m_ocproblem->costsSecondPartialDerivativeWRTControlSparsity(m_costsControlHessianSparsity);
+                printError(costsHaveControlHessianSparsity, "costs", "control");
+
+                bool costsHaveMixedHessianSparsity = m_ocproblem->costsSecondPartialDerivativeWRTStateControlSparsity(m_costsMixedHessianSparsity);
+                printError(costsHaveMixedHessianSparsity, "costs", "state/control");
+
+                bool systemHasStateHessianSparsity = m_integrator->getCollocationConstraintSecondDerivativeWRTStateSparsity(m_systemStateHessianSparsity);
+                bool systemHasControlHessianSparsity = m_integrator->getCollocationConstraintSecondDerivativeWRTControlSparsity(m_systemControlHessianSparsity);
+                bool systemHasMixedHessianSparsity = m_integrator->getCollocationConstraintSecondDerivativeWRTStateControlSparsity(m_systemMixedHessianSparsity);
 
                 resetNonZerosCount();
-                m_hessianBlocksSet.clear();
 
                 std::vector<MeshPoint>::iterator mesh = m_meshPoints.begin(), previousControlMesh = mesh;
                 size_t index = 0, constraintIndex = 0;
@@ -1158,19 +1215,21 @@ namespace iDynTree {
                         }
 
                         //Saving the jacobian structure due to the constraints (state should not be constrained here)
-                        if (ocHasControlSparsisty) {
-                            addJacobianBlock(constraintIndex, mesh->controlIndex, m_ocControlSparsity);
+                        if (ocHasControlJacobianSparsisty) {
+                            addJacobianBlock(constraintIndex, mesh->controlIndex, m_ocControlJacobianSparsity);
                         } else {
                             addJacobianBlock(constraintIndex, nc, mesh->controlIndex, nu);
                         }
                         constraintIndex += nc;
 
                         //Saving the hessian structure
-                        if (!m_info.costIsLinear() || m_info.hasNonLinearConstraints()) {
-                            addHessianBlock(mesh->controlIndex, nu, mesh->controlIndex, nu); //assume that a cost/constraint depends on the square of u
-                            addHessianBlock(mesh->stateIndex, nx, mesh->stateIndex, nx); //assume that a cost/constraint depends on the square of x
-
-                            addHessianBlock(mesh->controlIndex, nu, mesh->stateIndex, nx); //assume that a cost/constraint depends on the product of x-u
+                        if (!m_info.costIsLinear()) {
+                            addHessianSparsityBlock(costsHaveStateHessianSparsity, mesh->stateIndex, nx, mesh->stateIndex, nx, m_costsStateHessianSparsity);
+                            addHessianSparsityBlock(costsHaveMixedHessianSparsity, mesh->stateIndex, nx, mesh->controlIndex, nu, m_costsMixedHessianSparsity);
+                            addHessianSparsityBlock(costsHaveControlHessianSparsity, mesh->controlIndex, nu, mesh->controlIndex, nu, m_costsControlHessianSparsity);
+                        }
+                        if (m_info.hasNonLinearConstraints()){
+                            addHessianSparsityBlock(constraintsHaveControlHessianSparsity, mesh->controlIndex, nu, mesh->controlIndex, nu, m_constraintsControlHessianSparsity);
                         }
 
                     } else if (mesh->type == MeshPointType::Control) {
@@ -1186,17 +1245,17 @@ namespace iDynTree {
                         upperBoundMap.segment(static_cast<Eigen::Index>(constraintIndex), static_cast<Eigen::Index>(nx)).setZero();
 
                         //Saving the jacobian structure due to the dynamical constraints
-                        if (systemHasControlSparsity) {
-                            addJacobianBlock(constraintIndex, mesh->controlIndex, m_collocationControlNZ[1]);
-                            addJacobianBlock(constraintIndex, mesh->previousControlIndex, m_collocationControlNZ[0]);
+                        if (systemHasControlJacobianSparsity) {
+                            addJacobianBlock(constraintIndex, mesh->controlIndex, m_collocationControlJacobianNZ[1]);
+                            addJacobianBlock(constraintIndex, mesh->previousControlIndex, m_collocationControlJacobianNZ[0]);
                         } else {
                             addJacobianBlock(constraintIndex, nx, mesh->controlIndex, nu);
                             addJacobianBlock(constraintIndex, nx, mesh->previousControlIndex, nu);
                         }
 
-                        if (systemHasStateSparsity) {
-                            addJacobianBlock(constraintIndex, mesh->stateIndex, m_collocationStateNZ[1]);
-                            addJacobianBlock(constraintIndex, (mesh - 1)->stateIndex, m_collocationStateNZ[0]);
+                        if (systemHasStateJacobianSparsity) {
+                            addJacobianBlock(constraintIndex, mesh->stateIndex, m_collocationStateJacobianNZ[1]);
+                            addJacobianBlock(constraintIndex, (mesh - 1)->stateIndex, m_collocationStateJacobianNZ[0]);
                         } else {
                             addJacobianBlock(constraintIndex, nx, mesh->stateIndex, nx);
                             addJacobianBlock(constraintIndex, nx, (mesh - 1)->stateIndex, nx);
@@ -1228,42 +1287,54 @@ namespace iDynTree {
                         }
 
                         //Saving the jacobian structure due to the constraints
-                        if (ocHasStateSparsisty) {
-                            addJacobianBlock(constraintIndex, mesh->stateIndex, m_ocStateSparsity);
+                        if (ocHasStateJacobianSparsisty) {
+                            addJacobianBlock(constraintIndex, mesh->stateIndex, m_ocStateJacobianSparsity);
                         } else {
                             addJacobianBlock(constraintIndex, nc, mesh->stateIndex, nx);
                         }
-                        if (ocHasControlSparsisty) {
-                            addJacobianBlock(constraintIndex, mesh->controlIndex, m_ocControlSparsity);
+                        if (ocHasControlJacobianSparsisty) {
+                            addJacobianBlock(constraintIndex, mesh->controlIndex, m_ocControlJacobianSparsity);
                         } else {
                             addJacobianBlock(constraintIndex, nc, mesh->controlIndex, nu);
                         }
                         constraintIndex += nc;
 
                         //Saving the hessian structure
-                        if (!m_info.costIsLinear() || m_info.hasNonLinearConstraints()) {
-                            addHessianBlock(mesh->controlIndex, nu, mesh->controlIndex, nu); //assume that a cost/constraint depends on the square of u
-
-                            addHessianBlock(mesh->stateIndex, nx, mesh->stateIndex, nx); //assume that a cost/constraint depends on the square of x
-
-                            addHessianBlock(mesh->controlIndex, nu, mesh->stateIndex, nx); //assume that a cost/constraint depends on the product of x-u
-
+                        if (!m_info.costIsLinear()) {
+                            addHessianSparsityBlock(costsHaveStateHessianSparsity, mesh->stateIndex, nx, mesh->stateIndex, nx, m_costsStateHessianSparsity);
+                            addHessianSparsityBlock(costsHaveMixedHessianSparsity, mesh->stateIndex, nx, mesh->controlIndex, nu, m_costsMixedHessianSparsity);
+                            addHessianSparsityBlock(costsHaveControlHessianSparsity, mesh->controlIndex, nu, mesh->controlIndex, nu, m_costsControlHessianSparsity);
+                        }
+                        if (m_info.hasNonLinearConstraints()){
+                            addHessianSparsityBlock(constraintsHaveStateHessianSparsity, mesh->stateIndex, nx, mesh->stateIndex, nx, m_constraintsStateHessianSparsity);
+                            addHessianSparsityBlock(constraintsHaveMixedHessianSparsity, mesh->stateIndex, nx, mesh->controlIndex, nu, m_constraintsMixedHessianSparsity);
+                            addHessianSparsityBlock(constraintsHaveControlHessianSparsity, mesh->controlIndex, nu, mesh->controlIndex, nu, m_constraintsControlHessianSparsity);
                         }
 
-                        if (!(m_ocproblem->systemIsLinear())) { //if the system is not linear, automatically the above if is true
+                        if (!(m_ocproblem->systemIsLinear())) {
 
-                            addHessianBlock(mesh->previousControlIndex, nu, mesh->previousControlIndex, nu);
-                            addHessianBlock((mesh-1)->stateIndex, nx, (mesh-1)->stateIndex, nx);
+                            addHessianSparsityBlock(systemHasStateHessianSparsity, (mesh-1)->stateIndex, nx,
+                                                    (mesh-1)->stateIndex, nx, m_systemStateHessianSparsity[CollocationHessianIndex(0,0)]);
+                            addHessianSparsityBlock(systemHasStateHessianSparsity, (mesh-1)->stateIndex, nx,
+                                                    mesh->stateIndex, nx, m_systemStateHessianSparsity[CollocationHessianIndex(0,1)]);
+                            addHessianSparsityBlock(systemHasStateHessianSparsity, mesh->stateIndex, nx,
+                                                    mesh->stateIndex, nx, m_systemStateHessianSparsity[CollocationHessianIndex(1,1)]);
 
-                            addHessianBlock(mesh->stateIndex, nx, (mesh - 1)->stateIndex, nx);
+                            addHessianSparsityBlock(systemHasMixedHessianSparsity, (mesh-1)->stateIndex, nx,
+                                                    mesh->previousControlIndex, nu, m_systemMixedHessianSparsity[CollocationHessianIndex(0,0)]);
+                            addHessianSparsityBlock(systemHasMixedHessianSparsity, (mesh-1)->stateIndex, nx,
+                                                    mesh->controlIndex, nu, m_systemMixedHessianSparsity[CollocationHessianIndex(0,1)]);
+                            addHessianSparsityBlock(systemHasMixedHessianSparsity, mesh->stateIndex, nx,
+                                                    mesh->previousControlIndex, nu, m_systemMixedHessianSparsity[CollocationHessianIndex(1,0)]);
+                            addHessianSparsityBlock(systemHasMixedHessianSparsity, mesh->stateIndex, nx,
+                                                    mesh->controlIndex, nu, m_systemMixedHessianSparsity[CollocationHessianIndex(1,1)]);
 
-                            addHessianBlock(mesh->stateIndex, nx, mesh->previousControlIndex, nu);
-
-                            addHessianBlock(mesh->controlIndex, nu, mesh->previousControlIndex, nu);
-
-                            addHessianBlock(mesh->controlIndex, nu, (mesh - 1)->stateIndex, nx);
-
-                            addHessianBlock(mesh->previousControlIndex, nu, (mesh - 1)->stateIndex, nx);
+                            addHessianSparsityBlock(systemHasControlHessianSparsity, mesh->previousControlIndex, nu,
+                                                    mesh->previousControlIndex, nu, m_systemControlHessianSparsity[CollocationHessianIndex(0,0)]);
+                            addHessianSparsityBlock(systemHasControlHessianSparsity, mesh->previousControlIndex, nu,
+                                                    mesh->controlIndex, nu, m_systemControlHessianSparsity[CollocationHessianIndex(0,1)]);
+                            addHessianSparsityBlock(systemHasControlHessianSparsity, mesh->controlIndex, nu,
+                                                    mesh->controlIndex, nu, m_systemControlHessianSparsity[CollocationHessianIndex(1,1)]);
                         }
 
 
@@ -1278,15 +1349,15 @@ namespace iDynTree {
                         upperBoundMap.segment(static_cast<Eigen::Index>(constraintIndex), static_cast<Eigen::Index>(nx)).setZero();
 
                         //Saving the jacobian structure due to the dynamical constraints
-                        if (systemHasControlSparsity) {
-                            addJacobianBlock(constraintIndex, mesh->controlIndex, m_mergedCollocationControlNZ);
+                        if (systemHasControlJacobianSparsity) {
+                            addJacobianBlock(constraintIndex, mesh->controlIndex, m_mergedCollocationControlJacobianNZ);
                         } else {
                             addJacobianBlock(constraintIndex, nx, mesh->controlIndex, nu);
                         }
 
-                        if (systemHasStateSparsity) {
-                            addJacobianBlock(constraintIndex, mesh->stateIndex, m_collocationStateNZ[1]);
-                            addJacobianBlock(constraintIndex, (mesh - 1)->stateIndex, m_collocationStateNZ[0]);
+                        if (systemHasStateJacobianSparsity) {
+                            addJacobianBlock(constraintIndex, mesh->stateIndex, m_collocationStateJacobianNZ[1]);
+                            addJacobianBlock(constraintIndex, (mesh - 1)->stateIndex, m_collocationStateJacobianNZ[0]);
                         } else {
                             addJacobianBlock(constraintIndex, nx, mesh->stateIndex, nx);
                             addJacobianBlock(constraintIndex, nx, (mesh - 1)->stateIndex, nx);
@@ -1316,37 +1387,54 @@ namespace iDynTree {
                             }
                         }
 
-                        if (ocHasStateSparsisty) {
-                            addJacobianBlock(constraintIndex, mesh->stateIndex, m_ocStateSparsity);
+                        if (ocHasStateJacobianSparsisty) {
+                            addJacobianBlock(constraintIndex, mesh->stateIndex, m_ocStateJacobianSparsity);
                         } else {
                             addJacobianBlock(constraintIndex, nc, mesh->stateIndex, nx);
                         }
-                        if (ocHasControlSparsisty) {
-                            addJacobianBlock(constraintIndex, mesh->controlIndex, m_ocControlSparsity);
+                        if (ocHasControlJacobianSparsisty) {
+                            addJacobianBlock(constraintIndex, mesh->controlIndex, m_ocControlJacobianSparsity);
                         } else {
                             addJacobianBlock(constraintIndex, nc, mesh->controlIndex, nu);
                         }
                         constraintIndex += nc;
 
                         //Saving the hessian structure
-                        if (!m_info.costIsLinear() || m_info.hasNonLinearConstraints()) {
-                            addHessianBlock(mesh->controlIndex, nu, mesh->controlIndex, nu); //assume that a cost/constraint depends on the square of u
-
-                            addHessianBlock(mesh->stateIndex, nx, mesh->stateIndex, nx); //assume that a cost/constraint depends on the square of x
-
-                            addHessianBlock(mesh->controlIndex, nu, mesh->stateIndex, nx); //assume that a cost/constraint depends on the product of x-u
-
+                        if (!m_info.costIsLinear()) {
+                            addHessianSparsityBlock(costsHaveStateHessianSparsity, mesh->stateIndex, nx, mesh->stateIndex, nx, m_costsStateHessianSparsity);
+                            addHessianSparsityBlock(costsHaveMixedHessianSparsity, mesh->stateIndex, nx, mesh->controlIndex, nu, m_costsMixedHessianSparsity);
+//                            addHessianSparsityBlock(costsHaveControlHessianSparsity, mesh->controlIndex, nu, mesh->controlIndex, nu, m_costsControlHessianSparsity); // This was already inserted before
+                        }
+                        if (m_info.hasNonLinearConstraints()){
+                            addHessianSparsityBlock(constraintsHaveStateHessianSparsity, mesh->stateIndex, nx, mesh->stateIndex, nx, m_constraintsStateHessianSparsity);
+                            addHessianSparsityBlock(constraintsHaveMixedHessianSparsity, mesh->stateIndex, nx, mesh->controlIndex, nu, m_constraintsMixedHessianSparsity);
+//                            addHessianSparsityBlock(constraintsHaveControlHessianSparsity, mesh->controlIndex, nu, mesh->controlIndex, nu, m_constraintsControlHessianSparsity); // This was already inserted before
                         }
 
-                        if (!(m_ocproblem->systemIsLinear())) { //if the system is not linear, automatically the above if is true
+                        if (!(m_ocproblem->systemIsLinear())) {
 
-                            addHessianBlock((mesh-1)->stateIndex, nx, (mesh-1)->stateIndex, nx);
+                            addHessianSparsityBlock(systemHasStateHessianSparsity, (mesh-1)->stateIndex, nx,
+                                                    (mesh-1)->stateIndex, nx, m_systemStateHessianSparsity[CollocationHessianIndex(0,0)]);
+                            addHessianSparsityBlock(systemHasStateHessianSparsity, (mesh-1)->stateIndex, nx,
+                                                    mesh->stateIndex, nx, m_systemStateHessianSparsity[CollocationHessianIndex(0,1)]);
+                            addHessianSparsityBlock(systemHasStateHessianSparsity, mesh->stateIndex, nx,
+                                                    mesh->stateIndex, nx, m_systemStateHessianSparsity[CollocationHessianIndex(1,1)]);
 
-                            addHessianBlock(mesh->stateIndex, nx, (mesh - 1)->stateIndex, nx);
+                            addHessianSparsityBlock(systemHasMixedHessianSparsity, (mesh-1)->stateIndex, nx,
+                                                    mesh->previousControlIndex, nu, m_systemMixedHessianSparsity[CollocationHessianIndex(0,0)]);
+                            addHessianSparsityBlock(systemHasMixedHessianSparsity, (mesh-1)->stateIndex, nx,
+                                                    mesh->controlIndex, nu, m_systemMixedHessianSparsity[CollocationHessianIndex(0,1)]);
+                            addHessianSparsityBlock(systemHasMixedHessianSparsity, mesh->stateIndex, nx,
+                                                    mesh->previousControlIndex, nu, m_systemMixedHessianSparsity[CollocationHessianIndex(1,0)]);
+                            addHessianSparsityBlock(systemHasMixedHessianSparsity, mesh->stateIndex, nx,
+                                                    mesh->controlIndex, nu, m_systemMixedHessianSparsity[CollocationHessianIndex(1,1)]);
 
-                            addHessianBlock(mesh->controlIndex, nu, (mesh - 1)->stateIndex, nx);
-
-                            //some blocks are missing since the previous control index and controlIndex coincide
+//                            addHessianSparsityBlock(systemHasControlHessianSparsity, mesh->previousControlIndex, nu,
+//                                                    mesh->previousControlIndex, nu, m_systemControlHessianSparsity[CollocationHessianIndex(0,0)]); // This was already inserted before
+//                            addHessianSparsityBlock(systemHasControlHessianSparsity, mesh->previousControlIndex, nu,
+//                                                    mesh->controlIndex, nu, m_systemControlHessianSparsity[CollocationHessianIndex(0,1)]); // This was already inserted before
+//                            addHessianSparsityBlock(systemHasControlHessianSparsity, mesh->controlIndex, nu,
+//                                                    mesh->controlIndex, nu, m_systemControlHessianSparsity[CollocationHessianIndex(1,1)]); // This was already inserted before
                         }
 
                     }
@@ -1354,6 +1442,8 @@ namespace iDynTree {
                 }
                 assert(index == m_numberOfVariables);
                 assert(constraintIndex == m_numberOfConstraints);
+
+                m_hessianBlocks.getFullSparsity(m_fullHessianSparsity);
 
                 m_prepared = true;
                 return true;
@@ -1539,18 +1629,8 @@ namespace iDynTree {
                     return false;
                 }
 
-                if (nonZeroElementRows.size() != m_hessianNonZeros) {
-                    nonZeroElementRows.resize(static_cast<unsigned int>(m_hessianNonZeros));
-                }
-
-                if (nonZeroElementColumns.size() != m_hessianNonZeros) {
-                    nonZeroElementColumns.resize(static_cast<unsigned int>(m_hessianNonZeros));
-                }
-
-                for (unsigned int i = 0; i < m_hessianNonZeros; ++i){
-                    nonZeroElementRows[i] = m_hessianNZRows[i];
-                    nonZeroElementColumns[i] = m_hessianNZCols[i];
-                }
+                nonZeroElementRows = m_fullHessianSparsity.nonZeroElementRows;
+                nonZeroElementColumns = m_fullHessianSparsity.nonZeroElementColumns;
 
                 return true;
             }
@@ -1992,7 +2072,7 @@ namespace iDynTree {
                     hessian.resize(static_cast<unsigned int>(numberOfVariables()), static_cast<unsigned int>(numberOfVariables()));
                 }
 
-                m_hessianBlocksSet.reset();
+                m_hessianBlocks.reset();
 
                 MeshPointOrigin first = MeshPointOrigin::FirstPoint();
                 Eigen::Index constraintIndex = 0;
@@ -2039,7 +2119,7 @@ namespace iDynTree {
 
                             lambdaConstraints = fullLambda.segment(constraintIndex, nc);
 
-                            if (!(m_ocproblem->constraintSecondPartialDerivativeWRTControl(mesh->time, m_integrator->dynamicalSystem().lock()->initialState(), m_collocationControlBuffer[1], m_lambdaConstraints, m_controlHessianBuffer))){
+                            if (!(m_ocproblem->constraintsSecondPartialDerivativeWRTControl(mesh->time, m_integrator->dynamicalSystem().lock()->initialState(), m_collocationControlBuffer[1], m_lambdaConstraints, m_controlHessianBuffer))){
                                 std::ostringstream errorMsg;
                                 errorMsg << "Error while evaluating the constraints hessian wrt control at time " << mesh->time << ".";
                                 reportError("MultipleShootingTranscription", "evaluateConstraintsHessian", errorMsg.str().c_str());
@@ -2052,7 +2132,7 @@ namespace iDynTree {
 
                             lambdaConstraints = fullLambda.segment(constraintIndex, nc);
 
-                            if (!(m_ocproblem->constraintSecondPartialDerivativeWRTState(mesh->time, m_collocationStateBuffer[1], m_collocationControlBuffer[1], m_lambdaConstraints, m_stateHessianBuffer))){
+                            if (!(m_ocproblem->constraintsSecondPartialDerivativeWRTState(mesh->time, m_collocationStateBuffer[1], m_collocationControlBuffer[1], m_lambdaConstraints, m_stateHessianBuffer))){
                                 std::ostringstream errorMsg;
                                 errorMsg << "Error while evaluating the constraints hessian wrt state at time " << mesh->time << ".";
                                 reportError("MultipleShootingTranscription", "evaluateConstraintsHessian", errorMsg.str().c_str());
@@ -2061,7 +2141,7 @@ namespace iDynTree {
 
                             setHessianBlock(hessian, m_stateHessianBuffer, mesh->stateIndex, mesh->stateIndex);
 
-                            if (!(m_ocproblem->constraintSecondPartialDerivativeWRTStateControl(mesh->time, m_collocationStateBuffer[1], m_collocationControlBuffer[1], m_lambdaConstraints, m_stateControlHessianBuffer))){
+                            if (!(m_ocproblem->constraintsSecondPartialDerivativeWRTStateControl(mesh->time, m_collocationStateBuffer[1], m_collocationControlBuffer[1], m_lambdaConstraints, m_stateControlHessianBuffer))){
                                 std::ostringstream errorMsg;
                                 errorMsg << "Error while evaluating the constraints hessian wrt state and control at time " << mesh->time << ".";
                                 reportError("MultipleShootingTranscription", "evaluateConstraintsHessian", errorMsg.str().c_str());
@@ -2070,7 +2150,7 @@ namespace iDynTree {
 
                             setHessianBlockAndItsTranspose(hessian, m_stateControlHessianBuffer, mesh->stateIndex, mesh->controlIndex);
 
-                            if (!(m_ocproblem->constraintSecondPartialDerivativeWRTControl(mesh->time, m_collocationStateBuffer[1], m_collocationControlBuffer[1], m_lambdaConstraints, m_controlHessianBuffer))){
+                            if (!(m_ocproblem->constraintsSecondPartialDerivativeWRTControl(mesh->time, m_collocationStateBuffer[1], m_collocationControlBuffer[1], m_lambdaConstraints, m_controlHessianBuffer))){
                                 std::ostringstream errorMsg;
                                 errorMsg << "Error while evaluating the constraints hessian wrt control at time " << mesh->time << ".";
                                 reportError("MultipleShootingTranscription", "evaluateConstraintsHessian", errorMsg.str().c_str());

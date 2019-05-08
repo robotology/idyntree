@@ -261,6 +261,33 @@ namespace iDynTree {
                                                                   MatrixDynSize& hessian);
 
             /**
+             * @brief Returns the set of nonzeros elements in terms of row and colun index, in the state hessian
+             *
+             * @warning No check is performed in the indeces. They need to be in the range [0, stateDimension) and [0, stateDimension) respectively.
+             * @param stateSparsity Sparsity structure of the partial derivative of the jacobian wrt state variables.
+             * @return true if the sparsity is available. False otherwise.
+             */
+            bool constraintsSecondPartialDerivativeWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity);
+
+            /**
+             * @brief Returns the set of nonzeros elements in terms of row and colun index, in the mixed hessian
+             *
+             * @warning No check is performed in the indeces. They need to be in the range [0, stateDimension) and [0, controlDimension) respectively.
+             * @param stateControlSparsity Sparsity structure of the partial derivative of the jacobian wrt state and control variables.
+             * @return true if the sparsity is available. False otherwise.
+             */
+            bool constraintsSecondPartialDerivativeWRTStateControlSparsity(iDynTree::optimalcontrol::SparsityStructure& stateControlSparsity);
+
+            /**
+             * @brief Returns the set of nonzeros elements in terms of row and colun index, in the control hessian
+             *
+             * @warning No check is performed in the indeces. They need to be in the range [0, constraintDimension) and [0, controlDimension) respectively.
+             * @param controlSparsity Sparsity structure of the partial derivative of the jacobian wrt control variables.
+             * @return true if the sparsity is available. False otherwise.
+             */
+            bool constraintsSecondPartialDerivativeWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity);
+
+            /**
              * @brief Flag returning true if the group is an "AnyTime" group.
              * An "AnyTime" group contains only one constraint which is always enabled. It corresponds to a simple constraint.
              * @return true if the group contains a single constraint always enables. False otherwise.
