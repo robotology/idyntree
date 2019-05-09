@@ -589,7 +589,7 @@ namespace iDynTree {
 
         bool L2NormCost::costSecondPartialDerivativeWRTControlSparsity(SparsityStructure &controlSparsity)
         {
-            controlSparsity = m_pimpl->stateCost.getHessianSparsity();
+            controlSparsity = m_pimpl->controlCost.getHessianSparsity();
             return true;
         }
 
