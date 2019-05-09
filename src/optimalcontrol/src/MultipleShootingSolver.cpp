@@ -285,7 +285,7 @@ namespace iDynTree {
                 SparsityStructure& transposeSparsity = m_hessianBlocks.blockSparsity(initCol, initRow);
 
                 for (size_t i = 0; i < sparsity.size(); ++i){
-                    transposeSparsity.add(sparsity[i]);
+                    transposeSparsity.add(sparsity[i].col, sparsity[i].row);
                 }
             }
 
