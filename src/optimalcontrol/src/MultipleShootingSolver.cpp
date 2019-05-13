@@ -174,6 +174,9 @@ namespace iDynTree {
             CollocationHessianSparsityMap m_systemStateHessianSparsity, m_systemControlHessianSparsity, m_systemMixedHessianSparsity;
             SparsityStructure m_fullHessianSparsity;
 
+            bool m_useCostRegularization, m_useConstraintsRegularization;
+            double m_constraintsRegularization, m_costsRegularization;
+
 
             friend class MultipleShootingSolver;
 
@@ -1044,6 +1047,10 @@ namespace iDynTree {
             , m_stateGuesses(nullptr)
             , m_controlGuesses(nullptr)
             , m_solved(false)
+            , m_useCostRegularization(false)
+            , m_useConstraintsRegularization(false)
+            , m_constraintsRegularization(0.0)
+            , m_costsRegularization(0.0)
             { }
 
             MultipleShootingTranscription(const std::shared_ptr<OptimalControlProblem> problem, const std::shared_ptr<Integrator> integrationMethod)
@@ -1066,6 +1073,10 @@ namespace iDynTree {
             , m_stateGuesses(nullptr)
             , m_controlGuesses(nullptr)
             , m_solved(false)
+            , m_useCostRegularization(false)
+            , m_useConstraintsRegularization(false)
+            , m_constraintsRegularization(0.0)
+            , m_costsRegularization(0.0)
             { }
 
             MultipleShootingTranscription(const MultipleShootingTranscription& other) = delete;
@@ -1426,6 +1437,10 @@ namespace iDynTree {
                 assert(constraintIndex == m_numberOfConstraints);
 
                 m_hessianBlocks.getFullSparsity(m_fullHessianSparsity);
+
+                if (m_useCostRegularization || m_useConstraintsRegularization) {
+                    m_fullHessianSparsity.addIdentityBlock(0, 0, m_numberOfVariables);
+                }
 
                 m_prepared = true;
                 return true;
@@ -1817,6 +1832,12 @@ namespace iDynTree {
 
                 iDynTreeEigenMatrixMap hessianMap = toEigen(hessian);
 
+                if (m_useCostRegularization) {
+                    for (unsigned int i = 0; i < hessian.rows(); ++i) {
+                        hessian(i, i) = 0.0;
+                    }
+                }
+
                 for (auto mesh = m_meshPoints.begin(); mesh != m_meshPointsEnd; ++mesh){
 
                     stateBufferMap = variablesBuffer.segment(static_cast<Eigen::Index>(mesh->stateIndex), nx);
@@ -1855,6 +1876,13 @@ namespace iDynTree {
                         hessianMap.block(static_cast<Eigen::Index>(mesh->controlIndex), static_cast<Eigen::Index>(mesh->controlIndex), nu, nu) += costControlHessian;
                     }
                 }
+
+                if (m_useCostRegularization) {
+                    for (unsigned int i = 0; i < hessian.rows(); ++i) {
+                        hessian(i, i) += m_costsRegularization;
+                    }
+                }
+
                 return true;
             }
 
@@ -2054,6 +2082,12 @@ namespace iDynTree {
                     hessian.resize(static_cast<unsigned int>(numberOfVariables()), static_cast<unsigned int>(numberOfVariables()));
                 }
 
+                if (m_useConstraintsRegularization) {
+                    for (unsigned int i = 0; i < hessian.rows(); ++i) {
+                        hessian(i, i) = 0.0;
+                    }
+                }
+
                 m_hessianBlocks.reset();
 
                 MeshPointOrigin first = MeshPointOrigin::FirstPoint();
@@ -2147,6 +2181,12 @@ namespace iDynTree {
 
                 }
                 assert(static_cast<size_t>(constraintIndex) == m_numberOfConstraints);
+
+                if (m_useConstraintsRegularization) {
+                    for (unsigned int i = 0; i < hessian.rows(); ++i) {
+                        hessian(i, i) += m_constraintsRegularization;
+                    }
+                }
 
                 return true;
             }
@@ -2276,6 +2316,28 @@ namespace iDynTree {
         void MultipleShootingSolver::resetTranscription()
         {
             m_transcription->reset();
+        }
+
+        void iDynTree::optimalcontrol::MultipleShootingSolver::disableCostsHessianRegularization()
+        {
+            m_transcription->m_useCostRegularization = false;
+        }
+
+        void iDynTree::optimalcontrol::MultipleShootingSolver::disableConstraintsHessianRegularization()
+        {
+            m_transcription->m_useConstraintsRegularization = false;
+        }
+
+        void iDynTree::optimalcontrol::MultipleShootingSolver::addCostsHessianRegularization(double regularization)
+        {
+            m_transcription->m_useCostRegularization = true;
+            m_transcription->m_costsRegularization = regularization;
+        }
+
+        void iDynTree::optimalcontrol::MultipleShootingSolver::addConstraintsHessianRegularization(double regularization)
+        {
+            m_transcription->m_useConstraintsRegularization = true;
+            m_transcription->m_constraintsRegularization = regularization;
         }
     }
 }

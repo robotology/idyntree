@@ -76,6 +76,13 @@ namespace iDynTree {
 
             void resetTranscription();
 
+            void addConstraintsHessianRegularization(double regularization);
+
+            void disableConstraintsHessianRegularization();
+
+            void addCostsHessianRegularization(double regularization);
+
+            void disableCostsHessianRegularization();
 
         private:
 
