@@ -67,6 +67,10 @@ class YARPRobotStatePublisherModule : public yarp::os::RFModule
    yarp::os::Node*      m_rosNode;
    JointStateSuscriber* m_jointStateSubscriber;
 
+   // String to check if the urdf model joints are greater or lower
+   // than the number of joints streamed in joints_states topic
+   std::string m_model_joints;
+
 public:
     YARPRobotStatePublisherModule();
     bool configure(yarp::os::ResourceFinder &rf);

@@ -97,6 +97,10 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
         return false;
     }
 
+    // Get model joints option value from configuration parameters
+    // The default value is set to greater for back compatability
+    m_model_joints = rf.check("modelJoints",Value("greater")).asString();
+
     // If YARP is using a network clock, writing on a ROS topic is not working
     // Workaround: explicitly instantiate a network clock to read the time from gazebo
     if( yarp::os::NetworkBase::exists("/clock") )
@@ -207,12 +211,26 @@ void YARPRobotStatePublisherModule::onRead(yarp::rosmsg::sensor_msgs::JointState
         return;
     }
 
-    // Check if joint states contain at least as many joints of the model
-    if (v.name.size() < m_jointPos.size())
-    {
-        yError() << "Size mismatch. Model has " << m_jointPos.size()
-                 << " joints, while the received JointState message has " << v.name.size() << " joints.";
-        return;
+    if (m_model_joints == "lower") {
+
+        // Check if the joints states are more than the number of joints of the model
+        if (v.name.size() > m_jointPos.size()) {
+            yError() << "Size mismatch. Model has " << m_jointPos.size()
+                     << " joints, while the received JointState message has " << v.name.size() << " joints.";
+            return;
+        }
+
+    }
+    else {
+
+        // Check if joint states contain at least as many joints of the model
+        if (v.name.size() < m_jointPos.size())
+        {
+            yError() << "Size mismatch. Model has " << m_jointPos.size()
+                     << " joints, while the received JointState message has " << v.name.size() << " joints.";
+            return;
+        }
+
     }
 
     // TODO: this part can be drastically speed up.
