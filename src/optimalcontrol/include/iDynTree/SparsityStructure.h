@@ -21,6 +21,7 @@
 #include <vector>
 #include <cstddef>
 #include <unordered_set>
+#include <string>
 
 namespace iDynTree {
     namespace optimalcontrol {
