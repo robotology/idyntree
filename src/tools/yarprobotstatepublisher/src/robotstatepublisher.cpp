@@ -32,18 +32,18 @@ using namespace yarp::sig;
 using namespace yarp::math;
 
 /************************************************************/
-JointStateSuscriber::JointStateSuscriber(): m_module(nullptr)
+JointStateSubcriber::JointStateSubcriber(): m_module(nullptr)
 {
 }
 
 /************************************************************/
-void JointStateSuscriber::attach(YARPRobotStatePublisherModule* module)
+void JointStateSubcriber::attach(YARPRobotStatePublisherModule* module)
 {
     m_module = module;
 }
 
 /************************************************************/
-void JointStateSuscriber::onRead(yarp::rosmsg::sensor_msgs::JointState& v)
+void JointStateSubcriber::onRead(yarp::rosmsg::sensor_msgs::JointState& v)
 {
     m_module->onRead(v);
 }
@@ -142,7 +142,7 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
 
     // Setup the topic and configureisValid the onRead callback
     string jointStatesTopicName = rf.check("jointstates-topic",Value("/joint_states")).asString();
-    m_jointStateSubscriber = new JointStateSuscriber();
+    m_jointStateSubscriber = new JointStateSubcriber();
     m_jointStateSubscriber->attach(this);
     m_jointStateSubscriber->topic(jointStatesTopicName);
     m_jointStateSubscriber->useCallback();

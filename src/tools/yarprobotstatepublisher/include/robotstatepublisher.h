@@ -27,13 +27,13 @@
 class YARPRobotStatePublisherModule;
 
 /****************************************************************/
-class JointStateSuscriber: public yarp::os::Subscriber<yarp::rosmsg::sensor_msgs::JointState>
+class JointStateSubcriber: public yarp::os::Subscriber<yarp::rosmsg::sensor_msgs::JointState>
 {
 private:
     YARPRobotStatePublisherModule* m_module;
 
 public:
-    JointStateSuscriber();
+    JointStateSubcriber();
     void attach(YARPRobotStatePublisherModule* module);
     using yarp::os::Subscriber<yarp::rosmsg::sensor_msgs::JointState>::onRead;
     virtual void        onRead(yarp::rosmsg::sensor_msgs::JointState &v);
@@ -65,7 +65,7 @@ class YARPRobotStatePublisherModule : public yarp::os::RFModule
 
    // /JointState topic scruscriber
    yarp::os::Node*      m_rosNode;
-   JointStateSuscriber* m_jointStateSubscriber;
+   JointStateSubcriber* m_jointStateSubscriber;
 
 public:
     YARPRobotStatePublisherModule();
