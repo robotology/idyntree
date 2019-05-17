@@ -64,7 +64,7 @@ class YARPRobotStatePublisherModule : public yarp::os::RFModule
    yarp::os::Mutex m_mutex;
 
    // /JointState topic scruscriber
-   yarp::os::Node*      m_rosNode;
+   std::unique_ptr<yarp::os::Node> m_rosNode;
    JointStateSubcriber* m_jointStateSubscriber;
 
 public:

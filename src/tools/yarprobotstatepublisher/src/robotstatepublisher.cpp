@@ -64,9 +64,11 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
     string name="yarprobotstatepublisher";
     string namePrefix = rf.check("namePrefix",Value("")).asString();
     if (!namePrefix.empty()) {
-        m_rosNode = new yarp::os::Node("/"+namePrefix+"/yarprobotstatepublisher");
+        m_rosNode.reset(new yarp::os::Node("/"+namePrefix+"/yarprobotstatepublisher"));
     }
-    else m_rosNode = new yarp::os::Node("/yarprobotstatepublisher");
+    else {
+        m_rosNode.reset(new yarp::os::Node("/yarprobotstatepublisher"));
+    }
 
     string modelFileName=rf.check("model",Value("model.urdf")).asString();
     m_period=rf.check("period",Value(0.010)).asDouble();
@@ -172,10 +174,6 @@ bool YARPRobotStatePublisherModule::close()
     }
 
     m_baseFrameIndex = iDynTree::FRAME_INVALID_INDEX;
-
-    if(m_rosNode)
-        delete m_rosNode;
-    m_rosNode = nullptr;
 
     return true;
 }
