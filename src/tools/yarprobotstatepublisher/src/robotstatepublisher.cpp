@@ -144,7 +144,7 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
 
     // Setup the topic and configureisValid the onRead callback
     string jointStatesTopicName = rf.check("jointstates-topic",Value("/joint_states")).asString();
-    m_jointStateSubscriber = new JointStateSubscriber();
+    m_jointStateSubscriber.reset(new JointStateSubscriber());
     m_jointStateSubscriber->attach(this);
     m_jointStateSubscriber->topic(jointStatesTopicName);
     m_jointStateSubscriber->useCallback();
@@ -163,7 +163,6 @@ bool YARPRobotStatePublisherModule::close()
     {
         m_jointStateSubscriber->interrupt();
         m_jointStateSubscriber->close();
-        delete m_jointStateSubscriber;
     }
 
     if (m_ddtransformclient.isValid())
