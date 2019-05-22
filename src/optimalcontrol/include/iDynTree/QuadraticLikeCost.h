@@ -67,6 +67,12 @@ namespace iDynTree {
                                                                    const iDynTree::VectorDynSize& control,
                                                                    iDynTree::MatrixDynSize& partialDerivative) final;
 
+           virtual bool costSecondPartialDerivativeWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity) final;
+
+           virtual bool costSecondPartialDerivativeWRTStateControlSparsity(iDynTree::optimalcontrol::SparsityStructure& stateControlSparsity) final;
+
+           virtual bool costSecondPartialDerivativeWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) final;
+
        protected:
            QuadraticLikeCost(const std::string& costName);  //this class serves only as base class
 
@@ -76,6 +82,15 @@ namespace iDynTree {
            std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingMatrix> m_timeVaryingControlHessian;
            std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingVector> m_timeVaryingControlGradient;
            std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingDouble> m_timeVaryingControlCostBias;
+
+           bool m_hasSecondPartialDerivativeWRTStateSparsity;
+           bool m_hasSecondPartialDerivativeWRTControlSparsity;
+           bool m_hasSecondPartialDerivativeWRTStateControlSparsity;
+
+           SparsityStructure m_secondPartialDerivativeWRTStateSparsity;
+           SparsityStructure m_secondPartialDerivativeWRTControlSparsity;
+           SparsityStructure m_secondPartialDerivativeWRTStateControlSparsity;
+
        };
     }
 }

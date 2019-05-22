@@ -44,30 +44,62 @@ namespace iDynTree {
                 m_stateJacBuffer.zero();
                 m_controlJacBuffer.resize(nx,nu);
                 m_controlJacBuffer.zero();
-                m_zeroBuffer.resize(nx,nu);
-                m_zeroBuffer.zero();
+                m_zeroNxNxBuffer.resize(nx,nx);
+                m_zeroNxNxBuffer.zero();
+                m_zeroNxNuBuffer.resize(nx,nu);
+                m_zeroNxNuBuffer.zero();
+                m_zeroNuNuBuffer.resize(nu,nu);
+                m_zeroNuNuBuffer.zero();
+
+                m_stateHessianBuffer.resize(nx, nx);
+                m_stateHessianBuffer.zero();
+                m_controlHessianBuffer.resize(nu, nu);
+                m_controlHessianBuffer.zero();
+                m_mixedHessianBuffer.resize(nx, nu);
+                m_mixedHessianBuffer.zero();
+
+                m_lambda.resize(nx);
 
                 m_stateJacobianSparsity.resize(2);
                 m_controlJacobianSparsity.resize(2);
 
                 if (m_dynamicalSystem_ptr->dynamicsStateFirstDerivativeSparsity(m_stateJacobianSparsity[0])) {
-                    m_stateJacobianSparsity[1].nonZeroElementRows.clear();
-                    m_stateJacobianSparsity[1].nonZeroElementColumns.clear();
+                    m_stateJacobianSparsity[1].clear();
 
                     for (size_t i = 0; i < m_dynamicalSystem_ptr->stateSpaceSize(); ++i) {
-                        m_stateJacobianSparsity[0].addNonZeroIfNotPresent(i, i);
-                        m_stateJacobianSparsity[1].nonZeroElementRows.push_back(i);
-                        m_stateJacobianSparsity[1].nonZeroElementColumns.push_back(i);
+                        m_stateJacobianSparsity[0].add(i, i);
+                        m_stateJacobianSparsity[1].add(i, i);
                     }
 
-                    m_hasStateSparsity = true;
+                    m_hasStateJacobianSparsity = true;
                 }
 
                 if (m_dynamicalSystem_ptr->dynamicsControlFirstDerivativeSparsity(m_controlJacobianSparsity[0])) {
-                    m_controlJacobianSparsity[1].nonZeroElementRows.clear();
-                    m_controlJacobianSparsity[1].nonZeroElementColumns.clear();
+                    m_controlJacobianSparsity[1].clear();
 
-                    m_hasControlSparsity = true;
+                    m_hasControlJacobianSparsity = true;
+                }
+
+                if (m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTStateSparsity(m_stateHessianSparsity[CollocationHessianIndex(0, 0)])) {
+                    m_stateHessianSparsity[CollocationHessianIndex(0, 1)].clear();
+                    m_stateHessianSparsity[CollocationHessianIndex(1, 1)].clear();
+
+                    m_hasStateHessianSparsity = true;
+                }
+
+                if (m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTStateControlSparsity(m_stateControlHessianSparsity[CollocationHessianIndex(0, 0)])) {
+                    m_stateControlHessianSparsity[CollocationHessianIndex(0, 1)].clear();
+                    m_stateControlHessianSparsity[CollocationHessianIndex(1, 0)].clear();
+                    m_stateControlHessianSparsity[CollocationHessianIndex(1, 1)].clear();
+
+                    m_hasStateControlHessianSparsity = true;
+                }
+
+                if (m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTControlSparsity(m_controlHessianSparsity[CollocationHessianIndex(0, 0)])) {
+                    m_controlHessianSparsity[CollocationHessianIndex(0, 1)].clear();
+                    m_controlHessianSparsity[CollocationHessianIndex(1, 1)].clear();
+
+                    m_hasControlHessianSparsity = true;
                 }
 
                 return true;
@@ -239,14 +271,14 @@ namespace iDynTree {
                     controlJacobianValues[1].resize(nx,nu);
                 }
 
-                controlJacobianValues[1] = m_zeroBuffer;
+                controlJacobianValues[1] = m_zeroNxNuBuffer;
 
                 return true;
             }
 
             bool ForwardEuler::getCollocationConstraintJacobianStateSparsity(std::vector<SparsityStructure> &stateJacobianSparsity)
             {
-                if (!m_hasStateSparsity) {
+                if (!m_hasStateJacobianSparsity) {
                     return false;
                 }
 
@@ -256,11 +288,117 @@ namespace iDynTree {
 
             bool ForwardEuler::getCollocationConstraintJacobianControlSparsity(std::vector<SparsityStructure> &controlJacobianSparsity)
             {
-                if (!m_hasControlSparsity) {
+                if (!m_hasControlJacobianSparsity) {
                     return false;
                 }
 
                 controlJacobianSparsity = m_controlJacobianSparsity;
+                return true;
+            }
+
+            bool ForwardEuler::evaluateCollocationConstraintSecondDerivatives(double time, const std::vector<VectorDynSize> &collocationPoints,
+                                                                              const std::vector<VectorDynSize> &controlInputs, double dT,
+                                                                              const VectorDynSize &lambda, CollocationHessianMap &stateSecondDerivative,
+                                                                              CollocationHessianMap &controlSecondDerivative, CollocationHessianMap &stateControlSecondDerivative)
+            {
+                if (!m_dynamicalSystem_ptr){
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintSecondDerivatives", "Dynamical system not set.");
+                    return false;
+                }
+
+                if (collocationPoints.size() != 2){
+                    std::ostringstream errorMsg;
+                    errorMsg << "The size of the matrix containing the collocation point does not match the expected one. Input = ";
+                    errorMsg << collocationPoints.size() << ", Expected = 2.";
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintSecondDerivatives", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (controlInputs.size() != 2){
+                    std::ostringstream errorMsg;
+                    errorMsg << "The size of the matrix containing the control inputs does not match the expected one. Input = ";
+                    errorMsg << controlInputs.size() << ", Expected = 2.";
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintSecondDerivatives", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (!((m_dynamicalSystem_ptr->setControlInput(controlInputs[0])))){
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintSecondDerivatives", "Error while setting the control input.");
+                    return false;
+                }
+
+                toEigen(m_lambda) = dT * toEigen(lambda);
+
+                if (!(m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTState(time, collocationPoints[0], m_lambda, m_stateHessianBuffer))) {
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintSecondDerivatives",
+                                "Error while evaluating the dynamical system state second derivative.");
+                    return false;
+                }
+
+                stateSecondDerivative[CollocationHessianIndex(0, 0)] = m_stateHessianBuffer;
+
+                stateSecondDerivative[CollocationHessianIndex(0, 1)] = m_zeroNxNxBuffer;
+
+                stateSecondDerivative[CollocationHessianIndex(1, 1)] = m_zeroNxNxBuffer;
+
+                if (!(m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTControl(time, collocationPoints[0], m_lambda, m_controlHessianBuffer))) {
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintSecondDerivatives",
+                                "Error while evaluating the dynamical system control second derivative.");
+                    return false;
+                }
+
+                controlSecondDerivative[CollocationHessianIndex(0, 0)] = m_controlHessianBuffer;
+
+                controlSecondDerivative[CollocationHessianIndex(0, 1)] = m_zeroNuNuBuffer;
+
+                controlSecondDerivative[CollocationHessianIndex(1, 1)] = m_zeroNuNuBuffer;
+
+
+                if (!(m_dynamicalSystem_ptr->dynamicsSecondPartialDerivativeWRTStateControl(time, collocationPoints[0], m_lambda, m_mixedHessianBuffer))) {
+                    reportError(m_info.name().c_str(), "evaluateCollocationConstraintSecondDerivatives",
+                                "Error while evaluating the dynamical system second derivative wrt state and control.");
+                    return false;
+                }
+
+                stateControlSecondDerivative[CollocationHessianIndex(0, 0)] = m_mixedHessianBuffer;
+
+                stateControlSecondDerivative[CollocationHessianIndex(0, 1)] = m_zeroNxNuBuffer;
+
+                stateControlSecondDerivative[CollocationHessianIndex(1, 0)] = m_zeroNxNuBuffer;
+
+                stateControlSecondDerivative[CollocationHessianIndex(1, 1)] = m_zeroNxNuBuffer;
+
+
+                return true;
+            }
+
+            bool ForwardEuler::getCollocationConstraintSecondDerivativeWRTStateSparsity(CollocationHessianSparsityMap &stateDerivativeSparsity)
+            {
+                if (!m_hasStateHessianSparsity) {
+                    return false;
+                }
+
+                stateDerivativeSparsity = m_stateHessianSparsity;
+                return true;
+            }
+
+            bool ForwardEuler::getCollocationConstraintSecondDerivativeWRTControlSparsity(CollocationHessianSparsityMap &controlDerivativeSparsity)
+            {
+                if (!m_hasControlHessianSparsity) {
+                    return false;
+                }
+
+                controlDerivativeSparsity = m_controlHessianSparsity;
+                return true;
+            }
+
+            bool ForwardEuler::getCollocationConstraintSecondDerivativeWRTStateControlSparsity(CollocationHessianSparsityMap &stateControlDerivativeSparsity)
+            {
+                if (!m_hasStateControlHessianSparsity) {
+                    return false;
+                }
+
+                stateControlDerivativeSparsity = m_stateControlHessianSparsity;
                 return true;
             }
         }

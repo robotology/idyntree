@@ -33,6 +33,7 @@ namespace iDynTree {
         protected:
             VectorDynSize m_selected;
             MatrixDynSize m_selectionMatrix;
+            SparsityStructure m_correspondingHessianSparsity;
         public:
             Selector(unsigned int selectedSize) : m_selected(selectedSize) { }
 
@@ -42,6 +43,14 @@ namespace iDynTree {
 
             virtual const MatrixDynSize& asSelectorMatrix() {
                 return m_selectionMatrix;
+            }
+
+            const SparsityStructure& sparsity() {
+                return m_correspondingHessianSparsity;
+            }
+
+            void setSparsity(const SparsityStructure& sparsity) {
+                m_correspondingHessianSparsity = sparsity;
             }
 
             unsigned int size() const {
@@ -60,6 +69,7 @@ namespace iDynTree {
             {
                 m_selectionMatrix.resize(static_cast<unsigned int>(selectedRange.size), totalSize);
                 toEigen(m_selectionMatrix).block(0, selectedRange.offset, selectedRange.size, selectedRange.size).setIdentity();
+                m_correspondingHessianSparsity.addDenseBlock(selectedRange, selectedRange);
             }
 
             ~IndexSelector() override;
@@ -69,6 +79,7 @@ namespace iDynTree {
                 m_selected = make_span(fullVector).subspan(m_selectedIndex.offset, m_selectedIndex.size);
                 return m_selected;
             }
+
         };
         IndexSelector::~IndexSelector(){}
 
@@ -78,6 +89,7 @@ namespace iDynTree {
                 : Selector(selectorMatrix.rows())
             {
                 m_selectionMatrix = selectorMatrix;
+                m_correspondingHessianSparsity.addDenseBlock(0, 0, selectorMatrix.cols(), selectorMatrix.cols()); //dense
             }
 
             ~MatrixSelector() override;
@@ -91,11 +103,13 @@ namespace iDynTree {
         MatrixSelector::~MatrixSelector(){}
 
         //
-        // End of implementation of TimeVaryingGradient
+        // End of implementation of selectors
         //
 
         class CostAttributes {
             bool m_valid = false;
+            SparsityStructure m_emptySparsity; //dummy sparsity in case this cost is not initialized
+
         public:
             std::shared_ptr<TimeVaryingVector> desiredTrajectory;
             iDynTree::MatrixDynSize gradientSubMatrix, hessianMatrix;
@@ -163,7 +177,7 @@ namespace iDynTree {
                 }
 
                 iDynTree::toEigen(this->weightMatrix) = iDynTree::toEigen(weights).asDiagonal();
-                toEigen(this->gradientSubMatrix) = 0.5 * toEigen(this->selector->asSelectorMatrix()).transpose() * (toEigen(this->weightMatrix) + toEigen(this->weightMatrix).transpose());
+                toEigen(this->gradientSubMatrix) = toEigen(this->selector->asSelectorMatrix()).transpose() * toEigen(this->weightMatrix);
                 toEigen(this->hessianMatrix) = toEigen(this->gradientSubMatrix) * toEigen(this->selector->asSelectorMatrix());
 
                 return true;
@@ -285,6 +299,13 @@ namespace iDynTree {
 
                 return true;
 
+            }
+
+            const SparsityStructure& getHessianSparsity() {
+                if (!isValid()) {
+                    return m_emptySparsity;
+                }
+                return selector->sparsity();
             }
 
         };
@@ -551,6 +572,24 @@ namespace iDynTree {
         {
             partialDerivative.resize(state.size(), control.size());
             partialDerivative.zero();
+            return true;
+        }
+
+        bool L2NormCost::costSecondPartialDerivativeWRTStateSparsity(SparsityStructure &stateSparsity)
+        {
+            stateSparsity = m_pimpl->stateCost.getHessianSparsity();
+            return true;
+        }
+
+        bool L2NormCost::costSecondPartialDerivativeWRTStateControlSparsity(SparsityStructure &stateControlSparsity)
+        {
+            stateControlSparsity.clear();
+            return true;
+        }
+
+        bool L2NormCost::costSecondPartialDerivativeWRTControlSparsity(SparsityStructure &controlSparsity)
+        {
+            controlSparsity = m_pimpl->controlCost.getHessianSparsity();
             return true;
         }
 

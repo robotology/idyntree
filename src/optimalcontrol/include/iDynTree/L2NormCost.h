@@ -99,6 +99,12 @@ namespace iDynTree {
                                                                     const iDynTree::VectorDynSize& state,
                                                                     const iDynTree::VectorDynSize& control,
                                                                     iDynTree::MatrixDynSize& partialDerivative) final;
+
+            virtual bool costSecondPartialDerivativeWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity) final;
+
+            virtual bool costSecondPartialDerivativeWRTStateControlSparsity(iDynTree::optimalcontrol::SparsityStructure& stateControlSparsity) final;
+
+            virtual bool costSecondPartialDerivativeWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) final;
         };
 
     }

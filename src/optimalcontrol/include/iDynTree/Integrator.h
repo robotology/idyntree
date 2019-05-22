@@ -23,6 +23,7 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include <map>
 
 namespace iDynTree {
 
@@ -104,6 +105,28 @@ namespace optimalcontrol {
                  */
                 size_t numberOfStages() const;
             };
+
+
+            class CollocationHessianIndex {
+                size_t m_first;
+                size_t m_second;
+
+            public:
+
+                CollocationHessianIndex() = delete;
+
+                CollocationHessianIndex(size_t first, size_t second);
+
+                bool operator< (const CollocationHessianIndex& rhs) const;
+
+                size_t first() const;
+
+                size_t second() const;
+            };
+
+            using CollocationHessianMap = std::map<CollocationHessianIndex, MatrixDynSize>;
+
+            using CollocationHessianSparsityMap = std::map<CollocationHessianIndex, SparsityStructure>;
 
             /**
              * @warning This class is still in active development, and so API interface can change between iDynTree versions.
@@ -238,6 +261,19 @@ namespace optimalcontrol {
 
                 virtual bool getCollocationConstraintJacobianControlSparsity(std::vector<SparsityStructure>& controlJacobianSparsity);
 
+
+                virtual bool evaluateCollocationConstraintSecondDerivatives(double time, const std::vector<VectorDynSize>& collocationPoints,
+                                                                            const std::vector<VectorDynSize>& controlInputs, double dT,
+                                                                            const VectorDynSize& lambda,
+                                                                            CollocationHessianMap& stateSecondDerivative,
+                                                                            CollocationHessianMap& controlSecondDerivative,
+                                                                            CollocationHessianMap& stateControlSecondDerivative);
+
+                virtual bool getCollocationConstraintSecondDerivativeWRTStateSparsity(CollocationHessianSparsityMap& stateDerivativeSparsity);
+
+                virtual bool getCollocationConstraintSecondDerivativeWRTControlSparsity(CollocationHessianSparsityMap& controlDerivativeSparsity);
+
+                virtual bool getCollocationConstraintSecondDerivativeWRTStateControlSparsity(CollocationHessianSparsityMap& stateControlDerivativeSparsity);
 
                 const IntegratorInfo& info() const;
 

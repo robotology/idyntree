@@ -74,6 +74,27 @@ namespace iDynTree {
 
             virtual bool dynamicsControlFirstDerivativeSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) final;
 
+            virtual bool dynamicsSecondPartialDerivativeWRTState(double time,
+                                                                 const iDynTree::VectorDynSize& state,
+                                                                 const iDynTree::VectorDynSize& lambda,
+                                                                 iDynTree::MatrixDynSize& partialDerivative) final;
+
+            virtual bool dynamicsSecondPartialDerivativeWRTControl(double time,
+                                                                   const iDynTree::VectorDynSize& state,
+                                                                   const iDynTree::VectorDynSize& lambda,
+                                                                   iDynTree::MatrixDynSize& partialDerivative) final;
+
+            virtual bool dynamicsSecondPartialDerivativeWRTStateControl(double time,
+                                                                        const iDynTree::VectorDynSize& state,
+                                                                        const iDynTree::VectorDynSize& lambda,
+                                                                        iDynTree::MatrixDynSize& partialDerivative) final;
+
+            virtual bool dynamicsSecondPartialDerivativeWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity) final;
+
+            virtual bool dynamicsSecondPartialDerivativeWRTStateControlSparsity(iDynTree::optimalcontrol::SparsityStructure& stateControlSparsity) final;
+
+            virtual bool dynamicsSecondPartialDerivativeWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) final;
+
 
         private:
             class LinearSystemPimpl;

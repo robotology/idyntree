@@ -258,6 +258,8 @@ int main () {
     //ASSERT_IS_TRUE(optimizer->setIpoptOption("linear_solver", "ma27"));
     ASSERT_IS_TRUE(optimizer->setIpoptOption("print_level", 0));
 
+    optimizer->useApproximatedHessians();
+
     clock_t initT, endT;
     initT = clock();
     ASSERT_IS_TRUE(solver.solve());

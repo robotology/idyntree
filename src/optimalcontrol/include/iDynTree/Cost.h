@@ -18,6 +18,8 @@
 #define IDYNTREE_OPTIMALCONTROL_COST_H
 
 #include <string>
+#include <iDynTree/SparsityStructure.h>
+
 
 namespace iDynTree {
 
@@ -143,6 +145,33 @@ namespace iDynTree {
                                                                     const iDynTree::VectorDynSize& state,
                                                                     const iDynTree::VectorDynSize& control,
                                                                     iDynTree::MatrixDynSize& partialDerivative);
+
+            /**
+             * @brief Returns the set of nonzeros elements in terms of row and colun index, in the state hessian
+             *
+             * @warning No check is performed in the indeces. They need to be in the range [0, stateDimension) and [0, stateDimension) respectively.
+             * @param[out] stateSparsity Sparsity structure of the partial derivative of the gradient wrt state variables.
+             * @return true if the sparsity is available. False otherwise.
+             */
+            virtual bool costSecondPartialDerivativeWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity);
+
+            /**
+             * @brief Returns the set of nonzeros elements in terms of row and colun index, in the mixed hessian
+             *
+             * @warning No check is performed in the indeces. They need to be in the range [0, stateDimension) and [0, controlDimension) respectively.
+             * @param[out] stateControlSparsity Sparsity structure of the partial derivative of the gradient wrt state and control variables.
+             * @return true if the sparsity is available. False otherwise.
+             */
+            virtual bool costSecondPartialDerivativeWRTStateControlSparsity(iDynTree::optimalcontrol::SparsityStructure& stateControlSparsity);
+
+            /**
+             * @brief Returns the set of nonzeros elements in terms of row and colun index, in the control hessian
+             *
+             * @warning No check is performed in the indeces. They need to be in the range [0, constraintDimension) and [0, controlDimension) respectively.
+             * @param[out] controlSparsity Sparsity structure of the partial derivative of the gradient wrt control variables.
+             * @return true if the sparsity is available. False otherwise.
+             */
+            virtual bool costSecondPartialDerivativeWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity);
 
 
         private:

@@ -256,5 +256,44 @@ namespace iDynTree {
             return true;
         }
 
+        bool LinearConstraint::constraintSecondPartialDerivativeWRTState(double /*time*/, const VectorDynSize &state, const VectorDynSize &/*control*/, const VectorDynSize &/*lambda*/, MatrixDynSize &hessian)
+        {
+            hessian.resize(state.size(), state.size());
+            hessian.zero();
+            return true;
+        }
+
+        bool LinearConstraint::constraintSecondPartialDerivativeWRTControl(double /*time*/, const VectorDynSize &/*state*/, const VectorDynSize &control, const VectorDynSize &/*lambda*/, MatrixDynSize &hessian)
+        {
+            hessian.resize(control.size(), control.size());
+            hessian.zero();
+            return true;
+        }
+
+        bool LinearConstraint::constraintSecondPartialDerivativeWRTStateControl(double /*time*/, const VectorDynSize &state, const VectorDynSize &control, const VectorDynSize &/*lambda*/, MatrixDynSize &hessian)
+        {
+            hessian.resize(state.size(), control.size());
+            hessian.zero();
+            return true;
+        }
+
+        bool LinearConstraint::constraintSecondPartialDerivativeWRTStateSparsity(SparsityStructure &stateSparsity)
+        {
+            stateSparsity.clear();
+            return true;
+        }
+
+        bool LinearConstraint::constraintSecondPartialDerivativeWRTStateControlSparsity(SparsityStructure &stateControlSparsity)
+        {
+            stateControlSparsity.clear();
+            return true;
+        }
+
+        bool LinearConstraint::constraintSecondPartialDerivativeWRTControlSparsity(SparsityStructure &controlSparsity)
+        {
+            controlSparsity.clear();
+            return true;
+        }
+
     }
 }

@@ -83,10 +83,10 @@ public:
 
     virtual bool dynamicsControlFirstDerivativeSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) override {
         iDynTree::optimalcontrol::SparsityStructure sparsity;
-        sparsity.addNonZeroIfNotPresent(0, 0);
-        sparsity.addNonZeroIfNotPresent(0, 1);
-        sparsity.addNonZeroIfNotPresent(1, 0);
-        sparsity.addNonZeroIfNotPresent(1, 2);
+        sparsity.add(0, 0);
+        sparsity.add(0, 1);
+        sparsity.add(1, 0);
+        sparsity.add(1, 2);
         controlSparsity = sparsity;
         return true;
     }
@@ -163,7 +163,7 @@ public:
 
     virtual bool constraintJacobianWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity) override {
         iDynTree::optimalcontrol::SparsityStructure sparsity;
-        sparsity.addNonZeroIfNotPresent(0,0);
+        sparsity.add(0,0);
         controlSparsity = sparsity;
         return true;
     }
@@ -390,8 +390,8 @@ int main() {
     ASSERT_IS_FALSE(problem.isFeasiblePoint(4.0, testState, testControl));
 
     iDynTree::optimalcontrol::SparsityStructure stateSparsity, controlSparsity;
-    ASSERT_IS_TRUE(problem.constraintJacobianWRTStateSparsity(stateSparsity));
-    ASSERT_IS_TRUE(problem.constraintJacobianWRTControlSparsity(controlSparsity));
+    ASSERT_IS_TRUE(problem.constraintsJacobianWRTStateSparsity(stateSparsity));
+    ASSERT_IS_TRUE(problem.constraintsJacobianWRTControlSparsity(controlSparsity));
     iDynTree::MatrixDynSize stateSparsityCheck, controlSparsityCheck, stateZeroCheck, controlZeroCheck;
     stateSparsityCheck = obtainedStatejac;
     stateZeroCheck = stateSparsityCheck;
@@ -401,16 +401,16 @@ int main() {
     controlZeroCheck.zero();
 
     for(size_t i = 0; i < stateSparsity.size(); ++i) {
-        unsigned int row = static_cast<unsigned int>(stateSparsity.nonZeroElementRows[i]);
-        unsigned int col = static_cast<unsigned int>(stateSparsity.nonZeroElementColumns[i]);
+        unsigned int row = static_cast<unsigned int>(stateSparsity[i].row);
+        unsigned int col = static_cast<unsigned int>(stateSparsity[i].col);
         stateSparsityCheck(row, col) = 0.0;
     }
 
     ASSERT_EQUAL_MATRIX(stateSparsityCheck, stateZeroCheck);
 
     for(size_t i = 0; i < controlSparsity.size(); ++i) {
-        unsigned int row = static_cast<unsigned int>(controlSparsity.nonZeroElementRows[i]);
-        unsigned int col = static_cast<unsigned int>(controlSparsity.nonZeroElementColumns[i]);
+        unsigned int row = static_cast<unsigned int>(controlSparsity[i].row);
+        unsigned int col = static_cast<unsigned int>(controlSparsity[i].col);
         controlSparsityCheck(row, col) = 0.0;
     }
 

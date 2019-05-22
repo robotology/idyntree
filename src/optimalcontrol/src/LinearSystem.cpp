@@ -243,5 +243,44 @@ namespace iDynTree {
             return true;
         }
 
+        bool LinearSystem::dynamicsSecondPartialDerivativeWRTState(double /*time*/, const VectorDynSize &state, const VectorDynSize &/*lambda*/, MatrixDynSize &partialDerivative)
+        {
+            partialDerivative.resize(state.size(), state.size());
+            partialDerivative.zero();
+            return true;
+        }
+
+        bool LinearSystem::dynamicsSecondPartialDerivativeWRTControl(double /*time*/, const VectorDynSize &/*state*/, const VectorDynSize &/*lambda*/, MatrixDynSize &partialDerivative)
+        {
+            partialDerivative.resize(controlInput().size(), controlInput().size());
+            partialDerivative.zero();
+            return true;
+        }
+
+        bool LinearSystem::dynamicsSecondPartialDerivativeWRTStateControl(double /*time*/, const VectorDynSize &state, const VectorDynSize &/*lambda*/, MatrixDynSize &partialDerivative)
+        {
+            partialDerivative.resize(state.size(), controlInput().size());
+            partialDerivative.zero();
+            return true;
+        }
+
+        bool LinearSystem::dynamicsSecondPartialDerivativeWRTStateSparsity(SparsityStructure &stateSparsity)
+        {
+            stateSparsity.clear();
+            return true;
+        }
+
+        bool LinearSystem::dynamicsSecondPartialDerivativeWRTStateControlSparsity(SparsityStructure &stateControlSparsity)
+        {
+            stateControlSparsity.clear();
+            return true;
+        }
+
+        bool LinearSystem::dynamicsSecondPartialDerivativeWRTControlSparsity(SparsityStructure &controlSparsity)
+        {
+            controlSparsity.clear();
+            return true;
+        }
+
     }
 }

@@ -32,6 +32,9 @@ namespace iDynTree {
             , m_timeVaryingControlHessian(nullptr)
             , m_timeVaryingControlGradient(nullptr)
             , m_timeVaryingControlCostBias(nullptr)
+            , m_hasSecondPartialDerivativeWRTStateSparsity(false)
+            , m_hasSecondPartialDerivativeWRTControlSparsity(false)
+            , m_hasSecondPartialDerivativeWRTStateControlSparsity(false)
         { }
 
         QuadraticLikeCost::~QuadraticLikeCost()
@@ -391,6 +394,33 @@ namespace iDynTree {
         {
             partialDerivative.resize(state.size(), control.size());
             partialDerivative.zero();
+            return true;
+        }
+
+        bool QuadraticLikeCost::costSecondPartialDerivativeWRTStateSparsity(SparsityStructure &stateSparsity)
+        {
+            if (!m_hasSecondPartialDerivativeWRTStateSparsity) {
+                return false;
+            }
+            stateSparsity = m_secondPartialDerivativeWRTStateSparsity;
+            return true;
+        }
+
+        bool QuadraticLikeCost::costSecondPartialDerivativeWRTStateControlSparsity(SparsityStructure &stateControlSparsity)
+        {
+            if (!m_hasSecondPartialDerivativeWRTStateControlSparsity) {
+                return false;
+            }
+            stateControlSparsity = m_secondPartialDerivativeWRTStateControlSparsity;
+            return true;
+        }
+
+        bool QuadraticLikeCost::costSecondPartialDerivativeWRTControlSparsity(SparsityStructure &controlSparsity)
+        {
+            if (!m_hasSecondPartialDerivativeWRTControlSparsity) {
+                return false;
+            }
+            controlSparsity = m_secondPartialDerivativeWRTControlSparsity;
             return true;
         }
 

@@ -45,10 +45,33 @@ namespace iDynTree {
             std::shared_ptr<ConstraintsGroup> group_ptr;
             VectorDynSize constraintsBuffer;
             MatrixDynSize stateJacobianBuffer, controlJacobianBuffer;
-            SparsityStructure stateSparsity;
-            SparsityStructure controlSparsity;
-            bool hasStateSparsity = false;
-            bool hasControlSparsity = false;
+            MatrixDynSize stateHessianBuffer, controlHessianBuffer, mixedHessianBuffer;
+            VectorDynSize lambdaBuffer;
+            SparsityStructure stateJacobianSparsity;
+            SparsityStructure controlJacobianSparsity;
+            bool hasStateJacobianSparsity = false;
+            bool hasControlJacobianSparsity = false;
+            SparsityStructure stateHessianSparsity;
+            SparsityStructure controlHessianSparsity;
+            SparsityStructure mixedHessianSparsity;
+            bool hasStateHessianSparsity = false;
+            bool hasControlHessianSparsity = false;
+            bool hasMixedHessianSparsity = false;
+
+            template <typename intType>
+            void resizeBuffers(intType stateDim, intType controlDim) {
+                unsigned int nx = static_cast<unsigned int>(stateDim);
+                unsigned int nu = static_cast<unsigned int>(controlDim);
+                stateJacobianBuffer.resize(group_ptr->constraintsDimension(), nx);
+                controlJacobianBuffer.resize(group_ptr->constraintsDimension(), nu);
+                stateHessianBuffer.resize(nx, nx);
+                stateHessianBuffer.zero();
+                controlHessianBuffer.resize(nu, nu);
+                controlHessianBuffer.zero();
+                mixedHessianBuffer.resize(nx, nu);
+                mixedHessianBuffer.zero();
+            }
+
         } BufferedGroup;
 
         typedef std::shared_ptr<BufferedGroup> BufferedGroup_ptr;
@@ -57,10 +80,34 @@ namespace iDynTree {
 
         typedef struct{
             std::shared_ptr<Cost> cost;
+            MatrixDynSize stateHessianBuffer, controlHessianBuffer, mixedHessianBuffer;
+            VectorDynSize stateJacobianBuffer, controlJacobianBuffer;
             double weight;
             TimeRange timeRange;
             bool isLinear;
             bool isQuadratic;
+            SparsityStructure stateHessianSparsity;
+            SparsityStructure controlHessianSparsity;
+            SparsityStructure mixedHessianSparsity;
+            bool hasStateHessianSparsity = false;
+            bool hasControlHessianSparsity = false;
+            bool hasMixedHessianSparsity = false;
+
+            template <typename intType>
+            void resizeBuffers(intType stateDim, intType controlDim) {
+                unsigned int nx = static_cast<unsigned int>(stateDim);
+                unsigned int nu = static_cast<unsigned int>(controlDim);
+                stateJacobianBuffer.resize(nx);
+                stateJacobianBuffer.zero();
+                controlJacobianBuffer.resize(nu);
+                controlJacobianBuffer.zero();
+                stateHessianBuffer.resize(nx, nx);
+                stateHessianBuffer.zero();
+                controlHessianBuffer.resize(nu, nu);
+                controlHessianBuffer.zero();
+                mixedHessianBuffer.resize(nx, nu);
+                mixedHessianBuffer.zero();
+            }
         } TimedCost;
 
         typedef std::map< std::string, TimedCost> CostsMap;
@@ -72,12 +119,16 @@ namespace iDynTree {
             std::shared_ptr<DynamicalSystem> dynamicalSystem;
             ConstraintsGroupsMap constraintsGroups;
             CostsMap costs;
-            VectorDynSize costStateJacobianBuffer, costControlJacobianBuffer;
-            MatrixDynSize costStateHessianBuffer, costControlHessianBuffer, costMixedHessianBuffer;
             bool stateLowerBounded, stateUpperBounded, controlLowerBounded, controlUpperBounded;
             std::shared_ptr<iDynTree::optimalcontrol::TimeVaryingVector> stateLowerBound, stateUpperBound, controlLowerBound, controlUpperBound; //if they are empty is like there is no bound
-            SparsityStructure stateSparsity;
-            SparsityStructure controlSparsity;
+            SparsityStructure stateJacobianSparsity;
+            SparsityStructure controlJacobianSparsity;
+            SparsityStructure constraintsStateHessianSparsity;
+            SparsityStructure constraintsControlHessianSparsity;
+            SparsityStructure constraintsMixedHessianSparsity;
+            SparsityStructure costsStateHessianSparsity;
+            SparsityStructure costsControlHessianSparsity;
+            SparsityStructure costsMixedHessianSparsity;
             std::vector<std::string> mayerCostnames;
             std::vector<TimeRange> constraintsTimeRanges, costTimeRanges;
             std::vector<size_t> linearConstraintIndeces;
@@ -95,6 +146,10 @@ namespace iDynTree {
                 newCost.timeRange = timeRange;
                 newCost.isLinear = isLinear;
                 newCost.isQuadratic = isQuadratic;
+
+                if (dynamicalSystem){
+                    newCost.resizeBuffers(dynamicalSystem->stateSpaceSize(), dynamicalSystem->controlSpaceSize());
+                }
 
                 std::pair<CostsMap::iterator, bool> costResult;
                 costResult = costs.insert(std::pair<std::string, TimedCost>(cost->name(), newCost));
@@ -174,6 +229,15 @@ namespace iDynTree {
                 return false;
             }
             m_pimpl->dynamicalSystem = dynamicalSystem;
+
+            for (auto& cost : m_pimpl->costs){
+                cost.second.resizeBuffers(dynamicalSystem->stateSpaceSize(), dynamicalSystem->controlSpaceSize());
+            }
+
+            for (auto& group : m_pimpl->constraintsGroups){
+                group.second->resizeBuffers(dynamicalSystem->stateSpaceSize(), dynamicalSystem->controlSpaceSize());
+            }
+
             return true;
         }
 
@@ -185,6 +249,15 @@ namespace iDynTree {
             }
             m_pimpl->dynamicalSystem = linearSystem;
             m_pimpl->systemIsLinear = true;
+
+            for (auto& cost : m_pimpl->costs){
+                cost.second.resizeBuffers(linearSystem->stateSpaceSize(), linearSystem->controlSpaceSize());
+            }
+
+            for (auto& group : m_pimpl->constraintsGroups){
+                group.second->resizeBuffers(linearSystem->stateSpaceSize(), linearSystem->controlSpaceSize());
+            }
+
             return true;
         }
 
@@ -209,12 +282,12 @@ namespace iDynTree {
             newGroup->group_ptr = groupOfConstraints;
             newGroup->constraintsBuffer.resize(groupOfConstraints->constraintsDimension());
             if (m_pimpl->dynamicalSystem) {
-                newGroup->stateJacobianBuffer.resize(groupOfConstraints->constraintsDimension(), static_cast<unsigned int>(m_pimpl->dynamicalSystem->stateSpaceSize()));
-                newGroup->controlJacobianBuffer.resize(groupOfConstraints->constraintsDimension(), static_cast<unsigned int>(m_pimpl->dynamicalSystem->controlSpaceSize()));
+                newGroup->resizeBuffers(m_pimpl->dynamicalSystem->stateSpaceSize(), m_pimpl->dynamicalSystem->controlSpaceSize());
             }
+            newGroup->lambdaBuffer.resize(groupOfConstraints->constraintsDimension());
 
-            newGroup->hasStateSparsity = groupOfConstraints->constraintJacobianWRTStateSparsity(newGroup->stateSparsity); //needed to allocate memory in advance
-            newGroup->hasControlSparsity = groupOfConstraints->constraintJacobianWRTControlSparsity(newGroup->controlSparsity); //needed to allocate memory in advance
+            newGroup->hasStateJacobianSparsity = groupOfConstraints->constraintJacobianWRTStateSparsity(newGroup->stateJacobianSparsity); //needed to allocate memory in advance
+            newGroup->hasControlJacobianSparsity = groupOfConstraints->constraintJacobianWRTControlSparsity(newGroup->controlJacobianSparsity); //needed to allocate memory in advance
 
             std::pair< ConstraintsGroupsMap::iterator, bool> groupResult;
             groupResult = m_pimpl->constraintsGroups.insert(std::pair< std::string, BufferedGroup_ptr>(groupOfConstraints->name(), newGroup));
@@ -226,9 +299,9 @@ namespace iDynTree {
                 return false;
             }
 
-            m_pimpl->stateSparsity.resize(m_pimpl->stateSparsity.size() + newGroup->stateSparsity.size()); //needed to allocate memory in advance
+            m_pimpl->stateJacobianSparsity.reserve(m_pimpl->stateJacobianSparsity.size() + newGroup->stateJacobianSparsity.size()); //needed to allocate memory in advance
 
-            m_pimpl->controlSparsity.resize(m_pimpl->controlSparsity.size() + newGroup->controlSparsity.size()); //needed to allocate memory in advance
+            m_pimpl->controlJacobianSparsity.reserve(m_pimpl->controlJacobianSparsity.size() + newGroup->controlJacobianSparsity.size()); //needed to allocate memory in advance
 
             return true;
         }
@@ -878,31 +951,28 @@ namespace iDynTree {
                 partialDerivative.resize(state.size());
             }
 
-            if (m_pimpl->costStateJacobianBuffer.size() != state.size()) {
-                m_pimpl->costStateJacobianBuffer.resize(state.size());
-            }
-
             bool first = true;
 
             for(auto&  cost : m_pimpl->costs){
                 if (cost.second.timeRange.isInRange(time)){
-                    if(!cost.second.cost->costFirstPartialDerivativeWRTState(time, state, control, m_pimpl->costStateJacobianBuffer)){
+
+                    if(!cost.second.cost->costFirstPartialDerivativeWRTState(time, state, control, cost.second.stateJacobianBuffer)){
                         std::ostringstream errorMsg;
                         errorMsg << "Error while evaluating cost " << cost.second.cost->name() <<".";
                         reportError("OptimalControlProblem", "costsFirstPartialDerivativeWRTState", errorMsg.str().c_str());
                         return false;
                     }
-                    if (m_pimpl->costStateJacobianBuffer.size() != state.size()){
+                    if (cost.second.stateJacobianBuffer.size() != state.size()){
                         std::ostringstream errorMsg;
                         errorMsg << "Error while evaluating " << cost.second.cost->name() <<": " << "the jacobian size is expected to match the state dimension.";
                         reportError("OptimalControlProblem", "costsFirstPartialDerivativeWRTState", errorMsg.str().c_str());
                         return false;
                     }
                     if (first){
-                        toEigen(partialDerivative) = cost.second.weight * toEigen(m_pimpl->costStateJacobianBuffer);
+                        toEigen(partialDerivative) = cost.second.weight * toEigen(cost.second.stateJacobianBuffer);
                         first = false;
                     } else {
-                        toEigen(partialDerivative) += cost.second.weight * toEigen(m_pimpl->costStateJacobianBuffer);
+                        toEigen(partialDerivative) += cost.second.weight * toEigen(cost.second.stateJacobianBuffer);
                     }
                 }
             }
@@ -915,31 +985,27 @@ namespace iDynTree {
                 partialDerivative.resize(control.size());
             }
 
-            if (m_pimpl->costControlJacobianBuffer.size() != control.size()) {
-                m_pimpl->costControlJacobianBuffer.resize(control.size());
-            }
-
             bool first = true;
 
             for(auto& cost : m_pimpl->costs){
                 if (cost.second.timeRange.isInRange(time)){
-                    if (!cost.second.cost->costFirstPartialDerivativeWRTControl(time, state, control, m_pimpl->costControlJacobianBuffer)){
+                    if (!cost.second.cost->costFirstPartialDerivativeWRTControl(time, state, control, cost.second.controlJacobianBuffer)){
                         std::ostringstream errorMsg;
                         errorMsg << "Error while evaluating cost " << cost.second.cost->name() <<".";
                         reportError("OptimalControlProblem", "costFirstPartialDerivativeWRTControl", errorMsg.str().c_str());
                         return false;
                     }
-                    if (m_pimpl->costControlJacobianBuffer.size() != control.size()){
+                    if (cost.second.controlJacobianBuffer.size() != control.size()){
                         std::ostringstream errorMsg;
                         errorMsg << "Error while evaluating " << cost.second.cost->name() <<": " << "the jacobian size is expected to match the control dimension.";
                         reportError("OptimalControlProblem", "costFirstPartialDerivativeWRTControl", errorMsg.str().c_str());
                         return false;
                     }
                     if (first){
-                        toEigen(partialDerivative) = cost.second.weight * toEigen(m_pimpl->costControlJacobianBuffer);
+                        toEigen(partialDerivative) = cost.second.weight * toEigen(cost.second.controlJacobianBuffer);
                         first = false;
                     } else {
-                        toEigen(partialDerivative) += cost.second.weight * toEigen(m_pimpl->costControlJacobianBuffer);
+                        toEigen(partialDerivative) += cost.second.weight * toEigen(cost.second.controlJacobianBuffer);
                     }
                 }
             }
@@ -952,32 +1018,29 @@ namespace iDynTree {
                 partialDerivative.resize(state.size(), state.size());
             }
 
-            if ((m_pimpl->costStateHessianBuffer.rows() != state.size()) || (m_pimpl->costStateHessianBuffer.cols() != state.size())) {
-                m_pimpl->costStateHessianBuffer.resize(state.size(), state.size());
-            }
-
             bool first = true;
 
             for (auto& cost : m_pimpl->costs){
                 if (cost.second.timeRange.isInRange(time)){
-                    if (!cost.second.cost->costSecondPartialDerivativeWRTState(time, state, control, m_pimpl->costStateHessianBuffer)){
+
+                    if (!cost.second.cost->costSecondPartialDerivativeWRTState(time, state, control, cost.second.stateHessianBuffer)){
                         std::ostringstream errorMsg;
                         errorMsg << "Error while evaluating cost " << cost.second.cost->name() <<".";
                         reportError("OptimalControlProblem", "costSecondPartialDerivativeWRTState", errorMsg.str().c_str());
                         return false;
                     }
 
-                    if ((m_pimpl->costStateHessianBuffer.rows() != state.size()) || (m_pimpl->costStateHessianBuffer.cols() != state.size())){
+                    if ((cost.second.stateHessianBuffer.rows() != state.size()) || (cost.second.stateHessianBuffer.cols() != state.size())){
                         std::ostringstream errorMsg;
                         errorMsg << "Error while evaluating " << cost.second.cost->name() <<": " << "the hessian size is expected to be a square matrix matching the state dimension.";
                         reportError("OptimalControlProblem", "costSecondPartialDerivativeWRTState", errorMsg.str().c_str());
                         return false;
                     }
                     if (first){
-                        toEigen(partialDerivative) = cost.second.weight * toEigen(m_pimpl->costStateHessianBuffer);
+                        toEigen(partialDerivative) = cost.second.weight * toEigen(cost.second.stateHessianBuffer);
                         first = false;
                     } else {
-                        toEigen(partialDerivative) += cost.second.weight * toEigen(m_pimpl->costStateHessianBuffer);
+                        toEigen(partialDerivative) += cost.second.weight * toEigen(cost.second.stateHessianBuffer);
                     }
                 }
             }
@@ -990,22 +1053,19 @@ namespace iDynTree {
                 partialDerivative.resize(control.size(), control.size());
             }
 
-            if ((m_pimpl->costControlHessianBuffer.rows() != control.size()) || (m_pimpl->costControlHessianBuffer.cols() != control.size())) {
-                m_pimpl->costControlHessianBuffer.resize(control.size(), control.size());
-            }
-
             bool first = true;
 
             for (auto& cost : m_pimpl->costs){
                 if (cost.second.timeRange.isInRange(time)){
-                    if (!cost.second.cost->costSecondPartialDerivativeWRTControl(time, state, control, m_pimpl->costControlHessianBuffer)){
+
+                    if (!cost.second.cost->costSecondPartialDerivativeWRTControl(time, state, control, cost.second.controlHessianBuffer)){
                         std::ostringstream errorMsg;
                         errorMsg << "Error while evaluating cost " << cost.second.cost->name() <<".";
                         reportError("OptimalControlProblem", "costSecondPartialDerivativeWRTControl", errorMsg.str().c_str());
                         return false;
                     }
 
-                    if ((m_pimpl->costControlHessianBuffer.rows() != control.size()) || (m_pimpl->costControlHessianBuffer.cols() != control.size())){
+                    if ((cost.second.controlHessianBuffer.rows() != control.size()) || (cost.second.controlHessianBuffer.cols() != control.size())){
                         std::ostringstream errorMsg;
                         errorMsg << "Error while evaluating " << cost.second.cost->name() <<": " << "the hessian size is expected to be a square matrix matching the control dimension.";
                         reportError("OptimalControlProblem", "costSecondPartialDerivativeWRTControl", errorMsg.str().c_str());
@@ -1013,10 +1073,10 @@ namespace iDynTree {
                     }
 
                     if (first){
-                        toEigen(partialDerivative) = cost.second.weight * toEigen(m_pimpl->costControlHessianBuffer);
+                        toEigen(partialDerivative) = cost.second.weight * toEigen(cost.second.controlHessianBuffer);
                         first = false;
                     } else {
-                        toEigen(partialDerivative) += cost.second.weight * toEigen(m_pimpl->costControlHessianBuffer);
+                        toEigen(partialDerivative) += cost.second.weight * toEigen(cost.second.controlHessianBuffer);
                     }
                 }
             }
@@ -1029,22 +1089,19 @@ namespace iDynTree {
                 partialDerivative.resize(state.size(), control.size());
             }
 
-            if ((m_pimpl->costMixedHessianBuffer.rows() != state.size()) || (m_pimpl->costMixedHessianBuffer.cols() != control.size())) {
-                m_pimpl->costMixedHessianBuffer.resize(state.size(), control.size());
-            }
-
             bool first = true;
 
             for (auto& cost : m_pimpl->costs){
                 if (cost.second.timeRange.isInRange(time)){
-                    if (!cost.second.cost->costSecondPartialDerivativeWRTStateControl(time, state, control, m_pimpl->costMixedHessianBuffer)){
+
+                    if (!cost.second.cost->costSecondPartialDerivativeWRTStateControl(time, state, control, cost.second.mixedHessianBuffer)){
                         std::ostringstream errorMsg;
                         errorMsg << "Error while evaluating cost " << cost.second.cost->name() <<".";
                         reportError("OptimalControlProblem", "costSecondPartialDerivativeWRTStateControl", errorMsg.str().c_str());
                         return false;
                     }
 
-                    if ((m_pimpl->costMixedHessianBuffer.rows() != state.size()) || (m_pimpl->costMixedHessianBuffer.cols() != control.size())){
+                    if ((cost.second.mixedHessianBuffer.rows() != state.size()) || (cost.second.mixedHessianBuffer.cols() != control.size())){
                         std::ostringstream errorMsg;
                         errorMsg << "Error while evaluating " << cost.second.cost->name() <<": " << "the hessian size is expected to have as many rows as the state dimension and a number of columns matching the control dimension.";
                         reportError("OptimalControlProblem", "costSecondPartialDerivativeWRTStateControl", errorMsg.str().c_str());
@@ -1052,13 +1109,121 @@ namespace iDynTree {
                     }
 
                     if (first){
-                        toEigen(partialDerivative) = cost.second.weight * toEigen(m_pimpl->costMixedHessianBuffer);
+                        toEigen(partialDerivative) = cost.second.weight * toEigen(cost.second.mixedHessianBuffer);
                         first = false;
                     } else {
-                        toEigen(partialDerivative) += cost.second.weight * toEigen(m_pimpl->costMixedHessianBuffer);
+                        toEigen(partialDerivative) += cost.second.weight * toEigen(cost.second.mixedHessianBuffer);
                     }
                 }
             }
+            return true;
+        }
+
+        bool OptimalControlProblem::costsSecondPartialDerivativeWRTStateSparsity(SparsityStructure &stateSparsity)
+        {
+            bool allHaveSparsity = true;
+
+            auto cost = m_pimpl->costs.begin();
+
+            while (allHaveSparsity && cost != m_pimpl->costs.end()) {
+                cost->second.hasStateHessianSparsity =
+                    cost->second.cost->costSecondPartialDerivativeWRTStateSparsity(cost->second.stateHessianSparsity);
+                allHaveSparsity &= cost->second.hasStateHessianSparsity;
+                cost++;
+            }
+
+            if (allHaveSparsity) {
+                m_pimpl->costsStateHessianSparsity.clear();
+
+                for (auto& costPtr : m_pimpl->costs) {
+                    m_pimpl->costsStateHessianSparsity.merge(costPtr.second.stateHessianSparsity);
+                }
+
+            } else {
+                if (m_pimpl->dynamicalSystem) {
+                    m_pimpl->costsStateHessianSparsity.clear();
+                    m_pimpl->costsStateHessianSparsity.addDenseBlock(0, 0, m_pimpl->dynamicalSystem->stateSpaceSize(), m_pimpl->dynamicalSystem->stateSpaceSize());
+                } else {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Not all costs have the hessian sparsity defined and no dynamical system has been provided yet. Cannot determine the sparsity since the state dimension is unknown.";
+                    reportError("OptimalControlProblem", "costsSecondPartialDerivativeWRTStateSparsity", errorMsg.str().c_str());
+                    return false;
+                }
+            }
+
+            stateSparsity = m_pimpl->costsStateHessianSparsity;
+            return true;
+        }
+
+        bool OptimalControlProblem::costsSecondPartialDerivativeWRTControlSparsity(SparsityStructure &controlSparsity)
+        {
+            bool allHaveSparsity = true;
+
+            auto cost = m_pimpl->costs.begin();
+
+            while (allHaveSparsity && cost != m_pimpl->costs.end()) {
+                cost->second.hasControlHessianSparsity =
+                    cost->second.cost->costSecondPartialDerivativeWRTControlSparsity(cost->second.controlHessianSparsity);
+                allHaveSparsity &= cost->second.hasControlHessianSparsity;
+                cost++;
+            }
+
+            if (allHaveSparsity) {
+                m_pimpl->costsControlHessianSparsity.clear();
+
+                for (auto& costPtr : m_pimpl->costs) {
+                    m_pimpl->costsControlHessianSparsity.merge(costPtr.second.controlHessianSparsity);
+                }
+
+            } else {
+                if (m_pimpl->dynamicalSystem) {
+                    m_pimpl->costsControlHessianSparsity.clear();
+                    m_pimpl->costsControlHessianSparsity.addDenseBlock(0, 0, m_pimpl->dynamicalSystem->controlSpaceSize(), m_pimpl->dynamicalSystem->controlSpaceSize());
+                } else {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Not all costs have the hessian sparsity defined and no dynamical system has been provided yet. Cannot determine the sparsity since the control dimension is unknown.";
+                    reportError("OptimalControlProblem", "costsSecondPartialDerivativeWRTControlSparsity", errorMsg.str().c_str());
+                    return false;
+                }
+            }
+
+            controlSparsity = m_pimpl->costsControlHessianSparsity;
+            return true;
+        }
+
+        bool OptimalControlProblem::costsSecondPartialDerivativeWRTStateControlSparsity(SparsityStructure &stateControlSparsity)
+        {
+            bool allHaveSparsity = true;
+
+            auto cost = m_pimpl->costs.begin();
+
+            while (allHaveSparsity && cost != m_pimpl->costs.end()) {
+                cost->second.hasMixedHessianSparsity =
+                    cost->second.cost->costSecondPartialDerivativeWRTStateControlSparsity(cost->second.mixedHessianSparsity);
+                allHaveSparsity &= cost->second.hasMixedHessianSparsity;
+                cost++;
+            }
+
+            if (allHaveSparsity) {
+                m_pimpl->costsMixedHessianSparsity.clear();
+
+                for (auto& costPtr : m_pimpl->costs) {
+                    m_pimpl->costsMixedHessianSparsity.merge(costPtr.second.mixedHessianSparsity);
+                }
+
+            } else {
+                if (m_pimpl->dynamicalSystem) {
+                    m_pimpl->costsMixedHessianSparsity.clear();
+                    m_pimpl->costsMixedHessianSparsity.addDenseBlock(0, 0, m_pimpl->dynamicalSystem->stateSpaceSize(), m_pimpl->dynamicalSystem->controlSpaceSize());
+                } else {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Not all costs have the hessian sparsity defined and no dynamical system has been provided yet. Cannot determine the sparsity since the state and control dimensions are unknown.";
+                    reportError("OptimalControlProblem", "costsSecondPartialDerivativeWRTStateControlSparsity", errorMsg.str().c_str());
+                    return false;
+                }
+            }
+
+            stateControlSparsity = m_pimpl->costsMixedHessianSparsity;
             return true;
         }
 
@@ -1199,24 +1364,19 @@ namespace iDynTree {
             return true;
         }
 
-        bool OptimalControlProblem::constraintJacobianWRTStateSparsity(SparsityStructure &stateSparsity)
+        bool OptimalControlProblem::constraintsJacobianWRTStateSparsity(SparsityStructure &stateSparsity)
         {
-            size_t nonZeroIndexState = 0;
             size_t offset = 0;
+            m_pimpl->stateJacobianSparsity.clear();
             for (auto& group : m_pimpl->constraintsGroups){
 
-                group.second->hasStateSparsity = group.second->group_ptr->constraintJacobianWRTStateSparsity(group.second->stateSparsity);
+                group.second->hasStateJacobianSparsity = group.second->group_ptr->constraintJacobianWRTStateSparsity(group.second->stateJacobianSparsity);
 
-                if (group.second->hasStateSparsity) {
+                if (group.second->hasStateJacobianSparsity) {
 
-                    if (m_pimpl->stateSparsity.size() < (nonZeroIndexState + group.second->stateSparsity.size())) {
-                        m_pimpl->stateSparsity.resize(nonZeroIndexState + group.second->stateSparsity.size());
-                    }
-
-                    for (size_t i = 0; i < group.second->stateSparsity.size(); ++i) {
-                        m_pimpl->stateSparsity.nonZeroElementRows[nonZeroIndexState]    = group.second->stateSparsity.nonZeroElementRows[i] + offset;
-                        m_pimpl->stateSparsity.nonZeroElementColumns[nonZeroIndexState] = group.second->stateSparsity.nonZeroElementColumns[i];
-                        nonZeroIndexState++;
+                    for (size_t i = 0; i < group.second->stateJacobianSparsity.size(); ++i) {
+                        m_pimpl->stateJacobianSparsity.add(group.second->stateJacobianSparsity[i].row + offset,
+                                                           group.second->stateJacobianSparsity[i].col);
                     }
 
                 } else {
@@ -1225,17 +1385,10 @@ namespace iDynTree {
 
                         size_t rows = group.second->stateJacobianBuffer.rows();
                         size_t cols = group.second->stateJacobianBuffer.cols();
-                        size_t nonZeros = rows * cols;
-
-                        if (m_pimpl->stateSparsity.size() < (nonZeroIndexState + nonZeros)) {
-                            m_pimpl->stateSparsity.resize(nonZeroIndexState + nonZeros);
-                        }
 
                         for (size_t i = 0; i < rows; ++i) {
                             for (size_t j = 0; j < cols; ++j) {
-                                m_pimpl->stateSparsity.nonZeroElementRows[nonZeroIndexState]    = i + offset;
-                                m_pimpl->stateSparsity.nonZeroElementColumns[nonZeroIndexState] = j;
-                                nonZeroIndexState++;
+                                m_pimpl->stateJacobianSparsity.add(i + offset, j);
                             }
                         }
                     } else {
@@ -1248,32 +1401,25 @@ namespace iDynTree {
 
                 offset += group.second->stateJacobianBuffer.rows();
             }
-            m_pimpl->stateSparsity.resize(nonZeroIndexState); //remove leftovers
 
-
-            stateSparsity = m_pimpl->stateSparsity;
+            stateSparsity = m_pimpl->stateJacobianSparsity;
 
             return true;
         }
 
-        bool OptimalControlProblem::constraintJacobianWRTControlSparsity(SparsityStructure &controlSparsity)
+        bool OptimalControlProblem::constraintsJacobianWRTControlSparsity(SparsityStructure &controlSparsity)
         {
-            size_t nonZeroIndexControl = 0;
             size_t offset = 0;
+            m_pimpl->controlJacobianSparsity.clear();
             for (auto& group : m_pimpl->constraintsGroups){
 
-                group.second->hasControlSparsity = group.second->group_ptr->constraintJacobianWRTControlSparsity(group.second->controlSparsity);
+                group.second->hasControlJacobianSparsity = group.second->group_ptr->constraintJacobianWRTControlSparsity(group.second->controlJacobianSparsity);
 
-                if (group.second->hasControlSparsity) {
+                if (group.second->hasControlJacobianSparsity) {
 
-                    if (m_pimpl->controlSparsity.size() < (nonZeroIndexControl + group.second->controlSparsity.size())) {
-                        m_pimpl->controlSparsity.resize(nonZeroIndexControl + group.second->controlSparsity.size());
-                    }
-
-                    for (size_t i = 0; i < group.second->controlSparsity.size(); ++i) {
-                        m_pimpl->controlSparsity.nonZeroElementRows[nonZeroIndexControl]    = group.second->controlSparsity.nonZeroElementRows[i] + offset;
-                        m_pimpl->controlSparsity.nonZeroElementColumns[nonZeroIndexControl] = group.second->controlSparsity.nonZeroElementColumns[i];
-                        nonZeroIndexControl++;
+                    for (size_t i = 0; i < group.second->controlJacobianSparsity.size(); ++i) {
+                        m_pimpl->controlJacobianSparsity.add(group.second->controlJacobianSparsity[i].row + offset,
+                                                             group.second->controlJacobianSparsity[i].col);
                     }
 
                 } else {
@@ -1282,17 +1428,10 @@ namespace iDynTree {
 
                         size_t rows = group.second->controlJacobianBuffer.rows();
                         size_t cols = group.second->controlJacobianBuffer.cols();
-                        size_t nonZeros = rows * cols;
-
-                        if (m_pimpl->controlSparsity.size() < (nonZeroIndexControl + nonZeros)) {
-                            m_pimpl->controlSparsity.resize(nonZeroIndexControl + nonZeros);
-                        }
 
                         for (size_t i = 0; i < rows; ++i) {
                             for (size_t j = 0; j < cols; ++j) {
-                                m_pimpl->controlSparsity.nonZeroElementRows[nonZeroIndexControl]    = i + offset;
-                                m_pimpl->controlSparsity.nonZeroElementColumns[nonZeroIndexControl] = j;
-                                nonZeroIndexControl++;
+                                m_pimpl->controlJacobianSparsity.add(i + offset, j);
                             }
                         }
                     } else {
@@ -1305,11 +1444,219 @@ namespace iDynTree {
 
                 offset += group.second->controlJacobianBuffer.rows();
             }
-            m_pimpl->controlSparsity.resize(nonZeroIndexControl); //remove leftovers
 
+            controlSparsity = m_pimpl->controlJacobianSparsity;
 
-            controlSparsity = m_pimpl->controlSparsity;
+            return true;
+        }
 
+        bool OptimalControlProblem::constraintsSecondPartialDerivativeWRTState(double time, const VectorDynSize &state, const VectorDynSize &control, const VectorDynSize &lambda, MatrixDynSize &hessian)
+        {
+            if ((hessian.rows() != state.size()) || (hessian.cols() != state.size())) {
+                hessian.resize(state.size(), state.size());
+            }
+
+            if (m_pimpl->constraintsGroups.size() == 0) {
+                hessian.zero();
+                return true;
+            }
+
+            bool first = true;
+            Eigen::Index offset = 0;
+
+            for (auto& group : m_pimpl->constraintsGroups){
+                toEigen(group.second->lambdaBuffer) = toEigen(lambda).segment(offset, group.second->group_ptr->constraintsDimension());
+
+                if (! group.second->group_ptr->constraintSecondPartialDerivativeWRTState(time, state, control, group.second->lambdaBuffer, group.second->stateHessianBuffer)){
+                    std::ostringstream errorMsg;
+                    errorMsg << "Error while evaluating constraint " << group.second->group_ptr->name() <<".";
+                    reportError("OptimalControlProblem", "constraintSecondPartialDerivativeWRTState", errorMsg.str().c_str());
+                    return false;
+                }
+                if (first){
+                    toEigen(hessian) = toEigen(group.second->stateHessianBuffer);
+                    first = false;
+                } else {
+                    toEigen(hessian) += toEigen(group.second->stateHessianBuffer);
+                }
+                offset += group.second->group_ptr->constraintsDimension();
+            }
+
+            return true;
+        }
+
+        bool OptimalControlProblem::constraintsSecondPartialDerivativeWRTControl(double time, const VectorDynSize &state, const VectorDynSize &control, const VectorDynSize &lambda, MatrixDynSize &hessian)
+        {
+            if ((hessian.rows() != control.size()) || (hessian.cols() != control.size())) {
+                hessian.resize(control.size(), control.size());
+            }
+
+            if (m_pimpl->constraintsGroups.size() == 0) {
+                hessian.zero();
+                return true;
+            }
+
+            bool first = true;
+            Eigen::Index offset = 0;
+
+            for (auto& group : m_pimpl->constraintsGroups){
+                toEigen(group.second->lambdaBuffer) = toEigen(lambda).segment(offset, group.second->group_ptr->constraintsDimension());
+                if (! group.second->group_ptr->constraintSecondPartialDerivativeWRTControl(time, state, control, group.second->lambdaBuffer, group.second->controlHessianBuffer)){
+                    std::ostringstream errorMsg;
+                    errorMsg << "Error while evaluating constraint " << group.second->group_ptr->name() <<".";
+                    reportError("OptimalControlProblem", "constraintSecondPartialDerivativeWRTControl", errorMsg.str().c_str());
+                    return false;
+                }
+                if (first){
+                    toEigen(hessian) = toEigen(group.second->controlHessianBuffer);
+                    first = false;
+                } else {
+                    toEigen(hessian) += toEigen(group.second->controlHessianBuffer);
+                }
+                offset += group.second->group_ptr->constraintsDimension();
+            }
+            return true;
+        }
+
+        bool OptimalControlProblem::constraintsSecondPartialDerivativeWRTStateControl(double time, const VectorDynSize &state, const VectorDynSize &control, const VectorDynSize &lambda, MatrixDynSize &hessian)
+        {
+            if ((hessian.rows() != state.size()) || (hessian.cols() != control.size())) {
+                hessian.resize(state.size(), control.size());
+            }
+
+            if (m_pimpl->constraintsGroups.size() == 0) {
+                hessian.zero();
+                return true;
+            }
+
+            bool first = true;
+            Eigen::Index offset = 0;
+
+            for (auto& group : m_pimpl->constraintsGroups){
+                toEigen(group.second->lambdaBuffer) = toEigen(lambda).segment(offset, group.second->group_ptr->constraintsDimension());
+
+                if (! group.second->group_ptr->constraintSecondPartialDerivativeWRTStateControl(time, state, control, group.second->lambdaBuffer, group.second->mixedHessianBuffer)){
+                    std::ostringstream errorMsg;
+                    errorMsg << "Error while evaluating constraint " << group.second->group_ptr->name() <<".";
+                    reportError("OptimalControlProblem", "constraintSecondPartialDerivativeWRTStateControl", errorMsg.str().c_str());
+                    return false;
+                }
+                if (first){
+                    toEigen(hessian) = toEigen(group.second->mixedHessianBuffer);
+                    first = false;
+                } else {
+                    toEigen(hessian) += toEigen(group.second->mixedHessianBuffer);
+                }
+                offset += group.second->group_ptr->constraintsDimension();
+            }
+            return true;
+        }
+
+        bool OptimalControlProblem::constraintsSecondPartialDerivativeWRTStateSparsity(SparsityStructure &stateSparsity)
+        {
+            bool allHaveSparsity = true;
+
+            auto group = m_pimpl->constraintsGroups.begin();
+
+            while (allHaveSparsity && group != m_pimpl->constraintsGroups.end()) {
+                group->second->hasStateHessianSparsity =
+                    group->second->group_ptr->constraintsSecondPartialDerivativeWRTStateSparsity(group->second->stateHessianSparsity);
+                allHaveSparsity &= group->second->hasStateHessianSparsity;
+                group++;
+            }
+
+            if (allHaveSparsity) {
+                m_pimpl->constraintsStateHessianSparsity.clear();
+
+                for (auto& groupPtr : m_pimpl->constraintsGroups) {
+                    m_pimpl->constraintsStateHessianSparsity.merge(groupPtr.second->stateHessianSparsity);
+                }
+
+            } else {
+                if (m_pimpl->dynamicalSystem) {
+                    m_pimpl->constraintsStateHessianSparsity.clear();
+                    m_pimpl->constraintsStateHessianSparsity.addDenseBlock(0, 0, m_pimpl->dynamicalSystem->stateSpaceSize(), m_pimpl->dynamicalSystem->stateSpaceSize());
+                } else {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Not all groups have the hessian sparsity defined and no dynamical system has been provided yet. Cannot determine the sparsity since the state dimension is unknown.";
+                    reportError("OptimalControlProblem", "constraintsSecondPartialDerivativeWRTStateSparsity", errorMsg.str().c_str());
+                    return false;
+                }
+            }
+
+            stateSparsity = m_pimpl->constraintsStateHessianSparsity;
+            return true;
+        }
+
+        bool OptimalControlProblem::constraintsSecondPartialDerivativeWRTControlSparsity(SparsityStructure &controlSparsity)
+        {
+            bool allHaveSparsity = true;
+
+            auto group = m_pimpl->constraintsGroups.begin();
+
+            while (allHaveSparsity && group != m_pimpl->constraintsGroups.end()) {
+                group->second->hasControlHessianSparsity =
+                    group->second->group_ptr->constraintsSecondPartialDerivativeWRTControlSparsity(group->second->controlHessianSparsity);
+                allHaveSparsity &= group->second->hasControlHessianSparsity;
+                group++;
+            }
+
+            if (allHaveSparsity) {
+                m_pimpl->constraintsControlHessianSparsity.clear();
+
+                for (auto& groupPtr : m_pimpl->constraintsGroups) {
+                    m_pimpl->constraintsControlHessianSparsity.merge(groupPtr.second->controlHessianSparsity);
+                }
+
+            } else {
+                if (m_pimpl->dynamicalSystem) {
+                    m_pimpl->constraintsControlHessianSparsity.clear();
+                    m_pimpl->constraintsControlHessianSparsity.addDenseBlock(0, 0, m_pimpl->dynamicalSystem->controlSpaceSize(), m_pimpl->dynamicalSystem->controlSpaceSize());
+                } else {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Not all groups have the hessian sparsity defined and no dynamical system has been provided yet. Cannot determine the sparsity since the control dimension is unknown.";
+                    reportError("OptimalControlProblem", "constraintsSecondPartialDerivativeWRTControlSparsity", errorMsg.str().c_str());
+                    return false;
+                }
+            }
+
+            controlSparsity = m_pimpl->constraintsControlHessianSparsity;
+            return true;
+        }
+
+        bool OptimalControlProblem::constraintsSecondPartialDerivativeWRTStateControlSparsity(SparsityStructure &stateControlSparsity)
+        {
+            bool allHaveSparsity = true;
+
+            auto group = m_pimpl->constraintsGroups.begin();
+
+            while (allHaveSparsity && group != m_pimpl->constraintsGroups.end()) {
+                group->second->hasMixedHessianSparsity =
+                    group->second->group_ptr->constraintsSecondPartialDerivativeWRTStateControlSparsity(group->second->mixedHessianSparsity);
+                allHaveSparsity &= group->second->hasMixedHessianSparsity;
+                group++;
+            }
+
+            if (allHaveSparsity) {
+                m_pimpl->constraintsMixedHessianSparsity.clear();
+
+                for (auto& groupPtr : m_pimpl->constraintsGroups) {
+                    m_pimpl->constraintsMixedHessianSparsity.merge(groupPtr.second->mixedHessianSparsity);
+                }
+
+            } else {
+                if (m_pimpl->dynamicalSystem) {
+                    m_pimpl->constraintsMixedHessianSparsity.clear();
+                    m_pimpl->constraintsMixedHessianSparsity.addDenseBlock(0, 0, m_pimpl->dynamicalSystem->stateSpaceSize(), m_pimpl->dynamicalSystem->controlSpaceSize());
+                } else {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Not all groups have the hessian sparsity defined and no dynamical system has been provided yet. Cannot determine the sparsity since both the state and the control dimensions are unknown.";
+                    reportError("OptimalControlProblem", "constraintsSecondPartialDerivativeWRTStateControlSparsity", errorMsg.str().c_str());
+                    return false;
+                }
+            }
+
+            stateControlSparsity = m_pimpl->constraintsMixedHessianSparsity;
             return true;
         }
 
