@@ -218,6 +218,11 @@ namespace iDynTree
         std::string getJointName(const JointIndex index) const;
 
         /**
+         * Get the total mass of the robot
+         */
+        double getTotalMass() const;
+
+        /**
          * Get the index of a joint, given a jointName.
          * If the jointName is not found in the model,
          * return JOINT_INVALID_INDEX .
