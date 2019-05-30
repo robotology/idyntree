@@ -88,7 +88,7 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
     if (!ok_client)
     {
         yError()<<"Problem in opening the transformClient device";
-        yError()<<"Is the transform server running?";
+        yError()<<"Is the transformServer YARP device running?";
         close();
         return false;
     }
