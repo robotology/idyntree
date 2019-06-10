@@ -63,8 +63,14 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
 {
     string name="yarprobotstatepublisher";
     string namePrefix = rf.check("name-prefix",Value("")).asString();
+    string robot = rf.check("robot",Value("")).asString();
     if (!namePrefix.empty()) {
         m_rosNode.reset(new yarp::os::Node("/"+namePrefix+"/yarprobotstatepublisher"));
+    }
+    else if (!robot.empty()) {
+        m_rosNode.reset(new yarp::os::Node("/"+robot+"/yarprobotstatepublisher"));
+        std::cerr << "[WARNING] The yarprobotstatepublisher option robot is deprecated," << std::endl <<
+                     "[WARNING] use name-prefix option instead";
     }
     else {
         m_rosNode.reset(new yarp::os::Node("/yarprobotstatepublisher"));
