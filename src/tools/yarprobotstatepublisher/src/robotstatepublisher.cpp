@@ -19,7 +19,6 @@
 
 #include <yarp/math/Math.h>
 
-// #include <iDynTree/Model/Model.h>
 #include <iDynTree/ModelIO/ModelLoader.h>
 #include <iDynTree/KinDynComputations.h>
 #include <iDynTree/yarp/YARPConversions.h>
