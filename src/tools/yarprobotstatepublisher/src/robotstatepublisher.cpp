@@ -19,7 +19,8 @@
 
 #include <yarp/math/Math.h>
 
-#include <iDynTree/Model/Model.h>
+// #include <iDynTree/Model/Model.h>
+#include <iDynTree/ModelIO/ModelLoader.h>
 #include <iDynTree/KinDynComputations.h>
 #include <iDynTree/yarp/YARPConversions.h>
 
@@ -115,7 +116,9 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
 
     // Open the model
     string pathToModel=rf.findFileByName(modelFileName);
-    bool ok = m_kinDynComp.loadRobotModelFromFile(pathToModel);
+    iDynTree::ModelLoader modelLoader;
+    bool ok = modelLoader.loadModelFromFile(pathToModel);
+    ok = ok && m_kinDynComp.loadRobotModel(modelLoader.model());
     if (!ok || !m_kinDynComp.isValid())
     {
         yError()<<"Impossible to load file " << pathToModel;
