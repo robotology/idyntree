@@ -231,7 +231,7 @@ void YARPRobotStatePublisherModule::onRead(yarp::rosmsg::sensor_msgs::JointState
     {
         jntIndex = model.getJointIndex(v.name[i]);
 
-        if (jntIndex == iDynTree::JOINT_INVALID_INDEX)
+        if (!(model.getJoint(jntIndex)->getNrOfDOFs()) || jntIndex == iDynTree::JOINT_INVALID_INDEX)
             continue;
 
         m_jointPos(model.getJoint(jntIndex)->getDOFsOffset()) = v.position[i];
