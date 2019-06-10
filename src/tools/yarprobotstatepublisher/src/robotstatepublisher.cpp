@@ -229,14 +229,7 @@ void YARPRobotStatePublisherModule::onRead(yarp::rosmsg::sensor_msgs::JointState
     iDynTree::JointIndex jntIndex;
     for (size_t i=0; i < v.name.size(); i++)
     {
-        for (size_t j=0; j < model.getNrOfDOFs(); j++)
-        {
-            if (v.name[i] == model.getJointName(j))
-            {
-                jntIndex = model.getJointIndex(v.name[i]);
-                break;
-            }
-        }
+        jntIndex = model.getJointIndex(v.name[i]);
 
         if (jntIndex == iDynTree::JOINT_INVALID_INDEX)
             continue;
