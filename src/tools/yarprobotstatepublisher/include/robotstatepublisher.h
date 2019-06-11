@@ -22,21 +22,21 @@
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/KinDynComputations.h>
 
-#include <JointState.h>
+#include <yarp/rosmsg/sensor_msgs/JointState.h>
 
 class YARPRobotStatePublisherModule;
 
 /****************************************************************/
-class JointStateSuscriber: public yarp::os::Subscriber<JointState>
+class JointStateSubscriber: public yarp::os::Subscriber<yarp::rosmsg::sensor_msgs::JointState>
 {
 private:
     YARPRobotStatePublisherModule* m_module;
 
 public:
-    JointStateSuscriber();
+    JointStateSubscriber();
     void attach(YARPRobotStatePublisherModule* module);
-    using yarp::os::Subscriber<JointState>::onRead;
-    virtual void        onRead(JointState &v);
+    using yarp::os::Subscriber<yarp::rosmsg::sensor_msgs::JointState>::onRead;
+    virtual void        onRead(yarp::rosmsg::sensor_msgs::JointState &v);
 };
 
 
@@ -46,6 +46,8 @@ class YARPRobotStatePublisherModule : public yarp::os::RFModule
     double m_period;
     yarp::dev::PolyDriver       m_ddtransformclient;
     yarp::dev::IFrameTransform       *m_iframetrans;
+
+    std::string m_tfPrefix;
 
     // Clock-related workaround
     bool m_usingNetworkClock;
@@ -62,8 +64,8 @@ class YARPRobotStatePublisherModule : public yarp::os::RFModule
    yarp::os::Mutex m_mutex;
 
    // /JointState topic scruscriber
-   yarp::os::Node*      m_rosNode;
-   JointStateSuscriber* m_jointStateSubscriber;
+   std::unique_ptr<yarp::os::Node> m_rosNode;
+   std::unique_ptr<JointStateSubscriber> m_jointStateSubscriber;
 
 public:
     YARPRobotStatePublisherModule();
@@ -71,7 +73,7 @@ public:
     bool close();
     double getPeriod();
     bool updateModule();
-    virtual void        onRead(JointState &v);
+    virtual void        onRead(yarp::rosmsg::sensor_msgs::JointState &v);
 };
 
 #endif
