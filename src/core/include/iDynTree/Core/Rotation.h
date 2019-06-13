@@ -387,7 +387,7 @@ namespace iDynTree
         static Matrix3x3 RPYRightTrivializedDerivativeInverse(const double roll, const double pitch, const double yaw);
 
         /**
-         * Return the inverse of the rate of change of right-trivialized derivative of the RPY function.
+         *  Return the rate of change of the inverse of the right-trivialized derivative of the RPY function.
          *
          * See RPYRightTrivializedDerivativeRateOfChange for a detailed description of the method.
          *
