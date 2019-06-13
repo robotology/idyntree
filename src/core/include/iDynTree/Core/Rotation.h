@@ -366,12 +366,33 @@ namespace iDynTree
         static Matrix3x3 RPYRightTrivializedDerivative(const double roll, const double pitch, const double yaw);
 
         /**
+         * Return the rate of change of the right-trivialized derivative of the RPY function.
+         *
+         * If we indicate with \f$ rpy \in \mathbb{R}^3 \f$ the roll pitch yaw vector,
+         * and with \f$  RPY(rpy) : \mathbb{R}^3 \mapsto SO(3) \f$ the function implemented
+         * in the Rotation::RPY method, this method returns the right-trivialized partial
+         * derivative of Rotation::RPY, i.e. :
+         * \f[
+         *    (RPY(rpy) \frac{d}{d t}\frac{\partial RPY(rpy)}{\partial rpy})^\vee
+         * \f]
+         */
+        static Matrix3x3 RPYRightTrivializedDerivativeRateOfChange(const double roll, const double pitch, const double yaw, const double rollDot, const double pitchDot, const double yawDot);
+
+        /**
          * Return the inverse of the right-trivialized derivative of the RPY function.
          *
          * See RPYRightTrivializedDerivative for a detailed description of the method.
          *
          */
         static Matrix3x3 RPYRightTrivializedDerivativeInverse(const double roll, const double pitch, const double yaw);
+
+        /**
+         * Return the inverse of the rate of change of right-trivialized derivative of the RPY function.
+         *
+         * See RPYRightTrivializedDerivativeRateOfChange for a detailed description of the method.
+         *
+         */
+        static Matrix3x3 RPYRightTrivializedDerivativeInverseRateOfChange(const double roll, const double pitch, const double yaw, const double rollDot, const double pitchDot, const double yawDot);
 
         /**
          * Return the right-trivialized derivative of the Quaternion function.
