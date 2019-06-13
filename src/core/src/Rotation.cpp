@@ -517,6 +517,28 @@ namespace iDynTree
         return map;
     }
 
+    Matrix3x3 Rotation::RPYRightTrivializedDerivativeRateOfChange(const double /*roll*/, const double pitch, const double yaw, const double /*rollDot*/, const double pitchDot, const double yawDot)
+    {
+        Matrix3x3 map;
+
+        double sp = std::sin(pitch);
+        double cp = std::cos(pitch);
+        double sy = std::sin(yaw);
+        double cy = std::cos(yaw);
+
+        map(0, 0) = -sp * cy * pitchDot - cp * sy * yawDot;
+        map(1, 0) = -sp * sy * pitchDot + cy * cp * yawDot;
+        map(2, 0) = -cp * pitchDot;
+        map(0, 1) = -cy * yawDot;
+        map(1, 1) = -sy * yawDot;
+        map(2, 1) = 0.0;
+        map(0, 2) = 0.0;
+        map(1, 2) = 0.0;
+        map(2, 2) = 0.0;
+
+        return map;
+    }
+
     Matrix3x3 Rotation::RPYRightTrivializedDerivativeInverse(const double /*roll*/, const double pitch, const double yaw)
     {
         // See doc/symbolic/RPYExpressionReference.py
@@ -537,6 +559,29 @@ namespace iDynTree
         map(0, 2) = 0.0;
         map(1, 2) = 0.0;
         map(2, 2) = 1.0;
+
+        return map;
+    }
+
+    Matrix3x3 Rotation::RPYRightTrivializedDerivativeInverseRateOfChange(const double /*roll*/, const double pitch, const double yaw, const double /*rollDot*/, const double pitchDot, const double yawDot)
+    {
+        Matrix3x3 map;
+
+        double sp = std::sin(pitch);
+        double cp = std::cos(pitch);
+        double sy = std::sin(yaw);
+        double cy = std::cos(yaw);
+        double tp = std::tan(pitch);
+
+        map(0, 0) = (-sy * cp * yawDot + cy * sp * pitchDot) / std::pow(cp, 2);
+        map(1, 0) = -cy * yawDot;
+        map(2, 0) = -sy * tp * yawDot + cy * pitchDot / std::pow(cp, 2);
+        map(0, 1) = (cy * cp * yawDot + sy * sp * pitchDot) / std::pow(cp, 2);
+        map(1, 1) = -sy * yawDot;
+        map(2, 1) = cy * tp * yawDot + sy * pitchDot / std::pow(cp, 2);
+        map(0, 2) = 0.0;
+        map(1, 2) = 0.0;
+        map(2, 2) = 0.0;
 
         return map;
     }
