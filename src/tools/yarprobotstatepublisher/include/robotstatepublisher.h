@@ -23,6 +23,7 @@
 #include <iDynTree/KinDynComputations.h>
 
 #include <yarp/rosmsg/sensor_msgs/JointState.h>
+#include <memory>
 
 class YARPRobotStatePublisherModule;
 
