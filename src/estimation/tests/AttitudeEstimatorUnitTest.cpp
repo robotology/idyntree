@@ -13,6 +13,7 @@
 #include <iDynTree/Core/TestUtils.h>
 #include <iostream>
 #include <memory>
+
 void run(iDynTree::IAttitudeEstimator* estimator,
          const iDynTree::LinAcceleration& acc,
          const iDynTree::GyroscopeMeasurements& gyro,
@@ -81,7 +82,7 @@ int main()
     iDynTree::MagnetometerMeasurements mag; mag.zero();
     ok = qEKF->updateFilterWithMeasurements(linAcc, gyro, mag);
     ASSERT_IS_FALSE(ok);
-    linAcc(2) = 1.0;
+    linAcc(2) = -9.8;
     mag(2) = 1.0;
     std::cout << "Update measurements will internally run EKF update step" << std::endl;
     ok = qEKF->updateFilterWithMeasurements(linAcc, gyro, mag);
@@ -107,14 +108,35 @@ int main()
     }
 
     linAcc.zero();
-    linAcc(1) = 1;
-    gyro(1) = 0.05;
+    linAcc(2) = -9.8;
+    gyro(1) = 0.0;
 
     for (int i = 0; i <10 ; i++ )
     {
         run(qekf_, linAcc, gyro, mag);
     }
 
+    std::cout << "\nQuaternion EKF runs without faults." << std::endl;
+
+    std::cout << "\n\n Mahony filter running..." << std::endl;
+
+    std::unique_ptr<iDynTree::AttitudeMahonyFilter> mahony_filt;
+
+    mahony_filt = std::make_unique<iDynTree::AttitudeMahonyFilter>();
+    iDynTree::AttitudeMahonyFilterParameters mahony_params;
+    mahony_params.kp = 0.7;
+    mahony_params.ki = 0.01;
+    mahony_params.time_step_in_seconds = 0.01;
+    mahony_params.use_magnetometer_measurements = false;
+
+    mahony_filt->setParameters(mahony_params);
+    mahony_filt->setInternalState(x1_span);
+
+    iDynTree::IAttitudeEstimator* mahony_(mahony_filt.get());
+    for (int i = 0; i <10 ; i++ )
+    {
+        run(mahony_, linAcc, gyro, mag);
+    }
 
     return EXIT_SUCCESS;
 }

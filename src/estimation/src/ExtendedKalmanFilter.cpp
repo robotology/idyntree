@@ -144,8 +144,8 @@ bool iDynTree::DiscreteExtendedKalmanFilterHelper::ekfUpdate()
     auto xhat(toEigen(m_xhat));
     auto y(toEigen(m_y) - toEigen(z));        ///< innovation \f$ \tilde{y}_{k+1} = y_{k+1} - z_{k+1} \f$
 
-    S = H*Phat*H.transpose() + R;             ///< \f$ S_{k+1} = H_{k+1} \hat{P}_{k+1} H_{k+1}^T + R \f$
-    K = Phat*H.transpose()*S.inverse();       ///< \f$ K_{k+1} = \hat{P}_{k+1} H_{k+1}^T S_{k+1}^{-1} \f$
+    S = H*Phat*(H.transpose()) + R;             ///< \f$ S_{k+1} = H_{k+1} \hat{P}_{k+1} H_{k+1}^T + R \f$
+    K = Phat*(H.transpose())*(S.inverse());       ///< \f$ K_{k+1} = \hat{P}_{k+1} H_{k+1}^T S_{k+1}^{-1} \f$
     P = Phat - (K*H*Phat);                    ///< \f$ P_{k+1} = \hat{P}_{k+1} - (K_{k+1} H \hat{P}_{k+1}) \f$
     x = xhat + K*y;                           ///< \f$ x_{k+1} = \hat{x}_{k+1} + K_{k+1} \tilde{y}_{k+1} \f$
 
