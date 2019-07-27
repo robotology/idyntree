@@ -253,6 +253,7 @@ namespace iDynTree
          * @return bool true/false if successful or not
          */
         bool ekfComputeJacobianF(iDynTree::VectorDynSize& x, iDynTree::MatrixDynSize& F) override;
+        bool ekfComputeJacobianF(iDynTree::VectorDynSize& x, iDynTree::VectorDynSize& u, iDynTree::MatrixDynSize& F) override;
 
         /**
          * @brief Describes the measurement Jacobian necessary for computing Kalman gain and updating the predicted state and its covariance

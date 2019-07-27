@@ -24,6 +24,53 @@ void iDynTree::DiscreteExtendedKalmanFilterHelper::ekfReset()
     m_initial_state_covariance_set = false;
 }
 
+bool iDynTree::DiscreteExtendedKalmanFilterHelper::ekfInit(const size_t& state_size, const size_t& input_size, const size_t& output_size)
+{
+    m_dim_X = state_size;
+    m_dim_U = input_size;
+    m_dim_Y = output_size;
+
+    return ekfInit();
+}
+
+bool iDynTree::DiscreteExtendedKalmanFilterHelper::ekfReset(const size_t& state_size, const size_t& input_size, const size_t& output_size,
+                                                                                                        const iDynTree::Span<double>& x0, const iDynTree::Span<double>& P0,
+                                                                                                        const iDynTree::Span<double>& Q, const iDynTree::Span<double>& R)
+{
+    m_is_initialized = false;
+    m_measurement_updated = false;
+    m_input_updated = false;
+    m_initial_state_set = false;
+    m_initial_state_covariance_set = false;
+
+    if (!ekfInit(state_size, input_size, output_size))
+    {
+        return false;
+    }
+
+    if (!ekfSetInitialState(x0))
+    {
+        return false;
+    }
+
+    if (!ekfSetStateCovariance(P0))
+    {
+        return false;
+    }
+
+    if (!ekfSetSystemNoiseCovariance(Q))
+    {
+        return false;
+    }
+
+    if (!ekfSetMeasurementNoiseCovariance(R))
+    {
+        return false;
+    }
+
+    return true;
+}
+
 
 bool iDynTree::DiscreteExtendedKalmanFilterHelper::ekfInit()
 {
@@ -252,7 +299,6 @@ bool iDynTree::DiscreteExtendedKalmanFilterHelper::ekfGetStates(const iDynTree::
 
     for (size_t i = 0; i < m_dim_X; i++)
     {
-        double temp{m_x(i)};
         x(i) = m_x(i);
     }
     return true;

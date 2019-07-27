@@ -287,6 +287,15 @@ bool iDynTree::AttitudeQuaternionEKF::updateFilterWithMeasurements(const iDynTre
     return ok;
 }
 
+bool iDynTree::AttitudeQuaternionEKF::ekfComputeJacobianF(iDynTree::VectorDynSize& x, iDynTree::VectorDynSize& u, iDynTree::MatrixDynSize& F)
+{
+    ignore(u);
+    ignore(x);
+    ignore(F);
+    return false;
+}
+
+
 bool iDynTree::AttitudeQuaternionEKF::ekfComputeJacobianF(iDynTree::VectorDynSize& x, iDynTree::MatrixDynSize& F)
 {
     using iDynTree::toEigen;
