@@ -54,6 +54,9 @@ class YARPRobotStatePublisherModule : public yarp::os::RFModule
     bool m_usingNetworkClock;
     yarp::os::NetworkClock m_netClock;
 
+    // Reduced flag option
+    bool reducedModelOption;
+
     // Class for computing forward kinematics
    iDynTree::KinDynComputations m_kinDynComp;
    iDynTree::VectorDynSize m_jointPos;
