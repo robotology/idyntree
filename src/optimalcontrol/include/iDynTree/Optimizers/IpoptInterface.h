@@ -45,9 +45,9 @@ namespace iDynTree {
 
             virtual ~IpoptInterface() override;
 
-            virtual bool setProblem(std::shared_ptr<OptimizationProblem> problem) override;
+            virtual bool isAvailable() const override;
 
-            virtual bool setInitialGuess(VectorDynSize &initialGuess) override;
+            virtual bool setProblem(std::shared_ptr<OptimizationProblem> problem) override;
 
             virtual bool solve() override;
 
@@ -64,6 +64,8 @@ namespace iDynTree {
             virtual double minusInfinity() override;
 
             virtual double plusInfinity() override;
+
+            void useApproximatedHessians(bool useApproximatedHessian = true);
 
             bool setIpoptOption(const std::string &tag, const std::string &value);
 

@@ -19,6 +19,7 @@
 #include <iDynTree/Core/Utils.h>
 #include <iDynTree/ConstraintsGroup.h>
 #include <iDynTree/Constraint.h>
+#include <iDynTree/LinearConstraint.h>
 #include <iDynTree/TimeRange.h>
 #include <iDynTree/Core/EigenHelpers.h>
 #include <Eigen/Dense>
@@ -37,6 +38,7 @@ namespace optimalcontrol {
             VectorDynSize constraintBuffer;
             MatrixDynSize stateJacobianBuffer;
             MatrixDynSize controlJacobianBuffer;
+            VectorDynSize lambdaBuffer;
         }TimedConstraint;
 
         typedef std::shared_ptr<TimedConstraint> TimedConstraint_ptr;
@@ -47,15 +49,168 @@ namespace optimalcontrol {
         public:
             GroupOfConstraintsMap group;
             std::vector<TimedConstraint_ptr> orderedIntervals;
+            SparsityStructure groupStateJacobianSparsity;
+            SparsityStructure groupControlJacobianSparsity;
+            SparsityStructure groupStateHessianSparsity;
+            SparsityStructure groupControlHessianSparsity;
+            SparsityStructure groupMixedHessianSparsity;
             std::string name;
             unsigned int maxConstraintSize;
             std::vector<TimeRange> timeRanges;
+            bool isLinearGroup = true;
+            bool stateJacobianSparsityProvided = true;
+            bool controlJacobianSparsityProvided = true;
+            bool stateHessianSparsityProvided = true;
+            bool controlHessianSparsityProvided = true;
+            bool mixedHessianSparsityProvided = true;
+
 
             std::vector<TimedConstraint_ptr>::reverse_iterator findActiveConstraint(double time){
                 return std::find_if(orderedIntervals.rbegin(),
                                     orderedIntervals.rend(),
                                     [time](const TimedConstraint_ptr & a) -> bool { return a->timeRange.isInRange(time); }); //find the last element in the vector with init time lower than the specified time
             }
+
+            bool addConstraint(std::shared_ptr<Constraint> constraint, const TimeRange &timeRange)
+            {
+                if (!constraint){
+                    reportError("ConstraintsGroup", "addConstraint", "Empty constraint pointer.");
+                    return false;
+                }
+
+                if (constraint->constraintSize() > maxConstraintSize){
+                    reportError("ConstraintsGroup", "addConstraint", "The constraint dimension is greater than the maximum allowed by the group.");
+                    return false;
+                }
+
+                if (timeRange == TimeRange::AnyTime()){
+                    if (group.size() != 0){
+                        reportError("ConstraintsGroup", "addConstraint",
+                                    "Only one constraint is allowed in a group if the timeRange is AnyTime.");
+                        return false;
+                    }
+                } else {
+                    if (!timeRange.isValid()){
+                        reportError("ConstraintsGroup", "addConstraint", "Invalid timeRange.");
+                        return false;
+                    }
+                }
+
+                if(group.size() > 0){
+                    GroupOfConstraintsMap::iterator constraintIterator;
+                    constraintIterator = group.find(constraint->name());
+                    if(constraintIterator != group.end()){
+                        std::ostringstream errorMsg;
+                        errorMsg << "A constraint named " << constraint->name()
+                                 <<" already exists in the group "<< name << " .";
+                        reportError("ConstraintsGroup", "addConstraint", errorMsg.str().c_str());
+                        return false;
+                    }
+                }
+
+                //add constraints in the group
+                TimedConstraint_ptr newConstraint = std::make_shared<TimedConstraint>();
+
+                newConstraint->timeRange = timeRange;
+                newConstraint->constraint = constraint;
+                newConstraint->constraintBuffer.resize(static_cast<unsigned int>(constraint->constraintSize()));
+                newConstraint->stateJacobianBuffer.resize(static_cast<unsigned int>(constraint->constraintSize()), static_cast<unsigned int>(constraint->expectedStateSpaceSize()));
+                newConstraint->controlJacobianBuffer.resize(static_cast<unsigned int>(constraint->constraintSize()), static_cast<unsigned int>(constraint->expectedControlSpaceSize()));
+                newConstraint->lambdaBuffer.resize(static_cast<unsigned int>(constraint->constraintSize()));
+
+
+                std::pair< GroupOfConstraintsMap::iterator, bool> result;
+                result = group.insert(GroupOfConstraintsMap::value_type(constraint->name(), newConstraint));
+
+                if(!result.second){
+                    std::ostringstream errorMsg;
+                    errorMsg << "Unable to add constraint "<<constraint->name() << std::endl;
+                    reportError("ConstraintsGroup", "addConstraint", errorMsg.str().c_str());
+                    return false;
+                }
+
+                orderedIntervals.push_back(result.first->second); //register the time range in order to have the constraints ordered by init time. result.first->second is the TimedConstraint_ptr of the newly inserted TimedConstraint.
+                std::sort(orderedIntervals.begin(), orderedIntervals.end(), [](const TimedConstraint_ptr&a, const TimedConstraint_ptr&b) { return a->timeRange < b->timeRange;}); //reorder the vector
+
+                {
+                    SparsityStructure newConstraintStateJacobianSparsity, newConstraintControlJacobianSparsity;
+
+                    if (stateJacobianSparsityProvided
+                        && constraint->constraintJacobianWRTStateSparsity(newConstraintStateJacobianSparsity)) {
+
+                        if (!newConstraintStateJacobianSparsity.isValid()) {
+                            reportError("ConstraintsGroup", "addConstraint", "The state sparsity is provided but the dimension of the two vectors do not match.");
+                            return false;
+                        }
+
+                        groupStateJacobianSparsity.merge(newConstraintStateJacobianSparsity);
+
+                    } else {
+                        stateJacobianSparsityProvided = false;
+                    }
+
+                    if (controlJacobianSparsityProvided
+                        && constraint->constraintJacobianWRTControlSparsity(newConstraintControlJacobianSparsity)) {
+
+                        if (!newConstraintControlJacobianSparsity.isValid()) {
+                            reportError("ConstraintsGroup", "addConstraint", "The control sparsity is provided but the dimension of the two vectors do not match.");
+                            return false;
+                        }
+
+                        groupControlJacobianSparsity.merge(newConstraintControlJacobianSparsity);
+
+                    } else {
+                        controlJacobianSparsityProvided = false;
+                    }
+                }
+
+                SparsityStructure newConstraintStateHessianSparsity, newConstraintControlHessianSparsity, newConstraintMixedHessianSparsity;
+
+                if (stateHessianSparsityProvided
+                    && constraint->constraintSecondPartialDerivativeWRTStateSparsity(newConstraintStateHessianSparsity)) {
+
+                    if (!newConstraintStateHessianSparsity.isValid()) {
+                        reportError("ConstraintsGroup", "addConstraint", "The state hessian sparsity is provided but the dimension of the two vectors do not match.");
+                        return false;
+                    }
+
+                    groupStateHessianSparsity.merge(newConstraintStateHessianSparsity);
+
+                } else {
+                    stateHessianSparsityProvided = false;
+                }
+
+                if (controlHessianSparsityProvided
+                    && constraint->constraintSecondPartialDerivativeWRTControlSparsity(newConstraintControlHessianSparsity)) {
+
+                    if (!newConstraintControlHessianSparsity.isValid()) {
+                        reportError("ConstraintsGroup", "addConstraint", "The control hessian sparsity is provided but the dimension of the two vectors do not match.");
+                        return false;
+                    }
+
+                    groupControlHessianSparsity.merge(newConstraintControlHessianSparsity);
+
+                } else {
+                    controlHessianSparsityProvided = false;
+                }
+
+                if (mixedHessianSparsityProvided
+                    && constraint->constraintSecondPartialDerivativeWRTStateControlSparsity(newConstraintMixedHessianSparsity)) {
+
+                    if (!newConstraintMixedHessianSparsity.isValid()) {
+                        reportError("ConstraintsGroup", "addConstraint", "The state control hessian sparsity is provided but the dimension of the two vectors do not match.");
+                        return false;
+                    }
+
+                    groupMixedHessianSparsity.merge(newConstraintMixedHessianSparsity);
+
+                } else {
+                    mixedHessianSparsityProvided = false;
+                }
+
+                return true;
+            }
+
         };
 
         ConstraintsGroup::ConstraintsGroup(const std::string &name, unsigned int maxConstraintSize)
@@ -86,67 +241,13 @@ namespace optimalcontrol {
 
         bool ConstraintsGroup::addConstraint(std::shared_ptr<Constraint> constraint, const TimeRange &timeRange)
         {
-            if (!constraint){
-                reportError("ConstraintsGroup", "addConstraint", "Empty constraint pointer.");
-                return false;
-            }
+            m_pimpl->isLinearGroup = false;
+            return m_pimpl->addConstraint(constraint, timeRange);
+        }
 
-            if (constraint->constraintSize() > m_pimpl->maxConstraintSize){
-                reportError("ConstraintsGroup", "addConstraint", "The constraint dimension is greater than the maximum allowed by the group.");
-                return false;
-            }
-
-            if (timeRange == TimeRange::AnyTime()){
-                if (numberOfConstraints() != 0){
-                    reportError("ConstraintsGroup", "addConstraint",
-                                "Only one constraint is allowed in a group if the timeRange is AnyTime.");
-                    return false;
-                }
-            } else {
-                if (!timeRange.isValid()){
-                    reportError("ConstraintsGroup", "addConstraint", "Invalid timeRange.");
-                    return false;
-                }
-            }
-
-            if(m_pimpl->group.size() > 0){
-                GroupOfConstraintsMap::iterator constraintIterator;
-                constraintIterator = m_pimpl->group.find(constraint->name());
-                if(constraintIterator != m_pimpl->group.end()){
-                    std::ostringstream errorMsg;
-                    errorMsg << "A constraint named " << constraint->name()
-                             <<" already exists in the group "<< m_pimpl->name << " .";
-                    reportError("ConstraintsGroup", "addConstraint", errorMsg.str().c_str());
-                    return false;
-                }
-            }
-
-            //add constraints in the group
-            TimedConstraint_ptr newConstraint = std::make_shared<TimedConstraint>();
-
-            newConstraint->timeRange = timeRange;
-            newConstraint->constraint = constraint;
-            newConstraint->constraintBuffer.resize(static_cast<unsigned int>(constraint->constraintSize()));
-            newConstraint->stateJacobianBuffer.resize(static_cast<unsigned int>(constraint->constraintSize()), static_cast<unsigned int>(constraint->expectedStateSpaceSize()));
-            newConstraint->controlJacobianBuffer.resize(static_cast<unsigned int>(constraint->constraintSize()), static_cast<unsigned int>(constraint->expectedControlSpaceSize()));
-
-            std::pair< GroupOfConstraintsMap::iterator, bool> result;
-            result = m_pimpl->group.insert(GroupOfConstraintsMap::value_type(constraint->name(), newConstraint));
-
-            if(!result.second){
-                std::ostringstream errorMsg;
-                errorMsg << "Unable to add constraint "<<constraint->name() << std::endl;
-                reportError("ConstraintsGroup", "addConstraint", errorMsg.str().c_str());
-                return false;
-            }
-
-            m_pimpl->orderedIntervals.push_back(result.first->second); //register the time range in order to have the constraints ordered by init time. result.first->second is the TimedConstraint_ptr of the newly inserted TimedConstraint.
-            std::sort(m_pimpl->orderedIntervals.begin(), m_pimpl->orderedIntervals.end(), [](const TimedConstraint_ptr&a, const TimedConstraint_ptr&b) { return a->timeRange < b->timeRange;}); //reorder the vector
-
-
-            //the jacobian should be updated
-
-            return true;
+        bool ConstraintsGroup::addConstraint(std::shared_ptr<LinearConstraint> linearConstraint, const TimeRange &timeRange)
+        {
+            return m_pimpl->addConstraint(linearConstraint, timeRange);
         }
 
         bool ConstraintsGroup::updateTimeRange(const std::string &name, const TimeRange &timeRange)
@@ -234,7 +335,7 @@ namespace optimalcontrol {
             }
 
             size_t i=0;
-            for (auto constraint : m_pimpl->group) {
+            for (auto& constraint : m_pimpl->group) {
                 m_pimpl->timeRanges[i] = constraint.second->timeRange;
                 ++i;
             }
@@ -267,6 +368,7 @@ namespace optimalcontrol {
                     reportError("ConstraintsGroup", "evaluateConstraints", errorMsg.str().c_str());
                     return false;
                 }
+                return true;
             }
 
             if (constraints.size() < m_pimpl->maxConstraintSize) {
@@ -355,7 +457,29 @@ namespace optimalcontrol {
         bool ConstraintsGroup::constraintJacobianWRTState(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &jacobian)
         {
             if (isAnyTimeGroup()) {
-                return m_pimpl->group.begin()->second.get()->constraint->constraintJacobianWRTState(time, state, control, jacobian);
+                TimedConstraint_ptr loneConstraint = m_pimpl->group.begin()->second;
+                if (!(loneConstraint->constraint->constraintJacobianWRTState(time, state, control, jacobian))) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Failed to evaluate "<< loneConstraint->constraint->name() << std::endl;
+                    reportError("ConstraintsGroup", "constraintJacobianWRTState", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (jacobian.rows() != loneConstraint->constraint->constraintSize()) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The state jacobian of constraint "<< loneConstraint->constraint->name() << " has a number of rows different from the size of the constraint." << std::endl;
+                    reportError("ConstraintsGroup", "constraintJacobianWRTState", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (jacobian.cols() != state.size()) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The state jacobian of constraint "<< loneConstraint->constraint->name() << " has a number of columns different from the state size." << std::endl;
+                    reportError("ConstraintsGroup", "constraintJacobianWRTState", errorMsg.str().c_str());
+                    return false;
+                }
+
+                return true;
             }
 
             if ((jacobian.rows() != m_pimpl->maxConstraintSize)||(jacobian.cols() != state.size())) {
@@ -393,7 +517,7 @@ namespace optimalcontrol {
             if (constraintIterator->get()->constraint->constraintSize() < m_pimpl->maxConstraintSize) {
                 toEigen(jacobian).block(0, 0, constraintIterator->get()->stateJacobianBuffer.rows(), state.size()) =
                         toEigen(constraintIterator->get()->stateJacobianBuffer);
-                int nMissing = m_pimpl->maxConstraintSize - constraintIterator->get()->constraint->constraintSize();
+                unsigned int nMissing = m_pimpl->maxConstraintSize - static_cast<unsigned int>(constraintIterator->get()->constraint->constraintSize());
                 toEigen(jacobian).block(constraintIterator->get()->stateJacobianBuffer.rows(), 0, nMissing, state.size()).setZero();
             } else {
                 jacobian = constraintIterator->get()->stateJacobianBuffer;
@@ -409,28 +533,28 @@ namespace optimalcontrol {
         {
             if (isAnyTimeGroup()){
                 TimedConstraint_ptr loneConstraint = m_pimpl->group.begin()->second;
-                if (!(loneConstraint->constraint->constraintJacobianWRTControl(time, state, control, loneConstraint->controlJacobianBuffer))) {
+                if (!(loneConstraint->constraint->constraintJacobianWRTControl(time, state, control, jacobian))) {
                     std::ostringstream errorMsg;
                     errorMsg << "Failed to evaluate "<< loneConstraint->constraint->name() << std::endl;
                     reportError("ConstraintsGroup", "constraintJacobianWRTControl", errorMsg.str().c_str());
                     return false;
                 }
 
-                if (loneConstraint->controlJacobianBuffer.rows() != loneConstraint->constraint->constraintSize()) {
+                if (jacobian.rows() != loneConstraint->constraint->constraintSize()) {
                     std::ostringstream errorMsg;
                     errorMsg << "The control jacobian of constraint "<< loneConstraint->constraint->name() << " has a number of rows different from the size of the constraint." << std::endl;
                     reportError("ConstraintsGroup", "constraintJacobianWRTControl", errorMsg.str().c_str());
                     return false;
                 }
 
-                if (loneConstraint->controlJacobianBuffer.cols() != control.size()) {
+                if (jacobian.cols() != control.size()) {
                     std::ostringstream errorMsg;
                     errorMsg << "The control jacobian of constraint "<< loneConstraint->constraint->name() << " has a number of columns different from the control size." << std::endl;
                     reportError("ConstraintsGroup", "constraintJacobianWRTControl", errorMsg.str().c_str());
                     return false;
                 }
 
-                jacobian = m_pimpl->group.begin()->second.get()->controlJacobianBuffer;
+                return true;
             }
 
             if ((jacobian.rows() != m_pimpl->maxConstraintSize)||(jacobian.cols() != control.size())) {
@@ -468,11 +592,252 @@ namespace optimalcontrol {
             if (constraintIterator->get()->constraint->constraintSize() < m_pimpl->maxConstraintSize) {
                 toEigen(jacobian).block(0, 0, constraintIterator->get()->controlJacobianBuffer.rows(), state.size()) =
                         toEigen(constraintIterator->get()->controlJacobianBuffer);
-                int nMissing = m_pimpl->maxConstraintSize - constraintIterator->get()->constraint->constraintSize();
+                unsigned int nMissing = m_pimpl->maxConstraintSize - static_cast<unsigned int>(constraintIterator->get()->constraint->constraintSize());
                 toEigen(jacobian).block(constraintIterator->get()->controlJacobianBuffer.rows(), 0, nMissing, state.size()).setZero();
             } else {
                 jacobian = constraintIterator->get()->controlJacobianBuffer;
             }
+
+            return true;
+        }
+
+        bool ConstraintsGroup::constraintJacobianWRTStateSparsity(SparsityStructure &stateSparsity) const
+        {
+            if (!(m_pimpl->stateJacobianSparsityProvided)) {
+                return false;
+            }
+
+            stateSparsity = m_pimpl->groupStateJacobianSparsity;
+
+            return true;
+        }
+
+        bool ConstraintsGroup::constraintJacobianWRTControlSparsity(SparsityStructure &controlSparsity) const
+        {
+            if (!(m_pimpl->controlJacobianSparsityProvided)) {
+                return false;
+            }
+
+            controlSparsity = m_pimpl->groupControlJacobianSparsity;
+
+            return true;
+        }
+
+        bool ConstraintsGroup::constraintSecondPartialDerivativeWRTState(double time, const VectorDynSize &state, const VectorDynSize &control, const VectorDynSize &lambda, MatrixDynSize &hessian)
+        {
+            if (isAnyTimeGroup()){
+                TimedConstraint_ptr loneConstraint = m_pimpl->group.begin()->second;
+                if (!(loneConstraint->constraint->constraintSecondPartialDerivativeWRTState(time, state, control, lambda, hessian))) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Failed to evaluate "<< loneConstraint->constraint->name() << std::endl;
+                    reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTState", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (hessian.rows() != state.size()) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The second partial derivative WRT the state of constraint "<< loneConstraint->constraint->name() << " has a number of rows different from the size of the state." << std::endl;
+                    reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTState", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (hessian.cols() != state.size()) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The second partial derivative WRT the state of constraint "<< loneConstraint->constraint->name() << " has a number of columns different from the size of the state." << std::endl;
+                    reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTState", errorMsg.str().c_str());
+                    return false;
+                }
+
+                return true;
+            }
+
+            hessian.resize(state.size(), state.size());
+
+            std::vector< TimedConstraint_ptr >::reverse_iterator constraintIterator = m_pimpl->findActiveConstraint(time);
+            if (constraintIterator == m_pimpl->orderedIntervals.rend()){ //no active constraint
+                toEigen(hessian).setZero();
+                return true;
+            }
+
+            toEigen(constraintIterator->get()->lambdaBuffer) = toEigen(lambda).topRows(constraintIterator->get()->lambdaBuffer.size());
+
+            if (!(constraintIterator->get()->constraint->constraintSecondPartialDerivativeWRTState(time, state, control, constraintIterator->get()->lambdaBuffer, hessian))) {
+                std::ostringstream errorMsg;
+                errorMsg << "Failed to evaluate "<< constraintIterator->get()->constraint->name() << std::endl;
+                reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTState", errorMsg.str().c_str());
+                return false;
+            }
+
+            if (hessian.rows() != state.size()) {
+                std::ostringstream errorMsg;
+                errorMsg << "The second partial derivative WRT the state of constraint "<< constraintIterator->get()->constraint->name() << " has a number of rows different from the size of the state." << std::endl;
+                reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTState", errorMsg.str().c_str());
+                return false;
+            }
+
+            if (hessian.cols() != state.size()) {
+                std::ostringstream errorMsg;
+                errorMsg << "The second partial derivative WRT the state of constraint "<< constraintIterator->get()->constraint->name() << " has a number of columns different from the size of the state." << std::endl;
+                reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTState", errorMsg.str().c_str());
+                return false;
+            }
+
+            return true;
+        }
+
+        bool ConstraintsGroup::constraintSecondPartialDerivativeWRTControl(double time, const VectorDynSize &state, const VectorDynSize &control, const VectorDynSize &lambda, MatrixDynSize &hessian)
+        {
+            if (isAnyTimeGroup()){
+                TimedConstraint_ptr loneConstraint = m_pimpl->group.begin()->second;
+                if (!(loneConstraint->constraint->constraintSecondPartialDerivativeWRTControl(time, state, control, lambda, hessian))) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Failed to evaluate "<< loneConstraint->constraint->name() << std::endl;
+                    reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTControl", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (hessian.rows() != control.size()) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The second partial derivative WRT the control of constraint "<< loneConstraint->constraint->name() << " has a number of rows different from the size of the control." << std::endl;
+                    reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTControl", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (hessian.cols() != control.size()) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The second partial derivative WRT the control of constraint "<< loneConstraint->constraint->name() << " has a number of columns different from the size of the control." << std::endl;
+                    reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTControl", errorMsg.str().c_str());
+                    return false;
+                }
+
+                return true;
+            }
+
+            hessian.resize(control.size(), control.size());
+
+            std::vector< TimedConstraint_ptr >::reverse_iterator constraintIterator = m_pimpl->findActiveConstraint(time);
+            if (constraintIterator == m_pimpl->orderedIntervals.rend()){ //no active constraint
+                toEigen(hessian).setZero();
+                return true;
+            }
+
+            toEigen(constraintIterator->get()->lambdaBuffer) = toEigen(lambda).topRows(constraintIterator->get()->lambdaBuffer.size());
+
+            if (!(constraintIterator->get()->constraint->constraintSecondPartialDerivativeWRTControl(time, state, control, constraintIterator->get()->lambdaBuffer, hessian))) {
+                std::ostringstream errorMsg;
+                errorMsg << "Failed to evaluate "<< constraintIterator->get()->constraint->name() << std::endl;
+                reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTControl", errorMsg.str().c_str());
+                return false;
+            }
+
+            if (hessian.rows() != control.size()) {
+                std::ostringstream errorMsg;
+                errorMsg << "The second partial derivative WRT the control of constraint "<< constraintIterator->get()->constraint->name() << " has a number of rows different from the size of the control." << std::endl;
+                reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTControl", errorMsg.str().c_str());
+                return false;
+            }
+
+            if (hessian.cols() != control.size()) {
+                std::ostringstream errorMsg;
+                errorMsg << "The second partial derivative WRT the control of constraint "<< constraintIterator->get()->constraint->name() << " has a number of columns different from the size of the control." << std::endl;
+                reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTControl", errorMsg.str().c_str());
+                return false;
+            }
+
+            return true;
+        }
+
+        bool ConstraintsGroup::constraintSecondPartialDerivativeWRTStateControl(double time, const VectorDynSize &state, const VectorDynSize &control, const VectorDynSize &lambda, MatrixDynSize &hessian)
+        {
+            if (isAnyTimeGroup()){
+                TimedConstraint_ptr loneConstraint = m_pimpl->group.begin()->second;
+                if (!(loneConstraint->constraint->constraintSecondPartialDerivativeWRTStateControl(time, state, control, lambda, hessian))) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "Failed to evaluate "<< loneConstraint->constraint->name() << std::endl;
+                    reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTStateControl", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (hessian.rows() != state.size()) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The second partial derivative WRT state/control of constraint "<< loneConstraint->constraint->name() << " has a number of rows different from the size of the state." << std::endl;
+                    reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTStateControl", errorMsg.str().c_str());
+                    return false;
+                }
+
+                if (hessian.cols() != control.size()) {
+                    std::ostringstream errorMsg;
+                    errorMsg << "The second partial derivative WRT state/control of constraint "<< loneConstraint->constraint->name() << " has a number of columns different from the size of the control." << std::endl;
+                    reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTStateControl", errorMsg.str().c_str());
+                    return false;
+                }
+
+                return true;
+            }
+
+            hessian.resize(state.size(), control.size());
+
+            std::vector< TimedConstraint_ptr >::reverse_iterator constraintIterator = m_pimpl->findActiveConstraint(time);
+            if (constraintIterator == m_pimpl->orderedIntervals.rend()){ //no active constraint
+                toEigen(hessian).setZero();
+                return true;
+            }
+
+            toEigen(constraintIterator->get()->lambdaBuffer) = toEigen(lambda).topRows(constraintIterator->get()->lambdaBuffer.size());
+
+            if (!(constraintIterator->get()->constraint->constraintSecondPartialDerivativeWRTStateControl(time, state, control, constraintIterator->get()->lambdaBuffer, hessian))) {
+                std::ostringstream errorMsg;
+                errorMsg << "Failed to evaluate "<< constraintIterator->get()->constraint->name() << std::endl;
+                reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTStateControl", errorMsg.str().c_str());
+                return false;
+            }
+
+            if (hessian.rows() != state.size()) {
+                std::ostringstream errorMsg;
+                errorMsg << "The second partial derivative WRT state/control of constraint "<< constraintIterator->get()->constraint->name() << " has a number of rows different from the size of the state." << std::endl;
+                reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTStateControl", errorMsg.str().c_str());
+                return false;
+            }
+
+            if (hessian.cols() != control.size()) {
+                std::ostringstream errorMsg;
+                errorMsg << "The second partial derivative WRT state/control of constraint "<< constraintIterator->get()->constraint->name() << " has a number of columns different from the size of the control." << std::endl;
+                reportError("ConstraintsGroup", "constraintSecondPartialDerivativeWRTStateControl", errorMsg.str().c_str());
+                return false;
+            }
+
+            return true;
+        }
+
+        bool ConstraintsGroup::constraintsSecondPartialDerivativeWRTStateSparsity(SparsityStructure &stateSparsity)
+        {
+            if (!(m_pimpl->stateHessianSparsityProvided)) {
+                return false;
+            }
+
+            stateSparsity = m_pimpl->groupStateHessianSparsity;
+
+            return true;
+        }
+
+        bool ConstraintsGroup::constraintsSecondPartialDerivativeWRTStateControlSparsity(SparsityStructure &stateControlSparsity)
+        {
+            if (!(m_pimpl->mixedHessianSparsityProvided)) {
+                return false;
+            }
+
+            stateControlSparsity = m_pimpl->groupMixedHessianSparsity;
+
+            return true;
+        }
+
+        bool ConstraintsGroup::constraintsSecondPartialDerivativeWRTControlSparsity(SparsityStructure &controlSparsity)
+        {
+            if (!(m_pimpl->controlHessianSparsityProvided)) {
+                return false;
+            }
+
+            controlSparsity = m_pimpl->groupControlHessianSparsity;
 
             return true;
         }
@@ -487,16 +852,21 @@ namespace optimalcontrol {
 
         unsigned int ConstraintsGroup::numberOfConstraints() const
         {
-            return m_pimpl->group.size();
+            return static_cast<unsigned int>(m_pimpl->group.size());
         }
 
         const std::vector<std::string> ConstraintsGroup::listConstraints() const
         {
             std::vector<std::string> output;
-            for (auto constraint: m_pimpl->group) {
+            for (auto& constraint: m_pimpl->group) {
                 output.push_back(constraint.second->constraint->name()); //MEMORY ALLOCATION
             }
             return output;
+        }
+
+        bool ConstraintsGroup::isLinearGroup() const
+        {
+            return m_pimpl->isLinearGroup;
         }
 
     }

@@ -19,7 +19,7 @@
 
 #include <yarp/math/Math.h>
 
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/ModelIO/ModelLoader.h>
 #include <iDynTree/KinDynComputations.h>
 #include <iDynTree/yarp/YARPConversions.h>
 
@@ -32,18 +32,18 @@ using namespace yarp::sig;
 using namespace yarp::math;
 
 /************************************************************/
-JointStateSuscriber::JointStateSuscriber(): m_module(nullptr)
+JointStateSubscriber::JointStateSubscriber(): m_module(nullptr)
 {
 }
 
 /************************************************************/
-void JointStateSuscriber::attach(YARPRobotStatePublisherModule* module)
+void JointStateSubscriber::attach(YARPRobotStatePublisherModule* module)
 {
     m_module = module;
 }
 
 /************************************************************/
-void JointStateSuscriber::onRead(yarp::rosmsg::sensor_msgs::JointState& v)
+void JointStateSubscriber::onRead(yarp::rosmsg::sensor_msgs::JointState& v)
 {
     m_module->onRead(v);
 }
@@ -62,11 +62,19 @@ YARPRobotStatePublisherModule::YARPRobotStatePublisherModule(): m_iframetrans(nu
 bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
 {
     string name="yarprobotstatepublisher";
-    string namePrefix = rf.check("namePrefix",Value("")).asString();
+    string namePrefix = rf.check("name-prefix",Value("")).asString();
+    string robot = rf.check("robot",Value("")).asString();
     if (!namePrefix.empty()) {
-        m_rosNode = new yarp::os::Node("/"+namePrefix+"/yarprobotstatepublisher");
+        m_rosNode.reset(new yarp::os::Node("/"+namePrefix+"/yarprobotstatepublisher"));
     }
-    else m_rosNode = new yarp::os::Node("/yarprobotstatepublisher");
+    else if (!robot.empty()) {
+        m_rosNode.reset(new yarp::os::Node("/"+robot+"/yarprobotstatepublisher"));
+        std::cerr << "[WARNING] The yarprobotstatepublisher option robot is deprecated," << std::endl <<
+                     "[WARNING] use name-prefix option instead";
+    }
+    else {
+        m_rosNode.reset(new yarp::os::Node("/yarprobotstatepublisher"));
+    }
 
     string modelFileName=rf.check("model",Value("model.urdf")).asString();
     m_period=rf.check("period",Value(0.010)).asDouble();
@@ -80,13 +88,13 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
 
     pTransformclient_cfg.put("remote", "/transformServer");
 
-    m_tfPrefix = rf.check("tfPrefix",Value("")).asString();
+    m_tfPrefix = rf.check("tf-prefix",Value("")).asString();
 
     bool ok_client = m_ddtransformclient.open(pTransformclient_cfg);
     if (!ok_client)
     {
         yError()<<"Problem in opening the transformClient device";
-        yError()<<"Is the transform server running?";
+        yError()<<"Is the transformServer YARP device running?";
         close();
         return false;
     }
@@ -111,7 +119,9 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
 
     // Open the model
     string pathToModel=rf.findFileByName(modelFileName);
-    bool ok = m_kinDynComp.loadRobotModelFromFile(pathToModel);
+    iDynTree::ModelLoader modelLoader;
+    bool ok = modelLoader.loadModelFromFile(pathToModel);
+    ok = ok && m_kinDynComp.loadRobotModel(modelLoader.model());
     if (!ok || !m_kinDynComp.isValid())
     {
         yError()<<"Impossible to load file " << pathToModel;
@@ -146,7 +156,7 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
 
     // Setup the topic and configureisValid the onRead callback
     string jointStatesTopicName = rf.check("jointstates-topic",Value("/joint_states")).asString();
-    m_jointStateSubscriber = new JointStateSuscriber();
+    m_jointStateSubscriber.reset(new JointStateSubscriber());
     m_jointStateSubscriber->attach(this);
     m_jointStateSubscriber->topic(jointStatesTopicName);
     m_jointStateSubscriber->useCallback();
@@ -165,7 +175,6 @@ bool YARPRobotStatePublisherModule::close()
     {
         m_jointStateSubscriber->interrupt();
         m_jointStateSubscriber->close();
-        delete m_jointStateSubscriber;
     }
 
     if (m_ddtransformclient.isValid())
@@ -176,10 +185,6 @@ bool YARPRobotStatePublisherModule::close()
     }
 
     m_baseFrameIndex = iDynTree::FRAME_INVALID_INDEX;
-
-    if(m_rosNode)
-        delete m_rosNode;
-    m_rosNode = nullptr;
 
     return true;
 }

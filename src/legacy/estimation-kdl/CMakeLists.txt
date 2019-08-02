@@ -27,7 +27,7 @@ set(libraryname idyntree-estimation-kdl)
 
 add_library(${libraryname} ${IDYNTREE_ESTIMATION_KDL_SOURCES} ${IDYNTREE_ESTIMATION_KDL_HEADERS} ${IDYNTREE_ESTIMATION_KDL_PRIVATE_INCLUDES})
 
-target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include;${IDYNTREE_TREE_INCLUDE_DIRS}>"
+target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR} ${orocos_kdl_INCLUDE_DIRS})
 
@@ -35,7 +35,6 @@ target_link_libraries(${libraryname} idyntree-core idyntree-kdl idyntree-sensors
 
 # Ensure that build include directories are always included before system ones
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-target_include_directories(${libraryname} BEFORE PRIVATE ${IDYNTREE_TREE_INCLUDE_DIRS})
 
 if((${CMAKE_CXX_COMPILER_ID} MATCHES "GNU") OR (${CMAKE_CXX_COMPILER_ID} MATCHES "Clang"))
     target_compile_options(${libraryname} PRIVATE "-Wno-deprecated")

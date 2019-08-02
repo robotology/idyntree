@@ -89,6 +89,19 @@ public:
     virtual bool setJetsIntensity(const VectorDynSize & ) { return false; };
 };
 
+class DummyVectorsVisualization : public IVectorsVisualization {
+public:
+    virtual ~DummyVectorsVisualization() override { }
+    virtual size_t addVector(const Position &, const Direction &, double) override { return 0; }
+    virtual size_t addVector(const Position &, const Vector3 &) override { return 0; }
+    virtual size_t getNrOfVectors() const override { return 0; }
+    virtual bool getVector(size_t, Position &, Direction &, double &) const override { return false; }
+    virtual bool getVector(size_t, Position &, Vector3 &) const override { return false; }
+    virtual bool updateVector(size_t , const Position &, const Direction &, double) override { return false; }
+    virtual bool updateVector(size_t, const Position &, const Vector3&) override { return false; }
+    virtual bool setVectorColor(size_t , const ColorViz &) override { return false; }
+    virtual bool setVectorsAspect(double, double, double) override { return false; }
+};
 
 /**
  * Dummy model visualization.
@@ -107,13 +120,16 @@ public:
     virtual std::string getInstanceName() { return "dummyModelVisualizationInstance"; }
     virtual void setModelVisibility(const bool) {}
     virtual void setModelColor(const ColorViz & ) {}
-    virtual void resetModelColor() {}
+    virtual void resetModelColor() {}   
+    virtual bool setLinkColor(const LinkIndex &, const ColorViz &) { return false; }
+    virtual bool resetLinkColor(const LinkIndex &) { return false; }
     virtual std::vector< std::string > getLinkNames() { return std::vector<std::string>(); };
     virtual bool setLinkVisibility(const std::string &, bool) { return false; }
     virtual std::vector<std::string> getFeatures() { return std::vector<std::string>(); }
     virtual bool setFeatureVisibility(const std::string& , bool) { return false; }
     virtual IJetsVisualization& jets() { return m_dummyJets;  }
-
+    virtual Transform getWorldModelTransform() { return iDynTree::Transform::Identity(); }
+    virtual Transform getWorldLinkTransform(const LinkIndex &) { return iDynTree::Transform::Identity(); }
 };
 
 }

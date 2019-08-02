@@ -53,9 +53,43 @@ void threeLinksReducedTest()
     checkVizLoading(mdlLoaderReduced.model());
 }
 
+void checkArrowsVisualization() {
+    iDynTree::Visualizer viz;
+
+    iDynTree::IVectorsVisualization& vectors = viz.vectors();
+
+    size_t index = vectors.addVector(iDynTree::Position(0.1, 0.1, 0.0), iDynTree::Direction(0.0, -1.0, 0.0), 0.5);
+    ASSERT_IS_TRUE(index >= 0);
+
+    iDynTree::Vector3 components;
+    components(0) = 0.2;
+    components(1) = -0.5;
+    components(2) = 0.1;
+
+    index = vectors.addVector(iDynTree::Position(0.2, 0.1, 0.1), components);
+    ASSERT_IS_TRUE(index >= 0);
+    bool ok = vectors.setVectorColor(index, iDynTree::ColorViz(0.0, 1.0, 0.0, 1.0));
+    ASSERT_IS_TRUE(ok);
+    components(0) = 0.5;
+    components(1) = 0.0;
+    components(2) = 0.1;
+    ok = vectors.updateVector(index, iDynTree::Position(0.2, 0.1, 0.1), components);
+    ASSERT_IS_TRUE(ok);
+
+
+
+    for(int i=0; i < 5; i++)
+    {
+        viz.draw();
+    }
+
+    viz.close();
+}
+
 int main()
 {
     threeLinksReducedTest();
+    checkArrowsVisualization();
 
     return EXIT_SUCCESS;
 }

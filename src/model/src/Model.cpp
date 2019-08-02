@@ -132,6 +132,18 @@ LinkIndex Model::getLinkIndex(const std::string& linkName) const
     return LINK_INVALID_INDEX;
 }
 
+double Model::getTotalMass() const
+{
+    double totalMass = 0.0;
+
+    for(size_t l=0; l < this->getNrOfLinks(); l++)
+    {
+        totalMass += this->getLink(l)->getInertia().getMass();
+    }
+
+    return totalMass;
+}
+
 bool Model::isValidLinkIndex(const LinkIndex index) const
 {
     return (index != LINK_INVALID_INDEX) &&

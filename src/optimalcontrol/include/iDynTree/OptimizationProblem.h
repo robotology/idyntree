@@ -18,6 +18,7 @@
 #define IDYNTREE_OPTIMALCONTROL_OPTIMIZATIONPROBLEM_H
 
 #include <vector>
+#include <memory>
 #include <cstddef>
 
 namespace iDynTree {
@@ -32,6 +33,55 @@ namespace iDynTree {
          * @warning This class is still in active development, and so API interface can change between iDynTree versions.
          * \ingroup iDynTreeExperimental
          */
+
+        class OptimizationProblemInfoData {
+        protected:
+            friend class OptimizationProblem;
+            OptimizationProblemInfoData();
+        public:
+            bool hasLinearConstraints;
+
+            bool hasNonLinearConstraints;
+
+            bool costIsLinear;
+
+            bool costIsQuadratic;
+
+            bool costIsNonLinear;
+
+            bool hasSparseConstraintJacobian;
+
+            bool hasSparseHessian;
+
+            bool hessianIsProvided;
+        };
+
+        class OptimizationProblemInfo {
+        private:
+            std::shared_ptr<OptimizationProblemInfoData> m_data;
+        public:
+            OptimizationProblemInfo(std::shared_ptr<OptimizationProblemInfoData> data);
+
+            OptimizationProblemInfo() = delete;
+
+            OptimizationProblemInfo(const OptimizationProblemInfo &other) = delete;
+
+            bool hasLinearConstraints() const;
+
+            bool hasNonLinearConstraints() const;
+
+            bool costIsLinear() const;
+
+            bool costIsQuadratic() const;
+
+            bool costIsNonLinear() const;
+
+            bool hasSparseConstraintJacobian() const;
+
+            bool hasSparseHessian() const;
+
+            bool hessianIsProvided() const;
+        };
 
         class OptimizationProblem {
 
@@ -59,13 +109,15 @@ namespace iDynTree {
 
             virtual bool getHessianInfo(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns); //costs and constraints together
 
+            virtual bool getGuess(VectorDynSize &guess);
+
             virtual bool setVariables(const VectorDynSize& variables);
 
             virtual bool evaluateCostFunction(double& costValue);
 
-            virtual bool evaluateCostGradient(VectorDynSize& gradient);
+            virtual bool evaluateCostGradient(VectorDynSize& gradient); //for quadratic costs this corresponds to Hx + g !
 
-            virtual bool evaluateCostHessian(MatrixDynSize& hessian); //using dense matrices, but the sparsity pattern is still obtained
+            virtual bool evaluateCostHessian(MatrixDynSize& hessian); //using dense matrices, but the sparsity pattern is still obtained. Initialize hessian to zero in case of dense solvers
 
             virtual bool evaluateConstraints(VectorDynSize& constraints);
 
@@ -73,6 +125,11 @@ namespace iDynTree {
 
             virtual bool evaluateConstraintsHessian(const VectorDynSize& constraintsMultipliers, MatrixDynSize& hessian); //using dense matrices, but the sparsity pattern is still obtained
 
+            const OptimizationProblemInfo& info() const;
+
+        protected:
+            std::shared_ptr<OptimizationProblemInfoData> m_infoData;
+            OptimizationProblemInfo m_info;
         };
     }
 }

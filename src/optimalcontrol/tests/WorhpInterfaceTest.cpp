@@ -15,7 +15,7 @@
  */
 
 #include <iDynTree/OptimizationProblem.h>
-#include <iDynTree/Optimizers/IpoptInterface.h>
+#include <iDynTree/Optimizers/WorhpInterface.h>
 #include <iDynTree/Core/TestUtils.h>
 #include <iDynTree/Core/Utils.h>
 #include <iDynTree/Core/VectorDynSize.h>
@@ -56,6 +56,12 @@ public:
 
     virtual unsigned int numberOfConstraints() override {
         return 2;
+    }
+
+    virtual bool getGuess(iDynTree::VectorDynSize &guess) override {
+        guess.resize(2);
+        guess.zero();
+        return true;
     }
 
     virtual bool getConstraintsBounds(iDynTree::VectorDynSize& constraintsLowerBounds, iDynTree::VectorDynSize& constraintsUpperBounds) override {
@@ -193,27 +199,29 @@ public:
 };
 
 int main(){
-    iDynTree::optimization::IpoptInterface ipoptSolver;
+    iDynTree::optimization::WorhpInterface worhpSolver;
     std::shared_ptr<TestProblem> problem(new TestProblem);
     iDynTree::VectorDynSize guess(2), dummy1, dummy2, dummy3;
     guess.zero();
 
-    ASSERT_IS_TRUE(ipoptSolver.setIpoptOption("nlp_lower_bound_inf", -1.0e20));
-    ASSERT_IS_TRUE(ipoptSolver.setIpoptOption("print_level", 0));
-    ASSERT_IS_TRUE(ipoptSolver.setInitialGuess(guess));
+    ASSERT_IS_TRUE(worhpSolver.setWorhpParam("AcceptTolOpti", 1e-6));
+    ASSERT_IS_TRUE(worhpSolver.setWorhpParam("AcceptTolFeas", 1e-6));
+    ASSERT_IS_TRUE(worhpSolver.setWorhpParam("Algorithm", 2));
+    ASSERT_IS_TRUE(worhpSolver.setWorhpParam("NLPprint", -1));
 
-    ASSERT_IS_TRUE(problem->setMinusInfinity(ipoptSolver.minusInfinity()));
-    ASSERT_IS_TRUE(problem->setPlusInfinity(ipoptSolver.plusInfinity()));
-    ASSERT_IS_TRUE(ipoptSolver.setProblem(problem));
+
+    ASSERT_IS_TRUE(problem->setMinusInfinity(worhpSolver.minusInfinity()));
+    ASSERT_IS_TRUE(problem->setPlusInfinity(worhpSolver.plusInfinity()));
+    ASSERT_IS_TRUE(worhpSolver.setProblem(problem));
     for (int i = 0; i < 5; ++i){
-        ASSERT_IS_TRUE(ipoptSolver.solve());
+        ASSERT_IS_TRUE(worhpSolver.solve());
         double optimalCost;
-        ASSERT_IS_TRUE(ipoptSolver.getOptimalCost(optimalCost));
+        ASSERT_IS_TRUE(worhpSolver.getOptimalCost(optimalCost));
         ASSERT_EQUAL_DOUBLE_TOL(optimalCost, problem->expectedMinimum(), 1e-5);
         iDynTree::VectorDynSize solution;
-        ASSERT_IS_TRUE(ipoptSolver.getPrimalVariables(solution));
+        ASSERT_IS_TRUE(worhpSolver.getPrimalVariables(solution));
         ASSERT_EQUAL_VECTOR_TOL(solution, problem->expectedVariables(), 1e-5);
-        ASSERT_IS_TRUE(ipoptSolver.getDualVariables(dummy1, dummy2, dummy3));
+        ASSERT_IS_TRUE(worhpSolver.getDualVariables(dummy1, dummy2, dummy3));
     }
     return EXIT_SUCCESS;
 }

@@ -24,16 +24,19 @@
 
 #include <yarp/rosmsg/sensor_msgs/JointState.h>
 
+#include <memory>
+
+
 class YARPRobotStatePublisherModule;
 
 /****************************************************************/
-class JointStateSuscriber: public yarp::os::Subscriber<yarp::rosmsg::sensor_msgs::JointState>
+class JointStateSubscriber: public yarp::os::Subscriber<yarp::rosmsg::sensor_msgs::JointState>
 {
 private:
     YARPRobotStatePublisherModule* m_module;
 
 public:
-    JointStateSuscriber();
+    JointStateSubscriber();
     void attach(YARPRobotStatePublisherModule* module);
     using yarp::os::Subscriber<yarp::rosmsg::sensor_msgs::JointState>::onRead;
     virtual void        onRead(yarp::rosmsg::sensor_msgs::JointState &v);
@@ -64,8 +67,8 @@ class YARPRobotStatePublisherModule : public yarp::os::RFModule
    yarp::os::Mutex m_mutex;
 
    // /JointState topic scruscriber
-   yarp::os::Node*      m_rosNode;
-   JointStateSuscriber* m_jointStateSubscriber;
+   std::unique_ptr<yarp::os::Node> m_rosNode;
+   std::unique_ptr<JointStateSubscriber> m_jointStateSubscriber;
 
    // String to check if the urdf model joints are greater or lower
    // than the number of joints streamed in joints_states topic

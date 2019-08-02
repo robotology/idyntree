@@ -257,6 +257,48 @@ bool SimpleLeggedOdometry::changeFixedFrame(const FrameIndex newFixedFrame)
     return true;
 }
 
+bool SimpleLeggedOdometry::changeFixedFrame(const FrameIndex newFixedFrame, const Transform & world_H_newFixedFrame)
+{
+    if( !this->m_kinematicsUpdated )
+    {
+        reportError("SimpleLeggedOdometry",
+                    "changeFixedFrame",
+                    "changeFixedFrame was called, but the kinematics info was never setted.");
+        return false;
+    }
+
+    LinkIndex newFixedLink = this->m_model.getFrameLink(newFixedFrame);
+
+    if( newFixedLink == LINK_INVALID_INDEX )
+    {
+        reportError("SimpleLeggedOdometry",
+                    "changeFixedFrame",
+                    "changeFixedFrame was called, but the provided new fixed frame is unknown.");
+        return false;
+    }
+
+    Transform newFixedFrame_H_newFixedLink = m_model.getFrameTransform(newFixedFrame).inverse();
+    this->m_world_H_fixedLink = world_H_newFixedFrame * newFixedFrame_H_newFixedLink;
+    this->m_fixedLinkIndex = newFixedLink;
+
+    return true;
+}
+
+bool SimpleLeggedOdometry::changeFixedFrame(const std::string& newFixedFrame, const Transform & world_H_newFixedFrame)
+{
+    iDynTree::FrameIndex newFixedFrameIndex = this->m_model.getFrameIndex(newFixedFrame);
+
+    if( newFixedFrameIndex == FRAME_INVALID_INDEX )
+    {
+        reportError("SimpleLeggedOdometry",
+                    "changeFixedFrame",
+                    "changeFixedFrame was called, but the provided new fixed frame is unknown.");
+        return false;
+    }
+
+    return this->changeFixedFrame(newFixedFrameIndex, world_H_newFixedFrame);
+}
+
 bool SimpleLeggedOdometry::changeFixedFrame(const std::string& newFixedFrame)
 {
     iDynTree::FrameIndex newFixedFrameIndex = this->m_model.getFrameIndex(newFixedFrame);
@@ -297,6 +339,27 @@ Transform SimpleLeggedOdometry::getWorldLinkTransform(const LinkIndex link_index
     return m_world_H_fixedLink*base_H_fixed.inverse()*base_H_link;
 }
 
+Transform SimpleLeggedOdometry::getWorldFrameTransform(const FrameIndex frame_index)
+{
+    if( !this->m_kinematicsUpdated || !this->m_isOdometryInitialized  )
+    {
+        reportError("SimpleLeggedOdometry",
+                    "getWorldFrameTransform",
+                    "getWorldLinkTransform was called, but the kinematics update or the odometry init was never setted.");
+        return Transform::Identity();
+    }
 
+    if( !this->m_model.isValidFrameIndex(frame_index) )
+    {
+        reportError("SimpleLeggedOdometry",
+                    "getWorldFrameTransform",
+                    "getWorldLinkTransform was called, but the request linkindex is not part of the model");
+        return Transform::Identity();
+    }
+
+    LinkIndex linkIndex = this->m_model.getFrameLink(frame_index);
+    Transform link_H_frame = m_model.getFrameTransform(frame_index);
+    return getWorldLinkTransform(linkIndex) * link_H_frame;
 }
 
+}

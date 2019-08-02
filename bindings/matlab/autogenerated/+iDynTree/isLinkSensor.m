@@ -1,3 +1,3 @@
 function varargout = isLinkSensor(varargin)
-  [varargout{1:nargout}] = iDynTreeMEX(1263, varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(1287, varargin{:});
 end

@@ -31,7 +31,7 @@ namespace iDynTree
     //Useful typedefs
     //TODO: change methods below to use these typedefs
     typedef Eigen::Map<Eigen::VectorXd> iDynTreeEigenVector;
-    typedef Eigen::Map<Eigen::VectorXd> iDynTreeEigenConstVector;
+    typedef Eigen::Map<const Eigen::VectorXd> iDynTreeEigenConstVector;
     typedef Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> iDynTreeEigenMatrix;
     typedef const Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> iDynTreeEigenConstMatrix;
     typedef Eigen::Map<iDynTreeEigenMatrix> iDynTreeEigenMatrixMap;
