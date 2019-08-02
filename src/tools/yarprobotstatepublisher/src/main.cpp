@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     // print available command-line options
     // upon specifying --help; refer to xml
     // descriptor for the relative documentation
-    iif (rf.check("help"))
+    if (rf.check("help"))
     {
         cout<<"Options"<<endl;
         cout<<"\t--namePrefix             <name-prefix>: prefix of the yarprobotstatepublisher ports"<<endl;
