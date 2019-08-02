@@ -147,4 +147,48 @@ iDynTree::UnitQuaternion composeQuaternion2(const iDynTree::UnitQuaternion &q1, 
  */
 iDynTree::UnitQuaternion pureQuaternion(const iDynTree::Vector3& bodyFixedFrameVelocityInInertialFrame);
 
+
+/**
+ * @brief exponential map for quaternion - maps angular velocities to quaternion
+ *
+ * \f$ \text{exp}(\omega) = \begin{bmatrix} \text{cos}(\frac{||\omega||}{2}) \\ \text{sin}(\frac{||\omega||}{2})\frac{\omega}{||\omega||}  \end{bmatrix} \f$
+ *
+ * @param[in] omega angular velocity
+ * @return iDynTree::UnitQuaternion
+ */
+inline iDynTree::UnitQuaternion expQuaternion(iDynTree::Vector3 omega)
+{
+    iDynTree::UnitQuaternion q;
+    q.zero();
+    q(0) = 1.0;
+    using iDynTree::toEigen;
+    double norm{toEigen(omega).norm()};
+
+    if (norm == 0)
+    {
+        return q;
+    }
+
+    double c = std::cos(norm/2);
+    double s = std::sin(norm/2)/norm;
+
+    q(0) = c;
+    q(1) = omega(0)*s;
+    q(2) = omega(1)*s;
+    q(3) = omega(2)*s;
+
+    return q;
+}
+
+template<class T>
+inline bool check_are_almost_equal(const T& x, const T& y, int units_in_last_place)
+{
+    if (!( std::abs(x- y) <= std::numeric_limits<T>::epsilon()*std::max(std::abs(x), std::abs(y))*units_in_last_place))
+    {
+        return false;
+    }
+
+    return true;
+}
+
 #endif

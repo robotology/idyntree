@@ -18,7 +18,7 @@ bool checkValidMeasurement(const iDynTree::Vector3& in, const std::string& measu
     {
         if (isZeroVector(in))
         {
-            iDynTree::reportError("AttitudeMahonyFilter", "checkValidMeasurement",
+            iDynTree::reportError("AttitudeEstimator", "checkValidMeasurement",
                                   (measurement_type + " measurements are invalid. Expecting a non-zero vector.").c_str());
             return false;
         }
@@ -26,7 +26,7 @@ bool checkValidMeasurement(const iDynTree::Vector3& in, const std::string& measu
 
     if (isVectorNaN(in))
     {
-        iDynTree::reportError("AttitudeMahonyFilter", "checkValidMeasurement",
+        iDynTree::reportError("AttitudeEstimator", "checkValidMeasurement",
                               (measurement_type + " measurements are invalid. Has NaN elements.").c_str());
         return false;
     }

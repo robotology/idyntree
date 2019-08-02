@@ -116,18 +116,22 @@ bool iDynTree::AttitudeMahonyFilter::propagateStates()
     auto omega_mes(toEigen(m_omega_mes));
 
     // compute the correction from the measurements
-    gyroUpdate = Omega_y - b + (omega_mes*m_params_mahony.kp);
-    iDynTree::UnitQuaternion correction = pureQuaternion(gyro_update_dyn);
-    auto dq(toEigen(composeQuaternion2(m_state_mahony.m_orientation, correction)));
+    gyroUpdate = (Omega_y - b + (omega_mes*m_params_mahony.kp))*m_params_mahony.time_step_in_seconds*0.5;
+    iDynTree::UnitQuaternion correction = expQuaternion(gyro_update_dyn);
 
     // system dynamics equations
-    q = q + (dq*(m_params_mahony.time_step_in_seconds*0.5));
-    if (q.norm() == 0)
+    q = toEigen(composeQuaternion2(m_state_mahony.m_orientation, correction));
+
+    int precision{4};
+    double malformed_unit_quaternion_norm{0.0};
+    if (check_are_almost_equal(q.norm(), malformed_unit_quaternion_norm, precision))
     {
         reportError("AttitudeMahonyFilter", "propagateStates", "invalid quaternion with zero norm");
         return false;
     }
-    if (q.norm() != 1)
+
+    double unit_quaternion_norm{1.0};
+    if (!check_are_almost_equal(q.norm(), unit_quaternion_norm, precision))
     {
         q.normalize();
     }
@@ -136,6 +140,7 @@ bool iDynTree::AttitudeMahonyFilter::propagateStates()
 
     m_orientationInSO3 = iDynTree::Rotation::RotationFromQuaternion(m_state_mahony.m_orientation);
     m_orientationInRPY = iDynTree::Rotation::RotationFromQuaternion(m_state_mahony.m_orientation).asRPY();
+
     return true;
 }
 

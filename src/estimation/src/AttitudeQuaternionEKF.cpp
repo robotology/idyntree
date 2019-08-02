@@ -152,13 +152,13 @@ bool iDynTree::AttitudeQuaternionEKF::initializeFilter()
     }
 
     if (!setSystemNoiseVariance(m_params_qekf.gyroscope_noise_variance,
-                            m_params_qekf.gyro_bias_noise_variance))
+                                m_params_qekf.gyro_bias_noise_variance))
     {
         return false;
     }
 
     if (!setMeasurementNoiseVariance(m_params_qekf.accelerometer_noise_variance,
-                                m_params_qekf.magnetometer_noise_variance))
+                                     m_params_qekf.magnetometer_noise_variance))
     {
         return false;
     }
@@ -267,7 +267,7 @@ bool iDynTree::AttitudeQuaternionEKF::updateFilterWithMeasurements(const iDynTre
     m_A = A_R_B * m_yB;
     m_A(2) = 0; // to limit the vertical influence of magnetometer {^A}m_z = 0
     m_B_modified = A_R_B.transpose()* m_A; // rotate vector back to body frame
-    m_Mag_y = atan2(-m_B_modified(1), m_B_modified(0));
+    m_Mag_y = std::atan2(-m_B_modified(1), m_B_modified(0));
 
     // set accelerometer and magnetometer measurement
     if (!callEkfUpdate())
@@ -442,21 +442,26 @@ bool iDynTree::AttitudeQuaternionEKF::ekf_f(const iDynTree::VectorDynSize& x_k, 
     auto x_hat_plus(toEigen(xhat_k_plus_one));
 
     q = x.block<4,1>(0, 0);
-    Omega = x.block<3,1>(4, 0);
+    Omega = x.block<3,1>(4, 0)*m_params_qekf.time_step_in_seconds;
     b = x.block<3,1>(7, 0);
 
-    iDynTree::UnitQuaternion correction = pureQuaternion(ang_vel);
-    auto dq(toEigen(composeQuaternion2(orientation, correction)));
+    iDynTree::UnitQuaternion correction = expQuaternion(ang_vel);
+    iDynTree::UnitQuaternion q_hat_plus = composeQuaternion2(orientation, correction);
 
-    x_hat_plus.block<4,1>(0, 0) = q + (dq*(m_params_qekf.time_step_in_seconds*0.5));
-    if (x_hat_plus.block<4,1>(0, 0).norm() == 0)
+    x_hat_plus.block<4,1>(0, 0) = toEigen(q_hat_plus);
+    double quat_norm = x_hat_plus.block<4,1>(0, 0).norm();
+
+    double malformed_unit_quaternion_norm{0.0};
+    if (check_are_almost_equal(quat_norm, malformed_unit_quaternion_norm, 4))
     {
         reportError("AttitudeQuaternionEKF", "ekf_f", "invalid quaternion");
         return false;
     }
-    if (q.norm() != 1)
+
+    double unit_quaternion_norm{1.0};
+    if (!check_are_almost_equal(quat_norm, unit_quaternion_norm, 4))
     {
-        q.normalize();
+        x_hat_plus.block<4,1>(0, 0).normalize();
     }
     x_hat_plus.block<3,1>(4, 0) = u - b;
     x_hat_plus.block<3,1>(7, 0) = b*(1 - (m_params_qekf.bias_correlation_time_factor*m_params_qekf.time_step_in_seconds));
@@ -512,7 +517,7 @@ bool iDynTree::AttitudeQuaternionEKF::ekf_h(const iDynTree::VectorDynSize& xhat_
     {
         double q0q3{q(0)*q(3)};
         double q1q2{q(1)*q(2)};
-        zhat_k_plus_one(3) = atan2(2*(q0q3+q1q2), 1 - 2*(q2squared + q3squared));
+        zhat_k_plus_one(3) = std::atan2(2*(q0q3+q1q2), 1 - 2*(q2squared + q3squared));
     }
 
     return true;
