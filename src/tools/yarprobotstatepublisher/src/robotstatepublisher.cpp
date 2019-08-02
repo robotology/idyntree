@@ -151,9 +151,9 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
     }
 
     // Set reduced model option
-    // The default value is false and considers streaming TFs of all the frames in the model
-    // If set to true, only the TFs of the links are streamed to transform server
-    this->reducedModelOption=rf.check("reduced-model",Value(0)).asBool();
+    // By default TFs of all the frames in the model are streamed
+    // If the option is present, only the TFs of the links are streamed to transform server
+    this->reducedModelOption=rf.check("reduced-model");
 
     // Setup the topic and configureisValid the onRead callback
     string jointStatesTopicName = rf.check("jointstates-topic",Value("/joint_states")).asString();

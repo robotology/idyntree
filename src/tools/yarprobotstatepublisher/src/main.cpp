@@ -38,8 +38,8 @@ int main(int argc, char *argv[])
         cout<<"\t--name-prefix            <name-prefix> : prefix of the yarprobotstatepublisher ports (default no prefix)"<<endl;
         cout<<"\t--tf-prefix              <tf-prefix>   : prefix of the published TFs (default no prefix)"<<endl;
         cout<<"\t--model                  <file-name>   : file name of the model to load at startup"<<endl;
-        cout<<"\t--reduced-model          <boolean-flag>: set true to stream only the link TFs\n"
-              "                                           \t The default value is false and TFs of all the frames in the model are streamed"<<endl;
+        cout<<"\t--reduced-model          <boolean-flag>: use the option to stream only the link TFs\n"
+              "                                           \t By default TFs of all the frames in the model are streamed"<<endl;
         cout<<"\t--base-frame             <frame-name>  : specify the base frame of the published tf tree"<<endl;
         cout<<"\t--jointstates-topic      <topic-name>  : source ROS topic that streams the joint state (default /joint_states)"<<endl;
         return EXIT_SUCCESS;
