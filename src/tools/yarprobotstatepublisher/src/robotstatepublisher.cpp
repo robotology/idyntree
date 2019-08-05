@@ -154,6 +154,11 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
         return false;
     }
 
+    // Set reduced model option
+    // By default TFs of all the frames in the model are streamed
+    // If the option is present, only the TFs of the links are streamed to transform server
+    this->reducedModelOption=rf.check("reduced-model");
+
     // Setup the topic and configureisValid the onRead callback
     string jointStatesTopicName = rf.check("jointstates-topic",Value("/joint_states")).asString();
     m_jointStateSubscriber.reset(new JointStateSubscriber());
@@ -263,6 +268,17 @@ void YARPRobotStatePublisherModule::onRead(yarp::rosmsg::sensor_msgs::JointState
 
     // Set the updated joint positions
     m_kinDynComp.setJointPos(m_jointPos);
+  
+    // Set the size of the tf frames to be published
+    size_t sizeOfTFFrames;
+    if (this->reducedModelOption)
+    {
+        sizeOfTFFrames = model.getNrOfLinks();
+    }
+    else
+    {
+        sizeOfTFFrames = model.getNrOfFrames();
+    }
 
     // Publish the frames on TF
     bool m_publishGlobalTF = false; // TODO
@@ -279,7 +295,7 @@ void YARPRobotStatePublisherModule::onRead(yarp::rosmsg::sensor_msgs::JointState
         iDynTree::Transform world_H_base;
         iDynTree::toiDynTree(world_H_base_yarp, world_H_base);
 
-        for (size_t frameIdx=0; frameIdx < model.getNrOfFrames(); frameIdx++) {
+        for (size_t frameIdx=0; frameIdx < sizeOfTFFrames; frameIdx++) {
             // skip self-tranform
             if (m_baseFrameIndex == frameIdx) {
                 continue;
@@ -298,7 +314,7 @@ void YARPRobotStatePublisherModule::onRead(yarp::rosmsg::sensor_msgs::JointState
         }
     }
     else {
-        for (size_t frameIdx=0; frameIdx < model.getNrOfFrames(); frameIdx++)
+        for (size_t frameIdx=0; frameIdx < sizeOfTFFrames; frameIdx++)
         {
             if(m_baseFrameIndex == frameIdx)    // skip self-tranform
                 continue;
