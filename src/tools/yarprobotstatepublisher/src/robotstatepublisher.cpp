@@ -251,16 +251,9 @@ void YARPRobotStatePublisherModule::onRead(yarp::rosmsg::sensor_msgs::JointState
     iDynTree::JointIndex jntIndex;
     for (size_t i=0; i < v.name.size(); i++)
     {
-        for (size_t j=0; j < model.getNrOfDOFs(); j++)
-        {
-            if (v.name[i] == model.getJointName(j))
-            {
-                jntIndex = model.getJointIndex(v.name[i]);
-                break;
-            }
-        }
+        jntIndex = model.getJointIndex(v.name[i]);
 
-        if (jntIndex == iDynTree::JOINT_INVALID_INDEX)
+        if (!(model.getJoint(jntIndex)->getNrOfDOFs()) || jntIndex == iDynTree::JOINT_INVALID_INDEX)
             continue;
 
         m_jointPos(model.getJoint(jntIndex)->getDOFsOffset()) = v.position[i];
@@ -268,7 +261,7 @@ void YARPRobotStatePublisherModule::onRead(yarp::rosmsg::sensor_msgs::JointState
 
     // Set the updated joint positions
     m_kinDynComp.setJointPos(m_jointPos);
-  
+
     // Set the size of the tf frames to be published
     size_t sizeOfTFFrames;
     if (this->reducedModelOption)
@@ -280,51 +273,16 @@ void YARPRobotStatePublisherModule::onRead(yarp::rosmsg::sensor_msgs::JointState
         sizeOfTFFrames = model.getNrOfFrames();
     }
 
-    // Publish the frames on TF
-    bool m_publishGlobalTF = false; // TODO
-    if (m_publishGlobalTF) {
-        // Read the last TF from the world (ground) to the base
-        yarp::sig::Matrix world_H_base_yarp;
-        if (!m_iframetrans->getTransform(m_tfPrefix + m_baseFrameName, "ground", world_H_base_yarp)) {
-            yError() << "Failed to retrieve the relative transform between ground and"
-                     << m_tfPrefix + m_baseFrameName;
-            return;
-        }
+    for (size_t frameIdx=0; frameIdx < sizeOfTFFrames; frameIdx++)
+    {
+        if(m_baseFrameIndex == frameIdx)    // skip self-tranform
+            continue;
 
-        // Convert the transform from Yarp to iDynTree
-        iDynTree::Transform world_H_base;
-        iDynTree::toiDynTree(world_H_base_yarp, world_H_base);
-
-        for (size_t frameIdx=0; frameIdx < sizeOfTFFrames; frameIdx++) {
-            // skip self-tranform
-            if (m_baseFrameIndex == frameIdx) {
-                continue;
-            }
-
-            // skip publishing the world to base transform
-            if (model.getFrameName(frameIdx) == m_baseFrameName) {
-                continue;
-            }
-
-            iDynTree::Transform base_H_frame = m_kinDynComp.getRelativeTransform(m_baseFrameIndex, frameIdx);
-            iDynTree::toYarp(world_H_base * base_H_frame.asHomogeneousTransform(), m_buf4x4);
-            m_iframetrans->setTransform(m_tfPrefix + model.getFrameName(frameIdx),
-                                        "ground",
-                                        m_buf4x4);
-        }
-    }
-    else {
-        for (size_t frameIdx=0; frameIdx < sizeOfTFFrames; frameIdx++)
-        {
-            if(m_baseFrameIndex == frameIdx)    // skip self-tranform
-                continue;
-
-            iDynTree::Transform base_H_frame = m_kinDynComp.getRelativeTransform(m_baseFrameIndex, frameIdx);
-            iDynTree::toYarp(base_H_frame.asHomogeneousTransform(), m_buf4x4);
-            m_iframetrans->setTransform(m_tfPrefix + model.getFrameName(frameIdx),
-                                        m_tfPrefix + model.getFrameName(m_baseFrameIndex),
-                                        m_buf4x4);
-        }
+        iDynTree::Transform base_H_frame = m_kinDynComp.getRelativeTransform(m_baseFrameIndex, frameIdx);
+        iDynTree::toYarp(base_H_frame.asHomogeneousTransform(), m_buf4x4);
+        m_iframetrans->setTransform(m_tfPrefix + model.getFrameName(frameIdx),
+                                    m_tfPrefix + model.getFrameName(m_baseFrameIndex),
+                                    m_buf4x4);
     }
 
     return;

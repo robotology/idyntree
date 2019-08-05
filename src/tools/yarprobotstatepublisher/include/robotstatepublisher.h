@@ -23,9 +23,7 @@
 #include <iDynTree/KinDynComputations.h>
 
 #include <yarp/rosmsg/sensor_msgs/JointState.h>
-
 #include <memory>
-
 
 class YARPRobotStatePublisherModule;
 
@@ -41,7 +39,6 @@ public:
     using yarp::os::Subscriber<yarp::rosmsg::sensor_msgs::JointState>::onRead;
     virtual void        onRead(yarp::rosmsg::sensor_msgs::JointState &v);
 };
-
 
 /****************************************************************/
 class YARPRobotStatePublisherModule : public yarp::os::RFModule
