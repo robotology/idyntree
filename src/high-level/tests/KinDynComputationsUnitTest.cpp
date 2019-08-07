@@ -14,6 +14,7 @@
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/Position.h>
 #include <iDynTree/Core/Twist.h>
+#include <iDynTree/Core/AngularMotionVector3.h>
 #include <iDynTree/Core/SpatialAcc.h>
 #include <iDynTree/Core/SpatialMomentum.h>
 #include <iDynTree/Core/VectorDynSize.h>
@@ -62,7 +63,6 @@ void setRandomState(iDynTree::KinDynComputations & dynComp)
     }
 
     gravity(2) = 0.0;
-
     for(int i=0; i < 6; i++)
     {
         baseVel(i) = real_random_double();
@@ -383,6 +383,138 @@ void testAbsoluteJacobiansAndFrameBiasAcc(KinDynComputations & dynComp)
     ASSERT_EQUAL_VECTOR(frameAcc, frameAccJac);
 }
 
+// Dummy test: for now it just prints the frameBiasAcc, to check there is no
+// usage of not initialized memory
+void testLinearAngularMomentumBiasAcc(KinDynComputations & dynComp)
+{
+    // Get robot state
+    Transform world_T_base, world_T_base_prev, world_T_base_next;
+    VectorDynSize s(dynComp.model().getNrOfDOFs()), s_prev(dynComp.model().getNrOfDOFs()), s_next(dynComp.model().getNrOfDOFs());
+    Twist base_velocity, base_velocity_prev, base_velocity_next;
+    VectorDynSize s_dot(dynComp.model().getNrOfDOFs()), s_dot_prev(dynComp.model().getNrOfDOFs()), s_dot_next(dynComp.model().getNrOfDOFs());
+    Vector3 world_gravity;
+
+    // get robot state
+    dynComp.getRobotState(world_T_base, s, base_velocity, s_dot, world_gravity);
+    iDynTree::VectorDynSize nu(dynComp.getNrOfDegreesOfFreedom() + 6);
+
+    SpatialMomentum linearAngular_momentum = dynComp.getLinearAngularMomentum();
+    Vector6 linearAngular_momentum_bias_acc = dynComp.getLinearAngularMomentumBiasAcc();
+
+    MomentumFreeFloatingJacobian momJac(dynComp.getRobotModel());
+    bool ok = dynComp.getLinearAngularMomentumJacobian(momJac);
+    ASSERT_IS_TRUE(ok);
+
+    // Compute frame acceleration, and bias acceleration
+    double numericalDerivStep = 1e-8;
+    Vector6 baseAcc;
+    baseAcc.zero();
+    baseAcc(0) = 1;
+    baseAcc(1) = 0;
+    baseAcc(2) = 0;
+    baseAcc(3) = 0;
+    baseAcc(4) = 0;
+    baseAcc(5) = 0;
+
+    VectorDynSize sddot(dynComp.model().getNrOfDOFs());
+    for(int i=0; i < sddot.size(); i++)
+    {
+        sddot(i) = 1;
+    }
+    iDynTree::VectorDynSize nuDot(dynComp.getNrOfDegreesOfFreedom() + 6);
+    toEigen(nuDot).head(6) = iDynTree::toEigen(baseAcc);
+    toEigen(nuDot).tail(dynComp.getNrOfDegreesOfFreedom()) = iDynTree::toEigen(sddot);
+
+
+    // update joint state
+    toEigen(s_next) = toEigen(s) + toEigen(s_dot) * numericalDerivStep;
+    toEigen(s_dot_next) = toEigen(s_dot) + toEigen(sddot) * numericalDerivStep;
+    toEigen(s_prev) = toEigen(s) - toEigen(s_dot) * numericalDerivStep;
+    toEigen(s_dot_prev) = toEigen(s_dot) - toEigen(sddot) * numericalDerivStep;
+
+    // update base pose
+    AngularMotionVector3 base_unit_rotation;
+
+    // the integration of the base velocity depends on the representation used
+    Position world_T_base_next_pos, world_T_base_prev_pos;
+    Rotation world_T_base_next_rotation, world_T_base_prev_rotation;
+    if(dynComp.getFrameVelocityRepresentation() == INERTIAL_FIXED_REPRESENTATION)
+    {
+        toEigen(world_T_base_next_pos) = ((skew(toEigen(base_velocity.getAngularVec3()))) * toEigen(world_T_base.getPosition()) + toEigen(base_velocity.getLinearVec3())) * numericalDerivStep + toEigen(world_T_base.getPosition());
+        world_T_base_next.setPosition(world_T_base_next_pos);
+
+        toEigen(base_unit_rotation) = toEigen(base_velocity.getAngularVec3()) * numericalDerivStep;
+        world_T_base_next_rotation = base_unit_rotation.exp() * world_T_base.getRotation();
+        world_T_base_next.setRotation(world_T_base_next_rotation);
+
+        toEigen(world_T_base_prev_pos) = -((skew(toEigen(base_velocity.getAngularVec3()))) * toEigen(world_T_base.getPosition()) + toEigen(base_velocity.getLinearVec3())) * numericalDerivStep + toEigen(world_T_base.getPosition());
+        world_T_base_prev.setPosition(world_T_base_prev_pos);
+
+        toEigen(base_unit_rotation) = - toEigen(base_velocity.getAngularVec3()) * numericalDerivStep;
+        world_T_base_prev_rotation = base_unit_rotation.exp() * world_T_base.getRotation();
+        world_T_base_prev.setRotation(world_T_base_prev_rotation);
+    }
+    else if (dynComp.getFrameVelocityRepresentation() == BODY_FIXED_REPRESENTATION)
+    {
+        toEigen(world_T_base_next_pos) = (toEigen(world_T_base.getRotation()) * toEigen(base_velocity.getLinearVec3())) * numericalDerivStep + toEigen(world_T_base.getPosition());
+        world_T_base_next.setPosition(world_T_base_next_pos);
+
+        toEigen(base_unit_rotation) = toEigen(base_velocity.getAngularVec3()) * numericalDerivStep;
+        world_T_base_next_rotation = world_T_base.getRotation() * base_unit_rotation.exp();
+        world_T_base_next.setRotation(world_T_base_next_rotation);
+
+        toEigen(world_T_base_prev_pos) = -(toEigen(world_T_base.getRotation()) * toEigen(base_velocity.getLinearVec3())) * numericalDerivStep + toEigen(world_T_base.getPosition());
+        world_T_base_prev.setPosition(world_T_base_prev_pos);
+
+        toEigen(base_unit_rotation) = - toEigen(base_velocity.getAngularVec3()) * numericalDerivStep;
+        world_T_base_prev_rotation = world_T_base.getRotation() * base_unit_rotation.exp();
+        world_T_base_prev.setRotation(world_T_base_prev_rotation);
+    }
+    else
+    {
+        ASSERT_IS_TRUE(dynComp.getFrameVelocityRepresentation() == MIXED_REPRESENTATION);
+
+        toEigen(world_T_base_next_pos) = toEigen(base_velocity.getLinearVec3()) * numericalDerivStep + toEigen(world_T_base.getPosition());
+        world_T_base_next.setPosition(world_T_base_next_pos);
+
+        toEigen(base_unit_rotation) = toEigen(base_velocity.getAngularVec3()) * numericalDerivStep;
+        world_T_base_next_rotation = base_unit_rotation.exp() * world_T_base.getRotation();
+        world_T_base_next.setRotation(world_T_base_next_rotation);
+
+        toEigen(world_T_base_prev_pos) = -toEigen(base_velocity.getLinearVec3()) * numericalDerivStep + toEigen(world_T_base.getPosition());
+        world_T_base_prev.setPosition(world_T_base_prev_pos);
+
+        toEigen(base_unit_rotation) = -toEigen(base_velocity.getAngularVec3()) * numericalDerivStep;
+        world_T_base_prev_rotation = base_unit_rotation.exp() * world_T_base.getRotation();
+        world_T_base_prev.setRotation(world_T_base_prev_rotation);
+    }
+
+    toEigen(base_velocity_next.getLinearVec3()) = toEigen(base_velocity.getLinearVec3()) + toEigen(baseAcc).head(3) * numericalDerivStep;
+    toEigen(base_velocity_next.getAngularVec3()) = toEigen(base_velocity.getAngularVec3()) + toEigen(baseAcc).tail(3) * numericalDerivStep;
+
+    toEigen(base_velocity_prev.getLinearVec3()) = toEigen(base_velocity.getLinearVec3()) - toEigen(baseAcc).head(3) * numericalDerivStep;
+    toEigen(base_velocity_prev.getAngularVec3()) = toEigen(base_velocity.getAngularVec3()) - toEigen(baseAcc).tail(3) * numericalDerivStep;
+
+    ok = dynComp.setRobotState(world_T_base_next, s_next, base_velocity_next, s_dot_next, world_gravity);
+    ASSERT_IS_TRUE(ok);
+    SpatialMomentum linearAngular_momentum_next = dynComp.getLinearAngularMomentum();
+
+    ok = dynComp.setRobotState(world_T_base_prev, s_prev, base_velocity_prev, s_dot_prev, world_gravity);
+    ASSERT_IS_TRUE(ok);
+    SpatialMomentum linearAngular_momentum_prev = dynComp.getLinearAngularMomentum();
+
+    Vector6 centroidal_momentum_rate_of_change_numerical;
+    toEigen(centroidal_momentum_rate_of_change_numerical) = (toEigen(linearAngular_momentum_next) - toEigen(linearAngular_momentum_prev)) / (2 * numericalDerivStep);
+
+    Vector6 centroidal_momentum_rate_of_change_evaluated;
+    toEigen(centroidal_momentum_rate_of_change_evaluated) = toEigen(linearAngular_momentum_bias_acc) + toEigen(momJac) * toEigen(nuDot);
+
+    ok = dynComp.setRobotState(world_T_base, s, base_velocity, s_dot, world_gravity);
+    ASSERT_IS_TRUE(ok);
+
+    ASSERT_EQUAL_VECTOR_TOL(centroidal_momentum_rate_of_change_numerical, centroidal_momentum_rate_of_change_evaluated, 1e-5);
+}
+
 void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresentation frameVelRepr)
 {
     iDynTree::KinDynComputations dynComp;
@@ -401,6 +533,7 @@ void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresen
         testInverseDynamics(dynComp);
         testRelativeJacobians(dynComp);
         testAbsoluteJacobiansAndFrameBiasAcc(dynComp);
+        testLinearAngularMomentumBiasAcc(dynComp);
     }
 
 }
@@ -435,7 +568,7 @@ void testRelativeJacobianSparsity(KinDynComputations & dynComp)
             refFrame = real_random_int(0, dynComp.getNrOfFrames());
         } while (refFrame == frame && frame >= 0);
     }
-    
+
     // get sparsity pattern
     MatrixDynSize jacobianPattern(6, dynComp.getNrOfDegreesOfFreedom());
     bool ok = dynComp.getRelativeJacobianSparsityPattern(refFrame, frame, jacobianPattern);

@@ -552,6 +552,11 @@ public:
      */
      Vector3 getCenterOfMassBiasAcc();
 
+     /**
+     * Return the linear and angular momentum bias acceleration.
+     */
+     Vector6 getLinearAngularMomentumBiasAcc();
+
     /**
      * Get the average velocity of the robot.
      * The quantity is expressed in (B[A]), (A) or (B) depending on the FrameVelocityConvention used.
@@ -786,4 +791,3 @@ public:
 }
 
 #endif
-
