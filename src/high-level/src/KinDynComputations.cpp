@@ -1576,22 +1576,21 @@ Vector6 KinDynComputations::getLinearAngularMomentumBiasAcc()
         assert(pimpl->m_frameVelRepr == MIXED_REPRESENTATION);
 
         Transform world_X_base_mixed(iDynTree::Rotation::Identity(), pimpl->m_pos.worldBasePos().getPosition());
-        Twist inertialTwistWrtBase_InertialFixed = -(pimpl->m_pos.worldBasePos() * pimpl->m_vel.baseVel());
-        // inertialTwistWrtBase_InertialFixed(3) = 0;
-        // inertialTwistWrtBase_InertialFixed(4) = 0;
-        // inertialTwistWrtBase_InertialFixed(5) = 0;
+        Twist inertialTwistWrtBase_InertialFixed = -(world_X_base_mixed.inverse()* pimpl->m_pos.worldBasePos() * pimpl->m_vel.baseVel());
+        inertialTwistWrtBase_InertialFixed(3) = 0;
+        inertialTwistWrtBase_InertialFixed(4) = 0;
+        inertialTwistWrtBase_InertialFixed(5) = 0;
 
-        Twist baseTwistWrtInertial_mixed = -( world_X_base_mixed.inverse() * inertialTwistWrtBase_InertialFixed );
+        //Twist baseTwistWrtInertial_mixed = -( world_X_base_mixed.inverse() * inertialTwistWrtBase_InertialFixed );
         Wrench linearAngularMomentumInertial = pimpl->m_totalMomentum;
 
-        MatrixDynSize linAngMomentumJacobian_mixedRepresentation;
-        getLinearAngularMomentumJacobian(linAngMomentumJacobian_mixedRepresentation);
-        int rows = linAngMomentumJacobian_mixedRepresentation.rows();
+        //MatrixDynSize linAngMomentumJacobian_mixedRepresentation;
+        //getLinearAngularMomentumJacobian(linAngMomentumJacobian_mixedRepresentation);
+        //int rows = linAngMomentumJacobian_mixedRepresentation.rows();
 
         fromEigen(totalMomentumBias,
                   toEigen(world_X_base_mixed.inverse() * totalMomentumBiasInInertialInertial)
-                  + toEigen(world_X_base_mixed.inverse().asAdjointTransformWrench()) * toEigen(inertialTwistWrtBase_InertialFixed.asCrossProductMatrixWrench()) * toEigen(linearAngularMomentumInertial)
-                  + toEigen(linAngMomentumJacobian_mixedRepresentation).block(0,0,rows,6) * toEigen(baseTwistWrtInertial_mixed.asCrossProductMatrix()) * toEigen(getBaseTwist()));
+                  + toEigen(world_X_base_mixed.inverse().asAdjointTransformWrench()) * toEigen(inertialTwistWrtBase_InertialFixed.asCrossProductMatrixWrench()) * toEigen(linearAngularMomentumInertial));
     }
 
     return totalMomentumBias.asVector();
