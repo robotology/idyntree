@@ -8,7 +8,7 @@
 
 cmake_minimum_required(VERSION 3.5)
 
-project(iDynTree CXX)
+project(iDynTree C CXX)
 
 # Disable in source build, unless Eclipse is used
 if( ("${PROJECT_SOURCE_DIR}" STREQUAL "${PROJECT_BINARY_DIR}") AND
