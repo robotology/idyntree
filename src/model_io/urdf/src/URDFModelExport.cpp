@@ -30,6 +30,15 @@ namespace iDynTree
 {
 
 /*
+ * This file uses extensivly the libxml2's tree API, see
+ * http://www.xmlsoft.org/examples/index.html#Tree for more info.
+ * Usage of the C-based libxml2 API in C++ means that is necessary to
+ * use the BAD_CAST macro for handling const-correctness.
+ * See https://stackoverflow.com/questions/45058878/why-libxml2-uses-bad-cast-everywhere-in-a-c-c-code
+ * and http://www.xmlsoft.org/html/libxml-xmlstring.html#BAD_CAST for details on this.
+ */
+
+/*
  * Add a <origin> URDF element to the specified parent element with the specified transform.
  *
  * If parent_element contains a pointer to a tag <parent_element></parent_element>, this function
@@ -132,6 +141,7 @@ bool exportLink(const Link &link, const std::string linkName, xmlNodePtr parent_
 
     return ok;
 }
+
 
 /**
  * Add a <joint> URDF element to the specified parent element with the specified joint info.
@@ -241,6 +251,68 @@ bool exportJoint(IJointConstPtr joint, LinkConstPtr parentLink, LinkConstPtr chi
     return ok;
 }
 
+/*
+ * Add a <link> and <joint> URDF elements to the specified parent element for the specified additional frame.
+ *
+ * URDF does not have the concept of frame (see https://discourse.ros.org/t/urdf-ng-link-and-frame-concepts/56),
+ * so for each additional frame we need to add a URDF "fake" mass-less link.
+ *
+ * If parent_element contains a pointer to a tag <parent_element></parent_element>, this function modifies it to be something like:
+ *
+ * <parent_element>
+ *   <link name="<frame_name>"/>
+ *   <joint name="<frame_name>_fixed_joint" type="fixed">
+ *      <origin xyz="0.1 0.2 0.3" rpy="0 0 3.1416"/>
+ *      <parent link="<link_name>"/>
+ *      <child link="<frame_name>"/>
+ *   </joint>
+ * <parent_element/>
+ *
+ * where the actual values of the added element and attributes depend on the input frame_name, link_H_frame, parent_link_name and direction_options arguments.
+ */
+enum exportAdditionalFrameDirectionOption {
+    FAKE_LINK_IS_CHILD,
+    FAKE_LINK_IS_PARENT
+};
+bool exportAdditionalFrame(const std::string frame_name, Transform link_H_frame, const std::string link_name, exportAdditionalFrameDirectionOption direction_option, xmlNodePtr parent_element)
+{
+    bool ok=true;
+
+    // Export fake link
+    xmlNodePtr link_xml = xmlNewChild(parent_element, NULL, BAD_CAST "link", NULL);
+    xmlNewProp(link_xml, BAD_CAST "name", BAD_CAST frame_name.c_str());
+
+    // Export fake joint
+    xmlNodePtr joint_xml = xmlNewChild(parent_element, NULL, BAD_CAST "joint", NULL);
+    std::string fake_joint_name = frame_name + "_fixed_joint";
+    xmlNewProp(joint_xml, BAD_CAST "name", BAD_CAST fake_joint_name.c_str());
+    xmlNewProp(joint_xml, BAD_CAST "type", BAD_CAST "fixed");
+
+    // origin
+    exportTransform(link_H_frame, joint_xml);
+
+    std::string parent_of_fake_joint, child_of_fake_joint;
+
+    if (direction_option == FAKE_LINK_IS_CHILD) {
+        parent_of_fake_joint = link_name;
+        child_of_fake_joint = frame_name;
+    } else {
+        // direction_option == FAKE_LINK_IS_PARENT
+        parent_of_fake_joint = frame_name;
+        child_of_fake_joint = link_name;
+    }
+
+    // parent
+    xmlNodePtr parent_xml = xmlNewChild(joint_xml, NULL, BAD_CAST "parent", NULL);
+    xmlNewProp(parent_xml, BAD_CAST "link", BAD_CAST parent_of_fake_joint.c_str());
+
+    // child
+    xmlNodePtr child_xml = xmlNewChild(joint_xml, NULL, BAD_CAST "child", NULL);
+    xmlNewProp(child_xml, BAD_CAST "link", BAD_CAST child_of_fake_joint.c_str());
+
+    return ok;
+}
+
 bool URDFStringFromModel(const iDynTree::Model & model,
                          std::string & urdf_string,
                          const ModelExporterOptions options)
@@ -272,6 +344,21 @@ bool URDFStringFromModel(const iDynTree::Model & model,
         return false;
     }
 
+    // If the base link has at least an additional frame, add it as parent URDF link
+    // as a workaround for https://github.com/ros/kdl_parser/issues/27
+    FrameIndex baseFakeLinkFrameIndex = FRAME_INVALID_INDEX;
+    std::vector<FrameIndex> frameIndices;
+    ok = model.getLinkAdditionalFrames(baseLinkIndex, frameIndices);
+    if (ok && frameIndices.size() >= 1) {
+        baseFakeLinkFrameIndex = frameIndices[0];
+        ok = ok && exportAdditionalFrame(model.getFrameName(baseFakeLinkFrameIndex),
+                                         model.getFrameTransform(baseFakeLinkFrameIndex),
+                                         model.getLinkName(model.getFrameLink(baseFakeLinkFrameIndex)),
+                                         FAKE_LINK_IS_PARENT,
+                                         robot);
+    }
+
+
     // Create a Traversal
     Traversal exportTraversal;
     if (!model.computeFullTreeTraversal(exportTraversal, baseLinkIndex))
@@ -300,7 +387,18 @@ bool URDFStringFromModel(const iDynTree::Model & model,
         ok = ok && exportLink(*visitedLink, visitedLinkName, robot);
     }
 
-    // TODO(traversaro) : export additional frames
+    // Export all the additional frames that are not parent of the base link
+    for (FrameIndex frameIndex=model.getNrOfLinks(); frameIndex < static_cast<FrameIndex>(model.getNrOfFrames()); frameIndex++)
+    {
+        if (frameIndex != baseFakeLinkFrameIndex) {
+            ok = ok && exportAdditionalFrame(model.getFrameName(frameIndex),
+                                             model.getFrameTransform(frameIndex),
+                                             model.getLinkName(model.getFrameLink(frameIndex)),
+                                             FAKE_LINK_IS_CHILD,
+                                             robot);
+        }
+    }
+
 
     xmlChar *xmlbuff=0;
     int buffersize=0;
