@@ -289,12 +289,24 @@ void checkSimpleModel()
 
         model.addJoint("fixedJoint",&fixJoint);
 
+        model.addAdditionalFrameToLink("link0", "frame0_0", iDynTree::Transform::Identity());
+        model.addAdditionalFrameToLink("link1", "frame1_0", iDynTree::Transform::Identity());
+        model.addAdditionalFrameToLink("link1", "frame1_1", iDynTree::Transform::Identity());
+
+
         ASSERT_EQUAL_DOUBLE(model.getNrOfLinks(),2);
         ASSERT_EQUAL_DOUBLE(model.getNrOfJoints(),1);
         ASSERT_EQUAL_DOUBLE(model.getNrOfNeighbors(0),1);
         ASSERT_EQUAL_DOUBLE(model.getNrOfNeighbors(1),1);
         ASSERT_EQUAL_DOUBLE(model.getNeighbor(0,0).neighborLink,1);
         ASSERT_EQUAL_DOUBLE(model.getNeighbor(1,0).neighborLink,0);
+        std::vector<FrameIndex> link0_frames;
+        model.getLinkAdditionalFrames(0, link0_frames);
+        ASSERT_EQUAL_DOUBLE(link0_frames.size(), 1);
+        std::vector<FrameIndex> link1_frames;
+        model.getLinkAdditionalFrames(1, link1_frames);
+        ASSERT_EQUAL_DOUBLE(link1_frames.size(), 2);
+        ASSERT_IS_TRUE(link1_frames[0] < link1_frames[1]);
 
         createCopyAndDestroy(model);
         checkComputeTraversal(model);
