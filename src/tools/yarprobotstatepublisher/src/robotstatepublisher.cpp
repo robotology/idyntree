@@ -128,6 +128,9 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
     // Resize the joint pos buffer
     m_jointPos.resize(m_kinDynComp.model().getNrOfPosCoords());
 
+    // Initilize the joint pos buffer to Zero
+    m_jointPos.zero();
+
     // Get the base frame information
     if (rf.check("base-frame"))
     {
