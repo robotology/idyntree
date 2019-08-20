@@ -128,6 +128,9 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
     // Resize the joint pos buffer
     m_jointPos.resize(m_kinDynComp.model().getNrOfPosCoords());
 
+    // Initilize the joint pos buffer to Zero
+    m_jointPos.zero();
+
     // Get the base frame information
     if (rf.check("base-frame"))
     {
@@ -214,14 +217,6 @@ void YARPRobotStatePublisherModule::onRead(yarp::rosmsg::sensor_msgs::JointState
     // If configure was successful, parse the data
     if (m_baseFrameIndex == iDynTree::FRAME_INVALID_INDEX)
     {
-        return;
-    }
-
-    // Check if joint states contain at least as many joints of the model
-    if (v.name.size() < m_jointPos.size())
-    {
-        yError() << "Size mismatch. Model has " << m_jointPos.size()
-                 << " joints, while the received JointState message has " << v.name.size() << " joints.";
         return;
     }
 
