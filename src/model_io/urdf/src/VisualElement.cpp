@@ -21,9 +21,8 @@
 
 namespace iDynTree {
 
-    // !!!: this might be also collision. Should we specify the name or an enum ?
-    VisualElement::VisualElement()
-    : iDynTree::XMLElement("visual"){}
+    VisualElement::VisualElement(const std::string& name)
+    : iDynTree::XMLElement(name){}
 
     const VisualElement::VisualInfo& VisualElement::visualInfo() const
     {
