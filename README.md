@@ -81,7 +81,7 @@ you need to add `${VCPKG_ROOT}/installed/x64-windows` and `${VCPKG_ROOT}/install
 ##### macOS
 You can install most of the required and optional dependencies of iDynTree using [homebrew](https://brew.sh/) with the following command:
 ~~~
-brew install eigen qt5 dartsim/dart/ipopt
+brew install eigen qt5 ipopt
 ~~~
 
 
