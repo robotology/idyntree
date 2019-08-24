@@ -128,6 +128,9 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
     // Resize the joint pos buffer
     m_jointPos.resize(m_kinDynComp.model().getNrOfPosCoords());
 
+    // Initilize the joint pos buffer to Zero
+    m_jointPos.zero();
+
     // Get the base frame information
     if (rf.check("base-frame"))
     {
@@ -149,6 +152,11 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
         close();
         return false;
     }
+
+    // Set reduced model option
+    // By default TFs of all the frames in the model are streamed
+    // If the option is present, only the TFs of the links are streamed to transform server
+    this->reducedModelOption=rf.check("reduced-model");
 
     // Setup the topic and configureisValid the onRead callback
     string jointStatesTopicName = rf.check("jointstates-topic",Value("/joint_states")).asString();
@@ -212,14 +220,6 @@ void YARPRobotStatePublisherModule::onRead(yarp::rosmsg::sensor_msgs::JointState
         return;
     }
 
-    // Check if joint states contain at least as many joints of the model
-    if (v.name.size() < m_jointPos.size())
-    {
-        yError() << "Size mismatch. Model has " << m_jointPos.size()
-                 << " joints, while the received JointState message has " << v.name.size() << " joints.";
-        return;
-    }
-
     // TODO: this part can be drastically speed up.
     //      Possible improvements:
     //        * Add a map string --> indeces
@@ -239,7 +239,18 @@ void YARPRobotStatePublisherModule::onRead(yarp::rosmsg::sensor_msgs::JointState
     // Set the updated joint positions
     m_kinDynComp.setJointPos(m_jointPos);
 
-    for (size_t frameIdx=0; frameIdx < model.getNrOfFrames(); frameIdx++)
+    // Set the size of the tf frames to be published
+    size_t sizeOfTFFrames;
+    if (this->reducedModelOption)
+    {
+        sizeOfTFFrames = model.getNrOfLinks();
+    }
+    else
+    {
+        sizeOfTFFrames = model.getNrOfFrames();
+    }
+
+    for (size_t frameIdx=0; frameIdx < sizeOfTFFrames; frameIdx++)
     {
         if(m_baseFrameIndex == frameIdx)    // skip self-tranform
             continue;

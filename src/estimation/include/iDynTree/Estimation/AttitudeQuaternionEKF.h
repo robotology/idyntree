@@ -76,7 +76,7 @@ namespace iDynTree
      * @note: we will drop the subscripts and superscripts in the rest of the documentation for convenience
      *
      * Discretized dynamics during the prediction step,
-     * \f[ \hat{{x}}_{k+1} = \begin{bmatrix} q_k + \Delta t. \frac{1}{2}q_k  \circ \begin{bmatrix} 0 \\ \omega^b_{k+1} \end{bmatrix} \\ y_{gyro_{k}} - b_{k} \\ (1 - \lambda_{b} \Delta t)b_k \end{bmatrix} \f]
+     * \f[ \hat{{x}}_{k+1} = \begin{bmatrix} q_{k} \otimes \text{exp}(\omega \Delta T) \\ y_{gyro_{k}} - b_{k} \\ (1 - \lambda_{b} \Delta t)b_k \end{bmatrix} \f]
      *
      * Measurement model for accelerometer is given as,
      * \f[ h_{acc}(\hat{x}_{k+1}) = \begin{bmatrix} 2(q_1q_3 - q_0q_2) \\ 2(q_2q_3 - q_0q_1) \\ q_0^2 - q_1^2 - q_2^2 + q_3^2 \end{bmatrix} \f]
@@ -230,7 +230,7 @@ namespace iDynTree
          * discrete system propagation \f$ f(X, u) = f(X, y_gyro) \f$
          * where \f$ X = \begin{bmatrix} q_0 &  q_1 & q_2 & q_3 & \omega_x & \omega_y & \omega_z & \b_x & \b_y & \b_z \end{bmatrix}^T \f$
          * \f$ u = \begin{bmatrix} y_{gyro}_x & y_{gyro}_y & y_{gyro}_z \end{bmatrix}^T \f$
-         * \f$ f(X, u) = \begin{bmatrix} q + \Delta t. \frac{1}{2}q \circ \begin{bmatrix} 0 \\ \omega^b \end{bmatrix} \\ y_{gyro} - b \\ (1 - \lambda_{b} \Delta t)b \end{bmatrix}\f$
+         * \f$ f(X, u) = \begin{bmatrix} q_{k} \otimes \text{exp}(\omega \Delta T) \\ y_{gyro} - b \\ (1 - \lambda_{b} \Delta t)b \end{bmatrix}\f$
          */
         bool ekf_f(const iDynTree::VectorDynSize& x_k,
                const iDynTree::VectorDynSize& u_k,

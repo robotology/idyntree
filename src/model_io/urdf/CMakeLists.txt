@@ -14,6 +14,7 @@ endif()
 
 set(IDYNTREE_MODELIO_URDF_HEADERS include/iDynTree/ModelIO/URDFDofsImport.h
                                   include/iDynTree/ModelIO/ModelLoader.h
+                                  include/iDynTree/ModelIO/ModelExporter.h
                                   include/deprecated/iDynTree/ModelIO/URDFModelImport.h
                                   include/deprecated/iDynTree/ModelIO/URDFGenericSensorsImport.h
                                   include/deprecated/iDynTree/ModelIO/URDFSolidShapesImport.h)
@@ -29,7 +30,8 @@ set(IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS include/private/URDFDocument.h
                                           include/private/MaterialElement.h
                                           include/private/VisualElement.h
                                           include/private/GeometryElement.h
-                                          include/private/URDFParsingUtils.h)
+                                          include/private/URDFParsingUtils.h
+                                          include/private/URDFModelExport.h)
 
 set(IDYNTREE_MODELIO_URDF_XMLELEMENTS_SOURCES src/URDFDocument.cpp
                                               src/InertialElement.cpp
@@ -41,14 +43,15 @@ set(IDYNTREE_MODELIO_URDF_XMLELEMENTS_SOURCES src/URDFDocument.cpp
                                               src/ForceTorqueSensorElement.cpp
                                               src/MaterialElement.cpp
                                               src/VisualElement.cpp
-                                              src/GeometryElement.cpp
-                                              )
+                                              src/GeometryElement.cpp)
 
 set(IDYNTREE_MODELIO_URDF_SOURCES src/URDFDofsImport.cpp
                                   src/ModelLoader.cpp
+                                  src/ModelExporter.cpp
                                   src/deprecated/URDFModelImport.cpp
                                   src/deprecated/URDFGenericSensorsImport.cpp
-                                  src/deprecated/URDFSolidShapesImport.cpp)
+                                  src/deprecated/URDFSolidShapesImport.cpp
+                                  src/URDFModelExport.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_MODELIO_URDF_SOURCES})
 SOURCE_GROUP("Source Files\\XML Elements" FILES ${IDYNTREE_MODELIO_URDF_XMLELEMENTS_SOURCES})
@@ -60,7 +63,7 @@ list(APPEND IDYNTREE_MODELIO_URDF_SOURCES ${IDYNTREE_MODELIO_URDF_XMLELEMENTS_SO
 # share headers with all iDynTree targets
 set(libraryname idyntree-modelio-urdf)
 
-add_library(${libraryname} ${IDYNTREE_MODELIO_URDF_SOURCES} ${IDYNTREE_MODELIO_URDF_HEADERS} ${IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS})
+add_library(${libraryname} ${IDYNTREE_MODELIO_URDF_SOURCES} ${IDYNTREE_MODELIO_URDF_HEADERS} ${IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS} $<TARGET_OBJECTS:idyntree-private-fpconv>)
 
 target_compile_features(${libraryname} PRIVATE cxx_auto_type cxx_delegating_constructors cxx_final cxx_lambdas cxx_lambda_init_captures)
 
@@ -72,11 +75,14 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
                                                   ${LIBXML2_INCLUDE_DIR})
 
 target_link_libraries(${libraryname} LINK_PUBLIC idyntree-core idyntree-model idyntree-sensors idyntree-modelio-xml
-                                     LINK_PRIVATE ${TinyXML_LIBRARIES})
+                                     LINK_PRIVATE ${LIBXML2_LIBRARIES})
 
 target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS} ${LIBXML2_DEFINITIONS})
 
 target_include_directories(${libraryname} PRIVATE ${EIGEN3_INCLUDE_DIR})
+# See https://stackoverflow.com/questions/38832528/transitive-target-include-directories-on-object-libraries
+# Can be removed with CMake 3.12
+target_include_directories(${libraryname} PRIVATE $<TARGET_PROPERTY:idyntree-private-fpconv,INTERFACE_INCLUDE_DIRECTORIES>)
 
 # Ensure that build include directories are always included before system ones
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
