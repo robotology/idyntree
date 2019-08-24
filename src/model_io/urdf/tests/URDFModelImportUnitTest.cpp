@@ -34,11 +34,31 @@ void checkParsingOfDofsFromURDF(std::string fileName,
     ASSERT_EQUAL_DOUBLE(dofsNameList.size(),expectedNrOfDOFs);
 }
 
+unsigned int getNrOfVisuals(const iDynTree::Model& model)
+{
+    unsigned int nrOfVisuals = 0;
+    for (LinkIndex index = 0; index < model.getNrOfLinks(); ++index) {
+        nrOfVisuals += model.visualSolidShapes().linkSolidShapes[index].size();
+    }
+    return nrOfVisuals;
+}
+
+unsigned int getNrOfCollisions(const iDynTree::Model& model)
+{
+    unsigned int nrOfCollisions = 0;
+    for (LinkIndex index = 0; index < model.getNrOfLinks(); ++index) {
+        nrOfCollisions += model.collisionSolidShapes().linkSolidShapes[index].size();
+    }
+    return nrOfCollisions;
+}
+
 void checkURDF(std::string fileName,
                   unsigned int expectedNrOfLinks,
                   unsigned int expectedNrOfJoints,
                   unsigned int expectedNrOfDOFs,
                   unsigned int expectedNrOfFrames,
+                  unsigned int expectedNrOfVisuals,
+                  unsigned int expectedNrOfCollisions,
                   std::string expectedDefaultBase)
 {
     ModelLoader loader;
@@ -53,6 +73,8 @@ void checkURDF(std::string fileName,
     ASSERT_EQUAL_DOUBLE(model.getNrOfJoints(),expectedNrOfJoints);
     ASSERT_EQUAL_DOUBLE(model.getNrOfDOFs(),expectedNrOfDOFs);
     ASSERT_EQUAL_DOUBLE(model.getNrOfFrames(),expectedNrOfFrames);
+    ASSERT_EQUAL_DOUBLE(getNrOfVisuals(model), expectedNrOfVisuals);
+    ASSERT_EQUAL_DOUBLE(getNrOfCollisions(model), expectedNrOfCollisions);
     ASSERT_EQUAL_STRING(model.getLinkName(model.getDefaultBaseLink()),expectedDefaultBase);
 
     checkParsingOfDofsFromURDF(fileName,expectedNrOfDOFs);
@@ -67,6 +89,8 @@ void checkURDF(std::string fileName,
     ASSERT_EQUAL_DOUBLE(modelCopyConstruced.getNrOfJoints(),expectedNrOfJoints);
     ASSERT_EQUAL_DOUBLE(modelCopyConstruced.getNrOfDOFs(),expectedNrOfDOFs);
     ASSERT_EQUAL_DOUBLE(modelCopyConstruced.getNrOfFrames(),expectedNrOfFrames);
+    ASSERT_EQUAL_DOUBLE(getNrOfVisuals(modelCopyConstruced), expectedNrOfVisuals);
+    ASSERT_EQUAL_DOUBLE(getNrOfCollisions(modelCopyConstruced), expectedNrOfCollisions);
     ASSERT_EQUAL_STRING(modelCopyConstruced.getLinkName(modelCopyConstruced.getDefaultBaseLink()),expectedDefaultBase);
 
     // Check that the copy assignent works fine
@@ -82,6 +106,8 @@ void checkURDF(std::string fileName,
     ASSERT_EQUAL_DOUBLE(modelCopyAssigned.getNrOfJoints(),expectedNrOfJoints);
     ASSERT_EQUAL_DOUBLE(modelCopyAssigned.getNrOfDOFs(),expectedNrOfDOFs);
     ASSERT_EQUAL_DOUBLE(modelCopyAssigned.getNrOfFrames(),expectedNrOfFrames);
+    ASSERT_EQUAL_DOUBLE(getNrOfVisuals(modelCopyAssigned), expectedNrOfVisuals);
+    ASSERT_EQUAL_DOUBLE(getNrOfCollisions(modelCopyAssigned), expectedNrOfCollisions);
     ASSERT_EQUAL_STRING(modelCopyAssigned.getLinkName(modelCopyAssigned.getDefaultBaseLink()),expectedDefaultBase);
 }
 
@@ -198,12 +224,12 @@ void checkLoadReducedModelOrderIsKept(std::string urdfFileName)
 
 int main()
 {
-    checkURDF(getAbsModelPath("/simple_model.urdf"),1,0,0,1,"link1");
-    checkURDF(getAbsModelPath("/oneLink.urdf"),1,0,0,7,"link1");
-    checkURDF(getAbsModelPath("twoLinks.urdf"),2,1,1,6,"link1");
-    checkURDF(getAbsModelPath("icub_skin_frames.urdf"),39,38,32,62,"root_link");
-    checkURDF(getAbsModelPath("iCubGenova02.urdf"),33,32,26,111,"root_link");
-    checkURDF(getAbsModelPath("icalibrate.urdf"), 6, 5, 3, 7,"base");
+    checkURDF(getAbsModelPath("/simple_model.urdf"),1,0,0,1, 1, 0, "link1");
+    checkURDF(getAbsModelPath("/oneLink.urdf"),1,0,0,7,0,0,"link1");
+    checkURDF(getAbsModelPath("twoLinks.urdf"),2,1,1,6,0,0,"link1");
+    checkURDF(getAbsModelPath("icub_skin_frames.urdf"),39,38,32,62, 28, 28,"root_link");
+    checkURDF(getAbsModelPath("iCubGenova02.urdf"),33,32,26,111, 33, 33, "root_link");
+    checkURDF(getAbsModelPath("icalibrate.urdf"), 6, 5, 3, 7, 6, 6,"base");
 
     checkModelLoderForURDFFile(getAbsModelPath("/oneLink.urdf"));
     checkModelLoaderFromURDFString("this is not an xml", false);
