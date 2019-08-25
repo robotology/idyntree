@@ -446,6 +446,38 @@ namespace iDynTree
          */
         static Rotation RotationFromQuaternion(const iDynTree::Vector4& quaternion);
 
+        /**
+         * Get the left Jacobian of rotation matrix
+         *
+         * \f$ \omega \in \mathbb{R}^3 \f$ is the angular motion vector
+         * \f$ [\omega_\times]: \mathbb{R}^n \to \mathfrak{so}(3) \f$ where \f$ \mathfrak{so}(3) \f$
+         *  is the set of skew symmetric matrices or the Lie algebra of \f$ SO(3) \f$
+         * \f[ J_{l_{SO(3)}} = \sum_{n = 0}^{\infty} \frac{1}{(n+1)!} [\omega_\times]^n  = (I_3 + \frac{1 - \text{cos}(||\omega||)}{||\omega||^{2}} [\omega _{\times}] + \frac{||\omega|| - \text{sin}(||\omega||)}{||\omega||^{3}} [\omega _{\times}]^{2} \f]
+         *
+         * When simplified further,
+         * \f[ J_{l_{SO(3)}} = \frac{\text{sin}(||\omega||)}{||\omega||}I_3 + \frac{1 - \text{cos}(||\omega||)}{||\omega||} [\phi _{\times}] + \bigg(1 - \frac{\text{sin}(||\omega||)}{||\omega||}\bigg) \phi\phi^T \f]
+         *
+         * where \f$ \phi = \frac{\omega}{||\omega||} \f$
+         *
+         * @param[in] omega angular motion vector
+         * @return \f$ 3 \times 3 \f$ left Jacobian matrix
+         */
+        static Matrix3x3 leftJacobian(const iDynTree::AngularMotionVector3& omega);
+
+        /**
+         * Get the left Jacobian inverse of rotation matrix
+         *
+         * \f$ \omega \in \mathbb{R}^3 \f$ is the angular motion vector
+         * \f$ [\omega_\times]: \mathbb{R}^n \to \mathfrak{so}(3) \f$ where \f$ \mathfrak{so}(3) \f$
+         *  is the set of skew symmetric matrices or the Lie algebra of \f$ SO(3) \f$
+         * \f[ J^{-1} _{l _{SO(3)}} = \frac{||\omega||}{2} \text{cot} \bigg(\frac{||\omega||}{2}\bigg) I _3 + \bigg( 1 - \frac{||\omega||}{2} \text{cot} \bigg(\frac{||\omega||}{2}\bigg) \bigg) \phi \phi^T - \frac{||\omega||}{2} [\phi _{\times}] \f]
+         *
+         * where \f$ \phi = \frac{\omega}{||\omega||} \f$
+         *
+         * @param[in] omega angular motion vector
+         * @return \f$ 3 \times 3 \f$ left Jacobian inverse matrix
+         */
+        static Matrix3x3 leftJacobianInverse(const iDynTree::AngularMotionVector3& omega);
         ///@}
 
         /** @name Output helpers.

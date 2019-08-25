@@ -631,7 +631,71 @@ namespace iDynTree
         _rotation.fromQuaternion(_quaternion);
         return _rotation;
     }
-    
+
+    Matrix3x3 Rotation::leftJacobian(const AngularMotionVector3& omega)
+    {
+        iDynTree::Matrix3x3 J;
+        auto I3 = Eigen::MatrixXd::Identity(3, 3);
+        using iDynTree::toEigen;
+        double norm = toEigen(omega).norm();
+
+        if (iDynTree::checkDoublesAreEqual(norm, 0.0))
+        {
+            toEigen(J) = I3;
+            return J;
+        }
+
+        double c{std::cos(norm)};
+        double s{std::sin(norm)};
+
+        double alpha1{(s/norm)};
+        double alpha2{(1 - c)/norm};
+        double alpha3{(1 - (s/norm))};
+
+        Vector3 phi;
+        toEigen(phi) = toEigen(omega);
+        toEigen(phi).normalize();
+
+        Matrix3x3 phi_cross;
+        toEigen(phi_cross) = skew(toEigen(phi));
+
+        toEigen(J) = alpha1*I3 + alpha2*toEigen(phi_cross) + alpha3*toEigen(phi)*toEigen(phi).transpose();
+        return J;
+    }
+
+    Matrix3x3 Rotation::leftJacobianInverse(const AngularMotionVector3& omega)
+    {
+        iDynTree::Matrix3x3 Jinv;
+        auto I3 = Eigen::MatrixXd::Identity(3, 3);
+        using iDynTree::toEigen;
+        double norm = toEigen(omega).norm();
+
+        if (iDynTree::checkDoublesAreEqual(norm, 0.0))
+        {
+            toEigen(Jinv) = I3;
+            return Jinv;
+        }
+
+        double normovertwo{norm/2.0};
+        double c{std::cos(normovertwo)};
+        double s{std::sin(normovertwo)};
+        double cot{c/s};
+
+        double alpha1{(normovertwo*cot)};
+        double alpha2{(-normovertwo)};
+        double alpha3{(1 - alpha1)};
+
+        Vector3 phi;
+        toEigen(phi) = toEigen(omega);
+        toEigen(phi).normalize();
+
+        Matrix3x3 phi_cross;
+        toEigen(phi_cross) = skew(toEigen(phi));
+
+        toEigen(Jinv) = alpha1*I3  + alpha2*toEigen(phi_cross) + alpha3*toEigen(phi)*toEigen(phi).transpose();
+        return Jinv;
+    }
+
     std::string Rotation::toString() const
     {
         std::stringstream ss;

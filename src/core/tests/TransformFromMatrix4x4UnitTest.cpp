@@ -12,6 +12,7 @@
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/Position.h>
 #include <iDynTree/Core/Rotation.h>
+#include <iDynTree/Core/SpatialMotionVector.h>
 #include <iDynTree/Core/MatrixFixSize.h>
 #include <iostream>
 #include <string>
@@ -36,8 +37,26 @@ void checkFromMatrix4x4()
     ASSERT_EQUAL_TRANSFORM(t_posrot, t_buffer);
 }
 
+void checkLogExp()
+{
+    PositionRaw pos_raw(0, 0, 0);
+    Rotation rot = Rotation::RPY(0.0, 1.57, 0.0);
+    Position pos = Position(pos_raw);
+    Transform t_posrot(rot, pos);
+
+    SpatialMotionVector v;
+    v.zero();
+    v.setAngularVec3(rot.log());
+
+    Transform t_v = v.exp();
+
+    ASSERT_EQUAL_TRANSFORM_TOL(t_posrot, t_v, 0.01);
+}
+
+
 int main()
 {
     checkFromMatrix4x4();
+    checkLogExp();
     return EXIT_SUCCESS;
 }
