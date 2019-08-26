@@ -481,6 +481,7 @@ namespace iDynTree {
                 }
 
                 shape->name = visual.m_name;
+                shape->nameIsValid = visual.m_nameAttributeFound;
                 shape->link_H_geometry = link_H_geometry;
 
                 LinkIndex idyntreeLinkIndex = model.getLinkIndex(linkName);

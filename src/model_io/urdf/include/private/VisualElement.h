@@ -36,6 +36,7 @@ class iDynTree::VisualElement: public iDynTree::XMLElement
 public:
     struct VisualInfo {
         std::string m_name;
+        bool m_nameAttributeFound;
         iDynTree::Transform m_origin{iDynTree::Transform::Identity()};
         std::shared_ptr<SolidShape> m_solidShape;
         std::shared_ptr<MaterialElement::MaterialInfo> m_material;
