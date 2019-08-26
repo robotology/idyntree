@@ -531,8 +531,12 @@ std::string Transform::reservedToString() const
         // Understand if there is a meaningful
         // semantics for this operation and if it exists use it
 
-        // the linear part is not changed by the log
-        memcpy(logRes.getLinearVec3().data(),this->getPosition().data(),3*sizeof(double));
+        // the linear part is affected by the left Jacobian inverse of SO(3)
+        auto omega = this->getRotation().log();
+        auto JinvSO3 = Rotation::leftJacobianInverse(omega);
+        Vector3 rho;
+        toEigen(rho) = toEigen(JinvSO3)*toEigen(this->getPosition());
+        memcpy(logRes.getLinearVec3().data(),rho.data(),3*sizeof(double));
 
         // the angular part instead mapped by SO(3) -> so(3) log
         logRes.setAngularVec3(this->getRotation().log());
