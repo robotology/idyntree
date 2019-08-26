@@ -30,6 +30,10 @@ namespace iDynTree
         virtual ~SolidShape()=0;
         virtual SolidShape* clone()=0;
         std::string name;
+        /**
+         * True if the name is valid, false otherwise.
+         */
+        bool nameIsValid{false};
         Transform link_H_geometry;
 
         /**
