@@ -106,10 +106,122 @@ bool exportInertial(const SpatialInertia &inertia, xmlNodePtr parent_element)
     return ok;
 }
 
+
+
+/*
+ * Add a <visual> or <collision> URDF element to the specified parent element for the specified solid shapes.
+ *
+ * URDF support <box>, <cylinder>, <sphere> and <mesh> elements as shapes.
+ *
+ * If parent_element contains a pointer to a tag <parent_element></parent_element>, this function modifies it to be something like:
+ * <parent_element>
+ *   <visual>
+ *     <origin xyz="0 0 0" rpy="0 0 0" />
+ *     <geometry>
+ *       <box size="1 1 1" />
+ *     </geometry>
+ *     <material name="Cyan">
+ *       <color rgba="0 1.0 1.0 1.0"/>
+ *     </material>
+ *   </visual>
+ * <parent_element/>
+ * where the actual values of the added element and attributes depend on the input solidShape.
+ */
+enum exportSolidShapePropertyType {
+    VISUAL,
+    COLLISION
+};
+bool exportSolidShape(const SolidShape* solidShape, exportSolidShapePropertyType type, xmlNodePtr parent_element)
+{
+    bool ok=true;
+    std::string element_name;
+    if (type == VISUAL) {
+        element_name = "visual";
+    } else {
+        // assert(type == COLLISION)
+        element_name = "collision";
+    }
+
+    xmlNodePtr root_shape_xml = xmlNewChild(parent_element, NULL, BAD_CAST element_name.c_str(), NULL);
+    // Omit the name (that is an optional attribute) if the shape has no name
+    if (solidShape->nameIsValid) {
+        std::string shapeName = solidShape->name;
+        xmlNewProp(root_shape_xml, BAD_CAST "name", BAD_CAST shapeName.c_str());
+    }
+
+    // Export transform
+    ok = ok && exportTransform(solidShape->link_H_geometry, root_shape_xml);
+
+    // Export geometry
+    xmlNodePtr geometry_xml = xmlNewChild(root_shape_xml, NULL, BAD_CAST "geometry", NULL);
+
+    if (solidShape->isBox()) {
+        const Box* box = solidShape->asBox();
+
+        // Export box element
+        xmlNodePtr box_xml = xmlNewChild(geometry_xml, NULL, BAD_CAST "box", NULL);
+
+        // Export size attribute
+        double size_data[3] = {box->x, box->y, box->z};
+        std::string size_str;
+        ok = ok && vectorToString(Vector3(size_data, 3) , size_str);
+        xmlNewProp(box_xml, BAD_CAST "size", BAD_CAST size_str.c_str());
+
+    } else if (solidShape->isCylinder()) {
+        const Cylinder* cylinder = solidShape->asCylinder();
+
+        // Export cylinder element
+        xmlNodePtr cylinder_xml = xmlNewChild(geometry_xml, NULL, BAD_CAST "cylinder", NULL);
+
+        // Export radius attribute
+        std::string radius_str;
+        ok = ok && doubleToStringWithClassicLocale(cylinder->radius, radius_str);
+        xmlNewProp(cylinder_xml, BAD_CAST "radius", BAD_CAST radius_str.c_str());
+
+        // Export length attribute
+        std::string length_str;
+        ok = ok && doubleToStringWithClassicLocale(cylinder->length, length_str);
+        xmlNewProp(cylinder_xml, BAD_CAST "length", BAD_CAST length_str.c_str());
+
+    } else if (solidShape->isSphere()) {
+        const Sphere* sphere = solidShape->asSphere();
+
+        // Export sphere  element
+        xmlNodePtr sphere_xml = xmlNewChild(geometry_xml, NULL, BAD_CAST "sphere", NULL);
+
+        // Export radius attribute
+        std::string radius_str;
+        ok = ok && doubleToStringWithClassicLocale(sphere->radius, radius_str);
+        xmlNewProp(sphere_xml, BAD_CAST "radius", BAD_CAST radius_str.c_str());
+
+    } else if (solidShape->isExternalMesh()) {
+        const ExternalMesh* mesh = solidShape->asExternalMesh();
+
+        // Export mesh element
+        xmlNodePtr mesh_xml = xmlNewChild(geometry_xml, NULL, BAD_CAST "mesh", NULL);
+
+        // Export filename attribute
+        xmlNewProp(mesh_xml, BAD_CAST "filename", BAD_CAST mesh->filename.c_str());
+
+        // Export scale attribute
+        std::string scale_str;
+        ok = ok && vectorToString(mesh->scale, scale_str);
+        xmlNewProp(mesh_xml, BAD_CAST "scale", BAD_CAST scale_str.c_str());
+
+    } else {
+        std::cerr << "[ERROR] URDFModelExport: Impossible to convert geometry of type "
+                  <<  typeid(solidShape).name() << " to a URDF geometry." << std::endl;
+        return false;
+    }
+
+    return ok;
+
+    return ok;
+}
+
 /*
  * Add a <link> URDF element to the specified parent element with the specified link info.
  *
- * Currently this function does not export visual and collision elements.
  *
  * If parent_element contains a pointer to a tag <parent_element></parent_element>, this function modifies it to be something like:
  *
@@ -124,7 +236,7 @@ bool exportInertial(const SpatialInertia &inertia, xmlNodePtr parent_element)
  *
  * where the actual values of the added element and attributes depend on the input link and linkName arguments.
  */
-bool exportLink(const Link &link, const std::string linkName, xmlNodePtr parent_element)
+bool exportLink(const Link &link, const std::string linkName, const Model& model, xmlNodePtr parent_element)
 {
     bool ok = true;
     xmlNodePtr link_xml = xmlNewChild(parent_element, NULL, BAD_CAST "link", NULL);
@@ -132,12 +244,20 @@ bool exportLink(const Link &link, const std::string linkName, xmlNodePtr parent_
 
     ok = ok && exportInertial(link.getInertia(), link_xml);
 
-    /* TODO(traversaro) : support solid shapes
-    for (std::size_t i = 0 ; i < link.visual_array.size() ; ++i)
-        exportVisual(*link.visual_array[i], link_xml);
-    for (std::size_t i = 0 ; i < link.collision_array.size() ; ++i)
-        exportCollision(*link.collision_array[i], link_xml);
-    */
+    LinkIndex linkIndex = model.getLinkIndex(linkName);
+
+    // Export visual shapes
+    for(unsigned int shapeIdx=0; shapeIdx < model.visualSolidShapes().linkSolidShapes[linkIndex].size(); shapeIdx++) {
+        SolidShape * exportedShape = model.visualSolidShapes().linkSolidShapes[linkIndex][shapeIdx];
+        exportSolidShape(exportedShape, VISUAL, link_xml);
+    }
+
+    // Export collision shapes
+    for(unsigned int shapeIdx=0; shapeIdx < model.collisionSolidShapes().linkSolidShapes[linkIndex].size(); shapeIdx++) {
+        // Clone the shape
+        SolidShape * exportedShape = model.collisionSolidShapes().linkSolidShapes[linkIndex][shapeIdx];
+        exportSolidShape(exportedShape, COLLISION, link_xml);
+    }
 
     return ok;
 }
@@ -313,6 +433,9 @@ bool exportAdditionalFrame(const std::string frame_name, Transform link_H_frame,
     return ok;
 }
 
+
+
+
 bool URDFStringFromModel(const iDynTree::Model & model,
                          std::string & urdf_string,
                          const ModelExporterOptions options)
@@ -384,7 +507,7 @@ bool URDFStringFromModel(const iDynTree::Model & model,
         }
 
         // Export link
-        ok = ok && exportLink(*visitedLink, visitedLinkName, robot);
+        ok = ok && exportLink(*visitedLink, visitedLinkName, model, robot);
     }
 
     // Export all the additional frames that are not parent of the base link
@@ -398,7 +521,6 @@ bool URDFStringFromModel(const iDynTree::Model & model,
                                              robot);
         }
     }
-
 
     xmlChar *xmlbuff=0;
     int buffersize=0;

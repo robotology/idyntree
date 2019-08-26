@@ -64,7 +64,6 @@ public:
  * Furthermore, currently the model exporter only exports a subset of the features
  * supported in iDynTree::Model. In particular, the following features are not exported:
  *
- * * Visual and collision geometries
  * * Sensors
  * * Joint limits, damping and static friction.
  *
