@@ -45,7 +45,7 @@ private:
     VisualInfo m_info;
 
 public:
-    VisualElement();
+    VisualElement(const std::string& name);
 
     const VisualInfo& visualInfo() const;
 

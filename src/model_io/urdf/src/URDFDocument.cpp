@@ -150,7 +150,7 @@ namespace iDynTree {
             reportError("URDFDocument", "documentHasBeenParsed", "Failed to add visual elements to model");
         }
         if (!addVisualPropertiesToModel(m_model,
-                                        m_buffers.visuals,
+                                        m_buffers.collisions,
                                         m_buffers.materials,
                                         m_model.collisionSolidShapes())) {
             reportError("URDFDocument", "documentHasBeenParsed", "Failed to add collision elements to model");
