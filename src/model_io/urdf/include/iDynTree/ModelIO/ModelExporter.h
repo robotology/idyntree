@@ -43,6 +43,19 @@ public:
     std::string baseLink;
 
     /**
+     * Select if the first additional frame of the base link is exported as fake base link.
+     *
+     * The URDF exporter by default exports the first additional frame of the base link as
+     * a parent "fake" link to the actual base link, as a workaround for https://github.com/ros/kdl_parser/issues/27).
+     * By setting this option to false, is possible to disable this behaviour, for more info see iDynTree::ModelExporter docs.
+     * This option is ignored in non-URDF exporter.
+     *
+     * Default value: true.
+     * Supported formats: urdf.
+     */
+    bool exportFirstBaseLinkAdditionalFrameAsFakeURDFBase{true};
+
+    /**
      * Constructor.
      */
     ModelExporterOptions();
@@ -84,9 +97,10 @@ public:
  *
  * Furthermore, it is widespread use in URDF models to never use a real link (with mass) as the root link of a model, mainly
  * due to workaround a bug in official %KDL parser used in ROS (see https://github.com/ros/kdl_parser/issues/27 for more info). For this reason,
- * if the selected base_link has at least one additional frame, the first additional frame of the base link is added as a **parent** fake URDF link,
+ * if the selected base_link has at least one additional frame, by default the first additional frame of the base link is added as a **parent** fake URDF link,
  * instead as a **child** fake URDF link as done with the rest of %iDynTree's additional frames. If no additional frame is available for the base link,
  * the base link of the URDF will have a mass, and will generate a warning then used with the ROS's [`kdl_parser`](https://github.com/ros/kdl_parser) .
+ * This behaviour can be disabled by setting to false the `exportFirstBaseLinkAdditionalFrameAsFakeURDFBase` attribute of ModelExporterOptions.
  *
  */
 class ModelExporter
