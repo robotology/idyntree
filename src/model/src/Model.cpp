@@ -703,6 +703,29 @@ LinkIndex Model::getFrameLink(const FrameIndex frameIndex) const
     return LINK_INVALID_INDEX;
 }
 
+bool Model::getLinkAdditionalFrames(const LinkIndex lnkIndex, std::vector<FrameIndex>& frameIndices) const
+{
+    if (!isValidLinkIndex(lnkIndex)) {
+        std::stringstream ss;
+        ss << "LinkIndex " << lnkIndex << " is not valid, should be between 0 and " << this->getNrOfLinks()-1;
+        reportError("Model", "getLinkAdditionalFrames", ss.str().c_str());
+        return false;
+    }
+
+    frameIndices.resize(0);
+    // FrameIndex from 0 to this->getNrOfLinks()-1 are reserved for implicit frame of Links
+    // with the corresponding LinkIndex, while the frameIndex from getNrOfLinks() to getNrOfFrames()-1
+    // are the one of actual additional frames. See iDynTree::Model docs for more details
+    for (FrameIndex frameIndex=this->getNrOfLinks(); frameIndex < this->getNrOfFrames(); frameIndex++) {
+        if (this->getFrameLink(frameIndex) == lnkIndex) {
+            frameIndices.push_back(frameIndex);
+        }
+    }
+
+    return true;
+}
+
+
 
 unsigned int Model::getNrOfNeighbors(const LinkIndex link) const
 {

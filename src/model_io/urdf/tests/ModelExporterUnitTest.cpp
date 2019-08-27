@@ -57,9 +57,7 @@ void checkImportExportURDF(std::string fileName)
     ASSERT_EQUAL_DOUBLE(model.getNrOfLinks(), modelReloaded.getNrOfLinks());
     ASSERT_EQUAL_DOUBLE(model.getNrOfJoints(), modelReloaded.getNrOfJoints());
     ASSERT_EQUAL_DOUBLE(model.getNrOfDOFs(), modelReloaded.getNrOfDOFs());
-
-    // TODO(traversaro) : uncomment the following line when frames are correctly handled by the exporter
-    // ASSERT_EQUAL_DOUBLE(model.getNrOfFrames(), modelReloaded.getNrOfLinks());
+    ASSERT_EQUAL_DOUBLE(model.getNrOfFrames(), modelReloaded.getNrOfFrames());
 
     // Verify that the link correspond (note that the serialization could have changed)
     for(int lnkIndex=0; lnkIndex < model.getNrOfLinks(); lnkIndex++) {
@@ -70,6 +68,16 @@ void checkImportExportURDF(std::string fileName)
         SpatialInertia inertiaReloaded = modelReloaded.getLink(lnkIndexInReloaded)->getInertia();
         std::cerr << "Testing inertia of link " << model.getLinkName(lnkIndex) << std::endl;
         ASSERT_EQUAL_MATRIX(inertia.asMatrix(), inertiaReloaded.asMatrix());
+    }
+
+    // Verify that the frame correspond (note that the serialization could have changed)
+    for(FrameIndex frameIndex=model.getNrOfLinks(); frameIndex < model.getNrOfFrames(); frameIndex++) {
+        FrameIndex frameIndexInReloaded = modelReloaded.getFrameIndex(model.getFrameName(frameIndex));
+        ASSERT_IS_TRUE(frameIndexInReloaded != FRAME_INVALID_INDEX);
+        ASSERT_IS_TRUE(model.getFrameName(frameIndex) == modelReloaded.getFrameName(frameIndexInReloaded));
+        Transform link_H_frame = model.getFrameTransform(frameIndex);
+        Transform link_H_frame_reloaded = modelReloaded.getFrameTransform(frameIndexInReloaded);
+        ASSERT_EQUAL_MATRIX(link_H_frame.asHomogeneousTransform(), link_H_frame_reloaded.asHomogeneousTransform());
     }
 
 }

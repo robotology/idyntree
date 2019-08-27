@@ -63,11 +63,30 @@ public:
  *
  * Furthermore, currently the model exporter only exports a subset of the features
  * supported in iDynTree::Model. In particular, the following features are not exported:
- * * Additional frames
+ *
  * * Visual and collision geometries
  * * Sensors
  * * Joint limits, damping and static friction.
  *
+ * # Format documentation
+ *
+ * The following format are  supported  by the exporter.
+ *
+ * | Format | Extendend Name | Website |  String for filetype argument  |
+ * |:-----------------------------:|:-------:|:-------:|:--------:|
+ * | URDF | Unified Robot Description Format  | http://wiki.ros.org/urdf | `urdf` |
+ *
+ * ## URDF
+ *
+ * As the URDF format does not distinguish between frames and links (see https://discourse.ros.org/t/urdf-ng-link-and-frame-concepts/56
+ * for an extensive discussion on this) the URDF model exporter converts iDynTree's *additional frames* to mass-less and shape-less
+ * *fake* URDF links that are connected as child links via `fixed` joints to the corresponding **real** URDF links.
+ *
+ * Furthermore, it is widespread use in URDF models to never use a real link (with mass) as the root link of a model, mainly
+ * due to workaround a bug in official %KDL parser used in ROS (see https://github.com/ros/kdl_parser/issues/27 for more info). For this reason,
+ * if the selected base_link has at least one additional frame, the first additional frame of the base link is added as a **parent** fake URDF link,
+ * instead as a **child** fake URDF link as done with the rest of %iDynTree's additional frames. If no additional frame is available for the base link,
+ * the base link of the URDF will have a mass, and will generate a warning then used with the ROS's [`kdl_parser`](https://github.com/ros/kdl_parser) .
  *
  */
 class ModelExporter
