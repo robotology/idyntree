@@ -1,0 +1,192 @@
+name: C++ CI Workflow
+
+on:
+  push:
+  pull_request:
+  schedule:
+  # * is a special character in YAML so you have to quote this string
+  # Execute a "nightly" build at 2 AM UTC 
+  - cron:  '0 2 * * *'
+  
+  
+jobs:
+  build:
+    name: '[${{ matrix.os }}@${{ matrix.build_type }}]'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        build_type: [Release]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+
+    steps:
+    - uses: actions/checkout@master
+        
+    # Print environment variables to simplify development and debugging
+    - name: Environment Variables
+      shell: bash
+      run: env
+        
+    # ============
+    # DEPENDENCIES
+    # ============
+    
+    - name: Dependencies [Windows]
+      if: matrix.os == 'windows-latest'
+      run: |
+        git clone https://github.com/robotology-dependencies/robotology-vcpkg-binary-ports C:/robotology-vcpkg-binary-ports
+        vcpkg.exe --overlay-ports=C:/robotology-vcpkg-binary-ports install --triplet x64-windows ace libxml2 eigen3 ipopt-binary 
+        
+    - name: Dependencies [macOS]
+      if: matrix.os == 'macOS-latest'
+      run: |
+        brew install ace boost eigen swig qt5 orocos-kdl
+    
+    - name: Dependencies [Ubuntu]
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt-get install git build-essential cmake libace-dev coinor-libipopt-dev  libboost-system-dev libboost-filesystem-dev \
+                             libboost-thread-dev liborocos-kdl-dev libeigen3-dev swig qtbase5-dev qtdeclarative5-dev qtmultimedia5-dev \
+                             libxml2-dev liburdfdom-dev libtinyxml-dev liburdfdom-dev liboctave-dev python-dev valgrind 
+        
+    - name: Source-based Dependencies [Windows] 
+      if: matrix.os == 'windows-latest-disable-until-issue-569-is-solved'
+      shell: bash
+      run: |
+        # YCM
+        git clone https://github.com/robotology/ycm
+        cd ycm
+        mkdir -p build
+        cd build
+        cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
+        cmake --build . --config ${{ matrix.build_type }} --target INSTALL 
+        # YARP
+        git clone https://github.com/robotology/yarp
+        cd yarp
+        mkdir -p build
+        cd build
+        cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake \
+              -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
+        cmake --build . --config ${{ matrix.build_type }} --target INSTALL 
+        # Workaround for https://github.com/robotology-dependencies/robotology-vcpkg-binary-ports/issues/3
+        export IPOPT_DIR=${VCPKG_INSTALLATION_ROOT}/installed/x64-windows
+        # ICUB
+        git clone https://github.com/robotology/icub-main
+        cd icub-main
+        mkdir -p build
+        cd build
+        cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake \
+              -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
+        cmake --build . --config ${{ matrix.build_type }} --target INSTALL 
+        
+    - name: Source-based Dependencies [Ubuntu/macOS] 
+      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'
+      shell: bash
+      run: |
+        # YCM
+        git clone https://github.com/robotology/ycm
+        cd ycm
+        mkdir -p build
+        cd build
+        cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
+        cmake --build . --config ${{ matrix.build_type }} --target install 
+        # YARP
+        git clone https://github.com/robotology/yarp
+        cd yarp
+        mkdir -p build
+        cd build
+        cmake  -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
+        cmake --build . --config ${{ matrix.build_type }} --target install 
+        # ICUB
+        git clone https://github.com/robotology/icub-main
+        cd icub-main
+        mkdir -p build
+        cd build
+        cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
+        cmake --build . --config ${{ matrix.build_type }} --target install 
+ 
+    # ===================
+    # CMAKE-BASED PROJECT
+    # ===================
+    
+    - name: Configure [Windows]
+      # Use bash also on Windows (otherwise cd, mkdir, ... do not work)
+      if: matrix.os == 'windows-latest'
+      shell: bash
+      run: |
+        mkdir -p build
+        cd build
+        # ipopt disabled until https://github.com/robotology/idyntree/issues/274 is fixed
+        cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install \
+              -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=ON \
+              -DIDYNTREE_USES_PYTHON:BOOL=OFF -DIDYNTREE_USES_OCTAVE:BOOL=OFF -DIDYNTREE_USES_IPOPT:BOOL=OFF \
+              -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
+
+    - name: Configure [Ubuntu/macOS]
+      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'
+      shell: bash
+      run: |
+        mkdir -p build
+        cd build    
+        cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=ON \
+              -DIDYNTREE_USES_ICUB_MAIN:BOOL=ON -DIDYNTREE_USES_Qt5:BOOL=ON  -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+              -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
+
+    - name: Enable additional Ubuntu options (Valgrind, Octave, Python, legacy KDL) [Ubuntu] 
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        cd build
+        cmake -DIDYNTREE_USES_OCTAVE:BOOL=ON -DIDYNTREE_USES_PYTHON:BOOL=ON -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=ON -DIDYNTREE_USES_KDL:BOOL=ON .
+        # For some reason, Ubuntu 18.04 image in GitHub Actions contain OpenBLAS 0.3.5, that is affected by https://github.com/xianyi/OpenBLAS/issues/2003
+        # As a workaround, we test against the regular blas instead of openblas
+        sudo apt-get install libblas-dev libatlas-base-dev
+        sudo apt-get remove libopenblas-base
+        
+    - name: Build
+      shell: bash
+      run: |
+        cd build
+        # Attempt of fix for using YARP idl generators (that link ACE) in Windows 
+        # See https://github.com/robotology/idyntree/issues/569
+        export PATH=$PATH:${GITHUB_WORKSPACE}/install/bin:${VCPKG_INSTALLATION_ROOT}/installed/x64-windows/bin:${VCPKG_INSTALLATION_ROOT}/installed/x64-windows/debug/bin
+        cmake --build . --config ${{ matrix.build_type }}
+        
+    - name: Test
+      shell: bash
+      run: |
+        cd build
+        ctest --output-on-failure -C ${{ matrix.build_type }} . 
+        
+    - name: Install [Windows]
+      if: matrix.os == 'windows-latest'
+      shell: bash
+      run: |
+        cd build
+        cmake --build . --config ${{ matrix.build_type }} --target INSTALL
+        
+    - name: Install [Ubuntu/macOS]
+      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'
+      shell: bash
+      run: |
+        cd build
+        cmake --build . --config ${{ matrix.build_type }} --target install
+        
+    - name: Compile Examples [Windows]
+      if: matrix.os == 'windows-latest'
+      shell: bash
+      run: |
+        cd examples
+        mkdir -p build
+        cd build
+        cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake \
+              -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install .. 
+        cmake --build . --config ${{ matrix.build_type }}
+        
+    - name: Compile Examples [Ubuntu/macOS]
+      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'
+      shell: bash
+      run: |
+        cd examples
+        mkdir -p build
+        cd build
+        cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install .. 
+        cmake --build . --config ${{ matrix.build_type }}
