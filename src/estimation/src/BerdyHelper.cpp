@@ -20,9 +20,11 @@
 #include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Sensors/Sensors.h>
 #include <iDynTree/Sensors/AllSensorsTypes.h>
+#include <iDynTree/KinDynComputations.h>
 
 #include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
 
+#include <memory>
 #include <sstream>
 #include <algorithm>
 
@@ -179,6 +181,9 @@ bool BerdyHelper::init(const Model& model,
     m_linkVels.resize(m_model);
     m_link_H_externalWrenchMeasurementFrame.resize(m_model.getNrOfLinks(),Transform::Identity());
 
+    // Initialize links to base transform to identity
+    base_H_m_links.resize(m_model.getNrOfLinks(), Transform::Identity());
+
     bool res = m_options.checkConsistency();
 
     if( !res )
@@ -277,6 +282,14 @@ bool BerdyHelper::initSensorsMeasurements()
         berdySensorsInfo.wrenchSensors.push_back(jntIdx);
         berdySensorsInfo.jntIdxToOffset[jntIdx] = m_nrOfSensorsMeasurements;
         m_nrOfSensorsMeasurements += 6;
+    }
+
+    // Add CoM accelerometer sensor
+    if (m_options.includeCoMAccelerometerAsSensor)
+    {
+        std::cout << "Berdy helper : Considering CoM accelerometer sensor in initSensorsMeasurements" << std::endl;
+        berdySensorTypeOffsets.comAccelerationOffset = m_nrOfSensorsMeasurements;
+        m_nrOfSensorsMeasurements += 3;
     }
 
     //Create sensor ordering vector
@@ -614,10 +627,11 @@ IndexRange BerdyHelper::getRangeJointSensorVariable(const BerdySensorTypes senso
 IndexRange BerdyHelper::getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx) const
 {
     IndexRange ret = IndexRange::InvalidRange();
-    ret.size = 6;
 
     if( sensorType == NET_EXT_WRENCH_SENSOR )
     {
+        ret.size = 6;
+
         if (m_options.berdyVariant == ORIGINAL_BERDY_FIXED_BASE)
         {
             TraversalIndex trvIdx = m_dynamicsTraversal.getTraversalIndexFromLinkIndex(idx);
@@ -636,6 +650,13 @@ IndexRange BerdyHelper::getRangeLinkSensorVariable(const BerdySensorTypes sensor
             assert(m_options.berdyVariant == BERDY_FLOATING_BASE);
             ret.offset = berdySensorTypeOffsets.netExtWrenchOffset + 6*idx;
         }
+    }
+
+
+    if (sensorType == COM_ACCELEROMETER_SENSOR && m_options.berdyVariant == BERDY_FLOATING_BASE)
+    {
+        ret.size = 3;
+        ret.offset = berdySensorTypeOffsets.comAccelerationOffset;
     }
 
     assert(ret.isValid());
@@ -1366,6 +1387,29 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
         // bY for the joint wrenches is zero
     }
 
+    ////////////////////////////////////////////////////////////////////////
+    ///// COM ACCELERATION SENSOR
+    ////////////////////////////////////////////////////////////////////////
+    if (m_options.includeCoMAccelerometerAsSensor)
+    {
+        // Compute forward kinematics
+
+        for(LinkIndex idx = 0; idx < static_cast<LinkIndex>(m_model.getNrOfLinks()); idx++)
+        {
+            IndexRange sensorRange = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR, idx);
+            IndexRange netExtWrenchRange = this->getRangeLinkVariable(NET_EXT_WRENCH,idx);
+
+            // Get link to base rotation
+            matrixYElements.addSubMatrix(sensorRange.offset,
+                                         netExtWrenchRange.offset,
+                                         base_H_m_links.at(idx).asAdjointTransformWrench());
+
+        }
+
+
+        // bY for the com acceleratio sensor is zeor
+    }
+
     Y.setFromTriplets(matrixYElements);
     return true;
 }
@@ -1526,6 +1570,20 @@ bool BerdyHelper::updateKinematicsFromFloatingBase(const JointPosDoubleArray& jo
     m_jointPos = jointPos;
     m_jointVel = jointVel;
 
+    // Update kinDyn computation
+    iDynTree::KinDynComputations kinDynComputations;
+    kinDynComputations.loadRobotModel(m_model);
+    kinDynComputations.setRobotState(m_jointPos,
+                                     m_jointVel,
+                                     m_gravity);
+
+    // TODO: Update base_H_m_links transformations
+     for(LinkIndex idx = 0; idx < static_cast<LinkIndex>(m_model.getNrOfLinks()); idx++)
+     {
+         base_H_m_links.at(idx) = kinDynComputations.getRelativeTransform(idx, m_model.getLinkIndex(m_options.baseLink));
+         std::cout << "Berdy helper : updated transform for the link " << m_model.getLinkName(idx) << " with the transform : " << base_H_m_links.at(idx).toString().c_str() << std::endl;
+     }
+
     m_kinematicsUpdated = ok;
     return ok;
 }
@@ -1672,6 +1730,22 @@ bool BerdyHelper::getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, Vecto
             jointSens.range = sensorRange;
             m_sensorsOrdering.push_back(jointSens);
         }
+
+        if(m_options.includeCoMAccelerometerAsSensor) {
+
+            std::cout << "Berdy helper : Considering CoM accelerometer sensor inside cacheSensorOrdering";
+            IndexRange sensorRange = this->getRangeLinkSensorVariable(COM_ACCELEROMETER_SENSOR, m_model.getLinkIndex(m_options.baseLink));
+
+            BerdySensor linkSensor;
+            linkSensor.type = COM_ACCELEROMETER_SENSOR;
+            linkSensor.id = m_options.baseLink;
+            std::cout << "Berdy helper : CoM accelerometer sensor id " << linkSensor.id << std::endl;
+            linkSensor.range = sensorRange;
+            std::cout << "Berdy helper : CoM accelerometer sensor size : " << linkSensor.range.size << " offset : " << linkSensor.range.offset << std::endl;
+            m_sensorsOrdering.push_back(linkSensor);
+        }
+
+        std::cout << "Berdy helper : sensor ordering vector size : " << m_sensorsOrdering.size() << std::endl;
 
         //To avoid any problem, sort m_sensorsOrdering by range.offset
         std::sort(m_sensorsOrdering.begin(), m_sensorsOrdering.end());
@@ -2077,6 +2151,8 @@ bool BerdyHelper::serializeSensorVariables(SensorsMeasurements& sensMeas,
         LinkIndex childLink = m_dynamicsTraversal.getChildLinkIndexFromJointIndex(m_model,berdySensorsInfo.wrenchSensors[i]);
         setSubVector(y,sensorRange,toEigen(linkJointWrenches(childLink)));
     }
+
+    // TODO: Handle CoM acceleration sensor
 
 
     return ret;

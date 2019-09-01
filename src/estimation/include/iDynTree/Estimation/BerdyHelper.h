@@ -128,7 +128,10 @@ enum BerdySensorTypes
     /**
      * Non-physical sensor that measures the wrench trasmitted by a joint.
      */
-    JOINT_WRENCH_SENSOR     = 1003
+    JOINT_WRENCH_SENSOR     = 1003,
+
+    // CoM Accelerometer sensor
+    COM_ACCELEROMETER_SENSOR = 1004
 };
 
 bool isLinkBerdyDynamicVariable(const BerdyDynamicVariablesTypes dynamicVariableType);
@@ -152,6 +155,7 @@ public:
                      includeAllJointAccelerationsAsSensors(true),
                      includeAllJointTorquesAsSensors(false),
                      includeAllNetExternalWrenchesAsSensors(true),
+                     includeCoMAccelerometerAsSensor(false),
                      includeFixedBaseExternalWrench(false),
                      baseLink("")
     {
@@ -201,6 +205,14 @@ public:
      * Default value: true .
      */
     bool includeAllNetExternalWrenchesAsSensors;
+
+    /*
+     * If true, includes the CoM accelerometer in the sensors vector.
+     * It is compatible only with floating base variant of BERDY
+     *
+     * Default value: false .
+     */
+    bool includeCoMAccelerometerAsSensor;
 
     /**
      * If includeNetExternalWrenchesAsSensors is true and the
@@ -459,6 +471,7 @@ class BerdyHelper
         size_t dofTorquesOffset;
         size_t netExtWrenchOffset;
         size_t jointWrenchOffset;
+        size_t comAccelerationOffset;
     } berdySensorTypeOffsets;
 
     /**
@@ -488,6 +501,12 @@ class BerdyHelper
      * and the link frames.
      */
     std::vector<Transform> m_link_H_externalWrenchMeasurementFrame;
+
+    /*
+     * Vector containing the transforms between the base and the model links
+     *
+     */
+    std::vector<Transform> base_H_m_links;
 
 
 public:
