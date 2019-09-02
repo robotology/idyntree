@@ -19,6 +19,9 @@
 
 #include <iDynTree/Optimizer.h>
 
+#include <memory>
+#include <string>
+
 namespace iDynTree {
 
     class VectorDynSize;
