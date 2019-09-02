@@ -5,11 +5,11 @@
 # Try to locate the IPOPT library
 #
 # On non Windows systems, use pkg-config to try to locate the library,
-# if this fails then try to locate the library in the directory pointed by
-# the IPOPT_DIR enviromental variable.
+# if this fails then try to locate the library in the directory pointed
+# by the IPOPT_DIR environment variable.
 #
 # On Windows systems,  just try to find the library using the IPOPT_DIR
-# enviromental variable.
+# environment variable.
 #
 # Create the following variables::
 #
@@ -21,7 +21,7 @@
 
 #=============================================================================
 # Copyright (C) 2008-2010 RobotCub Consortium
-# Copyright (C) 2016 iCub Facility - Istituto Italiano di Tecnologia
+# Copyright (C) 2016 Istituto Italiano di Tecnologia (IIT)
 #   Authors: Ugo Pattacini <ugo.pattacini@iit.it>
 #   Authors: Daniele E. Domenichelli <daniele.domenichelli@iit.it>
 #
@@ -82,7 +82,8 @@ if(NOT WIN32)
       set(IPOPT_DIR /usr            CACHE PATH "Path to IPOPT build directory")
     endif()
 
-    set(IPOPT_INCLUDE_DIRS ${IPOPT_DIR}/include/coin)
+    find_path(IPOPT_INCLUDE_DIRS NAMES IpIpoptApplication.hpp coin/IpIpoptApplication.hpp PATHS ${IPOPT_DIR}/include/coin)
+    
     find_library(IPOPT_LIBRARIES ipopt ${IPOPT_DIR}/lib
                                      ${IPOPT_DIR}/lib/coin
                                      NO_DEFAULT_PATH)
@@ -129,8 +130,9 @@ else()
   include(SelectLibraryConfigurations)
 
   set(IPOPT_DIR $ENV{IPOPT_DIR} CACHE PATH "Path to IPOPT build directory")
+  
+  find_path(IPOPT_INCLUDE_DIRS NAMES IpIpoptApplication.hpp coin/IpIpoptApplication.hpp PATHS ${IPOPT_DIR}/include/coin)
 
-  set(IPOPT_INCLUDE_DIRS ${IPOPT_DIR}/include/coin)
   find_library(IPOPT_IPOPT_LIBRARY_RELEASE libipopt ${IPOPT_DIR}/lib
                                                     ${IPOPT_DIR}/lib/coin
                                                     NO_DEFAULT_PATH)
