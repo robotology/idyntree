@@ -52,14 +52,14 @@ classdef Rotation < iDynTree.RotationRaw
       [varargout{1:nargout}] = iDynTreeMEX(760, self, varargin{:});
     end
     function varargout = toString(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(773, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(777, self, varargin{:});
     end
     function varargout = display(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(774, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(778, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(775, self);
+        iDynTreeMEX(779, self);
         self.SwigClear();
       end
     end
@@ -92,20 +92,32 @@ classdef Rotation < iDynTree.RotationRaw
     function varargout = RPYRightTrivializedDerivative(varargin)
      [varargout{1:nargout}] = iDynTreeMEX(767, varargin{:});
     end
-    function varargout = RPYRightTrivializedDerivativeInverse(varargin)
+    function varargout = RPYRightTrivializedDerivativeRateOfChange(varargin)
      [varargout{1:nargout}] = iDynTreeMEX(768, varargin{:});
     end
-    function varargout = QuaternionRightTrivializedDerivative(varargin)
+    function varargout = RPYRightTrivializedDerivativeInverse(varargin)
      [varargout{1:nargout}] = iDynTreeMEX(769, varargin{:});
     end
-    function varargout = QuaternionRightTrivializedDerivativeInverse(varargin)
+    function varargout = RPYRightTrivializedDerivativeInverseRateOfChange(varargin)
      [varargout{1:nargout}] = iDynTreeMEX(770, varargin{:});
     end
-    function varargout = Identity(varargin)
+    function varargout = QuaternionRightTrivializedDerivative(varargin)
      [varargout{1:nargout}] = iDynTreeMEX(771, varargin{:});
     end
-    function varargout = RotationFromQuaternion(varargin)
+    function varargout = QuaternionRightTrivializedDerivativeInverse(varargin)
      [varargout{1:nargout}] = iDynTreeMEX(772, varargin{:});
+    end
+    function varargout = Identity(varargin)
+     [varargout{1:nargout}] = iDynTreeMEX(773, varargin{:});
+    end
+    function varargout = RotationFromQuaternion(varargin)
+     [varargout{1:nargout}] = iDynTreeMEX(774, varargin{:});
+    end
+    function varargout = leftJacobian(varargin)
+     [varargout{1:nargout}] = iDynTreeMEX(775, varargin{:});
+    end
+    function varargout = leftJacobianInverse(varargin)
+     [varargout{1:nargout}] = iDynTreeMEX(776, varargin{:});
     end
   end
 end
