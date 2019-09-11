@@ -287,7 +287,6 @@ bool BerdyHelper::initSensorsMeasurements()
     // Add CoM accelerometer sensor
     if (m_options.includeCoMAccelerometerAsSensor)
     {
-        //std::cout << "Berdy helper : Considering CoM accelerometer sensor in initSensorsMeasurements" << std::endl;
         berdySensorTypeOffsets.comAccelerationOffset = m_nrOfSensorsMeasurements;
         m_nrOfSensorsMeasurements += 3;
     }
@@ -1596,12 +1595,11 @@ bool BerdyHelper::updateKinematicsFromFloatingBase(const JointPosDoubleArray& jo
                                      m_jointVel,
                                      m_gravity);
 
-    // TODO: Update base_H_m_links transformations
-     for(LinkIndex idx = 0; idx < static_cast<LinkIndex>(m_model.getNrOfLinks()); idx++)
-     {
-         base_H_m_links.at(idx) = kinDynComputations.getRelativeTransform(idx, m_model.getLinkIndex(m_options.baseLink));
-         //std::cout << "Berdy helper : updated transform for the link " << m_model.getLinkName(idx) << " with the transform : " << base_H_m_links.at(idx).toString().c_str() << std::endl;
-     }
+    // Update base_H_m_links transformations
+    for(LinkIndex idx = 0; idx < static_cast<LinkIndex>(m_model.getNrOfLinks()); idx++)
+    {
+        base_H_m_links.at(idx) = kinDynComputations.getRelativeTransform(idx, m_model.getLinkIndex(m_options.baseLink));
+    }
 
     m_kinematicsUpdated = ok;
     return ok;
@@ -1752,19 +1750,15 @@ bool BerdyHelper::getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, Vecto
 
         if(m_options.includeCoMAccelerometerAsSensor) {
 
-            //std::cout << "Berdy helper : Considering CoM accelerometer sensor inside cacheSensorOrdering";
             IndexRange sensorRange = this->getRangeLinkSensorVariable(COM_ACCELEROMETER_SENSOR, m_model.getLinkIndex(m_options.baseLink));
 
             BerdySensor linkSensor;
             linkSensor.type = COM_ACCELEROMETER_SENSOR;
             linkSensor.id = m_options.baseLink;
-            //std::cout << "Berdy helper : CoM accelerometer sensor id " << linkSensor.id << std::endl;
             linkSensor.range = sensorRange;
-            //std::cout << "Berdy helper : CoM accelerometer sensor size : " << linkSensor.range.size << " offset : " << linkSensor.range.offset << std::endl;
+
             m_sensorsOrdering.push_back(linkSensor);
         }
-
-        //std::cout << "Berdy helper : sensor ordering vector size : " << m_sensorsOrdering.size() << std::endl;
 
         //To avoid any problem, sort m_sensorsOrdering by range.offset
         std::sort(m_sensorsOrdering.begin(), m_sensorsOrdering.end());
