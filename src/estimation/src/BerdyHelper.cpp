@@ -2096,6 +2096,7 @@ bool BerdyHelper::serializeSensorVariables(SensorsMeasurements& sensMeas,
                                            JointDOFsDoubleArray& jointTorques,
                                            JointDOFsDoubleArray& jointAccs,
                                            LinkInternalWrenches& linkJointWrenches,
+                                           LinearMotionVector3& comAcceleration,
                                            VectorDynSize& y)
 {
     bool ret=true;
@@ -2167,8 +2168,15 @@ bool BerdyHelper::serializeSensorVariables(SensorsMeasurements& sensMeas,
         setSubVector(y,sensorRange,toEigen(linkJointWrenches(childLink)));
     }
 
-    // TODO: Handle CoM acceleration sensor
+    ////////////////////////////////////////////////////////////////////////
+    ///// COM ACCELERATION
+    ////////////////////////////////////////////////////////////////////////
+    if (m_options.includeCoMAccelerometerAsSensor && m_options.berdyVariant == BERDY_FLOATING_BASE)
+    {
+        IndexRange sensorRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR);
 
+        setSubVector(y, sensorRange, comAcceleration);
+    }
 
     return ret;
 }

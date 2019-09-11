@@ -388,6 +388,15 @@ inline void setSubVector(VectorDynSize& vec,
 
 inline void setSubVector(VectorDynSize& vec,
                          const IndexRange range,
+                         const LinearMotionVector3& linMotionVector)
+{
+    assert(range.size==3);
+    toEigen(vec).segment(range.offset, range.size) = toEigen(linMotionVector);
+    return;
+}
+
+inline void setSubVector(VectorDynSize& vec,
+                         const IndexRange range,
                          const SpatialForceVector& wrench)
 {
     assert(range.size==6);

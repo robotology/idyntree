@@ -656,6 +656,7 @@ public:
                                   JointDOFsDoubleArray    & jointTorques,
                                   JointDOFsDoubleArray    & jointAccs,
                                   LinkInternalWrenches    & linkJointWrenches,
+                                  LinearMotionVector3     & comAcceleration,
                                   VectorDynSize& y);
 
 
