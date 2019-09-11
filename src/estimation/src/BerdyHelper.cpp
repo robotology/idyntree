@@ -1416,25 +1416,13 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
             IndexRange netExternalWrenchSensor = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR, idx);
 
             iDynTree::Rotation base_R_m_link = base_H_m_links.at(idx).getRotation();
-
-//            Matrix3x3 base_R_m_link_eigen_matrix;
-
-//            base_R_m_link_eigen_matrix.setVal(0, 0, base_R_m_link.getVal(0,0));
-//            base_R_m_link_eigen_matrix.setVal(0, 1, base_R_m_link.getVal(0,1));
-//            base_R_m_link_eigen_matrix.setVal(0, 2, base_R_m_link.getVal(0,2));
-
-//            base_R_m_link_eigen_matrix.setVal(1, 0, base_R_m_link.getVal(1,0));
-//            base_R_m_link_eigen_matrix.setVal(1, 1, base_R_m_link.getVal(1,1));
-//            base_R_m_link_eigen_matrix.setVal(1, 2, base_R_m_link.getVal(2,2));
-
-//            base_R_m_link_eigen_matrix.setVal(2, 0, base_R_m_link.getVal(2,0));
-//            base_R_m_link_eigen_matrix.setVal(2, 1, base_R_m_link.getVal(2,1));
-//            base_R_m_link_eigen_matrix.setVal(2, 2, base_R_m_link.getVal(2,2));
+            iDynTree::Matrix3x3 base_R_m_link_M33;
+            iDynTree::toEigen(base_R_m_link_M33) = iDynTree::toEigen(base_R_m_link);
 
             // Get link to base rotation
             matrixYElements.addSubMatrix(comAccelerometerRange.offset,
                                          netExternalWrenchSensor.offset,
-                                         base_R_m_link);
+                                         base_R_m_link_M33);
 
         }
 
