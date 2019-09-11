@@ -651,12 +651,27 @@ IndexRange BerdyHelper::getRangeLinkSensorVariable(const BerdySensorTypes sensor
         }
     }
 
+    assert(ret.isValid());
+    return ret;
+}
 
-    if (sensorType == COM_ACCELEROMETER_SENSOR && m_options.berdyVariant == BERDY_FLOATING_BASE)
+IndexRange BerdyHelper::getRangeCoMAccelerometerSensorVariable(const BerdySensorTypes sensorType) const
+{
+    IndexRange ret = IndexRange::InvalidRange();
+
+    if (sensorType != COM_ACCELEROMETER_SENSOR)
     {
-        ret.size = 3;
-        ret.offset = berdySensorTypeOffsets.comAccelerationOffset;
+        iDynTree::reportWarning("BerdyHelpers","getRangeCoMAccelerometerSensorVariable","Wrong sensor types passed for retrieving sensor range");
     }
+
+    if (m_options.berdyVariant != BERDY_FLOATING_BASE)
+    {
+        iDynTree::reportWarning("BerdyHelpers","getRangeCoMAccelerometerSensorVariable","CoM Accelerometer sensor is only available in BERDY_FLOATING_BASE");
+    }
+
+    // Set sensor size and offset
+    ret.size = 3;
+    ret.offset = berdySensorTypeOffsets.comAccelerationOffset;
 
     assert(ret.isValid());
     return ret;
@@ -1393,8 +1408,7 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
     {
 
         // Get the row index corresponding to the com accelerometer sensor
-        // TODO: Correct the link index pssed here
-        IndexRange comAccelerometerRange = this->getRangeLinkSensorVariable(COM_ACCELEROMETER_SENSOR, 0);
+        IndexRange comAccelerometerRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR);
 
         for(LinkIndex idx = 0; idx < static_cast<LinkIndex>(m_model.getNrOfLinks()); idx++)
         {
