@@ -626,6 +626,8 @@ public:
     IndexRange getRangeDOFSensorVariable(const BerdySensorTypes sensorType, const DOFIndex idx) const;
     IndexRange getRangeJointSensorVariable(const BerdySensorTypes sensorType, const JointIndex idx) const;
     IndexRange getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx) const;
+    IndexRange getRangeCoMAccelerometerSensorVariable(const BerdySensorTypes sensorType) const;
+
 
     /**
      * Ranges of dynamic variables
