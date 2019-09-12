@@ -24,6 +24,7 @@ macro(add_modelio_urdf_unit_test classname)
 endmacro()
 
 add_modelio_urdf_unit_test(URDFModelImport)
+add_modelio_urdf_unit_test(ModelCalibrationHelper)
 add_modelio_urdf_unit_test(ModelExporter)
 add_modelio_urdf_unit_test(URDFGenericSensorImport)
 add_modelio_urdf_unit_test(PredictSensorsMeasurement)
