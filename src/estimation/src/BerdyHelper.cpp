@@ -182,7 +182,7 @@ bool BerdyHelper::init(const Model& model,
     m_link_H_externalWrenchMeasurementFrame.resize(m_model.getNrOfLinks(),Transform::Identity());
 
     // Initialize links to base transform to identity
-    base_H_m_links.resize(m_model.getNrOfLinks(), Transform::Identity());
+    base_H_links.resize(m_model.getNrOfLinks(), Transform::Identity());
 
     bool res = m_options.checkConsistency();
 
@@ -1415,14 +1415,14 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
             // Get the column index corresponding to the net link external wrench sensor
             IndexRange netExternalWrenchSensor = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR, idx);
 
-            iDynTree::Rotation base_R_m_link = base_H_m_links.at(idx).getRotation();
-            iDynTree::Matrix3x3 base_R_m_link_M33;
-            iDynTree::toEigen(base_R_m_link_M33) = iDynTree::toEigen(base_R_m_link);
+            iDynTree::Rotation base_R_link = base_H_links.at(idx).getRotation();
+            iDynTree::Matrix3x3 base_R_link_M33;
+            iDynTree::toEigen(base_R_link_M33) = iDynTree::toEigen(base_R_link);
 
             // Get link to base rotation
             matrixYElements.addSubMatrix(comAccelerometerRange.offset,
                                          netExternalWrenchSensor.offset,
-                                         base_R_m_link_M33);
+                                         base_R_link_M33);
 
         }
 
@@ -1597,10 +1597,10 @@ bool BerdyHelper::updateKinematicsFromFloatingBase(const JointPosDoubleArray& jo
                                      m_jointVel,
                                      m_gravity);
 
-    // Update base_H_m_links transformations
+    // Update base_H_links transformations
     for(LinkIndex idx = 0; idx < static_cast<LinkIndex>(m_model.getNrOfLinks()); idx++)
     {
-        base_H_m_links.at(idx) = kinDynComputations.getRelativeTransform(idx, m_model.getLinkIndex(m_options.baseLink));
+        base_H_links.at(idx) = kinDynComputations.getRelativeTransform(m_model.getLinkIndex(m_options.baseLink), idx);
     }
 
     m_kinematicsUpdated = ok;
