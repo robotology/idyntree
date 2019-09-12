@@ -182,7 +182,7 @@ bool BerdyHelper::init(const Model& model,
     m_link_H_externalWrenchMeasurementFrame.resize(m_model.getNrOfLinks(),Transform::Identity());
 
     // Initialize links to base transform to identity
-    base_H_links.resize(m_model.getNrOfLinks(), Transform::Identity());
+    base_H_links.resize(m_model.getNrOfLinks());
 
     bool res = m_options.checkConsistency();
 
@@ -1415,7 +1415,7 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
             // Get the column index corresponding to the net link external wrench sensor
             IndexRange netExternalWrenchSensor = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR, idx);
 
-            iDynTree::Rotation base_R_link = base_H_links.at(idx).getRotation();
+            iDynTree::Rotation base_R_link = base_H_links(idx).getRotation();
             iDynTree::Matrix3x3 base_R_link_M33;
             iDynTree::toEigen(base_R_link_M33) = iDynTree::toEigen(base_R_link);
 
@@ -1590,18 +1590,12 @@ bool BerdyHelper::updateKinematicsFromFloatingBase(const JointPosDoubleArray& jo
     m_jointPos = jointPos;
     m_jointVel = jointVel;
 
-    // Update kinDyn computation
-    iDynTree::KinDynComputations kinDynComputations;
-    kinDynComputations.loadRobotModel(m_model);
-    kinDynComputations.setRobotState(m_jointPos,
-                                     m_jointVel,
-                                     m_gravity);
-
-    // Update base_H_links transformations
-    for(LinkIndex idx = 0; idx < static_cast<LinkIndex>(m_model.getNrOfLinks()); idx++)
-    {
-        base_H_links.at(idx) = kinDynComputations.getRelativeTransform(m_model.getLinkIndex(m_options.baseLink), idx);
-    }
+    // Compute forward kinematics
+    ok = ForwardPositionKinematics(m_model,
+                                   m_dynamicsTraversal,
+                                   iDynTree::Transform::Identity(),
+                                   m_jointPos,
+                                   base_H_links);
 
     m_kinematicsUpdated = ok;
     return ok;
