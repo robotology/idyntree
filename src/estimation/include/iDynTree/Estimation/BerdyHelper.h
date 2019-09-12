@@ -506,7 +506,7 @@ class BerdyHelper
      * Vector containing the transforms between the base and the model links
      *
      */
-    std::vector<Transform> base_H_m_links;
+    std::vector<Transform> base_H_links;
 
 
 public:
