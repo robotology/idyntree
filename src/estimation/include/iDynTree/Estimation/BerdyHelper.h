@@ -503,10 +503,10 @@ class BerdyHelper
     std::vector<Transform> m_link_H_externalWrenchMeasurementFrame;
 
     /*
-     * Vector containing the transforms between the base and the model links
+     * LinkPositions variable containing the transforms between the base and the model links
      *
      */
-    std::vector<Transform> base_H_links;
+    LinkPositions base_H_links;
 
 
 public:
