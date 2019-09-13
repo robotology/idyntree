@@ -1746,7 +1746,7 @@ bool BerdyHelper::getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, Vecto
 
         if(m_options.includeCoMAccelerometerAsSensor) {
 
-            IndexRange sensorRange = this->getRangeLinkSensorVariable(COM_ACCELEROMETER_SENSOR, m_model.getLinkIndex(m_options.baseLink));
+            IndexRange sensorRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR);
 
             BerdySensor linkSensor;
             linkSensor.type = COM_ACCELEROMETER_SENSOR;
