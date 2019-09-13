@@ -15,6 +15,7 @@ endif()
 set(IDYNTREE_MODELIO_URDF_HEADERS include/iDynTree/ModelIO/URDFDofsImport.h
                                   include/iDynTree/ModelIO/ModelLoader.h
                                   include/iDynTree/ModelIO/ModelExporter.h
+                                  include/iDynTree/ModelIO/ModelCalibrationHelper.h
                                   include/deprecated/iDynTree/ModelIO/URDFModelImport.h
                                   include/deprecated/iDynTree/ModelIO/URDFGenericSensorsImport.h
                                   include/deprecated/iDynTree/ModelIO/URDFSolidShapesImport.h)
@@ -48,6 +49,7 @@ set(IDYNTREE_MODELIO_URDF_XMLELEMENTS_SOURCES src/URDFDocument.cpp
 set(IDYNTREE_MODELIO_URDF_SOURCES src/URDFDofsImport.cpp
                                   src/ModelLoader.cpp
                                   src/ModelExporter.cpp
+                                  src/ModelCalibrationHelper.cpp
                                   src/deprecated/URDFModelImport.cpp
                                   src/deprecated/URDFGenericSensorsImport.cpp
                                   src/deprecated/URDFSolidShapesImport.cpp
