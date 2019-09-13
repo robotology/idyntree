@@ -62,8 +62,10 @@ if(DOXYGEN_FOUND)
 
     configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in
                    ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
-    add_custom_target(dox COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
-
+    if(NOT TARGET dox)
+      add_custom_target(dox COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
+    endif() 
+    
     set(DOX_GENERATE_HTML NO)
     set(DOX_GENERATE_MAN YES)
     set(DOX_GENERATE_XML NO)
