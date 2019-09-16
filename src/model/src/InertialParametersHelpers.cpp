@@ -129,10 +129,17 @@ bool BBFromExternalShape(ExternalMesh* extMesh, Box& box)
         }
         
         
-        double scaling_factor=extMesh->scale.getVal(0);
+        //get scaling factor coming from urdf
+        double scalingFactorX=extMesh->scale.getVal(0);
+        double scalingFactorY=extMesh->scale.getVal(1);
+        double scalingFactorZ=extMesh->scale.getVal(2);
+        
+        //use each component to scale each vertex coordinate
         for(size_t i=0; i < vertexVector.size(); i++)
         {
-            vertexVector[i]*=scaling_factor;
+            vertexVector[i].x*=scalingFactorX;
+            vertexVector[i].y*=scalingFactorY;
+            vertexVector[i].z*=scalingFactorZ;
         }
         
         double minX = vertexVector[0].x;
@@ -189,24 +196,12 @@ bool BBFromExternalShape(ExternalMesh* extMesh, Box& box)
         offset_bb_wrt_geom(1) = (maxY+minY)/2.0;
         offset_bb_wrt_geom(2) = (maxZ+minZ)/2.0;
         
-        double scaledX = extMesh->link_H_geometry.getPosition().getVal(0)*scaling_factor;
-        double scaledY = extMesh->link_H_geometry.getPosition().getVal(1)*scaling_factor;
-        double scaledZ = extMesh->link_H_geometry.getPosition().getVal(2)*scaling_factor;
-        
-        
-        Position scaledPosition(scaledX, scaledY, scaledZ);
-        
-        
-        Transform scaled_link_H_geometry(extMesh->link_H_geometry.getRotation(), scaledPosition);
         // Workaround for bug
         Position offset_bb_wrt_link = extMesh->link_H_geometry*offset_bb_wrt_geom;
 
         box.link_H_geometry = Transform(extMesh->link_H_geometry.getRotation(),
                                          offset_bb_wrt_link);
         
-        
-        
-
         return true;
     }
     else
