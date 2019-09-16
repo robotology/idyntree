@@ -67,6 +67,7 @@ void buildMesh(const aiScene* scene, const aiNode* node, const double scale, std
   }
 
   aiMatrix4x4 transform = node->mTransformation;
+  
   aiNode *pnode = node->mParent;
   while (pnode)
   {
@@ -76,6 +77,8 @@ void buildMesh(const aiScene* scene, const aiNode* node, const double scale, std
       transform = pnode->mTransformation * transform;
     pnode = pnode->mParent;
   }
+  
+  
 
   aiMatrix3x3 rotation(transform);
   aiMatrix3x3 inverse_transpose_rotation(rotation);
@@ -90,6 +93,7 @@ void buildMesh(const aiScene* scene, const aiNode* node, const double scale, std
     for (uint32_t j = 0; j < input_mesh->mNumVertices; j++)
     {
       aiVector3D p = input_mesh->mVertices[j];
+                    
       p *= transform;
       p *= scale;
       vertexVector.push_back(p);
@@ -105,6 +109,8 @@ void buildMesh(const aiScene* scene, const aiNode* node, const double scale, std
 
 bool BBFromExternalShape(ExternalMesh* extMesh, Box& box)
 {
+    
+    
     // Load mesh with assimp
     Assimp::Importer Importer;
 
@@ -113,7 +119,7 @@ bool BBFromExternalShape(ExternalMesh* extMesh, Box& box)
     if (pScene)
     {
         // Extract vector of vertices
-        double scale = 1.0;
+        double scale = 1;
         std::vector<aiVector3D> vertexVector;
         buildMesh(pScene, pScene->mRootNode, scale, vertexVector);
 
@@ -121,7 +127,14 @@ bool BBFromExternalShape(ExternalMesh* extMesh, Box& box)
         {
             return false;
         }
-
+        
+        
+        double scaling_factor=extMesh->scale.getVal(0);
+        for(size_t i=0; i < vertexVector.size(); i++)
+        {
+            vertexVector[i]*=scaling_factor;
+        }
+        
         double minX = vertexVector[0].x;
         double maxX = vertexVector[0].x;
         double minY = vertexVector[0].y;
@@ -129,8 +142,10 @@ bool BBFromExternalShape(ExternalMesh* extMesh, Box& box)
         double minZ = vertexVector[0].z;
         double maxZ = vertexVector[0].z;
 
+        
         for(size_t i=0; i < vertexVector.size(); i++)
         {
+
             if (vertexVector[i].x > maxX)
             {
                 maxX = vertexVector[i].x;
@@ -161,6 +176,7 @@ bool BBFromExternalShape(ExternalMesh* extMesh, Box& box)
                 minZ = vertexVector[i].z;
             }
         }
+        
 
         // The side of the BB is the difference between the max and min
         box.x = maxX-minX;
@@ -172,14 +188,24 @@ bool BBFromExternalShape(ExternalMesh* extMesh, Box& box)
         offset_bb_wrt_geom(0) = (maxX+minX)/2.0;
         offset_bb_wrt_geom(1) = (maxY+minY)/2.0;
         offset_bb_wrt_geom(2) = (maxZ+minZ)/2.0;
-
+        
+        double scaledX = extMesh->link_H_geometry.getPosition().getVal(0)*scaling_factor;
+        double scaledY = extMesh->link_H_geometry.getPosition().getVal(1)*scaling_factor;
+        double scaledZ = extMesh->link_H_geometry.getPosition().getVal(2)*scaling_factor;
+        
+        
+        Position scaledPosition(scaledX, scaledY, scaledZ);
+        
+        
+        Transform scaled_link_H_geometry(extMesh->link_H_geometry.getRotation(), scaledPosition);
         // Workaround for bug
         Position offset_bb_wrt_link = extMesh->link_H_geometry*offset_bb_wrt_geom;
 
-
         box.link_H_geometry = Transform(extMesh->link_H_geometry.getRotation(),
                                          offset_bb_wrt_link);
-
+        
+        
+        
 
         return true;
     }
@@ -228,6 +254,7 @@ bool BBFromShape(SolidShape* geom, Box& box)
     {
         // If shape is an external mesh, we need to load the mesh and extract the BB
         ExternalMesh* pExtMesh = static_cast<ExternalMesh*>(geom);
+        
         return BBFromExternalShape(pExtMesh, box);
     }
 
@@ -288,6 +315,7 @@ bool estimateInertialParametersFromLinkBoundingBoxesAndTotalMass(const double to
     double totalModelBBVolume = 0.0;
     for (LinkIndex lnkIdx=0; lnkIdx < model.getNrOfLinks(); lnkIdx++)
     {
+        
         totalModelBBVolume += boxGetVolume(boundingBoxVolume[lnkIdx]);
     }
 
