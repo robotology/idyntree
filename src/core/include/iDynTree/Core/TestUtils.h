@@ -297,7 +297,7 @@ namespace iDynTree
 
         for( unsigned int i = 0; i < vec1.size(); i++ )
         {
-            if( fabs(vec1(i)-vec2(i)) >= tol )
+            if( !(fabs(vec1(i)-vec2(i)) < tol) )
             {
                 checkCorrect = false;
                 correctElements[i] = false;
