@@ -45,7 +45,13 @@ function KinDynModel = loadReducedModel(jointList,baseLinkName,modelPath,modelNa
     modelLoader            = iDynTree.ModelLoader();
     reducedModel           = modelLoader.model();
 
-    modelLoader.loadReducedModelFromFile([modelPath,modelName], jointList_idyntree);
+    % if the model is a single rigid body, do not use the joints list
+    if isempty(jointList)
+        
+        modelLoader.loadModelFromFile([modelPath,modelName], 'urdf');
+    else
+        modelLoader.loadReducedModelFromFile([modelPath,modelName], jointList_idyntree);
+    end
 
     % get the number of degrees of freedom of the reduced model
     KinDynModel.NDOF       = reducedModel.getNrOfDOFs();
