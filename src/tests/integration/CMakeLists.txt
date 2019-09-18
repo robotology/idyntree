@@ -14,8 +14,10 @@ macro(add_integration_test testname)
     set(testtarget   IntegrationTest${testname})
     add_executable(${testbinary} ${testsrc})
     target_include_directories(${testbinary} PRIVATE ${IDYNTREE_TREE_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR})
-    target_link_libraries(${testbinary} idyntree-core idyntree-model idyntree-modelio-urdf idyntree-high-level idyntree-sensors idyntree-estimation)
-    add_test(NAME ${testtarget} COMMAND ${testbinary})
+    target_link_libraries(${testbinary} idyntree-core idyntree-model idyntree-modelio-urdf idyntree-high-level idyntree-sensors idyntree-estimation idyntree-solid-shapes)
+    # Setting explicitly the WORKING_DIRECTORY is necessary to make sure that meshes are correctly loaded,
+    # as a workaround for https://github.com/robotology/idyntree/issues/291
+    add_test(NAME ${testtarget} COMMAND ${testbinary} WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/src/tests/data)
 
     if(IDYNTREE_RUN_VALGRIND_TESTS)
         add_test(NAME memcheck_${testtarget} COMMAND ${MEMCHECK_COMMAND_COMPLETE} $<TARGET_FILE:${testbinary}>)
@@ -28,7 +30,7 @@ macro(add_integration_test_no_valgrind testname)
     set(testtarget   IntegrationTest${testname})
     add_executable(${testbinary} ${testsrc})
     target_include_directories(${testbinary} PRIVATE ${IDYNTREE_TREE_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR})
-    target_link_libraries(${testbinary} idyntree-core idyntree-model idyntree-modelio-urdf idyntree-high-level idyntree-sensors idyntree-estimation)
+    target_link_libraries(${testbinary} idyntree-core idyntree-model idyntree-modelio-urdf idyntree-high-level idyntree-sensors idyntree-estimation  idyntree-solid-shapes)
     add_test(NAME ${testtarget} COMMAND ${testbinary})
 endmacro()
 
@@ -49,3 +51,7 @@ add_integration_test_no_valgrind(iCubTorqueEstimation)
 
 # Until we fix it, add DynamicsLinearization test but don't execute it
 add_integration_exe(DynamicsLinearization)
+
+if(IDYNTREE_USES_ASSIMP)
+  add_integration_test(InertialParametersSolidShapesHelpers)
+endif()

@@ -18,6 +18,7 @@ add_subdirectory(model)
 add_subdirectory(sensors)
 add_subdirectory(model_io)
 add_subdirectory(estimation)
+add_subdirectory(solid-shapes)
 add_subdirectory(high-level)
 
 if (IDYNTREE_USES_IPOPT)

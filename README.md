@@ -35,6 +35,7 @@ but you can manually make sure that iDynTree searches or ignores a given depende
 - [Libxml2](http://xmlsoft.org/)
 
 ##### Optional
+- [Assimp](http://www.assimp.org/)
 - [IPOPT](https://projects.coin-or.org/Ipopt)
 - [Qt5](https://www.qt.io/)
 - [YARP](https://github.com/robotology/yarp)
