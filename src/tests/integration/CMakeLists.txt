@@ -52,5 +52,6 @@ add_integration_test_no_valgrind(iCubTorqueEstimation)
 # Until we fix it, add DynamicsLinearization test but don't execute it
 add_integration_exe(DynamicsLinearization)
 
-
-add_integration_test(InertialParametersSolidShapesHelpers)
+if(IDYNTREE_USES_ASSIMP)
+  add_integration_test(InertialParametersSolidShapesHelpers)
+endif()
