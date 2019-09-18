@@ -199,6 +199,19 @@ bool BBFromExternalShape(ExternalMesh* extMesh, Box& box)
             return false;
         }
 
+        // Apply scale attribute for external meshes
+        double scalingFactorX=extMesh->scale.getVal(0);
+        double scalingFactorY=extMesh->scale.getVal(1);
+        double scalingFactorZ=extMesh->scale.getVal(2);
+
+        // Use each component to scale each vertex coordinate
+        for(size_t i=0; i < vertexVector.size(); i++)
+        {
+            vertexVector[i].x*=scalingFactorX;
+            vertexVector[i].y*=scalingFactorY;
+            vertexVector[i].z*=scalingFactorZ;
+        }
+
         box = extractAABBFromVertices(extMesh->link_H_geometry, toiDynTree(vertexVector));
 
         return true;
