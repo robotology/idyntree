@@ -7,100 +7,100 @@ classdef AttitudeQuaternionEKFParameters < SwigRef
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1702, self);
+        varargout{1} = iDynTreeMEX(1727, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1703, self, varargin{1});
+        iDynTreeMEX(1728, self, varargin{1});
       end
     end
     function varargout = bias_correlation_time_factor(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1704, self);
+        varargout{1} = iDynTreeMEX(1729, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1705, self, varargin{1});
+        iDynTreeMEX(1730, self, varargin{1});
       end
     end
     function varargout = accelerometer_noise_variance(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1706, self);
+        varargout{1} = iDynTreeMEX(1731, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1707, self, varargin{1});
+        iDynTreeMEX(1732, self, varargin{1});
       end
     end
     function varargout = magnetometer_noise_variance(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1708, self);
+        varargout{1} = iDynTreeMEX(1733, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1709, self, varargin{1});
+        iDynTreeMEX(1734, self, varargin{1});
       end
     end
     function varargout = gyroscope_noise_variance(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1710, self);
+        varargout{1} = iDynTreeMEX(1735, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1711, self, varargin{1});
+        iDynTreeMEX(1736, self, varargin{1});
       end
     end
     function varargout = gyro_bias_noise_variance(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1712, self);
+        varargout{1} = iDynTreeMEX(1737, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1713, self, varargin{1});
+        iDynTreeMEX(1738, self, varargin{1});
       end
     end
     function varargout = initial_orientation_error_variance(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1714, self);
+        varargout{1} = iDynTreeMEX(1739, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1715, self, varargin{1});
+        iDynTreeMEX(1740, self, varargin{1});
       end
     end
     function varargout = initial_ang_vel_error_variance(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1716, self);
+        varargout{1} = iDynTreeMEX(1741, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1717, self, varargin{1});
+        iDynTreeMEX(1742, self, varargin{1});
       end
     end
     function varargout = initial_gyro_bias_error_variance(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1718, self);
+        varargout{1} = iDynTreeMEX(1743, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1719, self, varargin{1});
+        iDynTreeMEX(1744, self, varargin{1});
       end
     end
     function varargout = use_magnetometer_measurements(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1720, self);
+        varargout{1} = iDynTreeMEX(1745, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1721, self, varargin{1});
+        iDynTreeMEX(1746, self, varargin{1});
       end
     end
     function self = AttitudeQuaternionEKFParameters(varargin)
@@ -109,14 +109,14 @@ classdef AttitudeQuaternionEKFParameters < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1722, varargin{:});
+        tmp = iDynTreeMEX(1747, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1723, self);
+        iDynTreeMEX(1748, self);
         self.SwigClear();
       end
     end
