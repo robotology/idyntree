@@ -108,6 +108,7 @@
 #include "iDynTree/ModelIO/URDFDofsImport.h"
 #include "iDynTree/ModelIO/URDFGenericSensorsImport.h"
 #include "iDynTree/ModelIO/ModelLoader.h"
+#include "iDynTree/ModelIO/ModelExporter.h"
 
 // Estimation related classes
 #include "iDynTree/Estimation/ExternalWrenchesEstimation.h"
@@ -119,6 +120,9 @@
 #include "iDynTree/Estimation/AttitudeMahonyFilter.h"
 #include "iDynTree/Estimation/ExtendedKalmanFilter.h"
 #include "iDynTree/Estimation/AttitudeQuaternionEKF.h"
+
+// SolidShapes related classes
+#include "iDynTree/InertialParametersSolidShapesHelpers.h"
 
 // Regressors related data structures
 #include "iDynTree/Regressors/DynamicsRegressorParameters.h"
@@ -312,6 +316,7 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/ModelIO/URDFDofsImport.h"
 %include "iDynTree/ModelIO/URDFGenericSensorsImport.h"
 %include "iDynTree/ModelIO/ModelLoader.h"
+%include "iDynTree/ModelIO/ModelExporter.h"
 
 // Estimation related classes
 %include "iDynTree/Estimation/ExternalWrenchesEstimation.h"
@@ -323,6 +328,9 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/Estimation/AttitudeMahonyFilter.h"
 %include "iDynTree/Estimation/ExtendedKalmanFilter.h"
 %include "iDynTree/Estimation/AttitudeQuaternionEKF.h"
+
+// SolidShapes related classes
+%include "iDynTree/InertialParametersSolidShapesHelpers.h"
 
 // Regressors related data structures
 %include "iDynTree/Regressors/DynamicsRegressorParameters.h"
