@@ -215,6 +215,12 @@ public:
     bool includeCoMAccelerometerAsSensor;
 
     /**
+     * Vector of link indexes that are considered for rate of change of momentum constraint using CoM accelerometer sensor
+     * The default value is set to contains all the links present in the model
+     */
+    std::vector<LinkIndex> comConstraintLinkIndexVector;
+
+    /**
      * If includeNetExternalWrenchesAsSensors is true and the
      * variant is ORIGINAL_BERDY_FIXED_BASE, if this is
      * true the external wrench acting on the base fixed link

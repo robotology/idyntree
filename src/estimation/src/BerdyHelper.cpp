@@ -1406,14 +1406,14 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
     ////////////////////////////////////////////////////////////////////////
     if (m_options.includeCoMAccelerometerAsSensor)
     {
-
         // Get the row index corresponding to the com accelerometer sensor
         IndexRange comAccelerometerRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR);
 
-        for(LinkIndex idx = 0; idx < static_cast<LinkIndex>(m_model.getNrOfLinks()); idx++)
+        for(LinkIndex idx = 0; idx < static_cast<LinkIndex>(m_options.comConstraintLinkIndexVector.size()); idx++)
         {
             // Get the column index corresponding to the net link external wrench sensor
-            IndexRange netExternalWrenchSensor = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR, idx);
+            IndexRange netExternalWrenchSensor = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR,
+                                                                                  static_cast<LinkIndex>(m_options.comConstraintLinkIndexVector.at(idx)));
 
             iDynTree::Rotation base_R_link = base_H_links(idx).getRotation();
             iDynTree::Matrix3x3 base_R_link_M33;
@@ -1446,6 +1446,15 @@ bool BerdyHelper::initBerdyFloatingBase()
     // The dynamics equations considered by floating berdy are the acceleration propagation for each joint and the
     // Newton-Euler equations for each link
     m_nrOfDynamicEquations   = 6*m_model.getNrOfLinks() + 6*m_model.getNrOfJoints();
+
+    // check comConstraintLinkIndexVector is correctly set
+    if (m_options.includeCoMAccelerometerAsSensor) {
+        if (m_options.comConstraintLinkIndexVector.size() == 0)
+        {
+            reportError("BerdyHelpers","initBerdyFloatingBase","comConstraintLinkIndexVector is not initialized correctly, the size is 0");
+            res = false;
+        }
+    }
 
     initSensorsMeasurements();
 
