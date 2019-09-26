@@ -1409,11 +1409,14 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
         // Get the row index corresponding to the com accelerometer sensor
         IndexRange comAccelerometerRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR);
 
-        for(LinkIndex idx = 0; idx < static_cast<LinkIndex>(m_options.comConstraintLinkIndexVector.size()); idx++)
+        for(size_t i = 0; i < m_options.comConstraintLinkIndexVector.size(); i++)
         {
+            // Get link index from the vector
+            LinkIndex idx = m_options.comConstraintLinkIndexVector.at(i);
+
             // Get the column index corresponding to the net link external wrench sensor
             IndexRange netExternalWrenchSensor = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR,
-                                                                                  static_cast<LinkIndex>(m_options.comConstraintLinkIndexVector.at(idx)));
+                                                                                  idx);
 
             iDynTree::Rotation base_R_link = base_H_links(idx).getRotation();
             iDynTree::Matrix3x3 base_R_link_M33;
