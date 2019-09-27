@@ -35,7 +35,7 @@ with your GitHub account, and you will automatically receive notifications if yo
 * Check if Travis and AppVeyor compiler and run the test without any failure.  
 
 ## How to add wrap a new class or function with SWIG 
-* Include the new header in [bindings/iDynTree.i](bindings/iDynTree.i) . 
+* Include the new header in [bindings/iDynTree.i](bindings/iDynTree.i) .  For a little more detailed overview, check [doc/generating-idyntree-matlab-bindings.md](../../doc/generating-idyntree-matlab-bindings.md) . 
   * Notice that the headers should be included two times, take inspiration from the headers already present to get the idea.
   * Remember to include the headers following the inheritance order of the classes. 
 * If you add a instantiated template, remember to add it to swig with the `%template` SWIG command. 
