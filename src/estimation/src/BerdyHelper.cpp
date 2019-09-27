@@ -259,6 +259,9 @@ bool BerdyHelper::initSensorsMeasurements()
             && !m_options.includeFixedBaseExternalWrench)
             numOfExternalWrenches = this->m_model.getNrOfLinks() - 1;
         m_nrOfSensorsMeasurements += 6 * numOfExternalWrenches;
+
+        // TODO: Double check if this can be handled better
+        m_task1_nrOfSensorsMeasurements = 6*numOfExternalWrenches;
     }
 
     berdySensorTypeOffsets.jointWrenchOffset = m_nrOfSensorsMeasurements;
@@ -289,6 +292,7 @@ bool BerdyHelper::initSensorsMeasurements()
     {
         berdySensorTypeOffsets.comAccelerationOffset = m_nrOfSensorsMeasurements;
         m_nrOfSensorsMeasurements += 3;
+        m_task1_nrOfSensorsMeasurements += 3;
     }
 
     //Create sensor ordering vector
@@ -998,6 +1002,39 @@ Matrix6x1 BerdyHelper::getBiasTermJointAccelerationPropagation(IJointConstPtr jo
     return biasTerm;
 }
 
+// TODO: This is repetitive from computeBerdyDynamicsMatricesFloatingBase,
+// Need to clean up into sub routines for modularity and avoiding code duplication
+bool BerdyHelper::computeTask1BerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree::ColumnMajor>& task1_D, VectorDynSize& task1_bD)
+{
+    task1_D.resize(m_task1_nrOfDynamicEquations, m_task1_nrOfDynamicalVariables);
+    task1_bD.resize(m_task1_nrOfDynamicEquations);
+
+    task1_matrixDElements.clear();
+    task1_bD.zero();
+
+    // Add the equation of the Newton-Euler for a link
+    for (LinkIndex lnkIdx=0; lnkIdx < static_cast<LinkIndex>(m_model.getNrOfLinks()); lnkIdx++)
+    {
+        LinkConstPtr link = m_model.getLink(lnkIdx);
+
+        // Term depending on external force-torque
+        matrixDElements.addDiagonalMatrix(getRangeNewtonEulerEquationsFloatingBase(lnkIdx),
+                                          getRangeLinkVariable(NET_EXT_WRENCH, lnkIdx),
+                                          -1);
+
+        // TODO: Double check this bias term
+        // bias Term
+        Twist angularPartOfLeftTrivializedVel = Twist(LinearMotionVector3(0.0, 0.0, 0.0), m_linkVels(lnkIdx).getAngularVec3());
+        setSubVector(task1_bD,
+                     getRangeNewtonEulerEquationsFloatingBase(lnkIdx),
+                     toEigen(angularPartOfLeftTrivializedVel.cross(
+                             link->getInertia() * angularPartOfLeftTrivializedVel)));
+    }
+
+    task1_D.setFromTriplets(task1_matrixDElements);
+    return true;
+}
+
 bool BerdyHelper::computeBerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD)
 {
     D.resize(m_nrOfDynamicEquations,m_nrOfDynamicalVariables);
@@ -1099,6 +1136,73 @@ bool BerdyHelper::computeBerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree
     }
 
     D.setFromTriplets(matrixDElements);
+    return true;
+}
+
+// TODO: This is repetitive from computeBerdySensorMatrices,
+// Need to clean up into sub routines for modularity and avoiding code duplication
+bool BerdyHelper::computeTask1SensorMatrices(SparseMatrix<iDynTree::ColumnMajor>& task1_Y, VectorDynSize& task1_bY)
+{
+    task1_Y.resize(m_task1_nrOfSensorsMeasurements, m_task1_nrOfDynamicalVariables);
+    task1_bY.resize(m_nrOfSensorsMeasurements);
+
+    task1_matrixYElements.clear();
+    task1_bY.zero();
+
+    // The task1_Y matrix contains rows equal to the number of SIX_AXIS_FORCE_TORQUE sensors plus 3 rows for the COM_ACCELEROMETER_SENSOR
+    ////////////////////////////////////////////////////////////////////////
+    ///// SIX AXIS F/T SENSORS
+    ////////////////////////////////////////////////////////////////////////
+    size_t numOfFTs = m_sensors.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);
+    for(size_t idx = 0; idx<numOfFTs; idx++)
+    {
+        SixAxisForceTorqueSensor * ftSens = (SixAxisForceTorqueSensor*)m_sensors.getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE, idx);
+        LinkIndex childLink;
+        childLink = m_dynamicsTraversal.getChildLinkIndexFromJointIndex(m_model,ftSens->getParentJointIndex());
+        Matrix6x6 sensor_M_link;
+        ftSens->getWrenchAppliedOnLinkInverseMatrix(childLink,sensor_M_link);
+        IndexRange sensorRange = this->getRangeSensorVariable(SIX_AXIS_FORCE_TORQUE,idx);
+        IndexRange jointWrenchRange = this->getRangeJointVariable(JOINT_WRENCH,ftSens->getParentJointIndex());
+
+        task1_matrixYElements.addSubMatrix(sensorRange.offset,
+                                     jointWrenchRange.offset,
+                                     sensor_M_link);
+        // bY for the F/T sensor is equal to zero
+    }
+
+    ////////////////////////////////////////////////////////////////////////
+    ///// COM ACCELERATION SENSOR
+    ////////////////////////////////////////////////////////////////////////
+    if (m_options.includeCoMAccelerometerAsSensor)
+    {
+        // Get the row index corresponding to the com accelerometer sensor
+        IndexRange comAccelerometerRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR);
+
+        for(size_t i = 0; i < m_options.comConstraintLinkIndexVector.size(); i++)
+        {
+            // Get link index from the vector
+            LinkIndex idx = m_options.comConstraintLinkIndexVector.at(i);
+
+            // Get the column index corresponding to the net link external wrench sensor
+            IndexRange netExternalWrenchSensor = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR,
+                                                                                  idx);
+
+            iDynTree::Rotation base_R_link = base_H_links(idx).getRotation();
+            iDynTree::Matrix3x3 base_R_link_M33;
+            iDynTree::toEigen(base_R_link_M33) = iDynTree::toEigen(base_R_link);
+
+            // Get link to base rotation
+            task1_matrixYElements.addSubMatrix(comAccelerometerRange.offset,
+                                               netExternalWrenchSensor.offset,
+                                               base_R_link_M33);
+
+        }
+
+
+        // bY for the com acceleratio sensor is zeor
+    }
+
+    task1_Y.setFromTriplets(task1_matrixYElements);
     return true;
 }
 
@@ -1450,6 +1554,12 @@ bool BerdyHelper::initBerdyFloatingBase()
     // Newton-Euler equations for each link
     m_nrOfDynamicEquations   = 6*m_model.getNrOfLinks() + 6*m_model.getNrOfJoints();
 
+    // Task1 dynamic variabels include 6*nrOfLinks for the net external wrenches
+    m_task1_nrOfDynamicalVariables = 6*m_model.getNrOfLinks();
+
+    // TODO: Double check this
+    m_task1_nrOfDynamicEquations = 6*m_model.getNrOfLinks();
+
     // check comConstraintLinkIndexVector is correctly set
     if (m_options.includeCoMAccelerometerAsSensor) {
         if (m_options.comConstraintLinkIndexVector.size() == 0)
@@ -1504,6 +1614,36 @@ size_t BerdyHelper::getNrOfDynamicEquations() const
 size_t BerdyHelper::getNrOfSensorsMeasurements() const
 {
     return m_nrOfSensorsMeasurements;
+}
+
+size_t BerdyHelper::getNrOfDynamicVariables(const bool& task1) const
+{
+    if (task1) {
+        return m_task1_nrOfDynamicalVariables;
+    }
+    else {
+        return m_nrOfDynamicalVariables;
+    }
+}
+
+size_t BerdyHelper::getNrOfDynamicEquations(const bool& task1) const
+{
+    if (task1) {
+        return m_task1_nrOfDynamicEquations;
+    }
+    else {
+        return m_nrOfDynamicEquations;
+    }
+}
+
+size_t BerdyHelper::getNrOfSensorsMeasurements(const bool& task1) const
+{
+    if (task1) {
+        return m_task1_nrOfSensorsMeasurements;
+    }
+    else {
+        return m_nrOfSensorsMeasurements;
+    }
 }
 
 bool BerdyHelper::resizeAndZeroBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD,
@@ -1613,6 +1753,71 @@ bool BerdyHelper::updateKinematicsFromFloatingBase(const JointPosDoubleArray& jo
     return ok;
 }
 
+//TODO: These following two methods can replace the old ones
+bool BerdyHelper::getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD,
+                                   SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize& bY,
+                                   bool task1)
+{
+    if (!m_kinematicsUpdated)
+    {
+        reportError("BerdyHelpers","getBerdyMatrices",
+                    "Kinematic information not set.");
+        return false;
+    }
+
+
+    bool res = true;
+
+    // Compute D matrix of dynamics equations
+    if (m_options.berdyVariant == ORIGINAL_BERDY_FIXED_BASE)
+    {
+        res = res && computeBerdyDynamicsMatricesFixedBase(D, bD);
+    }
+    else
+    {
+        assert(m_options.berdyVariant == BERDY_FLOATING_BASE);
+
+        if (task1) {
+            res = res && computeTask1BerdyDynamicsMatricesFloatingBase(D, bD);
+        }
+        else {
+            res = res && computeBerdyDynamicsMatricesFloatingBase(D, bD);
+        }
+    }
+
+    // Compute Y matrix of sensors
+    if (task1) {
+        res = res && computeTask1SensorMatrices(Y, bY);
+    }
+    else {
+        res = res && computeBerdySensorMatrices(Y, bY);
+    }
+
+    return res;
+}
+
+bool BerdyHelper::getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
+                                   MatrixDynSize & Y, VectorDynSize & bY, bool task1)
+{
+    SparseMatrix<iDynTree::ColumnMajor> DSparse(getNrOfDynamicEquations(),getNrOfDynamicVariables());
+    SparseMatrix<iDynTree::ColumnMajor> YSparse(getNrOfSensorsMeasurements(),getNrOfDynamicVariables());
+
+    bool result = getBerdyMatrices(DSparse, bD, YSparse, bY, task1);
+    if (!result) return false;
+
+    for (SparseMatrix<iDynTree::ColumnMajor>::const_iterator it(DSparse.begin());
+         it != DSparse.end(); ++it) {
+        D(it->row, it->column) = it->value;
+    }
+
+    for (SparseMatrix<iDynTree::ColumnMajor>::const_iterator it(YSparse.begin());
+         it != YSparse.end(); ++it) {
+        Y(it->row, it->column) = it->value;
+    }
+    return true;
+}
+
+//TODO: The following functions can be deprecated in the next release
 bool BerdyHelper::getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD,
                                    SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize& bY)
 {
@@ -1643,26 +1848,26 @@ bool BerdyHelper::getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, Vecto
     return res;
 }
 
-    bool BerdyHelper::getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
-                                       MatrixDynSize & Y, VectorDynSize & bY)
-    {
-        SparseMatrix<iDynTree::ColumnMajor> DSparse(getNrOfDynamicEquations(),getNrOfDynamicVariables());
-        SparseMatrix<iDynTree::ColumnMajor> YSparse(getNrOfSensorsMeasurements(),getNrOfDynamicVariables());
+bool BerdyHelper::getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
+                                   MatrixDynSize & Y, VectorDynSize & bY)
+{
+    SparseMatrix<iDynTree::ColumnMajor> DSparse(getNrOfDynamicEquations(),getNrOfDynamicVariables());
+    SparseMatrix<iDynTree::ColumnMajor> YSparse(getNrOfSensorsMeasurements(),getNrOfDynamicVariables());
 
-        bool result = getBerdyMatrices(DSparse, bD, YSparse, bY);
-        if (!result) return false;
+    bool result = getBerdyMatrices(DSparse, bD, YSparse, bY);
+    if (!result) return false;
 
-        for (SparseMatrix<iDynTree::ColumnMajor>::const_iterator it(DSparse.begin());
-             it != DSparse.end(); ++it) {
-            D(it->row, it->column) = it->value;
-        }
-
-        for (SparseMatrix<iDynTree::ColumnMajor>::const_iterator it(YSparse.begin());
-             it != YSparse.end(); ++it) {
-            Y(it->row, it->column) = it->value;
-        }
-        return true;
+    for (SparseMatrix<iDynTree::ColumnMajor>::const_iterator it(DSparse.begin());
+         it != DSparse.end(); ++it) {
+        D(it->row, it->column) = it->value;
     }
+
+    for (SparseMatrix<iDynTree::ColumnMajor>::const_iterator it(YSparse.begin());
+         it != YSparse.end(); ++it) {
+        Y(it->row, it->column) = it->value;
+    }
+    return true;
+}
 
 
     void BerdyHelper::cacheSensorsOrdering()

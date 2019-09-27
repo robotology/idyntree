@@ -45,6 +45,12 @@ namespace iDynTree {
         void setDynamicsRegularizationPriorExpectedValue(const iDynTree::VectorDynSize& expectedValue);
         void setMeasurementsPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance);
 
+        // New methods with additional bool flag for task1
+        void setDynamicsConstraintsPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor> & covariance, const bool& task1);
+        void setDynamicsRegularizationPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance, const bool& task1);
+        void setDynamicsRegularizationPriorExpectedValue(const iDynTree::VectorDynSize& expectedValue, const bool& task1);
+        void setMeasurementsPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance, const bool& task1);
+
         const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& dynamicsConstraintsPriorCovarianceInverse() const; // Sigma_D^-1
         iDynTree::SparseMatrix<iDynTree::ColumnMajor>& dynamicsConstraintsPriorCovarianceInverse(); // Sigma_D^-1
         const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& dynamicsRegularizationPriorCovarianceInverse() const; // Sigma_d^-1
@@ -70,7 +76,15 @@ namespace iDynTree {
                                                    const Vector3& bodyAngularVelocityOfSpecifiedFrame,
                                                    const VectorDynSize& measurements);
 
+        void updateEstimateInformationFloatingBase(const JointPosDoubleArray& jointsConfiguration,
+                                                   const JointDOFsDoubleArray& jointsVelocity,
+                                                   const FrameIndex floatingFrame,
+                                                   const Vector3& bodyAngularVelocityOfSpecifiedFrame,
+                                                   const VectorDynSize& measurements,
+                                                   bool& task1);
+
         bool doEstimate();
+        bool doEstimate(const bool& task1);
 
         void getLastEstimate(iDynTree::VectorDynSize& lastEstimate) const;
         const iDynTree::VectorDynSize& getLastEstimate() const;

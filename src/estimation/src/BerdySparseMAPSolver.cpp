@@ -65,6 +65,43 @@ namespace iDynTree {
         Eigen::SimplicialLDLT<Eigen::SparseMatrix<double, Eigen::ColMajor> > covarianceDynamicsPriorInverseDecomposition;
         Eigen::SimplicialLDLT<Eigen::SparseMatrix<double, Eigen::ColMajor> > covarianceDynamicsAPosterioriInverseDecomposition;
 
+        // TODO: Guess having a separate buffers for berdy task1 solving is faster than changing the matrix sizes
+        // Double check this
+
+        // Task1 measurements
+        iDynTree::VectorDynSize task1_measurements;
+
+        // Priors on regularization, measurements and dynamics constraints
+        // These variables should be filled in the "initialization" phase
+        iDynTree::SparseMatrix<iDynTree::ColumnMajor> task1_priorDynamicsConstraintsCovarianceInverse; // Sigma_D^-1
+        iDynTree::SparseMatrix<iDynTree::ColumnMajor> task1_priorDynamicsRegularizationCovarianceInverse; // Sigma_d^-1
+        iDynTree::VectorDynSize task1_priorDynamicsRegularizationExpectedValue; // mu_d
+        iDynTree::SparseMatrix<iDynTree::ColumnMajor> task1_priorMeasurementsCovarianceInverse; // Sigma_y^-1
+
+        // The following variables are mainly buffers to contain intermediate results
+
+        // These matrices contain the elements representing the berdy system
+        iDynTree::SparseMatrix<iDynTree::ColumnMajor> task1_dynamicsConstraintsMatrix;
+        iDynTree::SparseMatrix<iDynTree::ColumnMajor> task1_measurementsMatrix;
+        iDynTree::VectorDynSize task1_dynamicsConstraintsBias;
+        iDynTree::VectorDynSize task1_measurementsBias;
+
+        // Expected value and variance of the prior on the dynamics
+        iDynTree::VectorDynSize task1_expectedDynamicsPrior;
+        Eigen::SparseMatrix<double, Eigen::ColMajor> task1_covarianceDynamicsPriorInverse;
+
+        iDynTree::VectorDynSize task1_expectedDynamicsPriorRHS;
+
+        // Expected value and variance of the a-posteriori on the dynamics
+        iDynTree::VectorDynSize task1_expectedDynamicsAPosteriori;
+        Eigen::SparseMatrix<double, Eigen::ColMajor> task1_covarianceDynamicsAPosterioriInverse;
+        iDynTree::VectorDynSize task1_expectedDynamicsAPosterioriRHS;
+
+        // Decomposition buffers
+        Eigen::SimplicialLDLT<Eigen::SparseMatrix<double, Eigen::ColMajor> > task1_covarianceDynamicsPriorInverseDecomposition;
+        Eigen::SimplicialLDLT<Eigen::SparseMatrix<double, Eigen::ColMajor> > task1_covarianceDynamicsAPosterioriInverseDecomposition;
+
+
         BerdySparseMAPSolverPimpl(BerdyHelper& berdyHelper)
         : berdy(berdyHelper)
         , valid(false)
@@ -73,7 +110,9 @@ namespace iDynTree {
         }
 
         bool initialize();
+        void initializeTask1Buffers();
         void computeMAP(bool computePermutation);
+        void computeStackOfTasksMap(bool computePermutation);
         static bool invertSparseMatrix(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>&in, iDynTree::SparseMatrix<iDynTree::ColumnMajor>& inverted);
     };
 
@@ -118,6 +157,74 @@ namespace iDynTree {
         assert(covariance.rows() == m_pimpl->priorMeasurementsCovarianceInverse.rows()
                && covariance.columns() == m_pimpl->priorMeasurementsCovarianceInverse.columns());
         BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::invertSparseMatrix(covariance, m_pimpl->priorMeasurementsCovarianceInverse);
+    }
+
+    // New methods with additional bool flag for task1
+    void BerdySparseMAPSolver::setDynamicsConstraintsPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance,
+                                                                     const bool& task1)
+    {
+        assert(m_pimpl);
+
+        if (task1) {
+            assert(covariance.rows() == m_pimpl->task1_priorDynamicsConstraintsCovarianceInverse.rows()
+                   && covariance.columns() == m_pimpl->task1_priorDynamicsConstraintsCovarianceInverse.columns());
+            BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::invertSparseMatrix(covariance, m_pimpl->task1_priorDynamicsConstraintsCovarianceInverse);
+        }
+        else {
+            assert(covariance.rows() == m_pimpl->priorDynamicsConstraintsCovarianceInverse.rows()
+                   && covariance.columns() == m_pimpl->priorDynamicsConstraintsCovarianceInverse.columns());
+            BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::invertSparseMatrix(covariance, m_pimpl->priorDynamicsConstraintsCovarianceInverse);
+        }
+
+    }
+
+    void BerdySparseMAPSolver::setDynamicsRegularizationPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance,
+                                                                        const bool& task1)
+    {
+        assert(m_pimpl);
+
+        if (task1) {
+            assert(covariance.rows() == m_pimpl->task1_priorDynamicsRegularizationCovarianceInverse.rows()
+                   && covariance.columns() == m_pimpl->task1_priorDynamicsRegularizationCovarianceInverse.columns());
+            BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::invertSparseMatrix(covariance, m_pimpl->task1_priorDynamicsRegularizationCovarianceInverse);
+        }
+        else {
+            assert(covariance.rows() == m_pimpl->priorDynamicsRegularizationCovarianceInverse.rows()
+                   && covariance.columns() == m_pimpl->priorDynamicsRegularizationCovarianceInverse.columns());
+            BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::invertSparseMatrix(covariance, m_pimpl->priorDynamicsRegularizationCovarianceInverse);
+        }
+    }
+
+    void BerdySparseMAPSolver::setDynamicsRegularizationPriorExpectedValue(const iDynTree::VectorDynSize& expectedValue,
+                                                                           const bool& task1)
+    {
+        assert(m_pimpl);
+
+        if (task1) {
+            assert(expectedValue.size() == m_pimpl->task1_priorDynamicsRegularizationExpectedValue.size());
+            m_pimpl->task1_priorDynamicsRegularizationExpectedValue = expectedValue;
+        }
+        else {
+            assert(expectedValue.size() == m_pimpl->priorDynamicsRegularizationExpectedValue.size());
+            m_pimpl->priorDynamicsRegularizationExpectedValue = expectedValue;
+        }
+    }
+
+    void BerdySparseMAPSolver::setMeasurementsPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance,
+                                                              const bool& task1)
+    {
+        assert(m_pimpl);
+
+        if (task1) {
+            assert(covariance.rows() == m_pimpl->task1_priorMeasurementsCovarianceInverse.rows()
+                   && covariance.columns() == m_pimpl->task1_priorMeasurementsCovarianceInverse.columns());
+            BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::invertSparseMatrix(covariance, m_pimpl->task1_priorMeasurementsCovarianceInverse);
+        }
+        else {
+            assert(covariance.rows() == m_pimpl->priorMeasurementsCovarianceInverse.rows()
+                   && covariance.columns() == m_pimpl->priorMeasurementsCovarianceInverse.columns());
+            BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::invertSparseMatrix(covariance, m_pimpl->priorMeasurementsCovarianceInverse);
+        }
     }
 
     const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& BerdySparseMAPSolver::dynamicsConstraintsPriorCovarianceInverse() const
@@ -212,6 +319,50 @@ namespace iDynTree {
                                                         floatingFrame, bodyAngularVelocityOfSpecifiedFrame);
     }
 
+    void BerdySparseMAPSolver::updateEstimateInformationFloatingBase(const iDynTree::JointPosDoubleArray& jointsConfiguration,
+                                                                     const iDynTree::JointDOFsDoubleArray& jointsVelocity,
+                                                                     const FrameIndex floatingFrame,
+                                                                     const Vector3& bodyAngularVelocityOfSpecifiedFrame,
+                                                                     const iDynTree::VectorDynSize& measurements,
+                                                                     bool& task1)
+    {
+        assert(m_pimpl);
+
+        m_pimpl->jointsConfiguration = jointsConfiguration;
+        m_pimpl->jointsVelocity = jointsVelocity;
+
+        if (task1) {
+            m_pimpl->task1_measurements = measurements;
+        }
+        else {
+            m_pimpl->measurements = measurements;
+        }
+
+        m_pimpl->berdy.updateKinematicsFromFloatingBase(m_pimpl->jointsConfiguration, m_pimpl->jointsVelocity,
+                                                        floatingFrame, bodyAngularVelocityOfSpecifiedFrame);
+    }
+
+    bool BerdySparseMAPSolver::doEstimate(const bool& task1)
+    {
+        assert(m_pimpl);
+        using iDynTree::toEigen;
+#ifdef EIGEN_RUNTIME_NO_MALLOC
+        Eigen::internal::set_is_malloc_allowed(false);
+#endif
+        bool computePermutation = false;
+
+        if (task1) {
+            m_pimpl->computeStackOfTasksMap(computePermutation);
+        }
+
+        //m_pimpl->computeMAP(computePermutation);
+
+#ifdef EIGEN_RUNTIME_NO_MALLOC
+        Eigen::internal::set_is_malloc_allowed(true);
+#endif
+        return true;
+    }
+
     bool BerdySparseMAPSolver::doEstimate()
     {
         assert(m_pimpl);
@@ -238,6 +389,69 @@ namespace iDynTree {
     {
         assert(m_pimpl);
         return m_pimpl->expectedDynamicsAPosteriori;
+    }
+
+    // Stack of tasks computation of MAP
+    void BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::computeStackOfTasksMap(bool computePermutation)
+    {
+
+        /*
+         * Get berdy task1 matrices
+         */
+        berdy.getBerdyMatrices(task1_dynamicsConstraintsMatrix,
+                               task1_dynamicsConstraintsBias,
+                               task1_measurementsMatrix,
+                               task1_measurementsBias,
+                               true);
+
+        // Compute the maximum a posteriori probability
+        // See Latella et al., "Whole-Body Human Inverse Dynamics with
+        // Distributed Micro-Accelerometers, Gyros and Force Sensing" in Sensors, 2016
+
+        // Intermediate quantities
+
+        // Covariance matrix of the prior of the dynamics: var[p(d)], Eq. 10a
+        //TODO: find a way to map to iDynTree::SparseMatrix
+        task1_covarianceDynamicsPriorInverse
+        //    toEigen(m_intermediateQuantities.covarianceDynamicsPriorInverse)
+        //Better to assign the "sum" before, and adding the product part later
+        = toEigen(task1_priorDynamicsRegularizationCovarianceInverse);
+
+        task1_covarianceDynamicsPriorInverse += toEigen(task1_dynamicsConstraintsMatrix).transpose() * toEigen(task1_priorDynamicsConstraintsCovarianceInverse) * toEigen(task1_dynamicsConstraintsMatrix);
+
+        // decompose m_covarianceDynamicsPriorInverse
+        if (computePermutation) {
+            task1_covarianceDynamicsPriorInverseDecomposition.analyzePattern(task1_covarianceDynamicsPriorInverse);
+        }
+        //    m_intermediateQuantities.covarianceDynamicsPriorInverseDecomposition.factorize(toEigen(m_intermediateQuantities.covarianceDynamicsPriorInverse));
+        task1_covarianceDynamicsPriorInverseDecomposition.factorize(task1_covarianceDynamicsPriorInverse);
+
+        // Expected value of the prior of the dynamics: E[p(d)], Eq. 10b
+        toEigen(task1_expectedDynamicsPriorRHS) = toEigen(task1_priorDynamicsRegularizationCovarianceInverse) * toEigen(task1_priorDynamicsRegularizationExpectedValue) - toEigen(task1_dynamicsConstraintsMatrix).transpose() * toEigen(task1_priorDynamicsConstraintsCovarianceInverse) * toEigen(task1_dynamicsConstraintsBias);
+
+        toEigen(task1_expectedDynamicsPrior) =
+        task1_covarianceDynamicsPriorInverseDecomposition.solve(toEigen(task1_expectedDynamicsPriorRHS));
+
+        // Final result: covariance matrix of the whole-body dynamics, Eq. 11a
+        //TODO: find a way to map to iDynTree::SparseMatrix
+        task1_covarianceDynamicsAPosterioriInverse = task1_covarianceDynamicsPriorInverse;
+        task1_covarianceDynamicsAPosterioriInverse += toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_priorMeasurementsCovarianceInverse) * toEigen(task1_measurementsMatrix);
+
+        // decompose m_covarianceDynamicsAPosterioriInverse
+        if (computePermutation) {
+            //        m_intermediateQuantities.covarianceDynamicsAPosterioriInverseDecomposition.analyzePattern(toEigen(m_covarianceDynamicsAPosterioriInverse));
+            task1_covarianceDynamicsAPosterioriInverseDecomposition.analyzePattern(task1_covarianceDynamicsAPosterioriInverse);
+        }
+        //    m_intermediateQuantities.covarianceDynamicsAPosterioriInverseDecomposition.factorize(toEigen(m_covarianceDynamicsAPosterioriInverse));
+        task1_covarianceDynamicsAPosterioriInverseDecomposition.factorize(task1_covarianceDynamicsAPosterioriInverse);
+
+        // Final result: expected value of the whole-body dynamics, Eq. 11b
+        toEigen(task1_expectedDynamicsAPosterioriRHS) = (toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_priorMeasurementsCovarianceInverse) * (toEigen(task1_measurements) - toEigen(task1_measurementsBias)) + covarianceDynamicsPriorInverse * toEigen(task1_expectedDynamicsPrior));
+        toEigen(task1_expectedDynamicsAPosteriori) =
+        task1_covarianceDynamicsAPosterioriInverseDecomposition.solve(toEigen(task1_expectedDynamicsAPosterioriRHS));
+
+
+
     }
 
     void BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::computeMAP(bool computePermutation)
@@ -298,6 +512,51 @@ namespace iDynTree {
         covarianceDynamicsAPosterioriInverseDecomposition.solve(toEigen(expectedDynamicsAPosterioriRHS));
     }
 
+    void BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::initializeTask1Buffers()
+    {
+        // Resize task1 buffers
+        size_t task1_numberOfDynVariables = berdy.getNrOfDynamicVariables(true);
+        size_t task1_numberOfDynEquations = berdy.getNrOfDynamicEquations(true);
+        size_t task1_numberOfMeasurements = berdy.getNrOfSensorsMeasurements(true);
+
+        task1_measurements.resize(task1_numberOfMeasurements);
+        task1_measurements.zero();
+
+        task1_expectedDynamicsAPosteriori.resize(task1_numberOfDynVariables);
+        task1_expectedDynamicsAPosteriori.zero();
+        task1_covarianceDynamicsAPosterioriInverse.resize(task1_numberOfDynVariables, task1_numberOfDynVariables);
+
+        task1_covarianceDynamicsPriorInverse.resize(task1_numberOfDynVariables, task1_numberOfDynVariables);
+        task1_expectedDynamicsPrior.resize(task1_numberOfDynVariables);
+        task1_expectedDynamicsPriorRHS.resize(task1_numberOfDynVariables);
+        task1_expectedDynamicsAPosterioriRHS.resize(task1_numberOfDynVariables);
+        task1_expectedDynamicsAPosterioriRHS.zero();
+
+        // Resize task1 priors and set them to identity.
+        // If a prior is specified in config file they will be cleared after
+        iDynTree::Triplets identityTriplets;
+        task1_priorDynamicsConstraintsCovarianceInverse.resize(task1_numberOfDynEquations, task1_numberOfDynEquations);
+        identityTriplets.reserve(task1_numberOfDynEquations);
+        identityTriplets.setDiagonalMatrix(0, 0, 1.0, task1_numberOfDynEquations);
+        task1_priorDynamicsConstraintsCovarianceInverse.setFromTriplets(identityTriplets);
+
+        task1_priorDynamicsRegularizationCovarianceInverse.resize(task1_numberOfDynVariables, task1_numberOfDynVariables);
+        identityTriplets.clear();
+        identityTriplets.reserve(task1_numberOfDynVariables);
+        identityTriplets.setDiagonalMatrix(0, 0, 1.0, task1_numberOfDynVariables);
+        task1_priorDynamicsRegularizationCovarianceInverse.setFromTriplets(identityTriplets);
+
+        task1_priorMeasurementsCovarianceInverse.resize(task1_numberOfMeasurements, task1_numberOfMeasurements);
+        identityTriplets.clear();
+        identityTriplets.reserve(task1_numberOfMeasurements);
+        identityTriplets.setDiagonalMatrix(0, 0, 1.0, task1_numberOfMeasurements);
+        task1_priorMeasurementsCovarianceInverse.setFromTriplets(identityTriplets);
+
+        task1_priorDynamicsRegularizationExpectedValue.resize(task1_numberOfDynVariables);
+        task1_priorDynamicsRegularizationExpectedValue.zero();
+
+    }
+
     bool BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::initialize()
     {
         valid = false;
@@ -351,6 +610,9 @@ namespace iDynTree {
         Vector3 initialGravity;
         initialGravity.zero();
         initialGravity(2) = -9.81;
+
+        // Call to initialize task1 buffers
+        initializeTask1Buffers();
 
         berdy.updateKinematicsFromFixedBase(jointsConfiguration, jointsVelocity, berdy.dynamicTraversal().getBaseLink()->getIndex(), initialGravity);
         computeMAP(true);

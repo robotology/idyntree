@@ -387,6 +387,11 @@ class BerdyHelper
     size_t m_nrOfDynamicEquations;
     size_t m_nrOfSensorsMeasurements;
 
+    // variables for task1 of stack of tasks berdy
+    size_t m_task1_nrOfDynamicalVariables;
+    size_t m_task1_nrOfDynamicEquations;
+    size_t m_task1_nrOfSensorsMeasurements;
+
     /**
      * Buffer of link-specific body velocities.
      */
@@ -446,6 +451,10 @@ class BerdyHelper
     bool computeBerdyDynamicsMatricesFixedBase(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD);
     bool computeBerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD);
 
+    // Methods for task 1 sub matrices for stack of tasks berdy
+    bool computeTask1SensorMatrices(SparseMatrix<iDynTree::ColumnMajor>& task1_Y, VectorDynSize& task1_bY);
+    bool computeTask1BerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree::ColumnMajor>& task1_D, VectorDynSize& task1_bD);
+
     // Helper method
     Matrix6x1 getBiasTermJointAccelerationPropagation(IJointConstPtr joint,
                                                       const LinkIndex parentLinkIdx,
@@ -501,6 +510,9 @@ class BerdyHelper
 
     Triplets matrixDElements;
     Triplets matrixYElements;
+
+    Triplets task1_matrixDElements;
+    Triplets task1_matrixYElements;
 
     /**
      * Transform between the frame in which the external net wrench measurements are expressed
@@ -588,6 +600,23 @@ public:
     size_t getNrOfSensorsMeasurements() const;
 
     /**
+     * Get the number of columns of the D matrix.
+     * This depends on the Berdy variant selected.
+     */
+    size_t getNrOfDynamicVariables(const bool& task1) const;
+
+    /**
+     * Get the number of dynamics equations used in the Berdy
+     * equations
+     */
+    size_t getNrOfDynamicEquations(const bool& task1) const;
+
+    /**
+     * Get the number of sensors measurements.
+     */
+    size_t getNrOfSensorsMeasurements(const bool& task1) const;
+
+    /**
      * Resize and set to zero Berdy matrices.
      */
     bool resizeAndZeroBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize &bD,
@@ -601,10 +630,28 @@ public:
                                     MatrixDynSize & Y, VectorDynSize & bY);
 
     /**
+     * Get Berdy matrices - new method
+     */
+    bool getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize &bD,
+                          SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize &bY,
+                          bool task1);
+
+    /**
      * Get Berdy matrices
      */
     bool getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize &bD,
                           SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize &bY);
+
+    /**
+     * Get Berdy matrices - new method
+     *
+     * \note internally this function uses sparse matrices
+     * Prefer the use of resizeAndZeroBerdyMatrices(SparseMatrix &, VectorDynSize &, SparseMatrix &, VectorDynSize &)
+     */
+    bool getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
+                          MatrixDynSize & Y, VectorDynSize & bY,
+                          bool task1);
+
     /**
      * Get Berdy matrices
      *
