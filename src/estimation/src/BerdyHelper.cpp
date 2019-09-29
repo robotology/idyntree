@@ -251,6 +251,10 @@ bool BerdyHelper::initSensorsMeasurements()
         m_nrOfSensorsMeasurements += this->m_model.getNrOfDOFs();
     }
 
+    // Initialize task1 number of measurements variable
+    m_task1_nrOfSensorsMeasurements = 0;
+    task1BerdySensorTypeOffsets.netExtWrenchOffset = m_task1_nrOfSensorsMeasurements;
+
     berdySensorTypeOffsets.netExtWrenchOffset = m_nrOfSensorsMeasurements;
     if( m_options.includeAllNetExternalWrenchesAsSensors )
     {
@@ -261,7 +265,7 @@ bool BerdyHelper::initSensorsMeasurements()
         m_nrOfSensorsMeasurements += 6 * numOfExternalWrenches;
 
         // TODO: Double check if this can be handled better
-        m_task1_nrOfSensorsMeasurements = 6*numOfExternalWrenches;
+        m_task1_nrOfSensorsMeasurements += 6*numOfExternalWrenches;
     }
 
     berdySensorTypeOffsets.jointWrenchOffset = m_nrOfSensorsMeasurements;
@@ -292,6 +296,8 @@ bool BerdyHelper::initSensorsMeasurements()
     {
         berdySensorTypeOffsets.comAccelerationOffset = m_nrOfSensorsMeasurements;
         m_nrOfSensorsMeasurements += 3;
+
+        task1BerdySensorTypeOffsets.comAccelerationOffset = m_task1_nrOfSensorsMeasurements;
         m_task1_nrOfSensorsMeasurements += 3;
     }
 
@@ -627,6 +633,43 @@ IndexRange BerdyHelper::getRangeJointSensorVariable(const BerdySensorTypes senso
     return ret;
 }
 
+IndexRange BerdyHelper::getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx, const bool task1) const
+{
+    IndexRange ret = IndexRange::InvalidRange();
+
+    if( sensorType == NET_EXT_WRENCH_SENSOR )
+    {
+        ret.size = 6;
+
+        if (m_options.berdyVariant == ORIGINAL_BERDY_FIXED_BASE)
+        {
+            TraversalIndex trvIdx = m_dynamicsTraversal.getTraversalIndexFromLinkIndex(idx);
+
+            if (m_options.includeFixedBaseExternalWrench)
+            {
+                ret.offset = berdySensorTypeOffsets.netExtWrenchOffset + 6*trvIdx;
+            }
+            else
+            {
+                ret.offset = berdySensorTypeOffsets.netExtWrenchOffset + 6*(trvIdx-1);
+            }
+        }
+        else
+        {
+            assert(m_options.berdyVariant == BERDY_FLOATING_BASE);
+            if (task1) {
+                ret.offset = task1BerdySensorTypeOffsets.netExtWrenchOffset + 6*idx;
+            }
+            else {
+                ret.offset = berdySensorTypeOffsets.netExtWrenchOffset + 6*idx;
+            }
+        }
+    }
+
+    assert(ret.isValid());
+    return ret;
+}
+
 IndexRange BerdyHelper::getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx) const
 {
     IndexRange ret = IndexRange::InvalidRange();
@@ -659,7 +702,7 @@ IndexRange BerdyHelper::getRangeLinkSensorVariable(const BerdySensorTypes sensor
     return ret;
 }
 
-IndexRange BerdyHelper::getRangeCoMAccelerometerSensorVariable(const BerdySensorTypes sensorType) const
+IndexRange BerdyHelper::getRangeCoMAccelerometerSensorVariable(const BerdySensorTypes sensorType, const bool task1) const
 {
     IndexRange ret = IndexRange::InvalidRange();
 
@@ -675,7 +718,13 @@ IndexRange BerdyHelper::getRangeCoMAccelerometerSensorVariable(const BerdySensor
 
     // Set sensor size and offset
     ret.size = 3;
-    ret.offset = berdySensorTypeOffsets.comAccelerationOffset;
+
+    if (task1) {
+        ret.offset = task1BerdySensorTypeOffsets.comAccelerationOffset;
+    }
+    else {
+        ret.offset = berdySensorTypeOffsets.comAccelerationOffset;
+    }
 
     assert(ret.isValid());
     return ret;
@@ -1176,7 +1225,7 @@ bool BerdyHelper::computeTask1SensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
     if (m_options.includeCoMAccelerometerAsSensor)
     {
         // Get the row index corresponding to the com accelerometer sensor
-        IndexRange comAccelerometerRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR);
+        IndexRange comAccelerometerRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR, true);
 
         for(size_t i = 0; i < m_options.comConstraintLinkIndexVector.size(); i++)
         {
@@ -1185,7 +1234,7 @@ bool BerdyHelper::computeTask1SensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
 
             // Get the column index corresponding to the net link external wrench sensor
             IndexRange netExternalWrenchSensor = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR,
-                                                                                  idx);
+                                                                                  idx, true);
 
             iDynTree::Rotation base_R_link = base_H_links(idx).getRotation();
             iDynTree::Matrix3x3 base_R_link_M33;
@@ -1511,7 +1560,7 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
     if (m_options.includeCoMAccelerometerAsSensor)
     {
         // Get the row index corresponding to the com accelerometer sensor
-        IndexRange comAccelerometerRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR);
+        IndexRange comAccelerometerRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR, false);
 
         for(size_t i = 0; i < m_options.comConstraintLinkIndexVector.size(); i++)
         {
@@ -1520,7 +1569,7 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
 
             // Get the column index corresponding to the net link external wrench sensor
             IndexRange netExternalWrenchSensor = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR,
-                                                                                  idx);
+                                                                                  idx, false);
 
             iDynTree::Rotation base_R_link = base_H_links(idx).getRotation();
             iDynTree::Matrix3x3 base_R_link_M33;
@@ -1877,6 +1926,9 @@ bool BerdyHelper::getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
         m_sensorsOrdering.clear();
         m_sensorsOrdering.reserve(size);
 
+        m_task1SensorsOrdering.clear();
+        m_task1SensorsOrdering.reserve(size);
+
         //To be a bit more flexible, rely on getRangeSensorVariable to have the order of
         //the URDF sensors
         //???: Isn't this a loop in some way??
@@ -1940,6 +1992,16 @@ bool BerdyHelper::getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
                 {
                     continue;
                 }
+
+                // Task1 sensor ordering
+                IndexRange task1SensorRange = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR, idx, true);
+                BerdySensor task1LinkSens;
+                task1LinkSens.type = NET_EXT_WRENCH_SENSOR;
+                task1LinkSens.id = m_model.getLinkName(idx);
+                task1LinkSens.range = task1SensorRange;
+
+                m_task1SensorsOrdering.push_back(task1LinkSens);
+
                 IndexRange sensorRange = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR, idx);
                 BerdySensor linkSens;
                 linkSens.type = NET_EXT_WRENCH_SENSOR;
@@ -1963,7 +2025,16 @@ bool BerdyHelper::getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
 
         if(m_options.includeCoMAccelerometerAsSensor) {
 
-            IndexRange sensorRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR);
+            IndexRange task1SensorRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR, true);
+
+            BerdySensor task1LinkSensor;
+            task1LinkSensor.type = COM_ACCELEROMETER_SENSOR;
+            task1LinkSensor.id = m_options.baseLink;
+            task1LinkSensor.range = task1SensorRange;
+
+            m_task1SensorsOrdering.push_back(task1LinkSensor);
+
+            IndexRange sensorRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR, false);
 
             BerdySensor linkSensor;
             linkSensor.type = COM_ACCELEROMETER_SENSOR;
@@ -1975,6 +2046,8 @@ bool BerdyHelper::getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
 
         //To avoid any problem, sort m_sensorsOrdering by range.offset
         std::sort(m_sensorsOrdering.begin(), m_sensorsOrdering.end());
+
+        std::sort(m_task1SensorsOrdering.begin(), m_task1SensorsOrdering.end());
     }
 
     void BerdyHelper::cacheDynamicVariablesOrderingFixedBase()
@@ -2049,6 +2122,7 @@ bool BerdyHelper::getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
 
         //To avoid any problem, sort m_dynamicVariablesOrdering by range.offset
         std::sort(m_dynamicVariablesOrdering.begin(), m_dynamicVariablesOrdering.end());
+
     }
 
     void BerdyHelper::cacheDynamicVariablesOrderingFloatingBase()
@@ -2056,6 +2130,9 @@ bool BerdyHelper::getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
         m_dynamicVariablesOrdering.clear();
         unsigned size = 0;
         m_dynamicVariablesOrdering.reserve(size);
+
+        m_task1DynamicVariablesOrdering.clear();
+        m_task1DynamicVariablesOrdering.reserve(size);
 
         /*
          * Ordering:
@@ -2081,6 +2158,14 @@ bool BerdyHelper::getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
 
             m_dynamicVariablesOrdering.push_back(acceleration);
             m_dynamicVariablesOrdering.push_back(netExtWrench);
+
+            // Task1
+            BerdyDynamicVariable task1NetExternalWrench;
+            task1NetExternalWrench.type = NET_EXT_WRENCH;
+            task1NetExternalWrench.id = linkName;
+            task1NetExternalWrench.range = getRangeLinkVariable(task1NetExternalWrench.type, link);
+
+            m_task1DynamicVariablesOrdering.push_back(task1NetExternalWrench);
         }
 
         for (JointIndex jntIdx = 0; jntIdx < static_cast<JointIndex>(m_model.getNrOfJoints()); ++jntIdx)
@@ -2114,6 +2199,8 @@ bool BerdyHelper::getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
 
         //To avoid any problem, sort m_dynamicVariablesOrdering by range.offset
         std::sort(m_dynamicVariablesOrdering.begin(), m_dynamicVariablesOrdering.end());
+
+        std::sort(m_task1DynamicVariablesOrdering.begin(), m_task1DynamicVariablesOrdering.end());
     }
 
     const std::vector<BerdySensor>& BerdyHelper::getSensorsOrdering() const
@@ -2121,9 +2208,29 @@ bool BerdyHelper::getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
         return m_sensorsOrdering;
     }
 
+    const std::vector<BerdySensor>& BerdyHelper::getSensorsOrdering(const bool& task1) const
+    {
+        if (task1) {
+            return m_task1SensorsOrdering;
+        }
+        else {
+            return m_sensorsOrdering;
+        }
+    }
+
     const std::vector<BerdyDynamicVariable>& BerdyHelper::getDynamicVariablesOrdering() const
     {
         return m_dynamicVariablesOrdering;
+    }
+
+    const std::vector<BerdyDynamicVariable>& BerdyHelper::getDynamicVariablesOrdering(const bool& task1) const
+    {
+        if (task1) {
+            return m_task1DynamicVariablesOrdering;
+        }
+        else {
+            return m_dynamicVariablesOrdering;
+        }
     }
 
 bool BerdyHelper::serializeDynamicVariables(LinkProperAccArray& properAccs,
@@ -2384,7 +2491,7 @@ bool BerdyHelper::serializeSensorVariables(SensorsMeasurements& sensMeas,
     ////////////////////////////////////////////////////////////////////////
     if (m_options.includeCoMAccelerometerAsSensor && m_options.berdyVariant == BERDY_FLOATING_BASE)
     {
-        IndexRange sensorRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR);
+        IndexRange sensorRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR, true);
 
         setSubVector(y, sensorRange, comAcceleration);
     }

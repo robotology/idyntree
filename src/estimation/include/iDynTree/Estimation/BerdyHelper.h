@@ -423,6 +423,9 @@ class BerdyHelper
     std::vector<BerdySensor> m_sensorsOrdering; /*!< Sensor ordering. Created on init */
     std::vector<BerdyDynamicVariable> m_dynamicVariablesOrdering; /*!< Dynamic variable ordering. Created on init */
 
+    std::vector<BerdySensor> m_task1SensorsOrdering; /*!< task1 Sensor ordering. Created on init */
+    std::vector<BerdyDynamicVariable> m_task1DynamicVariablesOrdering; /*!< task1 Dynamic variable ordering. Created on init */
+
     /**
      * Helpers method for initialization.
      */
@@ -488,6 +491,14 @@ class BerdyHelper
         size_t jointWrenchOffset;
         size_t comAccelerationOffset;
     } berdySensorTypeOffsets;
+
+    /**
+     * Helper for mapping sensors measurements to the task1 Y1 vector.
+     */
+    struct {
+        size_t netExtWrenchOffset;
+        size_t comAccelerationOffset;
+    } task1BerdySensorTypeOffsets;
 
     /**
      * Helper of additional sensors.
@@ -673,13 +684,25 @@ public:
     const std::vector<BerdySensor>& getSensorsOrdering() const;
 
     /**
+     * Return the internal ordering of the sensors - new method
+     *
+     * Measurements are expected to respect the internal sensors ordering
+     * Use this function to obtain the sensors ordering.
+     *
+     * @return the sensors ordering
+     */
+    const std::vector<BerdySensor>& getSensorsOrdering(const bool& task1) const;
+
+    /**
      * Get the range of the specified sensor in
      */
     IndexRange getRangeSensorVariable(const SensorType type, const unsigned int sensorIdx) const;
     IndexRange getRangeDOFSensorVariable(const BerdySensorTypes sensorType, const DOFIndex idx) const;
     IndexRange getRangeJointSensorVariable(const BerdySensorTypes sensorType, const JointIndex idx) const;
     IndexRange getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx) const;
-    IndexRange getRangeCoMAccelerometerSensorVariable(const BerdySensorTypes sensorType) const;
+    IndexRange getRangeCoMAccelerometerSensorVariable(const BerdySensorTypes sensorType, const bool task1) const;
+
+    IndexRange getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx, const bool task1) const;
 
 
     /**
@@ -690,6 +713,7 @@ public:
     IndexRange getRangeDOFVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const DOFIndex idx) const;
 
     const std::vector<BerdyDynamicVariable>& getDynamicVariablesOrdering() const;
+    const std::vector<BerdyDynamicVariable>& getDynamicVariablesOrdering(const bool& task1) const;
 
     /**
      * Serialized dynamic variables from the separate buffers
