@@ -394,7 +394,6 @@ namespace iDynTree {
     // Stack of tasks computation of MAP
     void BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::computeStackOfTasksMap(bool computePermutation)
     {
-
         /*
          * Get berdy task1 matrices
          */
@@ -403,6 +402,12 @@ namespace iDynTree {
                                task1_measurementsMatrix,
                                task1_measurementsBias,
                                true);
+
+        std::cout << "==============Task1 Berdy Matrices Size==============" << std::endl;
+        std::cout << "task1_dynamicsConstraintsMatrix : " << task1_dynamicsConstraintsMatrix.rows() << " X " << task1_dynamicsConstraintsMatrix.columns() << std::endl;
+        std::cout << "task1_dynamicsConstraintsBias : " << task1_dynamicsConstraintsBias.size() << std::endl;
+        std::cout << "task1_measurementsMatrix : " << task1_measurementsMatrix.rows() << " X " << task1_measurementsMatrix.columns() << std::endl;
+        std::cout << "task1_measurementsBias : " << task1_measurementsBias.size() << std::endl;
 
         // Compute the maximum a posteriori probability
         // See Latella et al., "Whole-Body Human Inverse Dynamics with
@@ -423,7 +428,10 @@ namespace iDynTree {
         if (computePermutation) {
             task1_covarianceDynamicsPriorInverseDecomposition.analyzePattern(task1_covarianceDynamicsPriorInverse);
         }
+
         //    m_intermediateQuantities.covarianceDynamicsPriorInverseDecomposition.factorize(toEigen(m_intermediateQuantities.covarianceDynamicsPriorInverse));
+        // TODO: This seems to crash
+        std::cout << "Inside computeStackOfTasksMap..." << std::endl;
         task1_covarianceDynamicsPriorInverseDecomposition.factorize(task1_covarianceDynamicsPriorInverse);
 
         // Expected value of the prior of the dynamics: E[p(d)], Eq. 10b
@@ -446,7 +454,7 @@ namespace iDynTree {
         task1_covarianceDynamicsAPosterioriInverseDecomposition.factorize(task1_covarianceDynamicsAPosterioriInverse);
 
         // Final result: expected value of the whole-body dynamics, Eq. 11b
-        toEigen(task1_expectedDynamicsAPosterioriRHS) = (toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_priorMeasurementsCovarianceInverse) * (toEigen(task1_measurements) - toEigen(task1_measurementsBias)) + covarianceDynamicsPriorInverse * toEigen(task1_expectedDynamicsPrior));
+        toEigen(task1_expectedDynamicsAPosterioriRHS) = (toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_priorMeasurementsCovarianceInverse) * (toEigen(task1_measurements) - toEigen(task1_measurementsBias)) + task1_covarianceDynamicsPriorInverse * toEigen(task1_expectedDynamicsPrior));
         toEigen(task1_expectedDynamicsAPosteriori) =
         task1_covarianceDynamicsAPosterioriInverseDecomposition.solve(toEigen(task1_expectedDynamicsAPosterioriRHS));
 
@@ -463,7 +471,11 @@ namespace iDynTree {
                                dynamicsConstraintsBias,
                                measurementsMatrix,
                                measurementsBias);
-
+        std::cout << "==============Berdy Matrices Size==============" << std::endl;
+        std::cout << "dynamicsConstraintsMatrix : " << dynamicsConstraintsMatrix.rows() << " X " << dynamicsConstraintsMatrix.columns() << std::endl;
+        std::cout << "dynamicsConstraintsBias : " << dynamicsConstraintsBias.size() << std::endl;
+        std::cout << "measurementsMatrix : " << measurementsMatrix.rows() << " X " << measurementsMatrix.columns() << std::endl;
+        std::cout << "measurementsBias : " << measurementsBias.size() << std::endl;
 
         // Compute the maximum a posteriori probability
         // See Latella et al., "Whole-Body Human Inverse Dynamics with

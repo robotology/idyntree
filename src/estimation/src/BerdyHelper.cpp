@@ -1193,7 +1193,7 @@ bool BerdyHelper::computeBerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree
 bool BerdyHelper::computeTask1SensorMatrices(SparseMatrix<iDynTree::ColumnMajor>& task1_Y, VectorDynSize& task1_bY)
 {
     task1_Y.resize(m_task1_nrOfSensorsMeasurements, m_task1_nrOfDynamicalVariables);
-    task1_bY.resize(m_nrOfSensorsMeasurements);
+    task1_bY.resize(m_task1_nrOfSensorsMeasurements);
 
     task1_matrixYElements.clear();
     task1_bY.zero();
