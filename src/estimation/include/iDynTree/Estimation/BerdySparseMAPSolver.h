@@ -87,6 +87,7 @@ namespace iDynTree {
         bool doEstimate(const bool& task1);
 
         void getLastEstimate(iDynTree::VectorDynSize& lastEstimate) const;
+        void getLastEstimate(iDynTree::VectorDynSize& lastEstimate, const bool task1) const;
         const iDynTree::VectorDynSize& getLastEstimate() const;
 
 

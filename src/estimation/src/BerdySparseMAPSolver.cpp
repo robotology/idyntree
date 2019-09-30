@@ -112,7 +112,7 @@ namespace iDynTree {
         bool initialize();
         void initializeTask1Buffers();
         void computeMAP(bool computePermutation);
-        void computeStackOfTasksMap(bool computePermutation);
+        void computeTask1MAP(bool computePermutation);
         static bool invertSparseMatrix(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>&in, iDynTree::SparseMatrix<iDynTree::ColumnMajor>& inverted);
     };
 
@@ -352,10 +352,11 @@ namespace iDynTree {
         bool computePermutation = false;
 
         if (task1) {
-            m_pimpl->computeStackOfTasksMap(computePermutation);
+            m_pimpl->computeTask1MAP(computePermutation);
         }
-
-        //m_pimpl->computeMAP(computePermutation);
+        else {
+            m_pimpl->computeMAP(computePermutation);
+        }
 
 #ifdef EIGEN_RUNTIME_NO_MALLOC
         Eigen::internal::set_is_malloc_allowed(true);
@@ -379,6 +380,18 @@ namespace iDynTree {
         return true;
     }
 
+    void BerdySparseMAPSolver::getLastEstimate(iDynTree::VectorDynSize& lastEstimate, const bool task1) const
+    {
+        assert(m_pimpl);
+
+        if (task1) {
+            lastEstimate = m_pimpl->task1_expectedDynamicsAPosteriori;
+        }
+        else {
+            lastEstimate = m_pimpl->expectedDynamicsAPosteriori;
+        }
+    }
+
     void BerdySparseMAPSolver::getLastEstimate(iDynTree::VectorDynSize& lastEstimate) const
     {
         assert(m_pimpl);
@@ -392,7 +405,7 @@ namespace iDynTree {
     }
 
     // Stack of tasks computation of MAP
-    void BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::computeStackOfTasksMap(bool computePermutation)
+    void BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::computeTask1MAP(bool computePermutation)
     {
         /*
          * Get berdy task1 matrices
@@ -403,11 +416,11 @@ namespace iDynTree {
                                task1_measurementsBias,
                                true);
 
-        std::cout << "==============Task1 Berdy Matrices Size==============" << std::endl;
-        std::cout << "task1_dynamicsConstraintsMatrix : " << task1_dynamicsConstraintsMatrix.rows() << " X " << task1_dynamicsConstraintsMatrix.columns() << std::endl;
-        std::cout << "task1_dynamicsConstraintsBias : " << task1_dynamicsConstraintsBias.size() << std::endl;
-        std::cout << "task1_measurementsMatrix : " << task1_measurementsMatrix.rows() << " X " << task1_measurementsMatrix.columns() << std::endl;
-        std::cout << "task1_measurementsBias : " << task1_measurementsBias.size() << std::endl;
+//        std::cout << "==============Task1 Berdy Matrices Size==============" << std::endl;
+//        std::cout << "task1_dynamicsConstraintsMatrix : " << task1_dynamicsConstraintsMatrix.rows() << " X " << task1_dynamicsConstraintsMatrix.columns() << std::endl;
+//        std::cout << "task1_dynamicsConstraintsBias : " << task1_dynamicsConstraintsBias.size() << std::endl;
+//        std::cout << "task1_measurementsMatrix : " << task1_measurementsMatrix.rows() << " X " << task1_measurementsMatrix.columns() << std::endl;
+//        std::cout << "task1_measurementsBias : " << task1_measurementsBias.size() << std::endl;
 
         // Compute the maximum a posteriori probability
         // See Latella et al., "Whole-Body Human Inverse Dynamics with
@@ -430,8 +443,6 @@ namespace iDynTree {
         }
 
         //    m_intermediateQuantities.covarianceDynamicsPriorInverseDecomposition.factorize(toEigen(m_intermediateQuantities.covarianceDynamicsPriorInverse));
-        // TODO: This seems to crash
-        std::cout << "Inside computeStackOfTasksMap..." << std::endl;
         task1_covarianceDynamicsPriorInverseDecomposition.factorize(task1_covarianceDynamicsPriorInverse);
 
         // Expected value of the prior of the dynamics: E[p(d)], Eq. 10b
@@ -457,9 +468,6 @@ namespace iDynTree {
         toEigen(task1_expectedDynamicsAPosterioriRHS) = (toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_priorMeasurementsCovarianceInverse) * (toEigen(task1_measurements) - toEigen(task1_measurementsBias)) + task1_covarianceDynamicsPriorInverse * toEigen(task1_expectedDynamicsPrior));
         toEigen(task1_expectedDynamicsAPosteriori) =
         task1_covarianceDynamicsAPosterioriInverseDecomposition.solve(toEigen(task1_expectedDynamicsAPosterioriRHS));
-
-
-
     }
 
     void BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::computeMAP(bool computePermutation)
@@ -471,11 +479,11 @@ namespace iDynTree {
                                dynamicsConstraintsBias,
                                measurementsMatrix,
                                measurementsBias);
-        std::cout << "==============Berdy Matrices Size==============" << std::endl;
-        std::cout << "dynamicsConstraintsMatrix : " << dynamicsConstraintsMatrix.rows() << " X " << dynamicsConstraintsMatrix.columns() << std::endl;
-        std::cout << "dynamicsConstraintsBias : " << dynamicsConstraintsBias.size() << std::endl;
-        std::cout << "measurementsMatrix : " << measurementsMatrix.rows() << " X " << measurementsMatrix.columns() << std::endl;
-        std::cout << "measurementsBias : " << measurementsBias.size() << std::endl;
+//        std::cout << "==============Berdy Matrices Size==============" << std::endl;
+//        std::cout << "dynamicsConstraintsMatrix : " << dynamicsConstraintsMatrix.rows() << " X " << dynamicsConstraintsMatrix.columns() << std::endl;
+//        std::cout << "dynamicsConstraintsBias : " << dynamicsConstraintsBias.size() << std::endl;
+//        std::cout << "measurementsMatrix : " << measurementsMatrix.rows() << " X " << measurementsMatrix.columns() << std::endl;
+//        std::cout << "measurementsBias : " << measurementsBias.size() << std::endl;
 
         // Compute the maximum a posteriori probability
         // See Latella et al., "Whole-Body Human Inverse Dynamics with
@@ -627,6 +635,7 @@ namespace iDynTree {
         initializeTask1Buffers();
 
         berdy.updateKinematicsFromFixedBase(jointsConfiguration, jointsVelocity, berdy.dynamicTraversal().getBaseLink()->getIndex(), initialGravity);
+        computeTask1MAP(true);
         computeMAP(true);
 
         valid = true;

@@ -709,6 +709,7 @@ public:
      * Ranges of dynamic variables
      */
     IndexRange getRangeLinkVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const LinkIndex idx) const;
+    IndexRange getRangeLinkVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const LinkIndex idx, const bool task1) const;
     IndexRange getRangeJointVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const JointIndex idx) const;
     IndexRange getRangeDOFVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const DOFIndex idx) const;
 
@@ -760,6 +761,13 @@ public:
      */
     bool extractLinkNetExternalWrenchesFromDynamicVariables(const VectorDynSize& d,
                                                             LinkNetExternalWrenches& netExtWrenches) const;
+
+    /**
+     * Extract the net external force-torques from the dynamic variables - new method
+     */
+    bool extractLinkNetExternalWrenchesFromDynamicVariables(const VectorDynSize& d,
+                                                            LinkNetExternalWrenches& netExtWrenches,
+                                                            const bool task1) const;
 
 
     /**

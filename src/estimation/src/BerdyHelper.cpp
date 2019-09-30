@@ -421,6 +421,50 @@ IndexRange BerdyHelper::getRangeOriginalBerdyFixedBase(BerdyDynamicVariablesType
     return ret;
 }
 
+IndexRange BerdyHelper::getRangeLinkVariable(BerdyDynamicVariablesTypes dynamicVariableType, LinkIndex idx, const bool task1) const
+{
+    if( !isLinkBerdyDynamicVariable(dynamicVariableType) )
+    {
+        return IndexRange::InvalidRange();
+    }
+
+    if (m_options.berdyVariant == ORIGINAL_BERDY_FIXED_BASE)
+    {
+        return getRangeOriginalBerdyFixedBase(dynamicVariableType,
+                                              m_dynamicsTraversal.getTraversalIndexFromLinkIndex(idx));
+    }
+    else
+    {
+        IndexRange ret;
+        assert(m_options.berdyVariant == BERDY_FLOATING_BASE);
+        assert(m_options.includeAllNetExternalWrenchesAsDynamicVariables);
+        // For BERDY_FLOATING_BASE, the only two link dynamic variable are the proper classical acceleration and the
+        // external force-torque
+        switch (dynamicVariableType)
+        {
+            case LINK_BODY_PROPER_CLASSICAL_ACCELERATION:
+                ret.offset = 12*idx;
+                ret.size = 6;
+                break;
+            case NET_EXT_WRENCH:
+                if (task1) {
+                    ret.offset = 6*idx;
+                }
+                else {
+                    ret.offset = 12*idx + 6;
+                }
+                ret.size = 6;
+                break;
+            default:
+                assert(false);
+                ret = IndexRange::InvalidRange();
+                break;
+        }
+
+        return ret;
+    }
+}
+
 IndexRange BerdyHelper::getRangeLinkVariable(BerdyDynamicVariablesTypes dynamicVariableType, LinkIndex idx) const
 {
     if( !isLinkBerdyDynamicVariable(dynamicVariableType) )
@@ -2526,6 +2570,28 @@ bool BerdyHelper::extractJointTorquesFromDynamicVariables(const VectorDynSize& d
                                   parentLinkIndex,
                                   childLinkIndex,
                                   jointTorques);
+    }
+
+    return true;
+}
+
+bool BerdyHelper::extractLinkNetExternalWrenchesFromDynamicVariables(const VectorDynSize& d,
+                                                                     LinkNetExternalWrenches& netExtWrenches,
+                                                                     const bool task1) const
+{
+    const Model& model = this->model();
+    for (LinkIndex lnkIdx=0; lnkIdx < static_cast<LinkIndex>(model.getNrOfLinks()); lnkIdx++)
+    {
+        IndexRange range;
+        if (task1) {
+            range = this->getRangeLinkVariable(NET_EXT_WRENCH, lnkIdx, task1);
+        }
+        else {
+            range = this->getRangeLinkVariable(NET_EXT_WRENCH, lnkIdx);
+        }
+        LinearForceVector3   force(d.data() + range.offset, 3);
+        AngularMotionVector3 torque(d.data() + range.offset + 3, 3);
+        netExtWrenches(lnkIdx) = Wrench(force, torque);
     }
 
     return true;
