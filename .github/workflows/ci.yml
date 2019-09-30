@@ -44,6 +44,7 @@ jobs:
     - name: Dependencies [Ubuntu]
       if: matrix.os == 'ubuntu-latest'
       run: |
+        sudo apt-get update
         sudo apt-get install git build-essential cmake libace-dev coinor-libipopt-dev  libboost-system-dev libboost-filesystem-dev \
                              libboost-thread-dev liborocos-kdl-dev libeigen3-dev swig qtbase5-dev qtdeclarative5-dev qtmultimedia5-dev \
                              libxml2-dev liburdfdom-dev libtinyxml-dev liburdfdom-dev liboctave-dev python-dev valgrind 
