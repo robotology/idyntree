@@ -1097,7 +1097,7 @@ Matrix6x1 BerdyHelper::getBiasTermJointAccelerationPropagation(IJointConstPtr jo
 
 // TODO: This is repetitive from computeBerdyDynamicsMatricesFloatingBase,
 // Need to clean up into sub routines for modularity and avoiding code duplication
-bool BerdyHelper::computeTask1BerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree::ColumnMajor>& task1_D, VectorDynSize& task1_bD)
+bool BerdyHelper::computeTask1BerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree::ColumnMajor>& task1_D, VectorDynSize& task1_bD, const bool task1)
 {
     task1_D.resize(m_task1_nrOfDynamicEquations, m_task1_nrOfDynamicalVariables);
     task1_bD.resize(m_task1_nrOfDynamicEquations);
@@ -1111,8 +1111,8 @@ bool BerdyHelper::computeTask1BerdyDynamicsMatricesFloatingBase(SparseMatrix<iDy
         LinkConstPtr link = m_model.getLink(lnkIdx);
 
         // Term depending on external force-torque
-        matrixDElements.addDiagonalMatrix(getRangeNewtonEulerEquationsFloatingBase(lnkIdx),
-                                          getRangeLinkVariable(NET_EXT_WRENCH, lnkIdx),
+        task1_matrixDElements.addDiagonalMatrix(getRangeNewtonEulerEquationsFloatingBase(lnkIdx),
+                                          getRangeLinkVariable(NET_EXT_WRENCH, lnkIdx, task1),
                                           -1);
 
         // TODO: Double check this bias term
@@ -1871,7 +1871,7 @@ bool BerdyHelper::getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, Vecto
         assert(m_options.berdyVariant == BERDY_FLOATING_BASE);
 
         if (task1) {
-            res = res && computeTask1BerdyDynamicsMatricesFloatingBase(D, bD);
+            res = res && computeTask1BerdyDynamicsMatricesFloatingBase(D, bD, true);
         }
         else {
             res = res && computeBerdyDynamicsMatricesFloatingBase(D, bD);

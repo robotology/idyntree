@@ -456,7 +456,7 @@ class BerdyHelper
 
     // Methods for task 1 sub matrices for stack of tasks berdy
     bool computeTask1SensorMatrices(SparseMatrix<iDynTree::ColumnMajor>& task1_Y, VectorDynSize& task1_bY);
-    bool computeTask1BerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree::ColumnMajor>& task1_D, VectorDynSize& task1_bD);
+    bool computeTask1BerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree::ColumnMajor>& task1_D, VectorDynSize& task1_bD, const bool task1);
 
     // Helper method
     Matrix6x1 getBiasTermJointAccelerationPropagation(IJointConstPtr joint,
