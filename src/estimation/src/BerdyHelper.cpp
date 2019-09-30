@@ -1234,34 +1234,43 @@ bool BerdyHelper::computeBerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree
 
 // TODO: This is repetitive from computeBerdySensorMatrices,
 // Need to clean up into sub routines for modularity and avoiding code duplication
-bool BerdyHelper::computeTask1SensorMatrices(SparseMatrix<iDynTree::ColumnMajor>& task1_Y, VectorDynSize& task1_bY)
+bool BerdyHelper::computeTask1SensorMatrices(SparseMatrix<iDynTree::ColumnMajor>& task1_Y, VectorDynSize& task1_bY, const bool task1)
 {
+
     task1_Y.resize(m_task1_nrOfSensorsMeasurements, m_task1_nrOfDynamicalVariables);
     task1_bY.resize(m_task1_nrOfSensorsMeasurements);
 
     task1_matrixYElements.clear();
     task1_bY.zero();
 
-    // The task1_Y matrix contains rows equal to the number of SIX_AXIS_FORCE_TORQUE sensors plus 3 rows for the COM_ACCELEROMETER_SENSOR
+    // The task1_Y matrix contains rows equal to the number of NET_EXT_WRENCH_SENSOR sensors plus 3 rows for the COM_ACCELEROMETER_SENSOR
     ////////////////////////////////////////////////////////////////////////
-    ///// SIX AXIS F/T SENSORS
+    ///// NET EXTERNAL WRENCHES ACTING ON LINKS
     ////////////////////////////////////////////////////////////////////////
-    size_t numOfFTs = m_sensors.getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);
-    for(size_t idx = 0; idx<numOfFTs; idx++)
+    if( m_options.includeAllNetExternalWrenchesAsSensors )
     {
-        SixAxisForceTorqueSensor * ftSens = (SixAxisForceTorqueSensor*)m_sensors.getSensor(iDynTree::SIX_AXIS_FORCE_TORQUE, idx);
-        LinkIndex childLink;
-        childLink = m_dynamicsTraversal.getChildLinkIndexFromJointIndex(m_model,ftSens->getParentJointIndex());
-        Matrix6x6 sensor_M_link;
-        ftSens->getWrenchAppliedOnLinkInverseMatrix(childLink,sensor_M_link);
-        IndexRange sensorRange = this->getRangeSensorVariable(SIX_AXIS_FORCE_TORQUE,idx);
-        IndexRange jointWrenchRange = this->getRangeJointVariable(JOINT_WRENCH,ftSens->getParentJointIndex());
+        for(LinkIndex idx = 0; idx < static_cast<LinkIndex>(m_model.getNrOfLinks()); idx++)
+        {
+            // TODO: Handle floating base check and task1 checks correctly
+            if(m_options.berdyVariant == BERDY_FLOATING_BASE)
+            {
+                // Y for the net external wrenches is just
+                // six rows of 0 with an identity placed at the location
+                // of the net external wrenches in the dynamic variable vector
+                IndexRange sensorRange = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR,idx, task1);
+                IndexRange netExtWrenchRange = this->getRangeLinkVariable(NET_EXT_WRENCH,idx, task1);
 
-        task1_matrixYElements.addSubMatrix(sensorRange.offset,
-                                     jointWrenchRange.offset,
-                                     sensor_M_link);
-        // bY for the F/T sensor is equal to zero
+                Transform measurementFrame_X_link = m_link_H_externalWrenchMeasurementFrame[idx].inverse();
+
+                task1_matrixYElements.addSubMatrix(sensorRange.offset,
+                                             netExtWrenchRange.offset,
+                                             measurementFrame_X_link.asAdjointTransformWrench());
+
+                // bY for the net external wrenches is zero
+            }
+        }
     }
+
 
     ////////////////////////////////////////////////////////////////////////
     ///// COM ACCELERATION SENSOR
@@ -1880,7 +1889,7 @@ bool BerdyHelper::getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, Vecto
 
     // Compute Y matrix of sensors
     if (task1) {
-        res = res && computeTask1SensorMatrices(Y, bY);
+        res = res && computeTask1SensorMatrices(Y, bY, true);
     }
     else {
         res = res && computeBerdySensorMatrices(Y, bY);
@@ -2207,7 +2216,7 @@ bool BerdyHelper::getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
             BerdyDynamicVariable task1NetExternalWrench;
             task1NetExternalWrench.type = NET_EXT_WRENCH;
             task1NetExternalWrench.id = linkName;
-            task1NetExternalWrench.range = getRangeLinkVariable(task1NetExternalWrench.type, link);
+            task1NetExternalWrench.range = getRangeLinkVariable(task1NetExternalWrench.type, link, true);
 
             m_task1DynamicVariablesOrdering.push_back(task1NetExternalWrench);
         }
