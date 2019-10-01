@@ -17,6 +17,7 @@
 #include <iDynTree/Core/EigenSparseHelpers.h>
 
 #include <Eigen/SparseCore>
+#include<Eigen/SparseQR>
 #include <Eigen/SparseCholesky>
 
 #include <cassert>
@@ -100,6 +101,10 @@ namespace iDynTree {
         // Decomposition buffers
         Eigen::SimplicialLDLT<Eigen::SparseMatrix<double, Eigen::ColMajor> > task1_covarianceDynamicsPriorInverseDecomposition;
         Eigen::SimplicialLDLT<Eigen::SparseMatrix<double, Eigen::ColMajor> > task1_covarianceDynamicsAPosterioriInverseDecomposition;
+
+        // Task1 direct solution variables
+        Eigen::SparseMatrix<double, Eigen::ColMajor> task1_directSolutionMeasurementMatrix;
+        Eigen::SparseQR<Eigen::SparseMatrix<double, Eigen::ColMajor>, Eigen::NaturalOrdering<int> > task1_directSolutionMeasurementMatrixInverseDecomposition;
 
 
         BerdySparseMAPSolverPimpl(BerdyHelper& berdyHelper)
@@ -422,52 +427,73 @@ namespace iDynTree {
 //        std::cout << "task1_measurementsMatrix : " << task1_measurementsMatrix.rows() << " X " << task1_measurementsMatrix.columns() << std::endl;
 //        std::cout << "task1_measurementsBias : " << task1_measurementsBias.size() << std::endl;
 
-        // Compute the maximum a posteriori probability
-        // See Latella et al., "Whole-Body Human Inverse Dynamics with
-        // Distributed Micro-Accelerometers, Gyros and Force Sensing" in Sensors, 2016
+        if (!berdy.getOptions().task1MAPSolution) {
 
-        // Intermediate quantities
+            // This is a simple solution to the measurement linear equation Y1 * d + by1 = y1
 
-        // Covariance matrix of the prior of the dynamics: var[p(d)], Eq. 10a
-        //TODO: find a way to map to iDynTree::SparseMatrix
-        task1_covarianceDynamicsPriorInverse
-        //    toEigen(m_intermediateQuantities.covarianceDynamicsPriorInverse)
-        //Better to assign the "sum" before, and adding the product part later
-        = toEigen(task1_priorDynamicsRegularizationCovarianceInverse);
+            // Initialize eigen sparse measurement matrix from idyntee sparse measurement matrix
+            task1_directSolutionMeasurementMatrix = toEigen(task1_measurementsMatrix);
 
-        task1_covarianceDynamicsPriorInverse += toEigen(task1_dynamicsConstraintsMatrix).transpose() * toEigen(task1_priorDynamicsConstraintsCovarianceInverse) * toEigen(task1_dynamicsConstraintsMatrix);
+            if (computePermutation) {
+                task1_directSolutionMeasurementMatrixInverseDecomposition.analyzePattern(task1_directSolutionMeasurementMatrix);
+            }
 
-        // decompose m_covarianceDynamicsPriorInverse
-        if (computePermutation) {
-            task1_covarianceDynamicsPriorInverseDecomposition.analyzePattern(task1_covarianceDynamicsPriorInverse);
+            task1_directSolutionMeasurementMatrixInverseDecomposition.factorize(task1_directSolutionMeasurementMatrix);
+
+            toEigen(task1_expectedDynamicsAPosteriori) = task1_directSolutionMeasurementMatrixInverseDecomposition.solve(toEigen(task1_measurements) - toEigen(task1_measurementsBias));
+
+
+            //task1_measurementsMatrix.
         }
+        else { // This is using MAP
 
-        //    m_intermediateQuantities.covarianceDynamicsPriorInverseDecomposition.factorize(toEigen(m_intermediateQuantities.covarianceDynamicsPriorInverse));
-        task1_covarianceDynamicsPriorInverseDecomposition.factorize(task1_covarianceDynamicsPriorInverse);
+            // Compute the maximum a posteriori probability
+            // See Latella et al., "Whole-Body Human Inverse Dynamics with
+            // Distributed Micro-Accelerometers, Gyros and Force Sensing" in Sensors, 2016
 
-        // Expected value of the prior of the dynamics: E[p(d)], Eq. 10b
-        toEigen(task1_expectedDynamicsPriorRHS) = toEigen(task1_priorDynamicsRegularizationCovarianceInverse) * toEigen(task1_priorDynamicsRegularizationExpectedValue) - toEigen(task1_dynamicsConstraintsMatrix).transpose() * toEigen(task1_priorDynamicsConstraintsCovarianceInverse) * toEigen(task1_dynamicsConstraintsBias);
+            // Intermediate quantities
 
-        toEigen(task1_expectedDynamicsPrior) =
-        task1_covarianceDynamicsPriorInverseDecomposition.solve(toEigen(task1_expectedDynamicsPriorRHS));
+            // Covariance matrix of the prior of the dynamics: var[p(d)], Eq. 10a
+            //TODO: find a way to map to iDynTree::SparseMatrix
+            task1_covarianceDynamicsPriorInverse
+            //    toEigen(m_intermediateQuantities.covarianceDynamicsPriorInverse)
+            //Better to assign the "sum" before, and adding the product part later
+            = toEigen(task1_priorDynamicsRegularizationCovarianceInverse);
 
-        // Final result: covariance matrix of the whole-body dynamics, Eq. 11a
-        //TODO: find a way to map to iDynTree::SparseMatrix
-        task1_covarianceDynamicsAPosterioriInverse = task1_covarianceDynamicsPriorInverse;
-        task1_covarianceDynamicsAPosterioriInverse += toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_priorMeasurementsCovarianceInverse) * toEigen(task1_measurementsMatrix);
+            task1_covarianceDynamicsPriorInverse += toEigen(task1_dynamicsConstraintsMatrix).transpose() * toEigen(task1_priorDynamicsConstraintsCovarianceInverse) * toEigen(task1_dynamicsConstraintsMatrix);
 
-        // decompose m_covarianceDynamicsAPosterioriInverse
-        if (computePermutation) {
-            //        m_intermediateQuantities.covarianceDynamicsAPosterioriInverseDecomposition.analyzePattern(toEigen(m_covarianceDynamicsAPosterioriInverse));
-            task1_covarianceDynamicsAPosterioriInverseDecomposition.analyzePattern(task1_covarianceDynamicsAPosterioriInverse);
+            // decompose m_covarianceDynamicsPriorInverse
+            if (computePermutation) {
+                task1_covarianceDynamicsPriorInverseDecomposition.analyzePattern(task1_covarianceDynamicsPriorInverse);
+            }
+
+            //    m_intermediateQuantities.covarianceDynamicsPriorInverseDecomposition.factorize(toEigen(m_intermediateQuantities.covarianceDynamicsPriorInverse));
+            task1_covarianceDynamicsPriorInverseDecomposition.factorize(task1_covarianceDynamicsPriorInverse);
+
+            // Expected value of the prior of the dynamics: E[p(d)], Eq. 10b
+            toEigen(task1_expectedDynamicsPriorRHS) = toEigen(task1_priorDynamicsRegularizationCovarianceInverse) * toEigen(task1_priorDynamicsRegularizationExpectedValue) - toEigen(task1_dynamicsConstraintsMatrix).transpose() * toEigen(task1_priorDynamicsConstraintsCovarianceInverse) * toEigen(task1_dynamicsConstraintsBias);
+
+            toEigen(task1_expectedDynamicsPrior) =
+            task1_covarianceDynamicsPriorInverseDecomposition.solve(toEigen(task1_expectedDynamicsPriorRHS));
+
+            // Final result: covariance matrix of the whole-body dynamics, Eq. 11a
+            //TODO: find a way to map to iDynTree::SparseMatrix
+            task1_covarianceDynamicsAPosterioriInverse = task1_covarianceDynamicsPriorInverse;
+            task1_covarianceDynamicsAPosterioriInverse += toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_priorMeasurementsCovarianceInverse) * toEigen(task1_measurementsMatrix);
+
+            // decompose m_covarianceDynamicsAPosterioriInverse
+            if (computePermutation) {
+                //        m_intermediateQuantities.covarianceDynamicsAPosterioriInverseDecomposition.analyzePattern(toEigen(m_covarianceDynamicsAPosterioriInverse));
+                task1_covarianceDynamicsAPosterioriInverseDecomposition.analyzePattern(task1_covarianceDynamicsAPosterioriInverse);
+            }
+            //    m_intermediateQuantities.covarianceDynamicsAPosterioriInverseDecomposition.factorize(toEigen(m_covarianceDynamicsAPosterioriInverse));
+            task1_covarianceDynamicsAPosterioriInverseDecomposition.factorize(task1_covarianceDynamicsAPosterioriInverse);
+
+            // Final result: expected value of the whole-body dynamics, Eq. 11b
+            toEigen(task1_expectedDynamicsAPosterioriRHS) = (toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_priorMeasurementsCovarianceInverse) * (toEigen(task1_measurements) - toEigen(task1_measurementsBias)) + task1_covarianceDynamicsPriorInverse * toEigen(task1_expectedDynamicsPrior));
+            toEigen(task1_expectedDynamicsAPosteriori) =
+            task1_covarianceDynamicsAPosterioriInverseDecomposition.solve(toEigen(task1_expectedDynamicsAPosterioriRHS));
         }
-        //    m_intermediateQuantities.covarianceDynamicsAPosterioriInverseDecomposition.factorize(toEigen(m_covarianceDynamicsAPosterioriInverse));
-        task1_covarianceDynamicsAPosterioriInverseDecomposition.factorize(task1_covarianceDynamicsAPosterioriInverse);
-
-        // Final result: expected value of the whole-body dynamics, Eq. 11b
-        toEigen(task1_expectedDynamicsAPosterioriRHS) = (toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_priorMeasurementsCovarianceInverse) * (toEigen(task1_measurements) - toEigen(task1_measurementsBias)) + task1_covarianceDynamicsPriorInverse * toEigen(task1_expectedDynamicsPrior));
-        toEigen(task1_expectedDynamicsAPosteriori) =
-        task1_covarianceDynamicsAPosterioriInverseDecomposition.solve(toEigen(task1_expectedDynamicsAPosterioriRHS));
     }
 
     void BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::computeMAP(bool computePermutation)
@@ -574,6 +600,8 @@ namespace iDynTree {
 
         task1_priorDynamicsRegularizationExpectedValue.resize(task1_numberOfDynVariables);
         task1_priorDynamicsRegularizationExpectedValue.zero();
+
+        task1_directSolutionMeasurementMatrix.resize(task1_numberOfMeasurements, task1_numberOfDynVariables);
 
     }
 

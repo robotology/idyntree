@@ -157,7 +157,8 @@ public:
                      includeAllNetExternalWrenchesAsSensors(true),
                      includeCoMAccelerometerAsSensor(false),
                      includeFixedBaseExternalWrench(false),
-                     baseLink("")
+                     baseLink(""),
+                     task1MAPSolution(false)
     {
     }
 
@@ -245,6 +246,14 @@ public:
      * \note If the string is empty the default base link of the model will be used.
      */
     std::string baseLink;
+
+    /**
+     * Boolean flag that controls how task1 is solved.
+     * The default value is set to false and task1 is solved directly using the measurements linear equation without considering the dynamics
+     * If set to true, task1 is solved through MAP
+     *
+     */
+    bool task1MAPSolution;
 
     /**
      * Check that the options are not self-contradicting.
