@@ -427,7 +427,8 @@ namespace iDynTree {
 //        std::cout << "task1_measurementsMatrix : " << task1_measurementsMatrix.rows() << " X " << task1_measurementsMatrix.columns() << std::endl;
 //        std::cout << "task1_measurementsBias : " << task1_measurementsBias.size() << std::endl;
 
-        if (!berdy.getOptions().task1MAPSolution) {
+        // This is for the direct least squares solution using only the task1 measurements equation
+        if (berdy.getOptions().task1SolutionOption == iDynTree::DIRECT) {
 
             // This is a simple solution to the measurement linear equation Y1 * d + by1 = y1
 
@@ -441,11 +442,13 @@ namespace iDynTree {
             task1_directSolutionMeasurementMatrixInverseDecomposition.factorize(task1_directSolutionMeasurementMatrix);
 
             toEigen(task1_expectedDynamicsAPosteriori) = task1_directSolutionMeasurementMatrixInverseDecomposition.solve(toEigen(task1_measurements) - toEigen(task1_measurementsBias));
-
-
-            //task1_measurementsMatrix.
         }
-        else { // This is using MAP
+        // This is for partial MAP solution considering only the task1 measurements equation
+        else if (berdy.getOptions().task1SolutionOption == iDynTree::PARTIAL_MAP) {
+            // TODO Implement MAP solution on Y1 * d1 + bd1 = y1
+        }
+        // This is for full MAP solution considering the task1 dynamics equation and task1 measurements equation
+        else if (berdy.getOptions().task1SolutionOption == iDynTree::FULL_MAP) {
 
             // Compute the maximum a posteriori probability
             // See Latella et al., "Whole-Body Human Inverse Dynamics with
