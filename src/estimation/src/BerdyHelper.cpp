@@ -292,11 +292,14 @@ bool BerdyHelper::initSensorsMeasurements()
     }
 
     // Add CoM accelerometer sensor
-    if (m_options.includeCoMAccelerometerAsSensor)
+    if (m_options.includeCoMAccelerometerAsSensorInTask1)
     {
-        berdySensorTypeOffsets.comAccelerationOffset = m_nrOfSensorsMeasurements;
-        m_nrOfSensorsMeasurements += 3;
+        task1BerdySensorTypeOffsets.comAccelerationOffset = m_task1_nrOfSensorsMeasurements;
+        m_task1_nrOfSensorsMeasurements += 3;
+    }
 
+    if (m_options.includeCoMAccelerometerAsSensorInTask2)
+    {
         task1BerdySensorTypeOffsets.comAccelerationOffset = m_task1_nrOfSensorsMeasurements;
         m_task1_nrOfSensorsMeasurements += 3;
     }
@@ -1275,7 +1278,7 @@ bool BerdyHelper::computeTask1SensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
     ////////////////////////////////////////////////////////////////////////
     ///// COM ACCELERATION SENSOR
     ////////////////////////////////////////////////////////////////////////
-    if (m_options.includeCoMAccelerometerAsSensor)
+    if (m_options.includeCoMAccelerometerAsSensorInTask1)
     {
         // Get the row index corresponding to the com accelerometer sensor
         IndexRange comAccelerometerRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR, true);
@@ -1610,7 +1613,7 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
     ////////////////////////////////////////////////////////////////////////
     ///// COM ACCELERATION SENSOR
     ////////////////////////////////////////////////////////////////////////
-    if (m_options.includeCoMAccelerometerAsSensor)
+    if (m_options.includeCoMAccelerometerAsSensorInTask2)
     {
         // Get the row index corresponding to the com accelerometer sensor
         IndexRange comAccelerometerRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR, false);
@@ -1663,7 +1666,7 @@ bool BerdyHelper::initBerdyFloatingBase()
     m_task1_nrOfDynamicEquations = 6*m_model.getNrOfLinks();
 
     // check comConstraintLinkIndexVector is correctly set
-    if (m_options.includeCoMAccelerometerAsSensor) {
+    if (m_options.includeCoMAccelerometerAsSensorInTask1 || m_options.includeCoMAccelerometerAsSensorInTask2) {
         if (m_options.comConstraintLinkIndexVector.size() == 0)
         {
             reportError("BerdyHelpers","initBerdyFloatingBase","comConstraintLinkIndexVector is not initialized correctly, the size is 0");
@@ -2076,7 +2079,7 @@ bool BerdyHelper::getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
             m_sensorsOrdering.push_back(jointSens);
         }
 
-        if(m_options.includeCoMAccelerometerAsSensor) {
+        if(m_options.includeCoMAccelerometerAsSensorInTask1) {
 
             IndexRange task1SensorRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR, true);
 
@@ -2086,6 +2089,9 @@ bool BerdyHelper::getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
             task1LinkSensor.range = task1SensorRange;
 
             m_task1SensorsOrdering.push_back(task1LinkSensor);
+        }
+
+        if(m_options.includeCoMAccelerometerAsSensorInTask2) {
 
             IndexRange sensorRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR, false);
 
@@ -2542,7 +2548,7 @@ bool BerdyHelper::serializeSensorVariables(SensorsMeasurements& sensMeas,
     ////////////////////////////////////////////////////////////////////////
     ///// COM ACCELERATION
     ////////////////////////////////////////////////////////////////////////
-    if (m_options.includeCoMAccelerometerAsSensor && m_options.berdyVariant == BERDY_FLOATING_BASE)
+    if (m_options.includeCoMAccelerometerAsSensorInTask1 && m_options.berdyVariant == BERDY_FLOATING_BASE)
     {
         IndexRange sensorRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR, true);
 
@@ -2612,6 +2618,7 @@ bool BerdyHelper::extractLinkNetExternalWrenchesFromDynamicVariables(const Vecto
     const Model& model = this->model();
     for (LinkIndex lnkIdx=0; lnkIdx < static_cast<LinkIndex>(model.getNrOfLinks()); lnkIdx++)
     {
+
         IndexRange range = this->getRangeLinkVariable(NET_EXT_WRENCH, lnkIdx);
         LinearForceVector3   force(d.data() + range.offset, 3);
         AngularMotionVector3 torque(d.data() + range.offset + 3, 3);

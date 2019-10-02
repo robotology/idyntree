@@ -176,7 +176,8 @@ public:
                      includeAllJointAccelerationsAsSensors(true),
                      includeAllJointTorquesAsSensors(false),
                      includeAllNetExternalWrenchesAsSensors(true),
-                     includeCoMAccelerometerAsSensor(false),
+                     includeCoMAccelerometerAsSensorInTask1(false),
+                     includeCoMAccelerometerAsSensorInTask2(false),
                      includeFixedBaseExternalWrench(false),
                      baseLink(""),
                      task1SolutionOption(PARTIAL_MAP)
@@ -229,12 +230,20 @@ public:
     bool includeAllNetExternalWrenchesAsSensors;
 
     /*
-     * If true, includes the CoM accelerometer in the sensors vector.
+     * If true, includes the CoM accelerometer in the task1 sensors vector.
      * It is compatible only with floating base variant of BERDY
      *
      * Default value: false .
      */
-    bool includeCoMAccelerometerAsSensor;
+    bool includeCoMAccelerometerAsSensorInTask1;
+
+    /*
+     * If true, includes the CoM accelerometer in the task2 sensors vector.
+     * It is compatible only with floating base variant of BERDY
+     *
+     * Default value: false .
+     */
+    bool includeCoMAccelerometerAsSensorInTask2;
 
     /**
      * Vector of link indexes that are considered for rate of change of momentum constraint using CoM accelerometer sensor
