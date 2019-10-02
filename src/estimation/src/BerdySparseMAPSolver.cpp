@@ -445,7 +445,23 @@ namespace iDynTree {
         }
         // This is for partial MAP solution considering only the task1 measurements equation
         else if (berdy.getOptions().task1SolutionOption == iDynTree::PARTIAL_MAP) {
-            // TODO Implement MAP solution on Y1 * d1 + bd1 = y1
+            // Implement MAP solution on Y1 * d1 + bd1 = y1
+
+            task1_covarianceDynamicsAPosterioriInverse = toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_priorMeasurementsCovarianceInverse) * toEigen(task1_measurementsMatrix);
+
+            // decompose m_covarianceDynamicsAPosterioriInverse
+            if (computePermutation) {
+                //        m_intermediateQuantities.covarianceDynamicsAPosterioriInverseDecomposition.analyzePattern(toEigen(m_covarianceDynamicsAPosterioriInverse));
+                task1_covarianceDynamicsAPosterioriInverseDecomposition.analyzePattern(task1_covarianceDynamicsAPosterioriInverse);
+            }
+            //    m_intermediateQuantities.covarianceDynamicsAPosterioriInverseDecomposition.factorize(toEigen(m_covarianceDynamicsAPosterioriInverse));
+            task1_covarianceDynamicsAPosterioriInverseDecomposition.factorize(task1_covarianceDynamicsAPosterioriInverse);
+
+            // Final result: expected value of the whole-body dynamics, Eq. 11b
+            toEigen(task1_expectedDynamicsAPosterioriRHS) = toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_priorMeasurementsCovarianceInverse) * (toEigen(task1_measurements) - toEigen(task1_measurementsBias));
+            toEigen(task1_expectedDynamicsAPosteriori) =
+            task1_covarianceDynamicsAPosterioriInverseDecomposition.solve(toEigen(task1_expectedDynamicsAPosterioriRHS));
+
         }
         // This is for full MAP solution considering the task1 dynamics equation and task1 measurements equation
         else if (berdy.getOptions().task1SolutionOption == iDynTree::FULL_MAP) {
