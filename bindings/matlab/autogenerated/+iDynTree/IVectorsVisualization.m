@@ -5,27 +5,27 @@ classdef IVectorsVisualization < SwigRef
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1922, self);
+        iDynTreeMEX(1931, self);
         self.SwigClear();
       end
     end
     function varargout = addVector(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1923, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1932, self, varargin{:});
     end
     function varargout = getNrOfVectors(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1924, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1933, self, varargin{:});
     end
     function varargout = getVector(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1925, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1934, self, varargin{:});
     end
     function varargout = updateVector(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1926, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1935, self, varargin{:});
     end
     function varargout = setVectorColor(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1927, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1936, self, varargin{:});
     end
     function varargout = setVectorsAspect(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1928, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1937, self, varargin{:});
     end
     function self = IVectorsVisualization(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
