@@ -1807,6 +1807,8 @@ bool BerdyHelper::getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, Vecto
                 dofAcceleration.type = DOF_ACCELERATION;
                 dofAcceleration.id = m_model.getJointName(jntIdx);
                 dofAcceleration.range = getRangeDOFVariable(dofAcceleration.type, joint->getDOFsOffset());
+
+                m_dynamicVariablesOrdering.push_back(dofAcceleration);
             }
         }
 
