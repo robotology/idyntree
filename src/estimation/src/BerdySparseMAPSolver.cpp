@@ -409,11 +409,11 @@ namespace iDynTree {
         return m_pimpl->expectedDynamicsAPosteriori;
     }
 
-    // Stack of tasks computation of MAP
+    // Task1 MAP Computation
     void BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::computeTask1MAP(bool computePermutation)
     {
         /*
-         * Get berdy task1 matrices
+         * Get task1 berdy matrices
          */
         berdy.getBerdyMatrices(task1_dynamicsConstraintsMatrix,
                                task1_dynamicsConstraintsBias,
@@ -421,98 +421,22 @@ namespace iDynTree {
                                task1_measurementsBias,
                                true);
 
-//        std::cout << "==============Task1 Berdy Matrices Size==============" << std::endl;
-//        std::cout << "task1_dynamicsConstraintsMatrix : " << task1_dynamicsConstraintsMatrix.rows() << " X " << task1_dynamicsConstraintsMatrix.columns() << std::endl;
-//        std::cout << "task1_dynamicsConstraintsBias : " << task1_dynamicsConstraintsBias.size() << std::endl;
-//        std::cout << "task1_measurementsMatrix : " << task1_measurementsMatrix.rows() << " X " << task1_measurementsMatrix.columns() << std::endl;
-//        std::cout << "task1_measurementsBias : " << task1_measurementsBias.size() << std::endl;
+        // This is a partial MAP solution considering only the task1 measurements equation  Y1 * d1 + bd1 = y1
 
-        // This is for the direct least squares solution using only the task1 measurements equation
-        if (berdy.getOptions().task1SolutionOption == iDynTree::DIRECT) {
+        task1_covarianceDynamicsAPosterioriInverse = toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_priorMeasurementsCovarianceInverse) * toEigen(task1_measurementsMatrix);
 
-            // This is a simple solution to the measurement linear equation Y1 * d + by1 = y1
-
-            // Initialize eigen sparse measurement matrix from idyntee sparse measurement matrix
-            task1_directSolutionMeasurementMatrix = toEigen(task1_measurementsMatrix);
-
-            if (computePermutation) {
-                task1_directSolutionMeasurementMatrixInverseDecomposition.analyzePattern(task1_directSolutionMeasurementMatrix);
-            }
-
-            task1_directSolutionMeasurementMatrixInverseDecomposition.factorize(task1_directSolutionMeasurementMatrix);
-
-            toEigen(task1_expectedDynamicsAPosteriori) = task1_directSolutionMeasurementMatrixInverseDecomposition.solve(toEigen(task1_measurements) - toEigen(task1_measurementsBias));
+        // decompose m_covarianceDynamicsAPosterioriInverse
+        if (computePermutation) {
+            //        m_intermediateQuantities.covarianceDynamicsAPosterioriInverseDecomposition.analyzePattern(toEigen(m_covarianceDynamicsAPosterioriInverse));
+            task1_covarianceDynamicsAPosterioriInverseDecomposition.analyzePattern(task1_covarianceDynamicsAPosterioriInverse);
         }
-        // This is for partial MAP solution considering only the task1 measurements equation
-        else if (berdy.getOptions().task1SolutionOption == iDynTree::PARTIAL_MAP) {
-            // Implement MAP solution on Y1 * d1 + bd1 = y1
+        //    m_intermediateQuantities.covarianceDynamicsAPosterioriInverseDecomposition.factorize(toEigen(m_covarianceDynamicsAPosterioriInverse));
+        task1_covarianceDynamicsAPosterioriInverseDecomposition.factorize(task1_covarianceDynamicsAPosterioriInverse);
 
-            task1_covarianceDynamicsAPosterioriInverse = toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_priorMeasurementsCovarianceInverse) * toEigen(task1_measurementsMatrix);
-
-            // decompose m_covarianceDynamicsAPosterioriInverse
-            if (computePermutation) {
-                //        m_intermediateQuantities.covarianceDynamicsAPosterioriInverseDecomposition.analyzePattern(toEigen(m_covarianceDynamicsAPosterioriInverse));
-                task1_covarianceDynamicsAPosterioriInverseDecomposition.analyzePattern(task1_covarianceDynamicsAPosterioriInverse);
-            }
-            //    m_intermediateQuantities.covarianceDynamicsAPosterioriInverseDecomposition.factorize(toEigen(m_covarianceDynamicsAPosterioriInverse));
-            task1_covarianceDynamicsAPosterioriInverseDecomposition.factorize(task1_covarianceDynamicsAPosterioriInverse);
-
-            // Final result: expected value of the whole-body dynamics, Eq. 11b
-            toEigen(task1_expectedDynamicsAPosterioriRHS) = toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_priorMeasurementsCovarianceInverse) * (toEigen(task1_measurements) - toEigen(task1_measurementsBias));
-            toEigen(task1_expectedDynamicsAPosteriori) =
-            task1_covarianceDynamicsAPosterioriInverseDecomposition.solve(toEigen(task1_expectedDynamicsAPosterioriRHS));
-
-        }
-        // This is for full MAP solution considering the task1 dynamics equation and task1 measurements equation
-        else if (berdy.getOptions().task1SolutionOption == iDynTree::FULL_MAP) {
-
-            // Compute the maximum a posteriori probability
-            // See Latella et al., "Whole-Body Human Inverse Dynamics with
-            // Distributed Micro-Accelerometers, Gyros and Force Sensing" in Sensors, 2016
-
-            // Intermediate quantities
-
-            // Covariance matrix of the prior of the dynamics: var[p(d)], Eq. 10a
-            //TODO: find a way to map to iDynTree::SparseMatrix
-            task1_covarianceDynamicsPriorInverse
-            //    toEigen(m_intermediateQuantities.covarianceDynamicsPriorInverse)
-            //Better to assign the "sum" before, and adding the product part later
-            = toEigen(task1_priorDynamicsRegularizationCovarianceInverse);
-
-            task1_covarianceDynamicsPriorInverse += toEigen(task1_dynamicsConstraintsMatrix).transpose() * toEigen(task1_priorDynamicsConstraintsCovarianceInverse) * toEigen(task1_dynamicsConstraintsMatrix);
-
-            // decompose m_covarianceDynamicsPriorInverse
-            if (computePermutation) {
-                task1_covarianceDynamicsPriorInverseDecomposition.analyzePattern(task1_covarianceDynamicsPriorInverse);
-            }
-
-            //    m_intermediateQuantities.covarianceDynamicsPriorInverseDecomposition.factorize(toEigen(m_intermediateQuantities.covarianceDynamicsPriorInverse));
-            task1_covarianceDynamicsPriorInverseDecomposition.factorize(task1_covarianceDynamicsPriorInverse);
-
-            // Expected value of the prior of the dynamics: E[p(d)], Eq. 10b
-            toEigen(task1_expectedDynamicsPriorRHS) = toEigen(task1_priorDynamicsRegularizationCovarianceInverse) * toEigen(task1_priorDynamicsRegularizationExpectedValue) - toEigen(task1_dynamicsConstraintsMatrix).transpose() * toEigen(task1_priorDynamicsConstraintsCovarianceInverse) * toEigen(task1_dynamicsConstraintsBias);
-
-            toEigen(task1_expectedDynamicsPrior) =
-            task1_covarianceDynamicsPriorInverseDecomposition.solve(toEigen(task1_expectedDynamicsPriorRHS));
-
-            // Final result: covariance matrix of the whole-body dynamics, Eq. 11a
-            //TODO: find a way to map to iDynTree::SparseMatrix
-            task1_covarianceDynamicsAPosterioriInverse = task1_covarianceDynamicsPriorInverse;
-            task1_covarianceDynamicsAPosterioriInverse += toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_priorMeasurementsCovarianceInverse) * toEigen(task1_measurementsMatrix);
-
-            // decompose m_covarianceDynamicsAPosterioriInverse
-            if (computePermutation) {
-                //        m_intermediateQuantities.covarianceDynamicsAPosterioriInverseDecomposition.analyzePattern(toEigen(m_covarianceDynamicsAPosterioriInverse));
-                task1_covarianceDynamicsAPosterioriInverseDecomposition.analyzePattern(task1_covarianceDynamicsAPosterioriInverse);
-            }
-            //    m_intermediateQuantities.covarianceDynamicsAPosterioriInverseDecomposition.factorize(toEigen(m_covarianceDynamicsAPosterioriInverse));
-            task1_covarianceDynamicsAPosterioriInverseDecomposition.factorize(task1_covarianceDynamicsAPosterioriInverse);
-
-            // Final result: expected value of the whole-body dynamics, Eq. 11b
-            toEigen(task1_expectedDynamicsAPosterioriRHS) = (toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_priorMeasurementsCovarianceInverse) * (toEigen(task1_measurements) - toEigen(task1_measurementsBias)) + task1_covarianceDynamicsPriorInverse * toEigen(task1_expectedDynamicsPrior));
-            toEigen(task1_expectedDynamicsAPosteriori) =
-            task1_covarianceDynamicsAPosterioriInverseDecomposition.solve(toEigen(task1_expectedDynamicsAPosterioriRHS));
-        }
+        // Final result: expected value of the whole-body dynamics, Eq. 11b
+        toEigen(task1_expectedDynamicsAPosterioriRHS) = toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_priorMeasurementsCovarianceInverse) * (toEigen(task1_measurements) - toEigen(task1_measurementsBias));
+        toEigen(task1_expectedDynamicsAPosteriori) =
+        task1_covarianceDynamicsAPosterioriInverseDecomposition.solve(toEigen(task1_expectedDynamicsAPosterioriRHS));
     }
 
     void BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::computeMAP(bool computePermutation)
@@ -524,11 +448,6 @@ namespace iDynTree {
                                dynamicsConstraintsBias,
                                measurementsMatrix,
                                measurementsBias);
-//        std::cout << "==============Berdy Matrices Size==============" << std::endl;
-//        std::cout << "dynamicsConstraintsMatrix : " << dynamicsConstraintsMatrix.rows() << " X " << dynamicsConstraintsMatrix.columns() << std::endl;
-//        std::cout << "dynamicsConstraintsBias : " << dynamicsConstraintsBias.size() << std::endl;
-//        std::cout << "measurementsMatrix : " << measurementsMatrix.rows() << " X " << measurementsMatrix.columns() << std::endl;
-//        std::cout << "measurementsBias : " << measurementsBias.size() << std::endl;
 
         // Compute the maximum a posteriori probability
         // See Latella et al., "Whole-Body Human Inverse Dynamics with

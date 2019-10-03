@@ -139,27 +139,6 @@ bool isJointBerdyDynamicVariable(const BerdyDynamicVariablesTypes dynamicVariabl
 bool isDOFBerdyDynamicVariable(const BerdyDynamicVariablesTypes dynamicVariableType);
 
 /**
- * Enumeration of task1 solutions
- */
-enum Task1SolutionOption
-{
-    /*
-     * This is for direct least squares solution on only the task1 measurements equation Y1 * d1 + by1 = y1
-     */
-    DIRECT = 0,
-
-    /*
-     * This is for partial MAP solution on only the task1 measurements equation Y1 * d1 + by1 = y1
-     */
-    PARTIAL_MAP = 1,
-
-    /*
-     * This is for for full MAP solution using task1 dynamics equation D1 * d1 + bd1 = 0 and task1 measurements equation Y1 * d1 + by1 = y1
-     */
-    FULL_MAP = 2
-};
-
-/**
  * Options of the BerdyHelper class.
  *
  * Documentation of each option is provided as usual Doxygen documentation.
@@ -180,7 +159,7 @@ public:
                      includeCoMAccelerometerAsSensorInTask2(false),
                      includeFixedBaseExternalWrench(false),
                      baseLink(""),
-                     task1SolutionOption(PARTIAL_MAP)
+                     stackOfTasksMAP(false)
     {
     }
 
@@ -278,10 +257,10 @@ public:
     std::string baseLink;
 
     /**
-     * Type of task1 solution
-     * The default option is PARTIAL_MAP
+     * This is a boolean flag for stack of task MAP estimation
+     * The default value is false
      */
-    Task1SolutionOption task1SolutionOption;
+    bool stackOfTasksMAP;
 
     /**
      * Check that the options are not self-contradicting.
