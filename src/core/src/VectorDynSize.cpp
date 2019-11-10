@@ -153,6 +153,18 @@ double VectorDynSize::operator()(unsigned int index) const
     return this->m_data[index];
 }
 
+double& VectorDynSize::operator[](unsigned int index)
+{
+    assert(index < this->size());
+    return this->m_data[index];
+}
+
+double VectorDynSize::operator[](unsigned int index) const
+{
+    assert(index < this->size());
+    return this->m_data[index];
+}
+
 double VectorDynSize::getVal(const unsigned int index) const
 {
     if( index >= this->size() )
