@@ -119,6 +119,10 @@ namespace iDynTree
 
         double& operator()(const unsigned int index);
 
+        double operator[](const unsigned int index) const;
+
+        double& operator[](const unsigned int index);
+
         double getVal(const unsigned int index) const;
 
         bool setVal(const unsigned int index, const double new_el);

@@ -63,6 +63,10 @@ namespace iDynTree
 
         double& operator()(const unsigned int index);
 
+        double operator[](const unsigned int index) const;
+
+        double& operator[](const unsigned int index);
+
         double getVal(const unsigned int index) const;
 
         bool setVal(const unsigned int index, const double new_el);
@@ -144,7 +148,7 @@ namespace iDynTree
     template<unsigned int VecSize>
     VectorFixSize<VecSize>::VectorFixSize()
     {
-        
+
     }
 
 
@@ -214,6 +218,19 @@ namespace iDynTree
         return this->m_data[index];
     }
 
+    template<unsigned int VecSize>
+    double VectorFixSize<VecSize>::operator[](const unsigned int index) const
+    {
+        assert(index < VecSize);
+        return this->m_data[index];
+    }
+
+    template<unsigned int VecSize>
+    double & VectorFixSize<VecSize>::operator[](const unsigned int index)
+    {
+        assert(index < VecSize);
+        return this->m_data[index];
+    }
 
     template<unsigned int VecSize>
     double VectorFixSize<VecSize>::getVal(const unsigned int index) const
