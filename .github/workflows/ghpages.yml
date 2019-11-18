@@ -1,0 +1,45 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    
+    - name: Print GitHub context
+      env:
+        GITHUB_EVENT: ${{ github.event_name }}
+        GITHUB_REF: ${{ github.ref }}
+      run: |
+        echo $GITHUB_EVENT $GITHUB_REF
+    
+    - name: Generate Doxygen Website
+      run: |
+        cd ${GITHUB_WORKSPACE}
+        mkdir deploy
+        sudo apt-get install build-essential doxygen graphviz
+        cd ${GITHUB_WORKSPACE}
+        git clone https://github.com/robotology/idyntree
+        cd idyntree
+        mkdir build
+        cd build 
+        cmake -DIDYNTREE_ONLY_DOCS:BOOL=ON ..
+        make dox
+        cp -r ./doc/html ${GITHUB_WORKSPACE}/deploy/master
+        git checkout devel
+        cmake -DIDYNTREE_ONLY_DOCS:BOOL=ON ..
+        make dox
+        cp -r ./doc/html ${GITHUB_WORKSPACE}/deploy/devel
+
+    - name: Deploy
+      if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/devel')
+      uses: JamesIves/github-pages-deploy-action@master
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: deploy
+        
