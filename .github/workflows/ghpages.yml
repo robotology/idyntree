@@ -18,6 +18,7 @@ jobs:
         echo $GITHUB_EVENT $GITHUB_REF
     
     - name: Generate Doxygen Website
+      if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/devel')
       run: |
         cd ${GITHUB_WORKSPACE}
         mkdir deploy
