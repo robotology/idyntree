@@ -166,15 +166,15 @@ For more info on how to modify the matlab bindings, see https://github.com/robot
 ## Tutorials
 | Topic  | C++ | Matlab | Python |
 |:------:|:---:|:------:|:------:|
-| Use of the [ExtWrenchesAndJointTorquesEstimator class](http://robotology.gitlab.io/docs/idyntree/master/classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html) for computing offset for FT sensors | NA | [examples/matlab/SixAxisFTOffsetEstimation/SixAxisFTOffsetEstimation.m](examples/matlab/SixAxisFTOffsetEstimation/SixAxisFTOffsetEstimation.m) | NA |
-| How to get the axis of a revolute joint expressed in a arbitary frame using the [KinDynComputations class](http://robotology.gitlab.io/docs/idyntree/master/classiDynTree_1_1KinDynComputations.html) | NA | [ examples/matlab/GetJointAxesInWorldFrame.m](examples/matlab/GetJointAxesInWorldFrame.m) | NA |
+| Use of the [ExtWrenchesAndJointTorquesEstimator class](https://robotology.github.io/idyntree/master/classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html) for computing offset for FT sensors | NA | [examples/matlab/SixAxisFTOffsetEstimation/SixAxisFTOffsetEstimation.m](examples/matlab/SixAxisFTOffsetEstimation/SixAxisFTOffsetEstimation.m) | NA |
+| How to get the axis of a revolute joint expressed in a arbitary frame using the [KinDynComputations class](https://robotology.github.io/idyntree/master/classiDynTree_1_1KinDynComputations.html) | NA | [ examples/matlab/GetJointAxesInWorldFrame.m](examples/matlab/GetJointAxesInWorldFrame.m) | NA |
 
 Are you interested in a tutorial on a specific feature or algorithm? Just [request it on an enhancement issue](https://github.com/robotology/idyntree/issues/new).
 
 ## Documentation
 The documentation for the complete API of iDynTree is automatically extracted from the C++ code using [Doxygen](http://www.doxygen.org),
-and is available at the URL : [http://robotology.gitlab.io/docs/idyntree/master/](http://robotology.gitlab.io/docs/idyntree/master/).
-The documentation generated from the `devel` branch is available at the URL : [http://robotology.gitlab.io/docs/idyntree/devel/](http://robotology.gitlab.io/docs/idyntree/devel/).
+and is available at the URL : [https://robotology.github.io/idyntree/master/](https://robotology.github.io/idyntree/master/).
+The documentation generated from the `devel` branch is available at the URL : [https://robotology.github.io/idyntree/devel/](https://robotology.github.io/idyntree/devel/).
 
 ## Announcements 
 Announcements on new releases, API changes or other news are done on [`robotology/QA` GitHub repository](https://github.com/robotology/QA). You can watch that repository to get all the iDynTree-related announcements, that will always tagged with the `announcement` tag.
