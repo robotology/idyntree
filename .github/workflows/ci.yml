@@ -34,12 +34,12 @@ jobs:
       if: matrix.os == 'windows-latest'
       run: |
         git clone https://github.com/robotology-dependencies/robotology-vcpkg-binary-ports C:/robotology-vcpkg-binary-ports
-        vcpkg.exe --overlay-ports=C:/robotology-vcpkg-binary-ports install --triplet x64-windows ace libxml2 eigen3 ipopt-binary 
+        vcpkg.exe --overlay-ports=C:/robotology-vcpkg-binary-ports install --triplet x64-windows ace assimp libxml2 eigen3 ipopt-binary 
         
     - name: Dependencies [macOS]
       if: matrix.os == 'macOS-latest'
       run: |
-        brew install ace boost eigen swig qt5 orocos-kdl
+        brew install ace assimp boost eigen swig qt5 orocos-kdl
     
     - name: Dependencies [Ubuntu]
       if: matrix.os == 'ubuntu-latest'
@@ -47,7 +47,7 @@ jobs:
         sudo apt-get update
         sudo apt-get install git build-essential cmake libace-dev coinor-libipopt-dev  libboost-system-dev libboost-filesystem-dev \
                              libboost-thread-dev liborocos-kdl-dev libeigen3-dev swig qtbase5-dev qtdeclarative5-dev qtmultimedia5-dev \
-                             libxml2-dev liburdfdom-dev libtinyxml-dev liburdfdom-dev liboctave-dev python-dev valgrind 
+                             libxml2-dev liburdfdom-dev libtinyxml-dev liburdfdom-dev liboctave-dev python-dev valgrind libassimp-dev
         
     - name: Source-based Dependencies [Windows] 
       if: matrix.os == 'windows-latest-disable-until-issue-569-is-solved'
@@ -117,9 +117,10 @@ jobs:
         mkdir -p build
         cd build
         # ipopt disabled until https://github.com/robotology/idyntree/issues/274 is fixed
+        # assimp disabled until https://github.com/robotology/idyntree/issues/601 is fixed
         cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install \
               -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=ON \
-              -DIDYNTREE_USES_PYTHON:BOOL=OFF -DIDYNTREE_USES_OCTAVE:BOOL=OFF -DIDYNTREE_USES_IPOPT:BOOL=OFF \
+              -DIDYNTREE_USES_PYTHON:BOOL=OFF -DIDYNTREE_USES_OCTAVE:BOOL=OFF -DIDYNTREE_USES_IPOPT:BOOL=OFF -DIDYNTREE_USES_ASSIMP:BOOL=OFF \
               -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
 
     - name: Configure [Ubuntu/macOS]
@@ -127,9 +128,10 @@ jobs:
       shell: bash
       run: |
         mkdir -p build
-        cd build    
+        cd build
+        # IDYNTREE_USES_ASSIMP set to OFF as a workaround for https://github.com/robotology/idyntree/issues/599
         cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=ON \
-              -DIDYNTREE_USES_ICUB_MAIN:BOOL=ON -DIDYNTREE_USES_Qt5:BOOL=ON  -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+              -DIDYNTREE_USES_ICUB_MAIN:BOOL=ON -DIDYNTREE_USES_Qt5:BOOL=ON  -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DIDYNTREE_USES_ASSIMP:BOOL=OFF \
               -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
 
     - name: Enable additional Ubuntu options (Valgrind, Octave, Python, legacy KDL) [Ubuntu] 
