@@ -4,17 +4,26 @@
 
 #########################################################################
 # Enable/disable dependencies
+# DO_NOT_SILENTLY_SEARCH: Do not search for the package to set the default
+#                         value of IDYNTREE_USES_<dep> option, but just set
+#                         it to OFF 
 macro(idyntree_handle_dependency package)
+  set(options DO_NOT_SILENTLY_SEARCH)
   set(singleValueArgs MINIMUM_VERSION)
   set(multiValueArgs COMPONENTS)
   cmake_parse_arguments(IHD "" "${singleValueArgs}" "${multiValueArgs}" ${ARGN})
-  if (IHD_COMPONENTS)
-    find_package(${package} ${IHD_MINIMUM_VERSION} QUIET COMPONENTS ${IHD_COMPONENTS})
-  else ()
-    find_package(${package} ${IHD_MINIMUM_VERSION} QUIET)
-  endif ()
   string(TOUPPER ${package} PKG)
-  option(IDYNTREE_USES_${PKG} "Build the part of iDynTree that depends on package ${package}" ${${package}_FOUND})
+  if (IHD_DO_NOT_SILENTLY_SEARCH)
+    if (IHD_COMPONENTS)
+      find_package(${package} ${IHD_MINIMUM_VERSION} QUIET COMPONENTS ${IHD_COMPONENTS})
+    else ()
+      find_package(${package} ${IHD_MINIMUM_VERSION} QUIET)
+    endif ()
+    set(IDYNTREE_USES_${PKG}_DEFAULT ${${package}_FOUND})
+  else ()
+    set(IDYNTREE_USES_${PKG}_DEFAULT FALSE)
+  endif ()
+  option(IDYNTREE_USES_${PKG} "Build the part of iDynTree that depends on package ${package}" ${IDYNTREE_USES_${PKG}_DEFAULT})
   if (IDYNTREE_USES_${PKG})
     if (IHD_COMPONENTS)
       find_package(${package} ${IHD_MINIMUM_VERSION} COMPONENTS ${IHD_COMPONENTS} REQUIRED)
@@ -57,4 +66,5 @@ idyntree_handle_dependency(Qt5 COMPONENTS Qml Quick Widgets)
 idyntree_handle_dependency(OsqpEigen)
 idyntree_handle_dependency(ALGLIB 3.14.0)
 idyntree_handle_dependency(WORHP)
-idyntree_handle_dependency(ASSIMP)
+# Workaround for https://github.com/robotology/idyntree/issues/599
+idyntree_handle_dependency(ASSIMP DO_NOT_SILENTLY_SEARCH)
