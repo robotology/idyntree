@@ -32,9 +32,8 @@ set(IDYNTREE_MODEL_HEADERS include/iDynTree/Model/ContactWrench.h
                            include/iDynTree/Model/PrismaticJoint.h
                            include/iDynTree/Model/SolidShapes.h
                            include/iDynTree/Model/SubModel.h
-                           include/iDynTree/Model/Traversal.h)
-
-set(IDYNTREE_MODEL_PRIVATE_INCLUDES include/iDynTree/Model/ModelTestUtils.h)
+                           include/iDynTree/Model/Traversal.h
+                           include/iDynTree/Model/ModelTestUtils.h)
 
 set(IDYNTREE_MODEL_SOURCES src/ContactWrench.cpp
                            src/DenavitHartenberg.cpp
@@ -62,11 +61,10 @@ set(IDYNTREE_MODEL_SOURCES src/ContactWrench.cpp
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_MODEL_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_MODEL_HEADERS})
-SOURCE_GROUP("Header Files\\Private" FILES ${IDYNTREE_MODEL_PRIVATE_INCLUDES})
 
 set(libraryname idyntree-model)
 
-add_library(${libraryname} ${IDYNTREE_MODEL_SOURCES} ${IDYNTREE_MODEL_HEADERS} ${IDYNTREE_MODEL_PRIVATE_INCLUDES})
+add_library(${libraryname} ${IDYNTREE_MODEL_SOURCES} ${IDYNTREE_MODEL_HEADERS})
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
