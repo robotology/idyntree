@@ -225,10 +225,10 @@ public:
     bool includeCoMAccelerometerAsSensorInTask2;
 
     /**
-     * Vector of link indexes that are considered for rate of change of momentum constraint using CoM accelerometer sensor
+     * Vector of link names that are considered for rate of change of momentum constraint using CoM accelerometer sensor
      * The default value is set to contains all the links present in the model
      */
-    std::vector<LinkIndex> comConstraintLinkIndexVector;
+    std::vector<std::string> comConstraintLinkNamesVector;
 
     /**
      * If includeNetExternalWrenchesAsSensors is true and the

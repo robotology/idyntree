@@ -1283,10 +1283,13 @@ bool BerdyHelper::computeTask1SensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
         // Get the row index corresponding to the com accelerometer sensor
         IndexRange comAccelerometerRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR, true);
 
-        for(size_t i = 0; i < m_options.comConstraintLinkIndexVector.size(); i++)
+        for(size_t i = 0; i < m_options.comConstraintLinkNamesVector.size(); i++)
         {
+            // Get link name from the vector
+            std::string linkName = m_options.comConstraintLinkNamesVector.at(i);
+
             // Get link index from the vector
-            LinkIndex idx = m_options.comConstraintLinkIndexVector.at(i);
+            LinkIndex idx = m_model.getLinkIndex(linkName);
 
             // Get the column index corresponding to the net link external wrench sensor
             IndexRange netExternalWrenchSensor = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR,
@@ -1618,10 +1621,13 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
         // Get the row index corresponding to the com accelerometer sensor
         IndexRange comAccelerometerRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR, false);
 
-        for(size_t i = 0; i < m_options.comConstraintLinkIndexVector.size(); i++)
+        for(size_t i = 0; i < m_options.comConstraintLinkNamesVector.size(); i++)
         {
+            // Get link name from the vector
+            std::string linkName = m_options.comConstraintLinkNamesVector.at(i);
+
             // Get link index from the vector
-            LinkIndex idx = m_options.comConstraintLinkIndexVector.at(i);
+            LinkIndex idx = m_model.getLinkIndex(linkName);
 
             // Get the column index corresponding to the net link external wrench sensor
             IndexRange netExternalWrenchSensor = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR,
@@ -1665,11 +1671,11 @@ bool BerdyHelper::initBerdyFloatingBase()
     // TODO: Double check this
     m_task1_nrOfDynamicEquations = 6*m_model.getNrOfLinks();
 
-    // check comConstraintLinkIndexVector is correctly set
+    // check comConstraintLinkNamesVector is correctly set
     if (m_options.includeCoMAccelerometerAsSensorInTask1 || m_options.includeCoMAccelerometerAsSensorInTask2) {
-        if (m_options.comConstraintLinkIndexVector.size() == 0)
+        if (m_options.comConstraintLinkNamesVector.size() == 0)
         {
-            reportError("BerdyHelpers","initBerdyFloatingBase","comConstraintLinkIndexVector is not initialized correctly, the size is 0");
+            reportError("BerdyHelpers","initBerdyFloatingBase","comConstraintLinkNamesVector is not initialized correctly, the size is 0");
             res = false;
         }
     }
