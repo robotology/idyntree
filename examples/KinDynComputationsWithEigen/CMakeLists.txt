@@ -20,6 +20,7 @@ source_group("Source Files" FILES ${folder_source})
 add_executable(${PROJECT_NAME} ${folder_source})
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${EIGEN3_INCLUDE_DIR})
+message(STATUS "iDynTree_LIBRARIES : ${iDynTree_LIBRARIES}")
 target_link_libraries(${PROJECT_NAME} ${iDynTree_LIBRARIES})
 
 

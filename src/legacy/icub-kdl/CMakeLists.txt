@@ -43,7 +43,8 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
 
 target_link_libraries(${libraryname} LINK_PUBLIC  skinDynLib iKin iDyn
                                             ${GSL_LIBRARIES}
-                                            ${YARP_LIBRARIES}
+                                            YARP::YARP_os
+                                            YARP::YARP_math
                                             idyntree-core
                                             idyntree-sensors
                                             idyntree-modelio-urdf-kdl
