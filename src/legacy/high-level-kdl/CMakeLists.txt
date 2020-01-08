@@ -42,11 +42,6 @@ if (IDYNTREE_USES_KDL)
     target_link_libraries(${libraryname} idyntree-kdl idyntree-modelio-urdf-kdl idyntree-sensors idyntree-modelio-urdf-kdl ${TinyXML_LIBRARIES})
 endif()
 
-
-# Ensure that build include directories are always included before system ones
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-target_include_directories(${libraryname} BEFORE PRIVATE ${IDYNTREE_TREE_INCLUDE_DIRS})
-
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_HIGH_LEVEL_KDL_HEADERS})
 
 install(TARGETS ${libraryname}
@@ -59,9 +54,6 @@ install(TARGETS ${libraryname}
         PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/HighLevel/impl)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
-
-get_property(IDYNTREE_COMP_INCLUDE_DIRS TARGET ${libraryname} PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${IDYNTREE_COMP_INCLUDE_DIRS})
 
 if(IDYNTREE_COMPILE_TESTS AND IDYNTREE_USES_KDL)
     add_subdirectory(tests)

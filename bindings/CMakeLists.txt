@@ -17,10 +17,22 @@ if(SWIG_FOUND OR IDYNTREE_USES_MATLAB OR IDYNTREE_USES_OCTAVE)
 
     set_source_files_properties(iDynTree.i PROPERTIES CPLUSPLUS ON)
 
-    get_property(IDYNTREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
     get_property(IDYNTREE_LIBRARIES GLOBAL PROPERTY ${VARS_PREFIX}_TARGETS)
 
-    include_directories(${IDYNTREE_INCLUDE_DIRS})
+    # From https://github.com/robotology/yarp/blob/v3.3.0/bindings/CMakeLists.txt#L49
+    foreach(_lib IN LISTS IDYNTREE_LIBRARIES)
+        get_property(_include_dirs TARGET ${_lib} PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
+        foreach(_dir IN LISTS _include_dirs)
+            if("${_dir}" MATCHES "\$<BUILD_INTERFACE:(.+)>$")
+                include_directories("${CMAKE_MATCH_1}")
+            elseif("${_dir}" MATCHES "\$<INSTALL_INTERFACE:(.+)>$")
+                # Nothing to do
+            else()
+                include_directories(${_dir})
+            endif()
+        endforeach()
+    endforeach()
+
     link_libraries(${IDYNTREE_LIBRARIES})
 
     # Remove the deprecation warnings because by definition we always build bindings also of deprecated modules

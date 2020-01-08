@@ -6,14 +6,12 @@
 # https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 # at your option.
 
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-
 set(IDYNTREE_MODELIO_XML_DATAFILES ${IDYNTREE_MODELIO_TESTFILES_DIR}/xml)
 
 add_executable(XMLParserUnitTest XMLParserUnitTest.cpp)
 target_compile_definitions(XMLParserUnitTest PUBLIC -DIDYNTREE_TEST_FILES_DIR="${IDYNTREE_MODELIO_XML_DATAFILES}")
 
-target_include_directories(XMLParserUnitTest PRIVATE ${EIGEN3_INCLUDE_DIR} ${IDYNTREE_TREE_INCLUDE_DIRS})
+target_include_directories(XMLParserUnitTest PRIVATE ${EIGEN3_INCLUDE_DIR})
 target_link_libraries(XMLParserUnitTest idyntree-core idyntree-modelio-xml)
 add_test(NAME UnitTestXMLParser COMMAND XMLParserUnitTest)
 
