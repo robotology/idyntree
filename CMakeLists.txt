@@ -42,13 +42,6 @@ if(NOT IDYNTREE_ONLY_DOCS)
     # Find dependecies
     include(iDynTreeDependencies)
 
-    if(IDYNTREE_USES_YARP)
-        find_package(YARP REQUIRED)
-        if (NOT YARP_HAS_MATH_LIB)
-            message(FATAL_ERROR "YARP was found, but no libYARP_math was detected, please recompile yarp")
-        endif()
-    endif()
-
     # Add external libraries that are embedded in iDynTree
     # source tree, if necessary (by default does not adds
     # anything) feel free to check teh logic inside

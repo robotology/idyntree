@@ -8,9 +8,6 @@
 
 project(iDynTree_ModelIO_iKin_KDL CXX)
 
-find_package(YARP REQUIRED)
-find_package(ICUB REQUIRED)
-
 set(IDYNTREE_MODELIO_IKIN_KDL_HEADERS include/iDynTree/ModelIO/iKin_export.hpp)
 
 set(IDYNTREE_MODELIO_IKIN_KDL_SOURCES src/iKin_export.cpp)

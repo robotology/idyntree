@@ -41,10 +41,7 @@ if(IDYNTREE_USES_ICUB_MAIN)
   # Commented because at the moment it takes a lot of time
   # add_all_components_test(urdf2dh)
   # target_link_libraries(urdf2dh_test iKin idyntree-kdl idyntree-yarp-kdl idyntree-regressors idyntree-modelio-urdf-kdl idyntree-modelio-ikin)
-  find_package(YARP)
-  find_package(ICUB)
   add_executable(urdf2dh_standalone_test urdf2dh_test.cpp)
-  target_include_directories(urdf2dh_standalone_test PUBLIC ${ICUB_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
   target_link_libraries(urdf2dh_standalone_test iKin idyntree-kdl idyntree-yarp-kdl idyntree-regressors idyntree-modelio-urdf-kdl idyntree-modelio-ikin-kdl idyntree-testmodels)
 # \todo reenable this test
   #add_test(NAME test_urdf2dh COMMAND urdf2dh_test urdf_icub_test.urdf)

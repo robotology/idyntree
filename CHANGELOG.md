@@ -40,6 +40,7 @@ to normalize errors or as initial points of a nonlinear optimization procedure.
 
 ### Changed
 - The changelog has been migrated to the format described in https://keepachangelog.com/en/1.0.0/ .
+- If the IDYNTREE_USES_YARP option is enabled, the minimum required version of YARP is 3.3 .
 - The CMake config files are now installed in ${CMAKE_INSTALL_PREFIX}/lib/cmake/iDynTree also in Windows.
 
 ### Deprecated
