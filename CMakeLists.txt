@@ -73,7 +73,6 @@ if(NOT IDYNTREE_ONLY_DOCS)
     endif()
     if(IDYNTREE_USES_KDL)
         list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES orocos_kdl)
-        list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES TinyXML)
     endif()
 
     include(InstallBasicPackageFiles)
