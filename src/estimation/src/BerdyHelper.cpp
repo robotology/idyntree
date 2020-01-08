@@ -1771,6 +1771,30 @@ bool BerdyHelper::resizeAndZeroBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>
     return true;
 }
 
+bool BerdyHelper::resizeAndZeroBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD,
+                                             SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize& bY,
+                                             const bool& task1)
+{
+    if (task1) {
+        D.resize(getNrOfDynamicEquations(task1),getNrOfDynamicVariables(task1));
+        bD.resize(getNrOfDynamicEquations(task1));
+        Y.resize(getNrOfSensorsMeasurements(task1),getNrOfDynamicVariables(task1));
+        bY.resize(getNrOfSensorsMeasurements(task1));
+    }
+    else {
+        D.resize(getNrOfDynamicEquations(),getNrOfDynamicVariables());
+        bD.resize(getNrOfDynamicEquations());
+        Y.resize(getNrOfSensorsMeasurements(),getNrOfDynamicVariables());
+        bY.resize(getNrOfSensorsMeasurements());
+    }
+
+    D.zero();
+    bD.zero();
+    Y.zero();
+    bY.zero();
+    return true;
+}
+
 bool BerdyHelper::resizeAndZeroBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
                                              MatrixDynSize & Y, VectorDynSize & bY)
 {
@@ -1778,6 +1802,29 @@ bool BerdyHelper::resizeAndZeroBerdyMatrices(MatrixDynSize & D, VectorDynSize & 
     bD.resize(getNrOfDynamicEquations());
     Y.resize(getNrOfSensorsMeasurements(),getNrOfDynamicVariables());
     bY.resize(getNrOfSensorsMeasurements());
+    D.zero();
+    bD.zero();
+    Y.zero();
+    bY.zero();
+    return true;
+}
+
+bool BerdyHelper::resizeAndZeroBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
+                                             MatrixDynSize & Y, VectorDynSize & bY,
+                                             const bool& task1)
+{
+    if (task1) {
+        D.resize(getNrOfDynamicEquations(task1),getNrOfDynamicVariables(task1));
+        bD.resize(getNrOfDynamicEquations(task1));
+        Y.resize(getNrOfSensorsMeasurements(task1),getNrOfDynamicVariables(task1));
+        bY.resize(getNrOfSensorsMeasurements(task1));
+    }
+    else {
+        D.resize(getNrOfDynamicEquations(),getNrOfDynamicVariables());
+        bD.resize(getNrOfDynamicEquations());
+        Y.resize(getNrOfSensorsMeasurements(),getNrOfDynamicVariables());
+        bY.resize(getNrOfSensorsMeasurements());
+    }
     D.zero();
     bD.zero();
     Y.zero();

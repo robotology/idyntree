@@ -644,10 +644,25 @@ public:
     size_t getNrOfSensorsMeasurements(const bool& task1) const;
 
     /**
+     * Resize and set to zero Berdy matrices. - new method
+     */
+    bool resizeAndZeroBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize &bD,
+                                    SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize &bY,
+                                    const bool& task1);
+
+    /**
      * Resize and set to zero Berdy matrices.
      */
     bool resizeAndZeroBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize &bD,
                                     SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize &bY);
+
+    /**
+     * Resize and set to zero Berdy matrices. - new method
+     *
+     */
+    bool resizeAndZeroBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
+                                    MatrixDynSize & Y, VectorDynSize & bY,
+                                    const bool& task1);
 
     /**
      * Resize and set to zero Berdy matrices.
