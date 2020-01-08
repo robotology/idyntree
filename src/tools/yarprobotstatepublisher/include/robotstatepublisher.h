@@ -23,6 +23,8 @@
 #include <iDynTree/KinDynComputations.h>
 
 #include <yarp/rosmsg/sensor_msgs/JointState.h>
+
+#include <mutex>
 #include <memory>
 
 class YARPRobotStatePublisherModule;
@@ -65,7 +67,7 @@ class YARPRobotStatePublisherModule : public yarp::os::RFModule
    yarp::sig::Matrix m_buf4x4;
 
    // Mutex protecting the method across the different threads
-   yarp::os::Mutex m_mutex;
+   std::mutex m_mutex;
 
    // /JointState topic scruscriber
    std::unique_ptr<yarp::os::Node> m_rosNode;

@@ -172,7 +172,7 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
 /************************************************************/
 bool YARPRobotStatePublisherModule::close()
 {
-    yarp::os::LockGuard guard(m_mutex);
+    std::lock_guard<std::mutex> guard(m_mutex);
 
     // Disconnect the topic subscriber
     if (m_jointStateSubscriber)
@@ -212,7 +212,7 @@ bool YARPRobotStatePublisherModule::updateModule()
 /************************************************************/
 void YARPRobotStatePublisherModule::onRead(yarp::rosmsg::sensor_msgs::JointState &v)
 {
-    yarp::os::LockGuard guard(m_mutex);
+    std::lock_guard<std::mutex> guard(m_mutex);
 
     // If configure was successful, parse the data
     if (m_baseFrameIndex == iDynTree::FRAME_INVALID_INDEX)
