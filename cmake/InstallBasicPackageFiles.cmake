@@ -321,7 +321,8 @@ function(INSTALL_BASIC_PACKAGE_FILES _Name)
     set(_export_cmd TARGETS ${_IBPF_TARGETS})
 
   elseif(DEFINED _IBPF_TARGETS_PROPERTY)
-    message(DEPRECATION "TARGETS_PROPERTY is deprecated. Use EXPORT instead")
+    # Warning suppressed for https://github.com/robotology/idyntree/issues/613
+    # message(DEPRECATION "TARGETS_PROPERTY is deprecated. Use EXPORT instead")
 
     if(DEFINED _IBPF_TARGETS_PROPERTIES)
       message(FATAL_ERROR "TARGETS_PROPERTIES cannot be used with TARGETS_PROPERTIES")
@@ -374,7 +375,8 @@ function(INSTALL_BASIC_PACKAGE_FILES _Name)
   endif()
   # ENABLE_COMPATIBILITY_VARS is deprecated
   if(_IBPF_ENABLE_COMPATIBILITY_VARS)
-    message(DEPRECATION "ENABLE_COMPATIBILITY_VARS is deprecated.")
+    # Warning for https://github.com/robotology/idyntree/issues/613 suppressed
+    # message(DEPRECATION "ENABLE_COMPATIBILITY_VARS is deprecated.")
   endif()
   # ENABLE_COMPATIBILITY_VARS does not work with EXPORT
   if(NOT DEFINED _targets AND _IBPF_ENABLE_COMPATIBILITY_VARS)
