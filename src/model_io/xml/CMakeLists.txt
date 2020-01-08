@@ -41,7 +41,7 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
                                           PRIVATE ${EIGEN3_INCLUDE_DIR}
                                                   ${LIBXML2_INCLUDE_DIR}
-						  ${IDYNTREE_TREE_INCLUDE_DIRS})
+                                                  ${IDYNTREE_TREE_INCLUDE_DIRS})
 
 target_link_libraries(${libraryname} LINK_PUBLIC 
                                      LINK_PRIVATE ${LIBXML2_LIBRARIES} idyntree-core)
