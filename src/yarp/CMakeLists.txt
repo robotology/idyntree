@@ -30,6 +30,7 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
 
 
 add_library(idyntree-yarp ${iDynTree_YARP_source} ${iDynTree_YARP_header})
+add_library(iDynTree::idyntree-yarp ALIAS idyntree-yarp)
 
 set_target_properties(idyntree-yarp PROPERTIES PUBLIC_HEADER "${iDynTree_YARP_header}")
 

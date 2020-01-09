@@ -25,6 +25,7 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
 
 set(libraryname idyntree-icub)
 add_library(${libraryname} ${iDynTree_ICUB_source} ${iDynTree_ICUB_header})
+add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 
 # Ensure that build include directories are always included before system ones
 get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)

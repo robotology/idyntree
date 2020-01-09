@@ -46,6 +46,7 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
 set(libraryname idyntree-visualization)
 add_library(${libraryname} ${iDynTree_visualization_source} ${iDynTree_visualization_header}
                            ${iDynTree_visualization_private_source} ${iDynTree_visualization_private_headers})
+add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 
 set_target_properties(${libraryname} PROPERTIES PUBLIC_HEADER "${iDynTree_visualization_header}")
 

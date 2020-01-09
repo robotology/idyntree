@@ -109,6 +109,7 @@ include_directories(include/iDynTree/Core)
 set(libraryname idyntree-core)
 
 add_library(${libraryname} ${IDYNTREE_CORE_EXP_SOURCES} ${IDYNTREE_CORE_EXP_HEADERS} ${IDYNTREE_CORE_EXP_PRIVATE_INCLUDES})
+add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 
 if (DEFINED CMAKE_COMPILER_IS_GNUCXX)
   if(${CMAKE_COMPILER_IS_GNUCXX} AND ${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS 5)
