@@ -32,10 +32,6 @@ source_group("Header Files" FILES ${iDynTree_visualization_header})
 source_group("Private Source Files" FILES ${iDynTree_visualization_source})
 source_group("Private Header Files" FILES ${iDynTree_visualization_header})
 
-# share headers with all iDynTree targets
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include")
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-
 include(AddInstallRPATHSupport)
 add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
                           LIB_DIRS "${CMAKE_INSTALL_PREFIX}/lib"
@@ -52,8 +48,6 @@ set_target_properties(${libraryname} PROPERTIES PUBLIC_HEADER "${iDynTree_visual
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
                                           PRIVATE ${EIGEN3_INCLUDE_DIR})
-
-include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 
 target_link_libraries(${libraryname} LINK_PUBLIC idyntree-core
                                                  idyntree-model)

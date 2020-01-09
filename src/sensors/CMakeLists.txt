@@ -8,12 +8,6 @@
 
 project(iDynTree_Sensors CXX)
 
-# share headers with all iDynTree targets
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include")
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-
-include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
-
 set(IDYNTREE_SENSORS_HEADERS include/iDynTree/Sensors/AllSensorsTypes.h
                              include/iDynTree/Sensors/Sensors.h
                              include/iDynTree/Sensors/SixAxisForceTorqueSensor.h
@@ -52,9 +46,6 @@ include_directories(SYSTEM AFTER ${orocos_kdl_INCLUDE_DIRS}
 
 target_link_libraries(${libraryname} idyntree-core idyntree-model)
 
-# Ensure that build include directories are always included before system ones
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-target_include_directories(${libraryname} BEFORE PRIVATE ${IDYNTREE_TREE_INCLUDE_DIRS})
 
 target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
 
@@ -70,7 +61,6 @@ install(TARGETS ${libraryname}
         PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Sensors/Impl)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 if(IDYNTREE_COMPILE_TESTS)
     add_subdirectory(tests)

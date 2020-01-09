@@ -29,8 +29,6 @@ set(libraryname idyntree-kdl)
 
 add_library(${libraryname} ${IDYNTREE_KDL_SOURCES} ${IDYNTREE_KDL_HEADERS} ${IDYNTREE_KDL_PRIVATE_INCLUDES})
 
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 
@@ -45,10 +43,6 @@ target_include_directories(${libraryname} INTERFACE ${EIGEN3_INCLUDE_DIR}
 include_directories(SYSTEM ${EIGEN3_INCLUDE_DIR}
                            ${orocos_kdl_INCLUDE_DIRS})
 
-# Ensure that build include directories are always included before system ones
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-target_include_directories(${libraryname} BEFORE PRIVATE ${IDYNTREE_TREE_INCLUDE_DIRS})
-
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_KDL_HEADERS})
 
 install(TARGETS ${libraryname}
@@ -60,5 +54,3 @@ install(TARGETS ${libraryname}
         PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/kdl_codyco/impl)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
-
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include)

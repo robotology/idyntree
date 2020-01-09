@@ -19,10 +19,6 @@ SET(iDynTree_YARP_KDL_header include/iCub/iDynTree/DynTree.h
 SOURCE_GROUP("Source Files" FILES ${iDynTree_YARP_KDL_source})
 SOURCE_GROUP("Header Files" FILES ${iDynTree_YARP_KDL_header})
 
-# share headers with all iDynTree targes
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include")
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-
 include(AddInstallRPATHSupport)
 add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
                           LIB_DIRS "${CMAKE_INSTALL_PREFIX}/lib"
@@ -41,8 +37,6 @@ set_target_properties(idyntree-yarp-kdl PROPERTIES VERSION ${${VARS_PREFIX}_VERS
 
 target_include_directories(idyntree-yarp-kdl PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                     "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
-
-include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 
 target_include_directories(idyntree-yarp-kdl INTERFACE ${EIGEN3_INCLUDE_DIR}
                                                     ${YARP_INCLUDE_DIRS})

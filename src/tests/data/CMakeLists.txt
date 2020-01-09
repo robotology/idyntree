@@ -35,4 +35,5 @@ set(IDYNTREE_TESTS_URDFS icub.urdf
 # configure an header containing the path
 # where the test files are stored and the list of files
 configure_file("${CMAKE_CURRENT_SOURCE_DIR}/testModels.h.in" "${CMAKE_CURRENT_BINARY_DIR}/testModels.h" @ONLY)
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${CMAKE_CURRENT_BINARY_DIR}")
+add_library(idyntree-testmodels INTERFACE)
+target_include_directories(idyntree-testmodels INTERFACE "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>")

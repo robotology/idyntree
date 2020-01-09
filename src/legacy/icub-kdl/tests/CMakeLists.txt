@@ -5,14 +5,13 @@ include_directories(${CMAKE_SOURCE_DIR}/include
                           ${YARP_INCLUDE_DIRS}
                           ${ICUB_INCLUDE_DIRS})
 
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 macro(add_icub_test testName)
     set(testsrc ${testName}Test.cpp)
     set(testbinary ${testName}Test)
     set(testname   test_${testName})
     add_executable(${testbinary} ${testsrc})
-    target_include_directories(${testbinary} PRIVATE ${EIGEN3_INCLUDE_DIR} ${IDYNTREE_TREE_INCLUDE_DIRS})
-    target_link_libraries(${testbinary} idyntree-core idyntree-high-level idyntree-yarp-kdl idyntree-icub-kdl ${YARP_LIBRARIES} ${orocos_kdl_LIBRARIES})
+    target_include_directories(${testbinary} PRIVATE ${EIGEN3_INCLUDE_DIR})
+    target_link_libraries(${testbinary} idyntree-core idyntree-high-level idyntree-yarp-kdl idyntree-icub-kdl ${YARP_LIBRARIES} ${orocos_kdl_LIBRARIES} idyntree-testmodels)
     add_test(NAME ${testname} COMMAND ${testbinary})
 
     if(IDYNTREE_RUN_VALGRIND_TESTS)
