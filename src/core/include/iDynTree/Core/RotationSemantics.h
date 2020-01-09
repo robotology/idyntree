@@ -13,6 +13,8 @@
 
 #include <string>
 
+#include <iDynTree/Core/Utils.h>
+
 namespace iDynTree
 {
     class PositionSemantics;
@@ -22,7 +24,8 @@ namespace iDynTree
      *
      * \ingroup iDynTreeCore
      */
-    class RotationSemantics
+    class
+    RotationSemantics
     {
     protected:
         int orientationFrame;
@@ -54,13 +57,16 @@ namespace iDynTree
          * Constructor: initialize semantics from individual parameters
          *
          */
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         RotationSemantics(int _orientationFrame, int _body, int _refOrientationFrame, int _refBody);
 
         /**
          * Copy constructor: create a RotationSemantics from another RotationSemantics
          */
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         RotationSemantics(const RotationSemantics & other);
 
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         void setToUnknown();
 
         /**
@@ -68,16 +74,26 @@ namespace iDynTree
          *  Semantics setters and getters.
          */
         ///@{
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         int getOrientationFrame() const;
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         int getBody() const;
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         int getReferenceOrientationFrame() const;
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         int getRefBody() const;
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         int getCoordinateFrame() const;
 
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         void setOrientationFrame(int _orientationFrame);
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         void setBody(int _body);
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         void setReferenceOrientationFrame(int _refOrientationFrame);
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         void setRefBody(int _refBody);
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         void setCoordinateFrame(int _coordinateFrame);
     ///@}
 

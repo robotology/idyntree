@@ -74,11 +74,13 @@ namespace iDynTree
         /**
          * Semantic getter
          */
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         PositionSemantics& getSemantics();
 
         /**
          * Const Semantic getter
          */
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         const PositionSemantics& getSemantics() const;
 
         /**

@@ -13,6 +13,7 @@
 
 #include <iDynTree/Core/MotionVector3.h>
 #include <iDynTree/Core/PrivateMotionForceVertorAssociations.h>
+#include <iDynTree/Core/Utils.h>
 
 namespace iDynTree
 {
@@ -26,7 +27,9 @@ namespace iDynTree
          * Constructors:
          */
         AngularMotionVector3Semantics();
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         AngularMotionVector3Semantics(int _body, int _refBody, int _coordinateFrame);
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         AngularMotionVector3Semantics(const AngularMotionVector3Semantics & other);
     };
 
