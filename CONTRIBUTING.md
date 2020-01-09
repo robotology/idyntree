@@ -24,21 +24,16 @@ In a nutshell, development of new features/bugfixes happens in separated branch.
 ## Continuous Integration 
 We use [https://en.wikipedia.org/wiki/Continuous_integration](Continuous Integration) to make 
 sure that proposed changes in the library do not cause regression. In particular we use 
-[Travis](https://travis-ci.org/robotology/idyntree) for Linux/OS X and [AppVeyor](https://ci.appveyor.com/project/robotology/idyntree) for Windows. 
+[GitHub Actions](https://travis-ci.org/robotology/idyntree) for Continuous Integration on Linux, macOS and Windows. 
+
 In all this build systems the compilation of the tests is enabled by setting to true 
 the `IDYNTREE_COMPILE_TESTS` CMake flag. 
 
-### Travis 
-All the dependencies (also the optional one) are enabled in the Travis build. 
+Almost all the dependencies are enabled in the Linux build. 
 Furthermore on Linux builds the `IDYNTREE_RUN_VALGRIND_TESTS` flag is enabled, to 
 run all the tests also under the [`valgrind`](http://valgrind.org/) tool, to spot 
 any memory-related error, suck of use of initialized memory or memory leak. 
 
-You can find the specific iDynTree configuration used in the AppVeyor build in the [`.travis.yml`](https://github.com/robotology/idyntree/blob/master/.travis.yml) file. 
+Some dependencies or options are disabled on Windows and macOS, and you can find the specific iDynTree configuration used in the GitHub Actions build in the [`.github/workflows/ci.yml`](https://github.com/robotology/idyntree/blob/master/.github/workflows/ci.yml) file. 
 
 
-### AppVeyor 
-For the time being AppVeyor is just building the iDynTree parts that don't depend on 
-[KDL](https://github.com/orocos/orocos_kinematics_dynamics), [YARP](https://github.com/robotology/yarp) or [icub-main](https://github.com/robotology/icub-main).
-
-You can find the specific iDynTree configuration used in the AppVeyor build in the [`appveyor.yml`](https://github.com/robotology/idyntree/blob/master/appveyor.yml) file. 
