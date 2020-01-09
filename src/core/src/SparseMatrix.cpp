@@ -312,42 +312,6 @@ namespace iDynTree {
         return it;
     }
 
-    // MARK: - Methods to be explicitly implemented (thus asserted false)
-
-    template <iDynTree::MatrixStorageOrdering ordering>
-    SparseMatrix<ordering>::SparseMatrix(unsigned rows, unsigned cols, const iDynTree::VectorDynSize& memoryReserveDescription)
-    : m_allocatedSize(0)
-    , m_rows(rows)
-    , m_columns(cols)
-    {
-        UNUSED(memoryReserveDescription);
-        assert(false);
-    }
-
-    template <iDynTree::MatrixStorageOrdering ordering>
-    double SparseMatrix<ordering>::operator()(unsigned int, unsigned int) const
-    {
-        assert(false);
-    }
-
-    template <iDynTree::MatrixStorageOrdering ordering>
-    double& SparseMatrix<ordering>::operator()(unsigned int, unsigned int)
-    {
-        assert(false);
-    }
-
-    template <iDynTree::MatrixStorageOrdering ordering>
-    void SparseMatrix<ordering>::resize(unsigned, unsigned, const iDynTree::VectorDynSize&)
-    {
-        assert(false);
-    }
-
-    template <iDynTree::MatrixStorageOrdering ordering>
-    void SparseMatrix<ordering>::setFromTriplets(iDynTree::Triplets&)
-    {
-        assert(false);
-    }
-
     // MARK: - Row-Major implementation
     template <>
     SparseMatrix<iDynTree::RowMajor>::SparseMatrix(unsigned rows, unsigned cols, const iDynTree::VectorDynSize& memoryReserveDescription)
