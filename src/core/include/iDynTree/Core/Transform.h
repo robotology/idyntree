@@ -134,11 +134,13 @@ namespace iDynTree
         /**
          * Semantic accessor
          */
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         TransformSemantics & getSemantics();
 
         /**
          * Const semantic getter
          */
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         const TransformSemantics & getSemantics() const;
 
         /**

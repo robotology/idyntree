@@ -26,7 +26,9 @@ namespace iDynTree
          * Constructors:
          */
         inline LinearForceVector3Semantics() {}
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         LinearForceVector3Semantics(int _body, int _refBody, int _coordinateFrame);
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         LinearForceVector3Semantics(const LinearForceVector3Semantics & other);
     };
 

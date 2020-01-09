@@ -42,6 +42,10 @@ to normalize errors or as initial points of a nonlinear optimization procedure.
 - The changelog has been migrated to the format described in https://keepachangelog.com/en/1.0.0/ .
 - The CMake config files are now installed in ${CMAKE_INSTALL_PREFIX}/lib/cmake/iDynTree also in Windows.
 
+### Deprecated
+- All the classes and methods that end in Semantics are deprecated, and will be removed in iDynTree 2.0, see https://github.com/robotology/idyntree/pull/622 for more info.
+- The CMake option IDYNTREE_USES_KDL and all the classes available when enabling it are deprecated, and will be removed in iDynTree 2.0 .
+
 ### Fixed
 - Fixed missing `DOF_ACCELLERATION` data in dynamic variable cache ordering
 (https://github.com/robotology/idyntree/pull/587)

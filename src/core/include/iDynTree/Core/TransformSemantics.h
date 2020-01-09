@@ -13,6 +13,8 @@
 
 #include <string>
 
+#include <iDynTree/Core/Utils.h>
+
 namespace iDynTree
 {
     class PositionSemantics;
@@ -44,12 +46,14 @@ namespace iDynTree
         /**
          * Constructor: initialize all semantics from a Transform object (create links)
          */
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         TransformSemantics(PositionSemantics & position, RotationSemantics & rotation);
 
 
         /**
          * Get the rotation part of the transform
          */
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         const RotationSemantics & getRotationSemantics() const;
 
         /**
@@ -60,11 +64,13 @@ namespace iDynTree
         /**
          * Set the rotation part of the transform
          */
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         bool setRotationSemantics(const RotationSemantics & rotation);
 
         /**
          * Set the translation part of the transform
          */
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         bool setPositionSemantics(const PositionSemantics & position);
 
         /**

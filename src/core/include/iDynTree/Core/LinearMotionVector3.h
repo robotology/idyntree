@@ -34,17 +34,21 @@ namespace iDynTree
          * Constructors:
          */
         inline LinearMotionVector3Semantics() {}
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         LinearMotionVector3Semantics(int _point, int _body, int _refBody, int _coordinateFrame);
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         LinearMotionVector3Semantics(const LinearMotionVector3Semantics & other);
 
         /**
          * Semantics operations
          * Compute the semantics of the result given the semantics of the operands.
          */
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         bool changePoint(const PositionSemantics & newPoint,
                          const AngularMotionVector3Semantics & otherAngular,
                          LinearMotionVector3Semantics & resultLinear) const;
 
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         static bool compose(const LinearMotionVector3Semantics & op1,
                             const LinearMotionVector3Semantics & op2,
                             LinearMotionVector3Semantics & result);

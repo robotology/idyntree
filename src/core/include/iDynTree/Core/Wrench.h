@@ -20,7 +20,6 @@ namespace iDynTree
      *
      * \ingroup iDynTreeCore
      *
-     * Currently this class does not support semantics.
      */
     class Wrench: public SpatialForceVector
     {

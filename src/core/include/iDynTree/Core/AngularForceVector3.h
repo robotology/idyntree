@@ -13,6 +13,7 @@
 
 #include <iDynTree/Core/ForceVector3.h>
 #include <iDynTree/Core/PrivateMotionForceVertorAssociations.h>
+#include <iDynTree/Core/Utils.h>
 
 namespace iDynTree
 {
@@ -24,7 +25,8 @@ namespace iDynTree
     /**
      * Class providing the semantics for any angular force vector (torque or angular momentum).
      */
-    class AngularForceVector3Semantics: public ForceVector3Semantics<AngularForceVector3Semantics>
+    class
+    AngularForceVector3Semantics: public ForceVector3Semantics<AngularForceVector3Semantics>
     {
     protected:
         int point;
@@ -34,17 +36,21 @@ namespace iDynTree
          * Constructors:
          */
         inline AngularForceVector3Semantics() {}
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         AngularForceVector3Semantics(int _point, int _body, int _refBody, int _coordinateFrame);
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         AngularForceVector3Semantics(const AngularForceVector3Semantics & other);
 
         /**
          * Semantics operations
          * Compute the semantics of the result given the semantics of the operands.
          */
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         bool changePoint(const PositionSemantics & newPoint,
                          const LinearForceVector3Semantics & otherLinear,
                          AngularForceVector3Semantics & resultAngular) const;
 
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         static bool compose(const AngularForceVector3Semantics & op1,
                             const AngularForceVector3Semantics & op2,
                             AngularForceVector3Semantics & result);
