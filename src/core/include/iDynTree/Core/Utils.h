@@ -20,31 +20,24 @@
  */
 #define IDYNTREE_UNUSED(var) ((void)var)
 
+
+// Note: we set IDYNTREE_DEPRECATED to nothing when compiling idyntree-core and
+// idyntree-high-level because some deprecated functions (mainly related to semantics)
+// need still too be used, as they are going to be removed without any replacement
+// When this functions will be removed as part of iDynTree 2.0, we can remove this special case
+// Furthermore, SWIG has some problems with this attributes, so until we use a recent SWIG version
+// we also disabled them for SWIG
 /**
  * \brief Macro to deprecate functions and methods
  *
  * see https://blog.samat.io/2017/02/27/Deprecating-functions-and-methods-in-Cplusplus/
  */
-// C++14
-#if __cplusplus >= 201402L
-  #if defined(__has_cpp_attribute)
-    #if __has_cpp_attribute(deprecated)
-      #define IDYNTREE_DEPRECATED [[deprecated]]
-      #define IDYNTREE_DEPRECATED_WITH_MSG(msg) [[deprecated(msg)]]
-    #endif
-  #endif
-// Earlier standards
+#if defined(idyntree_core_EXPORTS) || defined(idyntree_high_level_EXPORTS) || defined(SWIG)
+#define IDYNTREE_DEPRECATED
+#define IDYNTREE_DEPRECATED_WITH_MSG(msg)
 #else
-  #if defined(__GNUC__) || defined(__clang__)
-    #define IDYNTREE_DEPRECATED __attribute__((deprecated))
-    #define IDYNTREE_DEPRECATED_WITH_MSG(msg) __attribute__((deprecated(msg)))
-  #elif defined(_MSC_VER)
-    #define IDYNTREE_DEPRECATED __declspec(deprecated)
-    #define IDYNTREE_DEPRECATED_WITH_MSG(msg) __declspec(deprecated(msg))
-  #else
-    #define IDYNTREE_DEPRECATED
-    #define IDYNTREE_DEPRECATED_WITH_MSG(msg)
-  #endif
+#define IDYNTREE_DEPRECATED [[deprecated]]
+#define IDYNTREE_DEPRECATED_WITH_MSG(msg) [[deprecated(msg)]]
 #endif
 
 namespace iDynTree
