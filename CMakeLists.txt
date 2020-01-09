@@ -63,12 +63,26 @@ if(NOT IDYNTREE_ONLY_DOCS)
     # add the actual components of the library
     add_subdirectory(src)
 
+    # List exported dependencies
+    set(_IDYNTREE_EXPORTED_DEPENDENCIES "")
+    if(IDYNTREE_USES_YARP)
+        list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES YARP)
+    endif()
+    if(IDYNTREE_USES_ICUB_MAIN)
+        list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES ICUB)
+    endif()
+    if(IDYNTREE_USES_KDL)
+        list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES orocos_kdl)
+    endif()
+
     include(InstallBasicPackageFiles)
     install_basic_package_files(iDynTree VARS_PREFIX ${VARS_PREFIX}
-                                        VERSION ${${VARS_PREFIX}_VERSION}
-                                        COMPATIBILITY SameMajorVersion
-                                        TARGETS_PROPERTY ${VARS_PREFIX}_TARGETS
-                                        NO_CHECK_REQUIRED_COMPONENTS_MACRO)
+                                         VERSION ${${VARS_PREFIX}_VERSION}
+                                         COMPATIBILITY SameMajorVersion
+                                         TARGETS_PROPERTY ${VARS_PREFIX}_TARGETS
+                                         NO_CHECK_REQUIRED_COMPONENTS_MACRO
+                                         ENABLE_COMPATIBILITY_VARS
+                                         DEPENDENCIES ${_IDYNTREE_EXPORTED_DEPENDENCIES})
 
     include(AddUninstallTarget)
 

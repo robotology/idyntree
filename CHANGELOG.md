@@ -40,6 +40,7 @@ to normalize errors or as initial points of a nonlinear optimization procedure.
 
 ### Changed
 - The changelog has been migrated to the format described in https://keepachangelog.com/en/1.0.0/ .
+- The CMake config files are now installed in ${CMAKE_INSTALL_PREFIX}/lib/cmake/iDynTree also in Windows.
 
 ### Fixed
 - Fixed missing `DOF_ACCELLERATION` data in dynamic variable cache ordering
