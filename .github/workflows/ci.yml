@@ -39,6 +39,7 @@ jobs:
     - name: Dependencies [macOS]
       if: matrix.os == 'macOS-latest'
       run: |
+        brew update
         brew install ace assimp boost eigen swig qt5 orocos-kdl
     
     - name: Dependencies [Ubuntu]
