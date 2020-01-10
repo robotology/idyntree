@@ -109,6 +109,8 @@ else()
 endif()
 
 add_library(${libraryname} ${PUBLIC_HEADERS} ${INTEGRATORS_PUBLIC_HEADERS} ${OCSOLVERS_PUBLIC_HEADERS} ${OPTIMIZERS_HEADERS} ${SOURCES} ${OPTIMIZERS_SOURCES})
+add_library(iDynTree::${libraryname} ALIAS ${libraryname})
+
 target_include_directories(${libraryname} SYSTEM PUBLIC ${EIGEN3_INCLUDE_DIR})
 target_include_directories(${libraryname} SYSTEM PRIVATE ${INCLUDE_LIST})
 target_include_directories(${libraryname} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)

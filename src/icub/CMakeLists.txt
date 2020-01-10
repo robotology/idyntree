@@ -25,6 +25,7 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
 
 set(libraryname idyntree-icub)
 add_library(${libraryname} ${iDynTree_ICUB_source} ${iDynTree_ICUB_header})
+add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 
 set_target_properties(${libraryname} PROPERTIES PUBLIC_HEADER "${iDynTree_ICUB_header}")
 

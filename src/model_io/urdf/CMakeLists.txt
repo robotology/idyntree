@@ -66,6 +66,7 @@ list(APPEND IDYNTREE_MODELIO_URDF_SOURCES ${IDYNTREE_MODELIO_URDF_XMLELEMENTS_SO
 set(libraryname idyntree-modelio-urdf)
 
 add_library(${libraryname} ${IDYNTREE_MODELIO_URDF_SOURCES} ${IDYNTREE_MODELIO_URDF_HEADERS} ${IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS} $<TARGET_OBJECTS:idyntree-private-fpconv>)
+add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 
 target_compile_features(${libraryname} PRIVATE cxx_auto_type cxx_delegating_constructors cxx_final cxx_lambdas cxx_lambda_init_captures)
 

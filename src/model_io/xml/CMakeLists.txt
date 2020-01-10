@@ -32,6 +32,7 @@ SOURCE_GROUP("Private Header Files" FILES ${IDYNTREE_MODELIO_XML_PRIVATE_HEADERS
 set(libraryname idyntree-modelio-xml)
 
 add_library(${libraryname} ${IDYNTREE_MODELIO_XML_SOURCES} ${IDYNTREE_MODELIO_XML_HEADERS} ${IDYNTREE_MODELIO_XML_PRIVATE_HEADERS})
+add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 
 # Test if this works:
 # We want to include the same-library header files directly (in the implementation), but with the full prefix in the .h (as this will be public)

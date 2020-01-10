@@ -4,6 +4,7 @@ set(IDYNTREE_SOLID_SHAPES_SOURCES src/InertialParametersSolidShapesHelpers.cpp)
 set(IDYNTREE_SOLID_SHAPES_HEADERS include/iDynTree/InertialParametersSolidShapesHelpers.h)
 
 add_library(${libraryname} ${IDYNTREE_SOLID_SHAPES_HEADERS} ${IDYNTREE_SOLID_SHAPES_SOURCES})
+add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
