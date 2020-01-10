@@ -33,13 +33,10 @@ set_target_properties(idyntree-yarp PROPERTIES PUBLIC_HEADER "${iDynTree_YARP_he
 target_include_directories(idyntree-yarp PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 
-target_include_directories(idyntree-yarp INTERFACE ${YARP_INCLUDE_DIRS})
-
-target_include_directories(idyntree-yarp PRIVATE SYSTEM ${YARP_INCLUDE_DIRS})
-
 target_link_libraries(idyntree-yarp idyntree-core
                                     idyntree-model
-                                    ${YARP_LIBRARIES})
+                                    YARP::YARP_os
+                                    YARP::YARP_math)
                                     
 target_compile_options(idyntree-yarp PRIVATE ${IDYNTREE_WARNING_FLAGS})
 

@@ -4,8 +4,6 @@
 
 project(yarprobotstatepublisher)
 
-find_package(YARP COMPONENTS rosmsg REQUIRED)
-
 add_executable(${PROJECT_NAME}
     include/robotstatepublisher.h
     src/main.cpp
@@ -14,7 +12,9 @@ add_executable(${PROJECT_NAME}
 target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR}/include)
 
 target_link_libraries(${PROJECT_NAME}
-    ${YARP_LIBRARIES}
+    YARP::YARP_init
+    YARP::YARP_os
+    YARP::YARP_dev
     YARP::YARP_rosmsg
     idyntree-high-level
     idyntree-yarp)

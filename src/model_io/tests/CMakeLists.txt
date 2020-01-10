@@ -23,18 +23,15 @@ if (IDYNTREE_USES_SYMORO_PAR)
 endif()
 
 if(IDYNTREE_USES_ICUB_MAIN)
-    find_package(YARP REQUIRED)
-    find_package(ICUB REQUIRED)
-    include_directories(SYSTEM ${ICUB_INCLUDE_DIRS} ${YARP_INCLUDE_DIRS})
     add_executable(check_iKin_export_random_chain check_iKin_export_random_chain.cpp)
-    target_link_libraries(check_iKin_export_random_chain idyntree-core idyntree-modelio-urdf-kdl idyntree-modelio-ikin-kdl ${YARP_LIBRARIES} iKin)
+    target_link_libraries(check_iKin_export_random_chain idyntree-core idyntree-modelio-urdf-kdl idyntree-modelio-ikin-kdl YARP::YARP_os YARP::YARP_math iKin)
     add_test(NAME test_check_iKin_export_random_chain COMMAND check_iKin_export_random_chain)
 
 endif()
 
 #check iKin Denavit Hartenberg parameters export
 #add_executable(check_iKin_export_random_chain check_iKin_export_random_chain.cpp)
-#target_link_libraries(check_iKin_export_random_chain ${kdl_codyco_LIBRARIES} ${YARP_LIBRARIES} ${ICUB_LIBRARIES} kdl-format-io)
+#target_link_libraries(check_iKin_export_random_chain ${kdl_codyco_LIBRARIES} YARP::YARP_os YARP::YARP_math ${ICUB_LIBRARIES} kdl-format-io)
 
 
 #In Release mode, don't compile the HRP2 Regressor model because it takes a lot of time

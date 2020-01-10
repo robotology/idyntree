@@ -8,9 +8,6 @@
 
 project(iDynTree_ModelIO_iKin_KDL CXX)
 
-find_package(YARP REQUIRED)
-find_package(ICUB REQUIRED)
-
 set(IDYNTREE_MODELIO_IKIN_KDL_HEADERS include/iDynTree/ModelIO/iKin_export.hpp)
 
 set(IDYNTREE_MODELIO_IKIN_KDL_SOURCES src/iKin_export.cpp)
@@ -29,7 +26,7 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
                                                  ${YARP_INCLUDE_DIRS}
                                           PRIVATE ${EIGEN3_INCLUDE_DIR})
 
-target_link_libraries(${libraryname} idyntree-core iKin ${YARP_LIBRARIES} ${orocos_kdl_LIBRARIES})
+target_link_libraries(${libraryname} idyntree-core iKin YARP::YARP_os YARP::YARP_math ${orocos_kdl_LIBRARIES})
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODELIO_IKIN_KDL_HEADERS})
 

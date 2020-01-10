@@ -49,7 +49,7 @@ endif()
 
 target_link_libraries(idyntree-yarp-kdl LINK_PUBLIC
                                             ${GSL_LIBRARIES}
-                                            ${YARP_LIBRARIES}
+                                            YARP::YARP_os YARP::YARP_math
                                             idyntree-core
                                             idyntree-sensors
                                             idyntree-modelio-urdf-kdl
