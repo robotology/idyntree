@@ -71,7 +71,7 @@ if(NOT IDYNTREE_ONLY_DOCS)
     include(InstallBasicPackageFiles)
     install_basic_package_files(iDynTree VARS_PREFIX ${VARS_PREFIX}
                                          VERSION ${${VARS_PREFIX}_VERSION}
-                                         COMPATIBILITY SameMajorVersion
+                                         COMPATIBILITY AnyNewerVersion
                                          TARGETS_PROPERTY ${VARS_PREFIX}_TARGETS
                                          NO_CHECK_REQUIRED_COMPONENTS_MACRO
                                          ENABLE_COMPATIBILITY_VARS
