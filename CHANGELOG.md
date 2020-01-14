@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2020-01-14
+
 ### Added
 - Added method to compute the inverse dynamics inertial parameters regressor in KinDynComputations ( https://github.com/robotology/idyntree/pull/480 ).
 KinDynComputations finally reached feature parity with respect to DynamicsComputations, that will finally be removed in one of the future iDynTree feature releases.
@@ -36,56 +38,40 @@ to normalize errors or as initial points of a nonlinear optimization procedure.
 - Added basic tests for the Attitude Estimator classes (https://github.com/robotology/idyntree/pull/522)
 - Added `DiscreteKalmanFilterHelper` class for an implementation of a discrete, linear time-invariant Kalman Filter  (https://github.com/robotology/idyntree/pull/559)
 - Added dynamic reset functionality to `DiscreteExtendedKalmanFilterHelper` class (https://github.com/robotology/idyntree/pull/553)
-
+- Added high-level Matlab/Octave wrappers of the iDyntree bindings (https://github.com/robotology/idyntree/pull/530)
+- Added bindings for the class `Span` with the name `DynamicSpan` (https://github.com/robotology/idyntree/pull/522)
+- Implement `RPYRightTrivializedDerivativeRateOfChange()` and `RPYRightTrivializedDerivativeInverseRateOfChange()` into `Rotation` class
+- Implement left Jacobian and left Jacobian inverse of SO(3) in Rotation class (https://github.com/robotology/idyntree/pull/562)
+- Add nameIsValid attribute to iDynTree::SolidShape class.
+- Add operator[] method to `iDynTree::VectorDynSize` (https://github.com/robotology/idyntree/pull/596)
+- Add operator[] method to `iDynTree::VectorFixSize` (https://github.com/robotology/idyntree/pull/596)
+- Implement `getTotalMass()` method for Model class
+- Enable the installation of the `ModelTestUtils.h` file (https://github.com/robotology/idyntree/pull/607)
+- Added `iDynTree::ModelExporter` class to export `iDynTree::Model` instances to URDF files (https://github.com/robotology/idyntree/pull/554).
+- Added support in the URDF parser to correctly parse the optional name parameter of visual and collision elements.
+- Added `iDynTree::ModelCalibrationHelper` to simplify loading a model from file, update its inertial parameters and exporting again to file (https://github.com/robotology/idyntree/pull/576).
+- In `yarprobotstatepublisher`, add `tf-prefix` and `jointstates-topic` options for the tf prefixes and ROS topic.
+* In `yarprobotstatepublisher`, add `reduced-model` optional parameter to stream only the link transformations to transform server. By default, tranformations from all the frames are streamed to the transform server.
 
 ### Changed
 - The changelog has been migrated to the format described in https://keepachangelog.com/en/1.0.0/ .
 - If the IDYNTREE_USES_YARP option is enabled, the minimum required version of YARP is 3.3 .
 - The CMake config files are now installed in ${CMAKE_INSTALL_PREFIX}/lib/cmake/iDynTree also in Windows.
+- Updated `iDynTree::ModelLoader` class to load by default models with normalized joint ordering (https://github.com/robotology/idyntree/issues/491).
+- In `yarprobotstatepublisher` the model joint positions values are initialized to zero and the joint positions values are updadted in run time if the values are available in ROS topic given through `jointstates-topic` parameter.
+- In `yarprobotstatepublisher`, joint size check between model joints and joints in ROS topic given through `jointstates-topic` parameter have been removed.
 
 ### Deprecated
 - All the classes and methods that end in Semantics are deprecated, and will be removed in iDynTree 2.0, see https://github.com/robotology/idyntree/pull/622 for more info.
 - The CMake option IDYNTREE_USES_KDL and all the classes available when enabling it are deprecated, and will be removed in iDynTree 2.0 .
+- In `yarprobotstatepublisher`, the `robot` option is deprecated, and replaced by `name-prefix`.
 
 ### Fixed
 - Fixed missing `DOF_ACCELLERATION` data in dynamic variable cache ordering
 (https://github.com/robotology/idyntree/pull/587)
-
-
-#### `estimation`
-
-#### `bindings`
-* Added high-level Matlab/Octave wrappers of the iDyntree bindings (https://github.com/robotology/idyntree/pull/530)
-
-### `core`
-* Fixed compatibility of `Span` with SWIG bindings compilation (https://github.com/robotology/idyntree/pull/522)
-* Added bindings for the class `Span` with the name `DynamicSpan` (https://github.com/robotology/idyntree/pull/522)
-* Added basic tests for `Span` (https://github.com/robotology/idyntree/pull/522)
-* Implement `RPYRightTrivializedDerivativeRateOfChange()` and `RPYRightTrivializedDerivativeInverseRateOfChange()` into `Rotation` class
-* Implement left Jacobian and left Jacobian inverse of SO(3) in Rotation class (https://github.com/robotology/idyntree/pull/562)
-* Fixed implementation of Transform::log() method (https://github.com/robotology/idyntree/pull/562)
-* Fixed implementation of SpatialMotionVector::exp() method (https://github.com/robotology/idyntree/pull/562)
-* Add nameIsValid attribute to iDynTree::SolidShape class.
-* Add operator[] method to `iDynTree::VectorDynSize` (https://github.com/robotology/idyntree/pull/596)
-* Add operator[] method to `iDynTree::VectorFixSize` (https://github.com/robotology/idyntree/pull/596)
-
-### `Model`
-* Implement `getTotalMass()` method for Model class
-* Enable the installation of the `ModelTestUtils.h` file (https://github.com/robotology/idyntree/pull/607)
-
-### `modelio`
-* Added `iDynTree::ModelExporter` class to export `iDynTree::Model` instances to URDF files (https://github.com/robotology/idyntree/pull/554).
-* Added support in the URDF parser to correctly parse the optional name parameter of visual and collision elements.
-* Added `iDynTree::ModelCalibrationHelper` to simplify loading a model from file, update its inertial parameters and exporting again to file (https://github.com/robotology/idyntree/pull/576).
-* Updated `iDynTree::ModelLoader` class to load by default models with normalized joint ordering (https://github.com/robotology/idyntree/issues/491).
-
-### `yarprobotstatepublisher`
-* Add `tf-prefix` and `jointstates-topic` options for the tf prefixes and ROS topic.
-* `robot` option is deprecated, and replaced by `name-prefix`.
-* Add `reduced-model` optional parameter to stream only the link transformations to transform server. By default, tranformations from all the frames are streamed to the transform server.
-* Remove joint size check between model joints and joints in ROS topic given through `jointstates-topic` parameter.
-* Initialize the model joint positions values to zero and update the joint positions values in run time if the values are
-available in ROS topic given through `jointstates-topic` parameter.
+- Fixed compatibility of `Span` with SWIG bindings compilation (https://github.com/robotology/idyntree/pull/522)
+- Fixed implementation of `Transform::log()` method (https://github.com/robotology/idyntree/pull/562)
+- Fixed implementation of `SpatialMotionVector::exp()` method (https://github.com/robotology/idyntree/pull/562)
 
 ## [0.11.2] - 2019-12-12
 
