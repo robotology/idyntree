@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2020-01-14
+
+### Fixed
+- Change CMake version compatibility from [SameMajorVersion to AnyNewerVersion](https://cmake.org/cmake/help/v3.12/module/CMakePackageConfigHelpers.html#generating-a-package-version-file), as API breakage between major version will be limited, and to avoid breaking the compatibility of any downstream project that request a minimum version of iDynTree as in `find_package(iDynTree 0.11 REQUIRED)` (https://github.com/robotology/idyntree/pull/629).
+
 ## [1.0.0] - 2020-01-14
 
 ### Added
@@ -45,7 +50,7 @@ to normalize errors or as initial points of a nonlinear optimization procedure.
 - Add nameIsValid attribute to iDynTree::SolidShape class.
 - Add operator[] method to `iDynTree::VectorDynSize` (https://github.com/robotology/idyntree/pull/596)
 - Add operator[] method to `iDynTree::VectorFixSize` (https://github.com/robotology/idyntree/pull/596)
-- Implement `getTotalMass()` method for Model class
+- Implement `getTotalMass()` method for Model class(
 - Enable the installation of the `ModelTestUtils.h` file (https://github.com/robotology/idyntree/pull/607)
 - Added `iDynTree::ModelExporter` class to export `iDynTree::Model` instances to URDF files (https://github.com/robotology/idyntree/pull/554).
 - Added support in the URDF parser to correctly parse the optional name parameter of visual and collision elements.
