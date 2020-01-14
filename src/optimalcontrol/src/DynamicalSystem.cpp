@@ -18,6 +18,9 @@
 #include <iDynTree/Controller.h>
 #include <iDynTree/Core/Utils.h>
 
+#include <cstddef>
+
+
 namespace iDynTree {
     namespace optimalcontrol {
 
@@ -77,29 +80,57 @@ namespace iDynTree {
             return true;
         }
 
-        bool  DynamicalSystem::dynamicsStateFirstDerivative(const VectorDynSize& state,
-                                                            double time,
-                                                            MatrixDynSize& dynamicsDerivative)
+        bool  DynamicalSystem::dynamicsStateFirstDerivative(const VectorDynSize& /*state*/,
+                                                            double /*time*/,
+                                                            MatrixDynSize& /*dynamicsDerivative*/)
         { return false; }
 
-        bool DynamicalSystem::dynamicsControlFirstDerivative(const VectorDynSize& state,
-                                                             double time,
-                                                             MatrixDynSize& dynamicsDerivative)
+        bool DynamicalSystem::dynamicsControlFirstDerivative(const VectorDynSize& /*state*/,
+                                                             double /*time*/,
+                                                             MatrixDynSize& /*dynamicsDerivative*/)
         { return false; }
 
-//        bool DynamicalSystem::setController(std::shared_ptr<Controller> controllerPointer){
-//            if (controllerPointer->controlSpaceSize() != m_controlSize){
-//                reportError("DynamicalSystem", "setController", "The controller dimension is not coherent with the controlSpaceSize.");
-//                return false;
-//            }
-//            m_controller_ptr = controllerPointer;
-//            return true;
-//        }
+        bool DynamicalSystem::dynamicsStateFirstDerivativeSparsity(SparsityStructure &/*stateSparsity*/)
+        {
+            return false;
+        }
 
-//        const std::weak_ptr<const Controller> DynamicalSystem::controller() const
-//        {
-//            return m_controller_ptr;
-//        }
+        bool DynamicalSystem::dynamicsControlFirstDerivativeSparsity(SparsityStructure &/*controlSparsity*/)
+        {
+            return false;
+        }
+
+        bool DynamicalSystem::dynamicsSecondPartialDerivativeWRTState(double /*time*/, const VectorDynSize &/*state*/, const iDynTree::VectorDynSize &/*lambda*/, iDynTree::MatrixDynSize &/*partialDerivative*/)
+        {
+            return false;
+        }
+
+        bool DynamicalSystem::dynamicsSecondPartialDerivativeWRTControl(double /*time*/, const VectorDynSize &/*state*/, const iDynTree::VectorDynSize &/*lambda*/, iDynTree::MatrixDynSize &/*partialDerivative*/)
+        {
+            return false;
+        }
+
+        bool DynamicalSystem::dynamicsSecondPartialDerivativeWRTStateControl(double /*time*/, const VectorDynSize &/*state*/, const iDynTree::VectorDynSize &/*lambda*/, iDynTree::MatrixDynSize &/*partialDerivative*/)
+        {
+            return false;
+        }
+
+        bool DynamicalSystem::dynamicsSecondPartialDerivativeWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure &/*stateSparsity*/)
+        {
+            return false;
+        }
+
+        bool DynamicalSystem::dynamicsSecondPartialDerivativeWRTStateControlSparsity(SparsityStructure &/*stateControlSparsity*/)
+        {
+            return false;
+        }
+
+        bool DynamicalSystem::dynamicsSecondPartialDerivativeWRTControlSparsity(SparsityStructure &/*controlSparsity*/)
+        {
+            return false;
+        }
+
+
 
     }
 }

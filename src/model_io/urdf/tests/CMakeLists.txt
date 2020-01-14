@@ -6,14 +6,13 @@
 # https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 # at your option.
 
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 macro(add_modelio_urdf_unit_test classname)
     set(testsrc ${classname}UnitTest.cpp)
     set(testbinary ${classname}UnitTest)
     set(testname   UnitTest${classname})
     add_executable(${testbinary} ${testsrc})
-    target_include_directories(${testbinary} PRIVATE ${EIGEN3_INCLUDE_DIR} ${IDYNTREE_TREE_INCLUDE_DIRS})
-    target_link_libraries(${testbinary} idyntree-modelio-urdf)
+    target_include_directories(${testbinary} PRIVATE ${EIGEN3_INCLUDE_DIR})
+    target_link_libraries(${testbinary} idyntree-modelio-urdf idyntree-testmodels)
     add_test(NAME ${testname} COMMAND ${testbinary})
 
     if(IDYNTREE_RUN_VALGRIND_TESTS)
@@ -24,6 +23,8 @@ macro(add_modelio_urdf_unit_test classname)
 endmacro()
 
 add_modelio_urdf_unit_test(URDFModelImport)
+add_modelio_urdf_unit_test(ModelCalibrationHelper)
+add_modelio_urdf_unit_test(ModelExporter)
 add_modelio_urdf_unit_test(URDFGenericSensorImport)
 add_modelio_urdf_unit_test(PredictSensorsMeasurement)
 add_modelio_urdf_unit_test(icubSensorURDF)

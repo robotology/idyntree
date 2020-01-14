@@ -8,7 +8,7 @@
 
 cmake_minimum_required(VERSION 3.5)
 
-project(iDynTree CXX)
+project(iDynTree C CXX)
 
 # Disable in source build, unless Eclipse is used
 if( ("${PROJECT_SOURCE_DIR}" STREQUAL "${PROJECT_BINARY_DIR}") AND
@@ -23,9 +23,9 @@ endif()
 
 set(VARS_PREFIX "iDynTree")
 
-set(${VARS_PREFIX}_MAJOR_VERSION 0)
-set(${VARS_PREFIX}_MINOR_VERSION 11)
-set(${VARS_PREFIX}_PATCH_VERSION 2)
+set(${VARS_PREFIX}_MAJOR_VERSION 1)
+set(${VARS_PREFIX}_MINOR_VERSION 0)
+set(${VARS_PREFIX}_PATCH_VERSION 0)
 set(${VARS_PREFIX}_VERSION ${${VARS_PREFIX}_MAJOR_VERSION}.${${VARS_PREFIX}_MINOR_VERSION}.${${VARS_PREFIX}_PATCH_VERSION})
 
 # Pick up our CMake scripts - they are all in the cmake subdirectory.
@@ -42,13 +42,6 @@ if(NOT IDYNTREE_ONLY_DOCS)
     # Find dependecies
     include(iDynTreeDependencies)
 
-    if(IDYNTREE_USES_YARP)
-        find_package(YARP REQUIRED)
-        if (NOT YARP_HAS_MATH_LIB)
-            message(FATAL_ERROR "YARP was found, but no libYARP_math was detected, please recompile yarp")
-        endif()
-    endif()
-
     # Add external libraries that are embedded in iDynTree
     # source tree, if necessary (by default does not adds
     # anything) feel free to check teh logic inside
@@ -63,12 +56,26 @@ if(NOT IDYNTREE_ONLY_DOCS)
     # add the actual components of the library
     add_subdirectory(src)
 
+    # List exported dependencies
+    set(_IDYNTREE_EXPORTED_DEPENDENCIES "")
+    if(IDYNTREE_USES_YARP)
+        list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES YARP)
+    endif()
+    if(IDYNTREE_USES_ICUB_MAIN)
+        list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES ICUB)
+    endif()
+    if(IDYNTREE_USES_KDL)
+        list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES orocos_kdl)
+    endif()
+
     include(InstallBasicPackageFiles)
     install_basic_package_files(iDynTree VARS_PREFIX ${VARS_PREFIX}
-                                        VERSION ${${VARS_PREFIX}_VERSION}
-                                        COMPATIBILITY SameMajorVersion
-                                        TARGETS_PROPERTY ${VARS_PREFIX}_TARGETS
-                                        NO_CHECK_REQUIRED_COMPONENTS_MACRO)
+                                         VERSION ${${VARS_PREFIX}_VERSION}
+                                         COMPATIBILITY SameMajorVersion
+                                         TARGETS_PROPERTY ${VARS_PREFIX}_TARGETS
+                                         NO_CHECK_REQUIRED_COMPONENTS_MACRO
+                                         ENABLE_COMPATIBILITY_VARS
+                                         DEPENDENCIES ${_IDYNTREE_EXPORTED_DEPENDENCIES})
 
     include(AddUninstallTarget)
 

@@ -246,7 +246,7 @@ int main () {
     // Multiple Shooting settings
     ASSERT_IS_TRUE(solver.setIntegrator(integrator));
     ASSERT_IS_TRUE(solver.setOptimizer(optimizer));
-    ASSERT_IS_TRUE(solver.setStepSizeBounds(0.001, 0.01));
+    ASSERT_IS_TRUE(solver.setStepSizeBounds(0.001, 0.02));
     ASSERT_IS_TRUE(solver.setControlPeriod(0.01));
 
     iDynTree::VectorDynSize initialState(2);
@@ -257,9 +257,8 @@ int main () {
     // Optimizer settings
     //ASSERT_IS_TRUE(optimizer->setIpoptOption("linear_solver", "ma27"));
     ASSERT_IS_TRUE(optimizer->setIpoptOption("print_level", 0));
-    ASSERT_IS_TRUE(optimizer->setIpoptOption("hessian_constant", "yes"));
-    ASSERT_IS_TRUE(optimizer->setIpoptOption("jac_c_constant", "yes"));
-    ASSERT_IS_TRUE(optimizer->setIpoptOption("jac_d_constant", "yes"));
+
+    optimizer->useApproximatedHessians();
 
     clock_t initT, endT;
     initT = clock();
@@ -275,13 +274,15 @@ int main () {
     std::cerr << "Last control: " << controls.back().toString() << std::endl;
     std::cerr << "Elapsed time: " <<  static_cast<double>(endT - initT) / CLOCKS_PER_SEC * 1000.0 <<" ms."<<std::endl;
 
-    for (int i=0; i < 2; ++i){
+    for (int i=0; i < 5; ++i){
 
-        std::cerr << "------------" << std::endl;
+//        std::cerr << "------------" << std::endl;
 
         //iDynTree::getRandomVector(initialState, -2.0, 2.0);
         initialState = states.front();
         ASSERT_IS_TRUE(solver.setInitialState(initialState));
+        ASSERT_IS_TRUE(problem->setTimeHorizon(0.0 + i*0.01, 1.0 + i*0.01));
+
 
         initT = clock();
         ASSERT_IS_TRUE(solver.solve());
@@ -289,12 +290,12 @@ int main () {
 
 
         ASSERT_IS_TRUE(solver.getSolution(states, controls));
-        std::cerr << "Initial state: " << initialState.toString() << std::endl;
-        std::cerr << "First state: " << states.front().toString() << std::endl;
-        std::cerr << "Last state: " << states.back().toString() << std::endl;
-        std::cerr << "First control: " << controls.front().toString() << std::endl;
-        std::cerr << "Last control: " << controls.back().toString() << std::endl;
-        std::cerr << "Elapsed time: " <<  static_cast<double>(endT - initT) / CLOCKS_PER_SEC * 1000.0 <<" ms."<<std::endl;
+//        std::cerr << "Initial state: " << initialState.toString() << std::endl;
+//        std::cerr << "First state: " << states.front().toString() << std::endl;
+//        std::cerr << "Last state: " << states.back().toString() << std::endl;
+//        std::cerr << "First control: " << controls.front().toString() << std::endl;
+//        std::cerr << "Last control: " << controls.back().toString() << std::endl;
+//        std::cerr << "Elapsed time: " <<  static_cast<double>(endT - initT) / CLOCKS_PER_SEC * 1000.0 <<" ms."<<std::endl;
     }
 
     return EXIT_SUCCESS;

@@ -91,11 +91,13 @@ namespace iDynTree
         /**
          * Semantic getter
          */
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         RotationSemantics& getSemantics();
 
         /**
          * Semantic getter
          */
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         const RotationSemantics& getSemantics() const;
 
         /**
@@ -366,12 +368,33 @@ namespace iDynTree
         static Matrix3x3 RPYRightTrivializedDerivative(const double roll, const double pitch, const double yaw);
 
         /**
+         * Return the rate of change of the right-trivialized derivative of the RPY function.
+         *
+         * If we indicate with \f$ rpy \in \mathbb{R}^3 \f$ the roll pitch yaw vector,
+         * and with \f$  RPY(rpy) : \mathbb{R}^3 \mapsto SO(3) \f$ the function implemented
+         * in the Rotation::RPY method, this method returns the right-trivialized partial
+         * derivative of Rotation::RPY, i.e. :
+         * \f[
+         *    (RPY(rpy) \frac{d}{d t}\frac{\partial RPY(rpy)}{\partial rpy})^\vee
+         * \f]
+         */
+        static Matrix3x3 RPYRightTrivializedDerivativeRateOfChange(const double roll, const double pitch, const double yaw, const double rollDot, const double pitchDot, const double yawDot);
+
+        /**
          * Return the inverse of the right-trivialized derivative of the RPY function.
          *
          * See RPYRightTrivializedDerivative for a detailed description of the method.
          *
          */
         static Matrix3x3 RPYRightTrivializedDerivativeInverse(const double roll, const double pitch, const double yaw);
+
+        /**
+         *  Return the rate of change of the inverse of the right-trivialized derivative of the RPY function.
+         *
+         * See RPYRightTrivializedDerivativeRateOfChange for a detailed description of the method.
+         *
+         */
+        static Matrix3x3 RPYRightTrivializedDerivativeInverseRateOfChange(const double roll, const double pitch, const double yaw, const double rollDot, const double pitchDot, const double yawDot);
 
         /**
          * Return the right-trivialized derivative of the Quaternion function.
@@ -425,6 +448,38 @@ namespace iDynTree
          */
         static Rotation RotationFromQuaternion(const iDynTree::Vector4& quaternion);
 
+        /**
+         * Get the left Jacobian of rotation matrix
+         *
+         * \f$ \omega \in \mathbb{R}^3 \f$ is the angular motion vector
+         * \f$ [\omega_\times]: \mathbb{R}^n \to \mathfrak{so}(3) \f$ where \f$ \mathfrak{so}(3) \f$
+         *  is the set of skew symmetric matrices or the Lie algebra of \f$ SO(3) \f$
+         * \f[ J_{l_{SO(3)}} = \sum_{n = 0}^{\infty} \frac{1}{(n+1)!} [\omega_\times]^n  = (I_3 + \frac{1 - \text{cos}(||\omega||)}{||\omega||^{2}} [\omega _{\times}] + \frac{||\omega|| - \text{sin}(||\omega||)}{||\omega||^{3}} [\omega _{\times}]^{2} \f]
+         *
+         * When simplified further,
+         * \f[ J_{l_{SO(3)}} = \frac{\text{sin}(||\omega||)}{||\omega||}I_3 + \frac{1 - \text{cos}(||\omega||)}{||\omega||} [\phi _{\times}] + \bigg(1 - \frac{\text{sin}(||\omega||)}{||\omega||}\bigg) \phi\phi^T \f]
+         *
+         * where \f$ \phi = \frac{\omega}{||\omega||} \f$
+         *
+         * @param[in] omega angular motion vector
+         * @return \f$ 3 \times 3 \f$ left Jacobian matrix
+         */
+        static Matrix3x3 leftJacobian(const iDynTree::AngularMotionVector3& omega);
+
+        /**
+         * Get the left Jacobian inverse of rotation matrix
+         *
+         * \f$ \omega \in \mathbb{R}^3 \f$ is the angular motion vector
+         * \f$ [\omega_\times]: \mathbb{R}^n \to \mathfrak{so}(3) \f$ where \f$ \mathfrak{so}(3) \f$
+         *  is the set of skew symmetric matrices or the Lie algebra of \f$ SO(3) \f$
+         * \f[ J^{-1} _{l _{SO(3)}} = \frac{||\omega||}{2} \text{cot} \bigg(\frac{||\omega||}{2}\bigg) I _3 + \bigg( 1 - \frac{||\omega||}{2} \text{cot} \bigg(\frac{||\omega||}{2}\bigg) \bigg) \phi \phi^T - \frac{||\omega||}{2} [\phi _{\times}] \f]
+         *
+         * where \f$ \phi = \frac{\omega}{||\omega||} \f$
+         *
+         * @param[in] omega angular motion vector
+         * @return \f$ 3 \times 3 \f$ left Jacobian inverse matrix
+         */
+        static Matrix3x3 leftJacobianInverse(const iDynTree::AngularMotionVector3& omega);
         ///@}
 
         /** @name Output helpers.

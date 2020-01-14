@@ -13,12 +13,24 @@
  * - ACADO toolbox (http://acado.github.io)
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
-
-#define HAVE_STDDEF_H
-#define HAVE_CSTDDEF
-#include <IpTNLP.hpp>
-#undef HAVE_STDDEF_H
-#undef HAVE_CSTDDEF //workaroud for missing libraries
+#ifndef HAVE_STDDEF_H
+    #ifndef HAVE_CSTDDEF
+        #define HAVE_CSTDDEF
+        #include <IpTNLP.hpp>
+        #undef HAVE_CSTDDEF
+    #else
+        #include <IpTNLP.hpp>
+    #endif
+    #undef HAVE_STDDEF_H
+#else
+    #ifndef HAVE_CSTDDEF
+        #define HAVE_CSTDDEF
+        #include <IpTNLP.hpp>
+        #undef HAVE_CSTDDEF
+    #else
+        #include <IpTNLP.hpp>
+    #endif
+#endif
 #include <IpIpoptApplication.hpp>
 
 #include <Eigen/Dense>
@@ -43,7 +55,8 @@ namespace iDynTree {
         public:
 
             unsigned int numberOfVariables, numberOfConstraints;
-            std::vector<size_t> constraintsJacNNZRows, constraintsJacNNZCols, hessianNNZRows, hessianNNZCols;
+            std::vector<size_t> constraintsJacNNZRows, constraintsJacNNZCols, inputHessianNNZRows, inputHessianNNZCols,
+                lowerTriangularHessianNNZRows, lowerTriangularHessianNNZCols;
             std::shared_ptr<OptimizationProblem> problem;
             double minusInfinity, plusInfinity; //TODO. Set these before solving
             VectorDynSize solution;
@@ -96,6 +109,7 @@ namespace iDynTree {
 
                 if (constraintMultipliers.size() != numberOfConstraints) {
                     constraintMultipliers.resize(numberOfConstraints);
+                    constraintMultipliers.zero();
                 }
 
                 if ((m_jacobianBuffer.rows() != numberOfConstraints) || (m_jacobianBuffer.cols() != numberOfVariables)) {
@@ -104,7 +118,7 @@ namespace iDynTree {
 
                 nnz_jac_g = static_cast<Ipopt::Index>(constraintsJacNNZRows.size()); //set in the solve method
 
-                nnz_h_lag = static_cast<Ipopt::Index>(hessianNNZRows.size()); //set in the solve method
+                nnz_h_lag = static_cast<Ipopt::Index>(lowerTriangularHessianNNZRows.size());
 
                 index_style = C_STYLE;
                 return true;
@@ -178,6 +192,7 @@ namespace iDynTree {
 
                 if(init_x){
                     Eigen::Map<Eigen::VectorXd> x_map(x, n);
+                    initialGuessSet = problem->getGuess(initialGuess);
                     if (initialGuessSet) {
                         if (initialGuess.size() == static_cast<unsigned int>(n)){
                             x_map = iDynTree::toEigen(initialGuess);
@@ -332,12 +347,13 @@ namespace iDynTree {
                     toEigen(m_lagrangianHessianBuffer) = obj_factor * toEigen(m_costHessianBuffer) + toEigen(m_constraintsHessianBuffer);
                 }
 
-                for (size_t i = 0; i < hessianNNZRows.size(); ++i){
+                for (size_t i = 0; i < lowerTriangularHessianNNZRows.size(); ++i){
                     if (values == nullptr){
-                        iRow[i] = static_cast<Ipopt::Index>(hessianNNZRows[i]); //these two vectors have been filled in the get_nlp_info method
-                        jCol[i] = static_cast<Ipopt::Index>(hessianNNZCols[i]);
+                        iRow[i] = static_cast<Ipopt::Index>(lowerTriangularHessianNNZRows[i]); //these two vectors have been filled in the get_nlp_info method
+                        jCol[i] = static_cast<Ipopt::Index>(lowerTriangularHessianNNZCols[i]);
                     } else {
-                        values[i] = m_lagrangianHessianBuffer(static_cast<unsigned int>(hessianNNZRows[i]), static_cast<unsigned int>(hessianNNZCols[i]));
+                        values[i] = m_lagrangianHessianBuffer(static_cast<unsigned int>(lowerTriangularHessianNNZRows[i]),
+                                                              static_cast<unsigned int>(lowerTriangularHessianNNZCols[i]));
                     }
                 }
 
@@ -448,6 +464,7 @@ namespace iDynTree {
             Ipopt::SmartPtr<Ipopt::IpoptApplication> loader;
             unsigned int previousNumberOfVariables, previousNumberOfConstraints;
             size_t previousJacobianNonZeros, previousHessianNonZeros;
+            bool useApproximatedHessian;
 
             IpoptInterfaceImplementation()
             : nlpPointer(new NLPImplementation())
@@ -456,6 +473,7 @@ namespace iDynTree {
             , previousNumberOfConstraints(0)
             , previousJacobianNonZeros(0)
             , previousHessianNonZeros(0)
+            , useApproximatedHessian(false)
             {
             }
 
@@ -464,7 +482,7 @@ namespace iDynTree {
                 bool sameVariables = (previousNumberOfVariables == nlpPointer->numberOfVariables);
                 bool sameConstraints = (previousNumberOfConstraints == nlpPointer->numberOfConstraints);
                 bool sameNNZJac = (previousJacobianNonZeros == nlpPointer->constraintsJacNNZRows.size());
-                bool sameNNZHes = (previousHessianNonZeros == nlpPointer->hessianNNZRows.size());
+                bool sameNNZHes = (previousHessianNonZeros == nlpPointer->lowerTriangularHessianNNZRows.size());
                 return alreadySolved && sameVariables && sameConstraints && sameNNZJac && sameNNZHes;
             }
         };
@@ -483,6 +501,11 @@ namespace iDynTree {
             }
         }
 
+        bool IpoptInterface::isAvailable() const
+        {
+            return true;
+        }
+
         bool IpoptInterface::setProblem(std::shared_ptr<OptimizationProblem> problem)
         {
             if (!problem){
@@ -491,13 +514,6 @@ namespace iDynTree {
             }
             m_problem = problem;
             m_pimpl->nlpPointer->problem = problem;
-            return true;
-        }
-
-        bool IpoptInterface::setInitialGuess(VectorDynSize &initialGuess)
-        {
-            m_pimpl->nlpPointer->initialGuessSet = true;
-            m_pimpl->nlpPointer->initialGuess = initialGuess;
             return true;
         }
 
@@ -520,25 +536,84 @@ namespace iDynTree {
 
             m_pimpl->nlpPointer->numberOfConstraints = m_problem->numberOfConstraints();
 
-            if (!(m_problem->getConstraintsJacobianInfo(m_pimpl->nlpPointer->constraintsJacNNZRows,
-                                                        m_pimpl->nlpPointer->constraintsJacNNZCols))){
-                reportError("IpoptInterface", "solve", "Error while retrieving constraints jacobian info.");
-                return false;
+            if (!(m_problem->info().hessianIsProvided()) || (m_pimpl->useApproximatedHessian)) {
+                m_pimpl->loader->Options()->SetStringValue("hessian_approximation", "limited-memory");
             }
-            if (!(m_problem->getHessianInfo(m_pimpl->nlpPointer->hessianNNZRows,
-                                            m_pimpl->nlpPointer->hessianNNZCols))){
-                reportError("IpoptInterface", "solve", "Error while retrieving hessian info.");
-                return false;
+
+            if (!(m_problem->info().hasNonLinearConstraints())) {
+                m_pimpl->loader->Options()->SetStringValue("jac_c_constant", "yes");
+                m_pimpl->loader->Options()->SetStringValue("jac_d_constant", "yes");
+
+                if (m_problem->info().costIsQuadratic()) {
+                    m_pimpl->loader->Options()->SetStringValue("hessian_constant", "yes");
+                }
+            }
+
+            if (m_problem->info().hasSparseConstraintJacobian()) {
+                if (!(m_problem->getConstraintsJacobianInfo(m_pimpl->nlpPointer->constraintsJacNNZRows,
+                                                            m_pimpl->nlpPointer->constraintsJacNNZCols))){
+                    reportError("IpoptInterface", "solve", "Error while retrieving constraints jacobian info.");
+                    return false;
+                }
+            } else { //dense jacobian
+                m_pimpl->nlpPointer->constraintsJacNNZCols.clear();
+                m_pimpl->nlpPointer->constraintsJacNNZRows.clear();
+                for (unsigned int i = 0; i < m_pimpl->nlpPointer->numberOfConstraints; i++) {
+                    for (unsigned int j = 0; j < m_pimpl->nlpPointer->numberOfVariables; ++j) {
+                        m_pimpl->nlpPointer->constraintsJacNNZRows.push_back(i);
+                        m_pimpl->nlpPointer->constraintsJacNNZCols.push_back(j);
+                    }
+                }
+            }
+
+            if (m_problem->info().hasSparseHessian()) {
+                if (!(m_problem->getHessianInfo(m_pimpl->nlpPointer->inputHessianNNZRows,
+                                                m_pimpl->nlpPointer->inputHessianNNZCols))){
+                    reportError("IpoptInterface", "solve", "Error while retrieving hessian info.");
+                    return false;
+                }
+
+                std::vector<size_t>& iRows = m_pimpl->nlpPointer->inputHessianNNZRows;
+                std::vector<size_t>& jCols = m_pimpl->nlpPointer->inputHessianNNZCols;
+
+                std::vector<size_t>& iRowsLT = m_pimpl->nlpPointer->lowerTriangularHessianNNZRows;
+                std::vector<size_t>& jColsLT = m_pimpl->nlpPointer->lowerTriangularHessianNNZCols;
+
+                size_t nnz = 0;
+                for (size_t i = 0; i < iRows.size(); ++i) {
+                    if (jCols[i] <= iRows[i]) { //taking only the lower triangular part
+                        if (nnz < iRowsLT.size()) {
+                            iRowsLT[nnz] = iRows[i];
+                            jColsLT[nnz] = jCols[i];
+                        } else {
+                            iRowsLT.push_back(iRows[i]);
+                            jColsLT.push_back(jCols[i]);
+                        }
+                        ++nnz;
+                    }
+                }
+                iRowsLT.resize(nnz);
+                jColsLT.resize(nnz);
+
+            } else { //dense hessian
+                m_pimpl->nlpPointer->lowerTriangularHessianNNZRows.clear();
+                m_pimpl->nlpPointer->lowerTriangularHessianNNZCols.clear();
+                for (unsigned int i = 0; i < m_pimpl->nlpPointer->numberOfVariables; i++) {
+                    for (unsigned int j = 0; j <= i; ++j) {
+                        m_pimpl->nlpPointer->lowerTriangularHessianNNZRows.push_back(i);
+                        m_pimpl->nlpPointer->lowerTriangularHessianNNZCols.push_back(j);
+                    }
+                }
             }
 
             if (m_pimpl->possibleReOptimize()){ //reoptimize possibility
-                m_pimpl->loader->Options()->SetStringValue("warm_start_init_point", "yes");
-                m_pimpl->loader->Options()->SetStringValue("warm_start_same_structure", "yes");
-                m_pimpl->loader->Options()->SetNumericValue("warm_start_bound_frac", 1e-6);
-                m_pimpl->loader->Options()->SetNumericValue("warm_start_bound_push", 1e-6);
-                m_pimpl->loader->Options()->SetNumericValue("warm_start_mult_bound_push", 1e-6);
-                m_pimpl->loader->Options()->SetNumericValue("warm_start_slack_bound_frac", 1e-6);
-                m_pimpl->loader->Options()->SetNumericValue("warm_start_slack_bound_push", 1e-6);
+                m_pimpl->loader->Options()->SetStringValueIfUnset("warm_start_init_point", "yes");
+                m_pimpl->loader->Options()->SetStringValueIfUnset("warm_start_same_structure", "yes");
+                m_pimpl->loader->Options()->SetNumericValueIfUnset("warm_start_bound_frac", 1e-6);
+                m_pimpl->loader->Options()->SetNumericValueIfUnset("warm_start_bound_push", 1e-6);
+                m_pimpl->loader->Options()->SetNumericValueIfUnset("warm_start_mult_bound_push", 1e-6);
+                m_pimpl->loader->Options()->SetNumericValueIfUnset("warm_start_slack_bound_frac", 1e-6);
+                m_pimpl->loader->Options()->SetNumericValueIfUnset("warm_start_slack_bound_push", 1e-6);
 
                 m_pimpl->loader->ReOptimizeTNLP(m_pimpl->nlpPointer);
                 if (m_pimpl->nlpPointer->exitCode < 0) {
@@ -554,7 +629,7 @@ namespace iDynTree {
             m_pimpl->previousNumberOfVariables = m_pimpl->nlpPointer->numberOfVariables;
             m_pimpl->previousNumberOfConstraints = m_pimpl->nlpPointer->numberOfConstraints;
             m_pimpl->previousJacobianNonZeros = m_pimpl->nlpPointer->constraintsJacNNZRows.size();
-            m_pimpl->previousHessianNonZeros = m_pimpl->nlpPointer->hessianNNZRows.size();
+            m_pimpl->previousHessianNonZeros = m_pimpl->nlpPointer->inputHessianNNZRows.size();
 
             return true;
         }
@@ -646,6 +721,11 @@ namespace iDynTree {
                 return Optimizer::plusInfinity();
             }
             return static_cast<double>(output);
+        }
+
+        void IpoptInterface::useApproximatedHessians(bool useApproximatedHessian)
+        {
+            m_pimpl->useApproximatedHessian = useApproximatedHessian;
         }
 
         bool IpoptInterface::setIpoptOption(const std::string &tag, const std::string &value)

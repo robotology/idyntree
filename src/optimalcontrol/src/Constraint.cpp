@@ -14,8 +14,9 @@
  * - ADRL Control Toolbox (https://adrlab.bitbucket.io/ct/ct_doc/doc/html/index.html)
  */
 
-#include "iDynTree/Constraint.h"
-#include "iDynTree/Core/Utils.h"
+#include <iDynTree/Constraint.h>
+#include <iDynTree/Core/Utils.h>
+#include <iDynTree/Core/MatrixDynSize.h>
 
 #include <cassert>
 
@@ -113,12 +114,12 @@ namespace iDynTree {
             return true;
         }
 
-        bool Constraint::constraintJacobianWRTState(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &jacobian)
+        bool Constraint::constraintJacobianWRTState(double /*time*/, const VectorDynSize &/*state*/, const VectorDynSize &/*control*/, MatrixDynSize &/*jacobian*/)
         {
             return false;
         }
 
-        bool Constraint::constraintJacobianWRTControl(double time, const VectorDynSize &state, const VectorDynSize &control, MatrixDynSize &jacobian)
+        bool Constraint::constraintJacobianWRTControl(double /*time*/, const VectorDynSize &/*state*/, const VectorDynSize &/*control*/, MatrixDynSize &/*jacobian*/)
         {
             return false;
         }
@@ -131,6 +132,47 @@ namespace iDynTree {
         size_t Constraint::expectedControlSpaceSize() const
         {
             return 0;
+        }
+
+        bool Constraint::constraintJacobianWRTStateSparsity(SparsityStructure &/*stateSparsity*/)
+        {
+            return false;
+        }
+
+        bool Constraint::constraintJacobianWRTControlSparsity(SparsityStructure &/*controlSparsity*/)
+        {
+            return false;
+        }
+
+        bool Constraint::constraintSecondPartialDerivativeWRTState(double /*time*/, const VectorDynSize &/*state*/, const VectorDynSize &/*control*/, const VectorDynSize &/*lambda*/, MatrixDynSize &/*hessian*/)
+        {
+            return false;
+        }
+
+
+        bool Constraint::constraintSecondPartialDerivativeWRTControl(double /*time*/, const VectorDynSize &/*state*/, const VectorDynSize &/*control*/, const VectorDynSize &/*lambda*/, MatrixDynSize &/*hessian*/)
+        {
+            return false;
+        }
+
+        bool Constraint::constraintSecondPartialDerivativeWRTStateControl(double /*time*/, const VectorDynSize &/*state*/, const VectorDynSize &/*control*/, const VectorDynSize &/*lambda*/, MatrixDynSize &/*hessian*/)
+        {
+            return false;
+        }
+
+        bool Constraint::constraintSecondPartialDerivativeWRTStateSparsity(SparsityStructure &/*stateSparsity*/)
+        {
+            return false;
+        }
+
+        bool Constraint::constraintSecondPartialDerivativeWRTStateControlSparsity(SparsityStructure &/*stateControlSparsity*/)
+        {
+            return false;
+        }
+
+        bool Constraint::constraintSecondPartialDerivativeWRTControlSparsity(SparsityStructure &/*controlSparsity*/)
+        {
+            return false;
         }
 
     }

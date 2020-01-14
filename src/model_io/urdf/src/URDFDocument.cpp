@@ -15,6 +15,7 @@
 
 #include <iDynTree/Model/PrismaticJoint.h>
 #include <iDynTree/Model/RevoluteJoint.h>
+#include <iDynTree/Model/ModelTransformers.h>
 #include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
 
 #include <algorithm>
@@ -26,8 +27,6 @@ namespace iDynTree {
     static std::unordered_set<std::string> processJoints(iDynTree::Model& model,
                                                          std::unordered_map<std::string, JointElement::JointInfo>& joints,
                                                          std::unordered_map<std::string, JointElement::JointInfo>& fixed_joints);
-    static bool isFakeLink(const iDynTree::Model& modelWithFakeLinks, const iDynTree::LinkIndex linkToCheck);
-    static bool removeFakeLinks(const iDynTree::Model &originalModel, iDynTree::Model& cleanModel);
     static bool processSensors(const Model& model,
                                const std::vector<std::shared_ptr<SensorHelper>>& helpers,
                                iDynTree::SensorsList& sensors);
@@ -119,13 +118,20 @@ namespace iDynTree {
 
         // set the default root in the model
         m_model.setDefaultBaseLink(m_model.getLinkIndex(rootCandidates[0]));
-        iDynTree::Model newModel;
+        iDynTree::Model newModel, normalizedModel;
 
         if (!removeFakeLinks(m_model, newModel)) {
             reportError("URDFDocument", "documentHasBeenParsed", "Failed to remove fake links from the model");
             return false;
         }
-        m_model = newModel;
+
+        std::string baseLinkName = newModel.getLinkName(newModel.getDefaultBaseLink());
+        if (!createModelWithNormalizedJointNumbering(newModel, baseLinkName, normalizedModel)) {
+            reportError("URDFDocument", "documentHasBeenParsed", "Failed to remove fake links from the model");
+            return false;
+        }
+
+        m_model = normalizedModel;
 
         if (!processSensors(m_model, m_buffers.sensorHelpers, m_sensors))
         {
@@ -209,123 +215,6 @@ namespace iDynTree {
             childLinks.insert(childLinkName);
         }
         return childLinks;
-    }
-
-
-    bool isFakeLink(const Model& modelWithFakeLinks, const LinkIndex linkToCheck)
-    {
-        // First condition: base link is massless
-        double mass = modelWithFakeLinks.getLink(linkToCheck)->getInertia().getMass();
-        if (mass > 0.0)
-        {
-            return false;
-        }
-
-        // Second condition: the base link has only one child
-        if (modelWithFakeLinks.getNrOfNeighbors(linkToCheck) != 1)
-        {
-            return false;
-        }
-
-        // Third condition: the base link is attached to its child with a fixed joint
-        Neighbor neigh = modelWithFakeLinks.getNeighbor(linkToCheck, 0);
-        if (modelWithFakeLinks.getJoint(neigh.neighborJoint)->getNrOfDOFs() > 0)
-        {
-            return false;
-        }
-
-        return true;
-    }
-
-    bool removeFakeLinks(const iDynTree::Model &originalModel, iDynTree::Model& cleanModel)
-    {
-        // Clear the output model
-        cleanModel = iDynTree::Model();
-
-        std::unordered_set<std::string> linksToRemove;
-        std::unordered_set<std::string> jointsToRemove;
-
-        std::string newDefaultBaseLink = originalModel.getLinkName(originalModel.getDefaultBaseLink());
-
-        // We iterate on all the links in the model
-        // and check which one are "fake links", according
-        // to our definition
-        for (LinkIndex linkIndex = 0; linkIndex < (LinkIndex)originalModel.getNrOfLinks(); ++linkIndex)
-        {
-            if (isFakeLink(originalModel, linkIndex))
-            {
-                linksToRemove.insert(originalModel.getLinkName(linkIndex));
-                JointIndex jointIndex = originalModel.getNeighbor(linkIndex, 0).neighborJoint;
-                jointsToRemove.insert(originalModel.getJointName(jointIndex));
-
-                // if the fake link is the default base, we also need to update the
-                // default base in the new model
-                if (linkIndex == originalModel.getDefaultBaseLink())
-                {
-                    LinkIndex newBaseIndex = originalModel.getNeighbor(linkIndex, 0).neighborLink;
-                    newDefaultBaseLink = originalModel.getLinkName(newBaseIndex);
-                }
-            }
-        }
-
-        // Add all links, except for the one that we need to remove
-        for (unsigned link = 0; link < originalModel.getNrOfLinks(); ++link)
-        {
-            std::string linkToAdd = originalModel.getLinkName(link);
-            if (linksToRemove.find(linkToAdd) == linksToRemove.end())
-            {
-                cleanModel.addLink(linkToAdd, *originalModel.getLink(link));
-            }
-        }
-
-        // Add all joints, preserving the serialization
-        for (unsigned joint = 0; joint < originalModel.getNrOfJoints(); ++joint)
-        {
-            std::string jointToAdd = originalModel.getJointName(joint);
-            if (jointsToRemove.find(jointToAdd) == jointsToRemove.end())
-            {
-                // we need to change the link index in the new joints
-                // to match the new link serialization
-                IJointPtr newJoint = originalModel.getJoint(joint)->clone();
-                std::string firstLinkName = originalModel.getLinkName(newJoint->getFirstAttachedLink());
-                std::string secondLinkName = originalModel.getLinkName(newJoint->getSecondAttachedLink());
-                JointIndex firstLinkNewIndex = cleanModel.getLinkIndex(firstLinkName);
-                JointIndex secondLinkNewIndex = cleanModel.getLinkIndex(secondLinkName);
-                newJoint->setAttachedLinks(firstLinkNewIndex, secondLinkNewIndex);
-
-                cleanModel.addJoint(jointToAdd, newJoint);
-                delete newJoint;
-            }
-        }
-
-        // Then we add all frames (i.e. fake links that we removed from the model)
-        for (unsigned link = 0; link < originalModel.getNrOfLinks(); ++link)
-        {
-            std::string fakeLinkName = originalModel.getLinkName(link);
-            if (linksToRemove.find(fakeLinkName) != linksToRemove.end())
-            {
-                LinkIndex fakeLinkOldIndex = originalModel.getLinkIndex(fakeLinkName);
-
-                // One of the condition for a base to be fake is to
-                // be connected to the real link with a fixed joint, so
-                // their transform can be obtained without specifying the joint positions
-                assert(originalModel.getNrOfNeighbors(fakeLinkOldIndex) == 1);
-
-                JointIndex fakeLink_realLink_joint = originalModel.getNeighbor(fakeLinkOldIndex, 0).neighborJoint;
-                LinkIndex realLinkOldIndex = originalModel.getNeighbor(fakeLinkOldIndex, 0).neighborLink;
-                std::string realLinkName = originalModel.getLinkName(realLinkOldIndex);
-
-                // Get the transform
-                iDynTree::Transform realLink_H_fakeLink =
-                originalModel.getJoint(fakeLink_realLink_joint)->getRestTransform(realLinkOldIndex, fakeLinkOldIndex);
-
-                // Add the fake base as a frame
-                cleanModel.addAdditionalFrameToLink(realLinkName, fakeLinkName, realLink_H_fakeLink);
-            }
-        }
-
-        // Set the default base link
-        return cleanModel.setDefaultBaseLink(cleanModel.getLinkIndex(newDefaultBaseLink));
     }
 
     bool processSensors(const Model& model,
@@ -481,6 +370,7 @@ namespace iDynTree {
                 }
 
                 shape->name = visual.m_name;
+                shape->nameIsValid = visual.m_nameAttributeFound;
                 shape->link_H_geometry = link_H_geometry;
 
                 LinkIndex idyntreeLinkIndex = model.getLinkIndex(linkName);

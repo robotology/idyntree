@@ -11,6 +11,7 @@
 #ifndef IDYNTREE_URDF_PARSING_UTILS_H
 #define IDYNTREE_URDF_PARSING_UTILS_H
 
+#include <cmath>
 #include <cstdlib>
 #include <sstream>
 #include <string>
@@ -18,6 +19,8 @@
 
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/VectorFixSize.h>
+
+#include <fpconv.h>
 
 namespace iDynTree
 {
@@ -45,6 +48,21 @@ bool inline stringToUnsignedIntWithClassicLocale(const std::string & inStr, unsi
     ss.imbue(std::locale::classic());
     ss >> outInt;
     return !(ss.fail());
+}
+
+bool inline doubleToStringWithClassicLocale(const double & inDouble, std::string& outStr)
+{
+    if (std::isnan(inDouble) || std::isinf(inDouble)) {
+        return false;
+    }
+
+    // fpconv returns nul-terminated strings, that can be converted directly to C++ std::string
+    // see https://github.com/night-shift/fpconv/tree/4a087d1b2df765baa409536931916a2c082cdda4#example-usage
+    char buf[24 + 1];
+    int str_len = idyntree_private_fpconv_dtoa(inDouble, buf);
+    buf[str_len] = '\0';
+    outStr = buf;
+    return true;
 }
 
 std::string inline intToString(const int inInt)
@@ -114,6 +132,27 @@ bool inline vector3FromString(const std::string & vector_str, Vector3 & out)
     out(2) = xyz[2];
 
     return true;
+}
+
+template<typename iDynTreeVectorType>
+bool inline vectorToString(const iDynTreeVectorType & in, std::string & out_str)
+{
+    std::stringstream ss;
+    bool ok = true;
+    for (unsigned int i = 0; i < in.size(); ++i)
+    {
+        std::string bufStr;
+        ok = ok && doubleToStringWithClassicLocale(in(i), bufStr);
+        if (i != 0)
+        {
+            ss << " ";
+        }
+        ss << bufStr;
+    }
+
+    out_str = ss.str();
+
+    return ok;
 }
 
 

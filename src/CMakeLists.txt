@@ -18,6 +18,7 @@ add_subdirectory(model)
 add_subdirectory(sensors)
 add_subdirectory(model_io)
 add_subdirectory(estimation)
+add_subdirectory(solid-shapes)
 add_subdirectory(high-level)
 
 if (IDYNTREE_USES_IPOPT)
@@ -25,7 +26,9 @@ if (IDYNTREE_USES_IPOPT)
   add_subdirectory(inverse-kinematics)
 endif()
 
-add_subdirectory(optimalcontrol)
+if (IDYNTREE_COMPILES_OPTIMALCONTROL)
+  add_subdirectory(optimalcontrol)
+endif()
 
 if(IDYNTREE_USES_YARP)
     add_subdirectory(yarp)

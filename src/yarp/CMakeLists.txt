@@ -18,10 +18,6 @@ SET(iDynTree_YARP_header include/iDynTree/yarp/YARPConversions.h
 SOURCE_GROUP("Source Files" FILES ${iDynTree_YARP_source})
 SOURCE_GROUP("Header Files" FILES ${iDynTree_YARP_header})
 
-# share headers with all iDynTree targets
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include")
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-
 include(AddInstallRPATHSupport)
 add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
                           LIB_DIRS "${CMAKE_INSTALL_PREFIX}/lib"
@@ -30,21 +26,17 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
 
 
 add_library(idyntree-yarp ${iDynTree_YARP_source} ${iDynTree_YARP_header})
+add_library(iDynTree::idyntree-yarp ALIAS idyntree-yarp)
 
 set_target_properties(idyntree-yarp PROPERTIES PUBLIC_HEADER "${iDynTree_YARP_header}")
 
 target_include_directories(idyntree-yarp PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 
-include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
-
-target_include_directories(idyntree-yarp INTERFACE ${YARP_INCLUDE_DIRS})
-
-target_include_directories(idyntree-yarp PRIVATE SYSTEM ${YARP_INCLUDE_DIRS})
-
 target_link_libraries(idyntree-yarp idyntree-core
                                     idyntree-model
-                                    ${YARP_LIBRARIES})
+                                    YARP::YARP_os
+                                    YARP::YARP_math)
                                     
 target_compile_options(idyntree-yarp PRIVATE ${IDYNTREE_WARNING_FLAGS})
 

@@ -1,13 +1,16 @@
+# Copyright (C) 2018 Fondazione Istituto Italiano di Tecnologia
+#
+# Licensed under either the GNU Lesser General Public License v3.0 :
+# https://www.gnu.org/licenses/lgpl-3.0.html
+# or the GNU Lesser General Public License v2.1 :
+# https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+# at your option.
+
 cmake_minimum_required(VERSION 3.0)
 
 project(idyntree_optimalcontrol)
 
 set(libraryname idyntree-optimalcontrol)
-
-# Dependencies
-# IPOPT
-# SUNDIALS (?)
-# find_package(IPOPT REQUIRED)
 
 
 set(PUBLIC_HEADERS include/iDynTree/OptimalControl.h
@@ -23,13 +26,18 @@ set(PUBLIC_HEADERS include/iDynTree/OptimalControl.h
                    include/iDynTree/SystemLineariser.h
                    include/iDynTree/Cost.h
                    include/iDynTree/Constraint.h
+                   include/iDynTree/QuadraticLikeCost.h
                    include/iDynTree/QuadraticCost.h
+                   include/iDynTree/L2NormCost.h
                    include/iDynTree/LinearConstraint.h
+                   include/iDynTree/LinearCost.h
                    include/iDynTree/Controller.h
                    include/iDynTree/TimeRange.h
                    include/iDynTree/ConstraintsGroup.h
                    include/iDynTree/OptimizationProblem.h
-                   include/iDynTree/Optimizer.h)
+                   include/iDynTree/Optimizer.h
+                   include/iDynTree/TimeVaryingObject.h
+                   include/iDynTree/SparsityStructure.h)
 set(INTEGRATORS_PUBLIC_HEADERS include/iDynTree/Integrators/FixedStepIntegrator.h
                                include/iDynTree/Integrators/RK4.h
                                include/iDynTree/Integrators/ImplicitTrapezoidal.h
@@ -51,7 +59,10 @@ set(SOURCES src/DynamicalSystem.cpp
             src/Cost.cpp
             src/Constraint.cpp
             src/QuadraticCost.cpp
+            src/QuadraticLikeCost.cpp
+            src/L2NormCost.cpp
             src/LinearConstraint.cpp
+            src/LinearCost.cpp
             src/Controller.cpp
             src/FixedStepIntegrator.cpp
             src/RK4.cpp
@@ -60,16 +71,46 @@ set(SOURCES src/DynamicalSystem.cpp
             src/ConstraintsGroup.cpp
             src/OptimizationProblem.cpp
             src/Optimizer.cpp
-            src/ForwardEuler.cpp)
+            src/ForwardEuler.cpp
+            src/TimeVaryingObject.cpp
+            src/SparsityStructure.cpp)
 
+list(APPEND OPTIMIZERS_HEADERS include/iDynTree/Optimizers/IpoptInterface.h)
 if (IDYNTREE_USES_IPOPT)
-    list(APPEND OPTIMIZERS_HEADERS include/iDynTree/Optimizers/IpoptInterface.h)
     list(APPEND OPTIMIZERS_SOURCES src/IpoptInterface.cpp)
     list(APPEND LINK_LIST ${IPOPT_LIBRARIES})
     list(APPEND INCLUDE_LIST ${IPOPT_INCLUDE_DIRS})
+else()
+    list(APPEND OPTIMIZERS_SOURCES src/IpoptInterfaceNotImplemented.cpp)
+endif()
+
+list(APPEND OPTIMIZERS_HEADERS include/iDynTree/Optimizers/OsqpInterface.h)
+if (IDYNTREE_USES_OSQPEIGEN)
+    list(APPEND OPTIMIZERS_SOURCES src/OsqpInterface.cpp)
+    list(APPEND LINK_LIST   OsqpEigen::OsqpEigen osqp::osqp)
+else()
+    list(APPEND OPTIMIZERS_SOURCES src/OsqpInterfaceNotImplemented.cpp)
+endif()
+
+list(APPEND OPTIMIZERS_HEADERS include/iDynTree/Optimizers/AlglibInterface.h)
+if (IDYNTREE_USES_ALGLIB)
+    list(APPEND OPTIMIZERS_SOURCES src/AlglibInterface.cpp)
+    list(APPEND LINK_LIST ALGLIB)
+else()
+    list(APPEND OPTIMIZERS_SOURCES src/AlglibInterfaceNotImplemented.cpp)
+endif()
+
+list(APPEND OPTIMIZERS_HEADERS include/iDynTree/Optimizers/WorhpInterface.h)
+if (IDYNTREE_USES_WORHP)
+    list(APPEND OPTIMIZERS_SOURCES src/WorhpInterface.cpp)
+    list(APPEND LINK_LIST WORHP::WORHP)
+else()
+    list(APPEND OPTIMIZERS_SOURCES src/WorhpInterfaceNotImplemented.cpp)
 endif()
 
 add_library(${libraryname} ${PUBLIC_HEADERS} ${INTEGRATORS_PUBLIC_HEADERS} ${OCSOLVERS_PUBLIC_HEADERS} ${OPTIMIZERS_HEADERS} ${SOURCES} ${OPTIMIZERS_SOURCES})
+add_library(iDynTree::${libraryname} ALIAS ${libraryname})
+
 target_include_directories(${libraryname} SYSTEM PUBLIC ${EIGEN3_INCLUDE_DIR})
 target_include_directories(${libraryname} SYSTEM PRIVATE ${INCLUDE_LIST})
 target_include_directories(${libraryname} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
@@ -98,8 +139,6 @@ install(FILES ${OCSOLVERS_PUBLIC_HEADERS} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR
 
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include)
-
 
 if(IDYNTREE_COMPILE_TESTS)
   add_subdirectory(tests)

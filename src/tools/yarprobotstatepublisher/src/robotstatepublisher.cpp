@@ -19,7 +19,7 @@
 
 #include <yarp/math/Math.h>
 
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/ModelIO/ModelLoader.h>
 #include <iDynTree/KinDynComputations.h>
 #include <iDynTree/yarp/YARPConversions.h>
 
@@ -32,18 +32,18 @@ using namespace yarp::sig;
 using namespace yarp::math;
 
 /************************************************************/
-JointStateSuscriber::JointStateSuscriber(): m_module(nullptr)
+JointStateSubscriber::JointStateSubscriber(): m_module(nullptr)
 {
 }
 
 /************************************************************/
-void JointStateSuscriber::attach(YARPRobotStatePublisherModule* module)
+void JointStateSubscriber::attach(YARPRobotStatePublisherModule* module)
 {
     m_module = module;
 }
 
 /************************************************************/
-void JointStateSuscriber::onRead(JointState& v)
+void JointStateSubscriber::onRead(yarp::rosmsg::sensor_msgs::JointState& v)
 {
     m_module->onRead(v);
 }
@@ -62,24 +62,42 @@ YARPRobotStatePublisherModule::YARPRobotStatePublisherModule(): m_iframetrans(nu
 bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
 {
     string name="yarprobotstatepublisher";
-    m_rosNode = new yarp::os::Node("/yarprobotstatepublisher");
-    string robot=rf.check("robot",Value("isaacSim")).asString();
+    string namePrefix = rf.check("name-prefix",Value("")).asString();
+    string robot = rf.check("robot",Value("")).asString();
+    if (!namePrefix.empty()) {
+        m_rosNode.reset(new yarp::os::Node("/"+namePrefix+"/yarprobotstatepublisher"));
+    }
+    else if (!robot.empty()) {
+        m_rosNode.reset(new yarp::os::Node("/"+robot+"/yarprobotstatepublisher"));
+        std::cerr << "[WARNING] The yarprobotstatepublisher option robot is deprecated," << std::endl <<
+                     "[WARNING] use name-prefix option instead";
+    }
+    else {
+        m_rosNode.reset(new yarp::os::Node("/yarprobotstatepublisher"));
+    }
+
     string modelFileName=rf.check("model",Value("model.urdf")).asString();
     m_period=rf.check("period",Value(0.010)).asDouble();
 
     Property pTransformclient_cfg;
     pTransformclient_cfg.put("device", "transformClient");
-    pTransformclient_cfg.put("local", "/"+name+"/transformClient");
+    if (!namePrefix.empty()) {
+        pTransformclient_cfg.put("local", "/"+namePrefix+"/"+name+"/transformClient");
+    }
+    else pTransformclient_cfg.put("local", "/"+name+"/transformClient");
+
     pTransformclient_cfg.put("remote", "/transformServer");
+
+    m_tfPrefix = rf.check("tf-prefix",Value("")).asString();
 
     bool ok_client = m_ddtransformclient.open(pTransformclient_cfg);
     if (!ok_client)
     {
         yError()<<"Problem in opening the transformClient device";
+        yError()<<"Is the transformServer YARP device running?";
         close();
         return false;
     }
-
     if (!m_ddtransformclient.view(m_iframetrans))
     {
         yError()<<"IFrameTransform I/F is not implemented";
@@ -97,7 +115,9 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
 
     // Open the model
     string pathToModel=rf.findFileByName(modelFileName);
-    bool ok = m_kinDynComp.loadRobotModelFromFile(pathToModel);
+    iDynTree::ModelLoader modelLoader;
+    bool ok = modelLoader.loadModelFromFile(pathToModel);
+    ok = ok && m_kinDynComp.loadRobotModel(modelLoader.model());
     if (!ok || !m_kinDynComp.isValid())
     {
         yError()<<"Impossible to load file " << pathToModel;
@@ -107,6 +127,9 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
 
     // Resize the joint pos buffer
     m_jointPos.resize(m_kinDynComp.model().getNrOfPosCoords());
+
+    // Initilize the joint pos buffer to Zero
+    m_jointPos.zero();
 
     // Get the base frame information
     if (rf.check("base-frame"))
@@ -130,10 +153,16 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
         return false;
     }
 
+    // Set reduced model option
+    // By default TFs of all the frames in the model are streamed
+    // If the option is present, only the TFs of the links are streamed to transform server
+    this->reducedModelOption=rf.check("reduced-model");
+
     // Setup the topic and configureisValid the onRead callback
-    m_jointStateSubscriber = new JointStateSuscriber();
+    string jointStatesTopicName = rf.check("jointstates-topic",Value("/joint_states")).asString();
+    m_jointStateSubscriber.reset(new JointStateSubscriber());
     m_jointStateSubscriber->attach(this);
-    m_jointStateSubscriber->topic("/joint_states");
+    m_jointStateSubscriber->topic(jointStatesTopicName);
     m_jointStateSubscriber->useCallback();
 
     return true;
@@ -143,14 +172,13 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
 /************************************************************/
 bool YARPRobotStatePublisherModule::close()
 {
-    yarp::os::LockGuard guard(m_mutex);
+    std::lock_guard<std::mutex> guard(m_mutex);
 
     // Disconnect the topic subscriber
     if (m_jointStateSubscriber)
     {
         m_jointStateSubscriber->interrupt();
         m_jointStateSubscriber->close();
-        delete m_jointStateSubscriber;
     }
 
     if (m_ddtransformclient.isValid())
@@ -161,10 +189,6 @@ bool YARPRobotStatePublisherModule::close()
     }
 
     m_baseFrameIndex = iDynTree::FRAME_INVALID_INDEX;
-
-    if(m_rosNode)
-        delete m_rosNode;
-    m_rosNode = nullptr;
 
     return true;
 }
@@ -186,21 +210,13 @@ bool YARPRobotStatePublisherModule::updateModule()
 }
 
 /************************************************************/
-void YARPRobotStatePublisherModule::onRead(JointState &v)
+void YARPRobotStatePublisherModule::onRead(yarp::rosmsg::sensor_msgs::JointState &v)
 {
-    yarp::os::LockGuard guard(m_mutex);
+    std::lock_guard<std::mutex> guard(m_mutex);
 
     // If configure was successful, parse the data
     if (m_baseFrameIndex == iDynTree::FRAME_INVALID_INDEX)
     {
-        return;
-    }
-
-    // Check size
-    if (v.name.size() != m_jointPos.size())
-    {
-        yError() << "Size mismatch. Model has " << m_jointPos.size()
-                 << " joints, while the received JointState message has " << v.name.size() << " joints.";
         return;
     }
 
@@ -209,10 +225,12 @@ void YARPRobotStatePublisherModule::onRead(JointState &v)
     //        * Add a map string --> indeces
     // Fill the buffer of joints positions
     const iDynTree::Model& model = m_kinDynComp.model();
+    iDynTree::JointIndex jntIndex;
     for (size_t i=0; i < v.name.size(); i++)
     {
-        iDynTree::JointIndex jntIndex = model.getJointIndex(v.name[i]);
-        if (jntIndex == iDynTree::JOINT_INVALID_INDEX)
+        jntIndex = model.getJointIndex(v.name[i]);
+
+        if (!(model.getJoint(jntIndex)->getNrOfDOFs()) || jntIndex == iDynTree::JOINT_INVALID_INDEX)
             continue;
 
         m_jointPos(model.getJoint(jntIndex)->getDOFsOffset()) = v.position[i];
@@ -221,16 +239,26 @@ void YARPRobotStatePublisherModule::onRead(JointState &v)
     // Set the updated joint positions
     m_kinDynComp.setJointPos(m_jointPos);
 
-    // Publish the frames on TF
-    for (size_t frameIdx=0; frameIdx < model.getNrOfFrames(); frameIdx++)
+    // Set the size of the tf frames to be published
+    size_t sizeOfTFFrames;
+    if (this->reducedModelOption)
+    {
+        sizeOfTFFrames = model.getNrOfLinks();
+    }
+    else
+    {
+        sizeOfTFFrames = model.getNrOfFrames();
+    }
+
+    for (size_t frameIdx=0; frameIdx < sizeOfTFFrames; frameIdx++)
     {
         if(m_baseFrameIndex == frameIdx)    // skip self-tranform
             continue;
 
         iDynTree::Transform base_H_frame = m_kinDynComp.getRelativeTransform(m_baseFrameIndex, frameIdx);
         iDynTree::toYarp(base_H_frame.asHomogeneousTransform(), m_buf4x4);
-        m_iframetrans->setTransform(model.getFrameName(frameIdx),
-                                    model.getFrameName(m_baseFrameIndex),
+        m_iframetrans->setTransform(m_tfPrefix + model.getFrameName(frameIdx),
+                                    m_tfPrefix + model.getFrameName(m_baseFrameIndex),
                                     m_buf4x4);
     }
 

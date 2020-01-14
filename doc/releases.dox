@@ -10,8 +10,9 @@
 
 This page lists the main changes introduced in iDynTree at each release.
 
-
-<h1>iDynTree 0.8 Series</h1>
+\li \subpage v0_12
+\li \subpage v0_11
+\li \subpage v0_10
 \li \subpage v0_8
 
 */

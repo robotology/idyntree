@@ -1,3 +1,3 @@
 function varargout = isJointSensor(varargin)
-  [varargout{1:nargout}] = iDynTreeMEX(1264, varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(1296, varargin{:});
 end

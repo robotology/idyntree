@@ -16,9 +16,14 @@ set(IDYNTREE_ESTIMATION_HEADERS include/iDynTree/Estimation/BerdyHelper.h
                                 include/iDynTree/Estimation/SchmittTrigger.h
                                 include/iDynTree/Estimation/ContactStateMachine.h
                                 include/iDynTree/Estimation/BipedFootContactClassifier.h
-                                include/iDynTree/Estimation/GravityCompensationHelpers.h)
+                                include/iDynTree/Estimation/GravityCompensationHelpers.h
+                                include/iDynTree/Estimation/ExtendedKalmanFilter.h
+                                include/iDynTree/Estimation/AttitudeEstimator.h
+                                include/iDynTree/Estimation/AttitudeMahonyFilter.h
+                                include/iDynTree/Estimation/AttitudeQuaternionEKF.h
+                                include/iDynTree/Estimation/KalmanFilter.h                                )
 
-set(IDYNTREE_ESTIMATION_PRIVATE_INCLUDES )
+set(IDYNTREE_ESTIMATION_PRIVATE_INCLUDES include/iDynTree/Estimation/AttitudeEstimatorUtils.h)
 
 set(IDYNTREE_ESTIMATION_SOURCES src/BerdyHelper.cpp
                                 src/ExternalWrenchesEstimation.cpp
@@ -28,7 +33,13 @@ set(IDYNTREE_ESTIMATION_SOURCES src/BerdyHelper.cpp
                                 src/SchmittTrigger.cpp
                                 src/ContactStateMachine.cpp
                                 src/BipedFootContactClassifier.cpp
-                                src/GravityCompensationHelpers.cpp)
+                                src/GravityCompensationHelpers.cpp
+                                src/ExtendedKalmanFilter.cpp
+                                src/AttitudeEstimator.cpp
+                                src/AttitudeEstimatorUtils.cpp
+                                src/AttitudeMahonyFilter.cpp
+                                src/AttitudeQuaternionEKF.cpp
+                                src/KalmanFilter.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_ESTIMATION_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_ESTIMATION_HEADERS})
@@ -36,15 +47,13 @@ SOURCE_GROUP("Header Files" FILES ${IDYNTREE_ESTIMATION_HEADERS})
 set(libraryname idyntree-estimation)
 
 add_library(${libraryname} ${IDYNTREE_ESTIMATION_SOURCES} ${IDYNTREE_ESTIMATION_HEADERS} ${IDYNTREE_ESTIMATION_PRIVATE_INCLUDES})
+add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 target_include_directories(${libraryname} PRIVATE SYSTEM ${EIGEN3_INCLUDE_DIR})
 
 target_link_libraries(${libraryname} idyntree-core idyntree-model idyntree-sensors idyntree-modelio-urdf)
-
-# Ensure that build include directories are always included before system ones
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 
 target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
 
@@ -60,8 +69,6 @@ install(TARGETS ${libraryname}
         PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Estimation/impl)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
-
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 if(IDYNTREE_COMPILE_TESTS)
     add_subdirectory(tests)

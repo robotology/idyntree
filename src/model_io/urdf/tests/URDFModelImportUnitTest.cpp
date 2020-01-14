@@ -225,7 +225,7 @@ void checkLoadReducedModelOrderIsKept(std::string urdfFileName)
 int main()
 {
     checkURDF(getAbsModelPath("/simple_model.urdf"),1,0,0,1, 1, 0, "link1");
-    checkURDF(getAbsModelPath("/oneLink.urdf"),1,0,0,7,0,0,"link1");
+    checkURDF(getAbsModelPath("/oneLink.urdf"),1,0,0,7,1,1,"link1");
     checkURDF(getAbsModelPath("twoLinks.urdf"),2,1,1,6,0,0,"link1");
     checkURDF(getAbsModelPath("icub_skin_frames.urdf"),39,38,32,62, 28, 28,"root_link");
     checkURDF(getAbsModelPath("iCubGenova02.urdf"),33,32,26,111, 33, 33, "root_link");

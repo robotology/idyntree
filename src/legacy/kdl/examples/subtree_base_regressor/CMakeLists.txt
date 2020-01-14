@@ -38,7 +38,7 @@ endforeach(header_file ${folder_header})
 if (folder_source)
   add_executable(subtree_base_regressor ${folder_source} ${folder_header})
   target_link_libraries(subtree_base_regressor ${orocos_kdl_LIBRARIES}
-                                                 ${YARP_LIBRARIES} ${ICUB_LIBRARIES}
+                                                 YARP::YARP_os YARP::YARP_math${ICUB_LIBRARIES}
                                                 ${iDynTree_LIBRARIES})
 else (folder_source)
   message(FATAL_ERROR "No source code files found. Please add something")

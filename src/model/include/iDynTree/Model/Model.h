@@ -218,6 +218,11 @@ namespace iDynTree
         std::string getJointName(const JointIndex index) const;
 
         /**
+         * Get the total mass of the robot
+         */
+        double getTotalMass() const;
+
+        /**
          * Get the index of a joint, given a jointName.
          * If the jointName is not found in the model,
          * return JOINT_INVALID_INDEX .
@@ -411,6 +416,18 @@ namespace iDynTree
          *
          */
         LinkIndex getFrameLink(const FrameIndex frameIndex) const;
+
+        /**
+         * Get the additional frames of a specified link.
+         *
+         * @note The vector of returned frame index is ordered according to the frame index.
+         * @warning This method searches linearly over all the frames.
+         *
+         * @param[in] link a LinkIndex of the specified link,
+         * @param[out] frames a vector of FrameIndex of the frame indeces attached to the specified link index,
+         * @return true if the specified link is a valid link, false otherwise.
+         */
+        bool getLinkAdditionalFrames(const LinkIndex lnkIndex, std::vector<FrameIndex>& frameIndeces) const;
 
         /**
          * Get the nr of neighbors of a given link.

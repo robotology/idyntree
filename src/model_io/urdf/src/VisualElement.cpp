@@ -34,6 +34,10 @@ namespace iDynTree {
         auto found = attributes.find("name");
         if (found != attributes.end()) {
             m_info.m_name = found->second->value();
+            m_info.m_nameAttributeFound = true;
+        } else {
+            m_info.m_name = "";
+            m_info.m_nameAttributeFound = false;
         }
         return true;
     }

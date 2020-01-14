@@ -6,14 +6,13 @@
 # https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 # at your option.
 
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 macro(add_estimation_test classname)
     set(testsrc ${classname}UnitTest.cpp)
     set(testbinary ${classname}UnitTest)
     set(testname   UnitTest${classname})
     add_executable(${testbinary} ${testsrc})
-    target_include_directories(${testbinary} PRIVATE ${IDYNTREE_TREE_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR})
-    target_link_libraries(${testbinary} idyntree-model idyntree-estimation)
+    target_include_directories(${testbinary} PRIVATE ${EIGEN3_INCLUDE_DIR})
+    target_link_libraries(${testbinary} idyntree-model idyntree-estimation idyntree-testmodels)
     add_test(NAME ${testname} COMMAND ${testbinary})
 
     if(IDYNTREE_RUN_VALGRIND_TESTS)
@@ -27,3 +26,5 @@ add_estimation_test(BerdyMAPSolver)
 add_estimation_test(ExternalWrenchesEstimation)
 add_estimation_test(ExtWrenchesAndJointTorquesEstimator)
 add_estimation_test(SimpleLeggedOdometry)
+add_estimation_test(AttitudeEstimator)
+add_estimation_test(KalmanFilter)

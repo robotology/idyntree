@@ -397,6 +397,22 @@ namespace iDynTree {
         return IK_PIMPL(m_pimpl)->m_comHullConstraint.computeMargin(comProjection);
     }
 
+    bool InverseKinematics::getCenterOfMassProjectConstraintConvexHull(Polygon2D& poly)
+    {
+        if (!IK_PIMPL(m_pimpl)->m_comHullConstraint.isActive())
+        {
+            poly.setNrOfVertices(0);
+            return false;
+        }
+
+        if (!IK_PIMPL(m_pimpl)->m_problemInitialized) {
+            IK_PIMPL(m_pimpl)->computeProblemSizeAndResizeBuffers();
+        }
+
+        poly = IK_PIMPL(m_pimpl)->m_comHullConstraint.projectedConvexHull;
+        return true;
+    }
+
     bool InverseKinematics::addTarget(const std::string& frameName,
                                       const iDynTree::Transform& constraintValue,
                                       const double positionWeight,

@@ -15,7 +15,6 @@
 
 #include <yarp/os/ResourceFinder.h>
 #include <yarp/os/RateThread.h>
-#include <yarp/os/Semaphore.h>
 #include <yarp/os/Log.h>
 
 #include <yarp/dev/IAnalogSensor.h>
@@ -69,13 +68,11 @@ protected:
     iDynTree::Direction m_gravityDirection;
     iCub::ctrl::FirstOrderLowPassFilter *filtIMUGravity;    //!< filter the gravity vector received from the IMU
 
-    yarp::os::Semaphore mutex;
-
     int sensorsNum;
     bool mbSimpleDraw;
 
     // Shared data (populated by the run, and used by the draw)
-    yarp::os::Mutex m_mutex;
+    std::mutex m_mutex;
     iDynTree::Position m_comInPrimarySole;
     iDynTree::Position m_desiredComInPrimarySole;
 

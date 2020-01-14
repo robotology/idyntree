@@ -23,6 +23,7 @@ source_group("Private\\Source Files" FILES ${PRIVATE_IDYN_TREE_IK_SOURCES})
 
 add_library(${libraryname} ${IDYN_TREE_IK_HEADERS} ${IDYN_TREE_IK_SOURCES}
                            ${PRIVATE_IDYN_TREE_IK_SOURCES} ${PRIVATE_IDYN_TREE_IK_HEADERS})
+add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
@@ -48,7 +49,6 @@ install(TARGETS ${libraryname}
         PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 
 if(IDYNTREE_COMPILE_TESTS)

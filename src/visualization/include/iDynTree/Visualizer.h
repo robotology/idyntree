@@ -14,6 +14,7 @@
 #include <string>
 
 #include <iDynTree/Core/Direction.h>
+#include <iDynTree/Core/Position.h>
 
 #include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/LinkState.h>
@@ -293,6 +294,70 @@ public:
     virtual bool setJetsIntensity(const VectorDynSize & jetsIntensity) = 0;
 };
 
+/**
+ * Interface to the visualization of vectors.
+ */
+class IVectorsVisualization
+{
+public:
+    /**
+     * Denstructor
+     */
+    virtual ~IVectorsVisualization() = 0;
+
+    /**
+     * @brief Add a vector in the visualization
+     * @return The vector index.
+     */
+    virtual size_t addVector(const Position & origin, const Direction & direction, double modulus) = 0;
+
+    /**
+     * @brief Add a vector in the visualization
+     * @return The vector index.
+     */
+    virtual size_t addVector(const Position & origin, const Vector3 & components) = 0;
+
+    /**
+     * Get the number of visualized vectors.
+     *
+     */
+    virtual size_t getNrOfVectors() const = 0;
+
+    /**
+     * Get vector properties.
+     */
+    virtual bool getVector(size_t vectorIndex, Position & currentOrigin,
+                           Direction & currentDirection, double & currentModulus) const = 0;
+
+    /**
+     * Get vector properties.
+     */
+    virtual bool getVector(size_t vectorIndex, Position & currentOrigin, Vector3 & components) const = 0;
+
+    /**
+     * Update Vector
+     */
+    virtual bool updateVector(size_t vectorIndex, const Position & origin, const Direction & direction, double modulus) = 0;
+
+    /**
+     * Update Vector
+     */
+    virtual bool updateVector(size_t vectorIndex, const Position & origin, const Vector3& components) = 0;
+
+    /**
+     * Set vector color.
+     */
+    virtual bool setVectorColor(size_t vectorIndex, const ColorViz & vectorColor) = 0;
+
+    /**
+     * @brief Determines the dimension of the visualized arrows
+     * @param zeroModulusRadius Constant offset for the arrow radius.
+     * @param modulusMultiplier Multiplies the modulus and adds up to the zeroModulusRadius to get the total arrow radius.
+     * @return true if successfull, false in case of negative numbers.
+     */
+    virtual bool setVectorsAspect(double zeroModulusRadius, double modulusMultiplier, double heightScale) = 0;
+};
+
 
 /**
  * Interface to the visualization of a model istance.
@@ -341,8 +406,21 @@ public:
     /**
      * Reset the colors of the model.
      */
-    virtual void resetModelColor() = 0;
-
+    virtual void resetModelColor() = 0;    
+    
+    /**
+     * Set the color of all the geometries of the given link.
+     *
+     * This will overwrite the material of the link, but it can be
+     * reset by resetLinkColor.
+     */
+    virtual bool setLinkColor(const LinkIndex& linkIndex, const ColorViz& linkColor) = 0;
+    
+    /**
+     * Reset the colors of given link.
+     */
+    virtual bool resetLinkColor(const LinkIndex& linkIndex) = 0;
+    
     /**
      * Get the name of the link in the model.
      */
@@ -372,8 +450,20 @@ public:
      * Get a reference to the internal IJetsVisualization interface.
      */
     virtual IJetsVisualization& jets() = 0;
-
-
+        
+    /**
+     * Get the transformation of the model (root link) with respect to visualizer world \f$ w_H_{root}\f$
+     * The obtained transformation matrix can be used to map any homogeneous vector from the
+     * model's root link frame to the visualizer world frame.
+     */
+    virtual Transform getWorldModelTransform() = 0;
+    
+    /**
+     * Get the transformation of given link with respect to visualizer world \f$ w_H_{link}\f$
+     * The obtained transformation matrix can be used to map any homogeneous vector from the
+     * given link frame to the visualizer world frame.
+     */
+    virtual Transform getWorldLinkTransform(const LinkIndex& linkIndex) = 0;
 };
 
 /**
@@ -484,6 +574,11 @@ public:
      * Return an interface to manipulate the visualization environment.
      */
     IEnvironment& enviroment();
+
+    /**
+     * Get a reference to the internal IVectorsVisualization interface.
+     */
+    IVectorsVisualization& vectors();
 
     /**
      * Wrap the run method of the Irrlicht device.

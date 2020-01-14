@@ -32,9 +32,8 @@ set(IDYNTREE_MODEL_HEADERS include/iDynTree/Model/ContactWrench.h
                            include/iDynTree/Model/PrismaticJoint.h
                            include/iDynTree/Model/SolidShapes.h
                            include/iDynTree/Model/SubModel.h
-                           include/iDynTree/Model/Traversal.h)
-
-set(IDYNTREE_MODEL_PRIVATE_INCLUDES include/iDynTree/Model/ModelTestUtils.h)
+                           include/iDynTree/Model/Traversal.h
+                           include/iDynTree/Model/ModelTestUtils.h)
 
 set(IDYNTREE_MODEL_SOURCES src/ContactWrench.cpp
                            src/DenavitHartenberg.cpp
@@ -62,21 +61,16 @@ set(IDYNTREE_MODEL_SOURCES src/ContactWrench.cpp
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_MODEL_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_MODEL_HEADERS})
-SOURCE_GROUP("Header Files\\Private" FILES ${IDYNTREE_MODEL_PRIVATE_INCLUDES})
 
 set(libraryname idyntree-model)
 
-add_library(${libraryname} ${IDYNTREE_MODEL_SOURCES} ${IDYNTREE_MODEL_HEADERS} ${IDYNTREE_MODEL_PRIVATE_INCLUDES})
+add_library(${libraryname} ${IDYNTREE_MODEL_SOURCES} ${IDYNTREE_MODEL_HEADERS})
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
                                           PRIVATE ${EIGEN3_INCLUDE_DIR})
 
 target_link_libraries(${libraryname} idyntree-core)
-
-# Ensure that build include directories are always included before system ones
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-target_include_directories(${libraryname} BEFORE PRIVATE ${IDYNTREE_TREE_INCLUDE_DIRS})
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODEL_HEADERS})
 
@@ -90,9 +84,6 @@ install(TARGETS ${libraryname}
         PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Model/impl)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
-
-get_property(IDYNTREE_COMP_INCLUDE_DIRS TARGET ${libraryname} PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${IDYNTREE_COMP_INCLUDE_DIRS})
 
 
 if(IDYNTREE_COMPILE_TESTS)

@@ -15,12 +15,14 @@ if(IDYNTREE_USES_IRRLICHT)
                                                src/Environment.h
                                                src/ModelVisualization.h
                                                src/JetsVisualization.h
+                                               src/VectorsVisualization.h
                                                src/Light.h
                                                src/FloorGridSceneNode.h)
     set(iDynTree_visualization_private_source  src/Camera.cpp
                                                src/Environment.cpp
                                                src/ModelVisualization.cpp
                                                src/JetsVisualization.cpp
+                                               src/VectorsVisualization.cpp
                                                src/Light.cpp
                                                src/FloorGridSceneNode.cpp)
 endif()
@@ -29,10 +31,6 @@ source_group("Source Files" FILES ${iDynTree_visualization_source})
 source_group("Header Files" FILES ${iDynTree_visualization_header})
 source_group("Private Source Files" FILES ${iDynTree_visualization_source})
 source_group("Private Header Files" FILES ${iDynTree_visualization_header})
-
-# share headers with all iDynTree targets
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/include")
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
 
 include(AddInstallRPATHSupport)
 add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
@@ -44,14 +42,13 @@ add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
 set(libraryname idyntree-visualization)
 add_library(${libraryname} ${iDynTree_visualization_source} ${iDynTree_visualization_header}
                            ${iDynTree_visualization_private_source} ${iDynTree_visualization_private_headers})
+add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 
 set_target_properties(${libraryname} PROPERTIES PUBLIC_HEADER "${iDynTree_visualization_header}")
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
                                           PRIVATE ${EIGEN3_INCLUDE_DIR})
-
-include_directories(${IDYNTREE_TREE_INCLUDE_DIRS})
 
 target_link_libraries(${libraryname} LINK_PUBLIC idyntree-core
                                                  idyntree-model)
@@ -68,6 +65,9 @@ if(IDYNTREE_USES_IRRLICHT)
 
     target_include_directories(${libraryname} PRIVATE SYSTEM ${IRRLICHT_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR})
     target_link_libraries(${libraryname} LINK_PRIVATE ${IRRLICHT_LIBRARY} ${OPENGL_LIBRARIES})
+    if(MSVC)
+       add_definitions(-D_USE_MATH_DEFINES)
+    endif()
     add_definitions(-DIDYNTREE_USES_IRRLICHT)
 
     # On Apple system, irrlicht uses some system libraries 

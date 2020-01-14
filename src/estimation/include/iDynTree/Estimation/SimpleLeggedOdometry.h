@@ -234,6 +234,24 @@ public:
     bool changeFixedFrame(const FrameIndex newFixedFrame);
 
     /**
+     * Change the link that the odometry assumes to be fixed
+     * with respect to the inertial/world frame.
+     *
+     * \note The position of the external frame is set by the user
+     */
+    bool changeFixedFrame(const std::string & newFixedFrame,
+                          const Transform & world_H_newFixedFrame);
+
+    /**
+     * Change the link that the odometry assumes to be fixed
+     * with respect to the inertial/world frame.
+     *
+     * \note The position of the external frame is set by the user
+     */
+    bool changeFixedFrame(const FrameIndex newFixedFrame,
+                          const Transform & world_H_newFixedFrame);
+
+    /**
      * Get the link currently considered fixed with respect to the inertial frame.
      *
      * \note This can be diffent from what was set with changeFixedFrame, because
@@ -249,11 +267,16 @@ public:
      * \note this method works only for link, not for arbitrary frames.
      */
     iDynTree::Transform getWorldLinkTransform(const LinkIndex frame_index);
+
+    /**
+     * Get the world_H_frame transform for an arbitrary frame.
+     *
+     * \note this method works also for arbitrary frames.
+     */
+    iDynTree::Transform getWorldFrameTransform(const FrameIndex frame_index);
 };
 
 
 } // End namespace iDynTree
 
 #endif // IDYNTREE_SIMPLE_LEGGED_ODOMETRY2_
-
-

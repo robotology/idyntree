@@ -97,9 +97,10 @@ Transform SpatialMotionVector::exp() const
     // Understand if there is a meaningful
     // semantics for this operation and if it exists use it
 
-    // the linear part is not changed by the exp
+    // the linear part is affected by the left Jacobian of SO(3)
     Position newPos;
-    memcpy(newPos.data(),this->getLinearVec3().data(),3*sizeof(double));
+    auto J_SO3 = Rotation::leftJacobian(this->getAngularVec3());
+    toEigen(newPos) = toEigen(J_SO3)*toEigen(this->getLinearVec3());
     res.setPosition(newPos);
 
     // the angular part instead mapped by so(3) -> SO(3) exp map

@@ -20,6 +20,7 @@
 #include <cstddef>
 #include <string>
 #include <iDynTree/Core/VectorDynSize.h>
+#include <iDynTree/SparsityStructure.h>
 
 namespace iDynTree {
 
@@ -27,10 +28,6 @@ namespace iDynTree {
 
     namespace optimalcontrol {
 
-        /**
-         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
-         * \ingroup iDynTreeExperimental
-         */
 
         /**
          * @brief The Constraint virtual class definition
@@ -38,6 +35,10 @@ namespace iDynTree {
          * Inherit publicly from this class to define a constraint of an optimal control problem.
         */
 
+        /**
+         * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+         * \ingroup iDynTreeExperimental
+         */
         class Constraint {
         public:
 
@@ -161,6 +162,105 @@ namespace iDynTree {
              * @return The expected dimension of the control vectors.
              */
             virtual size_t expectedControlSpaceSize() const;
+
+            /**
+             * @brief Returns the set of nonzeros elements in terms of row and colun index, in the state jacobian
+             *
+             * @warning No check is performed in the indeces. They need to be in the range [0, constraintDimension) and [0, stateDimension) respectively.
+             * @param stateSparsity Sparsity structure of the partial derivative of the constraint wrt state variables.
+             * @return true if the sparsity is available. False otherwise.
+             */
+            virtual bool constraintJacobianWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity);
+
+            /**
+             * @brief Returns the set of nonzeros elements in terms of row and colun index, in the control jacobian
+             *
+             * @warning No check is performed in the indeces. They need to be in the range [0, constraintDimension) and [0, controlDimension) respectively.
+             * @param controlSparsity Sparsity structure of the partial derivative of the constraint wrt control variables.
+             * @return true if the sparsity is available. False otherwise.
+             */
+            virtual bool constraintJacobianWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity);
+
+            /**
+             * @brief Evaluate constraint second partial derivative wrt the state variables
+             *
+             * It is the result of \f$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial x^2}\f$
+             * @param[in] time The time at which the partial derivative is computed.
+             * @param[in] state The state value at which the partial derivative is computed.
+             * @param[in] control The control value at which the partial derivative is computed..
+             * @param[in] lambda The lagrange multipliers
+             * @param[out] hessian The output partial derivative.
+             * @return True if successfull, false otherwise (or if not implemented).
+             */
+            virtual bool constraintSecondPartialDerivativeWRTState(double time,
+                                                                   const VectorDynSize& state,
+                                                                   const VectorDynSize& control,
+                                                                   const VectorDynSize& lambda,
+                                                                   MatrixDynSize& hessian);
+
+
+            /**
+             * @brief Evaluate constraint second partial derivative wrt the control
+             *
+             * It is the result of \f$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial u^2}\f$
+             * @param[in] time The time at which the partial derivative is computed.
+             * @param[in] state The state value at which the partial derivative is computed.
+             * @param[in] control The control value at which the partial derivative is computed.
+             * @param[in] lambda The lagrange multipliers
+             * @param[out] hessian The output partial derivative.
+             * @return True if successfull, false otherwise (or if not implemented).
+             */
+            virtual bool constraintSecondPartialDerivativeWRTControl(double time,
+                                                                     const VectorDynSize& state,
+                                                                     const VectorDynSize& control,
+                                                                     const VectorDynSize& lambda,
+                                                                     MatrixDynSize& hessian);
+
+
+            /**
+             * @brief Evaluate constraint second partial derivative wrt the state and control
+             *
+             * It is the result of \f$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial x \partial u}\f$,
+             * thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs.
+             * @param[in] time The time at which the partial derivative is computed.
+             * @param[in] state The state value at which the partial derivative is computed.
+             * @param[in] control The control value at which the partial derivative is computed.
+             * @param[in] lambda The lagrange multipliers
+             * @param[out] hessian The output partial derivative.
+             * @return True if successfull, false otherwise (or if not implemented).
+             */
+            virtual bool constraintSecondPartialDerivativeWRTStateControl(double time,
+                                                                          const VectorDynSize& state,
+                                                                          const VectorDynSize& control,
+                                                                          const VectorDynSize& lambda,
+                                                                          MatrixDynSize& hessian);
+
+            /**
+             * @brief Returns the set of nonzeros elements in terms of row and colun index, in the state hessian
+             *
+             * @warning No check is performed in the indeces. They need to be in the range [0, stateDimension) and [0, stateDimension) respectively.
+             * @param stateSparsity Sparsity structure of the partial derivative of the jacobian wrt state variables.
+             * @return true if the sparsity is available. False otherwise.
+             */
+            virtual bool constraintSecondPartialDerivativeWRTStateSparsity(iDynTree::optimalcontrol::SparsityStructure& stateSparsity);
+
+            /**
+             * @brief Returns the set of nonzeros elements in terms of row and colun index, in the mixed hessian
+             *
+             * @warning No check is performed in the indeces. They need to be in the range [0, stateDimension) and [0, controlDimension) respectively.
+             * @param stateControlSparsity Sparsity structure of the partial derivative of the jacobian wrt state and control variables.
+             * @return true if the sparsity is available. False otherwise.
+             */
+            virtual bool constraintSecondPartialDerivativeWRTStateControlSparsity(iDynTree::optimalcontrol::SparsityStructure& stateControlSparsity);
+
+            /**
+             * @brief Returns the set of nonzeros elements in terms of row and colun index, in the control hessian
+             *
+             * @warning No check is performed in the indeces. They need to be in the range [0, constraintDimension) and [0, controlDimension) respectively.
+             * @param controlSparsity Sparsity structure of the partial derivative of the jacobian wrt control variables.
+             * @return true if the sparsity is available. False otherwise.
+             */
+            virtual bool constraintSecondPartialDerivativeWRTControlSparsity(iDynTree::optimalcontrol::SparsityStructure& controlSparsity);
 
 
         private:

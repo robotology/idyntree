@@ -93,6 +93,12 @@ namespace iDynTree
         return m_vertices.size();
     }
 
+    void Polygon2D::setNrOfVertices(size_t size)
+    {
+        m_vertices.resize(size);
+        return;
+    }
+
     Vector2& Polygon2D::operator()(const size_t idx)
     {
         return m_vertices[idx];

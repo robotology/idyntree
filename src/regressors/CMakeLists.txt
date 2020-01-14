@@ -36,6 +36,7 @@ set(libraryname idyntree-regressors)
 
 add_library(${libraryname} ${IDYNTREE_REGRESSORS_SOURCES}     ${IDYNTREE_REGRESSORS_HEADERS}
                                 ${IDYNTREE_REGRESSORS_SOURCES_EXP} ${IDYNTREE_REGRESSORS_HEADERS_EXP})
+add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
@@ -45,10 +46,6 @@ target_link_libraries(${libraryname} idyntree-core idyntree-sensors)
 if (IDYNTREE_USES_KDL)
   target_link_libraries(${libraryname} idyntree-modelio-urdf-kdl ${orocos_kdl_LIBRARIES} ${TinyXML_LIBRARIES})
 endif ()
-
-# Ensure that build include directories are always included before system ones
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-target_include_directories(${libraryname} BEFORE PRIVATE ${IDYNTREE_TREE_INCLUDE_DIRS})
 
 if((${CMAKE_CXX_COMPILER_ID} MATCHES "GNU") OR (${CMAKE_CXX_COMPILER_ID} MATCHES "Clang"))
     target_compile_options(${libraryname} PRIVATE "-Wno-deprecated")
@@ -68,6 +65,3 @@ install(TARGETS ${libraryname}
 install(DIRECTORY include/iDynTree/Regressors DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
-
-get_property(IDYNTREE_COMP_INCLUDE_DIRS TARGET ${libraryname} PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${IDYNTREE_COMP_INCLUDE_DIRS})

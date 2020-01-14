@@ -71,6 +71,7 @@
 #include "iDynTree/Core/TransformSemantics.h"
 #include "iDynTree/Core/Transform.h"
 #include "iDynTree/Core/TransformDerivative.h"
+#include "iDynTree/Core/Span.h"
 
 // Model related data structures
 #include "iDynTree/Model/Indices.h"
@@ -107,6 +108,9 @@
 #include "iDynTree/ModelIO/URDFDofsImport.h"
 #include "iDynTree/ModelIO/URDFGenericSensorsImport.h"
 #include "iDynTree/ModelIO/ModelLoader.h"
+#include "iDynTree/ModelIO/ModelExporter.h"
+#include "iDynTree/ModelIO/ModelCalibrationHelper.h"
+
 
 // Estimation related classes
 #include "iDynTree/Estimation/ExternalWrenchesEstimation.h"
@@ -114,6 +118,13 @@
 #include "iDynTree/Estimation/SimpleLeggedOdometry.h"
 #include "iDynTree/Estimation/BerdyHelper.h"
 #include "iDynTree/Estimation/BerdySparseMAPSolver.h"
+#include "iDynTree/Estimation/AttitudeEstimator.h"
+#include "iDynTree/Estimation/AttitudeMahonyFilter.h"
+#include "iDynTree/Estimation/ExtendedKalmanFilter.h"
+#include "iDynTree/Estimation/AttitudeQuaternionEKF.h"
+
+// SolidShapes related classes
+#include "iDynTree/InertialParametersSolidShapesHelpers.h"
 
 // Regressors related data structures
 #include "iDynTree/Regressors/DynamicsRegressorParameters.h"
@@ -256,7 +267,9 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/Core/TransformSemantics.h"
 %include "iDynTree/Core/Transform.h"
 %include "iDynTree/Core/TransformDerivative.h"
+%include "iDynTree/Core/Span.h"
 
+%template(DynamicSpan) iDynTree::Span<double, iDynTree::dynamic_extent>;
 
 // Model related data structures
 %include "iDynTree/Model/Indices.h"
@@ -305,6 +318,8 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/ModelIO/URDFDofsImport.h"
 %include "iDynTree/ModelIO/URDFGenericSensorsImport.h"
 %include "iDynTree/ModelIO/ModelLoader.h"
+%include "iDynTree/ModelIO/ModelExporter.h"
+%include "iDynTree/ModelIO/ModelCalibrationHelper.h"
 
 // Estimation related classes
 %include "iDynTree/Estimation/ExternalWrenchesEstimation.h"
@@ -312,6 +327,13 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "iDynTree/Estimation/SimpleLeggedOdometry.h"
 %include "iDynTree/Estimation/BerdyHelper.h"
 %include "iDynTree/Estimation/BerdySparseMAPSolver.h"
+%include "iDynTree/Estimation/AttitudeEstimator.h"
+%include "iDynTree/Estimation/AttitudeMahonyFilter.h"
+%include "iDynTree/Estimation/ExtendedKalmanFilter.h"
+%include "iDynTree/Estimation/AttitudeQuaternionEKF.h"
+
+// SolidShapes related classes
+%include "iDynTree/InertialParametersSolidShapesHelpers.h"
 
 // Regressors related data structures
 %include "iDynTree/Regressors/DynamicsRegressorParameters.h"

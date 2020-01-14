@@ -65,6 +65,10 @@ public:
  *
  * Helper class to load a model from a generic format.
  *
+ * Unless the methods for loading a model with an explicit serialization are used,
+ * the default joint serialization of the model loaded will be a "normalized" joint serialization
+ * based on the default base link, see the iDynTree::createModelWithNormalizedJointNumbering function
+ * for more details.
  */
 class ModelLoader
 {

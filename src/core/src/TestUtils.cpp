@@ -47,7 +47,7 @@ void assertTrue(bool prop, std::string file, int line)
 
 void assertDoubleAreEqual(const double& val1, const double& val2, double tol, std::string file, int line)
 {
-    if( fabs(val1-val2) >= tol )
+    if( !(fabs(val1-val2) < tol) )
     {
        std::cerr << file << ":" << line << " : assertDoubleAreEqual failure: val1 is " << val1
                   << " while val2 is " << val2 << std::endl;

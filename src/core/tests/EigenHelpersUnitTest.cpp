@@ -34,14 +34,15 @@ void testSpatialVectors()
 }
 
 void testSpanToEigen(const Vector3& input) {
-    //Checks if compiles
     Vector3 randVec, check;
     getRandomVector(randVec);
     Span<double> spanCheck = make_span(check);
     toEigen(spanCheck) = toEigen(randVec);
+    ASSERT_EQUAL_VECTOR(randVec, check);
     toEigen(make_span(check)) = toEigen(randVec);
     toEigen(randVec) = toEigen(make_span(check));
     toEigen(check) = toEigen(make_span(input));
+    ASSERT_EQUAL_VECTOR(input, check);
 }
 
 int main()

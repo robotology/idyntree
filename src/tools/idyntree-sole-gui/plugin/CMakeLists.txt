@@ -4,10 +4,6 @@
  
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 
-include_directories(${YARP_INCLUDE_DIRS}
-                    ${GSL_INCLUDE_DIRS}
-                    ${ctrlLib_INCLUDE_DIRS})
-
 set(QtiDynTreeSoleGuiPlugin_SRCS
                              qticubskinguiplugin.cpp
                              qticubskinguiplugin_plugin.cpp

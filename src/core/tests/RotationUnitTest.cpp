@@ -63,6 +63,67 @@ void validateRPYRightTrivializedDerivative(const Rotation & R)
     }
 }
 
+void validateRPYRightTrivializedDerivativeRateOfChange(const Rotation & R, const Vector3 & eulerAngleRateOfChange)
+{
+    iDynTree::Vector3 rpy = R.asRPY();
+    Matrix3x3 DotRPYtoOmegaRateOfChange = Rotation::RPYRightTrivializedDerivativeRateOfChange(rpy(0),rpy(1),rpy(2),
+                                                                                              eulerAngleRateOfChange(0), eulerAngleRateOfChange(1),
+                                                                                              eulerAngleRateOfChange(2));
+
+    Matrix3x3 OmegaToDotRPYRateOfChange = Rotation::RPYRightTrivializedDerivativeInverseRateOfChange(rpy(0),rpy(1),rpy(2),
+                                                                                                     eulerAngleRateOfChange(0), eulerAngleRateOfChange(1),
+                                                                                                     eulerAngleRateOfChange(2));
+
+    Matrix3x3 OmegaToDotRPY = Rotation::RPYRightTrivializedDerivativeInverse(rpy(0),rpy(1),rpy(2));
+    Matrix3x3 DotRPYToOmega = Rotation::RPYRightTrivializedDerivative(rpy(0),rpy(1),rpy(2));
+
+    Matrix3x3 OmegaToDotRPYRateOfChangeCheck;
+    toEigen(OmegaToDotRPYRateOfChangeCheck) = -toEigen(OmegaToDotRPY) * toEigen(DotRPYtoOmegaRateOfChange) * toEigen(OmegaToDotRPY);
+
+    ASSERT_EQUAL_MATRIX(OmegaToDotRPYRateOfChangeCheck, OmegaToDotRPYRateOfChange);
+
+    Vector3 rpyRateOfChangePerturbedUp;
+    Vector3 rpyRateOfChangePerturbedDown;
+    Vector3 angularVelocity;
+    toEigen(angularVelocity) = toEigen(DotRPYToOmega) * toEigen(eulerAngleRateOfChange);
+
+    double numericalDerivStep = 1e-8;
+
+    Vector3 rpyUp;
+    Vector3 rpyDown;
+
+    toEigen(rpyUp) = toEigen(rpy) + toEigen(eulerAngleRateOfChange) * numericalDerivStep;
+    toEigen(rpyDown) = toEigen(rpy) - toEigen(eulerAngleRateOfChange) * numericalDerivStep;
+
+    Matrix3x3 DotRPYToOmegaUp = Rotation::RPYRightTrivializedDerivative(rpyUp(0),rpyUp(1),rpyUp(2));
+    Matrix3x3 DotRPYToOmegaDown = Rotation::RPYRightTrivializedDerivative(rpyDown(0),rpyDown(1),rpyDown(2));
+
+    for(size_t i=0; i < 3; i++)
+    {
+        rpyRateOfChangePerturbedUp = eulerAngleRateOfChange;
+        rpyRateOfChangePerturbedUp(i) = rpyRateOfChangePerturbedUp(i) + numericalDerivStep;
+        rpyRateOfChangePerturbedDown = eulerAngleRateOfChange;
+        rpyRateOfChangePerturbedDown(i) = rpyRateOfChangePerturbedDown(i) - numericalDerivStep;
+
+        Vector3 RPYNumSecondDev;
+        toEigen(RPYNumSecondDev) = (toEigen(rpyRateOfChangePerturbedUp) - toEigen(rpyRateOfChangePerturbedDown))/(2*numericalDerivStep);
+
+        Vector3 angularVelocityUp;
+        toEigen(angularVelocityUp) = toEigen(DotRPYToOmegaUp) * toEigen(rpyRateOfChangePerturbedUp);
+        Vector3 angularVelocityDown;
+        toEigen(angularVelocityDown) = toEigen(DotRPYToOmegaDown) * toEigen(rpyRateOfChangePerturbedDown);
+
+        Vector3 angularAccelerationNum;
+        toEigen(angularAccelerationNum) = (toEigen(angularVelocityUp) - toEigen(angularVelocityDown))/(2*numericalDerivStep);
+
+        Vector3 checkDoubleDotRPY;
+        toEigen(checkDoubleDotRPY) = toEigen(OmegaToDotRPYRateOfChange) * toEigen(angularVelocity)
+            + toEigen(OmegaToDotRPY) * toEigen(angularAccelerationNum);
+
+        ASSERT_EQUAL_VECTOR_TOL(checkDoubleDotRPY,RPYNumSecondDev,1e-4);
+    }
+}
+
 void validateQuaternionRightTrivializedDerivative(const Rotation & R)
 {
     double numericalDerivStep = 1e-8;
@@ -131,20 +192,24 @@ void validateQuaternionRightTrivializedDerivative(const Rotation & R)
     }
 }
 
-void validateAllTests(const Rotation & R)
+void validateAllTests(const Rotation & R, const Vector3 & eulerAngleRateOfChange)
 {
     validateRPYRightTrivializedDerivative(R);
     validateQuaternionRightTrivializedDerivative(R);
+    validateRPYRightTrivializedDerivativeRateOfChange(R, eulerAngleRateOfChange);
 }
 
 int main()
 {
-    // Check RPYRightTrivializedDerivative 
+    // Check RPYRightTrivializedDerivative
 
     Rotation R = iDynTree::getRandomRotation();
-    validateAllTests(R);
+    Vector3 eulerAngleRateOfChange;
+    iDynTree::getRandomVector(eulerAngleRateOfChange, -1.0, 1.0);
+    validateAllTests(R, eulerAngleRateOfChange);
     R = iDynTree::getRandomRotation();
-    validateAllTests(R);
-    
+    iDynTree::getRandomVector(eulerAngleRateOfChange, -1.0, 1.0);
+    validateAllTests(R,eulerAngleRateOfChange);
+
     return EXIT_SUCCESS;
 }

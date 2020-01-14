@@ -47,6 +47,7 @@ SpatialVectorSemantics<LinearVec3SemanticsT, AngularVec3SemanticsT>
          */
         SpatialVectorSemantics(LinearVec3SemanticsT & linearVec3, AngularVec3SemanticsT & angularVec3);
 
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         bool check_linear2angularConsistency(const LinearVec3SemanticsT & linearVec3, const AngularVec3SemanticsT & angularVec3);
 
         /**

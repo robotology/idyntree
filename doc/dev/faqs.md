@@ -25,23 +25,17 @@ test validating the functionality of the MATLAB interface will be automatically 
 ## How to run the Valgrind-based tests 
 [Valgrind MemCheck](http://valgrind.org/) is a tool to identify memory related software bugs (use of initialize memory, memory leaks, ...). To automatically run the iDynTree test suite under Valgrind, just enabled the `IDYNTREE_RUN_VALGRIND_TESTS` CMake option (together with the `IDYNTREE_COMPILE_TESTS` option). 
 
-## How to get notified if my code fails to compile or create a failure in some tests 
-iDynTree uses [Travis](https://travis-ci.org/robotology/idyntree) and [AppVeyor](https://ci.appveyor.com/project/robotology/idyntree) Continous Integration (CI) services
-to make sure that all code commited to the repository. To be notified if some of your commits
-failed to pass tests, just sign in [Travis](https://travis-ci.org/) and [AppVeyor](https://ci.appveyor.com/login)
-with your GitHub account, and you will automatically receive notifications if your commits cause a failure. 
-
 ## What are the things that needs to be done before merging a pull request?
-* Check if Travis and AppVeyor compiler and run the test without any failure.  
+* Check if the GitHub Actions jobs compiles and run the test without any failure.  
 
 ## How to add wrap a new class or function with SWIG 
-* Include the new header in [bindings/iDynTree.i](bindings/iDynTree.i) . 
+* Include the new header in [bindings/iDynTree.i](bindings/iDynTree.i) .  For a little more detailed overview, check [doc/generating-idyntree-matlab-bindings.md](../../doc/generating-idyntree-matlab-bindings.md) . 
   * Notice that the headers should be included two times, take inspiration from the headers already present to get the idea.
   * Remember to include the headers following the inheritance order of the classes. 
 * If you add a instantiated template, remember to add it to swig with the `%template` SWIG command. 
 * Regenerate the MATLAB bindings, following the instructions in https://github.com/robotology/idyntree#matlab-bindings-modifications . 
 * (Optional) Add a new matlab test testing the new code in `bindings/matlab/tests`. 
-  * The structure of tests in `bindings/matlab/tests` uses [MOxUnit](https://github.com/MOxUnit/MOxUnit) a unit test framework for Matlab and Octave. Please see the MOxUnit documentation and existing tests for understanding the structure of the tests. As the tests are run by `Travis` also on Octave, please make sure that your tests do not use Matlab-specific features.
+  * The structure of tests in `bindings/matlab/tests` uses [MOxUnit](https://github.com/MOxUnit/MOxUnit) a unit test framework for Matlab and Octave. Please see the MOxUnit documentation and existing tests for understanding the structure of the tests. As the tests are run by `GitHub Actions` also on Octave, please make sure that your tests do not use Matlab-specific features.
 * Run matlab tests with `ctest -VV -R matlab` in the build directory, and check that they are running file. 
 * Commit the updated version of the bindings by adding everything inside the `bindings/matlab` directory, with commit message `[bindings] update matlab bindings`. 
 

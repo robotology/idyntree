@@ -14,6 +14,7 @@
 #include <iDynTree/Core/VectorFixSize.h>
 #include <iDynTree/Core/Rotation.h>
 #include <iDynTree/Core/PrivateMotionForceVertorAssociations.h>
+#include <iDynTree/Core/Utils.h>
 
 #define GEOMVECTOR3SEMANTICS_TEMPLATE_HDR \
 template <class MotionForceSemanticsT>
@@ -41,7 +42,9 @@ namespace iDynTree
          * Constructors:
          */
         inline GeomVector3Semantics() {}
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         GeomVector3Semantics(int _body, int _refBody, int _coordinateFrame);
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         GeomVector3Semantics(const GeomVector3Semantics & other);
 
         void setToUnknown();
@@ -97,7 +100,9 @@ namespace iDynTree
         /**
          * Getters & setters
          */
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         const MotionForceSemanticsT& getSemantics() const;
+        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
         void setSemantics(MotionForceSemanticsT& _semantics);
 
         /**

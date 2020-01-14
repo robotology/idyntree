@@ -1,10 +1,17 @@
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
+# Copyright (C) 2018 Fondazione Istituto Italiano di Tecnologia
+#
+# Licensed under either the GNU Lesser General Public License v3.0 :
+# https://www.gnu.org/licenses/lgpl-3.0.html
+# or the GNU Lesser General Public License v2.1 :
+# https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+# at your option.
+
 macro(add_oc_test classname)
     set(testsrc ${classname}Test.cpp)
     set(testbinary ${classname}UnitTest)
     set(testname   UnitTest${classname})
     add_executable(${testbinary} ${testsrc})
-    target_include_directories(${testbinary} PRIVATE ${IDYNTREE_TREE_INCLUDE_DIRS} ${EIGEN3_INCLUDE_DIR})
+    target_include_directories(${testbinary} PRIVATE ${EIGEN3_INCLUDE_DIR})
     target_link_libraries(${testbinary} idyntree-model idyntree-optimalcontrol)
     add_test(NAME ${testname} COMMAND ${testbinary})
 
@@ -17,7 +24,21 @@ add_oc_test(ConstraintsGroup)
 add_oc_test(Integrators)
 add_oc_test(OCProblem)
 add_oc_test(MultipleShooting)
+add_oc_test(L2Norm)
 if (IDYNTREE_USES_IPOPT)
-    add_oc_test(Optimizer)
+    add_oc_test(IpoptInterface)
     add_oc_test(OptimalControlIpopt)
 endif()
+
+if (IDYNTREE_USES_OSQPEIGEN)
+    add_oc_test(LinearOCOsqp)
+endif()
+
+if (IDYNTREE_USES_ALGLIB)
+    add_oc_test(AlglibInterface)
+endif()
+
+if (IDYNTREE_USES_WORHP)
+    add_oc_test(WorhpInterface)
+endif()
+

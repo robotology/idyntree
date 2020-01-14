@@ -64,7 +64,7 @@ bool getVectorOfStringFromProperty(yarp::os::Property& prop, std::string key, st
     return true;
 }
 
-ObserverThread::ObserverThread(yarp::os::ResourceFinder& config, int period) : RateThread(period), mutex(1)
+ObserverThread::ObserverThread(yarp::os::ResourceFinder& config, int period) : RateThread(period)
 {
     yDebug("ObserverThread running at %g ms.", getRate());
 
@@ -248,6 +248,8 @@ bool ObserverThread::threadInit()
 
 void ObserverThread::run()
 {
+    std::lock_guard<std::mutex> guard(m_mutex);
+
     // Read encoders
     m_iencs->getEncoders(m_measuredEncodersInDeg.data());
 
@@ -432,6 +434,8 @@ void ObserverThread::drawPolygon(QPainter* qpainter, iDynTree::Polygon& poly)
 
 void ObserverThread::draw(QPainter* qpainter, int widthInPixels, int heightInPixels)
 {
+    std::lock_guard<std::mutex> guard(m_mutex);
+
     // The painter draws directly in the primary sole xy plane (the gui need to appropriatly set the world transform)
     double maxXvizInM = 0.03;
     double maxYvizInM = 0.05;

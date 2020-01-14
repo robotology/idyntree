@@ -109,6 +109,7 @@ include_directories(include/iDynTree/Core)
 set(libraryname idyntree-core)
 
 add_library(${libraryname} ${IDYNTREE_CORE_EXP_SOURCES} ${IDYNTREE_CORE_EXP_HEADERS} ${IDYNTREE_CORE_EXP_PRIVATE_INCLUDES})
+add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 
 if (DEFINED CMAKE_COMPILER_IS_GNUCXX)
   if(${CMAKE_COMPILER_IS_GNUCXX} AND ${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS 5)
@@ -140,10 +141,6 @@ install(TARGETS ${libraryname}
         PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Core/impl)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
-
-get_property(IDYNTREE_COMP_INCLUDE_DIRS TARGET ${libraryname} PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS ${IDYNTREE_COMP_INCLUDE_DIRS})
-
 
 if(IDYNTREE_COMPILE_TESTS)
     add_subdirectory(tests)

@@ -1,4 +1,4 @@
-iDynTree [![Build Status](https://travis-ci.org/robotology/idyntree.svg?branch=maste2013-r)](https://travis-ci.org/robotology/idyntree) [![Build status](https://ci.appveyor.com/api/projects/status/1uecfmyvxb2dujt9/branch/master?svg=true)](https://ci.appveyor.com/project/robotology/idyntree/branch/master) [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0) [![License: LGPL v2](https://img.shields.io/badge/License-LGPL%20v2-blue.svg)](https://www.gnu.org/licenses/lgpl-2.1)  [![ZenHub](https://img.shields.io/badge/Shipping_faster_with-ZenHub-435198.svg)](https://zenhub.com)
+iDynTree [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0) [![License: LGPL v2](https://img.shields.io/badge/License-LGPL%20v2-blue.svg)](https://www.gnu.org/licenses/lgpl-2.1)  [![ZenHub](https://img.shields.io/badge/Shipping_faster_with-ZenHub-435198.svg)](https://zenhub.com)
 ===========
 
 iDynTree is a library of robots dynamics algorithms for control, estimation and simulation.
@@ -35,10 +35,16 @@ but you can manually make sure that iDynTree searches or ignores a given depende
 - [Libxml2](http://xmlsoft.org/)
 
 ##### Optional
+- [Assimp](http://www.assimp.org/)
 - [IPOPT](https://projects.coin-or.org/Ipopt)
 - [Qt5](https://www.qt.io/)
 - [YARP](https://github.com/robotology/yarp)
 - [ICUB](https://github.com/robotology/icub-main)
+
+##### Optional for the optimal control part
+- [ALGLIB](https://github.com/S-Dafarra/alglib-cmake)
+- [OSQP](https://github.com/robotology/osqp-eigen)
+- [WORHP](https://worhp.de/)
 
 ##### Deprecated
 - [Kinematics and Dynamics Library](https://github.com/orocos/orocos_kinematics_dynamics)
@@ -162,12 +168,18 @@ for example because you modified some iDynTree classes, you can install the expe
 version of Swig with Matlab support from https://github.com/robotology-dependencies/swig/ (branch `matlab`) and then enable Matlab bindings generation with the `IDYNTREE_GENERATE_MATLAB` options.
 For more info on how to modify the matlab bindings, see https://github.com/robotology/idyntree/blob/master/doc/dev/faqs.md#how-to-add-wrap-a-new-class-or-function-with-swig .
 
+##### Matlab/Octave high level wrappers
+They are a collection of Matlab/Octave functions that wraps the functionalities of (mainly) the iDyntree class `KinDynComputations` into functions with a typical Matlab/Octave interface. The purpose of the high-level wrappers is to provide a simpler and easy-to-use interface for Matlab/Octave users who want to use iDyntree inside Matlab/Octave, also helping in designing code which is less error-prone and easier to debug (e.g. in case the interface of an iDyntree function will change in the future). More details and a complete list of the wrappers can be found in the [wrappers README](/bindings/matlab/+iDynTreeWrappers/README.md).
+
+**Usage**: the wrappers package is installed together with the iDyntree bindings when compiling iDyntree with option `IDYNTREE_USES_MATLAB` or `IDYNTREE_USES_OCTAVE` set to `ON`. The functions can be called from Matlab/Octave using the namespace `iDynTreeWrappers`, i.e. `iDynTreeWrappers.name_of_the_corresponding_iDynTree_method`.
 
 ## Tutorials
 | Topic  | C++ | Matlab | Python |
 |:------:|:---:|:------:|:------:|
 | Use of the [ExtWrenchesAndJointTorquesEstimator class](https://robotology.github.io/idyntree/master/classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html) for computing offset for FT sensors | NA | [examples/matlab/SixAxisFTOffsetEstimation/SixAxisFTOffsetEstimation.m](examples/matlab/SixAxisFTOffsetEstimation/SixAxisFTOffsetEstimation.m) | NA |
 | How to get the axis of a revolute joint expressed in a arbitary frame using the [KinDynComputations class](https://robotology.github.io/idyntree/master/classiDynTree_1_1KinDynComputations.html) | NA | [ examples/matlab/GetJointAxesInWorldFrame.m](examples/matlab/GetJointAxesInWorldFrame.m) | NA |
+| How to use the [InverseKinematics class](https://robotology.github.io/docs/idyntree/master/classiDynTree_1_1InverseKinematics.html) for the IK of an industrial fixed-base manipulator. | [examples/InverseKinematics/README.md](examples/InverseKinematics/README.md) | NA | NA |
+
 
 Are you interested in a tutorial on a specific feature or algorithm? Just [request it on an enhancement issue](https://github.com/robotology/idyntree/issues/new).
 
@@ -176,7 +188,7 @@ The documentation for the complete API of iDynTree is automatically extracted fr
 and is available at the URL : [https://robotology.github.io/idyntree/master/](https://robotology.github.io/idyntree/master/).
 The documentation generated from the `devel` branch is available at the URL : [https://robotology.github.io/idyntree/devel/](https://robotology.github.io/idyntree/devel/).
 
-## Announcements 
+## Announcements
 Announcements on new releases, API changes or other news are done on [`robotology/QA` GitHub repository](https://github.com/robotology/QA). You can watch that repository to get all the iDynTree-related announcements, that will always tagged with the `announcement` tag.
 
 ## Developer Documentation
@@ -208,8 +220,8 @@ The initial development of iDynTree was supported by the FP7 EU projects [CoDyCo
 
 The development is now supported by the [Dynamic Interaction Control research line](https://www.iit.it/research/lines/dynamic-interaction-control) at the [Italian Institute of Technology](https://www.iit.it/).
 
-## License 
-iDynTree is licensed under either the GNU Lesser General Public License v3.0 : 
+## License
+iDynTree is licensed under either the GNU Lesser General Public License v3.0 :
 
 https://www.gnu.org/licenses/lgpl-3.0.html
 

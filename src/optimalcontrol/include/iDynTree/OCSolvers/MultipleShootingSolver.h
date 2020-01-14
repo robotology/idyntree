@@ -18,7 +18,7 @@
 #define IDYNTREE_OPTIMALCONTROL_MULTIPLESHOOTINGSOLVER_H
 
 #include <iDynTree/OptimalControlSolver.h>
-#include <iDynTree/OptimizationProblem.h>
+#include <iDynTree/TimeVaryingObject.h>
 #include <iDynTree/Optimizer.h>
 
 #include <vector>
@@ -42,86 +42,6 @@ namespace iDynTree {
          * \ingroup iDynTreeExperimental
          */
 
-        class MultipleShootingTranscription : public optimization::OptimizationProblem {
-
-            friend class MultipleShootingSolver;
-
-            MultipleShootingTranscription();
-
-            MultipleShootingTranscription(const std::shared_ptr<OptimalControlProblem> problem, const std::shared_ptr<Integrator> integrationMethod);
-
-            MultipleShootingTranscription(const MultipleShootingTranscription& other) = delete;
-
-            size_t setControlMeshPoints();
-
-            bool preliminaryChecks();
-
-            bool setMeshPoints();
-
-            bool setOptimalControlProblem(const std::shared_ptr<OptimalControlProblem> problem);
-
-            bool setIntegrator(const std::shared_ptr<Integrator> integrationMethod);
-
-            bool setStepSizeBounds(const double minStepSize, const double maxStepsize);
-
-            bool setControlPeriod(double period);
-
-            bool setAdditionalStateMeshPoints(const std::vector<double>& stateMeshes);
-
-            bool setAdditionalControlMeshPoints(const std::vector<double>& controlMeshes);
-
-            void setPlusInfinity(double plusInfinity);
-
-            void setMinusInfinity(double minusInfinity);
-
-            bool setInitialState(const VectorDynSize &initialState);
-
-            bool getTimings(std::vector<double>& stateEvaluations, std::vector<double>& controlEvaluations);
-
-            bool getSolution(std::vector<VectorDynSize>& states, std::vector<VectorDynSize>& controls);
-
-            class MultipleShootingTranscriptionPimpl;
-            MultipleShootingTranscriptionPimpl *m_pimpl;
-
-        public:
-
-            virtual ~MultipleShootingTranscription() override;
-
-            virtual bool prepare() override;
-
-            virtual void reset() override;
-
-            virtual unsigned int numberOfVariables() override;
-
-            virtual unsigned int numberOfConstraints() override;
-
-            virtual bool getConstraintsBounds(VectorDynSize& constraintsLowerBounds, VectorDynSize& constraintsUpperBounds) override;
-
-            virtual bool getVariablesUpperBound(VectorDynSize& variablesUpperBound) override;
-
-            virtual bool getVariablesLowerBound(VectorDynSize& variablesLowerBound) override;
-
-            virtual bool getConstraintsJacobianInfo(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns) override;
-
-            virtual bool getHessianInfo(std::vector<size_t>& nonZeroElementRows, std::vector<size_t>& nonZeroElementColumns) override;
-
-            virtual bool setVariables(const VectorDynSize& variables) override;
-
-            virtual bool evaluateCostFunction(double& costValue) override;
-
-            virtual bool evaluateCostGradient(VectorDynSize& gradient) override;
-
-            virtual bool evaluateCostHessian(MatrixDynSize& hessian) override; //using dense matrices, but the sparsity pattern is still obtained
-
-            virtual bool evaluateConstraints(VectorDynSize& constraints) override;
-
-            virtual bool evaluateConstraintsJacobian(MatrixDynSize& jacobian) override; //using dense matrices, but the sparsity pattern is still obtained
-
-            virtual bool evaluateConstraintsHessian(const VectorDynSize& constraintsMultipliers, MatrixDynSize& hessian) override; //using dense matrices, but the sparsity pattern is still obtained
-
-        };
-
-
         class MultipleShootingSolver : public OptimalControlSolver {
 
         public:
@@ -143,7 +63,12 @@ namespace iDynTree {
 
             bool setInitialState(const VectorDynSize &initialState);
 
+            bool setGuesses(std::shared_ptr<optimalcontrol::TimeVaryingVector> stateGuesses,
+                            std::shared_ptr<optimalcontrol::TimeVaryingVector> controlGuesses);
+
             bool getTimings(std::vector<double>& stateEvaluations, std::vector<double>& controlEvaluations);
+
+            bool getPossibleTimings(std::vector<double>& stateEvaluations, std::vector<double>& controlEvaluations);
 
             virtual bool solve() override;
 
@@ -151,8 +76,18 @@ namespace iDynTree {
 
             void resetTranscription();
 
+            void addConstraintsHessianRegularization(double regularization);
+
+            void disableConstraintsHessianRegularization();
+
+            void addCostsHessianRegularization(double regularization);
+
+            void disableCostsHessianRegularization();
 
         private:
+
+            class MultipleShootingTranscription;
+
             std::shared_ptr<MultipleShootingTranscription> m_transcription;
             std::shared_ptr<optimization::Optimizer> m_optimizer;
         };

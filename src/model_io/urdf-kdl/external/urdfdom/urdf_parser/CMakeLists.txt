@@ -1,14 +1,5 @@
 include_directories(include)
 
-get_property(IDYNTREE_TREE_INCLUDE_DIRS GLOBAL PROPERTY IDYNTREE_TREE_INCLUDE_DIRS)
-include_directories(SYSTEM ${IDYNTREE_TREE_INCLUDE_DIRS})
-
-# share headers with all iDynTree targes
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/urdf_parser/include")
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/../urdfdom_headers/urdf_model/include")
-set_property(GLOBAL APPEND PROPERTY IDYNTREE_TREE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/../urdfdom_headers/urdf_exception/include")
-
-
 #add_library(iDynTree_priv_urdfdom_world SHARED src/pose.cpp src/model.cpp src/link.cpp src/joint.cpp src/world.cpp)
 #target_link_libraries(iDynTree_priv_urdfdom_world ${TinyXML_LIBRARIES})
 #set_target_properties(iDynTree_priv_urdfdom_world PROPERTIES SOVERSION 0.3)

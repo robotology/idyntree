@@ -19,6 +19,7 @@
 #include <iDynTree/Model/JointState.h>
 
 #include <iDynTree/Core/ArticulatedBodyInertia.h>
+#include <iDynTree/Core/SpatialInertia.h>
 #include <iDynTree/Core/SpatialMomentum.h>
 #include <iDynTree/Core/EigenHelpers.h>
 
@@ -476,6 +477,61 @@ bool ArticulatedBodyAlgorithm(const Model& model,
     return true;
 }
 
+bool InverseDynamicsInertialParametersRegressor(const iDynTree::Model & model,
+                                                const iDynTree::Traversal & traversal,
+                                                const iDynTree::LinkPositions& referenceFrame_H_link,
+                                                const iDynTree::LinkVelArray & linksVel,
+                                                const iDynTree::LinkAccArray & linksProperAcc,
+                                                      iDynTree::MatrixDynSize & baseForceAndJointTorquesRegressor)
+{
+    baseForceAndJointTorquesRegressor.resize(6+model.getNrOfDOFs(), 10*model.getNrOfLinks());
+    baseForceAndJointTorquesRegressor.zero();
+
+    // Eigen map of the input matrix
+    iDynTreeEigenMatrixMap regressor = iDynTree::toEigen(baseForceAndJointTorquesRegressor);
+
+    Matrix6x10 netForceTorqueRegressor_i;
+
+    for (TraversalIndex l =(TraversalIndex)traversal.getNrOfVisitedLinks()-1; l >= 0; l-- ) {
+
+        // In this cycle, we compute the contribution of the inertial parameters of link to the inverse dynamics results
+        LinkConstPtr link = traversal.getLink(l);
+        LinkIndex lnkIdx = link->getIndex();
+
+        // Each link affects the dynamics of the joints from itself to the base
+        netForceTorqueRegressor_i = SpatialInertia::momentumDerivativeRegressor(linksVel(lnkIdx),
+                                                                                linksProperAcc(lnkIdx));
+
+        iDynTreeEigenMatrix linkRegressor = iDynTree::toEigen(netForceTorqueRegressor_i);
+
+        // Base dynamics
+        // The base dynamics is expressed with the orientation of the base and with respect to the base origin
+        regressor.block(0,(int)(10*lnkIdx),6,10) =
+            toEigen(referenceFrame_H_link(lnkIdx).asAdjointTransformWrench())*linkRegressor;
+
+        LinkIndex visitedLinkIdx  = lnkIdx;
+
+        while (visitedLinkIdx != traversal.getBaseLink()->getIndex())
+        {
+            LinkIndex parentLinkIdx = traversal.getParentLinkFromLinkIndex(visitedLinkIdx)->getIndex();
+            IJointConstPtr joint = traversal.getParentJointFromLinkIndex(visitedLinkIdx);
+
+            size_t dofOffset = joint->getDOFsOffset();
+            for(int i=0; i < joint->getNrOfDOFs(); i++)
+            {
+                iDynTree::SpatialMotionVector S = joint->getMotionSubspaceVector(i,visitedLinkIdx,parentLinkIdx);
+                Transform visitedLink_H_link = referenceFrame_H_link(visitedLinkIdx).inverse()*referenceFrame_H_link(lnkIdx);
+                regressor.block(6+dofOffset+i,10*lnkIdx,1,10) =
+                    toEigen(S).transpose()*(toEigen(visitedLink_H_link.asAdjointTransformWrench())*linkRegressor);
+            }
+
+            visitedLinkIdx = parentLinkIdx;
+        }
+
+    }
+
+    return true;
+}
 
 
 }
