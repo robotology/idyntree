@@ -2,8 +2,8 @@
 #define IDYNTREE_PLOTTER_CHARTSMANAGER_H
 
 
-#include <ChartsService.h>
-#include <RealTimeStreamData.h>
+#include <thrifts/ChartsService.h>
+#include <thrifts/RealTimeStreamData.h>
 #include <yarp/os/Port.h>
 #include <yarp/os/BufferedPort.h>
 #include <yarp/sig/Vector.h>
