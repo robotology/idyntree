@@ -196,10 +196,11 @@ jobs:
 
         
     - name: Check build if some dependencies are not enabled [Ubuntu]
+      if: matrix.os == 'ubuntu-latest'
       shell: bash
       run: |
         cd build
-        for missing_dep in Qt5 IPOPT ASSIMP; do
+        for missing_dep in ASSIMP Qt5 IPOPT; do
             echo "Testing ${missing_dep} as missing dependency."
             # Deselect missing dependency and build
             cmake -DIDYNTREE_USES_${missing_dep}:BOOL=OFF .
