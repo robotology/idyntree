@@ -14,7 +14,6 @@
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
 #include <iDynTree/Core/Utils.h>
-#include <iDynTree/Core/EigenHelpers.h>
 #include <vector>
 
 namespace iDynTree
