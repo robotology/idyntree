@@ -193,3 +193,17 @@ jobs:
         cd build
         cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install .. 
         cmake --build . --config ${{ matrix.build_type }}
+
+        
+    - name: Check build if some dependencies are not enabled [Ubuntu]
+      shell: bash
+      run: |
+        cd build
+        for missing_dep in Qt5 IPOPT ASSIMP; do
+            echo "Testing ${missing_dep} as missing dependency."
+            # Deselect missing dependency and build
+            cmake -DIDYNTREE_USES_${missing_dep}:BOOL=OFF .
+            cmake --build . --config ${{ matrix.build_type }}
+            # Enable again dependency 
+            cmake -DIDYNTREE_USES_${missing_dep}:BOOL=ON .
+        done
