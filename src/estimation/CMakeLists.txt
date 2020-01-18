@@ -6,8 +6,6 @@
 # https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 # at your option.
 
-project(iDynTree_Estimation CXX)
-
 set(IDYNTREE_ESTIMATION_HEADERS include/iDynTree/Estimation/BerdyHelper.h
                                 include/iDynTree/Estimation/ExternalWrenchesEstimation.h
                                 include/iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h

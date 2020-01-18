@@ -1,7 +1,3 @@
-cmake_minimum_required(VERSION 3.0)
-
-project(iDynTreePlotter)
-
 find_package(Qt5 COMPONENTS Widgets Charts QUIET)
 if (${Qt5Charts_FOUND})
 
@@ -11,17 +7,17 @@ if (${Qt5Charts_FOUND})
                   HEADERS_VAR THRIFT_HEADERS
                   INCLUDE_DIRS_VAR THRIFT_INCLUDE_DIRS)
 
-  add_library(${PROJECT_NAME}-service STATIC ${THRIFT_SOURCES} ${THRIFT_HEADERS})
-  target_include_directories(${PROJECT_NAME}-service SYSTEM PUBLIC ${THRIFT_INCLUDE_DIRS})
-  target_link_libraries(${PROJECT_NAME}-service YARP::YARP_init YARP::YARP_OS YARP::YARP_sig)
+  add_library(iDynTreePlotter-service STATIC ${THRIFT_SOURCES} ${THRIFT_HEADERS})
+  target_include_directories(iDynTreePlotter-service SYSTEM PUBLIC ${THRIFT_INCLUDE_DIRS})
+  target_link_libraries(iDynTreePlotter-service YARP::YARP_init YARP::YARP_OS YARP::YARP_sig)
   
   
   set(SOURCES src/main.cpp src/ChartsManager.cpp src/ChartsManagerWindow.cpp)
   set(HEADERS include/ChartsManager.h include/ChartsManagerWindow.h)
   
-  add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
-  target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
-  target_link_libraries(${PROJECT_NAME} Qt5::Charts Qt5::Widgets
-                                        ${PROJECT_NAME}-service)
+  add_executable(iDynTreePlotter ${SOURCES} ${HEADERS})
+  target_include_directories(iDynTreePlotter PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+  target_link_libraries(iDynTreePlotter Qt5::Charts Qt5::Widgets
+                                        iDynTreePlotter-service)
   
 endif()
