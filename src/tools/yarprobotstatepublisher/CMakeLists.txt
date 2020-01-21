@@ -7,7 +7,7 @@ add_executable(yarprobotstatepublisher
     src/main.cpp
     src/robotstatepublisher.cpp)
 
-target_include_directories(yarprobotstatepublisher PRIVATE ${PROJECT_SOURCE_DIR}/include)
+target_include_directories(yarprobotstatepublisher PRIVATE include)
 
 target_link_libraries(yarprobotstatepublisher
     YARP::YARP_init
