@@ -9,6 +9,7 @@
  */
 
 #include <iDynTree/Estimation/ExtendedKalmanFilter.h>
+#include <iDynTree/Core/EigenHelpers.h>
 
 iDynTree::DiscreteExtendedKalmanFilterHelper::DiscreteExtendedKalmanFilterHelper()
 {
