@@ -6,8 +6,6 @@
 # https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 # at your option.
 
-project(iDynTree_HighLevel CXX)
-
 set(IDYNTREE_HIGH_LEVEL_HEADERS include/iDynTree/KinDynComputations.h)
 
 set(IDYNTREE_HIGH_LEVEL_SOURCES src/KinDynComputations.cpp)

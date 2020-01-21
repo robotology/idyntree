@@ -6,8 +6,6 @@
 # https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 # at your option.
 
-project(iDynTree_ICUB CXX)
-
 SET(iDynTree_ICUB_source src/iKinConversions.cpp
                          src/skinDynLibConversions.cpp)
 

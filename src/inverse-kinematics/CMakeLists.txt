@@ -1,7 +1,3 @@
-cmake_minimum_required(VERSION 2.8.12)
-
-project(iDynTree_InverseKinematics CXX)
-
 set(libraryname idyntree-inverse-kinematics)
 
 set(IDYN_TREE_IK_SOURCES src/ConvexHullHelpers.cpp

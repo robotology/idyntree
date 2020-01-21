@@ -6,10 +6,6 @@
 # https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 # at your option.
 
-project(iDynTree_ModelIO_XML CXX)
-
-find_package(LibXml2 REQUIRED)
-
 set(IDYNTREE_MODELIO_XML_HEADERS include/iDynTree/XMLParser.h
                                  include/iDynTree/XMLElement.h
                                  include/iDynTree/XMLAttribute.h

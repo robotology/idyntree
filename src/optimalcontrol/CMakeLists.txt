@@ -6,10 +6,6 @@
 # https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 # at your option.
 
-cmake_minimum_required(VERSION 3.0)
-
-project(idyntree_optimalcontrol)
-
 set(libraryname idyntree-optimalcontrol)
 
 
