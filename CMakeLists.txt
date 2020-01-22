@@ -8,7 +8,8 @@
 
 cmake_minimum_required(VERSION 3.5)
 
-project(iDynTree C CXX)
+project(iDynTree VERSION 1.0.100
+                 LANGUAGES C CXX)
 
 # Disable in source build, unless Eclipse is used
 if( ("${PROJECT_SOURCE_DIR}" STREQUAL "${PROJECT_BINARY_DIR}") AND
@@ -21,12 +22,7 @@ if( ("${PROJECT_SOURCE_DIR}" STREQUAL "${PROJECT_BINARY_DIR}") AND
                        "you need to remove CMakeCache.txt and CMakeFiles/ as well.")
 endif()
 
-set(VARS_PREFIX "iDynTree")
-
-set(${VARS_PREFIX}_MAJOR_VERSION 1)
-set(${VARS_PREFIX}_MINOR_VERSION 0)
-set(${VARS_PREFIX}_PATCH_VERSION 1)
-set(${VARS_PREFIX}_VERSION ${${VARS_PREFIX}_MAJOR_VERSION}.${${VARS_PREFIX}_MINOR_VERSION}.${${VARS_PREFIX}_PATCH_VERSION})
+set(VARS_PREFIX "${PROJECT_NAME}")
 
 # Pick up our CMake scripts - they are all in the cmake subdirectory.
 set(IDYNTREE_MODULE_DIR ${PROJECT_SOURCE_DIR}/cmake)
