@@ -6,8 +6,6 @@
 # https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 # at your option.
 
-project(iDynTree_Model CXX)
-
 set(IDYNTREE_MODEL_HEADERS include/iDynTree/Model/ContactWrench.h
                            include/iDynTree/Model/DenavitHartenberg.h
                            include/iDynTree/Model/FixedJoint.h
