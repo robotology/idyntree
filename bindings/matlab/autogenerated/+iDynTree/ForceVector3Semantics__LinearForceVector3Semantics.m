@@ -7,24 +7,24 @@ classdef ForceVector3Semantics__LinearForceVector3Semantics < iDynTree.GeomVecto
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(481, varargin{:});
+        tmp = iDynTreeMEX(487, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(484, self);
+        iDynTreeMEX(490, self);
         self.SwigClear();
       end
     end
   end
   methods(Static)
     function varargout = compose(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(482, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(488, varargin{:});
     end
     function varargout = inverse(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(483, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(489, varargin{:});
     end
   end
 end

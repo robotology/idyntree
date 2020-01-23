@@ -1,3 +1,3 @@
 function varargout = isLinkBerdyDynamicVariable(varargin)
-  [varargout{1:nargout}] = iDynTreeMEX(1572, varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(1578, varargin{:});
 end
