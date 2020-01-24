@@ -9,41 +9,41 @@ classdef LinkUnknownWrenchContacts < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1511, varargin{:});
+        tmp = iDynTreeMEX(1517, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = clear(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1512, self, varargin{:});
-    end
-    function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1513, self, varargin{:});
-    end
-    function varargout = getNrOfContactsForLink(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1514, self, varargin{:});
-    end
-    function varargout = setNrOfContactsForLink(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1515, self, varargin{:});
-    end
-    function varargout = addNewContactForLink(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1516, self, varargin{:});
-    end
-    function varargout = addNewContactInFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1517, self, varargin{:});
-    end
-    function varargout = addNewUnknownFullWrenchInFrameOrigin(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1518, self, varargin{:});
     end
-    function varargout = contactWrench(self,varargin)
+    function varargout = resize(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1519, self, varargin{:});
     end
-    function varargout = toString(self,varargin)
+    function varargout = getNrOfContactsForLink(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1520, self, varargin{:});
+    end
+    function varargout = setNrOfContactsForLink(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1521, self, varargin{:});
+    end
+    function varargout = addNewContactForLink(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1522, self, varargin{:});
+    end
+    function varargout = addNewContactInFrame(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1523, self, varargin{:});
+    end
+    function varargout = addNewUnknownFullWrenchInFrameOrigin(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1524, self, varargin{:});
+    end
+    function varargout = contactWrench(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1525, self, varargin{:});
+    end
+    function varargout = toString(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1526, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1521, self);
+        iDynTreeMEX(1527, self);
         self.SwigClear();
       end
     end

@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Added `bindings` for `InverseKinematics` (https://github.com/robotology/idyntree/pull/633)
+
 ### Fixed 
 - Remove spurious inclusion of Eigen headers in ExtendedKalmanFilter.h public header, that could create probles when using that header in a downstream project that does not use Eigen (https://github.com/robotology/idyntree/pull/639).
 

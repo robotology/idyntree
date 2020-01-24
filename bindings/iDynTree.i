@@ -136,6 +136,10 @@
 // Visualization
 #include "iDynTree/Visualizer.h"
 
+// Inverse Kinematics
+#include "iDynTree/ConvexHullHelpers.h"
+#include "iDynTree/InverseKinematics.h"
+
 // Legacy high level interfaces
 #include "iDynTree/HighLevel/DynamicsComputations.h"
 
@@ -344,6 +348,10 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 
 // Visualization
 %include "iDynTree/Visualizer.h"
+
+// Inverse Kinematics
+%include "iDynTree/ConvexHullHelpers.h"
+%include "iDynTree/InverseKinematics.h"
 
 // Legacy high level interfaces
 %include "iDynTree/HighLevel/DynamicsComputations.h"
