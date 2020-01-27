@@ -189,6 +189,36 @@ bool VectorDynSize::setVal(const unsigned int index, const double new_el)
     return true;
 }
 
+const double* VectorDynSize::begin() const noexcept
+{
+    return this->m_data;
+}
+
+const double* VectorDynSize::end() const noexcept
+{
+    return this->m_data + this->m_size;
+}
+
+const double* VectorDynSize::cbegin() const noexcept
+{
+    return this->m_data;
+}
+
+const double* VectorDynSize::cend() const noexcept
+{
+    return this->m_data + this->m_size;
+}
+
+double* VectorDynSize::begin() noexcept
+{
+    return this->m_data;
+}
+
+double* VectorDynSize::end() noexcept
+{
+    return this->m_data + this->m_size;
+}
+
 void VectorDynSize::changeCapacityAndCopyData(const unsigned int _newCapacity)
 {
     //Corner case: zero capacity
