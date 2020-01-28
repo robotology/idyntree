@@ -52,7 +52,7 @@ if(NOT IDYNTREE_ONLY_DOCS)
     # add the actual components of the library
     add_subdirectory(src)
 
-    # List exported dependencies
+    # List exported CMake package dependencies
     set(_IDYNTREE_EXPORTED_DEPENDENCIES "")
     if(IDYNTREE_USES_YARP)
         list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES YARP)
@@ -64,6 +64,13 @@ if(NOT IDYNTREE_ONLY_DOCS)
         list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES orocos_kdl)
     endif()
 
+    # List exported CMake package dependencies when the library is compiled as static
+    set(_IDYNTREE_EXPORTED_DEPENDENCIES_ONLY_STATIC "")
+    list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES_ONLY_STATIC LibXml2)
+    if(IDYNTREE_USES_OSQPEIGEN)
+        list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES_ONLY_STATIC OsqpEigen)
+    endif()
+
     include(InstallBasicPackageFiles)
     install_basic_package_files(iDynTree VARS_PREFIX ${VARS_PREFIX}
                                          VERSION ${${VARS_PREFIX}_VERSION}
@@ -71,7 +78,8 @@ if(NOT IDYNTREE_ONLY_DOCS)
                                          TARGETS_PROPERTY ${VARS_PREFIX}_TARGETS
                                          NO_CHECK_REQUIRED_COMPONENTS_MACRO
                                          ENABLE_COMPATIBILITY_VARS
-                                         DEPENDENCIES ${_IDYNTREE_EXPORTED_DEPENDENCIES})
+                                         DEPENDENCIES ${_IDYNTREE_EXPORTED_DEPENDENCIES}
+                                         PRIVATE_DEPENDENCIES ${_IDYNTREE_EXPORTED_DEPENDENCIES_ONLY_STATIC})
 
     include(AddUninstallTarget)
 

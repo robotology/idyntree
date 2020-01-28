@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed 
 - Remove spurious inclusion of Eigen headers in ExtendedKalmanFilter.h public header, that could create probles when using that header in a downstream project that does not use Eigen (https://github.com/robotology/idyntree/pull/639).
+- Added find_dependency(OsqpEigen) and find_dependency(LibXml2) when iDynTree is compiled as a static library, fixing the use of iDynTree on Windows (https://github.com/robotology/idyntree/pull/642).
+
+### Changed
+- To reduce the possible unexpected problems, the automatic set of the `IDYNTREE_USES_<pkg>` CMake variable when the `<pkg>` CMake package is available in the system has  been removed for Irrlicht and WORHP, as it was already disabled for ASSIMP and ALGLIB (https://github.com/robotology/idyntree/pull/642). To use this dependencies it is now compulsory to set manually the `IDYNTREE_USES_<pkg>` variable to `ON`.
 
 ## [1.0.1] - 2020-01-14
 
