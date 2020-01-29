@@ -71,6 +71,48 @@ namespace iDynTree
 
         bool setVal(const unsigned int index, const double new_el);
 
+        /**
+         * Returns a const iterator to the beginning of the vector
+         * @note At the moment iterator is implemented as a pointer, it may change in the future.
+         * For this reason it should not be used as a pointer to the data, use data() instead.
+         */
+        const double* begin() const noexcept;
+
+        /**
+         * Returns a const iterator to the beginning of the vector
+         * @note At the moment iterator is implemented as a pointer, it may change in the future.
+         * For this reason it should not be used as a pointer to the data, use data() instead.
+         */
+        const double* end() const noexcept;
+
+        /**
+         * Returns a const iterator to the beginning of the vector
+         * @note At the moment iterator is implemented as a pointer, it may change in the future.
+         * For this reason it should not be used as a pointer to the data, use data() instead.
+         */
+        const double* cbegin() const noexcept;
+
+        /**
+         * Returns a const iterator to the beginning of the vector
+         * @note At the moment iterator is implemented as a pointer, it may change in the future.
+         * For this reason it should not be used as a pointer to the data, use data() instead.
+         */
+        const double* cend() const noexcept;
+
+        /**
+         * Returns a iterator to the beginning of the vector
+         * @note At the moment iterator is implemented as a pointer, it may change in the future.
+         * For this reason it should not be used as a pointer to the data, use data() instead.
+         */
+        double* begin() noexcept;
+
+        /**
+         * Returns a iterator to the beginning of the vector
+         * @note At the moment iterator is implemented as a pointer, it may change in the future.
+         * For this reason it should not be used as a pointer to the data, use data() instead.
+         */
+        double* end() noexcept;
+
         unsigned int size() const;
 
         ///@}
@@ -187,6 +229,42 @@ namespace iDynTree
     const double* VectorFixSize<VecSize>::data() const
     {
         return this->m_data;
+    }
+
+    template<unsigned int VecSize>
+    const double* VectorFixSize<VecSize>::begin() const noexcept
+    {
+        return this->m_data;
+    }
+
+    template<unsigned int VecSize>
+    const double* VectorFixSize<VecSize>::end() const noexcept
+    {
+        return this->m_data + VecSize;
+    }
+
+    template<unsigned int VecSize>
+    const double* VectorFixSize<VecSize>::cbegin() const noexcept
+    {
+        return this->m_data;
+    }
+
+    template<unsigned int VecSize>
+    const double* VectorFixSize<VecSize>::cend() const noexcept
+    {
+        return this->m_data + VecSize;
+    }
+
+    template <unsigned int VecSize>
+    double *VectorFixSize<VecSize>::begin() noexcept
+    {
+        return this->m_data;
+    }
+
+    template<unsigned int VecSize>
+    double* VectorFixSize<VecSize>::end() noexcept
+    {
+        return this->m_data + VecSize;
     }
 
     template<unsigned int VecSize>
