@@ -295,13 +295,13 @@ bool BerdyHelper::initSensorsMeasurements()
     if (m_options.includeCoMAccelerometerAsSensorInTask1)
     {
         task1BerdySensorTypeOffsets.comAccelerationOffset = m_task1_nrOfSensorsMeasurements;
-        m_task1_nrOfSensorsMeasurements += 3;
+        m_task1_nrOfSensorsMeasurements += 6;
     }
 
     if (m_options.includeCoMAccelerometerAsSensorInTask2)
     {
-        task1BerdySensorTypeOffsets.comAccelerationOffset = m_task1_nrOfSensorsMeasurements;
-        m_task1_nrOfSensorsMeasurements += 3;
+        task1BerdySensorTypeOffsets.comAccelerationOffset = m_nrOfSensorsMeasurements;
+        m_nrOfSensorsMeasurements += 6;
     }
 
     //Create sensor ordering vector
@@ -764,7 +764,7 @@ IndexRange BerdyHelper::getRangeCoMAccelerometerSensorVariable(const BerdySensor
     }
 
     // Set sensor size and offset
-    ret.size = 3;
+    ret.size = 6;
 
     if (task1) {
         ret.offset = task1BerdySensorTypeOffsets.comAccelerationOffset;
@@ -1295,19 +1295,18 @@ bool BerdyHelper::computeTask1SensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
             IndexRange netExternalWrenchSensor = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR,
                                                                                   idx, true);
 
-            iDynTree::Rotation base_R_link = base_H_links(idx).getRotation();
-            iDynTree::Matrix3x3 base_R_link_M33;
-            iDynTree::toEigen(base_R_link_M33) = iDynTree::toEigen(base_R_link);
+            // TODO: Ensure that base_H_links is correctly updatwd after the forward kinematics
+            Transform base_X_link = base_H_links(idx);
 
             // Get link to base rotation
             task1_matrixYElements.addSubMatrix(comAccelerometerRange.offset,
                                                netExternalWrenchSensor.offset,
-                                               base_R_link_M33);
+                                               base_X_link.asAdjointTransformWrench());
 
         }
 
 
-        // bY for the com acceleratio sensor is zeor
+        // bY for the com acceleration sensor is zero
     }
 
     task1_Y.setFromTriplets(task1_matrixYElements);
@@ -1633,19 +1632,18 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
             IndexRange netExternalWrenchSensor = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR,
                                                                                   idx, false);
 
-            iDynTree::Rotation base_R_link = base_H_links(idx).getRotation();
-            iDynTree::Matrix3x3 base_R_link_M33;
-            iDynTree::toEigen(base_R_link_M33) = iDynTree::toEigen(base_R_link);
+            // TODO: Ensure that base_H_links is correctly updated after the forward kinematics
+            Transform base_X_link = base_H_links(idx);
 
             // Get link to base rotation
             matrixYElements.addSubMatrix(comAccelerometerRange.offset,
                                          netExternalWrenchSensor.offset,
-                                         base_R_link_M33);
+                                         base_X_link.asAdjointTransformWrench());
 
         }
 
 
-        // bY for the com acceleratio sensor is zeor
+        // bY for the com acceleration sensor is zero
     }
 
     Y.setFromTriplets(matrixYElements);
