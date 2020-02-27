@@ -300,7 +300,7 @@ bool BerdyHelper::initSensorsMeasurements()
 
     if (m_options.includeCoMAccelerometerAsSensorInTask2)
     {
-        task1BerdySensorTypeOffsets.comAccelerationOffset = m_nrOfSensorsMeasurements;
+        berdySensorTypeOffsets.comAccelerationOffset = m_nrOfSensorsMeasurements;
         m_nrOfSensorsMeasurements += 6;
     }
 
