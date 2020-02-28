@@ -413,6 +413,12 @@ class BerdyHelper
      */
 
     /**
+     * Base transform
+     */
+    Transform m_baseTransform;
+
+
+    /**
      * Joint positions
      */
     JointPosDoubleArray m_jointPos;
@@ -551,7 +557,7 @@ class BerdyHelper
      * LinkPositions variable containing the transforms between the base and the model links
      *
      */
-    LinkPositions base_H_links;
+    LinkPositions world_H_links;
 
 
 public:
@@ -823,6 +829,34 @@ public:
      * @return true if all went ok, false otherwise.
      */
     bool updateKinematicsFromFloatingBase(const JointPosDoubleArray  & jointPos,
+                                          const JointDOFsDoubleArray & jointVel,
+                                          const FrameIndex & floatingFrame,
+                                          const Vector3 & angularVel);
+
+    /**
+      * @name Methods to submit the input data for dynamics computations.
+      */
+    //@{
+
+    /**
+     * Set the kinematic information necessary for the dynamics estimation using the
+     * angular velocity information of a floating frame.
+     *
+     * \note This method cannot be used if the selected BerdyVariant is ORIGINAL_BERDY_FIXED_BASE.
+     * \note we not require to give the linear velocity of floating base because the dynamics equations
+     *       are invariant with respect to an offset in linear velocity. This convenient to avoid
+     *       any dependency on any prior floating base estimation.
+     *
+     * @param[in] baseTransform the transformation from floating base to world
+     * @param[in] jointPos the position of the joints of the model.
+     * @param[in] jointVel the velocities of the joints of the model.
+     * @param[in] floatingFrame the index of the frame for which kinematic information is provided.
+     * @param[in] angularVel angular velocity (wrt to any inertial frame) of the specified floating frame,
+     *                       expressed in the specified floating frame orientation.
+     * @return true if all went ok, false otherwise.
+     */
+    bool updateKinematicsFromFloatingBase(const Transform & baseTransform,
+                                          const JointPosDoubleArray  & jointPos,
                                           const JointDOFsDoubleArray & jointVel,
                                           const FrameIndex & floatingFrame,
                                           const Vector3 & angularVel);

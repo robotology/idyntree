@@ -62,6 +62,9 @@ namespace iDynTree {
         Eigen::SparseMatrix<double, Eigen::ColMajor> covarianceDynamicsAPosterioriInverse;
         iDynTree::VectorDynSize expectedDynamicsAPosterioriRHS;
 
+        // Simulated y1 vector
+        iDynTree::VectorDynSize simulatedMeasurementsFromMAPSolution;
+
         // Decomposition buffers
         Eigen::SimplicialLDLT<Eigen::SparseMatrix<double, Eigen::ColMajor> > covarianceDynamicsPriorInverseDecomposition;
         Eigen::SimplicialLDLT<Eigen::SparseMatrix<double, Eigen::ColMajor> > covarianceDynamicsAPosterioriInverseDecomposition;
@@ -324,7 +327,8 @@ namespace iDynTree {
                                                         floatingFrame, bodyAngularVelocityOfSpecifiedFrame);
     }
 
-    void BerdySparseMAPSolver::updateEstimateInformationFloatingBase(const iDynTree::JointPosDoubleArray& jointsConfiguration,
+    void BerdySparseMAPSolver::updateEstimateInformationFloatingBase(const Transform& baseTransform,
+                                                                     const iDynTree::JointPosDoubleArray& jointsConfiguration,
                                                                      const iDynTree::JointDOFsDoubleArray& jointsVelocity,
                                                                      const FrameIndex floatingFrame,
                                                                      const Vector3& bodyAngularVelocityOfSpecifiedFrame,
@@ -343,7 +347,7 @@ namespace iDynTree {
             m_pimpl->measurements = measurements;
         }
 
-        m_pimpl->berdy.updateKinematicsFromFloatingBase(m_pimpl->jointsConfiguration, m_pimpl->jointsVelocity,
+        m_pimpl->berdy.updateKinematicsFromFloatingBase(baseTransform, m_pimpl->jointsConfiguration, m_pimpl->jointsVelocity,
                                                         floatingFrame, bodyAngularVelocityOfSpecifiedFrame);
     }
 
@@ -384,6 +388,17 @@ namespace iDynTree {
 #endif
         return true;
     }
+
+    const iDynTree::VectorDynSize& BerdySparseMAPSolver::getSimulatedMeasurementVector(iDynTree::VectorDynSize& simulatedy, bool task1)
+    {
+
+        if(task1) {
+
+            simulatedy = m_pimpl->simulatedMeasurementsFromMAPSolution;
+        }
+
+    }
+
 
     void BerdySparseMAPSolver::getLastEstimate(iDynTree::VectorDynSize& lastEstimate, const bool task1) const
     {
@@ -437,6 +452,15 @@ namespace iDynTree {
         toEigen(task1_expectedDynamicsAPosterioriRHS) = toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_priorMeasurementsCovarianceInverse) * (toEigen(task1_measurements) - toEigen(task1_measurementsBias));
         toEigen(task1_expectedDynamicsAPosteriori) =
         task1_covarianceDynamicsAPosterioriInverseDecomposition.solve(toEigen(task1_expectedDynamicsAPosterioriRHS));
+
+        // Compute simulated y1 from the solutions of MAP estimation
+        simulatedMeasurementsFromMAPSolution.resize(berdy.getNrOfSensorsMeasurements(true));
+        simulatedMeasurementsFromMAPSolution.zero();
+        toEigen(simulatedMeasurementsFromMAPSolution) = toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_expectedDynamicsAPosteriori);
+
+//        std::cout << "Simulated y1 size : " << simulatedMeasurementsFromMAPSolution.size() << std::endl;
+//        std::cout << "Simulated y1 : " << simulatedMeasurementsFromMAPSolution.toString() << std::endl;
+//        std::cout << simulatedMeasurementsFromMAPSolution.toString() << std::endl;
     }
 
     void BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::computeMAP(bool computePermutation)

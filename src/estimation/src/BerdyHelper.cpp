@@ -182,7 +182,7 @@ bool BerdyHelper::init(const Model& model,
     m_link_H_externalWrenchMeasurementFrame.resize(m_model.getNrOfLinks(),Transform::Identity());
 
     // Initialize links to base transform to identity
-    base_H_links.resize(m_model.getNrOfLinks());
+    world_H_links.resize(m_model.getNrOfLinks());
 
     bool res = m_options.checkConsistency();
 
@@ -1295,8 +1295,8 @@ bool BerdyHelper::computeTask1SensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
             IndexRange netExternalWrenchSensor = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR,
                                                                                   idx, true);
 
-            // TODO: Ensure that base_H_links is correctly updatwd after the forward kinematics
-            Transform base_X_link = base_H_links(idx);
+            // TODO: Ensure that world_H_links is correctly updatwd after the forward kinematics
+            Transform base_X_link = m_baseTransform.inverse() * world_H_links(idx);
 
             // Get link to base rotation
             task1_matrixYElements.addSubMatrix(comAccelerometerRange.offset,
@@ -1632,8 +1632,8 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
             IndexRange netExternalWrenchSensor = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR,
                                                                                   idx, false);
 
-            // TODO: Ensure that base_H_links is correctly updated after the forward kinematics
-            Transform base_X_link = base_H_links(idx);
+            // TODO: Ensure that world_H_links is correctly updated after the forward kinematics
+            Transform base_X_link = world_H_links(idx);
 
             // Get link to base rotation
             matrixYElements.addSubMatrix(comAccelerometerRange.offset,
@@ -1898,12 +1898,63 @@ bool BerdyHelper::updateKinematicsFromFloatingBase(const JointPosDoubleArray& jo
     m_jointPos = jointPos;
     m_jointVel = jointVel;
 
+    m_kinematicsUpdated = ok;
+    return ok;
+}
+
+
+bool BerdyHelper::updateKinematicsFromFloatingBase(const Transform& baseTransform,
+                                                   const JointPosDoubleArray& jointPos,
+                                                   const JointDOFsDoubleArray& jointVel,
+                                                   const FrameIndex& floatingFrame,
+                                                   const Vector3& angularVel)
+{
+    if( !m_areModelAndSensorsValid )
+    {
+        reportError("BerdyHelpers","updateKinematicsFromFloatingBase","Model and sensors information not setted.");
+        return false;
+    }
+
+    if( floatingFrame == FRAME_INVALID_INDEX ||
+        floatingFrame < 0 || floatingFrame >= static_cast<FrameIndex>(m_model.getNrOfFrames()) )
+    {
+        reportError("BerdyHelpers","updateKinematicsFromFloatingBase","Unknown frame index specified.");
+        return false;
+    }
+
+    // Get link of the specified frame
+    LinkIndex floatingLinkIndex = m_model.getFrameLink(floatingFrame);
+
+    // To initialize the kinematic propagation, we should first convert the kinematics
+    // information from the frame in which they are specified to the main frame of the link
+    Transform link_H_frame = m_model.getFrameTransform(floatingFrame);
+
+    // Convert the twist from the additional  frame to the link frame
+    Twist      base_vel_frame, base_vel_link;
+    Vector3 zero3;
+    zero3.zero();
+    base_vel_frame.setLinearVec3(zero3);
+    base_vel_frame.setAngularVec3(angularVel);
+    base_vel_link = link_H_frame*base_vel_frame;
+
+    // Propagate the kinematics information
+    bool ok = dynamicsEstimationForwardVelKinematics(m_model,m_kinematicTraversals.getTraversalWithLinkAsBase(m_model,floatingLinkIndex),
+                                                        base_vel_link.getAngularVec3(),
+                                                        jointPos,jointVel,
+                                                        m_linkVels);
+    // Set base transform
+    m_baseTransform = baseTransform;
+
+    // The jointPos and joint vel are stored directly, as are then passed to the Model object to get adjacent links transforms
+    m_jointPos = jointPos;
+    m_jointVel = jointVel;
+
     // Compute forward kinematics
     ok = ForwardPositionKinematics(m_model,
                                    m_dynamicsTraversal,
-                                   iDynTree::Transform::Identity(),
+                                   m_baseTransform,
                                    m_jointPos,
-                                   base_H_links);
+                                   world_H_links);
 
     m_kinematicsUpdated = ok;
     return ok;

@@ -12,8 +12,10 @@
 #define IDYNTREE_BERDY_SPARSEMAPSOLVER_H
 
 #include <iDynTree/Core/Utils.h>
+#include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/VectorFixSize.h>
 #include <iDynTree/Model/Indices.h>
+#include <iDynTree/Core/VectorDynSize.h>
 
 namespace iDynTree {
 
@@ -76,7 +78,8 @@ namespace iDynTree {
                                                    const Vector3& bodyAngularVelocityOfSpecifiedFrame,
                                                    const VectorDynSize& measurements);
 
-        void updateEstimateInformationFloatingBase(const JointPosDoubleArray& jointsConfiguration,
+        void updateEstimateInformationFloatingBase(const Transform& baseTransform,
+                                                   const JointPosDoubleArray& jointsConfiguration,
                                                    const JointDOFsDoubleArray& jointsVelocity,
                                                    const FrameIndex floatingFrame,
                                                    const Vector3& bodyAngularVelocityOfSpecifiedFrame,
@@ -90,6 +93,8 @@ namespace iDynTree {
         void getLastEstimate(iDynTree::VectorDynSize& lastEstimate, const bool task1) const;
         const iDynTree::VectorDynSize& getLastEstimate() const;
 
+
+        const iDynTree::VectorDynSize& getSimulatedMeasurementVector(iDynTree::VectorDynSize& simulatedy, bool task1);
 
     };
 }
