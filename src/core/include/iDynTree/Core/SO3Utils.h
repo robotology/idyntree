@@ -31,6 +31,15 @@ namespace iDynTree
     };
 
     /**
+     * @brief Check if the rotation matrix is valid.
+     *
+     * It checks that the determinant is 1, that the Frobenius norm is finite and that it is orthogonal.
+     * @param r The input rotation
+     * @return True if it is a rotation matrix.
+     */
+    bool isValidRotationMatrix(const iDynTree::Rotation& r);
+
+    /**
      * @brief Computes the geodesic distance between two rotation matrices.
      *
      * It implements the angular distance presented in Sec. 4 of "Rotation Averaging" (available at http://users.cecs.anu.edu.au/~hongdong/rotationaveraging.pdf),

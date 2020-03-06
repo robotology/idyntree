@@ -12,6 +12,16 @@
 #include <Eigen/Dense>
 
 #include <cmath>
+#include <numeric>
+
+void checkIsValidRotationMatrix()
+{
+    ASSERT_IS_TRUE(iDynTree::isValidRotationMatrix(iDynTree::Rotation::Identity()));
+    ASSERT_IS_TRUE(iDynTree::isValidRotationMatrix(iDynTree::getRandomRotation()));
+    iDynTree::Rotation test;
+    iDynTree::getRandomMatrix(test);
+    ASSERT_IS_TRUE(!iDynTree::isValidRotationMatrix(test));
+}
 
 void checkGeodesicDistance()
 {
@@ -66,6 +76,7 @@ void checkWeightedMeanRotation()
     bool ok = iDynTree::geodesicL2WeightedMeanRotation(rotations, weights, weightedMean, options);
 
     ASSERT_IS_TRUE(ok);
+    ASSERT_IS_TRUE(iDynTree::isValidRotationMatrix(weightedMean));
 
     Eigen::Vector3d r;
     r.setZero();
@@ -106,8 +117,9 @@ void checkMeanRotation()
     options.maxIterations = 1000;
 
     bool ok = iDynTree::geodesicL2MeanRotation(rotations, weightedMean, options);
-
     ASSERT_IS_TRUE(ok);
+    ASSERT_IS_TRUE(iDynTree::isValidRotationMatrix(weightedMean));
+
 
     Eigen::Vector3d r;
     r.setZero();
@@ -126,6 +138,7 @@ void checkMeanRotation()
 int main()
 {
 
+    checkIsValidRotationMatrix();
     checkGeodesicDistance();
     checkWeightedMeanRotation();
     checkMeanRotation();

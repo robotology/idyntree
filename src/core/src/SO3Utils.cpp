@@ -10,13 +10,21 @@
 
 
 #include <iDynTree/Core/SO3Utils.h>
-
+#include <iDynTree/Core/Utils.h>
 #include <iDynTree/Core/EigenHelpers.h>
 
 #include <cmath>
 #include <chrono>
 #include <string>
 #include <numeric>
+
+bool iDynTree::isValidRotationMatrix(const iDynTree::Rotation &r)
+{
+    Eigen::Map<const Eigen::Matrix<double,3,3,Eigen::RowMajor>> map = iDynTree::toEigen(r);
+    return std::isfinite(map.norm())
+        && iDynTree::checkDoublesAreEqual(map.determinant(), 1.0)
+        && (map * map.transpose()).isApprox(iDynTree::toEigen(iDynTree::Rotation::Identity()));
+}
 
 double iDynTree::geodesicL2Distance(const iDynTree::Rotation& rotation1, const iDynTree::Rotation& rotation2)
 {
@@ -97,7 +105,7 @@ bool iDynTree::geodesicL2WeightedMeanRotation(const std::vector<iDynTree::Rotati
     meanRotation = inputRotations[0];
 
     bool optimal_R_found{false};
-    auto start = std::chrono::high_resolution_clock::now();
+    std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
     int iteration = 1;
     while (!optimal_R_found)
     {
@@ -139,7 +147,14 @@ bool iDynTree::geodesicL2WeightedMeanRotation(const std::vector<iDynTree::Rotati
         r *= options.stepSize;
 
         meanRotation = meanRotation * perturbation.exp();
-        auto now = std::chrono::high_resolution_clock::now();
+
+        if (!isValidRotationMatrix(meanRotation))
+        {
+            iDynTree::reportError("SO3Utils", "geodesicL2WeightedMeanRotation", "The computed mean rotation is no more a rotation matrix.");
+            return false;
+        }
+
+        std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
         std::chrono::duration<double> timout_check = now - start;
         double time_lapsed{timout_check.count()};
 
@@ -158,7 +173,7 @@ bool iDynTree::geodesicL2WeightedMeanRotation(const std::vector<iDynTree::Rotati
         iteration++;
 
     }
-    auto finish = std::chrono::high_resolution_clock::now();
+    std::chrono::steady_clock::time_point finish = std::chrono::steady_clock::now();
 
     std::chrono::duration<double> elapsed = finish - start;
     std::stringstream ss;
@@ -171,3 +186,4 @@ bool iDynTree::geodesicL2WeightedMeanRotation(const std::vector<iDynTree::Rotati
 
     return true;
 }
+
