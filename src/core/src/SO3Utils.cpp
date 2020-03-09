@@ -28,10 +28,9 @@ bool iDynTree::isValidRotationMatrix(const iDynTree::Rotation &r)
 
 double iDynTree::geodesicL2Distance(const iDynTree::Rotation& rotation1, const iDynTree::Rotation& rotation2)
 {
-    using iDynTree::toEigen;
-    auto angvel(toEigen((rotation1.inverse()*rotation2).log()));
+    Eigen::Vector3d angvelEigen = iDynTree::toEigen((rotation1.inverse()*rotation2).log());
 
-    return angvel.norm();
+    return angvelEigen.norm();
 }
 
 bool iDynTree::geodesicL2MeanRotation(const std::vector<iDynTree::Rotation>& inputRotations,
