@@ -9,6 +9,7 @@ on:
   - cron:  '0 2 * * *'
 
 env:
+  vcpkg_TAG: 2020.01 
   YCM_TAG: v0.11.0
   YARP_TAG: v3.3.2
   ICUB_TAG: v1.15.0
@@ -43,7 +44,12 @@ jobs:
     
     - name: Dependencies [Windows]
       if: matrix.os == 'windows-latest'
+      shell: bash
       run: |
+        cd ${VCPKG_INSTALLATION_ROOT}
+        git checkout ${vcpkg_TAG}
+        ./bootstrap-vcpkg.sh
+        vcpkg.exe update
         git clone https://github.com/robotology-dependencies/robotology-vcpkg-binary-ports C:/robotology-vcpkg-binary-ports
         vcpkg.exe --overlay-ports=C:/robotology-vcpkg-binary-ports install --triplet x64-windows ace assimp libxml2 eigen3 ipopt-binary 
         
@@ -65,7 +71,7 @@ jobs:
       uses: actions/cache@v1
       with:
         path: install_deps
-        key: source-deps-${{ runner.os }}-ycm-${{ env.YCM_TAG }}-yarp-${{ env.YARP_TAG }}-icub-${{ env.ICUB_TAG }}
+        key: source-deps-${{ runner.os }}-vcpkg-${{ env.vcpkg_TAG }}-ycm-${{ env.YCM_TAG }}-yarp-${{ env.YARP_TAG }}-icub-${{ env.ICUB_TAG }}
     
     - name: Source-based Dependencies [Windows] 
       if: steps.cache-source-deps.outputs.cache-hit != 'true' && matrix.os == 'windows-latest-disable-until-issue-569-is-solved'
