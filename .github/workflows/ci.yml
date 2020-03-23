@@ -9,7 +9,7 @@ on:
   - cron:  '0 2 * * *'
 
 env:
-  vcpkg_TAG: 2020.01 
+  vcpkg_TAG: 97302ca1729eac9917c8a8977667601453795c90
   YCM_TAG: v0.11.0
   YARP_TAG: v3.3.2
   ICUB_TAG: v1.15.0
