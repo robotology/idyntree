@@ -52,7 +52,7 @@ jobs:
         cd C:/
         md C:/robotology
         md C:/robotology/vcpkg
-        wget https://github.com/robotology/robotology-superbuild-dependencies-vcpkg/releases/download/%vcpkg_robotology_TAG%/vcpkg-robotology.zip
+        wget https://github.com/robotology/robotology-superbuild-dependencies-vcpkg/releases/download/${env:vcpkg_robotology_TAG}/vcpkg-robotology.zip
         unzip vcpkg-robotology.zip -d C:/robotology/vcpkg
         # Overwrite the VCPKG_INSTALLATION_ROOT env variable defined by GitHub Actions to point to our vcpkg
         echo "::set-env name=VCPKG_INSTALLATION_ROOT::C:/robotology/vcpkg"
