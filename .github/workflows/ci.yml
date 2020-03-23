@@ -9,7 +9,7 @@ on:
   - cron:  '0 2 * * *'
 
 env:
-  vcpkg_TAG: 97302ca1729eac9917c8a8977667601453795c90
+  vcpkg_robotology_TAG: v0.0.3
   YCM_TAG: v0.11.0
   YARP_TAG: v3.3.2
   ICUB_TAG: v1.15.0
@@ -44,15 +44,19 @@ jobs:
     
     - name: Dependencies [Windows]
       if: matrix.os == 'windows-latest'
-      shell: bash
       run: |
-        cd ${VCPKG_INSTALLATION_ROOT}
-        git fetch --unshallow
-        git checkout ${vcpkg_TAG}
-        ./bootstrap-vcpkg.sh
-        vcpkg.exe update
-        git clone https://github.com/robotology-dependencies/robotology-vcpkg-binary-ports C:/robotology-vcpkg-binary-ports
-        vcpkg.exe --overlay-ports=C:/robotology-vcpkg-binary-ports install --triplet x64-windows ace assimp libxml2 eigen3 ipopt-binary 
+        # To avoid spending a huge time compiling vcpkg dependencies, we download a root that comes precompiled with all the ports that we need 
+        choco install -y wget unzip
+        # To avoid problems with non-relocatable packages, we unzip the archive exactly in the same C:/robotology/vcpkg 
+        # that has been used to create the pre-compiled archive
+        cd C:/
+        md C:/robotology
+        md C:/robotology/vcpkg
+        wget https://github.com/robotology/robotology-superbuild-dependencies-vcpkg/releases/download/%vcpkg_robotology_TAG%/vcpkg-robotology.zip
+        unzip vcpkg-robotology.zip -d C:/robotology/vcpkg
+        # Overwrite the VCPKG_INSTALLATION_ROOT env variable defined by GitHub Actions to point to our vcpkg
+        echo "::set-env name=VCPKG_INSTALLATION_ROOT::C:/robotology/vcpkg"
+
         
     - name: Dependencies [macOS]
       if: matrix.os == 'macOS-latest'
@@ -72,7 +76,7 @@ jobs:
       uses: actions/cache@v1
       with:
         path: install_deps
-        key: source-deps-${{ runner.os }}-vcpkg-${{ env.vcpkg_TAG }}-ycm-${{ env.YCM_TAG }}-yarp-${{ env.YARP_TAG }}-icub-${{ env.ICUB_TAG }}
+        key: source-deps-${{ runner.os }}-vcpkg-robotology-${{ env.vcpkg_robotology_TAG }}-ycm-${{ env.YCM_TAG }}-yarp-${{ env.YARP_TAG }}-icub-${{ env.ICUB_TAG }}
     
     - name: Source-based Dependencies [Windows] 
       if: steps.cache-source-deps.outputs.cache-hit != 'true' && matrix.os == 'windows-latest-disable-until-issue-569-is-solved'
