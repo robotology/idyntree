@@ -75,7 +75,7 @@ jobs:
       id: cache-source-deps
       uses: actions/cache@v1
       with:
-        path: install_deps
+        path: ${{ github.workspace }}/install/deps
         key: source-deps-${{ runner.os }}-vcpkg-robotology-${{ env.vcpkg_robotology_TAG }}-ycm-${{ env.YCM_TAG }}-yarp-${{ env.YARP_TAG }}-icub-${{ env.ICUB_TAG }}
     
     - name: Source-based Dependencies [Windows] 
@@ -87,7 +87,7 @@ jobs:
         cd ycm
         mkdir -p build
         cd build
-        cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install_deps ..
+        cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install/deps ..
         cmake --build . --config ${{ matrix.build_type }} --target INSTALL 
         # YARP
         git clone -b ${YARP_TAG} https://github.com/robotology/yarp
@@ -95,7 +95,7 @@ jobs:
         mkdir -p build
         cd build
         cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake \
-              -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install_deps -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install_deps ..
+              -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install/deps -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install/deps ..
         cmake --build . --config ${{ matrix.build_type }} --target INSTALL 
         # Workaround for https://github.com/robotology-dependencies/robotology-vcpkg-binary-ports/issues/3
         export IPOPT_DIR=${VCPKG_INSTALLATION_ROOT}/installed/x64-windows
@@ -105,7 +105,7 @@ jobs:
         mkdir -p build
         cd build
         cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake \
-              -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install_deps -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install_deps ..
+              -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install/deps -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install/deps ..
         cmake --build . --config ${{ matrix.build_type }} --target INSTALL 
         
     - name: Source-based Dependencies [Ubuntu/macOS] 
@@ -117,21 +117,21 @@ jobs:
         cd ycm
         mkdir -p build
         cd build
-        cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install_deps ..
+        cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install/deps ..
         cmake --build . --config ${{ matrix.build_type }} --target install 
         # YARP
         git clone -b ${YARP_TAG} https://github.com/robotology/yarp
         cd yarp
         mkdir -p build
         cd build
-        cmake  -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install_deps -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install_deps ..
+        cmake  -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install/deps -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install/deps ..
         cmake --build . --config ${{ matrix.build_type }} --target install 
         # ICUB
         git clone -b ${ICUB_TAG} https://github.com/robotology/icub-main
         cd icub-main
         mkdir -p build
         cd build
-        cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install_deps -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install_deps ..
+        cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install/deps -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install/deps ..
         cmake --build . --config ${{ matrix.build_type }} --target install 
  
     # ===================
@@ -147,7 +147,7 @@ jobs:
         cd build
         # ipopt disabled until https://github.com/robotology/idyntree/issues/274 is fixed
         # assimp disabled until https://github.com/robotology/idyntree/issues/601 is fixed
-        cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install_deps \
+        cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install/deps \
               -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=ON \
               -DIDYNTREE_USES_PYTHON:BOOL=OFF -DIDYNTREE_USES_OCTAVE:BOOL=OFF -DIDYNTREE_USES_IPOPT:BOOL=OFF -DIDYNTREE_USES_ASSIMP:BOOL=OFF \
               -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
@@ -159,7 +159,7 @@ jobs:
         mkdir -p build
         cd build
         # IDYNTREE_USES_ASSIMP set to OFF as a workaround for https://github.com/robotology/idyntree/issues/599
-        cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install_deps -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=ON \
+        cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install/deps -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=ON \
               -DIDYNTREE_USES_ICUB_MAIN:BOOL=ON -DIDYNTREE_USES_Qt5:BOOL=ON  -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DIDYNTREE_USES_ASSIMP:BOOL=OFF \
               -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
 
@@ -210,7 +210,7 @@ jobs:
         mkdir -p build
         cd build
         cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake \
-              -DCMAKE_PREFIX_PATH="${GITHUB_WORKSPACE}/install_deps;${GITHUB_WORKSPACE}/install" .. 
+              -DCMAKE_PREFIX_PATH="${GITHUB_WORKSPACE}/install/deps;${GITHUB_WORKSPACE}/install" .. 
         cmake --build . --config ${{ matrix.build_type }}
         
     - name: Compile Examples [Ubuntu/macOS]
@@ -220,7 +220,7 @@ jobs:
         cd examples
         mkdir -p build
         cd build
-        cmake -DCMAKE_PREFIX_PATH="${GITHUB_WORKSPACE}/install_deps;${GITHUB_WORKSPACE}/install" .. 
+        cmake -DCMAKE_PREFIX_PATH="${GITHUB_WORKSPACE}/install/deps;${GITHUB_WORKSPACE}/install" .. 
         cmake --build . --config ${{ matrix.build_type }}
 
         
