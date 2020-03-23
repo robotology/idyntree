@@ -47,6 +47,7 @@ jobs:
       shell: bash
       run: |
         cd ${VCPKG_INSTALLATION_ROOT}
+        git fetch --unshallow
         git checkout ${vcpkg_TAG}
         ./bootstrap-vcpkg.sh
         vcpkg.exe update
