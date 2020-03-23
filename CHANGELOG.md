@@ -11,7 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `bindings` for `InverseKinematics` (https://github.com/robotology/idyntree/pull/633)
 - Implement `cbegin()` / `cend()` and `begin()` / `end()` methods for `VectorDynSize` and `VectorFixSize` (https://github.com/robotology/idyntree/pull/646)
 
-### Fixed
+## [1.0.2] - 2020-02-21
+
+### Fixed 
 - Remove spurious inclusion of Eigen headers in ExtendedKalmanFilter.h public header, that could create probles when using that header in a downstream project that does not use Eigen (https://github.com/robotology/idyntree/pull/639).
 - Added find_dependency(OsqpEigen) and find_dependency(LibXml2) when iDynTree is compiled as a static library, fixing the use of iDynTree on Windows (https://github.com/robotology/idyntree/pull/642).
 

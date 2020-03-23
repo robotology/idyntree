@@ -35,9 +35,7 @@ target_link_libraries(${libraryname} LINK_PUBLIC iKin skinDynLib idyntree-core i
 
 target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
 
-target_include_directories(${libraryname} INTERFACE ${skinDynLib_INCLUDE_DIRS})
 target_include_directories(${libraryname} PRIVATE SYSTEM ${skinDynLib_INCLUDE_DIRS})
-target_include_directories(${libraryname} INTERFACE ${iKin_INCLUDE_DIRS})
 target_include_directories(${libraryname} PRIVATE SYSTEM ${iKin_INCLUDE_DIRS})
 
 
