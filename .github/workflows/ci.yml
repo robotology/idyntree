@@ -210,7 +210,7 @@ jobs:
         mkdir -p build
         cd build
         cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake \
-              -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install_deps;${GITHUB_WORKSPACE}/install .. 
+              -DCMAKE_PREFIX_PATH="${GITHUB_WORKSPACE}/install_deps;${GITHUB_WORKSPACE}/install" .. 
         cmake --build . --config ${{ matrix.build_type }}
         
     - name: Compile Examples [Ubuntu/macOS]
@@ -220,7 +220,7 @@ jobs:
         cd examples
         mkdir -p build
         cd build
-        cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install_deps;${GITHUB_WORKSPACE}/install .. 
+        cmake -DCMAKE_PREFIX_PATH="${GITHUB_WORKSPACE}/install_deps;${GITHUB_WORKSPACE}/install" .. 
         cmake --build . --config ${{ matrix.build_type }}
 
         
