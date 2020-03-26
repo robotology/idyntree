@@ -437,8 +437,9 @@ namespace iDynTree {
                                true);
 
         // This is a partial MAP solution considering only the task1 measurements equation  Y1 * d1 + bd1 = y1
+        task1_covarianceDynamicsAPosterioriInverse = toEigen(task1_priorDynamicsRegularizationCovarianceInverse);
 
-        task1_covarianceDynamicsAPosterioriInverse = toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_priorMeasurementsCovarianceInverse) * toEigen(task1_measurementsMatrix);
+        task1_covarianceDynamicsAPosterioriInverse += toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_priorMeasurementsCovarianceInverse) * toEigen(task1_measurementsMatrix);
 
         // decompose m_covarianceDynamicsAPosterioriInverse
         if (computePermutation) {
@@ -449,7 +450,7 @@ namespace iDynTree {
         task1_covarianceDynamicsAPosterioriInverseDecomposition.factorize(task1_covarianceDynamicsAPosterioriInverse);
 
         // Final result: expected value of the whole-body dynamics, Eq. 11b
-        toEigen(task1_expectedDynamicsAPosterioriRHS) = toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_priorMeasurementsCovarianceInverse) * (toEigen(task1_measurements) - toEigen(task1_measurementsBias));
+        toEigen(task1_expectedDynamicsAPosterioriRHS) = toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_priorMeasurementsCovarianceInverse) * (toEigen(task1_measurements) - toEigen(task1_measurementsBias)) + toEigen(task1_priorDynamicsRegularizationCovarianceInverse) * toEigen(task1_priorDynamicsRegularizationExpectedValue);
         toEigen(task1_expectedDynamicsAPosteriori) =
         task1_covarianceDynamicsAPosterioriInverseDecomposition.solve(toEigen(task1_expectedDynamicsAPosterioriRHS));
 
