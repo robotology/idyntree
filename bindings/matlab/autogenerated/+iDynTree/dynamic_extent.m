@@ -1,3 +1,3 @@
 function v = dynamic_extent()
-  v = iDynTreeMEX(826);
+  v = iDynTreeMEX(850);
 end

@@ -7,24 +7,24 @@ classdef LinearMotionVector3Semantics < iDynTree.GeomVector3Semantics__LinearMot
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(505, varargin{:});
+        tmp = iDynTreeMEX(529, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = changePoint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(506, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(530, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(508, self);
+        iDynTreeMEX(532, self);
         self.SwigClear();
       end
     end
   end
   methods(Static)
     function varargout = compose(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(507, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(531, varargin{:});
     end
   end
 end

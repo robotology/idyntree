@@ -2,9 +2,9 @@ function varargout = FRAME_INVALID_INDEX(varargin)
   narginchk(0,1)
   if nargin==0
     nargoutchk(0,1)
-    varargout{1} = iDynTreeMEX(861);
+    varargout{1} = iDynTreeMEX(885);
   else
     nargoutchk(0,0)
-    iDynTreeMEX(862,varargin{1});
+    iDynTreeMEX(886,varargin{1});
   end
 end
