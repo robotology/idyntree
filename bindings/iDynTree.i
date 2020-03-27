@@ -303,7 +303,6 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 %include "joints.i"
 
 %template(SolidshapesVector) std::vector<iDynTree::SolidShape*>;
-//%template(linksSolidshapesVector) std::vector<SolidshapesVector>;
 %template(linksSolidshapesVector) std::vector< std::vector<iDynTree::SolidShape *>>;
 
 
