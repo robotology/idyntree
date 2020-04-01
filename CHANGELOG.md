@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `bindings` for `InverseKinematics` (https://github.com/robotology/idyntree/pull/633)
 - Implement `cbegin()` / `cend()` and `begin()` / `end()` methods for `VectorDynSize` and `VectorFixSize` (https://github.com/robotology/idyntree/pull/646)
 
+## [1.0.3] - 2020-04-01
+
+### Fixed 
+- Fixed configuration and compilation with Assimp >= 5.0.0 (https://github.com/robotology/idyntree/pull/661). 
+- Fixed runtime errors of the MATLAB bindings on Windows and compatibility with MATLAB 2020a (https://github.com/robotology/idyntree/pull/664).
+
 ## [1.0.2] - 2020-02-21
 
 ### Fixed

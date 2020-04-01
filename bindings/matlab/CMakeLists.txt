@@ -22,12 +22,14 @@ macro(SWIG_GENERATE_MODULE name language)
   endforeach()
 endmacro()
 
-macro(SWIG_COMPILE_MODULE name language)
+macro(SWIG_COMPILE_MODULE_MEX name language)
   SWIG_MODULE_INITIALIZE(${name} ${language})
-  add_library(${SWIG_MODULE_${name}_REAL_NAME}
-              MODULE
-              ${swig_generated_sources}
-              ${swig_other_sources})
+  matlab_add_mex(NAME ${SWIG_MODULE_${name}_REAL_NAME}
+                 MODULE
+                 SRC ${swig_generated_sources}
+                     ${swig_other_sources})
+  # Avoid the "d" suffix for mex files as it prevents the bindings to call the mex file correctly 
+  set_target_properties(${SWIG_MODULE_${name}_REAL_NAME} PROPERTIES DEBUG_POSTFIX "")
 endmacro()
 
 # Options related to installation directories
@@ -89,7 +91,7 @@ if(IDYNTREE_USES_MATLAB)
                MX_LIBRARY
                MAIN_PROGRAM)
 
-  swig_compile_module(${mexname} matlab)
+  swig_compile_module_mex(${mexname} matlab)
   swig_link_libraries(${mexname} ${Matlab_LIBRARIES} ${IDYNTREE_LIBRARIES} idyntree-core)
   target_include_directories(${mexname} PUBLIC ${Matlab_INCLUDE_DIRS})
 

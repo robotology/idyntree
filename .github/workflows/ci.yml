@@ -56,8 +56,14 @@ jobs:
         unzip vcpkg-robotology.zip -d C:/robotology/vcpkg
         # Overwrite the VCPKG_INSTALLATION_ROOT env variable defined by GitHub Actions to point to our vcpkg
         echo "::set-env name=VCPKG_INSTALLATION_ROOT::C:/robotology/vcpkg"
-
         
+    - name: Additional vcpkg Dependencies [Windows]
+      if: matrix.os == 'windows-latest'
+      shell: bash
+      run: |
+        # Install dependencies that are not included in the robotology-superbuild-dependencies-vcpkg archive (for now)
+        ${VCPKG_INSTALLATION_ROOT}/vcpkg.exe install assimp:x64-windows
+
     - name: Dependencies [macOS]
       if: matrix.os == 'macOS-latest'
       run: |
@@ -146,9 +152,8 @@ jobs:
         mkdir -p build
         cd build
         # ipopt disabled until https://github.com/robotology/idyntree/issues/274 is fixed
-        # assimp disabled until https://github.com/robotology/idyntree/issues/601 is fixed
         cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install/deps \
-              -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=ON \
+              -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON  -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=ON \
               -DIDYNTREE_USES_PYTHON:BOOL=OFF -DIDYNTREE_USES_OCTAVE:BOOL=OFF -DIDYNTREE_USES_IPOPT:BOOL=OFF -DIDYNTREE_USES_ASSIMP:BOOL=OFF \
               -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
 
@@ -158,7 +163,7 @@ jobs:
       run: |
         mkdir -p build
         cd build
-        # IDYNTREE_USES_ASSIMP set to OFF as a workaround for https://github.com/robotology/idyntree/issues/599
+        # Assimp is disabled as workaround for https://github.com/robotology/idyntree/issues/599
         cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install/deps -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=ON \
               -DIDYNTREE_USES_ICUB_MAIN:BOOL=ON -DIDYNTREE_USES_Qt5:BOOL=ON  -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DIDYNTREE_USES_ASSIMP:BOOL=OFF \
               -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
@@ -167,7 +172,8 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       run: |
         cd build
-        cmake -DIDYNTREE_USES_OCTAVE:BOOL=ON -DIDYNTREE_USES_PYTHON:BOOL=ON -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=ON -DIDYNTREE_USES_KDL:BOOL=ON .
+        # Assimp is disabled on Ubuntu as a workaround for https://github.com/robotology/idyntree/issues/663
+        cmake -DIDYNTREE_USES_OCTAVE:BOOL=ON -DIDYNTREE_USES_PYTHON:BOOL=ON -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=ON -DIDYNTREE_USES_KDL:BOOL=ON  -DIDYNTREE_USES_ASSIMP:BOOL=OFF  .
         # For some reason, Ubuntu 18.04 image in GitHub Actions contain OpenBLAS 0.3.5, that is affected by https://github.com/xianyi/OpenBLAS/issues/2003
         # As a workaround, we test against the regular blas instead of openblas
         sudo apt-get install libblas-dev libatlas-base-dev

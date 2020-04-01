@@ -98,4 +98,4 @@ if(IDYNTREE_USES_ALGLIB AND ALGLIB_FOUND)
 endif()
 idyntree_handle_dependency(WORHP DO_NOT_SILENTLY_SEARCH)
 # Workaround for https://github.com/robotology/idyntree/issues/599
-idyntree_handle_dependency(ASSIMP DO_NOT_SILENTLY_SEARCH MAIN_TARGET assimp::assimp)
+idyntree_handle_dependency(assimp DO_NOT_SILENTLY_SEARCH MAIN_TARGET assimp::assimp)
