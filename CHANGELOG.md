@@ -10,7 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.3] - 2020-04-01
 
 ### Fixed 
-- Fixed configuration and compilation with Assimp >= 5.0.0 . 
+- Fixed configuration and compilation with Assimp >= 5.0.0 (https://github.com/robotology/idyntree/pull/661). 
+- Fixed runtime errors of the MATLAB bindings on Windows and compatibility with MATLAB 2020a (https://github.com/robotology/idyntree/pull/664).
 
 ## [1.0.2] - 2020-02-21
 
