@@ -9,23 +9,23 @@ classdef DOFSpatialForceArray < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1207, varargin{:});
+        tmp = iDynTreeMEX(1231, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1208, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1232, self, varargin{:});
     end
     function varargout = isConsistent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1209, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1233, self, varargin{:});
     end
     function varargout = paren(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1210, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1234, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1211, self);
+        iDynTreeMEX(1235, self);
         self.SwigClear();
       end
     end
