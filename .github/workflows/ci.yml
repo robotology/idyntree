@@ -59,6 +59,7 @@ jobs:
         
     - name: Additional vcpkg Dependencies [Windows]
       if: matrix.os == 'windows-latest'
+      shell: bash
       run: |
         # Install dependencies that are not included in the robotology-superbuild-dependencies-vcpkg archive
         ${VCPKG_INSTALLATION_ROOT}/vcpkg.exe --install assimp:x64-windows
