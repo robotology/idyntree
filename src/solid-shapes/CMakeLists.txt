@@ -16,9 +16,16 @@ target_include_directories(${libraryname} PRIVATE ${EIGEN3_INCLUDE_DIR})
 
 if (IDYNTREE_USES_ASSIMP)
   target_compile_definitions(${libraryname} PRIVATE IDYNTREE_USES_ASSIMP)
-  target_include_directories(${libraryname} PRIVATE "${ASSIMP_INCLUDE_DIRS}")
-  link_directories("${ASSIMP_LIBRARY_DIRS}")
-  target_link_libraries(${libraryname} PRIVATE "${ASSIMP_LIBRARIES}")
+  # Depending on the assimp version, the way of consuming assimp changes
+  # In assimp 5.0, only the imported assimp::assimp target is defined, in earlier 
+  # versions (that do no export the version to CMake) the ASSIMP_* variables are defined
+  if(assimp_VERSION AND assimp_VERSION VERSION_GREATER_EQUAL 5.0)
+    target_link_libraries(${libraryname} PRIVATE "${ASSIMP_LIBRARIES}")
+  else()
+    target_include_directories(${libraryname} PRIVATE "${ASSIMP_INCLUDE_DIRS}")
+    link_directories("${ASSIMP_LIBRARY_DIRS}")
+    target_link_libraries(${libraryname} PRIVATE "${ASSIMP_LIBRARIES}")
+  endif()
 endif()
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_SOLID_SHAPES_HEADERS})
