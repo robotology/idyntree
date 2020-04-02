@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.4] - 2020-04-02
+
+### Fixed 
+- Further fix for configuration compilation with Assimp >= 5.0.0 (https://github.com/robotology/idyntree/pull/666). 
+
 ## [1.0.3] - 2020-04-01
 
 ### Fixed 
