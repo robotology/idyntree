@@ -20,7 +20,7 @@ if (IDYNTREE_USES_ASSIMP)
   # In assimp 5.0, only the imported assimp::assimp target is defined, in earlier 
   # versions (that do no export the version to CMake) the ASSIMP_* variables are defined
   if(assimp_VERSION AND assimp_VERSION VERSION_GREATER_EQUAL 5.0)
-    target_link_libraries(${libraryname} PRIVATE "assimp::assimp")
+    target_link_libraries(${libraryname} PRIVATE assimp::assimp)
   else()
     target_include_directories(${libraryname} PRIVATE "${ASSIMP_INCLUDE_DIRS}")
     link_directories("${ASSIMP_LIBRARY_DIRS}")
