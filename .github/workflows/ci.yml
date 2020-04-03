@@ -82,7 +82,7 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ${{ github.workspace }}/install/deps
-        key: source-deps-${{ runner.os }}-vcpkg-robotology-${{ env.vcpkg_robotology_TAG }}-ycm-${{ env.YCM_TAG }}-yarp-${{ env.YARP_TAG }}-icub-${{ env.ICUB_TAG }}-github-workspace-#{{ env.GITHUB_WORKSPACE }}
+        key: source-deps-${{ runner.os }}-vcpkg-robotology-${{ env.vcpkg_robotology_TAG }}-ycm-${{ env.YCM_TAG }}-yarp-${{ env.YARP_TAG }}-icub-${{ env.ICUB_TAG }}-github-workspace-${{ env.GITHUB_WORKSPACE }}
     
     - name: Source-based Dependencies [Windows] 
       if: steps.cache-source-deps.outputs.cache-hit != 'true' && matrix.os == 'windows-latest-disable-until-issue-569-is-solved'
