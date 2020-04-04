@@ -12,6 +12,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `bindings` for `InverseKinematics` (https://github.com/robotology/idyntree/pull/633)
 - Implement `cbegin()` / `cend()` and `begin()` / `end()` methods for `VectorDynSize` and `VectorFixSize` (https://github.com/robotology/idyntree/pull/646)
 
+## [1.0.5] - 2020-04-03
+
+### Fixed 
+- Fix find_package(iDynTree) when iDynTree is built with IDYNTREE_USES_ASSIMP ON and BUILD_SHARED_LIBS OFF (https://github.com/robotology/idyntree/pull/667). 
+
+
+## [1.0.4] - 2020-04-02
+
+### Fixed 
+- Further fix for configuration compilation with Assimp >= 5.0.0 (https://github.com/robotology/idyntree/pull/666). 
+>>>>>>> master
+
 ## [1.0.3] - 2020-04-01
 
 ### Fixed 

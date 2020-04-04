@@ -70,6 +70,9 @@ if(NOT IDYNTREE_ONLY_DOCS)
     if(IDYNTREE_USES_OSQPEIGEN)
         list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES_ONLY_STATIC OsqpEigen)
     endif()
+    if(IDYNTREE_USES_ASSIMP)
+        list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES_ONLY_STATIC assimp)
+    endif()
 
     include(InstallBasicPackageFiles)
     install_basic_package_files(iDynTree VARS_PREFIX ${VARS_PREFIX}
