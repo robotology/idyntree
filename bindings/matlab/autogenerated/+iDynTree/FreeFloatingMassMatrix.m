@@ -7,17 +7,17 @@ classdef FreeFloatingMassMatrix < iDynTree.MatrixDynSize
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1249, varargin{:});
+        tmp = iDynTreeMEX(1274, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1250, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1275, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1251, self);
+        iDynTreeMEX(1276, self);
         self.SwigClear();
       end
     end

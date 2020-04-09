@@ -7,29 +7,29 @@ classdef SpatialMotionVector < iDynTree.SpatialMotionVectorBase
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(614, varargin{:});
+        tmp = iDynTreeMEX(639, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = mtimes(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(615, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(640, self, varargin{:});
     end
     function varargout = cross(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(616, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(641, self, varargin{:});
     end
     function varargout = asCrossProductMatrix(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(617, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(642, self, varargin{:});
     end
     function varargout = asCrossProductMatrixWrench(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(618, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(643, self, varargin{:});
     end
     function varargout = exp(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(619, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(644, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(620, self);
+        iDynTreeMEX(645, self);
         self.SwigClear();
       end
     end

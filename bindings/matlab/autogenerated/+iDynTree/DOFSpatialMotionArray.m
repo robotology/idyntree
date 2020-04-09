@@ -9,23 +9,23 @@ classdef DOFSpatialMotionArray < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1236, varargin{:});
+        tmp = iDynTreeMEX(1261, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1237, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1262, self, varargin{:});
     end
     function varargout = isConsistent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1238, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1263, self, varargin{:});
     end
     function varargout = paren(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1239, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1264, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1240, self);
+        iDynTreeMEX(1265, self);
         self.SwigClear();
       end
     end
