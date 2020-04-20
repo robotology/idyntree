@@ -1,4 +1,4 @@
-classdef linksSolidshapesVector < SwigRef
+classdef SolidShapesVector < SwigRef
   methods
     function this = swig_this(self)
       this = iDynTreeMEX(3, self);
@@ -48,7 +48,7 @@ classdef linksSolidshapesVector < SwigRef
     function varargout = erase(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1329, self, varargin{:});
     end
-    function self = linksSolidshapesVector(varargin)
+    function self = SolidShapesVector(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;

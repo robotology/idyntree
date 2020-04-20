@@ -9,78 +9,78 @@ classdef DynamicSpan < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(852, varargin{:});
+        tmp = iDynTreeMEX(877, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(853, self);
+        iDynTreeMEX(878, self);
         self.SwigClear();
       end
     end
     function varargout = first(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(854, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(879, self, varargin{:});
     end
     function varargout = last(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(855, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(880, self, varargin{:});
     end
     function varargout = subspan(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(856, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(881, self, varargin{:});
     end
     function varargout = size(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(857, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(882, self, varargin{:});
     end
     function varargout = size_bytes(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(858, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(883, self, varargin{:});
     end
     function varargout = empty(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(859, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(884, self, varargin{:});
     end
     function varargout = brace(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(860, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(885, self, varargin{:});
     end
     function varargout = getVal(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(861, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(886, self, varargin{:});
     end
     function varargout = setVal(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(862, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(887, self, varargin{:});
     end
     function varargout = at(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(863, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(888, self, varargin{:});
     end
     function varargout = paren(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(864, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(889, self, varargin{:});
     end
     function varargout = begin(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(865, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(890, self, varargin{:});
     end
     function varargout = end(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(866, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(891, self, varargin{:});
     end
     function varargout = cbegin(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(867, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(892, self, varargin{:});
     end
     function varargout = cend(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(868, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(893, self, varargin{:});
     end
     function varargout = rbegin(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(869, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(894, self, varargin{:});
     end
     function varargout = rend(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(870, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(895, self, varargin{:});
     end
     function varargout = crbegin(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(871, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(896, self, varargin{:});
     end
     function varargout = crend(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(872, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(897, self, varargin{:});
     end
   end
   methods(Static)
     function v = extent()
-      v = iDynTreeMEX(851);
+      v = iDynTreeMEX(876);
     end
   end
 end

@@ -1,6 +1,6 @@
 # Copyright (C) 2013-2018 Fondazione Istituto Italiano di Tecnologia
-# 
-# Licensed under either the GNU Lesser General Public License v3.0 : 
+#
+# Licensed under either the GNU Lesser General Public License v3.0 :
 # https://www.gnu.org/licenses/lgpl-3.0.html
 # or the GNU Lesser General Public License v2.1 :
 # https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
@@ -40,7 +40,7 @@ if(NOT IDYNTREE_ONLY_DOCS)
 
     # Add external libraries that are embedded in iDynTree
     # source tree, if necessary (by default does not adds
-    # anything) feel free to check teh logic inside
+    # anything) feel free to check the logic inside
     add_subdirectory(extern)
 
     include(AddInstallRPATHSupport)

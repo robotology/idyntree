@@ -14,7 +14,8 @@ function w_H_frame = getWorldTransform(KinDynModel,frameName)
     %
     % OUTPUTS: - w_H_frame: [4 x 4] from frame to world transformation matrix.
     %
-    % Author : Gabriele Nava (gabriele.nava@iit.it)
+    % Author : Gabriele Nava (gabriele.nava@iit.it), Francisco Andrade
+    % (franciscojavier.andradechavez@iit.it)
     %
     % Copyright (C) 2019 Istituto Italiano di Tecnologia (IIT). All rights reserved.
     % This software may be modified and distributed under the terms of the
@@ -22,19 +23,14 @@ function w_H_frame = getWorldTransform(KinDynModel,frameName)
 
     %% ------------Initialization----------------
     
-    % get the transformation between the frame and the world 
-    w_H_frame_iDyntree = KinDynModel.kinDynComp.getWorldTransform(frameName);  
-    w_R_frame_iDyntree = w_H_frame_iDyntree.getRotation;
-    framePos_iDyntree  = w_H_frame_iDyntree.getPosition;
-    
-    % covert to Matlab format
-    w_R_frame          = w_R_frame_iDyntree.toMatlab;
-    framePos           = framePos_iDyntree.toMatlab;
-    w_H_frame          = [w_R_frame, framePos;
-                           0,   0,   0,   1];                     
+    % get the transformation between the frame and the world in Matlab
+    % format
+    w_H_frame = KinDynModel.kinDynComp.getWorldTransform(frameName).asHomogeneousTransform.toMatlab;  
+
     % Debug output
     if KinDynModel.DEBUG
-        
+        w_R_frame          = w_H_frame(1:3,1:3);
+    
         disp('[getWorldTransform]: debugging outputs...')
         
          % w_R_frame must be a valid rotation matrix

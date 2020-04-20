@@ -8,31 +8,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Added a new function to `iDynTreeWrappers` for the function `getWorldTransformsAsHomogeneous`.
+- Added functions for having a MATLAB iDynTree Visualizer in `iDynTreeWrappers`. Some time optimization has been performed (https://github.com/robotology/idyntree/issues/659).
+- Added `bindings` for `getWorldTransformsAsHomogeneous` function.
+- Added function `getWorldTransformsAsHomogeneous` that gives a vector of Matrix4x4 based on a vector of strings containing the frame transforms.
 - Added `bindings` for handling `linkSolidShapes` properly (https://github.com/robotology/idyntree/issues/656).
 - Added `bindings` for `InverseKinematics` (https://github.com/robotology/idyntree/pull/633).
 - Implement `cbegin()` / `cend()` and `begin()` / `end()` methods for `VectorDynSize` and `VectorFixSize` (https://github.com/robotology/idyntree/pull/646).
 
 ## [1.0.5] - 2020-04-03
 
-### Fixed 
-- Fix find_package(iDynTree) when iDynTree is built with IDYNTREE_USES_ASSIMP ON and BUILD_SHARED_LIBS OFF (https://github.com/robotology/idyntree/pull/667). 
-
+### Fixed
+- Fix find_package(iDynTree) when iDynTree is built with IDYNTREE_USES_ASSIMP ON and BUILD_SHARED_LIBS OFF (https://github.com/robotology/idyntree/pull/667).
 
 ## [1.0.4] - 2020-04-02
 
-### Fixed 
-- Further fix for configuration compilation with Assimp >= 5.0.0 (https://github.com/robotology/idyntree/pull/666). 
+### Fixed
+- Further fix for configuration compilation with Assimp >= 5.0.0 (https://github.com/robotology/idyntree/pull/666).
 
 ## [1.0.3] - 2020-04-01
 
-### Fixed 
-- Fixed configuration and compilation with Assimp >= 5.0.0 (https://github.com/robotology/idyntree/pull/661). 
+### Fixed
+- Fixed configuration and compilation with Assimp >= 5.0.0 (https://github.com/robotology/idyntree/pull/661).
 - Fixed runtime errors of the MATLAB bindings on Windows and compatibility with MATLAB 2020a (https://github.com/robotology/idyntree/pull/664).
 
 ## [1.0.2] - 2020-02-21
 
 ### Fixed
-- Remove spurious inclusion of Eigen headers in ExtendedKalmanFilter.h public header, that could create probles when using that header in a downstream project that does not use Eigen (https://github.com/robotology/idyntree/pull/639).
+- Remove spurious inclusion of Eigen headers in ExtendedKalmanFilter.h public header, that could create problems when using that header in a downstream project that does not use Eigen (https://github.com/robotology/idyntree/pull/639).
 - Added find_dependency(OsqpEigen) and find_dependency(LibXml2) when iDynTree is compiled as a static library, fixing the use of iDynTree on Windows (https://github.com/robotology/idyntree/pull/642).
 
 ### Changed

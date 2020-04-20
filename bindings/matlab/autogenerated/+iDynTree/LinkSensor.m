@@ -2,30 +2,30 @@ classdef LinkSensor < iDynTree.Sensor
   methods
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1393, self);
+        iDynTreeMEX(1418, self);
         self.SwigClear();
       end
     end
     function varargout = getParentLink(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1394, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1419, self, varargin{:});
     end
     function varargout = getParentLinkIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1395, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1420, self, varargin{:});
     end
     function varargout = getLinkSensorTransform(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1396, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1421, self, varargin{:});
     end
     function varargout = setParentLink(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1397, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1422, self, varargin{:});
     end
     function varargout = setParentLinkIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1398, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1423, self, varargin{:});
     end
     function varargout = setLinkSensorTransform(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1399, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1424, self, varargin{:});
     end
     function varargout = isConsistent(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1400, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1425, self, varargin{:});
     end
     function self = LinkSensor(varargin)
       self@iDynTree.Sensor(SwigRef.Null);

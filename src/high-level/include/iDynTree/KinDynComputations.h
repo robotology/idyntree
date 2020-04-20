@@ -12,6 +12,7 @@
 #define IDYNTREE_KINDYNCOMPUTATIONS_H
 
 #include <string>
+#include <vector>
 
 #include <iDynTree/Core/VectorFixSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
@@ -378,6 +379,13 @@ public:
      */
     iDynTree::Transform getWorldTransform(std::string frameName);
 
+    /**
+     * Return the transforms as a homogeneous matrices where the frame is
+     * specified by name in the frameNames vector, and the reference frame is the world one
+     * (world_H_frame).
+     *
+     */
+    std::vector<iDynTree::Matrix4x4> getWorldTransformsAsHomogeneous(const std::vector<std::string>& frameNames);
 
     /**
      * Return the transform where the frame is the frame

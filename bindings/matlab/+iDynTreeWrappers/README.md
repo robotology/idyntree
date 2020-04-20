@@ -22,9 +22,9 @@ For a Matlab/Octave user, it may be sometimes counterintuitive to use C++ based 
     baseOrigin   = baseOrigin_iDyntree.toMatlab;
     jointPos     = jointPos_iDyntree.toMatlab;
     baseVel      = baseVel_iDyntree.toMatlab;
-    jointVel     = jointVel_iDyntree.toMatlab; 
+    jointVel     = jointVel_iDyntree.toMatlab;
     basePose     = [baseRotation, baseOrigin;
-                       0,  0,  0,  1]; 
+                       0,  0,  0,  1];
 ```
 
 The purpose of the wrapper is therefore to provide a simpler and easy-to-use interface for Matlab/Octave users who wants to use iDyntree inside Matlab/Octave, also helping in designing code which is less error-prone and easier to debug (e.g. in case the interface of an iDyntree function will change in the future).
@@ -42,30 +42,31 @@ The purpose of the wrapper is therefore to provide a simpler and easy-to-use int
 - [getCentroidalTotalMomentum](getCentroidalTotalMomentum.m)
 - [getRobotState](getRobotState.m)
 - [getWorldBaseTransform](getWorldBaseTransform.m)
-- [getBaseTwist](getBaseTwist.m) 
-- [getModelVel](getModelVel.m) 
+- [getBaseTwist](getBaseTwist.m)
+- [getModelVel](getModelVel.m)
 - [getFrameVelocityRepresentation](getFrameVelocityRepresentation.m)
 - [getNrOfDegreesOfFreedom](getNrOfDegreesOfFreedom.m)
 - [getFloatingBase](getFloatingBase.m)
 - [getFrameIndex](getFrameIndex.m)
 - [getFrameName](getFrameName.m)
-- [getWorldTransform](getWorldTransform.m) 
-- [getRelativeTransform](getRelativeTransform.m) 
-- [getRelativeJacobian](getRelativeJacobian.m) 
+- [getWorldTransform](getWorldTransform.m)
+- [getWorldTransformsAsHomogeneous](getWorldTransformsAsHomogeneous.m)
+- [getRelativeTransform](getRelativeTransform.m)
+- [getRelativeJacobian](getRelativeJacobian.m)
 - [getFreeFloatingMassMatrix](getFreeFloatingMassMatrix.m)
 - [getFrameBiasAcc](getFrameBiasAcc.m)
 - [getFrameFreeFloatingJacobian](getFrameFreeFloatingJacobian.m)
-- [getCenterOfMassPosition](getCenterOfMassPosition.m) 
-- [generalizedBiasForces](generalizedBiasForces.m) 
+- [getCenterOfMassPosition](getCenterOfMassPosition.m)
+- [generalizedBiasForces](generalizedBiasForces.m)
 - [generalizedGravityForces](generalizedGravityForces.m)
-- [getCenterOfMassJacobian](getCenterOfMassJacobian.m) 
-- [getCenterOfMassVelocity](getCenterOfMassVelocity.m) 
- 
+- [getCenterOfMassJacobian](getCenterOfMassJacobian.m)
+- [getCenterOfMassVelocity](getCenterOfMassVelocity.m)
+
 ### Set the model-related quantities
- 
-- [setJointPos](setJointPos.m) 
+
+- [setJointPos](setJointPos.m)
 - [setFrameVelocityRepresentation](setFrameVelocityRepresentation.m)
-- [setFloatingBase](setFloatingBase.m) 
+- [setFloatingBase](setFloatingBase.m)
 - [setRobotState](setRobotState.m)
 
 ## Visualizer class
@@ -75,3 +76,15 @@ Not proper wrappers, they wrap more than one method of the class each. **Require
 - [initializeVisualizer](initializeVisualizer.m)
 - [visualizerSetup](visualizerSetup.m)
 - [updateVisualizer](updateVisualizer.m)
+
+## Matlab Native visualization
+
+Not actual wrappers, they use the iDynTreeWrappers in combination with the MATLAB patch plotting functions to visualize the robot.
+**Disclaimers**:
+- This visualization **has not been tested** with Octave.
+- At the moment, there is **no support** for .dae mesh files.
+
+- [prepareVisualization](prepareVisualization.m)
+- [updateVisualization](updateVisualization.m)
+- [getMeshes](getMeshes.m)
+- [plotMeshInWorld](plotMeshInWorld.m)

@@ -8,6 +8,9 @@
 // Wrap the std::vector<std::string> params
 %template(StringVector) std::vector<std::string>;
 
+// Wrap the std::vector<std::int> params
+%template(IntVector) std::vector<int>;
+
 // Ignore some methods to avoid warnings
 %include "./ignore.i"
 
@@ -302,8 +305,8 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 
 %include "joints.i"
 
-%template(SolidshapesVector) std::vector<iDynTree::SolidShape*>;
-%template(linksSolidshapesVector) std::vector< std::vector<iDynTree::SolidShape *>>;
+%template(SolidShapesVector) std::vector<iDynTree::SolidShape*>;
+%template(LinksSolidShapesVector) std::vector< std::vector<iDynTree::SolidShape *>>;
 
 
 // Kinematics & Dynamics related functions
@@ -349,6 +352,13 @@ TEMPLATE_WRAP_MOTION_FORCE(ForceVector3, WRAP_FORCE, SET_NAME_FOR_WRAPPER,,)
 
 // High level interfaces
 %include "iDynTree/KinDynComputations.h"
+
+#ifdef SWIGMATLAB
+%include "./matlab/matlab_mat4x4vec.i"
+#endif
+
+%template(Matrix4x4Vector) std::vector<iDynTree::Matrix4x4>;
+
 
 // Visualization
 %include "iDynTree/Visualizer.h"
