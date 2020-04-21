@@ -7,10 +7,10 @@
     mxArray * toMatlab() const
     {
         const mwSize NDIMS=3;
-        int nMatrices=$self->size();
+        mwSize nMatrices=$self->size();
         std::vector<iDynTree::Matrix4x4> :: const_iterator it =$self->begin();
-        int nRows=it->rows();
-        int nCols=it->cols();
+        mwSize nRows=it->rows();
+        mwSize nCols=it->cols();
         const mwSize dims[]={nMatrices,nRows,nCols};
         mxArray *p = mxCreateNumericArray(NDIMS,dims,mxDOUBLE_CLASS,mxREAL);
         double* d = static_cast<double*>(mxGetData(p));
