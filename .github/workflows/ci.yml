@@ -67,7 +67,7 @@ jobs:
     - name: Dependencies [macOS]
       if: matrix.os == 'macOS-latest'
       run: |
-        brew install ace assimp boost eigen swig qt5 orocos-kdl
+        brew install ace assimp boost eigen swig qt5 orocos-kdl octave
     
     - name: Dependencies [Ubuntu]
       if: matrix.os == 'ubuntu-latest'
@@ -166,14 +166,14 @@ jobs:
         cd build
         cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install/deps -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=ON \
               -DIDYNTREE_USES_ICUB_MAIN:BOOL=ON -DIDYNTREE_USES_Qt5:BOOL=ON  -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DIDYNTREE_USES_ASSIMP:BOOL=ON \
-              -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
+              -DIDYNTREE_USES_OCTAVE:BOOL=ON -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
 
-    - name: Enable additional Ubuntu options (Valgrind, Octave, Python, legacy KDL) [Ubuntu] 
+    - name: Enable additional Ubuntu options (Valgrind, Python, legacy KDL) [Ubuntu] 
       if: matrix.os == 'ubuntu-latest'
       run: |
         cd build
         # Assimp is disabled on Ubuntu as a workaround for https://github.com/robotology/idyntree/issues/663
-        cmake -DIDYNTREE_USES_OCTAVE:BOOL=ON -DIDYNTREE_USES_PYTHON:BOOL=ON -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=ON -DIDYNTREE_USES_KDL:BOOL=ON  -DIDYNTREE_USES_ASSIMP:BOOL=OFF  .
+        cmake -DIDYNTREE_USES_PYTHON:BOOL=ON -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=ON -DIDYNTREE_USES_KDL:BOOL=ON  -DIDYNTREE_USES_ASSIMP:BOOL=OFF  .
         # For some reason, Ubuntu 18.04 image in GitHub Actions contain OpenBLAS 0.3.5, that is affected by https://github.com/xianyi/OpenBLAS/issues/2003
         # As a workaround, we test against the regular blas instead of openblas
         sudo apt-get install libblas-dev libatlas-base-dev

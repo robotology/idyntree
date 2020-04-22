@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `bindings` for handling `linkSolidShapes` properly (https://github.com/robotology/idyntree/issues/656).
 - Added `bindings` for `InverseKinematics` (https://github.com/robotology/idyntree/pull/633).
 - Implement `cbegin()` / `cend()` and `begin()` / `end()` methods for `VectorDynSize` and `VectorFixSize` (https://github.com/robotology/idyntree/pull/646).
+- Added CI for MacOS with `IDYNTREE_USES_OCTAVE` `ON`
 
 ## [1.0.5] - 2020-04-03
 

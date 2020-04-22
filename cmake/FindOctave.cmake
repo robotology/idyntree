@@ -15,7 +15,6 @@
 #  OCTAVE_PATCH_VERSION        - patch version
 #  OCTAVE_OCT_FILE_DIR         - object files that will be dynamically loaded
 #  OCTAVE_OCT_LIB_DIR          - oct libraries
-#  OCTAVE_ROOT_DIR             - octave prefix
 #
 # The macro octave_add_oct allows to create compiled modules.
 # octave_add_oct ( target_name
@@ -24,12 +23,6 @@
 #         [EXTENSION ext]
 # )
 #
-# To install it, you can the use the variable OCTAVE_OCT_FILE_DIR as follow:
-#  file ( RELATIVE_PATH PKG_OCTAVE_OCT_FILE_DIR ${OCTAVE_ROOT_DIR} ${OCTAVE_OCT_FILE_DIR} )
-#  install (
-#    TARGETS target_name
-#    DESTINATION ${PKG_OCTAVE_OCT_FILE_DIR}
-#  )
 #=============================================================================
 # Copyright 2013, Julien Schueller
 # All rights reserved.
@@ -61,9 +54,6 @@ find_program( OCTAVE_CONFIG_EXECUTABLE
               NAMES octave-config
             )
 if ( OCTAVE_CONFIG_EXECUTABLE )
-  execute_process ( COMMAND ${OCTAVE_CONFIG_EXECUTABLE} -p PREFIX
-                    OUTPUT_VARIABLE OCTAVE_ROOT_DIR
-                    OUTPUT_STRIP_TRAILING_WHITESPACE )
 
   execute_process ( COMMAND ${OCTAVE_CONFIG_EXECUTABLE} -p BINDIR
                     OUTPUT_VARIABLE OCTAVE_BIN_PATHS
@@ -158,7 +148,7 @@ endmacro ()
 # handle REQUIRED and QUIET options
 include ( FindPackageHandleStandardArgs )
 
-find_package_handle_standard_args ( Octave REQUIRED_VARS OCTAVE_EXECUTABLE OCTAVE_ROOT_DIR OCTAVE_INCLUDE_DIRS OCTAVE_LIBRARIES VERSION_VAR OCTAVE_VERSION_STRING )
+find_package_handle_standard_args ( Octave REQUIRED_VARS OCTAVE_EXECUTABLE OCTAVE_INCLUDE_DIRS OCTAVE_LIBRARIES VERSION_VAR OCTAVE_VERSION_STRING )
 
 mark_as_advanced (
   OCTAVE_OCT_FILE_DIR
@@ -169,7 +159,6 @@ mark_as_advanced (
   OCTAVE_LIBRARIES
   OCTAVE_INCLUDE_DIR
   OCTAVE_INCLUDE_DIRS
-  OCTAVE_ROOT_DIR
   OCTAVE_VERSION_STRING
   OCTAVE_MAJOR_VERSION
   OCTAVE_MINOR_VERSION
