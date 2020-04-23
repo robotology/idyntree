@@ -29,3 +29,7 @@ if (IDYNTREE_USES_MATLAB OR IDYNTREE_GENERATE_MATLAB)
     # We save the location of mesh2tri in a variable that is then accessible to the test
     set(IDYNTREE_INTERNAL_MESH2TRI_PATH "${CMAKE_CURRENT_LIST_DIR}/mesh2tri" PARENT_SCOPE)
 endif()
+
+# xml2struct ( https://it.mathworks.com/matlabcentral/fileexchange/28518-xml2struct )
+
+# colladaParser ( https://it.mathworks.com/matlabcentral/fileexchange/45687-colladaparser )
