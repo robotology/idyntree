@@ -15,14 +15,23 @@
 % REMARK : If you have installed the URDF models by https://github.com/robotology/icub-models
 % You could fill the required variables as follows:
 % % Substitute in the following the location of the install prefix of icub-models
- icubModelsInstallPrefix = '';
+icubModelsInstallPrefix = '';
+
+% if installed with robotology superbuild you can directly use
+icubModelsInstallPrefix = getenv('ROBOTOLOGY_SUPERBUILD_INSTALL_PREFIX');
+
+
  meshFilePrefix = [icubModelsInstallPrefix '/share'];
-% Select the robot using the folder name
- robotName='';
+% Select the robot using the folder name 
+robotName='';
+
+% Example
+robotName='iCubGenova04';
+
  modelPath = [icubModelsInstallPrefix '/share/iCub/robots/' robotName '/'];
  fileName='model.urdf';
 
-jointOrder={
+ jointOrder={
     'r_hip_pitch';
     'r_hip_roll';
     'r_hip_yaw';
@@ -56,53 +65,59 @@ jointOrder={
     'neck_roll';
     'neck_yaw'
     };
-%
+
+% Main variable of iDyntreeWrappers used for many things including updating
+% robot position and getting world to frame transforms
 KinDynModel = iDynTreeWrappers.loadReducedModel(jointOrder,'root_link',modelPath,fileName,false);
 
 % create vector of positions
 joints_positions=zeros(KinDynModel.NDOF,1);
 
-% Prepare figure, handles and variables required for the update
-[transforms,linkNames,linkNames_idyn,map,linkMeshInfo,meshHandles,parent,mainHandler]=iDynTreeWrappers.prepareVisualization(KinDynModel,meshFilePrefix);
-% Note: For default visualization these variables can be ignored:
-%       map,linkMeshInfo,meshHandles,parent,mainHandler.
+fakeWorld=[1,0,0,0;0,1,0,0;0,0,1,0.6;0,0,0,1];%eye(4);
+                
+% Set initial position of the robot
+iDynTreeWrappers.setRobotState(KinDynModel,fakeWorld,joints_positions,zeros(6,1),zeros(size(joints_positions)),[0,0,-9.81]);
 
-% generate random positions for the robot
-a = -pi/2;
-b = pi/2;
-randVector=(b-a).*rand(KinDynModel.NDOF,1)+ a;
+% Prepare figure, handles and variables required for the update, some extra
+% options are commented. 
+[visualizer,objects]=iDynTreeWrappers.prepareVisualization(KinDynModel,meshFilePrefix,...
+    'color',[0,0,1],'material','metal','transparency',1,'debug',true,'view',[-92.9356   22.4635],...
+    'groundOn',true,'groundColor',[0.5 0.5 0.5], 'groundTransparency',0.5,'groundFrame','l_sole');%,... % optional inputs
+     %'style','wireframe','wireframe_rendering',0.1);
 
-% update only joints of arms and head to avoid ackward positions.
-joints_positions(16:end)=randVector(16:end);
+% pause to let you see the result with the options that are enabled
+pause(1);
+% generate decent position
+joints_positions=zeros(KinDynModel.NDOF,1);
+joints_positions([16 17 19 23 24 26])=pi/10;
 
+%% Update robot position
 % update kinematics
-iDynTreeWrappers.setRobotState(KinDynModel,eye(4),joints_positions,zeros(6,1),zeros(size(joints_positions)),[0,0,-9.81]);
+iDynTreeWrappers.setRobotState(KinDynModel,fakeWorld,joints_positions,zeros(6,1),zeros(size(joints_positions)),[0,0,-9.81]);
 
-%%  Compare time efficiency of the update function
-% using iDyntree string vector
 tic
- iDynTreeWrappers.updateVisualization(KinDynModel,linkNames_idyn,transforms);
+ iDynTreeWrappers.updateVisualization(KinDynModel,visualizer);
 stringVector_time=toc
-
-% using a string cell array with the link names
-tic
- iDynTreeWrappers.updateVisualization(KinDynModel,linkNames,transforms);
-cellArray_time=toc
-
 axis tight
 
-%% Try some custom changes
-toModify=meshHandles(1).modelMesh;
-% wireFrame style
-color=toModify.FaceColor;
-toModify.FaceColor='none';
-toModify.EdgeColor=color;
-faces=toModify.Faces;
-vertices=toModify.Vertices;
-reducepatch(toModify,0.005)
+%% Use modification functions
+% Change all links to default values
+iDynTreeWrappers.modifyLinksVisualization(visualizer,'useDefault',true);
 
-% go back to normal
-toModify.Vertices=vertices;
-toModify.Faces=faces;
-toModify.FaceColor=color;
-toModify.EdgeColor='none';
+% Modify using link indices
+indecesToModify= 23;
+iDynTreeWrappers.modifyLinksVisualization(visualizer,'linksIndices',indecesToModify,'color',[1,1,1]);
+
+indecesToModify=[28,33];
+iDynTreeWrappers.modifyLinksVisualization(visualizer,'linksIndices',indecesToModify,'color',[0,0,0],'transparency',1,'material','metal');
+
+% Modify using link names
+% Select link names to modify
+linkstoModify=visualizer.linkNames([1,6,13,19]);
+
+iDynTreeWrappers.modifyLinksVisualization(visualizer,'linksToModify',linkstoModify,'style','wireframe');
+pause(1);
+iDynTreeWrappers.modifyLinksVisualization(visualizer,'linksToModify',linkstoModify(3),'style','invisible');
+pause(1);
+iDynTreeWrappers.modifyLinksVisualization(visualizer,'linksToModify',linkstoModify(3),'style','fullMesh');
+

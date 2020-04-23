@@ -1,6 +1,6 @@
 function [Visualizer,Objects]=prepareVisualization(KinDynModel,meshFilePrefix,varargin)
 % Creates the figures, loads the meshes, handles some visual effects, and creates the transform objects
-% - Iputs:
+% - Inputs:
 %   - `KinDynModel` : iDyntreewrappers main variable. Contains the model.
 %   - `meshFilePrefix` : Path in which we can find the meshes. As an example the path to the mesh in a iCub urdf is `'package://iCub/meshes/simmechanics/sim_sea_2-5_root_link_prt-binary.stl'
 %   `. `meshFilePrefix` should replace package to allow to find the rest of the path.

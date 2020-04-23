@@ -88,3 +88,5 @@ Not actual wrappers, they use the iDynTreeWrappers in combination with the MATLA
 - [updateVisualization](updateVisualization.m)
 - [getMeshes](getMeshes.m)
 - [plotMeshInWorld](plotMeshInWorld.m)
+- [modifyLinkVisual](modifyLinkVisual.m)
+- [modifyLinksVisualization](modifyLinksVisualization.m)

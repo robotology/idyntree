@@ -1,6 +1,6 @@
 function []=modifyLinkVisual(meshHandle,varargin)
 % Modifies a single `meshHandle` with the specified changes.
-%     - Iputs:
+%     - Inputs:
 %         - `meshHandle` : Struct containing the patch type of variable ( `modelMesh` field ) and the original information of the mesh in `fullMesh_bckup` field.
 %     - Optional Inputs:
 %         - `color` : Selects the color of the meshes.
