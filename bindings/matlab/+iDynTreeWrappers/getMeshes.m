@@ -75,7 +75,7 @@ for links=1:numberOfLinks
         link_H_geom=solidarray{solids}.link_H_geometry.asHomogeneousTransform.toMatlab;
         meshInfo(solids).link_H_geom=link_H_geom;
         meshInfo(solids).mesh_triangles=mesh_triangles;              
-        map(count,:)=[{meshFile},{linkName}];
+        map(count,:)=[{meshInfo(solids).meshFile},{linkName}];
         count=count+1;
     end
     linkMeshInfo(links).meshInfo=meshInfo;
