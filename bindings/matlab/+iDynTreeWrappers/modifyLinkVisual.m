@@ -16,7 +16,7 @@ function []=modifyLinkVisual(meshHandle,varargin)
 %         - `useDefault`  : Enables the use of the default values instead of ignoring non specified changes.
 %
 % Author : Francisco Andrade (franciscojavier.andradechavez@iit.it)
-% 
+%
 % Copyright (C) 2019 Istituto Italiano di Tecnologia (IIT). All rights reserved.
 % This software may be modified and distributed under the terms of the
 % GNU Lesser General Public License v2.1 or any later version.
@@ -57,11 +57,11 @@ for nMeshes=1:length(meshHandle.modelMesh)
     if ~any(ismember(p.UsingDefaults,'material')) || options.useDefault
         material(modelMesh,options.material);
     end
-    
-    
+
+
     if ~any(ismember(p.UsingDefaults,'style')) || options.useDefault
-        [isWF,noColor]=isWireframe(modelMesh);        
-            
+        [isWF,noColor]=isWireframe(modelMesh);
+
         if strcmpi(options.style,'wireframe') && ~isWF
             if noColor
                 color=options.color;

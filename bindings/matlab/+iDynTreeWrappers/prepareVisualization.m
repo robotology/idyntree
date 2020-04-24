@@ -6,7 +6,7 @@ function [Visualizer,Objects]=prepareVisualization(KinDynModel,meshFilePrefix,va
 %   `. `meshFilePrefix` should replace package to allow to find the rest of the path.
 % - Optional Inputs:
 %     - `view` : Selects the angle in which the figure is seen.
-%     - `material` : Selects effect with which the patch is rendered. Options are : 'dull','metal','shiny';            
+%     - `material` : Selects effect with which the patch is rendered. Options are : 'dull','metal','shiny';
 %     - `debug` : Enables having extra information for debugging purposes.
 %     - `groundOn` : Enables showing a plane as the ground.
 %     - `groundColor` : Selects the color of the ground.
@@ -18,7 +18,7 @@ function [Visualizer,Objects]=prepareVisualization(KinDynModel,meshFilePrefix,va
 %           - `transforms` : Is the transform objects array. There is one transform for each link
 %           - `linkNames`  : The name of the links in the same order of the transforms
 %           - `linkNames_idyn`  : The idyntree string vector equivalent to `linkNames`
-%           - `NOBJ` : Contains the number of visual objects in the visualizer            
+%           - `NOBJ` : Contains the number of visual objects in the visualizer
 %           - `meshHandles` : Has the handles of the mesh objects.
 %           - `parent`     : Contains the axes object of the parent figure.
 %           - `mainHandler`: Is the handle of the overall figure.

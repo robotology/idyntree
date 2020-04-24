@@ -2,14 +2,14 @@
 % To use insert the path where the meshes may be found, it replaces what is required
 % to complete the path inside the urdf visual mesh field.
 
-% Example: 
+% Example:
 % If a test model has the following mesh file in the URDF
 % 'package://stl/sim_sea_2-5_root_link_prt-binary.stl'
 % The required path is what it takes to reach the stl folder.
-% meshFilePrefix=<path_to_stl_folder>; 
+% meshFilePrefix=<path_to_stl_folder>;
 % It basically replaces the functionality of find Package by inserting the
 % path manually.
-% The path to the model is also required: 
+% The path to the model is also required:
 % modelPath=<path_to_urdf_folder>;
 
 % REMARK : If you have installed the URDF models by https://github.com/robotology/icub-models
@@ -22,7 +22,7 @@ icubModelsInstallPrefix = getenv('ROBOTOLOGY_SUPERBUILD_INSTALL_PREFIX');
 
 
  meshFilePrefix = [icubModelsInstallPrefix '/share'];
-% Select the robot using the folder name 
+% Select the robot using the folder name
 robotName='';
 
 % Example
@@ -73,13 +73,14 @@ KinDynModel = iDynTreeWrappers.loadReducedModel(jointOrder,'root_link',modelPath
 % create vector of positions
 joints_positions=zeros(KinDynModel.NDOF,1);
 
-fakeWorld=[1,0,0,0;0,1,0,0;0,0,1,0.6;0,0,0,1];%eye(4);
-                
+% add a world to base mainly to avoid overlap of coordinate frame and robot
+world_H_base=[1,0,0,0;0,1,0,0;0,0,1,0.6;0,0,0,1];
+
 % Set initial position of the robot
-iDynTreeWrappers.setRobotState(KinDynModel,fakeWorld,joints_positions,zeros(6,1),zeros(size(joints_positions)),[0,0,-9.81]);
+iDynTreeWrappers.setRobotState(KinDynModel,world_H_base,joints_positions,zeros(6,1),zeros(size(joints_positions)),[0,0,-9.81]);
 
 % Prepare figure, handles and variables required for the update, some extra
-% options are commented. 
+% options are commented.
 [visualizer,objects]=iDynTreeWrappers.prepareVisualization(KinDynModel,meshFilePrefix,...
     'color',[0,0,1],'material','metal','transparency',1,'debug',true,'view',[-92.9356   22.4635],...
     'groundOn',true,'groundColor',[0.5 0.5 0.5], 'groundTransparency',0.5,'groundFrame','l_sole');%,... % optional inputs
@@ -93,7 +94,7 @@ joints_positions([16 17 19 23 24 26])=pi/10;
 
 %% Update robot position
 % update kinematics
-iDynTreeWrappers.setRobotState(KinDynModel,fakeWorld,joints_positions,zeros(6,1),zeros(size(joints_positions)),[0,0,-9.81]);
+iDynTreeWrappers.setRobotState(KinDynModel,world_H_base,joints_positions,zeros(6,1),zeros(size(joints_positions)),[0,0,-9.81]);
 
 tic
  iDynTreeWrappers.updateVisualization(KinDynModel,visualizer);
@@ -120,4 +121,3 @@ pause(1);
 iDynTreeWrappers.modifyLinksVisualization(visualizer,'linksToModify',linkstoModify(3),'style','invisible');
 pause(1);
 iDynTreeWrappers.modifyLinksVisualization(visualizer,'linksToModify',linkstoModify(3),'style','fullMesh');
-
