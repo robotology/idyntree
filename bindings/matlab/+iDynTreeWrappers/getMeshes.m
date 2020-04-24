@@ -31,11 +31,11 @@ iterator=linkSolidShapesV.begin;
 % iterate getting the name of the mesh and the name of the link
 count=1;
 link_with_no_visual=[];
-for links=1:numberOfLinks    
+for links=1:numberOfLinks
     linkName=model.getLinkName(links-1);
     linkMeshInfo(links).linkName=linkName;
     solidarray=iterator.next;
-    solids_number=size(solidarray,2);    
+    solids_number=size(solidarray,2);
     meshInfo=struct('meshFile',{},'mesh_triangles',{},'link_H_geom',{});
     for solids=1:solids_number
         if solidarray{solids}.isExternalMesh
@@ -52,7 +52,7 @@ for links=1:numberOfLinks
             meshInfo(solids).meshFile=meshFile;
             meshInfo(solids).scale=scale';
         else
-            meshInfo(solids).scale=[1,1,1];  
+            meshInfo(solids).scale=[1,1,1];
             if solidarray{solids}.isCylinder
                 meshInfo(solids).meshFile='cylinder';
                 length=solidarray{solids}.asCylinder.length;
@@ -67,15 +67,15 @@ for links=1:numberOfLinks
                 mesh_triangles=calculateMeshFromBox(box_dimensions);
             end
             if solidarray{solids}.isSphere
-                meshInfo(solids).meshFile='sphere';                
+                meshInfo(solids).meshFile='sphere';
                 radius=solidarray{solids}.asSphere.radius;
                 mesh_triangles=calculateMeshFromSphere(radius);
             end
         end
         link_H_geom=solidarray{solids}.link_H_geometry.asHomogeneousTransform.toMatlab;
         meshInfo(solids).link_H_geom=link_H_geom;
-        meshInfo(solids).mesh_triangles=mesh_triangles;              
-        map(count,:)=[{meshFile},{linkName}];
+        meshInfo(solids).mesh_triangles=mesh_triangles;
+        map(count,:)=[{meshInfo(solids).meshFile},{linkName}];
         count=count+1;
     end
     linkMeshInfo(links).meshInfo=meshInfo;
