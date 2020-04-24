@@ -109,6 +109,9 @@ xlabel('{x}');
 ylabel('{y}');
 zlabel('{z}');
 
+% Change zoom behavior
+setAxes3DPanAndZoomStyle(zoom(gca),gca,'camera')
+
 % Draw the ground
 if options.groundOn
     % Create plane on x y axis
