@@ -186,17 +186,9 @@ function [] = setRobotState(varargin)
     gravityVec_iDyntree = iDynTree.Vector3();
          
     % set joints position and velocity
-    for k = 0:length(jointPos)-1
-        
-        jointVel_iDyntree.setVal(k,jointVel(k+1));
-        jointPos_iDyntree.setVal(k,jointPos(k+1));
-    end
-    
-    % set the gravity vector
-    for k = 0:2
-        
-       gravityVec_iDyntree.setVal(k,gravAcc(k+1));       
-    end
+    jointVel_iDyntree.fromMatlab(jointVel);
+    jointPos_iDyntree.fromMatlab(jointPos);
+    gravityVec_iDyntree.fromMatlab(gravAcc);
     
     % set the current robot state
     switch nargin
