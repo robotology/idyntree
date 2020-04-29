@@ -84,6 +84,6 @@ for mesh_number=1:length(linkMeshInfo.meshInfo)
     alpha(modelMesh(mesh_number),options.transparency);
 
 end
-set(transform,'Matrix',w_H_link);
+set(transform,'Matrix',w_H_link,'Tag',linkMeshInfo.linkName);
 meshHandles.modelMesh=modelMesh;
 end

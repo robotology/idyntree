@@ -133,32 +133,16 @@ function [] = setRobotState(varargin)
             end
             
             % define the quantities required to set the floating base
-            baseRotation_iDyntree = iDynTree.Rotation();
-            baseOrigin_iDyntree   = iDynTree.Position();
             basePose_iDyntree     = iDynTree.Transform();
             baseVel_iDyntree      = iDynTree.Twist();
+            basePose_HTransform=basePose_iDyntree.asHomogeneousTransform;
             
-            % set the element of the rotation matrix and of the base
-            % position vector
-            for k = 0:2
-                
-                baseOrigin_iDyntree.setVal(k,basePose(k+1,4));
-                
-                for j = 0:2
-                    
-                    baseRotation_iDyntree.setVal(k,j,basePose(k+1,j+1));                   
-                end
-            end      
+            % set the transform of the base
+            basePose_HTransform.fromMatlab(basePose);
+            basePose_iDyntree.fromHomogeneousTransform(basePose_HTransform);
             
-            % add the rotation matrix and the position to basePose_iDyntree
-            basePose_iDyntree.setRotation(baseRotation_iDyntree);
-            basePose_iDyntree.setPosition(baseOrigin_iDyntree);
-            
-            % set the base velocities
-            for k = 0:5
-                
-                baseVel_iDyntree.setVal(k,baseVel(k+1));
-            end
+            % set the base velocities            
+            baseVel_iDyntree.fromMatlab(baseVel);
             
         case 4
             
