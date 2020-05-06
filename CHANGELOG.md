@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.6] - 2020-05-06
+
 ### Fixed
 - Fixed compilation with ipopt installed via vcpkg (https://github.com/robotology/idyntree/pull/689).
 - Fixed compilation with Visual Studio 2019 16.6 (https://github.com/robotology/idyntree/pull/672).
