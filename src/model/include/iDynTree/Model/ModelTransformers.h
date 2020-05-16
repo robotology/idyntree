@@ -88,6 +88,46 @@ bool createModelWithNormalizedJointNumbering(const Model& model,
                                              Model& reducedModel);
 
 
+/**
+ * \brief Options for the createModelWithLinkFramesOnParentJointAxis function.
+ */
+struct createModelWithLinkFramesOnParentJointAxisOptions
+{
+    /**
+     * Name of the links to consider as the base (required).
+     */
+    std::string baseLink;
+    
+    /**
+     * If true, export the original link frames as additional frames (default: false).
+     */
+    bool exportOriginalLinkFrames = false; 
+    
+    /**
+     * If exportOriginalLinkFrames is true, the additional frames that represent the original (non shifted)
+     * link frames are named as "linkName" + exportOriginalLinkFramesSuffix (default: "_original_frame").
+     */
+    std::string exportOriginalLinkFramesSuffix = "_original_frame";
+};
+
+/**
+ * @brief Given a specified base, return a model in which link frames have been moved to lay on the parent joint axis.
+ *
+ * This function takes in input a iDynTree::Model and a name of a link in that model, to use as a base.
+ * It returns a model identical to the one in input, but with the link frames moved to ensure that their origin 
+ * of the frame lays on the axis of the joint connecting the link to the parent, if this joint is a revolute or prismatic.
+ * It is useful as a pre-processing step when exporting an existing iDynTree::Model to representation that has 
+ * this constraint, such as URDF 1.0 . 
+ 
+ *
+ *
+ * @return true if all went well, false if there was an error in conversion.
+ */
+bool createModelWithLinkFramesOnParentJointAxis(const Model& inputModel,
+                                                const createModelWithLinkFramesOnParentJointAxisOptions& baseLink,
+                                                Model& outputModel);
+
+
 }
 
 #endif
