@@ -14,6 +14,7 @@
 #include <iDynTree/Core/Utils.h>
 
 #include <iterator>
+#include <string>
 #include <vector>
 
 
