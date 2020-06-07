@@ -179,6 +179,11 @@ jobs:
         sudo apt-get install libblas-dev libatlas-base-dev
         sudo apt-get remove libopenblas-base
         
+    - name: Install missing Ubuntu 20.04 dependencies 
+      if: matrix.os == 'ubuntu-20.04'
+      run: |
+        sudo apt-get install libgfortran-10-dev
+        
     - name: Build
       shell: bash
       run: |
