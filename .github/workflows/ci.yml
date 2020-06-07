@@ -83,7 +83,7 @@ jobs:
       with:
         path: ${{ github.workspace }}/install/deps
         # Including ${{ runner.temp }} is a workaround for https://github.com/robotology/whole-body-estimators/issues/60
-        key: source-deps-${{ runner.os }}-${{ runner.temp }}-vcpkg-robotology-${{ env.vcpkg_robotology_TAG }}-ycm-${{ env.YCM_TAG }}-yarp-${{ env.YARP_TAG }}-icub-${{ env.ICUB_TAG }}-github-workspace-${{ env.GITHUB_WORKSPACE }}
+        key: source-deps-${{ matrix.os }}-${{ runner.os }}-${{ runner.temp }}-vcpkg-robotology-${{ env.vcpkg_robotology_TAG }}-ycm-${{ env.YCM_TAG }}-yarp-${{ env.YARP_TAG }}-icub-${{ env.ICUB_TAG }}-github-workspace-${{ env.GITHUB_WORKSPACE }}
     
     - name: Source-based Dependencies [Windows] 
       if: steps.cache-source-deps.outputs.cache-hit != 'true' && matrix.os == 'windows-latest-disable-until-issue-569-is-solved'
@@ -178,11 +178,6 @@ jobs:
         # As a workaround, we test against the regular blas instead of openblas
         sudo apt-get install libblas-dev libatlas-base-dev
         sudo apt-get remove libopenblas-base
-        
-    - name: Install missing Ubuntu 20.04 dependencies 
-      if: matrix.os == 'ubuntu-20.04'
-      run: |
-        sudo apt-get install libgfortran-10-dev
         
     - name: Build
       shell: bash
