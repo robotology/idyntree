@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Fixed compilation with assimp installed with apt-get on Ubuntu 20.04 (https://github.com/robotology/idyntree/pull/692, https://github.com/robotology/idyntree/issues/693). 
+
 ## [1.0.6] - 2020-05-06
 
 ### Fixed
