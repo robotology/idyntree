@@ -56,15 +56,15 @@ if((${CMAKE_CXX_COMPILER_ID} MATCHES "GNU") OR (${CMAKE_CXX_COMPILER_ID} MATCHES
     target_compile_options(${libraryname} PRIVATE "-Wno-deprecated")
 endif()
 
-target_link_libraries(${libraryname} idyntree-core
-                                     idyntree-model
-                                     idyntree-sensors
-                                     idyntree-kdl
-                                     idyntree-modelio-urdf
-                                     ${orocos_kdl_LIBRARIES}
-                                     ${urdfdom_LIBRARIES}
-                                     ${console_bridge_LIBRARIES}
-                                     ${TinyXML_LIBRARIES})
+target_link_libraries(${libraryname} PRIVATE idyntree-core
+                                             idyntree-model
+                                             idyntree-sensors
+                                             idyntree-kdl
+                                             idyntree-modelio-urdf
+                                             ${orocos_kdl_LIBRARIES}
+                                             ${urdfdom_LIBRARIES}
+                                             ${console_bridge_LIBRARIES}
+                                             ${TinyXML_LIBRARIES})
 
 if(NOT CMAKE_VERSION VERSION_LESS 2.8.12)
     target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})

@@ -42,7 +42,7 @@ target_include_directories(${libraryname} PRIVATE SYSTEM ${orocos_kdl_INCLUDE_DI
 
 target_link_libraries(${libraryname} idyntree-core idyntree-sensors)
 if (IDYNTREE_USES_KDL)
-  target_link_libraries(${libraryname} idyntree-modelio-urdf-kdl ${orocos_kdl_LIBRARIES} ${TinyXML_LIBRARIES})
+  target_link_libraries(${libraryname} idyntree-kdl idyntree-modelio-urdf-kdl ${orocos_kdl_LIBRARIES} ${TinyXML_LIBRARIES})
 endif ()
 
 if((${CMAKE_CXX_COMPILER_ID} MATCHES "GNU") OR (${CMAKE_CXX_COMPILER_ID} MATCHES "Clang"))

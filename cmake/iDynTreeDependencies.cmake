@@ -99,3 +99,21 @@ endif()
 idyntree_handle_dependency(WORHP DO_NOT_SILENTLY_SEARCH)
 # Workaround for https://github.com/robotology/idyntree/issues/599
 idyntree_handle_dependency(assimp DO_NOT_SILENTLY_SEARCH MAIN_TARGET assimp::assimp)
+# Workaround for https://github.com/robotology/idyntree/issues/693
+if(TARGET assimp::assimp)
+  get_property(assimp_INTERFACE_INCLUDE_DIRECTORIES
+               TARGET assimp::assimp
+               PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
+  if(assimp_INTERFACE_INCLUDE_DIRECTORIES MATCHES "/usr/lib/include")
+    string(REPLACE "/usr/lib/include" "/usr/include" assimp_INTERFACE_INCLUDE_DIRECTORIES "${assimp_INTERFACE_INCLUDE_DIRECTORIES}")
+    set_property(TARGET assimp::assimp
+                 PROPERTY INTERFACE_INCLUDE_DIRECTORIES
+                 "${assimp_INTERFACE_INCLUDE_DIRECTORIES}")
+    get_property(assimp_LOCATION_RELEASE
+                 TARGET assimp::assimp
+                 PROPERTY LOCATION_RELEASE)
+    set_property(TARGET assimp::assimp
+                 PROPERTY IMPORTED_LOCATION
+                 "${assimp_LOCATION_RELEASE}")
+  endif()
+endif()
