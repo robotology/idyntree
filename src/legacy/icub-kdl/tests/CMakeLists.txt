@@ -11,7 +11,7 @@ macro(add_icub_test testName)
     set(testname   test_${testName})
     add_executable(${testbinary} ${testsrc})
     target_include_directories(${testbinary} PRIVATE ${EIGEN3_INCLUDE_DIR})
-    target_link_libraries(${testbinary} idyntree-core idyntree-high-level idyntree-yarp-kdl idyntree-icub-kdl idyntree-kdl idyntree-modelio-urdf-kdl idyntree-modelio-urdf YARP::YARP_os YARP::YARP_math ${orocos_kdl_LIBRARIES} idyntree-testmodels)
+    target_link_libraries(${testbinary} idyntree-core idyntree-high-level idyntree-yarp-kdl idyntree-icub-kdl idyntree-kdl idyntree-modelio-urdf-kdl idyntree-modelio-urdf YARP::YARP_os YARP::YARP_math ${orocos_kdl_LIBRARIES} ${urdfdom_LIBRARIES} ${console_bridge_LIBRARIES} idyntree-testmodels)
     add_test(NAME ${testname} COMMAND ${testbinary})
 
     if(IDYNTREE_RUN_VALGRIND_TESTS)
