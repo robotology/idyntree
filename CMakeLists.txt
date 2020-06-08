@@ -1,6 +1,6 @@
 # Copyright (C) 2013-2018 Fondazione Istituto Italiano di Tecnologia
-# 
-# Licensed under either the GNU Lesser General Public License v3.0 : 
+#
+# Licensed under either the GNU Lesser General Public License v3.0 :
 # https://www.gnu.org/licenses/lgpl-3.0.html
 # or the GNU Lesser General Public License v2.1 :
 # https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
@@ -8,7 +8,8 @@
 
 cmake_minimum_required(VERSION 3.5)
 
-project(iDynTree C CXX)
+project(iDynTree VERSION 1.1.0
+                 LANGUAGES C CXX)
 
 # Disable in source build, unless Eclipse is used
 if( ("${PROJECT_SOURCE_DIR}" STREQUAL "${PROJECT_BINARY_DIR}") AND
@@ -21,12 +22,7 @@ if( ("${PROJECT_SOURCE_DIR}" STREQUAL "${PROJECT_BINARY_DIR}") AND
                        "you need to remove CMakeCache.txt and CMakeFiles/ as well.")
 endif()
 
-set(VARS_PREFIX "iDynTree")
-
-set(${VARS_PREFIX}_MAJOR_VERSION 1)
-set(${VARS_PREFIX}_MINOR_VERSION 0)
-set(${VARS_PREFIX}_PATCH_VERSION 7)
-set(${VARS_PREFIX}_VERSION ${${VARS_PREFIX}_MAJOR_VERSION}.${${VARS_PREFIX}_MINOR_VERSION}.${${VARS_PREFIX}_PATCH_VERSION})
+set(VARS_PREFIX "${PROJECT_NAME}")
 
 # Pick up our CMake scripts - they are all in the cmake subdirectory.
 set(IDYNTREE_MODULE_DIR ${PROJECT_SOURCE_DIR}/cmake)
@@ -44,7 +40,7 @@ if(NOT IDYNTREE_ONLY_DOCS)
 
     # Add external libraries that are embedded in iDynTree
     # source tree, if necessary (by default does not adds
-    # anything) feel free to check teh logic inside
+    # anything) feel free to check the logic inside
     add_subdirectory(extern)
 
     include(AddInstallRPATHSupport)

@@ -20,10 +20,10 @@ add_subdirectory(model_io)
 add_subdirectory(estimation)
 add_subdirectory(solid-shapes)
 add_subdirectory(high-level)
+add_subdirectory(inverse-kinematics)
 
 if (IDYNTREE_USES_IPOPT)
   set(IDYNTREE_BUILD_IK TRUE)
-  add_subdirectory(inverse-kinematics)
 endif()
 
 if (IDYNTREE_COMPILES_OPTIMALCONTROL)

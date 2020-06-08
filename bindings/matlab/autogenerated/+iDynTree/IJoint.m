@@ -5,108 +5,108 @@ classdef IJoint < SwigRef
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(907, self);
+        iDynTreeMEX(962, self);
         self.SwigClear();
       end
     end
     function varargout = clone(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(908, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(963, self, varargin{:});
     end
     function varargout = getNrOfPosCoords(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(909, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(964, self, varargin{:});
     end
     function varargout = getNrOfDOFs(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(910, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(965, self, varargin{:});
     end
     function varargout = setAttachedLinks(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(911, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(966, self, varargin{:});
     end
     function varargout = setRestTransform(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(912, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(967, self, varargin{:});
     end
     function varargout = getFirstAttachedLink(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(913, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(968, self, varargin{:});
     end
     function varargout = getSecondAttachedLink(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(914, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(969, self, varargin{:});
     end
     function varargout = getRestTransform(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(915, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(970, self, varargin{:});
     end
     function varargout = getTransform(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(916, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(971, self, varargin{:});
     end
     function varargout = getTransformDerivative(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(917, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(972, self, varargin{:});
     end
     function varargout = getMotionSubspaceVector(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(918, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(973, self, varargin{:});
     end
     function varargout = computeChildPosVelAcc(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(919, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(974, self, varargin{:});
     end
     function varargout = computeChildVelAcc(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(920, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(975, self, varargin{:});
     end
     function varargout = computeChildVel(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(921, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(976, self, varargin{:});
     end
     function varargout = computeChildAcc(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(922, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(977, self, varargin{:});
     end
     function varargout = computeChildBiasAcc(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(923, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(978, self, varargin{:});
     end
     function varargout = computeJointTorque(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(924, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(979, self, varargin{:});
     end
     function varargout = setIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(925, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(980, self, varargin{:});
     end
     function varargout = getIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(926, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(981, self, varargin{:});
     end
     function varargout = setPosCoordsOffset(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(927, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(982, self, varargin{:});
     end
     function varargout = getPosCoordsOffset(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(928, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(983, self, varargin{:});
     end
     function varargout = setDOFsOffset(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(929, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(984, self, varargin{:});
     end
     function varargout = getDOFsOffset(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(930, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(985, self, varargin{:});
     end
     function varargout = hasPosLimits(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(931, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(986, self, varargin{:});
     end
     function varargout = enablePosLimits(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(932, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(987, self, varargin{:});
     end
     function varargout = getPosLimits(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(933, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(988, self, varargin{:});
     end
     function varargout = getMinPosLimit(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(934, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(989, self, varargin{:});
     end
     function varargout = getMaxPosLimit(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(935, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(990, self, varargin{:});
     end
     function varargout = setPosLimits(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(936, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(991, self, varargin{:});
     end
     function varargout = isRevoluteJoint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(937, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(992, self, varargin{:});
     end
     function varargout = isFixedJoint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(938, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(993, self, varargin{:});
     end
     function varargout = asRevoluteJoint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(939, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(994, self, varargin{:});
     end
     function varargout = asFixedJoint(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(940, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(995, self, varargin{:});
     end
     function self = IJoint(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')

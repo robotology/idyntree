@@ -11,74 +11,74 @@ classdef AttitudeQuaternionEKF < iDynTree.IAttitudeEstimator & iDynTree.Discrete
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1758, varargin{:});
+        tmp = iDynTreeMEX(1863, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = getParameters(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1759, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1864, self, varargin{:});
     end
     function varargout = setParameters(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1760, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1865, self, varargin{:});
     end
     function varargout = setGravityDirection(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1761, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1866, self, varargin{:});
     end
     function varargout = setTimeStepInSeconds(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1762, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1867, self, varargin{:});
     end
     function varargout = setBiasCorrelationTimeFactor(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1763, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1868, self, varargin{:});
     end
     function varargout = useMagnetometerMeasurements(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1764, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1869, self, varargin{:});
     end
     function varargout = setMeasurementNoiseVariance(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1765, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1870, self, varargin{:});
     end
     function varargout = setSystemNoiseVariance(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1766, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1871, self, varargin{:});
     end
     function varargout = setInitialStateCovariance(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1767, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1872, self, varargin{:});
     end
     function varargout = initializeFilter(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1768, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1873, self, varargin{:});
     end
     function varargout = updateFilterWithMeasurements(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1769, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1874, self, varargin{:});
     end
     function varargout = propagateStates(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1770, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1875, self, varargin{:});
     end
     function varargout = getOrientationEstimateAsRotationMatrix(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1771, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1876, self, varargin{:});
     end
     function varargout = getOrientationEstimateAsQuaternion(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1772, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1877, self, varargin{:});
     end
     function varargout = getOrientationEstimateAsRPY(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1773, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1878, self, varargin{:});
     end
     function varargout = getInternalStateSize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1774, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1879, self, varargin{:});
     end
     function varargout = getInternalState(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1775, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1880, self, varargin{:});
     end
     function varargout = getDefaultInternalInitialState(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1776, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1881, self, varargin{:});
     end
     function varargout = setInternalState(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1777, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1882, self, varargin{:});
     end
     function varargout = setInternalStateInitialOrientation(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1778, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1883, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1779, self);
+        iDynTreeMEX(1884, self);
         self.SwigClear();
       end
     end

@@ -127,6 +127,48 @@ namespace iDynTree
 
         bool setVal(const unsigned int index, const double new_el);
 
+        /**
+         * Returns a const iterator to the beginning of the vector
+         * @note At the moment iterator is implemented as a pointer, it may change in the future.
+         * For this reason it should not be used as a pointer to the data, use data() instead.
+         */
+        const double* begin() const noexcept;
+
+        /**
+         * Returns a const iterator to the beginning of the vector
+         * @note At the moment iterator is implemented as a pointer, it may change in the future.
+         * For this reason it should not be used as a pointer to the data, use data() instead.
+         */
+        const double* end() const noexcept;
+
+        /**
+         * Returns a const iterator to the beginning of the vector
+         * @note At the moment iterator is implemented as a pointer, it may change in the future.
+         * For this reason it should not be used as a pointer to the data, use data() instead.
+         */
+        const double* cbegin() const noexcept;
+
+        /**
+         * Returns a const iterator to the beginning of the vector
+         * @note At the moment iterator is implemented as a pointer, it may change in the future.
+         * For this reason it should not be used as a pointer to the data, use data() instead.
+         */
+        const double* cend() const noexcept;
+
+        /**
+         * Returns a iterator to the beginning of the vector
+         * @note At the moment iterator is implemented as a pointer, it may change in the future.
+         * For this reason it should not be used as a pointer to the data, use data() instead.
+         */
+        double* begin() noexcept;
+
+        /**
+         * Returns a iterator to the beginning of the vector
+         * @note At the moment iterator is implemented as a pointer, it may change in the future.
+         * For this reason it should not be used as a pointer to the data, use data() instead.
+         */
+        double* end() noexcept;
+
         unsigned int size() const;
 
         ///@}

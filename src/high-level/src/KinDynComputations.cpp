@@ -802,7 +802,7 @@ void KinDynComputations::getRobotState(Transform& world_T_base,
         // base_X_inertial \ls^inertial v_base
         base_velocity = pimpl->m_pos.worldBasePos() * pimpl->m_vel.baseVel();
     }
-    
+
 }
 
 void KinDynComputations::getRobotState(iDynTree::VectorDynSize &s,
@@ -889,12 +889,12 @@ Transform KinDynComputations::getRelativeTransform(const std::string& refFrameNa
 {
     int refFrameIndex = getFrameIndex(refFrameName);
     int frameIndex = getFrameIndex(frameName);
-    if( frameIndex < 0 )
+    if( frameIndex == iDynTree::FRAME_INVALID_INDEX )
     {
         reportError("KinDynComputations","getRelativeTransform","unknown frameName");
         return Transform::Identity();
     }
-    else if( refFrameIndex < 0 )
+    else if( refFrameIndex == iDynTree::FRAME_INVALID_INDEX )
     {
         reportError("KinDynComputations","getRelativeTransform","unknown refFrameName");
         return Transform::Identity();
@@ -1005,7 +1005,7 @@ Transform KinDynComputations::getRelativeTransformExplicit(const iDynTree::Frame
 Transform KinDynComputations::getWorldTransform(std::string frameName)
 {
     int frameIndex = getFrameIndex(frameName);
-    if( frameIndex < 0 )
+    if( frameIndex  == iDynTree::FRAME_INVALID_INDEX )
     {
         return Transform::Identity();
     }
@@ -1071,6 +1071,27 @@ Transform KinDynComputations::getWorldTransform(const FrameIndex frameIndex)
     world_H_frame.getSemantics().setRotationSemantics(rotSem);
 
     return world_H_frame;
+}
+
+std::vector<iDynTree::Matrix4x4> KinDynComputations::getWorldTransformsAsHomogeneous(const std::vector<std::string>& frameNames)
+{
+    std::vector<iDynTree::Matrix4x4> worldTransforms;
+    int numberOfTransforms=frameNames.size();
+    for(int number=0; number<numberOfTransforms; number++)
+    {
+        std::string frameName=frameNames[number];
+        int frameIndex = getFrameIndex(frameName);
+        if( frameIndex  == iDynTree::FRAME_INVALID_INDEX )
+        {
+            reportError("KinDynComputations","getWorldTransformsAsHomogeneous", "requested frameName not found in model. Returning empty vector.");
+            return {};
+        }
+        else
+        {
+            worldTransforms.push_back(getWorldTransform(frameIndex).asHomogeneousTransform());
+        }
+    }
+    return worldTransforms;
 }
 
 unsigned int KinDynComputations::getNrOfFrames() const
@@ -1815,14 +1836,14 @@ SpatialMomentum KinDynComputations::getCentroidalTotalMomentum()
 
 bool KinDynComputations::getFreeFloatingMassMatrix(MatrixDynSize& freeFloatingMassMatrix)
 {
-    // Compute the body-fixed-body-fixed mass matrix, if necessary 
+    // Compute the body-fixed-body-fixed mass matrix, if necessary
     this->computeRawMassMatrixAndTotalMomentum();
-    
-    // If the matrix has the right size, this should be inexpensive 
+
+    // If the matrix has the right size, this should be inexpensive
     freeFloatingMassMatrix.resize(pimpl->m_robot_model.getNrOfDOFs()+6,pimpl->m_robot_model.getNrOfDOFs()+6);
 
     toEigen(freeFloatingMassMatrix) = toEigen(pimpl->m_rawMassMatrix);
-    
+
     // Handle the different representations
     pimpl->processOnRightSideMatrixExpectingBodyFixedModelVelocity(freeFloatingMassMatrix);
     pimpl->processOnLeftSideBodyFixedBaseMomentumJacobian(freeFloatingMassMatrix);

@@ -4,49 +4,49 @@ classdef BerdySensors < SwigRef
       this = iDynTreeMEX(3, self);
     end
     function varargout = pop(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(46, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(71, self, varargin{:});
     end
     function varargout = brace(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(47, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(72, self, varargin{:});
     end
     function varargout = setbrace(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(48, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(73, self, varargin{:});
     end
     function varargout = append(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(49, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(74, self, varargin{:});
     end
     function varargout = empty(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(50, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(75, self, varargin{:});
     end
     function varargout = size(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(51, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(76, self, varargin{:});
     end
     function varargout = swap(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(52, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(77, self, varargin{:});
     end
     function varargout = begin(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(53, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(78, self, varargin{:});
     end
     function varargout = end(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(54, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(79, self, varargin{:});
     end
     function varargout = rbegin(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(55, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(80, self, varargin{:});
     end
     function varargout = rend(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(56, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(81, self, varargin{:});
     end
     function varargout = clear(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(57, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(82, self, varargin{:});
     end
     function varargout = get_allocator(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(58, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(83, self, varargin{:});
     end
     function varargout = pop_back(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(59, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(84, self, varargin{:});
     end
     function varargout = erase(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(60, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(85, self, varargin{:});
     end
     function self = BerdySensors(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
@@ -54,38 +54,38 @@ classdef BerdySensors < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(61, varargin{:});
+        tmp = iDynTreeMEX(86, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = push_back(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(62, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(87, self, varargin{:});
     end
     function varargout = front(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(63, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(88, self, varargin{:});
     end
     function varargout = back(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(64, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(89, self, varargin{:});
     end
     function varargout = assign(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(65, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(90, self, varargin{:});
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(66, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(91, self, varargin{:});
     end
     function varargout = insert(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(67, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(92, self, varargin{:});
     end
     function varargout = reserve(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(68, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(93, self, varargin{:});
     end
     function varargout = capacity(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(69, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(94, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(70, self);
+        iDynTreeMEX(95, self);
         self.SwigClear();
       end
     end

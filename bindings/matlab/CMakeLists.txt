@@ -1,4 +1,4 @@
-# As matlab support is higly experimental for now in swig, we split the binding generation in two phases:
+# As Matlab support is higly experimental for now in swig, we split the binding generation in two phases:
 #  * Generation of the .cxx code, left to the author of the library that needs to have a recent (non-standard) swig
 #  * Compilation of the .cxx, that is left to the user that compiles the library.
 # For doing this we split the traditional swig_add_module macro in two macro: one for generating the wrapper and one
@@ -28,7 +28,7 @@ macro(SWIG_COMPILE_MODULE_MEX name language)
                  MODULE
                  SRC ${swig_generated_sources}
                      ${swig_other_sources})
-  # Avoid the "d" suffix for mex files as it prevents the bindings to call the mex file correctly 
+  # Avoid the "d" suffix for mex files as it prevents the bindings to call the mex file correctly
   set_target_properties(${SWIG_MODULE_${name}_REAL_NAME} PROPERTIES DEBUG_POSTFIX "")
 endmacro()
 
@@ -112,6 +112,9 @@ if(IDYNTREE_USES_MATLAB)
 
   # Install the high-level-matlab-wrappers
   install(DIRECTORY ${HIGH_LEVEL_WRAPPERS_SOURCE_DIR} DESTINATION ${CMAKE_INSTALL_PREFIX}/${IDYNTREE_INSTALL_MATLAB_MFILESDIR})
+
+  # Install the matlab-visualization-external-functions
+  install(FILES ${IDYNTREE_INTERNAL_MESH2TRI_PATH}/mesh2tri.m DESTINATION ${CMAKE_INSTALL_PREFIX}/${IDYNTREE_INSTALL_MATLAB_MFILESDIR})
 
   #On new versions of Clang, MATLAB requires C++11.
   #I enable it on all Clangs

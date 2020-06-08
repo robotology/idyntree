@@ -7,18 +7,22 @@ set(IDYN_TREE_IK_HEADERS include/iDynTree/ConvexHullHelpers.h
                          include/iDynTree/BoundingBoxHelpers.h
                          include/iDynTree/InverseKinematics.h)
 
-set(PRIVATE_IDYN_TREE_IK_SOURCES src/InverseKinematicsNLP.cpp
-                                 src/InverseKinematicsData.cpp
-                                 src/TransformConstraint.cpp)
-set(PRIVATE_IDYN_TREE_IK_HEADERS include/private/InverseKinematicsNLP.h
-                                 include/private/InverseKinematicsData.h
-                                 include/private/TransformConstraint.h)
+if(IDYNTREE_USES_IPOPT)
+    set(PRIVATE_IDYN_TREE_IK_SOURCES src/InverseKinematicsNLP.cpp
+                                     src/InverseKinematicsData.cpp
+                                     src/TransformConstraint.cpp)
+    set(PRIVATE_IDYN_TREE_IK_HEADERS include/private/InverseKinematicsNLP.h
+                                     include/private/InverseKinematicsData.h
+                                     include/private/TransformConstraint.h)
+    source_group("Private\\Header Files" FILES ${PRIVATE_IDYN_TREE_IK_HEADERS})
+    source_group("Private\\Source Files" FILES ${PRIVATE_IDYN_TREE_IK_SOURCES})
 
-source_group("Private\\Header Files" FILES ${PRIVATE_IDYN_TREE_IK_HEADERS})
-source_group("Private\\Source Files" FILES ${PRIVATE_IDYN_TREE_IK_SOURCES})
+    add_library(${libraryname} ${IDYN_TREE_IK_HEADERS} ${IDYN_TREE_IK_SOURCES}
+                               ${PRIVATE_IDYN_TREE_IK_SOURCES} ${PRIVATE_IDYN_TREE_IK_HEADERS})
+else()
+    add_library(${libraryname} ${IDYN_TREE_IK_HEADERS} ${IDYN_TREE_IK_SOURCES})
+endif()
 
-add_library(${libraryname} ${IDYN_TREE_IK_HEADERS} ${IDYN_TREE_IK_SOURCES}
-                           ${PRIVATE_IDYN_TREE_IK_SOURCES} ${PRIVATE_IDYN_TREE_IK_HEADERS})
 add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
@@ -28,11 +32,16 @@ target_include_directories(${libraryname} PRIVATE include/private)
 
 # Probably SYSTEM is not compatible with cmake 2.8.12, but I think as YARP requires
 # CMake 3.0 we can increase the min version
-target_include_directories(${libraryname} SYSTEM PUBLIC ${IPOPT_INCLUDE_DIRS})
-target_include_directories(${libraryname} SYSTEM PRIVATE ${EIGEN3_INCLUDE_DIR})
-target_link_libraries(${libraryname} idyntree-core idyntree-high-level ${IPOPT_LIBRARIES})
 
-target_compile_definitions(${libraryname} PRIVATE ${IPOPT_DEFINITIONS})
+target_include_directories(${libraryname} SYSTEM PRIVATE ${EIGEN3_INCLUDE_DIR})
+target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-high-level)
+
+if(IDYNTREE_USES_IPOPT)
+    target_compile_definitions(${libraryname} PRIVATE IDYNTREE_USES_IPOPT)
+    target_compile_definitions(${libraryname} PRIVATE ${IPOPT_DEFINITIONS})
+    target_include_directories(${libraryname} PRIVATE ${IPOPT_INCLUDE_DIRS})
+    target_link_libraries(${libraryname} PRIVATE ${IPOPT_LIBRARIES})
+endif()
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYN_TREE_IK_HEADERS})
 
@@ -47,7 +56,7 @@ install(TARGETS ${libraryname}
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
 
 
-if(IDYNTREE_COMPILE_TESTS)
+if(IDYNTREE_COMPILE_TESTS AND IDYNTREE_USES_IPOPT)
   add_subdirectory(tests)
 endif()
 

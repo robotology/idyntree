@@ -9,29 +9,29 @@ classdef Link < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(900, varargin{:});
+        tmp = iDynTreeMEX(955, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = inertia(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(901, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(956, self, varargin{:});
     end
     function varargout = setInertia(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(902, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(957, self, varargin{:});
     end
     function varargout = getInertia(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(903, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(958, self, varargin{:});
     end
     function varargout = setIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(904, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(959, self, varargin{:});
     end
     function varargout = getIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(905, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(960, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(906, self);
+        iDynTreeMEX(961, self);
         self.SwigClear();
       end
     end

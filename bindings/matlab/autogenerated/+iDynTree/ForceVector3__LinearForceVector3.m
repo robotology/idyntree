@@ -7,14 +7,14 @@ classdef ForceVector3__LinearForceVector3 < iDynTree.GeomVector3__LinearForceVec
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(495, varargin{:});
+        tmp = iDynTreeMEX(550, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(496, self);
+        iDynTreeMEX(551, self);
         self.SwigClear();
       end
     end
