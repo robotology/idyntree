@@ -5,6 +5,13 @@ include_directories(${CMAKE_SOURCE_DIR}/include
                           ${YARP_INCLUDE_DIRS}
                           ${ICUB_INCLUDE_DIRS})
 
+
+if(IDYNTREE_USES_INTERNAL_URDFDOM)
+    set(urdfdom_LIBRARIES iDynTree_priv_urdfdom_model)
+else()
+    find_package(urdfdom REQUIRED)
+endif()
+
 macro(add_icub_test testName)
     set(testsrc ${testName}Test.cpp)
     set(testbinary ${testName}Test)
