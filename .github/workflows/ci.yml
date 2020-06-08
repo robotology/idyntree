@@ -21,7 +21,7 @@ jobs:
     strategy:
       matrix:
         build_type: [Release]
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-18.04, ubuntu-20.04, windows-latest, macOS-latest]
 
     steps:
     - uses: actions/checkout@master
@@ -34,7 +34,7 @@ jobs:
     # Remove apt repos that are known to break from time to time 
     # See https://github.com/actions/virtual-environments/issues/323  
     - name: Remove broken apt repos [Ubuntu]
-      if: matrix.os == 'ubuntu-latest'
+      if: contains(matrix.os, 'ubuntu')
       run: |
         for apt_file in `grep -lr microsoft /etc/apt/sources.list.d/`; do sudo rm $apt_file; done
         
@@ -70,7 +70,7 @@ jobs:
         brew install ace assimp boost eigen swig qt5 orocos-kdl
     
     - name: Dependencies [Ubuntu]
-      if: matrix.os == 'ubuntu-latest'
+      if: contains(matrix.os, 'ubuntu')
       run: |
         sudo apt-get update
         sudo apt-get install git build-essential cmake libace-dev coinor-libipopt-dev  libboost-system-dev libboost-filesystem-dev \
@@ -83,7 +83,7 @@ jobs:
       with:
         path: ${{ github.workspace }}/install/deps
         # Including ${{ runner.temp }} is a workaround for https://github.com/robotology/whole-body-estimators/issues/60
-        key: source-deps-${{ runner.os }}-${{ runner.temp }}-vcpkg-robotology-${{ env.vcpkg_robotology_TAG }}-ycm-${{ env.YCM_TAG }}-yarp-${{ env.YARP_TAG }}-icub-${{ env.ICUB_TAG }}-github-workspace-${{ env.GITHUB_WORKSPACE }}
+        key: source-deps-${{ matrix.os }}-${{ runner.os }}-${{ runner.temp }}-vcpkg-robotology-${{ env.vcpkg_robotology_TAG }}-ycm-${{ env.YCM_TAG }}-yarp-${{ env.YARP_TAG }}-icub-${{ env.ICUB_TAG }}-github-workspace-${{ env.GITHUB_WORKSPACE }}
     
     - name: Source-based Dependencies [Windows] 
       if: steps.cache-source-deps.outputs.cache-hit != 'true' && matrix.os == 'windows-latest-disable-until-issue-569-is-solved'
@@ -116,7 +116,7 @@ jobs:
         cmake --build . --config ${{ matrix.build_type }} --target INSTALL 
         
     - name: Source-based Dependencies [Ubuntu/macOS] 
-      if: steps.cache-source-deps.outputs.cache-hit != 'true' && (matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest')
+      if: steps.cache-source-deps.outputs.cache-hit != 'true' && (contains(matrix.os, 'ubuntu') || matrix.os == 'macOS-latest')
       shell: bash
       run: |
         # YCM
@@ -159,7 +159,7 @@ jobs:
               -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
 
     - name: Configure [Ubuntu/macOS]
-      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'
+      if: contains(matrix.os, 'ubuntu') || matrix.os == 'macOS-latest'
       shell: bash
       run: |
         mkdir -p build
@@ -169,7 +169,7 @@ jobs:
               -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
 
     - name: Enable additional Ubuntu options (Valgrind, Octave, Python, legacy KDL) [Ubuntu] 
-      if: matrix.os == 'ubuntu-latest'
+      if: contains(matrix.os, 'ubuntu')
       run: |
         cd build
         # Assimp is disabled on Ubuntu as a workaround for https://github.com/robotology/idyntree/issues/663
@@ -189,6 +189,8 @@ jobs:
         cmake --build . --config ${{ matrix.build_type }}
         
     - name: Test
+      # Workaround for https://github.com/robotology/idyntree/issues/694
+      if: matrix.os != 'ubuntu-20.04'
       shell: bash
       run: |
         cd build
@@ -202,7 +204,7 @@ jobs:
         cmake --build . --config ${{ matrix.build_type }} --target INSTALL
         
     - name: Install [Ubuntu/macOS]
-      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'
+      if: contains(matrix.os, 'ubuntu') || matrix.os == 'macOS-latest'
       shell: bash
       run: |
         cd build
@@ -220,7 +222,7 @@ jobs:
         cmake --build . --config ${{ matrix.build_type }}
         
     - name: Compile Examples [Ubuntu/macOS]
-      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOS-latest'
+      if: contains(matrix.os, 'ubuntu') || matrix.os == 'macOS-latest'
       shell: bash
       run: |
         cd examples
@@ -231,7 +233,7 @@ jobs:
 
         
     - name: Check build if some dependencies are not enabled [Ubuntu]
-      if: matrix.os == 'ubuntu-latest'
+      if: contains(matrix.os, 'ubuntu')
       shell: bash
       run: |
         cd build
