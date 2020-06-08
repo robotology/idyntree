@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2020-06-08
+
 ### Added
 - Added a new function to `iDynTreeWrappers` for the function `getWorldTransformsAsHomogeneous`.
 - Added functions for having a MATLAB iDynTree Visualizer in `iDynTreeWrappers`. Some time optimization has been performed (https://github.com/robotology/idyntree/issues/659).
