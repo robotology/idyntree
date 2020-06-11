@@ -6,18 +6,6 @@
 # https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 # at your option.
 
-macro(IDYNTREE_ADD_TOOL_YARP_KDL tool_name tool_code)
-    add_executable(${tool_name} ${tool_code})
-    target_link_libraries(${tool_name} idyntree-core
-                                       idyntree-regressors
-                                       idyntree-modelio-urdf-kdl
-                                       idyntree-modelio-symoro)
-
-    target_compile_options(${tool_name} PRIVATE ${IDYNTREE_WARNING_FLAGS})
-    target_include_directories(${tool_name} PRIVATE SYSTEM ${EIGEN3_INCLUDE_DIR} ${orocos_kdl_INCLUDE_DIRS})
-    install(TARGETS ${tool_name} DESTINATION bin)
-endmacro(IDYNTREE_ADD_TOOL_YARP_KDL tool_name tool_code)
-
 macro(IDYNTREE_ADD_TOOL tool_name tool_code)
     add_executable(${tool_name} ${tool_code})
     target_link_libraries(${tool_name} idyntree-core
@@ -36,14 +24,10 @@ if(IDYNTREE_USES_IRRLICHT)
     idyntree_add_tool(idyntree-model-view idyntree-model-view.cpp)
 endif()
 
-if(IDYNTREE_USES_ICUB_MAIN AND IDYNTREE_USES_KDL AND IDYNTREE_USES_SYMORO_PAR)
-    idyntree_add_tool_yarp_kdl(par2urdf par2urdf.cpp)
-endif()
-
 if(IDYNTREE_USES_ICUB_MAIN)
   add_definitions(-D_USE_MATH_DEFINES)
   add_executable(urdf2dh urdf2dh)
-  target_link_libraries(urdf2dh iKin idyntree-core idyntree-regressors  idyntree-model idyntree-icub idyntree-high-level)
+  target_link_libraries(urdf2dh iKin idyntree-core idyntree-model idyntree-icub idyntree-high-level)
   install(TARGETS urdf2dh DESTINATION bin)
 endif()
 

@@ -60,9 +60,6 @@ if(NOT IDYNTREE_ONLY_DOCS)
     if(IDYNTREE_USES_ICUB_MAIN)
         list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES ICUB)
     endif()
-    if(IDYNTREE_USES_KDL)
-        list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES orocos_kdl)
-    endif()
 
     # List exported CMake package dependencies when the library is compiled as static
     set(_IDYNTREE_EXPORTED_DEPENDENCIES_ONLY_STATIC "")
