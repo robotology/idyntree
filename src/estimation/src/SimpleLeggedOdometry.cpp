@@ -68,7 +68,7 @@ bool SimpleLeggedOdometry::init(const FrameIndex initialFixedFrameIndex,
     m_fixedLinkIndex = m_model.getFrameLink(initialFixedFrameIndex);
 
     Transform world_H_initialFixedFrame = initialFixedFrame_H_world.inverse();
-    Transform initalFixedFrame_H_fixedLink =  m_model.getFrameTransform(m_fixedLinkIndex).inverse();
+    Transform initalFixedFrame_H_fixedLink =  m_model.getFrameTransform(initialFixedFrameIndex).inverse();
 
     m_world_H_fixedLink = world_H_initialFixedFrame*initalFixedFrame_H_fixedLink;
 
