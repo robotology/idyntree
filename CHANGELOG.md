@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Fix bug in init() of SimpleLeggedOdometry that used an incorrect initial world frame location if used with an additional frame of a link (https://github.com/robotology/idyntree/pull/698)
+
 ## [1.1.0] - 2020-06-08
 
 ### Added
