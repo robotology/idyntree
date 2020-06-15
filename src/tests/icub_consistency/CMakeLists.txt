@@ -7,28 +7,14 @@
 # at your option.
 
 
-macro(add_icub_consistency_test_kdl testName)
-    set(testsrc ${testName}ConsistencyTest.cpp)
-    set(testbinary ${testName}ConsistencyTest)
-    set(testname   ConsistencyTest${testName})
-    add_executable(${testbinary} ${testsrc})
-    target_link_libraries(${testbinary} idyntree-modelio-urdf-kdl idyntree-yarp idyntree-high-level idyntree-modelio-ikin-kdl idyntree-icub idyntree-icub-kdl idyntree-icub idyntree-core idyntree-kdl idyntree-model idyntree-estimation idyntree-testmodels)
-    target_include_directories(${testbinary} PRIVATE SYSTEM ${EIGEN3_INCLUDE_DIR})
-    add_test(NAME ${testname} COMMAND ${testbinary})
-
-    if(IDYNTREE_RUN_VALGRIND_TESTS)
-        add_test(NAME memcheck_${testname} COMMAND ${MEMCHECK_COMMAND_COMPLETE} $<TARGET_FILE:${testbinary}>)
-
-    endif()
-endmacro()
 
 macro(add_icub_consistency_test testName)
     set(testsrc ${testName}ConsistencyTest.cpp)
     set(testbinary ${testName}ConsistencyTest)
     set(testname   ConsistencyTest${testName})
     add_executable(${testbinary} ${testsrc})
-    target_link_libraries(${testbinary} idyntree-yarp idyntree-high-level idyntree-icub idyntree-icub idyntree-icub idyntree-core idyntree-model idyntree-estimation idyntree-testmodels)
-    target_include_directories(${testbinary} PRIVATE SYSTEM ${EIGEN3_INCLUDE_DIR})
+    target_link_libraries(${testbinary} PRIVATE idyntree-yarp idyntree-high-level idyntree-icub idyntree-core
+                                                idyntree-model idyntree-estimation idyntree-testmodels Eigen3::Eigen)
     add_test(NAME ${testname} COMMAND ${testbinary})
 
     if(IDYNTREE_RUN_VALGRIND_TESTS)

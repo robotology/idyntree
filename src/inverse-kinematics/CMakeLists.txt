@@ -29,12 +29,8 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 target_include_directories(${libraryname} PRIVATE include/private)
 
-
-# Probably SYSTEM is not compatible with cmake 2.8.12, but I think as YARP requires
-# CMake 3.0 we can increase the min version
-
-target_include_directories(${libraryname} SYSTEM PRIVATE ${EIGEN3_INCLUDE_DIR})
-target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-high-level)
+target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-high-level
+                                     PRIVATE Eigen3::Eigen)
 
 if(IDYNTREE_USES_IPOPT)
     target_compile_definitions(${libraryname} PRIVATE IDYNTREE_USES_IPOPT)

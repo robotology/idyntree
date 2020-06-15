@@ -8,10 +8,6 @@
 
 project(iDynTree_ModelIO_URDF CXX)
 
-if(NOT LIBXML2_LIBRARY OR NOT LIBXML2_INCLUDE_DIR)
-    find_package(LibXml2 REQUIRED)
-endif()
-
 set(IDYNTREE_MODELIO_URDF_HEADERS include/iDynTree/ModelIO/URDFDofsImport.h
                                   include/iDynTree/ModelIO/ModelLoader.h
                                   include/iDynTree/ModelIO/ModelExporter.h
@@ -73,20 +69,15 @@ target_compile_features(${libraryname} PRIVATE cxx_auto_type cxx_delegating_cons
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/deprecated>"
                                                  "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/private>"
-                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
-                                          PRIVATE ${EIGEN3_INCLUDE_DIR}
-                                                  ${LIBXML2_INCLUDE_DIR})
+                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 
-target_link_libraries(${libraryname} LINK_PUBLIC idyntree-core idyntree-model idyntree-sensors idyntree-modelio-xml
-                                     LINK_PRIVATE ${LIBXML2_LIBRARIES})
-
-target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS} ${LIBXML2_DEFINITIONS})
-
-target_include_directories(${libraryname} PRIVATE ${EIGEN3_INCLUDE_DIR})
+target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model idyntree-sensors idyntree-modelio-xml
+                                     PRIVATE Eigen3::Eigen LibXml2::LibXml2)
 # See https://stackoverflow.com/questions/38832528/transitive-target-include-directories-on-object-libraries
 # Can be removed with CMake 3.12
 target_include_directories(${libraryname} PRIVATE $<TARGET_PROPERTY:idyntree-private-fpconv,INTERFACE_INCLUDE_DIRECTORIES>)
 
+target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODELIO_URDF_HEADERS})
 

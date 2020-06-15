@@ -47,11 +47,11 @@ add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 set_target_properties(${libraryname} PROPERTIES PUBLIC_HEADER "${iDynTree_visualization_header}")
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
-                                          PRIVATE ${EIGEN3_INCLUDE_DIR})
+                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 
-target_link_libraries(${libraryname} LINK_PUBLIC idyntree-core
-                                                 idyntree-model)
+target_link_libraries(${libraryname} PUBLIC idyntree-core
+                                            idyntree-model
+                                     PRIVATE Eigen3::Eigen)
 
 # enable warnings on this part of the add_library
 target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
@@ -70,7 +70,7 @@ if(IDYNTREE_USES_IRRLICHT)
     endif()
     add_definitions(-DIDYNTREE_USES_IRRLICHT)
 
-    # On Apple system, irrlicht uses some system libraries 
+    # On Apple system, irrlicht uses some system libraries
     if (APPLE)
     	find_library(CARBON_LIBRARY Carbon)
     	find_library(COCOA_LIBRARY Cocoa)

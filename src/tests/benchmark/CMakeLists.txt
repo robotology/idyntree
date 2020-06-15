@@ -10,10 +10,8 @@ macro(add_benchmark benchmarkName)
     set(testsrc ${benchmarkName}Benchmark.cpp)
     set(testbinary ${benchmarkName}Benchmark)
     add_executable(${testbinary} ${testsrc})
-    target_include_directories(${testbinary} PRIVATE ${EIGEN3_INCLUDE_DIR})
-    FIND_PACKAGE(Boost)
-    include_directories(${Boost_INCLUDE_DIR})
-    target_link_libraries(${testbinary} idyntree-modelio-urdf idyntree-modelio-urdf-kdl idyntree-core idyntree-kdl idyntree-model idyntree-testmodels)
+    target_link_libraries(${testbinary} PRIVATE idyntree-modelio-urdf idyntree-modelio-urdf-kdl idyntree-core
+                                                idyntree-kdl idyntree-model idyntree-testmodels Eigen3::Eigen)
 endmacro()
 
 add_benchmark(Dynamics)
