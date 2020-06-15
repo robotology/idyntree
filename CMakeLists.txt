@@ -8,7 +8,7 @@
 
 cmake_minimum_required(VERSION 3.5)
 
-project(iDynTree VERSION 1.1.0
+project(iDynTree VERSION 1.99.0
                  LANGUAGES C CXX)
 
 # Disable in source build, unless Eclipse is used
@@ -59,9 +59,6 @@ if(NOT IDYNTREE_ONLY_DOCS)
     endif()
     if(IDYNTREE_USES_ICUB_MAIN)
         list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES ICUB)
-    endif()
-    if(IDYNTREE_USES_KDL)
-        list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES orocos_kdl)
     endif()
 
     # List exported CMake package dependencies when the library is compiled as static

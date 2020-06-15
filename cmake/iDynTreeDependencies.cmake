@@ -62,15 +62,6 @@ if(NOT TARGET LibXml2::LibXml2)
   find_package(LibXml2 REQUIRED)
 endif()
 
-# For orocos_kdl we have custom logic, because we want to set it to FALSE by default
-option(IDYNTREE_USES_KDL "Build the part of iDynTree that depends on package orocos_kdl" FALSE)
-if (IDYNTREE_USES_KDL)
-    # KDL requires a system version of TinyXML
-  find_package(TinyXML REQUIRED)
-  include(OrocosKDLFindLogic)
-  find_package(orocos_kdl REQUIRED)
-endif ()
-
 idyntree_handle_dependency(YARP COMPONENTS os dev math rosmsg idl_tools MAIN_TARGET YARP::YARP_os)
 set(YARP_REQUIRED_VERSION 3.3)
 if(IDYNTREE_USES_YARP AND YARP_FOUND)
