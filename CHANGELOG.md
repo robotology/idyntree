@@ -5,11 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [Unreleased Major]
+
+### Added
+- Added a new CMake option `IDYNTREE_COMPILES_TOOLS` to disable compilation of iDynTree tools.
 
 ### Removed 
-
 - Remove the CMake option IDYNTREE_USES_KDL and all the classes available when enabling it. They were deprecated in iDynTree 1.0 .
+
+## [Unreleased]
 
 ### Fixed
 - Fix bug in init() of SimpleLeggedOdometry that used an incorrect initial world frame location if used with an additional frame of a link (https://github.com/robotology/idyntree/pull/698)
