@@ -49,8 +49,9 @@ option(IDYNTREE_USES_SEMANTICS "Compile iDynTree semantics check" FALSE)
 
 
 #########################################################################
-# Turn off compilation of optimal control part.
+# Turn off compilation of specific parts of iDynTree.
 option(IDYNTREE_COMPILES_OPTIMALCONTROL "Compile iDynTree optimal control part." TRUE)
+option(IDYNTREE_COMPILES_TOOLS "Compile iDynTree tools." TRUE)
 
 #########################################################################
 # Deal with RPATH

@@ -41,7 +41,9 @@ endif()
 add_subdirectory(visualization)
 
 # compile simple command line tools
-add_subdirectory(tools)
+if(IDYNTREE_COMPILES_TOOLS)
+    add_subdirectory(tools)
+endif()
 
 if(IDYNTREE_COMPILE_TESTS)
     add_subdirectory(tests)
