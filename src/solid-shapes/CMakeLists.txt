@@ -10,14 +10,13 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 
 
-target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model)
-target_include_directories(${libraryname} PRIVATE ${EIGEN3_INCLUDE_DIR})
-
+target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model
+                                     PRIVATE Eigen3::Eigen)
 
 if (IDYNTREE_USES_ASSIMP)
   target_compile_definitions(${libraryname} PRIVATE IDYNTREE_USES_ASSIMP)
   # Depending on the assimp version, the way of consuming assimp changes
-  # In assimp 5.0, only the imported assimp::assimp target is defined, in earlier 
+  # In assimp 5.0, only the imported assimp::assimp target is defined, in earlier
   # versions (that do no export the version to CMake) the ASSIMP_* variables are defined
   if(assimp_VERSION AND assimp_VERSION VERSION_GREATER_EQUAL 5.0)
     target_link_libraries(${libraryname} PRIVATE assimp::assimp)

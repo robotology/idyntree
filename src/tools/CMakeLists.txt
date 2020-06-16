@@ -8,13 +8,13 @@
 
 macro(IDYNTREE_ADD_TOOL tool_name tool_code)
     add_executable(${tool_name} ${tool_code})
-    target_link_libraries(${tool_name} idyntree-core
-                                       idyntree-model
-                                       idyntree-high-level
-                                       idyntree-modelio-urdf
-                                       idyntree-visualization)
+    target_link_libraries(${tool_name} PRIVATE idyntree-core
+                                               idyntree-model
+                                               idyntree-high-level
+                                               idyntree-modelio-urdf
+                                               idyntree-visualization
+                                               Eigen3::Eigen)
     target_compile_options(${tool_name} PRIVATE ${IDYNTREE_WARNING_FLAGS})
-    target_include_directories(${tool_name} PRIVATE SYSTEM ${EIGEN3_INCLUDE_DIR})
     install(TARGETS ${tool_name} DESTINATION bin)
 endmacro(IDYNTREE_ADD_TOOL tool_name tool_code)
 

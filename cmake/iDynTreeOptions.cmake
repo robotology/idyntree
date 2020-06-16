@@ -5,7 +5,7 @@ option(IDYNTREE_SHARED_LIBRARY "Compile iDynTree as a shared library" FALSE)
 else()
 option(IDYNTREE_SHARED_LIBRARY "Compile iDynTree as a shared library" TRUE)
 endif()
-set(BUILD_SHARED_LIBS ${IDYNTREE_SHARED_LIBRARY})
+option(BUILD_SHARED_LIBS "Build libraries as shared as opposed to static" ${IDYNTREE_SHARED_LIBRARY})
 
 #########################################################################
 option(IDYNTREE_ONLY_DOCS "Only produce iDynTree documentation, without compiling" FALSE)
