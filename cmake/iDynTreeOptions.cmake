@@ -13,7 +13,7 @@ mark_as_advanced(IDYNTREE_ONLY_DOCS)
 
 #########################################################################
 # Use position indipendent code
-set (CMAKE_POSITION_INDEPENDENT_CODE TRUE)
+option(CMAKE_POSITION_INDEPENDENT_CODE "When compiling static libraries generate position independent code" TRUE)
 
 #########################################################################
 # Turn on testing.
