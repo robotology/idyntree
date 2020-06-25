@@ -9,58 +9,58 @@ classdef BerdySparseMAPSolver < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1751, varargin{:});
+        tmp = iDynTreeMEX(1569, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1752, self);
+        iDynTreeMEX(1570, self);
         self.SwigClear();
       end
     end
     function varargout = setDynamicsConstraintsPriorCovariance(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1753, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1571, self, varargin{:});
     end
     function varargout = setDynamicsRegularizationPriorCovariance(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1754, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1572, self, varargin{:});
     end
     function varargout = setDynamicsRegularizationPriorExpectedValue(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1755, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1573, self, varargin{:});
     end
     function varargout = setMeasurementsPriorCovariance(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1756, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1574, self, varargin{:});
     end
     function varargout = dynamicsConstraintsPriorCovarianceInverse(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1757, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1575, self, varargin{:});
     end
     function varargout = dynamicsRegularizationPriorCovarianceInverse(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1758, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1576, self, varargin{:});
     end
     function varargout = dynamicsRegularizationPriorExpectedValue(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1759, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1577, self, varargin{:});
     end
     function varargout = measurementsPriorCovarianceInverse(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1760, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1578, self, varargin{:});
     end
     function varargout = isValid(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1761, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1579, self, varargin{:});
     end
     function varargout = initialize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1762, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1580, self, varargin{:});
     end
     function varargout = updateEstimateInformationFixedBase(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1763, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1581, self, varargin{:});
     end
     function varargout = updateEstimateInformationFloatingBase(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1764, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1582, self, varargin{:});
     end
     function varargout = doEstimate(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1765, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1583, self, varargin{:});
     end
     function varargout = getLastEstimate(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1766, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1584, self, varargin{:});
     end
   end
   methods(Static)

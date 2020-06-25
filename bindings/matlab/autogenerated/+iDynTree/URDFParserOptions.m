@@ -7,20 +7,20 @@ classdef URDFParserOptions < SwigRef
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1549, self);
+        varargout{1} = iDynTreeMEX(1367, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1550, self, varargin{1});
+        iDynTreeMEX(1368, self, varargin{1});
       end
     end
     function varargout = originalFilename(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1551, self);
+        varargout{1} = iDynTreeMEX(1369, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1552, self, varargin{1});
+        iDynTreeMEX(1370, self, varargin{1});
       end
     end
     function self = URDFParserOptions(varargin)
@@ -29,14 +29,14 @@ classdef URDFParserOptions < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1553, varargin{:});
+        tmp = iDynTreeMEX(1371, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1554, self);
+        iDynTreeMEX(1372, self);
         self.SwigClear();
       end
     end
