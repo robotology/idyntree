@@ -12,10 +12,11 @@
 #ifndef GYROSCOPE_HPP
 #define GYROSCOPE_HPP
 
+#include <iDynTree/Core/GeomVector3.h>
+
 namespace iDynTree
 {
     class Transform;
-    class AngularMotionVector3;
     typedef AngularMotionVector3 AngVelocity;
 }
 

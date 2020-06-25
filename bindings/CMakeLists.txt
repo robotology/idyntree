@@ -45,7 +45,6 @@ if(SWIG_FOUND OR IDYNTREE_USES_MATLAB OR IDYNTREE_USES_OCTAVE)
     # is resolved
     # (not working at the moment, todo \TODO fix)
     set(IDYNTREE_SWIG_DEPENDS_I_FILES ${CMAKE_CURRENT_SOURCE_DIR}/ignore.i
-                                      ${CMAKE_CURRENT_SOURCE_DIR}/macrosForTemplates.i
                                       ${CMAKE_CURRENT_SOURCE_DIR}/sensors.i)
 
     if(IDYNTREE_USES_LUA)

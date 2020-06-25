@@ -12,10 +12,8 @@
 #define IDYNTREE_SPATIAL_MOTION_RAW_H
 
 #include <iDynTree/Core/VectorFixSize.h>
-#include <iDynTree/Core/LinearMotionVector3.h>
-#include <iDynTree/Core/AngularMotionVector3.h>
+#include <iDynTree/Core/GeomVector3.h>
 #include <iDynTree/Core/SpatialVector.h>
-#include <iDynTree/Core/PrivateMotionForceVertorAssociations.h>
 
 namespace iDynTree
 {
@@ -48,17 +46,10 @@ namespace iDynTree
     {
     public:
         /**
-         * We use traits here to have the associations SpatialVector <=> Linear/Angular 3D vectors types
-         * defined in a single place.
-         */
-        typedef SpatialMotionForceVectorT_traits<SpatialMotionVector>::LinearVector3Type LinearVector3T;
-        typedef SpatialMotionForceVectorT_traits<SpatialMotionVector>::AngularVector3Type AngularVector3T;
-
-        /**
          * constructors
          */
         inline SpatialMotionVector() {}
-        SpatialMotionVector(const LinearVector3T & _linearVec3, const AngularVector3T & _angularVec3);
+        SpatialMotionVector(const LinearMotionVector3 & _linearVec3, const AngularMotionVector3 & _angularVec3);
         SpatialMotionVector(const SpatialMotionVector & other);
         SpatialMotionVector(const SpatialVector<SpatialMotionVector> & other);
 

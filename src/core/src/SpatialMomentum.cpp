@@ -35,11 +35,7 @@ SpatialMomentum::SpatialMomentum(const SpatialMomentum& other):
 
 SpatialMomentum SpatialMomentum::operator+(const SpatialMomentum& other) const
 {
-#ifdef IDYNTREE_DONT_USE_SEMANTICS
     return efficient6dSum(*this,other);
-#else
-    return compose(*this,(other));
-#endif
 }
 
 SpatialMomentum SpatialMomentum::operator-() const

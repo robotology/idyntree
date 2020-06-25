@@ -9,8 +9,6 @@
  */
 
 
-# include "iDynTree/Core/LinearMotionVector3.h"
-
 #include "iDynTree/Sensors/AccelerometerSensor.h"
 
 #include "iDynTree/Core/Transform.h"

@@ -30,7 +30,6 @@ namespace iDynTree
      *
      * \ingroup iDynTreeCore
      *
-     * This class is currently lacking semantics.
      *
      */
     class Axis
@@ -101,7 +100,7 @@ namespace iDynTree
         Twist getRotationTwist(const double dtheta) const;
 
         SpatialAcc getRotationSpatialAcc(const double d2theta) const;
-        
+
         /**
          * Get the transform induced by a translation of a distance dist
          * along this axis. The returned transform is the nonTranslated_T_translated,

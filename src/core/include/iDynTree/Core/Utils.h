@@ -21,18 +21,15 @@
 #define IDYNTREE_UNUSED(var) ((void)var)
 
 
-// Note: we set IDYNTREE_DEPRECATED to nothing when compiling idyntree-core and
-// idyntree-high-level because some deprecated functions (mainly related to semantics)
-// need still too be used, as they are going to be removed without any replacement
-// When this functions will be removed as part of iDynTree 2.0, we can remove this special case
-// Furthermore, SWIG has some problems with this attributes, so until we use a recent SWIG version
-// we also disabled them for SWIG
+// Note: we set IDYNTREE_DEPRECATED to nothing when compiling with SWIG has some
+// SWIG has some problems with this attributes, so until we use a recent SWIG version
+// we disabled them for SWIG
 /**
  * \brief Macro to deprecate functions and methods
  *
  * see https://blog.samat.io/2017/02/27/Deprecating-functions-and-methods-in-Cplusplus/
  */
-#if defined(idyntree_core_EXPORTS) || defined(idyntree_high_level_EXPORTS) || defined(SWIG)
+#if defined(SWIG)
 #define IDYNTREE_DEPRECATED
 #define IDYNTREE_DEPRECATED_WITH_MSG(msg)
 #else
@@ -84,13 +81,13 @@ namespace iDynTree
      *
      */
     void reportInfo(const char* className, const char* methodName, const char* message);
-    
+
     /**
      * Helper function for reporting debug messages in iDynTree
      *
      */
     void reportDebug(const char* className, const char* methodName, const char* message);
-    
+
     /**
      * Convert a double from degrees to radians.
      */

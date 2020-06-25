@@ -8,8 +8,7 @@
  * at your option.
  */
 
-
-#include <iDynTree/Core/AngularMotionVector3.h>
+#include <iDynTree/Core/GeomVector3.h>
 #include <iDynTree/Core/ClassicalAcc.h>
 #include <iDynTree/Core/Rotation.h>
 #include <iDynTree/Core/Axis.h>
@@ -21,7 +20,6 @@
 #include <iDynTree/Core/SpatialAcc.h>
 #include <iDynTree/Core/SpatialMomentum.h>
 #include <iDynTree/Core/Utils.h>
-#include <iDynTree/Core/PrivateSemanticsMacros.h>
 #include <iDynTree/Core/EigenHelpers.h>
 
 
@@ -67,39 +65,20 @@ namespace iDynTree
 
     Rotation::Rotation(const Rotation & other): RotationRaw(other)
     {
-        iDynTreeSemanticsOp(this->semantics = other.getSemantics());
     }
 
     Rotation::Rotation(const RotationRaw& other): RotationRaw(other)
     {
 
     }
-
-    Rotation::Rotation(const RotationRaw& otherPos, RotationSemantics & /*otherSem*/): RotationRaw(otherPos)
-    {
-        iDynTreeSemanticsOp(this->semantics = otherSem);
-    }
-
-    RotationSemantics& Rotation::getSemantics()
-    {
-        return this->semantics;
-    }
-
-    const RotationSemantics& Rotation::getSemantics() const
-    {
-        return this->semantics;
-    }
-
     const Rotation& Rotation::changeOrientFrame(const Rotation& newOrientFrame)
     {
-        iDynTreeAssert( this->semantics.changeOrientFrame(newOrientFrame.semantics) );
         this->RotationRaw::changeOrientFrame(newOrientFrame);
         return *this;
     }
 
     const Rotation& Rotation::changeRefOrientFrame(const Rotation& newRefOrientFrame)
     {
-        iDynTreeAssert( this->semantics.changeRefOrientFrame(newRefOrientFrame.semantics) );
         this->RotationRaw::changeRefOrientFrame(newRefOrientFrame);
         return *this;
     }
@@ -111,23 +90,17 @@ namespace iDynTree
 
     Rotation Rotation::compose(const Rotation& op1, const Rotation& op2)
     {
-        RotationSemantics resultSemantics;
-        iDynTreeAssert( RotationSemantics::compose(op1.semantics,op2.semantics,resultSemantics) );
-        return Rotation(RotationRaw::compose(op1,op2),resultSemantics);
+        return Rotation(RotationRaw::compose(op1,op2));
     }
 
     Rotation Rotation::inverse2(const Rotation& orient)
     {
-        RotationSemantics resultSemantics;
-        iDynTreeAssert( RotationSemantics::inverse2(orient.getSemantics(),resultSemantics) );
-        return Rotation(RotationRaw::inverse2(orient),resultSemantics);
+        return Rotation(RotationRaw::inverse2(orient));
     }
 
     Position Rotation::changeCoordFrameOf(const Position & other) const
     {
-        PositionSemantics resultSemantics;
-        iDynTreeAssert( this->semantics.changeCoordFrameOf(other.getSemantics(), resultSemantics) );
-        return Position(this->RotationRaw::changeCoordFrameOf(other), resultSemantics);
+        return Position(this->RotationRaw::changeCoordFrameOf(other));
     }
 
     SpatialMotionVector Rotation::changeCoordFrameOf(const SpatialMotionVector& other) const
@@ -164,7 +137,6 @@ namespace iDynTree
     {
         Direction result;
 
-        // \todo TODO add semantics to Direction
         Eigen::Map<const Matrix3dRowMajor> newCoordFrame(m_data);
         Eigen::Map<const Eigen::Vector3d> directionCoord(other.data());
         Eigen::Map<Eigen::Vector3d> resultData(result.data());
@@ -177,8 +149,6 @@ namespace iDynTree
     ClassicalAcc Rotation::changeCoordFrameOf(const ClassicalAcc &other) const
     {
         ClassicalAcc result;
-
-        // \todo TODO add semantics to ClassicalAcc
         result = RotationRaw::changeCoordFrameOf(other);
 
         return result;
@@ -188,7 +158,6 @@ namespace iDynTree
     {
         RotationalInertiaRaw result;
 
-        // \todo TODO add semantics to ClassicalAcc
         result = RotationRaw::changeCoordFrameOf(other);
 
         return result;
@@ -701,7 +670,6 @@ namespace iDynTree
         std::stringstream ss;
 
         ss << RotationRaw::toString();
-        iDynTreeSemanticsOp(ss << " " << semantics.toString());
 
         return ss.str();
     }

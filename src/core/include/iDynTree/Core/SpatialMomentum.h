@@ -22,7 +22,6 @@ namespace iDynTree
      *
      * \ingroup iDynTreeCore
      *
-     * Currently this class does not support semantics.
      */
     class SpatialMomentum: public SpatialForceVector
     {

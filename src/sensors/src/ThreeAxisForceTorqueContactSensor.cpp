@@ -8,9 +8,6 @@
  * at your option.
  */
 
-
-# include "iDynTree/Core/LinearMotionVector3.h"
-
 #include "iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h"
 
 #include "iDynTree/Core/Transform.h"

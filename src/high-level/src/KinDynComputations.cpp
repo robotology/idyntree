@@ -41,9 +41,6 @@
 namespace iDynTree
 {
 
-// \todo TODO find a better way to handle the world index, and
-// in general to handle the key used for semantics
-const int WORLD_INDEX = -100;
 unsigned int DEFAULT_DYNAMICS_COMPUTATION_FRAME_INDEX=10000;
 std::string DEFAULT_DYNAMICS_COMPUTATION_FRAME_NAME="iDynTreeDynCompDefaultFrame";
 
@@ -928,23 +925,6 @@ Transform KinDynComputations::getRelativeTransform(const iDynTree::FrameIndex re
 
     Transform refFrame_H_frame = world_H_refFrame.inverse()*world_H_frame;
 
-    // Set semantics
-    // Setting position semantics
-    PositionSemantics posSem;
-    posSem.setCoordinateFrame(refFrameIndex);
-    posSem.setReferencePoint(refFrameIndex);
-    posSem.setPoint(frameIndex);
-
-    refFrame_H_frame.getSemantics().setPositionSemantics(posSem);
-
-    // Setting rotation semantics
-    RotationSemantics rotSem;
-    rotSem.setReferenceOrientationFrame(refFrameIndex);
-    rotSem.setCoordinateFrame(refFrameIndex);
-    rotSem.setOrientationFrame(frameIndex);
-
-    refFrame_H_frame.getSemantics().setRotationSemantics(rotSem);
-
     return refFrame_H_frame;
 }
 
@@ -1053,22 +1033,6 @@ Transform KinDynComputations::getWorldTransform(const FrameIndex frameIndex)
 
         world_H_frame = world_H_link*link_H_frame;
     }
-
-    // Setting position semantics
-    PositionSemantics posSem;
-    posSem.setCoordinateFrame(WORLD_INDEX);
-    posSem.setReferencePoint(WORLD_INDEX);
-    posSem.setPoint(frameIndex);
-
-    world_H_frame.getSemantics().setPositionSemantics(posSem);
-
-    // Setting rotation semantics
-    RotationSemantics rotSem;
-    rotSem.setReferenceOrientationFrame(WORLD_INDEX);
-    rotSem.setCoordinateFrame(WORLD_INDEX);
-    rotSem.setOrientationFrame(frameIndex);
-
-    world_H_frame.getSemantics().setRotationSemantics(rotSem);
 
     return world_H_frame;
 }

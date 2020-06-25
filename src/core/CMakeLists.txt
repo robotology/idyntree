@@ -18,10 +18,8 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
                               include/iDynTree/Core/MatrixFixSize.h
                               include/iDynTree/Core/Position.h
                               include/iDynTree/Core/PositionRaw.h
-                              include/iDynTree/Core/PositionSemantics.h
                               include/iDynTree/Core/Rotation.h
                               include/iDynTree/Core/RotationRaw.h
-                              include/iDynTree/Core/RotationSemantics.h
                               include/iDynTree/Core/RotationalInertiaRaw.h
                               include/iDynTree/Core/SpatialAcc.h
                               include/iDynTree/Core/SpatialForceVector.h
@@ -32,23 +30,14 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
                               include/iDynTree/Core/TestUtils.h
                               include/iDynTree/Core/Transform.h
                               include/iDynTree/Core/TransformDerivative.h
-                              include/iDynTree/Core/TransformSemantics.h
                               include/iDynTree/Core/Twist.h
                               include/iDynTree/Core/Utils.h
                               include/iDynTree/Core/VectorFixSize.h
                               include/iDynTree/Core/VectorDynSize.h
-                              include/iDynTree/Core/LinearForceVector3.h
-                              include/iDynTree/Core/AngularForceVector3.h
-                              include/iDynTree/Core/LinearMotionVector3.h
-                              include/iDynTree/Core/AngularMotionVector3.h
                               include/iDynTree/Core/Wrench.h
                               include/iDynTree/Core/PrivateUtils.h
-                              include/iDynTree/Core/PrivateMotionForceVertorAssociations.h
                               include/iDynTree/Core/PrivatePreProcessorUtils.h
-                              include/iDynTree/Core/PrivateSemanticsMacros.h
                               include/iDynTree/Core/GeomVector3.h
-                              include/iDynTree/Core/MotionVector3.h
-                              include/iDynTree/Core/ForceVector3.h
                               include/iDynTree/Core/SpatialVector.h
                               include/iDynTree/Core/SparseMatrix.h
                               include/iDynTree/Core/Triplets.h
@@ -63,19 +52,11 @@ set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
                               src/Direction.cpp
                               src/InertiaNonLinearParametrization.cpp
                               src/MatrixDynSize.cpp
-                              src/LinearForceVector3.cpp
-                              src/AngularForceVector3.cpp
-                              src/LinearMotionVector3.cpp
-                              src/AngularMotionVector3.cpp
-                              src/ForceVector3.cpp
-                              src/MotionVector3.cpp
                               src/GeomVector3.cpp
                               src/Position.cpp
                               src/PositionRaw.cpp
-                              src/PositionSemantics.cpp
                               src/Rotation.cpp
                               src/RotationRaw.cpp
-                              src/RotationSemantics.cpp
                               src/RotationalInertiaRaw.cpp
                               src/SpatialAcc.cpp
                               src/SpatialForceVector.cpp
@@ -86,7 +67,6 @@ set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
                               src/TestUtils.cpp
                               src/Transform.cpp
                               src/TransformDerivative.cpp
-                              src/TransformSemantics.cpp
                               src/Twist.cpp
                               src/Utils.cpp
                               src/VectorDynSize.cpp
@@ -99,7 +79,6 @@ set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_CORE_EXP_SOURCES})
 SOURCE_GROUP("Header Files" FILES ${IDYNTREE_CORE_EXP_HEADERS})
-#SOURCE_GROUP("Header Files\\Private" FILES ${IDYNTREE_CORE_EXP_PRIVATE_INCLUDES})
 
 # Check if this does not break existing build
 # reason: avoid including with <iDynTree/Core/**> inside .cpp but using directly
@@ -108,7 +87,7 @@ include_directories(include/iDynTree/Core)
 
 set(libraryname idyntree-core)
 
-add_library(${libraryname} ${IDYNTREE_CORE_EXP_SOURCES} ${IDYNTREE_CORE_EXP_HEADERS} ${IDYNTREE_CORE_EXP_PRIVATE_INCLUDES})
+add_library(${libraryname} ${IDYNTREE_CORE_EXP_SOURCES} ${IDYNTREE_CORE_EXP_HEADERS})
 add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 
 if (DEFINED CMAKE_COMPILER_IS_GNUCXX)

@@ -12,11 +12,11 @@
 #ifndef ACCELEROMETER_HPP
 #define ACCELEROMETER_HPP
 
+#include <iDynTree/Core/GeomVector3.h>
 
 namespace iDynTree
 {
     class Transform;
-    class LinearMotionVector3;
     typedef LinearMotionVector3 LinAcceleration;
     class SpatialAcc;
     class Twist;

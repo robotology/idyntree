@@ -90,13 +90,12 @@ Transform FixedJoint::getRestTransform(const LinkIndex child, const LinkIndex pa
 {
     if( child == this->link1 )
     {
-        iDynTreeAssert(p_linkB == this->link2);
         return this->link1_X_link2;
     }
     else
     {
-        iDynTreeAssert(child == this->link2);
-        iDynTreeAssert(parent == this->link1);
+        assert(child == this->link2);
+        assert(parent == this->link1);
         return this->link2_X_link1;
     }
 }
@@ -105,13 +104,12 @@ const Transform & FixedJoint::getTransform(const VectorDynSize & jntPos, const L
 {
     if( child == this->link1 )
     {
-        iDynTreeAssert(p_linkB == this->link2);
         return this->link1_X_link2;
     }
     else
     {
-        iDynTreeAssert(child == this->link2);
-        iDynTreeAssert(parent == this->link1);
+        assert(child == this->link2);
+        assert(parent == this->link1);
         return this->link2_X_link1;
     }
 }

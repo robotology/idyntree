@@ -9,8 +9,6 @@
  */
 
 
-# include "iDynTree/Core/LinearMotionVector3.h"
-
 #include "iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h"
 
 #include "iDynTree/Core/Transform.h"
@@ -172,5 +170,5 @@ Vector3 ThreeAxisAngularAccelerometerSensor::predictMeasurement(const SpatialAcc
 {
     return this->predictMeasurement(linkAcc);
 }
-    
+
 }

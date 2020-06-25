@@ -12,7 +12,6 @@
 #define IDYNTREE_POSITION_H
 
 #include <iDynTree/Core/PositionRaw.h>
-#include <iDynTree/Core/PositionSemantics.h>
 #include <iDynTree/Core/Rotation.h>
 
 #include <string>
@@ -42,14 +41,6 @@ namespace iDynTree
      */
     class Position: public PositionRaw
     {
-    private:
-        PositionSemantics semantics;
-
-        /**
-         * Copy constructor: create a Position from a PositionRaw and a PositionSemantics object.
-         */
-        Position(const PositionRaw & otherPos, const PositionSemantics & otherSem);
-
     public:
         /**
          * Default constructor: initialize all the coordinates to 0
@@ -70,18 +61,6 @@ namespace iDynTree
          * Copy constructor: create a Position from a PositionRaw
          */
         Position(const PositionRaw & other);
-
-        /**
-         * Semantic getter
-         */
-        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
-        PositionSemantics& getSemantics();
-
-        /**
-         * Const Semantic getter
-         */
-        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
-        const PositionSemantics& getSemantics() const;
 
         /**
          * Geometric operations
@@ -123,20 +102,6 @@ namespace iDynTree
 
         static Position Zero();
     };
-
-       // TODO \todo this information is interesting, but distracting for the average user.
-   //             Move it to a design document describing the semantic model of iDynTree .
-   //  The exact semantics for this class are inspired to the one define as PositionCoord in:
-   //
-   //  De Laet T, Bellens S, Smits R, Aertbeliën E, Bruyninckx H, and De Schutter J
-   //  (2013), Geometric Relations between Rigid Bodies: Semantics for Standardization,
-   //  IEEE Robotics & Automation Magazine, Vol. 20, No. 1, pp. 84-93.
-   //  URL : http://people.mech.kuleuven.be/~tdelaet/geometric_relations_semantics/geometric_relations_semantics_theory.pdf
-   //
-   //  One operation is not mentione in that paper  included for a logic paradox:
-   //    Position(a|A,c|C) = compose(Position(b|B,c|C),Position(a|A,b|B)) is forbidded in iDynTree to avoid ambiguity on compose(Position(b|B,a|A),Position(a|A,b|B))
-   //
-   //
 }
 
 #endif
