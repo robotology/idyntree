@@ -12,6 +12,8 @@ function [Visualizer,Objects]=prepareVisualization(KinDynModel,meshFilePrefix,va
 %     - `groundColor` : Selects the color of the ground.
 %     - `groundTransparency` : Selects the transparency of the ground.
 %     - `groundFrame` : Selects the frame in which the ground is attached.
+%     - `name` : The name of the figure 
+%     - `reuseFigure` : Enable the reuse of an already open figure with the same name
 %     Note: all extra variables are sent to `plotMeshInWorld`
 %   - Outputs:
 %       - `Visualizer` : Struct containing the following fields
@@ -42,6 +44,8 @@ default_groundOn=false;
 default_groundColor=[0 0.5 0.5];
 default_groundTransparency=0.8;
 default_groundFrame='none';
+default_name='iDynTreeVisualizer';
+default_reuseFigure=false;
 % accepted values
 expected_materials={'dull','metal','shiny'};
 % add parameters and validity funcitons
@@ -54,6 +58,8 @@ addParameter(p,'groundOn',default_groundOn,@(x) islogical(x));
 addParameter(p,'groundColor',default_groundColor,@(x)validateattributes(x,{'numeric'},{'numel', 3}));
 addParameter(p,'groundTransparency',default_groundTransparency,@(x) isnumeric(x) && isscalar(x));
 addParameter(p,'groundFrame',default_groundFrame,@(x) isstring(x) || ischar(x));
+addParameter(p,'name',default_name,@(x) isstring(x) || ischar(x));
+addParameter(p,'reuseFigure',default_reuseFigure,@(x) islogical(x));
 
 % parse inputs
 parse(p,KinDynModel,meshFilePrefix,varargin{:});
@@ -63,7 +69,15 @@ model=KinDynModel.kinDynComp.model;
 [linkMeshInfo,map]=iDynTreeWrappers.getMeshes(model,meshFilePrefix);
 numberOfLinks=length(linkMeshInfo);
 linkNames=cell(numberOfLinks,1);
-mainHandler=figure;
+figHandles = findobj('Type', 'figure', 'Name', options.name);
+if options.reuseFigure && size(figHandles, 1) > 0
+    mainHandler=figHandles(1,1);
+    clf(mainHandler,'reset')
+else
+    mainHandler=figure;
+end
+set(mainHandler,'Name', options.name,'numbertitle','off')
+set(0, 'CurrentFigure', mainHandler) %Set the figure as current figure such that gca works
 parent=gca;
 hold on
 linkNames_idyn=iDynTree.StringVector();
