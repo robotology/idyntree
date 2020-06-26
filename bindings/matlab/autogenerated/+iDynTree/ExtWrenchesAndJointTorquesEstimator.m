@@ -9,52 +9,52 @@ classdef ExtWrenchesAndJointTorquesEstimator < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1651, varargin{:});
+        tmp = iDynTreeMEX(1469, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1652, self);
+        iDynTreeMEX(1470, self);
         self.SwigClear();
       end
     end
     function varargout = setModelAndSensors(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1653, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1471, self, varargin{:});
     end
     function varargout = loadModelAndSensorsFromFile(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1654, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1472, self, varargin{:});
     end
     function varargout = loadModelAndSensorsFromFileWithSpecifiedDOFs(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1655, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1473, self, varargin{:});
     end
     function varargout = model(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1656, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1474, self, varargin{:});
     end
     function varargout = sensors(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1657, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1475, self, varargin{:});
     end
     function varargout = submodels(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1658, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1476, self, varargin{:});
     end
     function varargout = updateKinematicsFromFloatingBase(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1659, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1477, self, varargin{:});
     end
     function varargout = updateKinematicsFromFixedBase(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1660, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1478, self, varargin{:});
     end
     function varargout = computeExpectedFTSensorsMeasurements(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1661, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1479, self, varargin{:});
     end
     function varargout = estimateExtWrenchesAndJointTorques(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1662, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1480, self, varargin{:});
     end
     function varargout = checkThatTheModelIsStill(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1663, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1481, self, varargin{:});
     end
     function varargout = estimateLinkNetWrenchesWithoutGravity(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1664, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1482, self, varargin{:});
     end
   end
   methods(Static)

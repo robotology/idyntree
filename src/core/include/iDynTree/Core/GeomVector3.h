@@ -12,121 +12,42 @@
 #define IDYNTREE_GEOM_VECTOR_3_H
 
 #include <iDynTree/Core/VectorFixSize.h>
-#include <iDynTree/Core/Rotation.h>
-#include <iDynTree/Core/PrivateMotionForceVertorAssociations.h>
-#include <iDynTree/Core/Utils.h>
-
-#define GEOMVECTOR3SEMANTICS_TEMPLATE_HDR \
-template <class MotionForceSemanticsT>
-
-#define GEOMVECTOR3_TEMPLATE_HDR \
-template <class MotionForceT>
 
 namespace iDynTree
 {
-    class Rotation;
+	class Rotation;
 
-    /**
-     * Template class providing the semantics for any geometric relation vector.
-     */
-    GEOMVECTOR3SEMANTICS_TEMPLATE_HDR
-    class GeomVector3Semantics
-    {
-    protected:
-        int body;
-        int refBody;
-        int coordinateFrame;
+	class GeomVector3 : public Vector3 {
+	public:
+		GeomVector3() = default;
+		GeomVector3(const double* in_data, const unsigned int in_size);
+		GeomVector3(const double x, const double y, const double z);
+		GeomVector3(const Vector3 other);
+        GeomVector3 changeCoordFrame(const Rotation& newCoordFrame) const;
+        GeomVector3 compose(const GeomVector3& op1, const GeomVector3& op2) const;
+        GeomVector3 inverse(const GeomVector3& op) const;
+        double dot(const GeomVector3& other) const;
+        GeomVector3 operator+(const GeomVector3& other) const;
+		GeomVector3 operator-(const GeomVector3& other) const;
+		GeomVector3 operator-() const;
+		Rotation exp() const;
+		GeomVector3 cross(const GeomVector3& other) const;
 
-    public:
-        /**
-         * Constructors:
-         */
-        inline GeomVector3Semantics() {}
-        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
-        GeomVector3Semantics(int _body, int _refBody, int _coordinateFrame);
-        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
-        GeomVector3Semantics(const GeomVector3Semantics & other);
+	};
 
-        void setToUnknown();
-
-
-        /**
-         * Getters, setters & helpers
-         */
-        int getBody() const;
-        int getRefBody() const;
-        int getCoordinateFrame() const;
-        bool isUnknown() const;
-
-        /**
-         * Semantics operations
-         * Compute the semantics of the result given the semantics of the operands.
-         */
-        bool changeCoordFrame(const RotationSemantics & newCoordFrame, MotionForceSemanticsT & result) const;
-        static bool compose(const MotionForceSemanticsT & op1, const MotionForceSemanticsT & op2, MotionForceSemanticsT & result);
-        static bool inverse(const MotionForceSemanticsT & op, MotionForceSemanticsT & result);
-
-        bool dot(const typename DualMotionForceSemanticsT<MotionForceSemanticsT>::Type & other) const;
-    };
-
-    /**
-     * Template class providing the raw coordinates and semantics for any geometric relation vector.
-     *
-     * \ingroup iDynTreeCore
-     *
-     * A geometrical vector can be used to describe a motion or a force vector.
-     *
-     * This is a basic vector, used to implement the adjoint transformations common
-     * to motion and force vectors or to just provide an interface.
-     *
-     */
-    GEOMVECTOR3_TEMPLATE_HDR
-    class GeomVector3: public Vector3
-    {
-    public:
-        typedef typename MotionForce_traits<MotionForceT>::SemanticsType MotionForceSemanticsT;
-
-        MotionForceSemanticsT semantics;
-
-        typedef GeomVector3<MotionForceT> MotionForceTbase;
-
-        /**
-         * constructors
-         */
-        inline GeomVector3() {}
-        GeomVector3(const double* in_data, const unsigned int in_size);
-        GeomVector3(const GeomVector3 & other);
-
-        /**
-         * Getters & setters
-         */
-        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
-        const MotionForceSemanticsT& getSemantics() const;
-        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
-        void setSemantics(MotionForceSemanticsT& _semantics);
-
-        /**
-         * Geometric operations
-         */
-        MotionForceT changeCoordFrame(const Rotation & newCoordFrame) const;
-        static MotionForceT compose(const MotionForceTbase & op1, const MotionForceT & op2);
-        static MotionForceT inverse(const MotionForceTbase & op);
-
-        /**
-         * dot product
-         */
-        double dot(const typename MotionForce_traits<MotionForceT>::DualSpace & other) const;
-
-        /**
-         * overloaded operators
-         */
-        MotionForceT operator+(const MotionForceT &other) const;
-        MotionForceT operator-(const MotionForceT &other) const;
-        MotionForceT operator-() const;
-
-        template <class DerivedSpatialVecT, class LinearVector3T, class AngularVector3T>
-        class SpatialVector;
-    };
+	typedef GeomVector3 LinearMotionVector3;
+	typedef LinearMotionVector3 LinVelocity;
+	typedef LinearMotionVector3 LinAcceleration;
+	typedef GeomVector3 AngularMotionVector3;
+	typedef AngularMotionVector3 AngVelocity;
+	typedef AngularMotionVector3 AngAcceleration;
+	typedef GeomVector3 LinearForceVector3;
+	typedef LinearForceVector3 LinMomentum;
+	typedef LinearForceVector3 Force;
+	typedef GeomVector3 AngularForceVector3;
+	typedef AngularForceVector3 AngMomentum;
+	typedef AngularForceVector3 Torque;
+	typedef GeomVector3 MotionVector3;
 
 }
 

@@ -13,7 +13,7 @@
 #define IDYNTREE_SO3UTILS_H
 
 #include <iDynTree/Core/Rotation.h>
-#include <iDynTree/Core/AngularMotionVector3.h>
+#include <iDynTree/Core/GeomVector3.h>
 #include <vector>
 
 namespace iDynTree

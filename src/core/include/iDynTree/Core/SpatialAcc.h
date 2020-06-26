@@ -22,7 +22,6 @@ namespace iDynTree
      * \note The linear part of this spatial vector **is not** the acceleration
      *       of a point.
      *
-     * Currently this class does not support semantics.
      *
      * \ingroup iDynTreeCore
      */

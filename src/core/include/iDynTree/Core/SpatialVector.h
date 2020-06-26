@@ -13,10 +13,8 @@
 
 #include "Position.h"
 #include "Rotation.h"
-#include <iDynTree/Core/PrivateMotionForceVertorAssociations.h>
 #include "Utils.h"
-#include <iDynTree/Core/PrivatePreProcessorUtils.h>
-#include <iDynTree/Core/PrivateSemanticsMacros.h>
+#include <iDynTree/Core/GeomVector3.h>
 
 
 #include <iostream>
@@ -29,43 +27,26 @@ namespace iDynTree
     class Position;
     class Rotation;
 
-#define SPATIALVECTORSEMANTICS_TEMPLATE_HDR \
-template <typename LinearVec3SemanticsT, typename AngularVec3SemanticsT>
-#define SPATIALVECTORSEMANTICS_INSTANCE_HDR \
-SpatialVectorSemantics<LinearVec3SemanticsT, AngularVec3SemanticsT>
+    /**
+ * Traits class for SpatialMotionVector and SpatialForceVector classes
+ */
+    template <class SpatialMotionForceVectorT>
+    class SpatialMotionForceVectorT_traits {};
 
-    SPATIALVECTORSEMANTICS_TEMPLATE_HDR
-    class SpatialVectorSemantics
+    template <>
+    class SpatialMotionForceVectorT_traits<SpatialMotionVector>
     {
-    protected:
-        LinearVec3SemanticsT & linearVec3Semantics;
-        AngularVec3SemanticsT & angularVec3Semantics;
-
     public:
-        /**
-         * constructors
-         */
-        SpatialVectorSemantics(LinearVec3SemanticsT & linearVec3, AngularVec3SemanticsT & angularVec3);
+        typedef LinearMotionVector3 LinearVector3Type;
+        typedef AngularMotionVector3 AngularVector3Type;
+    };
 
-        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
-        bool check_linear2angularConsistency(const LinearVec3SemanticsT & linearVec3, const AngularVec3SemanticsT & angularVec3);
-
-        /**
-         * copy assignment operator
-         * We redefine this operator because the compiler is unable to generate a default
-         * one, since TransformSemantics is only composed by references.
-         */
-        SpatialVectorSemantics & operator=(const SpatialVectorSemantics & other);
-
-        /** @name Output helpers.
-         *  Output helpers.
-         */
-        ///@{
-        std::string toString() const;
-
-        std::string reservedToString() const;
-        ///@}
-
+    template <>
+    class SpatialMotionForceVectorT_traits<SpatialForceVector>
+    {
+    public:
+        typedef LinearForceVector3 LinearVector3Type;
+        typedef AngularForceVector3 AngularVector3Type;
     };
 
     /**
@@ -109,7 +90,6 @@ SpatialVector<DerivedSpatialVecT>
     protected:
         LinearVector3T linearVec3;
         AngularVector3T angularVec3;
-        SpatialVectorSemantics<typename LinearVector3T::SemanticsType, typename AngularVector3T::SemanticsType> semantics;
         static const unsigned int linearOffset = 0;
         static const unsigned int angularOffset = 3;
         static const unsigned int totalSize = 6;
@@ -185,55 +165,6 @@ SpatialVector<DerivedSpatialVecT>
     };
 
 
-    /**
-     *====================================================================================
-     * SpatialVectorSemantics Method definitions
-     */
-
-    SPATIALVECTORSEMANTICS_TEMPLATE_HDR
-    SPATIALVECTORSEMANTICS_INSTANCE_HDR::SpatialVectorSemantics(LinearVec3SemanticsT & linearVec3,
-                                                                AngularVec3SemanticsT & angularVec3):
-    linearVec3Semantics(linearVec3),
-    angularVec3Semantics(angularVec3)
-    {
-    }
-
-    SPATIALVECTORSEMANTICS_TEMPLATE_HDR
-    SPATIALVECTORSEMANTICS_INSTANCE_HDR & SPATIALVECTORSEMANTICS_INSTANCE_HDR::operator=(const SpatialVectorSemantics & /*other*/)
-    {
-        return *this;
-    }
-
-
-
-    SPATIALVECTORSEMANTICS_TEMPLATE_HDR
-    bool SPATIALVECTORSEMANTICS_INSTANCE_HDR::check_linear2angularConsistency(const LinearVec3SemanticsT & linearVec3,
-                                                                              const AngularVec3SemanticsT & angularVec3)
-    {
-        return (   reportErrorIf(!checkEqualOrUnknown(linearVec3.getBody(), angularVec3.getBody()),
-                                 IDYNTREE_PRETTY_FUNCTION,
-                                 "linear and angular vectors are defined for different bodies\n")
-                && reportErrorIf(!checkEqualOrUnknown(linearVec3.getRefBody(), angularVec3.getRefBody()),
-                                 IDYNTREE_PRETTY_FUNCTION,
-                                 "linear and angular vectors have different reference bodies\n")
-                && reportErrorIf(!checkEqualOrUnknown(linearVec3.getCoordinateFrame(), angularVec3.getCoordinateFrame()),
-                                 IDYNTREE_PRETTY_FUNCTION,
-                                 "linear and angular vectors are expressed in different coordinateFrames\n"));
-    }
-
-    SPATIALVECTORSEMANTICS_TEMPLATE_HDR
-    std::string SPATIALVECTORSEMANTICS_INSTANCE_HDR::toString() const
-    {
-        // \todo
-        return std::string();
-    }
-
-    SPATIALVECTORSEMANTICS_TEMPLATE_HDR
-    std::string SPATIALVECTORSEMANTICS_INSTANCE_HDR::reservedToString() const
-    {
-        return this->toString();
-    }
-
 
     /**
      *====================================================================================
@@ -244,8 +175,7 @@ SpatialVector<DerivedSpatialVecT>
     SPATIALVECTOR_TEMPLATE_HDR
     SPATIALVECTOR_INSTANCE_HDR::SpatialVector():
     linearVec3(),
-    angularVec3(),
-    semantics(linearVec3.semantics, angularVec3.semantics)
+    angularVec3()
     {
     }
 
@@ -253,16 +183,14 @@ SpatialVector<DerivedSpatialVecT>
     SPATIALVECTOR_INSTANCE_HDR::SpatialVector(const LinearVector3T & _linearVec3,
                                               const AngularVector3T & _angularVec3):
     linearVec3(_linearVec3),
-    angularVec3(_angularVec3),
-    semantics(linearVec3.semantics, angularVec3.semantics)
+    angularVec3(_angularVec3)
     {
     }
 
     SPATIALVECTOR_TEMPLATE_HDR
     SPATIALVECTOR_INSTANCE_HDR::SpatialVector(const SpatialVector & other):
     linearVec3(other.getLinearVec3()),
-    angularVec3(other.getAngularVec3()),
-    semantics(linearVec3.semantics, angularVec3.semantics)
+    angularVec3(other.getAngularVec3())
     {
     }
 
@@ -294,9 +222,6 @@ SpatialVector<DerivedSpatialVecT>
     SPATIALVECTOR_TEMPLATE_HDR
     void SPATIALVECTOR_INSTANCE_HDR::setLinearVec3(const LinearVector3T & _linearVec3)
     {
-        // check semantics
-        iDynTreeAssert(semantics.check_linear2angularConsistency(_linearVec3.semantics,
-                                                                 this->angularVec3.semantics));
         // set linear component
         this->linearVec3 = _linearVec3;
     }
@@ -304,9 +229,6 @@ SpatialVector<DerivedSpatialVecT>
     SPATIALVECTOR_TEMPLATE_HDR
     void SPATIALVECTOR_INSTANCE_HDR::setAngularVec3(const AngularVector3T & _angularVec3)
     {
-        // check semantics
-        iDynTreeAssert(semantics.check_linear2angularConsistency(this->linearVec3.semantics,
-                                                                 _angularVec3.semantics));
         // set angular component
         this->angularVec3 = _angularVec3;
     }
@@ -452,7 +374,6 @@ SpatialVector<DerivedSpatialVecT>
 
         ss << linearVec3.toString() << " "
         << angularVec3.toString();
-        iDynTreeSemanticsOp(ss << " " << semantics.toString());
         ss << std::endl;
 
         return ss.str();

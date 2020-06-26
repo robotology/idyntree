@@ -13,6 +13,8 @@
 
 #include <iDynTree/Model/LinkState.h>
 
+#include <iDynTree/Core/GeomVector3.h>
+
 namespace iDynTree
 {
 
@@ -20,7 +22,6 @@ namespace iDynTree
     class Traversal;
     class Model;
     class VectorDynSize;
-    class LinearMotionVector3;
     typedef LinearMotionVector3 LinAcceleration;
     class SensorsMeasurements;
     class FreeFloatingAcc;

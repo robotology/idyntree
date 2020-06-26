@@ -12,11 +12,11 @@
 #ifndef THREE_AXIS_ANGULAR_ACCELEROMETER_H
 #define THREE_AXIS_ANGULAR_ACCELEROMETER_H
 
+#include <iDynTree/Core/GeomVector3.h>
 
 namespace iDynTree
 {
     class Transform;
-    class LinearMotionVector3;
     typedef LinearMotionVector3 LinAcceleration;
     class SpatialAcc;
     class Twist;

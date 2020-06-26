@@ -8,8 +8,6 @@
  * at your option.
  */
 
-#include "iDynTree/Core/AngularMotionVector3.h"
-
 #include "iDynTree/Sensors/GyroscopeSensor.h"
 #include "iDynTree/Core/Transform.h"
 #include "iDynTree/Core/Wrench.h"

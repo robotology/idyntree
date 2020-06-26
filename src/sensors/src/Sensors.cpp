@@ -14,10 +14,6 @@
 #include <map>
 
 #include <iDynTree/Core/Wrench.h>
-#include <iDynTree/Core/AngularMotionVector3.h>
-#include <iDynTree/Core/LinearMotionVector3.h>
-
-// #include "iDynTree/Sensors/IMeasurement.hpp"
 #include <iDynTree/Sensors/Sensors.h>
 
 #include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
@@ -822,52 +818,6 @@ bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
 
 bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
                                          const unsigned int& sensor_index,
-                                         const iDynTree::LinAcceleration & measurement)
-{
-    if( sensor_type == ACCELEROMETER )
-    {
-        if( sensor_index < this->pimpl->AccelerometerMeasurements.size() )
-        {
-            this->pimpl->AccelerometerMeasurements[sensor_index] = measurement;
-            return true;
-        }
-        else
-        {
-            std::cerr << "[ERROR] setMeasurement failed: sensor_index " << sensor_index
-                      << "is out of bounds, because nrOfSensors is "
-                      << this->pimpl->AccelerometerMeasurements.size() << std::endl;
-            return false;
-        }
-    }
-
-    return false;
-}
-
-bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
-                                          const unsigned int& sensor_index,
-                                          const iDynTree::AngVelocity & measurement)
-{
-    if( sensor_type == GYROSCOPE )
-    {
-        if( sensor_index < this->pimpl->GyroscopeMeasurements.size() )
-        {
-            this->pimpl->GyroscopeMeasurements[sensor_index] = measurement;
-            return true;
-        }
-        else
-        {
-            std::cerr << "[ERROR] setMeasurement failed: sensor_index " << sensor_index
-                      << "is out of bounds, because nrOfSensors is "
-                      << this->pimpl->GyroscopeMeasurements.size() << std::endl;
-            return false;
-        }
-    }
-
-    return false;
-}
-
-bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
-                                         const unsigned int& sensor_index,
                                          const Vector3& measurement)
 {
     if( sensor_type == ACCELEROMETER )
@@ -953,51 +903,6 @@ bool SensorsMeasurements::getMeasurement(const SensorType& sensor_type,
             std::cerr << "[ERROR] getMeasurement failed: sensor_index " << sensor_index
                       << "is out of bounds, because nrOfSensors is "
                       << this-> pimpl->SixAxisFTSensorsMeasurements.size() << std::endl;
-            return false;
-        }
-    }
-
-    return false;
-}
-
-bool SensorsMeasurements::getMeasurement(const SensorType& sensor_type,
-                                         const unsigned int& sensor_index,
-                                         iDynTree::LinAcceleration & measurement) const
-{
-    if( sensor_type == ACCELEROMETER )
-    {
-        if( sensor_index < this->pimpl->AccelerometerMeasurements.size() )
-        {
-            measurement = this->pimpl->AccelerometerMeasurements[sensor_index];
-            return true;
-        }
-        else
-        {
-            std::cerr << "[ERROR] getMeasurement failed: sensor_index " << sensor_index
-                      << "is out of bounds, because nrOfSensors is "
-                      << this->pimpl->AccelerometerMeasurements.size() << std::endl;
-            return false;
-        }
-    }
-
-    return false;
-}
-bool SensorsMeasurements::getMeasurement(const SensorType& sensor_type,
-                                         const unsigned int& sensor_index,
-                                         iDynTree::AngVelocity& measurement) const
-{
-    if( sensor_type == GYROSCOPE )
-    {
-        if( sensor_index < this->pimpl->GyroscopeMeasurements.size() )
-        {
-            measurement = this->pimpl->GyroscopeMeasurements[sensor_index];
-            return true;
-        }
-        else
-        {
-            std::cerr << "[ERROR] getMeasurement failed: sensor_index " << sensor_index
-                      << "is out of bounds, because nrOfSensors is "
-                      << this->pimpl->GyroscopeMeasurements.size() << std::endl;
             return false;
         }
     }

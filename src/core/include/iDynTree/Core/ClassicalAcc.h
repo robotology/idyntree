@@ -35,7 +35,6 @@ namespace iDynTree
      *       that compose the classical acceleration without any conversion.
      *
      *
-     * Currently this class does not support semantics.
      *
      * \ingroup iDynTreeCore
      */

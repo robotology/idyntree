@@ -9,46 +9,46 @@ classdef ModelLoader < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1567, varargin{:});
+        tmp = iDynTreeMEX(1385, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1568, self);
+        iDynTreeMEX(1386, self);
         self.SwigClear();
       end
     end
     function varargout = parsingOptions(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1569, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1387, self, varargin{:});
     end
     function varargout = setParsingOptions(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1570, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1388, self, varargin{:});
     end
     function varargout = loadModelFromString(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1571, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1389, self, varargin{:});
     end
     function varargout = loadModelFromFile(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1572, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1390, self, varargin{:});
     end
     function varargout = loadReducedModelFromFullModel(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1573, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1391, self, varargin{:});
     end
     function varargout = loadReducedModelFromString(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1574, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1392, self, varargin{:});
     end
     function varargout = loadReducedModelFromFile(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1575, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1393, self, varargin{:});
     end
     function varargout = model(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1576, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1394, self, varargin{:});
     end
     function varargout = sensors(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1577, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1395, self, varargin{:});
     end
     function varargout = isValid(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1578, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1396, self, varargin{:});
     end
   end
   methods(Static)

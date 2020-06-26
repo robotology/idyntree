@@ -9,6 +9,7 @@
  */
 
 #include <iDynTree/Core/SpatialAcc.h>
+#include <iDynTree/Core/PrivateUtils.h>
 
 namespace iDynTree
 {
@@ -34,11 +35,7 @@ SpatialAcc::SpatialAcc(const SpatialAcc& other):
 
 SpatialAcc SpatialAcc::operator+(const SpatialAcc& other) const
 {
-#ifdef IDYNTREE_DONT_USE_SEMANTICSD
     return efficient6dSum(*this,other);
-#else
-    return compose(*this,(other));
-#endif
 }
 
 SpatialAcc SpatialAcc::operator-() const
@@ -48,11 +45,7 @@ SpatialAcc SpatialAcc::operator-() const
 
 SpatialAcc SpatialAcc::operator-(const SpatialAcc& other) const
 {
-#ifdef IDYNTREE_DONT_USE_SEMANTICSF
     return efficient6ddifference(*this,other);
-#else
-    return compose(*this,inverse(other));
-#endif
 }
 
 }

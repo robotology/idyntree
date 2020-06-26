@@ -1,3 +1,3 @@
 function varargout = estimateLinkContactWrenchesFromLinkNetExternalWrenches(varargin)
-  [varargout{1:nargout}] = iDynTreeMEX(1650, varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(1468, varargin{:});
 end

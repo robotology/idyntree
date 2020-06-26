@@ -11,12 +11,11 @@
 #ifndef IDYNTREE_CORE_SENSORS_HPP
 #define IDYNTREE_CORE_SENSORS_HPP
 
+#include <iDynTree/Core/GeomVector3.h>
 
 
 namespace iDynTree {
     class Wrench;
-    class AngularMotionVector3;
-    class LinearMotionVector3;
     typedef LinearMotionVector3 LinAcceleration;
     typedef AngularMotionVector3 AngVelocity;
 }
@@ -582,12 +581,6 @@ namespace iDynTree {
                                 const iDynTree::Wrench & measurement);
             bool setMeasurement(const SensorType & sensor_type,
                                 const unsigned int & sensor_index,
-                                const iDynTree::LinAcceleration & measurement);
-            bool setMeasurement(const SensorType & sensor_type,
-                                const unsigned int & sensor_index,
-                                const iDynTree::AngVelocity & measurement);
-            bool setMeasurement(const SensorType & sensor_type,
-                                const unsigned int & sensor_index,
                                 const Vector3 & measurement);
 
 
@@ -600,12 +593,6 @@ namespace iDynTree {
             bool getMeasurement(const SensorType & sensor_type,
                                 const unsigned int & sensor_index,
                                 iDynTree::Wrench & measurement) const;
-            bool getMeasurement(const SensorType & sensor_type,
-                                const unsigned int & sensor_index,
-                                iDynTree::LinAcceleration &measurement) const;
-            bool getMeasurement(const SensorType & sensor_type,
-                                const unsigned int & sensor_index,
-                                iDynTree::AngVelocity &measurement) const;
             bool getMeasurement(const SensorType & sensor_type,
                                 const unsigned int & sensor_index,
                                 Vector3& measurement) const;

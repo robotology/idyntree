@@ -9,46 +9,46 @@ classdef SimpleLeggedOdometry < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1665, varargin{:});
+        tmp = iDynTreeMEX(1483, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1666, self);
+        iDynTreeMEX(1484, self);
         self.SwigClear();
       end
     end
     function varargout = setModel(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1667, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1485, self, varargin{:});
     end
     function varargout = loadModelFromFile(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1668, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1486, self, varargin{:});
     end
     function varargout = loadModelFromFileWithSpecifiedDOFs(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1669, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1487, self, varargin{:});
     end
     function varargout = model(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1670, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1488, self, varargin{:});
     end
     function varargout = updateKinematics(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1671, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1489, self, varargin{:});
     end
     function varargout = init(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1672, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1490, self, varargin{:});
     end
     function varargout = changeFixedFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1673, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1491, self, varargin{:});
     end
     function varargout = getCurrentFixedLink(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1674, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1492, self, varargin{:});
     end
     function varargout = getWorldLinkTransform(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1675, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1493, self, varargin{:});
     end
     function varargout = getWorldFrameTransform(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1676, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1494, self, varargin{:});
     end
   end
   methods(Static)

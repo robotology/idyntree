@@ -24,8 +24,6 @@ namespace iDynTree
      *
      * \ingroup iDynTreeCore
      *
-     * This class is currently lacking semantics.
-     *
      */
     class Direction: public Vector3
     {

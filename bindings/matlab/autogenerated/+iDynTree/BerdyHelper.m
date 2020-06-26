@@ -9,104 +9,104 @@ classdef BerdyHelper < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1719, varargin{:});
+        tmp = iDynTreeMEX(1537, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = dynamicTraversal(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1720, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1538, self, varargin{:});
     end
     function varargout = model(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1721, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1539, self, varargin{:});
     end
     function varargout = sensors(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1722, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1540, self, varargin{:});
     end
     function varargout = isValid(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1723, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1541, self, varargin{:});
     end
     function varargout = init(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1724, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1542, self, varargin{:});
     end
     function varargout = getOptions(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1725, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1543, self, varargin{:});
     end
     function varargout = getNrOfDynamicVariables(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1726, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1544, self, varargin{:});
     end
     function varargout = getNrOfDynamicEquations(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1727, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1545, self, varargin{:});
     end
     function varargout = getNrOfSensorsMeasurements(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1728, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1546, self, varargin{:});
     end
     function varargout = resizeAndZeroBerdyMatrices(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1729, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1547, self, varargin{:});
     end
     function varargout = getBerdyMatrices(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1730, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1548, self, varargin{:});
     end
     function varargout = getSensorsOrdering(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1731, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1549, self, varargin{:});
     end
     function varargout = getRangeSensorVariable(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1732, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1550, self, varargin{:});
     end
     function varargout = getRangeDOFSensorVariable(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1733, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1551, self, varargin{:});
     end
     function varargout = getRangeJointSensorVariable(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1734, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1552, self, varargin{:});
     end
     function varargout = getRangeLinkSensorVariable(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1735, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1553, self, varargin{:});
     end
     function varargout = getRangeLinkVariable(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1736, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1554, self, varargin{:});
     end
     function varargout = getRangeJointVariable(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1737, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1555, self, varargin{:});
     end
     function varargout = getRangeDOFVariable(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1738, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1556, self, varargin{:});
     end
     function varargout = getDynamicVariablesOrdering(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1739, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1557, self, varargin{:});
     end
     function varargout = serializeDynamicVariables(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1740, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1558, self, varargin{:});
     end
     function varargout = serializeSensorVariables(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1741, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1559, self, varargin{:});
     end
     function varargout = serializeDynamicVariablesComputedFromFixedBaseRNEA(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1742, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1560, self, varargin{:});
     end
     function varargout = extractJointTorquesFromDynamicVariables(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1743, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1561, self, varargin{:});
     end
     function varargout = extractLinkNetExternalWrenchesFromDynamicVariables(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1744, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1562, self, varargin{:});
     end
     function varargout = updateKinematicsFromFloatingBase(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1745, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1563, self, varargin{:});
     end
     function varargout = updateKinematicsFromFixedBase(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1746, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1564, self, varargin{:});
     end
     function varargout = updateKinematicsFromTraversalFixedBase(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1747, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1565, self, varargin{:});
     end
     function varargout = setNetExternalWrenchMeasurementFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1748, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1566, self, varargin{:});
     end
     function varargout = getNetExternalWrenchMeasurementFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1749, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1567, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1750, self);
+        iDynTreeMEX(1568, self);
         self.SwigClear();
       end
     end
