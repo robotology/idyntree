@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Added the possibility of reusing an already opened figure with the MATLAB iDynTree Visualizer if the name coincides.
+- Added the possibility of reusing an already opened figure with the MATLAB iDynTree Visualizer either if the name coincides or by using gcf.
 
 ### Fixed
 - Fix bug in init() of SimpleLeggedOdometry that used an incorrect initial world frame location if used with an additional frame of a link (https://github.com/robotology/idyntree/pull/698)
