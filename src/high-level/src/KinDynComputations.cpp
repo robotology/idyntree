@@ -1803,12 +1803,10 @@ bool KinDynComputations::getCentroidalTotalMomentumJacobian(MatrixDynSize& centr
     if (!getLinearAngularMomentumJacobian(centroidalMomentumJacobian))
         return false;
 
-    // Get the base link index
-    LinkIndex baseLink = this->pimpl->m_traversal.getBaseLink()->getIndex();
-
+    // get CoM and base pose
     Position com = getCenterOfMassPosition();
-    const Position& basePosition = getWorldTransform(baseLink).getPosition();
-    const Rotation& A_R_B = getWorldTransform(baseLink).getRotation();
+    const Position& basePosition = pimpl->m_pos.worldBasePos().getPosition();
+    const Rotation& A_R_B = pimpl->m_pos.worldBasePos().getRotation();
 
     if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
     {
