@@ -1817,10 +1817,10 @@ bool KinDynComputations::getCentroidalTotalMomentumJacobian(MatrixDynSize& centr
         // J_G[B] = G[B]_X_B * J_B
         // where is G[B]_X_B is the adjoint wrench transformation
 
-
         Transform com_T_base_in_base(Rotation::Identity(), A_R_B.inverse() * (basePosition - com));
 
-        toEigen(centroidalMomentumJacobian) = toEigen(com_T_base_in_base.asAdjointTransformWrench()) * toEigen(centroidalMomentumJacobian);
+        // The eval() solves the Eigen aliasing problem
+        toEigen(centroidalMomentumJacobian) = (toEigen(com_T_base_in_base.asAdjointTransformWrench()) * toEigen(centroidalMomentumJacobian)).eval();
 
         return true;
     }
@@ -1833,7 +1833,8 @@ bool KinDynComputations::getCentroidalTotalMomentumJacobian(MatrixDynSize& centr
 
         Transform com_T_base_in_inertial(Rotation::Identity(), basePosition - com);
 
-        toEigen(centroidalMomentumJacobian) = toEigen(com_T_base_in_inertial.asAdjointTransformWrench()) * toEigen(centroidalMomentumJacobian);
+        // The eval() solves the Eigen aliasing problem
+        toEigen(centroidalMomentumJacobian) = (toEigen(com_T_base_in_inertial.asAdjointTransformWrench()) * toEigen(centroidalMomentumJacobian)).eval();
 
         return true;
     }
@@ -1847,7 +1848,8 @@ bool KinDynComputations::getCentroidalTotalMomentumJacobian(MatrixDynSize& centr
 
         iDynTree::Transform com_T_inertial(Rotation::Identity(),  -com);
 
-        toEigen(centroidalMomentumJacobian) = toEigen(com_T_inertial.asAdjointTransformWrench()) * toEigen(centroidalMomentumJacobian);
+        // The eval() solves the Eigen aliasing problem
+        toEigen(centroidalMomentumJacobian) = (toEigen(com_T_inertial.asAdjointTransformWrench()) * toEigen(centroidalMomentumJacobian)).eval();
 
         return true;
     }
