@@ -1798,6 +1798,65 @@ SpatialMomentum KinDynComputations::getCentroidalTotalMomentum()
     return newOutputFrame_X_oldOutputFrame*base_momentum;
 }
 
+bool KinDynComputations::getCentroidalTotalMomentumJacobian(MatrixDynSize& centroidalMomentumJacobian)
+{
+    if (!getLinearAngularMomentumJacobian(centroidalMomentumJacobian))
+        return false;
+
+    // Get the base link index
+    LinkIndex baseLink = this->pimpl->m_traversal.getBaseLink()->getIndex();
+
+    Position com = getCenterOfMassPosition();
+    const Position& basePosition = getWorldTransform(baseLink).getPosition();
+    const Rotation& A_R_B = getWorldTransform(baseLink).getRotation();
+
+    if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        // The getLinearAngularMomentumJacobian returns a quantity expressed in (B). Here we want to
+        // express the quantity in (G[B]).
+        // J_G[B] = G[B]_X_B * J_B
+        // where is G[B]_X_B is the adjoint wrench transformation
+
+
+        Transform com_T_base_in_base(Rotation::Identity(), A_R_B.inverse() * (basePosition - com));
+
+        toEigen(centroidalMomentumJacobian) = toEigen(com_T_base_in_base.asAdjointTransformWrench()) * toEigen(centroidalMomentumJacobian);
+
+        return true;
+    }
+    else if(pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
+    {
+        // The getLinearAngularMomentumJacobian returns a quantity expressed in (B[A]). Here we want
+        // to express the quantity in (G[A]).
+        // J_G[A] = G[A]_X_B[A] * J_B[A]
+        // where is G[A]_X_B[A] is the adjoint wrench transformation
+
+        Transform com_T_base_in_inertial(Rotation::Identity(), basePosition - com);
+
+        toEigen(centroidalMomentumJacobian) = toEigen(com_T_base_in_inertial.asAdjointTransformWrench()) * toEigen(centroidalMomentumJacobian);
+
+        return true;
+    }
+    else
+    {
+        // The getLinearAngularMomentumJacobian returns a quantity expressed in (A). Here we want
+        // to express the quantity in (G[A]).
+        // J_G[A] = G[A]_X_A * J_A
+        // where is G[A]_X_A is the adjoint wrench transformation
+        assert(pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
+
+        iDynTree::Transform com_T_inertial(Rotation::Identity(),  -com);
+
+        toEigen(centroidalMomentumJacobian) = toEigen(com_T_inertial.asAdjointTransformWrench()) * toEigen(centroidalMomentumJacobian);
+
+        return true;
+    }
+
+    assert(false);
+
+    return false;
+}
+
 bool KinDynComputations::getFreeFloatingMassMatrix(MatrixDynSize& freeFloatingMassMatrix)
 {
     // Compute the body-fixed-body-fixed mass matrix, if necessary
