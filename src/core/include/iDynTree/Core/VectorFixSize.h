@@ -49,6 +49,13 @@ namespace iDynTree
         VectorFixSize(const double * in_data, const unsigned int in_size);
 
         /**
+         * Constructor from an Eigen::MatrixBase
+         *
+         */
+        template<class Derived>
+        VectorFixSize(const Eigen::MatrixBase<Derived>& vector);
+
+        /**
          * @name Vector interface methods.
          * Methods exposing a vector-like interface to VectorFixSize.
          */
@@ -114,6 +121,13 @@ namespace iDynTree
 #endif
 
         /**
+         * Copy assignment operator for Eigen::MatrixBase.
+         *
+         */
+        template <class Derived>
+        VectorFixSize & operator=(const Eigen::MatrixBase<Derived>& vector);
+
+        /**
          * Assign all element of the vector to 0.
          */
         void zero();
@@ -166,6 +180,13 @@ namespace iDynTree
 
     }
 
+    template<unsigned int VecSize>
+    template<class Derived>
+    VectorFixSize<VecSize>::VectorFixSize(const Eigen::MatrixBase<Derived>& vector)
+        : Eigen::Matrix<double, VecSize, 1>(vector)
+    {
+
+    }
 
     template<unsigned int VecSize>
     VectorFixSize<VecSize>::VectorFixSize(const double* in_data,
@@ -243,6 +264,13 @@ namespace iDynTree
     }
 #endif
 
+    template<unsigned int VecSize>
+    template<class Derived>
+    VectorFixSize<VecSize> & VectorFixSize<VecSize>::operator=(const Eigen::MatrixBase<Derived>& vector)
+    {
+        Eigen::Matrix<double, VecSize, 1>::operator=(vector);
+        return *this;
+    }
 
     template<unsigned int VecSize>
     double VectorFixSize<VecSize>::getVal(const unsigned int index) const
