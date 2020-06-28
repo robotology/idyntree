@@ -21,9 +21,9 @@ namespace iDynTree
 {
     Direction::Direction(double x, double y, double z)
     {
-        this->m_data[0] = x;
-        this->m_data[1] = y;
-        this->m_data[2] = z;
+        this->data()[0] = x;
+        this->data()[1] = y;
+        this->data()[2] = z;
 
         this->Normalize();
     }
@@ -36,22 +36,22 @@ namespace iDynTree
 
     Direction::Direction(const Direction& other):VectorFixSize< int(3) >(other)
     {
-        this->m_data[0] = other.m_data[0];
-        this->m_data[1] = other.m_data[1];
-        this->m_data[2] = other.m_data[2];
+        this->data()[0] = other.data()[0];
+        this->data()[1] = other.data()[1];
+        this->data()[2] = other.data()[2];
     }
 
 
     void Direction::setToDefault()
     {
-        this->m_data[0] = 1.0;
-        this->m_data[1] = 0.0;
-        this->m_data[2] = 0.0;
+        this->data()[0] = 1.0;
+        this->data()[1] = 0.0;
+        this->data()[2] = 0.0;
     }
 
     void Direction::Normalize(double tol)
     {
-        Eigen::Map<Eigen::Vector3d> vec(this->m_data);
+        Eigen::Map<Eigen::Vector3d> vec(this->data());
         double nrm = vec.norm();
         if( nrm < tol )
         {
@@ -105,18 +105,18 @@ namespace iDynTree
 
     Direction Direction::reverse() const
     {
-        return Direction(-this->m_data[0],
-                         -this->m_data[1],
-                         -this->m_data[2]);
+        return Direction(-this->data()[0],
+                         -this->data()[1],
+                         -this->data()[2]);
     }
 
     std::string Direction::toString() const
     {
         std::stringstream ss;
 
-        ss << " x " << this->m_data[0]
-        << " y " << this->m_data[1]
-        << " z " << this->m_data[2];
+        ss << " x " << this->data()[0]
+        << " y " << this->data()[1]
+        << " z " << this->data()[2];
 
         return ss.str();
     }

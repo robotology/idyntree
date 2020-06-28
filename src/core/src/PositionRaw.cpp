@@ -33,9 +33,9 @@ namespace iDynTree
 
     PositionRaw::PositionRaw(double x, double y, double z)
     {
-        this->m_data[0] = x;
-        this->m_data[1] = y;
-        this->m_data[2] = z;
+        this->data()[0] = x;
+        this->data()[1] = y;
+        this->data()[2] = z;
     }
 
     PositionRaw::PositionRaw(const double* in_data, const unsigned int in_size):
@@ -46,26 +46,26 @@ namespace iDynTree
 
     PositionRaw::PositionRaw(const PositionRaw& other):VectorFixSize< int(3) >(other)
     {
-        this->m_data[0] = other.m_data[0];
-        this->m_data[1] = other.m_data[1];
-        this->m_data[2] = other.m_data[2];
+        this->data()[0] = other.data()[0];
+        this->data()[1] = other.data()[1];
+        this->data()[2] = other.data()[2];
 
     }
 
     const PositionRaw& PositionRaw::changePoint(const PositionRaw& newPoint)
     {
-        this->m_data[0] += newPoint(0);
-        this->m_data[1] += newPoint(1);
-        this->m_data[2] += newPoint(2);
+        this->data()[0] += newPoint(0);
+        this->data()[1] += newPoint(1);
+        this->data()[2] += newPoint(2);
 
         return *this;
     }
 
     const PositionRaw& PositionRaw::changeRefPoint(const PositionRaw& newRefPoint)
     {
-        this->m_data[0] += newRefPoint(0);
-        this->m_data[1] += newRefPoint(1);
-        this->m_data[2] += newRefPoint(2);
+        this->data()[0] += newRefPoint(0);
+        this->data()[1] += newRefPoint(1);
+        this->data()[2] += newRefPoint(2);
 
         return *this;
     }
@@ -82,9 +82,9 @@ namespace iDynTree
     PositionRaw PositionRaw::inverse(const PositionRaw& op)
     {
         PositionRaw result;
-        result(0) = -op.m_data[0];
-        result(1) = -op.m_data[1];
-        result(2) = -op.m_data[2];
+        result(0) = -op.data()[0];
+        result(1) = -op.data()[1];
+        result(2) = -op.data()[2];
         return result;
     }
 
@@ -123,7 +123,7 @@ namespace iDynTree
     std::string PositionRaw::toString() const
     {
         std::stringstream ss;
-        ss << this->m_data[0] << " " << this->m_data[1] << " " << this->m_data[2];
+        ss << this->data()[0] << " " << this->data()[1] << " " << this->data()[2];
         return ss.str();
     }
 

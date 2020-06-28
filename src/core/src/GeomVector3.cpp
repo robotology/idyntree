@@ -31,16 +31,16 @@ namespace iDynTree
 
     GeomVector3::GeomVector3(const double x, const double y, const double z)
     {
-        this->m_data[0] = x;
-        this->m_data[1] = y;
-        this->m_data[2] = z;
+        this->data()[0] = x;
+        this->data()[1] = y;
+        this->data()[2] = z;
     }
 
     GeomVector3::GeomVector3(const Vector3 other)
     {
-        this->m_data[0] = other(0);
-        this->m_data[1] = other(1);
-        this->m_data[2] = other(2);
+        this->data()[0] = other(0);
+        this->data()[1] = other(1);
+        this->data()[2] = other(2);
     }
 
     // Geometric operations
