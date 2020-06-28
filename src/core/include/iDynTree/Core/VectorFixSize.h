@@ -20,6 +20,8 @@
 #include <cassert>
 #include <cstring>
 
+#include <Eigen/Dense>
+
 namespace iDynTree
 {
     /**
@@ -29,16 +31,8 @@ namespace iDynTree
      *
      * \ingroup iDynTreeCore
      */
-    template<unsigned int VecSize> class VectorFixSize
+    template<unsigned int VecSize> class VectorFixSize : public Eigen::Matrix<double, VecSize, 1>
     {
-    protected:
-        /**
-         * Storage for the VectorDynSize
-         *
-         * Array of VecSize doubles.
-         */
-        double m_data[VecSize];
-
     public:
         /**
          * Default constructor.
@@ -59,14 +53,6 @@ namespace iDynTree
          * Methods exposing a vector-like interface to VectorFixSize.
          */
         ///@{
-        double operator()(const unsigned int index) const;
-
-        double& operator()(const unsigned int index);
-
-        double operator[](const unsigned int index) const;
-
-        double& operator[](const unsigned int index);
-
         double getVal(const unsigned int index) const;
 
         bool setVal(const unsigned int index, const double new_el);
@@ -128,20 +114,6 @@ namespace iDynTree
 #endif
 
         /**
-         * Raw data accessor
-         *
-         * @return a const pointer to a vector of size() doubles
-         */
-        const double * data() const;
-
-        /**
-         * Raw data accessor
-         *
-         * @return a pointer to a vector of size() doubles
-         */
-        double * data();
-
-        /**
          * Assign all element of the vector to 0.
          */
         void zero();
@@ -189,6 +161,7 @@ namespace iDynTree
     //Implementation
     template<unsigned int VecSize>
     VectorFixSize<VecSize>::VectorFixSize()
+        : Eigen::Matrix<double, VecSize, 1>()
     {
 
     }
@@ -197,6 +170,7 @@ namespace iDynTree
     template<unsigned int VecSize>
     VectorFixSize<VecSize>::VectorFixSize(const double* in_data,
                                  const unsigned int in_size)
+        : Eigen::Matrix<double, VecSize, 1>()
     {
         if( in_size != VecSize )
         {
@@ -205,7 +179,7 @@ namespace iDynTree
         }
         else
         {
-            memcpy(this->m_data,in_data,sizeof(double)*VecSize);
+            std::memcpy(this->data(), in_data, sizeof(double) * VecSize);
         }
     }
 
@@ -214,57 +188,44 @@ namespace iDynTree
     {
         for(unsigned int i=0; i < VecSize; i++ )
         {
-            this->m_data[i] = 0.0;
+            this->operator[](i) = 0.0;
         }
-    }
-
-
-    template<unsigned int VecSize>
-    double* VectorFixSize<VecSize>::data()
-    {
-        return this->m_data;
-    }
-
-    template<unsigned int VecSize>
-    const double* VectorFixSize<VecSize>::data() const
-    {
-        return this->m_data;
     }
 
     template<unsigned int VecSize>
     const double* VectorFixSize<VecSize>::begin() const noexcept
     {
-        return this->m_data;
+        return this->data();
     }
 
     template<unsigned int VecSize>
     const double* VectorFixSize<VecSize>::end() const noexcept
     {
-        return this->m_data + VecSize;
+        return this->data() + VecSize;
     }
 
     template<unsigned int VecSize>
     const double* VectorFixSize<VecSize>::cbegin() const noexcept
     {
-        return this->m_data;
+        return this->data();
     }
 
     template<unsigned int VecSize>
     const double* VectorFixSize<VecSize>::cend() const noexcept
     {
-        return this->m_data + VecSize;
+        return this->data() + VecSize;
     }
 
     template <unsigned int VecSize>
     double *VectorFixSize<VecSize>::begin() noexcept
     {
-        return this->m_data;
+        return this->data();
     }
 
     template<unsigned int VecSize>
     double* VectorFixSize<VecSize>::end() noexcept
     {
-        return this->m_data + VecSize;
+        return this->data() + VecSize;
     }
 
     template<unsigned int VecSize>
@@ -277,38 +238,11 @@ namespace iDynTree
     template<unsigned int VecSize>
     VectorFixSize<VecSize> & VectorFixSize<VecSize>::operator=(const Span<const double>& vec) {
         assert(VecSize == vec.size());
-        std::memcpy(this->m_data, vec.data(), VecSize*sizeof(double));
+        std::memcpy(this->data(), vec.data(), VecSize * sizeof(double));
         return *this;
     }
 #endif
 
-    template<unsigned int VecSize>
-    double VectorFixSize<VecSize>::operator()(const unsigned int index) const
-    {
-        assert(index < VecSize);
-        return this->m_data[index];
-    }
-
-    template<unsigned int VecSize>
-    double & VectorFixSize<VecSize>::operator()(const unsigned int index)
-    {
-        assert(index < VecSize);
-        return this->m_data[index];
-    }
-
-    template<unsigned int VecSize>
-    double VectorFixSize<VecSize>::operator[](const unsigned int index) const
-    {
-        assert(index < VecSize);
-        return this->m_data[index];
-    }
-
-    template<unsigned int VecSize>
-    double & VectorFixSize<VecSize>::operator[](const unsigned int index)
-    {
-        assert(index < VecSize);
-        return this->m_data[index];
-    }
 
     template<unsigned int VecSize>
     double VectorFixSize<VecSize>::getVal(const unsigned int index) const
@@ -319,7 +253,7 @@ namespace iDynTree
             return 0.0;
         }
 
-        return this->m_data[index];
+        return this->operator[](index);
     }
 
     template<unsigned int VecSize>
@@ -331,7 +265,7 @@ namespace iDynTree
             return false;
         }
 
-        this->m_data[index] = new_el;
+        this->operator[](index) = new_el;
 
         return true;
     }
@@ -341,7 +275,7 @@ namespace iDynTree
     {
         for(unsigned int i=0; i < this->size(); i++ )
         {
-            buf[i] = this->m_data[i];
+            buf[i] = this->operator[](i);
         }
     }
 
@@ -352,7 +286,7 @@ namespace iDynTree
 
         for(unsigned int i=0; i < this->size(); i++ )
         {
-            ss << this->m_data[i] << " ";
+            ss << this->operator[](i) << " ";
         }
 
         return ss.str();
@@ -365,7 +299,7 @@ namespace iDynTree
 
         for(unsigned int i=0; i < this->size(); i++ )
         {
-            ss << this->m_data[i] << " ";
+            ss << this->operator[](i) << " ";
         }
 
         return ss.str();

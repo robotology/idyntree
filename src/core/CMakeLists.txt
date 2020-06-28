@@ -92,13 +92,13 @@ add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 
 if (DEFINED CMAKE_COMPILER_IS_GNUCXX)
   if(${CMAKE_COMPILER_IS_GNUCXX} AND ${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS 5)
-    target_compile_options(idyntree-core INTERFACE ${CXX11_FLAGS})
+    target_compile_options(idyntree-core INTERFACE ${CXX17_FLAGS})
   endif()
 endif()
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
-target_link_libraries(${libraryname} PRIVATE Eigen3::Eigen)
+target_link_libraries(${libraryname} PUBLIC Eigen3::Eigen)
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_CORE_EXP_HEADERS})
 
