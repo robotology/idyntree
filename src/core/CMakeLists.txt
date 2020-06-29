@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Fondazione Istituto Italiano di Tecnologia
+# Copyright (C) Fondazione Istituto Italiano di Tecnologia
 #
 # Licensed under either the GNU Lesser General Public License v3.0 :
 # https://www.gnu.org/licenses/lgpl-3.0.html
@@ -43,7 +43,14 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
                               include/iDynTree/Core/Triplets.h
                               include/iDynTree/Core/CubicSpline.h
                               include/iDynTree/Core/Span.h
-                              include/iDynTree/Core/SO3Utils.h)
+                              include/iDynTree/Core/SO3Utils.h
+                              # Deprecated headers
+                              include/iDynTree/Core/AngularForceVector3.h
+                              include/iDynTree/Core/AngularMotionVector3.h
+                              include/iDynTree/Core/ForceVector3.h
+                              include/iDynTree/Core/LinearForceVector3.h
+                              include/iDynTree/Core/LinearMotionVector3.h
+                              include/iDynTree/Core/MotionVector3.h)
 
 
 set(IDYNTREE_CORE_EXP_SOURCES src/Axis.cpp
