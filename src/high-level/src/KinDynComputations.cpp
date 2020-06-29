@@ -1810,7 +1810,9 @@ bool KinDynComputations::getCentroidalTotalMomentumJacobian(MatrixDynSize& centr
     const Position& basePosition = pimpl->m_pos.worldBasePos().getPosition();
     const Rotation& A_R_B = pimpl->m_pos.worldBasePos().getRotation();
 
-    if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    switch (pimpl->m_frameVelRepr)
+    {
+    case BODY_FIXED_REPRESENTATION:
     {
         // The getLinearAngularMomentumJacobian returns a quantity expressed in (B). Here we want to
         // express the quantity in (G[B]).
@@ -1822,9 +1824,10 @@ bool KinDynComputations::getCentroidalTotalMomentumJacobian(MatrixDynSize& centr
         // The eval() solves the Eigen aliasing problem
         toEigen(centroidalMomentumJacobian) = (toEigen(com_T_base_in_base.asAdjointTransformWrench()) * toEigen(centroidalMomentumJacobian)).eval();
 
-        return true;
+        break;
     }
-    else if(pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
+
+    case MIXED_REPRESENTATION:
     {
         // The getLinearAngularMomentumJacobian returns a quantity expressed in (B[A]). Here we want
         // to express the quantity in (G[A]).
@@ -1836,9 +1839,10 @@ bool KinDynComputations::getCentroidalTotalMomentumJacobian(MatrixDynSize& centr
         // The eval() solves the Eigen aliasing problem
         toEigen(centroidalMomentumJacobian) = (toEigen(com_T_base_in_inertial.asAdjointTransformWrench()) * toEigen(centroidalMomentumJacobian)).eval();
 
-        return true;
+        break;
     }
-    else
+
+    case INERTIAL_FIXED_REPRESENTATION:
     {
         // The getLinearAngularMomentumJacobian returns a quantity expressed in (A). Here we want
         // to express the quantity in (G[A]).
@@ -1851,12 +1855,15 @@ bool KinDynComputations::getCentroidalTotalMomentumJacobian(MatrixDynSize& centr
         // The eval() solves the Eigen aliasing problem
         toEigen(centroidalMomentumJacobian) = (toEigen(com_T_inertial.asAdjointTransformWrench()) * toEigen(centroidalMomentumJacobian)).eval();
 
-        return true;
+        break;
     }
 
-    assert(false);
+    default:
+        assert(false);
+        return false;
+    }
 
-    return false;
+    return true;
 }
 
 bool KinDynComputations::getFreeFloatingMassMatrix(MatrixDynSize& freeFloatingMassMatrix)
