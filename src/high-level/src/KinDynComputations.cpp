@@ -1801,7 +1801,9 @@ SpatialMomentum KinDynComputations::getCentroidalTotalMomentum()
 bool KinDynComputations::getCentroidalTotalMomentumJacobian(MatrixDynSize& centroidalMomentumJacobian)
 {
     if (!getLinearAngularMomentumJacobian(centroidalMomentumJacobian))
+    {
         return false;
+    }
 
     // get CoM and base pose
     Position com = getCenterOfMassPosition();
