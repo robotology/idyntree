@@ -14,9 +14,9 @@ function [Visualizer,Objects]=prepareVisualization(KinDynModel,meshFilePrefix,va
 %     - `groundFrame` : Selects the frame in which the ground is attached.
 %     - `name` : The name of the figure 
 %     - `reuseFigure` : Enable the reuse of an already open figure. It can be the following values:
-%         - true: Reuse the figure with the same name (the figure is cleared before reusing it)
+%         - 'name': Reuse the figure with the same name (the figure is cleared before reusing it)
 %         - 'gcf': Reuse the figure returned by gcf
-%         - false: Do not reuse the figure.
+%         - 'none': Do not reuse the figure.
 %     Note: all extra variables are sent to `plotMeshInWorld`
 %   - Outputs:
 %       - `Visualizer` : Struct containing the following fields
@@ -48,9 +48,10 @@ default_groundColor=[0 0.5 0.5];
 default_groundTransparency=0.8;
 default_groundFrame='none';
 default_name='iDynTreeVisualizer';
-default_reuseFigure=false;
+default_reuseFigure='none';
 % accepted values
 expected_materials={'dull','metal','shiny'};
+expected_reuseFigure={'name', 'gcf', 'none'};
 % add parameters and validity funcitons
 addRequired(p,'structInput');
 addRequired(p,'meshFilePrefix',@(x) isstring(x) || ischar(x));
@@ -62,7 +63,7 @@ addParameter(p,'groundColor',default_groundColor,@(x)validateattributes(x,{'nume
 addParameter(p,'groundTransparency',default_groundTransparency,@(x) isnumeric(x) && isscalar(x));
 addParameter(p,'groundFrame',default_groundFrame,@(x) isstring(x) || ischar(x));
 addParameter(p,'name',default_name,@(x) isstring(x) || ischar(x));
-addParameter(p,'reuseFigure',default_reuseFigure,@(x) islogical(x) || strcmp(x,'gcf'));
+addParameter(p,'reuseFigure',default_reuseFigure,@(x) any(validatestring(x,expected_reuseFigure)));
 
 % parse inputs
 parse(p,KinDynModel,meshFilePrefix,varargin{:});
@@ -72,12 +73,16 @@ model=KinDynModel.kinDynComp.model;
 [linkMeshInfo,map]=iDynTreeWrappers.getMeshes(model,meshFilePrefix);
 numberOfLinks=length(linkMeshInfo);
 linkNames=cell(numberOfLinks,1);
-figHandles = findobj('Type', 'figure', 'Name', options.name);
 if strcmp(options.reuseFigure,'gcf')
     mainHandler=gcf;
-elseif options.reuseFigure && size(figHandles, 1) > 0
-    mainHandler=figHandles(1,1);
-    clf(mainHandler,'reset')
+elseif strcmp(options.reuseFigure,'name')
+    figHandles = findobj('Type', 'figure', 'Name', options.name);
+    if size(figHandles, 1) > 0
+        mainHandler=figHandles(1,1);
+        clf(mainHandler,'reset')
+    else
+        mainHandler=figure;
+    end
 else
     mainHandler=figure;
 end
