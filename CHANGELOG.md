@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Added a new CMake option `IDYNTREE_COMPILES_TOOLS` to disable compilation of iDynTree tools.
+- Added a `KinDynComputations::getCentroidalTotalMomentumJacobian()` method (https://github.com/robotology/idyntree/pull/706)
 
 ### Removed 
 - Remove the CMake option IDYNTREE_USES_KDL and all the classes available when enabling it. They were deprecated in iDynTree 1.0 .

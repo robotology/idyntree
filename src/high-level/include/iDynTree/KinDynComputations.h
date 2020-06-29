@@ -623,6 +623,19 @@ public:
      */
     iDynTree::SpatialMomentum getCentroidalTotalMomentum();
 
+    /**
+     * @brief Get the total centroidal momentum jacobian of the robot.
+     * If G is the center of mass, this quantity is expressed in (G[A]), (G[A]) or (G[B]) depending
+     * on the FrameVelocityConvention used.
+     * @param[out] centroidalTotalMomentumJacobian the (6) times (6+getNrOfDOFs()) output centroidal
+     * total momentum jacobian.
+     * @return true if all went well, false otherwise.
+     * @note If the chosen FrameVelocityRepresentation is MIXED_REPRESENTATION or
+     * INERTIAL_FIXED_REPRESENTATION, the function computes the Centroidal Momentum Matrix (CMM)
+     * introduced in https://doi.org/10.1109/IROS.2008.4650772 .
+     */
+    bool getCentroidalTotalMomentumJacobian(MatrixDynSize& centroidalTotalMomentumJacobian);
+
     //@}
 
 
