@@ -14,9 +14,9 @@ function [Visualizer,Objects]=prepareVisualization(KinDynModel,meshFilePrefix,va
 %     - `groundFrame` : Selects the frame in which the ground is attached.
 %     - `name` : The name of the figure 
 %     - `reuseFigure` : Enable the reuse of an already open figure. It can be the following values:
-%         - 'name': Reuse the figure with the same name (the figure is cleared before reusing it)
-%         - 'gcf': Reuse the figure returned by gcf
-%         - 'none': Do not reuse the figure.
+%         - 'name': Reuse the figure with the same name (the figure is cleared before reusing it). The name must be set.
+%         - 'gcf': Reuse the figure returned by gcf.
+%         - 'none': Do not reuse the figure (Default).
 %     Note: all extra variables are sent to `plotMeshInWorld`
 %   - Outputs:
 %       - `Visualizer` : Struct containing the following fields
@@ -68,25 +68,30 @@ addParameter(p,'reuseFigure',default_reuseFigure,@(x) any(validatestring(x,expec
 % parse inputs
 parse(p,KinDynModel,meshFilePrefix,varargin{:});
 options=p.Results;
+isNameSet=~any(strcmp(p.UsingDefaults, 'name'));
 %% Get meshes from the model variable
 model=KinDynModel.kinDynComp.model;
 [linkMeshInfo,map]=iDynTreeWrappers.getMeshes(model,meshFilePrefix);
 numberOfLinks=length(linkMeshInfo);
 linkNames=cell(numberOfLinks,1);
-if strcmp(options.reuseFigure,'gcf')
-    mainHandler=gcf;
-elseif strcmp(options.reuseFigure,'name')
-    figHandles = findobj('Type', 'figure', 'Name', options.name);
-    if size(figHandles, 1) > 0
-        mainHandler=figHandles(1,1);
-        clf(mainHandler,'reset')
-    else
+switch options.reuseFigure
+    case 'gcf'
+        mainHandler=gcf;
+        cla(mainHandler);
+    case 'name'
+        figHandles = findobj('Type', 'figure', 'Name', options.name);
+        if isNameSet && ~isempty(figHandles)
+            mainHandler=figHandles(1,1);
+            cla(mainHandler);
+        else
+            mainHandler=figure;
+        end
+    otherwise
         mainHandler=figure;
-    end
-else
-    mainHandler=figure;
 end
-set(mainHandler,'Name', options.name,'numbertitle','off')
+if isNameSet
+    set(mainHandler,'Name', options.name,'numbertitle','off')
+end
 set(0, 'CurrentFigure', mainHandler) %Set the figure as current figure such that gca works
 parent=gca;
 hold on
