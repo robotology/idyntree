@@ -102,7 +102,7 @@ if(MSVC)
    add_definitions(-D_USE_MATH_DEFINES)
 endif()
 
-target_compile_features(${libraryname} PUBLIC cxx_attribute_deprecated)
+target_compile_features(${libraryname} PUBLIC cxx_attribute_deprecated cxx_std_17)
 
 install(TARGETS ${libraryname}
         EXPORT iDynTree
