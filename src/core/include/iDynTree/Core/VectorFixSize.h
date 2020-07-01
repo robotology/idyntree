@@ -200,17 +200,15 @@ namespace iDynTree
         }
         else
         {
-            std::memcpy(this->data(), in_data, sizeof(double) * VecSize);
+            Eigen::Map<const Eigen::Matrix<double, VecSize, 1>> map(in_data, in_size);
+            this->operator=(map);
         }
     }
 
     template<unsigned int VecSize>
     void VectorFixSize<VecSize>::zero()
     {
-        for(unsigned int i=0; i < VecSize; i++ )
-        {
-            this->operator[](i) = 0.0;
-        }
+        this->setZero();
     }
 
     template<unsigned int VecSize>
@@ -259,7 +257,9 @@ namespace iDynTree
     template<unsigned int VecSize>
     VectorFixSize<VecSize> & VectorFixSize<VecSize>::operator=(const Span<const double>& vec) {
         assert(VecSize == vec.size());
-        std::memcpy(this->data(), vec.data(), VecSize * sizeof(double));
+
+        Eigen::Map<const Eigen::Matrix<double, VecSize, 1>> map(vec.data(), vec.size());
+        this->operator=(map);
         return *this;
     }
 #endif
