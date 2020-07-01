@@ -20,6 +20,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <algorithm>
+#include <random>
 
 using namespace iDynTree;
 
@@ -205,7 +206,8 @@ void checkLoadReducedModelOrderIsKept(std::string urdfFileName)
         }
     }
 
-    std::random_shuffle(dofsName.begin(), dofsName.end());
+    std::mt19937 g{42};
+    std::shuffle(dofsName.begin(), dofsName.end(), g);
 
     //now load the new model and check they are the same
     ASSERT_IS_TRUE(loader.loadReducedModelFromFullModel(loadedModel, dofsName) && loader.isValid());
