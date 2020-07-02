@@ -201,7 +201,7 @@ namespace iDynTree
         else
         {
             Eigen::Map<const Eigen::Matrix<double, VecSize, 1>> map(in_data, in_size);
-            this->operator=(map);
+            *this = map;
         }
     }
 
