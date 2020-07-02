@@ -1,11 +1,8 @@
 #########################################################################
 # Control whether libraries are shared or static.
-if( MSVC )
-option(IDYNTREE_SHARED_LIBRARY "Compile iDynTree as a shared library" FALSE)
-else()
-option(IDYNTREE_SHARED_LIBRARY "Compile iDynTree as a shared library" TRUE)
-endif()
-option(BUILD_SHARED_LIBS "Build libraries as shared as opposed to static" ${IDYNTREE_SHARED_LIBRARY})
+option(BUILD_SHARED_LIBS "Build libraries as shared as opposed to static" ON)
+
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 #########################################################################
 option(IDYNTREE_ONLY_DOCS "Only produce iDynTree documentation, without compiling" FALSE)

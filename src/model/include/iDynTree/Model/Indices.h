@@ -13,27 +13,34 @@
 
 #include <string>
 
+// Workaround for SWIG problems with GenerateExportHeader-generated code
+#if defined(SWIG)
+#define IDYNTREE_MODEL_EXPORT
+#else
+#include "ModelExport.h"
+#endif
+
 namespace iDynTree
 {
     typedef int LinkIndex;
-    extern LinkIndex LINK_INVALID_INDEX;
-    extern std::string LINK_INVALID_NAME;
+    IDYNTREE_MODEL_EXPORT extern LinkIndex LINK_INVALID_INDEX;
+    IDYNTREE_MODEL_EXPORT extern std::string LINK_INVALID_NAME;
 
     typedef int JointIndex;
-    extern int JOINT_INVALID_INDEX;
-    extern std::string JOINT_INVALID_NAME;
+    IDYNTREE_MODEL_EXPORT extern int JOINT_INVALID_INDEX;
+    IDYNTREE_MODEL_EXPORT extern std::string JOINT_INVALID_NAME;
 
     typedef int DOFIndex;
-    extern int DOF_INVALID_INDEX;
-    extern std::string DOF_INVALID_NAME;
+    IDYNTREE_MODEL_EXPORT extern int DOF_INVALID_INDEX;
+    IDYNTREE_MODEL_EXPORT extern std::string DOF_INVALID_NAME;
 
 
     typedef int FrameIndex;
-    extern int FRAME_INVALID_INDEX;
-    extern std::string FRAME_INVALID_NAME;
+    IDYNTREE_MODEL_EXPORT extern int FRAME_INVALID_INDEX;
+    IDYNTREE_MODEL_EXPORT extern std::string FRAME_INVALID_NAME;
 
     typedef int TraversalIndex;
-    extern TraversalIndex TRAVERSAL_INVALID_INDEX;
+    IDYNTREE_MODEL_EXPORT extern TraversalIndex TRAVERSAL_INVALID_INDEX;
 
 }
 
