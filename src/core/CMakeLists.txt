@@ -107,6 +107,12 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 target_link_libraries(${libraryname} PRIVATE Eigen3::Eigen)
 
+# On Windows correctly export global constants that are not inlined
+include(GenerateExportHeader)
+generate_export_header(${libraryname} EXPORT_FILE_NAME CoreExport.h)
+list(APPEND IDYNTREE_CORE_EXP_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/CoreExport.h)
+target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>")
+
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_CORE_EXP_HEADERS})
 
 target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})

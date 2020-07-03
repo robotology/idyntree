@@ -70,6 +70,13 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
 target_link_libraries(${libraryname} PUBLIC idyntree-core
                                      PRIVATE Eigen3::Eigen)
 
+# On Windows correctly export global constants that are not inlined
+include(GenerateExportHeader)
+generate_export_header(${libraryname} EXPORT_FILE_NAME ModelExport.h)
+list(APPEND IDYNTREE_MODEL_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/ModelExport.h)
+
+target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>")
+
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODEL_HEADERS})
 
 install(TARGETS ${libraryname}
