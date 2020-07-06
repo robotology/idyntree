@@ -176,6 +176,7 @@ bool BerdyHelper::init(const Model& model,
 
     m_model.computeFullTreeTraversal(m_dynamicsTraversal,baseLinkIndex);
     m_kinematicTraversals.resize(m_model);
+    m_baseTransform = iDynTree::Transform::Identity();
     m_jointPos.resize(m_model);
     m_jointVel.resize(m_model);
     m_linkVels.resize(m_model);
