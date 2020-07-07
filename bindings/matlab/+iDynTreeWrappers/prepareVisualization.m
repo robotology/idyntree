@@ -77,12 +77,12 @@ linkNames=cell(numberOfLinks,1);
 switch options.reuseFigure
     case 'gcf'
         mainHandler=gcf;
-        cla(mainHandler);
+        cla(mainHandler.Children);
     case 'name'
         figHandles = findobj('Type', 'figure', 'Name', options.name);
         if isNameSet && ~isempty(figHandles)
             mainHandler=figHandles(1,1);
-            cla(mainHandler);
+            cla(mainHandler.Children);
         else
             mainHandler=figure;
         end
