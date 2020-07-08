@@ -12,6 +12,11 @@ function [Visualizer,Objects]=prepareVisualization(KinDynModel,meshFilePrefix,va
 %     - `groundColor` : Selects the color of the ground.
 %     - `groundTransparency` : Selects the transparency of the ground.
 %     - `groundFrame` : Selects the frame in which the ground is attached.
+%     - `name` : The name of the figure 
+%     - `reuseFigure` : Enable the reuse of an already open figure. It can be the following values:
+%         - 'name': Reuse the figure with the same name (the figure is cleared before reusing it). The name must be set.
+%         - 'gcf': Reuse the figure returned by gcf.
+%         - 'none': Do not reuse the figure (Default).
 %     Note: all extra variables are sent to `plotMeshInWorld`
 %   - Outputs:
 %       - `Visualizer` : Struct containing the following fields
@@ -42,8 +47,11 @@ default_groundOn=false;
 default_groundColor=[0 0.5 0.5];
 default_groundTransparency=0.8;
 default_groundFrame='none';
+default_name='iDynTreeVisualizer';
+default_reuseFigure='none';
 % accepted values
 expected_materials={'dull','metal','shiny'};
+expected_reuseFigure={'name', 'gcf', 'none'};
 % add parameters and validity funcitons
 addRequired(p,'structInput');
 addRequired(p,'meshFilePrefix',@(x) isstring(x) || ischar(x));
@@ -54,16 +62,37 @@ addParameter(p,'groundOn',default_groundOn,@(x) islogical(x));
 addParameter(p,'groundColor',default_groundColor,@(x)validateattributes(x,{'numeric'},{'numel', 3}));
 addParameter(p,'groundTransparency',default_groundTransparency,@(x) isnumeric(x) && isscalar(x));
 addParameter(p,'groundFrame',default_groundFrame,@(x) isstring(x) || ischar(x));
+addParameter(p,'name',default_name,@(x) isstring(x) || ischar(x));
+addParameter(p,'reuseFigure',default_reuseFigure,@(x) any(validatestring(x,expected_reuseFigure)));
 
 % parse inputs
 parse(p,KinDynModel,meshFilePrefix,varargin{:});
 options=p.Results;
+isNameSet=~any(strcmp(p.UsingDefaults, 'name'));
 %% Get meshes from the model variable
 model=KinDynModel.kinDynComp.model;
 [linkMeshInfo,map]=iDynTreeWrappers.getMeshes(model,meshFilePrefix);
 numberOfLinks=length(linkMeshInfo);
 linkNames=cell(numberOfLinks,1);
-mainHandler=figure;
+switch options.reuseFigure
+    case 'gcf'
+        mainHandler=gcf;
+        cla(mainHandler.Children);
+    case 'name'
+        figHandles = findobj('Type', 'figure', 'Name', options.name);
+        if isNameSet && ~isempty(figHandles)
+            mainHandler=figHandles(1,1);
+            cla(mainHandler.Children);
+        else
+            mainHandler=figure;
+        end
+    otherwise
+        mainHandler=figure;
+end
+if isNameSet
+    set(mainHandler,'Name', options.name,'numbertitle','off')
+end
+set(0, 'CurrentFigure', mainHandler) %Set the figure as current figure such that gca works
 parent=gca;
 hold on
 linkNames_idyn=iDynTree.StringVector();
