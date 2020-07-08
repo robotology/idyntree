@@ -107,8 +107,16 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
 target_link_libraries(${libraryname} PRIVATE Eigen3::Eigen)
 
-# On Windows correctly export global constants that are not inlined
-include(GenerateExportHeader)
+# On Windows we need to correctly export global constants that are not inlined with the use of GenerateExportHeader
+# vtk 6.3 installs a GenerateExportHeader CMake module that shadows the official CMake module if find_package(VTK)
+# is invoked, the issue has been solved in vtk >= 7.1, see https://gitlab.kitware.com/vtk/vtk/-/merge_requests/1593 .
+# To ensure that the build works even if find_package(VTK) is invoked and VTK 6 is found, we manually include exactly the
+# GenerateExportHeader that is shipped with CMake, extracting the CMake install prefix from the CMAKE_COMMAND variable
+# This workaround can be removed once we will not support anymore platforms that ship with vtk 6.3 as main vtk version (Ubuntu 18.04).
+get_filename_component(CMAKE_UPSTREAM_MODULE_LOCATION ${CMAKE_COMMAND} PATH)
+get_filename_component(CMAKE_UPSTREAM_MODULE_LOCATION ${CMAKE_UPSTREAM_MODULE_LOCATION} PATH)
+set(CMAKE_UPSTREAM_MODULE_LOCATION ${CMAKE_UPSTREAM_MODULE_LOCATION}/share/cmake-${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}/Modules)
+include(${CMAKE_UPSTREAM_MODULE_LOCATION}/GenerateExportHeader.cmake)
 generate_export_header(${libraryname} EXPORT_FILE_NAME CoreExport.h)
 list(APPEND IDYNTREE_CORE_EXP_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/CoreExport.h)
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>")
