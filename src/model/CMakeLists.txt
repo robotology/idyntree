@@ -79,7 +79,11 @@ target_link_libraries(${libraryname} PUBLIC idyntree-core
 get_filename_component(CMAKE_UPSTREAM_MODULE_LOCATION ${CMAKE_COMMAND} PATH)
 get_filename_component(CMAKE_UPSTREAM_MODULE_LOCATION ${CMAKE_UPSTREAM_MODULE_LOCATION} PATH)
 set(CMAKE_UPSTREAM_MODULE_LOCATION ${CMAKE_UPSTREAM_MODULE_LOCATION}/share/cmake-${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}/Modules)
-include(${CMAKE_UPSTREAM_MODULE_LOCATION}/GenerateExportHeader.cmake)
+if(EXISTS ${CMAKE_UPSTREAM_MODULE_LOCATION}/GenerateExportHeader.cmake)
+    include(${CMAKE_UPSTREAM_MODULE_LOCATION}/GenerateExportHeader.cmake)
+else()
+    include(GenerateExportHeader)
+endif()
 generate_export_header(${libraryname} EXPORT_FILE_NAME ModelExport.h)
 list(APPEND IDYNTREE_MODEL_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/ModelExport.h)
 
