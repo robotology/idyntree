@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed 
 - Remove the CMake option IDYNTREE_USES_KDL and all the classes available when enabling it. They were deprecated in iDynTree 1.0 .
 - Remove the semantics related classes. They were deprecated in iDynTree 1.0 .
-- Remove unnecessary warning messages from [ModelSensorsTransformers.cpp](https://github.com/robotology/idyntree/blob/master/src/sensors/src/ModelSensorsTransformers.cpp) and [URDFDocument.cpp](https://github.com/robotology/idyntree/blob/master/src/model_io/urdf/src/URDFDocument.cpp)
+- Remove unnecessary warning messages from [ModelSensorsTransformers.cpp](https://github.com/robotology/idyntree/blob/master/src/sensors/src/ModelSensorsTransformers.cpp) and [URDFDocument.cpp](https://github.com/robotology/idyntree/blob/master/src/model_io/urdf/src/URDFDocument.cpp) (see https://github.com/robotology/idyntree/pull/718)
 
 
 ## [Unreleased]
