@@ -10,7 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added a new CMake option `IDYNTREE_COMPILES_TOOLS` to disable compilation of iDynTree tools.
 - Added a `KinDynComputations::getCentroidalTotalMomentumJacobian()` method (https://github.com/robotology/idyntree/pull/706)
-- iDynTree now supports build compiled as a shared library also on Windows. 
+- iDynTree now supports build compiled as a shared library also on Windows.
+
+### Fixed
+- Fixed bug in `yarprobotstatepublisher` that caused segmentation fault each time an unknown joint name was read from the input joint states topic (https://github.com/robotology/idyntree/pull/719)
 
 ### Changed
 - By default  iDynTree is compiled as a shared library also on Windows. The `BUILD_SHARED_LIBS` CMake variable can be used to
