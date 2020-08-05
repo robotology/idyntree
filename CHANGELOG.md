@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - iDynTree now supports build compiled as a shared library also on Windows.
 
 ### Fixed
-- Fixed bug in `YARPRobotStatePublisherModule::onRead` that caused segmentation fault each time an invalid joint index is returned by `Model::getJointIndex` (https://github.com/robotology/idyntree/pull/719)
+- Fixed bug in `yarprobotstatepublisher` that caused segmentation fault each time an unknown joint name was read from the input joint states topic (https://github.com/robotology/idyntree/pull/719)
 
 ### Changed
 - By default  iDynTree is compiled as a shared library also on Windows. The `BUILD_SHARED_LIBS` CMake variable can be used to
