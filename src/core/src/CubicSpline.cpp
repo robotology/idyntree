@@ -81,8 +81,9 @@ bool iDynTree::CubicSpline::setData(const iDynTree::VectorDynSize& time, const i
 bool iDynTree::CubicSpline::computeCoefficients()
 {
     // the coefficients are updated. No need to recompute them
-    if(m_areCoefficientsUpdated)
+    if(m_areCoefficientsUpdated){
         return true;
+    }
 
     m_velocities(0) = m_v0;
     m_velocities(m_velocities.size() - 1) = m_vf;
