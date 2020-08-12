@@ -21,6 +21,7 @@ iDynTree::CubicSpline::CubicSpline()
 ,m_vf(0)
 ,m_a0(0)
 ,m_af(0)
+,m_areCoefficientsUpdated{false}
 {
     m_coefficients.clear();
     m_velocities.resize(0);
@@ -39,6 +40,7 @@ iDynTree::CubicSpline::CubicSpline(unsigned int buffersDimension)
     ,m_vf(0)
     ,m_a0(0)
     ,m_af(0)
+    ,m_areCoefficientsUpdated{false}
 {
 }
 
@@ -71,11 +73,17 @@ bool iDynTree::CubicSpline::setData(const iDynTree::VectorDynSize& time, const i
 
     m_y = yData;
 
-    return this->computeCoefficients();
+    m_areCoefficientsUpdated = false;
+
+    return true;
 }
 
 bool iDynTree::CubicSpline::computeCoefficients()
 {
+    // the coefficients are updated. No need to recompute them
+    if(m_areCoefficientsUpdated)
+        return true;
+
     m_velocities(0) = m_v0;
     m_velocities(m_velocities.size() - 1) = m_vf;
 
@@ -93,6 +101,9 @@ bool iDynTree::CubicSpline::computeCoefficients()
         m_coefficients[i](2) = ( 3*(m_y(i+1) - m_y(i))/m_T(i) - 2*m_velocities(i) - m_velocities(i+1) )/m_T(i);
         m_coefficients[i](3) = ( 2*(m_y(i) - m_y(i+1))/m_T(i) + m_velocities(i) + m_velocities(i+1) )/std::pow(m_T(i), 2);
     }
+
+    // The coefficients are now updated.
+    m_areCoefficientsUpdated = true;
 
     return true;
 }
@@ -164,12 +175,18 @@ void iDynTree::CubicSpline::setInitialConditions(double initialVelocity, double 
 {
     m_v0 = initialVelocity;
     m_a0 = initialAcceleration;
+
+    // The initial condition has been updated. The coefficients have to be recomputed.
+    m_areCoefficientsUpdated = false;
 }
 
 void iDynTree::CubicSpline::setFinalConditions(double finalVelocity, double finalAcceleration)
 {
     m_vf = finalVelocity;
     m_af = finalAcceleration;
+
+    // The initial condition has been updated. The coefficients have to be recomputed.
+    m_areCoefficientsUpdated = false;
 }
 
 double iDynTree::CubicSpline::evaluatePoint(double t)
@@ -184,6 +201,14 @@ double iDynTree::CubicSpline::evaluatePoint(double t, double &velocity, double &
     if(m_time.size() == 0){
         std::cerr << "[ERROR][CUBICSPLINE] First you have to load data! The returned data should not be considered." << std::endl;
         return std::nan("");
+    }
+
+    // The coefficients are not updated. It's time to compute them.
+    if(!m_areCoefficientsUpdated){
+        if(!this->computeCoefficients()){
+                std::cerr << "[ERROR][CUBICSPLINE] Unable to compute the internal coefficients of the cubic spline." << std::endl;
+        return std::nan("");
+        }
     }
 
     if( t < m_time(0) ){

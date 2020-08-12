@@ -34,6 +34,7 @@ namespace iDynTree
         bool computeIntermediateVelocities();
         bool computeCoefficients();
 
+        bool m_areCoefficientsUpdated;
 
     public:
         CubicSpline();
