@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Fixed bug in `yarprobotstatepublisher` that caused segmentation fault each time an unknown joint name was read from the input joint states topic (https://github.com/robotology/idyntree/pull/719)
+- Fixed bug in `CubicSpline()` that causes wrong coefficients calculation when boundary conditions are set (https://github.com/robotology/idyntree/pull/723)
 
 ### Changed
 - By default  iDynTree is compiled as a shared library also on Windows. The `BUILD_SHARED_LIBS` CMake variable can be used to
