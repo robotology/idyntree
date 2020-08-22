@@ -92,7 +92,7 @@ jobs:
         # YCM
         git clone https://github.com/robotology/ycm
         cd ycm
-        git checkout ${YCM_TAG}
+        git checkout a1f5dd33353a1304c73131bdc08036ed5c1d39f4
         mkdir -p build
         cd build
         cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install/deps ..
