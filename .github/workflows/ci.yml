@@ -10,7 +10,7 @@ on:
 
 env:
   vcpkg_robotology_TAG: v0.0.3
-  YCM_TAG: v0.11.0
+  YCM_TAG: v0.11.3
   YARP_TAG: v3.3.2
   ICUB_TAG: v1.15.0
   
