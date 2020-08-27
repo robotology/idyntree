@@ -1,12 +1,12 @@
-'''
- For testing iDynTree python bindings, we rely on the unittest standard python lib
-'''
+"""
+For testing iDynTree python bindings, we rely on the unittest standard python lib
+"""
 
 import sys
 
-sys.path.append("../../python/");
-sys.path.append("../../../lib/python/");
-sys.path.append("../../../lib/python/Debug/");
+sys.path.append("../../python/")
+sys.path.append("../../../lib/python/")
+sys.path.append("../../../lib/python/Debug/")
 
 import unittest
 import numpy as np
@@ -14,7 +14,7 @@ import iDynTree
 import random
 
 class HelpersTest(unittest.TestCase):
-    '''Helper methods'''
+    """Helper methods"""
     def places(self):
         return 7
 
@@ -32,7 +32,7 @@ class HelpersTest(unittest.TestCase):
             for c in range(0, v1.cols()):
                 self.checkApproxEqual(v1.getVal(r, c), v2.getVal(r, c), msg=msg + ":" + msgMore)
 
-    '''tests'''
+    """tests"""
     def testDynSizeFromPython(self):
         pos = [-1.0, 2, 3.0]
         p1 = iDynTree.VectorDynSize.FromPython(pos)
@@ -42,7 +42,7 @@ class HelpersTest(unittest.TestCase):
         p2.setVal(2, pos[2])
         self.checkVectorEqual(p1, p2, "helper does not properly create vector (vectors are not equal)")
 
-    def testDynSizePythonCostructor(self):
+    def testDynSizePythonConstructor(self):
         pos = [-1.0, 2, 3.0]
         p1 = iDynTree.VectorDynSize(pos)
         p2 = iDynTree.VectorDynSize(3)
@@ -81,7 +81,7 @@ class HelpersTest(unittest.TestCase):
         p2.setVal(5, pos[5])
         self.checkVectorEqual(p1, p2, "helper does not properly create vector (vectors are not equal)")
 
-    def testWrenchPythonCostructor(self):
+    def testWrenchPythonConstructor(self):
         pos = [-1.0, 2, 3.0, 4.0, 5.5, 6.9]
         p1 = iDynTree.Wrench(pos)
         p2 = iDynTree.Wrench()
@@ -105,7 +105,7 @@ class HelpersTest(unittest.TestCase):
         p2.setVal(5, pos[5])
         self.checkVectorEqual(p1, p2, "helper does not properly create vector (vectors are not equal)")
 
-    def testTwistPythonCostructor(self):
+    def testTwistPythonConstructor(self):
         pos = [-1.0, 2, 3.0, 4.0, 5.5, 6.9]
         p1 = iDynTree.Twist(pos)
         p2 = iDynTree.Twist()
@@ -129,7 +129,7 @@ class HelpersTest(unittest.TestCase):
         p2.setVal(5, pos[5])
         self.checkVectorEqual(p1, p2, "helper does not properly create vector (vectors are not equal)")
 
-    def testSpatialAccPythonCostructor(self):
+    def testSpatialAccPythonConstructor(self):
         pos = [-1.0, 2, 3.0, 4.0, 5.5, 6.9]
         p1 = iDynTree.SpatialAcc(pos)
         p2 = iDynTree.SpatialAcc()
@@ -274,7 +274,10 @@ class HelpersTest(unittest.TestCase):
         p2[2] = pos[2]
 
         p2_asNumpy = p2.toNumPy()
-        # TODO: check the type is a numpy array
+
+        if not isinstance(p2_asNumpy, np.ndarray):
+            raise TypeError("Conversion to NumPy failed")
+
         self.checkVectorEqual(pos, p2_asNumpy, "helper does not returned a well-formed array")
 
 
