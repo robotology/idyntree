@@ -1,12 +1,7 @@
 set(CMAKE_SWIG_FLAGS "-Wextra;-module;iDynTree;-threads")
-set(IDYNTREE_USES_PYTHON_VERSION "" CACHE STRING "Specify python version to use" )
 
-find_package(Python3 ${IDYNTREE_USES_PYTHON_VERSION} COMPONENTS Interpreter Development NumPy REQUIRED)
+find_package(Python3 COMPONENTS Interpreter Development NumPy REQUIRED)
 message(STATUS "Using Python: ${Python3_EXECUTABLE}")
-
-if(NOT IDYNTREE_USES_PYTHON_VERSION)
-    set (IDYNTREE_USES_PYTHON_VERSION ${Python3_VERSION})
-endif()
 
 set_source_files_properties(../iDynTree.i PROPERTIES CPLUSPLUS ON)
 
