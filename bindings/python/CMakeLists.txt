@@ -1,7 +1,7 @@
 set(CMAKE_SWIG_FLAGS "-Wextra;-module;iDynTree;-threads")
 set(IDYNTREE_USES_PYTHON_VERSION "" CACHE STRING "Specify python version to use" )
 
-find_package(Python3 ${IDYNTREE_USES_PYTHON_VERSION} COMPONENTS Interpreter Development REQUIRED)
+find_package(Python3 ${IDYNTREE_USES_PYTHON_VERSION} COMPONENTS Interpreter Development NumPy REQUIRED)
 message(STATUS "Using Python: ${Python3_EXECUTABLE}")
 
 if(NOT IDYNTREE_USES_PYTHON_VERSION)
@@ -17,7 +17,7 @@ swig_add_library(iDynTree_python
 
 set(target_name ${SWIG_MODULE_iDynTree_python_REAL_NAME})
 
-target_link_libraries(${target_name} PUBLIC Python3::Python)
+target_link_libraries(${target_name} PUBLIC Python3::Python Python3::NumPy)
 set_target_properties(${target_name} PROPERTIES
     OUTPUT_NAME "_iDynTree"
     LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib/python)
