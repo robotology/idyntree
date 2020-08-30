@@ -73,8 +73,10 @@ jobs:
       if: contains(matrix.os, 'ubuntu')
       run: |
         sudo apt-get update
-        sudo apt-get install git build-essential cmake libace-dev coinor-libipopt-dev libeigen3-dev swig qtbase5-dev qtdeclarative5-dev qtmultimedia5-dev libqt5charts5-dev \
-                             libxml2-dev liboctave-dev python-dev valgrind libassimp-dev
+        sudo apt-get install \
+            git build-essential cmake libace-dev coinor-libipopt-dev libeigen3-dev swig \
+            qtbase5-dev qtdeclarative5-dev qtmultimedia5-dev libqt5charts5-dev \
+            libxml2-dev liboctave-dev python-dev python3-numpy valgrind libassimp-dev
         
     - name: Cache Source-based Dependencies
       id: cache-source-deps
