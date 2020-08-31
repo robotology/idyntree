@@ -51,6 +51,7 @@ class YARPRobotStatePublisherModule : public yarp::os::RFModule
     yarp::dev::IFrameTransform       *m_iframetrans;
 
     std::string m_tfPrefix;
+    std::string m_treeType;
 
     // Clock-related workaround
     bool m_usingNetworkClock;

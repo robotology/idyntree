@@ -45,6 +45,9 @@ int main(int argc, char *argv[])
               "                                           \t The position values of the model joints are initilized to Zero\n"
               "                                           \t In runtime, the joint values from the ROS topic are used to set\n"
               "                                           \t the position values of some of the model joints."<<endl;
+        cout<<"\t--tree-type              <tree-type>   : the type of tree tou want to represent the transformations in.\n"
+              "                                           \t the values can be DEEP or SHALLOW. If omitted, the default\n"
+              "                                           \t value SHALLOW will be used"<<endl;
         return EXIT_SUCCESS;
     }
 
