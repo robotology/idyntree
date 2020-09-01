@@ -8,7 +8,7 @@ import os
 os.environ["PYTHONPATH"] = os.environ["PYTHONPATH"] + ":../:../../../lib/python/"
 
 import unittest
-import iDynTree; iDynTree.init_helpers(); iDynTree.init_numpy_helpers()
+import iDynTree;
 import numpy as np
 import random
 
@@ -41,12 +41,12 @@ class DynCompTest(unittest.TestCase):
         # set state
         dofs = dynComp.getNrOfDegreesOfFreedom()
         print "dofs: {}".format(dofs)
-        q = iDynTree.VectorDynSize.fromPyList([random.random() for i in range(0, dofs)])
-        dq = iDynTree.VectorDynSize.fromPyList([random.random() for i in range(0, dofs)])
-        ddq = iDynTree.VectorDynSize.fromPyList([random.random() for i in range(0, dofs)])
+        q = iDynTree.VectorDynSize.FromPython([random.random() for i in range(0, dofs)])
+        dq = iDynTree.VectorDynSize.FromPython([random.random() for i in range(0, dofs)])
+        ddq = iDynTree.VectorDynSize.FromPython([random.random() for i in range(0, dofs)])
 
         # set gravity
-        grav = iDynTree.SpatialAcc.fromPyList([0.0, 0.0, -9.81, 0.0, 0.0, 0.0])
+        grav = iDynTree.SpatialAcc.FromPython([0.0, 0.0, -9.81, 0.0, 0.0, 0.0])
         dynComp.setRobotState(q,dq,ddq,grav)
 
         torques = iDynTree.VectorDynSize(dofs+6)

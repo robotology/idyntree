@@ -13,7 +13,7 @@ option(IDYNTREE_GENERATE_MATLAB "Enable if you have the experimental version of 
 find_package(SWIG)
 # It is possible to compile matlab/octave bindings without using SWIG
 if(SWIG_FOUND OR IDYNTREE_USES_MATLAB OR IDYNTREE_USES_OCTAVE)
-    include(UseSWIG)
+    include(${SWIG_USE_FILE})
 
     set_source_files_properties(iDynTree.i PROPERTIES CPLUSPLUS ON)
 
