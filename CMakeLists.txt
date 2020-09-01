@@ -6,7 +6,7 @@
 # https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 # at your option.
 
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.12)
 
 project(iDynTree VERSION 1.99.0
                  LANGUAGES C CXX)
