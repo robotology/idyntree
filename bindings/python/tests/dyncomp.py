@@ -41,12 +41,12 @@ class DynCompTest(unittest.TestCase):
         # set state
         dofs = dynComp.getNrOfDegreesOfFreedom()
         print "dofs: {}".format(dofs)
-        q = iDynTree.VectorDynSize.fromPython([random.random() for i in range(0, dofs)])
-        dq = iDynTree.VectorDynSize.fromPython([random.random() for i in range(0, dofs)])
-        ddq = iDynTree.VectorDynSize.fromPython([random.random() for i in range(0, dofs)])
+        q = iDynTree.VectorDynSize.FromPython([random.random() for i in range(0, dofs)])
+        dq = iDynTree.VectorDynSize.FromPython([random.random() for i in range(0, dofs)])
+        ddq = iDynTree.VectorDynSize.FromPython([random.random() for i in range(0, dofs)])
 
         # set gravity
-        grav = iDynTree.SpatialAcc.fromPython([0.0, 0.0, -9.81, 0.0, 0.0, 0.0])
+        grav = iDynTree.SpatialAcc.FromPython([0.0, 0.0, -9.81, 0.0, 0.0, 0.0])
         dynComp.setRobotState(q,dq,ddq,grav)
 
         torques = iDynTree.VectorDynSize(dofs+6)
