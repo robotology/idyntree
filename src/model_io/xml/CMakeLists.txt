@@ -34,7 +34,6 @@ add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 # We want to include the same-library header files directly (in the implementation), but with the full prefix in the .h (as this will be public)
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/iDynTree>"
-                                                 "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/private>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
                                           PRIVATE ${EIGEN3_INCLUDE_DIR}
                                                   ${LIBXML2_INCLUDE_DIR})
