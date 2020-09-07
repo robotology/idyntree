@@ -78,33 +78,35 @@ MatrixDynSize::MatrixDynSize(const MatrixDynSize& other)
 
 MatrixDynSize& MatrixDynSize::operator=(const MatrixDynSize& other)
 {
-    if (this == &other) return *this;
+    return this->operator=(other);
 
-    // Copy the new rows and columns
-    m_rows = other.m_rows;
-    m_cols = other.m_cols;
-    unsigned requiredCapacity = m_rows * m_cols;
+    // if (this == &other) return *this;
 
-    // if other is empty, return
-    if (requiredCapacity == 0) return  *this;
+    // // Copy the new rows and columns
+    // m_rows = other.m_rows;
+    // m_cols = other.m_cols;
+    // unsigned requiredCapacity = m_rows * m_cols;
 
-    // If the copied data fits in the currently allocated buffer,
-    // use that one (if the user want to free the memory can use
-    // the shrink_to_fit method).
-    // Otherwise, allocate a new buffer after deleting the old one)
-    if (m_capacity < requiredCapacity) {
-        // need to allocate new buffer
-        // if old buffer exists, delete it
-        if (m_capacity > 0) {
-            delete [] m_data;
-        }
-        m_data = new double[requiredCapacity];
-        m_capacity = requiredCapacity;
-    }
+    // // if other is empty, return
+    // if (requiredCapacity == 0) return  *this;
 
-    // Now we are sure that m_capacity >= m_rows*m_cols
-    std::memcpy(this->m_data, other.m_data, requiredCapacity * sizeof(double));
-    return *this;
+    // // If the copied data fits in the currently allocated buffer,
+    // // use that one (if the user want to free the memory can use
+    // // the shrink_to_fit method).
+    // // Otherwise, allocate a new buffer after deleting the old one)
+    // if (m_capacity < requiredCapacity) {
+    //     // need to allocate new buffer
+    //     // if old buffer exists, delete it
+    //     if (m_capacity > 0) {
+    //         delete [] m_data;
+    //     }
+    //     m_data = new double[requiredCapacity];
+    //     m_capacity = requiredCapacity;
+    // }
+
+    // // Now we are sure that m_capacity >= m_rows*m_cols
+    // std::memcpy(this->m_data, other.m_data, requiredCapacity * sizeof(double));
+    // return *this;
 }
 
 MatrixDynSize::~MatrixDynSize()
@@ -306,38 +308,4 @@ std::string MatrixDynSize::reservedToString() const
     return this->toString();
 }
 
-MatrixDynSize& MatrixDynSize::operator=(const MatrixView<const double>& other)
-{
-    m_rows = other.rows();
-    m_cols = other.cols();
-
-    const unsigned requiredCapacity = m_rows * m_cols;
-
-    // if other is empty, return
-    if (requiredCapacity == 0) return  *this;
-
-    // If the copied data fits in the currently allocated buffer,
-    // use that one (if the user want to free the memory can use
-    // the shrink_to_fit method).
-    // Otherwise, allocate a new buffer after deleting the old one)
-    if (m_capacity < requiredCapacity) {
-        // need to allocate new buffer
-        // if old buffer exists, delete it
-        if (m_capacity > 0) {
-            delete [] m_data;
-        }
-        m_data = new double[requiredCapacity];
-        m_capacity = requiredCapacity;
-    }
-
-    for(unsigned int i = 0; i < m_rows; i++)
-    {
-        for(unsigned int j = 0; j < m_cols; j++)
-        {
-            this->m_data[this->rawIndexRowMajor(i,j)] = other(i, j);
-        }
-    }
-
-    return *this;
-}
 }
