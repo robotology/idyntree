@@ -14,6 +14,7 @@
 #include <string>
 #include <iostream>
 #include <cassert>
+#include <cstring>
 
 #include <iDynTree/Core/Utils.h>
 #include <iDynTree/Core/Span.h>
@@ -27,7 +28,7 @@ namespace iDynTree
      * \ingroup iDynTreeCore
      */
 
-    template<class ElementType>
+    template<class ElementType, bool IsRowMajor = true>
     class MatrixView
     {
     public:
@@ -40,11 +41,10 @@ namespace iDynTree
         pointer m_storage;
         unsigned int m_rows;
         unsigned int m_cols;
-        bool m_isRowMajor{true};
 
         unsigned int rawIndex(int row, int col) const
         {
-            if (m_isRowMajor)
+            if (IsRowMajor)
             {
                 return (row + this->m_rows*col);
             }
@@ -55,15 +55,17 @@ namespace iDynTree
         }
 
     public:
-        template <class Container,
+         template <class Container,
                   std::enable_if_t<
                         std::is_const<element_type>::value &&
                         std::is_convertible<decltype(std::declval<Container>().data()),
                                             pointer>::value &&
                         std::is_same<typename Container::IsRowMajor, bool>::value, int> = 0>
         MatrixView(const Container& matrix)
-            : MatrixView(matrix.data(), matrix.rows(), matrix.cols(), Container::IsRowMajor)
+            : MatrixView(matrix.data(), matrix.rows(), matrix.cols())
         {
+            static_assert(Container::IsRowMajor == IsRowMajor,
+                          "[ERROR] [MatrixView] The MatrixView and the container does not use the same StoringMethod");
         }
 
         template <class Container,
@@ -71,8 +73,8 @@ namespace iDynTree
                         std::is_const<element_type>::value &&
                         std::is_convertible<decltype(std::declval<Container>().data()),
                                             pointer>::value, int> = 0>
-        MatrixView(const Container& matrix, const bool& isRowMajor = true)
-            : MatrixView(matrix.data(), matrix.rows(), matrix.cols(), isRowMajor)
+        MatrixView(const Container& matrix)
+           : MatrixView(matrix.data(), matrix.rows(), matrix.cols())
         {
         }
 
@@ -81,29 +83,30 @@ namespace iDynTree
                         std::is_convertible<decltype(std::declval<Container>().data()),
                                             pointer>::value &&
                         std::is_same<typename Container::IsRowMajor, bool>::value, int> = 0>
-        MatrixView(Container& matrix) : MatrixView(matrix.data(), matrix.rows(), matrix.cols(), Container::IsRowMajor)
+        MatrixView(Container& matrix)
+           : MatrixView(matrix.data(), matrix.rows(), matrix.cols())
         {
+            static_assert(Container::IsRowMajor == IsRowMajor,
+                          "[ERROR] [MatrixView] The MatrixView and the container does not use the same StoringMethod");
         }
 
         template <class Container,
                   std::enable_if_t<
                         std::is_convertible<decltype(std::declval<Container>().data()),
                                             pointer>::value, int> = 0>
-        MatrixView(Container& matrix, const bool& isRowMajor = true)
-            : MatrixView(matrix.data(), matrix.rows(), matrix.cols(), isRowMajor)
+        MatrixView(Container& matrix)
+            : MatrixView(matrix.data(), matrix.rows(), matrix.cols())
         {
         }
 
-        MatrixView(pointer in_data, const unsigned int in_rows, const unsigned int in_cols, const bool& isRowMajor)
-            : m_storage(in_data), m_rows(in_rows), m_cols(in_cols), m_isRowMajor(isRowMajor)
+        MatrixView(pointer in_data, const unsigned int& in_rows, const unsigned int& in_cols)
+            : m_storage(in_data), m_rows(in_rows), m_cols(in_cols)
         {
         }
 
-        MatrixView& operator=(const MatrixView& matrix)
+        template <bool OtherIsRowMajor, std::enable_if_t<OtherIsRowMajor != IsRowMajor, int> = 0 >
+        MatrixView operator=(const MatrixView<MatrixView::element_type, OtherIsRowMajor>& matrix)
         {
-            if(matrix == *this)
-                return *this;
-
             assert(m_rows == matrix.rows());
             assert(m_cols == matrix.cols());
 
@@ -115,7 +118,15 @@ namespace iDynTree
                 }
             }
 
-            m_storage = matrix.data();
+            return *this;
+        }
+
+        MatrixView operator=(const MatrixView& matrix)
+        {
+            assert(m_rows == matrix.rows());
+            assert(m_cols == matrix.cols());
+
+            std::memcpy(this->m_storage, matrix.m_storage, m_rows * m_cols * sizeof(element_type));
 
             return *this;
         }
@@ -149,9 +160,19 @@ namespace iDynTree
         {
             return this->m_cols;
         }
+
+        void zero() const
+        {
+            const unsigned int capacity = m_cols * m_rows;
+            std::fill(m_storage, m_storage + capacity, 0.0);
+        }
         ///@}
     };
 
+    // template deduction
+    template <class Container,
+              std::enable_if_t<std::is_same<typename Container::IsRowMajor, bool>::value, int> = 0>
+    MatrixView(const Container& matrix) -> MatrixView<typename std::pointer_traits<decltype(std::declval<Container>().data())>::element_type, Container::IsRowMajor>;
 }
 
 #endif /* IDYNTREE_MATRIX_DYN_SIZE_H */
