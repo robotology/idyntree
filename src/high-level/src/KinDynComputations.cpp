@@ -117,10 +117,10 @@ public:
     const SpatialInertia & getRobotLockedInertia();
 
     // Process a jacobian that expects a body fixed base velocity depending on the selected FrameVelocityRepresentation
-    void processOnRightSideMatrixExpectingBodyFixedModelVelocity(MatrixDynSize &mat);
-    void processOnLeftSideBodyFixedBaseMomentumJacobian(MatrixDynSize & jac);
-    void processOnLeftSideBodyFixedAvgVelocityJacobian(MatrixDynSize &jac);
-    void processOnLeftSideBodyFixedCentroidalAvgVelocityJacobian(MatrixDynSize &jac, const FrameVelocityRepresentation & leftSideRepresentation);
+    void processOnRightSideMatrixExpectingBodyFixedModelVelocity(MatrixView<double> mat);
+    void processOnLeftSideBodyFixedBaseMomentumJacobian(MatrixView<double> jac);
+    void processOnLeftSideBodyFixedAvgVelocityJacobian(MatrixView<double> jac);
+    void processOnLeftSideBodyFixedCentroidalAvgVelocityJacobian(MatrixView<double> jac, const FrameVelocityRepresentation & leftSideRepresentation);
 
     // Transform a wrench from and to body fixed and the used representation
     Wrench fromBodyFixedToUsedRepresentation(const Wrench & wrenchInBodyFixed, const Transform & inertial_X_link);
@@ -551,6 +551,17 @@ bool KinDynComputations::getRelativeJacobianSparsityPattern(const iDynTree::Fram
                                                             const iDynTree::FrameIndex frameIndex,
                                                             iDynTree::MatrixDynSize & outJacobian) const
     {
+        //I have the two links. Create the jacobian
+        outJacobian.resize(6, pimpl->m_robot_model.getNrOfDOFs());
+
+        this->getRelativeJacobianSparsityPattern(refFrameIndex, frameIndex, MatrixView<double>(outJacobian));
+    }
+
+
+bool KinDynComputations::getRelativeJacobianSparsityPattern(const iDynTree::FrameIndex refFrameIndex,
+                                                            const iDynTree::FrameIndex frameIndex,
+                                                            MatrixView<double> outJacobian) const
+    {
         if (!pimpl->m_robot_model.isValidFrameIndex(frameIndex))
         {
             reportError("KinDynComputations","getRelativeJacobian","Frame index out of bounds");
@@ -562,6 +573,9 @@ bool KinDynComputations::getRelativeJacobianSparsityPattern(const iDynTree::Fram
             return false;
         }
 
+        // clear the matrix
+        outJacobian.zero();
+
         // This method computes the sparsity pattern of the relative Jacobian.
         // For details on how to compute the relative Jacobian, see Traversaro's PhD thesis, 3.37
         // or getRelativeJacobianExplicit method.
@@ -570,10 +584,6 @@ bool KinDynComputations::getRelativeJacobianSparsityPattern(const iDynTree::Fram
         // Get the links to which the frames are attached
         LinkIndex jacobianLinkIndex = pimpl->m_robot_model.getFrameLink(frameIndex);
         LinkIndex refJacobianLink = pimpl->m_robot_model.getFrameLink(refFrameIndex);
-
-        //I have the two links. Create the jacobian
-        outJacobian.resize(6, pimpl->m_robot_model.getNrOfDOFs());
-        outJacobian.zero();
 
         iDynTree::Traversal& relativeTraversal = pimpl->m_traversalCache.getTraversalWithLinkAsBase(pimpl->m_robot_model, refJacobianLink);
 
@@ -625,6 +635,15 @@ bool KinDynComputations::getRelativeJacobianSparsityPattern(const iDynTree::Fram
     bool KinDynComputations::getFrameFreeFloatingJacobianSparsityPattern(const FrameIndex frameIndex,
                                                                          iDynTree::MatrixDynSize & outJacobianPattern) const
     {
+        outJacobianPattern.resize(6, 6 + getNrOfDegreesOfFreedom());
+
+        return this->getFrameFreeFloatingJacobianSparsityPattern(frameIndex,
+                                                                 MatrixView<double>(outJacobianPattern));
+    }
+
+    bool KinDynComputations::getFrameFreeFloatingJacobianSparsityPattern(const FrameIndex frameIndex,
+                                                                         MatrixView<double> outJacobianPattern) const
+    {
         if (!pimpl->m_robot_model.isValidFrameIndex(frameIndex))
         {
             reportError("KinDynComputations","getFrameJacobian","Frame index out of bounds");
@@ -644,7 +663,6 @@ bool KinDynComputations::getRelativeJacobianSparsityPattern(const iDynTree::Fram
         iDynTree::toEigen(genericAdjointTransform).bottomRightCorner(3, 3).setOnes();
 
         // We zero the jacobian
-        outJacobianPattern.resize(6, 6 + getNrOfDegreesOfFreedom());
         outJacobianPattern.zero();
 
         // Compute base part
@@ -1190,15 +1208,26 @@ Vector6 KinDynComputations::getFrameAcc(const FrameIndex frameIdx,
 
 }
 
-
 bool KinDynComputations::getFrameFreeFloatingJacobian(const std::string& frameName,
-                                          MatrixDynSize& outJacobian)
+                                                      MatrixDynSize& outJacobian)
 {
     return getFrameFreeFloatingJacobian(getFrameIndex(frameName),outJacobian);
 }
 
 bool KinDynComputations::getFrameFreeFloatingJacobian(const FrameIndex frameIndex,
                                                       MatrixDynSize& outJacobian)
+{
+    return getFrameFreeFloatingJacobian(frameIndex, MatrixView<double>(outJacobian));
+}
+
+bool KinDynComputations::getFrameFreeFloatingJacobian(const std::string& frameName,
+                                                      const MatrixView<double> & outJacobian)
+{
+    return getFrameFreeFloatingJacobian(getFrameIndex(frameName),outJacobian);
+}
+
+bool KinDynComputations::getFrameFreeFloatingJacobian(const FrameIndex frameIndex,
+                                                      const MatrixView<double> & outJacobian)
 {
     if (!pimpl->m_robot_model.isValidFrameIndex(frameIndex))
     {
@@ -1266,6 +1295,16 @@ bool KinDynComputations::getRelativeJacobian(const iDynTree::FrameIndex refFrame
                                              iDynTree::MatrixDynSize & outJacobian)
 {
 
+    outJacobian.resize(6, pimpl->m_robot_model.getNrOfDOFs());
+
+    this->getRelativeJacobian(refFrameIndex, frameIndex, MatrixView<double>(outJacobian));
+}
+
+bool KinDynComputations::getRelativeJacobian(const iDynTree::FrameIndex refFrameIndex,
+                                             const iDynTree::FrameIndex frameIndex,
+                                             MatrixView<double> outJacobian)
+{
+
     iDynTree::FrameIndex expressedOriginFrame = iDynTree::FRAME_INVALID_INDEX;
     iDynTree::FrameIndex expressedOrientationFrame = iDynTree::FRAME_INVALID_INDEX;
 
@@ -1290,6 +1329,22 @@ bool KinDynComputations::getRelativeJacobianExplicit(const iDynTree::FrameIndex 
                                                      const iDynTree::FrameIndex expressedOriginFrameIndex,
                                                      const iDynTree::FrameIndex expressedOrientationFrameIndex,
                                                      iDynTree::MatrixDynSize & outJacobian)
+{
+
+    outJacobian.resize(6, pimpl->m_robot_model.getNrOfDOFs());
+
+    return this->getRelativeJacobianExplicit(refFrameIndex,
+                                             frameIndex,
+                                             expressedOriginFrameIndex,
+                                             expressedOrientationFrameIndex,
+                                             MatrixView<double>(outJacobian));
+}
+
+bool KinDynComputations::getRelativeJacobianExplicit(const iDynTree::FrameIndex refFrameIndex,
+                                                     const iDynTree::FrameIndex frameIndex,
+                                                     const iDynTree::FrameIndex expressedOriginFrameIndex,
+                                                     const iDynTree::FrameIndex expressedOrientationFrameIndex,
+                                                     MatrixView<double> outJacobian)
 {
     if (!pimpl->m_robot_model.isValidFrameIndex(frameIndex))
     {
@@ -1339,7 +1394,6 @@ bool KinDynComputations::getRelativeJacobianExplicit(const iDynTree::FrameIndex 
     LinkIndex refJacobianLink = pimpl->m_robot_model.getFrameLink(refFrameIndex);
 
     //I have the two links. Create the jacobian
-    outJacobian.resize(6, pimpl->m_robot_model.getNrOfDOFs());
     outJacobian.zero();
 
     iDynTree::Traversal& relativeTraversal = pimpl->m_traversalCache.getTraversalWithLinkAsBase(pimpl->m_robot_model, refJacobianLink);
@@ -1460,9 +1514,14 @@ Vector3 KinDynComputations::getCenterOfMassVelocity()
 
 bool KinDynComputations::getCenterOfMassJacobian(MatrixDynSize& comJacobian)
 {
-    this->computeRawMassMatrixAndTotalMomentum();
-
     comJacobian.resize(3,pimpl->m_robot_model.getNrOfDOFs()+6);
+
+    return this->getCenterOfMassJacobian(MatrixView<double>(comJacobian));
+}
+
+bool KinDynComputations::getCenterOfMassJacobian(MatrixView<double> comJacobian)
+{
+    this->computeRawMassMatrixAndTotalMomentum();
 
     const SpatialInertia & lockedInertia = pimpl->getRobotLockedInertia();
     Matrix6x6 invLockedInertia = lockedInertia.getInverse();
@@ -1527,7 +1586,7 @@ const SpatialInertia& KinDynComputations::KinDynComputationsPrivateAttributes::g
 }
 
 void KinDynComputations::KinDynComputationsPrivateAttributes::processOnRightSideMatrixExpectingBodyFixedModelVelocity(
-        MatrixDynSize &mat)
+    MatrixView<double> mat)
 {
     assert(mat.cols() == m_robot_model.getNrOfDOFs()+6);
 
@@ -1557,7 +1616,7 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::processOnRightSide
 }
 
 void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideBodyFixedAvgVelocityJacobian(
-        MatrixDynSize &jac)
+      MatrixView<double> jac)
 {
     assert(jac.rows() == 6);
 
@@ -1582,7 +1641,7 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideB
     toEigen(jac) = toEigen(newOutputFrame_X_oldOutputFrame_)*toEigen(jac);
 }
 
-void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideBodyFixedBaseMomentumJacobian(MatrixDynSize& jac)
+void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideBodyFixedBaseMomentumJacobian(MatrixView<double> jac)
 {
     Transform newOutputFrame_X_oldOutputFrame;
     if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
@@ -1634,9 +1693,15 @@ Twist KinDynComputations::getAverageVelocity()
 
 bool KinDynComputations::getAverageVelocityJacobian(MatrixDynSize& avgVelocityJacobian)
 {
+    avgVelocityJacobian.resize(6,pimpl->m_robot_model.getNrOfDOFs()+6);
+
+    return this->getAverageVelocityJacobian(MatrixView<double>(avgVelocityJacobian));
+}
+
+bool KinDynComputations::getAverageVelocityJacobian(MatrixView<double> avgVelocityJacobian)
+{
     this->computeRawMassMatrixAndTotalMomentum();
 
-    avgVelocityJacobian.resize(6,pimpl->m_robot_model.getNrOfDOFs()+6);
     const SpatialInertia & lockedInertia = pimpl->getRobotLockedInertia();
     Matrix6x6 invLockedInertia = lockedInertia.getInverse();
 
@@ -1651,7 +1716,7 @@ bool KinDynComputations::getAverageVelocityJacobian(MatrixDynSize& avgVelocityJa
 }
 
 void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideBodyFixedCentroidalAvgVelocityJacobian(
-        MatrixDynSize &jac, const FrameVelocityRepresentation & leftSideRepresentation)
+    MatrixView<double> jac, const FrameVelocityRepresentation & leftSideRepresentation)
 {
     assert(jac.cols() == m_robot_model.getNrOfDOFs()+6);
 
@@ -1713,12 +1778,17 @@ Twist KinDynComputations::getCentroidalAverageVelocity()
     return newOutputFrame_X_oldOutputFrame*base_averageVelocity;
 }
 
-
 bool KinDynComputations::getCentroidalAverageVelocityJacobian(MatrixDynSize& centroidalAvgVelocityJacobian)
+{
+    centroidalAvgVelocityJacobian.resize(6,pimpl->m_robot_model.getNrOfDOFs()+6);
+
+    return this->getCentroidalAverageVelocityJacobian(MatrixView<double>(centroidalAvgVelocityJacobian));
+}
+
+bool KinDynComputations::getCentroidalAverageVelocityJacobian(MatrixView<double> centroidalAvgVelocityJacobian)
 {
     this->computeRawMassMatrixAndTotalMomentum();
 
-    centroidalAvgVelocityJacobian.resize(6,pimpl->m_robot_model.getNrOfDOFs()+6);
     const SpatialInertia & lockedInertia = pimpl->getRobotLockedInertia();
     Matrix6x6 invLockedInertia = lockedInertia.getInverse();
     // The first six rows of the mass matrix are the base-base average velocity jacobian
@@ -1756,9 +1826,14 @@ iDynTree::SpatialMomentum KinDynComputations::getLinearAngularMomentum()
 
 bool KinDynComputations::getLinearAngularMomentumJacobian(MatrixDynSize& linAngMomentumJacobian)
 {
-    this->computeRawMassMatrixAndTotalMomentum();
-
     linAngMomentumJacobian.resize(6,pimpl->m_robot_model.getNrOfDOFs()+6);
+
+    return this->getLinearAngularMomentumJacobian(MatrixView<double>(linAngMomentumJacobian));
+}
+
+bool KinDynComputations::getLinearAngularMomentumJacobian(MatrixView<double> linAngMomentumJacobian)
+{
+    this->computeRawMassMatrixAndTotalMomentum();
 
     toEigen(linAngMomentumJacobian) = toEigen(pimpl->m_rawMassMatrix).block(0,0,6,6+pimpl->m_robot_model.getNrOfDOFs());
 
@@ -1799,6 +1874,13 @@ SpatialMomentum KinDynComputations::getCentroidalTotalMomentum()
 }
 
 bool KinDynComputations::getCentroidalTotalMomentumJacobian(MatrixDynSize& centroidalMomentumJacobian)
+{
+    centroidalMomentumJacobian.resize(6,pimpl->m_robot_model.getNrOfDOFs()+6);
+
+    return this->getCentroidalTotalMomentumJacobian(MatrixView<double>(centroidalMomentumJacobian));
+}
+
+bool KinDynComputations::getCentroidalTotalMomentumJacobian(MatrixView<double> centroidalMomentumJacobian)
 {
     if (!getLinearAngularMomentumJacobian(centroidalMomentumJacobian))
     {
@@ -1868,13 +1950,30 @@ bool KinDynComputations::getCentroidalTotalMomentumJacobian(MatrixDynSize& centr
 
 bool KinDynComputations::getFreeFloatingMassMatrix(MatrixDynSize& freeFloatingMassMatrix)
 {
+    // If the matrix has the right size, this should be inexpensive
+    freeFloatingMassMatrix.resize(pimpl->m_robot_model.getNrOfDOFs()+6,pimpl->m_robot_model.getNrOfDOFs()+6);
+
+    this->getFreeFloatingMassMatrix(MatrixView<double>(freeFloatingMassMatrix));
+
+    // Return
+    return this->getFreeFloatingMassMatrix(MatrixView<double>(freeFloatingMassMatrix));
+}
+
+bool KinDynComputations::getFreeFloatingMassMatrix(MatrixView<double> freeFloatingMassMatrix)
+{
+    if(freeFloatingMassMatrix.cols() != pimpl->m_robot_model.getNrOfDOFs()+6 || freeFloatingMassMatrix.rows() != pimpl->m_robot_model.getNrOfDOFs()+6)
+    {
+        return false;
+    }
+
     // Compute the body-fixed-body-fixed mass matrix, if necessary
     this->computeRawMassMatrixAndTotalMomentum();
 
     // If the matrix has the right size, this should be inexpensive
-    freeFloatingMassMatrix.resize(pimpl->m_robot_model.getNrOfDOFs()+6,pimpl->m_robot_model.getNrOfDOFs()+6);
-
-    toEigen(freeFloatingMassMatrix) = toEigen(pimpl->m_rawMassMatrix);
+ //    iDynTree::toEigen(freeFloatingMassMatrix) = iDynTree::toEigen(pimpl->m_rawMassMatrix);
+// -
+    // iDynTree::toEigen(freeFloatingMassMatrix) = iDynTree::toEigen(pimpl->m_rawMassMatrix);
+    freeFloatingMassMatrix = pimpl->m_rawMassMatrix;
 
     // Handle the different representations
     pimpl->processOnRightSideMatrixExpectingBodyFixedModelVelocity(freeFloatingMassMatrix);
@@ -1883,6 +1982,7 @@ bool KinDynComputations::getFreeFloatingMassMatrix(MatrixDynSize& freeFloatingMa
     // Return
     return true;
 }
+
 
 Wrench KinDynComputations::KinDynComputationsPrivateAttributes::fromUsedRepresentationToBodyFixed(const Wrench & wrenchInUsedRepresentation,
                                                                                                   const Transform & inertial_X_link)
@@ -2211,4 +2311,3 @@ bool KinDynComputations::inverseDynamicsInertialParametersRegressor(const Vector
 }
 
 }
-

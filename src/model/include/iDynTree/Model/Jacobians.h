@@ -11,6 +11,8 @@
 #ifndef IDYNTREE_JACOBIANS_H
 #define IDYNTREE_JACOBIANS_H
 
+#include <iDynTree/Core/MatrixView.h>
+
 #include <iDynTree/Model/Indices.h>
 
 namespace iDynTree
@@ -49,7 +51,7 @@ namespace iDynTree
                                           const LinkIndex linkIndex,
                                           const Transform & jacobFrame_X_world,
                                           const Transform & baseFrame_X_jacobBaseFrame,
-                                                MatrixDynSize & jacobian);
+                                          const MatrixView<double> & jacobian);
 
 
 }

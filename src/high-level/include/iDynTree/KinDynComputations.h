@@ -16,8 +16,8 @@
 
 #include <iDynTree/Core/VectorFixSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
+#include <iDynTree/Core/MatrixView.h>
 #include <iDynTree/Core/Utils.h>
-
 
 #include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/FreeFloatingMatrices.h>
@@ -256,6 +256,10 @@ public:
                                             const iDynTree::FrameIndex frameIndex,
                                             iDynTree::MatrixDynSize & outJacobianPattern) const;
 
+    bool getRelativeJacobianSparsityPattern(const iDynTree::FrameIndex refFrameIndex,
+                                            const iDynTree::FrameIndex frameIndex,
+                                            MatrixView<double> outJacobianPattern) const;
+
 
     /**
      * Returns the sparsity pattern of the free floating Jacobian for the specified frame
@@ -270,6 +274,9 @@ public:
      */
     bool getFrameFreeFloatingJacobianSparsityPattern(const FrameIndex frameIndex,
                                                      iDynTree::MatrixDynSize & outJacobianPattern) const;
+
+    bool getFrameFreeFloatingJacobianSparsityPattern(const FrameIndex frameIndex,
+                                                     MatrixView<double> outJacobianPattern) const;
 
 
     //@}
@@ -464,6 +471,11 @@ public:
     bool getFrameFreeFloatingJacobian(const FrameIndex frameIndex,
                                       iDynTree::MatrixDynSize & outJacobian);
 
+    bool getFrameFreeFloatingJacobian(const std::string & frameName,
+                                      const MatrixView<double> & outJacobian);
+
+    bool getFrameFreeFloatingJacobian(const FrameIndex frameIndex,
+                                      const MatrixView<double> & outJacobian);
 
 
 
@@ -480,6 +492,10 @@ public:
     bool getRelativeJacobian(const iDynTree::FrameIndex refFrameIndex,
                              const iDynTree::FrameIndex frameIndex,
                              iDynTree::MatrixDynSize & outJacobian);
+
+    bool getRelativeJacobian(const iDynTree::FrameIndex refFrameIndex,
+                             const iDynTree::FrameIndex frameIndex,
+                             MatrixView<double> outJacobian);
 
     /**
      * Return the relative Jacobian between the two frames
@@ -501,6 +517,12 @@ public:
                                      const iDynTree::FrameIndex expressedOriginFrameIndex,
                                      const iDynTree::FrameIndex expressedOrientationFrameIndex,
                                      iDynTree::MatrixDynSize & outJacobian);
+
+    bool getRelativeJacobianExplicit(const iDynTree::FrameIndex refFrameIndex,
+                                     const iDynTree::FrameIndex frameIndex,
+                                     const iDynTree::FrameIndex expressedOriginFrameIndex,
+                                     const iDynTree::FrameIndex expressedOrientationFrameIndex,
+                                     MatrixView<double> outJacobian);
 
 
     /**
@@ -555,6 +577,8 @@ public:
      */
     bool getCenterOfMassJacobian(MatrixDynSize & comJacobian);
 
+    bool getCenterOfMassJacobian(MatrixView<double> comJacobian);
+
     /**
      * Return the center of mass bias acceleration.
      */
@@ -580,6 +604,8 @@ public:
      */
     bool getAverageVelocityJacobian(MatrixDynSize & avgVelocityJacobian);
 
+    bool getAverageVelocityJacobian(MatrixView<double> avgVelocityJacobian);
+
     /**
      * Get the centroidal average velocity of the robot.
      *
@@ -600,6 +626,8 @@ public:
      */
     bool getCentroidalAverageVelocityJacobian(MatrixDynSize & centroidalAvgVelocityJacobian);
 
+    bool getCentroidalAverageVelocityJacobian(MatrixView<double> centroidalAvgVelocityJacobian);
+
     /**
      * Get the linear and angular momentum of the robot.
      * The quantity is expressed in (B[A]), (A) or (B) depending on the FrameVelocityConvention used.
@@ -615,6 +643,8 @@ public:
      * \note Implementation incomplete, please refrain to use until this warning has been removed.
      */
     bool getLinearAngularMomentumJacobian(MatrixDynSize & linAngMomentumJacobian);
+
+    bool getLinearAngularMomentumJacobian(MatrixView<double> linAngMomentumJacobian);
 
     /**
      * Get the centroidal (total) momentum of the robot.
@@ -635,6 +665,8 @@ public:
      * introduced in https://doi.org/10.1109/IROS.2008.4650772 .
      */
     bool getCentroidalTotalMomentumJacobian(MatrixDynSize& centroidalTotalMomentumJacobian);
+
+    bool getCentroidalTotalMomentumJacobian(MatrixView<double> centroidalTotalMomentumJacobian);
 
     //@}
 
@@ -704,6 +736,7 @@ public:
      */
     bool getFreeFloatingMassMatrix(MatrixDynSize & freeFloatingMassMatrix);
 
+    bool getFreeFloatingMassMatrix(MatrixView<double> freeFloatingMassMatrix);
 
     /**
      * @brief Compute the free floating inverse dynamics.
@@ -807,4 +840,3 @@ public:
 }
 
 #endif
-

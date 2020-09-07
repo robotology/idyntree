@@ -27,7 +27,7 @@ bool FreeFloatingJacobianUsingLinkPos(const Model& model,
                                       const LinkIndex jacobianLinkIndex,
                                       const Transform& jacobFrame_X_world,
                                       const Transform& baseFrame_X_jacobBaseFrame,
-                                            MatrixDynSize& jacobian)
+                                      const MatrixView<double>& jacobian)
 {
     // We zero the jacobian
     jacobian.zero();
