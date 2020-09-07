@@ -75,6 +75,26 @@ inline Eigen::Map<Eigen::VectorXd> toEigen(iDynTree::Span<double> vec)
 }
 #endif
 
+inline Eigen::Map<const Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor>> toEigen(MatrixView<const double, true> mat)
+{
+    return Eigen::Map<const Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> >(mat.data(), mat.rows(), mat.cols());
+}
+
+inline Eigen::Map< Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor>> toEigen(MatrixView< double, true> mat)
+{
+    return Eigen::Map< Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> >(mat.data(), mat.rows(), mat.cols());
+}
+
+inline Eigen::Map<const Eigen::MatrixXd> toEigen(MatrixView<const double, false> mat)
+{
+    return Eigen::Map<const Eigen::MatrixXd >(mat.data(), mat.rows(), mat.cols());
+}
+
+inline Eigen::Map< Eigen::MatrixXd > toEigen(MatrixView< double, false> mat)
+{
+    return Eigen::Map< Eigen::MatrixXd >(mat.data(), mat.rows(), mat.cols());
+}
+
 inline Eigen::Map<const Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> > toEigen(const MatrixDynSize & mat)
 {
     return Eigen::Map<const Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> >(mat.data(),mat.rows(),mat.cols());
