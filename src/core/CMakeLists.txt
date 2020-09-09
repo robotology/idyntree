@@ -44,6 +44,7 @@ set(IDYNTREE_CORE_EXP_HEADERS include/iDynTree/Core/Axis.h
                               include/iDynTree/Core/CubicSpline.h
                               include/iDynTree/Core/Span.h
                               include/iDynTree/Core/SO3Utils.h
+                              include/iDynTree/Core/MatrixView.h
                               # Deprecated headers
                               include/iDynTree/Core/AngularForceVector3.h
                               include/iDynTree/Core/AngularMotionVector3.h
