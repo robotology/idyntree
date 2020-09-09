@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - By default  iDynTree is compiled as a shared library also on Windows. The `BUILD_SHARED_LIBS` CMake variable can be used to
   control if iDynTree is built as a shared or a static library.
 - The Python method `*.fromPyList` is replaced by `*.FromPython` (https://github.com/robotology/idyntree/pull/726).
+- The minimum required CMake version to configure and compile iDynTree is now 3.16 . 
 
 ### Removed 
 - Remove the CMake option IDYNTREE_USES_KDL and all the classes available when enabling it. They were deprecated in iDynTree 1.0 .
