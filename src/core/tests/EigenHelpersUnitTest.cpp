@@ -45,6 +45,19 @@ void testSpanToEigen(const Vector3& input) {
     ASSERT_EQUAL_VECTOR(input, check);
 }
 
+template <class MatrixType>
+void testMatrixToEigen(const MatrixType& input) {
+    MatrixDynSize randMat(input.rows(), input.cols()), check(input.rows(), input.cols());
+    getRandomMatrix(randMat);
+    MatrixView<double> matrixViewCheck(check);
+    toEigen(matrixViewCheck) = toEigen(randMat);
+    ASSERT_EQUAL_MATRIX(randMat, check);
+    toEigen(make_matrix_view(check)) = toEigen(randMat);
+    toEigen(randMat) = toEigen(make_matrix_view(check));
+    toEigen(check) = toEigen(make_matrix_view(input));
+    ASSERT_EQUAL_MATRIX(input, check);
+}
+
 int main()
 {
     Vector3 vec;
@@ -59,6 +72,19 @@ int main()
 
     testSpanToEigen(vec);
 
+
+    // test the matrix view
+    Matrix2x3 mat1;
+    getRandomMatrix(mat1);
+    testMatrixToEigen(mat1);
+
+    MatrixDynSize mat2(12,31);
+    getRandomMatrix(mat2);
+    testMatrixToEigen(mat2);
+
+    Eigen::MatrixXd mat3(12,31);
+    getRandomMatrix(mat3);
+    testMatrixToEigen(mat3);
 
     return EXIT_SUCCESS;
 }
