@@ -14,6 +14,8 @@
 
 #include <string>
 
+#include <iDynTree/Core/MatrixView.h>
+
 namespace iDynTree
 {
     /**
@@ -104,6 +106,15 @@ namespace iDynTree
          * @return *this
          */
         MatrixDynSize& operator=(const MatrixDynSize& other);
+
+        /**
+         * Assignment operator
+         *
+         * @param other the object to copy into self
+         *
+         * @return *this
+         */
+        MatrixDynSize& operator=(const MatrixView<const double>& other);
 
         /**
          * Denstructor
