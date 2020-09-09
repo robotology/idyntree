@@ -7,13 +7,12 @@ import sys
 # This test is meant to be executed from the build,
 # so we add in sys.path the location of iDynTree.py and _iDynTree.so
 # TODO: this probably does not work on Windows, fix it
-sys.path.append("../../python/");
-sys.path.append("../../../lib/python/");
-sys.path.append("../../../lib/python/Debug/");
-
+sys.path.append("../../python/")
+sys.path.append("../../../lib/python/")
+sys.path.append("../../../lib/python/Debug/")
 
 import unittest
-import iDynTree
+from idyntree import iDynTree
 import random
 
 class JointTest(unittest.TestCase):
