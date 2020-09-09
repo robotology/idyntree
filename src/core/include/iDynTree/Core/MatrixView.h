@@ -29,31 +29,30 @@
 namespace iDynTree
 {
 
-    // this is required to be compatible with c++17
-    template <typename... Ts> struct make_void
+    namespace MatrixViewInternal
     {
-        typedef void type;
-    };
-    template <typename... Ts> using void_t = typename make_void<Ts...>::type;
+        // this is required to be compatible with c++17
+        template <typename... Ts> struct make_void { typedef void type; };
+        template <typename... Ts> using void_t = typename make_void<Ts...>::type;
 
-    /**
-     * has_IsRowMajor is used to build a type-dependent expression that check if an element has
-     * IsRowMajor argument. This specific implementation is used when the the object has not
-     * IsRowMajor.
-     */
-    template <typename T, typename = void> struct has_IsRowMajor : std::false_type
-    {
-    };
+        /**
+         * has_IsRowMajor is used to build a type-dependent expression that check if an
+         * element has IsRowMajor argument. This specific implementation is used when
+         * the the object has not IsRowMajor.
+         */
+        template <typename T, typename = void>
+        struct has_IsRowMajor : std::false_type {};
 
-    /**
-     * has_IsRowMajor is used to build a type-dependent expression that check if an element has
-     * IsRowMajor argument. This specific implementation is used when the the object has not
-     * IsRowMajor, indeed <code>void_t<\endcode> is used to detect ill-formed types in SFINAE
-     * context.
-     */
-    template <typename T> struct has_IsRowMajor<T, void_t<decltype(T::IsRowMajor)>> : std::true_type
-    {
-    };
+        /**
+         * has_IsRowMajor is used to build a type-dependent expression that check if an
+         * element has IsRowMajor argument. This specific implementation is used when
+         * the the object has not IsRowMajor, indeed <code>void_t<\endcode> is used to
+         * detect ill-formed types in SFINAE context.
+         */
+        template <typename T>
+        struct has_IsRowMajor<T, void_t<decltype(T::IsRowMajor)>> : std::true_type {};
+
+    } // namespace MatrixViewIntenal
 
     /**
      * Type of storage ordering
@@ -123,7 +122,7 @@ namespace iDynTree
             std::enable_if_t<std::is_const<element_type>::value
                                  && std::is_convertible<decltype(std::declval<Container>().data()),
                                                         pointer>::value
-                                 && has_IsRowMajor<Container>::value
+                                 && MatrixViewInternal::has_IsRowMajor<Container>::value
                                  && !std::is_same<Container, MatrixView>::value,
                              int> = 0>
         MatrixView(const Container& matrix)
@@ -140,7 +139,7 @@ namespace iDynTree
             std::enable_if_t<std::is_const<element_type>::value
                                  && std::is_convertible<decltype(std::declval<Container>().data()),
                                                         pointer>::value
-                                 && !has_IsRowMajor<Container>::value
+                                 && !MatrixViewInternal::has_IsRowMajor<Container>::value
                                  && !std::is_same<Container, MatrixView>::value,
                              int> = 0>
         MatrixView(const Container& matrix, const StorageOrder& order = StorageOrder::RowMajor)
@@ -151,7 +150,7 @@ namespace iDynTree
         template <class Container,
                   std::enable_if_t<
                       std::is_convertible<decltype(std::declval<Container>().data()), pointer>::value
-                          && has_IsRowMajor<Container>::value
+                          && MatrixViewInternal::has_IsRowMajor<Container>::value
                           && !std::is_same<Container, MatrixView>::value,
                       int> = 0>
         MatrixView(Container& matrix)
@@ -166,7 +165,7 @@ namespace iDynTree
         template <class Container,
                   std::enable_if_t<
                       std::is_convertible<decltype(std::declval<Container>().data()), pointer>::value
-                          && !has_IsRowMajor<Container>::value
+                          && !MatrixViewInternal::has_IsRowMajor<Container>::value
                           && !std::is_same<Container, MatrixView>::value,
                       int> = 0>
         MatrixView(Container& matrix, const StorageOrder& order = StorageOrder::RowMajor)
@@ -232,7 +231,7 @@ namespace iDynTree
 
     template <class Container,
               std::enable_if_t<
-                  has_IsRowMajor<Container>::value
+                  MatrixViewInternal::has_IsRowMajor<Container>::value
                       || std::is_same<MatrixView<typename Container::value_type>, Container>::value,
                   int> = 0>
     IDYNTREE_CONSTEXPR MatrixView<typename Container::value_type> make_matrix_view(Container& cont)
@@ -242,7 +241,7 @@ namespace iDynTree
 
     template <class Container,
               std::enable_if_t<
-                  has_IsRowMajor<Container>::value
+                  MatrixViewInternal::has_IsRowMajor<Container>::value
                       || std::is_same<MatrixView<const typename Container::value_type>, Container>::value,
                   int> = 0>
     IDYNTREE_CONSTEXPR MatrixView<const typename Container::value_type> make_matrix_view(const Container& cont)
@@ -252,7 +251,7 @@ namespace iDynTree
 
     template <class Container,
               std::enable_if_t<
-                  !has_IsRowMajor<Container>::value
+                  !MatrixViewInternal::has_IsRowMajor<Container>::value
                       && !std::is_same<MatrixView<typename Container::value_type>, Container>::value,
                   int> = 0>
     IDYNTREE_CONSTEXPR MatrixView<typename Container::value_type>
@@ -264,7 +263,7 @@ namespace iDynTree
 
     template <class Container,
               std::enable_if_t<
-                  !has_IsRowMajor<Container>::value
+                  !MatrixViewInternal::has_IsRowMajor<Container>::value
                       && !std::is_same<MatrixView<typename Container::value_type>, Container>::value,
                   int> = 0>
     IDYNTREE_CONSTEXPR MatrixView<const typename Container::value_type>
