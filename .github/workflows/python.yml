@@ -26,15 +26,14 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install Python tools
-        run: pip install setuptools_scm pytest
+        run: pip install setuptools_scm
 
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-              git build-essential cmake cmake-extras libace-dev coinor-libipopt-dev libeigen3-dev swig \
-              qtbase5-dev qtdeclarative5-dev qtmultimedia5-dev libqt5charts5-dev \
-              libxml2-dev liboctave-dev python-dev python3-numpy valgrind libassimp-dev
+              build-essential coinor-libipopt-dev libeigen3-dev swig \
+              libxml2-dev libassimp-dev
 
       - name: Create sdist
         run: python setup.py sdist
