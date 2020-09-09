@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - iDynTree now supports build compiled as a shared library also on Windows.
 - When used in Python, new iDynTree objects can be constructed from generic iterable objects and NumPy arrays (`*.FromPython`),
   and existing objects can be converted to NumPy arrays (`*.toNumPy`) (https://github.com/robotology/idyntree/pull/726).
+- iDynTree Python bindings can now be installed with `pip3 install git+https://github.com/robotology/idyntree.git` (https://github.com/robotology/idyntree/pull/733).
 
 ### Fixed
 - Fixed bug in `yarprobotstatepublisher` that caused segmentation fault each time an unknown joint name was read from the input joint states topic (https://github.com/robotology/idyntree/pull/719)
@@ -23,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   control if iDynTree is built as a shared or a static library.
 - The Python method `*.fromPyList` is replaced by `*.FromPython` (https://github.com/robotology/idyntree/pull/726).
 - The minimum required CMake version to configure and compile iDynTree is now 3.16 (https://github.com/robotology/idyntree/pull/732).
+- Import the Python SWIG bindings changed from `import iDynTree` to either `from idyntree import iDynTree` or `import idyntree.iDynTree` (https://github.com/robotology/idyntree/pull/733).
 
 ### Removed 
 - Remove the CMake option IDYNTREE_USES_KDL and all the classes available when enabling it. They were deprecated in iDynTree 1.0 .
