@@ -77,17 +77,18 @@ namespace iDynTree
     public:
         using element_type = ElementType;
         using value_type = std::remove_cv_t<ElementType>;
+        using index_type = std::ptrdiff_t;
         using pointer = element_type*;
         using reference = element_type&;
 
     private:
         pointer m_storage;
-        unsigned int m_rows;
-        unsigned int m_cols;
+        index_type m_rows;
+        index_type m_cols;
 
         StorageOrder m_storageOrder;
 
-        unsigned int rawIndex(int row, int col) const
+        index_type rawIndex(index_type row, index_type col) const
         {
             if (m_storageOrder == StorageOrder::RowMajor)
             {
@@ -174,8 +175,8 @@ namespace iDynTree
         }
 
         MatrixView(pointer in_data,
-                   const unsigned int& in_rows,
-                   const unsigned int& in_cols,
+                   index_type in_rows,
+                   index_type in_cols,
                    const StorageOrder& order = StorageOrder::RowMajor)
             : m_storage(in_data)
             , m_rows(in_rows)
@@ -200,19 +201,19 @@ namespace iDynTree
          *
          */
         ///@{
-        reference operator()(const unsigned int row, const unsigned int col) const
+        reference operator()(index_type row, const index_type col) const
         {
             assert(row < this->rows());
             assert(col < this->cols());
             return this->m_storage[rawIndex(row, col)];
         }
 
-        unsigned int rows() const
+        index_type rows() const noexcept
         {
             return this->m_rows;
         }
 
-        unsigned int cols() const
+        index_type cols() const noexcept
         {
             return this->m_cols;
         }
@@ -222,8 +223,8 @@ namespace iDynTree
     template <class ElementType>
     IDYNTREE_CONSTEXPR MatrixView<ElementType>
     make_matrix_view(ElementType* ptr,
-                     const unsigned int& rows,
-                     const unsigned int& cols,
+                     typename MatrixView<ElementType>::index_type rows,
+                     typename MatrixView<ElementType>::index_type cols,
                      const StorageOrder& order = StorageOrder::RowMajor)
     {
         return MatrixView<ElementType>(ptr, rows, cols, order);
