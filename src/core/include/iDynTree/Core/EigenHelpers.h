@@ -73,6 +73,43 @@ inline Eigen::Map<Eigen::VectorXd> toEigen(iDynTree::Span<double> vec)
 {
     return Eigen::Map<Eigen::VectorXd>(vec.data(),vec.size());
 }
+
+inline Eigen::Map<const Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>,
+                  0,
+                  Eigen::Stride<Eigen::Dynamic, Eigen::Dynamic>>
+toEigen(const MatrixView<const double>& mat)
+{
+    using MatrixRowMajor = Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor>;
+
+    // This is a trick required to see a ColMajor matrix as a RowMajor matrix.
+    const int innerStride = (mat.storageOrder() == StorageOrder::ColMajor) ? mat.rows() : 1;
+    const int outherStride = (mat.storageOrder() ==StorageOrder::ColMajor) ? 1 : mat.cols();
+
+    return Eigen::Map<const MatrixRowMajor, 0, Eigen::Stride<Eigen::Dynamic, Eigen::Dynamic>>(
+        mat.data(),
+        mat.rows(),
+        mat.cols(),
+        Eigen::Stride<Eigen::Dynamic, Eigen::Dynamic>(outherStride, innerStride));
+}
+
+inline Eigen::Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor>,
+                  0,
+                  Eigen::Stride<Eigen::Dynamic, Eigen::Dynamic>>
+toEigen(const MatrixView<double>& mat)
+{
+    using MatrixRowMajor = Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor>;
+
+    // This is a trick required to see a ColMajor matrix as a RowMajor matrix.
+    const int innerStride = (mat.storageOrder() == StorageOrder::ColMajor) ? mat.rows() : 1;
+    const int outherStride = (mat.storageOrder() == StorageOrder::ColMajor) ? 1 : mat.cols();
+
+    return Eigen::Map<MatrixRowMajor, 0, Eigen::Stride<Eigen::Dynamic, Eigen::Dynamic>>(
+        mat.data(),
+        mat.rows(),
+        mat.cols(),
+        Eigen::Stride<Eigen::Dynamic, Eigen::Dynamic>(outherStride, innerStride));
+}
+
 #endif
 
 inline Eigen::Map<const Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor> > toEigen(const MatrixDynSize & mat)
