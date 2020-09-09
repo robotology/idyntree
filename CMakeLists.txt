@@ -6,9 +6,9 @@
 # https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 # at your option.
 
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.16)
 
-project(iDynTree VERSION 1.99.0
+project(iDynTree VERSION 1.99.1
                  LANGUAGES C CXX)
 
 # Disable in source build, unless Eclipse is used
