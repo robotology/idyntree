@@ -104,7 +104,7 @@ if (DEFINED CMAKE_COMPILER_IS_GNUCXX)
 endif()
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
+                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 target_link_libraries(${libraryname} PRIVATE Eigen3::Eigen)
 
 # On Windows we need to correctly export global constants that are not inlined with the use of GenerateExportHeader
