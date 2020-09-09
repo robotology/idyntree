@@ -58,6 +58,14 @@ void testMatrixToEigen(const MatrixType& input) {
     ASSERT_EQUAL_MATRIX(input, check);
 }
 
+void checkMatrixViewStorageOrder(const Eigen::MatrixXd& input) {
+    auto matrixView = make_matrix_view(input);
+
+    // The toEigen returns a RowMajor matrix even if the original matrix is ColMajor.
+    // The Eigen::Stride is chosen to have the coherent behaviour.
+    ASSERT_EQUAL_MATRIX(input, toEigen(matrixView));
+}
+
 int main()
 {
     Vector3 vec;
@@ -85,6 +93,8 @@ int main()
     Eigen::MatrixXd mat3(12,31);
     getRandomMatrix(mat3);
     testMatrixToEigen(mat3);
+
+    checkMatrixViewStorageOrder(mat3);
 
     return EXIT_SUCCESS;
 }
