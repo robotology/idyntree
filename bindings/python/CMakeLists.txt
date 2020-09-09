@@ -1,26 +1,34 @@
-set(CMAKE_SWIG_FLAGS "-Wextra;-module;iDynTree;-threads")
-
 find_package(Python3 COMPONENTS Interpreter Development NumPy REQUIRED)
 message(STATUS "Using Python: ${Python3_EXECUTABLE}")
 
+cmake_policy(SET CMP0078 NEW)
+cmake_policy(SET CMP0086 NEW)
+
 set_source_files_properties(../iDynTree.i PROPERTIES CPLUSPLUS ON)
 
-swig_add_library(iDynTree_python
+set(target_name iDynTree)
+
+swig_add_library(${target_name}
     TYPE SHARED
     LANGUAGE python
     SOURCES ../iDynTree.i)
 
-set(target_name ${SWIG_MODULE_iDynTree_python_REAL_NAME})
-
 target_link_libraries(${target_name} PUBLIC Python3::Python Python3::NumPy)
+
 set_target_properties(${target_name} PROPERTIES
-    OUTPUT_NAME "_iDynTree"
     LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib/python)
 
 set_property(
     TARGET ${target_name}
-    PROPERTY SWIG_DEPENDS
-    python.i numpy.i)
+    PROPERTY SWIG_DEPENDS python.i numpy.i)
+
+set_property(
+    TARGET ${target_name}
+    PROPERTY SWIG_COMPILE_OPTIONS -Wextra -threads)
+
+set_property(
+    TARGET ${target_name}
+    PROPERTY SWIG_GENERATED_COMPILE_OPTIONS -Wextra)
 
 # installation path is determined reliably on most platforms using distutils
 execute_process(COMMAND ${Python3_EXECUTABLE}
