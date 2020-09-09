@@ -30,13 +30,22 @@ set_property(
     TARGET ${target_name}
     PROPERTY SWIG_GENERATED_COMPILE_OPTIONS -Wextra)
 
-# installation path is determined reliably on most platforms using distutils
-execute_process(COMMAND ${Python3_EXECUTABLE}
-    -c "from distutils import sysconfig; print(sysconfig.get_python_lib(1,0,prefix=''))"
-    OUTPUT_VARIABLE PYTHON_INSTDIR)
-string(STRIP ${PYTHON_INSTDIR} PYTHON_INSTDIR)
-       install(FILES ${CMAKE_CURRENT_BINARY_DIR}/iDynTree.py DESTINATION ${PYTHON_INSTDIR} )
-       install(TARGETS ${target_name} DESTINATION ${PYTHON_INSTDIR} )
+if(IDYNTREE_PACKAGE_FOR_PYPI)
+    set(PYTHON_INSTDIR ${CMAKE_INSTALL_PREFIX})
+    file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/__init__.py "from . import iDynTree")
+    install(
+        FILES ${CMAKE_CURRENT_BINARY_DIR}/__init__.py
+        DESTINATION ${CMAKE_INSTALL_PREFIX})
+else()
+    # installation path is determined reliably on most platforms using distutils
+    execute_process(COMMAND ${Python3_EXECUTABLE}
+        -c "from distutils import sysconfig; print(sysconfig.get_python_lib(1,0,prefix=''))"
+        OUTPUT_VARIABLE PYTHON_INSTDIR)
+    string(STRIP ${PYTHON_INSTDIR} PYTHON_INSTDIR)
+endif()
+
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/iDynTree.py DESTINATION ${PYTHON_INSTDIR})
+install(TARGETS ${target_name} DESTINATION ${PYTHON_INSTDIR})
 
 if(WIN32)
     set_target_properties(${target_name} PROPERTIES SUFFIX ".pyd")
