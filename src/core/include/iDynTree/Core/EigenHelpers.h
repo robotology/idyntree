@@ -83,7 +83,7 @@ toEigen(const MatrixView<const double>& mat)
 
     // This is a trick required to see a ColMajor matrix as a RowMajor matrix.
     const int innerStride = (mat.storageOrder() == StorageOrder::ColMajor) ? mat.rows() : 1;
-    const int outerStride = (mat.storageOrder() ==StorageOrder::ColMajor) ? 1 : mat.cols();
+    const int outerStride = (mat.storageOrder() == StorageOrder::ColMajor) ? 1 : mat.cols();
 
     return Eigen::Map<const MatrixRowMajor, 0, Eigen::Stride<Eigen::Dynamic, Eigen::Dynamic>>(
         mat.data(),
