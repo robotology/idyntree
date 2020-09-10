@@ -11,12 +11,14 @@ set(target_name iDynTree)
 swig_add_library(${target_name}
     TYPE SHARED
     LANGUAGE python
-    SOURCES ../iDynTree.i)
+    SOURCES ../iDynTree.i
+    OUTFILE_DIR ${CMAKE_CURRENT_BINARY_DIR}
+    OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/idyntree)
 
 target_link_libraries(${target_name} PUBLIC Python3::Python Python3::NumPy)
 
 set_target_properties(${target_name} PROPERTIES
-    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib/python)
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/idyntree)
 
 set_property(
     TARGET ${target_name}
@@ -30,13 +32,26 @@ set_property(
     TARGET ${target_name}
     PROPERTY SWIG_GENERATED_COMPILE_OPTIONS -Wextra)
 
-# installation path is determined reliably on most platforms using distutils
-execute_process(COMMAND ${Python3_EXECUTABLE}
-    -c "from distutils import sysconfig; print(sysconfig.get_python_lib(1,0,prefix=''))"
-    OUTPUT_VARIABLE PYTHON_INSTDIR)
-string(STRIP ${PYTHON_INSTDIR} PYTHON_INSTDIR)
-       install(FILES ${CMAKE_CURRENT_BINARY_DIR}/iDynTree.py DESTINATION ${PYTHON_INSTDIR} )
-       install(TARGETS ${target_name} DESTINATION ${PYTHON_INSTDIR} )
+# Add a simple __init__.py that loads the bindings and allows using idyntree.iDynTree
+file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/idyntree/__init__.py "from . import iDynTree")
+
+if(IDYNTREE_PACKAGE_FOR_PYPI)
+    set(PYTHON_INSTDIR ${CMAKE_INSTALL_PREFIX})
+else()
+    # installation path is determined reliably on most platforms using distutils
+    execute_process(COMMAND ${Python3_EXECUTABLE}
+        -c "from distutils import sysconfig; print(sysconfig.get_python_lib(1,0,prefix=''))"
+        OUTPUT_VARIABLE PYTHON_INSTDIR_PREFIX)
+    string(STRIP ${PYTHON_INSTDIR_PREFIX} PYTHON_INSTDIR_PREFIX)
+    set(PYTHON_INSTDIR ${PYTHON_INSTDIR_PREFIX}/idyntree)
+endif()
+
+install(
+    FILES ${CMAKE_CURRENT_BINARY_DIR}/idyntree/__init__.py
+          ${CMAKE_CURRENT_BINARY_DIR}/idyntree/iDynTree.py
+    DESTINATION ${PYTHON_INSTDIR})
+
+install(TARGETS ${target_name} DESTINATION ${PYTHON_INSTDIR})
 
 if(WIN32)
     set_target_properties(${target_name} PROPERTIES SUFFIX ".pyd")
