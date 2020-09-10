@@ -1,0 +1,62 @@
+name: Python CI Workflow
+
+on:
+  push:
+  pull_request:
+
+jobs:
+
+  build:
+    name: '[Python ${{ matrix.python-version }}]'
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        python-version:
+          - 3.6
+          - 3.8
+
+    steps:
+
+      - uses: actions/checkout@master
+      - run: git fetch --prune --unshallow
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Python tools
+        run: pip install setuptools_scm
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+              build-essential coinor-libipopt-dev libeigen3-dev swig \
+              libxml2-dev libassimp-dev
+
+      - name: Create sdist
+        run: python setup.py sdist
+
+      - name: Install sdist
+        run: pip -v install dist/*.tar.gz
+
+      - name: Test import
+        run: python -c 'from idyntree import iDynTree'
+
+      - name: Remove sdist
+        run: |
+          rm -rf dist/
+          pip uninstall -y idyntree
+
+      - name: Create bdist_wheel
+        run: pip wheel -v -w dist/ .
+
+      - name: Install bdist_wheel
+        run: pip -v install dist/*.whl
+
+      - name: Test import
+        run: python -c 'from idyntree import iDynTree'
+
+      - name: Remove bdist_wheel
+        run: pip uninstall -y idyntree
