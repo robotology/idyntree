@@ -82,6 +82,37 @@ toEigen(const MatrixView<const double>& mat)
     using MatrixRowMajor = Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor>;
 
     // This is a trick required to see a ColMajor matrix as a RowMajor matrix.
+    //
+    // Given the following matrix
+    //     _                 _                     _
+    //    / \     _____     |  1   2   3   4    5  |
+    //   / _ \   |_____|    |                      |
+    //  / ___ \  |_____|    |                      |
+    // /_/   \_\            |_ 6   7   8   9   10 _|
+    //
+    // If the matrix is stored as RowMajor matrix there will be a vector v_row in which
+    // the elements are saved
+    // v_row = [1 2 3 4 5 6 7 8 9 10]
+    //
+    // If the matrix is stored as ColMajor matrix there will be a vector v_col in which
+    // the elements are saved
+    // v_col = [1 6 2 7 3 8 4 9 5 10]
+    //
+    // Our goal here is to build a RowMajor Matrix (independently it is RowMajor/ColMajor)
+    // starting from the raw vactor (v_row, v_col)
+    //
+    // From the Eigen documentation https://eigen.tuxfamily.org/dox/classEigen_1_1Stride.html
+    // The inner stride is the pointer increment between two consecutive entries within a given row of a row-major matrix.
+    // The outer stride is the pointer increment between two consecutive rows of a row-major matrix.
+    //
+    // Starting from v_row we can build a RowMajor matrix by choosing the following pair of strides
+    //    - inner_stride = 1
+    //    - outer_stride = 5 = number of columns of A
+    //
+    // Starting from v_col we can build a RowMajor matrix by choosing the following pair of strides
+    //    - inner_stride = 2 = number of rows of A
+    //    - outer_stride = 1
+
     const int innerStride = (mat.storageOrder() == StorageOrder::ColMajor) ? mat.rows() : 1;
     const int outerStride = (mat.storageOrder() == StorageOrder::ColMajor) ? 1 : mat.cols();
 
@@ -100,6 +131,37 @@ toEigen(const MatrixView<double>& mat)
     using MatrixRowMajor = Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor>;
 
     // This is a trick required to see a ColMajor matrix as a RowMajor matrix.
+    //
+    // Given the following matrix
+    //     _                 _                     _
+    //    / \     _____     |  1   2   3   4    5  |
+    //   / _ \   |_____|    |                      |
+    //  / ___ \  |_____|    |                      |
+    // /_/   \_\            |_ 6   7   8   9   10 _|
+    //
+    // If the matrix is stored as RowMajor matrix there will be a vector v_row in which
+    // the elements are saved as
+    // v_row = [1 2 3 4 5 6 7 8 9 10]
+    //
+    // If the matrix is stored as ColMajor matrix there will be a vector v_col in which
+    // the elements are saved as
+    // v_col = [1 6 2 7 3 8 4 9 5 10]
+    //
+    // Our goal here is to build a RowMajor Matrix (independently it is RowMajor/ColMajor)
+    // starting from the raw vactor (v_row, v_col)
+    //
+    // From the Eigen documentation https://eigen.tuxfamily.org/dox/classEigen_1_1Stride.html
+    // The inner stride is the pointer increment between two consecutive entries within a given row of a row-major matrix.
+    // The outer stride is the pointer increment between two consecutive rows of a row-major matrix.
+    //
+    // Starting from v_row we can build a RowMajor matrix by choosing the following pair of strides
+    //    - inner_stride = 1
+    //    - outer_stride = 5 = number of columns of A
+    //
+    // Starting from v_col we can build a RowMajor matrix by choosing the following pair of strides
+    //    - inner_stride = 2 = number of rows of A
+    //    - outer_stride = 1
+
     const int innerStride = (mat.storageOrder() == StorageOrder::ColMajor) ? mat.rows() : 1;
     const int outerStride = (mat.storageOrder() == StorageOrder::ColMajor) ? 1 : mat.cols();
 
