@@ -141,6 +141,14 @@ namespace iDynTree
          */
         void fillColMajorBuffer(double * colMajorBuf) const;
 
+ #if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
+        /** Typedefs to enable make_matrix_view.
+         */
+        ///@{
+        typedef double value_type;
+        ///@}
+#endif
+
 
         /** @name Output helpers.
          *  Output helpers.

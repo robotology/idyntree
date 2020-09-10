@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - When used in Python, new iDynTree objects can be constructed from generic iterable objects and NumPy arrays (`*.FromPython`),
   and existing objects can be converted to NumPy arrays (`*.toNumPy`) (https://github.com/robotology/idyntree/pull/726).
 - iDynTree Python bindings can now be installed with `pip3 install git+https://github.com/robotology/idyntree.git` (https://github.com/robotology/idyntree/pull/733).
+- Implement the MatrixView class (https://github.com/robotology/idyntree/pull/734)
 
 ### Fixed
 - Fixed bug in `yarprobotstatepublisher` that caused segmentation fault each time an unknown joint name was read from the input joint states topic (https://github.com/robotology/idyntree/pull/719)
