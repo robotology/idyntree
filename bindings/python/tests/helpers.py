@@ -10,7 +10,7 @@ sys.path.append("../../../lib/python/Debug/")
 
 import unittest
 import numpy as np
-from idyntree import iDynTree
+import idyntree.bindings as iDynTree
 import random
 
 class HelpersTest(unittest.TestCase):

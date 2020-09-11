@@ -42,7 +42,7 @@ jobs:
         run: pip -v install dist/*.tar.gz
 
       - name: Test import
-        run: python -c 'from idyntree import iDynTree'
+        run: python -c 'import idyntree.bindings'
 
       - name: Remove sdist
         run: |
@@ -56,7 +56,7 @@ jobs:
         run: pip -v install dist/*.whl
 
       - name: Test import
-        run: python -c 'from idyntree import iDynTree'
+        run: python -c 'import idyntree.bindings'
 
       - name: Remove bdist_wheel
         run: pip uninstall -y idyntree

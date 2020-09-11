@@ -12,7 +12,7 @@ sys.path.append("../../../lib/python/")
 sys.path.append("../../../lib/python/Debug/")
 
 import unittest
-from idyntree import iDynTree
+import idyntree.bindings as iDynTree
 import random
 
 class JointTest(unittest.TestCase):

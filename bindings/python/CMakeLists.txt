@@ -4,7 +4,9 @@ message(STATUS "Using Python: ${Python3_EXECUTABLE}")
 cmake_policy(SET CMP0078 NEW)
 cmake_policy(SET CMP0086 NEW)
 
-set_source_files_properties(../iDynTree.i PROPERTIES CPLUSPLUS ON)
+set_source_files_properties(../iDynTree.i PROPERTIES
+    CPLUSPLUS ON
+    SWIG_MODULE_NAME "bindings")
 
 set(target_name iDynTree)
 
@@ -32,8 +34,8 @@ set_property(
     TARGET ${target_name}
     PROPERTY SWIG_GENERATED_COMPILE_OPTIONS -Wextra)
 
-# Add a simple __init__.py that loads the bindings and allows using idyntree.iDynTree
-file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/idyntree/__init__.py "from . import iDynTree")
+# Add a simple __init__.py that loads the bindings and allows using idyntree.bindings
+file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/idyntree/__init__.py "from . import bindings")
 
 if(IDYNTREE_PACKAGE_FOR_PYPI)
     set(PYTHON_INSTDIR ${CMAKE_INSTALL_PREFIX})
@@ -48,7 +50,7 @@ endif()
 
 install(
     FILES ${CMAKE_CURRENT_BINARY_DIR}/idyntree/__init__.py
-          ${CMAKE_CURRENT_BINARY_DIR}/idyntree/iDynTree.py
+          ${CMAKE_CURRENT_BINARY_DIR}/idyntree/bindings.py
     DESTINATION ${PYTHON_INSTDIR})
 
 install(TARGETS ${target_name} DESTINATION ${PYTHON_INSTDIR})
