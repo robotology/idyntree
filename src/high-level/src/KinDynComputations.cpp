@@ -113,14 +113,18 @@ public:
     // storage of the CRBs, used to extract
     LinkCompositeRigidBodyInertias m_linkCRBIs;
 
+    // container used to reduce the memory allocation when the span version of the
+    // generalizedBiasForces generalizedGravityForces and generalizedExternalForces is called
+    FreeFloatingGeneralizedTorques m_generalizedForcesContainer;
+
     // Helper function to get the lockedInertia of the robot from the m_linkCRBIs
     const SpatialInertia & getRobotLockedInertia();
 
     // Process a jacobian that expects a body fixed base velocity depending on the selected FrameVelocityRepresentation
-    void processOnRightSideMatrixExpectingBodyFixedModelVelocity(MatrixView<double> mat);
-    void processOnLeftSideBodyFixedBaseMomentumJacobian(MatrixView<double> jac);
-    void processOnLeftSideBodyFixedAvgVelocityJacobian(MatrixView<double> jac);
-    void processOnLeftSideBodyFixedCentroidalAvgVelocityJacobian(MatrixView<double> jac, const FrameVelocityRepresentation & leftSideRepresentation);
+    void processOnRightSideMatrixExpectingBodyFixedModelVelocity(const MatrixView<double> & mat);
+    void processOnLeftSideBodyFixedBaseMomentumJacobian(const MatrixView<double> & jac);
+    void processOnLeftSideBodyFixedAvgVelocityJacobian(const MatrixView<double> & jac);
+    void processOnLeftSideBodyFixedCentroidalAvgVelocityJacobian(const MatrixView<double> & jac, const FrameVelocityRepresentation & leftSideRepresentation);
 
     // Transform a wrench from and to body fixed and the used representation
     Wrench fromBodyFixedToUsedRepresentation(const Wrench & wrenchInBodyFixed, const Transform & inertial_X_link);
@@ -348,6 +352,7 @@ void KinDynComputations::resizeInternalDataStructures()
     this->pimpl->m_invDynZeroLinkVel.resize(this->pimpl->m_robot_model);
     this->pimpl->m_invDynZeroLinkProperAcc.resize(this->pimpl->m_robot_model);
     this->pimpl->m_traversalCache.resize(this->pimpl->m_robot_model);
+    this->pimpl->m_generalizedForcesContainer.resize(this->pimpl->m_robot_model);
 
     for(LinkIndex lnkIdx = 0; lnkIdx < static_cast<LinkIndex>(pimpl->m_robot_model.getNrOfLinks()); lnkIdx++)
     {
@@ -554,14 +559,23 @@ bool KinDynComputations::getRelativeJacobianSparsityPattern(const iDynTree::Fram
         //I have the two links. Create the jacobian
         outJacobian.resize(6, pimpl->m_robot_model.getNrOfDOFs());
 
-        this->getRelativeJacobianSparsityPattern(refFrameIndex, frameIndex, MatrixView<double>(outJacobian));
+        return this->getRelativeJacobianSparsityPattern(refFrameIndex, frameIndex, MatrixView<double>(outJacobian));
     }
 
 
 bool KinDynComputations::getRelativeJacobianSparsityPattern(const iDynTree::FrameIndex refFrameIndex,
                                                             const iDynTree::FrameIndex frameIndex,
-                                                            MatrixView<double> outJacobian) const
+                                                            const MatrixView<double> & outJacobian) const
     {
+        bool ok = (outJacobian.rows() == 6)
+            && (outJacobian.cols() == pimpl->m_robot_model.getNrOfDOFs());
+
+        if( !ok )
+        {
+            reportError("KinDynComputations","getRelativeJacobianSparsityPattern","Wrong size in input outJacobian");
+            return false;
+        }
+
         if (!pimpl->m_robot_model.isValidFrameIndex(frameIndex))
         {
             reportError("KinDynComputations","getRelativeJacobian","Frame index out of bounds");
@@ -642,11 +656,22 @@ bool KinDynComputations::getRelativeJacobianSparsityPattern(const iDynTree::Fram
     }
 
     bool KinDynComputations::getFrameFreeFloatingJacobianSparsityPattern(const FrameIndex frameIndex,
-                                                                         MatrixView<double> outJacobianPattern) const
+                                                                         const MatrixView<double> & outJacobianPattern) const
     {
         if (!pimpl->m_robot_model.isValidFrameIndex(frameIndex))
         {
             reportError("KinDynComputations","getFrameJacobian","Frame index out of bounds");
+            return false;
+        }
+
+        bool ok = (outJacobianPattern.rows() == 6)
+            && (outJacobianPattern.cols() == pimpl->m_robot_model.getNrOfDOFs() + 6);
+
+        if( !ok )
+        {
+            reportError("KinDynComputations",
+                        "getFrameFreeJacobianSparsityPattern",
+                        "Wrong size in input outJacobianPattern");
             return false;
         }
 
@@ -707,12 +732,12 @@ unsigned int KinDynComputations::getNrOfDegreesOfFreedom() const
     return (unsigned int)this->pimpl->m_robot_model.getNrOfDOFs();
 }
 
-std::string KinDynComputations::getDescriptionOfDegreeOfFreedom(int dof_index)
+std::string KinDynComputations::getDescriptionOfDegreeOfFreedom(int dof_index) const
 {
     return this->pimpl->m_robot_model.getJointName(dof_index);
 }
 
-std::string KinDynComputations::getDescriptionOfDegreesOfFreedom()
+std::string KinDynComputations::getDescriptionOfDegreesOfFreedom() const
 {
     std::stringstream ss;
 
@@ -734,6 +759,105 @@ bool KinDynComputations::setRobotState(const VectorDynSize& s,
     return setRobotState(world_T_base,s,
                          base_velocity,s_dot,
                          world_gravity);
+}
+
+bool KinDynComputations::setRobotState(const iDynTree::Span<const double>& s,
+                                       const iDynTree::Span<const double>& s_dot,
+                                       const iDynTree::Span<const double>& world_gravity)
+{
+    Transform world_T_base = Transform::Identity();
+    Twist base_velocity = Twist::Zero();
+
+    return setRobotState(world_T_base, s,
+                         base_velocity, s_dot,
+                         world_gravity);
+}
+
+
+bool KinDynComputations::setRobotState(const iDynTree::Span<const double> &world_p_base,
+                                       const iDynTree::MatrixView<const double> &world_R_base,
+                                       const iDynTree::Span<const double>& s,
+                                       const iDynTree::Span<const double>& base_velocity,
+                                       const iDynTree::Span<const double>& s_dot,
+                                       const iDynTree::Span<const double>& world_gravity)
+
+{
+    bool ok = s.size() == pimpl->m_robot_model.getNrOfPosCoords();
+    if( !ok )
+    {
+        reportError("KinDynComputations","setRobotState","Wrong size in input joint positions");
+        return false;
+    }
+
+    ok = s_dot.size() == pimpl->m_robot_model.getNrOfDOFs();
+    if( !ok )
+    {
+        reportError("KinDynComputations","setRobotState","Wrong size in input joint velocities");
+        return false;
+    }
+
+    constexpr int expected_position_size = 3;
+    ok = world_p_base.size() == expected_position_size;
+    if( !ok )
+    {
+        reportError("KinDynComputations","setRobotState","Wrong size in input world_p_base");
+        return false;
+    }
+
+    constexpr int expected_rotation_cols = 3;
+    constexpr int expected_rotation_rows = 3;
+    ok = (world_R_base.rows() == expected_rotation_rows) && (world_R_base.rows() == expected_rotation_cols);
+    if( !ok )
+    {
+        reportError("KinDynComputations","setRobotState","Wrong size in input world_R_base");
+        return false;
+    }
+
+    constexpr int expected_twist_size = 6;
+    ok = base_velocity.size() == expected_twist_size;
+    if( !ok )
+    {
+        reportError("KinDynComputations","setRobotState","Wrong size in input base_velocity");
+        return false;
+    }
+
+    this->invalidateCache();
+
+    // Save pos
+    this->pimpl->m_pos.worldBasePos().setPosition(world_p_base);
+    this->pimpl->m_pos.worldBasePos().setRotation(world_R_base);
+    toEigen(this->pimpl->m_pos.jointPos()) = toEigen(s);
+
+    // Save gravity
+    this->pimpl->m_gravityAcc = world_gravity;
+    Rotation base_R_inertial = this->pimpl->m_pos.worldBasePos().getRotation().inverse();
+    toEigen(pimpl->m_gravityAccInBaseLinkFrame) = toEigen(base_R_inertial)*toEigen(this->pimpl->m_gravityAcc);
+
+    // Save vel
+    toEigen(pimpl->m_vel.jointVel()) = toEigen(s_dot);
+
+    iDynTree::Twist base_twist;
+    toEigen(base_twist.getLinearVec3()) = toEigen(base_velocity).head<3>();
+    toEigen(base_twist.getAngularVec3()) = toEigen(base_velocity).tail<3>();
+
+    // Account for the different possible representations
+    if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
+    {
+        pimpl->m_vel.baseVel() = pimpl->m_pos.worldBasePos().getRotation().inverse()*base_twist;
+    }
+    else if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        // Data is stored in body fixed
+        pimpl->m_vel.baseVel() = base_twist;
+    }
+    else
+    {
+        assert(pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
+        // base_X_inertial \ls^inertial v_base
+        pimpl->m_vel.baseVel() = pimpl->m_pos.worldBasePos().inverse()*base_twist;
+    }
+
+    return true;
 }
 
 bool KinDynComputations::setRobotState(const Transform& world_T_base,
@@ -820,6 +944,77 @@ void KinDynComputations::getRobotState(Transform& world_T_base,
 
 }
 
+bool KinDynComputations::getRobotState(const iDynTree::Span<double>& world_p_base,
+                                       const iDynTree::MatrixView<double>& world_R_base,
+                                       const iDynTree::Span<double>& s,
+                                       const iDynTree::Span<double>& base_velocity,
+                                       const iDynTree::Span<double>& s_dot,
+                                       const iDynTree::Span<double>& world_gravity)
+{
+    bool ok = s.size() == pimpl->m_robot_model.getNrOfPosCoords();
+    if( !ok )
+    {
+        reportError("KinDynComputations","getRobotState","Wrong size in input joint positions");
+        return false;
+    }
+
+    ok = s_dot.size() == pimpl->m_robot_model.getNrOfDOFs();
+    if( !ok )
+    {
+        reportError("KinDynComputations","getRobotState","Wrong size in input joint velocities");
+        return false;
+    }
+
+    constexpr int expected_position_size = 3;
+    ok = world_p_base.size() == expected_position_size;
+    if( !ok )
+    {
+        reportError("KinDynComputations","getRobotState","Wrong size in input world_p_base");
+        return false;
+    }
+
+    constexpr int expected_rotation_cols = 3;
+    constexpr int expected_rotation_rows = 3;
+    ok = (world_R_base.rows() == expected_rotation_rows) && (world_R_base.rows() == expected_rotation_cols);
+    if( !ok )
+    {
+        reportError("KinDynComputations","getRobotState","Wrong size in input world_R_base");
+        return false;
+    }
+
+    constexpr int expected_twist_size = 6;
+    ok = base_velocity.size() == expected_twist_size;
+    if( !ok )
+    {
+        reportError("KinDynComputations","getRobotState","Wrong size in input base_velocity");
+        return false;
+    }
+
+    getRobotState(s, s_dot, world_gravity);
+
+    toEigen(world_R_base) = toEigen(this->pimpl->m_pos.worldBasePos().getRotation());
+    toEigen(world_p_base) = toEigen(this->pimpl->m_pos.worldBasePos().getPosition());
+
+    // Account for the different possible representations
+    if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
+    {
+        toEigen(base_velocity) = toEigen(pimpl->m_pos.worldBasePos().getRotation() * pimpl->m_vel.baseVel());
+    }
+    else if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
+    {
+        // Data is stored in body fixed
+        toEigen(base_velocity) = toEigen(pimpl->m_vel.baseVel());
+    }
+    else
+    {
+        assert(pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
+
+        // base_X_inertial \ls^inertial v_base
+        toEigen(base_velocity) = toEigen(pimpl->m_pos.worldBasePos() * pimpl->m_vel.baseVel());
+    }
+    return true;
+}
+
 void KinDynComputations::getRobotState(iDynTree::VectorDynSize &s,
                                        iDynTree::VectorDynSize &s_dot,
                                        iDynTree::Vector3& world_gravity)
@@ -827,6 +1022,38 @@ void KinDynComputations::getRobotState(iDynTree::VectorDynSize &s,
     world_gravity = pimpl->m_gravityAcc;
     toEigen(s) = toEigen(this->pimpl->m_pos.jointPos());
     toEigen(s_dot) = toEigen(pimpl->m_vel.jointVel());
+}
+
+void KinDynComputations::getRobotState(const iDynTree::Span<double>& s,
+                                       const iDynTree::Span<double>& s_dot,
+                                       const iDynTree::Span<double>& world_gravity)
+{
+    constexpr int expected_size_gravity = 3;
+    assert(s.size() == pimpl->m_robot_model.getNrOfDOFs());
+    assert(s_dot.size() == pimpl->m_robot_model.getNrOfDOFs());
+    assert(world_gravity.size() == expected_size_gravity);
+
+    toEigen(world_gravity) = toEigen(pimpl->m_gravityAcc);
+    toEigen(s) = toEigen(this->pimpl->m_pos.jointPos());
+    toEigen(s_dot) = toEigen(pimpl->m_vel.jointVel());
+}
+
+
+bool KinDynComputations::setJointPos(const iDynTree::Span<const double>& s)
+{
+    bool ok = (s.size() == pimpl->m_robot_model.getNrOfPosCoords());
+    if( !ok )
+    {
+        reportError("KinDynComputations","setJointPos","Wrong size in input joint positions");
+        return false;
+    }
+
+    toEigen(this->pimpl->m_pos.jointPos()) = toEigen(s);
+
+    // Invalidate cache
+    this->invalidateCache();
+
+    return true;
 }
 
 bool KinDynComputations::setJointPos(const VectorDynSize& s)
@@ -846,13 +1073,38 @@ bool KinDynComputations::setJointPos(const VectorDynSize& s)
     return true;
 }
 
-
-Transform KinDynComputations::getWorldBaseTransform()
+Transform KinDynComputations::getWorldBaseTransform() const
 {
     return this->pimpl->m_pos.worldBasePos();
 }
 
-Twist KinDynComputations::getBaseTwist()
+bool KinDynComputations::getWorldBaseTransform(const iDynTree::Span<double>& world_p_base,
+                                               const iDynTree::MatrixView<double>& world_R_base) const
+{
+    constexpr int expected_position_size = 3;
+    bool ok = world_p_base.size() == expected_position_size;
+    if( !ok )
+    {
+        reportError("KinDynComputations","getWorldBaseTransform","Wrong size in input world_p_base");
+        return false;
+    }
+
+    constexpr int expected_rotation_cols = 3;
+    constexpr int expected_rotation_rows = 3;
+    ok = (world_R_base.rows() == expected_rotation_rows) && (world_R_base.rows() == expected_rotation_cols);
+    if( !ok )
+    {
+        reportError("KinDynComputations","getWorldBaseTransform","Wrong size in input world_R_base");
+        return false;
+    }
+
+    toEigen(world_p_base) = toEigen(this->pimpl->m_pos.worldBasePos().getPosition());
+    toEigen(world_R_base) = toEigen(this->pimpl->m_pos.worldBasePos().getRotation());
+
+    return true;
+}
+
+Twist KinDynComputations::getBaseTwist() const
 {
     if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
     {
@@ -874,21 +1126,61 @@ Twist KinDynComputations::getBaseTwist()
     return Twist::Zero();
 }
 
-bool KinDynComputations::getJointPos(VectorDynSize& q)
+bool KinDynComputations::getBaseTwist(const iDynTree::Span<double> & base_velocity) const
+{
+    constexpr int expected_twist_size = 6;
+    bool ok = base_velocity.size() == expected_twist_size;
+    if( !ok )
+    {
+        reportError("KinDynComputations","getRobotState","Wrong size in input base_velocity");
+        return false;
+    }
+
+    toEigen(base_velocity) = toEigen(getBaseTwist());
+    return true;
+}
+
+bool KinDynComputations::getJointPos(VectorDynSize& q) const
 {
     q.resize(this->pimpl->m_robot_model.getNrOfPosCoords());
     toEigen(q) = toEigen(this->pimpl->m_pos.jointPos());
     return true;
 }
 
-bool KinDynComputations::getJointVel(VectorDynSize& dq)
+bool KinDynComputations::getJointPos(const iDynTree::Span<double> &q) const
+{
+    bool ok = q.size() == pimpl->m_robot_model.getNrOfPosCoords();
+    if( !ok )
+    {
+        reportError("KinDynComputations","getJointPos","Wrong size in input q.");
+        return false;
+    }
+
+    toEigen(q) = toEigen(this->pimpl->m_pos.jointPos());
+    return true;
+}
+
+bool KinDynComputations::getJointVel(VectorDynSize& dq) const
 {
     dq.resize(pimpl->m_robot_model.getNrOfDOFs());
     dq = this->pimpl->m_vel.jointVel();
     return true;
 }
 
-bool KinDynComputations::getModelVel(VectorDynSize& nu)
+bool KinDynComputations::getJointVel(const iDynTree::Span<double> &dq) const
+{
+    bool ok = dq.size() == pimpl->m_robot_model.getNrOfPosCoords();
+    if( !ok )
+    {
+        reportError("KinDynComputations","getJointVel","Wrong size in input dq,");
+        return false;
+    }
+
+    toEigen(dq) = toEigen(this->pimpl->m_vel.jointVel());
+    return true;
+}
+
+bool KinDynComputations::getModelVel(VectorDynSize& nu) const
 {
     nu.resize(pimpl->m_robot_model.getNrOfDOFs()+6);
     toEigen(nu).segment<6>(0) = toEigen(getBaseTwist());
@@ -897,7 +1189,21 @@ bool KinDynComputations::getModelVel(VectorDynSize& nu)
     return true;
 }
 
+bool KinDynComputations::getModelVel(const iDynTree::Span<double>& nu) const
+{
 
+    bool ok = nu.size() == (pimpl->m_robot_model.getNrOfPosCoords() + 6);
+    if( !ok )
+    {
+        reportError("KinDynComputations","getModelVel","Wrong size in input nu");
+        return false;
+    }
+
+    toEigen(nu).segment<6>(0) = toEigen(getBaseTwist());
+    toEigen(nu).segment(6,pimpl->m_robot_model.getNrOfDOFs()) = toEigen(this->pimpl->m_vel.jointVel());
+
+    return true;
+}
 
 Transform KinDynComputations::getRelativeTransform(const std::string& refFrameName,
                                                    const std::string& frameName)
@@ -917,6 +1223,29 @@ Transform KinDynComputations::getRelativeTransform(const std::string& refFrameNa
     else
     {
         return this->getRelativeTransform(refFrameIndex,frameIndex);
+    }
+}
+
+bool KinDynComputations::getRelativeTransform(const std::string & refFrameName,
+                                              const std::string & frameName,
+                                              const iDynTree::Span<double>& refFrame_p_frame,
+                                              const iDynTree::MatrixView<double>& refFrame_R_frame)
+{
+    const int refFrameIndex = getFrameIndex(refFrameName);
+    const int frameIndex = getFrameIndex(frameName);
+    if( frameIndex == iDynTree::FRAME_INVALID_INDEX )
+    {
+        reportError("KinDynComputations","getRelativeTransform","unknown frameName");
+        return false;
+    }
+    else if( refFrameIndex == iDynTree::FRAME_INVALID_INDEX )
+    {
+        reportError("KinDynComputations","getRelativeTransform","unknown refFrameName");
+        return false;
+    }
+    else
+    {
+        return this->getRelativeTransform(refFrameIndex,frameIndex, refFrame_p_frame, refFrame_R_frame);
     }
 }
 
@@ -944,6 +1273,38 @@ Transform KinDynComputations::getRelativeTransform(const iDynTree::FrameIndex re
     Transform refFrame_H_frame = world_H_refFrame.inverse()*world_H_frame;
 
     return refFrame_H_frame;
+}
+
+
+bool KinDynComputations::getRelativeTransform(const iDynTree::FrameIndex refFrameIndex,
+                                              const iDynTree::FrameIndex frameIndex,
+                                              const iDynTree::Span<double>& refFrame_p_frame,
+                                              const iDynTree::MatrixView<double>& refFrame_R_frame)
+{
+    constexpr int expected_position_size = 3;
+    bool ok = refFrame_p_frame.size() == expected_position_size;
+    if( !ok )
+    {
+        reportError("KinDynComputations","getRelativeTransform","Wrong size in input refFrame_p_frame");
+        return false;
+    }
+
+    constexpr int expected_rotation_cols = 3;
+    constexpr int expected_rotation_rows = 3;
+    ok = (refFrame_R_frame.rows() == expected_rotation_rows)
+        && (refFrame_R_frame.rows() == expected_rotation_cols);
+    if( !ok )
+    {
+        reportError("KinDynComputations","getRelativeTransform","Wrong size in input refFrame_R_frame");
+        return false;
+    }
+
+    const Transform refFrame_H_frame = getRelativeTransform(refFrameIndex, frameIndex);
+
+    toEigen(refFrame_p_frame) = toEigen(refFrame_H_frame.getPosition());
+    toEigen(refFrame_R_frame) = toEigen(refFrame_H_frame.getRotation());
+
+    return true;
 }
 
 Transform KinDynComputations::getRelativeTransformExplicit(const iDynTree::FrameIndex refFrameOriginIndex,
@@ -999,8 +1360,42 @@ Transform KinDynComputations::getRelativeTransformExplicit(const iDynTree::Frame
     return Transform(refFrameOrientation_R_frameOrientation,refFrameOrientation_p_refFrameOrigin_frameOrigin);
 }
 
-// TODO: When it is possible to break the API, change the parameter to a const &
-Transform KinDynComputations::getWorldTransform(std::string frameName)
+bool KinDynComputations::getRelativeTransformExplicit(const iDynTree::FrameIndex refFrameOriginIndex,
+                                                      const iDynTree::FrameIndex refFrameOrientationIndex,
+                                                      const iDynTree::FrameIndex    frameOriginIndex,
+                                                      const iDynTree::FrameIndex    frameOrientationIndex,
+                                                      const iDynTree::Span<double>& position,
+                                                      const iDynTree::MatrixView<double>& rotation)
+{
+    constexpr int expected_position_size = 3;
+    bool ok = position.size() == expected_position_size;
+    if( !ok )
+    {
+        reportError("KinDynComputations","getRelativeTransformExplicit","Wrong size in input position");
+        return false;
+    }
+
+    constexpr int expected_rotation_cols = 3;
+    constexpr int expected_rotation_rows = 3;
+    ok = (rotation.rows() == expected_rotation_rows) && (rotation.rows() == expected_rotation_cols);
+    if( !ok )
+    {
+        reportError("KinDynComputations","getRelativeTransformExplicit","Wrong size in input rotation");
+        return false;
+    }
+
+    const Transform transform = getRelativeTransformExplicit(refFrameOriginIndex,
+                                                             refFrameOrientationIndex,
+                                                             frameOriginIndex,
+                                                             frameOrientationIndex);
+
+    toEigen(position) = toEigen(transform.getPosition());
+    toEigen(rotation) = toEigen(transform.getRotation());
+
+    return true;
+}
+
+Transform KinDynComputations::getWorldTransform(const std::string & frameName)
 {
     int frameIndex = getFrameIndex(frameName);
     if( frameIndex  == iDynTree::FRAME_INVALID_INDEX )
@@ -1055,6 +1450,51 @@ Transform KinDynComputations::getWorldTransform(const FrameIndex frameIndex)
     return world_H_frame;
 }
 
+bool KinDynComputations::getWorldTransform(const FrameIndex frameIndex,
+                                           const iDynTree::Span<double>& world_p_frame,
+                                           const iDynTree::MatrixView<double>& world_R_frame)
+{
+    constexpr int expected_position_size = 3;
+    bool ok = world_p_frame.size() == expected_position_size;
+    if( !ok )
+    {
+        reportError("KinDynComputations","getWorldTransform","Wrong size in input world_p_frame");
+        return false;
+    }
+
+    constexpr int expected_rotation_cols = 3;
+    constexpr int expected_rotation_rows = 3;
+    ok = (world_R_frame.rows() == expected_rotation_rows) && (world_R_frame.rows() == expected_rotation_cols);
+    if( !ok )
+    {
+        reportError("KinDynComputations","getWorldTransform","Wrong size in input world_R_frame");
+        return false;
+    }
+
+    Transform transform = getWorldTransform(frameIndex);
+
+    toEigen(world_p_frame) = toEigen(transform.getPosition());
+    toEigen(world_R_frame) = toEigen(transform.getRotation());
+
+    return true;
+}
+
+bool KinDynComputations::getWorldTransform(const std::string & frameName,
+                                           const iDynTree::Span<double>& world_p_frame,
+                                           const iDynTree::MatrixView<double>& world_R_frame)
+{
+    int frameIndex = getFrameIndex(frameName);
+    if( frameIndex  == iDynTree::FRAME_INVALID_INDEX )
+    {
+        return false;
+    }
+    else
+    {
+        return getWorldTransform(frameIndex, world_p_frame, world_R_frame);
+    }
+}
+
+
 std::vector<iDynTree::Matrix4x4> KinDynComputations::getWorldTransformsAsHomogeneous(const std::vector<std::string>& frameNames)
 {
     std::vector<iDynTree::Matrix4x4> worldTransforms;
@@ -1084,6 +1524,11 @@ unsigned int KinDynComputations::getNrOfFrames() const
 Twist KinDynComputations::getFrameVel(const std::string& frameName)
 {
     return getFrameVel(getFrameIndex(frameName));
+}
+
+bool KinDynComputations::getFrameVel(const std::string & frameName, const iDynTree::Span<double>& twist)
+{
+    return this->getFrameVel(getFrameIndex(frameName), twist);
 }
 
 Twist KinDynComputations::getFrameVel(const FrameIndex frameIdx)
@@ -1124,12 +1569,38 @@ Twist KinDynComputations::getFrameVel(const FrameIndex frameIdx)
 
 }
 
+bool KinDynComputations::getFrameVel(const FrameIndex frameIdx, const iDynTree::Span<double> &twist)
+{
+
+    constexpr int expected_twist_size = 6;
+    bool ok = twist.size() == expected_twist_size;
+    if( !ok )
+    {
+        reportError("KinDynComputations","getFrameVel","Wrong size in input twist");
+        return false;
+    }
+
+
+    toEigen(twist) = toEigen(getFrameVel(frameIdx));
+    return true;
+}
+
+
 Vector6 KinDynComputations::getFrameAcc(const std::string & frameName,
-                    const Vector6& baseAcc,
-                    const VectorDynSize& s_ddot)
+                                        const Vector6& baseAcc,
+                                        const VectorDynSize& s_ddot)
 {
     return getFrameAcc(getFrameIndex(frameName), baseAcc, s_ddot);
 }
+
+bool KinDynComputations::getFrameAcc(const std::string & frameName,
+                                     const Span<const double>& baseAcc,
+                                     const Span<const double>& s_ddot,
+                                     const Span<double>& frame_acceleration)
+{
+    return this->getFrameAcc(getFrameIndex(frameName), baseAcc, s_ddot, frame_acceleration);
+}
+
 
 Vector6 KinDynComputations::getFrameAcc(const FrameIndex frameIdx,
                                       const Vector6& baseAcc,
@@ -1208,6 +1679,38 @@ Vector6 KinDynComputations::getFrameAcc(const FrameIndex frameIdx,
 
 }
 
+bool KinDynComputations::getFrameAcc(const FrameIndex frame_name,
+                                     const Span<const double>& base_acc,
+                                     const Span<const double>& s_ddot,
+                                     const Span<double>& frame_acceleration)
+{
+    bool ok = s_ddot.size() == pimpl->m_robot_model.getNrOfPosCoords();
+    if( !ok )
+    {
+        reportError("KinDynComputations","getFrameAcc","Wrong size in input joint acceleration");
+        return false;
+    }
+
+    constexpr int expected_spatial_acceleration_size = 6;
+    ok = base_acc.size() == expected_spatial_acceleration_size;
+    if( !ok )
+    {
+        reportError("KinDynComputations","getFrameAcc","Wrong size in input base_acc");
+        return false;
+    }
+
+    ok = frame_acceleration.size() == expected_spatial_acceleration_size;
+    if( !ok )
+    {
+        reportError("KinDynComputations","getFrameAcc","Wrong size in input frame_acceleration");
+        return false;
+    }
+
+    toEigen(frame_acceleration) = toEigen(getFrameAcc(frame_name, base_acc, s_ddot));
+
+    return true;
+}
+
 bool KinDynComputations::getFrameFreeFloatingJacobian(const std::string& frameName,
                                                       MatrixDynSize& outJacobian)
 {
@@ -1232,6 +1735,17 @@ bool KinDynComputations::getFrameFreeFloatingJacobian(const FrameIndex frameInde
     if (!pimpl->m_robot_model.isValidFrameIndex(frameIndex))
     {
         reportError("KinDynComputations","getFrameJacobian","Frame index out of bounds");
+        return false;
+    }
+
+    bool ok = (outJacobian.rows() == 6)
+        && (outJacobian.cols() == pimpl->m_robot_model.getNrOfDOFs() + 6);
+
+    if( !ok )
+    {
+        reportError("KinDynComputations",
+                    "getFrameFreeFloatingJacobian",
+                    "Wrong size in input outJacobian");
         return false;
     }
 
@@ -1302,8 +1816,19 @@ bool KinDynComputations::getRelativeJacobian(const iDynTree::FrameIndex refFrame
 
 bool KinDynComputations::getRelativeJacobian(const iDynTree::FrameIndex refFrameIndex,
                                              const iDynTree::FrameIndex frameIndex,
-                                             MatrixView<double> outJacobian)
+                                             const MatrixView<double> & outJacobian)
 {
+
+    bool ok = (outJacobian.rows() == 6)
+        && (outJacobian.cols() == pimpl->m_robot_model.getNrOfDOFs());
+
+    if( !ok )
+    {
+        reportError("KinDynComputations",
+                    "getRelativeJacobian",
+                    "Wrong size in input outJacobian");
+        return false;
+    }
 
     iDynTree::FrameIndex expressedOriginFrame = iDynTree::FRAME_INVALID_INDEX;
     iDynTree::FrameIndex expressedOrientationFrame = iDynTree::FRAME_INVALID_INDEX;
@@ -1344,8 +1869,20 @@ bool KinDynComputations::getRelativeJacobianExplicit(const iDynTree::FrameIndex 
                                                      const iDynTree::FrameIndex frameIndex,
                                                      const iDynTree::FrameIndex expressedOriginFrameIndex,
                                                      const iDynTree::FrameIndex expressedOrientationFrameIndex,
-                                                     MatrixView<double> outJacobian)
+                                                     const MatrixView<double> & outJacobian)
 {
+    bool ok = (outJacobian.rows() == 6)
+        && (outJacobian.cols() == pimpl->m_robot_model.getNrOfDOFs());
+
+    if( !ok )
+    {
+        reportError("KinDynComputations",
+                    "getRelativeJacobianExplicit",
+                    "Wrong size in input outJacobian");
+        return false;
+    }
+
+
     if (!pimpl->m_robot_model.isValidFrameIndex(frameIndex))
     {
         reportError("KinDynComputations","getRelativeJacobian","Frame index out of bounds");
@@ -1435,7 +1972,10 @@ Vector6 KinDynComputations::getFrameBiasAcc(const std::string & frameName)
     return getFrameBiasAcc(getFrameIndex(frameName));
 }
 
-
+bool KinDynComputations::getFrameBiasAcc(const std::string & frameName, const iDynTree::Span<double> & bias_acc)
+{
+    return getFrameBiasAcc(getFrameIndex(frameName), bias_acc);
+}
 
 Vector6 KinDynComputations::getFrameBiasAcc(const FrameIndex frameIdx)
 {
@@ -1482,6 +2022,21 @@ Vector6 KinDynComputations::getFrameBiasAcc(const FrameIndex frameIdx)
     }
 }
 
+bool KinDynComputations::getFrameBiasAcc(const FrameIndex frameIndex, const iDynTree::Span<double> & bias_acc)
+{
+    constexpr int expected_spatial_acceleration_size = 6;
+    bool ok = bias_acc.size() == expected_spatial_acceleration_size;
+    if( !ok )
+    {
+        reportError("KinDynComputations","getFrameBiasAcc","Wrong size in input bias_acc");
+        return false;
+    }
+
+    toEigen(bias_acc) = toEigen(getFrameBiasAcc(frameIndex));
+
+    return true;
+}
+
 Position KinDynComputations::getCenterOfMassPosition()
 {
     this->computeRawMassMatrixAndTotalMomentum();
@@ -1491,6 +2046,21 @@ Position KinDynComputations::getCenterOfMassPosition()
 
     // Return {}^world com = {}^world H_base \ls_base com
     return pimpl->m_pos.worldBasePos()*base_com;
+}
+
+bool KinDynComputations::getCenterOfMassPosition(const iDynTree::Span<double> & pos)
+{
+    constexpr int expected_position_size = 3;
+    bool ok = pos.size() == expected_position_size;
+    if( !ok )
+    {
+        reportError("KinDynComputations","getCenterOfMassPosition","Wrong size in input pos");
+        return false;
+    }
+
+    toEigen(pos) = toEigen(getCenterOfMassPosition());
+
+    return true;
 }
 
 Vector3 KinDynComputations::getCenterOfMassVelocity()
@@ -1512,6 +2082,21 @@ Vector3 KinDynComputations::getCenterOfMassVelocity()
     return com_vel;
 }
 
+bool KinDynComputations::getCenterOfMassVelocity(const iDynTree::Span<double> & vel)
+{
+    constexpr int expected_velocity_size = 3;
+    bool ok = vel.size() == expected_velocity_size;
+    if( !ok )
+    {
+        reportError("KinDynComputations","getCenterOfMassVelocity","Wrong size in input vel");
+        return false;
+    }
+
+    toEigen(vel) = toEigen(getCenterOfMassVelocity());
+
+    return true;
+}
+
 bool KinDynComputations::getCenterOfMassJacobian(MatrixDynSize& comJacobian)
 {
     comJacobian.resize(3,pimpl->m_robot_model.getNrOfDOFs()+6);
@@ -1519,8 +2104,19 @@ bool KinDynComputations::getCenterOfMassJacobian(MatrixDynSize& comJacobian)
     return this->getCenterOfMassJacobian(MatrixView<double>(comJacobian));
 }
 
-bool KinDynComputations::getCenterOfMassJacobian(MatrixView<double> comJacobian)
+bool KinDynComputations::getCenterOfMassJacobian(const MatrixView<double> & comJacobian)
 {
+    bool ok = (comJacobian.rows() == 3)
+        && (comJacobian.cols() == pimpl->m_robot_model.getNrOfDOFs() + 6);
+
+    if( !ok )
+    {
+        reportError("KinDynComputations",
+                    "getCenterOfMassJacobian",
+                    "Wrong size in input comJacobian");
+        return false;
+    }
+
     this->computeRawMassMatrixAndTotalMomentum();
 
     const SpatialInertia & lockedInertia = pimpl->getRobotLockedInertia();
@@ -1580,13 +2176,28 @@ Vector3 KinDynComputations::getCenterOfMassBiasAcc()
     return comBiasAcc;
 }
 
+bool KinDynComputations::getCenterOfMassBiasAcc(const iDynTree::Span<double> & acc)
+{
+    constexpr int expected_acceleration_size = 3;
+    bool ok = acc.size() == expected_acceleration_size;
+    if( !ok )
+    {
+        reportError("KinDynComputations","getCenterOfMassBiasAcc","Wrong size in input acc");
+        return false;
+    }
+
+    toEigen(acc) = toEigen(getCenterOfMassBiasAcc());
+
+    return true;
+}
+
 const SpatialInertia& KinDynComputations::KinDynComputationsPrivateAttributes::getRobotLockedInertia()
 {
     return m_linkCRBIs(m_traversal.getBaseLink()->getIndex());
 }
 
 void KinDynComputations::KinDynComputationsPrivateAttributes::processOnRightSideMatrixExpectingBodyFixedModelVelocity(
-    MatrixView<double> mat)
+    const MatrixView<double> & mat)
 {
     assert(mat.cols() == m_robot_model.getNrOfDOFs()+6);
 
@@ -1616,7 +2227,7 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::processOnRightSide
 }
 
 void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideBodyFixedAvgVelocityJacobian(
-      MatrixView<double> jac)
+      const MatrixView<double> & jac)
 {
     assert(jac.rows() == 6);
 
@@ -1641,7 +2252,7 @@ void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideB
     toEigen(jac) = toEigen(newOutputFrame_X_oldOutputFrame_)*toEigen(jac);
 }
 
-void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideBodyFixedBaseMomentumJacobian(MatrixView<double> jac)
+void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideBodyFixedBaseMomentumJacobian(const MatrixView<double> & jac)
 {
     Transform newOutputFrame_X_oldOutputFrame;
     if (m_frameVelRepr == BODY_FIXED_REPRESENTATION)
@@ -1691,6 +2302,21 @@ Twist KinDynComputations::getAverageVelocity()
     assert(false);
 }
 
+bool KinDynComputations::getAverageVelocity(const iDynTree::Span<double> & vel)
+{
+    constexpr int expected_spatial_velocity_size = 6;
+    bool ok = vel.size() == expected_spatial_velocity_size;
+    if( !ok )
+    {
+        reportError("KinDynComputations","getAverageVelocity","Wrong size in input vel");
+        return false;
+    }
+
+    toEigen(vel) = toEigen(getAverageVelocity());
+
+    return true;
+}
+
 bool KinDynComputations::getAverageVelocityJacobian(MatrixDynSize& avgVelocityJacobian)
 {
     avgVelocityJacobian.resize(6,pimpl->m_robot_model.getNrOfDOFs()+6);
@@ -1698,8 +2324,19 @@ bool KinDynComputations::getAverageVelocityJacobian(MatrixDynSize& avgVelocityJa
     return this->getAverageVelocityJacobian(MatrixView<double>(avgVelocityJacobian));
 }
 
-bool KinDynComputations::getAverageVelocityJacobian(MatrixView<double> avgVelocityJacobian)
+bool KinDynComputations::getAverageVelocityJacobian(const MatrixView<double> & avgVelocityJacobian)
 {
+    bool ok = (avgVelocityJacobian.rows() == 6)
+        && (avgVelocityJacobian.cols() == pimpl->m_robot_model.getNrOfDOFs() + 6);
+
+    if( !ok )
+    {
+        reportError("KinDynComputations",
+                    "getAverageVelocityJacobian",
+                    "Wrong size in input avgVelocityJacobian");
+        return false;
+    }
+
     this->computeRawMassMatrixAndTotalMomentum();
 
     const SpatialInertia & lockedInertia = pimpl->getRobotLockedInertia();
@@ -1716,7 +2353,7 @@ bool KinDynComputations::getAverageVelocityJacobian(MatrixView<double> avgVeloci
 }
 
 void KinDynComputations::KinDynComputationsPrivateAttributes::processOnLeftSideBodyFixedCentroidalAvgVelocityJacobian(
-    MatrixView<double> jac, const FrameVelocityRepresentation & leftSideRepresentation)
+    const MatrixView<double> & jac, const FrameVelocityRepresentation & leftSideRepresentation)
 {
     assert(jac.cols() == m_robot_model.getNrOfDOFs()+6);
 
@@ -1778,6 +2415,21 @@ Twist KinDynComputations::getCentroidalAverageVelocity()
     return newOutputFrame_X_oldOutputFrame*base_averageVelocity;
 }
 
+bool KinDynComputations::getCentroidalAverageVelocity(const iDynTree::Span<double> & vel)
+{
+    constexpr int expected_spatial_velocity_size = 6;
+    bool ok = vel.size() == expected_spatial_velocity_size;
+    if( !ok )
+    {
+        reportError("KinDynComputations","getCentroidalAverageVelocity","Wrong size in input vel");
+        return false;
+    }
+
+    toEigen(vel) = toEigen(getCentroidalAverageVelocity());
+
+    return true;
+}
+
 bool KinDynComputations::getCentroidalAverageVelocityJacobian(MatrixDynSize& centroidalAvgVelocityJacobian)
 {
     centroidalAvgVelocityJacobian.resize(6,pimpl->m_robot_model.getNrOfDOFs()+6);
@@ -1785,8 +2437,19 @@ bool KinDynComputations::getCentroidalAverageVelocityJacobian(MatrixDynSize& cen
     return this->getCentroidalAverageVelocityJacobian(MatrixView<double>(centroidalAvgVelocityJacobian));
 }
 
-bool KinDynComputations::getCentroidalAverageVelocityJacobian(MatrixView<double> centroidalAvgVelocityJacobian)
+bool KinDynComputations::getCentroidalAverageVelocityJacobian(const MatrixView<double> & centroidalAvgVelocityJacobian)
 {
+    bool ok = (centroidalAvgVelocityJacobian.rows() == 6)
+        && (centroidalAvgVelocityJacobian.cols() == pimpl->m_robot_model.getNrOfDOFs() + 6);
+
+    if( !ok )
+    {
+        reportError("KinDynComputations",
+                    "getCentroidalAverageVelocityJacobian",
+                    "Wrong size in input centroidalAvgVelocityJacobian");
+        return false;
+    }
+
     this->computeRawMassMatrixAndTotalMomentum();
 
     const SpatialInertia & lockedInertia = pimpl->getRobotLockedInertia();
@@ -1824,6 +2487,21 @@ iDynTree::SpatialMomentum KinDynComputations::getLinearAngularMomentum()
     assert(false);
 }
 
+bool KinDynComputations::getLinearAngularMomentum(const iDynTree::Span<double>& spatial_momentum)
+{
+    constexpr int expected_spatial_momentum_size = 6;
+    bool ok = spatial_momentum.size() == expected_spatial_momentum_size;
+    if( !ok )
+    {
+        reportError("KinDynComputations","getLinearAngularMomentum","Wrong size in input spatial_momentum");
+        return false;
+    }
+
+    toEigen(spatial_momentum) = toEigen(getLinearAngularMomentum());
+
+    return true;
+}
+
 bool KinDynComputations::getLinearAngularMomentumJacobian(MatrixDynSize& linAngMomentumJacobian)
 {
     linAngMomentumJacobian.resize(6,pimpl->m_robot_model.getNrOfDOFs()+6);
@@ -1831,8 +2509,19 @@ bool KinDynComputations::getLinearAngularMomentumJacobian(MatrixDynSize& linAngM
     return this->getLinearAngularMomentumJacobian(MatrixView<double>(linAngMomentumJacobian));
 }
 
-bool KinDynComputations::getLinearAngularMomentumJacobian(MatrixView<double> linAngMomentumJacobian)
+bool KinDynComputations::getLinearAngularMomentumJacobian(const MatrixView<double> & linAngMomentumJacobian)
 {
+    bool ok = (linAngMomentumJacobian.rows() == 6)
+        && (linAngMomentumJacobian.cols() == pimpl->m_robot_model.getNrOfDOFs() + 6);
+
+    if( !ok )
+    {
+        reportError("KinDynComputations",
+                    "getLinearAngularMomentumJacobian",
+                    "Wrong size in input linAngMomentumJacobian");
+        return false;
+    }
+
     this->computeRawMassMatrixAndTotalMomentum();
 
     toEigen(linAngMomentumJacobian) = toEigen(pimpl->m_rawMassMatrix).block(0,0,6,6+pimpl->m_robot_model.getNrOfDOFs());
@@ -1873,6 +2562,21 @@ SpatialMomentum KinDynComputations::getCentroidalTotalMomentum()
     return newOutputFrame_X_oldOutputFrame*base_momentum;
 }
 
+bool KinDynComputations::getCentroidalTotalMomentum(const iDynTree::Span<double>& spatial_momentum)
+{
+    constexpr int expected_spatial_momentum_size = 6;
+    bool ok = spatial_momentum.size() == expected_spatial_momentum_size;
+    if( !ok )
+    {
+        reportError("KinDynComputations","getCentroidalTotalMomentum","Wrong size in input spatial_momentum");
+        return false;
+    }
+
+    toEigen(spatial_momentum) = toEigen(getCentroidalTotalMomentum());
+
+    return true;
+}
+
 bool KinDynComputations::getCentroidalTotalMomentumJacobian(MatrixDynSize& centroidalMomentumJacobian)
 {
     centroidalMomentumJacobian.resize(6,pimpl->m_robot_model.getNrOfDOFs()+6);
@@ -1880,8 +2584,19 @@ bool KinDynComputations::getCentroidalTotalMomentumJacobian(MatrixDynSize& centr
     return this->getCentroidalTotalMomentumJacobian(MatrixView<double>(centroidalMomentumJacobian));
 }
 
-bool KinDynComputations::getCentroidalTotalMomentumJacobian(MatrixView<double> centroidalMomentumJacobian)
+bool KinDynComputations::getCentroidalTotalMomentumJacobian(const MatrixView<double> & centroidalMomentumJacobian)
 {
+    bool ok = (centroidalMomentumJacobian.rows() == 6)
+        && (centroidalMomentumJacobian.cols() == pimpl->m_robot_model.getNrOfDOFs() + 6);
+
+    if( !ok )
+    {
+        reportError("KinDynComputations",
+                    "getCentroidalTotalMomentumJacobian",
+                    "Wrong size in input centroidalMomentumJacobian");
+        return false;
+    }
+
     if (!getLinearAngularMomentumJacobian(centroidalMomentumJacobian))
     {
         return false;
@@ -1959,10 +2674,16 @@ bool KinDynComputations::getFreeFloatingMassMatrix(MatrixDynSize& freeFloatingMa
     return this->getFreeFloatingMassMatrix(MatrixView<double>(freeFloatingMassMatrix));
 }
 
-bool KinDynComputations::getFreeFloatingMassMatrix(MatrixView<double> freeFloatingMassMatrix)
+bool KinDynComputations::getFreeFloatingMassMatrix(const MatrixView<double> & freeFloatingMassMatrix)
 {
-    if(freeFloatingMassMatrix.cols() != pimpl->m_robot_model.getNrOfDOFs()+6 || freeFloatingMassMatrix.rows() != pimpl->m_robot_model.getNrOfDOFs()+6)
+    bool ok = (freeFloatingMassMatrix.cols() == pimpl->m_robot_model.getNrOfDOFs()+6)
+        && (freeFloatingMassMatrix.rows() == pimpl->m_robot_model.getNrOfDOFs()+6);
+
+    if( !ok )
     {
+        reportError("KinDynComputations",
+                    "getFreeFloatingMassMatrix",
+                    "Wrong size in input freeFloatingMassMatrix");
         return false;
     }
 
@@ -2097,6 +2818,34 @@ bool KinDynComputations::inverseDynamics(const Vector6& baseAcc,
     return true;
 }
 
+bool KinDynComputations::inverseDynamics(const iDynTree::Span<const double>& baseAcc,
+                                         const iDynTree::Span<const double>& s_ddot,
+                                         const LinkNetExternalWrenches & linkExtForces,
+                                               FreeFloatingGeneralizedTorques & baseForceAndJointTorques)
+{
+    constexpr int expected_spatial_acceleration_size = 6;
+    bool ok = baseAcc.size() == expected_spatial_acceleration_size;
+    if( !ok )
+    {
+        reportError("KinDynComputations","inverseDynamics","Wrong size in input baseAcc");
+        return false;
+    }
+
+    ok = s_ddot.size() == pimpl->m_robot_model.getNrOfDOFs();
+    if( !ok )
+    {
+        reportError("KinDynComputations","inverseDynamics","Wrong size in input s_ddot");
+        return false;
+    }
+
+
+
+    return this->inverseDynamics(Vector6(baseAcc),
+                                 VectorDynSize(s_ddot),
+                                 linkExtForces,
+                                 baseForceAndJointTorques);
+}
+
 bool KinDynComputations::generalizedBiasForces(FreeFloatingGeneralizedTorques & generalizedBiasForces)
 {
     // Needed for using pimpl->m_linkVel
@@ -2155,6 +2904,30 @@ bool KinDynComputations::generalizedBiasForces(FreeFloatingGeneralizedTorques & 
     return true;
 }
 
+bool KinDynComputations::generalizedBiasForces(const iDynTree::Span<double> & generalizedBiasForces)
+{
+    bool ok = generalizedBiasForces.size() == pimpl->m_robot_model.getNrOfDOFs() + 6;
+
+    if( !ok )
+    {
+        reportError("KinDynComputations","generalizedBiasForces","Wrong size in input generalizedBiasForces");
+        return false;
+    }
+
+    ok = this->generalizedBiasForces(pimpl->m_generalizedForcesContainer);
+
+    if( !ok )
+    {
+        reportError("KinDynComputations","generalizedBiasForces","Unable to compute the bias forces");
+        return false;
+    }
+
+    toEigen(generalizedBiasForces).head<6>() = toEigen(pimpl->m_generalizedForcesContainer.baseWrench());
+    toEigen(generalizedBiasForces).tail(pimpl->m_robot_model.getNrOfDOFs()) = toEigen(pimpl->m_generalizedForcesContainer.jointTorques());
+
+    return true;
+}
+
 bool KinDynComputations::generalizedGravityForces(FreeFloatingGeneralizedTorques & generalizedGravityForces)
 {
     // Clear input buffers that need to be cleared
@@ -2189,6 +2962,30 @@ bool KinDynComputations::generalizedGravityForces(FreeFloatingGeneralizedTorques
     // Convert output base force
     generalizedGravityForces.baseWrench() = pimpl->fromBodyFixedToUsedRepresentation(generalizedGravityForces.baseWrench(),
                                                                               pimpl->m_linkPos(pimpl->m_traversal.getBaseLink()->getIndex()));
+
+    return true;
+}
+
+bool KinDynComputations::generalizedGravityForces(const iDynTree::Span<double> & generalizedGravityForces)
+{
+    bool ok = generalizedGravityForces.size() == pimpl->m_robot_model.getNrOfDOFs() + 6;
+
+    if( !ok )
+    {
+        reportError("KinDynComputations","generalizedGravityForces","Wrong size in input generalizedBiasForces");
+        return false;
+    }
+
+    ok = this->generalizedGravityForces(pimpl->m_generalizedForcesContainer);
+
+    if( !ok )
+    {
+        reportError("KinDynComputations","generalizedGravityForces","Unable to compute the bias forces");
+        return false;
+    }
+
+    toEigen(generalizedGravityForces).head<6>() = toEigen(pimpl->m_generalizedForcesContainer.baseWrench());
+    toEigen(generalizedGravityForces).tail(pimpl->m_robot_model.getNrOfDOFs()) = toEigen(pimpl->m_generalizedForcesContainer.jointTorques());
 
     return true;
 }
