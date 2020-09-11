@@ -14,3 +14,4 @@ endmacro()
 
 # todo
 add_unit_test_hl(KinDynComputations)
+add_unit_test_hl(KinDynComputationsMatrixViewAndSpan)
