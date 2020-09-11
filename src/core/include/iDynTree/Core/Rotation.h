@@ -80,6 +80,11 @@ namespace iDynTree
         Rotation(const Rotation & other);
 
         /**
+         * Create a Rotation from a MatrixView.
+         */
+        Rotation(const MatrixView<const double>& other);
+
+        /**
          * Geometric operations.
          * For the inverse2() operation, both the forward and the inverse geometric relations have to
          * be expressed in the reference orientation frame!!
