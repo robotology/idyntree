@@ -74,6 +74,11 @@ VectorDynSize::~VectorDynSize()
         this->m_data = 0;
     }
 }
+#if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
+VectorDynSize::VectorDynSize(const Span<const double> &vec)
+    : VectorDynSize(vec.data(), vec.size())
+{}
+#endif
 
 VectorDynSize& VectorDynSize::operator=(const VectorDynSize& vec)
 {
