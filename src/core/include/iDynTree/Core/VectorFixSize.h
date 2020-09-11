@@ -54,6 +54,15 @@ namespace iDynTree
          */
         VectorFixSize(const double * in_data, const unsigned int in_size);
 
+#if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
+        /**
+         * Constructor from an iDynTree::Span
+         *
+         * Print an error an build a vector full of zeros if in_size is not size().
+         */
+        VectorFixSize(const Span<const double>& vec);
+#endif
+
         /**
          * @name Vector interface methods.
          * Methods exposing a vector-like interface to VectorFixSize.
@@ -208,6 +217,15 @@ namespace iDynTree
             memcpy(this->m_data,in_data,sizeof(double)*VecSize);
         }
     }
+
+#if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
+
+    template<unsigned int VecSize>
+    VectorFixSize<VecSize>::VectorFixSize(const Span<const double>& vec)
+        : VectorFixSize<VecSize>::VectorFixSize(vec.data(), vec.size())
+        {}
+
+#endif
 
     template<unsigned int VecSize>
     void VectorFixSize<VecSize>::zero()
