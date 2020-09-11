@@ -48,6 +48,10 @@ namespace iDynTree
         this->m_data[8] = zz;
     }
 
+    RotationRaw::RotationRaw(const MatrixView<const double>& other):
+                             MatrixFixSize<3, 3>(other)
+    {}
+
     RotationRaw::RotationRaw(const double* in_data, const unsigned int in_rows, const unsigned int in_cols):
                              MatrixFixSize<3, 3>(in_data,in_rows,in_cols)
     {

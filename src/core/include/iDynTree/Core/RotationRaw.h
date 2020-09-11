@@ -63,6 +63,8 @@ namespace iDynTree
                     const unsigned int in_rows,
                     const unsigned int in_cols);
 
+        RotationRaw(const MatrixView<const double>& other);
+
         /**
          * Copy constructor: create a RotationRaw from another RotationRaw.
          */
