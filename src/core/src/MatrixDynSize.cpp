@@ -42,6 +42,29 @@ MatrixDynSize::MatrixDynSize(unsigned int _rows,
     zero();
 }
 
+MatrixDynSize::MatrixDynSize(const MatrixView<const double>& other) : m_rows(other.rows()),
+                                                                      m_cols(other.cols())
+{
+    if( this->m_rows*this->m_cols == 0 )
+    {
+        this->m_capacity = 0;
+        this->m_data = 0;
+    }
+    else
+    {
+        this->m_capacity = this->m_rows*this->m_cols;
+        this->m_data = new double[this->m_capacity];
+
+        // copy the matrix
+        for(unsigned int i = 0; i < m_rows; i++)
+        {
+            for(unsigned int j = 0; j < m_cols; j++)
+            {
+                this->m_data[this->rawIndexRowMajor(i,j)] = other(i, j);
+            }
+        }
+    }
+}
 
 MatrixDynSize::MatrixDynSize(const double* in_data,
                              const unsigned int in_rows,
