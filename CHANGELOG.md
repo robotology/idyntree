@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   control if iDynTree is built as a shared or a static library.
 - The Python method `*.fromPyList` is replaced by `*.FromPython` (https://github.com/robotology/idyntree/pull/726).
 - The minimum required CMake version to configure and compile iDynTree is now 3.16 (https://github.com/robotology/idyntree/pull/732).
-- Import the Python SWIG bindings changed from `import iDynTree` to either `from idyntree import iDynTree` or `import idyntree.iDynTree` (https://github.com/robotology/idyntree/pull/733).
+- The Python package name of the SWIG bindings changed from `iDynTree` to `idyntree.bindings` (https://github.com/robotology/idyntree/pull/733, https://github.com/robotology/idyntree/pull/735). To continue referring to iDynTree classes as `iDynTree.<ClassName>`, you can change your `import iDynTree` statements to `import idyntree.bindings as iDynTree`. Otherwise, you can use `import idyntree.bindings` to refer them as `idyntree.bindings.<ClassName>`.
 
 ### Removed 
 - Remove the CMake option IDYNTREE_USES_KDL and all the classes available when enabling it. They were deprecated in iDynTree 1.0 .
