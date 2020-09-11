@@ -69,6 +69,10 @@ namespace iDynTree
 
     }
 
+    Position::Position(const Span<const double> & other): PositionRaw(other)
+    {
+    }
+
     const Position& Position::changePoint(const Position& newPoint)
     {
         this->PositionRaw::changePoint(newPoint);

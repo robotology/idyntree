@@ -63,6 +63,11 @@ namespace iDynTree
         Position(const PositionRaw & other);
 
         /**
+         * Create a Position from a span
+         */
+        Position(const Span<const double> & other);
+
+        /**
          * Geometric operations
          */
         const Position & changePoint(const Position & newPoint);
