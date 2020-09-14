@@ -230,6 +230,8 @@ bool ObserverThread::init(yarp::os::ResourceFinder& config)
 
         filtIMUGravity = new iCub::ctrl::FirstOrderLowPassFilter(6.0, this->getRate()/1000.0, initIMUFilter);
     }
+
+    return true;
 }
 
 ObserverThread::~ObserverThread()
