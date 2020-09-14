@@ -220,8 +220,10 @@ namespace std {
 %include "iDynTree/Core/Transform.h"
 %include "iDynTree/Core/TransformDerivative.h"
 %include "iDynTree/Core/Span.h"
+%include "iDynTree/Core/MatrixView.h"
 
 %template(DynamicSpan) iDynTree::Span<double, iDynTree::dynamic_extent>;
+%template(DynamicMatrixView) iDynTree::MatrixView<double>;
 
 // Model related data structures
 %include "iDynTree/Model/Indices.h"
