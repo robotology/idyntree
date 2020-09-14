@@ -42,7 +42,7 @@ MatrixDynSize::MatrixDynSize(unsigned int _rows,
     zero();
 }
 
-MatrixDynSize::MatrixDynSize(const MatrixView<const double>& other) : m_rows(other.rows()),
+MatrixDynSize::MatrixDynSize(MatrixView<const double> other) : m_rows(other.rows()),
                                                                       m_cols(other.cols())
 {
     if( this->m_rows*this->m_cols == 0 )
@@ -130,7 +130,7 @@ MatrixDynSize& MatrixDynSize::operator=(const MatrixDynSize& other)
     return *this;
 }
 
-MatrixDynSize& MatrixDynSize::operator=(const MatrixView<const double>& other)
+MatrixDynSize& MatrixDynSize::operator=(MatrixView<const double> other)
 {
     m_rows = other.rows();
     m_cols = other.cols();

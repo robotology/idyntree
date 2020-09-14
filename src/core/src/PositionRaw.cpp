@@ -52,7 +52,7 @@ namespace iDynTree
 
     }
 
-    PositionRaw::PositionRaw(const Span<const double>& other):
+    PositionRaw::PositionRaw(Span<const double> other):
                  VectorFixSize< 3 >(other)
     {
 

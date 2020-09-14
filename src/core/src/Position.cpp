@@ -69,7 +69,7 @@ namespace iDynTree
 
     }
 
-    Position::Position(const Span<const double> & other): PositionRaw(other)
+    Position::Position(Span<const double> other): PositionRaw(other)
     {
     }
 

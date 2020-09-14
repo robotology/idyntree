@@ -82,7 +82,7 @@ namespace iDynTree
          *
          * \warning this class stores data using the row major order
          */
-        MatrixFixSize(const iDynTree::MatrixView<const double>& other);
+        MatrixFixSize(iDynTree::MatrixView<const double> other);
 
         /**
          * @name Matrix interface methods.
@@ -98,7 +98,7 @@ namespace iDynTree
         unsigned int cols() const;
         ///@}
 
-        MatrixFixSize & operator=(const iDynTree::MatrixView<const double>& mat);
+        MatrixFixSize & operator=(iDynTree::MatrixView<const double> mat);
 
         /**
          * Raw data accessor
@@ -196,7 +196,7 @@ namespace iDynTree
     }
 
     template<unsigned int nRows, unsigned int nCols>
-    MatrixFixSize<nRows,nCols>::MatrixFixSize(const iDynTree::MatrixView<const double>& other)
+    MatrixFixSize<nRows,nCols>::MatrixFixSize(iDynTree::MatrixView<const double> other)
     {
         if( other.rows() != nRows ||
             other.cols() != nCols )
@@ -253,7 +253,7 @@ namespace iDynTree
     }
 
     template<unsigned int nRows, unsigned int nCols>
-    MatrixFixSize<nRows,nCols> & MatrixFixSize<nRows,nCols>::operator=(const iDynTree::MatrixView<const double>& mat) {
+    MatrixFixSize<nRows,nCols> & MatrixFixSize<nRows,nCols>::operator=(iDynTree::MatrixView<const double> mat) {
         assert(nCols == mat.cols());
         assert(nRows == mat.rows());
 

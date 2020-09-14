@@ -72,7 +72,7 @@ namespace iDynTree
 
     }
 
-    Rotation::Rotation(const MatrixView<const double>& other): RotationRaw(other)
+    Rotation::Rotation(MatrixView<const double> other): RotationRaw(other)
     {
 
     }

@@ -106,7 +106,7 @@ namespace iDynTree
          * \warning performs dynamic memory allocation operations
          *
          */
-        MatrixDynSize(const iDynTree::MatrixView<const double>& other);
+        MatrixDynSize(iDynTree::MatrixView<const double> other);
 
         /**
          * Assignment operator
@@ -124,7 +124,7 @@ namespace iDynTree
          *
          * @return *this
          */
-        MatrixDynSize& operator=(const iDynTree::MatrixView<const double>& other);
+        MatrixDynSize& operator=(iDynTree::MatrixView<const double> other);
 
         /**
          * Denstructor

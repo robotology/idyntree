@@ -75,7 +75,7 @@ VectorDynSize::~VectorDynSize()
     }
 }
 #if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
-VectorDynSize::VectorDynSize(const Span<const double> &vec)
+VectorDynSize::VectorDynSize(Span<const double> vec)
     : VectorDynSize(vec.data(), vec.size())
 {}
 #endif
@@ -101,7 +101,7 @@ VectorDynSize& VectorDynSize::operator=(const VectorDynSize& vec)
 }
 
 #if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
-VectorDynSize &VectorDynSize::operator=(const Span<const double> &vec)
+VectorDynSize &VectorDynSize::operator=(Span<const double> vec)
 {
     // if the size don't match, reallocate the data
     if( this->m_size != vec.size() )

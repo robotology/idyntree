@@ -55,7 +55,7 @@ namespace iDynTree
          * Construct from a span
          * @warning if the Span size is different from 3 an assert is thrown at run-time.
          */
-        PositionRaw(const iDynTree::Span<const double>& other);
+        PositionRaw(iDynTree::Span<const double> other);
 
         /**
          * Geometric operations

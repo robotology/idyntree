@@ -60,7 +60,7 @@ namespace iDynTree
          *
          * Print an error an build a vector full of zeros if in_size is not size().
          */
-        VectorFixSize(const iDynTree::Span<const double>& vec);
+        VectorFixSize(iDynTree::Span<const double> vec);
 #endif
 
         /**
@@ -133,7 +133,7 @@ namespace iDynTree
          * Checks that dimensions are matching through an assert.
          *
          */
-        VectorFixSize & operator=(const iDynTree::Span<const double>& vec);
+        VectorFixSize & operator=(iDynTree::Span<const double> vec);
 #endif
 
         /**
@@ -221,7 +221,7 @@ namespace iDynTree
 #if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
 
     template<unsigned int VecSize>
-    VectorFixSize<VecSize>::VectorFixSize(const iDynTree::Span<const double>& vec)
+    VectorFixSize<VecSize>::VectorFixSize(iDynTree::Span<const double> vec)
         : VectorFixSize<VecSize>::VectorFixSize(vec.data(), vec.size())
         {}
 
@@ -293,7 +293,7 @@ namespace iDynTree
 
 #if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
     template<unsigned int VecSize>
-    VectorFixSize<VecSize> & VectorFixSize<VecSize>::operator=(const iDynTree::Span<const double>& vec) {
+    VectorFixSize<VecSize> & VectorFixSize<VecSize>::operator=(iDynTree::Span<const double> vec) {
         assert(VecSize == vec.size());
         std::memcpy(this->m_data, vec.data(), VecSize*sizeof(double));
         return *this;
