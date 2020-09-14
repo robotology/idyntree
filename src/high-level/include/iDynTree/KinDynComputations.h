@@ -1,4 +1,4 @@
-/*
+ /*
  * Copyright (C) 2016 Fondazione Istituto Italiano di Tecnologia
  *
  * Licensed under either the GNU Lesser General Public License v3.0 :
@@ -274,7 +274,7 @@ public:
      */
     bool getRelativeJacobianSparsityPattern(const iDynTree::FrameIndex refFrameIndex,
                                             const iDynTree::FrameIndex frameIndex,
-                                            const MatrixView<double> & outJacobianPattern) const;
+                                            iDynTree::MatrixView<double> outJacobianPattern) const;
 
 
     /**
@@ -306,7 +306,7 @@ public:
      * @return true on success. False otherwise
      */
     bool getFrameFreeFloatingJacobianSparsityPattern(const FrameIndex frameIndex,
-                                                     const MatrixView<double> & outJacobianPattern) const;
+                                                     iDynTree::MatrixView<double> outJacobianPattern) const;
 
 
     //@}
@@ -335,7 +335,7 @@ public:
      * @param[in] s A vector of dimension this->model().getNrOfPosCoords() .
      * @return true if all went well, false otherwise.
      */
-    bool setJointPos(const iDynTree::Span<const double> & s);
+    bool setJointPos(iDynTree::Span<const double> s);
 
     /**
      * Set the state for the robot (floating base)
@@ -368,12 +368,12 @@ public:
      * @warning the Span and the MatrixView objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
      */
-    bool setRobotState(const iDynTree::Span<const double>& world_p_base,
-                       const iDynTree::MatrixView<const double>& world_R_base,
-                       const iDynTree::Span<const double>& s,
-                       const iDynTree::Span<const double>& base_velocity,
-                       const iDynTree::Span<const double>& s_dot,
-                       const iDynTree::Span<const double>& world_gravity);
+    bool setRobotState(iDynTree::Span<const double> world_p_base,
+                       iDynTree::MatrixView<const double> world_R_base,
+                       iDynTree::Span<const double> s,
+                       iDynTree::Span<const double> base_velocity,
+                       iDynTree::Span<const double> s_dot,
+                       iDynTree::Span<const double> world_gravity);
 
     /**
      * Set the state for the robot (fixed base)
@@ -394,9 +394,9 @@ public:
      * @warning the Span objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
      */
-    bool setRobotState(const iDynTree::Span<const double>& s,
-                       const iDynTree::Span<const double>& s_dot,
-                       const iDynTree::Span<const double>& world_gravity);
+    bool setRobotState(iDynTree::Span<const double> s,
+                       iDynTree::Span<const double> s_dot,
+                       iDynTree::Span<const double> world_gravity);
 
     void getRobotState(iDynTree::Transform &world_T_base,
                        iDynTree::VectorDynSize& s,
@@ -408,27 +408,27 @@ public:
                        iDynTree::VectorDynSize &s_dot,
                        iDynTree::Vector3& world_gravity);
 
-    bool getRobotState(const iDynTree::Span<double>& world_p_base,
-                       const iDynTree::MatrixView<double>& world_R_base,
-                       const iDynTree::Span<double>& s,
-                       const iDynTree::Span<double>& base_velocity,
-                       const iDynTree::Span<double>& s_dot,
-                       const iDynTree::Span<double>& world_gravity);
+    bool getRobotState(iDynTree::Span<double> world_p_base,
+                       iDynTree::MatrixView<double> world_R_base,
+                       iDynTree::Span<double> s,
+                       iDynTree::Span<double> base_velocity,
+                       iDynTree::Span<double> s_dot,
+                       iDynTree::Span<double> world_gravity);
 
-    void getRobotState(const iDynTree::Span<double>& s,
-                       const iDynTree::Span<double>& s_dot,
-                       const iDynTree::Span<double>& world_gravity);
+    void getRobotState(iDynTree::Span<double> s,
+                       iDynTree::Span<double> s_dot,
+                       iDynTree::Span<double> world_gravity);
 
 
     /**
      * Access the robot state.
      */
     iDynTree::Transform getWorldBaseTransform() const;
-    bool getWorldBaseTransform(const iDynTree::Span<double>& world_p_base,
-                               const iDynTree::MatrixView<double>& world_R_base) const;
+    bool getWorldBaseTransform(iDynTree::Span<double> world_p_base,
+                               iDynTree::MatrixView<double> world_R_base) const;
 
     iDynTree::Twist getBaseTwist() const;
-    bool getBaseTwist(const iDynTree::Span<double> & base_velocity) const;
+    bool getBaseTwist(iDynTree::Span<double> base_velocity) const;
 
     bool getJointPos(iDynTree::VectorDynSize &q) const;
 
@@ -437,7 +437,7 @@ public:
      * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
      */
-    bool getJointPos(const iDynTree::Span<double> &q) const;
+    bool getJointPos(iDynTree::Span<double>q) const;
 
     bool getJointVel(iDynTree::VectorDynSize &dq) const;
 
@@ -446,7 +446,7 @@ public:
      * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
      */
-    bool getJointVel(const iDynTree::Span<double> &dq) const;
+    bool getJointVel(iDynTree::Span<double>dq) const;
 
     /**
      * Get the n+6 velocity of the model.
@@ -460,7 +460,7 @@ public:
      * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
      */
-    bool getModelVel(const iDynTree::Span<double> &nu) const;
+    bool getModelVel(iDynTree::Span<double>nu) const;
 
 
     //@}
@@ -501,8 +501,8 @@ public:
      * @return true if all went well, false otherwise.
      */
     bool getWorldTransform(const iDynTree::FrameIndex frameIndex,
-                           const iDynTree::Span<double>& world_p_frame,
-                           const iDynTree::MatrixView<double>& world_R_frame);
+                           iDynTree::Span<double> world_p_frame,
+                           iDynTree::MatrixView<double> world_R_frame);
 
     /**
      * Version of getWorldTransform where the frame is specified by name.
@@ -520,8 +520,8 @@ public:
      *
      */
     bool getWorldTransform(const std::string & frameName,
-                           const iDynTree::Span<double>& world_p_frame,
-                           const iDynTree::MatrixView<double>& world_R_frame);
+                           iDynTree::Span<double> world_p_frame,
+                           iDynTree::MatrixView<double> world_R_frame);
 
     /**
      * Return the transforms as a homogeneous matrices where the frame is
@@ -551,8 +551,8 @@ public:
      */
     bool getRelativeTransform(const iDynTree::FrameIndex refFrameIndex,
                               const iDynTree::FrameIndex frameIndex,
-                              const iDynTree::Span<double>& refFrame_p_frame,
-                              const iDynTree::MatrixView<double>& refFrame_R_frame);
+                              iDynTree::Span<double> refFrame_p_frame,
+                              iDynTree::MatrixView<double> refFrame_R_frame);
 
      /**
      * Return the transform between the frame with the origin of the frameOriginIndex
@@ -590,8 +590,8 @@ public:
                                       const iDynTree::FrameIndex refFrameOrientationIndex,
                                       const iDynTree::FrameIndex    frameOriginIndex,
                                       const iDynTree::FrameIndex    frameOrientationIndex,
-                                      const iDynTree::Span<double>& refFrameOrigin_refFrameOrientation_p_frameOrigin_frameORientation,
-                                      const iDynTree::MatrixView<double>& refFrameOrigin_refFrameOrientation_R_frameOrigin_frameORientation);
+                                      iDynTree::Span<double> refFrameOrigin_refFrameOrientation_p_frameOrigin_frameORientation,
+                                      iDynTree::MatrixView<double> refFrameOrigin_refFrameOrientation_R_frameOrigin_frameORientation);
 
     /**
      * Version of getRelativeTransform where the frames are specified by name.
@@ -610,8 +610,8 @@ public:
      */
     bool getRelativeTransform(const std::string & refFrameName,
                               const std::string & frameName,
-                              const iDynTree::Span<double>& refFrame_p_frame,
-                              const iDynTree::MatrixView<double>& refFrame_R_frame);
+                              iDynTree::Span<double> refFrame_p_frame,
+                              iDynTree::MatrixView<double> refFrame_R_frame);
     //@}
 
     /**
@@ -631,7 +631,7 @@ public:
      * @warning the Span objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
      */
-    bool getFrameVel(const std::string & frameName, const iDynTree::Span<double> & twist);
+    bool getFrameVel(const std::string & frameName, iDynTree::Span<double> twist);
 
     /**
      * Return the frame velocity, with the convention specified by getFrameVelocityRepresentation .
@@ -645,7 +645,7 @@ public:
      * @warning the Span objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
      */
-    bool getFrameVel(const FrameIndex frameIdx, const iDynTree::Span<double> & twist);
+    bool getFrameVel(const FrameIndex frameIdx, iDynTree::Span<double> twist);
 
     /**
      * Return the frame acceleration, with the convention specified by getFrameVelocityRepresentation .
@@ -666,9 +666,9 @@ public:
      * @return true if all went well, false otherwise.
      */
     bool getFrameAcc(const std::string & frameName,
-                     const Span<const double>& baseAcc,
-                     const Span<const double>& s_ddot,
-                     const Span<double>& frame_acceleration);
+                     iDynTree::Span<const double> baseAcc,
+                     iDynTree::Span<const double> s_ddot,
+                     iDynTree::Span<double> frame_acceleration);
 
     /**
      * Return the frame acceleration, with the convention specified by getFrameVelocityRepresentation .
@@ -689,9 +689,9 @@ public:
      * @return true if all went well, false otherwise.
      */
     bool getFrameAcc(const FrameIndex frameName,
-                     const Span<const double>& baseAcc,
-                     const Span<const double>& s_ddot,
-                     const Span<double>& frame_acceleration);
+                     iDynTree::Span<const double> baseAcc,
+                     iDynTree::Span<const double> s_ddot,
+                     iDynTree::Span<double> frame_acceleration);
 
     /**
      * Compute the free floating jacobian for a given frame for the given representaiton.
@@ -716,7 +716,7 @@ public:
      * @return true if all went well, false otherwise.
      */
     bool getFrameFreeFloatingJacobian(const std::string & frameName,
-                                      const MatrixView<double> & outJacobian);
+                                      iDynTree::MatrixView<double> outJacobian);
 
     /**
      * Compute the free floating jacobian for a given frame for the given representaiton (MatrixView implementation).
@@ -725,7 +725,7 @@ public:
      * @return true if all went well, false otherwise.
      */
     bool getFrameFreeFloatingJacobian(const FrameIndex frameIndex,
-                                      const MatrixView<double> & outJacobian);
+                                      iDynTree::MatrixView<double> outJacobian);
 
 
 
@@ -757,7 +757,7 @@ public:
      */
     bool getRelativeJacobian(const iDynTree::FrameIndex refFrameIndex,
                              const iDynTree::FrameIndex frameIndex,
-                             const MatrixView<double> & outJacobian);
+                             iDynTree::MatrixView<double> outJacobian);
 
     /**
      * Return the relative Jacobian between the two frames
@@ -800,7 +800,7 @@ public:
                                      const iDynTree::FrameIndex frameIndex,
                                      const iDynTree::FrameIndex expressedOriginFrameIndex,
                                      const iDynTree::FrameIndex expressedOrientationFrameIndex,
-                                     const MatrixView<double> & outJacobian);
+                                     iDynTree::MatrixView<double> outJacobian);
 
 
     /**
@@ -817,7 +817,7 @@ public:
      * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true on success, false otherwise
      */
-    bool getFrameBiasAcc(const FrameIndex frameIdx, const iDynTree::Span<double> & bias_acc);
+    bool getFrameBiasAcc(const FrameIndex frameIdx, iDynTree::Span<double> bias_acc);
 
     /**
      * Get the bias acceleration (i.e. acceleration not due to robot acceleration) of the frame velocity.
@@ -833,7 +833,7 @@ public:
      * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true on success, false otherwise
      */
-    bool getFrameBiasAcc(const std::string & frameName, const iDynTree::Span<double> & bias_acc);
+    bool getFrameBiasAcc(const std::string & frameName, iDynTree::Span<double> bias_acc);
 
     // Todo getFrameRelativeVel and getFrameRelativeJacobian to match the getRelativeTransform behaviour
 
@@ -863,7 +863,7 @@ public:
      * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true on success, false otherwise.
      */
-    bool getCenterOfMassPosition(const iDynTree::Span<double> & pos);
+    bool getCenterOfMassPosition(iDynTree::Span<double> pos);
 
     /**
      * Return the center of mass velocity, with respect to the world/inertial frame.
@@ -881,7 +881,7 @@ public:
      * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true on success, false otherwise.
      */
-    bool getCenterOfMassVelocity(const iDynTree::Span<double> & vel);
+    bool getCenterOfMassVelocity(iDynTree::Span<double> vel);
 
     /**
      * Return the center of mass jacobian, i.e. the 3 \times (n+6) matrix such that:
@@ -897,7 +897,7 @@ public:
      * @warning the MatrixView object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true on success, false otherwise.
      */
-    bool getCenterOfMassJacobian(const MatrixView<double> & comJacobian);
+    bool getCenterOfMassJacobian(iDynTree::MatrixView<double> comJacobian);
 
     /**
      * Return the center of mass bias acceleration.
@@ -909,7 +909,7 @@ public:
      * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true on success, false otherwise.
      */
-     bool getCenterOfMassBiasAcc(const iDynTree::Span<double> & acc);
+     bool getCenterOfMassBiasAcc(iDynTree::Span<double> acc);
 
     /**
      * Get the average velocity of the robot.
@@ -929,7 +929,7 @@ public:
      * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true on success, false otherwise.
      */
-    bool getAverageVelocity(const iDynTree::Span<double> & acc);
+    bool getAverageVelocity(iDynTree::Span<double> acc);
 
     /**
      * Get the jacobian of the average velocity of the robot.
@@ -951,7 +951,7 @@ public:
      * @warning the MatrixView object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true on success, false otherwise.
      */
-    bool getAverageVelocityJacobian(const MatrixView<double> & avgVelocityJacobian);
+    bool getAverageVelocityJacobian(iDynTree::MatrixView<double> avgVelocityJacobian);
 
     /**
      * Get the centroidal average velocity of the robot.
@@ -979,7 +979,7 @@ public:
      * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true on success, false otherwise.
      */
-    bool getCentroidalAverageVelocity(const iDynTree::Span<double> & acc);
+    bool getCentroidalAverageVelocity(iDynTree::Span<double> acc);
 
     /**
      * Get the jacobian of the centroidal average velocity of the robot.
@@ -995,7 +995,7 @@ public:
      * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true on success, false otherwise.
      */
-    bool getCentroidalAverageVelocityJacobian(const MatrixView<double> & centroidalAvgVelocityJacobian);
+    bool getCentroidalAverageVelocityJacobian(iDynTree::MatrixView<double> centroidalAvgVelocityJacobian);
 
     /**
      * Get the linear and angular momentum of the robot.
@@ -1014,7 +1014,7 @@ public:
      * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true on success, false otherwise.
      */
-    bool getLinearAngularMomentum(const iDynTree::Span<double> & spatialMomentum);
+    bool getLinearAngularMomentum(iDynTree::Span<double> spatialMomentum);
 
     /**
      * Get the linear and angular momentum jacobian of the robot.
@@ -1031,7 +1031,7 @@ public:
      * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true on success, false otherwise.
      */
-    bool getLinearAngularMomentumJacobian(const MatrixView<double> & linAngMomentumJacobian);
+    bool getLinearAngularMomentumJacobian(iDynTree::MatrixView<double> linAngMomentumJacobian);
 
     /**
      * Get the centroidal (total) momentum of the robot.
@@ -1047,7 +1047,7 @@ public:
      * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true on success, false otherwise.
      */
-    bool getCentroidalTotalMomentum(const iDynTree::Span<double>& spatial_momentum);
+    bool getCentroidalTotalMomentum(iDynTree::Span<double> spatial_momentum);
 
     /**
      * @brief Get the total centroidal momentum jacobian of the robot.
@@ -1074,7 +1074,7 @@ public:
      * introduced in https://doi.org/10.1109/IROS.2008.4650772 .
      * @warning the MatrixView object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      */
-    bool getCentroidalTotalMomentumJacobian(const MatrixView<double> & centroidalTotalMomentumJacobian);
+    bool getCentroidalTotalMomentumJacobian(iDynTree::MatrixView<double> centroidalTotalMomentumJacobian);
 
     //@}
 
@@ -1163,7 +1163,7 @@ public:
      * @warning the MatrixView object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
      */
-    bool getFreeFloatingMassMatrix(const MatrixView<double> & freeFloatingMassMatrix);
+    bool getFreeFloatingMassMatrix(iDynTree::MatrixView<double> freeFloatingMassMatrix);
 
     /**
      * @brief Compute the free floating inverse dynamics.
@@ -1203,8 +1203,8 @@ public:
      * @warning the Span objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
      */
-    bool inverseDynamics(const iDynTree::Span<const double>& baseAcc,
-                         const iDynTree::Span<const double>& s_ddot,
+    bool inverseDynamics(iDynTree::Span<const double> baseAcc,
+                         iDynTree::Span<const double> s_ddot,
                          const LinkNetExternalWrenches & linkExtForces,
                                FreeFloatingGeneralizedTorques & baseForceAndJointTorques);
 
@@ -1238,7 +1238,7 @@ public:
      * @warning the Span objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
      */
-    bool generalizedBiasForces(const iDynTree::Span<double> & generalizedBiasForces);
+    bool generalizedBiasForces(iDynTree::Span<double> generalizedBiasForces);
 
     /**
      * @brief Compute the getNrOfDOFS()+6 vector of generalized gravity forces.
@@ -1270,7 +1270,7 @@ public:
      * @warning the Span objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
      */
-    bool generalizedGravityForces(const iDynTree::Span<double> & generalizedGravityForces);
+    bool generalizedGravityForces(iDynTree::Span<double> generalizedGravityForces);
 
     /**
      * @brief Compute the getNrOfDOFS()+6 vector of generalized external forces.
