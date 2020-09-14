@@ -89,7 +89,7 @@ namespace iDynTree
          *
          * \warning performs dynamic memory allocation operations
          */
-        VectorDynSize(const Span<const double> & vec);
+        VectorDynSize(const iDynTree::Span<const double> & vec);
 #endif
 
         /**
@@ -120,7 +120,7 @@ namespace iDynTree
          *
          * \warning performs dynamic memory allocation operations
          */
-        VectorDynSize & operator=(const Span<const double>& vec);
+        VectorDynSize & operator=(const iDynTree::Span<const double>& vec);
 #endif
         /**
          * @name Vector interface methods.

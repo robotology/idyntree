@@ -82,7 +82,7 @@ namespace iDynTree
         /**
          * Create a Rotation from a MatrixView.
          */
-        Rotation(const MatrixView<const double>& other);
+        Rotation(const iDynTree::MatrixView<const double>& other);
 
         /**
          * Geometric operations.

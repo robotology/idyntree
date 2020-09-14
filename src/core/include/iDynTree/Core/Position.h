@@ -65,7 +65,7 @@ namespace iDynTree
         /**
          * Create a Position from a span
          */
-        Position(const Span<const double> & other);
+        Position(const iDynTree::Span<const double> & other);
 
         /**
          * Geometric operations
