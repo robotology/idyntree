@@ -1117,7 +1117,7 @@ bool KinDynComputations::getJointPos(VectorDynSize& q) const
     return true;
 }
 
-bool KinDynComputations::getJointPos(Span<double>q) const
+bool KinDynComputations::getJointPos(Span<double> q) const
 {
     bool ok = q.size() == pimpl->m_robot_model.getNrOfPosCoords();
     if( !ok )
@@ -1137,7 +1137,7 @@ bool KinDynComputations::getJointVel(VectorDynSize& dq) const
     return true;
 }
 
-bool KinDynComputations::getJointVel(Span<double>dq) const
+bool KinDynComputations::getJointVel(Span<double> dq) const
 {
     bool ok = dq.size() == pimpl->m_robot_model.getNrOfPosCoords();
     if( !ok )

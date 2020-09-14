@@ -432,7 +432,7 @@ public:
      * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
      */
-    bool getJointPos(iDynTree::Span<double>q) const;
+    bool getJointPos(iDynTree::Span<double> q) const;
 
     bool getJointVel(iDynTree::VectorDynSize &dq) const;
 
@@ -441,7 +441,7 @@ public:
      * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
      */
-    bool getJointVel(iDynTree::Span<double>dq) const;
+    bool getJointVel(iDynTree::Span<double> dq) const;
 
     /**
      * Get the n+6 velocity of the model.
