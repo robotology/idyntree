@@ -455,7 +455,7 @@ public:
      * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
      */
-    bool getModelVel(iDynTree::Span<double>nu) const;
+    bool getModelVel(iDynTree::Span<double> nu) const;
 
 
     //@}
