@@ -774,8 +774,7 @@ bool KinDynComputations::setRobotState(Span<const double> s,
 }
 
 
-bool KinDynComputations::setRobotState(Span<const double> world_p_base,
-                                       iDynTree::MatrixView<const double> world_R_base,
+bool KinDynComputations::setRobotState(iDynTree::MatrixView<const double> world_T_base,
                                        Span<const double> s,
                                        Span<const double> base_velocity,
                                        Span<const double> s_dot,
@@ -796,20 +795,12 @@ bool KinDynComputations::setRobotState(Span<const double> world_p_base,
         return false;
     }
 
-    constexpr int expected_position_size = 3;
-    ok = world_p_base.size() == expected_position_size;
+    constexpr int expected_transform_cols = 4;
+    constexpr int expected_transform_rows = 4;
+    ok = (world_T_base.rows() == expected_transform_rows) && (world_T_base.cols() == expected_transform_cols);
     if( !ok )
     {
-        reportError("KinDynComputations","setRobotState","Wrong size in input world_p_base");
-        return false;
-    }
-
-    constexpr int expected_rotation_cols = 3;
-    constexpr int expected_rotation_rows = 3;
-    ok = (world_R_base.rows() == expected_rotation_rows) && (world_R_base.rows() == expected_rotation_cols);
-    if( !ok )
-    {
-        reportError("KinDynComputations","setRobotState","Wrong size in input world_R_base");
+        reportError("KinDynComputations","setRobotState","Wrong size in input world_T_base");
         return false;
     }
 
@@ -824,8 +815,7 @@ bool KinDynComputations::setRobotState(Span<const double> world_p_base,
     this->invalidateCache();
 
     // Save pos
-    this->pimpl->m_pos.worldBasePos().setPosition(world_p_base);
-    this->pimpl->m_pos.worldBasePos().setRotation(world_R_base);
+    this->pimpl->m_pos.worldBasePos() = iDynTree::Transform(world_T_base);
     toEigen(this->pimpl->m_pos.jointPos()) = toEigen(s);
 
     // Save gravity
@@ -944,8 +934,7 @@ void KinDynComputations::getRobotState(Transform& world_T_base,
 
 }
 
-bool KinDynComputations::getRobotState(iDynTree::Span<double> world_p_base,
-                                       iDynTree::MatrixView<double> world_R_base,
+bool KinDynComputations::getRobotState(iDynTree::MatrixView<double> world_T_base,
                                        iDynTree::Span<double> s,
                                        iDynTree::Span<double> base_velocity,
                                        iDynTree::Span<double> s_dot,
@@ -965,20 +954,12 @@ bool KinDynComputations::getRobotState(iDynTree::Span<double> world_p_base,
         return false;
     }
 
-    constexpr int expected_position_size = 3;
-    ok = world_p_base.size() == expected_position_size;
+    constexpr int expected_transform_cols = 4;
+    constexpr int expected_transform_rows = 4;
+    ok = (world_T_base.rows() == expected_transform_rows) && (world_T_base.cols() == expected_transform_cols);
     if( !ok )
     {
-        reportError("KinDynComputations","getRobotState","Wrong size in input world_p_base");
-        return false;
-    }
-
-    constexpr int expected_rotation_cols = 3;
-    constexpr int expected_rotation_rows = 3;
-    ok = (world_R_base.rows() == expected_rotation_rows) && (world_R_base.rows() == expected_rotation_cols);
-    if( !ok )
-    {
-        reportError("KinDynComputations","getRobotState","Wrong size in input world_R_base");
+        reportError("KinDynComputations","getRobotState","Wrong size in input world_T_base");
         return false;
     }
 
@@ -992,8 +973,7 @@ bool KinDynComputations::getRobotState(iDynTree::Span<double> world_p_base,
 
     getRobotState(s, s_dot, world_gravity);
 
-    toEigen(world_R_base) = toEigen(this->pimpl->m_pos.worldBasePos().getRotation());
-    toEigen(world_p_base) = toEigen(this->pimpl->m_pos.worldBasePos().getPosition());
+    toEigen(world_T_base) = toEigen(this->pimpl->m_pos.worldBasePos().asHomogeneousTransform());
 
     // Account for the different possible representations
     if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
@@ -1078,28 +1058,18 @@ Transform KinDynComputations::getWorldBaseTransform() const
     return this->pimpl->m_pos.worldBasePos();
 }
 
-bool KinDynComputations::getWorldBaseTransform(iDynTree::Span<double> world_p_base,
-                                               iDynTree::MatrixView<double> world_R_base) const
+bool KinDynComputations::getWorldBaseTransform(iDynTree::MatrixView<double> world_T_base) const
 {
-    constexpr int expected_position_size = 3;
-    bool ok = world_p_base.size() == expected_position_size;
+    constexpr int expected_transform_cols = 4;
+    constexpr int expected_transform_rows = 4;
+    bool ok = (world_T_base.rows() == expected_transform_rows) && (world_T_base.cols() == expected_transform_cols);
     if( !ok )
     {
-        reportError("KinDynComputations","getWorldBaseTransform","Wrong size in input world_p_base");
+        reportError("KinDynComputations","getWorldBaseTransform","Wrong size in input world_T_base");
         return false;
     }
 
-    constexpr int expected_rotation_cols = 3;
-    constexpr int expected_rotation_rows = 3;
-    ok = (world_R_base.rows() == expected_rotation_rows) && (world_R_base.rows() == expected_rotation_cols);
-    if( !ok )
-    {
-        reportError("KinDynComputations","getWorldBaseTransform","Wrong size in input world_R_base");
-        return false;
-    }
-
-    toEigen(world_p_base) = toEigen(this->pimpl->m_pos.worldBasePos().getPosition());
-    toEigen(world_R_base) = toEigen(this->pimpl->m_pos.worldBasePos().getRotation());
+    toEigen(world_T_base) = toEigen(this->pimpl->m_pos.worldBasePos().asHomogeneousTransform());
 
     return true;
 }
@@ -1228,8 +1198,7 @@ Transform KinDynComputations::getRelativeTransform(const std::string& refFrameNa
 
 bool KinDynComputations::getRelativeTransform(const std::string & refFrameName,
                                               const std::string & frameName,
-                                              iDynTree::Span<double> refFrame_p_frame,
-                                              iDynTree::MatrixView<double> refFrame_R_frame)
+                                              iDynTree::MatrixView<double> refFrame_H_frame)
 {
     const int refFrameIndex = getFrameIndex(refFrameName);
     const int frameIndex = getFrameIndex(frameName);
@@ -1245,7 +1214,7 @@ bool KinDynComputations::getRelativeTransform(const std::string & refFrameName,
     }
     else
     {
-        return this->getRelativeTransform(refFrameIndex,frameIndex, refFrame_p_frame, refFrame_R_frame);
+        return this->getRelativeTransform(refFrameIndex,frameIndex, refFrame_H_frame);
     }
 }
 
@@ -1278,31 +1247,19 @@ Transform KinDynComputations::getRelativeTransform(const iDynTree::FrameIndex re
 
 bool KinDynComputations::getRelativeTransform(const iDynTree::FrameIndex refFrameIndex,
                                               const iDynTree::FrameIndex frameIndex,
-                                              iDynTree::Span<double> refFrame_p_frame,
-                                              iDynTree::MatrixView<double> refFrame_R_frame)
+                                              iDynTree::MatrixView<double> refFrame_H_frame)
 {
-    constexpr int expected_position_size = 3;
-    bool ok = refFrame_p_frame.size() == expected_position_size;
+    constexpr int expected_transform_cols = 4;
+    constexpr int expected_transform_rows = 4;
+    bool ok = (refFrame_H_frame.rows() == expected_transform_rows)
+        && (refFrame_H_frame.cols() == expected_transform_cols);
     if( !ok )
     {
-        reportError("KinDynComputations","getRelativeTransform","Wrong size in input refFrame_p_frame");
+        reportError("KinDynComputations","getRelativeTransform","Wrong size in input refFrame_H_frame");
         return false;
     }
 
-    constexpr int expected_rotation_cols = 3;
-    constexpr int expected_rotation_rows = 3;
-    ok = (refFrame_R_frame.rows() == expected_rotation_rows)
-        && (refFrame_R_frame.rows() == expected_rotation_cols);
-    if( !ok )
-    {
-        reportError("KinDynComputations","getRelativeTransform","Wrong size in input refFrame_R_frame");
-        return false;
-    }
-
-    const Transform refFrame_H_frame = getRelativeTransform(refFrameIndex, frameIndex);
-
-    toEigen(refFrame_p_frame) = toEigen(refFrame_H_frame.getPosition());
-    toEigen(refFrame_R_frame) = toEigen(refFrame_H_frame.getRotation());
+    toEigen(refFrame_H_frame) = toEigen(getRelativeTransform(refFrameIndex, frameIndex).asHomogeneousTransform());
 
     return true;
 }
@@ -1364,34 +1321,23 @@ bool KinDynComputations::getRelativeTransformExplicit(const iDynTree::FrameIndex
                                                       const iDynTree::FrameIndex refFrameOrientationIndex,
                                                       const iDynTree::FrameIndex    frameOriginIndex,
                                                       const iDynTree::FrameIndex    frameOrientationIndex,
-                                                      iDynTree::Span<double> position,
-                                                      iDynTree::MatrixView<double> rotation)
+                                                      iDynTree::MatrixView<double> transform)
 {
-    constexpr int expected_position_size = 3;
-    bool ok = position.size() == expected_position_size;
+    constexpr int expected_transform_cols = 4;
+    constexpr int expected_transform_rows = 4;
+    bool ok = (transform.rows() == expected_transform_rows) && (transform.cols() == expected_transform_cols);
     if( !ok )
     {
-        reportError("KinDynComputations","getRelativeTransformExplicit","Wrong size in input position");
+        reportError("KinDynComputations",
+                    "getWorldBaseTransform",
+                    "Wrong size in input refFrameOrigin_refFrameOrientation_H_frameOrigin_frameORientation");
         return false;
     }
 
-    constexpr int expected_rotation_cols = 3;
-    constexpr int expected_rotation_rows = 3;
-    ok = (rotation.rows() == expected_rotation_rows) && (rotation.rows() == expected_rotation_cols);
-    if( !ok )
-    {
-        reportError("KinDynComputations","getRelativeTransformExplicit","Wrong size in input rotation");
-        return false;
-    }
-
-    const Transform transform = getRelativeTransformExplicit(refFrameOriginIndex,
-                                                             refFrameOrientationIndex,
-                                                             frameOriginIndex,
-                                                             frameOrientationIndex);
-
-    toEigen(position) = toEigen(transform.getPosition());
-    toEigen(rotation) = toEigen(transform.getRotation());
-
+    toEigen(transform) = toEigen(getRelativeTransformExplicit(refFrameOriginIndex,
+                                                              refFrameOrientationIndex,
+                                                              frameOriginIndex,
+                                                              frameOrientationIndex).asHomogeneousTransform());
     return true;
 }
 
@@ -1451,37 +1397,24 @@ Transform KinDynComputations::getWorldTransform(const FrameIndex frameIndex)
 }
 
 bool KinDynComputations::getWorldTransform(const FrameIndex frameIndex,
-                                           iDynTree::Span<double> world_p_frame,
-                                           iDynTree::MatrixView<double> world_R_frame)
+                                           iDynTree::MatrixView<double> world_T_frame)
 {
-    constexpr int expected_position_size = 3;
-    bool ok = world_p_frame.size() == expected_position_size;
+    constexpr int expected_transform_cols = 4;
+    constexpr int expected_transform_rows = 4;
+    bool ok = (world_T_frame.rows() == expected_transform_rows) && (world_T_frame.cols() == expected_transform_cols);
     if( !ok )
     {
-        reportError("KinDynComputations","getWorldTransform","Wrong size in input world_p_frame");
+        reportError("KinDynComputations","getWorldBaseTransform","Wrong size in input world_T_frame");
         return false;
     }
 
-    constexpr int expected_rotation_cols = 3;
-    constexpr int expected_rotation_rows = 3;
-    ok = (world_R_frame.rows() == expected_rotation_rows) && (world_R_frame.rows() == expected_rotation_cols);
-    if( !ok )
-    {
-        reportError("KinDynComputations","getWorldTransform","Wrong size in input world_R_frame");
-        return false;
-    }
-
-    Transform transform = getWorldTransform(frameIndex);
-
-    toEigen(world_p_frame) = toEigen(transform.getPosition());
-    toEigen(world_R_frame) = toEigen(transform.getRotation());
+    toEigen(world_T_frame) = toEigen(this->getWorldTransform(frameIndex).asHomogeneousTransform());
 
     return true;
 }
 
 bool KinDynComputations::getWorldTransform(const std::string & frameName,
-                                           iDynTree::Span<double> world_p_frame,
-                                           iDynTree::MatrixView<double> world_R_frame)
+                                           iDynTree::MatrixView<double> world_T_frame)
 {
     int frameIndex = getFrameIndex(frameName);
     if( frameIndex  == iDynTree::FRAME_INVALID_INDEX )
@@ -1490,7 +1423,7 @@ bool KinDynComputations::getWorldTransform(const std::string & frameName,
     }
     else
     {
-        return getWorldTransform(frameIndex, world_p_frame, world_R_frame);
+        return getWorldTransform(frameIndex, world_T_frame);
     }
 }
 

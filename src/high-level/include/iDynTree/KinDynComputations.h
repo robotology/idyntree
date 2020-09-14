@@ -357,10 +357,8 @@ public:
     /**
      * Set the state for the robot (floating base) (Span and MatrixView implementation)
      *
-     * @param world_p_base translation part of the homogeneous transformation that transforms position vectors expressed in the base reference frame
-     *                      in position frames expressed in the world reference frame (i.e. pos_world = world_T_base*pos_base .
-     * @param world_R_base rotation part of the homogeneous transformation that transforms position vectors expressed in the base reference frame
-     *                      in position frames expressed in the world reference frame (i.e. pos_world = world_T_base*pos_base .
+     * @param world_T_base the homogeneous transformation that transforms position vectors expressed in the base reference frame
+     *                      in position frames expressed in the world reference frame (i.e. pos_world = world_T_base*pos_base).
      * @param s a vector of getNrOfDegreesOfFreedom() joint positions (in rad)
      * @param base_velocity The twist (linear/angular velocity) of the base, expressed with the convention specified by the used FrameVelocityConvention.
      * @param s_dot a vector of getNrOfDegreesOfFreedom() joint velocities (in rad/sec)
@@ -368,8 +366,7 @@ public:
      * @warning the Span and the MatrixView objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
      */
-    bool setRobotState(iDynTree::Span<const double> world_p_base,
-                       iDynTree::MatrixView<const double> world_R_base,
+    bool setRobotState(iDynTree::MatrixView<const double> world_T_base,
                        iDynTree::Span<const double> s,
                        iDynTree::Span<const double> base_velocity,
                        iDynTree::Span<const double> s_dot,
@@ -389,7 +386,7 @@ public:
     /**
      * Set the state for the robot (fixed base)
      * Same as setRobotState, but with:
-     *  world_R_base      = iDynTree::Transform::Identity()
+     *  world_T_base      = iDynTree::Transform::Identity()
      *  base_velocity     = iDynTree::Twist::Zero();
      * @warning the Span objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
@@ -408,8 +405,7 @@ public:
                        iDynTree::VectorDynSize &s_dot,
                        iDynTree::Vector3& world_gravity);
 
-    bool getRobotState(iDynTree::Span<double> world_p_base,
-                       iDynTree::MatrixView<double> world_R_base,
+    bool getRobotState(iDynTree::MatrixView<double> world_T_base,
                        iDynTree::Span<double> s,
                        iDynTree::Span<double> base_velocity,
                        iDynTree::Span<double> s_dot,
@@ -424,8 +420,7 @@ public:
      * Access the robot state.
      */
     iDynTree::Transform getWorldBaseTransform() const;
-    bool getWorldBaseTransform(iDynTree::Span<double> world_p_base,
-                               iDynTree::MatrixView<double> world_R_base) const;
+    bool getWorldBaseTransform(iDynTree::MatrixView<double> world_T_base) const;
 
     iDynTree::Twist getBaseTwist() const;
     bool getBaseTwist(iDynTree::Span<double> base_velocity) const;
@@ -494,15 +489,13 @@ public:
     /**
      * Return the transform where the frame is the frame
      * specified by frameIndex, and the reference frame is the world one
-     * (world_H_frame).
-     * @param world_p_frame contains the position component of world_H_frame.
-     * @param world_R_frame contains the rotation component of world_H_frame.
+     * (world_T_frame).
+     * @param world_T_frame
      * @warning the Span and the MatrixView objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
      */
     bool getWorldTransform(const iDynTree::FrameIndex frameIndex,
-                           iDynTree::Span<double> world_p_frame,
-                           iDynTree::MatrixView<double> world_R_frame);
+                           iDynTree::MatrixView<double> world_T_frame);
 
     /**
      * Version of getWorldTransform where the frame is specified by name.
@@ -520,8 +513,7 @@ public:
      *
      */
     bool getWorldTransform(const std::string & frameName,
-                           iDynTree::Span<double> world_p_frame,
-                           iDynTree::MatrixView<double> world_R_frame);
+                           iDynTree::MatrixView<double> world_T_frame);
 
     /**
      * Return the transforms as a homogeneous matrices where the frame is
@@ -544,15 +536,12 @@ public:
      * Return the transform where the frame is the frame
      * specified by frameIndex, and the reference frame is the one specified
      * by refFrameIndex (refFrame_H_frame).
-     * @param refFrame_p_frame contains the position component of refFrame_H_frame.
-     * @param refFrame_R_frame contains the rotation component of refFrame_H_frame.
      * @warning the Span and the MatrixView objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
      */
     bool getRelativeTransform(const iDynTree::FrameIndex refFrameIndex,
                               const iDynTree::FrameIndex frameIndex,
-                              iDynTree::Span<double> refFrame_p_frame,
-                              iDynTree::MatrixView<double> refFrame_R_frame);
+                              iDynTree::MatrixView<double> refFrame_H_frame);
 
      /**
      * Return the transform between the frame with the origin of the frameOriginIndex
@@ -590,8 +579,7 @@ public:
                                       const iDynTree::FrameIndex refFrameOrientationIndex,
                                       const iDynTree::FrameIndex    frameOriginIndex,
                                       const iDynTree::FrameIndex    frameOrientationIndex,
-                                      iDynTree::Span<double> refFrameOrigin_refFrameOrientation_p_frameOrigin_frameORientation,
-                                      iDynTree::MatrixView<double> refFrameOrigin_refFrameOrientation_R_frameOrigin_frameORientation);
+                                      iDynTree::MatrixView<double> refFrameOrigin_refFrameOrientation_H_frameOrigin_frameORientation);
 
     /**
      * Version of getRelativeTransform where the frames are specified by name.
@@ -610,8 +598,7 @@ public:
      */
     bool getRelativeTransform(const std::string & refFrameName,
                               const std::string & frameName,
-                              iDynTree::Span<double> refFrame_p_frame,
-                              iDynTree::MatrixView<double> refFrame_R_frame);
+                              iDynTree::MatrixView<double> refFrame_H_frame);
     //@}
 
     /**

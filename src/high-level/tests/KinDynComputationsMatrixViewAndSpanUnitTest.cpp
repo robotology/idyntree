@@ -60,8 +60,8 @@ void setRandomState(iDynTree::KinDynComputations & dynComp)
     worldTbase = iDynTree::Transform(Rotation::RPY(random_double(),random_double(),random_double()),
                                      Position(random_double(),random_double(),random_double()));
 
-    Eigen::Matrix3d rot = toEigen(worldTbase.getRotation());
-    Eigen::Vector3d pos = toEigen(worldTbase.getPosition());
+
+    Eigen::Matrix4d transform = toEigen(worldTbase.asHomogeneousTransform());
 
     for(int i=0; i < 3; i++)
     {
@@ -83,31 +83,32 @@ void setRandomState(iDynTree::KinDynComputations & dynComp)
         ddqj(dof) = random_double();
     }
 
-    bool ok = dynComp.setRobotState(make_span(pos.data(), pos.size()),
-                                    rot,
+    bool ok = dynComp.setRobotState(transform,
                                     make_span(qj.data(), qj.size()),
                                     make_span(baseVel.data(), baseVel.size()),
                                     make_span(dqj.data(), dqj.size()),
                                     make_span(gravity.data(), gravity.size()));
 
+
+    ASSERT_IS_TRUE(ok);
+
     Eigen::VectorXd qj_read(dofs), dqj_read(dofs);
     Eigen::Vector3d gravity_read;
-    Eigen::Matrix3d rot_read;
-    Eigen::Vector3d pos_read;
+    Eigen::Matrix4d transform_read;
     Eigen::Vector6d baseVel_read;
 
-    dynComp.getRobotState(make_span(pos_read.data(), pos_read.size()),
-                          rot_read,
-                          make_span(qj_read.data(), qj_read.size()),
-                          make_span(baseVel_read.data(), baseVel_read.size()),
-                          make_span(dqj_read.data(), dqj_read.size()),
-                          make_span(gravity_read.data(), gravity_read.size()));
+    ok = dynComp.getRobotState(transform_read,
+                               make_span(qj_read.data(), qj_read.size()),
+                               make_span(baseVel_read.data(), baseVel_read.size()),
+                               make_span(dqj_read.data(), dqj_read.size()),
+                               make_span(gravity_read.data(), gravity_read.size()));
+
+    ASSERT_IS_TRUE(ok);
 
     ASSERT_EQUAL_VECTOR(qj_read, qj);
     ASSERT_EQUAL_VECTOR(dqj_read, dqj);
     ASSERT_EQUAL_VECTOR(gravity_read, gravity);
-    ASSERT_EQUAL_VECTOR(pos_read, pos);
-    ASSERT_EQUAL_MATRIX(rot_read, rot);
+    ASSERT_EQUAL_MATRIX(transform_read, transform);
     ASSERT_EQUAL_VECTOR(baseVel_read, baseVel);
 
     ASSERT_EQUAL_DOUBLE(ok,true);
