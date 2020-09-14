@@ -1744,7 +1744,7 @@ bool KinDynComputations::getRelativeJacobian(const iDynTree::FrameIndex refFrame
 
     outJacobian.resize(6, pimpl->m_robot_model.getNrOfDOFs());
 
-    this->getRelativeJacobian(refFrameIndex, frameIndex, MatrixView<double>(outJacobian));
+    return this->getRelativeJacobian(refFrameIndex, frameIndex, MatrixView<double>(outJacobian));
 }
 
 bool KinDynComputations::getRelativeJacobian(const iDynTree::FrameIndex refFrameIndex,
