@@ -1,4 +1,4 @@
- /*
+/*
  * Copyright (C) 2016 Fondazione Istituto Italiano di Tecnologia
  *
  * Licensed under either the GNU Lesser General Public License v3.0 :
@@ -490,8 +490,9 @@ public:
      * Return the transform where the frame is the frame
      * specified by frameIndex, and the reference frame is the world one
      * (world_T_frame).
-     * @param world_T_frame
-     * @warning the Span and the MatrixView objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @param world_T_frame a 4x4 matrix representing the homogeneous transformation that transforms position vectors expressed in the 'frame' reference frame
+     *                      in position frames expressed in the world reference frame (i.e. pos_world = world_T_frame * pos_frame).
+     * @warning the MatrixView object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
      */
     bool getWorldTransform(const iDynTree::FrameIndex frameIndex,
@@ -536,6 +537,8 @@ public:
      * Return the transform where the frame is the frame
      * specified by frameIndex, and the reference frame is the one specified
      * by refFrameIndex (refFrame_H_frame).
+     * @param refFrame_H_frame a 4x4 matrix representing the homogeneous transformation that transforms position vectors expressed in the 'frame' reference frame
+     *                      in position frames expressed in the 'refFrame' reference frame (i.e. pos_refFrame = refFrame_T_frame * pos_frame).
      * @warning the Span and the MatrixView objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true if all went well, false otherwise.
      */
@@ -645,7 +648,7 @@ public:
 
     /**
      * Return the frame acceleration, with the convention specified by getFrameVelocityRepresentation.
-     * (MatrixView and Span version)
+     * (Span version)
      *
      * @warning As this method recomputes the accelerations of all links for each call, it may be computationally expensive.
      *
