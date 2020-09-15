@@ -144,13 +144,13 @@ bool exportSolidShape(const SolidShape* solidShape, exportSolidShapePropertyType
 
     xmlNodePtr root_shape_xml = xmlNewChild(parent_element, NULL, BAD_CAST element_name.c_str(), NULL);
     // Omit the name (that is an optional attribute) if the shape has no name
-    if (solidShape->nameIsValid) {
-        std::string shapeName = solidShape->name;
+    if (solidShape->isNameValid()) {
+        std::string shapeName = solidShape->getName();
         xmlNewProp(root_shape_xml, BAD_CAST "name", BAD_CAST shapeName.c_str());
     }
 
     // Export transform
-    ok = ok && exportTransform(solidShape->link_H_geometry, root_shape_xml);
+    ok = ok && exportTransform(solidShape->getLink_H_geometry(), root_shape_xml);
 
     // Export geometry
     xmlNodePtr geometry_xml = xmlNewChild(root_shape_xml, NULL, BAD_CAST "geometry", NULL);
@@ -214,7 +214,23 @@ bool exportSolidShape(const SolidShape* solidShape, exportSolidShapePropertyType
         return false;
     }
 
-    return ok;
+    // Export material if set.
+    if (solidShape->isMaterialSet()) {
+        auto material = solidShape->getMaterial();
+        xmlNodePtr material_xml = xmlNewChild(root_shape_xml, NULL, BAD_CAST "material", NULL);
+        xmlNewProp(material_xml, BAD_CAST "name", BAD_CAST material.name().c_str());
+
+        if (material.hasColor()) {
+            xmlNodePtr color_xml = xmlNewChild(material_xml, NULL, BAD_CAST "color", NULL);
+            std::string material_str;
+            ok = ok && vectorToString(material.color(), material_str);
+            xmlNewProp(color_xml, BAD_CAST "rgba", BAD_CAST material_str.c_str());
+        }
+        if (material.hasTexture()) {
+            xmlNodePtr texture_xml = xmlNewChild(material_xml, NULL, BAD_CAST "texture", NULL);
+            xmlNewProp(texture_xml, BAD_CAST "filename", BAD_CAST material.texture().c_str());
+        }
+    }
 
     return ok;
 }

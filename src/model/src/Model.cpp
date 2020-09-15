@@ -901,11 +901,6 @@ const ModelSolidShapes& Model::collisionSolidShapes() const
     return m_collisionSolidShapes;
 }
 
-
-
-
-
-
 std::string Model::toString() const
 {
     std::stringstream ss;
@@ -935,9 +930,4 @@ std::string Model::toString() const
 
     return ss.str();
 }
-
-
-
-
-
 }
