@@ -19,7 +19,9 @@ namespace iDynTree
 {
 
 ModelExporterOptions::ModelExporterOptions()
-: baseLink("") {}
+: baseLink(""),
+    exportFirstBaseLinkAdditionalFrameAsFakeURDFBase(true),
+    robotExportedName("iDynTreeURDFModelExportModelName") {}
 
 
 class ModelExporter::Pimpl {

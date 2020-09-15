@@ -461,7 +461,7 @@ bool URDFStringFromModel(const iDynTree::Model & model,
     xmlDocPtr urdf_xml = xmlNewDoc(BAD_CAST "1.0");
     xmlNodePtr robot = xmlNewNode(NULL, BAD_CAST "robot");
     // TODO(traversaro) properly export this :)
-    xmlNewProp(robot, BAD_CAST "name", BAD_CAST "iDynTreeURDFModelExportModelName");
+    xmlNewProp(robot, BAD_CAST "name", BAD_CAST options.robotExportedName.c_str());
     xmlDocSetRootElement(urdf_xml, robot);
 
     // TODO(traversaro) : We are assuming that the model has no loops,
