@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and existing objects can be converted to NumPy arrays (`*.toNumPy`) (https://github.com/robotology/idyntree/pull/726).
 - iDynTree Python bindings can now be installed with `pip3 install git+https://github.com/robotology/idyntree.git` (https://github.com/robotology/idyntree/pull/733).
 - Implement the MatrixView class (https://github.com/robotology/idyntree/pull/734)
+- Add the possibility to use `MatrixView` and `Span` as input/output objects for `KinDynComputations` class (https://github.com/robotology/idyntree/pull/736).
 
 ### Fixed
 - Fixed bug in `yarprobotstatepublisher` that caused segmentation fault each time an unknown joint name was read from the input joint states topic (https://github.com/robotology/idyntree/pull/719)
@@ -26,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The Python method `*.fromPyList` is replaced by `*.FromPython` (https://github.com/robotology/idyntree/pull/726).
 - The minimum required CMake version to configure and compile iDynTree is now 3.16 (https://github.com/robotology/idyntree/pull/732).
 - The Python package name of the SWIG bindings changed from `iDynTree` to `idyntree.bindings` (https://github.com/robotology/idyntree/pull/733, https://github.com/robotology/idyntree/pull/735). To continue referring to iDynTree classes as `iDynTree.<ClassName>`, you can change your `import iDynTree` statements to `import idyntree.bindings as iDynTree`. Otherwise, you can use `import idyntree.bindings` to refer them as `idyntree.bindings.<ClassName>`.
+- Improve the use of `const` keyword  in `KinDynComputations`(https://github.com/robotology/idyntree/pull/736).
 
 ### Removed 
 - Remove the CMake option IDYNTREE_USES_KDL and all the classes available when enabling it. They were deprecated in iDynTree 1.0 .

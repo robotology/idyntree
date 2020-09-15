@@ -16,8 +16,9 @@
 
 #include <iDynTree/Core/VectorFixSize.h>
 #include <iDynTree/Core/MatrixDynSize.h>
+#include <iDynTree/Core/MatrixView.h>
 #include <iDynTree/Core/Utils.h>
-
+#include <iDynTree/Core/Span.h>
 
 #include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/FreeFloatingMatrices.h>
@@ -178,14 +179,14 @@ public:
      * Get a human readable description of a given internal degree of freedom of the robot.
      *
      */
-    std::string getDescriptionOfDegreeOfFreedom(int dof_index);
+    std::string getDescriptionOfDegreeOfFreedom(int dof_index) const;
 
     /**
      * Get a human readable description of all the internal degrees of freedom of the robot.
      *
      * @return a std::string containing the description of the internal degrees of freedom.
      */
-    std::string getDescriptionOfDegreesOfFreedom();
+    std::string getDescriptionOfDegreesOfFreedom() const;
 
 
     /**
@@ -256,6 +257,25 @@ public:
                                             const iDynTree::FrameIndex frameIndex,
                                             iDynTree::MatrixDynSize & outJacobianPattern) const;
 
+    /**
+     * Returns the sparsity pattern of the relative Jacobian for the specified frames
+     * (MatrixView implementation)
+     *
+     * The resulting matrix must have the same size of the free floating Jacobian (6 x #DoFs)
+     * It is filled with only 0 and 1 with the following meaning:
+     * - 0: the element will always have 0 (for every robot configuration)
+     * - 1: it exists a robot configuration such that the element have a value different from zero.
+     * @param refFrameIndex refence frame for the Jacobian
+     * @param frameIndex Jacobian frame
+     * @param outJacobianPattern a MatrixView containing an already existing memory.
+     * @warning outJacobianPattern size must be 6 x #DoFs, it is not possible to resize a
+     * MatrixView element.
+     * @return true on success. False otherwise
+     */
+    bool getRelativeJacobianSparsityPattern(const iDynTree::FrameIndex refFrameIndex,
+                                            const iDynTree::FrameIndex frameIndex,
+                                            iDynTree::MatrixView<double> outJacobianPattern) const;
+
 
     /**
      * Returns the sparsity pattern of the free floating Jacobian for the specified frame
@@ -270,6 +290,23 @@ public:
      */
     bool getFrameFreeFloatingJacobianSparsityPattern(const FrameIndex frameIndex,
                                                      iDynTree::MatrixDynSize & outJacobianPattern) const;
+
+    /**
+     * Returns the sparsity pattern of the free floating Jacobian for the specified frame
+     * (MatrixView implementation).
+     *
+     * The resulting matrix has the same size of the free floating Jacobian (6 x (6 + #DoFs))
+     * It is filled with only 0 and 1 with the following meaning:
+     * - 0: the element will always have 0 (for every robot configuration)
+     * - 1: it exists a robot configuration such that the element have a value different from zero.
+     * @param frameIndex Jacobian frame
+     * @param outJacobianPattern the Jacobian sparsity pattern
+     * @warning outJacobianPattern size must be 6 x (#DoFs + 6), it is not possible to resize a
+     * MatrixView element.
+     * @return true on success. False otherwise
+     */
+    bool getFrameFreeFloatingJacobianSparsityPattern(const FrameIndex frameIndex,
+                                                     iDynTree::MatrixView<double> outJacobianPattern) const;
 
 
     //@}
@@ -291,6 +328,16 @@ public:
     bool setJointPos(const iDynTree::VectorDynSize& s);
 
     /**
+     * @brief Set the (internal) joint positions. (Span implementation)
+     *
+     * \note This method sets only the joint positions, leaving all the other components of the state to their previous value.
+     *
+     * @param[in] s A vector of dimension this->model().getNrOfPosCoords() .
+     * @return true if all went well, false otherwise.
+     */
+    bool setJointPos(iDynTree::Span<const double> s);
+
+    /**
      * Set the state for the robot (floating base)
      *
      * @param world_T_base  the homogeneous transformation that transforms position vectors expressed in the base reference frame
@@ -299,13 +346,31 @@ public:
      * @param base_velocity The twist (linear/angular velocity) of the base, expressed with the convention specified by the used FrameVelocityConvention.
      * @param s_dot a vector of getNrOfDegreesOfFreedom() joint velocities (in rad/sec)
      * @param world_gravity a 3d vector of the gravity acceleration vector, expressed in the world/inertial frame.
-     *
+     * @return true if all went well, false otherwise.
      */
     bool setRobotState(const iDynTree::Transform &world_T_base,
                        const iDynTree::VectorDynSize& s,
                        const iDynTree::Twist& base_velocity,
                        const iDynTree::VectorDynSize& s_dot,
                        const iDynTree::Vector3& world_gravity);
+
+    /**
+     * Set the state for the robot (floating base) (Span and MatrixView implementation)
+     *
+     * @param world_T_base the homogeneous transformation that transforms position vectors expressed in the base reference frame
+     *                      in position frames expressed in the world reference frame (i.e. pos_world = world_T_base*pos_base).
+     * @param s a vector of getNrOfDegreesOfFreedom() joint positions (in rad)
+     * @param base_velocity The twist (linear/angular velocity) of the base, expressed with the convention specified by the used FrameVelocityConvention.
+     * @param s_dot a vector of getNrOfDegreesOfFreedom() joint velocities (in rad/sec)
+     * @param world_gravity a 3d vector of the gravity acceleration vector, expressed in the world/inertial frame.
+     * @warning the Span and the MatrixView objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if all went well, false otherwise.
+     */
+    bool setRobotState(iDynTree::MatrixView<const double> world_T_base,
+                       iDynTree::Span<const double> s,
+                       iDynTree::Span<const double> base_velocity,
+                       iDynTree::Span<const double> s_dot,
+                       iDynTree::Span<const double> world_gravity);
 
     /**
      * Set the state for the robot (fixed base)
@@ -318,6 +383,18 @@ public:
                        const iDynTree::VectorDynSize &s_dot,
                        const iDynTree::Vector3& world_gravity);
 
+    /**
+     * Set the state for the robot (fixed base)
+     * Same as setRobotState, but with:
+     *  world_T_base      = iDynTree::Transform::Identity()
+     *  base_velocity     = iDynTree::Twist::Zero();
+     * @warning the Span objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if all went well, false otherwise.
+     */
+    bool setRobotState(iDynTree::Span<const double> s,
+                       iDynTree::Span<const double> s_dot,
+                       iDynTree::Span<const double> world_gravity);
+
     void getRobotState(iDynTree::Transform &world_T_base,
                        iDynTree::VectorDynSize& s,
                        iDynTree::Twist& base_velocity,
@@ -328,20 +405,58 @@ public:
                        iDynTree::VectorDynSize &s_dot,
                        iDynTree::Vector3& world_gravity);
 
+    bool getRobotState(iDynTree::MatrixView<double> world_T_base,
+                       iDynTree::Span<double> s,
+                       iDynTree::Span<double> base_velocity,
+                       iDynTree::Span<double> s_dot,
+                       iDynTree::Span<double> world_gravity);
+
+    void getRobotState(iDynTree::Span<double> s,
+                       iDynTree::Span<double> s_dot,
+                       iDynTree::Span<double> world_gravity);
+
+
     /**
      * Access the robot state.
      */
-    iDynTree::Transform getWorldBaseTransform();
-    iDynTree::Twist     getBaseTwist();
+    iDynTree::Transform getWorldBaseTransform() const;
+    bool getWorldBaseTransform(iDynTree::MatrixView<double> world_T_base) const;
 
-    bool getJointPos(iDynTree::VectorDynSize &q);
-    bool getJointVel(iDynTree::VectorDynSize &dq);
+    iDynTree::Twist getBaseTwist() const;
+    bool getBaseTwist(iDynTree::Span<double> base_velocity) const;
+
+    bool getJointPos(iDynTree::VectorDynSize &q) const;
+
+    /**
+     * Get the n joint position of the model.
+     * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if all went well, false otherwise.
+     */
+    bool getJointPos(iDynTree::Span<double> q) const;
+
+    bool getJointVel(iDynTree::VectorDynSize &dq) const;
+
+    /**
+     * Get the n joint velocity of the model.
+     * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if all went well, false otherwise.
+     */
+    bool getJointVel(iDynTree::Span<double> dq) const;
 
     /**
      * Get the n+6 velocity of the model.
-     * Obtained by stacking the output of getBaseTwist and of getJointVel .
+     * Obtained by stacking the output of getBaseTwist and of getJointVel.
      */
-    bool getModelVel(iDynTree::VectorDynSize &nu);
+    bool getModelVel(iDynTree::VectorDynSize &nu) const;
+
+    /**
+     * Get the n+6 velocity of the model.
+     * Obtained by stacking the output of getBaseTwist and of getJointVel.
+     * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if all went well, false otherwise.
+     */
+    bool getModelVel(iDynTree::Span<double> nu) const;
+
 
     //@}
 
@@ -372,12 +487,34 @@ public:
     iDynTree::Transform getWorldTransform(const iDynTree::FrameIndex frameIndex);
 
     /**
+     * Return the transform where the frame is the frame
+     * specified by frameIndex, and the reference frame is the world one
+     * (world_T_frame).
+     * @param world_T_frame a 4x4 matrix representing the homogeneous transformation that transforms position vectors expressed in the 'frame' reference frame
+     *                      in position frames expressed in the world reference frame (i.e. pos_world = world_T_frame * pos_frame).
+     * @warning the MatrixView object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if all went well, false otherwise.
+     */
+    bool getWorldTransform(const iDynTree::FrameIndex frameIndex,
+                           iDynTree::MatrixView<double> world_T_frame);
+
+    /**
      * Version of getWorldTransform where the frame is specified by name.
      *
      * @note For real time code use the method that takes an integer.
      *
      */
-    iDynTree::Transform getWorldTransform(std::string frameName);
+    iDynTree::Transform getWorldTransform(const std::string & frameName);
+
+    /**
+     * Version of getWorldTransform where the frame is specified by name
+     * (MatrixView and Span implementation).
+     *
+     * @note For real time code use the method that takes an integer.
+     *
+     */
+    bool getWorldTransform(const std::string & frameName,
+                           iDynTree::MatrixView<double> world_T_frame);
 
     /**
      * Return the transforms as a homogeneous matrices where the frame is
@@ -395,6 +532,19 @@ public:
      */
     iDynTree::Transform getRelativeTransform(const iDynTree::FrameIndex refFrameIndex,
                                              const iDynTree::FrameIndex frameIndex);
+
+    /**
+     * Return the transform where the frame is the frame
+     * specified by frameIndex, and the reference frame is the one specified
+     * by refFrameIndex (refFrame_H_frame).
+     * @param refFrame_H_frame a 4x4 matrix representing the homogeneous transformation that transforms position vectors expressed in the 'frame' reference frame
+     *                      in position frames expressed in the 'refFrame' reference frame (i.e. pos_refFrame = refFrame_T_frame * pos_frame).
+     * @warning the Span and the MatrixView objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if all went well, false otherwise.
+     */
+    bool getRelativeTransform(const iDynTree::FrameIndex refFrameIndex,
+                              const iDynTree::FrameIndex frameIndex,
+                              iDynTree::MatrixView<double> refFrame_H_frame);
 
      /**
      * Return the transform between the frame with the origin of the frameOriginIndex
@@ -415,6 +565,26 @@ public:
                                                      const iDynTree::FrameIndex    frameOrientationIndex);
 
     /**
+     * Return the transform between the frame with the origin of the frameOriginIndex
+     * and the orientation of frameOrientationIndex and the one with the origin
+     * of refFrameOriginIndex and the orientation of refFrameOrientationIndex. (MatrixView and Span
+     * implementation)
+     *
+     * In symbols we return the (refFrameOrigin,refFrameOrientation)_H_(frameOrigin,frameORientation)
+     *
+     * This is a variant of the getRelativeTransform in which the orientation and origin part of both
+     * side of the transform are explicited.
+     *
+     * \todo provide mode detailed documentation.
+     *
+     */
+    bool getRelativeTransformExplicit(const iDynTree::FrameIndex refFrameOriginIndex,
+                                      const iDynTree::FrameIndex refFrameOrientationIndex,
+                                      const iDynTree::FrameIndex    frameOriginIndex,
+                                      const iDynTree::FrameIndex    frameOrientationIndex,
+                                      iDynTree::MatrixView<double> refFrameOrigin_refFrameOrientation_H_frameOrigin_frameORientation);
+
+    /**
      * Version of getRelativeTransform where the frames are specified by name.
      *
      * @note For real time code use the method that takes an integer.
@@ -423,6 +593,15 @@ public:
     iDynTree::Transform getRelativeTransform(const std::string & refFrameName,
                                              const std::string & frameName);
 
+    /**
+     * Version of getRelativeTransform where the frames are specified by name (Span and MatrixView version).
+     *
+     * @note For real time code use the method that takes an integer.
+     *
+     */
+    bool getRelativeTransform(const std::string & refFrameName,
+                              const std::string & frameName,
+                              iDynTree::MatrixView<double> refFrame_H_frame);
     //@}
 
     /**
@@ -431,14 +610,32 @@ public:
     //@{
 
     /**
-     * Return the frame velocity, with the convention specified by getFrameVelocityRepresentation .
+     * Return the frame velocity, with the convention specified by getFrameVelocityRepresentation.
      */
     iDynTree::Twist getFrameVel(const std::string & frameName);
+
+    /**
+     * Return the frame velocity, with the convention specified by getFrameVelocityRepresentation.
+     * (MatrixView and Span implementation)
+     *
+     * @warning the Span objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if all went well, false otherwise.
+     */
+    bool getFrameVel(const std::string & frameName, iDynTree::Span<double> twist);
 
     /**
      * Return the frame velocity, with the convention specified by getFrameVelocityRepresentation .
      */
     iDynTree::Twist getFrameVel(const FrameIndex frameIdx);
+
+    /**
+     * Return the frame velocity, with the convention specified by getFrameVelocityRepresentation.
+     * (MatrixView and Span implementation)
+     *
+     * @warning the Span objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if all went well, false otherwise.
+     */
+    bool getFrameVel(const FrameIndex frameIdx, iDynTree::Span<double> twist);
 
     /**
      * Return the frame acceleration, with the convention specified by getFrameVelocityRepresentation .
@@ -450,6 +647,20 @@ public:
                         const VectorDynSize& s_ddot);
 
     /**
+     * Return the frame acceleration, with the convention specified by getFrameVelocityRepresentation.
+     * (Span version)
+     *
+     * @warning As this method recomputes the accelerations of all links for each call, it may be computationally expensive.
+     *
+     * @warning the Span objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if all went well, false otherwise.
+     */
+    bool getFrameAcc(const std::string & frameName,
+                     iDynTree::Span<const double> baseAcc,
+                     iDynTree::Span<const double> s_ddot,
+                     iDynTree::Span<double> frame_acceleration);
+
+    /**
      * Return the frame acceleration, with the convention specified by getFrameVelocityRepresentation .
      *
      * @warning As this method recomputes the accelerations of all links for each call, it may be computationally expensive.
@@ -458,12 +669,53 @@ public:
                         const Vector6& baseAcc,
                         const VectorDynSize& s_ddot);
 
+    /**
+     * Return the frame acceleration, with the convention specified by getFrameVelocityRepresentation.
+     * (MatrixView and Span version)
+     *
+     * @warning As this method recomputes the accelerations of all links for each call, it may be computationally expensive.
+     *
+     * @warning the Span objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if all went well, false otherwise.
+     */
+    bool getFrameAcc(const FrameIndex frameName,
+                     iDynTree::Span<const double> baseAcc,
+                     iDynTree::Span<const double> s_ddot,
+                     iDynTree::Span<double> frame_acceleration);
+
+    /**
+     * Compute the free floating jacobian for a given frame for the given representaiton.
+     *
+     * @return true if all went well, false otherwise.
+     */
     bool getFrameFreeFloatingJacobian(const std::string & frameName,
                                       iDynTree::MatrixDynSize & outJacobian);
 
+    /**
+     * Compute the free floating jacobian for a given frame for the given representaiton.
+     *
+     * @return true if all went well, false otherwise.
+     */
     bool getFrameFreeFloatingJacobian(const FrameIndex frameIndex,
                                       iDynTree::MatrixDynSize & outJacobian);
 
+    /**
+     * Compute the free floating jacobian for a given frame for the given representaiton (MatrixView implementation).
+     *
+     * @warning the MatrixView objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if all went well, false otherwise.
+     */
+    bool getFrameFreeFloatingJacobian(const std::string & frameName,
+                                      iDynTree::MatrixView<double> outJacobian);
+
+    /**
+     * Compute the free floating jacobian for a given frame for the given representaiton (MatrixView implementation).
+     *
+     * @warning the MatrixView objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if all went well, false otherwise.
+     */
+    bool getFrameFreeFloatingJacobian(const FrameIndex frameIndex,
+                                      iDynTree::MatrixView<double> outJacobian);
 
 
 
@@ -480,6 +732,22 @@ public:
     bool getRelativeJacobian(const iDynTree::FrameIndex refFrameIndex,
                              const iDynTree::FrameIndex frameIndex,
                              iDynTree::MatrixDynSize & outJacobian);
+
+    /**
+     * Return the relative Jacobian between the two frames (MatrixView implementation).
+     *
+     * The Jacobian maps the internal robot shape with the relative
+     * velocity of refFrame w.r.t. frame expressed depending on the velocity representation, i.e
+     * \f[
+     *  v_{refFrame, frame} = J_{refFrame, frame}(s) \dot{s}
+     * \f]
+     *
+     * @warning the MatrixView objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if all went well, false otherwise.
+     */
+    bool getRelativeJacobian(const iDynTree::FrameIndex refFrameIndex,
+                             const iDynTree::FrameIndex frameIndex,
+                             iDynTree::MatrixView<double> outJacobian);
 
     /**
      * Return the relative Jacobian between the two frames
@@ -502,6 +770,28 @@ public:
                                      const iDynTree::FrameIndex expressedOrientationFrameIndex,
                                      iDynTree::MatrixDynSize & outJacobian);
 
+    /**
+     * Return the relative Jacobian between the two frames (MatrixView implementation)
+     *
+     * The Jacobian maps the internal robot shape with the relative
+     * velocity of refFrame w.r.t. frame expressed in the specified frame, i.e
+     * \f[
+     *  {}^{expressedOriginFrame, [expressedOrientationFrame]} \mathrm{v}_{refFrame, frame} = {}^{expressedOriginFrame, [expressedOrientationFrame]} J_{refFrame, frame}(s) \dot{s}
+     * \f]
+     *
+     * @param refFrameIndex reference frame
+     * @param frameIndex considered frame
+     * @param expressedOriginFrameIndex frame whose origin is used to express the Jacobian
+     * @param expressedOrientationFrameIndex frame whose orientation is used to express the Jacobian
+     * @warning the MatrixView objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true on success, false otherwise.
+     */
+    bool getRelativeJacobianExplicit(const iDynTree::FrameIndex refFrameIndex,
+                                     const iDynTree::FrameIndex frameIndex,
+                                     const iDynTree::FrameIndex expressedOriginFrameIndex,
+                                     const iDynTree::FrameIndex expressedOrientationFrameIndex,
+                                     iDynTree::MatrixView<double> outJacobian);
+
 
     /**
      * Get the bias acceleration (i.e. acceleration not due to robot acceleration) of the frame velocity.
@@ -514,9 +804,26 @@ public:
      * Get the bias acceleration (i.e. acceleration not due to robot acceleration) of the frame velocity.
      *
      * This term is usually called \f$\dot{J} \nu\f$ or \f$\dot{J} \dot{q}\f$.
+     * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true on success, false otherwise
+     */
+    bool getFrameBiasAcc(const FrameIndex frameIdx, iDynTree::Span<double> bias_acc);
+
+    /**
+     * Get the bias acceleration (i.e. acceleration not due to robot acceleration) of the frame velocity.
+     *
+     * This term is usually called \f$\dot{J} \nu\f$ or \f$\dot{J} \dot{q}\f$.
      */
     Vector6 getFrameBiasAcc(const std::string & frameName);
 
+    /**
+     * Get the bias acceleration (i.e. acceleration not due to robot acceleration) of the frame velocity.
+     *
+     * This term is usually called \f$\dot{J} \nu\f$ or \f$\dot{J} \dot{q}\f$.
+     * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true on success, false otherwise
+     */
+    bool getFrameBiasAcc(const std::string & frameName, iDynTree::Span<double> bias_acc);
 
     // Todo getFrameRelativeVel and getFrameRelativeJacobian to match the getRelativeTransform behaviour
 
@@ -541,12 +848,30 @@ public:
     iDynTree::Position getCenterOfMassPosition();
 
     /**
+     * Return the center of mass position.
+     *
+     * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true on success, false otherwise.
+     */
+    bool getCenterOfMassPosition(iDynTree::Span<double> pos);
+
+    /**
      * Return the center of mass velocity, with respect to the world/inertial frame.
      *
      * \note This is the time derivative of the quantity returned by getCenterOfMassPosition .
      *
      */
     iDynTree::Vector3 getCenterOfMassVelocity();
+
+    /**
+     * Return the center of mass velocity, with respect to the world/inertial frame.
+     *
+     * \note This is the time derivative of the quantity returned by getCenterOfMassPosition.
+     *
+     * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true on success, false otherwise.
+     */
+    bool getCenterOfMassVelocity(iDynTree::Span<double> vel);
 
     /**
      * Return the center of mass jacobian, i.e. the 3 \times (n+6) matrix such that:
@@ -556,9 +881,25 @@ public:
     bool getCenterOfMassJacobian(MatrixDynSize & comJacobian);
 
     /**
+     * Return the center of mass jacobian, i.e. the 3 \times (n+6) matrix such that:
+     *  getCenterOfMassVelocity() == getCenterOfMassJacobian() * \nu .
+     *
+     * @warning the MatrixView object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true on success, false otherwise.
+     */
+    bool getCenterOfMassJacobian(iDynTree::MatrixView<double> comJacobian);
+
+    /**
      * Return the center of mass bias acceleration.
      */
      Vector3 getCenterOfMassBiasAcc();
+
+    /**
+     * Return the center of mass bias acceleration.
+     * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true on success, false otherwise.
+     */
+     bool getCenterOfMassBiasAcc(iDynTree::Span<double> acc);
 
     /**
      * Get the average velocity of the robot.
@@ -571,6 +912,16 @@ public:
     iDynTree::Twist getAverageVelocity();
 
     /**
+     * Get the average velocity of the robot. (Span implementation)
+     * The quantity is expressed in (B[A]), (A) or (B) depending on the FrameVelocityConvention used.
+     *
+     * \note the linear part of this twist correspond to the getCenterOfMassVelocity only if the FrameVelocityConvention is set to MIXED.
+     * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true on success, false otherwise.
+     */
+    bool getAverageVelocity(iDynTree::Span<double> acc);
+
+    /**
      * Get the jacobian of the average velocity of the robot.
      * The quantity is expressed in (B[A]), (A) or (B) depending on the FrameVelocityConvention used.
      *
@@ -579,6 +930,18 @@ public:
      * \note Implementation incomplete, please refrain to use until this warning has been removed.
      */
     bool getAverageVelocityJacobian(MatrixDynSize & avgVelocityJacobian);
+
+    /**
+     * Get the jacobian of the average velocity of the robot. (MatrixView implementation)
+     * The quantity is expressed in (B[A]), (A) or (B) depending on the FrameVelocityConvention used.
+     *
+     * \note the linear part of this jacobian correspond to the getCenterOfMassVelocity only if the FrameVelocityConvention is set to MIXED.
+     *
+     * \note Implementation incomplete, please refrain to use until this warning has been removed.
+     * @warning the MatrixView object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true on success, false otherwise.
+     */
+    bool getAverageVelocityJacobian(iDynTree::MatrixView<double> avgVelocityJacobian);
 
     /**
      * Get the centroidal average velocity of the robot.
@@ -594,11 +957,35 @@ public:
     iDynTree::Twist getCentroidalAverageVelocity();
 
     /**
+     * Get the centroidal average velocity of the robot (Span version).
+     *
+     * The quantity is the average velocity returned by getAverageVelocity, but computed in the center of mass
+     * and with the orientation of the FrameVelocityRepresentation used.
+     * It we indicate with G the center of mass, it is expressed in (G[A]) for the mixed and inertial representation,
+     * and in (G[B]) for the base body-fixed representation.
+     *
+     * \note the linear part of this twist correspond to the getCenterOfMassVelocity only if the FrameVelocityConvention is set to MIXED or INERTIAL.
+     *
+     * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true on success, false otherwise.
+     */
+    bool getCentroidalAverageVelocity(iDynTree::Span<double> acc);
+
+    /**
      * Get the jacobian of the centroidal average velocity of the robot.
      *
      * See the getCentroidalAverageVelocity method for more info on this.
      */
     bool getCentroidalAverageVelocityJacobian(MatrixDynSize & centroidalAvgVelocityJacobian);
+
+    /**
+     * Get the jacobian of the centroidal average velocity of the robot (MatrixView version).
+     *
+     * See the getCentroidalAverageVelocity method for more info on this.
+     * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true on success, false otherwise.
+     */
+    bool getCentroidalAverageVelocityJacobian(iDynTree::MatrixView<double> centroidalAvgVelocityJacobian);
 
     /**
      * Get the linear and angular momentum of the robot.
@@ -611,10 +998,30 @@ public:
     /**
      * Get the linear and angular momentum of the robot.
      * The quantity is expressed in (B[A]), (A) or (B) depending on the FrameVelocityConvention used.
+     * @note spatialMomentum vector has to be a 6d-vector. The first 3 elements will contain
+     * the linear part, while the last 3 elements the angular part.
+     * @note Implementation incomplete, please refrain to use until this warning has been removed.
+     * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true on success, false otherwise.
+     */
+    bool getLinearAngularMomentum(iDynTree::Span<double> spatialMomentum);
+
+    /**
+     * Get the linear and angular momentum jacobian of the robot.
+     * The quantity is expressed in (B[A]), (A) or (B) depending on the FrameVelocityConvention used.
      *
      * \note Implementation incomplete, please refrain to use until this warning has been removed.
      */
     bool getLinearAngularMomentumJacobian(MatrixDynSize & linAngMomentumJacobian);
+
+    /**
+     * Get the linear and angular momentum jacobian of the robot (MatrixView implementation).
+     * The quantity is expressed in (B[A]), (A) or (B) depending on the FrameVelocityConvention used.
+     * @note Implementation incomplete, please refrain to use until this warning has been removed.
+     * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true on success, false otherwise.
+     */
+    bool getLinearAngularMomentumJacobian(iDynTree::MatrixView<double> linAngMomentumJacobian);
 
     /**
      * Get the centroidal (total) momentum of the robot.
@@ -622,6 +1029,15 @@ public:
      *
      */
     iDynTree::SpatialMomentum getCentroidalTotalMomentum();
+
+    /**
+     * Get the centroidal (total) momentum of the robot.
+     * If G is the center of mass, this quantity is expressed in (G[A]), (G[A]) or (G[B]) depending on the FrameVelocityConvention used.
+     *
+     * @warning the Span object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true on success, false otherwise.
+     */
+    bool getCentroidalTotalMomentum(iDynTree::Span<double> spatial_momentum);
 
     /**
      * @brief Get the total centroidal momentum jacobian of the robot.
@@ -635,6 +1051,20 @@ public:
      * introduced in https://doi.org/10.1109/IROS.2008.4650772 .
      */
     bool getCentroidalTotalMomentumJacobian(MatrixDynSize& centroidalTotalMomentumJacobian);
+
+    /**
+     * @brief Get the total centroidal momentum jacobian of the robot.
+     * If G is the center of mass, this quantity is expressed in (G[A]), (G[A]) or (G[B]) depending
+     * on the FrameVelocityConvention used (MatrixView implementation).
+     * @param[out] centroidalTotalMomentumJacobian the (6) times (6+getNrOfDOFs()) output centroidal
+     * total momentum jacobian.
+     * @return true if all went well, false otherwise.
+     * @note If the chosen FrameVelocityRepresentation is MIXED_REPRESENTATION or
+     * INERTIAL_FIXED_REPRESENTATION, the function computes the Centroidal Momentum Matrix (CMM)
+     * introduced in https://doi.org/10.1109/IROS.2008.4650772 .
+     * @warning the MatrixView object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     */
+    bool getCentroidalTotalMomentumJacobian(iDynTree::MatrixView<double> centroidalTotalMomentumJacobian);
 
     //@}
 
@@ -704,6 +1134,26 @@ public:
      */
     bool getFreeFloatingMassMatrix(MatrixDynSize & freeFloatingMassMatrix);
 
+    /**
+     * @brief Get the free floating mass matrix of the system (MatrixView version).
+     *
+     * This method computes \f$M(q) \in \mathbb{R}^{(6+n_{DOF}) \times (6+n_{DOF})}\f$.
+     *
+     * The mass matrix depends on the joint positions, specified by the setRobotState methods.
+     * If the chosen FrameVelocityRepresentation is MIXED_REPRESENTATION or INERTIAL_FIXED_REPRESENTATION,
+     * the mass matrix depends also on the base orientation with respect to the inertial frame,
+     * that is also set by the  setRobotState methods.
+     *
+     * For more details on the structure of the free floating mass matrix, please check:
+     * S. Traversaro, A. Saccon
+     * Multibody Dynamics Notation
+     * http://repository.tue.nl/849895
+     *
+     * @param[out] freeFloatingMassMatrix the (6+getNrOfDOFs()) times (6+getNrOfDOFs()) output mass matrix.
+     * @warning the MatrixView object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if all went well, false otherwise.
+     */
+    bool getFreeFloatingMassMatrix(iDynTree::MatrixView<double> freeFloatingMassMatrix);
 
     /**
      * @brief Compute the free floating inverse dynamics.
@@ -727,6 +1177,28 @@ public:
                                FreeFloatingGeneralizedTorques & baseForceAndJointTorques);
 
     /**
+     * @brief Compute the free floating inverse dynamics (Span version).
+     *
+     * This method computes \f$M(q) \dot{\nu} + C(q, \nu) \nu + G(q) - \sum_{L \in \mathcal{L}} J_L^T \mathrm{f}_L^x \in \mathbb{R}^{6+n_{DOF}}\f$.
+     *
+     * The semantics of baseAcc, the base part of baseForceAndJointTorques
+     * and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .
+     *
+     * The state is the one given set by the setRobotState method.
+     *
+     * @param[in] baseAcc the acceleration of the base link
+     * @param[in] s_ddot the accelerations of the joints
+     * @param[in] linkExtForces the external wrenches excerted by the environment on the model
+     * @param[out] baseForceAndJointTorques the output generalized torques
+     * @warning the Span objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if all went well, false otherwise.
+     */
+    bool inverseDynamics(iDynTree::Span<const double> baseAcc,
+                         iDynTree::Span<const double> s_ddot,
+                         const LinkNetExternalWrenches & linkExtForces,
+                               FreeFloatingGeneralizedTorques & baseForceAndJointTorques);
+
+    /**
      * @brief Compute the getNrOfDOFS()+6 vector of generalized bias (gravity+coriolis) forces.
      *
      * This method computes \f$C(q, \nu) \nu + G(q) \in \mathbb{R}^{6+n_{DOF}}\f$.
@@ -741,6 +1213,24 @@ public:
     bool generalizedBiasForces(FreeFloatingGeneralizedTorques & generalizedBiasForces);
 
     /**
+     * @brief Compute the getNrOfDOFS()+6 vector of generalized bias (gravity+coriolis) forces. (Span version)
+     *
+     * This method computes \f$C(q, \nu) \nu + G(q) \in \mathbb{R}^{6+n_{DOF}}\f$.
+     *
+     * The semantics of the base part of generalizedBiasForces depend of the chosen FrameVelocityRepresentation .
+     *
+     * The state is the one given set by the setRobotState method.
+     *
+     * @note generalizedBiasForces has to be a (6 + dofs)-d vector. The first 6 elements will
+     * contain the bias forces related to the system base, while the last dofs elements
+     * related to the joints.
+     *
+     * @warning the Span objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if all went well, false otherwise.
+     */
+    bool generalizedBiasForces(iDynTree::Span<double> generalizedBiasForces);
+
+    /**
      * @brief Compute the getNrOfDOFS()+6 vector of generalized gravity forces.
      *
      * This method computes \f$G(q) \in \mathbb{R}^{6+n_{DOF}}\f$.
@@ -753,6 +1243,24 @@ public:
      * @return true if all went well, false otherwise
      */
     bool generalizedGravityForces(FreeFloatingGeneralizedTorques & generalizedGravityForces);
+
+    /**
+     * @brief Compute the getNrOfDOFS()+6 vector of generalized gravity forces.
+     *
+     * This method computes \f$G(q) \in \mathbb{R}^{6+n_{DOF}}\f$.
+     *
+     * The semantics of the base part of generalizedGravityForces depend of the chosen FrameVelocityRepresentation .
+     *
+     * The state is the one given set by the setRobotState method.
+     *
+     * @note generalizedGravityForces has to be a (6 + dofs)-d vector. The first 6 elements will
+     * contain the bias forces related to the system base, while the last dofs elements
+     * related to the joints.
+     *
+     * @warning the Span objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if all went well, false otherwise.
+     */
+    bool generalizedGravityForces(iDynTree::Span<double> generalizedGravityForces);
 
     /**
      * @brief Compute the getNrOfDOFS()+6 vector of generalized external forces.
@@ -807,4 +1315,3 @@ public:
 }
 
 #endif
-

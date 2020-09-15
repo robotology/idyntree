@@ -80,6 +80,18 @@ namespace iDynTree
          */
         VectorDynSize(const VectorDynSize& vec);
 
+#if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
+
+        /**
+         * Constructor from an iDynTree::Span
+         *
+         * @param vec span representing a vector
+         *
+         * \warning performs dynamic memory allocation operations
+         */
+        VectorDynSize(iDynTree::Span<const double> vec);
+#endif
+
         /**
          * Denstructor
          *
@@ -108,7 +120,7 @@ namespace iDynTree
          *
          * \warning performs dynamic memory allocation operations
          */
-        VectorDynSize & operator=(const Span<const double>& vec);
+        VectorDynSize & operator=(iDynTree::Span<const double> vec);
 #endif
         /**
          * @name Vector interface methods.

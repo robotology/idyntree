@@ -21,6 +21,8 @@ namespace iDynTree
     class SpatialForceVector;
     class ClassicalAcc;
     class RotationalInertiaRaw;
+    template<class>
+    class MatrixView;
 
     /**
      * Class providing the raw coordinates for iDynTree::Rotation class.
@@ -62,6 +64,8 @@ namespace iDynTree
         RotationRaw(const double* in_data,
                     const unsigned int in_rows,
                     const unsigned int in_cols);
+
+        RotationRaw(iDynTree::MatrixView<const double> other);
 
         /**
          * Copy constructor: create a RotationRaw from another RotationRaw.

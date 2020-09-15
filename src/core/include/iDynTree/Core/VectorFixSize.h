@@ -54,6 +54,15 @@ namespace iDynTree
          */
         VectorFixSize(const double * in_data, const unsigned int in_size);
 
+#if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
+        /**
+         * Constructor from an iDynTree::Span
+         *
+         * Print an error an build a vector full of zeros if in_size is not size().
+         */
+        VectorFixSize(iDynTree::Span<const double> vec);
+#endif
+
         /**
          * @name Vector interface methods.
          * Methods exposing a vector-like interface to VectorFixSize.
@@ -124,7 +133,7 @@ namespace iDynTree
          * Checks that dimensions are matching through an assert.
          *
          */
-        VectorFixSize & operator=(const Span<const double>& vec);
+        VectorFixSize & operator=(iDynTree::Span<const double> vec);
 #endif
 
         /**
@@ -209,6 +218,15 @@ namespace iDynTree
         }
     }
 
+#if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
+
+    template<unsigned int VecSize>
+    VectorFixSize<VecSize>::VectorFixSize(iDynTree::Span<const double> vec)
+        : VectorFixSize<VecSize>::VectorFixSize(vec.data(), vec.size())
+        {}
+
+#endif
+
     template<unsigned int VecSize>
     void VectorFixSize<VecSize>::zero()
     {
@@ -275,7 +293,7 @@ namespace iDynTree
 
 #if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
     template<unsigned int VecSize>
-    VectorFixSize<VecSize> & VectorFixSize<VecSize>::operator=(const Span<const double>& vec) {
+    VectorFixSize<VecSize> & VectorFixSize<VecSize>::operator=(iDynTree::Span<const double> vec) {
         assert(VecSize == vec.size());
         std::memcpy(this->m_data, vec.data(), VecSize*sizeof(double));
         return *this;

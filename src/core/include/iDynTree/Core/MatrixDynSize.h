@@ -98,6 +98,16 @@ namespace iDynTree
          */
         MatrixDynSize(const MatrixDynSize& other);
 
+
+        /**
+         * Constructor from MatrixView object
+         *
+         * @param other MatrixView to copy
+         * \warning performs dynamic memory allocation operations
+         *
+         */
+        MatrixDynSize(iDynTree::MatrixView<const double> other);
+
         /**
          * Assignment operator
          *
@@ -114,7 +124,7 @@ namespace iDynTree
          *
          * @return *this
          */
-        MatrixDynSize& operator=(const MatrixView<const double>& other);
+        MatrixDynSize& operator=(iDynTree::MatrixView<const double> other);
 
         /**
          * Denstructor

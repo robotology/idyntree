@@ -31,6 +31,7 @@ namespace iDynTree
 
     namespace MatrixViewInternal
     {
+#ifndef SWIG
         // this is required to be compatible with c++17
         template <typename... Ts> struct make_void { typedef void type; };
         template <typename... Ts> using void_t = typename make_void<Ts...>::type;
@@ -51,6 +52,7 @@ namespace iDynTree
          */
         template <typename T>
         struct has_IsRowMajor<T, void_t<decltype(T::IsRowMajor)>> : std::true_type {};
+#endif
 
     } // namespace MatrixViewIntenal
 
@@ -109,6 +111,7 @@ namespace iDynTree
         {
         }
 
+#ifndef SWIG
         template <
             class OtherElementType,
             class = std::enable_if_t<
@@ -173,6 +176,8 @@ namespace iDynTree
             : MatrixView(matrix.data(), matrix.rows(), matrix.cols(), order)
         {
         }
+
+#endif // SWIG
 
         MatrixView(pointer in_data,
                    index_type in_rows,

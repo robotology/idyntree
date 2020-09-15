@@ -71,6 +71,12 @@ namespace iDynTree
     {
 
     }
+
+    Rotation::Rotation(MatrixView<const double> other): RotationRaw(other)
+    {
+
+    }
+
     const Rotation& Rotation::changeOrientFrame(const Rotation& newOrientFrame)
     {
         this->RotationRaw::changeOrientFrame(newOrientFrame);

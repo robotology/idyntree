@@ -13,6 +13,7 @@
 
 
 #include <iDynTree/Core/Utils.h>
+#include <iDynTree/Core/MatrixView.h>
 
 #include <cassert>
 #include <cstring>
@@ -77,6 +78,13 @@ namespace iDynTree
         MatrixFixSize(const double * in_data, const unsigned int in_rows, const unsigned int in_cols);
 
         /**
+         * Constructor from a MatrixView
+         *
+         * \warning this class stores data using the row major order
+         */
+        MatrixFixSize(iDynTree::MatrixView<const double> other);
+
+        /**
          * @name Matrix interface methods.
          * Methods exposing a matrix-like interface to MatrixFixSize.
          *
@@ -89,6 +97,8 @@ namespace iDynTree
         unsigned int rows() const;
         unsigned int cols() const;
         ///@}
+
+        MatrixFixSize & operator=(iDynTree::MatrixView<const double> mat);
 
         /**
          * Raw data accessor
@@ -186,6 +196,27 @@ namespace iDynTree
     }
 
     template<unsigned int nRows, unsigned int nCols>
+    MatrixFixSize<nRows,nCols>::MatrixFixSize(iDynTree::MatrixView<const double> other)
+    {
+        if( other.rows() != nRows ||
+            other.cols() != nCols )
+        {
+            reportError("MatrixFixSize","constructor","input matrix does not have the right size");
+            this->zero();
+        }
+        else
+        {
+            for(unsigned int row=0; row < nRows; row++ )
+            {
+                for(unsigned int col=0; col < nCols; col++ )
+                {
+                    this->m_data[rawIndexRowMajor(row,col)] = other(row, col);
+                }
+            }
+        }
+    }
+
+    template<unsigned int nRows, unsigned int nCols>
     void MatrixFixSize<nRows,nCols>::zero()
     {
         for(unsigned int row=0; row < this->rows(); row++ )
@@ -219,6 +250,21 @@ namespace iDynTree
     const double* MatrixFixSize<nRows,nCols>::data() const
     {
         return this->m_data;
+    }
+
+    template<unsigned int nRows, unsigned int nCols>
+    MatrixFixSize<nRows,nCols> & MatrixFixSize<nRows,nCols>::operator=(iDynTree::MatrixView<const double> mat) {
+        assert(nCols == mat.cols());
+        assert(nRows == mat.rows());
+
+        for(unsigned int i = 0; i < nRows; i++)
+        {
+            for(unsigned int j = 0; j < nCols; j++)
+            {
+                this->m_data[this->rawIndexRowMajor(i,j)] = mat(i, j);
+            }
+        }
+        return *this;
     }
 
     template<unsigned int nRows, unsigned int nCols>

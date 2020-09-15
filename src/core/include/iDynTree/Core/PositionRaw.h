@@ -52,6 +52,12 @@ namespace iDynTree
         PositionRaw(const PositionRaw & other);
 
         /**
+         * Construct from a span
+         * @warning if the Span size is different from 3 an assert is thrown at run-time.
+         */
+        PositionRaw(iDynTree::Span<const double> other);
+
+        /**
          * Geometric operations
          */
         const PositionRaw & changePoint(const PositionRaw & newPoint);
