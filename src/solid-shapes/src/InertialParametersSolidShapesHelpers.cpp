@@ -31,7 +31,7 @@ namespace iDynTree
 SpatialInertia boxGet6DInertiaInLinkFrameFromDensity(const Box& box,
                                                      double density)
 {
-    double boxVolume = box.x*box.y*box.z;
+    double boxVolume = box.getX() * box.getY() * box.getZ();
     double boxMass   = density*boxVolume;
     // Assuming uniform density, the center of mass is coincident with the box center
     PositionRaw comInGeomFrame;
@@ -39,21 +39,21 @@ SpatialInertia boxGet6DInertiaInLinkFrameFromDensity(const Box& box,
     // From http://scienceworld.wolfram.com/physics/MomentofInertiaRectangularParallelepiped.html
     RotationalInertiaRaw rotInertiaInGeomFrame;
     rotInertiaInGeomFrame.zero();
-    double x2 = box.x*box.x;
-    double y2 = box.y*box.y;
-    double z2 = box.z*box.z;
+    double x2 = box.getX() * box.getX();
+    double y2 = box.getY() * box.getY();
+    double z2 = box.getZ() * box.getZ();
     rotInertiaInGeomFrame(0, 0) = (boxMass/12.0)*(y2+z2);
     rotInertiaInGeomFrame(1, 1) = (boxMass/12.0)*(x2+z2);
     rotInertiaInGeomFrame(2, 2) = (boxMass/12.0)*(x2+y2);
 
     SpatialInertia inertiaInGeometryFrame = SpatialInertia(boxMass, comInGeomFrame, rotInertiaInGeomFrame);
 
-    return box.link_H_geometry*inertiaInGeometryFrame;
+    return box.getLink_H_geometry() * inertiaInGeometryFrame;
 }
 
 double boxGetVolume(const Box& box)
 {
-    return box.x*box.y*box.z;
+    return box.getX() * box.getY() * box.getX();
 }
 
 #ifdef IDYNTREE_USES_ASSIMP

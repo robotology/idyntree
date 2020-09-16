@@ -273,10 +273,10 @@ LinkIndex Model::addLink(const std::string& name, const Link& link)
     }
 
     // Add an empty vector of collision shapes
-    m_collisionSolidShapes.linkSolidShapes.push_back(std::vector<SolidShape*>(0));
+    m_collisionSolidShapes.getLinkSolidShapes().push_back(std::vector<SolidShape*>(0));
 
     // Add an empty vector of visual shapes
-    m_visualSolidShapes.linkSolidShapes.push_back(std::vector<SolidShape*>(0));
+    m_visualSolidShapes.getLinkSolidShapes().push_back(std::vector<SolidShape*>(0));
 
 
     return newLinkIndex;

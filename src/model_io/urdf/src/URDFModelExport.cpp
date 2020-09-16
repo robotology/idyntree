@@ -162,7 +162,7 @@ bool exportSolidShape(const SolidShape* solidShape, exportSolidShapePropertyType
         xmlNodePtr box_xml = xmlNewChild(geometry_xml, NULL, BAD_CAST "box", NULL);
 
         // Export size attribute
-        double size_data[3] = {box->x, box->y, box->z};
+        double size_data[3] = {box->getX(), box->getY(), box->getZ()};
         std::string size_str;
         ok = ok && vectorToString(Vector3(size_data, 3) , size_str);
         xmlNewProp(box_xml, BAD_CAST "size", BAD_CAST size_str.c_str());
@@ -175,12 +175,12 @@ bool exportSolidShape(const SolidShape* solidShape, exportSolidShapePropertyType
 
         // Export radius attribute
         std::string radius_str;
-        ok = ok && doubleToStringWithClassicLocale(cylinder->radius, radius_str);
+        ok = ok && doubleToStringWithClassicLocale(cylinder->getRadius(), radius_str);
         xmlNewProp(cylinder_xml, BAD_CAST "radius", BAD_CAST radius_str.c_str());
 
         // Export length attribute
         std::string length_str;
-        ok = ok && doubleToStringWithClassicLocale(cylinder->length, length_str);
+        ok = ok && doubleToStringWithClassicLocale(cylinder->getLength(), length_str);
         xmlNewProp(cylinder_xml, BAD_CAST "length", BAD_CAST length_str.c_str());
 
     } else if (solidShape->isSphere()) {
@@ -191,7 +191,7 @@ bool exportSolidShape(const SolidShape* solidShape, exportSolidShapePropertyType
 
         // Export radius attribute
         std::string radius_str;
-        ok = ok && doubleToStringWithClassicLocale(sphere->radius, radius_str);
+        ok = ok && doubleToStringWithClassicLocale(sphere->getRadius(), radius_str);
         xmlNewProp(sphere_xml, BAD_CAST "radius", BAD_CAST radius_str.c_str());
 
     } else if (solidShape->isExternalMesh()) {
@@ -201,11 +201,11 @@ bool exportSolidShape(const SolidShape* solidShape, exportSolidShapePropertyType
         xmlNodePtr mesh_xml = xmlNewChild(geometry_xml, NULL, BAD_CAST "mesh", NULL);
 
         // Export filename attribute
-        xmlNewProp(mesh_xml, BAD_CAST "filename", BAD_CAST mesh->filename.c_str());
+        xmlNewProp(mesh_xml, BAD_CAST "filename", BAD_CAST mesh->getFilename().c_str());
 
         // Export scale attribute
         std::string scale_str;
-        ok = ok && vectorToString(mesh->scale, scale_str);
+        ok = ok && vectorToString(mesh->getScale(), scale_str);
         xmlNewProp(mesh_xml, BAD_CAST "scale", BAD_CAST scale_str.c_str());
 
     } else {
@@ -263,15 +263,15 @@ bool exportLink(const Link &link, const std::string linkName, const Model& model
     LinkIndex linkIndex = model.getLinkIndex(linkName);
 
     // Export visual shapes
-    for(unsigned int shapeIdx=0; shapeIdx < model.visualSolidShapes().linkSolidShapes[linkIndex].size(); shapeIdx++) {
-        SolidShape * exportedShape = model.visualSolidShapes().linkSolidShapes[linkIndex][shapeIdx];
+    for(unsigned int shapeIdx=0; shapeIdx < model.visualSolidShapes().getLinkSolidShapes()[linkIndex].size(); shapeIdx++) {
+        SolidShape * exportedShape = model.visualSolidShapes().getLinkSolidShapes()[linkIndex][shapeIdx];
         exportSolidShape(exportedShape, VISUAL, link_xml);
     }
 
     // Export collision shapes
-    for(unsigned int shapeIdx=0; shapeIdx < model.collisionSolidShapes().linkSolidShapes[linkIndex].size(); shapeIdx++) {
+    for(unsigned int shapeIdx=0; shapeIdx < model.collisionSolidShapes().getLinkSolidShapes()[linkIndex].size(); shapeIdx++) {
         // Clone the shape
-        SolidShape * exportedShape = model.collisionSolidShapes().linkSolidShapes[linkIndex][shapeIdx];
+        SolidShape * exportedShape = model.collisionSolidShapes().getLinkSolidShapes()[linkIndex][shapeIdx];
         exportSolidShape(exportedShape, COLLISION, link_xml);
     }
 

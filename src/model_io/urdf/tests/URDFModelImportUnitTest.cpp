@@ -38,7 +38,7 @@ unsigned int getNrOfVisuals(const iDynTree::Model& model)
 {
     unsigned int nrOfVisuals = 0;
     for (LinkIndex index = 0; index < model.getNrOfLinks(); ++index) {
-        nrOfVisuals += model.visualSolidShapes().linkSolidShapes[index].size();
+        nrOfVisuals += model.visualSolidShapes().getLinkSolidShapes()[index].size();
     }
     return nrOfVisuals;
 }
@@ -47,7 +47,7 @@ unsigned int getNrOfCollisions(const iDynTree::Model& model)
 {
     unsigned int nrOfCollisions = 0;
     for (LinkIndex index = 0; index < model.getNrOfLinks(); ++index) {
-        nrOfCollisions += model.collisionSolidShapes().linkSolidShapes[index].size();
+        nrOfCollisions += model.collisionSolidShapes().getLinkSolidShapes()[index].size();
     }
     return nrOfCollisions;
 }
