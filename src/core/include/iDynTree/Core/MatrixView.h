@@ -57,16 +57,7 @@ namespace iDynTree
     } // namespace MatrixViewIntenal
 
     /**
-     * Type of storage ordering
-     */
-    enum class StorageOrder
-    {
-        RowMajor,
-        ColMajor
-    };
-
-    /**
-     * MatrixView implements a view interface of Matrices. Both RowMajor and ColMajor matrices are
+     * MatrixView implements a view interface of Matrices. Both RowMajor and ColumnMajor matrices are
      * supported.
      * @note The user should define the storage ordering when the MatrixView is created (the default
      order is RowMajor). However if the MatrixView is generated:
@@ -88,11 +79,11 @@ namespace iDynTree
         index_type m_rows;
         index_type m_cols;
 
-        StorageOrder m_storageOrder;
+        MatrixStorageOrdering m_storageOrder;
 
         index_type rawIndex(index_type row, index_type col) const
         {
-            if (m_storageOrder == StorageOrder::RowMajor)
+            if (m_storageOrder == MatrixStorageOrdering::RowMajor)
             {
                 return (col + this->m_cols * row);
             } else
@@ -104,7 +95,7 @@ namespace iDynTree
     public:
 
         MatrixView()
-            : MatrixView(nullptr, 0, 0, StorageOrder::RowMajor)
+            : MatrixView(nullptr, 0, 0, MatrixStorageOrdering::RowMajor)
         {}
         MatrixView(const MatrixView& other)
             : MatrixView(other.m_storage, other.m_rows, other.m_cols, other.m_storageOrder)
@@ -133,8 +124,8 @@ namespace iDynTree
             : MatrixView(matrix.data(),
                          matrix.rows(),
                          matrix.cols(),
-                         Container::IsRowMajor ? StorageOrder::RowMajor
-                                               : StorageOrder::ColMajor)
+                         Container::IsRowMajor ? MatrixStorageOrdering::RowMajor
+                                               : MatrixStorageOrdering::ColumnMajor)
         {
         }
 
@@ -146,7 +137,7 @@ namespace iDynTree
                                  && !MatrixViewInternal::has_IsRowMajor<Container>::value
                                  && !std::is_same<Container, MatrixView>::value,
                              int> = 0>
-        MatrixView(const Container& matrix, const StorageOrder& order = StorageOrder::RowMajor)
+        MatrixView(const Container& matrix, const MatrixStorageOrdering& order = MatrixStorageOrdering::RowMajor)
             : MatrixView(matrix.data(), matrix.rows(), matrix.cols(), order)
         {
         }
@@ -161,8 +152,8 @@ namespace iDynTree
             : MatrixView(matrix.data(),
                          matrix.rows(),
                          matrix.cols(),
-                         Container::IsRowMajor ? StorageOrder::RowMajor
-                                               : StorageOrder::ColMajor)
+                         Container::IsRowMajor ? MatrixStorageOrdering::RowMajor
+                                               : MatrixStorageOrdering::ColumnMajor)
         {
         }
 
@@ -172,7 +163,7 @@ namespace iDynTree
                           && !MatrixViewInternal::has_IsRowMajor<Container>::value
                           && !std::is_same<Container, MatrixView>::value,
                       int> = 0>
-        MatrixView(Container& matrix, const StorageOrder& order = StorageOrder::RowMajor)
+        MatrixView(Container& matrix, const MatrixStorageOrdering& order = MatrixStorageOrdering::RowMajor)
             : MatrixView(matrix.data(), matrix.rows(), matrix.cols(), order)
         {
         }
@@ -182,7 +173,7 @@ namespace iDynTree
         MatrixView(pointer in_data,
                    index_type in_rows,
                    index_type in_cols,
-                   const StorageOrder& order = StorageOrder::RowMajor)
+                   const MatrixStorageOrdering& order = MatrixStorageOrdering::RowMajor)
             : m_storage(in_data)
             , m_rows(in_rows)
             , m_cols(in_cols)
@@ -190,7 +181,7 @@ namespace iDynTree
         {
         }
 
-        const StorageOrder& storageOrder() const noexcept
+        const MatrixStorageOrdering& storageOrder() const noexcept
         {
             return m_storageOrder;
         }
@@ -230,7 +221,7 @@ namespace iDynTree
     make_matrix_view(ElementType* ptr,
                      typename MatrixView<ElementType>::index_type rows,
                      typename MatrixView<ElementType>::index_type cols,
-                     const StorageOrder& order = StorageOrder::RowMajor)
+                     const MatrixStorageOrdering& order = MatrixStorageOrdering::RowMajor)
     {
         return MatrixView<ElementType>(ptr, rows, cols, order);
     }
@@ -262,7 +253,7 @@ namespace iDynTree
                   int> = 0>
     IDYNTREE_CONSTEXPR MatrixView<typename Container::value_type>
     make_matrix_view(Container& cont,
-                     const StorageOrder& order = StorageOrder::RowMajor)
+                     const MatrixStorageOrdering& order = MatrixStorageOrdering::RowMajor)
     {
         return MatrixView<typename Container::value_type>(cont, order);
     }
@@ -274,7 +265,7 @@ namespace iDynTree
                   int> = 0>
     IDYNTREE_CONSTEXPR MatrixView<const typename Container::value_type>
     make_matrix_view(const Container& cont,
-                     const StorageOrder& order = StorageOrder::RowMajor)
+                     const MatrixStorageOrdering& order = MatrixStorageOrdering::RowMajor)
     {
         return MatrixView<const typename Container::value_type>(cont, order);
     }
