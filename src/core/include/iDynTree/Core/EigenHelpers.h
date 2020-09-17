@@ -81,7 +81,7 @@ toEigen(const MatrixView<const double>& mat)
 {
     using MatrixRowMajor = Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor>;
 
-    // This is a trick required to see a ColMajor matrix as a RowMajor matrix.
+    // This is a trick required to see a ColumnMajor matrix as a RowMajor matrix.
     //
     // Given the following matrix
     //     _                 _                     _
@@ -94,11 +94,11 @@ toEigen(const MatrixView<const double>& mat)
     // the elements are saved
     // v_row = [1 2 3 4 5 6 7 8 9 10]
     //
-    // If the matrix is stored as ColMajor matrix there will be a vector v_col in which
+    // If the matrix is stored as ColumnMajor matrix there will be a vector v_col in which
     // the elements are saved
     // v_col = [1 6 2 7 3 8 4 9 5 10]
     //
-    // Our goal here is to build a RowMajor Matrix (independently it is RowMajor/ColMajor)
+    // Our goal here is to build a RowMajor Matrix (independently it is RowMajor/ColumnMajor)
     // starting from the raw vactor (v_row, v_col)
     //
     // From the Eigen documentation https://eigen.tuxfamily.org/dox/classEigen_1_1Stride.html
@@ -113,8 +113,8 @@ toEigen(const MatrixView<const double>& mat)
     //    - inner_stride = 2 = number of rows of A
     //    - outer_stride = 1
 
-    const int innerStride = (mat.storageOrder() == StorageOrder::ColMajor) ? mat.rows() : 1;
-    const int outerStride = (mat.storageOrder() == StorageOrder::ColMajor) ? 1 : mat.cols();
+    const int innerStride = (mat.storageOrder() == MatrixStorageOrdering::ColumnMajor) ? mat.rows() : 1;
+    const int outerStride = (mat.storageOrder() == MatrixStorageOrdering::ColumnMajor) ? 1 : mat.cols();
 
     return Eigen::Map<const MatrixRowMajor, 0, Eigen::Stride<Eigen::Dynamic, Eigen::Dynamic>>(
         mat.data(),
@@ -130,7 +130,7 @@ toEigen(const MatrixView<double>& mat)
 {
     using MatrixRowMajor = Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor>;
 
-    // This is a trick required to see a ColMajor matrix as a RowMajor matrix.
+    // This is a trick required to see a ColumnMajor matrix as a RowMajor matrix.
     //
     // Given the following matrix
     //     _                 _                     _
@@ -143,11 +143,11 @@ toEigen(const MatrixView<double>& mat)
     // the elements are saved as
     // v_row = [1 2 3 4 5 6 7 8 9 10]
     //
-    // If the matrix is stored as ColMajor matrix there will be a vector v_col in which
+    // If the matrix is stored as ColumnMajor matrix there will be a vector v_col in which
     // the elements are saved as
     // v_col = [1 6 2 7 3 8 4 9 5 10]
     //
-    // Our goal here is to build a RowMajor Matrix (independently it is RowMajor/ColMajor)
+    // Our goal here is to build a RowMajor Matrix (independently it is RowMajor/ColumnMajor)
     // starting from the raw vactor (v_row, v_col)
     //
     // From the Eigen documentation https://eigen.tuxfamily.org/dox/classEigen_1_1Stride.html
@@ -162,8 +162,8 @@ toEigen(const MatrixView<double>& mat)
     //    - inner_stride = 2 = number of rows of A
     //    - outer_stride = 1
 
-    const int innerStride = (mat.storageOrder() == StorageOrder::ColMajor) ? mat.rows() : 1;
-    const int outerStride = (mat.storageOrder() == StorageOrder::ColMajor) ? 1 : mat.cols();
+    const int innerStride = (mat.storageOrder() == MatrixStorageOrdering::ColumnMajor) ? mat.rows() : 1;
+    const int outerStride = (mat.storageOrder() == MatrixStorageOrdering::ColumnMajor) ? 1 : mat.cols();
 
     return Eigen::Map<MatrixRowMajor, 0, Eigen::Stride<Eigen::Dynamic, Eigen::Dynamic>>(
         mat.data(),
