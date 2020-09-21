@@ -297,34 +297,36 @@ void reducedModelAddSolidShapes(const Model& fullModel,
         Transform subModelBase_H_visitedLink     = subModelBase_X_link(visitedLinkIndex);
 
         // Add visual shapes to the new lumped link, i.e. the subModelBase
-        for(int shapeIdx=0; shapeIdx < fullModel.visualSolidShapes().linkSolidShapes[visitedLinkIndex].size(); shapeIdx++)
+        auto& visualSolidShapes = fullModel.visualSolidShapes().getLinkSolidShapes();
+        for(int shapeIdx=0; shapeIdx < visualSolidShapes[visitedLinkIndex].size(); shapeIdx++)
         {
             // Clone the shape
-            SolidShape * copiedShape = fullModel.visualSolidShapes().linkSolidShapes[visitedLinkIndex][shapeIdx]->clone();
+            SolidShape * copiedShape = visualSolidShapes[visitedLinkIndex][shapeIdx]->clone();
 
             // Update shape transform from the old link to the new link
-            Transform visitedLink_H_shape = fullModel.visualSolidShapes().linkSolidShapes[visitedLinkIndex][shapeIdx]->link_H_geometry;
-            copiedShape->link_H_geometry = subModelBase_H_visitedLink*visitedLink_H_shape;
+            Transform visitedLink_H_shape = visualSolidShapes[visitedLinkIndex][shapeIdx]->getLink_H_geometry();
+            copiedShape->setLink_H_geometry(subModelBase_H_visitedLink * visitedLink_H_shape);
 
             // Ownership of the new pointer is transfered to the ModelSolidShapes class
             // (it will be eventually deleted by the close() method
-            reducedModel.visualSolidShapes().linkSolidShapes[subModelBaseIndexInReducedModel].push_back(copiedShape);
+            reducedModel.visualSolidShapes().getLinkSolidShapes()[subModelBaseIndexInReducedModel].push_back(copiedShape);
         }
 
         // Add collision shapes to the new lumped link, i.e. the subModelBase
-        for(int shapeIdx=0; shapeIdx < fullModel.collisionSolidShapes().linkSolidShapes[visitedLinkIndex].size(); shapeIdx++)
+        auto& collisionSolidShapes = fullModel.collisionSolidShapes().getLinkSolidShapes();
+        for(int shapeIdx=0; shapeIdx < collisionSolidShapes[visitedLinkIndex].size(); shapeIdx++)
         {
             // Clone the shape : ownership of the new pointer is transfered to the ModelSolidShapes class
             // (it will be eventually deleted by the close() method
-            SolidShape * copiedShape = fullModel.collisionSolidShapes().linkSolidShapes[visitedLinkIndex][shapeIdx]->clone();
+            SolidShape * copiedShape = collisionSolidShapes[visitedLinkIndex][shapeIdx]->clone();
 
             // Update shape transform from the old link to the new link
-            Transform visitedLink_H_shape = fullModel.collisionSolidShapes().linkSolidShapes[visitedLinkIndex][shapeIdx]->link_H_geometry;
-            copiedShape->link_H_geometry = subModelBase_H_visitedLink*visitedLink_H_shape;
+            Transform visitedLink_H_shape = collisionSolidShapes[visitedLinkIndex][shapeIdx]->getLink_H_geometry();
+            copiedShape->setLink_H_geometry(subModelBase_H_visitedLink*visitedLink_H_shape);
 
             // Ownership of the new pointer is transfered to the ModelSolidShapes class
             // (it will be eventually deleted by the close() method
-            reducedModel.collisionSolidShapes().linkSolidShapes[subModelBaseIndexInReducedModel].push_back(copiedShape);
+            reducedModel.collisionSolidShapes().getLinkSolidShapes()[subModelBaseIndexInReducedModel].push_back(copiedShape);
         }
     }
 

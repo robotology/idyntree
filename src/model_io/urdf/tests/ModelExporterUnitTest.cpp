@@ -27,7 +27,7 @@ unsigned int getNrOfVisuals(const iDynTree::Model& model)
 {
     unsigned int nrOfVisuals = 0;
     for (LinkIndex index = 0; index < model.getNrOfLinks(); ++index) {
-        nrOfVisuals += model.visualSolidShapes().linkSolidShapes[index].size();
+        nrOfVisuals += model.visualSolidShapes().getLinkSolidShapes()[index].size();
     }
     return nrOfVisuals;
 }
@@ -36,7 +36,7 @@ unsigned int getNrOfCollisions(const iDynTree::Model& model)
 {
     unsigned int nrOfCollisions = 0;
     for (LinkIndex index = 0; index < model.getNrOfLinks(); ++index) {
-        nrOfCollisions += model.collisionSolidShapes().linkSolidShapes[index].size();
+        nrOfCollisions += model.collisionSolidShapes().getLinkSolidShapes()[index].size();
     }
     return nrOfCollisions;
 }
@@ -48,34 +48,34 @@ void checkSolidAreEqual(SolidShape* solid, SolidShape* solidCheck)
     ASSERT_IS_TRUE(solid->isSphere() == solidCheck->isSphere());
     ASSERT_IS_TRUE(solid->isExternalMesh() == solidCheck->isExternalMesh());
 
-    ASSERT_IS_TRUE(solid->name == solidCheck->name);
-    ASSERT_IS_TRUE(solid->nameIsValid == solidCheck->nameIsValid);
+    ASSERT_IS_TRUE(solid->getName() == solidCheck->getName());
+    ASSERT_IS_TRUE(solid->isNameValid() == solidCheck->isNameValid());
 
-    ASSERT_EQUAL_TRANSFORM(solid->link_H_geometry, solidCheck->link_H_geometry);
+    ASSERT_EQUAL_TRANSFORM(solid->getLink_H_geometry(), solidCheck->getLink_H_geometry());
 
     if (solid->isBox()) {
         const Box* box = solid->asBox();
         const Box* boxCheck = solidCheck->asBox();
-        ASSERT_EQUAL_DOUBLE(box->x, boxCheck->x);
-        ASSERT_EQUAL_DOUBLE(box->y, boxCheck->y);
-        ASSERT_EQUAL_DOUBLE(box->z, boxCheck->z);
+        ASSERT_EQUAL_DOUBLE(box->getX(), boxCheck->getX());
+        ASSERT_EQUAL_DOUBLE(box->getY(), boxCheck->getY());
+        ASSERT_EQUAL_DOUBLE(box->getZ(), boxCheck->getZ());
 
     } else if (solid->isCylinder()) {
         const Cylinder* cylinder = solid->asCylinder();
         const Cylinder* cylinderCheck = solidCheck->asCylinder();
-        ASSERT_EQUAL_DOUBLE(cylinder->radius, cylinderCheck->radius);
-        ASSERT_EQUAL_DOUBLE(cylinder->length, cylinderCheck->length);
+        ASSERT_EQUAL_DOUBLE(cylinder->getRadius(), cylinderCheck->getRadius());
+        ASSERT_EQUAL_DOUBLE(cylinder->getLength(), cylinderCheck->getLength());
 
     } else if (solid->isSphere()) {
         const Sphere* sphere = solid->asSphere();
         const Sphere* sphereCheck = solidCheck->asSphere();
-        ASSERT_EQUAL_DOUBLE(sphere->radius, sphereCheck->radius);
+        ASSERT_EQUAL_DOUBLE(sphere->getRadius(), sphereCheck->getRadius());
 
     } else if (solid->isExternalMesh()) {
         const ExternalMesh* mesh = solid->asExternalMesh();
         const ExternalMesh* meshCheck = solidCheck->asExternalMesh();
-        ASSERT_EQUAL_VECTOR(mesh->scale, meshCheck->scale);
-        ASSERT_IS_TRUE(mesh->filename == meshCheck->filename);
+        ASSERT_EQUAL_VECTOR(mesh->getScale(), meshCheck->getScale());
+        ASSERT_IS_TRUE(mesh->getFilename() == meshCheck->getFilename());
     } else {
         ASSERT_IS_TRUE(false);
     }
@@ -127,26 +127,26 @@ void checkImportExportURDF(std::string fileName)
         // For each link, verify that the visual and collision shape correspond
 
         // First verify that the number of visual elements are the same
-        ASSERT_EQUAL_DOUBLE(model.visualSolidShapes().linkSolidShapes[lnkIndex].size(),
-                            modelReloaded.visualSolidShapes().linkSolidShapes[lnkIndexInReloaded].size());
+        ASSERT_EQUAL_DOUBLE(model.visualSolidShapes().getLinkSolidShapes()[lnkIndex].size(),
+                            modelReloaded.visualSolidShapes().getLinkSolidShapes()[lnkIndexInReloaded].size());
 
         // Then, if there is only one element, verify that it matches
-        if (model.visualSolidShapes().linkSolidShapes[lnkIndex].size() == 1) {
-            SolidShape* solidInModel = model.visualSolidShapes().linkSolidShapes[lnkIndex][0];
-            SolidShape* solidInModelReloaded = modelReloaded.visualSolidShapes().linkSolidShapes[lnkIndexInReloaded][0];
-            std::cerr << "original: " << solidInModel->link_H_geometry.toString() << std::endl
-                      << "reloaded: " << solidInModelReloaded->link_H_geometry.toString() << std::endl;
+        if (model.visualSolidShapes().getLinkSolidShapes()[lnkIndex].size() == 1) {
+            SolidShape* solidInModel = model.visualSolidShapes().getLinkSolidShapes()[lnkIndex][0];
+            SolidShape* solidInModelReloaded = modelReloaded.visualSolidShapes().getLinkSolidShapes()[lnkIndexInReloaded][0];
+            std::cerr << "original: " << solidInModel->getLink_H_geometry().toString() << std::endl
+                      << "reloaded: " << solidInModelReloaded->getLink_H_geometry().toString() << std::endl;
             checkSolidAreEqual(solidInModel, solidInModelReloaded);
         }
 
         // First verify that the number of visual elements are the same
-        ASSERT_EQUAL_DOUBLE(model.collisionSolidShapes().linkSolidShapes[lnkIndex].size(),
-                            modelReloaded.collisionSolidShapes().linkSolidShapes[lnkIndexInReloaded].size());
+        ASSERT_EQUAL_DOUBLE(model.collisionSolidShapes().getLinkSolidShapes()[lnkIndex].size(),
+                            modelReloaded.collisionSolidShapes().getLinkSolidShapes()[lnkIndexInReloaded].size());
 
         // Then, if there is only one element, verify that it matches
-        if (model.collisionSolidShapes().linkSolidShapes[lnkIndex].size() == 1) {
-            SolidShape* solidInModel = model.collisionSolidShapes().linkSolidShapes[lnkIndex][0];
-            SolidShape* solidInModelReloaded = modelReloaded.collisionSolidShapes().linkSolidShapes[lnkIndexInReloaded][0];
+        if (model.collisionSolidShapes().getLinkSolidShapes()[lnkIndex].size() == 1) {
+            SolidShape* solidInModel = model.collisionSolidShapes().getLinkSolidShapes()[lnkIndex][0];
+            SolidShape* solidInModelReloaded = modelReloaded.collisionSolidShapes().getLinkSolidShapes()[lnkIndexInReloaded][0];
             checkSolidAreEqual(solidInModel, solidInModelReloaded);
         }
     }

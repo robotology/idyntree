@@ -354,9 +354,10 @@ namespace iDynTree {
                 // Retrieving the geometry
                 std::shared_ptr<SolidShape> shape = visual.m_solidShape;
                 if (visual.m_material) {
+                    Material material;
                     // Now check material (if exists) if it has all the information
                     if (visual.m_material->m_rgba) {
-                        shape->material = *visual.m_material->m_rgba;
+                        material.setColor(*visual.m_material->m_rgba);
                     } else {
                         // Look in the DB for the material with the specified name
                         auto found = materialDatabase.find(visual.m_material->m_name);
@@ -365,18 +366,20 @@ namespace iDynTree {
                             reportError("URDFDocument", "addVisualPropertiesToModel", message.c_str());
                             return false;
                         }
-                        shape->material = *found->second.m_rgba;
+                        material.setColor(*found->second.m_rgba);
                     }
+                    shape->setMaterial(material);
                 }
 
-                shape->name = visual.m_name;
-                shape->nameIsValid = visual.m_nameAttributeFound;
-                shape->link_H_geometry = link_H_geometry;
+                if (visual.m_nameAttributeFound) {
+                    shape->setName(visual.m_name);
+                }
+                shape->setLink_H_geometry(link_H_geometry);
 
                 LinkIndex idyntreeLinkIndex = model.getLinkIndex(linkName);
                 // ModelSolidShapes contains plain pointers, but they own the memory.
                 SolidShape *solidShape = shape->clone();
-                modelGeometries.linkSolidShapes[idyntreeLinkIndex].push_back(solidShape);
+                modelGeometries.getLinkSolidShapes()[idyntreeLinkIndex].push_back(solidShape);
             }
         }
         return true;

@@ -144,13 +144,13 @@ bool exportSolidShape(const SolidShape* solidShape, exportSolidShapePropertyType
 
     xmlNodePtr root_shape_xml = xmlNewChild(parent_element, NULL, BAD_CAST element_name.c_str(), NULL);
     // Omit the name (that is an optional attribute) if the shape has no name
-    if (solidShape->nameIsValid) {
-        std::string shapeName = solidShape->name;
+    if (solidShape->isNameValid()) {
+        std::string shapeName = solidShape->getName();
         xmlNewProp(root_shape_xml, BAD_CAST "name", BAD_CAST shapeName.c_str());
     }
 
     // Export transform
-    ok = ok && exportTransform(solidShape->link_H_geometry, root_shape_xml);
+    ok = ok && exportTransform(solidShape->getLink_H_geometry(), root_shape_xml);
 
     // Export geometry
     xmlNodePtr geometry_xml = xmlNewChild(root_shape_xml, NULL, BAD_CAST "geometry", NULL);
@@ -162,7 +162,7 @@ bool exportSolidShape(const SolidShape* solidShape, exportSolidShapePropertyType
         xmlNodePtr box_xml = xmlNewChild(geometry_xml, NULL, BAD_CAST "box", NULL);
 
         // Export size attribute
-        double size_data[3] = {box->x, box->y, box->z};
+        double size_data[3] = {box->getX(), box->getY(), box->getZ()};
         std::string size_str;
         ok = ok && vectorToString(Vector3(size_data, 3) , size_str);
         xmlNewProp(box_xml, BAD_CAST "size", BAD_CAST size_str.c_str());
@@ -175,12 +175,12 @@ bool exportSolidShape(const SolidShape* solidShape, exportSolidShapePropertyType
 
         // Export radius attribute
         std::string radius_str;
-        ok = ok && doubleToStringWithClassicLocale(cylinder->radius, radius_str);
+        ok = ok && doubleToStringWithClassicLocale(cylinder->getRadius(), radius_str);
         xmlNewProp(cylinder_xml, BAD_CAST "radius", BAD_CAST radius_str.c_str());
 
         // Export length attribute
         std::string length_str;
-        ok = ok && doubleToStringWithClassicLocale(cylinder->length, length_str);
+        ok = ok && doubleToStringWithClassicLocale(cylinder->getLength(), length_str);
         xmlNewProp(cylinder_xml, BAD_CAST "length", BAD_CAST length_str.c_str());
 
     } else if (solidShape->isSphere()) {
@@ -191,7 +191,7 @@ bool exportSolidShape(const SolidShape* solidShape, exportSolidShapePropertyType
 
         // Export radius attribute
         std::string radius_str;
-        ok = ok && doubleToStringWithClassicLocale(sphere->radius, radius_str);
+        ok = ok && doubleToStringWithClassicLocale(sphere->getRadius(), radius_str);
         xmlNewProp(sphere_xml, BAD_CAST "radius", BAD_CAST radius_str.c_str());
 
     } else if (solidShape->isExternalMesh()) {
@@ -201,11 +201,11 @@ bool exportSolidShape(const SolidShape* solidShape, exportSolidShapePropertyType
         xmlNodePtr mesh_xml = xmlNewChild(geometry_xml, NULL, BAD_CAST "mesh", NULL);
 
         // Export filename attribute
-        xmlNewProp(mesh_xml, BAD_CAST "filename", BAD_CAST mesh->filename.c_str());
+        xmlNewProp(mesh_xml, BAD_CAST "filename", BAD_CAST mesh->getFilename().c_str());
 
         // Export scale attribute
         std::string scale_str;
-        ok = ok && vectorToString(mesh->scale, scale_str);
+        ok = ok && vectorToString(mesh->getScale(), scale_str);
         xmlNewProp(mesh_xml, BAD_CAST "scale", BAD_CAST scale_str.c_str());
 
     } else {
@@ -214,7 +214,23 @@ bool exportSolidShape(const SolidShape* solidShape, exportSolidShapePropertyType
         return false;
     }
 
-    return ok;
+    // Export material if set.
+    if (solidShape->isMaterialSet()) {
+        auto material = solidShape->getMaterial();
+        xmlNodePtr material_xml = xmlNewChild(root_shape_xml, NULL, BAD_CAST "material", NULL);
+        xmlNewProp(material_xml, BAD_CAST "name", BAD_CAST material.name().c_str());
+
+        if (material.hasColor()) {
+            xmlNodePtr color_xml = xmlNewChild(material_xml, NULL, BAD_CAST "color", NULL);
+            std::string material_str;
+            ok = ok && vectorToString(material.color(), material_str);
+            xmlNewProp(color_xml, BAD_CAST "rgba", BAD_CAST material_str.c_str());
+        }
+        if (material.hasTexture()) {
+            xmlNodePtr texture_xml = xmlNewChild(material_xml, NULL, BAD_CAST "texture", NULL);
+            xmlNewProp(texture_xml, BAD_CAST "filename", BAD_CAST material.texture().c_str());
+        }
+    }
 
     return ok;
 }
@@ -247,15 +263,15 @@ bool exportLink(const Link &link, const std::string linkName, const Model& model
     LinkIndex linkIndex = model.getLinkIndex(linkName);
 
     // Export visual shapes
-    for(unsigned int shapeIdx=0; shapeIdx < model.visualSolidShapes().linkSolidShapes[linkIndex].size(); shapeIdx++) {
-        SolidShape * exportedShape = model.visualSolidShapes().linkSolidShapes[linkIndex][shapeIdx];
+    for(unsigned int shapeIdx=0; shapeIdx < model.visualSolidShapes().getLinkSolidShapes()[linkIndex].size(); shapeIdx++) {
+        SolidShape * exportedShape = model.visualSolidShapes().getLinkSolidShapes()[linkIndex][shapeIdx];
         exportSolidShape(exportedShape, VISUAL, link_xml);
     }
 
     // Export collision shapes
-    for(unsigned int shapeIdx=0; shapeIdx < model.collisionSolidShapes().linkSolidShapes[linkIndex].size(); shapeIdx++) {
+    for(unsigned int shapeIdx=0; shapeIdx < model.collisionSolidShapes().getLinkSolidShapes()[linkIndex].size(); shapeIdx++) {
         // Clone the shape
-        SolidShape * exportedShape = model.collisionSolidShapes().linkSolidShapes[linkIndex][shapeIdx];
+        SolidShape * exportedShape = model.collisionSolidShapes().getLinkSolidShapes()[linkIndex][shapeIdx];
         exportSolidShape(exportedShape, COLLISION, link_xml);
     }
 
@@ -445,7 +461,7 @@ bool URDFStringFromModel(const iDynTree::Model & model,
     xmlDocPtr urdf_xml = xmlNewDoc(BAD_CAST "1.0");
     xmlNodePtr robot = xmlNewNode(NULL, BAD_CAST "robot");
     // TODO(traversaro) properly export this :)
-    xmlNewProp(robot, BAD_CAST "name", BAD_CAST "iDynTreeURDFModelExportModelName");
+    xmlNewProp(robot, BAD_CAST "name", BAD_CAST options.robotExportedName.c_str());
     xmlDocSetRootElement(urdf_xml, robot);
 
     // TODO(traversaro) : We are assuming that the model has no loops,
