@@ -67,3 +67,14 @@ if(IDYNTREE_USES_PYTHON OR
        MESSAGE(FATAL_ERROR "Swig not found, impossible to compile or generate iDynTree bindings.")
    endif()
 endif()
+
+
+option(IDYNTREE_USES_PYTHON_PYBIND11 "Create iDynTree Python bindings using pybind11" FALSE)
+find_package(pybind11 QUIET)
+if (${IDYNTREE_USES_PYTHON_PYBIND11})
+    if (${pybind11_FOUND})
+        add_subdirectory(pybind11)
+    else()
+       MESSAGE(FATAL_ERROR "pybind11 not found, impossible to generate iDynTree pybind11 bindings.")  
+    endif()
+endif()
