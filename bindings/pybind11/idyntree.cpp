@@ -2,6 +2,7 @@
 
 #include "idyntree_core.h"
 #include "idyntree_model.h"
+#include "idyntree_sensors.h"
 
 #include <pybind11/pybind11.h>
 
@@ -13,6 +14,7 @@ namespace py = ::pybind11;
 PYBIND11_MODULE(bindings, m) {
   iDynTree::bindings::iDynTreeCoreBindings(m);
   iDynTree::bindings::iDynTreeModelBindings(m);
+  iDynTree::bindings::iDynTreeSensorsBindings(m);
 }
 
 }  // namespace
