@@ -1,14 +1,17 @@
 find_package(Python3 COMPONENTS Interpreter Development NumPy REQUIRED)
 
 pybind11_add_module(pybind11_idyntree SYSTEM idyntree.cpp 
+                                    error_utilities.h error_utilities.cpp
                                     idyntree_core.h idyntree_core.cpp
                                     error_utilities.h error_utilities.cpp
                                     idyntree_model.h idyntree_model.cpp
-                                    idyntree_sensors.h idyntree_sensors.cpp)
+                                    idyntree_sensors.h idyntree_sensors.cpp
+                                    idyntree_modelio_urdf.h idyntree_modelio_urdf.cpp)
 
 target_link_libraries(pybind11_idyntree PUBLIC idyntree-core
                                                idyntree-model
-                                               idyntree-sensors)
+                                               idyntree-sensors
+                                               idyntree-modelio-urdf)
 
 # The generated Python dynamic module must have the same name as the pybind11
 # module, i.e. `bindings`.
