@@ -11,6 +11,16 @@ option(IDYNTREE_USES_OCTAVE "Do you want to create the OCTAVE bindings" FALSE)
 option(IDYNTREE_GENERATE_MATLAB "Enable if you have the experimental version of SWIG necessary for generating the Matlab wrapper" FALSE)
 
 find_package(SWIG)
+
+# Setup installation directory for Python bindings.
+if (IDYNTREE_USES_PYTHON_PYBIND11 OR IDYNTREE_USES_PYTHON)
+    if(IDYNTREE_PACKAGE_FOR_PYPI)
+        set(PYTHON_INSTDIR ${CMAKE_INSTALL_PREFIX})
+    else()
+        set(PYTHON_INSTDIR ${IDYNTREE_PYTHON_INSTALL_DIR}/idyntree)
+    endif()
+endif()
+
 # It is possible to compile matlab/octave bindings without using SWIG
 if(SWIG_FOUND OR IDYNTREE_USES_MATLAB OR IDYNTREE_USES_OCTAVE)
     include(${SWIG_USE_FILE})
@@ -71,7 +81,7 @@ endif()
 
 option(IDYNTREE_USES_PYTHON_PYBIND11 "Create iDynTree Python bindings using pybind11" FALSE)
 find_package(pybind11 QUIET)
-if (${IDYNTREE_USES_PYTHON_PYBIND11})
+if (IDYNTREE_USES_PYTHON_PYBIND11)
     if (${pybind11_FOUND})
         add_subdirectory(pybind11)
     else()

@@ -1,6 +1,6 @@
 find_package(Python3 COMPONENTS Interpreter Development NumPy REQUIRED)
 
-pybind11_add_module(pybind11_idyntree SYSTEM idyntree.cpp 
+pybind11_add_module(pybind11_idyntree SYSTEM idyntree.cpp
                                     error_utilities.h error_utilities.cpp
                                     idyntree_core.h idyntree_core.cpp
                                     error_utilities.h error_utilities.cpp
@@ -19,14 +19,15 @@ set_target_properties(pybind11_idyntree PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/idyntree
     OUTPUT_NAME "pybind")
 
-file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/idyntree/__init__.py "")
-
 # if compile tests execute also python tests
 if(IDYNTREE_COMPILE_TESTS)
     add_subdirectory(tests)
 endif()
 
-# install(TARGETS pybind11_idyntree
-#   COMPONENT python
-#   LIBRARY DESTINATION "${Python3_LIBRARY_DIRS}"
-# )
+# Output package is:
+# idyntree
+# |
+# |- __init__.py (generated from main bindings CMake file).
+# |
+# |_ pybind.<cpython_extension>
+install(TARGETS pybind11_idyntree DESTINATION ${PYTHON_INSTDIR})
