@@ -16,6 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - iDynTree Python bindings can now be installed with `pip3 install git+https://github.com/robotology/idyntree.git` (https://github.com/robotology/idyntree/pull/733).
 - Implement the MatrixView class (https://github.com/robotology/idyntree/pull/734)
 - Add the possibility to use `MatrixView` and `Span` as input/output objects for `KinDynComputations` class (https://github.com/robotology/idyntree/pull/736).
+- New Python bindings based on [pybind11](https://github.com/pybind/pybind11).
+  They can be compiled by specifying the CMake option `IDYNTREE_USES_PYTHON_PYBIND11`. **Note** that the generated bindings are not
+  compatible with the SWIG-generated bindings (e.g. functions have different names). They can be imported as `idyntree.pybind` Python module.
 
 ### Fixed
 - Fixed bug in `yarprobotstatepublisher` that caused segmentation fault each time an unknown joint name was read from the input joint states topic (https://github.com/robotology/idyntree/pull/719)
@@ -29,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The Python package name of the SWIG bindings changed from `iDynTree` to `idyntree.bindings` (https://github.com/robotology/idyntree/pull/733, https://github.com/robotology/idyntree/pull/735). To continue referring to iDynTree classes as `iDynTree.<ClassName>`, you can change your `import iDynTree` statements to `import idyntree.bindings as iDynTree`. Otherwise, you can use `import idyntree.bindings` to refer them as `idyntree.bindings.<ClassName>`.
 - Improve the use of `const` keyword  in `KinDynComputations`(https://github.com/robotology/idyntree/pull/736).
 
-### Removed 
+### Removed
 - Remove the CMake option IDYNTREE_USES_KDL and all the classes available when enabling it. They were deprecated in iDynTree 1.0 .
 - Remove the semantics related classes. They were deprecated in iDynTree 1.0 .
 - Remove unnecessary warning messages from [ModelSensorsTransformers.cpp](https://github.com/robotology/idyntree/blob/master/src/sensors/src/ModelSensorsTransformers.cpp) and [URDFDocument.cpp](https://github.com/robotology/idyntree/blob/master/src/model_io/urdf/src/URDFDocument.cpp) (see [PR 718](https://github.com/robotology/idyntree/pull/718))
@@ -40,7 +43,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Added the possibility of reusing an already opened figure with the MATLAB iDynTree Visualizer either if the name coincides or by using gcf.
-
 
 ### Changed
 - `SolidShapes.h` public API **changes**. API changes are back compatible, but as the **ABI has changed**, this means a re-compilation of the dependent projects is needed. In details:
