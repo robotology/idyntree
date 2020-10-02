@@ -43,11 +43,16 @@ if(NOT IDYNTREE_ONLY_DOCS)
     # anything) feel free to check the logic inside
     add_subdirectory(extern)
 
+    # Create the absolute paths for the BIN DIRS.
+    foreach(item ${IDYNTREE_BINARY_DIRS})
+        list(APPEND ABSOLUTE_BIN_DIRS "${CMAKE_INSTALL_PREFIX}/${item}")
+    endforeach()
+
     include(AddInstallRPATHSupport)
-    add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
-                            LIB_DIRS "${CMAKE_INSTALL_PREFIX}/lib"
-                            DEPENDS IDYNTREE_ENABLE_RPATH
-                            USE_LINK_PATH)
+    add_install_rpath_support(BIN_DIRS ${ABSOLUTE_BIN_DIRS}
+                              LIB_DIRS "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}"
+                              DEPENDS IDYNTREE_ENABLE_RPATH
+                              USE_LINK_PATH)
 
     # add the actual components of the library
     add_subdirectory(src)
