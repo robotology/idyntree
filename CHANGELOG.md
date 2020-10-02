@@ -41,8 +41,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Added the possibility of reusing an already opened figure with the MATLAB iDynTree Visualizer either if the name coincides or by using gcf.
 
+
+### Changed
+- `SolidShapes.h` public API **changes**. API changes are back compatible, but as the **ABI has changed**, this means a re-compilation of the dependent projects is needed. In details:
+    - Added getters and setters to all classes in `SolidShapes.h` (`idyntree-model`). Public attributes are still available for compatibility but are now **deprecated** and will be removed in the next major release of iDynTree (2.x).
+    - Added `Material` class in `SolidShapes.h` (`idyntree-model`). The `material` attribute in `SolidShape` is now deprecated. Please use the `color` property in the new `Material` class to maintain the previous behaviour. Note that the old and new properties are completely orthogonal. Ensure the code is consistent with their uses.
+
 ### Fixed
-- Fix bug in init() of SimpleLeggedOdometry that used an incorrect initial world frame location if used with an additional frame of a link (https://github.com/robotology/idyntree/pull/698)
+- Fixed bug in init() of `SimpleLeggedOdometry` that used an incorrect initial world frame location if used with an additional frame of a link (https://github.com/robotology/idyntree/pull/698).
+- Fixed bug that prevented to use iDynTree cmake packages directly from the build directory (https://github.com/robotology/idyntree/pull/728).
 
 ## [1.1.0] - 2020-06-08
 

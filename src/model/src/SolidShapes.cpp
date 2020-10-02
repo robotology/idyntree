@@ -11,10 +11,65 @@
 #include <iDynTree/Model/SolidShapes.h>
 #include <iDynTree/Model/Model.h>
 
+#include <string>
+
 namespace iDynTree
 {
+    Material::Material(): Material("") {}
+
+    Material::Material(const std::string& name): m_isColorSet(false),
+    m_name(name) {}
+
+    std::string Material::name() const { return m_name; }
+
+    bool Material::hasColor() const { return m_isColorSet;}
+
+    Vector4 Material::color() const {return m_color;}
+
+    void Material::setColor(const Vector4& color) {
+        m_color = color;
+        m_isColorSet = true;
+    }
+
+    bool Material::hasTexture() const { return !m_texture.empty(); }
+
+    std::string Material::texture() const { return m_texture; }
+
+    void Material::setTexture(const std::string& texture) {
+        m_texture = texture;
+    }
+
+    SolidShape::SolidShape(): nameIsValid(false), m_isMaterialSet(false) {}
+
     SolidShape::~SolidShape()
     {
+    }
+
+    const std::string& SolidShape::getName() const { return name; }
+
+    void SolidShape::setName(const std::string &name) {
+        this->name = name;
+        nameIsValid = !name.empty();
+    }
+
+    bool SolidShape::isNameValid() const { return nameIsValid; }
+
+    const Transform& SolidShape::getLink_H_geometry() const {
+        return link_H_geometry;
+        
+    }
+
+    void SolidShape::setLink_H_geometry(const Transform& newTransform) {
+        this->link_H_geometry = newTransform;
+    }
+
+    bool SolidShape::isMaterialSet() const { return m_isMaterialSet; }
+
+    const Material& SolidShape::getMaterial() const {return m_material; }
+    
+    void SolidShape::setMaterial(const Material& material) {
+        m_material = material;
+        m_isMaterialSet = true;
     }
 
     bool SolidShape::isSphere() const
@@ -77,7 +132,6 @@ namespace iDynTree
         return dynamic_cast<const ExternalMesh*>(this);
     }
 
-
     Sphere::~Sphere()
     {
     }
@@ -86,6 +140,10 @@ namespace iDynTree
     {
         return new Sphere(*this);
     }
+
+    double Sphere::getRadius() const { return radius; }
+
+    void Sphere::setRadius(double radius) { this->radius = radius; }
 
     Box::~Box()
     {
@@ -96,6 +154,18 @@ namespace iDynTree
         return new Box(*this);
     }
 
+    double Box::getX() const { return x; }
+
+    void Box::setX(double x) { this->x = x; }
+
+    double Box::getY() const { return y; }
+
+    void Box::setY(double y) { this->y = y; }
+
+    double Box::getZ() const { return z; }
+
+    void Box::setZ(double z) { this->z = z; }
+
     Cylinder::~Cylinder()
     {
     }
@@ -105,6 +175,14 @@ namespace iDynTree
         return new Cylinder(*this);
     }
 
+    double Cylinder::getLength() const { return length; }
+
+    void Cylinder::setLength(double length) { this->length = length; }
+
+    double Cylinder::getRadius() const { return radius; }
+
+    void Cylinder::setRadius(double radius) { this->radius = radius; }
+
     ExternalMesh::~ExternalMesh()
     {
     }
@@ -112,6 +190,18 @@ namespace iDynTree
     SolidShape* ExternalMesh::clone()
     {
         return new ExternalMesh(*this);
+    }
+
+    const std::string& ExternalMesh::getFilename() const { return filename; }
+
+    void ExternalMesh::setFilename(const std::string& filename) {
+        this->filename = filename;
+    }
+
+    const iDynTree::Vector3& ExternalMesh::getScale() const { return scale; }
+
+    void ExternalMesh::setScale(const iDynTree::Vector3& scale) {
+        this->scale = scale;
     }
 
     void ModelSolidShapes::clear()
@@ -177,5 +267,13 @@ namespace iDynTree
     bool ModelSolidShapes::isConsistent(const Model& model) const
     {
         return (this->linkSolidShapes.size() == model.getNrOfLinks());
+    }
+
+    std::vector<std::vector<SolidShape *>>& ModelSolidShapes::getLinkSolidShapes() {
+        return linkSolidShapes;
+    }
+
+    const std::vector<std::vector<SolidShape *>>& ModelSolidShapes::getLinkSolidShapes() const {
+        return linkSolidShapes;
     }
 }

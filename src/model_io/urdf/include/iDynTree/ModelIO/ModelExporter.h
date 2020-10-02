@@ -53,7 +53,15 @@ public:
      * Default value: true.
      * Supported formats: urdf.
      */
-    bool exportFirstBaseLinkAdditionalFrameAsFakeURDFBase{true};
+    bool exportFirstBaseLinkAdditionalFrameAsFakeURDFBase;
+
+    /**
+     * Specify the robot name.
+     *
+     * Default: "iDynTreeURDFModelExportModelName".
+     * Supported formats: urdf.
+     */
+    std::string robotExportedName;
 
     /**
      * Constructor.
