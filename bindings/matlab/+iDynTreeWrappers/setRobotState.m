@@ -38,6 +38,10 @@ function [] = setRobotState(varargin)
 
     %% ------------Initialization----------------
 
+    persistent baseRotation_iDyntree baseOrigin_iDyntree ...
+               basePose_iDyntree baseVel_iDyntree jointPos_iDyntree ...
+               jointVel_iDyntree gravityVec_iDyntree
+        
     KinDynModel = varargin{1};
     
     % check the number of inputs
@@ -133,11 +137,15 @@ function [] = setRobotState(varargin)
             end
             
             % define the quantities required to set the floating base
-            baseRotation_iDyntree = iDynTree.Rotation();
-            baseOrigin_iDyntree   = iDynTree.Position();
-            basePose_iDyntree     = iDynTree.Transform();
-            baseVel_iDyntree      = iDynTree.Twist();
             
+            if isempty(baseRotation_iDyntree)
+                
+                baseRotation_iDyntree = iDynTree.Rotation();
+                baseOrigin_iDyntree   = iDynTree.Position();
+                basePose_iDyntree     = iDynTree.Transform();
+                baseVel_iDyntree      = iDynTree.Twist();
+            end
+         
             % set the element of the rotation matrix and of the base
             % position vector
             for k = 0:2
@@ -197,9 +205,12 @@ function [] = setRobotState(varargin)
     end
     
     % define all the remaining quantities required for setting the system state
-    jointPos_iDyntree   = iDynTree.VectorDynSize(KinDynModel.NDOF);
-    jointVel_iDyntree   = iDynTree.VectorDynSize(KinDynModel.NDOF);
-    gravityVec_iDyntree = iDynTree.Vector3();
+    if isempty(jointPos_iDyntree)
+        
+        jointPos_iDyntree   = iDynTree.VectorDynSize(KinDynModel.NDOF);
+        jointVel_iDyntree   = iDynTree.VectorDynSize(KinDynModel.NDOF);
+        gravityVec_iDyntree = iDynTree.Vector3();
+    end
          
     % set joints position and velocity
     for k = 0:length(jointPos)-1
