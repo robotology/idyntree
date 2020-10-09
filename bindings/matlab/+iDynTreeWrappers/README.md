@@ -1,4 +1,4 @@
-# idyntree high-level-wrappers
+# iDynTree high-level-wrappers
 
 A collection of Matlab/Octave functions that wraps the functionalities of (mainly) the iDyntree class `KinDynComputations`. For further information on the single wrapper, refer to the description included in each function.
 
@@ -74,6 +74,8 @@ The purpose of the wrapper is therefore to provide a simpler and easy-to-use int
 
 Not proper wrappers, they wrap more than one method of the class each. **Requirements:** compile iDyntree with Irrlicht `(IDYNTREE_USES_IRRLICHT = ON)`.
 
+**Warning**: the visualizer class may be deprecated in a future release.
+
 - [initializeVisualizer](initializeVisualizer.m)
 - [visualizerSetup](visualizerSetup.m)
 - [updateVisualizer](updateVisualizer.m)
@@ -81,9 +83,11 @@ Not proper wrappers, they wrap more than one method of the class each. **Require
 ## Matlab Native visualization
 
 Not actual wrappers, they use the iDynTreeWrappers in combination with the MATLAB patch plotting functions to visualize the robot.
+
 **Disclaimers**:
-- This visualization **has not been tested** with Octave.
-- At the moment, there is **no support** for .dae mesh files.
+
+1) This visualization **has not been tested** with Octave.
+2) At the moment, there is **no support** for `.dae` mesh file format.
 
 - [prepareVisualization](prepareVisualization.m)
 - [updateVisualization](updateVisualization.m)

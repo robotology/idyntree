@@ -1,7 +1,7 @@
 function frameVelRepr = getFrameVelocityRepresentation(KinDynModel)
 
     % GETFRAMEVELOCITYREPRESENTATION retrieves the current frame velocity
-    %                                     representation. 
+    %                                representation. 
     %
     % This matlab function wraps a functionality of the iDyntree library.                     
     % For further info see also: https://github.com/robotology/idyntree

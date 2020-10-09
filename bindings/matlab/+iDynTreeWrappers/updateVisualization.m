@@ -14,8 +14,12 @@ function []=updateVisualization(KinDynModel,Visualizer)
 % SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 % SPDX-License-Identifier: BSD-3-Clause
 
-transforms_idyn=KinDynModel.kinDynComp.getWorldTransformsAsHomogeneous(Visualizer.linkNames_idyn);
-w_H_links= transforms_idyn.toMatlab();
-for it=1:Visualizer.NOBJ
-    Visualizer.transforms(it).Matrix=squeeze(w_H_links(it,:,:));
+    %% ------------Initialization----------------
+    transforms_idyn = KinDynModel.kinDynComp.getWorldTransformsAsHomogeneous(Visualizer.linkNames_idyn);
+    w_H_links       = transforms_idyn.toMatlab();
+    
+    for it = 1:Visualizer.NOBJ
+     
+        Visualizer.transforms(it).Matrix = squeeze(w_H_links(it,:,:));
+    end
 end

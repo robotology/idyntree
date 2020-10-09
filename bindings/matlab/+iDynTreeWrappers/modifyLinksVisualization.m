@@ -27,28 +27,34 @@ addRequired(p,'structInput');
 addParameter(p,'linksToModify',default_linksToModify,@(x) iscell(x));
 addParameter(p,'linksIndices',default_linksIndices,@(x)isnumeric(x) && all(x>0) && ~any(x>Visualizer.NOBJ));
 
-% parse inputs
-parse(p,Visualizer,varargin{:});
-options=p.Results;
+    % Parse inputs
+    parse(p,Visualizer,varargin{:});
+    options = p.Results;
 
-if ~any(ismember(p.UsingDefaults,'linksToModify'))  || ~any(ismember(p.UsingDefaults,'linksIndices'))
-    % select the indices of the links to modify
-    if ~any(ismember(p.UsingDefaults,'linksIndices'))
-        indices=options.linksIndices;
-    else
-        [~,indices_temp]=ismember(options.linksToModify,Visualizer.linkNames);
-        indices=nonzeros(indices_temp);
-        if length(indices_temp)~=length(indices)
-            notInModel=length(indices_temp)-length(indices);
-            indices_notInModel=find(indices_temp==0);
-            warndlg(sprintf('The list of links to modify contains %d names (positions [ %s ] ) that are not in the list of links of the model',notInModel,num2str(indices_notInModel')));
+    if ~any(ismember(p.UsingDefaults,'linksToModify')) || ~any(ismember(p.UsingDefaults,'linksIndices'))
+    
+        % Select the indices of the links to modify
+        if ~any(ismember(p.UsingDefaults,'linksIndices'))
+        
+            indices = options.linksIndices;
+        else
+            [~,indices_temp] = ismember(options.linksToModify,Visualizer.linkNames);
+            indices = nonzeros(indices_temp);
+            
+            if length(indices_temp) ~= length(indices)
+                
+                notInModel         = length(indices_temp)-length(indices);
+                indices_notInModel = find(indices_temp==0);
+                warndlg(sprintf('The list of links to modify contains %d names (positions [ %s ] ) that are not in the list of links of the model',notInModel,num2str(indices_notInModel')));
+            end
         end
+    else
+        % By default modify all links
+        indices = 1:Visualizer.NOBJ;
     end
-else
-    % by default modify all links
-    indices=1:Visualizer.NOBJ;
-end
 
-for it=1:length(indices)
-    iDynTreeWrappers.modifyLinkVisual(Visualizer.meshHandles(indices(it)),varargin{:});
+    for it = 1:length(indices)
+    
+        iDynTreeWrappers.modifyLinkVisual(Visualizer.meshHandles(indices(it)),varargin{:});
+    end
 end

@@ -17,7 +17,7 @@ function [linkMeshInfo,map]=getMeshes(model,meshFilePrefix)
 % SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 % SPDX-License-Identifier: BSD-3-Clause
 
-
+    %% ------------Initialization----------------
 
 % get the linkSolidShapes containing the mesh information
 visual=model.visualSolidShapes;
@@ -91,32 +91,35 @@ end
 linkMeshInfo(link_with_no_visual)=[];
 
 end
-%% Create points and connectivity list for each geometry
 
-function [mesh_triangles]=calculateMeshFromSphere(radius)
-[X,Y,Z]=sphere;
-X = X * radius;
-Y = Y * radius;
-Z = Z * radius;
-[F,V]=mesh2tri(X,Y,Z,'f');
-mesh_triangles.Points=V;
-mesh_triangles.ConnectivityList = F;
+% Create points and connectivity list for each geometry
+function [mesh_triangles] = calculateMeshFromSphere(radius)
+    
+    [X,Y,Z] = sphere;
+    X       = X * radius;
+    Y       = Y * radius;
+    Z       = Z * radius;
+    [F,V]   = mesh2tri(X,Y,Z,'f');
+    mesh_triangles.Points           = V;
+    mesh_triangles.ConnectivityList = F;
 end
 
-function [mesh_triangles]=calculateMeshFromBox(box_dimensions)
-mesh_triangles.Points = [0 0 0;1 0 0;1 1 0;0 1 0;0 0 1;1 0 1;1 1 1;0 1 1];
-mesh_triangles.Points(:,1)=mesh_triangles.Points(:,1)*box_dimensions(1)-box_dimensions(1)/2;
-mesh_triangles.Points(:,2)=mesh_triangles.Points(:,2)*box_dimensions(2)-box_dimensions(2)/2;
-mesh_triangles.Points(:,3)=mesh_triangles.Points(:,3)*box_dimensions(3)-box_dimensions(3)/2;
-mesh_triangles.ConnectivityList = [1 2 6 5;2 3 7 6;3 4 8 7;4 1 5 8;1 2 3 4;5 6 7 8];
+function [mesh_triangles] = calculateMeshFromBox(box_dimensions)
+
+    mesh_triangles.Points           = [0 0 0;1 0 0;1 1 0;0 1 0;0 0 1;1 0 1;1 1 1;0 1 1];
+    mesh_triangles.Points(:,1)      = mesh_triangles.Points(:,1)*box_dimensions(1)-box_dimensions(1)/2;
+    mesh_triangles.Points(:,2)      = mesh_triangles.Points(:,2)*box_dimensions(2)-box_dimensions(2)/2;
+    mesh_triangles.Points(:,3)      = mesh_triangles.Points(:,3)*box_dimensions(3)-box_dimensions(3)/2;
+    mesh_triangles.ConnectivityList = [1 2 6 5;2 3 7 6;3 4 8 7;4 1 5 8;1 2 3 4;5 6 7 8];
 end
 
-function [mesh_triangles]=calculateMeshFromCylinder(length,radius)
-[X,Y,Z] = cylinder;
-X = X * radius;
-Y = Y * radius;
-Z = Z * length-length/2;
-[F,V]=mesh2tri(X,Y,Z,'f');
-mesh_triangles.Points=V;
-mesh_triangles.ConnectivityList = F;
+function [mesh_triangles] = calculateMeshFromCylinder(length,radius)
+
+    [X,Y,Z] = cylinder;
+    X       = X * radius;
+    Y       = Y * radius;
+    Z       = Z * length-length/2;
+    [F,V]   = mesh2tri(X,Y,Z,'f');
+    mesh_triangles.Points           = V;
+    mesh_triangles.ConnectivityList = F;
 end

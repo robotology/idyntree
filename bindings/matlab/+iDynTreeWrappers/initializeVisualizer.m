@@ -1,7 +1,9 @@
 function Visualizer = initializeVisualizer(KinDynModel,debugMode)
 
     % INITIALIZEVISUALIZER opens the iDyntree visualizer and loads the reduced
-    %                           model into the visualizer.
+    %                      model into the visualizer.
+    %
+    % WARNING! This function is deprecated! Use prepareVisualization instead.
     %
     % This matlab function wraps a functionality of the iDyntree library.                     
     % For further info see also: https://github.com/robotology/idyntree
@@ -21,8 +23,8 @@ function Visualizer = initializeVisualizer(KinDynModel,debugMode)
 % SPDX-License-Identifier: BSD-3-Clause
 
     %% ------------Initialization----------------
-    
-    Visualizer.viz   = iDynTree.Visualizer();
+
+    Visualizer.viz = iDynTree.Visualizer();
     
     % load the model in the visualizer
     ack = Visualizer.viz.addModel(KinDynModel.kinDynComp.model(),'viz1');

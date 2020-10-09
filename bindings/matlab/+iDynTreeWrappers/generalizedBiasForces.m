@@ -1,7 +1,7 @@
 function h = generalizedBiasForces(KinDynModel)
 
     % GENERALIZEDBIASFORCES retrieves the generalized bias forces from 
-    %                            the reduced model. 
+    %                       the reduced model. 
     %
     % This matlab function wraps a functionality of the iDyntree library.                     
     % For further info see also: https://github.com/robotology/idyntree
@@ -19,11 +19,8 @@ function h = generalizedBiasForces(KinDynModel)
 
     %% ------------Initialization----------------
     
-    % create the vector that must be populated with the bias forces
-    h_iDyntree = iDynTree.FreeFloatingGeneralizedTorques(KinDynModel.kinDynComp.model);
-    
     % get the bias forces
-    ack = KinDynModel.kinDynComp.generalizedBiasForces(h_iDyntree);
+    ack = KinDynModel.kinDynComp.generalizedBiasForces(KinDynModel.dynamics.h_iDyntree);
     
     % check for errors
     if ~ack
@@ -32,7 +29,7 @@ function h = generalizedBiasForces(KinDynModel)
     
     % convert to Matlab format: compute the base bias acc (h_b) and the
     % joint bias acc (h_s) and concatenate them
-    h_b = h_iDyntree.baseWrench.toMatlab;
-    h_s = h_iDyntree.jointTorques.toMatlab;   
+    h_b = KinDynModel.dynamics.h_iDyntree.baseWrench.toMatlab;
+    h_s = KinDynModel.dynamics.h_iDyntree.jointTorques.toMatlab;   
     h   = [h_b;h_s];
 end

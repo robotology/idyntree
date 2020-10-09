@@ -1,7 +1,6 @@
 function [] = setJointPos(KinDynModel,jointPos)
 
-    % SETJOINTPOS sets the joints configuration for kino-dynamic 
-    %                  computations.
+    % SETJOINTPOS sets the joints configuration for kino-dynamic computations.
     %
     % This matlab function wraps a functionality of the iDyntree library.                     
     % For further info see also: https://github.com/robotology/idyntree
@@ -32,17 +31,14 @@ function [] = setJointPos(KinDynModel,jointPos)
             
         disp('[setJointPos]: done.')     
     end
-    
-    % convert the joint position to a dynamic size vector
-    jointPos_iDyntree = iDynTree.VectorDynSize(KinDynModel.NDOF);
-    
+
     for k = 0:length(jointPos)-1
         
-        jointPos_iDyntree.setVal(k,jointPos(k+1));
+        KinDynModel.kinematics.jointPos_iDyntree.setVal(k,jointPos(k+1));
     end
     
     % set the current joint positions
-    ack = KinDynModel.kinDynComp.setJointPos(jointPos_iDyntree);
+    ack = KinDynModel.kinDynComp.setJointPos(KinDynModel.kinematics.jointPos_iDyntree);
     
     % check for errors
     if ~ack  

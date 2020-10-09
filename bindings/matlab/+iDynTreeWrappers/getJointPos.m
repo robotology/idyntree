@@ -17,12 +17,9 @@ function jointPos = getJointPos(KinDynModel)
 % SPDX-License-Identifier: BSD-3-Clause
 
     %% ------------Initialization----------------
-    
-    % create the vector that must be populated with the joint positions
-    jointPos_iDyntree = iDynTree.VectorDynSize(KinDynModel.NDOF);
-    
+
     % get the joints positions
-    ack = KinDynModel.kinDynComp.getJointPos(jointPos_iDyntree);
+    ack = KinDynModel.kinDynComp.getJointPos(KinDynModel.kinematics.jointPos_iDyntree);
     
     % check for errors
     if ~ack   
@@ -30,5 +27,5 @@ function jointPos = getJointPos(KinDynModel)
     end
     
     % convert to Matlab format
-    jointPos = jointPos_iDyntree.toMatlab;
+    jointPos = KinDynModel.kinematics.jointPos_iDyntree.toMatlab;
 end

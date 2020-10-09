@@ -1,8 +1,8 @@
 function totalMomentum = getCentroidalTotalMomentum(KinDynModel)
 
     % GETCENTROIDALTOTALMOMENTUM retrieves the centroidal momentum from the reduced
-    %                                 model. The quantity is expressed in a frame that depends
-    %                                 on the 'FrameVelocityReperesentation' settings.                               
+    %                            model. The quantity is expressed in a frame that depends
+    %                            on the 'FrameVelocityReperesentation' settings.                               
     %
     % This matlab function wraps a functionality of the iDyntree library.                     
     % For further info see also: https://github.com/robotology/idyntree

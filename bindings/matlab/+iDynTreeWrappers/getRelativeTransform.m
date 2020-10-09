@@ -1,7 +1,7 @@
 function frame1_H_frame2 = getRelativeTransform(KinDynModel,frame1Name,frame2Name)
 
     % GETRELATIVETRANSFORM gets the transformation matrix between two specified 
-    %                           frames.
+    %                      frames.
     %
     % This matlab function wraps a functionality of the iDyntree library.                     
     % For further info see also: https://github.com/robotology/idyntree

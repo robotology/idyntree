@@ -42,77 +42,100 @@ addParameter(p,'style',default_style,@(x) any(validatestring(x,expected_styles))
 addParameter(p,'material',default_material,@(x) any(validatestring(x,expected_materials)));
 addParameter(p,'useDefault',default_useDefault);
 
-% parse inputs
-parse(p,meshHandle,varargin{:});
-options=p.Results;
-for nMeshes=1:length(meshHandle.modelMesh)
-    modelMesh=meshHandle.modelMesh(nMeshes);
-    if ~any(ismember(p.UsingDefaults,'color')) || options.useDefault
-        changeColor(modelMesh,options.color);
-    end
-    if ~any(ismember(p.UsingDefaults,'transparency')) || options.useDefault
-        alpha(modelMesh,options.transparency);
-    end
-    if ~any(ismember(p.UsingDefaults,'material')) || options.useDefault
-        material(modelMesh,options.material);
-    end
-
-
-    if ~any(ismember(p.UsingDefaults,'style')) || options.useDefault
-        [isWF,noColor]=isWireframe(modelMesh);
-
-        if strcmpi(options.style,'wireframe') && ~isWF
-            if noColor
-                color=options.color;
-            else
-                color=modelMesh.FaceColor;
-            end
-            reducepatch(modelMesh,options.wireframe_rendering);
-            modelMesh.FaceColor='none';
-            modelMesh.EdgeColor=color;
+    % Parse inputs
+    parse(p,meshHandle,varargin{:});
+    options = p.Results;
+    
+    for nMeshes = 1:length(meshHandle.modelMesh)
+        
+        modelMesh = meshHandle.modelMesh(nMeshes);
+        
+        if ~any(ismember(p.UsingDefaults,'color')) || options.useDefault
+            
+            changeColor(modelMesh,options.color);
         end
-        if strcmpi(options.style,'fullMesh') && isWF % means full mesh
-            if noColor
-                color=options.color;
-            else
-                color=modelMesh.EdgeColor;
-            end
-            modelMesh.Vertices=meshHandle.fullMesh_bckup(nMeshes).vertices;
-            modelMesh.Faces=meshHandle.fullMesh_bckup(nMeshes).faces;
-            modelMesh.FaceColor=color;
-            modelMesh.EdgeColor='none';
+        if ~any(ismember(p.UsingDefaults,'transparency')) || options.useDefault
+            
+            alpha(modelMesh,options.transparency);
         end
-        if strcmpi(options.style,'invisible')% make invisible
-            modelMesh.Visible='off';
-        else
-            modelMesh.Visible='on';
+        if ~any(ismember(p.UsingDefaults,'material')) || options.useDefault
+            
+            material(modelMesh,options.material);
+        end
+        if ~any(ismember(p.UsingDefaults,'style')) || options.useDefault
+            
+            [isWF,noColor] = isWireframe(modelMesh);
+
+            if strcmpi(options.style,'wireframe') && ~isWF
+                
+                if noColor
+                    
+                    color = options.color;
+                else
+                    color = modelMesh.FaceColor;
+                end
+                
+                reducepatch(modelMesh,options.wireframe_rendering);
+                modelMesh.FaceColor = 'none';
+                modelMesh.EdgeColor = color;
+            end
+            if strcmpi(options.style,'fullMesh') && isWF
+            
+                if noColor
+                
+                    color = options.color;
+            
+                else                  
+                    color = modelMesh.EdgeColor;
+                end
+                
+                modelMesh.Vertices  =  meshHandle.fullMesh_bckup(nMeshes).vertices;          
+                modelMesh.Faces     =  meshHandle.fullMesh_bckup(nMeshes).faces;
+                modelMesh.FaceColor =  color;
+                modelMesh.EdgeColor = 'none';
+            end
+            if strcmpi(options.style,'invisible')
+                
+                % make invisible
+                modelMesh.Visible = 'off';
+            else
+                modelMesh.Visible = 'on';
+            end
         end
     end
 end
 
-    function []=changeColor(modelMesh,color)
-        if isWireframe(modelMesh)
-            modelMesh.EdgeColor=color;
-        else
-            modelMesh.FaceColor=color;
-        end
+% Utilities 
+function [] = changeColor(modelMesh,color)
+        
+    if isWireframe(modelMesh)
+      
+        modelMesh.EdgeColor = color;    
+    else
+        modelMesh.FaceColor = color;
     end
+end
 
-    function [isIt,noColor]=isWireframe(meshHandle)
-        % if there is a numeric value in edges and a char ('none') in faces
-        % then is wireframe
-        noColor=false;
-        if ischar(meshHandle.FaceColor) && ~ischar(meshHandle.EdgeColor)
-            isIt=true;
-        end
-        % As long as there is a color in faces is not wireframe
-        if ~ischar(meshHandle.FaceColor) && ischar(meshHandle.EdgeColor)
-            isIt=false;
-        end
-        % The mesh is invisble and not on purpose. Make it wireframe.
-        if ~exist('isIt','var')
-            isIt=true;
-            noColor=true;
-        end
+function [isIt, noColor] = isWireframe(meshHandle)
+
+    % If there is a numeric value in edges and a char ('none') in faces
+    % then is wireframe
+    noColor = false;
+    
+    if ischar(meshHandle.FaceColor) && ~ischar(meshHandle.EdgeColor)
+       
+        isIt = true;
+    end
+    
+    % As long as there is a color in faces is not wireframe
+    if ~ischar(meshHandle.FaceColor) && ischar(meshHandle.EdgeColor)
+      
+        isIt = false;
+    end
+    % The mesh is invisble and not on purpose. Make it wireframe.
+    if ~exist('isIt','var')
+         
+        isIt    = true;
+        noColor = true;
     end
 end

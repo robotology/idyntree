@@ -1,7 +1,7 @@
 function stateVel = getModelVel(KinDynModel)
 
     % GETMODELVEL gets the joints and floating base velocities from the 
-    %                  reduced model.
+    %             reduced model.
     %
     % This matlab function wraps a functionality of the iDyntree library.                     
     % For further info see also: https://github.com/robotology/idyntree
@@ -18,12 +18,9 @@ function stateVel = getModelVel(KinDynModel)
 % SPDX-License-Identifier: BSD-3-Clause
 
     %% ------------Initialization----------------
-    
-    % create the vector that must be populated with the stae velocities
-    stateVel_iDyntree = iDynTree.VectorDynSize(KinDynModel.NDOF);
-    
+ 
     % get the joints velocities
-    ack = KinDynModel.kinDynComp.getModelVel(stateVel_iDyntree);
+    ack = KinDynModel.kinDynComp.getModelVel(KinDynModel.kinematics.stateVel_iDyntree);
     
     % check for errors
     if ~ack  
@@ -31,5 +28,5 @@ function stateVel = getModelVel(KinDynModel)
     end
     
     % convert to Matlab format
-    stateVel = stateVel_iDyntree.toMatlab;
+    stateVel = KinDynModel.kinematics.stateVel_iDyntree.toMatlab;
 end

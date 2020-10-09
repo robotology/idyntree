@@ -40,49 +40,51 @@ addParameter(p,'style',default_style,@(x) any(validatestring(x,expected_styles))
 parse(p,linkMeshInfo,w_H_link,varargin{:});
 options=p.Results;
 
-%% Create a transform object %
-transform = hgtransform('Parent',gca);
-for mesh_number=1:length(linkMeshInfo.meshInfo)
+    %% Create a transform object
+    transform = hgtransform('Parent',gca);
+    
+    for mesh_number = 1:length(linkMeshInfo.meshInfo)
 
-    mesh_triangles=linkMeshInfo.meshInfo(mesh_number).mesh_triangles;
-    link_H_geom=linkMeshInfo.meshInfo(mesh_number).link_H_geom;
-    scale=linkMeshInfo.meshInfo(mesh_number).scale;
+        mesh_triangles = linkMeshInfo.meshInfo(mesh_number).mesh_triangles;
+        link_H_geom    = linkMeshInfo.meshInfo(mesh_number).link_H_geom;
+        scale          = linkMeshInfo.meshInfo(mesh_number).scale;
 
-    % Change scale
-    % Scale the STL mesh
-    corrected_vertices=mesh_triangles.Points.*scale;
+        % Scale the STL mesh
+        corrected_vertices = mesh_triangles.Points.*scale;
 
-    % Applying transform to link frame to stl file  :
-    corrected_vertices=link_H_geom*[corrected_vertices';ones(1,size(corrected_vertices,1))];
-    corrected_vertices=corrected_vertices';
-    corrected_vertices=corrected_vertices(:,1:3);
+        % Applying transform to link frame to stl file:
+        corrected_vertices = link_H_geom*[corrected_vertices';ones(1,size(corrected_vertices,1))];
+        corrected_vertices = corrected_vertices';
+        corrected_vertices = corrected_vertices(:,1:3);
 
-    % plot in figureusing patch
-    modelMesh(mesh_number) = ...
-        patch('Faces',mesh_triangles.ConnectivityList,'Vertices',corrected_vertices,...
-        'FaceColor',options.color , ...
-        'EdgeColor',  'none',        ...
-        'FaceLighting',    'gouraud',     ...
-        'AmbientStrength', 0.25);
+        % Plot in the figure using patch
+        modelMesh(mesh_number) = patch('Faces',mesh_triangles.ConnectivityList, ...
+                                       'Vertices',corrected_vertices, ...
+                                       'FaceColor',options.color , ...
+                                       'EdgeColor','none', ...
+                                       'FaceLighting','gouraud', ...
+                                       'AmbientStrength', 0.25);
 
-    faces_bckup=modelMesh(mesh_number).Faces;
-    vertices_bckup=modelMesh(mesh_number).Vertices;
-    meshHandles.fullMesh_bckup(mesh_number).faces=faces_bckup;
-    meshHandles.fullMesh_bckup(mesh_number).vertices=vertices_bckup;
+        faces_bckup    = modelMesh(mesh_number).Faces;
+        vertices_bckup = modelMesh(mesh_number).Vertices;
+        
+        meshHandles.fullMesh_bckup(mesh_number).faces    = faces_bckup;
+        meshHandles.fullMesh_bckup(mesh_number).vertices = vertices_bckup;
 
-    if strcmp(options.style,'wireframe')
-        reducepatch(modelMesh(mesh_number),options.wireframe_rendering);
-        modelMesh(mesh_number).FaceColor='none';
-        modelMesh(mesh_number).EdgeColor=options.color;
+        if strcmp(options.style,'wireframe')
+       
+            reducepatch(modelMesh(mesh_number),options.wireframe_rendering);
+            modelMesh(mesh_number).FaceColor = 'none';
+            modelMesh(mesh_number).EdgeColor = options.color;
+        end
+
+        % Parent transform as parent to the mesh
+        set(modelMesh(mesh_number),'Parent',transform);
+
+        % Set the object transparency
+        alpha(modelMesh(mesh_number),options.transparency);
     end
-
-    %parent transform as parent to the mesh
-    set(modelMesh(mesh_number),'Parent',transform);
-
-    % Set the object transparency
-    alpha(modelMesh(mesh_number),options.transparency);
-
-end
-set(transform,'Matrix',w_H_link);
-meshHandles.modelMesh=modelMesh;
+    
+    set(transform,'Matrix',w_H_link);
+    meshHandles.modelMesh = modelMesh;
 end

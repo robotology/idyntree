@@ -64,56 +64,70 @@ addParameter(p,'groundFrame',default_groundFrame,@(x) isstring(x) || ischar(x));
 addParameter(p,'name',default_name,@(x) isstring(x) || ischar(x));
 addParameter(p,'reuseFigure',default_reuseFigure,@(x) any(validatestring(x,expected_reuseFigure)));
 
-% parse inputs
-parse(p,KinDynModel,meshFilePrefix,varargin{:});
-options=p.Results;
-isNameSet=~any(strcmp(p.UsingDefaults, 'name'));
-%% Get meshes from the model variable
-model=KinDynModel.kinDynComp.model;
-[linkMeshInfo,map]=iDynTreeWrappers.getMeshes(model,meshFilePrefix);
-numberOfLinks=length(linkMeshInfo);
-linkNames=cell(numberOfLinks,1);
-switch options.reuseFigure
-    case 'gcf'
-        mainHandler=gcf;
-        cla(mainHandler.Children);
-    case 'name'
-        figHandles = findobj('Type', 'figure', 'Name', options.name);
-        if isNameSet && ~isempty(figHandles)
-            mainHandler=figHandles(1,1);
+    % Parse inputs
+    parse(p,KinDynModel,meshFilePrefix,varargin{:});
+    options   =  p.Results;
+    isNameSet = ~any(strcmp(p.UsingDefaults, 'name'));
+    
+    %% Get meshes from the model variable
+    model              = KinDynModel.kinDynComp.model;
+    [linkMeshInfo,map] = iDynTreeWrappers.getMeshes(model,meshFilePrefix);
+    numberOfLinks      = length(linkMeshInfo);
+    linkNames          = cell(numberOfLinks,1);
+    
+    switch options.reuseFigure
+    
+        case 'gcf'
+            
+            mainHandler = gcf;
             cla(mainHandler.Children);
-        else
-            mainHandler=figure;
-        end
-    otherwise
-        mainHandler=figure;
-end
-if isNameSet
-    set(mainHandler,'Name', options.name,'numbertitle','off')
-end
-set(0, 'CurrentFigure', mainHandler) %Set the figure as current figure such that gca works
-parent=gca;
-hold on
-linkNames_idyn=iDynTree.StringVector();
+    
+        case 'name'
+        
+            figHandles = findobj('Type', 'figure', 'Name', options.name);
+        
+            if isNameSet && ~isempty(figHandles)
+            
+                mainHandler = figHandles(1,1);
+                cla(mainHandler.Children);
+            else
+                mainHandler = figure;
+            end  
+            
+        otherwise           
+            mainHandler = figure;
+    end
+    
+    if isNameSet
+        
+        set(mainHandler,'Name', options.name,'numbertitle','off')
+    end
+    
+    % Set the figure as current figure such that gca works
+    set(0, 'CurrentFigure', mainHandler) 
+    parent = gca;
+    hold on
+    linkNames_idyn = iDynTree.StringVector();
 
-for it=1:numberOfLinks
-    w_H_link=iDynTreeWrappers.getWorldTransform(KinDynModel,linkMeshInfo(it).linkName);
-    [meshHandles(it,:),transforms(it)]=iDynTreeWrappers.plotMeshInWorld(linkMeshInfo(it),w_H_link,varargin{:});
-    linkNames{it}=linkMeshInfo(it).linkName;
-    linkNames_idyn.push_back(linkNames{it});
-end
+    for it=1:numberOfLinks
+        
+        w_H_link = iDynTreeWrappers.getWorldTransform(KinDynModel,linkMeshInfo(it).linkName);
+        [meshHandles(it,:),transforms(it)] = iDynTreeWrappers.plotMeshInWorld(linkMeshInfo(it),w_H_link,varargin{:});
+        linkNames{it} = linkMeshInfo(it).linkName;
+        linkNames_idyn.push_back(linkNames{it});
+    end
 
-% Add a camera light, and tone down the specular highlighting
-camlight('headlight');
-material(options.material);
+    % Add a camera light, and tone down the specular highlighting
+    camlight('headlight');
+    material(options.material);
 
-% Make axis pretty and add grid for visual reference
-axis equal;
-axis tight;
-grid on;
+    % Make axis pretty and add grid for visual reference
+    axis equal;
+    axis tight;
+    grid on;
 
-% Apply views
-view(parent,options.view);
+    % Apply views
+    view(parent,options.view);
 
 % Add world reference frame
 hold on;
@@ -125,65 +139,72 @@ frameAxisSize = min(axisRange)/4;
 linewidthSize=frameAxisSize*50;
 iDynTreeWrappers.plotFrame(eye(4), frameAxisSize, linewidthSize);
 
-% Axis labels
-title('Robot Visualizer ');
-xlabel('{x}');
-ylabel('{y}');
-zlabel('{z}');
+    % Axis labels
+    title('Robot Visualizer ');
+    xlabel('{x}');
+    ylabel('{y}');
+    zlabel('{z}');
 
-% Draw the ground
-if options.groundOn
-    % Create plane on x y axis
-    normal_vector=[0,0,1];
-    point_on_plane=[0,0,0];
-    d=normal_vector*point_on_plane';
-    x = [1 -1 -1 1]*max(axisRange(1:2)); % Generate data for x vertices
-    y = [1 1 -1 -1]*max(axisRange(1:2)); % Generate data for y vertices
-    z = 1/normal_vector(3)*(normal_vector(1)*x + normal_vector(2)*y + d); % Solve for z vertices data
-    groundHandle=patch('XData',x,'YData',y,'ZData',z,'FaceColor', options.groundColor);
-    alpha(groundHandle,options.groundTransparency);
-    % apply transform
-    groundTransform = hgtransform('Parent',parent);
-    set(groundHandle,'Parent',groundTransform);
-    if any(ismember(p.UsingDefaults,'groundFrame'))
-        w_H_plane=eye(4,4);
-        options.groundFrame=linkNames{1};
+    % Draw the ground
+    if options.groundOn
+    
+        % Create plane on x-y axis
+        normal_vector  = [0,0,1];
+        point_on_plane = [0,0,0];
+        d              = normal_vector*point_on_plane';
+        
+        x = [1 -1 -1  1]*max(axisRange(1:2)); % Generate data for x vertices
+        y = [1  1 -1 -1]*max(axisRange(1:2)); % Generate data for y vertices
+        z = 1/normal_vector(3)*(normal_vector(1)*x + normal_vector(2)*y + d); % Solve for z vertices data
+        
+        groundHandle   = patch('XData',x,'YData',y,'ZData',z,'FaceColor', options.groundColor);
+        alpha(groundHandle,options.groundTransparency);
+        
+        % apply transform
+        groundTransform = hgtransform('Parent',parent);
+        set(groundHandle,'Parent',groundTransform);
+        
+        if any(ismember(p.UsingDefaults,'groundFrame'))
+            
+            w_H_plane           = eye(4,4);
+            options.groundFrame = linkNames{1};
+        else
+            w_H_plane_idyn      = KinDynModel.kinDynComp.getWorldTransform(options.groundFrame);
+            w_H_plane           = w_H_plane_idyn.asHomogeneousTransform.toMatlab();
+            w_H_plane(1:2,4)    = 0;
+        end
+        set(groundTransform,'Matrix',w_H_plane);
+
+        objectFrames_idyn = iDynTree.StringVector();
+        objectFrames_idyn.push_back(options.groundFrame);
+
+        % Build Object struct
+        Objects.frames_idyn = objectFrames_idyn;
+        Objects.transform   = groundTransform;
+        Objects.frames      = options.groundFrame;
+        Objects.types       = {'plane'};
+        Objects.names       = {'ground'};
+        Objects.handle      = groundHandle;
+
+        if options.debug
+            Objects.map = [Objects.names',Objects.frames'];
+        end
     else
-        w_H_plane_idyn=KinDynModel.kinDynComp.getWorldTransform(options.groundFrame);
-        w_H_plane= w_H_plane_idyn.asHomogeneousTransform.toMatlab();
-        w_H_plane(1:2,4)=0;
+        Objects=[];
     end
-    set(groundTransform,'Matrix',w_H_plane);
 
-    objectFrames_idyn=iDynTree.StringVector();
-    objectFrames_idyn.push_back(options.groundFrame);
+    % Build Output struct
+    Visualizer.transforms     = transforms;
+    Visualizer.linkNames_idyn = linkNames_idyn;
+    Visualizer.linkNames      = linkNames;
+    Visualizer.NOBJ           = length(transforms);
+    Visualizer.meshHandles    = meshHandles;
+    Visualizer.mainHandler    = mainHandler;
+    Visualizer.parent         = parent;
+    Visualizer.DEBUG          = options.debug;
 
-    % Build Object struct
-    Objects.frames_idyn=objectFrames_idyn;
-    Objects.transform=groundTransform;
-    Objects.frames=options.groundFrame;
-    Objects.types={'plane'};
-    Objects.names={'ground'};
-    Objects.handle=groundHandle;
-
-    if options.debug
-        Objects.map=[Objects.names',Objects.frames'];
+    if options.debug      
+        Visualizer.map = map;
+        Visualizer.linkMeshInfo = linkMeshInfo;
     end
-else
-    Objects=[];
-end
-
-% Build Output struct
-Visualizer.transforms=transforms;
-Visualizer.linkNames_idyn=linkNames_idyn;
-Visualizer.linkNames=linkNames;
-Visualizer.NOBJ=length(transforms);
-Visualizer.meshHandles=meshHandles;
-Visualizer.mainHandler=mainHandler;
-Visualizer.parent=parent;
-Visualizer.DEBUG=options.debug;
-
-if options.debug
-    Visualizer.map=map;
-    Visualizer.linkMeshInfo=linkMeshInfo;
 end
