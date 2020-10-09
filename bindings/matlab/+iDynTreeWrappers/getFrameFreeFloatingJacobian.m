@@ -1,7 +1,7 @@
 function J_frame = getFrameFreeFloatingJacobian(KinDynModel,frameName)
 
     % GETFRAMEFREEFLOATINGJACOBIAN gets the free floating jacobian of a 
-    %                                   specified frame. 
+    %                              specified frame. 
     %
     % This matlab function wraps a functionality of the iDyntree library.                     
     % For further info see also: https://github.com/robotology/idyntree
@@ -21,12 +21,9 @@ function J_frame = getFrameFreeFloatingJacobian(KinDynModel,frameName)
     % GNU Lesser General Public License v2.1 or any later version.
 
     %% ------------Initialization----------------
-    
-    % create the matrix that must be populated with the jacobian map
-    J_frame_iDyntree = iDynTree.MatrixDynSize(6,KinDynModel.NDOF+6);
-    
+
     % get the free floating jacobian
-    ack = KinDynModel.kinDynComp.getFrameFreeFloatingJacobian(frameName,J_frame_iDyntree);
+    ack = KinDynModel.kinDynComp.getFrameFreeFloatingJacobian(frameName,KinDynModel.kinematics.J_frame_iDyntree);
     
     % check for errors
     if ~ack   
@@ -34,5 +31,5 @@ function J_frame = getFrameFreeFloatingJacobian(KinDynModel,frameName)
     end
     
     % convert to Matlab format
-    J_frame = J_frame_iDyntree.toMatlab;
+    J_frame = KinDynModel.kinematics.J_frame_iDyntree.toMatlab;
 end

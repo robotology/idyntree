@@ -1,7 +1,7 @@
 function basePose = getWorldBaseTransform(KinDynModel)
 
-    % GETWORLDBASETRANSFORM gets the transformation matrix between the base frame
-    %                            and the inertial reference frame. 
+    % GETWORLDBASETRANSFORM gets the transformation matrix between the base
+    %                       frame and the inertial reference frame. 
     %
     % This matlab function wraps a functionality of the iDyntree library.                     
     % For further info see also: https://github.com/robotology/idyntree

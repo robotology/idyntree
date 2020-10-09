@@ -30,7 +30,7 @@ function nDof = getNrOfDegreesOfFreedom(KinDynModel)
         % check nDof is not empty
         if isempty(nDof)
             
-            error('[getNrOfDegreesOfFreedom]: nDof is empty.')
+            warning('[getNrOfDegreesOfFreedom]: nDof is empty.')
         end
                
         disp('[getNrOfDegreesOfFreedom]: done.')     

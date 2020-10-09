@@ -3,6 +3,8 @@ function [] = updateVisualizer(Visualizer,KinDynModel,jointPos,basePose)
     % UPDATEVISUALIZER updates the iDyntree visualizer with the current
     %                  base pose and joints position.
     %
+    % WARNING! This function is deprecated! Use updateVisualization instead.
+    %
     % This matlab function wraps a functionality of the iDyntree library.                     
     % For further info see also: https://github.com/robotology/idyntree
     %
@@ -86,37 +88,29 @@ function [] = updateVisualizer(Visualizer,KinDynModel,jointPos,basePose)
             
         disp('[updateVisualizer]: done.')     
     end
-    
-    % convert joints position to a dynamic size vector
-    jointPos_iDyntree = iDynTree.VectorDynSize(KinDynModel.NDOF);
-    
+
     for k = 0:length(jointPos)-1
         
-        jointPos_iDyntree.setVal(k,jointPos(k+1));
+        KinDynModel.kinematics.jointPos_iDyntree.setVal(k,jointPos(k+1));
     end
-    
-    % define the quantities required to set the floating base pose
-    baseRotation_iDyntree = iDynTree.Rotation();
-    baseOrigin_iDyntree   = iDynTree.Position();
-    basePose_iDyntree     = iDynTree.Transform();
             
     % set the elements of the rotation matrix and of the base position vector
     for k = 0:2
                 
-        baseOrigin_iDyntree.setVal(k,basePose(k+1,4));
+        KinDynModel.kinematics.baseOrigin_iDyntree.setVal(k,basePose(k+1,4));
                 
         for j = 0:2
                     
-            baseRotation_iDyntree.setVal(k,j,basePose(k+1,j+1));                   
+            KinDynModel.kinematics.baseRotation_iDyntree.setVal(k,j,basePose(k+1,j+1));                   
         end
     end
             
     % add the rotation matrix and the position to w_H_b_iDyntree
-    basePose_iDyntree.setRotation(baseRotation_iDyntree);
-    basePose_iDyntree.setPosition(baseOrigin_iDyntree);
+    KinDynModel.kinematics.basePose_iDyntree.setRotation(KinDynModel.kinematics.baseRotation_iDyntree);
+    KinDynModel.kinematics.basePose_iDyntree.setPosition(KinDynModel.kinematics.baseOrigin_iDyntree);
 
     % set the current joints position and world-to-base transform
-    ack = Visualizer.viz.modelViz(0).setPositions(basePose_iDyntree,jointPos_iDyntree);
+    ack = Visualizer.viz.modelViz(0).setPositions(KinDynModel.kinematics.basePose_iDyntree,KinDynModel.kinematics.jointPos_iDyntree);
        
     % check for errors
     if ~ack    

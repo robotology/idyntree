@@ -1,7 +1,7 @@
 function baseLinkName = getFloatingBase(KinDynModel)
 
     % GETFLOATINGBASE retrieves the floating base link name from the 
-    %                      reduced model.
+    %                 reduced model.
     %
     % This matlab function wraps a functionality of the iDyntree library.                     
     % For further info see also: https://github.com/robotology/idyntree

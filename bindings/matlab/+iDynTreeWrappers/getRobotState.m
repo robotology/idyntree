@@ -21,29 +21,24 @@ function [basePose,jointPos,baseVel,jointVel] = getRobotState(KinDynModel)
     % GNU Lesser General Public License v2.1 or any later version.
 
     %% ------------Initialization----------------
-
-    % define all the iDyntree required quantities
-    basePose_iDyntree   = iDynTree.Transform();
-    jointPos_iDyntree   = iDynTree.VectorDynSize(KinDynModel.NDOF);
-    baseVel_iDyntree    = iDynTree.Twist();
-    jointVel_iDyntree   = iDynTree.VectorDynSize(KinDynModel.NDOF);
-    gravityVec_iDyntree = iDynTree.Vector3();
     
     % get the floating base state
-    KinDynModel.kinDynComp.getRobotState(basePose_iDyntree,jointPos_iDyntree,baseVel_iDyntree,jointVel_iDyntree,gravityVec_iDyntree);
+    KinDynModel.kinDynComp.getRobotState(KinDynModel.kinematics.basePose_iDyntree,KinDynModel.kinematics.jointPos_iDyntree, ...
+                                         KinDynModel.kinematics.baseVel_iDyntree,KinDynModel.kinematics.jointVel_iDyntree, ...
+                                         KinDynModel.kinematics.gravityVec_iDyntree);
    
     % get the base position and orientation
-    baseRotation_iDyntree = basePose_iDyntree.getRotation;
-    baseOrigin_iDyntree   = basePose_iDyntree.getPosition;
+    baseRotation_iDyntree = KinDynModel.kinematics.basePose_iDyntree.getRotation;
+    baseOrigin_iDyntree   = KinDynModel.kinematics.basePose_iDyntree.getPosition;
     
     % covert to Matlab format
     baseRotation = baseRotation_iDyntree.toMatlab;
     baseOrigin   = baseOrigin_iDyntree.toMatlab;
     basePose     = [baseRotation, baseOrigin;
                        0,  0,  0,  1]; 
-    jointPos     = jointPos_iDyntree.toMatlab;
-    baseVel      = baseVel_iDyntree.toMatlab;
-    jointVel     = jointVel_iDyntree.toMatlab;   
+    jointPos     = KinDynModel.kinematics.jointPos_iDyntree.toMatlab;
+    baseVel      = KinDynModel.kinematics.baseVel_iDyntree.toMatlab;
+    jointVel     = KinDynModel.kinematics.jointVel_iDyntree.toMatlab;   
     
     % Debug output
     if KinDynModel.DEBUG

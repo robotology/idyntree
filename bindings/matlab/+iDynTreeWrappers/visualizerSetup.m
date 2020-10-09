@@ -1,7 +1,9 @@
 function [] = visualizerSetup(Visualizer,disableViewInertialFrame,lightDir,cameraPos,cameraTarget)
 
     % VISUALIZERSETUP modifies the visualization environment according to the 
-    %                      user specifications.
+    %                 user specifications.
+    %
+    % WARNING! This function is deprecated! Use prepareVisualization instead.
     %
     % This matlab function wraps a functionality of the iDyntree library.                     
     % For further info see also: https://github.com/robotology/idyntree
@@ -24,7 +26,7 @@ function [] = visualizerSetup(Visualizer,disableViewInertialFrame,lightDir,camer
     % GNU Lesser General Public License v2.1 or any later version.
 
     %% ------------Initialization----------------
-    
+
     % disable environmental features  
     if disableViewInertialFrame
         

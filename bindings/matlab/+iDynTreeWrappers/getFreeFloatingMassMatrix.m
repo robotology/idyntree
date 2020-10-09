@@ -18,12 +18,9 @@ function M = getFreeFloatingMassMatrix(KinDynModel)
     % GNU Lesser General Public License v2.1 or any later version.
 
     %% ------------Initialization----------------
-    
-    % create the matrix that must be populated with the mass info
-    M_iDyntree = iDynTree.MatrixDynSize(KinDynModel.NDOF+6,KinDynModel.NDOF+6);
-    
+
     % get the mass matrix
-    ack = KinDynModel.kinDynComp.getFreeFloatingMassMatrix(M_iDyntree);
+    ack = KinDynModel.kinDynComp.getFreeFloatingMassMatrix(KinDynModel.dynamics.M_iDyntree);
     
     % check for errors
     if ~ack  
@@ -31,7 +28,7 @@ function M = getFreeFloatingMassMatrix(KinDynModel)
     end
     
     % convert to Matlab format
-    M = M_iDyntree.toMatlab;
+    M = KinDynModel.dynamics.M_iDyntree.toMatlab;
     
     % debug output
     if KinDynModel.DEBUG

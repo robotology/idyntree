@@ -18,12 +18,9 @@ function jointVel = getJointVel(KinDynModel)
     % GNU Lesser General Public License v2.1 or any later version.
 
     %% ------------Initialization----------------
-
-    % create the vector that must be populated with the joint velocities
-    jointVel_iDyntree = iDynTree.VectorDynSize(KinDynModel.NDOF);
     
     % get the joints velocities
-    ack = KinDynModel.kinDynComp.getJointVel(jointVel_iDyntree);
+    ack = KinDynModel.kinDynComp.getJointVel(KinDynModel.kinematics.jointVel_iDyntree);
     
     % check for errors
     if ~ack   
@@ -31,5 +28,5 @@ function jointVel = getJointVel(KinDynModel)
     end
     
     % convert to Matlab format
-    jointVel = jointVel_iDyntree.toMatlab;
+    jointVel = KinDynModel.kinematics.jointVel_iDyntree.toMatlab;
 end

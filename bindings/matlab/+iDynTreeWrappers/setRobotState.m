@@ -38,10 +38,6 @@ function [] = setRobotState(varargin)
 
     %% ------------Initialization----------------
 
-    persistent baseRotation_iDyntree baseOrigin_iDyntree ...
-               basePose_iDyntree baseVel_iDyntree jointPos_iDyntree ...
-               jointVel_iDyntree gravityVec_iDyntree
-        
     KinDynModel = varargin{1};
     
     % check the number of inputs
@@ -135,37 +131,27 @@ function [] = setRobotState(varargin)
                 
                 disp('[setRobotState]: done.')     
             end
-            
-            % define the quantities required to set the floating base
-            
-            if isempty(baseRotation_iDyntree)
-                
-                baseRotation_iDyntree = iDynTree.Rotation();
-                baseOrigin_iDyntree   = iDynTree.Position();
-                basePose_iDyntree     = iDynTree.Transform();
-                baseVel_iDyntree      = iDynTree.Twist();
-            end
-         
+
             % set the element of the rotation matrix and of the base
             % position vector
             for k = 0:2
                 
-                baseOrigin_iDyntree.setVal(k,basePose(k+1,4));
+                KinDynModel.kinematics.baseOrigin_iDyntree.setVal(k,basePose(k+1,4));
                 
                 for j = 0:2
                     
-                    baseRotation_iDyntree.setVal(k,j,basePose(k+1,j+1));                   
+                    KinDynModel.kinematics.baseRotation_iDyntree.setVal(k,j,basePose(k+1,j+1));                   
                 end
             end      
             
             % add the rotation matrix and the position to basePose_iDyntree
-            basePose_iDyntree.setRotation(baseRotation_iDyntree);
-            basePose_iDyntree.setPosition(baseOrigin_iDyntree);
+            KinDynModel.kinematics.basePose_iDyntree.setRotation(KinDynModel.kinematics.baseRotation_iDyntree);
+            KinDynModel.kinematics.basePose_iDyntree.setPosition(KinDynModel.kinematics.baseOrigin_iDyntree);
             
             % set the base velocities
             for k = 0:5
                 
-                baseVel_iDyntree.setVal(k,baseVel(k+1));
+                KinDynModel.kinematics.baseVel_iDyntree.setVal(k,baseVel(k+1));
             end
             
         case 4
@@ -204,25 +190,17 @@ function [] = setRobotState(varargin)
             error('[setRobotState]: wrong number of inputs.')
     end
     
-    % define all the remaining quantities required for setting the system state
-    if isempty(jointPos_iDyntree)
-        
-        jointPos_iDyntree   = iDynTree.VectorDynSize(KinDynModel.NDOF);
-        jointVel_iDyntree   = iDynTree.VectorDynSize(KinDynModel.NDOF);
-        gravityVec_iDyntree = iDynTree.Vector3();
-    end
-         
     % set joints position and velocity
     for k = 0:length(jointPos)-1
         
-        jointVel_iDyntree.setVal(k,jointVel(k+1));
-        jointPos_iDyntree.setVal(k,jointPos(k+1));
+        KinDynModel.kinematics.jointVel_iDyntree.setVal(k,jointVel(k+1));
+        KinDynModel.kinematics.jointPos_iDyntree.setVal(k,jointPos(k+1));
     end
     
     % set the gravity vector
     for k = 0:2
         
-       gravityVec_iDyntree.setVal(k,gravAcc(k+1));       
+       KinDynModel.kinematics.gravityVec_iDyntree.setVal(k,gravAcc(k+1));       
     end
     
     % set the current robot state
@@ -230,11 +208,14 @@ function [] = setRobotState(varargin)
         
         case 4
             
-            ack = KinDynModel.kinDynComp.setRobotState(jointPos_iDyntree,jointVel_iDyntree,gravityVec_iDyntree);
+            ack = KinDynModel.kinDynComp.setRobotState(KinDynModel.kinematics.jointPos_iDyntree,KinDynModel.kinematics.jointVel_iDyntree, ...
+                                                       KinDynModel.kinematics.gravityVec_iDyntree);
             
         case 6
             
-            ack = KinDynModel.kinDynComp.setRobotState(basePose_iDyntree,jointPos_iDyntree,baseVel_iDyntree,jointVel_iDyntree,gravityVec_iDyntree);
+            ack = KinDynModel.kinDynComp.setRobotState(KinDynModel.kinematics.basePose_iDyntree,KinDynModel.kinematics.jointPos_iDyntree, ...
+                                                       KinDynModel.kinematics.baseVel_iDyntree,KinDynModel.kinematics.jointVel_iDyntree, ...
+                                                       KinDynModel.kinematics.gravityVec_iDyntree);
     end
     
     % check for errors

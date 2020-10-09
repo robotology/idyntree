@@ -18,12 +18,9 @@ function J_CoM = getCenterOfMassJacobian(KinDynModel)
     % GNU Lesser General Public License v2.1 or any later version.
 
     %% ------------Initialization----------------
-    
-    % create the matrix that must be populated with the jacobian map
-    J_CoM_iDyntree = iDynTree.MatrixDynSize(3,KinDynModel.NDOF+6);
-    
+
     % get the free floating jacobian
-    ack = KinDynModel.kinDynComp.getCenterOfMassJacobian(J_CoM_iDyntree);
+    ack = KinDynModel.kinDynComp.getCenterOfMassJacobian(KinDynModel.kinematics.J_CoM_iDyntree);
     
     % check for errors
     if ~ack    
@@ -31,5 +28,5 @@ function J_CoM = getCenterOfMassJacobian(KinDynModel)
     end
     
     % convert to Matlab format
-    J_CoM = J_CoM_iDyntree.toMatlab;
+    J_CoM = KinDynModel.kinematics.J_CoM_iDyntree.toMatlab;
 end
