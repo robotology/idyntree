@@ -85,6 +85,33 @@ if (IDYNTREE_USES_PYTHON_PYBIND11)
     if (${pybind11_FOUND})
         add_subdirectory(pybind11)
     else()
-       MESSAGE(FATAL_ERROR "pybind11 not found, impossible to generate iDynTree pybind11 bindings.")  
+       MESSAGE(FATAL_ERROR "pybind11 not found, impossible to generate iDynTree pybind11 bindings.")
     endif()
+endif()
+
+# Install main __init__.py file.
+if (IDYNTREE_USES_PYTHON_PYBIND11 OR IDYNTREE_USES_PYTHON)
+    if (WIN32)
+        set(NEW_LINE "\n\r")
+    else()
+        set(NEW_LINE "\n")
+    endif()
+    # Clear the file first if it exists.
+    file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/__init__.py "")
+    # If pybind is enabled, add the corresponding import.
+    if (${IDYNTREE_USES_PYTHON_PYBIND11})
+        file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/__init__.py "from . import pybind${NEW_LINE}")
+    endif()
+    # If SWIG is enabled, add the corresponding import.
+    if (${IDYNTREE_USES_PYTHON})
+        file(APPEND "${CMAKE_CURRENT_BINARY_DIR}/__init__.py" "from . import swig${NEW_LINE}")
+        # Create also an alias from swig to the old `bindings` import.
+        file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/bindings.py" "from .swig import *${NEW_LINE}")
+        install(FILES "${CMAKE_CURRENT_BINARY_DIR}/bindings.py"
+                DESTINATION ${PYTHON_INSTDIR})
+        # Add the alias in the __init__.py
+        file(APPEND "${CMAKE_CURRENT_BINARY_DIR}/__init__.py" "from . import bindings${NEW_LINE}")
+    endif()
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/__init__.py"
+             DESTINATION ${PYTHON_INSTDIR})
 endif()

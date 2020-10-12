@@ -6,12 +6,12 @@ cmake_policy(SET CMP0086 NEW)
 
 set_source_files_properties(../iDynTree.i PROPERTIES
     CPLUSPLUS ON
-    SWIG_MODULE_NAME "bindings")
+    SWIG_MODULE_NAME "swig")
 
 set(target_name iDynTree)
 
 swig_add_library(${target_name}
-    TYPE SHARED
+    TYPE MODULE
     LANGUAGE python
     SOURCES ../iDynTree.i
     OUTFILE_DIR ${CMAKE_CURRENT_BINARY_DIR}
@@ -34,23 +34,8 @@ set_property(
     TARGET ${target_name}
     PROPERTY SWIG_GENERATED_COMPILE_OPTIONS -Wextra)
 
-# Add a simple __init__.py that loads the bindings and allows using idyntree.bindings
-file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/idyntree/__init__.py "from . import bindings")
-
-if(IDYNTREE_PACKAGE_FOR_PYPI)
-    set(PYTHON_INSTDIR ${CMAKE_INSTALL_PREFIX})
-else()
-    # installation path is determined reliably on most platforms using distutils
-    execute_process(COMMAND ${Python3_EXECUTABLE}
-        -c "from distutils import sysconfig; print(sysconfig.get_python_lib(1,0,prefix=''))"
-        OUTPUT_VARIABLE PYTHON_INSTDIR_PREFIX)
-    string(STRIP ${PYTHON_INSTDIR_PREFIX} PYTHON_INSTDIR_PREFIX)
-    set(PYTHON_INSTDIR ${PYTHON_INSTDIR_PREFIX}/idyntree)
-endif()
-
 install(
-    FILES ${CMAKE_CURRENT_BINARY_DIR}/idyntree/__init__.py
-          ${CMAKE_CURRENT_BINARY_DIR}/idyntree/bindings.py
+    FILES ${CMAKE_CURRENT_BINARY_DIR}/idyntree/swig.py
     DESTINATION ${PYTHON_INSTDIR})
 
 install(TARGETS ${target_name} DESTINATION ${PYTHON_INSTDIR})
