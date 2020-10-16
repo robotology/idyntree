@@ -141,13 +141,6 @@ namespace iDynTree {
          * Update all the indices (link/frames) contained in this sensor.
          */
         virtual bool updateIndices(const Model & model) = 0;
-
-        // Deprecated
-        IDYNTREE_DEPRECATED_WITH_MSG("Use updateIndices() instead")
-        virtual bool updateIndeces(const Model & model)
-        {
-            return updateIndices(model);
-        }
     };
 
     /**

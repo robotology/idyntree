@@ -162,9 +162,9 @@ Box extractAABBFromVertices(const Transform& link_H_vertices,
     }
 
     // The side of the BB is the difference between the max and min
-    box.x = maxX-minX;
-    box.y = maxY-minY;
-    box.z = maxZ-minZ;
+    box.setX(maxX-minX);
+    box.setY(maxY-minY);
+    box.setZ(maxZ-minZ);
 
     // The offset between the geometry origin and the bounding box origin is the middle point
     Position offset_bb_wrt_geom;
@@ -174,8 +174,8 @@ Box extractAABBFromVertices(const Transform& link_H_vertices,
 
     Position offset_bb_wrt_link = link_H_vertices*offset_bb_wrt_geom;
 
-    box.link_H_geometry = Transform(link_H_vertices.getRotation(),
-                                    offset_bb_wrt_link);
+    box.setLink_H_geometry(Transform(link_H_vertices.getRotation(),
+                                     offset_bb_wrt_link));
 
     return box;
 }
@@ -185,7 +185,8 @@ bool BBFromExternalShape(ExternalMesh* extMesh, Box& box)
     // Load mesh with assimp
     Assimp::Importer Importer;
 
-    const aiScene* pScene = Importer.ReadFile(extMesh->filename.c_str(), 0);
+    std::string filename = extMesh->getFilename();
+    const aiScene* pScene = Importer.ReadFile(filename.c_str(), 0);
 
     if (pScene)
     {
@@ -200,9 +201,9 @@ bool BBFromExternalShape(ExternalMesh* extMesh, Box& box)
         }
 
         // Apply scale attribute for external meshes
-        double scalingFactorX=extMesh->scale.getVal(0);
-        double scalingFactorY=extMesh->scale.getVal(1);
-        double scalingFactorZ=extMesh->scale.getVal(2);
+        double scalingFactorX=extMesh->getScale().getVal(0);
+        double scalingFactorY=extMesh->getScale().getVal(1);
+        double scalingFactorZ=extMesh->getScale().getVal(2);
 
         // Use each component to scale each vertex coordinate
         for(size_t i=0; i < vertexVector.size(); i++)
@@ -212,14 +213,14 @@ bool BBFromExternalShape(ExternalMesh* extMesh, Box& box)
             vertexVector[i].z*=scalingFactorZ;
         }
 
-        box = extractAABBFromVertices(extMesh->link_H_geometry, toiDynTree(vertexVector));
+        box = extractAABBFromVertices(extMesh->getLink_H_geometry(), toiDynTree(vertexVector));
 
         return true;
     }
     else
     {
         std::stringstream ss;
-        ss << "Impossible to load mesh " << extMesh->filename << " using the Assimp library.";
+        ss << "Impossible to load mesh " << extMesh->getFilename() << " using the Assimp library.";
         reportError("", "BBFromExternalShape", ss.str().c_str());
         return false;
     }
@@ -233,7 +234,7 @@ bool BBFromShape(SolidShape* geom, Box& box)
         // If shape is a box, just copy it
         Box* pBox = static_cast<Box*>(geom);
         box = *pBox;
-        box.link_H_geometry = geom->link_H_geometry;
+        box.setLink_H_geometry(geom->getLink_H_geometry());
         return true;
     }
 
@@ -241,8 +242,10 @@ bool BBFromShape(SolidShape* geom, Box& box)
     {
         // If shape is a sphere all the side of the BB are the diameter of the sphere
         Sphere* pSphere = static_cast<Sphere*>(geom);
-        box.x = box.y = box.z = 2.0*pSphere->radius;
-        box.link_H_geometry = geom->link_H_geometry;
+        box.setX(2.0*pSphere->getRadius());
+        box.setY(2.0*pSphere->getRadius());
+        box.setZ(2.0*pSphere->getRadius());
+        box.setLink_H_geometry(geom->getLink_H_geometry());
         return true;
     }
 
@@ -251,9 +254,10 @@ bool BBFromShape(SolidShape* geom, Box& box)
         // If shape is a cylinder the x and y side of the BB are the diameter of the cylinder,
         // while the z side is the lenght of the cylinder
         Cylinder* pCylinder = static_cast<Cylinder*>(geom);
-        box.x = box.y = 2.0*pCylinder->radius;
-        box.z = pCylinder->length;
-        box.link_H_geometry = geom->link_H_geometry;
+        box.setX(2.0*pCylinder->getRadius());
+        box.setY(2.0*pCylinder->getRadius());
+        box.setZ(pCylinder->getLength());
+        box.setLink_H_geometry(geom->getLink_H_geometry());
         return true;
     }
 
@@ -275,28 +279,28 @@ std::vector<Position> computeBoxVertices(const Box box)
     std::vector<Position> vertices;
 
     // + + +
-    vertices.push_back(box.link_H_geometry*Position(+box.x/2, +box.y/2, +box.z/2));
+    vertices.push_back(box.getLink_H_geometry()*Position(+box.getX()/2, +box.getY()/2, +box.getZ()/2));
 
     // + + -
-    vertices.push_back(box.link_H_geometry*Position(+box.x/2, +box.y/2, -box.z/2));
+    vertices.push_back(box.getLink_H_geometry()*Position(+box.getX()/2, +box.getY()/2, -box.getZ()/2));
 
     // + - +
-    vertices.push_back(box.link_H_geometry*Position(+box.x/2, -box.y/2, +box.z/2));
+    vertices.push_back(box.getLink_H_geometry()*Position(+box.getX()/2, -box.getY()/2, +box.getZ()/2));
 
     // + - -
-    vertices.push_back(box.link_H_geometry*Position(+box.x/2, -box.y/2, -box.z/2));
+    vertices.push_back(box.getLink_H_geometry()*Position(+box.getX()/2, -box.getY()/2, -box.getZ()/2));
 
     // - + +
-    vertices.push_back(box.link_H_geometry*Position(-box.x/2, +box.y/2, +box.z/2));
+    vertices.push_back(box.getLink_H_geometry()*Position(-box.getX()/2, +box.getY()/2, +box.getZ()/2));
 
     // - + -
-    vertices.push_back(box.link_H_geometry*Position(-box.x/2, +box.y/2, -box.z/2));
+    vertices.push_back(box.getLink_H_geometry()*Position(-box.getX()/2, +box.getY()/2, -box.getZ()/2));
 
     // - - +
-    vertices.push_back(box.link_H_geometry*Position(-box.x/2, -box.y/2, +box.z/2));
+    vertices.push_back(box.getLink_H_geometry()*Position(-box.getX()/2, -box.getY()/2, +box.getZ()/2));
 
     // - - -
-    vertices.push_back(box.link_H_geometry*Position(-box.x/2, -box.y/2, -box.z/2));
+    vertices.push_back(box.getLink_H_geometry()*Position(-box.getX()/2, -box.getY()/2, -box.getZ()/2));
 
     return vertices;
 }
@@ -329,20 +333,22 @@ bool getBoundingBoxOfLinkGeometries(iDynTree::Model& model,
     for (LinkIndex lnkIdx=0; lnkIdx < model.getNrOfLinks(); lnkIdx++)
     {
         // If models has no shape associated
-        if (model.collisionSolidShapes().linkSolidShapes[lnkIdx].size() == 0)
+        if (model.collisionSolidShapes().getLinkSolidShapes()[lnkIdx].size() == 0)
         {
             Box box;
-            box.x = box.y = box.z = 0.0;
+            box.setX(0);
+            box.setY(0);
+            box.setZ(0);
             linkBBsInLinkFrame[lnkIdx] = box;
             continue;
         }
 
         // Bounding boxes for each shape of the link, each expressed in link frame
         std::vector<iDynTree::Box> shapesBBsInLinkFrame;
-        for(int shapeIdx=0; shapeIdx < model.collisionSolidShapes().linkSolidShapes[lnkIdx].size(); shapeIdx++)
+        for(int shapeIdx=0; shapeIdx < model.collisionSolidShapes().getLinkSolidShapes()[lnkIdx].size(); shapeIdx++)
         {
             iDynTree::Box shapeBoundingBox;
-            SolidShape * shape = model.collisionSolidShapes().linkSolidShapes[lnkIdx][shapeIdx];
+            SolidShape * shape = model.collisionSolidShapes().getLinkSolidShapes()[lnkIdx][shapeIdx];
             bool ok = BBFromShape(shape, shapeBoundingBox);
             if (!ok) return false;
             shapesBBsInLinkFrame.push_back(shapeBoundingBox);

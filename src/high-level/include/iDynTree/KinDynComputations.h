@@ -121,27 +121,7 @@ public:
      * @param model the model to use in this class.
      * @return true if all went ok, false otherwise.
      */
-    bool loadRobotModel(const iDynTree::Model & model );
-
-    /**
-     * Load the model of the robot from an external file.
-     *
-     * @param filename path to the file to load
-     * @param filetype type of the file to load, currently supporting only urdf type.
-     *
-     */
-    IDYNTREE_DEPRECATED_WITH_MSG("Use iDynTree::ModelLoader::loadRobotModelFromFile and pass the Model to loadRobotModel")
-    bool loadRobotModelFromFile(const std::string & filename, const std::string & filetype="urdf");
-
-    /**
-     * Load the model of the robot  from a string.
-     *
-     * @param modelString string containg the model of the robot.
-     * @param filetype type of the file to load, currently supporting only urdf type.
-     *
-     */
-    IDYNTREE_DEPRECATED_WITH_MSG("Use iDynTree::ModelLoader::loadRobotModelFromString and pass the Model to loadRobotModel")
-    bool loadRobotModelFromString(const std::string & modelString, const std::string & filetype="urdf");
+    bool loadRobotModel(const iDynTree::Model & model);
 
     /**
      * Return true if the models for the robot have been correctly.

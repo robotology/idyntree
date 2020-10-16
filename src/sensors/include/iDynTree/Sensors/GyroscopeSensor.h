@@ -123,10 +123,6 @@ namespace iDynTree {
          */
         bool updateIndices(const Model & model);
 
-        // Deprecated
-        IDYNTREE_DEPRECATED_WITH_MSG("Use updateIndices() instead")
-        bool updateIndeces(const Model & model);
-
         /**
          * Predict sensor measurement when given the parent link spatial velocity, expressed
          * in the link orientation and wrt the link origin.

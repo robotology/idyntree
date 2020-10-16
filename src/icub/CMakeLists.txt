@@ -48,7 +48,3 @@ install(TARGETS ${libraryname}
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS idyntree-icub)
 
-# Install headers in deprecated location
-install(DIRECTORY include/iDynTree/iCub
-        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/iDynTree")
-

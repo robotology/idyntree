@@ -134,16 +134,6 @@ namespace iDynTree {
 #endif
     }
 
-    bool InverseKinematics::setRobotConfiguration(const iDynTree::Transform& baseConfiguration, const iDynTree::VectorDynSize& jointConfiguration)
-    {
-#ifdef IDYNTREE_USES_IPOPT
-        assert(m_pimpl);
-        return IK_PIMPL(m_pimpl)->setRobotConfiguration(baseConfiguration, jointConfiguration);
-#else
-        return missingIpoptErrorReport();
-#endif
-    }
-
     bool InverseKinematics::setCurrentRobotConfiguration(const iDynTree::Transform& baseConfiguration, const iDynTree::VectorDynSize& jointConfiguration)
     {
 #ifdef IDYNTREE_USES_IPOPT
@@ -700,15 +690,6 @@ namespace iDynTree {
 #endif
     }
 
-    bool InverseKinematics::setDesiredJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight)
-    {
-#ifdef IDYNTREE_USES_IPOPT
-        return this->setDesiredReducedJointConfiguration(desiredJointConfiguration, weight);
-#else
-        return missingIpoptErrorReport();
-#endif
-    }
-
     bool InverseKinematics::setDesiredFullJointsConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight)
     {
 #ifdef IDYNTREE_USES_IPOPT
@@ -791,15 +772,6 @@ namespace iDynTree {
 #endif
     }
 
-    bool InverseKinematics::setInitialCondition(const iDynTree::Transform* baseTransform, const iDynTree::VectorDynSize* initialCondition)
-    {
-#ifdef IDYNTREE_USES_IPOPT
-        return this->setReducedInitialCondition(baseTransform, initialCondition);
-#else
-        return missingIpoptErrorReport();
-#endif
-    }
-
     bool InverseKinematics::setFullJointsInitialCondition(const iDynTree::Transform* baseTransform,
                                                           const iDynTree::VectorDynSize* initialCondition)
     {
@@ -863,13 +835,13 @@ namespace iDynTree {
         return InverseKinematicsTreatTargetAsConstraintNone;
 #endif
     }
-    
+
     bool InverseKinematics::setTargetResolutionMode(const std::string& frameName, InverseKinematicsTreatTargetAsConstraint mode)
     {
 #ifdef IDYNTREE_USES_IPOPT
         assert(m_pimpl);
         internal::kinematics::TransformMap::iterator transConstr = IK_PIMPL(m_pimpl)->getTargetRefIfItExists(frameName);
-        
+
         if( transConstr == IK_PIMPL(m_pimpl)->m_targets.end() )
         {
             std::stringstream ss;
@@ -877,7 +849,7 @@ namespace iDynTree {
             reportError("InverseKinematics","setTargetResolutionMode",ss.str().c_str());
             return false;
         }
-        
+
         IK_PIMPL(m_pimpl)->setTargetResolutionMode(transConstr, mode);
         return true;
 #else
@@ -891,7 +863,7 @@ namespace iDynTree {
 #ifdef IDYNTREE_USES_IPOPT
         assert(m_pimpl);
         internal::kinematics::TransformMap::iterator transConstr = IK_PIMPL(m_pimpl)->getTargetRefIfItExists(frameName);
-        
+
         if( transConstr == IK_PIMPL(m_pimpl)->m_targets.end() )
         {
             std::stringstream ss;
@@ -899,7 +871,7 @@ namespace iDynTree {
             reportError("InverseKinematics","targetResolutionMode",ss.str().c_str());
             return InverseKinematicsTreatTargetAsConstraintNone;
         }
-        
+
         return IK_PIMPL(m_pimpl)->targetResolutionMode(transConstr);
 #else
         missingIpoptErrorReport();
@@ -914,17 +886,6 @@ namespace iDynTree {
         return IK_PIMPL(m_pimpl)->solveProblem();
 #else
         return missingIpoptErrorReport();
-#endif
-    }
-
-    void InverseKinematics::getSolution(iDynTree::Transform & baseTransformSolution,
-                                        iDynTree::VectorDynSize & shapeSolution)
-    {
-#ifdef IDYNTREE_USES_IPOPT
-        this->getReducedSolution(baseTransformSolution, shapeSolution);
-        return;
-#else
-        missingIpoptErrorReport();
 #endif
     }
 
@@ -969,17 +930,6 @@ namespace iDynTree {
 #endif
     }
 
-    const Model& InverseKinematics::model() const
-    {
-#ifdef IDYNTREE_USES_IPOPT
-        assert(m_pimpl);
-        return this->reducedModel();
-#else
-        missingIpoptErrorReport();
-        return this->reducedModel();
-#endif
-    }
-
     const Model& InverseKinematics::fullModel() const
     {
 #ifdef IDYNTREE_USES_IPOPT
@@ -990,7 +940,7 @@ namespace iDynTree {
         return this->reducedModel();
 #endif
     }
-    
+
     const Model& InverseKinematics::reducedModel() const
     {
 #ifdef IDYNTREE_USES_IPOPT
@@ -1001,7 +951,7 @@ namespace iDynTree {
         return this->reducedModel();
 #endif
     }
-    
+
     bool InverseKinematics::isCOMTargetActive()
     {
 #ifdef IDYNTREE_USES_IPOPT

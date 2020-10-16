@@ -11,10 +11,7 @@ project(iDynTree_ModelIO_URDF CXX)
 set(IDYNTREE_MODELIO_URDF_HEADERS include/iDynTree/ModelIO/URDFDofsImport.h
                                   include/iDynTree/ModelIO/ModelLoader.h
                                   include/iDynTree/ModelIO/ModelExporter.h
-                                  include/iDynTree/ModelIO/ModelCalibrationHelper.h
-                                  include/deprecated/iDynTree/ModelIO/URDFModelImport.h
-                                  include/deprecated/iDynTree/ModelIO/URDFGenericSensorsImport.h
-                                  include/deprecated/iDynTree/ModelIO/URDFSolidShapesImport.h)
+                                  include/iDynTree/ModelIO/ModelCalibrationHelper.h)
 
 set(IDYNTREE_MODELIO_URDF_PRIVATE_HEADERS include/private/URDFDocument.h
                                           include/private/InertialElement.h
@@ -46,9 +43,6 @@ set(IDYNTREE_MODELIO_URDF_SOURCES src/URDFDofsImport.cpp
                                   src/ModelLoader.cpp
                                   src/ModelExporter.cpp
                                   src/ModelCalibrationHelper.cpp
-                                  src/deprecated/URDFModelImport.cpp
-                                  src/deprecated/URDFGenericSensorsImport.cpp
-                                  src/deprecated/URDFSolidShapesImport.cpp
                                   src/URDFModelExport.cpp)
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_MODELIO_URDF_SOURCES})
@@ -67,7 +61,6 @@ add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 target_compile_features(${libraryname} PRIVATE cxx_auto_type cxx_delegating_constructors cxx_final cxx_lambdas cxx_lambda_init_captures)
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-                                                 "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/deprecated>"
                                                  "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/private>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 

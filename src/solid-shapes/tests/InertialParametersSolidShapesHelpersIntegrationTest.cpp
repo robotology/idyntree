@@ -29,24 +29,24 @@ void checkOneCubeVsEightSmallCubes()
     iDynTree::Model oneCubeModel;
     iDynTree::Link oneCubeLink;
     oneCubeModel.addLink("link0", oneCubeLink);
-    oneCubeModel.collisionSolidShapes().linkSolidShapes[0].resize(1);
+    oneCubeModel.collisionSolidShapes().getLinkSolidShapes()[0].resize(1);
     iDynTree::Box oneCube;
-    oneCube.link_H_geometry = Transform::Identity();
-    oneCube.x = 1;
-    oneCube.y = 1;
-    oneCube.z = 1;
-    oneCubeModel.collisionSolidShapes().linkSolidShapes[0][0] = new iDynTree::Box(oneCube);
+    oneCube.setLink_H_geometry(Transform::Identity());
+    oneCube.setX(1.0);
+    oneCube.setY(1.0);
+    oneCube.setZ(1.0);
+    oneCubeModel.collisionSolidShapes().getLinkSolidShapes()[0][0] = new iDynTree::Box(oneCube);
 
     iDynTree::Model eightCubeModel;
     iDynTree::Link eightCubeLink;
     eightCubeModel.addLink("link0", eightCubeLink);
-    oneCubeModel.collisionSolidShapes().linkSolidShapes[0];
+    oneCubeModel.collisionSolidShapes().getLinkSolidShapes()[0];
 
     iDynTree::Box smallCube;
-    smallCube.link_H_geometry = Transform::Identity();
-    smallCube.x = 1.0/2.0;
-    smallCube.y = 1.0/2.0;
-    smallCube.z = 1.0/2.0;
+    smallCube.setLink_H_geometry(Transform::Identity());
+    smallCube.setX(1.0/2.0);
+    smallCube.setY(1.0/2.0);
+    smallCube.setZ(1.0/2.0);
 
     // Generate origins for the small cubes
     std::vector<Position> smallCubesOrigins;
@@ -75,8 +75,8 @@ void checkOneCubeVsEightSmallCubes()
     smallCubesOrigins.push_back(Position(-1.0/4.0, -1.0/4.0, -1.0/4.0));
 
     for(auto&& smallCubeOrigin: smallCubesOrigins) {
-        smallCube.link_H_geometry.setPosition(smallCubeOrigin);
-        eightCubeModel.collisionSolidShapes().linkSolidShapes[0].push_back(new Box(smallCube));
+        smallCube.setLink_H_geometry(Transform(Rotation::Identity(), smallCubeOrigin));
+        eightCubeModel.collisionSolidShapes().getLinkSolidShapes()[0].push_back(new Box(smallCube));
     }
 
     // Compute the inertia with the bounding boxes for both cases

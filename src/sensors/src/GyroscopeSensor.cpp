@@ -121,14 +121,6 @@ bool GyroscopeSensor::updateIndices(const Model& model)
     return true;
 }
 
-// Deprecated
-bool GyroscopeSensor::updateIndeces(const Model& model)
-{
-    return updateIndices(model);
-}
-
-
-
 std::string GyroscopeSensor::getName() const
 {
     return this->pimpl->name;

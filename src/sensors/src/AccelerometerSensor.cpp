@@ -136,13 +136,6 @@ bool AccelerometerSensor::updateIndices(const Model& model)
     return true;
 }
 
-// Deprecated
-bool AccelerometerSensor::updateIndeces(const Model& model)
-{
-    return updateIndices(model);
-}
-
-
 std::string AccelerometerSensor::getName() const
 {
     return this->pimpl->name;

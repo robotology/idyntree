@@ -25,6 +25,9 @@
 #include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/FreeFloatingState.h>
 
+#include <iDynTree/ModelIO/ModelLoader.h>
+
+
 using namespace iDynTree;
 
 double random_double()
@@ -392,9 +395,10 @@ void testAbsoluteJacobiansAndFrameBiasAcc(KinDynComputations & dynComp)
 
 void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresentation frameVelRepr)
 {
-    iDynTree::KinDynComputations dynComp;
-
-    bool ok = dynComp.loadRobotModelFromFile(modelFilePath);
+	iDynTree::KinDynComputations dynComp;
+    iDynTree::ModelLoader mdlLoader;
+    bool ok = mdlLoader.loadModelFromFile(modelFilePath);
+    ok = ok && dynComp.loadRobotModel(mdlLoader.model());
     ASSERT_IS_TRUE(ok);
 
     ok = dynComp.setFrameVelocityRepresentation(frameVelRepr);
@@ -502,9 +506,10 @@ void testAbsoluteJacobianSparsity(KinDynComputations & dynComp)
 
 void testSparsityPattern(std::string modelFilePath, const FrameVelocityRepresentation frameVelRepr)
 {
-    iDynTree::KinDynComputations dynComp;
-
-    bool ok = dynComp.loadRobotModelFromFile(modelFilePath);
+	iDynTree::KinDynComputations dynComp;
+    iDynTree::ModelLoader mdlLoader;
+    bool ok = mdlLoader.loadModelFromFile(modelFilePath);
+    ok = ok && dynComp.loadRobotModel(mdlLoader.model());
     ASSERT_IS_TRUE(ok);
 
     ok = dynComp.setFrameVelocityRepresentation(frameVelRepr);

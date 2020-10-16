@@ -177,12 +177,6 @@ bool SixAxisForceTorqueSensor::updateIndices(const Model& model)
     return true;
 }
 
-// Deprecated
-bool SixAxisForceTorqueSensor::updateIndeces(const Model& model)
-{
-    return updateIndices(model);
-}
-
 std::string SixAxisForceTorqueSensor::getName() const
 {
     return this->pimpl->name;
