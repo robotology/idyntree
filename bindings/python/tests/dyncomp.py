@@ -8,7 +8,7 @@ import os
 os.environ["PYTHONPATH"] = os.environ["PYTHONPATH"] + ":../:../../../lib/python/"
 
 import unittest
-import iDynTree;
+import idyntree.swig as iDynTree;
 import numpy as np
 import random
 

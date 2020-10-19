@@ -11,6 +11,16 @@ option(IDYNTREE_USES_OCTAVE "Do you want to create the OCTAVE bindings" FALSE)
 option(IDYNTREE_GENERATE_MATLAB "Enable if you have the experimental version of SWIG necessary for generating the Matlab wrapper" FALSE)
 
 find_package(SWIG)
+
+# Setup installation directory for Python bindings.
+if (IDYNTREE_USES_PYTHON_PYBIND11 OR IDYNTREE_USES_PYTHON)
+    if(IDYNTREE_PACKAGE_FOR_PYPI)
+        set(PYTHON_INSTDIR ${CMAKE_INSTALL_PREFIX})
+    else()
+        set(PYTHON_INSTDIR ${IDYNTREE_PYTHON_INSTALL_DIR}/idyntree)
+    endif()
+endif()
+
 # It is possible to compile matlab/octave bindings without using SWIG
 if(SWIG_FOUND OR IDYNTREE_USES_MATLAB OR IDYNTREE_USES_OCTAVE)
     include(${SWIG_USE_FILE})
@@ -66,4 +76,42 @@ if(IDYNTREE_USES_PYTHON OR
    if(NOT SWIG_FOUND)
        MESSAGE(FATAL_ERROR "Swig not found, impossible to compile or generate iDynTree bindings.")
    endif()
+endif()
+
+
+option(IDYNTREE_USES_PYTHON_PYBIND11 "Create iDynTree Python bindings using pybind11" FALSE)
+find_package(pybind11 QUIET)
+if (IDYNTREE_USES_PYTHON_PYBIND11)
+    if (${pybind11_FOUND})
+        add_subdirectory(pybind11)
+    else()
+       MESSAGE(FATAL_ERROR "pybind11 not found, impossible to generate iDynTree pybind11 bindings.")
+    endif()
+endif()
+
+# Install main __init__.py file.
+if (IDYNTREE_USES_PYTHON_PYBIND11 OR IDYNTREE_USES_PYTHON)
+    if (WIN32)
+        set(NEW_LINE "\n\r")
+    else()
+        set(NEW_LINE "\n")
+    endif()
+    # Clear the file first if it exists.
+    file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/__init__.py "")
+    # If pybind is enabled, add the corresponding import.
+    if (${IDYNTREE_USES_PYTHON_PYBIND11})
+        file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/__init__.py "from . import pybind${NEW_LINE}")
+    endif()
+    # If SWIG is enabled, add the corresponding import.
+    if (${IDYNTREE_USES_PYTHON})
+        file(APPEND "${CMAKE_CURRENT_BINARY_DIR}/__init__.py" "from . import swig${NEW_LINE}")
+        # Create also an alias from swig to the old `bindings` import.
+        file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/bindings.py" "from .swig import *${NEW_LINE}")
+        install(FILES "${CMAKE_CURRENT_BINARY_DIR}/bindings.py"
+                DESTINATION ${PYTHON_INSTDIR})
+        # Add the alias in the __init__.py
+        file(APPEND "${CMAKE_CURRENT_BINARY_DIR}/__init__.py" "from . import bindings${NEW_LINE}")
+    endif()
+    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/__init__.py"
+             DESTINATION ${PYTHON_INSTDIR})
 endif()
