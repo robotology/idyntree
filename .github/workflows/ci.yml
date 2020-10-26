@@ -9,7 +9,7 @@ on:
   - cron:  '0 2 * * *'
 
 env:
-  vcpkg_robotology_TAG: v0.0.3
+  vcpkg_robotology_TAG: v0.5.0
   YCM_TAG: v0.11.1
   YARP_TAG: v3.3.2
   ICUB_TAG: v1.15.0
@@ -49,11 +49,9 @@ jobs:
         choco install -y wget unzip
         # To avoid problems with non-relocatable packages, we unzip the archive exactly in the same C:/robotology/vcpkg 
         # that has been used to create the pre-compiled archive
-        cd C:/
-        md C:/robotology
-        md C:/robotology/vcpkg
         wget https://github.com/robotology/robotology-superbuild-dependencies-vcpkg/releases/download/${env:vcpkg_robotology_TAG}/vcpkg-robotology.zip
-        unzip vcpkg-robotology.zip -d C:/robotology/vcpkg
+        unzip vcpkg-robotology.zip -d C:/
+        rm vcpkg-robotology.zip
         # Overwrite the VCPKG_INSTALLATION_ROOT env variable defined by GitHub Actions to point to our vcpkg
         echo "::set-env name=VCPKG_INSTALLATION_ROOT::C:/robotology/vcpkg"
         
