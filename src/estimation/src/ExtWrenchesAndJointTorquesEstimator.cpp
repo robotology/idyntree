@@ -117,6 +117,17 @@ bool ExtWrenchesAndJointTorquesEstimator::setModelAndSensors(const Model& _model
     return true;
 }
 
+bool ExtWrenchesAndJointTorquesEstimator::loadModelAndSensorsFromFile(const std::string filename,
+                                                                      const std::string filetype)
+{
+    ModelLoader loader;
+    if (!loader.loadModelFromFile(filename, filetype)) {
+        reportError("ExtWrenchesAndJointTorquesEstimator", "loadModelAndSensorsFromFile", "Error in parsing from URDF.");
+        return false;
+    }
+    return setModelAndSensors(loader.model(), loader.sensors());
+}
+
 bool ExtWrenchesAndJointTorquesEstimator::loadModelAndSensorsFromFileWithSpecifiedDOFs(const std::string filename,
                                                                                        const std::vector< std::string >& consideredDOFs,
                                                                                        const std::string filetype)
