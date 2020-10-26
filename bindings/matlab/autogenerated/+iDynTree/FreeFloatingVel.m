@@ -9,26 +9,26 @@ classdef FreeFloatingVel < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1107, varargin{:});
+        tmp = iDynTreeMEX(1121, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = resize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1108, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1122, self, varargin{:});
     end
     function varargout = baseVel(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1109, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1123, self, varargin{:});
     end
     function varargout = jointVel(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1110, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1124, self, varargin{:});
     end
     function varargout = getNrOfDOFs(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1111, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1125, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1112, self);
+        iDynTreeMEX(1126, self);
         self.SwigClear();
       end
     end
