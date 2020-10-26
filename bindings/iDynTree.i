@@ -98,9 +98,7 @@
 #include "iDynTree/Sensors/PredictSensorsMeasurements.h"
 
 // Model loading from external formats
-#include "iDynTree/ModelIO/URDFModelImport.h"
 #include "iDynTree/ModelIO/URDFDofsImport.h"
-#include "iDynTree/ModelIO/URDFGenericSensorsImport.h"
 #include "iDynTree/ModelIO/ModelLoader.h"
 #include "iDynTree/ModelIO/ModelExporter.h"
 #include "iDynTree/ModelIO/ModelCalibrationHelper.h"
@@ -272,9 +270,7 @@ namespace std {
 %include "sensors.i"
 
 // Model loading from external formats
-%include "iDynTree/ModelIO/URDFModelImport.h"
 %include "iDynTree/ModelIO/URDFDofsImport.h"
-%include "iDynTree/ModelIO/URDFGenericSensorsImport.h"
 %include "iDynTree/ModelIO/ModelLoader.h"
 %include "iDynTree/ModelIO/ModelExporter.h"
 %include "iDynTree/ModelIO/ModelCalibrationHelper.h"
