@@ -165,10 +165,4 @@ Vector3 ThreeAxisAngularAccelerometerSensor::predictMeasurement(const SpatialAcc
     return returnAcc;
 }
 
-// Deprecated
-Vector3 ThreeAxisAngularAccelerometerSensor::predictMeasurement(const SpatialAcc& linkAcc, const iDynTree::Twist& )
-{
-    return this->predictMeasurement(linkAcc);
-}
-
 }

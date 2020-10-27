@@ -182,36 +182,6 @@ bool SimpleLeggedOdometry::setModel(const Model& _model)
     return true;
 }
 
-
-bool SimpleLeggedOdometry::loadModelFromFile(const std::string filename,
-                                             const std::string filetype)
-{
-    ModelLoader loader;
-    if (!loader.loadModelFromFile(filename, filetype)) {
-        reportError("SimpleLeggedOdometry",
-                    "loadModelFromFile",
-                    "Error in parsing model from URDF.");
-        return false;
-    }
-    return setModel(loader.model());
-}
-
-bool SimpleLeggedOdometry::loadModelFromFileWithSpecifiedDOFs(const std::string filename,
-                                                              const std::vector<std::string>& consideredDOFs,
-                                                              const std::string filetype)
-{
-    ModelLoader loader;
-    if (!loader.loadReducedModelFromFile(filename, consideredDOFs, filetype)) {
-        reportError("SimpleLeggedOdometry",
-                    "loadModelFromFileWithSpecifiedDOFs",
-                    "Error in parsing model from URDF.");
-        return false;
-    }
-    return setModel(loader.model());
-}
-
-
-
 std::string SimpleLeggedOdometry::getCurrentFixedLink()
 {
     if( this->m_isModelValid && this->m_isOdometryInitialized )

@@ -9,24 +9,18 @@ classdef SimpleLeggedOdometry < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1483, varargin{:});
+        tmp = iDynTreeMEX(1485, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1484, self);
+        iDynTreeMEX(1486, self);
         self.SwigClear();
       end
     end
     function varargout = setModel(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1485, self, varargin{:});
-    end
-    function varargout = loadModelFromFile(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1486, self, varargin{:});
-    end
-    function varargout = loadModelFromFileWithSpecifiedDOFs(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1487, self, varargin{:});
     end
     function varargout = model(self,varargin)

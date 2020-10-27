@@ -460,28 +460,6 @@ void KinDynComputations::computeBiasAccFwdKinematics()
     this->pimpl->m_areBiasAccelerationsUpdated = ok;
 }
 
-bool KinDynComputations::loadRobotModelFromFile(const std::string& filename,
-                                                  const std::string& filetype)
-{
-    ModelLoader loader;
-    if (!loader.loadModelFromFile(filename, filetype)) {
-        reportError("KinDynComputations", "loadRobotModelFromFile", "Error in loading robot model");
-        return false;
-    }
-    return this->loadRobotModel(loader.model());
-}
-
-bool KinDynComputations::loadRobotModelFromString(const std::string& modelString,
-                                                  const std::string& filetype)
-{
-    ModelLoader loader;
-    if (!loader.loadModelFromString(modelString, filetype)) {
-        reportError("KinDynComputations", "loadRobotModelFromString", "Error in loading robot model");
-        return false;
-    }
-    return this->loadRobotModel(loader.model());
-}
-
 bool KinDynComputations::loadRobotModel(const Model& model)
 {
     this->pimpl->m_robot_model = model;

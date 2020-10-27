@@ -161,10 +161,6 @@ namespace iDynTree {
          */
         bool updateIndices(const Model & model);
 
-        // Deprecated
-        IDYNTREE_DEPRECATED_WITH_MSG("Use updateIndices() instead")
-        bool updateIndeces(const Model & model);
-
         /**
          * The Six Axis Force Torque sensor measure the Force Torque (wrench)
          * applied by a link on another link. This method returns the link

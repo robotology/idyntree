@@ -38,6 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove unnecessary warning messages from [ModelSensorsTransformers.cpp](https://github.com/robotology/idyntree/blob/master/src/sensors/src/ModelSensorsTransformers.cpp) and [URDFDocument.cpp](https://github.com/robotology/idyntree/blob/master/src/model_io/urdf/src/URDFDocument.cpp) (see [PR 718](https://github.com/robotology/idyntree/pull/718))
 - Python2 will not be maintained past 2020 and its support has been dropped (https://github.com/robotology/idyntree/pull/726).
 - Remove the need to call `iDynTree.init_helpers()` and `iDynTree.init_numpy_helpers()` from Python (https://github.com/robotology/idyntree/pull/726).
+- Remove headers and methods that were deprecated in iDynTree 1.0 (https://github.com/robotology/idyntree/pull/751).
 
 ## [Unreleased]
 

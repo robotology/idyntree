@@ -124,11 +124,6 @@ namespace iDynTree {
          */
         bool updateIndices(const Model & model);
 
-        // Deprecated
-        IDYNTREE_DEPRECATED_WITH_MSG("Use updateIndices() instead")
-        bool updateIndeces(const Model & model);
-
-
       /**
         * Following method is to be implemented after defining the interface
         * Get wrench applied on the specified link expressed in the specified link frame.

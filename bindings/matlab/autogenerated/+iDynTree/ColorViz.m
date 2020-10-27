@@ -7,40 +7,40 @@ classdef ColorViz < SwigRef
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1790, self);
+        varargout{1} = iDynTreeMEX(1789, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1791, self, varargin{1});
+        iDynTreeMEX(1790, self, varargin{1});
       end
     end
     function varargout = g(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1792, self);
+        varargout{1} = iDynTreeMEX(1791, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1793, self, varargin{1});
+        iDynTreeMEX(1792, self, varargin{1});
       end
     end
     function varargout = b(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1794, self);
+        varargout{1} = iDynTreeMEX(1793, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1795, self, varargin{1});
+        iDynTreeMEX(1794, self, varargin{1});
       end
     end
     function varargout = a(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1796, self);
+        varargout{1} = iDynTreeMEX(1795, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1797, self, varargin{1});
+        iDynTreeMEX(1796, self, varargin{1});
       end
     end
     function self = ColorViz(varargin)
@@ -49,14 +49,14 @@ classdef ColorViz < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1798, varargin{:});
+        tmp = iDynTreeMEX(1797, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1799, self);
+        iDynTreeMEX(1798, self);
         self.SwigClear();
       end
     end
