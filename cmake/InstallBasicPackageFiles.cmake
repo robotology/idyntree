@@ -614,7 +614,7 @@ ${_compatibility_vars}
   endif()
 
   unset(PACKAGE_DEPENDENCIES)
-  if(DEFINED _IBPF_DEPENDENCIES)
+  if(DEFINED _IBPF_DEPENDENCIES OR (DEFINED _IBPF_PRIVATE_DEPENDENCIES AND _need_private_deps))
     set(PACKAGE_DEPENDENCIES "#### Expanded from @PACKAGE_DEPENDENCIES@ by install_basic_package_files() ####\n\ninclude(CMakeFindDependencyMacro)\n")
 
     foreach(_dep ${_IBPF_DEPENDENCIES})
