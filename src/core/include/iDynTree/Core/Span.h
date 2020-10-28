@@ -345,6 +345,7 @@ public:
     using index_type = std::ptrdiff_t;
     using pointer = element_type*;
     using reference = element_type&;
+    using const_reference = const element_type&;
 
     using iterator = details::span_iterator<Span<ElementType, Extent>, false>;
     using const_iterator = details::span_iterator<Span<ElementType, Extent>, true>;
@@ -495,8 +496,8 @@ public:
         return data()[idx];
     }
 
-    IDYNTREE_CONSTEXPR value_type getVal(index_type idx) const { return this->operator[](idx);}
-    IDYNTREE_CONSTEXPR bool setVal(index_type idx, value_type val)
+    IDYNTREE_CONSTEXPR const_reference getVal(index_type idx) const { return this->operator[](idx);}
+    IDYNTREE_CONSTEXPR bool setVal(index_type idx, const_reference val)
     {
         assert(idx >= 0 && idx < storage_.size());
         data()[idx] = val;
