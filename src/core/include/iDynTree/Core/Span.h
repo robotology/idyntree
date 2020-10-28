@@ -495,8 +495,8 @@ public:
         return data()[idx];
     }
 
-    IDYNTREE_CONSTEXPR const reference getVal(index_type idx) const { return this->operator[](idx);}
-    IDYNTREE_CONSTEXPR bool setVal(index_type idx, const reference val)
+    IDYNTREE_CONSTEXPR value_type getVal(index_type idx) const { return this->operator[](idx);}
+    IDYNTREE_CONSTEXPR bool setVal(index_type idx, value_type val)
     {
         assert(idx >= 0 && idx < storage_.size());
         data()[idx] = val;
