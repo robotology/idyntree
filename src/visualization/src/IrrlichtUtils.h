@@ -170,7 +170,7 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
     {
         const iDynTree::Box* box = geom->asBox();
 
-        irr::scene::IMesh* boxMesh = smgr->getGeometryCreator()->createCubeMesh(irr::core::vector3df(box->x,box->y,box->z));
+        irr::scene::IMesh* boxMesh = smgr->getGeometryCreator()->createCubeMesh(irr::core::vector3df(box->getX(),box->getY(),box->getZ()));
 
         geomNode = smgr->addMeshSceneNode(boxMesh,linkNode);
 
@@ -184,7 +184,7 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
 
         //geomNode = smgr->addSphereSceneNode(sphere->radius,16,linkNode);
 
-        irr::scene::IMesh* sphereMesh = smgr->getGeometryCreator()->createSphereMesh(sphere->radius);
+        irr::scene::IMesh* sphereMesh = smgr->getGeometryCreator()->createSphereMesh(sphere->getRadius());
 
         geomNode = smgr->addMeshSceneNode(sphereMesh,linkNode);
     }
@@ -193,14 +193,14 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
     {
         const iDynTree::Cylinder* cylinder = geom->asCylinder();
 
-        irr::scene::IMesh* cylinderMesh = smgr->getGeometryCreator()->createCylinderMesh(cylinder->radius,cylinder->length,16);
+        irr::scene::IMesh* cylinderMesh = smgr->getGeometryCreator()->createCylinderMesh(cylinder->getRadius(),cylinder->getLength(),16);
 
         // The Irrlicht geometry creator creates meshes that are symmetric wrt to the y axis and the origin in the base
         // while iDynTree/URDF has them parallel to the z axis, and the origin in the center
         // so we rotate and translate the mesh before creating the scene node
         irr::core::matrix4 irr2idyntree;
         irr2idyntree.buildRotateFromTo(irr::core::vector3df(0.0,1.0,0.0),irr::core::vector3df(0.0,0.0,1.0));
-        irr2idyntree(3,2) = -cylinder->length/2.0;
+        irr2idyntree(3,2) = -cylinder->getLength()/2.0;
 
         smgr->getMeshManipulator()->transform(cylinderMesh,irr2idyntree);
 
@@ -211,22 +211,22 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
     {
         const iDynTree::ExternalMesh* externalMesh = geom->asExternalMesh();
 
-        irr::scene::IAnimatedMesh* loadedAnimatedMesh = smgr->getMesh(externalMesh->filename.c_str());
+        irr::scene::IAnimatedMesh* loadedAnimatedMesh = smgr->getMesh(externalMesh->getFilename().c_str());
 
         if (!loadedAnimatedMesh)
         {
-            std::cerr << "Error in loading mesh " << externalMesh->filename << std::endl;
+            std::cerr << "Error in loading mesh " << externalMesh->getFilename() << std::endl;
             return 0;
         }
 
         // If multiple mesh are loaded, add them
-        if (getFileExt(externalMesh->filename) == "dae")
+        if (getFileExt(externalMesh->getFilename()) == "dae")
         {
             use_iDynTree_material = false;
         }
 
         geomNode = smgr->addMeshSceneNode(loadedAnimatedMesh->getMesh(0),linkNode);
-        geomNode->setScale(idyntree2irr_pos(externalMesh->scale));
+        geomNode->setScale(idyntree2irr_pos(externalMesh->getScale()));
 
 
     }
@@ -242,13 +242,13 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
     {
         for(irr::u32 mat=0; mat < geomNode->getMaterialCount(); mat++)
         {
-            geomNode->getMaterial(mat) = idyntree2irr(geom->material);
+            geomNode->getMaterial(mat) = idyntree2irr(geom->getMaterial().color());
         }
     }
 
     geomNode->setMaterialFlag(irr::video::EMF_BACK_FACE_CULLING, false);
-    geomNode->setPosition(idyntree2irr_pos(geom->link_H_geometry.getPosition()));
-    geomNode->setRotation(idyntree2irr_rpy(geom->link_H_geometry.getRotation().asRPY()));
+    geomNode->setPosition(idyntree2irr_pos(geom->getLink_H_geometry().getPosition()));
+    geomNode->setRotation(idyntree2irr_rpy(geom->getLink_H_geometry().getRotation().asRPY()));
 
     return geomNode;
 }
