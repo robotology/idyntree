@@ -102,12 +102,12 @@ void ModelVisualization::ModelVisualizationPimpl::addModelGeometriesToSceneManag
         this->linkNodes[linkIdx] = this->m_irrSmgr->addEmptySceneNode(this->modelNode);
         this->frameNodes[linkIdx] = this->linkNodes[linkIdx];
 
-        this->geomNodes[linkIdx].resize(modelGeom.linkSolidShapes[linkIdx].size());
-        this->geomNodesNotTransparentMaterialCache[linkIdx].resize(modelGeom.linkSolidShapes[linkIdx].size());
+        this->geomNodes[linkIdx].resize(modelGeom.getLinkSolidShapes()[linkIdx].size());
+        this->geomNodesNotTransparentMaterialCache[linkIdx].resize(modelGeom.getLinkSolidShapes()[linkIdx].size());
 
-        for(size_t geom=0; geom < modelGeom.linkSolidShapes[linkIdx].size(); geom++)
+        for(size_t geom=0; geom < modelGeom.getLinkSolidShapes()[linkIdx].size(); geom++)
         {
-            this->geomNodes[linkIdx][geom] = addGeometryToSceneManager(modelGeom.linkSolidShapes[linkIdx][geom],this->linkNodes[linkIdx],this->m_irrSmgr);
+            this->geomNodes[linkIdx][geom] = addGeometryToSceneManager(modelGeom.getLinkSolidShapes()[linkIdx][geom],this->linkNodes[linkIdx],this->m_irrSmgr);
 
             if( this->geomNodes[linkIdx][geom] )
             {
@@ -215,7 +215,7 @@ Model& ModelVisualization::model()
 Transform ModelVisualization::getWorldModelTransform()
 {
     Transform w_H_b;
-    irr::core::matrix4 relativeTransform(this->pimpl->modelNode->getRelativeTransformation());    
+    irr::core::matrix4 relativeTransform(this->pimpl->modelNode->getRelativeTransformation());
     w_H_b = irr2idyntree_trans(relativeTransform);
     return w_H_b;
 }
@@ -227,7 +227,7 @@ Transform ModelVisualization::getWorldLinkTransform(const LinkIndex& linkIndex)
         reportError("ModelVisualization","getWorldToLinkTransorm", "invalid link index. returning identity transform");
         return Transform::Identity();
     }
-    
+
     Transform w_H_link;
     irr::core::matrix4 relativeLinkTransform(this->pimpl->linkNodes[linkIndex]->getRelativeTransformation());
     w_H_link = irr2idyntree_trans(relativeLinkTransform);
@@ -294,7 +294,7 @@ bool ModelVisualization::setLinkColor(const LinkIndex& linkIndex, const ColorViz
         reportError("ModelVisualization","setLinkColor", "invalid link index");
         return false;
     }
-        
+
     irr::video::SColor col = idyntree2irrlicht(linkColor).toSColor();
     for(size_t geom=0; geom < pimpl->geomNodes[linkIndex].size(); geom++)
     {
@@ -338,7 +338,7 @@ bool ModelVisualization::resetLinkColor(const LinkIndex& linkIndex)
         reportError("ModelVisualization","resetLinkColor", "invalid link index");
         return false;
     }
-    
+
     for(size_t geom=0; geom < pimpl->geomNodes[linkIndex].size(); geom++)
     {
         if( pimpl->geomNodes[linkIndex][geom] )
@@ -372,7 +372,7 @@ bool ModelVisualization::resetLinkColor(const LinkIndex& linkIndex)
             }
         }
     }
-   return true; 
+   return true;
 }
 
 
