@@ -11,7 +11,7 @@
 #ifndef IDYNTREE_LINEAR_FORCE_VECTOR_3_H
 #define IDYNTREE_LINEAR_FORCE_VECTOR_3_H
 
-#warning <iDynTree/Core/LinearForceVector3.h> is deprecated. Please use GeomVector3 and <iDynTree/Model/GeomVector3.h>.
+#warning <iDynTree/Core/LinearForceVector3.h> is deprecated. Please use GeomVector3 and <iDynTree/Core/GeomVector3.h>.
 
 #include <iDynTree/Core/GeomVector3.h>
 
