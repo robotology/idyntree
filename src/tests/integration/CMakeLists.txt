@@ -19,7 +19,7 @@ macro(add_integration_test testname)
     add_test(NAME ${testtarget} COMMAND ${testbinary} WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/src/tests/data)
 
     if(IDYNTREE_RUN_VALGRIND_TESTS)
-        add_test(NAME memcheck_${testtarget} COMMAND ${MEMCHECK_COMMAND_COMPLETE} $<TARGET_FILE:${testbinary}>)
+        add_test(NAME memcheck_${testtarget} COMMAND ${MEMCHECK_COMMAND_COMPLETE} $<TARGET_FILE:${testbinary}> WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/src/tests/data)
     endif()
 endmacro()
 

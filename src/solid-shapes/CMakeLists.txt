@@ -18,7 +18,9 @@ if (IDYNTREE_USES_ASSIMP)
   # Depending on the assimp version, the way of consuming assimp changes
   # In assimp 5.0, only the imported assimp::assimp target is defined, in earlier
   # versions (that do no export the version to CMake) the ASSIMP_* variables are defined
-  if(assimp_VERSION AND assimp_VERSION VERSION_GREATER_EQUAL 5.0)
+  # We assume that on WIN32 we always have a valid imported target as a workaround for 
+  # https://github.com/microsoft/vcpkg/issues/14255
+  if((assimp_VERSION AND assimp_VERSION VERSION_GREATER_EQUAL 5.0) OR WIN32)
     target_link_libraries(${libraryname} PRIVATE assimp::assimp)
   else()
     target_include_directories(${libraryname} PRIVATE "${ASSIMP_INCLUDE_DIRS}")

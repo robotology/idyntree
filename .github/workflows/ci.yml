@@ -9,7 +9,7 @@ on:
   - cron:  '0 2 * * *'
 
 env:
-  vcpkg_robotology_TAG: v0.0.3
+  vcpkg_robotology_TAG: v0.5.0
   YCM_TAG: v0.11.1
   YARP_TAG: v3.3.2
   ICUB_TAG: v1.15.0
@@ -49,11 +49,9 @@ jobs:
         choco install -y wget unzip
         # To avoid problems with non-relocatable packages, we unzip the archive exactly in the same C:/robotology/vcpkg 
         # that has been used to create the pre-compiled archive
-        cd C:/
-        md C:/robotology
-        md C:/robotology/vcpkg
         wget https://github.com/robotology/robotology-superbuild-dependencies-vcpkg/releases/download/${env:vcpkg_robotology_TAG}/vcpkg-robotology.zip
-        unzip vcpkg-robotology.zip -d C:/robotology/vcpkg
+        unzip vcpkg-robotology.zip -d C:/
+        rm vcpkg-robotology.zip
         # Overwrite the VCPKG_INSTALLATION_ROOT env variable defined by GitHub Actions to point to our vcpkg
         echo "::set-env name=VCPKG_INSTALLATION_ROOT::C:/robotology/vcpkg"
         
@@ -163,7 +161,7 @@ jobs:
         # ipopt disabled until https://github.com/robotology/idyntree/issues/274 is fixed
         cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install/deps \
               -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON  -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=ON \
-              -DIDYNTREE_USES_PYTHON:BOOL=OFF -DIDYNTREE_USES_OCTAVE:BOOL=OFF -DIDYNTREE_USES_IPOPT:BOOL=OFF -DIDYNTREE_USES_ASSIMP:BOOL=OFF \
+              -DIDYNTREE_USES_PYTHON:BOOL=OFF -DIDYNTREE_USES_OCTAVE:BOOL=OFF -DIDYNTREE_USES_IPOPT:BOOL=OFF \
               -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
 
     - name: Configure [Ubuntu/macOS]
@@ -181,7 +179,7 @@ jobs:
       run: |
         cd build
         # Assimp is disabled on Ubuntu as a workaround for https://github.com/robotology/idyntree/issues/663
-        cmake -DIDYNTREE_USES_PYTHON:BOOL=ON -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=OFF  .
+        cmake -DIDYNTREE_USES_PYTHON:BOOL=ON -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=ON .
         # For some reason, Ubuntu 18.04 image in GitHub Actions contain OpenBLAS 0.3.5, that is affected by https://github.com/xianyi/OpenBLAS/issues/2003
         # As a workaround, we test against the regular blas instead of openblas
         sudo apt-get install libblas-dev libatlas-base-dev
