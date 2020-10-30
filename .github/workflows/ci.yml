@@ -53,7 +53,7 @@ jobs:
         unzip vcpkg-robotology.zip -d C:/
         rm vcpkg-robotology.zip
         # Overwrite the VCPKG_INSTALLATION_ROOT env variable defined by GitHub Actions to point to our vcpkg
-        echo "VCPKG_INSTALLATION_ROOT=C:/robotology/vcpkg" >> $GITHUB_ENV
+        echo "VCPKG_INSTALLATION_ROOT=C:\robotology\vcpkg" >> $GITHUB_ENV
    
     # Print environment variables to simplify development and debugging
     - name: Environment Variables
