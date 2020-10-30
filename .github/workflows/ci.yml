@@ -54,7 +54,12 @@ jobs:
         rm vcpkg-robotology.zip
         # Overwrite the VCPKG_INSTALLATION_ROOT env variable defined by GitHub Actions to point to our vcpkg
         echo "VCPKG_INSTALLATION_ROOT=C:/robotology/vcpkg" >> $GITHUB_ENV
-        
+   
+    # Print environment variables to simplify development and debugging
+    - name: Environment Variables
+      shell: bash
+      run: env
+
     - name: Additional vcpkg Dependencies [Windows]
       if: matrix.os == 'windows-latest'
       shell: bash
