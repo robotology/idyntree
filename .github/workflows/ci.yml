@@ -10,9 +10,9 @@ on:
 
 env:
   vcpkg_robotology_TAG: v0.5.0
-  YCM_TAG: v0.11.1
-  YARP_TAG: v3.3.2
-  ICUB_TAG: v1.15.0
+  YCM_TAG: v0.12.0
+  YARP_TAG: v3.4.1
+  ICUB_TAG: v1.17.0
   # Overwrite the VCPKG_INSTALLATION_ROOT env variable defined by GitHub Actions to point to our vcpkg  
   VCPKG_INSTALLATION_ROOT: C:\robotology\vcpkg
   
