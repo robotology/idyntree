@@ -193,8 +193,6 @@ jobs:
         cmake --build . --config ${{ matrix.build_type }}
         
     - name: Test
-      # Workaround for https://github.com/robotology/idyntree/issues/694
-      if: matrix.os != 'ubuntu-20.04'
       shell: bash
       run: |
         cd build
