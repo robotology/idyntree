@@ -22,7 +22,7 @@ function [linkMeshInfo,map]=getMeshes(model,meshFilePrefix)
 
 % get the linkSolidShapes containing the mesh information
 visual=model.visualSolidShapes;
-linkSolidShapesV=visual.linkSolidShapes;
+linkSolidShapesV=visual.getLinkSolidShapes;
 % get number of links
 numberOfLinks=linkSolidShapesV.size;
 linkMeshInfo=struct('meshInfo',{},'linkName',{});
@@ -40,8 +40,8 @@ for links=1:numberOfLinks
     for solids=1:solids_number
         if solidarray{solids}.isExternalMesh
             externalMesh=solidarray{solids}.asExternalMesh;
-            scale=externalMesh.scale.toMatlab;
-            meshName=split(externalMesh.filename,':');
+            scale=externalMesh.getScale.toMatlab;
+            meshName=split(externalMesh.getFilename,':');
             meshFile=meshName{2};
             % Import an STL mesh, returning a PATCH-compatible face-vertex structure
             if strcmp('package',meshName{1})
@@ -72,7 +72,7 @@ for links=1:numberOfLinks
                 mesh_triangles=calculateMeshFromSphere(radius);
             end
         end
-        link_H_geom=solidarray{solids}.link_H_geometry.asHomogeneousTransform.toMatlab;
+        link_H_geom=solidarray{solids}.getLink_H_geometry.asHomogeneousTransform.toMatlab;
         meshInfo(solids).link_H_geom=link_H_geom;
         meshInfo(solids).mesh_triangles=mesh_triangles;
         map(count,:)=[{meshInfo(solids).meshFile},{linkName}];
