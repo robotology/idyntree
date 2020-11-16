@@ -55,15 +55,15 @@ for links=1:numberOfLinks
             meshInfo(solids).scale=[1,1,1];
             if solidarray{solids}.isCylinder
                 meshInfo(solids).meshFile='cylinder';
-                length=solidarray{solids}.asCylinder.length;
-                radius=solidarray{solids}.asCylinder.radius;
+                length=solidarray{solids}.asCylinder.getLength;
+                radius=solidarray{solids}.asCylinder.getRadius;
                 mesh_triangles=calculateMeshFromCylinder(length,radius);
             end
             if solidarray{solids}.isBox
                 meshInfo(solids).meshFile='box';
-                box_dimensions(1)=solidarray{solids}.asBox.x;
-                box_dimensions(2)=solidarray{solids}.asBox.y;
-                box_dimensions(3)=solidarray{solids}.asBox.z;
+                box_dimensions(1)=solidarray{solids}.asBox.getX;
+                box_dimensions(2)=solidarray{solids}.asBox.getY;
+                box_dimensions(3)=solidarray{solids}.asBox.getZ;
                 mesh_triangles=calculateMeshFromBox(box_dimensions);
             end
             if solidarray{solids}.isSphere
