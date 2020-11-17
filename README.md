@@ -111,7 +111,7 @@ In the rest of the documentation, `<prefix>` will indicate the installation pref
 Once the library is installed, you can link it using `CMake` with as little effort as writing the following line of code in your project's `CMakeLists.txt`:
 ```cmake
 ...
-find_package(iDynTree MAJOR.MINOR.PATCH REQUIRED)
+find_package(iDynTree REQUIRED)
 ...
 target_link_libraries(<target> PRIVATE ${iDynTree_LIBRARIES})
 ...
@@ -188,7 +188,7 @@ They are a collection of Matlab/Octave functions that wraps the functionalities 
 ## Tutorials
 | Topic  | Location | Language  |
 |:------:|:--------:|:---------:|
-| Basic usage of the [KinDynComputations class](https://robotology.github.io/idyntree/master/classiDynTree_1_1KinDynComputations.html) together with the [Eigen] C++ Matrix library. | [examples/cxx/KinDynComputationsWithEigen/main.cpp](examples/cxx/KinDynComputationsWithEigen/main.cpp) | C++ |
+| Basic usage of the [KinDynComputations class](https://robotology.github.io/idyntree/master/classiDynTree_1_1KinDynComputations.html) together with the [[Eigen](http://eigen.tuxfamily.org) C++ Matrix library. | [examples/cxx/KinDynComputationsWithEigen/main.cpp](examples/cxx/KinDynComputationsWithEigen/main.cpp) | C++ |
 | How to use the [InverseKinematics class](https://robotology.github.io/docs/idyntree/master/classiDynTree_1_1InverseKinematics.html) for the IK of an industrial fixed-base manipulator. | [examples/cxx/InverseKinematics/README.md](examples/cxx/InverseKinematics/README.md) | C++ |
 | Use of the [ExtWrenchesAndJointTorquesEstimator class](https://robotology.github.io/idyntree/master/classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html) for computing offset for FT sensors |  [examples/matlab/SixAxisFTOffsetEstimation/SixAxisFTOffsetEstimation.m](examples/matlab/SixAxisFTOffsetEstimation/SixAxisFTOffsetEstimation.m) | MATLAB |
 | How to get the axis of a revolute joint expressed in a arbitary frame using the [KinDynComputations class](https://robotology.github.io/idyntree/master/classiDynTree_1_1KinDynComputations.html) | [examples/matlab/SensorsListParsing/SensorsListParsing.m](examples/matlab/SensorsListParsing/SensorsListParsing.m) | MATLAB |
