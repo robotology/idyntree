@@ -49,7 +49,7 @@ but you can manually make sure that iDynTree searches or ignores a given depende
 
 #### Install dependencies
 
-If you need to install also `YARP` and `ICUB`, it is recommended that you install iDynTree via the the [`robotology-superbuild`](https://github.com/robotology/robotology-superbuild). If instead you are not interested in the `YARP` and `ICUB` integration, you can easily install the rest of the dependencies using
+If you need to install also `YARP` and `ICUB`, it is recommended that you install iDynTree via the [`robotology-superbuild`](https://github.com/robotology/robotology-superbuild). If instead you are not interested in the `YARP` and `ICUB` integration, you can easily install the rest of the dependencies using
 standard package managers.
 
 ##### Windows
