@@ -10,9 +10,11 @@ on:
 
 env:
   vcpkg_robotology_TAG: v0.5.0
-  YCM_TAG: v0.11.1
-  YARP_TAG: v3.3.2
-  ICUB_TAG: v1.15.0
+  YCM_TAG: v0.12.0
+  YARP_TAG: v3.4.1
+  ICUB_TAG: v1.17.0
+  # Overwrite the VCPKG_INSTALLATION_ROOT env variable defined by GitHub Actions to point to our vcpkg  
+  VCPKG_INSTALLATION_ROOT: C:\robotology\vcpkg
   
 jobs:
   build:
@@ -52,9 +54,7 @@ jobs:
         wget https://github.com/robotology/robotology-superbuild-dependencies-vcpkg/releases/download/${env:vcpkg_robotology_TAG}/vcpkg-robotology.zip
         unzip vcpkg-robotology.zip -d C:/
         rm vcpkg-robotology.zip
-        # Overwrite the VCPKG_INSTALLATION_ROOT env variable defined by GitHub Actions to point to our vcpkg
-        echo "::set-env name=VCPKG_INSTALLATION_ROOT::C:/robotology/vcpkg"
-        
+   
     - name: Additional vcpkg Dependencies [Windows]
       if: matrix.os == 'windows-latest'
       shell: bash
@@ -195,8 +195,6 @@ jobs:
         cmake --build . --config ${{ matrix.build_type }}
         
     - name: Test
-      # Workaround for https://github.com/robotology/idyntree/issues/694
-      if: matrix.os != 'ubuntu-20.04'
       shell: bash
       run: |
         cd build
