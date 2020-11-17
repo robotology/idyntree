@@ -53,27 +53,9 @@ struct EigenRobotState
     Eigen::Matrix<double,6,1> baseVel;
     Eigen::VectorXd jointVel;
     Eigen::Vector3d gravity;
-};
 
-/**
- * Struct containing the floating robot state
- * using iDynTree data structures.
- * For the semantics of this structures,
- * see KinDynComputation::setRobotState method.
- */
-struct iDynTreeRobotState
-{
-    void resize(int nrOfInternalDOFs)
-    {
-        jointPos.resize(nrOfInternalDOFs);
-        jointVel.resize(nrOfInternalDOFs);
-    }
-
-    iDynTree::Transform world_H_base;
-    iDynTree::VectorDynSize jointPos;
-    iDynTree::Twist         baseVel;
-    iDynTree::VectorDynSize jointVel;
-    iDynTree::Vector3       gravity;
+    // See https://eigen.tuxfamily.org/dox/group__TopicStructHavingEigenMembers.html
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 };
 
 struct EigenRobotAcceleration
@@ -91,17 +73,9 @@ struct EigenRobotAcceleration
 
     Eigen::Matrix<double,6,1> baseAcc;
     Eigen::VectorXd jointAcc;
-};
 
-struct iDynTreeRobotAcceleration
-{
-    void resize(int nrOfInternalDOFs)
-    {
-        jointAcc.resize(nrOfInternalDOFs);
-    }
-
-    iDynTree::Vector6 baseAcc;
-    iDynTree::VectorDynSize jointAcc;
+    // See https://eigen.tuxfamily.org/dox/group__TopicStructHavingEigenMembers.html
+    EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 };
 
 
@@ -145,18 +119,12 @@ int main(int argc, char *argv[])
     eigRobotState.resize(model.getNrOfDOFs());
     eigRobotState.random();
 
-    // Now we convert the Eigen data structures in iDynTree ones
-    iDynTreeRobotState idynRobotState;
-    idynRobotState.resize(model.getNrOfDOFs());
-    iDynTree::fromEigen(idynRobotState.world_H_base,eigRobotState.world_H_base);
-    iDynTree::toEigen(idynRobotState.jointPos) = eigRobotState.jointPos;
-    iDynTree::fromEigen(idynRobotState.baseVel,eigRobotState.baseVel);
-    toEigen(idynRobotState.jointVel) = eigRobotState.jointVel;
-    toEigen(idynRobotState.gravity)  = eigRobotState.gravity;
-
     // Now we create the KinDynComputations class, so we can set the state
-    kinDynComp.setRobotState(idynRobotState.world_H_base,idynRobotState.jointPos,
-                             idynRobotState.baseVel,idynRobotState.jointVel,idynRobotState.gravity);
+    kinDynComp.setRobotState(iDynTree::MatrixView<double>(eigRobotState.world_H_base),
+                             iDynTree::Span<double>(eigRobotState.jointPos),
+                             iDynTree::Span<double>(eigRobotState.baseVel),
+                             iDynTree::Span<double>(eigRobotState.jointVel),
+                             iDynTree::Span<double>(eigRobotState.gravity));
 
     // Once we called the setRobotState, we can call all the methods of KinDynComputations
 
@@ -177,17 +145,32 @@ int main(int argc, char *argv[])
     Eigen::Matrix4d arbitraryFrame_H_anotherArbitraryFrame = iDynTree::toEigen(kinDynComp.getRelativeTransform(arbitraryFrameName,anotherArbitraryFrameName).asHomogeneousTransform());
 
     // More complex quantities (such as jacobians and matrices) need to be handled in a different way for efficency reasons
-    iDynTree::FreeFloatingMassMatrix idynMassMatrix(model);
-    kinDynComp.getFreeFloatingMassMatrix(idynMassMatrix);
-    Eigen::MatrixXd eigMassMatrix = iDynTree::toEigen(idynMassMatrix);
+    Eigen::MatrixXd eigMassMatrix(6+model.getNrOfDOFs(), 6+model.getNrOfDOFs());
+    ok = kinDynComp.getFreeFloatingMassMatrix(iDynTree::MatrixView<double>(eigMassMatrix));
 
-    iDynTree::FrameFreeFloatingJacobian idynJacobian(model);
-    kinDynComp.getFreeFloatingMassMatrix(idynMassMatrix);
-    Eigen::MatrixXd eigJacobian = iDynTree::toEigen(idynJacobian);
+    if (!ok)
+    {
+        std::cerr << "Matrix of wrong size passed to KinDynComputations::getFreeFloatingMassMatrix" << std::endl;
+        return EXIT_FAILURE;
+    }
 
-    iDynTree::MatrixDynSize idynCOMJacobian(3,model.getNrOfDOFs()+6);
-    kinDynComp.getCenterOfMassJacobian(idynCOMJacobian);
-    Eigen::MatrixXd eigCOMJacobian = iDynTree::toEigen(idynCOMJacobian);
+    Eigen::MatrixXd eigJacobian(6, 6+model.getNrOfDOFs());
+    ok = kinDynComp.getFrameFreeFloatingJacobian(arbitraryFrameIndex, iDynTree::MatrixView<double>(eigJacobian));
+
+    if (!ok)
+    {
+        std::cerr << "Wrong frame index or wrong size passed to KinDynComputations::getFrameFreeFloatingJacobian" << std::endl;
+        return EXIT_FAILURE;
+    }
+
+    Eigen::MatrixXd eigCOMJacobian(3, 6+model.getNrOfDOFs());
+    ok = kinDynComp.getCenterOfMassJacobian(iDynTree::MatrixView<double>(eigCOMJacobian));
+
+    if (!ok)
+    {
+        std::cerr << "Matrix of wrong size passed to KinDynComputations::getCenterOfMassJacobian" << std::endl;
+        return EXIT_FAILURE;
+    }
 
     std::cerr << "COM Jacobian: " << std::endl;
     std::cerr << eigCOMJacobian << std::endl;
@@ -198,11 +181,6 @@ int main(int argc, char *argv[])
     eigRobotAcc.resize(model.getNrOfDOFs());
     eigRobotAcc.random();
 
-    iDynTreeRobotAcceleration idynRobotAcc;
-    idynRobotAcc.resize(model.getNrOfDOFs());
-    iDynTree::toEigen(idynRobotAcc.baseAcc) = eigRobotAcc.baseAcc;
-    iDynTree::toEigen(idynRobotAcc.jointAcc) = eigRobotAcc.jointAcc;
-
     // In input to the inverse dynamics we also have external forces (that we assume set to zero)
     iDynTree::LinkNetExternalWrenches extForces(model);
     extForces.zero();
@@ -210,7 +188,10 @@ int main(int argc, char *argv[])
     // The output is a set of generalized torques (joint torques + base wrenches)
     iDynTree::FreeFloatingGeneralizedTorques invDynTrqs(model);
 
-    kinDynComp.inverseDynamics(idynRobotAcc.baseAcc,idynRobotAcc.jointAcc,extForces,invDynTrqs);
+    kinDynComp.inverseDynamics(iDynTree::Span<double>(eigRobotAcc.baseAcc),
+                               iDynTree::Span<double>(eigRobotAcc.jointAcc),
+                               extForces,
+                               invDynTrqs);
 
     // The output of inv dynamics can be converted easily to eigen vectors
     Eigen::Matrix<double,6,1> baseWrench = iDynTree::toEigen(invDynTrqs.baseWrench());
