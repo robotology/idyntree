@@ -3,7 +3,7 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-project(iDynTreeExamples)
+project(iDynTreeCxxExamples)
 
 add_subdirectory(KinDynComputationsWithEigen)
 add_subdirectory(InverseKinematics)
