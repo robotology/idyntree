@@ -12,7 +12,7 @@
 // C headers
 #include <cstdlib>
 
-// Eigen headers 
+// Eigen headers
 #include <Eigen/Core>
 
 // iDynTree headers
@@ -20,7 +20,7 @@
 #include <iDynTree/KinDynComputations.h>
 #include <iDynTree/ModelIO/ModelLoader.h>
 
-// Helpers function to convert between 
+// Helpers function to convert between
 // iDynTree datastructures
 #include <iDynTree/Core/EigenHelpers.h>
 
