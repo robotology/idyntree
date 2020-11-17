@@ -17,9 +17,9 @@ iDynTree is written in C++ language, but thanks to [SWIG](http://www.swig.org/) 
 * **[Acknowledgments](#acknowledgments)**
 
 ## Installation
-iDynTree is mainly developed and mantained by the [Dynamic Interaction Control research line](https://www.iit.it/research/lines/dynamic-interaction-control) at the [Italian Institute of Technology](https://www.iit.it/), as part of the [iCub project](http://www.icub.org/) .
+iDynTree is mainly developed and mantained by the [iCub Tech facility](https://www.iit.it/research/facilities/icub-tech) and [Dynamic Interaction Control research line](https://www.iit.it/research/lines/dynamic-interaction-control) at the [Italian Institute of Technology](https://www.iit.it/), as part of the [iCub project](http://www.icub.org/) .
 
-For this reason it is usually installed through the [robotology-superbuild](https://github.com/robotology/robotology-superbuild), an easy way to download, compile and install the robotology software on multiple operating systems, using the [CMake](www.cmake.org) build system and its extension [YCM](http://robotology.github.io/ycm). For more informations on the superbuild concept, please check [YCM documentation](http://robotology.github.io/ycm/gh-pages/master/index.html#superbuild). To get iDynTree when using the `robotology-superbuild`, please enable the `ROBOTOLOGY_ENABLE_DYNAMICS` CMake option of the superbuild.
+For this reason it is usually installed through the [robotology-superbuild](https://github.com/robotology/robotology-superbuild), an easy way to download, compile and install the robotology software on multiple operating systems, using the [CMake](www.cmake.org) build system and its extension [YCM](http://robotology.github.io/ycm). To get iDynTree when using the `robotology-superbuild`, please enable the `ROBOTOLOGY_ENABLE_DYNAMICS` CMake option of the superbuild.
 
 If you are not interested in installing all the robotology software it is still possible to install iDynTree without installing the rest of the robotology software, and please read the rest of the Readme for more info on this.
 
@@ -40,51 +40,36 @@ but you can manually make sure that iDynTree searches or ignores a given depende
 - [Qt5](https://www.qt.io/)
 - [YARP](https://github.com/robotology/yarp)
 - [ICUB](https://github.com/robotology/icub-main)
+- [irrlicht](http://irrlicht.sourceforge.net/)
 
 ##### Optional for the optimal control part
 - [ALGLIB](https://github.com/S-Dafarra/alglib-cmake)
-- [OSQP](https://github.com/robotology/osqp-eigen)
+- [osqp-eigen](https://github.com/robotology/osqp-eigen)
 - [WORHP](https://worhp.de/)
-
-##### Deprecated
-- [Kinematics and Dynamics Library](https://github.com/orocos/orocos_kinematics_dynamics)
-- [urdfdom](https://github.com/ros/urdfdom)
-- [irrlicht](http://irrlicht.sourceforge.net/)
 
 #### Install dependencies
 
-If you need to install also `YARP` and `ICUB`, it is recommended that you use the [`robotology-superbuild`](https://github.com/robotology/robotology-superbuild), but if you want to install them manually please
-check the documentation at [ICub Software Installation](http://wiki.icub.org/wiki/ICub_Software_Installation). The rest of the dependencies can be installed using standard operating system package managers.
+If you need to install also `YARP` and `ICUB`, it is recommended that you install iDynTree via the [`robotology-superbuild`](https://github.com/robotology/robotology-superbuild). If instead you are not interested in the `YARP` and `ICUB` integration, you can easily install the rest of the dependencies using
+standard package managers.
 
 ##### Windows
 
-There are two ways of installing the required and optional dependencies of iDynTree in Windows: with binary installers or using  [`vcpkg`](https://github.com/Microsoft/vcpkg).
-
-###### Installers
-There are several installers that provide the binary dependencies of iDynTree on Windows.
-
-In particular you can run the [binary installer of YARP](http://www.yarp.it/download.html#download_windows) to install Eigen3, Qt5 and YARP itself, the [binary installer of ICUB software](http://wiki.icub.org/wiki/Windows:_installation_from_sources#Getting_iCub.27s_dependenceis) to install Ipopt and ICUB, and the [robotology-additional-dependencies installer](https://github.com/robotology-playground/robotology-additional-dependencies) to install Libxml2 .
-**Important: make sure that you are installing the 64-bit installers, if you want to compile the robotology-superbuild using the the 64-bit compiler!**
-These installers will set automatically all the enviroment variables necessary to make sure that these libraries are found by CMake, and they will modify the PATH enviroment variable to make sure that the libraries can be used when launching the programs that use them.
+On Windows we recommend to use  [`vcpkg`](https://github.com/Microsoft/vcpkg) C++ package manager to install iDynTree dependencies.
 
 ###### vcpkg
 If you use [`vcpkg`](https://github.com/Microsoft/vcpkg), you can install all the required and optional dependencies of iDynTree using the following command:
 ~~~
- ./vcpkg install --triplet x64-windows eigen3 qt5 libxml2
+ ./vcpkg install --triplet x64-windows assimp eigen3 qt5 libxml2 irrlicht
 ~~~
-Use the `x86-windows` triplet only if you want to compile iDynTree using the 32-bit compiler.
 The default way to use the libraries provided by vcpkg in CMake is to use the [vcpkg CMake toolchain](https://github.com/Microsoft/vcpkg/blob/master/docs/users/integration.md#cmake-toolchain-file-recommended-for-open-source-cmake-projects).
-If you prefer not to use the vcpkg toolchain, to use the libraries installed by vcpkg, it is necessary to use the `CMAKE_PREFIX_PATH`,  `CMAKE_PROGRAM_PATH` and `PATH` environment variables. In particular, if your vcpkg is installed in `${VCPKG_ROOT}`,
-you need to add `${VCPKG_ROOT}/installed/x64-windows` and `${VCPKG_ROOT}/installed/x64-windows/debug` to `CMAKE_PREFIX_PATH`,
-`${VCPKG_ROOT}/installed/x64-windows/tools` to `CMAKE_PROGRAM_PATH` and `${VCPKG_ROOT}/installed/x64-windows/bin` and `${VCPKG_ROOT}/installed/x64-windows/debug/bin` to `PATH`.
 
+If you want also to install the `ipopt` library, we recommend to use the port `ipopt-binary` available at https://github.com/robotology/robotology-vcpkg-ports .
 
 ##### macOS
 You can install most of the required and optional dependencies of iDynTree using [homebrew](https://brew.sh/) with the following command:
 ~~~
-brew install eigen qt5 ipopt
+brew install assimp eigen qt5 ipopt
 ~~~
-
 
 #### Debian/Ubuntu
 You can install most of the required and optional dependencies of iDynTree using the following command:
@@ -93,14 +78,15 @@ sudo apt-get install libeigen3-dev libxml2-dev coinor-libipopt-dev qtbase5-dev q
 ~~~
 
 ### Build
-Once you installed the necessary dependencies, the iDynTree library can be compiled as any CMake based project.
+Once you installed the necessary dependencies, the iDynTree library can be compiled as any CMake based project. In the following instructions, we indicate with `<additional_platform_specific_options>` where
+you should add the platform specific options, as the use of `-DCMAKE_TOOLCHAIN_FILE=[path to vcpkg]/scripts/buildsystems/vcpkg.cmake` if you are using [vcpkg](https://github.com/Microsoft/vcpkg).
 
 With `make` facilities:
 ```bash
 $ git clone https://github.com/robotology/idyntree
 $ cd idyntree
 $ mkdir build && cd build
-$ cmake ..
+$ cmake <additional_platform_specific_options> ..
 $ make
 $ [sudo] make install
 ```
@@ -110,10 +96,11 @@ With IDE build tool facilities, such as Visual Studio or Xcode
 $ git clone https://github.com/robotology/idyntree
 $ cd idyntree
 $ mkdir build && cd build
-$ cmake ..
+$ cmake <additional_platform_specific_options> ..
 $ cmake --build . --target ALL_BUILD --config Release
 $ cmake --build . --target INSTALL --config Release
 ```
+
 
 If you need more help on how to build CMake-based projects, please check [CGold's First step](https://cgold.readthedocs.io/en/latest/first-step.html) section.
 
@@ -124,7 +111,7 @@ In the rest of the documentation, `<prefix>` will indicate the installation pref
 Once the library is installed, you can link it using `CMake` with as little effort as writing the following line of code in your project's `CMakeLists.txt`:
 ```cmake
 ...
-find_package(iDynTree 0.MINOR.PATCH REQUIRED)
+find_package(iDynTree REQUIRED)
 ...
 target_link_libraries(<target> PRIVATE ${iDynTree_LIBRARIES})
 ...
@@ -138,14 +125,12 @@ See [CMake's reference documentation](https://cmake.org/cmake/help/latest/) if y
 ### Bindings
 To compile bindings to iDynTree in several scriping languages, you should enable them using the `IDYNTREE_USES_PYTHON`, `IDYNTREE_USES_LUA`, `IDYNTREE_USES_MATLAB`, `IDYNTREE_USES_OCTAVE` CMake options.
 
-Several examples for using the bindings are available in https://github.com/robotology-playground/idyntree/blob/master/doc/geometric_classes.md .
-
 Then, properly accessing bindings to iDynTree can require some additional steps.
 
 #### Python
 You should add to the `PYTHONPATH` enviromental variable the install path of the `iDynTree.py` file.
 ~~~
-export PYTHONPATH=$PYTHONPATH:<prefix>/lib/python2.7/dist-packages/
+export PYTHONPATH=$PYTHONPATH:<prefix>/lib/python<majorPythonVersion>.<minorPythonVersion>./dist-packages/
 ~~~
 
 #### Python (pybind11)
@@ -161,7 +146,7 @@ export PYTHONPATH=${PYTHONPATH}:<prefix>/<python_package_path>
 ```
 
 where `<prefix>` corresponds to the value specified in `CMAKE_INSTALL_PREFIX` and `<python_package_path>` is the Python installation prefix, as returned by
-  
+
 ```python
 disutils.sysconfig.get_python_lib(1,0,prefix='')
 ```
@@ -175,7 +160,7 @@ import idyntree.pybind as iDynTree
 
 ```
 
-#### Matlab
+#### MATLAB
 You should add to Matlab path the `<prefix>/mex` directory.
 You can modify the relative location for Matlab bindings files in the installation prefix using the `IDYNTREE_INSTALL_MATLAB_LIBDIR` and `IDYNTREE_INSTALL_MATLAB_MFILESDIR` CMake options.
 
@@ -184,7 +169,7 @@ You should add to Octave path the `<prefix>/octave` directory.
 You can modify the relative location for Matlab bindings files in the installation prefix using the`IDYNTREE_INSTALL_OCTAVE_LIBDIR` and `IDYNTREE_INSTALL_OCTAVE_MFILESDIR` CMake options.
 
 
-##### Matlab/Octave bindings modifications
+##### MATLAB/Octave bindings modifications
 All the other bindings (Python,Lua, ...) are generated by SWIG and compiled on the fly by the user,
 by enabling the `IDYNTREE_USES_<LANGUAGE>` option. The Matlab and Octave bindings are an exception because they
 rely on an experimental version of Swig, developed for providing Matlab bindings for the [casadi](https://github.com/casadi/casadi/wiki) project. For this reason, usually the Matlab bindigs
@@ -195,18 +180,21 @@ for example because you modified some iDynTree classes, you can install the expe
 version of Swig with Matlab support from https://github.com/robotology-dependencies/swig/ (branch `matlab`) and then enable Matlab bindings generation with the `IDYNTREE_GENERATE_MATLAB` options.
 For more info on how to modify the matlab bindings, see https://github.com/robotology/idyntree/blob/master/doc/dev/faqs.md#how-to-add-wrap-a-new-class-or-function-with-swig .
 
-##### Matlab/Octave high level wrappers
+##### MATLAB/Octave high level wrappers
 They are a collection of Matlab/Octave functions that wraps the functionalities of (mainly) the iDyntree class `KinDynComputations` into functions with a typical Matlab/Octave interface. The purpose of the high-level wrappers is to provide a simpler and easy-to-use interface for Matlab/Octave users who want to use iDyntree inside Matlab/Octave, also helping in designing code which is less error-prone and easier to debug (e.g. in case the interface of an iDyntree function will change in the future). More details and a complete list of the wrappers can be found in the [wrappers README](/bindings/matlab/+iDynTreeWrappers/README.md).
 
 **Usage**: the wrappers package is installed together with the iDyntree bindings when compiling iDyntree with option `IDYNTREE_USES_MATLAB` or `IDYNTREE_USES_OCTAVE` set to `ON`. The functions can be called from Matlab/Octave using the namespace `iDynTreeWrappers`, i.e. `iDynTreeWrappers.name_of_the_corresponding_iDynTree_method`.
 
 ## Tutorials
-| Topic  | C++ | Matlab | Python |
-|:------:|:---:|:------:|:------:|
-| Use of the [ExtWrenchesAndJointTorquesEstimator class](https://robotology.github.io/idyntree/master/classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html) for computing offset for FT sensors | NA | [examples/matlab/SixAxisFTOffsetEstimation/SixAxisFTOffsetEstimation.m](examples/matlab/SixAxisFTOffsetEstimation/SixAxisFTOffsetEstimation.m) | NA |
-| How to get the axis of a revolute joint expressed in a arbitary frame using the [KinDynComputations class](https://robotology.github.io/idyntree/master/classiDynTree_1_1KinDynComputations.html) | NA | [ examples/matlab/GetJointAxesInWorldFrame.m](examples/matlab/GetJointAxesInWorldFrame.m) | NA |
-| How to use the [InverseKinematics class](https://robotology.github.io/docs/idyntree/master/classiDynTree_1_1InverseKinematics.html) for the IK of an industrial fixed-base manipulator. | [examples/InverseKinematics/README.md](examples/InverseKinematics/README.md) | NA | NA |
-
+| Topic  | Location | Language  |
+|:------:|:--------:|:---------:|
+| Basic usage of the [KinDynComputations class](https://robotology.github.io/idyntree/master/classiDynTree_1_1KinDynComputations.html) together with the [[Eigen](http://eigen.tuxfamily.org) C++ Matrix library. | [examples/cxx/KinDynComputationsWithEigen/main.cpp](examples/cxx/KinDynComputationsWithEigen/main.cpp) | C++ |
+| How to use the [InverseKinematics class](https://robotology.github.io/docs/idyntree/master/classiDynTree_1_1InverseKinematics.html) for the IK of an industrial fixed-base manipulator. | [examples/cxx/InverseKinematics/README.md](examples/cxx/InverseKinematics/README.md) | C++ |
+| Use of the [ExtWrenchesAndJointTorquesEstimator class](https://robotology.github.io/idyntree/master/classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html) for computing offset for FT sensors |  [examples/matlab/SixAxisFTOffsetEstimation/SixAxisFTOffsetEstimation.m](examples/matlab/SixAxisFTOffsetEstimation/SixAxisFTOffsetEstimation.m) | MATLAB |
+| How to get the axis of a revolute joint expressed in a arbitary frame using the [KinDynComputations class](https://robotology.github.io/idyntree/master/classiDynTree_1_1KinDynComputations.html) | [examples/matlab/SensorsListParsing/SensorsListParsing.m](examples/matlab/SensorsListParsing/SensorsListParsing.m) | MATLAB |
+| How to read the Six Axis Force Torque sensors information contained in a URDF model. | [examples/matlab/GetJointAxesInWorldFrame.m](examples/matlab/GetJointAxesInWorldFrame.m) | MATLAB |
+| Usage of the MATLAB-native visualizer using the [MATLAB high-level wrappers](bindings/matlab/+iDynTreeWrappers/README.md). | [examples/matlab/iDynTreeWrappers/visualizeRobot.m](examples/matlab/iDynTreeWrappers/visualizeRobot.m) | MATLAB |
+| Basic usage of the [KinDynComputations class](https://robotology.github.io/idyntree/master/classiDynTree_1_1KinDynComputations.html). | [examples/python/KinDynComputationsTutorial.py](examples/python/KinDynComputationsTutorial.py) | Python |
 
 Are you interested in a tutorial on a specific feature or algorithm? Just [request it on an enhancement issue](https://github.com/robotology/idyntree/issues/new).
 
@@ -219,7 +207,7 @@ The documentation generated from the `devel` branch is available at the URL : [h
 Announcements on new releases, API changes or other news are done on [`robotology/QA` GitHub repository](https://github.com/robotology/QA). You can watch that repository to get all the iDynTree-related announcements, that will always tagged with the `announcement` tag.
 
 ## Developer Documentation
-If you want to contribute to iDynTree development, please check the [Developer's FAQ](https://github.com/robotology/idyntree/blob/master/doc/dev/faqs.md).
+If you want to contribute to iDynTree development, please check the [Developer's FAQ](doc/dev/faqs.md).
 
 ## Reference paper
 A paper describing some of the algorithms implemented in iDynTree and their use in a real world scenario can be downloaded [here](http://journal.frontiersin.org/article/10.3389/frobt.2015.00006/abstract) .
