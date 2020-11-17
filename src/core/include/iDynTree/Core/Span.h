@@ -402,9 +402,7 @@ public:
     template <class Container,
               class = std::enable_if_t<
                   !details::is_span<Container>::value && !details::is_std_array<Container>::value &&
-                  std::is_convertible<typename Container::pointer, pointer>::value &&
-                  std::is_convertible<typename Container::pointer,
-                                      decltype(std::declval<Container>().data())>::value>>
+                  std::is_convertible<decltype(std::declval<Container>().data()), pointer>::value>>
     IDYNTREE_CONSTEXPR Span(Container& cont) : Span(cont.data(), static_cast<index_type>(cont.size()))
     {
     }
@@ -412,9 +410,7 @@ public:
     template <class Container,
               class = std::enable_if_t<
                   std::is_const<element_type>::value && !details::is_span<Container>::value &&
-                  std::is_convertible<typename Container::pointer, pointer>::value &&
-                  std::is_convertible<typename Container::pointer,
-                                      decltype(std::declval<Container>().data())>::value>>
+                  std::is_convertible<decltype(std::declval<Container>().data()), pointer>::value>>
     IDYNTREE_CONSTEXPR Span(const Container& cont) : Span(cont.data(), static_cast<index_type>(cont.size()))
     {
     }
