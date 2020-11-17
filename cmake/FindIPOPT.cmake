@@ -82,7 +82,7 @@ if(NOT WIN32)
       set(IPOPT_DIR /usr            CACHE PATH "Path to IPOPT build directory")
     endif()
 
-    find_path(IPOPT_INCLUDE_DIRS NAMES IpIpoptApplication.hpp PATH_SUFFIXES coin PATHS ${IPOPT_DIR}/include/coin)
+    find_path(IPOPT_INCLUDE_DIRS NAMES IpIpoptApplication.hpp PATH_SUFFIXES coin coin-or PATHS ${IPOPT_DIR}/include/coin)
     
     find_library(IPOPT_LIBRARIES ipopt ${IPOPT_DIR}/lib
                                      ${IPOPT_DIR}/lib/coin)
@@ -128,7 +128,7 @@ else()
 
   set(IPOPT_DIR $ENV{IPOPT_DIR} CACHE PATH "Path to IPOPT build directory")
   
-  find_path(IPOPT_INCLUDE_DIRS NAMES IpIpoptApplication.hpp PATH_SUFFIXES coin PATHS ${IPOPT_DIR}/include/coin)
+  find_path(IPOPT_INCLUDE_DIRS NAMES IpIpoptApplication.hpp PATH_SUFFIXES coin coin-or PATHS ${IPOPT_DIR}/include/coin)
 
   find_library(IPOPT_IPOPT_LIBRARY_RELEASE libipopt ${IPOPT_DIR}/lib
                                                     ${IPOPT_DIR}/lib/coin)
@@ -207,7 +207,9 @@ else()
         find_library(IPOPT_${_LIB}_LIBRARY_RELEASE ${_lib} ${_IPOPT_IPOPT_LIBRARY_DIR})
         find_library(IPOPT_${_LIB}_LIBRARY_DEBUG ${_lib}d ${_IPOPT_IPOPT_LIBRARY_DIR})
         select_library_configurations(IPOPT_${_LIB})
-        list(APPEND IPOPT_LIBRARIES ${IPOPT_${_LIB}_LIBRARY})
+        if(NOT "${IPOPT_${_LIB}_LIBRARY}" MATCHES "NOTFOUND$")
+          list(APPEND IPOPT_LIBRARIES ${IPOPT_${_LIB}_LIBRARY})
+        endif()
       endforeach()
     endif()
   endif()
