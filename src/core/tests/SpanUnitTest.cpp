@@ -1413,6 +1413,12 @@ void from_eigen_constructor()
     for(size_t i=0; i < vec.size(); i++) {
         ASSERT_IS_TRUE(vec[i] == s[i]);
     }
+
+    auto other = make_span(vec);
+    ASSERT_IS_TRUE(vec.size() == other.size());
+    for(size_t i=0; i < vec.size(); i++) {
+        ASSERT_IS_TRUE(vec[i] == other[i]);
+    }
 }
 
 int main(){

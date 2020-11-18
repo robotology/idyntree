@@ -32,10 +32,6 @@ namespace iDynTree
     namespace MatrixViewInternal
     {
 #ifndef SWIG
-        // this is required to be compatible with c++17
-        template <typename... Ts> struct make_void { typedef void type; };
-        template <typename... Ts> using void_t = typename make_void<Ts...>::type;
-
         /**
          * has_IsRowMajor is used to build a type-dependent expression that check if an
          * element has IsRowMajor argument. This specific implementation is used when
@@ -51,7 +47,7 @@ namespace iDynTree
          * detect ill-formed types in SFINAE context.
          */
         template <typename T>
-        struct has_IsRowMajor<T, void_t<decltype(T::IsRowMajor)>> : std::true_type {};
+        struct has_IsRowMajor<T, SpanUtils::void_t<decltype(T::IsRowMajor)>> : std::true_type {};
 #endif
 
     } // namespace MatrixViewIntenal

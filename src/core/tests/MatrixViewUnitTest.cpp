@@ -47,5 +47,9 @@ int main()
 
     areMatricesEqual(view3, mat3);
 
+    auto view4 = make_matrix_view(mat3);
+    areMatricesEqual(view4, mat3);
+
+
     return 0;
 }

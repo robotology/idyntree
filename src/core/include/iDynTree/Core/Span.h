@@ -77,6 +77,55 @@
 namespace iDynTree
 {
 
+namespace SpanUtils {
+#ifndef SWIG
+// this is required to be compatible with c++17
+template <typename... Ts> struct make_void { typedef void type; };
+template <typename... Ts> using void_t = typename make_void<Ts...>::type;
+
+//Small utility to detect if type T has value_type defined
+template <typename T, typename = void> struct is_value_defined : std::false_type
+{
+};
+
+template <typename T>
+struct is_value_defined<T, void_t<typename T::value_type>> : std::true_type
+{
+};
+
+//Small utility to detect if type T has element_type defined
+template <typename T, typename = void> struct is_element_defined : std::false_type
+{
+};
+
+template <typename T>
+struct is_element_defined<T, void_t<typename T::element_type>> : std::true_type
+{
+};
+
+//Small utility to detect if class T has the data() method defined
+template <typename T, typename = void> struct has_data_method : std::false_type
+{
+};
+
+template <typename T>
+struct has_data_method<T, void_t<decltype(std::declval<T>().data())>> : std::true_type
+{
+};
+
+//Small utility to detect if class T has the data() method defined
+template <typename T, typename = void> struct has_size_method : std::false_type
+{
+};
+
+template <typename T>
+struct has_size_method<T, void_t<decltype(std::declval<T>().size())>> : std::true_type
+{
+};
+
+#endif
+}
+
 // [views.constants], constants
 IDYNTREE_CONSTEXPR const std::ptrdiff_t dynamic_extent = -1;
 
@@ -400,17 +449,19 @@ public:
     // on Container to be a contiguous sequence container.
 #ifndef SWIG
     template <class Container,
-              class = std::enable_if_t<
-                  !details::is_span<Container>::value && !details::is_std_array<Container>::value &&
-                  std::is_convertible<decltype(std::declval<Container>().data()), pointer>::value>>
+             class = std::enable_if_t<SpanUtils::has_data_method<Container>::value && SpanUtils::has_size_method<Container>::value>,
+             class = std::enable_if_t<
+                 !details::is_span<Container>::value && !details::is_std_array<Container>::value &&
+                 std::is_convertible<decltype(std::declval<Container>().data()), pointer>::value>>
     IDYNTREE_CONSTEXPR Span(Container& cont) : Span(cont.data(), static_cast<index_type>(cont.size()))
     {
     }
 
     template <class Container,
-              class = std::enable_if_t<
-                  std::is_const<element_type>::value && !details::is_span<Container>::value &&
-                  std::is_convertible<decltype(std::declval<Container>().data()), pointer>::value>>
+             class = std::enable_if_t<SpanUtils::has_data_method<Container>::value && SpanUtils::has_size_method<Container>::value>,
+             class = std::enable_if_t<
+                 std::is_const<element_type>::value && !details::is_span<Container>::value &&
+                 std::is_convertible<decltype(std::declval<Container>().data()), pointer>::value>>
     IDYNTREE_CONSTEXPR Span(const Container& cont) : Span(cont.data(), static_cast<index_type>(cont.size()))
     {
     }
@@ -689,7 +740,7 @@ IDYNTREE_CONSTEXPR Span<typename Container::value_type> make_span(Container& con
     return Span<typename Container::value_type>(cont);
 }
 
-template <class Container>
+template <class Container, typename = typename std::enable_if<SpanUtils::is_value_defined<Container>::value>::type>
 IDYNTREE_CONSTEXPR Span<const typename Container::value_type> make_span(const Container& cont)
 {
     return Span<const typename Container::value_type>(cont);
@@ -701,10 +752,18 @@ IDYNTREE_CONSTEXPR Span<typename Ptr::element_type> make_span(Ptr& cont, std::pt
     return Span<typename Ptr::element_type>(cont, count);
 }
 
-template <class Ptr>
+template <class Ptr, typename = typename std::enable_if<!SpanUtils::is_value_defined<Ptr>::value && SpanUtils::is_element_defined<Ptr>::value>::type>
 IDYNTREE_CONSTEXPR Span<typename Ptr::element_type> make_span(Ptr& cont)
 {
     return Span<typename Ptr::element_type>(cont);
+}
+
+template <class Container, typename = typename std::enable_if<!SpanUtils::is_value_defined<Container>::value &&
+                                                             !SpanUtils::is_element_defined<Container>::value &&
+                                                             SpanUtils::has_data_method<Container>::value>::type>
+IDYNTREE_CONSTEXPR Span<typename std::remove_pointer<decltype (std::declval<Container>().data())>::type> make_span(Container& cont)
+{
+    return Span<typename std::remove_pointer<decltype (std::declval<Container>().data())>::type>(cont);
 }
 
 } // namespace iDynTree

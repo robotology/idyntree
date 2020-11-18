@@ -120,11 +120,11 @@ int main(int argc, char *argv[])
     eigRobotState.random();
 
     // Now we create the KinDynComputations class, so we can set the state
-    kinDynComp.setRobotState(iDynTree::MatrixView<double>(eigRobotState.world_H_base),
-                             iDynTree::Span<double>(eigRobotState.jointPos),
-                             iDynTree::Span<double>(eigRobotState.baseVel),
-                             iDynTree::Span<double>(eigRobotState.jointVel),
-                             iDynTree::Span<double>(eigRobotState.gravity));
+    kinDynComp.setRobotState(iDynTree::make_matrix_view(eigRobotState.world_H_base),
+                             iDynTree::make_span(eigRobotState.jointPos),
+                             iDynTree::make_span(eigRobotState.baseVel),
+                             iDynTree::make_span(eigRobotState.jointVel),
+                             iDynTree::make_span(eigRobotState.gravity));
 
     // Once we called the setRobotState, we can call all the methods of KinDynComputations
 
@@ -146,7 +146,7 @@ int main(int argc, char *argv[])
 
     // More complex quantities (such as jacobians and matrices) need to be handled in a different way for efficency reasons
     Eigen::MatrixXd eigMassMatrix(6+model.getNrOfDOFs(), 6+model.getNrOfDOFs());
-    ok = kinDynComp.getFreeFloatingMassMatrix(iDynTree::MatrixView<double>(eigMassMatrix));
+    ok = kinDynComp.getFreeFloatingMassMatrix(iDynTree::make_matrix_view(eigMassMatrix));
 
     if (!ok)
     {
@@ -155,7 +155,7 @@ int main(int argc, char *argv[])
     }
 
     Eigen::MatrixXd eigJacobian(6, 6+model.getNrOfDOFs());
-    ok = kinDynComp.getFrameFreeFloatingJacobian(arbitraryFrameIndex, iDynTree::MatrixView<double>(eigJacobian));
+    ok = kinDynComp.getFrameFreeFloatingJacobian(arbitraryFrameIndex, iDynTree::make_matrix_view(eigJacobian));
 
     if (!ok)
     {
@@ -164,7 +164,7 @@ int main(int argc, char *argv[])
     }
 
     Eigen::MatrixXd eigCOMJacobian(3, 6+model.getNrOfDOFs());
-    ok = kinDynComp.getCenterOfMassJacobian(iDynTree::MatrixView<double>(eigCOMJacobian));
+    ok = kinDynComp.getCenterOfMassJacobian(iDynTree::make_matrix_view(eigCOMJacobian));
 
     if (!ok)
     {
@@ -188,8 +188,8 @@ int main(int argc, char *argv[])
     // The output is a set of generalized torques (joint torques + base wrenches)
     iDynTree::FreeFloatingGeneralizedTorques invDynTrqs(model);
 
-    kinDynComp.inverseDynamics(iDynTree::Span<double>(eigRobotAcc.baseAcc),
-                               iDynTree::Span<double>(eigRobotAcc.jointAcc),
+    kinDynComp.inverseDynamics(iDynTree::make_span(eigRobotAcc.baseAcc),
+                               iDynTree::make_span(eigRobotAcc.jointAcc),
                                extForces,
                                invDynTrqs);
 
