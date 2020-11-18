@@ -23,7 +23,7 @@ struct GyroscopeSensor::GyroscopePrivateAttributes
    // Transform from the link to the sensor
     Transform link_H_sensor;
     // Index of the parent link
-     int parent_link_index;
+    LinkIndex parent_link_index;
     // Name of the parent link
      std::string parent_link_name;
 };
@@ -79,7 +79,7 @@ bool GyroscopeSensor::setParentLink(const std::string& parent)
     return true;
 }
 
-bool GyroscopeSensor::setParentLinkIndex(const int &parent_index)
+bool GyroscopeSensor::setParentLinkIndex(const LinkIndex &parent_index)
 {
     this->pimpl->parent_link_index = parent_index;
     return true;

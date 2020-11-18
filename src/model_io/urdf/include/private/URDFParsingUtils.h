@@ -72,6 +72,14 @@ std::string inline intToString(const int inInt)
     return ss.str();
 }
 
+std::string inline intToString(const size_t inInt)
+{
+    std::stringstream ss;
+    ss << inInt;
+    return ss.str();
+}
+
+
 /**
  * Split string along spaces
  */

@@ -41,7 +41,7 @@ namespace iDynTree
          * This id is propagated to the contact wrench data structure.
          * It is implemented mainly for compatibility with the skinDynLib library.
          */
-        unsigned long m_contactId;
+        std::size_t m_contactId;
 
     public:
         /**
@@ -71,11 +71,11 @@ namespace iDynTree
          */
         Wrench   & contactWrench();
 
-        unsigned long& contactId();
+        std::size_t& contactId();
 
         const Position & contactPoint() const;
         const Wrench   & contactWrench() const;
-        const unsigned long& contactId() const;
+        const std::size_t& contactId() const;
 
     };
 
@@ -96,7 +96,7 @@ namespace iDynTree
          *
          * @param[in] nrOfLinks the size of the vector.
          */
-        LinkContactWrenches(unsigned int nrOfLinks = 0);
+        LinkContactWrenches(std::size_t nrOfLinks = 0);
         LinkContactWrenches(const Model & model);
 
         /**
@@ -104,7 +104,7 @@ namespace iDynTree
          *
          * @param[in] nrOfLinks the number of links to which resize this object
          */
-        void resize(unsigned int nrOfLinks);
+        void resize(std::size_t nrOfLinks);
         void resize(const Model & model);
 
         /**

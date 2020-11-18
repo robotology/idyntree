@@ -367,7 +367,7 @@ int KinDynComputations::getFrameIndex(const std::string& frameName) const
     return index;
 }
 
-std::string KinDynComputations::getFrameName(int frameIndex) const
+std::string KinDynComputations::getFrameName(FrameIndex frameIndex) const
 {
     return this->pimpl->m_robot_model.getFrameName(frameIndex);
 }

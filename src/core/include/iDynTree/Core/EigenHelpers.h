@@ -11,6 +11,8 @@
 #ifndef IDYNTREE_EIGEN_HELPERS_H
 #define IDYNTREE_EIGEN_HELPERS_H
 
+#include <cstddef>
+
 #include <Eigen/Dense>
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/VectorFixSize.h>
@@ -113,8 +115,8 @@ toEigen(const MatrixView<const double>& mat)
     //    - inner_stride = 2 = number of rows of A
     //    - outer_stride = 1
 
-    const int innerStride = (mat.storageOrder() == MatrixStorageOrdering::ColumnMajor) ? mat.rows() : 1;
-    const int outerStride = (mat.storageOrder() == MatrixStorageOrdering::ColumnMajor) ? 1 : mat.cols();
+    const std::ptrdiff_t innerStride = (mat.storageOrder() == MatrixStorageOrdering::ColumnMajor) ? mat.rows() : 1;
+    const std::ptrdiff_t outerStride = (mat.storageOrder() == MatrixStorageOrdering::ColumnMajor) ? 1 : mat.cols();
 
     return Eigen::Map<const MatrixRowMajor, 0, Eigen::Stride<Eigen::Dynamic, Eigen::Dynamic>>(
         mat.data(),
@@ -162,8 +164,8 @@ toEigen(const MatrixView<double>& mat)
     //    - inner_stride = 2 = number of rows of A
     //    - outer_stride = 1
 
-    const int innerStride = (mat.storageOrder() == MatrixStorageOrdering::ColumnMajor) ? mat.rows() : 1;
-    const int outerStride = (mat.storageOrder() == MatrixStorageOrdering::ColumnMajor) ? 1 : mat.cols();
+    const std::ptrdiff_t innerStride = (mat.storageOrder() == MatrixStorageOrdering::ColumnMajor) ? mat.rows() : 1;
+    const std::ptrdiff_t outerStride = (mat.storageOrder() == MatrixStorageOrdering::ColumnMajor) ? 1 : mat.cols();
 
     return Eigen::Map<MatrixRowMajor, 0, Eigen::Stride<Eigen::Dynamic, Eigen::Dynamic>>(
         mat.data(),
@@ -405,3 +407,4 @@ inline void setSubVector(VectorDynSize& vec,
 }
 
 #endif /* IDYNTREE_EIGEN_HELPERS_H */
+
