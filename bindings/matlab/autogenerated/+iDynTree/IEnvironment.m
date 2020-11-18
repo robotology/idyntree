@@ -5,33 +5,33 @@ classdef IEnvironment < SwigRef
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1813, self);
+        iDynTreeMEX(1817, self);
         self.SwigClear();
       end
     end
     function varargout = getElements(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1814, self, varargin{:});
-    end
-    function varargout = setElementVisibility(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1815, self, varargin{:});
-    end
-    function varargout = setBackgroundColor(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1816, self, varargin{:});
-    end
-    function varargout = setAmbientLight(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1817, self, varargin{:});
-    end
-    function varargout = getLights(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1818, self, varargin{:});
     end
-    function varargout = addLight(self,varargin)
+    function varargout = setElementVisibility(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1819, self, varargin{:});
     end
-    function varargout = lightViz(self,varargin)
+    function varargout = setBackgroundColor(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1820, self, varargin{:});
     end
-    function varargout = removeLight(self,varargin)
+    function varargout = setAmbientLight(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1821, self, varargin{:});
+    end
+    function varargout = getLights(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1822, self, varargin{:});
+    end
+    function varargout = addLight(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1823, self, varargin{:});
+    end
+    function varargout = lightViz(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1824, self, varargin{:});
+    end
+    function varargout = removeLight(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1825, self, varargin{:});
     end
     function self = IEnvironment(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')

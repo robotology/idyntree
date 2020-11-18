@@ -9,62 +9,62 @@ classdef Vector4 < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(328, varargin{:});
+        tmp = iDynTreeMEX(332, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = paren(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(329, self, varargin{:});
-    end
-    function varargout = brace(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(330, self, varargin{:});
-    end
-    function varargout = getVal(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(331, self, varargin{:});
-    end
-    function varargout = setVal(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(332, self, varargin{:});
-    end
-    function varargout = cbegin(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(333, self, varargin{:});
     end
-    function varargout = cend(self,varargin)
+    function varargout = brace(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(334, self, varargin{:});
     end
-    function varargout = begin(self,varargin)
+    function varargout = getVal(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(335, self, varargin{:});
     end
-    function varargout = end(self,varargin)
+    function varargout = setVal(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(336, self, varargin{:});
     end
-    function varargout = size(self,varargin)
+    function varargout = cbegin(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(337, self, varargin{:});
     end
-    function varargout = data(self,varargin)
+    function varargout = cend(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(338, self, varargin{:});
     end
-    function varargout = zero(self,varargin)
+    function varargout = begin(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(339, self, varargin{:});
     end
-    function varargout = fillBuffer(self,varargin)
+    function varargout = end(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(340, self, varargin{:});
     end
-    function varargout = toString(self,varargin)
+    function varargout = size(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(341, self, varargin{:});
     end
-    function varargout = display(self,varargin)
+    function varargout = data(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(342, self, varargin{:});
     end
-    function varargout = toMatlab(self,varargin)
+    function varargout = zero(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(343, self, varargin{:});
     end
-    function varargout = fromMatlab(self,varargin)
+    function varargout = fillBuffer(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(344, self, varargin{:});
+    end
+    function varargout = toString(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(345, self, varargin{:});
+    end
+    function varargout = display(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(346, self, varargin{:});
+    end
+    function varargout = toMatlab(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(347, self, varargin{:});
+    end
+    function varargout = fromMatlab(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(348, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(345, self);
+        iDynTreeMEX(349, self);
         self.SwigClear();
       end
     end

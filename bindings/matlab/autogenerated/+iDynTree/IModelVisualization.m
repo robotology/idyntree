@@ -5,57 +5,57 @@ classdef IModelVisualization < SwigRef
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1837, self);
+        iDynTreeMEX(1841, self);
         self.SwigClear();
       end
     end
     function varargout = setPositions(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1838, self, varargin{:});
-    end
-    function varargout = setLinkPositions(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1839, self, varargin{:});
-    end
-    function varargout = model(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1840, self, varargin{:});
-    end
-    function varargout = getInstanceName(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1841, self, varargin{:});
-    end
-    function varargout = setModelVisibility(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1842, self, varargin{:});
     end
-    function varargout = setModelColor(self,varargin)
+    function varargout = setLinkPositions(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1843, self, varargin{:});
     end
-    function varargout = resetModelColor(self,varargin)
+    function varargout = model(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1844, self, varargin{:});
     end
-    function varargout = setLinkColor(self,varargin)
+    function varargout = getInstanceName(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1845, self, varargin{:});
     end
-    function varargout = resetLinkColor(self,varargin)
+    function varargout = setModelVisibility(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1846, self, varargin{:});
     end
-    function varargout = getLinkNames(self,varargin)
+    function varargout = setModelColor(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1847, self, varargin{:});
     end
-    function varargout = setLinkVisibility(self,varargin)
+    function varargout = resetModelColor(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1848, self, varargin{:});
     end
-    function varargout = getFeatures(self,varargin)
+    function varargout = setLinkColor(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1849, self, varargin{:});
     end
-    function varargout = setFeatureVisibility(self,varargin)
+    function varargout = resetLinkColor(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1850, self, varargin{:});
     end
-    function varargout = jets(self,varargin)
+    function varargout = getLinkNames(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1851, self, varargin{:});
     end
-    function varargout = getWorldModelTransform(self,varargin)
+    function varargout = setLinkVisibility(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1852, self, varargin{:});
     end
-    function varargout = getWorldLinkTransform(self,varargin)
+    function varargout = getFeatures(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1853, self, varargin{:});
+    end
+    function varargout = setFeatureVisibility(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1854, self, varargin{:});
+    end
+    function varargout = jets(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1855, self, varargin{:});
+    end
+    function varargout = getWorldModelTransform(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1856, self, varargin{:});
+    end
+    function varargout = getWorldLinkTransform(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1857, self, varargin{:});
     end
     function self = IModelVisualization(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
