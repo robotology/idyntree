@@ -113,7 +113,7 @@ struct has_data_method<T, void_t<decltype(std::declval<T>().data())>> : std::tru
 {
 };
 
-//Small utility to detect if class T has the data() method defined
+//Small utility to detect if class T has the size() method defined
 template <typename T, typename = void> struct has_size_method : std::false_type
 {
 };
