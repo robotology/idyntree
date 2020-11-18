@@ -337,7 +337,7 @@ public:
     /**
      * Set the state for the robot (floating base) (Span and MatrixView implementation)
      *
-     * @param world_T_base the homogeneous transformation that transforms position vectors expressed in the base reference frame
+     * @param world_T_base the 4x4 homogeneous transformation that transforms position vectors expressed in the base reference frame
      *                      in position frames expressed in the world reference frame (i.e. pos_world = world_T_base*pos_base).
      * @param s a vector of getNrOfDegreesOfFreedom() joint positions (in rad)
      * @param base_velocity The twist (linear/angular velocity) of the base, expressed with the convention specified by the used FrameVelocityConvention.
