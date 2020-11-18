@@ -713,6 +713,7 @@ namespace details
 }
 
 
+#ifndef SWIG
 //
 // make_span() - Utility functions for creating spans
 //
@@ -765,6 +766,8 @@ IDYNTREE_CONSTEXPR Span<typename std::remove_pointer<decltype (std::declval<Cont
 {
     return Span<typename std::remove_pointer<decltype (std::declval<Container>().data())>::type>(cont);
 }
+
+#endif
 
 } // namespace iDynTree
 
