@@ -37,7 +37,7 @@ namespace iDynTree
          * element corresponding to row and col, using row
          * major ordering.
          */
-        unsigned int rawIndexRowMajor(int row, int col) const;
+        std::size_t rawIndexRowMajor(std::size_t row, std::size_t col) const;
 
         /**
          * Return the raw index in the data vector of the
@@ -48,7 +48,7 @@ namespace iDynTree
          *          this function is used just in the fillColMajorBuffer
          *          method.
          */
-        unsigned int rawIndexColMajor(int row, int col) const;
+        std::size_t rawIndexColMajor(std::size_t row, std::size_t col) const;
 
     protected:
         /**
@@ -75,7 +75,7 @@ namespace iDynTree
          *
          * \warning this class stores data using the row major order
          */
-        MatrixFixSize(const double * in_data, const unsigned int in_rows, const unsigned int in_cols);
+        MatrixFixSize(const double * in_data, const std::size_t in_rows, const std::size_t in_cols);
 
         /**
          * Constructor from a MatrixView
@@ -90,12 +90,12 @@ namespace iDynTree
          *
          */
         ///@{
-        double operator()(const unsigned int row, const unsigned int col) const;
-        double& operator()(const unsigned int row, const unsigned int col);
-        double getVal(const unsigned int row, const unsigned int col) const;
-        bool setVal(const unsigned int row, const unsigned int col, const double new_el);
-        unsigned int rows() const;
-        unsigned int cols() const;
+        double operator()(const std::size_t row, const std::size_t col) const;
+        double& operator()(const std::size_t row, const std::size_t col);
+        double getVal(const std::size_t row, const std::size_t col) const;
+        bool setVal(const std::size_t row, const std::size_t col, const double new_el);
+        std::size_t rows() const;
+        std::size_t cols() const;
         ///@}
 
         MatrixFixSize & operator=(iDynTree::MatrixView<const double> mat);
@@ -180,8 +180,8 @@ namespace iDynTree
 
     template<unsigned int nRows, unsigned int nCols>
     MatrixFixSize<nRows,nCols>::MatrixFixSize(const double* in_data,
-                                              const unsigned int in_rows,
-                                              const unsigned int in_cols)
+                                              const std::size_t in_rows,
+                                              const std::size_t in_cols)
     {
         if( in_rows != nRows ||
             in_cols != nCols )
@@ -206,9 +206,9 @@ namespace iDynTree
         }
         else
         {
-            for(unsigned int row=0; row < nRows; row++ )
+            for(std::size_t row=0; row < nRows; row++ )
             {
-                for(unsigned int col=0; col < nCols; col++ )
+                for(std::size_t col=0; col < nCols; col++ )
                 {
                     this->m_data[rawIndexRowMajor(row,col)] = other(row, col);
                 }
@@ -219,9 +219,9 @@ namespace iDynTree
     template<unsigned int nRows, unsigned int nCols>
     void MatrixFixSize<nRows,nCols>::zero()
     {
-        for(unsigned int row=0; row < this->rows(); row++ )
+        for(std::size_t row=0; row < this->rows(); row++ )
         {
-            for(unsigned int col=0; col < this->cols(); col++ )
+            for(std::size_t col=0; col < this->cols(); col++ )
             {
                 this->m_data[rawIndexRowMajor(row,col)] = 0.0;
             }
@@ -229,13 +229,13 @@ namespace iDynTree
     }
 
     template<unsigned int nRows, unsigned int nCols>
-    unsigned int MatrixFixSize<nRows,nCols>::rows() const
+    std::size_t MatrixFixSize<nRows,nCols>::rows() const
     {
         return nRows;
     }
 
     template<unsigned int nRows, unsigned int nCols>
-    unsigned int MatrixFixSize<nRows,nCols>::cols() const
+    std::size_t MatrixFixSize<nRows,nCols>::cols() const
     {
         return nCols;
     }
@@ -257,9 +257,9 @@ namespace iDynTree
         assert(nCols == mat.cols());
         assert(nRows == mat.rows());
 
-        for(unsigned int i = 0; i < nRows; i++)
+        for(std::size_t i = 0; i < nRows; i++)
         {
-            for(unsigned int j = 0; j < nCols; j++)
+            for(std::size_t j = 0; j < nCols; j++)
             {
                 this->m_data[this->rawIndexRowMajor(i,j)] = mat(i, j);
             }
@@ -268,7 +268,7 @@ namespace iDynTree
     }
 
     template<unsigned int nRows, unsigned int nCols>
-    double& MatrixFixSize<nRows,nCols>::operator()(const unsigned int row, const unsigned int col)
+    double& MatrixFixSize<nRows,nCols>::operator()(const std::size_t row, const std::size_t col)
     {
         assert(row < nRows);
         assert(col < nCols);
@@ -276,7 +276,7 @@ namespace iDynTree
     }
 
     template<unsigned int nRows, unsigned int nCols>
-    double MatrixFixSize<nRows,nCols>::operator()(const unsigned int row, const unsigned int col) const
+    double MatrixFixSize<nRows,nCols>::operator()(const std::size_t row, const std::size_t col) const
     {
         assert(row < nRows);
         assert(col < nCols);
@@ -284,7 +284,7 @@ namespace iDynTree
     }
 
     template<unsigned int nRows, unsigned int nCols>
-    double MatrixFixSize<nRows,nCols>::getVal(const unsigned int row, const unsigned int col) const
+    double MatrixFixSize<nRows,nCols>::getVal(const std::size_t row, const std::size_t col) const
     {
         if( row >= this->rows() ||
             col  >= this->cols() )
@@ -297,7 +297,7 @@ namespace iDynTree
     }
 
     template<unsigned int nRows, unsigned int nCols>
-    bool MatrixFixSize<nRows,nCols>::setVal(const unsigned int row, const unsigned int col, const double new_el)
+    bool MatrixFixSize<nRows,nCols>::setVal(const std::size_t row, const std::size_t col, const double new_el)
     {
         if( row >= this->rows() ||
             col   >= this->cols() )
@@ -321,9 +321,9 @@ namespace iDynTree
     template<unsigned int nRows, unsigned int nCols>
     void MatrixFixSize<nRows,nCols>::fillColMajorBuffer(double* colMajorBuf) const
     {
-        for(unsigned int row = 0; row < this->rows(); row++ )
+        for(std::size_t row = 0; row < this->rows(); row++ )
         {
-            for(unsigned int col = 0; col < this->cols(); col++ )
+            for(std::size_t col = 0; col < this->cols(); col++ )
             {
                 colMajorBuf[this->rawIndexColMajor(row,col)] =
                     this->m_data[this->rawIndexRowMajor(row,col)];
@@ -332,13 +332,13 @@ namespace iDynTree
     }
 
     template<unsigned int nRows, unsigned int nCols>
-    unsigned int MatrixFixSize<nRows,nCols>::rawIndexRowMajor(int row, int col) const
+    std::size_t MatrixFixSize<nRows,nCols>::rawIndexRowMajor(std::size_t row, std::size_t col) const
     {
         return (nCols*row + col);
     }
 
     template<unsigned int nRows, unsigned int nCols>
-    unsigned int MatrixFixSize<nRows,nCols>::rawIndexColMajor(int row, int col) const
+    std::size_t MatrixFixSize<nRows,nCols>::rawIndexColMajor(std::size_t row, std::size_t col) const
     {
         return (row + nRows*col);
     }
@@ -348,9 +348,9 @@ namespace iDynTree
     {
         std::stringstream ss;
 
-        for(unsigned int row=0; row < this->rows(); row++ )
+        for(std::size_t row=0; row < this->rows(); row++ )
         {
-            for(unsigned int col=0; col < this->cols(); col++ )
+            for(std::size_t col=0; col < this->cols(); col++ )
             {
                 ss << this->m_data[this->rawIndexRowMajor(row,col)] << " ";
             }
@@ -383,3 +383,4 @@ namespace iDynTree
 }
 
 #endif /* IDYNTREE_MATRIX_FIX_SIZE_H */
+

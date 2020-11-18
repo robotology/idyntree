@@ -11,6 +11,7 @@
 #ifndef IDYNTREE_TRIPLETS_H
 #define IDYNTREE_TRIPLETS_H
 
+#include <iDynTree/Core/MatrixFixSize.h>
 #include <iDynTree/Core/Utils.h>
 
 #include <iterator>
@@ -23,8 +24,6 @@ namespace iDynTree {
     class Triplets;
 
     class MatrixDynSize;
-    template <unsigned rows, unsigned cols>
-    class MatrixFixSize;
 
     template <MatrixStorageOrdering ordering>
     class SparseMatrix;
@@ -39,13 +38,13 @@ public:
     static bool rowMajorCompare(const iDynTree::Triplet& a, const iDynTree::Triplet &b);
     static bool columnMajorCompare(const iDynTree::Triplet& a, const iDynTree::Triplet &b);
 
-    Triplet(unsigned row, unsigned column, double value);
+    Triplet(std::size_t row, std::size_t column, double value);
 
     bool operator<(const iDynTree::Triplet&) const;
     bool operator==(const iDynTree::Triplet&) const;
 
-    unsigned row;
-    unsigned column;
+    std::size_t row;
+    std::size_t column;
     double value;
 };
 
@@ -56,30 +55,30 @@ class iDynTree::Triplets
 
 public:
 
-    void reserve(unsigned size);
+    void reserve(std::size_t size);
     void clear();
 
-    template <unsigned rows, unsigned cols>
-    inline void addSubMatrix(unsigned startingRow,
-                             unsigned startingColumn,
+    template <unsigned int rows, unsigned int cols>
+    inline void addSubMatrix(std::size_t startingRow,
+                             std::size_t startingColumn,
                              const MatrixFixSize<rows, cols> &matrix)
     {
         //if enough memory has been reserved this should be a noop
         m_triplets.reserve(m_triplets.size() + (rows * cols));
-        for (unsigned row = 0; row < rows; ++row) {
-            for (unsigned col = 0; col < cols; ++col) {
+        for (std::size_t row = 0; row < rows; ++row) {
+            for (std::size_t col = 0; col < cols; ++col) {
                 m_triplets.push_back(Triplet(startingRow + row, startingColumn + col, matrix(row, col)));
             }
         }
     }
 
-    void addSubMatrix(unsigned startingRow,
-                      unsigned startingColumn,
+    void addSubMatrix(std::size_t startingRow,
+                      std::size_t startingColumn,
                       const MatrixDynSize&);
 
     template <MatrixStorageOrdering ordering>
-    void addSubMatrix(unsigned startingRow,
-                      unsigned startingColumn,
+    void addSubMatrix(std::size_t startingRow,
+                      std::size_t startingColumn,
                       const SparseMatrix<ordering>& matrix)
     {
         //if enough memory has been reserved this should be a noop
@@ -103,34 +102,34 @@ public:
                           startingRow.size);
     }
 
-    void addDiagonalMatrix(unsigned startingRow,
-                           unsigned startingColumn,
+    void addDiagonalMatrix(std::size_t startingRow,
+                           std::size_t startingColumn,
                            double value,
-                           unsigned diagonalMatrixSize);
+                           std::size_t diagonalMatrixSize);
 
     void pushTriplet(const Triplet& triplet);
 
-    template <unsigned rows, unsigned cols>
-    inline void setSubMatrix(unsigned startingRow,
-                             unsigned startingColumn,
+    template <std::size_t rows, std::size_t cols>
+    inline void setSubMatrix(std::size_t startingRow,
+                             std::size_t startingColumn,
                              const MatrixFixSize<rows, cols> &matrix)
     {
         //if enough memory has been reserved this should be a noop
         m_triplets.reserve(m_triplets.size() + (rows * cols));
-        for (unsigned row = 0; row < rows; ++row) {
-            for (unsigned col = 0; col < cols; ++col) {
+        for (std::size_t row = 0; row < rows; ++row) {
+            for (std::size_t col = 0; col < cols; ++col) {
                 setTriplet(Triplet(startingRow + row, startingColumn + col, matrix(row, col)));
             }
         }
     }
 
-    void setSubMatrix(unsigned startingRow,
-                      unsigned startingColumn,
+    void setSubMatrix(std::size_t startingRow,
+                      std::size_t startingColumn,
                       const MatrixDynSize&);
 
     template <MatrixStorageOrdering ordering>
-    void setSubMatrix(unsigned startingRow,
-                      unsigned startingColumn,
+    void setSubMatrix(std::size_t startingRow,
+                      std::size_t startingColumn,
                       const SparseMatrix<ordering>& matrix)
     {
         //if enough memory has been reserved this should be a noop
@@ -154,16 +153,16 @@ public:
                           startingRow.size);
     }
 
-    void setDiagonalMatrix(unsigned startingRow,
-                           unsigned startingColumn,
+    void setDiagonalMatrix(std::size_t startingRow,
+                           std::size_t startingColumn,
                            double value,
-                           unsigned diagonalMatrixSize);
+                           std::size_t diagonalMatrixSize);
 
 
     void setTriplet(const Triplet& triplet);
 
     bool isEmpty() const;
-    unsigned size() const;
+    std::size_t size() const;
 
     std::string description() const;
 

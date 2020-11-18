@@ -21,7 +21,7 @@ namespace iDynTree {
 
     template <MatrixStorageOrdering ordering>
     class SparseMatrix;
-    
+
     class Triplet;
     class Triplets;
 }
@@ -48,12 +48,12 @@ private:
                                      */
 
 
-    unsigned m_allocatedSize; /**< size of the memory allocated for m_values and m_innerIndices */
+    std::size_t m_allocatedSize; /**< size of the memory allocated for m_values and m_innerIndices */
 
-    unsigned m_rows;
-    unsigned m_columns;
+    std::size_t m_rows;
+    std::size_t m_columns;
 
-    void initializeMatrix(unsigned outerSize, const double* vector, unsigned vectorSize);
+    void initializeMatrix(std::size_t outerSize, const double* vector, std::size_t vectorSize);
 
     /**
      * Insert a new element at the specified position
@@ -64,7 +64,7 @@ private:
      * @param value value to be inserted
      * @return index in m_values of the inserted element
      */
-    unsigned insert(unsigned row, unsigned col, double value);
+    std::size_t insert(std::size_t row, std::size_t col, double value);
 
     /**
      * Check if the element at row-col is present in the matrix.
@@ -78,7 +78,7 @@ private:
      * @param[out] index if found contains the index, if not the index of the next element
      * @return true if the value has been found
      */
-    bool valueIndexForOuterAndInnerIndices(unsigned outerIndex, unsigned innerIndex, unsigned& valueIndex) const;
+    bool valueIndexForOuterAndInnerIndices(std::size_t outerIndex, std::size_t innerIndex, std::size_t& valueIndex) const;
 
 public:
 
@@ -91,10 +91,10 @@ public:
      * Creates a zero sparse matrix with the specified dimensions
      *
      */
-    SparseMatrix(unsigned rows, unsigned cols);
+    SparseMatrix(std::size_t rows, std::size_t cols);
 
 
-    SparseMatrix(unsigned rows, unsigned cols,
+    SparseMatrix(std::size_t rows, std::size_t cols,
                  const iDynTree::VectorDynSize& memoryReserveDescription);
 
     template <iDynTree::MatrixStorageOrdering otherOrdering>
@@ -114,7 +114,7 @@ public:
      *
      * @return the number of non zero elements
      */
-    unsigned numberOfNonZeros() const;
+    std::size_t numberOfNonZeros() const;
 
     /**
      * Resize the matrix to the specified new dimensions
@@ -124,7 +124,7 @@ public:
      * @param rows the new number of rows of this matrix
      * @param columns the new number of columns of this matrix
      */
-    void resize(unsigned rows, unsigned columns);
+    void resize(std::size_t rows, std::size_t columns);
 
     /**
      * Resize the matrix to the specified new dimensions
@@ -135,9 +135,9 @@ public:
      * @param columns the new number of columns of this matrix
      * @param innerIndicesInformation information on the NNZ for each column (row), used to reserve memory in advance. It depends on the storage ordering
      */
-    void resize(unsigned rows, unsigned columns, const iDynTree::VectorDynSize &innerIndicesInformation);
+    void resize(std::size_t rows, std::size_t columns, const iDynTree::VectorDynSize &innerIndicesInformation);
 
-    void reserve(unsigned nonZeroElements);
+    void reserve(std::size_t nonZeroElements);
 
 
     /**
@@ -186,8 +186,8 @@ public:
      */
     void setFromTriplets(iDynTree::Triplets& triplets);
 
-    static SparseMatrix sparseMatrixFromTriplets(unsigned rows,
-                                                 unsigned cols,
+    static SparseMatrix sparseMatrixFromTriplets(std::size_t rows,
+                                                 std::size_t cols,
                                                  const iDynTree::Triplets& nonZeroElements);
 
 
@@ -199,7 +199,7 @@ public:
      * @param col column index
      * @return the value at the specified row and column
      */
-    double operator()(unsigned row, unsigned col) const;
+    double operator()(std::size_t row, std::size_t col) const;
 
     /**
      * Access operation to the element of the matrix identified by row-col
@@ -210,14 +210,14 @@ public:
      * @param col column index
      * @return reference to the value at the specified row and column
      */
-    double& operator()(unsigned row, unsigned col);
+    double& operator()(std::size_t row, std::size_t col);
 
-    inline double getValue(unsigned row, unsigned col) const
+    inline double getValue(std::size_t row, std::size_t col) const
     {
         return this->operator()(row, col);
     }
 
-    inline void setValue(unsigned row, unsigned col, double newValue)
+    inline void setValue(std::size_t row, std::size_t col, double newValue)
     {
         double &value = this->operator()(row, col);
         value = newValue;
@@ -228,13 +228,13 @@ public:
      * Returns the number of rows of the matrix
      * @return the number of rows
      */
-    unsigned rows() const;
+    std::size_t rows() const;
 
     /**
      * Returns the number of columns of the matrix
      * @return the number of columns
      */
-    unsigned columns() const;
+    std::size_t columns() const;
 
     //Raw buffers access
     double * valuesBuffer();
@@ -294,7 +294,7 @@ public:
         int m_column;
         double *m_value;
 
-        TripletRef(unsigned row, unsigned column, double *value);
+        TripletRef(std::size_t row, std::size_t column, double *value);
         friend class iDynTree::SparseMatrix<ordering>::Iterator;
 
     public:

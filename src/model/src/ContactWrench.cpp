@@ -36,19 +36,19 @@ const Wrench& ContactWrench::contactWrench() const
     return m_contactWrench;
 }
 
-long unsigned int& ContactWrench::contactId()
+std::size_t& ContactWrench::contactId()
 {
     return m_contactId;
 }
 
 
-const long unsigned int& ContactWrench::contactId() const
+const std::size_t& ContactWrench::contactId() const
 {
     return m_contactId;
 }
 
 
-LinkContactWrenches::LinkContactWrenches(unsigned int nrOfLinks)
+LinkContactWrenches::LinkContactWrenches(std::size_t nrOfLinks)
 {
     this->resize(nrOfLinks);
 }
@@ -64,7 +64,7 @@ void LinkContactWrenches::resize(const iDynTree::Model& model)
     resize(model.getNrOfLinks());
 }
 
-void LinkContactWrenches::resize(unsigned int nrOfLinks)
+void LinkContactWrenches::resize(std::size_t nrOfLinks)
 {
     // To avoid dynamic memory allocation at runtime
     // we make sure that the vector have at least spaces for 3 contacts
@@ -112,7 +112,7 @@ bool LinkContactWrenches::computeNetWrenches(LinkNetExternalWrenches& netWrenche
         netWrenches.resize(m_linkContactWrenches.size());
     }
 
-    for(LinkIndex l=0; l < nrOfLinks; l++)
+    for(LinkIndex l=0; l < static_cast<LinkIndex>(nrOfLinks); l++)
     {
         netWrenches(l).zero();
 

@@ -29,10 +29,10 @@ namespace iDynTree
     class JointPosDoubleArray: public VectorDynSize
     {
     public:
-        JointPosDoubleArray(unsigned int nrOfDOFs = 0);
+        JointPosDoubleArray(std::size_t nrOfDOFs = 0);
         JointPosDoubleArray(const iDynTree::Model & model);
 
-        void resize(unsigned int nrOfDOFs);
+        void resize(std::size_t nrOfDOFs);
         void resize(const iDynTree::Model & model);
 
         bool isConsistent(const iDynTree::Model & model) const;
@@ -47,10 +47,10 @@ namespace iDynTree
     class JointDOFsDoubleArray: public VectorDynSize
     {
     public:
-        JointDOFsDoubleArray(unsigned int nrOfDOFs = 0);
+        JointDOFsDoubleArray(std::size_t nrOfDOFs = 0);
         JointDOFsDoubleArray(const iDynTree::Model & model);
 
-        void resize(unsigned int nrOfDOFs);
+        void resize(std::size_t nrOfDOFs);
         void resize(const iDynTree::Model & model);
 
         bool isConsistent(const iDynTree::Model & model) const;
@@ -73,10 +73,10 @@ namespace iDynTree
         std::vector<iDynTree::SpatialForceVector> m_dofSpatialForce;
 
     public:
-        DOFSpatialForceArray(unsigned int nrOfDOFs = 0);
+        DOFSpatialForceArray(std::size_t nrOfDOFs = 0);
         DOFSpatialForceArray(const iDynTree::Model & model);
 
-        void resize(const unsigned int nrOfDOFs);
+        void resize(const std::size_t nrOfDOFs);
         void resize(const iDynTree::Model & model);
 
         bool isConsistent(const iDynTree::Model & model) const;
@@ -97,10 +97,10 @@ namespace iDynTree
         std::vector<iDynTree::SpatialMotionVector> m_dofSpatialMotion;
 
     public:
-        DOFSpatialMotionArray(unsigned int nrOfDOFs = 0);
+        DOFSpatialMotionArray(std::size_t nrOfDOFs = 0);
         DOFSpatialMotionArray(const iDynTree::Model & model);
 
-        void resize(const unsigned int nrOfDOFs);
+        void resize(const std::size_t nrOfDOFs);
         void resize(const iDynTree::Model & model);
 
         bool isConsistent(const iDynTree::Model & model) const;

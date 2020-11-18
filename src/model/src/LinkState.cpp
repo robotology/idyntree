@@ -16,7 +16,7 @@
 namespace iDynTree
 {
 
-LinkPositions::LinkPositions(unsigned int nrOfLinks)
+LinkPositions::LinkPositions(std::size_t nrOfLinks)
 {
     resize(nrOfLinks);
 }
@@ -31,7 +31,7 @@ void LinkPositions::resize(const Model& model)
     resize(model.getNrOfLinks());
 }
 
-void LinkPositions::resize(unsigned int nrOfLinks)
+void LinkPositions::resize(std::size_t nrOfLinks)
 {
     Transform identityTransform = Transform::Identity();
     this->m_linkPos.resize(nrOfLinks);
@@ -86,7 +86,7 @@ LinkWrenches::LinkWrenches(const Model& model)
     resize(model);
 }
 
-LinkWrenches::LinkWrenches(unsigned int nrOfLinks)
+LinkWrenches::LinkWrenches(std::size_t nrOfLinks)
 {
     resize(nrOfLinks);
 }
@@ -96,7 +96,7 @@ void LinkWrenches::resize(const Model& model)
     this->resize(model.getNrOfLinks());
 }
 
-void LinkWrenches::resize(unsigned int nrOfLinks)
+void LinkWrenches::resize(std::size_t nrOfLinks)
 {
     iDynTree::Wrench zeroWrench = iDynTree::Wrench::Zero();
     this->m_linkWrenches.resize(nrOfLinks,zeroWrench);
@@ -149,7 +149,7 @@ LinkWrenches::~LinkWrenches()
     resize(0);
 }
 
-LinkInertias::LinkInertias(unsigned int nrOfLinks)
+LinkInertias::LinkInertias(std::size_t nrOfLinks)
 {
     this->resize(nrOfLinks);
 }
@@ -164,7 +164,7 @@ void LinkInertias::resize(const Model& model)
     this->resize(model.getNrOfLinks());
 }
 
-void LinkInertias::resize(unsigned int nrOfLinks)
+void LinkInertias::resize(std::size_t nrOfLinks)
 {
     /**
      * We reset the vector elements to be zero because the resize is
@@ -202,7 +202,7 @@ LinkVelArray::LinkVelArray(const Model& model)
     resize(model);
 }
 
-LinkVelArray::LinkVelArray(unsigned int nrOfLinks)
+LinkVelArray::LinkVelArray(std::size_t nrOfLinks)
 {
     resize(nrOfLinks);
 }
@@ -222,7 +222,7 @@ void LinkVelArray::resize(const Model& model)
     resize(model.getNrOfLinks());
 }
 
-void LinkVelArray::resize(unsigned int nrOfLinks)
+void LinkVelArray::resize(std::size_t nrOfLinks)
 {
     iDynTree::Twist zeroTwist = iDynTree::Twist::Zero();
     this->m_linkTwist.resize(nrOfLinks,zeroTwist);
@@ -261,7 +261,7 @@ LinkAccArray::LinkAccArray(const Model& model)
     resize(model);
 }
 
-LinkAccArray::LinkAccArray(unsigned int nrOfLinks)
+LinkAccArray::LinkAccArray(std::size_t nrOfLinks)
 {
     resize(nrOfLinks);
 }
@@ -281,7 +281,7 @@ void LinkAccArray::resize(const Model& model)
     resize(model.getNrOfLinks());
 }
 
-void LinkAccArray::resize(unsigned int nrOfLinks)
+void LinkAccArray::resize(std::size_t nrOfLinks)
 {
     iDynTree::SpatialAcc zeroAcc = iDynTree::SpatialAcc::Zero();
     this->m_linkAcc.resize(nrOfLinks,zeroAcc);
@@ -292,7 +292,7 @@ bool LinkAccArray::isConsistent(const Model& model) const
     return (this->m_linkAcc.size() == model.getNrOfLinks());
 }
 
-unsigned int LinkAccArray::getNrOfLinks() const
+std::size_t LinkAccArray::getNrOfLinks() const
 {
     return this->m_linkAcc.size();
 }
@@ -319,7 +319,7 @@ LinkArticulatedBodyInertias::LinkArticulatedBodyInertias(const Model& model)
     resize(model);
 }
 
-LinkArticulatedBodyInertias::LinkArticulatedBodyInertias(unsigned int nrOfLinks)
+LinkArticulatedBodyInertias::LinkArticulatedBodyInertias(std::size_t nrOfLinks)
 {
     resize(nrOfLinks);
 }
@@ -339,7 +339,7 @@ void LinkArticulatedBodyInertias::resize(const Model& model)
     resize(model.getNrOfLinks());
 }
 
-void LinkArticulatedBodyInertias::resize(unsigned int nrOfLinks)
+void LinkArticulatedBodyInertias::resize(std::size_t nrOfLinks)
 {
     ArticulatedBodyInertia abi;
     abi.zero();

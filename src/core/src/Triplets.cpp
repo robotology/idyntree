@@ -18,7 +18,7 @@
 
 namespace iDynTree {
 
-    Triplet::Triplet(unsigned _row, unsigned _column, double _value)
+    Triplet::Triplet(std::size_t _row, std::size_t _column, double _value)
     : row(_row)
     , column(_column)
     , value(_value) {}
@@ -45,7 +45,7 @@ namespace iDynTree {
         || (a.column == b.column && a.row < b.row);
     }
 
-    void Triplets::reserve(unsigned size)
+    void Triplets::reserve(std::size_t size)
     {
         m_triplets.reserve(size);
     }
@@ -55,36 +55,36 @@ namespace iDynTree {
         m_triplets.clear();
     }
 
-    void Triplets::addSubMatrix(unsigned startingRow,
-                                unsigned startingColumn,
+    void Triplets::addSubMatrix(std::size_t startingRow,
+                                std::size_t startingColumn,
                                 const MatrixDynSize &matrix)
     {
-        unsigned rows = matrix.rows();
-        unsigned cols = matrix.cols();
+        std::size_t rows = matrix.rows();
+        std::size_t cols = matrix.cols();
 
         //if enough memory has been reserved this should be a noop
         m_triplets.reserve(m_triplets.size() + (rows * cols));
-        for (unsigned row = 0; row < rows; ++row) {
-            for (unsigned col = 0; col < cols; ++col) {
+        for (std::size_t row = 0; row < rows; ++row) {
+            for (std::size_t col = 0; col < cols; ++col) {
                 m_triplets.push_back(Triplet(startingRow + row, startingColumn + col, matrix(row, col)));
             }
         }
     }
 
-    void Triplets::addDiagonalMatrix(unsigned startingRow,
-                                     unsigned startingColumn,
+    void Triplets::addDiagonalMatrix(std::size_t startingRow,
+                                     std::size_t startingColumn,
                                      double value,
-                                     unsigned diagonalMatrixSize)
+                                     std::size_t diagonalMatrixSize)
     {
         //if enough memory has been reserved this should be a noop
         m_triplets.reserve(m_triplets.size() + diagonalMatrixSize);
-        for (unsigned i = 0; i < diagonalMatrixSize; ++i) {
+        for (std::size_t i = 0; i < diagonalMatrixSize; ++i) {
             m_triplets.push_back(Triplet(startingRow + i, startingColumn + i, value));
         }
     }
 
     bool Triplets::isEmpty() const { return m_triplets.empty(); }
-    unsigned Triplets::size() const { return m_triplets.size(); }
+    std::size_t Triplets::size() const { return m_triplets.size(); }
 
     std::vector<iDynTree::Triplet>::const_iterator Triplets::begin() const { return m_triplets.begin(); }
     std::vector<iDynTree::Triplet>::iterator Triplets::begin() { return m_triplets.begin(); }
@@ -97,30 +97,30 @@ namespace iDynTree {
     }
 
 
-    void Triplets::setSubMatrix(unsigned startingRow,
-                                unsigned startingColumn,
+    void Triplets::setSubMatrix(std::size_t startingRow,
+                                std::size_t startingColumn,
                                 const MatrixDynSize &matrix)
     {
-        unsigned rows = matrix.rows();
-        unsigned cols = matrix.cols();
+        std::size_t rows = matrix.rows();
+        std::size_t cols = matrix.cols();
 
         //if enough memory has been reserved this should be a noop
         m_triplets.reserve(m_triplets.size() + (rows * cols));
-        for (unsigned row = 0; row < rows; ++row) {
-            for (unsigned col = 0; col < cols; ++col) {
+        for (std::size_t row = 0; row < rows; ++row) {
+            for (std::size_t col = 0; col < cols; ++col) {
                 setTriplet(Triplet(startingRow + row, startingColumn + col, matrix(row, col)));
             }
         }
     }
 
-    void Triplets::setDiagonalMatrix(unsigned startingRow,
-                                     unsigned startingColumn,
+    void Triplets::setDiagonalMatrix(std::size_t startingRow,
+                                     std::size_t startingColumn,
                                      double value,
-                                     unsigned diagonalMatrixSize)
+                                     std::size_t diagonalMatrixSize)
     {
         //if enough memory has been reserved this should be a noop
         m_triplets.reserve(m_triplets.size() + diagonalMatrixSize);
-        for (unsigned i = 0; i < diagonalMatrixSize; ++i) {
+        for (std::size_t i = 0; i < diagonalMatrixSize; ++i) {
             setTriplet(Triplet(startingRow + i, startingColumn + i, value));
         }
     }

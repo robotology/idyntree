@@ -2,18 +2,18 @@ classdef Sphere < iDynTree.SolidShape
   methods
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(999, self);
+        iDynTreeMEX(1003, self);
         self.SwigClear();
       end
     end
     function varargout = clone(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1000, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1004, self, varargin{:});
     end
     function varargout = getRadius(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1001, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1005, self, varargin{:});
     end
     function varargout = setRadius(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1002, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1006, self, varargin{:});
     end
     function self = Sphere(varargin)
       self@iDynTree.SolidShape(SwigRef.Null);
@@ -22,7 +22,7 @@ classdef Sphere < iDynTree.SolidShape
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1003, varargin{:});
+        tmp = iDynTreeMEX(1007, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end

@@ -9,26 +9,26 @@ classdef DynamicMatrixView < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(716, varargin{:});
+        tmp = iDynTreeMEX(720, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = storageOrder(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(717, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(721, self, varargin{:});
     end
     function varargout = paren(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(718, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(722, self, varargin{:});
     end
     function varargout = rows(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(719, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(723, self, varargin{:});
     end
     function varargout = cols(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(720, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(724, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(721, self);
+        iDynTreeMEX(725, self);
         self.SwigClear();
       end
     end

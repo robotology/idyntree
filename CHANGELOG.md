@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The minimum required CMake version to configure and compile iDynTree is now 3.16 (https://github.com/robotology/idyntree/pull/732).
 - The Python package name of the SWIG bindings changed from `iDynTree` to `idyntree.bindings` (https://github.com/robotology/idyntree/pull/733, https://github.com/robotology/idyntree/pull/735). To continue referring to iDynTree classes as `iDynTree.<ClassName>`, you can change your `import iDynTree` statements to `import idyntree.bindings as iDynTree`. Otherwise, you can use `import idyntree.bindings` to refer them as `idyntree.bindings.<ClassName>`.
 - Improve the use of `const` keyword  in `KinDynComputations`(https://github.com/robotology/idyntree/pull/736).
+- Cleanup size and indices attributes. For consistency with std and Eigen, all sizes and indices have been changed to use std::size_t for unsigned quantities and std::ptrdiff_t for signed quantities. The only exception is the index stored in the triplets of the iDynTree::SparseMatrix data structure, that have been left defined to int for compatibility with Eigen (https://github.com/robotology/idyntree/pull/767).
 
 ### Removed
 - Remove the CMake option IDYNTREE_USES_KDL and all the classes available when enabling it. They were deprecated in iDynTree 1.0 .

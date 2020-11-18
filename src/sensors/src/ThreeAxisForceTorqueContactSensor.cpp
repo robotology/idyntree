@@ -23,7 +23,7 @@ struct ThreeAxisForceTorqueContactSensor::ThreeAxisForceTorqueContactSensorPriva
 {
     std::string name;
     Transform link_H_sensor;
-    int parent_link_index;
+    LinkIndex parent_link_index;
     std::string parent_link_name;
 
     std::vector<Position> m_loadCellLocations;
@@ -94,7 +94,7 @@ std::string ThreeAxisForceTorqueContactSensor::getParentLink() const
     return(this->pimpl->parent_link_name);
 }
 
-int ThreeAxisForceTorqueContactSensor::getParentLinkIndex() const
+LinkIndex ThreeAxisForceTorqueContactSensor::getParentLinkIndex() const
 {
     return(this->pimpl->parent_link_index);
 }

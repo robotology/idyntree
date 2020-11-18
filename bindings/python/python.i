@@ -23,18 +23,34 @@ import_array();
 // NumPy typemaps for vectors
 %apply (double* IN_ARRAY1, int DIM1) {(double* in, int size)};
 %apply (double** ARGOUTVIEWM_ARRAY1, int* DIM1) {(double** out, int* size)};
+%apply (double* IN_ARRAY1, int DIM1) {(double* in, std::size_t size)};
+%apply (double** ARGOUTVIEWM_ARRAY1, int* DIM1) {(double** out, std::size_t* size)};
+%apply (double* IN_ARRAY1, int DIM1) {(double* in, std::ptrdiff_t size)};
+%apply (double** ARGOUTVIEWM_ARRAY1, int* DIM1) {(double** out, std::ptrdiff_t* size)};
 
 // NumPy typemaps for matrices
 %apply (double* IN_ARRAY2, int DIM1, int DIM2) {(double* in, int i, int j)};
 %apply (double** ARGOUTVIEWM_ARRAY2, int* DIM1, int* DIM2) {(double** out, int* i, int* j)};
+%apply (double* IN_ARRAY2, int DIM1, int DIM2) {(double* in, std::size_t i, std::size_t j)};
+%apply (double** ARGOUTVIEWM_ARRAY2, int* DIM1, int* DIM2) {(double** out, std::size_t* i, std::size_t* j)};
+%apply (double* IN_ARRAY2, int DIM1, int DIM2) {(double* in, std::ptrdiff_t i, std::ptrdiff_t j)};
+%apply (double** ARGOUTVIEWM_ARRAY2, int* DIM1, int* DIM2) {(double** out, std::ptrdiff_t* i, std::ptrdiff_t* j)};
 
 // NumPy typemaps for vectors / matrices constructors
 %apply (double* IN_ARRAY1, int DIM1) {(const double* in_data, const unsigned in_size)};
 %apply (double* IN_ARRAY2, int DIM1, int DIM2) {(const double* in_data, const unsigned in_rows, const unsigned in_cols)};
+%apply (double* IN_ARRAY1, int DIM1) {(const double* in_data, const std::size_t in_size)};
+%apply (double* IN_ARRAY2, int DIM1, int DIM2) {(const double* in_data, const std::size_t in_rows, const std::size_t in_cols)};
+%apply (double* IN_ARRAY1, int DIM1) {(const double* in_data, const std::ptrdiff_t in_size)};
+%apply (double* IN_ARRAY2, int DIM1, int DIM2) {(const double* in_data, const std::ptrdiff_t in_rows, const std::ptrdiff_t in_cols)};
 
 // NumPy typemaps for SpatialVector constructor
 %apply (double* IN_ARRAY1, int DIM1) {(const double* linear_data, const unsigned linear_size)};
 %apply (double* IN_ARRAY1, int DIM1) {(const double* angular_data, const unsigned angular_size)};
+%apply (double* IN_ARRAY1, int DIM1) {(const double* linear_data, const std::size_t linear_size)};
+%apply (double* IN_ARRAY1, int DIM1) {(const double* angular_data, const std::size_t angular_size)};
+%apply (double* IN_ARRAY1, int DIM1) {(const double* linear_data, const std::ptrdiff_t linear_size)};
+%apply (double* IN_ARRAY1, int DIM1) {(const double* angular_data, const std::ptrdiff_t angular_size)};
 
 // Map the <Class>::reservedToString method to __str__ so that print(<Object>) automatically works in Python
 %rename(__str__) reservedToString;

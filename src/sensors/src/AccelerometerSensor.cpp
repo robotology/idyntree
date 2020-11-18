@@ -24,9 +24,9 @@ struct AccelerometerSensor::AccelerometerPrivateAttributes
     std::string name;
     // Transform from the link to the sensor
     Transform link_H_sensor;
-    // Index of the parent junction
-    int parent_link_index;
-    // Name of the parent junction
+    // Index of the parent link
+    LinkIndex parent_link_index;
+    // Name of the parent link
      std::string parent_link_name;
     // Name of the link to which the Accelerometer is connected
 };
@@ -96,7 +96,7 @@ std::string AccelerometerSensor::getParentLink() const
     return(this->pimpl->parent_link_name);
 }
 
-int AccelerometerSensor::getParentLinkIndex() const
+LinkIndex AccelerometerSensor::getParentLinkIndex() const
 {
     return(this->pimpl->parent_link_index);
 }
