@@ -33,6 +33,13 @@ setup(
     install_requires=[
         "numpy",
     ],
+    setup_requires=[
+        "setuptools_scm",
+        "ninja",
+        "cmake",
+        "numpy",
+        "cmake-build-extension",
+    ],
     ext_modules=[
         CMakeExtension(name='BuildAndInstall',
                        install_prefix="idyntree",
