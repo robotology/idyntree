@@ -1,19 +1,71 @@
-name: Python CI Workflow
+name: Python CI/CD
 
 on:
   push:
   pull_request:
+  release:
+    types:
+      - published
 
 jobs:
 
-  build:
-    name: '[Python ${{ matrix.python-version }}]'
-    runs-on: ubuntu-20.04
+  build_sdist:
+    name: Build source distribution
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version:
-          - 3.6
           - 3.8
+
+    steps:
+
+      - uses: actions/checkout@master
+      - run: git fetch --prune --unshallow
+
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install sdist dependencies
+        run: pip install setuptools_scm cmake_build_extension
+
+      - name: Build sdist
+        run: python setup.py sdist
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            coinor-libipopt-dev \
+            libeigen3-dev swig \
+            libxml2-dev \
+            libassimp-dev
+
+      - name: Install sdist
+        run: pip -v install dist/*.tar.gz
+
+      - name: Test import
+        run: python -c 'import idyntree.bindings'
+
+      - uses: actions/upload-artifact@v2
+        if: github.repository == 'robotology/idyntree'
+        with:
+          path: dist/*.tar.gz
+
+  build_wheels:
+    name: Build wheels on ${{ matrix.os }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version:
+          - 3.8
+        os:
+          - ubuntu-latest
+          # - macos-latest
+          # - windows-latest
 
     steps:
 
@@ -25,38 +77,49 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install Python tools
-        run: pip install setuptools_scm
+      - name: Install cibuildwheel
+        run: pip install cibuildwheel
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-              build-essential coinor-libipopt-dev libeigen3-dev swig \
-              libxml2-dev libassimp-dev
+      - name: Build wheels
+        run: python -m cibuildwheel --output-dir wheelhouse
+        env:
+          CIBW_BUILD_VERBOSITY: 1
+          CIBW_BUILD: cp38-manylinux_x86_64
+          CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014
+          CIBW_BEFORE_BUILD: "yum install -y eigen3-devel assimp-devel libxml2-devel coin-or-Ipopt-devel swig3"
 
-      - name: Create sdist
-        run: python setup.py sdist
+      - name: Install wheel
+        run: pip -v install wheelhouse/*.whl
 
-      - name: Install sdist
-        run: pip -v install dist/*.tar.gz
-
+      # Note: when we will have unit tests with pytest, testing should be done with cibuildwheel
       - name: Test import
         run: python -c 'import idyntree.bindings'
 
-      - name: Remove sdist
-        run: |
-          rm -rf dist/
-          pip uninstall -y idyntree
+      - uses: actions/upload-artifact@v2
+        if: github.repository == 'robotology/idyntree'
+        with:
+          path: ./wheelhouse/*.whl
 
-      - name: Create bdist_wheel
-        run: pip wheel -v -w dist/ .
+  upload_pypi:
+    needs:
+      - build_sdist
+      - build_wheels
+    runs-on: ubuntu-latest
+    # Devel branch produces pre-releases
+    # Master branch produces stable releases linked to GitHub releases
+    if: |
+      github.repository == 'robotology/idyntree' &&
+      ((github.event_name == 'release' && github.event.action == 'published') ||
+       (github.event_name == 'push' && github.ref == 'refs/heads/devel'))
 
-      - name: Install bdist_wheel
-        run: pip -v install dist/*.whl
+    steps:
 
-      - name: Test import
-        run: python -c 'import idyntree.bindings'
+      - uses: actions/download-artifact@v2
+        with:
+          name: artifact
+          path: dist
 
-      - name: Remove bdist_wheel
-        run: pip uninstall -y idyntree
+      - uses: pypa/gh-action-pypi-publish@master
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_TOKEN }}
