@@ -17,7 +17,7 @@ swig_add_library(${target_name}
     OUTFILE_DIR ${CMAKE_CURRENT_BINARY_DIR}
     OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/idyntree)
 
-target_link_libraries(${target_name} PUBLIC Python3::Python Python3::NumPy)
+target_link_libraries(${target_name} PUBLIC Python3::NumPy)
 
 set_target_properties(${target_name} PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/idyntree)
