@@ -1,4 +1,4 @@
-find_package(Python3 COMPONENTS Interpreter Development NumPy REQUIRED)
+find_package(Python3 COMPONENTS Interpreter Development.Module NumPy REQUIRED)
 
 pybind11_add_module(pybind11_idyntree SYSTEM idyntree.cpp
                                     error_utilities.h error_utilities.cpp

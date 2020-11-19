@@ -1,4 +1,4 @@
-find_package(Python3 COMPONENTS Interpreter Development NumPy REQUIRED)
+find_package(Python3 COMPONENTS Interpreter Development.Module NumPy REQUIRED)
 message(STATUS "Using Python: ${Python3_EXECUTABLE}")
 
 cmake_policy(SET CMP0078 NEW)
