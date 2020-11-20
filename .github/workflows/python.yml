@@ -87,13 +87,7 @@ jobs:
           CIBW_BUILD: cp38-manylinux_x86_64
           CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014
           CIBW_BEFORE_BUILD: "yum install -y eigen3-devel assimp-devel libxml2-devel coin-or-Ipopt-devel swig3"
-
-      - name: Install wheel
-        run: pip -v install wheelhouse/*.whl
-
-      # Note: when we will have unit tests with pytest, testing should be done with cibuildwheel
-      - name: Test import
-        run: python -c 'import idyntree.bindings'
+          CIBW_TEST_COMMAND: "python -c 'import idyntree.bindings'"
 
       - uses: actions/upload-artifact@v2
         if: github.repository == 'robotology/idyntree'
