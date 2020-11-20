@@ -1,4 +1,9 @@
-find_package(Python3 COMPONENTS Interpreter Development.Module NumPy REQUIRED)
+if(${CMAKE_VERSION} VERSION_LESS "3.18.0")
+    find_package(Python3 COMPONENTS Interpreter Development NumPy REQUIRED)
+else()
+    find_package(Python3 COMPONENTS Interpreter Development.Module NumPy REQUIRED)
+endif()
+
 message(STATUS "Using Python: ${Python3_EXECUTABLE}")
 
 cmake_policy(SET CMP0078 NEW)
