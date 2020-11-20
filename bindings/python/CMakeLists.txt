@@ -1,4 +1,9 @@
-find_package(Python3 COMPONENTS Interpreter Development NumPy REQUIRED)
+if(${CMAKE_VERSION} VERSION_LESS "3.18.0")
+    find_package(Python3 COMPONENTS Interpreter Development NumPy REQUIRED)
+else()
+    find_package(Python3 COMPONENTS Interpreter Development.Module NumPy REQUIRED)
+endif()
+
 message(STATUS "Using Python: ${Python3_EXECUTABLE}")
 
 cmake_policy(SET CMP0078 NEW)
@@ -17,7 +22,7 @@ swig_add_library(${target_name}
     OUTFILE_DIR ${CMAKE_CURRENT_BINARY_DIR}
     OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/idyntree)
 
-target_link_libraries(${target_name} PUBLIC Python3::Python Python3::NumPy)
+target_link_libraries(${target_name} PUBLIC Python3::NumPy)
 
 set_target_properties(${target_name} PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/idyntree)
