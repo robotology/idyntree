@@ -56,7 +56,7 @@ jobs:
 
   build_wheels:
     name: Build wheels on ${{ matrix.os }}
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
@@ -88,6 +88,16 @@ jobs:
           CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014
           CIBW_BEFORE_BUILD: "yum install -y eigen3-devel assimp-devel libxml2-devel coin-or-Ipopt-devel swig3"
           CIBW_TEST_COMMAND: "python -c 'import idyntree.bindings'"
+          # Note: here we repair the wheel maintaining the linux_x86_64 platform
+          CIBW_REPAIR_WHEEL_COMMAND_LINUX: "auditwheel repair --plat linux_x86_64 -w {dest_dir} {wheel}"
+
+      # Rename the wheel to manylinux2014 (even if it is not) so that it can be uploaded to PyPI
+      - name: Rename wheels
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          ls wheelhouse/
+          find wheelhouse/ -type f -name "*.whl" -exec rename.ul linux manylinux2014 {} +
+          ls wheelhouse/
 
       - uses: actions/upload-artifact@v2
         if: github.repository == 'robotology/idyntree'
