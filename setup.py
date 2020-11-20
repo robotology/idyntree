@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from setuptools import setup
 from cmake_build_extension import BuildExtension, CMakeExtension
@@ -6,6 +7,10 @@ from cmake_build_extension import BuildExtension, CMakeExtension
 with open(Path(__file__).parent.absolute() / 'README.md', encoding='utf-8') as f:
     long_description = f.read()
 
+if "CIBUILDWHEEL" in os.environ and os.environ["CIBUILDWHEEL"] == "1":
+    CIBW_CMAKE_OPTIONS = ["-DCMAKE_INSTALL_LIBDIR=lib"]
+else:
+    CIBW_CMAKE_OPTIONS = []
 
 setup(
     name='idyntree',
@@ -57,7 +62,7 @@ setup(
                            "-DIDYNTREE_USES_WORHP:BOOL=OFF",
                            "-DIDYNTREE_USES_YARP:BOOL=OFF",
                            "-DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF",
-                       ]),
+                       ] + CIBW_CMAKE_OPTIONS),
     ],
     cmdclass=dict(build_ext=BuildExtension),
     zip_safe=False,
