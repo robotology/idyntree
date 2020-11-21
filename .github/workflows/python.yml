@@ -50,7 +50,6 @@ jobs:
         run: python -c 'import idyntree.bindings'
 
       - uses: actions/upload-artifact@v2
-        if: github.repository == 'robotology/idyntree'
         with:
           path: dist/*.tar.gz
 
@@ -99,7 +98,6 @@ jobs:
           ls wheelhouse/
 
       - uses: actions/upload-artifact@v2
-        if: github.repository == 'robotology/idyntree'
         with:
           path: ./wheelhouse/*.whl
 
