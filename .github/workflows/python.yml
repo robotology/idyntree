@@ -54,18 +54,16 @@ jobs:
         with:
           path: dist/*.tar.gz
 
-  build_wheels:
-    name: Build wheels on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
+  build_linux_wheels:
+
+    name: Build wheels on ubuntu-latest
+    runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
       matrix:
         python-version:
           - 3.8
-        os:
-          - ubuntu-latest
-          # - macos-latest
-          # - windows-latest
+          # - 3.9
 
     steps:
 
@@ -77,23 +75,24 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install cibuildwheel
-        run: pip install cibuildwheel
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential \
+            coinor-libipopt-dev \
+            libeigen3-dev swig \
+            libxml2-dev \
+            libassimp-dev
 
-      - name: Build wheels
-        run: python -m cibuildwheel --output-dir wheelhouse
-        env:
-          CIBW_BUILD_VERBOSITY: 1
-          CIBW_BUILD: cp38-manylinux_x86_64
-          CIBW_MANYLINUX_X86_64_IMAGE: manylinux2014
-          CIBW_BEFORE_BUILD: "yum install -y eigen3-devel assimp-devel libxml2-devel coin-or-Ipopt-devel swig3"
-          CIBW_TEST_COMMAND: "python -c 'import idyntree.bindings'"
-          # Note: here we repair the wheel maintaining the linux_x86_64 platform
-          CIBW_REPAIR_WHEEL_COMMAND_LINUX: "auditwheel repair --plat linux_x86_64 -w {dest_dir} {wheel}"
+      - name: '[Linux] Build wheel'
+        run: pip wheel -w wheelhouse .
+
+      - name: Remove other wheels
+        run: find wheelhouse/ -type f -not -name 'idyntree-*' -delete
 
       # Rename the wheel to manylinux2014 (even if it is not) so that it can be uploaded to PyPI
       - name: Rename wheels
-        if: matrix.os == 'ubuntu-latest'
         run: |
           ls wheelhouse/
           find wheelhouse/ -type f -name "*.whl" -exec rename.ul linux manylinux2014 {} +
@@ -107,7 +106,7 @@ jobs:
   upload_pypi:
     needs:
       - build_sdist
-      - build_wheels
+      - build_linux_wheels
     runs-on: ubuntu-latest
     # Devel branch produces pre-releases
     # Master branch produces stable releases linked to GitHub releases
