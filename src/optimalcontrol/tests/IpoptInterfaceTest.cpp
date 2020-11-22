@@ -210,14 +210,15 @@ int main(){
     ASSERT_IS_TRUE(problem->setMinusInfinity(ipoptSolver.minusInfinity()));
     ASSERT_IS_TRUE(problem->setPlusInfinity(ipoptSolver.plusInfinity()));
     ASSERT_IS_TRUE(ipoptSolver.setProblem(problem));
+    double testTolerance = 5e-5;
     for (int i = 0; i < 5; ++i){
         ASSERT_IS_TRUE(ipoptSolver.solve());
         double optimalCost;
         ASSERT_IS_TRUE(ipoptSolver.getOptimalCost(optimalCost));
-        ASSERT_EQUAL_DOUBLE_TOL(optimalCost, problem->expectedMinimum(), 1e-5);
+        ASSERT_EQUAL_DOUBLE_TOL(optimalCost, problem->expectedMinimum(), testTolerance);
         iDynTree::VectorDynSize solution;
         ASSERT_IS_TRUE(ipoptSolver.getPrimalVariables(solution));
-        ASSERT_EQUAL_VECTOR_TOL(solution, problem->expectedVariables(), 1e-5);
+        ASSERT_EQUAL_VECTOR_TOL(solution, problem->expectedVariables(), testTolerance);
         ASSERT_IS_TRUE(ipoptSolver.getDualVariables(dummy1, dummy2, dummy3));
     }
     return EXIT_SUCCESS;

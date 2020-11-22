@@ -65,7 +65,7 @@ jobs:
     - name: Dependencies [macOS]
       if: matrix.os == 'macOS-latest'
       run: |
-        brew install ace assimp boost eigen swig qt5 
+        brew install ace assimp boost eigen ipopt swig qt5
     
     - name: Dependencies [Ubuntu]
       if: contains(matrix.os, 'ubuntu')
@@ -172,7 +172,7 @@ jobs:
         cd build
         cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install/deps -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=ON \
               -DIDYNTREE_USES_ICUB_MAIN:BOOL=ON -DIDYNTREE_USES_Qt5:BOOL=ON  -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DIDYNTREE_USES_ASSIMP:BOOL=ON \
-              -DIDYNTREE_USES_OCTAVE:BOOL=ON -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
+              -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_OCTAVE:BOOL=ON -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
 
     - name: Enable additional Ubuntu options (Valgrind, Python) [Ubuntu] 
       if: contains(matrix.os, 'ubuntu')
