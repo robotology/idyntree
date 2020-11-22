@@ -9,42 +9,42 @@ classdef SpatialInertiaRaw < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(706, varargin{:});
+        tmp = iDynTreeMEX(558, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = fromRotationalInertiaWrtCenterOfMass(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(707, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(559, self, varargin{:});
     end
     function varargout = getMass(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(708, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(560, self, varargin{:});
     end
     function varargout = getCenterOfMass(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(709, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(561, self, varargin{:});
     end
     function varargout = getRotationalInertiaWrtFrameOrigin(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(710, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(562, self, varargin{:});
     end
     function varargout = getRotationalInertiaWrtCenterOfMass(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(711, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(563, self, varargin{:});
     end
     function varargout = multiply(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(713, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(565, self, varargin{:});
     end
     function varargout = zero(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(714, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(566, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(715, self);
+        iDynTreeMEX(567, self);
         self.SwigClear();
       end
     end
   end
   methods(Static)
     function varargout = combine(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(712, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(564, varargin{:});
     end
   end
 end

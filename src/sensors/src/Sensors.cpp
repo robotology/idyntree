@@ -14,10 +14,6 @@
 #include <map>
 
 #include <iDynTree/Core/Wrench.h>
-#include <iDynTree/Core/AngularMotionVector3.h>
-#include <iDynTree/Core/LinearMotionVector3.h>
-
-// #include "iDynTree/Sensors/IMeasurement.hpp"
 #include <iDynTree/Sensors/Sensors.h>
 
 #include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
@@ -53,7 +49,7 @@ LinkSensor::~LinkSensor()
 struct SensorsList::SensorsListPimpl
 {
     std::vector<std::vector<Sensor *> > allSensors;
-    typedef std::map<std::string, size_t> SensorNameToIndexMap;
+    typedef std::map<std::string, std::ptrdiff_t> SensorNameToIndexMap;
     std::vector<SensorNameToIndexMap> sensorsNameToIndex;
 };
 
@@ -72,11 +68,11 @@ void SensorsList::constructor(const SensorsList& other)
     this->pimpl->sensorsNameToIndex.resize(NR_OF_SENSOR_TYPES);
     for(int sens_type = 0; sens_type < NR_OF_SENSOR_TYPES; sens_type++ )
     {
-        for(unsigned int sens = 0; sens < other.getNrOfSensors((SensorType)sens_type); sens++ )
+        for(std::size_t sens = 0; sens < other.getNrOfSensors((SensorType)sens_type); sens++ )
         {
             this->pimpl->allSensors[sens_type].push_back(other.pimpl->allSensors[sens_type][sens]->clone());
             std::string sensor_name = other.getSensor((SensorType)sens_type,sens)->getName();
-            this->pimpl->sensorsNameToIndex[sens_type].insert(std::pair<std::string,int>(sensor_name,sens));
+            this->pimpl->sensorsNameToIndex[sens_type].insert(std::pair<std::string,std::ptrdiff_t>(sensor_name,sens));
         }
     }
 }
@@ -119,7 +115,7 @@ SensorsList::~SensorsList()
     this->destructor();
 }
 
-int SensorsList::addSensor(const Sensor& sensor)
+std::ptrdiff_t  SensorsList::addSensor(const Sensor& sensor)
  {
     Sensor *newSensor = sensor.clone();
     if( ! newSensor->isValid() )
@@ -139,8 +135,8 @@ int SensorsList::addSensor(const Sensor& sensor)
     }
 
     this->pimpl->allSensors[newSensor->getSensorType()].push_back(newSensor);
-    int new_index = this->pimpl->allSensors[newSensor->getSensorType()].size()-1;
-    this->pimpl->sensorsNameToIndex[newSensor->getSensorType()].insert(std::pair<std::string,int>(newSensor->getName(),new_index));
+    std::size_t new_index = this->pimpl->allSensors[newSensor->getSensorType()].size()-1;
+    this->pimpl->sensorsNameToIndex[newSensor->getSensorType()].insert(std::pair<std::string,size_t>(newSensor->getName(),new_index));
 
     return new_index;
 }
@@ -171,7 +167,7 @@ bool SensorsList::setSerialization(const SensorType& sensor_type,
 
     for(size_t i=0; i < serializaton.size(); i++ )
     {
-        int oldSensIndex = getSensorIndex(sensor_type,serializaton[i]);
+        std::ptrdiff_t oldSensIndex = getSensorIndex(sensor_type,serializaton[i]);
         if( oldSensIndex == -1 )
         {
             std::cerr << "[ERROR] SensorsTree::setSerialization error : sensor " << serializaton[i] << " not found in sensor list." << std::endl;
@@ -185,12 +181,12 @@ bool SensorsList::setSerialization(const SensorType& sensor_type,
     return true;
 }
 
-unsigned int SensorsList::getNrOfSensors(const SensorType & sensor_type) const
+std::size_t SensorsList::getNrOfSensors(const SensorType & sensor_type) const
 {
     return this->pimpl->allSensors[sensor_type].size();
 }
 
-bool SensorsList::getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name, unsigned int & sensor_index) const
+bool SensorsList::getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name, std::ptrdiff_t & sensor_index) const
 {
     SensorsListPimpl::SensorNameToIndexMap::const_iterator it;
     it = this->pimpl->sensorsNameToIndex[sensor_type].find(_sensor_name);
@@ -206,27 +202,33 @@ bool SensorsList::getSensorIndex(const SensorType & sensor_type, const std::stri
     }
 }
 
-int SensorsList::getSensorIndex(const SensorType& sensor_type, const std::string& _sensor_name) const
+bool SensorsList::getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name, unsigned int & sensor_index) const
 {
-    unsigned int retUnsignedVal;
-    int retVal;
-    bool ok = getSensorIndex(sensor_type,_sensor_name,retUnsignedVal);
+    std::ptrdiff_t sensor_index_full ;
+    bool ret = this->getSensorIndex(sensor_type, _sensor_name, sensor_index_full);
+    if (ret) 
+    {
+        sensor_index = static_cast<unsigned int>(sensor_index_full);
+    }
+    return ret;
+}
+
+
+std::ptrdiff_t SensorsList::getSensorIndex(const SensorType& sensor_type, const std::string& _sensor_name) const
+{
+    std::ptrdiff_t retVal;
+    bool ok = getSensorIndex(sensor_type,_sensor_name,retVal);
 
     if( !ok )
     {
         retVal = -1;
-    }
-    else
-    {
-        // \todo TODO check overflow
-        retVal = (int) retUnsignedVal;
     }
 
     return retVal;
 }
 
 
-Sensor* SensorsList::getSensor(const SensorType& sensor_type, int sensor_index) const
+Sensor* SensorsList::getSensor(const SensorType& sensor_type, std::ptrdiff_t sensor_index) const
 {
     if( sensor_index < (int)getNrOfSensors(sensor_type) && sensor_index >= 0 )
     {
@@ -276,11 +278,12 @@ bool SensorsList::removeAllSensorsOfType(const iDynTree::SensorType &sensor_type
     return true;
 }
 
-    bool SensorsList::removeSensor(const SensorType & sensor_type, const unsigned int sensor_index)
+    bool SensorsList::removeSensor(const SensorType & sensor_type, const std::ptrdiff_t sensor_index)
     {
         std::vector<Sensor*>& typeVector = this->pimpl->allSensors[sensor_type];
-        if (sensor_index >= typeVector.size())
+        if (sensor_index >= static_cast<std::ptrdiff_t>(typeVector.size())) {
             return false;
+        }
         Sensor *s = typeVector[sensor_index];
         typeVector.erase(typeVector.begin() + sensor_index);
         SensorsListPimpl::SensorNameToIndexMap& nameToIndex = this->pimpl->sensorsNameToIndex[sensor_type];
@@ -296,7 +299,7 @@ bool SensorsList::removeAllSensorsOfType(const iDynTree::SensorType &sensor_type
 
     bool SensorsList::removeSensor(const iDynTree::SensorType &sensor_type, const std::string &_sensor_name)
     {
-        int index = getSensorIndex(sensor_type, _sensor_name);
+        std::ptrdiff_t index = getSensorIndex(sensor_type, _sensor_name);
         if (index < 0) return false;
         return removeSensor(sensor_type, index);
     }
@@ -677,7 +680,7 @@ SensorsMeasurements::~SensorsMeasurements()
     delete this->pimpl;
 }
 
-bool SensorsMeasurements::setNrOfSensors(const SensorType& sensor_type, unsigned int nrOfSensors)
+bool SensorsMeasurements::setNrOfSensors(const SensorType& sensor_type, std::size_t nrOfSensors)
 {
     Wrench zeroWrench;
     LinAcceleration zeroLinAcc;
@@ -737,15 +740,15 @@ bool SensorsMeasurements::resize(const SensorsList &sensorsList)
 
 bool SensorsMeasurements::toVector(VectorDynSize & measurementVector) const
 {
-    unsigned int itr;
+    std::size_t itr;
     LinAcceleration thisLinAcc;
     AngVelocity thisAngVel;
     Wrench thisWrench;
-    unsigned int numFT = this->pimpl->SixAxisFTSensorsMeasurements.size();
-    unsigned int numAcc = this->pimpl->AccelerometerMeasurements.size();
-    unsigned int numGyro = this->pimpl->GyroscopeMeasurements.size();
-    unsigned int numThreeAxisAngularAcc = this->pimpl->ThreeAxisAngularAccelerometerMeasurements.size();
-    unsigned int numThreeAxisFT = this->pimpl->ThreeAxisForceTorqueContactMeasurements.size();
+    std::size_t numFT = this->pimpl->SixAxisFTSensorsMeasurements.size();
+    std::size_t numAcc = this->pimpl->AccelerometerMeasurements.size();
+    std::size_t numGyro = this->pimpl->GyroscopeMeasurements.size();
+    std::size_t numThreeAxisAngularAcc = this->pimpl->ThreeAxisAngularAccelerometerMeasurements.size();
+    std::size_t numThreeAxisFT = this->pimpl->ThreeAxisForceTorqueContactMeasurements.size();
 
     bool ok = true;
 
@@ -778,7 +781,7 @@ bool SensorsMeasurements::toVector(VectorDynSize & measurementVector) const
     }
     for(itr = 0; itr<numThreeAxisAngularAcc; itr++)
     {
-        int offset = 6*numFT + 3*numAcc + 3*numGyro + 3*itr;
+        std::ptrdiff_t offset = 6*numFT + 3*numAcc + 3*numGyro + 3*itr;
         Vector3 thisAngAcc = this->pimpl->ThreeAxisAngularAccelerometerMeasurements.at(itr);
         ok && measurementVector.setVal(offset,   thisAngAcc.getVal(0));
         ok && measurementVector.setVal(offset+1, thisAngAcc.getVal(1));
@@ -786,7 +789,7 @@ bool SensorsMeasurements::toVector(VectorDynSize & measurementVector) const
     }
     for(itr = 0; itr<numThreeAxisFT; itr++)
     {
-        int offset = 6*numFT + 3*numAcc + 3*numGyro + 3*numThreeAxisAngularAcc + 3*itr;
+        std::ptrdiff_t offset = 6*numFT + 3*numAcc + 3*numGyro + 3*numThreeAxisAngularAcc + 3*itr;
         Vector3 thisThreeAxisFT = this->pimpl->ThreeAxisForceTorqueContactMeasurements.at(itr);
         ok && measurementVector.setVal(offset,   thisThreeAxisFT.getVal(0));
         ok && measurementVector.setVal(offset+1, thisThreeAxisFT.getVal(1));
@@ -798,12 +801,12 @@ bool SensorsMeasurements::toVector(VectorDynSize & measurementVector) const
 
 
 bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
-                                         const unsigned int& sensor_index,
+                                         const std::ptrdiff_t& sensor_index,
                                          const iDynTree::Wrench &measurement )
 {
     if( sensor_type == SIX_AXIS_FORCE_TORQUE )
     {
-        if( sensor_index < this->pimpl->SixAxisFTSensorsMeasurements.size() )
+        if( static_cast<std::size_t>(sensor_index) < this->pimpl->SixAxisFTSensorsMeasurements.size() )
         {
             this->pimpl->SixAxisFTSensorsMeasurements[sensor_index] = measurement;
             return true;
@@ -821,58 +824,12 @@ bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
 }
 
 bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
-                                         const unsigned int& sensor_index,
-                                         const iDynTree::LinAcceleration & measurement)
-{
-    if( sensor_type == ACCELEROMETER )
-    {
-        if( sensor_index < this->pimpl->AccelerometerMeasurements.size() )
-        {
-            this->pimpl->AccelerometerMeasurements[sensor_index] = measurement;
-            return true;
-        }
-        else
-        {
-            std::cerr << "[ERROR] setMeasurement failed: sensor_index " << sensor_index
-                      << "is out of bounds, because nrOfSensors is "
-                      << this->pimpl->AccelerometerMeasurements.size() << std::endl;
-            return false;
-        }
-    }
-
-    return false;
-}
-
-bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
-                                          const unsigned int& sensor_index,
-                                          const iDynTree::AngVelocity & measurement)
-{
-    if( sensor_type == GYROSCOPE )
-    {
-        if( sensor_index < this->pimpl->GyroscopeMeasurements.size() )
-        {
-            this->pimpl->GyroscopeMeasurements[sensor_index] = measurement;
-            return true;
-        }
-        else
-        {
-            std::cerr << "[ERROR] setMeasurement failed: sensor_index " << sensor_index
-                      << "is out of bounds, because nrOfSensors is "
-                      << this->pimpl->GyroscopeMeasurements.size() << std::endl;
-            return false;
-        }
-    }
-
-    return false;
-}
-
-bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
-                                         const unsigned int& sensor_index,
+                                         const std::ptrdiff_t& sensor_index,
                                          const Vector3& measurement)
 {
     if( sensor_type == ACCELEROMETER )
     {
-        if( sensor_index < this->pimpl->AccelerometerMeasurements.size() )
+        if( static_cast<std::size_t>(sensor_index) < this->pimpl->AccelerometerMeasurements.size() )
         {
             this->pimpl->AccelerometerMeasurements[sensor_index] = measurement;
             return true;
@@ -888,7 +845,7 @@ bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
 
     if( sensor_type == GYROSCOPE )
     {
-        if( sensor_index < this->pimpl->GyroscopeMeasurements.size() )
+        if( static_cast<std::size_t>(sensor_index) < this->pimpl->GyroscopeMeasurements.size() )
         {
             this->pimpl->GyroscopeMeasurements[sensor_index] = measurement;
             return true;
@@ -904,7 +861,7 @@ bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
 
     if (sensor_type == THREE_AXIS_ANGULAR_ACCELEROMETER)
     {
-        if( sensor_index < this->pimpl->ThreeAxisAngularAccelerometerMeasurements.size() )
+        if( static_cast<std::size_t>(sensor_index) < this->pimpl->ThreeAxisAngularAccelerometerMeasurements.size() )
         {
             this->pimpl->ThreeAxisAngularAccelerometerMeasurements[sensor_index] = measurement;
             return true;
@@ -920,7 +877,7 @@ bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
 
     if (sensor_type == THREE_AXIS_FORCE_TORQUE_CONTACT)
     {
-        if( sensor_index < this->pimpl->ThreeAxisForceTorqueContactMeasurements.size() )
+        if( static_cast<std::size_t>(sensor_index) < this->pimpl->ThreeAxisForceTorqueContactMeasurements.size() )
         {
             this->pimpl->ThreeAxisForceTorqueContactMeasurements[sensor_index] = measurement;
             return true;
@@ -938,12 +895,12 @@ bool SensorsMeasurements::setMeasurement(const SensorType& sensor_type,
 }
 
 bool SensorsMeasurements::getMeasurement(const SensorType& sensor_type,
-                                         const unsigned int& sensor_index,
+                                         const std::ptrdiff_t& sensor_index,
                                          Wrench& measurement) const
 {
     if( sensor_type == SIX_AXIS_FORCE_TORQUE )
     {
-        if( sensor_index < this->pimpl->SixAxisFTSensorsMeasurements.size() )
+        if( static_cast<std::size_t>(sensor_index) < this->pimpl->SixAxisFTSensorsMeasurements.size() )
         {
             measurement = this->pimpl->SixAxisFTSensorsMeasurements[sensor_index];
             return true;
@@ -960,57 +917,12 @@ bool SensorsMeasurements::getMeasurement(const SensorType& sensor_type,
     return false;
 }
 
-bool SensorsMeasurements::getMeasurement(const SensorType& sensor_type,
-                                         const unsigned int& sensor_index,
-                                         iDynTree::LinAcceleration & measurement) const
-{
-    if( sensor_type == ACCELEROMETER )
-    {
-        if( sensor_index < this->pimpl->AccelerometerMeasurements.size() )
-        {
-            measurement = this->pimpl->AccelerometerMeasurements[sensor_index];
-            return true;
-        }
-        else
-        {
-            std::cerr << "[ERROR] getMeasurement failed: sensor_index " << sensor_index
-                      << "is out of bounds, because nrOfSensors is "
-                      << this->pimpl->AccelerometerMeasurements.size() << std::endl;
-            return false;
-        }
-    }
-
-    return false;
-}
-bool SensorsMeasurements::getMeasurement(const SensorType& sensor_type,
-                                         const unsigned int& sensor_index,
-                                         iDynTree::AngVelocity& measurement) const
-{
-    if( sensor_type == GYROSCOPE )
-    {
-        if( sensor_index < this->pimpl->GyroscopeMeasurements.size() )
-        {
-            measurement = this->pimpl->GyroscopeMeasurements[sensor_index];
-            return true;
-        }
-        else
-        {
-            std::cerr << "[ERROR] getMeasurement failed: sensor_index " << sensor_index
-                      << "is out of bounds, because nrOfSensors is "
-                      << this->pimpl->GyroscopeMeasurements.size() << std::endl;
-            return false;
-        }
-    }
-
-    return false;
-}
-
-bool SensorsMeasurements::getMeasurement(const SensorType &sensor_type, const unsigned int &sensor_index,
+bool SensorsMeasurements::getMeasurement(const SensorType &sensor_type, const std::ptrdiff_t &sensor_index,
                                          Vector3 &measurement) const
 {
     if( sensor_type == ACCELEROMETER )
     {
-        if( sensor_index < this->pimpl->AccelerometerMeasurements.size() )
+        if( static_cast<std::size_t>(sensor_index) < this->pimpl->AccelerometerMeasurements.size() )
         {
             measurement = this->pimpl->AccelerometerMeasurements[sensor_index];
             return true;
@@ -1026,7 +938,7 @@ bool SensorsMeasurements::getMeasurement(const SensorType &sensor_type, const un
 
     if( sensor_type == GYROSCOPE )
     {
-        if( sensor_index < this->pimpl->GyroscopeMeasurements.size() )
+        if( static_cast<std::size_t>(sensor_index) < this->pimpl->GyroscopeMeasurements.size() )
         {
             measurement = this->pimpl->GyroscopeMeasurements[sensor_index];
             return true;
@@ -1042,7 +954,7 @@ bool SensorsMeasurements::getMeasurement(const SensorType &sensor_type, const un
 
     if( sensor_type == THREE_AXIS_ANGULAR_ACCELEROMETER )
     {
-        if( sensor_index < this->pimpl->ThreeAxisAngularAccelerometerMeasurements.size() )
+        if( static_cast<std::size_t>(sensor_index) < this->pimpl->ThreeAxisAngularAccelerometerMeasurements.size() )
         {
             measurement = this->pimpl->ThreeAxisAngularAccelerometerMeasurements[sensor_index];
             return true;
@@ -1058,7 +970,7 @@ bool SensorsMeasurements::getMeasurement(const SensorType &sensor_type, const un
 
     if( sensor_type == THREE_AXIS_FORCE_TORQUE_CONTACT )
     {
-        if( sensor_index < this->pimpl->ThreeAxisForceTorqueContactMeasurements.size() )
+        if( static_cast<std::size_t>(sensor_index) < this->pimpl->ThreeAxisForceTorqueContactMeasurements.size() )
         {
             measurement = this->pimpl->ThreeAxisForceTorqueContactMeasurements[sensor_index];
             return true;
@@ -1075,9 +987,9 @@ bool SensorsMeasurements::getMeasurement(const SensorType &sensor_type, const un
     return false;
 }
 
-unsigned int SensorsMeasurements::getNrOfSensors(const SensorType& sensor_type) const
+std::size_t SensorsMeasurements::getNrOfSensors(const SensorType& sensor_type) const
 {
-    unsigned int returnVal = 0;
+    std::size_t returnVal = 0;
     switch (sensor_type)
     {
         case SIX_AXIS_FORCE_TORQUE :

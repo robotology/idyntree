@@ -65,15 +65,16 @@ jobs:
     - name: Dependencies [macOS]
       if: matrix.os == 'macOS-latest'
       run: |
-        brew install ace assimp boost eigen ipopt swig qt5 orocos-kdl
+        brew install ace assimp boost eigen ipopt swig qt5
     
     - name: Dependencies [Ubuntu]
       if: contains(matrix.os, 'ubuntu')
       run: |
         sudo apt-get update
-        sudo apt-get install git build-essential cmake libace-dev coinor-libipopt-dev  libboost-system-dev libboost-filesystem-dev \
-                             libboost-thread-dev liborocos-kdl-dev libeigen3-dev swig qtbase5-dev qtdeclarative5-dev qtmultimedia5-dev libqt5charts5-dev \
-                             libxml2-dev liburdfdom-dev libtinyxml-dev liburdfdom-dev liboctave-dev python-dev valgrind libassimp-dev
+        sudo apt-get install \
+            git build-essential cmake libace-dev coinor-libipopt-dev libeigen3-dev swig \
+            qtbase5-dev qtdeclarative5-dev qtmultimedia5-dev libqt5charts5-dev \
+            libxml2-dev liboctave-dev python-dev python3-numpy valgrind libassimp-dev
         
     - name: Cache Source-based Dependencies
       id: cache-source-deps
@@ -173,11 +174,12 @@ jobs:
               -DIDYNTREE_USES_ICUB_MAIN:BOOL=ON -DIDYNTREE_USES_Qt5:BOOL=ON  -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DIDYNTREE_USES_ASSIMP:BOOL=ON \
               -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_OCTAVE:BOOL=ON -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
 
-    - name: Enable additional Ubuntu options (Valgrind, Python, legacy KDL) [Ubuntu] 
+    - name: Enable additional Ubuntu options (Valgrind, Python) [Ubuntu] 
       if: contains(matrix.os, 'ubuntu')
       run: |
         cd build
-        cmake -DIDYNTREE_USES_PYTHON:BOOL=ON -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=ON -DIDYNTREE_USES_KDL:BOOL=ON .
+        # Assimp is disabled on Ubuntu as a workaround for https://github.com/robotology/idyntree/issues/663
+        cmake -DIDYNTREE_USES_PYTHON:BOOL=ON -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=ON .
         # For some reason, Ubuntu 18.04 image in GitHub Actions contain OpenBLAS 0.3.5, that is affected by https://github.com/xianyi/OpenBLAS/issues/2003
         # As a workaround, we test against the regular blas instead of openblas
         sudo apt-get install libblas-dev libatlas-base-dev

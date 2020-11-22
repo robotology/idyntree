@@ -2,42 +2,30 @@ classdef Box < iDynTree.SolidShape
   methods
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1171, self);
+        iDynTreeMEX(1008, self);
         self.SwigClear();
       end
     end
     function varargout = clone(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1172, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1009, self, varargin{:});
     end
-    function varargout = x(self, varargin)
-      narginchk(1, 2)
-      if nargin==1
-        nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1173, self);
-      else
-        nargoutchk(0, 0)
-        iDynTreeMEX(1174, self, varargin{1});
-      end
+    function varargout = getX(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1010, self, varargin{:});
     end
-    function varargout = y(self, varargin)
-      narginchk(1, 2)
-      if nargin==1
-        nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1175, self);
-      else
-        nargoutchk(0, 0)
-        iDynTreeMEX(1176, self, varargin{1});
-      end
+    function varargout = setX(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1011, self, varargin{:});
     end
-    function varargout = z(self, varargin)
-      narginchk(1, 2)
-      if nargin==1
-        nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1177, self);
-      else
-        nargoutchk(0, 0)
-        iDynTreeMEX(1178, self, varargin{1});
-      end
+    function varargout = getY(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1012, self, varargin{:});
+    end
+    function varargout = setY(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1013, self, varargin{:});
+    end
+    function varargout = getZ(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1014, self, varargin{:});
+    end
+    function varargout = setZ(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1015, self, varargin{:});
     end
     function self = Box(varargin)
       self@iDynTree.SolidShape(SwigRef.Null);
@@ -46,7 +34,7 @@ classdef Box < iDynTree.SolidShape
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1179, varargin{:});
+        tmp = iDynTreeMEX(1016, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end

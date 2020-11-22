@@ -11,8 +11,9 @@ macro(add_integration_test testname)
     set(testbinary ${testname}IntegrationTest)
     set(testtarget   IntegrationTest${testname})
     add_executable(${testbinary} ${testsrc})
-    target_include_directories(${testbinary} PRIVATE ${EIGEN3_INCLUDE_DIR})
-    target_link_libraries(${testbinary} idyntree-core idyntree-model idyntree-modelio-urdf idyntree-high-level idyntree-sensors idyntree-estimation idyntree-solid-shapes idyntree-testmodels)
+    target_link_libraries(${testbinary} PRIVATE idyntree-core idyntree-model idyntree-modelio-urdf
+                                                idyntree-high-level idyntree-sensors idyntree-estimation
+                                                idyntree-solid-shapes idyntree-testmodels Eigen3::Eigen)
     # Setting explicitly the WORKING_DIRECTORY is necessary to make sure that meshes are correctly loaded,
     # as a workaround for https://github.com/robotology/idyntree/issues/291
     add_test(NAME ${testtarget} COMMAND ${testbinary} WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/src/tests/data)
@@ -27,8 +28,9 @@ macro(add_integration_test_no_valgrind testname)
     set(testbinary ${testname}IntegrationTest)
     set(testtarget   IntegrationTest${testname})
     add_executable(${testbinary} ${testsrc})
-    target_include_directories(${testbinary} PRIVATE ${EIGEN3_INCLUDE_DIR})
-    target_link_libraries(${testbinary} idyntree-core idyntree-model idyntree-modelio-urdf idyntree-high-level idyntree-sensors idyntree-estimation  idyntree-solid-shapes idyntree-testmodels)
+    target_link_libraries(${testbinary} PRIVATE idyntree-core idyntree-model idyntree-modelio-urdf
+                                                idyntree-high-level idyntree-sensors idyntree-estimation
+                                                idyntree-solid-shapes idyntree-testmodels Eigen3::Eigen)
     add_test(NAME ${testtarget} COMMAND ${testbinary})
 endmacro()
 
@@ -37,8 +39,8 @@ macro(add_integration_exe testname)
     set(testbinary ${testname}IntegrationTest)
     set(testtarget   IntegrationTest${testname})
     add_executable(${testbinary} ${testsrc})
-    target_include_directories(${testbinary} PRIVATE ${EIGEN3_INCLUDE_DIR})
-    target_link_libraries(${testbinary} idyntree-core idyntree-model idyntree-modelio-urdf idyntree-high-level idyntree-testmodels)
+    target_link_libraries(${testbinary} PRIVATE idyntree-core idyntree-model idyntree-modelio-urdf
+                                                idyntree-high-level idyntree-testmodels Eigen3::Eigen)
 endmacro()
 
 add_integration_test(Dynamics)

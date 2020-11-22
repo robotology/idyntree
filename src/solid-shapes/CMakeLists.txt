@@ -7,17 +7,16 @@ add_library(${libraryname} ${IDYNTREE_SOLID_SHAPES_HEADERS} ${IDYNTREE_SOLID_SHA
 add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
+                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 
 
-target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model)
-target_include_directories(${libraryname} PRIVATE ${EIGEN3_INCLUDE_DIR})
-
+target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model
+                                     PRIVATE Eigen3::Eigen)
 
 if (IDYNTREE_USES_ASSIMP)
   target_compile_definitions(${libraryname} PRIVATE IDYNTREE_USES_ASSIMP)
   # Depending on the assimp version, the way of consuming assimp changes
-  # In assimp 5.0, only the imported assimp::assimp target is defined, in earlier 
+  # In assimp 5.0, only the imported assimp::assimp target is defined, in earlier
   # versions (that do no export the version to CMake) the ASSIMP_* variables are defined
   # We assume that on WIN32 we always have a valid imported target as a workaround for 
   # https://github.com/microsoft/vcpkg/issues/14255

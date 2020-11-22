@@ -15,8 +15,8 @@
 #include <iDynTree/Core/SpatialAcc.h>
 #include <iDynTree/Core/SpatialMomentum.h>
 #include <iDynTree/Core/Utils.h>
-#include <iDynTree/Core/PrivateSemanticsMacros.h>
 
+#include <iDynTree/Core/EigenHelpers.h>
 
 #include <cassert>
 #include <iostream>
@@ -32,7 +32,9 @@ namespace iDynTree
     static SpatialMotionForceVectorT changePointOfMotionT(const Position & pos,
                                                           const SpatialMotionForceVectorT & other)
     {
-        return SpatialMotionForceVectorT(other.getLinearVec3().changePoint(pos, other.getAngularVec3()),
+        GeomVector3 newLinearVec;
+        toEigen(newLinearVec) = toEigen(other.getLinearVec3()) + toEigen(pos).cross(toEigen(other.getAngularVec3()));
+        return SpatialMotionForceVectorT(newLinearVec,
                                          other.getAngularVec3());
     }
 
@@ -40,16 +42,15 @@ namespace iDynTree
     static SpatialMotionForceVectorT changePointOfForceT(const Position & pos,
                                                          const SpatialMotionForceVectorT & other)
     {
+        GeomVector3 newAngularVec;
+        toEigen(newAngularVec) = toEigen(other.getAngularVec3()) + toEigen(pos).cross(toEigen(other.getLinearVec3()));
         return SpatialMotionForceVectorT(other.getLinearVec3(),
-                                         other.getAngularVec3().changePoint(pos, other.getLinearVec3()));
+                                         newAngularVec);
     }
 
     /**
      * class Method definitions
      */
-
-    // For all the constructors and functions below, checking the semantics while debugging
-    // should always be done before the actual composition.
 
     Position::Position(): PositionRaw()
     {
@@ -61,7 +62,6 @@ namespace iDynTree
 
     Position::Position(const Position & other): PositionRaw(other)
     {
-        iDynTreeSemanticsOp(this->semantics = other.getSemantics());
     }
 
     Position::Position(const PositionRaw& other): PositionRaw(other)
@@ -69,33 +69,18 @@ namespace iDynTree
 
     }
 
-    Position::Position(const PositionRaw & otherPos, const PositionSemantics & /*otherSem*/): PositionRaw(otherPos)
+    Position::Position(Span<const double> other): PositionRaw(other)
     {
-        iDynTreeSemanticsOp(this->semantics = otherSem);
     }
-
-
-    PositionSemantics& Position::getSemantics()
-    {
-        return this->semantics;
-    }
-
-    const PositionSemantics& Position::getSemantics() const
-    {
-        return this->semantics;
-    }
-
 
     const Position& Position::changePoint(const Position& newPoint)
     {
-        iDynTreeAssert( this->semantics.changePoint(newPoint.semantics) );
         this->PositionRaw::changePoint(newPoint);
         return *this;
     }
 
     const Position& Position::changeRefPoint(const Position& newRefPoint)
     {
-        iDynTreeAssert( this->semantics.changeRefPoint(newRefPoint.semantics) );
         this->PositionRaw::changeRefPoint(newRefPoint);
         return *this;
     }
@@ -108,17 +93,13 @@ namespace iDynTree
 
     Position Position::compose(const Position& op1, const Position& op2)
     {
-        PositionSemantics resultSemantics;
-        iDynTreeAssert( PositionSemantics::compose(op1.semantics,op2.semantics,resultSemantics) );
-        return Position(PositionRaw::compose(op1,op2),resultSemantics);
+        return Position(PositionRaw::compose(op1,op2));
     }
 
 
     Position Position::inverse(const Position& op)
     {
-        PositionSemantics resultSemantics;
-        iDynTreeAssert( PositionSemantics::inverse(op.semantics,resultSemantics) );
-        return Position(PositionRaw::inverse(op),resultSemantics);
+        return Position(PositionRaw::inverse(op));
     }
 
     SpatialMotionVector Position::changePointOf(const SpatialMotionVector & other) const
@@ -197,8 +178,6 @@ namespace iDynTree
         std::stringstream ss;
 
         ss << PositionRaw::toString();
-        iDynTreeSemanticsOp(ss << " " << semantics.toString());
-
         return ss.str();
     }
 

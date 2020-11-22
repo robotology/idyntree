@@ -22,7 +22,6 @@
 #include <iDynTree/Core/MatrixFixSize.h>
 
 #include <iDynTree/Core/PrivateUtils.h>
-#include <iDynTree/Core/PrivateSemanticsMacros.h>
 #include <iDynTree/Core/Utils.h>
 
 #include <Eigen/Dense>
@@ -84,27 +83,22 @@ spatialVelType transformTwistEfficient(const Transform & op1, const spatialVelTy
  */
 
 Transform::Transform(): pos(),
-                        rot(),
-                        semantics(pos.getSemantics(), rot.getSemantics())
+                        rot()
 {
 }
 
 Transform::Transform(const Rotation& _rot, const Position& origin): pos(origin),
-                                                                    rot(_rot),
-                                                                    semantics(pos.getSemantics(), rot.getSemantics())
+                                                                    rot(_rot)
 {
-    iDynTreeSemanticsOp(this->semantics.check_position2rotationConsistency(pos.getSemantics(), rot.getSemantics()));
 }
 
 Transform::Transform(const Matrix4x4& transform)
-: semantics(pos.getSemantics(), rot.getSemantics())
 {
     fromHomogeneousTransform(transform);
 }
 
 Transform::Transform(const Transform& other): pos(other.getPosition()),
-                                              rot(other.getRotation()),
-                                              semantics(pos.getSemantics(), rot.getSemantics())
+                                              rot(other.getRotation())
 {
 }
 
@@ -113,19 +107,7 @@ Transform& Transform::operator=(const Transform& other)
     if (this == &other) return *this;
     this->pos = other.getPosition();
     this->rot = other.getRotation();
-    this->semantics.setPositionSemantics(other.getPosition().getSemantics());
-    this->semantics.setRotationSemantics(other.getRotation().getSemantics());
     return *this;
-}
-
-TransformSemantics& Transform::getSemantics()
-{
-    return this->semantics;
-}
-
-const TransformSemantics& Transform::getSemantics() const
-{
-    return this->semantics;
 }
 
 const Position& Transform::getPosition() const
@@ -140,22 +122,12 @@ const Rotation& Transform::getRotation() const
 
 void Transform::setPosition(const Position& position)
 {
-    // check consistency of setted position with existing rotation
-    // and set the semantics. Here we could just have done the check,
-    // without setting the semantics, because they are set in the
-    // processing that follows.
-    iDynTreeAssert(this->semantics.setPositionSemantics(position.getSemantics()));
-
     // set position
     this->pos = position;
 }
 
 void Transform::setRotation(const Rotation& rotation)
 {
-    // check consistency of setted rotation with existing position
-    // and set the semantics.
-    iDynTreeAssert(this->semantics.setRotationSemantics(rotation.getSemantics()));
-
     // set rotation
     this->rot = rotation;
 }
@@ -194,56 +166,32 @@ Position Transform::operator*(const Position& op2) const
 
 Twist Transform::operator*(const Twist& op2) const
 {
-#ifdef IDYNTREE_DONT_USE_SEMANTICS
     return transformTwistEfficient(*this,op2);
-#else
-    return transform<Twist>(*this,op2);
-#endif
 }
 
 SpatialForceVector Transform::operator*(const SpatialForceVector& op2) const
 {
-#ifdef IDYNTREE_DONT_USE_SEMANTICS
     return transformWrenchEfficient(*this,op2);
-#else
-    return transform<SpatialForceVector>(*this,op2);
-#endif
 }
 
 Wrench Transform::operator*(const Wrench& op2) const
 {
-#ifdef IDYNTREE_DONT_USE_SEMANTICS
     return transformWrenchEfficient(*this,op2);
-#else
-    return transform<Wrench>(*this,op2);
-#endif
 }
 
 SpatialMomentum Transform::operator*(const SpatialMomentum& op2) const
 {
-#ifdef IDYNTREE_DONT_USE_SEMANTICS
     return transformWrenchEfficient(*this,op2);
-#else
-    return transform<SpatialMomentum>(*this,op2);
-#endif
 }
 
 SpatialAcc Transform::operator*(const SpatialAcc& op2) const
 {
-#ifdef IDYNTREE_DONT_USE_SEMANTICS
     return transformTwistEfficient(*this,op2);
-#else
-    return transform<Twist>(*this,op2);
-#endif
 }
 
 SpatialMotionVector Transform::operator*(const SpatialMotionVector& op2) const
 {
-#ifdef IDYNTREE_DONT_USE_SEMANTICS
     return transformTwistEfficient(*this,op2);
-#else
-    return transform<SpatialMotionVector>(*this,op2);
-#endif
 }
 
 
@@ -286,8 +234,6 @@ std::string Transform::toString() const
 
     ss << rot.toString() << " "
        << pos.toString();
-
-    iDynTreeSemanticsOp(ss << " " << semantics.toString());
 
     ss << std::endl;
 
@@ -527,9 +473,6 @@ std::string Transform::reservedToString() const
     SpatialMotionVector Transform::log() const
     {
         SpatialMotionVector logRes;
-
-        // Understand if there is a meaningful
-        // semantics for this operation and if it exists use it
 
         // the linear part is affected by the left Jacobian inverse of SO(3)
         auto omega = this->getRotation().log();

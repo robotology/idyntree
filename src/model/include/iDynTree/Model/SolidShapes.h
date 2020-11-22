@@ -17,12 +17,6 @@
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Model/Indices.h>
 
-// TODO: Deprecation of public attributes.
-// - Ensure everybody migrated to use getters and setters.
-// - Move public attributes into private section and rename them with member
-//   convention (i.e. m_xxx).
-// - Bonus: change all the getters from `getXXX()` to `xxx()` (this can't be
-//   done now as you can't have a function with the same name as the variable).
 namespace iDynTree
 {
     class Material {
@@ -116,25 +110,19 @@ namespace iDynTree
         const Box* asBox() const;
         const Cylinder* asCylinder() const;
         const ExternalMesh* asExternalMesh() const;
-
-        IDYNTREE_DEPRECATED_WITH_MSG("Please use the setter and getters.")
+    private:
         std::string name;
         /**
          * True if the name is valid, false otherwise.
          */
-        IDYNTREE_DEPRECATED_WITH_MSG("Use isNameValid().")
         bool nameIsValid;
 
-        IDYNTREE_DEPRECATED_WITH_MSG("Please use the setter and getters.")
         Transform link_H_geometry;
 
         /**
          * Material of the geometry, encoded as a rgba vector.
          */
-        IDYNTREE_DEPRECATED_WITH_MSG("Please use the setter and getters and the Material class.")
         Vector4 material;
-
-    private:
         bool m_isMaterialSet;
         Material m_material;
     };
@@ -156,7 +144,7 @@ namespace iDynTree
          */
         void setRadius(double radius);
 
-        IDYNTREE_DEPRECATED_WITH_MSG("Please use the setter and getters.")
+    private:
         double radius;
     };
 
@@ -193,7 +181,7 @@ namespace iDynTree
          * Sets the y side length.
          */
         void setY(double y);
-    
+
         /**
          * Returns the current z side length.
          */
@@ -204,11 +192,9 @@ namespace iDynTree
          */
         void setZ(double z);
 
-        IDYNTREE_DEPRECATED_WITH_MSG("Please use the setter and getters.")
+    private:
         double x;
-        IDYNTREE_DEPRECATED_WITH_MSG("Please use the setter and getters.")
         double y;
-        IDYNTREE_DEPRECATED_WITH_MSG("Please use the setter and getters.")
         double z;
     };
 
@@ -238,10 +224,8 @@ namespace iDynTree
          */
         void setRadius(double radius);
 
-        IDYNTREE_DEPRECATED_WITH_MSG("Please use the setter and getters.")
+    private:
         double length;
-
-        IDYNTREE_DEPRECATED_WITH_MSG("Please use the setter and getters.")
         double radius;
     };
 
@@ -271,10 +255,8 @@ namespace iDynTree
          */
         void setScale(const iDynTree::Vector3& scale);
 
-        IDYNTREE_DEPRECATED_WITH_MSG("Please use the setter and getters.")
+    private:
         std::string filename;
-
-        IDYNTREE_DEPRECATED_WITH_MSG("Please use the setter and getters.")
         iDynTree::Vector3 scale;
     };
 
@@ -282,6 +264,10 @@ namespace iDynTree
     {
     private:
         ModelSolidShapes& copy(const ModelSolidShapes& other);
+        /**
+         * Storage ot ModelSolidShapes.
+         */
+        std::vector< std::vector<SolidShape *> > linkSolidShapes;
 
     public:
         ModelSolidShapes();
@@ -298,12 +284,6 @@ namespace iDynTree
         std::vector<std::vector<SolidShape *> >& getLinkSolidShapes();
 
         const std::vector<std::vector<SolidShape *> >& getLinkSolidShapes() const;
-
-        IDYNTREE_DEPRECATED_WITH_MSG("Please use getLinkSolidShapes().")
-        /**
-         * Storage ot ModelSolidShapes.
-         */
-        std::vector< std::vector<SolidShape *> > linkSolidShapes;
     };
 
 }

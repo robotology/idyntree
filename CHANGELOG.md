@@ -7,11 +7,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2020-11-22
+
+### Added
+- Added a new CMake option `IDYNTREE_COMPILES_TOOLS` to disable compilation of iDynTree tools.
+- Added a `KinDynComputations::getCentroidalTotalMomentumJacobian()` method (https://github.com/robotology/idyntree/pull/706)
+- iDynTree now supports build compiled as a shared library also on Windows.
+- When used in Python, new iDynTree objects can be constructed from generic iterable objects and NumPy arrays (`*.FromPython`),
+  and existing objects can be converted to NumPy arrays (`*.toNumPy`) (https://github.com/robotology/idyntree/pull/726).
+- iDynTree Python bindings can now be installed with `pip3 install git+https://github.com/robotology/idyntree.git` (https://github.com/robotology/idyntree/pull/733).
+- Implement the MatrixView class (https://github.com/robotology/idyntree/pull/734)
+- Add the possibility to use `MatrixView` and `Span` as input/output objects for `KinDynComputations` class (https://github.com/robotology/idyntree/pull/736).
+- New Python bindings based on [pybind11](https://github.com/pybind/pybind11).
+  They can be compiled by specifying the CMake option `IDYNTREE_USES_PYTHON_PYBIND11`. **Note** that the generated bindings are not
+  compatible with the SWIG-generated bindings (e.g. functions have different names). They can be imported as `idyntree.pybind` Python module.
+
+### Fixed
+- Fixed bug in `yarprobotstatepublisher` that caused segmentation fault each time an unknown joint name was read from the input joint states topic (https://github.com/robotology/idyntree/pull/719)
+- Fixed bug in `CubicSpline()` that causes wrong coefficients calculation when boundary conditions are set (https://github.com/robotology/idyntree/pull/723)
+
+### Changed
+- By default  iDynTree is compiled as a shared library also on Windows. The `BUILD_SHARED_LIBS` CMake variable can be used to
+  control if iDynTree is built as a shared or a static library.
+- The Python method `*.fromPyList` is replaced by `*.FromPython` (https://github.com/robotology/idyntree/pull/726).
+- The minimum required CMake version to configure and compile iDynTree is now 3.16 (https://github.com/robotology/idyntree/pull/732).
+- The Python package name of the SWIG bindings changed from `iDynTree` to `idyntree.bindings` (https://github.com/robotology/idyntree/pull/733, https://github.com/robotology/idyntree/pull/735). To continue referring to iDynTree classes as `iDynTree.<ClassName>`, you can change your `import iDynTree` statements to `import idyntree.bindings as iDynTree`. Otherwise, you can use `import idyntree.bindings` to refer them as `idyntree.bindings.<ClassName>`.
+- Improve the use of `const` keyword  in `KinDynComputations`(https://github.com/robotology/idyntree/pull/736).
+- Cleanup size and indices attributes. For consistency with std and Eigen, all sizes and indices have been changed to use std::size_t for unsigned quantities and std::ptrdiff_t for signed quantities. The only exception is the index stored in the triplets of the iDynTree::SparseMatrix data structure, that have been left defined to int for compatibility with Eigen (https://github.com/robotology/idyntree/pull/767).
+
+### Removed
+- Remove the CMake option IDYNTREE_USES_KDL and all the classes available when enabling it. They were deprecated in iDynTree 1.0 .
+- Remove the semantics related classes. They were deprecated in iDynTree 1.0 .
+- Remove unnecessary warning messages from [ModelSensorsTransformers.cpp](https://github.com/robotology/idyntree/blob/master/src/sensors/src/ModelSensorsTransformers.cpp) and [URDFDocument.cpp](https://github.com/robotology/idyntree/blob/master/src/model_io/urdf/src/URDFDocument.cpp) (see [PR 718](https://github.com/robotology/idyntree/pull/718))
+- Python2 will not be maintained past 2020 and its support has been dropped (https://github.com/robotology/idyntree/pull/726).
+- Remove the need to call `iDynTree.init_helpers()` and `iDynTree.init_numpy_helpers()` from Python (https://github.com/robotology/idyntree/pull/726).
+- Remove headers and methods that were deprecated in iDynTree 1.0 (https://github.com/robotology/idyntree/pull/751).
+
 ## [1.2.0] - 2020-10-17
 
 ### Added
 - Added the possibility of reusing an already opened figure with the MATLAB iDynTree Visualizer either if the name coincides or by using gcf.
-
 
 ### Changed
 - `SolidShapes.h` public API **changes**. API changes are back compatible, but as the **ABI has changed**, this means a re-compilation of the dependent projects is needed. In details:

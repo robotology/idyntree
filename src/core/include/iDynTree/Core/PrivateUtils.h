@@ -35,8 +35,7 @@ namespace iDynTree
     Eigen::Matrix3d skew(const Eigen::Vector3d & vec);
 
     /**
-     * Efficient version of the copy from one 6D vector to another,
-     * used when semantics is disabled.
+     * Efficient version of the copy from one 6D vector to another.
      */
     template <typename vector6d>
     void efficient6dCopy(vector6d* pthis, const vector6d& other)
@@ -47,8 +46,7 @@ namespace iDynTree
     }
 
     /**
-     * Efficient version of the sum of two 6D vectors,
-     * used when semantics is disabled.
+     * Efficient version of the sum of two 6D vectors.
      */
     template <typename vector6d>
     vector6d efficient6dSum(const vector6d & op1, const vector6d & op2)
@@ -60,8 +58,7 @@ namespace iDynTree
     }
 
     /**
-     * Efficient version of the different of two 6D vectors,
-     * used when semantics is disabled.
+     * Efficient version of the different of two 6D vectors.
      */
     template <typename vector6d>
     vector6d efficient6ddifference(const vector6d & op1, const vector6d & op2)

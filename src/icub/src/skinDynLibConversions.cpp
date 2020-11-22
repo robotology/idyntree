@@ -86,7 +86,7 @@ bool skinDynLibConversionsHelper::getSkinDynLibAlias(const Model& model,
 }
 
 bool skinDynLibConversionsHelper::getSkinDynLibAlias(const Model& model,
-                                                     const int iDynTree_link_index, int & iDynTree_frame_index,
+                                                     const LinkIndex iDynTree_link_index, FrameIndex & iDynTree_frame_index,
                                                      int & skinDynLib_body_part, int & skinDynLib_link_index) const
 {
   if( iDynTree_link_index < 0 || iDynTree_link_index >= static_cast<LinkIndex>(model.getNrOfLinks()) ) return false;
@@ -131,8 +131,8 @@ bool skinDynLibConversionsHelper::removeSkinDynLibAlias(const Model& model, std:
 
 bool skinDynLibConversionsHelper::skinDynLib2iDynTree(const int skinDynLib_body_part,
                                                       const int skinDynLib_link_index,
-                                                      int & iDynTree_link_index,
-                                                       int & iDynTree_frame_index) const
+                                                      LinkIndex & iDynTree_link_index,
+                                                      FrameIndex & iDynTree_frame_index) const
 {
     skinDynLibLinkID skinID;
     skinID.body_part = skinDynLib_body_part;

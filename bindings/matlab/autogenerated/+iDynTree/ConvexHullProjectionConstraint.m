@@ -4,118 +4,118 @@ classdef ConvexHullProjectionConstraint < SwigRef
       this = iDynTreeMEX(3, self);
     end
     function varargout = setActive(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2130, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1901, self, varargin{:});
     end
     function varargout = isActive(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2131, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1902, self, varargin{:});
     end
     function varargout = getNrOfConstraints(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2132, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1903, self, varargin{:});
     end
     function varargout = projectedConvexHull(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(2133, self);
+        varargout{1} = iDynTreeMEX(1904, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(2134, self, varargin{1});
+        iDynTreeMEX(1905, self, varargin{1});
       end
     end
     function varargout = A(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(2135, self);
+        varargout{1} = iDynTreeMEX(1906, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(2136, self, varargin{1});
+        iDynTreeMEX(1907, self, varargin{1});
       end
     end
     function varargout = b(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(2137, self);
+        varargout{1} = iDynTreeMEX(1908, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(2138, self, varargin{1});
+        iDynTreeMEX(1909, self, varargin{1});
       end
     end
     function varargout = P(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(2139, self);
+        varargout{1} = iDynTreeMEX(1910, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(2140, self, varargin{1});
+        iDynTreeMEX(1911, self, varargin{1});
       end
     end
     function varargout = Pdirection(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(2141, self);
+        varargout{1} = iDynTreeMEX(1912, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(2142, self, varargin{1});
+        iDynTreeMEX(1913, self, varargin{1});
       end
     end
     function varargout = AtimesP(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(2143, self);
+        varargout{1} = iDynTreeMEX(1914, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(2144, self, varargin{1});
+        iDynTreeMEX(1915, self, varargin{1});
       end
     end
     function varargout = o(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(2145, self);
+        varargout{1} = iDynTreeMEX(1916, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(2146, self, varargin{1});
+        iDynTreeMEX(1917, self, varargin{1});
       end
     end
     function varargout = buildConvexHull(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2147, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1918, self, varargin{:});
     end
     function varargout = supportFrameIndices(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(2148, self);
+        varargout{1} = iDynTreeMEX(1919, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(2149, self, varargin{1});
+        iDynTreeMEX(1920, self, varargin{1});
       end
     end
     function varargout = absoluteFrame_X_supportFrame(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(2150, self);
+        varargout{1} = iDynTreeMEX(1921, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(2151, self, varargin{1});
+        iDynTreeMEX(1922, self, varargin{1});
       end
     end
     function varargout = project(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2152, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1923, self, varargin{:});
     end
     function varargout = computeMargin(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2153, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1924, self, varargin{:});
     end
     function varargout = setProjectionAlongDirection(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2154, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1925, self, varargin{:});
     end
     function varargout = projectAlongDirection(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(2155, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1926, self, varargin{:});
     end
     function self = ConvexHullProjectionConstraint(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
@@ -123,14 +123,14 @@ classdef ConvexHullProjectionConstraint < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(2156, varargin{:});
+        tmp = iDynTreeMEX(1927, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(2157, self);
+        iDynTreeMEX(1928, self);
         self.SwigClear();
       end
     end

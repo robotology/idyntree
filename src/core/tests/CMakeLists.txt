@@ -5,8 +5,7 @@ macro(add_unit_test classname)
     set(testbinary ${classname}UnitTest)
     set(testname   UnitTest${classname})
     add_executable(${testbinary} ${testsrc})
-    target_include_directories(${testbinary} PRIVATE ${EIGEN3_INCLUDE_DIR})
-    target_link_libraries(${testbinary} idyntree-core)
+    target_link_libraries(${testbinary} PRIVATE idyntree-core Eigen3::Eigen)
     add_test(NAME ${testname} COMMAND ${testbinary})
 
     if(IDYNTREE_RUN_VALGRIND_TESTS)
@@ -33,6 +32,7 @@ add_unit_test(TransformFromMatrix4x4)
 add_unit_test(CubicSpline)
 add_unit_test(Span)
 add_unit_test(SO3Utils)
+add_unit_test(MatrixView)
 
 
 # We have also some usages of the API that we want to make sure that do not compile
@@ -45,8 +45,7 @@ macro(add_compilation_error_test name)
     add_executable(${testbinary} ${testsrc})
     set_target_properties(${testbinary} PROPERTIES EXCLUDE_FROM_ALL TRUE
                                                    EXCLUDE_FROM_DEFAULT_BUILD TRUE)
-    target_include_directories(${testbinary} PRIVATE ${EIGEN3_INCLUDE_DIR})
-    target_link_libraries(${testbinary} idyntree-core)
+    target_link_libraries(${testbinary} PRIVATE idyntree-core Eigen3::Eigen)
 
     add_test(NAME ${testname}
              COMMAND ${CMAKE_COMMAND} --build . --target ${testbinary} --config $<CONFIGURATION>

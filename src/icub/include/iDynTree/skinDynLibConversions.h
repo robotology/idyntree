@@ -128,7 +128,7 @@ public:
      */
     bool getSkinDynLibAlias(const Model & model,
                             const LinkIndex iDynTree_link_index,
-                                  LinkIndex & iDynTree_frame_index,
+                                  FrameIndex & iDynTree_frame_index,
                              int & skinDynLib_body_part,
                              int & skinDynLib_link_index) const;
 
@@ -137,8 +137,8 @@ public:
      */
     bool skinDynLib2iDynTree(const int skinDynLib_body_part,
                              const int skinDynLib_link_index,
-                             int & iDynTree_link_index,
-                             int & iDynTree_frame_index) const;
+                             LinkIndex & iDynTree_link_index,
+                             FrameIndex & iDynTree_frame_index) const;
     /**
      * Remove a alias in the form (body_part, link_index) for a link
      */

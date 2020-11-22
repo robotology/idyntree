@@ -31,10 +31,10 @@ namespace iDynTree
         std::vector<iDynTree::Transform> m_linkPos;
 
     public:
-        LinkPositions(unsigned int nrOfLinks = 0);
+        LinkPositions(std::size_t nrOfLinks = 0);
         LinkPositions(const iDynTree::Model & model);
 
-        void resize(unsigned int nrOfLinks);
+        void resize(std::size_t nrOfLinks);
         void resize(const iDynTree::Model & model);
 
         bool isConsistent(const Model& model) const;
@@ -73,7 +73,7 @@ namespace iDynTree
          *
          * @param[in] nrOfLinks the size of the vector.
          */
-        LinkWrenches(unsigned int nrOfLinks = 0);
+        LinkWrenches(std::size_t nrOfLinks = 0);
         LinkWrenches(const iDynTree::Model & model);
 
         /**
@@ -81,7 +81,7 @@ namespace iDynTree
          *
          * @param[in] nrOfLinks new size for the vector
          */
-        void resize(unsigned int nrOfLinks);
+        void resize(std::size_t nrOfLinks);
         void resize(const iDynTree::Model & model);
 
         bool isConsistent(const Model& model) const;
@@ -138,10 +138,10 @@ namespace iDynTree
         std::vector<iDynTree::SpatialInertia> m_linkInertials;
 
     public:
-        LinkInertias(unsigned int nrOfLinks = 0);
+        LinkInertias(std::size_t nrOfLinks = 0);
         LinkInertias(const iDynTree::Model & model);
 
-        void resize(unsigned int nrOfLinks);
+        void resize(std::size_t nrOfLinks);
         void resize(const iDynTree::Model & model);
 
         bool isConsistent(const Model& model) const;
@@ -163,10 +163,10 @@ namespace iDynTree
         std::vector<iDynTree::ArticulatedBodyInertia> m_linkABIs;
 
     public:
-        LinkArticulatedBodyInertias(unsigned int nrOfLinks = 0);
+        LinkArticulatedBodyInertias(std::size_t nrOfLinks = 0);
         LinkArticulatedBodyInertias(const iDynTree::Model & model);
 
-        void resize(unsigned int nrOfLinks);
+        void resize(std::size_t nrOfLinks);
         void resize(const iDynTree::Model & model);
 
         bool isConsistent(const Model& model) const;
@@ -186,10 +186,10 @@ namespace iDynTree
         std::vector<iDynTree::Twist> m_linkTwist;
 
     public:
-        LinkVelArray(unsigned int nrOfLinks = 0);
+        LinkVelArray(std::size_t nrOfLinks = 0);
         LinkVelArray(const iDynTree::Model & model);
 
-        void resize(unsigned int nrOfLinks);
+        void resize(std::size_t nrOfLinks);
         void resize(const iDynTree::Model & model);
 
         bool isConsistent(const Model& model) const;
@@ -214,10 +214,10 @@ namespace iDynTree
         std::vector<iDynTree::SpatialAcc> m_linkAcc;
 
     public:
-        LinkAccArray(unsigned int nrOfLinks = 0);
+        LinkAccArray(std::size_t nrOfLinks = 0);
         LinkAccArray(const iDynTree::Model & model);
 
-        void resize(unsigned int nrOfLinks);
+        void resize(std::size_t nrOfLinks);
         void resize(const iDynTree::Model & model);
 
         bool isConsistent(const Model& model) const;
@@ -225,7 +225,7 @@ namespace iDynTree
         iDynTree::SpatialAcc & operator()(const LinkIndex link);
         const iDynTree::SpatialAcc & operator()(const LinkIndex link) const;
 
-        unsigned int getNrOfLinks() const;
+        std::size_t getNrOfLinks() const;
 
         std::string toString(const Model & model) const;
 

@@ -88,8 +88,19 @@ void checkCopyOperator()
 
 }
 
+void checkMatrixView()
+{
+    MatrixDynSize test1, testToMatrixView;
+    testToMatrixView.resize(15, 12);
+    iDynTree::getRandomMatrix(testToMatrixView);
+
+    test1 = iDynTree::make_matrix_view(testToMatrixView);
+    ASSERT_EQUAL_MATRIX(test1, testToMatrixView);
+}
+
 int main()
 {
     checkCapacity();
     checkCopyOperator();
+    checkMatrixView();
 }

@@ -9,7 +9,6 @@
 set(IDYNTREE_SENSORS_HEADERS include/iDynTree/Sensors/AllSensorsTypes.h
                              include/iDynTree/Sensors/Sensors.h
                              include/iDynTree/Sensors/SixAxisForceTorqueSensor.h
-                             include/iDynTree/Sensors/SixAxisFTSensor.h
                              include/iDynTree/Sensors/GyroscopeSensor.h
                              include/iDynTree/Sensors/AccelerometerSensor.h
                              include/iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h
@@ -36,14 +35,10 @@ add_library(${libraryname} ${IDYNTREE_SENSORS_SOURCES} ${IDYNTREE_SENSORS_HEADER
 add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
-                                          PRIVATE ${EIGEN3_INCLUDE_DIR})
+                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 
-#include system headers
-include_directories(SYSTEM AFTER ${orocos_kdl_INCLUDE_DIRS}
-                                 ${EIGEN3_INCLUDE_DIR})
-
-target_link_libraries(${libraryname} idyntree-core idyntree-model)
+target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model
+                                     PRIVATE Eigen3::Eigen)
 
 
 target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})

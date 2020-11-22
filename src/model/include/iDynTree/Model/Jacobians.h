@@ -27,6 +27,9 @@ namespace iDynTree
     class JointPosDoubleArray;
     class MatrixDynSize;
 
+    template<typename>
+    class MatrixView;
+
     /**
      * \ingroup iDynTreeModel
      *
@@ -49,7 +52,7 @@ namespace iDynTree
                                           const LinkIndex linkIndex,
                                           const Transform & jacobFrame_X_world,
                                           const Transform & baseFrame_X_jacobBaseFrame,
-                                                MatrixDynSize & jacobian);
+                                          const MatrixView<double>& jacobian);
 
 
 }

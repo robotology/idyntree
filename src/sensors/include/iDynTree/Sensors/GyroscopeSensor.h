@@ -12,10 +12,11 @@
 #ifndef GYROSCOPE_HPP
 #define GYROSCOPE_HPP
 
+#include <iDynTree/Core/GeomVector3.h>
+
 namespace iDynTree
 {
     class Transform;
-    class AngularMotionVector3;
     typedef AngularMotionVector3 AngVelocity;
 }
 
@@ -121,10 +122,6 @@ namespace iDynTree {
          * Documented in Sensor
          */
         bool updateIndices(const Model & model);
-
-        // Deprecated
-        IDYNTREE_DEPRECATED_WITH_MSG("Use updateIndices() instead")
-        bool updateIndeces(const Model & model);
 
         /**
          * Predict sensor measurement when given the parent link spatial velocity, expressed

@@ -72,14 +72,14 @@ namespace iDynTree {
          *
          * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
          */
-        bool setFirstLinkSensorTransform(const int link_index, const iDynTree::Transform & link_H_sensor) const;
+        bool setFirstLinkSensorTransform(const LinkIndex link_index, const iDynTree::Transform & link_H_sensor) const;
 
         /**
          * Set the transform from the sensor to a the second link attached to the sensor.
          *
          * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
          */
-        bool setSecondLinkSensorTransform(const int link_index, const iDynTree::Transform & link_H_sensor) const;
+        bool setSecondLinkSensorTransform(const LinkIndex link_index, const iDynTree::Transform & link_H_sensor) const;
 
         /**
          * Get the index of the first link attached to the sensor.
@@ -119,7 +119,7 @@ namespace iDynTree {
         bool setParentJoint(const std::string &parent);
 
         // Documented in JointSensor
-        bool setParentJointIndex(const int &parent_index);
+        bool setParentJointIndex(const JointIndex &parent_index);
 
         /**
          * The Six Axis Force Torque sensor measure the Force Torque (wrench)
@@ -127,7 +127,7 @@ namespace iDynTree {
          * on which the measured force is applied.
          * @return the index of the link on which the measure force is applied.
          */
-        bool setAppliedWrenchLink(const int applied_wrench_index);
+        bool setAppliedWrenchLink(const LinkIndex applied_wrench_index);
 
         /**
          * Documented in the sensor
@@ -161,23 +161,19 @@ namespace iDynTree {
          */
         bool updateIndices(const Model & model);
 
-        // Deprecated
-        IDYNTREE_DEPRECATED_WITH_MSG("Use updateIndices() instead")
-        bool updateIndeces(const Model & model);
-
         /**
          * The Six Axis Force Torque sensor measure the Force Torque (wrench)
          * applied by a link on another link. This method returns the link
          * on which the measured force is applied.
          * @return the index of the link on which the measure force is applied.
          */
-        int getAppliedWrenchLink() const;
+        LinkIndex getAppliedWrenchLink() const;
 
         /**
          * Check if a given link is attached to this FT sensor.
          * @return true if link_index is attached to the ft sensor, false otherwise
          */
-        bool isLinkAttachedToSensor(const int link_index) const;
+        bool isLinkAttachedToSensor(const LinkIndex link_index) const;
 
 
         /**
@@ -185,7 +181,7 @@ namespace iDynTree {
          *
          * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
          */
-        bool getLinkSensorTransform(const int link_index, iDynTree::Transform & link_H_sensor) const;
+        bool getLinkSensorTransform(const LinkIndex link_index, iDynTree::Transform & link_H_sensor) const;
 
 
         /**
@@ -196,7 +192,7 @@ namespace iDynTree {
          *
          * @return true if link_index is one of the two links attached to the FT sensor, false otherwise.
          */
-        bool getWrenchAppliedOnLink(const int link_index,
+        bool getWrenchAppliedOnLink(const LinkIndex link_index,
                                     const iDynTree::Wrench & measured_wrench,
                                     iDynTree::Wrench & wrench_applied_on_link ) const;
 

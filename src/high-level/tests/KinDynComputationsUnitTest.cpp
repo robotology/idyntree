@@ -25,6 +25,9 @@
 #include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/FreeFloatingState.h>
 
+#include <iDynTree/ModelIO/ModelLoader.h>
+
+
 using namespace iDynTree;
 
 double random_double()
@@ -118,12 +121,13 @@ void testRelativeTransform(iDynTree::KinDynComputations & dynComp)
 void testAverageVelocityAndTotalMomentumJacobian(iDynTree::KinDynComputations & dynComp)
 {
     iDynTree::Twist avgVel;
-    iDynTree::SpatialMomentum mom;
-    iDynTree::Vector6 avgVelCheck, momCheck;
+    iDynTree::SpatialMomentum mom, centroidalMom;
+    iDynTree::Vector6 avgVelCheck, momCheck, centroidalMomCheck;
     iDynTree::VectorDynSize nu(dynComp.getNrOfDegreesOfFreedom()+6);
     dynComp.getModelVel(nu);
 
     MomentumFreeFloatingJacobian momJac(dynComp.getRobotModel());
+    MomentumFreeFloatingJacobian centroidalMomJac(dynComp.getRobotModel());
     FrameFreeFloatingJacobian    avgVelJac(dynComp.getRobotModel());
 
     avgVel = dynComp.getAverageVelocity();
@@ -136,10 +140,16 @@ void testAverageVelocityAndTotalMomentumJacobian(iDynTree::KinDynComputations & 
 
     ASSERT_IS_TRUE(ok);
 
+    centroidalMom = dynComp.getCentroidalTotalMomentum();
+    ok = dynComp.getCentroidalTotalMomentumJacobian(centroidalMomJac);
+    ASSERT_IS_TRUE(ok);
+
     toEigen(momCheck) = toEigen(momJac)*toEigen(nu);
+    toEigen(centroidalMomCheck) = toEigen(centroidalMomJac)*toEigen(nu);
     toEigen(avgVelCheck) = toEigen(avgVelJac)*toEigen(nu);
 
     ASSERT_EQUAL_VECTOR(momCheck,mom.asVector());
+    ASSERT_EQUAL_VECTOR(centroidalMomCheck,centroidalMom.asVector());
     ASSERT_EQUAL_VECTOR(avgVelCheck,avgVel.asVector());
 }
 
@@ -385,9 +395,10 @@ void testAbsoluteJacobiansAndFrameBiasAcc(KinDynComputations & dynComp)
 
 void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresentation frameVelRepr)
 {
-    iDynTree::KinDynComputations dynComp;
-
-    bool ok = dynComp.loadRobotModelFromFile(modelFilePath);
+	iDynTree::KinDynComputations dynComp;
+    iDynTree::ModelLoader mdlLoader;
+    bool ok = mdlLoader.loadModelFromFile(modelFilePath);
+    ok = ok && dynComp.loadRobotModel(mdlLoader.model());
     ASSERT_IS_TRUE(ok);
 
     ok = dynComp.setFrameVelocityRepresentation(frameVelRepr);
@@ -495,9 +506,10 @@ void testAbsoluteJacobianSparsity(KinDynComputations & dynComp)
 
 void testSparsityPattern(std::string modelFilePath, const FrameVelocityRepresentation frameVelRepr)
 {
-    iDynTree::KinDynComputations dynComp;
-
-    bool ok = dynComp.loadRobotModelFromFile(modelFilePath);
+	iDynTree::KinDynComputations dynComp;
+    iDynTree::ModelLoader mdlLoader;
+    bool ok = mdlLoader.loadModelFromFile(modelFilePath);
+    ok = ok && dynComp.loadRobotModel(mdlLoader.model());
     ASSERT_IS_TRUE(ok);
 
     ok = dynComp.setFrameVelocityRepresentation(frameVelRepr);

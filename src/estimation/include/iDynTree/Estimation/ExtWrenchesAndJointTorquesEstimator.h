@@ -115,7 +115,6 @@ public:
      *                     Only "urdf" is supported at the moment.
      * @return true if all went well (files were correctly loaded and consistent), false otherwise.
      */
-    IDYNTREE_DEPRECATED_WITH_MSG("Use iDynTree::ModelLoader::loadModelFromFile and call setModelAndSensors on the parsed Model and SensorsList")
     bool loadModelAndSensorsFromFile(const std::string filename, const std::string filetype="");
 
     /**

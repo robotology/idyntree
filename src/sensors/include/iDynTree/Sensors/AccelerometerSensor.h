@@ -12,11 +12,11 @@
 #ifndef ACCELEROMETER_HPP
 #define ACCELEROMETER_HPP
 
+#include <iDynTree/Core/GeomVector3.h>
 
 namespace iDynTree
 {
     class Transform;
-    class LinearMotionVector3;
     typedef LinearMotionVector3 LinAcceleration;
     class SpatialAcc;
     class Twist;
@@ -123,11 +123,6 @@ namespace iDynTree {
          * Documented in Sensor
          */
         bool updateIndices(const Model & model);
-
-        // Deprecated
-        IDYNTREE_DEPRECATED_WITH_MSG("Use updateIndices() instead")
-        bool updateIndeces(const Model & model);
-
 
       /**
         * Following method is to be implemented after defining the interface

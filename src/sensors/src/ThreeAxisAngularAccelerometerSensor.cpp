@@ -9,8 +9,6 @@
  */
 
 
-# include "iDynTree/Core/LinearMotionVector3.h"
-
 #include "iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h"
 
 #include "iDynTree/Core/Transform.h"
@@ -28,9 +26,9 @@ struct ThreeAxisAngularAccelerometerSensor::ThreeAxisAngularAccelerometerPrivate
     std::string name;
     // Transform from the link to the sensor
     Transform link_H_sensor;
-    // Index of the parent junction
-    int parent_link_index;
-    // Name of the parent junction
+    // Index of the parent link
+    iDynTree::LinkIndex parent_link_index;
+    // Name of the parent link
      std::string parent_link_name;
     // Name of the link to which the Accelerometer is connected
 };
@@ -100,7 +98,7 @@ std::string ThreeAxisAngularAccelerometerSensor::getParentLink() const
     return(this->pimpl->parent_link_name);
 }
 
-int ThreeAxisAngularAccelerometerSensor::getParentLinkIndex() const
+iDynTree::LinkIndex ThreeAxisAngularAccelerometerSensor::getParentLinkIndex() const
 {
     return(this->pimpl->parent_link_index);
 }
@@ -167,10 +165,4 @@ Vector3 ThreeAxisAngularAccelerometerSensor::predictMeasurement(const SpatialAcc
     return returnAcc;
 }
 
-// Deprecated
-Vector3 ThreeAxisAngularAccelerometerSensor::predictMeasurement(const SpatialAcc& linkAcc, const iDynTree::Twist& )
-{
-    return this->predictMeasurement(linkAcc);
-}
-    
 }

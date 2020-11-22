@@ -76,11 +76,6 @@ namespace iDynTree {
 
             bool removeGroupOfConstraints(const std::string& name);
 
-            IDYNTREE_DEPRECATED_WITH_MSG("Use addConstraint() instead")
-            bool addContraint(std::shared_ptr<Constraint> newConstraint) {
-                return addConstraint(newConstraint);
-            }
-
             bool addConstraint(std::shared_ptr<Constraint> newConstraint); // this apply for the full horizon. It creates a group named with the same name and containing only newConstraint
 
             bool addConstraint(std::shared_ptr<LinearConstraint> newConstraint);

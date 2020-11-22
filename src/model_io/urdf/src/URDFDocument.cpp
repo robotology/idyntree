@@ -260,12 +260,7 @@ namespace iDynTree {
                     LinkIndex linkToWhichTheSensorIsAttached = linkSensor->getParentLinkIndex();
                     std::string linkToWhichTheSensorIsAttachedName = model.getLinkName(linkToWhichTheSensorIsAttached);
 
-                    if (model.isFrameNameUsed(linkSensor->getName()))
-                    {
-                        std::string err = "addSensorFramesAsAdditionalFrames is specified as an option, but it is impossible to add the frame of sensor " + linkSensor->getName() + " as there is already a frame with that name";
-                        reportWarning("", "addSensorFramesAsAdditionalFramesToModel", err.c_str());
-                    }
-                    else
+                    if (!model.isFrameNameUsed(linkSensor->getName()))
                     {
                         // std::cerr << "Adding sensor " << linkSensor->getName() << " to link " << linkToWhichTheSensorIsAttachedName << " as additional frame"<< std::endl;
                         bool ok = model.addAdditionalFrameToLink(linkToWhichTheSensorIsAttachedName,linkSensor->getName(),linkSensor->getLinkSensorTransform());
@@ -291,12 +286,7 @@ namespace iDynTree {
 
                     std::string linkToWhichTheSensorIsAttachedName = ftSensor->getSecondLinkName();
 
-                    if (model.isFrameNameUsed(ftSensor->getName()))
-                    {
-                        std::string err = "addSensorFramesAsAdditionalFrames is specified as an option, but it is impossible to add the frame of sensor " + ftSensor->getName() + " as there is already a frame with that name";
-                        reportWarning("", "addSensorFramesAsAdditionalFramesToModel", err.c_str());
-                    }
-                    else
+                    if (!model.isFrameNameUsed(ftSensor->getName()))
                     {
                         Transform link_H_sensor;
                         bool ok = ftSensor->getLinkSensorTransform(ftSensor->getSecondLinkIndex(),link_H_sensor);

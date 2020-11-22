@@ -1,11 +1,10 @@
-# Copyright: 2015 Fondazione Istituto Italiano di Tecnologia
-# Author: Silvio Traversaro
-# CopyPolicy: Released under the terms of the GNU GPL v2.0.
-#
+# Copyright: 2020 Fondazione Istituto Italiano di Tecnologia
+# CopyPolicy: Released under the terms of the MIT license
 
-cmake_minimum_required(VERSION 2.8.11)
 
-project("iDynTree_Examples")
+cmake_minimum_required(VERSION 3.16)
 
-add_subdirectory(KinDynComputationsWithEigen)
+project(iDynTreeExamples)
+
+add_subdirectory(cxx)
 

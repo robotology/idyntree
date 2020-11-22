@@ -38,17 +38,17 @@ namespace iDynTree
         /**
          * Size of the vector.
          */
-        unsigned int m_size;
+        std::size_t m_size;
 
         /**
          * The buffer to which m_data is pointing is m_capacity*sizeof(double).
          */
-        unsigned int m_capacity;
+        std::size_t m_capacity;
 
         /**
          * Set the capacity of the vector, resizing the buffer pointed by m_data.
          */
-        void changeCapacityAndCopyData(const unsigned int _newCapacity);
+        void changeCapacityAndCopyData(const std::size_t _newCapacity);
 
     public:
         /**
@@ -63,7 +63,7 @@ namespace iDynTree
          *
          * \warning performs dynamic memory allocation operations
          */
-        VectorDynSize(unsigned int _size);
+        VectorDynSize(std::size_t _size);
 
         /**
          * Constructor from a C-style array.
@@ -72,13 +72,25 @@ namespace iDynTree
          *
          * \warning performs dynamic memory allocation operations
          */
-        VectorDynSize(const double * in_data, const unsigned int in_size);
+        VectorDynSize(const double * in_data, const std::size_t in_size);
 
         /**
          * Copy constructor
          * \warning performs dynamic memory allocation operations
          */
         VectorDynSize(const VectorDynSize& vec);
+
+#if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
+
+        /**
+         * Constructor from an iDynTree::Span
+         *
+         * @param vec span representing a vector
+         *
+         * \warning performs dynamic memory allocation operations
+         */
+        VectorDynSize(iDynTree::Span<const double> vec);
+#endif
 
         /**
          * Denstructor
@@ -108,24 +120,24 @@ namespace iDynTree
          *
          * \warning performs dynamic memory allocation operations
          */
-        VectorDynSize & operator=(const Span<const double>& vec);
+        VectorDynSize & operator=(iDynTree::Span<const double> vec);
 #endif
         /**
          * @name Vector interface methods.
          * Methods exposing a vector-like interface to PositionRaw.
          */
         ///@{
-        double operator()(const unsigned int index) const;
+        double operator()(const std::size_t index) const;
 
-        double& operator()(const unsigned int index);
+        double& operator()(const std::size_t index);
 
-        double operator[](const unsigned int index) const;
+        double operator[](const std::size_t index) const;
 
-        double& operator[](const unsigned int index);
+        double& operator[](const std::size_t index);
 
-        double getVal(const unsigned int index) const;
+        double getVal(const std::size_t index) const;
 
-        bool setVal(const unsigned int index, const double new_el);
+        bool setVal(const std::size_t index, const double new_el);
 
         /**
          * Returns a const iterator to the beginning of the vector
@@ -169,7 +181,7 @@ namespace iDynTree
          */
         double* end() noexcept;
 
-        unsigned int size() const;
+        std::size_t size() const;
 
         ///@}
 
@@ -199,7 +211,7 @@ namespace iDynTree
          * \warning performs dynamic memory allocation operations if newCapacity > capacity()
          * \note if newCapacity <= capacity(), this method does nothing and the capacity will remain unchanged.
          */
-        void reserve(const unsigned int newCapacity);
+        void reserve(const std::size_t newCapacity);
 
         /**
          * Change the size of the vector preserving old content.
@@ -207,7 +219,7 @@ namespace iDynTree
          * @param newSize the new size of the vector
          * \warning performs dynamic memory allocation operations if newSize > capacity()
          */
-        void resize(const unsigned int newSize);
+        void resize(const std::size_t newSize);
 
         /**
          * Change the capacity of the vector to match the size.

@@ -21,6 +21,7 @@
 
 #include <iDynTree/ModelIO/ModelLoader.h>
 #include <iDynTree/KinDynComputations.h>
+#include <iDynTree/Model/Traversal.h>
 #include <iDynTree/yarp/YARPConversions.h>
 
 #include "robotstatepublisher.h"
@@ -78,6 +79,12 @@ bool YARPRobotStatePublisherModule::configure(ResourceFinder &rf)
 
     string modelFileName=rf.check("model",Value("model.urdf")).asString();
     m_period=rf.check("period",Value(0.010)).asDouble();
+    m_treeType=rf.check("tree-type", Value("SHALLOW")).asString();
+    if(m_treeType != "SHALLOW" && m_treeType != "DEEP")
+    {
+        yError("Wrong tree format. The only allowed values are \"SHALLOW\" or \"DEEP\"");
+        return false;
+    }
 
     Property pTransformclient_cfg;
     pTransformclient_cfg.put("device", "transformClient");
@@ -230,7 +237,9 @@ void YARPRobotStatePublisherModule::onRead(yarp::rosmsg::sensor_msgs::JointState
     {
         jntIndex = model.getJointIndex(v.name[i]);
 
-        if (!(model.getJoint(jntIndex)->getNrOfDOFs()) || jntIndex == iDynTree::JOINT_INVALID_INDEX)
+        if ( jntIndex == iDynTree::JOINT_INVALID_INDEX)
+            continue;
+        if (!(model.getJoint(jntIndex)->getNrOfDOFs()))
             continue;
 
         m_jointPos(model.getJoint(jntIndex)->getDOFsOffset()) = v.position[i];
@@ -250,16 +259,95 @@ void YARPRobotStatePublisherModule::onRead(yarp::rosmsg::sensor_msgs::JointState
         sizeOfTFFrames = model.getNrOfFrames();
     }
 
-    for (size_t frameIdx=0; frameIdx < sizeOfTFFrames; frameIdx++)
+    if (m_treeType == "SHALLOW")
     {
-        if(m_baseFrameIndex == frameIdx)    // skip self-tranform
-            continue;
+        // In shallow mode, we publish the position of each frame of the robot w.r.t. to the base frame of the robot
+        for (size_t frameIdx=0; frameIdx < sizeOfTFFrames; frameIdx++)
+        {
+            if(m_baseFrameIndex == frameIdx)    // skip self-tranform
+                continue;
 
-        iDynTree::Transform base_H_frame = m_kinDynComp.getRelativeTransform(m_baseFrameIndex, frameIdx);
-        iDynTree::toYarp(base_H_frame.asHomogeneousTransform(), m_buf4x4);
-        m_iframetrans->setTransform(m_tfPrefix + model.getFrameName(frameIdx),
-                                    m_tfPrefix + model.getFrameName(m_baseFrameIndex),
-                                    m_buf4x4);
+            iDynTree::Transform base_H_frame = m_kinDynComp.getRelativeTransform(m_baseFrameIndex, frameIdx);
+            iDynTree::toYarp(base_H_frame.asHomogeneousTransform(), m_buf4x4);
+            m_iframetrans->setTransform(m_tfPrefix + model.getFrameName(frameIdx),
+                                        m_tfPrefix + model.getFrameName(m_baseFrameIndex),
+                                        m_buf4x4);
+        }
+    }
+    else
+    {
+        // mode == DEEP
+        // In deep mode, we need to distinguish the following cases:
+        // For the frames that are frames of the link, we publish their location w.r.t. to their parent link
+        // For the additional frames, we publish their location w.r.t. to the frame of the link to which they are
+        // attached (note that this transform are actually constant)
+
+        // The traversal is the data structure that contains information on which link is parent of which other link,
+        // as in iDynTree the model is an undirected data structure
+        iDynTree::Traversal traversal;
+
+        // We generate a traversal using the base frame index
+        m_kinDynComp.model().computeFullTreeTraversal(traversal, m_baseFrameIndex);
+
+        bool setOk = false;
+
+        //Processing joints instead of links since it's easier this way to distinguish between static transform and non static ones
+        for (size_t jointIndex=0; jointIndex < model.getNrOfJoints(); jointIndex++)
+        {
+            auto currJoint = model.getJoint(jointIndex);
+            iDynTree::LinkIndex parentLinkIndex = traversal.getParentLinkIndexFromJointIndex(model,jointIndex);//currJoint->getFirstAttachedLink();
+            iDynTree::LinkIndex linkIndex = traversal.getChildLinkIndexFromJointIndex(model,jointIndex);//currJoint->getSecondAttachedLink();
+            iDynTree::Transform parentLink_H_link = m_kinDynComp.getRelativeTransform(parentLinkIndex, linkIndex);
+            iDynTree::toYarp(parentLink_H_link.asHomogeneousTransform(), m_buf4x4);
+
+            if(currJoint->getNrOfDOFs() == 0) //Static transform
+            {
+                //To avoid setting a static transform more than once
+                if(m_iframetrans->canTransform(m_tfPrefix + model.getFrameName(linkIndex),m_tfPrefix + model.getFrameName(parentLinkIndex)))
+                {
+                    continue;
+                }
+                setOk = m_iframetrans->setTransformStatic(m_tfPrefix + model.getFrameName(linkIndex),
+                                                          m_tfPrefix + model.getFrameName(parentLinkIndex),
+                                                          m_buf4x4);
+            }
+            else
+            {
+                setOk = m_iframetrans->setTransform(m_tfPrefix + model.getFrameName(linkIndex),
+                                                    m_tfPrefix + model.getFrameName(parentLinkIndex),
+                                                    m_buf4x4);
+            }
+
+            if(!setOk)
+            {
+                yInfo("The transformation between %s and %s cannot be set as %s",(m_tfPrefix + model.getFrameName(parentLinkIndex)).c_str(),
+                      (m_tfPrefix + model.getFrameName(linkIndex)).c_str(),currJoint->getNrOfDOFs()==0?"static":"timed");
+            }
+        }
+
+        // Process frames, only if the reduced model option is not passed
+        if (!this->reducedModelOption)
+        {
+            // Process additional frames (that have all indexes between model.getNrOfLinks()+1 and model.getNrOfFrames()
+            for (size_t frameIndex=model.getNrOfLinks(); frameIndex < model.getNrOfFrames(); frameIndex++)
+            {
+                iDynTree::LinkIndex linkIndex = m_kinDynComp.model().getFrameLink(frameIndex);
+                iDynTree::Transform link_H_frame = m_kinDynComp.model().getFrameTransform(frameIndex);
+                iDynTree::toYarp(link_H_frame.asHomogeneousTransform(), m_buf4x4);
+
+                //To avoid setting a static transform more than once
+                if(m_iframetrans->canTransform(m_tfPrefix + model.getFrameName(frameIndex),m_tfPrefix + model.getFrameName(linkIndex)))
+                {
+                    continue;
+                }
+                setOk = m_iframetrans->setTransformStatic(m_tfPrefix + model.getFrameName(frameIndex),
+                                                          m_tfPrefix + model.getFrameName(linkIndex),
+                                                          m_buf4x4);
+                if(!setOk)
+                    yInfo("The transformation between %s and %s cannot be set",(m_tfPrefix + model.getFrameName(linkIndex)).c_str(),
+                          (m_tfPrefix + model.getFrameName(frameIndex)).c_str());
+            }
+        }
     }
 
     return;

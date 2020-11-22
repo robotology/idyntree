@@ -12,8 +12,8 @@
 #define IDYNTREE_ROTATION_H
 
 #include <string>
+#include <iDynTree/Core/GeomVector3.h>
 #include <iDynTree/Core/RotationRaw.h>
-#include <iDynTree/Core/RotationSemantics.h>
 #include <iDynTree/Core/VectorFixSize.h>
 
 namespace iDynTree
@@ -30,7 +30,6 @@ namespace iDynTree
     class RotationalInertiaRaw;
     class SpatialMotionVector;
     class SpatialForceVector;
-    class AngularMotionVector3;
     class ArticulatedBodyInertia;
 
     /**
@@ -55,14 +54,6 @@ namespace iDynTree
      */
     class Rotation: public RotationRaw
     {
-    private:
-        RotationSemantics semantics;
-
-        /**
-         * Copy constructor: create a Rotation from another RotationRaw and another RotationSemantics.
-         */
-        Rotation(const RotationRaw & other, RotationSemantics & semantics);
-
     public:
         /**
          * Default constructor.
@@ -89,16 +80,9 @@ namespace iDynTree
         Rotation(const Rotation & other);
 
         /**
-         * Semantic getter
+         * Create a Rotation from a MatrixView.
          */
-        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
-        RotationSemantics& getSemantics();
-
-        /**
-         * Semantic getter
-         */
-        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
-        const RotationSemantics& getSemantics() const;
+        Rotation(iDynTree::MatrixView<const double> other);
 
         /**
          * Geometric operations.

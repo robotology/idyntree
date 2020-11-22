@@ -94,9 +94,6 @@ Transform SpatialMotionVector::exp() const
 {
     Transform res;
 
-    // Understand if there is a meaningful
-    // semantics for this operation and if it exists use it
-
     // the linear part is affected by the left Jacobian of SO(3)
     Position newPos;
     auto J_SO3 = Rotation::leftJacobian(this->getAngularVec3());

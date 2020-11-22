@@ -6,9 +6,9 @@
 # https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 # at your option.
 
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.16)
 
-project(iDynTree VERSION 1.2.0
+project(iDynTree VERSION 2.0.0
                  LANGUAGES C CXX)
 
 # Disable in source build, unless Eclipse is used
@@ -43,11 +43,16 @@ if(NOT IDYNTREE_ONLY_DOCS)
     # anything) feel free to check the logic inside
     add_subdirectory(extern)
 
+    # Create the absolute paths for the BIN DIRS.
+    foreach(item ${IDYNTREE_BINARY_DIRS})
+        list(APPEND ABSOLUTE_BIN_DIRS "${CMAKE_INSTALL_PREFIX}/${item}")
+    endforeach()
+
     include(AddInstallRPATHSupport)
-    add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
-                            LIB_DIRS "${CMAKE_INSTALL_PREFIX}/lib"
-                            DEPENDS IDYNTREE_ENABLE_RPATH
-                            USE_LINK_PATH)
+    add_install_rpath_support(BIN_DIRS ${ABSOLUTE_BIN_DIRS}
+                              LIB_DIRS "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}"
+                              DEPENDS IDYNTREE_ENABLE_RPATH
+                              USE_LINK_PATH)
 
     # add the actual components of the library
     add_subdirectory(src)
@@ -59,9 +64,6 @@ if(NOT IDYNTREE_ONLY_DOCS)
     endif()
     if(IDYNTREE_USES_ICUB_MAIN)
         list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES ICUB)
-    endif()
-    if(IDYNTREE_USES_KDL)
-        list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES orocos_kdl)
     endif()
 
     # List exported CMake package dependencies when the library is compiled as static

@@ -77,21 +77,21 @@ bool SixAxisForceTorqueSensor::setName(const std::string& _name)
 }
 
 
-bool SixAxisForceTorqueSensor::setAppliedWrenchLink(const int applied_wrench_index)
+bool SixAxisForceTorqueSensor::setAppliedWrenchLink(const LinkIndex applied_wrench_index)
 {
     this->pimpl->appliedWrenchLink = applied_wrench_index;
     return true;
 }
 
 
-bool SixAxisForceTorqueSensor::setFirstLinkSensorTransform(const int link_index, const iDynTree::Transform& link_H_sensor) const
+bool SixAxisForceTorqueSensor::setFirstLinkSensorTransform(const LinkIndex link_index, const iDynTree::Transform& link_H_sensor) const
 {
     this->pimpl->link1 = link_index;
     this->pimpl->link1_H_sensor = link_H_sensor;
     return true;
 }
 
-bool SixAxisForceTorqueSensor::setSecondLinkSensorTransform(const int link_index, const iDynTree::Transform& link_H_sensor) const
+bool SixAxisForceTorqueSensor::setSecondLinkSensorTransform(const LinkIndex link_index, const iDynTree::Transform& link_H_sensor) const
 {
     this->pimpl->link2 = link_index;
     this->pimpl->link2_H_sensor = link_H_sensor;
@@ -104,7 +104,7 @@ bool SixAxisForceTorqueSensor::setParentJoint(const std::string& parent)
     return true;
 }
 
-bool SixAxisForceTorqueSensor::setParentJointIndex(const int &parent_index)
+bool SixAxisForceTorqueSensor::setParentJointIndex(const JointIndex &parent_index)
 {
     this->pimpl->parent_junction_index = parent_index;
     return true;
@@ -177,12 +177,6 @@ bool SixAxisForceTorqueSensor::updateIndices(const Model& model)
     return true;
 }
 
-// Deprecated
-bool SixAxisForceTorqueSensor::updateIndeces(const Model& model)
-{
-    return updateIndices(model);
-}
-
 std::string SixAxisForceTorqueSensor::getName() const
 {
     return this->pimpl->name;
@@ -194,7 +188,7 @@ SensorType SixAxisForceTorqueSensor::getSensorType() const
 }
 
 
-int SixAxisForceTorqueSensor::getAppliedWrenchLink() const
+LinkIndex SixAxisForceTorqueSensor::getAppliedWrenchLink() const
 {
     return this->pimpl->appliedWrenchLink;
 }
@@ -209,14 +203,14 @@ JointIndex SixAxisForceTorqueSensor::getParentJointIndex() const
     return this->pimpl->parent_junction_index;
 }
 
-bool SixAxisForceTorqueSensor::isLinkAttachedToSensor(const int link_index) const
+bool SixAxisForceTorqueSensor::isLinkAttachedToSensor(const LinkIndex link_index) const
 {
     return (this->pimpl->link1 == link_index ||
             this->pimpl->link2 == link_index );
 }
 
 
-bool SixAxisForceTorqueSensor::getLinkSensorTransform(const int link_index, iDynTree::Transform& link_H_sensor) const
+bool SixAxisForceTorqueSensor::getLinkSensorTransform(const LinkIndex link_index, iDynTree::Transform& link_H_sensor) const
 {
     if( this->pimpl->link1 == link_index )
     {
@@ -233,7 +227,7 @@ bool SixAxisForceTorqueSensor::getLinkSensorTransform(const int link_index, iDyn
     return false;
 }
 
-bool SixAxisForceTorqueSensor::getWrenchAppliedOnLink(const int link_index,
+bool SixAxisForceTorqueSensor::getWrenchAppliedOnLink(const LinkIndex link_index,
                                                       const Wrench& measured_wrench,
                                                       iDynTree::Wrench& wrench_applied_on_link) const
 {

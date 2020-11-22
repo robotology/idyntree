@@ -17,7 +17,7 @@ set(IDYNTREE_MODELIO_XML_SOURCES src/XMLParser.cpp
                                  src/XMLElement.cpp
                                  src/XMLAttribute.cpp
                                  src/XMLDocument.cpp)
-								  
+
 
 
 SOURCE_GROUP("Source Files" FILES ${IDYNTREE_MODELIO_XML_SOURCES})
@@ -34,13 +34,11 @@ add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 # We want to include the same-library header files directly (in the implementation), but with the full prefix in the .h (as this will be public)
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/iDynTree>"
-                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>"
-                                          PRIVATE ${EIGEN3_INCLUDE_DIR}
-                                                  ${LIBXML2_INCLUDE_DIR})
+                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 
-target_link_libraries(${libraryname} LINK_PUBLIC 
-                                     LINK_PRIVATE ${LIBXML2_LIBRARIES} idyntree-core)
-                                     
+target_link_libraries(${libraryname} PRIVATE Eigen3::Eigen LibXml2::LibXml2 idyntree-core)
+
+
 if(NOT CMAKE_VERSION VERSION_LESS 2.8.12)
     target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS} ${LIBXML2_DEFINITIONS})
 endif()

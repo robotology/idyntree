@@ -13,7 +13,6 @@
 
 #include <iDynTree/Core/Position.h>
 #include <iDynTree/Core/Rotation.h>
-#include <iDynTree/Core/TransformSemantics.h>
 #include <iDynTree/Core/MatrixFixSize.h>
 
 #include <string>
@@ -30,9 +29,6 @@ namespace iDynTree
     class SpatialForceVector;
     class SpatialInertia;
     class ArticulatedBodyInertia;
-
-    class PositionSemantics;
-    class RotationSemantics;
 
     /**
      * Class representation the relative displacement between two different frames.
@@ -90,7 +86,6 @@ namespace iDynTree
          * in a 3d vector expressed in the reference orientation frame.
          */
         Rotation rot;
-        TransformSemantics semantics;
 
     public:
         /**
@@ -101,7 +96,7 @@ namespace iDynTree
         Transform();
 
         /**
-         * Constructor from a rotation and a point (can raise error on semantics of the passed elements)
+         * Constructor from a rotation and a point
          */
         Transform(const Rotation & _rot, const Position & origin);
 
@@ -130,18 +125,6 @@ namespace iDynTree
          * @return *this equal to the other object
          */
         Transform& operator=(const Transform& other);
-
-        /**
-         * Semantic accessor
-         */
-        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
-        TransformSemantics & getSemantics();
-
-        /**
-         * Const semantic getter
-         */
-        IDYNTREE_DEPRECATED_WITH_MSG("All iDynTree semantics class and  methods will be removed in iDynTree 2.0")
-        const TransformSemantics & getSemantics() const;
 
         /**
          * Get the rotation part of the transform
@@ -556,20 +539,6 @@ namespace iDynTree
         std::string reservedToString() const;
         ///@}
 
-    /* TODO \todo move in desing semantics document
-     * The semantics for this class are lousely on the one of PoseCoord in:
-     *
-     * De Laet T, Bellens S, Smits R, Aertbeliën E, Bruyninckx H, and De Schutter J
-     * (2013), Geometric Relations between Rigid Bodies: Semantics for Standardization,
-     * IEEE Robotics & Automation Magazine, Vol. 20, No. 1, pp. 84-93.
-     * URL : http://people.mech.kuleuven.be/~tdelaet/geometric_relations_semantics/geometric_relations_semantics_theory.pdf
-     *
-     * Hence with respect to
-     * the PoseCoord we restrict the semantics to the one of the homogeneous transformation matrix
-     * representation, enforcing that the reference orientation frame is always coincident with teh
-     * coordinate frame .
-     *
-     */
     };
 }
 

@@ -17,7 +17,7 @@
 namespace iDynTree
 {
 
-JointPosDoubleArray::JointPosDoubleArray(unsigned int nrOfPosCoords): VectorDynSize(nrOfPosCoords)
+JointPosDoubleArray::JointPosDoubleArray(std::size_t nrOfPosCoords): VectorDynSize(nrOfPosCoords)
 {
 
 }
@@ -32,7 +32,7 @@ void JointPosDoubleArray::resize(const iDynTree::Model& model)
     resize(model.getNrOfPosCoords());
 }
 
-void JointPosDoubleArray::resize(unsigned int nrOfPosCoords)
+void JointPosDoubleArray::resize(std::size_t nrOfPosCoords)
 {
     VectorDynSize::resize(nrOfPosCoords);
     this->zero();
@@ -49,7 +49,7 @@ JointPosDoubleArray::~JointPosDoubleArray()
 }
 
 
-JointDOFsDoubleArray::JointDOFsDoubleArray(unsigned int nrOfDOFs): VectorDynSize(nrOfDOFs)
+JointDOFsDoubleArray::JointDOFsDoubleArray(std::size_t nrOfDOFs): VectorDynSize(nrOfDOFs)
 {
 
 }
@@ -64,7 +64,7 @@ void JointDOFsDoubleArray::resize(const iDynTree::Model& model)
     resize(model.getNrOfDOFs());
 }
 
-void JointDOFsDoubleArray::resize(unsigned int nrOfDOFs)
+void JointDOFsDoubleArray::resize(std::size_t nrOfDOFs)
 {
     VectorDynSize::resize(nrOfDOFs);
     this->zero();
@@ -80,7 +80,7 @@ JointDOFsDoubleArray::~JointDOFsDoubleArray()
 
 }
 
-DOFSpatialForceArray::DOFSpatialForceArray(unsigned int nrOfDOFs)
+DOFSpatialForceArray::DOFSpatialForceArray(std::size_t nrOfDOFs)
 {
     resize(nrOfDOFs);
 }
@@ -95,7 +95,7 @@ void DOFSpatialForceArray::resize(const iDynTree::Model& model)
     resize(model.getNrOfDOFs());
 }
 
-void DOFSpatialForceArray::resize(const unsigned int nrOfDOFs)
+void DOFSpatialForceArray::resize(const std::size_t nrOfDOFs)
 {
     this->m_dofSpatialForce.resize(nrOfDOFs,iDynTree::SpatialForceVector::Zero());
 }
@@ -122,7 +122,7 @@ DOFSpatialForceArray::~DOFSpatialForceArray()
 }
 
 
-DOFSpatialMotionArray::DOFSpatialMotionArray(unsigned int nrOfDOFs)
+DOFSpatialMotionArray::DOFSpatialMotionArray(std::size_t nrOfDOFs)
 {
     resize(nrOfDOFs);
 }
@@ -142,7 +142,7 @@ bool DOFSpatialMotionArray::isConsistent(const Model& model) const
     return (this->m_dofSpatialMotion.size() == model.getNrOfDOFs());
 }
 
-void DOFSpatialMotionArray::resize(const unsigned int nrOfDOFs)
+void DOFSpatialMotionArray::resize(const std::size_t nrOfDOFs)
 {
     this->m_dofSpatialMotion.resize(nrOfDOFs,iDynTree::SpatialMotionVector::Zero());
 }

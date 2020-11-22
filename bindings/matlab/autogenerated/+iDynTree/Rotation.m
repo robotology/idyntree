@@ -7,117 +7,114 @@ classdef Rotation < iDynTree.RotationRaw
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(800, varargin{:});
+        tmp = iDynTreeMEX(632, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
-    function varargout = getSemantics(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(801, self, varargin{:});
-    end
     function varargout = changeOrientFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(802, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(633, self, varargin{:});
     end
     function varargout = changeRefOrientFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(803, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(634, self, varargin{:});
     end
     function varargout = changeCoordinateFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(804, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(635, self, varargin{:});
     end
     function varargout = changeCoordFrameOf(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(807, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(638, self, varargin{:});
     end
     function varargout = inverse(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(808, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(639, self, varargin{:});
     end
     function varargout = mtimes(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(809, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(640, self, varargin{:});
     end
     function varargout = log(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(810, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(641, self, varargin{:});
     end
     function varargout = fromQuaternion(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(811, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(642, self, varargin{:});
     end
     function varargout = getRPY(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(812, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(643, self, varargin{:});
     end
     function varargout = asRPY(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(813, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(644, self, varargin{:});
     end
     function varargout = getQuaternion(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(814, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(645, self, varargin{:});
     end
     function varargout = asQuaternion(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(815, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(646, self, varargin{:});
     end
     function varargout = toString(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(832, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(663, self, varargin{:});
     end
     function varargout = display(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(833, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(664, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(834, self);
+        iDynTreeMEX(665, self);
         self.SwigClear();
       end
     end
   end
   methods(Static)
     function varargout = compose(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(805, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(636, varargin{:});
     end
     function varargout = inverse2(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(806, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(637, varargin{:});
     end
     function varargout = RotX(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(816, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(647, varargin{:});
     end
     function varargout = RotY(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(817, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(648, varargin{:});
     end
     function varargout = RotZ(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(818, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(649, varargin{:});
     end
     function varargout = RotAxis(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(819, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(650, varargin{:});
     end
     function varargout = RotAxisDerivative(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(820, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(651, varargin{:});
     end
     function varargout = RPY(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(821, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(652, varargin{:});
     end
     function varargout = RPYRightTrivializedDerivative(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(822, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(653, varargin{:});
     end
     function varargout = RPYRightTrivializedDerivativeRateOfChange(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(823, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(654, varargin{:});
     end
     function varargout = RPYRightTrivializedDerivativeInverse(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(824, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(655, varargin{:});
     end
     function varargout = RPYRightTrivializedDerivativeInverseRateOfChange(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(825, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(656, varargin{:});
     end
     function varargout = QuaternionRightTrivializedDerivative(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(826, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(657, varargin{:});
     end
     function varargout = QuaternionRightTrivializedDerivativeInverse(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(827, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(658, varargin{:});
     end
     function varargout = Identity(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(828, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(659, varargin{:});
     end
     function varargout = RotationFromQuaternion(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(829, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(660, varargin{:});
     end
     function varargout = leftJacobian(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(830, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(661, varargin{:});
     end
     function varargout = leftJacobianInverse(varargin)
-     [varargout{1:nargout}] = iDynTreeMEX(831, varargin{:});
+     [varargout{1:nargout}] = iDynTreeMEX(662, varargin{:});
     end
   end
 end

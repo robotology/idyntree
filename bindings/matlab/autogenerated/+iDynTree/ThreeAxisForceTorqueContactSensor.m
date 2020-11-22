@@ -7,64 +7,64 @@ classdef ThreeAxisForceTorqueContactSensor < iDynTree.LinkSensor
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1529, varargin{:});
+        tmp = iDynTreeMEX(1361, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1530, self);
+        iDynTreeMEX(1362, self);
         self.SwigClear();
       end
     end
     function varargout = setName(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1531, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1363, self, varargin{:});
     end
     function varargout = setLinkSensorTransform(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1532, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1364, self, varargin{:});
     end
     function varargout = setParentLink(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1533, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1365, self, varargin{:});
     end
     function varargout = setParentLinkIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1534, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1366, self, varargin{:});
     end
     function varargout = getName(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1535, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1367, self, varargin{:});
     end
     function varargout = getSensorType(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1536, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1368, self, varargin{:});
     end
     function varargout = getParentLink(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1537, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1369, self, varargin{:});
     end
     function varargout = getParentLinkIndex(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1538, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1370, self, varargin{:});
     end
     function varargout = getLinkSensorTransform(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1539, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1371, self, varargin{:});
     end
     function varargout = isValid(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1540, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1372, self, varargin{:});
     end
     function varargout = clone(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1541, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1373, self, varargin{:});
     end
     function varargout = updateIndices(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1542, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1374, self, varargin{:});
     end
     function varargout = setLoadCellLocations(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1543, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1375, self, varargin{:});
     end
     function varargout = getLoadCellLocations(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1544, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1376, self, varargin{:});
     end
     function varargout = computeThreeAxisForceTorqueFromLoadCellMeasurements(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1545, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1377, self, varargin{:});
     end
     function varargout = computeCenterOfPressureFromLoadCellMeasurements(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1546, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1378, self, varargin{:});
     end
   end
   methods(Static)

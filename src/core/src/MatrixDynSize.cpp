@@ -24,8 +24,8 @@ MatrixDynSize::MatrixDynSize(): m_data(0), m_rows(0), m_cols(0), m_capacity(0)
 
 }
 
-MatrixDynSize::MatrixDynSize(unsigned int _rows,
-                             unsigned int _cols): m_rows(_rows),
+MatrixDynSize::MatrixDynSize(std::size_t _rows,
+                             std::size_t _cols): m_rows(_rows),
                                                   m_cols(_cols)
 {
     if( this->m_rows*this->m_cols == 0 )
@@ -42,10 +42,33 @@ MatrixDynSize::MatrixDynSize(unsigned int _rows,
     zero();
 }
 
+MatrixDynSize::MatrixDynSize(MatrixView<const double> other) : m_rows(other.rows()),
+                                                                      m_cols(other.cols())
+{
+    if( this->m_rows*this->m_cols == 0 )
+    {
+        this->m_capacity = 0;
+        this->m_data = 0;
+    }
+    else
+    {
+        this->m_capacity = this->m_rows*this->m_cols;
+        this->m_data = new double[this->m_capacity];
+
+        // copy the matrix
+        for(std::size_t i = 0; i < m_rows; i++)
+        {
+            for(std::size_t j = 0; j < m_cols; j++)
+            {
+                this->m_data[this->rawIndexRowMajor(i,j)] = other(i, j);
+            }
+        }
+    }
+}
 
 MatrixDynSize::MatrixDynSize(const double* in_data,
-                             const unsigned int in_rows,
-                             const unsigned int in_cols): m_rows(in_rows),
+                             const std::size_t in_rows,
+                             const std::size_t in_cols): m_rows(in_rows),
                                                           m_cols(in_cols)
 {
     if( this->m_rows*this->m_cols == 0 )
@@ -83,7 +106,7 @@ MatrixDynSize& MatrixDynSize::operator=(const MatrixDynSize& other)
     // Copy the new rows and columns
     m_rows = other.m_rows;
     m_cols = other.m_cols;
-    unsigned requiredCapacity = m_rows * m_cols;
+    std::size_t requiredCapacity = m_rows * m_cols;
 
     // if other is empty, return
     if (requiredCapacity == 0) return  *this;
@@ -107,6 +130,41 @@ MatrixDynSize& MatrixDynSize::operator=(const MatrixDynSize& other)
     return *this;
 }
 
+MatrixDynSize& MatrixDynSize::operator=(MatrixView<const double> other)
+{
+    m_rows = other.rows();
+    m_cols = other.cols();
+
+    const std::size_t requiredCapacity = m_rows * m_cols;
+
+    // if other is empty, return
+    if (requiredCapacity == 0) return  *this;
+
+    // If the copied data fits in the currently allocated buffer,
+    // use that one (if the user want to free the memory can use
+    // the shrink_to_fit method).
+    // Otherwise, allocate a new buffer after deleting the old one)
+    if (m_capacity < requiredCapacity) {
+        // need to allocate new buffer
+        // if old buffer exists, delete it
+        if (m_capacity > 0) {
+            delete [] m_data;
+        }
+        m_data = new double[requiredCapacity];
+        m_capacity = requiredCapacity;
+    }
+
+    for(std::size_t i = 0; i < m_rows; i++)
+    {
+        for(std::size_t j = 0; j < m_cols; j++)
+        {
+            this->m_data[this->rawIndexRowMajor(i,j)] = other(i, j);
+        }
+    }
+
+    return *this;
+}
+
 MatrixDynSize::~MatrixDynSize()
 {
     if( this->m_capacity > 0 )
@@ -118,21 +176,21 @@ MatrixDynSize::~MatrixDynSize()
 
 void MatrixDynSize::zero()
 {
-    for(unsigned int row=0; row < this->rows(); row++ )
+    for(std::size_t row=0; row < this->rows(); row++ )
     {
-        for(unsigned int col=0; col < this->cols(); col++ )
+        for(std::size_t col=0; col < this->cols(); col++ )
         {
             this->m_data[rawIndexRowMajor(row,col)] = 0.0;
         }
     }
 }
 
-unsigned int MatrixDynSize::rows() const
+std::size_t MatrixDynSize::rows() const
 {
     return this->m_rows;
 }
 
-unsigned int MatrixDynSize::cols() const
+std::size_t MatrixDynSize::cols() const
 {
     return this->m_cols;
 }
@@ -147,21 +205,21 @@ const double* MatrixDynSize::data() const
     return this->m_data;
 }
 
-double& MatrixDynSize::operator()(const unsigned int row, const unsigned int col)
+double& MatrixDynSize::operator()(const std::size_t row, const std::size_t col)
 {
     assert(row < this->rows());
     assert(col < this->cols());
     return this->m_data[rawIndexRowMajor(row,col)];
 }
 
-double MatrixDynSize::operator()(const unsigned int row, const unsigned int col) const
+double MatrixDynSize::operator()(const std::size_t row, const std::size_t col) const
 {
     assert(row < this->rows());
     assert(col < this->cols());
     return this->m_data[rawIndexRowMajor(row,col)];
 }
 
-double MatrixDynSize::getVal(const unsigned int row, const unsigned int col) const
+double MatrixDynSize::getVal(const std::size_t row, const std::size_t col) const
 {
     if( row > this->rows() ||
         col  > this->cols() )
@@ -173,7 +231,7 @@ double MatrixDynSize::getVal(const unsigned int row, const unsigned int col) con
     return this->m_data[rawIndexRowMajor(row,col)];
 }
 
-bool MatrixDynSize::setVal(const unsigned int row, const unsigned int col, const double new_el)
+bool MatrixDynSize::setVal(const std::size_t row, const std::size_t col, const double new_el)
 {
     if( row > this->rows() ||
         col   > this->cols() )
@@ -214,7 +272,7 @@ void MatrixDynSize::shrink_to_fit()
     changeCapacityAndCopyData(this->m_rows*this->m_cols);
 }
 
-void MatrixDynSize::changeCapacityAndCopyData(const unsigned int _newCapacity)
+void MatrixDynSize::changeCapacityAndCopyData(const std::size_t _newCapacity)
 {
     // same capacity => do nothing
     if (m_capacity == _newCapacity) return;
@@ -241,7 +299,7 @@ void MatrixDynSize::changeCapacityAndCopyData(const unsigned int _newCapacity)
     m_data = newBuffer;
 }
 
-void MatrixDynSize::resize(const unsigned int _newRows, const unsigned int _newCols)
+void MatrixDynSize::resize(const std::size_t _newRows, const std::size_t _newCols)
 {
     if( (_newRows == this->rows()) &&
         (_newCols == this->cols()) )
@@ -264,9 +322,9 @@ void MatrixDynSize::fillRowMajorBuffer(double* rowMajorBuf) const
 
 void MatrixDynSize::fillColMajorBuffer(double* colMajorBuf) const
 {
-    for(unsigned int row = 0; row < this->rows(); row++ )
+    for(std::size_t row = 0; row < this->rows(); row++ )
     {
-        for(unsigned int col = 0; col < this->cols(); col++ )
+        for(std::size_t col = 0; col < this->cols(); col++ )
         {
             colMajorBuf[this->rawIndexColMajor(row,col)] =
                 this->m_data[this->rawIndexRowMajor(row,col)];
@@ -274,12 +332,12 @@ void MatrixDynSize::fillColMajorBuffer(double* colMajorBuf) const
     }
 }
 
-unsigned int MatrixDynSize::rawIndexRowMajor(int row, int col) const
+std::size_t MatrixDynSize::rawIndexRowMajor(std::size_t row, std::size_t col) const
 {
     return (this->m_cols*row + col);
 }
 
-unsigned int MatrixDynSize::rawIndexColMajor(int row, int col) const
+std::size_t MatrixDynSize::rawIndexColMajor(std::size_t row, std::size_t col) const
 {
     return (row + this->m_rows*col);
 }
@@ -289,9 +347,9 @@ std::string MatrixDynSize::toString() const
 {
     std::stringstream ss;
 
-    for(unsigned int row=0; row < this->rows(); row++ )
+    for(std::size_t row=0; row < this->rows(); row++ )
     {
-        for(unsigned int col=0; col < this->cols(); col++ )
+        for(std::size_t col=0; col < this->cols(); col++ )
         {
             ss << this->m_data[this->rawIndexRowMajor(row,col)] << " ";
         }
@@ -305,6 +363,5 @@ std::string MatrixDynSize::reservedToString() const
 {
     return this->toString();
 }
-
 
 }

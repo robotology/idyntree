@@ -11,12 +11,11 @@
 #ifndef IDYNTREE_CORE_SENSORS_HPP
 #define IDYNTREE_CORE_SENSORS_HPP
 
+#include <iDynTree/Core/GeomVector3.h>
 
 
 namespace iDynTree {
     class Wrench;
-    class AngularMotionVector3;
-    class LinearMotionVector3;
     typedef LinearMotionVector3 LinAcceleration;
     typedef AngularMotionVector3 AngVelocity;
 }
@@ -71,7 +70,7 @@ namespace iDynTree {
         return !isLinkSensor(type);
     }
 
-    inline unsigned int getSensorTypeSize(const SensorType type)
+    inline std::size_t getSensorTypeSize(const SensorType type)
     {
         switch(type)
         {
@@ -142,13 +141,6 @@ namespace iDynTree {
          * Update all the indices (link/frames) contained in this sensor.
          */
         virtual bool updateIndices(const Model & model) = 0;
-
-        // Deprecated
-        IDYNTREE_DEPRECATED_WITH_MSG("Use updateIndices() instead")
-        virtual bool updateIndeces(const Model & model)
-        {
-            return updateIndices(model);
-        }
     };
 
     /**
@@ -179,7 +171,7 @@ namespace iDynTree {
          *
          * @return the index of the parent (Junction or Link) of the sensor.
          */
-        virtual int getParentJointIndex() const = 0;
+        virtual JointIndex getParentJointIndex() const = 0;
 
         /**
          * Set the name of the parent Joint.
@@ -189,7 +181,7 @@ namespace iDynTree {
         /**
          * Set the numeric index of the parent joint of the sensor.
          */
-        virtual bool setParentJointIndex(const int &) = 0;
+        virtual bool setParentJointIndex(const JointIndex &) = 0;
 
         /**
          * Check if the sensor is consistent with the specified model.
@@ -313,7 +305,7 @@ namespace iDynTree {
              * @param[in] sensor constant reference to the Sensor to add.
              * @return the sensor index of the newly added sensor, or -1 in case of error.
              */
-            int addSensor(const Sensor & sensor);
+            std::ptrdiff_t addSensor(const Sensor & sensor);
 
             /**
              * Change the serialization of a specific sensor type.
@@ -329,14 +321,23 @@ namespace iDynTree {
              * Get the number of sensors of type sensor_type in this SensorsList .
              * @return the number of sensors of type sensor_type
              */
-            unsigned int getNrOfSensors(const SensorType & sensor_type) const;
+            std::size_t getNrOfSensors(const SensorType & sensor_type) const;
 
             /**
              * Get the index of a sensor of type sensor_type in this SensorList
              *
              * @return true if the sensor name is found, false otherwise.
              */
-            bool getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name, unsigned int & sensor_index) const;
+            bool getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name, std::ptrdiff_t & sensor_index) const;
+
+            /**
+             * Get the index of a sensor of type sensor_type in this SensorList
+             *
+             * @return true if the sensor name is found, false otherwise.
+             *
+             * @deprecated Use the version that takes in input a  std::ptrdiff_t sensor_index 
+             */
+            IDYNTREE_DEPRECATED_WITH_MSG("Use std::ptrdiff_t for representing the SensorIndex.") bool getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name, unsigned int & sensor_index) const;
 
             /**
              * Get the index of a sensor of type sensor_type and with name sensor_name
@@ -346,7 +347,7 @@ namespace iDynTree {
              * \note Some languages do not support well in-output parameters, so we provided this
              *       method as an alternative to the three-arguments getSensorIndex
              */
-            int getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name) const;
+            std::ptrdiff_t getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name) const;
 
             /**
              * Get the total size of sensor measurements.
@@ -359,7 +360,7 @@ namespace iDynTree {
              *
              * \return the pointer of sensor, of 0 if sensor_index is out of bounds
              */
-            Sensor * getSensor(const SensorType & sensor_type, int sensor_index) const;
+            Sensor * getSensor(const SensorType & sensor_type, std::ptrdiff_t sensor_index) const;
 
             /**
              * Check if all the sensors in the list are consistent with the specified model.
@@ -367,7 +368,7 @@ namespace iDynTree {
             bool isConsistent(const Model& model) const;
 
             bool removeSensor(const SensorType & sensor_type, const std::string & _sensor_name);
-            bool removeSensor(const SensorType & sensor_type, const unsigned int sensor_index);
+            bool removeSensor(const SensorType & sensor_type, const std::ptrdiff_t sensor_index);
             bool removeAllSensorsOfType(const SensorType & sensor_type);
 
             iterator allSensorsIterator();
@@ -551,13 +552,13 @@ namespace iDynTree {
              * Set the number of sensors of type sensor_type in this SensorsTree .
              * @return true if all went right, false otherwise
              */
-            bool setNrOfSensors(const SensorType & sensor_type, unsigned int nrOfSensors);
+            bool setNrOfSensors(const SensorType & sensor_type, std::size_t nrOfSensors);
 
             /**
              * Get the number of sensors of type sensor_type in this SensorsMeasurements .
              * @return the number of sensors of type sensor_type
              */
-            unsigned int getNrOfSensors(const SensorType & sensor_type) const;
+            std::size_t getNrOfSensors(const SensorType & sensor_type) const;
 
             /**
              * Resize and reset the measurement vectors
@@ -578,16 +579,10 @@ namespace iDynTree {
              * and the specified sensor_type uses Wrench as its measurement type.
              */
             bool setMeasurement(const SensorType & sensor_type,
-                                const unsigned int & sensor_index,
+                                const std::ptrdiff_t & sensor_index,
                                 const iDynTree::Wrench & measurement);
             bool setMeasurement(const SensorType & sensor_type,
-                                const unsigned int & sensor_index,
-                                const iDynTree::LinAcceleration & measurement);
-            bool setMeasurement(const SensorType & sensor_type,
-                                const unsigned int & sensor_index,
-                                const iDynTree::AngVelocity & measurement);
-            bool setMeasurement(const SensorType & sensor_type,
-                                const unsigned int & sensor_index,
+                                const std::ptrdiff_t & sensor_index,
                                 const Vector3 & measurement);
 
 
@@ -598,16 +593,10 @@ namespace iDynTree {
              * and the specified sensor_type uses its appropriate type as its measurement type.
              */
             bool getMeasurement(const SensorType & sensor_type,
-                                const unsigned int & sensor_index,
+                                const std::ptrdiff_t & sensor_index,
                                 iDynTree::Wrench & measurement) const;
             bool getMeasurement(const SensorType & sensor_type,
-                                const unsigned int & sensor_index,
-                                iDynTree::LinAcceleration &measurement) const;
-            bool getMeasurement(const SensorType & sensor_type,
-                                const unsigned int & sensor_index,
-                                iDynTree::AngVelocity &measurement) const;
-            bool getMeasurement(const SensorType & sensor_type,
-                                const unsigned int & sensor_index,
+                                const std::ptrdiff_t & sensor_index,
                                 Vector3& measurement) const;
 
             /**

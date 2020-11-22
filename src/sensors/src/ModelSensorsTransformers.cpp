@@ -154,14 +154,6 @@ bool createReducedModelAndSensors(const Model& fullModel,
 
                 delete sensorCopy;
             }
-            // If the joint to which is attached the sensor has been lumped, notify that the joint
-            // sensor will not be present in the reduced model
-            else {
-                std::stringstream ss;
-                ss << "The joint " << parentJointName << " is not in the reduced model, the associated joint sensor won't be present" << std::endl;
-                reportWarning("", "createReducedModelAndSensors", ss.str().c_str());
-
-            }
         }
         else {
             std::stringstream ss;

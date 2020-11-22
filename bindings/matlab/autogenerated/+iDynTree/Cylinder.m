@@ -2,32 +2,24 @@ classdef Cylinder < iDynTree.SolidShape
   methods
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1180, self);
+        iDynTreeMEX(1017, self);
         self.SwigClear();
       end
     end
     function varargout = clone(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1181, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1018, self, varargin{:});
     end
-    function varargout = length(self, varargin)
-      narginchk(1, 2)
-      if nargin==1
-        nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1182, self);
-      else
-        nargoutchk(0, 0)
-        iDynTreeMEX(1183, self, varargin{1});
-      end
+    function varargout = getLength(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1019, self, varargin{:});
     end
-    function varargout = radius(self, varargin)
-      narginchk(1, 2)
-      if nargin==1
-        nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1184, self);
-      else
-        nargoutchk(0, 0)
-        iDynTreeMEX(1185, self, varargin{1});
-      end
+    function varargout = setLength(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1020, self, varargin{:});
+    end
+    function varargout = getRadius(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1021, self, varargin{:});
+    end
+    function varargout = setRadius(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1022, self, varargin{:});
     end
     function self = Cylinder(varargin)
       self@iDynTree.SolidShape(SwigRef.Null);
@@ -36,7 +28,7 @@ classdef Cylinder < iDynTree.SolidShape
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1186, varargin{:});
+        tmp = iDynTreeMEX(1023, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end

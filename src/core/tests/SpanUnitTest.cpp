@@ -29,6 +29,8 @@
 #include <iDynTree/Core/TestUtils.h>
 #include <iDynTree/Core/Span.h>
 
+#include <Eigen/Dense>
+
 #include <array>       // for array
 #include <iostream>    // for ptrdiff_t
 #include <iterator>    // for reverse_iterator, operator-, operator==
@@ -1398,6 +1400,27 @@ void default_constructible()
     ASSERT_IS_TRUE((!std::is_default_constructible<Span<int, 42>>::value));
 }
 
+void from_eigen_constructor()
+{
+    Eigen::Vector3d vec;
+    vec[0] = 1;
+    vec[1] = 2;
+    vec[2] = 3;
+
+    Span<double> s(vec);
+
+    ASSERT_IS_TRUE(vec.size() == s.size());
+    for(size_t i=0; i < vec.size(); i++) {
+        ASSERT_IS_TRUE(vec[i] == s[i]);
+    }
+
+    auto other = make_span(vec);
+    ASSERT_IS_TRUE(vec.size() == other.size());
+    for(size_t i=0; i < vec.size(); i++) {
+        ASSERT_IS_TRUE(vec[i] == other[i]);
+    }
+}
+
 int main(){
     default_constructor();
     size_optimization();
@@ -1429,6 +1452,7 @@ int main(){
     fixed_size_conversions();
     interop_with_std_regex();
     default_constructible();
+    from_eigen_constructor();
 
     return EXIT_SUCCESS;
 }

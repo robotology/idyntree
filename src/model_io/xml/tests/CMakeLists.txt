@@ -11,8 +11,7 @@ set(IDYNTREE_MODELIO_XML_DATAFILES ${IDYNTREE_MODELIO_TESTFILES_DIR}/xml)
 add_executable(XMLParserUnitTest XMLParserUnitTest.cpp)
 target_compile_definitions(XMLParserUnitTest PUBLIC -DIDYNTREE_TEST_FILES_DIR="${IDYNTREE_MODELIO_XML_DATAFILES}")
 
-target_include_directories(XMLParserUnitTest PRIVATE ${EIGEN3_INCLUDE_DIR})
-target_link_libraries(XMLParserUnitTest idyntree-core idyntree-modelio-xml)
+target_link_libraries(XMLParserUnitTest PRIVATE idyntree-core idyntree-modelio-xml Eigen3::Eigen)
 add_test(NAME UnitTestXMLParser COMMAND XMLParserUnitTest)
 
 if(IDYNTREE_RUN_VALGRIND_TESTS)

@@ -24,7 +24,7 @@ VectorDynSize::VectorDynSize(): m_data(0), m_size(0), m_capacity(0)
 
 }
 
-VectorDynSize::VectorDynSize(unsigned int _size): m_size(_size), m_capacity(_size)
+VectorDynSize::VectorDynSize(std::size_t _size): m_size(_size), m_capacity(_size)
 {
     if( this->m_size == 0 )
     {
@@ -40,7 +40,7 @@ VectorDynSize::VectorDynSize(unsigned int _size): m_size(_size), m_capacity(_siz
 
 
 VectorDynSize::VectorDynSize(const double* in_data,
-                             const unsigned int in_size): m_size(in_size), m_capacity(in_size)
+                             const std::size_t in_size): m_size(in_size), m_capacity(in_size)
 {
     if( this->m_size == 0 )
     {
@@ -74,6 +74,11 @@ VectorDynSize::~VectorDynSize()
         this->m_data = 0;
     }
 }
+#if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
+VectorDynSize::VectorDynSize(Span<const double> vec)
+    : VectorDynSize(vec.data(), vec.size())
+{}
+#endif
 
 VectorDynSize& VectorDynSize::operator=(const VectorDynSize& vec)
 {
@@ -96,12 +101,12 @@ VectorDynSize& VectorDynSize::operator=(const VectorDynSize& vec)
 }
 
 #if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
-VectorDynSize &VectorDynSize::operator=(const Span<const double> &vec)
+VectorDynSize &VectorDynSize::operator=(Span<const double> vec)
 {
     // if the size don't match, reallocate the data
     if( this->m_size != vec.size() )
     {
-        resize(static_cast<unsigned int>(vec.size()));
+        resize(static_cast<std::size_t>(vec.size()));
     }
 
     // After reallocation, the size should match
@@ -119,14 +124,14 @@ VectorDynSize &VectorDynSize::operator=(const Span<const double> &vec)
 
 void VectorDynSize::zero()
 {
-    for(unsigned int i=0; i < this->size(); i++ )
+    for(std::size_t i=0; i < this->size(); i++ )
     {
         this->m_data[i] = 0.0;
     }
 }
 
 
-unsigned int VectorDynSize::size() const
+std::size_t VectorDynSize::size() const
 {
     return this->m_size;
 }
@@ -142,30 +147,30 @@ const double* VectorDynSize::data() const
     return this->m_data;
 }
 
-double& VectorDynSize::operator()(unsigned int index)
+double& VectorDynSize::operator()(std::size_t index)
 {
     assert(index < this->size());
     return this->m_data[index];
 }
 
-double VectorDynSize::operator()(unsigned int index) const
+double VectorDynSize::operator()(std::size_t index) const
 {
     return this->m_data[index];
 }
 
-double& VectorDynSize::operator[](unsigned int index)
-{
-    assert(index < this->size());
-    return this->m_data[index];
-}
-
-double VectorDynSize::operator[](unsigned int index) const
+double& VectorDynSize::operator[](std::size_t index)
 {
     assert(index < this->size());
     return this->m_data[index];
 }
 
-double VectorDynSize::getVal(const unsigned int index) const
+double VectorDynSize::operator[](std::size_t index) const
+{
+    assert(index < this->size());
+    return this->m_data[index];
+}
+
+double VectorDynSize::getVal(const std::size_t index) const
 {
     if( index >= this->size() )
     {
@@ -176,7 +181,7 @@ double VectorDynSize::getVal(const unsigned int index) const
     return this->m_data[index];
 }
 
-bool VectorDynSize::setVal(const unsigned int index, const double new_el)
+bool VectorDynSize::setVal(const std::size_t index, const double new_el)
 {
     if( index >= this->size() )
     {
@@ -219,7 +224,7 @@ double* VectorDynSize::end() noexcept
     return this->m_data + this->m_size;
 }
 
-void VectorDynSize::changeCapacityAndCopyData(const unsigned int _newCapacity)
+void VectorDynSize::changeCapacityAndCopyData(const std::size_t _newCapacity)
 {
     //Corner case: zero capacity
     if (_newCapacity == 0) {
@@ -244,7 +249,7 @@ void VectorDynSize::changeCapacityAndCopyData(const unsigned int _newCapacity)
     this->m_data = localBuf;
 }
 
-void VectorDynSize::reserve(const unsigned int _newCapacity)
+void VectorDynSize::reserve(const std::size_t _newCapacity)
 {
     assert(this->m_size <= this->m_capacity);
 
@@ -256,7 +261,7 @@ void VectorDynSize::reserve(const unsigned int _newCapacity)
     this->changeCapacityAndCopyData(_newCapacity);
 }
 
-void VectorDynSize::resize(const unsigned int _newSize)
+void VectorDynSize::resize(const std::size_t _newSize)
 {
     //Possible cases:
     // 1) Reduce size -> don't touch capacity. Lose elements > _newSize
@@ -286,7 +291,7 @@ void VectorDynSize::shrink_to_fit()
 
 void VectorDynSize::fillBuffer(double* buf) const
 {
-    for(unsigned int i=0; i < this->size(); i++ )
+    for(std::size_t i=0; i < this->size(); i++ )
     {
         buf[i] = this->m_data[i];
     }
@@ -297,7 +302,7 @@ std::string VectorDynSize::toString() const
 {
     std::stringstream ss;
 
-    for(unsigned int i=0; i < this->size(); i++ )
+    for(std::size_t i=0; i < this->size(); i++ )
     {
         ss << this->m_data[i] << " ";
     }

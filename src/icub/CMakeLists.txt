@@ -29,7 +29,7 @@ set_target_properties(${libraryname} PROPERTIES PUBLIC_HEADER "${iDynTree_ICUB_h
 
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}>")
+                                                 "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 
 target_link_libraries(${libraryname} LINK_PUBLIC iKin skinDynLib idyntree-core idyntree-model idyntree-yarp idyntree-estimation)
 
@@ -47,8 +47,4 @@ install(TARGETS ${libraryname}
         PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/iDynTree" COMPONENT dev)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS idyntree-icub)
-
-# Install headers in deprecated location
-install(DIRECTORY include/iDynTree/iCub
-        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/iDynTree")
 

@@ -14,6 +14,8 @@
 
 #include <string>
 
+#include <iDynTree/Core/MatrixView.h>
+
 namespace iDynTree
 {
     /**
@@ -29,7 +31,7 @@ namespace iDynTree
          * element corresponding to row and col, using row
          * major ordering.
          */
-        unsigned int rawIndexRowMajor(int row, int col) const;
+        std::size_t rawIndexRowMajor(std::size_t row, std::size_t col) const;
 
         /**
          * Return the raw index in the data vector of the
@@ -40,12 +42,12 @@ namespace iDynTree
          *          this function is used just in the fillColMajorBuffer
          *          method.
          */
-        unsigned int rawIndexColMajor(int row, int col) const;
+        std::size_t rawIndexColMajor(std::size_t row, std::size_t col) const;
 
         /**
          * Set the capacity of the vector, resizing the buffer pointed by m_data.
          */
-        void changeCapacityAndCopyData(const unsigned int _newCapacity);
+        void changeCapacityAndCopyData(const std::size_t _newCapacity);
 
     protected:
         /**
@@ -56,13 +58,13 @@ namespace iDynTree
          * \warning this class stores data using the row major order
          */
         double * m_data;
-        unsigned int m_rows;
-        unsigned int m_cols;
+        std::size_t m_rows;
+        std::size_t m_cols;
 
         /**
          * The buffer to which m_data is pointing is m_capacity*sizeof(double).
          */
-        unsigned int m_capacity;
+        std::size_t m_capacity;
 
     public:
         /**
@@ -78,7 +80,7 @@ namespace iDynTree
          *
          * \warning performs dynamic memory allocation operations
          */
-        MatrixDynSize(unsigned int _rows, unsigned int _cols);
+        MatrixDynSize(std::size_t _rows, std::size_t _cols);
 
         /**
          * Constructor from a C-style matrix.
@@ -87,7 +89,7 @@ namespace iDynTree
          * \warning this class stores data using the row major order
          * \warning performs dynamic memory allocation operations
          */
-        MatrixDynSize(const double * in_data, const unsigned int in_rows, const unsigned int in_cols);
+        MatrixDynSize(const double * in_data, const std::size_t in_rows, const std::size_t in_cols);
 
         /**
          * Copy constructor
@@ -95,6 +97,16 @@ namespace iDynTree
          * @param other the object to copy
          */
         MatrixDynSize(const MatrixDynSize& other);
+
+
+        /**
+         * Constructor from MatrixView object
+         *
+         * @param other MatrixView to copy
+         * \warning performs dynamic memory allocation operations
+         *
+         */
+        MatrixDynSize(iDynTree::MatrixView<const double> other);
 
         /**
          * Assignment operator
@@ -104,6 +116,15 @@ namespace iDynTree
          * @return *this
          */
         MatrixDynSize& operator=(const MatrixDynSize& other);
+
+        /**
+         * Assignment operator
+         *
+         * @param other the object to copy into self
+         *
+         * @return *this
+         */
+        MatrixDynSize& operator=(iDynTree::MatrixView<const double> other);
 
         /**
          * Denstructor
@@ -120,12 +141,12 @@ namespace iDynTree
          *          In doubt, don't use them and rely on more high level functions.
          */
         ///@{
-        double operator()(const unsigned int row, const unsigned int col) const;
-        double& operator()(const unsigned int row, const unsigned int col);
-        double getVal(const unsigned int row, const unsigned int col) const;
-        bool setVal(const unsigned int row, const unsigned int col, const double new_el);
-        unsigned int rows() const;
-        unsigned int cols() const;
+        double operator()(const std::size_t row, const std::size_t col) const;
+        double& operator()(const std::size_t row, const std::size_t col);
+        double getVal(const std::size_t row, const std::size_t col) const;
+        bool setVal(const std::size_t row, const std::size_t col, const double new_el);
+        std::size_t rows() const;
+        std::size_t cols() const;
         ///@}
 
         /**
@@ -157,7 +178,7 @@ namespace iDynTree
          *
          * \warning performs dynamic memory allocation operations if newRows*newCols > capacity()
          */
-        void resize(const unsigned int _newRows, const unsigned int _newCols);
+        void resize(const std::size_t _newRows, const std::size_t _newCols);
 
         /**
          * Increase the capacity of the matrix, preserving old content.
@@ -209,6 +230,14 @@ namespace iDynTree
         void fillColMajorBuffer(double * colMajorBuf) const;
 
 
+#if !defined(SWIG_VERSION) || SWIG_VERSION >= 0x030000
+        /** Typedefs to enable make_matrix_view.
+         */
+        ///@{
+        typedef double value_type;
+        ///@}
+#endif
+
         /** @name Output helpers.
          *  Output helpers.
          */
@@ -222,3 +251,4 @@ namespace iDynTree
 }
 
 #endif /* IDYNTREE_MATRIX_DYN_SIZE_H */
+

@@ -1,11 +1,8 @@
 #########################################################################
 # Control whether libraries are shared or static.
-if( MSVC )
-option(IDYNTREE_SHARED_LIBRARY "Compile iDynTree as a shared library" FALSE)
-else()
-option(IDYNTREE_SHARED_LIBRARY "Compile iDynTree as a shared library" TRUE)
-endif()
-set(BUILD_SHARED_LIBS ${IDYNTREE_SHARED_LIBRARY})
+option(BUILD_SHARED_LIBS "Build libraries as shared as opposed to static" ON)
+
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 #########################################################################
 option(IDYNTREE_ONLY_DOCS "Only produce iDynTree documentation, without compiling" FALSE)
@@ -13,7 +10,7 @@ mark_as_advanced(IDYNTREE_ONLY_DOCS)
 
 #########################################################################
 # Use position indipendent code
-set (CMAKE_POSITION_INDEPENDENT_CODE TRUE)
+option(CMAKE_POSITION_INDEPENDENT_CODE "When compiling static libraries generate position independent code" TRUE)
 
 #########################################################################
 # Turn on testing.
@@ -44,18 +41,16 @@ if(IDYNTREE_COMPILE_TESTS)
 endif()
 
 #########################################################################
-# Turn on compilation of geometrical relations semantics check.
-option(IDYNTREE_USES_SEMANTICS "Compile iDynTree semantics check" FALSE)
-
-
-#########################################################################
-# Turn off compilation of optimal control part.
+# Turn off compilation of specific parts of iDynTree.
 option(IDYNTREE_COMPILES_OPTIMALCONTROL "Compile iDynTree optimal control part." TRUE)
+option(IDYNTREE_COMPILES_TOOLS "Compile iDynTree tools." TRUE)
 
 #########################################################################
 # Deal with RPATH
 option(IDYNTREE_ENABLE_RPATH "Enable RPATH for the library" TRUE)
 mark_as_advanced(IDYNTREE_ENABLE_RPATH)
+
+list(APPEND IDYNTREE_BINARY_DIRS "${CMAKE_INSTALL_BINDIR}")
 
 if( MSVC )
     option(IDYNTREE_USES_INTERNAL_URDFDOM "Compile iDynTree with an internal copy of urdfdom patched to avoid Boost dependencies" TRUE)
@@ -78,9 +73,17 @@ if(IDYNTREE_COMPILE_BINDINGS)
     add_definitions(-DIDYNTREE_COMPILE_BINDINGS)
 endif(IDYNTREE_COMPILE_BINDINGS)
 
-if(IDYNTREE_USES_SEMANTICS)
-    add_definitions(-DIDYNTREE_USES_SEMANTICS)
-endif(IDYNTREE_USES_SEMANTICS)
+if(IDYNTREE_USES_PYTHON OR IDYNTREE_USES_PYTHON_PYBIND11)
+    find_package(Python3 COMPONENTS Interpreter QUIET)
+    if (Python3_FOUND)
+        execute_process(COMMAND ${Python3_EXECUTABLE}
+            -c "from distutils import sysconfig; print(sysconfig.get_python_lib(1,0,prefix=''))"
+            OUTPUT_VARIABLE _PYTHON_INSTDIR)
+        string(STRIP ${_PYTHON_INSTDIR} IDYNTREE_PYTHON_INSTALL_DIR)
+        # Bindings are installed in `idyntree` subdirectory.
+        list(APPEND IDYNTREE_BINARY_DIRS "${IDYNTREE_PYTHON_INSTALL_DIR}/idyntree")
+    endif()
+endif()
 
 #set default build type to "Release" in single-config generators
 if(NOT CMAKE_CONFIGURATION_TYPES)

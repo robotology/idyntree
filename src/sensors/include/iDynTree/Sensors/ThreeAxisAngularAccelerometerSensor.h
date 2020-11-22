@@ -12,11 +12,11 @@
 #ifndef THREE_AXIS_ANGULAR_ACCELEROMETER_H
 #define THREE_AXIS_ANGULAR_ACCELEROMETER_H
 
+#include <iDynTree/Core/GeomVector3.h>
 
 namespace iDynTree
 {
     class Transform;
-    class LinearMotionVector3;
     typedef LinearMotionVector3 LinAcceleration;
     class SpatialAcc;
     class Twist;
@@ -131,10 +131,6 @@ namespace iDynTree {
         * @return the predicted measurement as a AngAcceleration
         */
         Vector3 predictMeasurement(const iDynTree::SpatialAcc &linkAcc);
-
-        // Deprecated
-        IDYNTREE_DEPRECATED_WITH_MSG("Use predictMeasurement(const iDynTree::SpatialAcc &linkAcc) instead")
-        Vector3 predictMeasurement(const iDynTree::SpatialAcc &linkAcc, const iDynTree::Twist &linkTwist);
     };
 
 

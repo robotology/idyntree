@@ -13,6 +13,7 @@
 #include "testModels.h"
 
 #include <iDynTree/Core/TestUtils.h>
+#include <iDynTree/ModelIO/ModelLoader.h>
 
 
 using namespace iDynTree;
@@ -71,7 +72,9 @@ int main()
 
     std::vector<std::string> consideredJoints = getCanonical_iCubJoints();
 
-    bool ok = simpleOdometry.loadModelFromFileWithSpecifiedDOFs(getAbsModelPath("iCubDarmstadt01.urdf"),consideredJoints);
+    iDynTree::ModelLoader mdlLoader;
+    bool ok = mdlLoader.loadReducedModelFromFile(getAbsModelPath("iCubDarmstadt01.urdf"),consideredJoints);
+    ok =  ok && simpleOdometry.setModel(mdlLoader.model());
 
     ASSERT_IS_TRUE(ok);
 

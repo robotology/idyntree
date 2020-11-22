@@ -1,0 +1,126 @@
+name: Python CI/CD
+
+on:
+  push:
+  pull_request:
+  release:
+    types:
+      - published
+
+jobs:
+
+  build_sdist:
+    name: Build source distribution
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version:
+          - 3.8
+
+    steps:
+
+      - uses: actions/checkout@master
+      - run: git fetch --prune --unshallow
+
+      - name: Install Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install sdist dependencies
+        run: pip install setuptools_scm cmake_build_extension
+
+      - name: Build sdist
+        run: python setup.py sdist
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            coinor-libipopt-dev \
+            libeigen3-dev swig \
+            libxml2-dev \
+            libassimp-dev
+
+      - name: Install sdist
+        run: pip -v install dist/*.tar.gz
+
+      - name: Test import
+        run: python -c 'import idyntree.bindings'
+
+      - uses: actions/upload-artifact@v2
+        with:
+          path: dist/*.tar.gz
+
+  build_linux_wheels:
+
+    name: Build wheels on ubuntu-latest
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version:
+          - 3.8
+          # - 3.9
+
+    steps:
+
+      - uses: actions/checkout@master
+      - run: git fetch --prune --unshallow
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential \
+            coinor-libipopt-dev \
+            libeigen3-dev swig \
+            libxml2-dev \
+            libassimp-dev
+
+      - name: '[Linux] Build wheel'
+        run: pip wheel -w wheelhouse .
+
+      - name: Remove other wheels
+        run: find wheelhouse/ -type f -not -name 'idyntree-*' -delete
+
+      # Rename the wheel to manylinux2014 (even if it is not) so that it can be uploaded to PyPI
+      - name: Rename wheels
+        run: |
+          ls wheelhouse/
+          find wheelhouse/ -type f -name "*.whl" -exec rename.ul linux manylinux2014 {} +
+          ls wheelhouse/
+
+      - uses: actions/upload-artifact@v2
+        with:
+          path: ./wheelhouse/*.whl
+
+  upload_pypi:
+    needs:
+      - build_sdist
+      - build_linux_wheels
+    runs-on: ubuntu-latest
+    # Devel branch produces pre-releases
+    # Master branch produces stable releases linked to GitHub releases
+    if: |
+      github.repository == 'robotology/idyntree' &&
+      ((github.event_name == 'release' && github.event.action == 'published') ||
+       (github.event_name == 'push' && github.ref == 'refs/heads/devel'))
+
+    steps:
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: artifact
+          path: dist
+
+      - uses: pypa/gh-action-pypi-publish@master
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_TOKEN }}
