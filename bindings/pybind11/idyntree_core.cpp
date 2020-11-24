@@ -17,6 +17,8 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 
+#include <cstddef>
+
 namespace iDynTree {
 namespace bindings {
 namespace {
@@ -25,10 +27,10 @@ namespace py = ::pybind11;
 void vectorDynSizeClassDefinition(py::class_<VectorDynSize>& vector) {
   vector.def(py::init())
       .def(py::init<unsigned>())
-      .def("__getitem__", py::overload_cast<const unsigned>(
+      .def("__getitem__", py::overload_cast<const std::size_t>(
                               &VectorDynSize::operator(), py::const_))
       .def("__setitem__",
-           [](VectorDynSize& the_vector, unsigned index, double new_value) {
+           [](VectorDynSize& the_vector, std::size_t index, double new_value) {
              the_vector(index) = new_value;
            })
       .def(
@@ -61,10 +63,10 @@ void createFixSizeVector(pybind11::module& module,
   py::class_<VectorFixSize<size>>(module, class_name.c_str(),
                                   py::buffer_protocol())
       .def(py::init())
-      .def("__getitem__", py::overload_cast<const unsigned>(
+      .def("__getitem__", py::overload_cast<const std::size_t>(
                               &VectorFixSize<size>::operator(), py::const_))
       .def("__setitem__",
-           [](VectorFixSize<size>& the_vector, unsigned index,
+           [](VectorFixSize<size>& the_vector, std::size_t index,
               double new_value) { the_vector(index) = new_value; })
       .def("__len__", &VectorFixSize<size>::size)
       .def(
@@ -93,12 +95,13 @@ void matrixDynSizeClassDefinition(py::class_<MatrixDynSize>& matrix) {
   matrix.def(py::init())
       .def(py::init<unsigned, unsigned>())
       .def("__getitem__",
-           [](MatrixDynSize& matrix, std::pair<unsigned, unsigned> indices) {
+           [](MatrixDynSize& matrix,
+              std::pair<std::size_t, std::size_t> indices) {
              return matrix.getVal(indices.first, indices.second);
            })
       .def("__setitem__",
-           [](MatrixDynSize& matrix, std::pair<unsigned, unsigned> indices,
-              double item) {
+           [](MatrixDynSize& matrix,
+              std::pair<std::size_t, std::size_t> indices, double item) {
              return matrix.setVal(indices.first, indices.second, item);
            })
       .def("rows", &MatrixDynSize::rows)
@@ -127,12 +130,12 @@ void createFixSizeMatrix(pybind11::module& module,
       .def(py::init())
       .def("__getitem__",
            [](MatrixFixSize<rows, cols>& matrix,
-              std::pair<unsigned, unsigned> indices) {
+              std::pair<std::size_t, std::size_t> indices) {
              return matrix.getVal(indices.first, indices.second);
            })
       .def("__setitem__",
            [](MatrixFixSize<rows, cols>& matrix,
-              std::pair<unsigned, unsigned> indices, double item) {
+              std::pair<std::size_t, std::size_t> indices, double item) {
              return matrix.setVal(indices.first, indices.second, item);
            })
       .def("rows", &MatrixFixSize<rows, cols>::rows)
