@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.1] - 2020-11-24
+
+### Fixed 
+- Fixed problem in pybind11-based Python bindings (https://github.com/robotology/idyntree/pull/781). 
+
 ## [2.0.0] - 2020-11-22
 
 ### Added
