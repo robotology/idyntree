@@ -130,8 +130,8 @@ enum BerdySensorTypes
      */
     JOINT_WRENCH_SENSOR     = 1003,
 
-    // CoM Accelerometer sensor
-    COM_ACCELEROMETER_SENSOR = 1004
+    // Rate of Change of Momentum (ROCM) Sensor
+    ROCM_SENSOR = 1004
 };
 
 bool isLinkBerdyDynamicVariable(const BerdyDynamicVariablesTypes dynamicVariableType);
@@ -155,8 +155,8 @@ public:
                      includeAllJointAccelerationsAsSensors(true),
                      includeAllJointTorquesAsSensors(false),
                      includeAllNetExternalWrenchesAsSensors(true),
-                     includeCoMAccelerometerAsSensorInTask1(false),
-                     includeCoMAccelerometerAsSensorInTask2(false),
+                     includeROCMAsSensorInTask1(false),
+                     includeROCMAsSensorInTask2(false),
                      includeFixedBaseExternalWrench(false),
                      baseLink(""),
                      stackOfTasksMAP(false)
@@ -209,26 +209,26 @@ public:
     bool includeAllNetExternalWrenchesAsSensors;
 
     /*
-     * If true, includes the CoM accelerometer in the task1 sensors vector.
+     * If true, includes the Rate of Change of Momentum (ROCM) in the task1 sensors vector.
      * It is compatible only with floating base variant of BERDY
      *
      * Default value: false .
      */
-    bool includeCoMAccelerometerAsSensorInTask1;
+    bool includeROCMAsSensorInTask1;
 
     /*
-     * If true, includes the CoM accelerometer in the task2 sensors vector.
+     * If true, includes the Rate of Change of Momentum (ROCM) in the task2 sensors vector.
      * It is compatible only with floating base variant of BERDY
      *
      * Default value: false .
      */
-    bool includeCoMAccelerometerAsSensorInTask2;
+    bool includeROCMAsSensorInTask2;
 
     /**
-     * Vector of link names that are considered for rate of change of momentum constraint using CoM accelerometer sensor
+     * Vector of link names that are considered for rate of change of momentum constraint using Rate of Change of Momentum (ROCM) sensor
      * The default value is set to contains all the links present in the model
      */
-    std::vector<std::string> comConstraintLinkNamesVector;
+    std::vector<std::string> rocmConstraintLinkNamesVector;
 
     /**
      * If includeNetExternalWrenchesAsSensors is true and the
@@ -737,7 +737,7 @@ public:
     IndexRange getRangeDOFSensorVariable(const BerdySensorTypes sensorType, const DOFIndex idx) const;
     IndexRange getRangeJointSensorVariable(const BerdySensorTypes sensorType, const JointIndex idx) const;
     IndexRange getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx) const;
-    IndexRange getRangeCoMAccelerometerSensorVariable(const BerdySensorTypes sensorType, const bool task1) const;
+    IndexRange getRangeROCMSensorVariable(const BerdySensorTypes sensorType, const bool task1) const;
 
     IndexRange getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx, const bool task1) const;
 

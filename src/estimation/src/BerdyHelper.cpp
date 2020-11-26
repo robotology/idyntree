@@ -292,14 +292,14 @@ bool BerdyHelper::initSensorsMeasurements()
         m_nrOfSensorsMeasurements += 6;
     }
 
-    // Add CoM accelerometer sensor
-    if (m_options.includeCoMAccelerometerAsSensorInTask1)
+    // Add Rate of Change of Momentum (ROCM) sensor
+    if (m_options.includeROCMAsSensorInTask1)
     {
         task1BerdySensorTypeOffsets.comAccelerationOffset = m_task1_nrOfSensorsMeasurements;
         m_task1_nrOfSensorsMeasurements += 6;
     }
 
-    if (m_options.includeCoMAccelerometerAsSensorInTask2)
+    if (m_options.includeROCMAsSensorInTask2)
     {
         berdySensorTypeOffsets.comAccelerationOffset = m_nrOfSensorsMeasurements;
         m_nrOfSensorsMeasurements += 6;
@@ -750,18 +750,18 @@ IndexRange BerdyHelper::getRangeLinkSensorVariable(const BerdySensorTypes sensor
     return ret;
 }
 
-IndexRange BerdyHelper::getRangeCoMAccelerometerSensorVariable(const BerdySensorTypes sensorType, const bool task1) const
+IndexRange BerdyHelper::getRangeROCMSensorVariable(const BerdySensorTypes sensorType, const bool task1) const
 {
     IndexRange ret = IndexRange::InvalidRange();
 
-    if (sensorType != COM_ACCELEROMETER_SENSOR)
+    if (sensorType != ROCM_SENSOR)
     {
-        iDynTree::reportWarning("BerdyHelpers","getRangeCoMAccelerometerSensorVariable","Wrong sensor types passed for retrieving sensor range");
+        iDynTree::reportWarning("BerdyHelpers","getRangeROCMSensorVariable","Wrong sensor types passed for retrieving sensor range");
     }
 
     if (m_options.berdyVariant != BERDY_FLOATING_BASE)
     {
-        iDynTree::reportWarning("BerdyHelpers","getRangeCoMAccelerometerSensorVariable","CoM Accelerometer sensor is only available in BERDY_FLOATING_BASE");
+        iDynTree::reportWarning("BerdyHelpers","getRangeROCMSensorVariable","Rate of Change of Momentum (ROCM) sensor is only available in BERDY_FLOATING_BASE");
     }
 
     // Set sensor size and offset
@@ -1247,7 +1247,7 @@ bool BerdyHelper::computeTask1SensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
     task1_matrixYElements.clear();
     task1_bY.zero();
 
-    // The task1_Y matrix contains rows equal to the number of NET_EXT_WRENCH_SENSOR sensors plus 3 rows for the COM_ACCELEROMETER_SENSOR
+    // The task1_Y matrix contains rows equal to the number of NET_EXT_WRENCH_SENSOR sensors plus 6 rows for the ROCM_SENSOR
     ////////////////////////////////////////////////////////////////////////
     ///// NET EXTERNAL WRENCHES ACTING ON LINKS
     ////////////////////////////////////////////////////////////////////////
@@ -1277,17 +1277,17 @@ bool BerdyHelper::computeTask1SensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
 
 
     ////////////////////////////////////////////////////////////////////////
-    ///// COM ACCELERATION SENSOR
+    ///// Rate of Change of Momentum (ROCM) SENSOR
     ////////////////////////////////////////////////////////////////////////
-    if (m_options.includeCoMAccelerometerAsSensorInTask1)
+    if (m_options.includeROCMAsSensorInTask1)
     {
-        // Get the row index corresponding to the com accelerometer sensor
-        IndexRange comAccelerometerRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR, true);
+        // Get the row index corresponding to the rocm sensor
+        IndexRange comAccelerometerRange = this->getRangeROCMSensorVariable(ROCM_SENSOR, true);
 
-        for(size_t i = 0; i < m_options.comConstraintLinkNamesVector.size(); i++)
+        for(size_t i = 0; i < m_options.rocmConstraintLinkNamesVector.size(); i++)
         {
             // Get link name from the vector
-            std::string linkName = m_options.comConstraintLinkNamesVector.at(i);
+            std::string linkName = m_options.rocmConstraintLinkNamesVector.at(i);
 
             // Get link index from the vector
             LinkIndex idx = m_model.getLinkIndex(linkName);
@@ -1307,7 +1307,7 @@ bool BerdyHelper::computeTask1SensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
         }
 
 
-        // bY for the com acceleration sensor is zero
+        // bY for the rocm sensor is zero
     }
 
     task1_Y.setFromTriplets(task1_matrixYElements);
@@ -1614,17 +1614,17 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
     }
 
     ////////////////////////////////////////////////////////////////////////
-    ///// COM ACCELERATION SENSOR
+    ///// Rate of Change of Momentum (ROCM) SENSOR
     ////////////////////////////////////////////////////////////////////////
-    if (m_options.includeCoMAccelerometerAsSensorInTask2)
+    if (m_options.includeROCMAsSensorInTask2)
     {
-        // Get the row index corresponding to the com accelerometer sensor
-        IndexRange comAccelerometerRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR, false);
+        // Get the row index corresponding to the rocm sensor
+        IndexRange comAccelerometerRange = this->getRangeROCMSensorVariable(ROCM_SENSOR, false);
 
-        for(size_t i = 0; i < m_options.comConstraintLinkNamesVector.size(); i++)
+        for(size_t i = 0; i < m_options.rocmConstraintLinkNamesVector.size(); i++)
         {
             // Get link name from the vector
-            std::string linkName = m_options.comConstraintLinkNamesVector.at(i);
+            std::string linkName = m_options.rocmConstraintLinkNamesVector.at(i);
 
             // Get link index from the vector
             LinkIndex idx = m_model.getLinkIndex(linkName);
@@ -1644,7 +1644,7 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
         }
 
 
-        // bY for the com acceleration sensor is zero
+        // bY for the rocm sensor is zero
     }
 
     Y.setFromTriplets(matrixYElements);
@@ -1671,10 +1671,10 @@ bool BerdyHelper::initBerdyFloatingBase()
     m_task1_nrOfDynamicEquations = 6*m_model.getNrOfLinks();
 
     // check comConstraintLinkNamesVector is correctly set
-    if (m_options.includeCoMAccelerometerAsSensorInTask1 || m_options.includeCoMAccelerometerAsSensorInTask2) {
-        if (m_options.comConstraintLinkNamesVector.size() == 0)
+    if (m_options.includeROCMAsSensorInTask1 || m_options.includeROCMAsSensorInTask2) {
+        if (m_options.rocmConstraintLinkNamesVector.size() == 0)
         {
-            reportError("BerdyHelpers","initBerdyFloatingBase","comConstraintLinkNamesVector is not initialized correctly, the size is 0");
+            reportError("BerdyHelpers","initBerdyFloatingBase","rocmConstraintLinkNamesVector is not initialized correctly, the size is 0");
             res = false;
         }
     }
@@ -2182,24 +2182,24 @@ bool BerdyHelper::getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
             m_sensorsOrdering.push_back(jointSens);
         }
 
-        if(m_options.includeCoMAccelerometerAsSensorInTask1) {
+        if(m_options.includeROCMAsSensorInTask1) {
 
-            IndexRange task1SensorRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR, true);
+            IndexRange task1SensorRange = this->getRangeROCMSensorVariable(ROCM_SENSOR, true);
 
             BerdySensor task1LinkSensor;
-            task1LinkSensor.type = COM_ACCELEROMETER_SENSOR;
+            task1LinkSensor.type = ROCM_SENSOR;
             task1LinkSensor.id = m_options.baseLink;
             task1LinkSensor.range = task1SensorRange;
 
             m_task1SensorsOrdering.push_back(task1LinkSensor);
         }
 
-        if(m_options.includeCoMAccelerometerAsSensorInTask2) {
+        if(m_options.includeROCMAsSensorInTask2) {
 
-            IndexRange sensorRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR, false);
+            IndexRange sensorRange = this->getRangeROCMSensorVariable(ROCM_SENSOR, false);
 
             BerdySensor linkSensor;
-            linkSensor.type = COM_ACCELEROMETER_SENSOR;
+            linkSensor.type = ROCM_SENSOR;
             linkSensor.id = m_options.baseLink;
             linkSensor.range = sensorRange;
 
@@ -2576,7 +2576,7 @@ bool BerdyHelper::serializeSensorVariables(SensorsMeasurements& sensMeas,
                                            JointDOFsDoubleArray& jointTorques,
                                            JointDOFsDoubleArray& jointAccs,
                                            LinkInternalWrenches& linkJointWrenches,
-                                           LinearMotionVector3& comAcceleration,
+                                           LinearMotionVector3& comAcceleration, //TODO: Double check this! it needs to be 6x1 spatial motion vector
                                            VectorDynSize& y)
 {
     bool ret=true;
@@ -2649,11 +2649,11 @@ bool BerdyHelper::serializeSensorVariables(SensorsMeasurements& sensMeas,
     }
 
     ////////////////////////////////////////////////////////////////////////
-    ///// COM ACCELERATION
+    ///// Rate of Change of Momentum (ROCM)
     ////////////////////////////////////////////////////////////////////////
-    if (m_options.includeCoMAccelerometerAsSensorInTask1 && m_options.berdyVariant == BERDY_FLOATING_BASE)
+    if (m_options.includeROCMAsSensorInTask1 && m_options.berdyVariant == BERDY_FLOATING_BASE)
     {
-        IndexRange sensorRange = this->getRangeCoMAccelerometerSensorVariable(COM_ACCELEROMETER_SENSOR, true);
+        IndexRange sensorRange = this->getRangeROCMSensorVariable(ROCM_SENSOR, true);
 
         setSubVector(y, sensorRange, comAcceleration);
     }
