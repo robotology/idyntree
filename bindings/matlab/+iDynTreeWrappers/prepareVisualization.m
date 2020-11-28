@@ -124,13 +124,7 @@ frameAxisSize = min(axisRange)/4;
 % linewidth value 1 = to 0.35mm. It is better if we increase the linewidth
 % in proportion to the axisSize of the frame.c
 linewidthSize=frameAxisSize*50;
-plot3(parent, [0 frameAxisSize], [0 0], [0 0], 'r', 'linewidth', linewidthSize);
-plot3(parent, [0 0], [0 frameAxisSize], [0 0], 'g', 'linewidth', linewidthSize);
-plot3(parent, [0 0], [0 0], [0 frameAxisSize], 'b', 'linewidth', linewidthSize);
-axisTextDistance = frameAxisSize+frameAxisSize*.2;
-text(parent, axisTextDistance, 0, 0, 'x', 'color', 'r');
-text(parent, 0, axisTextDistance, 0, 'y', 'color', 'g');
-text(parent, 0, 0, axisTextDistance, 'z', 'color', 'b');
+iDynTreeWrappers.plotFrame(eye(4), frameAxisSize, linewidthSize);
 
 % Axis labels
 title('Robot Visualizer ');
