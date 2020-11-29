@@ -50,7 +50,7 @@ jobs:
         mkdir -p build
         cd build
         cmake -GNinja -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}  -DIDYNTREE_COMPILE_TESTS:BOOL=ON \ 
-              -DIDYNTREE_USES_Qt5:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON 
+              -DIDYNTREE_USES_Qt5:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON ..
 
     - name: Configure [Conda/Windows]
       if: contains(matrix.os, 'windows')
@@ -59,7 +59,7 @@ jobs:
         mkdir -p build
         cd build
         cmake -G"Visual Studio 16 2019"  -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}  -DIDYNTREE_COMPILE_TESTS:BOOL=ON \ 
-              -DIDYNTREE_USES_Qt5:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON 
+              -DIDYNTREE_USES_Qt5:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON ..
 
     - name: Build [Conda]
       shell: bash -l {0}
