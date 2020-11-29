@@ -17,7 +17,63 @@ env:
   VCPKG_INSTALLATION_ROOT: C:\robotology\vcpkg
   
 jobs:
-  build:
+  build-with-conda-dependencies:    
+    name: '[conda:${{ matrix.os }}]'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type: [Release]
+        os: [ubuntu-latest, macos-latest, windows-2019]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+
+    - name: Dependencies [Conda]
+      shell: bash -l {0}
+      run: |
+        # Install mamba (https://github.com/mamba-org/mamba) as first step 
+        conda install -c conda-forge mamba
+        # Compilation related dependencies 
+        mamba install -c conda-forge cmake compilers make ninja pkg-config
+        # Actual dependencies
+        mamba install -c conda-forge eigen libxml2 assimp ipopt qt5 
+
+    - name: Configure [Conda/Linux&macOS]
+      if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
+      shell: bash -l {0}
+      run: |
+        mkdir -p build
+        cd build
+        cmake -GNinja -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}  -DIDYNTREE_COMPILE_TESTS:BOOL=ON \ 
+              -DIDYNTREE_USES_Qt5:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON 
+
+    - name: Configure [Conda/Windows]
+      if: contains(matrix.os, 'windows')
+      shell: bash -l {0}
+      run: |
+        mkdir -p build
+        cd build
+        cmake -G"Visual Studio 16 2019"  -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}  -DIDYNTREE_COMPILE_TESTS:BOOL=ON \ 
+              -DIDYNTREE_USES_Qt5:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON 
+
+    - name: Build [Conda]
+      shell: bash -l {0}
+      run: |
+        cd build
+        cmake --build . --config ${{ matrix.build_type }}
+
+    - name: Test [Conda]
+      shell: bash -l {0}
+      run: |
+        cd build
+        ctest --output-on-failure -C ${{ matrix.build_type }} . 
+
+  build-with-system-dependencies:
     name: '[${{ matrix.os }}@${{ matrix.build_type }}]'
     runs-on: ${{ matrix.os }}
     strategy:
