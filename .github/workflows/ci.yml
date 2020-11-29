@@ -24,7 +24,7 @@ jobs:
       fail-fast: false
       matrix:
         build_type: [Release]
-        os: [ubuntu-latest, macos-latest, windows-2019]
+        os: [ubuntu-20.04, macos-10.15, windows-2019]
 
     steps:
     - uses: actions/checkout@v2
@@ -41,7 +41,7 @@ jobs:
         # Compilation related dependencies 
         mamba install -c conda-forge cmake compilers make ninja pkg-config
         # Actual dependencies
-        mamba install -c conda-forge eigen libxml2 assimp ipopt qt5 
+        mamba install -c conda-forge eigen libxml2 assimp ipopt qt
 
     - name: Configure [Conda/Linux&macOS]
       if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
