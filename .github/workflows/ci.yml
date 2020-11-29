@@ -104,8 +104,6 @@ jobs:
         cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake \
               -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install/deps -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install/deps ..
         cmake --build . --config ${{ matrix.build_type }} --target INSTALL 
-        # Workaround for https://github.com/robotology-dependencies/robotology-vcpkg-binary-ports/issues/3
-        export IPOPT_DIR=${VCPKG_INSTALLATION_ROOT}/installed/x64-windows
         # ICUB
         git clone -b ${ICUB_TAG} https://github.com/robotology/icub-main
         cd icub-main
@@ -158,10 +156,9 @@ jobs:
       run: |
         mkdir -p build
         cd build
-        # ipopt disabled until https://github.com/robotology/idyntree/issues/274 is fixed
         cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install/deps \
               -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON  -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=ON \
-              -DIDYNTREE_USES_PYTHON:BOOL=OFF -DIDYNTREE_USES_OCTAVE:BOOL=OFF -DIDYNTREE_USES_IPOPT:BOOL=OFF \
+              -DIDYNTREE_USES_PYTHON:BOOL=OFF -DIDYNTREE_USES_OCTAVE:BOOL=OFF -DIDYNTREE_USES_IPOPT:BOOL=ON \
               -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
 
     - name: Configure [Ubuntu/macOS]
