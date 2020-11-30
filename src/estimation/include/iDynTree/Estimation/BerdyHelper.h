@@ -62,7 +62,35 @@ enum BerdyVariants
      * for accounting for free floating dynamics and removing the NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV from the dynamic variables.
      *
      */
-    BERDY_FLOATING_BASE = 1
+    BERDY_FLOATING_BASE = 1,
+
+    /**
+     * Modified version of floating base Berdy
+     * for accounting centroidal dynamics constraints towards estimating the external link wrench indepenedent of the internal joint torque estimates
+     * (aka Stack of Tasks Berdy Berdy i.e., SOT Berdy)
+     */
+    HIERARCHICAL_BERDY_FLOATING_BASE = 2
+};
+
+/**
+ * Enumeration of the HIERARCHICAL_BERDY_FLOATING_BASE Berdy variant tasks
+ * in this class.
+ *
+ * @warning This class is still in active development, and so API interface can change between iDynTree versions.
+ * \ingroup iDynTreeExperimental
+ */
+enum HierarchialBerdyTask
+{
+    /**
+     * CENTROIDAL_DYNAMICS of HIERARCHICAL_BERDY_FLOATING_BASE that considers only centroidal dynamics constraint
+     */
+    CENTROIDAL_DYNAMICS = 0,
+
+    /**
+     * Full dynamics estimation problem of HIERARCHICAL_BERDY_FLOATING_BASE that considers only centroidal dynamics constraint
+     * This is the BERDY_FLOATING_BASE complete estimation problem
+     */
+    FULL_DYNAMICS = 1
 };
 
 /**
@@ -130,7 +158,10 @@ enum BerdySensorTypes
      */
     JOINT_WRENCH_SENSOR     = 1003,
 
-    // Rate of Change of Momentum (ROCM) Sensor
+    /**
+     * Non-physical sensor that holds the value of Rate of Change of Momentum (ROCM) of the system
+     * for centroidal dynamics constraint used in HIERARCHICAL_BERDY_FLOATING_BASE Berdy variation
+     */
     ROCM_SENSOR = 1004
 };
 
@@ -158,8 +189,7 @@ public:
                      includeROCMAsSensorInTask1(false),
                      includeROCMAsSensorInTask2(false),
                      includeFixedBaseExternalWrench(false),
-                     baseLink(""),
-                     stackOfTasksMAP(false)
+                     baseLink("")
     {
     }
 
@@ -210,7 +240,7 @@ public:
 
     /*
      * If true, includes the Rate of Change of Momentum (ROCM) in the task1 sensors vector.
-     * It is compatible only with floating base variant of BERDY
+     * It is compatible only with HIERARCHICAL_BERDY_FLOATING_BASE
      *
      * Default value: false .
      */
@@ -218,14 +248,15 @@ public:
 
     /*
      * If true, includes the Rate of Change of Momentum (ROCM) in the task2 sensors vector.
-     * It is compatible only with floating base variant of BERDY
+     * It is compatible only with HIERARCHICAL_BERDY_FLOATING_BASE
      *
      * Default value: false .
      */
     bool includeROCMAsSensorInTask2;
 
     /**
-     * Vector of link names that are considered for rate of change of momentum constraint using Rate of Change of Momentum (ROCM) sensor
+     * Vector of link names that are considered for rate of change of momentum constraint using
+     * Rate of Change of Momentum (ROCM) sensor for HIERARCHICAL_BERDY_FLOATING_BASE variation
      * The default value is set to contains all the links present in the model
      */
     std::vector<std::string> rocmConstraintLinkNamesVector;
@@ -255,12 +286,6 @@ public:
      * \note If the string is empty the default base link of the model will be used.
      */
     std::string baseLink;
-
-    /**
-     * This is a boolean flag for stack of task MAP estimation
-     * The default value is false
-     */
-    bool stackOfTasksMAP;
 
     /**
      * Check that the options are not self-contradicting.
@@ -457,7 +482,6 @@ class BerdyHelper
 
     IndexRange getRangeOriginalBerdyFixedBase(const BerdyDynamicVariablesTypes dynamicVariableType, const TraversalIndex idx) const;
 
-
     /**
      * Ranges for specific dynamics equations
      */
@@ -477,8 +501,8 @@ class BerdyHelper
     bool computeBerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD);
 
     // Methods for task 1 sub matrices for stack of tasks berdy
-    bool computeTask1SensorMatrices(SparseMatrix<iDynTree::ColumnMajor>& task1_Y, VectorDynSize& task1_bY, const bool task1);
-    bool computeTask1BerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree::ColumnMajor>& task1_D, VectorDynSize& task1_bD, const bool task1);
+    bool computeTask1SensorMatrices(SparseMatrix<iDynTree::ColumnMajor>& task1_Y, VectorDynSize& task1_bY, const HierarchialBerdyTask task);
+    bool computeTask1BerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree::ColumnMajor>& task1_D, VectorDynSize& task1_bD, const HierarchialBerdyTask task);
 
     // Helper method
     Matrix6x1 getBiasTermJointAccelerationPropagation(IJointConstPtr joint,
@@ -511,7 +535,7 @@ class BerdyHelper
         size_t dofTorquesOffset;
         size_t netExtWrenchOffset;
         size_t jointWrenchOffset;
-        size_t comAccelerationOffset;
+        size_t rocmOffset;
     } berdySensorTypeOffsets;
 
     /**
@@ -519,7 +543,7 @@ class BerdyHelper
      */
     struct {
         size_t netExtWrenchOffset;
-        size_t comAccelerationOffset;
+        size_t rocmOffset;
     } task1BerdySensorTypeOffsets;
 
     /**
@@ -619,76 +643,40 @@ public:
      * Get the number of columns of the D matrix.
      * This depends on the Berdy variant selected.
      */
-    size_t getNrOfDynamicVariables() const;
+    size_t getNrOfDynamicVariables(const HierarchialBerdyTask& task) const;
 
     /**
      * Get the number of dynamics equations used in the Berdy
      * equations
      */
-    size_t getNrOfDynamicEquations() const;
+    size_t getNrOfDynamicEquations(const HierarchialBerdyTask& task) const;
 
     /**
      * Get the number of sensors measurements.
      */
-    size_t getNrOfSensorsMeasurements() const;
-
-    /**
-     * Get the number of columns of the D matrix.
-     * This depends on the Berdy variant selected.
-     */
-    size_t getNrOfDynamicVariables(const bool& task1) const;
-
-    /**
-     * Get the number of dynamics equations used in the Berdy
-     * equations
-     */
-    size_t getNrOfDynamicEquations(const bool& task1) const;
-
-    /**
-     * Get the number of sensors measurements.
-     */
-    size_t getNrOfSensorsMeasurements(const bool& task1) const;
-
-    /**
-     * Resize and set to zero Berdy matrices. - new method
-     */
-    bool resizeAndZeroBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize &bD,
-                                    SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize &bY,
-                                    const bool& task1);
+    size_t getNrOfSensorsMeasurements(const HierarchialBerdyTask& task) const;
 
     /**
      * Resize and set to zero Berdy matrices.
      */
     bool resizeAndZeroBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize &bD,
-                                    SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize &bY);
+                                    SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize &bY,
+                                    const HierarchialBerdyTask& task);
 
     /**
-     * Resize and set to zero Berdy matrices. - new method
+     * Resize and set to zero Berdy matrices.
      *
      */
     bool resizeAndZeroBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
                                     MatrixDynSize & Y, VectorDynSize & bY,
-                                    const bool& task1);
+                                    const HierarchialBerdyTask& task);
 
     /**
-     * Resize and set to zero Berdy matrices.
-     *
-     */
-    bool resizeAndZeroBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
-                                    MatrixDynSize & Y, VectorDynSize & bY);
-
-    /**
-     * Get Berdy matrices - new method
+     * Get Berdy matrices.
      */
     bool getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize &bD,
                           SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize &bY,
-                          bool task1);
-
-    /**
-     * Get Berdy matrices
-     */
-    bool getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize &bD,
-                          SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize &bY);
+                          const HierarchialBerdyTask& task);
 
     /**
      * Get Berdy matrices - new method
@@ -698,17 +686,7 @@ public:
      */
     bool getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
                           MatrixDynSize & Y, VectorDynSize & bY,
-                          bool task1);
-
-    /**
-     * Get Berdy matrices
-     *
-     * \note internally this function uses sparse matrices
-     * Prefer the use of resizeAndZeroBerdyMatrices(SparseMatrix &, VectorDynSize &, SparseMatrix &, VectorDynSize &)
-     */
-    bool getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
-                          MatrixDynSize & Y, VectorDynSize & bY);
-
+                          const HierarchialBerdyTask& task);
 
     /**
      * Return the internal ordering of the sensors
@@ -718,17 +696,7 @@ public:
      *
      * @return the sensors ordering
      */
-    const std::vector<BerdySensor>& getSensorsOrdering() const;
-
-    /**
-     * Return the internal ordering of the sensors - new method
-     *
-     * Measurements are expected to respect the internal sensors ordering
-     * Use this function to obtain the sensors ordering.
-     *
-     * @return the sensors ordering
-     */
-    const std::vector<BerdySensor>& getSensorsOrdering(const bool& task1) const;
+    const std::vector<BerdySensor>& getSensorsOrdering(const HierarchialBerdyTask& task) const;
 
     /**
      * Get the range of the specified sensor in
@@ -736,22 +704,17 @@ public:
     IndexRange getRangeSensorVariable(const SensorType type, const unsigned int sensorIdx) const;
     IndexRange getRangeDOFSensorVariable(const BerdySensorTypes sensorType, const DOFIndex idx) const;
     IndexRange getRangeJointSensorVariable(const BerdySensorTypes sensorType, const JointIndex idx) const;
-    IndexRange getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx) const;
-    IndexRange getRangeROCMSensorVariable(const BerdySensorTypes sensorType, const bool task1) const;
-
-    IndexRange getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx, const bool task1) const;
-
+    IndexRange getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx, const HierarchialBerdyTask task) const;
+    IndexRange getRangeROCMSensorVariable(const BerdySensorTypes sensorType, const HierarchialBerdyTask task) const;
 
     /**
      * Ranges of dynamic variables
      */
-    IndexRange getRangeLinkVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const LinkIndex idx) const;
-    IndexRange getRangeLinkVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const LinkIndex idx, const bool task1) const;
+    IndexRange getRangeLinkVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const LinkIndex idx, const HierarchialBerdyTask task) const;
     IndexRange getRangeJointVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const JointIndex idx) const;
     IndexRange getRangeDOFVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const DOFIndex idx) const;
 
-    const std::vector<BerdyDynamicVariable>& getDynamicVariablesOrdering() const;
-    const std::vector<BerdyDynamicVariable>& getDynamicVariablesOrdering(const bool& task1) const;
+    const std::vector<BerdyDynamicVariable>& getDynamicVariablesOrdering(const HierarchialBerdyTask& task) const;
 
     /**
      * Serialized dynamic variables from the separate buffers
@@ -775,7 +738,6 @@ public:
                                   VectorDynSize& y);
 
 
-
     /**
      * Debug function:
      *
@@ -784,7 +746,6 @@ public:
     bool serializeDynamicVariablesComputedFromFixedBaseRNEA(JointDOFsDoubleArray  & jointAccs,
                                                             LinkNetExternalWrenches & netExtWrenches,
                                                             VectorDynSize& d);
-
 
     /**
      * Extract the joint torques from the dynamic variables
@@ -797,14 +758,8 @@ public:
      * Extract the net external force-torques from the dynamic variables
      */
     bool extractLinkNetExternalWrenchesFromDynamicVariables(const VectorDynSize& d,
-                                                            LinkNetExternalWrenches& netExtWrenches) const;
-
-    /**
-     * Extract the net external force-torques from the dynamic variables - new method
-     */
-    bool extractLinkNetExternalWrenchesFromDynamicVariables(const VectorDynSize& d,
                                                             LinkNetExternalWrenches& netExtWrenches,
-                                                            const bool task1) const;
+                                                            const HierarchialBerdyTask& task) const;
 
 
     /**

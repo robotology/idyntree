@@ -8,7 +8,6 @@
  * at your option.
  */
 #include "iDynTree/Estimation/BerdySparseMAPSolver.h"
-#include "iDynTree/Estimation/BerdyHelper.h"
 
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/VectorFixSize.h>
@@ -136,44 +135,13 @@ namespace iDynTree {
         delete m_pimpl;
     }
 
-    void BerdySparseMAPSolver::setDynamicsConstraintsPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance)
-    {
-        assert(m_pimpl);
-        assert(covariance.rows() == m_pimpl->priorDynamicsConstraintsCovarianceInverse.rows()
-               && covariance.columns() == m_pimpl->priorDynamicsConstraintsCovarianceInverse.columns());
-        BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::invertSparseMatrix(covariance, m_pimpl->priorDynamicsConstraintsCovarianceInverse);
-    }
-
-    void BerdySparseMAPSolver::setDynamicsRegularizationPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance)
-    {
-        assert(m_pimpl);
-        assert(covariance.rows() == m_pimpl->priorDynamicsRegularizationCovarianceInverse.rows()
-               && covariance.columns() == m_pimpl->priorDynamicsRegularizationCovarianceInverse.columns());
-        BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::invertSparseMatrix(covariance, m_pimpl->priorDynamicsRegularizationCovarianceInverse);
-    }
-
-    void BerdySparseMAPSolver::setDynamicsRegularizationPriorExpectedValue(const iDynTree::VectorDynSize& expectedValue)
-    {
-        assert(m_pimpl);
-        assert(expectedValue.size() == m_pimpl->priorDynamicsRegularizationExpectedValue.size());
-        m_pimpl->priorDynamicsRegularizationExpectedValue = expectedValue;
-    }
-
-    void BerdySparseMAPSolver::setMeasurementsPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance)
-    {
-        assert(m_pimpl);
-        assert(covariance.rows() == m_pimpl->priorMeasurementsCovarianceInverse.rows()
-               && covariance.columns() == m_pimpl->priorMeasurementsCovarianceInverse.columns());
-        BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::invertSparseMatrix(covariance, m_pimpl->priorMeasurementsCovarianceInverse);
-    }
-
-    // New methods with additional bool flag for task1
     void BerdySparseMAPSolver::setDynamicsConstraintsPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance,
-                                                                     const bool& task1)
+                                                                     const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS)
     {
         assert(m_pimpl);
 
-        if (task1) {
+        if (task == HierarchialBerdyTask::CENTROIDAL_DYNAMICS) {
+            assert(m_pimpl->berdy.getOptions().berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE);
             assert(covariance.rows() == m_pimpl->task1_priorDynamicsConstraintsCovarianceInverse.rows()
                    && covariance.columns() == m_pimpl->task1_priorDynamicsConstraintsCovarianceInverse.columns());
             BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::invertSparseMatrix(covariance, m_pimpl->task1_priorDynamicsConstraintsCovarianceInverse);
@@ -187,11 +155,12 @@ namespace iDynTree {
     }
 
     void BerdySparseMAPSolver::setDynamicsRegularizationPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance,
-                                                                        const bool& task1)
+                                                                        const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS)
     {
         assert(m_pimpl);
 
-        if (task1) {
+        if (task == HierarchialBerdyTask::CENTROIDAL_DYNAMICS) {
+            assert(m_pimpl->berdy.getOptions().berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE);
             assert(covariance.rows() == m_pimpl->task1_priorDynamicsRegularizationCovarianceInverse.rows()
                    && covariance.columns() == m_pimpl->task1_priorDynamicsRegularizationCovarianceInverse.columns());
             BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::invertSparseMatrix(covariance, m_pimpl->task1_priorDynamicsRegularizationCovarianceInverse);
@@ -204,11 +173,12 @@ namespace iDynTree {
     }
 
     void BerdySparseMAPSolver::setDynamicsRegularizationPriorExpectedValue(const iDynTree::VectorDynSize& expectedValue,
-                                                                           const bool& task1)
+                                                                           const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS)
     {
         assert(m_pimpl);
 
-        if (task1) {
+        if (task == HierarchialBerdyTask::CENTROIDAL_DYNAMICS) {
+            assert(m_pimpl->berdy.getOptions().berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE);
             assert(expectedValue.size() == m_pimpl->task1_priorDynamicsRegularizationExpectedValue.size());
             m_pimpl->task1_priorDynamicsRegularizationExpectedValue = expectedValue;
         }
@@ -219,11 +189,12 @@ namespace iDynTree {
     }
 
     void BerdySparseMAPSolver::setMeasurementsPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance,
-                                                              const bool& task1)
+                                                              const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS)
     {
         assert(m_pimpl);
 
-        if (task1) {
+        if (task == HierarchialBerdyTask::CENTROIDAL_DYNAMICS) {
+            assert(m_pimpl->berdy.getOptions().berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE);
             assert(covariance.rows() == m_pimpl->task1_priorMeasurementsCovarianceInverse.rows()
                    && covariance.columns() == m_pimpl->task1_priorMeasurementsCovarianceInverse.columns());
             BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::invertSparseMatrix(covariance, m_pimpl->task1_priorMeasurementsCovarianceInverse);
@@ -311,36 +282,21 @@ namespace iDynTree {
         m_pimpl->berdy.updateKinematicsFromFixedBase(m_pimpl->jointsConfiguration, m_pimpl->jointsVelocity, fixedFrame, gravity);
     }
 
-    void BerdySparseMAPSolver::updateEstimateInformationFloatingBase(const iDynTree::JointPosDoubleArray& jointsConfiguration,
-                                                                     const iDynTree::JointDOFsDoubleArray& jointsVelocity,
-                                                                     const FrameIndex floatingFrame,
-                                                                     const Vector3& bodyAngularVelocityOfSpecifiedFrame,
-                                                                     const iDynTree::VectorDynSize& measurements)
-    {
-        assert(m_pimpl);
-
-        m_pimpl->jointsConfiguration = jointsConfiguration;
-        m_pimpl->jointsVelocity = jointsVelocity;
-        m_pimpl->measurements = measurements;
-
-        m_pimpl->berdy.updateKinematicsFromFloatingBase(m_pimpl->jointsConfiguration, m_pimpl->jointsVelocity,
-                                                        floatingFrame, bodyAngularVelocityOfSpecifiedFrame);
-    }
-
     void BerdySparseMAPSolver::updateEstimateInformationFloatingBase(const Transform& baseTransform,
                                                                      const iDynTree::JointPosDoubleArray& jointsConfiguration,
                                                                      const iDynTree::JointDOFsDoubleArray& jointsVelocity,
                                                                      const FrameIndex floatingFrame,
                                                                      const Vector3& bodyAngularVelocityOfSpecifiedFrame,
                                                                      const iDynTree::VectorDynSize& measurements,
-                                                                     bool& task1)
+                                                                     HierarchialBerdyTask& task)
     {
         assert(m_pimpl);
 
         m_pimpl->jointsConfiguration = jointsConfiguration;
         m_pimpl->jointsVelocity = jointsVelocity;
 
-        if (task1) {
+        if (task == HierarchialBerdyTask::CENTROIDAL_DYNAMICS) {
+            assert(m_pimpl->berdy.getOptions().berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE);
             m_pimpl->task1_measurements = measurements;
         }
         else {
@@ -351,7 +307,7 @@ namespace iDynTree {
                                                         floatingFrame, bodyAngularVelocityOfSpecifiedFrame);
     }
 
-    bool BerdySparseMAPSolver::doEstimate(const bool& task1)
+    bool BerdySparseMAPSolver::doEstimate(const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS)
     {
         assert(m_pimpl);
         using iDynTree::toEigen;
@@ -360,7 +316,8 @@ namespace iDynTree {
 #endif
         bool computePermutation = false;
 
-        if (task1) {
+        if (task == HierarchialBerdyTask::CENTROIDAL_DYNAMICS) {
+            assert(m_pimpl->berdy.getOptions().berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE);
             m_pimpl->computeTask1MAP(computePermutation);
         }
         else {
@@ -373,49 +330,18 @@ namespace iDynTree {
         return true;
     }
 
-    bool BerdySparseMAPSolver::doEstimate()
-    {
-        assert(m_pimpl);
-        using iDynTree::toEigen;
-#ifdef EIGEN_RUNTIME_NO_MALLOC
-        Eigen::internal::set_is_malloc_allowed(false);
-#endif
-        bool computePermutation = false;
-        m_pimpl->computeMAP(computePermutation);
-
-#ifdef EIGEN_RUNTIME_NO_MALLOC
-        Eigen::internal::set_is_malloc_allowed(true);
-#endif
-        return true;
-    }
-
-    const iDynTree::VectorDynSize& BerdySparseMAPSolver::getSimulatedMeasurementVector(iDynTree::VectorDynSize& simulatedy, bool task1)
-    {
-
-        if(task1) {
-
-            simulatedy = m_pimpl->simulatedMeasurementsFromMAPSolution;
-        }
-
-    }
-
-
-    void BerdySparseMAPSolver::getLastEstimate(iDynTree::VectorDynSize& lastEstimate, const bool task1) const
+    void BerdySparseMAPSolver::getLastEstimate(iDynTree::VectorDynSize& lastEstimate,
+                                               const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS) const
     {
         assert(m_pimpl);
 
-        if (task1) {
+        if (task == HierarchialBerdyTask::CENTROIDAL_DYNAMICS) {
+            assert(m_pimpl->berdy.getOptions().berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE);
             lastEstimate = m_pimpl->task1_expectedDynamicsAPosteriori;
         }
         else {
             lastEstimate = m_pimpl->expectedDynamicsAPosteriori;
         }
-    }
-
-    void BerdySparseMAPSolver::getLastEstimate(iDynTree::VectorDynSize& lastEstimate) const
-    {
-        assert(m_pimpl);
-        lastEstimate = m_pimpl->expectedDynamicsAPosteriori;
     }
 
     const iDynTree::VectorDynSize& BerdySparseMAPSolver::getLastEstimate() const
@@ -434,7 +360,7 @@ namespace iDynTree {
                                task1_dynamicsConstraintsBias,
                                task1_measurementsMatrix,
                                task1_measurementsBias,
-                               true);
+                               HierarchialBerdyTask::CENTROIDAL_DYNAMICS);
 
         // This is a partial MAP solution considering only the task1 measurements equation  Y1 * d1 + bd1 = y1
         task1_covarianceDynamicsAPosterioriInverse = toEigen(task1_priorDynamicsRegularizationCovarianceInverse);
@@ -455,7 +381,7 @@ namespace iDynTree {
         task1_covarianceDynamicsAPosterioriInverseDecomposition.solve(toEigen(task1_expectedDynamicsAPosterioriRHS));
 
         // Compute simulated y1 from the solutions of MAP estimation
-        simulatedMeasurementsFromMAPSolution.resize(berdy.getNrOfSensorsMeasurements(true));
+        simulatedMeasurementsFromMAPSolution.resize(berdy.getNrOfSensorsMeasurements(HierarchialBerdyTask::CENTROIDAL_DYNAMICS));
         simulatedMeasurementsFromMAPSolution.zero();
         toEigen(simulatedMeasurementsFromMAPSolution) = toEigen(task1_measurementsMatrix).transpose() * toEigen(task1_expectedDynamicsAPosteriori);
 
@@ -472,7 +398,8 @@ namespace iDynTree {
         berdy.getBerdyMatrices(dynamicsConstraintsMatrix,
                                dynamicsConstraintsBias,
                                measurementsMatrix,
-                               measurementsBias);
+                               measurementsBias,
+                               HierarchialBerdyTask::FULL_DYNAMICS);
 
         // Compute the maximum a posteriori probability
         // See Latella et al., "Whole-Body Human Inverse Dynamics with
@@ -524,9 +451,9 @@ namespace iDynTree {
     void BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::initializeTask1Buffers()
     {
         // Resize task1 buffers
-        size_t task1_numberOfDynVariables = berdy.getNrOfDynamicVariables(true);
-        size_t task1_numberOfDynEquations = berdy.getNrOfDynamicEquations(true);
-        size_t task1_numberOfMeasurements = berdy.getNrOfSensorsMeasurements(true);
+        size_t task1_numberOfDynVariables = berdy.getNrOfDynamicVariables(HierarchialBerdyTask::CENTROIDAL_DYNAMICS);
+        size_t task1_numberOfDynEquations = berdy.getNrOfDynamicEquations(HierarchialBerdyTask::CENTROIDAL_DYNAMICS);
+        size_t task1_numberOfMeasurements = berdy.getNrOfSensorsMeasurements(HierarchialBerdyTask::CENTROIDAL_DYNAMICS);
 
         task1_measurements.resize(task1_numberOfMeasurements);
         task1_measurements.zero();
@@ -573,9 +500,9 @@ namespace iDynTree {
         valid = false;
         if (!berdy.isValid()) return false;
         // Resize internal variables
-        size_t numberOfDynVariables = berdy.getNrOfDynamicVariables();
-        size_t numberOfDynEquations = berdy.getNrOfDynamicEquations();
-        size_t numberOfMeasurements = berdy.getNrOfSensorsMeasurements();
+        size_t numberOfDynVariables = berdy.getNrOfDynamicVariables(HierarchialBerdyTask::FULL_DYNAMICS);
+        size_t numberOfDynEquations = berdy.getNrOfDynamicEquations(HierarchialBerdyTask::FULL_DYNAMICS);
+        size_t numberOfMeasurements = berdy.getNrOfSensorsMeasurements(HierarchialBerdyTask::FULL_DYNAMICS);
 
         jointsConfiguration.resize(berdy.model());
         jointsConfiguration.zero();
@@ -622,11 +549,15 @@ namespace iDynTree {
         initialGravity.zero();
         initialGravity(2) = -9.81;
 
-        // Call to initialize task1 buffers
-        initializeTask1Buffers();
-
         berdy.updateKinematicsFromFixedBase(jointsConfiguration, jointsVelocity, berdy.dynamicTraversal().getBaseLink()->getIndex(), initialGravity);
-        computeTask1MAP(true);
+
+        // Call to initialize task1 buffers
+        if (berdy.getOptions().berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE)
+        {
+            initializeTask1Buffers();
+            computeTask1MAP(true);
+        }
+
         computeMAP(true);
 
         valid = true;

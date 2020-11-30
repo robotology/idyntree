@@ -17,6 +17,8 @@
 #include <iDynTree/Model/Indices.h>
 #include <iDynTree/Core/VectorDynSize.h>
 
+#include "iDynTree/Estimation/BerdyHelper.h"
+
 namespace iDynTree {
 
     class BerdyHelper;
@@ -42,16 +44,10 @@ namespace iDynTree {
         BerdySparseMAPSolver(BerdyHelper& berdyHelper);
         ~BerdySparseMAPSolver();
 
-        void setDynamicsConstraintsPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor> & covariance);
-        void setDynamicsRegularizationPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance);
-        void setDynamicsRegularizationPriorExpectedValue(const iDynTree::VectorDynSize& expectedValue);
-        void setMeasurementsPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance);
-
-        // New methods with additional bool flag for task1
-        void setDynamicsConstraintsPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor> & covariance, const bool& task1);
-        void setDynamicsRegularizationPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance, const bool& task1);
-        void setDynamicsRegularizationPriorExpectedValue(const iDynTree::VectorDynSize& expectedValue, const bool& task1);
-        void setMeasurementsPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance, const bool& task1);
+        void setDynamicsConstraintsPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor> & covariance, const HierarchialBerdyTask& task);
+        void setDynamicsRegularizationPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance, const HierarchialBerdyTask& task);
+        void setDynamicsRegularizationPriorExpectedValue(const iDynTree::VectorDynSize& expectedValue, const HierarchialBerdyTask& task);
+        void setMeasurementsPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance, const HierarchialBerdyTask& task);
 
         const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& dynamicsConstraintsPriorCovarianceInverse() const; // Sigma_D^-1
         iDynTree::SparseMatrix<iDynTree::ColumnMajor>& dynamicsConstraintsPriorCovarianceInverse(); // Sigma_D^-1
@@ -72,29 +68,17 @@ namespace iDynTree {
                                                 const Vector3& gravityInFixedFrame,
                                                 const VectorDynSize& measurements);
 
-        void updateEstimateInformationFloatingBase(const JointPosDoubleArray& jointsConfiguration,
-                                                   const JointDOFsDoubleArray& jointsVelocity,
-                                                   const FrameIndex floatingFrame,
-                                                   const Vector3& bodyAngularVelocityOfSpecifiedFrame,
-                                                   const VectorDynSize& measurements);
-
         void updateEstimateInformationFloatingBase(const Transform& baseTransform,
                                                    const JointPosDoubleArray& jointsConfiguration,
                                                    const JointDOFsDoubleArray& jointsVelocity,
                                                    const FrameIndex floatingFrame,
                                                    const Vector3& bodyAngularVelocityOfSpecifiedFrame,
                                                    const VectorDynSize& measurements,
-                                                   bool& task1);
+                                                   HierarchialBerdyTask& task);
 
-        bool doEstimate();
-        bool doEstimate(const bool& task1);
-
-        void getLastEstimate(iDynTree::VectorDynSize& lastEstimate) const;
-        void getLastEstimate(iDynTree::VectorDynSize& lastEstimate, const bool task1) const;
+        bool doEstimate(const HierarchialBerdyTask& task);
+        void getLastEstimate(iDynTree::VectorDynSize& lastEstimate, const  HierarchialBerdyTask& task) const;
         const iDynTree::VectorDynSize& getLastEstimate() const;
-
-
-        const iDynTree::VectorDynSize& getSimulatedMeasurementVector(iDynTree::VectorDynSize& simulatedy, bool task1);
 
     };
 }
