@@ -82,13 +82,13 @@ enum BerdyVariants
 enum HierarchialBerdyTask
 {
     /**
-     * CENTROIDAL_DYNAMICS of HIERARCHICAL_BERDY_FLOATING_BASE that considers only centroidal dynamics constraint
+     * Option of HIERARCHICAL_BERDY_FLOATING_BASE that considers only centroidal dynamics constraint
      */
     CENTROIDAL_DYNAMICS = 0,
 
     /**
-     * Full dynamics estimation problem of HIERARCHICAL_BERDY_FLOATING_BASE that considers only centroidal dynamics constraint
-     * This is the BERDY_FLOATING_BASE complete estimation problem
+     * Option to consider the Full dynamics estimation problem
+     * This is similar to the case of BERDY_FLOATING_BASE complete estimation problem
      */
     FULL_DYNAMICS = 1
 };
