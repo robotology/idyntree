@@ -626,7 +626,7 @@ void COMConvexHullConstraintWithSwitchingConstraints()
 int main()
 {
     // Improve repetability (at least in the same platform)
-    srand(0);
+    srand(1);
 
     simpleChainIK(2, 13, iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw);
 
