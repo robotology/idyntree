@@ -43,6 +43,15 @@ jobs:
         # Actual dependencies
         mamba install -c conda-forge eigen libxml2 assimp ipopt qt
 
+    # Additional dependencies useful only on Linux
+    - name: Dependencies [Conda/Linux]
+      if: contains(matrix.os, 'ubuntu') 
+      shell: bash -l {0}
+      run: |
+        # Additional dependencies only useful on Linux
+        # See https://github.com/robotology/robotology-superbuild/issues/477
+        mamba install -c conda-forge expat-cos6-x86_64 freeglut libselinux-cos6-x86_64 libxau-cos6-x86_64 libxcb-cos6-x86_64 libxdamage-cos6-x86_64 libxext-cos6-x86_64 libxfixes-cos6-x86_64 libxxf86vm-cos6-x86_64 mesalib mesa-libgl-cos6-x86_64
+
     - name: Configure [Conda/Linux&macOS]
       if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
       shell: bash -l {0}
@@ -66,6 +75,8 @@ jobs:
         cmake --build . --config ${{ matrix.build_type }}
 
     - name: Test [Conda]
+      # Test disabled on Windows due to https://github.com/robotology/idyntree/issues/787
+      if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
       shell: bash -l {0}
       run: |
         cd build
