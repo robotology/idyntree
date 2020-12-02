@@ -136,7 +136,7 @@ namespace iDynTree {
     }
 
     void BerdySparseMAPSolver::setDynamicsConstraintsPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance,
-                                                                     const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS)
+                                                                     const HierarchialBerdyTask& task)
     {
         assert(m_pimpl);
 
@@ -155,7 +155,7 @@ namespace iDynTree {
     }
 
     void BerdySparseMAPSolver::setDynamicsRegularizationPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance,
-                                                                        const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS)
+                                                                        const HierarchialBerdyTask& task)
     {
         assert(m_pimpl);
 
@@ -173,7 +173,7 @@ namespace iDynTree {
     }
 
     void BerdySparseMAPSolver::setDynamicsRegularizationPriorExpectedValue(const iDynTree::VectorDynSize& expectedValue,
-                                                                           const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS)
+                                                                           const HierarchialBerdyTask& task)
     {
         assert(m_pimpl);
 
@@ -189,7 +189,7 @@ namespace iDynTree {
     }
 
     void BerdySparseMAPSolver::setMeasurementsPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance,
-                                                              const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS)
+                                                              const HierarchialBerdyTask& task)
     {
         assert(m_pimpl);
 
@@ -288,7 +288,7 @@ namespace iDynTree {
                                                                      const FrameIndex floatingFrame,
                                                                      const Vector3& bodyAngularVelocityOfSpecifiedFrame,
                                                                      const iDynTree::VectorDynSize& measurements,
-                                                                     HierarchialBerdyTask& task)
+                                                                     const HierarchialBerdyTask& task)
     {
         assert(m_pimpl);
 
@@ -307,7 +307,7 @@ namespace iDynTree {
                                                         floatingFrame, bodyAngularVelocityOfSpecifiedFrame);
     }
 
-    bool BerdySparseMAPSolver::doEstimate(const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS)
+    bool BerdySparseMAPSolver::doEstimate(const HierarchialBerdyTask& task)
     {
         assert(m_pimpl);
         using iDynTree::toEigen;
@@ -331,7 +331,7 @@ namespace iDynTree {
     }
 
     void BerdySparseMAPSolver::getLastEstimate(iDynTree::VectorDynSize& lastEstimate,
-                                               const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS) const
+                                               const HierarchialBerdyTask& task) const
     {
         assert(m_pimpl);
 

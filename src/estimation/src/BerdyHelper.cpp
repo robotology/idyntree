@@ -425,7 +425,7 @@ IndexRange BerdyHelper::getRangeOriginalBerdyFixedBase(BerdyDynamicVariablesType
     return ret;
 }
 
-IndexRange BerdyHelper::getRangeLinkVariable(BerdyDynamicVariablesTypes dynamicVariableType, LinkIndex idx, const HierarchialBerdyTask task = HierarchialBerdyTask::FULL_DYNAMICS) const
+IndexRange BerdyHelper::getRangeLinkVariable(BerdyDynamicVariablesTypes dynamicVariableType, LinkIndex idx, const HierarchialBerdyTask task) const
 {
     if( !isLinkBerdyDynamicVariable(dynamicVariableType) )
     {
@@ -644,7 +644,7 @@ IndexRange BerdyHelper::getRangeJointSensorVariable(const BerdySensorTypes senso
     return ret;
 }
 
-IndexRange BerdyHelper::getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx, const HierarchialBerdyTask task = HierarchialBerdyTask::FULL_DYNAMICS) const
+IndexRange BerdyHelper::getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx, const HierarchialBerdyTask task) const
 {
     IndexRange ret = IndexRange::InvalidRange();
 
@@ -703,7 +703,7 @@ IndexRange BerdyHelper::getRangeROCMSensorVariable(const BerdySensorTypes sensor
     if (task == HierarchialBerdyTask::CENTROIDAL_DYNAMICS) {
         ret.offset = task1BerdySensorTypeOffsets.rocmOffset;
     }
-    else {
+    else if (task == HierarchialBerdyTask::FULL_DYNAMICS) {
         ret.offset = berdySensorTypeOffsets.rocmOffset;
     }
 
@@ -1171,7 +1171,7 @@ bool BerdyHelper::computeBerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree
 
 // TODO: This is repetitive from computeBerdySensorMatrices,
 // Need to clean up into sub routines for modularity and avoiding code duplication
-bool BerdyHelper::computeTask1SensorMatrices(SparseMatrix<iDynTree::ColumnMajor>& task1_Y, VectorDynSize& task1_bY, const HierarchialBerdyTask task = HierarchialBerdyTask::CENTROIDAL_DYNAMICS)
+bool BerdyHelper::computeTask1SensorMatrices(SparseMatrix<iDynTree::ColumnMajor>& task1_Y, VectorDynSize& task1_bY, const HierarchialBerdyTask task)
 {
 
     task1_Y.resize(m_task1_nrOfSensorsMeasurements, m_task1_nrOfDynamicalVariables);
@@ -1644,7 +1644,7 @@ const Traversal& BerdyHelper::dynamicTraversal() const
 
 bool BerdyHelper::isValid() const { return m_areModelAndSensorsValid; }
 
-size_t BerdyHelper::getNrOfDynamicVariables(const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS) const
+size_t BerdyHelper::getNrOfDynamicVariables(const HierarchialBerdyTask& task) const
 {
     // In case of centroidal dyanmics task, ensure the berdy variation is set as HIERARCHICAL_BERDY_FLOATING_BASE
     if (task == HierarchialBerdyTask::CENTROIDAL_DYNAMICS) {
@@ -1656,7 +1656,7 @@ size_t BerdyHelper::getNrOfDynamicVariables(const HierarchialBerdyTask& task = H
     }
 }
 
-size_t BerdyHelper::getNrOfDynamicEquations(const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS) const
+size_t BerdyHelper::getNrOfDynamicEquations(const HierarchialBerdyTask& task) const
 {
     if (task == HierarchialBerdyTask::CENTROIDAL_DYNAMICS) {
         assert(m_options.berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE);
@@ -1667,7 +1667,7 @@ size_t BerdyHelper::getNrOfDynamicEquations(const HierarchialBerdyTask& task = H
     }
 }
 
-size_t BerdyHelper::getNrOfSensorsMeasurements(const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS) const
+size_t BerdyHelper::getNrOfSensorsMeasurements(const HierarchialBerdyTask& task) const
 {
     if (task == HierarchialBerdyTask::CENTROIDAL_DYNAMICS) {
         assert(m_options.berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE);
@@ -1680,7 +1680,7 @@ size_t BerdyHelper::getNrOfSensorsMeasurements(const HierarchialBerdyTask& task 
 
 bool BerdyHelper::resizeAndZeroBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD,
                                              SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize& bY,
-                                             const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS)
+                                             const HierarchialBerdyTask& task)
 {
     if (task == HierarchialBerdyTask::CENTROIDAL_DYNAMICS) {
         assert(m_options.berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE);
@@ -1705,7 +1705,7 @@ bool BerdyHelper::resizeAndZeroBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>
 
 bool BerdyHelper::resizeAndZeroBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
                                              MatrixDynSize & Y, VectorDynSize & bY,
-                                             const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS)
+                                             const HierarchialBerdyTask& task)
 {
     if (task == HierarchialBerdyTask::CENTROIDAL_DYNAMICS) {
         assert(m_options.berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE);
@@ -1859,7 +1859,7 @@ bool BerdyHelper::updateKinematicsFromFloatingBase(const Transform& baseTransfor
 
 bool BerdyHelper::getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD,
                                    SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize& bY,
-                                   const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS)
+                                   const HierarchialBerdyTask& task)
 {
     if (!m_kinematicsUpdated)
     {
@@ -1902,7 +1902,7 @@ bool BerdyHelper::getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, Vecto
 
 bool BerdyHelper::getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
                                    MatrixDynSize & Y, VectorDynSize & bY,
-                                   const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS)
+                                   const HierarchialBerdyTask& task)
 {
     SparseMatrix<iDynTree::ColumnMajor> DSparse(getNrOfDynamicEquations(task),getNrOfDynamicVariables(task));
     SparseMatrix<iDynTree::ColumnMajor> YSparse(getNrOfSensorsMeasurements(task),getNrOfDynamicVariables(task));

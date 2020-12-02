@@ -44,10 +44,10 @@ namespace iDynTree {
         BerdySparseMAPSolver(BerdyHelper& berdyHelper);
         ~BerdySparseMAPSolver();
 
-        void setDynamicsConstraintsPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor> & covariance, const HierarchialBerdyTask& task);
-        void setDynamicsRegularizationPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance, const HierarchialBerdyTask& task);
-        void setDynamicsRegularizationPriorExpectedValue(const iDynTree::VectorDynSize& expectedValue, const HierarchialBerdyTask& task);
-        void setMeasurementsPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance, const HierarchialBerdyTask& task);
+        void setDynamicsConstraintsPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor> & covariance, const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS);
+        void setDynamicsRegularizationPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance, const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS);
+        void setDynamicsRegularizationPriorExpectedValue(const iDynTree::VectorDynSize& expectedValue, const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS);
+        void setMeasurementsPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance, const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS);
 
         const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& dynamicsConstraintsPriorCovarianceInverse() const; // Sigma_D^-1
         iDynTree::SparseMatrix<iDynTree::ColumnMajor>& dynamicsConstraintsPriorCovarianceInverse(); // Sigma_D^-1
@@ -74,10 +74,10 @@ namespace iDynTree {
                                                    const FrameIndex floatingFrame,
                                                    const Vector3& bodyAngularVelocityOfSpecifiedFrame,
                                                    const VectorDynSize& measurements,
-                                                   HierarchialBerdyTask& task);
+                                                   const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS);
 
-        bool doEstimate(const HierarchialBerdyTask& task);
-        void getLastEstimate(iDynTree::VectorDynSize& lastEstimate, const  HierarchialBerdyTask& task) const;
+        bool doEstimate(const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS);
+        void getLastEstimate(iDynTree::VectorDynSize& lastEstimate, const  HierarchialBerdyTask& task  = HierarchialBerdyTask::FULL_DYNAMICS) const;
         const iDynTree::VectorDynSize& getLastEstimate() const;
 
     };

@@ -501,8 +501,8 @@ class BerdyHelper
     bool computeBerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD);
 
     // Methods for task 1 sub matrices for stack of tasks berdy
-    bool computeTask1SensorMatrices(SparseMatrix<iDynTree::ColumnMajor>& task1_Y, VectorDynSize& task1_bY, const HierarchialBerdyTask task);
-    bool computeTask1BerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree::ColumnMajor>& task1_D, VectorDynSize& task1_bD, const HierarchialBerdyTask task);
+    bool computeTask1SensorMatrices(SparseMatrix<iDynTree::ColumnMajor>& task1_Y, VectorDynSize& task1_bY, const HierarchialBerdyTask task = HierarchialBerdyTask::CENTROIDAL_DYNAMICS);
+    bool computeTask1BerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree::ColumnMajor>& task1_D, VectorDynSize& task1_bD, const HierarchialBerdyTask task = HierarchialBerdyTask::CENTROIDAL_DYNAMICS);
 
     // Helper method
     Matrix6x1 getBiasTermJointAccelerationPropagation(IJointConstPtr joint,
@@ -643,25 +643,25 @@ public:
      * Get the number of columns of the D matrix.
      * This depends on the Berdy variant selected.
      */
-    size_t getNrOfDynamicVariables(const HierarchialBerdyTask& task) const;
+    size_t getNrOfDynamicVariables(const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS) const;
 
     /**
      * Get the number of dynamics equations used in the Berdy
      * equations
      */
-    size_t getNrOfDynamicEquations(const HierarchialBerdyTask& task) const;
+    size_t getNrOfDynamicEquations(const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS) const;
 
     /**
      * Get the number of sensors measurements.
      */
-    size_t getNrOfSensorsMeasurements(const HierarchialBerdyTask& task) const;
+    size_t getNrOfSensorsMeasurements(const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS) const;
 
     /**
      * Resize and set to zero Berdy matrices.
      */
     bool resizeAndZeroBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize &bD,
                                     SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize &bY,
-                                    const HierarchialBerdyTask& task);
+                                    const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS);
 
     /**
      * Resize and set to zero Berdy matrices.
@@ -669,14 +669,14 @@ public:
      */
     bool resizeAndZeroBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
                                     MatrixDynSize & Y, VectorDynSize & bY,
-                                    const HierarchialBerdyTask& task);
+                                    const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS);
 
     /**
      * Get Berdy matrices.
      */
     bool getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize &bD,
                           SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize &bY,
-                          const HierarchialBerdyTask& task);
+                          const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS);
 
     /**
      * Get Berdy matrices - new method
@@ -686,7 +686,7 @@ public:
      */
     bool getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
                           MatrixDynSize & Y, VectorDynSize & bY,
-                          const HierarchialBerdyTask& task);
+                          const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS);
 
     /**
      * Return the internal ordering of the sensors
@@ -696,7 +696,7 @@ public:
      *
      * @return the sensors ordering
      */
-    const std::vector<BerdySensor>& getSensorsOrdering(const HierarchialBerdyTask& task) const;
+    const std::vector<BerdySensor>& getSensorsOrdering(const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS) const;
 
     /**
      * Get the range of the specified sensor in
@@ -704,17 +704,17 @@ public:
     IndexRange getRangeSensorVariable(const SensorType type, const unsigned int sensorIdx) const;
     IndexRange getRangeDOFSensorVariable(const BerdySensorTypes sensorType, const DOFIndex idx) const;
     IndexRange getRangeJointSensorVariable(const BerdySensorTypes sensorType, const JointIndex idx) const;
-    IndexRange getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx, const HierarchialBerdyTask task) const;
-    IndexRange getRangeROCMSensorVariable(const BerdySensorTypes sensorType, const HierarchialBerdyTask task) const;
+    IndexRange getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx, const HierarchialBerdyTask task = HierarchialBerdyTask::FULL_DYNAMICS) const;
+    IndexRange getRangeROCMSensorVariable(const BerdySensorTypes sensorType, const HierarchialBerdyTask task = HierarchialBerdyTask::CENTROIDAL_DYNAMICS) const;
 
     /**
      * Ranges of dynamic variables
      */
-    IndexRange getRangeLinkVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const LinkIndex idx, const HierarchialBerdyTask task) const;
+    IndexRange getRangeLinkVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const LinkIndex idx, const HierarchialBerdyTask task = HierarchialBerdyTask::FULL_DYNAMICS) const;
     IndexRange getRangeJointVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const JointIndex idx) const;
     IndexRange getRangeDOFVariable(const BerdyDynamicVariablesTypes dynamicVariableType, const DOFIndex idx) const;
 
-    const std::vector<BerdyDynamicVariable>& getDynamicVariablesOrdering(const HierarchialBerdyTask& task) const;
+    const std::vector<BerdyDynamicVariable>& getDynamicVariablesOrdering(const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS) const;
 
     /**
      * Serialized dynamic variables from the separate buffers
@@ -759,7 +759,7 @@ public:
      */
     bool extractLinkNetExternalWrenchesFromDynamicVariables(const VectorDynSize& d,
                                                             LinkNetExternalWrenches& netExtWrenches,
-                                                            const HierarchialBerdyTask& task) const;
+                                                            const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS) const;
 
 
     /**
