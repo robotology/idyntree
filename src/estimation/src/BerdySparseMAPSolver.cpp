@@ -282,12 +282,12 @@ namespace iDynTree {
         m_pimpl->berdy.updateKinematicsFromFixedBase(m_pimpl->jointsConfiguration, m_pimpl->jointsVelocity, fixedFrame, gravity);
     }
 
-    void BerdySparseMAPSolver::updateEstimateInformationFloatingBase(const Transform& baseTransform,
-                                                                     const iDynTree::JointPosDoubleArray& jointsConfiguration,
+    void BerdySparseMAPSolver::updateEstimateInformationFloatingBase(const iDynTree::JointPosDoubleArray& jointsConfiguration,
                                                                      const iDynTree::JointDOFsDoubleArray& jointsVelocity,
                                                                      const FrameIndex floatingFrame,
                                                                      const Vector3& bodyAngularVelocityOfSpecifiedFrame,
                                                                      const iDynTree::VectorDynSize& measurements,
+                                                                     const Transform& w_H_b,
                                                                      const HierarchialBerdyTask& task)
     {
         assert(m_pimpl);
@@ -304,7 +304,7 @@ namespace iDynTree {
         }
 
         m_pimpl->berdy.updateKinematicsFromFloatingBase(m_pimpl->jointsConfiguration, m_pimpl->jointsVelocity,
-                                                        floatingFrame, bodyAngularVelocityOfSpecifiedFrame, baseTransform);
+                                                        floatingFrame, bodyAngularVelocityOfSpecifiedFrame, w_H_b);
     }
 
     bool BerdySparseMAPSolver::doEstimate(const HierarchialBerdyTask& task)

@@ -68,12 +68,12 @@ namespace iDynTree {
                                                 const Vector3& gravityInFixedFrame,
                                                 const VectorDynSize& measurements);
 
-        void updateEstimateInformationFloatingBase(const Transform& baseTransform,
-                                                   const JointPosDoubleArray& jointsConfiguration,
+        void updateEstimateInformationFloatingBase(const JointPosDoubleArray& jointsConfiguration,
                                                    const JointDOFsDoubleArray& jointsVelocity,
                                                    const FrameIndex floatingFrame,
                                                    const Vector3& bodyAngularVelocityOfSpecifiedFrame,
                                                    const VectorDynSize& measurements,
+                                                   const Transform& w_H_b = iDynTree::Transform::Identity(),
                                                    const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS);
 
         bool doEstimate(const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS);
