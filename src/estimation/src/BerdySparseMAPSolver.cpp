@@ -303,8 +303,8 @@ namespace iDynTree {
             m_pimpl->measurements = measurements;
         }
 
-        m_pimpl->berdy.updateKinematicsFromFloatingBase(baseTransform, m_pimpl->jointsConfiguration, m_pimpl->jointsVelocity,
-                                                        floatingFrame, bodyAngularVelocityOfSpecifiedFrame);
+        m_pimpl->berdy.updateKinematicsFromFloatingBase(m_pimpl->jointsConfiguration, m_pimpl->jointsVelocity,
+                                                        floatingFrame, bodyAngularVelocityOfSpecifiedFrame, baseTransform);
     }
 
     bool BerdySparseMAPSolver::doEstimate(const HierarchialBerdyTask& task)

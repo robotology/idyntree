@@ -1752,59 +1752,12 @@ bool BerdyHelper::updateKinematicsFromFixedBase(const JointPosDoubleArray& joint
     return updateKinematicsFromFloatingBase(jointPos,jointVel,fixedFrame,zeroAngularVel);
 }
 
+
 bool BerdyHelper::updateKinematicsFromFloatingBase(const JointPosDoubleArray& jointPos,
                                                    const JointDOFsDoubleArray& jointVel,
                                                    const FrameIndex& floatingFrame,
-                                                   const Vector3& angularVel)
-{
-    if( !m_areModelAndSensorsValid )
-    {
-        reportError("BerdyHelpers","updateKinematicsFromFloatingBase","Model and sensors information not setted.");
-        return false;
-    }
-
-    if( floatingFrame == FRAME_INVALID_INDEX ||
-        floatingFrame < 0 || floatingFrame >= static_cast<FrameIndex>(m_model.getNrOfFrames()) )
-    {
-        reportError("BerdyHelpers","updateKinematicsFromFloatingBase","Unknown frame index specified.");
-        return false;
-    }
-
-    // Get link of the specified frame
-    LinkIndex floatingLinkIndex = m_model.getFrameLink(floatingFrame);
-
-    // To initialize the kinematic propagation, we should first convert the kinematics
-    // information from the frame in which they are specified to the main frame of the link
-    Transform link_H_frame = m_model.getFrameTransform(floatingFrame);
-
-    // Convert the twist from the additional  frame to the link frame
-    Twist      base_vel_frame, base_vel_link;
-    Vector3 zero3;
-    zero3.zero();
-    base_vel_frame.setLinearVec3(zero3);
-    base_vel_frame.setAngularVec3(angularVel);
-    base_vel_link = link_H_frame*base_vel_frame;
-
-    // Propagate the kinematics information
-    bool ok = dynamicsEstimationForwardVelKinematics(m_model,m_kinematicTraversals.getTraversalWithLinkAsBase(m_model,floatingLinkIndex),
-                                                        base_vel_link.getAngularVec3(),
-                                                        jointPos,jointVel,
-                                                        m_linkVels);
-
-    // The jointPos and joint vel are stored directly, as are then passed to the Model object to get adjacent links transforms
-    m_jointPos = jointPos;
-    m_jointVel = jointVel;
-
-    m_kinematicsUpdated = ok;
-    return ok;
-}
-
-
-bool BerdyHelper::updateKinematicsFromFloatingBase(const Transform& baseTransform,
-                                                   const JointPosDoubleArray& jointPos,
-                                                   const JointDOFsDoubleArray& jointVel,
-                                                   const FrameIndex& floatingFrame,
-                                                   const Vector3& angularVel)
+                                                   const Vector3& angularVel,
+                                                   const Transform & w_H_b)
 {
     if( !m_areModelAndSensorsValid )
     {
@@ -1840,7 +1793,7 @@ bool BerdyHelper::updateKinematicsFromFloatingBase(const Transform& baseTransfor
                                                         jointPos,jointVel,
                                                         m_linkVels);
     // Set base transform
-    m_baseTransform = baseTransform;
+    m_baseTransform = w_H_b;
 
     // The jointPos and joint vel are stored directly, as are then passed to the Model object to get adjacent links transforms
     m_jointPos = jointPos;

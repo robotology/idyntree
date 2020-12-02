@@ -762,33 +762,6 @@ public:
                                                             LinkNetExternalWrenches& netExtWrenches,
                                                             const HierarchialBerdyTask& task = HierarchialBerdyTask::FULL_DYNAMICS) const;
 
-
-    /**
-      * @name Methods to submit the input data for dynamics computations.
-      */
-    //@{
-
-    /**
-     * Set the kinematic information necessary for the dynamics estimation using the
-     * angular velocity information of a floating frame.
-     *
-     * \note This method cannot be used if the selected BerdyVariant is ORIGINAL_BERDY_FIXED_BASE.
-     * \note we not require to give the linear velocity of floating base because the dynamics equations
-     *       are invariant with respect to an offset in linear velocity. This convenient to avoid
-     *       any dependency on any prior floating base estimation.
-     *
-     * @param[in] jointPos the position of the joints of the model.
-     * @param[in] jointVel the velocities of the joints of the model.
-     * @param[in] floatingFrame the index of the frame for which kinematic information is provided.
-     * @param[in] angularVel angular velocity (wrt to any inertial frame) of the specified floating frame,
-     *                       expressed in the specified floating frame orientation.
-     * @return true if all went ok, false otherwise.
-     */
-    bool updateKinematicsFromFloatingBase(const JointPosDoubleArray  & jointPos,
-                                          const JointDOFsDoubleArray & jointVel,
-                                          const FrameIndex & floatingFrame,
-                                          const Vector3 & angularVel);
-
     /**
       * @name Methods to submit the input data for dynamics computations.
       */
@@ -809,13 +782,14 @@ public:
      * @param[in] floatingFrame the index of the frame for which kinematic information is provided.
      * @param[in] angularVel angular velocity (wrt to any inertial frame) of the specified floating frame,
      *                       expressed in the specified floating frame orientation.
+     * @param[in] w_H_b wptional transformation between floating base and world with default value set to Identity
      * @return true if all went ok, false otherwise.
      */
-    bool updateKinematicsFromFloatingBase(const Transform & baseTransform,
-                                          const JointPosDoubleArray  & jointPos,
+    bool updateKinematicsFromFloatingBase(const JointPosDoubleArray  & jointPos,
                                           const JointDOFsDoubleArray & jointVel,
                                           const FrameIndex & floatingFrame,
-                                          const Vector3 & angularVel);
+                                          const Vector3 & angularVel,
+                                          const Transform & w_H_b = iDynTree::Transform::Identity());
 
     /**
      * Set the kinematic information necessary for the dynamics estimation assuming that a
