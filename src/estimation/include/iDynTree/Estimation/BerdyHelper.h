@@ -734,8 +734,9 @@ public:
                                   JointDOFsDoubleArray    & jointTorques,
                                   JointDOFsDoubleArray    & jointAccs,
                                   LinkInternalWrenches    & linkJointWrenches,
-                                  LinearMotionVector3     & comAcceleration,
-                                  VectorDynSize& y);
+                                  VectorDynSize           & y,
+                                  SpatialMomentum           rocm = SpatialMomentum::Zero(), // Rate of Change of Momentum (rocm ) denoted through 6x1 spatial momentum vector. Double check this
+                                  HierarchialBerdyTask      task = HierarchialBerdyTask::CENTROIDAL_DYNAMICS);
 
 
     /**

@@ -2412,8 +2412,9 @@ bool BerdyHelper::serializeSensorVariables(SensorsMeasurements& sensMeas,
                                            JointDOFsDoubleArray& jointTorques,
                                            JointDOFsDoubleArray& jointAccs,
                                            LinkInternalWrenches& linkJointWrenches,
-                                           LinearMotionVector3& comAcceleration, //TODO: Double check this! it needs to be 6x1 spatial motion vector
-                                           VectorDynSize& y)
+                                           VectorDynSize& y,
+                                           SpatialMomentum rocm,
+                                           HierarchialBerdyTask task)
 {
     bool ret=true;
     assert(y.size() == this->getNrOfSensorsMeasurements());
@@ -2487,13 +2488,12 @@ bool BerdyHelper::serializeSensorVariables(SensorsMeasurements& sensMeas,
     ////////////////////////////////////////////////////////////////////////
     ///// Rate of Change of Momentum (ROCM)
     ////////////////////////////////////////////////////////////////////////
-    /// // TODO: This method serializeSensorVariables needs to be double checked for using with HIERARCHICAL_BERDY_FLOATING_BASE
-    /// This does not seem be called by other methods either from the solver or front the front end
+    /// This method serializeSensorVariables is used in Testing for the Berdy estimator helper class
     if (m_options.includeROCMAsSensorInTask1 && m_options.berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE)
     {
-        IndexRange sensorRange = this->getRangeROCMSensorVariable(ROCM_SENSOR, HierarchialBerdyTask::CENTROIDAL_DYNAMICS);
+        IndexRange sensorRange = this->getRangeROCMSensorVariable(ROCM_SENSOR, task);
 
-        setSubVector(y, sensorRange, comAcceleration);
+        setSubVector(y, sensorRange, static_cast<SpatialForceVector>(rocm));
     }
 
     return ret;
