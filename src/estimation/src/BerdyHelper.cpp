@@ -200,7 +200,8 @@ bool BerdyHelper::init(const Model& model,
             cacheDynamicVariablesOrderingFixedBase();
             break;
 
-        case BERDY_FLOATING_BASE :
+        case BERDY_FLOATING_BASE:
+        case HIERARCHICAL_BERDY_FLOATING_BASE:
             res = initBerdyFloatingBase();
             cacheDynamicVariablesOrderingFloatingBase();
             break;
@@ -293,13 +294,13 @@ bool BerdyHelper::initSensorsMeasurements()
     }
 
     // Add Rate of Change of Momentum (ROCM) sensor
-    if (m_options.includeROCMAsSensorInTask1)
+    if (m_options.berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE && m_options.includeROCMAsSensorInTask1)
     {
         task1BerdySensorTypeOffsets.rocmOffset = m_task1_nrOfSensorsMeasurements;
         m_task1_nrOfSensorsMeasurements += 6;
     }
 
-    if (m_options.includeROCMAsSensorInTask2)
+    if (m_options.berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE && m_options.includeROCMAsSensorInTask2)
     {
         berdySensorTypeOffsets.rocmOffset = m_nrOfSensorsMeasurements;
         m_nrOfSensorsMeasurements += 6;
@@ -1597,18 +1598,25 @@ bool BerdyHelper::initBerdyFloatingBase()
     // Newton-Euler equations for each link
     m_nrOfDynamicEquations   = 6*m_model.getNrOfLinks() + 6*m_model.getNrOfJoints();
 
-    // Task1 dynamic variabels include 6*nrOfLinks for the net external wrenches
-    m_task1_nrOfDynamicalVariables = 6*m_model.getNrOfLinks();
+    if (m_options.berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE)
+    {
+        // Task1 dynamic variabels include 6*nrOfLinks for the net external wrenches
+        m_task1_nrOfDynamicalVariables = 6*m_model.getNrOfLinks();
 
-    // TODO: Double check this
-    m_task1_nrOfDynamicEquations = 6*m_model.getNrOfLinks();
+        // TODO: Double check this
+        m_task1_nrOfDynamicEquations = 6*m_model.getNrOfLinks();
 
-    // check comConstraintLinkNamesVector is correctly set
-    if (m_options.includeROCMAsSensorInTask1 || m_options.includeROCMAsSensorInTask2) {
-        if (m_options.rocmConstraintLinkNamesVector.size() == 0)
-        {
-            reportError("BerdyHelpers","initBerdyFloatingBase","rocmConstraintLinkNamesVector is not initialized correctly, the size is 0");
-            res = false;
+        // check comConstraintLinkNamesVector is correctly set
+        if (m_options.includeROCMAsSensorInTask1 || m_options.includeROCMAsSensorInTask2) {
+            if (m_options.rocmConstraintLinkNamesVector.size() == 0)
+            {
+                reportInfo("BerdyHelpers","initBerdyFloatingBase","rocmConstraintLinkNamesVector is not initialized using berdy helper options. Considering all the model links for centroidal dynamics constraint");
+                m_options.rocmConstraintLinkNamesVector.resize(m_model.getNrOfLinks());
+                for (size_t l = 0; l < m_model.getNrOfLinks(); l++)
+                {
+                    m_options.rocmConstraintLinkNamesVector.at(l) = m_model.getLinkName(l);
+                }
+            }
         }
     }
 
@@ -1979,7 +1987,7 @@ void BerdyHelper::cacheSensorsOrdering()
         m_sensorsOrdering.push_back(jointSens);
     }
 
-    if(m_options.includeROCMAsSensorInTask1) {
+    if(m_options.berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE && m_options.includeROCMAsSensorInTask1) {
 
         IndexRange task1SensorRange = this->getRangeROCMSensorVariable(ROCM_SENSOR, HierarchialBerdyTask::CENTROIDAL_DYNAMICS);
 
@@ -1991,7 +1999,7 @@ void BerdyHelper::cacheSensorsOrdering()
         m_task1SensorsOrdering.push_back(task1LinkSensor);
     }
 
-    if(m_options.includeROCMAsSensorInTask2) {
+    if(m_options.berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE && m_options.includeROCMAsSensorInTask2) {
 
         IndexRange sensorRange = this->getRangeROCMSensorVariable(ROCM_SENSOR, HierarchialBerdyTask::FULL_DYNAMICS);
 
@@ -2003,10 +2011,14 @@ void BerdyHelper::cacheSensorsOrdering()
         m_sensorsOrdering.push_back(linkSensor);
     }
 
+    if (m_options.berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE)
+    {
+        std::sort(m_task1SensorsOrdering.begin(), m_task1SensorsOrdering.end());
+    }
+
     //To avoid any problem, sort m_sensorsOrdering by range.offset
     std::sort(m_sensorsOrdering.begin(), m_sensorsOrdering.end());
 
-    std::sort(m_task1SensorsOrdering.begin(), m_task1SensorsOrdering.end());
 }
 
 void BerdyHelper::cacheDynamicVariablesOrderingFixedBase()
@@ -2201,6 +2213,7 @@ bool BerdyHelper::serializeDynamicVariables(LinkProperAccArray& properAccs,
             break;
 
         case BERDY_FLOATING_BASE :
+        case HIERARCHICAL_BERDY_FLOATING_BASE:
             res = serializeDynamicVariablesFloatingBase(properAccs, netTotalWrenchesWithoutGrav, netExtWrenches,
                                                         linkJointWrenches, jointTorques, jointAccs, d);
             break;
@@ -2267,7 +2280,7 @@ bool BerdyHelper::serializeDynamicVariablesFloatingBase(LinkProperAccArray& prop
                                                      VectorDynSize& d)
 {
     d.resize(this->getNrOfDynamicVariables());
-    assert(this->m_options.berdyVariant == BERDY_FLOATING_BASE);
+    assert(this->m_options.berdyVariant == BERDY_FLOATING_BASE || this->m_options.berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE);
 
     for (LinkIndex link = 0; link < static_cast<LinkIndex>(m_model.getNrOfLinks()); ++link)
     {
