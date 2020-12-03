@@ -106,7 +106,7 @@ if(IDYNTREE_USES_MATLAB)
                PREFIX ""
                SUFFIX .mex)
 
-  target_link_libraries(${target_name} ${IDYNTREE_LIBRARIES} idyntree-core)
+  target_link_libraries(${target_name} ${IDYNTREE_LIBRARIES} idyntree-core ${Matlab_LIBRARIES})
   target_include_directories(${target_name} PUBLIC ${Matlab_INCLUDE_DIRS})
   set_target_properties(${target_name} PROPERTIES PREFIX "" SUFFIX .${Matlab_MEX_EXTENSION})
 
