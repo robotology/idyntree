@@ -10,7 +10,7 @@ if (IDYNTREE_USES_MATLAB)
   find_package(Matlab REQUIRED
                COMPONENTS MAIN_PROGRAM)
   add_test(NAME matlab_idyntree_tests
-           COMMAND ${Matlab_MAIN_PROGRAM} -nodisplay -nodesktop -nojvm -r "addpath('$<TARGET_FILE_DIR:${mexname}>');addpath('${MEX_BINDINGS_SOURCE_DIR}');addpath('${MATLAB_WRAPPERS_BINDINGS_SOURCE_DIR}');addpath('${CMAKE_CURRENT_SOURCE_DIR}/');addpath(genpath('${IDYNTREE_INTERNAL_MOXUNIT_PATH}'));success=moxunit_runtests('${CMAKE_CURRENT_SOURCE_DIR}','-verbose');")
+           COMMAND ${Matlab_MAIN_PROGRAM} -nodisplay -nodesktop -nojvm -r "addpath('$<TARGET_FILE_DIR:${mexname}>');addpath('${MEX_BINDINGS_SOURCE_DIR}');addpath('${MATLAB_WRAPPERS_BINDINGS_SOURCE_DIR}');addpath('${CMAKE_CURRENT_SOURCE_DIR}/');addpath(genpath('${IDYNTREE_INTERNAL_MOXUNIT_PATH}'));success=moxunit_runtests('${CMAKE_CURRENT_SOURCE_DIR}','-verbose');exit(~success);")
 endif()
 
 if (IDYNTREE_USES_OCTAVE)
