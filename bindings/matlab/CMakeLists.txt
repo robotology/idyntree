@@ -75,7 +75,11 @@ macro(GET_LIBRARY_FROM_SWIG_WRAPPER i_main_file i_other_files target_name genera
         TARGET ${target_name}
         PROPERTY SWIG_DEPENDS ${i_other_files})
   else()
-      add_library(${target_name} MODULE ${swig_generated_sources})
+      if(${target_name} STREQUAL "iDynTreeMEX") 
+          matlab_add_mex(NAME ${target_name} SRC ${swig_generated_sources})
+      else()
+          add_library(${target_name} MODULE ${swig_generated_sources})
+      endif()
       set_target_properties(${target_name} PROPERTIES DEBUG_POSTFIX "")
       set_source_files_properties(${swig_generated_sources} PROPERTIES GENERATED 1)
   endif()
@@ -87,10 +91,7 @@ endmacro()
 # ==============
 
 if(IDYNTREE_USES_MATLAB)
-  find_package(Matlab
-               REQUIRED
-               MX_LIBRARY
-               MAIN_PROGRAM)
+  find_package(Matlab REQUIRED)
 
   set(target_name ${mexname})
 

@@ -23,7 +23,11 @@ endif()
 
 # It is possible to compile matlab/octave bindings without using SWIG
 if(SWIG_FOUND OR IDYNTREE_USES_MATLAB OR IDYNTREE_USES_OCTAVE)
-    include(${SWIG_USE_FILE})
+    if(EXISTS ${SWIG_USE_FILE})
+        include(${SWIG_USE_FILE})
+    else()
+        include(UseSWIG)
+    endif()
 
     set_source_files_properties(iDynTree.i PROPERTIES CPLUSPLUS ON)
 

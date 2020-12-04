@@ -7,11 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- Fixed compilation of MATLAB bindings on macOS and Windows (https://github.com/robotology/idyntree/pull/789).
+- Fixed compilation of MATLAB bindings on macOS and Windows (https://github.com/robotology/idyntree/pull/789, https://github.com/robotology/idyntree/pull/790).
 
 ## [2.0.1] - 2020-11-24
 
-### Fixed 
+### Fixed
 - Fixed problem in pybind11-based Python bindings (https://github.com/robotology/idyntree/pull/781). 
 
 ## [2.0.0] - 2020-11-22
