@@ -75,8 +75,6 @@ jobs:
         cmake --build . --config ${{ matrix.build_type }}
 
     - name: Test [Conda]
-      # Test disabled on Windows due to https://github.com/robotology/idyntree/issues/787
-      if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
       shell: bash -l {0}
       run: |
         cd build
