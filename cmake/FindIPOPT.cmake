@@ -129,11 +129,12 @@ else()
   set(IPOPT_DIR $ENV{IPOPT_DIR} CACHE PATH "Path to IPOPT build directory")
   
   find_path(IPOPT_INCLUDE_DIRS NAMES IpIpoptApplication.hpp PATH_SUFFIXES coin coin-or PATHS ${IPOPT_DIR}/include/coin)
-
-  find_library(IPOPT_IPOPT_LIBRARY_RELEASE libipopt ${IPOPT_DIR}/lib
-                                                    ${IPOPT_DIR}/lib/coin)
-  find_library(IPOPT_IPOPT_LIBRARY_DEBUG   libipoptD ${IPOPT_DIR}/lib
-                                                     ${IPOPT_DIR}/lib/coin)
+  
+  # See https://github.com/coin-or/Ipopt/blob/releases/3.13.3/src/Interfaces/Ipopt.java#L167 for a possible library names
+  find_library(IPOPT_IPOPT_LIBRARY_RELEASE NAMES libipopt ipopt ipopt-3 ipopt-0 libipopt-3 libipopt-0
+                                           HINTS ${IPOPT_DIR}/lib ${IPOPT_DIR}/lib/coin)
+  find_library(IPOPT_IPOPT_LIBRARY_DEBUG NAMES libipoptD ipoptD ipoptD-3 ipoptD-0 libipoptD-3 libipoptD-0
+                                         HINTS ${IPOPT_DIR}/lib ${IPOPT_DIR}/lib/coin)
 
   select_library_configurations(IPOPT_IPOPT)
   set(IPOPT_LIBRARIES ${IPOPT_IPOPT_LIBRARY})
