@@ -68,7 +68,7 @@ for links=1:numberOfLinks
             end
             if solidarray{solids}.isSphere
                 meshInfo(solids).meshFile='sphere';
-                radius=solidarray{solids}.asSphere.radius;
+                radius=solidarray{solids}.asSphere.getRadius;
                 mesh_triangles=calculateMeshFromSphere(radius);
             end
         end
