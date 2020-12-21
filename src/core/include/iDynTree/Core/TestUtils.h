@@ -229,7 +229,12 @@ namespace iDynTree
      */
     inline void printMatrixWrongElements(std::string name, std::vector< std::vector<TestMatrixMismatch> > & correctElems)
     {
-        std::cerr << name << "( \u2714 match, (expected,got:error) mismatch): \n";
+#ifndef _WIN32
+#define IDYNTREE_MATCH_CHARACTER "\u2714"
+#else
+#define IDYNTREE_MATCH_CHARACTER "o"
+#endif
+        std::cerr << name << "( " IDYNTREE_MATCH_CHARACTER " match, (expected,got:error) mismatch): \n";
 
         size_t rows = correctElems.size();
         size_t cols = correctElems[0].size();
@@ -239,7 +244,7 @@ namespace iDynTree
             {
                 if( correctElems[row][col].match )
                 {
-                    std::cerr << "\u2714";
+                    std::cerr << IDYNTREE_MATCH_CHARACTER;
                 }
                 else
                 {
