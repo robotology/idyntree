@@ -107,6 +107,16 @@ struct Visualizer::VisualizerPimpl
     irr::video::IVideoDriver* m_irrDriver;
 
     /**
+     * Additional texture background color.
+     */
+    irr::video::SColorf m_irrTextureBackgroundColor;
+
+    /**
+     * Additional texture to get pixels' color.
+     */
+    irr::video::ITexture* m_irrTexture;
+
+    /**
      * Camera used by the visualization.
      */
     Camera m_camera;
@@ -134,9 +144,10 @@ struct Visualizer::VisualizerPimpl
 
 #ifdef IDYNTREE_USES_IRRLICHT
         m_modelViz.resize(0);
-        m_irrDevice = 0;
-        m_irrSmgr   = 0;
-        m_irrDriver = 0;
+        m_irrDevice  = 0;
+        m_irrSmgr    = 0;
+        m_irrDriver  = 0;
+        m_irrTexture = 0;
 #endif
     }
 };
@@ -166,7 +177,7 @@ Visualizer::~Visualizer()
     pimpl = 0;
 }
 
-bool Visualizer::init(const VisualizerOptions options)
+bool Visualizer::init(const VisualizerOptions &visualizerOptions, const VisualizerOptions &textureOptions)
 {
 #ifdef IDYNTREE_USES_IRRLICHT
     if( pimpl->m_isInitialized )
@@ -178,9 +189,10 @@ bool Visualizer::init(const VisualizerOptions options)
     irr::SIrrlichtCreationParameters irrDevParams;
 
     irrDevParams.DriverType = irr::video::EDT_OPENGL;
-    irrDevParams.WindowSize = irr::core::dimension2d<irr::u32>(options.winWidth, options.winHeight);
+    irrDevParams.WindowSize = irr::core::dimension2d<irr::u32>(visualizerOptions.winWidth, visualizerOptions.winHeight);
+    irrDevParams.WithAlphaChannel = true;
 
-    if( options.verbose )
+    if( visualizerOptions.verbose )
     {
         reportWarning("Visualizer","init","verbose flag found, enabling verbose output in Visualizer");
         irrDevParams.LoggingLevel = irr::ELL_DEBUG;
@@ -214,10 +226,18 @@ bool Visualizer::init(const VisualizerOptions options)
 
     // Add environment
     pimpl->m_environment.m_envNode       = pimpl->m_irrSmgr->addEmptySceneNode();
-    pimpl->m_environment.m_rootFrameNode = addFrameAxes(pimpl->m_irrSmgr,pimpl->m_environment.m_envNode,options.rootFrameArrowsDimension);
+    pimpl->m_environment.m_rootFrameNode = addFrameAxes(pimpl->m_irrSmgr,pimpl->m_environment.m_envNode,visualizerOptions.rootFrameArrowsDimension);
     pimpl->m_environment.m_floorGridNode = addFloorGridNode(pimpl->m_irrSmgr,pimpl->m_environment.m_envNode);
     pimpl->m_environment.m_sceneManager = pimpl->m_irrSmgr;
-    pimpl->m_environment.m_backgroundColor = irr::video::SColorf(0.0,0.4,0.4,1.0);
+    pimpl->m_environment.m_backgroundColor = irr::video::SColorf(visualizerOptions.backgroundColor.r,
+                                                                 visualizerOptions.backgroundColor.g,
+                                                                 visualizerOptions.backgroundColor.b,
+                                                                 visualizerOptions.backgroundColor.a);
+
+    pimpl->m_irrTextureBackgroundColor = irr::video::SColorf(textureOptions.backgroundColor.r,
+                                                             textureOptions.backgroundColor.g,
+                                                             textureOptions.backgroundColor.b,
+                                                             textureOptions.backgroundColor.a);
 
     // Add default light (sun, directional light pointing backwards
     addVizLights(pimpl->m_irrSmgr);
@@ -234,15 +254,26 @@ bool Visualizer::init(const VisualizerOptions options)
 
     pimpl->m_vectors.init(pimpl->m_irrSmgr);
 
+    if (pimpl->m_irrDriver->queryFeature(irr::video::EVDF_RENDER_TO_TARGET)) //check if render to target is possible
+    {
+        pimpl->m_irrTexture = pimpl->m_irrDriver->addRenderTargetTexture(irr::core::dimension2d<irr::u32>(textureOptions.winWidth, textureOptions.winHeight), "RenderTexture");
+    }
+
     pimpl->m_isInitialized = true;
     pimpl->lastFPS         = -1;
 
     return true;
 #else
-    IDYNTREE_UNUSED(options);
+    IDYNTREE_UNUSED(visualizerOptions);
+    IDYNTREE_UNUSED(textureOptions);
     reportError("Visualizer","init","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
     return false;
 #endif
+}
+
+bool Visualizer::init(const VisualizerOptions options)
+{
+    return init(options, options);
 }
 
 size_t Visualizer::getNrOfVisualizedModels()
@@ -333,6 +364,19 @@ void Visualizer::draw()
 
 
     pimpl->m_irrDriver->beginScene(true,true, pimpl->m_environment.m_backgroundColor.toSColor());
+
+    if (pimpl->m_irrTexture)
+    {
+        // set render target texture
+        pimpl->m_irrDriver->setRenderTarget(pimpl->m_irrTexture, true, true, pimpl->m_irrTextureBackgroundColor.toSColor());
+
+        // draw whole scene into render buffer
+        pimpl->m_irrSmgr->drawAll();
+
+        // set back old render target
+        // The buffer might have been distorted, so clear it
+        pimpl->m_irrDriver->setRenderTarget(0, true, true, pimpl->m_environment.m_backgroundColor.toSColor());
+    }
 
     pimpl->m_irrSmgr->drawAll();
 
@@ -490,6 +534,109 @@ void Visualizer::close()
     pimpl->m_modelViz.resize(0);
 
     return;
+#endif
+}
+
+bool Visualizer::isWindowActive() const
+{
+#ifdef IDYNTREE_USES_IRRLICHT
+    return pimpl->m_irrDevice->isWindowActive();
+#else
+    return false;
+#endif
+}
+
+ColorViz Visualizer::getTexturePixelColor(unsigned int width, unsigned int height) const
+{
+    ColorViz pixelOut;
+#ifdef IDYNTREE_USES_IRRLICHT
+    irr::video::SColor pixelIrrlicht = irr::video::SColor(0, 0, 0, 0);
+
+    if (!pimpl->m_irrTexture)
+    {
+        reportError("Visualizer","getTexturePixelColor","Cannot get pixel color. The video driver does not allow to render to a target.");
+        return pixelOut;
+    }
+
+    auto textureDim = pimpl->m_irrTexture->getSize();
+
+    if ( width >= textureDim.Width || height >= textureDim.Height)
+    {
+        std::stringstream ss;
+        ss << "The requested pixel is out of bounds. Requested (" << width << ", " << height
+           << "). Picture dimensions: (" << textureDim.Width  << ", " << textureDim.Height << ").";
+        reportError("Visualizer", "getTexturePixelColor", ss.str().c_str());
+        return pixelOut;
+    }
+
+    auto pitch = pimpl->m_irrTexture->getPitch();
+    auto format = pimpl->m_irrTexture->getColorFormat();
+    auto bytes = irr::video::IImage::getBitsPerPixelFromFormat(format) / 8;
+
+    unsigned char* buffer = (unsigned char*) pimpl->m_irrTexture->lock(irr::video::E_TEXTURE_LOCK_MODE::ETLM_READ_ONLY);
+    if (buffer)
+    {
+        pixelIrrlicht = irr::video::SColor(*(unsigned int*)(buffer + (height * pitch) + (width * bytes)));
+        pimpl->m_irrTexture->unlock();
+    }
+
+    pixelOut.r = pixelIrrlicht.getRed();
+    pixelOut.g = pixelIrrlicht.getGreen();
+    pixelOut.b = pixelIrrlicht.getBlue();
+    pixelOut.a = pixelIrrlicht.getAlpha();
+
+    return pixelOut;
+#else
+    reportError("Visualizer","getTexturePixelColor","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
+    return pixelOut;
+#endif
+}
+
+bool Visualizer::getTexturePixels(std::vector<PixelViz> &pixels) const
+{
+#ifdef IDYNTREE_USES_IRRLICHT
+    irr::video::SColor pixelIrrlicht = irr::video::SColor(0, 0, 0, 0);
+
+    if (!pimpl->m_irrTexture)
+    {
+        reportError("Visualizer","getTexturePixels","Cannot get pixel color. The video driver does not allow to render to a target.");
+        return false;
+    }
+
+    auto textureDim = pimpl->m_irrTexture->getSize();
+
+    pixels.resize(textureDim.Width * textureDim.Height);
+
+    auto pitch = pimpl->m_irrTexture->getPitch();
+    auto format = pimpl->m_irrTexture->getColorFormat();
+    auto bytes = irr::video::IImage::getBitsPerPixelFromFormat(format) / 8;
+
+    unsigned char* buffer = (unsigned char*) pimpl->m_irrTexture->lock(irr::video::E_TEXTURE_LOCK_MODE::ETLM_READ_ONLY);
+    if (buffer)
+    {
+        size_t i = 0;
+        for (size_t width = 0; width < textureDim.Width; ++width)
+        {
+            for (size_t height = 0; height < textureDim.Height; ++height)
+            {
+                pixelIrrlicht = irr::video::SColor(*(unsigned int*)(buffer + (height * pitch) + (width * bytes)));
+                pixels[i].width = width;
+                pixels[i].height = height;
+                pixels[i].r = pixelIrrlicht.getRed();
+                pixels[i].g = pixelIrrlicht.getGreen();
+                pixels[i].b = pixelIrrlicht.getBlue();
+                pixels[i].a = pixelIrrlicht.getAlpha();
+                ++i;
+            }
+        }
+
+        pimpl->m_irrTexture->unlock();
+    }
+
+    return true;
+#else
+    reportError("Visualizer","getTexturePixels","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
+    return false;
 #endif
 }
 

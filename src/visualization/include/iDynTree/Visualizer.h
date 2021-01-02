@@ -12,6 +12,7 @@
 #define IDYNTREE_VISUALIZER_H
 
 #include <string>
+#include <vector>
 
 #include <iDynTree/Core/Direction.h>
 #include <iDynTree/Core/Position.h>
@@ -92,6 +93,25 @@ public:
      * Build a color from a Vector4 rgba.
      */
     ColorViz(const Vector4 & rgba);
+};
+
+/**
+ * Basic structure to encode pixel information
+ */
+class PixelViz : public ColorViz
+{
+public:
+
+    /**
+     * Width position of the pixel.
+     */
+    unsigned int width;
+
+    /**
+     * Height position of the pixel.
+     */
+    unsigned int height;
+
 };
 
 enum LightType
@@ -406,8 +426,8 @@ public:
     /**
      * Reset the colors of the model.
      */
-    virtual void resetModelColor() = 0;    
-    
+    virtual void resetModelColor() = 0;
+
     /**
      * Set the color of all the geometries of the given link.
      *
@@ -415,12 +435,12 @@ public:
      * reset by resetLinkColor.
      */
     virtual bool setLinkColor(const LinkIndex& linkIndex, const ColorViz& linkColor) = 0;
-    
+
     /**
      * Reset the colors of given link.
      */
     virtual bool resetLinkColor(const LinkIndex& linkIndex) = 0;
-    
+
     /**
      * Get the name of the link in the model.
      */
@@ -450,14 +470,14 @@ public:
      * Get a reference to the internal IJetsVisualization interface.
      */
     virtual IJetsVisualization& jets() = 0;
-        
+
     /**
      * Get the transformation of the model (root link) with respect to visualizer world \f$ w_H_{root}\f$
      * The obtained transformation matrix can be used to map any homogeneous vector from the
      * model's root link frame to the visualizer world frame.
      */
     virtual Transform getWorldModelTransform() = 0;
-    
+
     /**
      * Get the transformation of given link with respect to visualizer world \f$ w_H_{link}\f$
      * The obtained transformation matrix can be used to map any homogeneous vector from the
@@ -491,10 +511,16 @@ struct VisualizerOptions
      */
     double rootFrameArrowsDimension;
 
+    /**
+     * The bacground color
+     */
+    ColorViz backgroundColor;
+
     VisualizerOptions(): verbose(false),
                          winWidth(800),
                          winHeight(600),
-                         rootFrameArrowsDimension(1.0)
+                         rootFrameArrowsDimension(1.0),
+                         backgroundColor(0.0,0.4,0.4,1.0)
     {
     }
 };
@@ -523,6 +549,13 @@ public:
      * \note this is called implicitly when addModel is called for the first time.
      */
     bool init(const VisualizerOptions = VisualizerOptions());
+
+    /**
+     * Initialize the visualization.
+     *
+     * \note this is called implicitly when addModel is called for the first time.
+     */
+    bool init(const VisualizerOptions& visualizerOptions, const VisualizerOptions& textureOptions);
 
     /**
      * Get number of models visualized.
@@ -606,6 +639,31 @@ public:
      * Close the visualizer.
      */
     void close();
+
+    /**
+     * @brief Get if the visualizer window is active (to allow drawing only if necessary)
+     * @return True if the window is active, false otherwise.
+     */
+    bool isWindowActive() const;
+
+    /**
+     * @brief Get the color of the pixel at the given position in the additional texture.
+     *
+     * Remember to call draw() first.
+     * @param width The width of the pixel
+     * @param height The height of the pixel
+     * @return The color of the pixel
+     */
+    ColorViz getTexturePixelColor(unsigned int width, unsigned int height) const;
+
+    /**
+     * @brief Get the pixels of the additional texture.
+     *
+     * Remember to call draw() first.
+     * @param pixels The output pixels
+     * @return True in case of success, false otherwise
+     */
+    bool getTexturePixels(std::vector<PixelViz>& pixels) const;
 };
 
 }
