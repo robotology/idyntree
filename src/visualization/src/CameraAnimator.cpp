@@ -32,8 +32,6 @@ CameraAnimator::CameraAnimator(irr::gui::ICursorControl* cursor,
         m_mousePos = m_cursorControl->getRelativePosition();
     }
 
-    //    camera->bindTargetAndRotation(true); //To change the target and the rotation at the same time
-
     allKeysUp();
 }
 
@@ -100,10 +98,6 @@ bool CameraAnimator::OnEvent(const irr::SEvent& event)
 //! OnAnimate() is called just before rendering the whole scene.
 void CameraAnimator::animateNode(irr::scene::ISceneNode *node, irr::u32 timeMs)
 {
-    //Alt + LM = Rotate around camera pivot
-    //Alt + LM + MM = Dolly forth/back in view direction (speed % distance camera pivot - max distance to pivot)
-    //Alt + MM = Move on camera plane (Screen center is about the mouse pointer, depending on move speed)
-
     if (!node || node->getType() != irr::scene::ESNT_CAMERA)
         return;
 
@@ -117,129 +111,163 @@ void CameraAnimator::animateNode(irr::scene::ISceneNode *node, irr::u32 timeMs)
     if (smgr && smgr->getActiveCamera() != camera)
         return;
 
-    if (m_oldCamera != camera)
+    irr::core::vector3df initialTarget = camera->getTarget();
+    irr::core::vector3df newTarget = initialTarget;
+
+    irr::core::vector3df initialPosition = camera->getPosition();
+    irr::core::vector3df newPosition = initialPosition;
+
+    if (m_wheelMoving)
     {
-        m_lastCameraTarget = m_oldTarget = camera->getTarget();
-        m_oldCamera = camera;
+        m_wheelMoving = false;
+        m_zooming = true;
+        m_currentZoom = m_wheelDirection;
     }
-    else
+
+
+    if (m_zooming)
     {
-        m_oldTarget += camera->getTarget() - m_lastCameraTarget;
-    }
-
-    irr::f32 nRotX = m_rotX;
-    irr::f32 nRotY = m_rotY;
-    irr::f32 nZoom = m_currentZoom;
-
-    if ( (isMouseKeyDown(0) && isMouseKeyDown(2)) || isMouseKeyDown(1) )
-    {
-        if (!m_zooming)
-        {
-            m_zoomStart = m_mousePos;
-            m_zooming = true;
-        }
-        else
-        {
-            const irr::f32 targetMinDistance = 0.1f;
-            nZoom += (m_zoomStart.X - m_mousePos.X) * m_zoomSpeed;
-
-            if (nZoom < targetMinDistance) // jox: fixed bug: bounce back when zooming to close
-                nZoom = targetMinDistance;
-        }
-    }
-    else if (m_zooming)
-    {
-        const irr::f32 old = m_currentZoom;
-        m_currentZoom = m_currentZoom + (m_zoomStart.X - m_mousePos.X ) * m_zoomSpeed;
-        nZoom = m_currentZoom;
-
-        if (nZoom < 0)
-            nZoom = m_currentZoom = old;
         m_zooming = false;
-    }
+        irr::f32 distanceFromInitialPosition = m_currentZoom * m_zoomSpeed;
+        irr::f32 distanceFromTarget = newPosition.getDistanceFrom(newTarget);
+        irr::f32 minimumDistance = 0.01;
 
-    // Translation ---------------------------------
-
-    irr::core::vector3df translate(m_oldTarget);
-    const irr::core::vector3df upVector(camera->getUpVector());
-    const irr::core::vector3df target = camera->getTarget();
-
-    irr::core::vector3df pos = camera->getPosition();
-    irr::core::vector3df tvectX = pos - target;
-    tvectX = tvectX.crossProduct(upVector);
-    tvectX.normalize();
-
-    const irr::scene::SViewFrustum* const va = camera->getViewFrustum();
-    irr::core::vector3df tvectY = (va->getFarLeftDown() - va->getFarRightDown());
-    tvectY = tvectY.crossProduct(upVector.Y > 0 ? pos - target : target - pos);
-    tvectY.normalize();
-
-    if (isMouseKeyDown(2) && !m_zooming)
-    {
-        if (!m_translating)
+        if (distanceFromTarget - distanceFromInitialPosition < minimumDistance)
         {
-            m_translateStart = m_mousePos;
-            m_translating = true;
+            distanceFromInitialPosition = distanceFromTarget - minimumDistance;
         }
-        else
-        {
-            translate +=  tvectX * (m_translateStart.X - m_mousePos.X)*m_translateSpeed +
-                          tvectY * (m_translateStart.Y - m_mousePos.Y)*m_translateSpeed;
-        }
-    }
-    else if (m_translating)
-    {
-        translate += tvectX * (m_translateStart.X - m_mousePos.X)*m_translateSpeed +
-                     tvectY * (m_translateStart.Y - m_mousePos.Y)*m_translateSpeed;
-        m_oldTarget = translate;
-        m_translating = false;
+
+        irr::f32 interpolationValue = distanceFromInitialPosition / newPosition.getDistanceFrom(newTarget);
+
+        newPosition += interpolationValue * (newTarget - newPosition);
     }
 
-    // Rotation ------------------------------------
+    camera->setPosition(newPosition);
+    camera->setTarget(newTarget);
 
-    if (isMouseKeyDown(0) && !m_zooming)
-    {
-        if (!m_rotating)
-        {
-            m_rotateStart = m_mousePos;
-            m_rotating = true;
-            nRotX = m_rotX;
-            nRotY = m_rotY;
-        }
-        else
-        {
-            nRotX += (m_rotateStart.X - m_mousePos.X) * m_rotateSpeed;
-            nRotY += (m_rotateStart.Y - m_mousePos.Y) * m_rotateSpeed;
-        }
-    }
-    else if (m_rotating)
-    {
-        m_rotX += (m_rotateStart.X - m_mousePos.X) * m_rotateSpeed;
-        m_rotY += (m_rotateStart.Y - m_mousePos.Y) * m_rotateSpeed;
-        nRotX = m_rotX;
-        nRotY = m_rotY;
-        m_rotating = false;
-    }
+//    if (m_oldCamera != camera)
+//    {
+//        m_lastCameraTarget = m_oldTarget = camera->getTarget();
+//        m_oldCamera = camera;
+//    }
+//    else
+//    {
+//        m_oldTarget += camera->getTarget() - m_lastCameraTarget;
+//    }
 
-    // Set pos ------------------------------------
+//    irr::f32 nRotX = m_rotX;
+//    irr::f32 nRotY = m_rotY;
+//    irr::f32 nZoom = m_currentZoom;
 
-    pos = translate;
-    pos.X += nZoom;
+//    if ( (isMouseKeyDown(0) && isMouseKeyDown(2)) || isMouseKeyDown(1) )
+//    {
+//        if (!m_zooming)
+//        {
+//            m_zoomStart = m_mousePos;
+//            m_zooming = true;
+//        }
+//        else
+//        {
+//            const irr::f32 targetMinDistance = 0.1f;
+//            nZoom += (m_zoomStart.X - m_mousePos.X) * m_zoomSpeed;
 
-    pos.rotateXYBy(nRotY, translate);
-    pos.rotateXZBy(-nRotX, translate);
+//            if (nZoom < targetMinDistance) // jox: fixed bug: bounce back when zooming to close
+//                nZoom = targetMinDistance;
+//        }
+//    }
+//    else if (m_zooming)
+//    {
+//        const irr::f32 old = m_currentZoom;
+//        m_currentZoom = m_currentZoom + (m_zoomStart.X - m_mousePos.X ) * m_zoomSpeed;
+//        nZoom = m_currentZoom;
 
-    camera->setPosition(pos);
-    camera->setTarget(translate);
+//        if (nZoom < 0)
+//            nZoom = m_currentZoom = old;
+//        m_zooming = false;
+//    }
 
-    // Rotation Error ----------------------------
+//    // Translation ---------------------------------
 
-    // jox: fixed bug: jitter when rotating to the top and bottom of y
-    pos.set(0,1,0);
-    pos.rotateXYBy(-nRotY);
-    pos.rotateXZBy(-nRotX+180.f);
+//    irr::core::vector3df translate(m_oldTarget);
+//    const irr::core::vector3df upVector(camera->getUpVector());
+//    const irr::core::vector3df target = camera->getTarget();
+
+//    irr::core::vector3df pos = camera->getPosition();
+//    irr::core::vector3df tvectX = pos - target;
+//    tvectX = tvectX.crossProduct(upVector);
+//    tvectX.normalize();
+
+//    const irr::scene::SViewFrustum* const va = camera->getViewFrustum();
+//    irr::core::vector3df tvectY = (va->getFarLeftDown() - va->getFarRightDown());
+//    tvectY = tvectY.crossProduct(upVector.Y > 0 ? pos - target : target - pos);
+//    tvectY.normalize();
+
+//    if (isMouseKeyDown(2) && !m_zooming)
+//    {
+//        if (!m_translating)
+//        {
+//            m_translateStart = m_mousePos;
+//            m_translating = true;
+//        }
+//        else
+//        {
+//            translate +=  tvectX * (m_translateStart.X - m_mousePos.X)*m_translateSpeed +
+//                          tvectY * (m_translateStart.Y - m_mousePos.Y)*m_translateSpeed;
+//        }
+//    }
+//    else if (m_translating)
+//    {
+//        translate += tvectX * (m_translateStart.X - m_mousePos.X)*m_translateSpeed +
+//                     tvectY * (m_translateStart.Y - m_mousePos.Y)*m_translateSpeed;
+//        m_oldTarget = translate;
+//        m_translating = false;
+//    }
+
+//    // Rotation ------------------------------------
+
+//    if (isMouseKeyDown(0) && !m_zooming)
+//    {
+//        if (!m_rotating)
+//        {
+//            m_rotateStart = m_mousePos;
+//            m_rotating = true;
+//            nRotX = m_rotX;
+//            nRotY = m_rotY;
+//        }
+//        else
+//        {
+//            nRotX += (m_rotateStart.X - m_mousePos.X) * m_rotateSpeed;
+//            nRotY += (m_rotateStart.Y - m_mousePos.Y) * m_rotateSpeed;
+//        }
+//    }
+//    else if (m_rotating)
+//    {
+//        m_rotX += (m_rotateStart.X - m_mousePos.X) * m_rotateSpeed;
+//        m_rotY += (m_rotateStart.Y - m_mousePos.Y) * m_rotateSpeed;
+//        nRotX = m_rotX;
+//        nRotY = m_rotY;
+//        m_rotating = false;
+//    }
+
+//    // Set pos ------------------------------------
+
+//    pos = translate;
+//    pos.X += nZoom;
+
+//    pos.rotateXYBy(nRotY, translate);
+//    pos.rotateXZBy(-nRotX, translate);
+
+//    camera->setPosition(pos);
+//    camera->setTarget(translate);
+
+//    // Rotation Error ----------------------------
+
+//    // jox: fixed bug: jitter when rotating to the top and bottom of y
+//    pos.set(0,1,0);
+//    pos.rotateXYBy(-nRotY);
+//    pos.rotateXZBy(-nRotX+180.f);
 //    camera->setUpVector(pos);
-    m_lastCameraTarget = camera->getTarget();
+//    m_lastCameraTarget = camera->getTarget();
 }
 
 

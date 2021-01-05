@@ -383,6 +383,7 @@ inline irr::scene::ICameraSceneNode* addVizCamera(irr::scene::ISceneManager* smg
     camera->setPosition(irr::core::vector3df(0.8,0.8,0.8));
     camera->setTarget(irr::core::vector3df(0,0,0));
     camera->setUpVector(irr::core::vector3df(0.0,0.0,1.0));
+    camera->bindTargetAndRotation(true); //To change the target and the rotation at the same time
 
     // See http://irrlicht.sourceforge.net/forum/viewtopic.php?f=4&t=47734
     irr::core::matrix4 matproj = camera->getProjectionMatrix();
