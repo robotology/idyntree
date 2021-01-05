@@ -19,6 +19,7 @@
 #include "Environment.h"
 #include "ModelVisualization.h"
 #include "VectorsVisualization.h"
+#include "CameraAnimator.h"
 #endif
 
 #include "DummyImplementations.h"
@@ -251,6 +252,10 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions, const Visualiz
     sun.setAmbientColor(iDynTree::ColorViz(0.1,0.1,0.1,1.0));
 
     pimpl->m_camera.setIrrlichtCamera(addVizCamera(pimpl->m_irrSmgr));
+    irr::scene::ISceneNodeAnimator* anm = new CameraAnimator(pimpl->m_irrDevice->getCursorControl(),
+        -1500.f, 200.f, 1500.f, 70.f);
+    pimpl->m_camera.irrlichtCamera()->addAnimator(anm);
+    anm->drop();
 
     pimpl->m_vectors.init(pimpl->m_irrSmgr);
 
@@ -370,6 +375,10 @@ void Visualizer::draw()
         // set render target texture
         pimpl->m_irrDriver->setRenderTarget(pimpl->m_irrTexture, true, true, pimpl->m_irrTextureBackgroundColor.toSColor());
 
+        auto textureDims = pimpl->m_irrTexture->getSize();
+
+        pimpl->m_camera.irrlichtCamera()->setAspectRatio(textureDims.Width/ (float)textureDims.Height);
+
         // draw whole scene into render buffer
         pimpl->m_irrSmgr->drawAll();
 
@@ -377,6 +386,10 @@ void Visualizer::draw()
         // The buffer might have been distorted, so clear it
         pimpl->m_irrDriver->setRenderTarget(0, true, true, pimpl->m_environment.m_backgroundColor.toSColor());
     }
+
+    auto winDimensions = pimpl->m_irrDriver->getScreenSize();
+
+    pimpl->m_camera.irrlichtCamera()->setAspectRatio(winDimensions.Width/ (float)winDimensions.Height);
 
     pimpl->m_irrSmgr->drawAll();
 
