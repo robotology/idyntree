@@ -66,7 +66,7 @@ namespace iDynTree
     public:
         //! Constructor
         CameraAnimator(irr::gui::ICursorControl* cursor, irr::f32 rotateSpeed = -1500.f,
-            irr::f32 zoomSpeed = 1.f, irr::f32 translationSpeed = 1500.f, irr::f32 distance=70.f);
+            irr::f32 zoomSpeed = 1.f, irr::f32 translationSpeed = 10.0f, irr::f32 distance=70.f);
 
         //! Destructor
         virtual ~CameraAnimator();
@@ -137,6 +137,7 @@ namespace iDynTree
         irr::core::position2df m_zoomStart;
         irr::core::position2df m_translateStart;
         irr::core::position2df m_mousePos;
+        irr::core::position2df m_initialMousePosition;
         irr::f32 m_zoomSpeed;
         irr::f32 m_rotateSpeed;
         irr::f32 m_translateSpeed;

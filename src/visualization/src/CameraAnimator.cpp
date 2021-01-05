@@ -17,7 +17,7 @@ namespace iDynTree
 //! constructor
 CameraAnimator::CameraAnimator(irr::gui::ICursorControl* cursor,
     irr::f32 rotateSpeed, irr::f32 zoomSpeed, irr::f32 translateSpeed, irr::f32 distance)
-    : m_cursorControl(cursor), m_oldCamera(0), m_mousePos(0.5f, 0.5f),
+    : m_cursorControl(cursor), m_oldCamera(0), m_mousePos(0.5f, 0.5f), m_initialMousePosition(m_mousePos),
     m_zoomSpeed(zoomSpeed), m_rotateSpeed(rotateSpeed), m_translateSpeed(translateSpeed),
     m_currentZoom(distance), m_rotX(0.0f), m_rotY(0.0f),
     m_zooming(false), m_rotating(false), m_moving(false), m_translating(false)
@@ -58,9 +58,11 @@ bool CameraAnimator::OnEvent(const irr::SEvent& event)
     {
     case irr::EMIE_LMOUSE_PRESSED_DOWN:
         m_mouseKeys[0] = true;
+        m_initialMousePosition = m_cursorControl->getRelativePosition();
         break;
     case irr::EMIE_RMOUSE_PRESSED_DOWN:
         m_mouseKeys[2] = true;
+        m_initialMousePosition = m_cursorControl->getRelativePosition();
         break;
     case irr::EMIE_MMOUSE_PRESSED_DOWN:
         m_mouseKeys[1] = true;
@@ -117,6 +119,10 @@ void CameraAnimator::animateNode(irr::scene::ISceneNode *node, irr::u32 timeMs)
     irr::core::vector3df initialPosition = camera->getPosition();
     irr::core::vector3df newPosition = initialPosition;
 
+    irr::core::matrix4 initialTransformation = camera->getAbsoluteTransformation();
+
+    irr::core::vector2df mouseDelta = m_mousePos - m_initialMousePosition;
+
     if (m_wheelMoving)
     {
         m_wheelMoving = false;
@@ -124,6 +130,11 @@ void CameraAnimator::animateNode(irr::scene::ISceneNode *node, irr::u32 timeMs)
         m_currentZoom = m_wheelDirection;
     }
 
+    if (m_mouseKeys[2])
+    {
+        m_translating = true;
+        m_initialMousePosition = m_mousePos;
+    }
 
     if (m_zooming)
     {
@@ -140,6 +151,16 @@ void CameraAnimator::animateNode(irr::scene::ISceneNode *node, irr::u32 timeMs)
         irr::f32 interpolationValue = distanceFromInitialPosition / newPosition.getDistanceFrom(newTarget);
 
         newPosition += interpolationValue * (newTarget - newPosition);
+    }
+
+    if (m_translating)
+    {
+        m_translating = false;
+        irr::core::vector3df deltaInCameraCoordinates(m_translateSpeed * mouseDelta.Y, m_translateSpeed * mouseDelta.X, 0.0);
+        irr::core::vector3df deltaInWorld;
+        initialTransformation.rotateVect(deltaInWorld, deltaInCameraCoordinates);
+        newPosition += deltaInWorld;
+        newTarget += deltaInWorld;
     }
 
     camera->setPosition(newPosition);
