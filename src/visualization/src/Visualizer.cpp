@@ -108,11 +108,6 @@ struct Visualizer::VisualizerPimpl
     irr::video::IVideoDriver* m_irrDriver;
 
     /**
-     * Additional texture background color.
-     */
-    irr::video::SColorf m_irrTextureBackgroundColor;
-
-    /**
      * Additional texture to get pixels' color.
      */
     irr::video::ITexture* m_irrTexture;
@@ -128,13 +123,18 @@ struct Visualizer::VisualizerPimpl
     Environment m_environment;
 
     /**
+     * Environment used in the texture.
+     */
+    Environment m_textureEnvironment;
+
+    /**
      * Vectors visualization
      */
     VectorsVisualization m_vectors;
 
 #else
     DummyCamera m_camera;
-    DummyEnvironment m_environment;
+    DummyEnvironment m_environment, m_textureEnvironment;
     DummyVectorsVisualization m_invalidVectors;
 #endif
 
@@ -226,30 +226,11 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions, const Visualiz
     pimpl->m_irrDevice->getCursorControl()->setVisible(true);
 
     // Add environment
-    pimpl->m_environment.m_envNode       = pimpl->m_irrSmgr->addEmptySceneNode();
-    pimpl->m_environment.m_rootFrameNode = addFrameAxes(pimpl->m_irrSmgr,pimpl->m_environment.m_envNode,visualizerOptions.rootFrameArrowsDimension);
-    pimpl->m_environment.m_floorGridNode = addFloorGridNode(pimpl->m_irrSmgr,pimpl->m_environment.m_envNode);
-    pimpl->m_environment.m_sceneManager = pimpl->m_irrSmgr;
-    pimpl->m_environment.m_backgroundColor = irr::video::SColorf(visualizerOptions.backgroundColor.r,
-                                                                 visualizerOptions.backgroundColor.g,
-                                                                 visualizerOptions.backgroundColor.b,
-                                                                 visualizerOptions.backgroundColor.a);
+    pimpl->m_environment.init(pimpl->m_irrSmgr, visualizerOptions.rootFrameArrowsDimension);
+    pimpl->m_environment.m_envNode->setVisible(true);
 
-    pimpl->m_irrTextureBackgroundColor = irr::video::SColorf(textureOptions.backgroundColor.r,
-                                                             textureOptions.backgroundColor.g,
-                                                             textureOptions.backgroundColor.b,
-                                                             textureOptions.backgroundColor.a);
-
-    // Add default light (sun, directional light pointing backwards
-    addVizLights(pimpl->m_irrSmgr);
-    std::string sunName = "sun";
-    pimpl->m_environment.addLight(sunName);
-    ILight & sun = pimpl->m_environment.lightViz(sunName);
-    sun.setType(DIRECTIONAL_LIGHT);
-    sun.setDirection(iDynTree::Direction(0,0,-1));
-    sun.setDiffuseColor(iDynTree::ColorViz(0.7,0.7,0.7,1.0));
-    sun.setSpecularColor(iDynTree::ColorViz(0.1,0.1,0.1,1.0));
-    sun.setAmbientColor(iDynTree::ColorViz(0.1,0.1,0.1,1.0));
+    pimpl->m_textureEnvironment.init(pimpl->m_irrSmgr, textureOptions.rootFrameArrowsDimension);
+    pimpl->m_textureEnvironment.m_envNode->setVisible(false);
 
     pimpl->m_camera.setIrrlichtCamera(addVizCamera(pimpl->m_irrSmgr));
     pimpl->m_camera.setCameraAnimator(new CameraAnimator(pimpl->m_irrDevice->getCursorControl(),
@@ -370,8 +351,11 @@ void Visualizer::draw()
 
     if (pimpl->m_irrTexture)
     {
+        pimpl->m_environment.m_envNode->setVisible(false); //Disable the visualizer environment
+        pimpl->m_textureEnvironment.m_envNode->setVisible(true); //Enable the texture environment
         // set render target texture
-        pimpl->m_irrDriver->setRenderTarget(pimpl->m_irrTexture, true, true, pimpl->m_irrTextureBackgroundColor.toSColor());
+        pimpl->m_irrDriver->setRenderTarget(pimpl->m_irrTexture, true, true,
+                                            pimpl->m_textureEnvironment.m_backgroundColor.toSColor());
 
         auto textureDims = pimpl->m_irrTexture->getSize();
 
@@ -379,6 +363,9 @@ void Visualizer::draw()
 
         // draw whole scene into render buffer
         pimpl->m_irrSmgr->drawAll();
+
+        pimpl->m_environment.m_envNode->setVisible(true); //Enable the visualizer environment
+        pimpl->m_textureEnvironment.m_envNode->setVisible(false); //Disable the texture environment
 
         // set back old render target
         // The buffer might have been distorted, so clear it
@@ -488,6 +475,11 @@ IEnvironment& Visualizer::enviroment()
     return pimpl->m_environment;
 }
 
+IEnvironment &Visualizer::textureEnviroment()
+{
+    return pimpl->m_textureEnvironment;
+}
+
 IVectorsVisualization &Visualizer::vectors()
 {
 #ifdef IDYNTREE_USES_IRRLICHT
@@ -527,6 +519,7 @@ void Visualizer::close()
 
     pimpl->m_vectors.close();
     pimpl->m_environment.close();
+    pimpl->m_textureEnvironment.close();
 
     pimpl->m_irrDevice->closeDevice();
     pimpl->m_irrDevice->drop();

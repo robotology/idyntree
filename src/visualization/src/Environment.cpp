@@ -36,11 +36,38 @@ void Environment::close()
     }
 
     m_lights.resize(0);
+
+    if (m_sceneManager)
+    {
+        m_sceneManager->drop();
+        m_sceneManager = nullptr;
+    }
 }
 
 Environment::~Environment()
 {
     close();
+}
+
+void Environment::init(irr::scene::ISceneManager *sceneManager, double rootFrameArrowsDimension)
+{
+    m_sceneManager = sceneManager;
+    m_sceneManager->grab();
+    m_envNode       = m_sceneManager->addEmptySceneNode();
+    m_rootFrameNode = addFrameAxes(m_sceneManager,m_envNode, rootFrameArrowsDimension);
+    m_floorGridNode = addFloorGridNode(m_sceneManager,m_envNode);
+    m_backgroundColor = irr::video::SColorf(0.0,0.4,0.4,1.0);
+
+    // Add default light (sun, directional light pointing backwards
+    addVizLights(m_sceneManager);
+    std::string sunName = "sun";
+    addLight(sunName);
+    ILight & sun = lightViz(sunName);
+    sun.setType(DIRECTIONAL_LIGHT);
+    sun.setDirection(iDynTree::Direction(0,0,-1));
+    sun.setDiffuseColor(iDynTree::ColorViz(0.7,0.7,0.7,1.0));
+    sun.setSpecularColor(iDynTree::ColorViz(0.1,0.1,0.1,1.0));
+    sun.setAmbientColor(iDynTree::ColorViz(0.1,0.1,0.1,1.0));
 }
 
 std::vector< std::string > Environment::getElements()
@@ -57,8 +84,13 @@ std::vector< std::string > Environment::getElements()
 bool Environment::setElementVisibility(const std::string elementKey, bool isVisible)
 {
     bool retValue = false;
-    if( elementKey == "root_frame"  )
+    if((elementKey == "world_frame") || (elementKey == "root_frame")) //"root_frame is kept for retrocompatibility due to a previous misalignement with the docs
     {
+        if (elementKey == "root_frame")
+        {
+            reportWarning("Environment", "setElementVisibility", "\"root_frame\" is deprecated. Use \"world_frame\" instead.");
+        }
+
         if( m_rootFrameNode )
         {
             m_rootFrameNode->setVisible(isVisible);
@@ -117,7 +149,7 @@ bool Environment::addLight(const std::string& lightName)
 
     // Add a new light
     m_lights.push_back(new Light());
-    m_lights[lightIdx]->addLight(lightName,m_sceneManager->addLightSceneNode());
+    m_lights[lightIdx]->addLight(lightName,m_sceneManager->addLightSceneNode(m_envNode));
 
     return true;
 }
@@ -158,6 +190,14 @@ bool Environment::removeLight(const std::string& lightName)
     ss << "Light name " << lightName << " does not exist.";
     reportError("Environment","removeLight",ss.str().c_str());
     return false;
+}
+
+void Environment::setFloorGridColor(const ColorViz &floorGridColor)
+{
+    if (m_floorGridNode)
+    {
+        m_floorGridNode->setGridColor(idyntree2irrlicht(floorGridColor).toSColor());
+    }
 }
 
 

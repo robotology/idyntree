@@ -311,12 +311,10 @@ inline irr::scene::ISceneNode * addFrameAxes(irr::scene::ISceneManager* smgr,
     return frameNode;
 }
 
-inline irr::scene::ISceneNode * addFloorGridNode(irr::scene::ISceneManager* smgr,
+inline CFloorGridSceneNode * addFloorGridNode(irr::scene::ISceneManager* smgr,
                                                 irr::scene::ISceneNode * parentNode=0)
 {
-    irr::scene::ISceneNode * retPtr;
-    retPtr = new CFloorGridSceneNode(parentNode,smgr);
-    return retPtr;
+    return new CFloorGridSceneNode(parentNode,smgr);
 }
 
 inline void setWorldHNode(irr::scene::ISceneNode* node, const iDynTree::Transform & trans)

@@ -239,6 +239,11 @@ public:
     virtual void setBackgroundColor(const ColorViz & backgroundColor) = 0;
 
     /**
+     * Set the floor grid color.
+     */
+    virtual void setFloorGridColor(const ColorViz & floorGridColor) = 0;
+
+    /**
      * Set the ambient light of the enviroment.
      */
     virtual void setAmbientLight(const ColorViz & ambientLight) = 0;
@@ -546,16 +551,10 @@ struct VisualizerOptions
      */
     double rootFrameArrowsDimension;
 
-    /**
-     * The bacground color
-     */
-    ColorViz backgroundColor;
-
     VisualizerOptions(): verbose(false),
                          winWidth(800),
                          winHeight(600),
-                         rootFrameArrowsDimension(1.0),
-                         backgroundColor(0.0,0.4,0.4,1.0)
+                         rootFrameArrowsDimension(1.0)
     {
     }
 };
@@ -642,6 +641,11 @@ public:
      * Return an interface to manipulate the visualization environment.
      */
     IEnvironment& enviroment();
+
+    /**
+     * Return an interface to manipulate the environment in the additional texture.
+     */
+    IEnvironment& textureEnviroment();
 
     /**
      * Get a reference to the internal IVectorsVisualization interface.

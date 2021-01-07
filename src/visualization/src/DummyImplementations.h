@@ -71,6 +71,7 @@ public:
     virtual bool addLight(const std::string &) { return false; }
     virtual ILight & lightViz(const std::string &) { return m_dummyLight; }
     virtual bool removeLight(const std::string &) { return false; }
+    virtual void setFloorGridColor(const ColorViz & ){};
 };
 
 
