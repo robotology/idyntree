@@ -247,6 +247,7 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
     }
 
     geomNode->setMaterialFlag(irr::video::EMF_BACK_FACE_CULLING, false);
+    geomNode->setMaterialFlag(irr::video::EMF_NORMALIZE_NORMALS, true);
     geomNode->setPosition(idyntree2irr_pos(geom->getLink_H_geometry().getPosition()));
     geomNode->setRotation(idyntree2irr_rpy(geom->getLink_H_geometry().getRotation().asRPY()));
 
