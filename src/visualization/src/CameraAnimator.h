@@ -15,15 +15,6 @@
 
 namespace iDynTree
 {
-    //! Special scene node animator for Maya-style cameras
-    /** This scene node animator can be attached to a camera to make it act like a 3d
-    modelling tool.
-    The camera is moving relative to the target with the mouse, by pressing either
-    of the three buttons.
-    In order to move the camera, set a new target for the camera. The distance defines
-    the current orbit radius the camera moves on. Distance can be changed via the setter
-    or by mouse events.
-    */
     class ICameraAnimator : public irr::scene::ISceneNodeAnimator
     {
     public:
@@ -45,28 +36,18 @@ namespace iDynTree
 
         //! Set the zoom speed
         virtual void setZoomSpeed(irr::f32 zoomSpeed) = 0;
-
-        //! Returns the current distance, i.e. orbit radius
-        virtual irr::f32 getDistance() const = 0;
-
-        //! Set the distance
-        virtual void setDistance(irr::f32 distance) = 0;
     };
-} // end namespace irr
+}
 
 namespace iDynTree
 {
 
-    //! Special scene node animator for FPS cameras
-    /** This scene node animator can be attached to a camera to make it act
-    like a 3d modelling tool camera
-    */
     class CameraAnimator : public ICameraAnimator
     {
     public:
         //! Constructor
-        CameraAnimator(irr::gui::ICursorControl* cursor, irr::f32 rotateSpeed = -1500.f,
-            irr::f32 zoomSpeed = 1.f, irr::f32 translationSpeed = 10.0f, irr::f32 distance=70.f);
+        CameraAnimator(irr::gui::ICursorControl* cursor, irr::f32 rotateSpeed = 10.0f,
+            irr::f32 zoomSpeed = 0.5f, irr::f32 translationSpeed = 10.0f);
 
         //! Destructor
         virtual ~CameraAnimator();
@@ -95,12 +76,6 @@ namespace iDynTree
         //! Set the zoom speed
         virtual void setZoomSpeed(irr::f32 zoomSpeed);
 
-        //! Returns the current distance, i.e. orbit radius
-        virtual irr::f32 getDistance() const;
-
-        //! Set the distance
-        virtual void setDistance(irr::f32 distance);
-
         //! This animator will receive events when attached to the active camera
         virtual bool isEventReceiverEnabled() const
         {
@@ -122,7 +97,6 @@ namespace iDynTree
     private:
 
         void allKeysUp();
-        void animate();
         bool isMouseKeyDown(irr::s32 key) const;
 
         bool m_mouseKeys[3];
@@ -130,22 +104,14 @@ namespace iDynTree
         irr::f32 m_wheelDirection;
 
         irr::gui::ICursorControl *m_cursorControl;
-        irr::scene::ICameraSceneNode* m_oldCamera;
-        irr::core::vector3df m_oldTarget;
-        irr::core::vector3df m_lastCameraTarget;    // to find out if the camera target was moved outside this animator
-        irr::core::position2df m_rotateStart;
-        irr::core::position2df m_zoomStart;
-        irr::core::position2df m_translateStart;
         irr::core::position2df m_mousePos;
         irr::core::position2df m_initialMousePosition;
         irr::f32 m_zoomSpeed;
         irr::f32 m_rotateSpeed;
         irr::f32 m_translateSpeed;
-        irr::f32 m_currentZoom;
-        irr::f32 m_rotX, m_rotY;
         bool m_zooming;
         bool m_rotating;
-        bool m_moving;
+        bool m_movingUp;
         bool m_translating;
     };
 
