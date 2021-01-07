@@ -14,13 +14,18 @@
 namespace iDynTree
 {
 
-Camera::Camera(): m_irrCamera(0)
+Camera::Camera(): m_irrCamera(0), m_animator(0)
 {
 
 }
 
 Camera::~Camera()
 {
+    if (m_animator)
+    {
+        m_animator->drop();
+        m_animator = 0;
+    }
 }
 
 irr::scene::ICameraSceneNode* Camera::irrlichtCamera()
@@ -31,6 +36,19 @@ irr::scene::ICameraSceneNode* Camera::irrlichtCamera()
 void Camera::setIrrlichtCamera(irr::scene::ICameraSceneNode* cam)
 {
     m_irrCamera = cam;
+}
+
+void Camera::setCameraAnimator(CameraAnimator *animator)
+{
+    if(m_irrCamera)
+    {
+        m_animator = animator;
+        m_irrCamera->addAnimator(m_animator);
+    }
+    else
+    {
+        reportError("Camera","setCameraAnimator","Impossible to set the animator of a null camera");
+    }
 }
 
 void Camera::setPosition(const Position& cameraPos)
@@ -67,6 +85,11 @@ void Camera::setUpVector(const Direction& cameraUpVector)
     {
         reportError("Camera","setTarget","Impossible to set up vector of a null camera");
     }
+}
+
+void Camera::enableMouseControl(bool enabled)
+{
+    m_animator->enableControl(enabled);
 }
 
 }

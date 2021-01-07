@@ -252,10 +252,8 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions, const Visualiz
     sun.setAmbientColor(iDynTree::ColorViz(0.1,0.1,0.1,1.0));
 
     pimpl->m_camera.setIrrlichtCamera(addVizCamera(pimpl->m_irrSmgr));
-
-    irr::scene::ISceneNodeAnimator* anm = new CameraAnimator(pimpl->m_irrDevice->getCursorControl());
-    pimpl->m_camera.irrlichtCamera()->addAnimator(anm);
-    anm->drop();
+    pimpl->m_camera.setCameraAnimator(new CameraAnimator(pimpl->m_irrDevice->getCursorControl(),
+                                                         addFrameAxes(pimpl->m_irrSmgr, 0, 0.1)));
 
     pimpl->m_vectors.init(pimpl->m_irrSmgr);
 

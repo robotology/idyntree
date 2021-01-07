@@ -10,16 +10,17 @@
 
 #include <irrlicht.h>
 #include "CameraAnimator.h"
+#include "IrrlichtUtils.h"
 
 namespace iDynTree
 {
 
 //! constructor
-CameraAnimator::CameraAnimator(irr::gui::ICursorControl* cursor,
+CameraAnimator::CameraAnimator(irr::gui::ICursorControl* cursor, irr::scene::ISceneNode *cameraAxis,
     irr::f32 rotateSpeed, irr::f32 zoomSpeed, irr::f32 translateSpeed)
     : m_cursorControl(cursor), m_mousePos(0.5f, 0.5f), m_initialMousePosition(m_mousePos),
     m_zoomSpeed(zoomSpeed), m_rotateSpeed(rotateSpeed), m_translateSpeed(translateSpeed),
-    m_zooming(false), m_rotating(false), m_movingUp(false), m_translating(false)
+    m_zooming(false), m_rotating(false), m_movingUp(false), m_translating(false), m_isEnabled(false)
 {
     #ifdef _DEBUG
     setDebugName("iDynTreeCameraAnimator");
@@ -32,6 +33,7 @@ CameraAnimator::CameraAnimator(irr::gui::ICursorControl* cursor,
     }
 
     allKeysUp();
+    m_cameraAxis = cameraAxis;
 
 }
 
@@ -98,7 +100,7 @@ bool CameraAnimator::OnEvent(const irr::SEvent& event)
 
 
 //! OnAnimate() is called just before rendering the whole scene.
-void CameraAnimator::animateNode(irr::scene::ISceneNode *node, irr::u32 timeMs)
+void CameraAnimator::animateNode(irr::scene::ISceneNode *node, irr::u32 /*timeMs*/)
 {
     if (!node || node->getType() != irr::scene::ESNT_CAMERA)
         return;
@@ -112,6 +114,38 @@ void CameraAnimator::animateNode(irr::scene::ISceneNode *node, irr::u32 timeMs)
     irr::scene::ISceneManager * smgr = camera->getSceneManager();
     if (smgr && smgr->getActiveCamera() != camera)
         return;
+
+    irr::core::vector2df mouseDelta = m_mousePos - m_initialMousePosition;
+
+    if (m_wheelMoving)
+    {
+        m_wheelMoving = false;
+        m_zooming = true;
+    }
+
+    if (m_mouseKeys[0])
+    {
+        m_rotating = true;
+        m_initialMousePosition = m_mousePos;
+    }
+
+    if (m_mouseKeys[1])
+    {
+        m_movingUp = true;
+        m_initialMousePosition = m_mousePos;
+    }
+
+    if (m_mouseKeys[2])
+    {
+        m_translating = true;
+        m_initialMousePosition = m_mousePos;
+    }
+
+    if (!m_zooming && !m_translating && !m_rotating && !m_movingUp) //Doing nothing
+    {
+        m_cameraAxis->setVisible(false);
+        return;
+    }
 
     irr::core::vector3df initialTarget = camera->getTarget();
     irr::core::vector3df newTarget = initialTarget;
@@ -148,42 +182,21 @@ void CameraAnimator::animateNode(irr::scene::ISceneNode *node, irr::u32 timeMs)
     initialTransformation(2,1) = zAxis.Y;
     initialTransformation(2,2) = zAxis.Z;
 
-    irr::core::vector2df mouseDelta = m_mousePos - m_initialMousePosition;
+    m_cameraAxis->setPosition(initialTarget);
+    m_cameraAxis->setRotation(initialTransformation.getRotationDegrees());
+    m_cameraAxis->setVisible(true);
 
-    if (m_wheelMoving)
-    {
-        m_wheelMoving = false;
-        m_zooming = true;
-    }
-
-    if (m_mouseKeys[0])
-    {
-        m_rotating = true;
-        m_initialMousePosition = m_mousePos;
-    }
-
-    if (m_mouseKeys[1])
-    {
-        m_movingUp = true;
-        m_initialMousePosition = m_mousePos;
-    }
-
-    if (m_mouseKeys[2])
-    {
-        m_translating = true;
-        m_initialMousePosition = m_mousePos;
-    }
+    irr::f32 minimumDistanceFromTarget = 0.01;
 
     if (m_zooming)
     {
         m_zooming = false;
         irr::f32 distanceFromInitialPosition = m_wheelDirection * m_zoomSpeed;
         irr::f32 distanceFromTarget = newPosition.getDistanceFrom(newTarget);
-        irr::f32 minimumDistance = 0.01;
 
-        if (distanceFromTarget - distanceFromInitialPosition < minimumDistance)
+        if (distanceFromTarget - distanceFromInitialPosition < minimumDistanceFromTarget)
         {
-            distanceFromInitialPosition = distanceFromTarget - minimumDistance;
+            distanceFromInitialPosition = distanceFromTarget - minimumDistanceFromTarget;
         }
 
         irr::f32 interpolationValue = distanceFromInitialPosition / newPosition.getDistanceFrom(newTarget);
@@ -220,17 +233,10 @@ void CameraAnimator::animateNode(irr::scene::ISceneNode *node, irr::u32 timeMs)
         initialTransformation.rotateVect(deltaInWorld, deltaInCameraCoordinates);
         irr::core::vector3df desiredPosition = newPosition + deltaInWorld;
 
-        //Reset distance from target
-        irr::f32 currentDistance = desiredPosition.getDistanceFrom(newTarget);
+        irr::core::vector3df  differenceFromTarget = desiredPosition - newTarget;
+        differenceFromTarget.setLength(initialDistance); //Reset distance from target
 
-        if (currentDistance < 0.01)
-        {
-            currentDistance = 0.01;
-        }
-
-        irr::f32 interpolationValue = initialDistance / currentDistance;
-
-        newPosition += interpolationValue * (desiredPosition - newPosition);
+        newPosition = newTarget + differenceFromTarget;
     }
 
     if (m_movingUp)
@@ -283,6 +289,11 @@ void CameraAnimator::setZoomSpeed(irr::f32 speed)
     m_zoomSpeed = speed;
 }
 
+bool CameraAnimator::isEventReceiverEnabled() const
+{
+    return m_isEnabled;
+}
+
 
 //! Gets the rotation speed
 irr::f32 CameraAnimator::getRotateSpeed() const
@@ -305,11 +316,16 @@ irr::f32 CameraAnimator::getZoomSpeed() const
 }
 
 
-irr::scene::ISceneNodeAnimator* CameraAnimator::createClone(irr::scene::ISceneNode* node, irr::scene::ISceneManager* newManager)
+irr::scene::ISceneNodeAnimator* CameraAnimator::createClone(irr::scene::ISceneNode* /*node*/, irr::scene::ISceneManager* /*newManager*/)
 {
     CameraAnimator * newAnimator =
-        new CameraAnimator(m_cursorControl, m_rotateSpeed, m_zoomSpeed, m_translateSpeed);
+        new CameraAnimator(m_cursorControl, m_cameraAxis->clone(), m_rotateSpeed, m_zoomSpeed, m_translateSpeed);
     return newAnimator;
+}
+
+void CameraAnimator::enableControl(bool enable)
+{
+    m_isEnabled = enable;
 }
 
 } // end namespace

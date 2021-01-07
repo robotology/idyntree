@@ -255,7 +255,7 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
 
 inline irr::scene::ISceneNode * addFrameAxes(irr::scene::ISceneManager* smgr,
                                              irr::scene::ISceneNode * parentNode=0,
-                                             irr::f32 arrowLenght=1.0)
+                                             irr::f32 arrowLength=1.0)
 {
     irr::u32 alphaLev = 20;
     irr::video::SMaterial transRed;
@@ -280,7 +280,12 @@ inline irr::scene::ISceneNode * addFrameAxes(irr::scene::ISceneManager* smgr,
 
     irr::scene::ISceneNode * frameNode = smgr->addEmptySceneNode(parentNode);
 
-    irr::scene::IMesh* arrowMesh = smgr->getGeometryCreator()->createArrowMesh(4,8,1.2*arrowLenght,arrowLenght,0.01*arrowLenght,0.05*arrowLenght);
+    irr::f32 arrowHeight = 1.2*arrowLength;
+    irr::f32 cylinderHeight = arrowLength;
+    irr::f32 cylinderWidth = std::max(0.01*arrowLength, 0.005);
+    irr::f32 coneWidth = 5 * cylinderWidth;
+
+    irr::scene::IMesh* arrowMesh = smgr->getGeometryCreator()->createArrowMesh(4,8, arrowHeight, cylinderHeight, cylinderWidth, coneWidth);
 
     irr::scene::ISceneNode* xArrow = smgr->addMeshSceneNode(arrowMesh,frameNode);
     xArrow->setPosition(irr::core::vector3df(0.0,0.0,0.0));

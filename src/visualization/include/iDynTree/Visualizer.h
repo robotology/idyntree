@@ -51,6 +51,11 @@ public:
      * Set the up vector of the camera w.r.t to the world.
      */
     virtual void setUpVector(const Direction& upVector) = 0;
+
+    /**
+     * Enable the control of camera via the mouse.
+     */
+    virtual void enableMouseControl(bool enabled = true) = 0;
 };
 
 /**
@@ -376,6 +381,36 @@ public:
      * @return true if successfull, false in case of negative numbers.
      */
     virtual bool setVectorsAspect(double zeroModulusRadius, double modulusMultiplier, double heightScale) = 0;
+};
+
+/**
+ * Interface to the visualization of frames.
+ */
+class IFrameVisualization
+{
+public:
+
+    /**
+     * @brief Add a frame in the visualization
+     * @return The frame index.
+     */
+    virtual size_t addFrame(const Transform& transformation, double arrowLength = 1.0) = 0;
+
+    /**
+     * Get the number of visualized frames.
+     *
+     */
+    virtual size_t getNrOfFrames() const = 0;
+
+    /**
+     * Get frame transform.
+     */
+    virtual bool getFrameTransform(size_t frameIndex, Transform& currentTransform) const = 0;
+
+    /**
+     * Update Frame
+     */
+    virtual bool updateFrame(size_t frameIndex, const Transform& transformation) = 0;
 };
 
 

@@ -46,7 +46,7 @@ namespace iDynTree
     {
     public:
         //! Constructor
-        CameraAnimator(irr::gui::ICursorControl* cursor, irr::f32 rotateSpeed = 10.0f,
+        CameraAnimator(irr::gui::ICursorControl* cursor, irr::scene::ISceneNode *cameraAxis, irr::f32 rotateSpeed = 10.0f,
             irr::f32 zoomSpeed = 0.5f, irr::f32 translationSpeed = 10.0f);
 
         //! Destructor
@@ -77,10 +77,7 @@ namespace iDynTree
         virtual void setZoomSpeed(irr::f32 zoomSpeed);
 
         //! This animator will receive events when attached to the active camera
-        virtual bool isEventReceiverEnabled() const
-        {
-            return true;
-        }
+        virtual bool isEventReceiverEnabled() const;
 
         //! Returns type of the scene node
         virtual irr::scene::ESCENE_NODE_ANIMATOR_TYPE getType() const
@@ -94,6 +91,9 @@ namespace iDynTree
         this. */
         virtual irr::scene::ISceneNodeAnimator* createClone(irr::scene::ISceneNode* node, irr::scene::ISceneManager* newManager=0);
 
+        //! Enable this animator
+        void enableControl(bool enable = true);
+
     private:
 
         void allKeysUp();
@@ -104,6 +104,7 @@ namespace iDynTree
         irr::f32 m_wheelDirection;
 
         irr::gui::ICursorControl *m_cursorControl;
+        irr::scene::ISceneNode *m_cameraAxis;
         irr::core::position2df m_mousePos;
         irr::core::position2df m_initialMousePosition;
         irr::f32 m_zoomSpeed;
@@ -113,6 +114,7 @@ namespace iDynTree
         bool m_rotating;
         bool m_movingUp;
         bool m_translating;
+        bool m_isEnabled;
     };
 
 } // end namespace irr
