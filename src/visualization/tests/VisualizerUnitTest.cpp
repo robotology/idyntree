@@ -86,10 +86,39 @@ void checkArrowsVisualization() {
     viz.close();
 }
 
+void checkAdditionalTexture() {
+    iDynTree::Visualizer viz;
+    iDynTree::VisualizerOptions mainWindowOptions, textureOptions;
+
+    textureOptions.winWidth = 200;
+    textureOptions.winHeight = 200;
+
+    bool ok = viz.init(mainWindowOptions, textureOptions);
+    ASSERT_IS_TRUE(ok);
+
+    iDynTree::ColorViz backGroundColor(0.1, 0.2, 0.3, 0.4);
+
+    viz.textureEnviroment().setBackgroundColor(backGroundColor);
+
+    viz.draw();
+
+    std::vector<iDynTree::PixelViz> pixels;
+    ok = viz.getTexturePixels(pixels);
+    ASSERT_IS_TRUE(ok);
+
+    ASSERT_IS_TRUE(pixels.size() == static_cast<size_t>(textureOptions.winWidth * textureOptions.winHeight));
+    ASSERT_IS_TRUE(pixels[0].a = backGroundColor.a);
+    ASSERT_IS_TRUE(pixels[0].r = backGroundColor.r);
+    ASSERT_IS_TRUE(pixels[0].g = backGroundColor.g);
+    ASSERT_IS_TRUE(pixels[0].b = backGroundColor.b);
+
+}
+
 int main()
 {
     threeLinksReducedTest();
     checkArrowsVisualization();
+    checkAdditionalTexture();
 
     return EXIT_SUCCESS;
 }
