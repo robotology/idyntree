@@ -28,6 +28,7 @@ public:
     virtual void setPosition(const iDynTree::Position &) {};
     virtual void setTarget(const iDynTree::Position &) {};
     virtual void setUpVector(const Direction&) {};
+    virtual void enableMouseControl(bool) {};
 };
 
 /**
@@ -120,7 +121,7 @@ public:
     virtual std::string getInstanceName() { return "dummyModelVisualizationInstance"; }
     virtual void setModelVisibility(const bool) {}
     virtual void setModelColor(const ColorViz & ) {}
-    virtual void resetModelColor() {}   
+    virtual void resetModelColor() {}
     virtual bool setLinkColor(const LinkIndex &, const ColorViz &) { return false; }
     virtual bool resetLinkColor(const LinkIndex &) { return false; }
     virtual std::vector< std::string > getLinkNames() { return std::vector<std::string>(); };
