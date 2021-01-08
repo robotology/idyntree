@@ -242,7 +242,7 @@ namespace iDynTree
 
         /**
          * Returns the filename substituting the prefix "package://" with the corresponding absolute path.
-         * The absolute path is determined by searching from the file using the paths specified in the
+         * The absolute path is determined by searching for the file using the paths specified in the
          * "GAZEBO_MODEL_PATH", "ROS_PACKAGE_PATH" and "AMENT_PREFIX_PATH" environmental variables.
          */
         std::string getFileLocationOnLocalFileSystem() const;

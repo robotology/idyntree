@@ -239,13 +239,13 @@ namespace iDynTree
                 }
             }
 
-            return filename;
+            return output;
 
         };
 
-        auto isFileExisting = [cleanPathSeparator](const std::string& filename)->bool
+        auto isFileExisting = [](const std::string& filename)->bool
         {
-            if (FILE *file = fopen(cleanPathSeparator(filename).c_str(), "r")) {
+            if (FILE *file = fopen(filename.c_str(), "r")) {
                 fclose(file);
                 return true;
             } else {
@@ -253,7 +253,7 @@ namespace iDynTree
             }
         };
 
-        auto getFilePath = [isFileExisting](const std::string& filename, const std::string& prefixToRemove, const std::unordered_set<std::string>& paths)
+        auto getFilePath = [isFileExisting, cleanPathSeparator](const std::string& filename, const std::string& prefixToRemove, const std::unordered_set<std::string>& paths)
         {
             if(isFileExisting(filename))
             {
@@ -267,7 +267,7 @@ namespace iDynTree
                 for (const std::string& path : paths)
                 {
                     std::string testPath;
-                    testPath = path + filename_noprefix;
+                    testPath = cleanPathSeparator(path + filename_noprefix);
                     if (isFileExisting(testPath))
                     {
                         return testPath;
