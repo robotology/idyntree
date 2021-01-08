@@ -114,11 +114,43 @@ void checkAdditionalTexture() {
 
 }
 
+void checkFrameVisualization() {
+    iDynTree::Visualizer viz;
+
+    viz.init();
+
+    viz.camera().setPosition(iDynTree::Position(2.0, 0.0, 2.0));
+
+    iDynTree::IFrameVisualization& frames = viz.frames();
+
+    iDynTree::Transform firstTransform;
+    firstTransform.setRotation(iDynTree::Rotation::RPY(1.57, 0,0));
+    firstTransform.setPosition(iDynTree::Position(0.0, -1.0, 0.0));
+
+    size_t index = frames.addFrame(firstTransform);
+    ASSERT_IS_TRUE(index == 0);
+
+    iDynTree::Transform secondTransform;
+    secondTransform.setRotation(iDynTree::Rotation::RPY(-1.57, 0,0));
+    secondTransform.setPosition(iDynTree::Position(0.0, +1.0, 0.0));
+
+    index = frames.addFrame(secondTransform);
+    ASSERT_IS_TRUE(index == 1);
+
+    for(int i=0; i < 5; i++)
+    {
+        viz.draw();
+    }
+
+
+}
+
 int main()
 {
     threeLinksReducedTest();
     checkArrowsVisualization();
     checkAdditionalTexture();
+    checkFrameVisualization();
 
     return EXIT_SUCCESS;
 }

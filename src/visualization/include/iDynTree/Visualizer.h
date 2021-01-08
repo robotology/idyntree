@@ -653,6 +653,11 @@ public:
     IVectorsVisualization& vectors();
 
     /**
+     * Get a reference to the internal IFrameVisualization interface.
+     */
+    IFrameVisualization& frames();
+
+    /**
      * Wrap the run method of the Irrlicht device.
      */
     bool run();

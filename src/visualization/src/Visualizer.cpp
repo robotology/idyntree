@@ -19,6 +19,7 @@
 #include "Environment.h"
 #include "ModelVisualization.h"
 #include "VectorsVisualization.h"
+#include "FrameVisualization.h"
 #include "CameraAnimator.h"
 #endif
 
@@ -132,10 +133,16 @@ struct Visualizer::VisualizerPimpl
      */
     VectorsVisualization m_vectors;
 
+    /**
+     * Frames visualization
+     */
+    FrameVisualization m_frames;
+
 #else
     DummyCamera m_camera;
     DummyEnvironment m_environment, m_textureEnvironment;
     DummyVectorsVisualization m_invalidVectors;
+    DummyFrameVisualization m_invalidFrames;
 #endif
 
     VisualizerPimpl()
@@ -237,6 +244,8 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions, const Visualiz
                                                          addFrameAxes(pimpl->m_irrSmgr, 0, 0.1)));
 
     pimpl->m_vectors.init(pimpl->m_irrSmgr);
+
+    pimpl->m_frames.init(pimpl->m_irrSmgr);
 
     if (pimpl->m_irrDriver->queryFeature(irr::video::EVDF_RENDER_TO_TARGET)) //check if render to target is possible
     {
@@ -493,6 +502,19 @@ IVectorsVisualization &Visualizer::vectors()
 #endif
 }
 
+IFrameVisualization &Visualizer::frames()
+{
+#ifdef IDYNTREE_USES_IRRLICHT
+    if( !this->pimpl->m_isInitialized )
+    {
+        init();
+    }
+    return this->pimpl->m_frames;
+#else
+    return this->pimpl->m_invalidFrames;
+#endif
+}
+
 bool Visualizer::run()
 {
 #ifdef IDYNTREE_USES_IRRLICHT
@@ -518,6 +540,7 @@ void Visualizer::close()
     }
 
     pimpl->m_vectors.close();
+    pimpl->m_frames.close();
     pimpl->m_environment.close();
     pimpl->m_textureEnvironment.close();
 

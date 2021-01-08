@@ -20,6 +20,7 @@ void iDynTree::FrameVisualization::setFrameTransform(size_t index, const iDynTre
 }
 
 iDynTree::FrameVisualization::FrameVisualization()
+    : m_smgr(0)
 {
 
 }
@@ -85,5 +86,9 @@ void iDynTree::FrameVisualization::close()
     }
     m_frames.resize(0);
 
-    m_smgr->drop(); //Drop the element (dual of "grab")
+    if (m_smgr)
+    {
+        m_smgr->drop(); //Drop the element (dual of "grab")
+        m_smgr = 0;
+    }
 }

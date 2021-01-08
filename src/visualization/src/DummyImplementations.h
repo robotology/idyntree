@@ -105,6 +105,16 @@ public:
     virtual bool setVectorsAspect(double, double, double) override { return false; }
 };
 
+class DummyFrameVisualization : public IFrameVisualization
+{
+public:
+
+    virtual size_t addFrame(const Transform&, double) override {return 0; };
+    virtual size_t getNrOfFrames() const override {return 0; };
+    virtual bool getFrameTransform(size_t , Transform& ) const override {return false;};
+    virtual bool updateFrame(size_t, const Transform&) override {return false;};
+};
+
 /**
  * Dummy model visualization.
  */
