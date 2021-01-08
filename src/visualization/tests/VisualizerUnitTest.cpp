@@ -142,6 +142,23 @@ void checkFrameVisualization() {
         viz.draw();
     }
 
+    bool ok = frames.updateFrame(index, firstTransform);
+    ASSERT_IS_TRUE(ok);
+
+    for(int i=0; i < 5; i++)
+    {
+        viz.draw();
+    }
+
+    iDynTree::Transform firstRead, secondRead;
+    ok = frames.getFrameTransform(0, firstRead);
+    ASSERT_IS_TRUE(ok);
+
+    ok = frames.getFrameTransform(1, secondRead);
+    ASSERT_IS_TRUE(ok);
+
+    ASSERT_EQUAL_TRANSFORM_TOL(firstRead, secondRead, 1e-5);
+    ASSERT_EQUAL_TRANSFORM_TOL(firstRead, firstTransform, 1e-5);
 
 }
 
