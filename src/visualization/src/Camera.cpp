@@ -33,6 +33,24 @@ irr::scene::ICameraSceneNode* Camera::irrlichtCamera()
     return m_irrCamera;
 }
 
+void Camera::setAspectRatio(double aspectRatio)
+{
+    if(m_irrCamera)
+    {
+        m_irrCamera->setAspectRatio(aspectRatio);
+
+        //Setting the aspect ratio seems to reset the visualization of left handed frames (hence everything appears mirrored)
+        // See http://irrlicht.sourceforge.net/forum/viewtopic.php?f=4&t=47734
+        irr::core::matrix4 matproj = m_irrCamera->getProjectionMatrix();
+        matproj(0,0) *= -1;
+        m_irrCamera->setProjectionMatrix(matproj);
+    }
+    else
+    {
+        reportError("Camera","setAspectRatio","Impossible to set the aspect ratio of a null camera");
+    }
+}
+
 void Camera::setIrrlichtCamera(irr::scene::ICameraSceneNode* cam)
 {
     m_irrCamera = cam;

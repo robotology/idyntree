@@ -207,7 +207,7 @@ void CameraAnimator::animateNode(irr::scene::ISceneNode *node, irr::u32 /*timeMs
     if (m_translating)
     {
         m_translating = false;
-        irr::core::vector3df deltaInCameraCoordinates(m_translateSpeed * mouseDelta.Y, m_translateSpeed * mouseDelta.X, 0.0);
+        irr::core::vector3df deltaInCameraCoordinates(m_translateSpeed * mouseDelta.Y, -m_translateSpeed * mouseDelta.X, 0.0);
         irr::core::vector3df deltaInWorld;
         initialTransformation.rotateVect(deltaInWorld, deltaInCameraCoordinates);
         irr::f32 translation = deltaInWorld.getLength(); //Save the translation amount
@@ -228,7 +228,7 @@ void CameraAnimator::animateNode(irr::scene::ISceneNode *node, irr::u32 /*timeMs
     {
         m_rotating = false;
         irr::f32 initialDistance = newPosition.getDistanceFrom(newTarget);
-        irr::core::vector3df deltaInCameraCoordinates(m_rotateSpeed * mouseDelta.Y, m_rotateSpeed * mouseDelta.X, 0.0);
+        irr::core::vector3df deltaInCameraCoordinates(m_rotateSpeed * mouseDelta.Y, -m_rotateSpeed * mouseDelta.X, 0.0);
         irr::core::vector3df deltaInWorld;
         initialTransformation.rotateVect(deltaInWorld, deltaInCameraCoordinates);
         irr::core::vector3df desiredPosition = newPosition + deltaInWorld;

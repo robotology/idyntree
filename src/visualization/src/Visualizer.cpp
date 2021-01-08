@@ -368,7 +368,7 @@ void Visualizer::draw()
 
         auto textureDims = pimpl->m_irrTexture->getSize();
 
-        pimpl->m_camera.irrlichtCamera()->setAspectRatio(textureDims.Width/ (float)textureDims.Height);
+        pimpl->m_camera.setAspectRatio(textureDims.Width/ (float)textureDims.Height);
 
         // draw whole scene into render buffer
         pimpl->m_irrSmgr->drawAll();
@@ -383,7 +383,7 @@ void Visualizer::draw()
 
     auto winDimensions = pimpl->m_irrDriver->getScreenSize();
 
-    pimpl->m_camera.irrlichtCamera()->setAspectRatio(winDimensions.Width/ (float)winDimensions.Height);
+    pimpl->m_camera.setAspectRatio(winDimensions.Width/ (float)winDimensions.Height);
 
     pimpl->m_irrSmgr->drawAll();
 
