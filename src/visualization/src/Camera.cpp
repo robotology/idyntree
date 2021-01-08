@@ -105,9 +105,9 @@ void Camera::setUpVector(const Direction& cameraUpVector)
     }
 }
 
-void Camera::enableMouseControl(bool enabled)
+ICameraAnimator *Camera::animator()
 {
-    m_animator->enableControl(enabled);
+    return m_animator;
 }
 
 }

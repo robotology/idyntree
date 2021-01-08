@@ -39,8 +39,7 @@ public:
     virtual void setPosition(const Position& cameraPos);
     virtual void setTarget(const Position& targetPos);
     virtual void setUpVector(const Direction& upVector);
-    virtual void enableMouseControl(bool enabled = true);
-
+    virtual ICameraAnimator* animator();
 };
 
 }

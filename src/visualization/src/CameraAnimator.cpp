@@ -17,7 +17,7 @@ namespace iDynTree
 
 //! constructor
 CameraAnimator::CameraAnimator(irr::gui::ICursorControl* cursor, irr::scene::ISceneNode *cameraAxis,
-    irr::f32 rotateSpeed, irr::f32 zoomSpeed, irr::f32 translateSpeed)
+    double rotateSpeed, double zoomSpeed, double translateSpeed)
     : m_cursorControl(cursor), m_mousePos(0.5f, 0.5f), m_initialMousePosition(m_mousePos),
     m_zoomSpeed(zoomSpeed), m_rotateSpeed(rotateSpeed), m_translateSpeed(translateSpeed),
     m_zooming(false), m_rotating(false), m_movingUp(false), m_translating(false), m_isEnabled(false)
@@ -270,21 +270,21 @@ void CameraAnimator::allKeysUp()
 
 
 //! Sets the rotation speed
-void CameraAnimator::setRotateSpeed(irr::f32 speed)
+void CameraAnimator::setRotateSpeed(double speed)
 {
     m_rotateSpeed = speed;
 }
 
 
 //! Sets the movement speed
-void CameraAnimator::setMoveSpeed(irr::f32 speed)
+void CameraAnimator::setMoveSpeed(double speed)
 {
     m_translateSpeed = speed;
 }
 
 
 //! Sets the zoom speed
-void CameraAnimator::setZoomSpeed(irr::f32 speed)
+void CameraAnimator::setZoomSpeed(double speed)
 {
     m_zoomSpeed = speed;
 }
@@ -296,21 +296,21 @@ bool CameraAnimator::isEventReceiverEnabled() const
 
 
 //! Gets the rotation speed
-irr::f32 CameraAnimator::getRotateSpeed() const
+double CameraAnimator::getRotateSpeed() const
 {
     return m_rotateSpeed;
 }
 
 
 // Gets the movement speed
-irr::f32 CameraAnimator::getMoveSpeed() const
+double CameraAnimator::getMoveSpeed() const
 {
     return m_translateSpeed;
 }
 
 
 //! Gets the zoom speed
-irr::f32 CameraAnimator::getZoomSpeed() const
+double CameraAnimator::getZoomSpeed() const
 {
     return m_zoomSpeed;
 }
@@ -323,7 +323,7 @@ irr::scene::ISceneNodeAnimator* CameraAnimator::createClone(irr::scene::ISceneNo
     return newAnimator;
 }
 
-void CameraAnimator::enableControl(bool enable)
+void CameraAnimator::enableMouseControl(bool enable)
 {
     m_isEnabled = enable;
 }

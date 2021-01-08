@@ -12,75 +12,50 @@
 #define IDYNTREE_CAMERAANIMATOR_H
 
 #include <irrlicht.h>
-
-namespace iDynTree
-{
-    class ICameraAnimator : public irr::scene::ISceneNodeAnimator
-    {
-    public:
-
-        //! Returns the speed of movement
-        virtual irr::f32 getMoveSpeed() const = 0;
-
-        //! Sets the speed of movement
-        virtual void setMoveSpeed(irr::f32 moveSpeed) = 0;
-
-        //! Returns the rotation speed
-        virtual irr::f32 getRotateSpeed() const = 0;
-
-        //! Set the rotation speed
-        virtual void setRotateSpeed(irr::f32 rotateSpeed) = 0;
-
-        //! Returns the zoom speed
-        virtual irr::f32 getZoomSpeed() const = 0;
-
-        //! Set the zoom speed
-        virtual void setZoomSpeed(irr::f32 zoomSpeed) = 0;
-    };
-}
+#include <iDynTree/Visualizer.h>
 
 namespace iDynTree
 {
 
-    class CameraAnimator : public ICameraAnimator
+    class CameraAnimator : public ICameraAnimator, public irr::scene::ISceneNodeAnimator
     {
     public:
         //! Constructor
-        CameraAnimator(irr::gui::ICursorControl* cursor, irr::scene::ISceneNode *cameraAxis, irr::f32 rotateSpeed = 10.0f,
-            irr::f32 zoomSpeed = 0.5f, irr::f32 translationSpeed = 10.0f);
+        CameraAnimator(irr::gui::ICursorControl* cursor, irr::scene::ISceneNode *cameraAxis, double rotateSpeed = 10.0f,
+            double zoomSpeed = 0.5f, double translationSpeed = 10.0f);
 
         //! Destructor
         virtual ~CameraAnimator();
 
         //! Animates the scene node, currently only works on cameras
-        virtual void animateNode(irr::scene::ISceneNode* node, irr::u32 timeMs);
+        virtual void animateNode(irr::scene::ISceneNode* node, irr::u32 timeMs) override;
 
         //! Event receiver
-        virtual bool OnEvent(const irr::SEvent& event);
+        virtual bool OnEvent(const irr::SEvent& event) override;
 
         //! Returns the speed of movement in units per millisecond
-        virtual irr::f32 getMoveSpeed() const;
+        virtual double getMoveSpeed() const override;
 
         //! Sets the speed of movement in units per millisecond
-        virtual void setMoveSpeed(irr::f32 moveSpeed);
+        virtual void setMoveSpeed(double moveSpeed) override;
 
         //! Returns the rotation speed
-        virtual irr::f32 getRotateSpeed() const;
+        virtual double getRotateSpeed() const override;
 
         //! Set the rotation speed
-        virtual void setRotateSpeed(irr::f32 rotateSpeed);
+        virtual void setRotateSpeed(double rotateSpeed) override;
 
         //! Returns the zoom speed
-        virtual irr::f32 getZoomSpeed() const;
+        virtual double getZoomSpeed() const override;
 
         //! Set the zoom speed
-        virtual void setZoomSpeed(irr::f32 zoomSpeed);
+        virtual void setZoomSpeed(double zoomSpeed) override;
 
         //! This animator will receive events when attached to the active camera
-        virtual bool isEventReceiverEnabled() const;
+        virtual bool isEventReceiverEnabled() const override;
 
         //! Returns type of the scene node
-        virtual irr::scene::ESCENE_NODE_ANIMATOR_TYPE getType() const
+        virtual irr::scene::ESCENE_NODE_ANIMATOR_TYPE getType() const override
         {
             return irr::scene::ESNAT_CAMERA_MAYA;
         }
@@ -89,10 +64,10 @@ namespace iDynTree
         /** Please note that you will have to drop
         (IReferenceCounted::drop()) the returned pointer after calling
         this. */
-        virtual irr::scene::ISceneNodeAnimator* createClone(irr::scene::ISceneNode* node, irr::scene::ISceneManager* newManager=0);
+        virtual irr::scene::ISceneNodeAnimator* createClone(irr::scene::ISceneNode* node, irr::scene::ISceneManager* newManager=0) override;
 
         //! Enable this animator
-        void enableControl(bool enable = true);
+        virtual void enableMouseControl(bool enable = true) override;
 
     private:
 
@@ -107,9 +82,9 @@ namespace iDynTree
         irr::scene::ISceneNode *m_cameraAxis;
         irr::core::position2df m_mousePos;
         irr::core::position2df m_initialMousePosition;
-        irr::f32 m_zoomSpeed;
-        irr::f32 m_rotateSpeed;
-        irr::f32 m_translateSpeed;
+        double m_zoomSpeed;
+        double m_rotateSpeed;
+        double m_translateSpeed;
         bool m_zooming;
         bool m_rotating;
         bool m_movingUp;

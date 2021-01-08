@@ -28,7 +28,7 @@ public:
     virtual void setPosition(const iDynTree::Position &) {};
     virtual void setTarget(const iDynTree::Position &) {};
     virtual void setUpVector(const Direction&) {};
-    virtual void enableMouseControl(bool) {};
+    virtual ICameraAnimator* animator() {return nullptr;};
 };
 
 /**

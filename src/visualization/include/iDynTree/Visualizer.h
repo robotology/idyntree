@@ -27,6 +27,49 @@ class Transform;
 class Visualizer;
 
 /**
+ * Interface to animate the camera and control it via the mouse
+ */
+class ICameraAnimator
+{
+public:
+
+    /**
+     * Enable the control of camera via the mouse.
+     */
+    virtual void enableMouseControl(bool enabled = true) = 0;
+
+    /**
+     *  Returns the speed of movement
+     */
+    virtual double getMoveSpeed() const = 0;
+
+    /**
+     *  Sets the speed of movement
+     */
+    virtual void setMoveSpeed(double moveSpeed) = 0;
+
+    /**
+     *  Returns the rotation speed
+     */
+    virtual double getRotateSpeed() const = 0;
+
+    /**
+     *  Set the rotation speed
+     */
+    virtual void setRotateSpeed(double rotateSpeed) = 0;
+
+    /**
+     *  Returns the zoom speed
+     */
+    virtual double getZoomSpeed() const = 0;
+
+    /**
+     *  Set the zoom speed
+     */
+    virtual void setZoomSpeed(double zoomSpeed) = 0;
+};
+
+/**
  * Interface to manipulate the camera parameters.
  */
 class ICamera
@@ -53,9 +96,10 @@ public:
     virtual void setUpVector(const Direction& upVector) = 0;
 
     /**
-     * Enable the control of camera via the mouse.
+     * Get a pointer to the CameraAnimator object.
      */
-    virtual void enableMouseControl(bool enabled = true) = 0;
+    virtual ICameraAnimator* animator() = 0;
+
 };
 
 /**
