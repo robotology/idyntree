@@ -211,11 +211,11 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
     {
         const iDynTree::ExternalMesh* externalMesh = geom->asExternalMesh();
 
-        irr::scene::IAnimatedMesh* loadedAnimatedMesh = smgr->getMesh(externalMesh->getFilename().c_str());
+        irr::scene::IAnimatedMesh* loadedAnimatedMesh = smgr->getMesh(externalMesh->getFileLocationOnLocalFileSystem().c_str());
 
         if (!loadedAnimatedMesh)
         {
-            std::cerr << "Error in loading mesh " << externalMesh->getFilename() << std::endl;
+            std::cerr << "Error in loading mesh " << externalMesh->getFileLocationOnLocalFileSystem() << std::endl;
             return 0;
         }
 
