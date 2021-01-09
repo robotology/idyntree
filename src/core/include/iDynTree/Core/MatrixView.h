@@ -77,14 +77,17 @@ namespace iDynTree
 
         MatrixStorageOrdering m_storageOrder;
 
+        index_type m_innerStride;
+        index_type m_outerStride;
+
         index_type rawIndex(index_type row, index_type col) const
         {
             if (m_storageOrder == MatrixStorageOrdering::RowMajor)
             {
-                return (col + this->m_cols * row);
+                return (col + this->m_outerStride * row);
             } else
             {
-                return (this->m_rows * col + row);
+                return (this->m_outerStride * col + row);
             }
         }
 
@@ -174,6 +177,8 @@ namespace iDynTree
             , m_rows(in_rows)
             , m_cols(in_cols)
             , m_storageOrder(order)
+            , m_innerStride(1)
+            , m_outerStride(order == MatrixStorageOrdering::RowMajor ? in_cols : in_rows)
         {
         }
 
@@ -210,6 +215,25 @@ namespace iDynTree
             return this->m_cols;
         }
         ///@}
+
+        MatrixView block(index_type startingRow, index_type startingColumn,
+                         index_type rows, index_type cols) const
+        {
+            assert(rows <= this->rows());
+            assert(cols <= this->cols());
+
+            const index_type offset = rawIndex(startingRow, startingColumn);
+            assert(offset < this->rows() * this->cols());
+
+            MatrixView block;
+            block = *this;
+            block.m_rows = rows;
+            block.m_cols = cols;
+            block.m_storage = this->m_storage + offset;
+
+            return block;
+        }
+
     };
 
     template <class ElementType>
