@@ -47,6 +47,10 @@ IVectorsVisualization::~IVectorsVisualization()
 {
 }
 
+IFrameVisualization::~IFrameVisualization()
+{
+}
+
 IModelVisualization::~IModelVisualization()
 {
 }

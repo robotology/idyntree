@@ -440,8 +440,13 @@ class IFrameVisualization
 public:
 
     /**
-     * @brief Add a frame in the visualization
-     * @return The frame index.
+     * Destructor
+     */
+    virtual ~IFrameVisualization() = 0;
+
+    /**
+     * Add a frame in the visualization
+     * Returns the frame index.
      */
     virtual size_t addFrame(const Transform& transformation, double arrowLength = 1.0) = 0;
 
