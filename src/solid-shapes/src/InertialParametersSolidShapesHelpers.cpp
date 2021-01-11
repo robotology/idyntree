@@ -185,7 +185,7 @@ bool BBFromExternalShape(ExternalMesh* extMesh, Box& box)
     // Load mesh with assimp
     Assimp::Importer Importer;
 
-    std::string filename = extMesh->getFilename();
+    std::string filename = extMesh->getFileLocationOnLocalFileSystem();
     const aiScene* pScene = Importer.ReadFile(filename.c_str(), 0);
 
     if (pScene)
