@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add the possibility to plot and update frames in the Matlab visualizer.
 - Added ``getFileLocationOnLocalFileSystem`` method in ``ExternalMesh`` that attempts to find the mesh location in the local file system. This is now used by the ``Visualizer`` when loading the robot model (https://github.com/robotology/idyntree/pull/798)
+- Add the possibility to extract submatrix with MatrixView (https://github.com/robotology/idyntree/pull/800)
 
 ## [2.0.2] - 2020-12-04
 
