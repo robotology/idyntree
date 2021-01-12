@@ -18,6 +18,8 @@ if(IDYNTREE_USES_IRRLICHT)
                                                src/JetsVisualization.h
                                                src/VectorsVisualization.h
                                                src/FrameVisualization.h
+                                               src/Texture.h
+                                               src/TexturesHandler.h
                                                src/Light.h
                                                src/FloorGridSceneNode.h)
     set(iDynTree_visualization_private_source  src/Camera.cpp
@@ -27,6 +29,8 @@ if(IDYNTREE_USES_IRRLICHT)
                                                src/JetsVisualization.cpp
                                                src/VectorsVisualization.cpp
                                                src/FrameVisualization.cpp
+                                               src/Texture.cpp
+                                               src/TexturesHandler.cpp
                                                src/Light.cpp
                                                src/FloorGridSceneNode.cpp)
 endif()

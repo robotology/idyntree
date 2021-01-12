@@ -20,6 +20,7 @@
 #include "ModelVisualization.h"
 #include "VectorsVisualization.h"
 #include "FrameVisualization.h"
+#include "TexturesHandler.h"
 #include "CameraAnimator.h"
 #endif
 
@@ -57,6 +58,16 @@ IModelVisualization::~IModelVisualization()
 
 ILight::~ILight()
 {
+}
+
+ITexture::~ITexture()
+{
+
+}
+
+ITexturesHandler::~ITexturesHandler()
+{
+
 }
 
 
@@ -142,11 +153,17 @@ struct Visualizer::VisualizerPimpl
      */
     FrameVisualization m_frames;
 
+    /**
+     * Textures handling
+     */
+    TexturesHandler m_textures;
+
 #else
     DummyCamera m_camera;
     DummyEnvironment m_environment, m_textureEnvironment;
     DummyVectorsVisualization m_invalidVectors;
     DummyFrameVisualization m_invalidFrames;
+    DummyTexturesHandler m_invalidTextures;
 #endif
 
     VisualizerPimpl()
@@ -250,6 +267,8 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions, const Visualiz
     pimpl->m_vectors.init(pimpl->m_irrSmgr);
 
     pimpl->m_frames.init(pimpl->m_irrSmgr);
+
+    pimpl->m_textures.init(pimpl->m_irrDriver, pimpl->m_irrSmgr);
 
     if (pimpl->m_irrDriver->queryFeature(irr::video::EVDF_RENDER_TO_TARGET)) //check if render to target is possible
     {
@@ -385,6 +404,8 @@ void Visualizer::draw()
         pimpl->m_irrDriver->setRenderTarget(0, true, true, pimpl->m_environment.m_backgroundColor.toSColor());
     }
 
+    pimpl->m_textures.draw(pimpl->m_environment, pimpl->m_camera);
+
     auto winDimensions = pimpl->m_irrDriver->getScreenSize();
 
     pimpl->m_camera.setAspectRatio(winDimensions.Width/ (float)winDimensions.Height);
@@ -516,6 +537,15 @@ IFrameVisualization &Visualizer::frames()
     return this->pimpl->m_frames;
 #else
     return this->pimpl->m_invalidFrames;
+#endif
+}
+
+ITexturesHandler &Visualizer::textures()
+{
+#ifdef IDYNTREE_USES_IRRLICHT
+    return this->pimpl->m_textures;
+#else
+    return this->pimpl->m_invalidTextures;
 #endif
 }
 

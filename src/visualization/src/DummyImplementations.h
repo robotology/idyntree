@@ -145,6 +145,15 @@ public:
     virtual Transform getWorldLinkTransform(const LinkIndex &) { return iDynTree::Transform::Identity(); }
 };
 
+class DummyTexturesHandler : public ITexturesHandler
+{
+public:
+
+    virtual ~DummyTexturesHandler(){ };
+    virtual ITexture* add(const std::string& , const VisualizerOptions&){return nullptr;};
+    virtual ITexture* get(const std::string& ){return nullptr;};
+};
+
 }
 
 #endif

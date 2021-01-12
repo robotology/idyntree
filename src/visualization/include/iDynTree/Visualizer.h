@@ -97,6 +97,7 @@ public:
 
     /**
      * Get a pointer to the CameraAnimator object.
+     * It is not supposed to be deallocated, and its lifespan coincides with the one of the ICamera
      */
     virtual ICameraAnimator* animator() = 0;
 
@@ -575,6 +576,41 @@ public:
     virtual Transform getWorldLinkTransform(const LinkIndex& linkIndex) = 0;
 };
 
+class ITexture
+{
+public:
+
+    /**
+     * Destructor
+     */
+    virtual ~ITexture() = 0;
+
+    /**
+     * Return an interface to manipulate the texture environment.
+     */
+    virtual IEnvironment& environment() = 0;
+
+    /**
+     * @brief Get the color of the pixel at the given position in the additional texture.
+     *
+     * Remember to call draw() first.
+     * @param width The width of the pixel
+     * @param height The height of the pixel
+     * @return The color of the pixel
+     */
+    virtual ColorViz getPixelColor(unsigned int width, unsigned int height) const = 0;
+
+    /**
+     * @brief Get the pixels of the texture.
+     *
+     * Remember to call draw() first.
+     * @param pixels The output pixels
+     * @return True in case of success, false otherwise
+     */
+    virtual bool getPixels(std::vector<PixelViz>& pixels) const = 0;
+
+};
+
 /**
  * Visualizer options
  */
@@ -606,6 +642,33 @@ struct VisualizerOptions
                          rootFrameArrowsDimension(1.0)
     {
     }
+};
+
+class ITexturesHandler
+{
+public:
+
+    /**
+     * Destructor
+     */
+    virtual ~ITexturesHandler() = 0;
+
+    /**
+     * @brief Add a texture
+     * @param The name of the texture
+     * @param visualizerOptions The options for the texture
+     * @note The pointer should not be deleted. Its lifespan coincides with the one of the ITextureHandler.
+     * @return A ITexture pointer in case of success. A nullptr otherwise
+     */
+    virtual ITexture* add(const std::string& name, const VisualizerOptions& textureOptions = VisualizerOptions()) = 0;
+
+    /**
+     * @brief Get a specific texture
+     * @param The name of the texture to get.
+     * @note The pointer should not be deleted. Its lifespan coincides with the one of the ITextureHandler.
+     * @return the pointer to the texture. A nullptr if that texture does not exists.
+     */
+    virtual ITexture* get(const std::string& name) = 0;
 };
 
 /**
@@ -705,6 +768,11 @@ public:
      * Get a reference to the internal IFrameVisualization interface.
      */
     IFrameVisualization& frames();
+
+    /**
+     * Get a reference to the internal ITexturesHandler interface.
+     */
+    ITexturesHandler& textures();
 
     /**
      * Wrap the run method of the Irrlicht device.
