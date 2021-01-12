@@ -93,17 +93,18 @@ void checkAdditionalTexture() {
     textureOptions.winWidth = 200;
     textureOptions.winHeight = 200;
 
-    bool ok = viz.init(mainWindowOptions, textureOptions);
+    bool ok = viz.init(mainWindowOptions);
     ASSERT_IS_TRUE(ok);
 
+    iDynTree::ITexture* texture = viz.textures().add("testTexture", textureOptions);
     iDynTree::ColorViz backGroundColor(0.1, 0.2, 0.3, 0.4);
 
-    viz.textureEnviroment().setBackgroundColor(backGroundColor);
+    texture->environment().setBackgroundColor(backGroundColor);
 
     viz.draw();
 
     std::vector<iDynTree::PixelViz> pixels;
-    ok = viz.getTexturePixels(pixels);
+    ok = texture->getPixels(pixels);
     ASSERT_IS_TRUE(ok);
 
     ASSERT_IS_TRUE(pixels.size() == static_cast<size_t>(textureOptions.winWidth * textureOptions.winHeight));

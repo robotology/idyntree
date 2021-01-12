@@ -694,14 +694,7 @@ public:
      *
      * \note this is called implicitly when addModel is called for the first time.
      */
-    bool init(const VisualizerOptions = VisualizerOptions());
-
-    /**
-     * Initialize the visualization.
-     *
-     * \note this is called implicitly when addModel is called for the first time.
-     */
-    bool init(const VisualizerOptions& visualizerOptions, const VisualizerOptions& textureOptions);
+    bool init(const VisualizerOptions& visualizerOptions = VisualizerOptions());
 
     /**
      * Get number of models visualized.
@@ -755,11 +748,6 @@ public:
     IEnvironment& enviroment();
 
     /**
-     * Return an interface to manipulate the environment in the additional texture.
-     */
-    IEnvironment& textureEnviroment();
-
-    /**
      * Get a reference to the internal IVectorsVisualization interface.
      */
     IVectorsVisualization& vectors();
@@ -807,24 +795,6 @@ public:
      */
     bool isWindowActive() const;
 
-    /**
-     * @brief Get the color of the pixel at the given position in the additional texture.
-     *
-     * Remember to call draw() first.
-     * @param width The width of the pixel
-     * @param height The height of the pixel
-     * @return The color of the pixel
-     */
-    ColorViz getTexturePixelColor(unsigned int width, unsigned int height) const;
-
-    /**
-     * @brief Get the pixels of the additional texture.
-     *
-     * Remember to call draw() first.
-     * @param pixels The output pixels
-     * @return True in case of success, false otherwise
-     */
-    bool getTexturePixels(std::vector<PixelViz>& pixels) const;
 };
 
 }
