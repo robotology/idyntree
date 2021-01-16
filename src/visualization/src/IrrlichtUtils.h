@@ -38,13 +38,6 @@ inline iDynTree::ColorViz  irrlicht2idyntree(irr::video::SColorf color)
     return iDynTree::ColorViz((double)color.r,(double)color.g,(double)color.b,(double)color.a);
 }
 
-
-inline irr::core::vector3df idyntree2irr_rpy(const iDynTree::Vector3 & vecId)
-{
-    double kRad2deg = 180/M_PI;
-    return irr::core::vector3df(kRad2deg*vecId(0),kRad2deg*vecId(1),kRad2deg*vecId(2));
-}
-
 inline irr::core::vector3df idyntree2irr_pos(const iDynTree::Vector3 & vecId)
 {
     return irr::core::vector3df(vecId(0),vecId(1),vecId(2));
@@ -73,7 +66,25 @@ inline iDynTree::Rotation irr2idyntree_rot(const irr::core::vector3df & rotIrr)
 
 inline const irr::core::vector3df idyntree2irr_rot(const iDynTree::Rotation & rot)
 {
-    return idyntree2irr_rpy(rot.asRPY());
+    irr::core::matrix4 irrTransform(irr::core::matrix4::EM4CONST_IDENTITY);
+    //Transposing the matrix since irrlicht uses left handed frames
+    irrTransform(0,0) = rot(0,0);
+    irrTransform(0,1) = rot(1,0);
+    irrTransform(0,2) = rot(2,0);
+    irrTransform(1,0) = rot(0,1);
+    irrTransform(1,1) = rot(1,1);
+    irrTransform(1,2) = rot(2,1);
+    irrTransform(2,0) = rot(0,2);
+    irrTransform(2,1) = rot(1,2);
+    irrTransform(2,2) = rot(2,2);
+
+    return irrTransform.getRotationDegrees();
+}
+
+inline irr::core::vector3df idyntree2irr_rpy(const iDynTree::Vector3 & vecId)
+{
+    iDynTree::Rotation rot = iDynTree::Rotation::RPY(vecId(0), vecId(1), vecId(2));
+    return idyntree2irr_rot(rot);
 }
 
 inline irr::video::SMaterial idyntree2irr(const iDynTree::Vector4 & rgbaMaterialId)
@@ -225,10 +236,16 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
             use_iDynTree_material = false;
         }
 
+        iDynTree::Vector3 scale = externalMesh->getScale();
+
+        // If multiple mesh are loaded, add them
+        if (getFileExt(externalMesh->getFilename()) == "stl")
+        {
+            scale(0) = -scale(0); //STL meshes are interpreted as left handed by irrlicht
+        }
+
         geomNode = smgr->addMeshSceneNode(loadedAnimatedMesh->getMesh(0),linkNode);
-        geomNode->setScale(idyntree2irr_pos(externalMesh->getScale()));
-
-
+        geomNode->setScale(idyntree2irr_pos(scale));
     }
 
     if (!geomNode)
@@ -249,7 +266,7 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
     geomNode->setMaterialFlag(irr::video::EMF_BACK_FACE_CULLING, false);
     geomNode->setMaterialFlag(irr::video::EMF_NORMALIZE_NORMALS, true);
     geomNode->setPosition(idyntree2irr_pos(geom->getLink_H_geometry().getPosition()));
-    geomNode->setRotation(idyntree2irr_rpy(geom->getLink_H_geometry().getRotation().asRPY()));
+    geomNode->setRotation(idyntree2irr_rot(geom->getLink_H_geometry().getRotation()));
 
     return geomNode;
 }
@@ -320,7 +337,7 @@ inline CFloorGridSceneNode * addFloorGridNode(irr::scene::ISceneManager* smgr,
 inline void setWorldHNode(irr::scene::ISceneNode* node, const iDynTree::Transform & trans)
 {
     node->setPosition(idyntree2irr_pos(trans.getPosition()));
-    node->setRotation(idyntree2irr_rpy(trans.getRotation().asRPY()));
+    node->setRotation(idyntree2irr_rot(trans.getRotation()));
 }
 
 /**
