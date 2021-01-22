@@ -35,6 +35,8 @@ public:
 
     /**
      * Enable the control of camera via the mouse.
+     * By default, left button rotates the camera, the right button translates it on the plane.
+     * The middle button, translates the camera up and down, while the wheel increases or decreases the zoom.
      */
     virtual void enableMouseControl(bool enabled = true) = 0;
 
@@ -576,6 +578,12 @@ public:
     virtual Transform getWorldLinkTransform(const LinkIndex& linkIndex) = 0;
 };
 
+/**
+ * The interface for an object that can be used as an additional target for the renderer.
+ * This allows rendering the scene using dimensions and environment that are different from
+ * the main window. The camera is in common. Any camera change in the main window is also
+ * reflected in the other textures.
+ */
 class ITexture
 {
 public:
@@ -604,7 +612,11 @@ public:
      * @brief Get the pixels of the texture.
      *
      * Remember to call draw() first.
-     * @param pixels The output pixels
+     * @param pixels The output pixels. The size of the vector will be equal to the total number of
+     * pixels of the rendered texture, i.e. width of the texture times its height. Both these two parameters
+     * can be set in the textureOptions passed to the method ITexturesHandler::add. The pixels are saved in
+     * col-major format.
+     * @note This operation may affect the time performances of the visualizer, especially if the texture is large.
      * @return True in case of success, false otherwise
      */
     virtual bool getPixels(std::vector<PixelViz>& pixels) const = 0;
