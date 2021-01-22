@@ -38,6 +38,13 @@ inline iDynTree::ColorViz  irrlicht2idyntree(irr::video::SColorf color)
     return iDynTree::ColorViz((double)color.r,(double)color.g,(double)color.b,(double)color.a);
 }
 
+
+inline irr::core::vector3df idyntree2irr_rpy(const iDynTree::Vector3 & vecId)
+{
+    double kRad2deg = 180/M_PI;
+    return irr::core::vector3df(kRad2deg*vecId(0),kRad2deg*vecId(1),kRad2deg*vecId(2));
+}
+
 inline irr::core::vector3df idyntree2irr_pos(const iDynTree::Vector3 & vecId)
 {
     return irr::core::vector3df(vecId(0),vecId(1),vecId(2));
@@ -66,25 +73,7 @@ inline iDynTree::Rotation irr2idyntree_rot(const irr::core::vector3df & rotIrr)
 
 inline const irr::core::vector3df idyntree2irr_rot(const iDynTree::Rotation & rot)
 {
-    irr::core::matrix4 irrTransform(irr::core::matrix4::EM4CONST_IDENTITY);
-    //Transposing the matrix since irrlicht uses left handed frames
-    irrTransform(0,0) = rot(0,0);
-    irrTransform(0,1) = rot(1,0);
-    irrTransform(0,2) = rot(2,0);
-    irrTransform(1,0) = rot(0,1);
-    irrTransform(1,1) = rot(1,1);
-    irrTransform(1,2) = rot(2,1);
-    irrTransform(2,0) = rot(0,2);
-    irrTransform(2,1) = rot(1,2);
-    irrTransform(2,2) = rot(2,2);
-
-    return irrTransform.getRotationDegrees();
-}
-
-inline irr::core::vector3df idyntree2irr_rpy(const iDynTree::Vector3 & vecId)
-{
-    iDynTree::Rotation rot = iDynTree::Rotation::RPY(vecId(0), vecId(1), vecId(2));
-    return idyntree2irr_rot(rot);
+    return idyntree2irr_rpy(rot.asRPY());
 }
 
 inline irr::video::SMaterial idyntree2irr(const iDynTree::Vector4 & rgbaMaterialId)
