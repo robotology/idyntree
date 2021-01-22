@@ -100,6 +100,7 @@ public:
     /**
      * Get a pointer to the CameraAnimator object.
      * It is not supposed to be deallocated, and its lifespan coincides with the one of the ICamera
+     * It is accessible only after the visualizer has been initialized.
      */
     virtual ICameraAnimator* animator() = 0;
 

@@ -48,6 +48,7 @@ int main(int argc, char** argv)
     // Visualize the model
     iDynTree::Visualizer visualizer;
     ok = visualizer.addModel(mdlLoader.model(),"model");
+    visualizer.camera().animator()->enableMouseControl();
 
     if( !ok )
     {

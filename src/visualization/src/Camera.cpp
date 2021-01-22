@@ -107,6 +107,10 @@ void Camera::setUpVector(const Direction& cameraUpVector)
 
 ICameraAnimator *Camera::animator()
 {
+    if (!m_animator)
+    {
+        reportError("Camera","animator","The visualizer has not been initialed yet.");
+    }
     return m_animator;
 }
 
