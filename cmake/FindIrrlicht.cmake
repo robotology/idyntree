@@ -41,7 +41,7 @@ endif()
 find_path(Irrlicht_INCLUDE_DIR irrlicht.h
           PATH_SUFFIXES irrlicht)
 mark_as_advanced(Irrlicht_INCLUDE_DIR)
-find_library(Irrlicht_LIBRARY irrlicht libirrlicht)
+find_library(Irrlicht_LIBRARY Irrlicht libIrrlicht)
 mark_as_advanced(Irrlicht_LIBRARY)
 
 include(FindPackageHandleStandardArgs)
