@@ -455,6 +455,12 @@ public:
     virtual size_t addFrame(const Transform& transformation, double arrowLength = 1.0) = 0;
 
     /**
+     * Set the specified frame visible or not.
+     * Returns true in case of success, false otherwise (for example if the frame does not exists).
+     */
+    virtual bool setVisible(size_t frameIndex, bool isVisible) = 0;
+
+    /**
      * Get the number of visualized frames.
      *
      */

@@ -43,26 +43,14 @@ namespace iDynTree
 
         FrameVisualization& operator=(const FrameVisualization& other) = delete;
 
-        /**
-         * @brief Add a frame in the visualization
-         * @return The frame index.
-         */
         virtual size_t addFrame(const Transform& transformation, double arrowLength = 1.0) final;
 
-        /**
-         * Get the number of visualized frames.
-         *
-         */
+        virtual bool setVisible(size_t frameIndex, bool isVisible) final;
+
         virtual size_t getNrOfFrames() const final;
 
-        /**
-         * Get frame properties.
-         */
         virtual bool getFrameTransform(size_t frameIndex, Transform& currentTransform) const final;
 
-        /**
-         * Update Frame
-         */
         virtual bool updateFrame(size_t frameIndex, const Transform& transformation) final;
 
     };

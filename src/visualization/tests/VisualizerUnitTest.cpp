@@ -161,6 +161,16 @@ void checkFrameVisualization() {
     ASSERT_EQUAL_TRANSFORM_TOL(firstRead, secondRead, 1e-5);
     ASSERT_EQUAL_TRANSFORM_TOL(firstRead, firstTransform, 1e-5);
 
+    ok = frames.setVisible(0, false);
+    ASSERT_IS_TRUE(ok);
+    ok = frames.setVisible(1, false);
+    ASSERT_IS_TRUE(ok);
+
+    for(int i=0; i < 5; i++)
+    {
+        viz.draw();
+    }
+
 }
 
 int main()

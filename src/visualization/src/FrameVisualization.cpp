@@ -35,6 +35,18 @@ size_t iDynTree::FrameVisualization::addFrame(const iDynTree::Transform &transfo
     return m_frames.size() - 1;
 }
 
+bool iDynTree::FrameVisualization::setVisible(size_t frameIndex, bool isVisible)
+{
+    if (frameIndex >= m_frames.size()) {
+        reportError("FrameVisualization","setVisible","frameIndex out of bounds.");
+        return false;
+    }
+
+    m_frames[frameIndex].visualizationNode->setVisible(isVisible);
+
+    return true;
+}
+
 size_t iDynTree::FrameVisualization::getNrOfFrames() const
 {
     return m_frames.size();

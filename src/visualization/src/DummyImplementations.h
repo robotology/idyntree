@@ -111,6 +111,7 @@ public:
 
     virtual ~DummyFrameVisualization(){ };
     virtual size_t addFrame(const Transform&, double) override {return 0; };
+    virtual bool setVisible(size_t , bool ) override {return false;};
     virtual size_t getNrOfFrames() const override {return 0; };
     virtual bool getFrameTransform(size_t , Transform& ) const override {return false;};
     virtual bool updateFrame(size_t, const Transform&) override {return false;};
