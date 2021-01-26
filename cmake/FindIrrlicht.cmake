@@ -34,6 +34,13 @@
 
 find_package(Irrlicht QUIET NO_MODULE)
 if(Irrlicht_FOUND)
+  # Some Irrlicht-package in vcpkg only define Irrlicht, not Irrlicht::Irrlicht 
+  if(NOT TARGET Irrlicht::Irrlicht) 
+    if(TARGET Irrlicht)
+      add_library(Irrlicht::Irrlicht INTERFACE IMPORTED)
+      set_target_properties(Irrlicht::Irrlicht PROPERTIES INTERFACE_LINK_LIBRARIES Irrlicht)
+    endif()
+  endif()
   find_package_handle_standard_args(Irrlicht CONFIG_MODE)
   return()
 endif()
