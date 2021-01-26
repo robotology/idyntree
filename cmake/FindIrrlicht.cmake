@@ -1,71 +1,58 @@
-# - Try to find Irrlicht
-# Once done this will define
+#.rst:
+# FindAsio
+# -----------
 #
-#  IRRLICHT_FOUND - system has Irrlicht
-#  IRRLICHT_INCLUDE_DIRS - the Irrlicht include directory
-#  IRRLICHT_LIBRARIES - Link these to use Irrlicht
-#  IRRLICHT_DEFINITIONS - Compiler switches required for using Irrlicht
+# Find the Irrlicht library.
 #
-#  Copyright (c) 2006 Andreas Schneider <mail@cynapses.org>
+# IMPORTED Targets
+# ^^^^^^^^^^^^^^^^
 #
-#  Redistribution and use is allowed according to the terms of the New
-#  BSD license.
-#  For details see the accompanying COPYING-CMAKE-SCRIPTS file.
+# This module defines the following :prop_tgt:`IMPORTED` targets if
+# Irrlicht has been found::
+#
+#   Irrlicht::Irrlicht
+#
+# Result Variables
+# ^^^^^^^^^^^^^^^^
+#
+# This module defines the following variables::
+#
+#   Irrlicht_FOUND                - System has Irrlicht
 #
 
+#=============================================================================
+# Copyright Fondazione Istituto Italiano di Tecnologia
+#   Authors: Silvio Traversaro <silvio.traversaro@iit.it>
+#
+# Distributed under the OSI-approved BSD License (the "License");
+# see accompanying file Copyright.txt for details.
+#
+# This software is distributed WITHOUT ANY WARRANTY; without even the
+# implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the License for more information.
+#=============================================================================
 
-if (IRRLICHT_LIBRARIES AND IRRLICHT_INCLUDE_DIRS)
-  # in cache already
-  set(IRRLICHT_FOUND TRUE)
-else (IRRLICHT_LIBRARIES AND IRRLICHT_INCLUDE_DIRS)
+find_package(Irrlicht QUIET NO_MODULE)
+if(Irrlicht_FOUND)
+  find_package_handle_standard_args(Irrlicht CONFIG_MODE)
+  return()
+endif()
 
-  find_path(IRRLICHT_INCLUDE_DIR
-    NAMES
-      irrlicht.h
-    PATHS
-      /usr/include
-      /usr/include/irrlicht
-      /usr/local/include
-      /usr/local/include/irrlicht
-      /opt/local/include
-      /sw/include
-  )
+find_path(Irrlicht_INCLUDE_DIR irrlicht.h
+          PATH_SUFFIXES irrlicht)
+mark_as_advanced(Irrlicht_INCLUDE_DIR)
+find_library(Irrlicht_LIBRARY irrlicht libirrlicht)
+mark_as_advanced(Irrlicht_LIBRARY)
 
-  find_library(IRRLICHT_LIBRARY
-    NAMES
-        Irrlicht
-    PATHS
-      /usr/lib
-      /usr/local/lib
-      /opt/local/lib
-      /sw/lib
-  )
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(Irrlicht
+                                  FOUND_VAR Irrlicht_FOUND
+                                  REQUIRED_VARS Irrlicht_INCLUDE_DIR Irrlicht_LIBRARY)
 
-  if (IRRLICHT_LIBRARY)
-    set(IRRLICHT_FOUND TRUE)
-  endif (IRRLICHT_LIBRARY)
-
-  set(IRRLICHT_INCLUDE_DIRS
-    ${IRRLICHT_INCLUDE_DIR}
-  )
-
-  if (IRRLICHT_FOUND)
-    set(IRRLICHT_LIBRARIES
-      ${IRRLICHT_LIBRARIES}
-      ${IRRLICHT_LIBRARY}
-    )
-  endif (IRRLICHT_FOUND)
-
-  if (IRRLICHT_INCLUDE_DIRS AND IRRLICHT_LIBRARIES)
-     set(IRRLICHT_FOUND TRUE)
-  endif (IRRLICHT_INCLUDE_DIRS AND IRRLICHT_LIBRARIES)
-
-  if (IRRLICHT_FIND_REQUIRED)
-    message(FATAL_ERROR "Could not find Irrlicht")
-  endif (IRRLICHT_FIND_REQUIRED)
-
-  # show the IRRLICHT_INCLUDE_DIRS and IRRLICHT_LIBRARIES variables only in the advanced view
-  mark_as_advanced(IRRLICHT_INCLUDE_DIRS IRRLICHT_LIBRARIES)
-
-endif (IRRLICHT_LIBRARIES AND IRRLICHT_INCLUDE_DIRS)
-
+if(Irrlicht_FOUND AND NOT TARGET Irrlicht::Irrlicht)
+  add_library(Irrlicht::Irrlicht UNKNOWN IMPORTED)
+  set_target_properties(Irrlicht::Irrlicht PROPERTIES
+                        INTERFACE_INCLUDE_DIRECTORIES "${Irrlicht_INCLUDE_DIR}")
+  set_property(TARGET Irrlicht::Irrlicht APPEND PROPERTY
+               IMPORTED_LOCATION "${Irrlicht_LIBRARY}")
+endif()
