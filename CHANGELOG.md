@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Promoted the functions `computeBoundingBoxFromShape` and `computeBoxVertices` to public in the `idyntree-solid-shapes` library (https://github.com/robotology/idyntree/pull/801).
 
+### Fixed 
+- Fixed the `IDYNTREE_USES_IRRLICHT` option when `irrlicht` is installed via vcpkg (https://github.com/robotology/idyntree/pull/806).
+
 ## [2.0.2] - 2020-12-04
 
 ### Fixed 
