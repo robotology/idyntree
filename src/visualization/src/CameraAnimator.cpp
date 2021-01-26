@@ -161,14 +161,23 @@ void CameraAnimator::animateNode(irr::scene::ISceneNode *node, irr::u32 /*timeMs
 
     irr::core::vector3df xAxis = va->getFarLeftUp() - va->getFarLeftDown();
     xAxis.normalize();
-    irr::core::vector3df yAxis = va->getFarRightDown() - va->getFarLeftDown();
-    yAxis.normalize();
+    irr::core::vector3df yAxis;
 
     irr::core::vector3df zAxis = initialTarget - initialPosition;
     zAxis.normalize();
 
     yAxis = zAxis.crossProduct(xAxis);
     yAxis.normalize();
+
+    // Getting the rotation directly from camera results in undesired rotations when getting close to the singularity
+    // due to the fact that irrlicht stores rotations using RPY. As a consequence, we reconstruct the camera frame by
+    // having the z-axis parallel to the line connecting the camera position to the target position. The x-axis is
+    // reconstructed from the view frustrum. The view frustrum is the region of space that appears in the camera. It
+    // is basically a truncated rectangular pyramid. It is delimited by 8 points. We use the bottom left and top
+    // left points in the "far" plane to define the up direction, the x-axis. The y-axis is obtained by cross-product
+    // between the other two axes, obtaining a right-handed frame. Since irrlicht uses left-handed frames, the obtained
+    // frame is converted into a left-handed frame by taking its transpose (a left hand rotation corresponds to the
+    // inverse of a right hand rotation since the axis is the same, but the angle is on the opposite direction).
 
     initialTransformation(0,0) = xAxis.X;
     initialTransformation(0,1) = xAxis.Y;
