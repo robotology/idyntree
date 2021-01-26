@@ -8,6 +8,9 @@
  * at your option.
  */
 
+#ifndef IDYNTREE_IKIN_CONVERSIONS_IMPLEMENTATION_H
+#define IDYNTREE_IKIN_CONVERSIONS_IMPLEMENTATION_H
+
 #include <iDynTree/iKinConversions.h>
 #include <iDynTree/Model/DenavitHartenberg.h>
 
@@ -20,7 +23,7 @@
 namespace iDynTree
 {
 
-DHLink iKinLink2DHLink(const iCub::iKin::iKinLink & ikinlink)
+inline DHLink iKinLink2DHLink(const iCub::iKin::iKinLink & ikinlink)
 {
     DHLink ret;
 
@@ -34,14 +37,14 @@ DHLink iKinLink2DHLink(const iCub::iKin::iKinLink & ikinlink)
     return ret;
 }
 
-iCub::iKin::iKinLink DHLink2iKinLink(const DHLink & dhLink)
+inline iCub::iKin::iKinLink DHLink2iKinLink(const DHLink & dhLink)
 {
     return iCub::iKin::iKinLink(dhLink.A,dhLink.D,
                                 dhLink.Alpha,dhLink.Offset,
                                 dhLink.Min,dhLink.Max);
 }
 
-bool DHChainFromiKinChain(iCub::iKin::iKinChain& ikinChain,
+inline bool DHChainFromiKinChain(iCub::iKin::iKinChain& ikinChain,
                                 DHChain& dhChain)
 {
     assert(ikinChain.getN() == ikinChain.getDOF());
@@ -66,7 +69,7 @@ bool DHChainFromiKinChain(iCub::iKin::iKinChain& ikinChain,
     return true;
 }
 
-bool modelFromiKinChain(iCub::iKin::iKinChain& ikinChain, Model& output)
+inline bool modelFromiKinChain(iCub::iKin::iKinChain& ikinChain, Model& output)
 {
     DHChain chain;
     bool ok = DHChainFromiKinChain(ikinChain, chain);
@@ -81,14 +84,14 @@ bool modelFromiKinChain(iCub::iKin::iKinChain& ikinChain, Model& output)
     return ok;
 }
 
-iKinLimbImported::iKinLimbImported(): iCub::iKin::iKinLimb()
+inline iKinLimbImported::iKinLimbImported(): iCub::iKin::iKinLimb()
 {
 }
 
-iKinLimbImported::~iKinLimbImported()
+inline iKinLimbImported::~iKinLimbImported()
 {}
 
-bool iKinLimbImported::fromDHChain(const DHChain &dhChain)
+inline bool iKinLimbImported::fromDHChain(const DHChain &dhChain)
 {
     // Cleanup existing data
     dispose();
@@ -110,7 +113,7 @@ bool iKinLimbImported::fromDHChain(const DHChain &dhChain)
     return true;
 }
 
-bool iKinLimbImported::fromModel(const Model &model,
+inline bool iKinLimbImported::fromModel(const Model &model,
                                  const std::string &baseFrame,
                                  const std::string &distalFrame)
 {
@@ -120,7 +123,7 @@ bool iKinLimbImported::fromModel(const Model &model,
     return conversionSuccessful;
 }
 
-bool iKinLimbFromDHChain(const DHChain & dhChain,
+inline bool iKinLimbFromDHChain(const DHChain & dhChain,
                          iCub::iKin::iKinLimb& ikinLimb)
 {
     iKinLimbImported ikinLimbImported;
@@ -132,7 +135,7 @@ bool iKinLimbFromDHChain(const DHChain & dhChain,
     return ok;
 }
 
-bool iKinLimbFromModel(const Model & model,
+inline bool iKinLimbFromModel(const Model & model,
                        const std::string& baseFrame,
                        const std::string& distalFrame,
                        iCub::iKin::iKinLimb & ikinLimb)
@@ -144,3 +147,5 @@ bool iKinLimbFromModel(const Model & model,
 }
 
 }
+
+#endif
