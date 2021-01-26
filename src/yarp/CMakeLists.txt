@@ -14,7 +14,7 @@ SET(iDynTree_YARP_header include/iDynTree/yarp/YARPConversions.h
 
 SOURCE_GROUP("Header Files" FILES ${iDynTree_YARP_header})
 
-add_library(idyntree-yarp INTERFACE ${iDynTree_YARP_source} ${iDynTree_YARP_header})
+add_library(idyntree-yarp INTERFACE)
 add_library(iDynTree::idyntree-yarp ALIAS idyntree-yarp)
 
 set_target_properties(idyntree-yarp PROPERTIES PUBLIC_HEADER "${iDynTree_YARP_header}")

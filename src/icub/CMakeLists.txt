@@ -14,7 +14,7 @@ SET(iDynTree_ICUB_header include/iDynTree/iKinConversions.h
 SOURCE_GROUP("Header Files" FILES ${iDynTree_ICUB_header})
 
 set(libraryname idyntree-icub)
-add_library(${libraryname} INTERFACE ${iDynTree_ICUB_source} ${iDynTree_ICUB_header})
+add_library(${libraryname} INTERFACE)
 add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 
 set_target_properties(${libraryname} PROPERTIES PUBLIC_HEADER "${iDynTree_ICUB_header}")
