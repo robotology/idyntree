@@ -24,6 +24,7 @@ private:
     irr::f32 m_size;
     irr::core::aabbox3d<irr::f32> m_box;
     irr::video::SMaterial m_dummyMaterial;
+    irr::video::SColor m_gridColor;
 
 public:
     CFloorGridSceneNode(irr::scene::ISceneNode* parent, irr::scene::ISceneManager* mgr, irr::s32 id=-1);
@@ -32,6 +33,7 @@ public:
     virtual const irr::core::aabbox3d<irr::f32>& getBoundingBox() const;
     virtual irr::u32 getMaterialCount() const;
     virtual irr::video::SMaterial& getMaterial(irr::u32 i);
+    void setGridColor(const irr::video::SColor& gridColor);
 };
 
 }

@@ -92,6 +92,7 @@ void VectorsVisualization::init(irr::scene::ISceneManager *smgr)
 {
     assert(smgr);
     m_smgr = smgr;
+    m_smgr->grab();
 }
 
 void VectorsVisualization::close()
@@ -103,6 +104,12 @@ void VectorsVisualization::close()
         }
     }
     m_vectors.resize(0);
+
+    if (m_smgr)
+    {
+        m_smgr->drop();
+        m_smgr = nullptr;
+    }
 }
 
 VectorsVisualization::~VectorsVisualization()

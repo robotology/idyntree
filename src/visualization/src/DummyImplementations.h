@@ -28,6 +28,7 @@ public:
     virtual void setPosition(const iDynTree::Position &) {};
     virtual void setTarget(const iDynTree::Position &) {};
     virtual void setUpVector(const Direction&) {};
+    virtual ICameraAnimator* animator() {return nullptr;};
 };
 
 /**
@@ -70,6 +71,7 @@ public:
     virtual bool addLight(const std::string &) { return false; }
     virtual ILight & lightViz(const std::string &) { return m_dummyLight; }
     virtual bool removeLight(const std::string &) { return false; }
+    virtual void setFloorGridColor(const ColorViz & ){};
 };
 
 
@@ -103,6 +105,18 @@ public:
     virtual bool setVectorsAspect(double, double, double) override { return false; }
 };
 
+class DummyFrameVisualization : public IFrameVisualization
+{
+public:
+
+    virtual ~DummyFrameVisualization(){ };
+    virtual size_t addFrame(const Transform&, double) override {return 0; };
+    virtual bool setVisible(size_t , bool ) override {return false;};
+    virtual size_t getNrOfFrames() const override {return 0; };
+    virtual bool getFrameTransform(size_t , Transform& ) const override {return false;};
+    virtual bool updateFrame(size_t, const Transform&) override {return false;};
+};
+
 /**
  * Dummy model visualization.
  */
@@ -120,7 +134,7 @@ public:
     virtual std::string getInstanceName() { return "dummyModelVisualizationInstance"; }
     virtual void setModelVisibility(const bool) {}
     virtual void setModelColor(const ColorViz & ) {}
-    virtual void resetModelColor() {}   
+    virtual void resetModelColor() {}
     virtual bool setLinkColor(const LinkIndex &, const ColorViz &) { return false; }
     virtual bool resetLinkColor(const LinkIndex &) { return false; }
     virtual std::vector< std::string > getLinkNames() { return std::vector<std::string>(); };
@@ -130,6 +144,15 @@ public:
     virtual IJetsVisualization& jets() { return m_dummyJets;  }
     virtual Transform getWorldModelTransform() { return iDynTree::Transform::Identity(); }
     virtual Transform getWorldLinkTransform(const LinkIndex &) { return iDynTree::Transform::Identity(); }
+};
+
+class DummyTexturesHandler : public ITexturesHandler
+{
+public:
+
+    virtual ~DummyTexturesHandler(){ };
+    virtual ITexture* add(const std::string& , const VisualizerOptions&){return nullptr;};
+    virtual ITexture* get(const std::string& ){return nullptr;};
 };
 
 }

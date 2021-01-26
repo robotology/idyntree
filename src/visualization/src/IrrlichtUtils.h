@@ -225,10 +225,16 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
             use_iDynTree_material = false;
         }
 
+        iDynTree::Vector3 scale = externalMesh->getScale();
+
+        // If multiple mesh are loaded, add them
+        if (getFileExt(externalMesh->getFilename()) == "stl")
+        {
+            scale(0) = -scale(0); //STL meshes are interpreted as left handed by irrlicht
+        }
+
         geomNode = smgr->addMeshSceneNode(loadedAnimatedMesh->getMesh(0),linkNode);
-        geomNode->setScale(idyntree2irr_pos(externalMesh->getScale()));
-
-
+        geomNode->setScale(idyntree2irr_pos(scale));
     }
 
     if (!geomNode)
@@ -247,15 +253,16 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
     }
 
     geomNode->setMaterialFlag(irr::video::EMF_BACK_FACE_CULLING, false);
+    geomNode->setMaterialFlag(irr::video::EMF_NORMALIZE_NORMALS, true);
     geomNode->setPosition(idyntree2irr_pos(geom->getLink_H_geometry().getPosition()));
-    geomNode->setRotation(idyntree2irr_rpy(geom->getLink_H_geometry().getRotation().asRPY()));
+    geomNode->setRotation(idyntree2irr_rot(geom->getLink_H_geometry().getRotation()));
 
     return geomNode;
 }
 
 inline irr::scene::ISceneNode * addFrameAxes(irr::scene::ISceneManager* smgr,
                                              irr::scene::ISceneNode * parentNode=0,
-                                             irr::f32 arrowLenght=1.0)
+                                             irr::f32 arrowLength=1.0)
 {
     irr::u32 alphaLev = 20;
     irr::video::SMaterial transRed;
@@ -280,7 +287,12 @@ inline irr::scene::ISceneNode * addFrameAxes(irr::scene::ISceneManager* smgr,
 
     irr::scene::ISceneNode * frameNode = smgr->addEmptySceneNode(parentNode);
 
-    irr::scene::IMesh* arrowMesh = smgr->getGeometryCreator()->createArrowMesh(4,8,1.2*arrowLenght,arrowLenght,0.01*arrowLenght,0.05*arrowLenght);
+    irr::f32 arrowHeight = 1.2*arrowLength;
+    irr::f32 cylinderHeight = arrowLength;
+    irr::f32 cylinderWidth = std::max(0.01*arrowLength, 0.005);
+    irr::f32 coneWidth = 5 * cylinderWidth;
+
+    irr::scene::IMesh* arrowMesh = smgr->getGeometryCreator()->createArrowMesh(4,8, arrowHeight, cylinderHeight, cylinderWidth, coneWidth);
 
     irr::scene::ISceneNode* xArrow = smgr->addMeshSceneNode(arrowMesh,frameNode);
     xArrow->setPosition(irr::core::vector3df(0.0,0.0,0.0));
@@ -305,18 +317,16 @@ inline irr::scene::ISceneNode * addFrameAxes(irr::scene::ISceneManager* smgr,
     return frameNode;
 }
 
-inline irr::scene::ISceneNode * addFloorGridNode(irr::scene::ISceneManager* smgr,
+inline CFloorGridSceneNode * addFloorGridNode(irr::scene::ISceneManager* smgr,
                                                 irr::scene::ISceneNode * parentNode=0)
 {
-    irr::scene::ISceneNode * retPtr;
-    retPtr = new CFloorGridSceneNode(parentNode,smgr);
-    return retPtr;
+    return new CFloorGridSceneNode(parentNode,smgr);
 }
 
 inline void setWorldHNode(irr::scene::ISceneNode* node, const iDynTree::Transform & trans)
 {
     node->setPosition(idyntree2irr_pos(trans.getPosition()));
-    node->setRotation(idyntree2irr_rpy(trans.getRotation().asRPY()));
+    node->setRotation(idyntree2irr_rot(trans.getRotation()));
 }
 
 /**
@@ -383,6 +393,7 @@ inline irr::scene::ICameraSceneNode* addVizCamera(irr::scene::ISceneManager* smg
     camera->setPosition(irr::core::vector3df(0.8,0.8,0.8));
     camera->setTarget(irr::core::vector3df(0,0,0));
     camera->setUpVector(irr::core::vector3df(0.0,0.0,1.0));
+    camera->bindTargetAndRotation(true); //To change the target and the rotation at the same time
 
     // See http://irrlicht.sourceforge.net/forum/viewtopic.php?f=4&t=47734
     irr::core::matrix4 matproj = camera->getProjectionMatrix();

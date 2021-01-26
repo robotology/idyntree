@@ -12,6 +12,7 @@
 #define IDYNTREE_VISUALIZER_H
 
 #include <string>
+#include <vector>
 
 #include <iDynTree/Core/Direction.h>
 #include <iDynTree/Core/Position.h>
@@ -24,6 +25,51 @@ namespace iDynTree
 class Model;
 class Transform;
 class Visualizer;
+
+/**
+ * Interface to animate the camera and control it via the mouse
+ */
+class ICameraAnimator
+{
+public:
+
+    /**
+     * Enable the control of camera via the mouse.
+     * By default, left button rotates the camera, the right button translates it on the plane.
+     * The middle button, translates the camera up and down, while the wheel increases or decreases the zoom.
+     */
+    virtual void enableMouseControl(bool enabled = true) = 0;
+
+    /**
+     *  Returns the speed of movement
+     */
+    virtual double getMoveSpeed() const = 0;
+
+    /**
+     *  Sets the speed of movement
+     */
+    virtual void setMoveSpeed(double moveSpeed) = 0;
+
+    /**
+     *  Returns the rotation speed
+     */
+    virtual double getRotateSpeed() const = 0;
+
+    /**
+     *  Set the rotation speed
+     */
+    virtual void setRotateSpeed(double rotateSpeed) = 0;
+
+    /**
+     *  Returns the zoom speed
+     */
+    virtual double getZoomSpeed() const = 0;
+
+    /**
+     *  Set the zoom speed
+     */
+    virtual void setZoomSpeed(double zoomSpeed) = 0;
+};
 
 /**
  * Interface to manipulate the camera parameters.
@@ -50,6 +96,14 @@ public:
      * Set the up vector of the camera w.r.t to the world.
      */
     virtual void setUpVector(const Direction& upVector) = 0;
+
+    /**
+     * Get a pointer to the CameraAnimator object.
+     * It is not supposed to be deallocated, and its lifespan coincides with the one of the ICamera
+     * It is accessible only after the visualizer has been initialized.
+     */
+    virtual ICameraAnimator* animator() = 0;
+
 };
 
 /**
@@ -92,6 +146,25 @@ public:
      * Build a color from a Vector4 rgba.
      */
     ColorViz(const Vector4 & rgba);
+};
+
+/**
+ * Basic structure to encode pixel information
+ */
+class PixelViz : public ColorViz
+{
+public:
+
+    /**
+     * Width position of the pixel.
+     */
+    unsigned int width;
+
+    /**
+     * Height position of the pixel.
+     */
+    unsigned int height;
+
 };
 
 enum LightType
@@ -212,6 +285,11 @@ public:
      * Set the background color.
      */
     virtual void setBackgroundColor(const ColorViz & backgroundColor) = 0;
+
+    /**
+     * Set the floor grid color.
+     */
+    virtual void setFloorGridColor(const ColorViz & floorGridColor) = 0;
 
     /**
      * Set the ambient light of the enviroment.
@@ -358,6 +436,47 @@ public:
     virtual bool setVectorsAspect(double zeroModulusRadius, double modulusMultiplier, double heightScale) = 0;
 };
 
+/**
+ * Interface to the visualization of frames.
+ */
+class IFrameVisualization
+{
+public:
+
+    /**
+     * Destructor
+     */
+    virtual ~IFrameVisualization() = 0;
+
+    /**
+     * Add a frame in the visualization
+     * Returns the frame index.
+     */
+    virtual size_t addFrame(const Transform& transformation, double arrowLength = 1.0) = 0;
+
+    /**
+     * Set the specified frame visible or not.
+     * Returns true in case of success, false otherwise (for example if the frame does not exists).
+     */
+    virtual bool setVisible(size_t frameIndex, bool isVisible) = 0;
+
+    /**
+     * Get the number of visualized frames.
+     *
+     */
+    virtual size_t getNrOfFrames() const = 0;
+
+    /**
+     * Get frame transform.
+     */
+    virtual bool getFrameTransform(size_t frameIndex, Transform& currentTransform) const = 0;
+
+    /**
+     * Update Frame
+     */
+    virtual bool updateFrame(size_t frameIndex, const Transform& transformation) = 0;
+};
+
 
 /**
  * Interface to the visualization of a model istance.
@@ -406,8 +525,8 @@ public:
     /**
      * Reset the colors of the model.
      */
-    virtual void resetModelColor() = 0;    
-    
+    virtual void resetModelColor() = 0;
+
     /**
      * Set the color of all the geometries of the given link.
      *
@@ -415,12 +534,12 @@ public:
      * reset by resetLinkColor.
      */
     virtual bool setLinkColor(const LinkIndex& linkIndex, const ColorViz& linkColor) = 0;
-    
+
     /**
      * Reset the colors of given link.
      */
     virtual bool resetLinkColor(const LinkIndex& linkIndex) = 0;
-    
+
     /**
      * Get the name of the link in the model.
      */
@@ -450,20 +569,65 @@ public:
      * Get a reference to the internal IJetsVisualization interface.
      */
     virtual IJetsVisualization& jets() = 0;
-        
+
     /**
      * Get the transformation of the model (root link) with respect to visualizer world \f$ w_H_{root}\f$
      * The obtained transformation matrix can be used to map any homogeneous vector from the
      * model's root link frame to the visualizer world frame.
      */
     virtual Transform getWorldModelTransform() = 0;
-    
+
     /**
      * Get the transformation of given link with respect to visualizer world \f$ w_H_{link}\f$
      * The obtained transformation matrix can be used to map any homogeneous vector from the
      * given link frame to the visualizer world frame.
      */
     virtual Transform getWorldLinkTransform(const LinkIndex& linkIndex) = 0;
+};
+
+/**
+ * The interface for an object that can be used as an additional target for the renderer.
+ * This allows rendering the scene using dimensions and environment that are different from
+ * the main window. The camera is in common. Any camera change in the main window is also
+ * reflected in the other textures.
+ */
+class ITexture
+{
+public:
+
+    /**
+     * Destructor
+     */
+    virtual ~ITexture() = 0;
+
+    /**
+     * Return an interface to manipulate the texture environment.
+     */
+    virtual IEnvironment& environment() = 0;
+
+    /**
+     * @brief Get the color of the pixel at the given position in the additional texture.
+     *
+     * Remember to call draw() first.
+     * @param width The width of the pixel
+     * @param height The height of the pixel
+     * @return The color of the pixel
+     */
+    virtual ColorViz getPixelColor(unsigned int width, unsigned int height) const = 0;
+
+    /**
+     * @brief Get the pixels of the texture.
+     *
+     * Remember to call draw() first.
+     * @param pixels The output pixels. The size of the vector will be equal to the total number of
+     * pixels of the rendered texture, i.e. width of the texture times its height. Both these two parameters
+     * can be set in the textureOptions passed to the method ITexturesHandler::add. The pixels are saved in
+     * col-major format.
+     * @note This operation may affect the time performances of the visualizer, especially if the texture is large.
+     * @return True in case of success, false otherwise
+     */
+    virtual bool getPixels(std::vector<PixelViz>& pixels) const = 0;
+
 };
 
 /**
@@ -499,6 +663,33 @@ struct VisualizerOptions
     }
 };
 
+class ITexturesHandler
+{
+public:
+
+    /**
+     * Destructor
+     */
+    virtual ~ITexturesHandler() = 0;
+
+    /**
+     * @brief Add a texture
+     * @param The name of the texture
+     * @param visualizerOptions The options for the texture
+     * @note The pointer should not be deleted. Its lifespan coincides with the one of the ITextureHandler.
+     * @return A ITexture pointer in case of success. A nullptr otherwise
+     */
+    virtual ITexture* add(const std::string& name, const VisualizerOptions& textureOptions = VisualizerOptions()) = 0;
+
+    /**
+     * @brief Get a specific texture
+     * @param The name of the texture to get.
+     * @note The pointer should not be deleted. Its lifespan coincides with the one of the ITextureHandler.
+     * @return the pointer to the texture. A nullptr if that texture does not exists.
+     */
+    virtual ITexture* get(const std::string& name) = 0;
+};
+
 /**
  * Class to visualize a set of iDynTree models
  */
@@ -522,7 +713,7 @@ public:
      *
      * \note this is called implicitly when addModel is called for the first time.
      */
-    bool init(const VisualizerOptions = VisualizerOptions());
+    bool init(const VisualizerOptions& visualizerOptions = VisualizerOptions());
 
     /**
      * Get number of models visualized.
@@ -581,6 +772,16 @@ public:
     IVectorsVisualization& vectors();
 
     /**
+     * Get a reference to the internal IFrameVisualization interface.
+     */
+    IFrameVisualization& frames();
+
+    /**
+     * Get a reference to the internal ITexturesHandler interface.
+     */
+    ITexturesHandler& textures();
+
+    /**
      * Wrap the run method of the Irrlicht device.
      */
     bool run();
@@ -606,6 +807,13 @@ public:
      * Close the visualizer.
      */
     void close();
+
+    /**
+     * @brief Get if the visualizer window is active (to allow drawing only if necessary)
+     * @return True if the window is active, false otherwise.
+     */
+    bool isWindowActive() const;
+
 };
 
 }
