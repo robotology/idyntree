@@ -31,7 +31,7 @@ robotName='iCubGenova04';
  modelPath = [icubModelsInstallPrefix '/share/iCub/robots/' robotName '/'];
  fileName='model.urdf';
 
- jointOrder={
+ consideredJoints={
     'r_hip_pitch';
     'r_hip_roll';
     'r_hip_yaw';
@@ -68,7 +68,7 @@ robotName='iCubGenova04';
 
 % Main variable of iDyntreeWrappers used for many things including updating
 % robot position and getting world to frame transforms
-KinDynModel = iDynTreeWrappers.loadReducedModel(jointOrder,'root_link',modelPath,fileName,false);
+KinDynModel = iDynTreeWrappers.loadReducedModel(consideredJoints,'root_link',modelPath,fileName,false);
 
 % create vector of positions
 joints_positions=zeros(KinDynModel.NDOF,1);
@@ -90,7 +90,12 @@ iDynTreeWrappers.setRobotState(KinDynModel,world_H_base,joints_positions,zeros(6
 pause(1);
 % generate decent position
 joints_positions=zeros(KinDynModel.NDOF,1);
-joints_positions([16 17 19 23 24 26])=pi/10;
+joints_positions(KinDynModel.kinDynComp.model.getJointIndex('r_shoulder_roll')) = pi/10;
+joints_positions(KinDynModel.kinDynComp.model.getJointIndex('r_shoulder_yaw')) = pi/10;
+joints_positions(KinDynModel.kinDynComp.model.getJointIndex('r_elbow')) = pi/10;
+joints_positions(KinDynModel.kinDynComp.model.getJointIndex('l_shoulder_roll')) = pi/10;
+joints_positions(KinDynModel.kinDynComp.model.getJointIndex('l_shoulder_yaw')) = pi/10;
+joints_positions(KinDynModel.kinDynComp.model.getJointIndex('l_elbow')) = pi/10;
 
 %% Update robot position
 % update kinematics
@@ -106,15 +111,16 @@ axis tight
 iDynTreeWrappers.modifyLinksVisualization(visualizer,'useDefault',true);
 
 % Modify using link indices
-indecesToModify= 23;
-iDynTreeWrappers.modifyLinksVisualization(visualizer,'linksIndices',indecesToModify,'color',[1,1,1]);
+indecesToModify = find(contains(visualizer.linkNames,'head'));
+iDynTreeWrappers.modifyLinksVisualization(visualizer,'linksIndices',indecesToModify,'color',[1,0,0]);
 
-indecesToModify=[28,33];
+indecesToModify=[find(contains(visualizer.linkNames,'l_forearm')), ...
+                 find(contains(visualizer.linkNames,'l_hand'))];
 iDynTreeWrappers.modifyLinksVisualization(visualizer,'linksIndices',indecesToModify,'color',[0,0,0],'transparency',1,'material','metal');
 
 % Modify using link names
 % Select link names to modify
-linkstoModify=visualizer.linkNames([1,6,13,19]);
+linkstoModify = [{'r_upper_leg'}, {'r_lower_leg'}, {'r_ankle_1'}, {'r_ankle_2'}];
 
 iDynTreeWrappers.modifyLinksVisualization(visualizer,'linksToModify',linkstoModify,'style','wireframe');
 pause(1);
