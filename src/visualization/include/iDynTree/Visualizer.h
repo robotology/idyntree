@@ -93,6 +93,16 @@ public:
     virtual void setTarget(const iDynTree::Position & cameraPos) = 0;
 
     /**
+     * Get the linear position of the camera w.r.t to the world.
+     */
+    virtual iDynTree::Position getPosition() = 0;
+
+    /**
+     * Get the target of the camera (i.e. the point the camera is looking into) w.r.t. the world.
+     */
+    virtual iDynTree::Position getTarget() = 0;
+
+    /**
      * Set the up vector of the camera w.r.t to the world.
      */
     virtual void setUpVector(const Direction& upVector) = 0;
