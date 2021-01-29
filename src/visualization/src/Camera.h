@@ -39,6 +39,8 @@ public:
     virtual void setPosition(const Position& cameraPos);
     virtual void setTarget(const Position& targetPos);
     virtual void setUpVector(const Direction& upVector);
+    virtual iDynTree::Position getPosition();
+    virtual iDynTree::Position getTarget();
     virtual ICameraAnimator* animator();
 };
 

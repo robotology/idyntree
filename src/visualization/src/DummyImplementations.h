@@ -28,6 +28,8 @@ public:
     virtual void setPosition(const iDynTree::Position &) {};
     virtual void setTarget(const iDynTree::Position &) {};
     virtual void setUpVector(const Direction&) {};
+    virtual iDynTree::Position getPosition() {return iDynTree::Position();};
+    virtual iDynTree::Position getTarget() {return iDynTree::Position();};
     virtual ICameraAnimator* animator() {return nullptr;};
 };
 

@@ -105,6 +105,32 @@ void Camera::setUpVector(const Direction& cameraUpVector)
     }
 }
 
+Position Camera::getPosition()
+{
+    if(m_irrCamera)
+    {
+        return irr2idyntree_pos(m_irrCamera->getPosition());
+    }
+    else
+    {
+        reportError("Camera","getPosition","Impossible to get the position of a null camera");
+        return iDynTree::Position();
+    }
+}
+
+Position Camera::getTarget()
+{
+    if(m_irrCamera)
+    {
+        return irr2idyntree_pos(m_irrCamera->getTarget());
+    }
+    else
+    {
+        reportError("Camera","getTarget","Impossible to get the target of a null camera");
+        return iDynTree::Position();
+    }
+}
+
 ICameraAnimator *Camera::animator()
 {
     if (!m_animator)

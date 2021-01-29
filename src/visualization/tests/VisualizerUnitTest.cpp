@@ -121,6 +121,9 @@ void checkFrameVisualization() {
     viz.init();
 
     viz.camera().setPosition(iDynTree::Position(2.0, 0.0, 2.0));
+    ASSERT_EQUAL_VECTOR(viz.camera().getPosition(), iDynTree::Position(2.0, 0.0, 2.0));
+    viz.camera().setTarget(iDynTree::Position(0.0, 0.0, 0.0));
+    ASSERT_EQUAL_VECTOR(viz.camera().getTarget(), iDynTree::Position(0.0, 0.0, 0.0));
 
     iDynTree::IFrameVisualization& frames = viz.frames();
 
