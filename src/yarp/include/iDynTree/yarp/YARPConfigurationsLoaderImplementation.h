@@ -7,10 +7,13 @@
  * https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
  * at your option.
  */
-#include "iDynTree/yarp/YARPConfigurationsLoader.h"
-#include "yarp/os/Value.h"
 
-bool iDynTree::parseRotationMatrix(const yarp::os::Searchable& rf, const std::string& key, iDynTree::Rotation& rotation)
+#ifndef IDYNTREE_YARP_CONFIGURATIONS_LOADER_IMPLEMENTATION_H
+#define IDYNTREE_YARP_CONFIGURATIONS_LOADER_IMPLEMENTATION_H
+
+#include <yarp/os/Value.h>
+
+inline bool iDynTree::parseRotationMatrix(const yarp::os::Searchable& rf, const std::string& key, iDynTree::Rotation& rotation)
 {
     yarp::os::Value ini = rf.find(key);
     if (ini.isNull() || !ini.isList())
@@ -41,3 +44,5 @@ bool iDynTree::parseRotationMatrix(const yarp::os::Searchable& rf, const std::st
     }
     return true;
 }
+
+#endif

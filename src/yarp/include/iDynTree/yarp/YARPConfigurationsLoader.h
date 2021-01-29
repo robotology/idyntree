@@ -28,5 +28,6 @@ namespace iDynTree
     bool parseRotationMatrix(const yarp::os::Searchable& rf, const std::string& key, iDynTree::Rotation& rotation);
 }
 
+#include "YARPConfigurationsLoaderImplementation.h"
 
 #endif

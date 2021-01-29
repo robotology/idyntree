@@ -14,7 +14,7 @@ macro(add_icub_consistency_test testName)
     set(testname   ConsistencyTest${testName})
     add_executable(${testbinary} ${testsrc})
     target_link_libraries(${testbinary} PRIVATE idyntree-yarp idyntree-high-level idyntree-icub idyntree-core
-                                                idyntree-model idyntree-estimation idyntree-testmodels Eigen3::Eigen)
+                                                idyntree-model idyntree-estimation idyntree-testmodels iKin Eigen3::Eigen)
     add_test(NAME ${testname} COMMAND ${testbinary})
 
     if(IDYNTREE_RUN_VALGRIND_TESTS)

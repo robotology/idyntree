@@ -188,4 +188,6 @@ public:
 
 }
 
+#include "skinDynLibConversionsImplementation.h"
+
 #endif

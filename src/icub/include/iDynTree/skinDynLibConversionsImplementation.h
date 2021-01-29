@@ -8,6 +8,9 @@
  * at your option.
  */
 
+#ifndef IDYNTREE_SKINDYNLIB_CONVERSIONS_IMPLEMENTATION_H
+#define IDYNTREE_SKINDYNLIB_CONVERSIONS_IMPLEMENTATION_H
+
 #include <iDynTree/skinDynLibConversions.h>
 
 #include <iDynTree/Core/Position.h>
@@ -389,3 +392,5 @@ bool skinDynLibConversionsHelper::updateSkinContactListFromLinkContactWrenches(c
 
 
 }
+
+#endif

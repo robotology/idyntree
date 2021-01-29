@@ -219,4 +219,6 @@ bool toiDynTree(const yarp::sig::Matrix& yarpMatrix, MatrixType& iDynTreeMatrix)
 
 }
 
+#include "YARPConversionsImplementation.h"
+
 #endif

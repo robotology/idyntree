@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Fondazione Istituto Italiano di Tecnologia
+# Copyright (C) Fondazione Istituto Italiano di Tecnologia
 #
 # Licensed under either the GNU Lesser General Public License v3.0 :
 # https://www.gnu.org/licenses/lgpl-3.0.html
@@ -6,38 +6,23 @@
 # https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 # at your option.
 
-SET(iDynTree_ICUB_source src/iKinConversions.cpp
-                         src/skinDynLibConversions.cpp)
-
 SET(iDynTree_ICUB_header include/iDynTree/iKinConversions.h
-                         include/iDynTree/skinDynLibConversions.h)
+                         include/iDynTree/iKinConversionsImplementation.h
+                         include/iDynTree/skinDynLibConversions.h
+                         include/iDynTree/skinDynLibConversionsImplementation.h)
 
-SOURCE_GROUP("Source Files" FILES ${iDynTree_ICUB_source})
 SOURCE_GROUP("Header Files" FILES ${iDynTree_ICUB_header})
 
-include(AddInstallRPATHSupport)
-add_install_rpath_support(BIN_DIRS "${CMAKE_INSTALL_PREFIX}/bin"
-                          LIB_DIRS "${CMAKE_INSTALL_PREFIX}/lib"
-                          DEPENDS IDYNTREE_ENABLE_RPATH
-                          USE_LINK_PATH)
-
 set(libraryname idyntree-icub)
-add_library(${libraryname} ${iDynTree_ICUB_source} ${iDynTree_ICUB_header})
+add_library(${libraryname} INTERFACE)
 add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 
 set_target_properties(${libraryname} PROPERTIES PUBLIC_HEADER "${iDynTree_ICUB_header}")
 
-
-target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+target_include_directories(${libraryname} INTERFACE "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 
-target_link_libraries(${libraryname} LINK_PUBLIC iKin skinDynLib idyntree-core idyntree-model idyntree-yarp idyntree-estimation)
-
-target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
-
-target_include_directories(${libraryname} PRIVATE SYSTEM ${skinDynLib_INCLUDE_DIRS})
-target_include_directories(${libraryname} PRIVATE SYSTEM ${iKin_INCLUDE_DIRS})
-
+target_link_libraries(${libraryname} INTERFACE idyntree-core idyntree-model idyntree-yarp idyntree-estimation)
 
 install(TARGETS ${libraryname}
         EXPORT iDynTree

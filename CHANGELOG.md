@@ -15,13 +15,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Promoted the functions `computeBoundingBoxFromShape` and `computeBoxVertices` to public in the `idyntree-solid-shapes` library (https://github.com/robotology/idyntree/pull/801).
+- The `idyntree-yarp` and `idyntree-icub` libraries are now header-only, and are always installed even if `IDYNTREE_USES_YARP` or `IDYNTREE_USES_ICUB_MAIN` are set to `OFF`, to simplify deployment of the library. The downstream libraries that want to use them need to find and link `YARP` and `ICUB` CMake packages on their own (https://github.com/robotology/idyntree/pull/807).
 
 ### Fixed 
 - Fixed the `IDYNTREE_USES_IRRLICHT` option when `irrlicht` is installed via vcpkg (https://github.com/robotology/idyntree/pull/806).
 
 ## [2.0.2] - 2020-12-04
 
-### Fixed 
+### Fixed
 - Fixed compilation of MATLAB bindings on macOS and Windows (https://github.com/robotology/idyntree/pull/789, https://github.com/robotology/idyntree/pull/790).
 
 ## [2.0.1] - 2020-11-24
