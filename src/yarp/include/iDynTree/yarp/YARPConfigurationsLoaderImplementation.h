@@ -13,7 +13,7 @@
 
 #include <yarp/os/Value.h>
 
-inline bool iDynTree::parseRotationMatrix(const yarp::os::Searchable& rf, const std::string& key, iDynTree::Rotation& rotation)
+bool iDynTree::parseRotationMatrix(const yarp::os::Searchable& rf, const std::string& key, iDynTree::Rotation& rotation)
 {
     yarp::os::Value ini = rf.find(key);
     if (ini.isNull() || !ini.isList())
