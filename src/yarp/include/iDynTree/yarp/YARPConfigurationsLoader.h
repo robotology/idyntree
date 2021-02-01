@@ -25,7 +25,7 @@ namespace iDynTree
     * @param rotation The output rotation
     * @return true if successfull
     */
-    bool parseRotationMatrix(const yarp::os::Searchable& rf, const std::string& key, iDynTree::Rotation& rotation);
+    inline bool parseRotationMatrix(const yarp::os::Searchable& rf, const std::string& key, iDynTree::Rotation& rotation);
 }
 
 #include "YARPConfigurationsLoaderImplementation.h"
