@@ -30,7 +30,7 @@ class Transform;
  * @return true if conversion was successful, false otherwise
  * \ingroup iDynTreeYARP
  */
-bool toiDynTree(const yarp::sig::Vector & yarpVector, iDynTree::Wrench & iDynTreeWrench);
+inline bool toiDynTree(const yarp::sig::Vector & yarpVector, iDynTree::Wrench & iDynTreeWrench);
 
 /**
  * Convert a iDynTree::Wrench to a yarp::sig::Vector
@@ -39,7 +39,7 @@ bool toiDynTree(const yarp::sig::Vector & yarpVector, iDynTree::Wrench & iDynTre
  * @return true if conversion was successful, false otherwise
  * \ingroup iDynTreeYARP
  */
-bool toYarp(const iDynTree::Wrench & iDynTreeWrench, yarp::sig::Vector & yarpVector);
+inline bool toYarp(const iDynTree::Wrench & iDynTreeWrench, yarp::sig::Vector & yarpVector);
 
 /**
  * Convert a yarp::sig::Vector to a iDynTree::Position
@@ -48,7 +48,7 @@ bool toYarp(const iDynTree::Wrench & iDynTreeWrench, yarp::sig::Vector & yarpVec
  * @return true if conversion was successful, false otherwise (if the input yarpVector has size different from 3)
  * \ingroup iDynTreeYARP
  */
-bool toiDynTree(const yarp::sig::Vector & yarpVector, iDynTree::Position & iDynTreePosition);
+inline bool toiDynTree(const yarp::sig::Vector & yarpVector, iDynTree::Position & iDynTreePosition);
 
 /**
  * Convert a yarp::sig::Vector to a iDynTree::Vector3
@@ -57,7 +57,7 @@ bool toiDynTree(const yarp::sig::Vector & yarpVector, iDynTree::Position & iDynT
  * @return true if conversion was successful, false otherwise (if the input yarpVector has size different from 3)
  * \ingroup iDynTreeYARP
  */
-bool toiDynTree(const yarp::sig::Vector & yarpVector, iDynTree::Vector3 & iDynTreeVector3);
+inline bool toiDynTree(const yarp::sig::Vector & yarpVector, iDynTree::Vector3 & iDynTreeVector3);
 
 /**
  * Convert a iDynTree::Position to a yarp::sig::Vector of 3 elements.
@@ -66,7 +66,7 @@ bool toiDynTree(const yarp::sig::Vector & yarpVector, iDynTree::Vector3 & iDynTr
  * @return true if conversion was sucessful, false otherwise
  * \ingroup iDynTreeYARP
  */
-bool toYarp(const iDynTree::Position & iDynTreePosition, yarp::sig::Vector & yarpVector);
+inline bool toYarp(const iDynTree::Position & iDynTreePosition, yarp::sig::Vector & yarpVector);
 
 /**
  * Convert a yarp::sig::Vector of 3 elements to a iDynTree::Direction
@@ -78,7 +78,7 @@ bool toYarp(const iDynTree::Position & iDynTreePosition, yarp::sig::Vector & yar
  *
  * \ingroup iDynTreeYARP
  */
-bool toiDynTree(const yarp::sig::Vector & yarpVector, iDynTree::Direction & iDynTreeDirection);
+inline bool toiDynTree(const yarp::sig::Vector & yarpVector, iDynTree::Direction & iDynTreeDirection);
 
 /**
  * Convert a iDynTree::Direction to a yarp::sig::Vector of 3 elements.
@@ -88,7 +88,7 @@ bool toiDynTree(const yarp::sig::Vector & yarpVector, iDynTree::Direction & iDyn
  *
  * \ingroup iDynTreeYARP
  */
-bool toYarp(const iDynTree::Vector3 & iDynTreeDirection, yarp::sig::Vector & yarpVector);
+inline bool toYarp(const iDynTree::Vector3 & iDynTreeDirection, yarp::sig::Vector & yarpVector);
 
 /**
  * Convert a 4x4 yarp::sig::Matrix representing an homegeneous matrix to a iDynTree::Transform
@@ -98,7 +98,7 @@ bool toYarp(const iDynTree::Vector3 & iDynTreeDirection, yarp::sig::Vector & yar
  *
  * \ingroup iDynTreeYARP
  */
-bool toiDynTree(const yarp::sig::Matrix & yarpHomogeneousMatrix, iDynTree::Transform & iDynTreeTransform);
+inline bool toiDynTree(const yarp::sig::Matrix & yarpHomogeneousMatrix, iDynTree::Transform & iDynTreeTransform);
 
 /**
  * Convert a iDynTree::Transform to a 4x4 yarp::sig::Matrix representing an homegeneous matrix
@@ -108,7 +108,7 @@ bool toiDynTree(const yarp::sig::Matrix & yarpHomogeneousMatrix, iDynTree::Trans
  *
  * \ingroup iDynTreeYARP
  */
-bool toYarp(const iDynTree::Transform & iDynTreeTransform,  yarp::sig::Matrix & yarpHomogeneousMatrix);
+inline bool toYarp(const iDynTree::Transform & iDynTreeTransform,  yarp::sig::Matrix & yarpHomogeneousMatrix);
 
 /**
  * Convert a yarp::sig::Vector to a iDynTree::VectorDynSize
@@ -119,7 +119,7 @@ bool toYarp(const iDynTree::Transform & iDynTreeTransform,  yarp::sig::Matrix & 
  *
  * \ingroup iDynTreeYARP
  */
-bool toiDynTree(const yarp::sig::Vector & yarpVector, iDynTree::VectorDynSize & iDynTreeVector);
+inline bool toiDynTree(const yarp::sig::Vector & yarpVector, iDynTree::VectorDynSize & iDynTreeVector);
 
 /**
  * Convert a iDynTree::VectorFixSize to a yarp::sig::Vector
