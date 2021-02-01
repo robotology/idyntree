@@ -23,7 +23,7 @@ using namespace yarp::math;
 namespace iDynTree
 {
 
-inline bool toiDynTree(const yarp::sig::Vector & yarpVector, iDynTree::Wrench & iDynTreeWrench)
+bool toiDynTree(const yarp::sig::Vector & yarpVector, iDynTree::Wrench & iDynTreeWrench)
 {
     if( yarpVector.size() != 6 )
     {
@@ -36,7 +36,7 @@ inline bool toiDynTree(const yarp::sig::Vector & yarpVector, iDynTree::Wrench & 
 }
 
 
-inline bool toYarp(const iDynTree::Wrench & iDynTreeWrench,yarp::sig::Vector & yarpVector)
+bool toYarp(const iDynTree::Wrench & iDynTreeWrench,yarp::sig::Vector & yarpVector)
 {
     if( yarpVector.size() != 6 )
     {
@@ -48,7 +48,7 @@ inline bool toYarp(const iDynTree::Wrench & iDynTreeWrench,yarp::sig::Vector & y
     return true;
 }
 
-inline bool toiDynTree(const yarp::sig::Vector& yarpVector, iDynTree::Position& iDynTreePosition)
+bool toiDynTree(const yarp::sig::Vector& yarpVector, iDynTree::Position& iDynTreePosition)
 {
     if( yarpVector.size() != 3 )
     {
@@ -59,7 +59,7 @@ inline bool toiDynTree(const yarp::sig::Vector& yarpVector, iDynTree::Position& 
     return true;
 }
 
-inline bool toiDynTree(const yarp::sig::Vector& yarpVector, iDynTree::Vector3& iDynTreeVector3)
+bool toiDynTree(const yarp::sig::Vector& yarpVector, iDynTree::Vector3& iDynTreeVector3)
 {
     if( yarpVector.size() != 3 )
     {
@@ -70,7 +70,7 @@ inline bool toiDynTree(const yarp::sig::Vector& yarpVector, iDynTree::Vector3& i
     return true;
 }
 
-inline bool toYarp(const iDynTree::Position& iDynTreePosition, yarp::sig::Vector& yarpVector)
+bool toYarp(const iDynTree::Position& iDynTreePosition, yarp::sig::Vector& yarpVector)
 {
     if( yarpVector.size() != 3 )
     {
@@ -81,7 +81,7 @@ inline bool toYarp(const iDynTree::Position& iDynTreePosition, yarp::sig::Vector
     return true;
 }
 
-inline bool toiDynTree(const yarp::sig::Vector& yarpVector, Direction& direction)
+bool toiDynTree(const yarp::sig::Vector& yarpVector, Direction& direction)
 {
     if( yarpVector.size() != 3 )
     {
@@ -96,7 +96,7 @@ inline bool toiDynTree(const yarp::sig::Vector& yarpVector, Direction& direction
     return true;
 }
 
-inline bool toYarp(const Vector3& iDynTreeVector3, yarp::sig::Vector& yarpVector)
+bool toYarp(const Vector3& iDynTreeVector3, yarp::sig::Vector& yarpVector)
 {
     if( yarpVector.size() != 3 )
     {
@@ -107,14 +107,14 @@ inline bool toYarp(const Vector3& iDynTreeVector3, yarp::sig::Vector& yarpVector
     return true;
 }
 
-inline bool toiDynTree(const yarp::sig::Vector& yarpVector, VectorDynSize& iDynTreeVector)
+bool toiDynTree(const yarp::sig::Vector& yarpVector, VectorDynSize& iDynTreeVector)
 {
     iDynTreeVector.resize(yarpVector.size());
     memcpy(iDynTreeVector.data(),yarpVector.data(),yarpVector.size()*sizeof(double));
     return true;
 }
 
-inline bool toiDynTree(const yarp::sig::Matrix& yarpHomogeneousMatrix,
+bool toiDynTree(const yarp::sig::Matrix& yarpHomogeneousMatrix,
                 iDynTree::Transform& iDynTreeTransform)
 {
     if( yarpHomogeneousMatrix.rows() != 4 ||
@@ -145,7 +145,7 @@ inline bool toiDynTree(const yarp::sig::Matrix& yarpHomogeneousMatrix,
     return true;
 }
 
-inline bool toYarp(const iDynTree::Transform& iDynTreeTransform,
+bool toYarp(const iDynTree::Transform& iDynTreeTransform,
             yarp::sig::Matrix& yarpHomogeneousMatrix)
 {
     iDynTree::Matrix4x4 homTrans = iDynTreeTransform.asHomogeneousTransform();
