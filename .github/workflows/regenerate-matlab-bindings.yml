@@ -61,7 +61,7 @@ jobs:
             delete-branch: true
             title: 'update matlab bindings'
             body: |
-              This is a PR that automatically updates the 
+              This is a PR that regenerated the MATLAB/Octave iDynTree bindings.
               
               Before merging, wait for the continuous integration outcome as it is possible that the automatic generation broke the Octave tests.
               
