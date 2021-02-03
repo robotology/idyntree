@@ -3,7 +3,7 @@ function [Visualizer,Objects]=prepareVisualization(KinDynModel,meshFilePrefix,va
 % - Inputs:
 %   - `KinDynModel` : iDyntreewrappers main variable. Contains the model.
 %   - `meshFilePrefix` : Path in which we can find the meshes. As an example the path to the mesh in a iCub urdf is `'package://iCub/meshes/simmechanics/sim_sea_2-5_root_link_prt-binary.stl'
-%   `. `meshFilePrefix` should replace package to allow to find the rest of the path.
+%   `. `meshFilePrefix` should replace package to allow to find the rest of the path. If the value is "", the standard iDynTree workflow of locating the mesh via the ExternalMesh.getFileLocationOnLocalFileSystem method is used.
 % - Optional Inputs:
 %     - `view` : Selects the angle in which the figure is seen.
 %     - `material` : Selects effect with which the patch is rendered. Options are : 'dull','metal','shiny';
