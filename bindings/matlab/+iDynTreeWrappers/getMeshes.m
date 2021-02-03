@@ -5,7 +5,7 @@ function [linkMeshInfo,map]=getMeshes(model,meshFilePrefix)
 %     - Iputs:
 %         - `model` : iDyntree model loaded from a URDF.
 %         - `meshFilePrefix` : Path in which we can find the meshes. As an example the path to the mesh in a iCub urdf is `'package://iCub/meshes/simmechanics/sim_sea_2-5_root_link_prt-binary.stl'
-% `. `meshFilePrefix` should replace package to allow to find the rest of the path.
+% `. `meshFilePrefix` should replace package to allow to find the rest of the path. If the value is "", the standard iDynTree workflow of locating the mesh via the ExternalMesh.getFileLocationOnLocalFileSystem method.
 %     - Outputs:
 %         - `map`        : Cell array having both the names of the meshes and the associated link
 %         - `linkMeshInfo` : Struct array that contain the link name and a struct (`meshInfo`) that contains the name of file or if is a simple geometry, the triangulation ( edges and vertices of the mesh ) and the link to geometry transform.
@@ -41,13 +41,18 @@ for links=1:numberOfLinks
         if solidarray{solids}.isExternalMesh
             externalMesh=solidarray{solids}.asExternalMesh;
             scale=externalMesh.getScale.toMatlab;
-            meshName=split(externalMesh.getFilename,':');
-            meshFile=meshName{2};
-            % Import an STL mesh, returning a PATCH-compatible face-vertex structure
-            if strcmp('package',meshName{1})
-                mesh_triangles = stlread([meshFilePrefix meshFile]);
+            if(meshFilePrefix == "")
+               meshFile = externalMesh.getFilename;
+               mesh_triangles = stlread(externalMesh.getFileLocationOnLocalFileSystem);
             else
-                mesh_triangles = stlread(meshFile);
+                meshName=split(externalMesh.getFilename,':');
+                meshFile=meshName{2};
+                % Import an STL mesh, returning a PATCH-compatible face-vertex structure
+                if strcmp('package',meshName{1})
+                    mesh_triangles = stlread([meshFilePrefix meshFile]);
+                else
+                    mesh_triangles = stlread(meshFile);
+                end
             end
             meshInfo(solids).meshFile=meshFile;
             meshInfo(solids).scale=scale';
