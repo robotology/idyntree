@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] - 2020-02-03
+
+### Added
+- Add the possibility to plot and update frames in the Matlab visualizer.
+- Added ``getFileLocationOnLocalFileSystem`` method in ``ExternalMesh`` that attempts to find the mesh location in the local file system. This is now used by the ``Visualizer`` when loading the robot model (https://github.com/robotology/idyntree/pull/798). This can also be used by the `iDynTreeWrapper.prepareVisualization` MATLAB function, if `meshFilePrefix` is explicitly set to `""` (https://github.com/robotology/idyntree/pull/817).
+- Add the possibility to extract submatrix with MatrixView (https://github.com/robotology/idyntree/pull/800)
+- Improved the Visualizer library: camera animations and corrections, interface for frames and texture, fix of ``STL`` visualization. These improvements also include mouse control support for the camera, also in the `idyntree-model-view` application (https://github.com/robotology/idyntree/pull/802).
+
+### Changed
+- Promoted the functions `computeBoundingBoxFromShape` and `computeBoxVertices` to public in the `idyntree-solid-shapes` library (https://github.com/robotology/idyntree/pull/801).
+- The `idyntree-yarp` and `idyntree-icub` libraries are now header-only, and are always installed even if `IDYNTREE_USES_YARP` or `IDYNTREE_USES_ICUB_MAIN` are set to `OFF`, to simplify deployment of the library. The downstream libraries that want to use them need to find and link `YARP` and `ICUB` CMake packages on their own (https://github.com/robotology/idyntree/pull/807).
+
+### Fixed
+- Fixed the `IDYNTREE_USES_IRRLICHT` option when `irrlicht` is installed via vcpkg (https://github.com/robotology/idyntree/pull/806).
+
+
 ## [2.0.3] - 2020-02-03
 
 ### Fixed

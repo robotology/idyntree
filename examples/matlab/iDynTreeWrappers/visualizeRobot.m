@@ -3,13 +3,6 @@
 % to complete the path inside the urdf visual mesh field.
 
 % Example:
-% If a test model has the following mesh file in the URDF
-% 'package://stl/sim_sea_2-5_root_link_prt-binary.stl'
-% The required path is what it takes to reach the stl folder.
-% meshFilePrefix=<path_to_stl_folder>;
-% It basically replaces the functionality of find Package by inserting the
-% path manually.
-% The path to the model is also required:
 % modelPath=<path_to_urdf_folder>;
 
 % REMARK : If you have installed the URDF models by https://github.com/robotology/icub-models
@@ -19,9 +12,6 @@ icubModelsInstallPrefix = '';
 
 % if installed with robotology superbuild you can directly use
 icubModelsInstallPrefix = getenv('ROBOTOLOGY_SUPERBUILD_INSTALL_PREFIX');
-
-
- meshFilePrefix = [icubModelsInstallPrefix '/share'];
 % Select the robot using the folder name
 robotName='';
 
@@ -81,6 +71,8 @@ iDynTreeWrappers.setRobotState(KinDynModel,world_H_base,joints_positions,zeros(6
 
 % Prepare figure, handles and variables required for the update, some extra
 % options are commented.
+% This is necessary to avoid to rely on the manual specification of meshFilePrefix used in iDynTree < 3
+meshFilePrefix=""
 [visualizer,objects]=iDynTreeWrappers.prepareVisualization(KinDynModel,meshFilePrefix,...
     'color',[0,0,1],'material','metal','transparency',1,'debug',true,'view',[-92.9356   22.4635],...
     'groundOn',true,'groundColor',[0.5 0.5 0.5], 'groundTransparency',0.5,'groundFrame','l_sole');%,... % optional inputs

@@ -95,4 +95,6 @@ bool iKinLimbFromDHChain(const DHChain & dhChain,
 
 }
 
+#include "iKinConversionsImplementation.h"
+
 #endif

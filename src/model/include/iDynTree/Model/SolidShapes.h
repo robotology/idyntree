@@ -241,6 +241,13 @@ namespace iDynTree
         const std::string& getFilename() const;
 
         /**
+         * Returns the filename substituting the prefix "package://" with the corresponding absolute path.
+         * The absolute path is determined by searching for the file using the paths specified in the
+         * "GAZEBO_MODEL_PATH", "ROS_PACKAGE_PATH" and "AMENT_PREFIX_PATH" environmental variables.
+         */
+        std::string getFileLocationOnLocalFileSystem() const;
+
+        /**
          * Sets the filename.
          */
         void setFilename(const std::string& filename);

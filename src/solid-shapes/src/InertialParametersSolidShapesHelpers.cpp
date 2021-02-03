@@ -185,7 +185,7 @@ bool BBFromExternalShape(ExternalMesh* extMesh, Box& box)
     // Load mesh with assimp
     Assimp::Importer Importer;
 
-    std::string filename = extMesh->getFilename();
+    std::string filename = extMesh->getFileLocationOnLocalFileSystem();
     const aiScene* pScene = Importer.ReadFile(filename.c_str(), 0);
 
     if (pScene)
@@ -224,85 +224,6 @@ bool BBFromExternalShape(ExternalMesh* extMesh, Box& box)
         reportError("", "BBFromExternalShape", ss.str().c_str());
         return false;
     }
-}
-
-bool BBFromShape(SolidShape* geom, Box& box)
-{
-    // Extract BB from shape, this would be benefic from being moved as a method in the SolidShape interface
-    if (geom->isBox())
-    {
-        // If shape is a box, just copy it
-        Box* pBox = static_cast<Box*>(geom);
-        box = *pBox;
-        box.setLink_H_geometry(geom->getLink_H_geometry());
-        return true;
-    }
-
-    if (geom->isSphere())
-    {
-        // If shape is a sphere all the side of the BB are the diameter of the sphere
-        Sphere* pSphere = static_cast<Sphere*>(geom);
-        box.setX(2.0*pSphere->getRadius());
-        box.setY(2.0*pSphere->getRadius());
-        box.setZ(2.0*pSphere->getRadius());
-        box.setLink_H_geometry(geom->getLink_H_geometry());
-        return true;
-    }
-
-    if (geom->isCylinder())
-    {
-        // If shape is a cylinder the x and y side of the BB are the diameter of the cylinder,
-        // while the z side is the lenght of the cylinder
-        Cylinder* pCylinder = static_cast<Cylinder*>(geom);
-        box.setX(2.0*pCylinder->getRadius());
-        box.setY(2.0*pCylinder->getRadius());
-        box.setZ(pCylinder->getLength());
-        box.setLink_H_geometry(geom->getLink_H_geometry());
-        return true;
-    }
-
-    if (geom->isExternalMesh())
-    {
-        // If shape is an external mesh, we need to load the mesh and extract the BB
-        ExternalMesh* pExtMesh = static_cast<ExternalMesh*>(geom);
-        return BBFromExternalShape(pExtMesh, box);
-    }
-
-    return false;
-}
-
-/**
- * Compute vertices of the bounding box, computed in link frame
- */
-std::vector<Position> computeBoxVertices(const Box box)
-{
-    std::vector<Position> vertices;
-
-    // + + +
-    vertices.push_back(box.getLink_H_geometry()*Position(+box.getX()/2, +box.getY()/2, +box.getZ()/2));
-
-    // + + -
-    vertices.push_back(box.getLink_H_geometry()*Position(+box.getX()/2, +box.getY()/2, -box.getZ()/2));
-
-    // + - +
-    vertices.push_back(box.getLink_H_geometry()*Position(+box.getX()/2, -box.getY()/2, +box.getZ()/2));
-
-    // + - -
-    vertices.push_back(box.getLink_H_geometry()*Position(+box.getX()/2, -box.getY()/2, -box.getZ()/2));
-
-    // - + +
-    vertices.push_back(box.getLink_H_geometry()*Position(-box.getX()/2, +box.getY()/2, +box.getZ()/2));
-
-    // - + -
-    vertices.push_back(box.getLink_H_geometry()*Position(-box.getX()/2, +box.getY()/2, -box.getZ()/2));
-
-    // - - +
-    vertices.push_back(box.getLink_H_geometry()*Position(-box.getX()/2, -box.getY()/2, +box.getZ()/2));
-
-    // - - -
-    vertices.push_back(box.getLink_H_geometry()*Position(-box.getX()/2, -box.getY()/2, -box.getZ()/2));
-
-    return vertices;
 }
 
 /**
@@ -349,7 +270,7 @@ bool getBoundingBoxOfLinkGeometries(iDynTree::Model& model,
         {
             iDynTree::Box shapeBoundingBox;
             SolidShape * shape = model.collisionSolidShapes().getLinkSolidShapes()[lnkIdx][shapeIdx];
-            bool ok = BBFromShape(shape, shapeBoundingBox);
+            bool ok = computeBoundingBoxFromShape(*shape, shapeBoundingBox);
             if (!ok) return false;
             shapesBBsInLinkFrame.push_back(shapeBoundingBox);
         }
@@ -361,6 +282,89 @@ bool getBoundingBoxOfLinkGeometries(iDynTree::Model& model,
     return true;
 }
 #endif
+
+/**
+ * Compute vertices of the bounding box, computed in link frame
+ */
+std::vector<Position> computeBoxVertices(const Box box)
+{
+    std::vector<Position> vertices;
+
+    // + + +
+    vertices.push_back(box.getLink_H_geometry()*Position(+box.getX()/2, +box.getY()/2, +box.getZ()/2));
+
+    // + + -
+    vertices.push_back(box.getLink_H_geometry()*Position(+box.getX()/2, +box.getY()/2, -box.getZ()/2));
+
+    // + - +
+    vertices.push_back(box.getLink_H_geometry()*Position(+box.getX()/2, -box.getY()/2, +box.getZ()/2));
+
+    // + - -
+    vertices.push_back(box.getLink_H_geometry()*Position(+box.getX()/2, -box.getY()/2, -box.getZ()/2));
+
+    // - + +
+    vertices.push_back(box.getLink_H_geometry()*Position(-box.getX()/2, +box.getY()/2, +box.getZ()/2));
+
+    // - + -
+    vertices.push_back(box.getLink_H_geometry()*Position(-box.getX()/2, +box.getY()/2, -box.getZ()/2));
+
+    // - - +
+    vertices.push_back(box.getLink_H_geometry()*Position(-box.getX()/2, -box.getY()/2, +box.getZ()/2));
+
+    // - - -
+    vertices.push_back(box.getLink_H_geometry()*Position(-box.getX()/2, -box.getY()/2, -box.getZ()/2));
+
+    return vertices;
+}
+
+bool computeBoundingBoxFromShape(const SolidShape& geom, Box& box)
+{
+    // Extract BB from shape, this would be benefic from being moved as a method in the SolidShape interface
+    if (geom.isBox())
+    {
+        // If shape is a box, just copy it
+        Box* pBox = const_cast<Box*>(geom.asBox());
+        box = *pBox;
+        box.setLink_H_geometry(geom.getLink_H_geometry());
+        return true;
+    }
+
+    if (geom.isSphere())
+    {
+        // If shape is a sphere all the side of the BB are the diameter of the sphere
+        Sphere* pSphere = const_cast<Sphere *>(geom.asSphere());
+        box.setX(2.0*pSphere->getRadius());
+        box.setY(2.0*pSphere->getRadius());
+        box.setZ(2.0*pSphere->getRadius());
+        box.setLink_H_geometry(geom.getLink_H_geometry());
+        return true;
+    }
+
+    if (geom.isCylinder())
+    {
+        // If shape is a cylinder the x and y side of the BB are the diameter of the cylinder,
+        // while the z side is the lenght of the cylinder
+        Cylinder* pCylinder = const_cast<Cylinder *>(geom.asCylinder());
+        box.setX(2.0*pCylinder->getRadius());
+        box.setY(2.0*pCylinder->getRadius());
+        box.setZ(pCylinder->getLength());
+        box.setLink_H_geometry(geom.getLink_H_geometry());
+        return true;
+    }
+    
+#ifdef IDYNTREE_USES_ASSIMP
+    if (geom.isExternalMesh())
+    {
+        // If shape is an external mesh, we need to load the mesh and extract the BB
+        ExternalMesh* pExtMesh = const_cast<ExternalMesh *>(geom.asExternalMesh());
+        return BBFromExternalShape(pExtMesh, box);
+    }    
+#else
+    reportError("", "computeBoundingBoxFromShape", "IDYNTREE_USES_ASSIMP CMake option need to be set to ON to use computeBoundingBoxFromShape");
+#endif
+    return false;
+    
+}
 
 bool estimateInertialParametersFromLinkBoundingBoxesAndTotalMass(const double totalMass,
                                                                  iDynTree::Model& model,

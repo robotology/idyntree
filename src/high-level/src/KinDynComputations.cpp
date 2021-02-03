@@ -759,23 +759,10 @@ bool KinDynComputations::setRobotState(iDynTree::MatrixView<const double> world_
                                        Span<const double> world_gravity)
 
 {
-    bool ok = s.size() == pimpl->m_robot_model.getNrOfPosCoords();
-    if( !ok )
-    {
-        reportError("KinDynComputations","setRobotState","Wrong size in input joint positions");
-        return false;
-    }
-
-    ok = s_dot.size() == pimpl->m_robot_model.getNrOfDOFs();
-    if( !ok )
-    {
-        reportError("KinDynComputations","setRobotState","Wrong size in input joint velocities");
-        return false;
-    }
 
     constexpr int expected_transform_cols = 4;
     constexpr int expected_transform_rows = 4;
-    ok = (world_T_base.rows() == expected_transform_rows) && (world_T_base.cols() == expected_transform_cols);
+    bool ok = (world_T_base.rows() == expected_transform_rows) && (world_T_base.cols() == expected_transform_cols);
     if( !ok )
     {
         reportError("KinDynComputations","setRobotState","Wrong size in input world_T_base");
@@ -790,42 +777,12 @@ bool KinDynComputations::setRobotState(iDynTree::MatrixView<const double> world_
         return false;
     }
 
-    this->invalidateCache();
 
-    // Save pos
-    this->pimpl->m_pos.worldBasePos() = iDynTree::Transform(world_T_base);
-    toEigen(this->pimpl->m_pos.jointPos()) = toEigen(s);
-
-    // Save gravity
-    this->pimpl->m_gravityAcc = world_gravity;
-    Rotation base_R_inertial = this->pimpl->m_pos.worldBasePos().getRotation().inverse();
-    toEigen(pimpl->m_gravityAccInBaseLinkFrame) = toEigen(base_R_inertial)*toEigen(this->pimpl->m_gravityAcc);
-
-    // Save vel
-    toEigen(pimpl->m_vel.jointVel()) = toEigen(s_dot);
-
-    iDynTree::Twist base_twist;
-    toEigen(base_twist.getLinearVec3()) = toEigen(base_velocity).head<3>();
-    toEigen(base_twist.getAngularVec3()) = toEigen(base_velocity).tail<3>();
-
-    // Account for the different possible representations
-    if (pimpl->m_frameVelRepr == MIXED_REPRESENTATION)
-    {
-        pimpl->m_vel.baseVel() = pimpl->m_pos.worldBasePos().getRotation().inverse()*base_twist;
-    }
-    else if (pimpl->m_frameVelRepr == BODY_FIXED_REPRESENTATION)
-    {
-        // Data is stored in body fixed
-        pimpl->m_vel.baseVel() = base_twist;
-    }
-    else
-    {
-        assert(pimpl->m_frameVelRepr == INERTIAL_FIXED_REPRESENTATION);
-        // base_X_inertial \ls^inertial v_base
-        pimpl->m_vel.baseVel() = pimpl->m_pos.worldBasePos().inverse()*base_twist;
-    }
-
-    return true;
+    return this->setRobotState(iDynTree::Transform(world_T_base),
+                               s,
+                               iDynTree::SpatialMotionVector(base_velocity),
+                               s_dot,
+                               world_gravity);
 }
 
 bool KinDynComputations::setRobotState(const Transform& world_T_base,
@@ -1016,19 +973,7 @@ bool KinDynComputations::setJointPos(Span<const double> s)
 
 bool KinDynComputations::setJointPos(const VectorDynSize& s)
 {
-    bool ok = (s.size() == pimpl->m_robot_model.getNrOfPosCoords());
-    if( !ok )
-    {
-        reportError("KinDynComputations","setJointPos","Wrong size in input joint positions");
-        return false;
-    }
-
-    toEigen(this->pimpl->m_pos.jointPos()) = toEigen(s);
-
-    // Invalidate cache
-    this->invalidateCache();
-
-    return true;
+    return this->setJointPos(make_span(s));
 }
 
 Transform KinDynComputations::getWorldBaseTransform() const

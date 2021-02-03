@@ -19,6 +19,9 @@
 #include "Environment.h"
 #include "ModelVisualization.h"
 #include "VectorsVisualization.h"
+#include "FrameVisualization.h"
+#include "TexturesHandler.h"
+#include "CameraAnimator.h"
 #endif
 
 #include "DummyImplementations.h"
@@ -45,12 +48,26 @@ IVectorsVisualization::~IVectorsVisualization()
 {
 }
 
+IFrameVisualization::~IFrameVisualization()
+{
+}
+
 IModelVisualization::~IModelVisualization()
 {
 }
 
 ILight::~ILight()
 {
+}
+
+ITexture::~ITexture()
+{
+
+}
+
+ITexturesHandler::~ITexturesHandler()
+{
+
 }
 
 
@@ -121,10 +138,22 @@ struct Visualizer::VisualizerPimpl
      */
     VectorsVisualization m_vectors;
 
+    /**
+     * Frames visualization
+     */
+    FrameVisualization m_frames;
+
+    /**
+     * Textures handling
+     */
+    TexturesHandler m_textures;
+
 #else
     DummyCamera m_camera;
     DummyEnvironment m_environment;
     DummyVectorsVisualization m_invalidVectors;
+    DummyFrameVisualization m_invalidFrames;
+    DummyTexturesHandler m_invalidTextures;
 #endif
 
     VisualizerPimpl()
@@ -134,9 +163,9 @@ struct Visualizer::VisualizerPimpl
 
 #ifdef IDYNTREE_USES_IRRLICHT
         m_modelViz.resize(0);
-        m_irrDevice = 0;
-        m_irrSmgr   = 0;
-        m_irrDriver = 0;
+        m_irrDevice  = 0;
+        m_irrSmgr    = 0;
+        m_irrDriver  = 0;
 #endif
     }
 };
@@ -166,7 +195,7 @@ Visualizer::~Visualizer()
     pimpl = 0;
 }
 
-bool Visualizer::init(const VisualizerOptions options)
+bool Visualizer::init(const VisualizerOptions &visualizerOptions)
 {
 #ifdef IDYNTREE_USES_IRRLICHT
     if( pimpl->m_isInitialized )
@@ -178,9 +207,10 @@ bool Visualizer::init(const VisualizerOptions options)
     irr::SIrrlichtCreationParameters irrDevParams;
 
     irrDevParams.DriverType = irr::video::EDT_OPENGL;
-    irrDevParams.WindowSize = irr::core::dimension2d<irr::u32>(options.winWidth, options.winHeight);
+    irrDevParams.WindowSize = irr::core::dimension2d<irr::u32>(visualizerOptions.winWidth, visualizerOptions.winHeight);
+    irrDevParams.WithAlphaChannel = true;
 
-    if( options.verbose )
+    if( visualizerOptions.verbose )
     {
         reportWarning("Visualizer","init","verbose flag found, enabling verbose output in Visualizer");
         irrDevParams.LoggingLevel = irr::ELL_DEBUG;
@@ -213,33 +243,24 @@ bool Visualizer::init(const VisualizerOptions options)
     pimpl->m_irrDevice->getCursorControl()->setVisible(true);
 
     // Add environment
-    pimpl->m_environment.m_envNode       = pimpl->m_irrSmgr->addEmptySceneNode();
-    pimpl->m_environment.m_rootFrameNode = addFrameAxes(pimpl->m_irrSmgr,pimpl->m_environment.m_envNode,options.rootFrameArrowsDimension);
-    pimpl->m_environment.m_floorGridNode = addFloorGridNode(pimpl->m_irrSmgr,pimpl->m_environment.m_envNode);
-    pimpl->m_environment.m_sceneManager = pimpl->m_irrSmgr;
-    pimpl->m_environment.m_backgroundColor = irr::video::SColorf(0.0,0.4,0.4,1.0);
-
-    // Add default light (sun, directional light pointing backwards
-    addVizLights(pimpl->m_irrSmgr);
-    std::string sunName = "sun";
-    pimpl->m_environment.addLight(sunName);
-    ILight & sun = pimpl->m_environment.lightViz(sunName);
-    sun.setType(DIRECTIONAL_LIGHT);
-    sun.setDirection(iDynTree::Direction(0,0,-1));
-    sun.setDiffuseColor(iDynTree::ColorViz(0.7,0.7,0.7,1.0));
-    sun.setSpecularColor(iDynTree::ColorViz(0.1,0.1,0.1,1.0));
-    sun.setAmbientColor(iDynTree::ColorViz(0.1,0.1,0.1,1.0));
+    pimpl->m_environment.init(pimpl->m_irrSmgr, visualizerOptions.rootFrameArrowsDimension);
 
     pimpl->m_camera.setIrrlichtCamera(addVizCamera(pimpl->m_irrSmgr));
+    pimpl->m_camera.setCameraAnimator(new CameraAnimator(pimpl->m_irrDevice->getCursorControl(),
+                                                         addFrameAxes(pimpl->m_irrSmgr, 0, 0.1)));
 
     pimpl->m_vectors.init(pimpl->m_irrSmgr);
+
+    pimpl->m_frames.init(pimpl->m_irrSmgr);
+
+    pimpl->m_textures.init(pimpl->m_irrDriver, pimpl->m_irrSmgr);
 
     pimpl->m_isInitialized = true;
     pimpl->lastFPS         = -1;
 
     return true;
 #else
-    IDYNTREE_UNUSED(options);
+    IDYNTREE_UNUSED(visualizerOptions);
     reportError("Visualizer","init","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
     return false;
 #endif
@@ -333,6 +354,12 @@ void Visualizer::draw()
 
 
     pimpl->m_irrDriver->beginScene(true,true, pimpl->m_environment.m_backgroundColor.toSColor());
+
+    pimpl->m_textures.draw(pimpl->m_environment, pimpl->m_camera);
+
+    auto winDimensions = pimpl->m_irrDriver->getScreenSize();
+
+    pimpl->m_camera.setAspectRatio(winDimensions.Width/ (float)winDimensions.Height);
 
     pimpl->m_irrSmgr->drawAll();
 
@@ -446,6 +473,28 @@ IVectorsVisualization &Visualizer::vectors()
 #endif
 }
 
+IFrameVisualization &Visualizer::frames()
+{
+#ifdef IDYNTREE_USES_IRRLICHT
+    if( !this->pimpl->m_isInitialized )
+    {
+        init();
+    }
+    return this->pimpl->m_frames;
+#else
+    return this->pimpl->m_invalidFrames;
+#endif
+}
+
+ITexturesHandler &Visualizer::textures()
+{
+#ifdef IDYNTREE_USES_IRRLICHT
+    return this->pimpl->m_textures;
+#else
+    return this->pimpl->m_invalidTextures;
+#endif
+}
+
 bool Visualizer::run()
 {
 #ifdef IDYNTREE_USES_IRRLICHT
@@ -471,6 +520,7 @@ void Visualizer::close()
     }
 
     pimpl->m_vectors.close();
+    pimpl->m_frames.close();
     pimpl->m_environment.close();
 
     pimpl->m_irrDevice->closeDevice();
@@ -490,6 +540,15 @@ void Visualizer::close()
     pimpl->m_modelViz.resize(0);
 
     return;
+#endif
+}
+
+bool Visualizer::isWindowActive() const
+{
+#ifdef IDYNTREE_USES_IRRLICHT
+    return pimpl->m_irrDevice->isWindowActive();
+#else
+    return false;
 #endif
 }
 

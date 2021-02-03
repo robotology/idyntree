@@ -129,7 +129,7 @@ void ModelVisualization::ModelVisualizationPimpl::addModelGeometriesToSceneManag
 
         // Set the position of the added frame w.r.t. to the parent link, that will remain constant
         this->frameNodes[frameIdx]->setPosition(idyntree2irr_pos(model.getFrameTransform(frameIdx).getPosition()));
-        this->frameNodes[frameIdx]->setRotation(idyntree2irr_rpy(model.getFrameTransform(frameIdx).getRotation().asRPY()));
+        this->frameNodes[frameIdx]->setRotation(idyntree2irr_rot(model.getFrameTransform(frameIdx).getRotation()));
     }
 }
 

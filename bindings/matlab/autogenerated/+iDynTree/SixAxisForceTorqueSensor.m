@@ -7,97 +7,97 @@ classdef SixAxisForceTorqueSensor < iDynTree.JointSensor
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1287, varargin{:});
+        tmp = iDynTreeMEX(1289, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1288, self);
+        iDynTreeMEX(1290, self);
         self.SwigClear();
       end
     end
     function varargout = setName(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1289, self, varargin{:});
-    end
-    function varargout = setFirstLinkSensorTransform(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1290, self, varargin{:});
-    end
-    function varargout = setSecondLinkSensorTransform(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1291, self, varargin{:});
     end
-    function varargout = getFirstLinkIndex(self,varargin)
+    function varargout = setFirstLinkSensorTransform(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1292, self, varargin{:});
     end
-    function varargout = getSecondLinkIndex(self,varargin)
+    function varargout = setSecondLinkSensorTransform(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1293, self, varargin{:});
     end
-    function varargout = setFirstLinkName(self,varargin)
+    function varargout = getFirstLinkIndex(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1294, self, varargin{:});
     end
-    function varargout = setSecondLinkName(self,varargin)
+    function varargout = getSecondLinkIndex(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1295, self, varargin{:});
     end
-    function varargout = getFirstLinkName(self,varargin)
+    function varargout = setFirstLinkName(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1296, self, varargin{:});
     end
-    function varargout = getSecondLinkName(self,varargin)
+    function varargout = setSecondLinkName(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1297, self, varargin{:});
     end
-    function varargout = setParentJoint(self,varargin)
+    function varargout = getFirstLinkName(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1298, self, varargin{:});
     end
-    function varargout = setParentJointIndex(self,varargin)
+    function varargout = getSecondLinkName(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1299, self, varargin{:});
     end
-    function varargout = setAppliedWrenchLink(self,varargin)
+    function varargout = setParentJoint(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1300, self, varargin{:});
     end
-    function varargout = getName(self,varargin)
+    function varargout = setParentJointIndex(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1301, self, varargin{:});
     end
-    function varargout = getSensorType(self,varargin)
+    function varargout = setAppliedWrenchLink(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1302, self, varargin{:});
     end
-    function varargout = getParentJoint(self,varargin)
+    function varargout = getName(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1303, self, varargin{:});
     end
-    function varargout = getParentJointIndex(self,varargin)
+    function varargout = getSensorType(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1304, self, varargin{:});
     end
-    function varargout = isValid(self,varargin)
+    function varargout = getParentJoint(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1305, self, varargin{:});
     end
-    function varargout = clone(self,varargin)
+    function varargout = getParentJointIndex(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1306, self, varargin{:});
     end
-    function varargout = updateIndices(self,varargin)
+    function varargout = isValid(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1307, self, varargin{:});
     end
-    function varargout = getAppliedWrenchLink(self,varargin)
+    function varargout = clone(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1308, self, varargin{:});
     end
-    function varargout = isLinkAttachedToSensor(self,varargin)
+    function varargout = updateIndices(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1309, self, varargin{:});
     end
-    function varargout = getLinkSensorTransform(self,varargin)
+    function varargout = getAppliedWrenchLink(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1310, self, varargin{:});
     end
-    function varargout = getWrenchAppliedOnLink(self,varargin)
+    function varargout = isLinkAttachedToSensor(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1311, self, varargin{:});
     end
-    function varargout = getWrenchAppliedOnLinkMatrix(self,varargin)
+    function varargout = getLinkSensorTransform(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1312, self, varargin{:});
     end
-    function varargout = getWrenchAppliedOnLinkInverseMatrix(self,varargin)
+    function varargout = getWrenchAppliedOnLink(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1313, self, varargin{:});
     end
-    function varargout = predictMeasurement(self,varargin)
+    function varargout = getWrenchAppliedOnLinkMatrix(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1314, self, varargin{:});
     end
-    function varargout = toString(self,varargin)
+    function varargout = getWrenchAppliedOnLinkInverseMatrix(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1315, self, varargin{:});
+    end
+    function varargout = predictMeasurement(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1316, self, varargin{:});
+    end
+    function varargout = toString(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1317, self, varargin{:});
     end
   end
   methods(Static)

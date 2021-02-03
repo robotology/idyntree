@@ -8,7 +8,7 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-project(iDynTree VERSION 2.0.3
+project(iDynTree VERSION 3.0.0
                  LANGUAGES C CXX)
 
 # Disable in source build, unless Eclipse is used
@@ -56,15 +56,6 @@ if(NOT IDYNTREE_ONLY_DOCS)
 
     # add the actual components of the library
     add_subdirectory(src)
-
-    # List exported CMake package dependencies
-    set(_IDYNTREE_EXPORTED_DEPENDENCIES "")
-    if(IDYNTREE_USES_YARP)
-        list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES YARP)
-    endif()
-    if(IDYNTREE_USES_ICUB_MAIN)
-        list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES ICUB)
-    endif()
 
     # List exported CMake package dependencies when the library is compiled as static
     set(_IDYNTREE_EXPORTED_DEPENDENCIES_ONLY_STATIC "")

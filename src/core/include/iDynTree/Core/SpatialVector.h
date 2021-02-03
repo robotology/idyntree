@@ -101,6 +101,7 @@ SpatialVector<DerivedSpatialVecT>
         SpatialVector();
         SpatialVector(const LinearVector3T & _linearVec3, const AngularVector3T & _angularVec3);
         SpatialVector(const SpatialVector & other);
+        SpatialVector(iDynTree::Span<const double>  other);
 
         /**
          * Vector accessors, getters, setters
@@ -192,6 +193,21 @@ SpatialVector<DerivedSpatialVecT>
     linearVec3(other.getLinearVec3()),
     angularVec3(other.getAngularVec3())
     {
+    }
+
+    SPATIALVECTOR_TEMPLATE_HDR
+    SPATIALVECTOR_INSTANCE_HDR::SpatialVector(Span<const double> other)
+    {
+        if( other.size() != totalSize)
+        {
+            reportError("SpatialVector","constructor","input vector does not have the right size");
+            this->zero();
+        }
+        else
+        {
+            linearVec3 = LinearVector3T(other.subspan(0, 3));
+            angularVec3 = AngularVector3T(other.subspan(3, 3));
+        }
     }
 
     // Vector accessors, Getters, setters

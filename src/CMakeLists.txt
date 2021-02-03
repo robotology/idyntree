@@ -30,13 +30,8 @@ if (IDYNTREE_COMPILES_OPTIMALCONTROL)
   add_subdirectory(optimalcontrol)
 endif()
 
-if(IDYNTREE_USES_YARP)
-    add_subdirectory(yarp)
-endif()
-
-if(IDYNTREE_USES_ICUB_MAIN)
-    add_subdirectory(icub)
-endif()
+add_subdirectory(yarp)
+add_subdirectory(icub)
 
 add_subdirectory(visualization)
 

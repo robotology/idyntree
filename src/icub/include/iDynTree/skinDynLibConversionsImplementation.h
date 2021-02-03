@@ -8,6 +8,9 @@
  * at your option.
  */
 
+#ifndef IDYNTREE_SKINDYNLIB_CONVERSIONS_IMPLEMENTATION_H
+#define IDYNTREE_SKINDYNLIB_CONVERSIONS_IMPLEMENTATION_H
+
 #include <iDynTree/skinDynLibConversions.h>
 
 #include <iDynTree/Core/Position.h>
@@ -24,8 +27,8 @@
 namespace iDynTree
 {
 
-bool skinDynLibConversionsHelper::addSkinDynLibAlias(const Model& model, const std::string iDynTree_link_name, const std::string iDynTree_frame_name,
-                                                     const int skinDynLib_body_part, const int skinDynLib_link_index)
+inline bool skinDynLibConversionsHelper::addSkinDynLibAlias(const Model& model, const std::string iDynTree_link_name, const std::string iDynTree_frame_name,
+                                                            const int skinDynLib_body_part, const int skinDynLib_link_index)
 {
    int iDynTree_link_index = model.getLinkIndex(iDynTree_link_name);
    if( iDynTree_link_index < 0 )
@@ -55,11 +58,11 @@ bool skinDynLibConversionsHelper::addSkinDynLibAlias(const Model& model, const s
    return true;
 }
 
-bool skinDynLibConversionsHelper::getSkinDynLibAlias(const Model& model,
-                                                     const std::string iDynTree_link_name,
-                                                     std::string & iDynTree_frame_name,
-                                                     int & skinDynLib_body_part,
-                                                     int & skinDynLib_link_index) const
+inline bool skinDynLibConversionsHelper::getSkinDynLibAlias(const Model& model,
+                                                            const std::string iDynTree_link_name,
+                                                            std::string & iDynTree_frame_name,
+                                                            int & skinDynLib_body_part,
+                                                            int & skinDynLib_link_index) const
 {
    int iDynTree_link_index = model.getLinkIndex(iDynTree_link_name);
    if( iDynTree_link_index < 0 )
@@ -85,9 +88,9 @@ bool skinDynLibConversionsHelper::getSkinDynLibAlias(const Model& model,
 
 }
 
-bool skinDynLibConversionsHelper::getSkinDynLibAlias(const Model& model,
-                                                     const LinkIndex iDynTree_link_index, FrameIndex & iDynTree_frame_index,
-                                                     int & skinDynLib_body_part, int & skinDynLib_link_index) const
+inline bool skinDynLibConversionsHelper::getSkinDynLibAlias(const Model& model,
+                                                            const LinkIndex iDynTree_link_index, FrameIndex & iDynTree_frame_index,
+                                                            int & skinDynLib_body_part, int & skinDynLib_link_index) const
 {
   if( iDynTree_link_index < 0 || iDynTree_link_index >= static_cast<LinkIndex>(model.getNrOfLinks()) ) return false;
 
@@ -108,7 +111,7 @@ bool skinDynLibConversionsHelper::getSkinDynLibAlias(const Model& model,
 
 }
 
-bool skinDynLibConversionsHelper::removeSkinDynLibAlias(const Model& model, std::string link)
+inline bool skinDynLibConversionsHelper::removeSkinDynLibAlias(const Model& model, std::string link)
 {
    int link_index = model.getLinkIndex(link);
    if( link_index < 0 )
@@ -129,10 +132,10 @@ bool skinDynLibConversionsHelper::removeSkinDynLibAlias(const Model& model, std:
    return true;
 }
 
-bool skinDynLibConversionsHelper::skinDynLib2iDynTree(const int skinDynLib_body_part,
-                                                      const int skinDynLib_link_index,
-                                                      LinkIndex & iDynTree_link_index,
-                                                      FrameIndex & iDynTree_frame_index) const
+inline bool skinDynLibConversionsHelper::skinDynLib2iDynTree(const int skinDynLib_body_part,
+                                                             const int skinDynLib_link_index,
+                                                             LinkIndex & iDynTree_link_index,
+                                                             FrameIndex & iDynTree_frame_index) const
 {
     skinDynLibLinkID skinID;
     skinID.body_part = skinDynLib_body_part;
@@ -235,26 +238,26 @@ bool fromSkinDynLibToiDynTreeHelper(const Model& model,
 
     return true;
 }
-
-bool skinDynLibConversionsHelper::fromSkinDynLibToiDynTree(const Model& model,
-                                                           const iCub::skinDynLib::dynContactList& dynList,
-                                                           LinkUnknownWrenchContacts& unknowns)
+ 
+inline bool skinDynLibConversionsHelper::fromSkinDynLibToiDynTree(const Model& model,
+                                                                  const iCub::skinDynLib::dynContactList& dynList,
+                                                                  LinkUnknownWrenchContacts& unknowns)
 {
     return fromSkinDynLibToiDynTreeHelper<iCub::skinDynLib::dynContactList>(model,dynList,unknowns,*this);
 }
 
-bool skinDynLibConversionsHelper::fromSkinDynLibToiDynTree(const Model& model,
-                                                           const iCub::skinDynLib::skinContactList& skinList,
-                                                           LinkUnknownWrenchContacts& unknowns)
+inline bool skinDynLibConversionsHelper::fromSkinDynLibToiDynTree(const Model& model,
+                                                                  const iCub::skinDynLib::skinContactList& skinList,
+                                                                  LinkUnknownWrenchContacts& unknowns)
 {
     return fromSkinDynLibToiDynTreeHelper<iCub::skinDynLib::skinContactList>(model,skinList,unknowns,*this);
 }
 
 
 
-bool skinDynLibConversionsHelper::fromiDynTreeToSkinDynLib(const Model & model,
-                                                           const LinkContactWrenches& contactWrenches,
-                                                                 iCub::skinDynLib::dynContactList& dynList)
+inline bool skinDynLibConversionsHelper::fromiDynTreeToSkinDynLib(const Model & model,
+                                                                  const LinkContactWrenches& contactWrenches,
+                                                                  iCub::skinDynLib::dynContactList& dynList)
 {
     dynList.resize(0);
     yarp::sig::Vector forceCache(3), momentCache(3), positionCache(3);
@@ -309,9 +312,9 @@ bool skinDynLibConversionsHelper::fromiDynTreeToSkinDynLib(const Model & model,
     return true;
 }
 
-bool skinDynLibConversionsHelper::updateSkinContactListFromLinkContactWrenches(const Model& model,
-                                                                               const LinkContactWrenches& contactWrenches,
-                                                                               iCub::skinDynLib::skinContactList& skinContactListToUpdate)
+inline bool skinDynLibConversionsHelper::updateSkinContactListFromLinkContactWrenches(const Model& model,
+                                                                                      const LinkContactWrenches& contactWrenches,
+                                                                                      iCub::skinDynLib::skinContactList& skinContactListToUpdate)
 {
     yarp::sig::Vector wrenchCache(6), positionCache(3);
 
@@ -389,3 +392,5 @@ bool skinDynLibConversionsHelper::updateSkinContactListFromLinkContactWrenches(c
 
 
 }
+
+#endif

@@ -12,6 +12,9 @@
 #include <iDynTree/Model/Model.h>
 
 #include <string>
+#include <cstdlib>
+#include <fstream>
+#include <unordered_set>
 
 namespace iDynTree
 {
@@ -56,7 +59,7 @@ namespace iDynTree
 
     const Transform& SolidShape::getLink_H_geometry() const {
         return link_H_geometry;
-        
+
     }
 
     void SolidShape::setLink_H_geometry(const Transform& newTransform) {
@@ -66,7 +69,7 @@ namespace iDynTree
     bool SolidShape::isMaterialSet() const { return m_isMaterialSet; }
 
     const Material& SolidShape::getMaterial() const {return m_material; }
-    
+
     void SolidShape::setMaterial(const Material& material) {
         m_material = material;
         m_isMaterialSet = true;
@@ -193,6 +196,91 @@ namespace iDynTree
     }
 
     const std::string& ExternalMesh::getFilename() const { return filename; }
+
+    std::string ExternalMesh::getFileLocationOnLocalFileSystem() const
+    {
+        bool isWindows = false;
+    #ifdef _WIN32
+        isWindows = true;
+    #endif
+
+        std::unordered_set<std::string> pathList;
+        std::vector<std::string> envList = {"GAZEBO_MODEL_PATH", "ROS_PACKAGE_PATH", "AMENT_PREFIX_PATH"};
+
+        for (size_t i = 0; i < envList.size(); ++i)
+        {
+            const char * env_var_value = std::getenv(envList[i].c_str());
+
+            if (env_var_value)
+            {
+                std::stringstream env_var_string(env_var_value);
+
+                std::string individualPath;
+
+                while(std::getline(env_var_string, individualPath, isWindows ? ';' : ':'))
+                {
+                    pathList.insert(individualPath);
+                }
+            }
+        }
+
+
+        auto cleanPathSeparator = [isWindows](const std::string& filename)->std::string
+        {
+            std::string output = filename;
+            char pathSeparator = isWindows ? '\\' : '/';
+            char wrongPathSeparator = isWindows ? '/' : '\\';
+
+            for (size_t i = 0; i < output.size(); ++i)
+            {
+                if (output[i] == wrongPathSeparator)
+                {
+                    output[i] = pathSeparator;
+                }
+            }
+
+            return output;
+
+        };
+
+        auto isFileExisting = [](const std::string& filename)->bool
+        {
+            if (FILE *file = fopen(filename.c_str(), "r")) {
+                fclose(file);
+                return true;
+            } else {
+                return false;
+            }
+        };
+
+        auto getFilePath = [isFileExisting, cleanPathSeparator](const std::string& filename, const std::string& prefixToRemove, const std::unordered_set<std::string>& paths)
+        {
+            if(isFileExisting(filename))
+            {
+                return filename;
+            }
+
+            if (filename.substr(0, prefixToRemove.size()) == prefixToRemove)
+            {
+                std::string filename_noprefix = filename;
+                filename_noprefix.erase(0, prefixToRemove.size());
+                for (const std::string& path : paths)
+                {
+                    std::string testPath;
+                    testPath = cleanPathSeparator(path + filename_noprefix);
+                    if (isFileExisting(testPath))
+                    {
+                        return testPath;
+                    }
+                }
+
+            }
+
+            return filename; //By default return the input;
+        };
+
+        return getFilePath(filename, "package:/", pathList);
+    }
 
     void ExternalMesh::setFilename(const std::string& filename) {
         this->filename = filename;

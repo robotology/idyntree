@@ -3,7 +3,7 @@ function [Visualizer,Objects]=prepareVisualization(KinDynModel,meshFilePrefix,va
 % - Inputs:
 %   - `KinDynModel` : iDyntreewrappers main variable. Contains the model.
 %   - `meshFilePrefix` : Path in which we can find the meshes. As an example the path to the mesh in a iCub urdf is `'package://iCub/meshes/simmechanics/sim_sea_2-5_root_link_prt-binary.stl'
-%   `. `meshFilePrefix` should replace package to allow to find the rest of the path.
+%   `. `meshFilePrefix` should replace package to allow to find the rest of the path. If the value is "", the standard iDynTree workflow of locating the mesh via the ExternalMesh.getFileLocationOnLocalFileSystem method is used.
 % - Optional Inputs:
 %     - `view` : Selects the angle in which the figure is seen.
 %     - `material` : Selects effect with which the patch is rendered. Options are : 'dull','metal','shiny';
@@ -124,13 +124,7 @@ frameAxisSize = min(axisRange)/4;
 % linewidth value 1 = to 0.35mm. It is better if we increase the linewidth
 % in proportion to the axisSize of the frame.c
 linewidthSize=frameAxisSize*50;
-plot3(parent, [0 frameAxisSize], [0 0], [0 0], 'r', 'linewidth', linewidthSize);
-plot3(parent, [0 0], [0 frameAxisSize], [0 0], 'g', 'linewidth', linewidthSize);
-plot3(parent, [0 0], [0 0], [0 frameAxisSize], 'b', 'linewidth', linewidthSize);
-axisTextDistance = frameAxisSize+frameAxisSize*.2;
-text(parent, axisTextDistance, 0, 0, 'x', 'color', 'r');
-text(parent, 0, axisTextDistance, 0, 'y', 'color', 'g');
-text(parent, 0, 0, axisTextDistance, 'z', 'color', 'b');
+iDynTreeWrappers.plotFrame(eye(4), frameAxisSize, linewidthSize);
 
 % Axis labels
 title('Robot Visualizer ');

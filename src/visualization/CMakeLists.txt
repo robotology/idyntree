@@ -12,17 +12,25 @@ if(IDYNTREE_USES_IRRLICHT)
     # Some files are compiled only when irrlicht is available
     set(iDynTree_visualization_private_headers src/IrrlichtUtils.h
                                                src/Camera.h
+                                               src/CameraAnimator.h
                                                src/Environment.h
                                                src/ModelVisualization.h
                                                src/JetsVisualization.h
                                                src/VectorsVisualization.h
+                                               src/FrameVisualization.h
+                                               src/Texture.h
+                                               src/TexturesHandler.h
                                                src/Light.h
                                                src/FloorGridSceneNode.h)
     set(iDynTree_visualization_private_source  src/Camera.cpp
+                                               src/CameraAnimator.cpp
                                                src/Environment.cpp
                                                src/ModelVisualization.cpp
                                                src/JetsVisualization.cpp
                                                src/VectorsVisualization.cpp
+                                               src/FrameVisualization.cpp
+                                               src/Texture.cpp
+                                               src/TexturesHandler.cpp
                                                src/Light.cpp
                                                src/FloorGridSceneNode.cpp)
 endif()
@@ -63,8 +71,8 @@ if(IDYNTREE_USES_IRRLICHT)
     find_package(OpenGL)
     find_package(Irrlicht REQUIRED)
 
-    target_include_directories(${libraryname} PRIVATE SYSTEM ${IRRLICHT_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR})
-    target_link_libraries(${libraryname} LINK_PRIVATE ${IRRLICHT_LIBRARY} ${OPENGL_LIBRARIES})
+    target_include_directories(${libraryname} PRIVATE SYSTEM ${OPENGL_INCLUDE_DIR})
+    target_link_libraries(${libraryname} PRIVATE Irrlicht::Irrlicht ${OPENGL_LIBRARIES})
     if(MSVC)
        add_definitions(-D_USE_MATH_DEFINES)
     endif()
@@ -72,10 +80,10 @@ if(IDYNTREE_USES_IRRLICHT)
 
     # On Apple system, irrlicht uses some system libraries
     if (APPLE)
-    	find_library(CARBON_LIBRARY Carbon)
-    	find_library(COCOA_LIBRARY Cocoa)
-    	find_library(IOKIT_LIBRARY IOKit)
-    	target_link_libraries(${libraryname} LINK_PRIVATE ${CARBON_LIBRARY} ${COCOA_LIBRARY} ${IOKIT_LIBRARY})
+        find_library(CARBON_LIBRARY Carbon)
+        find_library(COCOA_LIBRARY Cocoa)
+        find_library(IOKIT_LIBRARY IOKit)
+        target_link_libraries(${libraryname} LINK_PRIVATE ${CARBON_LIBRARY} ${COCOA_LIBRARY} ${IOKIT_LIBRARY})
     endif ()
 endif()
 
