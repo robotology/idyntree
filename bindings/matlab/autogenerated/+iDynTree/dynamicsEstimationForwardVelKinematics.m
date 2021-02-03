@@ -1,3 +1,3 @@
 function varargout = dynamicsEstimationForwardVelKinematics(varargin)
-  [varargout{1:nargout}] = iDynTreeMEX(1472, varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(1474, varargin{:});
 end

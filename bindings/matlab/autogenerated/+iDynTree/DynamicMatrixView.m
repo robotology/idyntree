@@ -26,9 +26,12 @@ classdef DynamicMatrixView < SwigRef
     function varargout = cols(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(724, self, varargin{:});
     end
+    function varargout = block(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(725, self, varargin{:});
+    end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(725, self);
+        iDynTreeMEX(726, self);
         self.SwigClear();
       end
     end
