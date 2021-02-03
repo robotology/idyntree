@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [3.0.0] - 2020-02-03
 
 ### Added
 - Add the possibility to plot and update frames in the Matlab visualizer.
@@ -17,8 +17,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Promoted the functions `computeBoundingBoxFromShape` and `computeBoxVertices` to public in the `idyntree-solid-shapes` library (https://github.com/robotology/idyntree/pull/801).
 - The `idyntree-yarp` and `idyntree-icub` libraries are now header-only, and are always installed even if `IDYNTREE_USES_YARP` or `IDYNTREE_USES_ICUB_MAIN` are set to `OFF`, to simplify deployment of the library. The downstream libraries that want to use them need to find and link `YARP` and `ICUB` CMake packages on their own (https://github.com/robotology/idyntree/pull/807).
 
-### Fixed 
+### Fixed
 - Fixed the `IDYNTREE_USES_IRRLICHT` option when `irrlicht` is installed via vcpkg (https://github.com/robotology/idyntree/pull/806).
+
+
+## [2.0.3] - 2020-02-03
+
+### Fixed
+- Fixed use of sphere shape in MATLAB-based Visualizer (https://github.com/robotology/idyntree/pull/796).
+- Fixed compilation against conda-forge-provided Ipopt on Windows (https://github.com/robotology/idyntree/pull/793).
 
 ## [2.0.2] - 2020-12-04
 
