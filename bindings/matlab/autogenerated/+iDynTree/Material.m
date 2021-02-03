@@ -9,35 +9,35 @@ classdef Material < SwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(976, varargin{:});
+        tmp = iDynTreeMEX(977, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = name(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(977, self, varargin{:});
-    end
-    function varargout = hasColor(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(978, self, varargin{:});
     end
-    function varargout = color(self,varargin)
+    function varargout = hasColor(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(979, self, varargin{:});
     end
-    function varargout = setColor(self,varargin)
+    function varargout = color(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(980, self, varargin{:});
     end
-    function varargout = hasTexture(self,varargin)
+    function varargout = setColor(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(981, self, varargin{:});
     end
-    function varargout = texture(self,varargin)
+    function varargout = hasTexture(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(982, self, varargin{:});
     end
-    function varargout = setTexture(self,varargin)
+    function varargout = texture(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(983, self, varargin{:});
+    end
+    function varargout = setTexture(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(984, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(984, self);
+        iDynTreeMEX(985, self);
         self.SwigClear();
       end
     end
