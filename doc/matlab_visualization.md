@@ -60,7 +60,7 @@ It uses the [iDynTreeWrappers](../bindings/matlab/%2BiDynTreeWrappers) to handle
     - Inputs:
         - `model` : iDynTree model loaded form a URDF.
         - `meshFilePrefix` : Path in which we can find the meshes. As an example the path to the mesh in a iCub urdf is `'package://iCub/meshes/simmechanics/sim_sea_2-5_root_link_prt-binary.stl' 
-`. `meshFilePrefix` should replace package to allow to find the rest of the path. If the value is "", the standard iDynTree workflow of locating the mesh via the ExternalMesh.getFileLocationOnLocalFileSystem method.
+`. `meshFilePrefix` should replace package to allow to find the rest of the path. If the value is "", the standard iDynTree workflow of locating the mesh via the ExternalMesh.getFileLocationOnLocalFileSystem method is used.
     - Outputs:
         - `map`        : Cell array having both the names of the meshes and the associated link
         - `linkMeshInfo` : Struct array that contain the link name and a struct (`meshInfo`) that contains the name of file or if is a simple geometry, the triangulation ( edges and vertices of the mesh ) and the link to geometry transform.
