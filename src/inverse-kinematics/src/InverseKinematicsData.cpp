@@ -157,7 +157,7 @@ namespace kinematics {
 
         m_areBaseInitialConditionsSet = false;
         m_areJointsInitialConditionsSet = internal::kinematics::InverseKinematicsData::InverseKinematicsInitialConditionNotSet;
-        
+
         m_comTarget.isActive = false;
         m_comTarget.weight = 0;
         m_comTarget.desiredPosition.zero();
@@ -396,15 +396,15 @@ namespace kinematics {
             return false;
         }
     }
-    
-    void InverseKinematicsData::setCoMTarget(iDynTree::Position& desiredPosition, double weight){
+
+    void InverseKinematicsData::setCoMTarget(const iDynTree::Position& desiredPosition, double weight){
         this->m_comTarget.desiredPosition = desiredPosition;
 
         if (!this->m_comTarget.isActive
             && m_defaultTargetResolutionMode & iDynTree::InverseKinematicsTreatTargetAsConstraintPositionOnly) {
             this->m_comTarget.isConstraint = true;
         }
-        
+
         if (!(weight < 0)) {
             this->m_comTarget.weight = weight;
         }
@@ -538,10 +538,10 @@ namespace kinematics {
 
         return;
     }
-    
+
     bool InverseKinematicsData::setJointLimits(std::vector<std::pair<double, double> >& jointLimits)
-    {        
-        // check that the dimension of the vector is correct  
+    {
+        // check that the dimension of the vector is correct
         if(jointLimits.size() != m_jointLimits.size())
             return false;
 
@@ -551,16 +551,16 @@ namespace kinematics {
 
         return true;
     }
-    
+
     bool InverseKinematicsData::getJointLimits(std::vector<std::pair<double, double> >& jointLimits)
-    {        
-      // check that the dimension of the vector is correct  
+    {
+      // check that the dimension of the vector is correct
       if(jointLimits.size() != m_jointLimits.size())
         return false;
-      
+
       // return the current limits
       jointLimits = m_jointLimits;
-      
+
       return true;
     }
 
