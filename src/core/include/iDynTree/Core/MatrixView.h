@@ -16,7 +16,6 @@
 #include <type_traits>
 
 #include <iDynTree/Core/Span.h>
-#include <iDynTree/Core/Utils.h>
 
 // constexpr workaround for SWIG
 #ifdef SWIG
