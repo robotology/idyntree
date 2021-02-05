@@ -13,4 +13,4 @@ endmacro()
 
 add_ik_test(ConvexHullHelpers)
 add_ik_test(InverseKinematics)
-
+add_ik_test(InverseKinematicsMatrixViewAndSpan)
