@@ -238,7 +238,7 @@ namespace iDynTree
          *
          * @param direction     vector along which we want to project a point
          */
-        void setProjectionAlongDirection(const iDynTree::Vector3& direction);
+        void setProjectionAlongDirection(Vector3 direction);
 
         /*!
          * Project a point along a direction defined by the projection matrix 'Pdirection'
@@ -247,7 +247,7 @@ namespace iDynTree
          *
          * @param posIn3dInAbsoluteFrame     a point we want to project
          */
-        Vector2 projectAlongDirection(const iDynTree::Position& posIn3dInAbsoluteFrame);
+        Vector2 projectAlongDirection(iDynTree::Position& posIn3dInAbsoluteFrame);
 
     };
 }

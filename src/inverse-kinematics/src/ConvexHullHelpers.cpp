@@ -351,7 +351,7 @@ namespace iDynTree
         return margin;
     }
 
-    void ConvexHullProjectionConstraint::setProjectionAlongDirection(const Vector3& direction)
+    void ConvexHullProjectionConstraint::setProjectionAlongDirection(Vector3 direction)
     {
         Vector3 xProjection, yProjection;
 
@@ -371,7 +371,7 @@ namespace iDynTree
 
     }
 
-    Vector2 ConvexHullProjectionConstraint::projectAlongDirection(const iDynTree::Position& posIn3dInAbsoluteFrame)
+    Vector2 ConvexHullProjectionConstraint::projectAlongDirection(iDynTree::Position& posIn3dInAbsoluteFrame)
     {
         iDynTree::Vector2 projected;
         toEigen(projected) = toEigen(Pdirection) * toEigen(posIn3dInAbsoluteFrame - o);
