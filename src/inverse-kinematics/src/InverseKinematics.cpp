@@ -1231,11 +1231,11 @@ namespace iDynTree {
                                                iDynTree::Span<double> shapeSolution)
     {
 #ifdef IDYNTREE_USES_IPOPT
-        bool ok = shapeSolution.size() == IK_PIMPL(m_pimpl)->m_dofs;
+        bool ok = shapeSolution.size() == IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints.size();
         if (!ok)
         {
             reportError("InveseKineamtics",
-                        "getFullJointsSolution",
+                        "getReducedSolution",
                         "Invalid size of the shapeSolution vector");
             return false;
         }
@@ -1247,7 +1247,7 @@ namespace iDynTree {
         if (!ok)
         {
             reportError("InverseKinematics",
-                        "getFullJointsSolution",
+                        "getReducedSolution",
                         "Invalid size of the baseTransformSolution vector");
             return false;
         }
@@ -1287,8 +1287,8 @@ namespace iDynTree {
         if (!ok)
         {
             reportError("InverseKinematics",
-                        "getFullJointsSolution",
-                        "Invalid size of the baseTransformSolution vector");
+                        "getPoseForFrame",
+                        "Invalid size of the transform matrix");
             return false;
         }
 
