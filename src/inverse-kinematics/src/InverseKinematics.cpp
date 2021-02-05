@@ -1352,7 +1352,8 @@ namespace iDynTree {
 #endif
     }
 
-    void InverseKinematics::setCOMTarget(const Position& desiredPosition, double weight)
+    // this should be const reference but we keep it like this to avoid breaking the API. Please change me in iDynTree 4.0
+    void InverseKinematics::setCOMTarget(Position& desiredPosition, double weight)
     {
 #ifdef IDYNTREE_USES_IPOPT
         IK_PIMPL(m_pimpl)->setCoMTarget(desiredPosition, weight);
@@ -1361,7 +1362,7 @@ namespace iDynTree {
 #endif
     }
 
-    bool InverseKinematics::setCOMTarget(iDynTree::Span<const double> desiredPosition, double weight)
+    bool InverseKinematics::setCOMTarget(iDynTree::Span<double> desiredPosition, double weight)
     {
         constexpr int expected_pos_size = 3;
         bool ok = (desiredPosition.size() == expected_pos_size);
@@ -1371,7 +1372,9 @@ namespace iDynTree {
             return false;
         }
 
-        this->setCOMTarget(Position(desiredPosition), weight);
+        // TODO please remove me in iDynTree 4.0
+        Position tmp(desiredPosition);
+        this->setCOMTarget(tmp, weight);
 
         return true;
     }
@@ -1395,7 +1398,8 @@ namespace iDynTree {
 #endif
     }
 
-    void InverseKinematics::setCOMConstraintProjectionDirection(const iDynTree::Vector3& direction)
+    // this should be const reference but we keep it like this to avoid breaking the API. Please change me in iDynTree 4.0
+    void InverseKinematics::setCOMConstraintProjectionDirection(iDynTree::Vector3 direction)
     {
         this->setCOMConstraintProjectionDirection(make_span(direction));
     }
