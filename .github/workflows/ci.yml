@@ -41,7 +41,7 @@ jobs:
         # Compilation related dependencies 
         mamba install -c conda-forge cmake compilers make ninja pkg-config
         # Actual dependencies
-        mamba install -c conda-forge eigen libxml2 assimp ipopt qt
+        mamba install -c conda-forge eigen libxml2 assimp ipopt qt irrlicht
 
     # Additional dependencies useful only on Linux
     - name: Dependencies [Conda/Linux]
@@ -58,7 +58,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake -GNinja -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}  -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_Qt5:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON ..
+        cmake -GNinja -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}  -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_Qt5:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON ..
 
     - name: Configure [Conda/Windows]
       if: contains(matrix.os, 'windows')
@@ -66,7 +66,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake -G"Visual Studio 16 2019"  -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_Qt5:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON ..
+        cmake -G"Visual Studio 16 2019"  -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_Qt5:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON ..
 
     - name: Build [Conda]
       shell: bash -l {0}
