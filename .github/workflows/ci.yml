@@ -78,7 +78,8 @@ jobs:
       shell: bash -l {0}
       run: |
         cd build
-        ctest --output-on-failure -C ${{ matrix.build_type }} . 
+        # Visualizer tests excluded as a workaround for https://github.com/robotology/idyntree/issues/808
+        ctest --output-on-failure -C ${{ matrix.build_type }} -E "Visualizer" . 
 
   build-with-system-dependencies:
     name: '[${{ matrix.os }}@${{ matrix.build_type }}]'
