@@ -128,7 +128,7 @@ public:
      * @brief set the kinematic model to be used in the optimization
      *
      * All the degrees of freedom listed in the second parameters will be used as
-     * optimization variables. 
+     * optimization variables.
      * If the vector is empty, all the joints will be used.
      *
      * @note you may want to simplify the model by calling
@@ -139,7 +139,7 @@ public:
      */
     bool setModel(const iDynTree::Model &model,
                   const std::vector<std::string> &consideredJoints = std::vector<std::string>());
-    
+
     /*!
      * Set new joint limits
      * \author Yue Hu
@@ -147,7 +147,7 @@ public:
      * @return true if successfull, false otherwise
      */
     bool setJointLimits(std::vector<std::pair<double, double> >& jointLimits);
-    
+
     /*!
      * Get current joint limits
      * \author Yue Hu
@@ -179,6 +179,24 @@ public:
      */
     bool setCurrentRobotConfiguration(const iDynTree::Transform& baseConfiguration,
                                       const iDynTree::VectorDynSize& jointConfiguration);
+
+    /*!
+     * Sets the robot current configuration
+     *
+     *
+     * @param baseConfiguration  the 4x4 homogeneous transformation that transforms position vectors expressed in the base reference frame
+     *                      in position frames expressed in the world reference frame (i.e. pos_world = baseConfiguration*pos_base).
+     * @param robotConfiguration the robot configuration
+     *
+     * @note the size (and order) of jointConfiguration must match the joints in the model, not
+     * in the consideredJoints variable
+     *
+     * @warning the Span and the MatrixView objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if successful, false otherwise.
+     */
+    bool setCurrentRobotConfiguration(iDynTree::MatrixView<const double> baseConfiguration,
+                                      iDynTree::Span<const double> jointConfiguration);
+
 
     /*!
      * Set configuration for the specified joint
@@ -309,6 +327,22 @@ public:
                             const iDynTree::Transform& constraintValue);
 
     /*!
+     * Adds a (constancy) constraint for the specified frame
+     *
+     * The homogeneous trasformation of the specified frame w.r.t. the inertial frame
+     * will remain constant and equal to the specified second parameter
+     *
+     * @param frameName       the name of the frame on which to attach the constraint
+     * @param constraintValue the 4x4 homogeneous transformation to associate to the constraint.
+     *
+     * @warning the Span and the MatrixView objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if successful, false otherwise.
+     */
+    bool addFrameConstraint(const std::string& frameName,
+                            iDynTree::MatrixView<const double> constraintValue);
+
+
+    /*!
      * Adds a (constancy) position constraint for the specified frame
      *
      * Only the position component of the frame is constrained
@@ -327,10 +361,38 @@ public:
      * @param frameName       the name of the frame on which to attach the constraint
      * @param constraintValue the position associated to the constraint
      *
+     * @warning the Span and the MatrixView objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if successful, false otherwise.
+     */
+    bool addFramePositionConstraint(const std::string& frameName,
+                                    iDynTree::Span<const double> constraintValue);
+
+
+    /*!
+     * Adds a (constancy) position constraint for the specified frame
+     *
+     * Only the position component of the frame is constrained
+     * @param frameName       the name of the frame on which to attach the constraint
+     * @param constraintValue the position associated to the constraint
+     *
      * @return true if successful, false otherwise.
      */
     bool addFramePositionConstraint(const std::string& frameName,
                                     const iDynTree::Transform& constraintValue);
+
+    /*!
+     * Adds a (constancy) position constraint for the specified frame
+     *
+     * Only the position component of the frame is constrained
+     * @param frameName       the name of the frame on which to attach the constraint
+     * @param constraintValue the 4x4 homogeneous transformation to associate to the constraint.
+     *
+     * @warning the Span and the MatrixView objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if successful, false otherwise.
+     */
+    bool addFramePositionConstraint(const std::string& frameName,
+                                    iDynTree::MatrixView<const double> constraintValue);
+
 
     /*!
      * Adds a (constancy) orientation constraint for the specified frame
@@ -343,6 +405,19 @@ public:
      */
     bool addFrameRotationConstraint(const std::string& frameName,
                                     const iDynTree::Rotation& constraintValue);
+
+    /*!
+     * Adds a (constancy) orientation constraint for the specified frame
+     *
+     * Only the orientation component of the frame is constrained
+     * @param frameName       the name of the frame on which to attach the constraint
+     * @param constraintValue if constraintValue is a 4x4 matrix is considered as homogeneous transformation, if it is a 3x3 is considered as rotation matrix.
+     *
+     * @warning the Span and the MatrixView objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if successful, false otherwise.
+     */
+    bool addFrameRotationConstraint(const std::string& frameName,
+                                    iDynTree::MatrixView<const double> constraintValue);
 
     /*!
      * Adds a (constancy) orientation constraint for the specified frame
@@ -368,11 +443,32 @@ public:
      *          time of the next call to solve.
      *
      * @param frameName       the name of the frame on which to attach the constraint
+     * @param newConstraintValue the 4x4 homogeneous transformation to associate to the pose of the constrained frame (r) in the world frame (w), i.e. ʷHᵣ.
+     * @warning the Span and the MatrixView objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if successful, false otherwise.
+     */
+    bool activateFrameConstraint(const std::string& frameName,
+                                 iDynTree::MatrixView<const double> newConstraintValue);
+
+    /*!
+     * Activate a given constraint previously added with an addFrame**Constraint method.
+     *
+     * \note In this version of iDynTree, it is not possible to change the nature of the constraint
+     *       (Full, Position or Rotation) when activating it again.
+     *
+     * @note This method returns true even if the frame constraint was already activate, it only
+     *       returns false if the constraint was never added.
+     * @warning This method is not meant to be called at each IK loop, and it can increase the computational
+     *          time of the next call to solve.
+     *
+     * @param frameName       the name of the frame on which to attach the constraint
      * @param newConstraintValue the pose of the constrained frame (r) in the world frame (w), i.e. ʷHᵣ .
      * @return true if successful, false otherwise.
      */
     bool activateFrameConstraint(const std::string& frameName,
                                  const Transform& newConstraintValue);
+
+
     /*!
      * Deactivate a given constraint previously added with an addFrame**Constraint method.
      *
@@ -478,6 +574,24 @@ public:
                    const double rotationWeight=1.0);
 
     /*!
+     * Adds a target for the specified frame
+     *
+     * @param frameName       the name of the frame which represents the target
+     * @param targetValue the 4x4 homogeneous transformation to associate to target.
+     * @param[in] positionWeight if the position part of the target is handled as
+     *                           a term in the cost function, this specify the weight
+     *                           of this term in the cost function. Default value is 1.0
+     * @param[in] rotationWeight if the rotation part of the target is handled as
+     *                           a term in the cost function, this specify the weight
+     *                           of this term in the cost function. Default value is 1.0
+     * @return true if successful, false otherwise.
+     */
+    bool addTarget(const std::string& frameName,
+                   iDynTree::MatrixView<const double> targetValue,
+                   const double positionWeight=1.0,
+                   const double rotationWeight=1.0);
+
+    /*!
      * Adds a position (3D) target for the specified frame
      *
      * @param frameName the name of the frame which represents the target
@@ -494,6 +608,21 @@ public:
     /*!
      * Adds a position (3D) target for the specified frame
      *
+     * @param frameName the name of the frame which represents the target
+     * @param targetValue value that the origin of the frame frameName should reach
+     * @param[in] positionWeight if the position part of the target is handled as
+     *                           a term in the cost function, this specify the weight
+     *                           of this term in the cost function. Default value is 1.0
+     * @return true if successful, false otherwise.
+     */
+    bool addPositionTarget(const std::string& frameName,
+                           iDynTree::Span<const double> targetValue,
+                           const double positionWeight=1.0);
+
+
+    /*!
+     * Adds a position (3D) target for the specified frame
+     *
      * \note only the position component of the targetValue parameter
      * will be considered
      * @param frameName the name of the frame which represents the target
@@ -505,6 +634,23 @@ public:
      */
     bool addPositionTarget(const std::string& frameName,
                            const iDynTree::Transform& targetValue,
+                           const double positionWeight=1.0);
+
+    /*!
+     * Adds a target for the specified frame
+     *
+     * @param frameName       the name of the frame which represents the target
+     * @param targetValue the 4x4 homogeneous transformation to associate to target.
+     * @param[in] positionWeight if the position part of the target is handled as
+     *                           a term in the cost function, this specify the weight
+     *                           of this term in the cost function. Default value is 1.0
+     * @param[in] rotationWeight if the rotation part of the target is handled as
+     *                           a term in the cost function, this specify the weight
+     *                           of this term in the cost function. Default value is 1.0
+     * @return true if successful, false otherwise.
+     */
+    bool addPositionTarget(const std::string& frameName,
+                           iDynTree::MatrixView<const double> targetValue,
                            const double positionWeight=1.0);
 
     /*!
@@ -547,6 +693,33 @@ public:
                            const double rotationWeight=1.0);
 
     /*!
+     * Adds an orientation target for the specified frame
+     *
+     * \note only the orientation component of the targetValue parameter
+     * will be considered
+     *
+     * This call is equivalent to call
+     * @code
+     * addRotationTarget(frameName, targetValue.rotation());
+     * @endcode
+     * @see
+     * addRotationTarget(const std::string&, const iDynTree::Rotation&)
+     * addTarget(const std::string&, const iDynTree::Transform&)
+     *
+     * @param frameName the name of the frame which represents the target
+     * @param targetValue if constraintValue is a 4x4 matrix is considered as homogeneous
+                          transformation, if it is a 3x3 is considered as rotation matrix.
+     * @param[in] rotationWeight if the rotation part of the target is handled as
+     *                           a term in the cost function, this specify the weight
+     *                           of this term in the cost function. Default value is 1.0
+     * @return true if successful, false otherwise.
+     */
+    bool addRotationTarget(const std::string& frameName,
+                           iDynTree::MatrixView<const double> targetValue,
+                           const double rotationWeight=1.0);
+
+
+    /*!
      * Update the desired target and weights for the specified frame.
      *
      * @param frameName       the name of the frame which represents the target
@@ -565,6 +738,24 @@ public:
                       const double rotationWeight=-1.0);
 
     /*!
+     * Update the desired target and weights for the specified frame.
+     *
+     * @param frameName       the name of the frame which represents the target
+     * @param targetValue 4x4 homogeneous transformation to associate to target.
+     * @param[in] positionWeight if the position part of the target is handled as
+     *                           a term in the cost function, this specify the weight
+     *                           of this term in the cost function. Default value is the the last one previously set.
+     * @param[in] rotationWeight if the rotation part of the target is handled as
+     *                           a term in the cost function, this specify the weight
+     *                           of this term in the cost function. Default value is the the last one previously set.
+     * @return true if successful, false otherwise, for example if the specified frame target was not previously added with addTarget .
+     */
+    bool updateTarget(const std::string& frameName,
+                      iDynTree::MatrixView<const double> targetValue,
+                      const double positionWeight=-1.0,
+                      const double rotationWeight=-1.0);
+
+    /*!
      * Update the position (3D) target for the specified frame
      *
      * @param frameName the name of the frame which represents the target
@@ -577,6 +768,22 @@ public:
     bool updatePositionTarget(const std::string& frameName,
                               const iDynTree::Position& targetValue,
                               const double positionWeight=-1.0);
+
+
+    /*!
+     * Update the position (3D) target for the specified frame
+     *
+     * @param frameName the name of the frame which represents the target
+     * @param targetValue value that the origin of the frame frameName should reach
+     * @param[in] positionWeight if the position part of the target is handled as
+     *                           a term in the cost function, this specify the weight
+     *                           of this term in the cost function. Default value is the last one previously set.
+     * @return true if successful, false otherwise, for example if the specified frame target was not previously added with addTarget or addPositionTarget .
+     */
+    bool updatePositionTarget(const std::string& frameName,
+                              iDynTree::Span<const double> targetValue,
+                              const double positionWeight=-1.0);
+
     /*!
      * Update an orientation target for the specified frame
      *
@@ -591,6 +798,20 @@ public:
                               const iDynTree::Rotation& targetValue,
                               const double rotationWeight=-1.0);
 
+    /*!
+     * Update an orientation target for the specified frame
+     *
+     * @param frameName the name of the frame which represents the target
+     * @param targetValue 3x3 rotation matrix representing  the orientation of the frame
+                          frameName should reach
+     * @param[in] rotationWeight if the rotation part of the target is handled as
+     *                           a term in the cost function, this specify the weight
+     *                           of this term in the cost function. Default value is the last one previously set.
+     * @return true if successful, false otherwise, for example if the specified frame target was not previously added with addTarget or addRotationTarget .
+     */
+    bool updateRotationTarget(const std::string& frameName,
+                              iDynTree::MatrixView<const double> targetValue,
+                              const double rotationWeight=-1.0);
 
     /*!
      * Specify the default method to solve all the specified targets
@@ -603,7 +824,7 @@ public:
      * function. Existing targets will remain unchanged
      *
      * @param mode the target resolution mode
-     * 
+     *
      * @return true if successful, false otherwise.
      */
     void setDefaultTargetResolutionMode(enum iDynTree::InverseKinematicsTreatTargetAsConstraint mode);
@@ -631,8 +852,8 @@ public:
      * @param targetName the name (frame) identified the target
      * @return true if successful, false otherwise, for example if the specified frame target was not previously added with addTarget or addRotationTarget .
      */
-    bool setTargetResolutionMode(const std::string& targetName, enum InverseKinematicsTreatTargetAsConstraint mode);
-    
+    bool setTargetResolutionMode(const std::string& targetName,
+                                 enum InverseKinematicsTreatTargetAsConstraint mode);
 
     /*!
      * Return the target resolution mode
@@ -668,6 +889,23 @@ public:
      * @note the desiredJointConfiguration have the same serialisation of the joints in the specified model
      *
      * @param[in] desiredJointConfiguration configuration for the joints
+     * @param[in] weight weight for the joint configuration cost.
+     *                   If it is not passed, the previous passed value will be mantained.
+     *                   If the value was never passed, its value is 1e-6 .
+     *
+     * @return true if successful, false otherwise.
+     */
+    bool setDesiredFullJointsConfiguration(iDynTree::Span<const double> desiredJointConfiguration,
+                                           double weight = -1.0);
+
+    /*!
+     * Sets a desired final configuration for all the robot joints.
+     *
+     * The solver will try to obtain solutions as similar to the specified configuration as possible
+     *
+     * @note the desiredJointConfiguration have the same serialisation of the joints in the specified model
+     *
+     * @param[in] desiredJointConfiguration configuration for the joints
      * @param[in] weights Joint-wise weights for the joint configuration cost.
      *                   This vector should have the same dimension of the desiredJointConfiguration.
      *                   If one of its elements is negative, the previous value will be kept.
@@ -676,6 +914,25 @@ public:
      * @return true if successful, false otherwise.
      */
     bool setDesiredFullJointsConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, const iDynTree::VectorDynSize& weights);
+
+        /*!
+     * Sets a desired final configuration for all the robot joints.
+     *
+     * The solver will try to obtain solutions as similar to the specified configuration as possible
+     *
+     * @note the desiredJointConfiguration have the same serialisation of the joints in the specified model
+     *
+     * @param[in] desiredJointConfiguration configuration for the joints
+     * @param[in] weights Joint-wise weights for the joint configuration cost.
+     *                   This vector should have the same dimension of the desiredJointConfiguration.
+     *                   If one of its elements is negative, the previous value will be kept.
+     *                   If the value was never passed, its value is 1e-6, equal for all joints.
+     *
+     * @return true if successful, false otherwise.
+     */
+    bool setDesiredFullJointsConfiguration(iDynTree::Span<const double> desiredJointConfiguration,
+                                           iDynTree::Span<const double> weights);
+
 
     /*!
      * Sets a desired final configuration for the set of considered joints.
@@ -691,7 +948,26 @@ public:
      *
      * @return true if successful, false otherwise.
      */
-    bool setDesiredReducedJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight=-1.0);
+    bool setDesiredReducedJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration,
+                                             double weight=-1.0);
+
+    /*!
+     * Sets a desired final configuration for the set of considered joints.
+     *
+     * The solver will try to obtain solutions as similar to the specified configuration as possible
+     *
+     * @note the desiredJointConfiguration have the same order of the joints in the consideredJoints list.
+     *
+     * @param[in] desiredJointConfiguration configuration for the joints
+     * @param[in] weight weight for the joint configuration cost.
+     *                   If it is not passed, the previous passed value will be mantained.
+     *                   If the value was never passed, its value is 1e-6 .
+     *
+     * @return true if successful, false otherwise.
+     */
+    bool setDesiredReducedJointConfiguration(iDynTree::Span<const double> desiredJointConfiguration,
+                                             double weight=-1.0);
+
 
     /*!
      * Sets a desired final configuration for the set of considered joints.
@@ -708,7 +984,27 @@ public:
      *
      * @return true if successful, false otherwise.
      */
-    bool setDesiredReducedJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, const iDynTree::VectorDynSize& weights);
+    bool setDesiredReducedJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration,
+                                             const iDynTree::VectorDynSize& weights);
+
+    /*!
+     * Sets a desired final configuration for the set of considered joints.
+     *
+     * The solver will try to obtain solutions as similar to the specified configuration as possible
+     *
+     * @note the desiredJointConfiguration have the same order of the joints in the consideredJoints list.
+     *
+     * @param[in] desiredJointConfiguration configuration for the joints
+     * @param[in] weights Joint-wise weights for the joint configuration cost.
+     *                   This vector should have the same dimension of the desiredJointConfiguration.
+     *                   If one of its elements is negative, the previous value will be kept.
+     *                   If the value was never passed, its value is 1e-6, equal for all joints.
+     *
+     * @return true if successful, false otherwise.
+     */
+    bool setDesiredReducedJointConfiguration(iDynTree::Span<const double> desiredJointConfiguration,
+                                             iDynTree::Span<const double> weights);
+
 
     bool setFullJointsInitialCondition(const iDynTree::Transform* baseTransform,
                                        const iDynTree::VectorDynSize* initialCondition);
@@ -725,21 +1021,39 @@ public:
     void getFullJointsSolution(iDynTree::Transform& baseTransformSolution,
                                iDynTree::VectorDynSize& shapeSolution);
 
+    bool getFullJointsSolution(iDynTree::MatrixView<double> baseTransformSolution,
+                               iDynTree::Span<double> shapeSolution);
+
     /*!
      * Return the last solution of the inverse kinematics problem
      *
      * This method returns in the shapeSolution variable only the joints that have been optimised
-     * viz. only the joints specified in the consideredJoints variable in the initialization 
+     * viz. only the joints specified in the consideredJoints variable in the initialization
      * @param[out] baseTransformSolution  solution for the base position
      * @param[out] shapeSolution       solution for the shape (the internal configurations)
      */
     void getReducedSolution(iDynTree::Transform& baseTransformSolution,
                             iDynTree::VectorDynSize& shapeSolution);
 
+    /*!
+     * Return the last solution of the inverse kinematics problem
+     *
+     * This method returns in the shapeSolution variable only the joints that have been optimised
+     * viz. only the joints specified in the consideredJoints variable in the initialization
+     * @param[out] baseTransformSolution  4x4 homogeneous matrix solution for the base pose
+     * @param[out] shapeSolution       solution for the shape (the internal configurations)
+     * @warning the Span and the MatrixView objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
+     * @return true if successful, false otherwise.
+     */
+    bool getReducedSolution(iDynTree::MatrixView<double> baseTransformSolution,
+                            iDynTree::Span<double> shapeSolution);
+
     ///@}
 
 
     bool getPoseForFrame(const std::string& frameName, iDynTree::Transform& transform);
+
+    bool getPoseForFrame(const std::string& frameName, iDynTree::MatrixView<double> transform);
 
     /*
      Other iKin features:
@@ -756,6 +1070,8 @@ public:
     const Model & reducedModel() const;
 
     void setCOMTarget(iDynTree::Position& desiredPosition, double weight = 1.0);
+
+    bool setCOMTarget(iDynTree::Span<double> desiredPosition, double weight = 1.0);
 
     void setCOMAsConstraint(bool asConstraint = true);
 
@@ -775,6 +1091,8 @@ public:
      * @param direction    vector along which we want to project a point
      */
     void setCOMConstraintProjectionDirection(iDynTree::Vector3 direction);
+
+    bool setCOMConstraintProjectionDirection(iDynTree::Span<const double> direction);
 
 private:
     void* m_pimpl; /*!< private implementation */

@@ -934,9 +934,7 @@ void KinDynComputations::getRobotState(iDynTree::VectorDynSize &s,
                                        iDynTree::VectorDynSize &s_dot,
                                        iDynTree::Vector3& world_gravity)
 {
-    world_gravity = pimpl->m_gravityAcc;
-    toEigen(s) = toEigen(this->pimpl->m_pos.jointPos());
-    toEigen(s_dot) = toEigen(pimpl->m_vel.jointVel());
+    this->getRobotState(make_span(s), make_span(s_dot), make_span(world_gravity));
 }
 
 void KinDynComputations::getRobotState(iDynTree::Span<double> s,

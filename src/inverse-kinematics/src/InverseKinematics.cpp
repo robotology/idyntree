@@ -93,7 +93,7 @@ namespace iDynTree {
         return missingIpoptErrorReport();
 #endif
     }
-    
+
     bool InverseKinematics::setJointLimits(std::vector<std::pair<double, double> >& jointLimits)
     {
 #ifdef IDYNTREE_USES_IPOPT
@@ -103,7 +103,7 @@ namespace iDynTree {
         return missingIpoptErrorReport();
 #endif
     }
-    
+
     bool InverseKinematics::getJointLimits(std::vector<std::pair<double, double> >& jointLimits)
     {
 #ifdef IDYNTREE_USES_IPOPT
@@ -144,6 +144,21 @@ namespace iDynTree {
 #endif
     }
 
+    bool InverseKinematics::setCurrentRobotConfiguration(iDynTree::MatrixView<const double> baseConfiguration,
+                                                         iDynTree::Span<const double> jointConfiguration)
+    {
+        constexpr int expected_transform_cols = 4;
+        constexpr int expected_transform_rows = 4;
+        bool ok = (baseConfiguration.rows() == expected_transform_rows)
+            && (baseConfiguration.cols() == expected_transform_cols);
+        if( !ok )
+        {
+            reportError("InverseKinematics","getWorldBaseTransform","Wrong size in input world_T_base");
+            return false;
+        }
+
+        return this->setCurrentRobotConfiguration(Transform(baseConfiguration), jointConfiguration);
+    }
 
     bool InverseKinematics::setJointConfiguration(const std::string& jointName, const double jointConfiguration)
     {
@@ -293,6 +308,7 @@ namespace iDynTree {
 #endif
     }
 
+
     bool InverseKinematics::addFrameConstraint(const std::string& frameName, const iDynTree::Transform& constraintValue)
     {
 #ifdef IDYNTREE_USES_IPOPT
@@ -301,6 +317,22 @@ namespace iDynTree {
 #else
         return missingIpoptErrorReport();
 #endif
+    }
+
+    bool InverseKinematics::addFrameConstraint(const std::string &frameName,
+                                               iDynTree::MatrixView<const double> constraintValue)
+    {
+        constexpr int expected_transform_cols = 4;
+        constexpr int expected_transform_rows = 4;
+        bool ok = (constraintValue.rows() == expected_transform_rows)
+            && (constraintValue.cols() == expected_transform_cols);
+        if( !ok )
+        {
+            reportError("InverseKinematics","addFrameConstraint","Wrong size in input constraintValue");
+            return false;
+        }
+
+        return this->addFrameConstraint(frameName, Transform(constraintValue));
     }
 
     bool InverseKinematics::addFramePositionConstraint(const std::string& frameName, const iDynTree::Position& constraintValue)
@@ -313,6 +345,19 @@ namespace iDynTree {
 #endif
     }
 
+    bool InverseKinematics::addFramePositionConstraint(const std::string &frameName, iDynTree::Span<const double> constraintValue)
+    {
+        constexpr int expected_pos_size = 3;
+        bool ok = (constraintValue.size() == expected_pos_size);
+        if( !ok )
+        {
+            reportError("InverseKinematics","addFramePositionConstraint","Wrong size in input constraintValue");
+            return false;
+        }
+
+        return this->addFramePositionConstraint(frameName, Position(constraintValue));
+    }
+
     bool InverseKinematics::addFramePositionConstraint(const std::string& frameName, const iDynTree::Transform& constraintValue)
     {
 #ifdef IDYNTREE_USES_IPOPT
@@ -321,6 +366,23 @@ namespace iDynTree {
 #else
         return missingIpoptErrorReport();
 #endif
+    }
+
+
+    bool InverseKinematics::addFramePositionConstraint(const std::string &frameName,
+                                                       iDynTree::MatrixView<const double> constraintValue)
+    {
+        constexpr int expected_transform_cols = 4;
+        constexpr int expected_transform_rows = 4;
+        bool ok = (constraintValue.rows() == expected_transform_rows)
+            && (constraintValue.cols() == expected_transform_cols);
+        if( !ok )
+        {
+            reportError("InverseKinematics","addFrameConstraint","Wrong size in input constraintValue");
+            return false;
+        }
+
+        return this->addFramePositionConstraint(frameName, Transform(constraintValue));
     }
 
     bool InverseKinematics::addFrameRotationConstraint(const std::string& frameName, const iDynTree::Rotation& constraintValue)
@@ -342,6 +404,32 @@ namespace iDynTree {
         return missingIpoptErrorReport();
 #endif
     }
+
+      bool InverseKinematics::addFrameRotationConstraint(const std::string& frameName,
+                                                         iDynTree::MatrixView<const double> constraintValue)
+      {
+          constexpr int expected_transform_cols = 4;
+          constexpr int expected_transform_rows = 4;
+          constexpr int expected_rotation_cols = 3;
+          constexpr int expected_rotation_rows = 3;
+
+          if ((constraintValue.rows() == expected_transform_rows)
+              && (constraintValue.cols() == expected_transform_cols))
+          {
+              return this->addFrameRotationConstraint(frameName, Transform(constraintValue));
+          }
+
+          if ((constraintValue.rows() == expected_rotation_rows)
+              && (constraintValue.cols() == expected_rotation_cols))
+          {
+              return this->addFrameRotationConstraint(frameName, Rotation(constraintValue));
+          }
+
+          reportError("InverseKinematics",
+                      "addFrameRotationConstraint",
+                      "Wrong size in input constraintValue");
+          return false;
+      }
 
     bool InverseKinematics::activateFrameConstraint(const std::string& frameName, const Transform& newConstraintValue)
     {
@@ -369,6 +457,22 @@ namespace iDynTree {
 #else
         return missingIpoptErrorReport();
 #endif
+    }
+
+    bool InverseKinematics::activateFrameConstraint(const std::string& frameName,
+                                                    iDynTree::MatrixView<const double> newConstraintValue)
+    {
+        constexpr int expected_transform_cols = 4;
+        constexpr int expected_transform_rows = 4;
+        bool ok = (newConstraintValue.rows() == expected_transform_rows)
+            && (newConstraintValue.cols() == expected_transform_cols);
+        if( !ok )
+        {
+            reportError("InverseKinematics","activateFrameConstraint","Wrong size in input constraintValue");
+            return false;
+        }
+
+        return this->activateFrameConstraint(frameName, Transform(newConstraintValue));
     }
 
     bool InverseKinematics::deactivateFrameConstraint(const std::string& frameName)
@@ -582,6 +686,26 @@ namespace iDynTree {
 #endif
     }
 
+    bool InverseKinematics::addTarget(const std::string& frameName,
+                                      iDynTree::MatrixView<const double> targetValue,
+                                      const double positionWeight,
+                                      const double rotationWeight)
+    {
+        constexpr int expected_transform_cols = 4;
+        constexpr int expected_transform_rows = 4;
+        bool ok = (targetValue.rows() == expected_transform_rows)
+                  && (targetValue.cols() == expected_transform_cols);
+        if (!ok)
+        {
+            reportError("InverseKinematics",
+                        "addTarget",
+                        "Wrong size in input targetValue");
+            return false;
+        }
+
+        return this->addTarget(frameName, Transform(targetValue), positionWeight, rotationWeight);
+    }
+
     bool InverseKinematics::addPositionTarget(const std::string& frameName, const iDynTree::Position& constraintValue, const double positionWeight)
     {
 #ifdef IDYNTREE_USES_IPOPT
@@ -592,6 +716,23 @@ namespace iDynTree {
 #endif
     }
 
+    bool InverseKinematics::addPositionTarget(const std::string& frameName,
+                                              iDynTree::Span<const double> targetValue,
+                                              const double positionWeight)
+    {
+        constexpr int expected_pos_size = 3;
+        bool ok = (targetValue.size() == expected_pos_size);
+        if (!ok)
+        {
+            reportError("InverseKinematics",
+                        "addPositionTarget",
+                        "Wrong size in input targetValue");
+            return false;
+        }
+
+        return this->addPositionTarget(frameName, Position(targetValue), positionWeight);
+    }
+
     bool InverseKinematics::addPositionTarget(const std::string& frameName, const iDynTree::Transform& constraintValue, const double positionWeight)
     {
 #ifdef IDYNTREE_USES_IPOPT
@@ -600,6 +741,25 @@ namespace iDynTree {
 #else
         return missingIpoptErrorReport();
 #endif
+    }
+
+    bool InverseKinematics::addPositionTarget(const std::string& frameName,
+                                              iDynTree::MatrixView<const double> targetValue,
+                                              const double positionWeight)
+    {
+        constexpr int expected_transform_cols = 4;
+        constexpr int expected_transform_rows = 4;
+        bool ok = (targetValue.rows() == expected_transform_rows)
+                  && (targetValue.cols() == expected_transform_cols);
+        if (!ok)
+        {
+            reportError("InverseKinematics",
+                        "addPositionTarget",
+                        "Wrong size in input targetValue");
+            return false;
+        }
+
+        return this->addPositionTarget(frameName, Transform(targetValue), positionWeight);
     }
 
     bool InverseKinematics::addRotationTarget(const std::string& frameName, const iDynTree::Rotation& constraintValue, const double rotationWeight)
@@ -620,6 +780,33 @@ namespace iDynTree {
 #else
         return missingIpoptErrorReport();
 #endif
+    }
+
+    bool InverseKinematics::addRotationTarget(const std::string& frameName,
+                                              iDynTree::MatrixView<const double> targetValue,
+                                              const double rotationWeight)
+    {
+        constexpr int expected_transform_cols = 4;
+        constexpr int expected_transform_rows = 4;
+        constexpr int expected_rotation_cols = 3;
+        constexpr int expected_rotation_rows = 3;
+
+        if ((targetValue.rows() == expected_transform_rows)
+            && (targetValue.cols() == expected_transform_cols))
+        {
+            return this->addRotationTarget(frameName, Transform(targetValue), rotationWeight);
+        }
+
+        if ((targetValue.rows() == expected_rotation_rows)
+            && (targetValue.cols() == expected_rotation_cols))
+        {
+            return this->addRotationTarget(frameName,Rotation(targetValue),rotationWeight);
+        }
+
+        reportError("InverseKinematics",
+                    "addRotationTarget",
+                    "Wrong size in input targetValue");
+        return false;
     }
 
     bool InverseKinematics::updateTarget(const std::string& frameName,
@@ -646,6 +833,26 @@ namespace iDynTree {
 #endif
     }
 
+    bool InverseKinematics::updateTarget(const std::string& frameName,
+                                         iDynTree::MatrixView<const double> targetValue,
+                                         const double positionWeight,
+                                         const double rotationWeight)
+    {
+        constexpr int expected_transform_cols = 4;
+        constexpr int expected_transform_rows = 4;
+        bool ok = (targetValue.rows() == expected_transform_rows)
+                  && (targetValue.cols() == expected_transform_cols);
+        if (!ok)
+        {
+            reportError("InverseKinematics",
+                        "updateTarget",
+                        "Wrong size in input targetValue");
+            return false;
+        }
+
+        return this->updateTarget(frameName, Transform(targetValue), positionWeight, rotationWeight);
+    }
+
     bool InverseKinematics::updatePositionTarget(const std::string& frameName,
                                                  const Position& targetValue,
                                                  const double positionWeight)
@@ -666,6 +873,23 @@ namespace iDynTree {
 #else
         return missingIpoptErrorReport();
 #endif
+    }
+
+    bool InverseKinematics::updatePositionTarget(const std::string& frameName,
+                                                 iDynTree::Span<const double> targetValue,
+                                                 const double positionWeight)
+    {
+        constexpr int expected_pos_size = 3;
+        bool ok = (targetValue.size() == expected_pos_size);
+        if (!ok)
+        {
+            reportError("InverseKinematics",
+                        "updatePositionTarget",
+                        "Wrong size in input targetValue");
+            return false;
+        }
+
+        return this->updatePositionTarget(frameName, Position(targetValue), positionWeight);
     }
 
     bool InverseKinematics::updateRotationTarget(const std::string& frameName,
@@ -690,7 +914,29 @@ namespace iDynTree {
 #endif
     }
 
-    bool InverseKinematics::setDesiredFullJointsConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight)
+    bool InverseKinematics::updateRotationTarget(const std::string& frameName,
+                                                 iDynTree::MatrixView<const double> targetValue,
+                                                 const double rotationWeight)
+    {
+        constexpr int expected_rotation_cols = 3;
+        constexpr int expected_rotation_rows = 3;
+
+        const bool ok = ((targetValue.rows() == expected_rotation_rows)
+            && (targetValue.cols() == expected_rotation_cols));
+
+        if (!ok)
+        {
+            reportError("InverseKinematics",
+                        "updateRotationTarget",
+                        "Wrong size in input targetValue");
+            return false;
+        }
+
+        return this->updateRotationTarget(frameName,Rotation(targetValue),rotationWeight);
+    }
+
+    bool InverseKinematics::setDesiredFullJointsConfiguration(iDynTree::Span<const double> desiredJointConfiguration,
+                                                              double weight)
     {
 #ifdef IDYNTREE_USES_IPOPT
         assert(m_pimpl);
@@ -705,7 +951,14 @@ namespace iDynTree {
 #endif
     }
 
-    bool InverseKinematics::setDesiredFullJointsConfiguration(const VectorDynSize &desiredJointConfiguration, const VectorDynSize &weights)
+    bool InverseKinematics::setDesiredFullJointsConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration,
+                                                              double weight)
+    {
+        return this->setDesiredFullJointsConfiguration(make_span(desiredJointConfiguration), weight);
+    }
+
+    bool InverseKinematics::setDesiredFullJointsConfiguration(iDynTree::Span<const double> desiredJointConfiguration,
+                                                              iDynTree::Span<const double> weights)
     {
 #ifdef IDYNTREE_USES_IPOPT
         assert(m_pimpl);
@@ -720,8 +973,8 @@ namespace iDynTree {
 
         assert(IK_PIMPL(m_pimpl)->m_preferredJointsWeight.size() == weights.size());
         for (unsigned int i = 0; i < weights.size(); ++i){
-            if (weights(i) >= 0.0) {
-                IK_PIMPL(m_pimpl)->m_preferredJointsWeight(i) = weights(i);
+            if (weights[i] >= 0.0) {
+                IK_PIMPL(m_pimpl)->m_preferredJointsWeight(i) = weights[i];
             }
         }
         return true;
@@ -730,13 +983,22 @@ namespace iDynTree {
 #endif
     }
 
-    bool InverseKinematics::setDesiredReducedJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration, double weight)
+    bool InverseKinematics::setDesiredFullJointsConfiguration(
+        const iDynTree::VectorDynSize& desiredJointConfiguration,
+        const iDynTree::VectorDynSize& weights)
+    {
+        return this->setDesiredFullJointsConfiguration(make_span(desiredJointConfiguration),
+                                                       make_span(weights));
+    }
+
+    bool InverseKinematics::setDesiredReducedJointConfiguration(iDynTree::Span<const double> desiredJointConfiguration,
+                                                                double weight)
     {
 #ifdef IDYNTREE_USES_IPOPT
         assert(m_pimpl);
         assert(IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints.size() == desiredJointConfiguration.size());
         for (size_t i = 0; i < desiredJointConfiguration.size(); ++i) {
-            IK_PIMPL(m_pimpl)->m_preferredJointsConfiguration(IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]) = desiredJointConfiguration(i);
+            IK_PIMPL(m_pimpl)->m_preferredJointsConfiguration(IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]) = desiredJointConfiguration[i];
         }
 
         if (weight >= 0.0) {
@@ -748,7 +1010,14 @@ namespace iDynTree {
 #endif
     }
 
-    bool InverseKinematics::setDesiredReducedJointConfiguration(const VectorDynSize &desiredJointConfiguration, const VectorDynSize &weights)
+    bool InverseKinematics::setDesiredReducedJointConfiguration(const iDynTree::VectorDynSize& desiredJointConfiguration,
+                                                                double weight)
+    {
+        return this->setDesiredReducedJointConfiguration(make_span(desiredJointConfiguration), weight);
+    }
+
+    bool InverseKinematics::setDesiredReducedJointConfiguration(iDynTree::Span<const double> desiredJointConfiguration,
+                                                                iDynTree::Span<const double> weights)
     {
 #ifdef IDYNTREE_USES_IPOPT
         assert(m_pimpl);
@@ -760,9 +1029,9 @@ namespace iDynTree {
         }
 
         for (size_t i = 0; i < desiredJointConfiguration.size(); ++i) {
-            IK_PIMPL(m_pimpl)->m_preferredJointsConfiguration(IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]) = desiredJointConfiguration(i);
+            IK_PIMPL(m_pimpl)->m_preferredJointsConfiguration(IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]) = desiredJointConfiguration[i];
             if (weights(i) >= 0.0) {
-                IK_PIMPL(m_pimpl)->m_preferredJointsWeight(IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]) = weights(i);
+                IK_PIMPL(m_pimpl)->m_preferredJointsWeight(IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]) = weights[i];
             }
         }
 
@@ -770,6 +1039,13 @@ namespace iDynTree {
 #else
         return missingIpoptErrorReport();
 #endif
+    }
+
+    bool InverseKinematics::setDesiredReducedJointConfiguration(const VectorDynSize &desiredJointConfiguration,
+                                                                const VectorDynSize &weights)
+    {
+        return this->setDesiredReducedJointConfiguration(make_span(desiredJointConfiguration),
+                                                         make_span(weights));
     }
 
     bool InverseKinematics::setFullJointsInitialCondition(const iDynTree::Transform* baseTransform,
@@ -902,6 +1178,39 @@ namespace iDynTree {
 #endif
     }
 
+    bool InverseKinematics::getFullJointsSolution(iDynTree::MatrixView<double> baseTransformSolution,
+                                                  iDynTree::Span<double> shapeSolution)
+    {
+#ifdef IDYNTREE_USES_IPOPT
+        bool ok = shapeSolution.size() == IK_PIMPL(m_pimpl)->m_dofs;
+        if (!ok)
+        {
+            reportError("InveseKineamtics",
+                        "getFullJointsSolution",
+                        "Invalid size of the shapeSolution vector");
+            return false;
+        }
+
+        constexpr int expected_transform_cols = 4;
+        constexpr int expected_transform_rows = 4;
+        ok = (baseTransformSolution.rows() == expected_transform_rows)
+            && (baseTransformSolution.cols() == expected_transform_cols);
+        if (!ok)
+        {
+            reportError("InverseKinematics",
+                        "getFullJointsSolution",
+                        "Invalid size of the baseTransformSolution vector");
+            return false;
+        }
+
+        toEigen(baseTransformSolution) = toEigen(IK_PIMPL(m_pimpl)->m_baseResults.asHomogeneousTransform());
+        toEigen(shapeSolution)         = toEigen(IK_PIMPL(m_pimpl)->m_jointsResults);
+        return true;
+#else
+        return missingIpoptErrorReport();
+#endif
+    }
+
     void InverseKinematics::getReducedSolution(iDynTree::Transform & baseTransformSolution,
                                                iDynTree::VectorDynSize & shapeSolution)
     {
@@ -918,6 +1227,44 @@ namespace iDynTree {
 #endif
     }
 
+    bool InverseKinematics::getReducedSolution(iDynTree::MatrixView<double> baseTransformSolution,
+                                               iDynTree::Span<double> shapeSolution)
+    {
+#ifdef IDYNTREE_USES_IPOPT
+        bool ok = shapeSolution.size() == IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints.size();
+        if (!ok)
+        {
+            reportError("InveseKineamtics",
+                        "getReducedSolution",
+                        "Invalid size of the shapeSolution vector");
+            return false;
+        }
+
+        constexpr int expected_transform_cols = 4;
+        constexpr int expected_transform_rows = 4;
+        ok = (baseTransformSolution.rows() == expected_transform_rows)
+            && (baseTransformSolution.cols() == expected_transform_cols);
+        if (!ok)
+        {
+            reportError("InverseKinematics",
+                        "getReducedSolution",
+                        "Invalid size of the baseTransformSolution vector");
+            return false;
+        }
+
+        assert(m_pimpl);
+        toEigen(baseTransformSolution) = toEigen(IK_PIMPL(m_pimpl)->m_baseResults.asHomogeneousTransform());
+        assert(shapeSolution.size() == IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints.size());
+        for (size_t i = 0; i < shapeSolution.size(); ++i) {
+            shapeSolution(i) = IK_PIMPL(m_pimpl)->m_jointsResults(IK_PIMPL(m_pimpl)->m_reducedVariablesInfo.modelJointsToOptimisedJoints[i]);
+        }
+        return true;
+#else
+        return missingIpoptErrorReport();
+#endif
+    }
+
+
     bool InverseKinematics::getPoseForFrame(const std::string& frameName,
                                             iDynTree::Transform& transform)
     {
@@ -929,6 +1276,31 @@ namespace iDynTree {
         return missingIpoptErrorReport();
 #endif
     }
+
+    bool InverseKinematics::getPoseForFrame(const std::string& frameName,
+                                            iDynTree::MatrixView<double> transform)
+    {
+        constexpr int expected_transform_cols = 4;
+        constexpr int expected_transform_rows = 4;
+        const bool ok = (transform.rows() == expected_transform_rows)
+            && (transform.cols() == expected_transform_cols);
+        if (!ok)
+        {
+            reportError("InverseKinematics",
+                        "getPoseForFrame",
+                        "Invalid size of the transform matrix");
+            return false;
+        }
+
+#ifdef IDYNTREE_USES_IPOPT
+        assert(m_pimpl);
+        toEigen(transform) = toEigen(IK_PIMPL(m_pimpl)->dynamics().getWorldTransform(frameName).asHomogeneousTransform());
+        return true;
+#else
+        return missingIpoptErrorReport();
+#endif
+    }
+
 
     const Model& InverseKinematics::fullModel() const
     {
@@ -960,7 +1332,7 @@ namespace iDynTree {
         return missingIpoptErrorReport();
 #endif
     }
-    
+
     void InverseKinematics::setCOMAsConstraint(bool asConstraint)
     {
 #ifdef IDYNTREE_USES_IPOPT
@@ -970,7 +1342,7 @@ namespace iDynTree {
 #endif
     }
 
-    
+
     bool InverseKinematics::isCOMAConstraint()
     {
 #ifdef IDYNTREE_USES_IPOPT
@@ -980,6 +1352,7 @@ namespace iDynTree {
 #endif
     }
 
+    // this should be const reference but we keep it like this to avoid breaking the API. Please change me in iDynTree 4.0
     void InverseKinematics::setCOMTarget(Position& desiredPosition, double weight)
     {
 #ifdef IDYNTREE_USES_IPOPT
@@ -987,6 +1360,23 @@ namespace iDynTree {
 #else
         missingIpoptErrorReport();
 #endif
+    }
+
+    bool InverseKinematics::setCOMTarget(iDynTree::Span<double> desiredPosition, double weight)
+    {
+        constexpr int expected_pos_size = 3;
+        bool ok = (desiredPosition.size() == expected_pos_size);
+        if( !ok )
+        {
+            reportError("InverseKinematics","setCOMTarget","Wrong size in input desiredPosition");
+            return false;
+        }
+
+        // TODO please remove me in iDynTree 4.0
+        Position tmp(desiredPosition);
+        this->setCOMTarget(tmp, weight);
+
+        return true;
     }
 
     void InverseKinematics::setCOMAsConstraintTolerance(double tolerance)
@@ -1008,15 +1398,32 @@ namespace iDynTree {
 #endif
     }
 
+    // this should be const reference but we keep it like this to avoid breaking the API. Please change me in iDynTree 4.0
     void InverseKinematics::setCOMConstraintProjectionDirection(iDynTree::Vector3 direction)
     {
+        this->setCOMConstraintProjectionDirection(make_span(direction));
+    }
+
+    bool InverseKinematics::setCOMConstraintProjectionDirection(iDynTree::Span<const double> direction)
+    {
+        constexpr int expected_pos_size = 3;
+        bool ok = (direction.size() == expected_pos_size);
+        if( !ok )
+        {
+            reportError("InverseKinematics",
+                        "setCOMConstraintProjectionDirection",
+                        "Wrong size in input direction");
+            return false;
+        }
+
 #ifdef IDYNTREE_USES_IPOPT
         // define the projection matrix 'Pdirection' in the class 'ConvexHullProjectionConstraint'
         IK_PIMPL(m_pimpl)->m_comHullConstraint_projDirection = direction;
         IK_PIMPL(m_pimpl)->m_comHullConstraint.setProjectionAlongDirection(direction);
+
+        return true;
 #else
-        missingIpoptErrorReport();
+        return missingIpoptErrorReport();
 #endif
     }
-
 }

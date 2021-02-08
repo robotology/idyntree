@@ -68,7 +68,7 @@ class internal::kinematics::InverseKinematicsData {
         InverseKinematicsInitialConditionPartial,
         InverseKinematicsInitialConditionFull
     };
-    
+
 public:
     /*! @name Model-related variables
      */
@@ -115,14 +115,14 @@ public:
     iDynTree::Direction m_comHullConstraint_xAxisOfPlaneInWorld;
     iDynTree::Direction m_comHullConstraint_yAxisOfPlaneInWorld;
     iDynTree::Position m_comHullConstraint_originOfPlaneInWorld;
-    
+
     //Preferred joints configuration for the optimization
     //Size: getNrOfDOFs of the considered model
     iDynTree::VectorDynSize m_preferredJointsConfiguration;
     iDynTree::VectorDynSize m_preferredJointsWeight;
 
     bool m_areBaseInitialConditionsSet; /*!< True if initial condition for the base pose are provided by the user */
-    
+
     InverseKinematicsInitialConditionType m_areJointsInitialConditionsSet; /*!< specify if the initial condition for the joints are provided by the user */
 
     //These variables containts the initial condition
@@ -325,10 +325,10 @@ public:
      */
     iDynTree::KinDynComputations& dynamics();
 
-    void setCoMTarget(iDynTree::Position& desiredPosition, double weight);
-    
+    void setCoMTarget(const iDynTree::Position& desiredPosition, double weight);
+
     void setCoMasConstraint(bool asConstraint);
-    
+
     bool isCoMaConstraint();
 
     void setCoMasConstraintTolerance(double TOL);
