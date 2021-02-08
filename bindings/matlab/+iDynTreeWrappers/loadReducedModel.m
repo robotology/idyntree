@@ -1,15 +1,15 @@
-function KinDynModel = loadReducedModel(jointList,baseLinkName,modelPath,modelName,debugMode)
+function KinDynModel = loadReducedModel(jointList,baseFrameName,modelPath,modelName,debugMode)
 
     % LOADREDUCEDMODEL loads the urdf model of the rigid multi-body system.
-    %                     
-    % This matlab function wraps a functionality of the iDyntree library.                     
+    %
+    % This matlab function wraps a functionality of the iDyntree library.
     % For further info see also: https://github.com/robotology/idyntree
     %
     % FORMAT:  KinDynModel = loadReducedModel(jointList,baseLinkName,modelPath,modelName,debugMode)
     %
     % INPUTS:  - jointList: cell array containing the list of joints to be used
     %                       in the reduced model;
-    %          - baseLinkName: a string that specifies link which is considered
+    %          - baseFrameName: a string that specifies frame which is considered
     %                          as the floating base;
     %          - modelPath: a string that specifies the path to the urdf model;
     %          - modelName: a string that specifies the model name;
@@ -25,27 +25,23 @@ function KinDynModel = loadReducedModel(jointList,baseLinkName,modelPath,modelNa
 
     %% ------------Initialization----------------
     disp(['[loadReducedModel]: loading the following model: ',[modelPath,modelName]]);
-        
+
     % if DEBUG option is set to TRUE, all the wrappers will be run in debug
     % mode. Wrappers concerning iDyntree simulator have their own debugger
     KinDynModel.DEBUG      = debugMode;
-    
-    % retrieve the link that will be used as the floating base
-    KinDynModel.BASE_LINK  = baseLinkName;
-        
+
     % load the list of joints to be used in the reduced model
     jointList_idyntree     = iDynTree.StringVector();
-    
+
     for k = 1:length(jointList)
-        
         jointList_idyntree.push_back(jointList{k});
     end
 
     % only joints specified in the joint list will be considered in the model
     modelLoader            = iDynTree.ModelLoader();
     reducedModel           = modelLoader.model();
-
     modelLoader.loadReducedModelFromFile([modelPath,modelName], jointList_idyntree);
+
 
     % get the number of degrees of freedom of the reduced model
     KinDynModel.NDOF       = reducedModel.getNrOfDOFs();
@@ -55,9 +51,18 @@ function KinDynModel = loadReducedModel(jointList,baseLinkName,modelPath,modelNa
     KinDynModel.kinDynComp = iDynTree.KinDynComputations();
 
     KinDynModel.kinDynComp.loadRobotModel(reducedModel);
-    
+
+    % retrieve the link that will be used as the floating base
+    frameBaseIndex        = reducedModel.getFrameIndex(baseFrameName);
+    linkBaseIndex         = reducedModel.getFrameLink(frameBaseIndex);
+    KinDynModel.BASE_LINK = reducedModel.getLinkName(linkBaseIndex);
+
+    % This is a fixed transform between the link and the frame
+    KinDynModel.baseFixedTransform = KinDynModel.kinDynComp.getRelativeTransform(frameBaseIndex, ...
+                                                                                 linkBaseIndex);
+
     % set the floating base link
     KinDynModel.kinDynComp.setFloatingBase(KinDynModel.BASE_LINK);
-    
+
     disp(['[loadReducedModel]: loaded model: ',[modelPath,modelName],', number of joints: ',num2str(KinDynModel.NDOF)]);
 end
