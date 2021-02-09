@@ -196,7 +196,7 @@ if(IDYNTREE_USES_OCTAVE)
   # Install the high-level-matlab-wrappers
   install(
       DIRECTORY ${HIGH_LEVEL_WRAPPERS_SOURCE_DIR}
-      DESTINATION ${CMAKE_INSTALL_PREFIX}/${IDYNTREE_INSTALL_MATLAB_MFILESDIR})
+      DESTINATION ${CMAKE_INSTALL_PREFIX}/${IDYNTREE_INSTALL_OCTAVE_MFILESDIR})
 endif()
 
 # if compile tests compile also matlab/octave tests
