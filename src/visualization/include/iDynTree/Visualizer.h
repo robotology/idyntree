@@ -824,6 +824,12 @@ public:
      */
     bool isWindowActive() const;
 
+    /**
+     * @brief Set the color palette.
+     * @param name name of the color palette. Currently only vanilla and meshcat are supported.
+     * @return true if all went ok, false otherwise.
+     */
+    bool setColorPalette(const std::string& name);
 };
 
 }
