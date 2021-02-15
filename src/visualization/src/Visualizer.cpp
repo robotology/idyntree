@@ -617,7 +617,7 @@ bool Visualizer::setColorPalette(const std::string &name)
     this->enviroment().setFloorGridColor(irrlicht2idyntree(colors->second.gridColor));
 
     // delete the frame in the origin and create a new one
-    pimpl->m_environment.m_rootFrameNode->drop();
+    pimpl->m_environment.m_rootFrameNode->remove();
     pimpl->m_environment.m_rootFrameNode = addFrameAxes(pimpl->m_irrSmgr,
                                                         pimpl->m_environment.m_envNode,
                                                         pimpl->rootFrameArrowsDimension,
