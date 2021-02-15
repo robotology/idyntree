@@ -262,28 +262,22 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
 
 inline irr::scene::ISceneNode * addFrameAxes(irr::scene::ISceneManager* smgr,
                                              irr::scene::ISceneNode * parentNode=0,
-                                             irr::f32 arrowLength=1.0)
+                                             irr::f32 arrowLength=1.0,
+                                             const irr::video::SColor& red = irr::video::SColor(20, 255, 0, 0),
+                                             const irr::video::SColor& green = irr::video::SColor(20, 0, 255, 0),
+                                             const irr::video::SColor& blue = irr::video::SColor(20, 0, 0, 255))
 {
-    irr::u32 alphaLev = 20;
     irr::video::SMaterial transRed;
-    transRed.AmbientColor = irr::video::SColor(alphaLev,255,0,0);
-    transRed.DiffuseColor = irr::video::SColor(alphaLev,255,0,0);
+    transRed.AmbientColor = red;
+    transRed.DiffuseColor = red;
 
     irr::video::SMaterial transGreen;
-    transGreen.AmbientColor = irr::video::SColor(alphaLev,0,255,0);
-    transGreen.DiffuseColor = irr::video::SColor(alphaLev,0,255,0);
+    transGreen.AmbientColor = green;
+    transGreen.DiffuseColor = green;
 
     irr::video::SMaterial transBlue;
-    transBlue.AmbientColor = irr::video::SColor(alphaLev,0,0,255);
-    transBlue.DiffuseColor = irr::video::SColor(alphaLev,0,0,255);
-
-    irr::video::SMaterial transYellow;
-    transYellow.AmbientColor = irr::video::SColor(alphaLev,255,255,0);
-    transYellow.DiffuseColor = irr::video::SColor(alphaLev,255,255,0);
-
-    irr::video::SMaterial transGray;
-    transYellow.AmbientColor = irr::video::SColor(alphaLev,100,100,100);
-    transYellow.DiffuseColor = irr::video::SColor(alphaLev,100,100,100);
+    transBlue.AmbientColor = blue;
+    transBlue.DiffuseColor = blue;
 
     irr::scene::ISceneNode * frameNode = smgr->addEmptySceneNode(parentNode);
 

@@ -123,6 +123,7 @@ size_t VectorsVisualization::addVector(const Position &origin, const Direction &
     newVector.origin = origin;
     newVector.direction = direction;
     newVector.modulus = modulus;
+    newVector.color = m_vectorsDefaultColor;
 
     m_vectors.push_back(newVector);
 
@@ -187,6 +188,20 @@ bool VectorsVisualization::updateVector(size_t vectorIndex, const Position &orig
 bool VectorsVisualization::updateVector(size_t vectorIndex, const Position &origin, const Vector3 &components)
 {
     return updateVector(vectorIndex, origin, Direction(components(0), components(1), components(2)), toEigen(components).norm());
+}
+
+void VectorsVisualization::setVectorsDefaultColor(const ColorViz &vectorColor)
+{
+    m_vectorsDefaultColor = vectorColor;
+}
+
+void VectorsVisualization::setVectorsColor(const ColorViz &vectorColor)
+{
+    for(auto & vector : m_vectors) {
+        vector.color = vectorColor;
+    }
+
+    drawAll();
 }
 
 bool VectorsVisualization::setVectorColor(size_t vectorIndex, const ColorViz &vectorColor)
