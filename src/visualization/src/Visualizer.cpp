@@ -151,12 +151,14 @@ struct Visualizer::VisualizerPimpl
     double rootFrameArrowsDimension;
     struct ColorPalette
     {
-        irr::video::SColorf background;
-        irr::video::SColor  gridColor;
+        irr::video::SColorf background = irr::video::SColorf(0.0,0.4,0.4,1.0);
+        irr::video::SColor  gridColor = irr::video::SColor(100,0,0,255);
 
-        irr::video::SColor xAxis;
-        irr::video::SColor yAxis;
-        irr::video::SColor zAxis;
+        irr::video::SColor xAxis = irr::video::SColor(20,255,0,0);
+        irr::video::SColor yAxis = irr::video::SColor(20,0,255,0);
+        irr::video::SColor zAxis = irr::video::SColor(20,0,0,255);
+
+        irr::video::SColor vector = irr::video::SColor(1,1,0,0);
     };
     std::unordered_map<std::string, ColorPalette> m_palette;
 
@@ -169,12 +171,14 @@ struct Visualizer::VisualizerPimpl
         m_palette["vanilla"].xAxis = irr::video::SColor(alphaLev,255,0,0);
         m_palette["vanilla"].yAxis = irr::video::SColor(alphaLev,0,255,0);
         m_palette["vanilla"].zAxis = irr::video::SColor(alphaLev,0,0,255);
+        m_palette["vanilla"].vector = irr::video::SColor(255,255,0,0);
 
         m_palette["meshcat"].background = irr::video::SColorf(0.42,0.63,0.85,1.0);
         m_palette["meshcat"].gridColor =  irr::video::SColor(128,128,128,100);
         m_palette["meshcat"].xAxis = irr::video::SColor(alphaLev,234, 67, 53);
         m_palette["meshcat"].yAxis = irr::video::SColor(alphaLev,52, 168, 83);
         m_palette["meshcat"].zAxis = irr::video::SColor(alphaLev,66,133,244);
+        m_palette["meshcat"].vector = irr::video::SColor(255,253,98,2);
     }
 #else
     DummyCamera m_camera;
@@ -615,6 +619,9 @@ bool Visualizer::setColorPalette(const std::string &name)
 
     this->enviroment().setBackgroundColor(irrlicht2idyntree(colors->second.background));
     this->enviroment().setFloorGridColor(irrlicht2idyntree(colors->second.gridColor));
+
+    this->vectors().setVectorsColor(irrlicht2idyntree(colors->second.vector));
+    this->vectors().setVectorsDefaultColor(irrlicht2idyntree(colors->second.vector));
 
     // delete the frame in the origin and create a new one
     pimpl->m_environment.m_rootFrameNode->remove();
