@@ -620,7 +620,10 @@ bool Visualizer::setColorPalette(const std::string &name)
     pimpl->m_environment.m_rootFrameNode->drop();
     pimpl->m_environment.m_rootFrameNode = addFrameAxes(pimpl->m_irrSmgr,
                                                         pimpl->m_environment.m_envNode,
-                                                        pimpl->rootFrameArrowsDimension);
+                                                        pimpl->rootFrameArrowsDimension,
+                                                        colors->second.xAxis,
+                                                        colors->second.yAxis,
+                                                        colors->second.zAxis);
     return true;
 
 #else
