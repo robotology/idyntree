@@ -43,7 +43,7 @@ jobs:
         # Actual dependencies
         mamba install -c conda-forge eigen libxml2 assimp ipopt qt irrlicht
         # robotology dependencies
-        mamba install -c conda-forge -c robotology-staging yarp icub-main
+        mamba install -c conda-forge -c robotology-staging yarp icub-main osqp-eigen
 
     # Additional dependencies useful only on Linux
     - name: Dependencies [Conda/Linux]
