@@ -228,9 +228,9 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
         iDynTree::Vector3 scale = externalMesh->getScale();
 
         // If multiple mesh are loaded, add them
-        if (getFileExt(externalMesh->getFilename()) == "stl")
+        if (getFileExt(externalMesh->getFilename()) == "stl" || getFileExt(externalMesh->getFilename()) == "obj")
         {
-            scale(0) = -scale(0); //STL meshes are interpreted as left handed by irrlicht
+            scale(0) = -scale(0); //STL and OBJ meshes are interpreted as left handed by irrlicht
         }
 
         geomNode = smgr->addMeshSceneNode(loadedAnimatedMesh->getMesh(0),linkNode);
