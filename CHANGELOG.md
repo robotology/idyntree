@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Fixed the `IDYNTREE_USES_ASSIMP` option on Windows if `IDYNTREE_USES_YARP` is also enabled (https://github.com/robotology/idyntree/pull/832).
-
+- Fixed the ``OBJ`` meshes visualization in the Visualizer library (https://github.com/robotology/idyntree/pull/833).
 ## [3.0.0] - 2020-02-03
 
 ### Added
@@ -40,7 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.0.1] - 2020-11-24
 
 ### Fixed
-- Fixed problem in pybind11-based Python bindings (https://github.com/robotology/idyntree/pull/781). 
+- Fixed problem in pybind11-based Python bindings (https://github.com/robotology/idyntree/pull/781).
 
 ## [2.0.0] - 2020-11-22
 
