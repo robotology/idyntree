@@ -105,15 +105,12 @@ inline irr::video::SMaterial idyntree2irr(const iDynTree::ColorViz & rgbaMateria
 
 inline iDynTree::Transform irr2idyntree_trans(const irr::core::matrix4 & transIrr)
 {
-    iDynTree::Matrix4x4 trans;
-    for (int i = 0; i < 4; i++)
-    {
-        for (int j = 0; j < 4; j++)
-        {
-            trans(i, j) = transIrr(i, j);
-        }
-    }
-    return iDynTree::Transform(trans);
+    iDynTree::Transform output;
+
+    output.setPosition(irr2idyntree_pos(transIrr.getTranslation()));
+    output.setRotation(irr2idyntree_rot(transIrr.getRotationDegrees()));
+
+    return output;
 }
 
 /**
