@@ -36,19 +36,19 @@ jobs:
     - name: Install files to enable compilation of mex files [Conda/Linux]
       if: contains(matrix.os, 'ubuntu') 
       run: |
-        curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2019b_mexa64.zip
-        unzip msdk_R2019b_mexa64.zip
-        rm msdk_R2019b_mexa64.zip
-        echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2019b_mexa64" >> $GITHUB_ENV
+        curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020b_mexa64.zip
+        unzip msdk_R2020b_mexa64.zip
+        rm msdk_R2020b_mexa64.zip
+        echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2020b_mexa64" >> $GITHUB_ENV
         echo "GHA_Matlab_MEX_EXTENSION=mexa64" >> $GITHUB_ENV
                 
     - name: Install files to enable compilation of mex files [Conda/macOS]
       if: contains(matrix.os, 'macos') 
       run: |
-        curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2019b_mexmaci64.zip
-        unzip msdk_R2019b_mexmaci64.zip
-        rm msdk_R2019b_mexmaci64.zip
-        echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2019b_mexmaci64" >> $GITHUB_ENV
+        curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020a_mexmaci64.zip
+        unzip msdk_R2020a_mexmaci64.zip
+        rm msdk_R2020a_mexmaci64.zip
+        echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2020a_mexmaci64" >> $GITHUB_ENV
         echo "GHA_Matlab_MEX_EXTENSION=mexmaci64" >> $GITHUB_ENV
         
     - name: Install files to enable compilation of mex files [Conda/Windows]
@@ -126,19 +126,19 @@ jobs:
     - name: Install files to enable compilation of mex files [Linux]
       if: contains(matrix.os, 'ubuntu') 
       run: |
-        curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2019b_mexa64.zip
-        unzip msdk_R2019b_mexa64.zip
-        rm msdk_R2019b_mexa64.zip
-        echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2019b_mexa64" >> $GITHUB_ENV
+        curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020b_mexa64.zip
+        unzip msdk_R2020b_mexa64.zip
+        rm msdk_R2020b_mexa64.zip
+        echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2020b_mexa64" >> $GITHUB_ENV
         echo "GHA_Matlab_MEX_EXTENSION=mexa64" >> $GITHUB_ENV
                 
     - name: Install files to enable compilation of mex files [macOS]
       if: contains(matrix.os, 'macos') 
       run: |
-        curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2019b_mexmaci64.zip
-        unzip msdk_R2019b_mexmaci64.zip
-        rm msdk_R2019b_mexmaci64.zip
-        echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2019b_mexmaci64" >> $GITHUB_ENV
+        curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020a_mexmaci64.zip
+        unzip msdk_R2020a_mexmaci64.zip
+        rm msdk_R2020a_mexmaci64.zip
+        echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2020a_mexmaci64" >> $GITHUB_ENV
         echo "GHA_Matlab_MEX_EXTENSION=mexmaci64" >> $GITHUB_ENV
         
     - name: Install files to enable compilation of mex files [Windows]
