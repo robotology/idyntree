@@ -76,7 +76,7 @@ macro(GET_LIBRARY_FROM_SWIG_WRAPPER i_main_file i_other_files target_name genera
         PROPERTY SWIG_DEPENDS ${i_other_files})
   else()
       if(${target_name} STREQUAL "iDynTreeMEX") 
-          matlab_add_mex(NAME ${target_name} SRC ${swig_generated_sources})
+          matlab_add_mex(NAME ${target_name} SRC ${swig_generated_sources} NO_IMPLICIT_LINK_TO_MATLAB_LIBRARIES)
       else()
           add_library(${target_name} MODULE ${swig_generated_sources})
       endif()
@@ -102,21 +102,7 @@ if(IDYNTREE_USES_MATLAB)
           ${IDYNTREE_GENERATE_MATLAB}
           ${MEX_BINDINGS_SOURCE_DIR})
 
-  set_target_properties(${target_name}
-    PROPERTIES OUTPUT_NAME ${mexname}
-               PREFIX ""
-               SUFFIX .mex)
-
-  target_link_libraries(${target_name} ${IDYNTREE_LIBRARIES} idyntree-core ${Matlab_LIBRARIES})
-  target_include_directories(${target_name} PUBLIC ${Matlab_INCLUDE_DIRS})
-  set_target_properties(${target_name} PROPERTIES PREFIX "" SUFFIX .${Matlab_MEX_EXTENSION})
-
-  # entry point in the mex file + taking care of visibility and symbol clashes.
-  if(WIN32)
-    set_target_properties(${target_name}
-        PROPERTIES
-        DEFINE_SYMBOL "DLL_EXPORT_SYM=__declspec(dllexport)")
-  endif()
+  target_link_libraries(${target_name} ${IDYNTREE_LIBRARIES} idyntree-core ${Matlab_MEX_LIBRARY} ${Matlab_MX_LIBRARY})
 
   # Install the generated front-end to ${CMAKE_INSTALL_PREFIX}/mex
   install(
