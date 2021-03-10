@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed the `IDYNTREE_USES_ASSIMP` option on Windows if `IDYNTREE_USES_YARP` is also enabled (https://github.com/robotology/idyntree/pull/832).
 - Fixed the ``OBJ`` meshes visualization in the Visualizer library (https://github.com/robotology/idyntree/pull/833).
 - Fixed `ModelVisualization::getWorldLinkTransform()` method (https://github.com/robotology/idyntree/issues/836)
+- Only link required MATLAB libraries when compiling iDynTree MATLAB bindings (https://github.com/robotology/idyntree/pull/840).
 
 ### Deprecated
 - The method `ModelVisualization::getWorldModelTransform()` is deprecated, and will be removed in iDynTree 4.0.
