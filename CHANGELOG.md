@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [3.0.1] - 2020-03-11
+
 ### Fixed
 - Fixed the `IDYNTREE_USES_ASSIMP` option on Windows if `IDYNTREE_USES_YARP` is also enabled (https://github.com/robotology/idyntree/pull/832).
 - Fixed the ``OBJ`` meshes visualization in the Visualizer library (https://github.com/robotology/idyntree/pull/833).
