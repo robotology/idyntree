@@ -1,0 +1,11 @@
+<map id="iDynTree::ArticulatedBodyAlgorithmInternalBuffers" name="iDynTree::ArticulatedBodyAlgorithmInternalBuffers">
+<area shape="rect" id="node1" title="Structure of buffers required by ArticulatedBodyAlgorithm." alt="" coords="633,193,824,234"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1LinkAccArray.html" title="Class for storing a vector of spatial accelerations, one for each link in a model." alt="" coords="252,11,424,37"/>
+<area shape="rect" id="node3" href="$classiDynTree_1_1DOFSpatialForceArray.html" title="Class for storing a vector of spatial force vectors, one for each dof in a model." alt="" coords="241,62,435,103"/>
+<area shape="rect" id="node4" href="$classiDynTree_1_1LinkArticulatedBodyInertias.html" title="Class for storing a vector of ArticulatedBodyInertias objects , one for each link in a model." alt="" coords="245,127,431,169"/>
+<area shape="rect" id="node5" href="$classiDynTree_1_1JointDOFsDoubleArray.html" title="Class for storing a vector of scalar values, one for each internal coordinate in a model." alt="" coords="239,193,437,234"/>
+<area shape="rect" id="node6" href="$classiDynTree_1_1VectorDynSize.html" title="Class providing a simple form of vector with dynamic size." alt="" coords="5,200,187,227"/>
+<area shape="rect" id="node7" href="$classiDynTree_1_1DOFSpatialMotionArray.html" title="Class for storing a vector of spatial motion vectors, one for each (internal) dof in a model." alt="" coords="236,258,440,299"/>
+<area shape="rect" id="node8" href="$classiDynTree_1_1LinkVelArray.html" title="Class for storing a vector of twists, one for each link in a model." alt="" coords="253,324,423,351"/>
+<area shape="rect" id="node9" href="$classiDynTree_1_1LinkWrenches.html" title="Vector of wrenches connected in some way to the link of a model." alt="" coords="249,375,427,401"/>
+</map>

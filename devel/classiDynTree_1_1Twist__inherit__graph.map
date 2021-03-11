@@ -1,0 +1,6 @@
+<map id="iDynTree::Twist" name="iDynTree::Twist">
+<area shape="rect" id="node1" title="Class representing a twist, i.e." alt="" coords="55,261,175,288"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1SpatialMotionVector.html" title="Class providing the raw coordinates for any motion spatial vector (i.e." alt="" coords="5,185,224,212"/>
+<area shape="rect" id="node3" href="$classiDynTree_1_1SpatialVector.html" title=" " alt="" coords="23,95,206,136"/>
+<area shape="rect" id="node4" href="$classiDynTree_1_1SpatialVector.html" title=" " alt="" coords="28,5,201,32"/>
+</map>

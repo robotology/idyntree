@@ -1,0 +1,11 @@
+<map id="iDynTree::SpatialVector" name="iDynTree::SpatialVector">
+<area shape="rect" id="node1" title=" " alt="" coords="5,83,179,109"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1SpatialVector.html" title=" " alt="" coords="392,42,575,83"/>
+<area shape="rect" id="node6" href="$classiDynTree_1_1SpatialVector.html" title=" " alt="" coords="397,107,570,149"/>
+<area shape="rect" id="node3" href="$classiDynTree_1_1SpatialMotionVector.html" title="Class providing the raw coordinates for any motion spatial vector (i.e." alt="" coords="624,49,843,76"/>
+<area shape="rect" id="node4" href="$classiDynTree_1_1SpatialAcc.html" title="Class representing a spatial acceleration, i.e." alt="" coords="918,5,1073,32"/>
+<area shape="rect" id="node5" href="$classiDynTree_1_1Twist.html" title="Class representing a twist, i.e." alt="" coords="935,56,1055,83"/>
+<area shape="rect" id="node7" href="$classiDynTree_1_1SpatialForceVector.html" title="Class providing the raw coordinates for any spatial force vector, (i.e." alt="" coords="629,115,837,141"/>
+<area shape="rect" id="node8" href="$classiDynTree_1_1SpatialMomentum.html" title="Class representing a spatial momentum, i.e." alt="" coords="892,111,1099,137"/>
+<area shape="rect" id="node9" href="$classiDynTree_1_1Wrench.html" title="Class representing a wrench, i.e." alt="" coords="927,161,1063,188"/>
+</map>

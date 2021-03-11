@@ -1,0 +1,5 @@
+<map id="iDynTree::estimateExternalWrenchesBuffers" name="iDynTree::estimateExternalWrenchesBuffers">
+<area shape="rect" id="node1" title=" " alt="" coords="93,95,291,136"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1LinkPositions.html" title=" " alt="" coords="5,5,179,32"/>
+<area shape="rect" id="node3" href="$classiDynTree_1_1LinkWrenches.html" title="Vector of wrenches connected in some way to the link of a model." alt="" coords="203,5,381,32"/>
+</map>

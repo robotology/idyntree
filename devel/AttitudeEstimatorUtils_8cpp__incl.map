@@ -1,0 +1,39 @@
+<map id="AttitudeEstimatorUtils.cpp" name="AttitudeEstimatorUtils.cpp">
+<area shape="rect" id="node1" title=" " alt="" coords="776,5,971,32"/>
+<area shape="rect" id="node2" href="$AttitudeEstimatorUtils_8h.html" title=" " alt="" coords="653,80,835,121"/>
+<area shape="rect" id="node36" title=" " alt="" coords="833,169,895,196"/>
+<area shape="rect" id="node37" title=" " alt="" coords="919,169,982,196"/>
+<area shape="rect" id="node3" href="$AttitudeEstimator_8h.html" title=" " alt="" coords="195,408,349,449"/>
+<area shape="rect" id="node26" href="$EigenHelpers_8h.html" title=" " alt="" coords="594,169,809,196"/>
+<area shape="rect" id="node4" href="$VectorFixSize_8h.html" title=" " alt="" coords="571,647,787,673"/>
+<area shape="rect" id="node20" href="$Rotation_8h.html" title=" " alt="" coords="875,497,1059,524"/>
+<area shape="rect" id="node25" title=" " alt="" coords="168,721,248,748"/>
+<area shape="rect" id="node5" href="$Utils_8h.html" title=" " alt="" coords="687,796,846,823"/>
+<area shape="rect" id="node6" title=" " alt="" coords="1031,871,1102,897"/>
+<area shape="rect" id="node8" href="$Span_8h.html" title=" " alt="" coords="1299,796,1461,823"/>
+<area shape="rect" id="node9" title=" " alt="" coords="937,871,1007,897"/>
+<area shape="rect" id="node17" title=" " alt="" coords="1237,721,1296,748"/>
+<area shape="rect" id="node18" title=" " alt="" coords="567,721,641,748"/>
+<area shape="rect" id="node19" title=" " alt="" coords="817,721,884,748"/>
+<area shape="rect" id="node7" title=" " alt="" coords="713,871,820,897"/>
+<area shape="rect" id="node10" title=" " alt="" coords="1243,871,1328,897"/>
+<area shape="rect" id="node11" title=" " alt="" coords="1352,871,1408,897"/>
+<area shape="rect" id="node12" title=" " alt="" coords="1433,871,1503,897"/>
+<area shape="rect" id="node13" title=" " alt="" coords="1528,871,1587,897"/>
+<area shape="rect" id="node14" title=" " alt="" coords="1611,871,1698,897"/>
+<area shape="rect" id="node15" title=" " alt="" coords="1126,871,1218,897"/>
+<area shape="rect" id="node16" title=" " alt="" coords="1722,871,1782,897"/>
+<area shape="rect" id="node21" href="$GeomVector3_8h.html" title=" " alt="" coords="526,572,743,599"/>
+<area shape="rect" id="node22" href="$RotationRaw_8h.html" title=" " alt="" coords="869,572,1080,599"/>
+<area shape="rect" id="node23" href="$MatrixFixSize_8h.html" title=" " alt="" coords="811,647,1029,673"/>
+<area shape="rect" id="node24" href="$MatrixView_8h.html" title=" " alt="" coords="1011,721,1213,748"/>
+<area shape="rect" id="node27" title=" " alt="" coords="475,251,578,278"/>
+<area shape="rect" id="node28" href="$VectorDynSize_8h.html" title=" " alt="" coords="1554,647,1777,673"/>
+<area shape="rect" id="node29" href="$MatrixDynSize_8h.html" title=" " alt="" coords="1155,647,1379,673"/>
+<area shape="rect" id="node30" href="$SpatialMotionVector_8h.html" title=" " alt="" coords="825,244,1031,285"/>
+<area shape="rect" id="node34" href="$SpatialForceVector_8h.html" title=" " alt="" coords="603,244,800,285"/>
+<area shape="rect" id="node35" href="$Transform_8h.html" title=" " alt="" coords="1056,333,1251,360"/>
+<area shape="rect" id="node31" href="$SpatialVector_8h.html" title=" " alt="" coords="577,333,791,360"/>
+<area shape="rect" id="node32" href="$Position_8h.html" title=" " alt="" coords="1110,415,1197,442"/>
+<area shape="rect" id="node33" href="$PositionRaw_8h.html" title=" " alt="" coords="1155,572,1363,599"/>
+</map>

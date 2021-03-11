@@ -1,0 +1,6 @@
+<map id="iDynTree::optimalcontrol::BufferedGroup" name="iDynTree::optimalcontrol::BufferedGroup">
+<area shape="rect" id="node1" title=" " alt="" coords="391,161,573,202"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1MatrixDynSize.html" title="Class providing a simple form of matrix with dynamic size." alt="" coords="5,64,188,91"/>
+<area shape="rect" id="node3" href="$classiDynTree_1_1optimalcontrol_1_1SparsityStructure.html" title=" " alt="" coords="5,161,188,202"/>
+<area shape="rect" id="node4" href="$classiDynTree_1_1VectorDynSize.html" title="Class providing a simple form of vector with dynamic size." alt="" coords="6,228,187,255"/>
+</map>

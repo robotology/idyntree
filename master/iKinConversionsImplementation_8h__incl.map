@@ -1,0 +1,52 @@
+<map id="iKinConversionsImplementation.h" name="iKinConversionsImplementation.h">
+<area shape="rect" id="node1" title=" " alt="" coords="1970,5,2213,32"/>
+<area shape="rect" id="node2" href="$iKinConversions_8h.html" title=" " alt="" coords="2061,80,2261,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="2061,155,2209,181"/>
+<area shape="rect" id="node5" href="$DenavitHartenberg_8h.html" title=" " alt="" coords="1723,80,1985,107"/>
+<area shape="rect" id="node18" title=" " alt="" coords="1423,1080,1493,1107"/>
+<area shape="rect" id="node44" href="$YARPConversions_8h.html" title=" " alt="" coords="209,304,451,331"/>
+<area shape="rect" id="node3" title=" " alt="" coords="1606,931,1665,957"/>
+<area shape="rect" id="node6" href="$Indices_8h.html" title=" " alt="" coords="981,304,1167,331"/>
+<area shape="rect" id="node9" href="$Model_8h.html" title=" " alt="" coords="1514,155,1693,181"/>
+<area shape="rect" id="node40" href="$Transform_8h.html" title=" " alt="" coords="1617,557,1811,584"/>
+<area shape="rect" id="node43" title=" " alt="" coords="1923,304,1985,331"/>
+<area shape="rect" id="node7" title=" " alt="" coords="371,1080,441,1107"/>
+<area shape="rect" id="node8" title=" " alt="" coords="633,386,749,413"/>
+<area shape="rect" id="node10" href="$IJoint_8h.html" title=" " alt="" coords="1112,229,1284,256"/>
+<area shape="rect" id="node11" href="$Link_8h.html" title=" " alt="" coords="1360,229,1527,256"/>
+<area shape="rect" id="node41" href="$SolidShapes_8h.html" title=" " alt="" coords="1666,229,1885,256"/>
+<area shape="rect" id="node42" title=" " alt="" coords="1703,304,1768,331"/>
+<area shape="rect" id="node12" href="$SpatialInertia_8h.html" title=" " alt="" coords="1191,304,1407,331"/>
+<area shape="rect" id="node13" href="$SpatialInertiaRaw_8h.html" title=" " alt="" coords="1556,379,1760,420"/>
+<area shape="rect" id="node14" href="$VectorFixSize_8h.html" title=" " alt="" coords="679,856,895,883"/>
+<area shape="rect" id="node26" href="$Twist_8h.html" title=" " alt="" coords="1147,386,1310,413"/>
+<area shape="rect" id="node27" href="$SpatialMomentum_8h.html" title=" " alt="" coords="773,386,1023,413"/>
+<area shape="rect" id="node38" href="$SpatialAcc_8h.html" title=" " alt="" coords="1334,386,1531,413"/>
+<area shape="rect" id="node39" href="$Wrench_8h.html" title=" " alt="" coords="430,386,609,413"/>
+<area shape="rect" id="node15" href="$Utils_8h.html" title=" " alt="" coords="477,1005,636,1032"/>
+<area shape="rect" id="node17" href="$Span_8h.html" title=" " alt="" coords="883,1005,1044,1032"/>
+<area shape="rect" id="node24" title=" " alt="" coords="1069,931,1143,957"/>
+<area shape="rect" id="node25" title=" " alt="" coords="823,931,890,957"/>
+<area shape="rect" id="node16" title=" " alt="" coords="503,1080,610,1107"/>
+<area shape="rect" id="node19" title=" " alt="" coords="782,1080,867,1107"/>
+<area shape="rect" id="node20" title=" " alt="" coords="891,1080,947,1107"/>
+<area shape="rect" id="node21" title=" " alt="" coords="972,1080,1043,1107"/>
+<area shape="rect" id="node22" title=" " alt="" coords="1067,1080,1126,1107"/>
+<area shape="rect" id="node23" title=" " alt="" coords="1187,1080,1279,1107"/>
+<area shape="rect" id="node28" href="$SpatialForceVector_8h.html" title=" " alt="" coords="726,468,923,509"/>
+<area shape="rect" id="node29" href="$GeomVector3_8h.html" title=" " alt="" coords="772,781,989,808"/>
+<area shape="rect" id="node30" href="$SpatialVector_8h.html" title=" " alt="" coords="863,557,1077,584"/>
+<area shape="rect" id="node31" href="$Position_8h.html" title=" " alt="" coords="1433,632,1520,659"/>
+<area shape="rect" id="node33" href="$Rotation_8h.html" title=" " alt="" coords="1255,707,1439,733"/>
+<area shape="rect" id="node37" title=" " alt="" coords="965,931,1045,957"/>
+<area shape="rect" id="node32" href="$PositionRaw_8h.html" title=" " alt="" coords="1217,781,1425,808"/>
+<area shape="rect" id="node34" href="$RotationRaw_8h.html" title=" " alt="" coords="1449,781,1659,808"/>
+<area shape="rect" id="node35" href="$MatrixFixSize_8h.html" title=" " alt="" coords="1217,856,1435,883"/>
+<area shape="rect" id="node36" href="$MatrixView_8h.html" title=" " alt="" coords="1218,931,1421,957"/>
+<area shape="rect" id="node45" title=" " alt="" coords="5,386,137,413"/>
+<area shape="rect" id="node46" title=" " alt="" coords="162,386,293,413"/>
+<area shape="rect" id="node47" href="$YARPConversionsImplementation_8h.html" title=" " alt="" coords="438,475,689,502"/>
+<area shape="rect" id="node48" href="$Direction_8h.html" title=" " alt="" coords="508,781,696,808"/>
+<area shape="rect" id="node49" href="$VectorDynSize_8h.html" title=" " alt="" coords="920,856,1143,883"/>
+<area shape="rect" id="node50" title=" " alt="" coords="507,557,646,584"/>
+</map>

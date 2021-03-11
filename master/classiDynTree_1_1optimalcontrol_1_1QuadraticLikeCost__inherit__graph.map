@@ -1,0 +1,6 @@
+<map id="iDynTree::optimalcontrol::QuadraticLikeCost" name="iDynTree::optimalcontrol::QuadraticLikeCost">
+<area shape="rect" id="node1" title=" " alt="" coords="108,95,291,136"/>
+<area shape="rect" id="node3" href="$classiDynTree_1_1optimalcontrol_1_1LinearCost.html" title=" " alt="" coords="5,184,188,225"/>
+<area shape="rect" id="node4" href="$classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html" title=" " alt="" coords="212,184,395,225"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1optimalcontrol_1_1Cost.html" title="The Cost virtual class definition." alt="" coords="108,5,291,47"/>
+</map>

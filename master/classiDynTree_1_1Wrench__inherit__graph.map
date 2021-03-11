@@ -1,0 +1,6 @@
+<map id="iDynTree::Wrench" name="iDynTree::Wrench">
+<area shape="rect" id="node1" title="Class representing a wrench, i.e." alt="" coords="41,261,177,288"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1SpatialForceVector.html" title="Class providing the raw coordinates for any spatial force vector, (i.e." alt="" coords="5,185,213,212"/>
+<area shape="rect" id="node3" href="$classiDynTree_1_1SpatialVector.html" title=" " alt="" coords="23,95,196,136"/>
+<area shape="rect" id="node4" href="$classiDynTree_1_1SpatialVector.html" title=" " alt="" coords="23,5,196,32"/>
+</map>
