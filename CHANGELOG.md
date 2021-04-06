@@ -12,6 +12,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - The wheels uploaded to PyPI are now `manylinux_2_24` compliant (https://github.com/robotology/idyntree/pull/844)
 
+
+## [3.0.1] - 2020-03-11
+
+### Fixed
+- Fixed the `IDYNTREE_USES_ASSIMP` option on Windows if `IDYNTREE_USES_YARP` is also enabled (https://github.com/robotology/idyntree/pull/832).
+- Fixed the ``OBJ`` meshes visualization in the Visualizer library (https://github.com/robotology/idyntree/pull/833).
+- Fixed `ModelVisualization::getWorldLinkTransform()` method (https://github.com/robotology/idyntree/issues/836)
+- Only link required MATLAB libraries when compiling iDynTree MATLAB bindings (https://github.com/robotology/idyntree/pull/840).
+
+### Deprecated
+- The method `ModelVisualization::getWorldModelTransform()` is deprecated, and will be removed in iDynTree 4.0.
+>>>>>>> master
+
 ## [3.0.0] - 2020-02-03
 
 ### Added
@@ -42,7 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.0.1] - 2020-11-24
 
 ### Fixed
-- Fixed problem in pybind11-based Python bindings (https://github.com/robotology/idyntree/pull/781). 
+- Fixed problem in pybind11-based Python bindings (https://github.com/robotology/idyntree/pull/781).
 
 ## [2.0.0] - 2020-11-22
 

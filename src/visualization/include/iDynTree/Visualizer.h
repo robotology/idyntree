@@ -595,12 +595,11 @@ public:
      * The obtained transformation matrix can be used to map any homogeneous vector from the
      * model's root link frame to the visualizer world frame.
      */
+    IDYNTREE_DEPRECATED_WITH_MSG("This method is simply returning the identity. If you need the root link transformation matrix, please use the getWorldLinkTransform(<root link frame index>) method.")
     virtual Transform getWorldModelTransform() = 0;
 
     /**
      * Get the transformation of given link with respect to visualizer world \f$ w_H_{link}\f$
-     * The obtained transformation matrix can be used to map any homogeneous vector from the
-     * given link frame to the visualizer world frame.
      */
     virtual Transform getWorldLinkTransform(const LinkIndex& linkIndex) = 0;
 };

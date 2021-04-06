@@ -33,6 +33,34 @@ jobs:
       with:
         auto-update-conda: true
 
+    - name: Install files to enable compilation of mex files [Conda/Linux]
+      if: contains(matrix.os, 'ubuntu') 
+      run: |
+        curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020b_mexa64.zip
+        unzip msdk_R2020b_mexa64.zip
+        rm msdk_R2020b_mexa64.zip
+        echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2020b_mexa64" >> $GITHUB_ENV
+        echo "GHA_Matlab_MEX_EXTENSION=mexa64" >> $GITHUB_ENV
+                
+    - name: Install files to enable compilation of mex files [Conda/macOS]
+      if: contains(matrix.os, 'macos') 
+      run: |
+        curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020a_mexmaci64.zip
+        unzip msdk_R2020a_mexmaci64.zip
+        rm msdk_R2020a_mexmaci64.zip
+        echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2020a_mexmaci64" >> $GITHUB_ENV
+        echo "GHA_Matlab_MEX_EXTENSION=mexmaci64" >> $GITHUB_ENV
+        
+    - name: Install files to enable compilation of mex files [Conda/Windows]
+      if: contains(matrix.os, 'windows') 
+      shell: bash
+      run: |
+        curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020a_mexw64.zip
+        unzip msdk_R2020a_mexw64.zip
+        rm msdk_R2020a_mexw64.zip
+        echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2020a_mexw64" >> $GITHUB_ENV
+        echo "GHA_Matlab_MEX_EXTENSION=mexw64" >> $GITHUB_ENV
+
     - name: Dependencies [Conda]
       shell: bash -l {0}
       run: |
@@ -41,7 +69,9 @@ jobs:
         # Compilation related dependencies 
         mamba install -c conda-forge cmake compilers make ninja pkg-config
         # Actual dependencies
-        mamba install -c conda-forge eigen libxml2 assimp ipopt qt
+        mamba install -c conda-forge eigen libxml2 assimp ipopt qt irrlicht
+        # robotology dependencies
+        mamba install -c conda-forge -c robotology-staging yarp icub-main osqp-eigen
 
     # Additional dependencies useful only on Linux
     - name: Dependencies [Conda/Linux]
@@ -58,7 +88,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake -GNinja -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}  -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_Qt5:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON ..
+        cmake -GNinja -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DMATLAB_FIND_DEBUG:BOOL=ON -DIDYNTREE_USES_MATLAB:BOOL=ON -DMatlab_ROOT_DIR=${GHA_Matlab_ROOT_DIR} -DMatlab_MEX_EXTENSION:STRING=${GHA_Matlab_MEX_EXTENSION} -DIDYNTREE_DISABLE_MATLAB_TESTS:BOOL=ON -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_QT5:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=ON -DIDYNTREE_USES_ICUB_MAIN:BOOL=ON -DIDYNTREE_USES_OSQPEIGEN:BOOL=ON ..
 
     - name: Configure [Conda/Windows]
       if: contains(matrix.os, 'windows')
@@ -66,7 +96,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake -G"Visual Studio 16 2019"  -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_Qt5:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON ..
+        cmake -G"Visual Studio 16 2019"  -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DMATLAB_FIND_DEBUG:BOOL=ON  -DIDYNTREE_USES_MATLAB:BOOL=ON -DMatlab_ROOT_DIR=${GHA_Matlab_ROOT_DIR} -DMatlab_MEX_EXTENSION:STRING=${GHA_Matlab_MEX_EXTENSION} -DIDYNTREE_DISABLE_MATLAB_TESTS:BOOL=ON  -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_QT5:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=ON -DIDYNTREE_USES_ICUB_MAIN:BOOL=ON -DIDYNTREE_USES_OSQPEIGEN:BOOL=ON ..
 
     - name: Build [Conda]
       shell: bash -l {0}
@@ -74,11 +104,19 @@ jobs:
         cd build
         cmake --build . --config ${{ matrix.build_type }}
 
+    - name: Inspect libraries linked by iDynTreeMEX.mexa64 [Conda/Linux]
+      if: contains(matrix.os, 'ubuntu')
+      shell: bash -l {0}
+      run: |
+        cd build
+        ldd ./lib/iDynTreeMEX.mexa64
+
     - name: Test [Conda]
       shell: bash -l {0}
       run: |
         cd build
-        ctest --output-on-failure -C ${{ matrix.build_type }} . 
+        # Visualizer tests excluded as a workaround for https://github.com/robotology/idyntree/issues/808
+        ctest --output-on-failure -C ${{ matrix.build_type }} -E "Visualizer|matlab" . 
 
   build-with-system-dependencies:
     name: '[${{ matrix.os }}@${{ matrix.build_type }}]'
@@ -90,7 +128,36 @@ jobs:
 
     steps:
     - uses: actions/checkout@master
+
+
+    - name: Install files to enable compilation of mex files [Linux]
+      if: contains(matrix.os, 'ubuntu') 
+      run: |
+        curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020b_mexa64.zip
+        unzip msdk_R2020b_mexa64.zip
+        rm msdk_R2020b_mexa64.zip
+        echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2020b_mexa64" >> $GITHUB_ENV
+        echo "GHA_Matlab_MEX_EXTENSION=mexa64" >> $GITHUB_ENV
+                
+    - name: Install files to enable compilation of mex files [macOS]
+      if: contains(matrix.os, 'macos') 
+      run: |
+        curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020a_mexmaci64.zip
+        unzip msdk_R2020a_mexmaci64.zip
+        rm msdk_R2020a_mexmaci64.zip
+        echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2020a_mexmaci64" >> $GITHUB_ENV
+        echo "GHA_Matlab_MEX_EXTENSION=mexmaci64" >> $GITHUB_ENV
         
+    - name: Install files to enable compilation of mex files [Windows]
+      if: contains(matrix.os, 'windows') 
+      shell: bash
+      run: |
+        curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020a_mexw64.zip
+        unzip msdk_R2020a_mexw64.zip
+        rm msdk_R2020a_mexw64.zip
+        echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2020a_mexw64" >> $GITHUB_ENV
+        echo "GHA_Matlab_MEX_EXTENSION=mexw64" >> $GITHUB_ENV
+
     # Print environment variables to simplify development and debugging
     - name: Environment Variables
       shell: bash
@@ -222,6 +289,7 @@ jobs:
         cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install/deps \
               -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON  -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=ON \
               -DIDYNTREE_USES_PYTHON:BOOL=OFF -DIDYNTREE_USES_OCTAVE:BOOL=OFF -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON \
+              -DIDYNTREE_USES_MATLAB:BOOL=ON -DMatlab_ROOT_DIR=${GHA_Matlab_ROOT_DIR} -DMatlab_MEX_EXTENSION:STRING=${GHA_Matlab_MEX_EXTENSION} -DIDYNTREE_DISABLE_MATLAB_TESTS:BOOL=ON  \
               -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
 
     - name: Configure [Ubuntu/macOS]
@@ -232,6 +300,7 @@ jobs:
         cd build
         cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install/deps -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=ON \
               -DIDYNTREE_USES_ICUB_MAIN:BOOL=ON -DIDYNTREE_USES_Qt5:BOOL=ON  -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DIDYNTREE_USES_ASSIMP:BOOL=ON \
+              -DIDYNTREE_USES_MATLAB:BOOL=ON -DMatlab_ROOT_DIR=${GHA_Matlab_ROOT_DIR} -DMatlab_MEX_EXTENSION:STRING=${GHA_Matlab_MEX_EXTENSION} -DIDYNTREE_DISABLE_MATLAB_TESTS:BOOL=ON  \
               -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_OCTAVE:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
 
     - name: Enable additional Ubuntu options (Valgrind, Python) [Ubuntu] 
@@ -253,13 +322,14 @@ jobs:
         # See https://github.com/robotology/idyntree/issues/569
         export PATH=$PATH:${GITHUB_WORKSPACE}/install/bin:${VCPKG_INSTALLATION_ROOT}/installed/x64-windows/bin:${VCPKG_INSTALLATION_ROOT}/installed/x64-windows/debug/bin
         cmake --build . --config ${{ matrix.build_type }}
+  
         
     - name: Test
       shell: bash
       run: |
         cd build
         # Visualizer tests excluded as a workaround for https://github.com/robotology/idyntree/issues/808
-        ctest --output-on-failure -C ${{ matrix.build_type }} -E "Visualizer" . 
+        ctest --output-on-failure -C ${{ matrix.build_type }} -E "Visualizer|matlab" . 
         
     - name: Install [Windows]
       if: matrix.os == 'windows-latest'
