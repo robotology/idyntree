@@ -20,16 +20,18 @@
 namespace iDynTree
 {
 
-FixedJoint::FixedJoint(const LinkIndex _link1, const LinkIndex _link2,
-                       const Transform& _link1_X_link2):
-                       link1(_link1), link2(_link2),
-                       link1_X_link2(_link1_X_link2),
-                       link2_X_link1(_link1_X_link2.inverse())
+FixedJoint::FixedJoint()
+: FixedJoint(Transform::Identity()) {}
+
+FixedJoint::FixedJoint(const Transform& _link1_X_link2)
+: FixedJoint(LINK_INVALID_INDEX, LINK_INVALID_INDEX, _link1_X_link2)
 {
 }
 
-FixedJoint::FixedJoint(const Transform& _link1_X_link2):
-                       link1(LINK_INVALID_INDEX), link2(LINK_INVALID_INDEX),
+
+FixedJoint::FixedJoint(const LinkIndex _link1, const LinkIndex _link2,
+                       const Transform& _link1_X_link2):
+                       link1(_link1), link2(_link2),
                        link1_X_link2(_link1_X_link2),
                        link2_X_link1(_link1_X_link2.inverse())
 {
