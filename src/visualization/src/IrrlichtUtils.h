@@ -161,13 +161,17 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
     // mesh has a specific formal (for now collada) that we now specifies internally materials
     bool use_iDynTree_material = true;
 
-    irr::scene::ISceneNode * geomNode = 0;
+    irr::scene::IMeshSceneNode * geomNode = 0;
 
     if (geom->isBox())
     {
         const iDynTree::Box* box = geom->asBox();
 
         irr::scene::IMesh* boxMesh = smgr->getGeometryCreator()->createCubeMesh(irr::core::vector3df(box->getX(),box->getY(),box->getZ()));
+
+        irr::core::matrix4 irr2idyntree;
+        irr2idyntree.buildRotateFromTo(irr::core::vector3df(0.0,1.0,0.0),irr::core::vector3df(0.0,0.0,1.0));
+        smgr->getMeshManipulator()->transform(boxMesh,irr2idyntree);
 
         geomNode = smgr->addMeshSceneNode(boxMesh,linkNode);
 
