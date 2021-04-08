@@ -2,10 +2,12 @@
 
 #include "error_utilities.h"
 
+#include <iDynTree/Model/FixedJoint.h>
 #include <iDynTree/Model/IJoint.h>
 #include <iDynTree/Model/Indices.h>
 #include <iDynTree/Model/Link.h>
 #include <iDynTree/Model/Model.h>
+#include <iDynTree/Model/PrismaticJoint.h>
 #include <iDynTree/Model/RevoluteJoint.h>
 #include <iDynTree/Model/SolidShapes.h>
 #include <iDynTree/Model/Traversal.h>
@@ -240,6 +242,15 @@ void iDynTreeModelBindings(pybind11::module& module) {
       .def("set_axis",
            py::overload_cast<const Axis&, const LinkIndex, const LinkIndex>(
                &RevoluteJoint::setAxis));
+
+  py::class_<PrismaticJoint, IJoint>(module, "PrismaticJoint")
+      .def(py::init())
+      .def("set_axis",
+           py::overload_cast<const Axis&, const LinkIndex, const LinkIndex>(
+               &PrismaticJoint::setAxis));
+
+  py::class_<FixedJoint, IJoint>(module, "FixedJoint")
+      .def(py::init());
 
   py::class_<Traversal> traversal(module, "Traversal");
   traversalClassDefinition(traversal);

@@ -148,6 +148,54 @@ class IDynTreeRevoluteJointTest(unittest.TestCase):
       self.assertEqual(joint_transform.rotation[r, c], rotation[r, c])
 
 
+class IDynTreePrismaticJointTest(unittest.TestCase):
+
+  def test_attached_links(self):
+    joint = iDynTree.PrismaticJoint()
+    joint.set_attached_links(1, 2)
+    self.assertEqual(joint.get_first_attached_link(), 1)
+    self.assertEqual(joint.get_second_attached_link(), 2)
+
+  def test_rest_transform(self):
+    position = iDynTree.Position(1, 2, 3)
+    rotation = iDynTree.Rotation(0, 0, 1,
+                                 1, 0, 0,
+                                 0, 1, 0)
+    transform = iDynTree.Transform(rotation, position)
+
+    joint = iDynTree.PrismaticJoint()
+    joint.set_attached_links(1, 2)
+    joint.set_rest_transform(transform)
+    joint_transform = joint.get_rest_transform(1, 2)
+    self.assertEqual(list(joint_transform.position), list(position))
+    for r, c in itertools.product(range(3), range(3)):
+      self.assertEqual(joint_transform.rotation[r, c], rotation[r, c])
+
+
+class IDynTreeFixedJointTest(unittest.TestCase):
+
+  def test_attached_links(self):
+    joint = iDynTree.FixedJoint()
+    joint.set_attached_links(1, 2)
+    self.assertEqual(joint.get_first_attached_link(), 1)
+    self.assertEqual(joint.get_second_attached_link(), 2)
+
+  def test_rest_transform(self):
+    position = iDynTree.Position(1, 2, 3)
+    rotation = iDynTree.Rotation(0, 0, 1,
+                                 1, 0, 0,
+                                 0, 1, 0)
+    transform = iDynTree.Transform(rotation, position)
+
+    joint = iDynTree.FixedJoint()
+    joint.set_attached_links(1, 2)
+    joint.set_rest_transform(transform)
+    joint_transform = joint.get_rest_transform(1, 2)
+    self.assertEqual(list(joint_transform.position), list(position))
+    for r, c in itertools.product(range(3), range(3)):
+      self.assertEqual(joint_transform.rotation[r, c], rotation[r, c])
+
+
 class IDynTreeTraversalTest(unittest.TestCase):
 
   def test_empty_traversal(self):
