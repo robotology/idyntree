@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Add the possibility to use `MatrixView` and `Span` as input/output objects for `InverseKinematics` class (https://github.com/robotology/idyntree/pull/822).
+- Add the possibility to get frame trasform from the visualizer, and to use frame/link name in place of indices (https://github.com/robotology/idyntree/pull/849).
+
 ### Changed
 - The wheels uploaded to PyPI are now `manylinux_2_24` compliant (https://github.com/robotology/idyntree/pull/844)
 
@@ -23,7 +25,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Deprecated
 - The method `ModelVisualization::getWorldModelTransform()` is deprecated, and will be removed in iDynTree 4.0.
->>>>>>> master
 
 ## [3.0.0] - 2020-02-03
 
