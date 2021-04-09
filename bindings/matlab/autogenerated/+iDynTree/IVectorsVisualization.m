@@ -24,8 +24,14 @@ classdef IVectorsVisualization < SwigRef
     function varargout = setVectorColor(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1861, self, varargin{:});
     end
-    function varargout = setVectorsAspect(self,varargin)
+    function varargout = setVectorsDefaultColor(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1862, self, varargin{:});
+    end
+    function varargout = setVectorsColor(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1863, self, varargin{:});
+    end
+    function varargout = setVectorsAspect(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1864, self, varargin{:});
     end
     function self = IVectorsVisualization(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
