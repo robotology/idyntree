@@ -234,6 +234,46 @@ Transform ModelVisualization::getWorldLinkTransform(const LinkIndex& linkIndex)
     return w_H_link;
 }
 
+Transform ModelVisualization::getWorldFrameTransform(const FrameIndex& frameIndex)
+{
+    if (!pimpl->m_model.isValidFrameIndex(frameIndex))
+    {
+        reportError("ModelVisualization","getWorldFrameTransform", "invalid frame index. returning identity transform");
+        return Transform::Identity();
+    }
+
+    LinkIndex linkIndex = pimpl->m_model.getFrameLink(frameIndex);
+
+    Transform w_H_frame;
+    w_H_frame = getWorldLinkTransform(linkIndex) * pimpl->m_model.getFrameTransform(frameIndex);
+
+    return w_H_frame;
+}
+
+Transform ModelVisualization::getWorldLinkTransform(const std::string& linkName)
+{
+    LinkIndex linkIndex = pimpl->m_model.getLinkIndex(linkName);
+    if (linkIndex == LINK_INVALID_INDEX)
+    {
+        reportError("ModelVisualization","getWorldLinkTransform", "invalid link name. returning identity transform");
+        return Transform::Identity();
+    }
+
+    return getWorldLinkTransform(linkIndex);
+}
+
+Transform ModelVisualization::getWorldFrameTransform(const std::string& frameName)
+{
+    FrameIndex frameIndex = pimpl->m_model.getFrameIndex(frameName);
+    if (frameIndex == LINK_INVALID_INDEX)
+    {
+        reportError("ModelVisualization","getWorldFrameTransform", "invalid frame name. returning identity transform");
+        return Transform::Identity();
+    }
+
+    return getWorldFrameTransform(frameIndex);
+}
+
 
 bool ModelVisualization::setPositions(const Transform& world_H_base, const VectorDynSize& jointPos)
 {
