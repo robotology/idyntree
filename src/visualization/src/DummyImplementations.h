@@ -149,6 +149,8 @@ public:
     virtual Transform getWorldModelTransform() { return iDynTree::Transform::Identity(); }
     virtual Transform getWorldLinkTransform(const LinkIndex &) { return iDynTree::Transform::Identity(); }
     virtual Transform getWorldFrameTransform(const FrameIndex &) { return iDynTree::Transform::Identity(); }
+    virtual Transform getWorldLinkTransform(const std::string &) { return iDynTree::Transform::Identity(); }
+    virtual Transform getWorldFrameTransform(const std::string &) { return iDynTree::Transform::Identity(); }
 };
 
 class DummyTexturesHandler : public ITexturesHandler

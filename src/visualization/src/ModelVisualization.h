@@ -52,6 +52,8 @@ public:
     virtual Transform getWorldModelTransform();
     virtual Transform getWorldLinkTransform(const LinkIndex& linkIndex);
     virtual Transform getWorldFrameTransform(const FrameIndex& frameIndex);
+    virtual Transform getWorldLinkTransform(const std::string& linkName);
+    virtual Transform getWorldFrameTransform(const std::string& frameName);
 };
 
 }
