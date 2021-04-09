@@ -602,6 +602,11 @@ public:
      * Get the transformation of given link with respect to visualizer world \f$ w_H_{link}\f$
      */
     virtual Transform getWorldLinkTransform(const LinkIndex& linkIndex) = 0;
+
+    /**
+     * Get the transformation of given frame with respect to visualizer world \f$ w_H_{frame}\f$
+     */
+    virtual Transform getWorldFrameTransform(const FrameIndex& frameIndex) = 0;
 };
 
 /**

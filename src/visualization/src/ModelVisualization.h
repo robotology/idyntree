@@ -51,6 +51,7 @@ public:
     virtual IJetsVisualization& jets();
     virtual Transform getWorldModelTransform();
     virtual Transform getWorldLinkTransform(const LinkIndex& linkIndex);
+    virtual Transform getWorldFrameTransform(const FrameIndex& frameIndex);
 };
 
 }

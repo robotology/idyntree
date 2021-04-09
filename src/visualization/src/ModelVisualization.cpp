@@ -234,6 +234,22 @@ Transform ModelVisualization::getWorldLinkTransform(const LinkIndex& linkIndex)
     return w_H_link;
 }
 
+Transform ModelVisualization::getWorldFrameTransform(const FrameIndex& frameIndex)
+{
+    if (!pimpl->m_model.isValidFrameIndex(frameIndex))
+    {
+        reportError("ModelVisualization","getWorldFrameTransform", "invalid frame index. returning identity transform");
+        return Transform::Identity();
+    }
+
+    LinkIndex linkIndex = pimpl->m_model.getFrameLink(frameIndex);
+
+    Transform w_H_frame;
+    w_H_frame = getWorldLinkTransform(linkIndex) * pimpl->m_model.getFrameTransform(frameIndex);
+
+    return w_H_frame;
+}
+
 
 bool ModelVisualization::setPositions(const Transform& world_H_base, const VectorDynSize& jointPos)
 {
