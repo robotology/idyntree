@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The wheels uploaded to PyPI are now `manylinux_2_24` compliant (https://github.com/robotology/idyntree/pull/844)
 
 
+## [3.0.2] - 2020-04-11
+
 ### Fixed
 - Fixed compilation of Python bindings on Windows (https://github.com/robotology/idyntree/pull/843).
 
