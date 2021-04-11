@@ -1,0 +1,4 @@
+<map id="iDynTree::DummyJetsVisualization" name="iDynTree::DummyJetsVisualization">
+<area shape="rect" id="node1" title="Dummy jets." alt="" coords="5,80,252,107"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1IJetsVisualization.html" title="Interface to the visualization of jets attached to a model." alt="" coords="29,5,228,32"/>
+</map>

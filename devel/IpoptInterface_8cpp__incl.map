@@ -1,0 +1,43 @@
+<map id="IpoptInterface.cpp" name="IpoptInterface.cpp">
+<area shape="rect" id="node1" title=" " alt="" coords="501,5,641,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,80,99,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="123,80,291,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="565,162,667,189"/>
+<area shape="rect" id="node5" href="$EigenHelpers_8h.html" title=" " alt="" coords="837,80,1051,107"/>
+<area shape="rect" id="node7" href="$VectorDynSize_8h.html" title=" " alt="" coords="365,319,587,345"/>
+<area shape="rect" id="node9" title=" " alt="" coords="909,781,979,808"/>
+<area shape="rect" id="node19" href="$Utils_8h.html" title=" " alt="" coords="1811,707,1970,733"/>
+<area shape="rect" id="node23" href="$MatrixDynSize_8h.html" title=" " alt="" coords="464,393,688,420"/>
+<area shape="rect" id="node36" href="$IpoptInterface_8h.html" title=" " alt="" coords="2091,543,2245,584"/>
+<area shape="rect" id="node41" title=" " alt="" coords="2131,80,2207,107"/>
+<area shape="rect" id="node6" title=" " alt="" coords="1913,781,1983,808"/>
+<area shape="rect" id="node18" href="$VectorFixSize_8h.html" title=" " alt="" coords="1623,550,1839,577"/>
+<area shape="rect" id="node25" href="$MatrixFixSize_8h.html" title=" " alt="" coords="865,550,1082,577"/>
+<area shape="rect" id="node27" href="$SpatialMotionVector_8h.html" title=" " alt="" coords="1322,155,1529,196"/>
+<area shape="rect" id="node34" href="$SpatialForceVector_8h.html" title=" " alt="" coords="1588,155,1785,196"/>
+<area shape="rect" id="node35" href="$Transform_8h.html" title=" " alt="" coords="712,244,907,271"/>
+<area shape="rect" id="node8" href="$Span_8h.html" title=" " alt="" coords="470,707,631,733"/>
+<area shape="rect" id="node17" title=" " alt="" coords="707,632,765,659"/>
+<area shape="rect" id="node10" title=" " alt="" coords="800,781,885,808"/>
+<area shape="rect" id="node11" title=" " alt="" coords="345,781,401,808"/>
+<area shape="rect" id="node12" title=" " alt="" coords="426,781,497,808"/>
+<area shape="rect" id="node13" title=" " alt="" coords="521,781,580,808"/>
+<area shape="rect" id="node14" title=" " alt="" coords="605,781,691,808"/>
+<area shape="rect" id="node15" title=" " alt="" coords="229,781,321,808"/>
+<area shape="rect" id="node16" title=" " alt="" coords="715,781,775,808"/>
+<area shape="rect" id="node21" title=" " alt="" coords="1469,632,1544,659"/>
+<area shape="rect" id="node22" title=" " alt="" coords="1568,632,1635,659"/>
+<area shape="rect" id="node20" title=" " alt="" coords="1781,781,1888,808"/>
+<area shape="rect" id="node24" href="$MatrixView_8h.html" title=" " alt="" coords="460,632,663,659"/>
+<area shape="rect" id="node26" title=" " alt="" coords="1244,632,1324,659"/>
+<area shape="rect" id="node28" href="$GeomVector3_8h.html" title=" " alt="" coords="1433,468,1650,495"/>
+<area shape="rect" id="node29" href="$SpatialVector_8h.html" title=" " alt="" coords="1350,244,1565,271"/>
+<area shape="rect" id="node30" href="$Position_8h.html" title=" " alt="" coords="938,319,1025,345"/>
+<area shape="rect" id="node32" href="$Rotation_8h.html" title=" " alt="" coords="1019,393,1203,420"/>
+<area shape="rect" id="node31" href="$PositionRaw_8h.html" title=" " alt="" coords="1099,468,1307,495"/>
+<area shape="rect" id="node33" href="$RotationRaw_8h.html" title=" " alt="" coords="864,468,1075,495"/>
+<area shape="rect" id="node37" title=" " alt="" coords="2296,781,2373,808"/>
+<area shape="rect" id="node38" href="$Optimizer_8h.html" title=" " alt="" coords="2101,632,2259,659"/>
+<area shape="rect" id="node39" href="$OptimizationProblem_8h.html" title=" " alt="" coords="2063,707,2297,733"/>
+<area shape="rect" id="node40" title=" " alt="" coords="2149,781,2211,808"/>
+</map>

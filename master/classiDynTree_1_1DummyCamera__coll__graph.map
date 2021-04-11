@@ -1,0 +1,4 @@
+<map id="iDynTree::DummyCamera" name="iDynTree::DummyCamera">
+<area shape="rect" id="node1" title="Dummy camera." alt="" coords="5,80,196,107"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1ICamera.html" title="Interface to manipulate the camera parameters." alt="" coords="29,5,172,32"/>
+</map>

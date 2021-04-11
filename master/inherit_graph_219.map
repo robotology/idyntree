@@ -1,0 +1,13 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classiDynTree_1_1XMLElement.html" title="Class representing an XML element." alt="" coords="5,249,175,275"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1ForceTorqueSensorElement.html" title=" " alt="" coords="223,5,432,47"/>
+<area shape="rect" id="node3" href="$classiDynTree_1_1GeometryElement.html" title=" " alt="" coords="224,71,431,98"/>
+<area shape="rect" id="node4" href="$classiDynTree_1_1InertialElement.html" title=" " alt="" coords="234,122,421,149"/>
+<area shape="rect" id="node5" href="$classiDynTree_1_1JointElement.html" title=" " alt="" coords="242,173,413,199"/>
+<area shape="rect" id="node6" href="$classiDynTree_1_1LinkElement.html" title=" " alt="" coords="243,223,411,250"/>
+<area shape="rect" id="node7" href="$classiDynTree_1_1MaterialElement.html" title=" " alt="" coords="230,274,425,301"/>
+<area shape="rect" id="node8" href="$classiDynTree_1_1OriginElement.html" title=" " alt="" coords="237,325,417,351"/>
+<area shape="rect" id="node9" href="$classiDynTree_1_1RobotElement.html" title=" " alt="" coords="238,375,417,402"/>
+<area shape="rect" id="node10" href="$classiDynTree_1_1SensorElement.html" title=" " alt="" coords="235,426,420,453"/>
+<area shape="rect" id="node11" href="$classiDynTree_1_1VisualElement.html" title=" " alt="" coords="237,477,418,503"/>
+</map>

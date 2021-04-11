@@ -1,0 +1,5 @@
+<map id="iDynTree::RevoluteJoint" name="iDynTree::RevoluteJoint">
+<area shape="rect" id="node1" title="Class representing a revolute joint, i.e." alt="" coords="5,155,180,181"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1MovableJointImpl.html" title="Base template for implementation of non&#45;fixed joints." alt="" coords="21,80,165,107"/>
+<area shape="rect" id="node3" href="$classiDynTree_1_1IJoint.html" title="Interface (i.e." alt="" coords="33,5,153,32"/>
+</map>

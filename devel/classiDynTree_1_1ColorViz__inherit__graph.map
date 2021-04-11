@@ -1,0 +1,4 @@
+<map id="iDynTree::ColorViz" name="iDynTree::ColorViz">
+<area shape="rect" id="node1" title="Basic structure to encode color information." alt="" coords="5,5,147,32"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1PixelViz.html" title="Basic structure to encode pixel information." alt="" coords="7,80,145,107"/>
+</map>

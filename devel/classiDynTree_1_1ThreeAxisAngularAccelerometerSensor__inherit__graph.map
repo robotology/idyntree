@@ -1,0 +1,5 @@
+<map id="iDynTree::ThreeAxisAngularAccelerometerSensor" name="iDynTree::ThreeAxisAngularAccelerometerSensor">
+<area shape="rect" id="node1" title="Class representing a three axis angular accelerometer, i.e." alt="" coords="5,155,208,196"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1LinkSensor.html" title="Interface for Sensor that are associated to a Link." alt="" coords="27,80,186,107"/>
+<area shape="rect" id="node3" href="$classiDynTree_1_1Sensor.html" title="Interface for Sensor classes in iDynTree ." alt="" coords="41,5,172,32"/>
+</map>

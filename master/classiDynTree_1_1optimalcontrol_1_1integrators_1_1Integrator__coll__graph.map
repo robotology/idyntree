@@ -1,0 +1,4 @@
+<map id="iDynTree::optimalcontrol::integrators::Integrator" name="iDynTree::optimalcontrol::integrators::Integrator">
+<area shape="rect" id="node1" title="The Integrator base class." alt="" coords="13,109,196,151"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfo.html" title="Class containing infos about the implemented integrator." alt="" coords="5,5,204,47"/>
+</map>

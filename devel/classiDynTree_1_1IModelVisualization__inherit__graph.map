@@ -1,0 +1,5 @@
+<map id="iDynTree::IModelVisualization" name="iDynTree::IModelVisualization">
+<area shape="rect" id="node1" title="Interface to the visualization of a model istance." alt="" coords="160,5,375,32"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1DummyModelVisualization.html" title="Dummy model visualization." alt="" coords="5,80,268,107"/>
+<area shape="rect" id="node3" href="$classiDynTree_1_1ModelVisualization.html" title=" " alt="" coords="293,80,503,107"/>
+</map>

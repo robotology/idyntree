@@ -1,0 +1,4 @@
+<map id="iDynTree::FrameFreeFloatingJacobian" name="iDynTree::FrameFreeFloatingJacobian">
+<area shape="rect" id="node1" title="Jacobian of the 6D frame velocity." alt="" coords="5,80,215,121"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1MatrixDynSize.html" title="Class providing a simple form of matrix with dynamic size." alt="" coords="19,5,201,32"/>
+</map>

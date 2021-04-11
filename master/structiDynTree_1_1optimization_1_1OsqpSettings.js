@@ -1,0 +1,25 @@
+var structiDynTree_1_1optimization_1_1OsqpSettings =
+[
+    [ "rho", "structiDynTree_1_1optimization_1_1OsqpSettings.html#a5d1bfcb87605ddd77d5f8480b54dae77", null ],
+    [ "sigma", "structiDynTree_1_1optimization_1_1OsqpSettings.html#a67aeaa5ab3a363280e4c8427b334fec1", null ],
+    [ "max_iter", "structiDynTree_1_1optimization_1_1OsqpSettings.html#ae0cd693ced905ac444a8b9977fec24c4", null ],
+    [ "eps_abs", "structiDynTree_1_1optimization_1_1OsqpSettings.html#af9ca4167b6c18c09d3368fdad013aa32", null ],
+    [ "eps_rel", "structiDynTree_1_1optimization_1_1OsqpSettings.html#a02f3c106c086e8387fade77e1d6c244d", null ],
+    [ "eps_prim_inf", "structiDynTree_1_1optimization_1_1OsqpSettings.html#a1e8aa6c7bd9359ab8a22ba5de74ea305", null ],
+    [ "eps_dual_inf", "structiDynTree_1_1optimization_1_1OsqpSettings.html#a0aeed2e24308203ffed0937432616504", null ],
+    [ "alpha", "structiDynTree_1_1optimization_1_1OsqpSettings.html#a89bc2fe6024f88233d6930991055336b", null ],
+    [ "linsys_solver", "structiDynTree_1_1optimization_1_1OsqpSettings.html#a249e2b6a840e2a228e95ae0841fbea49", null ],
+    [ "delta", "structiDynTree_1_1optimization_1_1OsqpSettings.html#ae7d688001e1ecfb9787b685d0c6cb723", null ],
+    [ "polish", "structiDynTree_1_1optimization_1_1OsqpSettings.html#a368863b5a7a2e246bf37919a173ab09e", null ],
+    [ "polish_refine_iter", "structiDynTree_1_1optimization_1_1OsqpSettings.html#ade77c574481c51c9247f9d260b515390", null ],
+    [ "verbose", "structiDynTree_1_1optimization_1_1OsqpSettings.html#a5bd4b4c018fedc1bc94c07281657d31f", null ],
+    [ "scaled_termination", "structiDynTree_1_1optimization_1_1OsqpSettings.html#a57c45fd89955d8beae9a287dc0b3111a", null ],
+    [ "check_termination", "structiDynTree_1_1optimization_1_1OsqpSettings.html#a0d4d403fd52cf2e4c1440a3b5c8d0c84", null ],
+    [ "warm_start", "structiDynTree_1_1optimization_1_1OsqpSettings.html#a01eada4232ef8cb60a631dba3ebdb15c", null ],
+    [ "scaling", "structiDynTree_1_1optimization_1_1OsqpSettings.html#a88a10410a9961dfe22e7cbcc44f6dca9", null ],
+    [ "adaptive_rho", "structiDynTree_1_1optimization_1_1OsqpSettings.html#a78956f2d00108ddc3fe78b552719483c", null ],
+    [ "adaptive_rho_interval", "structiDynTree_1_1optimization_1_1OsqpSettings.html#a891e483e688755dbd08db08f7fc24e88", null ],
+    [ "adaptive_rho_tolerance", "structiDynTree_1_1optimization_1_1OsqpSettings.html#a18936fbf53d8683af56d9ab33b3df5d1", null ],
+    [ "adaptive_rho_fraction", "structiDynTree_1_1optimization_1_1OsqpSettings.html#ab632aeefdaf80c829afaad8a0d0efa23", null ],
+    [ "time_limit", "structiDynTree_1_1optimization_1_1OsqpSettings.html#acab437eb597b81c921fe2f3ff9ebb8e6", null ]
+];

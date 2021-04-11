@@ -1,0 +1,4 @@
+<map id="iDynTree::DummyLight" name="iDynTree::DummyLight">
+<area shape="rect" id="node1" title="Dummy light." alt="" coords="5,80,176,107"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1ILight.html" title="Interface to a light visualization." alt="" coords="29,5,152,32"/>
+</map>

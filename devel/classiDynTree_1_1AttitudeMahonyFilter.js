@@ -1,0 +1,26 @@
+var classiDynTree_1_1AttitudeMahonyFilter =
+[
+    [ "AttitudeMahonyFilter", "classiDynTree_1_1AttitudeMahonyFilter.html#ae2a22d925e2bfac7f4c3f6a91a3a1871", null ],
+    [ "useMagnetoMeterMeasurements", "classiDynTree_1_1AttitudeMahonyFilter.html#af4722cd241bbe3990de91bd3a8f29138", null ],
+    [ "setConfidenceForMagnetometerMeasurements", "classiDynTree_1_1AttitudeMahonyFilter.html#ae0d9d819b5a9e7d2d4dc9ae95168c0d2", null ],
+    [ "setGainkp", "classiDynTree_1_1AttitudeMahonyFilter.html#a6ca15476d3c86749bce4a61230e5959d", null ],
+    [ "setGainki", "classiDynTree_1_1AttitudeMahonyFilter.html#a17b6e6f323a3fc741351a68e3225a662", null ],
+    [ "setTimeStepInSeconds", "classiDynTree_1_1AttitudeMahonyFilter.html#aae10fdac1916d45d912763443e246500", null ],
+    [ "setGravityDirection", "classiDynTree_1_1AttitudeMahonyFilter.html#a2d04a24c139621ec0d036a18c721b02c", null ],
+    [ "setParameters", "classiDynTree_1_1AttitudeMahonyFilter.html#aca94c3f5d2341a11d80c03914c9372a0", null ],
+    [ "getParameters", "classiDynTree_1_1AttitudeMahonyFilter.html#a1b7e9dc1d9d573bc739279c10487337a", null ],
+    [ "updateFilterWithMeasurements", "classiDynTree_1_1AttitudeMahonyFilter.html#a761c1ce98405a7bf629e1e523e3649f5", null ],
+    [ "updateFilterWithMeasurements", "classiDynTree_1_1AttitudeMahonyFilter.html#aa87977f5cb6afd23f73aa526dc993ade", null ],
+    [ "propagateStates", "classiDynTree_1_1AttitudeMahonyFilter.html#af743b419ed9b87c50cc3d3bd87c09ce0", null ],
+    [ "getOrientationEstimateAsRotationMatrix", "classiDynTree_1_1AttitudeMahonyFilter.html#a17791aee32f963e4b1117625fb19a509", null ],
+    [ "getOrientationEstimateAsQuaternion", "classiDynTree_1_1AttitudeMahonyFilter.html#a12b66b4f277bb7942e82eb970550878a", null ],
+    [ "getOrientationEstimateAsRPY", "classiDynTree_1_1AttitudeMahonyFilter.html#acae8174e86843da647341949ca29e17a", null ],
+    [ "getInternalStateSize", "classiDynTree_1_1AttitudeMahonyFilter.html#a14a59acedee3a36d1cb1a57c863f6e21", null ],
+    [ "getInternalState", "classiDynTree_1_1AttitudeMahonyFilter.html#ae5f871007add5e65389039743a88ab71", null ],
+    [ "getDefaultInternalInitialState", "classiDynTree_1_1AttitudeMahonyFilter.html#af275b53472f9fa6f5f146f1f5a302bdc", null ],
+    [ "setInternalState", "classiDynTree_1_1AttitudeMahonyFilter.html#a056cbfe2f712924c67609afcda054271", null ],
+    [ "setInternalStateInitialOrientation", "classiDynTree_1_1AttitudeMahonyFilter.html#a9f0c070353e6da5b2ad7b478de1eb7dd", null ],
+    [ "m_params_mahony", "classiDynTree_1_1AttitudeMahonyFilter.html#ac0fc46ec94c50c7d38a193a204acf139", null ],
+    [ "m_state_mahony", "classiDynTree_1_1AttitudeMahonyFilter.html#ab40c1b03d4acc60dcdf9dc9dcdb6c9d4", null ],
+    [ "m_initial_state_mahony", "classiDynTree_1_1AttitudeMahonyFilter.html#a07413b093183b85df04fdbcfa241cec3", null ]
+];
