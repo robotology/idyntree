@@ -9,14 +9,27 @@ option(IDYNTREE_USES_LUA "Do you want to create the Lua bindings" FALSE)
 option(IDYNTREE_USES_MATLAB "Do you want to create the MATLAB bindings" FALSE)
 option(IDYNTREE_USES_OCTAVE "Do you want to create the OCTAVE bindings" FALSE)
 option(IDYNTREE_GENERATE_MATLAB "Enable if you have the experimental version of SWIG necessary for generating the Matlab wrapper" FALSE)
+option(IDYNTREE_DETECT_ACTIVE_PYTHON_SITEPACKAGES "Do you want iDynTree to detect and install in the active site-package directory? (it could be a system dir)" FALSE)
 
 find_package(SWIG)
 
-# Setup installation directory for Python bindings.
-if (IDYNTREE_USES_PYTHON_PYBIND11 OR IDYNTREE_USES_PYTHON)
-    if(IDYNTREE_PACKAGE_FOR_PYPI)
-        set(PYTHON_INSTDIR ${CMAKE_INSTALL_PREFIX})
+if(IDYNTREE_USES_PYTHON OR IDYNTREE_USES_PYTHON_PYBIND11)
+    if(${CMAKE_VERSION} VERSION_LESS "3.18.0")
+        set(IDYNTREE_SEARCHED_Python_Development_Component "Development")
     else()
+        set(IDYNTREE_SEARCHED_Python_Development_Component "Development.Module")
+    endif()
+    find_package(Python3 COMPONENTS Interpreter ${IDYNTREE_SEARCHED_Python_Development_Component} NumPy REQUIRED)
+
+    if (IDYNTREE_DETECT_ACTIVE_PYTHON_SITEPACKAGES)
+       set(PYTHON_INSTDIR ${Python3_SITELIB}/idyntree)
+    elseif(IDYNTREE_PACKAGE_FOR_PYPI)
+       set(PYTHON_INSTDIR ${CMAKE_INSTALL_PREFIX})
+    else()
+        execute_process(COMMAND ${Python3_EXECUTABLE}
+                        -c "from distutils import sysconfig; print(sysconfig.get_python_lib(1,0,prefix=''))"
+                        OUTPUT_VARIABLE _PYTHON_INSTDIR)
+        string(STRIP ${_PYTHON_INSTDIR} IDYNTREE_PYTHON_INSTALL_DIR)
         set(PYTHON_INSTDIR ${IDYNTREE_PYTHON_INSTALL_DIR}/idyntree)
     endif()
 endif()
