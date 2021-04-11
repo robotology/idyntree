@@ -1,9 +1,3 @@
-if(${CMAKE_VERSION} VERSION_LESS "3.18.0")
-    find_package(Python3 COMPONENTS Interpreter Development NumPy REQUIRED)
-else()
-    find_package(Python3 COMPONENTS Interpreter Development.Module NumPy REQUIRED)
-endif()
-
 pybind11_add_module(pybind11_idyntree SYSTEM idyntree.cpp
                                     error_utilities.h error_utilities.cpp
                                     idyntree_core.h idyntree_core.cpp
