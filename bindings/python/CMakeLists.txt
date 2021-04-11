@@ -31,13 +31,15 @@ set_property(
     TARGET ${target_name}
     PROPERTY SWIG_DEPENDS python.i numpy.i)
 
-set_property(
-    TARGET ${target_name}
-    PROPERTY SWIG_COMPILE_OPTIONS -Wextra -threads)
+if(NOT MSVC)
+    set_property(
+        TARGET ${target_name}
+        PROPERTY SWIG_COMPILE_OPTIONS -Wextra -threads)
 
-set_property(
-    TARGET ${target_name}
-    PROPERTY SWIG_GENERATED_COMPILE_OPTIONS -Wextra)
+    set_property(
+        TARGET ${target_name}
+        PROPERTY SWIG_GENERATED_COMPILE_OPTIONS -Wextra)
+endif()
 
 install(
     FILES ${CMAKE_CURRENT_BINARY_DIR}/idyntree/swig.py

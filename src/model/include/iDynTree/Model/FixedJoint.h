@@ -35,6 +35,15 @@ namespace iDynTree
         Transform link2_X_link1;
 
     public:
+
+       /**
+        * Default constructor.
+        * The joint is initialized with an Identity rest transform.
+        * You can call setRestTransform to set the rest transform at a
+        * second stage.
+        */
+        explicit FixedJoint();
+
         /**
          * Constructor
          */
