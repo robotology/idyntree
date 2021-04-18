@@ -22,6 +22,7 @@
 
 #include <iDynTree/KinDynComputations.h>
 #include <iDynTree/Model/Model.h>
+#include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/FreeFloatingState.h>
 
@@ -55,16 +56,13 @@ void setRandomState(iDynTree::KinDynComputations & dynComp)
 
     iDynTree::VectorDynSize qj(dofs), dqj(dofs), ddqj(dofs);
 
-    worldTbase = //iDynTree::Transform::Identity();
-    iDynTree::Transform(Rotation::RPY(random_double(),random_double(),random_double()),
+    worldTbase = iDynTree::Transform(Rotation::RPY(random_double(),random_double(),random_double()),
             Position(random_double(),random_double(),random_double()));
 
     for(int i=0; i < 3; i++)
     {
         gravity(i) = random_double();
     }
-
-    gravity(2) = 0.0;
 
     for(int i=0; i < 6; i++)
     {
@@ -183,6 +181,30 @@ inline Eigen::VectorXd toEigen(const FreeFloatingGeneralizedTorques & genForces)
     return concat;
 }
 
+inline iDynTree::SpatialAcc Vector6ToSpatialAcc(const iDynTree::Vector6& vec6)
+{
+    SpatialAcc ret;
+    ret(0) = vec6(0);
+    ret(1) = vec6(1);
+    ret(2) = vec6(2);
+    ret(3) = vec6(3);
+    ret(4) = vec6(4);
+    ret(5) = vec6(5);
+    return ret;
+}
+
+inline iDynTree::SpatialAcc Vector3ToSpatialAcc(const iDynTree::Vector3& vec6)
+{
+    SpatialAcc ret;
+    ret(0) = vec6(0);
+    ret(1) = vec6(1);
+    ret(2) = vec6(2);
+    ret(3) = 0.0;
+    ret(4) = 0.0;
+    ret(5) = 0.0;
+    return ret;
+}
+
 // Test different ways of computing inverse dynamics
 void testInverseDynamics(KinDynComputations & dynComp)
 {
@@ -196,20 +218,18 @@ void testInverseDynamics(KinDynComputations & dynComp)
         netExternalWrenches(link) = getRandomWrench();
     }
 
-    // Go component for component, for simplifyng debugging
-    for(int i=0; i < 6+dofs; i++)
+    for(int i=0; i < 6; i++)
     {
-        baseAcc.zero();
-        shapeAccs.zero();
-        if( i < 6 )
-        {
-            baseAcc(i) = 1.0;
-        }
-        else
-        {
-            shapeAccs(i-6) = 1.0;
-        }
+        baseAcc(i) = real_random_double();
+    }
 
+    for(size_t dof=0; dof < dofs; dof++)
+
+    {
+        shapeAccs(dof) = random_double();
+    }
+
+    {
         FreeFloatingGeneralizedTorques invDynForces(dynComp.model());
         FreeFloatingGeneralizedTorques massMatrixInvDynForces(dynComp.model());
         FreeFloatingGeneralizedTorques regressorInvDynForces(dynComp.model());
@@ -245,8 +265,6 @@ void testInverseDynamics(KinDynComputations & dynComp)
         ok = dynComp.inverseDynamicsInertialParametersRegressor(baseAcc, shapeAccs, regressor);
         ASSERT_IS_TRUE(ok);
 
-
-
         VectorDynSize inertialParams(10*dynComp.model().getNrOfLinks());
         ok = dynComp.model().getInertialParameters(inertialParams);
         ASSERT_IS_TRUE(ok);
@@ -260,6 +278,122 @@ void testInverseDynamics(KinDynComputations & dynComp)
         ASSERT_EQUAL_SPATIAL_FORCE(regressorInvDynForces.baseWrench(),invDynForces.baseWrench());
         ASSERT_EQUAL_VECTOR(regressorInvDynForces.jointTorques(),invDynForces.jointTorques());
 
+        // Run inverse dynamics with regressor matrix with internal joint force/torque
+        iDynTree::FreeFloatingGeneralizedTorques invDynForcesWithInternal(dynComp.model());
+        iDynTree::LinkInternalWrenches linkInternalWrenches(dynComp.model());
+
+        ok = dynComp.inverseDynamicsWithInternalJointForceTorques(baseAcc,shapeAccs,netExternalWrenches,invDynForcesWithInternal,linkInternalWrenches);
+        ASSERT_IS_TRUE(ok);
+
+        // To validate linkInternalWrenches, we use those forces to verify that Newton-Euler equations holds true for each link
+        // In particular, we build the three terms of Equation 4.17 in https://traversaro.github.io/traversaro-phd-thesis/traversaro-phd-thesis.pdf:
+        //
+        // \f$ {}_C \phi_L = {}_C \mathrm{f}^{x}_L + \sum_{D  \in \aleph{L}} {}_C \mathrm{f}_{D,L} \f$
+        //
+        // inertial "force/torque": \f$ {}_C \phi_L =  \f$ : the term that depend on inertial parameters, including the gravitational force.
+        // external force/torque: \f$ {}_C \mathrm{f}^{x}_L \f$ : the net external force/torque that the external environment excerts on the link L.
+        // internal force/torque: \f$ \sum_{D  \in \aleph{L}} {}_C \mathrm{f}_{D,L} \f$ : the net (i.e. sum of all) internal force/torque
+        //                                           that the other neighbor links (contained in the set $\aleph{L}$) excert on link L via the joints.
+        // The main difference is that in Equation 4.17 the quantities are computed in the frame L of the link, while in this test for consistency
+        // with the quantities contained in linkInternalWrenches and the rest of results of KinDynComputations, we will use a different frame depending
+        // on the getFrameVelocityRepresentation used:
+        //
+        // |`FrameVelocityRepresentation`     |       C      |
+        // |:--------------------------------:|:------------:|
+        // | `MIXED_REPRESENTATION` (default) | \f$ L[A] \f$ |
+        // | `BODY_FIXED_REPRESENTATION`      | \f$   L  \f$ |
+        // | `INERTIAL_FIXED_REPRESENTATION`  | \f$   A \f$  |
+
+        // The inertial term is a complicated to compute in mixed representation, so for now we
+        // test only BODY_FIXED_REPRESENTATION or INERTIAL_FIXED_REPRESENTATION
+        if (dynComp.getFrameVelocityRepresentation() == MIXED_REPRESENTATION) {
+            return;
+        }
+
+        iDynTree::LinkWrenches inertialWrenches(dynComp.model());
+        iDynTree::LinkWrenches externalWrenches(dynComp.model());
+        iDynTree::LinkWrenches internalWrenches(dynComp.model());
+
+        iDynTree::VectorDynSize dummyJointPos, dummyJointVel;
+        iDynTree::Vector3 gravityInAbsoluteFrame;
+        dummyJointPos.resize(dynComp.model().getNrOfPosCoords());
+        dummyJointVel.resize(dynComp.model().getNrOfDOFs());
+        dynComp.getRobotState(dummyJointPos, dummyJointVel, gravityInAbsoluteFrame);
+
+        LinkIndex baseLnkIdx = dynComp.getRobotModel().getLinkIndex(dynComp.getFloatingBase());
+
+        for(LinkIndex lnkIdx = 0; lnkIdx < dynComp.getNrOfLinks(); lnkIdx++) {
+            // Compute inertialWrenches
+            // Inertia is always expressed in L, let's convert it in A if we are in INERTIAL_FIXED_REPRESENTATION
+            iDynTree::SpatialInertia rawInertia = dynComp.getRobotModel().getLink(lnkIdx)->getInertia();
+            iDynTree::SpatialInertia I;
+            if (dynComp.getFrameVelocityRepresentation() == INERTIAL_FIXED_REPRESENTATION) {
+                I = dynComp.getWorldTransform(lnkIdx)*rawInertia;
+            } else {
+                // BODY_FIXED_REPRESENTATION
+                I = rawInertia;
+            }
+
+            // Not really efficient, but ok as we are in a test
+            iDynTree::SpatialAcc     a = Vector6ToSpatialAcc(dynComp.getFrameAcc(lnkIdx, baseAcc,shapeAccs));
+            iDynTree::Twist          v = dynComp.getFrameVel(lnkIdx);
+            // Add "gravitational" force
+            iDynTree::Wrench gravitationalWrench;
+            if (dynComp.getFrameVelocityRepresentation() == INERTIAL_FIXED_REPRESENTATION) {
+                gravitationalWrench = (I*Vector3ToSpatialAcc(gravityInAbsoluteFrame));
+            } else {
+                // BODY_FIXED_REPRESENTATION
+                gravitationalWrench = (I*(dynComp.getWorldTransform(lnkIdx).inverse()*Vector3ToSpatialAcc(gravityInAbsoluteFrame)));
+            }
+            inertialWrenches(lnkIdx) = I*a + v*(I*v) - gravitationalWrench;
+
+
+
+            inertialWrenches(lnkIdx) = inertialWrenches(lnkIdx) ;
+
+            // Compute external wrenches (it was already an input of inverseDynamics)
+            externalWrenches(lnkIdx) = netExternalWrenches(lnkIdx);
+
+            // Compute internal wrenches
+            // We start from the wrench applied by the parent link on the link lnkIdx
+            // {}_{C} \mathrm{f}_{\lambda(L), L}
+            internalWrenches(lnkIdx) = linkInternalWrenches(lnkIdx);
+
+            // Then we add the link that the link applies on its children
+            // rotating them appropriately and inverting their direction
+            const iDynTree::Model& model = dynComp.getRobotModel();
+            iDynTree::Traversal traversal;
+            model.computeFullTreeTraversal(traversal, model.getLinkIndex(dynComp.getFloatingBase()));
+            const Link * parentLink	= traversal.getParentLinkFromLinkIndex(lnkIdx);
+            for(unsigned int neigh_i=0; neigh_i < model.getNrOfNeighbors(lnkIdx); neigh_i++) {
+                LinkIndex neighborIndex = model.getNeighbor(lnkIdx,neigh_i).neighborLink;
+                // The child links are the neighbor links that are not parent
+                if (!parentLink || neighborIndex != parentLink->getIndex()) {
+                    LinkIndex childIndex = neighborIndex;
+                    Transform link_X_child;
+                    if (dynComp.getFrameVelocityRepresentation() == INERTIAL_FIXED_REPRESENTATION) {
+                        // In inertial fixed representation, all joint internal wrenches are expressed in A
+                        link_X_child = iDynTree::Transform::Identity();
+                    } else {
+                        // BODY_FIXED_REPRESENTATION
+                        link_X_child = dynComp.getRelativeTransform(lnkIdx,childIndex);
+                    }
+                    iDynTree::Wrench wrenchAppliedByChildOnLinkInLinkFrame = -(link_X_child*linkInternalWrenches(childIndex));
+                    internalWrenches(lnkIdx) = internalWrenches(lnkIdx) + wrenchAppliedByChildOnLinkInLinkFrame;
+                }
+            }
+
+            // If the link is the base link, we need to add to the external wrenches the baseWrench of the generalized torques
+            // This happens because the random-generated external forces and acceleration may not be "consistent" according to
+            // definition 4.1 of https://traversaro.github.io/traversaro-phd-thesis/traversaro-phd-thesis.pdf
+            if (baseLnkIdx == lnkIdx) {
+                externalWrenches(lnkIdx) = externalWrenches(lnkIdx) + invDynForcesWithInternal.baseWrench();
+            }
+
+            // Validate Netwon-Euler Equations
+            // inertial = external + internal
+            ASSERT_EQUAL_SPATIAL_FORCE(inertialWrenches(lnkIdx), externalWrenches(lnkIdx) + internalWrenches(lnkIdx));
+        }
     }
 }
 
@@ -393,6 +527,13 @@ void testAbsoluteJacobiansAndFrameBiasAcc(KinDynComputations & dynComp)
     ASSERT_EQUAL_VECTOR(frameAcc, frameAccJac);
 }
 
+void testInverseDynamicsWithInternalJointForceTorques(KinDynComputations & dynComp)
+{
+    // Comute inverseDynamicsWithInternalJointForceTorques
+    iDynTree::LinkInternalWrenches linkInternalWrenches(dynComp.model());
+
+}
+
 void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresentation frameVelRepr)
 {
 	iDynTree::KinDynComputations dynComp;
@@ -446,7 +587,7 @@ void testRelativeJacobianSparsity(KinDynComputations & dynComp)
             refFrame = real_random_int(0, dynComp.getNrOfFrames());
         } while (refFrame == frame && frame >= 0);
     }
-    
+
     // get sparsity pattern
     MatrixDynSize jacobianPattern(6, dynComp.getNrOfDegreesOfFreedom());
     bool ok = dynComp.getRelativeJacobianSparsityPattern(refFrame, frame, jacobianPattern);

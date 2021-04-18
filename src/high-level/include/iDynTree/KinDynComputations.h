@@ -1179,6 +1179,42 @@ public:
                                FreeFloatingGeneralizedTorques & baseForceAndJointTorques);
 
     /**
+     * This method is similar to inverseDynamics, but provides as an additional output the internal 6D force/torques (aka wrenches)
+     * excerted by the two links connected to each joint, in the linkInternalWrenches argument.
+     *
+     * The `linkInternalWrenches` is a container of \f$n_{L}\f$ (number of links) 6D Force/Torques, one associated to each link.
+     * In particular, if the link \f$L\f$ is the link with index \f$L\f$ the element linkInternalWrenches(i) contains, depending on the
+     * choice of `FrameVelocityRepresentation`:
+     *
+     * |`FrameVelocityRepresentation` |  `linkInternalWrenches(i)` |
+     * |:----------------------------:|:--------------------------:|
+     * | `MIXED_REPRESENTATION` (default) | \f$ {}_{L[A]} \mathrm{f}_{\lambda(L), L} \f$ |
+     * | `BODY_FIXED_REPRESENTATION` | f$ {}_{L} \mathrm{f}_{\lambda(L), L} \f$ |
+     * | `INERTIAL_FIXED_REPRESENTATION` | \f$ {}_{A} \mathrm{f}_{\lambda(L), L} \f$ |
+     *
+     * Where if $C$ is a given frame, \f$ {}_{C} \mathrm{f}_{\lambda(L), L} \f$ is the 6D force/torque that the
+     * parent link \f$\lambda(L)\f$ excerts on its child \f$L\f$.
+     *
+     * \warning Note that this definition strictly depends on the floating base specified in the KinDynComputations instances,
+     *          as given a link \f$L\f$, its parent \lambda(L) depends on the choosen base link.
+     */
+    bool inverseDynamicsWithInternalJointForceTorques(const Vector6& baseAcc,
+                                                      const VectorDynSize& s_ddot,
+                                                      const LinkNetExternalWrenches & linkExtForces,
+                                                            FreeFloatingGeneralizedTorques & baseForceAndJointTorques,
+                                                            LinkInternalWrenches& linkInternalWrenches
+                                                            );
+    /**
+     * Variant of inverseDynamicsWithInternalJointForceTorques that takes iDynTree::Span objects that point to already allocated memory as inputs.
+     * See inverseDynamicsWithInternalJointForceTorques for the description of the input and output parameters.
+     */
+    bool inverseDynamicsWithInternalJointForceTorques(iDynTree::Span<const double> baseAcc,
+                                                      iDynTree::Span<const double> s_ddot,
+                                                      const LinkNetExternalWrenches & linkExtForces,
+                                                            FreeFloatingGeneralizedTorques & baseForceAndJointTorques,
+                                                            LinkInternalWrenches& linkInternalWrenches);
+
+    /**
      * @brief Compute the getNrOfDOFS()+6 vector of generalized bias (gravity+coriolis) forces.
      *
      * This method computes \f$C(q, \nu) \nu + G(q) \in \mathbb{R}^{6+n_{DOF}}\f$.
