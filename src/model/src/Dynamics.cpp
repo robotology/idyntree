@@ -128,6 +128,10 @@ bool RNEADynamicPhase(const Model& model, const Traversal& traversal,
             // are coherent, should be zero. This because any external wrench on the base should
             // be present also in the fExt vector .
             baseWrenchJntTorques.baseWrench() = f(visitedLinkIndex);
+
+            // As the the base link has no parent link and the residual force/torque is reported as the base wrench in
+            // the generalized torques, set the related internal joint force/torque to zero
+            f(visitedLinkIndex) = iDynTree::Wrench::Zero();
         }
         else
         {

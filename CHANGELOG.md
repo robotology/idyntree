@@ -11,9 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add the possibility to use `MatrixView` and `Span` as input/output objects for `InverseKinematics` class (https://github.com/robotology/idyntree/pull/822).
 - Add the possibility to get frame trasform from the visualizer, and to use frame/link name in place of indices (https://github.com/robotology/idyntree/pull/849).
 - Add `IDYNTREE_DETECT_ACTIVE_PYTHON_SITEPACKAGES` CMake option (default value: OFF) to detect and install in the active site-package directory the Python bindings (https://github.com/robotology/idyntree/pull/852).
+- Add inverseDynamicsWithInternalJointForceTorques method to KinDynComputations, this method permits to compute the inverse dynamics, but providing as an output the internal joint 6D force/torque for each joint (https://github.com/robotology/idyntree/pull/857).
 
 ### Changed
 - The wheels uploaded to PyPI are now `manylinux_2_24` compliant (https://github.com/robotology/idyntree/pull/844)
+
+### Fixed 
+- Dynamics: In RNEA Dynamic Loop, return zero for wrench corresponding to non-existing parent joint of base link (https://github.com/robotology/idyntree/pull/857).
 
 
 ## [3.0.2] - 2020-04-11

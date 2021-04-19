@@ -167,17 +167,20 @@ classdef KinDynComputations < SwigRef
     function varargout = inverseDynamics(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1762, self, varargin{:});
     end
-    function varargout = generalizedBiasForces(self,varargin)
+    function varargout = inverseDynamicsWithInternalJointForceTorques(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1763, self, varargin{:});
     end
-    function varargout = generalizedGravityForces(self,varargin)
+    function varargout = generalizedBiasForces(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1764, self, varargin{:});
     end
-    function varargout = generalizedExternalForces(self,varargin)
+    function varargout = generalizedGravityForces(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1765, self, varargin{:});
     end
-    function varargout = inverseDynamicsInertialParametersRegressor(self,varargin)
+    function varargout = generalizedExternalForces(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1766, self, varargin{:});
+    end
+    function varargout = inverseDynamicsInertialParametersRegressor(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1767, self, varargin{:});
     end
   end
   methods(Static)
