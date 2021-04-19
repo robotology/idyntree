@@ -1192,8 +1192,8 @@ public:
      * | `BODY_FIXED_REPRESENTATION` | f$ {}_{L} \mathrm{f}_{\lambda(L), L} \f$ |
      * | `INERTIAL_FIXED_REPRESENTATION` | \f$ {}_{A} \mathrm{f}_{\lambda(L), L} \f$ |
      *
-     * Where if $C$ is a given frame, \f$ {}_{C} \mathrm{f}_{\lambda(L), L} \f$ is the 6D force/torque that the
-     * parent link \f$\lambda(L)\f$ excerts on its child \f$L\f$.
+     * Where if \f$C\f$ is a given frame, \f$ {}_{C} \mathrm{f}_{\lambda(L), L} \f$ is the 6D force/torque that the
+     * parent link \f$\lambda(L)\f$ excerts on its child \f$L\f$ expressed in frame \f$C\f$.
      *
      * \warning Note that this definition strictly depends on the floating base specified in the KinDynComputations instances,
      *          as given a link \f$L\f$, its parent \lambda(L) depends on the choosen base link.
