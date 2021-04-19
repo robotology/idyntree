@@ -347,10 +347,6 @@ void testInverseDynamics(KinDynComputations & dynComp)
             }
             inertialWrenches(lnkIdx) = I*a + v*(I*v) - gravitationalWrench;
 
-
-
-            inertialWrenches(lnkIdx) = inertialWrenches(lnkIdx) ;
-
             // Compute external wrenches (it was already an input of inverseDynamics)
             externalWrenches(lnkIdx) = netExternalWrenches(lnkIdx);
 
