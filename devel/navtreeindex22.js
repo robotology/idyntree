@@ -1,10 +1,5 @@
 var NAVTREEINDEX22 =
 {
-"classiDynTree_1_1optimization_1_1IpoptInterface.html#a6836c50c97f711451f5c0f011a2efddb":[3,7,31,20],
-"classiDynTree_1_1optimization_1_1IpoptInterface.html#a6aa9534d0b4d0ff842961a4ebe5e6b90":[3,7,31,8],
-"classiDynTree_1_1optimization_1_1IpoptInterface.html#a6b4243557c1c55f140ca1cb7056019b0":[3,7,31,19],
-"classiDynTree_1_1optimization_1_1IpoptInterface.html#a8fb216655106afd95163924b82fc842b":[3,7,31,12],
-"classiDynTree_1_1optimization_1_1IpoptInterface.html#a91f4b97eeae1f285d6c15cff00ab5b47":[3,7,31,4],
 "classiDynTree_1_1optimization_1_1IpoptInterface.html#aa8d717a8662c0bbc8c7d4afa92121f31":[3,7,31,18],
 "classiDynTree_1_1optimization_1_1IpoptInterface.html#ab88ba9440f4f11c057b0514bc7d539ff":[3,7,31,7],
 "classiDynTree_1_1optimization_1_1IpoptInterface.html#ac5141d4d0cc1750b5530b5b3b87a5c3b":[3,7,31,2],
@@ -249,5 +244,10 @@ var NAVTREEINDEX22 =
 "classinternal_1_1kinematics_1_1InverseKinematicsData.html#a4295e14928ac5b8c84ec92b56bfbdf51":[5,0,2,0,0,50],
 "classinternal_1_1kinematics_1_1InverseKinematicsData.html#a4c1131f2ada255f618fe73539c883625":[5,0,2,0,0,40],
 "classinternal_1_1kinematics_1_1InverseKinematicsData.html#a4e71b9e0ec1b1dc245fb8cc57ef4d9e6":[5,0,2,0,0,24],
-"classinternal_1_1kinematics_1_1InverseKinematicsData.html#a534f2742aad51078cf6e2b73bf6bc870":[5,0,2,0,0,53]
+"classinternal_1_1kinematics_1_1InverseKinematicsData.html#a534f2742aad51078cf6e2b73bf6bc870":[5,0,2,0,0,53],
+"classinternal_1_1kinematics_1_1InverseKinematicsData.html#a551bf67bcc74fea5ec409ab90466fd42":[5,0,2,0,0,47],
+"classinternal_1_1kinematics_1_1InverseKinematicsData.html#a558eb1949d06bae51c90b897f50ab0c6":[5,0,2,0,0,68],
+"classinternal_1_1kinematics_1_1InverseKinematicsData.html#a55ede29a25cf408ec8f466547277c0f9":[5,0,2,0,0,36],
+"classinternal_1_1kinematics_1_1InverseKinematicsData.html#a58ce0860edb833e14febda610033b18b":[5,0,2,0,0,33],
+"classinternal_1_1kinematics_1_1InverseKinematicsData.html#a60936bb71ca4e3ea53ca44e96fcceaeb":[5,0,2,0,0,71]
 };

@@ -101,10 +101,5 @@ var classiDynTree_1_1KinDynComputations =
     [ "getFreeFloatingMassMatrix", "classiDynTree_1_1KinDynComputations.html#aade6b7d911481ea0e3763587247cd896", null ],
     [ "inverseDynamics", "classiDynTree_1_1KinDynComputations.html#a60870f0f43c035fc63527ad42394f963", null ],
     [ "inverseDynamics", "classiDynTree_1_1KinDynComputations.html#abd0cffbfc42e25cee59bcb7d9f68138c", null ],
-    [ "generalizedBiasForces", "classiDynTree_1_1KinDynComputations.html#a36e267abacd5773178bae3c2b6c26faa", null ],
-    [ "generalizedBiasForces", "classiDynTree_1_1KinDynComputations.html#aa9de9b73d42371a0c8d9002d494ad808", null ],
-    [ "generalizedGravityForces", "classiDynTree_1_1KinDynComputations.html#a9033e15503c5befbd0d5107038ac37f9", null ],
-    [ "generalizedGravityForces", "classiDynTree_1_1KinDynComputations.html#ac7330ad350c6ede3ab55e906525c2328", null ],
-    [ "generalizedExternalForces", "classiDynTree_1_1KinDynComputations.html#a5a30a1e975f9510ef1b8fa605d0c6c03", null ],
     [ "inverseDynamicsInertialParametersRegressor", "classiDynTree_1_1KinDynComputations.html#a2945d5222c617680fc262ae01dca0f23", null ]
 ];

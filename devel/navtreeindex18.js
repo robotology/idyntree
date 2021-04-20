@@ -1,10 +1,5 @@
 var NAVTREEINDEX18 =
 {
-"classiDynTree_1_1Wrench.html#af66e21abd0dd2721b0ca8db613355648":[3,0,22,6],
-"classiDynTree_1_1Wrench.html#afcf112b3ddd4e01fc0389dd2319eb383":[3,0,22,29],
-"classiDynTree_1_1XMLAttribute.html":[5,0,1,188],
-"classiDynTree_1_1XMLAttribute.html#a10d9efd1d5dc3507dc9b1143748e57dc":[5,0,1,188,4],
-"classiDynTree_1_1XMLAttribute.html#a255e025528fde4f5e1f7e11b2f13dfdb":[5,0,1,188,0],
 "classiDynTree_1_1XMLAttribute.html#a447232923ee05fad897ce5d6e3430e6d":[5,0,1,188,7],
 "classiDynTree_1_1XMLAttribute.html#a4da70f85ee7d440b99fcc75bf6d79257":[5,0,1,188,5],
 "classiDynTree_1_1XMLAttribute.html#a82c2a869d99feea7dab9fb0abc49542e":[5,0,1,188,3],
@@ -249,5 +244,10 @@ var NAVTREEINDEX18 =
 "classiDynTree_1_1optimalcontrol_1_1CostAttributes.html#ab0be5d393e287e2bd9de8f5191fc57c0":[5,0,1,2,7,6],
 "classiDynTree_1_1optimalcontrol_1_1CostAttributes.html#ab71e518a6e80e85c7744e6e7d963fb82":[5,0,1,2,7,0],
 "classiDynTree_1_1optimalcontrol_1_1CostAttributes.html#ac08ab87051147aed6eb558b7d8b6feb8":[5,0,1,2,7,7],
-"classiDynTree_1_1optimalcontrol_1_1CostAttributes.html#ac1f6c56655999cf94bdb2bb1950cf729":[5,0,1,2,7,2]
+"classiDynTree_1_1optimalcontrol_1_1CostAttributes.html#ac1f6c56655999cf94bdb2bb1950cf729":[5,0,1,2,7,2],
+"classiDynTree_1_1optimalcontrol_1_1CostAttributes.html#ad37d94e342f04e47dc79f4f25f9a761f":[5,0,1,2,7,3],
+"classiDynTree_1_1optimalcontrol_1_1CostAttributes.html#af89f16157fb2eca9439d9bc2b3987e83":[5,0,1,2,7,5],
+"classiDynTree_1_1optimalcontrol_1_1DerivedDynamicalSystem.html":[5,0,1,2,8],
+"classiDynTree_1_1optimalcontrol_1_1DerivedDynamicalSystem.html#a165aa744348a711a192333374a5b938b":[5,0,1,2,8,13],
+"classiDynTree_1_1optimalcontrol_1_1DerivedDynamicalSystem.html#a1fd99959d9beca663b96dc431f5e444a":[5,0,1,2,8,6]
 };

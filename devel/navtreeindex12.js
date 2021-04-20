@@ -1,10 +1,5 @@
 var NAVTREEINDEX12 =
 {
-"classiDynTree_1_1MomentumFreeFloatingJacobian.html#afbcf1bf37275f811cab76cda68cad818":[5,0,1,123,0],
-"classiDynTree_1_1MovableJointImpl.html":[3,1,4],
-"classiDynTree_1_1MovableJointImpl.html#a021ac00a8b2e9e519f930baad1bc1fa2":[3,1,4,9],
-"classiDynTree_1_1MovableJointImpl.html#a045d13488a7d6481fcf2db951655922a":[3,1,4,1],
-"classiDynTree_1_1MovableJointImpl.html#a047913be4f7bdeb35d785e4ad71d5395":[3,1,4,28],
 "classiDynTree_1_1MovableJointImpl.html#a0dd24dad1882bc1df35a1832275fbfbb":[3,1,4,16],
 "classiDynTree_1_1MovableJointImpl.html#a1c55168bcc2dbd7b1fd58737a6bb46d8":[3,1,4,13],
 "classiDynTree_1_1MovableJointImpl.html#a2b0c23cad4da4e748ecdaf009805f767":[3,1,4,15],
@@ -249,5 +244,10 @@ var NAVTREEINDEX12 =
 "classiDynTree_1_1RevoluteJoint.html#afb136bbf0c99f9bcf571dfe1d3937e18":[3,1,6,15],
 "classiDynTree_1_1RevoluteJoint.html#afbbbe860f34622d4d8ae1d938fd65b98":[3,1,6,33],
 "classiDynTree_1_1RevoluteJoint.html#afc1d4419f5f5ae413ad4863de28b56b4":[3,1,6,19],
-"classiDynTree_1_1RigidBodyInertiaNonLinearParametrization.html":[5,0,1,134]
+"classiDynTree_1_1RigidBodyInertiaNonLinearParametrization.html":[5,0,1,134],
+"classiDynTree_1_1RigidBodyInertiaNonLinearParametrization.html#a04f5f4b7bdfb65f28676dc2690ff5e90":[5,0,1,134,4],
+"classiDynTree_1_1RigidBodyInertiaNonLinearParametrization.html#a0a81a97c3836c35c52e6cff4827c5af8":[5,0,1,134,6],
+"classiDynTree_1_1RigidBodyInertiaNonLinearParametrization.html#a2cd0ec22c0284865c3a96bdf8cebfcaa":[5,0,1,134,1],
+"classiDynTree_1_1RigidBodyInertiaNonLinearParametrization.html#a3a59e7a9d05ddd309234f425426a1beb":[5,0,1,134,9],
+"classiDynTree_1_1RigidBodyInertiaNonLinearParametrization.html#a5211cdc73b612df5798d86bd0ed7173b":[5,0,1,134,5]
 };

@@ -1,10 +1,5 @@
 var NAVTREEINDEX26 =
 {
-"structiDynTree_1_1optimalcontrol_1_1TimedConstraint.html#a0cafe685ba1e6a72b5ea414958095bcb":[5,0,1,2,31,3],
-"structiDynTree_1_1optimalcontrol_1_1TimedConstraint.html#a76e76c7de7252c4870226f40b7b89016":[5,0,1,2,31,4],
-"structiDynTree_1_1optimalcontrol_1_1TimedConstraint.html#a85654697160bb8f9c2d832663a04bf0d":[5,0,1,2,31,5],
-"structiDynTree_1_1optimalcontrol_1_1TimedConstraint.html#a96b749fbae775dfd22d5ed8e54316e7c":[5,0,1,2,31,2],
-"structiDynTree_1_1optimalcontrol_1_1TimedConstraint.html#ac881f6cfd264576cfd7999faa0018eea":[5,0,1,2,31,0],
 "structiDynTree_1_1optimalcontrol_1_1TimedCost.html":[5,0,1,2,32],
 "structiDynTree_1_1optimalcontrol_1_1TimedCost.html#a0c2d6b1a082a0ccb6a111d04672570ef":[5,0,1,2,32,10],
 "structiDynTree_1_1optimalcontrol_1_1TimedCost.html#a156b911b55c0cb03697bc71e3d3fc1ad":[5,0,1,2,32,0],
