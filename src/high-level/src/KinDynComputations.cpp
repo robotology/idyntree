@@ -934,9 +934,7 @@ void KinDynComputations::getRobotState(iDynTree::VectorDynSize &s,
                                        iDynTree::VectorDynSize &s_dot,
                                        iDynTree::Vector3& world_gravity)
 {
-    world_gravity = pimpl->m_gravityAcc;
-    toEigen(s) = toEigen(this->pimpl->m_pos.jointPos());
-    toEigen(s_dot) = toEigen(pimpl->m_vel.jointVel());
+    this->getRobotState(make_span(s), make_span(s_dot), make_span(world_gravity));
 }
 
 void KinDynComputations::getRobotState(iDynTree::Span<double> s,
@@ -2695,11 +2693,62 @@ bool KinDynComputations::inverseDynamics(Span<const double> baseAcc,
     }
 
 
-
     return this->inverseDynamics(Vector6(baseAcc),
                                  VectorDynSize(s_ddot),
                                  linkExtForces,
                                  baseForceAndJointTorques);
+}
+
+bool KinDynComputations::inverseDynamicsWithInternalJointForceTorques(const Vector6& baseAcc,
+                                                                      const VectorDynSize& s_ddot,
+                                                                      const LinkNetExternalWrenches & linkExtForces,
+                                                                            FreeFloatingGeneralizedTorques & baseForceAndJointTorques,
+                                                                            LinkInternalWrenches& linkInternalWrenches)
+{
+    bool ok = this->inverseDynamics(baseAcc,
+                                    s_ddot,
+                                    linkExtForces,
+                                    baseForceAndJointTorques);
+
+    if (!ok) return false;
+
+    // Convert the linkInternalWrenches in the FrameVelocityConvention used
+    linkInternalWrenches.resize(pimpl->m_robot_model);
+    for(LinkIndex lnkIdx = 0; lnkIdx < pimpl->m_robot_model.getNrOfLinks(); lnkIdx++) {
+        linkInternalWrenches(lnkIdx) =
+            pimpl->fromBodyFixedToUsedRepresentation(pimpl->m_invDynInternalWrenches(lnkIdx), this->getWorldTransform(lnkIdx));
+    }
+
+    return ok;
+}
+
+bool KinDynComputations::inverseDynamicsWithInternalJointForceTorques(iDynTree::Span<const double> baseAcc,
+                                                                      iDynTree::Span<const double> s_ddot,
+                                                                      const LinkNetExternalWrenches & linkExtForces,
+                                                                            FreeFloatingGeneralizedTorques & baseForceAndJointTorques,
+                                                                            LinkInternalWrenches& linkInternalWrenches)
+{
+    constexpr int expected_spatial_acceleration_size = 6;
+    bool ok = baseAcc.size() == expected_spatial_acceleration_size;
+    if( !ok )
+    {
+        reportError("KinDynComputations","inverseDynamicsWithInternalJointForceTorques","Wrong size in input baseAcc");
+        return false;
+    }
+
+    ok = s_ddot.size() == pimpl->m_robot_model.getNrOfDOFs();
+    if( !ok )
+    {
+        reportError("KinDynComputations","inverseDynamicsWithInternalJointForceTorques","Wrong size in input s_ddot");
+        return false;
+    }
+
+
+    return this->inverseDynamicsWithInternalJointForceTorques(Vector6(baseAcc),
+                                                              VectorDynSize(s_ddot),
+                                                              linkExtForces,
+                                                              baseForceAndJointTorques,
+                                                              linkInternalWrenches);
 }
 
 bool KinDynComputations::generalizedBiasForces(FreeFloatingGeneralizedTorques & generalizedBiasForces)

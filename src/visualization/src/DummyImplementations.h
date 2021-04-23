@@ -105,6 +105,8 @@ public:
     virtual bool updateVector(size_t, const Position &, const Vector3&) override { return false; }
     virtual bool setVectorColor(size_t , const ColorViz &) override { return false; }
     virtual bool setVectorsAspect(double, double, double) override { return false; }
+    virtual void setVectorsColor(const ColorViz &) override { return; }
+    virtual void setVectorsDefaultColor(const ColorViz &) override { return; }
 };
 
 class DummyFrameVisualization : public IFrameVisualization
@@ -146,6 +148,9 @@ public:
     virtual IJetsVisualization& jets() { return m_dummyJets;  }
     virtual Transform getWorldModelTransform() { return iDynTree::Transform::Identity(); }
     virtual Transform getWorldLinkTransform(const LinkIndex &) { return iDynTree::Transform::Identity(); }
+    virtual Transform getWorldFrameTransform(const FrameIndex &) { return iDynTree::Transform::Identity(); }
+    virtual Transform getWorldLinkTransform(const std::string &) { return iDynTree::Transform::Identity(); }
+    virtual Transform getWorldFrameTransform(const std::string &) { return iDynTree::Transform::Identity(); }
 };
 
 class DummyTexturesHandler : public ITexturesHandler

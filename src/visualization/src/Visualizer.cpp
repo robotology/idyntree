@@ -148,6 +148,38 @@ struct Visualizer::VisualizerPimpl
      */
     TexturesHandler m_textures;
 
+    double rootFrameArrowsDimension;
+    struct ColorPalette
+    {
+        irr::video::SColorf background = irr::video::SColorf(0.0,0.4,0.4,1.0);
+        irr::video::SColor  gridColor = irr::video::SColor(100,0,0,255);
+
+        irr::video::SColor xAxis = irr::video::SColor(20,255,0,0);
+        irr::video::SColor yAxis = irr::video::SColor(20,0,255,0);
+        irr::video::SColor zAxis = irr::video::SColor(20,0,0,255);
+
+        irr::video::SColor vector = irr::video::SColor(1,1,0,0);
+    };
+    std::unordered_map<std::string, ColorPalette> m_palette;
+
+    void initializePalette()
+    {
+        irr::u32 alphaLev = 20;
+        // vanilla palette (This is the original palette of the visualizer)
+        m_palette["vanilla"].background = irr::video::SColorf(0.0,0.4,0.4,1.0);
+        m_palette["vanilla"].gridColor = irr::video::SColor(100,0,0,255);
+        m_palette["vanilla"].xAxis = irr::video::SColor(alphaLev,255,0,0);
+        m_palette["vanilla"].yAxis = irr::video::SColor(alphaLev,0,255,0);
+        m_palette["vanilla"].zAxis = irr::video::SColor(alphaLev,0,0,255);
+        m_palette["vanilla"].vector = irr::video::SColor(255,255,0,0);
+
+        m_palette["meshcat"].background = irr::video::SColorf(0.42,0.63,0.85,1.0);
+        m_palette["meshcat"].gridColor =  irr::video::SColor(128,128,128,100);
+        m_palette["meshcat"].xAxis = irr::video::SColor(alphaLev,234, 67, 53);
+        m_palette["meshcat"].yAxis = irr::video::SColor(alphaLev,52, 168, 83);
+        m_palette["meshcat"].zAxis = irr::video::SColor(alphaLev,66,133,244);
+        m_palette["meshcat"].vector = irr::video::SColor(255,253,98,2);
+    }
 #else
     DummyCamera m_camera;
     DummyEnvironment m_environment;
@@ -204,6 +236,9 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
         return false;
     }
 
+    // initialize the color palette
+    pimpl->initializePalette();
+
     irr::SIrrlichtCreationParameters irrDevParams;
 
     irrDevParams.DriverType = irr::video::EDT_OPENGL;
@@ -243,7 +278,8 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
     pimpl->m_irrDevice->getCursorControl()->setVisible(true);
 
     // Add environment
-    pimpl->m_environment.init(pimpl->m_irrSmgr, visualizerOptions.rootFrameArrowsDimension);
+    pimpl->rootFrameArrowsDimension = visualizerOptions.rootFrameArrowsDimension;
+    pimpl->m_environment.init(pimpl->m_irrSmgr, pimpl->rootFrameArrowsDimension);
 
     pimpl->m_camera.setIrrlichtCamera(addVizCamera(pimpl->m_irrSmgr));
     pimpl->m_camera.setCameraAnimator(new CameraAnimator(pimpl->m_irrDevice->getCursorControl(),
@@ -552,4 +588,55 @@ bool Visualizer::isWindowActive() const
 #endif
 }
 
+
+bool Visualizer::setColorPalette(const std::string &name)
+{
+#ifdef IDYNTREE_USES_IRRLICHT
+
+    if( !pimpl->m_isInitialized )
+    {
+        reportError("Visualizer",
+                    "setColorPalette",
+                    "Impossible to set the color palette. Please initialize the visualizer");
+        return false;
+    }
+
+    const auto colors = pimpl->m_palette.find(name);
+
+    if(colors == pimpl->m_palette.end())
+    {
+        std::string paletteName;
+        for (const auto& tmp: pimpl->m_palette)
+            paletteName += " " + tmp.first;
+
+        const std::string error = "The palette named " + name
+                                + " does not exist. The following palette are available"
+                                + paletteName + ".";
+
+        reportError("Visualizer","setColorPalette", error.c_str());
+        return false;
+    }
+
+    this->enviroment().setBackgroundColor(irrlicht2idyntree(colors->second.background));
+    this->enviroment().setFloorGridColor(irrlicht2idyntree(colors->second.gridColor));
+
+    this->vectors().setVectorsColor(irrlicht2idyntree(colors->second.vector));
+    this->vectors().setVectorsDefaultColor(irrlicht2idyntree(colors->second.vector));
+
+    // delete the frame in the origin and create a new one
+    pimpl->m_environment.m_rootFrameNode->remove();
+    pimpl->m_environment.m_rootFrameNode = addFrameAxes(pimpl->m_irrSmgr,
+                                                        pimpl->m_environment.m_envNode,
+                                                        pimpl->rootFrameArrowsDimension,
+                                                        colors->second.xAxis,
+                                                        colors->second.yAxis,
+                                                        colors->second.zAxis);
+    return true;
+
+#else
+    reportError("Visualizer","setColorPalette",
+                "Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
+    return false;
+#endif
+}
 }

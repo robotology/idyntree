@@ -27,6 +27,8 @@ namespace iDynTree {
             irr::scene::ISceneNode * visualizationNode = nullptr;
         } VectorsProperties;
 
+        ColorViz m_vectorsDefaultColor{ColorViz(1.0, 0.0, 0.0, 1.0)};
+
         std::vector<VectorsProperties> m_vectors;
 
         irr::scene::ISceneManager* m_smgr;
@@ -67,6 +69,10 @@ namespace iDynTree {
         virtual bool updateVector(size_t vectorIndex, const Position & origin, const Vector3& components) override;
 
         virtual bool setVectorColor(size_t vectorIndex, const ColorViz & vectorColor) override;
+
+        virtual void setVectorsDefaultColor(const ColorViz &vectorColor) override;
+
+        virtual void setVectorsColor(const ColorViz &vectorColor) override;
 
         virtual bool setVectorsAspect(double zeroModulusRadius, double modulusMultiplier, double heightScale) override;
 

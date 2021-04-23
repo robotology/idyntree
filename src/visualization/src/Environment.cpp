@@ -179,7 +179,7 @@ bool Environment::removeLight(const std::string& lightName)
             m_lights[i]->removeLight();
             delete m_lights[i];
             m_lights[i] = nullptr;
-            std::vector<Light*>::iterator it;
+            std::vector<Light*>::iterator it = m_lights.begin();
             std::advance(it,i);
             m_lights.erase(it);
             return true;

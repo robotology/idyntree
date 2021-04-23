@@ -438,6 +438,16 @@ public:
     virtual bool setVectorColor(size_t vectorIndex, const ColorViz & vectorColor) = 0;
 
     /**
+     * Set the default color for the vector.
+     */
+    virtual void setVectorsDefaultColor(const ColorViz &vectorColor) = 0;
+
+    /**
+     * Set the color for all the existing vectors.
+     */
+    virtual void setVectorsColor(const ColorViz &vectorColor) = 0;
+
+    /**
      * @brief Determines the dimension of the visualized arrows
      * @param zeroModulusRadius Constant offset for the arrow radius.
      * @param modulusMultiplier Multiplies the modulus and adds up to the zeroModulusRadius to get the total arrow radius.
@@ -592,6 +602,21 @@ public:
      * Get the transformation of given link with respect to visualizer world \f$ w_H_{link}\f$
      */
     virtual Transform getWorldLinkTransform(const LinkIndex& linkIndex) = 0;
+
+    /**
+     * Get the transformation of given link with respect to visualizer world \f$ w_H_{link}\f$
+     */
+    virtual Transform getWorldLinkTransform(const std::string& linkName) = 0;
+
+    /**
+     * Get the transformation of given frame with respect to visualizer world \f$ w_H_{frame}\f$
+     */
+    virtual Transform getWorldFrameTransform(const FrameIndex& frameIndex) = 0;
+
+    /**
+     * Get the transformation of given frame with respect to visualizer world \f$ w_H_{frame}\f$
+     */
+    virtual Transform getWorldFrameTransform(const std::string& frameName) = 0;
 };
 
 /**
@@ -823,6 +848,12 @@ public:
      */
     bool isWindowActive() const;
 
+    /**
+     * @brief Set the color palette.
+     * @param name name of the color palette. Currently only vanilla and meshcat are supported.
+     * @return true if all went ok, false otherwise.
+     */
+    bool setColorPalette(const std::string& name);
 };
 
 }

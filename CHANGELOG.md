@@ -5,7 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [Unreleased]
+
+### Added
+- Add the possibility to use `MatrixView` and `Span` as input/output objects for `InverseKinematics` class (https://github.com/robotology/idyntree/pull/822).
+- Add the possibility to get frame trasform from the visualizer, and to use frame/link name in place of indices (https://github.com/robotology/idyntree/pull/849).
+- Add `IDYNTREE_DETECT_ACTIVE_PYTHON_SITEPACKAGES` CMake option (default value: OFF) to detect and install in the active site-package directory the Python bindings (https://github.com/robotology/idyntree/pull/852).
+- Add inverseDynamicsWithInternalJointForceTorques method to KinDynComputations, this method permits to compute the inverse dynamics, but providing as an output the internal joint 6D force/torque for each joint (https://github.com/robotology/idyntree/pull/857).
+
+### Changed
+- The wheels uploaded to PyPI are now `manylinux_2_24` compliant (https://github.com/robotology/idyntree/pull/844)
+
+### Fixed 
+- Dynamics: In RNEA Dynamic Loop, return zero for wrench corresponding to non-existing parent joint of base link (https://github.com/robotology/idyntree/pull/857).
+- Fixed compilation when using Eigen 3.4 (https://github.com/robotology/idyntree/pull/861).
 
 ## [3.0.2] - 2020-04-11
 
@@ -342,3 +355,18 @@ As this is an `inline` function, this modification does not affect `iDynTree`'s 
 - The logic to enable/disable dependencies has changed. In particular, now all the dependencies (excluding the legacy dependency on KDL) that are found on the system are enabled. Users can still select manually the dependency that they want to compile using the `IDYNTREE_USES_<dep>` variables ( https://github.com/robotology/idyntree/pull/323 ).
 - IPOPT has been added as an optional dependency for the Inverse Kinematics component.
 - The Octave bindings have been migrated to use the exact same mex code used for the Matlab bindings ( https://github.com/robotology/idyntree/pull/305 ).
+
+## [0.4.0] - 2017-03-10
+
+### Changed
+
+- The `IVector`, `IRawVector`, `IMatrix` and `IRawMatrix` interfaces have been removed for performance reasons, 
+  see https://github.com/robotology/idyntree/issues/98#issuecomment-158823148 . If you want to write generic 
+  code in C++ you can rely on templates, and on Matlab and Python you can rely on the native dynamic type system. 
+   
+- All the core classes that have a fixed size (`Position`, `Rotation`, `Transform`, `SpatialMotionVector`, etc, etc) are 
+  not initialized by their empty constructor for performance reasons, see https://github.com/robotology/idyntree/issues/98#issuecomment-158795881 .
+  From now on, make sure that initialize them before any use. Most of those classes should have a `zero()` method to
+  zero its content, or a `Zero()` static method that return a instance with its content set to zero. 
+  For ensuring that no regression happened on the iDynTree codebase, a CMake advanced option `IDYNTREE_RUN_VALGRIND_TESTS`
+  has been added to make that no use of initialized memory occurs. 

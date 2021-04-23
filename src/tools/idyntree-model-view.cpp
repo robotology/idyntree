@@ -26,6 +26,10 @@ void addOptions(cmdline::parser &cmd)
     cmd.add<std::string>("model", 'm',
                          "Model to load.",
                          true);
+
+    cmd.add<std::string>("color-palette", 'c',
+                         "Color palette.",
+                         false);
 }
 
 int main(int argc, char** argv)
@@ -35,7 +39,7 @@ int main(int argc, char** argv)
     cmd.parse_check(argc, argv);
 
     // Read model
-    std::string modelPath = cmd.get<std::string>("model");
+    const std::string& modelPath = cmd.get<std::string>("model");
     iDynTree::ModelLoader mdlLoader;
     bool ok = mdlLoader.loadModelFromFile(modelPath);
 
@@ -48,6 +52,17 @@ int main(int argc, char** argv)
     // Visualize the model
     iDynTree::Visualizer visualizer;
     ok = visualizer.addModel(mdlLoader.model(),"model");
+    const std::string& palette = cmd.get<std::string>("color-palette");
+    if(!palette.empty())
+    {
+        ok = visualizer.setColorPalette(palette);
+        if( !ok )
+        {
+            std::cerr << "Impossible to set the color palette." << std::endl;
+            return EXIT_FAILURE;
+        }
+    }
+
     visualizer.camera().animator()->enableMouseControl();
 
     if( !ok )
@@ -64,5 +79,3 @@ int main(int argc, char** argv)
 
     return EXIT_SUCCESS;
 }
-
-
