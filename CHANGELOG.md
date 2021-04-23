@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed 
 - Dynamics: In RNEA Dynamic Loop, return zero for wrench corresponding to non-existing parent joint of base link (https://github.com/robotology/idyntree/pull/857).
-
+- Fixed compilation when using Eigen 3.4 (https://github.com/robotology/idyntree/pull/861).
 
 ## [3.0.2] - 2020-04-11
 
