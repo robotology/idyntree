@@ -1594,14 +1594,14 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
 
         std::cerr << "Jacobian (iDynTree)\n" << dynTreeJacobian.toString() << "\n";
 
-        if (parametrization == InverseKinematicsRotationParametrizationQuaternion) {
+        if (parametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
             iDynTree::MatrixFixSize<4, 3> quaternionDerivativeMapBuffer;
             computeConstraintJacobian(dynTreeJacobian,
                                       quaternionDerivativeMapBuffer,
                                       quaternionDerivativeInverseMapBuffer,
                                       ComputeContraintJacobianOptionLinearPart|ComputeContraintJacobianOptionAngularPart,
                                       _analyticalJacobian);
-        } else if (parametrization == InverseKinematicsRotationParametrizationRollPitchYaw) {
+        } else if (parametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw) {
             analyticalJacobian = toEigen(dynTreeJacobian);
             iDynTree::Transform currentTransform = m_data.m_dynamics.getWorldTransform(frameIndex);
             iDynTree::Vector3 rpy;
@@ -1617,7 +1617,7 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
 
 
         //Compute numerical derivative
-        MatrixDynSize _finiteDifferenceJacobian(3 + sizeOfRotationParametrization(parametrization), derivativePoint.size());
+        iDynTree::MatrixDynSize _finiteDifferenceJacobian(3 + sizeOfRotationParametrization(parametrization), derivativePoint.size());
         _finiteDifferenceJacobian.zero();
         Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > finiteDifferenceJacobian = toEigen(_finiteDifferenceJacobian);
 
@@ -1639,12 +1639,12 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
                 positiveIncrement.head<3>() = iDynTree::toEigen(currentPosition);
 
                 const iDynTree::Rotation& currentRotation = currentTransform.getRotation();
-                if (parametrization == InverseKinematicsRotationParametrizationQuaternion) {
+                if (parametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
                     //get quaternion
                     iDynTree::Vector4 quaternion;
                     currentRotation.getQuaternion(quaternion);
                     positiveIncrement.tail<4>() = iDynTree::toEigen(quaternion);
-                } else if (parametrization == InverseKinematicsRotationParametrizationRollPitchYaw) {
+                } else if (parametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw) {
                     //get quaternion
                     iDynTree::Vector3 rpy;
                     currentRotation.getRPY(rpy(0), rpy(1), rpy(2));
@@ -1667,13 +1667,13 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
                 negativeIncrement.head<3>() = iDynTree::toEigen(currentPosition);
 
                 const iDynTree::Rotation& currentRotation = currentTransform.getRotation();
-                if (parametrization == InverseKinematicsRotationParametrizationQuaternion) {
+                if (parametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
                     //get quaternion
                     iDynTree::Vector4 quaternion;
                     currentRotation.getQuaternion(quaternion);
                     negativeIncrement.tail<4>() = iDynTree::toEigen(quaternion);
                     //                std::cerr << "Quat-:\t" << quaternion.toString() << "\n";
-                } else if (parametrization == InverseKinematicsRotationParametrizationRollPitchYaw) {
+                } else if (parametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw) {
                     //get quaternion
                     iDynTree::Vector3 rpy;
                     currentRotation.getRPY(rpy(0), rpy(1), rpy(2));
