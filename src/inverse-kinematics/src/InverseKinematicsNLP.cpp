@@ -1566,7 +1566,6 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
         //Note: not updated afer migration
 
         using namespace Ipopt;
-        using namespace iDynTree;
         using namespace Eigen;
 
         enum InverseKinematicsRotationParametrization parametrization = (enum InverseKinematicsRotationParametrization)_parametrization;
@@ -1584,13 +1583,13 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
 
 
         //Compute analytical derivatives
-        MatrixDynSize _analyticalJacobian(3 + sizeOfRotationParametrization(parametrization), derivativePoint.size());
+        iDynTree::MatrixDynSize _analyticalJacobian(3 + sizeOfRotationParametrization(parametrization), derivativePoint.size());
         _analyticalJacobian.zero();
         Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > analyticalJacobian = toEigen(_analyticalJacobian);
 
         updateState(_x);
 
-        MatrixDynSize dynTreeJacobian(6, 6 + derivativePoint.size() - (3 + sizeOfRotationParametrization(parametrization)));
+        iDynTree::MatrixDynSize dynTreeJacobian(6, 6 + derivativePoint.size() - (3 + sizeOfRotationParametrization(parametrization)));
         m_data.m_dynamics.getFrameFreeFloatingJacobian(frameIndex, dynTreeJacobian);
 
         std::cerr << "Jacobian (iDynTree)\n" << dynTreeJacobian.toString() << "\n";
@@ -1605,11 +1604,11 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
         } else if (parametrization == InverseKinematicsRotationParametrizationRollPitchYaw) {
             analyticalJacobian = toEigen(dynTreeJacobian);
             iDynTree::Transform currentTransform = m_data.m_dynamics.getWorldTransform(frameIndex);
-            Vector3 rpy;
+            iDynTree::Vector3 rpy;
             currentTransform.getRotation().getRPY(rpy(0), rpy(1), rpy(2));
             std::cerr << "RPY\n" << rpy.toString() << "\n";
 
-            Matrix3x3 map;
+            iDynTree::Matrix3x3 map;
             map.zero();
             omegaToRPYParameters(rpy, map);
             analyticalJacobian.bottomRows<3>() = toEigen(map) * analyticalJacobian.bottomRows<3>();
@@ -1642,12 +1641,12 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
                 const iDynTree::Rotation& currentRotation = currentTransform.getRotation();
                 if (parametrization == InverseKinematicsRotationParametrizationQuaternion) {
                     //get quaternion
-                    Vector4 quaternion;
+                    iDynTree::Vector4 quaternion;
                     currentRotation.getQuaternion(quaternion);
                     positiveIncrement.tail<4>() = iDynTree::toEigen(quaternion);
                 } else if (parametrization == InverseKinematicsRotationParametrizationRollPitchYaw) {
                     //get quaternion
-                    Vector3 rpy;
+                    iDynTree::Vector3 rpy;
                     currentRotation.getRPY(rpy(0), rpy(1), rpy(2));
                     positiveIncrement.tail<3>() = iDynTree::toEigen(rpy);
                 }
@@ -1670,13 +1669,13 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
                 const iDynTree::Rotation& currentRotation = currentTransform.getRotation();
                 if (parametrization == InverseKinematicsRotationParametrizationQuaternion) {
                     //get quaternion
-                    Vector4 quaternion;
+                    iDynTree::Vector4 quaternion;
                     currentRotation.getQuaternion(quaternion);
                     negativeIncrement.tail<4>() = iDynTree::toEigen(quaternion);
                     //                std::cerr << "Quat-:\t" << quaternion.toString() << "\n";
                 } else if (parametrization == InverseKinematicsRotationParametrizationRollPitchYaw) {
                     //get quaternion
-                    Vector3 rpy;
+                    iDynTree::Vector3 rpy;
                     currentRotation.getRPY(rpy(0), rpy(1), rpy(2));
                     negativeIncrement.tail<3>() = iDynTree::toEigen(rpy);
                 }
