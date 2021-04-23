@@ -1566,50 +1566,49 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
         //Note: not updated afer migration
 
         using namespace Ipopt;
-        using namespace iDynTree;
         using namespace Eigen;
 
-        enum InverseKinematicsRotationParametrization parametrization = (enum InverseKinematicsRotationParametrization)_parametrization;
+        enum iDynTree::InverseKinematicsRotationParametrization parametrization = (enum iDynTree::InverseKinematicsRotationParametrization)_parametrization;
 
         //Copying initial point
         Number *_x = new Number[derivativePoint.size()];
         Map<VectorXd> x(_x, derivativePoint.size());
         x = toEigen(derivativePoint);
 
-        if (parametrization == InverseKinematicsRotationParametrizationQuaternion) {
+        if (parametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
             std::cerr << "Quaternion\n" << x.segment<4>(3).transpose() << "\n";
-        } else if (parametrization == InverseKinematicsRotationParametrizationRollPitchYaw) {
+        } else if (parametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw) {
 //            std::cerr << "RPY\n" << (x.segment<3>(3).transpose() * 180.0 / M_PI) << "\n";
         }
 
 
         //Compute analytical derivatives
-        MatrixDynSize _analyticalJacobian(3 + sizeOfRotationParametrization(parametrization), derivativePoint.size());
+        iDynTree::MatrixDynSize _analyticalJacobian(3 + iDynTree::sizeOfRotationParametrization(parametrization), derivativePoint.size());
         _analyticalJacobian.zero();
         Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > analyticalJacobian = toEigen(_analyticalJacobian);
 
         updateState(_x);
 
-        MatrixDynSize dynTreeJacobian(6, 6 + derivativePoint.size() - (3 + sizeOfRotationParametrization(parametrization)));
+        iDynTree::MatrixDynSize dynTreeJacobian(6, 6 + derivativePoint.size() - (3 + iDynTree::sizeOfRotationParametrization(parametrization)));
         m_data.m_dynamics.getFrameFreeFloatingJacobian(frameIndex, dynTreeJacobian);
 
         std::cerr << "Jacobian (iDynTree)\n" << dynTreeJacobian.toString() << "\n";
 
-        if (parametrization == InverseKinematicsRotationParametrizationQuaternion) {
+        if (parametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
             iDynTree::MatrixFixSize<4, 3> quaternionDerivativeMapBuffer;
             computeConstraintJacobian(dynTreeJacobian,
                                       quaternionDerivativeMapBuffer,
                                       quaternionDerivativeInverseMapBuffer,
                                       ComputeContraintJacobianOptionLinearPart|ComputeContraintJacobianOptionAngularPart,
                                       _analyticalJacobian);
-        } else if (parametrization == InverseKinematicsRotationParametrizationRollPitchYaw) {
+        } else if (parametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw) {
             analyticalJacobian = toEigen(dynTreeJacobian);
             iDynTree::Transform currentTransform = m_data.m_dynamics.getWorldTransform(frameIndex);
-            Vector3 rpy;
+            iDynTree::Vector3 rpy;
             currentTransform.getRotation().getRPY(rpy(0), rpy(1), rpy(2));
             std::cerr << "RPY\n" << rpy.toString() << "\n";
 
-            Matrix3x3 map;
+            iDynTree::Matrix3x3 map;
             map.zero();
             omegaToRPYParameters(rpy, map);
             analyticalJacobian.bottomRows<3>() = toEigen(map) * analyticalJacobian.bottomRows<3>();
@@ -1618,7 +1617,7 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
 
 
         //Compute numerical derivative
-        MatrixDynSize _finiteDifferenceJacobian(3 + sizeOfRotationParametrization(parametrization), derivativePoint.size());
+        iDynTree::MatrixDynSize _finiteDifferenceJacobian(3 + iDynTree::sizeOfRotationParametrization(parametrization), derivativePoint.size());
         _finiteDifferenceJacobian.zero();
         Map<Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor> > finiteDifferenceJacobian = toEigen(_finiteDifferenceJacobian);
 
@@ -1630,7 +1629,7 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
             xPlusIncrement = x;
             xPlusIncrement(i) += epsilon;
 
-            VectorXd positiveIncrement(3 + sizeOfRotationParametrization(parametrization));
+            VectorXd positiveIncrement(3 + iDynTree::sizeOfRotationParametrization(parametrization));
             positiveIncrement.setZero();
             {
                 updateState(_xPlusIncrement);
@@ -1640,14 +1639,14 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
                 positiveIncrement.head<3>() = iDynTree::toEigen(currentPosition);
 
                 const iDynTree::Rotation& currentRotation = currentTransform.getRotation();
-                if (parametrization == InverseKinematicsRotationParametrizationQuaternion) {
+                if (parametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
                     //get quaternion
-                    Vector4 quaternion;
+                    iDynTree::Vector4 quaternion;
                     currentRotation.getQuaternion(quaternion);
                     positiveIncrement.tail<4>() = iDynTree::toEigen(quaternion);
-                } else if (parametrization == InverseKinematicsRotationParametrizationRollPitchYaw) {
+                } else if (parametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw) {
                     //get quaternion
-                    Vector3 rpy;
+                    iDynTree::Vector3 rpy;
                     currentRotation.getRPY(rpy(0), rpy(1), rpy(2));
                     positiveIncrement.tail<3>() = iDynTree::toEigen(rpy);
                 }
@@ -1657,7 +1656,7 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
             xPlusIncrement = x;
             xPlusIncrement(i) -= epsilon;
 
-            VectorXd negativeIncrement(3 + sizeOfRotationParametrization(parametrization));
+            VectorXd negativeIncrement(3 + iDynTree::sizeOfRotationParametrization(parametrization));
             negativeIncrement.setZero();
 
             {
@@ -1668,15 +1667,15 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
                 negativeIncrement.head<3>() = iDynTree::toEigen(currentPosition);
 
                 const iDynTree::Rotation& currentRotation = currentTransform.getRotation();
-                if (parametrization == InverseKinematicsRotationParametrizationQuaternion) {
+                if (parametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
                     //get quaternion
-                    Vector4 quaternion;
+                    iDynTree::Vector4 quaternion;
                     currentRotation.getQuaternion(quaternion);
                     negativeIncrement.tail<4>() = iDynTree::toEigen(quaternion);
                     //                std::cerr << "Quat-:\t" << quaternion.toString() << "\n";
-                } else if (parametrization == InverseKinematicsRotationParametrizationRollPitchYaw) {
+                } else if (parametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw) {
                     //get quaternion
-                    Vector3 rpy;
+                    iDynTree::Vector3 rpy;
                     currentRotation.getRPY(rpy(0), rpy(1), rpy(2));
                     negativeIncrement.tail<3>() = iDynTree::toEigen(rpy);
                 }
@@ -1691,13 +1690,13 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
         std::cerr << "**************************\n\n";
 
         std::cerr << "Analytical Jacobian (Base)\n";
-        std::cerr << analyticalJacobian.leftCols(3 + sizeOfRotationParametrization(parametrization)) << "\n\n";
+        std::cerr << analyticalJacobian.leftCols(3 + iDynTree::sizeOfRotationParametrization(parametrization)) << "\n\n";
         std::cerr << "Finite Difference Jacobian (Base)\n";
-        std::cerr << finiteDifferenceJacobian.leftCols(3 + sizeOfRotationParametrization(parametrization)) << "\n\n\n";
+        std::cerr << finiteDifferenceJacobian.leftCols(3 + iDynTree::sizeOfRotationParametrization(parametrization)) << "\n\n\n";
         std::cerr << "Analytical Jacobian (Joints)\n";
-        std::cerr << analyticalJacobian.rightCols(derivativePoint.size() - (3 + sizeOfRotationParametrization(parametrization))) << "\n\n";
+        std::cerr << analyticalJacobian.rightCols(derivativePoint.size() - (3 + iDynTree::sizeOfRotationParametrization(parametrization))) << "\n\n";
         std::cerr << "Finite Difference Jacobian (Joints)\n";
-        std::cerr << finiteDifferenceJacobian.rightCols(derivativePoint.size() - (3 + sizeOfRotationParametrization(parametrization))) << "\n\n\n";
+        std::cerr << finiteDifferenceJacobian.rightCols(derivativePoint.size() - (3 + iDynTree::sizeOfRotationParametrization(parametrization))) << "\n\n\n";
 
         std::cerr << std::scientific;
         std::cerr.precision(7);
@@ -1705,7 +1704,7 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
         //Checking error
         for (size_t i = 0; i < derivativePoint.size(); ++i) {
             VectorXd error = analyticalJacobian.col(i) - finiteDifferenceJacobian.col(i);
-            for (unsigned row = 0; row < (3 + sizeOfRotationParametrization(parametrization)); ++row) {
+            for (unsigned row = 0; row < (3 + iDynTree::sizeOfRotationParametrization(parametrization)); ++row) {
                 if (std::abs(error(row)) > tolerance) {
                     std::cerr << "[" << row << "," << i << "] ";
                     std::cerr << analyticalJacobian(row, i) << "\t" << finiteDifferenceJacobian(row, i);
