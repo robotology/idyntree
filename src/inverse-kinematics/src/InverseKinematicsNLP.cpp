@@ -1575,9 +1575,9 @@ void InverseKinematicsNLP::addSparsityInformationForConstraint(int constraintID,
         Map<VectorXd> x(_x, derivativePoint.size());
         x = toEigen(derivativePoint);
 
-        if (parametrization == InverseKinematicsRotationParametrizationQuaternion) {
+        if (parametrization == iDynTree::InverseKinematicsRotationParametrizationQuaternion) {
             std::cerr << "Quaternion\n" << x.segment<4>(3).transpose() << "\n";
-        } else if (parametrization == InverseKinematicsRotationParametrizationRollPitchYaw) {
+        } else if (parametrization == iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw) {
 //            std::cerr << "RPY\n" << (x.segment<3>(3).transpose() * 180.0 / M_PI) << "\n";
         }
 
