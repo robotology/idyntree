@@ -14,7 +14,7 @@ var IrrlichtUtils_8h =
     [ "RotationWithPrescribedZColumn", "IrrlichtUtils_8h.html#a8f07b5aa9b946682973ce91c0dff9c4c", null ],
     [ "getFileExt", "IrrlichtUtils_8h.html#a7676f271a9b7c442709bcbf204ede699", null ],
     [ "addGeometryToSceneManager", "IrrlichtUtils_8h.html#a28b9c6390d04a7fa594c36e0a1e71a22", null ],
-    [ "addFrameAxes", "IrrlichtUtils_8h.html#a002119065ffa5bde0eebcb3868400ed7", null ],
+    [ "addFrameAxes", "IrrlichtUtils_8h.html#a51c008cdc11e1fd88dcd952453f45a41", null ],
     [ "addFloorGridNode", "IrrlichtUtils_8h.html#a9cc7dd1826ac4f42ffd18ea7564fd4d4", null ],
     [ "setWorldHNode", "IrrlichtUtils_8h.html#a0671daf3474b049ff0f3ba1c9aa21866", null ],
     [ "addVizEnviroment", "IrrlichtUtils_8h.html#a6c85009c61c4213711b0892502aedb68", null ],

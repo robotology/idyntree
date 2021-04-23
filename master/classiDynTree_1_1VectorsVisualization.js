@@ -14,5 +14,7 @@ var classiDynTree_1_1VectorsVisualization =
     [ "updateVector", "classiDynTree_1_1VectorsVisualization.html#a9a806a45d61f10ac4d0eab65b02fdd53", null ],
     [ "updateVector", "classiDynTree_1_1VectorsVisualization.html#ab4a6a658ba896fb045c8d27e71af6164", null ],
     [ "setVectorColor", "classiDynTree_1_1VectorsVisualization.html#a76cff72a95bb6433a42a817ce33afd54", null ],
+    [ "setVectorsDefaultColor", "classiDynTree_1_1VectorsVisualization.html#a3aa8178f01293c27148ca4316a493a0d", null ],
+    [ "setVectorsColor", "classiDynTree_1_1VectorsVisualization.html#aa0e1201eab72464a222dde6b64bdf153", null ],
     [ "setVectorsAspect", "classiDynTree_1_1VectorsVisualization.html#afe44a4c0a91bfcd3c540f036a9dfab27", null ]
 ];

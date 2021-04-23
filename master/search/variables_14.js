@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['u_6159',['U',['../structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers.html#a8ad42f2fc2d272d3e7df9daa0a93d348',1,'iDynTree::ArticulatedBodyAlgorithmInternalBuffers::U()'],['../structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers.html#a18705d68a17253e373f1f414174540ba',1,'iDynTree::ArticulatedBodyAlgorithmInternalBuffers::u()']]],
+  ['u_6159',['u',['../structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers.html#a18705d68a17253e373f1f414174540ba',1,'iDynTree::ArticulatedBodyAlgorithmInternalBuffers::u()'],['../structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers.html#a8ad42f2fc2d272d3e7df9daa0a93d348',1,'iDynTree::ArticulatedBodyAlgorithmInternalBuffers::U()']]],
   ['unifiedlowerbounds_6160',['unifiedLowerBounds',['../classiDynTree_1_1optimization_1_1OsqpInterface_1_1OsqpInterfaceImplementation.html#ae1d761c1d809f63f86110fa34ac51ef5',1,'iDynTree::optimization::OsqpInterface::OsqpInterfaceImplementation']]],
   ['unifiedupperbounds_6161',['unifiedUpperBounds',['../classiDynTree_1_1optimization_1_1OsqpInterface_1_1OsqpInterfaceImplementation.html#a537a598c20bc0a97e9e9a483839b2272',1,'iDynTree::optimization::OsqpInterface::OsqpInterfaceImplementation']]],
   ['unknown_6162',['UNKNOWN',['../namespaceiDynTree.html#a79d980eee07cb2f08368804f713ba6f1',1,'iDynTree']]],

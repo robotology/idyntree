@@ -24,7 +24,7 @@ var classinternal_1_1kinematics_1_1InverseKinematicsData =
     [ "targetResolutionMode", "classinternal_1_1kinematics_1_1InverseKinematicsData.html#ad91ba72d38ca2329922b419a8fd506ac", null ],
     [ "solveProblem", "classinternal_1_1kinematics_1_1InverseKinematicsData.html#abf797e16ca56cefd1fc2bc649c7bc466", null ],
     [ "dynamics", "classinternal_1_1kinematics_1_1InverseKinematicsData.html#a609b7464eadfda0e9d2a19f6cafc684e", null ],
-    [ "setCoMTarget", "classinternal_1_1kinematics_1_1InverseKinematicsData.html#a18dc512e72d0edb7a641b461d412c80b", null ],
+    [ "setCoMTarget", "classinternal_1_1kinematics_1_1InverseKinematicsData.html#a4e71b9e0ec1b1dc245fb8cc57ef4d9e6", null ],
     [ "setCoMasConstraint", "classinternal_1_1kinematics_1_1InverseKinematicsData.html#a8ba499d6a8da51f087c2d3878217433b", null ],
     [ "isCoMaConstraint", "classinternal_1_1kinematics_1_1InverseKinematicsData.html#a70d398a424a4c79ddb55922369e27d5a", null ],
     [ "setCoMasConstraintTolerance", "classinternal_1_1kinematics_1_1InverseKinematicsData.html#aacbe9650fd690849c7bcf68180ed9087", null ],

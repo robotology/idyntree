@@ -1515,8 +1515,8 @@ Functions</h2></td></tr>
 <tr class="separator:a7676f271a9b7c442709bcbf204ede699"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28b9c6390d04a7fa594c36e0a1e71a22"><td class="memItemLeft" align="right" valign="top">irr::scene::ISceneNode *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiDynTree.html#a28b9c6390d04a7fa594c36e0a1e71a22">addGeometryToSceneManager</a> (const <a class="el" href="classiDynTree_1_1SolidShape.html">iDynTree::SolidShape</a> *geom, irr::scene::ISceneNode *linkNode, irr::scene::ISceneManager *smgr)</td></tr>
 <tr class="separator:a28b9c6390d04a7fa594c36e0a1e71a22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a002119065ffa5bde0eebcb3868400ed7"><td class="memItemLeft" align="right" valign="top">irr::scene::ISceneNode *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiDynTree.html#a002119065ffa5bde0eebcb3868400ed7">addFrameAxes</a> (irr::scene::ISceneManager *smgr, irr::scene::ISceneNode *parentNode=0, irr::f32 arrowLength=1.0)</td></tr>
-<tr class="separator:a002119065ffa5bde0eebcb3868400ed7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51c008cdc11e1fd88dcd952453f45a41"><td class="memItemLeft" align="right" valign="top">irr::scene::ISceneNode *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiDynTree.html#a51c008cdc11e1fd88dcd952453f45a41">addFrameAxes</a> (irr::scene::ISceneManager *smgr, irr::scene::ISceneNode *parentNode=0, irr::f32 arrowLength=1.0, const irr::video::SColor &amp;red=irr::video::SColor(20, 255, 0, 0), const irr::video::SColor &amp;green=irr::video::SColor(20, 0, 255, 0), const irr::video::SColor &amp;blue=irr::video::SColor(20, 0, 0, 255))</td></tr>
+<tr class="separator:a51c008cdc11e1fd88dcd952453f45a41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cc7dd1826ac4f42ffd18ea7564fd4d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classiDynTree_1_1CFloorGridSceneNode.html">CFloorGridSceneNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiDynTree.html#a9cc7dd1826ac4f42ffd18ea7564fd4d4">addFloorGridNode</a> (irr::scene::ISceneManager *smgr, irr::scene::ISceneNode *parentNode=0)</td></tr>
 <tr class="separator:a9cc7dd1826ac4f42ffd18ea7564fd4d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0671daf3474b049ff0f3ba1c9aa21866"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiDynTree.html#a0671daf3474b049ff0f3ba1c9aa21866">setWorldHNode</a> (irr::scene::ISceneNode *node, const <a class="el" href="classiDynTree_1_1Transform.html">iDynTree::Transform</a> &amp;trans)</td></tr>
@@ -11492,8 +11492,8 @@ If the shape is an <a class="el" href="classiDynTree_1_1ExternalMesh.html">Exter
 
 </div>
 </div>
-<a id="a002119065ffa5bde0eebcb3868400ed7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a002119065ffa5bde0eebcb3868400ed7">&#9670;&nbsp;</a></span>addFrameAxes()</h2>
+<a id="a51c008cdc11e1fd88dcd952453f45a41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51c008cdc11e1fd88dcd952453f45a41">&#9670;&nbsp;</a></span>addFrameAxes()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -11517,7 +11517,25 @@ If the shape is an <a class="el" href="classiDynTree_1_1ExternalMesh.html">Exter
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">irr::f32&#160;</td>
-          <td class="paramname"><em>arrowLength</em> = <code>1.0</code>&#160;</td>
+          <td class="paramname"><em>arrowLength</em> = <code>1.0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const irr::video::SColor &amp;&#160;</td>
+          <td class="paramname"><em>red</em> = <code>irr::video::SColor(20,&#160;255,&#160;0,&#160;0)</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const irr::video::SColor &amp;&#160;</td>
+          <td class="paramname"><em>green</em> = <code>irr::video::SColor(20,&#160;0,&#160;255,&#160;0)</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const irr::video::SColor &amp;&#160;</td>
+          <td class="paramname"><em>blue</em> = <code>irr::video::SColor(20,&#160;0,&#160;0,&#160;255)</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -12316,7 +12334,7 @@ If the shape is an <a class="el" href="classiDynTree_1_1ExternalMesh.html">Exter
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceiDynTree.html">iDynTree</a></li>
-    <li class="footer">Generated on Fri Apr 23 2021 13:58:04 for iDynTree by
+    <li class="footer">Generated on Fri Apr 23 2021 14:14:14 for iDynTree by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

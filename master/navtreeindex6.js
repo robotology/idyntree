@@ -220,8 +220,10 @@ var NAVTREEINDEX6 =
 "classiDynTree_1_1DummyLight.html#ad19bac00c689920c82359020cc50eadc":[5,0,1,48,1],
 "classiDynTree_1_1DummyLight.html#af3f93dc2b96522060d8e542dac513f9b":[5,0,1,48,10],
 "classiDynTree_1_1DummyModelVisualization.html":[5,0,1,49],
+"classiDynTree_1_1DummyModelVisualization.html#a21f7e1d8640c435742c0abf372a7d747":[5,0,1,49,20],
 "classiDynTree_1_1DummyModelVisualization.html#a36ebfe454c9cb3851f988ff2b789fd8d":[5,0,1,49,8],
 "classiDynTree_1_1DummyModelVisualization.html#a3bdcdfcaf1c37690a010f3429bc050d0":[5,0,1,49,14],
+"classiDynTree_1_1DummyModelVisualization.html#a41403854207527201ee17f50fd5f4336":[5,0,1,49,21],
 "classiDynTree_1_1DummyModelVisualization.html#a48b30a5b643d86e817414b95ca097500":[5,0,1,49,18],
 "classiDynTree_1_1DummyModelVisualization.html#a4ff660905beec696ed91cc15c1d8e84a":[5,0,1,49,5],
 "classiDynTree_1_1DummyModelVisualization.html#a594842f47dc1638d8b3cfabdd32cdccb":[5,0,1,49,11],
@@ -236,6 +238,7 @@ var NAVTREEINDEX6 =
 "classiDynTree_1_1DummyModelVisualization.html#aac904896ec38e643f02abcc627fae538":[5,0,1,49,13],
 "classiDynTree_1_1DummyModelVisualization.html#ac095fe317114290305ea7e797f5b22c6":[5,0,1,49,17],
 "classiDynTree_1_1DummyModelVisualization.html#ac9b99f8f91f261cd334d0c3da3c90433":[5,0,1,49,7],
+"classiDynTree_1_1DummyModelVisualization.html#ad046251b8269c66c20bd3283411829f9":[5,0,1,49,19],
 "classiDynTree_1_1DummyModelVisualization.html#ad6d09efb3f13fa3d9aa272389a23723f":[5,0,1,49,10],
 "classiDynTree_1_1DummyModelVisualization.html#ad8474b991a868c2c3949c145c73e7a83":[5,0,1,49,12],
 "classiDynTree_1_1DummyModelVisualization.html#ae30dd7fe01de7a890d2c47d739435d5d":[5,0,1,49,3],
@@ -246,8 +249,5 @@ var NAVTREEINDEX6 =
 "classiDynTree_1_1DummyVectorsVisualization.html":[5,0,1,51],
 "classiDynTree_1_1DummyVectorsVisualization.html#a0a4e24dfd7d5767ed8430183ac92cbc5":[5,0,1,51,7],
 "classiDynTree_1_1DummyVectorsVisualization.html#a0ead5c7089fb0ee3106e1858434e41da":[5,0,1,51,6],
-"classiDynTree_1_1DummyVectorsVisualization.html#a249ec039cb115c166ec52604c7dc2568":[5,0,1,51,4],
-"classiDynTree_1_1DummyVectorsVisualization.html#a2633002af6da4195a22f1a53ac7b7fa1":[5,0,1,51,5],
-"classiDynTree_1_1DummyVectorsVisualization.html#a2cf90d1eb68ec5eeaf3e5bb3021d0e5b":[5,0,1,51,8],
-"classiDynTree_1_1DummyVectorsVisualization.html#a97bc9ce3900b4c0ef5eea569cbc3139c":[5,0,1,51,3]
+"classiDynTree_1_1DummyVectorsVisualization.html#a249ec039cb115c166ec52604c7dc2568":[5,0,1,51,4]
 };

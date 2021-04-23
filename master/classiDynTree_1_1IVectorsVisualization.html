@@ -137,6 +137,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3a84596b129fbb0755fe64629cf5b414"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1IVectorsVisualization.html#a3a84596b129fbb0755fe64629cf5b414">setVectorColor</a> (size_t vectorIndex, const <a class="el" href="classiDynTree_1_1ColorViz.html">ColorViz</a> &amp;vectorColor)=0</td></tr>
 <tr class="memdesc:a3a84596b129fbb0755fe64629cf5b414"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set vector color.  <a href="classiDynTree_1_1IVectorsVisualization.html#a3a84596b129fbb0755fe64629cf5b414">More...</a><br /></td></tr>
 <tr class="separator:a3a84596b129fbb0755fe64629cf5b414"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae986b0ea7d58f776cdd316d85e15bb8b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1IVectorsVisualization.html#ae986b0ea7d58f776cdd316d85e15bb8b">setVectorsDefaultColor</a> (const <a class="el" href="classiDynTree_1_1ColorViz.html">ColorViz</a> &amp;vectorColor)=0</td></tr>
+<tr class="memdesc:ae986b0ea7d58f776cdd316d85e15bb8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the default color for the vector.  <a href="classiDynTree_1_1IVectorsVisualization.html#ae986b0ea7d58f776cdd316d85e15bb8b">More...</a><br /></td></tr>
+<tr class="separator:ae986b0ea7d58f776cdd316d85e15bb8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05a06c2f783dfefccd571734349e385c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1IVectorsVisualization.html#a05a06c2f783dfefccd571734349e385c">setVectorsColor</a> (const <a class="el" href="classiDynTree_1_1ColorViz.html">ColorViz</a> &amp;vectorColor)=0</td></tr>
+<tr class="memdesc:a05a06c2f783dfefccd571734349e385c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the color for all the existing vectors.  <a href="classiDynTree_1_1IVectorsVisualization.html#a05a06c2f783dfefccd571734349e385c">More...</a><br /></td></tr>
+<tr class="separator:a05a06c2f783dfefccd571734349e385c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7eab12835526d138fbd89df44176e329"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1IVectorsVisualization.html#a7eab12835526d138fbd89df44176e329">setVectorsAspect</a> (double zeroModulusRadius, double modulusMultiplier, double heightScale)=0</td></tr>
 <tr class="memdesc:a7eab12835526d138fbd89df44176e329"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the dimension of the visualized arrows.  <a href="classiDynTree_1_1IVectorsVisualization.html#a7eab12835526d138fbd89df44176e329">More...</a><br /></td></tr>
 <tr class="separator:a7eab12835526d138fbd89df44176e329"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -525,6 +531,66 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ae986b0ea7d58f776cdd316d85e15bb8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae986b0ea7d58f776cdd316d85e15bb8b">&#9670;&nbsp;</a></span>setVectorsDefaultColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void iDynTree::IVectorsVisualization::setVectorsDefaultColor </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classiDynTree_1_1ColorViz.html">ColorViz</a> &amp;&#160;</td>
+          <td class="paramname"><em>vectorColor</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the default color for the vector. </p>
+
+<p>Implemented in <a class="el" href="classiDynTree_1_1VectorsVisualization.html#a3aa8178f01293c27148ca4316a493a0d">iDynTree::VectorsVisualization</a>, and <a class="el" href="classiDynTree_1_1DummyVectorsVisualization.html#ad87749ecd7064624f699f457ab7a8e6a">iDynTree::DummyVectorsVisualization</a>.</p>
+
+</div>
+</div>
+<a id="a05a06c2f783dfefccd571734349e385c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05a06c2f783dfefccd571734349e385c">&#9670;&nbsp;</a></span>setVectorsColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void iDynTree::IVectorsVisualization::setVectorsColor </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classiDynTree_1_1ColorViz.html">ColorViz</a> &amp;&#160;</td>
+          <td class="paramname"><em>vectorColor</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the color for all the existing vectors. </p>
+
+<p>Implemented in <a class="el" href="classiDynTree_1_1VectorsVisualization.html#aa0e1201eab72464a222dde6b64bdf153">iDynTree::VectorsVisualization</a>, and <a class="el" href="classiDynTree_1_1DummyVectorsVisualization.html#ad719befa2160adc04afb22183cf81554">iDynTree::DummyVectorsVisualization</a>.</p>
+
+</div>
+</div>
 <a id="a7eab12835526d138fbd89df44176e329"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7eab12835526d138fbd89df44176e329">&#9670;&nbsp;</a></span>setVectorsAspect()</h2>
 
@@ -589,7 +655,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceiDynTree.html">iDynTree</a></li><li class="navelem"><a class="el" href="classiDynTree_1_1IVectorsVisualization.html">IVectorsVisualization</a></li>
-    <li class="footer">Generated on Fri Apr 23 2021 13:58:04 for iDynTree by
+    <li class="footer">Generated on Fri Apr 23 2021 14:14:14 for iDynTree by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

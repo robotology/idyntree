@@ -20,5 +20,6 @@ var classiDynTree_1_1Visualizer =
     [ "drawToFile", "classiDynTree_1_1Visualizer.html#ac3c119f56b8b892f93391b66cc22b90c", null ],
     [ "close", "classiDynTree_1_1Visualizer.html#a7326dfca30d383941d1fd0968b476a9e", null ],
     [ "isWindowActive", "classiDynTree_1_1Visualizer.html#afeb9911ec0c555084847462a0a2959e2", null ],
+    [ "setColorPalette", "classiDynTree_1_1Visualizer.html#a6bfaee81e42d7cd60971f7a552b1c9cb", null ],
     [ "ModelVisualization", "classiDynTree_1_1Visualizer.html#a62fa7ce6e4b7f0e02925f62df919bc42", null ]
 ];
