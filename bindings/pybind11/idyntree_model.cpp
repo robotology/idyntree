@@ -11,6 +11,7 @@
 #include <iDynTree/Model/RevoluteJoint.h>
 #include <iDynTree/Model/SolidShapes.h>
 #include <iDynTree/Model/Traversal.h>
+#include <iDynTree/Model/ModelTestUtils.h>
 
 #include <pybind11/operators.h>
 #include <pybind11/pybind11.h>
@@ -104,6 +105,17 @@ void traversalClassDefinition(py::class_<Traversal>& traversal) {
            py::return_value_policy::reference)
       .def("__repr__", &Traversal::toString);
 }
+
+    void utilityFunctionsDefinition(pybind11::module& module) {
+        module
+            .def("get_random_model",
+                 iDynTree::getRandomModel,
+                 py::arg("nr_of_joints"), py::arg("nr_of_additional_frames") = 10)
+            .def("get_random_chain",
+                 iDynTree::getRandomChain,
+                 py::arg("nr_of_joints"), py::arg("nr_of_additional_frames") = 10,
+                 py::arg("nr_fixed") = false);
+    }
 
 }  // namespace
 
@@ -257,6 +269,8 @@ void iDynTreeModelBindings(pybind11::module& module) {
 
   py::class_<Model> model(module, "Model");
   modelClassDefinition(model);
+
+  utilityFunctionsDefinition(module);
 }
 
 }  // namespace bindings
