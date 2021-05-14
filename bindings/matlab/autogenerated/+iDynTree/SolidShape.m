@@ -1,4 +1,4 @@
-classdef SolidShape < SwigRef
+classdef SolidShape < iDynTreeiDynTreeSwigRef
   methods
     function this = swig_this(self)
       this = iDynTreeMEX(3, self);
@@ -61,7 +61,7 @@ classdef SolidShape < SwigRef
       [varargout{1:nargout}] = iDynTreeMEX(1003, self, varargin{:});
     end
     function self = SolidShape(varargin)
-      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

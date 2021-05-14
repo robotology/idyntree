@@ -1,4 +1,4 @@
-classdef IJetsVisualization < SwigRef
+classdef IJetsVisualization < iDynTreeiDynTreeSwigRef
   methods
     function this = swig_this(self)
       this = iDynTreeMEX(3, self);
@@ -31,7 +31,7 @@ classdef IJetsVisualization < SwigRef
       [varargout{1:nargout}] = iDynTreeMEX(1856, self, varargin{:});
     end
     function self = IJetsVisualization(varargin)
-      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

@@ -1,4 +1,4 @@
-classdef IndexRange < SwigRef
+classdef IndexRange < iDynTreeiDynTreeSwigRef
   methods
     function this = swig_this(self)
       this = iDynTreeMEX(3, self);
@@ -27,7 +27,7 @@ classdef IndexRange < SwigRef
       [varargout{1:nargout}] = iDynTreeMEX(127, self, varargin{:});
     end
     function self = IndexRange(varargin)
-      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

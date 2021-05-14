@@ -1,4 +1,4 @@
-classdef BerdySensor < SwigRef
+classdef BerdySensor < iDynTreeiDynTreeSwigRef
   methods
     function this = swig_this(self)
       this = iDynTreeMEX(3, self);
@@ -40,7 +40,7 @@ classdef BerdySensor < SwigRef
       [varargout{1:nargout}] = iDynTreeMEX(1530, self, varargin{:});
     end
     function self = BerdySensor(varargin)
-      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

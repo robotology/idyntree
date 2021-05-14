@@ -1,8 +1,8 @@
 classdef FreeFloatingMassMatrix < iDynTree.MatrixDynSize
   methods
     function self = FreeFloatingMassMatrix(varargin)
-      self@iDynTree.MatrixDynSize(SwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+      self@iDynTree.MatrixDynSize(iDynTreeiDynTreeSwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

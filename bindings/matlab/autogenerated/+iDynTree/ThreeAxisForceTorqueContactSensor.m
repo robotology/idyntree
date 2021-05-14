@@ -1,8 +1,8 @@
 classdef ThreeAxisForceTorqueContactSensor < iDynTree.LinkSensor
   methods
     function self = ThreeAxisForceTorqueContactSensor(varargin)
-      self@iDynTree.LinkSensor(SwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+      self@iDynTree.LinkSensor(iDynTreeiDynTreeSwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

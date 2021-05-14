@@ -1,4 +1,4 @@
-classdef IntVector < SwigRef
+classdef IntVector < iDynTreeiDynTreeSwigRef
   methods
     function this = swig_this(self)
       this = iDynTreeMEX(3, self);
@@ -49,7 +49,7 @@ classdef IntVector < SwigRef
       [varargout{1:nargout}] = iDynTreeMEX(60, self, varargin{:});
     end
     function self = IntVector(varargin)
-      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

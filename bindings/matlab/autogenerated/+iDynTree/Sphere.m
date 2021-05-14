@@ -16,8 +16,8 @@ classdef Sphere < iDynTree.SolidShape
       [varargout{1:nargout}] = iDynTreeMEX(1007, self, varargin{:});
     end
     function self = Sphere(varargin)
-      self@iDynTree.SolidShape(SwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+      self@iDynTree.SolidShape(iDynTreeiDynTreeSwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

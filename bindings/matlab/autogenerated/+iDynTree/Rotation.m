@@ -1,8 +1,8 @@
 classdef Rotation < iDynTree.RotationRaw
   methods
     function self = Rotation(varargin)
-      self@iDynTree.RotationRaw(SwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+      self@iDynTree.RotationRaw(iDynTreeiDynTreeSwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

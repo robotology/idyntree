@@ -1,8 +1,8 @@
 classdef Twist < iDynTree.SpatialMotionVector
   methods
     function self = Twist(varargin)
-      self@iDynTree.SpatialMotionVector(SwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+      self@iDynTree.SpatialMotionVector(iDynTreeiDynTreeSwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

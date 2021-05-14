@@ -28,8 +28,8 @@ classdef LinkSensor < iDynTree.Sensor
       [varargout{1:nargout}] = iDynTreeMEX(1262, self, varargin{:});
     end
     function self = LinkSensor(varargin)
-      self@iDynTree.Sensor(SwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+      self@iDynTree.Sensor(iDynTreeiDynTreeSwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

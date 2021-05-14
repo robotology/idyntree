@@ -1,8 +1,8 @@
 classdef JointPosDoubleArray < iDynTree.VectorDynSize
   methods
     function self = JointPosDoubleArray(varargin)
-      self@iDynTree.VectorDynSize(SwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+      self@iDynTree.VectorDynSize(iDynTreeiDynTreeSwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end
