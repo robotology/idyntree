@@ -244,6 +244,7 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
     irrDevParams.DriverType = irr::video::EDT_OPENGL;
     irrDevParams.WindowSize = irr::core::dimension2d<irr::u32>(visualizerOptions.winWidth, visualizerOptions.winHeight);
     irrDevParams.WithAlphaChannel = true;
+    irrDevParams.AntiAlias = 4;
 
     if( visualizerOptions.verbose )
     {
