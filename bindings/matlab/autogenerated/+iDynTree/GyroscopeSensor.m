@@ -1,8 +1,8 @@
 classdef GyroscopeSensor < iDynTree.LinkSensor
   methods
     function self = GyroscopeSensor(varargin)
-      self@iDynTree.LinkSensor(iDynTreeiDynTreeSwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
+      self@iDynTree.LinkSensor(iDynTreeSwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

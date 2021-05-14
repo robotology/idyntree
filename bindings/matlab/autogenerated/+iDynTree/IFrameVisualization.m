@@ -1,4 +1,4 @@
-classdef IFrameVisualization < iDynTreeiDynTreeSwigRef
+classdef IFrameVisualization < iDynTreeSwigRef
   methods
     function this = swig_this(self)
       this = iDynTreeMEX(3, self);
@@ -25,7 +25,7 @@ classdef IFrameVisualization < iDynTreeiDynTreeSwigRef
       [varargout{1:nargout}] = iDynTreeMEX(1871, self, varargin{:});
     end
     function self = IFrameVisualization(varargin)
-      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

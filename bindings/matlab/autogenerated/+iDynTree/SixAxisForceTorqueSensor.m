@@ -1,8 +1,8 @@
 classdef SixAxisForceTorqueSensor < iDynTree.JointSensor
   methods
     function self = SixAxisForceTorqueSensor(varargin)
-      self@iDynTree.JointSensor(iDynTreeiDynTreeSwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
+      self@iDynTree.JointSensor(iDynTreeSwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

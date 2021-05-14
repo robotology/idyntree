@@ -1,4 +1,4 @@
-classdef ICamera < iDynTreeiDynTreeSwigRef
+classdef ICamera < iDynTreeSwigRef
   methods
     function this = swig_this(self)
       this = iDynTreeMEX(3, self);
@@ -28,7 +28,7 @@ classdef ICamera < iDynTreeiDynTreeSwigRef
       [varargout{1:nargout}] = iDynTreeMEX(1808, self, varargin{:});
     end
     function self = ICamera(varargin)
-      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

@@ -1,8 +1,8 @@
 classdef SpatialForceVector < iDynTree.SpatialForceVectorBase
   methods
     function self = SpatialForceVector(varargin)
-      self@iDynTree.SpatialForceVectorBase(iDynTreeiDynTreeSwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
+      self@iDynTree.SpatialForceVectorBase(iDynTreeSwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

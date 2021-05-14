@@ -1,8 +1,8 @@
 classdef SpatialMotionVector < iDynTree.SpatialMotionVectorBase
   methods
     function self = SpatialMotionVector(varargin)
-      self@iDynTree.SpatialMotionVectorBase(iDynTreeiDynTreeSwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
+      self@iDynTree.SpatialMotionVectorBase(iDynTreeSwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

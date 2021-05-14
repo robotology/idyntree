@@ -1,8 +1,8 @@
 classdef AttitudeMahonyFilter < iDynTree.IAttitudeEstimator
   methods
     function self = AttitudeMahonyFilter(varargin)
-      self@iDynTree.IAttitudeEstimator(iDynTreeiDynTreeSwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
+      self@iDynTree.IAttitudeEstimator(iDynTreeSwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

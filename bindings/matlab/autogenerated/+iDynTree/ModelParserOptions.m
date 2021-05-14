@@ -1,4 +1,4 @@
-classdef ModelParserOptions < iDynTreeiDynTreeSwigRef
+classdef ModelParserOptions < iDynTreeSwigRef
   methods
     function this = swig_this(self)
       this = iDynTreeMEX(3, self);
@@ -24,7 +24,7 @@ classdef ModelParserOptions < iDynTreeiDynTreeSwigRef
       end
     end
     function self = ModelParserOptions(varargin)
-      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

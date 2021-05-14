@@ -22,8 +22,8 @@ classdef JointSensor < iDynTree.Sensor
       [varargout{1:nargout}] = iDynTreeMEX(1254, self, varargin{:});
     end
     function self = JointSensor(varargin)
-      self@iDynTree.Sensor(iDynTreeiDynTreeSwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
+      self@iDynTree.Sensor(iDynTreeSwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

@@ -1,4 +1,4 @@
-classdef AttitudeQuaternionEKFParameters < iDynTreeiDynTreeSwigRef
+classdef AttitudeQuaternionEKFParameters < iDynTreeSwigRef
   methods
     function this = swig_this(self)
       this = iDynTreeMEX(3, self);
@@ -104,7 +104,7 @@ classdef AttitudeQuaternionEKFParameters < iDynTreeiDynTreeSwigRef
       end
     end
     function self = AttitudeQuaternionEKFParameters(varargin)
-      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

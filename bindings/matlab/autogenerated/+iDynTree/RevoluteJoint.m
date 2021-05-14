@@ -1,8 +1,8 @@
 classdef RevoluteJoint < iDynTree.MovableJointImpl1
   methods
     function self = RevoluteJoint(varargin)
-      self@iDynTree.MovableJointImpl1(iDynTreeiDynTreeSwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
+      self@iDynTree.MovableJointImpl1(iDynTreeSwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

@@ -31,8 +31,8 @@ classdef MovableJointImpl4 < iDynTree.IJoint
       [varargout{1:nargout}] = iDynTreeMEX(891, self, varargin{:});
     end
     function self = MovableJointImpl4(varargin)
-      self@iDynTree.IJoint(iDynTreeiDynTreeSwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
+      self@iDynTree.IJoint(iDynTreeSwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

@@ -1,4 +1,4 @@
-classdef Polygon2D < iDynTreeiDynTreeSwigRef
+classdef Polygon2D < iDynTreeSwigRef
   methods
     function this = swig_this(self)
       this = iDynTreeMEX(3, self);
@@ -14,7 +14,7 @@ classdef Polygon2D < iDynTreeiDynTreeSwigRef
       end
     end
     function self = Polygon2D(varargin)
-      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeiDynTreeSwigRef')
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end
