@@ -1,8 +1,8 @@
 classdef MomentumFreeFloatingJacobian < iDynTree.MatrixDynSize
   methods
     function self = MomentumFreeFloatingJacobian(varargin)
-      self@iDynTree.MatrixDynSize(SwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+      self@iDynTree.MatrixDynSize(iDynTreeSwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

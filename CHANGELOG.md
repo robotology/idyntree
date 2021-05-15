@@ -1,4 +1,3 @@
-
 # Changelog
 All notable changes to this project will be documented in this file.
 
@@ -7,7 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [3.1.0] - 2020-04-23
+## [3.2.0] - 2021-05-15
+
+### Changed
+- The `SwigRef.m`, `SwigMem.m` and `SwigGet.m` MATLAB files are now named `iDynTreeSwigRef.m`, `iDynTreeSwigMem.m` and `iDynTreeSwigGet.m`. This ensure prevent the possibility that other libraries (such as CasADi) install files with the same name in the MATLAB path with incompatible content (https://github.com/robotology/idyntree/issues/865, https://github.com/robotology/idyntree/pull/868).
+
+## [3.1.0] - 2021-04-23
 
 ### Added
 - Add the possibility to use `MatrixView` and `Span` as input/output objects for `InverseKinematics` class (https://github.com/robotology/idyntree/pull/822).
@@ -22,12 +26,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dynamics: In RNEA Dynamic Loop, return zero for wrench corresponding to non-existing parent joint of base link (https://github.com/robotology/idyntree/pull/857).
 - Fixed compilation when using Eigen 3.4 (https://github.com/robotology/idyntree/pull/861).
 
-## [3.0.2] - 2020-04-11
+## [3.0.2] - 2021-04-11
 
 ### Fixed
 - Fixed compilation of Python bindings on Windows (https://github.com/robotology/idyntree/pull/843).
 
-## [3.0.1] - 2020-03-11
+## [3.0.1] - 2021-03-11
 
 ### Fixed
 - Fixed the `IDYNTREE_USES_ASSIMP` option on Windows if `IDYNTREE_USES_YARP` is also enabled (https://github.com/robotology/idyntree/pull/832).
@@ -38,8 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 - The method `ModelVisualization::getWorldModelTransform()` is deprecated, and will be removed in iDynTree 4.0.
 
-## [3.0.0] - 2020-02-03
-
+## [3.0.0] - 2021-02-03
 ### Added
 - Add the possibility to plot and update frames in the Matlab visualizer.
 - Added ``getFileLocationOnLocalFileSystem`` method in ``ExternalMesh`` that attempts to find the mesh location in the local file system. This is now used by the ``Visualizer`` when loading the robot model (https://github.com/robotology/idyntree/pull/798). This can also be used by the `iDynTreeWrapper.prepareVisualization` MATLAB function, if `meshFilePrefix` is explicitly set to `""` (https://github.com/robotology/idyntree/pull/817).
@@ -54,7 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed the `IDYNTREE_USES_IRRLICHT` option when `irrlicht` is installed via vcpkg (https://github.com/robotology/idyntree/pull/806).
 
 
-## [2.0.3] - 2020-02-03
+## [2.0.3] - 2021-02-03
 
 ### Fixed
 - Fixed use of sphere shape in MATLAB-based Visualizer (https://github.com/robotology/idyntree/pull/796).

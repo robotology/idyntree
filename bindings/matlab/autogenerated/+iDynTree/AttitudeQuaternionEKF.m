@@ -4,9 +4,9 @@ classdef AttitudeQuaternionEKF < iDynTree.IAttitudeEstimator & iDynTree.Discrete
       this = iDynTreeMEX(3, self);
     end
     function self = AttitudeQuaternionEKF(varargin)
-      self@iDynTree.IAttitudeEstimator(SwigRef.Null);
-      self@iDynTree.DiscreteExtendedKalmanFilterHelper(SwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+      self@iDynTree.IAttitudeEstimator(iDynTreeSwigRef.Null);
+      self@iDynTree.DiscreteExtendedKalmanFilterHelper(iDynTreeSwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

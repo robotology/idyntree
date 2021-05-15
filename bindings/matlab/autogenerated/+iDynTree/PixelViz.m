@@ -21,8 +21,8 @@ classdef PixelViz < iDynTree.ColorViz
       end
     end
     function self = PixelViz(varargin)
-      self@iDynTree.ColorViz(SwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+      self@iDynTree.ColorViz(iDynTreeSwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end
