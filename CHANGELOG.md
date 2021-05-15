@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [3.2.0] - 2021-05-14
+## [3.2.0] - 2021-05-15
 
 ### Changed
 - The `SwigRef.m`, `SwigMem.m` and `SwigGet.m` MATLAB files are now named `iDynTreeSwigRef.m`, `iDynTreeSwigMem.m` and `iDynTreeSwigGet.m`. This ensure prevent the possibility that other libraries (such as CasADi) install files with the same name in the MATLAB path with incompatible content (https://github.com/robotology/idyntree/issues/865, https://github.com/robotology/idyntree/pull/868).
