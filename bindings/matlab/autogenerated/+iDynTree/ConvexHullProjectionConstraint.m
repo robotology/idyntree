@@ -1,4 +1,4 @@
-classdef ConvexHullProjectionConstraint < SwigRef
+classdef ConvexHullProjectionConstraint < iDynTreeSwigRef
   methods
     function this = swig_this(self)
       this = iDynTreeMEX(3, self);
@@ -118,7 +118,7 @@ classdef ConvexHullProjectionConstraint < SwigRef
       [varargout{1:nargout}] = iDynTreeMEX(1969, self, varargin{:});
     end
     function self = ConvexHullProjectionConstraint(varargin)
-      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

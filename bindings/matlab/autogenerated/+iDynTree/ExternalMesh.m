@@ -25,8 +25,8 @@ classdef ExternalMesh < iDynTree.SolidShape
       [varargout{1:nargout}] = iDynTreeMEX(1031, self, varargin{:});
     end
     function self = ExternalMesh(varargin)
-      self@iDynTree.SolidShape(SwigRef.Null);
-      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+      self@iDynTree.SolidShape(iDynTreeSwigRef.Null);
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

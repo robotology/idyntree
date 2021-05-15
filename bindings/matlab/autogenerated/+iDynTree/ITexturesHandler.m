@@ -1,4 +1,4 @@
-classdef ITexturesHandler < SwigRef
+classdef ITexturesHandler < iDynTreeSwigRef
   methods
     function this = swig_this(self)
       this = iDynTreeMEX(3, self);
@@ -16,7 +16,7 @@ classdef ITexturesHandler < SwigRef
       [varargout{1:nargout}] = iDynTreeMEX(1906, self, varargin{:});
     end
     function self = ITexturesHandler(varargin)
-      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end

@@ -1,4 +1,4 @@
-classdef Matrix4x4Vector < SwigRef
+classdef Matrix4x4Vector < iDynTreeSwigRef
   methods
     function this = swig_this(self)
       this = iDynTreeMEX(3, self);
@@ -49,7 +49,7 @@ classdef Matrix4x4Vector < SwigRef
       [varargout{1:nargout}] = iDynTreeMEX(1782, self, varargin{:});
     end
     function self = Matrix4x4Vector(varargin)
-      if nargin==1 && strcmp(class(varargin{1}),'SwigRef')
+      if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
         if ~isnull(varargin{1})
           self.swigPtr = varargin{1}.swigPtr;
         end
