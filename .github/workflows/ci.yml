@@ -69,7 +69,7 @@ jobs:
         # Compilation related dependencies 
         mamba install -c conda-forge cmake compilers make ninja pkg-config
         # Actual dependencies
-        mamba install -c conda-forge eigen libxml2 assimp ipopt qt irrlicht python numpy
+        mamba install -c conda-forge eigen libxml2 assimp ipopt qt irrlicht swig python numpy
         # robotology dependencies
         mamba install -c conda-forge -c robotology yarp icub-main osqp-eigen
 
