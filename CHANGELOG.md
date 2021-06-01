@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- The example file `examples/python/KinDynComputationsTutorial.py` has been fixed to work with Python 3 and iDynTree >= 2.0 ().
+
 ## [3.2.0] - 2021-05-15
 
 ### Changed
