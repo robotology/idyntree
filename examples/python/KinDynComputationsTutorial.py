@@ -61,7 +61,7 @@ baseAcc.zero();
 links = dynComp.model().getNrOfLinks();
 regr = iDynTree.MatrixDynSize(6+dofs,10*links);
 ok = dynComp.inverseDynamicsInertialParametersRegressor(baseAcc, dds, regr);
-# The Dynamics Regressior is quite big, uncomment if you really want to print it
+# The Dynamics Regressor is quite big, uncomment if you really want to print it
 #if( not ok ):
 #    print("Error in computing the dynamics regressor");
 #else :
