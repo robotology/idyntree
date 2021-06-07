@@ -42,7 +42,12 @@ namespace iDynTree
         m_texture = texture;
     }
 
-    SolidShape::SolidShape(): nameIsValid(false), m_isMaterialSet(false) {}
+    SolidShape::SolidShape()
+        : nameIsValid(false)
+        , link_H_geometry(iDynTree::Transform::Identity())
+        , m_isMaterialSet(false)
+    {
+    }
 
     SolidShape::~SolidShape()
     {
