@@ -169,10 +169,6 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
 
         irr::scene::IMesh* boxMesh = smgr->getGeometryCreator()->createCubeMesh(irr::core::vector3df(box->getX(),box->getY(),box->getZ()));
 
-        irr::core::matrix4 irr2idyntree;
-        irr2idyntree.buildRotateFromTo(irr::core::vector3df(0.0,1.0,0.0),irr::core::vector3df(0.0,0.0,1.0));
-        smgr->getMeshManipulator()->transform(boxMesh,irr2idyntree);
-
         geomNode = smgr->addMeshSceneNode(boxMesh,linkNode);
 
         boxMesh->drop();
