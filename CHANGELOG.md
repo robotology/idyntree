@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+## [3.2.1] - 2021-06-07
+
 ### Fixed
 - The example file `examples/python/KinDynComputationsTutorial.py` has been fixed to work with Python 3 and iDynTree >= 2.0 (https://github.com/robotology/idyntree/pull/873).
 - Fix of a bug introduced by https://github.com/robotology/idyntree/pull/845 and present in iDynTree 3.1.0 and 3.2.0 in the visualization of boxes (https://github.com/robotology/idyntree/pull/874)
