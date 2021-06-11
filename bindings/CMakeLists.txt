@@ -97,13 +97,9 @@ endif()
 
 
 option(IDYNTREE_USES_PYTHON_PYBIND11 "Create iDynTree Python bindings using pybind11" FALSE)
-find_package(pybind11 QUIET)
 if (IDYNTREE_USES_PYTHON_PYBIND11)
-    if (${pybind11_FOUND})
-        add_subdirectory(pybind11)
-    else()
-       MESSAGE(FATAL_ERROR "pybind11 not found, impossible to generate iDynTree pybind11 bindings.")
-    endif()
+    find_package(pybind11 REQUIRED)
+    add_subdirectory(pybind11)
 endif()
 
 # Install main __init__.py file.
