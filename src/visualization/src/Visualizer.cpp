@@ -56,6 +56,10 @@ IModelVisualization::~IModelVisualization()
 {
 }
 
+ILabel::~ILabel()
+{
+}
+
 ILight::~ILight()
 {
 }

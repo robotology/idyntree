@@ -620,6 +620,81 @@ public:
 };
 
 /**
+ * The interface to add a label in the visualizer.
+ */
+
+class ILabel
+{
+public:
+
+    /**
+     * Destructor
+     */
+    virtual ~ILabel() = 0;
+
+    /**
+     * @brief Set the text of the label
+     * @param text The text to be displayed
+     */
+    virtual void setText(const std::string& text) = 0;
+
+    /**
+     * @brief Get the label text
+     * @return The text shown in the label.
+     */
+    virtual std::string getText() const = 0;
+
+    /**
+     * @brief Set the height of the label. The width is computed automatically
+     * @param height The height to be set
+     */
+    virtual void setSize(float height) = 0;
+
+    /**
+     * @brief Set the width and the height of the label
+     * @param width The width of the label
+     * @param height The height of the label
+     */
+    virtual void setSize(float width, float height) = 0;
+
+    /**
+     * @brief Get the width of the label
+     * @return The width of the label
+     */
+    virtual float width() const = 0;
+
+    /**
+     * @brief Get the height of the label
+     * @return The height of the label
+     */
+    virtual float height() const = 0;
+
+    /**
+     * @brief Set the position of the label
+     * @param position The position of the label
+     */
+    virtual void setPosition(const iDynTree::Position& position) = 0;
+
+    /**
+     * @brief Get the position of the label
+     * @return The position of the label
+     */
+    virtual iDynTree::Position getPosition() const = 0;
+
+    /**
+     * @brief Set the color of the label
+     * @param color The color of the label
+     */
+    virtual void setColor(const iDynTree::ColorViz& color) = 0;
+
+    /**
+     * @brief Set the visibility of the label
+     * @param visible The visibility of the label
+     */
+    virtual void setVisible(bool visible = true) = 0;
+};
+
+/**
  * The interface for an object that can be used as an additional target for the renderer.
  * This allows rendering the scene using dimensions and environment that are different from
  * the main window. The camera is in common. Any camera change in the main window is also

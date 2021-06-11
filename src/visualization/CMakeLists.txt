@@ -21,6 +21,7 @@ if(IDYNTREE_USES_IRRLICHT)
                                                src/Texture.h
                                                src/TexturesHandler.h
                                                src/Light.h
+                                               src/Label.h
                                                src/FloorGridSceneNode.h)
     set(iDynTree_visualization_private_source  src/Camera.cpp
                                                src/CameraAnimator.cpp
@@ -32,6 +33,7 @@ if(IDYNTREE_USES_IRRLICHT)
                                                src/Texture.cpp
                                                src/TexturesHandler.cpp
                                                src/Light.cpp
+                                               src/Label.cpp
                                                src/FloorGridSceneNode.cpp)
 endif()
 
