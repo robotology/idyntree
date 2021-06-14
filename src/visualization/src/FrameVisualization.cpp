@@ -31,6 +31,7 @@ size_t iDynTree::FrameVisualization::addFrame(const iDynTree::Transform &transfo
 
     m_frames.back().visualizationNode = addFrameAxes(m_smgr, 0, arrowLength);
     setFrameTransform(m_frames.size() - 1, transformation);
+    m_frames.back().label.init(m_smgr, m_frames.back().visualizationNode);
 
     return m_frames.size() - 1;
 }
@@ -74,6 +75,16 @@ bool iDynTree::FrameVisualization::updateFrame(size_t frameIndex, const iDynTree
     }
     setFrameTransform(frameIndex, transformation);
     return true;
+}
+
+iDynTree::ILabel *iDynTree::FrameVisualization::getFrameLabel(size_t frameIndex)
+{
+    if (frameIndex >= m_frames.size()) {
+        reportError("FrameVisualization","getFrameLabel","frameIndex out of bounds.");
+        return nullptr;
+    }
+
+    return &m_frames[frameIndex].label;
 }
 
 iDynTree::FrameVisualization::~FrameVisualization()

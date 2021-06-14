@@ -11,6 +11,7 @@
 #define IDYNTREE_FRAMEVISUALIZATION_H
 
 #include <iDynTree/Visualizer.h>
+#include "Label.h"
 
 #include <vector>
 #include <irrlicht.h>
@@ -22,6 +23,7 @@ namespace iDynTree
         struct Frame
         {
             irr::scene::ISceneNode * visualizationNode = nullptr;
+            Label label;
         };
 
         std::vector<Frame> m_frames;
@@ -52,6 +54,8 @@ namespace iDynTree
         virtual bool getFrameTransform(size_t frameIndex, Transform& currentTransform) const final;
 
         virtual bool updateFrame(size_t frameIndex, const Transform& transformation) final;
+
+        virtual ILabel* getFrameLabel(size_t frameIndex) final;
 
     };
 }

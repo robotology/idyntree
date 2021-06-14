@@ -141,6 +141,7 @@ void checkFrameVisualization() {
 
     size_t index = frames.addFrame(firstTransform);
     ASSERT_IS_TRUE(index == 0);
+    frames.getFrameLabel(0)->setText("First");
 
     iDynTree::Transform secondTransform;
     secondTransform.setRotation(iDynTree::Rotation::RPY(-1.57, 0,0));
@@ -148,6 +149,7 @@ void checkFrameVisualization() {
 
     index = frames.addFrame(secondTransform);
     ASSERT_IS_TRUE(index == 1);
+    frames.getFrameLabel(1)->setText("Second");
 
     for(int i=0; i < 5; i++)
     {

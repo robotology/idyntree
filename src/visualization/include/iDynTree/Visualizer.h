@@ -585,6 +585,13 @@ public:
      * Update Frame
      */
     virtual bool updateFrame(size_t frameIndex, const Transform& transformation) = 0;
+
+    /**
+     * Get the label of a frame.
+     *
+     * Returns nullptr of the frame index is out of bounds.
+     */
+    virtual ILabel* getFrameLabel(size_t frameIndex) = 0;
 };
 
 
