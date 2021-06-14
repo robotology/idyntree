@@ -186,12 +186,29 @@ void checkFrameVisualization() {
 
 }
 
+void checkLabelVisualization()
+{
+    iDynTree::Visualizer viz;
+
+    iDynTree::ILabel& label = viz.getLabel("dummy");
+    label.setText("Label test");
+    label.setSize(1.0);
+    label.setPosition(iDynTree::Position(-1.0, -1.0, 0.1));
+    label.setColor(iDynTree::ColorViz(1.0, 0.0, 0.0, 0.0));
+
+    for(int i=0; i < 5; i++)
+    {
+        viz.draw();
+    }
+}
+
 int main()
 {
     threeLinksReducedTest();
     checkArrowsVisualization();
     checkAdditionalTexture();
     checkFrameVisualization();
+    checkLabelVisualization();
 
     return EXIT_SUCCESS;
 }

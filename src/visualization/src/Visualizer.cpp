@@ -551,6 +551,10 @@ ITexturesHandler &Visualizer::textures()
 ILabel &Visualizer::getLabel(const std::string &labelName)
 {
 #ifdef IDYNTREE_USES_IRRLICHT
+    if( !this->pimpl->m_isInitialized )
+    {
+        init();
+    }
     Label& requestedLabel =  this->pimpl->m_labels[labelName];
     if (!requestedLabel.initialized())
     {
