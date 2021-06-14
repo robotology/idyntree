@@ -141,12 +141,12 @@ void Label::setSize(float width, float height)
 
 float Label::width() const
 {
-    return m_width;
+    return -m_width;
 }
 
 float Label::height() const
 {
-    return m_height;
+    return -m_height;
 }
 
 void Label::setPosition(const iDynTree::Position &position)
