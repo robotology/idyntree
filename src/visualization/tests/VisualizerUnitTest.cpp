@@ -76,7 +76,7 @@ void checkArrowsVisualization() {
     ok = vectors.updateVector(index, iDynTree::Position(0.2, 0.1, 0.1), components);
     ASSERT_IS_TRUE(ok);
 
-
+    vectors.getVectorLabel(0)->setText("Vector0");
 
     for(int i=0; i < 5; i++)
     {

@@ -27,9 +27,21 @@ class Label : public iDynTree::ILabel
 
 public:
 
+    Label();
+
+    Label(const Label& other);
+
+    Label(Label&& other);
+
+    Label& operator=(const Label& other);
+
+    Label& operator=(Label&& other);
+
     virtual ~Label();
 
     void init(irr::scene::ISceneManager* smgr, irr::scene::ISceneNode* parent = nullptr);
+
+    bool initialized() const;
 
     virtual void setText(const std::string& text) final;
 
@@ -49,7 +61,7 @@ public:
 
     virtual void setColor(const iDynTree::ColorViz& color) final;
 
-    virtual void setVisible(bool visible = true) final;
+    virtual void setVisible(bool visible) final;
 };
 
 #endif // LABEL_H

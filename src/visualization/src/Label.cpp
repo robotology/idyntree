@@ -16,6 +16,48 @@
 #include "IrrlichtUtils.h"
 
 
+Label::Label()
+{
+
+}
+
+Label::Label(const Label &other)
+{
+    operator=(other);
+}
+
+Label::Label(Label &&other)
+{
+    operator=(other);
+}
+
+Label &Label::operator=(const Label &other)
+{
+    m_font = other.m_font;
+    if (m_font)
+    {
+        m_font->grab();
+    }
+
+    m_label = other.m_label;
+    if (m_label)
+    {
+        m_label->grab();
+    }
+    return *this;
+}
+
+Label &Label::operator=(Label &&other)
+{
+    m_font = other.m_font;
+    other.m_font = nullptr;
+
+    m_label = other.m_label;
+    other.m_label = nullptr;
+
+    return *this;
+}
+
 Label::~Label()
 {
     if (m_font)
@@ -39,6 +81,11 @@ void Label::init(irr::scene::ISceneManager *smgr, irr::scene::ISceneNode *parent
 
     m_label = smgr->addBillboardTextSceneNode(m_font, L"", parent);
     m_label->grab();
+}
+
+bool Label::initialized() const
+{
+    return m_font && m_label;
 }
 
 void Label::setText(const std::string &text)

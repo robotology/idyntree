@@ -22,13 +22,6 @@ using namespace iDynTree;
 
 void VectorsVisualization::drawVector(size_t vectorIndex)
 {
-    // Delete existing node
-    if (m_vectors[vectorIndex].visualizationNode)
-    {
-        m_vectors[vectorIndex].visualizationNode->remove();
-        m_vectors[vectorIndex].visualizationNode = nullptr;
-    }
-
     float arrowHeight = static_cast<float>(std::abs(m_vectors[vectorIndex].modulus) * m_heightScale);
     float arrowWidth = static_cast<float>(m_radiusOffset +
                                           m_radiusMultiplier * std::abs(m_vectors[vectorIndex].modulus) * m_heightScale);
@@ -58,7 +51,14 @@ void VectorsVisualization::drawVector(size_t vectorIndex)
     irr::scene::IMesh* arrowMesh = m_smgr->getGeometryCreator()->createArrowMesh(4, 8, arrowHeight, 0.9f * arrowHeight,
                                                                                  arrowWidth, 2.0f * arrowWidth);
 
-    m_vectors[vectorIndex].visualizationNode = m_smgr->addMeshSceneNode(arrowMesh,frameNode);
+    if (m_vectors[vectorIndex].visualizationNode)
+    {
+        m_vectors[vectorIndex].visualizationNode->setMesh(arrowMesh);
+    }
+    else
+    {
+        m_vectors[vectorIndex].visualizationNode = m_smgr->addMeshSceneNode(arrowMesh,frameNode);
+    }
     m_vectors[vectorIndex].visualizationNode->setPosition(arrowPosition);
     m_vectors[vectorIndex].visualizationNode->setRotation(arrowRotation);
     irr::video::SMaterial arrowColor;
@@ -128,6 +128,7 @@ size_t VectorsVisualization::addVector(const Position &origin, const Direction &
     m_vectors.push_back(newVector);
 
     drawVector(m_vectors.size()-1);
+    m_vectors.back().label.init(m_smgr, m_vectors.back().visualizationNode);
 
     return m_vectors.size() - 1;
 }
@@ -242,4 +243,14 @@ bool VectorsVisualization::setVectorsAspect(double zeroModulusRadius, double mod
     drawAll();
 
     return true;
+}
+
+ILabel *VectorsVisualization::getVectorLabel(size_t vectorIndex)
+{
+    if (vectorIndex >= m_vectors.size()) {
+        reportError("VectorsVisualization","getVectorLabel","vectorIndex out of bounds.");
+        return nullptr;
+    }
+
+    return &m_vectors[vectorIndex].label;
 }

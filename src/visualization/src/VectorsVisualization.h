@@ -11,6 +11,7 @@
 #define IDYNTREE_VECTORS_VISUALIZATION_H
 
 #include <iDynTree/Visualizer.h>
+#include "Label.h"
 
 #include <vector>
 #include <irrlicht.h>
@@ -24,7 +25,8 @@ namespace iDynTree {
             Direction direction;
             double modulus;
             ColorViz color = ColorViz(1.0, 0.0, 0.0, 1.0);
-            irr::scene::ISceneNode * visualizationNode = nullptr;
+            Label label;
+            irr::scene::IMeshSceneNode * visualizationNode = nullptr;
         } VectorsProperties;
 
         ColorViz m_vectorsDefaultColor{ColorViz(1.0, 0.0, 0.0, 1.0)};
@@ -75,6 +77,8 @@ namespace iDynTree {
         virtual void setVectorsColor(const ColorViz &vectorColor) override;
 
         virtual bool setVectorsAspect(double zeroModulusRadius, double modulusMultiplier, double heightScale) override;
+
+        virtual ILabel* getVectorLabel(size_t vectorIndex) override;
 
     };
 

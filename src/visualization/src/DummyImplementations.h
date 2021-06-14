@@ -93,6 +93,22 @@ public:
     virtual bool setJetsIntensity(const VectorDynSize & ) { return false; };
 };
 
+class DummyLabel : public iDynTree::ILabel
+{
+public:
+    virtual ~DummyLabel() override {};
+    virtual void setText(const std::string& ) override {};
+    virtual std::string getText() const override {return "";};
+    virtual void setSize(float ) override {};
+    virtual void setSize(float , float ) override {};
+    virtual float width() const override {return 0.0;};
+    virtual float height() const override {return 0.0;};
+    virtual void setPosition(const iDynTree::Position& ) override {};
+    virtual iDynTree::Position getPosition() const override {return iDynTree::Position::Zero();};
+    virtual void setColor(const iDynTree::ColorViz& ) override {};
+    virtual void setVisible(bool ) override {};
+};
+
 class DummyVectorsVisualization : public IVectorsVisualization {
 public:
     virtual ~DummyVectorsVisualization() override { }
@@ -107,6 +123,7 @@ public:
     virtual bool setVectorsAspect(double, double, double) override { return false; }
     virtual void setVectorsColor(const ColorViz &) override { return; }
     virtual void setVectorsDefaultColor(const ColorViz &) override { return; }
+    virtual ILabel* getVectorLabel(size_t ) override {return nullptr;}
 };
 
 class DummyFrameVisualization : public IFrameVisualization

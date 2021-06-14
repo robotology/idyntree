@@ -22,10 +22,12 @@
 #include "FrameVisualization.h"
 #include "TexturesHandler.h"
 #include "CameraAnimator.h"
+#include "Label.h"
 #endif
 
 #include "DummyImplementations.h"
 
+#include <unordered_map>
 #include <cassert>
 
 namespace iDynTree
@@ -152,7 +154,16 @@ struct Visualizer::VisualizerPimpl
      */
     TexturesHandler m_textures;
 
+    /**
+     * Dimension of the root frame arrows
+     */
     double rootFrameArrowsDimension;
+
+    /**
+     * Set of labels
+     */
+    std::unordered_map<std::string, Label> m_labels;
+
     struct ColorPalette
     {
         irr::video::SColorf background = irr::video::SColorf(0.0,0.4,0.4,1.0);
@@ -190,6 +201,7 @@ struct Visualizer::VisualizerPimpl
     DummyVectorsVisualization m_invalidVectors;
     DummyFrameVisualization m_invalidFrames;
     DummyTexturesHandler m_invalidTextures;
+    DummyLabel m_invalidLabel;
 #endif
 
     VisualizerPimpl()
@@ -533,6 +545,20 @@ ITexturesHandler &Visualizer::textures()
     return this->pimpl->m_textures;
 #else
     return this->pimpl->m_invalidTextures;
+#endif
+}
+
+ILabel &Visualizer::getLabel(const std::string &labelName)
+{
+#ifdef IDYNTREE_USES_IRRLICHT
+    Label& requestedLabel =  this->pimpl->m_labels[labelName];
+    if (!requestedLabel.initialized())
+    {
+        requestedLabel.init(this->pimpl->m_irrSmgr);
+    }
+    return requestedLabel;
+#else
+    return this->pimpl->m_invalidLabel;
 #endif
 }
 
