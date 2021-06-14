@@ -147,6 +147,7 @@ class DummyModelVisualization : public IModelVisualization
 {
     Model m_dummyModel;
     DummyJetsVisualization m_dummyJets;
+    DummyLabel m_dummyLabel;
 public:
     virtual ~DummyModelVisualization() {};
     virtual bool init(const Model& , const std::string , Visualizer &) { return false; }
@@ -170,6 +171,7 @@ public:
     virtual Transform getWorldFrameTransform(const FrameIndex &) { return iDynTree::Transform::Identity(); }
     virtual Transform getWorldLinkTransform(const std::string &) { return iDynTree::Transform::Identity(); }
     virtual Transform getWorldFrameTransform(const std::string &) { return iDynTree::Transform::Identity(); }
+    virtual ILabel& label() { return m_dummyLabel; };
 };
 
 class DummyTexturesHandler : public ITexturesHandler

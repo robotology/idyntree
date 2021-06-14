@@ -23,6 +23,11 @@ void checkVizLoading(const iDynTree::Model & model)
     bool ok = viz.addModel(model,"model");
     ASSERT_IS_TRUE(ok);
 
+    iDynTree::ILabel& label = viz.modelViz("model").label();
+    label.setText("TEST MODEL");
+    label.setSize(1.0);
+    label.setPosition(iDynTree::Position(-1.0, -1.0, 0.3));
+
     for(int i=0; i < 5; i++)
     {
         viz.draw();
