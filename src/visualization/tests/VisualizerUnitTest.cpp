@@ -83,6 +83,14 @@ void checkArrowsVisualization() {
         viz.draw();
     }
 
+    ok = vectors.setVisible(0, false);
+    ASSERT_IS_TRUE(ok);
+
+    for(int i=0; i < 5; i++)
+    {
+        viz.draw();
+    }
+
     viz.close();
 }
 

@@ -78,6 +78,8 @@ namespace iDynTree {
 
         virtual bool setVectorsAspect(double zeroModulusRadius, double modulusMultiplier, double heightScale) override;
 
+        virtual bool setVisible(size_t vectorIndex, bool visible) override;
+
         virtual ILabel* getVectorLabel(size_t vectorIndex) override;
 
     };

@@ -123,6 +123,7 @@ public:
     virtual bool setVectorsAspect(double, double, double) override { return false; }
     virtual void setVectorsColor(const ColorViz &) override { return; }
     virtual void setVectorsDefaultColor(const ColorViz &) override { return; }
+    virtual bool setVisible(size_t , bool ) override { return false; }
     virtual ILabel* getVectorLabel(size_t ) override {return nullptr;}
 };
 

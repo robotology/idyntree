@@ -245,6 +245,18 @@ bool VectorsVisualization::setVectorsAspect(double zeroModulusRadius, double mod
     return true;
 }
 
+bool VectorsVisualization::setVisible(size_t vectorIndex, bool visible)
+{
+    if (vectorIndex >= m_vectors.size()) {
+        reportError("VectorsVisualization","setVisible","vectorIndex out of bounds.");
+        return false;
+    }
+
+    m_vectors[vectorIndex].visualizationNode->setVisible(visible);
+
+    return true;
+}
+
 ILabel *VectorsVisualization::getVectorLabel(size_t vectorIndex)
 {
     if (vectorIndex >= m_vectors.size()) {

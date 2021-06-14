@@ -531,6 +531,14 @@ public:
     virtual bool setVectorsAspect(double zeroModulusRadius, double modulusMultiplier, double heightScale) = 0;
 
     /**
+     * @brief Set the visibility of a given vector
+     * @param The index of the vector to change the visibility
+     * @param visible The visibility of the vector
+     * @return true if successfull, false if the index is out of bounds
+     */
+    virtual bool setVisible(size_t vectorIndex, bool visible = true) = 0;
+
+    /**
      * @brief Get the label associated to a vector
      * @param vectorIndex The index of the vector to get the label
      * @return The label associated to the vector. nullptr if the vectorIndex is out of bounds.
