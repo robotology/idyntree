@@ -383,6 +383,81 @@ public:
 };
 
 /**
+ * The interface to add a label in the visualizer.
+ */
+
+class ILabel
+{
+public:
+
+    /**
+     * Destructor
+     */
+    virtual ~ILabel() = 0;
+
+    /**
+     * @brief Set the text of the label
+     * @param text The text to be displayed
+     */
+    virtual void setText(const std::string& text) = 0;
+
+    /**
+     * @brief Get the label text
+     * @return The text shown in the label.
+     */
+    virtual std::string getText() const = 0;
+
+    /**
+     * @brief Set the height of the label. The width is computed automatically
+     * @param height The height to be set
+     */
+    virtual void setSize(float height) = 0;
+
+    /**
+     * @brief Set the width and the height of the label
+     * @param width The width of the label
+     * @param height The height of the label
+     */
+    virtual void setSize(float width, float height) = 0;
+
+    /**
+     * @brief Get the width of the label
+     * @return The width of the label
+     */
+    virtual float width() const = 0;
+
+    /**
+     * @brief Get the height of the label
+     * @return The height of the label
+     */
+    virtual float height() const = 0;
+
+    /**
+     * @brief Set the position of the label
+     * @param position The position of the label
+     */
+    virtual void setPosition(const iDynTree::Position& position) = 0;
+
+    /**
+     * @brief Get the position of the label
+     * @return The position of the label
+     */
+    virtual iDynTree::Position getPosition() const = 0;
+
+    /**
+     * @brief Set the color of the label
+     * @param color The color of the label
+     */
+    virtual void setColor(const iDynTree::ColorViz& color) = 0;
+
+    /**
+     * @brief Set the visibility of the label
+     * @param visible The visibility of the label
+     */
+    virtual void setVisible(bool visible = true) = 0;
+};
+
+/**
  * Interface to the visualization of vectors.
  */
 class IVectorsVisualization
@@ -454,6 +529,21 @@ public:
      * @return true if successfull, false in case of negative numbers.
      */
     virtual bool setVectorsAspect(double zeroModulusRadius, double modulusMultiplier, double heightScale) = 0;
+
+    /**
+     * @brief Set the visibility of a given vector
+     * @param The index of the vector to change the visibility
+     * @param visible The visibility of the vector
+     * @return true if successfull, false if the index is out of bounds
+     */
+    virtual bool setVisible(size_t vectorIndex, bool visible = true) = 0;
+
+    /**
+     * @brief Get the label associated to a vector
+     * @param vectorIndex The index of the vector to get the label
+     * @return The label associated to the vector. nullptr if the vectorIndex is out of bounds.
+     */
+    virtual ILabel* getVectorLabel(size_t vectorIndex) = 0;
 };
 
 /**
@@ -495,6 +585,13 @@ public:
      * Update Frame
      */
     virtual bool updateFrame(size_t frameIndex, const Transform& transformation) = 0;
+
+    /**
+     * Get the label of a frame.
+     *
+     * Returns nullptr of the frame index is out of bounds.
+     */
+    virtual ILabel* getFrameLabel(size_t frameIndex) = 0;
 };
 
 
@@ -617,6 +714,11 @@ public:
      * Get the transformation of given frame with respect to visualizer world \f$ w_H_{frame}\f$
      */
     virtual Transform getWorldFrameTransform(const std::string& frameName) = 0;
+
+    /**
+     * Get the label for the model.
+     */
+    virtual ILabel& label() = 0;
 };
 
 /**
@@ -814,6 +916,11 @@ public:
      * Get a reference to the internal ITexturesHandler interface.
      */
     ITexturesHandler& textures();
+
+    /**
+     * Get a label given a name. Note: this does not set the text in the label.
+     */
+    ILabel& getLabel(const std::string& labelName);
 
     /**
      * Wrap the run method of the Irrlicht device.

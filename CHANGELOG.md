@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Add the visualization of labels in the visualizer (https://github.com/robotology/idyntree/pull/879)
 
 ## [3.2.1] - 2021-06-07
 
