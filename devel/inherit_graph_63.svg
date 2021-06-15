@@ -8,9 +8,9 @@
  viewBox="0.00 0.00 376.00 83.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 79)">
 <title>Graphical Class Hierarchy</title>
-<!-- Node320 -->
+<!-- Node323 -->
 <g id="node1" class="node">
-<title>Node320</title>
+<title>Node323</title>
 <g id="a_node1"><a xlink:href="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper.html" target="_top" xlink:title=" ">
 <polygon fill="none" stroke="black" points="1.5,-44.5 1.5,-74.5 153.5,-74.5 153.5,-44.5 1.5,-44.5"/>
 <text text-anchor="start" x="9.5" y="-62.5" font-family="FreeSans.ttf" font-size="10.00">iDynTree::DiscreteExtended</text>
@@ -27,9 +27,9 @@
 </a>
 </g>
 </g>
-<!-- Node320&#45;&gt;Node2 -->
+<!-- Node323&#45;&gt;Node2 -->
 <g id="edge1" class="edge">
-<title>Node320&#45;&gt;Node2</title>
+<title>Node323&#45;&gt;Node2</title>
 <path fill="none" stroke="midnightblue" d="M163.65,-59.5C172.67,-59.5 181.86,-59.5 190.92,-59.5"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="163.54,-56 153.54,-59.5 163.54,-63 163.54,-56"/>
 </g>

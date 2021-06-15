@@ -15,6 +15,7 @@ var classiDynTree_1_1Visualizer =
     [ "vectors", "classiDynTree_1_1Visualizer.html#a54c8186b01f017d0fb7aa1a4e5d2bf06", null ],
     [ "frames", "classiDynTree_1_1Visualizer.html#a46b3b391bec47966fa59c3c4232b76b0", null ],
     [ "textures", "classiDynTree_1_1Visualizer.html#a42b28c59da585545ad40f24dba3853b8", null ],
+    [ "getLabel", "classiDynTree_1_1Visualizer.html#a003497c7bbc6e20a4eddd6ac824e5f49", null ],
     [ "run", "classiDynTree_1_1Visualizer.html#abfa7aed891eb9df40e200892567be8c7", null ],
     [ "draw", "classiDynTree_1_1Visualizer.html#a1517692d3f37e28a7e51b1c5b4117571", null ],
     [ "drawToFile", "classiDynTree_1_1Visualizer.html#ac3c119f56b8b892f93391b66cc22b90c", null ],

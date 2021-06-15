@@ -139,6 +139,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a20b9c976ffb6d9e5cf3588d98ac98db8"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1FrameVisualization.html#a20b9c976ffb6d9e5cf3588d98ac98db8">updateFrame</a> (size_t frameIndex, const <a class="el" href="classiDynTree_1_1Transform.html">Transform</a> &amp;transformation) final</td></tr>
 <tr class="memdesc:a20b9c976ffb6d9e5cf3588d98ac98db8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update Frame.  <a href="classiDynTree_1_1FrameVisualization.html#a20b9c976ffb6d9e5cf3588d98ac98db8">More...</a><br /></td></tr>
 <tr class="separator:a20b9c976ffb6d9e5cf3588d98ac98db8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74154372d089e7df954c7a4c8224f286"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classiDynTree_1_1ILabel.html">ILabel</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1FrameVisualization.html#a74154372d089e7df954c7a4c8224f286">getFrameLabel</a> (size_t frameIndex) final</td></tr>
+<tr class="memdesc:a74154372d089e7df954c7a4c8224f286"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the label of a frame.  <a href="classiDynTree_1_1FrameVisualization.html#a74154372d089e7df954c7a4c8224f286">More...</a><br /></td></tr>
+<tr class="separator:a74154372d089e7df954c7a4c8224f286"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a2664dc635c2cef3ac96a5414d8ba3f21"></a>
@@ -453,6 +456,37 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a74154372d089e7df954c7a4c8224f286"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74154372d089e7df954c7a4c8224f286">&#9670;&nbsp;</a></span>getFrameLabel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classiDynTree_1_1ILabel.html">iDynTree::ILabel</a> * iDynTree::FrameVisualization::getFrameLabel </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>frameIndex</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the label of a frame. </p>
+<p>Returns nullptr of the frame index is out of bounds. </p>
+
+<p>Implements <a class="el" href="classiDynTree_1_1IFrameVisualization.html#ae7d29e6ef3940b5cd519b1772f459c56">iDynTree::IFrameVisualization</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="FrameVisualization_8h.html">FrameVisualization.h</a></li>
 <li><a class="el" href="FrameVisualization_8cpp.html">FrameVisualization.cpp</a></li>
@@ -463,7 +497,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceiDynTree.html">iDynTree</a></li><li class="navelem"><a class="el" href="classiDynTree_1_1FrameVisualization.html">FrameVisualization</a></li>
-    <li class="footer">Generated on Sat Jun 12 2021 10:33:22 for iDynTree by
+    <li class="footer">Generated on Tue Jun 15 2021 14:27:37 for iDynTree by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

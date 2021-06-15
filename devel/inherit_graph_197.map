@@ -1,3 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structiDynTree_1_1stackEl.html" title=" " alt="" coords="5,5,140,32"/>
+<area shape="rect" id="node1" href="$classiDynTree_1_1SpatialVector.html" title=" " alt="" coords="5,23,188,65"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1SpatialMotionVector.html" title="Class providing the raw coordinates for any motion spatial vector (i.e." alt="" coords="236,31,455,57"/>
+<area shape="rect" id="node3" href="$classiDynTree_1_1SpatialAcc.html" title="Class representing a spatial acceleration, i.e." alt="" coords="503,5,657,32"/>
+<area shape="rect" id="node4" href="$classiDynTree_1_1Twist.html" title="Class representing a twist, i.e." alt="" coords="520,56,640,83"/>
 </map>

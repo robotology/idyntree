@@ -21,5 +21,6 @@ var classiDynTree_1_1DummyModelVisualization =
     [ "getWorldLinkTransform", "classiDynTree_1_1DummyModelVisualization.html#a48b30a5b643d86e817414b95ca097500", null ],
     [ "getWorldFrameTransform", "classiDynTree_1_1DummyModelVisualization.html#ad046251b8269c66c20bd3283411829f9", null ],
     [ "getWorldLinkTransform", "classiDynTree_1_1DummyModelVisualization.html#a21f7e1d8640c435742c0abf372a7d747", null ],
-    [ "getWorldFrameTransform", "classiDynTree_1_1DummyModelVisualization.html#a41403854207527201ee17f50fd5f4336", null ]
+    [ "getWorldFrameTransform", "classiDynTree_1_1DummyModelVisualization.html#a41403854207527201ee17f50fd5f4336", null ],
+    [ "label", "classiDynTree_1_1DummyModelVisualization.html#abf29b8ced8ab50c4e29336c566d8f568", null ]
 ];

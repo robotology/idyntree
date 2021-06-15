@@ -7,6 +7,7 @@ var Visualizer_8h =
     [ "ILight", "classiDynTree_1_1ILight.html", "classiDynTree_1_1ILight" ],
     [ "IEnvironment", "classiDynTree_1_1IEnvironment.html", "classiDynTree_1_1IEnvironment" ],
     [ "IJetsVisualization", "classiDynTree_1_1IJetsVisualization.html", "classiDynTree_1_1IJetsVisualization" ],
+    [ "ILabel", "classiDynTree_1_1ILabel.html", "classiDynTree_1_1ILabel" ],
     [ "IVectorsVisualization", "classiDynTree_1_1IVectorsVisualization.html", "classiDynTree_1_1IVectorsVisualization" ],
     [ "IFrameVisualization", "classiDynTree_1_1IFrameVisualization.html", "classiDynTree_1_1IFrameVisualization" ],
     [ "IModelVisualization", "classiDynTree_1_1IModelVisualization.html", "classiDynTree_1_1IModelVisualization" ],

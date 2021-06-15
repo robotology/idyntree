@@ -1,8 +1,10 @@
 <map id="iDynTree::ModelVisualization::ModelVisualizationPimpl" name="iDynTree::ModelVisualization::ModelVisualizationPimpl">
-<area shape="rect" id="node1" title=" " alt="" coords="604,74,815,115"/>
+<area shape="rect" id="node1" title=" " alt="" coords="604,99,815,141"/>
 <area shape="rect" id="node2" href="$classiDynTree_1_1JetsVisualization.html" title=" " alt="" coords="253,5,448,32"/>
 <area shape="rect" id="node3" href="$classiDynTree_1_1IJetsVisualization.html" title="Interface to the visualization of jets attached to a model." alt="" coords="5,5,204,32"/>
 <area shape="rect" id="node4" href="$classiDynTree_1_1Traversal.html" title="Class that represents a traversal of a set of links of a Model." alt="" coords="277,56,424,83"/>
 <area shape="rect" id="node5" href="$classiDynTree_1_1Model.html" title="Class that represents a generic multibody model." alt="" coords="287,107,414,133"/>
 <area shape="rect" id="node6" href="$classiDynTree_1_1LinkPositions.html" title=" " alt="" coords="264,157,437,184"/>
+<area shape="rect" id="node7" href="$classLabel.html" title=" " alt="" coords="322,208,379,235"/>
+<area shape="rect" id="node8" href="$classiDynTree_1_1ILabel.html" title="The interface to add a label in the visualizer." alt="" coords="41,208,168,235"/>
 </map>

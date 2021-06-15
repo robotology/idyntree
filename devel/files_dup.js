@@ -103,6 +103,7 @@ var files_dup =
       [ "DummyLight", "classiDynTree_1_1DummyLight.html", "classiDynTree_1_1DummyLight" ],
       [ "DummyEnvironment", "classiDynTree_1_1DummyEnvironment.html", "classiDynTree_1_1DummyEnvironment" ],
       [ "DummyJetsVisualization", "classiDynTree_1_1DummyJetsVisualization.html", "classiDynTree_1_1DummyJetsVisualization" ],
+      [ "DummyLabel", "classiDynTree_1_1DummyLabel.html", "classiDynTree_1_1DummyLabel" ],
       [ "DummyVectorsVisualization", "classiDynTree_1_1DummyVectorsVisualization.html", "classiDynTree_1_1DummyVectorsVisualization" ],
       [ "DummyFrameVisualization", "classiDynTree_1_1DummyFrameVisualization.html", "classiDynTree_1_1DummyFrameVisualization" ],
       [ "DummyModelVisualization", "classiDynTree_1_1DummyModelVisualization.html", "classiDynTree_1_1DummyModelVisualization" ],
@@ -242,6 +243,10 @@ var files_dup =
       [ "L2NormCostImplementation", "classiDynTree_1_1optimalcontrol_1_1L2NormCost_1_1L2NormCostImplementation.html", "classiDynTree_1_1optimalcontrol_1_1L2NormCost_1_1L2NormCostImplementation" ]
     ] ],
     [ "L2NormCost.h", "L2NormCost_8h.html", null ],
+    [ "Label.cpp", "Label_8cpp.html", null ],
+    [ "Label.h", "Label_8h.html", [
+      [ "Label", "classLabel.html", "classLabel" ]
+    ] ],
     [ "Light.cpp", "Light_8cpp.html", "Light_8cpp" ],
     [ "Light.h", "Light_8h.html", [
       [ "Light", "classiDynTree_1_1Light.html", "classiDynTree_1_1Light" ]

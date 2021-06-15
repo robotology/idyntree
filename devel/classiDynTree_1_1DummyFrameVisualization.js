@@ -5,5 +5,6 @@ var classiDynTree_1_1DummyFrameVisualization =
     [ "setVisible", "classiDynTree_1_1DummyFrameVisualization.html#ae7972e3ba3f20f22f38edd6554367aec", null ],
     [ "getNrOfFrames", "classiDynTree_1_1DummyFrameVisualization.html#abebdff4ab2cb4b91de6b83242b461fab", null ],
     [ "getFrameTransform", "classiDynTree_1_1DummyFrameVisualization.html#a01dd0e892f8edbe283f85dc20f8e0bc8", null ],
-    [ "updateFrame", "classiDynTree_1_1DummyFrameVisualization.html#ada98a1a3ca2991724bda875fc2913e1a", null ]
+    [ "updateFrame", "classiDynTree_1_1DummyFrameVisualization.html#ada98a1a3ca2991724bda875fc2913e1a", null ],
+    [ "getFrameLabel", "classiDynTree_1_1DummyFrameVisualization.html#aca9e5ae2a03983fcbb8eb5a8b275a5fd", null ]
 ];
