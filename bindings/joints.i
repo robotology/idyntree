@@ -25,6 +25,13 @@ namespace iDynTree{
             dynamic_cast<const iDynTree::FixedJoint*>($self);
         return (p != 0);
     }
+    
+    bool isPrismaticJoint() const
+    {
+        const iDynTree::PrismaticJoint * p =
+            dynamic_cast<const iDynTree::PrismaticJoint*>($self);
+        return (p != 0);
+    }
 
     iDynTree::RevoluteJoint * asRevoluteJoint()
     {
@@ -40,6 +47,12 @@ namespace iDynTree{
         return p;
     }
 
+    iDynTree::PrismaticJoint * asPrismaticJoint()
+    {
+        iDynTree::PrismaticJoint * p =
+            static_cast<iDynTree::PrismaticJoint*>($self);
+        return p;
+    }
 }
 
 }

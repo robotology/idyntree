@@ -4,10 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [UnreleasedMajor]
 
 ### Added
 - Add the visualization of labels in the visualizer (https://github.com/robotology/idyntree/pull/879)
+
+## [Unreleased]
+
+### Added
+- Add the `is/asPrismaticJoint` methods in the bindings (https://github.com/robotology/idyntree/issues/881, https://github.com/robotology/idyntree/pull/882)
+>>>>>>> master
 
 ## [3.2.1] - 2021-06-07
 
