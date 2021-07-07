@@ -225,14 +225,6 @@ Model& ModelVisualization::model()
     return this->pimpl->m_model;
 }
 
-Transform ModelVisualization::getWorldModelTransform()
-{
-    Transform w_H_b;
-    irr::core::matrix4 relativeTransform(this->pimpl->modelNode->getRelativeTransformation());
-    w_H_b = irr2idyntree_trans(relativeTransform);
-    return w_H_b;
-}
-
 Transform ModelVisualization::getWorldLinkTransform(const LinkIndex& linkIndex)
 {
     if (linkIndex < 0 || linkIndex >= pimpl->geomNodes.size())
