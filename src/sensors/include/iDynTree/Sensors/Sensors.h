@@ -331,15 +331,6 @@ namespace iDynTree {
             bool getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name, std::ptrdiff_t & sensor_index) const;
 
             /**
-             * Get the index of a sensor of type sensor_type in this SensorList
-             *
-             * @return true if the sensor name is found, false otherwise.
-             *
-             * @deprecated Use the version that takes in input a  std::ptrdiff_t sensor_index 
-             */
-            IDYNTREE_DEPRECATED_WITH_MSG("Use std::ptrdiff_t for representing the SensorIndex.") bool getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name, unsigned int & sensor_index) const;
-
-            /**
              * Get the index of a sensor of type sensor_type and with name sensor_name
              *
              * @return the sensor index if the sensor_name is found, -1 otherwise.
