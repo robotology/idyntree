@@ -1,11 +1,5 @@
 var NAVTREEINDEX22 =
 {
-"classiDynTree_1_1optimization_1_1AlglibInterface.html#a059093f5710fc6bca4bfb52c1f192fe3":[3,7,30,10],
-"classiDynTree_1_1optimization_1_1AlglibInterface.html#a08953636337b1414052f329f42649f0f":[3,7,30,8],
-"classiDynTree_1_1optimization_1_1AlglibInterface.html#a21aebbcc1e60dd526f74f996fe1d9e22":[3,7,30,11],
-"classiDynTree_1_1optimization_1_1AlglibInterface.html#a237d586b135d79150a50d6fea5ea9cf2":[3,7,30,12],
-"classiDynTree_1_1optimization_1_1AlglibInterface.html#a33e40b7437e55dd6f36104d1a4d914cf":[3,7,30,13],
-"classiDynTree_1_1optimization_1_1AlglibInterface.html#a6836c50c97f711451f5c0f011a2efddb":[3,7,30,17],
 "classiDynTree_1_1optimization_1_1AlglibInterface.html#a755cbbeae4bc97b311ce8ec031779f50":[3,7,30,3],
 "classiDynTree_1_1optimization_1_1AlglibInterface.html#a75cc0634b21a7148022f6e84236cfbff":[3,7,30,1],
 "classiDynTree_1_1optimization_1_1AlglibInterface.html#a79a9f496151b7de19c9a998be4f323a9":[3,7,30,15],
@@ -249,5 +243,11 @@ var NAVTREEINDEX22 =
 "classiDynTree_1_1optimization_1_1WorhpInterface.html#a6836c50c97f711451f5c0f011a2efddb":[3,7,33,20],
 "classiDynTree_1_1optimization_1_1WorhpInterface.html#a7014b23b1fa584fdcba9c26de1ee4ffd":[3,7,33,6],
 "classiDynTree_1_1optimization_1_1WorhpInterface.html#a74f9698c545d20cb1abcecc38362d088":[3,7,33,1],
-"classiDynTree_1_1optimization_1_1WorhpInterface.html#a760fc0096c8aa84d8cdfec3b99bdcf6e":[3,7,33,18]
+"classiDynTree_1_1optimization_1_1WorhpInterface.html#a760fc0096c8aa84d8cdfec3b99bdcf6e":[3,7,33,18],
+"classiDynTree_1_1optimization_1_1WorhpInterface.html#a89652754b5118eeccc4dd2de81b0b928":[3,7,33,9],
+"classiDynTree_1_1optimization_1_1WorhpInterface.html#a8d6880db4f6662854bfe7e893a10ec77":[3,7,33,14],
+"classiDynTree_1_1optimization_1_1WorhpInterface.html#a91500eb3955a0c6bfb8574bc16e335e9":[3,7,33,7],
+"classiDynTree_1_1optimization_1_1WorhpInterface.html#a9d15c47a0a246e70df76477a1d676ce0":[3,7,33,16],
+"classiDynTree_1_1optimization_1_1WorhpInterface.html#a9f24a88ca6aceca1e81d17d2f1678c47":[3,7,33,5],
+"classiDynTree_1_1optimization_1_1WorhpInterface.html#aaf0eb03df35d4068268fd2cdb1e9d0a7":[3,7,33,15]
 };

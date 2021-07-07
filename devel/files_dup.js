@@ -8,8 +8,6 @@ var files_dup =
     [ "AlglibInterface.h", "AlglibInterface_8h.html", null ],
     [ "AlglibInterfaceNotImplemented.cpp", "AlglibInterfaceNotImplemented_8cpp.html", null ],
     [ "AllSensorsTypes.h", "AllSensorsTypes_8h.html", null ],
-    [ "AngularForceVector3.h", "AngularForceVector3_8h.html", null ],
-    [ "AngularMotionVector3.h", "AngularMotionVector3_8h.html", null ],
     [ "ArticulatedBodyInertia.cpp", "ArticulatedBodyInertia_8cpp.html", "ArticulatedBodyInertia_8cpp" ],
     [ "ArticulatedBodyInertia.h", "ArticulatedBodyInertia_8h.html", null ],
     [ "AttitudeEstimator.cpp", "AttitudeEstimator_8cpp.html", null ],
@@ -148,7 +146,6 @@ var files_dup =
       [ "ForceTorqueSensorElement", "classiDynTree_1_1ForceTorqueSensorElement.html", "classiDynTree_1_1ForceTorqueSensorElement" ],
       [ "ForceTorqueSensorHelper", "classiDynTree_1_1ForceTorqueSensorHelper.html", "classiDynTree_1_1ForceTorqueSensorHelper" ]
     ] ],
-    [ "ForceVector3.h", "ForceVector3_8h.html", null ],
     [ "ForwardEuler.cpp", "ForwardEuler_8cpp.html", null ],
     [ "ForwardEuler.h", "ForwardEuler_8h.html", null ],
     [ "ForwardKinematics.cpp", "ForwardKinematics_8cpp.html", "ForwardKinematics_8cpp" ],
@@ -257,8 +254,6 @@ var files_dup =
     [ "LinearConstraint.h", "LinearConstraint_8h.html", null ],
     [ "LinearCost.cpp", "LinearCost_8cpp.html", null ],
     [ "LinearCost.h", "LinearCost_8h.html", null ],
-    [ "LinearForceVector3.h", "LinearForceVector3_8h.html", null ],
-    [ "LinearMotionVector3.h", "LinearMotionVector3_8h.html", null ],
     [ "LinearMPC.cpp", "LinearMPC_8cpp.html", null ],
     [ "LinearMPC.h", "LinearMPC_8h.html", null ],
     [ "LinearSystem.cpp", "LinearSystem_8cpp.html", [
@@ -317,7 +312,6 @@ var files_dup =
     [ "ModelVisualization.h", "ModelVisualization_8h.html", [
       [ "ModelVisualization", "classiDynTree_1_1ModelVisualization.html", "classiDynTree_1_1ModelVisualization" ]
     ] ],
-    [ "MotionVector3.h", "MotionVector3_8h.html", null ],
     [ "MovableJointImpl.h", "MovableJointImpl_8h.html", "MovableJointImpl_8h" ],
     [ "MPC.cpp", "MPC_8cpp.html", null ],
     [ "MPC.h", "MPC_8h.html", null ],

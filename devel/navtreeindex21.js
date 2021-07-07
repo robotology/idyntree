@@ -1,11 +1,5 @@
 var NAVTREEINDEX21 =
 {
-"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#accb30d2b375cd93bbf7776d2d63d2100":[3,7,34,13],
-"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ad928571c75286252a7cf8e04675913c5":[3,7,34,6],
-"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#adba80cb374b9480383565e3b401219f4":[3,7,34,11],
-"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ae00c9061c568494f23b858ad05a0ff02":[3,7,34,28],
-"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ae1726e0a4c497e0dc23c5c1bdc352863":[3,7,34,10],
-"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ae9c9fd426f107159f3e5354fd3f0562e":[3,7,34,26],
 "classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#aeb28846afd2fe3f4373b646d49fbba97":[3,7,34,27],
 "classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#afc82f38e5250adee9edcd89cd1168ac4":[3,7,34,2],
 "classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost.html":[3,7,35],
@@ -249,5 +243,11 @@ var NAVTREEINDEX21 =
 "classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement.html":[3,7,11],
 "classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement.html#a0012c763c79c5c2e212bbfc30dca8f64":[3,7,11,1],
 "classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement.html#a1d874717c6479a5c043b1cac0e4489f8":[3,7,11,0],
-"classiDynTree_1_1optimization_1_1AlglibInterface.html":[3,7,30]
+"classiDynTree_1_1optimization_1_1AlglibInterface.html":[3,7,30],
+"classiDynTree_1_1optimization_1_1AlglibInterface.html#a059093f5710fc6bca4bfb52c1f192fe3":[3,7,30,10],
+"classiDynTree_1_1optimization_1_1AlglibInterface.html#a08953636337b1414052f329f42649f0f":[3,7,30,8],
+"classiDynTree_1_1optimization_1_1AlglibInterface.html#a21aebbcc1e60dd526f74f996fe1d9e22":[3,7,30,11],
+"classiDynTree_1_1optimization_1_1AlglibInterface.html#a237d586b135d79150a50d6fea5ea9cf2":[3,7,30,12],
+"classiDynTree_1_1optimization_1_1AlglibInterface.html#a33e40b7437e55dd6f36104d1a4d914cf":[3,7,30,13],
+"classiDynTree_1_1optimization_1_1AlglibInterface.html#a6836c50c97f711451f5c0f011a2efddb":[3,7,30,17]
 };

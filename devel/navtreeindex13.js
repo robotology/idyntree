@@ -1,11 +1,5 @@
 var NAVTREEINDEX13 =
 {
-"classiDynTree_1_1PrismaticJoint.html#ac91f6744cc6870e5e49d4c3b3c718950":[3,1,5,19],
-"classiDynTree_1_1PrismaticJoint.html#ad65f90f23365e80af12f46c89920e7b1":[3,1,5,21],
-"classiDynTree_1_1PrismaticJoint.html#ad9905ffd07c3f880d1c3bbc890011f5b":[3,1,5,6],
-"classiDynTree_1_1PrismaticJoint.html#af3efefcf0919eb273c4f2f3e992abef1":[3,1,5,17],
-"classiDynTree_1_1PrismaticJoint.html#af9d78ba6c319f68f16f9ff9ef58fd124":[3,1,5,29],
-"classiDynTree_1_1PrismaticJoint.html#afbbbe860f34622d4d8ae1d938fd65b98":[3,1,5,32],
 "classiDynTree_1_1PrismaticJoint.html#afdb1856b85c51302cbec0ca1f71a9226":[3,1,5,22],
 "classiDynTree_1_1PrismaticJoint.html#afeed092c3d22070bb861bea4a55ffb39":[3,1,5,5],
 "classiDynTree_1_1RevoluteJoint.html":[3,1,6],
@@ -249,5 +243,11 @@ var NAVTREEINDEX13 =
 "classiDynTree_1_1SensorElement.html#a69171cc4b5c552b97f44375029356a2e":[5,0,1,144,6],
 "classiDynTree_1_1SensorElement.html#a7129fb1e69a5bc819872e65d3965296d":[5,0,1,144,9],
 "classiDynTree_1_1SensorElement.html#a89602903716a20070be91a2eef07940f":[5,0,1,144,3],
-"classiDynTree_1_1SensorElement.html#a949bcf8e3496896d2b6d7d6da72870a7":[5,0,1,144,14]
+"classiDynTree_1_1SensorElement.html#a949bcf8e3496896d2b6d7d6da72870a7":[5,0,1,144,14],
+"classiDynTree_1_1SensorElement.html#aa5305a25df9fb2d6f2160ac22e4119be":[5,0,1,144,2],
+"classiDynTree_1_1SensorElement.html#ab40851b7629a74107f2183ca36e412e4":[5,0,1,144,4],
+"classiDynTree_1_1SensorElement.html#abebc95353394912e187ad70e6078fcdc":[5,0,1,144,15],
+"classiDynTree_1_1SensorElement.html#ac92ce9b144b27970e09f6f9dff77f251":[5,0,1,144,13],
+"classiDynTree_1_1SensorElement.html#ad36cb30cdb1e829f3154655b13afb516":[5,0,1,144,1],
+"classiDynTree_1_1SensorHelper.html":[5,0,1,145]
 };

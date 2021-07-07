@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['sensortype_6342',['SensorType',['../namespaceiDynTree.html#ad291b88efdf5262d744d33f642daf8b9',1,'iDynTree']]],
-  ['switchingpattern_6343',['SwitchingPattern',['../namespaceiDynTree.html#a87e9224ed19ef268687c0d2522048946',1,'iDynTree']]]
+  ['sensortype_6330',['SensorType',['../namespaceiDynTree.html#ad291b88efdf5262d744d33f642daf8b9',1,'iDynTree']]],
+  ['switchingpattern_6331',['SwitchingPattern',['../namespaceiDynTree.html#a87e9224ed19ef268687c0d2522048946',1,'iDynTree']]]
 ];

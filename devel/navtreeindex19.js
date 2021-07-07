@@ -1,11 +1,5 @@
 var NAVTREEINDEX19 =
 {
-"classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1_1ConstraintsGroupPimpl.html#aa7621ebcd0054309a80b79b6b041cbf2":[3,7,6,0,17],
-"classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1_1ConstraintsGroupPimpl.html#aad88160063917d4dcad69553935ae3db":[3,7,6,0,14],
-"classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1_1ConstraintsGroupPimpl.html#ac5055df2f161d9487fed9277b2a4fc28":[3,7,6,0,0],
-"classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1_1ConstraintsGroupPimpl.html#af32e8480dd87c1718115bcbf593af255":[3,7,6,0,3],
-"classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1_1ConstraintsGroupPimpl.html#af8aa8693344e170053f41f4254dcfed6":[3,7,6,0,12],
-"classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem.html":[3,7,7],
 "classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem.html#a9a54ab23ab86a89d1385c3715dd9f74c":[3,7,7,1],
 "classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem.html#ab52ff2a4d3b4710dcae26c474debf1e8":[3,7,7,2],
 "classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem.html#abb44051465e3022d2cbdd60b6fd7bea3":[3,7,7,4],
@@ -249,5 +243,11 @@ var NAVTREEINDEX19 =
 "classiDynTree_1_1optimalcontrol_1_1LinearSystem.html#a91ba05fa8d7fd40b9336f33130ec48ed":[3,7,22,26],
 "classiDynTree_1_1optimalcontrol_1_1LinearSystem.html#abb552b6be02127013c69f1106ad09497":[3,7,22,27],
 "classiDynTree_1_1optimalcontrol_1_1LinearSystem.html#ac130f0cfaa6a5843fdbcb944493b7951":[3,7,22,23],
-"classiDynTree_1_1optimalcontrol_1_1LinearSystem.html#ac246d0f193f99412444e4ed084cd0f64":[3,7,22,19]
+"classiDynTree_1_1optimalcontrol_1_1LinearSystem.html#ac246d0f193f99412444e4ed084cd0f64":[3,7,22,19],
+"classiDynTree_1_1optimalcontrol_1_1LinearSystem.html#ac7116dc1d8a4b14cca1c193c9c2915d1":[3,7,22,10],
+"classiDynTree_1_1optimalcontrol_1_1LinearSystem.html#acc25a7320b7478c3a6dff9f93d0877f7":[3,7,22,14],
+"classiDynTree_1_1optimalcontrol_1_1LinearSystem.html#ae62cb69e88b5598944dffd5c9f8336b4":[3,7,22,25],
+"classiDynTree_1_1optimalcontrol_1_1LinearSystem.html#ae9048969fa6bb586f08332aa279ac01a":[3,7,22,21],
+"classiDynTree_1_1optimalcontrol_1_1LinearSystem_1_1LinearSystemPimpl.html":[3,7,22,0],
+"classiDynTree_1_1optimalcontrol_1_1LinearSystem_1_1LinearSystemPimpl.html#a151d26fc075e4c40deb0c156cc9c88af":[3,7,22,0,5]
 };

@@ -1,11 +1,5 @@
 var NAVTREEINDEX20 =
 {
-"classiDynTree_1_1optimalcontrol_1_1LinearSystem.html#ac7116dc1d8a4b14cca1c193c9c2915d1":[3,7,22,10],
-"classiDynTree_1_1optimalcontrol_1_1LinearSystem.html#acc25a7320b7478c3a6dff9f93d0877f7":[3,7,22,14],
-"classiDynTree_1_1optimalcontrol_1_1LinearSystem.html#ae62cb69e88b5598944dffd5c9f8336b4":[3,7,22,25],
-"classiDynTree_1_1optimalcontrol_1_1LinearSystem.html#ae9048969fa6bb586f08332aa279ac01a":[3,7,22,21],
-"classiDynTree_1_1optimalcontrol_1_1LinearSystem_1_1LinearSystemPimpl.html":[3,7,22,0],
-"classiDynTree_1_1optimalcontrol_1_1LinearSystem_1_1LinearSystemPimpl.html#a151d26fc075e4c40deb0c156cc9c88af":[3,7,22,0,5],
 "classiDynTree_1_1optimalcontrol_1_1LinearSystem_1_1LinearSystemPimpl.html#a6e3a22d4f2ce20770b41bee4ff3936e3":[3,7,22,0,4],
 "classiDynTree_1_1optimalcontrol_1_1LinearSystem_1_1LinearSystemPimpl.html#a842a75983d2a0803e36533bd08c1e259":[3,7,22,0,3],
 "classiDynTree_1_1optimalcontrol_1_1LinearSystem_1_1LinearSystemPimpl.html#a862d4b758fbb61ba4cea4280c3e156a0":[3,7,22,0,0],
@@ -249,5 +243,11 @@ var NAVTREEINDEX20 =
 "classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#abedf340f114e51dacd483fd73f373fe5":[3,7,34,21],
 "classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#abf8b22918021ba6ff7743575d30138c1":[3,7,34,20],
 "classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ac26021f3cd107bb7612a34f4b079a9d5":[3,7,34,8],
-"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ac5f5e3bbb989ce5482cd2a690ed1687b":[3,7,34,5]
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ac5f5e3bbb989ce5482cd2a690ed1687b":[3,7,34,5],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#accb30d2b375cd93bbf7776d2d63d2100":[3,7,34,13],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ad928571c75286252a7cf8e04675913c5":[3,7,34,6],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#adba80cb374b9480383565e3b401219f4":[3,7,34,11],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ae00c9061c568494f23b858ad05a0ff02":[3,7,34,28],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ae1726e0a4c497e0dc23c5c1bdc352863":[3,7,34,10],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ae9c9fd426f107159f3e5354fd3f0562e":[3,7,34,26]
 };
