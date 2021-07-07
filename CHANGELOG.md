@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add the visualization of labels in the visualizer (https://github.com/robotology/idyntree/pull/879)
 
 ### Removed
-- Remove headers `iDynTree/Core/AngularForceVector3.h`, `iDynTree/Core/AngularMotionVector3.h`, `include/iDynTree/Core/ForceVector3.h`, `iDynTree/Core/LinearForceVector3.h`, `include/iDynTree/Core/LinearMotionVector3.h`, `include/iDynTree/Core/MotionVector3.h`. They were deprecated in iDynTree 2.0 (https://github.com/robotology/idyntree/pull/708).
+- Remove headers `iDynTree/Core/AngularForceVector3.h`, `iDynTree/Core/AngularMotionVector3.h`, `include/iDynTree/Core/ForceVector3.h`, `iDynTree/Core/LinearForceVector3.h`, `include/iDynTree/Core/LinearMotionVector3.h`, `include/iDynTree/Core/MotionVector3.h`. They were deprecated in iDynTree 2.0 (https://github.com/robotology/idyntree/pull/708, https://github.com/robotology/idyntree/pull/885).
 
 ## [Unreleased]
 
