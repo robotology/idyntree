@@ -166,7 +166,6 @@ public:
     virtual std::vector<std::string> getFeatures() { return std::vector<std::string>(); }
     virtual bool setFeatureVisibility(const std::string& , bool) { return false; }
     virtual IJetsVisualization& jets() { return m_dummyJets;  }
-    virtual Transform getWorldModelTransform() { return iDynTree::Transform::Identity(); }
     virtual Transform getWorldLinkTransform(const LinkIndex &) { return iDynTree::Transform::Identity(); }
     virtual Transform getWorldFrameTransform(const FrameIndex &) { return iDynTree::Transform::Identity(); }
     virtual Transform getWorldLinkTransform(const std::string &) { return iDynTree::Transform::Identity(); }
