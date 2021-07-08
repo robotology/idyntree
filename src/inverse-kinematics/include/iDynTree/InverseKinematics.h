@@ -1090,7 +1090,7 @@ public:
      *
      * @param direction    vector along which we want to project a point
      */
-    void setCOMConstraintProjectionDirection(const iDynTree::Vector3 direction);
+    void setCOMConstraintProjectionDirection(const iDynTree::Vector3& direction);
 
     bool setCOMConstraintProjectionDirection(iDynTree::Span<const double> direction);
 
