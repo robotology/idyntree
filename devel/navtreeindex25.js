@@ -1,7 +1,5 @@
 var NAVTREEINDEX25 =
 {
-"structiDynTree_1_1AttitudeQuaternionEKFParameters.html#a1713af1c3f17f856ad34127372590abb":[5,0,1,13,5],
-"structiDynTree_1_1AttitudeQuaternionEKFParameters.html#a36632047df81704134f3e68aa4e3041c":[5,0,1,13,1],
 "structiDynTree_1_1AttitudeQuaternionEKFParameters.html#a62569b4408f25fc383fec5378c56c6b5":[5,0,1,13,4],
 "structiDynTree_1_1AttitudeQuaternionEKFParameters.html#a7240502333c0ddceee465fe196f24564":[5,0,1,13,2],
 "structiDynTree_1_1AttitudeQuaternionEKFParameters.html#a746a917e3743a21c74d46d21970c3ce1":[5,0,1,13,8],
@@ -249,5 +247,7 @@ var NAVTREEINDEX25 =
 "structiDynTree_1_1details_1_1is__span.html":[5,0,1,0,7],
 "structiDynTree_1_1details_1_1is__span__oracle.html":[5,0,1,0,8],
 "structiDynTree_1_1details_1_1is__span__oracle_3_01iDynTree_1_1Span_3_01ElementType_00_01Extent_01_4_01_4.html":[5,0,1,0,9],
-"structiDynTree_1_1details_1_1is__std__array.html":[5,0,1,0,10]
+"structiDynTree_1_1details_1_1is__std__array.html":[5,0,1,0,10],
+"structiDynTree_1_1details_1_1is__std__array__oracle.html":[5,0,1,0,11],
+"structiDynTree_1_1details_1_1is__std__array__oracle_3_01std_1_1array_3_01ElementType_00_01Extent_01_4_01_4.html":[5,0,1,0,12]
 };

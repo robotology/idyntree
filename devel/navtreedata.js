@@ -93,8 +93,8 @@ var NAVTREEINDEX =
 "classiDynTree_1_1optimization_1_1AlglibInterface.html#a755cbbeae4bc97b311ce8ec031779f50",
 "classiDynTree_1_1optimization_1_1WorhpInterface.html#ab7033720d23d9af54b0700238757df04",
 "functions_vars_g.html",
-"structiDynTree_1_1AttitudeQuaternionEKFParameters.html#a1713af1c3f17f856ad34127372590abb",
-"structiDynTree_1_1details_1_1is__std__array__oracle.html"
+"structiDynTree_1_1AttitudeQuaternionEKFParameters.html#a62569b4408f25fc383fec5378c56c6b5",
+"structiDynTree_1_1estimateExternalWrenchesBuffers.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

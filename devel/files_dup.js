@@ -349,7 +349,6 @@ var files_dup =
       [ "OsqpInterface", "classiDynTree_1_1optimization_1_1OsqpInterface.html", "classiDynTree_1_1optimization_1_1OsqpInterface" ]
     ] ],
     [ "OsqpInterfaceNotImplemented.cpp", "OsqpInterfaceNotImplemented_8cpp.html", null ],
-    [ "par2urdf.cpp", "par2urdf_8cpp.html", "par2urdf_8cpp" ],
     [ "Position.cpp", "Position_8cpp.html", "Position_8cpp" ],
     [ "Position.h", "Position_8h.html", null ],
     [ "PositionRaw.cpp", "PositionRaw_8cpp.html", "PositionRaw_8cpp" ],
