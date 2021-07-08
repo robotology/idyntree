@@ -102,11 +102,17 @@ classdef IJoint < iDynTreeSwigRef
     function varargout = isFixedJoint(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(822, self, varargin{:});
     end
-    function varargout = asRevoluteJoint(self,varargin)
+    function varargout = isPrismaticJoint(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(823, self, varargin{:});
     end
-    function varargout = asFixedJoint(self,varargin)
+    function varargout = asRevoluteJoint(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(824, self, varargin{:});
+    end
+    function varargout = asFixedJoint(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(825, self, varargin{:});
+    end
+    function varargout = asPrismaticJoint(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(826, self, varargin{:});
     end
     function self = IJoint(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
