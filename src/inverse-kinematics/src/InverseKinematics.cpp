@@ -1372,7 +1372,7 @@ namespace iDynTree {
             return false;
         }
 
-        this->setCOMTarget(desiredPosition, weight);
+        this->setCOMTarget(Position(desiredPosition), weight);
 
         return true;
     }
