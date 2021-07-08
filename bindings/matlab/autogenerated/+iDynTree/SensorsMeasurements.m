@@ -9,37 +9,37 @@ classdef SensorsMeasurements < iDynTreeSwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1280, varargin{:});
+        tmp = iDynTreeMEX(1282, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1281, self);
+        iDynTreeMEX(1283, self);
         self.SwigClear();
       end
     end
     function varargout = setNrOfSensors(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1282, self, varargin{:});
-    end
-    function varargout = getNrOfSensors(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1283, self, varargin{:});
-    end
-    function varargout = resize(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1284, self, varargin{:});
     end
-    function varargout = toVector(self,varargin)
+    function varargout = getNrOfSensors(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1285, self, varargin{:});
     end
-    function varargout = setMeasurement(self,varargin)
+    function varargout = resize(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1286, self, varargin{:});
     end
-    function varargout = getMeasurement(self,varargin)
+    function varargout = toVector(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1287, self, varargin{:});
     end
-    function varargout = getSizeOfAllSensorsMeasurements(self,varargin)
+    function varargout = setMeasurement(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1288, self, varargin{:});
+    end
+    function varargout = getMeasurement(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1289, self, varargin{:});
+    end
+    function varargout = getSizeOfAllSensorsMeasurements(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1290, self, varargin{:});
     end
   end
   methods(Static)
