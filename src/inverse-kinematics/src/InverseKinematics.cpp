@@ -1396,7 +1396,7 @@ namespace iDynTree {
 #endif
     }
 
-    void InverseKinematics::setCOMConstraintProjectionDirection(const iDynTree::Vector3 direction)
+    void InverseKinematics::setCOMConstraintProjectionDirection(const iDynTree::Vector3& direction)
     {
         this->setCOMConstraintProjectionDirection(make_span(direction));
     }
