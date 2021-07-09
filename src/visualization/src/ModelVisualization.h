@@ -49,7 +49,6 @@ public:
     void setWireframeVisibility(bool isVisible);
     void setTransparent(bool isTransparent);
     virtual IJetsVisualization& jets();
-    virtual Transform getWorldModelTransform();
     virtual Transform getWorldLinkTransform(const LinkIndex& linkIndex);
     virtual Transform getWorldFrameTransform(const FrameIndex& frameIndex);
     virtual Transform getWorldLinkTransform(const std::string& linkName);
