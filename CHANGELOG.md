@@ -11,12 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 - Remove headers `iDynTree/Core/AngularForceVector3.h`, `iDynTree/Core/AngularMotionVector3.h`, `include/iDynTree/Core/ForceVector3.h`, `iDynTree/Core/LinearForceVector3.h`, `include/iDynTree/Core/LinearMotionVector3.h`, `include/iDynTree/Core/MotionVector3.h`. They were deprecated in iDynTree 2.0 (https://github.com/robotology/idyntree/pull/708, https://github.com/robotology/idyntree/pull/885).
+- The method `ModelVisualization::getWorldModelTransform()` was removed, it was deprecated in iDynTree 3.0.1 .
 
 ## [Unreleased]
 
 ### Added
 - Add the `is/asPrismaticJoint` methods in the bindings (https://github.com/robotology/idyntree/issues/881, https://github.com/robotology/idyntree/pull/882)
->>>>>>> master
 
 ## [3.2.1] - 2021-06-07
 
