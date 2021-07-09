@@ -181,7 +181,6 @@ var group__iDynTreeSensors =
       [ "getSerialization", "classiDynTree_1_1SensorsList.html#a674083e12d9a5e673d75db1998020589", null ],
       [ "getNrOfSensors", "classiDynTree_1_1SensorsList.html#a561e2e3a6e1002d3ee4af0e96d17efe9", null ],
       [ "getSensorIndex", "classiDynTree_1_1SensorsList.html#a03e95f4b1d11084323e3374bf8ca72b7", null ],
-      [ "IDYNTREE_DEPRECATED_WITH_MSG", "classiDynTree_1_1SensorsList.html#ad05a98cc3d00e0b1f4ae789ab9c399ec", null ],
       [ "getSensorIndex", "classiDynTree_1_1SensorsList.html#aa85df07f8e9590e8746011476a12eac7", null ],
       [ "getSizeOfAllSensorsMeasurements", "classiDynTree_1_1SensorsList.html#a31832ea1ddd81e7e4c9fa0983e33d47e", null ],
       [ "getSensor", "classiDynTree_1_1SensorsList.html#a565a9e4950747007745913a0ab2f6c41", null ],
@@ -192,9 +191,7 @@ var group__iDynTreeSensors =
       [ "allSensorsIterator", "classiDynTree_1_1SensorsList.html#a0dba47627494889297e2b8a82b66557a", null ],
       [ "allSensorsIterator", "classiDynTree_1_1SensorsList.html#a5a258d522fe2d95ce8a7757fbc178a15", null ],
       [ "sensorsIteratorForType", "classiDynTree_1_1SensorsList.html#a079886337021198c8fe1818786307e06", null ],
-      [ "sensorsIteratorForType", "classiDynTree_1_1SensorsList.html#a5a183cece741ddd5b2d1dfe95ae0bd7d", null ],
-      [ "_sensor_name", "classiDynTree_1_1SensorsList.html#a4dd000f3166062c76672472274d807f4", null ],
-      [ "const", "classiDynTree_1_1SensorsList.html#a5850b685b10e89fcd358790af6824734", null ]
+      [ "sensorsIteratorForType", "classiDynTree_1_1SensorsList.html#a5a183cece741ddd5b2d1dfe95ae0bd7d", null ]
     ] ],
     [ "SensorsMeasurements", "classiDynTree_1_1SensorsMeasurements.html", [
       [ "SensorsMeasurementsPrivateAttributes", "structiDynTree_1_1SensorsMeasurements_1_1SensorsMeasurementsPrivateAttributes.html", [

@@ -1,8 +1,5 @@
 var NAVTREEINDEX13 =
 {
-"classiDynTree_1_1PrismaticJoint.html#afdb1856b85c51302cbec0ca1f71a9226":[3,1,5,22],
-"classiDynTree_1_1PrismaticJoint.html#afeed092c3d22070bb861bea4a55ffb39":[3,1,5,5],
-"classiDynTree_1_1RevoluteJoint.html":[3,1,6],
 "classiDynTree_1_1RevoluteJoint.html#a045d13488a7d6481fcf2db951655922a":[3,1,6,29],
 "classiDynTree_1_1RevoluteJoint.html#a1eec73f7f3f2264a1ca6508964f2c322":[3,1,6,20],
 "classiDynTree_1_1RevoluteJoint.html#a20b3ce425f402faa6fba150f4bf81856":[3,1,6,12],
@@ -249,5 +246,8 @@ var NAVTREEINDEX13 =
 "classiDynTree_1_1SensorElement.html#abebc95353394912e187ad70e6078fcdc":[5,0,1,144,15],
 "classiDynTree_1_1SensorElement.html#ac92ce9b144b27970e09f6f9dff77f251":[5,0,1,144,13],
 "classiDynTree_1_1SensorElement.html#ad36cb30cdb1e829f3154655b13afb516":[5,0,1,144,1],
-"classiDynTree_1_1SensorHelper.html":[5,0,1,145]
+"classiDynTree_1_1SensorHelper.html":[5,0,1,145],
+"classiDynTree_1_1SensorHelper.html#a5bdee23a7596be29f49d791ee306c31e":[5,0,1,145,2],
+"classiDynTree_1_1SensorHelper.html#ac726e84fbbcc59662ab2bf0c531b1270":[5,0,1,145,3],
+"classiDynTree_1_1SensorHelper.html#ad420111e0ad36e1df48085f565476d40":[5,0,1,145,1]
 };

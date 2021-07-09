@@ -1,16 +1,17 @@
 var searchData=
 [
-  ['f_5fattribute_5707',['f_attribute',['../classiDynTree_1_1XMLElement_1_1XMLElementPimpl.html#ac2e1ed1bc8f21ded5b7ab23d764fc85f',1,'iDynTree::XMLElement::XMLElementPimpl']]],
-  ['f_5fchildparsed_5708',['f_childParsed',['../classiDynTree_1_1XMLElement_1_1XMLElementPimpl.html#aeb088d83efcd0618016574c81248363c',1,'iDynTree::XMLElement::XMLElementPimpl']]],
-  ['f_5fdocumentfactory_5709',['f_documentFactory',['../classiDynTree_1_1XMLParser_1_1XMLParserPimpl.html#a129e701188ac5837d1e28cdf5d9e721e',1,'iDynTree::XMLParser::XMLParserPimpl']]],
-  ['f_5fexitscope_5710',['f_exitScope',['../classiDynTree_1_1XMLElement_1_1XMLElementPimpl.html#ad7f36f8f649a19b9a9a5138870c4b32e',1,'iDynTree::XMLElement::XMLElementPimpl']]],
-  ['filtimugravity_5711',['filtIMUGravity',['../classObserverThread.html#ab610f644550c9f5425f16068c1238f63',1,'ObserverThread']]],
-  ['firsttime_5712',['firstTime',['../classWorhpInterface_1_1WorhpInterfaceImplementation.html#aecc6107b91eb33a5036226aec1ef9e07',1,'WorhpInterface::WorhpInterfaceImplementation']]],
-  ['fixedjoints_5713',['fixedJoints',['../classiDynTree_1_1URDFDocument.html#af869c50633a0784f6452ed0e6a5ed176',1,'iDynTree::URDFDocument']]],
-  ['fixedvariables_5714',['fixedVariables',['../classinternal_1_1kinematics_1_1InverseKinematicsData.html#a97cad77853f7e239528bde2569109fac',1,'internal::kinematics::InverseKinematicsData']]],
-  ['forcedirection_5715',['forceDirection',['../structiDynTree_1_1UnknownWrenchContact.html#a40fd8ee73d9423a40a8e280d72b6b886',1,'iDynTree::UnknownWrenchContact']]],
-  ['frame_5findex_5716',['frame_index',['../classiDynTree_1_1iDynTreeLinkAndFrame.html#a9952f75031a1b943a7313cbbacf84547',1,'iDynTree::iDynTreeLinkAndFrame']]],
-  ['frame_5finvalid_5findex_5717',['FRAME_INVALID_INDEX',['../namespaceiDynTree.html#a82c0279ac04b031c66dda7bf1fa94114',1,'iDynTree']]],
-  ['frame_5finvalid_5fname_5718',['FRAME_INVALID_NAME',['../namespaceiDynTree.html#ac8bbe5d2dc785f47b7c03010cde0b462',1,'iDynTree']]],
-  ['framenodes_5719',['frameNodes',['../structiDynTree_1_1ModelVisualization_1_1ModelVisualizationPimpl.html#ac4ebdbf5ea71cf48b7752cc63f0a8f8c',1,'iDynTree::ModelVisualization::ModelVisualizationPimpl']]]
+  ['g_5713',['g',['../classiDynTree_1_1ColorViz.html#a55604c0ff20631284b127b85cef9ed3b',1,'iDynTree::ColorViz']]],
+  ['geomnodes_5714',['geomNodes',['../structiDynTree_1_1ModelVisualization_1_1ModelVisualizationPimpl.html#ae058853e4023dc2a3e02f44a745efc04',1,'iDynTree::ModelVisualization::ModelVisualizationPimpl']]],
+  ['geomnodesnottransparentmaterialcache_5715',['geomNodesNotTransparentMaterialCache',['../structiDynTree_1_1ModelVisualization_1_1ModelVisualizationPimpl.html#a57e8fd0d7b4cccc31fee178ed890f509',1,'iDynTree::ModelVisualization::ModelVisualizationPimpl']]],
+  ['gradientsubmatrix_5716',['gradientSubMatrix',['../classiDynTree_1_1optimalcontrol_1_1CostAttributes.html#a95fdc0f2f2a8a8c79bfe2b221d0b48af',1,'iDynTree::optimalcontrol::CostAttributes']]],
+  ['group_5717',['group',['../classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1_1ConstraintsGroupPimpl.html#a9bbe0a3fe329366ef78ab4827be35d3c',1,'iDynTree::optimalcontrol::ConstraintsGroup::ConstraintsGroupPimpl']]],
+  ['group_5fptr_5718',['group_ptr',['../structiDynTree_1_1optimalcontrol_1_1BufferedGroup.html#a5cd8d8b0caa31cec9bdec2121b82fa57',1,'iDynTree::optimalcontrol::BufferedGroup']]],
+  ['groupcontrolhessiansparsity_5719',['groupControlHessianSparsity',['../classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1_1ConstraintsGroupPimpl.html#a1d1160d5c88a96c9c10386fce2d396b8',1,'iDynTree::optimalcontrol::ConstraintsGroup::ConstraintsGroupPimpl']]],
+  ['groupcontroljacobiansparsity_5720',['groupControlJacobianSparsity',['../classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1_1ConstraintsGroupPimpl.html#a31a520de082024b3668436ff36526523',1,'iDynTree::optimalcontrol::ConstraintsGroup::ConstraintsGroupPimpl']]],
+  ['groupmixedhessiansparsity_5721',['groupMixedHessianSparsity',['../classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1_1ConstraintsGroupPimpl.html#a4cf7fc3c48a392474ba9622e61dc2877',1,'iDynTree::optimalcontrol::ConstraintsGroup::ConstraintsGroupPimpl']]],
+  ['groupstatehessiansparsity_5722',['groupStateHessianSparsity',['../classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1_1ConstraintsGroupPimpl.html#a6a9fc75bd3e6f49d8e1b1f7407eecd33',1,'iDynTree::optimalcontrol::ConstraintsGroup::ConstraintsGroupPimpl']]],
+  ['groupstatejacobiansparsity_5723',['groupStateJacobianSparsity',['../classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1_1ConstraintsGroupPimpl.html#aa6ae46fab492b4733c61cfaa04d0d4cd',1,'iDynTree::optimalcontrol::ConstraintsGroup::ConstraintsGroupPimpl']]],
+  ['gyro_5fbias_5fnoise_5fvariance_5724',['gyro_bias_noise_variance',['../structiDynTree_1_1AttitudeQuaternionEKFParameters.html#a1713af1c3f17f856ad34127372590abb',1,'iDynTree::AttitudeQuaternionEKFParameters']]],
+  ['gyroscope_5fnoise_5fvariance_5725',['gyroscope_noise_variance',['../structiDynTree_1_1AttitudeQuaternionEKFParameters.html#a62569b4408f25fc383fec5378c56c6b5',1,'iDynTree::AttitudeQuaternionEKFParameters']]],
+  ['gyroscopemeasurements_5726',['GyroscopeMeasurements',['../structiDynTree_1_1SensorsMeasurements_1_1SensorsMeasurementsPrivateAttributes.html#a37eadaa70281aa49dd86ac3824738474',1,'iDynTree::SensorsMeasurements::SensorsMeasurementsPrivateAttributes']]]
 ];

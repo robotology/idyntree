@@ -1,8 +1,8 @@
 var NAVTREEINDEX7 =
 {
 "classiDynTree_1_1DummyModelVisualization.html#a3bdcdfcaf1c37690a010f3429bc050d0":[5,0,1,50,14],
-"classiDynTree_1_1DummyModelVisualization.html#a41403854207527201ee17f50fd5f4336":[5,0,1,50,21],
-"classiDynTree_1_1DummyModelVisualization.html#a48b30a5b643d86e817414b95ca097500":[5,0,1,50,18],
+"classiDynTree_1_1DummyModelVisualization.html#a41403854207527201ee17f50fd5f4336":[5,0,1,50,20],
+"classiDynTree_1_1DummyModelVisualization.html#a48b30a5b643d86e817414b95ca097500":[5,0,1,50,17],
 "classiDynTree_1_1DummyModelVisualization.html#a4ff660905beec696ed91cc15c1d8e84a":[5,0,1,50,5],
 "classiDynTree_1_1DummyModelVisualization.html#a594842f47dc1638d8b3cfabdd32cdccb":[5,0,1,50,11],
 "classiDynTree_1_1DummyModelVisualization.html#a5ebec925284350c08094add86b9522aa":[5,0,1,50,6],
@@ -14,10 +14,9 @@ var NAVTREEINDEX7 =
 "classiDynTree_1_1DummyModelVisualization.html#a9e1d20750dfd843039f23b8d66c3c07c":[5,0,1,50,4],
 "classiDynTree_1_1DummyModelVisualization.html#aa80c179731c41729cccaa7b447a8368a":[5,0,1,50,15],
 "classiDynTree_1_1DummyModelVisualization.html#aac904896ec38e643f02abcc627fae538":[5,0,1,50,13],
-"classiDynTree_1_1DummyModelVisualization.html#abf29b8ced8ab50c4e29336c566d8f568":[5,0,1,50,22],
-"classiDynTree_1_1DummyModelVisualization.html#ac095fe317114290305ea7e797f5b22c6":[5,0,1,50,17],
+"classiDynTree_1_1DummyModelVisualization.html#abf29b8ced8ab50c4e29336c566d8f568":[5,0,1,50,21],
 "classiDynTree_1_1DummyModelVisualization.html#ac9b99f8f91f261cd334d0c3da3c90433":[5,0,1,50,7],
-"classiDynTree_1_1DummyModelVisualization.html#ad046251b8269c66c20bd3283411829f9":[5,0,1,50,19],
+"classiDynTree_1_1DummyModelVisualization.html#ad046251b8269c66c20bd3283411829f9":[5,0,1,50,18],
 "classiDynTree_1_1DummyModelVisualization.html#ad6d09efb3f13fa3d9aa272389a23723f":[5,0,1,50,10],
 "classiDynTree_1_1DummyModelVisualization.html#ad8474b991a868c2c3949c145c73e7a83":[5,0,1,50,12],
 "classiDynTree_1_1DummyModelVisualization.html#ae30dd7fe01de7a890d2c47d739435d5d":[5,0,1,50,3],
@@ -249,5 +248,6 @@ var NAVTREEINDEX7 =
 "classiDynTree_1_1FreeFloatingMassMatrix.html#ae86eb69f39997bd181971d9bd5f56950":[5,0,1,65,21],
 "classiDynTree_1_1FreeFloatingMassMatrix.html#aec352e4bfae97705cbe42eb99b91b969":[5,0,1,65,5],
 "classiDynTree_1_1FreeFloatingMassMatrix.html#af1d85eadf886d3fb508e2bf9e9788600":[5,0,1,65,25],
-"classiDynTree_1_1FreeFloatingMassMatrix.html#afbcf1bf37275f811cab76cda68cad818":[5,0,1,65,0]
+"classiDynTree_1_1FreeFloatingMassMatrix.html#afbcf1bf37275f811cab76cda68cad818":[5,0,1,65,0],
+"classiDynTree_1_1FreeFloatingPos.html":[5,0,1,66]
 };

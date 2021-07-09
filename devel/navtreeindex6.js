@@ -248,6 +248,6 @@ var NAVTREEINDEX6 =
 "classiDynTree_1_1DummyLight.html#ad19bac00c689920c82359020cc50eadc":[5,0,1,49,1],
 "classiDynTree_1_1DummyLight.html#af3f93dc2b96522060d8e542dac513f9b":[5,0,1,49,10],
 "classiDynTree_1_1DummyModelVisualization.html":[5,0,1,50],
-"classiDynTree_1_1DummyModelVisualization.html#a21f7e1d8640c435742c0abf372a7d747":[5,0,1,50,20],
+"classiDynTree_1_1DummyModelVisualization.html#a21f7e1d8640c435742c0abf372a7d747":[5,0,1,50,19],
 "classiDynTree_1_1DummyModelVisualization.html#a36ebfe454c9cb3851f988ff2b789fd8d":[5,0,1,50,8]
 };

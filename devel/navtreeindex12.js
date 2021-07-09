@@ -1,13 +1,10 @@
 var NAVTREEINDEX12 =
 {
-"classiDynTree_1_1ModelVisualization.html#a73d51a3ebdd25d7ebc51b8776a9de0b0":[5,0,1,124,14],
-"classiDynTree_1_1ModelVisualization.html#a7ceec27b438d493e03d5af25d29fe667":[5,0,1,124,24],
-"classiDynTree_1_1ModelVisualization.html#a85aef702f222a1794a3eea50356ce518":[5,0,1,124,5],
 "classiDynTree_1_1ModelVisualization.html#a89b805448c5fa1ad365e6069ceadd749":[5,0,1,124,2],
 "classiDynTree_1_1ModelVisualization.html#a9278ef17d39f10442491c1dff16d4848":[5,0,1,124,15],
-"classiDynTree_1_1ModelVisualization.html#aa35084cc32da9c1acbed74592e906eca":[5,0,1,124,25],
+"classiDynTree_1_1ModelVisualization.html#aa35084cc32da9c1acbed74592e906eca":[5,0,1,124,24],
 "classiDynTree_1_1ModelVisualization.html#ab33930af9c68dcc3ae2ee6a8ff5fde77":[5,0,1,124,7],
-"classiDynTree_1_1ModelVisualization.html#ab53c53c59d50bbb8060bbbe20af5bb7c":[5,0,1,124,23],
+"classiDynTree_1_1ModelVisualization.html#ab53c53c59d50bbb8060bbbe20af5bb7c":[5,0,1,124,22],
 "classiDynTree_1_1ModelVisualization.html#ac328ece5c776ab37077b788df5ba8e86":[5,0,1,124,4],
 "classiDynTree_1_1ModelVisualization.html#ac3f9061a6a203965714e449621eca0b9":[5,0,1,124,6],
 "classiDynTree_1_1ModelVisualization.html#ad4371f8991952ce7b91a8268cb8b8531":[5,0,1,124,12],
@@ -16,7 +13,7 @@ var NAVTREEINDEX12 =
 "classiDynTree_1_1ModelVisualization.html#ae54af8f52ab8f7f79cd7b3b05e1ec398":[5,0,1,124,19],
 "classiDynTree_1_1ModelVisualization.html#ae776e7e4523bec5a079976ba84eea5dc":[5,0,1,124,18],
 "classiDynTree_1_1ModelVisualization.html#ae8a62070c5741cebf6a5843dea93fc59":[5,0,1,124,8],
-"classiDynTree_1_1ModelVisualization.html#af5c63587c63ffa1b4b2ee4a9a108dd1f":[5,0,1,124,22],
+"classiDynTree_1_1ModelVisualization.html#af5c63587c63ffa1b4b2ee4a9a108dd1f":[5,0,1,124,21],
 "classiDynTree_1_1MomentumFreeFloatingJacobian.html":[5,0,1,125],
 "classiDynTree_1_1MomentumFreeFloatingJacobian.html#a071eb4583b2bd16399cf4bb460e15db0":[5,0,1,125,14],
 "classiDynTree_1_1MomentumFreeFloatingJacobian.html#a162f9d9077a0d5bbddc1da1b303515e5":[5,0,1,125,8],
@@ -249,5 +246,8 @@ var NAVTREEINDEX12 =
 "classiDynTree_1_1PrismaticJoint.html#ad9905ffd07c3f880d1c3bbc890011f5b":[3,1,5,6],
 "classiDynTree_1_1PrismaticJoint.html#af3efefcf0919eb273c4f2f3e992abef1":[3,1,5,17],
 "classiDynTree_1_1PrismaticJoint.html#af9d78ba6c319f68f16f9ff9ef58fd124":[3,1,5,29],
-"classiDynTree_1_1PrismaticJoint.html#afbbbe860f34622d4d8ae1d938fd65b98":[3,1,5,32]
+"classiDynTree_1_1PrismaticJoint.html#afbbbe860f34622d4d8ae1d938fd65b98":[3,1,5,32],
+"classiDynTree_1_1PrismaticJoint.html#afdb1856b85c51302cbec0ca1f71a9226":[3,1,5,22],
+"classiDynTree_1_1PrismaticJoint.html#afeed092c3d22070bb861bea4a55ffb39":[3,1,5,5],
+"classiDynTree_1_1RevoluteJoint.html":[3,1,6]
 };

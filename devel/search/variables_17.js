@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['x_6207',['x',['../structiDynTree_1_1estimateExternalWrenchesBuffers.html#ae5a8e31f5b0687c18159f23e690bfc23',1,'iDynTree::estimateExternalWrenchesBuffers']]],
-  ['x0_6208',['x0',['../classiDynTree_1_1optimization_1_1AlglibInterface_1_1AlglibInterfaceImplementation.html#aa235b3332277626276888d3e6e2f169b',1,'iDynTree::optimization::AlglibInterface::AlglibInterfaceImplementation']]]
+  ['zeromatrix_6202',['zeroMatrix',['../structiDynTree_1_1optimization_1_1SharedData.html#a58fc248cff5c940be70fb2a0a4191c0d',1,'iDynTree::optimization::SharedData']]]
 ];

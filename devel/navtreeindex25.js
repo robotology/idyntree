@@ -1,13 +1,5 @@
 var NAVTREEINDEX25 =
 {
-"structiDynTree_1_1AttitudeQuaternionEKFParameters.html#a62569b4408f25fc383fec5378c56c6b5":[5,0,1,13,4],
-"structiDynTree_1_1AttitudeQuaternionEKFParameters.html#a7240502333c0ddceee465fe196f24564":[5,0,1,13,2],
-"structiDynTree_1_1AttitudeQuaternionEKFParameters.html#a746a917e3743a21c74d46d21970c3ce1":[5,0,1,13,8],
-"structiDynTree_1_1AttitudeQuaternionEKFParameters.html#a7822b825b05c3f0ab6cc0888e62831c8":[5,0,1,13,3],
-"structiDynTree_1_1AttitudeQuaternionEKFParameters.html#aa7f9cfe773bc891cfe24de78430fccd4":[5,0,1,13,0],
-"structiDynTree_1_1AttitudeQuaternionEKFParameters.html#ab89d382744fb69db1570767a960b0b76":[5,0,1,13,6],
-"structiDynTree_1_1AttitudeQuaternionEKFParameters.html#ad6736d3272d84629e5e78fe9e5b60d96":[5,0,1,13,9],
-"structiDynTree_1_1AttitudeQuaternionEKFParameters.html#adebf29310eb3bbe3aa2e5f02baad3d37":[5,0,1,13,7],
 "structiDynTree_1_1BerdyDynamicVariable.html":[5,0,1,15],
 "structiDynTree_1_1BerdyDynamicVariable.html#a16199a3b4bd74df1a8578ecf066e1524":[5,0,1,15,4],
 "structiDynTree_1_1BerdyDynamicVariable.html#a589e92c8f4542ad8b0bab669103fdac0":[5,0,1,15,2],
@@ -249,5 +241,13 @@ var NAVTREEINDEX25 =
 "structiDynTree_1_1details_1_1is__span__oracle_3_01iDynTree_1_1Span_3_01ElementType_00_01Extent_01_4_01_4.html":[5,0,1,0,9],
 "structiDynTree_1_1details_1_1is__std__array.html":[5,0,1,0,10],
 "structiDynTree_1_1details_1_1is__std__array__oracle.html":[5,0,1,0,11],
-"structiDynTree_1_1details_1_1is__std__array__oracle_3_01std_1_1array_3_01ElementType_00_01Extent_01_4_01_4.html":[5,0,1,0,12]
+"structiDynTree_1_1details_1_1is__std__array__oracle_3_01std_1_1array_3_01ElementType_00_01Extent_01_4_01_4.html":[5,0,1,0,12],
+"structiDynTree_1_1estimateExternalWrenchesBuffers.html":[5,0,1,54],
+"structiDynTree_1_1estimateExternalWrenchesBuffers.html#a1772f06ec76c567d2c837c61ab8431c4":[5,0,1,54,0],
+"structiDynTree_1_1estimateExternalWrenchesBuffers.html#a1f056dfd91587e272c6e396e61ec4930":[5,0,1,54,1],
+"structiDynTree_1_1estimateExternalWrenchesBuffers.html#a2aca7ab3d8f4092cd9d9394dc714d466":[5,0,1,54,13],
+"structiDynTree_1_1estimateExternalWrenchesBuffers.html#a3054f9d10cd9f16a08490e0abbb25309":[5,0,1,54,10],
+"structiDynTree_1_1estimateExternalWrenchesBuffers.html#a3efa3b93b84e0b0d02a619945d417e33":[5,0,1,54,6],
+"structiDynTree_1_1estimateExternalWrenchesBuffers.html#a7d68bde7917d51ca707f54a44b7a5b1d":[5,0,1,54,11],
+"structiDynTree_1_1estimateExternalWrenchesBuffers.html#a8c3a1fd22a99881c8ce7cf23bcd6f9c0":[5,0,1,54,3]
 };

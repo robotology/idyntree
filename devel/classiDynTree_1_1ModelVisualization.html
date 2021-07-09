@@ -170,9 +170,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3db574d67780963ff7d297145be89df5"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classiDynTree_1_1IJetsVisualization.html">IJetsVisualization</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1ModelVisualization.html#a3db574d67780963ff7d297145be89df5">jets</a> ()</td></tr>
 <tr class="memdesc:a3db574d67780963ff7d297145be89df5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a reference to the internal <a class="el" href="classiDynTree_1_1IJetsVisualization.html" title="Interface to the visualization of jets attached to a model.">IJetsVisualization</a> interface.  <a href="classiDynTree_1_1ModelVisualization.html#a3db574d67780963ff7d297145be89df5">More...</a><br /></td></tr>
 <tr class="separator:a3db574d67780963ff7d297145be89df5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25334858f5a3d4c75a7bd851cc162329"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classiDynTree_1_1Transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1ModelVisualization.html#a25334858f5a3d4c75a7bd851cc162329">getWorldModelTransform</a> ()</td></tr>
-<tr class="memdesc:a25334858f5a3d4c75a7bd851cc162329"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the transformation of the model (root link) with respect to visualizer world \( w_H_{root}\) The obtained transformation matrix can be used to map any homogeneous vector from the model's root link frame to the visualizer world frame.  <a href="classiDynTree_1_1ModelVisualization.html#a25334858f5a3d4c75a7bd851cc162329">More...</a><br /></td></tr>
-<tr class="separator:a25334858f5a3d4c75a7bd851cc162329"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5c63587c63ffa1b4b2ee4a9a108dd1f"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classiDynTree_1_1Transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1ModelVisualization.html#af5c63587c63ffa1b4b2ee4a9a108dd1f">getWorldLinkTransform</a> (const <a class="el" href="namespaceiDynTree.html#a7b1bbb834d5bf0d3c64cdf91ab3d6e72">LinkIndex</a> &amp;linkIndex)</td></tr>
 <tr class="memdesc:af5c63587c63ffa1b4b2ee4a9a108dd1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the transformation of given link with respect to visualizer world \( w_H_{link}\).  <a href="classiDynTree_1_1ModelVisualization.html#af5c63587c63ffa1b4b2ee4a9a108dd1f">More...</a><br /></td></tr>
 <tr class="separator:af5c63587c63ffa1b4b2ee4a9a108dd1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -773,35 +770,6 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a25334858f5a3d4c75a7bd851cc162329"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25334858f5a3d4c75a7bd851cc162329">&#9670;&nbsp;</a></span>getWorldModelTransform()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classiDynTree_1_1Transform.html">Transform</a> iDynTree::ModelVisualization::getWorldModelTransform </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the transformation of the model (root link) with respect to visualizer world \( w_H_{root}\) The obtained transformation matrix can be used to map any homogeneous vector from the model's root link frame to the visualizer world frame. </p>
-
-<p>Implements <a class="el" href="classiDynTree_1_1IModelVisualization.html#a7784653772549e8f732cadf59236f563">iDynTree::IModelVisualization</a>.</p>
-
-</div>
-</div>
 <a id="af5c63587c63ffa1b4b2ee4a9a108dd1f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af5c63587c63ffa1b4b2ee4a9a108dd1f">&#9670;&nbsp;</a></span>getWorldLinkTransform() <span class="overload">[1/2]</span></h2>
 
@@ -961,7 +929,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceiDynTree.html">iDynTree</a></li><li class="navelem"><a class="el" href="classiDynTree_1_1ModelVisualization.html">ModelVisualization</a></li>
-    <li class="footer">Generated on Fri Jul 9 2021 12:53:19 for iDynTree by
+    <li class="footer">Generated on Fri Jul 9 2021 22:14:50 for iDynTree by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

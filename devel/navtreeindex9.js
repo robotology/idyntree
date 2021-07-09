@@ -1,15 +1,13 @@
 var NAVTREEINDEX9 =
 {
-"classiDynTree_1_1IModelVisualization.html#a18789f25967f8c105cefaaa5a9a58244":[5,0,1,86,17],
 "classiDynTree_1_1IModelVisualization.html#a30b9126e3d854c657013e7af4b8a6084":[5,0,1,86,0],
 "classiDynTree_1_1IModelVisualization.html#a416adb24480ac485047155ab3a053f24":[5,0,1,86,3],
 "classiDynTree_1_1IModelVisualization.html#a4d216f8ba410a9a827b6e5495d1fa441":[5,0,1,86,10],
 "classiDynTree_1_1IModelVisualization.html#a4f9c29aa7d950ac3e6eeb8ddacc3f420":[5,0,1,86,4],
-"classiDynTree_1_1IModelVisualization.html#a552088c4d186f59f5475f668b1506cab":[5,0,1,86,20],
-"classiDynTree_1_1IModelVisualization.html#a7130962b2f7f44cd8d76dbbabb0d8acf":[5,0,1,86,16],
-"classiDynTree_1_1IModelVisualization.html#a7784653772549e8f732cadf59236f563":[5,0,1,86,15],
+"classiDynTree_1_1IModelVisualization.html#a552088c4d186f59f5475f668b1506cab":[5,0,1,86,19],
+"classiDynTree_1_1IModelVisualization.html#a7130962b2f7f44cd8d76dbbabb0d8acf":[5,0,1,86,15],
 "classiDynTree_1_1IModelVisualization.html#a86dcccc124cafe7280578d9f66dd13fd":[5,0,1,86,11],
-"classiDynTree_1_1IModelVisualization.html#a939509d297d7a868d588f8e38583cf22":[5,0,1,86,18],
+"classiDynTree_1_1IModelVisualization.html#a939509d297d7a868d588f8e38583cf22":[5,0,1,86,17],
 "classiDynTree_1_1IModelVisualization.html#aae4fd91e3244e38cc00da2460e24d058":[5,0,1,86,7],
 "classiDynTree_1_1IModelVisualization.html#ab76d9b8e6720e724a4dc3a77c15f01c6":[5,0,1,86,6],
 "classiDynTree_1_1IModelVisualization.html#abe6388fc1ac461069a69f434606104ae":[5,0,1,86,8],
@@ -249,5 +247,7 @@ var NAVTREEINDEX9 =
 "classiDynTree_1_1JointPosDoubleArray.html#adb08f82f775b84bd0e0f8964b5c42dc5":[5,0,1,96,29],
 "classiDynTree_1_1JointPosDoubleArray.html#adb3205ed58008a5d54c9cd84b155d6e9":[5,0,1,96,28],
 "classiDynTree_1_1JointPosDoubleArray.html#ae0939194f829b13a798bc7120efa26c9":[5,0,1,96,23],
-"classiDynTree_1_1JointPosDoubleArray.html#ae4f23d980b16dac5b100ec8eaa37f848":[5,0,1,96,31]
+"classiDynTree_1_1JointPosDoubleArray.html#ae4f23d980b16dac5b100ec8eaa37f848":[5,0,1,96,31],
+"classiDynTree_1_1JointPosDoubleArray.html#af1d48bf5aac5f4cf8c87e3ac161d2523":[5,0,1,96,32],
+"classiDynTree_1_1JointPosDoubleArray.html#af654f4b9b859eff6af68a6ece12a60d2":[5,0,1,96,35]
 };

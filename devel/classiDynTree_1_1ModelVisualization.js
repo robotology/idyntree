@@ -21,7 +21,6 @@ var classiDynTree_1_1ModelVisualization =
     [ "setWireframeVisibility", "classiDynTree_1_1ModelVisualization.html#ae776e7e4523bec5a079976ba84eea5dc", null ],
     [ "setTransparent", "classiDynTree_1_1ModelVisualization.html#ae54af8f52ab8f7f79cd7b3b05e1ec398", null ],
     [ "jets", "classiDynTree_1_1ModelVisualization.html#a3db574d67780963ff7d297145be89df5", null ],
-    [ "getWorldModelTransform", "classiDynTree_1_1ModelVisualization.html#a25334858f5a3d4c75a7bd851cc162329", null ],
     [ "getWorldLinkTransform", "classiDynTree_1_1ModelVisualization.html#af5c63587c63ffa1b4b2ee4a9a108dd1f", null ],
     [ "getWorldFrameTransform", "classiDynTree_1_1ModelVisualization.html#ab53c53c59d50bbb8060bbbe20af5bb7c", null ],
     [ "getWorldLinkTransform", "classiDynTree_1_1ModelVisualization.html#a7ceec27b438d493e03d5af25d29fe667", null ],

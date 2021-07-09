@@ -17,7 +17,6 @@ var classiDynTree_1_1DummyModelVisualization =
     [ "getFeatures", "classiDynTree_1_1DummyModelVisualization.html#a3bdcdfcaf1c37690a010f3429bc050d0", null ],
     [ "setFeatureVisibility", "classiDynTree_1_1DummyModelVisualization.html#aa80c179731c41729cccaa7b447a8368a", null ],
     [ "jets", "classiDynTree_1_1DummyModelVisualization.html#a63505b6fd52ee361a9ddb75463cb8d25", null ],
-    [ "getWorldModelTransform", "classiDynTree_1_1DummyModelVisualization.html#ac095fe317114290305ea7e797f5b22c6", null ],
     [ "getWorldLinkTransform", "classiDynTree_1_1DummyModelVisualization.html#a48b30a5b643d86e817414b95ca097500", null ],
     [ "getWorldFrameTransform", "classiDynTree_1_1DummyModelVisualization.html#ad046251b8269c66c20bd3283411829f9", null ],
     [ "getWorldLinkTransform", "classiDynTree_1_1DummyModelVisualization.html#a21f7e1d8640c435742c0abf372a7d747", null ],
