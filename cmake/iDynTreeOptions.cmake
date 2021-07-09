@@ -44,6 +44,7 @@ endif()
 # Turn off compilation of specific parts of iDynTree.
 option(IDYNTREE_COMPILES_OPTIMALCONTROL "Compile iDynTree optimal control part." TRUE)
 option(IDYNTREE_COMPILES_TOOLS "Compile iDynTree tools." TRUE)
+option(IDYNTREE_COMPILES_YARP_TOOLS "Deprecated: Compile iDynTree tools that depend (also) on YARP." TRUE)
 
 #########################################################################
 # Deal with RPATH

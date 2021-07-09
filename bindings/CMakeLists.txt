@@ -1,9 +1,27 @@
+cmake_minimum_required(VERSION 3.16)
+project(iDynTreeBindings)
+
+# Detect if we are doing a standalone build of the bindings, using an external iDynTree
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+  set(IDYNTREE_BINDINGS_BUILD_STANDALONE TRUE)
+else()
+  set(IDYNTREE_BINDINGS_BUILD_STANDALONE FALSE)
+endif()
+
+if(IDYNTREE_BINDINGS_BUILD_STANDALONE)
+  # Add CMake helpers
+  list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/../cmake)
+  find_package(iDynTree REQUIRED)
+  set(IDYNTREE_LIBRARIES ${iDynTree_LIBRARIES})
+else()
+  get_property(IDYNTREE_LIBRARIES GLOBAL PROPERTY ${VARS_PREFIX}_TARGETS)
+endif()
+
 
 #############################################################################
 ## Options for compiling supported languages.  There's nothing magical
 ## about this list, any SWIG-supported language should work - take a
 ## look at e.g. ruby code below for how to do it.
-
 option(IDYNTREE_USES_PYTHON "Do you want to create the Python bindings" FALSE)
 option(IDYNTREE_USES_LUA "Do you want to create the Lua bindings" FALSE)
 option(IDYNTREE_USES_MATLAB "Do you want to create the MATLAB bindings" FALSE)
@@ -44,8 +62,6 @@ if(SWIG_FOUND OR IDYNTREE_USES_MATLAB OR IDYNTREE_USES_OCTAVE)
 
     set_source_files_properties(iDynTree.i PROPERTIES CPLUSPLUS ON)
 
-    get_property(IDYNTREE_LIBRARIES GLOBAL PROPERTY ${VARS_PREFIX}_TARGETS)
-
     # From https://github.com/robotology/yarp/blob/v3.3.0/bindings/CMakeLists.txt#L49
     foreach(_lib IN LISTS IDYNTREE_LIBRARIES)
         get_property(_include_dirs TARGET ${_lib} PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
@@ -62,8 +78,10 @@ if(SWIG_FOUND OR IDYNTREE_USES_MATLAB OR IDYNTREE_USES_OCTAVE)
 
     link_libraries(${IDYNTREE_LIBRARIES})
 
-    # Remove the deprecation warnings because by definition we always build bindings also of deprecated modules
-    idyntree_disable_deprecation_warnings()
+    if(NOT IDYNTREE_BINDINGS_BUILD_STANDALONE)
+      # Remove the deprecation warnings because by definition we always build bindings also of deprecated modules
+      idyntree_disable_deprecation_warnings()
+    endif()
 
     # list all dependencies of the process of generating
     # SWIG bindings (for now just .i files included in the main

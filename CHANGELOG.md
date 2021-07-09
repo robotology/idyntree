@@ -15,8 +15,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.3.0] - 2021-07-08
+
 ### Added
 - Add the `is/asPrismaticJoint` methods in the bindings (https://github.com/robotology/idyntree/issues/881, https://github.com/robotology/idyntree/pull/882)
+- Add the possibility of building the binding of iDynTree (`bindings` directory) on their own, against an already compiled system iDynTree (https://github.com/robotology/idyntree/pull/892/, https://github.com/robotology/robotology-superbuild/pull/817).
+
+### Deprecated
+- The tools that depend on YARP (`urdf2dh`, `yarprobotstatepublisher`, `idyntree-sole-gui`, `iDynTreePlotter`) have been moved in [`idyntree-yarp-tools`](https://github.com/robotology/idyntree-yarp-tools) and their use in iDynTree has been deprecated. The option `IDYNTREE_COMPILES_YARP_TOOLS` has been introduced to disable their compilation. This option is set by default to `ON` on iDynTree 3, will exist but default to `OFF` in iDynTree 4, and will be removed in iDynTree 5.
 
 ## [3.2.1] - 2021-06-07
 
