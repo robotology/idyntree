@@ -1069,9 +1069,9 @@ public:
 
     const Model & reducedModel() const;
 
-    void setCOMTarget(iDynTree::Position& desiredPosition, double weight = 1.0);
+    void setCOMTarget(const iDynTree::Position& desiredPosition, double weight = 1.0);
 
-    bool setCOMTarget(iDynTree::Span<double> desiredPosition, double weight = 1.0);
+    bool setCOMTarget(iDynTree::Span<const double> desiredPosition, double weight = 1.0);
 
     void setCOMAsConstraint(bool asConstraint = true);
 
@@ -1090,7 +1090,7 @@ public:
      *
      * @param direction    vector along which we want to project a point
      */
-    void setCOMConstraintProjectionDirection(iDynTree::Vector3 direction);
+    void setCOMConstraintProjectionDirection(const iDynTree::Vector3& direction);
 
     bool setCOMConstraintProjectionDirection(iDynTree::Span<const double> direction);
 
