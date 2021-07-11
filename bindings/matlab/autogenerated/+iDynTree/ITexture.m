@@ -5,18 +5,18 @@ classdef ITexture < iDynTreeSwigRef
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1892, self);
+        iDynTreeMEX(1905, self);
         self.SwigClear();
       end
     end
     function varargout = environment(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1893, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1906, self, varargin{:});
     end
     function varargout = getPixelColor(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1894, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1907, self, varargin{:});
     end
     function varargout = getPixels(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1895, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1908, self, varargin{:});
     end
     function self = ITexture(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
