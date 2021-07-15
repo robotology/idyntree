@@ -131,7 +131,7 @@ jobs:
         cd bindings
         mkdir build
         cd build
-        cmake -GNinja -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DMATLAB_FIND_DEBUG:BOOL=ON -DIDYNTREE_USES_MATLAB:BOOL=ON -DMatlab_ROOT_DIR=${GHA_Matlab_ROOT_DIR} -DMatlab_MEX_EXTENSION:STRING=${GHA_Matlab_MEX_EXTENSION} -DIDYNTREE_DISABLE_MATLAB_TESTS:BOOL=ON ..
+        cmake -GNinja  -DCMAKE_INSTALL_PREFIX=${CONDA_PREFIX}/idyntree_bindings_install_test -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DMATLAB_FIND_DEBUG:BOOL=ON -DIDYNTREE_USES_MATLAB:BOOL=ON -DMatlab_ROOT_DIR=${GHA_Matlab_ROOT_DIR} -DMatlab_MEX_EXTENSION:STRING=${GHA_Matlab_MEX_EXTENSION} -DIDYNTREE_DISABLE_MATLAB_TESTS:BOOL=ON ..
         cmake --build . --config ${{ matrix.build_type }}
         cmake --install . --config ${{ matrix.build_type }}
 
@@ -142,7 +142,7 @@ jobs:
         cd bindings
         mkdir build
         cd build
-        cmake -G"Visual Studio 16 2019" -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DMATLAB_FIND_DEBUG:BOOL=ON -DIDYNTREE_USES_MATLAB:BOOL=ON -DMatlab_ROOT_DIR=${GHA_Matlab_ROOT_DIR} -DMatlab_MEX_EXTENSION:STRING=${GHA_Matlab_MEX_EXTENSION} -DIDYNTREE_DISABLE_MATLAB_TESTS:BOOL=ON ..
+        cmake -G"Visual Studio 16 2019" -DCMAKE_INSTALL_PREFIX=${CONDA_PREFIX}/Library/idyntree_bindings_install_test -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DMATLAB_FIND_DEBUG:BOOL=ON -DIDYNTREE_USES_MATLAB:BOOL=ON -DMatlab_ROOT_DIR=${GHA_Matlab_ROOT_DIR} -DMatlab_MEX_EXTENSION:STRING=${GHA_Matlab_MEX_EXTENSION} -DIDYNTREE_DISABLE_MATLAB_TESTS:BOOL=ON ..
         cmake --build . --config ${{ matrix.build_type }}
         cmake --install . --config ${{ matrix.build_type }}
 
