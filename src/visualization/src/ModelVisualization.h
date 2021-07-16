@@ -41,7 +41,7 @@ public:
     virtual void setModelColor(const ColorViz & modelColor);
     virtual void resetModelColor();
     virtual bool setLinkColor(const LinkIndex& linkIndex, const ColorViz& linkColor);
-    virtual bool resetLinkColor(const LinkIndex& linkIndex); 
+    virtual bool resetLinkColor(const LinkIndex& linkIndex);
     virtual std::vector< std::string > getLinkNames();
     virtual bool setLinkVisibility(const std::string & linkName, bool isVisible);
     virtual std::vector<std::string> getFeatures();
@@ -49,11 +49,11 @@ public:
     void setWireframeVisibility(bool isVisible);
     void setTransparent(bool isTransparent);
     virtual IJetsVisualization& jets();
-    virtual Transform getWorldModelTransform();
     virtual Transform getWorldLinkTransform(const LinkIndex& linkIndex);
     virtual Transform getWorldFrameTransform(const FrameIndex& frameIndex);
     virtual Transform getWorldLinkTransform(const std::string& linkName);
     virtual Transform getWorldFrameTransform(const std::string& frameName);
+    virtual ILabel& label();
 };
 
 }

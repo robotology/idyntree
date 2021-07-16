@@ -93,6 +93,22 @@ public:
     virtual bool setJetsIntensity(const VectorDynSize & ) { return false; };
 };
 
+class DummyLabel : public iDynTree::ILabel
+{
+public:
+    virtual ~DummyLabel() override {};
+    virtual void setText(const std::string& ) override {};
+    virtual std::string getText() const override {return "";};
+    virtual void setSize(float ) override {};
+    virtual void setSize(float , float ) override {};
+    virtual float width() const override {return 0.0;};
+    virtual float height() const override {return 0.0;};
+    virtual void setPosition(const iDynTree::Position& ) override {};
+    virtual iDynTree::Position getPosition() const override {return iDynTree::Position::Zero();};
+    virtual void setColor(const iDynTree::ColorViz& ) override {};
+    virtual void setVisible(bool ) override {};
+};
+
 class DummyVectorsVisualization : public IVectorsVisualization {
 public:
     virtual ~DummyVectorsVisualization() override { }
@@ -107,6 +123,8 @@ public:
     virtual bool setVectorsAspect(double, double, double) override { return false; }
     virtual void setVectorsColor(const ColorViz &) override { return; }
     virtual void setVectorsDefaultColor(const ColorViz &) override { return; }
+    virtual bool setVisible(size_t , bool ) override { return false; }
+    virtual ILabel* getVectorLabel(size_t ) override {return nullptr;}
 };
 
 class DummyFrameVisualization : public IFrameVisualization
@@ -119,6 +137,7 @@ public:
     virtual size_t getNrOfFrames() const override {return 0; };
     virtual bool getFrameTransform(size_t , Transform& ) const override {return false;};
     virtual bool updateFrame(size_t, const Transform&) override {return false;};
+    virtual ILabel* getFrameLabel(size_t) override {return nullptr;};
 };
 
 /**
@@ -128,6 +147,7 @@ class DummyModelVisualization : public IModelVisualization
 {
     Model m_dummyModel;
     DummyJetsVisualization m_dummyJets;
+    DummyLabel m_dummyLabel;
 public:
     virtual ~DummyModelVisualization() {};
     virtual bool init(const Model& , const std::string , Visualizer &) { return false; }
@@ -146,11 +166,11 @@ public:
     virtual std::vector<std::string> getFeatures() { return std::vector<std::string>(); }
     virtual bool setFeatureVisibility(const std::string& , bool) { return false; }
     virtual IJetsVisualization& jets() { return m_dummyJets;  }
-    virtual Transform getWorldModelTransform() { return iDynTree::Transform::Identity(); }
     virtual Transform getWorldLinkTransform(const LinkIndex &) { return iDynTree::Transform::Identity(); }
     virtual Transform getWorldFrameTransform(const FrameIndex &) { return iDynTree::Transform::Identity(); }
     virtual Transform getWorldLinkTransform(const std::string &) { return iDynTree::Transform::Identity(); }
     virtual Transform getWorldFrameTransform(const std::string &) { return iDynTree::Transform::Identity(); }
+    virtual ILabel& label() { return m_dummyLabel; };
 };
 
 class DummyTexturesHandler : public ITexturesHandler

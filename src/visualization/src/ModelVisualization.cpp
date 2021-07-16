@@ -11,6 +11,7 @@
 #include "ModelVisualization.h"
 #include "JetsVisualization.h"
 #include "IrrlichtUtils.h"
+#include "Label.h"
 
 #include <iDynTree/Model/ForwardKinematics.h>
 #include <iDynTree/Model/Model.h>
@@ -71,6 +72,11 @@ struct ModelVisualization::ModelVisualizationPimpl
      * JetsVisualization helper class
      */
     JetsVisualization m_jets;
+
+    /**
+     * The label of the model
+     */
+    Label m_label;
 
 
     ModelVisualizationPimpl()
@@ -202,6 +208,13 @@ bool ModelVisualization::init(const Model& model,
     // Initialize the jets visualizer
     this->pimpl->m_jets.init(this->pimpl->m_irrSmgr,this,&(this->pimpl->frameNodes));
 
+    irr::scene::ISceneNode* labelParent = this->pimpl->modelNode;
+    if (this->pimpl->linkNodes.size() > 0)
+    {
+        labelParent = this->pimpl->linkNodes.front();
+    }
+    this->pimpl->m_label.init(this->pimpl->m_irrSmgr, labelParent);
+
     pimpl->m_isValid = true;
 
     return true;
@@ -210,14 +223,6 @@ bool ModelVisualization::init(const Model& model,
 Model& ModelVisualization::model()
 {
     return this->pimpl->m_model;
-}
-
-Transform ModelVisualization::getWorldModelTransform()
-{
-    Transform w_H_b;
-    irr::core::matrix4 relativeTransform(this->pimpl->modelNode->getRelativeTransformation());
-    w_H_b = irr2idyntree_trans(relativeTransform);
-    return w_H_b;
 }
 
 Transform ModelVisualization::getWorldLinkTransform(const LinkIndex& linkIndex)
@@ -272,6 +277,11 @@ Transform ModelVisualization::getWorldFrameTransform(const std::string& frameNam
     }
 
     return getWorldFrameTransform(frameIndex);
+}
+
+ILabel &ModelVisualization::label()
+{
+    return pimpl->m_label;
 }
 
 

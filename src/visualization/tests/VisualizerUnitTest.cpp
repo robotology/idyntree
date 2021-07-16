@@ -23,6 +23,11 @@ void checkVizLoading(const iDynTree::Model & model)
     bool ok = viz.addModel(model,"model");
     ASSERT_IS_TRUE(ok);
 
+    iDynTree::ILabel& label = viz.modelViz("model").label();
+    label.setText("TEST MODEL");
+    label.setSize(1.0);
+    label.setPosition(iDynTree::Position(-1.0, -1.0, 0.3));
+
     for(int i=0; i < 5; i++)
     {
         viz.draw();
@@ -76,7 +81,15 @@ void checkArrowsVisualization() {
     ok = vectors.updateVector(index, iDynTree::Position(0.2, 0.1, 0.1), components);
     ASSERT_IS_TRUE(ok);
 
+    vectors.getVectorLabel(0)->setText("Vector0");
 
+    for(int i=0; i < 5; i++)
+    {
+        viz.draw();
+    }
+
+    ok = vectors.setVisible(0, false);
+    ASSERT_IS_TRUE(ok);
 
     for(int i=0; i < 5; i++)
     {
@@ -133,6 +146,7 @@ void checkFrameVisualization() {
 
     size_t index = frames.addFrame(firstTransform);
     ASSERT_IS_TRUE(index == 0);
+    frames.getFrameLabel(0)->setText("First");
 
     iDynTree::Transform secondTransform;
     secondTransform.setRotation(iDynTree::Rotation::RPY(-1.57, 0,0));
@@ -140,6 +154,7 @@ void checkFrameVisualization() {
 
     index = frames.addFrame(secondTransform);
     ASSERT_IS_TRUE(index == 1);
+    frames.getFrameLabel(1)->setText("Second");
 
     for(int i=0; i < 5; i++)
     {
@@ -176,12 +191,29 @@ void checkFrameVisualization() {
 
 }
 
+void checkLabelVisualization()
+{
+    iDynTree::Visualizer viz;
+
+    iDynTree::ILabel& label = viz.getLabel("dummy");
+    label.setText("Label test");
+    label.setSize(1.0);
+    label.setPosition(iDynTree::Position(-1.0, -1.0, 0.1));
+    label.setColor(iDynTree::ColorViz(1.0, 0.0, 0.0, 0.0));
+
+    for(int i=0; i < 5; i++)
+    {
+        viz.draw();
+    }
+}
+
 int main()
 {
     threeLinksReducedTest();
     checkArrowsVisualization();
     checkAdditionalTexture();
     checkFrameVisualization();
+    checkLabelVisualization();
 
     return EXIT_SUCCESS;
 }

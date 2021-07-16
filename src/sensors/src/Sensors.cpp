@@ -202,18 +202,6 @@ bool SensorsList::getSensorIndex(const SensorType & sensor_type, const std::stri
     }
 }
 
-bool SensorsList::getSensorIndex(const SensorType & sensor_type, const std::string & _sensor_name, unsigned int & sensor_index) const
-{
-    std::ptrdiff_t sensor_index_full ;
-    bool ret = this->getSensorIndex(sensor_type, _sensor_name, sensor_index_full);
-    if (ret) 
-    {
-        sensor_index = static_cast<unsigned int>(sensor_index_full);
-    }
-    return ret;
-}
-
-
 std::ptrdiff_t SensorsList::getSensorIndex(const SensorType& sensor_type, const std::string& _sensor_name) const
 {
     std::ptrdiff_t retVal;
