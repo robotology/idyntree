@@ -163,9 +163,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a63505b6fd52ee361a9ddb75463cb8d25"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classiDynTree_1_1IJetsVisualization.html">IJetsVisualization</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1DummyModelVisualization.html#a63505b6fd52ee361a9ddb75463cb8d25">jets</a> ()</td></tr>
 <tr class="memdesc:a63505b6fd52ee361a9ddb75463cb8d25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a reference to the internal <a class="el" href="classiDynTree_1_1IJetsVisualization.html" title="Interface to the visualization of jets attached to a model.">IJetsVisualization</a> interface.  <a href="classiDynTree_1_1DummyModelVisualization.html#a63505b6fd52ee361a9ddb75463cb8d25">More...</a><br /></td></tr>
 <tr class="separator:a63505b6fd52ee361a9ddb75463cb8d25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac095fe317114290305ea7e797f5b22c6"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classiDynTree_1_1Transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1DummyModelVisualization.html#ac095fe317114290305ea7e797f5b22c6">getWorldModelTransform</a> ()</td></tr>
-<tr class="memdesc:ac095fe317114290305ea7e797f5b22c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the transformation of the model (root link) with respect to visualizer world \( w_H_{root}\) The obtained transformation matrix can be used to map any homogeneous vector from the model's root link frame to the visualizer world frame.  <a href="classiDynTree_1_1DummyModelVisualization.html#ac095fe317114290305ea7e797f5b22c6">More...</a><br /></td></tr>
-<tr class="separator:ac095fe317114290305ea7e797f5b22c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48b30a5b643d86e817414b95ca097500"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classiDynTree_1_1Transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1DummyModelVisualization.html#a48b30a5b643d86e817414b95ca097500">getWorldLinkTransform</a> (const <a class="el" href="namespaceiDynTree.html#a7b1bbb834d5bf0d3c64cdf91ab3d6e72">LinkIndex</a> &amp;)</td></tr>
 <tr class="memdesc:a48b30a5b643d86e817414b95ca097500"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the transformation of given link with respect to visualizer world \( w_H_{link}\).  <a href="classiDynTree_1_1DummyModelVisualization.html#a48b30a5b643d86e817414b95ca097500">More...</a><br /></td></tr>
 <tr class="separator:a48b30a5b643d86e817414b95ca097500"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -178,6 +175,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a41403854207527201ee17f50fd5f4336"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classiDynTree_1_1Transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1DummyModelVisualization.html#a41403854207527201ee17f50fd5f4336">getWorldFrameTransform</a> (const std::string &amp;)</td></tr>
 <tr class="memdesc:a41403854207527201ee17f50fd5f4336"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the transformation of given frame with respect to visualizer world \( w_H_{frame}\).  <a href="classiDynTree_1_1DummyModelVisualization.html#a41403854207527201ee17f50fd5f4336">More...</a><br /></td></tr>
 <tr class="separator:a41403854207527201ee17f50fd5f4336"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf29b8ced8ab50c4e29336c566d8f568"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classiDynTree_1_1ILabel.html">ILabel</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1DummyModelVisualization.html#abf29b8ced8ab50c4e29336c566d8f568">label</a> ()</td></tr>
+<tr class="memdesc:abf29b8ced8ab50c4e29336c566d8f568"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the label for the model.  <a href="classiDynTree_1_1DummyModelVisualization.html#abf29b8ced8ab50c4e29336c566d8f568">More...</a><br /></td></tr>
+<tr class="separator:abf29b8ced8ab50c4e29336c566d8f568"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classiDynTree_1_1Dummy.html">Dummy</a> model visualization. </p>
@@ -736,35 +736,6 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ac095fe317114290305ea7e797f5b22c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac095fe317114290305ea7e797f5b22c6">&#9670;&nbsp;</a></span>getWorldModelTransform()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual <a class="el" href="classiDynTree_1_1Transform.html">Transform</a> iDynTree::DummyModelVisualization::getWorldModelTransform </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the transformation of the model (root link) with respect to visualizer world \( w_H_{root}\) The obtained transformation matrix can be used to map any homogeneous vector from the model's root link frame to the visualizer world frame. </p>
-
-<p>Implements <a class="el" href="classiDynTree_1_1IModelVisualization.html#a7784653772549e8f732cadf59236f563">iDynTree::IModelVisualization</a>.</p>
-
-</div>
-</div>
 <a id="a48b30a5b643d86e817414b95ca097500"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a48b30a5b643d86e817414b95ca097500">&#9670;&nbsp;</a></span>getWorldLinkTransform() <span class="overload">[1/2]</span></h2>
 
@@ -885,6 +856,35 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="abf29b8ced8ab50c4e29336c566d8f568"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf29b8ced8ab50c4e29336c566d8f568">&#9670;&nbsp;</a></span>label()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classiDynTree_1_1ILabel.html">ILabel</a>&amp; iDynTree::DummyModelVisualization::label </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the label for the model. </p>
+
+<p>Implements <a class="el" href="classiDynTree_1_1IModelVisualization.html#a552088c4d186f59f5475f668b1506cab">iDynTree::IModelVisualization</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="DummyImplementations_8h.html">DummyImplementations.h</a></li>
 </ul>
@@ -894,7 +894,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceiDynTree.html">iDynTree</a></li><li class="navelem"><a class="el" href="classiDynTree_1_1DummyModelVisualization.html">DummyModelVisualization</a></li>
-    <li class="footer">Generated on Fri Jul 16 2021 14:41:26 for iDynTree by
+    <li class="footer">Generated on Fri Jul 16 2021 14:42:02 for iDynTree by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

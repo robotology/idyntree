@@ -6,6 +6,7 @@ var annotated_dup =
     [ "ChartsManager", "classChartsManager.html", "classChartsManager" ],
     [ "ChartsManagerWindow", "classChartsManagerWindow.html", "classChartsManagerWindow" ],
     [ "JointStateSubscriber", "classJointStateSubscriber.html", "classJointStateSubscriber" ],
+    [ "Label", "classLabel.html", "classLabel" ],
     [ "MatrixElement", "classMatrixElement.html", "classMatrixElement" ],
     [ "ObserverThread", "classObserverThread.html", "classObserverThread" ],
     [ "QtiDynTreeSoleGuiPlugin", "classQtiDynTreeSoleGuiPlugin.html", "classQtiDynTreeSoleGuiPlugin" ],

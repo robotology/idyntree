@@ -15,5 +15,6 @@ var structiDynTree_1_1ModelVisualization_1_1ModelVisualizationPimpl =
     [ "geomNodes", "structiDynTree_1_1ModelVisualization_1_1ModelVisualizationPimpl.html#ae058853e4023dc2a3e02f44a745efc04", null ],
     [ "geomNodesNotTransparentMaterialCache", "structiDynTree_1_1ModelVisualization_1_1ModelVisualizationPimpl.html#a57e8fd0d7b4cccc31fee178ed890f509", null ],
     [ "m_irrSmgr", "structiDynTree_1_1ModelVisualization_1_1ModelVisualizationPimpl.html#ac6db99c7698d947c17adb3fd02989282", null ],
-    [ "m_jets", "structiDynTree_1_1ModelVisualization_1_1ModelVisualizationPimpl.html#aaa0d20a40fd9ff9d18ae9549640d13df", null ]
+    [ "m_jets", "structiDynTree_1_1ModelVisualization_1_1ModelVisualizationPimpl.html#aaa0d20a40fd9ff9d18ae9549640d13df", null ],
+    [ "m_label", "structiDynTree_1_1ModelVisualization_1_1ModelVisualizationPimpl.html#a152c224615b4323603d927cc7041aca4", null ]
 ];

@@ -8,8 +8,6 @@ var files_dup =
     [ "AlglibInterface.h", "AlglibInterface_8h.html", null ],
     [ "AlglibInterfaceNotImplemented.cpp", "AlglibInterfaceNotImplemented_8cpp.html", null ],
     [ "AllSensorsTypes.h", "AllSensorsTypes_8h.html", null ],
-    [ "AngularForceVector3.h", "AngularForceVector3_8h.html", null ],
-    [ "AngularMotionVector3.h", "AngularMotionVector3_8h.html", null ],
     [ "ArticulatedBodyInertia.cpp", "ArticulatedBodyInertia_8cpp.html", "ArticulatedBodyInertia_8cpp" ],
     [ "ArticulatedBodyInertia.h", "ArticulatedBodyInertia_8h.html", null ],
     [ "AttitudeEstimator.cpp", "AttitudeEstimator_8cpp.html", null ],
@@ -103,6 +101,7 @@ var files_dup =
       [ "DummyLight", "classiDynTree_1_1DummyLight.html", "classiDynTree_1_1DummyLight" ],
       [ "DummyEnvironment", "classiDynTree_1_1DummyEnvironment.html", "classiDynTree_1_1DummyEnvironment" ],
       [ "DummyJetsVisualization", "classiDynTree_1_1DummyJetsVisualization.html", "classiDynTree_1_1DummyJetsVisualization" ],
+      [ "DummyLabel", "classiDynTree_1_1DummyLabel.html", "classiDynTree_1_1DummyLabel" ],
       [ "DummyVectorsVisualization", "classiDynTree_1_1DummyVectorsVisualization.html", "classiDynTree_1_1DummyVectorsVisualization" ],
       [ "DummyFrameVisualization", "classiDynTree_1_1DummyFrameVisualization.html", "classiDynTree_1_1DummyFrameVisualization" ],
       [ "DummyModelVisualization", "classiDynTree_1_1DummyModelVisualization.html", "classiDynTree_1_1DummyModelVisualization" ],
@@ -147,7 +146,6 @@ var files_dup =
       [ "ForceTorqueSensorElement", "classiDynTree_1_1ForceTorqueSensorElement.html", "classiDynTree_1_1ForceTorqueSensorElement" ],
       [ "ForceTorqueSensorHelper", "classiDynTree_1_1ForceTorqueSensorHelper.html", "classiDynTree_1_1ForceTorqueSensorHelper" ]
     ] ],
-    [ "ForceVector3.h", "ForceVector3_8h.html", null ],
     [ "ForwardEuler.cpp", "ForwardEuler_8cpp.html", null ],
     [ "ForwardEuler.h", "ForwardEuler_8h.html", null ],
     [ "ForwardKinematics.cpp", "ForwardKinematics_8cpp.html", "ForwardKinematics_8cpp" ],
@@ -242,6 +240,10 @@ var files_dup =
       [ "L2NormCostImplementation", "classiDynTree_1_1optimalcontrol_1_1L2NormCost_1_1L2NormCostImplementation.html", "classiDynTree_1_1optimalcontrol_1_1L2NormCost_1_1L2NormCostImplementation" ]
     ] ],
     [ "L2NormCost.h", "L2NormCost_8h.html", null ],
+    [ "Label.cpp", "Label_8cpp.html", null ],
+    [ "Label.h", "Label_8h.html", [
+      [ "Label", "classLabel.html", "classLabel" ]
+    ] ],
     [ "Light.cpp", "Light_8cpp.html", "Light_8cpp" ],
     [ "Light.h", "Light_8h.html", [
       [ "Light", "classiDynTree_1_1Light.html", "classiDynTree_1_1Light" ]
@@ -252,8 +254,6 @@ var files_dup =
     [ "LinearConstraint.h", "LinearConstraint_8h.html", null ],
     [ "LinearCost.cpp", "LinearCost_8cpp.html", null ],
     [ "LinearCost.h", "LinearCost_8h.html", null ],
-    [ "LinearForceVector3.h", "LinearForceVector3_8h.html", null ],
-    [ "LinearMotionVector3.h", "LinearMotionVector3_8h.html", null ],
     [ "LinearMPC.cpp", "LinearMPC_8cpp.html", null ],
     [ "LinearMPC.h", "LinearMPC_8h.html", null ],
     [ "LinearSystem.cpp", "LinearSystem_8cpp.html", [
@@ -312,7 +312,6 @@ var files_dup =
     [ "ModelVisualization.h", "ModelVisualization_8h.html", [
       [ "ModelVisualization", "classiDynTree_1_1ModelVisualization.html", "classiDynTree_1_1ModelVisualization" ]
     ] ],
-    [ "MotionVector3.h", "MotionVector3_8h.html", null ],
     [ "MovableJointImpl.h", "MovableJointImpl_8h.html", "MovableJointImpl_8h" ],
     [ "MPC.cpp", "MPC_8cpp.html", null ],
     [ "MPC.h", "MPC_8h.html", null ],
@@ -350,7 +349,6 @@ var files_dup =
       [ "OsqpInterface", "classiDynTree_1_1optimization_1_1OsqpInterface.html", "classiDynTree_1_1optimization_1_1OsqpInterface" ]
     ] ],
     [ "OsqpInterfaceNotImplemented.cpp", "OsqpInterfaceNotImplemented_8cpp.html", null ],
-    [ "par2urdf.cpp", "par2urdf_8cpp.html", "par2urdf_8cpp" ],
     [ "Position.cpp", "Position_8cpp.html", "Position_8cpp" ],
     [ "Position.h", "Position_8h.html", null ],
     [ "PositionRaw.cpp", "PositionRaw_8cpp.html", "PositionRaw_8cpp" ],

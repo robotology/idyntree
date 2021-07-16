@@ -81,13 +81,13 @@ var classiDynTree_1_1InverseKinematics =
     [ "getPoseForFrame", "classiDynTree_1_1InverseKinematics.html#a23b43854dd578c1f0317488dc7c31487", null ],
     [ "fullModel", "classiDynTree_1_1InverseKinematics.html#a1a6ef09da0cb4ddb68261529a45f3f2f", null ],
     [ "reducedModel", "classiDynTree_1_1InverseKinematics.html#a880e07ce1aea19321ecdaaaa8dcb0a84", null ],
-    [ "setCOMTarget", "classiDynTree_1_1InverseKinematics.html#a176c4c0e2471a8af391e7b156b04a2b0", null ],
-    [ "setCOMTarget", "classiDynTree_1_1InverseKinematics.html#afbc14b6fefb10120a59db30c370c5f00", null ],
+    [ "setCOMTarget", "classiDynTree_1_1InverseKinematics.html#a1edaecf608d2780adea491a03fa70b2e", null ],
+    [ "setCOMTarget", "classiDynTree_1_1InverseKinematics.html#a8e7d4e0d6a4f6fcc1c19d429ea0d09aa", null ],
     [ "setCOMAsConstraint", "classiDynTree_1_1InverseKinematics.html#a557041738a620f4ce2ef433083b9b3a0", null ],
     [ "setCOMAsConstraintTolerance", "classiDynTree_1_1InverseKinematics.html#ab2776f60ee744d261552c5685bec170f", null ],
     [ "isCOMAConstraint", "classiDynTree_1_1InverseKinematics.html#acc2d97dd6ed312e557fbee2a5d91e313", null ],
     [ "isCOMTargetActive", "classiDynTree_1_1InverseKinematics.html#a20284b4e939d67add4a1a90bba06dc0c", null ],
     [ "deactivateCOMTarget", "classiDynTree_1_1InverseKinematics.html#ae834df2d99d5332143bb3ab617ea54e7", null ],
-    [ "setCOMConstraintProjectionDirection", "classiDynTree_1_1InverseKinematics.html#a9a77ce138803d1db8f2db9f1927034de", null ],
+    [ "setCOMConstraintProjectionDirection", "classiDynTree_1_1InverseKinematics.html#a9311a6549a06f0cf8e6e3d2dc884aa12", null ],
     [ "setCOMConstraintProjectionDirection", "classiDynTree_1_1InverseKinematics.html#a222d4e73db789db16adbf14d4b78442d", null ]
 ];

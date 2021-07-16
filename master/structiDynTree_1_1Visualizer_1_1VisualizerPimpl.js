@@ -8,5 +8,6 @@ var structiDynTree_1_1Visualizer_1_1VisualizerPimpl =
     [ "m_environment", "structiDynTree_1_1Visualizer_1_1VisualizerPimpl.html#a180a6af127258fbe33264bb7226872a2", null ],
     [ "m_invalidVectors", "structiDynTree_1_1Visualizer_1_1VisualizerPimpl.html#a0c87b95d2949917ba393d618ef750678", null ],
     [ "m_invalidFrames", "structiDynTree_1_1Visualizer_1_1VisualizerPimpl.html#af15bba7a6da22e0018698fe9cc44235b", null ],
-    [ "m_invalidTextures", "structiDynTree_1_1Visualizer_1_1VisualizerPimpl.html#a840634212cb1f8981836481c52c2dd08", null ]
+    [ "m_invalidTextures", "structiDynTree_1_1Visualizer_1_1VisualizerPimpl.html#a840634212cb1f8981836481c52c2dd08", null ],
+    [ "m_invalidLabel", "structiDynTree_1_1Visualizer_1_1VisualizerPimpl.html#a25b3f67581a13cac86f2b82d131cdb76", null ]
 ];

@@ -146,6 +146,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7eab12835526d138fbd89df44176e329"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1IVectorsVisualization.html#a7eab12835526d138fbd89df44176e329">setVectorsAspect</a> (double zeroModulusRadius, double modulusMultiplier, double heightScale)=0</td></tr>
 <tr class="memdesc:a7eab12835526d138fbd89df44176e329"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines the dimension of the visualized arrows.  <a href="classiDynTree_1_1IVectorsVisualization.html#a7eab12835526d138fbd89df44176e329">More...</a><br /></td></tr>
 <tr class="separator:a7eab12835526d138fbd89df44176e329"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0528ca51bfc248dadc1542ca2d920c3"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1IVectorsVisualization.html#ad0528ca51bfc248dadc1542ca2d920c3">setVisible</a> (size_t vectorIndex, bool visible=true)=0</td></tr>
+<tr class="memdesc:ad0528ca51bfc248dadc1542ca2d920c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the visibility of a given vector.  <a href="classiDynTree_1_1IVectorsVisualization.html#ad0528ca51bfc248dadc1542ca2d920c3">More...</a><br /></td></tr>
+<tr class="separator:ad0528ca51bfc248dadc1542ca2d920c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac10adddde7a220fcf8781a6834559fba"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classiDynTree_1_1ILabel.html">ILabel</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1IVectorsVisualization.html#ac10adddde7a220fcf8781a6834559fba">getVectorLabel</a> (size_t vectorIndex)=0</td></tr>
+<tr class="memdesc:ac10adddde7a220fcf8781a6834559fba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the label associated to a vector.  <a href="classiDynTree_1_1IVectorsVisualization.html#ac10adddde7a220fcf8781a6834559fba">More...</a><br /></td></tr>
+<tr class="separator:ac10adddde7a220fcf8781a6834559fba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interface to the visualization of vectors. </p>
@@ -645,6 +651,91 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ad0528ca51bfc248dadc1542ca2d920c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0528ca51bfc248dadc1542ca2d920c3">&#9670;&nbsp;</a></span>setVisible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool iDynTree::IVectorsVisualization::setVisible </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>vectorIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>visible</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the visibility of a given vector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">The</td><td>index of the vector to change the visibility </td></tr>
+    <tr><td class="paramname">visible</td><td>The visibility of the vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if successfull, false if the index is out of bounds </dd></dl>
+
+<p>Implemented in <a class="el" href="classiDynTree_1_1DummyVectorsVisualization.html#a0a2aee2f48176afa5b734ac76c78958b">iDynTree::DummyVectorsVisualization</a>, and <a class="el" href="classiDynTree_1_1VectorsVisualization.html#ac392a282861d97c1e404d8c713bd8405">iDynTree::VectorsVisualization</a>.</p>
+
+</div>
+</div>
+<a id="ac10adddde7a220fcf8781a6834559fba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac10adddde7a220fcf8781a6834559fba">&#9670;&nbsp;</a></span>getVectorLabel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classiDynTree_1_1ILabel.html">ILabel</a>* iDynTree::IVectorsVisualization::getVectorLabel </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>vectorIndex</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the label associated to a vector. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vectorIndex</td><td>The index of the vector to get the label </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The label associated to the vector. nullptr if the vectorIndex is out of bounds. </dd></dl>
+
+<p>Implemented in <a class="el" href="classiDynTree_1_1DummyVectorsVisualization.html#a84bf8efac2ee62c8e040136765142b10">iDynTree::DummyVectorsVisualization</a>, and <a class="el" href="classiDynTree_1_1VectorsVisualization.html#a0348d783d3f7a79f1bc217710985cf7c">iDynTree::VectorsVisualization</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="Visualizer_8h.html">Visualizer.h</a></li>
 <li><a class="el" href="Visualizer_8cpp.html">Visualizer.cpp</a></li>
@@ -655,7 +746,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceiDynTree.html">iDynTree</a></li><li class="navelem"><a class="el" href="classiDynTree_1_1IVectorsVisualization.html">IVectorsVisualization</a></li>
-    <li class="footer">Generated on Fri Jul 16 2021 14:41:26 for iDynTree by
+    <li class="footer">Generated on Fri Jul 16 2021 14:42:02 for iDynTree by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

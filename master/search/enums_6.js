@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['lighttype_6302',['LightType',['../namespaceiDynTree.html#aad6844bb3e20ca63bfe9e3ee6e26515a',1,'iDynTree']]]
+  ['lighttype_6318',['LightType',['../namespaceiDynTree.html#aad6844bb3e20ca63bfe9e3ee6e26515a',1,'iDynTree']]]
 ];

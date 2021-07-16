@@ -135,6 +135,10 @@ var hierarchy =
     [ "iKinLimb", null, [
       [ "iDynTree::iKinLimbImported", "classiDynTree_1_1iKinLimbImported.html", null ]
     ] ],
+    [ "iDynTree::ILabel", "classiDynTree_1_1ILabel.html", [
+      [ "iDynTree::DummyLabel", "classiDynTree_1_1DummyLabel.html", null ],
+      [ "Label", "classLabel.html", null ]
+    ] ],
     [ "iDynTree::ILight", "classiDynTree_1_1ILight.html", [
       [ "iDynTree::DummyLight", "classiDynTree_1_1DummyLight.html", null ],
       [ "iDynTree::Light", "classiDynTree_1_1Light.html", null ]
@@ -170,8 +174,8 @@ var hierarchy =
     [ "ISceneNodeAnimator", null, [
       [ "iDynTree::CameraAnimator", "classiDynTree_1_1CameraAnimator.html", null ]
     ] ],
-    [ "iDynTree::SensorsList::Iterator", "classiDynTree_1_1SensorsList_1_1Iterator.html", null ],
     [ "iDynTree::SparseMatrix< ordering >::Iterator", "classiDynTree_1_1SparseMatrix_1_1Iterator.html", null ],
+    [ "iDynTree::SensorsList::Iterator", "classiDynTree_1_1SensorsList_1_1Iterator.html", null ],
     [ "iterator", null, [
       [ "iDynTree::optimization::DenseIterator", "classiDynTree_1_1optimization_1_1DenseIterator.html", null ],
       [ "iDynTree::optimization::TripletIterator", "classiDynTree_1_1optimization_1_1TripletIterator.html", null ]
