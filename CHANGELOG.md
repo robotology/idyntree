@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [3.3.1] - 2021-07-15
+## [3.3.1] - 2021-07-16
 
 ### Fixed 
 - Fixed the possibility of installing the bindings of iDynTree (`bindings` directory) on their own, against an already compiled system iDynTree (https://github.com/robotology/idyntree/pull/896).
