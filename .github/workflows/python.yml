@@ -115,6 +115,9 @@ jobs:
           name: dist
           path: dist
 
+      - name: Inspect dist folder
+        run: ls -lah dist/
+
       - uses: pypa/gh-action-pypi-publish@master
         if: |
           github.repository == 'robotology/idyntree' &&
