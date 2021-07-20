@@ -64,10 +64,11 @@ iDynTree::ColorViz iDynTree::Texture::getPixelColor(unsigned int width, unsigned
         irrTexture->unlock();
     }
 
-    pixelOut.r = pixelIrrlicht.getRed();
-    pixelOut.g = pixelIrrlicht.getGreen();
-    pixelOut.b = pixelIrrlicht.getBlue();
-    pixelOut.a = pixelIrrlicht.getAlpha();
+    irr::video::SColorf pixelIrrlichtFloat(pixelIrrlicht);
+    pixelOut.r = pixelIrrlichtFloat.getRed();
+    pixelOut.g = pixelIrrlichtFloat.getGreen();
+    pixelOut.b = pixelIrrlichtFloat.getBlue();
+    pixelOut.a = pixelIrrlichtFloat.getAlpha();
 
     return pixelOut;
 }
@@ -99,12 +100,13 @@ bool iDynTree::Texture::getPixels(std::vector<iDynTree::PixelViz> &pixels) const
             for (size_t height = 0; height < textureDim.Height; ++height)
             {
                 pixelIrrlicht = irr::video::SColor(*(unsigned int*)(buffer + (height * pitch) + (width * bytes)));
+                irr::video::SColorf pixelIrrlichtFloat(pixelIrrlicht);
                 pixels[i].width = width;
                 pixels[i].height = height;
-                pixels[i].r = pixelIrrlicht.getRed();
-                pixels[i].g = pixelIrrlicht.getGreen();
-                pixels[i].b = pixelIrrlicht.getBlue();
-                pixels[i].a = pixelIrrlicht.getAlpha();
+                pixels[i].r = pixelIrrlichtFloat.getRed();
+                pixels[i].g = pixelIrrlichtFloat.getGreen();
+                pixels[i].b = pixelIrrlichtFloat.getBlue();
+                pixels[i].a = pixelIrrlichtFloat.getAlpha();
                 ++i;
             }
         }
@@ -113,4 +115,9 @@ bool iDynTree::Texture::getPixels(std::vector<iDynTree::PixelViz> &pixels) const
     }
 
     return true;
+}
+
+void iDynTree::Texture::enableDraw(bool enabled)
+{
+    shouldDraw = enabled;
 }

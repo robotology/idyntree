@@ -756,6 +756,12 @@ public:
      */
     virtual bool getPixels(std::vector<PixelViz>& pixels) const = 0;
 
+    /**
+     * @brief Enable/disable the drawing on the texture.
+     * @param enabled If true (default), the visualizer will draw on the texture when calling draw();
+     */
+    virtual void enableDraw(bool enabled = true) = 0;
+
 };
 
 /**
@@ -915,6 +921,16 @@ public:
     ILabel& getLabel(const std::string& labelName);
 
     /**
+     * Get the visualizer width. Note: if the window is resized, this returns the correct size only if run is called first.
+     */
+    int width();
+
+    /**
+     * Get the visualizer height. Note: if the window is resized, this returns the correct size only if run is called first.
+     */
+    int height();
+
+    /**
      * Wrap the run method of the Irrlicht device.
      */
     bool run();
@@ -925,7 +941,12 @@ public:
     void draw();
 
     /**
-     * Right the current visualization to a image file.
+     * Draw the visualization in a subportion of the window. Need to call draw once done.
+     */
+    void subDraw(int xOffsetFromTopLeft, int yOffsetFromTopLeft, int subImageWidth, int subImageHeight);
+
+    /**
+     * Draw the current visualization to a image file.
      *
      * The format of the image is desumed from the filename.
      *

@@ -48,20 +48,22 @@ void iDynTree::TexturesHandler::draw(iDynTree::Environment &defaultEnvironment, 
 
     for (auto t = m_textures.begin(); t != m_textures.end(); ++t)
     {
-        t->second->textureEnvironment.m_envNode->setVisible(true); //Enable the texture environment
-        // set render target texture
-       m_irrDriver->setRenderTarget(t->second->irrTexture, true, true,
-                                    t->second->textureEnvironment.m_backgroundColor.toSColor());
+        if (t->second->shouldDraw)
+        {
+            t->second->textureEnvironment.m_envNode->setVisible(true); //Enable the texture environment
+            // set render target texture
+            m_irrDriver->setRenderTarget(t->second->irrTexture, true, true,
+                                         t->second->textureEnvironment.m_backgroundColor.toSColor());
 
-        auto textureDims = t->second->irrTexture->getSize();
+            auto textureDims = t->second->irrTexture->getSize();
 
-        defaultCamera.setAspectRatio(textureDims.Width/ (float)textureDims.Height);
+            defaultCamera.setAspectRatio(textureDims.Width/ (float)textureDims.Height);
 
-        // draw whole scene into render buffer
-        m_sceneManager->drawAll();
+            // draw whole scene into render buffer
+            m_sceneManager->drawAll();
 
-        t->second->textureEnvironment.m_envNode->setVisible(false); //Disable the texture environment
-
+            t->second->textureEnvironment.m_envNode->setVisible(false); //Disable the texture environment
+        }
     }
 
     defaultEnvironment.m_envNode->setVisible(true); //Enable the visualizer environment

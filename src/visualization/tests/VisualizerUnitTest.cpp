@@ -121,10 +121,25 @@ void checkAdditionalTexture() {
     ASSERT_IS_TRUE(ok);
 
     ASSERT_IS_TRUE(pixels.size() == static_cast<size_t>(textureOptions.winWidth * textureOptions.winHeight));
-    ASSERT_IS_TRUE(pixels[0].a = backGroundColor.a);
-    ASSERT_IS_TRUE(pixels[0].r = backGroundColor.r);
-    ASSERT_IS_TRUE(pixels[0].g = backGroundColor.g);
-    ASSERT_IS_TRUE(pixels[0].b = backGroundColor.b);
+    ASSERT_EQUAL_DOUBLE_TOL(pixels[0].a, backGroundColor.a, 1e-1);
+    ASSERT_EQUAL_DOUBLE_TOL(pixels[0].r, backGroundColor.r, 1e-1);
+    ASSERT_EQUAL_DOUBLE_TOL(pixels[0].g, backGroundColor.g, 1e-1);
+    ASSERT_EQUAL_DOUBLE_TOL(pixels[0].b, backGroundColor.b, 1e-1);
+
+    iDynTree::ColorViz newBackground(0.0, 0.0, 0.0, 0.0);
+    texture->environment().setBackgroundColor(newBackground);
+    texture->enableDraw(false); //The texture should not be updated, hence the background color should not change
+
+    viz.draw();
+
+    ok = texture->getPixels(pixels);
+    ASSERT_IS_TRUE(ok);
+
+    ASSERT_IS_TRUE(pixels.size() == static_cast<size_t>(textureOptions.winWidth * textureOptions.winHeight));
+    ASSERT_EQUAL_DOUBLE_TOL(pixels[0].a, backGroundColor.a, 1e-1);
+    ASSERT_EQUAL_DOUBLE_TOL(pixels[0].r, backGroundColor.r, 1e-1);
+    ASSERT_EQUAL_DOUBLE_TOL(pixels[0].g, backGroundColor.g, 1e-1);
+    ASSERT_EQUAL_DOUBLE_TOL(pixels[0].b, backGroundColor.b, 1e-1);
 
 }
 
@@ -207,6 +222,24 @@ void checkLabelVisualization()
     }
 }
 
+void checkViewPorts()
+{
+    iDynTree::Visualizer viz;
+
+    for(int i=0; i < 5; i++)
+    {
+        viz.run(); //to update the output of width() and height() in case of resize
+        viz.getLabel("label").setText("LEFT");
+
+        viz.subDraw(0, 0, viz.width()/2, viz.height());
+
+        viz.getLabel("label").setText("RIGHT");
+
+        viz.subDraw(viz.width()/2, 0, viz.width()/2, viz.height());
+        viz.draw();
+    }
+}
+
 int main()
 {
     threeLinksReducedTest();
@@ -214,6 +247,7 @@ int main()
     checkAdditionalTexture();
     checkFrameVisualization();
     checkLabelVisualization();
+    checkViewPorts();
 
     return EXIT_SUCCESS;
 }
