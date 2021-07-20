@@ -211,7 +211,7 @@ class MeshcatVisualizer:
         self.viewer.open()
 
     def jupyter_cell(self):
-        self.viewer.jupyter_cell()
+        return self.viewer.jupyter_cell()
 
     def set_model_from_file(self, model_path: str, considered_joints=None, model_name='iDynTree'):
 
