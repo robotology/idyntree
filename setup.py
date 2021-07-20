@@ -14,6 +14,7 @@ setuptools.setup(
         cmake_build_extension.CMakeExtension(
             name="BuildAndInstall",
             install_prefix="idyntree",
+            expose_binaries=["bin/idyntree-model-info"],
             cmake_configure_options=[
                 "-DBUILD_SHARED_LIBS:BOOL=OFF",
                 "-DIDYNTREE_USES_PYTHON:BOOL=ON",
