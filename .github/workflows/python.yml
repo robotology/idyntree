@@ -2,7 +2,10 @@ name: Python CI/CD
 
 on:
   push:
+    branches: [ '**' ]
+    tags-ignore: [ '**' ]
   pull_request:
+  workflow_dispatch:
   release:
     types:
       - published
@@ -28,12 +31,6 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install sdist dependencies
-        run: pip install setuptools_scm cmake_build_extension
-
-      - name: Build sdist
-        run: python setup.py sdist
-
       - name: Install build dependencies
         run: |
           sudo apt-get update
@@ -44,6 +41,10 @@ jobs:
             swig \
             libxml2-dev \
             libassimp-dev
+          pip install build
+
+      - name: Build sdist
+        run: python -m build --sdist
 
       - name: Install sdist
         run: pip -v install dist/*.tar.gz
@@ -53,6 +54,7 @@ jobs:
 
       - uses: actions/upload-artifact@v2
         with:
+          name: dist
           path: dist/*.tar.gz
 
   build_wheels:
@@ -88,11 +90,14 @@ jobs:
           CIBW_BUILD: cp37-*_x86_64 cp38-*_x86_64 cp39-*_x86_64
           CIBW_MANYLINUX_X86_64_IMAGE: manylinux_2_24
           CIBW_ENVIRONMENT_LINUX: AUDITWHEEL_PLAT=manylinux_2_24_x86_64
-          CIBW_BEFORE_BUILD_LINUX: "apt-get update && apt-get install -y libeigen3-dev libassimp-dev libxml2-dev coinor-libipopt-dev"
+          CIBW_BEFORE_BUILD_LINUX: |
+            apt-get update &&\
+            apt-get install -y libeigen3-dev libassimp-dev libxml2-dev coinor-libipopt-dev
           CIBW_TEST_COMMAND: "python -c 'import idyntree.bindings'"
 
       - uses: actions/upload-artifact@v2
         with:
+          name: dist
           path: ./wheelhouse/*.whl
 
   upload_pypi:
@@ -100,21 +105,21 @@ jobs:
       - build_sdist
       - build_wheels
     runs-on: ubuntu-latest
-    # Devel branch produces pre-releases
-    # Master branch produces stable releases linked to GitHub releases
-    if: |
-      github.repository == 'robotology/idyntree' &&
-      ((github.event_name == 'release' && github.event.action == 'published') ||
-       (github.event_name == 'push' && github.ref == 'refs/heads/devel'))
+    # Devel branch produces pre-releases.
+    # Master branch produces stable releases linked to GitHub releases.
 
     steps:
 
       - uses: actions/download-artifact@v2
         with:
-          name: artifact
+          name: dist
           path: dist
 
       - uses: pypa/gh-action-pypi-publish@master
+        if: |
+          github.repository == 'robotology/idyntree' &&
+          ((github.event_name == 'release' && github.event.action == 'published') ||
+           (github.event_name == 'push' && github.ref == 'refs/heads/devel'))
         with:
           user: __token__
           password: ${{ secrets.PYPI_TOKEN }}
