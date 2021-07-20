@@ -12,7 +12,6 @@ import os
 import idyntree.bindings as idyn
 import numpy as np
 import warnings
-import meshcat
 
 
 class MeshcatVisualizer:
@@ -23,6 +22,7 @@ class MeshcatVisualizer:
     """
 
     def __init__(self):
+        import meshcat
         self.viewer = meshcat.Visualizer()
         self.traversal = dict()
         self.model = dict()
@@ -43,6 +43,8 @@ class MeshcatVisualizer:
         return False
 
     def __load_mesh(self, geometry_object):
+
+        import meshcat
 
         mesh_path = geometry_object.asExternalMesh().getFileLocationOnLocalFileSystem()
 
@@ -94,7 +96,7 @@ class MeshcatVisualizer:
 
     def __add_model_geometry_to_viewer(self, model, model_geometry: idyn.ModelSolidShapes,
                                        model_name, color):
-        import meshcat.geometry
+        import meshcat
 
         if not self.__model_exists(model_name):
             msg = "The model named: " +  model_name + " already exists."
