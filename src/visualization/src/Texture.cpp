@@ -11,19 +11,26 @@
 #include "Texture.h"
 #include "DummyImplementations.h"
 
-void iDynTree::Texture::init(irr::video::IVideoDriver *irrDriver,
+void iDynTree::Texture::init(irr::video::IVideoDriver *irrDriverInput,
                              irr::scene::ISceneManager* sceneManager,
                              const std::string &name,
                              const VisualizerOptions &textureOptions)
 {
-    irrTexture = irrDriver->addRenderTargetTexture(irr::core::dimension2d<irr::u32>(textureOptions.winWidth, textureOptions.winHeight), name.c_str());
+    irrTexture = irrDriverInput->addRenderTargetTexture(irr::core::dimension2d<irr::u32>(textureOptions.winWidth, textureOptions.winHeight), name.c_str());
     textureEnvironment.init(sceneManager, textureOptions.rootFrameArrowsDimension);
     textureEnvironment.m_envNode->setVisible(false);
+    irrDriver = irrDriverInput;
+    irrDriver->grab();
 }
 
 iDynTree::Texture::~Texture()
 {
     irrTexture = 0;
+    if (irrDriver)
+    {
+        irrDriver->drop();
+        irrDriver = nullptr;
+    }
 }
 
 iDynTree::IEnvironment &iDynTree::Texture::environment()
@@ -115,6 +122,46 @@ bool iDynTree::Texture::getPixels(std::vector<iDynTree::PixelViz> &pixels) const
     }
 
     return true;
+}
+
+bool iDynTree::Texture::drawToFile(const std::string filename) const
+{
+    if (!irrTexture)
+    {
+        reportError("Texture","drawToFile","Cannot save the texture to file. It has not properly initialized.");
+        return false;
+    }
+
+    auto textureDim = irrTexture->getSize();
+    irr::video::IImage* const image = irrDriver->createImage(irrTexture,
+                                                             irr::core::position2d<irr::s32>(0, 0),
+                                                             textureDim);
+    bool retValue = false;
+    if (image) //should always be true, but you never know
+    {
+        //write screenshot to file
+        if (!irrDriver->writeImageToFile(image, filename.c_str()))
+        {
+            std::stringstream ss;
+            ss << "Impossible to write image file to " << filename;
+            reportError("Texture","drawToFile",ss.str().c_str());
+            retValue = false;
+        }
+        else
+        {
+            retValue = true;
+        }
+
+        //Don't forget to drop image since we don't need it anymore.
+        image->drop();
+    }
+    else
+    {
+        reportError("Texture","drawToFile","Failed to create image from texture.");
+        return false;
+    }
+
+    return retValue;
 }
 
 void iDynTree::Texture::enableDraw(bool enabled)

@@ -722,6 +722,10 @@ void Visualizer::close()
 bool Visualizer::isWindowActive() const
 {
 #ifdef IDYNTREE_USES_IRRLICHT
+    if( !pimpl->m_isInitialized )
+    {
+        return false;
+    }
     return pimpl->m_irrDevice->isWindowActive();
 #else
     return false;

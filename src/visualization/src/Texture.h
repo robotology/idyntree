@@ -24,10 +24,11 @@ public:
 
 
     irr::video::ITexture* irrTexture{nullptr};
+    irr::video::IVideoDriver* irrDriver{nullptr};
     Environment textureEnvironment;
     bool shouldDraw{true};
 
-    void init(irr::video::IVideoDriver* irrDriver, irr::scene::ISceneManager *sceneManager, const std::string& name, const VisualizerOptions& textureOptions);
+    void init(irr::video::IVideoDriver* irrDriverInput, irr::scene::ISceneManager *sceneManager, const std::string& name, const VisualizerOptions& textureOptions);
 
     virtual ~Texture();
 
@@ -36,6 +37,8 @@ public:
     virtual ColorViz getPixelColor(unsigned int width, unsigned int height) const override;
 
     virtual bool getPixels(std::vector<PixelViz>& pixels) const override;
+
+    virtual bool drawToFile(const std::string filename="iDynTreeVisualizerTextureScreenshot.png") const override;
 
     virtual void enableDraw(bool enabled = true) override;
 

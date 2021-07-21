@@ -757,6 +757,18 @@ public:
     virtual bool getPixels(std::vector<PixelViz>& pixels) const = 0;
 
     /**
+     * Draw the current texture to a image file.
+     *
+     * The format of the image is desumed from the filename.
+     *
+     * For more info on the process of writing the image,
+     * check irr::video::IVideoDriver::writeImageToFile irrlicht method.
+     *
+     * @return true if all went ok, false otherwise.
+     */
+    virtual bool drawToFile(const std::string filename="iDynTreeVisualizerTextureScreenshot.png") const = 0;
+
+    /**
      * @brief Enable/disable the drawing on the texture.
      * @param enabled If true (default), the visualizer will draw on the texture when calling draw();
      */
