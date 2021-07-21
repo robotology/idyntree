@@ -39,6 +39,8 @@ install(
 
 install(TARGETS ${target_name} DESTINATION ${PYTHON_INSTDIR})
 
+install(DIRECTORY visualize DESTINATION ${PYTHON_INSTDIR})
+
 if(WIN32)
     set_target_properties(${target_name} PROPERTIES SUFFIX ".pyd")
 endif(WIN32)

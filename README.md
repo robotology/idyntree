@@ -195,6 +195,7 @@ They are a collection of Matlab/Octave functions that wraps the functionalities 
 | How to read the Six Axis Force Torque sensors information contained in a URDF model. | [examples/matlab/GetJointAxesInWorldFrame.m](examples/matlab/GetJointAxesInWorldFrame.m) | MATLAB |
 | Usage of the MATLAB-native visualizer using the [MATLAB high-level wrappers](bindings/matlab/+iDynTreeWrappers/README.md). | [examples/matlab/iDynTreeWrappers/visualizeRobot.m](examples/matlab/iDynTreeWrappers/visualizeRobot.m) | MATLAB |
 | Basic usage of the [KinDynComputations class](https://robotology.github.io/idyntree/master/classiDynTree_1_1KinDynComputations.html). | [examples/python/KinDynComputationsTutorial.py](examples/python/KinDynComputationsTutorial.py) | Python |
+| Basic usage of the [MeshcatVisualizer class](bindings/python/visualize/meshcat_visualizer.py). | [examples/python/MeshcatVisualizerExample.ipynb](examples/python/MeshcatVisualizerExample.ipynb) | Python |
 
 Are you interested in a tutorial on a specific feature or algorithm? Just [request it on an enhancement issue](https://github.com/robotology/idyntree/issues/new).
 
