@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [4.1.0] - 2021-07-21
+## [4.1.0] - 2021-07-22
 
 ### Added
 - Add the `MeshcatVisualizer` Python class (https://github.com/robotology/idyntree/pull/901). This class uses [meshcat](https://github.com/rdeits/meshcat-python) to visualize the state of a model either in a browser or in a Jupyter cell. Check the example in `examples/python/MeshcatVisualizerExample.ipynb`.
