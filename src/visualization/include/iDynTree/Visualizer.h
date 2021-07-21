@@ -774,6 +774,23 @@ public:
      */
     virtual void enableDraw(bool enabled = true) = 0;
 
+    /**
+     * Get the texture width.
+     */
+    virtual int width() const = 0;
+
+    /**
+     * Get the texture height.
+     */
+    virtual int height() const = 0;
+
+    /**
+     * Set the area used for drawing operations. The entirety of the texture is cleared between two draw() calls.
+     * Use this in conjunction with subDraw() to draw on different parts of the same texture.
+     * Use call it with (0, 0, width(), height()) to draw on the full texture (this is done by default).
+     */
+    virtual bool setSubDrawArea(int xOffsetFromTopLeft, int yOffsetFromTopLeft, int subImageWidth, int subImageHeight) = 0;
+
 };
 
 /**

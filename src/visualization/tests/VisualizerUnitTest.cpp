@@ -226,18 +226,25 @@ void checkViewPorts()
 {
     iDynTree::Visualizer viz;
     viz.init();
+    auto texture = viz.textures().add("dummy");
 
     for(int i=0; i < 5; i++)
     {
+        viz.camera().setPosition(iDynTree::Position(1.0, 0.1*i + 1.0, 0.1*i + 1.0));
         viz.run(); //to update the output of width() and height() in case of resize
         viz.getLabel("label").setText("LEFT");
 
+        texture->setSubDrawArea(0, 0, texture->width()/2, texture->height());
+//        texture->enableDraw(false); //Uncomment this line to disable the drawing on the texture
         viz.subDraw(0, 0, viz.width()/2, viz.height());
 
         viz.getLabel("label").setText("RIGHT");
-
+//        texture->enableDraw(true); //Uncomment this line to reenable the drawing on the texture
+        texture->setSubDrawArea(viz.width()/2, 0, texture->width()/2, texture->height());
         viz.subDraw(viz.width()/2, 0, viz.width()/2, viz.height());
         viz.draw();
+//      texture->drawToFile(); //Uncomment this line to check what is contained in the texture
+
     }
 }
 

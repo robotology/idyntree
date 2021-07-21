@@ -17,6 +17,7 @@ void iDynTree::Texture::init(irr::video::IVideoDriver *irrDriverInput,
                              const VisualizerOptions &textureOptions)
 {
     irrTexture = irrDriverInput->addRenderTargetTexture(irr::core::dimension2d<irr::u32>(textureOptions.winWidth, textureOptions.winHeight), name.c_str());
+    viewport = {0, 0, textureOptions.winWidth, textureOptions.winHeight};
     textureEnvironment.init(sceneManager, textureOptions.rootFrameArrowsDimension);
     textureEnvironment.m_envNode->setVisible(false);
     irrDriver = irrDriverInput;
@@ -167,4 +168,55 @@ bool iDynTree::Texture::drawToFile(const std::string filename) const
 void iDynTree::Texture::enableDraw(bool enabled)
 {
     shouldDraw = enabled;
+    forceClear = enabled; //in case the texture has been enabled between one subDraw and the other.
+}
+
+int iDynTree::Texture::width() const
+{
+    if (!irrTexture)
+    {
+        return 0;
+    }
+
+    return irrTexture->getSize().Width;
+}
+
+int iDynTree::Texture::height() const
+{
+    if (!irrTexture)
+    {
+        return 0;
+    }
+
+    return irrTexture->getSize().Height;
+}
+
+bool iDynTree::Texture::setSubDrawArea(int xOffsetFromTopLeft, int yOffsetFromTopLeft, int subImageWidth, int subImageHeight)
+{
+    if (!irrTexture)
+    {
+        reportError("Texture","setSubDrawArea","Cannot get pixel color. The video texture has not been properly initialized.");
+        return false;
+    }
+
+    if (xOffsetFromTopLeft + subImageWidth > width())
+    {
+        reportError("Texture","setSubDrawArea","The specified draw coordinates are out of bounds. The sum of the xOffsetFromTopLeft and width are greater than the texture width.");
+        return false;
+    }
+
+    if (yOffsetFromTopLeft + subImageHeight > height())
+    {
+        reportError("Texture","setSubDrawArea","The specified draw coordinates are out of bounds. The sum of the yOffsetFromTopLeft and height are greater than the texture height.");
+        return false;
+    }
+
+    if (subImageHeight <= 0)
+    {
+        return false;
+    }
+
+    viewport = {xOffsetFromTopLeft, yOffsetFromTopLeft, xOffsetFromTopLeft + subImageWidth, yOffsetFromTopLeft + subImageHeight};
+
+    return true;
 }

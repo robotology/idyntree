@@ -25,8 +25,10 @@ public:
 
     irr::video::ITexture* irrTexture{nullptr};
     irr::video::IVideoDriver* irrDriver{nullptr};
+    irr::core::rect<irr::s32> viewport;
     Environment textureEnvironment;
     bool shouldDraw{true};
+    bool forceClear{false};
 
     void init(irr::video::IVideoDriver* irrDriverInput, irr::scene::ISceneManager *sceneManager, const std::string& name, const VisualizerOptions& textureOptions);
 
@@ -41,6 +43,12 @@ public:
     virtual bool drawToFile(const std::string filename="iDynTreeVisualizerTextureScreenshot.png") const override;
 
     virtual void enableDraw(bool enabled = true) override;
+
+    virtual int width() const override;
+
+    virtual int height() const override;
+
+    virtual bool setSubDrawArea(int xOffsetFromTopLeft, int yOffsetFromTopLeft, int subImageWidth, int subImageHeight) override;
 
 };
 

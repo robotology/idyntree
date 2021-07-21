@@ -433,7 +433,7 @@ void Visualizer::draw()
 
         pimpl->m_irrDriver->setViewPort(irr::core::rect<irr::s32>(0, 0, winWidth, winHeight));
 
-        pimpl->m_textures.draw(pimpl->m_environment, pimpl->m_camera);
+        pimpl->m_textures.draw(pimpl->m_environment, pimpl->m_camera, true);
 
         pimpl->m_camera.setAspectRatio(winWidth/ (float)winHeight);
 
@@ -488,16 +488,19 @@ void Visualizer::subDraw(int xOffsetFromTopLeft, int yOffsetFromTopLeft, int sub
         return;
     }
 
+    bool clearTextureBuffers = false;
     if (!pimpl->m_subDrawStarted)
     {
         pimpl->m_irrDriver->beginScene(true,true, pimpl->m_environment.m_backgroundColor.toSColor(), pimpl->m_irrVideoData);
         pimpl->m_subDrawStarted = true;
+        clearTextureBuffers = true;
     }
 
-    pimpl->m_textures.draw(pimpl->m_environment, pimpl->m_camera);
+    pimpl->m_textures.draw(pimpl->m_environment, pimpl->m_camera, clearTextureBuffers);
 
     pimpl->m_camera.setAspectRatio(subImageWidth/ (float)subImageHeight);
 
+    pimpl->m_irrDriver->setViewPort(irr::core::rect<irr::s32>(0, 0, width(), height())); //workaround for http://irrlicht.sourceforge.net/forum/viewtopic.php?f=7&t=47004
     pimpl->m_irrDriver->setViewPort(irr::core::rect<irr::s32>(xOffsetFromTopLeft, yOffsetFromTopLeft,
                                                               xOffsetFromTopLeft + subImageWidth, yOffsetFromTopLeft + subImageHeight));
 
