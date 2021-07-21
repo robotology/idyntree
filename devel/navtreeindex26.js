@@ -1,5 +1,6 @@
 var NAVTREEINDEX26 =
 {
+"structiDynTree_1_1estimateExternalWrenchesBuffers.html#a8c3a1fd22a99881c8ce7cf23bcd6f9c0":[5,0,1,54,3],
 "structiDynTree_1_1estimateExternalWrenchesBuffers.html#a8f2ef44cfc80a707fab7a095fa7809e8":[5,0,1,54,5],
 "structiDynTree_1_1estimateExternalWrenchesBuffers.html#a9df3a903d8a16c8d55c840bbdd91893d":[5,0,1,54,12],
 "structiDynTree_1_1estimateExternalWrenchesBuffers.html#aa8e53e1e1d93bc334b03d997e64c1f89":[5,0,1,54,2],

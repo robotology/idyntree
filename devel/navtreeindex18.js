@@ -1,5 +1,6 @@
 var NAVTREEINDEX18 =
 {
+"classiDynTree_1_1Visualizer.html#ac3c119f56b8b892f93391b66cc22b90c":[5,0,1,187,18],
 "classiDynTree_1_1Visualizer.html#af6ef8cb57712e6be6bc7029b16cd6d05":[5,0,1,187,9],
 "classiDynTree_1_1Visualizer.html#afeb9911ec0c555084847462a0a2959e2":[5,0,1,187,20],
 "classiDynTree_1_1Wrench.html":[3,0,22],
@@ -248,6 +249,5 @@ var NAVTREEINDEX18 =
 "classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem.html#ab52ff2a4d3b4710dcae26c474debf1e8":[3,7,7,2],
 "classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem.html#abb44051465e3022d2cbdd60b6fd7bea3":[3,7,7,4],
 "classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem.html#adc948b7d3046a17f7095e3f09a624d23":[3,7,7,3],
-"classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem.html#add7e34c9914205a0a428692c83af1c18":[3,7,7,6],
-"classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem.html#aecd92e0995c2d54416a8f81c3e5c1426":[3,7,7,5]
+"classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem.html#add7e34c9914205a0a428692c83af1c18":[3,7,7,6]
 };

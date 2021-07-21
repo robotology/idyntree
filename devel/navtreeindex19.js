@@ -1,5 +1,6 @@
 var NAVTREEINDEX19 =
 {
+"classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem.html#aecd92e0995c2d54416a8f81c3e5c1426":[3,7,7,5],
 "classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1_1ControlledDynamicalSystemImplementation.html":[3,7,7,0],
 "classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1_1ControlledDynamicalSystemImplementation.html#a1a993a1d3f654577c4d9c90c40b23312":[3,7,7,0,2],
 "classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1_1ControlledDynamicalSystemImplementation.html#a34a98dd8d28505720ff3eae9d983da29":[3,7,7,0,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX19 =
 "classiDynTree_1_1optimalcontrol_1_1LinearSystem_1_1LinearSystemPimpl.html#a842a75983d2a0803e36533bd08c1e259":[3,7,22,0,3],
 "classiDynTree_1_1optimalcontrol_1_1LinearSystem_1_1LinearSystemPimpl.html#a862d4b758fbb61ba4cea4280c3e156a0":[3,7,22,0,0],
 "classiDynTree_1_1optimalcontrol_1_1LinearSystem_1_1LinearSystemPimpl.html#a91b937dc9f5053d25d985c0a69336981":[3,7,22,0,1],
-"classiDynTree_1_1optimalcontrol_1_1LinearSystem_1_1LinearSystemPimpl.html#af8d4916df471ff3078db4edad3568bc1":[3,7,22,0,2],
-"classiDynTree_1_1optimalcontrol_1_1MPC.html":[3,7,23]
+"classiDynTree_1_1optimalcontrol_1_1LinearSystem_1_1LinearSystemPimpl.html#af8d4916df471ff3078db4edad3568bc1":[3,7,22,0,2]
 };

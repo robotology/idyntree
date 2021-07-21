@@ -1,5 +1,6 @@
 var NAVTREEINDEX25 =
 {
+"structiDynTree_1_1AttitudeQuaternionEKFParameters.html#adebf29310eb3bbe3aa2e5f02baad3d37":[5,0,1,13,7],
 "structiDynTree_1_1BerdyDynamicVariable.html":[5,0,1,15],
 "structiDynTree_1_1BerdyDynamicVariable.html#a16199a3b4bd74df1a8578ecf066e1524":[5,0,1,15,4],
 "structiDynTree_1_1BerdyDynamicVariable.html#a589e92c8f4542ad8b0bab669103fdac0":[5,0,1,15,2],
@@ -248,6 +249,5 @@ var NAVTREEINDEX25 =
 "structiDynTree_1_1estimateExternalWrenchesBuffers.html#a2aca7ab3d8f4092cd9d9394dc714d466":[5,0,1,54,13],
 "structiDynTree_1_1estimateExternalWrenchesBuffers.html#a3054f9d10cd9f16a08490e0abbb25309":[5,0,1,54,10],
 "structiDynTree_1_1estimateExternalWrenchesBuffers.html#a3efa3b93b84e0b0d02a619945d417e33":[5,0,1,54,6],
-"structiDynTree_1_1estimateExternalWrenchesBuffers.html#a7d68bde7917d51ca707f54a44b7a5b1d":[5,0,1,54,11],
-"structiDynTree_1_1estimateExternalWrenchesBuffers.html#a8c3a1fd22a99881c8ce7cf23bcd6f9c0":[5,0,1,54,3]
+"structiDynTree_1_1estimateExternalWrenchesBuffers.html#a7d68bde7917d51ca707f54a44b7a5b1d":[5,0,1,54,11]
 };

@@ -1,5 +1,6 @@
 var NAVTREEINDEX10 =
 {
+"classiDynTree_1_1JointPosDoubleArray.html#af654f4b9b859eff6af68a6ece12a60d2":[5,0,1,96,35],
 "classiDynTree_1_1JointPosDoubleArray.html#afa55464b73d97865bb3c070a3fa53b72":[5,0,1,96,3],
 "classiDynTree_1_1JointSensor.html":[3,2,3],
 "classiDynTree_1_1JointSensor.html#a132037b450bd1e276d123066560de435":[3,2,3,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX10 =
 "classiDynTree_1_1LinkUnknownWrenchContacts.html#abd5fb5d2f6ee5e51151bdcdbf708f57f":[5,0,1,109,11],
 "classiDynTree_1_1LinkUnknownWrenchContacts.html#abeaeeee221e5ad4e8a173b5ceaba35a3":[5,0,1,109,6],
 "classiDynTree_1_1LinkUnknownWrenchContacts.html#ac2721f47e70d9363f649127fb6df2d36":[5,0,1,109,2],
-"classiDynTree_1_1LinkUnknownWrenchContacts.html#acdcac2a19937332a6fb9ac3c9046e8c6":[5,0,1,109,3],
-"classiDynTree_1_1LinkUnknownWrenchContacts.html#ad028fd124d282c79334908721d90101a":[5,0,1,109,10]
+"classiDynTree_1_1LinkUnknownWrenchContacts.html#acdcac2a19937332a6fb9ac3c9046e8c6":[5,0,1,109,3]
 };

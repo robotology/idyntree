@@ -1,5 +1,6 @@
 var NAVTREEINDEX20 =
 {
+"classiDynTree_1_1optimalcontrol_1_1MPC.html":[3,7,23],
 "classiDynTree_1_1optimalcontrol_1_1MatrixSelector.html":[5,0,1,2,17],
 "classiDynTree_1_1optimalcontrol_1_1MatrixSelector.html#a0ad2e3912792c51e813e18fd8cb74480":[5,0,1,2,17,7],
 "classiDynTree_1_1optimalcontrol_1_1MatrixSelector.html#a22e514feed601d1e5d6d46cd2a522b83":[5,0,1,2,17,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX20 =
 "classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#afc82f38e5250adee9edcd89cd1168ac4":[3,7,34,2],
 "classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost.html":[3,7,35],
 "classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost.html#a155ce5315d859f994510ba47adad0ef1":[3,7,35,9],
-"classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost.html#a379ea8c1910865e1ad109cc46ad8bfb6":[3,7,35,17],
-"classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost.html#a416877725e0df7d52ef0f599b39db143":[3,7,35,14]
+"classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost.html#a379ea8c1910865e1ad109cc46ad8bfb6":[3,7,35,17]
 };

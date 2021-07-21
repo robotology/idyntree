@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['unknownwrenchcontact_3416',['UnknownWrenchContact',['../structiDynTree_1_1UnknownWrenchContact.html',1,'iDynTree']]],
-  ['urdfdocument_3417',['URDFDocument',['../classiDynTree_1_1URDFDocument.html',1,'iDynTree']]]
+  ['unknownwrenchcontact_3417',['UnknownWrenchContact',['../structiDynTree_1_1UnknownWrenchContact.html',1,'iDynTree']]],
+  ['urdfdocument_3418',['URDFDocument',['../classiDynTree_1_1URDFDocument.html',1,'iDynTree']]]
 ];

@@ -1,5 +1,6 @@
 var NAVTREEINDEX12 =
 {
+"classiDynTree_1_1ModelVisualization.html#a85aef702f222a1794a3eea50356ce518":[5,0,1,124,5],
 "classiDynTree_1_1ModelVisualization.html#a89b805448c5fa1ad365e6069ceadd749":[5,0,1,124,2],
 "classiDynTree_1_1ModelVisualization.html#a9278ef17d39f10442491c1dff16d4848":[5,0,1,124,15],
 "classiDynTree_1_1ModelVisualization.html#aa35084cc32da9c1acbed74592e906eca":[5,0,1,124,24],
@@ -248,6 +249,5 @@ var NAVTREEINDEX12 =
 "classiDynTree_1_1PrismaticJoint.html#af9d78ba6c319f68f16f9ff9ef58fd124":[3,1,5,29],
 "classiDynTree_1_1PrismaticJoint.html#afbbbe860f34622d4d8ae1d938fd65b98":[3,1,5,32],
 "classiDynTree_1_1PrismaticJoint.html#afdb1856b85c51302cbec0ca1f71a9226":[3,1,5,22],
-"classiDynTree_1_1PrismaticJoint.html#afeed092c3d22070bb861bea4a55ffb39":[3,1,5,5],
-"classiDynTree_1_1RevoluteJoint.html":[3,1,6]
+"classiDynTree_1_1PrismaticJoint.html#afeed092c3d22070bb861bea4a55ffb39":[3,1,5,5]
 };

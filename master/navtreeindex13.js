@@ -1,5 +1,6 @@
 var NAVTREEINDEX13 =
 {
+"classiDynTree_1_1RevoluteJoint.html":[3,1,6],
 "classiDynTree_1_1RevoluteJoint.html#a045d13488a7d6481fcf2db951655922a":[3,1,6,29],
 "classiDynTree_1_1RevoluteJoint.html#a1eec73f7f3f2264a1ca6508964f2c322":[3,1,6,20],
 "classiDynTree_1_1RevoluteJoint.html#a20b3ce425f402faa6fba150f4bf81856":[3,1,6,12],
@@ -248,6 +249,5 @@ var NAVTREEINDEX13 =
 "classiDynTree_1_1SensorElement.html#ad36cb30cdb1e829f3154655b13afb516":[5,0,1,144,1],
 "classiDynTree_1_1SensorHelper.html":[5,0,1,145],
 "classiDynTree_1_1SensorHelper.html#a5bdee23a7596be29f49d791ee306c31e":[5,0,1,145,2],
-"classiDynTree_1_1SensorHelper.html#ac726e84fbbcc59662ab2bf0c531b1270":[5,0,1,145,3],
-"classiDynTree_1_1SensorHelper.html#ad420111e0ad36e1df48085f565476d40":[5,0,1,145,1]
+"classiDynTree_1_1SensorHelper.html#ac726e84fbbcc59662ab2bf0c531b1270":[5,0,1,145,3]
 };

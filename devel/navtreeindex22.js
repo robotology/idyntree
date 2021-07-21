@@ -1,5 +1,6 @@
 var NAVTREEINDEX22 =
 {
+"classiDynTree_1_1optimization_1_1AlglibInterface.html#aa98dc1cbe48a07206d201838f8027768":[3,7,30,9],
 "classiDynTree_1_1optimization_1_1AlglibInterface.html#ac4f37167d1e64a8e1aa6306afd0c52e0":[3,7,30,2],
 "classiDynTree_1_1optimization_1_1AlglibInterface.html#acd9e30e5d403c497e60a68c54dbdcf37":[3,7,30,4],
 "classiDynTree_1_1optimization_1_1AlglibInterface.html#ad20ff1c23c66b9e8d0a803c870fc131f":[3,7,30,16],
@@ -248,6 +249,5 @@ var NAVTREEINDEX22 =
 "classiDynTree_1_1optimization_1_1WorhpInterface.html#ad41aa251a914e7c6d01fa3a9d83d49c5":[3,7,33,2],
 "classiDynTree_1_1optimization_1_1WorhpInterface.html#ae2625de0cfd4d7c807753117b8a760dc":[3,7,33,17],
 "classiDynTree_1_1optimization_1_1WorhpInterface.html#ae3b9609d905cbbf3c3336c9350e94106":[3,7,33,21],
-"classiDynTree_1_1optimization_1_1WorhpInterface.html#af895de43d051bd371c3dd0ca77b60140":[3,7,33,8],
-"classiDynTree_1_1skinDynLibConversionsHelper.html":[3,10,3]
+"classiDynTree_1_1optimization_1_1WorhpInterface.html#af895de43d051bd371c3dd0ca77b60140":[3,7,33,8]
 };

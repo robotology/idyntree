@@ -1,5 +1,6 @@
 var NAVTREEINDEX5 =
 {
+"classiDynTree_1_1AttitudeQuaternionEKF.html#af8e0003290ca166251c7d8bb4a80162d":[5,0,1,12,36],
 "classiDynTree_1_1AttitudeQuaternionEKF.html#afeea4332a25849b1fd96708d6d7c42ee":[5,0,1,12,5],
 "classiDynTree_1_1AttitudeQuaternionEKF.html#aff1960e49e08ce5219426f88ed38d9ce":[5,0,1,12,3],
 "classiDynTree_1_1Axis.html":[3,0,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX5 =
 "classiDynTree_1_1ColorViz.html#a66c1f26b9f0ab71c5a0424b7138e4801":[5,0,1,27,2],
 "classiDynTree_1_1ColorViz.html#a76f94a49b08d57cfcbd1153324f5cc42":[5,0,1,27,0],
 "classiDynTree_1_1ColorViz.html#ab7bb92c9c5bc5d9b83190143136f277a":[5,0,1,27,5],
-"classiDynTree_1_1ColorViz.html#ac0d868d2b5eccab6808bab3d092fb0fe":[5,0,1,27,3],
-"classiDynTree_1_1ColorViz.html#afa1267993192af9e91a8a4b63a9f41f9":[5,0,1,27,1]
+"classiDynTree_1_1ColorViz.html#ac0d868d2b5eccab6808bab3d092fb0fe":[5,0,1,27,3]
 };

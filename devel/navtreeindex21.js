@@ -1,5 +1,6 @@
 var NAVTREEINDEX21 =
 {
+"classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost.html#a416877725e0df7d52ef0f599b39db143":[3,7,35,14],
 "classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost.html#a41bc5547c17cf3b7490ea15361fc0de8":[3,7,35,15],
 "classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost.html#a47cce0b64dbbba8e0eac180f0dd19e20":[3,7,35,4],
 "classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost.html#a55d298ac7b70590ad7e9122a21c03b7d":[3,7,35,22],
@@ -248,6 +249,5 @@ var NAVTREEINDEX21 =
 "classiDynTree_1_1optimization_1_1AlglibInterface.html#a75cc0634b21a7148022f6e84236cfbff":[3,7,30,1],
 "classiDynTree_1_1optimization_1_1AlglibInterface.html#a79a9f496151b7de19c9a998be4f323a9":[3,7,30,15],
 "classiDynTree_1_1optimization_1_1AlglibInterface.html#a8f2bcb36bd7f6cdc9857c8212785ea4c":[3,7,30,5],
-"classiDynTree_1_1optimization_1_1AlglibInterface.html#a9378c189eddd25f3da3171d9d2be7224":[3,7,30,6],
-"classiDynTree_1_1optimization_1_1AlglibInterface.html#aa98dc1cbe48a07206d201838f8027768":[3,7,30,9]
+"classiDynTree_1_1optimization_1_1AlglibInterface.html#a9378c189eddd25f3da3171d9d2be7224":[3,7,30,6]
 };

@@ -1,5 +1,6 @@
 var NAVTREEINDEX14 =
 {
+"classiDynTree_1_1SensorHelper.html#ad420111e0ad36e1df48085f565476d40":[5,0,1,145,1],
 "classiDynTree_1_1SensorHelper.html#ad5fbaf3d8c8df33cc7c30b689bccd97a":[5,0,1,145,0],
 "classiDynTree_1_1SensorsList.html":[3,2,5],
 "classiDynTree_1_1SensorsList.html#a03e95f4b1d11084323e3374bf8ca72b7":[3,2,5,17],
@@ -248,6 +249,5 @@ var NAVTREEINDEX14 =
 "classiDynTree_1_1SparseMatrix.html#a29ee8a8299132878d559670986295057":[5,0,1,154,20],
 "classiDynTree_1_1SparseMatrix.html#a2c8be14df0e6c00c30228817fa4aafe9":[5,0,1,154,42],
 "classiDynTree_1_1SparseMatrix.html#a2cfb20f7ed2794fb908bddebec8bff7a":[5,0,1,154,48],
-"classiDynTree_1_1SparseMatrix.html#a32921b22df34d345d3cdd907ebab89ba":[5,0,1,154,44],
-"classiDynTree_1_1SparseMatrix.html#a331944a95ddc8b8317e3a2a26829ea7a":[5,0,1,154,28]
+"classiDynTree_1_1SparseMatrix.html#a32921b22df34d345d3cdd907ebab89ba":[5,0,1,154,44]
 };

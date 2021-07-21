@@ -1,5 +1,6 @@
 var NAVTREEINDEX24 =
 {
+"functions_vars_n.html":[5,3,2,13],
 "functions_vars_o.html":[5,3,2,14],
 "functions_vars_p.html":[5,3,2,15],
 "functions_vars_r.html":[5,3,2,16],
@@ -21,8 +22,8 @@ var NAVTREEINDEX24 =
 "globals_type.html":[6,1,3],
 "globals_vars.html":[6,1,2],
 "group__iDynTreeCore.html":[3,0],
-"group__iDynTreeCore.html#ga92610f375c318c6d08be7c5fb29c7222":[3,0,23],
 "group__iDynTreeCore.html#ga92610f375c318c6d08be7c5fb29c7222":[6,0,283,7],
+"group__iDynTreeCore.html#ga92610f375c318c6d08be7c5fb29c7222":[3,0,23],
 "group__iDynTreeDeprecated.html":[3,11],
 "group__iDynTreeEstimation.html":[3,4],
 "group__iDynTreeExperimental.html":[3,7],
@@ -114,20 +115,20 @@ var NAVTREEINDEX24 =
 "index.html":[0],
 "modules.html":[3],
 "namespaceQtCharts.html":[4,0,3],
-"namespacecmdline.html":[4,0,0],
 "namespacecmdline.html":[5,0,0],
+"namespacecmdline.html":[4,0,0],
 "namespacecmdline_1_1detail.html":[5,0,0,0],
 "namespacecmdline_1_1detail.html":[4,0,0,0],
 "namespaceiDynTree.html":[4,0,1],
 "namespaceiDynTree.html":[5,0,1],
-"namespaceiDynTree_1_1MatrixViewInternal.html":[4,0,1,1],
 "namespaceiDynTree_1_1MatrixViewInternal.html":[5,0,1,1],
+"namespaceiDynTree_1_1MatrixViewInternal.html":[4,0,1,1],
 "namespaceiDynTree_1_1SpanUtils.html":[5,0,1,4],
 "namespaceiDynTree_1_1SpanUtils.html":[4,0,1,4],
 "namespaceiDynTree_1_1details.html":[4,0,1,0],
 "namespaceiDynTree_1_1details.html":[5,0,1,0],
-"namespaceiDynTree_1_1optimalcontrol.html":[5,0,1,2],
 "namespaceiDynTree_1_1optimalcontrol.html":[4,0,1,2],
+"namespaceiDynTree_1_1optimalcontrol.html":[5,0,1,2],
 "namespaceiDynTree_1_1optimalcontrol_1_1integrators.html":[5,0,1,2,0],
 "namespaceiDynTree_1_1optimalcontrol_1_1integrators.html":[4,0,1,2,0],
 "namespaceiDynTree_1_1optimization.html":[4,0,1,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX24 =
 "structiDynTree_1_1AttitudeQuaternionEKFParameters.html#a7822b825b05c3f0ab6cc0888e62831c8":[5,0,1,13,3],
 "structiDynTree_1_1AttitudeQuaternionEKFParameters.html#aa7f9cfe773bc891cfe24de78430fccd4":[5,0,1,13,0],
 "structiDynTree_1_1AttitudeQuaternionEKFParameters.html#ab89d382744fb69db1570767a960b0b76":[5,0,1,13,6],
-"structiDynTree_1_1AttitudeQuaternionEKFParameters.html#ad6736d3272d84629e5e78fe9e5b60d96":[5,0,1,13,9],
-"structiDynTree_1_1AttitudeQuaternionEKFParameters.html#adebf29310eb3bbe3aa2e5f02baad3d37":[5,0,1,13,7]
+"structiDynTree_1_1AttitudeQuaternionEKFParameters.html#ad6736d3272d84629e5e78fe9e5b60d96":[5,0,1,13,9]
 };
