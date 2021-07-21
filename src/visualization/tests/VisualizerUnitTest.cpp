@@ -225,6 +225,7 @@ void checkLabelVisualization()
 void checkViewPorts()
 {
     iDynTree::Visualizer viz;
+    viz.init();
 
     for(int i=0; i < 5; i++)
     {
@@ -240,6 +241,21 @@ void checkViewPorts()
     }
 }
 
+void checkDoubleViz()
+{
+    iDynTree::Visualizer viz1, viz2;
+
+    viz1.getLabel("dummy").setText("VIZ1");
+    viz2.getLabel("dummy").setText("VIZ2");
+
+
+    for(int i=0; i < 5; i++)
+    {
+        viz1.draw();
+        viz2.draw();
+    }
+}
+
 int main()
 {
     threeLinksReducedTest();
@@ -248,6 +264,7 @@ int main()
     checkFrameVisualization();
     checkLabelVisualization();
     checkViewPorts();
+    checkDoubleViz();
 
     return EXIT_SUCCESS;
 }

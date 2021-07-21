@@ -130,6 +130,11 @@ struct Visualizer::VisualizerPimpl
     irr::video::IVideoDriver* m_irrDriver;
 
     /**
+     * Irrlicht video data.
+     */
+    irr::video::SExposedVideoData m_irrVideoData;
+
+    /**
      * Camera used by the visualization.
      */
     Camera m_camera;
@@ -296,6 +301,10 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
     // Get video driver
     pimpl->m_irrDriver = pimpl->m_irrDevice->getVideoDriver();
 
+    pimpl->m_irrVideoData = pimpl->m_irrDriver->getExposedVideoData(); //save the current window settings.
+                                                                       //This is helpful in case other Viualizer objects are created
+                                                                       // since Irrlicht by default draws on the last window opened.
+
     // Always visualize the mouse cursor
     pimpl->m_irrDevice->getCursorControl()->setVisible(true);
 
@@ -420,7 +429,7 @@ void Visualizer::draw()
             return;
         }
 
-        pimpl->m_irrDriver->beginScene(true,true, pimpl->m_environment.m_backgroundColor.toSColor());
+        pimpl->m_irrDriver->beginScene(true,true, pimpl->m_environment.m_backgroundColor.toSColor(), pimpl->m_irrVideoData);
 
         pimpl->m_irrDriver->setViewPort(irr::core::rect<irr::s32>(0, 0, winWidth, winHeight));
 
@@ -481,7 +490,7 @@ void Visualizer::subDraw(int xOffsetFromTopLeft, int yOffsetFromTopLeft, int sub
 
     if (!pimpl->m_subDrawStarted)
     {
-        pimpl->m_irrDriver->beginScene(true,true, pimpl->m_environment.m_backgroundColor.toSColor());
+        pimpl->m_irrDriver->beginScene(true,true, pimpl->m_environment.m_backgroundColor.toSColor(), pimpl->m_irrVideoData);
         pimpl->m_subDrawStarted = true;
     }
 
