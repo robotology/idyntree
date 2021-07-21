@@ -6,11 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.0] - 2021-07-21
+
+### Added
+- Add the `MeshcatVisualizer` Python class (https://github.com/robotology/idyntree/pull/901). This class uses [meshcat](https://github.com/rdeits/meshcat-python) to visualize the state of a model either in a browser or in a Jupyter cell. Check the example in `examples/python/MeshcatVisualizerExample.ipynb`.
+
 ## [4.0.0] - 2021-07-16
 
 ### Added
 - Add the visualization of labels in the visualizer (https://github.com/robotology/idyntree/pull/879)
-- Implement the `MeshcatVisualizer` python class (https://github.com/robotology/idyntree/pull/901)
 
 ### Removed
 - Remove headers `iDynTree/Core/AngularForceVector3.h`, `iDynTree/Core/AngularMotionVector3.h`, `include/iDynTree/Core/ForceVector3.h`, `iDynTree/Core/LinearForceVector3.h`, `include/iDynTree/Core/LinearMotionVector3.h`, `include/iDynTree/Core/MotionVector3.h`. They were deprecated in iDynTree 2.0 (https://github.com/robotology/idyntree/pull/708, https://github.com/robotology/idyntree/pull/885).
