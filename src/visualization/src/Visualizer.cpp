@@ -644,7 +644,7 @@ ILabel &Visualizer::getLabel(const std::string &labelName)
 #endif
 }
 
-int Visualizer::width()
+int Visualizer::width() const
 {
 #ifdef IDYNTREE_USES_IRRLICHT
     if( !pimpl->m_isInitialized )
@@ -660,7 +660,7 @@ int Visualizer::width()
 #endif
 }
 
-int Visualizer::height()
+int Visualizer::height() const
 {
 #ifdef IDYNTREE_USES_IRRLICHT
     if( !pimpl->m_isInitialized )

@@ -941,12 +941,12 @@ public:
     /**
      * Get the visualizer width. Note: if the window is resized, this returns the correct size only if run is called first.
      */
-    int width();
+    int width() const;
 
     /**
      * Get the visualizer height. Note: if the window is resized, this returns the correct size only if run is called first.
      */
-    int height();
+    int height() const;
 
     /**
      * Wrap the run method of the Irrlicht device.

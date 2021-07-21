@@ -56,6 +56,7 @@ void iDynTree::TexturesHandler::draw(iDynTree::Environment &defaultEnvironment, 
                                          t->second->textureEnvironment.m_backgroundColor.toSColor());
 
             auto textureDims = t->second->irrTexture->getSize();
+            m_irrDriver->setViewPort(irr::core::rect<irr::s32>(0, 0, textureDims.Width, textureDims.Height)); //Setting the viewport to the full texture
 
             defaultCamera.setAspectRatio(textureDims.Width/ (float)textureDims.Height);
 
