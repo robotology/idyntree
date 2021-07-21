@@ -99,7 +99,7 @@ class MeshcatVisualizer:
         import meshcat
 
         if not self.__model_exists(model_name):
-            msg = "The model named: " +  model_name + " already exists."
+            msg = "The model named: " +  model_name + " does not exist."
             warnings.warn(msg, category=UserWarning, stacklevel=2)
             return
 
@@ -165,7 +165,7 @@ class MeshcatVisualizer:
         """Display the robot at given configuration."""
 
         if not self.__model_exists(model_name):
-            msg = "The model named: " +  model_name + " already exists."
+            msg = "The model named: " +  model_name + " does not exist."
             warnings.warn(msg, category=UserWarning, stacklevel=2)
             return
 
