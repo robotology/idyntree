@@ -150,6 +150,7 @@ jobs:
     name: '[${{ matrix.os }}@${{ matrix.build_type }}]'
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         build_type: [Release]
         os: [ubuntu-18.04, ubuntu-20.04, windows-latest, macOS-latest]
