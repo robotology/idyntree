@@ -28,7 +28,7 @@ class MeshcatVisualizer:
         self.model = dict()
         self.link_pos = dict()
 
-    def __is_mesh(self, geometry_object):
+    def __is_mesh(self, geometry_object) -> bool:
 
         mesh_path = geometry_object.asExternalMesh().getFileLocationOnLocalFileSystem()
 
