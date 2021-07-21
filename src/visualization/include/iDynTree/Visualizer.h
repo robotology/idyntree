@@ -910,7 +910,13 @@ public:
     /**
      * Return an interface to manipulate the visualization environment.
      */
+    IDYNTREE_DEPRECATED_WITH_MSG("Please use the environment method instead (this method has a typo).")
     IEnvironment& enviroment();
+
+    /**
+     * Return an interface to manipulate the visualization environment.
+     */
+    IEnvironment& environment();
 
     /**
      * Get a reference to the internal IVectorsVisualization interface.

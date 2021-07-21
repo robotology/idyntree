@@ -583,6 +583,11 @@ ICamera& Visualizer::camera()
 
 IEnvironment& Visualizer::enviroment()
 {
+    return environment();
+}
+
+IEnvironment &Visualizer::environment()
+{
     return pimpl->m_environment;
 }
 
@@ -761,8 +766,8 @@ bool Visualizer::setColorPalette(const std::string &name)
         return false;
     }
 
-    this->enviroment().setBackgroundColor(irrlicht2idyntree(colors->second.background));
-    this->enviroment().setFloorGridColor(irrlicht2idyntree(colors->second.gridColor));
+    this->environment().setBackgroundColor(irrlicht2idyntree(colors->second.background));
+    this->environment().setFloorGridColor(irrlicht2idyntree(colors->second.gridColor));
 
     this->vectors().setVectorsColor(irrlicht2idyntree(colors->second.vector));
     this->vectors().setVectorsDefaultColor(irrlicht2idyntree(colors->second.vector));
