@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Fixed the conversion from irrlicht pixels to iDynTree pixels. Fixed a typo in the environment method of the visualizer. Fixed the running of two visualizer instances in the same process (https://github.com/robotology/idyntree/pull/903).
+
+### Added
+- Added the possibility to draw in different portions of the visualizer window and textures at the same time. Allow disabling the drawing on textures (https://github.com/robotology/idyntree/pull/903)
 
 ## [4.1.0] - 2021-07-22
 
