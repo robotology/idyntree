@@ -9,12 +9,9 @@ on:
   - cron:  '0 2 * * *'
 
 env:
-  vcpkg_robotology_TAG: v0.6.0
   YCM_TAG: v0.12.0
   YARP_TAG: v3.4.1
   ICUB_TAG: v1.17.0
-  # Overwrite the VCPKG_INSTALLATION_ROOT env variable defined by GitHub Actions to point to our vcpkg  
-  VCPKG_INSTALLATION_ROOT: C:\robotology\vcpkg
   
 jobs:
   build-with-conda-dependencies:    
@@ -153,7 +150,7 @@ jobs:
       fail-fast: false
       matrix:
         build_type: [Release]
-        os: [ubuntu-18.04, ubuntu-20.04, windows-latest, macOS-latest]
+        os: [ubuntu-18.04, ubuntu-20.04, macOS-latest]
 
     steps:
     - uses: actions/checkout@master
@@ -203,24 +200,6 @@ jobs:
     # DEPENDENCIES
     # ============
     
-    - name: Dependencies [Windows]
-      if: matrix.os == 'windows-latest'
-      run: |
-        # To avoid spending a huge time compiling vcpkg dependencies, we download a root that comes precompiled with all the ports that we need 
-        choco install -y wget unzip
-        # To avoid problems with non-relocatable packages, we unzip the archive exactly in the same C:/robotology/vcpkg 
-        # that has been used to create the pre-compiled archive
-        wget https://github.com/robotology/robotology-superbuild-dependencies-vcpkg/releases/download/${env:vcpkg_robotology_TAG}/vcpkg-robotology.zip
-        unzip vcpkg-robotology.zip -d C:/
-        rm vcpkg-robotology.zip
-   
-    - name: Additional vcpkg Dependencies [Windows]
-      if: matrix.os == 'windows-latest'
-      shell: bash
-      run: |
-        # Install dependencies that are not included in the robotology-superbuild-dependencies-vcpkg archive (for now)
-        ${VCPKG_INSTALLATION_ROOT}/vcpkg.exe install assimp:x64-windows
-
     - name: Dependencies [macOS]
       if: matrix.os == 'macOS-latest'
       run: |
@@ -235,42 +214,6 @@ jobs:
             qtbase5-dev qtdeclarative5-dev qtmultimedia5-dev libqt5charts5-dev \
             libxml2-dev liboctave-dev python-dev python3-numpy valgrind libassimp-dev libirrlicht-dev
         
-    - name: Cache Source-based Dependencies
-      id: cache-source-deps
-      uses: actions/cache@v1
-      with:
-        path: ${{ github.workspace }}/install/deps
-        # Including ${{ runner.temp }} is a workaround for https://github.com/robotology/whole-body-estimators/issues/60
-        key: source-deps-${{ matrix.os }}-${{ runner.os }}-${{ runner.temp }}-vcpkg-robotology-${{ env.vcpkg_robotology_TAG }}-ycm-${{ env.YCM_TAG }}-yarp-${{ env.YARP_TAG }}-icub-${{ env.ICUB_TAG }}-github-workspace-${{ env.GITHUB_WORKSPACE }}
-    
-    - name: Source-based Dependencies [Windows] 
-      if: steps.cache-source-deps.outputs.cache-hit != 'true' && matrix.os == 'windows-latest-disable-until-issue-569-is-solved'
-      shell: bash
-      run: |
-        # YCM
-        git clone https://github.com/robotology/ycm
-        cd ycm
-        git checkout ${YCM_TAG}
-        mkdir -p build
-        cd build
-        cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install/deps ..
-        cmake --build . --config ${{ matrix.build_type }} --target INSTALL 
-        # YARP
-        git clone -b ${YARP_TAG} https://github.com/robotology/yarp
-        cd yarp
-        mkdir -p build
-        cd build
-        cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake \
-              -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install/deps -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install/deps ..
-        cmake --build . --config ${{ matrix.build_type }} --target INSTALL 
-        # ICUB
-        git clone -b ${ICUB_TAG} https://github.com/robotology/icub-main
-        cd icub-main
-        mkdir -p build
-        cd build
-        cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake \
-              -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install/deps -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install/deps ..
-        cmake --build . --config ${{ matrix.build_type }} --target INSTALL 
         
     - name: Source-based Dependencies [Ubuntu/macOS] 
       if: steps.cache-source-deps.outputs.cache-hit != 'true' && (contains(matrix.os, 'ubuntu') || matrix.os == 'macOS-latest')
@@ -307,19 +250,6 @@ jobs:
     # ===================
     # CMAKE-BASED PROJECT
     # ===================
-    
-    - name: Configure [Windows]
-      # Use bash also on Windows (otherwise cd, mkdir, ... do not work)
-      if: matrix.os == 'windows-latest'
-      shell: bash
-      run: |
-        mkdir -p build
-        cd build
-        cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install/deps \
-              -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON  -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=ON \
-              -DIDYNTREE_USES_PYTHON:BOOL=OFF -DIDYNTREE_USES_OCTAVE:BOOL=OFF -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON \
-              -DIDYNTREE_USES_MATLAB:BOOL=ON -DMatlab_ROOT_DIR=${GHA_Matlab_ROOT_DIR} -DMatlab_MEX_EXTENSION:STRING=${GHA_Matlab_MEX_EXTENSION} -DIDYNTREE_DISABLE_MATLAB_TESTS:BOOL=ON  \
-              -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
 
     - name: Configure [Ubuntu/macOS]
       if: contains(matrix.os, 'ubuntu') || matrix.os == 'macOS-latest'
@@ -359,32 +289,15 @@ jobs:
         cd build
         # Visualizer tests excluded as a workaround for https://github.com/robotology/idyntree/issues/808
         ctest --output-on-failure -C ${{ matrix.build_type }} -E "Visualizer|matlab" . 
-        
-    - name: Install [Windows]
-      if: matrix.os == 'windows-latest'
-      shell: bash
-      run: |
-        cd build
-        cmake --build . --config ${{ matrix.build_type }} --target INSTALL
-        
+
+                
     - name: Install [Ubuntu/macOS]
       if: contains(matrix.os, 'ubuntu') || matrix.os == 'macOS-latest'
       shell: bash
       run: |
         cd build
         cmake --build . --config ${{ matrix.build_type }} --target install
-        
-    - name: Compile Examples [Windows]
-      if: matrix.os == 'windows-latest'
-      shell: bash
-      run: |
-        cd examples
-        mkdir -p build
-        cd build
-        cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake \
-              -DCMAKE_PREFIX_PATH="${GITHUB_WORKSPACE}/install/deps;${GITHUB_WORKSPACE}/install" .. 
-        cmake --build . --config ${{ matrix.build_type }}
-        
+ 
     - name: Compile Examples [Ubuntu/macOS]
       if: contains(matrix.os, 'ubuntu') || matrix.os == 'macOS-latest'
       shell: bash
