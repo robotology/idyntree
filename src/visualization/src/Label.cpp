@@ -173,4 +173,12 @@ void Label::setVisible(bool visible)
 {
     assert(m_label);
     m_label->setVisible(visible);
+    if (visible)
+    {
+        setText(m_text);
+    }
+    else
+    {
+        m_label->setText(L""); //This is a workaround since it seems that the visibility of labels is not considered with viewports
+    }
 }

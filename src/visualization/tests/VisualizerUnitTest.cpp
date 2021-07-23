@@ -227,18 +227,31 @@ void checkViewPorts()
     iDynTree::Visualizer viz;
     viz.init();
     auto texture = viz.textures().add("dummy");
+    iDynTree::ILabel& leftLabel = viz.getLabel("leftlabel");
+    leftLabel.setText("LEFT");
+    iDynTree::ILabel& rightLabel = viz.getLabel("rightlabel");
+    rightLabel.setText("RIGHT");
+    size_t frameIndex = viz.frames().addFrame(iDynTree::Transform(iDynTree::Rotation::Identity(), iDynTree::Position(0.5, 0.5, 0.1)));
+
+
 
     for(int i=0; i < 5; i++)
     {
         viz.camera().setPosition(iDynTree::Position(1.0, 0.1*i + 1.0, 0.1*i + 1.0));
         viz.run(); //to update the output of width() and height() in case of resize
-        viz.getLabel("label").setText("LEFT");
+
+        leftLabel.setVisible(true);
+        rightLabel.setVisible(false);
+        viz.frames().setVisible(frameIndex, false);
 
         texture->setSubDrawArea(0, 0, texture->width()/2, texture->height());
 //        texture->enableDraw(false); //Uncomment this line to disable the drawing on the texture
         viz.subDraw(0, 0, viz.width()/2, viz.height());
 
-        viz.getLabel("label").setText("RIGHT");
+        leftLabel.setVisible(false);
+        rightLabel.setVisible(true);
+        viz.frames().setVisible(frameIndex, true);
+
 //        texture->enableDraw(true); //Uncomment this line to reenable the drawing on the texture
         texture->setSubDrawArea(viz.width()/2, 0, texture->width()/2, texture->height());
         viz.subDraw(viz.width()/2, 0, viz.width()/2, viz.height());
