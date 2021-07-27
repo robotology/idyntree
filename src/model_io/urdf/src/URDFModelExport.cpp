@@ -25,6 +25,7 @@
 
 #include <libxml/tree.h>
 #include <libxml/parser.h>
+#include <libxml/xmlstring.h>
 
 namespace iDynTree
 {
@@ -382,7 +383,21 @@ bool exportJoint(IJointConstPtr joint, LinkConstPtr parentLink, LinkConstPtr chi
     xmlNodePtr child_xml = xmlNewChild(joint_xml, NULL, BAD_CAST "child", NULL);
     xmlNewProp(child_xml, BAD_CAST "link", BAD_CAST model.getLinkName(childLink->getIndex()).c_str());
 
-    // TODO(traversaro) : handle joint limits and friction
+    // Position limits
+    if (joint->hasPosLimits() && joint->getNrOfDOFs() == 1)
+    {
+        xmlNodePtr limit_xml = xmlNewChild(joint_xml, NULL, BAD_CAST "limit", NULL);
+        std::string bufStr;
+        double min, max;
+        ok = ok && joint->getPosLimits(0, min, max);
+
+        ok = ok && doubleToStringWithClassicLocale(min, bufStr);
+        xmlNewProp(limit_xml, BAD_CAST "lower", BAD_CAST bufStr.c_str());
+        ok = ok && doubleToStringWithClassicLocale(max, bufStr);
+        xmlNewProp(limit_xml, BAD_CAST "upper", BAD_CAST bufStr.c_str());
+    }
+
+    // TODO(traversaro) : handle friction
 
     return ok;
 }
