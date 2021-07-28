@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Added the possibility to draw in different portions of the visualizer window and textures at the same time. Allow disabling the drawing on textures (https://github.com/robotology/idyntree/pull/903).
+
+### Deprecated
+- The `iDynTree::Visualizer::enviroment()` was deprecated. Please use the `iDynTree::Visualizer::environment()` method instead (https://github.com/robotology/idyntree/pull/903).
+
+### Fixed
+- Fixed the conversion from irrlicht pixels to iDynTree pixels. Fixed a typo in the environment method of the visualizer. Fixed the running of two visualizer instances in the same process (https://github.com/robotology/idyntree/pull/903).
+
 ## [4.1.0] - 2021-07-22
 
 ### Added

@@ -756,6 +756,41 @@ public:
      */
     virtual bool getPixels(std::vector<PixelViz>& pixels) const = 0;
 
+    /**
+     * Draw the current texture to a image file.
+     *
+     * The format of the image is desumed from the filename.
+     *
+     * For more info on the process of writing the image,
+     * check irr::video::IVideoDriver::writeImageToFile irrlicht method.
+     *
+     * @return true if all went ok, false otherwise.
+     */
+    virtual bool drawToFile(const std::string filename="iDynTreeVisualizerTextureScreenshot.png") const = 0;
+
+    /**
+     * @brief Enable/disable the drawing on the texture.
+     * @param enabled If true (default), the visualizer will draw on the texture when calling draw();
+     */
+    virtual void enableDraw(bool enabled = true) = 0;
+
+    /**
+     * Get the texture width.
+     */
+    virtual int width() const = 0;
+
+    /**
+     * Get the texture height.
+     */
+    virtual int height() const = 0;
+
+    /**
+     * Set the area used for drawing operations. The entirety of the texture is cleared between two draw() calls.
+     * Use this in conjunction with subDraw() to draw on different parts of the same texture.
+     * Use call it with (0, 0, width(), height()) to draw on the full texture (this is done by default).
+     */
+    virtual bool setSubDrawArea(int xOffsetFromTopLeft, int yOffsetFromTopLeft, int subImageWidth, int subImageHeight) = 0;
+
 };
 
 /**
@@ -892,7 +927,13 @@ public:
     /**
      * Return an interface to manipulate the visualization environment.
      */
+    IDYNTREE_DEPRECATED_WITH_MSG("Please use the environment method instead (this method has a typo).")
     IEnvironment& enviroment();
+
+    /**
+     * Return an interface to manipulate the visualization environment.
+     */
+    IEnvironment& environment();
 
     /**
      * Get a reference to the internal IVectorsVisualization interface.
@@ -915,6 +956,16 @@ public:
     ILabel& getLabel(const std::string& labelName);
 
     /**
+     * Get the visualizer width. Note: if the window is resized, this returns the correct size only if run is called first.
+     */
+    int width() const;
+
+    /**
+     * Get the visualizer height. Note: if the window is resized, this returns the correct size only if run is called first.
+     */
+    int height() const;
+
+    /**
      * Wrap the run method of the Irrlicht device.
      */
     bool run();
@@ -925,7 +976,12 @@ public:
     void draw();
 
     /**
-     * Right the current visualization to a image file.
+     * Draw the visualization in a subportion of the window. Need to call draw once done.
+     */
+    void subDraw(int xOffsetFromTopLeft, int yOffsetFromTopLeft, int subImageWidth, int subImageHeight);
+
+    /**
+     * Draw the current visualization to a image file.
      *
      * The format of the image is desumed from the filename.
      *

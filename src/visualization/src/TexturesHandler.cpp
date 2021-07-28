@@ -37,7 +37,7 @@ void iDynTree::TexturesHandler::init(irr::video::IVideoDriver *irrDriver,
     m_areTexturesSupported = m_irrDriver->queryFeature(irr::video::EVDF_RENDER_TO_TARGET);
 }
 
-void iDynTree::TexturesHandler::draw(iDynTree::Environment &defaultEnvironment, iDynTree::Camera &defaultCamera)
+void iDynTree::TexturesHandler::draw(iDynTree::Environment &defaultEnvironment, iDynTree::Camera &defaultCamera, bool clearBuffers)
 {
     if (m_textures.size() == 0)
     {
@@ -48,26 +48,31 @@ void iDynTree::TexturesHandler::draw(iDynTree::Environment &defaultEnvironment, 
 
     for (auto t = m_textures.begin(); t != m_textures.end(); ++t)
     {
-        t->second->textureEnvironment.m_envNode->setVisible(true); //Enable the texture environment
-        // set render target texture
-       m_irrDriver->setRenderTarget(t->second->irrTexture, true, true,
-                                    t->second->textureEnvironment.m_backgroundColor.toSColor());
+        if (t->second->shouldDraw)
+        {
+            t->second->textureEnvironment.m_envNode->setVisible(true); //Enable the texture environment
+            bool clearThisTexture = clearBuffers || t->second->forceClear;
+            // set render target texture
+            m_irrDriver->setRenderTarget(t->second->irrTexture, clearThisTexture, clearThisTexture,
+                                         t->second->textureEnvironment.m_backgroundColor.toSColor());
 
-        auto textureDims = t->second->irrTexture->getSize();
+            m_irrDriver->setViewPort(irr::core::rect<irr::s32>(0, 0, t->second->irrTexture->getSize().Width, t->second->irrTexture->getSize().Height)); //workaround for http://irrlicht.sourceforge.net/forum/viewtopic.php?f=7&t=47004
+            m_irrDriver->setViewPort(t->second->viewport); //Setting the viewport specified for the texture
+            float width = t->second->viewport.LowerRightCorner.X - t->second->viewport.UpperLeftCorner.X;
+            float height = t->second->viewport.LowerRightCorner.Y - t->second->viewport.UpperLeftCorner.Y;
+            defaultCamera.setAspectRatio(width / height);
 
-        defaultCamera.setAspectRatio(textureDims.Width/ (float)textureDims.Height);
+            // draw whole scene into render buffer
+            m_sceneManager->drawAll();
 
-        // draw whole scene into render buffer
-        m_sceneManager->drawAll();
-
-        t->second->textureEnvironment.m_envNode->setVisible(false); //Disable the texture environment
-
+            t->second->textureEnvironment.m_envNode->setVisible(false); //Disable the texture environment
+        }
     }
 
     defaultEnvironment.m_envNode->setVisible(true); //Enable the visualizer environment
     // set back old render target
     // The buffer might have been distorted, so clear it
-    m_irrDriver->setRenderTarget(0, true, true, defaultEnvironment.m_backgroundColor.toSColor());
+    m_irrDriver->setRenderTarget(0, clearBuffers, clearBuffers, defaultEnvironment.m_backgroundColor.toSColor());
 }
 
 iDynTree::ITexture *iDynTree::TexturesHandler::add(const std::string &name, const iDynTree::VisualizerOptions &textureOptions)
