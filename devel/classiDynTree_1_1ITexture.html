@@ -115,12 +115,27 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acc2e8c7c5e02bf901b7df10c4b7d1af3"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classiDynTree_1_1IEnvironment.html">IEnvironment</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1ITexture.html#acc2e8c7c5e02bf901b7df10c4b7d1af3">environment</a> ()=0</td></tr>
 <tr class="memdesc:acc2e8c7c5e02bf901b7df10c4b7d1af3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return an interface to manipulate the texture environment.  <a href="classiDynTree_1_1ITexture.html#acc2e8c7c5e02bf901b7df10c4b7d1af3">More...</a><br /></td></tr>
 <tr class="separator:acc2e8c7c5e02bf901b7df10c4b7d1af3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2c45cf8667d339d91567bfd58c33471"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classiDynTree_1_1ColorViz.html">ColorViz</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1ITexture.html#ad2c45cf8667d339d91567bfd58c33471">getPixelColor</a> (unsigned int width, unsigned int height) const =0</td></tr>
+<tr class="memitem:ad2c45cf8667d339d91567bfd58c33471"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classiDynTree_1_1ColorViz.html">ColorViz</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1ITexture.html#ad2c45cf8667d339d91567bfd58c33471">getPixelColor</a> (unsigned int <a class="el" href="classiDynTree_1_1ITexture.html#acd258bc165fe99ed6fe987ed2aab682d">width</a>, unsigned int <a class="el" href="classiDynTree_1_1ITexture.html#a92644f4603752dccf3188b6de6b26288">height</a>) const =0</td></tr>
 <tr class="memdesc:ad2c45cf8667d339d91567bfd58c33471"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the color of the pixel at the given position in the additional texture.  <a href="classiDynTree_1_1ITexture.html#ad2c45cf8667d339d91567bfd58c33471">More...</a><br /></td></tr>
 <tr class="separator:ad2c45cf8667d339d91567bfd58c33471"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accfd16dd44c6bb16c076398081965bce"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1ITexture.html#accfd16dd44c6bb16c076398081965bce">getPixels</a> (std::vector&lt; <a class="el" href="classiDynTree_1_1PixelViz.html">PixelViz</a> &gt; &amp;pixels) const =0</td></tr>
 <tr class="memdesc:accfd16dd44c6bb16c076398081965bce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the pixels of the texture.  <a href="classiDynTree_1_1ITexture.html#accfd16dd44c6bb16c076398081965bce">More...</a><br /></td></tr>
 <tr class="separator:accfd16dd44c6bb16c076398081965bce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54b05365c8136ec72b76bac964d3b403"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1ITexture.html#a54b05365c8136ec72b76bac964d3b403">drawToFile</a> (const std::string filename=&quot;iDynTreeVisualizerTextureScreenshot.png&quot;) const =0</td></tr>
+<tr class="memdesc:a54b05365c8136ec72b76bac964d3b403"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the current texture to a image file.  <a href="classiDynTree_1_1ITexture.html#a54b05365c8136ec72b76bac964d3b403">More...</a><br /></td></tr>
+<tr class="separator:a54b05365c8136ec72b76bac964d3b403"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac37428ca8f11fb8fa749f2cddb328c7a"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1ITexture.html#ac37428ca8f11fb8fa749f2cddb328c7a">enableDraw</a> (bool enabled=true)=0</td></tr>
+<tr class="memdesc:ac37428ca8f11fb8fa749f2cddb328c7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable/disable the drawing on the texture.  <a href="classiDynTree_1_1ITexture.html#ac37428ca8f11fb8fa749f2cddb328c7a">More...</a><br /></td></tr>
+<tr class="separator:ac37428ca8f11fb8fa749f2cddb328c7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd258bc165fe99ed6fe987ed2aab682d"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1ITexture.html#acd258bc165fe99ed6fe987ed2aab682d">width</a> () const =0</td></tr>
+<tr class="memdesc:acd258bc165fe99ed6fe987ed2aab682d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the texture width.  <a href="classiDynTree_1_1ITexture.html#acd258bc165fe99ed6fe987ed2aab682d">More...</a><br /></td></tr>
+<tr class="separator:acd258bc165fe99ed6fe987ed2aab682d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92644f4603752dccf3188b6de6b26288"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1ITexture.html#a92644f4603752dccf3188b6de6b26288">height</a> () const =0</td></tr>
+<tr class="memdesc:a92644f4603752dccf3188b6de6b26288"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the texture height.  <a href="classiDynTree_1_1ITexture.html#a92644f4603752dccf3188b6de6b26288">More...</a><br /></td></tr>
+<tr class="separator:a92644f4603752dccf3188b6de6b26288"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabd49737df8e97ee6e76c7f96ce41950"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1ITexture.html#aabd49737df8e97ee6e76c7f96ce41950">setSubDrawArea</a> (int xOffsetFromTopLeft, int yOffsetFromTopLeft, int subImageWidth, int subImageHeight)=0</td></tr>
+<tr class="memdesc:aabd49737df8e97ee6e76c7f96ce41950"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the area used for drawing operations.  <a href="classiDynTree_1_1ITexture.html#aabd49737df8e97ee6e76c7f96ce41950">More...</a><br /></td></tr>
+<tr class="separator:aabd49737df8e97ee6e76c7f96ce41950"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The interface for an object that can be used as an additional target for the renderer. </p>
@@ -179,7 +194,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Return an interface to manipulate the texture environment. </p>
 
-<p>Implemented in <a class="el" href="classiDynTree_1_1Texture.html#abe4194c7523fd997e3c9adb1300a7c69">iDynTree::Texture</a>.</p>
+<p>Implemented in <a class="el" href="classiDynTree_1_1Texture.html#ad3654611a7fa077373a73da2f34e53fe">iDynTree::Texture</a>.</p>
 
 </div>
 </div>
@@ -227,7 +242,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The color of the pixel </dd></dl>
 
-<p>Implemented in <a class="el" href="classiDynTree_1_1Texture.html#a46381e74c038972cfe88ce37c25ea49f">iDynTree::Texture</a>.</p>
+<p>Implemented in <a class="el" href="classiDynTree_1_1Texture.html#a5be44f486db36df1d25ae1d66e760100">iDynTree::Texture</a>.</p>
 
 </div>
 </div>
@@ -265,7 +280,187 @@ Public Member Functions</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>This operation may affect the time performances of the visualizer, especially if the texture is large. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True in case of success, false otherwise </dd></dl>
 
-<p>Implemented in <a class="el" href="classiDynTree_1_1Texture.html#a24e3e4d2c05f84413adbd7712ae6823b">iDynTree::Texture</a>.</p>
+<p>Implemented in <a class="el" href="classiDynTree_1_1Texture.html#a5de3e5b00aba3a54ec6d791eea84c113">iDynTree::Texture</a>.</p>
+
+</div>
+</div>
+<a id="a54b05365c8136ec72b76bac964d3b403"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54b05365c8136ec72b76bac964d3b403">&#9670;&nbsp;</a></span>drawToFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool iDynTree::ITexture::drawToFile </td>
+          <td>(</td>
+          <td class="paramtype">const std::string&#160;</td>
+          <td class="paramname"><em>filename</em> = <code>&quot;iDynTreeVisualizerTextureScreenshot.png&quot;</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Draw the current texture to a image file. </p>
+<p>The format of the image is desumed from the filename.</p>
+<p>For more info on the process of writing the image, check irr::video::IVideoDriver::writeImageToFile irrlicht method.</p>
+<dl class="section return"><dt>Returns</dt><dd>true if all went ok, false otherwise. </dd></dl>
+
+<p>Implemented in <a class="el" href="classiDynTree_1_1Texture.html#a2b11f494710bfa77df35b7e132b3826e">iDynTree::Texture</a>.</p>
+
+</div>
+</div>
+<a id="ac37428ca8f11fb8fa749f2cddb328c7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac37428ca8f11fb8fa749f2cddb328c7a">&#9670;&nbsp;</a></span>enableDraw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void iDynTree::ITexture::enableDraw </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enabled</em> = <code>true</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enable/disable the drawing on the texture. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">enabled</td><td>If true (default), the visualizer will draw on the texture when calling draw(); </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classiDynTree_1_1Texture.html#a4e5589c1df85b59ab2b351cd85e12eee">iDynTree::Texture</a>.</p>
+
+</div>
+</div>
+<a id="acd258bc165fe99ed6fe987ed2aab682d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd258bc165fe99ed6fe987ed2aab682d">&#9670;&nbsp;</a></span>width()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int iDynTree::ITexture::width </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the texture width. </p>
+
+<p>Implemented in <a class="el" href="classiDynTree_1_1Texture.html#aba40b257b7b5699f4d266aac933fca71">iDynTree::Texture</a>.</p>
+
+</div>
+</div>
+<a id="a92644f4603752dccf3188b6de6b26288"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92644f4603752dccf3188b6de6b26288">&#9670;&nbsp;</a></span>height()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int iDynTree::ITexture::height </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the texture height. </p>
+
+<p>Implemented in <a class="el" href="classiDynTree_1_1Texture.html#aeb13034c46ec1984bc476edec6151e54">iDynTree::Texture</a>.</p>
+
+</div>
+</div>
+<a id="aabd49737df8e97ee6e76c7f96ce41950"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabd49737df8e97ee6e76c7f96ce41950">&#9670;&nbsp;</a></span>setSubDrawArea()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool iDynTree::ITexture::setSubDrawArea </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>xOffsetFromTopLeft</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>yOffsetFromTopLeft</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>subImageWidth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>subImageHeight</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the area used for drawing operations. </p>
+<p>The entirety of the texture is cleared between two draw() calls. Use this in conjunction with subDraw() to draw on different parts of the same texture. Use call it with (0, 0, <a class="el" href="classiDynTree_1_1ITexture.html#acd258bc165fe99ed6fe987ed2aab682d" title="Get the texture width.">width()</a>, <a class="el" href="classiDynTree_1_1ITexture.html#a92644f4603752dccf3188b6de6b26288" title="Get the texture height.">height()</a>) to draw on the full texture (this is done by default). </p>
+
+<p>Implemented in <a class="el" href="classiDynTree_1_1Texture.html#a6353baf74cabc8635abafb4fe4a18318">iDynTree::Texture</a>.</p>
 
 </div>
 </div>
@@ -279,7 +474,7 @@ Public Member Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceiDynTree.html">iDynTree</a></li><li class="navelem"><a class="el" href="classiDynTree_1_1ITexture.html">ITexture</a></li>
-    <li class="footer">Generated on Thu Jul 22 2021 15:39:47 for iDynTree by
+    <li class="footer">Generated on Wed Jul 28 2021 07:16:06 for iDynTree by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

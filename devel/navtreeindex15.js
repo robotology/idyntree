@@ -1,5 +1,10 @@
 var NAVTREEINDEX15 =
 {
+"classiDynTree_1_1SparseMatrix.html#a24f2ff77f8a365363a8e653aa0eb4fc6":[5,0,1,154,2],
+"classiDynTree_1_1SparseMatrix.html#a29ee8a8299132878d559670986295057":[5,0,1,154,20],
+"classiDynTree_1_1SparseMatrix.html#a2c8be14df0e6c00c30228817fa4aafe9":[5,0,1,154,42],
+"classiDynTree_1_1SparseMatrix.html#a2cfb20f7ed2794fb908bddebec8bff7a":[5,0,1,154,48],
+"classiDynTree_1_1SparseMatrix.html#a32921b22df34d345d3cdd907ebab89ba":[5,0,1,154,44],
 "classiDynTree_1_1SparseMatrix.html#a331944a95ddc8b8317e3a2a26829ea7a":[5,0,1,154,28],
 "classiDynTree_1_1SparseMatrix.html#a3f3521e5da401ce928fc492c493a8aff":[5,0,1,154,30],
 "classiDynTree_1_1SparseMatrix.html#a413b461da9fab3f4e827ee823a6a13f1":[5,0,1,154,11],
@@ -244,10 +249,5 @@ var NAVTREEINDEX15 =
 "classiDynTree_1_1SpatialMomentum.html#a8b9ae18e77c2af17ec1d369d196e0c10":[3,0,15,13],
 "classiDynTree_1_1SpatialMomentum.html#aa1ad54ef1ef1c37676cf7c231242f9fb":[3,0,15,26],
 "classiDynTree_1_1SpatialMomentum.html#aa1adc21c7c04b11507360c0fd4b669ef":[3,0,15,9],
-"classiDynTree_1_1SpatialMomentum.html#aa6aa22433d0a6c29e37a4efc5970e1d8":[3,0,15,37],
-"classiDynTree_1_1SpatialMomentum.html#aaf50d0723aa1bf73962f05224a56bd8b":[3,0,15,23],
-"classiDynTree_1_1SpatialMomentum.html#ab3e289ea80df9790190ef366d4ce7623":[3,0,15,6],
-"classiDynTree_1_1SpatialMomentum.html#ab764ff72fed03fa8fae21deb6747b181":[3,0,15,7],
-"classiDynTree_1_1SpatialMomentum.html#ac96276a6d073a19752aea3ef4183d608":[3,0,15,10],
-"classiDynTree_1_1SpatialMomentum.html#adfea1ab56aa331af032a7f7d31ac0afc":[3,0,15,39]
+"classiDynTree_1_1SpatialMomentum.html#aa6aa22433d0a6c29e37a4efc5970e1d8":[3,0,15,37]
 };
