@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.3.0] - 2021-07-29
+
+### Added
+- Added support for exporting joint position limits to URDF for 1-DoF joints
+  (prismatic and revolute).
+- Added pybind11 python bindings for adding and reading joint limits.
+
 ## [4.2.0] - 2021-07-23
 
 - Add the possibility to pass the zmq url to the meshcat visualizer, to simplify its use in [Google Colab](https://colab.research.google.com) (https://github.com/robotology/idyntree/pull/905).

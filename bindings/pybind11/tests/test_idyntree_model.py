@@ -147,6 +147,16 @@ class IDynTreeRevoluteJointTest(unittest.TestCase):
     for r, c in itertools.product(range(3), range(3)):
       self.assertEqual(joint_transform.rotation[r, c], rotation[r, c])
 
+  def test_limits(self):
+    limits = (-2.7, 1.8)
+    joint = iDynTree.RevoluteJoint()
+    self.assertFalse(joint.has_pos_limits())
+    joint.enable_pos_limits(True)
+    self.assertTrue(joint.has_pos_limits())
+    joint.set_pos_limits(0, *limits)
+    self.assertEqual(joint.get_min_pos_limit(0), limits[0])
+    self.assertEqual(joint.get_max_pos_limit(0), limits[1])
+
 
 class IDynTreePrismaticJointTest(unittest.TestCase):
 
@@ -170,6 +180,16 @@ class IDynTreePrismaticJointTest(unittest.TestCase):
     self.assertEqual(list(joint_transform.position), list(position))
     for r, c in itertools.product(range(3), range(3)):
       self.assertEqual(joint_transform.rotation[r, c], rotation[r, c])
+
+  def test_limits(self):
+    limits = (-2.7, 1.8)
+    joint = iDynTree.PrismaticJoint()
+    self.assertFalse(joint.has_pos_limits())
+    joint.enable_pos_limits(True)
+    self.assertTrue(joint.has_pos_limits())
+    joint.set_pos_limits(0, *limits)
+    self.assertEqual(joint.get_min_pos_limit(0), limits[0])
+    self.assertEqual(joint.get_max_pos_limit(0), limits[1])
 
 
 class IDynTreeFixedJointTest(unittest.TestCase):
