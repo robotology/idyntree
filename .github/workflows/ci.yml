@@ -63,6 +63,8 @@ jobs:
     - name: Dependencies [Conda]
       shell: bash -l {0}
       run: |
+        # Workaround for https://github.com/conda-incubator/setup-miniconda/issues/186
+        conda config --remove channels defaults
         # Compilation related dependencies 
         mamba install cmake compilers make ninja pkg-config
         # Actual dependencies
