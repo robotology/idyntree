@@ -90,7 +90,12 @@ void jointClassDefinition(py::class_<IJoint>& joint) {
       .def("set_rest_transform", &IJoint::setRestTransform)
       .def("get_rest_transform", &IJoint::getRestTransform)
       .def("get_first_attached_link", &IJoint::getFirstAttachedLink)
-      .def("get_second_attached_link", &IJoint::getSecondAttachedLink);
+      .def("get_second_attached_link", &IJoint::getSecondAttachedLink)
+      .def("enable_pos_limits", &IJoint::enablePosLimits)
+      .def("has_pos_limits", &IJoint::hasPosLimits)
+      .def("set_pos_limits", &IJoint::setPosLimits)
+      .def("get_max_pos_limit", &IJoint::getMaxPosLimit)
+      .def("get_min_pos_limit", &IJoint::getMinPosLimit);
 }
 
 void traversalClassDefinition(py::class_<Traversal>& traversal) {
