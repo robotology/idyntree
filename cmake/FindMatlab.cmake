@@ -1867,6 +1867,24 @@ set(Matlab_LIBRARIES
   ${Matlab_ENG_LIBRARY} ${Matlab_MAT_LIBRARY}
   ${Matlab_DATAARRAY_LIBRARY} ${Matlab_ENGINE_LIBRARY})
 
+# internal
+# This small stub permits to add imported targets for the found MATLAB libraries
+function(_Matlab_add_imported_target _matlab_library_name)
+  if(NOT TARGET Matlab::${_matlab_library_name})
+      add_library(Matlab::${_matlab_library_name} UNKNOWN IMPORTED)
+      set_target_properties(Matlab::${_matlab_library_name} PROPERTIES
+        INTERFACE_INCLUDE_DIRECTORIES "${Matlab_INCLUDE_DIRS}"
+        IMPORTED_LOCATION "${Matlab_${_matlab_library_name}_LIBRARY}")
+  endif()
+endfunction()
+
+_Matlab_add_imported_target(MEX)
+_Matlab_add_imported_target(MX)
+_Matlab_add_imported_target(ENG)
+_Matlab_add_imported_target(MAT)
+_Matlab_add_imported_target(ENGINE)
+_Matlab_add_imported_target(DATAARRAY)
+
 find_package_handle_standard_args(
   Matlab
   FOUND_VAR Matlab_FOUND
