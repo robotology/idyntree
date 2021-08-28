@@ -111,7 +111,7 @@ if(IDYNTREE_USES_MATLAB)
           ${IDYNTREE_GENERATE_MATLAB}
           ${MEX_BINDINGS_SOURCE_DIR})
 
-  target_link_libraries(${target_name} ${IDYNTREE_LIBRARIES} Matlab::MEX Matlab:MX)
+  target_link_libraries(${target_name} ${IDYNTREE_LIBRARIES} Matlab::mex Matlab:mx)
 
   # Install the generated front-end to ${CMAKE_INSTALL_PREFIX}/mex
   install(
