@@ -1897,11 +1897,13 @@ set(Matlab_LIBRARIES
 # internal
 # This small stub permits to add imported targets for the found MATLAB libraries
 function(_Matlab_add_imported_target _matlab_library_variable_name _matlab_library_target_name)
-  if(NOT TARGET Matlab::${_matlab_library_target_name})
+  if(${Matlab_${_matlab_library_variable_name}_LIBRARY})
+    if(NOT TARGET Matlab::${_matlab_library_target_name})
       add_library(Matlab::${_matlab_library_target_name} UNKNOWN IMPORTED)
       set_target_properties(Matlab::${_matlab_library_target_name} PROPERTIES
         INTERFACE_INCLUDE_DIRECTORIES "${Matlab_INCLUDE_DIRS}"
         IMPORTED_LOCATION "${Matlab_${_matlab_library_variable_name}_LIBRARY}")
+    endif()
   endif()
 endfunction()
 
