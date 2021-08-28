@@ -101,6 +101,10 @@ endif()
 
 if(IDYNTREE_USES_MATLAB)
   find_package(Matlab REQUIRED)
+  message(STATUS "CMAKE_MODULE_PATH: ${CMAKE_MODULE_PATH}")
+  if(NOT TARGET Matlab::mx)
+    message(FATAL_ERROR "Missing required target Matlab::mx)
+  endif()
 
   set(target_name ${mexname})
 
