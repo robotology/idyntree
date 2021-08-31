@@ -210,11 +210,14 @@ namespace iDynTree
     #endif
 
         std::unordered_set<std::string> pathList;
-        std::vector<std::string> envList = {"GAZEBO_MODEL_PATH", "ROS_PACKAGE_PATH", "AMENT_PREFIX_PATH"};
+        // List of variables that contain <prefix>/share paths
+        std::vector<std::string> envListShare = {"GAZEBO_MODEL_PATH", "ROS_PACKAGE_PATH"};
+        // List of variables that contains <prefix> paths (to which /share needs to be added)
+        std::vector<std::string> envListPrefix = {"AMENT_PREFIX_PATH"};
 
-        for (size_t i = 0; i < envList.size(); ++i)
+        for (size_t i = 0; i < envListShare.size(); ++i)
         {
-            const char * env_var_value = std::getenv(envList[i].c_str());
+            const char * env_var_value = std::getenv(envListShare[i].c_str());
 
             if (env_var_value)
             {
@@ -228,7 +231,24 @@ namespace iDynTree
                 }
             }
         }
+        
+        
+        for (size_t i = 0; i < envListPrefix.size(); ++i)
+        {
+            const char * env_var_value = std::getenv(envListPrefix[i].c_str());
 
+            if (env_var_value)
+            {
+                std::stringstream env_var_string(env_var_value);
+
+                std::string individualPath;
+
+                while(std::getline(env_var_string, individualPath, isWindows ? ';' : ':'))
+                {
+                    pathList.insert(individualPath + "/share");
+                }
+            }
+        }
 
         auto cleanPathSeparator = [isWindows](const std::string& filename)->std::string
         {
