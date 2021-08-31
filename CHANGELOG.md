@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   (prismatic and revolute).
 - Added pybind11 python bindings for adding and reading joint limits.
 
+### Fixed 
+- Fixed handling of the AMENT_PREFIX_PATH environment variable (https://github.com/robotology/idyntree/pull/915).
+
 ## [4.2.0] - 2021-07-23
 
 - Add the possibility to pass the zmq url to the meshcat visualizer, to simplify its use in [Google Colab](https://colab.research.google.com) (https://github.com/robotology/idyntree/pull/905).
