@@ -6,13 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-
 ### Added
 - Added support for exporting joint position limits to URDF for 1-DoF joints
   (prismatic and revolute).
 - Added pybind11 python bindings for adding and reading joint limits.
 
 ### Fixed 
+- In the URDF exporter, export only frames attached to the exported traversal [#914](https://github.com/robotology/idyntree/pull/914).
 - Fixed handling of the AMENT_PREFIX_PATH environment variable (https://github.com/robotology/idyntree/pull/915).
 
 ## [4.2.0] - 2021-07-23

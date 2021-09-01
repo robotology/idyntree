@@ -10,11 +10,12 @@
 #include <iDynTree/Core/SpatialInertia.h>
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/VectorFixSize.h>
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Model/FixedJoint.h>
+#include <iDynTree/Model/Indices.h>
+#include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/PrismaticJoint.h>
 #include <iDynTree/Model/RevoluteJoint.h>
+#include <iDynTree/Model/Traversal.h>
 
 #include "URDFParsingUtils.h"
 
@@ -503,7 +504,7 @@ bool URDFStringFromModel(const iDynTree::Model & model,
     // options.exportFirstBaseLinkAdditionalFrameAsFakeURDFBase is set to false
     // If options.exportFirstBaseLinkAdditionalFrameAsFakeURDFBase is set to false,
     // baseFakeLinkFrameIndex remains set to FRAME_INVALID_INDEX, a
-    // and all the additional frames of the base link get exported as child fake links 
+    // and all the additional frames of the base link get exported as child fake links
     // in the loop and the end of this function
     FrameIndex baseFakeLinkFrameIndex = FRAME_INVALID_INDEX;
     std::vector<FrameIndex> frameIndices;
@@ -546,10 +547,14 @@ bool URDFStringFromModel(const iDynTree::Model & model,
         ok = ok && exportLink(*visitedLink, visitedLinkName, model, robot);
     }
 
-    // Export all the additional frames that are not parent of the base link
+    // Export all the additional frames.
     for (FrameIndex frameIndex=model.getNrOfLinks(); frameIndex < static_cast<FrameIndex>(model.getNrOfFrames()); frameIndex++)
     {
-        if (frameIndex != baseFakeLinkFrameIndex) {
+        // Check that the frame is not parent of the base link and that the
+        // frame link is present in the traversal.
+        if (frameIndex != baseFakeLinkFrameIndex
+            && exportTraversal.getTraversalIndexFromLinkIndex(model.getFrameLink(frameIndex)) != TRAVERSAL_INVALID_INDEX) {
+
             ok = ok && exportAdditionalFrame(model.getFrameName(frameIndex),
                                              model.getFrameTransform(frameIndex),
                                              model.getLinkName(model.getFrameLink(frameIndex)),
