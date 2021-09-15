@@ -11,4 +11,4 @@ function n=countTestNodes(obj)
 %
 % NNO 2015
 
-    n=numel(obj.tests);
+    n=obj.test_count;

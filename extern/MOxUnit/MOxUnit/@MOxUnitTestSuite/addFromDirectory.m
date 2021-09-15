@@ -7,8 +7,8 @@ function obj=addFromDirectory(obj,directory,pat,add_recursive)
 %   obj             MoxUnitTestSuite instance.
 %   directory       name of directory that may contain files with top-level
 %                   function that returns MOxUnitTestNode instances.
-%   pat             File pattern to look for in directory (default: '*.m').
-%                   Matching files are added using addFromFile.
+%   pattern         Regular expression containing file pattern of files to
+%                   add.
 %   add_recursive   If true, then files are added recursively from
 %                   sub-directories. If false (the default) then only files
 %                   are added from directory, but files in subdirectories
@@ -18,9 +18,6 @@ function obj=addFromDirectory(obj,directory,pat,add_recursive)
 %   obj             MoxUnitTestSuite instance with MOxUnitTestNode
 %                   instances  added, if present in the files in directory.
 %
-% Notes:
-%   - this function does not add files recursively.
-%
 % See also: initTestSuite, addFromFile
 %
 % NNO 2015
@@ -29,33 +26,12 @@ function obj=addFromDirectory(obj,directory,pat,add_recursive)
         add_recursive=false;
     end
 
-    if nargin<3 || isempty(pat)
-        pat='*.m';
+    % find the files
+    filenames=moxunit_util_find_files(directory,pat,add_recursive);
+
+    n_filenames=numel(filenames);
+
+    for k=1:n_filenames
+        filename=filenames{k};
+        obj=addFromFile(obj,filename);
     end
-
-    pat_regexp=['^' regexptranslate('wildcard',pat) '$'];
-
-    if isdir(directory)
-        d=dir(directory);
-        n=numel(d);
-
-        for k=1:n
-            fn=d(k).name;
-            path_fn=fullfile(directory,fn);
-
-            if isdir(path_fn)
-                if add_recursive && is_sub_directory(fn)
-                    obj=addFromDirectory(obj,path_fn,pat,add_recursive);
-                end
-            elseif ~isempty(regexp(fn,pat_regexp,'once'))
-                obj=addFromFile(obj,path_fn);
-            end
-        end
-    else
-        error('moxunit:illegalParameter','Input is not a directory');
-    end
-
-
-
-function tf=is_sub_directory(fn)
-    tf=~any(strcmp(fn,{'.','..'}));

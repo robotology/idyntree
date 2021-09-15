@@ -23,15 +23,17 @@ function joined=moxunit_util_strjoin(strings, delim)
 %
 % Examples:
 %   moxunit_util_strjoin({'a','b','c'})
-%   > 'a b c'
+%   %|| 'a b c'
+%
 %   moxunit_util_strjoin({'a','b','c'}, '>#<')
-%   > 'a>#<b>#<c'
-%   moxunit_util_strjoin({'a','b','c'}, '\t')
-%   > 'a	b	c'   % each string of spaces is a tab character
+%   %|| 'a>#<b>#<c'
+%
+%   % '\\' is the escaped backslash character
 %   moxunit_util_strjoin({'a','b','c'}, '\\')
-%   > 'a\b\c'        % '\\' is the escaped backslash character
+%   %|| 'a\b\c'
+%
 %   moxunit_util_strjoin({'a','b','c'},{'*','='})
-%   > 'a*b=c'
+%   %|| 'a*b=c'
 %
 % Notes:
 %   - this function implements similar functionality as matlab's strjoin

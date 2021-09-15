@@ -9,4 +9,5 @@ function s=str(obj)
 % Output:
 %   s               string representation of obj.
 %
-    s=sprintf('<abstract %s object>', class(obj));
+
+    s=sprintf('%s(%s,%s)>', class(obj), getName(obj), getLocation(obj));
