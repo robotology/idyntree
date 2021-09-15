@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). 
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 - In the URDF exporter, export only frames attached to the exported traversal [#914](https://github.com/robotology/idyntree/pull/914).
 - Fixed handling of the AMENT_PREFIX_PATH environment variable (https://github.com/robotology/idyntree/pull/915).
+
+### Deprecated
+- The option `IDYNTREE_COMPILES_YARP_TOOLS`, that was already deprecated in iDynTree 3, is now set to `OFF` by default. It will be removed in iDynTree 5, please use the repo https://github.com/robotology/idyntree-yarp-tools instead (https://github.com/robotology/idyntree/pull/919).
+
 
 ## [4.2.0] - 2021-07-23
 
