@@ -12,6 +12,9 @@ jobs:
   build-matlab-tests:    
     name: '[matlab:${{ matrix.matlab_version }}:${{ matrix.os }}]'
     runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash -l {0}
     strategy:
       fail-fast: false
       matrix:
@@ -40,7 +43,6 @@ jobs:
           echo 'LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6' >> $GITHUB_ENV
 
     - name: Dependencies
-      shell: bash -l {0}
       run: |
         # Workaround for https://github.com/conda-incubator/setup-miniconda/issues/186
         conda config --remove channels defaults
@@ -52,7 +54,6 @@ jobs:
     # Additional dependencies useful only on Linux
     - name: Dependencies [Conda/Linux]
       if: contains(matrix.os, 'ubuntu') 
-      shell: bash -l {0}
       run: |
         # Additional dependencies only useful on Linux
         # See https://github.com/robotology/robotology-superbuild/issues/477
@@ -60,34 +61,29 @@ jobs:
 
     - name: Configure
       if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
-      shell: bash -l {0}
       run: |
         mkdir build
         cd build
         cmake -GNinja -DCMAKE_INSTALL_PREFIX=${CONDA_PREFIX} -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DMATLAB_FIND_DEBUG:BOOL=ON -DIDYNTREE_USES_MATLAB:BOOL=ON -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_QT5:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_USES_OSQPEIGEN:BOOL=ON ..
 
     - name: Build
-      shell: bash -l {0}
       run: |
         cd build
         cmake --build . --config ${{ matrix.build_type }}
 
     - name: Inspect libraries linked by iDynTreeMEX.mexa64 [Conda/Linux]
       if: contains(matrix.os, 'ubuntu')
-      shell: bash -l {0}
       run: |
         cd build
         ldd ./lib/iDynTreeMEX.mexa64
 
     - name: Test [Conda]
-      shell: bash -l {0}
       run: |
         cd build
         # Only run matlab tests as the rest of tests are already run by other jobs
         ctest --output-on-failure -C ${{ matrix.build_type }} -R "matlab" -VV . 
      
     - name: Install [Conda]
-      shell: bash -l {0}
       run: |
         cd build
         cmake --install . --config ${{ matrix.build_type }}
