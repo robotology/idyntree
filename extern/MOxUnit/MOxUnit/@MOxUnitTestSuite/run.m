@@ -47,9 +47,9 @@ function result=run(obj,result,test_partition_index,test_partition_count)
                 test_partition_index,test_partition_count);
     end
 
-
-    for j=test_partition_index:test_partition_count:numel(obj.tests)
-        test_case=obj.tests{j};
+    n_nodes=countTestNodes(obj);
+    for j=test_partition_index:test_partition_count:n_nodes
+        test_case=getTestNode(obj,j);
         result=run(test_case, result);
     end
 

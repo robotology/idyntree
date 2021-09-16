@@ -19,7 +19,8 @@ function obj=MOxUnitTestSuite(name)
     end
 
     s=struct();
-    s.tests=cell(0);
+    s.test_count=0;
+    s.tests=cell(10,1); % some space to start with
     obj=class(s,class_name,MOxUnitTestNode(name));
 
 

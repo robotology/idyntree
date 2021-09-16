@@ -1,4 +1,4 @@
-function names=moxunit_util_mfile_subfunctions(fn)
+function fs=moxunit_util_mfile_subfunctions(fn)
 % find the names of subfunctions defined in an .m file
 %
 % names=moxunit_util_mfile_subfunctions(fn)
@@ -7,7 +7,10 @@ function names=moxunit_util_mfile_subfunctions(fn)
 %   fn                  filename of .m file
 %
 % Output:
-%   names               1xP cell with the names of subfunctions in fn.
+%   fs                  Px1 struct (with P the number of subfunctions)
+%                       with fields:
+%                       .name      name of the function
+%                       .nargout   number of output elements
 %
 % Example:
 %    Running this function on itself returns two subfunctions,
@@ -40,6 +43,7 @@ function names=moxunit_util_mfile_subfunctions(fn)
     % function outputs can be specifed in three ways, namely with zero,
     % one, or more than one output
     argout_pat='\s*((\s([\w~]+\s*=)?)|(\[[\w~,\s]*\]\s*=))\s*';
+    argout_pat='\s*(?<argout>(\s([\w~]+\s*=)?)|(\[[\w~,\s]*\]\s*=))\s*';
 
 
     % function name that we are after
@@ -59,13 +63,30 @@ function names=moxunit_util_mfile_subfunctions(fn)
     match=regexp([newline text newline],pat,'tokens');
 
     % extract function names
-    all_func_names=cellfun(@(x)x{end-1},match,'UniformOutput',false);
+    n_func=numel(match)-1;
+    names=cell(n_func,1);
+    nargouts=cell(n_func,1);
 
-    if numel(all_func_names)==0
-        names=cell(0);
-    else
-        names=all_func_names(2:end);
+    for k=1:n_func
+        m=match{k+1};
+
+        args=m{end-2};
+        args=regexprep(args,'[\[,\]=]+',' ');
+        args=regexprep(args,'\s+',' ');
+        args=regexprep(args,'^[ ]+','');
+        args=regexprep(args,'[ ]+$','');
+
+        if isempty(args)
+            arg_count=0;
+        else
+            arg_count=1+numel(regexp(args,' '));
+        end
+
+        names{k}=m{end-1};
+        nargouts{k}=arg_count;
     end
+
+    fs=struct('name',names,'nargout',nargouts);
 
 
 function s = read_file(fn)

@@ -1,0 +1,89 @@
+name: MATLAB Tests Workflow
+
+on:
+  push:
+  pull_request:
+  schedule:
+  # * is a special character in YAML so you have to quote this string
+  # Execute a "nightly" build at 2 AM UTC 
+  - cron:  '0 2 * * *'
+  
+jobs:
+  build-matlab-tests:    
+    name: '[matlab:${{ matrix.matlab_version }}:${{ matrix.os }}]'
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash -l {0}
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type: [Release]
+        os: [ubuntu-20.04]
+        matlab_version: [R2020a, R2020b, R2021a, latest]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: conda-incubator/setup-miniconda@v2
+      with:
+        miniforge-variant: Mambaforge
+        miniforge-version: latest
+        channels: conda-forge,robotology
+
+    - name: Setup MATLAB
+      uses: matlab-actions/setup-matlab@v1
+      with:
+        release: ${{ matrix.matlab_version }}
+
+    # workaround for https://github.com/robotology/robotology-superbuild/issues/64
+    - name: Do not use MATLAB's stdc++ to avoid incompatibilities with other libraries
+      if: contains(matrix.os, 'ubuntu')
+      run:
+          echo 'LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6' >> $GITHUB_ENV
+
+    - name: Dependencies
+      run: |
+        # Workaround for https://github.com/conda-incubator/setup-miniconda/issues/186
+        conda config --remove channels defaults
+        # Compilation related dependencies 
+        mamba install cmake compilers make ninja pkg-config
+        # Actual dependencies
+        mamba install eigen libxml2 assimp ipopt qt irrlicht osqp-eigen
+
+    # Additional dependencies useful only on Linux
+    - name: Dependencies [Conda/Linux]
+      if: contains(matrix.os, 'ubuntu') 
+      run: |
+        # Additional dependencies only useful on Linux
+        # See https://github.com/robotology/robotology-superbuild/issues/477
+        mamba install expat-cos6-x86_64 freeglut libselinux-cos6-x86_64 libxau-cos6-x86_64 libxcb-cos6-x86_64 libxdamage-cos6-x86_64 libxext-cos6-x86_64 libxfixes-cos6-x86_64 libxxf86vm-cos6-x86_64 mesalib mesa-libgl-cos6-x86_64
+
+    - name: Configure
+      if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
+      run: |
+        mkdir build
+        cd build
+        cmake -GNinja -DCMAKE_INSTALL_PREFIX=${CONDA_PREFIX} -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DMATLAB_FIND_DEBUG:BOOL=ON -DIDYNTREE_USES_MATLAB:BOOL=ON -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_QT5:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_USES_OSQPEIGEN:BOOL=ON ..
+
+    - name: Build
+      run: |
+        cd build
+        cmake --build . --config ${{ matrix.build_type }}
+
+    - name: Inspect libraries linked by iDynTreeMEX.mexa64 [Conda/Linux]
+      if: contains(matrix.os, 'ubuntu')
+      run: |
+        cd build
+        ldd ./lib/iDynTreeMEX.mexa64
+
+    - name: Test [Conda]
+      run: |
+        cd build
+        # Only run matlab tests as the rest of tests are already run by other jobs
+        ctest --output-on-failure -C ${{ matrix.build_type }} -R "matlab" -VV . 
+     
+    - name: Install [Conda]
+      run: |
+        cd build
+        cmake --install . --config ${{ matrix.build_type }}

@@ -1,0 +1,82 @@
+# vim ft=yaml
+# travis-ci.org definition for MOxUnit build (based on CoSMoMVPA,
+# which is based on PyMVPA, which is based on nipype configuration, 
+# which in turn was based on nipy)
+
+language: minimal
+os: linux
+
+cache:
+  - apt
+
+env:
+  matrix:
+    - WITH_COVERAGE=
+    - WITH_COVERAGE=true
+    - RUN_DOC_TEST=true
+
+before_install:
+  # to prevent IPv6 being used for APT
+  - sudo bash -c "echo 'Acquire::ForceIPv4 \"true\";' > /etc/apt/apt.conf.d/99force-ipv4"
+  - travis_retry sudo apt-get -y -qq update
+  - travis_retry sudo apt-get install -y -qq software-properties-common python-software-properties
+  - travis_retry sudo apt-add-repository -y ppa:octave/stable
+  - travis_retry sudo apt-get -y -qq update
+  # get Octave 4,0
+  - travis_retry sudo apt-get -y -qq install octave liboctave-dev
+  # install MOcov
+  - cd ..
+  - rm -rf MOcov
+  - git clone https://github.com/MOcov/MOcov.git
+  - make -C MOcov install
+  # retrieve MOdox
+  - rm -rf MOdox
+  - travis_retry git clone -v git://github.com/MOdox/MOdox.git
+  - make -C MOdox install
+  # go back to original directory
+  - cd MOxUnit
+  # prevent shippable from re-using old test results
+  - if [[  "$SHIPPABLE" == "true"  ]]; then
+      if [[  "$WITH_COVERAGE" != "true" ]]; then
+          rm -f ${SHIPPABLE_BUILD_DIR}/shippable/testresults/*.xml;
+      fi;
+    fi
+
+script:
+  - if [[  "$WITH_COVERAGE" == "true" ]]; then
+      TEST_ARGS=WITH_COVERAGE=true;
+      COVER_ARGS=COVER=`pwd`/MOxUnit;
+
+      if [[  "$SHIPPABLE" == "true"  ]]; then
+        OUTPUT_ARGS=COVER_XML_FILE=${SHIPPABLE_BUILD_DIR}/shippable/codecoverage/coverage.xml;
+        AFTER_SCRIPT="find ${SHIPPABLE_BUILD_DIR}/shippable/;cat ${SHIPPABLE_BUILD_DIR}/shippable/codecoverage/coverage.xml;which reports";
+      elif [[  "$TRAVIS" == "true"  ]]; then
+        OUTPUT_ARGS=COVER_JSON_FILE=`pwd`/coveralls.json;
+        AFTER_SCRIPT="curl --verbose -F json_file=@`pwd`/coveralls.json https://coveralls.io/api/v1/jobs";
+      fi;
+    elif [[  "$SHIPPABLE" == "true"  ]]; then
+      RESULT_ARGS=JUNIT_XML_FILE=${SHIPPABLE_BUILD_DIR}/shippable/testresults/test_results.xml;
+    elif [[  "$RUN_DOC_TEST" == "true" ]]; then
+      TEST_ARGS=RUN_DOC_TEST=true;
+    fi;
+
+  - echo Test arguments $TEST_ARGS $COVER_ARGS $OUTPUT_ARGS $RESULT_ARGS
+  - make test $TEST_ARGS $COVER_ARGS $OUTPUT_ARGS $RESULT_ARGS
+  - eval $AFTER_SCRIPT
+
+jobs:
+  include:
+    - language: matlab
+      matlab: R2020a
+
+      # No need to do anything, but the 'before_install' key is inherited from teh enclosing scope and has to be reset to something insubstantial
+      before_install:
+        - echo 'noop'
+      # Could also clear 'env' but, as is, the only environment variable inhereted fromthe scope is $WITH_COVERAGE which does nothing here
+
+      script:
+        - if [[  "$SHIPPABLE" == "true"  ]]; then
+            echo 'No Matlab testing on Shippable';
+          else
+            matlab -batch 'back=cd("./MOxUnit/"); moxunit_set_path(); cd(back); moxunit_runtests tests -verbose; exit(double(~ans))';
+          fi;
