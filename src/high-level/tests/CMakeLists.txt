@@ -3,7 +3,7 @@ macro(add_unit_test_hl classname)
     set(testbinary ${classname}UnitTest)
     set(testname   UnitTest${classname})
     add_executable(${testbinary} ${testsrc})
-    target_link_libraries(${testbinary} PRIVATE idyntree-core idyntree-model idyntree-high-level idyntree-modelio-urdf
+    target_link_libraries(${testbinary} PRIVATE idyntree-core idyntree-model idyntree-high-level idyntree-modelio
                                                 idyntree-testmodels Eigen3::Eigen)
     add_test(NAME ${testname} COMMAND ${testbinary})
 

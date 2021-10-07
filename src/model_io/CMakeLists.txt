@@ -10,4 +10,4 @@
 set(IDYNTREE_MODELIO_TESTFILES_DIR ${CMAKE_CURRENT_SOURCE_DIR}/tests/format_examples)
 
 add_subdirectory(xml)
-add_subdirectory(urdf)
+add_subdirectory(codecs)

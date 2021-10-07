@@ -50,7 +50,7 @@ add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 
-target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model idyntree-sensors idyntree-modelio-urdf
+target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model idyntree-sensors idyntree-modelio
                                      PRIVATE Eigen3::Eigen)
 
 target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
@@ -67,6 +67,17 @@ install(TARGETS ${libraryname}
         PRIVATE_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/Estimation/impl)
 
 set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
+
+# Create deprecated target idyntree-modelio-urdf 
+add_library(idyntree-modelio-urdf INTERFACE)
+add_library(iDynTree::idyntree-modelio-urdf ALIAS idyntree-modelio-urdf)
+target_link_libraries(idyntree-modelio-urdf INTERFACE idyntree-modelio)
+install(TARGETS idyntree-modelio-urdf
+        EXPORT iDynTree)
+if(CMAKE_VERSION VERSION_GREATER 3.17)
+  set_target_properties(idyntree-modelio-urdf
+                        PROPERTIES DEPRECATION "Do not use deprecated target iDynTree::idyntree-modelio-urdf, use iDynTree::idyntree-modelio instead.")
+endif()
 
 if(IDYNTREE_COMPILE_TESTS)
     add_subdirectory(tests)
