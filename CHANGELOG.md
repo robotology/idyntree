@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Fixed the conversion from irrlicht pixels to iDynTree pixels. Fixed a typo in the environment method of the visualizer. Fixed the running of two visualizer instances in the same process (https://github.com/robotology/idyntree/pull/903).
+- Fixed the update of the vectors in the visualization that caused the FPS to drop (https://github.com/robotology/idyntree/pull/921).
 
 ## [4.1.0] - 2021-07-22
 
@@ -411,7 +412,7 @@ As this is an `inline` function, this modification does not affect `iDynTree`'s 
 - The `IVector`, `IRawVector`, `IMatrix` and `IRawMatrix` interfaces have been removed for performance reasons, 
   see https://github.com/robotology/idyntree/issues/98#issuecomment-158823148 . If you want to write generic 
   code in C++ you can rely on templates, and on Matlab and Python you can rely on the native dynamic type system. 
-   
+  
 - All the core classes that have a fixed size (`Position`, `Rotation`, `Transform`, `SpatialMotionVector`, etc, etc) are 
   not initialized by their empty constructor for performance reasons, see https://github.com/robotology/idyntree/issues/98#issuecomment-158795881 .
   From now on, make sure that initialize them before any use. Most of those classes should have a `zero()` method to
