@@ -142,11 +142,15 @@ if (IDYNTREE_USES_PYTHON_PYBIND11 OR IDYNTREE_USES_PYTHON)
         file(APPEND "${CMAKE_CURRENT_BINARY_DIR}/__init__.py" "from . import swig${NEW_LINE}from . import visualize${NEW_LINE}")
         # Create also an alias from swig to the old `bindings` import.
         file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/bindings.py" "from .swig import *${NEW_LINE}")
-        install(FILES "${CMAKE_CURRENT_BINARY_DIR}/bindings.py"
-                DESTINATION ${PYTHON_INSTDIR})
+        install(
+            FILES "${CMAKE_CURRENT_BINARY_DIR}/bindings.py"
+            DESTINATION ${PYTHON_INSTDIR}
+            COMPONENT python)
         # Add the alias in the __init__.py
         file(APPEND "${CMAKE_CURRENT_BINARY_DIR}/__init__.py" "from . import bindings${NEW_LINE}")
     endif()
-    install(FILES "${CMAKE_CURRENT_BINARY_DIR}/__init__.py"
-             DESTINATION ${PYTHON_INSTDIR})
+    install(
+        FILES "${CMAKE_CURRENT_BINARY_DIR}/__init__.py"
+        DESTINATION ${PYTHON_INSTDIR}
+        COMPONENT python)
 endif()
