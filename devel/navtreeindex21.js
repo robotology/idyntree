@@ -1,5 +1,12 @@
 var NAVTREEINDEX21 =
 {
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#a6ab8e33bb3c769c20cc61220b0987bbb":[3,7,34,1],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#a6cd4faefd974997223f94df948f0dbc3":[3,7,34,0],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#a6f758bc67249991beddf14886bd646d4":[3,7,34,18],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#a80897122f5bf717243d0f454d6f702f8":[3,7,34,9],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#a917cfae65e537e496290046a44d7ca94":[3,7,34,29],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#a9269110e23af528aae7b78aad054d0c9":[3,7,34,24],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#a98ef09172a6249a121342f44306e77fa":[3,7,34,7],
 "classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#aa329727f0449dd78cc65248c5ee2f7ec":[3,7,34,31],
 "classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ab298698138c89514de25695c40b4bed6":[3,7,34,15],
 "classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ab75a1c3759901f6cd1dc3543481d06c9":[3,7,34,19],
@@ -242,12 +249,5 @@ var NAVTREEINDEX21 =
 "classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4.html#a72bf5f94da63280de3c2b3223cd251e6":[3,7,17,6],
 "classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4.html#a77cb08d2a9451f828508e19c25a9991e":[3,7,17,17],
 "classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4.html#a91cc593e13d13305e81b3e7fc5ae6276":[3,7,17,24],
-"classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4.html#a97950a2b3f0f491f75109ff0739dc0f9":[3,7,17,14],
-"classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4.html#aa0aac8f0c4e34d345c05960591468d73":[3,7,17,10],
-"classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4.html#aa9eb4f3c3a4da99f1ce27b28154e4bfb":[3,7,17,22],
-"classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4.html#aab4d320903f06565e0fbecbbae934f0f":[3,7,17,13],
-"classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4.html#ab5b22916d2b6e31314d3dd8955a574d4":[3,7,17,9],
-"classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4.html#acefec19f5d879d9720df1f3a8c1b8186":[3,7,17,18],
-"classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4.html#ad5b95d324ad148603d09aedcb52860ce":[3,7,17,20],
-"classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4.html#ae44f7ecb211132d6280df85e23378a05":[3,7,17,12]
+"classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4.html#a97950a2b3f0f491f75109ff0739dc0f9":[3,7,17,14]
 };
