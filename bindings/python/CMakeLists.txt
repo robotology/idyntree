@@ -35,11 +35,18 @@ endif()
 
 install(
     FILES ${CMAKE_CURRENT_BINARY_DIR}/idyntree/swig.py
-    DESTINATION ${PYTHON_INSTDIR})
+    DESTINATION ${PYTHON_INSTDIR}
+    COMPONENT python)
 
-install(TARGETS ${target_name} DESTINATION ${PYTHON_INSTDIR})
+install(
+    TARGETS ${target_name}
+    DESTINATION ${PYTHON_INSTDIR}
+    COMPONENT python)
 
-install(DIRECTORY visualize DESTINATION ${PYTHON_INSTDIR})
+install(
+    DIRECTORY visualize
+    DESTINATION ${PYTHON_INSTDIR}
+    COMPONENT python)
 
 if(WIN32)
     set_target_properties(${target_name} PROPERTIES SUFFIX ".pyd")
