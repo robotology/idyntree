@@ -12,9 +12,7 @@ function obj=addFromFile(obj,fn)
 %
 % Output:
 %   obj             MoxUnitTestSuite instance with the MOxUnitTestNode test
-%                   added, if present. If calling the function defined in
-%                   fn raises an exception, or does not return a
-%                   MOxUnitTestNode instance, then obj remains unchanged.
+%                   added, if present.
 %
 % See also: initTestSuite
 %
@@ -24,22 +22,31 @@ function obj=addFromFile(obj,fn)
     cleaner=onCleanup(@()cd(orig_pwd));
 
     [fn_dir,name]=fileparts(fn);
+
     if ~isempty(fn_dir)
         cd(fn_dir);
     end
 
-    try
-        func=str2func(name);
+    func=str2func(name);
 
-        if nargout(func)~=1
-            return;
-        end
-
-        test_case=func();
-        if isa(test_case,'MOxUnitTestNode')
-            obj=addTest(obj,test_case);
-        end
-    catch
-        % ignore silently, assuming that the file was not a test case
+    if nargout(func)~=1
+        return;
     end
 
+    test_case=func();
+    if isa(test_case,'MOxUnitTestNode')
+        obj=addTest(obj,test_case);
+
+    elseif isa(test_case,'matlab.unittest.Test')
+
+        matlab_test_struct=test_case;
+        n_tests=numel(matlab_test_struct);
+
+        for k=1:n_tests
+            test_node=MOxUnitMatlabUnitWrapperTestCase(...
+                                    matlab_test_struct(k));
+            obj=addTest(obj,test_node);
+        end
+    else
+        % unknown class, silent skip
+    end

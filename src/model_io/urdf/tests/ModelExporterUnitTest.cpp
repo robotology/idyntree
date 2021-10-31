@@ -11,6 +11,7 @@
 
 
 #include <iDynTree/Model/Model.h>
+#include <iDynTree/Model/RevoluteJoint.h>
 #include <iDynTree/ModelIO/ModelLoader.h>
 #include <iDynTree/ModelIO/ModelExporter.h>
 
@@ -19,6 +20,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <algorithm>
+#include <memory>
 #include <fstream>
 
 using namespace iDynTree;
@@ -163,6 +165,59 @@ void checkImportExportURDF(std::string fileName)
 
 }
 
+void testFramesNotInTraversal() {
+    // Create a model with two different roots and export only one.
+
+    Model model;
+    SpatialInertia zeroInertia;
+    zeroInertia.zero();
+
+    Link link;
+    link.setInertia(zeroInertia);
+
+    // Create a 2 links - one joint model.
+    model.addLink("link_1_1", link);
+    model.addLink("link_1_2", link);
+
+    auto joint = std::make_unique<RevoluteJoint>();
+    model.addJoint("link_1_1", "link_1_2", "j1", joint.get());
+
+    // Add a frame to the body.
+    model.addAdditionalFrameToLink("link_1_2", "f1", Transform::Identity());
+
+    // Add also another link not connected to the other body.
+    model.addLink("link_2_1", link);
+
+    // Add a frame to this body too.
+    model.addAdditionalFrameToLink("link_2_1", "f2", Transform::Identity());
+
+    // Export the model. We want to export only the first body.
+    ModelExporter exporter;
+    // Set the root link to link_1_1.
+    ModelExporterOptions options;
+    options.baseLink = "link_1_1";
+    exporter.setExportingOptions(options);
+
+    bool ok = exporter.init(model, SensorsList());
+    ASSERT_IS_TRUE(ok);
+    std::string urdfString;
+    ok = exporter.exportModelToString(urdfString);
+    ASSERT_IS_TRUE(ok);
+
+    // Reload the model.
+    ModelLoader loader;
+
+    ok = loader.loadModelFromString(urdfString);
+    ASSERT_IS_TRUE(ok);
+    Model modelReloaded = loader.model();
+
+    // Check that the reloaded model contains only the 2 links - 1 joint model.
+    ASSERT_EQUAL_DOUBLE(modelReloaded.getNrOfLinks(), 2);
+    ASSERT_EQUAL_DOUBLE(modelReloaded.getNrOfJoints(), 1);
+    ASSERT_EQUAL_DOUBLE(modelReloaded.getNrOfDOFs(), 1);
+    ASSERT_EQUAL_DOUBLE(modelReloaded.getNrOfFrames(), 2 + 1);
+}
+
 
 int main()
 {
@@ -178,6 +233,8 @@ int main()
         std::cout << "Checking model import/export test on " << urdfFileName << std::endl;
         checkImportExportURDF(urdfFileName);
     }
+
+    testFramesNotInTraversal();
 
 
     return EXIT_SUCCESS;

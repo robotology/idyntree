@@ -18,8 +18,10 @@ function str=obj2text(obj)
 
     if isstruct(content)
         % error or failure
+        stack_prefix='  ';
+        stack_str=moxunit_util_stack2str(content.stack, stack_prefix);
         str=sprintf('%s: %s\n%s',...
-                outcome,content.message,stack2str(content.stack));
+                outcome,content.message,stack_str);
 
     elseif ischar(content)
         % skipped
@@ -63,9 +65,12 @@ function str=obj2xml(obj)
             raw_message=content.message;
             message=moxunit_util_remove_matlab_anchor_tag(raw_message);
             message=moxunit_util_escape_xml(message);
-            stack_trace=moxunit_util_escape_xml(stack2str(content.stack));
+
+            raw_stack_str=moxunit_util_stack2str(content.stack);
+            stack_str=moxunit_util_escape_xml(raw_stack_str);
+
             infix=sprintf('>\n  <%s message="%s">%s</%s>',...
-                        outcome,message,stack_trace,outcome);
+                        outcome,message,stack_str,outcome);
         end
 
         suffix=sprintf('\n</testcase>');
@@ -73,15 +78,7 @@ function str=obj2xml(obj)
 
     str=sprintf('%s%s%s',prefix,infix,suffix);
 
-function str=stack2str(stack)
-    n_stack=numel(stack);
-    lines=cell(1,n_stack);
-    for k=1:n_stack
-        s=stack(k);
-        lines{k}=sprintf('  %s:%d (%s)', ...
-                        s.name, s.line, s.file);
-    end
-    str=moxunit_util_strjoin(lines,'\n');
+
 
 function s=get_classname(test_)
     location=getLocation(test_);

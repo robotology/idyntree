@@ -11,6 +11,17 @@ function assertTrue(a, message)
 %   'MOxUnit:notLogicalScalar'      a is not a logical scalar
 %   'MOxUnit:notTrue'               a is not true
 %
+% Examples:
+%   assertTrue(true);
+%   %||  % ok
+%
+%   assertTrue(false);
+%
+%   %|| error('input does not evaluate to true');
+%
+%   assertFalse([true,true]);
+%   %|| error('input is not a logical scalar');
+%
 % Notes:
 %   - If a custom message is provided, then any error message is prefixed
 %     by this custom message
@@ -42,7 +53,7 @@ function assertTrue(a, message)
     full_message=moxunit_util_input2str(message,whatswrong,a);
 
     if moxunit_util_platform_is_octave()
-        error(error_id,full_message);
+        error(error_id,'%s',full_message);
     else
-        throwAsCaller(MException(error_id, full_message));
+        throwAsCaller(MException(error_id,'%s',full_message));
     end

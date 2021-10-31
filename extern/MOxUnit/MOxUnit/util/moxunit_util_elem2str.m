@@ -24,21 +24,30 @@ function elem_str=moxunit_util_elem2str(elem, max_chars)
         max_chars=100;
     end
 
+    body_str='';
+
     try
         if is_row_vector_string(elem)
-            elem_str=['''' elem ''''];
+            body_str=['''' elem ''''];
         elseif numel(elem)<=max_chars
             % try pretty printing
-            elem_str=tiny_elem2str(elem);
-        else
-            elem_str=elem2str_size_and_class(elem);
+            body_str=tiny_elem2str(elem);
         end
+
+        body_str=limit_string_size(body_str,max_chars);
     catch
-        % fall back
-        elem_str=elem2str_class(elem);
+        % use empty body string
     end
 
-    elem_str=limit_string_size(elem_str,max_chars);
+    header_str=get_header_str(elem);
+    if isempty(body_str)
+        suffix='';
+    else
+        suffix=sprintf('\n%s',body_str);
+    end
+
+    elem_str=sprintf('%s%s',header_str,suffix);
+
 
 
 function elem_str=tiny_elem2str(elem)
@@ -63,9 +72,10 @@ function elem_str=tiny_elem2str(elem)
 
     elseif isnumeric(elem)
         % If the element is numeric, we can use mat2str
-        elem_str=mat2str(elem);
+        precision=5;
+        elem_str=mat2str(elem,precision);
 
-    elseif exist('evalc', 'builtin')
+    elseif can_use_evalc()
         % If we have `evalc`, we can just trust the `display` function
         % provided by the environment to format the string correctly
         % and capture it with `evalc`.
@@ -74,10 +84,21 @@ function elem_str=tiny_elem2str(elem)
         % remove trailing newlines
         elem_str=regexprep(elem_str,sprintf('[\n]*$'),'');
 
+        % remove 'ans = ' from the beginning, if running octave
+        if moxunit_util_platform_is_octave()
+
+            elem_str=regexprep(elem_str,'^ans\s*= ','');
+            elem_str=regexprep(elem_str,'^ans\(:,:,',sprintf('\n(:,:,'));
+            elem_str=regexprep(elem_str,sprintf('\nans\\(:,:,'),...
+                                            sprintf('\n(:,:,'));
+        end
+
+
+
     else
         % If evalc is not present (Octave), just show the size and
         % the class
-        elem_str=elem2str_size_and_class(elem);
+        elem_str='';
     end
 
 
@@ -95,18 +116,38 @@ function tf=is_row_vector_string(elem)
     end
 
 
+function header_str=get_header_str(elem)
+% if possible, return size and class. If this raises an exception, return
+% the class only
+    try
+        header_str=elem2str_size_and_class(elem);
+    catch
+        header_str=elem2str_class(elem);
+    end
+
+
 function elem_str=elem2str_size_and_class(elem)
 % return string representation of elem with size and class
-    siz_cell = arrayfun(@num2str, size(elem), ...
+    siz = size(elem);
+    siz_cell = arrayfun(@num2str, siz, ...
                         'UniformOutput', false);
     siz_str = moxunit_util_strjoin(siz_cell, 'x');
-    elem_str = sprintf('%s(%s)', siz_str, class(elem));
+
+    class_str = elem2str_class(elem);
+
+    if any(siz==0)
+        suffix=' (empty)';
+    else
+        suffix='';
+    end
+
+    elem_str = sprintf('%s %s%s', siz_str, class_str, suffix);
 
 
-function elem_str=elem2str_class(elem)
+function class_str=elem2str_class(elem)
 % return string representation of elem with class only; used as a fallback
 % option if tiny_elem2str and elem2str_size_and_class cannot be used
-    elem_str = sprintf('(%s)', class(elem));
+    class_str = sprintf('%s', class(elem));
 
 
 function elem_str=limit_string_size(elem_str, max_chars)
@@ -117,4 +158,20 @@ function elem_str=limit_string_size(elem_str, max_chars)
         elem_str=[elem_str(1:n) infix elem_str(end+((1-n):0))];
     end
 
+function tf=can_use_evalc()
+    tf=false;
 
+    code_is_mfile=2;
+    code_is_mex_or_oct_file=3;
+
+    func_name='evalc';
+    if exist(func_name,'builtin')
+        tf=true;
+        return;
+    end
+
+    exist_code=exist(func_name);
+    if any(exist_code==[code_is_mfile,code_is_mex_or_oct_file])
+        tf=true;
+        return;
+    end

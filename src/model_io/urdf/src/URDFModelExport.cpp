@@ -10,11 +10,12 @@
 #include <iDynTree/Core/SpatialInertia.h>
 #include <iDynTree/Core/Transform.h>
 #include <iDynTree/Core/VectorFixSize.h>
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Model/FixedJoint.h>
+#include <iDynTree/Model/Indices.h>
+#include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/PrismaticJoint.h>
 #include <iDynTree/Model/RevoluteJoint.h>
+#include <iDynTree/Model/Traversal.h>
 
 #include "URDFParsingUtils.h"
 
@@ -25,6 +26,7 @@
 
 #include <libxml/tree.h>
 #include <libxml/parser.h>
+#include <libxml/xmlstring.h>
 
 namespace iDynTree
 {
@@ -382,7 +384,21 @@ bool exportJoint(IJointConstPtr joint, LinkConstPtr parentLink, LinkConstPtr chi
     xmlNodePtr child_xml = xmlNewChild(joint_xml, NULL, BAD_CAST "child", NULL);
     xmlNewProp(child_xml, BAD_CAST "link", BAD_CAST model.getLinkName(childLink->getIndex()).c_str());
 
-    // TODO(traversaro) : handle joint limits and friction
+    // Position limits
+    if (joint->hasPosLimits() && joint->getNrOfDOFs() == 1)
+    {
+        xmlNodePtr limit_xml = xmlNewChild(joint_xml, NULL, BAD_CAST "limit", NULL);
+        std::string bufStr;
+        double min, max;
+        ok = ok && joint->getPosLimits(0, min, max);
+
+        ok = ok && doubleToStringWithClassicLocale(min, bufStr);
+        xmlNewProp(limit_xml, BAD_CAST "lower", BAD_CAST bufStr.c_str());
+        ok = ok && doubleToStringWithClassicLocale(max, bufStr);
+        xmlNewProp(limit_xml, BAD_CAST "upper", BAD_CAST bufStr.c_str());
+    }
+
+    // TODO(traversaro) : handle friction
 
     return ok;
 }
@@ -488,7 +504,7 @@ bool URDFStringFromModel(const iDynTree::Model & model,
     // options.exportFirstBaseLinkAdditionalFrameAsFakeURDFBase is set to false
     // If options.exportFirstBaseLinkAdditionalFrameAsFakeURDFBase is set to false,
     // baseFakeLinkFrameIndex remains set to FRAME_INVALID_INDEX, a
-    // and all the additional frames of the base link get exported as child fake links 
+    // and all the additional frames of the base link get exported as child fake links
     // in the loop and the end of this function
     FrameIndex baseFakeLinkFrameIndex = FRAME_INVALID_INDEX;
     std::vector<FrameIndex> frameIndices;
@@ -531,10 +547,14 @@ bool URDFStringFromModel(const iDynTree::Model & model,
         ok = ok && exportLink(*visitedLink, visitedLinkName, model, robot);
     }
 
-    // Export all the additional frames that are not parent of the base link
+    // Export all the additional frames.
     for (FrameIndex frameIndex=model.getNrOfLinks(); frameIndex < static_cast<FrameIndex>(model.getNrOfFrames()); frameIndex++)
     {
-        if (frameIndex != baseFakeLinkFrameIndex) {
+        // Check that the frame is not parent of the base link and that the
+        // frame link is present in the traversal.
+        if (frameIndex != baseFakeLinkFrameIndex
+            && exportTraversal.getTraversalIndexFromLinkIndex(model.getFrameLink(frameIndex)) != TRAVERSAL_INVALID_INDEX) {
+
             ok = ok && exportAdditionalFrame(model.getFrameName(frameIndex),
                                              model.getFrameTransform(frameIndex),
                                              model.getLinkName(model.getFrameLink(frameIndex)),

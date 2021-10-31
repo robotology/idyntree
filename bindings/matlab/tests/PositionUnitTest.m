@@ -1,4 +1,8 @@
 function test_suite=PositionUnitTest
+    try % assignment of 'localfunctions' is necessary in Matlab >= 2016
+        test_functions=localfunctions();
+    catch % no problem; early Matlab versions can use initTestSuite fine
+    end
     initTestSuite
     test_sum_of_positions
 

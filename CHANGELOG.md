@@ -1,10 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). 
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [Unreleased Major]
 
 ### Added
 - Added the possibility to draw in different portions of the visualizer window and textures at the same time. Allow disabling the drawing on textures (https://github.com/robotology/idyntree/pull/903).
@@ -15,6 +15,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fixed the conversion from irrlicht pixels to iDynTree pixels. Fixed a typo in the environment method of the visualizer. Fixed the running of two visualizer instances in the same process (https://github.com/robotology/idyntree/pull/903).
 - Fixed the update of the vectors in the visualization that caused the FPS to drop (https://github.com/robotology/idyntree/pull/921).
+
+## [Unreleased]
+
+### Added 
+- Added support for exporting joint position limits to URDF for 1-DoF joints
+  (prismatic and revolute).
+- Added pybind11 python bindings for adding and reading joint limits.
+
+### Fixed 
+- In the URDF exporter, export only frames attached to the exported traversal [#914](https://github.com/robotology/idyntree/pull/914).
+- Fixed handling of the AMENT_PREFIX_PATH environment variable (https://github.com/robotology/idyntree/pull/915).
+
+### Deprecated
+- The option `IDYNTREE_COMPILES_YARP_TOOLS`, that was already deprecated in iDynTree 3, is now set to `OFF` by default. It will be removed in iDynTree 5, please use the repo https://github.com/robotology/idyntree-yarp-tools instead (https://github.com/robotology/idyntree/pull/919).
+
+
+## [4.2.0] - 2021-07-23
+
+### Added
+- Add the possibility to pass the zmq url to the meshcat visualizer, to simplify its use in [Google Colab](https://colab.research.google.com) (https://github.com/robotology/idyntree/pull/905).
 
 ## [4.1.0] - 2021-07-22
 

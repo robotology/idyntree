@@ -13,7 +13,10 @@ function string=getProgressStr(obj,verbosity)
     outcome=getOutcomeStr(obj, verbosity);
 
     if verbosity>=2
-        string=sprintf('%10s: %s\n', outcome, str(getTest(obj)));
+        test_node=getTest(obj);
+        string=sprintf('%10s in % 7.2f s: %s\n', ...
+                            outcome, getDuration(obj), ...
+                            str(test_node));
     elseif verbosity>=1
         string=outcome;
     else

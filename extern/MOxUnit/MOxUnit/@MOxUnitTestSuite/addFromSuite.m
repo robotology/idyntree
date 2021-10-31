@@ -16,12 +16,9 @@ function obj=addFromSuite(obj, s)
 %
 % NNO 2015
 
-    n_obj=countTestNodes(obj);
-    n_s=countTestNodes(s);
+    n_test_nodes=countTestNodes(s);
 
-    % allocate space
-    obj.tests{end+n_s}=[];
-
-    for k=1:n_s
-        obj.tests{n_obj+k}=getTestNode(s,k);
+    for k=1:n_test_nodes
+        test_node=getTestNode(s, k);
+        obj=addTest(obj, test_node);
     end

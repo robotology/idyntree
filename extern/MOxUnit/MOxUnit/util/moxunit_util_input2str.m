@@ -35,18 +35,12 @@ function string=moxunit_util_input2str(message,whatswrong,a,b)
 
     elseif nargin<4
         % one element
-        string=sprintf('%s\n\nInput:%s\n', ...
+        string=sprintf('%s\n\nInput: %s\n', ...
                         prefix,moxunit_util_elem2str(a));
 
     else
         % two elements
-        string=sprintf('%s\n\nFirst input:\n%s\n\nSecond input:\n%s\n',...
+        string=sprintf('%s\n\nFirst input: %s\n\nSecond input: %s\n',...
                         prefix, moxunit_util_elem2str(a),...
                                 moxunit_util_elem2str(b));
     end
-
-    string=strrep(string,sprintf('\n'),'\n');
-
-
-
-

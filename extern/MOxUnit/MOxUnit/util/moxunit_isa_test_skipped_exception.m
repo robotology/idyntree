@@ -21,18 +21,11 @@ function tf=moxunit_isa_test_skipped_exception(exception)
     persistent cached_test_skipped_identifier
 
     if isempty(cached_test_skipped_identifier)
-        if moxunit_util_platform_is_octave()
-            try
-                moxunit_throw_test_skipped_exception('error');
-            catch
-                last_caught_error=lasterror();
-            end
-
-        else
-            try
-                moxunit_throw_test_skipped_exception('error');
-            catch last_caught_error;
-            end
+        try
+            moxunit_throw_test_skipped_exception('error');
+            assert(false,'should never get here');
+        catch
+            last_caught_error=lasterror();
         end
 
         cached_test_skipped_identifier=last_caught_error(1).identifier;
