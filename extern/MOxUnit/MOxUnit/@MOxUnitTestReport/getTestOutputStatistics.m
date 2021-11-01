@@ -9,22 +9,16 @@ function label_counts=getTestOutputStatistics(obj)
 %
 % Output:
 %   label_counts    struct that may contain the fields 'failure', 'error',
-%                   'skipped', with the value the number of times a text
-%                   failed, raised an error or was skipped. If a field is
-%                   absent, the number of times is zero.
-%                   A success is not part of label_counts
+%                   'skipped', or 'passed' with the value the number of
+%                   times a test failed, raised an error, was skipped or
+%                   passed (respectively). If a field is absent, the number
+%                   of times is zero.
 
     label_verbosity=2;
     label_counts=struct();
 
     for i=1:countTestOutcomes(obj)
         test_outcome=getTestOutcome(obj,i);
-
-        if isSuccess(test_outcome)
-            % no need to report statistics for successes
-            continue;
-        end
-
         test_label=getOutcomeStr(test_outcome,label_verbosity);
 
         if ~isfield(label_counts,test_label);

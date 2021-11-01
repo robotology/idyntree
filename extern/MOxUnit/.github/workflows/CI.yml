@@ -1,0 +1,44 @@
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "unit-tests"
+  unit-tests:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    # Use A Github Action to perform tests
+    - name: run unit tests and documentation tests, generate coverage report
+      uses: joergbrech/moxunit-action@v1.1
+      with:
+        tests: tests
+        src: MOxUnit
+        with_coverage: true
+        doc_tests: true
+        cover_xml_file: coverage.xml
+
+    # Store the coverage report as an artifact
+    - name: Store Coverage report as artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: coverage_xml_file
+        path: coverage.xml
+    
+    ## Use a Github Action to publish coverage reports
+    #- name: Publish coverage report to codecov.io
+    #  uses: codecov/codecov-action@v1
+    #  with:
+    #    file: ./coverage.xml

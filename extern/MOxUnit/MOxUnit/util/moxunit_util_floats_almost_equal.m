@@ -60,7 +60,7 @@ function [message,error_id,whatswrong]=moxunit_util_floats_almost_equal(a,b,f,no
     elseif ~isfloat(a)
         whatswrong='first input is not float';
         error_id=get_error_id(f, 'notFloat');
-    elseif ~isnumeric(b)
+    elseif ~isfloat(b)
         whatswrong='second input is not float';
         error_id=get_error_id(f, 'notFloat');
     else

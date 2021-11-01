@@ -9,11 +9,13 @@ function result=moxunit_runtests(varargin)
 %   '-quiet'                do not show output
 %   filename                } test the unit tests in filename
 %   directory               } (which must initialize a test suite through
-%                           } initTestSuite) or in directory. Multiple
-%                           filename or directory arguments can be
+%   suite                   } initTestSuite), in the directory, or the
+%                           } MOxUnitTestSuite instance.
+%                           Multiple filename or directory arguments can be
 %                           provided. If there are no filename or directory
 %                           arguments, then all tests in the current
 %                           directory are run.
+%
 %   '-recursive'            If this option is present, then files are added
 %                           recursively from any directory. If absent, then
 %                           only files from each directory (but not their
@@ -70,21 +72,22 @@ function result=moxunit_runtests(varargin)
     params=get_params(varargin{:});
 
     if params.fid>2
-        % not standard or error output; file most be closed
+        % not standard or error output; file must be closed
         % afterwards
         cleaner=onCleanup(@()fclose(params.fid));
     end
 
     suite=MOxUnitTestSuite();
-    for k=1:numel(params.filenames)
-        % add files to the test suite
-        filename=params.filenames{k};
-        if isdir(filename)
-            suite=addFromDirectory(suite,filename,[],params.add_recursive);
-        else
-            suite=addFromFile(suite,filename);
-        end
-    end
+
+    % build pattern for filenames by combining the test name pattern with
+    % extension
+    mfile_ext_pattern='.m$';
+    mfile_test_filename_pattern=get_test_file_pattern(mfile_ext_pattern);
+
+    suite=add_from_to_test_spec(suite, ...
+                                        params.to_test_spec,...
+                                        mfile_test_filename_pattern,...
+                                        params.add_recursive);
 
     % show summary of test suite
     if params.verbosity>0
@@ -102,12 +105,44 @@ function result=moxunit_runtests(varargin)
     disp(test_report);
 
     if ~isempty(params.junit_xml_file)
-        write_junit_xml(params.junit_xml_file, test_report);
+        writeXML(test_report,params.junit_xml_file);
     end
 
 
     % return true if no errors or failures
     result=wasSuccessful(test_report);
+
+
+function mfile_test_filename_pattern=get_test_file_pattern(...
+                                                mfile_ext_pattern)
+    test_name_pattern=moxunit_util_get_test_name_regexp();
+    assert(sum(test_name_pattern=='$')==1,'unexpected pattern');
+    assert(test_name_pattern(end)=='$','unexpected pattern');
+
+    mfile_test_filename_pattern=regexprep(test_name_pattern,...
+                                            '\$',...
+                                            mfile_ext_pattern);
+
+
+function suite=add_from_to_test_spec(suite, ...
+                                        to_test_spec, ...
+                                        mfile_test_filename_pattern,...
+                                        add_recursive)
+    for k=1:numel(to_test_spec)
+        % add files to the test suite
+        to_test=to_test_spec{k};
+        if isa(to_test,'MOxUnitTestSuite')
+            suite=addFromSuite(suite,to_test);
+        elseif moxunit_util_isfolder(to_test)
+            suite=addFromDirectory(suite,...
+                                    to_test,...
+                                    mfile_test_filename_pattern,...
+                                    add_recursive);
+        else
+            suite=addFromFile(suite,to_test);
+        end
+    end
+
 
 
 function test_report=run_all_tests(suite, test_report, params)
@@ -141,7 +176,7 @@ function test_report=run_all_tests(suite, test_report, params)
             elseif iscell(value)
                 n_values=numel(value);
                 param_elem_matrix=[repmat({key_arg},1,n_values);...
-                                           value(:)];
+                                           value(:)'];
                 param_elem=param_elem_matrix(:)';
             else
                 error('moxunit:illegalParameterValue',...
@@ -157,28 +192,27 @@ function test_report=run_all_tests(suite, test_report, params)
 
         all_params=[mocov_expr_param, mocov_params];
 
+        if params.verbosity>=1
+            params_as_strings=cellfun(@param2str,all_params,...
+                                    'UniformOutput',false);
+            params_joined=sprintf('%s ',params_as_strings{:});
+
+            fprintf('running coverage with parameters: %s\n',...
+                                params_joined);
+        end
+
+
         test_report=mocov(all_params{:});
     else
         test_report=f_handle();
     end
 
-
-
-
-function write_junit_xml(fn, test_report)
-    fid=fopen(fn,'w');
-    file_closer=onCleanup(@()fclose(fid));
-
-    xml_preamble='<?xml version="1.0" encoding="utf-8"?>';
-    xml_header='<testsuites>';
-    xml_body=getSummaryStr(test_report,'xml');
-    xml_footer='</testsuites>';
-
-    fprintf(fid,'%s\n%s\n%s\n%s',...
-                xml_preamble,...
-                xml_header,...
-                xml_body,...
-                xml_footer);
+function s=param2str(p)
+    if ischar(p)
+        s=p;
+    else
+        s=sprintf('<%s>',class(p));
+    end
 
 
 function params=get_params(varargin)
@@ -200,16 +234,21 @@ function params=get_params(varargin)
 
     % allocate space for filenames
     n=numel(varargin);
-    filenames=cell(n,1);
+    to_test_spec=cell(n,1);
 
     k=0;
     while k<n
         k=k+1;
         arg=varargin{k};
-        if ~ischar(arg)
+
+        if isa(arg,'MOxUnitTestSuite')
+            to_test_spec{k}=arg;
+            continue
+        elseif ~ischar(arg)
             error('moxunit:illegalParameter',...
-                    'Illegal argument at position %d', k);
+                    'Illegal argument type at position %d', k);
         end
+
         switch arg
             case '-verbose'
                 params.verbosity=params.verbosity+1;
@@ -231,53 +270,11 @@ function params=get_params(varargin)
                     error('Could not open file %s for writing', fn);
                 end
 
-             case '-cover'
-                 if k==n
-                    error('moxunit:missingParameter',...
-                           'Missing parameter after option ''%s''',arg);
-                end
+            case {'-cover','-cover_xml_file','-junit_xml_file',...
+                        '-cover_json_file','-cover_html_dir',...
+                        '-cover_method'}
+                params=set_key_value(params,varargin,k);
                 k=k+1;
-                params.cover=varargin{k};
-
-             case '-cover_xml_file'
-                if k==n
-                    error('moxunit:missingParameter',...
-                           'Missing parameter after option ''%s''',arg);
-                end
-                k=k+1;
-                params.cover_xml_file=varargin{k};
-
-            case '-junit_xml_file'
-                if k==n
-                    error('moxunit:missingParameter',...
-                           'Missing parameter after option ''%s''',arg);
-                end
-                k=k+1;
-                params.junit_xml_file=varargin{k};
-
-            case '-cover_json_file'
-                if k==n
-                    error('moxunit:missingParameter',...
-                           'Missing parameter after option ''%s''',arg);
-                end
-                k=k+1;
-                params.cover_json_file=varargin{k};
-
-            case '-cover_html_dir'
-                if k==n
-                    error('moxunit:missingParameter',...
-                           'Missing parameter after option ''%s''',arg);
-                end
-                k=k+1;
-                params.cover_html_dir=varargin{k};
-
-            case '-cover_method'
-                if k==n
-                    error('moxunit:missingParameter',...
-                           'Missing parameter after option ''%s''',arg);
-                end
-                k=k+1;
-                params.cover_method=varargin{k};
 
              case '-cover_exclude'
                 if k==n
@@ -321,17 +318,23 @@ function params=get_params(varargin)
             otherwise
 
                 if ~isempty(dir(arg))
-                    filenames{k}=arg;
+                    to_test_spec{k}=arg;
                 else
+                    % Close the file if it has been already open before
+                    % throwing an error. This prevents resource leak and,
+                    % eventually 'Too many files open' error.
+                    try
+                        fclose(params.fid);
+                    end %#ok<TRYNC>
                     error('moxunit:illegalParameter',...
                     'Parameter not recognised or file missing: %s', arg);
                 end
         end
     end
 
-    filenames=filenames(~cellfun(@isempty,filenames));
+    to_test_spec=to_test_spec(~cellfun(@isempty,to_test_spec));
 
-    if numel(filenames)==0
+    if numel(to_test_spec)==0
         me_name=mfilename();
         if isequal(pwd(), fileparts(which(me_name)))
             error('moxunit:illegalParameter',...
@@ -341,12 +344,27 @@ function params=get_params(varargin)
                             'on MOxUnit itself, use:\n\n'...
                             '  %s ../tests'], me_name, me_name);
         end
-        filenames={pwd()};
+        to_test_spec={pwd()};
     end
 
-    params.filenames=filenames;
+    params.to_test_spec=to_test_spec;
 
     check_cover_consistency(params)
+
+
+function params = set_key_value(params,args,k)
+    n=numel(args);
+
+    arg = args{k};
+    assert(arg(1)=='-');
+    key=arg(2:end);
+
+    if k==n
+        error('moxunit:missingParameter',...
+               'Missing parameter after option ''%s''',arg);
+    end
+
+    params.(key)=args{k+1};
 
 function check_cover_consistency(params)
     keys=fieldnames(params);

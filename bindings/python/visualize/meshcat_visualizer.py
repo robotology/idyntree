@@ -21,9 +21,13 @@ class MeshcatVisualizer:
     https://github.com/stack-of-tasks/pinocchio/blob/b134b25f1409f5bf036105b996da2d29c1a66a12/bindings/python/pinocchio/visualize/meshcat_visualizer.py
     """
 
-    def __init__(self):
+    def __init__(self, zmq_url=None):
         import meshcat
-        self.viewer = meshcat.Visualizer()
+        
+        if zmq_url is not None:
+            print("Connecting to meshcat-server at zmq_url=" + zmq_url + ".")
+          
+        self.viewer = meshcat.Visualizer(zmq_url=zmq_url)
         self.traversal = dict()
         self.model = dict()
         self.link_pos = dict()

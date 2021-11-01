@@ -28,4 +28,7 @@ endif()
 # |- __init__.py (generated from main bindings CMake file).
 # |
 # |_ pybind.<cpython_extension>
-install(TARGETS pybind11_idyntree DESTINATION ${PYTHON_INSTDIR})
+install(
+    TARGETS pybind11_idyntree
+    DESTINATION ${PYTHON_INSTDIR}
+    COMPONENT python)

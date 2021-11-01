@@ -9,11 +9,21 @@ function assertEqual(a, b, message)
 %   msg             optional custom message
 %
 % Raises:
-%   'moxunit:differentSize'         a and b are of different size
-%   'moxunit:differentClass         a and b are of different class
-%   'moxunit:differentSparsity'     a is sparse and b is not, or
-%                                         vice versa
-%   'moxunit:elementsNotEqual'      values in a and b are not equal
+%   'assertEqual:nonEqual'             a and b are of different
+%                                      size or values are not equal
+%   'assertEqual:classNotEqual         a and b are of different class
+%   'assertEqual:sparsityNotEqual'     a is sparse and b is not, or
+%                                      vice versa
+%
+% Examples:
+%   assertEqual('foo','foo');
+%   %|| % passes without output
+%
+%   assertEqual('foo','bar');
+%   %|| error('elements are not equal');
+%
+%   assertEqual([1 2],[1;2]);
+%   %|| error('inputs are not of the same size');
 %
 % Notes:
 %   - If a custom message is provided, then any error message is prefixed
@@ -57,20 +67,21 @@ function assertEqual(a, b, message)
     full_message=moxunit_util_input2str(message,whatswrong,a,b);
 
     if moxunit_util_platform_is_octave()
-        error(error_id,full_message);
+        error(error_id,'%s',full_message);
     else
-        throwAsCaller(MException(error_id, full_message));
+        throwAsCaller(MException(error_id, '%s', full_message));
     end
 
 function tf=isequaln_wrapper(a,b)
 % wrapper to support old versions of Matlab
     persistent has_equaln;
 
-    if isequal(has_equaln,true)
-        tf=isequaln(a,b);
-    elseif isequal(has_equaln,false)
-        tf=isequalwithequalnans(a,b);
-    else
+    if isempty(has_equaln)
         has_equaln=~isempty(which('isequaln'));
-        tf=isequaln_wrapper(a,b);
+    end
+
+    if has_equaln
+        tf=isequaln(a,b);
+    else
+        tf=isequalwithequalnans(a,b);
     end
