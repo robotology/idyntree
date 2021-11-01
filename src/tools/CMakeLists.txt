@@ -11,7 +11,7 @@ macro(IDYNTREE_ADD_TOOL tool_name tool_code)
     target_link_libraries(${tool_name} PRIVATE idyntree-core
                                                idyntree-model
                                                idyntree-high-level
-                                               idyntree-modelio-urdf
+                                               idyntree-modelio
                                                idyntree-visualization
                                                Eigen3::Eigen)
     target_compile_options(${tool_name} PRIVATE ${IDYNTREE_WARNING_FLAGS})
