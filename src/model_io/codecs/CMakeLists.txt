@@ -64,7 +64,7 @@ target_include_directories(${libraryname} PRIVATE $<TARGET_PROPERTY:idyntree-pri
 
 target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
 
-set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODELIO_URDF_HEADERS})
+set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODELIO_HEADERS})
 
 install(TARGETS ${libraryname}
         EXPORT iDynTree
