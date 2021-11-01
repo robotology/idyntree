@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed 
 - In the URDF exporter, export only frames attached to the exported traversal [#914](https://github.com/robotology/idyntree/pull/914).
 - Fixed handling of the AMENT_PREFIX_PATH environment variable (https://github.com/robotology/idyntree/pull/915).
-- `__is_mesh` in the `MeshcatVisualizer` now returns `false` for non-meshes, and instead was raising an error
+- `__is_mesh` in the `MeshcatVisualizer` now returns `false` for non-meshes, and instead was raising an error (https://github.com/robotology/idyntree/pull/925).
 
 ### Deprecated
 - The option `IDYNTREE_COMPILES_YARP_TOOLS`, that was already deprecated in iDynTree 3, is now set to `OFF` by default. It will be removed in iDynTree 5, please use the repo https://github.com/robotology/idyntree-yarp-tools instead (https://github.com/robotology/idyntree/pull/919).
