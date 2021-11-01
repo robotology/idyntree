@@ -58,10 +58,14 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
 
 target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model idyntree-sensors idyntree-modelio-xml
                                      PRIVATE Eigen3::Eigen LibXml2::LibXml2)
+if(IDYNTREE_USES_SDFORMAT)
+  target_compile_definitions(${libraryname} PRIVATE IDYNTREE_USES_SDFORMAT)
+  target_link_libraries(${libraryname} PRIVATE ${idyntree_sdformat_target_name})
+endif()
 # See https://stackoverflow.com/questions/38832528/transitive-target-include-directories-on-object-libraries
 # Can be removed with CMake 3.12
 target_include_directories(${libraryname} PRIVATE $<TARGET_PROPERTY:idyntree-private-fpconv,INTERFACE_INCLUDE_DIRECTORIES>)
-
+if
 target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
 
 set_property(TARGET ${libraryname} PROPERTY PUBLIC_HEADER ${IDYNTREE_MODELIO_URDF_HEADERS})

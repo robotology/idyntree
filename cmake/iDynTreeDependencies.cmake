@@ -113,3 +113,15 @@ if(TARGET assimp::assimp)
                  "${assimp_LOCATION_RELEASE}")
   endif()
 endif()
+
+# Handle SDF manually has idyntree can work with several different major version of sdformat
+# and the option name is always the same, even if the package name changes (sdformat12, sdformat13)
+option(IDYNTREE_USES_SDFORMAT "Build the part of iDynTree that depends on sdformat" OFF)
+# This value is specified as a cache value as it can be specified by configuration
+set(IDYNTREE_USED_SDFORMAT_VERSION 12 CACHE STRING "Major version of SDFormat used by iDynTree configuration")
+option(IDYNTREE_USED_SDFORMAT_VERSION 12)
+set(idyntree_sdformat_package_name "sdformat${IDYNTREE_USED_SDFORMAT_VERSION}")
+set(idyntree_sdformat_target_name "sdformat${IDYNTREE_USED_SDFORMAT_VERSION}::sdformat${IDYNTREE_USED_SDFORMAT_VERSION}")
+if(IDYNTREE_USES_SDFORMAT AND NOT TARGET ${idyntree_sdformat_target_name})
+  find_package(sdformat${IDYNTREE_USED_SDFORMAT_VERSION} REQUIRED)
+endif()
