@@ -9,6 +9,10 @@ on:
   release:
     types:
       - published
+  schedule:
+  # * is a special character in YAML so you have to quote this string
+  # Execute a "weekly" build at 2 AM UTC on Thursday
+  - cron:  '0 2 * * *'
 
 jobs:
 
@@ -87,7 +91,7 @@ jobs:
         run: python -m cibuildwheel --output-dir wheelhouse
         env:
           CIBW_BUILD_VERBOSITY: 1
-          CIBW_BUILD: cp37-*_x86_64 cp38-*_x86_64 cp39-*_x86_64
+          CIBW_BUILD: cp37-*manylinux*_x86_64 cp38-*manylinux*_x86_64 cp39-*manylinux*_x86_64
           CIBW_MANYLINUX_X86_64_IMAGE: manylinux_2_24
           CIBW_ENVIRONMENT_LINUX: AUDITWHEEL_PLAT=manylinux_2_24_x86_64
           CIBW_BEFORE_BUILD_LINUX: |

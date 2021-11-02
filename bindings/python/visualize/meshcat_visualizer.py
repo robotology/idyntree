@@ -34,6 +34,8 @@ class MeshcatVisualizer:
 
     def __is_mesh(self, geometry_object) -> bool:
 
+        if not geometry_object.isExternalMesh():
+            return False
         mesh_path = geometry_object.asExternalMesh().getFileLocationOnLocalFileSystem()
 
         # Check whether the geometry object contains a Mesh supported by MeshCat
@@ -128,9 +130,10 @@ class MeshcatVisualizer:
                     obj = self.__load_mesh(solid_shape)
                     is_mesh = True
                 else:
-                    msg = "The geometry object named " \
-                          + solid_shape.asExternalMesh().getName() \
-                          + " is not supported by iDynTree/MeshCat for visualization."
+
+                    msg = "The geometry object named \"" \
+                          + solid_shape.getName() \
+                          + "\" is not supported by iDynTree/MeshCat for visualization."
                     warnings.warn(msg, category=UserWarning, stacklevel=2)
                     continue
 
