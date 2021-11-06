@@ -31,8 +31,8 @@ void transformClassDefinition(py::class_<Transform>& transform) {
       .def(py::init<const Rotation&, const Position&>())
       .def(py::init<const MatrixFixSize<4, 4>&>())
       .def_static("Identity", &Transform::Identity)
-      .def_property_readonly("rotation", &Transform::getRotation)
-      .def_property_readonly("position", &Transform::getPosition)
+      .def_property("rotation", &Transform::getRotation, &Transform::setRotation)
+      .def_property("position", &Transform::getPosition,  &Transform::setPosition)
       .def("inverse", &Transform::inverse)
       .def(py::self * py::self)
       .def(
