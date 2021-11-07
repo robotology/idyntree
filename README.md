@@ -9,8 +9,9 @@ iDynTree is written in C++ language, but thanks to [SWIG](http://www.swig.org/) 
 
 ##  Contents
 * **[Installation](#installation)**
-* **[Tutorials](#tutorials)**
-* **[Documentation](#documentation)**
+* **[Library Usage](#library-usage)**
+* **[Tools Usage](#tools-usage)**
+* **[Reference Documentation](#reference-documentation)**
 * **[Announcements](#announcements)**
 * **[Developer Documentation](#developer-documentation)**
 * **[Reference Paper](#reference-paper)**
@@ -46,7 +47,6 @@ If you want to build iDynTree directly from source, you can check the documentat
 Once the library is installed, you can link it in C++ programs using `CMake` with as little effort as writing the following line of code in your project's `CMakeLists.txt`:
 ```cmake
 find_package(iDynTree REQUIRED)
-
 target_link_libraries(<target> PRIVATE iDynTree::idyntree-high-level iDynTree::idyntree-estimation)
 ```
 
