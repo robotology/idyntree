@@ -61,6 +61,13 @@ target_link_libraries(<target> PRIVATE iDynTree::idyntree-high-level iDynTree::i
 
 See [CMake's reference documentation](https://cmake.org/cmake/help/latest/) if you need more info on the [`find_package`](https://cmake.org/cmake/help/latest/command/find_package.html) or [`target_link_libraries`](https://cmake.org/cmake/help/latest/command/target_link_libraries.html) CMake commands.
 
+### Usage in MATLAB
+To make sure that iDynTree is available in MATLAB, try to run some simple code that uses it:
+~~~
+p = iDynTree.Position()
+~~~
+
+If this is not working, make sure that you are launching `matlab` after having activated the conda environment (if you installed iDynTree via conda) or after having sourced por executed the correct setup script (if you installed iDynTree via the robotology-superbuild).
 
 ### Tutorials
 
