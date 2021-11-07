@@ -34,14 +34,13 @@ If you are not familiar with conda or conda-forge, you can read an introduction 
 
 ### robotology-superbuild (advanced)
 
-For this reason it is usually installed through the [robotology-superbuild](https://github.com/robotology/robotology-superbuild), an easy way to download, compile and install the robotology software on multiple operating systems, using the [CMake](www.cmake.org) build system and its extension [YCM](http://robotology.github.io/ycm). To get iDynTree when using the `robotology-superbuild`, please enable the `ROBOTOLOGY_ENABLE_DYNAMICS` CMake option of the superbuild. If you want to install also iDynTree Python or MATLAB bindings, remember to enable the `ROBOTOLOGY_USES_PYTHON` or `ROBOTOLOGY_USES_MATLAB` options. 
-
+If you are installing iDynTree for use as part of [iCub humanoid robot software installation](https://icub-tech-iit.github.io/documentation/sw_installation/), you may want to install iDynTree through the [robotology-superbuild](https://github.com/robotology/robotology-superbuild), an easy way to download, compile and install the robotology software on multiple operating systems, using the [CMake](www.cmake.org) build system and its extension [YCM](http://robotology.github.io/ycm). To get iDynTree when using the `robotology-superbuild`, please enable the `ROBOTOLOGY_ENABLE_DYNAMICS` CMake option of the superbuild. If you want to install also iDynTree Python or MATLAB bindings, remember to enable the `ROBOTOLOGY_USES_PYTHON` or `ROBOTOLOGY_USES_MATLAB` options. 
 
 ### Build from source (advanced)
 
 If you want to build iDynTree directly from source, you can check the documentation in [`doc/build-from-source.md`](doc/build-from-source.md).
 
-## Usage
+## Library Usage
 
 ### Usage in C++
 Once the library is installed, you can link it in C++ programs using `CMake` with as little effort as writing the following line of code in your project's `CMakeLists.txt`:
@@ -69,6 +68,28 @@ These tutorials describe how to use specific parts of iDynTree. Are you interest
 | Usage of the MATLAB-native visualizer using the [MATLAB high-level wrappers](bindings/matlab/+iDynTreeWrappers/README.md). | [examples/matlab/iDynTreeWrappers/visualizeRobot.m](examples/matlab/iDynTreeWrappers/visualizeRobot.m) | MATLAB |
 | Basic usage of the [KinDynComputations class](https://robotology.github.io/idyntree/master/classiDynTree_1_1KinDynComputations.html). | [examples/python/KinDynComputationsTutorial.py](examples/python/KinDynComputationsTutorial.py) | Python |
 | Basic usage of the [MeshcatVisualizer class](bindings/python/visualize/meshcat_visualizer.py). | [examples/python/MeshcatVisualizerExample.ipynb](examples/python/MeshcatVisualizerExample.ipynb) | Python |
+
+## Tools Usage 
+
+iDynTree also includes some command line tools to use some of the functionality of the library without writing any line of code. The available command line tools are listed in the following, and each tool also includes an online help that is tipically available by passing the `-h` flag.
+
+### `idyntree-model-info`
+
+Tool that reads a model from a file, and print some useful information as specified via the command line.
+
+Example: Print the total mass of a given model
+~~~
+idyntree-model-info -m <location-of-the-model> --total-mass
+~~~
+
+### `idyntree-model-view`
+
+Tool that reads a model from a file and visualize it using the `idyntree-visualizer` library
+
+Example: Visualize a given model
+~~~
+idyntree-model-view -m <location-of-the-model>
+~~~
 
 
 ## Reference Documentation
