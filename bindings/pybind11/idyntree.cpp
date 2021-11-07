@@ -1,6 +1,7 @@
 #include <vector>
 
 #include "idyntree_core.h"
+#include "idyntree_high_level.h"
 #include "idyntree_model.h"
 #include "idyntree_modelio_urdf.h"
 #include "idyntree_sensors.h"
@@ -17,6 +18,7 @@ PYBIND11_MODULE(pybind, m) {
   iDynTree::bindings::iDynTreeModelBindings(m);
   iDynTree::bindings::iDynTreeSensorsBindings(m);
   iDynTree::bindings::iDynTreeModelIoUrdfBindings(m);
+  iDynTree::bindings::iDynTreeHighLevelBindings(m);
 }
 
 }  // namespace
