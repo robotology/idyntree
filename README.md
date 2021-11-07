@@ -20,11 +20,17 @@ iDynTree is written in C++ language, but thanks to [SWIG](http://www.swig.org/) 
 
 ### conda (recommended) 
 
-You can easily the library with [`conda`](https://github.com/conda-forge/osqp-eigen-feedstock) using the following command
+You can easily the C++ and Python library with via [`conda-forge`](https://conda-forge.org) using the following command
 ~~~
-conda install -c conda-forge osqp-eigen
+conda install -c conda-forge idyntree
 ~~~
 
+If you need to install also the MATLAB bindings, you can install them with:
+~~~
+conda install -c conda-forge -c robotology idyntree-matlab-bindings
+~~~
+
+If you are not familiar with conda or conda-forge, you can read an introduction document in [conda-forge overview](https://github.com/robotology/robotology-superbuild/blob/master/doc/conda-forge.md#conda-forge-overview).
 
 ### robotology-superbuild (advanced)
 
