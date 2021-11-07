@@ -21,7 +21,7 @@ iDynTree is written in C++ language, but thanks to [SWIG](http://www.swig.org/) 
 
 ### conda (recommended) 
 
-You can easily the C++ and Python library with via [`conda-forge`](https://conda-forge.org) using the following command
+You can easily install the C++ and Python library with via [`conda-forge`](https://conda-forge.org) using the following command
 ~~~
 conda install -c conda-forge idyntree
 ~~~
