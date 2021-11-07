@@ -1,11 +1,20 @@
 iDynTree [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0) [![License: LGPL v2](https://img.shields.io/badge/License-LGPL%20v2-blue.svg)](https://www.gnu.org/licenses/lgpl-2.1)  [![ZenHub](https://img.shields.io/badge/Shipping_faster_with-ZenHub-435198.svg)](https://zenhub.com)
 ===========
 
-iDynTree is a library of robots dynamics algorithms for control, estimation and simulation.
+iDynTree is a library of robots dynamics algorithms for control, estimation and simulation. It is specifically designed for free-floating robots, but it is possible to use it also  with fixed-base robots. 
 
-iDynTree is specifically designed for free-floating robots, but it is possible to use it also  with fixed-base robots.
+The **major characteristic features** of iDynTree are:
+* It is written in **C++**, with **Python** and **MATLAB** bindings.
+* It uses an  **undirected graph data structure** (`iDynTree::Model`) that is used to represent robots, to easily change the **base link** that you are using for your kinematics and dynamics computations without the need to reload your model or change your joint or link serializations. This is done as iDynTree was developed for floating-base robots such as humanoids, in which the most convenient choice of **base link** can change.
+* It contains support for **reading and writing URDF files** from a `iDynTree::Model`, making it useful to write tools that modify robot models and saves them back to file. This is done as iDynTree was developed to developed **tools for identification of kinematics and dynamics parameters**.
+* It defaults to use the **mixed representation** to represent link quantities (including the velocity and acceleration of the base link), but it can optionally use also **body (left-trivialized)** or **inertial (right-trivialized)** representation if requested. This is done because iDynTree was developed to satisfy the needs of **research in synthesis of floating-base whole-body controllers**. If you are not familiar with the different representation for 6D quantities, check  [Section 6 of "Multibody dynamics notation (version 2)"](
+https://pure.tue.nl/ws/portalfiles/portal/139293126/A_Multibody_Dynamics_Notation_Revision_2_.pdf).
+* It contains an implementation of the algorithm used in the iCub humanoid robot to **estimate the joint torques without the need of collocated joint torque sensors**, exploting the specific **undirected graph data structure** . This is done as this was one of the originally goal for the implementation of iDynTree. See the class [`iDynTree::ExtWrenchesAndJointTorquesEstimator`](https://github.com/robotology/idyntree/blob/master/src/estimation/include/iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h) and [Chapter 6 of "Modelling, Estimation and Identification of Humanoid Robots Dynamics"](https://traversaro.github.io/traversaro-phd-thesis/traversaro-phd-thesis.pdf).
 
-iDynTree is written in C++ language, but thanks to [SWIG](http://www.swig.org/) it is possible to use the iDynTree algorithms in several other languages. Support and documentation is provided in particular for C++, MATLAB and Python. If you are interested in using iDynTree with another programming language, feel free to [create a new issue](https://github.com/robotology/idyntree/issues/new) requesting support for it.
+To avoid confusion, it is also useful to clarify what **iDynTree is not**:
+* It is not the **fastest C++ library** for kinematics and dynamics multibody computations for robotics. It is not slow, but if have an application in which you need the absolute fastest library, check out [Pinocchio](https://github.com/stack-of-tasks/pinocchio).
+* It is not a **multibody simulator** library. It provides the building blocks that you could use to build a multibody simulator, but it is not a multibody simulator per se. If you need a simulator library in C++, check out [DART](https://dartsim.github.io/), [Simbody](https://github.com/simbody/simbody), [Drake](https://drake.mit.edu/), [MuJoCo](https://mujoco.org/) or the abstraction layer [`ignition-physics`](https://github.com/ignitionrobotics/ign-physics). If you need a simulator implemented in MATLAB/Simulink (built on iDynTree), check [`matlab-whole-body-simulator`](https://github.com/ami-iit/matlab-whole-body-simulator).
+
 
 ##  Contents
 * **[Installation](#installation)**
