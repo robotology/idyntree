@@ -47,7 +47,7 @@ class IDynTreeSensorsTest(unittest.TestCase):
 
   def test_link_sensor_transform(self):
     sensor = iDynTree.AccelerometerSensor()
-    position = iDynTree.Position(1, 2, 3)
+    position = (1, 2, 3)
     rotation = iDynTree.Rotation(0, 0, 1,
                                  1, 0, 0,
                                  0, 1, 0)
