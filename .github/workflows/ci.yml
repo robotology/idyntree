@@ -5,16 +5,16 @@ on:
   pull_request:
   schedule:
   # * is a special character in YAML so you have to quote this string
-  # Execute a "nightly" build at 2 AM UTC 
+  # Execute a "nightly" build at 2 AM UTC
   - cron:  '0 2 * * *'
 
 env:
   YCM_TAG: v0.12.0
   YARP_TAG: v3.4.1
   ICUB_TAG: v1.17.0
-  
+
 jobs:
-  build-with-conda-dependencies:    
+  build-with-conda-dependencies:
     name: '[conda:${{ matrix.os }}]'
     runs-on: ${{ matrix.os }}
     strategy:
@@ -33,25 +33,25 @@ jobs:
         channels: conda-forge,robotology
 
     - name: Install files to enable compilation of mex files [Conda/Linux]
-      if: contains(matrix.os, 'ubuntu') 
+      if: contains(matrix.os, 'ubuntu')
       run: |
         curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020b_mexa64.zip
         unzip msdk_R2020b_mexa64.zip
         rm msdk_R2020b_mexa64.zip
         echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2020b_mexa64" >> $GITHUB_ENV
         echo "GHA_Matlab_MEX_EXTENSION=mexa64" >> $GITHUB_ENV
-                
+
     - name: Install files to enable compilation of mex files [Conda/macOS]
-      if: contains(matrix.os, 'macos') 
+      if: contains(matrix.os, 'macos')
       run: |
         curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020a_mexmaci64.zip
         unzip msdk_R2020a_mexmaci64.zip
         rm msdk_R2020a_mexmaci64.zip
         echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2020a_mexmaci64" >> $GITHUB_ENV
         echo "GHA_Matlab_MEX_EXTENSION=mexmaci64" >> $GITHUB_ENV
-        
+
     - name: Install files to enable compilation of mex files [Conda/Windows]
-      if: contains(matrix.os, 'windows') 
+      if: contains(matrix.os, 'windows')
       shell: bash
       run: |
         curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020a_mexw64.zip
@@ -65,7 +65,7 @@ jobs:
       run: |
         # Workaround for https://github.com/conda-incubator/setup-miniconda/issues/186
         conda config --remove channels defaults
-        # Compilation related dependencies 
+        # Compilation related dependencies
         mamba install cmake compilers make ninja pkg-config
         # Actual dependencies
         mamba install eigen libxml2 assimp ipopt qt irrlicht
@@ -74,7 +74,7 @@ jobs:
 
     # Additional dependencies useful only on Linux
     - name: Dependencies [Conda/Linux]
-      if: contains(matrix.os, 'ubuntu') 
+      if: contains(matrix.os, 'ubuntu')
       shell: bash -l {0}
       run: |
         # Additional dependencies only useful on Linux
@@ -115,14 +115,14 @@ jobs:
       run: |
         cd build
         # Visualizer tests excluded as a workaround for https://github.com/robotology/idyntree/issues/808
-        ctest --output-on-failure -C ${{ matrix.build_type }} -E "Visualizer|matlab" . 
-     
+        ctest --output-on-failure -C ${{ matrix.build_type }} -E "Visualizer|matlab" .
+
     - name: Install [Conda]
       shell: bash -l {0}
       run: |
         cd build
         cmake --install . --config ${{ matrix.build_type }}
-     
+
     - name: Test standalone installation of MATLAB bindings [Conda/Linux&macOS]
       if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
       shell: bash -l {0}
@@ -159,25 +159,25 @@ jobs:
 
 
     - name: Install files to enable compilation of mex files [Linux]
-      if: contains(matrix.os, 'ubuntu') 
+      if: contains(matrix.os, 'ubuntu')
       run: |
         curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020b_mexa64.zip
         unzip msdk_R2020b_mexa64.zip
         rm msdk_R2020b_mexa64.zip
         echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2020b_mexa64" >> $GITHUB_ENV
         echo "GHA_Matlab_MEX_EXTENSION=mexa64" >> $GITHUB_ENV
-                
+
     - name: Install files to enable compilation of mex files [macOS]
-      if: contains(matrix.os, 'macos') 
+      if: contains(matrix.os, 'macos')
       run: |
         curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020a_mexmaci64.zip
         unzip msdk_R2020a_mexmaci64.zip
         rm msdk_R2020a_mexmaci64.zip
         echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2020a_mexmaci64" >> $GITHUB_ENV
         echo "GHA_Matlab_MEX_EXTENSION=mexmaci64" >> $GITHUB_ENV
-        
+
     - name: Install files to enable compilation of mex files [Windows]
-      if: contains(matrix.os, 'windows') 
+      if: contains(matrix.os, 'windows')
       shell: bash
       run: |
         curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020a_mexw64.zip
@@ -190,23 +190,23 @@ jobs:
     - name: Environment Variables
       shell: bash
       run: env
-    
-    # Remove apt repos that are known to break from time to time 
-    # See https://github.com/actions/virtual-environments/issues/323  
+
+    # Remove apt repos that are known to break from time to time
+    # See https://github.com/actions/virtual-environments/issues/323
     - name: Remove broken apt repos [Ubuntu]
       if: contains(matrix.os, 'ubuntu')
       run: |
         for apt_file in `grep -lr microsoft /etc/apt/sources.list.d/`; do sudo rm $apt_file; done
-        
+
     # ============
     # DEPENDENCIES
     # ============
-    
+
     - name: Dependencies [macOS]
       if: matrix.os == 'macOS-latest'
       run: |
         brew install ace assimp boost eigen ipopt irrlicht swig qt5
-    
+
     - name: Dependencies [Ubuntu]
       if: contains(matrix.os, 'ubuntu')
       run: |
@@ -215,9 +215,9 @@ jobs:
             git build-essential cmake libace-dev coinor-libipopt-dev libeigen3-dev swig \
             qtbase5-dev qtdeclarative5-dev qtmultimedia5-dev libqt5charts5-dev \
             libxml2-dev liboctave-dev python-dev python3-numpy valgrind libassimp-dev libirrlicht-dev
-        
-        
-    - name: Source-based Dependencies [Ubuntu/macOS] 
+
+
+    - name: Source-based Dependencies [Ubuntu/macOS]
       if: steps.cache-source-deps.outputs.cache-hit != 'true' && (contains(matrix.os, 'ubuntu') || matrix.os == 'macOS-latest')
       shell: bash
       run: |
@@ -227,28 +227,28 @@ jobs:
         mkdir -p build
         cd build
         cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install/deps ..
-        cmake --build . --config ${{ matrix.build_type }} --target install 
+        cmake --build . --config ${{ matrix.build_type }} --target install
         # YARP
         git clone -b ${YARP_TAG} https://github.com/robotology/yarp
         cd yarp
         mkdir -p build
         cd build
         cmake  -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install/deps -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install/deps ..
-        cmake --build . --config ${{ matrix.build_type }} --target install 
+        cmake --build . --config ${{ matrix.build_type }} --target install
         # ICUB
         git clone -b ${ICUB_TAG} https://github.com/robotology/icub-main
         cd icub-main
         mkdir -p build
         cd build
         cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install/deps -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install/deps ..
-        cmake --build . --config ${{ matrix.build_type }} --target install 
- 
- 
+        cmake --build . --config ${{ matrix.build_type }} --target install
+
+
     - name: Dependencies (workaround for portaudio YCM problem) [macOS]
       if: matrix.os == 'macOS-latest'
       run: |
         brew install octave
- 
+
     # ===================
     # CMAKE-BASED PROJECT
     # ===================
@@ -264,7 +264,7 @@ jobs:
               -DIDYNTREE_USES_MATLAB:BOOL=ON -DMatlab_ROOT_DIR=${GHA_Matlab_ROOT_DIR} -DMatlab_MEX_EXTENSION:STRING=${GHA_Matlab_MEX_EXTENSION} -DIDYNTREE_DISABLE_MATLAB_TESTS:BOOL=ON  \
               -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_OCTAVE:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
 
-    - name: Enable additional Ubuntu options (Valgrind, Python) [Ubuntu] 
+    - name: Enable additional Ubuntu options (Valgrind, Python) [Ubuntu]
       if: contains(matrix.os, 'ubuntu')
       run: |
         cd build
@@ -274,32 +274,32 @@ jobs:
         # As a workaround, we test against the regular blas instead of openblas
         sudo apt-get install libblas-dev libatlas-base-dev
         sudo apt-get remove libopenblas-base
-        
+
     - name: Build
       shell: bash
       run: |
         cd build
-        # Attempt of fix for using YARP idl generators (that link ACE) in Windows 
+        # Attempt of fix for using YARP idl generators (that link ACE) in Windows
         # See https://github.com/robotology/idyntree/issues/569
         export PATH=$PATH:${GITHUB_WORKSPACE}/install/bin:${VCPKG_INSTALLATION_ROOT}/installed/x64-windows/bin:${VCPKG_INSTALLATION_ROOT}/installed/x64-windows/debug/bin
         cmake --build . --config ${{ matrix.build_type }}
-  
-        
+
+
     - name: Test
       shell: bash
       run: |
         cd build
         # Visualizer tests excluded as a workaround for https://github.com/robotology/idyntree/issues/808
-        ctest --output-on-failure -C ${{ matrix.build_type }} -E "Visualizer|matlab" . 
+        ctest --output-on-failure -C ${{ matrix.build_type }} -E "Visualizer|matlab" .
 
-                
+
     - name: Install [Ubuntu/macOS]
       if: contains(matrix.os, 'ubuntu') || matrix.os == 'macOS-latest'
       shell: bash
       run: |
         cd build
         cmake --build . --config ${{ matrix.build_type }} --target install
- 
+
     - name: Compile Examples [Ubuntu/macOS]
       if: contains(matrix.os, 'ubuntu') || matrix.os == 'macOS-latest'
       shell: bash
@@ -307,10 +307,10 @@ jobs:
         cd examples
         mkdir -p build
         cd build
-        cmake -DCMAKE_PREFIX_PATH="${GITHUB_WORKSPACE}/install/deps;${GITHUB_WORKSPACE}/install" .. 
+        cmake -DCMAKE_PREFIX_PATH="${GITHUB_WORKSPACE}/install/deps;${GITHUB_WORKSPACE}/install" ..
         cmake --build . --config ${{ matrix.build_type }}
 
-        
+
     - name: Check build if some dependencies are not enabled [Ubuntu]
       if: contains(matrix.os, 'ubuntu')
       shell: bash
@@ -321,6 +321,6 @@ jobs:
             # Deselect missing dependency and build
             cmake -DIDYNTREE_USES_${missing_dep}:BOOL=OFF .
             cmake --build . --config ${{ matrix.build_type }}
-            # Enable again dependency 
+            # Enable again dependency
             cmake -DIDYNTREE_USES_${missing_dep}:BOOL=ON .
         done
