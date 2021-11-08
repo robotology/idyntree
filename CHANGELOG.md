@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Added the possibility to draw in different portions of the visualizer window and textures at the same time. Allow disabling the drawing on textures (https://github.com/robotology/idyntree/pull/903).
+- Implement iDynTree base type `type_caster` for pybind11 bindings. In other word, `VectorDynSize`,`VectorFixSize`, `MatrixDynSize` and `MatrixFixSize` are now automatically converted in `NumPy` objects (https://github.com/robotology/idyntree/pull/931)
 
 ### Deprecated
 - The `iDynTree::Visualizer::enviroment()` was deprecated. Please use the `iDynTree::Visualizer::environment()` method instead (https://github.com/robotology/idyntree/pull/903).
