@@ -110,12 +110,22 @@ jobs:
         cd build
         ldd ./lib/iDynTreeMEX.mexa64
 
-    - name: Test [Conda]
+    - name: Test [Conda/Linux&macOS]
+      if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
       shell: bash -l {0}
       run: |
         cd build
         # Visualizer tests excluded as a workaround for https://github.com/robotology/idyntree/issues/808
         ctest --output-on-failure -C ${{ matrix.build_type }} -E "Visualizer|matlab" .
+
+    - name: Test [Conda/Windows]
+      if: contains(matrix.os, 'windows')
+      shell: bash -l {0}
+      run: |
+        cd build
+        # Visualizer tests excluded as a workaround for https://github.com/robotology/idyntree/issues/808
+        # Python tests excluded as a workaround for https://github.com/robotology/idyntree/issues/939
+        ctest --output-on-failure -C ${{ matrix.build_type }} -E "Visualizer|matlab|Python|pybind" .
 
     - name: Install [Conda]
       shell: bash -l {0}
