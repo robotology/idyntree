@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fixed the conversion from irrlicht pixels to iDynTree pixels. Fixed a typo in the environment method of the visualizer. Fixed the running of two visualizer instances in the same process (https://github.com/robotology/idyntree/pull/903).
 - Fixed the update of the vectors in the visualization that caused the FPS to drop (https://github.com/robotology/idyntree/pull/921).
+- Fixed compatibility with pybind11 >= 2.6.0 (https://github.com/robotology/idyntree/issues/867, https://github.com/robotology/idyntree/pull/937).
 
 ## [Unreleased]
 

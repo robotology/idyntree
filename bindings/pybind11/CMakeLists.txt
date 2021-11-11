@@ -1,4 +1,4 @@
-pybind11_add_module(pybind11_idyntree SYSTEM idyntree.cpp
+pybind11_add_module(pybind11_idyntree idyntree.cpp
                                     error_utilities.h error_utilities.cpp
                                     idyntree_core.h idyntree_core.cpp
                                     error_utilities.h error_utilities.cpp
