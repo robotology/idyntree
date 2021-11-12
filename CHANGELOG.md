@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The `iDynTree::idyntree-modelio-urdf` CMake imported target used when using classes such as `iDynTree::ModelLoader` and `iDynTree::ModelExporter`  was deprecated. Please use the `iDynTree::idyntree-modelio` imported target instead. 
 
 ### Removed 
-- The tools that depend on YARP (`urdf2dh`, `yarprobotstatepublisher`, `idyntree-sole-gui`, `iDynTreePlotter`) have been moved in [`idyntree-yarp-tools`](https://github.com/robotology/idyntree-yarp-tools) and their have been removed from iDynTree, together with the the option `IDYNTREE_COMPILES_YARP_TOOLS` that was been introduced to disable their compilation in iDynTree 3.
+- The tools that depend on YARP (`urdf2dh`, `yarprobotstatepublisher`, `idyntree-sole-gui`, `iDynTreePlotter`) have been moved in [`idyntree-yarp-tools`](https://github.com/robotology/idyntree-yarp-tools) and their have been removed from iDynTree, together with the the option `IDYNTREE_COMPILES_YARP_TOOLS` that was been introduced to disable their compilation in iDynTree 3 (https://github.com/robotology/idyntree/pull/940).
 
 ### Fixed
 - Fixed the conversion from irrlicht pixels to iDynTree pixels. Fixed a typo in the environment method of the visualizer. Fixed the running of two visualizer instances in the same process (https://github.com/robotology/idyntree/pull/903).
