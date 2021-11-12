@@ -1,9 +1,7 @@
 <map id="YARPConversions.h" name="YARPConversions.h">
-<area shape="rect" id="node1" title=" " alt="" coords="344,5,491,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="199,5,345,32"/>
 <area shape="rect" id="node2" href="$iKinConversionsImplementation_8h.html" title=" " alt="" coords="5,80,248,107"/>
-<area shape="rect" id="node5" href="$skinDynLibConversionsImplementation_8h.html" title=" " alt="" coords="272,80,563,107"/>
-<area shape="rect" id="node7" href="$robotstatepublisher_8cpp.html" title=" " alt="" coords="587,80,762,107"/>
+<area shape="rect" id="node4" href="$skinDynLibConversionsImplementation_8h.html" title=" " alt="" coords="272,80,563,107"/>
 <area shape="rect" id="node3" href="$iKinConversions_8h.html" title=" " alt="" coords="57,155,196,181"/>
-<area shape="rect" id="node4" href="$urdf2dh_8cpp.html" title=" " alt="" coords="77,229,176,256"/>
-<area shape="rect" id="node6" href="$skinDynLibConversions_8h.html" title=" " alt="" coords="324,155,511,181"/>
+<area shape="rect" id="node5" href="$skinDynLibConversions_8h.html" title=" " alt="" coords="324,155,511,181"/>
 </map>

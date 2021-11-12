@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classiDynTree_1_1SparseMatrix_1_1ConstIterator.html" title=" " alt="" coords="5,5,204,47"/>
+<area shape="rect" id="node1" href="$classiDynTree_1_1SpatialInertiaRaw.html" title="Class providing the raw coordinates for a spatial inertia, i.e." alt="" coords="5,5,208,32"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1SpatialInertia.html" title="Class representing a six dimensional inertia." alt="" coords="256,5,431,32"/>
 </map>

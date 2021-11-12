@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['transformconstrainttype_6346',['TransformConstraintType',['../classinternal_1_1kinematics_1_1TransformConstraint.html#aae569ceeb375670f5b2121ac7da5d525',1,'internal::kinematics::TransformConstraint']]]
+  ['unknownwrenchcontacttype_6118',['UnknownWrenchContactType',['../namespaceiDynTree.html#a3af0bfcd7989e409b610847e3b397b26',1,'iDynTree']]]
 ];

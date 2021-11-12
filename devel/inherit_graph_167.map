@@ -1,10 +1,3 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classiDynTree_1_1Sensor.html" title="Interface for Sensor classes in iDynTree ." alt="" coords="5,97,136,123"/>
-<area shape="rect" id="node2" href="$classiDynTree_1_1JointSensor.html" title="Interface for Sensor that are associated to a Joint." alt="" coords="184,42,344,69"/>
-<area shape="rect" id="node4" href="$classiDynTree_1_1LinkSensor.html" title="Interface for Sensor that are associated to a Link." alt="" coords="185,122,343,149"/>
-<area shape="rect" id="node3" href="$classiDynTree_1_1SixAxisForceTorqueSensor.html" title="A six axis force torque sensor class implementation of the Sensor." alt="" coords="399,5,612,47"/>
-<area shape="rect" id="node5" href="$classiDynTree_1_1AccelerometerSensor.html" title="Interface to the Accelerometer class." alt="" coords="392,71,619,98"/>
-<area shape="rect" id="node6" href="$classiDynTree_1_1GyroscopeSensor.html" title="Interface to the Gyroscope class." alt="" coords="405,122,605,149"/>
-<area shape="rect" id="node7" href="$classiDynTree_1_1ThreeAxisAngularAccelerometerSensor.html" title="Class representing a three axis angular accelerometer, i.e." alt="" coords="404,173,607,215"/>
-<area shape="rect" id="node8" href="$classiDynTree_1_1ThreeAxisForceTorqueContactSensor.html" title="Class representing a three axis force&#45;torque contact sensor." alt="" coords="412,239,599,280"/>
+<area shape="rect" id="node1" href="$classiDynTree_1_1SensorsList.html" title="Structure representing a group of sensors associated with an UndirectedTree." alt="" coords="5,5,167,32"/>
 </map>

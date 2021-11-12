@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['sensortype_6344',['SensorType',['../namespaceiDynTree.html#ad291b88efdf5262d744d33f642daf8b9',1,'iDynTree']]],
-  ['switchingpattern_6345',['SwitchingPattern',['../namespaceiDynTree.html#a87e9224ed19ef268687c0d2522048946',1,'iDynTree']]]
+  ['transformconstrainttype_6117',['TransformConstraintType',['../classinternal_1_1kinematics_1_1TransformConstraint.html#aae569ceeb375670f5b2121ac7da5d525',1,'internal::kinematics::TransformConstraint']]]
 ];

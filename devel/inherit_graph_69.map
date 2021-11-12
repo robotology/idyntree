@@ -1,7 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classiDynTree_1_1IJoint.html" title="Interface (i.e." alt="" coords="5,35,125,61"/>
-<area shape="rect" id="node2" href="$classiDynTree_1_1FixedJoint.html" title="Class representing a fixed joint, i.e." alt="" coords="207,5,358,32"/>
-<area shape="rect" id="node3" href="$classiDynTree_1_1MovableJointImpl.html" title="Base template for implementation of non&#45;fixed joints." alt="" coords="173,57,392,98"/>
-<area shape="rect" id="node4" href="$classiDynTree_1_1PrismaticJoint.html" title="Class representing a prismatic joint, i.e." alt="" coords="440,39,617,65"/>
-<area shape="rect" id="node5" href="$classiDynTree_1_1RevoluteJoint.html" title="Class representing a revolute joint, i.e." alt="" coords="441,89,616,116"/>
+<area shape="rect" id="node1" href="$classiDynTree_1_1ILight.html" title="Interface to a light visualization." alt="" coords="5,31,128,57"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1DummyLight.html" title="Dummy light." alt="" coords="176,5,347,32"/>
+<area shape="rect" id="node3" href="$classiDynTree_1_1Light.html" title=" " alt="" coords="202,56,321,83"/>
 </map>

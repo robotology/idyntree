@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['matrixstorageordering_6342',['MatrixStorageOrdering',['../namespaceiDynTree.html#a1d9848852f7effdff0a7206e361759dc',1,'iDynTree']]],
-  ['meshpointtype_6343',['MeshPointType',['../namespaceiDynTree_1_1optimalcontrol.html#a65d86b0558993b768c8644089001aa6a',1,'iDynTree::optimalcontrol']]]
+  ['sensortype_6115',['SensorType',['../namespaceiDynTree.html#ad291b88efdf5262d744d33f642daf8b9',1,'iDynTree']]],
+  ['switchingpattern_6116',['SwitchingPattern',['../namespaceiDynTree.html#a87e9224ed19ef268687c0d2522048946',1,'iDynTree']]]
 ];

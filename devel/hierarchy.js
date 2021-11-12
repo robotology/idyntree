@@ -8,7 +8,6 @@ var hierarchy =
     [ "iDynTree::AttitudeMahonyFilterParameters", "structiDynTree_1_1AttitudeMahonyFilterParameters.html", null ],
     [ "iDynTree::AttitudeQuaternionEKFParameters", "structiDynTree_1_1AttitudeQuaternionEKFParameters.html", null ],
     [ "iDynTree::Axis", "classiDynTree_1_1Axis.html", null ],
-    [ "ChartsManager::ChartInfo::Axis", "structChartsManager_1_1ChartInfo_1_1Axis.html", null ],
     [ "iDynTree::BerdyDynamicVariable", "structiDynTree_1_1BerdyDynamicVariable.html", null ],
     [ "iDynTree::BerdyHelper", "classiDynTree_1_1BerdyHelper.html", null ],
     [ "iDynTree::BerdyOptions", "structiDynTree_1_1BerdyOptions.html", null ],
@@ -19,9 +18,6 @@ var hierarchy =
     [ "iDynTree::BoundingBoxProjectionConstraint", "classiDynTree_1_1BoundingBoxProjectionConstraint.html", null ],
     [ "iDynTree::optimalcontrol::BufferedGroup", "structiDynTree_1_1optimalcontrol_1_1BufferedGroup.html", null ],
     [ "iDynTree::details::calculate_subspan_type< ElementType, Extent, Offset, Count >", "structiDynTree_1_1details_1_1calculate__subspan__type.html", null ],
-    [ "ChartsService", null, [
-      [ "ChartsManager", "classChartsManager.html", null ]
-    ] ],
     [ "iDynTree::optimalcontrol::integrators::CollocationHessianIndex", "classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex.html", null ],
     [ "iDynTree::ColorViz", "classiDynTree_1_1ColorViz.html", [
       [ "iDynTree::PixelViz", "classiDynTree_1_1PixelViz.html", null ]
@@ -174,12 +170,12 @@ var hierarchy =
     [ "ISceneNodeAnimator", null, [
       [ "iDynTree::CameraAnimator", "classiDynTree_1_1CameraAnimator.html", null ]
     ] ],
-    [ "iDynTree::SparseMatrix< ordering >::Iterator", "classiDynTree_1_1SparseMatrix_1_1Iterator.html", null ],
     [ "iDynTree::SensorsList::Iterator", "classiDynTree_1_1SensorsList_1_1Iterator.html", null ],
     [ "iterator", null, [
       [ "iDynTree::optimization::DenseIterator", "classiDynTree_1_1optimization_1_1DenseIterator.html", null ],
       [ "iDynTree::optimization::TripletIterator", "classiDynTree_1_1optimization_1_1TripletIterator.html", null ]
     ] ],
+    [ "iDynTree::SparseMatrix< ordering >::Iterator", "classiDynTree_1_1SparseMatrix_1_1Iterator.html", null ],
     [ "iDynTree::ITexture", "classiDynTree_1_1ITexture.html", [
       [ "iDynTree::Texture", "classiDynTree_1_1Texture.html", null ]
     ] ],
@@ -275,22 +271,7 @@ var hierarchy =
     [ "iDynTree::ModelExporter::Pimpl", "classiDynTree_1_1ModelExporter_1_1Pimpl.html", null ],
     [ "iDynTree::Polygon", "classiDynTree_1_1Polygon.html", null ],
     [ "iDynTree::Polygon2D", "classiDynTree_1_1Polygon2D.html", null ],
-    [ "QMainWindow", null, [
-      [ "ChartsManagerWindow", "classChartsManagerWindow.html", null ]
-    ] ],
-    [ "QQmlExtensionPlugin", null, [
-      [ "QtiDynTreeSoleGuiPluginPlugin", "classQtiDynTreeSoleGuiPluginPlugin.html", null ]
-    ] ],
-    [ "QQuickPaintedItem", null, [
-      [ "QtiDynTreeSoleGuiPlugin", "classQtiDynTreeSoleGuiPlugin.html", null ]
-    ] ],
     [ "cmdline::range_reader< T >", "structcmdline_1_1range__reader.html", null ],
-    [ "RateThread", null, [
-      [ "ObserverThread", "classObserverThread.html", null ]
-    ] ],
-    [ "RFModule", null, [
-      [ "YARPRobotStatePublisherModule", "classYARPRobotStatePublisherModule.html", null ]
-    ] ],
     [ "iDynTree::RigidBodyInertiaNonLinearParametrization", "classiDynTree_1_1RigidBodyInertiaNonLinearParametrization.html", null ],
     [ "iDynTree::SchmittParams", "structiDynTree_1_1SchmittParams.html", null ],
     [ "iDynTree::SchmittTrigger", "classiDynTree_1_1SchmittTrigger.html", null ],
@@ -360,9 +341,6 @@ var hierarchy =
     [ "iDynTree::stackEl", "structiDynTree_1_1stackEl.html", null ],
     [ "state", "structstate.html", null ],
     [ "iDynTree::SubModelDecomposition", "classiDynTree_1_1SubModelDecomposition.html", null ],
-    [ "Subscriber", null, [
-      [ "JointStateSubscriber", "classJointStateSubscriber.html", null ]
-    ] ],
     [ "iDynTree::optimalcontrol::SystemLineariser", "classiDynTree_1_1optimalcontrol_1_1SystemLineariser.html", null ],
     [ "iDynTree::TestMatrixMismatch", "structiDynTree_1_1TestMatrixMismatch.html", null ],
     [ "iDynTree::ThreeAxisAngularAccelerometerSensor::ThreeAxisAngularAccelerometerPrivateAttributes", "structiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1_1ThreeAxisAngularAccelerometerPrivateAttributes.html", null ],
@@ -381,8 +359,8 @@ var hierarchy =
     [ "internal::kinematics::TransformConstraint", "classinternal_1_1kinematics_1_1TransformConstraint.html", null ],
     [ "iDynTree::TransformDerivative", "classiDynTree_1_1TransformDerivative.html", null ],
     [ "iDynTree::Traversal", "classiDynTree_1_1Traversal.html", null ],
-    [ "iDynTree::Triplet", "classiDynTree_1_1Triplet.html", null ],
     [ "iDynTree::optimization::Triplet", "classiDynTree_1_1optimization_1_1Triplet.html", null ],
+    [ "iDynTree::Triplet", "classiDynTree_1_1Triplet.html", null ],
     [ "iDynTree::SparseMatrix< ordering >::Iterator::TripletRef", "classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef.html", null ],
     [ "iDynTree::Triplets", "classiDynTree_1_1Triplets.html", null ],
     [ "true_type", null, [

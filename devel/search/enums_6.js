@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['lighttype_6341',['LightType',['../namespaceiDynTree.html#aad6844bb3e20ca63bfe9e3ee6e26515a',1,'iDynTree']]]
+  ['matrixstorageordering_6113',['MatrixStorageOrdering',['../namespaceiDynTree.html#a1d9848852f7effdff0a7206e361759dc',1,'iDynTree']]],
+  ['meshpointtype_6114',['MeshPointType',['../namespaceiDynTree_1_1optimalcontrol.html#a65d86b0558993b768c8644089001aa6a',1,'iDynTree::optimalcontrol']]]
 ];

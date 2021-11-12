@@ -1,5 +1,5 @@
 <map id="Traversal.h" name="Traversal.h">
-<area shape="rect" id="node1" title=" " alt="" coords="2477,5,2570,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="2371,5,2465,32"/>
 <area shape="rect" id="node2" href="$BerdyHelper_8h.html" title=" " alt="" coords="202,87,317,114"/>
 <area shape="rect" id="node3" href="$BerdyHelper_8cpp.html" title=" " alt="" coords="5,177,135,203"/>
 <area shape="rect" id="node5" href="$ExtWrenchesAndJointTorquesEstimator_8h.html" title=" " alt="" coords="341,80,551,121"/>
@@ -23,8 +23,7 @@
 <area shape="rect" id="node26" href="$URDFModelExport_8cpp.html" title=" " alt="" coords="3807,87,3975,114"/>
 <area shape="rect" id="node27" href="$PredictSensorsMeasurements_8cpp.html" title=" " alt="" coords="3999,87,4242,114"/>
 <area shape="rect" id="node28" href="$SixAxisForceTorqueSensor_8cpp.html" title=" " alt="" coords="4266,87,4485,114"/>
-<area shape="rect" id="node29" href="$robotstatepublisher_8cpp.html" title=" " alt="" coords="4509,87,4684,114"/>
-<area shape="rect" id="node30" href="$ModelVisualization_8cpp.html" title=" " alt="" coords="4709,87,4882,114"/>
+<area shape="rect" id="node29" href="$ModelVisualization_8cpp.html" title=" " alt="" coords="4509,87,4682,114"/>
 <area shape="rect" id="node4" href="$BerdySparseMAPSolver_8cpp.html" title=" " alt="" coords="159,177,359,203"/>
 <area shape="rect" id="node8" href="$GravityCompensationHelpers_8cpp.html" title=" " alt="" coords="619,177,860,203"/>
 <area shape="rect" id="node10" href="$SimpleLeggedOdometry_8cpp.html" title=" " alt="" coords="884,177,1088,203"/>

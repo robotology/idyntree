@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classiDynTree_1_1Triplet.html" title=" " alt="" coords="5,5,132,32"/>
+<area shape="rect" id="node1" href="$classiDynTree_1_1VectorDynSize.html" title="Class providing a simple form of vector with dynamic size." alt="" coords="5,46,187,73"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1JointDOFsDoubleArray.html" title="Class for storing a vector of scalar values, one for each internal coordinate in a model." alt="" coords="235,5,432,47"/>
+<area shape="rect" id="node3" href="$classiDynTree_1_1JointPosDoubleArray.html" title="Class for storing a vector of scalar values, one for each internal position coordinate in a model." alt="" coords="241,71,426,112"/>
 </map>

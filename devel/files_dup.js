@@ -46,15 +46,6 @@ var files_dup =
       [ "CameraAnimator", "classiDynTree_1_1CameraAnimator.html", "classiDynTree_1_1CameraAnimator" ]
     ] ],
     [ "Centroidal.h", "Centroidal_8h.html", null ],
-    [ "ChartsManager.cpp", "ChartsManager_8cpp.html", "ChartsManager_8cpp" ],
-    [ "ChartsManager.h", "ChartsManager_8h.html", [
-      [ "ChartsManager", "classChartsManager.html", "classChartsManager" ],
-      [ "Axis", "structChartsManager_1_1ChartInfo_1_1Axis.html", "structChartsManager_1_1ChartInfo_1_1Axis" ]
-    ] ],
-    [ "ChartsManagerWindow.cpp", "ChartsManagerWindow_8cpp.html", null ],
-    [ "ChartsManagerWindow.h", "ChartsManagerWindow_8h.html", [
-      [ "ChartsManagerWindow", "classChartsManagerWindow.html", "classChartsManagerWindow" ]
-    ] ],
     [ "ClassicalAcc.cpp", "ClassicalAcc_8cpp.html", "ClassicalAcc_8cpp" ],
     [ "ClassicalAcc.h", "ClassicalAcc_8h.html", null ],
     [ "CMakeCXXCompilerId.cpp", "CMakeCXXCompilerId_8cpp.html", "CMakeCXXCompilerId_8cpp" ],
@@ -272,9 +263,6 @@ var files_dup =
     [ "LinkTraversalsCache.h", "LinkTraversalsCache_8h.html", [
       [ "LinkTraversalsCache", "classiDynTree_1_1LinkTraversalsCache.html", "classiDynTree_1_1LinkTraversalsCache" ]
     ] ],
-    [ "idyntree-sole-gui/src/main.cpp", "idyntree-sole-gui_2src_2main_8cpp.html", "idyntree-sole-gui_2src_2main_8cpp" ],
-    [ "plotter/src/main.cpp", "plotter_2src_2main_8cpp.html", "plotter_2src_2main_8cpp" ],
-    [ "yarprobotstatepublisher/src/main.cpp", "yarprobotstatepublisher_2src_2main_8cpp.html", "yarprobotstatepublisher_2src_2main_8cpp" ],
     [ "MaterialElement.cpp", "MaterialElement_8cpp.html", null ],
     [ "MaterialElement.h", "MaterialElement_8h.html", [
       [ "MaterialElement", "classiDynTree_1_1MaterialElement.html", "classiDynTree_1_1MaterialElement" ],
@@ -319,10 +307,6 @@ var files_dup =
     [ "MultiBodySystem.h", "MultiBodySystem_8h.html", null ],
     [ "MultipleShootingSolver.cpp", "MultipleShootingSolver_8cpp.html", "MultipleShootingSolver_8cpp" ],
     [ "MultipleShootingSolver.h", "MultipleShootingSolver_8h.html", null ],
-    [ "ObserverThread.cpp", "ObserverThread_8cpp.html", "ObserverThread_8cpp" ],
-    [ "ObserverThread.h", "ObserverThread_8h.html", [
-      [ "ObserverThread", "classObserverThread.html", "classObserverThread" ]
-    ] ],
     [ "OptimalControl.h", "OptimalControl_8h.html", null ],
     [ "OptimalControlProblem.cpp", "OptimalControlProblem_8cpp.html", "OptimalControlProblem_8cpp" ],
     [ "OptimalControlProblem.h", "OptimalControlProblem_8h.html", null ],
@@ -360,14 +344,6 @@ var files_dup =
     [ "PrivatePreProcessorUtils.h", "PrivatePreProcessorUtils_8h.html", "PrivatePreProcessorUtils_8h" ],
     [ "PrivateUtils.cpp", "PrivateUtils_8cpp.html", "PrivateUtils_8cpp" ],
     [ "PrivateUtils.h", "PrivateUtils_8h.html", "PrivateUtils_8h" ],
-    [ "qticubskinguiplugin.cpp", "qticubskinguiplugin_8cpp.html", "qticubskinguiplugin_8cpp" ],
-    [ "qticubskinguiplugin.h", "qticubskinguiplugin_8h.html", [
-      [ "QtiDynTreeSoleGuiPlugin", "classQtiDynTreeSoleGuiPlugin.html", "classQtiDynTreeSoleGuiPlugin" ]
-    ] ],
-    [ "qticubskinguiplugin_plugin.cpp", "qticubskinguiplugin__plugin_8cpp.html", null ],
-    [ "qticubskinguiplugin_plugin.h", "qticubskinguiplugin__plugin_8h.html", [
-      [ "QtiDynTreeSoleGuiPluginPlugin", "classQtiDynTreeSoleGuiPluginPlugin.html", "classQtiDynTreeSoleGuiPluginPlugin" ]
-    ] ],
     [ "QuadraticCost.cpp", "QuadraticCost_8cpp.html", null ],
     [ "QuadraticCost.h", "QuadraticCost_8h.html", null ],
     [ "QuadraticLikeCost.cpp", "QuadraticLikeCost_8cpp.html", null ],
@@ -379,11 +355,6 @@ var files_dup =
     [ "RobotElement.cpp", "RobotElement_8cpp.html", null ],
     [ "RobotElement.h", "RobotElement_8h.html", [
       [ "RobotElement", "classiDynTree_1_1RobotElement.html", "classiDynTree_1_1RobotElement" ]
-    ] ],
-    [ "robotstatepublisher.cpp", "robotstatepublisher_8cpp.html", null ],
-    [ "robotstatepublisher.h", "robotstatepublisher_8h.html", [
-      [ "JointStateSubscriber", "classJointStateSubscriber.html", "classJointStateSubscriber" ],
-      [ "YARPRobotStatePublisherModule", "classYARPRobotStatePublisherModule.html", "classYARPRobotStatePublisherModule" ]
     ] ],
     [ "Rotation.cpp", "Rotation_8cpp.html", "Rotation_8cpp" ],
     [ "Rotation.h", "Rotation_8h.html", null ],
@@ -503,8 +474,6 @@ var files_dup =
     ] ],
     [ "Twist.cpp", "Twist_8cpp.html", null ],
     [ "Twist.h", "Twist_8h.html", null ],
-    [ "urdf2dh.cpp", "urdf2dh_8cpp.html", "urdf2dh_8cpp" ],
-    [ "urdf2dh_helpers.h", "urdf2dh__helpers_8h.html", "urdf2dh__helpers_8h" ],
     [ "URDFDocument.cpp", "URDFDocument_8cpp.html", "URDFDocument_8cpp" ],
     [ "URDFDocument.h", "URDFDocument_8h.html", [
       [ "URDFDocument", "classiDynTree_1_1URDFDocument.html", "classiDynTree_1_1URDFDocument" ]

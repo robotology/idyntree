@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['berdydynamicvariablestypes_6331',['BerdyDynamicVariablesTypes',['../group__iDynTreeExperimental.html#ga83d8f828969dabc7dc82904d8de15312',1,'iDynTree']]],
-  ['berdysensortypes_6332',['BerdySensorTypes',['../group__iDynTreeExperimental.html#gab629c8d25391838124595ba8961654e4',1,'iDynTree']]],
-  ['berdyvariants_6333',['BerdyVariants',['../group__iDynTreeExperimental.html#ga62aff3167b9df327b4b1db6affadd21f',1,'iDynTree']]]
+  ['contactfoot_6105',['contactFoot',['../classiDynTree_1_1BipedFootContactClassifier.html#af20af239a0c6b136d86155c97f12d49c',1,'iDynTree::BipedFootContactClassifier']]],
+  ['contacttransition_6106',['contactTransition',['../classiDynTree_1_1ContactStateMachine.html#a3ff1e2de3b160f0a4a4b3b6de6593a49',1,'iDynTree::ContactStateMachine']]]
 ];

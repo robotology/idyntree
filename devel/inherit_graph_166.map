@@ -1,3 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classiDynTree_1_1SchmittTrigger.html" title="Schmitt Trigger class for binary state detection This device is used to obtain a binary state (ON/OFF..." alt="" coords="5,5,187,32"/>
+<area shape="rect" id="node1" href="$classiDynTree_1_1SensorHelper.html" title=" " alt="" coords="5,78,180,105"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1AccelerometerSensorHelper.html" title=" " alt="" coords="228,5,455,47"/>
+<area shape="rect" id="node3" href="$classiDynTree_1_1ForceTorqueSensorHelper.html" title=" " alt="" coords="237,71,446,112"/>
+<area shape="rect" id="node4" href="$classiDynTree_1_1GyroscopeSensorHelper.html" title=" " alt="" coords="241,136,441,177"/>
 </map>
