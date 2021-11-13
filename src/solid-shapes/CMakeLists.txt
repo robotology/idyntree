@@ -1,7 +1,9 @@
 set(libraryname idyntree-solid-shapes)
 
-set(IDYNTREE_SOLID_SHAPES_SOURCES src/InertialParametersSolidShapesHelpers.cpp)
-set(IDYNTREE_SOLID_SHAPES_HEADERS include/iDynTree/InertialParametersSolidShapesHelpers.h)
+set(IDYNTREE_SOLID_SHAPES_SOURCES src/InertialParametersSolidShapesHelpers.cpp
+                                  src/ModelTransformersSolidShapes.cpp)
+set(IDYNTREE_SOLID_SHAPES_HEADERS include/iDynTree/InertialParametersSolidShapesHelpers.h
+                                  include/iDynTree/ModelTransformersSolidShapes.h)
 
 add_library(${libraryname} ${IDYNTREE_SOLID_SHAPES_HEADERS} ${IDYNTREE_SOLID_SHAPES_SOURCES})
 add_library(iDynTree::${libraryname} ALIAS ${libraryname})
