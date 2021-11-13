@@ -10,6 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added support for exporting joint position limits to URDF for 1-DoF joints
   (prismatic and revolute).
 - Added pybind11 python bindings for adding and reading joint limits.
+- Added the `ModelTransformsSolidShapes.h` header in the `iDynTree::idyntree-solid-shapes` library.
+  At the moment, this header contains just the `iDynTree::approximateSolidShapesWithPrimitiveShape`
+  function, useful to approximate the solid shapes of a given iDynTree::Model to a series of bounding boxes (https://github.com/robotology/idyntree/pull/941).
+- Added `idyntree-model-simplify-shapes` command line tool. This tool is useful to take in input a model, and 
+  return in output the same model, but with all the geometries of the model approximated with their axis aligned 
+  bounding boxes (https://github.com/robotology/idyntree/issues/933, https://github.com/robotology/idyntree/pull/941).
 
 ### Fixed 
 - In the URDF exporter, export only frames attached to the exported traversal [#914](https://github.com/robotology/idyntree/pull/914).

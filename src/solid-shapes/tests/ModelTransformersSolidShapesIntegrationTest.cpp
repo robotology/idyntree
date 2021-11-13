@@ -33,7 +33,7 @@ void checkThatOneSphereIsApproximatedToABox()
     // Compute the simplified model
     iDynTree::Model oneBoxModel;
     ApproximateSolidShapesWithPrimitiveShapeOptions options = ApproximateSolidShapesWithPrimitiveShapeOptions();
-    options.conversionType = ConvertSolidShapesWithEnclosingAxiAlignedBoundingBox;
+    options.conversionType = ConvertSolidShapesWithEnclosingAxisAlignedBoundingBoxes;
     bool ok = approximateSolidShapesWithPrimitiveShape(oneSphereModel, oneBoxModel);
     ASSERT_IS_TRUE(ok);
 

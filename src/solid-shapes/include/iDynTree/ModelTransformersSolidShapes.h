@@ -20,12 +20,12 @@ class Model;
 class SensorsList;
 
 enum ApproximateSolidShapesWithPrimitiveShapeConversionType {
-    ConvertSolidShapesWithEnclosingAxiAlignedBoundingBox
+    ConvertSolidShapesWithEnclosingAxisAlignedBoundingBoxes
 };
 
 struct ApproximateSolidShapesWithPrimitiveShapeOptions 
 {
-    ApproximateSolidShapesWithPrimitiveShapeConversionType conversionType = ConvertSolidShapesWithEnclosingAxiAlignedBoundingBox;
+    ApproximateSolidShapesWithPrimitiveShapeConversionType conversionType = ConvertSolidShapesWithEnclosingAxisAlignedBoundingBoxes;
 };
 
 /**
@@ -35,7 +35,7 @@ struct ApproximateSolidShapesWithPrimitiveShapeOptions
  * solid shapes of the model (both collision and visual) substituted with a primitive shape 
  * that approximates in some way the original solid shape.
  *
- * \note At the moment, the only conversion type provides is to approximate each solid
+ * \note At the moment, the only conversion type provided is to approximate each solid
  * shape of the model with its axis aligned bounding box, using the iDynTree::computeBoundingBoxFromShape
  * function.
  *
