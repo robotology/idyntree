@@ -1189,7 +1189,7 @@ public:
      * |`FrameVelocityRepresentation` |  `linkInternalWrenches(i)` |
      * |:----------------------------:|:--------------------------:|
      * | `MIXED_REPRESENTATION` (default) | \f$ {}_{L[A]} \mathrm{f}_{\lambda(L), L} \f$ |
-     * | `BODY_FIXED_REPRESENTATION` | f$ {}_{L} \mathrm{f}_{\lambda(L), L} \f$ |
+     * | `BODY_FIXED_REPRESENTATION` | \f$ {}_{L} \mathrm{f}_{\lambda(L), L} \f$ |
      * | `INERTIAL_FIXED_REPRESENTATION` | \f$ {}_{A} \mathrm{f}_{\lambda(L), L} \f$ |
      *
      * Where if \f$C\f$ is a given frame, \f$ {}_{C} \mathrm{f}_{\lambda(L), L} \f$ is the 6D force/torque that the
