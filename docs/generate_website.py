@@ -16,10 +16,10 @@ def generate_documentation(tag, options):
 
     root_folder = "../"
     if tag != 'master':
-        os.chdir('bipedal-locomotion-framework')
+        os.chdir('idyntree')
         subprocess.Popen(["git", "checkout", tag], stdout=subprocess.PIPE)
         os.chdir('..')
-        root_folder = "bipedal-locomotion-framework/"
+        root_folder = "idyntree/"
 
     additional_pages = []
     if 'additional_pages' in options.keys():
