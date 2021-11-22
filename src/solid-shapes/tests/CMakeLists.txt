@@ -21,3 +21,4 @@ macro(add_unit_test classname)
 endmacro()
 
 add_unit_test(InertialParametersSolidShapesHelpers)
+add_unit_test(ModelTransformersSolidShapes)
