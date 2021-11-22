@@ -1,5 +1,6 @@
 var NAVTREEINDEX8 =
 {
+"classiDynTree_1_1FreeFloatingMassMatrix.html#afbcf1bf37275f811cab76cda68cad818":[5,0,1,65,0],
 "classiDynTree_1_1FreeFloatingPos.html":[5,0,1,66],
 "classiDynTree_1_1FreeFloatingPos.html#a279b784f801f6b74df935e941eb97335":[5,0,1,66,6],
 "classiDynTree_1_1FreeFloatingPos.html#a31608c663581f5b26e85f5819dffea73":[5,0,1,66,7],
@@ -248,6 +249,5 @@ var NAVTREEINDEX8 =
 "classiDynTree_1_1ILight.html#ada6d0932d2ae3729b032ed9b5200ece6":[5,0,1,85,0],
 "classiDynTree_1_1IModelVisualization.html":[5,0,1,86],
 "classiDynTree_1_1IModelVisualization.html#a0417a81f8bc5cd5e9f817d55cc144b5f":[5,0,1,86,5],
-"classiDynTree_1_1IModelVisualization.html#a07a1db66cf54ad7905e9e175cbbaa02c":[5,0,1,86,18],
-"classiDynTree_1_1IModelVisualization.html#a17fc5c0d21dbd2480e28afda70955804":[5,0,1,86,9]
+"classiDynTree_1_1IModelVisualization.html#a07a1db66cf54ad7905e9e175cbbaa02c":[5,0,1,86,18]
 };

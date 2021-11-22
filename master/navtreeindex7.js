@@ -1,5 +1,6 @@
 var NAVTREEINDEX7 =
 {
+"classiDynTree_1_1DummyModelVisualization.html#a21f7e1d8640c435742c0abf372a7d747":[5,0,1,50,19],
 "classiDynTree_1_1DummyModelVisualization.html#a36ebfe454c9cb3851f988ff2b789fd8d":[5,0,1,50,8],
 "classiDynTree_1_1DummyModelVisualization.html#a3bdcdfcaf1c37690a010f3429bc050d0":[5,0,1,50,14],
 "classiDynTree_1_1DummyModelVisualization.html#a41403854207527201ee17f50fd5f4336":[5,0,1,50,20],
@@ -248,6 +249,5 @@ var NAVTREEINDEX7 =
 "classiDynTree_1_1FreeFloatingMassMatrix.html#ae25ad33695edf5ec1b43e13ffcfdde2c":[5,0,1,65,23],
 "classiDynTree_1_1FreeFloatingMassMatrix.html#ae86eb69f39997bd181971d9bd5f56950":[5,0,1,65,21],
 "classiDynTree_1_1FreeFloatingMassMatrix.html#aec352e4bfae97705cbe42eb99b91b969":[5,0,1,65,5],
-"classiDynTree_1_1FreeFloatingMassMatrix.html#af1d85eadf886d3fb508e2bf9e9788600":[5,0,1,65,25],
-"classiDynTree_1_1FreeFloatingMassMatrix.html#afbcf1bf37275f811cab76cda68cad818":[5,0,1,65,0]
+"classiDynTree_1_1FreeFloatingMassMatrix.html#af1d85eadf886d3fb508e2bf9e9788600":[5,0,1,65,25]
 };

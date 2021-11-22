@@ -1,5 +1,6 @@
 var NAVTREEINDEX9 =
 {
+"classiDynTree_1_1IModelVisualization.html#a17fc5c0d21dbd2480e28afda70955804":[5,0,1,86,9],
 "classiDynTree_1_1IModelVisualization.html#a18789f25967f8c105cefaaa5a9a58244":[5,0,1,86,16],
 "classiDynTree_1_1IModelVisualization.html#a30b9126e3d854c657013e7af4b8a6084":[5,0,1,86,0],
 "classiDynTree_1_1IModelVisualization.html#a416adb24480ac485047155ab3a053f24":[5,0,1,86,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX9 =
 "classiDynTree_1_1JointPosDoubleArray.html#adb08f82f775b84bd0e0f8964b5c42dc5":[5,0,1,96,29],
 "classiDynTree_1_1JointPosDoubleArray.html#adb3205ed58008a5d54c9cd84b155d6e9":[5,0,1,96,28],
 "classiDynTree_1_1JointPosDoubleArray.html#ae0939194f829b13a798bc7120efa26c9":[5,0,1,96,23],
-"classiDynTree_1_1JointPosDoubleArray.html#ae4f23d980b16dac5b100ec8eaa37f848":[5,0,1,96,31],
-"classiDynTree_1_1JointPosDoubleArray.html#af1d48bf5aac5f4cf8c87e3ac161d2523":[5,0,1,96,32]
+"classiDynTree_1_1JointPosDoubleArray.html#ae4f23d980b16dac5b100ec8eaa37f848":[5,0,1,96,31]
 };

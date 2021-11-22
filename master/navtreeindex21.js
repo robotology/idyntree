@@ -1,5 +1,13 @@
 var NAVTREEINDEX21 =
 {
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ae00c9061c568494f23b858ad05a0ff02":[3,7,34,28],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ae1726e0a4c497e0dc23c5c1bdc352863":[3,7,34,10],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ae9c9fd426f107159f3e5354fd3f0562e":[3,7,34,26],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#aeb28846afd2fe3f4373b646d49fbba97":[3,7,34,27],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#afc82f38e5250adee9edcd89cd1168ac4":[3,7,34,2],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost.html":[3,7,35],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost.html#a155ce5315d859f994510ba47adad0ef1":[3,7,35,9],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost.html#a379ea8c1910865e1ad109cc46ad8bfb6":[3,7,35,17],
 "classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost.html#a416877725e0df7d52ef0f599b39db143":[3,7,35,14],
 "classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost.html#a41bc5547c17cf3b7490ea15361fc0de8":[3,7,35,15],
 "classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost.html#a47cce0b64dbbba8e0eac180f0dd19e20":[3,7,35,4],
@@ -241,13 +249,5 @@ var NAVTREEINDEX21 =
 "classiDynTree_1_1optimization_1_1AlglibInterface.html":[3,7,30],
 "classiDynTree_1_1optimization_1_1AlglibInterface.html#a059093f5710fc6bca4bfb52c1f192fe3":[3,7,30,10],
 "classiDynTree_1_1optimization_1_1AlglibInterface.html#a08953636337b1414052f329f42649f0f":[3,7,30,8],
-"classiDynTree_1_1optimization_1_1AlglibInterface.html#a21aebbcc1e60dd526f74f996fe1d9e22":[3,7,30,11],
-"classiDynTree_1_1optimization_1_1AlglibInterface.html#a237d586b135d79150a50d6fea5ea9cf2":[3,7,30,12],
-"classiDynTree_1_1optimization_1_1AlglibInterface.html#a33e40b7437e55dd6f36104d1a4d914cf":[3,7,30,13],
-"classiDynTree_1_1optimization_1_1AlglibInterface.html#a6836c50c97f711451f5c0f011a2efddb":[3,7,30,17],
-"classiDynTree_1_1optimization_1_1AlglibInterface.html#a755cbbeae4bc97b311ce8ec031779f50":[3,7,30,3],
-"classiDynTree_1_1optimization_1_1AlglibInterface.html#a75cc0634b21a7148022f6e84236cfbff":[3,7,30,1],
-"classiDynTree_1_1optimization_1_1AlglibInterface.html#a79a9f496151b7de19c9a998be4f323a9":[3,7,30,15],
-"classiDynTree_1_1optimization_1_1AlglibInterface.html#a8f2bcb36bd7f6cdc9857c8212785ea4c":[3,7,30,5],
-"classiDynTree_1_1optimization_1_1AlglibInterface.html#a9378c189eddd25f3da3171d9d2be7224":[3,7,30,6]
+"classiDynTree_1_1optimization_1_1AlglibInterface.html#a21aebbcc1e60dd526f74f996fe1d9e22":[3,7,30,11]
 };

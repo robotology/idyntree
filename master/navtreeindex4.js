@@ -1,5 +1,6 @@
 var NAVTREEINDEX4 =
 {
+"classObserverThread.html#a37796c9a53d7e074b82c28eeb2b123d8":[5,0,8,9],
 "classObserverThread.html#a3fb73c984f5f77c2d76c417ca7bb7fd4":[5,0,8,3],
 "classObserverThread.html#a46a314cd849f89fb117f83a758bfcb93":[5,0,8,26],
 "classObserverThread.html#a48897dbaf2920981a18ef820a7e872fa":[5,0,8,11],
@@ -248,6 +249,5 @@ var NAVTREEINDEX4 =
 "classiDynTree_1_1AttitudeQuaternionEKF.html#add647ea478071ebfc8d16a421c36f3ef":[5,0,1,12,17],
 "classiDynTree_1_1AttitudeQuaternionEKF.html#addb65b053f2854685bb193318cfd5e6c":[5,0,1,12,11],
 "classiDynTree_1_1AttitudeQuaternionEKF.html#aeba1557b81069aec88408f1d54b1ca9f":[5,0,1,12,40],
-"classiDynTree_1_1AttitudeQuaternionEKF.html#af2c3440e43f4a09841e7aacb977fc5f6":[5,0,1,12,20],
-"classiDynTree_1_1AttitudeQuaternionEKF.html#af2ec69c3ded347027f494c84af300d45":[5,0,1,12,29]
+"classiDynTree_1_1AttitudeQuaternionEKF.html#af2c3440e43f4a09841e7aacb977fc5f6":[5,0,1,12,20]
 };

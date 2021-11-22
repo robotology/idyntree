@@ -303,10 +303,10 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>NLP-based Inverse kinematics. </p>
 <p>Given a mechanical structure configuration </p><p class="formulaDsp">
-\[ q \in SE(3) \times \mathbb{R}^n \]
+\[ q \in \operatorname{SE}(3) \times \mathbb{R}^n \]
 </p>
 <p> and possibly multiple target frames </p><p class="formulaDsp">
-\[ F_i^d \in \SE(3) \]
+\[ F_i^d \in \operatorname{SE}(3) \]
 </p>
 <p> the inverse kinematics is responsible to find the configuration \( q^* \) such that </p><p class="formulaDsp">
 \[ F_i(q^*) = F_i^d \forall i, \]
@@ -941,7 +941,7 @@ The parameters such as max iterations, max cpu time and verbosity are resetted w
       </table>
 </div><div class="memdoc">
 <p>Adds a (constancy) constraint for the specified frame</p>
-<p>The constraint is \( {}^w_X_{frame}(q) = {}^w_X_{frame}(q^0) \) where the robot configuration \(q\) is the one specified with setRobotConfiguration </p><dl class="section note"><dt>Note</dt><dd>you should specify first the robot configuration. Otherwise call the versions with explicit constraint value </dd></dl>
+<p>The constraint is \( {}^w X_{frame}(q) = {}^w X_{frame}(q^0) \) where the robot configuration \(q\) is the one specified with setRobotConfiguration </p><dl class="section note"><dt>Note</dt><dd>you should specify first the robot configuration. Otherwise call the versions with explicit constraint value </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">frameName</td><td>the frame name</td></tr>
@@ -3236,7 +3236,7 @@ This method returns true even if the frame constraint was already activate, it o
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceiDynTree.html">iDynTree</a></li><li class="navelem"><a class="el" href="classiDynTree_1_1InverseKinematics.html">InverseKinematics</a></li>
-    <li class="footer">Generated on Fri Nov 12 2021 16:03:23 for iDynTree by
+    <li class="footer">Generated on Mon Nov 22 2021 08:00:51 for iDynTree by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

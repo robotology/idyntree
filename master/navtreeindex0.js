@@ -36,7 +36,8 @@ var NAVTREEINDEX0 =
 "AttitudeEstimatorUtils_8h.html#a525335710b53cb064ca56b936120431e":[6,0,11,0],
 "AttitudeEstimatorUtils_8h.html#a60120ce6e1d4c5d9d436539c43d248e6":[6,0,11,5],
 "AttitudeEstimatorUtils_8h.html#a699bd96c30f376d8a7faae5851cae0a7":[6,0,11,3],
-"AttitudeEstimatorUtils_8h.html#ae22926f6b4098d795734502bfa284aff":[6,0,11,6],
+"AttitudeEstimatorUtils_8h.html#a810ee43797b075ff113b46c0b83796d5":[6,0,11,6],
+"AttitudeEstimatorUtils_8h.html#ae22926f6b4098d795734502bfa284aff":[6,0,11,7],
 "AttitudeEstimator_8cpp.html":[6,0,8],
 "AttitudeEstimator_8h.html":[6,0,9],
 "AttitudeEstimator_8h.html#a48e2955e462d28103d57a10634d0654d":[6,0,9,6],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "ExtWrenchesAndJointTorquesEstimator_8cpp.html":[6,0,80],
 "ExtWrenchesAndJointTorquesEstimator_8cpp.html#a10e8ce019bcc651b1f8f7d20ff89e006":[6,0,80,0],
 "ExtWrenchesAndJointTorquesEstimator_8h.html":[6,0,81],
-"ExtendedKalmanFilter_8cpp.html":[6,0,76],
-"ExtendedKalmanFilter_8h.html":[6,0,77]
+"ExtendedKalmanFilter_8cpp.html":[6,0,76]
 };

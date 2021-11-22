@@ -1,5 +1,13 @@
 var NAVTREEINDEX20 =
 {
+"classiDynTree_1_1optimalcontrol_1_1LinearSystem.html#ae9048969fa6bb586f08332aa279ac01a":[3,7,22,21],
+"classiDynTree_1_1optimalcontrol_1_1LinearSystem_1_1LinearSystemPimpl.html":[3,7,22,0],
+"classiDynTree_1_1optimalcontrol_1_1LinearSystem_1_1LinearSystemPimpl.html#a151d26fc075e4c40deb0c156cc9c88af":[3,7,22,0,5],
+"classiDynTree_1_1optimalcontrol_1_1LinearSystem_1_1LinearSystemPimpl.html#a6e3a22d4f2ce20770b41bee4ff3936e3":[3,7,22,0,4],
+"classiDynTree_1_1optimalcontrol_1_1LinearSystem_1_1LinearSystemPimpl.html#a842a75983d2a0803e36533bd08c1e259":[3,7,22,0,3],
+"classiDynTree_1_1optimalcontrol_1_1LinearSystem_1_1LinearSystemPimpl.html#a862d4b758fbb61ba4cea4280c3e156a0":[3,7,22,0,0],
+"classiDynTree_1_1optimalcontrol_1_1LinearSystem_1_1LinearSystemPimpl.html#a91b937dc9f5053d25d985c0a69336981":[3,7,22,0,1],
+"classiDynTree_1_1optimalcontrol_1_1LinearSystem_1_1LinearSystemPimpl.html#af8d4916df471ff3078db4edad3568bc1":[3,7,22,0,2],
 "classiDynTree_1_1optimalcontrol_1_1MPC.html":[3,7,23],
 "classiDynTree_1_1optimalcontrol_1_1MatrixSelector.html":[5,0,1,2,17],
 "classiDynTree_1_1optimalcontrol_1_1MatrixSelector.html#a0ad2e3912792c51e813e18fd8cb74480":[5,0,1,2,17,7],
@@ -241,13 +249,5 @@ var NAVTREEINDEX20 =
 "classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ac5f5e3bbb989ce5482cd2a690ed1687b":[3,7,34,5],
 "classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#accb30d2b375cd93bbf7776d2d63d2100":[3,7,34,13],
 "classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ad928571c75286252a7cf8e04675913c5":[3,7,34,6],
-"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#adba80cb374b9480383565e3b401219f4":[3,7,34,11],
-"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ae00c9061c568494f23b858ad05a0ff02":[3,7,34,28],
-"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ae1726e0a4c497e0dc23c5c1bdc352863":[3,7,34,10],
-"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ae9c9fd426f107159f3e5354fd3f0562e":[3,7,34,26],
-"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#aeb28846afd2fe3f4373b646d49fbba97":[3,7,34,27],
-"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#afc82f38e5250adee9edcd89cd1168ac4":[3,7,34,2],
-"classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost.html":[3,7,35],
-"classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost.html#a155ce5315d859f994510ba47adad0ef1":[3,7,35,9],
-"classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost.html#a379ea8c1910865e1ad109cc46ad8bfb6":[3,7,35,17]
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#adba80cb374b9480383565e3b401219f4":[3,7,34,11]
 };
