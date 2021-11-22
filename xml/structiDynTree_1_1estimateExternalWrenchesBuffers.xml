@@ -1,0 +1,324 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1estimateExternalWrenchesBuffers" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::estimateExternalWrenchesBuffers</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1estimateExternalWrenchesBuffers_1ae5744844c1e8672aae03b4c0dff824e4" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &gt;</type>
+        <definition>std::vector&lt;MatrixDynSize&gt; iDynTree::estimateExternalWrenchesBuffers::A</definition>
+        <argsstring></argsstring>
+        <name>A</name>
+        <briefdescription>
+<para>The problem of external wrenches estimation boils down to solve a LS problem in the form argmin_x (Ax-b)^2 . </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="242" column="17" bodyfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" bodystart="242" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1estimateExternalWrenchesBuffers_1ae5a8e31f5b0687c18159f23e690bfc23" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &gt;</type>
+        <definition>std::vector&lt;VectorDynSize&gt; iDynTree::estimateExternalWrenchesBuffers::x</definition>
+        <argsstring></argsstring>
+        <name>x</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="243" column="17" bodyfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" bodystart="243" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1estimateExternalWrenchesBuffers_1a3054f9d10cd9f16a08490e0abbb25309" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector6</ref> &gt;</type>
+        <definition>std::vector&lt;Vector6&gt; iDynTree::estimateExternalWrenchesBuffers::b</definition>
+        <argsstring></argsstring>
+        <name>b</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="244" column="17" bodyfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" bodystart="244" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1estimateExternalWrenchesBuffers_1a7d68bde7917d51ca707f54a44b7a5b1d" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &gt;</type>
+        <definition>std::vector&lt;MatrixDynSize&gt; iDynTree::estimateExternalWrenchesBuffers::pinvA</definition>
+        <argsstring></argsstring>
+        <name>pinvA</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="245" column="17" bodyfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" bodystart="245" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1estimateExternalWrenchesBuffers_1a9df3a903d8a16c8d55c840bbdd91893d" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkWrenches</ref></type>
+        <definition>LinkWrenches iDynTree::estimateExternalWrenchesBuffers::b_contacts_subtree</definition>
+        <argsstring></argsstring>
+        <name>b_contacts_subtree</name>
+        <briefdescription>
+<para>We compute the b term for each subtree in a iterative way, so we need a buffer to store it for each link. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="252" column="18" bodyfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" bodystart="252" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1estimateExternalWrenchesBuffers_1a2aca7ab3d8f4092cd9d9394dc714d466" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1LinkPositions" kindref="compound">LinkPositions</ref></type>
+        <definition>LinkPositions iDynTree::estimateExternalWrenchesBuffers::subModelBase_H_link</definition>
+        <argsstring></argsstring>
+        <name>subModelBase_H_link</name>
+        <briefdescription>
+<para>We compute the transform between each link and the submodel base, for computing the A matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="259" column="19" bodyfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" bodystart="259" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structiDynTree_1_1estimateExternalWrenchesBuffers_1a1772f06ec76c567d2c837c61ab8431c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::estimateExternalWrenchesBuffers::estimateExternalWrenchesBuffers</definition>
+        <argsstring>()</argsstring>
+        <name>estimateExternalWrenchesBuffers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="219" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structiDynTree_1_1estimateExternalWrenchesBuffers_1a1f056dfd91587e272c6e396e61ec4930" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::estimateExternalWrenchesBuffers::estimateExternalWrenchesBuffers</definition>
+        <argsstring>(const SubModelDecomposition &amp;subModels)</argsstring>
+        <name>estimateExternalWrenchesBuffers</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SubModelDecomposition" kindref="compound">SubModelDecomposition</ref> &amp;</type>
+          <declname>subModels</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="220" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structiDynTree_1_1estimateExternalWrenchesBuffers_1aa8e53e1e1d93bc334b03d997e64c1f89" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::estimateExternalWrenchesBuffers::estimateExternalWrenchesBuffers</definition>
+        <argsstring>(const size_t nrOfSubModels, const size_t nrOfLinks)</argsstring>
+        <name>estimateExternalWrenchesBuffers</name>
+        <param>
+          <type>const size_t</type>
+          <declname>nrOfSubModels</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>nrOfLinks</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="221" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structiDynTree_1_1estimateExternalWrenchesBuffers_1a8c3a1fd22a99881c8ce7cf23bcd6f9c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::estimateExternalWrenchesBuffers::resize</definition>
+        <argsstring>(const SubModelDecomposition &amp;subModels)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SubModelDecomposition" kindref="compound">SubModelDecomposition</ref> &amp;</type>
+          <declname>subModels</declname>
+        </param>
+        <briefdescription>
+<para>Resize the struct for the number of submodel. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="226" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="structiDynTree_1_1estimateExternalWrenchesBuffers_1adab6951bbf1293647c47b1fff12cbe6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::estimateExternalWrenchesBuffers::resize</definition>
+        <argsstring>(const size_t nrOfSubModels, const size_t nrOfLinks)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>const size_t</type>
+          <declname>nrOfSubModels</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>nrOfLinks</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="227" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="structiDynTree_1_1estimateExternalWrenchesBuffers_1a8f2ef44cfc80a707fab7a095fa7809e8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::estimateExternalWrenchesBuffers::getNrOfSubModels</definition>
+        <argsstring>() const</argsstring>
+        <name>getNrOfSubModels</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="229" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="structiDynTree_1_1estimateExternalWrenchesBuffers_1a3efa3b93b84e0b0d02a619945d417e33" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::estimateExternalWrenchesBuffers::getNrOfLinks</definition>
+        <argsstring>() const</argsstring>
+        <name>getNrOfLinks</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="230" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="structiDynTree_1_1estimateExternalWrenchesBuffers_1af03ea4dc4b0df412d2fd6df805cc7b4c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::estimateExternalWrenchesBuffers::isConsistent</definition>
+        <argsstring>(const SubModelDecomposition &amp;subModels) const</argsstring>
+        <name>isConsistent</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SubModelDecomposition" kindref="compound">SubModelDecomposition</ref> &amp;</type>
+          <declname>subModels</declname>
+        </param>
+        <briefdescription>
+<para>Check if the buffer size are consistent with the submodel decomposition. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="236" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="8">
+        <label>std::vector&lt; iDynTree::MatrixDynSize &gt;</label>
+        <childnode refid="9" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; iDynTree::MatrixDynSize &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+      </node>
+      <node id="10">
+        <label>iDynTree::LinkPositions</label>
+        <link refid="classiDynTree_1_1LinkPositions"/>
+      </node>
+      <node id="5">
+        <label>T</label>
+      </node>
+      <node id="9">
+        <label>iDynTree::MatrixDynSize</label>
+        <link refid="classiDynTree_1_1MatrixDynSize"/>
+      </node>
+      <node id="11">
+        <label>iDynTree::LinkWrenches</label>
+        <link refid="classiDynTree_1_1LinkWrenches"/>
+      </node>
+      <node id="7">
+        <label>iDynTree::VectorDynSize</label>
+        <link refid="classiDynTree_1_1VectorDynSize"/>
+      </node>
+      <node id="4">
+        <label>std::vector&lt; T &gt;</label>
+        <childnode refid="5" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>std::vector&lt; iDynTree::VectorDynSize &gt;</label>
+        <childnode refid="7" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; iDynTree::VectorDynSize &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::vector&lt; iDynTree::VectorFixSize &gt;</label>
+        <childnode refid="3" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; iDynTree::VectorFixSize &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::estimateExternalWrenchesBuffers</label>
+        <link refid="structiDynTree_1_1estimateExternalWrenchesBuffers"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>b</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>x</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>A</edgelabel>
+          <edgelabel>pinvA</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>subModelBase_H_link</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>b_contacts_subtree</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="217" column="1" bodyfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" bodystart="218" bodyend="260"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1estimateExternalWrenchesBuffers_1ae5744844c1e8672aae03b4c0dff824e4" prot="public" virt="non-virtual"><scope>iDynTree::estimateExternalWrenchesBuffers</scope><name>A</name></member>
+      <member refid="structiDynTree_1_1estimateExternalWrenchesBuffers_1a3054f9d10cd9f16a08490e0abbb25309" prot="public" virt="non-virtual"><scope>iDynTree::estimateExternalWrenchesBuffers</scope><name>b</name></member>
+      <member refid="structiDynTree_1_1estimateExternalWrenchesBuffers_1a9df3a903d8a16c8d55c840bbdd91893d" prot="public" virt="non-virtual"><scope>iDynTree::estimateExternalWrenchesBuffers</scope><name>b_contacts_subtree</name></member>
+      <member refid="structiDynTree_1_1estimateExternalWrenchesBuffers_1a1772f06ec76c567d2c837c61ab8431c4" prot="public" virt="non-virtual"><scope>iDynTree::estimateExternalWrenchesBuffers</scope><name>estimateExternalWrenchesBuffers</name></member>
+      <member refid="structiDynTree_1_1estimateExternalWrenchesBuffers_1a1f056dfd91587e272c6e396e61ec4930" prot="public" virt="non-virtual"><scope>iDynTree::estimateExternalWrenchesBuffers</scope><name>estimateExternalWrenchesBuffers</name></member>
+      <member refid="structiDynTree_1_1estimateExternalWrenchesBuffers_1aa8e53e1e1d93bc334b03d997e64c1f89" prot="public" virt="non-virtual"><scope>iDynTree::estimateExternalWrenchesBuffers</scope><name>estimateExternalWrenchesBuffers</name></member>
+      <member refid="structiDynTree_1_1estimateExternalWrenchesBuffers_1a3efa3b93b84e0b0d02a619945d417e33" prot="public" virt="non-virtual"><scope>iDynTree::estimateExternalWrenchesBuffers</scope><name>getNrOfLinks</name></member>
+      <member refid="structiDynTree_1_1estimateExternalWrenchesBuffers_1a8f2ef44cfc80a707fab7a095fa7809e8" prot="public" virt="non-virtual"><scope>iDynTree::estimateExternalWrenchesBuffers</scope><name>getNrOfSubModels</name></member>
+      <member refid="structiDynTree_1_1estimateExternalWrenchesBuffers_1af03ea4dc4b0df412d2fd6df805cc7b4c" prot="public" virt="non-virtual"><scope>iDynTree::estimateExternalWrenchesBuffers</scope><name>isConsistent</name></member>
+      <member refid="structiDynTree_1_1estimateExternalWrenchesBuffers_1a7d68bde7917d51ca707f54a44b7a5b1d" prot="public" virt="non-virtual"><scope>iDynTree::estimateExternalWrenchesBuffers</scope><name>pinvA</name></member>
+      <member refid="structiDynTree_1_1estimateExternalWrenchesBuffers_1a8c3a1fd22a99881c8ce7cf23bcd6f9c0" prot="public" virt="non-virtual"><scope>iDynTree::estimateExternalWrenchesBuffers</scope><name>resize</name></member>
+      <member refid="structiDynTree_1_1estimateExternalWrenchesBuffers_1adab6951bbf1293647c47b1fff12cbe6a" prot="public" virt="non-virtual"><scope>iDynTree::estimateExternalWrenchesBuffers</scope><name>resize</name></member>
+      <member refid="structiDynTree_1_1estimateExternalWrenchesBuffers_1a2aca7ab3d8f4092cd9d9394dc714d466" prot="public" virt="non-virtual"><scope>iDynTree::estimateExternalWrenchesBuffers</scope><name>subModelBase_H_link</name></member>
+      <member refid="structiDynTree_1_1estimateExternalWrenchesBuffers_1ae5a8e31f5b0687c18159f23e690bfc23" prot="public" virt="non-virtual"><scope>iDynTree::estimateExternalWrenchesBuffers</scope><name>x</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

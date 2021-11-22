@@ -1,0 +1,203 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="MatrixView_8h" kind="file" language="C++">
+    <compoundname>MatrixView.h</compoundname>
+    <includes local="no">cassert</includes>
+    <includes local="no">type_traits</includes>
+    <includes refid="Span_8h" local="no">iDynTree/Core/Span.h</includes>
+    <includes refid="Utils_8h" local="no">iDynTree/Core/Utils.h</includes>
+    <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
+    <includedby refid="MatrixDynSize_8h" local="no">iDynTree/Core/MatrixDynSize.h</includedby>
+    <includedby refid="MatrixFixSize_8h" local="no">iDynTree/Core/MatrixFixSize.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>cassert</label>
+      </node>
+      <node id="3">
+        <label>type_traits</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/Core/MatrixView.h</label>
+        <link refid="MatrixView_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structiDynTree_1_1MatrixViewInternal_1_1has__IsRowMajor" prot="public">iDynTree::MatrixViewInternal::has_IsRowMajor</innerclass>
+    <innerclass refid="structiDynTree_1_1MatrixViewInternal_1_1has__IsRowMajor_3_01T_00_01SpanUtils_1_1void__t_3_01decl7e9aca95d34952fed609ee84e1af283d" prot="public">iDynTree::MatrixViewInternal::has_IsRowMajor&lt; T, SpanUtils::void_t&lt; decltype(T::IsRowMajor)&gt; &gt;</innerclass>
+    <innerclass refid="classiDynTree_1_1MatrixView" prot="public">iDynTree::MatrixView</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <innernamespace refid="namespaceiDynTree_1_1MatrixViewInternal">iDynTree::MatrixViewInternal</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="MatrixView_8h_1a347aa032e680c7848af88b7a3b840829" prot="public" static="no">
+        <name>IDYNTREE_CONSTEXPR</name>
+        <initializer>constexpr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixView.h" line="25" column="10" bodyfile="iDynTree/Core/MatrixView.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="MatrixView_8h_1ae51124a635564fed29ab419da3ec3dcf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR MatrixView&lt; ElementType &gt;</type>
+        <definition>IDYNTREE_CONSTEXPR MatrixView&lt;ElementType&gt; iDynTree::make_matrix_view</definition>
+        <argsstring>(ElementType *ptr, typename MatrixView&lt; ElementType &gt;::index_type rows, typename MatrixView&lt; ElementType &gt;::index_type cols, const MatrixStorageOrdering &amp;order=MatrixStorageOrdering::RowMajor)</argsstring>
+        <name>make_matrix_view</name>
+        <param>
+          <type>ElementType *</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>typename MatrixView&lt; ElementType &gt;::index_type</type>
+          <declname>rows</declname>
+        </param>
+        <param>
+          <type>typename MatrixView&lt; ElementType &gt;::index_type</type>
+          <declname>cols</declname>
+        </param>
+        <param>
+          <type>const MatrixStorageOrdering &amp;</type>
+          <declname>order</declname>
+          <defval>MatrixStorageOrdering::RowMajor</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixView.h" line="241" column="5" bodyfile="iDynTree/Core/MatrixView.h" bodystart="241" bodyend="247"/>
+      </memberdef>
+      <memberdef kind="function" id="MatrixView_8h_1a6bbb3790549d807aa71d5ed22512411f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Container</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt; MatrixViewInternal::has_IsRowMajor&lt; Container &gt;::value||std::is_same&lt; MatrixView&lt; typename Container::value_type &gt;, Container &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR MatrixView&lt; typename Container::value_type &gt;</type>
+        <definition>IDYNTREE_CONSTEXPR MatrixView&lt;typename Container::value_type&gt; iDynTree::make_matrix_view</definition>
+        <argsstring>(Container &amp;cont)</argsstring>
+        <name>make_matrix_view</name>
+        <param>
+          <type>Container &amp;</type>
+          <declname>cont</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixView.h" line="254" column="35" bodyfile="iDynTree/Core/MatrixView.h" bodystart="254" bodyend="257"/>
+      </memberdef>
+      <memberdef kind="function" id="MatrixView_8h_1ace02c0a5e7df4f19a28615bbea0b2d49" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Container</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt; MatrixViewInternal::has_IsRowMajor&lt; Container &gt;::value||std::is_same&lt; MatrixView&lt; const typename Container::value_type &gt;, Container &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR MatrixView&lt; const typename Container::value_type &gt;</type>
+        <definition>IDYNTREE_CONSTEXPR MatrixView&lt;const typename Container::value_type&gt; iDynTree::make_matrix_view</definition>
+        <argsstring>(const Container &amp;cont)</argsstring>
+        <name>make_matrix_view</name>
+        <param>
+          <type>const Container &amp;</type>
+          <declname>cont</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixView.h" line="264" column="35" bodyfile="iDynTree/Core/MatrixView.h" bodystart="264" bodyend="267"/>
+      </memberdef>
+      <memberdef kind="function" id="MatrixView_8h_1a60ffec30976d99d36dda278b50600853" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Container</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt; !MatrixViewInternal::has_IsRowMajor&lt; Container &gt;::value &amp;&amp;!std::is_same&lt; MatrixView&lt; typename Container::value_type &gt;, Container &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR MatrixView&lt; typename Container::value_type &gt;</type>
+        <definition>IDYNTREE_CONSTEXPR MatrixView&lt;typename Container::value_type&gt; iDynTree::make_matrix_view</definition>
+        <argsstring>(Container &amp;cont, const MatrixStorageOrdering &amp;order=MatrixStorageOrdering::RowMajor)</argsstring>
+        <name>make_matrix_view</name>
+        <param>
+          <type>Container &amp;</type>
+          <declname>cont</declname>
+        </param>
+        <param>
+          <type>const MatrixStorageOrdering &amp;</type>
+          <declname>order</declname>
+          <defval>MatrixStorageOrdering::RowMajor</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixView.h" line="275" column="5" bodyfile="iDynTree/Core/MatrixView.h" bodystart="275" bodyend="279"/>
+      </memberdef>
+      <memberdef kind="function" id="MatrixView_8h_1a6c7864c31a89d1f9f3a5196a21d8cf23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Container</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt; !MatrixViewInternal::has_IsRowMajor&lt; Container &gt;::value &amp;&amp;!std::is_same&lt; MatrixView&lt; typename Container::value_type &gt;, Container &gt;::value, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR MatrixView&lt; const typename Container::value_type &gt;</type>
+        <definition>IDYNTREE_CONSTEXPR MatrixView&lt;const typename Container::value_type&gt; iDynTree::make_matrix_view</definition>
+        <argsstring>(const Container &amp;cont, const MatrixStorageOrdering &amp;order=MatrixStorageOrdering::RowMajor)</argsstring>
+        <name>make_matrix_view</name>
+        <param>
+          <type>const Container &amp;</type>
+          <declname>cont</declname>
+        </param>
+        <param>
+          <type>const MatrixStorageOrdering &amp;</type>
+          <declname>order</declname>
+          <defval>MatrixStorageOrdering::RowMajor</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixView.h" line="287" column="5" bodyfile="iDynTree/Core/MatrixView.h" bodystart="287" bodyend="291"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/MatrixView.h"/>
+  </compounddef>
+</doxygen>

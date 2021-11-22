@@ -1,8 +1,0 @@
-<map id="TimeRange.h" name="TimeRange.h">
-<area shape="rect" id="node1" title=" " alt="" coords="395,5,503,32"/>
-<area shape="rect" id="node2" href="$OptimalControl_8h.html" title=" " alt="" coords="5,80,139,107"/>
-<area shape="rect" id="node3" href="$ConstraintsGroup_8cpp.html" title=" " alt="" coords="163,80,325,107"/>
-<area shape="rect" id="node4" href="$MultipleShootingSolver_8cpp.html" title=" " alt="" coords="350,80,549,107"/>
-<area shape="rect" id="node5" href="$OptimalControlProblem_8cpp.html" title=" " alt="" coords="573,80,776,107"/>
-<area shape="rect" id="node6" href="$TimeRange_8cpp.html" title=" " alt="" coords="800,80,923,107"/>
-</map>

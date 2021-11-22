@@ -1,0 +1,430 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1Axis" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::Axis</compoundname>
+    <includes local="no">iDynTree/Core/Axis.h</includes>
+      <sectiondef kind="user-defined">
+      <header>Output helpers.</header>
+      <description><para>Output helpers. </para>
+</description>
+      <memberdef kind="function" id="classiDynTree_1_1Axis_1ad33d0ab60bc41164780144474606f4e2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::Axis::toString</definition>
+        <argsstring>() const</argsstring>
+        <name>toString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Axis.h" line="142" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Axis_1a80528ce33353f585f61f967e86f9e9ee" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::Axis::reservedToString</definition>
+        <argsstring>() const</argsstring>
+        <name>reservedToString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Axis.h" line="144" column="21"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1Axis_1ab104372d1fc89c821174a62f6a26db11" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref></type>
+        <definition>Direction iDynTree::Axis::direction</definition>
+        <argsstring></argsstring>
+        <name>direction</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Axis.h" line="38" column="19" bodyfile="iDynTree/Core/Axis.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Axis_1a5e27763556aa489adfb3b61da001bd00" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position iDynTree::Axis::origin</definition>
+        <argsstring></argsstring>
+        <name>origin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Axis.h" line="39" column="19" bodyfile="iDynTree/Core/Axis.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1Axis_1a01d373304afdc2a11c5810d8bad50eb6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::Axis::setToDefault</definition>
+        <argsstring>()</argsstring>
+        <name>setToDefault</name>
+        <briefdescription>
+<para>Set the object to the default axis: direction : 1, 0, 0 , point: 0, 0, 0. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Axis.h" line="44" column="14"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1Axis_1aa1aff15197c9bdb23d6a8a397cfa5d79" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Axis::Axis</definition>
+        <argsstring>()</argsstring>
+        <name>Axis</name>
+        <briefdescription>
+<para>Default constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The data is not reset to the default for perfomance reason. Please initialize the data in the class before any use. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Axis.h" line="52" column="16" bodyfile="iDynTree/Core/Axis.h" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Axis_1a56cbca5b0f569174b2f8ce96b2b645e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Axis::Axis</definition>
+        <argsstring>(const Direction &amp;_direction, const Position &amp;_origin)</argsstring>
+        <name>Axis</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref> &amp;</type>
+          <declname>_direction</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+          <declname>_origin</declname>
+        </param>
+        <briefdescription>
+<para>Constructor from a <ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref> and an origin, represented by a <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Axis.h" line="57" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Axis_1add0c40dde7f3dc9e4c05f633a74354b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Axis::Axis</definition>
+        <argsstring>(const Axis &amp;other)</argsstring>
+        <name>Axis</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy constructor: create a <ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref> from another <ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Axis.h" line="62" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Axis_1a1bdc98a69afe6ba3ddc9f0c5c52f836e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref> &amp;</type>
+        <definition>const Direction&amp; iDynTree::Axis::getDirection</definition>
+        <argsstring>() const</argsstring>
+        <name>getDirection</name>
+        <briefdescription>
+<para>Get the direction of the axis. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Axis.h" line="67" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Axis_1a601caad683259796af973dc9a5767f2d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+        <definition>const Position&amp; iDynTree::Axis::getOrigin</definition>
+        <argsstring>() const</argsstring>
+        <name>getOrigin</name>
+        <briefdescription>
+<para>Get the origin of the axis. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Axis.h" line="72" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Axis_1aea61e891277aabb22e1067404d6d50d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::Axis::setDirection</definition>
+        <argsstring>(const Direction &amp;_direction)</argsstring>
+        <name>setDirection</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref> &amp;</type>
+          <declname>_direction</declname>
+        </param>
+        <briefdescription>
+<para>Set the direction of the axis. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Axis.h" line="77" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Axis_1ae672b6d583b8d07ffda719bfeb4de766" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::Axis::setOrigin</definition>
+        <argsstring>(const Position &amp;_position)</argsstring>
+        <name>setOrigin</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+          <declname>_position</declname>
+        </param>
+        <briefdescription>
+<para>Set the origin of the axis. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Axis.h" line="82" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Axis_1a80b21674827ef8701daed4addc4e1ee1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>Transform iDynTree::Axis::getRotationTransform</definition>
+        <argsstring>(const double theta) const</argsstring>
+        <name>getRotationTransform</name>
+        <param>
+          <type>const double</type>
+          <declname>theta</declname>
+        </param>
+        <briefdescription>
+<para>Get the transform induced by a rotation of an angle theta around this axis. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The returned transform is the nonRotated_T_rotated, such that if we have a quantity expressed in the frame obtained by the rotation v_rotated, we can transform it back in the non-rotated frame using the returned transform: v_nonRotated = nonRotated_T_rotated*v_rotated </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Axis.h" line="92" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Axis_1a134ff8af97722174e27fbb47db6fa729" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref></type>
+        <definition>TransformDerivative iDynTree::Axis::getRotationTransformDerivative</definition>
+        <argsstring>(const double theta) const</argsstring>
+        <name>getRotationTransformDerivative</name>
+        <param>
+          <type>const double</type>
+          <declname>theta</declname>
+        </param>
+        <briefdescription>
+<para>Get the derivative of the getRotationTransform function with respect to the theta argument. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Axis.h" line="98" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Axis_1a67346ce78cfcf70550028606af8fd8b5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref></type>
+        <definition>Twist iDynTree::Axis::getRotationTwist</definition>
+        <argsstring>(const double dtheta) const</argsstring>
+        <name>getRotationTwist</name>
+        <param>
+          <type>const double</type>
+          <declname>dtheta</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Axis.h" line="100" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Axis_1a847202356c483a5b60f628c22712c04b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref></type>
+        <definition>SpatialAcc iDynTree::Axis::getRotationSpatialAcc</definition>
+        <argsstring>(const double d2theta) const</argsstring>
+        <name>getRotationSpatialAcc</name>
+        <param>
+          <type>const double</type>
+          <declname>d2theta</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Axis.h" line="102" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Axis_1a57a3799baeaa916d82a1a010631b5cb3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>Transform iDynTree::Axis::getTranslationTransform</definition>
+        <argsstring>(const double dist) const</argsstring>
+        <name>getTranslationTransform</name>
+        <param>
+          <type>const double</type>
+          <declname>dist</declname>
+        </param>
+        <briefdescription>
+<para>Get the transform induced by a translation of a distance dist along this axis. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The returned transform is the nonTranslated_T_translated, such that if we have a quantity expressed in the frame obtained by the translation v_translated, we can transform it back in the non-translated frame using the returned transform: v_nonTranslated = nonTranslated_T_translated*v_translated </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Axis.h" line="112" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Axis_1a215d3dcc5c1da6293c2576905ab046fd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref></type>
+        <definition>TransformDerivative iDynTree::Axis::getTranslationTransformDerivative</definition>
+        <argsstring>(const double) const</argsstring>
+        <name>getTranslationTransformDerivative</name>
+        <param>
+          <type>const double</type>
+        </param>
+        <briefdescription>
+<para>Get the derivative of the getTranslationTransform function with respect to the dist argument. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Axis.h" line="118" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Axis_1a8cee386983f00c053a3632c0c061839f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref></type>
+        <definition>Twist iDynTree::Axis::getTranslationTwist</definition>
+        <argsstring>(const double ddist) const</argsstring>
+        <name>getTranslationTwist</name>
+        <param>
+          <type>const double</type>
+          <declname>ddist</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Axis.h" line="120" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Axis_1a1355ccdd4ea9f7dbf775920e3b2a694c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref></type>
+        <definition>SpatialAcc iDynTree::Axis::getTranslationSpatialAcc</definition>
+        <argsstring>(const double d2dist) const</argsstring>
+        <name>getTranslationSpatialAcc</name>
+        <param>
+          <type>const double</type>
+          <declname>d2dist</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Axis.h" line="122" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Axis_1a5f9e8b8b7d511a6662d21be27570b1c4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Axis::isParallel</definition>
+        <argsstring>(const Axis &amp;otherAxis, const double tolerance) const</argsstring>
+        <name>isParallel</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref> &amp;</type>
+          <declname>otherAxis</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>tolerance</declname>
+        </param>
+        <briefdescription>
+<para>Check if two axes are parallel (i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>their direction are parallel).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>otherAxis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the axes to check for parallelism. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tolerance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>tolerance to use in the parallelism check. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Axis.h" line="130" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Axis_1ab473268436d3549692c5ef59b7ad5730" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref></type>
+        <definition>Axis iDynTree::Axis::reverse</definition>
+        <argsstring>() const</argsstring>
+        <name>reverse</name>
+        <briefdescription>
+<para>Return the axis with the same origin, but reversed direction. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Axis.h" line="135" column="14"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class representing an axis (a directed line) in space. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The axis is represented as a origin plus a direction. </para>
+    </detaileddescription>
+    <location file="iDynTree/Core/Axis.h" line="35" column="5" bodyfile="iDynTree/Core/Axis.h" bodystart="36" bodyend="146"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1Axis_1aa1aff15197c9bdb23d6a8a397cfa5d79" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>Axis</name></member>
+      <member refid="classiDynTree_1_1Axis_1a56cbca5b0f569174b2f8ce96b2b645e0" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>Axis</name></member>
+      <member refid="classiDynTree_1_1Axis_1add0c40dde7f3dc9e4c05f633a74354b2" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>Axis</name></member>
+      <member refid="classiDynTree_1_1Axis_1ab104372d1fc89c821174a62f6a26db11" prot="private" virt="non-virtual"><scope>iDynTree::Axis</scope><name>direction</name></member>
+      <member refid="classiDynTree_1_1Axis_1a1bdc98a69afe6ba3ddc9f0c5c52f836e" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>getDirection</name></member>
+      <member refid="classiDynTree_1_1Axis_1a601caad683259796af973dc9a5767f2d" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>getOrigin</name></member>
+      <member refid="classiDynTree_1_1Axis_1a847202356c483a5b60f628c22712c04b" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>getRotationSpatialAcc</name></member>
+      <member refid="classiDynTree_1_1Axis_1a80b21674827ef8701daed4addc4e1ee1" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>getRotationTransform</name></member>
+      <member refid="classiDynTree_1_1Axis_1a134ff8af97722174e27fbb47db6fa729" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>getRotationTransformDerivative</name></member>
+      <member refid="classiDynTree_1_1Axis_1a67346ce78cfcf70550028606af8fd8b5" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>getRotationTwist</name></member>
+      <member refid="classiDynTree_1_1Axis_1a1355ccdd4ea9f7dbf775920e3b2a694c" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>getTranslationSpatialAcc</name></member>
+      <member refid="classiDynTree_1_1Axis_1a57a3799baeaa916d82a1a010631b5cb3" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>getTranslationTransform</name></member>
+      <member refid="classiDynTree_1_1Axis_1a215d3dcc5c1da6293c2576905ab046fd" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>getTranslationTransformDerivative</name></member>
+      <member refid="classiDynTree_1_1Axis_1a8cee386983f00c053a3632c0c061839f" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>getTranslationTwist</name></member>
+      <member refid="classiDynTree_1_1Axis_1a5f9e8b8b7d511a6662d21be27570b1c4" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>isParallel</name></member>
+      <member refid="classiDynTree_1_1Axis_1a5e27763556aa489adfb3b61da001bd00" prot="private" virt="non-virtual"><scope>iDynTree::Axis</scope><name>origin</name></member>
+      <member refid="classiDynTree_1_1Axis_1a80528ce33353f585f61f967e86f9e9ee" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>reservedToString</name></member>
+      <member refid="classiDynTree_1_1Axis_1ab473268436d3549692c5ef59b7ad5730" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>reverse</name></member>
+      <member refid="classiDynTree_1_1Axis_1aea61e891277aabb22e1067404d6d50d5" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>setDirection</name></member>
+      <member refid="classiDynTree_1_1Axis_1ae672b6d583b8d07ffda719bfeb4de766" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>setOrigin</name></member>
+      <member refid="classiDynTree_1_1Axis_1a01d373304afdc2a11c5810d8bad50eb6" prot="private" virt="non-virtual"><scope>iDynTree::Axis</scope><name>setToDefault</name></member>
+      <member refid="classiDynTree_1_1Axis_1ad33d0ab60bc41164780144474606f4e2" prot="public" virt="non-virtual"><scope>iDynTree::Axis</scope><name>toString</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

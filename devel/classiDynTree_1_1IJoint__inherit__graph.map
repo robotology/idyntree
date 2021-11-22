@@ -1,7 +1,0 @@
-<map id="iDynTree::IJoint" name="iDynTree::IJoint">
-<area shape="rect" id="node1" title="Interface (i.e." alt="" coords="125,5,245,32"/>
-<area shape="rect" id="node2" href="$classiDynTree_1_1FixedJoint.html" title="Class representing a fixed joint, i.e." alt="" coords="5,87,156,114"/>
-<area shape="rect" id="node3" href="$classiDynTree_1_1MovableJointImpl.html" title="Base template for implementation of non&#45;fixed joints." alt="" coords="181,80,399,121"/>
-<area shape="rect" id="node4" href="$classiDynTree_1_1PrismaticJoint.html" title="Class representing a prismatic joint, i.e." alt="" coords="101,169,279,211"/>
-<area shape="rect" id="node5" href="$classiDynTree_1_1RevoluteJoint.html" title="Class representing a revolute joint, i.e." alt="" coords="303,169,477,211"/>
-</map>

@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="EigenMathHelpers_8h" kind="file" language="C++">
+    <compoundname>EigenMathHelpers.h</compoundname>
+    <includes local="no">Eigen/Dense</includes>
+    <incdepgraph>
+      <node id="2">
+        <label>Eigen/Dense</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/Core/EigenMathHelpers.h</label>
+        <link refid="EigenMathHelpers_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="EigenMathHelpers_8h_1a903238e532f385a1cd3db7b731fa884c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename MapType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void iDynTree::pseudoInverse_helper2</definition>
+        <argsstring>(const MapType &amp;A, Eigen::JacobiSVD&lt; Eigen::MatrixXd &gt; &amp;svdDecomposition, MapType &amp;Apinv, double tolerance, unsigned int computationOptions=Eigen::ComputeThinU|Eigen::ComputeThinV)</argsstring>
+        <name>pseudoInverse_helper2</name>
+        <param>
+          <type>const MapType &amp;</type>
+          <declname>A</declname>
+        </param>
+        <param>
+          <type>Eigen::JacobiSVD&lt; Eigen::MatrixXd &gt; &amp;</type>
+          <declname>svdDecomposition</declname>
+        </param>
+        <param>
+          <type>MapType &amp;</type>
+          <declname>Apinv</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>tolerance</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>computationOptions</declname>
+          <defval>Eigen::ComputeThinU|Eigen::ComputeThinV</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenMathHelpers.h" line="23" column="6" bodyfile="iDynTree/Core/EigenMathHelpers.h" bodystart="23" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenMathHelpers_8h_1aacb98344c6221dbf5e5d7678e3e75136" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename MapType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void iDynTree::pseudoInverse_helper1</definition>
+        <argsstring>(const MapType &amp;A, Eigen::JacobiSVD&lt; Eigen::MatrixXd &gt; &amp;svdDecomposition, MapType &amp;Apinv, double tolerance, unsigned int computationOptions=Eigen::ComputeThinU|Eigen::ComputeThinV)</argsstring>
+        <name>pseudoInverse_helper1</name>
+        <param>
+          <type>const MapType &amp;</type>
+          <declname>A</declname>
+        </param>
+        <param>
+          <type>Eigen::JacobiSVD&lt; Eigen::MatrixXd &gt; &amp;</type>
+          <declname>svdDecomposition</declname>
+        </param>
+        <param>
+          <type>MapType &amp;</type>
+          <declname>Apinv</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>tolerance</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>computationOptions</declname>
+          <defval>Eigen::ComputeThinU|Eigen::ComputeThinV</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenMathHelpers.h" line="52" column="6" bodyfile="iDynTree/Core/EigenMathHelpers.h" bodystart="52" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenMathHelpers_8h_1a0b20a0208cab1ac6cdbd661612ca4c1b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename MapType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void iDynTree::pseudoInverse</definition>
+        <argsstring>(const MapType A, MapType Apinv, double tolerance, unsigned int computationOptions=Eigen::ComputeThinU|Eigen::ComputeThinV)</argsstring>
+        <name>pseudoInverse</name>
+        <param>
+          <type>const MapType</type>
+          <declname>A</declname>
+        </param>
+        <param>
+          <type>MapType</type>
+          <declname>Apinv</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>tolerance</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>computationOptions</declname>
+          <defval>Eigen::ComputeThinU|Eigen::ComputeThinV</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenMathHelpers.h" line="63" column="6" bodyfile="iDynTree/Core/EigenMathHelpers.h" bodystart="63" bodyend="71"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/EigenMathHelpers.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="VisualElement_8h" kind="file" language="C++">
+    <compoundname>VisualElement.h</compoundname>
+    <includes refid="XMLElement_8h" local="no">iDynTree/XMLElement.h</includes>
+    <includes refid="MaterialElement_8h" local="yes">MaterialElement.h</includes>
+    <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
+    <includes refid="SolidShapes_8h" local="no">iDynTree/Model/SolidShapes.h</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">string</includes>
+    <includes local="no">unordered_map</includes>
+    <includes local="no">vector</includes>
+    <includedby refid="LinkElement_8h" local="yes">private/LinkElement.h</includedby>
+    <includedby refid="RobotElement_8h" local="yes">private/RobotElement.h</includedby>
+    <includedby refid="URDFDocument_8h" local="yes">private/URDFDocument.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="5">
+        <label>vector</label>
+      </node>
+      <node id="4">
+        <label>unordered_map</label>
+      </node>
+      <node id="1">
+        <label>private/VisualElement.h</label>
+        <link refid="VisualElement_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1VisualElement" prot="public">iDynTree::VisualElement</innerclass>
+    <innerclass refid="structiDynTree_1_1VisualElement_1_1VisualInfo" prot="public">iDynTree::VisualElement::VisualInfo</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="private/VisualElement.h"/>
+  </compounddef>
+</doxygen>

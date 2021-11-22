@@ -1,0 +1,768 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimalcontrol_1_1LinearSystem" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::optimalcontrol::LinearSystem</compoundname>
+    <basecompoundref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" prot="public" virt="non-virtual">iDynTree::optimalcontrol::DynamicalSystem</basecompoundref>
+    <includes local="no">iDynTree/LinearSystem.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a4308fcbae088d2b32202b142bbb93f7e" prot="private" static="no" mutable="no">
+        <type>LinearSystemPimpl *</type>
+        <definition>LinearSystemPimpl* iDynTree::optimalcontrol::LinearSystem::m_pimpl</definition>
+        <argsstring></argsstring>
+        <name>m_pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearSystem.h" line="101" column="31" bodyfile="iDynTree/LinearSystem.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a2c0727b1b7067ad0042880a2c21021fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::LinearSystem::LinearSystem</definition>
+        <argsstring>(size_t stateSize, size_t controlSize)</argsstring>
+        <name>LinearSystem</name>
+        <param>
+          <type>size_t</type>
+          <declname>stateSize</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>controlSize</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearSystem.h" line="41" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a3437f9e6234fc7a698d4d4a590ec419b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::LinearSystem::LinearSystem</definition>
+        <argsstring>(size_t stateSize, size_t controlSize, const iDynTree::optimalcontrol::SparsityStructure &amp;stateSparsity, const iDynTree::optimalcontrol::SparsityStructure &amp;controlSparsity)</argsstring>
+        <name>LinearSystem</name>
+        <param>
+          <type>size_t</type>
+          <declname>stateSize</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>controlSize</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>stateSparsity</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>controlSparsity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearSystem.h" line="43" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a29645196589d2a947368e65c851c50bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::LinearSystem::LinearSystem</definition>
+        <argsstring>(const LinearSystem &amp;other)=delete</argsstring>
+        <name>LinearSystem</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem" kindref="compound">LinearSystem</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearSystem.h" line="47" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a79af515c739a47f2c0b7ba77d2131b5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::LinearSystem::~LinearSystem</definition>
+        <argsstring>() override</argsstring>
+        <name>~LinearSystem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearSystem.h" line="49" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a1d874018df76571d25f2cf5b510c4467" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::LinearSystem::setStateMatrix</definition>
+        <argsstring>(const iDynTree::MatrixDynSize &amp;stateMatrix)</argsstring>
+        <name>setStateMatrix</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>stateMatrix</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearSystem.h" line="52" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a36b039c6b817db400f277cfa3230802b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::LinearSystem::setControlMatrix</definition>
+        <argsstring>(const iDynTree::MatrixDynSize &amp;controlMatrix)</argsstring>
+        <name>setControlMatrix</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>controlMatrix</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearSystem.h" line="54" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a8909f5f3adbe11fa54c379760b417c7a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::LinearSystem::setStateMatrix</definition>
+        <argsstring>(std::shared_ptr&lt; TimeVaryingMatrix &gt; stateMatrix)</argsstring>
+        <name>setStateMatrix</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">TimeVaryingMatrix</ref> &gt;</type>
+          <declname>stateMatrix</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearSystem.h" line="57" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a3fa5cbf4e9a3fa25db27edeef20ca4de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::LinearSystem::setControlMatrix</definition>
+        <argsstring>(std::shared_ptr&lt; TimeVaryingMatrix &gt; controlMatrix)</argsstring>
+        <name>setControlMatrix</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">TimeVaryingMatrix</ref> &gt;</type>
+          <declname>controlMatrix</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearSystem.h" line="59" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a2596766c2b5a2346fc00633b1fcebc85" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::LinearSystem::dynamics</definition>
+        <argsstring>(const VectorDynSize &amp;state, double time, VectorDynSize &amp;stateDynamics) final</argsstring>
+        <name>dynamics</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aa10bd35bc49f5dfaea48ffeecf945312">dynamics</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>stateDynamics</declname>
+        </param>
+        <briefdescription>
+<para>Computes the system dynamics. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It return <formula id="81">$ f(t,x) $</formula>. Notice that here the dependency from the control input is removed, so that basically we are assuming an autonomous system. If the system is controlled, the control input will be set separately with the method setControlInput. This was necessary since the Integrator class needs an autonomous system to be integrated. See <ref refid="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem" kindref="compound">ControlledDynamicalSystem</ref> class in case you want to join a <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> with a <ref refid="classiDynTree_1_1optimalcontrol_1_1Controller" kindref="compound">Controller</ref>. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state point in which the dynamics is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the dynamics is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">stateDynamics</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value of the state derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearSystem.h" line="61" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a8a775ab121adc0f62c2d2203801a331e" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::LinearSystem::dynamicsStateFirstDerivative</definition>
+        <argsstring>(const VectorDynSize &amp;state, double time, MatrixDynSize &amp;dynamicsDerivative) final</argsstring>
+        <name>dynamicsStateFirstDerivative</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ae107a97a87ddc0f796e169c6de2cc39b">dynamicsStateFirstDerivative</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>dynamicsDerivative</declname>
+        </param>
+        <briefdescription>
+<para>Compute the partial derivative of the state dynamics wrt the state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Namely it computes, <formula id="82">$ \frac{\partial f(t,x,u)}{\partial x}$</formula>. By default it return false;</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state value at which computing the partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which computing the partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">dynamicsDerivative</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output derivative. It has to be a square matrix with dimension equal to the state size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successful, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearSystem.h" line="65" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1ae6521cb2dad7a528732ea7f6933a8071" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::LinearSystem::dynamicsControlFirstDerivative</definition>
+        <argsstring>(const VectorDynSize &amp;state, double time, MatrixDynSize &amp;dynamicsDerivative) final</argsstring>
+        <name>dynamicsControlFirstDerivative</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1adb980635dc572a927cef8bd46e6d5fb9">dynamicsControlFirstDerivative</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>dynamicsDerivative</declname>
+        </param>
+        <briefdescription>
+<para>Compute the partial derivative of the state dynamics wrt the control. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Namely it computes, <formula id="83">$ \frac{\partial f(t,x,u)}{\partial u}$</formula>. By default it return false;</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state value at which computing the partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which computing the partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">dynamicsDerivative</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output derivative. It has to be a matrix with number of rows equal to the state size and number of columns equal to the control size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successful, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearSystem.h" line="69" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1ab50cd1fb480d10395eb58f5b978f0abb" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::LinearSystem::dynamicsStateFirstDerivativeSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;stateSparsity) final</argsstring>
+        <name>dynamicsStateFirstDerivativeSparsity</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a53c392202df88d48e4066a52e1ef3299">dynamicsStateFirstDerivativeSparsity</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>stateSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the state jacobian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stateSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the jacobian wrt state variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearSystem.h" line="73" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a766c7b4d1388006e06b4e985f32c4913" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::LinearSystem::dynamicsControlFirstDerivativeSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;controlSparsity) final</argsstring>
+        <name>dynamicsControlFirstDerivativeSparsity</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1adce1c8de3d7c21ff9b349337c45526bc">dynamicsControlFirstDerivativeSparsity</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>controlSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the control jacobian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>controlSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the jacobian wrt state variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearSystem.h" line="75" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1aad45c1bcb83441937a1724bee499f58c" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::LinearSystem::dynamicsSecondPartialDerivativeWRTState</definition>
+        <argsstring>(double time, const iDynTree::VectorDynSize &amp;state, const iDynTree::VectorDynSize &amp;lambda, iDynTree::MatrixDynSize &amp;partialDerivative) final</argsstring>
+        <name>dynamicsSecondPartialDerivativeWRTState</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a7525017f74a6be06a5b33f6ab1a534de">dynamicsSecondPartialDerivativeWRTState</reimplements>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>partialDerivative</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the dynamics second partial derivative wrt the state variables. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It is the result of <formula id="84">$\frac{\partial^2 f(t, x, u)}{\partial x^2}$</formula> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The associated lagrange multipliers </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">partialDerivative</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearSystem.h" line="77" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a95d0eec0bfd0634ad3f0bf4c977b9a0b" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::LinearSystem::dynamicsSecondPartialDerivativeWRTControl</definition>
+        <argsstring>(double time, const iDynTree::VectorDynSize &amp;state, const iDynTree::VectorDynSize &amp;lambda, iDynTree::MatrixDynSize &amp;partialDerivative) final</argsstring>
+        <name>dynamicsSecondPartialDerivativeWRTControl</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a2fe62ab7639384a183bedce734aa6056">dynamicsSecondPartialDerivativeWRTControl</reimplements>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>partialDerivative</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the dynamics second partial derivative wrt the control. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It is the result of <formula id="85">$\frac{\partial^2 f(t, x, u)}{\partial u^2}$</formula> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The associated lagrange multipliers </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">partialDerivative</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearSystem.h" line="82" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a51e2fb08d78286e68b3bc15d720b943a" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::LinearSystem::dynamicsSecondPartialDerivativeWRTStateControl</definition>
+        <argsstring>(double time, const iDynTree::VectorDynSize &amp;state, const iDynTree::VectorDynSize &amp;lambda, iDynTree::MatrixDynSize &amp;partialDerivative) final</argsstring>
+        <name>dynamicsSecondPartialDerivativeWRTStateControl</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aa05844446c984946204dfda39a13aa8a">dynamicsSecondPartialDerivativeWRTStateControl</reimplements>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>partialDerivative</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the dynamics second partial derivative wrt the state and control. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It is the result of <formula id="86">$\frac{\partial^2 f(t, x, u)}{\partial x \partial u}$</formula>, thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The associated lagrange multipliers </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">partialDerivative</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearSystem.h" line="87" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1ac7591a0eaa5140d4894f1a911a5b995f" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::LinearSystem::dynamicsSecondPartialDerivativeWRTStateSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;stateSparsity) final</argsstring>
+        <name>dynamicsSecondPartialDerivativeWRTStateSparsity</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a59b187545289936a58b328dd879d1804">dynamicsSecondPartialDerivativeWRTStateSparsity</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>stateSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the state hessian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>No check is performed in the indeces. They need to be in the range [0, stateDimension) and [0, stateDimension) respectively. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">stateSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the jacobian wrt state variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearSystem.h" line="92" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a3fcadc398984a481f0509bded638bd05" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::LinearSystem::dynamicsSecondPartialDerivativeWRTStateControlSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;stateControlSparsity) final</argsstring>
+        <name>dynamicsSecondPartialDerivativeWRTStateControlSparsity</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ae146dece07aaff9858da1f9ab0bb8464">dynamicsSecondPartialDerivativeWRTStateControlSparsity</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>stateControlSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the mixed hessian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>No check is performed in the indeces. They need to be in the range [0, stateDimension) and [0, controlDimension) respectively. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">stateControlSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the jacobian wrt state and control variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearSystem.h" line="94" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a16b0a2f2acb0e0226510a15bcd578882" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::LinearSystem::dynamicsSecondPartialDerivativeWRTControlSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;controlSparsity) final</argsstring>
+        <name>dynamicsSecondPartialDerivativeWRTControlSparsity</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1adde7e5979c176b76d4334635210ead91">dynamicsSecondPartialDerivativeWRTControlSparsity</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>controlSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the control hessian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>No check is performed in the indeces. They need to be in the range [0, constraintDimension) and [0, controlDimension) respectively. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">controlSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the jacobian wrt control variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearSystem.h" line="96" column="26"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::optimalcontrol::DynamicalSystem</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::optimalcontrol::LinearSystem</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>iDynTree::optimalcontrol::DynamicalSystem</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::optimalcontrol::LinearSystem</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/LinearSystem.h" line="36" column="9" bodyfile="iDynTree/LinearSystem.h" bodystart="37" bodyend="103"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a9106ad9134ccfe7eed374dbd9e0192d2" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>controlInput</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a07c72447bba26fad4be33d3d629fb9e9" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>controlInput</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ae9048969fa6bb586f08332aa279ac01a" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>controlSpaceSize</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1af4b91c95d739fd82a0013560fa051233" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>DynamicalSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ab82065e18425aa56e59b030519d5e123" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>DynamicalSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a4020c60fe630d1f5b6b4baf06e7b42a4" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>DynamicalSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a2596766c2b5a2346fc00633b1fcebc85" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>dynamics</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1ae6521cb2dad7a528732ea7f6933a8071" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>dynamicsControlFirstDerivative</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a766c7b4d1388006e06b4e985f32c4913" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>dynamicsControlFirstDerivativeSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a95d0eec0bfd0634ad3f0bf4c977b9a0b" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>dynamicsSecondPartialDerivativeWRTControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a16b0a2f2acb0e0226510a15bcd578882" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>dynamicsSecondPartialDerivativeWRTControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1aad45c1bcb83441937a1724bee499f58c" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>dynamicsSecondPartialDerivativeWRTState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a51e2fb08d78286e68b3bc15d720b943a" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>dynamicsSecondPartialDerivativeWRTStateControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a3fcadc398984a481f0509bded638bd05" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>dynamicsSecondPartialDerivativeWRTStateControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1ac7591a0eaa5140d4894f1a911a5b995f" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>dynamicsSecondPartialDerivativeWRTStateSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a8a775ab121adc0f62c2d2203801a331e" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>dynamicsStateFirstDerivative</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1ab50cd1fb480d10395eb58f5b978f0abb" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>dynamicsStateFirstDerivativeSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a8d4e1f2401927edd62ab3236f787bda0" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>initialState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aacad7dc34a95cc980482026aa0340ea5" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>initialState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a2c0727b1b7067ad0042880a2c21021fd" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>LinearSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a3437f9e6234fc7a698d4d4a590ec419b" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>LinearSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a29645196589d2a947368e65c851c50bb" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>LinearSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a4308fcbae088d2b32202b142bbb93f7e" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>m_pimpl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aa7075f1f51fa22e426b6dd94f2297530" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>setControlInput</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a36b039c6b817db400f277cfa3230802b" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>setControlMatrix</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a3fa5cbf4e9a3fa25db27edeef20ca4de" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>setControlMatrix</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a5a08463a75e03ef33a3b945a47c03120" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>setInitialState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a1d874018df76571d25f2cf5b510c4467" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>setStateMatrix</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a8909f5f3adbe11fa54c379760b417c7a" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>setStateMatrix</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a1fdc25cc07f3bc2d02ac0cc2c74e8abc" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>stateSpaceSize</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a99a0776f0a23fd9a672c1be966839e81" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>~DynamicalSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a79af515c739a47f2c0b7ba77d2131b5e" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>~LinearSystem</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

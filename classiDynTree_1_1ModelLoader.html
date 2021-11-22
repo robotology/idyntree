@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>iDynTree::ModelLoader class | iDynTree master</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="./index.html">iDynTree</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="4">
+            <li>
+              <a href="pages.html">Versions</a>
+              <ol>
+                <li><a href="./index.html">Master</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="pages.html">Contacts</a>
+              <ol>
+                <li><a href="https://github.com/robotology/idyntree">GitHub</a></li>
+                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
+              </ol>
+            </li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespaceiDynTree.html">iDynTree</a>::<wbr/></span>ModelLoader <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="ModelLoader_8h.html">&lt;iDynTree/ModelIO/ModelLoader.h&gt;</a></div>
+        </h1>
+        <p>Helper class to load a model from a generic format.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#constructordestructor">Constructor/Destructor</a></li>
+                <li><a href="#model-loading-and-definition-methods">Model loading and definition methods</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<p>Unless the methods for loading a model with an explicit serialization are used, the default joint serialization of the model loaded will be a &quot;normalized&quot; joint serialization based on the default base link, see the iDynTree::createModelWithNormalizedJointNumbering function for more details.</p>
+        <section id="constructordestructor">
+          <h2><a href="#constructordestructor">Constructor/Destructor</a></h2>
+          <dl class="m-doc">
+            <dt id="a17284e5e46f1f2ff2d3d74a32442d362">
+              <span class="m-doc-wrap-bumper"><a href="#a17284e5e46f1f2ff2d3d74a32442d362" class="m-doc-self">ModelLoader</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Constructor.</dd>
+            <dt id="a6e6be84f2b3a2009d22949e4b7520de2">
+              <span class="m-doc-wrap-bumper"><a href="#a6e6be84f2b3a2009d22949e4b7520de2" class="m-doc-self">~ModelLoader</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="model-loading-and-definition-methods">
+          <h2><a href="#model-loading-and-definition-methods">Model loading and definition methods</a></h2>
+<p>This methods are used to load the structure of your model.</p>
+          <dl class="m-doc">
+            <dt id="adfc4ccd100924f832a6fa6b1929a20e6">
+              <span class="m-doc-wrap-bumper">auto <a href="#adfc4ccd100924f832a6fa6b1929a20e6" class="m-doc-self">parsingOptions</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="structiDynTree_1_1ModelParserOptions.html" class="m-doc">ModelParserOptions</a>&amp;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1a6f86c7cc5964554458ead6242796a9">
+              <span class="m-doc-wrap-bumper">void <a href="#a1a6f86c7cc5964554458ead6242796a9" class="m-doc-self">setParsingOptions</a>(</span><span class="m-doc-wrap">const <a href="structiDynTree_1_1ModelParserOptions.html" class="m-doc">ModelParserOptions</a>&amp; options)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a44b074a70bd585aecffa44a2329c99b0" class="m-doc">loadModelFromString</a>(</span><span class="m-doc-wrap">const std::string&amp; modelString,
+              const std::string&amp; filetype = &quot;urdf&quot;) -&gt; bool</span>
+            </dt>
+            <dd>Load the model of the robot from a string.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4731f7a0967a0f88b9ee760027f42c28" class="m-doc">loadModelFromFile</a>(</span><span class="m-doc-wrap">const std::string&amp; filename,
+              const std::string&amp; filetype = &quot;urdf&quot;) -&gt; bool</span>
+            </dt>
+            <dd>Load the model of the robot from an external file.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa1d105cc4c13bc5c6fd90cc6f8224085" class="m-doc">loadReducedModelFromFullModel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; fullModel,
+              const std::vector&lt;std::string&gt;&amp; consideredJoints,
+              const std::string filetype = &quot;&quot;) -&gt; bool</span>
+            </dt>
+            <dd>Load reduced model from another model, specifyng only the desired joints in the model.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af6391e49caad7c349a1f007abb4ec2d4" class="m-doc">loadReducedModelFromString</a>(</span><span class="m-doc-wrap">const std::string modelString,
+              const std::vector&lt;std::string&gt;&amp; consideredJoints,
+              const std::string filetype = &quot;&quot;) -&gt; bool</span>
+            </dt>
+            <dd>Load reduced model from string, specifyng only the desired joints in the model.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab846e7becb8c98998cb2b05749a95ade" class="m-doc">loadReducedModelFromFile</a>(</span><span class="m-doc-wrap">const std::string filename,
+              const std::vector&lt;std::string&gt;&amp; consideredJoints,
+              const std::string filetype = &quot;&quot;) -&gt; bool</span>
+            </dt>
+            <dd>Load reduced model from file, specifyng only the desired joints in the model.</dd>
+            <dt id="abfea0564c6c01dc8a90bab55df13b533">
+              <span class="m-doc-wrap-bumper">auto <a href="#abfea0564c6c01dc8a90bab55df13b533" class="m-doc-self">model</a>(</span><span class="m-doc-wrap">) -&gt; const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp;</span>
+            </dt>
+            <dd>Get the loaded model.</dd>
+            <dt id="a933ace452015e5dd1d0d229315aef980">
+              <span class="m-doc-wrap-bumper">auto <a href="#a933ace452015e5dd1d0d229315aef980" class="m-doc-self">sensors</a>(</span><span class="m-doc-wrap">) -&gt; const <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a>&amp;</span>
+            </dt>
+            <dd>Get the loaded sensors.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6b78cb43b48ab1b377b5c907f9918077" class="m-doc">isValid</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
+            </dt>
+            <dd>Return true if the model have been correctly true.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a44b074a70bd585aecffa44a2329c99b0"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ModelLoader::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a44b074a70bd585aecffa44a2329c99b0" class="m-doc-self">loadModelFromString</a>(</span><span class="m-doc-wrap">const std::string&amp; modelString,
+              const std::string&amp; filetype = &quot;urdf&quot;)</span></span>
+            </h3>
+            <p>Load the model of the robot from a string.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">modelString</td>
+                  <td>string containg the model of the robot.</td>
+                </tr>
+                <tr>
+                  <td>filetype</td>
+                  <td>type of the file to load, currently supporting only urdf type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a4731f7a0967a0f88b9ee760027f42c28"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ModelLoader::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4731f7a0967a0f88b9ee760027f42c28" class="m-doc-self">loadModelFromFile</a>(</span><span class="m-doc-wrap">const std::string&amp; filename,
+              const std::string&amp; filetype = &quot;urdf&quot;)</span></span>
+            </h3>
+            <p>Load the model of the robot from an external file.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">filename</td>
+                  <td>path to the file to load</td>
+                </tr>
+                <tr>
+                  <td>filetype</td>
+                  <td>type of the file to load, currently supporting only urdf type.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa1d105cc4c13bc5c6fd90cc6f8224085"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ModelLoader::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa1d105cc4c13bc5c6fd90cc6f8224085" class="m-doc-self">loadReducedModelFromFullModel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; fullModel,
+              const std::vector&lt;std::string&gt;&amp; consideredJoints,
+              const std::string filetype = &quot;&quot;)</span></span>
+            </h3>
+            <p>Load reduced model from another model, specifyng only the desired joints in the model.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">fullModel</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>consideredJoints&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>list of joints to consider in the model.</td>
+                </tr>
+                <tr>
+                  <td>filetype&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>(optional) explicit definition of the type of the loaded file. Only &quot;urdf&quot; is supported at the moment.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if all went well (files were correctly loaded and consistent), false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>All other joints will be considered to be fixed to their default position, and their child links will be lumped together.</p><aside class="m-note m-info"><h4>Note</h4><p>the order of the degreese of freedom of the newly loaded model will be the one specified by the input joints serialization, i.e. consideredJoints</p></aside><aside class="m-note m-info"><h4>Note</h4><p>Until <a href="https://github.com/robotology/idyntree/issues/132">https:/<wbr />/<wbr />github.com/<wbr />robotology/<wbr />idyntree/<wbr />issues/<wbr />132</a> is fixed, this method does not accounts for sensors.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="af6391e49caad7c349a1f007abb4ec2d4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ModelLoader::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af6391e49caad7c349a1f007abb4ec2d4" class="m-doc-self">loadReducedModelFromString</a>(</span><span class="m-doc-wrap">const std::string modelString,
+              const std::vector&lt;std::string&gt;&amp; consideredJoints,
+              const std::string filetype = &quot;&quot;)</span></span>
+            </h3>
+            <p>Load reduced model from string, specifyng only the desired joints in the model.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">modelString&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>string containg the model of the robot.</td>
+                </tr>
+                <tr>
+                  <td>consideredJoints&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>list of joints to consider in the model.</td>
+                </tr>
+                <tr>
+                  <td>filetype&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>(optional) explicit definiton of the filetype to load. Only &quot;urdf&quot; is supported at the moment.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if all went well (files were correctly loaded and consistent), false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>All other joints will be considered to be fixed to their default position, and their child links will be lumped together.</p>
+          </div></section>
+          <section class="m-doc-details" id="ab846e7becb8c98998cb2b05749a95ade"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ModelLoader::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab846e7becb8c98998cb2b05749a95ade" class="m-doc-self">loadReducedModelFromFile</a>(</span><span class="m-doc-wrap">const std::string filename,
+              const std::vector&lt;std::string&gt;&amp; consideredJoints,
+              const std::string filetype = &quot;&quot;)</span></span>
+            </h3>
+            <p>Load reduced model from file, specifyng only the desired joints in the model.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">filename&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>path to the file to load.</td>
+                </tr>
+                <tr>
+                  <td>consideredJoints&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>list of joints to consider in the model.</td>
+                </tr>
+                <tr>
+                  <td>filetype&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>(optional) explicit definiton of the filetype to load. Only &quot;urdf&quot; is supported at the moment.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if all went well (files were correctly loaded and consistent), false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>All other joints will be considered to be fixed to their default position, and their child links will be lumped together.</p>
+          </div></section>
+          <section class="m-doc-details" id="a6b78cb43b48ab1b377b5c907f9918077"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ModelLoader::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6b78cb43b48ab1b377b5c907f9918077" class="m-doc-self">isValid</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Return true if the model have been correctly true.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>True if the model was loaded correctly.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>iDynTree documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/robotology/idyntree/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

@@ -1,0 +1,518 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1SpatialInertia" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::SpatialInertia</compoundname>
+    <basecompoundref refid="classiDynTree_1_1SpatialInertiaRaw" prot="public" virt="non-virtual">iDynTree::SpatialInertiaRaw</basecompoundref>
+    <includes local="no">iDynTree/Core/SpatialInertia.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1ab599c235ffbb9936d16a56c53f390d06" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SpatialInertia::SpatialInertia</definition>
+        <argsstring>()</argsstring>
+        <name>SpatialInertia</name>
+        <briefdescription>
+<para>Default constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The data is not reset to zero for perfomance reason. Please initialize the data in the vector before any use. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertia.h" line="37" column="16" bodyfile="iDynTree/Core/SpatialInertia.h" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a894a85c0a1319ae8894c73b5298669d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SpatialInertia::SpatialInertia</definition>
+        <argsstring>(const double mass, const PositionRaw &amp;com, const RotationalInertiaRaw &amp;rotInertia)</argsstring>
+        <name>SpatialInertia</name>
+        <param>
+          <type>const double</type>
+          <declname>mass</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1PositionRaw" kindref="compound">PositionRaw</ref> &amp;</type>
+          <declname>com</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1RotationalInertiaRaw" kindref="compound">RotationalInertiaRaw</ref> &amp;</type>
+          <declname>rotInertia</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertia.h" line="38" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a105dc0fc74f9c5fe6475ac3d29dc275f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SpatialInertia::SpatialInertia</definition>
+        <argsstring>(const SpatialInertiaRaw &amp;other)</argsstring>
+        <name>SpatialInertia</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialInertiaRaw" kindref="compound">SpatialInertiaRaw</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertia.h" line="41" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a64175e97f51f1595870b8aff78f64839" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SpatialInertia::SpatialInertia</definition>
+        <argsstring>(const SpatialInertia &amp;other)</argsstring>
+        <name>SpatialInertia</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertia.h" line="42" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a7ac807ec779d50c39b04d37578f57e21" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x6</ref></type>
+        <definition>Matrix6x6 iDynTree::SpatialInertia::asMatrix</definition>
+        <argsstring>() const</argsstring>
+        <name>asMatrix</name>
+        <briefdescription>
+<para>Get the <ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref> as a 6x6 matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If <formula id="134">$ m \in \mathbb{R} $</formula> is the mass, <formula id="135">$ c \in \mathbb{R}^3 $</formula> is the center of mass, <formula id="136">$ I \in \mathbb{R}^{3 \times 3} $</formula> is the 3d inertia, and <formula id="137">$ 1_3 \in \mathbb{R}^{3 \times 3} $</formula> is the 3d identity matrix this method returns the <formula id="138">$ \mathbb{M} \in \mathbb{R}^{6 \times 6} $</formula> matrix such that: <formula id="139">\[ \mathbb{M} = \begin{bmatrix} m 1_3 &amp; -m c \times \\ m c \times &amp; I \end{bmatrix} \]</formula>.</para>
+<para><simplesect kind="note"><para>As all quantities in iDynTree, this inertia assumes the linear-angular serialization. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertia.h" line="66" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1ac8f2cb43371716b2aeb3a893e4e14462" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref></type>
+        <definition>Twist iDynTree::SpatialInertia::applyInverse</definition>
+        <argsstring>(const SpatialMomentum &amp;mom) const</argsstring>
+        <name>applyInverse</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialMomentum" kindref="compound">SpatialMomentum</ref> &amp;</type>
+          <declname>mom</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertia.h" line="68" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a7a7aee5d660fcc79d46351cc250a58cf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x6</ref></type>
+        <definition>Matrix6x6 iDynTree::SpatialInertia::getInverse</definition>
+        <argsstring>() const</argsstring>
+        <name>getInverse</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertia.h" line="69" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1ae27826af45cbe71fe032df901a8581ff" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref></type>
+        <definition>SpatialInertia iDynTree::SpatialInertia::operator+</definition>
+        <argsstring>(const SpatialInertia &amp;other) const</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertia.h" line="72" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a87e87a50bd6d6ce97333be081e5593fd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref></type>
+        <definition>SpatialForceVector iDynTree::SpatialInertia::operator*</definition>
+        <argsstring>(const SpatialMotionVector &amp;other) const</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertia.h" line="73" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a8f34cacbbf37b2ed9eb9c27501b39a9c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialMomentum" kindref="compound">SpatialMomentum</ref></type>
+        <definition>SpatialMomentum iDynTree::SpatialInertia::operator*</definition>
+        <argsstring>(const Twist &amp;other) const</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertia.h" line="74" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1acae1bf059807dd9af5717034b746b699" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
+        <definition>Wrench iDynTree::SpatialInertia::operator*</definition>
+        <argsstring>(const SpatialAcc &amp;other) const</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertia.h" line="75" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a100bc8dc58245924b2f3c3a7fbf243bc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
+        <definition>Wrench iDynTree::SpatialInertia::biasWrench</definition>
+        <argsstring>(const Twist &amp;V) const</argsstring>
+        <name>biasWrench</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref> &amp;</type>
+          <declname>V</declname>
+        </param>
+        <briefdescription>
+<para>Return the bias wrench v.cross(M*v). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Defining <formula id="140">$ \mathbb{M} $</formula> as this inertia, return the bias wrench v.cross(M*v), defined in math as: <formula id="141">\[ \mathrm{v} \bar\times^* \mathbb{M} \mathrm{v} = \\ \begin{bmatrix} \omega \times &amp; 0 \\ v \times &amp; \omega \times \end{bmatrix} \begin{bmatrix} m 1_3 &amp; -mc\times \\ mc\times &amp; I \end{bmatrix} \begin{bmatrix} v \\ \omega \end{bmatrix} = \\ \begin{bmatrix} m \omega \times v - \omega \times ( m c \times \omega) \\ m c \times ( \omega \times v ) + \omega \times I \omega \end{bmatrix} \]</formula> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertia.h" line="99" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1ad623214d451123c7e435a53e13572076" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x6</ref></type>
+        <definition>Matrix6x6 iDynTree::SpatialInertia::biasWrenchDerivative</definition>
+        <argsstring>(const Twist &amp;V) const</argsstring>
+        <name>biasWrenchDerivative</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref> &amp;</type>
+          <declname>V</declname>
+        </param>
+        <briefdescription>
+<para>Return the derivative of the bias wrench with respect to the link 6D velocity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Defining <formula id="138">$ \mathbb{M} \in \mathbb{R}^{6 \times 6} $</formula> as this inertia, return the derivative with respect to <formula id="142">$ \mathrm{v} = \begin{bmatrix} v \\ \omega \end{bmatrix} \in \mathbb{R}^6 $</formula> of the bias wrench <formula id="143">$ \mathrm{v} \bar\times^* \mathbb{M} \mathrm{v} $</formula> (i.e. v.cross(M*v)).</para>
+<para>The bias wrench is: <formula id="144">\[ \mathrm{v} \bar\times^* \mathbb{M} \mathrm{v} = \\ \begin{bmatrix} m \omega \times v - \omega \times ( m c \times \omega) \\ m c \times ( \omega \times v ) + \omega \times I \omega \end{bmatrix} \]</formula></para>
+<para>So the derivative with respect to the twist V is : <formula id="145">\[ \partial_\mathrm{v} ( \mathrm{v} \bar\times^* \mathbb{M} \mathrm{v} ) = \\ \begin{bmatrix} m \omega \times &amp; - m v \times + ( m c \times \omega) \times - (\omega \times) (mc \times) \\ (m c \times) ( \omega \times) &amp; - (m c \times )(v \times) + \omega \times I - (I \omega) \times \end{bmatrix} \]</formula> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertia.h" line="126" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1ac1bfbb66868419b1fd9fd635c8b779a1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector10</ref></type>
+        <definition>Vector10 iDynTree::SpatialInertia::asVector</definition>
+        <argsstring>() const</argsstring>
+        <name>asVector</name>
+        <briefdescription>
+<para>Get the Rigid Body Inertia as a vector of 10 inertial parameters. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Return the rigid body inertia inertial parameters, defined as:</para>
+<para><table rows="4" cols="3"><row>
+<entry thead="yes" align='center'><para>Elements   </para>
+</entry><entry thead="yes" align='center'><para>Symbol   </para>
+</entry><entry thead="yes" align='center'><para>Description    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>0   </para>
+</entry><entry thead="no" align='center'><para><formula id="146">$ m $</formula>   </para>
+</entry><entry thead="no" align='center'><para>The mass of the rigid body    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>1-3   </para>
+</entry><entry thead="no" align='center'><para><formula id="147">$ m c $</formula>   </para>
+</entry><entry thead="no" align='center'><para>The first moment of mass of the rigid body    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>4-9   </para>
+</entry><entry thead="no" align='center'><para><formula id="148">$ \mathop{vech}(I) $</formula>   </para>
+</entry><entry thead="no" align='center'><para>The 6 independent elements of the 3d inertia matrix, i.e. <formula id="149">$ \begin{bmatrix} I_{xx} \\ I_{xy} \\ I_{xz} \\ I_{yy} \\ I_{yz} \\ I_{zz} \end{bmatrix} $</formula> .   </para>
+</entry></row>
+</table>
+</para>
+<para>The first moment of mass is the center of mass ( <formula id="135">$ c \in \mathbb{R}^3 $</formula> ) w.r.t. to the frame where this rigid body inertia is expressed multiplied by the rigid body mass <formula id="146">$ m $</formula>.</para>
+<para>The 3d rigid body inertia <formula id="136">$ I \in \mathbb{R}^{3 \times 3} $</formula> is expressed with the orientation of the frame in which this rigid body inertia is expressed, and with respect to the frame origin. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertia.h" line="149" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a3e9180c32b6979c2baac6b5fe836d322" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SpatialInertia::fromVector</definition>
+        <argsstring>(const Vector10 &amp;inertialParams)</argsstring>
+        <name>fromVector</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector10</ref> &amp;</type>
+          <declname>inertialParams</declname>
+        </param>
+        <briefdescription>
+<para>Set the Rigid Body Inertia from the inertial parameters in the vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The serialization assumed in the inertialParams is the same used in the asVector method. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertia.h" line="156" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a6b493d81ed9bcedb37f81d0125d1ab04" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SpatialInertia::isPhysicallyConsistent</definition>
+        <argsstring>() const</argsstring>
+        <name>isPhysicallyConsistent</name>
+        <briefdescription>
+<para>Check if the Rigid Body Inertia is physically consistent. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method will check:<itemizedlist>
+<listitem><para>if the mass is positive,</para>
+</listitem><listitem><para>if the 3d inertia at the COM is positive semidefinite, (semidefinite to cover also the case of the inertia of a point mass),</para>
+</listitem><listitem><para>if the moment of inertia along the principal axes at the COM respect the triangle inequality.</para>
+</listitem></itemizedlist>
+</para>
+<para>It will return true if all this check will pass, or false otherwise. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertia.h" line="170" column="14"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a1149f9fcf0a85c53765676c9bd3d3d38" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref></type>
+        <definition>static SpatialInertia iDynTree::SpatialInertia::combine</definition>
+        <argsstring>(const SpatialInertia &amp;op1, const SpatialInertia &amp;op2)</argsstring>
+        <name>combine</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref> &amp;</type>
+          <declname>op1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref> &amp;</type>
+          <declname>op2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertia.h" line="45" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1aac5e562a500942361c6d6e659719b07b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref></type>
+        <definition>static SpatialInertia iDynTree::SpatialInertia::Zero</definition>
+        <argsstring>()</argsstring>
+        <name>Zero</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertia.h" line="128" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a183b97d44d255553c648236202c208a6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x10</ref></type>
+        <definition>static Matrix6x10 iDynTree::SpatialInertia::momentumRegressor</definition>
+        <argsstring>(const iDynTree::Twist &amp;v)</argsstring>
+        <name>momentumRegressor</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Twist" kindref="compound">iDynTree::Twist</ref> &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+<para>Get the momentum inertial parameters regressor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the matrix <formula id="150">\[ Y(\mathrm{v}) \in \mathbb{R}^{6 \times 10} \]</formula> such that: <formula id="151">\[ \mathbb{M} \mathrm{v} = Y(\mathrm{v}) \alpha \]</formula></para>
+<para>If <formula id="152">$ \alpha \in \mathbb{R}^{10} $</formula> is the inertial parameters representation of <formula id="140">$ \mathbb{M} $</formula>, as returned by the asVector method. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertia.h" line="187" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a5b8bf854a9e99daa3d7abdacaa73c0fd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x10</ref></type>
+        <definition>static Matrix6x10 iDynTree::SpatialInertia::momentumDerivativeRegressor</definition>
+        <argsstring>(const iDynTree::Twist &amp;v, const iDynTree::SpatialAcc &amp;a)</argsstring>
+        <name>momentumDerivativeRegressor</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Twist" kindref="compound">iDynTree::Twist</ref> &amp;</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">iDynTree::SpatialAcc</ref> &amp;</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+<para>Get the momentum derivative inertial parameters regressor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the matrix <formula id="153">\[ Y(\mathrm{v},a) \in \mathbb{R}^{6 \times 10} \]</formula> such that: <formula id="154">\[ \mathbb{M} a + \mathrm{v} \overline{\times}^{*} \mathbb{M} \mathrm{v} = Y(\mathrm{v}, a)\alpha \]</formula></para>
+<para>If <formula id="152">$ \alpha \in \mathbb{R}^{10} $</formula> is the inertial parameters representation of <formula id="140">$ \mathbb{M} $</formula>, as returned by the asVector method.</para>
+<para>This is also the regressor of the net wrench acting on a rigid body. As such, it is the building block of all other algorithms to compute dynamics regressors. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertia.h" line="208" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a33efaebc74adccc53058177922a50370" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x10</ref></type>
+        <definition>static Matrix6x10 iDynTree::SpatialInertia::momentumDerivativeSlotineLiRegressor</definition>
+        <argsstring>(const iDynTree::Twist &amp;v, const iDynTree::Twist &amp;vRef, const iDynTree::SpatialAcc &amp;aRef)</argsstring>
+        <name>momentumDerivativeSlotineLiRegressor</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Twist" kindref="compound">iDynTree::Twist</ref> &amp;</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Twist" kindref="compound">iDynTree::Twist</ref> &amp;</type>
+          <declname>vRef</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">iDynTree::SpatialAcc</ref> &amp;</type>
+          <declname>aRef</declname>
+        </param>
+        <briefdescription>
+<para>Get the momentum derivative inertial parameters regressor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the matrix <formula id="155">\[ Y(\mathrm{v},\mathrm{v}_r,a_r) \in \mathbb{R}^{6\times10} \]</formula> such that: <formula id="156">\[ \mathbb{M} a_r + (\mathrm{v} \overline{\times}^{*} \mathbb{M} - \mathbb{M} \mathrm{v} \times) \mathrm{v}_r = Y(\mathrm{v},\mathrm{v}_r,a_r)\alpha \]</formula></para>
+<para>If <formula id="152">$ \alpha \in \mathbb{R}^{10} $</formula> is the inertial parameters representation of <formula id="140">$ \mathbb{M} $</formula>, as returned by the asVector method.</para>
+<para>Notice that if <formula id="157">$ \mathrm{v} = \mathrm{v}_r $</formula>, this regressor reduces to the one computed by momentumDerivativeRegressor. The main difference is that (assuming constant <formula id="140">$ \mathbb{M} $</formula>) this regressor respect the passivity condition and thus is the basic building block for building Slotine Li style regressors.</para>
+<para>For more on this, please check:</para>
+<para>Garofalo, G.; Ott, C.; Albu-Schaffer, A., &quot;On the closed form computation of the dynamic matrices and their differentiations,&quot; in Intelligent Robots and Systems (IROS), 2013 IEEE/RSJ International Conference on doi: 10.1109/IROS.2013.6696688 URL: <ulink url="http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=6696688&amp;isnumber=6696319">http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=6696688&amp;isnumber=6696319</ulink> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertia.h" line="239" column="27"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class representing a six dimensional inertia. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::SpatialInertia</label>
+        <link refid="classiDynTree_1_1SpatialInertia"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::SpatialInertiaRaw</label>
+        <link refid="classiDynTree_1_1SpatialInertiaRaw"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>iDynTree::RotationalInertiaRaw</label>
+        <link refid="classiDynTree_1_1RotationalInertiaRaw"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::SpatialInertia</label>
+        <link refid="classiDynTree_1_1SpatialInertia"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::SpatialInertiaRaw</label>
+        <link refid="classiDynTree_1_1SpatialInertiaRaw"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_rotInertia</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Matrix3x3</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+        <childnode refid="5" relation="template-instance">
+          <edgelabel>&lt; 3, 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>iDynTree::MatrixFixSize&lt; nRows, nCols &gt;</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Core/SpatialInertia.h" line="29" column="5" bodyfile="iDynTree/Core/SpatialInertia.h" bodystart="30" bodyend="242"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1SpatialInertia_1ac8f2cb43371716b2aeb3a893e4e14462" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>applyInverse</name></member>
+      <member refid="classiDynTree_1_1SpatialInertia_1a7ac807ec779d50c39b04d37578f57e21" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>asMatrix</name></member>
+      <member refid="classiDynTree_1_1SpatialInertia_1ac1bfbb66868419b1fd9fd635c8b779a1" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>asVector</name></member>
+      <member refid="classiDynTree_1_1SpatialInertia_1a100bc8dc58245924b2f3c3a7fbf243bc" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>biasWrench</name></member>
+      <member refid="classiDynTree_1_1SpatialInertia_1ad623214d451123c7e435a53e13572076" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>biasWrenchDerivative</name></member>
+      <member refid="classiDynTree_1_1SpatialInertia_1a1149f9fcf0a85c53765676c9bd3d3d38" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>combine</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1aec240d29470a4bb7d7aebaa434ffef3c" prot="public" virt="non-virtual" ambiguityscope="iDynTree::SpatialInertiaRaw::"><scope>iDynTree::SpatialInertia</scope><name>combine</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1a910d0f719839f786b22a9bcc1b945371" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>fromRotationalInertiaWrtCenterOfMass</name></member>
+      <member refid="classiDynTree_1_1SpatialInertia_1a3e9180c32b6979c2baac6b5fe836d322" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>fromVector</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1a37cb05817ed6e158eb96a8d5d7519941" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>getCenterOfMass</name></member>
+      <member refid="classiDynTree_1_1SpatialInertia_1a7a7aee5d660fcc79d46351cc250a58cf" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>getInverse</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1a38d60687fb01182e2d6cc9970e697b98" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>getMass</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1a890bf2876d229c14b3ae24277bccebba" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>getRotationalInertiaWrtCenterOfMass</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1ae13758f1b92ba30c1c02e5076ccb8940" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>getRotationalInertiaWrtFrameOrigin</name></member>
+      <member refid="classiDynTree_1_1SpatialInertia_1a6b493d81ed9bcedb37f81d0125d1ab04" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>isPhysicallyConsistent</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1a94039efc9f52c01fc0111fb5c17cbd87" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>m_mass</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1adffed809529bfbc044e8c330374c611a" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>m_mcom</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1aae4c95f1309e827a915431c58dad3666" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>m_rotInertia</name></member>
+      <member refid="classiDynTree_1_1SpatialInertia_1a5b8bf854a9e99daa3d7abdacaa73c0fd" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>momentumDerivativeRegressor</name></member>
+      <member refid="classiDynTree_1_1SpatialInertia_1a33efaebc74adccc53058177922a50370" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>momentumDerivativeSlotineLiRegressor</name></member>
+      <member refid="classiDynTree_1_1SpatialInertia_1a183b97d44d255553c648236202c208a6" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>momentumRegressor</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1adda5a778ebf6d876fa24d8d8b48a49ef" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>multiply</name></member>
+      <member refid="classiDynTree_1_1SpatialInertia_1a87e87a50bd6d6ce97333be081e5593fd" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>operator*</name></member>
+      <member refid="classiDynTree_1_1SpatialInertia_1a8f34cacbbf37b2ed9eb9c27501b39a9c" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>operator*</name></member>
+      <member refid="classiDynTree_1_1SpatialInertia_1acae1bf059807dd9af5717034b746b699" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>operator*</name></member>
+      <member refid="classiDynTree_1_1SpatialInertia_1ae27826af45cbe71fe032df901a8581ff" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>operator+</name></member>
+      <member refid="classiDynTree_1_1SpatialInertia_1ab599c235ffbb9936d16a56c53f390d06" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>SpatialInertia</name></member>
+      <member refid="classiDynTree_1_1SpatialInertia_1a894a85c0a1319ae8894c73b5298669d7" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>SpatialInertia</name></member>
+      <member refid="classiDynTree_1_1SpatialInertia_1a105dc0fc74f9c5fe6475ac3d29dc275f" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>SpatialInertia</name></member>
+      <member refid="classiDynTree_1_1SpatialInertia_1a64175e97f51f1595870b8aff78f64839" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>SpatialInertia</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1a9075739a88cf8d456be6c9346955c267" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>SpatialInertiaRaw</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1aae32215a7b93c1f160bdf449dc76c60f" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>SpatialInertiaRaw</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1a5e43484f889736ad717282bb72bdac92" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>SpatialInertiaRaw</name></member>
+      <member refid="classiDynTree_1_1SpatialInertia_1aac5e562a500942361c6d6e659719b07b" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>Zero</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1ab545a454ffbd8144ce1b13fbb280d787" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>zero</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

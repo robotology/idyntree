@@ -1,0 +1,696 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1SpatialVector" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::SpatialVector</compoundname>
+      <sectiondef kind="user-defined">
+      <header>Output helpers.</header>
+      <description><para>Output helpers. </para>
+</description>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1aea482fe4d53b76b02a0438d9561e1fd0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::SpatialVector::toString</definition>
+        <argsstring>() const</argsstring>
+        <name>toString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="160" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a73b398dd07e9f3dd5c252692380a6b02" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::SpatialVector::reservedToString</definition>
+        <argsstring>() const</argsstring>
+        <name>reservedToString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="162" column="21"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classiDynTree_1_1SpatialVector_1a4ca8db3255a63370cb6fb9c5b8e4bc6c" prot="public" static="no">
+        <type><ref refid="classiDynTree_1_1SpatialMotionForceVectorT__traits" kindref="compound">SpatialMotionForceVectorT_traits</ref>&lt; DerivedSpatialVecT &gt;::LinearVector3Type</type>
+        <definition>typedef SpatialMotionForceVectorT_traits&lt;DerivedSpatialVecT&gt;::LinearVector3Type iDynTree::SpatialVector::LinearVector3T</definition>
+        <argsstring></argsstring>
+        <name>LinearVector3T</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="86" column="79" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classiDynTree_1_1SpatialVector_1a13a172b06a7af17f6220a90a4163b3f8" prot="public" static="no">
+        <type><ref refid="classiDynTree_1_1SpatialMotionForceVectorT__traits" kindref="compound">SpatialMotionForceVectorT_traits</ref>&lt; DerivedSpatialVecT &gt;::AngularVector3Type</type>
+        <definition>typedef SpatialMotionForceVectorT_traits&lt;DerivedSpatialVecT&gt;::AngularVector3Type iDynTree::SpatialVector::AngularVector3T</definition>
+        <argsstring></argsstring>
+        <name>AngularVector3T</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="87" column="80" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classiDynTree_1_1SpatialVector_1a7910d803e3b8c3ef52db0bdc0b2bec42" prot="public" static="no">
+        <type><ref refid="structiDynTree_1_1DualSpace" kindref="compound">DualSpace</ref>&lt; DerivedSpatialVecT &gt;::Type</type>
+        <definition>typedef DualSpace&lt;DerivedSpatialVecT&gt;::Type iDynTree::SpatialVector::DualVectorT</definition>
+        <argsstring></argsstring>
+        <name>DualVectorT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="88" column="43" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1SpatialVector_1a404b99c91ecaa2269ed0e891df474720" prot="protected" static="no" mutable="no">
+        <type>LinearVector3T</type>
+        <definition>LinearVector3T iDynTree::SpatialVector::linearVec3</definition>
+        <argsstring></argsstring>
+        <name>linearVec3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="91" column="24" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SpatialVector_1a7713fdb080783747a894974f5c4b44a6" prot="protected" static="no" mutable="no">
+        <type>AngularVector3T</type>
+        <definition>AngularVector3T iDynTree::SpatialVector::angularVec3</definition>
+        <argsstring></argsstring>
+        <name>angularVec3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="92" column="25" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-static-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1SpatialVector_1aa6aa22433d0a6c29e37a4efc5970e1d8" prot="protected" static="yes" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int iDynTree::SpatialVector::linearOffset</definition>
+        <argsstring></argsstring>
+        <name>linearOffset</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="93" column="35" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SpatialVector_1a45a617c3a2fbf58cb8f14be36a9f0ff5" prot="protected" static="yes" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int iDynTree::SpatialVector::angularOffset</definition>
+        <argsstring></argsstring>
+        <name>angularOffset</name>
+        <initializer>= 3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="94" column="35" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SpatialVector_1adfea1ab56aa331af032a7f7d31ac0afc" prot="protected" static="yes" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int iDynTree::SpatialVector::totalSize</definition>
+        <argsstring></argsstring>
+        <name>totalSize</name>
+        <initializer>= 6</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="95" column="35" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a787b62017e61e1dc49e0bc753cb0516b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SpatialVector::SpatialVector</definition>
+        <argsstring>()</argsstring>
+        <name>SpatialVector</name>
+        <briefdescription>
+<para>constructors </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="101" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a3d7d78e133ab83dfadb346539f70df96" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SpatialVector::SpatialVector</definition>
+        <argsstring>(const LinearVector3T &amp;_linearVec3, const AngularVector3T &amp;_angularVec3)</argsstring>
+        <name>SpatialVector</name>
+        <param>
+          <type>const LinearVector3T &amp;</type>
+          <declname>_linearVec3</declname>
+        </param>
+        <param>
+          <type>const AngularVector3T &amp;</type>
+          <declname>_angularVec3</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="102" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1aff082c865731b86ad00f3901b1f487cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SpatialVector::SpatialVector</definition>
+        <argsstring>(const SpatialVector &amp;other)</argsstring>
+        <name>SpatialVector</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialVector" kindref="compound">SpatialVector</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="103" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a1000a5a67bd77de13aabe6e41b320587" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SpatialVector::SpatialVector</definition>
+        <argsstring>(iDynTree::Span&lt; const double &gt; other)</argsstring>
+        <name>SpatialVector</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="104" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a705aa7e917215639cf8088da8a279031" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>LinearVector3T &amp;</type>
+        <definition>LinearVector3T&amp; iDynTree::SpatialVector::getLinearVec3</definition>
+        <argsstring>()</argsstring>
+        <name>getLinearVec3</name>
+        <briefdescription>
+<para>Vector accessors, getters, setters. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="109" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a8b9ae18e77c2af17ec1d369d196e0c10" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>AngularVector3T &amp;</type>
+        <definition>AngularVector3T&amp; iDynTree::SpatialVector::getAngularVec3</definition>
+        <argsstring>()</argsstring>
+        <name>getAngularVec3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="110" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1aef471e533b923fca899adfcac5703173" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const LinearVector3T &amp;</type>
+        <definition>const LinearVector3T&amp; iDynTree::SpatialVector::getLinearVec3</definition>
+        <argsstring>() const</argsstring>
+        <name>getLinearVec3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="111" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a67479f75f4632e397d7c38394f499ca5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const AngularVector3T &amp;</type>
+        <definition>const AngularVector3T&amp; iDynTree::SpatialVector::getAngularVec3</definition>
+        <argsstring>() const</argsstring>
+        <name>getAngularVec3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="112" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a171e7cf6e215e67eb32ac791526a044f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SpatialVector::setLinearVec3</definition>
+        <argsstring>(const LinearVector3T &amp;_linearVec3)</argsstring>
+        <name>setLinearVec3</name>
+        <param>
+          <type>const LinearVector3T &amp;</type>
+          <declname>_linearVec3</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="113" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a719a64c179d736390f48b6ddd0ccf6fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SpatialVector::setAngularVec3</definition>
+        <argsstring>(const AngularVector3T &amp;_angularVec3)</argsstring>
+        <name>setAngularVec3</name>
+        <param>
+          <type>const AngularVector3T &amp;</type>
+          <declname>_angularVec3</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="114" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a176d715e9026aee5a3cad9ff9dde198c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::SpatialVector::operator()</definition>
+        <argsstring>(const unsigned int index) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Vector element accessors, getters, setters. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="119" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a583e1a9062c0d7f72da539e521e597b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double &amp;</type>
+        <definition>double&amp; iDynTree::SpatialVector::operator()</definition>
+        <argsstring>(const unsigned int index)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="120" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a74a991f1f695825378e5b1765e743e42" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::SpatialVector::getVal</definition>
+        <argsstring>(const unsigned int index) const</argsstring>
+        <name>getVal</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="121" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a0fe3633e4ccf66267b01b7302a1658ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SpatialVector::setVal</definition>
+        <argsstring>(const unsigned int index, const double new_el)</argsstring>
+        <name>setVal</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>new_el</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="122" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1af1f3a2d0e7522b63b2dc0d729a33f5a5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int iDynTree::SpatialVector::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="123" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a8414377bb976157317aeb070b4ed235d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SpatialVector::zero</definition>
+        <argsstring>()</argsstring>
+        <name>zero</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="124" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1aaf50d0723aa1bf73962f05224a56bd8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const DerivedSpatialVecT</type>
+        <definition>const DerivedSpatialVecT iDynTree::SpatialVector::changePoint</definition>
+        <argsstring>(const Position &amp;newPoint)</argsstring>
+        <name>changePoint</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+          <declname>newPoint</declname>
+        </param>
+        <briefdescription>
+<para>Geometric operations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="129" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1af55844354af98084b8fd52a9240b2d5f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const DerivedSpatialVecT</type>
+        <definition>const DerivedSpatialVecT iDynTree::SpatialVector::changeCoordFrame</definition>
+        <argsstring>(const Rotation &amp;newCoordFrame)</argsstring>
+        <name>changeCoordFrame</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref> &amp;</type>
+          <declname>newCoordFrame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="130" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a676b41872e9165b9795a9706149a8e17" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::SpatialVector::dot</definition>
+        <argsstring>(const DualVectorT &amp;other) const</argsstring>
+        <name>dot</name>
+        <param>
+          <type>const DualVectorT &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>dot product </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="137" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1aee117ebb24cae309a169f678019f1181" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>DerivedSpatialVecT</type>
+        <definition>DerivedSpatialVecT iDynTree::SpatialVector::operator+</definition>
+        <argsstring>(const DerivedSpatialVecT &amp;other) const</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>const DerivedSpatialVecT &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>overloaded operators </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="142" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1afcf112b3ddd4e01fc0389dd2319eb383" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>DerivedSpatialVecT</type>
+        <definition>DerivedSpatialVecT iDynTree::SpatialVector::operator-</definition>
+        <argsstring>(const DerivedSpatialVecT &amp;other) const</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>const DerivedSpatialVecT &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="143" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a3ac59b03e3786339836b9b7d190f39e3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>DerivedSpatialVecT</type>
+        <definition>DerivedSpatialVecT iDynTree::SpatialVector::operator-</definition>
+        <argsstring>() const</argsstring>
+        <name>operator-</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="144" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a28178bda574859bc9cda8e51f23ffc07" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector6</ref></type>
+        <definition>Vector6 iDynTree::SpatialVector::asVector</definition>
+        <argsstring>() const</argsstring>
+        <name>asVector</name>
+        <briefdescription>
+<para>Conversion to basic vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="154" column="17"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1a0f1211dba411c4efe1a7c9d0944d2a38" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>DerivedSpatialVecT</type>
+        <definition>static DerivedSpatialVecT iDynTree::SpatialVector::compose</definition>
+        <argsstring>(const DerivedSpatialVecT &amp;op1, const DerivedSpatialVecT &amp;op2)</argsstring>
+        <name>compose</name>
+        <param>
+          <type>const DerivedSpatialVecT &amp;</type>
+          <declname>op1</declname>
+        </param>
+        <param>
+          <type>const DerivedSpatialVecT &amp;</type>
+          <declname>op2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="131" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1aa1ad54ef1ef1c37676cf7c231242f9fb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>DerivedSpatialVecT</type>
+        <definition>static DerivedSpatialVecT iDynTree::SpatialVector::inverse</definition>
+        <argsstring>(const DerivedSpatialVecT &amp;op)</argsstring>
+        <name>inverse</name>
+        <param>
+          <type>const DerivedSpatialVecT &amp;</type>
+          <declname>op</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="132" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialVector_1ae2ae611372d0a0f53dd983e3598bcc58" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>DerivedSpatialVecT</type>
+        <definition>static DerivedSpatialVecT iDynTree::SpatialVector::Zero</definition>
+        <argsstring>()</argsstring>
+        <name>Zero</name>
+        <briefdescription>
+<para>constructor helpers </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="149" column="35"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="5">
+        <label>iDynTree::Twist</label>
+        <link refid="classiDynTree_1_1Twist"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>iDynTree::SpatialVector&lt; SpatialForceVector &gt;</label>
+        <link refid="classiDynTree_1_1SpatialVector"/>
+        <childnode refid="1" relation="template-instance">
+          <edgelabel>&lt; SpatialForceVector &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>iDynTree::SpatialMomentum</label>
+        <link refid="classiDynTree_1_1SpatialMomentum"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>iDynTree::SpatialForceVector</label>
+        <link refid="classiDynTree_1_1SpatialForceVector"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::SpatialVector&lt; SpatialMotionVector &gt;</label>
+        <link refid="classiDynTree_1_1SpatialVector"/>
+        <childnode refid="1" relation="template-instance">
+          <edgelabel>&lt; SpatialMotionVector &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::SpatialVector</label>
+        <link refid="classiDynTree_1_1SpatialVector"/>
+      </node>
+      <node id="9">
+        <label>iDynTree::Wrench</label>
+        <link refid="classiDynTree_1_1Wrench"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::SpatialMotionVector</label>
+        <link refid="classiDynTree_1_1SpatialMotionVector"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>iDynTree::SpatialAcc</label>
+        <link refid="classiDynTree_1_1SpatialAcc"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>iDynTree::SpatialVector</label>
+        <link refid="classiDynTree_1_1SpatialVector"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>angularVec3</edgelabel>
+          <edgelabel>linearVec3</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::SpatialMotionForceVectorT_traits&lt; DerivedSpatialVecT &gt;</label>
+        <link refid="classiDynTree_1_1SpatialMotionForceVectorT__traits"/>
+        <childnode refid="3" relation="template-instance">
+          <edgelabel>&lt; DerivedSpatialVecT &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::SpatialMotionForceVectorT_traits&lt; SpatialMotionForceVectorT &gt;</label>
+        <link refid="classiDynTree_1_1SpatialMotionForceVectorT__traits"/>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Core/SpatialVector.h" line="83" column="5" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="84" bodyend="166"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1SpatialVector_1a45a617c3a2fbf58cb8f14be36a9f0ff5" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>angularOffset</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a7713fdb080783747a894974f5c4b44a6" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>angularVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a13a172b06a7af17f6220a90a4163b3f8" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>AngularVector3T</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a28178bda574859bc9cda8e51f23ffc07" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>asVector</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1af55844354af98084b8fd52a9240b2d5f" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>changeCoordFrame</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1aaf50d0723aa1bf73962f05224a56bd8b" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>changePoint</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a0f1211dba411c4efe1a7c9d0944d2a38" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>compose</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a676b41872e9165b9795a9706149a8e17" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>dot</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a7910d803e3b8c3ef52db0bdc0b2bec42" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>DualVectorT</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a8b9ae18e77c2af17ec1d369d196e0c10" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>getAngularVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a67479f75f4632e397d7c38394f499ca5" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>getAngularVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a705aa7e917215639cf8088da8a279031" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>getLinearVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1aef471e533b923fca899adfcac5703173" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>getLinearVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a74a991f1f695825378e5b1765e743e42" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>getVal</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1aa1ad54ef1ef1c37676cf7c231242f9fb" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>inverse</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1aa6aa22433d0a6c29e37a4efc5970e1d8" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>linearOffset</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a404b99c91ecaa2269ed0e891df474720" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>linearVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a4ca8db3255a63370cb6fb9c5b8e4bc6c" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>LinearVector3T</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a176d715e9026aee5a3cad9ff9dde198c" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a583e1a9062c0d7f72da539e521e597b5" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1aee117ebb24cae309a169f678019f1181" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>operator+</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1afcf112b3ddd4e01fc0389dd2319eb383" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>operator-</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a3ac59b03e3786339836b9b7d190f39e3" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>operator-</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a73b398dd07e9f3dd5c252692380a6b02" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>reservedToString</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a719a64c179d736390f48b6ddd0ccf6fa" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>setAngularVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a171e7cf6e215e67eb32ac791526a044f" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>setLinearVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a0fe3633e4ccf66267b01b7302a1658ec" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>setVal</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1af1f3a2d0e7522b63b2dc0d729a33f5a5" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>size</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a787b62017e61e1dc49e0bc753cb0516b" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>SpatialVector</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a3d7d78e133ab83dfadb346539f70df96" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>SpatialVector</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1aff082c865731b86ad00f3901b1f487cb" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>SpatialVector</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a1000a5a67bd77de13aabe6e41b320587" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>SpatialVector</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1aea482fe4d53b76b02a0438d9561e1fd0" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>toString</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1adfea1ab56aa331af032a7f7d31ac0afc" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>totalSize</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a8414377bb976157317aeb070b4ed235d" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>zero</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1ae2ae611372d0a0f53dd983e3598bcc58" prot="public" virt="non-virtual"><scope>iDynTree::SpatialVector</scope><name>Zero</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

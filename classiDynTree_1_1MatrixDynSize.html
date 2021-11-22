@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>iDynTree::MatrixDynSize class | iDynTree master</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="./index.html">iDynTree</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="4">
+            <li>
+              <a href="pages.html">Versions</a>
+              <ol>
+                <li><a href="./index.html">Master</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="pages.html">Contacts</a>
+              <ol>
+                <li><a href="https://github.com/robotology/idyntree">GitHub</a></li>
+                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
+              </ol>
+            </li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespaceiDynTree.html">iDynTree</a>::<wbr/></span>MatrixDynSize <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="MatrixDynSize_8h.html">&lt;iDynTree/Core/MatrixDynSize.h&gt;</a></div>
+        </h1>
+        <p>Class providing a simple form of matrix with dynamic size.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#derived-classes">Derived classes</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+                <li><a href="#matrix-interface-methods">Matrix interface methods.</a></li>
+                <li><a href="#output-helpers">Output helpers.</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <section id="derived-classes">
+          <h2><a href="#derived-classes">Derived classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classiDynTree_1_1FrameFreeFloatingJacobian.html" class="m-doc">FrameFreeFloatingJacobian</a>
+            </dt>
+            <dd>Jacobian of the 6D frame velocity.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1FreeFloatingMassMatrix.html" class="m-doc">FreeFloatingMassMatrix</a>
+            </dt>
+            <dd>Class representing the mass matrix of a Free Floating robot.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1FreeFloatingStateLinearization.html" class="m-doc">FreeFloatingStateLinearization</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1MomentumFreeFloatingJacobian.html" class="m-doc">MomentumFreeFloatingJacobian</a>
+            </dt>
+            <dd>Jacobian of the 6D momentum.</dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="a062017b1f0958fa8d18edd822ad7018f">
+              <span class="m-doc-wrap-bumper"><a href="#a062017b1f0958fa8d18edd822ad7018f" class="m-doc-self">MatrixDynSize</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Default constructor: create a 0x0 matrix.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a38a30ddc05269a2c8ee66603db7a1a5e" class="m-doc">MatrixDynSize</a>(</span><span class="m-doc-wrap">std::size_t _rows,
+              std::size_t _cols)</span>
+            </dt>
+            <dd>Constructor from the rows and columns, all the element assigned to 0.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#aaa27f4111779337ae337dc3ab1abf2e4" class="m-doc">MatrixDynSize</a>(</span><span class="m-doc-wrap">const double* in_data,
+              const std::size_t in_rows,
+              const std::size_t in_cols)</span>
+            </dt>
+            <dd>Constructor from a C-style matrix.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a280957c0323a79009ccee5708668ca5c" class="m-doc">MatrixDynSize</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>&amp; other)</span>
+            </dt>
+            <dd>Copy constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a162a5170740ac6bc8c0a3992f9200b1c" class="m-doc">MatrixDynSize</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;const double&gt; other)</span>
+            </dt>
+            <dd>Constructor from <a href="classiDynTree_1_1MatrixView.html" class="m-doc">MatrixView</a> object.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a9cbfeed643bb079a4c2060fb92309be7" class="m-doc">~MatrixDynSize</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Denstructor.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab5dc70fe26c9b8e58a7a03a336556749" class="m-doc">operator=</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>&amp; other) -&gt; <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>&amp;</span>
+            </dt>
+            <dd>Assignment operator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab4288557b4a3a229c195abfba9384688" class="m-doc">operator=</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;const double&gt; other) -&gt; <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>&amp;</span>
+            </dt>
+            <dd>Assignment operator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a326369f52bb74fe3cdc30fc02af81eb8" class="m-doc">data</a>(</span><span class="m-doc-wrap">) const -&gt; const double*</span>
+            </dt>
+            <dd>Raw data accessor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2bfc7c13f386f6d5845e685bbb78daf2" class="m-doc">data</a>(</span><span class="m-doc-wrap">) -&gt; double*</span>
+            </dt>
+            <dd>Raw data accessor.</dd>
+            <dt id="a071eb4583b2bd16399cf4bb460e15db0">
+              <span class="m-doc-wrap-bumper">void <a href="#a071eb4583b2bd16399cf4bb460e15db0" class="m-doc-self">zero</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Assign all element of the matrix to 0.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a9cf8980628426a135edc1653e8f56496" class="m-doc">resize</a>(</span><span class="m-doc-wrap">const std::size_t _newRows,
+              const std::size_t _newCols)</span>
+            </dt>
+            <dd>Change the size of the matrix, without preserving old content.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a23e474c7161903c18be88d8fac2b4137" class="m-doc">reserve</a>(</span><span class="m-doc-wrap">const size_t _newCapacity)</span>
+            </dt>
+            <dd>Increase the capacity of the matrix, preserving old content.</dd>
+            <dt id="aacda29701a42c3943a781b9876500daf">
+              <span class="m-doc-wrap-bumper">auto <a href="#aacda29701a42c3943a781b9876500daf" class="m-doc-self">capacity</a>(</span><span class="m-doc-wrap">) const -&gt; size_t</span>
+            </dt>
+            <dd>Get the dimension (in doubles) of the buffer to which m_data is pointing.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ad5c3a0b1b9ce8c691194c652adf95a5a" class="m-doc">shrink_to_fit</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Change the capacity of the matrix such that <a href="classiDynTree_1_1MatrixDynSize.html#aacda29701a42c3943a781b9876500daf" class="m-doc">capacity()</a> == rows()*cols(), preserving old content.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aa8af99c672e6a7e188115d2a8144a1c7" class="m-doc">fillRowMajorBuffer</a>(</span><span class="m-doc-wrap">double* rowMajorBuf) const</span>
+            </dt>
+            <dd>Assume that rowMajorBuf is pointing to a buffer of rows()*cols() doubles, and fill it with the content of this matrix, using row major order.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ab11629d6f89ef3d4051867e44abdf76e" class="m-doc">fillColMajorBuffer</a>(</span><span class="m-doc-wrap">double* colMajorBuf) const</span>
+            </dt>
+            <dd>Assume that colMajorBuf is pointing to a buffer of rows()*cols() doubles, and fill it with the content of this matrix, using column major order.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt>
+              double* <a href="#a80eba7978bcce15f4146f815c557f1bb" class="m-doc">m_data</a>
+            </dt>
+            <dd>Storage for the <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>.</dd>
+            <dt id="ae25ad33695edf5ec1b43e13ffcfdde2c">
+              std::size_t <a href="#ae25ad33695edf5ec1b43e13ffcfdde2c" class="m-doc-self">m_rows</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a4c1fb8178a7fa9dfa5863f767b15fe20">
+              std::size_t <a href="#a4c1fb8178a7fa9dfa5863f767b15fe20" class="m-doc-self">m_cols</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af1d85eadf886d3fb508e2bf9e9788600">
+              std::size_t <a href="#af1d85eadf886d3fb508e2bf9e9788600" class="m-doc-self">m_capacity</a>
+            </dt>
+            <dd>The buffer to which m_data is pointing is m_capacity*sizeof(double).</dd>
+          </dl>
+        </section>
+        <section id="matrix-interface-methods">
+          <h2><a href="#matrix-interface-methods">Matrix interface methods.</a></h2>
+<p>Methods exposing a matrix-like interface to <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>.</p><aside class="m-note m-danger"><h4>Warning</h4><p>Notice that using this methods you can damage the underlyng rotation matrix. In doubt, don&#x27;t use them and rely on more high level functions.</p></aside>
+          <dl class="m-doc">
+            <dt id="aec352e4bfae97705cbe42eb99b91b969">
+              <span class="m-doc-wrap-bumper">auto <a href="#aec352e4bfae97705cbe42eb99b91b969" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">const std::size_t row,
+              const std::size_t col) const -&gt; double</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a042335b734c10aa111c4c792f10d169c">
+              <span class="m-doc-wrap-bumper">auto <a href="#a042335b734c10aa111c4c792f10d169c" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">const std::size_t row,
+              const std::size_t col) -&gt; double&amp;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a162f9d9077a0d5bbddc1da1b303515e5">
+              <span class="m-doc-wrap-bumper">auto <a href="#a162f9d9077a0d5bbddc1da1b303515e5" class="m-doc-self">getVal</a>(</span><span class="m-doc-wrap">const std::size_t row,
+              const std::size_t col) const -&gt; double</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a34270bc42525a83112307cb480be5604">
+              <span class="m-doc-wrap-bumper">auto <a href="#a34270bc42525a83112307cb480be5604" class="m-doc-self">setVal</a>(</span><span class="m-doc-wrap">const std::size_t row,
+              const std::size_t col,
+              const double new_el) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a45a21d9dc00a7c5daadebc1f09ed3fdf">
+              <span class="m-doc-wrap-bumper">auto <a href="#a45a21d9dc00a7c5daadebc1f09ed3fdf" class="m-doc-self">rows</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a18a9a6232ac5c967cf541caa21586d71">
+              <span class="m-doc-wrap-bumper">auto <a href="#a18a9a6232ac5c967cf541caa21586d71" class="m-doc-self">cols</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="output-helpers">
+          <h2><a href="#output-helpers">Output helpers.</a></h2>
+<p>Output helpers.</p>
+          <dl class="m-doc">
+            <dt id="a77e45ef11c7624ed8b7e150ebd041825">
+              <span class="m-doc-wrap-bumper">auto <a href="#a77e45ef11c7624ed8b7e150ebd041825" class="m-doc-self">toString</a>(</span><span class="m-doc-wrap">) const -&gt; std::string</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ae86eb69f39997bd181971d9bd5f56950">
+              <span class="m-doc-wrap-bumper">auto <a href="#ae86eb69f39997bd181971d9bd5f56950" class="m-doc-self">reservedToString</a>(</span><span class="m-doc-wrap">) const -&gt; std::string</span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a38a30ddc05269a2c8ee66603db7a1a5e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> iDynTree::<wbr />MatrixDynSize::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a38a30ddc05269a2c8ee66603db7a1a5e" class="m-doc-self">MatrixDynSize</a>(</span><span class="m-doc-wrap">std::size_t _rows,
+              std::size_t _cols)</span></span>
+            </h3>
+            <p>Constructor from the rows and columns, all the element assigned to 0.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">_rows</td>
+                  <td>the desired rows of the matrix.</td>
+                </tr>
+                <tr>
+                  <td>_cols</td>
+                  <td>the desired cols of the matrix.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-danger"><h4>Warning</h4><p>performs dynamic memory allocation operations</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="aaa27f4111779337ae337dc3ab1abf2e4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> iDynTree::<wbr />MatrixDynSize::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aaa27f4111779337ae337dc3ab1abf2e4" class="m-doc-self">MatrixDynSize</a>(</span><span class="m-doc-wrap">const double* in_data,
+              const std::size_t in_rows,
+              const std::size_t in_cols)</span></span>
+            </h3>
+            <p>Constructor from a C-style matrix.</p>
+<aside class="m-note m-danger"><h4>Warning</h4><p>this class stores data using the row major order</p><p>performs dynamic memory allocation operations</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a280957c0323a79009ccee5708668ca5c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> iDynTree::<wbr />MatrixDynSize::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a280957c0323a79009ccee5708668ca5c" class="m-doc-self">MatrixDynSize</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>&amp; other)</span></span>
+            </h3>
+            <p>Copy constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>the object to copy</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a162a5170740ac6bc8c0a3992f9200b1c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> iDynTree::<wbr />MatrixDynSize::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a162a5170740ac6bc8c0a3992f9200b1c" class="m-doc-self">MatrixDynSize</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;const double&gt; other)</span></span>
+            </h3>
+            <p>Constructor from <a href="classiDynTree_1_1MatrixView.html" class="m-doc">MatrixView</a> object.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td><a href="classiDynTree_1_1MatrixView.html" class="m-doc">MatrixView</a> to copy</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-danger"><h4>Warning</h4><p>performs dynamic memory allocation operations</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a9cbfeed643bb079a4c2060fb92309be7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> iDynTree::<wbr />MatrixDynSize::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9cbfeed643bb079a4c2060fb92309be7" class="m-doc-self">~MatrixDynSize</a>(</span><span class="m-doc-wrap">) <span class="m-label m-warning">virtual</span></span></span>
+            </h3>
+            <p>Denstructor.</p>
+<aside class="m-note m-danger"><h4>Warning</h4><p>performs dynamic memory allocation operations</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ab5dc70fe26c9b8e58a7a03a336556749"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>&amp; iDynTree::<wbr />MatrixDynSize::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab5dc70fe26c9b8e58a7a03a336556749" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>&amp; other)</span></span>
+            </h3>
+            <p>Assignment operator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>the object to copy into self</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>*this</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab4288557b4a3a229c195abfba9384688"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>&amp; iDynTree::<wbr />MatrixDynSize::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab4288557b4a3a229c195abfba9384688" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1MatrixView.html" class="m-doc">iDynTree::<wbr />MatrixView</a>&lt;const double&gt; other)</span></span>
+            </h3>
+            <p>Assignment operator.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">other</td>
+                  <td>the object to copy into self</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>*this</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a326369f52bb74fe3cdc30fc02af81eb8"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const double* iDynTree::<wbr />MatrixDynSize::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a326369f52bb74fe3cdc30fc02af81eb8" class="m-doc-self">data</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Raw data accessor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>a const pointer to a vector of size() doubles</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-danger"><h4>Warning</h4><p>this class stores matrix data using the row major order</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a2bfc7c13f386f6d5845e685bbb78daf2"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">double* iDynTree::<wbr />MatrixDynSize::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2bfc7c13f386f6d5845e685bbb78daf2" class="m-doc-self">data</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Raw data accessor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>a pointer to a vector of size() doubles</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-danger"><h4>Warning</h4><p>this class stores matrix data using the row major order</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a9cf8980628426a135edc1653e8f56496"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />MatrixDynSize::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9cf8980628426a135edc1653e8f56496" class="m-doc-self">resize</a>(</span><span class="m-doc-wrap">const std::size_t _newRows,
+              const std::size_t _newCols)</span></span>
+            </h3>
+            <p>Change the size of the matrix, without preserving old content.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">_newRows</td>
+                  <td>the new rows of the matrix</td>
+                </tr>
+                <tr>
+                  <td>_newCols</td>
+                  <td>the new cols of the matrix</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-danger"><h4>Warning</h4><p>performs dynamic memory allocation operations if newRows*newCols &gt; <a href="classiDynTree_1_1MatrixDynSize.html#aacda29701a42c3943a781b9876500daf" class="m-doc">capacity()</a></p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a23e474c7161903c18be88d8fac2b4137"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />MatrixDynSize::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a23e474c7161903c18be88d8fac2b4137" class="m-doc-self">reserve</a>(</span><span class="m-doc-wrap">const size_t _newCapacity)</span></span>
+            </h3>
+            <p>Increase the capacity of the matrix, preserving old content.</p>
+<aside class="m-note m-danger"><h4>Warning</h4><p>performs dynamic memory allocation operations if _newCapacity &gt; <a href="classiDynTree_1_1MatrixDynSize.html#aacda29701a42c3943a781b9876500daf" class="m-doc">capacity()</a></p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ad5c3a0b1b9ce8c691194c652adf95a5a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />MatrixDynSize::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad5c3a0b1b9ce8c691194c652adf95a5a" class="m-doc-self">shrink_to_fit</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Change the capacity of the matrix such that <a href="classiDynTree_1_1MatrixDynSize.html#aacda29701a42c3943a781b9876500daf" class="m-doc">capacity()</a> == rows()*cols(), preserving old content.</p>
+<aside class="m-note m-danger"><h4>Warning</h4><p>performs dynamic memory allocation operations if newRows*newCols != <a href="classiDynTree_1_1MatrixDynSize.html#aacda29701a42c3943a781b9876500daf" class="m-doc">capacity()</a></p></aside>
+          </div></section>
+          <section class="m-doc-details" id="aa8af99c672e6a7e188115d2a8144a1c7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />MatrixDynSize::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa8af99c672e6a7e188115d2a8144a1c7" class="m-doc-self">fillRowMajorBuffer</a>(</span><span class="m-doc-wrap">double* rowMajorBuf) const</span></span>
+            </h3>
+            <p>Assume that rowMajorBuf is pointing to a buffer of rows()*cols() doubles, and fill it with the content of this matrix, using row major order.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">rowMajorBuf</td>
+                  <td>pointer to the buffer to fill</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-danger"><h4>Warning</h4><p>use this function only if you are an expert C user</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ab11629d6f89ef3d4051867e44abdf76e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />MatrixDynSize::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab11629d6f89ef3d4051867e44abdf76e" class="m-doc-self">fillColMajorBuffer</a>(</span><span class="m-doc-wrap">double* colMajorBuf) const</span></span>
+            </h3>
+            <p>Assume that colMajorBuf is pointing to a buffer of rows()*cols() doubles, and fill it with the content of this matrix, using column major order.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">colMajorBuf</td>
+                  <td>pointer to the buffer to fill</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-danger"><h4>Warning</h4><p>use this function only if you are an expert C user</p></aside>
+          </div></section>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="a80eba7978bcce15f4146f815c557f1bb"><div>
+            <h3>
+              double* iDynTree::<wbr />MatrixDynSize::<wbr /><a href="#a80eba7978bcce15f4146f815c557f1bb" class="m-doc-self">m_data</a> <span class="m-label m-warning">protected</span>
+            </h3>
+            <p>Storage for the <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>.</p>
+<p>Pointer to an area of <a href="classiDynTree_1_1MatrixDynSize.html#aacda29701a42c3943a781b9876500daf" class="m-doc">capacity()</a> doubles, managed by this class.</p><aside class="m-note m-danger"><h4>Warning</h4><p>this class stores data using the row major order</p></aside>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>iDynTree documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/robotology/idyntree/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::ApproximateSolidShapesWithPrimitiveShapeOptions</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions_1af59917507bdd294e0e71b23860c39a27" prot="public" static="no" mutable="no">
+        <type>ApproximateSolidShapesWithPrimitiveShapeConversionType</type>
+        <definition>ApproximateSolidShapesWithPrimitiveShapeConversionType iDynTree::ApproximateSolidShapesWithPrimitiveShapeOptions::conversionType</definition>
+        <argsstring></argsstring>
+        <name>conversionType</name>
+        <initializer>= ConvertSolidShapesWithEnclosingAxisAlignedBoundingBoxes</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTransformersSolidShapes.h" line="28" column="60" bodyfile="iDynTree/ModelTransformersSolidShapes.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/ModelTransformersSolidShapes.h" line="26" column="1" bodyfile="iDynTree/ModelTransformersSolidShapes.h" bodystart="27" bodyend="29"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions_1af59917507bdd294e0e71b23860c39a27" prot="public" virt="non-virtual"><scope>iDynTree::ApproximateSolidShapesWithPrimitiveShapeOptions</scope><name>conversionType</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

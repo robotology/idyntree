@@ -1,0 +1,424 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::optimalcontrol::MultipleShootingSolver</compoundname>
+    <basecompoundref refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver" prot="public" virt="non-virtual">iDynTree::optimalcontrol::OptimalControlSolver</basecompoundref>
+    <includes local="no">iDynTree/OCSolvers/MultipleShootingSolver.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a8e0ac1aaebe139b98829592cfb2fe5c3" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; MultipleShootingTranscription &gt;</type>
+        <definition>std::shared_ptr&lt;MultipleShootingTranscription&gt; iDynTree::optimalcontrol::MultipleShootingSolver::m_transcription</definition>
+        <argsstring></argsstring>
+        <name>m_transcription</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="91" column="29" bodyfile="iDynTree/OCSolvers/MultipleShootingSolver.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a1030a109493e52edde02cc17efca5d01" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimization_1_1Optimizer" kindref="compound">optimization::Optimizer</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;optimization::Optimizer&gt; iDynTree::optimalcontrol::MultipleShootingSolver::m_optimizer</definition>
+        <argsstring></argsstring>
+        <name>m_optimizer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="92" column="29" bodyfile="iDynTree/OCSolvers/MultipleShootingSolver.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a9461caf45d7470768693e97873894147" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::MultipleShootingSolver::MultipleShootingSolver</definition>
+        <argsstring>(const std::shared_ptr&lt; OptimalControlProblem &gt; &amp;ocProblem)</argsstring>
+        <name>MultipleShootingSolver</name>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem" kindref="compound">OptimalControlProblem</ref> &gt; &amp;</type>
+          <declname>ocProblem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="48" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a94138f63d63f2f163ec13c71e36fe0ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::MultipleShootingSolver::MultipleShootingSolver</definition>
+        <argsstring>(const MultipleShootingSolver &amp;other)=delete</argsstring>
+        <name>MultipleShootingSolver</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver" kindref="compound">MultipleShootingSolver</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="50" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1aeb670ccc7f2a7c147748b1af1be8aac2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::MultipleShootingSolver::setStepSizeBounds</definition>
+        <argsstring>(double minStepSize, double maxStepsize)</argsstring>
+        <name>setStepSizeBounds</name>
+        <param>
+          <type>double</type>
+          <declname>minStepSize</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>maxStepsize</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="52" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a25f163f5cb789f211cb91a045b8ab8a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::MultipleShootingSolver::setIntegrator</definition>
+        <argsstring>(const std::shared_ptr&lt; Integrator &gt; integrationMethod)</argsstring>
+        <name>setIntegrator</name>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator" kindref="compound">Integrator</ref> &gt;</type>
+          <declname>integrationMethod</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="54" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a84aa978d5a2592f2e20beb7636ec8299" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::MultipleShootingSolver::setControlPeriod</definition>
+        <argsstring>(double period)</argsstring>
+        <name>setControlPeriod</name>
+        <param>
+          <type>double</type>
+          <declname>period</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="56" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1aae570a93425d8ab3a300d833fb95faad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::MultipleShootingSolver::setAdditionalStateMeshPoints</definition>
+        <argsstring>(const std::vector&lt; double &gt; &amp;stateMeshes)</argsstring>
+        <name>setAdditionalStateMeshPoints</name>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>stateMeshes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="58" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a1a684e6a7e61aeb2e9ff3b5b20282993" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::MultipleShootingSolver::setAdditionalControlMeshPoints</definition>
+        <argsstring>(const std::vector&lt; double &gt; &amp;controlMeshes)</argsstring>
+        <name>setAdditionalControlMeshPoints</name>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>controlMeshes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="60" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1acbd8b7b6842006c5e3b6b61c1ab34b2b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::MultipleShootingSolver::setOptimizer</definition>
+        <argsstring>(std::shared_ptr&lt; optimization::Optimizer &gt; optimizer)</argsstring>
+        <name>setOptimizer</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimization_1_1Optimizer" kindref="compound">optimization::Optimizer</ref> &gt;</type>
+          <declname>optimizer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="62" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a6caaeb1375c71114ce4457684b12976f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::MultipleShootingSolver::setInitialState</definition>
+        <argsstring>(const VectorDynSize &amp;initialState)</argsstring>
+        <name>setInitialState</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>initialState</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="64" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1adfd907c9a95cb2cf47452ab80db6cb77" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::MultipleShootingSolver::setGuesses</definition>
+        <argsstring>(std::shared_ptr&lt; optimalcontrol::TimeVaryingVector &gt; stateGuesses, std::shared_ptr&lt; optimalcontrol::TimeVaryingVector &gt; controlGuesses)</argsstring>
+        <name>setGuesses</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">optimalcontrol::TimeVaryingVector</ref> &gt;</type>
+          <declname>stateGuesses</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">optimalcontrol::TimeVaryingVector</ref> &gt;</type>
+          <declname>controlGuesses</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="66" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a12110a13caf859e10a02fae98912f4c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::MultipleShootingSolver::getTimings</definition>
+        <argsstring>(std::vector&lt; double &gt; &amp;stateEvaluations, std::vector&lt; double &gt; &amp;controlEvaluations)</argsstring>
+        <name>getTimings</name>
+        <param>
+          <type>std::vector&lt; double &gt; &amp;</type>
+          <declname>stateEvaluations</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; &amp;</type>
+          <declname>controlEvaluations</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="69" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a76809e064e4e4b3fdb5a9633a174ada8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::MultipleShootingSolver::getPossibleTimings</definition>
+        <argsstring>(std::vector&lt; double &gt; &amp;stateEvaluations, std::vector&lt; double &gt; &amp;controlEvaluations)</argsstring>
+        <name>getPossibleTimings</name>
+        <param>
+          <type>std::vector&lt; double &gt; &amp;</type>
+          <declname>stateEvaluations</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; double &gt; &amp;</type>
+          <declname>controlEvaluations</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="71" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1ab0228c31eb5298e79cbe1bdc706cb7f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::MultipleShootingSolver::solve</definition>
+        <argsstring>() override</argsstring>
+        <name>solve</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver_1a03967acc8076478746703bc3582b4f3f">solve</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="73" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1afc73c7ee29cbefd15de8cc9fd209334e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::MultipleShootingSolver::getSolution</definition>
+        <argsstring>(std::vector&lt; VectorDynSize &gt; &amp;states, std::vector&lt; VectorDynSize &gt; &amp;controls)</argsstring>
+        <name>getSolution</name>
+        <param>
+          <type>std::vector&lt; <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &gt; &amp;</type>
+          <declname>states</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &gt; &amp;</type>
+          <declname>controls</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="75" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a5e473d16af12540b41df4bfb05533303" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::optimalcontrol::MultipleShootingSolver::resetTranscription</definition>
+        <argsstring>()</argsstring>
+        <name>resetTranscription</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="77" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a7717669f31a22bddcbf3784f22fcc2a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::optimalcontrol::MultipleShootingSolver::addConstraintsHessianRegularization</definition>
+        <argsstring>(double regularization)</argsstring>
+        <name>addConstraintsHessianRegularization</name>
+        <param>
+          <type>double</type>
+          <declname>regularization</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="79" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1ac5430c0b118c9f6f3e1dc5a284ed32a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::optimalcontrol::MultipleShootingSolver::disableConstraintsHessianRegularization</definition>
+        <argsstring>()</argsstring>
+        <name>disableConstraintsHessianRegularization</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="81" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1acf10bef2a044d880ae9bfd1fcbf8fcd7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::optimalcontrol::MultipleShootingSolver::addCostsHessianRegularization</definition>
+        <argsstring>(double regularization)</argsstring>
+        <name>addCostsHessianRegularization</name>
+        <param>
+          <type>double</type>
+          <declname>regularization</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="83" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1adaad8f8eab76a7b91d2ff38cc8b4eac8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::optimalcontrol::MultipleShootingSolver::disableCostsHessianRegularization</definition>
+        <argsstring>()</argsstring>
+        <name>disableCostsHessianRegularization</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="85" column="18"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::optimalcontrol::MultipleShootingSolver</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::optimalcontrol::OptimalControlSolver</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>iDynTree::optimalcontrol::MultipleShootingSolver</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::optimalcontrol::OptimalControlSolver</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver"/>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="45" column="9" bodyfile="iDynTree/OCSolvers/MultipleShootingSolver.h" bodystart="45" bodyend="93"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a7717669f31a22bddcbf3784f22fcc2a7" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>addConstraintsHessianRegularization</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1acf10bef2a044d880ae9bfd1fcbf8fcd7" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>addCostsHessianRegularization</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1ac5430c0b118c9f6f3e1dc5a284ed32a0" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>disableConstraintsHessianRegularization</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1adaad8f8eab76a7b91d2ff38cc8b4eac8" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>disableCostsHessianRegularization</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a76809e064e4e4b3fdb5a9633a174ada8" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>getPossibleTimings</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1afc73c7ee29cbefd15de8cc9fd209334e" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>getSolution</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a12110a13caf859e10a02fae98912f4c0" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>getTimings</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a1030a109493e52edde02cc17efca5d01" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>m_optimizer</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a8e0ac1aaebe139b98829592cfb2fe5c3" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>m_transcription</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a9461caf45d7470768693e97873894147" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>MultipleShootingSolver</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a94138f63d63f2f163ec13c71e36fe0ae" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>MultipleShootingSolver</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver_1a09fb40c47a84272706113ef950af2e54" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>OptimalControlSolver</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver_1a9fde83bee85fc95ed04f167faec8f5b2" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>OptimalControlSolver</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a5e473d16af12540b41df4bfb05533303" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>resetTranscription</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a1a684e6a7e61aeb2e9ff3b5b20282993" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>setAdditionalControlMeshPoints</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1aae570a93425d8ab3a300d833fb95faad" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>setAdditionalStateMeshPoints</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a84aa978d5a2592f2e20beb7636ec8299" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>setControlPeriod</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1adfd907c9a95cb2cf47452ab80db6cb77" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>setGuesses</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a6caaeb1375c71114ce4457684b12976f" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>setInitialState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a25f163f5cb789f211cb91a045b8ab8a8" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>setIntegrator</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1acbd8b7b6842006c5e3b6b61c1ab34b2b" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>setOptimizer</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1aeb670ccc7f2a7c147748b1af1be8aac2" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>setStepSizeBounds</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1ab0228c31eb5298e79cbe1bdc706cb7f9" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>solve</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver_1ae4125c5f205ef9a6cf0cb626821f6a6a" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>~OptimalControlSolver</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

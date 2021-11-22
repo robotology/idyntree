@@ -1,0 +1,1805 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::optimalcontrol::OptimalControlProblem</compoundname>
+    <includes local="no">iDynTree/OptimalControlProblem.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a388070b1c4e154ccbdea7c9b7592a309" prot="private" static="no" mutable="no">
+        <type>OptimalControlProblemPimpl *</type>
+        <definition>OptimalControlProblemPimpl* iDynTree::optimalcontrol::OptimalControlProblem::m_pimpl</definition>
+        <argsstring></argsstring>
+        <name>m_pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="276" column="40" bodyfile="iDynTree/OptimalControlProblem.h" bodystart="275" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a8f8f15343f3681e867a3a1497815b3a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::OptimalControlProblem::OptimalControlProblem</definition>
+        <argsstring>()</argsstring>
+        <name>OptimalControlProblem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="55" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ab893e61ce2643b91ef84ea56eb458dc7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::OptimalControlProblem::~OptimalControlProblem</definition>
+        <argsstring>()</argsstring>
+        <name>~OptimalControlProblem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="57" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a4ee4e74a855091b473d495d501edc577" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::OptimalControlProblem::OptimalControlProblem</definition>
+        <argsstring>(const OptimalControlProblem &amp;other)=delete</argsstring>
+        <name>OptimalControlProblem</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem" kindref="compound">OptimalControlProblem</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="59" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a001558d92e820f77f324d95adc4e295b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::setTimeHorizon</definition>
+        <argsstring>(double startingTime, double finalTime)</argsstring>
+        <name>setTimeHorizon</name>
+        <param>
+          <type>double</type>
+          <declname>startingTime</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>finalTime</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="61" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1aa15ec20794c4ea3013ce9dbbf3880085" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::optimalcontrol::OptimalControlProblem::initialTime</definition>
+        <argsstring>() const</argsstring>
+        <name>initialTime</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="63" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a28351bbdaed708d43d44b35eaa25170b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::optimalcontrol::OptimalControlProblem::finalTime</definition>
+        <argsstring>() const</argsstring>
+        <name>finalTime</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="65" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a4ebb1c541eda6f7364e35097ec8c9ce1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::setDynamicalSystemConstraint</definition>
+        <argsstring>(std::shared_ptr&lt; DynamicalSystem &gt; dynamicalSystem)</argsstring>
+        <name>setDynamicalSystemConstraint</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> &gt;</type>
+          <declname>dynamicalSystem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="67" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1adce0d7996ccf286f9f476f5a72312aa6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::setDynamicalSystemConstraint</definition>
+        <argsstring>(std::shared_ptr&lt; LinearSystem &gt; linearSystem)</argsstring>
+        <name>setDynamicalSystemConstraint</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem" kindref="compound">LinearSystem</ref> &gt;</type>
+          <declname>linearSystem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="69" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ac283893ec23a7265a6c26e80c527704f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::weak_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> &gt;</type>
+        <definition>const std::weak_ptr&lt;DynamicalSystem&gt; iDynTree::optimalcontrol::OptimalControlProblem::dynamicalSystem</definition>
+        <argsstring>() const</argsstring>
+        <name>dynamicalSystem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="71" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a5bdd83fa1e43b80cff9c8e609d6a6392" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::systemIsLinear</definition>
+        <argsstring>() const</argsstring>
+        <name>systemIsLinear</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="73" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a4fb55f0a9072eb927cd6a99b76c6c1db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::addGroupOfConstraints</definition>
+        <argsstring>(std::shared_ptr&lt; ConstraintsGroup &gt; groupOfConstraints)</argsstring>
+        <name>addGroupOfConstraints</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup" kindref="compound">ConstraintsGroup</ref> &gt;</type>
+          <declname>groupOfConstraints</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="75" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a9aa7f91a2d44558234dbe443b9a783bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::removeGroupOfConstraints</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>removeGroupOfConstraints</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="77" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1abec32a6da80771a87f082632507565bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::addConstraint</definition>
+        <argsstring>(std::shared_ptr&lt; Constraint &gt; newConstraint)</argsstring>
+        <name>addConstraint</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1Constraint" kindref="compound">Constraint</ref> &gt;</type>
+          <declname>newConstraint</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="79" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1abc67b1841b787b3d98f5e62fa7ed5d0e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::addConstraint</definition>
+        <argsstring>(std::shared_ptr&lt; LinearConstraint &gt; newConstraint)</argsstring>
+        <name>addConstraint</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint" kindref="compound">LinearConstraint</ref> &gt;</type>
+          <declname>newConstraint</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="81" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a82e394516abf28fcd9bfbfc64bafc2a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::removeConstraint</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>removeConstraint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="83" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a71bc6150196bc0aa9e0da36daee324de" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int iDynTree::optimalcontrol::OptimalControlProblem::countConstraints</definition>
+        <argsstring>() const</argsstring>
+        <name>countConstraints</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="85" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a5b659927f50eee911468564c1fe40682" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int iDynTree::optimalcontrol::OptimalControlProblem::countLinearConstraints</definition>
+        <argsstring>() const</argsstring>
+        <name>countLinearConstraints</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="87" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ad52580e616f7cd8045fc8827a7c21da0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int iDynTree::optimalcontrol::OptimalControlProblem::getConstraintsDimension</definition>
+        <argsstring>() const</argsstring>
+        <name>getConstraintsDimension</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="89" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a26f525addcfe9b897600284c6fa3b426" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::vector&lt; std::string &gt;</type>
+        <definition>const std::vector&lt;std::string&gt; iDynTree::optimalcontrol::OptimalControlProblem::listConstraints</definition>
+        <argsstring>() const</argsstring>
+        <name>listConstraints</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="91" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a12541f66cef3014b94c17bc07418cc2a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::vector&lt; std::string &gt;</type>
+        <definition>const std::vector&lt;std::string&gt; iDynTree::optimalcontrol::OptimalControlProblem::listGroups</definition>
+        <argsstring>() const</argsstring>
+        <name>listGroups</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="93" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a34e30ae0456f0edbf047c7b43d22ab49" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref> &gt; &amp;</type>
+        <definition>std::vector&lt;TimeRange&gt;&amp; iDynTree::optimalcontrol::OptimalControlProblem::getConstraintsTimeRanges</definition>
+        <argsstring>() const</argsstring>
+        <name>getConstraintsTimeRanges</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="95" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a700c04bc1a0bd7789c6386224d0ff237" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; size_t &gt; &amp;</type>
+        <definition>std::vector&lt;size_t&gt;&amp; iDynTree::optimalcontrol::OptimalControlProblem::getLinearConstraintsIndeces</definition>
+        <argsstring>() const</argsstring>
+        <name>getLinearConstraintsIndeces</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="97" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a02489128e1ec78197e2d43368e98ebc5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::addMayerTerm</definition>
+        <argsstring>(double weight, std::shared_ptr&lt; Cost &gt; cost)</argsstring>
+        <name>addMayerTerm</name>
+        <param>
+          <type>double</type>
+          <declname>weight</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1Cost" kindref="compound">Cost</ref> &gt;</type>
+          <declname>cost</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="102" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1af84f8268d7d9860caacbc7a2af9cfa01" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::addMayerTerm</definition>
+        <argsstring>(double weight, std::shared_ptr&lt; QuadraticCost &gt; quadraticCost)</argsstring>
+        <name>addMayerTerm</name>
+        <param>
+          <type>double</type>
+          <declname>weight</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1QuadraticCost" kindref="compound">QuadraticCost</ref> &gt;</type>
+          <declname>quadraticCost</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="104" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1afcacbdc9117f238009e661a74a53e6d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::addMayerTerm</definition>
+        <argsstring>(double weight, std::shared_ptr&lt; L2NormCost &gt; quadraticCost)</argsstring>
+        <name>addMayerTerm</name>
+        <param>
+          <type>double</type>
+          <declname>weight</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost" kindref="compound">L2NormCost</ref> &gt;</type>
+          <declname>quadraticCost</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="106" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a3acc6f9b97f6aa0db5e8ef27f83a393b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::addMayerTerm</definition>
+        <argsstring>(double weight, std::shared_ptr&lt; LinearCost &gt; linearCost)</argsstring>
+        <name>addMayerTerm</name>
+        <param>
+          <type>double</type>
+          <declname>weight</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1LinearCost" kindref="compound">LinearCost</ref> &gt;</type>
+          <declname>linearCost</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="108" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a11680230dfa111e50aecd797e7ccbacc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::addLagrangeTerm</definition>
+        <argsstring>(double weight, std::shared_ptr&lt; Cost &gt; cost)</argsstring>
+        <name>addLagrangeTerm</name>
+        <param>
+          <type>double</type>
+          <declname>weight</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1Cost" kindref="compound">Cost</ref> &gt;</type>
+          <declname>cost</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="110" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1aa60ac41b7e1066ea85c01edcc92b7cc5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::addLagrangeTerm</definition>
+        <argsstring>(double weight, std::shared_ptr&lt; QuadraticCost &gt; quadraticCost)</argsstring>
+        <name>addLagrangeTerm</name>
+        <param>
+          <type>double</type>
+          <declname>weight</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1QuadraticCost" kindref="compound">QuadraticCost</ref> &gt;</type>
+          <declname>quadraticCost</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="112" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1aed61cf010d71423e7043b4a5c1f2d4d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::addLagrangeTerm</definition>
+        <argsstring>(double weight, std::shared_ptr&lt; L2NormCost &gt; quadraticCost)</argsstring>
+        <name>addLagrangeTerm</name>
+        <param>
+          <type>double</type>
+          <declname>weight</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost" kindref="compound">L2NormCost</ref> &gt;</type>
+          <declname>quadraticCost</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="114" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a80980ee78870f5182dea05097faa976d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::addLagrangeTerm</definition>
+        <argsstring>(double weight, std::shared_ptr&lt; LinearCost &gt; linearCost)</argsstring>
+        <name>addLagrangeTerm</name>
+        <param>
+          <type>double</type>
+          <declname>weight</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1LinearCost" kindref="compound">LinearCost</ref> &gt;</type>
+          <declname>linearCost</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="116" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1acb5ce06342ae5477f0f50794f25d87e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::addLagrangeTerm</definition>
+        <argsstring>(double weight, double startingTime, double finalTime, std::shared_ptr&lt; Cost &gt; cost)</argsstring>
+        <name>addLagrangeTerm</name>
+        <param>
+          <type>double</type>
+          <declname>weight</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>startingTime</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>finalTime</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1Cost" kindref="compound">Cost</ref> &gt;</type>
+          <declname>cost</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="118" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a5d50f819307f5309b406cfb7efb69278" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::addLagrangeTerm</definition>
+        <argsstring>(double weight, double startingTime, double finalTime, std::shared_ptr&lt; QuadraticCost &gt; quadraticCost)</argsstring>
+        <name>addLagrangeTerm</name>
+        <param>
+          <type>double</type>
+          <declname>weight</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>startingTime</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>finalTime</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1QuadraticCost" kindref="compound">QuadraticCost</ref> &gt;</type>
+          <declname>quadraticCost</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="123" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a3f7146524e7dfdcae397ad544340b5f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::addLagrangeTerm</definition>
+        <argsstring>(double weight, double startingTime, double finalTime, std::shared_ptr&lt; L2NormCost &gt; quadraticCost)</argsstring>
+        <name>addLagrangeTerm</name>
+        <param>
+          <type>double</type>
+          <declname>weight</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>startingTime</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>finalTime</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost" kindref="compound">L2NormCost</ref> &gt;</type>
+          <declname>quadraticCost</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="128" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a0b886f55d1276dc14a9f0d075a0204d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::addLagrangeTerm</definition>
+        <argsstring>(double weight, double startingTime, double finalTime, std::shared_ptr&lt; LinearCost &gt; linearCost)</argsstring>
+        <name>addLagrangeTerm</name>
+        <param>
+          <type>double</type>
+          <declname>weight</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>startingTime</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>finalTime</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1LinearCost" kindref="compound">LinearCost</ref> &gt;</type>
+          <declname>linearCost</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="133" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a1cf49b1f74baed80c24ccca603d9a7f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::addLagrangeTerm</definition>
+        <argsstring>(double weight, const TimeRange &amp;timeRange, std::shared_ptr&lt; Cost &gt; cost)</argsstring>
+        <name>addLagrangeTerm</name>
+        <param>
+          <type>double</type>
+          <declname>weight</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref> &amp;</type>
+          <declname>timeRange</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1Cost" kindref="compound">Cost</ref> &gt;</type>
+          <declname>cost</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="138" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1abd1a53e2e446fd99c2f42c572f8001fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::addLagrangeTerm</definition>
+        <argsstring>(double weight, const TimeRange &amp;timeRange, std::shared_ptr&lt; QuadraticCost &gt; quadraticCost)</argsstring>
+        <name>addLagrangeTerm</name>
+        <param>
+          <type>double</type>
+          <declname>weight</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref> &amp;</type>
+          <declname>timeRange</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1QuadraticCost" kindref="compound">QuadraticCost</ref> &gt;</type>
+          <declname>quadraticCost</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="140" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a51b0a2f25e397361dd0ada69fed36558" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::addLagrangeTerm</definition>
+        <argsstring>(double weight, const TimeRange &amp;timeRange, std::shared_ptr&lt; L2NormCost &gt; quadraticCost)</argsstring>
+        <name>addLagrangeTerm</name>
+        <param>
+          <type>double</type>
+          <declname>weight</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref> &amp;</type>
+          <declname>timeRange</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost" kindref="compound">L2NormCost</ref> &gt;</type>
+          <declname>quadraticCost</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="142" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1adb0be63de26009c97f52fc211c5416f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::addLagrangeTerm</definition>
+        <argsstring>(double weight, const TimeRange &amp;timeRange, std::shared_ptr&lt; LinearCost &gt; linearCost)</argsstring>
+        <name>addLagrangeTerm</name>
+        <param>
+          <type>double</type>
+          <declname>weight</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref> &amp;</type>
+          <declname>timeRange</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1LinearCost" kindref="compound">LinearCost</ref> &gt;</type>
+          <declname>linearCost</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="144" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1afe915042aac68470ec2b49e7807eb927" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::updateCostTimeRange</definition>
+        <argsstring>(const std::string &amp;name, double newStartingTime, double newEndTime)</argsstring>
+        <name>updateCostTimeRange</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>newStartingTime</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>newEndTime</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="146" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ab73d563078b2d1230964c9d2cf62989b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::updateCostTimeRange</definition>
+        <argsstring>(const std::string &amp;name, const TimeRange &amp;newTimeRange)</argsstring>
+        <name>updateCostTimeRange</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref> &amp;</type>
+          <declname>newTimeRange</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="148" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ad24c7064f34f42765f8e3f9553f5d410" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::removeCost</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>removeCost</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="150" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a53c72542eef6773d4a94b077835af8e1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref> &gt; &amp;</type>
+        <definition>std::vector&lt;TimeRange&gt;&amp; iDynTree::optimalcontrol::OptimalControlProblem::getCostsTimeRanges</definition>
+        <argsstring>() const</argsstring>
+        <name>getCostsTimeRanges</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="152" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a994d66b1eec693a8a24a3f72f137938e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::hasOnlyLinearCosts</definition>
+        <argsstring>() const</argsstring>
+        <name>hasOnlyLinearCosts</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="154" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a35b485d624d04d19b8165a667abc60ed" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::hasOnlyQuadraticCosts</definition>
+        <argsstring>() const</argsstring>
+        <name>hasOnlyQuadraticCosts</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="156" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a8342782855251e0adc53e6ec51eaa383" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::setStateLowerBound</definition>
+        <argsstring>(const VectorDynSize &amp;minState)</argsstring>
+        <name>setStateLowerBound</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>minState</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="158" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ad5ef909b3c40da1a8e7d148c63282557" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::setStateLowerBound</definition>
+        <argsstring>(std::shared_ptr&lt; TimeVaryingVector &gt; minState)</argsstring>
+        <name>setStateLowerBound</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">TimeVaryingVector</ref> &gt;</type>
+          <declname>minState</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="160" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a01ad1c96b355b8a6f2155f95e0655f74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::setStateUpperBound</definition>
+        <argsstring>(const VectorDynSize &amp;maxState)</argsstring>
+        <name>setStateUpperBound</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>maxState</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="162" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a9c890c6f113a18dbb3dcf10b8bd8f3eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::setStateUpperBound</definition>
+        <argsstring>(std::shared_ptr&lt; TimeVaryingVector &gt; maxState)</argsstring>
+        <name>setStateUpperBound</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">TimeVaryingVector</ref> &gt;</type>
+          <declname>maxState</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="164" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a5921ec35c8c3b9bcd3da38dc85a9acd4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::setControlLowerBound</definition>
+        <argsstring>(const VectorDynSize &amp;minControl)</argsstring>
+        <name>setControlLowerBound</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>minControl</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="166" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a48308ee8e0c37adb24d002b39a755505" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::setControlLowerBound</definition>
+        <argsstring>(std::shared_ptr&lt; TimeVaryingVector &gt; minControl)</argsstring>
+        <name>setControlLowerBound</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">TimeVaryingVector</ref> &gt;</type>
+          <declname>minControl</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="168" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ab12d5ae29f35eb2e4a97492d338306a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::setControlUpperBound</definition>
+        <argsstring>(const VectorDynSize &amp;maxControl)</argsstring>
+        <name>setControlUpperBound</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>maxControl</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="170" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1aae545865e2ef845b988e82d61fdd2f4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::setControlUpperBound</definition>
+        <argsstring>(std::shared_ptr&lt; TimeVaryingVector &gt; maxControl)</argsstring>
+        <name>setControlUpperBound</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">TimeVaryingVector</ref> &gt;</type>
+          <declname>maxControl</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="172" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1afd55bb59616f578b1f68773e48970f76" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::setStateBoxConstraints</definition>
+        <argsstring>(const VectorDynSize &amp;minState, const VectorDynSize &amp;maxState)</argsstring>
+        <name>setStateBoxConstraints</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>minState</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>maxState</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="174" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1afbeffc43fa67ec4edda8b3ad2fd79c21" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::setStateBoxConstraints</definition>
+        <argsstring>(std::shared_ptr&lt; TimeVaryingVector &gt; minState, std::shared_ptr&lt; TimeVaryingVector &gt; maxState)</argsstring>
+        <name>setStateBoxConstraints</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">TimeVaryingVector</ref> &gt;</type>
+          <declname>minState</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">TimeVaryingVector</ref> &gt;</type>
+          <declname>maxState</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="177" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ad80b4e1dcac6906c40ee7964cc92c613" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::setControlBoxConstraints</definition>
+        <argsstring>(const VectorDynSize &amp;minControl, const VectorDynSize &amp;maxControl)</argsstring>
+        <name>setControlBoxConstraints</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>minControl</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>maxControl</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="180" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ab4476ace7e3d6d5f227060d3bd5137aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::setControlBoxConstraints</definition>
+        <argsstring>(std::shared_ptr&lt; TimeVaryingVector &gt; minControl, std::shared_ptr&lt; TimeVaryingVector &gt; maxControl)</argsstring>
+        <name>setControlBoxConstraints</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">TimeVaryingVector</ref> &gt;</type>
+          <declname>minControl</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">TimeVaryingVector</ref> &gt;</type>
+          <declname>maxControl</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="183" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ae9879491c00b326931e9b38924990af4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::getStateLowerBound</definition>
+        <argsstring>(double time, VectorDynSize &amp;minState)</argsstring>
+        <name>getStateLowerBound</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>minState</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="186" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a484613f00a345eb1d0ec5b78be0b51ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::getStateUpperBound</definition>
+        <argsstring>(double time, VectorDynSize &amp;maxState)</argsstring>
+        <name>getStateUpperBound</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>maxState</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="188" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a2083c2b8144b48fa4efd4963cce73dac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::getControlLowerBound</definition>
+        <argsstring>(double time, VectorDynSize &amp;minControl)</argsstring>
+        <name>getControlLowerBound</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>minControl</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="190" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a431f5188c049fa001905bfda44f74b6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::getControlUpperBound</definition>
+        <argsstring>(double time, VectorDynSize &amp;maxControl)</argsstring>
+        <name>getControlUpperBound</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>maxControl</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="192" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a67a0dbc68632df087c09d11c583dd728" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::costsEvaluation</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, double &amp;costValue)</argsstring>
+        <name>costsEvaluation</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>costValue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="194" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a6ac1abdd182daa78fe95dedce3f0dba0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::costsFirstPartialDerivativeWRTState</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, VectorDynSize &amp;partialDerivative)</argsstring>
+        <name>costsFirstPartialDerivativeWRTState</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>partialDerivative</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="196" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ab57ca1ba2664007eb8e5b1df590ba9d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::costsFirstPartialDerivativeWRTControl</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, VectorDynSize &amp;partialDerivative)</argsstring>
+        <name>costsFirstPartialDerivativeWRTControl</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>partialDerivative</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="201" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ac410977ec50668f2fa9babb1cca5fda4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::costsSecondPartialDerivativeWRTState</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, MatrixDynSize &amp;partialDerivative)</argsstring>
+        <name>costsSecondPartialDerivativeWRTState</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>partialDerivative</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="206" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a767b7a3a667d27bfc79342f0458a1914" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::costsSecondPartialDerivativeWRTControl</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, MatrixDynSize &amp;partialDerivative)</argsstring>
+        <name>costsSecondPartialDerivativeWRTControl</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>partialDerivative</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="211" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1aa50d615775a44abeec5a368b3dc50178" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::costsSecondPartialDerivativeWRTStateControl</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, MatrixDynSize &amp;partialDerivative)</argsstring>
+        <name>costsSecondPartialDerivativeWRTStateControl</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>partialDerivative</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="217" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ad4352f3855072d9cc5fbb2ae8f4db32b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::costsSecondPartialDerivativeWRTStateSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;stateSparsity)</argsstring>
+        <name>costsSecondPartialDerivativeWRTStateSparsity</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>stateSparsity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="222" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a1b594b44422066f9e155a58cad8e559f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::costsSecondPartialDerivativeWRTControlSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;controlSparsity)</argsstring>
+        <name>costsSecondPartialDerivativeWRTControlSparsity</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>controlSparsity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="224" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1abb27fe98321728fdd710795bdac4d8c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::costsSecondPartialDerivativeWRTStateControlSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;stateControlSparsity)</argsstring>
+        <name>costsSecondPartialDerivativeWRTStateControlSparsity</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>stateControlSparsity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="226" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a49ad293fdbe023d2e3c231912719172e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::constraintsEvaluation</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, VectorDynSize &amp;constraintsValue)</argsstring>
+        <name>constraintsEvaluation</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>constraintsValue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="228" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a9a2820cf7cd04c5df801a3c0ffbe157e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::getConstraintsUpperBound</definition>
+        <argsstring>(double time, double infinity, VectorDynSize &amp;upperBound)</argsstring>
+        <name>getConstraintsUpperBound</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>infinity</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>upperBound</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="230" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a636190efda17f40cd93ecef6da26d219" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::getConstraintsLowerBound</definition>
+        <argsstring>(double time, double infinity, VectorDynSize &amp;lowerBound)</argsstring>
+        <name>getConstraintsLowerBound</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>infinity</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>lowerBound</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="232" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a33a8c1a0347b981c256f0f5cdc22d416" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::isFeasiblePoint</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control)</argsstring>
+        <name>isFeasiblePoint</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="234" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a31ae236e57f7180a1a3541479eca3d2d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::constraintsJacobianWRTState</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, MatrixDynSize &amp;jacobian)</argsstring>
+        <name>constraintsJacobianWRTState</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>jacobian</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="236" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a3f34c659174b4e78e4f6b8e82d08f77a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::constraintsJacobianWRTControl</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, MatrixDynSize &amp;jacobian)</argsstring>
+        <name>constraintsJacobianWRTControl</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>jacobian</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="241" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a7ce26aebe71c9b7673346b13933e88ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::constraintsJacobianWRTStateSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;stateSparsity)</argsstring>
+        <name>constraintsJacobianWRTStateSparsity</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>stateSparsity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="246" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a10eb66200e440411848151168ebb2383" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::constraintsJacobianWRTControlSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;controlSparsity)</argsstring>
+        <name>constraintsJacobianWRTControlSparsity</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>controlSparsity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="248" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a0c7c2ec358f224dbfe3b58c4be810fac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::constraintsSecondPartialDerivativeWRTState</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, const VectorDynSize &amp;lambda, MatrixDynSize &amp;hessian)</argsstring>
+        <name>constraintsSecondPartialDerivativeWRTState</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>hessian</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="250" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ac35ace5bf40273c3af665af009e30d4b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::constraintsSecondPartialDerivativeWRTControl</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, const VectorDynSize &amp;lambda, MatrixDynSize &amp;hessian)</argsstring>
+        <name>constraintsSecondPartialDerivativeWRTControl</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>hessian</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="256" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ade15d4ad045d7d00d598fcc5ab6b902a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::constraintsSecondPartialDerivativeWRTStateControl</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, const VectorDynSize &amp;lambda, MatrixDynSize &amp;hessian)</argsstring>
+        <name>constraintsSecondPartialDerivativeWRTStateControl</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>hessian</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="262" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ad14203a9175f6a98edd9f207d6f49774" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::constraintsSecondPartialDerivativeWRTStateSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;stateSparsity)</argsstring>
+        <name>constraintsSecondPartialDerivativeWRTStateSparsity</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>stateSparsity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="268" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a111482e45422e7eeaf7a98c175c0d7c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::constraintsSecondPartialDerivativeWRTControlSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;controlSparsity)</argsstring>
+        <name>constraintsSecondPartialDerivativeWRTControlSparsity</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>controlSparsity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="270" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1abc9a594a838f6da6e0bf4fcf232e19cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::OptimalControlProblem::constraintsSecondPartialDerivativeWRTStateControlSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;stateControlSparsity)</argsstring>
+        <name>constraintsSecondPartialDerivativeWRTStateControlSparsity</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>stateControlSparsity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlProblem.h" line="272" column="18"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="iDynTree/OptimalControlProblem.h" line="52" column="9" bodyfile="iDynTree/OptimalControlProblem.h" bodystart="52" bodyend="278"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1abec32a6da80771a87f082632507565bb" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>addConstraint</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1abc67b1841b787b3d98f5e62fa7ed5d0e" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>addConstraint</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a4fb55f0a9072eb927cd6a99b76c6c1db" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>addGroupOfConstraints</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a11680230dfa111e50aecd797e7ccbacc" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>addLagrangeTerm</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1aa60ac41b7e1066ea85c01edcc92b7cc5" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>addLagrangeTerm</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1aed61cf010d71423e7043b4a5c1f2d4d4" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>addLagrangeTerm</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a80980ee78870f5182dea05097faa976d" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>addLagrangeTerm</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1acb5ce06342ae5477f0f50794f25d87e6" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>addLagrangeTerm</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a5d50f819307f5309b406cfb7efb69278" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>addLagrangeTerm</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a3f7146524e7dfdcae397ad544340b5f3" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>addLagrangeTerm</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a0b886f55d1276dc14a9f0d075a0204d0" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>addLagrangeTerm</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a1cf49b1f74baed80c24ccca603d9a7f4" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>addLagrangeTerm</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1abd1a53e2e446fd99c2f42c572f8001fb" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>addLagrangeTerm</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a51b0a2f25e397361dd0ada69fed36558" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>addLagrangeTerm</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1adb0be63de26009c97f52fc211c5416f1" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>addLagrangeTerm</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a02489128e1ec78197e2d43368e98ebc5" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>addMayerTerm</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1af84f8268d7d9860caacbc7a2af9cfa01" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>addMayerTerm</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1afcacbdc9117f238009e661a74a53e6d6" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>addMayerTerm</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a3acc6f9b97f6aa0db5e8ef27f83a393b" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>addMayerTerm</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a49ad293fdbe023d2e3c231912719172e" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>constraintsEvaluation</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a3f34c659174b4e78e4f6b8e82d08f77a" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>constraintsJacobianWRTControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a10eb66200e440411848151168ebb2383" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>constraintsJacobianWRTControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a31ae236e57f7180a1a3541479eca3d2d" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>constraintsJacobianWRTState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a7ce26aebe71c9b7673346b13933e88ca" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>constraintsJacobianWRTStateSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ac35ace5bf40273c3af665af009e30d4b" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>constraintsSecondPartialDerivativeWRTControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a111482e45422e7eeaf7a98c175c0d7c6" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>constraintsSecondPartialDerivativeWRTControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a0c7c2ec358f224dbfe3b58c4be810fac" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>constraintsSecondPartialDerivativeWRTState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ade15d4ad045d7d00d598fcc5ab6b902a" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>constraintsSecondPartialDerivativeWRTStateControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1abc9a594a838f6da6e0bf4fcf232e19cb" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>constraintsSecondPartialDerivativeWRTStateControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ad14203a9175f6a98edd9f207d6f49774" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>constraintsSecondPartialDerivativeWRTStateSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a67a0dbc68632df087c09d11c583dd728" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>costsEvaluation</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ab57ca1ba2664007eb8e5b1df590ba9d3" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>costsFirstPartialDerivativeWRTControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a6ac1abdd182daa78fe95dedce3f0dba0" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>costsFirstPartialDerivativeWRTState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a767b7a3a667d27bfc79342f0458a1914" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>costsSecondPartialDerivativeWRTControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a1b594b44422066f9e155a58cad8e559f" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>costsSecondPartialDerivativeWRTControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ac410977ec50668f2fa9babb1cca5fda4" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>costsSecondPartialDerivativeWRTState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1aa50d615775a44abeec5a368b3dc50178" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>costsSecondPartialDerivativeWRTStateControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1abb27fe98321728fdd710795bdac4d8c6" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>costsSecondPartialDerivativeWRTStateControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ad4352f3855072d9cc5fbb2ae8f4db32b" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>costsSecondPartialDerivativeWRTStateSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a71bc6150196bc0aa9e0da36daee324de" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>countConstraints</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a5b659927f50eee911468564c1fe40682" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>countLinearConstraints</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ac283893ec23a7265a6c26e80c527704f" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>dynamicalSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a28351bbdaed708d43d44b35eaa25170b" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>finalTime</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ad52580e616f7cd8045fc8827a7c21da0" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>getConstraintsDimension</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a636190efda17f40cd93ecef6da26d219" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>getConstraintsLowerBound</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a34e30ae0456f0edbf047c7b43d22ab49" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>getConstraintsTimeRanges</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a9a2820cf7cd04c5df801a3c0ffbe157e" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>getConstraintsUpperBound</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a2083c2b8144b48fa4efd4963cce73dac" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>getControlLowerBound</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a431f5188c049fa001905bfda44f74b6d" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>getControlUpperBound</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a53c72542eef6773d4a94b077835af8e1" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>getCostsTimeRanges</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a700c04bc1a0bd7789c6386224d0ff237" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>getLinearConstraintsIndeces</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ae9879491c00b326931e9b38924990af4" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>getStateLowerBound</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a484613f00a345eb1d0ec5b78be0b51ff" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>getStateUpperBound</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a994d66b1eec693a8a24a3f72f137938e" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>hasOnlyLinearCosts</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a35b485d624d04d19b8165a667abc60ed" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>hasOnlyQuadraticCosts</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1aa15ec20794c4ea3013ce9dbbf3880085" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>initialTime</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a33a8c1a0347b981c256f0f5cdc22d416" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>isFeasiblePoint</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a26f525addcfe9b897600284c6fa3b426" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>listConstraints</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a12541f66cef3014b94c17bc07418cc2a" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>listGroups</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a388070b1c4e154ccbdea7c9b7592a309" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>m_pimpl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a8f8f15343f3681e867a3a1497815b3a6" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>OptimalControlProblem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a4ee4e74a855091b473d495d501edc577" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>OptimalControlProblem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a82e394516abf28fcd9bfbfc64bafc2a4" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>removeConstraint</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ad24c7064f34f42765f8e3f9553f5d410" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>removeCost</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a9aa7f91a2d44558234dbe443b9a783bd" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>removeGroupOfConstraints</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ad80b4e1dcac6906c40ee7964cc92c613" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>setControlBoxConstraints</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ab4476ace7e3d6d5f227060d3bd5137aa" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>setControlBoxConstraints</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a5921ec35c8c3b9bcd3da38dc85a9acd4" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>setControlLowerBound</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a48308ee8e0c37adb24d002b39a755505" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>setControlLowerBound</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ab12d5ae29f35eb2e4a97492d338306a2" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>setControlUpperBound</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1aae545865e2ef845b988e82d61fdd2f4f" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>setControlUpperBound</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a4ebb1c541eda6f7364e35097ec8c9ce1" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>setDynamicalSystemConstraint</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1adce0d7996ccf286f9f476f5a72312aa6" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>setDynamicalSystemConstraint</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1afd55bb59616f578b1f68773e48970f76" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>setStateBoxConstraints</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1afbeffc43fa67ec4edda8b3ad2fd79c21" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>setStateBoxConstraints</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a8342782855251e0adc53e6ec51eaa383" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>setStateLowerBound</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ad5ef909b3c40da1a8e7d148c63282557" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>setStateLowerBound</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a01ad1c96b355b8a6f2155f95e0655f74" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>setStateUpperBound</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a9c890c6f113a18dbb3dcf10b8bd8f3eb" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>setStateUpperBound</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a001558d92e820f77f324d95adc4e295b" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>setTimeHorizon</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a5bdd83fa1e43b80cff9c8e609d6a6392" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>systemIsLinear</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1afe915042aac68470ec2b49e7807eb927" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>updateCostTimeRange</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ab73d563078b2d1230964c9d2cf62989b" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>updateCostTimeRange</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1ab893e61ce2643b91ef84ea56eb458dc7" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlProblem</scope><name>~OptimalControlProblem</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

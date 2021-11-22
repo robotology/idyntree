@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1GeodesicL2MeanOptions" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::GeodesicL2MeanOptions</compoundname>
+    <includes local="no">iDynTree/Core/SO3Utils.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1GeodesicL2MeanOptions_1a159b119ce41099644832778d4df658ba" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::GeodesicL2MeanOptions::tolerance</definition>
+        <argsstring></argsstring>
+        <name>tolerance</name>
+        <initializer>{1e-5}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SO3Utils.h" line="26" column="16" bodyfile="iDynTree/Core/SO3Utils.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1GeodesicL2MeanOptions_1a8ee053ef3c014149ee0643e6876eafc4" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::GeodesicL2MeanOptions::timeoutInSeconds</definition>
+        <argsstring></argsstring>
+        <name>timeoutInSeconds</name>
+        <initializer>{-1}</initializer>
+        <briefdescription>
+<para>Tolerance for terminating the inner refinement loop of the mean rotation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SO3Utils.h" line="27" column="16" bodyfile="iDynTree/Core/SO3Utils.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1GeodesicL2MeanOptions_1a9a7057a4e4577157e1482996dfe56f6d" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int iDynTree::GeodesicL2MeanOptions::maxIterations</definition>
+        <argsstring></argsstring>
+        <name>maxIterations</name>
+        <initializer>{-1}</initializer>
+        <briefdescription>
+<para>Timeout for the refinement loop. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SO3Utils.h" line="28" column="13" bodyfile="iDynTree/Core/SO3Utils.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1GeodesicL2MeanOptions_1a5974d42874f6bde6412165b585fe92b6" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::GeodesicL2MeanOptions::verbose</definition>
+        <argsstring></argsstring>
+        <name>verbose</name>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>Max number of iterations for the refinement loop. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SO3Utils.h" line="29" column="14" bodyfile="iDynTree/Core/SO3Utils.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1GeodesicL2MeanOptions_1acb9e03dfc924b5ed992c700c50310b0d" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::GeodesicL2MeanOptions::stepSize</definition>
+        <argsstring></argsstring>
+        <name>stepSize</name>
+        <initializer>{1.0}</initializer>
+        <briefdescription>
+<para>Add a message when the solution is found. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SO3Utils.h" line="30" column="16" bodyfile="iDynTree/Core/SO3Utils.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Struct containing the options for geodesicL2MeanRotation and geodesicL2WeightedMeanRotation. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/SO3Utils.h" line="24" column="5" bodyfile="iDynTree/Core/SO3Utils.h" bodystart="25" bodyend="31"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1GeodesicL2MeanOptions_1a9a7057a4e4577157e1482996dfe56f6d" prot="public" virt="non-virtual"><scope>iDynTree::GeodesicL2MeanOptions</scope><name>maxIterations</name></member>
+      <member refid="structiDynTree_1_1GeodesicL2MeanOptions_1acb9e03dfc924b5ed992c700c50310b0d" prot="public" virt="non-virtual"><scope>iDynTree::GeodesicL2MeanOptions</scope><name>stepSize</name></member>
+      <member refid="structiDynTree_1_1GeodesicL2MeanOptions_1a8ee053ef3c014149ee0643e6876eafc4" prot="public" virt="non-virtual"><scope>iDynTree::GeodesicL2MeanOptions</scope><name>timeoutInSeconds</name></member>
+      <member refid="structiDynTree_1_1GeodesicL2MeanOptions_1a159b119ce41099644832778d4df658ba" prot="public" virt="non-virtual"><scope>iDynTree::GeodesicL2MeanOptions</scope><name>tolerance</name></member>
+      <member refid="structiDynTree_1_1GeodesicL2MeanOptions_1a5974d42874f6bde6412165b585fe92b6" prot="public" virt="non-virtual"><scope>iDynTree::GeodesicL2MeanOptions</scope><name>verbose</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

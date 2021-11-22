@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1VisualizerOptions" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::VisualizerOptions</compoundname>
+    <includes local="no">iDynTree/Visualizer.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1VisualizerOptions_1a93881c95c54057b6d81685d91576770e" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::VisualizerOptions::verbose</definition>
+        <argsstring></argsstring>
+        <name>verbose</name>
+        <briefdescription>
+<para>Set the visualizer to be verbose, useful for debug (default : false). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="769" column="10" bodyfile="iDynTree/Visualizer.h" bodystart="769" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1VisualizerOptions_1a27dd48cc4e8277f38f07a4778dcbac88" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int iDynTree::VisualizerOptions::winWidth</definition>
+        <argsstring></argsstring>
+        <name>winWidth</name>
+        <briefdescription>
+<para>Initial width (in pixels) of the created windows (default: 800). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="774" column="9" bodyfile="iDynTree/Visualizer.h" bodystart="774" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1VisualizerOptions_1ac52ea0cc43febc857569c192a0919d06" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int iDynTree::VisualizerOptions::winHeight</definition>
+        <argsstring></argsstring>
+        <name>winHeight</name>
+        <briefdescription>
+<para>Initial height (in pixels) of the created window (default: 600). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="779" column="9" bodyfile="iDynTree/Visualizer.h" bodystart="779" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1VisualizerOptions_1aed0f49333d9da8f0db94c98f8aae77ec" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::VisualizerOptions::rootFrameArrowsDimension</definition>
+        <argsstring></argsstring>
+        <name>rootFrameArrowsDimension</name>
+        <briefdescription>
+<para>Dimension of the root frame arrows in meters (default: 1.0). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="784" column="12" bodyfile="iDynTree/Visualizer.h" bodystart="784" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structiDynTree_1_1VisualizerOptions_1a1f9e408639244900c2708406168ff1f1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::VisualizerOptions::VisualizerOptions</definition>
+        <argsstring>()</argsstring>
+        <name>VisualizerOptions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="786" column="5" bodyfile="iDynTree/Visualizer.h" bodystart="786" bodyend="791"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para><ref refid="classiDynTree_1_1Visualizer" kindref="compound">Visualizer</ref> options. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Visualizer.h" line="764" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="765" bodyend="792"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1VisualizerOptions_1aed0f49333d9da8f0db94c98f8aae77ec" prot="public" virt="non-virtual"><scope>iDynTree::VisualizerOptions</scope><name>rootFrameArrowsDimension</name></member>
+      <member refid="structiDynTree_1_1VisualizerOptions_1a93881c95c54057b6d81685d91576770e" prot="public" virt="non-virtual"><scope>iDynTree::VisualizerOptions</scope><name>verbose</name></member>
+      <member refid="structiDynTree_1_1VisualizerOptions_1a1f9e408639244900c2708406168ff1f1" prot="public" virt="non-virtual"><scope>iDynTree::VisualizerOptions</scope><name>VisualizerOptions</name></member>
+      <member refid="structiDynTree_1_1VisualizerOptions_1ac52ea0cc43febc857569c192a0919d06" prot="public" virt="non-virtual"><scope>iDynTree::VisualizerOptions</scope><name>winHeight</name></member>
+      <member refid="structiDynTree_1_1VisualizerOptions_1a27dd48cc4e8277f38f07a4778dcbac88" prot="public" virt="non-virtual"><scope>iDynTree::VisualizerOptions</scope><name>winWidth</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

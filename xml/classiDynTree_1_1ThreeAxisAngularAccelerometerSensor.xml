@@ -1,0 +1,397 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::ThreeAxisAngularAccelerometerSensor</compoundname>
+    <basecompoundref refid="classiDynTree_1_1LinkSensor" prot="public" virt="non-virtual">iDynTree::LinkSensor</basecompoundref>
+    <includes local="no">iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a16e3d94533e18494fc6cfaabcc1b53f3" prot="private" static="no" mutable="no">
+        <type>ThreeAxisAngularAccelerometerPrivateAttributes *</type>
+        <definition>ThreeAxisAngularAccelerometerPrivateAttributes* iDynTree::ThreeAxisAngularAccelerometerSensor::pimpl</definition>
+        <argsstring></argsstring>
+        <name>pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="40" column="57" bodyfile="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a1512d5b7e32c358fdb0a0b6b9b5b8679" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ThreeAxisAngularAccelerometerSensor::ThreeAxisAngularAccelerometerSensor</definition>
+        <argsstring>()</argsstring>
+        <name>ThreeAxisAngularAccelerometerSensor</name>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="46" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a4c7efd1837494a1a771637cf8effb241" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ThreeAxisAngularAccelerometerSensor::ThreeAxisAngularAccelerometerSensor</definition>
+        <argsstring>(const ThreeAxisAngularAccelerometerSensor &amp;other)</argsstring>
+        <name>ThreeAxisAngularAccelerometerSensor</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor" kindref="compound">ThreeAxisAngularAccelerometerSensor</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="51" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1afcfe46a5c4d2f131f6d4322641bd4a87" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor" kindref="compound">ThreeAxisAngularAccelerometerSensor</ref> &amp;</type>
+        <definition>ThreeAxisAngularAccelerometerSensor&amp; iDynTree::ThreeAxisAngularAccelerometerSensor::operator=</definition>
+        <argsstring>(const ThreeAxisAngularAccelerometerSensor &amp;other)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor" kindref="compound">ThreeAxisAngularAccelerometerSensor</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy operator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="56" column="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a44ea289081e8e872e28ae1839f913a60" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::ThreeAxisAngularAccelerometerSensor::~ThreeAxisAngularAccelerometerSensor</definition>
+        <argsstring>()</argsstring>
+        <name>~ThreeAxisAngularAccelerometerSensor</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="61" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1ae60d56505a10ef186f6af7f5bf5feaa1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ThreeAxisAngularAccelerometerSensor::setName</definition>
+        <argsstring>(const std::string &amp;_name)</argsstring>
+        <name>setName</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1a40cafcac5f0c1567e44d53c775641818">setName</reimplements>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>_name</declname>
+        </param>
+        <briefdescription>
+<para>Set the name (id) of the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="67" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a0c6420e2d828d4d95c399f847bada325" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ThreeAxisAngularAccelerometerSensor::setLinkSensorTransform</definition>
+        <argsstring>(const iDynTree::Transform &amp;link_H_sensor)</argsstring>
+        <name>setLinkSensorTransform</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1a716a29b8598842583ac5c92903a978f5">setLinkSensorTransform</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>link_H_sensor</declname>
+        </param>
+        <briefdescription>
+<para>Set the transform from the sensor to the parent link attached to the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if link_index is parent link attached to the accelerometer sensor, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="74" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a52e9392105c1194d30238ff2df75e782" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ThreeAxisAngularAccelerometerSensor::setParentLink</definition>
+        <argsstring>(const std::string &amp;parent)</argsstring>
+        <name>setParentLink</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1a9420746600b52d524f2c6fde5023147d">setParentLink</reimplements>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>parentLinkName</declname>
+        </param>
+        <briefdescription>
+<para>Set the name of the parent <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="79" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a0d83d703d9273361a697fd33e64286a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ThreeAxisAngularAccelerometerSensor::setParentLinkIndex</definition>
+        <argsstring>(const LinkIndex &amp;parent_index)</argsstring>
+        <name>setParentLinkIndex</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1aec8002495ae7ca62e3e8b516c55e5a0c">setParentLinkIndex</reimplements>
+        <param>
+          <type>const LinkIndex &amp;</type>
+        </param>
+        <briefdescription>
+<para>Set the numeric index of the parent link of the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="84" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1adf34f6a32f73d39b0a9a5eb98e675a05" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::ThreeAxisAngularAccelerometerSensor::getName</definition>
+        <argsstring>() const</argsstring>
+        <name>getName</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1a4a62adb1d4c1e4bedca8762783ab0468">getName</reimplements>
+        <briefdescription>
+<para>Get the id (name) of sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="90" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a5ef9ac9d8a3d752d2d89e66006bb2a49" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SensorType</type>
+        <definition>SensorType iDynTree::ThreeAxisAngularAccelerometerSensor::getSensorType</definition>
+        <argsstring>() const</argsstring>
+        <name>getSensorType</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1a6dd712921c150fddd33217694feb3652">getSensorType</reimplements>
+        <briefdescription>
+<para>Get the type of the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the type of the sensor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="95" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a9e1daa37dc2f4d2dcae646e01cb06a5b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::ThreeAxisAngularAccelerometerSensor::getParentLink</definition>
+        <argsstring>() const</argsstring>
+        <name>getParentLink</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1a4d664e0bb40e93c9c966f286a5205ed6">getParentLink</reimplements>
+        <briefdescription>
+<para>Get the name of the parent <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="101" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a9cb57d1b01e563b914a00182ad15a6ca" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::ThreeAxisAngularAccelerometerSensor::getParentLinkIndex</definition>
+        <argsstring>() const</argsstring>
+        <name>getParentLinkIndex</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1a45fc4c098204d10e64c4c82ae58ddd2c">getParentLinkIndex</reimplements>
+        <briefdescription>
+<para>Get the numeric index of the parent <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the index of the parent <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> of the sensor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="106" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a2eda12416407060776056a95c375d554" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>Transform iDynTree::ThreeAxisAngularAccelerometerSensor::getLinkSensorTransform</definition>
+        <argsstring>() const</argsstring>
+        <name>getLinkSensorTransform</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1ad5cb2901457ca5e0dedee1a6230ac858">getLinkSensorTransform</reimplements>
+        <briefdescription>
+<para>Return the transform that applied on a element expressed in sensor frames it transform it in one expressed in the link frame (. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="95">\[ {}^l H_s \]</formula>).</para>
+<para><simplesect kind="return"><para>the link_H_sensor transform </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="109" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a7df52d9d13dd67a1cf29847d436070e6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ThreeAxisAngularAccelerometerSensor::isValid</definition>
+        <argsstring>() const</argsstring>
+        <name>isValid</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1ace89679ad53fd11326ec00dc82ebd925">isValid</reimplements>
+        <briefdescription>
+<para>Return true if the sensor has been appropriately configured (all setters where setted, false otherwise. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="114" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a51c85baae65ce7f750e272fc684b24ee" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> *</type>
+        <definition>Sensor* iDynTree::ThreeAxisAngularAccelerometerSensor::clone</definition>
+        <argsstring>() const</argsstring>
+        <name>clone</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1a6428f5534e54c607bc5e773073c6c50e">clone</reimplements>
+        <briefdescription>
+<para>Return a pointer to a copy of this sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="119" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a8213b6c275f41db4b3a60bc2451a03f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ThreeAxisAngularAccelerometerSensor::updateIndices</definition>
+        <argsstring>(const Model &amp;model)</argsstring>
+        <name>updateIndices</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1ae91fc5a5922a99815b0cdc9de9f1ac88">updateIndices</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Update all the indices (link/frames) contained in this sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="124" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1af25f1dada5f0669f6fe876274f66891d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref></type>
+        <definition>Vector3 iDynTree::ThreeAxisAngularAccelerometerSensor::predictMeasurement</definition>
+        <argsstring>(const iDynTree::SpatialAcc &amp;linkAcc)</argsstring>
+        <name>predictMeasurement</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">iDynTree::SpatialAcc</ref> &amp;</type>
+          <declname>linkAcc</declname>
+        </param>
+        <briefdescription>
+<para>Simulate the measurement of the Three <ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref> angular accelerometer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">linkAcc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the left trivialized acceleration of the link frame w.r.t. to an inertial frame</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the predicted measurement as a AngAcceleration </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="133" column="17"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class representing a three axis angular accelerometer, i.e. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>a sensor that measures the 3D angular acceleration of the sensor frame. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::LinkSensor</label>
+        <link refid="classiDynTree_1_1LinkSensor"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::Sensor</label>
+        <link refid="classiDynTree_1_1Sensor"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::ThreeAxisAngularAccelerometerSensor</label>
+        <link refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>iDynTree::LinkSensor</label>
+        <link refid="classiDynTree_1_1LinkSensor"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::Sensor</label>
+        <link refid="classiDynTree_1_1Sensor"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::ThreeAxisAngularAccelerometerSensor</label>
+        <link refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" line="36" column="5" bodyfile="iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h" bodystart="37" bodyend="134"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a51c85baae65ce7f750e272fc684b24ee" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>clone</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a2eda12416407060776056a95c375d554" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>getLinkSensorTransform</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1adf34f6a32f73d39b0a9a5eb98e675a05" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>getName</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a9e1daa37dc2f4d2dcae646e01cb06a5b" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>getParentLink</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a9cb57d1b01e563b914a00182ad15a6ca" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>getParentLinkIndex</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a5ef9ac9d8a3d752d2d89e66006bb2a49" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>getSensorType</name></member>
+      <member refid="classiDynTree_1_1LinkSensor_1a371122608cfbaf0c9fdf562b2780c786" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>isConsistent</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a7df52d9d13dd67a1cf29847d436070e6" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>isValid</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1afcfe46a5c4d2f131f6d4322641bd4a87" prot="public" virt="non-virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a16e3d94533e18494fc6cfaabcc1b53f3" prot="private" virt="non-virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>pimpl</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1af25f1dada5f0669f6fe876274f66891d" prot="public" virt="non-virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>predictMeasurement</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a0c6420e2d828d4d95c399f847bada325" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>setLinkSensorTransform</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1ae60d56505a10ef186f6af7f5bf5feaa1" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>setName</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a52e9392105c1194d30238ff2df75e782" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>setParentLink</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a0d83d703d9273361a697fd33e64286a2" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>setParentLinkIndex</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a1512d5b7e32c358fdb0a0b6b9b5b8679" prot="public" virt="non-virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>ThreeAxisAngularAccelerometerSensor</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a4c7efd1837494a1a771637cf8effb241" prot="public" virt="non-virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>ThreeAxisAngularAccelerometerSensor</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a8213b6c275f41db4b3a60bc2451a03f5" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>updateIndices</name></member>
+      <member refid="classiDynTree_1_1LinkSensor_1a6d58c4792a359f962a64f800f56ecb5a" prot="public" virt="pure-virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>~LinkSensor</name></member>
+      <member refid="classiDynTree_1_1Sensor_1ab47aa38253b58f2a1c537e5956684e47" prot="public" virt="pure-virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>~Sensor</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a44ea289081e8e872e28ae1839f913a60" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisAngularAccelerometerSensor</scope><name>~ThreeAxisAngularAccelerometerSensor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

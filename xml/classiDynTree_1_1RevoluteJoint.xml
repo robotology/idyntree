@@ -1,0 +1,1175 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1RevoluteJoint" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::RevoluteJoint</compoundname>
+    <basecompoundref refid="classiDynTree_1_1MovableJointImpl" prot="public" virt="non-virtual">iDynTree::MovableJointImpl&lt; 1, 1 &gt;</basecompoundref>
+    <includes local="no">iDynTree/Model/RevoluteJoint.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1a64e64e4c7b80737e16af12d405479737" prot="private" static="no" mutable="no">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::RevoluteJoint::link1</definition>
+        <argsstring></argsstring>
+        <name>link1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="33" column="19" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1a0019a807eb17312f89d3e95251220455" prot="private" static="no" mutable="no">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::RevoluteJoint::link2</definition>
+        <argsstring></argsstring>
+        <name>link2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="34" column="19" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1a34fff2ede1ed0c72992270f8d70d89bb" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>Transform iDynTree::RevoluteJoint::link1_X_link2_at_rest</definition>
+        <argsstring></argsstring>
+        <name>link1_X_link2_at_rest</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="35" column="19" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1a00529279702ce43517fe1daad9767a35" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref></type>
+        <definition>Axis iDynTree::RevoluteJoint::rotation_axis_wrt_link1</definition>
+        <argsstring></argsstring>
+        <name>rotation_axis_wrt_link1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="36" column="14" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1a27aa47da74de0c6909449a815307d434" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::RevoluteJoint::m_hasPosLimits</definition>
+        <argsstring></argsstring>
+        <name>m_hasPosLimits</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="40" column="14" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1a5c24ef0034d0c449baba2d5fec33871c" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::RevoluteJoint::m_minPos</definition>
+        <argsstring></argsstring>
+        <name>m_minPos</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="41" column="16" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1a4acd59cca211ac385237519cc2b2c149" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::RevoluteJoint::m_maxPos</definition>
+        <argsstring></argsstring>
+        <name>m_maxPos</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="42" column="16" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1af3e89e865b6f934a00e2bfb32fee15fd" prot="private" static="no" mutable="yes">
+        <type>double</type>
+        <definition>double iDynTree::RevoluteJoint::q_previous</definition>
+        <argsstring></argsstring>
+        <name>q_previous</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="45" column="24" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1a088374402862b6993c0fc690baa0c547" prot="private" static="no" mutable="yes">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>Transform iDynTree::RevoluteJoint::link1_X_link2</definition>
+        <argsstring></argsstring>
+        <name>link1_X_link2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="46" column="27" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1a98aa396b2c5880913e1a8f93c0fad716" prot="private" static="no" mutable="yes">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>Transform iDynTree::RevoluteJoint::link2_X_link1</definition>
+        <argsstring></argsstring>
+        <name>link2_X_link1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="47" column="27" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1a2cd60e1fa399d50697d31977c3181fa8" prot="private" static="no" mutable="yes">
+        <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
+        <definition>SpatialMotionVector iDynTree::RevoluteJoint::S_link1_link2</definition>
+        <argsstring></argsstring>
+        <name>S_link1_link2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="48" column="37" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1RevoluteJoint_1a63b5b07e4efcd2d3223e2b6c654a26f5" prot="private" static="no" mutable="yes">
+        <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
+        <definition>SpatialMotionVector iDynTree::RevoluteJoint::S_link2_link1</definition>
+        <argsstring></argsstring>
+        <name>S_link2_link1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="49" column="37" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1affc24eb5821e46717f04db8f55314cc0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::RevoluteJoint::disablePosLimits</definition>
+        <argsstring>()</argsstring>
+        <name>disablePosLimits</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="39" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1ac9353cea48ca3448d9c3954b4fb77e56" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::RevoluteJoint::updateBuffers</definition>
+        <argsstring>(const double new_q) const</argsstring>
+        <name>updateBuffers</name>
+        <param>
+          <type>const double</type>
+          <declname>new_q</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="51" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1abea64170132558068a88804574ca7c87" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::RevoluteJoint::resetBuffers</definition>
+        <argsstring>(const double new_q) const</argsstring>
+        <name>resetBuffers</name>
+        <param>
+          <type>const double</type>
+          <declname>new_q</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="52" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1af697ff856633860ace4df9e45ad13204" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::RevoluteJoint::resetAxisBuffers</definition>
+        <argsstring>() const</argsstring>
+        <name>resetAxisBuffers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="53" column="14"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1aa09aee905d118d03a9d22b5bdc98e132" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::RevoluteJoint::RevoluteJoint</definition>
+        <argsstring>()</argsstring>
+        <name>RevoluteJoint</name>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="59" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a2340a2651002e2513df12ccd1b2b4040" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::RevoluteJoint::RevoluteJoint</definition>
+        <argsstring>(const LinkIndex link1, const LinkIndex link2, const Transform &amp;link1_X_link2, const Axis &amp;_rotation_axis_wrt_link1)</argsstring>
+        <name>RevoluteJoint</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link1</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link2</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>link1_X_link2</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref> &amp;</type>
+          <declname>_rotation_axis_wrt_link1</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="62" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1ad0ba82884c9219ac78f9137f16f432e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::RevoluteJoint::RevoluteJoint</definition>
+        <argsstring>(const Transform &amp;link1_X_link2, const Axis &amp;_rotation_axis_wrt_link1)</argsstring>
+        <name>RevoluteJoint</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>link1_X_link2</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref> &amp;</type>
+          <declname>_rotation_axis_wrt_link1</declname>
+        </param>
+        <briefdescription>
+<para>Constructor in which the LinkIndex to which the joint is attached are not specified. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This constructor is tipically used together with the <ref refid="classiDynTree_1_1Model_1aaead8cb8c5367589131a877ea121c573" kindref="member">Model::addJoint</ref> or <ref refid="classiDynTree_1_1Model_1a764763adb198032da5bdfcfc5f6a0748" kindref="member">Model::addJointAndLink</ref> methods, in which the links to which the joint is attached are specified by the other arguments of the method. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="71" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a23308fb8f761871832d44fe98b077bfd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::RevoluteJoint::RevoluteJoint</definition>
+        <argsstring>(const RevoluteJoint &amp;other)</argsstring>
+        <name>RevoluteJoint</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1RevoluteJoint" kindref="compound">RevoluteJoint</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="76" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a2988b3e47487b611a6db58149c76ade4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::RevoluteJoint::~RevoluteJoint</definition>
+        <argsstring>()</argsstring>
+        <name>~RevoluteJoint</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="81" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a3dfbe0ccbbf399581aab181f86727ded" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1IJoint" kindref="compound">IJoint</ref> *</type>
+        <definition>virtual IJoint* iDynTree::RevoluteJoint::clone</definition>
+        <argsstring>() const</argsstring>
+        <name>clone</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a021ac00a8b2e9e519f930baad1bc1fa2">clone</reimplements>
+        <briefdescription>
+<para>Clone the joint object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="84" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1ab0054852e1d734677a145eba7d855259" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::RevoluteJoint::setAttachedLinks</definition>
+        <argsstring>(const LinkIndex link1, const LinkIndex link2)</argsstring>
+        <name>setAttachedLinks</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1aafd1101e91ea337a451d62f0160a819c">setAttachedLinks</reimplements>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link1</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link2</declname>
+        </param>
+        <briefdescription>
+<para>Set the two links at which the joint is attached. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the first link </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>link2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the second link </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="87" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a01e2fa3bcf4c67533d2869d73124aa45" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::RevoluteJoint::setRestTransform</definition>
+        <argsstring>(const Transform &amp;link1_X_link2)</argsstring>
+        <name>setRestTransform</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a770aadc1a6e13bce3af213707fcf2d84">setRestTransform</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>link1_X_link2</declname>
+        </param>
+        <briefdescription>
+<para>Set the transform between the link2 frame and link1 frame at joint position 0 (or at the identity configuration element for complex joints). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The link1_T_link2 is transform that transforms a quantity expressed in link2 frame in a quantity expressed in the link1 frame, when the joint is in the 0 position : p_link1 = link1_T_link2*p_link2 . </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="90" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a8eb38f7d6b81de02f396a7464cb67b1e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::RevoluteJoint::setAxis</definition>
+        <argsstring>(const Axis &amp;revoluteAxis, const LinkIndex child, const LinkIndex parent=LINK_INVALID_INDEX)</argsstring>
+        <name>setAxis</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref> &amp;</type>
+          <declname>revoluteAxis</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+          <defval>LINK_INVALID_INDEX</defval>
+        </param>
+        <briefdescription>
+<para>Set the revolute axis of the joint, expressed in specified link frame, that is considered the &quot;child&quot; frame regarding the sign of the axis. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>See getAxis method for more information.</para>
+<para><simplesect kind="warning"><para>This method should be called after a valid restTransform between link1 and link2 has been set by calling the setRestTransform method. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="101" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1adae6f30b84188990fdd86ae68aa65527" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::RevoluteJoint::setAxis</definition>
+        <argsstring>(const Axis &amp;revoluteAxis_wrt_link1)</argsstring>
+        <name>setAxis</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref> &amp;</type>
+          <declname>revoluteAxis_wrt_link1</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="107" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a5b22e4e2870280815c24f1e1fb0084ce" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>LinkIndex</type>
+        <definition>virtual LinkIndex iDynTree::RevoluteJoint::getFirstAttachedLink</definition>
+        <argsstring>() const</argsstring>
+        <name>getFirstAttachedLink</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1abe3efda09a0c3d94c021891de447aaa8">getFirstAttachedLink</reimplements>
+        <briefdescription>
+<para>Get the first link attached to the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="110" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1ab51ac6ab6659dfdba43232dfedd24ea4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>LinkIndex</type>
+        <definition>virtual LinkIndex iDynTree::RevoluteJoint::getSecondAttachedLink</definition>
+        <argsstring>() const</argsstring>
+        <name>getSecondAttachedLink</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a1c55168bcc2dbd7b1fd58737a6bb46d8">getSecondAttachedLink</reimplements>
+        <briefdescription>
+<para>Get the second link attached to the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="113" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a7f3bc5c79ffa42a6eebd670e84c63358" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref></type>
+        <definition>virtual Axis iDynTree::RevoluteJoint::getAxis</definition>
+        <argsstring>(const LinkIndex child, const LinkIndex parent=LINK_INVALID_INDEX) const</argsstring>
+        <name>getAxis</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+          <defval>LINK_INVALID_INDEX</defval>
+        </param>
+        <briefdescription>
+<para>Get the revolute axis of the robot, expressed in child frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>child</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the link frame (one of the two at which the link is attached) in which the returned axis is expressed. Furthermore, the axis direction depends on the assumption that this frame is considered the &quot;child&quot; in the relationship.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+See</para>
+<para>Seth, A., Sherman, M., Eastman, P., &amp; Delp, S. (2010). Minimal formulation of joint motion for biomechanisms. Nonlinear Dynamics, 62(1), 291-303. <ulink url="https://nmbl.stanford.edu/publications/pdf/Seth2010.pdf">https://nmbl.stanford.edu/publications/pdf/Seth2010.pdf</ulink> Section 2.4</para>
+<para>and</para>
+<para>&quot;Modelling, Estimation and Identification of Humanoid Robots Dynamics&quot; Traversaro - Section 3.2 <ulink url="https://traversaro.github.io/preprints/traversaro-phd-thesis.pdf">https://traversaro.github.io/preprints/traversaro-phd-thesis.pdf</ulink></para>
+<para>for more details. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="139" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1addfd7a524a8b455fed2e119e5337a5ef" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>virtual Transform iDynTree::RevoluteJoint::getRestTransform</definition>
+        <argsstring>(const LinkIndex child, const LinkIndex parent) const</argsstring>
+        <name>getRestTransform</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a7b6fb4c82687601810f3696e9605f1e0">getRestTransform</reimplements>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Get the transform between the link parent and the link child at joint position 0 (or at the identity configuration element for complex joints). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Such that: p_child = child_H_parent*p_parent where p_child is a quantity expressed in the child frame, and p_parent is a quantity expressed in the child frame. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="143" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a4dd07d55b77a7b6063c4f677b9900499" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+        <definition>virtual const Transform&amp; iDynTree::RevoluteJoint::getTransform</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const LinkIndex child, const LinkIndex parent) const</argsstring>
+        <name>getTransform</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a2b0c23cad4da4e748ecdaf009805f767">getTransform</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Get the transform between the parent and the child, such that: p_child = child_H_parent*p_parent, where p_child is a quantity expressed in the child frame, and p_parent is a quantity expressed in the parent frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="148" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1afb136bbf0c99f9bcf571dfe1d3937e18" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref></type>
+        <definition>TransformDerivative iDynTree::RevoluteJoint::getTransformDerivative</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const LinkIndex child, const LinkIndex parent, const int posCoord_i) const</argsstring>
+        <name>getTransformDerivative</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a0dd24dad1882bc1df35a1832275fbfbb">getTransformDerivative</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>posCoord_i</declname>
+        </param>
+        <briefdescription>
+<para>Get the derivative of the transform with respect to a position coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In particular, if the selected position coordinate is <formula id="19">$q$</formula>, return the derivative: <formula id="20">\[ \frac{\partial {}^\texttt{child} H_\texttt{parent} }{\partial q} \]</formula></para>
+<para>If posCoord_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1a045d13488a7d6481fcf2db951655922a" kindref="member">getNrOfPosCoords()</ref>, the returned value is undefined. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="153" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1ab21df5f6c5075952811c700a9c5cd51a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
+        <definition>virtual SpatialMotionVector iDynTree::RevoluteJoint::getMotionSubspaceVector</definition>
+        <argsstring>(int dof_i, const LinkIndex child, const LinkIndex parent=LINK_INVALID_INDEX) const</argsstring>
+        <name>getMotionSubspaceVector</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a3a89b6fd2358c8435e7f794d3857045f">getMotionSubspaceVector</reimplements>
+        <param>
+          <type>int</type>
+          <declname>dof_i</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+          <defval>LINK_INVALID_INDEX</defval>
+        </param>
+        <briefdescription>
+<para>Get the motion subspace vector corresponding to the i-th dof of the joint, i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>the i-th column of the motion subspace matrix. The motion subspace matrix is the matrix that maps the joint velocity to the relative twist between the two links.</para>
+<para>In particular the motion subspace vector of the i-th dof is the S vector such that v_child = S_{child,parent}*dq_i + child_X_parent*v_parent if the velocities associated to all other DOFs of the joint are considered zero, where v_child and v_parent are the left-trivialized (body) velocities of the link child and parent.</para>
+<para>See &quot;Modelling, Estimation and Identification of Humanoid Robots Dynamics&quot; Silvio Traversaro - Section 3.2 <ulink url="https://traversaro.github.io/preprints/traversaro-phd-thesis.pdf">https://traversaro.github.io/preprints/traversaro-phd-thesis.pdf</ulink> for more details.</para>
+<para><simplesect kind="return"><para>the motion subspace vector.</para>
+</simplesect>
+If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1MovableJointImpl_1af9d78ba6c319f68f16f9ff9ef58fd124" kindref="member">getNrOfDOFs()</ref>, the returned value is undefined.</para>
+<para><simplesect kind="note"><para>The motion subspace matrix is also known in literature as hinge matrix, hinge map matrix, joint map matrix or joint motion map matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="159" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a4e54ab1a66775c23d867d96bc4981d89" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::RevoluteJoint::computeChildPosVelAcc</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, const VectorDynSize &amp;jntAcc, LinkPositions &amp;linkPositions, LinkVelArray &amp;linkVels, LinkAccArray &amp;linkAccs, const LinkIndex child, const LinkIndex parent) const</argsstring>
+        <name>computeChildPosVelAcc</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1aa41dbb76816e2621d6924ca052b07881">computeChildPosVelAcc</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntAcc</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkPositions" kindref="compound">LinkPositions</ref> &amp;</type>
+          <declname>linkPositions</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVels</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
+          <declname>linkAccs</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Compute the position, velocity and acceleration of link child, given the position, velocty and acceleration of link parent and the joint position, velocity and acceleration. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The position, velocity and acceleration of link child are directly saved in the linkPositions, linkVels and linkAccs arguments. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="164" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1adaae229eae185031300bf171a513d181" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::RevoluteJoint::computeChildVel</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, LinkVelArray &amp;linkVels, const LinkIndex child, const LinkIndex parent) const</argsstring>
+        <name>computeChildVel</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a70c9055aafb46f65fe767664c873625e">computeChildVel</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntVel</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVels</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Compute the velocity of child, given the velocity of parent and the joint position, velocity. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="173" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1aefd91d85490aac0b9231c4624ac61175" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::RevoluteJoint::computeChildVelAcc</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, const VectorDynSize &amp;jntAcc, LinkVelArray &amp;linkVels, LinkAccArray &amp;linkAccs, const LinkIndex child, const LinkIndex parent) const</argsstring>
+        <name>computeChildVelAcc</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a6d0853757008a1db34d41da9276df81e">computeChildVelAcc</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntAcc</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVels</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
+          <declname>linkAccs</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Compute the velocity and acceleration of child, given the velocity and acceleration of parent and the joint position, velocity and acceleration. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="179" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a8cc08db7802d2b4f0978efc6ca6c947d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::RevoluteJoint::computeChildAcc</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, const LinkVelArray &amp;linkVels, const VectorDynSize &amp;jntAcc, LinkAccArray &amp;linkAccs, const LinkIndex child, const LinkIndex parent) const</argsstring>
+        <name>computeChildAcc</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a65509300297221192cb46189b2a473d1">computeChildAcc</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVels</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntAcc</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
+          <declname>linkAccs</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Compute the (body-fixed) acceleration of a child link given the (body-fixed) acceleration of the parent. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="187" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a60ddcf0fd610a2d3ec72c05341621f09" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::RevoluteJoint::computeChildBiasAcc</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, const LinkVelArray &amp;linkVels, LinkAccArray &amp;linkBiasAccs, const LinkIndex child, const LinkIndex parent) const</argsstring>
+        <name>computeChildBiasAcc</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a3c16a316f95e25ad0af2768cb4c991a3">computeChildBiasAcc</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVels</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
+          <declname>linkBiasAccs</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Compute the (body-fixed) bias acceleration of a child link given the (body-fixed) bias acceleration of the parent. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="196" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a4d73857202239a3e54de8defafaf62a2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::RevoluteJoint::computeJointTorque</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const Wrench &amp;internalWrench, const LinkIndex linkThatAppliesWrench, const LinkIndex linkOnWhichWrenchIsApplied, VectorDynSize &amp;jntTorques) const</argsstring>
+        <name>computeJointTorque</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a495a50c9623710812f49cf6258ecb68e">computeJointTorque</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> &amp;</type>
+          <declname>internalWrench</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>linkThatAppliesWrench</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>linkOnWhichWrenchIsApplied</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntTorques</declname>
+        </param>
+        <briefdescription>
+<para>Compute the internal torque of joint, given the internal wrench that the linkThatAppliesWrench applies on the linkOnWhichWrenchIsApplied, expressed in the link frame of the linkOnWhichWrenchIsApplied. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">jntPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of joint positions. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">internalWrench</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>internal wrench that the linkThatAppliesWrench applies on the linkOnWhichWrenchIsApplied, expressed in the link frame of the linkOnWhichWrenchIsApplied </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkThatAppliesWrench</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>link index of the link that applies the considered internal wrench. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkOnWhichWrenchIsApplied</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>link index of the link on which the considered internal wrench is applied. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">jntTorques</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of joint torques. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="204" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a14b6333b82f42a82d644d341ed627c73" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::RevoluteJoint::hasPosLimits</definition>
+        <argsstring>() const</argsstring>
+        <name>hasPosLimits</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1af4badbd5891621e847a61d767cffd25e">hasPosLimits</reimplements>
+        <briefdescription>
+<para>Method to check if the joint has limits. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if the joints has limits </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="209" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a1adadb8bf7bdc3335dfb8b90556edc94" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::RevoluteJoint::enablePosLimits</definition>
+        <argsstring>(const bool enable)</argsstring>
+        <name>enablePosLimits</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a4f0f02e57295ad4b0ec94fe19fc3e0c0">enablePosLimits</reimplements>
+        <param>
+          <type>const bool</type>
+          <declname>enable</declname>
+        </param>
+        <briefdescription>
+<para>Method to set if the joint has limits. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if everything went correctly, false otherwise (for example if the joint does not support joint position limits) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="210" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a4d3db4e8079ec53967f00b2451e9651a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::RevoluteJoint::getPosLimits</definition>
+        <argsstring>(const size_t _index, double &amp;min, double &amp;max) const</argsstring>
+        <name>getPosLimits</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1ab734574da90b6d2ae24169ea180a081b">getPosLimits</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>min</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+<para>Get min and max position limits of the joint, for the _index dof. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>index of the dof for which the limit are obtained. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if everything is correct, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="211" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1ad67f412133c3e07b6c49fd7b67b6c4aa" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::RevoluteJoint::getMinPosLimit</definition>
+        <argsstring>(const size_t _index) const</argsstring>
+        <name>getMinPosLimit</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a46dbe9dec3ef79f6d5662269f6fe8f65">getMinPosLimit</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Get the min position limit of the joint, bindings-friendly version. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="212" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1a3580e3bc0eeb67b1497cbfec5945641d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::RevoluteJoint::getMaxPosLimit</definition>
+        <argsstring>(const size_t _index) const</argsstring>
+        <name>getMaxPosLimit</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a047913be4f7bdeb35d785e4ad71d5395">getMaxPosLimit</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Get the max position limit of the joint, bindings-friendly version. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="213" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RevoluteJoint_1abbea73315ff8ea7f81b9c3d27d32f05c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::RevoluteJoint::setPosLimits</definition>
+        <argsstring>(const size_t _index, double &amp;min, double &amp;max)</argsstring>
+        <name>setPosLimits</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a63c57d91c3d80a610671f04fcbdd22ff">setPosLimits</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>min</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+<para>Set the position limits for a dof the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This just sets the internal position limits of the joint. To set them as enabled, you need to call the enablePosLimits(true) method. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/RevoluteJoint.h" line="214" column="22"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class representing a revolute joint, i.e. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>a joint that constraint two links to move only around a common axis. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>MovableJointImpl1</label>
+        <link refid="classiDynTree_1_1MovableJointImpl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::RevoluteJoint</label>
+        <link refid="classiDynTree_1_1RevoluteJoint"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::IJoint</label>
+        <link refid="classiDynTree_1_1IJoint"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>MovableJointImpl1</label>
+        <link refid="classiDynTree_1_1MovableJointImpl"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::RevoluteJoint</label>
+        <link refid="classiDynTree_1_1RevoluteJoint"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::IJoint</label>
+        <link refid="classiDynTree_1_1IJoint"/>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Model/RevoluteJoint.h" line="29" column="5" bodyfile="iDynTree/Model/RevoluteJoint.h" bodystart="30" bodyend="215"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a3dfbe0ccbbf399581aab181f86727ded" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>clone</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a8cc08db7802d2b4f0978efc6ca6c947d" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>computeChildAcc</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a60ddcf0fd610a2d3ec72c05341621f09" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>computeChildBiasAcc</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a4e54ab1a66775c23d867d96bc4981d89" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>computeChildPosVelAcc</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1adaae229eae185031300bf171a513d181" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>computeChildVel</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1aefd91d85490aac0b9231c4624ac61175" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>computeChildVelAcc</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a4d73857202239a3e54de8defafaf62a2" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>computeJointTorque</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1affc24eb5821e46717f04db8f55314cc0" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>disablePosLimits</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a1adadb8bf7bdc3335dfb8b90556edc94" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>enablePosLimits</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a7f3bc5c79ffa42a6eebd670e84c63358" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>getAxis</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a593be2dc005f1580c341bc723ed36b5e" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>getDOFsOffset</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a5b22e4e2870280815c24f1e1fb0084ce" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>getFirstAttachedLink</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a717d5ccedc215f53b75e918229d98bab" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>getIndex</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a3580e3bc0eeb67b1497cbfec5945641d" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>getMaxPosLimit</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1ad67f412133c3e07b6c49fd7b67b6c4aa" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>getMinPosLimit</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1ab21df5f6c5075952811c700a9c5cd51a" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>getMotionSubspaceVector</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1af9d78ba6c319f68f16f9ff9ef58fd124" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>getNrOfDOFs</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a045d13488a7d6481fcf2db951655922a" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>getNrOfPosCoords</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a599c535eb4fced80019a72e126752a0c" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>getPosCoordsOffset</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a4d3db4e8079ec53967f00b2451e9651a" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>getPosLimits</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1addfd7a524a8b455fed2e119e5337a5ef" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>getRestTransform</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1ab51ac6ab6659dfdba43232dfedd24ea4" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>getSecondAttachedLink</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a4dd07d55b77a7b6063c4f677b9900499" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>getTransform</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1afb136bbf0c99f9bcf571dfe1d3937e18" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>getTransformDerivative</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a14b6333b82f42a82d644d341ed627c73" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>hasPosLimits</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a64e64e4c7b80737e16af12d405479737" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>link1</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a088374402862b6993c0fc690baa0c547" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>link1_X_link2</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a34fff2ede1ed0c72992270f8d70d89bb" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>link1_X_link2_at_rest</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a0019a807eb17312f89d3e95251220455" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>link2</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a98aa396b2c5880913e1a8f93c0fad716" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>link2_X_link1</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a425f5ae5cc08edee16740d4b8a793360" prot="protected" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>m_DOFsOffset</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a27aa47da74de0c6909449a815307d434" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>m_hasPosLimits</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a872555afe6bfd9b14fb6bbea08968003" prot="protected" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>m_index</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a4acd59cca211ac385237519cc2b2c149" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>m_maxPos</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a5c24ef0034d0c449baba2d5fec33871c" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>m_minPos</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a6332b3582ec526f58f719a90d2d00c81" prot="protected" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>m_posCoordsOffset</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1af3e89e865b6f934a00e2bfb32fee15fd" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>q_previous</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1af697ff856633860ace4df9e45ad13204" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>resetAxisBuffers</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1abea64170132558068a88804574ca7c87" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>resetBuffers</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1aa09aee905d118d03a9d22b5bdc98e132" prot="public" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>RevoluteJoint</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a2340a2651002e2513df12ccd1b2b4040" prot="public" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>RevoluteJoint</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1ad0ba82884c9219ac78f9137f16f432e5" prot="public" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>RevoluteJoint</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a23308fb8f761871832d44fe98b077bfd" prot="public" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>RevoluteJoint</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a00529279702ce43517fe1daad9767a35" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>rotation_axis_wrt_link1</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a2cd60e1fa399d50697d31977c3181fa8" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>S_link1_link2</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a63b5b07e4efcd2d3223e2b6c654a26f5" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>S_link2_link1</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1ab0054852e1d734677a145eba7d855259" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>setAttachedLinks</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a8eb38f7d6b81de02f396a7464cb67b1e" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>setAxis</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1adae6f30b84188990fdd86ae68aa65527" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>setAxis</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1aa9cb6e7141a84e23c7d7fca9c900c6bc" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>setDOFsOffset</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a4b1807b06b92f64c41502c17b8ecd5a6" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>setIndex</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1afbbbe860f34622d4d8ae1d938fd65b98" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>setPosCoordsOffset</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1abbea73315ff8ea7f81b9c3d27d32f05c" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>setPosLimits</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a01e2fa3bcf4c67533d2869d73124aa45" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>setRestTransform</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1ac9353cea48ca3448d9c3954b4fb77e56" prot="private" virt="non-virtual"><scope>iDynTree::RevoluteJoint</scope><name>updateBuffers</name></member>
+      <member refid="classiDynTree_1_1IJoint_1ac989ee81d08959eca68666aa6740cb16" prot="public" virt="pure-virtual"><scope>iDynTree::RevoluteJoint</scope><name>~IJoint</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a723d226cd4e943ac3a2b5b69a3b1c833" prot="public" virt="pure-virtual"><scope>iDynTree::RevoluteJoint</scope><name>~MovableJointImpl</name></member>
+      <member refid="classiDynTree_1_1RevoluteJoint_1a2988b3e47487b611a6db58149c76ade4" prot="public" virt="virtual"><scope>iDynTree::RevoluteJoint</scope><name>~RevoluteJoint</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

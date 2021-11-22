@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::optimalcontrol::integrators::SolutionElement</compoundname>
+    <includes local="no">iDynTree/Integrator.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement_1a1d874717c6479a5c043b1cac0e4489f8" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref></type>
+        <definition>VectorDynSize iDynTree::optimalcontrol::integrators::SolutionElement::stateAtT</definition>
+        <argsstring></argsstring>
+        <name>stateAtT</name>
+        <briefdescription>
+<para>State value. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="50" column="31" bodyfile="iDynTree/Integrator.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement_1a0012c763c79c5c2e212bbfc30dca8f64" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::optimalcontrol::integrators::SolutionElement::time</definition>
+        <argsstring></argsstring>
+        <name>time</name>
+        <briefdescription>
+<para>Time at which stateAtT is computed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="54" column="24" bodyfile="iDynTree/Integrator.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Output of the integrator at a specific time. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>iDynTree::VectorDynSize</label>
+        <link refid="classiDynTree_1_1VectorDynSize"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::optimalcontrol::integrators::SolutionElement</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>stateAtT</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Integrator.h" line="45" column="13" bodyfile="iDynTree/Integrator.h" bodystart="45" bodyend="55"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement_1a1d874717c6479a5c043b1cac0e4489f8" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::SolutionElement</scope><name>stateAtT</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement_1a0012c763c79c5c2e212bbfc30dca8f64" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::SolutionElement</scope><name>time</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::optimalcontrol::OptimalControlSolver</compoundname>
+    <derivedcompoundref refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver" prot="public" virt="non-virtual">iDynTree::optimalcontrol::MultipleShootingSolver</derivedcompoundref>
+    <includes local="no">iDynTree/OptimalControlSolver.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver_1a09fb40c47a84272706113ef950af2e54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::OptimalControlSolver::OptimalControlSolver</definition>
+        <argsstring>()=delete</argsstring>
+        <name>OptimalControlSolver</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlSolver.h" line="41" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver_1a9fde83bee85fc95ed04f167faec8f5b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::OptimalControlSolver::OptimalControlSolver</definition>
+        <argsstring>(const std::shared_ptr&lt; OptimalControlProblem &gt; ocProblem)</argsstring>
+        <name>OptimalControlSolver</name>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem" kindref="compound">OptimalControlProblem</ref> &gt;</type>
+          <declname>ocProblem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlSolver.h" line="43" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver_1ae4125c5f205ef9a6cf0cb626821f6a6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::optimalcontrol::OptimalControlSolver::~OptimalControlSolver</definition>
+        <argsstring>()</argsstring>
+        <name>~OptimalControlSolver</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlSolver.h" line="45" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver_1a03967acc8076478746703bc3582b4f3f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::OptimalControlSolver::solve</definition>
+        <argsstring>()=0</argsstring>
+        <name>solve</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1ab0228c31eb5298e79cbe1bdc706cb7f9">solve</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimalControlSolver.h" line="47" column="26"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::optimalcontrol::MultipleShootingSolver</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::optimalcontrol::OptimalControlSolver</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver"/>
+      </node>
+    </inheritancegraph>
+    <location file="iDynTree/OptimalControlSolver.h" line="37" column="9" bodyfile="iDynTree/OptimalControlSolver.h" bodystart="38" bodyend="49"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver_1a09fb40c47a84272706113ef950af2e54" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlSolver</scope><name>OptimalControlSolver</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver_1a9fde83bee85fc95ed04f167faec8f5b2" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlSolver</scope><name>OptimalControlSolver</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver_1a03967acc8076478746703bc3582b4f3f" prot="public" virt="pure-virtual"><scope>iDynTree::optimalcontrol::OptimalControlSolver</scope><name>solve</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver_1ae4125c5f205ef9a6cf0cb626821f6a6a" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::OptimalControlSolver</scope><name>~OptimalControlSolver</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

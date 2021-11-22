@@ -1,7 +1,0 @@
-<map id="iDynTree::TransformDerivative" name="iDynTree::TransformDerivative">
-<area shape="rect" id="node1" title="Class representing the derivative of Transform object." alt="" coords="109,213,329,240"/>
-<area shape="rect" id="node2" href="$classiDynTree_1_1VectorFixSize.html" title=" " alt="" coords="5,117,217,143"/>
-<area shape="rect" id="node3" href="$classiDynTree_1_1VectorFixSize.html" title="Class providing a simple vector of N elements." alt="" coords="24,5,199,47"/>
-<area shape="rect" id="node4" href="$classiDynTree_1_1MatrixFixSize.html" title=" " alt="" coords="241,109,416,151"/>
-<area shape="rect" id="node5" href="$classiDynTree_1_1MatrixFixSize.html" title="Class providing a simple form of matrix with dynamic size." alt="" coords="241,5,416,47"/>
-</map>

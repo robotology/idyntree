@@ -1,0 +1,305 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1ContactStateMachine" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::ContactStateMachine</compoundname>
+    <includes local="no">iDynTree/Estimation/ContactStateMachine.h</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classiDynTree_1_1ContactStateMachine_1a3ff1e2de3b160f0a4a4b3b6de6593a49" prot="public" static="no" strong="no">
+        <type></type>
+        <name>contactTransition</name>
+        <enumvalue id="classiDynTree_1_1ContactStateMachine_1a3ff1e2de3b160f0a4a4b3b6de6593a49a21b97376600fe519447527427ec228b9" prot="public">
+          <name>STABLE_OFFCONTACT</name>
+          <briefdescription>
+<para>previous state: off contact, current state: off contact </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classiDynTree_1_1ContactStateMachine_1a3ff1e2de3b160f0a4a4b3b6de6593a49aa8f55eb8a65e86cd76634b286136223c" prot="public">
+          <name>STABLE_ONCONTACT</name>
+          <briefdescription>
+<para>previous state: on contact, current state: on contact </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classiDynTree_1_1ContactStateMachine_1a3ff1e2de3b160f0a4a4b3b6de6593a49a036db61ab6a2856f3a3186af39b8e454" prot="public">
+          <name>CONTACT_BREAK</name>
+          <briefdescription>
+<para>previous state: on contact, current state: off contact </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classiDynTree_1_1ContactStateMachine_1a3ff1e2de3b160f0a4a4b3b6de6593a49ae7d672315b8c5329c68891ec9c6c2f80" prot="public">
+          <name>CONTACT_MAKE</name>
+          <briefdescription>
+<para>previous state: off contact, current state: on contact </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classiDynTree_1_1ContactStateMachine_1a3ff1e2de3b160f0a4a4b3b6de6593a49a2df246442db275db4de2f07bd4af0923" prot="public">
+          <name>UNKNOWN_TRANSITION</name>
+          <initializer>= -1</initializer>
+          <briefdescription>
+<para>Unknown transition. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Enumeration of contact transitions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ContactStateMachine.h" line="61" column="9" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="62" bodyend="87"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1ContactStateMachine_1a73662a4e19793f96e938acc8ef0f5b43" prot="public" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classiDynTree_1_1SchmittTrigger" kindref="compound">SchmittTrigger</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;SchmittTrigger&gt; iDynTree::ContactStateMachine::m_contactSchmitt</definition>
+        <argsstring></argsstring>
+        <name>m_contactSchmitt</name>
+        <briefdescription>
+<para>unique pointer to the schmitt trigger device </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ContactStateMachine.h" line="128" column="25" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1ContactStateMachine_1a43f35ee9828d3973c4c6c47ebd1a6e9f" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::ContactStateMachine::m_previousState</definition>
+        <argsstring></argsstring>
+        <name>m_previousState</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ContactStateMachine.h" line="131" column="14" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1ContactStateMachine_1a1e12e745fc2931da65ab26f65dac2909" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::ContactStateMachine::m_currentState</definition>
+        <argsstring></argsstring>
+        <name>m_currentState</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ContactStateMachine.h" line="134" column="14" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1ContactStateMachine_1ace6064413372d47ba0fdc30a5e1fd2a4" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int iDynTree::ContactStateMachine::m_tranisitionMode</definition>
+        <argsstring></argsstring>
+        <name>m_tranisitionMode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ContactStateMachine.h" line="137" column="13" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1ContactStateMachine_1a84f56bd6dc10cd56035c907c4a191c06" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ContactStateMachine::ContactStateMachine</definition>
+        <argsstring>(const SchmittParams &amp;s)</argsstring>
+        <name>ContactStateMachine</name>
+        <param>
+          <type>const <ref refid="structiDynTree_1_1SchmittParams" kindref="compound">SchmittParams</ref> &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>const reference to a struct containing schmitt trigger device parameters </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ContactStateMachine.h" line="93" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ContactStateMachine_1a4557b8a49662617f8902e60b54a327fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::ContactStateMachine::contactMeasurementUpdate</definition>
+        <argsstring>(double currentTime, double contactNormalForce)</argsstring>
+        <name>contactMeasurementUpdate</name>
+        <param>
+          <type>double</type>
+          <declname>currentTime</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>contactNormalForce</declname>
+        </param>
+        <briefdescription>
+<para>Calls schmitt trigger device update. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>currentTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>time </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>contactNormalForce</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>normal force acting on the contact link in consideration </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ContactStateMachine.h" line="100" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ContactStateMachine_1ad7c8a61bf69587923f0990bb3c88b23b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::ContactStateMachine::resetDevice</definition>
+        <argsstring>()</argsstring>
+        <name>resetDevice</name>
+        <briefdescription>
+<para>Calls schmitt trigger device reset. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ContactStateMachine.h" line="105" column="14" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="105" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ContactStateMachine_1ad7e300074de0e0e1627f4e6c6e50779a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ContactStateMachine::contactState</definition>
+        <argsstring>()</argsstring>
+        <name>contactState</name>
+        <briefdescription>
+<para>Get current contact state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true, if in contact, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ContactStateMachine.h" line="111" column="14" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="111" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ContactStateMachine_1a876aff9f52fecfa4d8fc73abe1272b3e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1ContactStateMachine_1a3ff1e2de3b160f0a4a4b3b6de6593a49" kindref="member">contactTransition</ref></type>
+        <definition>contactTransition iDynTree::ContactStateMachine::contactTransitionMode</definition>
+        <argsstring>()</argsstring>
+        <name>contactTransitionMode</name>
+        <briefdescription>
+<para>Determines contact transitions using simple binary switching logic. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>contactTransition enumerated value </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ContactStateMachine.h" line="117" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ContactStateMachine_1a441c61571ece47719322503b7bad6ca5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::ContactStateMachine::lastUpdateTime</definition>
+        <argsstring>()</argsstring>
+        <name>lastUpdateTime</name>
+        <briefdescription>
+<para>Get time of last contact state update. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>time </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ContactStateMachine.h" line="123" column="16"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Contact State Machine class for binary contact state detection Contains a Schmitt Trigger device for updating the contact states using the contact normal force acting on the contact link and Determines contact transitions using simple binary switching logic. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Can be used to determine stable contacts, contact breaking and contact making. The parameters to the Schmitt Trigger are passed as a struct and is the Schmitt Trigger is instantiated in the class constructor.</para>
+<para>NOTE: There are no default parameters to the Schmitt Trigger. These parameters are set through the constructor during instantiation.</para>
+<para>This class does not exactly abstract the Schmitt Trigger class. Schmitt Trigger methods are still accessible through the m_contactSchmitt object. This class uses a generic Schmitt Trigger object and augments its functionality specific to physical contacts based scenarios. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>iDynTree::ContactStateMachine</label>
+        <link refid="classiDynTree_1_1ContactStateMachine"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_contactSchmitt</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>T</label>
+      </node>
+      <node id="3">
+        <label>std::unique_ptr&lt; T &gt;</label>
+        <childnode refid="4" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::unique_ptr&lt; iDynTree::SchmittTrigger &gt;</label>
+        <childnode refid="3" relation="template-instance">
+          <edgelabel>&lt; iDynTree::SchmittTrigger &gt;</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Estimation/ContactStateMachine.h" line="55" column="5" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="56" bodyend="139"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1ContactStateMachine_1a3ff1e2de3b160f0a4a4b3b6de6593a49a036db61ab6a2856f3a3186af39b8e454" prot="public" virt="non-virtual"><scope>iDynTree::ContactStateMachine</scope><name>CONTACT_BREAK</name></member>
+      <member refid="classiDynTree_1_1ContactStateMachine_1a3ff1e2de3b160f0a4a4b3b6de6593a49ae7d672315b8c5329c68891ec9c6c2f80" prot="public" virt="non-virtual"><scope>iDynTree::ContactStateMachine</scope><name>CONTACT_MAKE</name></member>
+      <member refid="classiDynTree_1_1ContactStateMachine_1a4557b8a49662617f8902e60b54a327fc" prot="public" virt="non-virtual"><scope>iDynTree::ContactStateMachine</scope><name>contactMeasurementUpdate</name></member>
+      <member refid="classiDynTree_1_1ContactStateMachine_1ad7e300074de0e0e1627f4e6c6e50779a" prot="public" virt="non-virtual"><scope>iDynTree::ContactStateMachine</scope><name>contactState</name></member>
+      <member refid="classiDynTree_1_1ContactStateMachine_1a84f56bd6dc10cd56035c907c4a191c06" prot="public" virt="non-virtual"><scope>iDynTree::ContactStateMachine</scope><name>ContactStateMachine</name></member>
+      <member refid="classiDynTree_1_1ContactStateMachine_1a3ff1e2de3b160f0a4a4b3b6de6593a49" prot="public" virt="non-virtual"><scope>iDynTree::ContactStateMachine</scope><name>contactTransition</name></member>
+      <member refid="classiDynTree_1_1ContactStateMachine_1a876aff9f52fecfa4d8fc73abe1272b3e" prot="public" virt="non-virtual"><scope>iDynTree::ContactStateMachine</scope><name>contactTransitionMode</name></member>
+      <member refid="classiDynTree_1_1ContactStateMachine_1a441c61571ece47719322503b7bad6ca5" prot="public" virt="non-virtual"><scope>iDynTree::ContactStateMachine</scope><name>lastUpdateTime</name></member>
+      <member refid="classiDynTree_1_1ContactStateMachine_1a73662a4e19793f96e938acc8ef0f5b43" prot="public" virt="non-virtual"><scope>iDynTree::ContactStateMachine</scope><name>m_contactSchmitt</name></member>
+      <member refid="classiDynTree_1_1ContactStateMachine_1a1e12e745fc2931da65ab26f65dac2909" prot="private" virt="non-virtual"><scope>iDynTree::ContactStateMachine</scope><name>m_currentState</name></member>
+      <member refid="classiDynTree_1_1ContactStateMachine_1a43f35ee9828d3973c4c6c47ebd1a6e9f" prot="private" virt="non-virtual"><scope>iDynTree::ContactStateMachine</scope><name>m_previousState</name></member>
+      <member refid="classiDynTree_1_1ContactStateMachine_1ace6064413372d47ba0fdc30a5e1fd2a4" prot="private" virt="non-virtual"><scope>iDynTree::ContactStateMachine</scope><name>m_tranisitionMode</name></member>
+      <member refid="classiDynTree_1_1ContactStateMachine_1ad7c8a61bf69587923f0990bb3c88b23b" prot="public" virt="non-virtual"><scope>iDynTree::ContactStateMachine</scope><name>resetDevice</name></member>
+      <member refid="classiDynTree_1_1ContactStateMachine_1a3ff1e2de3b160f0a4a4b3b6de6593a49a21b97376600fe519447527427ec228b9" prot="public" virt="non-virtual"><scope>iDynTree::ContactStateMachine</scope><name>STABLE_OFFCONTACT</name></member>
+      <member refid="classiDynTree_1_1ContactStateMachine_1a3ff1e2de3b160f0a4a4b3b6de6593a49aa8f55eb8a65e86cd76634b286136223c" prot="public" virt="non-virtual"><scope>iDynTree::ContactStateMachine</scope><name>STABLE_ONCONTACT</name></member>
+      <member refid="classiDynTree_1_1ContactStateMachine_1a3ff1e2de3b160f0a4a4b3b6de6593a49a2df246442db275db4de2f07bd4af0923" prot="public" virt="non-virtual"><scope>iDynTree::ContactStateMachine</scope><name>UNKNOWN_TRANSITION</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

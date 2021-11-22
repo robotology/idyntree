@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1details_1_1is__span__oracle_3_01iDynTree_1_1Span_3_01ElementType_00_01Extent_01_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::details::is_span_oracle&lt; iDynTree::Span&lt; ElementType, Extent &gt; &gt;</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::true_type</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>class ElementType</type>
+      </param>
+      <param>
+        <type>std::ptrdiff_t</type>
+        <declname>Extent</declname>
+        <defname>Extent</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>std::true_type</label>
+      </node>
+      <node id="1">
+        <label>iDynTree::details::is_span_oracle&lt; iDynTree::Span&lt; ElementType, Extent &gt; &gt;</label>
+        <link refid="structiDynTree_1_1details_1_1is__span__oracle_3_01iDynTree_1_1Span_3_01ElementType_00_01Extent_01_4_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>std::true_type</label>
+      </node>
+      <node id="1">
+        <label>iDynTree::details::is_span_oracle&lt; iDynTree::Span&lt; ElementType, Extent &gt; &gt;</label>
+        <link refid="structiDynTree_1_1details_1_1is__span__oracle_3_01iDynTree_1_1Span_3_01ElementType_00_01Extent_01_4_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Core/Span.h" line="144" column="5" bodyfile="iDynTree/Core/Span.h" bodystart="145" bodyend="146"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

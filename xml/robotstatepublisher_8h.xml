@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="robotstatepublisher_8h" kind="file" language="C++">
+    <compoundname>robotstatepublisher.h</compoundname>
+    <includes local="no">vector</includes>
+    <includes local="no">yarp/os/all.h</includes>
+    <includes local="no">yarp/dev/PolyDriver.h</includes>
+    <includes local="no">yarp/dev/IFrameTransform.h</includes>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/Core/VectorDynSize.h</includes>
+    <includes refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includes>
+    <includes local="no">yarp/rosmsg/sensor_msgs/JointState.h</includes>
+    <includes local="no">mutex</includes>
+    <includes local="no">memory</includes>
+    <incdepgraph>
+      <node id="4">
+        <label>yarp/dev/PolyDriver.h</label>
+      </node>
+      <node id="2">
+        <label>vector</label>
+      </node>
+      <node id="1">
+        <label>robotstatepublisher.h</label>
+        <link refid="robotstatepublisher_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>mutex</label>
+      </node>
+      <node id="5">
+        <label>yarp/dev/IFrameTransform.h</label>
+      </node>
+      <node id="3">
+        <label>yarp/os/all.h</label>
+      </node>
+      <node id="6">
+        <label>yarp/rosmsg/sensor_msgs/JointState.h</label>
+      </node>
+      <node id="8">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classJointStateSubscriber" prot="public">JointStateSubscriber</innerclass>
+    <innerclass refid="classYARPRobotStatePublisherModule" prot="public">YARPRobotStatePublisherModule</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="authors"><para>: Silvio Traversaro <ulink url="mailto:silvio.traversaro@iit.it">silvio.traversaro@iit.it</ulink> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="robotstatepublisher.h"/>
+  </compounddef>
+</doxygen>

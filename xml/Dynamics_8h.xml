@@ -1,0 +1,410 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="Dynamics_8h" kind="file" language="C++">
+    <compoundname>Dynamics.h</compoundname>
+    <includes refid="MatrixDynSize_8h" local="no">iDynTree/Core/MatrixDynSize.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
+    <includes refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includes>
+    <includes refid="JointState_8h" local="no">iDynTree/Model/JointState.h</includes>
+    <includedby refid="DynamicsLinearization_8h" local="no">iDynTree/Model/DynamicsLinearization.h</includedby>
+    <includedby refid="DynamicsLinearizationHelpers_8h" local="no">iDynTree/Model/DynamicsLinearizationHelpers.h</includedby>
+    <includedby refid="GravityCompensationHelpers_8h" local="no">iDynTree/Estimation/GravityCompensationHelpers.h</includedby>
+    <innerclass refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers" prot="public">iDynTree::ArticulatedBodyAlgorithmInternalBuffers</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__iDynTreeModel_1ga1f433a6725585332945762ed4e6b5fe5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ComputeLinearAndAngularMomentum</definition>
+        <argsstring>(const Model &amp;model, const LinkPositions &amp;linkPositions, const LinkVelArray &amp;linkVels, SpatialMomentum &amp;totalMomentum)</argsstring>
+        <name>ComputeLinearAndAngularMomentum</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const LinkPositions &amp;</type>
+          <declname>linkPositions</declname>
+        </param>
+        <param>
+          <type>const LinkVelArray &amp;</type>
+          <declname>linkVels</declname>
+        </param>
+        <param>
+          <type>SpatialMomentum &amp;</type>
+          <declname>totalMomentum</declname>
+        </param>
+        <briefdescription>
+<para>Compute the total linear and angular momentum of a robot, expressed in the world frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the used model, </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkPositions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>linkPositions(l) contains the world_H_link transform. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkVels</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>linkVels(l) contains the link l velocity expressed in l frame. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">totalMomentum</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>total momentum, expressed in world frame. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Dynamics.h" line="45" column="10" declfile="iDynTree/Model/Dynamics.h" declline="45" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="Dynamics_8h_1ae214683bf9d037ee89a0c070ed9ed78d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ComputeLinearAndAngularMomentumDerivativeBias</definition>
+        <argsstring>(const Model &amp;model, const LinkPositions &amp;linkPositions, const LinkVelArray &amp;linkVel, const LinkAccArray &amp;linkBiasAcc, Wrench &amp;totalMomentumBias)</argsstring>
+        <name>ComputeLinearAndAngularMomentumDerivativeBias</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const LinkPositions &amp;</type>
+          <declname>linkPositions</declname>
+        </param>
+        <param>
+          <type>const LinkVelArray &amp;</type>
+          <declname>linkVel</declname>
+        </param>
+        <param>
+          <type>const LinkAccArray &amp;</type>
+          <declname>linkBiasAcc</declname>
+        </param>
+        <param>
+          <type>Wrench &amp;</type>
+          <declname>totalMomentumBias</declname>
+        </param>
+        <briefdescription>
+<para>Compute the total momentum derivatitive bias, i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>the part of the total momentum derivative that does not depend on robot acceleration.</para>
+<para>The linear and angular momentum derivative depends on the robot position, velocity and acceleration. This function computes the part that do not depend on the robot accelearation.</para>
+<para>This function returns the bias of the derivative of the ComputeLinearAndAngularMomentum function. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Dynamics.h" line="58" column="10" declfile="iDynTree/Model/Dynamics.h" declline="58" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeModel_1ga18613d41830aef7430e7a8a09fef98e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::RNEADynamicPhase</definition>
+        <argsstring>(const iDynTree::Model &amp;model, const iDynTree::Traversal &amp;traversal, const iDynTree::JointPosDoubleArray &amp;jointPos, const iDynTree::LinkVelArray &amp;linksVel, const iDynTree::LinkAccArray &amp;linksProperAcc, const iDynTree::LinkNetExternalWrenches &amp;linkExtForces, iDynTree::LinkInternalWrenches &amp;linkIntWrenches, iDynTree::FreeFloatingGeneralizedTorques &amp;baseForceAndJointTorques)</argsstring>
+        <name>RNEADynamicPhase</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Traversal" kindref="compound">iDynTree::Traversal</ref> &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">iDynTree::JointPosDoubleArray</ref> &amp;</type>
+          <declname>jointPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">iDynTree::LinkVelArray</ref> &amp;</type>
+          <declname>linksVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">iDynTree::LinkAccArray</ref> &amp;</type>
+          <declname>linksProperAcc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">iDynTree::LinkNetExternalWrenches</ref> &amp;</type>
+          <declname>linkExtForces</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">iDynTree::LinkInternalWrenches</ref> &amp;</type>
+          <declname>linkIntWrenches</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1FreeFloatingGeneralizedTorques" kindref="compound">iDynTree::FreeFloatingGeneralizedTorques</ref> &amp;</type>
+          <declname>baseForceAndJointTorques</declname>
+        </param>
+        <briefdescription>
+<para>Compute the inverse dynamics, i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>the generalized torques corresponding to a given set of robot accelerations and external force/torques.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The model used for the computation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">traversal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The traversal used for the computation, it defines the used base link. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jointPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The (internal) joint position of the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linksVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector of left-trivialized velocities for each link of the model (for each link <formula id="0">$L$</formula>, the corresponding velocity is <formula id="1">${}^L \mathrm{v}_{A, L}$</formula>). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linksProperAcc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector of left-trivialized proper acceleration for each link of the model (for each link <formula id="0">$L$</formula>, the corresponding proper acceleration is <formula id="2">${}^L \dot{\mathrm{v}}_{A, L} - \begin{bmatrix} {}^L R_A {}^A g \\ 0_{3\times1} \end{bmatrix} $</formula>), where <formula id="3">$ {}^A g \in \mathbb{R}^3 $</formula> is the gravity acceleration expressed in an inertial frame <formula id="4">$A$</formula> . See iDynTree::LinkNetExternalWrenches . </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkExtForces</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector of external 6D force/torques applied to the links. For each link <formula id="0">$L$</formula>, the corresponding external force is <formula id="5">${}_L \mathrm{f}^x_L$</formula>, i.e. the force that the enviroment applies on the on the link <formula id="0">$L$</formula>, expressed in the link frame <formula id="0">$L$</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">linkIntWrenches</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector of internal joint force/torques. See iDynTree::LinkInternalWrenches . </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">baseForceAndJointTorques</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Generalized torques output. The base element is the residual force on the base (that is equal to zero if the robot acceleration and the external forces provided in LinkNetExternalWrenches were consistent), while the joint part is composed by the joint torques. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Dynamics.h" line="79" column="10" declfile="iDynTree/Model/Dynamics.h" declline="79" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="Dynamics_8h_1afa4f3546edbb4ab3e50a486e316a2470" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::CompositeRigidBodyAlgorithm</definition>
+        <argsstring>(const Model &amp;model, const Traversal &amp;traversal, const JointPosDoubleArray &amp;jointPos, LinkCompositeRigidBodyInertias &amp;linkCRBs, FreeFloatingMassMatrix &amp;massMatrix)</argsstring>
+        <name>CompositeRigidBodyAlgorithm</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const Traversal &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const JointPosDoubleArray &amp;</type>
+          <declname>jointPos</declname>
+        </param>
+        <param>
+          <type>LinkCompositeRigidBodyInertias &amp;</type>
+          <declname>linkCRBs</declname>
+        </param>
+        <param>
+          <type>FreeFloatingMassMatrix &amp;</type>
+          <declname>massMatrix</declname>
+        </param>
+        <briefdescription>
+<para>Compute the floating base mass matrix, using the composite rigid body algorithm. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Dynamics.h" line="93" column="10" declfile="iDynTree/Model/Dynamics.h" declline="93" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeModel_1ga5879141982887fc0d049cc3645f10dd5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ArticulatedBodyAlgorithm</definition>
+        <argsstring>(const Model &amp;model, const Traversal &amp;traversal, const FreeFloatingPos &amp;robotPos, const FreeFloatingVel &amp;robotVel, const LinkNetExternalWrenches &amp;linkExtWrenches, const JointDOFsDoubleArray &amp;jointTorques, ArticulatedBodyAlgorithmInternalBuffers &amp;buffers, FreeFloatingAcc &amp;robotAcc)</argsstring>
+        <name>ArticulatedBodyAlgorithm</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const Traversal &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const FreeFloatingPos &amp;</type>
+          <declname>robotPos</declname>
+        </param>
+        <param>
+          <type>const FreeFloatingVel &amp;</type>
+          <declname>robotVel</declname>
+        </param>
+        <param>
+          <type>const LinkNetExternalWrenches &amp;</type>
+          <declname>linkExtWrenches</declname>
+        </param>
+        <param>
+          <type>const JointDOFsDoubleArray &amp;</type>
+          <declname>jointTorques</declname>
+        </param>
+        <param>
+          <type>ArticulatedBodyAlgorithmInternalBuffers &amp;</type>
+          <declname>buffers</declname>
+        </param>
+        <param>
+          <type>FreeFloatingAcc &amp;</type>
+          <declname>robotAcc</declname>
+        </param>
+        <briefdescription>
+<para>Compute the floating base acceleration of an unconstrianed robot, using as input the external forces and the joint torques. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>We follow the algorithm described in Featherstone 2008, modified for the floating base case and for handling fixed joints. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Dynamics.h" line="154" column="10" declfile="iDynTree/Model/Dynamics.h" declline="154" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeModel_1ga0c75db73b7682b9c524b0727b516b12b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseDynamicsInertialParametersRegressor</definition>
+        <argsstring>(const iDynTree::Model &amp;model, const iDynTree::Traversal &amp;traversal, const iDynTree::LinkPositions &amp;referenceFrame_H_link, const iDynTree::LinkVelArray &amp;linksVel, const iDynTree::LinkAccArray &amp;linksAcc, iDynTree::MatrixDynSize &amp;baseForceAndJointTorquesRegressor)</argsstring>
+        <name>InverseDynamicsInertialParametersRegressor</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Traversal" kindref="compound">iDynTree::Traversal</ref> &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkPositions" kindref="compound">iDynTree::LinkPositions</ref> &amp;</type>
+          <declname>referenceFrame_H_link</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">iDynTree::LinkVelArray</ref> &amp;</type>
+          <declname>linksVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">iDynTree::LinkAccArray</ref> &amp;</type>
+          <declname>linksAcc</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>baseForceAndJointTorquesRegressor</declname>
+        </param>
+        <briefdescription>
+<para>Compute the inverse dynamics of the model as linear function of the inertial parameters. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function computes the matrix that multiplied by the vector of inertial parameters of a model (see <ref refid="classiDynTree_1_1Model_1a2c283e000a2d6a5e86770d8616b7e18b" kindref="member">iDynTree::Model::getInertialParameters</ref>) returns the inverse dynamics generalized torques. In particular it is consistent with the result of the iDynTree::RNEADynamicPhase function, i.e. the first six rows of the regressor correspond to the sum of all external force/torques acting on the robot, expressed in the origin and with the orientation of the specified referenceFrame, as defined by the referenceFrame_H_link argument.</para>
+<para><simplesect kind="note"><para>The regressor only computes the inverse dynamics generalized torques assuming that the external forces are equal to zero, as the contribution of the external forces to the inverse dynamics is indipendent from inertial parameters.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The model used for the computation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">traversal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The traversal used for the computation, it defines the used base link. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">referenceFrame_H_link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> of each link w.r.t. to given frame D (tipically an inertial frame A, the base frame B or the mixed frame B[A]). For each link <formula id="0">$L$</formula>, the corresponding transform is <formula id="6">${}^D H_L$</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linksVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector of left-trivialized velocities for each link of the model (for each link <formula id="0">$L$</formula>, the corresponding velocity is <formula id="1">${}^L \mathrm{v}_{A, L}$</formula>). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linksProperAcc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector of left-trivialized proper acceleration for each link of the model (for each link <formula id="0">$L$</formula>, the corresponding proper acceleration is <formula id="2">${}^L \dot{\mathrm{v}}_{A, L} - \begin{bmatrix} {}^L R_A {}^A g \\ 0_{3\times1} \end{bmatrix} $</formula>), where <formula id="3">$ {}^A g \in \mathbb{R}^3 $</formula> is the gravity acceleration expressed in an inertial frame <formula id="4">$A$</formula> . </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">baseForceAndJointTorquesRegressor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The (6+model.getNrOfDOFs() X 10*model.getNrOfLinks()) inverse dynamics regressor. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Dynamics.h" line="187" column="10" declfile="iDynTree/Model/Dynamics.h" declline="187" declcolumn="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/Dynamics.h"/>
+  </compounddef>
+</doxygen>

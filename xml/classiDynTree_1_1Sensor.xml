@@ -1,0 +1,234 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1Sensor" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::Sensor</compoundname>
+    <derivedcompoundref refid="classiDynTree_1_1JointSensor" prot="public" virt="non-virtual">iDynTree::JointSensor</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1LinkSensor" prot="public" virt="non-virtual">iDynTree::LinkSensor</derivedcompoundref>
+    <includes local="no">iDynTree/Sensors/Sensors.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1Sensor_1ab47aa38253b58f2a1c537e5956684e47" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type></type>
+        <definition>virtual iDynTree::Sensor::~Sensor</definition>
+        <argsstring>()=0</argsstring>
+        <name>~Sensor</name>
+        <briefdescription>
+<para>Virtual destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="104" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Sensor_1a4a62adb1d4c1e4bedca8762783ab0468" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::string</type>
+        <definition>virtual std::string iDynTree::Sensor::getName</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getName</name>
+        <reimplementedby refid="classiDynTree_1_1AccelerometerSensor_1aa9d4f983bdf10f65edb53ae79fd93436">getName</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1GyroscopeSensor_1a752a648315e33507e9d4ac7f76c5377e">getName</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a973fc334d1ae6e08d6d189f260a79acf">getName</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1adf34f6a32f73d39b0a9a5eb98e675a05">getName</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a8297291284faa8217f01bad0fed9ca2d">getName</reimplementedby>
+        <briefdescription>
+<para>Get the id (name) of sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="109" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Sensor_1a6dd712921c150fddd33217694feb3652" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>SensorType</type>
+        <definition>virtual SensorType iDynTree::Sensor::getSensorType</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getSensorType</name>
+        <reimplementedby refid="classiDynTree_1_1AccelerometerSensor_1a991cf7c3abd0ff5d6117d30603d1b003">getSensorType</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1GyroscopeSensor_1a162084c8f8d22edf2c21b822c50f325a">getSensorType</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a0e7919d76cf8126f0e270bad03d7d70b">getSensorType</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a5ef9ac9d8a3d752d2d89e66006bb2a49">getSensorType</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1aac80df24ed741903317fb8a725ce0e36">getSensorType</reimplementedby>
+        <briefdescription>
+<para>Get the type of the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the type of the sensor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="115" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Sensor_1ace89679ad53fd11326ec00dc82ebd925" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::Sensor::isValid</definition>
+        <argsstring>() const =0</argsstring>
+        <name>isValid</name>
+        <reimplementedby refid="classiDynTree_1_1AccelerometerSensor_1a05bf54b4a247b4536c5846ef93702b46">isValid</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1GyroscopeSensor_1a29f2d548c97f8a945a0dd79647249f43">isValid</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a816f6f309557a0f69330dad9879cfc14">isValid</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a7df52d9d13dd67a1cf29847d436070e6">isValid</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a659cbf015f650a0874fe4db00020cd10">isValid</reimplementedby>
+        <briefdescription>
+<para>Return true if the sensor has been appropriately configured (all setters where setted, false otherwise. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="122" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Sensor_1a40cafcac5f0c1567e44d53c775641818" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::Sensor::setName</definition>
+        <argsstring>(const std::string &amp;)=0</argsstring>
+        <name>setName</name>
+        <reimplementedby refid="classiDynTree_1_1AccelerometerSensor_1af6e1ad0f6ae149b8cb6591ceb6359648">setName</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1GyroscopeSensor_1a056d2caa535815b23a6b8732180d7c8e">setName</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a445a69b12f7ae15e85e189cecb37a984">setName</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1ae60d56505a10ef186f6af7f5bf5feaa1">setName</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a355c0226fb7c34e765123b965efdac85">setName</reimplementedby>
+        <param>
+          <type>const std::string &amp;</type>
+        </param>
+        <briefdescription>
+<para>Set the id (name) of sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="127" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Sensor_1a6428f5534e54c607bc5e773073c6c50e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> *</type>
+        <definition>virtual Sensor* iDynTree::Sensor::clone</definition>
+        <argsstring>() const =0</argsstring>
+        <name>clone</name>
+        <reimplementedby refid="classiDynTree_1_1AccelerometerSensor_1a8d35a19908ac5fcc03abcd6b7bfda077">clone</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1GyroscopeSensor_1aa4629cd992fe475e9287fdebf51e0c53">clone</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a41bc1ed3c1ae3a46b593dc5638fd6725">clone</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a51c85baae65ce7f750e272fc684b24ee">clone</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a670171513daa59f2494bd08af665e3ea">clone</reimplementedby>
+        <briefdescription>
+<para>Return a pointer to a copy of this sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="133" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Sensor_1a247d7d8b8dcdf828cf7172aabf05457c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::Sensor::isConsistent</definition>
+        <argsstring>(const Model &amp;model) const =0</argsstring>
+        <name>isConsistent</name>
+        <reimplementedby refid="classiDynTree_1_1JointSensor_1ac71c4fca8476a8af346c5ecfee83a7e9">isConsistent</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1LinkSensor_1a371122608cfbaf0c9fdf562b2780c786">isConsistent</reimplementedby>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Check if the sensor is consistent with the specified model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="138" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Sensor_1ae91fc5a5922a99815b0cdc9de9f1ac88" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::Sensor::updateIndices</definition>
+        <argsstring>(const Model &amp;model)=0</argsstring>
+        <name>updateIndices</name>
+        <reimplementedby refid="classiDynTree_1_1AccelerometerSensor_1a4b8a0d3c55a3341ad98b9490864512d0">updateIndices</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1GyroscopeSensor_1af9fba9009f28b235bc9ebaae469b6f4a">updateIndices</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1SixAxisForceTorqueSensor_1ada92c79d908918bf309936c15f6f0f05">updateIndices</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a8213b6c275f41db4b3a60bc2451a03f5">updateIndices</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1aff3b2cd0b1a847dc6336c55042131e6e">updateIndices</reimplementedby>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Update all the indices (link/frames) contained in this sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="143" column="22"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Interface for <ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> classes in iDynTree . </para>
+    </briefdescription>
+    <detaileddescription>
+<para>All sensor classes inherit from this base class. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="8">
+        <label>iDynTree::ThreeAxisForceTorqueContactSensor</label>
+        <link refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>iDynTree::AccelerometerSensor</label>
+        <link refid="classiDynTree_1_1AccelerometerSensor"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>iDynTree::GyroscopeSensor</label>
+        <link refid="classiDynTree_1_1GyroscopeSensor"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::JointSensor</label>
+        <link refid="classiDynTree_1_1JointSensor"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>iDynTree::LinkSensor</label>
+        <link refid="classiDynTree_1_1LinkSensor"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::Sensor</label>
+        <link refid="classiDynTree_1_1Sensor"/>
+      </node>
+      <node id="3">
+        <label>iDynTree::SixAxisForceTorqueSensor</label>
+        <link refid="classiDynTree_1_1SixAxisForceTorqueSensor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>iDynTree::ThreeAxisAngularAccelerometerSensor</label>
+        <link refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="iDynTree/Sensors/Sensors.h" line="98" column="5" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="99" bodyend="144"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1Sensor_1a6428f5534e54c607bc5e773073c6c50e" prot="public" virt="pure-virtual"><scope>iDynTree::Sensor</scope><name>clone</name></member>
+      <member refid="classiDynTree_1_1Sensor_1a4a62adb1d4c1e4bedca8762783ab0468" prot="public" virt="pure-virtual"><scope>iDynTree::Sensor</scope><name>getName</name></member>
+      <member refid="classiDynTree_1_1Sensor_1a6dd712921c150fddd33217694feb3652" prot="public" virt="pure-virtual"><scope>iDynTree::Sensor</scope><name>getSensorType</name></member>
+      <member refid="classiDynTree_1_1Sensor_1a247d7d8b8dcdf828cf7172aabf05457c" prot="public" virt="pure-virtual"><scope>iDynTree::Sensor</scope><name>isConsistent</name></member>
+      <member refid="classiDynTree_1_1Sensor_1ace89679ad53fd11326ec00dc82ebd925" prot="public" virt="pure-virtual"><scope>iDynTree::Sensor</scope><name>isValid</name></member>
+      <member refid="classiDynTree_1_1Sensor_1a40cafcac5f0c1567e44d53c775641818" prot="public" virt="pure-virtual"><scope>iDynTree::Sensor</scope><name>setName</name></member>
+      <member refid="classiDynTree_1_1Sensor_1ae91fc5a5922a99815b0cdc9de9f1ac88" prot="public" virt="pure-virtual"><scope>iDynTree::Sensor</scope><name>updateIndices</name></member>
+      <member refid="classiDynTree_1_1Sensor_1ab47aa38253b58f2a1c537e5956684e47" prot="public" virt="pure-virtual"><scope>iDynTree::Sensor</scope><name>~Sensor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

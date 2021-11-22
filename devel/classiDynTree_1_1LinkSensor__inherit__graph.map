@@ -1,8 +1,0 @@
-<map id="iDynTree::LinkSensor" name="iDynTree::LinkSensor">
-<area shape="rect" id="node1" title="Interface for Sensor that are associated to a Link." alt="" coords="184,85,343,112"/>
-<area shape="rect" id="node3" href="$classiDynTree_1_1AccelerometerSensor.html" title="Interface to the Accelerometer class." alt="" coords="391,5,617,32"/>
-<area shape="rect" id="node4" href="$classiDynTree_1_1GyroscopeSensor.html" title="Interface to the Gyroscope class." alt="" coords="404,56,604,83"/>
-<area shape="rect" id="node5" href="$classiDynTree_1_1ThreeAxisAngularAccelerometerSensor.html" title="Class representing a three axis angular accelerometer, i.e." alt="" coords="403,107,605,149"/>
-<area shape="rect" id="node6" href="$classiDynTree_1_1ThreeAxisForceTorqueContactSensor.html" title="Class representing a three axis force&#45;torque contact sensor." alt="" coords="411,173,597,214"/>
-<area shape="rect" id="node2" href="$classiDynTree_1_1Sensor.html" title="Interface for Sensor classes in iDynTree ." alt="" coords="5,85,136,112"/>
-</map>

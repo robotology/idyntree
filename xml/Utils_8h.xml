@@ -1,0 +1,399 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="Utils_8h" kind="file" language="C++">
+    <compoundname>Utils.h</compoundname>
+    <includes local="no">cstddef</includes>
+    <includes local="yes">CoreExport.h</includes>
+    <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
+    <includedby refid="L2NormCost_8h" local="no">iDynTree/L2NormCost.h</includedby>
+    <includedby refid="OptimalControlProblem_8h" local="no">iDynTree/OptimalControlProblem.h</includedby>
+    <includedby refid="SparsityStructure_8h" local="no">iDynTree/SparsityStructure.h</includedby>
+    <includedby refid="Axis_8h" local="no">iDynTree/Core/Axis.h</includedby>
+    <includedby refid="Direction_8h" local="no">iDynTree/Core/Direction.h</includedby>
+    <includedby refid="EigenHelpers_8h" local="no">iDynTree/Core/EigenHelpers.h</includedby>
+    <includedby refid="MatrixFixSize_8h" local="no">iDynTree/Core/MatrixFixSize.h</includedby>
+    <includedby refid="MatrixView_8h" local="no">iDynTree/Core/MatrixView.h</includedby>
+    <includedby refid="SparseMatrix_8h" local="no">iDynTree/Core/SparseMatrix.h</includedby>
+    <includedby refid="SpatialVector_8h" local="yes">iDynTree/Core/SpatialVector.h</includedby>
+    <includedby refid="TestUtils_8h" local="no">iDynTree/Core/TestUtils.h</includedby>
+    <includedby refid="Triplets_8h" local="no">iDynTree/Core/Triplets.h</includedby>
+    <includedby refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includedby>
+    <includedby refid="BerdyHelper_8h" local="no">iDynTree/Estimation/BerdyHelper.h</includedby>
+    <includedby refid="BerdySparseMAPSolver_8h" local="no">iDynTree/Estimation/BerdySparseMAPSolver.h</includedby>
+    <includedby refid="ExtendedKalmanFilter_8h" local="no">iDynTree/Estimation/ExtendedKalmanFilter.h</includedby>
+    <includedby refid="GravityCompensationHelpers_8h" local="no">iDynTree/Estimation/GravityCompensationHelpers.h</includedby>
+    <includedby refid="KalmanFilter_8h" local="no">iDynTree/Estimation/KalmanFilter.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>CoreExport.h</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/Core/Utils.h</label>
+        <link refid="Utils_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>cstddef</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structiDynTree_1_1IndexRange" prot="public">iDynTree::IndexRange</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="Utils_8h_1a92a04f61c0d9680aebd960d653165339" prot="public" static="no">
+        <name>IDYNTREE_UNUSED</name>
+        <param><defname>var</defname></param>
+        <initializer>((void)var)</initializer>
+        <briefdescription>
+<para>Macro to suppress unused variable warnings. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>see <ulink url="http://stackoverflow.com/a/4851173">http://stackoverflow.com/a/4851173</ulink> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Utils.h" line="21" column="9" bodyfile="iDynTree/Core/Utils.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="Utils_8h_1a069ac05ff9cbb2e8c9a27845f641a184" prot="public" static="no">
+        <name>IDYNTREE_DEPRECATED</name>
+        <initializer>[[deprecated]]</initializer>
+        <briefdescription>
+<para>Macro to deprecate functions and methods. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>see <ulink url="https://blog.samat.io/2017/02/27/Deprecating-functions-and-methods-in-Cplusplus/">https://blog.samat.io/2017/02/27/Deprecating-functions-and-methods-in-Cplusplus/</ulink> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Utils.h" line="38" column="10" bodyfile="iDynTree/Core/Utils.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="Utils_8h_1a604e6a884902ee52a0cbb3e0c5fcfb64" prot="public" static="no">
+        <name>IDYNTREE_DEPRECATED_WITH_MSG</name>
+        <param><defname>msg</defname></param>
+        <initializer>[[deprecated(msg)]]</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Utils.h" line="39" column="9" bodyfile="iDynTree/Core/Utils.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="Utils_8h_1a1d9848852f7effdff0a7206e361759dc" prot="public" static="no" strong="no">
+        <type></type>
+        <name>MatrixStorageOrdering</name>
+        <enumvalue id="Utils_8h_1a1d9848852f7effdff0a7206e361759dca2b26025c525aa73dc7d5a8ab6b75c277" prot="public">
+          <name>RowMajor</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Row Major ordering, i.e. matrix is serialized row by row </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Utils_8h_1a1d9848852f7effdff0a7206e361759dcaa2d6963e41f11651763298147696f0dc" prot="public">
+          <name>ColumnMajor</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Column Major ordering, i.e. matrix is serialized row by column </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Enum describing the possible matrix storage ordering. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Utils.h" line="124" column="5" bodyfile="iDynTree/Core/Utils.h" bodystart="124" bodyend="127"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="Utils_8h_1a09f55e26767f7112939284cfcea999f7" prot="public" static="no" mutable="no">
+        <type>IDYNTREE_CORE_EXPORT int</type>
+        <definition>IDYNTREE_CORE_EXPORT int iDynTree::UNKNOWN</definition>
+        <argsstring></argsstring>
+        <name>UNKNOWN</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Utils.h" line="46" column="37" declfile="iDynTree/Core/Utils.h" declline="46" declcolumn="37"/>
+      </memberdef>
+      <memberdef kind="variable" id="Utils_8h_1abe71efaac97b8e18f842ccc49d07026a" prot="public" static="no" mutable="no">
+        <type>IDYNTREE_CORE_EXPORT double</type>
+        <definition>IDYNTREE_CORE_EXPORT double iDynTree::DEFAULT_TOL</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT_TOL</name>
+        <briefdescription>
+<para>Default tolerance for methods with a tolerance, setted to 1e-10. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Utils.h" line="49" column="40" declfile="iDynTree/Core/Utils.h" declline="49" declcolumn="40"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="Utils_8h_1ac967fe3c6f3c26e946fe2f70ee6f3af9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::assertWoAbort</definition>
+        <argsstring>(const char *semCheck, const char *file, const char *func, int line)</argsstring>
+        <name>assertWoAbort</name>
+        <param>
+          <type>const char *</type>
+          <declname>semCheck</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>file</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Function embedding the semantic checks. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function can throw an exception if the semantic check detects an error (returns False). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Utils.h" line="56" column="10" declfile="iDynTree/Core/Utils.h" declline="56" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="Utils_8h_1af82eb4858f1f94dbcf92a68210e17593" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::checkEqualOrUnknown</definition>
+        <argsstring>(const int op1, const int op2)</argsstring>
+        <name>checkEqualOrUnknown</name>
+        <param>
+          <type>const int</type>
+          <declname>op1</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>op2</declname>
+        </param>
+        <briefdescription>
+<para>Helper class for semantic checking. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Return true if two values are equal, or if one of the two is unknown All negative values are used for represent an unknown value. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Utils.h" line="64" column="10" declfile="iDynTree/Core/Utils.h" declline="64" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="Utils_8h_1ab710bc576b963cce44ee3a97a0d37df5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::reportError</definition>
+        <argsstring>(const char *className, const char *methodName, const char *errorMessage)</argsstring>
+        <name>reportError</name>
+        <param>
+          <type>const char *</type>
+          <declname>className</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>methodName</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>errorMessage</declname>
+        </param>
+        <briefdescription>
+<para>Helper function for reporting error if the semantic check fails. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Utils.h" line="70" column="10" declfile="iDynTree/Core/Utils.h" declline="70" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="Utils_8h_1a1b924287a0557e41bb16704961399f68" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::reportErrorIf</definition>
+        <argsstring>(bool condition, const char *className_methodName, const char *errorMessage)</argsstring>
+        <name>reportErrorIf</name>
+        <param>
+          <type>bool</type>
+          <declname>condition</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>className_methodName</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>errorMessage</declname>
+        </param>
+        <briefdescription>
+<para>Call report error if condition is true. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Utils.h" line="75" column="10" declfile="iDynTree/Core/Utils.h" declline="75" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="Utils_8h_1ad1ad9933bf06265120db1feecb34ac9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::reportWarning</definition>
+        <argsstring>(const char *className, const char *methodName, const char *errorMessage)</argsstring>
+        <name>reportWarning</name>
+        <param>
+          <type>const char *</type>
+          <declname>className</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>methodName</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>errorMessage</declname>
+        </param>
+        <briefdescription>
+<para>Helper function for reporting warnings in iDynTree. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Utils.h" line="81" column="10" declfile="iDynTree/Core/Utils.h" declline="81" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="Utils_8h_1a6260625e944d3b34a7db5730dbd11d21" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::reportInfo</definition>
+        <argsstring>(const char *className, const char *methodName, const char *message)</argsstring>
+        <name>reportInfo</name>
+        <param>
+          <type>const char *</type>
+          <declname>className</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>methodName</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>message</declname>
+        </param>
+        <briefdescription>
+<para>Helper function for reporting information messages in iDynTree. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Utils.h" line="87" column="10" declfile="iDynTree/Core/Utils.h" declline="87" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="Utils_8h_1a34f0ca347ac5bfae3a50fe09ccd787d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::reportDebug</definition>
+        <argsstring>(const char *className, const char *methodName, const char *message)</argsstring>
+        <name>reportDebug</name>
+        <param>
+          <type>const char *</type>
+          <declname>className</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>methodName</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>message</declname>
+        </param>
+        <briefdescription>
+<para>Helper function for reporting debug messages in iDynTree. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Utils.h" line="93" column="10" declfile="iDynTree/Core/Utils.h" declline="93" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="Utils_8h_1a2099697a85abd10017e2ab2ca9f3336e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::deg2rad</definition>
+        <argsstring>(const double valueInDeg)</argsstring>
+        <name>deg2rad</name>
+        <param>
+          <type>const double</type>
+          <declname>valueInDeg</declname>
+        </param>
+        <briefdescription>
+<para>Convert a double from degrees to radians. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Utils.h" line="98" column="12" declfile="iDynTree/Core/Utils.h" declline="98" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="Utils_8h_1a3ffc4d06e77379cc44c32f2ea44df1d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::rad2deg</definition>
+        <argsstring>(const double valueInRad)</argsstring>
+        <name>rad2deg</name>
+        <param>
+          <type>const double</type>
+          <declname>valueInRad</declname>
+        </param>
+        <briefdescription>
+<para>Convert a double from radians to degree. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Utils.h" line="103" column="12" declfile="iDynTree/Core/Utils.h" declline="103" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="Utils_8h_1a3f330bf40f3d09799c2b4923f79173ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::checkDoublesAreEqual</definition>
+        <argsstring>(const double &amp;val1, const double &amp;val2, double tol=DEFAULT_TOL)</argsstring>
+        <name>checkDoublesAreEqual</name>
+        <param>
+          <type>const double &amp;</type>
+          <declname>val1</declname>
+        </param>
+        <param>
+          <type>const double &amp;</type>
+          <declname>val2</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>tol</declname>
+          <defval>DEFAULT_TOL</defval>
+        </param>
+        <briefdescription>
+<para>Check whether two doubles are equal given a tolerance tol. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Utils.h" line="132" column="10" declfile="iDynTree/Core/Utils.h" declline="132" declcolumn="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/Utils.h"/>
+  </compounddef>
+</doxygen>

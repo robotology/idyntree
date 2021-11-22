@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1SensorHelper" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::SensorHelper</compoundname>
+    <derivedcompoundref refid="classiDynTree_1_1AccelerometerSensorHelper" prot="public" virt="non-virtual">iDynTree::AccelerometerSensorHelper</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1ForceTorqueSensorHelper" prot="public" virt="non-virtual">iDynTree::ForceTorqueSensorHelper</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1GyroscopeSensorHelper" prot="public" virt="non-virtual">iDynTree::GyroscopeSensorHelper</derivedcompoundref>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1SensorHelper_1ac726e84fbbcc59662ab2bf0c531b1270" prot="protected" static="no" mutable="no">
+        <type>std::shared_ptr&lt; const <ref refid="structiDynTree_1_1SensorElement_1_1SensorInfo" kindref="compound">SensorElement::SensorInfo</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;const SensorElement::SensorInfo&gt; iDynTree::SensorHelper::m_sensorInfo</definition>
+        <argsstring></argsstring>
+        <name>m_sensorInfo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/SensorElement.h" line="69" column="21" bodyfile="private/SensorElement.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1SensorHelper_1ad5fbaf3d8c8df33cc7c30b689bccd97a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SensorHelper::SensorHelper</definition>
+        <argsstring>(std::shared_ptr&lt; const SensorElement::SensorInfo &gt; m_sensorInfo)</argsstring>
+        <name>SensorHelper</name>
+        <param>
+          <type>std::shared_ptr&lt; const <ref refid="structiDynTree_1_1SensorElement_1_1SensorInfo" kindref="compound">SensorElement::SensorInfo</ref> &gt;</type>
+          <declname>m_sensorInfo</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/SensorElement.h" line="71" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SensorHelper_1a4ab30e6befa21a0a38f811ccfd539a38" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::SensorHelper::~SensorHelper</definition>
+        <argsstring>()</argsstring>
+        <name>~SensorHelper</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/SensorElement.h" line="73" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SensorHelper_1a5bdee23a7596be29f49d791ee306c31e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> *</type>
+        <definition>virtual Sensor* iDynTree::SensorHelper::generateSensor</definition>
+        <argsstring>(const Model &amp;) const =0</argsstring>
+        <name>generateSensor</name>
+        <reimplementedby refid="classiDynTree_1_1ForceTorqueSensorHelper_1a79d3a6260d4b95ce3509168d1dc03157">generateSensor</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1AccelerometerSensorHelper_1af2cf5fd57df89b32b762af88837d8b75">generateSensor</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1GyroscopeSensorHelper_1a3f365581c04b435546517e02f8327e59">generateSensor</reimplementedby>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/SensorElement.h" line="76" column="20"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::AccelerometerSensorHelper</label>
+        <link refid="classiDynTree_1_1AccelerometerSensorHelper"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::SensorHelper</label>
+        <link refid="classiDynTree_1_1SensorHelper"/>
+      </node>
+      <node id="4">
+        <label>iDynTree::GyroscopeSensorHelper</label>
+        <link refid="classiDynTree_1_1GyroscopeSensorHelper"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::ForceTorqueSensorHelper</label>
+        <link refid="classiDynTree_1_1ForceTorqueSensorHelper"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>std::shared_ptr&lt; const iDynTree::SensorElement::SensorInfo &gt;</label>
+        <childnode refid="3" relation="template-instance">
+          <edgelabel>&lt; const iDynTree::SensorElement::SensorInfo &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>T</label>
+      </node>
+      <node id="3">
+        <label>std::shared_ptr&lt; T &gt;</label>
+        <childnode refid="4" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::SensorHelper</label>
+        <link refid="classiDynTree_1_1SensorHelper"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_sensorInfo</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="private/SensorElement.h" line="67" column="1" bodyfile="private/SensorElement.h" bodystart="67" bodyend="77"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1SensorHelper_1a5bdee23a7596be29f49d791ee306c31e" prot="public" virt="pure-virtual"><scope>iDynTree::SensorHelper</scope><name>generateSensor</name></member>
+      <member refid="classiDynTree_1_1SensorHelper_1ac726e84fbbcc59662ab2bf0c531b1270" prot="protected" virt="non-virtual"><scope>iDynTree::SensorHelper</scope><name>m_sensorInfo</name></member>
+      <member refid="classiDynTree_1_1SensorHelper_1ad5fbaf3d8c8df33cc7c30b689bccd97a" prot="public" virt="non-virtual"><scope>iDynTree::SensorHelper</scope><name>SensorHelper</name></member>
+      <member refid="classiDynTree_1_1SensorHelper_1a4ab30e6befa21a0a38f811ccfd539a38" prot="public" virt="virtual"><scope>iDynTree::SensorHelper</scope><name>~SensorHelper</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

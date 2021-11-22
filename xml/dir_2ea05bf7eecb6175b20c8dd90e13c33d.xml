@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_2ea05bf7eecb6175b20c8dd90e13c33d" kind="dir">
+    <compoundname>iDynTree/Sensors</compoundname>
+    <innerfile refid="AccelerometerSensor_8h">AccelerometerSensor.h</innerfile>
+    <innerfile refid="AllSensorsTypes_8h">AllSensorsTypes.h</innerfile>
+    <innerfile refid="GyroscopeSensor_8h">GyroscopeSensor.h</innerfile>
+    <innerfile refid="ModelSensorsTransformers_8h">ModelSensorsTransformers.h</innerfile>
+    <innerfile refid="PredictSensorsMeasurements_8h">PredictSensorsMeasurements.h</innerfile>
+    <innerfile refid="Sensors_8h">Sensors.h</innerfile>
+    <innerfile refid="SixAxisForceTorqueSensor_8h">SixAxisForceTorqueSensor.h</innerfile>
+    <innerfile refid="ThreeAxisAngularAccelerometerSensor_8h">ThreeAxisAngularAccelerometerSensor.h</innerfile>
+    <innerfile refid="ThreeAxisForceTorqueContactSensor_8h">ThreeAxisForceTorqueContactSensor.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Sensors/"/>
+  </compounddef>
+</doxygen>

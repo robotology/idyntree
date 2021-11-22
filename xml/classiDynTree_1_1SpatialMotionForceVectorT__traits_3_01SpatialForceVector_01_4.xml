@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1SpatialMotionForceVectorT__traits_3_01SpatialForceVector_01_4" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::SpatialMotionForceVectorT_traits&lt; SpatialForceVector &gt;</compoundname>
+    <templateparamlist>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classiDynTree_1_1SpatialMotionForceVectorT__traits_3_01SpatialForceVector_01_4_1a4e2508ae97d4f5dfd44a696880cc676f" prot="public" static="no">
+        <type><ref refid="classiDynTree_1_1GeomVector3" kindref="compound">LinearForceVector3</ref></type>
+        <definition>typedef LinearForceVector3 iDynTree::SpatialMotionForceVectorT_traits&lt; SpatialForceVector &gt;::LinearVector3Type</definition>
+        <argsstring></argsstring>
+        <name>LinearVector3Type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="48" column="36" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classiDynTree_1_1SpatialMotionForceVectorT__traits_3_01SpatialForceVector_01_4_1a3ca57c15cc8f6ee1b55cd14a06e1d4b8" prot="public" static="no">
+        <type><ref refid="classiDynTree_1_1GeomVector3" kindref="compound">AngularForceVector3</ref></type>
+        <definition>typedef AngularForceVector3 iDynTree::SpatialMotionForceVectorT_traits&lt; SpatialForceVector &gt;::AngularVector3Type</definition>
+        <argsstring></argsstring>
+        <name>AngularVector3Type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="49" column="37" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/SpatialVector.h" line="45" column="5" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="46" bodyend="50"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1SpatialMotionForceVectorT__traits_3_01SpatialForceVector_01_4_1a3ca57c15cc8f6ee1b55cd14a06e1d4b8" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionForceVectorT_traits&lt; SpatialForceVector &gt;</scope><name>AngularVector3Type</name></member>
+      <member refid="classiDynTree_1_1SpatialMotionForceVectorT__traits_3_01SpatialForceVector_01_4_1a4e2508ae97d4f5dfd44a696880cc676f" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionForceVectorT_traits&lt; SpatialForceVector &gt;</scope><name>LinearVector3Type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

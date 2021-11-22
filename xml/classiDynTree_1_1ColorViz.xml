@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1ColorViz" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::ColorViz</compoundname>
+    <derivedcompoundref refid="classiDynTree_1_1PixelViz" prot="public" virt="non-virtual">iDynTree::PixelViz</derivedcompoundref>
+    <includes local="no">iDynTree/Visualizer.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1ColorViz_1ac0d868d2b5eccab6808bab3d092fb0fe" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float iDynTree::ColorViz::r</definition>
+        <argsstring></argsstring>
+        <name>r</name>
+        <briefdescription>
+<para>Red component of the color. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="128" column="11" bodyfile="iDynTree/Visualizer.h" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1ColorViz_1a55604c0ff20631284b127b85cef9ed3b" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float iDynTree::ColorViz::g</definition>
+        <argsstring></argsstring>
+        <name>g</name>
+        <briefdescription>
+<para>Green component of the color. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="133" column="11" bodyfile="iDynTree/Visualizer.h" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1ColorViz_1ab7bb92c9c5bc5d9b83190143136f277a" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float iDynTree::ColorViz::b</definition>
+        <argsstring></argsstring>
+        <name>b</name>
+        <briefdescription>
+<para>Blue component of the color. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="138" column="11" bodyfile="iDynTree/Visualizer.h" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1ColorViz_1a097c11ce78907c8cca1f932bb53f9a15" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float iDynTree::ColorViz::a</definition>
+        <argsstring></argsstring>
+        <name>a</name>
+        <briefdescription>
+<para>Alpha component of the color. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="143" column="11" bodyfile="iDynTree/Visualizer.h" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1ColorViz_1a76f94a49b08d57cfcbd1153324f5cc42" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ColorViz::ColorViz</definition>
+        <argsstring>()</argsstring>
+        <name>ColorViz</name>
+        <briefdescription>
+<para>Default constructor (to white) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="148" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ColorViz_1afa1267993192af9e91a8a4b63a9f41f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ColorViz::ColorViz</definition>
+        <argsstring>(float r, float g, float b, float a)</argsstring>
+        <name>ColorViz</name>
+        <param>
+          <type>float</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>a</declname>
+        </param>
+        <briefdescription>
+<para>Constructor for rgba. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="153" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ColorViz_1a66c1f26b9f0ab71c5a0424b7138e4801" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ColorViz::ColorViz</definition>
+        <argsstring>(const Vector4 &amp;rgba)</argsstring>
+        <name>ColorViz</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector4</ref> &amp;</type>
+          <declname>rgba</declname>
+        </param>
+        <briefdescription>
+<para>Build a color from a Vector4 rgba. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="158" column="5"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Basic structure to encode color information. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::PixelViz</label>
+        <link refid="classiDynTree_1_1PixelViz"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::ColorViz</label>
+        <link refid="classiDynTree_1_1ColorViz"/>
+      </node>
+    </inheritancegraph>
+    <location file="iDynTree/Visualizer.h" line="122" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="123" bodyend="159"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1ColorViz_1a097c11ce78907c8cca1f932bb53f9a15" prot="public" virt="non-virtual"><scope>iDynTree::ColorViz</scope><name>a</name></member>
+      <member refid="classiDynTree_1_1ColorViz_1ab7bb92c9c5bc5d9b83190143136f277a" prot="public" virt="non-virtual"><scope>iDynTree::ColorViz</scope><name>b</name></member>
+      <member refid="classiDynTree_1_1ColorViz_1a76f94a49b08d57cfcbd1153324f5cc42" prot="public" virt="non-virtual"><scope>iDynTree::ColorViz</scope><name>ColorViz</name></member>
+      <member refid="classiDynTree_1_1ColorViz_1afa1267993192af9e91a8a4b63a9f41f9" prot="public" virt="non-virtual"><scope>iDynTree::ColorViz</scope><name>ColorViz</name></member>
+      <member refid="classiDynTree_1_1ColorViz_1a66c1f26b9f0ab71c5a0424b7138e4801" prot="public" virt="non-virtual"><scope>iDynTree::ColorViz</scope><name>ColorViz</name></member>
+      <member refid="classiDynTree_1_1ColorViz_1a55604c0ff20631284b127b85cef9ed3b" prot="public" virt="non-virtual"><scope>iDynTree::ColorViz</scope><name>g</name></member>
+      <member refid="classiDynTree_1_1ColorViz_1ac0d868d2b5eccab6808bab3d092fb0fe" prot="public" virt="non-virtual"><scope>iDynTree::ColorViz</scope><name>r</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

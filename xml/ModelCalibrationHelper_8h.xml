@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="ModelCalibrationHelper_8h" kind="file" language="C++">
+    <compoundname>ModelCalibrationHelper.h</compoundname>
+    <includes refid="Model_8h" local="no">iDynTree/Model/Model.h</includes>
+    <includes refid="Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includes>
+    <includes refid="ModelExporter_8h" local="no">iDynTree/ModelIO/ModelExporter.h</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
+    <incdepgraph>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/ModelIO/ModelCalibrationHelper.h</label>
+        <link refid="ModelCalibrationHelper_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>vector</label>
+      </node>
+      <node id="2">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1ModelCalibrationHelper" prot="public">iDynTree::ModelCalibrationHelper</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/ModelIO/ModelCalibrationHelper.h"/>
+  </compounddef>
+</doxygen>

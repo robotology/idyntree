@@ -1,0 +1,397 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1IModelVisualization" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::IModelVisualization</compoundname>
+    <includes local="no">iDynTree/Visualizer.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1IModelVisualization_1a35240745f0999a53d10bd836cc477326" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type></type>
+        <definition>virtual iDynTree::IModelVisualization::~IModelVisualization</definition>
+        <argsstring>()=0</argsstring>
+        <name>~IModelVisualization</name>
+        <briefdescription>
+<para>Denstructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="607" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IModelVisualization_1ad69716975b88d3fc3faaab805a1a1cce" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IModelVisualization::setPositions</definition>
+        <argsstring>(const Transform &amp;world_H_base, const VectorDynSize &amp;jointPos)=0</argsstring>
+        <name>setPositions</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>world_H_base</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jointPos</declname>
+        </param>
+        <briefdescription>
+<para>Set the position of the model (using base position and joint positions) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="612" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IModelVisualization_1ac4d2070b8add278cbc30f0e6a0948f9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IModelVisualization::setLinkPositions</definition>
+        <argsstring>(const LinkPositions &amp;linkPos)=0</argsstring>
+        <name>setLinkPositions</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkPositions" kindref="compound">LinkPositions</ref> &amp;</type>
+          <declname>linkPos</declname>
+        </param>
+        <briefdescription>
+<para>Set the positions of the model by directly specifing link positions wrt to the world. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="617" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IModelVisualization_1a416adb24480ac485047155ab3a053f24" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+        <definition>virtual Model&amp; iDynTree::IModelVisualization::model</definition>
+        <argsstring>()=0</argsstring>
+        <name>model</name>
+        <briefdescription>
+<para>Reference to the used model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="622" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IModelVisualization_1a4f9c29aa7d950ac3e6eeb8ddacc3f420" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::string</type>
+        <definition>virtual std::string iDynTree::IModelVisualization::getInstanceName</definition>
+        <argsstring>()=0</argsstring>
+        <name>getInstanceName</name>
+        <briefdescription>
+<para>Get the instance name. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="627" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IModelVisualization_1a0417a81f8bc5cd5e9f817d55cc144b5f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::IModelVisualization::setModelVisibility</definition>
+        <argsstring>(const bool isVisible)=0</argsstring>
+        <name>setModelVisibility</name>
+        <param>
+          <type>const bool</type>
+          <declname>isVisible</declname>
+        </param>
+        <briefdescription>
+<para>Set the visibility of all the link of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="632" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IModelVisualization_1ab76d9b8e6720e724a4dc3a77c15f01c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::IModelVisualization::setModelColor</definition>
+        <argsstring>(const ColorViz &amp;modelColor)=0</argsstring>
+        <name>setModelColor</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ColorViz" kindref="compound">ColorViz</ref> &amp;</type>
+          <declname>modelColor</declname>
+        </param>
+        <briefdescription>
+<para>Set the color of all the geometries of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This will overwrite the material of the model, but it can be reset by resetModelColor. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="640" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IModelVisualization_1aae4fd91e3244e38cc00da2460e24d058" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::IModelVisualization::resetModelColor</definition>
+        <argsstring>()=0</argsstring>
+        <name>resetModelColor</name>
+        <briefdescription>
+<para>Reset the colors of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="645" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IModelVisualization_1abe6388fc1ac461069a69f434606104ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IModelVisualization::setLinkColor</definition>
+        <argsstring>(const LinkIndex &amp;linkIndex, const ColorViz &amp;linkColor)=0</argsstring>
+        <name>setLinkColor</name>
+        <param>
+          <type>const LinkIndex &amp;</type>
+          <declname>linkIndex</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ColorViz" kindref="compound">ColorViz</ref> &amp;</type>
+          <declname>linkColor</declname>
+        </param>
+        <briefdescription>
+<para>Set the color of all the geometries of the given link. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This will overwrite the material of the link, but it can be reset by resetLinkColor. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="653" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IModelVisualization_1a17fc5c0d21dbd2480e28afda70955804" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IModelVisualization::resetLinkColor</definition>
+        <argsstring>(const LinkIndex &amp;linkIndex)=0</argsstring>
+        <name>resetLinkColor</name>
+        <param>
+          <type>const LinkIndex &amp;</type>
+          <declname>linkIndex</declname>
+        </param>
+        <briefdescription>
+<para>Reset the colors of given link. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="658" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IModelVisualization_1a4d216f8ba410a9a827b6e5495d1fa441" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>virtual std::vector&lt; std::string &gt; iDynTree::IModelVisualization::getLinkNames</definition>
+        <argsstring>()=0</argsstring>
+        <name>getLinkNames</name>
+        <briefdescription>
+<para>Get the name of the link in the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="663" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IModelVisualization_1a86dcccc124cafe7280578d9f66dd13fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IModelVisualization::setLinkVisibility</definition>
+        <argsstring>(const std::string &amp;linkName, bool isVisible)=0</argsstring>
+        <name>setLinkVisibility</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>linkName</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isVisible</declname>
+        </param>
+        <briefdescription>
+<para>Set a given link visibility. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="668" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IModelVisualization_1afc4739fc4e8cd0629b0d8a9b8fbe1e95" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>virtual std::vector&lt;std::string&gt; iDynTree::IModelVisualization::getFeatures</definition>
+        <argsstring>()=0</argsstring>
+        <name>getFeatures</name>
+        <briefdescription>
+<para>Get list of visualization features that can be enabled/disabled. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method will return the follow list: <table rows="2" cols="3"><row>
+<entry thead="yes" align='center'><para>Visualization feature   </para>
+</entry><entry thead="yes" align='center'><para>Description   </para>
+</entry><entry thead="yes" align='center'><para>Default value    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>wireframe   </para>
+</entry><entry thead="no" align='center'><para>Visualize mesh of the model as wireframe   </para>
+</entry><entry thead="no" align='center'><para>false   </para>
+</entry></row>
+</table>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="678" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IModelVisualization_1ae3a6d78785994edae56c168668932843" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IModelVisualization::setFeatureVisibility</definition>
+        <argsstring>(const std::string &amp;elementKey, bool isVisible)=0</argsstring>
+        <name>setFeatureVisibility</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>elementKey</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isVisible</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if the visibility is correctly setted, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="683" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IModelVisualization_1ad4a127d71ac358022d31669375eccb55" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1IJetsVisualization" kindref="compound">IJetsVisualization</ref> &amp;</type>
+        <definition>virtual IJetsVisualization&amp; iDynTree::IModelVisualization::jets</definition>
+        <argsstring>()=0</argsstring>
+        <name>jets</name>
+        <briefdescription>
+<para>Get a reference to the internal <ref refid="classiDynTree_1_1IJetsVisualization" kindref="compound">IJetsVisualization</ref> interface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="688" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IModelVisualization_1a7130962b2f7f44cd8d76dbbabb0d8acf" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>virtual Transform iDynTree::IModelVisualization::getWorldLinkTransform</definition>
+        <argsstring>(const LinkIndex &amp;linkIndex)=0</argsstring>
+        <name>getWorldLinkTransform</name>
+        <param>
+          <type>const LinkIndex &amp;</type>
+          <declname>linkIndex</declname>
+        </param>
+        <briefdescription>
+<para>Get the transformation of given link with respect to visualizer world <formula id="39">$ {}^w wH_{link}$</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="693" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IModelVisualization_1a18789f25967f8c105cefaaa5a9a58244" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>virtual Transform iDynTree::IModelVisualization::getWorldLinkTransform</definition>
+        <argsstring>(const std::string &amp;linkName)=0</argsstring>
+        <name>getWorldLinkTransform</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>linkName</declname>
+        </param>
+        <briefdescription>
+<para>Get the transformation of given link with respect to visualizer world <formula id="40">$ {}^w H_{link}$</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="698" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IModelVisualization_1a939509d297d7a868d588f8e38583cf22" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>virtual Transform iDynTree::IModelVisualization::getWorldFrameTransform</definition>
+        <argsstring>(const FrameIndex &amp;frameIndex)=0</argsstring>
+        <name>getWorldFrameTransform</name>
+        <param>
+          <type>const FrameIndex &amp;</type>
+          <declname>frameIndex</declname>
+        </param>
+        <briefdescription>
+<para>Get the transformation of given frame with respect to visualizer world <formula id="41">$ {}^w H_{frame}$</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="703" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IModelVisualization_1a07a1db66cf54ad7905e9e175cbbaa02c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>virtual Transform iDynTree::IModelVisualization::getWorldFrameTransform</definition>
+        <argsstring>(const std::string &amp;frameName)=0</argsstring>
+        <name>getWorldFrameTransform</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <briefdescription>
+<para>Get the transformation of given frame with respect to visualizer world <formula id="41">$ {}^w H_{frame}$</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="708" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IModelVisualization_1a552088c4d186f59f5475f668b1506cab" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1ILabel" kindref="compound">ILabel</ref> &amp;</type>
+        <definition>virtual ILabel&amp; iDynTree::IModelVisualization::label</definition>
+        <argsstring>()=0</argsstring>
+        <name>label</name>
+        <briefdescription>
+<para>Get the label for the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="713" column="20"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Interface to the visualization of a model istance. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Visualizer.h" line="601" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="602" bodyend="714"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1IModelVisualization_1afc4739fc4e8cd0629b0d8a9b8fbe1e95" prot="public" virt="pure-virtual"><scope>iDynTree::IModelVisualization</scope><name>getFeatures</name></member>
+      <member refid="classiDynTree_1_1IModelVisualization_1a4f9c29aa7d950ac3e6eeb8ddacc3f420" prot="public" virt="pure-virtual"><scope>iDynTree::IModelVisualization</scope><name>getInstanceName</name></member>
+      <member refid="classiDynTree_1_1IModelVisualization_1a4d216f8ba410a9a827b6e5495d1fa441" prot="public" virt="pure-virtual"><scope>iDynTree::IModelVisualization</scope><name>getLinkNames</name></member>
+      <member refid="classiDynTree_1_1IModelVisualization_1a939509d297d7a868d588f8e38583cf22" prot="public" virt="pure-virtual"><scope>iDynTree::IModelVisualization</scope><name>getWorldFrameTransform</name></member>
+      <member refid="classiDynTree_1_1IModelVisualization_1a07a1db66cf54ad7905e9e175cbbaa02c" prot="public" virt="pure-virtual"><scope>iDynTree::IModelVisualization</scope><name>getWorldFrameTransform</name></member>
+      <member refid="classiDynTree_1_1IModelVisualization_1a7130962b2f7f44cd8d76dbbabb0d8acf" prot="public" virt="pure-virtual"><scope>iDynTree::IModelVisualization</scope><name>getWorldLinkTransform</name></member>
+      <member refid="classiDynTree_1_1IModelVisualization_1a18789f25967f8c105cefaaa5a9a58244" prot="public" virt="pure-virtual"><scope>iDynTree::IModelVisualization</scope><name>getWorldLinkTransform</name></member>
+      <member refid="classiDynTree_1_1IModelVisualization_1ad4a127d71ac358022d31669375eccb55" prot="public" virt="pure-virtual"><scope>iDynTree::IModelVisualization</scope><name>jets</name></member>
+      <member refid="classiDynTree_1_1IModelVisualization_1a552088c4d186f59f5475f668b1506cab" prot="public" virt="pure-virtual"><scope>iDynTree::IModelVisualization</scope><name>label</name></member>
+      <member refid="classiDynTree_1_1IModelVisualization_1a416adb24480ac485047155ab3a053f24" prot="public" virt="pure-virtual"><scope>iDynTree::IModelVisualization</scope><name>model</name></member>
+      <member refid="classiDynTree_1_1IModelVisualization_1a17fc5c0d21dbd2480e28afda70955804" prot="public" virt="pure-virtual"><scope>iDynTree::IModelVisualization</scope><name>resetLinkColor</name></member>
+      <member refid="classiDynTree_1_1IModelVisualization_1aae4fd91e3244e38cc00da2460e24d058" prot="public" virt="pure-virtual"><scope>iDynTree::IModelVisualization</scope><name>resetModelColor</name></member>
+      <member refid="classiDynTree_1_1IModelVisualization_1ae3a6d78785994edae56c168668932843" prot="public" virt="pure-virtual"><scope>iDynTree::IModelVisualization</scope><name>setFeatureVisibility</name></member>
+      <member refid="classiDynTree_1_1IModelVisualization_1abe6388fc1ac461069a69f434606104ae" prot="public" virt="pure-virtual"><scope>iDynTree::IModelVisualization</scope><name>setLinkColor</name></member>
+      <member refid="classiDynTree_1_1IModelVisualization_1ac4d2070b8add278cbc30f0e6a0948f9a" prot="public" virt="pure-virtual"><scope>iDynTree::IModelVisualization</scope><name>setLinkPositions</name></member>
+      <member refid="classiDynTree_1_1IModelVisualization_1a86dcccc124cafe7280578d9f66dd13fd" prot="public" virt="pure-virtual"><scope>iDynTree::IModelVisualization</scope><name>setLinkVisibility</name></member>
+      <member refid="classiDynTree_1_1IModelVisualization_1ab76d9b8e6720e724a4dc3a77c15f01c6" prot="public" virt="pure-virtual"><scope>iDynTree::IModelVisualization</scope><name>setModelColor</name></member>
+      <member refid="classiDynTree_1_1IModelVisualization_1a0417a81f8bc5cd5e9f817d55cc144b5f" prot="public" virt="pure-virtual"><scope>iDynTree::IModelVisualization</scope><name>setModelVisibility</name></member>
+      <member refid="classiDynTree_1_1IModelVisualization_1ad69716975b88d3fc3faaab805a1a1cce" prot="public" virt="pure-virtual"><scope>iDynTree::IModelVisualization</scope><name>setPositions</name></member>
+      <member refid="classiDynTree_1_1IModelVisualization_1a35240745f0999a53d10bd836cc477326" prot="public" virt="pure-virtual"><scope>iDynTree::IModelVisualization</scope><name>~IModelVisualization</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

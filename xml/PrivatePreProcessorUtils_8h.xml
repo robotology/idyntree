@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="PrivatePreProcessorUtils_8h" kind="file" language="C++">
+    <compoundname>PrivatePreProcessorUtils.h</compoundname>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="PrivatePreProcessorUtils_8h_1a24dc8a6fa402bd3a9b9ee3f40017c1fd" prot="public" static="no">
+        <name>IDYNTREE_PRETTY_FUNCTION</name>
+        <initializer>__FUNCTION__</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/PrivatePreProcessorUtils.h" line="17" column="10" bodyfile="iDynTree/Core/PrivatePreProcessorUtils.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/PrivatePreProcessorUtils.h"/>
+  </compounddef>
+</doxygen>

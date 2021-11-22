@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="IJoint_8h" kind="file" language="C++">
+    <compoundname>IJoint.h</compoundname>
+    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
+    <includedby refid="FixedJoint_8h" local="no">iDynTree/Model/FixedJoint.h</includedby>
+    <includedby refid="Model_8h" local="no">iDynTree/Model/Model.h</includedby>
+    <includedby refid="ModelTestUtils_8h" local="yes">iDynTree/Model/ModelTestUtils.h</includedby>
+    <includedby refid="MovableJointImpl_8h" local="no">iDynTree/Model/MovableJointImpl.h</includedby>
+    <innerclass refid="classiDynTree_1_1IJoint" prot="public">iDynTree::IJoint</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="IJoint_8h_1ade0c4658492d5288102a323d704a2a1c" prot="public" static="no">
+        <type>IJoint *</type>
+        <definition>typedef IJoint* iDynTree::IJointPtr</definition>
+        <argsstring></argsstring>
+        <name>IJointPtr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="369" column="21" bodyfile="iDynTree/Model/IJoint.h" bodystart="369" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="IJoint_8h_1ac8fef24361e5d31b7bb1c5e468ea9513" prot="public" static="no">
+        <type>const IJoint *</type>
+        <definition>typedef const IJoint* iDynTree::IJointConstPtr</definition>
+        <argsstring></argsstring>
+        <name>IJointConstPtr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="370" column="27" bodyfile="iDynTree/Model/IJoint.h" bodystart="370" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/IJoint.h"/>
+  </compounddef>
+</doxygen>

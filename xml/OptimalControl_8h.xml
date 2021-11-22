@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="OptimalControl_8h" kind="file" language="C++">
+    <compoundname>OptimalControl.h</compoundname>
+    <includes refid="DynamicalSystem_8h" local="no">iDynTree/DynamicalSystem.h</includes>
+    <includes refid="LinearSystem_8h" local="no">iDynTree/LinearSystem.h</includes>
+    <includes refid="Constraint_8h" local="no">iDynTree/Constraint.h</includes>
+    <includes refid="ConstraintsGroup_8h" local="no">iDynTree/ConstraintsGroup.h</includes>
+    <includes refid="Cost_8h" local="no">iDynTree/Cost.h</includes>
+    <includes refid="OptimalControlProblem_8h" local="no">iDynTree/OptimalControlProblem.h</includes>
+    <includes refid="TimeRange_8h" local="no">iDynTree/TimeRange.h</includes>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/OptimalControl.h"/>
+  </compounddef>
+</doxygen>

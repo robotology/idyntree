@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="InertialParametersSolidShapesHelpers_8h" kind="file" language="C++">
+    <compoundname>InertialParametersSolidShapesHelpers.h</compoundname>
+    <includes refid="Model_8h" local="no">iDynTree/Model/Model.h</includes>
+    <includes refid="SolidShapes_8h" local="no">iDynTree/Model/SolidShapes.h</includes>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="InertialParametersSolidShapesHelpers_8h_1a4ed7d9dcd80664b1b86236a0f1086cda" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::estimateInertialParametersFromLinkBoundingBoxesAndTotalMass</definition>
+        <argsstring>(const double totalMass, iDynTree::Model &amp;model, VectorDynSize &amp;estimatedInertialParams)</argsstring>
+        <name>estimateInertialParametersFromLinkBoundingBoxesAndTotalMass</name>
+        <param>
+          <type>const double</type>
+          <declname>totalMass</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>VectorDynSize &amp;</type>
+          <declname>estimatedInertialParams</declname>
+        </param>
+        <briefdescription>
+<para>Estimate the inertial parameters of a model using link bounding boxes and the total mass. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">totalMass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The total mass of the model, in Kilograms. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The model, used to extract the bounding box of the links. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">inertialParameters</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of inertial parameters, in the format used by <ref refid="classiDynTree_1_1Model_1a2c283e000a2d6a5e86770d8616b7e18b" kindref="member">Model::getInertialParameters</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise .</para>
+</simplesect>
+<simplesect kind="note"><para>if inertialParameters does not have the correct size, it will be resized. </para>
+</simplesect>
+<simplesect kind="warning"><para>This function needs to allocate some internal buffers, and so it performs dynamic memory allocation.</para>
+</simplesect>
+<simplesect kind="note"><para>This function requires IDYNTREE_USES_ASSIMP to be true, otherwise it always returns false. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InertialParametersSolidShapesHelpers.h" line="33" column="6" declfile="iDynTree/InertialParametersSolidShapesHelpers.h" declline="33" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="InertialParametersSolidShapesHelpers_8h_1a3fc080109daad044981533bc143d1bee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::computeBoundingBoxFromShape</definition>
+        <argsstring>(const SolidShape &amp;geom, Box &amp;box)</argsstring>
+        <name>computeBoundingBoxFromShape</name>
+        <param>
+          <type>const SolidShape &amp;</type>
+          <declname>geom</declname>
+        </param>
+        <param>
+          <type>Box &amp;</type>
+          <declname>box</declname>
+        </param>
+        <briefdescription>
+<para>Compute bounding box from a solid shape object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">geom</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The link collision as a iDynTree solid shape object </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The bounding box for the solid shape object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise .</para>
+</simplesect>
+<simplesect kind="note"><para>If the shape is an <ref refid="classiDynTree_1_1ExternalMesh" kindref="compound">ExternalMesh</ref> type, this function requires IDYNTREE_USES_ASSIMP to be true, otherwise it always returns false. </para>
+</simplesect>
+<simplesect kind="note"><para>If the shape is an <ref refid="classiDynTree_1_1ExternalMesh" kindref="compound">ExternalMesh</ref> type, an Axis-Aligned Bounding <ref refid="classiDynTree_1_1Box" kindref="compound">Box</ref> (AABB) is computed from the mesh vertices. This means that the returned bounding box is neither unique nor a minimum volume bounding box for the given mesh. The axes alignment to compute AABB is done with respect to the frame associated with the shape. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InertialParametersSolidShapesHelpers.h" line="48" column="6" declfile="iDynTree/InertialParametersSolidShapesHelpers.h" declline="48" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="InertialParametersSolidShapesHelpers_8h_1a22b1c506654dc8a1589bbccc2ba32deb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; Position &gt;</type>
+        <definition>std::vector&lt;Position&gt; iDynTree::computeBoxVertices</definition>
+        <argsstring>(const Box box)</argsstring>
+        <name>computeBoxVertices</name>
+        <param>
+          <type>const Box</type>
+          <declname>box</declname>
+        </param>
+        <briefdescription>
+<para>Get the bounding box vertices in the link frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">box</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The link collision solid shape as a <ref refid="classiDynTree_1_1Box" kindref="compound">Box</ref> object. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>vector of vertex positions in the link frame. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InertialParametersSolidShapesHelpers.h" line="56" column="13" declfile="iDynTree/InertialParametersSolidShapesHelpers.h" declline="56" declcolumn="13"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/InertialParametersSolidShapesHelpers.h"/>
+  </compounddef>
+</doxygen>

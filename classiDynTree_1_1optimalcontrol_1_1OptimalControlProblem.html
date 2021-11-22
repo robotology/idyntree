@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>iDynTree::optimalcontrol::OptimalControlProblem class | iDynTree master</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="./index.html">iDynTree</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="4">
+            <li>
+              <a href="pages.html">Versions</a>
+              <ol>
+                <li><a href="./index.html">Master</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="pages.html">Contacts</a>
+              <ol>
+                <li><a href="https://github.com/robotology/idyntree">GitHub</a></li>
+                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
+              </ol>
+            </li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespaceiDynTree.html">iDynTree</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceiDynTree_1_1optimalcontrol.html">optimalcontrol</a>::<wbr/></span>OptimalControlProblem <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="OptimalControlProblem_8h.html">&lt;iDynTree/OptimalControlProblem.h&gt;</a></div>
+        </h1>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<aside class="m-note m-danger"><h4>Warning</h4><p>This class is still in active development, and so API interface can change between iDynTree versions.</p></aside>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="a8f8f15343f3681e867a3a1497815b3a6">
+              <span class="m-doc-wrap-bumper"><a href="#a8f8f15343f3681e867a3a1497815b3a6" class="m-doc-self">OptimalControlProblem</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ab893e61ce2643b91ef84ea56eb458dc7">
+              <span class="m-doc-wrap-bumper"><a href="#ab893e61ce2643b91ef84ea56eb458dc7" class="m-doc-self">~OptimalControlProblem</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a4ee4e74a855091b473d495d501edc577">
+              <span class="m-doc-wrap-bumper"><a href="#a4ee4e74a855091b473d495d501edc577" class="m-doc-self">OptimalControlProblem</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem.html" class="m-doc">OptimalControlProblem</a>&amp; other) <span class="m-label m-flat m-danger">deleted</span></span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt id="a001558d92e820f77f324d95adc4e295b">
+              <span class="m-doc-wrap-bumper">auto <a href="#a001558d92e820f77f324d95adc4e295b" class="m-doc-self">setTimeHorizon</a>(</span><span class="m-doc-wrap">double startingTime,
+              double finalTime) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aa15ec20794c4ea3013ce9dbbf3880085">
+              <span class="m-doc-wrap-bumper">auto <a href="#aa15ec20794c4ea3013ce9dbbf3880085" class="m-doc-self">initialTime</a>(</span><span class="m-doc-wrap">) const -&gt; double</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a28351bbdaed708d43d44b35eaa25170b">
+              <span class="m-doc-wrap-bumper">auto <a href="#a28351bbdaed708d43d44b35eaa25170b" class="m-doc-self">finalTime</a>(</span><span class="m-doc-wrap">) const -&gt; double</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a4ebb1c541eda6f7364e35097ec8c9ce1">
+              <span class="m-doc-wrap-bumper">auto <a href="#a4ebb1c541eda6f7364e35097ec8c9ce1" class="m-doc-self">setDynamicalSystemConstraint</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html" class="m-doc">DynamicalSystem</a>&gt; dynamicalSystem) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="adce0d7996ccf286f9f476f5a72312aa6">
+              <span class="m-doc-wrap-bumper">auto <a href="#adce0d7996ccf286f9f476f5a72312aa6" class="m-doc-self">setDynamicalSystemConstraint</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1LinearSystem.html" class="m-doc">LinearSystem</a>&gt; linearSystem) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ac283893ec23a7265a6c26e80c527704f">
+              <span class="m-doc-wrap-bumper">auto <a href="#ac283893ec23a7265a6c26e80c527704f" class="m-doc-self">dynamicalSystem</a>(</span><span class="m-doc-wrap">) const -&gt; const std::weak_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html" class="m-doc">DynamicalSystem</a>&gt;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a5bdd83fa1e43b80cff9c8e609d6a6392">
+              <span class="m-doc-wrap-bumper">auto <a href="#a5bdd83fa1e43b80cff9c8e609d6a6392" class="m-doc-self">systemIsLinear</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a4fb55f0a9072eb927cd6a99b76c6c1db">
+              <span class="m-doc-wrap-bumper">auto <a href="#a4fb55f0a9072eb927cd6a99b76c6c1db" class="m-doc-self">addGroupOfConstraints</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup.html" class="m-doc">ConstraintsGroup</a>&gt; groupOfConstraints) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a9aa7f91a2d44558234dbe443b9a783bd">
+              <span class="m-doc-wrap-bumper">auto <a href="#a9aa7f91a2d44558234dbe443b9a783bd" class="m-doc-self">removeGroupOfConstraints</a>(</span><span class="m-doc-wrap">const std::string&amp; name) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="abec32a6da80771a87f082632507565bb">
+              <span class="m-doc-wrap-bumper">auto <a href="#abec32a6da80771a87f082632507565bb" class="m-doc-self">addConstraint</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1Constraint.html" class="m-doc">Constraint</a>&gt; newConstraint) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="abc67b1841b787b3d98f5e62fa7ed5d0e">
+              <span class="m-doc-wrap-bumper">auto <a href="#abc67b1841b787b3d98f5e62fa7ed5d0e" class="m-doc-self">addConstraint</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1LinearConstraint.html" class="m-doc">LinearConstraint</a>&gt; newConstraint) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a82e394516abf28fcd9bfbfc64bafc2a4">
+              <span class="m-doc-wrap-bumper">auto <a href="#a82e394516abf28fcd9bfbfc64bafc2a4" class="m-doc-self">removeConstraint</a>(</span><span class="m-doc-wrap">const std::string&amp; name) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a71bc6150196bc0aa9e0da36daee324de">
+              <span class="m-doc-wrap-bumper">auto <a href="#a71bc6150196bc0aa9e0da36daee324de" class="m-doc-self">countConstraints</a>(</span><span class="m-doc-wrap">) const -&gt; unsigned int</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a5b659927f50eee911468564c1fe40682">
+              <span class="m-doc-wrap-bumper">auto <a href="#a5b659927f50eee911468564c1fe40682" class="m-doc-self">countLinearConstraints</a>(</span><span class="m-doc-wrap">) const -&gt; unsigned int</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ad52580e616f7cd8045fc8827a7c21da0">
+              <span class="m-doc-wrap-bumper">auto <a href="#ad52580e616f7cd8045fc8827a7c21da0" class="m-doc-self">getConstraintsDimension</a>(</span><span class="m-doc-wrap">) const -&gt; unsigned int</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a26f525addcfe9b897600284c6fa3b426">
+              <span class="m-doc-wrap-bumper">auto <a href="#a26f525addcfe9b897600284c6fa3b426" class="m-doc-self">listConstraints</a>(</span><span class="m-doc-wrap">) const -&gt; const std::vector&lt;std::string&gt;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a12541f66cef3014b94c17bc07418cc2a">
+              <span class="m-doc-wrap-bumper">auto <a href="#a12541f66cef3014b94c17bc07418cc2a" class="m-doc-self">listGroups</a>(</span><span class="m-doc-wrap">) const -&gt; const std::vector&lt;std::string&gt;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a34e30ae0456f0edbf047c7b43d22ab49">
+              <span class="m-doc-wrap-bumper">auto <a href="#a34e30ae0456f0edbf047c7b43d22ab49" class="m-doc-self">getConstraintsTimeRanges</a>(</span><span class="m-doc-wrap">) const -&gt; std::vector&lt;<a href="classiDynTree_1_1optimalcontrol_1_1TimeRange.html" class="m-doc">TimeRange</a>&gt;&amp;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a700c04bc1a0bd7789c6386224d0ff237">
+              <span class="m-doc-wrap-bumper">auto <a href="#a700c04bc1a0bd7789c6386224d0ff237" class="m-doc-self">getLinearConstraintsIndeces</a>(</span><span class="m-doc-wrap">) const -&gt; std::vector&lt;size_t&gt;&amp;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a02489128e1ec78197e2d43368e98ebc5">
+              <span class="m-doc-wrap-bumper">auto <a href="#a02489128e1ec78197e2d43368e98ebc5" class="m-doc-self">addMayerTerm</a>(</span><span class="m-doc-wrap">double weight,
+              std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1Cost.html" class="m-doc">Cost</a>&gt; cost) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af84f8268d7d9860caacbc7a2af9cfa01">
+              <span class="m-doc-wrap-bumper">auto <a href="#af84f8268d7d9860caacbc7a2af9cfa01" class="m-doc-self">addMayerTerm</a>(</span><span class="m-doc-wrap">double weight,
+              std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html" class="m-doc">QuadraticCost</a>&gt; quadraticCost) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="afcacbdc9117f238009e661a74a53e6d6">
+              <span class="m-doc-wrap-bumper">auto <a href="#afcacbdc9117f238009e661a74a53e6d6" class="m-doc-self">addMayerTerm</a>(</span><span class="m-doc-wrap">double weight,
+              std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1L2NormCost.html" class="m-doc">L2NormCost</a>&gt; quadraticCost) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a3acc6f9b97f6aa0db5e8ef27f83a393b">
+              <span class="m-doc-wrap-bumper">auto <a href="#a3acc6f9b97f6aa0db5e8ef27f83a393b" class="m-doc-self">addMayerTerm</a>(</span><span class="m-doc-wrap">double weight,
+              std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1LinearCost.html" class="m-doc">LinearCost</a>&gt; linearCost) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a11680230dfa111e50aecd797e7ccbacc">
+              <span class="m-doc-wrap-bumper">auto <a href="#a11680230dfa111e50aecd797e7ccbacc" class="m-doc-self">addLagrangeTerm</a>(</span><span class="m-doc-wrap">double weight,
+              std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1Cost.html" class="m-doc">Cost</a>&gt; cost) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aa60ac41b7e1066ea85c01edcc92b7cc5">
+              <span class="m-doc-wrap-bumper">auto <a href="#aa60ac41b7e1066ea85c01edcc92b7cc5" class="m-doc-self">addLagrangeTerm</a>(</span><span class="m-doc-wrap">double weight,
+              std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html" class="m-doc">QuadraticCost</a>&gt; quadraticCost) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aed61cf010d71423e7043b4a5c1f2d4d4">
+              <span class="m-doc-wrap-bumper">auto <a href="#aed61cf010d71423e7043b4a5c1f2d4d4" class="m-doc-self">addLagrangeTerm</a>(</span><span class="m-doc-wrap">double weight,
+              std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1L2NormCost.html" class="m-doc">L2NormCost</a>&gt; quadraticCost) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a80980ee78870f5182dea05097faa976d">
+              <span class="m-doc-wrap-bumper">auto <a href="#a80980ee78870f5182dea05097faa976d" class="m-doc-self">addLagrangeTerm</a>(</span><span class="m-doc-wrap">double weight,
+              std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1LinearCost.html" class="m-doc">LinearCost</a>&gt; linearCost) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="acb5ce06342ae5477f0f50794f25d87e6">
+              <span class="m-doc-wrap-bumper">auto <a href="#acb5ce06342ae5477f0f50794f25d87e6" class="m-doc-self">addLagrangeTerm</a>(</span><span class="m-doc-wrap">double weight,
+              double startingTime,
+              double finalTime,
+              std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1Cost.html" class="m-doc">Cost</a>&gt; cost) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a5d50f819307f5309b406cfb7efb69278">
+              <span class="m-doc-wrap-bumper">auto <a href="#a5d50f819307f5309b406cfb7efb69278" class="m-doc-self">addLagrangeTerm</a>(</span><span class="m-doc-wrap">double weight,
+              double startingTime,
+              double finalTime,
+              std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html" class="m-doc">QuadraticCost</a>&gt; quadraticCost) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a3f7146524e7dfdcae397ad544340b5f3">
+              <span class="m-doc-wrap-bumper">auto <a href="#a3f7146524e7dfdcae397ad544340b5f3" class="m-doc-self">addLagrangeTerm</a>(</span><span class="m-doc-wrap">double weight,
+              double startingTime,
+              double finalTime,
+              std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1L2NormCost.html" class="m-doc">L2NormCost</a>&gt; quadraticCost) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a0b886f55d1276dc14a9f0d075a0204d0">
+              <span class="m-doc-wrap-bumper">auto <a href="#a0b886f55d1276dc14a9f0d075a0204d0" class="m-doc-self">addLagrangeTerm</a>(</span><span class="m-doc-wrap">double weight,
+              double startingTime,
+              double finalTime,
+              std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1LinearCost.html" class="m-doc">LinearCost</a>&gt; linearCost) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1cf49b1f74baed80c24ccca603d9a7f4">
+              <span class="m-doc-wrap-bumper">auto <a href="#a1cf49b1f74baed80c24ccca603d9a7f4" class="m-doc-self">addLagrangeTerm</a>(</span><span class="m-doc-wrap">double weight,
+              const <a href="classiDynTree_1_1optimalcontrol_1_1TimeRange.html" class="m-doc">TimeRange</a>&amp; timeRange,
+              std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1Cost.html" class="m-doc">Cost</a>&gt; cost) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="abd1a53e2e446fd99c2f42c572f8001fb">
+              <span class="m-doc-wrap-bumper">auto <a href="#abd1a53e2e446fd99c2f42c572f8001fb" class="m-doc-self">addLagrangeTerm</a>(</span><span class="m-doc-wrap">double weight,
+              const <a href="classiDynTree_1_1optimalcontrol_1_1TimeRange.html" class="m-doc">TimeRange</a>&amp; timeRange,
+              std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html" class="m-doc">QuadraticCost</a>&gt; quadraticCost) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a51b0a2f25e397361dd0ada69fed36558">
+              <span class="m-doc-wrap-bumper">auto <a href="#a51b0a2f25e397361dd0ada69fed36558" class="m-doc-self">addLagrangeTerm</a>(</span><span class="m-doc-wrap">double weight,
+              const <a href="classiDynTree_1_1optimalcontrol_1_1TimeRange.html" class="m-doc">TimeRange</a>&amp; timeRange,
+              std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1L2NormCost.html" class="m-doc">L2NormCost</a>&gt; quadraticCost) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="adb0be63de26009c97f52fc211c5416f1">
+              <span class="m-doc-wrap-bumper">auto <a href="#adb0be63de26009c97f52fc211c5416f1" class="m-doc-self">addLagrangeTerm</a>(</span><span class="m-doc-wrap">double weight,
+              const <a href="classiDynTree_1_1optimalcontrol_1_1TimeRange.html" class="m-doc">TimeRange</a>&amp; timeRange,
+              std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1LinearCost.html" class="m-doc">LinearCost</a>&gt; linearCost) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="afe915042aac68470ec2b49e7807eb927">
+              <span class="m-doc-wrap-bumper">auto <a href="#afe915042aac68470ec2b49e7807eb927" class="m-doc-self">updateCostTimeRange</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              double newStartingTime,
+              double newEndTime) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ab73d563078b2d1230964c9d2cf62989b">
+              <span class="m-doc-wrap-bumper">auto <a href="#ab73d563078b2d1230964c9d2cf62989b" class="m-doc-self">updateCostTimeRange</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              const <a href="classiDynTree_1_1optimalcontrol_1_1TimeRange.html" class="m-doc">TimeRange</a>&amp; newTimeRange) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ad24c7064f34f42765f8e3f9553f5d410">
+              <span class="m-doc-wrap-bumper">auto <a href="#ad24c7064f34f42765f8e3f9553f5d410" class="m-doc-self">removeCost</a>(</span><span class="m-doc-wrap">const std::string&amp; name) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a53c72542eef6773d4a94b077835af8e1">
+              <span class="m-doc-wrap-bumper">auto <a href="#a53c72542eef6773d4a94b077835af8e1" class="m-doc-self">getCostsTimeRanges</a>(</span><span class="m-doc-wrap">) const -&gt; std::vector&lt;<a href="classiDynTree_1_1optimalcontrol_1_1TimeRange.html" class="m-doc">TimeRange</a>&gt;&amp;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a994d66b1eec693a8a24a3f72f137938e">
+              <span class="m-doc-wrap-bumper">auto <a href="#a994d66b1eec693a8a24a3f72f137938e" class="m-doc-self">hasOnlyLinearCosts</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a35b485d624d04d19b8165a667abc60ed">
+              <span class="m-doc-wrap-bumper">auto <a href="#a35b485d624d04d19b8165a667abc60ed" class="m-doc-self">hasOnlyQuadraticCosts</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a8342782855251e0adc53e6ec51eaa383">
+              <span class="m-doc-wrap-bumper">auto <a href="#a8342782855251e0adc53e6ec51eaa383" class="m-doc-self">setStateLowerBound</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; minState) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ad5ef909b3c40da1a8e7d148c63282557">
+              <span class="m-doc-wrap-bumper">auto <a href="#ad5ef909b3c40da1a8e7d148c63282557" class="m-doc-self">setStateLowerBound</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject.html" class="m-doc">TimeVaryingVector</a>&gt; minState) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a01ad1c96b355b8a6f2155f95e0655f74">
+              <span class="m-doc-wrap-bumper">auto <a href="#a01ad1c96b355b8a6f2155f95e0655f74" class="m-doc-self">setStateUpperBound</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; maxState) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a9c890c6f113a18dbb3dcf10b8bd8f3eb">
+              <span class="m-doc-wrap-bumper">auto <a href="#a9c890c6f113a18dbb3dcf10b8bd8f3eb" class="m-doc-self">setStateUpperBound</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject.html" class="m-doc">TimeVaryingVector</a>&gt; maxState) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a5921ec35c8c3b9bcd3da38dc85a9acd4">
+              <span class="m-doc-wrap-bumper">auto <a href="#a5921ec35c8c3b9bcd3da38dc85a9acd4" class="m-doc-self">setControlLowerBound</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; minControl) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a48308ee8e0c37adb24d002b39a755505">
+              <span class="m-doc-wrap-bumper">auto <a href="#a48308ee8e0c37adb24d002b39a755505" class="m-doc-self">setControlLowerBound</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject.html" class="m-doc">TimeVaryingVector</a>&gt; minControl) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ab12d5ae29f35eb2e4a97492d338306a2">
+              <span class="m-doc-wrap-bumper">auto <a href="#ab12d5ae29f35eb2e4a97492d338306a2" class="m-doc-self">setControlUpperBound</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; maxControl) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aae545865e2ef845b988e82d61fdd2f4f">
+              <span class="m-doc-wrap-bumper">auto <a href="#aae545865e2ef845b988e82d61fdd2f4f" class="m-doc-self">setControlUpperBound</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject.html" class="m-doc">TimeVaryingVector</a>&gt; maxControl) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="afd55bb59616f578b1f68773e48970f76">
+              <span class="m-doc-wrap-bumper">auto <a href="#afd55bb59616f578b1f68773e48970f76" class="m-doc-self">setStateBoxConstraints</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; minState,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; maxState) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="afbeffc43fa67ec4edda8b3ad2fd79c21">
+              <span class="m-doc-wrap-bumper">auto <a href="#afbeffc43fa67ec4edda8b3ad2fd79c21" class="m-doc-self">setStateBoxConstraints</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject.html" class="m-doc">TimeVaryingVector</a>&gt; minState,
+              std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject.html" class="m-doc">TimeVaryingVector</a>&gt; maxState) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ad80b4e1dcac6906c40ee7964cc92c613">
+              <span class="m-doc-wrap-bumper">auto <a href="#ad80b4e1dcac6906c40ee7964cc92c613" class="m-doc-self">setControlBoxConstraints</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; minControl,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; maxControl) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ab4476ace7e3d6d5f227060d3bd5137aa">
+              <span class="m-doc-wrap-bumper">auto <a href="#ab4476ace7e3d6d5f227060d3bd5137aa" class="m-doc-self">setControlBoxConstraints</a>(</span><span class="m-doc-wrap">std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject.html" class="m-doc">TimeVaryingVector</a>&gt; minControl,
+              std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject.html" class="m-doc">TimeVaryingVector</a>&gt; maxControl) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ae9879491c00b326931e9b38924990af4">
+              <span class="m-doc-wrap-bumper">auto <a href="#ae9879491c00b326931e9b38924990af4" class="m-doc-self">getStateLowerBound</a>(</span><span class="m-doc-wrap">double time,
+              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; minState) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a484613f00a345eb1d0ec5b78be0b51ff">
+              <span class="m-doc-wrap-bumper">auto <a href="#a484613f00a345eb1d0ec5b78be0b51ff" class="m-doc-self">getStateUpperBound</a>(</span><span class="m-doc-wrap">double time,
+              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; maxState) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a2083c2b8144b48fa4efd4963cce73dac">
+              <span class="m-doc-wrap-bumper">auto <a href="#a2083c2b8144b48fa4efd4963cce73dac" class="m-doc-self">getControlLowerBound</a>(</span><span class="m-doc-wrap">double time,
+              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; minControl) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a431f5188c049fa001905bfda44f74b6d">
+              <span class="m-doc-wrap-bumper">auto <a href="#a431f5188c049fa001905bfda44f74b6d" class="m-doc-self">getControlUpperBound</a>(</span><span class="m-doc-wrap">double time,
+              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; maxControl) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a67a0dbc68632df087c09d11c583dd728">
+              <span class="m-doc-wrap-bumper">auto <a href="#a67a0dbc68632df087c09d11c583dd728" class="m-doc-self">costsEvaluation</a>(</span><span class="m-doc-wrap">double time,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; state,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; control,
+              double&amp; costValue) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a6ac1abdd182daa78fe95dedce3f0dba0">
+              <span class="m-doc-wrap-bumper">auto <a href="#a6ac1abdd182daa78fe95dedce3f0dba0" class="m-doc-self">costsFirstPartialDerivativeWRTState</a>(</span><span class="m-doc-wrap">double time,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; state,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; control,
+              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; partialDerivative) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ab57ca1ba2664007eb8e5b1df590ba9d3">
+              <span class="m-doc-wrap-bumper">auto <a href="#ab57ca1ba2664007eb8e5b1df590ba9d3" class="m-doc-self">costsFirstPartialDerivativeWRTControl</a>(</span><span class="m-doc-wrap">double time,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; state,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; control,
+              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; partialDerivative) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ac410977ec50668f2fa9babb1cca5fda4">
+              <span class="m-doc-wrap-bumper">auto <a href="#ac410977ec50668f2fa9babb1cca5fda4" class="m-doc-self">costsSecondPartialDerivativeWRTState</a>(</span><span class="m-doc-wrap">double time,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; state,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; control,
+              <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>&amp; partialDerivative) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a767b7a3a667d27bfc79342f0458a1914">
+              <span class="m-doc-wrap-bumper">auto <a href="#a767b7a3a667d27bfc79342f0458a1914" class="m-doc-self">costsSecondPartialDerivativeWRTControl</a>(</span><span class="m-doc-wrap">double time,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; state,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; control,
+              <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>&amp; partialDerivative) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aa50d615775a44abeec5a368b3dc50178">
+              <span class="m-doc-wrap-bumper">auto <a href="#aa50d615775a44abeec5a368b3dc50178" class="m-doc-self">costsSecondPartialDerivativeWRTStateControl</a>(</span><span class="m-doc-wrap">double time,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; state,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; control,
+              <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>&amp; partialDerivative) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ad4352f3855072d9cc5fbb2ae8f4db32b">
+              <span class="m-doc-wrap-bumper">auto <a href="#ad4352f3855072d9cc5fbb2ae8f4db32b" class="m-doc-self">costsSecondPartialDerivativeWRTStateSparsity</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1optimalcontrol_1_1SparsityStructure.html" class="m-doc">iDynTree::<wbr />optimalcontrol::<wbr />SparsityStructure</a>&amp; stateSparsity) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1b594b44422066f9e155a58cad8e559f">
+              <span class="m-doc-wrap-bumper">auto <a href="#a1b594b44422066f9e155a58cad8e559f" class="m-doc-self">costsSecondPartialDerivativeWRTControlSparsity</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1optimalcontrol_1_1SparsityStructure.html" class="m-doc">iDynTree::<wbr />optimalcontrol::<wbr />SparsityStructure</a>&amp; controlSparsity) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="abb27fe98321728fdd710795bdac4d8c6">
+              <span class="m-doc-wrap-bumper">auto <a href="#abb27fe98321728fdd710795bdac4d8c6" class="m-doc-self">costsSecondPartialDerivativeWRTStateControlSparsity</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1optimalcontrol_1_1SparsityStructure.html" class="m-doc">iDynTree::<wbr />optimalcontrol::<wbr />SparsityStructure</a>&amp; stateControlSparsity) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a49ad293fdbe023d2e3c231912719172e">
+              <span class="m-doc-wrap-bumper">auto <a href="#a49ad293fdbe023d2e3c231912719172e" class="m-doc-self">constraintsEvaluation</a>(</span><span class="m-doc-wrap">double time,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; state,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; control,
+              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; constraintsValue) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a9a2820cf7cd04c5df801a3c0ffbe157e">
+              <span class="m-doc-wrap-bumper">auto <a href="#a9a2820cf7cd04c5df801a3c0ffbe157e" class="m-doc-self">getConstraintsUpperBound</a>(</span><span class="m-doc-wrap">double time,
+              double infinity,
+              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; upperBound) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a636190efda17f40cd93ecef6da26d219">
+              <span class="m-doc-wrap-bumper">auto <a href="#a636190efda17f40cd93ecef6da26d219" class="m-doc-self">getConstraintsLowerBound</a>(</span><span class="m-doc-wrap">double time,
+              double infinity,
+              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; lowerBound) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a33a8c1a0347b981c256f0f5cdc22d416">
+              <span class="m-doc-wrap-bumper">auto <a href="#a33a8c1a0347b981c256f0f5cdc22d416" class="m-doc-self">isFeasiblePoint</a>(</span><span class="m-doc-wrap">double time,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; state,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; control) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a31ae236e57f7180a1a3541479eca3d2d">
+              <span class="m-doc-wrap-bumper">auto <a href="#a31ae236e57f7180a1a3541479eca3d2d" class="m-doc-self">constraintsJacobianWRTState</a>(</span><span class="m-doc-wrap">double time,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; state,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; control,
+              <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>&amp; jacobian) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a3f34c659174b4e78e4f6b8e82d08f77a">
+              <span class="m-doc-wrap-bumper">auto <a href="#a3f34c659174b4e78e4f6b8e82d08f77a" class="m-doc-self">constraintsJacobianWRTControl</a>(</span><span class="m-doc-wrap">double time,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; state,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; control,
+              <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>&amp; jacobian) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a7ce26aebe71c9b7673346b13933e88ca">
+              <span class="m-doc-wrap-bumper">auto <a href="#a7ce26aebe71c9b7673346b13933e88ca" class="m-doc-self">constraintsJacobianWRTStateSparsity</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1optimalcontrol_1_1SparsityStructure.html" class="m-doc">iDynTree::<wbr />optimalcontrol::<wbr />SparsityStructure</a>&amp; stateSparsity) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a10eb66200e440411848151168ebb2383">
+              <span class="m-doc-wrap-bumper">auto <a href="#a10eb66200e440411848151168ebb2383" class="m-doc-self">constraintsJacobianWRTControlSparsity</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1optimalcontrol_1_1SparsityStructure.html" class="m-doc">iDynTree::<wbr />optimalcontrol::<wbr />SparsityStructure</a>&amp; controlSparsity) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a0c7c2ec358f224dbfe3b58c4be810fac">
+              <span class="m-doc-wrap-bumper">auto <a href="#a0c7c2ec358f224dbfe3b58c4be810fac" class="m-doc-self">constraintsSecondPartialDerivativeWRTState</a>(</span><span class="m-doc-wrap">double time,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; state,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; control,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; lambda,
+              <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>&amp; hessian) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ac35ace5bf40273c3af665af009e30d4b">
+              <span class="m-doc-wrap-bumper">auto <a href="#ac35ace5bf40273c3af665af009e30d4b" class="m-doc-self">constraintsSecondPartialDerivativeWRTControl</a>(</span><span class="m-doc-wrap">double time,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; state,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; control,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; lambda,
+              <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>&amp; hessian) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ade15d4ad045d7d00d598fcc5ab6b902a">
+              <span class="m-doc-wrap-bumper">auto <a href="#ade15d4ad045d7d00d598fcc5ab6b902a" class="m-doc-self">constraintsSecondPartialDerivativeWRTStateControl</a>(</span><span class="m-doc-wrap">double time,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; state,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; control,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; lambda,
+              <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>&amp; hessian) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ad14203a9175f6a98edd9f207d6f49774">
+              <span class="m-doc-wrap-bumper">auto <a href="#ad14203a9175f6a98edd9f207d6f49774" class="m-doc-self">constraintsSecondPartialDerivativeWRTStateSparsity</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1optimalcontrol_1_1SparsityStructure.html" class="m-doc">iDynTree::<wbr />optimalcontrol::<wbr />SparsityStructure</a>&amp; stateSparsity) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a111482e45422e7eeaf7a98c175c0d7c6">
+              <span class="m-doc-wrap-bumper">auto <a href="#a111482e45422e7eeaf7a98c175c0d7c6" class="m-doc-self">constraintsSecondPartialDerivativeWRTControlSparsity</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1optimalcontrol_1_1SparsityStructure.html" class="m-doc">iDynTree::<wbr />optimalcontrol::<wbr />SparsityStructure</a>&amp; controlSparsity) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="abc9a594a838f6da6e0bf4fcf232e19cb">
+              <span class="m-doc-wrap-bumper">auto <a href="#abc9a594a838f6da6e0bf4fcf232e19cb" class="m-doc-self">constraintsSecondPartialDerivativeWRTStateControlSparsity</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1optimalcontrol_1_1SparsityStructure.html" class="m-doc">iDynTree::<wbr />optimalcontrol::<wbr />SparsityStructure</a>&amp; stateControlSparsity) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>iDynTree documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/robotology/idyntree/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

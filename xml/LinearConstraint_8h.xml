@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="LinearConstraint_8h" kind="file" language="C++">
+    <compoundname>LinearConstraint.h</compoundname>
+    <includes refid="Constraint_8h" local="no">iDynTree/Constraint.h</includes>
+    <includes refid="MatrixDynSize_8h" local="no">iDynTree/Core/MatrixDynSize.h</includes>
+    <includes refid="TimeVaryingObject_8h" local="no">iDynTree/TimeVaryingObject.h</includes>
+    <includes refid="SparsityStructure_8h" local="no">iDynTree/SparsityStructure.h</includes>
+    <includes local="no">string</includes>
+    <includes local="no">memory</includes>
+    <incdepgraph>
+      <node id="2">
+        <label>string</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/LinearConstraint.h</label>
+        <link refid="LinearConstraint_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint" prot="public">iDynTree::optimalcontrol::LinearConstraint</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <innernamespace refid="namespaceiDynTree_1_1optimalcontrol">iDynTree::optimalcontrol</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/LinearConstraint.h"/>
+  </compounddef>
+</doxygen>

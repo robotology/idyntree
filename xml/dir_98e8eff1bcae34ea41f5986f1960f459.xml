@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_98e8eff1bcae34ea41f5986f1960f459" kind="dir">
+    <compoundname>iDynTree</compoundname>
+    <innerfile refid="iKinConversions_8h">iKinConversions.h</innerfile>
+    <innerfile refid="iKinConversionsImplementation_8h">iKinConversionsImplementation.h</innerfile>
+    <innerfile refid="skinDynLibConversions_8h">skinDynLibConversions.h</innerfile>
+    <innerfile refid="skinDynLibConversionsImplementation_8h">skinDynLibConversionsImplementation.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/"/>
+  </compounddef>
+</doxygen>

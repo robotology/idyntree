@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="LinkTraversalsCache_8h" kind="file" language="C++">
+    <compoundname>LinkTraversalsCache.h</compoundname>
+    <includes local="no">vector</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
+    <includedby refid="BerdyHelper_8h" local="no">iDynTree/Estimation/BerdyHelper.h</includedby>
+    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>vector</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/Model/LinkTraversalsCache.h</label>
+        <link refid="LinkTraversalsCache_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1LinkTraversalsCache" prot="public">iDynTree::LinkTraversalsCache</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/LinkTraversalsCache.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,449 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::ThreeAxisForceTorqueContactSensor</compoundname>
+    <basecompoundref refid="classiDynTree_1_1LinkSensor" prot="public" virt="non-virtual">iDynTree::LinkSensor</basecompoundref>
+    <includes local="no">iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h</includes>
+      <sectiondef kind="user-defined">
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a40cfcd0ae4f87a355e9a103afae53df9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::ThreeAxisForceTorqueContactSensor::setLoadCellLocations</definition>
+        <argsstring>(std::vector&lt; Position &gt; &amp;loadCellLocations)</argsstring>
+        <name>setLoadCellLocations</name>
+        <param>
+          <type>std::vector&lt; <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &gt; &amp;</type>
+          <declname>loadCellLocations</declname>
+        </param>
+        <briefdescription>
+<para>Helper methods to conver from raw load cells measurements (expressed in Newtons) to the measurement of the three axis F/T sensors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Set the load cells locations in sensor frame.</para>
+<para>Note the load cells are assumed to be measured the force applied on the link, on the z-direction in the sensor frame, coherently with the sensor definition. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="150" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a6635108e1e4778e84cb8cd3a4261dc18" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &gt;</type>
+        <definition>std::vector&lt;Position&gt; iDynTree::ThreeAxisForceTorqueContactSensor::getLoadCellLocations</definition>
+        <argsstring>() const</argsstring>
+        <name>getLoadCellLocations</name>
+        <briefdescription>
+<para>Get the load cells locations in sensor frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="155" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1ab4c6badea80c6d3a48ae1b6d96b76cc8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref></type>
+        <definition>Vector3 iDynTree::ThreeAxisForceTorqueContactSensor::computeThreeAxisForceTorqueFromLoadCellMeasurements</definition>
+        <argsstring>(VectorDynSize &amp;loadCellMeasurements) const</argsstring>
+        <name>computeThreeAxisForceTorqueFromLoadCellMeasurements</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>loadCellMeasurements</declname>
+        </param>
+        <briefdescription>
+<para>Compute the force/torque measurements from the raw load cell readings. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>a zero vector in case of error, the result otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="162" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a0cb7b4dcec179b29fefaa116f8a515a8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position iDynTree::ThreeAxisForceTorqueContactSensor::computeCenterOfPressureFromLoadCellMeasurements</definition>
+        <argsstring>(VectorDynSize &amp;loadCellMeasurements) const</argsstring>
+        <name>computeCenterOfPressureFromLoadCellMeasurements</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>loadCellMeasurements</declname>
+        </param>
+        <briefdescription>
+<para>Compute the center of pressure in sensor frame from the raw load cell readings. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="167" column="18"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1aeddb5df90b22293098f40b3fa042d21a" prot="private" static="no" mutable="no">
+        <type>ThreeAxisForceTorqueContactSensorPrivateAttributes *</type>
+        <definition>ThreeAxisForceTorqueContactSensorPrivateAttributes* iDynTree::ThreeAxisForceTorqueContactSensor::pimpl</definition>
+        <argsstring></argsstring>
+        <name>pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="51" column="61" bodyfile="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a68628c854b8a28e510aba96f0c802e55" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ThreeAxisForceTorqueContactSensor::ThreeAxisForceTorqueContactSensor</definition>
+        <argsstring>()</argsstring>
+        <name>ThreeAxisForceTorqueContactSensor</name>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="57" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1ad268a5a84823f122b83fc59884734965" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ThreeAxisForceTorqueContactSensor::ThreeAxisForceTorqueContactSensor</definition>
+        <argsstring>(const ThreeAxisForceTorqueContactSensor &amp;other)</argsstring>
+        <name>ThreeAxisForceTorqueContactSensor</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor" kindref="compound">ThreeAxisForceTorqueContactSensor</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="62" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a1be09ff575e14e196fd14ed8713e87fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor" kindref="compound">ThreeAxisForceTorqueContactSensor</ref> &amp;</type>
+        <definition>ThreeAxisForceTorqueContactSensor&amp; iDynTree::ThreeAxisForceTorqueContactSensor::operator=</definition>
+        <argsstring>(const ThreeAxisForceTorqueContactSensor &amp;other)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor" kindref="compound">ThreeAxisForceTorqueContactSensor</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy operator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="67" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a5cdc5c339744808ca229f7dd0fb79ab5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::ThreeAxisForceTorqueContactSensor::~ThreeAxisForceTorqueContactSensor</definition>
+        <argsstring>()</argsstring>
+        <name>~ThreeAxisForceTorqueContactSensor</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="72" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a355c0226fb7c34e765123b965efdac85" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ThreeAxisForceTorqueContactSensor::setName</definition>
+        <argsstring>(const std::string &amp;_name)</argsstring>
+        <name>setName</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1a40cafcac5f0c1567e44d53c775641818">setName</reimplements>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>_name</declname>
+        </param>
+        <briefdescription>
+<para>Set the name (id) of the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="78" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a137df78d69f448d6a1e1876158167eec" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ThreeAxisForceTorqueContactSensor::setLinkSensorTransform</definition>
+        <argsstring>(const iDynTree::Transform &amp;link_H_sensor)</argsstring>
+        <name>setLinkSensorTransform</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1a716a29b8598842583ac5c92903a978f5">setLinkSensorTransform</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>link_H_sensor</declname>
+        </param>
+        <briefdescription>
+<para>Set the transform from the sensor to the parent link attached to the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if link_index is parent link attached to the accelerometer sensor, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="85" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a7e2978a17832c1405d6667db5515aa8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ThreeAxisForceTorqueContactSensor::setParentLink</definition>
+        <argsstring>(const std::string &amp;parent)</argsstring>
+        <name>setParentLink</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1a9420746600b52d524f2c6fde5023147d">setParentLink</reimplements>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>parentLinkName</declname>
+        </param>
+        <briefdescription>
+<para>Set the name of the parent <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="90" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1ae29362a072ca8c3dcace8c39b553c83a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ThreeAxisForceTorqueContactSensor::setParentLinkIndex</definition>
+        <argsstring>(const LinkIndex &amp;parent_index)</argsstring>
+        <name>setParentLinkIndex</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1aec8002495ae7ca62e3e8b516c55e5a0c">setParentLinkIndex</reimplements>
+        <param>
+          <type>const LinkIndex &amp;</type>
+        </param>
+        <briefdescription>
+<para>Set the numeric index of the parent link of the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="95" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a8297291284faa8217f01bad0fed9ca2d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::ThreeAxisForceTorqueContactSensor::getName</definition>
+        <argsstring>() const</argsstring>
+        <name>getName</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1a4a62adb1d4c1e4bedca8762783ab0468">getName</reimplements>
+        <briefdescription>
+<para>Get the id (name) of sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="101" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1aac80df24ed741903317fb8a725ce0e36" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SensorType</type>
+        <definition>SensorType iDynTree::ThreeAxisForceTorqueContactSensor::getSensorType</definition>
+        <argsstring>() const</argsstring>
+        <name>getSensorType</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1a6dd712921c150fddd33217694feb3652">getSensorType</reimplements>
+        <briefdescription>
+<para>Get the type of the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the type of the sensor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="106" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a6d1bf2bf8184f0a079f0c0bffc2c7b1f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::ThreeAxisForceTorqueContactSensor::getParentLink</definition>
+        <argsstring>() const</argsstring>
+        <name>getParentLink</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1a4d664e0bb40e93c9c966f286a5205ed6">getParentLink</reimplements>
+        <briefdescription>
+<para>Get the name of the parent <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="112" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1ad956d3ad8f4670cf87047ca3d9971698" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::ThreeAxisForceTorqueContactSensor::getParentLinkIndex</definition>
+        <argsstring>() const</argsstring>
+        <name>getParentLinkIndex</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1a45fc4c098204d10e64c4c82ae58ddd2c">getParentLinkIndex</reimplements>
+        <briefdescription>
+<para>Get the numeric index of the parent <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the index of the parent <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> of the sensor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="117" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1aeb7e44f72ffbb9991b0d9995c1040627" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>Transform iDynTree::ThreeAxisForceTorqueContactSensor::getLinkSensorTransform</definition>
+        <argsstring>() const</argsstring>
+        <name>getLinkSensorTransform</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1ad5cb2901457ca5e0dedee1a6230ac858">getLinkSensorTransform</reimplements>
+        <briefdescription>
+<para>Return the transform that applied on a element expressed in sensor frames it transform it in one expressed in the link frame (. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="95">\[ {}^l H_s \]</formula>).</para>
+<para><simplesect kind="return"><para>the link_H_sensor transform </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="120" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a659cbf015f650a0874fe4db00020cd10" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ThreeAxisForceTorqueContactSensor::isValid</definition>
+        <argsstring>() const</argsstring>
+        <name>isValid</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1ace89679ad53fd11326ec00dc82ebd925">isValid</reimplements>
+        <briefdescription>
+<para>Return true if the sensor has been appropriately configured (all setters where setted, false otherwise. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="125" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a670171513daa59f2494bd08af665e3ea" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> *</type>
+        <definition>Sensor* iDynTree::ThreeAxisForceTorqueContactSensor::clone</definition>
+        <argsstring>() const</argsstring>
+        <name>clone</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1a6428f5534e54c607bc5e773073c6c50e">clone</reimplements>
+        <briefdescription>
+<para>Return a pointer to a copy of this sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="130" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1aff3b2cd0b1a847dc6336c55042131e6e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ThreeAxisForceTorqueContactSensor::updateIndices</definition>
+        <argsstring>(const Model &amp;model)</argsstring>
+        <name>updateIndices</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1ae91fc5a5922a99815b0cdc9de9f1ac88">updateIndices</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Update all the indices (link/frames) contained in this sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="135" column="14"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class representing a three axis force-torque contact sensor. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>It is meant to represent sole sensor composed of a array of uniaxial pressure sensors, such as the one present in the soles of Boston Dynamics Atlas, SoftBank Robotics Nao or ROBOTIS OP2.</para>
+<para>The sensor is assumed to be measuring the z-component of the force and the x,y component of the torque of the net external force/torque applied on the link expressed in the sensor frame.</para>
+<para><simplesect kind="note"><para>While the SixAxisFTSensor is meant to model the force torque measured at a joint, this sensor is modeled as measuring directly (part) of the external contact force exerted on a link. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::ThreeAxisForceTorqueContactSensor</label>
+        <link refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::LinkSensor</label>
+        <link refid="classiDynTree_1_1LinkSensor"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::Sensor</label>
+        <link refid="classiDynTree_1_1Sensor"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>iDynTree::ThreeAxisForceTorqueContactSensor</label>
+        <link refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::LinkSensor</label>
+        <link refid="classiDynTree_1_1LinkSensor"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::Sensor</label>
+        <link refid="classiDynTree_1_1Sensor"/>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" line="47" column="5" bodyfile="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h" bodystart="48" bodyend="171"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a670171513daa59f2494bd08af665e3ea" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>clone</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a0cb7b4dcec179b29fefaa116f8a515a8" prot="public" virt="non-virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>computeCenterOfPressureFromLoadCellMeasurements</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1ab4c6badea80c6d3a48ae1b6d96b76cc8" prot="public" virt="non-virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>computeThreeAxisForceTorqueFromLoadCellMeasurements</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1aeb7e44f72ffbb9991b0d9995c1040627" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>getLinkSensorTransform</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a6635108e1e4778e84cb8cd3a4261dc18" prot="public" virt="non-virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>getLoadCellLocations</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a8297291284faa8217f01bad0fed9ca2d" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>getName</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a6d1bf2bf8184f0a079f0c0bffc2c7b1f" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>getParentLink</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1ad956d3ad8f4670cf87047ca3d9971698" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>getParentLinkIndex</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1aac80df24ed741903317fb8a725ce0e36" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>getSensorType</name></member>
+      <member refid="classiDynTree_1_1LinkSensor_1a371122608cfbaf0c9fdf562b2780c786" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>isConsistent</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a659cbf015f650a0874fe4db00020cd10" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>isValid</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a1be09ff575e14e196fd14ed8713e87fb" prot="public" virt="non-virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1aeddb5df90b22293098f40b3fa042d21a" prot="private" virt="non-virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>pimpl</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a137df78d69f448d6a1e1876158167eec" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>setLinkSensorTransform</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a40cfcd0ae4f87a355e9a103afae53df9" prot="public" virt="non-virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>setLoadCellLocations</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a355c0226fb7c34e765123b965efdac85" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>setName</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a7e2978a17832c1405d6667db5515aa8b" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>setParentLink</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1ae29362a072ca8c3dcace8c39b553c83a" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>setParentLinkIndex</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a68628c854b8a28e510aba96f0c802e55" prot="public" virt="non-virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>ThreeAxisForceTorqueContactSensor</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1ad268a5a84823f122b83fc59884734965" prot="public" virt="non-virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>ThreeAxisForceTorqueContactSensor</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1aff3b2cd0b1a847dc6336c55042131e6e" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>updateIndices</name></member>
+      <member refid="classiDynTree_1_1LinkSensor_1a6d58c4792a359f962a64f800f56ecb5a" prot="public" virt="pure-virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>~LinkSensor</name></member>
+      <member refid="classiDynTree_1_1Sensor_1ab47aa38253b58f2a1c537e5956684e47" prot="public" virt="pure-virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>~Sensor</name></member>
+      <member refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a5cdc5c339744808ca229f7dd0fb79ab5" prot="public" virt="virtual"><scope>iDynTree::ThreeAxisForceTorqueContactSensor</scope><name>~ThreeAxisForceTorqueContactSensor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

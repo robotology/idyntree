@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="ForceTorqueSensorElement_8h" kind="file" language="C++">
+    <compoundname>ForceTorqueSensorElement.h</compoundname>
+    <includes refid="XMLElement_8h" local="no">iDynTree/XMLElement.h</includes>
+    <includes refid="SensorElement_8h" local="yes">SensorElement.h</includes>
+    <innerclass refid="classiDynTree_1_1ForceTorqueSensorElement" prot="public">iDynTree::ForceTorqueSensorElement</innerclass>
+    <innerclass refid="classiDynTree_1_1ForceTorqueSensorHelper" prot="public">iDynTree::ForceTorqueSensorHelper</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="private/ForceTorqueSensorElement.h"/>
+  </compounddef>
+</doxygen>

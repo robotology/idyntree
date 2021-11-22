@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimalcontrol_1_1MultiBodySystem" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::optimalcontrol::MultiBodySystem</compoundname>
+    <basecompoundref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" prot="public" virt="non-virtual">iDynTree::optimalcontrol::DynamicalSystem</basecompoundref>
+    <includes local="no">iDynTree/MultiBodySystem.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultiBodySystem_1ad359b8ee85ead4e31da86d09595ad082" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::MultiBodySystem::MultiBodySystem</definition>
+        <argsstring>(const iDynTree::Model &amp;)</argsstring>
+        <name>MultiBodySystem</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/MultiBodySystem.h" line="38" column="13"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::optimalcontrol::DynamicalSystem</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::optimalcontrol::MultiBodySystem</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1MultiBodySystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>iDynTree::optimalcontrol::DynamicalSystem</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::optimalcontrol::MultiBodySystem</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1MultiBodySystem"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/MultiBodySystem.h" line="33" column="9" bodyfile="iDynTree/MultiBodySystem.h" bodystart="34" bodyend="40"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a9106ad9134ccfe7eed374dbd9e0192d2" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>controlInput</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a07c72447bba26fad4be33d3d629fb9e9" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>controlInput</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ae9048969fa6bb586f08332aa279ac01a" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>controlSpaceSize</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1af4b91c95d739fd82a0013560fa051233" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>DynamicalSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ab82065e18425aa56e59b030519d5e123" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>DynamicalSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a4020c60fe630d1f5b6b4baf06e7b42a4" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>DynamicalSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aa10bd35bc49f5dfaea48ffeecf945312" prot="public" virt="pure-virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>dynamics</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1adb980635dc572a927cef8bd46e6d5fb9" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>dynamicsControlFirstDerivative</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1adce1c8de3d7c21ff9b349337c45526bc" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>dynamicsControlFirstDerivativeSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a2fe62ab7639384a183bedce734aa6056" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>dynamicsSecondPartialDerivativeWRTControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1adde7e5979c176b76d4334635210ead91" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>dynamicsSecondPartialDerivativeWRTControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a7525017f74a6be06a5b33f6ab1a534de" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>dynamicsSecondPartialDerivativeWRTState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aa05844446c984946204dfda39a13aa8a" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>dynamicsSecondPartialDerivativeWRTStateControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ae146dece07aaff9858da1f9ab0bb8464" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>dynamicsSecondPartialDerivativeWRTStateControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a59b187545289936a58b328dd879d1804" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>dynamicsSecondPartialDerivativeWRTStateSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ae107a97a87ddc0f796e169c6de2cc39b" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>dynamicsStateFirstDerivative</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a53c392202df88d48e4066a52e1ef3299" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>dynamicsStateFirstDerivativeSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a8d4e1f2401927edd62ab3236f787bda0" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>initialState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aacad7dc34a95cc980482026aa0340ea5" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>initialState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1MultiBodySystem_1ad359b8ee85ead4e31da86d09595ad082" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>MultiBodySystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aa7075f1f51fa22e426b6dd94f2297530" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>setControlInput</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a5a08463a75e03ef33a3b945a47c03120" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>setInitialState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a1fdc25cc07f3bc2d02ac0cc2c74e8abc" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>stateSpaceSize</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a99a0776f0a23fd9a672c1be966839e81" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>~DynamicalSystem</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

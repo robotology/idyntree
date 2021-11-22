@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespaceinternal_1_1kinematics" kind="namespace" language="C++">
+    <compoundname>internal::kinematics</compoundname>
+    <innerclass refid="classinternal_1_1kinematics_1_1InverseKinematicsData" prot="public">internal::kinematics::InverseKinematicsData</innerclass>
+    <innerclass refid="classinternal_1_1kinematics_1_1SparsityHelper" prot="public">internal::kinematics::SparsityHelper</innerclass>
+    <innerclass refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP" prot="public">internal::kinematics::InverseKinematicsNLP</innerclass>
+    <innerclass refid="classinternal_1_1kinematics_1_1TransformConstraint" prot="public">internal::kinematics::TransformConstraint</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="InverseKinematicsData_8h_1a644811f328012fcdfb6b45ab0492ef18" prot="public" static="no">
+        <type>std::map&lt; int, <ref refid="classinternal_1_1kinematics_1_1TransformConstraint" kindref="compound">internal::kinematics::TransformConstraint</ref> &gt;</type>
+        <definition>typedef std::map&lt;int, internal::kinematics::TransformConstraint&gt; internal::kinematics::TransformMap</definition>
+        <argsstring></argsstring>
+        <name>TransformMap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsData.h" line="37" column="22" bodyfile="private/InverseKinematicsData.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="private/InverseKinematicsData.h" line="33" column="1"/>
+  </compounddef>
+</doxygen>

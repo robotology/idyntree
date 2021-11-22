@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="AttitudeQuaternionEKF_8h" kind="file" language="C++">
+    <compoundname>AttitudeQuaternionEKF.h</compoundname>
+    <includes refid="AttitudeEstimator_8h" local="no">iDynTree/Estimation/AttitudeEstimator.h</includes>
+    <includes refid="ExtendedKalmanFilter_8h" local="no">iDynTree/Estimation/ExtendedKalmanFilter.h</includes>
+    <includes refid="Direction_8h" local="no">iDynTree/Core/Direction.h</includes>
+    <innerclass refid="structiDynTree_1_1AttitudeQuaternionEKFParameters" prot="public">iDynTree::AttitudeQuaternionEKFParameters</innerclass>
+    <innerclass refid="classiDynTree_1_1AttitudeQuaternionEKF" prot="public">iDynTree::AttitudeQuaternionEKF</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="AttitudeQuaternionEKF_8h_1a0dd93cfe8edb7763d1f57d6454c1c25f" prot="public" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int iDynTree::output_dimensions_with_magnetometer</definition>
+        <argsstring></argsstring>
+        <name>output_dimensions_with_magnetometer</name>
+        <initializer>= 4</initializer>
+        <briefdescription>
+<para>dimension of <formula id="259">$ \mathbb{R}^3 \times \mathbb{R} $</formula> accelerometer measurements and magnetometer yaw measurement </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="20" column="24" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="AttitudeQuaternionEKF_8h_1a8772fb8ad891bd276db791f2e815de11" prot="public" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int iDynTree::output_dimensions_without_magnetometer</definition>
+        <argsstring></argsstring>
+        <name>output_dimensions_without_magnetometer</name>
+        <initializer>= 3</initializer>
+        <briefdescription>
+<para>dimension of <formula id="225">$ \mathbb{R}^3 $</formula> accelerometer measurements </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="21" column="24" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="AttitudeQuaternionEKF_8h_1ae4a3a4ece8b00835bf57f387795ba015" prot="public" static="no" mutable="no">
+        <type>const unsigned int</type>
+        <definition>const unsigned int iDynTree::input_dimensions</definition>
+        <argsstring></argsstring>
+        <name>input_dimensions</name>
+        <initializer>= 3</initializer>
+        <briefdescription>
+<para>dimension of <formula id="225">$ \mathbb{R}^3 $</formula> gyroscope measurements </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="22" column="24" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h"/>
+  </compounddef>
+</doxygen>

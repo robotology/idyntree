@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="BipedFootContactClassifier_8h" kind="file" language="C++">
+    <compoundname>BipedFootContactClassifier.h</compoundname>
+    <includes local="no">memory</includes>
+    <includes refid="ContactStateMachine_8h" local="yes">ContactStateMachine.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/Estimation/BipedFootContactClassifier.h</label>
+        <link refid="BipedFootContactClassifier_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1BipedFootContactClassifier" prot="public">iDynTree::BipedFootContactClassifier</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="BipedFootContactClassifier_8h_1a87e9224ed19ef268687c0d2522048946" prot="public" static="no" strong="no">
+        <type></type>
+        <name>SwitchingPattern</name>
+        <enumvalue id="BipedFootContactClassifier_8h_1a87e9224ed19ef268687c0d2522048946a524b0c6a15e4d5b55f396a39e42ab305" prot="public">
+          <name>ALTERNATE_CONTACT</name>
+          <briefdescription>
+<para>Switching active foot between left and right at every double stance. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="BipedFootContactClassifier_8h_1a87e9224ed19ef268687c0d2522048946ad1645067b3ead8a700e7551ff0af01d9" prot="public">
+          <name>LATEST_ACTIVE_CONTACT</name>
+          <briefdescription>
+<para>Setting active foot to the one that made contact most recently <linebreak/>
+ </para>
+          </briefdescription>
+          <detaileddescription>
+<para><simplesect kind="warning"><para>this pattern remains unimplemented in the current version of this class using this pattern will always return left foot as the active foot </para>
+</simplesect>
+</para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="BipedFootContactClassifier_8h_1a87e9224ed19ef268687c0d2522048946aa6e9a49639f39ee24e3fbafc4cee78f0" prot="public">
+          <name>DEFAULT_CONTACT</name>
+          <briefdescription>
+<para>Fixing active foot to the default foot defined by the user <linebreak/>
+ </para>
+          </briefdescription>
+          <detaileddescription>
+<para><simplesect kind="warning"><para>this pattern remains unimplemented in the current version of this class using this pattern will always return left foot as the active foot </para>
+</simplesect>
+</para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Enumeration of switching pattern. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BipedFootContactClassifier.h" line="30" column="5" bodyfile="iDynTree/Estimation/BipedFootContactClassifier.h" bodystart="31" bodyend="50"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Estimation/BipedFootContactClassifier.h"/>
+  </compounddef>
+</doxygen>

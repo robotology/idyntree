@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="DynamicsUtils_8h" kind="file" language="C++">
+    <compoundname>DynamicsUtils.h</compoundname>
+    <includes refid="SpatialMotionVector_8h" local="no">iDynTree/Core/SpatialMotionVector.h</includes>
+    <includes refid="SpatialForceVector_8h" local="no">iDynTree/Core/SpatialForceVector.h</includes>
+    <includes refid="SpatialInertia_8h" local="no">iDynTree/Core/SpatialInertia.h</includes>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="DynamicsUtils_8h_1aed28749437ab0ff261382d34506ffad4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::biasWrenchVelocityDerivative</definition>
+        <argsstring>(SpatialInertia M, SpatialMotionVector V)</argsstring>
+        <name>biasWrenchVelocityDerivative</name>
+        <param>
+          <type>SpatialInertia</type>
+          <declname>M</declname>
+        </param>
+        <param>
+          <type>SpatialMotionVector</type>
+          <declname>V</declname>
+        </param>
+        <briefdescription>
+<para>Given a rigid body inertia <formula id="8">$M$</formula> and spatial motion vector <formula id="9">$V$</formula>, the bias wrench <formula id="10">$B$</formula> of rigid body is defined as: </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="11">\[ B = \times \]</formula> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DynamicsUtils.h" line="28" column="5" declfile="iDynTree/Model/DynamicsUtils.h" declline="28" declcolumn="5"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/DynamicsUtils.h"/>
+  </compounddef>
+</doxygen>

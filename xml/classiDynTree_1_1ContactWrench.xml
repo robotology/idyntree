@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1ContactWrench" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::ContactWrench</compoundname>
+    <includes local="no">iDynTree/Model/ContactWrench.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1ContactWrench_1a1ea6c9c6e4fb7442484740ca2da537fd" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position iDynTree::ContactWrench::m_contactPoint</definition>
+        <argsstring></argsstring>
+        <name>m_contactPoint</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ContactWrench.h" line="36" column="18" bodyfile="iDynTree/Model/ContactWrench.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1ContactWrench_1a8fce640ebec1a5ceb34fda13108b7338" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
+        <definition>Wrench iDynTree::ContactWrench::m_contactWrench</definition>
+        <argsstring></argsstring>
+        <name>m_contactWrench</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ContactWrench.h" line="37" column="18" bodyfile="iDynTree/Model/ContactWrench.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1ContactWrench_1a49705e50e9f3720503a7566b3fba1a35" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t iDynTree::ContactWrench::m_contactId</definition>
+        <argsstring></argsstring>
+        <name>m_contactId</name>
+        <briefdescription>
+<para>Unique id identifing the contact. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This id is propagated to the contact wrench data structure. It is implemented mainly for compatibility with the skinDynLib library. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ContactWrench.h" line="44" column="21" bodyfile="iDynTree/Model/ContactWrench.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1ContactWrench_1a06a5add49a95bf80c6de46bbce39a07e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+        <definition>Position&amp; iDynTree::ContactWrench::contactPoint</definition>
+        <argsstring>()</argsstring>
+        <name>contactPoint</name>
+        <briefdescription>
+<para><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> of a point on the contact surface. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is the position of a point (expressed in the link frame) that lies on the contact surface.</para>
+<para>Its precise definition is application dependent.</para>
+<para>If the <ref refid="classiDynTree_1_1ContactWrench" kindref="compound">ContactWrench</ref> class is used to represent a pure force applied on a point, the contactPoint is the point in which the pure force is applied.</para>
+<para>If the <ref refid="classiDynTree_1_1ContactWrench" kindref="compound">ContactWrench</ref> class is used to represent contact information coming from a tacticle system, the contact point may be the average between all the taxels (tactile elements) belonging to the contact. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ContactWrench.h" line="63" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ContactWrench_1a6cfed634a1fca25e67ddf7a2506a74a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> &amp;</type>
+        <definition>Wrench&amp; iDynTree::ContactWrench::contactWrench</definition>
+        <argsstring>()</argsstring>
+        <name>contactWrench</name>
+        <briefdescription>
+<para><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> that an external element excert on a link through the contact. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This wrench (expressed with respect to the contactPoint and with the orientation of the link frame) is the wrench excerted on the link by an external element. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ContactWrench.h" line="72" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ContactWrench_1a2d0b7ead32c4246379d69838498cb58c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t &amp;</type>
+        <definition>std::size_t&amp; iDynTree::ContactWrench::contactId</definition>
+        <argsstring>()</argsstring>
+        <name>contactId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ContactWrench.h" line="74" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ContactWrench_1acdd900781b0eff26fa29ee67c09da16d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+        <definition>const Position&amp; iDynTree::ContactWrench::contactPoint</definition>
+        <argsstring>() const</argsstring>
+        <name>contactPoint</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ContactWrench.h" line="76" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ContactWrench_1acddc7a78c4feb082421704066b11b5e9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> &amp;</type>
+        <definition>const Wrench&amp; iDynTree::ContactWrench::contactWrench</definition>
+        <argsstring>() const</argsstring>
+        <name>contactWrench</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ContactWrench.h" line="77" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ContactWrench_1ab0cdcc5736bd614f7a3c16e72b7db317" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::size_t &amp;</type>
+        <definition>const std::size_t&amp; iDynTree::ContactWrench::contactId</definition>
+        <argsstring>() const</argsstring>
+        <name>contactId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ContactWrench.h" line="78" column="27"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A wrench excerted on a link due to an external contact. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The contact wrench is represented by two quantities the contactPoint and the contactWrench . </para>
+    </detaileddescription>
+    <location file="iDynTree/Model/ContactWrench.h" line="33" column="5" bodyfile="iDynTree/Model/ContactWrench.h" bodystart="34" bodyend="80"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1ContactWrench_1a2d0b7ead32c4246379d69838498cb58c" prot="public" virt="non-virtual"><scope>iDynTree::ContactWrench</scope><name>contactId</name></member>
+      <member refid="classiDynTree_1_1ContactWrench_1ab0cdcc5736bd614f7a3c16e72b7db317" prot="public" virt="non-virtual"><scope>iDynTree::ContactWrench</scope><name>contactId</name></member>
+      <member refid="classiDynTree_1_1ContactWrench_1a06a5add49a95bf80c6de46bbce39a07e" prot="public" virt="non-virtual"><scope>iDynTree::ContactWrench</scope><name>contactPoint</name></member>
+      <member refid="classiDynTree_1_1ContactWrench_1acdd900781b0eff26fa29ee67c09da16d" prot="public" virt="non-virtual"><scope>iDynTree::ContactWrench</scope><name>contactPoint</name></member>
+      <member refid="classiDynTree_1_1ContactWrench_1a6cfed634a1fca25e67ddf7a2506a74a3" prot="public" virt="non-virtual"><scope>iDynTree::ContactWrench</scope><name>contactWrench</name></member>
+      <member refid="classiDynTree_1_1ContactWrench_1acddc7a78c4feb082421704066b11b5e9" prot="public" virt="non-virtual"><scope>iDynTree::ContactWrench</scope><name>contactWrench</name></member>
+      <member refid="classiDynTree_1_1ContactWrench_1a49705e50e9f3720503a7566b3fba1a35" prot="private" virt="non-virtual"><scope>iDynTree::ContactWrench</scope><name>m_contactId</name></member>
+      <member refid="classiDynTree_1_1ContactWrench_1a1ea6c9c6e4fb7442484740ca2da537fd" prot="private" virt="non-virtual"><scope>iDynTree::ContactWrench</scope><name>m_contactPoint</name></member>
+      <member refid="classiDynTree_1_1ContactWrench_1a8fce640ebec1a5ceb34fda13108b7338" prot="private" virt="non-virtual"><scope>iDynTree::ContactWrench</scope><name>m_contactWrench</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

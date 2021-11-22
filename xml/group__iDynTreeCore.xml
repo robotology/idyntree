@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="group__iDynTreeCore" kind="group">
+    <compoundname>iDynTreeCore</compoundname>
+    <title>%iDynTree core data structures</title>
+    <innerclass refid="classiDynTree_1_1ArticulatedBodyInertia" prot="public">iDynTree::ArticulatedBodyInertia</innerclass>
+    <innerclass refid="classiDynTree_1_1Axis" prot="public">iDynTree::Axis</innerclass>
+    <innerclass refid="classiDynTree_1_1ClassicalAcc" prot="public">iDynTree::ClassicalAcc</innerclass>
+    <innerclass refid="classiDynTree_1_1Direction" prot="public">iDynTree::Direction</innerclass>
+    <innerclass refid="classiDynTree_1_1MatrixDynSize" prot="public">iDynTree::MatrixDynSize</innerclass>
+    <innerclass refid="classiDynTree_1_1MatrixFixSize" prot="public">iDynTree::MatrixFixSize</innerclass>
+    <innerclass refid="classiDynTree_1_1Position" prot="public">iDynTree::Position</innerclass>
+    <innerclass refid="classiDynTree_1_1PositionRaw" prot="public">iDynTree::PositionRaw</innerclass>
+    <innerclass refid="classiDynTree_1_1Rotation" prot="public">iDynTree::Rotation</innerclass>
+    <innerclass refid="classiDynTree_1_1RotationalInertiaRaw" prot="public">iDynTree::RotationalInertiaRaw</innerclass>
+    <innerclass refid="classiDynTree_1_1RotationRaw" prot="public">iDynTree::RotationRaw</innerclass>
+    <innerclass refid="classiDynTree_1_1SpatialAcc" prot="public">iDynTree::SpatialAcc</innerclass>
+    <innerclass refid="classiDynTree_1_1SpatialForceVector" prot="public">iDynTree::SpatialForceVector</innerclass>
+    <innerclass refid="classiDynTree_1_1SpatialInertia" prot="public">iDynTree::SpatialInertia</innerclass>
+    <innerclass refid="classiDynTree_1_1SpatialInertiaRaw" prot="public">iDynTree::SpatialInertiaRaw</innerclass>
+    <innerclass refid="classiDynTree_1_1SpatialMomentum" prot="public">iDynTree::SpatialMomentum</innerclass>
+    <innerclass refid="classiDynTree_1_1SpatialMotionVector" prot="public">iDynTree::SpatialMotionVector</innerclass>
+    <innerclass refid="classiDynTree_1_1Transform" prot="public">iDynTree::Transform</innerclass>
+    <innerclass refid="classiDynTree_1_1TransformDerivative" prot="public">iDynTree::TransformDerivative</innerclass>
+    <innerclass refid="classiDynTree_1_1Twist" prot="public">iDynTree::Twist</innerclass>
+    <innerclass refid="classiDynTree_1_1VectorDynSize" prot="public">iDynTree::VectorDynSize</innerclass>
+    <innerclass refid="classiDynTree_1_1VectorFixSize" prot="public">iDynTree::VectorFixSize</innerclass>
+    <innerclass refid="classiDynTree_1_1Wrench" prot="public">iDynTree::Wrench</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group__iDynTreeCore_1ga92610f375c318c6d08be7c5fb29c7222" prot="public" static="no">
+        <name>SPATIALVECTOR_TEMPLATE_HDR</name>
+        <initializer>template &lt;typename DerivedSpatialVecT&gt;</initializer>
+        <briefdescription>
+<para>Class providing an interface to any spatial motion or force vector, which provides raw coordinates. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>A motion spatial vector can be used to describe twist, spatial acceleration, and derivatives.</para>
+<para>A force spatial vector can be used to describe spatial momentum, wrench, and derivatives.</para>
+<para><simplesect kind="note"><para>in iDynTree, the spatial vector follows this serialization: the first three elements are the linear part and the second three elements are the angular part. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="76" column="9" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>iDynTree provides basic data structures to implement kinemanics and dynamics algorithms. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

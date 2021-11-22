@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="Optimizer_8h" kind="file" language="C++">
+    <compoundname>Optimizer.h</compoundname>
+    <includes local="no">memory</includes>
+    <includes refid="OptimizationProblem_8h" local="no">iDynTree/OptimizationProblem.h</includes>
+    <includedby refid="MultipleShootingSolver_8h" local="no">iDynTree/OCSolvers/MultipleShootingSolver.h</includedby>
+    <includedby refid="AlglibInterface_8h" local="no">iDynTree/Optimizers/AlglibInterface.h</includedby>
+    <includedby refid="IpoptInterface_8h" local="no">iDynTree/Optimizers/IpoptInterface.h</includedby>
+    <includedby refid="OsqpInterface_8h" local="no">iDynTree/Optimizers/OsqpInterface.h</includedby>
+    <includedby refid="WorhpInterface_8h" local="no">iDynTree/Optimizers/WorhpInterface.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/Optimizer.h</label>
+        <link refid="Optimizer_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1optimization_1_1Optimizer" prot="public">iDynTree::optimization::Optimizer</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <innernamespace refid="namespaceiDynTree_1_1optimization">iDynTree::optimization</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Optimizer.h"/>
+  </compounddef>
+</doxygen>

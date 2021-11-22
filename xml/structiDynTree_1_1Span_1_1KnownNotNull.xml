@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1Span_1_1KnownNotNull" kind="struct" language="C++" prot="private">
+    <compoundname>iDynTree::Span::KnownNotNull</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1Span_1_1KnownNotNull_1aac54924ef2caea7af1864fabc149d4e4" prot="public" static="no" mutable="no">
+        <type>pointer</type>
+        <definition>pointer iDynTree::Span&lt; ElementType, Extent &gt;::KnownNotNull::p</definition>
+        <argsstring></argsstring>
+        <name>p</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="576" column="17" bodyfile="iDynTree/Core/Span.h" bodystart="576" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/Span.h" line="574" column="5" bodyfile="iDynTree/Core/Span.h" bodystart="575" bodyend="577"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1Span_1_1KnownNotNull_1aac54924ef2caea7af1864fabc149d4e4" prot="public" virt="non-virtual"><scope>iDynTree::Span::KnownNotNull</scope><name>p</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

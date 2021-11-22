@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1Polygon2D" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::Polygon2D</compoundname>
+    <includes local="no">iDynTree/ConvexHullHelpers.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1Polygon2D_1a73aa7246408880d3529e04e4f433e306" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector2</ref> &gt;</type>
+        <definition>std::vector&lt;Vector2&gt; iDynTree::Polygon2D::m_vertices</definition>
+        <argsstring></argsstring>
+        <name>m_vertices</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="88" column="21" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1Polygon2D_1ad143381c39c3f1234dad23e673ab8561" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Polygon2D::Polygon2D</definition>
+        <argsstring>()</argsstring>
+        <name>Polygon2D</name>
+        <briefdescription>
+<para>Default constructor: build an invalid polygon without any vertex. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="93" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Polygon2D_1a9a1e285e865a930d6b99413a065180a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::Polygon2D::setNrOfVertices</definition>
+        <argsstring>(size_t size)</argsstring>
+        <name>setNrOfVertices</name>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>Set the number of vertices (the vertices can then be accessed with the operator() </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="98" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Polygon2D_1a5a48450436b7325e17165e79f0e60333" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::Polygon2D::getNrOfVertices</definition>
+        <argsstring>() const</argsstring>
+        <name>getNrOfVertices</name>
+        <briefdescription>
+<para>Get the number of vertices in the <ref refid="classiDynTree_1_1Polygon" kindref="compound">Polygon</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the number of vertices </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="104" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Polygon2D_1afb76cbccbffe71b2627e0a83295d3af7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Polygon2D::isValid</definition>
+        <argsstring>() const</argsstring>
+        <name>isValid</name>
+        <briefdescription>
+<para>Check if a polygon is valid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The condition for the validity of the polygon are: It has at least three points.</para>
+<para><simplesect kind="return"><para>true if is valid, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="114" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Polygon2D_1a004c610a603ed8f4445ec7cf3d27e077" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector2</ref> &amp;</type>
+        <definition>Vector2&amp; iDynTree::Polygon2D::operator()</definition>
+        <argsstring>(const size_t idx)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const size_t</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="116" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Polygon2D_1a9d77bf912627c727adc6328e8d057e00" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector2</ref> &amp;</type>
+        <definition>const Vector2&amp; iDynTree::Polygon2D::operator()</definition>
+        <argsstring>(const size_t idx) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const size_t</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="117" column="24"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class representing a 2D <ref refid="classiDynTree_1_1Polygon" kindref="compound">Polygon</ref> expressed in the 2D space. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+      </node>
+      <node id="5">
+        <label>T</label>
+      </node>
+      <node id="4">
+        <label>std::vector&lt; T &gt;</label>
+        <childnode refid="5" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::vector&lt; iDynTree::VectorFixSize &gt;</label>
+        <childnode refid="3" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; iDynTree::VectorFixSize &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::Polygon2D</label>
+        <link refid="classiDynTree_1_1Polygon2D"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_vertices</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/ConvexHullHelpers.h" line="85" column="5" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="86" bodyend="118"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1Polygon2D_1a5a48450436b7325e17165e79f0e60333" prot="public" virt="non-virtual"><scope>iDynTree::Polygon2D</scope><name>getNrOfVertices</name></member>
+      <member refid="classiDynTree_1_1Polygon2D_1afb76cbccbffe71b2627e0a83295d3af7" prot="public" virt="non-virtual"><scope>iDynTree::Polygon2D</scope><name>isValid</name></member>
+      <member refid="classiDynTree_1_1Polygon2D_1a73aa7246408880d3529e04e4f433e306" prot="public" virt="non-virtual"><scope>iDynTree::Polygon2D</scope><name>m_vertices</name></member>
+      <member refid="classiDynTree_1_1Polygon2D_1a004c610a603ed8f4445ec7cf3d27e077" prot="public" virt="non-virtual"><scope>iDynTree::Polygon2D</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1Polygon2D_1a9d77bf912627c727adc6328e8d057e00" prot="public" virt="non-virtual"><scope>iDynTree::Polygon2D</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1Polygon2D_1ad143381c39c3f1234dad23e673ab8561" prot="public" virt="non-virtual"><scope>iDynTree::Polygon2D</scope><name>Polygon2D</name></member>
+      <member refid="classiDynTree_1_1Polygon2D_1a9a1e285e865a930d6b99413a065180a2" prot="public" virt="non-virtual"><scope>iDynTree::Polygon2D</scope><name>setNrOfVertices</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

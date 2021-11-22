@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="Integrator_8h" kind="file" language="C++">
+    <compoundname>Integrator.h</compoundname>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/Core/VectorDynSize.h</includes>
+    <includes refid="MatrixDynSize_8h" local="no">iDynTree/Core/MatrixDynSize.h</includes>
+    <includes refid="SparsityStructure_8h" local="no">iDynTree/SparsityStructure.h</includes>
+    <includes local="no">vector</includes>
+    <includes local="no">string</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">map</includes>
+    <includedby refid="FixedStepIntegrator_8h" local="no">iDynTree/Integrators/FixedStepIntegrator.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/Integrator.h</label>
+        <link refid="Integrator_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="5">
+        <label>map</label>
+      </node>
+      <node id="2">
+        <label>vector</label>
+      </node>
+      <node id="4">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement" prot="public">iDynTree::optimalcontrol::integrators::SolutionElement</innerclass>
+    <innerclass refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfoData" prot="public">iDynTree::optimalcontrol::integrators::IntegratorInfoData</innerclass>
+    <innerclass refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfo" prot="public">iDynTree::optimalcontrol::integrators::IntegratorInfo</innerclass>
+    <innerclass refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex" prot="public">iDynTree::optimalcontrol::integrators::CollocationHessianIndex</innerclass>
+    <innerclass refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator" prot="public">iDynTree::optimalcontrol::integrators::Integrator</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <innernamespace refid="namespaceiDynTree_1_1optimalcontrol">iDynTree::optimalcontrol</innernamespace>
+    <innernamespace refid="namespaceiDynTree_1_1optimalcontrol_1_1integrators">iDynTree::optimalcontrol::integrators</innernamespace>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="Integrator_8h_1aa5c8ad68150707a78233d30d14b183b2" prot="public" static="no">
+        <type>std::map&lt; CollocationHessianIndex, MatrixDynSize &gt;</type>
+        <definition>using iDynTree::optimalcontrol::integrators::CollocationHessianMap = typedef std::map&lt;CollocationHessianIndex, MatrixDynSize&gt;</definition>
+        <argsstring></argsstring>
+        <name>CollocationHessianMap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="127" column="13" bodyfile="iDynTree/Integrator.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="Integrator_8h_1a7a03df16db0b979f0c465865aaf2c5c4" prot="public" static="no">
+        <type>std::map&lt; CollocationHessianIndex, SparsityStructure &gt;</type>
+        <definition>using iDynTree::optimalcontrol::integrators::CollocationHessianSparsityMap = typedef std::map&lt;CollocationHessianIndex, SparsityStructure&gt;</definition>
+        <argsstring></argsstring>
+        <name>CollocationHessianSparsityMap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="129" column="13" bodyfile="iDynTree/Integrator.h" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Integrator.h"/>
+  </compounddef>
+</doxygen>

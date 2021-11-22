@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="DynamicsLinearizationHelpers_8h" kind="file" language="C++">
+    <compoundname>DynamicsLinearizationHelpers.h</compoundname>
+    <includes refid="MatrixFixSize_8h" local="no">iDynTree/Core/MatrixFixSize.h</includes>
+    <includes refid="Dynamics_8h" local="no">iDynTree/Model/Dynamics.h</includes>
+    <includedby refid="DynamicsLinearization_8h" local="no">iDynTree/Model/DynamicsLinearization.h</includedby>
+    <innerclass refid="classiDynTree_1_1SpatialMotionWrtMotionDerivative" prot="public">iDynTree::SpatialMotionWrtMotionDerivative</innerclass>
+    <innerclass refid="classiDynTree_1_1SpatialForceWrtMotionDerivative" prot="public">iDynTree::SpatialForceWrtMotionDerivative</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="DynamicsLinearizationHelpers_8h_1a8f92a6a26be06461e7364405c553bd66" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SpatialMotionWrtMotionDerivative</type>
+        <definition>SpatialMotionWrtMotionDerivative iDynTree::operator*</definition>
+        <argsstring>(const Transform &amp;a_X_b, const SpatialMotionWrtMotionDerivative &amp;op2)</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>const Transform &amp;</type>
+          <declname>a_X_b</declname>
+        </param>
+        <param>
+          <type>const SpatialMotionWrtMotionDerivative &amp;</type>
+          <declname>op2</declname>
+        </param>
+        <briefdescription>
+<para>Equivalent to: </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting><codeline><highlight class="normal">SpatialForceWrtMotionDerivative<sp/>ret;</highlight></codeline>
+<codeline><highlight class="normal">toEigen(ret)<sp/>=<sp/>toEigen(transform.asAdjointMatrixWrench())*toEigen(ret);</highlight></codeline>
+<codeline><highlight class="normal">return<sp/>ret;</highlight></codeline>
+</programlisting> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DynamicsLinearizationHelpers.h" line="50" column="38" declfile="iDynTree/Model/DynamicsLinearizationHelpers.h" declline="50" declcolumn="38"/>
+      </memberdef>
+      <memberdef kind="function" id="DynamicsLinearizationHelpers_8h_1aedfbcb0d62ea5bb9bf6fc476f3cc717a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SpatialForceWrtMotionDerivative</type>
+        <definition>SpatialForceWrtMotionDerivative iDynTree::operator*</definition>
+        <argsstring>(const Transform &amp;a_X_b, const SpatialForceWrtMotionDerivative &amp;op2)</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>const Transform &amp;</type>
+          <declname>a_X_b</declname>
+        </param>
+        <param>
+          <type>const SpatialForceWrtMotionDerivative &amp;</type>
+          <declname>op2</declname>
+        </param>
+        <briefdescription>
+<para>Equivalent to: </para>
+        </briefdescription>
+        <detaileddescription>
+<para><programlisting><codeline><highlight class="normal">SpatialForceWrtMotionDerivative<sp/>ret;</highlight></codeline>
+<codeline><highlight class="normal">toEigen(ret)<sp/>=<sp/>toEigen(transform.asAdjointMatrixWrench())*toEigen(ret);</highlight></codeline>
+<codeline><highlight class="normal">return<sp/>ret;</highlight></codeline>
+</programlisting> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DynamicsLinearizationHelpers.h" line="84" column="38" declfile="iDynTree/Model/DynamicsLinearizationHelpers.h" declline="84" declcolumn="38"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/DynamicsLinearizationHelpers.h"/>
+  </compounddef>
+</doxygen>

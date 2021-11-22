@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="skinDynLibConversions_8h" kind="file" language="C++">
+    <compoundname>skinDynLibConversions.h</compoundname>
+    <includes local="no">map</includes>
+    <includes local="no">string</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
+    <includes refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/Estimation/ExternalWrenchesEstimation.h</includes>
+    <includes local="no">iCub/skinDynLib/dynContactList.h</includes>
+    <includes local="no">iCub/skinDynLib/skinContactList.h</includes>
+    <includes refid="skinDynLibConversionsImplementation_8h" local="yes">skinDynLibConversionsImplementation.h</includes>
+    <includedby refid="skinDynLibConversionsImplementation_8h" local="no">iDynTree/skinDynLibConversionsImplementation.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="2">
+        <label>map</label>
+      </node>
+      <node id="5">
+        <label>iCub/skinDynLib/skinContactList.h</label>
+      </node>
+      <node id="4">
+        <label>iCub/skinDynLib/dynContactList.h</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/skinDynLibConversions.h</label>
+        <link refid="skinDynLibConversions_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1skinDynLibLinkID" prot="public">iDynTree::skinDynLibLinkID</innerclass>
+    <innerclass refid="classiDynTree_1_1iDynTreeLinkAndFrame" prot="public">iDynTree::iDynTreeLinkAndFrame</innerclass>
+    <innerclass refid="classiDynTree_1_1skinDynLibConversionsHelper" prot="public">iDynTree::skinDynLibConversionsHelper</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/skinDynLibConversions.h"/>
+  </compounddef>
+</doxygen>

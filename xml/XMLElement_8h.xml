@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="XMLElement_8h" kind="file" language="C++">
+    <compoundname>XMLElement.h</compoundname>
+    <includes local="no">functional</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">string</includes>
+    <includes local="no">unordered_map</includes>
+    <includes local="no">vector</includes>
+    <includedby refid="ForceTorqueSensorElement_8h" local="no">private/ForceTorqueSensorElement.h</includedby>
+    <includedby refid="GeometryElement_8h" local="no">private/GeometryElement.h</includedby>
+    <includedby refid="InertialElement_8h" local="no">private/InertialElement.h</includedby>
+    <includedby refid="JointElement_8h" local="no">private/JointElement.h</includedby>
+    <includedby refid="LinkElement_8h" local="no">private/LinkElement.h</includedby>
+    <includedby refid="MaterialElement_8h" local="no">private/MaterialElement.h</includedby>
+    <includedby refid="OriginElement_8h" local="no">private/OriginElement.h</includedby>
+    <includedby refid="RobotElement_8h" local="no">private/RobotElement.h</includedby>
+    <includedby refid="SensorElement_8h" local="no">private/SensorElement.h</includedby>
+    <includedby refid="VisualElement_8h" local="no">private/VisualElement.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>functional</label>
+      </node>
+      <node id="4">
+        <label>string</label>
+      </node>
+      <node id="6">
+        <label>vector</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/XMLElement.h</label>
+        <link refid="XMLElement_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>unordered_map</label>
+      </node>
+      <node id="3">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1XMLElement" prot="public">iDynTree::XMLElement</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/XMLElement.h"/>
+  </compounddef>
+</doxygen>

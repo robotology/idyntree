@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="SpatialForceVector_8h" kind="file" language="C++">
+    <compoundname>SpatialForceVector.h</compoundname>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
+    <includes refid="GeomVector3_8h" local="no">iDynTree/Core/GeomVector3.h</includes>
+    <includes refid="SpatialVector_8h" local="no">iDynTree/Core/SpatialVector.h</includes>
+    <includedby refid="DynamicsUtils_8h" local="no">iDynTree/Model/DynamicsUtils.h</includedby>
+    <includedby refid="JointState_8h" local="no">iDynTree/Model/JointState.h</includedby>
+    <includedby refid="EigenHelpers_8h" local="no">iDynTree/Core/EigenHelpers.h</includedby>
+    <includedby refid="SpatialMomentum_8h" local="no">iDynTree/Core/SpatialMomentum.h</includedby>
+    <includedby refid="Wrench_8h" local="no">iDynTree/Core/Wrench.h</includedby>
+    <innerclass refid="classiDynTree_1_1SpatialForceVector" prot="public">iDynTree::SpatialForceVector</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/SpatialForceVector.h"/>
+  </compounddef>
+</doxygen>

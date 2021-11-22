@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="Axis_8h" kind="file" language="C++">
+    <compoundname>Axis.h</compoundname>
+    <includes local="no">string</includes>
+    <includes refid="Direction_8h" local="no">iDynTree/Core/Direction.h</includes>
+    <includes refid="Position_8h" local="no">iDynTree/Core/Position.h</includes>
+    <includes refid="Utils_8h" local="no">iDynTree/Core/Utils.h</includes>
+    <includedby refid="PrismaticJoint_8h" local="no">iDynTree/Model/PrismaticJoint.h</includedby>
+    <includedby refid="RevoluteJoint_8h" local="no">iDynTree/Model/RevoluteJoint.h</includedby>
+    <includedby refid="JointElement_8h" local="no">private/JointElement.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>string</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/Core/Axis.h</label>
+        <link refid="Axis_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1Axis" prot="public">iDynTree::Axis</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/Axis.h"/>
+  </compounddef>
+</doxygen>

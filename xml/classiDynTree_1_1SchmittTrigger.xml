@@ -1,0 +1,588 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1SchmittTrigger" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::SchmittTrigger</compoundname>
+    <includes local="no">iDynTree/Estimation/SchmittTrigger.h</includes>
+      <sectiondef kind="user-defined">
+      <header>State</header>
+      <memberdef kind="variable" id="classiDynTree_1_1SchmittTrigger_1a12b318af8acda99286203e0b421c2754" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::SchmittTrigger::m_currentState</definition>
+        <argsstring></argsstring>
+        <name>m_currentState</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SchmittTrigger.h" line="161" column="14" bodyfile="iDynTree/Estimation/SchmittTrigger.h" bodystart="161" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SchmittTrigger_1ae5f91ccc6340ff5099e5790beca57b92" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::SchmittTrigger::m_previousTime</definition>
+        <argsstring></argsstring>
+        <name>m_previousTime</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SchmittTrigger.h" line="162" column="16" bodyfile="iDynTree/Estimation/SchmittTrigger.h" bodystart="162" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SchmittTrigger_1a626d4aedeb3f2db29fa91db58b047451" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::SchmittTrigger::m_timer</definition>
+        <argsstring></argsstring>
+        <name>m_timer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SchmittTrigger.h" line="163" column="16" bodyfile="iDynTree/Estimation/SchmittTrigger.h" bodystart="163" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Device Parameters</header>
+      <memberdef kind="variable" id="classiDynTree_1_1SchmittTrigger_1a281ead70dffd589ee48c98df73ba64a3" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::SchmittTrigger::m_stableOFFTime</definition>
+        <argsstring></argsstring>
+        <name>m_stableOFFTime</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SchmittTrigger.h" line="170" column="16" bodyfile="iDynTree/Estimation/SchmittTrigger.h" bodystart="170" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SchmittTrigger_1a2f94573ff5e4592ff05ecdc34fa0fdd3" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::SchmittTrigger::m_stableONTime</definition>
+        <argsstring></argsstring>
+        <name>m_stableONTime</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SchmittTrigger.h" line="171" column="16" bodyfile="iDynTree/Estimation/SchmittTrigger.h" bodystart="171" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SchmittTrigger_1af07910419834a8615b4cd70901182c1d" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::SchmittTrigger::m_highValueThreshold</definition>
+        <argsstring></argsstring>
+        <name>m_highValueThreshold</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SchmittTrigger.h" line="172" column="16" bodyfile="iDynTree/Estimation/SchmittTrigger.h" bodystart="172" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SchmittTrigger_1ae5220e5648db61180a22d0cc1ad9f834" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::SchmittTrigger::m_lowValueThreshold</definition>
+        <argsstring></argsstring>
+        <name>m_lowValueThreshold</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SchmittTrigger.h" line="173" column="16" bodyfile="iDynTree/Estimation/SchmittTrigger.h" bodystart="173" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Input</header>
+      <memberdef kind="variable" id="classiDynTree_1_1SchmittTrigger_1a45b01717eac6aafa5227d2ebd4d6efcf" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::SchmittTrigger::m_rawValue</definition>
+        <argsstring></argsstring>
+        <name>m_rawValue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SchmittTrigger.h" line="180" column="16" bodyfile="iDynTree/Estimation/SchmittTrigger.h" bodystart="180" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SchmittTrigger_1a469183688f1e193e7d7e660547a93c15" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int iDynTree::SchmittTrigger::m_verbose</definition>
+        <argsstring></argsstring>
+        <name>m_verbose</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SchmittTrigger.h" line="185" column="13" bodyfile="iDynTree/Estimation/SchmittTrigger.h" bodystart="185" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Setters</header>
+      <memberdef kind="function" id="classiDynTree_1_1SchmittTrigger_1a4bbfb06faf87bacaafcb48d26d333ce6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SchmittTrigger::configure</definition>
+        <argsstring>(double stableOFFTime, double stableONTime, double lowValueThreshold, double highValueThreshold)</argsstring>
+        <name>configure</name>
+        <param>
+          <type>double</type>
+          <declname>stableOFFTime</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>stableONTime</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>lowValueThreshold</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>highValueThreshold</declname>
+        </param>
+        <briefdescription>
+<para>Configures the Schmitt Trigger parameters (can be called after instantiation, to change the parameters) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stableOFFTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>time to elapse to switch to OFF state </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stableONTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>time to elapse to switch to ON state </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lowValueThreshold</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>threshold value to turn state OFF </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>highValueThreshold</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>threshold value to turn state ON </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SchmittTrigger.h" line="93" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SchmittTrigger_1a29d08d901e5c9007c1fc360b3ef56d3d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SchmittTrigger::setStableOFFTime</definition>
+        <argsstring>(double stableOFFTime)</argsstring>
+        <name>setStableOFFTime</name>
+        <param>
+          <type>double</type>
+          <declname>stableOFFTime</declname>
+        </param>
+        <briefdescription>
+<para>set required time to elapse to switch to OFF state </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stableOFFTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SchmittTrigger.h" line="102" column="14" bodyfile="iDynTree/Estimation/SchmittTrigger.h" bodystart="102" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SchmittTrigger_1a1ce31c77ea5deebbe6d8b295458bb854" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SchmittTrigger::setStableONTime</definition>
+        <argsstring>(double stableONTime)</argsstring>
+        <name>setStableONTime</name>
+        <param>
+          <type>double</type>
+          <declname>stableONTime</declname>
+        </param>
+        <briefdescription>
+<para>set required time to elapse to switch to ON state </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stableONTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SchmittTrigger.h" line="108" column="14" bodyfile="iDynTree/Estimation/SchmittTrigger.h" bodystart="108" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SchmittTrigger_1a5a073f869c044539ea1ed6054f96b09e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SchmittTrigger::setLowValueThreshold</definition>
+        <argsstring>(double lowValueThreshold)</argsstring>
+        <name>setLowValueThreshold</name>
+        <param>
+          <type>double</type>
+          <declname>lowValueThreshold</declname>
+        </param>
+        <briefdescription>
+<para>set low threshold value to trigger OFF state detection </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lowValueThreshold</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SchmittTrigger.h" line="114" column="14" bodyfile="iDynTree/Estimation/SchmittTrigger.h" bodystart="114" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SchmittTrigger_1a924f9c108b3778ab309f0c1d5f77d8ce" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SchmittTrigger::setHighValueThreshold</definition>
+        <argsstring>(double highValueThreshold)</argsstring>
+        <name>setHighValueThreshold</name>
+        <param>
+          <type>double</type>
+          <declname>highValueThreshold</declname>
+        </param>
+        <briefdescription>
+<para>set high threshold value to trigger ON state detection </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>highValueThreshold</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SchmittTrigger.h" line="120" column="14" bodyfile="iDynTree/Estimation/SchmittTrigger.h" bodystart="120" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SchmittTrigger_1ae7b71b094ce9961f5790a0563a60e440" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SchmittTrigger::setInitialState</definition>
+        <argsstring>(bool state)</argsstring>
+        <name>setInitialState</name>
+        <param>
+          <type>bool</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+<para>set initial state </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>binary state true/false </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SchmittTrigger.h" line="126" column="14" bodyfile="iDynTree/Estimation/SchmittTrigger.h" bodystart="126" bodyend="126"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Getters</header>
+      <memberdef kind="function" id="classiDynTree_1_1SchmittTrigger_1aac8920ee0c8e52c6736feb60b950a9bd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SchmittTrigger::getState</definition>
+        <argsstring>()</argsstring>
+        <name>getState</name>
+        <briefdescription>
+<para>get current state </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>binary state true/false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SchmittTrigger.h" line="138" column="14" bodyfile="iDynTree/Estimation/SchmittTrigger.h" bodystart="138" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SchmittTrigger_1a955ee661b7c26f49de420abd89332dd8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::SchmittTrigger::getElapsedTime</definition>
+        <argsstring>()</argsstring>
+        <name>getElapsedTime</name>
+        <briefdescription>
+<para>get time elapsed since the first update of the device </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>time </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SchmittTrigger.h" line="144" column="16" bodyfile="iDynTree/Estimation/SchmittTrigger.h" bodystart="144" bodyend="144"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Verbose</header>
+      <memberdef kind="function" id="classiDynTree_1_1SchmittTrigger_1ab6993bf0ca7697713a2ad90746b8f2dc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SchmittTrigger::setVerbose</definition>
+        <argsstring>()</argsstring>
+        <name>setVerbose</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SchmittTrigger.h" line="152" column="14" bodyfile="iDynTree/Estimation/SchmittTrigger.h" bodystart="152" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SchmittTrigger_1a4dd33f44fa05a636b2f8040d8e961ce1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SchmittTrigger::unsetVerbose</definition>
+        <argsstring>()</argsstring>
+        <name>unsetVerbose</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SchmittTrigger.h" line="153" column="14" bodyfile="iDynTree/Estimation/SchmittTrigger.h" bodystart="153" bodyend="153"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1SchmittTrigger_1af163ef294409e336012f581cec9325bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SchmittTrigger::SchmittTrigger</definition>
+        <argsstring>(double stableOFFTime, double stableONTime, double lowValueThreshold, double highValueThreshold)</argsstring>
+        <name>SchmittTrigger</name>
+        <param>
+          <type>double</type>
+          <declname>stableOFFTime</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>stableONTime</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>lowValueThreshold</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>highValueThreshold</declname>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stableOFFTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>time to elapse to switch to OFF state </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stableONTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>time to elapse to switch to ON state </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lowValueThreshold</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>threshold value to turn state OFF </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>highValueThreshold</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>threshold value to turn state ON </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SchmittTrigger.h" line="63" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SchmittTrigger_1aef6200c8634482b6f5b5b1199919d00a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SchmittTrigger::resetDevice</definition>
+        <argsstring>()</argsstring>
+        <name>resetDevice</name>
+        <briefdescription>
+<para>Sets the schmitt trigger settings to default values. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SchmittTrigger.h" line="71" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SchmittTrigger_1a8cdfc9864074756bea49c7a5e0b2da37" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SchmittTrigger::updateDevice</definition>
+        <argsstring>(double currentTime, double rawValue)</argsstring>
+        <name>updateDevice</name>
+        <param>
+          <type>double</type>
+          <declname>currentTime</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>rawValue</declname>
+        </param>
+        <briefdescription>
+<para>Update the device state with the latest time and input measurement. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>currentTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>current time </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rawValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>input measurement </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SchmittTrigger.h" line="78" column="14"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Schmitt Trigger class for binary state detection This device is used to obtain a binary state (ON/OFF) at some time instant depending on a value inputted to the device. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>It is initialized with 4 parameters,</para>
+<para><table rows="5" cols="3"><row>
+<entry thead="yes" align='center'><para>Parameter   </para>
+</entry><entry thead="yes" align='center'><para>Type   </para>
+</entry><entry thead="yes" align='center'><para>Description    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>stableOFFTime   </para>
+</entry><entry thead="no" align='center'><para>double   </para>
+</entry><entry thead="no" align='center'><para>Time to elapse to switch to OFF state, once low threshold is triggered    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>stableONTime   </para>
+</entry><entry thead="no" align='center'><para>double   </para>
+</entry><entry thead="no" align='center'><para>Time to elapse to switch to ON state, once high threshold is triggered    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>lowValueThreshold   </para>
+</entry><entry thead="no" align='center'><para>double   </para>
+</entry><entry thead="no" align='center'><para>Threshold Value to turn state OFF    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>highValueThreshold   </para>
+</entry><entry thead="no" align='center'><para>double   </para>
+</entry><entry thead="no" align='center'><para>Threshold Value to turn state ON   </para>
+</entry></row>
+</table>
+</para>
+<para>The device is first configured with the user-defined parameter settings, but is not activated until the first call of updateDevice method. The updateDevice method must be called at every iteration with the current time and the value to be compared, for continuously updating the binary state of the device.</para>
+<para>For instance, if the current state is OFF and there is a call to updateDevice with current time and an input value greater than the highValueThreshold, then a timer is activated and is updated at every call to updateMethod. If there are consecutive calls to the updateMethod with input values greater than the highValueThreshold, until the timer lapses stableONTime, then the state is switched to ON, otherwise it is remains OFF.</para>
+<para>NOTE: Time is specified relative to the process that is instantiating this device. Default state is set to ON during instantiation. This can be changed accordingly using the setInitialState method.</para>
+<para>NOTE: There are no default parameters to the Schmitt Trigger. These parameters are set through the constructor during instantiation. </para>
+    </detaileddescription>
+    <location file="iDynTree/Estimation/SchmittTrigger.h" line="53" column="5" bodyfile="iDynTree/Estimation/SchmittTrigger.h" bodystart="54" bodyend="187"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1SchmittTrigger_1a4bbfb06faf87bacaafcb48d26d333ce6" prot="public" virt="non-virtual"><scope>iDynTree::SchmittTrigger</scope><name>configure</name></member>
+      <member refid="classiDynTree_1_1SchmittTrigger_1a955ee661b7c26f49de420abd89332dd8" prot="public" virt="non-virtual"><scope>iDynTree::SchmittTrigger</scope><name>getElapsedTime</name></member>
+      <member refid="classiDynTree_1_1SchmittTrigger_1aac8920ee0c8e52c6736feb60b950a9bd" prot="public" virt="non-virtual"><scope>iDynTree::SchmittTrigger</scope><name>getState</name></member>
+      <member refid="classiDynTree_1_1SchmittTrigger_1a12b318af8acda99286203e0b421c2754" prot="private" virt="non-virtual"><scope>iDynTree::SchmittTrigger</scope><name>m_currentState</name></member>
+      <member refid="classiDynTree_1_1SchmittTrigger_1af07910419834a8615b4cd70901182c1d" prot="private" virt="non-virtual"><scope>iDynTree::SchmittTrigger</scope><name>m_highValueThreshold</name></member>
+      <member refid="classiDynTree_1_1SchmittTrigger_1ae5220e5648db61180a22d0cc1ad9f834" prot="private" virt="non-virtual"><scope>iDynTree::SchmittTrigger</scope><name>m_lowValueThreshold</name></member>
+      <member refid="classiDynTree_1_1SchmittTrigger_1ae5f91ccc6340ff5099e5790beca57b92" prot="private" virt="non-virtual"><scope>iDynTree::SchmittTrigger</scope><name>m_previousTime</name></member>
+      <member refid="classiDynTree_1_1SchmittTrigger_1a45b01717eac6aafa5227d2ebd4d6efcf" prot="private" virt="non-virtual"><scope>iDynTree::SchmittTrigger</scope><name>m_rawValue</name></member>
+      <member refid="classiDynTree_1_1SchmittTrigger_1a281ead70dffd589ee48c98df73ba64a3" prot="private" virt="non-virtual"><scope>iDynTree::SchmittTrigger</scope><name>m_stableOFFTime</name></member>
+      <member refid="classiDynTree_1_1SchmittTrigger_1a2f94573ff5e4592ff05ecdc34fa0fdd3" prot="private" virt="non-virtual"><scope>iDynTree::SchmittTrigger</scope><name>m_stableONTime</name></member>
+      <member refid="classiDynTree_1_1SchmittTrigger_1a626d4aedeb3f2db29fa91db58b047451" prot="private" virt="non-virtual"><scope>iDynTree::SchmittTrigger</scope><name>m_timer</name></member>
+      <member refid="classiDynTree_1_1SchmittTrigger_1a469183688f1e193e7d7e660547a93c15" prot="private" virt="non-virtual"><scope>iDynTree::SchmittTrigger</scope><name>m_verbose</name></member>
+      <member refid="classiDynTree_1_1SchmittTrigger_1aef6200c8634482b6f5b5b1199919d00a" prot="public" virt="non-virtual"><scope>iDynTree::SchmittTrigger</scope><name>resetDevice</name></member>
+      <member refid="classiDynTree_1_1SchmittTrigger_1af163ef294409e336012f581cec9325bc" prot="public" virt="non-virtual"><scope>iDynTree::SchmittTrigger</scope><name>SchmittTrigger</name></member>
+      <member refid="classiDynTree_1_1SchmittTrigger_1a924f9c108b3778ab309f0c1d5f77d8ce" prot="public" virt="non-virtual"><scope>iDynTree::SchmittTrigger</scope><name>setHighValueThreshold</name></member>
+      <member refid="classiDynTree_1_1SchmittTrigger_1ae7b71b094ce9961f5790a0563a60e440" prot="public" virt="non-virtual"><scope>iDynTree::SchmittTrigger</scope><name>setInitialState</name></member>
+      <member refid="classiDynTree_1_1SchmittTrigger_1a5a073f869c044539ea1ed6054f96b09e" prot="public" virt="non-virtual"><scope>iDynTree::SchmittTrigger</scope><name>setLowValueThreshold</name></member>
+      <member refid="classiDynTree_1_1SchmittTrigger_1a29d08d901e5c9007c1fc360b3ef56d3d" prot="public" virt="non-virtual"><scope>iDynTree::SchmittTrigger</scope><name>setStableOFFTime</name></member>
+      <member refid="classiDynTree_1_1SchmittTrigger_1a1ce31c77ea5deebbe6d8b295458bb854" prot="public" virt="non-virtual"><scope>iDynTree::SchmittTrigger</scope><name>setStableONTime</name></member>
+      <member refid="classiDynTree_1_1SchmittTrigger_1ab6993bf0ca7697713a2ad90746b8f2dc" prot="public" virt="non-virtual"><scope>iDynTree::SchmittTrigger</scope><name>setVerbose</name></member>
+      <member refid="classiDynTree_1_1SchmittTrigger_1a4dd33f44fa05a636b2f8040d8e961ce1" prot="public" virt="non-virtual"><scope>iDynTree::SchmittTrigger</scope><name>unsetVerbose</name></member>
+      <member refid="classiDynTree_1_1SchmittTrigger_1a8cdfc9864074756bea49c7a5e0b2da37" prot="public" virt="non-virtual"><scope>iDynTree::SchmittTrigger</scope><name>updateDevice</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

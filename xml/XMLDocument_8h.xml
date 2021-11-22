@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="XMLDocument_8h" kind="file" language="C++">
+    <compoundname>XMLDocument.h</compoundname>
+    <includes local="no">memory</includes>
+    <includes local="no">string</includes>
+    <includedby refid="URDFDocument_8h" local="no">private/URDFDocument.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/XMLDocument.h</label>
+        <link refid="XMLDocument_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1XMLDocument" prot="public">iDynTree::XMLDocument</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/XMLDocument.h"/>
+  </compounddef>
+</doxygen>

@@ -1,7 +1,0 @@
-<map id="iDynTree::optimalcontrol::IndexSelector" name="iDynTree::optimalcontrol::IndexSelector">
-<area shape="rect" id="node1" title=" " alt="" coords="689,57,872,98"/>
-<area shape="rect" id="node2" href="$classiDynTree_1_1optimalcontrol_1_1Selector.html" title=" " alt="" coords="457,57,640,98"/>
-<area shape="rect" id="node3" href="$classiDynTree_1_1MatrixDynSize.html" title="Class providing a simple form of matrix with dynamic size." alt="" coords="5,5,188,32"/>
-<area shape="rect" id="node4" href="$classiDynTree_1_1optimalcontrol_1_1SparsityStructure.html" title=" " alt="" coords="5,57,188,98"/>
-<area shape="rect" id="node5" href="$classiDynTree_1_1VectorDynSize.html" title="Class providing a simple form of vector with dynamic size." alt="" coords="6,123,187,149"/>
-</map>

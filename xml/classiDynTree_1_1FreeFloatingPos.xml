@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1FreeFloatingPos" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::FreeFloatingPos</compoundname>
+    <includes local="no">iDynTree/Model/FreeFloatingState.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1FreeFloatingPos_1aad41c4da3ed443679b518e6df126931b" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>Transform iDynTree::FreeFloatingPos::m_worldBasePos</definition>
+        <argsstring></argsstring>
+        <name>m_worldBasePos</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="39" column="19" bodyfile="iDynTree/Model/FreeFloatingState.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1FreeFloatingPos_1a7acd49e0e7773939ba34a11a5dc2df44" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">JointPosDoubleArray</ref></type>
+        <definition>JointPosDoubleArray iDynTree::FreeFloatingPos::m_jointPos</definition>
+        <argsstring></argsstring>
+        <name>m_jointPos</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="40" column="29" bodyfile="iDynTree/Model/FreeFloatingState.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingPos_1a93e51d593b16b15f5be0f86c92dade51" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::FreeFloatingPos::FreeFloatingPos</definition>
+        <argsstring>()</argsstring>
+        <name>FreeFloatingPos</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="44" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingPos_1a3e4cc78de27fb152f1d245a0bbb5de2b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::FreeFloatingPos::FreeFloatingPos</definition>
+        <argsstring>(const iDynTree::Model &amp;model)</argsstring>
+        <name>FreeFloatingPos</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="45" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingPos_1ab69d30d60d31af3fd103953d83ead22b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::FreeFloatingPos::resize</definition>
+        <argsstring>(const iDynTree::Model &amp;model)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Resize the class to match the dimension of the joints contained in a <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the model from which to get the number and dimension of the joints.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="warning"><para>This method wipes the joint positions if number and dimension of the joints of the model passed are different from the one already stored. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="56" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingPos_1aea73fe7075b9a6b60d9f62c65bc2a881" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+        <definition>Transform&amp; iDynTree::FreeFloatingPos::worldBasePos</definition>
+        <argsstring>()</argsstring>
+        <name>worldBasePos</name>
+        <briefdescription>
+<para>Get the base position. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="61" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingPos_1a32b053f578ff6e6e14a16c4ac30be3ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">JointPosDoubleArray</ref> &amp;</type>
+        <definition>JointPosDoubleArray&amp; iDynTree::FreeFloatingPos::jointPos</definition>
+        <argsstring>()</argsstring>
+        <name>jointPos</name>
+        <briefdescription>
+<para>Get the vector of joint positions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="66" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingPos_1a279b784f801f6b74df935e941eb97335" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+        <definition>const Transform&amp; iDynTree::FreeFloatingPos::worldBasePos</definition>
+        <argsstring>() const</argsstring>
+        <name>worldBasePos</name>
+        <briefdescription>
+<para>Get the base position (const version). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="71" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingPos_1a31608c663581f5b26e85f5819dffea73" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">JointPosDoubleArray</ref> &amp;</type>
+        <definition>const JointPosDoubleArray&amp; iDynTree::FreeFloatingPos::jointPos</definition>
+        <argsstring>() const</argsstring>
+        <name>jointPos</name>
+        <briefdescription>
+<para>Get the vector of joint positions (const version). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="76" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingPos_1ad26b33be62d9855e51cbdcaad31eca8c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int iDynTree::FreeFloatingPos::getNrOfPosCoords</definition>
+        <argsstring>() const</argsstring>
+        <name>getNrOfPosCoords</name>
+        <briefdescription>
+<para>Get the dimension of the joint positions vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="81" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingPos_1a3803d18f1287e18ef42aaf890ec00519" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::FreeFloatingPos::~FreeFloatingPos</definition>
+        <argsstring>()</argsstring>
+        <name>~FreeFloatingPos</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="86" column="17"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class representing the position of a Free Floating robot. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The position of a free floating robot is represented by the transform of a base frame with respect to an inertial frame, and a vector of joint positions. </para>
+    </detaileddescription>
+    <location file="iDynTree/Model/FreeFloatingState.h" line="36" column="5" bodyfile="iDynTree/Model/FreeFloatingState.h" bodystart="37" bodyend="87"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1FreeFloatingPos_1a93e51d593b16b15f5be0f86c92dade51" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingPos</scope><name>FreeFloatingPos</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingPos_1a3e4cc78de27fb152f1d245a0bbb5de2b" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingPos</scope><name>FreeFloatingPos</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingPos_1ad26b33be62d9855e51cbdcaad31eca8c" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingPos</scope><name>getNrOfPosCoords</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingPos_1a32b053f578ff6e6e14a16c4ac30be3ca" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingPos</scope><name>jointPos</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingPos_1a31608c663581f5b26e85f5819dffea73" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingPos</scope><name>jointPos</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingPos_1a7acd49e0e7773939ba34a11a5dc2df44" prot="private" virt="non-virtual"><scope>iDynTree::FreeFloatingPos</scope><name>m_jointPos</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingPos_1aad41c4da3ed443679b518e6df126931b" prot="private" virt="non-virtual"><scope>iDynTree::FreeFloatingPos</scope><name>m_worldBasePos</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingPos_1ab69d30d60d31af3fd103953d83ead22b" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingPos</scope><name>resize</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingPos_1aea73fe7075b9a6b60d9f62c65bc2a881" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingPos</scope><name>worldBasePos</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingPos_1a279b784f801f6b74df935e941eb97335" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingPos</scope><name>worldBasePos</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingPos_1a3803d18f1287e18ef42aaf890ec00519" prot="public" virt="virtual"><scope>iDynTree::FreeFloatingPos</scope><name>~FreeFloatingPos</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

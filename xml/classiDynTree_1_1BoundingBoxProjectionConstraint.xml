@@ -1,0 +1,538 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1BoundingBoxProjectionConstraint" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::BoundingBoxProjectionConstraint</compoundname>
+    <includes local="no">iDynTree/BoundingBoxHelpers.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a9110117f1e70e5c02f5ba7a3dbfc8352" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::BoundingBoxProjectionConstraint::m_isActive</definition>
+        <argsstring></argsstring>
+        <name>m_isActive</name>
+        <briefdescription>
+<para>Flag to specify if the constraint is active or not. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="40" column="14" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a4d968d97432efec2b3f0e279b5314dec" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Polygon2D" kindref="compound">Polygon2D</ref></type>
+        <definition>Polygon2D iDynTree::BoundingBoxProjectionConstraint::projectedBoundingBox</definition>
+        <argsstring></argsstring>
+        <name>projectedBoundingBox</name>
+        <briefdescription>
+<para>bounding box expressed in the 2D project constraint plane. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is computed by the buildBoundingBox method. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="64" column="19" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a67e2db7524cabbada251ebfec6118d76" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
+        <definition>MatrixDynSize iDynTree::BoundingBoxProjectionConstraint::A</definition>
+        <argsstring></argsstring>
+        <name>A</name>
+        <briefdescription>
+<para>A constraint matrix, such that Ax &lt;= b iff the com projection x is in the bounding box. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="69" column="23" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a174e78fcbd73beb939c18fc7793819ca" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref></type>
+        <definition>VectorDynSize iDynTree::BoundingBoxProjectionConstraint::b</definition>
+        <argsstring></argsstring>
+        <name>b</name>
+        <briefdescription>
+<para>b vector, such that Ax &lt;= b iff the com projection x is in the bounding box. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="74" column="23" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a0965c5b8cf5d35b5eb6359e813ee08f4" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix2x3</ref></type>
+        <definition>Matrix2x3 iDynTree::BoundingBoxProjectionConstraint::P</definition>
+        <argsstring></argsstring>
+        <name>P</name>
+        <briefdescription>
+<para>Projection matrix P, Note that x = P*(c-o), where x is the projection and c is the 3d COM . </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="80" column="19" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1aabea435e6e536c29f835e2253eb58b51" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix2x3</ref></type>
+        <definition>Matrix2x3 iDynTree::BoundingBoxProjectionConstraint::Pdirection</definition>
+        <argsstring></argsstring>
+        <name>Pdirection</name>
+        <briefdescription>
+<para>Projection matrix &apos;Pdirection&apos; defined by a given direction. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The projection &apos;x&apos; of a 3D point &apos;c&apos; along a given vector is obtained as: x = Pdirection*(c-o). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="87" column="19" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1aed4485913893e4e6392ff5be2a5ca82c" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
+        <definition>MatrixDynSize iDynTree::BoundingBoxProjectionConstraint::AtimesP</definition>
+        <argsstring></argsstring>
+        <name>AtimesP</name>
+        <briefdescription>
+<para>Matrix obtained multiplying the matrix A for the matrix P. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="92" column="23" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a1a1819a14597fd17e759b6b1a1ede95e" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
+        <definition>iDynTree::Position iDynTree::BoundingBoxProjectionConstraint::o</definition>
+        <argsstring></argsstring>
+        <name>o</name>
+        <briefdescription>
+<para>Plane offset o Note that x = P*(c-o), where x is the projection and c is the 3d COM . </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="98" column="28" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a3e1874b20406c550cc38d335b8753f8c" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; iDynTree::BoundingBoxProjectionConstraint::supportFrameIndices</definition>
+        <argsstring></argsstring>
+        <name>supportFrameIndices</name>
+        <briefdescription>
+<para>List of support frames. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="118" column="21" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1aec7064bb7cb6d238bf0c8473984d293c" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &gt;</type>
+        <definition>std::vector&lt;Transform&gt; iDynTree::BoundingBoxProjectionConstraint::absoluteFrame_X_supportFrame</definition>
+        <argsstring></argsstring>
+        <name>absoluteFrame_X_supportFrame</name>
+        <briefdescription>
+<para>List of absolue_X_supportFrames. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="123" column="21" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a0471e922ebb65e31b5822dc05dd9bf4d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::BoundingBoxProjectionConstraint::buildConstraintMatrix</definition>
+        <argsstring>()</argsstring>
+        <name>buildConstraintMatrix</name>
+        <briefdescription>
+<para>Once you compute the projected bounding box, build the A matrix and the b vector such that Ax &lt;= b iff the center of mass projection x is inside the bounding box. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="35" column="14"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1ad950afd6663135de4b7656d7be278235" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::BoundingBoxProjectionConstraint::setActive</definition>
+        <argsstring>(const bool isActive)</argsstring>
+        <name>setActive</name>
+        <param>
+          <type>const bool</type>
+          <declname>isActive</declname>
+        </param>
+        <briefdescription>
+<para>Set if the constraint is active or not. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="45" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a81936e6f83d733acb670173d3b30141d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BoundingBoxProjectionConstraint::isActive</definition>
+        <argsstring>()</argsstring>
+        <name>isActive</name>
+        <briefdescription>
+<para>Get if the constraint is active or not. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if the constraint is active, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="51" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a804e9f94e56b62cf35d269eb0fed0639" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::BoundingBoxProjectionConstraint::getNrOfConstraints</definition>
+        <argsstring>()</argsstring>
+        <name>getNrOfConstraints</name>
+        <briefdescription>
+<para>Get the number of constraints (i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>the number rows of the matrix A). <simplesect kind="return"><para>the number of constraints. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="57" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1af283e0be96a667d9446be6a737569804" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BoundingBoxProjectionConstraint::buildBoundingBox</definition>
+        <argsstring>(const iDynTree::Direction xAxisOfPlaneInWorld, const iDynTree::Direction yAxisOfPlaneInWorld, const iDynTree::Position originOfPlaneInWorld, const std::vector&lt; Polygon &gt; &amp;supportPolygonsExpressedInSupportFrame, const std::vector&lt; Transform &gt; &amp;absoluteFrame_X_supportFrame)</argsstring>
+        <name>buildBoundingBox</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Direction" kindref="compound">iDynTree::Direction</ref></type>
+          <declname>xAxisOfPlaneInWorld</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Direction" kindref="compound">iDynTree::Direction</ref></type>
+          <declname>yAxisOfPlaneInWorld</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
+          <declname>originOfPlaneInWorld</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="classiDynTree_1_1Polygon" kindref="compound">Polygon</ref> &gt; &amp;</type>
+          <declname>supportPolygonsExpressedInSupportFrame</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &gt; &amp;</type>
+          <declname>absoluteFrame_X_supportFrame</declname>
+        </param>
+        <briefdescription>
+<para>Build the projected bounding box. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>projectionPlaneXaxisInAbsoluteFrame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>X direction of the projection axis, in the absolute frame. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>projectionPlaneYaxisInAbsoluteFrame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Y direction of the projection axis, in the absolute frame. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>supportPolygonsExpressedInSupportFrame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector of the support polygons, expressed in the support frames. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>absoluteFrame_X_supportFrame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector of the transform between each support frame and the absolute frame. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="109" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a9d97dc9a2a54e958ed345faae3d51f54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector2</ref></type>
+        <definition>Vector2 iDynTree::BoundingBoxProjectionConstraint::project</definition>
+        <argsstring>(iDynTree::Position &amp;posIn3dInAbsoluteFrame)</argsstring>
+        <name>project</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &amp;</type>
+          <declname>posIn3dInAbsoluteFrame</declname>
+        </param>
+        <briefdescription>
+<para>Project a point in the plane of the bounding box. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The point is expressed in the absolute frame of the constriant. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="129" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a8b0076cd2583bcc73035920345fc8c1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::BoundingBoxProjectionConstraint::setProjectionAlongDirection</definition>
+        <argsstring>(Vector3 direction)</argsstring>
+        <name>setProjectionAlongDirection</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref></type>
+          <declname>direction</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set the projection matrix &apos;Pdirection&apos; given a desired projection direction.</para>
+<para><simplesect kind="author"><para>Aiko Dinale (29/08/2017)</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>direction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector along which we want to project a point </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="138" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BoundingBoxProjectionConstraint_1a930823fe7cb62c1ff65a5c1b2ad33863" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector2</ref></type>
+        <definition>Vector2 iDynTree::BoundingBoxProjectionConstraint::projectAlongDirection</definition>
+        <argsstring>(iDynTree::Position &amp;posIn3dInAbsoluteFrame)</argsstring>
+        <name>projectAlongDirection</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &amp;</type>
+          <declname>posIn3dInAbsoluteFrame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Project a point along a direction defined by the projection matrix &apos;Pdirection&apos;</para>
+<para><simplesect kind="author"><para>Aiko Dinale (29/08/2017)</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>posIn3dInAbsoluteFrame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a point we want to project </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/BoundingBoxHelpers.h" line="147" column="17"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para><ref refid="classiDynTree_1_1BoundingBoxProjectionConstraint" kindref="compound">BoundingBoxProjectionConstraint</ref> helper. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="10">
+        <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+      </node>
+      <node id="5">
+        <label>T</label>
+      </node>
+      <node id="13">
+        <label>iDynTree::Rotation</label>
+        <link refid="classiDynTree_1_1Rotation"/>
+        <childnode refid="14" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>iDynTree::PositionRaw</label>
+        <link refid="classiDynTree_1_1PositionRaw"/>
+        <childnode refid="18" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::MatrixDynSize</label>
+        <link refid="classiDynTree_1_1MatrixDynSize"/>
+      </node>
+      <node id="11">
+        <label>std::vector&lt; iDynTree::Transform &gt;</label>
+        <childnode refid="12" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; iDynTree::Transform &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="19">
+        <label>iDynTree::VectorDynSize</label>
+        <link refid="classiDynTree_1_1VectorDynSize"/>
+      </node>
+      <node id="4">
+        <label>std::vector&lt; T &gt;</label>
+        <childnode refid="5" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>iDynTree::MatrixFixSize&lt; 2, 3 &gt;</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+        <childnode refid="7" relation="template-instance">
+          <edgelabel>&lt; 2, 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::BoundingBoxProjectionConstraint</label>
+        <link refid="classiDynTree_1_1BoundingBoxProjectionConstraint"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>A</edgelabel>
+          <edgelabel>AtimesP</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>supportFrameIndices</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>P</edgelabel>
+          <edgelabel>Pdirection</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>projectedBoundingBox</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>absoluteFrame_X_supportFrame</edgelabel>
+        </childnode>
+        <childnode refid="16" relation="usage">
+          <edgelabel>o</edgelabel>
+        </childnode>
+        <childnode refid="19" relation="usage">
+          <edgelabel>b</edgelabel>
+        </childnode>
+      </node>
+      <node id="15">
+        <label>Matrix3x3</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+        <childnode refid="7" relation="template-instance">
+          <edgelabel>&lt; 3, 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="14">
+        <label>iDynTree::RotationRaw</label>
+        <link refid="classiDynTree_1_1RotationRaw"/>
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>iDynTree::Position</label>
+        <link refid="classiDynTree_1_1Position"/>
+        <childnode refid="17" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>iDynTree::MatrixFixSize&lt; nRows, nCols &gt;</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+      </node>
+      <node id="9">
+        <label>std::vector&lt; iDynTree::VectorFixSize &gt;</label>
+        <childnode refid="10" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; iDynTree::VectorFixSize &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>iDynTree::Polygon2D</label>
+        <link refid="classiDynTree_1_1Polygon2D"/>
+        <childnode refid="9" relation="usage">
+          <edgelabel>m_vertices</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::vector&lt; int &gt;</label>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; int &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="18">
+        <label>Vector3</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+        <childnode refid="10" relation="template-instance">
+          <edgelabel>&lt; 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="12">
+        <label>iDynTree::Transform</label>
+        <link refid="classiDynTree_1_1Transform"/>
+        <childnode refid="13" relation="usage">
+          <edgelabel>rot</edgelabel>
+        </childnode>
+        <childnode refid="16" relation="usage">
+          <edgelabel>pos</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/BoundingBoxHelpers.h" line="29" column="5" bodyfile="iDynTree/BoundingBoxHelpers.h" bodystart="30" bodyend="149"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1BoundingBoxProjectionConstraint_1a67e2db7524cabbada251ebfec6118d76" prot="public" virt="non-virtual"><scope>iDynTree::BoundingBoxProjectionConstraint</scope><name>A</name></member>
+      <member refid="classiDynTree_1_1BoundingBoxProjectionConstraint_1aec7064bb7cb6d238bf0c8473984d293c" prot="public" virt="non-virtual"><scope>iDynTree::BoundingBoxProjectionConstraint</scope><name>absoluteFrame_X_supportFrame</name></member>
+      <member refid="classiDynTree_1_1BoundingBoxProjectionConstraint_1aed4485913893e4e6392ff5be2a5ca82c" prot="public" virt="non-virtual"><scope>iDynTree::BoundingBoxProjectionConstraint</scope><name>AtimesP</name></member>
+      <member refid="classiDynTree_1_1BoundingBoxProjectionConstraint_1a174e78fcbd73beb939c18fc7793819ca" prot="public" virt="non-virtual"><scope>iDynTree::BoundingBoxProjectionConstraint</scope><name>b</name></member>
+      <member refid="classiDynTree_1_1BoundingBoxProjectionConstraint_1af283e0be96a667d9446be6a737569804" prot="public" virt="non-virtual"><scope>iDynTree::BoundingBoxProjectionConstraint</scope><name>buildBoundingBox</name></member>
+      <member refid="classiDynTree_1_1BoundingBoxProjectionConstraint_1a0471e922ebb65e31b5822dc05dd9bf4d" prot="private" virt="non-virtual"><scope>iDynTree::BoundingBoxProjectionConstraint</scope><name>buildConstraintMatrix</name></member>
+      <member refid="classiDynTree_1_1BoundingBoxProjectionConstraint_1a804e9f94e56b62cf35d269eb0fed0639" prot="public" virt="non-virtual"><scope>iDynTree::BoundingBoxProjectionConstraint</scope><name>getNrOfConstraints</name></member>
+      <member refid="classiDynTree_1_1BoundingBoxProjectionConstraint_1a81936e6f83d733acb670173d3b30141d" prot="public" virt="non-virtual"><scope>iDynTree::BoundingBoxProjectionConstraint</scope><name>isActive</name></member>
+      <member refid="classiDynTree_1_1BoundingBoxProjectionConstraint_1a9110117f1e70e5c02f5ba7a3dbfc8352" prot="private" virt="non-virtual"><scope>iDynTree::BoundingBoxProjectionConstraint</scope><name>m_isActive</name></member>
+      <member refid="classiDynTree_1_1BoundingBoxProjectionConstraint_1a1a1819a14597fd17e759b6b1a1ede95e" prot="public" virt="non-virtual"><scope>iDynTree::BoundingBoxProjectionConstraint</scope><name>o</name></member>
+      <member refid="classiDynTree_1_1BoundingBoxProjectionConstraint_1a0965c5b8cf5d35b5eb6359e813ee08f4" prot="public" virt="non-virtual"><scope>iDynTree::BoundingBoxProjectionConstraint</scope><name>P</name></member>
+      <member refid="classiDynTree_1_1BoundingBoxProjectionConstraint_1aabea435e6e536c29f835e2253eb58b51" prot="public" virt="non-virtual"><scope>iDynTree::BoundingBoxProjectionConstraint</scope><name>Pdirection</name></member>
+      <member refid="classiDynTree_1_1BoundingBoxProjectionConstraint_1a9d97dc9a2a54e958ed345faae3d51f54" prot="public" virt="non-virtual"><scope>iDynTree::BoundingBoxProjectionConstraint</scope><name>project</name></member>
+      <member refid="classiDynTree_1_1BoundingBoxProjectionConstraint_1a930823fe7cb62c1ff65a5c1b2ad33863" prot="public" virt="non-virtual"><scope>iDynTree::BoundingBoxProjectionConstraint</scope><name>projectAlongDirection</name></member>
+      <member refid="classiDynTree_1_1BoundingBoxProjectionConstraint_1a4d968d97432efec2b3f0e279b5314dec" prot="public" virt="non-virtual"><scope>iDynTree::BoundingBoxProjectionConstraint</scope><name>projectedBoundingBox</name></member>
+      <member refid="classiDynTree_1_1BoundingBoxProjectionConstraint_1ad950afd6663135de4b7656d7be278235" prot="public" virt="non-virtual"><scope>iDynTree::BoundingBoxProjectionConstraint</scope><name>setActive</name></member>
+      <member refid="classiDynTree_1_1BoundingBoxProjectionConstraint_1a8b0076cd2583bcc73035920345fc8c1c" prot="public" virt="non-virtual"><scope>iDynTree::BoundingBoxProjectionConstraint</scope><name>setProjectionAlongDirection</name></member>
+      <member refid="classiDynTree_1_1BoundingBoxProjectionConstraint_1a3e1874b20406c550cc38d335b8753f8c" prot="public" virt="non-virtual"><scope>iDynTree::BoundingBoxProjectionConstraint</scope><name>supportFrameIndices</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="SystemLineariser_8h" kind="file" language="C++">
+    <compoundname>SystemLineariser.h</compoundname>
+    <innerclass refid="classiDynTree_1_1optimalcontrol_1_1SystemLineariser" prot="public">iDynTree::optimalcontrol::SystemLineariser</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <innernamespace refid="namespaceiDynTree_1_1optimalcontrol">iDynTree::optimalcontrol</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/SystemLineariser.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1JointPosDoubleArray" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::JointPosDoubleArray</compoundname>
+    <basecompoundref refid="classiDynTree_1_1VectorDynSize" prot="public" virt="non-virtual">iDynTree::VectorDynSize</basecompoundref>
+    <includes local="no">iDynTree/Model/JointState.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1JointPosDoubleArray_1a11b9feb216427962eb76bb56a16b2e7e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::JointPosDoubleArray::JointPosDoubleArray</definition>
+        <argsstring>(std::size_t nrOfDOFs=0)</argsstring>
+        <name>JointPosDoubleArray</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>nrOfDOFs</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/JointState.h" line="32" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1JointPosDoubleArray_1a2207e3341616d0bf392aa93de89de1e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::JointPosDoubleArray::JointPosDoubleArray</definition>
+        <argsstring>(const iDynTree::Model &amp;model)</argsstring>
+        <name>JointPosDoubleArray</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/JointState.h" line="33" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1JointPosDoubleArray_1a0283c1bf421404a0c560e4a4a57c4490" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::JointPosDoubleArray::resize</definition>
+        <argsstring>(std::size_t nrOfDOFs)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>nrOfDOFs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/JointState.h" line="35" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1JointPosDoubleArray_1a61439b6f58feac5dca9b2062c2cc1457" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::JointPosDoubleArray::resize</definition>
+        <argsstring>(const iDynTree::Model &amp;model)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/JointState.h" line="36" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1JointPosDoubleArray_1a78911c1ffd581937c6017ef74b6bbe0f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::JointPosDoubleArray::isConsistent</definition>
+        <argsstring>(const iDynTree::Model &amp;model) const</argsstring>
+        <name>isConsistent</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/JointState.h" line="38" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1JointPosDoubleArray_1a6927f9ed20083812efd426e917e1643f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::JointPosDoubleArray::~JointPosDoubleArray</definition>
+        <argsstring>()</argsstring>
+        <name>~JointPosDoubleArray</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/JointState.h" line="40" column="9"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class for storing a vector of scalar values, one for each internal position coordinate in a model. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::VectorDynSize</label>
+        <link refid="classiDynTree_1_1VectorDynSize"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::JointPosDoubleArray</label>
+        <link refid="classiDynTree_1_1JointPosDoubleArray"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>iDynTree::VectorDynSize</label>
+        <link refid="classiDynTree_1_1VectorDynSize"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::JointPosDoubleArray</label>
+        <link refid="classiDynTree_1_1JointPosDoubleArray"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Model/JointState.h" line="29" column="5" bodyfile="iDynTree/Model/JointState.h" bodystart="30" bodyend="41"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1VectorDynSize_1a3ea2fb7a1554fed00d992b005b6c661a" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>allocator_type</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1a5f0343d03d3920a41c1bd94d2e6ffff5" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>begin</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1a6bd1b71bba47254db0d28d8a77135998" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>begin</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1adb08f82f775b84bd0e0f8964b5c42dc5" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>capacity</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1a2c6ca00df9c9295292f8aa505c938dbc" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>cbegin</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1ae32ad5772e2398de0f8fa4bf82eb9179" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>cend</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1aa7f1b92585b7eeab05b278ebe5504a06" prot="protected" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>changeCapacityAndCopyData</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1afa55464b73d97865bb3c070a3fa53b72" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>const_pointer</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1a6f33a6cbfc6efa20a58d174c96e1605f" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>data</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1a463b9b3d0f4581b3ab44f2ce63ba8874" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>data</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1aa75089c81fd2e6224182b16dee49dd79" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>end</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1acb315119d3e5018c46a6d410bae6830c" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>end</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1a1f435e6b594f64f058059df2e63434f8" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>fillBuffer</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1a5f0d8d1b4087ca7dad2efee621700b88" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>getVal</name></member>
+      <member refid="classiDynTree_1_1JointPosDoubleArray_1a78911c1ffd581937c6017ef74b6bbe0f" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>isConsistent</name></member>
+      <member refid="classiDynTree_1_1JointPosDoubleArray_1a11b9feb216427962eb76bb56a16b2e7e" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>JointPosDoubleArray</name></member>
+      <member refid="classiDynTree_1_1JointPosDoubleArray_1a2207e3341616d0bf392aa93de89de1e2" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>JointPosDoubleArray</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1af654f4b9b859eff6af68a6ece12a60d2" prot="protected" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>m_capacity</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1a5b4afa8d10714a7343f53d5a6c4ddecc" prot="protected" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>m_data</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1a82c970a6d8f227ee9b6613fd2592eea4" prot="protected" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>m_size</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1a420b4d9434108eb19ec6a8adc2190856" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1aa0dccee7d469722a58972d578ec3e004" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1a6bf2663c71216f9ec3b8fb9d6e68e3ec" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1a03b12232917d198052696fec51b891c9" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1a89c0494d10142474cf317a3fba6704d1" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>operator[]</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1a0f51ccc812b13faf0059f2e392e39c93" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>operator[]</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1a4ade79723371cd1b3b3d7bbdf17d9e92" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>pointer</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1a0c18e4e63e37de5efe0481f4c1861774" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>reserve</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1af1d48bf5aac5f4cf8c87e3ac161d2523" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>reservedToString</name></member>
+      <member refid="classiDynTree_1_1JointPosDoubleArray_1a0283c1bf421404a0c560e4a4a57c4490" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>resize</name></member>
+      <member refid="classiDynTree_1_1JointPosDoubleArray_1a61439b6f58feac5dca9b2062c2cc1457" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>resize</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1a4d111694becf32e213e35b89f6a22508" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>setVal</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1adb3205ed58008a5d54c9cd84b155d6e9" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>shrink_to_fit</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1ae0939194f829b13a798bc7120efa26c9" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>size</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1ae4f23d980b16dac5b100ec8eaa37f848" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>toString</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1a0bfc17c328f9cbb2a63b501edb09cc6a" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>value_type</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1ad5f75c57383d1f74bdff0cf636dc897c" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>VectorDynSize</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1ab5078978b40c0d797f4ec2679ad9a39c" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>VectorDynSize</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1a357bd4663b1aa598357dfeb2a5221dd4" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>VectorDynSize</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1a6cd442c9388f049e75a141fa9da1a37e" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>VectorDynSize</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1ab68a0190fe0a877a55d7a6b8399517a2" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>VectorDynSize</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1ad264c9a85bf7adbd308627b0e719d65f" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>zero</name></member>
+      <member refid="classiDynTree_1_1JointPosDoubleArray_1a6927f9ed20083812efd426e917e1643f" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>~JointPosDoubleArray</name></member>
+      <member refid="classiDynTree_1_1VectorDynSize_1a2b3a46833b8ac3023a285d9d180604c9" prot="public" virt="virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>~VectorDynSize</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

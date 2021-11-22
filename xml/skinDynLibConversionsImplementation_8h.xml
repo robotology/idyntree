@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="skinDynLibConversionsImplementation_8h" kind="file" language="C++">
+    <compoundname>skinDynLibConversionsImplementation.h</compoundname>
+    <includes refid="skinDynLibConversions_8h" local="no">iDynTree/skinDynLibConversions.h</includes>
+    <includes refid="Position_8h" local="no">iDynTree/Core/Position.h</includes>
+    <includes refid="Wrench_8h" local="no">iDynTree/Core/Wrench.h</includes>
+    <includes refid="Model_8h" local="no">iDynTree/Model/Model.h</includes>
+    <includes refid="Traversal_8h" local="no">iDynTree/Model/Traversal.h</includes>
+    <includes refid="ContactWrench_8h" local="no">iDynTree/Model/ContactWrench.h</includes>
+    <includes refid="YARPConversions_8h" local="no">iDynTree/yarp/YARPConversions.h</includes>
+    <includes local="no">cassert</includes>
+    <includedby refid="skinDynLibConversions_8h" local="yes">iDynTree/skinDynLibConversions.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/skinDynLibConversionsImplementation.h</label>
+        <link refid="skinDynLibConversionsImplementation_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>cassert</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="skinDynLibConversionsImplementation_8h_1abd0cb602d0a91817a13e042d47004d79" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class contactsList</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool iDynTree::fromSkinDynLibToiDynTreeHelper</definition>
+        <argsstring>(const Model &amp;model, const contactsList &amp;dynList, LinkUnknownWrenchContacts &amp;unknowns, const skinDynLibConversionsHelper &amp;conversionHelper)</argsstring>
+        <name>fromSkinDynLibToiDynTreeHelper</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const contactsList &amp;</type>
+          <declname>dynList</declname>
+        </param>
+        <param>
+          <type>LinkUnknownWrenchContacts &amp;</type>
+          <declname>unknowns</declname>
+        </param>
+        <param>
+          <type>const skinDynLibConversionsHelper &amp;</type>
+          <declname>conversionHelper</declname>
+        </param>
+        <briefdescription>
+<para>Templated version of fromSkinDynLibToiDynTree, useful to implement the exact same function for dynContactList and skinContactList, that have exactly the same interface, but they don&apos;t have any common ancestor in the class structure. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/skinDynLibConversionsImplementation.h" line="166" column="6" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="166" bodyend="240"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/skinDynLibConversionsImplementation.h"/>
+  </compounddef>
+</doxygen>

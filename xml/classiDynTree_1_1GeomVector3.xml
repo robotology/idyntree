@@ -1,0 +1,320 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1GeomVector3" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::GeomVector3</compoundname>
+    <basecompoundref refid="classiDynTree_1_1VectorFixSize" prot="public" virt="non-virtual">iDynTree::VectorFixSize&lt; 3 &gt;</basecompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1ab71bd5e2ac70a2decd3f2e482106f00c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::GeomVector3::GeomVector3</definition>
+        <argsstring>()=default</argsstring>
+        <name>GeomVector3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/GeomVector3.h" line="22" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1aeeac1dd21b65b6b5dd12904b1351a233" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::GeomVector3::GeomVector3</definition>
+        <argsstring>(const double *in_data, const unsigned int in_size)</argsstring>
+        <name>GeomVector3</name>
+        <param>
+          <type>const double *</type>
+          <declname>in_data</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>in_size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/GeomVector3.h" line="23" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1ae01e910747f89c27767ff5b1beb8d8c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::GeomVector3::GeomVector3</definition>
+        <argsstring>(const double x, const double y, const double z)</argsstring>
+        <name>GeomVector3</name>
+        <param>
+          <type>const double</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/GeomVector3.h" line="24" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1aa8e87fc1d7b70fb2de0277c5286a706d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::GeomVector3::GeomVector3</definition>
+        <argsstring>(const Vector3 other)</argsstring>
+        <name>GeomVector3</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref></type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/GeomVector3.h" line="25" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1a12571a756d72fa98e06747f574b4a4dc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1GeomVector3" kindref="compound">GeomVector3</ref></type>
+        <definition>GeomVector3 iDynTree::GeomVector3::changeCoordFrame</definition>
+        <argsstring>(const Rotation &amp;newCoordFrame) const</argsstring>
+        <name>changeCoordFrame</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref> &amp;</type>
+          <declname>newCoordFrame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/GeomVector3.h" line="26" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1a59ff22e4e2aa19f11ad14e59ab1eafac" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1GeomVector3" kindref="compound">GeomVector3</ref></type>
+        <definition>GeomVector3 iDynTree::GeomVector3::compose</definition>
+        <argsstring>(const GeomVector3 &amp;op1, const GeomVector3 &amp;op2) const</argsstring>
+        <name>compose</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1GeomVector3" kindref="compound">GeomVector3</ref> &amp;</type>
+          <declname>op1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1GeomVector3" kindref="compound">GeomVector3</ref> &amp;</type>
+          <declname>op2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/GeomVector3.h" line="27" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1a260a44b180c936550835a3a14eb2bc6c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1GeomVector3" kindref="compound">GeomVector3</ref></type>
+        <definition>GeomVector3 iDynTree::GeomVector3::inverse</definition>
+        <argsstring>(const GeomVector3 &amp;op) const</argsstring>
+        <name>inverse</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1GeomVector3" kindref="compound">GeomVector3</ref> &amp;</type>
+          <declname>op</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/GeomVector3.h" line="28" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1aec60050de711b7ec1ddeda437cf84b5b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::GeomVector3::dot</definition>
+        <argsstring>(const GeomVector3 &amp;other) const</argsstring>
+        <name>dot</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1GeomVector3" kindref="compound">GeomVector3</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/GeomVector3.h" line="29" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1a8cf0b58f2f1ea26e394c415c1c56642c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1GeomVector3" kindref="compound">GeomVector3</ref></type>
+        <definition>GeomVector3 iDynTree::GeomVector3::operator+</definition>
+        <argsstring>(const GeomVector3 &amp;other) const</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1GeomVector3" kindref="compound">GeomVector3</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/GeomVector3.h" line="30" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1a880ecfcf6738f3f442676c092ca22343" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1GeomVector3" kindref="compound">GeomVector3</ref></type>
+        <definition>GeomVector3 iDynTree::GeomVector3::operator-</definition>
+        <argsstring>(const GeomVector3 &amp;other) const</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1GeomVector3" kindref="compound">GeomVector3</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/GeomVector3.h" line="31" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1a1f7f7ed06f7e26132e0bde70639cf522" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1GeomVector3" kindref="compound">GeomVector3</ref></type>
+        <definition>GeomVector3 iDynTree::GeomVector3::operator-</definition>
+        <argsstring>() const</argsstring>
+        <name>operator-</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/GeomVector3.h" line="32" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1ad6e4d00636f3149d76ebce520f30ae4a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref></type>
+        <definition>Rotation iDynTree::GeomVector3::exp</definition>
+        <argsstring>() const</argsstring>
+        <name>exp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/GeomVector3.h" line="33" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1a4425d5277734d6ad621023e5b6bc6439" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1GeomVector3" kindref="compound">GeomVector3</ref></type>
+        <definition>GeomVector3 iDynTree::GeomVector3::cross</definition>
+        <argsstring>(const GeomVector3 &amp;other) const</argsstring>
+        <name>cross</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1GeomVector3" kindref="compound">GeomVector3</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/GeomVector3.h" line="34" column="13"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::GeomVector3</label>
+        <link refid="classiDynTree_1_1GeomVector3"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Vector3</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+        <childnode refid="3" relation="template-instance">
+          <edgelabel>&lt; 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::GeomVector3</label>
+        <link refid="classiDynTree_1_1GeomVector3"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Vector3</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+        <childnode refid="3" relation="template-instance">
+          <edgelabel>&lt; 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Core/GeomVector3.h" line="20" column="1" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="20" bodyend="36"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1VectorFixSize_1ad0f06a255dc213a5904d232f703a0192" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>allocator_type</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1affa1eab2d54d8227d8aeb402dc2dc1f7" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>begin</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a8e64a7875375a8b1b894614ba882ad05" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>begin</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a1420c32072d5c1e21140da111955a6d1" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>cbegin</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a0b5d60b77fbd7ba982e855453800f776" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>cend</name></member>
+      <member refid="classiDynTree_1_1GeomVector3_1a12571a756d72fa98e06747f574b4a4dc" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>changeCoordFrame</name></member>
+      <member refid="classiDynTree_1_1GeomVector3_1a59ff22e4e2aa19f11ad14e59ab1eafac" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>compose</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a69b51f8119155d31a254676ae867ae8f" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>const_pointer</name></member>
+      <member refid="classiDynTree_1_1GeomVector3_1a4425d5277734d6ad621023e5b6bc6439" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>cross</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a3bd1389dbdf51e06f4c64451c242397e" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>data</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1ab6f044aea32e55a72f6ebed68f93f767" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>data</name></member>
+      <member refid="classiDynTree_1_1GeomVector3_1aec60050de711b7ec1ddeda437cf84b5b" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>dot</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a9409f3724df4aa4de2c8281ba7e67db2" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>end</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a8b6f1796eba4d7c3db40e3d14e33b246" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>end</name></member>
+      <member refid="classiDynTree_1_1GeomVector3_1ad6e4d00636f3149d76ebce520f30ae4a" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>exp</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1aee106d61ebb0925fecfa55cbaa515981" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>fillBuffer</name></member>
+      <member refid="classiDynTree_1_1GeomVector3_1ab71bd5e2ac70a2decd3f2e482106f00c" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>GeomVector3</name></member>
+      <member refid="classiDynTree_1_1GeomVector3_1aeeac1dd21b65b6b5dd12904b1351a233" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>GeomVector3</name></member>
+      <member refid="classiDynTree_1_1GeomVector3_1ae01e910747f89c27767ff5b1beb8d8c4" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>GeomVector3</name></member>
+      <member refid="classiDynTree_1_1GeomVector3_1aa8e87fc1d7b70fb2de0277c5286a706d" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>GeomVector3</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1af8b3a33ff82732e94480023aa18cfe98" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>getVal</name></member>
+      <member refid="classiDynTree_1_1GeomVector3_1a260a44b180c936550835a3a14eb2bc6c" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>inverse</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a7bf5cd26b6fc24c9ddaf8854ebb8ec63" prot="protected" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>m_data</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1afbdebfe9410180223c2d33f6f5a243a5" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1aaeeab0c1251340903c447dbc3cd33b01" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1GeomVector3_1a8cf0b58f2f1ea26e394c415c1c56642c" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>operator+</name></member>
+      <member refid="classiDynTree_1_1GeomVector3_1a880ecfcf6738f3f442676c092ca22343" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>operator-</name></member>
+      <member refid="classiDynTree_1_1GeomVector3_1a1f7f7ed06f7e26132e0bde70639cf522" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>operator-</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a823899b673570f935b649cb98c1ca4f8" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a8345a3e5ee2998a02dd79019ce293421" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>operator[]</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a21683853dd0b95beea5b091a584fe486" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>operator[]</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1aa11c3eee00e88dabb7880f6cac2a9b82" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>pointer</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1acae25eb63bcbe6b524849d77134c168d" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>reservedToString</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1ab63541744f87c564754359e4923da4a6" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>setVal</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a92e903cfdf924fee24e71eee1b0dff76" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>size</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a11d7cfdce4e1674e2ce73a23c7e29990" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>toString</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1ada7487eff1fee83db8d41165d30f1263" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>value_type</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a1ed77487376ad9915912e2118cb228af" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>VectorFixSize</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a6e92dc360040bccf652bebb0b0318cd6" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>VectorFixSize</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a9fd2c86208c88b1b904564d0a6f5a3b5" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>VectorFixSize</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a57b77a6c96f3276ed8e12b5e35b7f442" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>zero</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

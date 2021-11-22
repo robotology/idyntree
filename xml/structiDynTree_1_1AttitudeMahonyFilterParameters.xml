@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1AttitudeMahonyFilterParameters" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::AttitudeMahonyFilterParameters</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1AttitudeMahonyFilterParameters_1a58df2c6120f64cbe5264821b9775f6b6" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>iDynTree::AttitudeMahonyFilterParameters::time_step_in_seconds</definition>
+        <argsstring></argsstring>
+        <name>time_step_in_seconds</name>
+        <initializer>{0.001}</initializer>
+        <briefdescription>
+<para>discretization time step in seconds, default value: <formula id="239">$ 0.001 s $</formula> </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="34" column="12" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1AttitudeMahonyFilterParameters_1a32e6e9a5a5a95d4060f7135a2b8f501c" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>iDynTree::AttitudeMahonyFilterParameters::kp</definition>
+        <argsstring></argsstring>
+        <name>kp</name>
+        <initializer>{1.0}</initializer>
+        <briefdescription>
+<para>Mahony <formula id="240">$ K_p $</formula> gain over the correction from IMU measurements, default value: <formula id="241">$ 1.0 $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="35" column="12" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1AttitudeMahonyFilterParameters_1a81eeb7bbcd18f339cb1c0355be15c62a" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>iDynTree::AttitudeMahonyFilterParameters::ki</definition>
+        <argsstring></argsstring>
+        <name>ki</name>
+        <initializer>{1.0}</initializer>
+        <briefdescription>
+<para>Mahony <formula id="242">$ K_i $</formula> gain over the gyro bias evolution, default value: <formula id="241">$ 1.0 $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="36" column="12" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1AttitudeMahonyFilterParameters_1ac7cf816b7de8f77a8bb573903fd168b2" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeMahonyFilterParameters::use_magnetometer_measurements</definition>
+        <argsstring></argsstring>
+        <name>use_magnetometer_measurements</name>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="37" column="10" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1AttitudeMahonyFilterParameters_1a8c0089a3102447cfe9527bce9a2e7ddd" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>iDynTree::AttitudeMahonyFilterParameters::confidence_magnetometer_measurements</definition>
+        <argsstring></argsstring>
+        <name>confidence_magnetometer_measurements</name>
+        <initializer>{0.0}</initializer>
+        <briefdescription>
+<para>confidence on magnetometer measurements, default value: <formula id="243">$ 0.0 $</formula> </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="38" column="12" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>set up the quaternion EKF </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="33" column="1" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="33" bodyend="39"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1AttitudeMahonyFilterParameters_1a8c0089a3102447cfe9527bce9a2e7ddd" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeMahonyFilterParameters</scope><name>confidence_magnetometer_measurements</name></member>
+      <member refid="structiDynTree_1_1AttitudeMahonyFilterParameters_1a81eeb7bbcd18f339cb1c0355be15c62a" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeMahonyFilterParameters</scope><name>ki</name></member>
+      <member refid="structiDynTree_1_1AttitudeMahonyFilterParameters_1a32e6e9a5a5a95d4060f7135a2b8f501c" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeMahonyFilterParameters</scope><name>kp</name></member>
+      <member refid="structiDynTree_1_1AttitudeMahonyFilterParameters_1a58df2c6120f64cbe5264821b9775f6b6" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeMahonyFilterParameters</scope><name>time_step_in_seconds</name></member>
+      <member refid="structiDynTree_1_1AttitudeMahonyFilterParameters_1ac7cf816b7de8f77a8bb573903fd168b2" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeMahonyFilterParameters</scope><name>use_magnetometer_measurements</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

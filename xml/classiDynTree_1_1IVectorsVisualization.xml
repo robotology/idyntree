@@ -1,0 +1,402 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1IVectorsVisualization" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::IVectorsVisualization</compoundname>
+    <includes local="no">iDynTree/Visualizer.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1IVectorsVisualization_1a1125e8e31b2c2f0e5d1672eed61a34e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type></type>
+        <definition>virtual iDynTree::IVectorsVisualization::~IVectorsVisualization</definition>
+        <argsstring>()=0</argsstring>
+        <name>~IVectorsVisualization</name>
+        <briefdescription>
+<para>Denstructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="469" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IVectorsVisualization_1add49aba200c78c11f67a7dea08476326" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>size_t</type>
+        <definition>virtual size_t iDynTree::IVectorsVisualization::addVector</definition>
+        <argsstring>(const Position &amp;origin, const Direction &amp;direction, double modulus)=0</argsstring>
+        <name>addVector</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+          <declname>origin</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref> &amp;</type>
+          <declname>direction</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>modulus</declname>
+        </param>
+        <briefdescription>
+<para>Add a vector in the visualization. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The vector index. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="475" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IVectorsVisualization_1ac09f7374d877e8ded950f659542fb811" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>size_t</type>
+        <definition>virtual size_t iDynTree::IVectorsVisualization::addVector</definition>
+        <argsstring>(const Position &amp;origin, const Vector3 &amp;components)=0</argsstring>
+        <name>addVector</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+          <declname>origin</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref> &amp;</type>
+          <declname>components</declname>
+        </param>
+        <briefdescription>
+<para>Add a vector in the visualization. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The vector index. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="481" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IVectorsVisualization_1a71d2f9cafe7dc0e15698d115a442f779" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>size_t</type>
+        <definition>virtual size_t iDynTree::IVectorsVisualization::getNrOfVectors</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getNrOfVectors</name>
+        <briefdescription>
+<para>Get the number of visualized vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="487" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IVectorsVisualization_1a513d13c35619c80714c5f2fd987a5bc7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IVectorsVisualization::getVector</definition>
+        <argsstring>(size_t vectorIndex, Position &amp;currentOrigin, Direction &amp;currentDirection, double &amp;currentModulus) const =0</argsstring>
+        <name>getVector</name>
+        <param>
+          <type>size_t</type>
+          <declname>vectorIndex</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+          <declname>currentOrigin</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref> &amp;</type>
+          <declname>currentDirection</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>currentModulus</declname>
+        </param>
+        <briefdescription>
+<para>Get vector properties. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="492" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IVectorsVisualization_1afb3836f141f9779146bd98896e7eff34" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IVectorsVisualization::getVector</definition>
+        <argsstring>(size_t vectorIndex, Position &amp;currentOrigin, Vector3 &amp;components) const =0</argsstring>
+        <name>getVector</name>
+        <param>
+          <type>size_t</type>
+          <declname>vectorIndex</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+          <declname>currentOrigin</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref> &amp;</type>
+          <declname>components</declname>
+        </param>
+        <briefdescription>
+<para>Get vector properties. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="498" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IVectorsVisualization_1a250b6e9d834891e9ab152cc0490cde56" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IVectorsVisualization::updateVector</definition>
+        <argsstring>(size_t vectorIndex, const Position &amp;origin, const Direction &amp;direction, double modulus)=0</argsstring>
+        <name>updateVector</name>
+        <param>
+          <type>size_t</type>
+          <declname>vectorIndex</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+          <declname>origin</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref> &amp;</type>
+          <declname>direction</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>modulus</declname>
+        </param>
+        <briefdescription>
+<para>Update Vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="503" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IVectorsVisualization_1aad3c01c4d7ec9817d7328e3158a28c51" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IVectorsVisualization::updateVector</definition>
+        <argsstring>(size_t vectorIndex, const Position &amp;origin, const Vector3 &amp;components)=0</argsstring>
+        <name>updateVector</name>
+        <param>
+          <type>size_t</type>
+          <declname>vectorIndex</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+          <declname>origin</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref> &amp;</type>
+          <declname>components</declname>
+        </param>
+        <briefdescription>
+<para>Update Vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="508" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IVectorsVisualization_1a3a84596b129fbb0755fe64629cf5b414" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IVectorsVisualization::setVectorColor</definition>
+        <argsstring>(size_t vectorIndex, const ColorViz &amp;vectorColor)=0</argsstring>
+        <name>setVectorColor</name>
+        <param>
+          <type>size_t</type>
+          <declname>vectorIndex</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ColorViz" kindref="compound">ColorViz</ref> &amp;</type>
+          <declname>vectorColor</declname>
+        </param>
+        <briefdescription>
+<para>Set vector color. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="513" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IVectorsVisualization_1ae986b0ea7d58f776cdd316d85e15bb8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::IVectorsVisualization::setVectorsDefaultColor</definition>
+        <argsstring>(const ColorViz &amp;vectorColor)=0</argsstring>
+        <name>setVectorsDefaultColor</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ColorViz" kindref="compound">ColorViz</ref> &amp;</type>
+          <declname>vectorColor</declname>
+        </param>
+        <briefdescription>
+<para>Set the default color for the vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="518" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IVectorsVisualization_1a05a06c2f783dfefccd571734349e385c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::IVectorsVisualization::setVectorsColor</definition>
+        <argsstring>(const ColorViz &amp;vectorColor)=0</argsstring>
+        <name>setVectorsColor</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ColorViz" kindref="compound">ColorViz</ref> &amp;</type>
+          <declname>vectorColor</declname>
+        </param>
+        <briefdescription>
+<para>Set the color for all the existing vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="523" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IVectorsVisualization_1a7eab12835526d138fbd89df44176e329" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IVectorsVisualization::setVectorsAspect</definition>
+        <argsstring>(double zeroModulusRadius, double modulusMultiplier, double heightScale)=0</argsstring>
+        <name>setVectorsAspect</name>
+        <param>
+          <type>double</type>
+          <declname>zeroModulusRadius</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>modulusMultiplier</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>heightScale</declname>
+        </param>
+        <briefdescription>
+<para>Determines the dimension of the visualized arrows. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>zeroModulusRadius</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Constant offset for the arrow radius. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>modulusMultiplier</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Multiplies the modulus and adds up to the zeroModulusRadius to get the total arrow radius. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successfull, false in case of negative numbers. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="531" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IVectorsVisualization_1ad0528ca51bfc248dadc1542ca2d920c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IVectorsVisualization::setVisible</definition>
+        <argsstring>(size_t vectorIndex, bool visible=true)=0</argsstring>
+        <name>setVisible</name>
+        <param>
+          <type>size_t</type>
+          <declname>vectorIndex</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>visible</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Set the visibility of a given vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>The</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>index of the vector to change the visibility </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>visible</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The visibility of the vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successfull, false if the index is out of bounds </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="539" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IVectorsVisualization_1ac10adddde7a220fcf8781a6834559fba" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1ILabel" kindref="compound">ILabel</ref> *</type>
+        <definition>virtual ILabel* iDynTree::IVectorsVisualization::getVectorLabel</definition>
+        <argsstring>(size_t vectorIndex)=0</argsstring>
+        <name>getVectorLabel</name>
+        <param>
+          <type>size_t</type>
+          <declname>vectorIndex</declname>
+        </param>
+        <briefdescription>
+<para>Get the label associated to a vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>vectorIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the vector to get the label </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The label associated to the vector. nullptr if the vectorIndex is out of bounds. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="546" column="20"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Interface to the visualization of vectors. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Visualizer.h" line="463" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="464" bodyend="547"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1IVectorsVisualization_1add49aba200c78c11f67a7dea08476326" prot="public" virt="pure-virtual"><scope>iDynTree::IVectorsVisualization</scope><name>addVector</name></member>
+      <member refid="classiDynTree_1_1IVectorsVisualization_1ac09f7374d877e8ded950f659542fb811" prot="public" virt="pure-virtual"><scope>iDynTree::IVectorsVisualization</scope><name>addVector</name></member>
+      <member refid="classiDynTree_1_1IVectorsVisualization_1a71d2f9cafe7dc0e15698d115a442f779" prot="public" virt="pure-virtual"><scope>iDynTree::IVectorsVisualization</scope><name>getNrOfVectors</name></member>
+      <member refid="classiDynTree_1_1IVectorsVisualization_1a513d13c35619c80714c5f2fd987a5bc7" prot="public" virt="pure-virtual"><scope>iDynTree::IVectorsVisualization</scope><name>getVector</name></member>
+      <member refid="classiDynTree_1_1IVectorsVisualization_1afb3836f141f9779146bd98896e7eff34" prot="public" virt="pure-virtual"><scope>iDynTree::IVectorsVisualization</scope><name>getVector</name></member>
+      <member refid="classiDynTree_1_1IVectorsVisualization_1ac10adddde7a220fcf8781a6834559fba" prot="public" virt="pure-virtual"><scope>iDynTree::IVectorsVisualization</scope><name>getVectorLabel</name></member>
+      <member refid="classiDynTree_1_1IVectorsVisualization_1a3a84596b129fbb0755fe64629cf5b414" prot="public" virt="pure-virtual"><scope>iDynTree::IVectorsVisualization</scope><name>setVectorColor</name></member>
+      <member refid="classiDynTree_1_1IVectorsVisualization_1a7eab12835526d138fbd89df44176e329" prot="public" virt="pure-virtual"><scope>iDynTree::IVectorsVisualization</scope><name>setVectorsAspect</name></member>
+      <member refid="classiDynTree_1_1IVectorsVisualization_1a05a06c2f783dfefccd571734349e385c" prot="public" virt="pure-virtual"><scope>iDynTree::IVectorsVisualization</scope><name>setVectorsColor</name></member>
+      <member refid="classiDynTree_1_1IVectorsVisualization_1ae986b0ea7d58f776cdd316d85e15bb8b" prot="public" virt="pure-virtual"><scope>iDynTree::IVectorsVisualization</scope><name>setVectorsDefaultColor</name></member>
+      <member refid="classiDynTree_1_1IVectorsVisualization_1ad0528ca51bfc248dadc1542ca2d920c3" prot="public" virt="pure-virtual"><scope>iDynTree::IVectorsVisualization</scope><name>setVisible</name></member>
+      <member refid="classiDynTree_1_1IVectorsVisualization_1a250b6e9d834891e9ab152cc0490cde56" prot="public" virt="pure-virtual"><scope>iDynTree::IVectorsVisualization</scope><name>updateVector</name></member>
+      <member refid="classiDynTree_1_1IVectorsVisualization_1aad3c01c4d7ec9817d7328e3158a28c51" prot="public" virt="pure-virtual"><scope>iDynTree::IVectorsVisualization</scope><name>updateVector</name></member>
+      <member refid="classiDynTree_1_1IVectorsVisualization_1a1125e8e31b2c2f0e5d1672eed61a34e1" prot="public" virt="pure-virtual"><scope>iDynTree::IVectorsVisualization</scope><name>~IVectorsVisualization</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

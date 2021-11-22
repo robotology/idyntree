@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1ForceTorqueSensorElement" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::ForceTorqueSensorElement</compoundname>
+    <basecompoundref refid="classiDynTree_1_1XMLElement" prot="public" virt="non-virtual">iDynTree::XMLElement</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1ForceTorqueSensorElement_1ae157c81f62e90e1a4b06c98fafa449a5" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1ForceTorqueSensorHelper" kindref="compound">iDynTree::ForceTorqueSensorHelper</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;iDynTree::ForceTorqueSensorHelper&gt; iDynTree::ForceTorqueSensorElement::m_helper</definition>
+        <argsstring></argsstring>
+        <name>m_helper</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/ForceTorqueSensorElement.h" line="28" column="21" bodyfile="private/ForceTorqueSensorElement.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1ForceTorqueSensorElement_1a4840a4d5855a9388d603909d5565f0f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ForceTorqueSensorElement::ForceTorqueSensorElement</definition>
+        <argsstring>(std::shared_ptr&lt; const SensorElement::SensorInfo &gt; sensorInfo)</argsstring>
+        <name>ForceTorqueSensorElement</name>
+        <param>
+          <type>std::shared_ptr&lt; const <ref refid="structiDynTree_1_1SensorElement_1_1SensorInfo" kindref="compound">SensorElement::SensorInfo</ref> &gt;</type>
+          <declname>sensorInfo</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/ForceTorqueSensorElement.h" line="30" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ForceTorqueSensorElement_1aa4c6d5b64e0290c93ccd0f963701b816" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">XMLElement</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;XMLElement&gt; iDynTree::ForceTorqueSensorElement::childElementForName</definition>
+        <argsstring>(const std::string &amp;name) override</argsstring>
+        <name>childElementForName</name>
+        <reimplements refid="classiDynTree_1_1XMLElement_1a94cf11d5e2e9f6a44f17c7439d2b809f">childElementForName</reimplements>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Factory method to create child element given the name. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>name of the element to create </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>a new parser element for the corresponding tag </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/ForceTorqueSensorElement.h" line="32" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ForceTorqueSensorElement_1ad3ac91fc185163b7f35acfb364b86a63" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::shared_ptr&lt; <ref refid="classiDynTree_1_1SensorHelper" kindref="compound">iDynTree::SensorHelper</ref> &gt;</type>
+        <definition>const std::shared_ptr&lt;iDynTree::SensorHelper&gt; iDynTree::ForceTorqueSensorElement::helper</definition>
+        <argsstring>() const</argsstring>
+        <name>helper</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/ForceTorqueSensorElement.h" line="34" column="27"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::XMLElement</label>
+        <link refid="classiDynTree_1_1XMLElement"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::ForceTorqueSensorElement</label>
+        <link refid="classiDynTree_1_1ForceTorqueSensorElement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>iDynTree::XMLElement</label>
+        <link refid="classiDynTree_1_1XMLElement"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::ForceTorqueSensorElement</label>
+        <link refid="classiDynTree_1_1ForceTorqueSensorElement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="private/ForceTorqueSensorElement.h" line="26" column="1" bodyfile="private/ForceTorqueSensorElement.h" bodystart="26" bodyend="35"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1XMLElement_1a2a182ac17f5e644b113a67e02c3595e5" prot="public" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>attributeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1adf74d829fbe4d3d112c0ef2eba8bd3ea" prot="public" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>attributes</name></member>
+      <member refid="classiDynTree_1_1ForceTorqueSensorElement_1aa4c6d5b64e0290c93ccd0f963701b816" prot="public" virt="virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>childElementForName</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a18b5b00729b99a19cb3e8f430656e152" prot="public" virt="virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>childHasBeenParsed</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1af5c19c2120a4e024149f78ee5bd52e6f" prot="public" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>children</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a3d8e1b737e614b35e3df0a4f76ac645b" prot="public" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>description</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a327997dec2ced313aad008c376205f36" prot="public" virt="virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>exitElementScope</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1aa6f49fb7b1b204e1a84cbdc51faeaa62" prot="public" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>exitScopeCallback</name></member>
+      <member refid="classiDynTree_1_1ForceTorqueSensorElement_1a4840a4d5855a9388d603909d5565f0f0" prot="public" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>ForceTorqueSensorElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1abebc95353394912e187ad70e6078fcdc" prot="public" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>getParsedTextContent</name></member>
+      <member refid="classiDynTree_1_1ForceTorqueSensorElement_1ad3ac91fc185163b7f35acfb364b86a63" prot="public" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>helper</name></member>
+      <member refid="classiDynTree_1_1ForceTorqueSensorElement_1ae157c81f62e90e1a4b06c98fafa449a5" prot="private" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>m_helper</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a7129fb1e69a5bc819872e65d3965296d" prot="public" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>name</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1aa44416f43c71e081f6637a91eb733e8d" prot="public" virt="virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>parsedCharacters</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1ab40851b7629a74107f2183ca36e412e4" prot="public" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>setAttributeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a2fe23e8a9ee4d2f776f792c9c118db45" prot="public" virt="virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>setAttributes</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a69171cc4b5c552b97f44375029356a2e" prot="public" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>setChildHasBeenParsedCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a16759fb450635662dced0eb2ace0228b" prot="public" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>setExitScopeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a885cb939d74e8ce27ce4c0708c04267e" prot="public" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a7ad288fac24328b2bb19908500fec39a" prot="public" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a42ee14ee8b2ec8a9e9e31472e1b17556" prot="public" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1aa0220e560dfd45a38797cb5209653ad4" prot="public" virt="virtual"><scope>iDynTree::ForceTorqueSensorElement</scope><name>~XMLElement</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

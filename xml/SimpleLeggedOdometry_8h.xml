@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="SimpleLeggedOdometry_8h" kind="file" language="C++">
+    <compoundname>SimpleLeggedOdometry.h</compoundname>
+    <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
+    <includes refid="Model_8h" local="no">iDynTree/Model/Model.h</includes>
+    <includes refid="Traversal_8h" local="no">iDynTree/Model/Traversal.h</includes>
+    <includes refid="JointState_8h" local="no">iDynTree/Model/JointState.h</includes>
+    <includes refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includes>
+    <innerclass refid="classiDynTree_1_1SimpleLeggedOdometry" prot="public">iDynTree::SimpleLeggedOdometry</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Estimation/SimpleLeggedOdometry.h"/>
+  </compounddef>
+</doxygen>

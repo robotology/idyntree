@@ -1,5 +1,0 @@
-<map id="iDynTree::PrismaticJoint" name="iDynTree::PrismaticJoint">
-<area shape="rect" id="node1" title="Class representing a prismatic joint, i.e." alt="" coords="5,155,183,181"/>
-<area shape="rect" id="node2" href="$classiDynTree_1_1MovableJointImpl.html" title="Base template for implementation of non&#45;fixed joints." alt="" coords="22,80,166,107"/>
-<area shape="rect" id="node3" href="$classiDynTree_1_1IJoint.html" title="Interface (i.e." alt="" coords="34,5,154,32"/>
-</map>

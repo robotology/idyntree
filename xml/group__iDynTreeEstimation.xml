@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="group__iDynTreeEstimation" kind="group">
+    <compoundname>iDynTreeEstimation</compoundname>
+    <title>Algorithms related to whole-body estimation.</title>
+    <innerclass refid="classiDynTree_1_1SimpleLeggedOdometry" prot="public">iDynTree::SimpleLeggedOdometry</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

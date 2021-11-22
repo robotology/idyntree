@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1BerdySensor" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::BerdySensor</compoundname>
+    <includes local="no">iDynTree/Estimation/BerdyHelper.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1BerdySensor_1aa22d89e1f66022ef86b9343b47e287e9" prot="public" static="no" mutable="no">
+        <type><ref refid="group__iDynTreeExperimental_1gab629c8d25391838124595ba8961654e4" kindref="member">iDynTree::BerdySensorTypes</ref></type>
+        <definition>iDynTree::BerdySensorTypes iDynTree::BerdySensor::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>type of the sensor </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="248" column="32" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="248" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1BerdySensor_1a0207a3c90241c0519a529b23042af393" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::BerdySensor::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>ID of the sensor </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="249" column="17" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="249" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1BerdySensor_1a7f773ad0965cddf3e56f637fca860716" prot="public" static="no" mutable="no">
+        <type><ref refid="structiDynTree_1_1IndexRange" kindref="compound">iDynTree::IndexRange</ref></type>
+        <definition>iDynTree::IndexRange iDynTree::BerdySensor::range</definition>
+        <argsstring></argsstring>
+        <name>range</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Range of the sensor (starting location in the measurements equations and number of measurements equations associated with the sensor) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="250" column="26" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="250" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structiDynTree_1_1BerdySensor_1aa91108da48e5b5d3222746b039c80139" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdySensor::operator==</definition>
+        <argsstring>(const struct BerdySensor &amp;sensor) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const struct <ref refid="structiDynTree_1_1BerdySensor" kindref="compound">BerdySensor</ref> &amp;</type>
+          <declname>sensor</declname>
+        </param>
+        <briefdescription>
+<para>Overload of equality operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Two sensors are considered equals if they have the same type and id <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sensor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the sensor to which the current sensor is compared to </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the two sensors are equal. False otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="261" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="structiDynTree_1_1BerdySensor_1aec02e210d6aec35287642c9b6a051974" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdySensor::operator&lt;</definition>
+        <argsstring>(const struct BerdySensor &amp;sensor) const</argsstring>
+        <name>operator&lt;</name>
+        <param>
+          <type>const struct <ref refid="structiDynTree_1_1BerdySensor" kindref="compound">BerdySensor</ref> &amp;</type>
+          <declname>sensor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="263" column="5"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure which describes the essential information about a sensor used in berdy A sensor is identified by the pair (type, id) </para>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="4">
+        <label>iDynTree::IndexRange</label>
+        <link refid="structiDynTree_1_1IndexRange"/>
+      </node>
+      <node id="3">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="1">
+        <label>iDynTree::BerdySensor</label>
+        <link refid="structiDynTree_1_1BerdySensor"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>id</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>range</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::string</label>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Estimation/BerdyHelper.h" line="247" column="1" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="247" bodyend="264"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1BerdySensor_1a0207a3c90241c0519a529b23042af393" prot="public" virt="non-virtual"><scope>iDynTree::BerdySensor</scope><name>id</name></member>
+      <member refid="structiDynTree_1_1BerdySensor_1aec02e210d6aec35287642c9b6a051974" prot="public" virt="non-virtual"><scope>iDynTree::BerdySensor</scope><name>operator&lt;</name></member>
+      <member refid="structiDynTree_1_1BerdySensor_1aa91108da48e5b5d3222746b039c80139" prot="public" virt="non-virtual"><scope>iDynTree::BerdySensor</scope><name>operator==</name></member>
+      <member refid="structiDynTree_1_1BerdySensor_1a7f773ad0965cddf3e56f637fca860716" prot="public" virt="non-virtual"><scope>iDynTree::BerdySensor</scope><name>range</name></member>
+      <member refid="structiDynTree_1_1BerdySensor_1aa22d89e1f66022ef86b9343b47e287e9" prot="public" virt="non-virtual"><scope>iDynTree::BerdySensor</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

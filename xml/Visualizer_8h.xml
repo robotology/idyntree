@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="Visualizer_8h" kind="file" language="C++">
+    <compoundname>Visualizer.h</compoundname>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
+    <includes refid="Direction_8h" local="no">iDynTree/Core/Direction.h</includes>
+    <includes refid="Position_8h" local="no">iDynTree/Core/Position.h</includes>
+    <includes refid="JointState_8h" local="no">iDynTree/Model/JointState.h</includes>
+    <includes refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includes>
+    <incdepgraph>
+      <node id="2">
+        <label>string</label>
+      </node>
+      <node id="3">
+        <label>vector</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/Visualizer.h</label>
+        <link refid="Visualizer_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1ICameraAnimator" prot="public">iDynTree::ICameraAnimator</innerclass>
+    <innerclass refid="classiDynTree_1_1ICamera" prot="public">iDynTree::ICamera</innerclass>
+    <innerclass refid="classiDynTree_1_1ColorViz" prot="public">iDynTree::ColorViz</innerclass>
+    <innerclass refid="classiDynTree_1_1PixelViz" prot="public">iDynTree::PixelViz</innerclass>
+    <innerclass refid="classiDynTree_1_1ILight" prot="public">iDynTree::ILight</innerclass>
+    <innerclass refid="classiDynTree_1_1IEnvironment" prot="public">iDynTree::IEnvironment</innerclass>
+    <innerclass refid="classiDynTree_1_1IJetsVisualization" prot="public">iDynTree::IJetsVisualization</innerclass>
+    <innerclass refid="classiDynTree_1_1ILabel" prot="public">iDynTree::ILabel</innerclass>
+    <innerclass refid="classiDynTree_1_1IVectorsVisualization" prot="public">iDynTree::IVectorsVisualization</innerclass>
+    <innerclass refid="classiDynTree_1_1IFrameVisualization" prot="public">iDynTree::IFrameVisualization</innerclass>
+    <innerclass refid="classiDynTree_1_1IModelVisualization" prot="public">iDynTree::IModelVisualization</innerclass>
+    <innerclass refid="classiDynTree_1_1ITexture" prot="public">iDynTree::ITexture</innerclass>
+    <innerclass refid="structiDynTree_1_1VisualizerOptions" prot="public">iDynTree::VisualizerOptions</innerclass>
+    <innerclass refid="classiDynTree_1_1ITexturesHandler" prot="public">iDynTree::ITexturesHandler</innerclass>
+    <innerclass refid="classiDynTree_1_1Visualizer" prot="public">iDynTree::Visualizer</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="Visualizer_8h_1aad6844bb3e20ca63bfe9e3ee6e26515a" prot="public" static="no" strong="no">
+        <type></type>
+        <name>LightType</name>
+        <enumvalue id="Visualizer_8h_1aad6844bb3e20ca63bfe9e3ee6e26515aa7552ee08212d810760cfcca2c9e26976" prot="public">
+          <name>POINT_LIGHT</name>
+          <briefdescription>
+<para>point light, it has a position in space and radiates light in all directions </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="Visualizer_8h_1aad6844bb3e20ca63bfe9e3ee6e26515aac19ca7f555771da916a01ed3fa781d21" prot="public">
+          <name>DIRECTIONAL_LIGHT</name>
+          <briefdescription>
+<para>directional light, coming from a direction from an infinite distance </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="180" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="181" bodyend="186"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Visualizer.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1RotationalInertiaRaw" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::RotationalInertiaRaw</compoundname>
+    <basecompoundref refid="classiDynTree_1_1MatrixFixSize" prot="public" virt="non-virtual">iDynTree::MatrixFixSize&lt; 3, 3 &gt;</basecompoundref>
+    <includes local="no">iDynTree/Core/RotationalInertiaRaw.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1RotationalInertiaRaw_1ab9d59eeb6e800984a084de1b92f9c848" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::RotationalInertiaRaw::RotationalInertiaRaw</definition>
+        <argsstring>()</argsstring>
+        <name>RotationalInertiaRaw</name>
+        <briefdescription>
+<para>Default constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The data is not reset to zero for perfomance reason. Please initialize the data in the vector before any use. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/RotationalInertiaRaw.h" line="42" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RotationalInertiaRaw_1a4fd1fb49b1ec5a14d36d77e579c8b4ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::RotationalInertiaRaw::RotationalInertiaRaw</definition>
+        <argsstring>(const double *in_data, const unsigned int in_rows, const unsigned int in_cols)</argsstring>
+        <name>RotationalInertiaRaw</name>
+        <param>
+          <type>const double *</type>
+          <declname>in_data</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>in_rows</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>in_cols</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/RotationalInertiaRaw.h" line="43" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RotationalInertiaRaw_1ab2abca01c8b3bf4875193d7c00fcfe5c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::RotationalInertiaRaw::RotationalInertiaRaw</definition>
+        <argsstring>(const RotationalInertiaRaw &amp;other)</argsstring>
+        <name>RotationalInertiaRaw</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1RotationalInertiaRaw" kindref="compound">RotationalInertiaRaw</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/RotationalInertiaRaw.h" line="44" column="9"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classiDynTree_1_1RotationalInertiaRaw_1a2e39cb0f0483d8035aa0b78de8d6d943" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1RotationalInertiaRaw" kindref="compound">RotationalInertiaRaw</ref></type>
+        <definition>static RotationalInertiaRaw iDynTree::RotationalInertiaRaw::Zero</definition>
+        <argsstring>()</argsstring>
+        <name>Zero</name>
+        <briefdescription>
+<para>Initializer helper: return a zero matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/RotationalInertiaRaw.h" line="49" column="37"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class providing the raw coordinates for a 3d inertia matrix. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="note"><para>in iDynTree, the spatial vector follows this serialization: the first three elements are the linear part and the second three elements are the angular part.</para>
+</simplesect>
+We use a parent Matrix3x3 for storage of the rotational inertia matrix: given that the inertia matrix is a 3x3 symmetric matrix, the ordering (row order or column order) is not influencing the storage of the matrix. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::RotationalInertiaRaw</label>
+        <link refid="classiDynTree_1_1RotationalInertiaRaw"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Matrix3x3</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+        <childnode refid="3" relation="template-instance">
+          <edgelabel>&lt; 3, 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::MatrixFixSize&lt; nRows, nCols &gt;</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>iDynTree::RotationalInertiaRaw</label>
+        <link refid="classiDynTree_1_1RotationalInertiaRaw"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Matrix3x3</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+        <childnode refid="3" relation="template-instance">
+          <edgelabel>&lt; 3, 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::MatrixFixSize&lt; nRows, nCols &gt;</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Core/RotationalInertiaRaw.h" line="33" column="5" bodyfile="iDynTree/Core/RotationalInertiaRaw.h" bodystart="34" bodyend="51"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1MatrixFixSize_1ae38fd55ba7321a950d4d99a215508bf2" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>cols</name></member>
+      <member refid="classiDynTree_1_1MatrixFixSize_1afa9fff22a34eb198785d87ffe161488f" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>data</name></member>
+      <member refid="classiDynTree_1_1MatrixFixSize_1aa4afb9030800a8424afd9a8bb36d8972" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>data</name></member>
+      <member refid="classiDynTree_1_1MatrixFixSize_1a58750c21e5e8c31c54c3eed7dd2309b6" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>fillColMajorBuffer</name></member>
+      <member refid="classiDynTree_1_1MatrixFixSize_1a6da0a936d351418e0dcb4d67f3d0abbc" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>fillRowMajorBuffer</name></member>
+      <member refid="classiDynTree_1_1MatrixFixSize_1af7565606ec61a76aef023327d6d76e5d" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>getVal</name></member>
+      <member refid="classiDynTree_1_1MatrixFixSize_1a8e916f4550fec92847dab198695299a1" prot="protected" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>m_data</name></member>
+      <member refid="classiDynTree_1_1MatrixFixSize_1a5a0f188608c558f9865c068ff219fbf7" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>MatrixFixSize</name></member>
+      <member refid="classiDynTree_1_1MatrixFixSize_1af40e02e39fdc16ea5c8b48017118cf9e" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>MatrixFixSize</name></member>
+      <member refid="classiDynTree_1_1MatrixFixSize_1a36e8e1c4e1b9910a1a0837e270cb8a62" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>MatrixFixSize</name></member>
+      <member refid="classiDynTree_1_1MatrixFixSize_1ab3e1a6639194edc7f1449f7a035006e7" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1MatrixFixSize_1a0d188ae16044771a2baeb0e9e4749647" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1MatrixFixSize_1a94ef6fa6794ee354df4687078731e383" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1MatrixFixSize_1a1323e690b88b1abe04bd838db6546637" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>reservedToString</name></member>
+      <member refid="classiDynTree_1_1RotationalInertiaRaw_1ab9d59eeb6e800984a084de1b92f9c848" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>RotationalInertiaRaw</name></member>
+      <member refid="classiDynTree_1_1RotationalInertiaRaw_1a4fd1fb49b1ec5a14d36d77e579c8b4ce" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>RotationalInertiaRaw</name></member>
+      <member refid="classiDynTree_1_1RotationalInertiaRaw_1ab2abca01c8b3bf4875193d7c00fcfe5c" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>RotationalInertiaRaw</name></member>
+      <member refid="classiDynTree_1_1MatrixFixSize_1a1504fe384616906ee0bab7a7751426c8" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>rows</name></member>
+      <member refid="classiDynTree_1_1MatrixFixSize_1ad0f0ee21b75babc619fffec43e922747" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>setVal</name></member>
+      <member refid="classiDynTree_1_1MatrixFixSize_1aab67a981ed6a31503d0aca8b4589d6be" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>toString</name></member>
+      <member refid="classiDynTree_1_1MatrixFixSize_1a8f8fd8b2d42c3b1e51eaac923dc77395" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>value_type</name></member>
+      <member refid="classiDynTree_1_1MatrixFixSize_1a26bd376a8f4cfa044ff366a22f1aab6e" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>zero</name></member>
+      <member refid="classiDynTree_1_1RotationalInertiaRaw_1a2e39cb0f0483d8035aa0b78de8d6d943" prot="public" virt="non-virtual"><scope>iDynTree::RotationalInertiaRaw</scope><name>Zero</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

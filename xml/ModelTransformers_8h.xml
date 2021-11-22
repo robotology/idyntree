@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="ModelTransformers_8h" kind="file" language="C++">
+    <compoundname>ModelTransformers.h</compoundname>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ModelTransformers_8h_1aab77480c8f9d5add110768cf75226508" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::removeFakeLinks</definition>
+        <argsstring>(const Model &amp;modelWithFakeLinks, Model &amp;modelWithoutFakeLinks)</argsstring>
+        <name>removeFakeLinks</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>modelWithFakeLinks</declname>
+        </param>
+        <param>
+          <type>Model &amp;</type>
+          <declname>modelWithoutFakeLinks</declname>
+        </param>
+        <briefdescription>
+<para>\function Remove all fake links in the model, transforming them in frames. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Given a <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> in input, this function copies all its links and joints to the model in output, except for links that recognized as &quot;fake links&quot;.</para>
+<para>The condition for a link to be classified as &quot;fake link&quot; are:<itemizedlist>
+<listitem><para>The link has a zero mass.</para>
+</listitem><listitem><para>The link is a leaf, i.e. it is connected to only one neighbor.</para>
+</listitem><listitem><para>The link is connected to its only neighbor with a fixed joint.</para>
+</listitem></itemizedlist>
+</para>
+<para>Once a &quot;fake link&quot; has been identified to respect this two conditions, it and the joint that it connects it to its only neighbor is not copied to the output model, but a frame with the same name of the &quot;fake link&quot; and with the same transform is added to the model.</para>
+<para><simplesect kind="note"><para>The definition of &quot;fake link&quot; used in this function excludes the case in which two fake links are attached to one another. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ModelTransformers.h" line="50" column="6" declfile="iDynTree/Model/ModelTransformers.h" declline="50" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTransformers_8h_1a0dfcb86d2d13eb1969493ee84da2f5c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::createReducedModel</definition>
+        <argsstring>(const Model &amp;fullModel, const std::vector&lt; std::string &gt; &amp;jointsInReducedModel, Model &amp;reducedModel)</argsstring>
+        <name>createReducedModel</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>fullModel</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>jointsInReducedModel</declname>
+        </param>
+        <param>
+          <type>Model &amp;</type>
+          <declname>reducedModel</declname>
+        </param>
+        <briefdescription>
+<para>This function takes in input a <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> and an ordered list of joints and returns a model with just the joint specified in the list, with that exact order. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>All other joints are be removed by lumping (i.e. fusing together) the inertia of the links that are connected by that joint, assuming the joint to be in &quot;rest&quot; position (i.e. zero for revolute or prismatic joints). The links eliminated with this process are be added back to the reduced model as &quot;frames&quot;, and are copied in the same way all the additional frames of the lumped links. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ModelTransformers.h" line="65" column="6" declfile="iDynTree/Model/ModelTransformers.h" declline="65" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTransformers_8h_1aa6a9c44d5b80ede19b30f721f88d3679" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::createModelWithNormalizedJointNumbering</definition>
+        <argsstring>(const Model &amp;model, const std::string &amp;baseForNormalizedJointNumbering, Model &amp;reducedModel)</argsstring>
+        <name>createModelWithNormalizedJointNumbering</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>baseForNormalizedJointNumbering</declname>
+        </param>
+        <param>
+          <type>Model &amp;</type>
+          <declname>reducedModel</declname>
+        </param>
+        <briefdescription>
+<para>Given a specified base, return a model with a &quot;normalized&quot; joint numbering for that base. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function takes in input a <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> and a name of a link in that model. It returns a model identical to the one in input, but with the joint serialization of the non-fixed joint modified in such a way that a non-fixed joint has an index higher than all the non-fixed joints on the path between it and the base. After all the non-fixed joints, the fixed joints are also added with the same criteria, but applied to fixed joints.</para>
+<para><simplesect kind="note"><para>This method make sure that the non-fixed joint in the model have a &quot;regular numbering&quot; as described in Featherstone &quot;Rigid Body Dynamics Algorithm&quot;, section 4.1.2 . Note that this numbering is not required by any algorithm in iDynTree, but it may be useful for example to ensure that for a chain model the joint numbering is the one induced by the kinematic structure.</para>
+</simplesect>
+<simplesect kind="return"><para>true if all went well, false if there was an error in conversion. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ModelTransformers.h" line="86" column="6" declfile="iDynTree/Model/ModelTransformers.h" declline="86" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Collection of function to modify model in various ways. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>In this file a series of functions for transforming Model objects are provided </para>
+    </detaileddescription>
+    <location file="iDynTree/Model/ModelTransformers.h"/>
+  </compounddef>
+</doxygen>

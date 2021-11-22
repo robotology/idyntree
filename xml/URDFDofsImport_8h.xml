@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="URDFDofsImport_8h" kind="file" language="C++">
+    <compoundname>URDFDofsImport.h</compoundname>
+    <includes local="no">vector</includes>
+    <includes local="no">string</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/ModelIO/URDFDofsImport.h</label>
+        <link refid="URDFDofsImport_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="2">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__iDynTreeModelIO_1ga80941e03b0209a745a76fadc3264879a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::dofsListFromURDF</definition>
+        <argsstring>(const std::string &amp;urdf_filename, std::vector&lt; std::string &gt; &amp;dofs)</argsstring>
+        <name>dofsListFromURDF</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>urdf_filename</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt; &amp;</type>
+          <declname>dofs</declname>
+        </param>
+        <briefdescription>
+<para>Load a list of dofs names from a URDF file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if all went ok, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/URDFDofsImport.h" line="29" column="6" declfile="iDynTree/ModelIO/URDFDofsImport.h" declline="29" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeModelIO_1ga657c7f9a0eedd9b8f71a54e6a83acdc0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::dofsListFromURDFString</definition>
+        <argsstring>(const std::string &amp;urdf_string, std::vector&lt; std::string &gt; &amp;dofs)</argsstring>
+        <name>dofsListFromURDFString</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>urdf_string</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt; &amp;</type>
+          <declname>dofs</declname>
+        </param>
+        <briefdescription>
+<para>Load a list of dofs object from a URDF string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if all went ok, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/URDFDofsImport.h" line="39" column="6" declfile="iDynTree/ModelIO/URDFDofsImport.h" declline="39" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/ModelIO/URDFDofsImport.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,951 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1DiscreteKalmanFilterHelper" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::DiscreteKalmanFilterHelper</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a7fa23830b82ab7ce02d62313bf5a5749" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t iDynTree::DiscreteKalmanFilterHelper::m_dim_X</definition>
+        <argsstring></argsstring>
+        <name>m_dim_X</name>
+        <briefdescription>
+<para>state dimension </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="203" column="16" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="203" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1ac58522d9cddca0f6c85c02a0fb2822f7" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t iDynTree::DiscreteKalmanFilterHelper::m_dim_Y</definition>
+        <argsstring></argsstring>
+        <name>m_dim_Y</name>
+        <briefdescription>
+<para>output dimenstion </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="204" column="16" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="204" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a0b37d3e557ec9910960dacaf85f8522d" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t iDynTree::DiscreteKalmanFilterHelper::m_dim_U</definition>
+        <argsstring></argsstring>
+        <name>m_dim_U</name>
+        <briefdescription>
+<para>input dimension </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="205" column="16" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="205" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1ae519611fadb53f51eb0216a68a30f451" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
+        <definition>iDynTree::VectorDynSize iDynTree::DiscreteKalmanFilterHelper::m_x</definition>
+        <argsstring></argsstring>
+        <name>m_x</name>
+        <briefdescription>
+<para>state at time instant k </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="207" column="33" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="207" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a0d60769b2b0808e75e809405f017a024" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
+        <definition>iDynTree::VectorDynSize iDynTree::DiscreteKalmanFilterHelper::m_x0</definition>
+        <argsstring></argsstring>
+        <name>m_x0</name>
+        <briefdescription>
+<para>buffer to store initial state </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="208" column="33" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="208" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1ade60ec4072df22a669b6cdeb5e19b917" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
+        <definition>iDynTree::VectorDynSize iDynTree::DiscreteKalmanFilterHelper::m_u</definition>
+        <argsstring></argsstring>
+        <name>m_u</name>
+        <briefdescription>
+<para>input at time instant k </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="209" column="33" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="209" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a191146e2ad2bfbbb1ddb6e115e5f2ab8" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
+        <definition>iDynTree::VectorDynSize iDynTree::DiscreteKalmanFilterHelper::m_y</definition>
+        <argsstring></argsstring>
+        <name>m_y</name>
+        <briefdescription>
+<para>measurements at time instant k </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="210" column="33" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="210" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a162e5594ff26458feda52c5cd7cae891" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
+        <definition>iDynTree::MatrixDynSize iDynTree::DiscreteKalmanFilterHelper::m_A</definition>
+        <argsstring></argsstring>
+        <name>m_A</name>
+        <briefdescription>
+<para>state transition matrix </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="212" column="33" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="212" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1ae2811c9e771709a8f3a03477b9a3f17e" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
+        <definition>iDynTree::MatrixDynSize iDynTree::DiscreteKalmanFilterHelper::m_B</definition>
+        <argsstring></argsstring>
+        <name>m_B</name>
+        <briefdescription>
+<para>control input matrix </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="213" column="33" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="213" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1abcacf2788c5d1ee56dac7ab4f2451d81" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
+        <definition>iDynTree::MatrixDynSize iDynTree::DiscreteKalmanFilterHelper::m_C</definition>
+        <argsstring></argsstring>
+        <name>m_C</name>
+        <briefdescription>
+<para>output matrix </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="214" column="33" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="214" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1ad47b844df1b1ce4e77486118fea3a421" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
+        <definition>iDynTree::MatrixDynSize iDynTree::DiscreteKalmanFilterHelper::m_D</definition>
+        <argsstring></argsstring>
+        <name>m_D</name>
+        <briefdescription>
+<para>feedthrough matrix </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="215" column="33" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="215" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a2c73bcb9fafa8e7520d04120df5939fe" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
+        <definition>iDynTree::MatrixDynSize iDynTree::DiscreteKalmanFilterHelper::m_P</definition>
+        <argsstring></argsstring>
+        <name>m_P</name>
+        <briefdescription>
+<para>state covariance matrix </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="217" column="33" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="217" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a1dd5d47933bf6a9277fc8eeb7aad35b6" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
+        <definition>iDynTree::MatrixDynSize iDynTree::DiscreteKalmanFilterHelper::m_P0</definition>
+        <argsstring></argsstring>
+        <name>m_P0</name>
+        <briefdescription>
+<para>initial state covariance matrix </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="218" column="33" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="218" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a0b9867945121a420b600941d8a1636c6" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
+        <definition>iDynTree::MatrixDynSize iDynTree::DiscreteKalmanFilterHelper::m_Q</definition>
+        <argsstring></argsstring>
+        <name>m_Q</name>
+        <briefdescription>
+<para>system noise covariance matrix </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="219" column="33" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="219" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1aee0dea49a299e1ba825245a05291b11f" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
+        <definition>iDynTree::MatrixDynSize iDynTree::DiscreteKalmanFilterHelper::m_R</definition>
+        <argsstring></argsstring>
+        <name>m_R</name>
+        <briefdescription>
+<para>measurement covariance matrix </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="220" column="33" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="220" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a799d024b926422913ee521f6244dcfcd" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::m_is_initialized</definition>
+        <argsstring></argsstring>
+        <name>m_is_initialized</name>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>flag to check if filter is initialized </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="222" column="14" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="222" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a22ebe32c0b8ff34e86f00f6c8333fc4a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::m_filter_constructed</definition>
+        <argsstring></argsstring>
+        <name>m_filter_constructed</name>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>flag to check if the filter is constructed properly with the A, B, C, D matrices </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="224" column="14" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="224" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a27c3dd9e65fbba5a976b4d36d23cb53c" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::m_initial_state_set</definition>
+        <argsstring></argsstring>
+        <name>m_initial_state_set</name>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>flag to check if initial state is set </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="225" column="14" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="225" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a1db0a164839bd7875d6ae6a4d88d23c8" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::m_initial_state_covariance_set</definition>
+        <argsstring></argsstring>
+        <name>m_initial_state_covariance_set</name>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>flag to check if initial state covariance matrix is set </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="226" column="14" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="226" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a0c5cb2d2165887491b75c220b46d25cb" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::m_measurement_noise_covariance_matrix_set</definition>
+        <argsstring></argsstring>
+        <name>m_measurement_noise_covariance_matrix_set</name>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>flag to check if measurement noise covariance matrix is set </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="227" column="14" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="227" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a1e1082d902313d6cd6ad90dda4ebaf79" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::m_system_noise_covariance_matrix_set</definition>
+        <argsstring></argsstring>
+        <name>m_system_noise_covariance_matrix_set</name>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>flag to check if system noise covariance matrix is set </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="228" column="14" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="228" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1ab1ac37549bfcce2d0b16b2c55a172c92" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::m_measurement_updated</definition>
+        <argsstring></argsstring>
+        <name>m_measurement_updated</name>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>flag to check if measurement is updated </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="230" column="14" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="230" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1ad5bac1548e9e013fff61d3545b9ef7a8" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::m_input_updated</definition>
+        <argsstring></argsstring>
+        <name>m_input_updated</name>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>flag to check if input is updated </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="231" column="14" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="231" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a82e2f8d99a1fb7622db478208422473c" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::m_use_feed_through</definition>
+        <argsstring></argsstring>
+        <name>m_use_feed_through</name>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>toggle to use feed through matrix D </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="233" column="14" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="233" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1ad0cc01496f84be50801c5ee9c3707a62" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::m_use_control_input</definition>
+        <argsstring></argsstring>
+        <name>m_use_control_input</name>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>toggle to use control input matrix B </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="234" column="14" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="234" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a6e92e6097a9c72d5112dd132d2ea2a0c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::DiscreteKalmanFilterHelper::DiscreteKalmanFilterHelper</definition>
+        <argsstring>()</argsstring>
+        <name>DiscreteKalmanFilterHelper</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="49" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1aa21afff6cf2dbf26aa40456f5f19cd03" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::constructKalmanFilter</definition>
+        <argsstring>(const iDynTree::MatrixDynSize &amp;A, const iDynTree::MatrixDynSize &amp;B, const iDynTree::MatrixDynSize &amp;C, const iDynTree::MatrixDynSize &amp;D)</argsstring>
+        <name>constructKalmanFilter</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>A</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>B</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>C</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>D</declname>
+        </param>
+        <briefdescription>
+<para>Describes the state propagation for a given dynamical system and the measurement model given the available measurements. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If state of the system is denoted by <formula id="294">$ x $</formula>, the control input by <formula id="295">$ u $</formula> and the measurements by <formula id="310">$ y $</formula>, then the system dynamics is given as <formula id="311">$ x_{k+1} = A x_{k} + B u_{k} + w_k $</formula> and the measurement model is given by <formula id="312">$ y_{k+1} = C x_{k+1} + D u_{k} + v_k $</formula></para>
+<para><simplesect kind="note"><para>all matrices are assumed to be time-invariant </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">A</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>state transition matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">B</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>control input matrix mapping inputs to states </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">C</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>output matrix mapping states to measurements </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>feed through matrix mapping inputs to measurements </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool true/false if filter was constructed successfully or not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="66" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a8a72b101b740dadfc402ec8afb0c1e24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::constructKalmanFilter</definition>
+        <argsstring>(const iDynTree::MatrixDynSize &amp;A, const iDynTree::MatrixDynSize &amp;B, const iDynTree::MatrixDynSize &amp;C)</argsstring>
+        <name>constructKalmanFilter</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>A</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>B</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>C</declname>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="73" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a3b4495421947a0c45dce66302dea1131" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::constructKalmanFilter</definition>
+        <argsstring>(const iDynTree::MatrixDynSize &amp;A, const iDynTree::MatrixDynSize &amp;C)</argsstring>
+        <name>constructKalmanFilter</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>A</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>C</declname>
+        </param>
+        <briefdescription>
+<para>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="79" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a9352a67f115714e8c1b33fa31bfe35e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::kfSetInitialState</definition>
+        <argsstring>(const iDynTree::VectorDynSize &amp;x0)</argsstring>
+        <name>kfSetInitialState</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>x0</declname>
+        </param>
+        <briefdescription>
+<para>Set initial state of the Kalman filter. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>this method must be called before calling <ref refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a84517077a1e6cda8d31ebc9692c472e6" kindref="member">kfInit()</ref> </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">x0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>initial state of dimension <formula id="313">$ dim_x \times 1 $</formula> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool true/false successful or not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="88" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a9d9d8650d8f0f69a75a85cf7297a449c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::kfSetStateCovariance</definition>
+        <argsstring>(const iDynTree::MatrixDynSize &amp;P)</argsstring>
+        <name>kfSetStateCovariance</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>P</declname>
+        </param>
+        <briefdescription>
+<para>Sets the state covariance matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>this method must be called before calling <ref refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a84517077a1e6cda8d31ebc9692c472e6" kindref="member">kfInit()</ref> </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">P</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>state covariance matrix of dimensions <formula id="314">$ dim_x \times dim_x $</formula> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool true/false successful or not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="96" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1ab827cf616cbc08e7cb4ced4e00454cdb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::kfSetSystemNoiseCovariance</definition>
+        <argsstring>(const iDynTree::MatrixDynSize &amp;Q)</argsstring>
+        <name>kfSetSystemNoiseCovariance</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>Q</declname>
+        </param>
+        <briefdescription>
+<para>Sets the system noise covariance matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>this method must be called before calling <ref refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a84517077a1e6cda8d31ebc9692c472e6" kindref="member">kfInit()</ref> </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">Q</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>system noise covariance matrix of dimensions <formula id="314">$ dim_x \times dim_x $</formula> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool true/false successful or not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="104" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1ab6f38e366f4cdec7dde0d1ef7a07b08a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::kfSetMeasurementNoiseCovariance</definition>
+        <argsstring>(const iDynTree::MatrixDynSize &amp;R)</argsstring>
+        <name>kfSetMeasurementNoiseCovariance</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>R</declname>
+        </param>
+        <briefdescription>
+<para>Sets the measurement noise covariance matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>this method must be called before calling <ref refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a84517077a1e6cda8d31ebc9692c472e6" kindref="member">kfInit()</ref> </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">R</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>measurement covariance matrix of dimensions <formula id="315">$ dim_y \times dim_y $</formula> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool true/false successful or not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="112" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a84517077a1e6cda8d31ebc9692c472e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::kfInit</definition>
+        <argsstring>()</argsstring>
+        <name>kfInit</name>
+        <briefdescription>
+<para>This method checks if the filter is properly constructed and configured i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>if initial states and covariance matrices are set. <simplesect kind="warning"><para>this method must be called before calling <ref refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a62d9614df8c118dfc724299580c6b1f2" kindref="member">kfPredict()</ref> or <ref refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a27141bb647a7b20076d054ee4fe0f912" kindref="member">kfUpdate()</ref> </para>
+</simplesect>
+<simplesect kind="return"><para>bool true/false successful or not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="120" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1acb2a1a9a2b6325fb9607cd03eac3264d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::kfSetInputVector</definition>
+        <argsstring>(const iDynTree::VectorDynSize &amp;u)</argsstring>
+        <name>kfSetInputVector</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>u</declname>
+        </param>
+        <briefdescription>
+<para>Set inputs for the Kalman filter. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">u</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>input vector of dimension <formula id="316">$ dim_u \times 1 $</formula> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool true/false successful or not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="128" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a62d9614df8c118dfc724299580c6b1f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::kfPredict</definition>
+        <argsstring>()</argsstring>
+        <name>kfPredict</name>
+        <briefdescription>
+<para>Runs one step of the Discrete Kalman Filter prediction equation described by <formula id="317">$ \hat{x}_{k+1} = A x_{k} + B u_{k} $</formula> <formula id="318">$ \hat{P}_{k+1} = A_k P_k A_k^T + Q $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>this function can be called only after setting up the filter properly through <ref refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a84517077a1e6cda8d31ebc9692c472e6" kindref="member">kfInit()</ref> step </para>
+</simplesect>
+<simplesect kind="note"><para>in case if B matrix is constructed, this function should be once called every step, after setting up the input vector using <ref refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1acb2a1a9a2b6325fb9607cd03eac3264d" kindref="member">kfSetInputVector()</ref> method.</para>
+</simplesect>
+<simplesect kind="return"><para>bool true/false if successful or not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="142" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1af31fb466481343f57b98864ba81b2c50" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::kfSetMeasurementVector</definition>
+        <argsstring>(const iDynTree::VectorDynSize &amp;y)</argsstring>
+        <name>kfSetMeasurementVector</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>y</declname>
+        </param>
+        <briefdescription>
+<para>Set measurements for the Kalman filter. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>input vector of dimension <formula id="319">$ dim_y \times 1 $</formula> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool true/false successful or not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="150" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a27141bb647a7b20076d054ee4fe0f912" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::kfUpdate</definition>
+        <argsstring>()</argsstring>
+        <name>kfUpdate</name>
+        <briefdescription>
+<para>Runs one step of the Discrete Kalman Filter update equation described by <formula id="320">$ \tilde{y}_{k+1} = C \hat{x}_{k+1} + D u_{k} $</formula> <formula id="321">$ x_{k+1} = \hat{x}_{k+1} + K_{k+1}(\tilde{y}_{k+1} - z_{k+1}) $</formula> <formula id="322">$ P_{k+1} = (I - K_{k+1} C) \hat{P}_{k+1} $</formula> where K is the Kalman gain. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>this function can be called only after setting up the filter properly through <ref refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a84517077a1e6cda8d31ebc9692c472e6" kindref="member">kfInit()</ref> step </para>
+</simplesect>
+<simplesect kind="note"><para>this function should be once called every step, after setting up the measurements vector using <ref refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1af31fb466481343f57b98864ba81b2c50" kindref="member">kfSetMeasurementVector()</ref> method.</para>
+</simplesect>
+<simplesect kind="return"><para>bool true/false if successful or not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="165" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1afd296039a06a6d90477648be49b1ddbf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::kfGetStates</definition>
+        <argsstring>(iDynTree::VectorDynSize &amp;x)</argsstring>
+        <name>kfGetStates</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Get system state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>system state of dimension <formula id="313">$ dim_x \times 1 $</formula> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool true/false successful or not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="173" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a47b76a7de3f01be1b70cfe792939c321" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::kfGetStateCovariance</definition>
+        <argsstring>(iDynTree::MatrixDynSize &amp;P)</argsstring>
+        <name>kfGetStateCovariance</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>P</declname>
+        </param>
+        <briefdescription>
+<para>Get system state covariance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">P</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>system state covariance matrix of dimension <formula id="314">$ dim_x \times dim_x $</formula> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool true/false successful or not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="181" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a0ee09e0a76acfbf37443c26a58ab3100" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::kfReset</definition>
+        <argsstring>()</argsstring>
+        <name>kfReset</name>
+        <briefdescription>
+<para>Reset Kalman filter Resets the Kalman filter and initializes with the internally stored states and matrices initially set by the user. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="188" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DiscreteKalmanFilterHelper_1a16c084e0804a0d52e3a32fb5deab03b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::DiscreteKalmanFilterHelper::kfReset</definition>
+        <argsstring>(const iDynTree::VectorDynSize &amp;x0, const iDynTree::MatrixDynSize &amp;P0, const iDynTree::MatrixDynSize &amp;Q, const iDynTree::MatrixDynSize &amp;R)</argsstring>
+        <name>kfReset</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>x0</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>P0</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>Q</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>R</declname>
+        </param>
+        <briefdescription>
+<para>Reset Kalman filter with the given arguments. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>the system matrices A, B, C and D are unchanged with the reset filter</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">x0</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>initial state vector of dimensions <formula id="313">$ dim_x \times 1 $</formula> </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">P</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>state covariance matrix of dimensions <formula id="314">$ dim_x \times dim_x $</formula> </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">Q</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>system noise covariance matrix of dimensions <formula id="314">$ dim_x \times dim_x $</formula> </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">R</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>measurement noise covariance matrix of dimensions <formula id="315">$ dim_y \times dim_y $</formula> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/KalmanFilter.h" line="199" column="14"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Discrete Kalman Filter with additive Gaussian noise. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The Kalman filter can be constructed by giving the system design matrices A, B, C and D. where A is the state transition matrix, B is the control input matrix, C is the output matrix and D the feed through matrix. These matrices can be used to describe a stochastic model for a linear dynamical system.</para>
+<para><formula id="308">\[ x_{k+1} = A x_{k} + B u_{k} + w_k \]</formula> <formula id="309">\[ y_{k+1} = C x_{k+1} + D u_{k} + v_k \]</formula></para>
+<para>Once the filter is constructed, the system noise and measurement noise covariance matrices can be set. The filter can be run, after setting initial state and state covariance matrix. The filter init method is called to check if the filter is properly configured and is ready to use.</para>
+<para><simplesect kind="warning"><para>care must be taken to design these matrices with proper dimensions, so that the filter does not crash</para>
+</simplesect>
+Once the filter is configured, the filter algorithm can be run in a loop by,<itemizedlist>
+<listitem><para>setting input vector</para>
+</listitem><listitem><para>prediction step which propagates the state through the modeled state dynamics</para>
+</listitem><listitem><para>setting the measurement vector</para>
+</listitem><listitem><para>correct the predicted states with the incoming measurements </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="iDynTree/Estimation/KalmanFilter.h" line="46" column="5" bodyfile="iDynTree/Estimation/KalmanFilter.h" bodystart="47" bodyend="235"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1aa21afff6cf2dbf26aa40456f5f19cd03" prot="public" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>constructKalmanFilter</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a8a72b101b740dadfc402ec8afb0c1e24" prot="public" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>constructKalmanFilter</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a3b4495421947a0c45dce66302dea1131" prot="public" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>constructKalmanFilter</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a6e92e6097a9c72d5112dd132d2ea2a0c" prot="public" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>DiscreteKalmanFilterHelper</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a47b76a7de3f01be1b70cfe792939c321" prot="public" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>kfGetStateCovariance</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1afd296039a06a6d90477648be49b1ddbf" prot="public" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>kfGetStates</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a84517077a1e6cda8d31ebc9692c472e6" prot="public" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>kfInit</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a62d9614df8c118dfc724299580c6b1f2" prot="public" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>kfPredict</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a0ee09e0a76acfbf37443c26a58ab3100" prot="public" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>kfReset</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a16c084e0804a0d52e3a32fb5deab03b3" prot="public" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>kfReset</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a9352a67f115714e8c1b33fa31bfe35e4" prot="public" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>kfSetInitialState</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1acb2a1a9a2b6325fb9607cd03eac3264d" prot="public" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>kfSetInputVector</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1ab6f38e366f4cdec7dde0d1ef7a07b08a" prot="public" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>kfSetMeasurementNoiseCovariance</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1af31fb466481343f57b98864ba81b2c50" prot="public" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>kfSetMeasurementVector</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a9d9d8650d8f0f69a75a85cf7297a449c" prot="public" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>kfSetStateCovariance</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1ab827cf616cbc08e7cb4ced4e00454cdb" prot="public" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>kfSetSystemNoiseCovariance</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a27141bb647a7b20076d054ee4fe0f912" prot="public" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>kfUpdate</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a162e5594ff26458feda52c5cd7cae891" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_A</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1ae2811c9e771709a8f3a03477b9a3f17e" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_B</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1abcacf2788c5d1ee56dac7ab4f2451d81" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_C</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1ad47b844df1b1ce4e77486118fea3a421" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_D</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a0b37d3e557ec9910960dacaf85f8522d" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_dim_U</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a7fa23830b82ab7ce02d62313bf5a5749" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_dim_X</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1ac58522d9cddca0f6c85c02a0fb2822f7" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_dim_Y</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a22ebe32c0b8ff34e86f00f6c8333fc4a" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_filter_constructed</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a1db0a164839bd7875d6ae6a4d88d23c8" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_initial_state_covariance_set</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a27c3dd9e65fbba5a976b4d36d23cb53c" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_initial_state_set</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1ad5bac1548e9e013fff61d3545b9ef7a8" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_input_updated</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a799d024b926422913ee521f6244dcfcd" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_is_initialized</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a0c5cb2d2165887491b75c220b46d25cb" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_measurement_noise_covariance_matrix_set</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1ab1ac37549bfcce2d0b16b2c55a172c92" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_measurement_updated</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a2c73bcb9fafa8e7520d04120df5939fe" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_P</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a1dd5d47933bf6a9277fc8eeb7aad35b6" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_P0</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a0b9867945121a420b600941d8a1636c6" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_Q</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1aee0dea49a299e1ba825245a05291b11f" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_R</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a1e1082d902313d6cd6ad90dda4ebaf79" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_system_noise_covariance_matrix_set</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1ade60ec4072df22a669b6cdeb5e19b917" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_u</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1ad0cc01496f84be50801c5ee9c3707a62" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_use_control_input</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a82e2f8d99a1fb7622db478208422473c" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_use_feed_through</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1ae519611fadb53f51eb0216a68a30f451" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_x</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a0d60769b2b0808e75e809405f017a024" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_x0</name></member>
+      <member refid="classiDynTree_1_1DiscreteKalmanFilterHelper_1a191146e2ad2bfbbb1ddb6e115e5f2ab8" prot="private" virt="non-virtual"><scope>iDynTree::DiscreteKalmanFilterHelper</scope><name>m_y</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

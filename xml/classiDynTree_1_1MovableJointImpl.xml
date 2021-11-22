@@ -1,0 +1,313 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1MovableJointImpl" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::MovableJointImpl</compoundname>
+    <basecompoundref refid="classiDynTree_1_1IJoint" prot="public" virt="non-virtual">iDynTree::IJoint</basecompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1PrismaticJoint" prot="public" virt="non-virtual">iDynTree::PrismaticJoint</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1RevoluteJoint" prot="public" virt="non-virtual">iDynTree::RevoluteJoint</derivedcompoundref>
+    <includes local="no">iDynTree/Model/MovableJointImpl.h</includes>
+    <templateparamlist>
+      <param>
+        <type>unsigned int</type>
+        <declname>nrOfPosCoords</declname>
+        <defname>nrOfPosCoords</defname>
+      </param>
+      <param>
+        <type>unsigned int</type>
+        <declname>nrOfDOFs</declname>
+        <defname>nrOfDOFs</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1MovableJointImpl_1a872555afe6bfd9b14fb6bbea08968003" prot="protected" static="no" mutable="no">
+        <type>JointIndex</type>
+        <definition>JointIndex iDynTree::MovableJointImpl&lt; nrOfPosCoords, nrOfDOFs &gt;::m_index</definition>
+        <argsstring></argsstring>
+        <name>m_index</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/MovableJointImpl.h" line="33" column="20" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1MovableJointImpl_1a6332b3582ec526f58f719a90d2d00c81" prot="protected" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t iDynTree::MovableJointImpl&lt; nrOfPosCoords, nrOfDOFs &gt;::m_posCoordsOffset</definition>
+        <argsstring></argsstring>
+        <name>m_posCoordsOffset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/MovableJointImpl.h" line="34" column="20" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1MovableJointImpl_1a425f5ae5cc08edee16740d4b8a793360" prot="protected" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t iDynTree::MovableJointImpl&lt; nrOfPosCoords, nrOfDOFs &gt;::m_DOFsOffset</definition>
+        <argsstring></argsstring>
+        <name>m_DOFsOffset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/MovableJointImpl.h" line="35" column="20" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1MovableJointImpl_1a723d226cd4e943ac3a2b5b69a3b1c833" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type></type>
+        <definition>iDynTree::MovableJointImpl&lt; nrOfPosCoords, nrOfDOFs &gt;::~MovableJointImpl</definition>
+        <argsstring>()=0</argsstring>
+        <name>~MovableJointImpl</name>
+        <briefdescription>
+<para>Denstructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/MovableJointImpl.h" line="42" column="17" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="160" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MovableJointImpl_1a045d13488a7d6481fcf2db951655922a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int iDynTree::MovableJointImpl&lt; nrOfPosCoords, nrOfDOFs &gt;::getNrOfPosCoords</definition>
+        <argsstring>() const</argsstring>
+        <name>getNrOfPosCoords</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a149ddcf05f6328fdd3ecbe38a0fca4a0">getNrOfPosCoords</reimplements>
+        <briefdescription>
+<para>Get the number of coordinates used to represent the position of the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For joints whose configuration is in R^n, the number of position coordinates should match the number of degrees of freedom of the joint.</para>
+<para><simplesect kind="return"><para>the number of position coordinates. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/MovableJointImpl.h" line="45" column="30" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="111" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MovableJointImpl_1af9d78ba6c319f68f16f9ff9ef58fd124" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int iDynTree::MovableJointImpl&lt; nrOfPosCoords, nrOfDOFs &gt;::getNrOfDOFs</definition>
+        <argsstring>() const</argsstring>
+        <name>getNrOfDOFs</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a83027b41a495e097b8cf534059516440">getNrOfDOFs</reimplements>
+        <briefdescription>
+<para>Get the number of degrees of freedom of the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This should be a number between 0 (fixed joint) and 6 (free joint).</para>
+<para><simplesect kind="return"><para>the number of degrees of freedom of the joint. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/MovableJointImpl.h" line="48" column="30" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="117" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MovableJointImpl_1a4b1807b06b92f64c41502c17b8ecd5a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void iDynTree::MovableJointImpl&lt; nrOfPosCoords, nrOfDOFs &gt;::setIndex</definition>
+        <argsstring>(JointIndex &amp;_index)</argsstring>
+        <name>setIndex</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1ac0d964dac9538e66a922b1ae50e7b662">setIndex</reimplements>
+        <param>
+          <type>JointIndex &amp;</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Get the motion subspace matrix, i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>the matrix that maps the joint velocity to the relative twist between the two links. In particular the motion subspace matrix is the S matrix such that v_linkA = S_{linkA,linkB}*dq + linkA_X_linkB*v_linkB where dq is the joint velocity.</para>
+<para><simplesect kind="return"><para>the motion subspace matrix</para>
+</simplesect>
+<simplesect kind="note"><para>The motion subspace matrix is also known in literature as hinge matrix, hinge map matrix, joint map matrix or joint motion map matrix. Get the motion subspace matrix derivatives, i.e. the matrix that maps the joint velocities to the relative spatial acceleration between the two links. In particular the motion subspace matrix derivative is the dS matrix such that a_linkA = S_{linkA,linkB}*ddq + dS_{linkA,linkB}*dq + linkA_X_linkB*a_linkB where ddq is the joint acceleration and dq is the joint velocity.</para>
+</simplesect>
+<simplesect kind="return"><para>the motion subspace matrix</para>
+</simplesect>
+<simplesect kind="note"><para>The motion subspace matrix is also known in literature as hinge matrix, hinge map matrix, joint map matrix or joint motion map matrix. Get the kinematic coupling matrix, i.e. the matrix that maps the joint velocities to the derivative of the joint coordinates.</para>
+</simplesect>
+<simplesect kind="note"><para>For the joint whose configuration is in R^n, the kinematic coupling matrix is equal to the identity.</para>
+</simplesect>
+<simplesect kind="return"><para>the nrOfPosCoords times nrOfDOFs kinematic coupling matrix </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/MovableJointImpl.h" line="92" column="22" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="123" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MovableJointImpl_1a717d5ccedc215f53b75e918229d98bab" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>JointIndex</type>
+        <definition>JointIndex iDynTree::MovableJointImpl&lt; nrOfPosCoords, nrOfDOFs &gt;::getIndex</definition>
+        <argsstring>() const</argsstring>
+        <name>getIndex</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a2accdcd6fbf7e222a3c7c6b99130934e">getIndex</reimplements>
+        <briefdescription>
+<para>Get the index of the joint in the model Joint serialization. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/MovableJointImpl.h" line="95" column="28" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="129" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MovableJointImpl_1afbbbe860f34622d4d8ae1d938fd65b98" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void iDynTree::MovableJointImpl&lt; nrOfPosCoords, nrOfDOFs &gt;::setPosCoordsOffset</definition>
+        <argsstring>(const size_t _offset)</argsstring>
+        <name>setPosCoordsOffset</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a6c80be1fe40e5a71cc56c4fbe625535f">setPosCoordsOffset</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Set the offset of the position coordinates of this joint in the position coordiantes serialization of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/MovableJointImpl.h" line="98" column="22" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="135" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MovableJointImpl_1a599c535eb4fced80019a72e126752a0c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::MovableJointImpl&lt; nrOfPosCoords, nrOfDOFs &gt;::getPosCoordsOffset</definition>
+        <argsstring>() const</argsstring>
+        <name>getPosCoordsOffset</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1afc71b67f79c9bbdd8f2925ee08ca0323">getPosCoordsOffset</reimplements>
+        <briefdescription>
+<para>Get the offset of the position coordinates of this joint in the position coordiantes serialization of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/MovableJointImpl.h" line="101" column="24" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="141" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MovableJointImpl_1aa9cb6e7141a84e23c7d7fca9c900c6bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void iDynTree::MovableJointImpl&lt; nrOfPosCoords, nrOfDOFs &gt;::setDOFsOffset</definition>
+        <argsstring>(const size_t _offset)</argsstring>
+        <name>setDOFsOffset</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1af65fc0f65b8367404848bc41ea87347c">setDOFsOffset</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Set the offset of the coordinates of this joint in the velocity/acceleration coordiantes serialization of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/MovableJointImpl.h" line="104" column="22" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="147" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MovableJointImpl_1a593be2dc005f1580c341bc723ed36b5e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::MovableJointImpl&lt; nrOfPosCoords, nrOfDOFs &gt;::getDOFsOffset</definition>
+        <argsstring>() const</argsstring>
+        <name>getDOFsOffset</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a64aa264a72088da07844f25176a25bee">getDOFsOffset</reimplements>
+        <briefdescription>
+<para>Get the offset of the position coordinates of joint in the velocity/acceleration coordiantes serialization of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/MovableJointImpl.h" line="107" column="24" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="153" bodyend="156"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Base template for implementation of non-fixed joints. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>A specific joint can be derived from an instantiation of this template.</para>
+<para>For more information on the assumption of the joint model, check the <ref refid="classiDynTree_1_1IJoint" kindref="compound">IJoint</ref> interface. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>iDynTree::RevoluteJoint&lt; 1, 1 &gt;</label>
+        <link refid="classiDynTree_1_1RevoluteJoint"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::IJoint</label>
+        <link refid="classiDynTree_1_1IJoint"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::MovableJointImpl&lt; nrOfPosCoords, nrOfDOFs &gt;</label>
+        <link refid="classiDynTree_1_1MovableJointImpl"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::PrismaticJoint&lt; 1, 1 &gt;</label>
+        <link refid="classiDynTree_1_1PrismaticJoint"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>iDynTree::IJoint</label>
+        <link refid="classiDynTree_1_1IJoint"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::MovableJointImpl&lt; nrOfPosCoords, nrOfDOFs &gt;</label>
+        <link refid="classiDynTree_1_1MovableJointImpl"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Model/MovableJointImpl.h" line="30" column="5" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="31" bodyend="108"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1IJoint_1a021ac00a8b2e9e519f930baad1bc1fa2" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>clone</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a65509300297221192cb46189b2a473d1" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>computeChildAcc</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a3c16a316f95e25ad0af2768cb4c991a3" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>computeChildBiasAcc</name></member>
+      <member refid="classiDynTree_1_1IJoint_1aa41dbb76816e2621d6924ca052b07881" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>computeChildPosVelAcc</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a70c9055aafb46f65fe767664c873625e" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>computeChildVel</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a6d0853757008a1db34d41da9276df81e" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>computeChildVelAcc</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a495a50c9623710812f49cf6258ecb68e" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>computeJointTorque</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a4f0f02e57295ad4b0ec94fe19fc3e0c0" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>enablePosLimits</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a593be2dc005f1580c341bc723ed36b5e" prot="public" virt="virtual"><scope>iDynTree::MovableJointImpl</scope><name>getDOFsOffset</name></member>
+      <member refid="classiDynTree_1_1IJoint_1abe3efda09a0c3d94c021891de447aaa8" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>getFirstAttachedLink</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a717d5ccedc215f53b75e918229d98bab" prot="public" virt="virtual"><scope>iDynTree::MovableJointImpl</scope><name>getIndex</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a047913be4f7bdeb35d785e4ad71d5395" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>getMaxPosLimit</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a46dbe9dec3ef79f6d5662269f6fe8f65" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>getMinPosLimit</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a3a89b6fd2358c8435e7f794d3857045f" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>getMotionSubspaceVector</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1af9d78ba6c319f68f16f9ff9ef58fd124" prot="public" virt="virtual"><scope>iDynTree::MovableJointImpl</scope><name>getNrOfDOFs</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a045d13488a7d6481fcf2db951655922a" prot="public" virt="virtual"><scope>iDynTree::MovableJointImpl</scope><name>getNrOfPosCoords</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a599c535eb4fced80019a72e126752a0c" prot="public" virt="virtual"><scope>iDynTree::MovableJointImpl</scope><name>getPosCoordsOffset</name></member>
+      <member refid="classiDynTree_1_1IJoint_1ab734574da90b6d2ae24169ea180a081b" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>getPosLimits</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a7b6fb4c82687601810f3696e9605f1e0" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>getRestTransform</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a1c55168bcc2dbd7b1fd58737a6bb46d8" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>getSecondAttachedLink</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a2b0c23cad4da4e748ecdaf009805f767" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>getTransform</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a0dd24dad1882bc1df35a1832275fbfbb" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>getTransformDerivative</name></member>
+      <member refid="classiDynTree_1_1IJoint_1af4badbd5891621e847a61d767cffd25e" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>hasPosLimits</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a425f5ae5cc08edee16740d4b8a793360" prot="protected" virt="non-virtual"><scope>iDynTree::MovableJointImpl</scope><name>m_DOFsOffset</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a872555afe6bfd9b14fb6bbea08968003" prot="protected" virt="non-virtual"><scope>iDynTree::MovableJointImpl</scope><name>m_index</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a6332b3582ec526f58f719a90d2d00c81" prot="protected" virt="non-virtual"><scope>iDynTree::MovableJointImpl</scope><name>m_posCoordsOffset</name></member>
+      <member refid="classiDynTree_1_1IJoint_1aafd1101e91ea337a451d62f0160a819c" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>setAttachedLinks</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1aa9cb6e7141a84e23c7d7fca9c900c6bc" prot="public" virt="virtual"><scope>iDynTree::MovableJointImpl</scope><name>setDOFsOffset</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a4b1807b06b92f64c41502c17b8ecd5a6" prot="public" virt="virtual"><scope>iDynTree::MovableJointImpl</scope><name>setIndex</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1afbbbe860f34622d4d8ae1d938fd65b98" prot="public" virt="virtual"><scope>iDynTree::MovableJointImpl</scope><name>setPosCoordsOffset</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a63c57d91c3d80a610671f04fcbdd22ff" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>setPosLimits</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a770aadc1a6e13bce3af213707fcf2d84" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>setRestTransform</name></member>
+      <member refid="classiDynTree_1_1IJoint_1ac989ee81d08959eca68666aa6740cb16" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>~IJoint</name></member>
+      <member refid="classiDynTree_1_1MovableJointImpl_1a723d226cd4e943ac3a2b5b69a3b1c833" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>~MovableJointImpl</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

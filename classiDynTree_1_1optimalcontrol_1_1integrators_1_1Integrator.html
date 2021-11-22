@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>iDynTree::optimalcontrol::integrators::Integrator class | iDynTree master</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="./index.html">iDynTree</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="4">
+            <li>
+              <a href="pages.html">Versions</a>
+              <ol>
+                <li><a href="./index.html">Master</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="pages.html">Contacts</a>
+              <ol>
+                <li><a href="https://github.com/robotology/idyntree">GitHub</a></li>
+                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
+              </ol>
+            </li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespaceiDynTree.html">iDynTree</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceiDynTree_1_1optimalcontrol.html">optimalcontrol</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceiDynTree_1_1optimalcontrol_1_1integrators.html">integrators</a>::<wbr/></span>Integrator <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="Integrator_8h.html">&lt;iDynTree/Integrator.h&gt;</a></div>
+        </h1>
+        <p>The <a href="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator.html" class="m-doc">Integrator</a> base class.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#derived-classes">Derived classes</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pro-methods">Protected functions</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<aside class="m-note m-danger"><h4>Warning</h4><p>This class is still in active development, and so API interface can change between iDynTree versions.</p></aside><p>Inherit publicly from this class in order to specify a custom integration method.</p>
+        <section id="derived-classes">
+          <h2><a href="#derived-classes">Derived classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator.html" class="m-doc">FixedStepIntegrator</a>
+            </dt>
+            <dd></dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a06482af463ae25bd99ab513ca1bd8cb1" class="m-doc">Integrator</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd><a href="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator.html" class="m-doc">Integrator</a> default constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a2b692b4e55ba221411c7ab685d85afeb" class="m-doc">Integrator</a>(</span><span class="m-doc-wrap">const std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html" class="m-doc">iDynTree::<wbr />optimalcontrol::<wbr />DynamicalSystem</a>&gt; dynamicalSystem)</span>
+            </dt>
+            <dd><a href="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator.html" class="m-doc">Integrator</a> constructor.</dd>
+            <dt id="aa3887eac25d4dd53962204d0503c8e06">
+              <span class="m-doc-wrap-bumper"><a href="#aa3887eac25d4dd53962204d0503c8e06" class="m-doc-self">Integrator</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator.html" class="m-doc">Integrator</a>&amp; other) <span class="m-label m-flat m-danger">deleted</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ab0cf81d20474d5f8737e8f8df501f464">
+              <span class="m-doc-wrap-bumper"><a href="#ab0cf81d20474d5f8737e8f8df501f464" class="m-doc-self">~Integrator</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab95d5885f287e7364630a277d7fe8c56" class="m-doc">integrate</a>(</span><span class="m-doc-wrap">double initialTime,
+              double finalTime) -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Integrate the dynamical system with specified integration bounds.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6e2b9052aa9b0638ce7d2f8347b4fe00" class="m-doc">setMaximumStepSize</a>(</span><span class="m-doc-wrap">const double dT) -&gt; bool</span>
+            </dt>
+            <dd>Specify the maximum integration step size.</dd>
+            <dt id="a0d39d3023f056364a01963b7520a7c21">
+              <span class="m-doc-wrap-bumper">auto <a href="#a0d39d3023f056364a01963b7520a7c21" class="m-doc-self">maximumStepSize</a>(</span><span class="m-doc-wrap">) const -&gt; double</span>
+            </dt>
+            <dd>Return the maximum step size set with setMaximumStepSize.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a72bf5f94da63280de3c2b3223cd251e6" class="m-doc">setDynamicalSystem</a>(</span><span class="m-doc-wrap">const std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html" class="m-doc">iDynTree::<wbr />optimalcontrol::<wbr />DynamicalSystem</a>&gt; dynamicalSystem) -&gt; bool</span>
+            </dt>
+            <dd>Set the <a href="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html" class="m-doc">DynamicalSystem</a> to be considered.</dd>
+            <dt id="a148992ef6281c95701bd33a8262eb7f9">
+              <span class="m-doc-wrap-bumper">auto <a href="#a148992ef6281c95701bd33a8262eb7f9" class="m-doc-self">dynamicalSystem</a>(</span><span class="m-doc-wrap">) const -&gt; const std::weak_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html" class="m-doc">DynamicalSystem</a>&gt;</span>
+            </dt>
+            <dd>Weak pointer to the specified <a href="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html" class="m-doc">DynamicalSystem</a>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7fd966d607d393a4dfa056206cd6d003" class="m-doc">getSolution</a>(</span><span class="m-doc-wrap">double time,
+              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; solution) const -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Retrieve integration solution at a specified time.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0b7ed351be29e3ddc4145824aec6b082" class="m-doc">getFullSolution</a>(</span><span class="m-doc-wrap">) const -&gt; const std::vector&lt;<a href="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement.html" class="m-doc">SolutionElement</a>&gt;&amp; <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Retrieve the full buffer of <a href="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement.html" class="m-doc">SolutionElement</a>.</dd>
+            <dt id="a1594f1f7ce88c5d45f585130c895b0a9">
+              <span class="m-doc-wrap-bumper">void <a href="#a1594f1f7ce88c5d45f585130c895b0a9" class="m-doc-self">clearSolution</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Clear the solution buffer.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4638d9ea1c915b7220e1d9b1dfc1fd08" class="m-doc">evaluateCollocationConstraint</a>(</span><span class="m-doc-wrap">double time,
+              const std::vector&lt;<a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&gt;&amp; collocationPoints,
+              const std::vector&lt;<a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&gt;&amp; controlInputs,
+              double dT,
+              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; constraintValue) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Evaluate the collocation constraint.</dd>
+            <dt id="a481d99de3957547ce59eb738ee9257d9">
+              <span class="m-doc-wrap-bumper">auto <a href="#a481d99de3957547ce59eb738ee9257d9" class="m-doc-self">evaluateCollocationConstraintJacobian</a>(</span><span class="m-doc-wrap">double time,
+              const std::vector&lt;<a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&gt;&amp; collocationPoints,
+              const std::vector&lt;<a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&gt;&amp; controlInputs,
+              double dT,
+              std::vector&lt;<a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>&gt;&amp; stateJacobianValues,
+              std::vector&lt;<a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a>&gt;&amp; controlJacobianValues) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af435b7aec4ebd1702506a9229ff0f738">
+              <span class="m-doc-wrap-bumper">auto <a href="#af435b7aec4ebd1702506a9229ff0f738" class="m-doc-self">getCollocationConstraintJacobianStateSparsity</a>(</span><span class="m-doc-wrap">std::vector&lt;<a href="classiDynTree_1_1optimalcontrol_1_1SparsityStructure.html" class="m-doc">SparsityStructure</a>&gt;&amp; stateJacobianSparsity) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a717b37e86dd16ae7803889fc65929993">
+              <span class="m-doc-wrap-bumper">auto <a href="#a717b37e86dd16ae7803889fc65929993" class="m-doc-self">getCollocationConstraintJacobianControlSparsity</a>(</span><span class="m-doc-wrap">std::vector&lt;<a href="classiDynTree_1_1optimalcontrol_1_1SparsityStructure.html" class="m-doc">SparsityStructure</a>&gt;&amp; controlJacobianSparsity) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a4f4f2819f24168c576c5614f98efa1d8">
+              <span class="m-doc-wrap-bumper">auto <a href="#a4f4f2819f24168c576c5614f98efa1d8" class="m-doc-self">evaluateCollocationConstraintSecondDerivatives</a>(</span><span class="m-doc-wrap">double time,
+              const std::vector&lt;<a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&gt;&amp; collocationPoints,
+              const std::vector&lt;<a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&gt;&amp; controlInputs,
+              double dT,
+              const <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; lambda,
+              CollocationHessianMap&amp; stateSecondDerivative,
+              CollocationHessianMap&amp; controlSecondDerivative,
+              CollocationHessianMap&amp; stateControlSecondDerivative) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a95763f06583ccbc1f3342673d9aa3779">
+              <span class="m-doc-wrap-bumper">auto <a href="#a95763f06583ccbc1f3342673d9aa3779" class="m-doc-self">getCollocationConstraintSecondDerivativeWRTStateSparsity</a>(</span><span class="m-doc-wrap">CollocationHessianSparsityMap&amp; stateDerivativeSparsity) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aeae704825f16a03c4a12d282fd525e42">
+              <span class="m-doc-wrap-bumper">auto <a href="#aeae704825f16a03c4a12d282fd525e42" class="m-doc-self">getCollocationConstraintSecondDerivativeWRTControlSparsity</a>(</span><span class="m-doc-wrap">CollocationHessianSparsityMap&amp; controlDerivativeSparsity) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a5867f7987daba0256adfb8d233eccbf6">
+              <span class="m-doc-wrap-bumper">auto <a href="#a5867f7987daba0256adfb8d233eccbf6" class="m-doc-self">getCollocationConstraintSecondDerivativeWRTStateControlSparsity</a>(</span><span class="m-doc-wrap">CollocationHessianSparsityMap&amp; stateControlDerivativeSparsity) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="acbf7100a4b6b9d9e64624bdfa1f32719">
+              <span class="m-doc-wrap-bumper">auto <a href="#acbf7100a4b6b9d9e64624bdfa1f32719" class="m-doc-self">info</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfo.html" class="m-doc">IntegratorInfo</a>&amp;</span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="pro-methods">
+          <h2><a href="#pro-methods">Protected functions</a></h2>
+          <dl class="m-doc">
+            <dt id="a3aeffb4013537d6f849f53a4864acc29">
+              <span class="m-doc-wrap-bumper">auto <a href="#a3aeffb4013537d6f849f53a4864acc29" class="m-doc-self">interpolatePoints</a>(</span><span class="m-doc-wrap">const std::vector&lt;<a href="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement.html" class="m-doc">SolutionElement</a>&gt;::const_iterator&amp; first,
+              const std::vector&lt;<a href="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement.html" class="m-doc">SolutionElement</a>&gt;::const_iterator&amp; second,
+              double time,
+              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; outputPoint) const -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a5490ec3615ab91d85a84b85926d43ef1">
+              <span class="m-doc-wrap-bumper">auto <a href="#a5490ec3615ab91d85a84b85926d43ef1" class="m-doc-self">allocateBuffers</a>(</span><span class="m-doc-wrap">) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a371179a8cb3e4b4a03a3a0d90d2e6cca">
+              double <a href="#a371179a8cb3e4b4a03a3a0d90d2e6cca" class="m-doc-self">m_dTmax</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aa9eb4f3c3a4da99f1ce27b28154e4bfb">
+              std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html" class="m-doc">DynamicalSystem</a>&gt; <a href="#aa9eb4f3c3a4da99f1ce27b28154e4bfb" class="m-doc-self">m_dynamicalSystem_ptr</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a25b9c2215f3bbf7940214925e3a55ede">
+              std::vector&lt;<a href="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement.html" class="m-doc">SolutionElement</a>&gt; <a href="#a25b9c2215f3bbf7940214925e3a55ede" class="m-doc-self">m_solution</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a91cc593e13d13305e81b3e7fc5ae6276">
+              std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfoData.html" class="m-doc">IntegratorInfoData</a>&gt; <a href="#a91cc593e13d13305e81b3e7fc5ae6276" class="m-doc-self">m_infoData</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a3b03ff054e91a4142240dea337524fa1">
+              <a href="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfo.html" class="m-doc">IntegratorInfo</a> <a href="#a3b03ff054e91a4142240dea337524fa1" class="m-doc-self">m_info</a>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a06482af463ae25bd99ab513ca1bd8cb1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> iDynTree::<wbr />optimalcontrol::<wbr />integrators::<wbr />Integrator::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a06482af463ae25bd99ab513ca1bd8cb1" class="m-doc-self">Integrator</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p><a href="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator.html" class="m-doc">Integrator</a> default constructor.</p>
+<p>This constructor allows to create an <a href="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator.html" class="m-doc">Integrator</a> object without specifying a <a href="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html" class="m-doc">DynamicalSystem</a> yet. This has to be done via the method setDynamicalSystem before calling the integrate method.</p>
+          </div></section>
+          <section class="m-doc-details" id="a2b692b4e55ba221411c7ab685d85afeb"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> iDynTree::<wbr />optimalcontrol::<wbr />integrators::<wbr />Integrator::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2b692b4e55ba221411c7ab685d85afeb" class="m-doc-self">Integrator</a>(</span><span class="m-doc-wrap">const std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html" class="m-doc">iDynTree::<wbr />optimalcontrol::<wbr />DynamicalSystem</a>&gt; dynamicalSystem)</span></span>
+            </h3>
+            <p><a href="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator.html" class="m-doc">Integrator</a> constructor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">dynamicalSystem&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Pointer to the <a href="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html" class="m-doc">DynamicalSystem</a> to be integrated.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab95d5885f287e7364630a277d7fe8c56"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />optimalcontrol::<wbr />integrators::<wbr />Integrator::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab95d5885f287e7364630a277d7fe8c56" class="m-doc-self">integrate</a>(</span><span class="m-doc-wrap">double initialTime,
+              double finalTime) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Integrate the dynamical system with specified integration bounds.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">initialTime&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Lower integration bound.</td>
+                </tr>
+                <tr>
+                  <td>finalTime&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Upper integration bound.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if successfull.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>This method should be implemented by the custom integrator.</p>
+          </div></section>
+          <section class="m-doc-details" id="a6e2b9052aa9b0638ce7d2f8347b4fe00"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />optimalcontrol::<wbr />integrators::<wbr />Integrator::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6e2b9052aa9b0638ce7d2f8347b4fe00" class="m-doc-self">setMaximumStepSize</a>(</span><span class="m-doc-wrap">const double dT)</span></span>
+            </h3>
+            <p>Specify the maximum integration step size.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">dT&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The masimum step size.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if successfull, false otherwise (for example if dT is not strictly positive)</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>This parameter is considered when integrating a <a href="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html" class="m-doc">DynamicalSystem</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="a72bf5f94da63280de3c2b3223cd251e6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />optimalcontrol::<wbr />integrators::<wbr />Integrator::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a72bf5f94da63280de3c2b3223cd251e6" class="m-doc-self">setDynamicalSystem</a>(</span><span class="m-doc-wrap">const std::shared_ptr&lt;<a href="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html" class="m-doc">iDynTree::<wbr />optimalcontrol::<wbr />DynamicalSystem</a>&gt; dynamicalSystem)</span></span>
+            </h3>
+            <p>Set the <a href="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html" class="m-doc">DynamicalSystem</a> to be considered.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">dynamicalSystem&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The dynamical system pointer</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if successfull, false otherwise, for example if a <a href="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html" class="m-doc">DynamicalSystem</a> was already set.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>This methods changes the dynamical system only if it was not already set.</p>
+          </div></section>
+          <section class="m-doc-details" id="a7fd966d607d393a4dfa056206cd6d003"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />optimalcontrol::<wbr />integrators::<wbr />Integrator::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7fd966d607d393a4dfa056206cd6d003" class="m-doc-self">getSolution</a>(</span><span class="m-doc-wrap">double time,
+              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; solution) const <span class="m-label m-warning">virtual</span></span></span>
+            </h3>
+            <p>Retrieve integration solution at a specified time.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">time&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Instant of interest.</td>
+                </tr>
+                <tr>
+                  <td>solution</td>
+                  <td>State corresponding to the specified time.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if successfull.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The method integrate should have been called first, and time should be within the integration bounds, otherwise returns false.</p><p>It sould not be necessary to override this method.</p>
+          </div></section>
+          <section class="m-doc-details" id="a0b7ed351be29e3ddc4145824aec6b082"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const std::vector&lt;<a href="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement.html" class="m-doc">SolutionElement</a>&gt;&amp; iDynTree::<wbr />optimalcontrol::<wbr />integrators::<wbr />Integrator::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0b7ed351be29e3ddc4145824aec6b082" class="m-doc-self">getFullSolution</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">virtual</span></span></span>
+            </h3>
+            <p>Retrieve the full buffer of <a href="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement.html" class="m-doc">SolutionElement</a>.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>A const reference to the internal buffer contaning the full output of the integration routine.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The method integrate should have been called first, and time should be within the integration bounds, otherwise returns false.</p><p>It sould not be necessary to override this method.</p>
+          </div></section>
+          <section class="m-doc-details" id="a4638d9ea1c915b7220e1d9b1dfc1fd08"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />optimalcontrol::<wbr />integrators::<wbr />Integrator::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4638d9ea1c915b7220e1d9b1dfc1fd08" class="m-doc-self">evaluateCollocationConstraint</a>(</span><span class="m-doc-wrap">double time,
+              const std::vector&lt;<a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&gt;&amp; collocationPoints,
+              const std::vector&lt;<a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&gt;&amp; controlInputs,
+              double dT,
+              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; constraintValue) <span class="m-label m-warning">virtual</span></span></span>
+            </h3>
+            <p>Evaluate the collocation constraint.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">time&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>Instant at which the collocation constraint is evaluated</td>
+                </tr>
+                <tr>
+                  <td>collocationPoints&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>A vector containing <svg class="m-math" style="width: 1.174em; height: 0.723em; vertical-align: -0.187em;" viewBox="0 -5.147373 11.273703 6.940636">
+<title>
+$x_k$
+</title>
+<defs>
+<path id='eq5-g0-107' d='M2.327273-5.292154C2.335243-5.308095 2.359153-5.411706 2.359153-5.419676C2.359153-5.459527 2.327273-5.531258 2.231631-5.531258C2.199751-5.531258 1.952677-5.507347 1.769365-5.491407L1.323039-5.459527C1.147696-5.443587 1.067995-5.435616 1.067995-5.292154C1.067995-5.180573 1.179577-5.180573 1.275218-5.180573C1.657783-5.180573 1.657783-5.132752 1.657783-5.061021C1.657783-5.037111 1.657783-5.021171 1.617933-4.877709L.486177-.342715C.454296-.223163 .454296-.175342 .454296-.167372C.454296-.03188 .565878 .079701 .71731 .079701C.988294 .079701 1.052055-.175342 1.083935-.286924C1.163636-.621669 1.370859-1.466501 1.458531-1.801245C1.896887-1.753425 2.430884-1.601993 2.430884-1.147696C2.430884-1.107846 2.430884-1.067995 2.414944-.988294C2.391034-.884682 2.375093-.773101 2.375093-.73325C2.375093-.263014 2.725778 .079701 3.188045 .079701C3.52279 .079701 3.730012-.167372 3.833624-.318804C4.024907-.613699 4.152428-1.091905 4.152428-1.139726C4.152428-1.219427 4.088667-1.243337 4.032877-1.243337C3.937235-1.243337 3.921295-1.195517 3.889415-1.052055C3.785803-.67746 3.57858-.143462 3.203985-.143462C2.996762-.143462 2.948941-.318804 2.948941-.533998C2.948941-.637609 2.956912-.73325 2.996762-.916563C3.004732-.948443 3.036613-1.075965 3.036613-1.163636C3.036613-1.817186 2.215691-1.960648 1.809215-2.016438C2.10411-2.191781 2.375093-2.462765 2.470735-2.566376C2.909091-2.996762 3.267746-3.291656 3.650311-3.291656C3.753923-3.291656 3.849564-3.267746 3.913325-3.188045C3.482939-3.132254 3.482939-2.757659 3.482939-2.749689C3.482939-2.574346 3.618431-2.454795 3.793773-2.454795C4.008966-2.454795 4.24807-2.630137 4.24807-2.956912C4.24807-3.227895 4.056787-3.514819 3.658281-3.514819C3.196015-3.514819 2.781569-3.164134 2.327273-2.709838C1.865006-2.255542 1.665753-2.16787 1.538232-2.11208L2.327273-5.292154Z'/>
+<path id='eq5-g1-120' d='M5.66675-4.877709C5.284184-4.805978 5.140722-4.519054 5.140722-4.291905C5.140722-4.004981 5.36787-3.90934 5.535243-3.90934C5.893898-3.90934 6.144956-4.220174 6.144956-4.542964C6.144956-5.045081 5.571108-5.272229 5.068991-5.272229C4.339726-5.272229 3.93325-4.554919 3.825654-4.327771C3.550685-5.224408 2.809465-5.272229 2.594271-5.272229C1.374844-5.272229 .729265-3.706102 .729265-3.443088C.729265-3.395268 .777086-3.335492 .860772-3.335492C.956413-3.335492 .980324-3.407223 1.004234-3.455044C1.41071-4.782067 2.211706-5.033126 2.558406-5.033126C3.096389-5.033126 3.203985-4.531009 3.203985-4.244085C3.203985-3.981071 3.132254-3.706102 2.988792-3.132254L2.582316-1.494396C2.402989-.777086 2.056289-.119552 1.422665-.119552C1.362889-.119552 1.06401-.119552 .812951-.274969C1.243337-.358655 1.338979-.71731 1.338979-.860772C1.338979-1.099875 1.159651-1.243337 .932503-1.243337C.645579-1.243337 .334745-.992279 .334745-.609714C.334745-.107597 .896638 .119552 1.41071 .119552C1.984558 .119552 2.391034-.334745 2.642092-.824907C2.833375-.119552 3.431133 .119552 3.873474 .119552C5.092902 .119552 5.738481-1.446575 5.738481-1.709589C5.738481-1.769365 5.69066-1.817186 5.618929-1.817186C5.511333-1.817186 5.499377-1.75741 5.463512-1.661768C5.140722-.609714 4.447323-.119552 3.90934-.119552C3.490909-.119552 3.263761-.430386 3.263761-.920548C3.263761-1.183562 3.311582-1.374844 3.502864-2.163885L3.921295-3.789788C4.100623-4.507098 4.507098-5.033126 5.057036-5.033126C5.080946-5.033126 5.415691-5.033126 5.66675-4.877709Z'/>
+</defs>
+<g id='eq5-page1'>
+<use x='0' y='0' xlink:href='#eq5-g1-120'/>
+<use x='6.652087' y='1.793263' xlink:href='#eq5-g0-107'/>
+</g>
+</svg> and <svg class="m-math" style="width: 2.301em; height: 0.809em; vertical-align: -0.274em;" viewBox="0 -5.147373 22.094392 7.770897">
+<title>
+$x_{k+1}$
+</title>
+<defs>
+<path id='eq6-g2-43' d='M3.474969-1.809215H5.818182C5.929763-1.809215 6.105106-1.809215 6.105106-1.992528S5.929763-2.175841 5.818182-2.175841H3.474969V-4.527024C3.474969-4.638605 3.474969-4.813948 3.291656-4.813948S3.108344-4.638605 3.108344-4.527024V-2.175841H.757161C.645579-2.175841 .470237-2.175841 .470237-1.992528S.645579-1.809215 .757161-1.809215H3.108344V.541968C3.108344 .653549 3.108344 .828892 3.291656 .828892S3.474969 .653549 3.474969 .541968V-1.809215Z'/>
+<path id='eq6-g2-49' d='M2.502615-5.076961C2.502615-5.292154 2.486675-5.300125 2.271482-5.300125C1.944707-4.98132 1.522291-4.790037 .765131-4.790037V-4.527024C.980324-4.527024 1.41071-4.527024 1.872976-4.742217V-.653549C1.872976-.358655 1.849066-.263014 1.091905-.263014H.812951V0C1.139726-.02391 1.825156-.02391 2.183811-.02391S3.235866-.02391 3.56264 0V-.263014H3.283686C2.526526-.263014 2.502615-.358655 2.502615-.653549V-5.076961Z'/>
+<path id='eq6-g0-107' d='M2.327273-5.292154C2.335243-5.308095 2.359153-5.411706 2.359153-5.419676C2.359153-5.459527 2.327273-5.531258 2.231631-5.531258C2.199751-5.531258 1.952677-5.507347 1.769365-5.491407L1.323039-5.459527C1.147696-5.443587 1.067995-5.435616 1.067995-5.292154C1.067995-5.180573 1.179577-5.180573 1.275218-5.180573C1.657783-5.180573 1.657783-5.132752 1.657783-5.061021C1.657783-5.037111 1.657783-5.021171 1.617933-4.877709L.486177-.342715C.454296-.223163 .454296-.175342 .454296-.167372C.454296-.03188 .565878 .079701 .71731 .079701C.988294 .079701 1.052055-.175342 1.083935-.286924C1.163636-.621669 1.370859-1.466501 1.458531-1.801245C1.896887-1.753425 2.430884-1.601993 2.430884-1.147696C2.430884-1.107846 2.430884-1.067995 2.414944-.988294C2.391034-.884682 2.375093-.773101 2.375093-.73325C2.375093-.263014 2.725778 .079701 3.188045 .079701C3.52279 .079701 3.730012-.167372 3.833624-.318804C4.024907-.613699 4.152428-1.091905 4.152428-1.139726C4.152428-1.219427 4.088667-1.243337 4.032877-1.243337C3.937235-1.243337 3.921295-1.195517 3.889415-1.052055C3.785803-.67746 3.57858-.143462 3.203985-.143462C2.996762-.143462 2.948941-.318804 2.948941-.533998C2.948941-.637609 2.956912-.73325 2.996762-.916563C3.004732-.948443 3.036613-1.075965 3.036613-1.163636C3.036613-1.817186 2.215691-1.960648 1.809215-2.016438C2.10411-2.191781 2.375093-2.462765 2.470735-2.566376C2.909091-2.996762 3.267746-3.291656 3.650311-3.291656C3.753923-3.291656 3.849564-3.267746 3.913325-3.188045C3.482939-3.132254 3.482939-2.757659 3.482939-2.749689C3.482939-2.574346 3.618431-2.454795 3.793773-2.454795C4.008966-2.454795 4.24807-2.630137 4.24807-2.956912C4.24807-3.227895 4.056787-3.514819 3.658281-3.514819C3.196015-3.514819 2.781569-3.164134 2.327273-2.709838C1.865006-2.255542 1.665753-2.16787 1.538232-2.11208L2.327273-5.292154Z'/>
+<path id='eq6-g1-120' d='M5.66675-4.877709C5.284184-4.805978 5.140722-4.519054 5.140722-4.291905C5.140722-4.004981 5.36787-3.90934 5.535243-3.90934C5.893898-3.90934 6.144956-4.220174 6.144956-4.542964C6.144956-5.045081 5.571108-5.272229 5.068991-5.272229C4.339726-5.272229 3.93325-4.554919 3.825654-4.327771C3.550685-5.224408 2.809465-5.272229 2.594271-5.272229C1.374844-5.272229 .729265-3.706102 .729265-3.443088C.729265-3.395268 .777086-3.335492 .860772-3.335492C.956413-3.335492 .980324-3.407223 1.004234-3.455044C1.41071-4.782067 2.211706-5.033126 2.558406-5.033126C3.096389-5.033126 3.203985-4.531009 3.203985-4.244085C3.203985-3.981071 3.132254-3.706102 2.988792-3.132254L2.582316-1.494396C2.402989-.777086 2.056289-.119552 1.422665-.119552C1.362889-.119552 1.06401-.119552 .812951-.274969C1.243337-.358655 1.338979-.71731 1.338979-.860772C1.338979-1.099875 1.159651-1.243337 .932503-1.243337C.645579-1.243337 .334745-.992279 .334745-.609714C.334745-.107597 .896638 .119552 1.41071 .119552C1.984558 .119552 2.391034-.334745 2.642092-.824907C2.833375-.119552 3.431133 .119552 3.873474 .119552C5.092902 .119552 5.738481-1.446575 5.738481-1.709589C5.738481-1.769365 5.69066-1.817186 5.618929-1.817186C5.511333-1.817186 5.499377-1.75741 5.463512-1.661768C5.140722-.609714 4.447323-.119552 3.90934-.119552C3.490909-.119552 3.263761-.430386 3.263761-.920548C3.263761-1.183562 3.311582-1.374844 3.502864-2.163885L3.921295-3.789788C4.100623-4.507098 4.507098-5.033126 5.057036-5.033126C5.080946-5.033126 5.415691-5.033126 5.66675-4.877709Z'/>
+</defs>
+<g id='eq6-page1'>
+<use x='0' y='0' xlink:href='#eq6-g1-120'/>
+<use x='6.652087' y='1.793263' xlink:href='#eq6-g0-107'/>
+<use x='11.273703' y='1.793263' xlink:href='#eq6-g2-43'/>
+<use x='17.860209' y='1.793263' xlink:href='#eq6-g2-49'/>
+</g>
+</svg>. Notice that <svg class="m-math" style="width: 2.301em; height: 0.809em; vertical-align: -0.274em;" viewBox="0 -5.147373 22.094392 7.770897">
+<title>
+$x_{k+1}$
+</title>
+<defs>
+<path id='eq7-g2-43' d='M3.474969-1.809215H5.818182C5.929763-1.809215 6.105106-1.809215 6.105106-1.992528S5.929763-2.175841 5.818182-2.175841H3.474969V-4.527024C3.474969-4.638605 3.474969-4.813948 3.291656-4.813948S3.108344-4.638605 3.108344-4.527024V-2.175841H.757161C.645579-2.175841 .470237-2.175841 .470237-1.992528S.645579-1.809215 .757161-1.809215H3.108344V.541968C3.108344 .653549 3.108344 .828892 3.291656 .828892S3.474969 .653549 3.474969 .541968V-1.809215Z'/>
+<path id='eq7-g2-49' d='M2.502615-5.076961C2.502615-5.292154 2.486675-5.300125 2.271482-5.300125C1.944707-4.98132 1.522291-4.790037 .765131-4.790037V-4.527024C.980324-4.527024 1.41071-4.527024 1.872976-4.742217V-.653549C1.872976-.358655 1.849066-.263014 1.091905-.263014H.812951V0C1.139726-.02391 1.825156-.02391 2.183811-.02391S3.235866-.02391 3.56264 0V-.263014H3.283686C2.526526-.263014 2.502615-.358655 2.502615-.653549V-5.076961Z'/>
+<path id='eq7-g0-107' d='M2.327273-5.292154C2.335243-5.308095 2.359153-5.411706 2.359153-5.419676C2.359153-5.459527 2.327273-5.531258 2.231631-5.531258C2.199751-5.531258 1.952677-5.507347 1.769365-5.491407L1.323039-5.459527C1.147696-5.443587 1.067995-5.435616 1.067995-5.292154C1.067995-5.180573 1.179577-5.180573 1.275218-5.180573C1.657783-5.180573 1.657783-5.132752 1.657783-5.061021C1.657783-5.037111 1.657783-5.021171 1.617933-4.877709L.486177-.342715C.454296-.223163 .454296-.175342 .454296-.167372C.454296-.03188 .565878 .079701 .71731 .079701C.988294 .079701 1.052055-.175342 1.083935-.286924C1.163636-.621669 1.370859-1.466501 1.458531-1.801245C1.896887-1.753425 2.430884-1.601993 2.430884-1.147696C2.430884-1.107846 2.430884-1.067995 2.414944-.988294C2.391034-.884682 2.375093-.773101 2.375093-.73325C2.375093-.263014 2.725778 .079701 3.188045 .079701C3.52279 .079701 3.730012-.167372 3.833624-.318804C4.024907-.613699 4.152428-1.091905 4.152428-1.139726C4.152428-1.219427 4.088667-1.243337 4.032877-1.243337C3.937235-1.243337 3.921295-1.195517 3.889415-1.052055C3.785803-.67746 3.57858-.143462 3.203985-.143462C2.996762-.143462 2.948941-.318804 2.948941-.533998C2.948941-.637609 2.956912-.73325 2.996762-.916563C3.004732-.948443 3.036613-1.075965 3.036613-1.163636C3.036613-1.817186 2.215691-1.960648 1.809215-2.016438C2.10411-2.191781 2.375093-2.462765 2.470735-2.566376C2.909091-2.996762 3.267746-3.291656 3.650311-3.291656C3.753923-3.291656 3.849564-3.267746 3.913325-3.188045C3.482939-3.132254 3.482939-2.757659 3.482939-2.749689C3.482939-2.574346 3.618431-2.454795 3.793773-2.454795C4.008966-2.454795 4.24807-2.630137 4.24807-2.956912C4.24807-3.227895 4.056787-3.514819 3.658281-3.514819C3.196015-3.514819 2.781569-3.164134 2.327273-2.709838C1.865006-2.255542 1.665753-2.16787 1.538232-2.11208L2.327273-5.292154Z'/>
+<path id='eq7-g1-120' d='M5.66675-4.877709C5.284184-4.805978 5.140722-4.519054 5.140722-4.291905C5.140722-4.004981 5.36787-3.90934 5.535243-3.90934C5.893898-3.90934 6.144956-4.220174 6.144956-4.542964C6.144956-5.045081 5.571108-5.272229 5.068991-5.272229C4.339726-5.272229 3.93325-4.554919 3.825654-4.327771C3.550685-5.224408 2.809465-5.272229 2.594271-5.272229C1.374844-5.272229 .729265-3.706102 .729265-3.443088C.729265-3.395268 .777086-3.335492 .860772-3.335492C.956413-3.335492 .980324-3.407223 1.004234-3.455044C1.41071-4.782067 2.211706-5.033126 2.558406-5.033126C3.096389-5.033126 3.203985-4.531009 3.203985-4.244085C3.203985-3.981071 3.132254-3.706102 2.988792-3.132254L2.582316-1.494396C2.402989-.777086 2.056289-.119552 1.422665-.119552C1.362889-.119552 1.06401-.119552 .812951-.274969C1.243337-.358655 1.338979-.71731 1.338979-.860772C1.338979-1.099875 1.159651-1.243337 .932503-1.243337C.645579-1.243337 .334745-.992279 .334745-.609714C.334745-.107597 .896638 .119552 1.41071 .119552C1.984558 .119552 2.391034-.334745 2.642092-.824907C2.833375-.119552 3.431133 .119552 3.873474 .119552C5.092902 .119552 5.738481-1.446575 5.738481-1.709589C5.738481-1.769365 5.69066-1.817186 5.618929-1.817186C5.511333-1.817186 5.499377-1.75741 5.463512-1.661768C5.140722-.609714 4.447323-.119552 3.90934-.119552C3.490909-.119552 3.263761-.430386 3.263761-.920548C3.263761-1.183562 3.311582-1.374844 3.502864-2.163885L3.921295-3.789788C4.100623-4.507098 4.507098-5.033126 5.057036-5.033126C5.080946-5.033126 5.415691-5.033126 5.66675-4.877709Z'/>
+</defs>
+<g id='eq7-page1'>
+<use x='0' y='0' xlink:href='#eq7-g1-120'/>
+<use x='6.652087' y='1.793263' xlink:href='#eq7-g0-107'/>
+<use x='11.273703' y='1.793263' xlink:href='#eq7-g2-43'/>
+<use x='17.860209' y='1.793263' xlink:href='#eq7-g2-49'/>
+</g>
+</svg> corresponds to the state at instant (time + dT).</td>
+                </tr>
+                <tr>
+                  <td>controlInputs&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>A vector containing <svg class="m-math" style="width: 1.175em; height: 0.723em; vertical-align: -0.187em;" viewBox="0 -5.147373 11.284055 6.940636">
+<title>
+$u_k$
+</title>
+<defs>
+<path id='eq8-g0-107' d='M2.327273-5.292154C2.335243-5.308095 2.359153-5.411706 2.359153-5.419676C2.359153-5.459527 2.327273-5.531258 2.231631-5.531258C2.199751-5.531258 1.952677-5.507347 1.769365-5.491407L1.323039-5.459527C1.147696-5.443587 1.067995-5.435616 1.067995-5.292154C1.067995-5.180573 1.179577-5.180573 1.275218-5.180573C1.657783-5.180573 1.657783-5.132752 1.657783-5.061021C1.657783-5.037111 1.657783-5.021171 1.617933-4.877709L.486177-.342715C.454296-.223163 .454296-.175342 .454296-.167372C.454296-.03188 .565878 .079701 .71731 .079701C.988294 .079701 1.052055-.175342 1.083935-.286924C1.163636-.621669 1.370859-1.466501 1.458531-1.801245C1.896887-1.753425 2.430884-1.601993 2.430884-1.147696C2.430884-1.107846 2.430884-1.067995 2.414944-.988294C2.391034-.884682 2.375093-.773101 2.375093-.73325C2.375093-.263014 2.725778 .079701 3.188045 .079701C3.52279 .079701 3.730012-.167372 3.833624-.318804C4.024907-.613699 4.152428-1.091905 4.152428-1.139726C4.152428-1.219427 4.088667-1.243337 4.032877-1.243337C3.937235-1.243337 3.921295-1.195517 3.889415-1.052055C3.785803-.67746 3.57858-.143462 3.203985-.143462C2.996762-.143462 2.948941-.318804 2.948941-.533998C2.948941-.637609 2.956912-.73325 2.996762-.916563C3.004732-.948443 3.036613-1.075965 3.036613-1.163636C3.036613-1.817186 2.215691-1.960648 1.809215-2.016438C2.10411-2.191781 2.375093-2.462765 2.470735-2.566376C2.909091-2.996762 3.267746-3.291656 3.650311-3.291656C3.753923-3.291656 3.849564-3.267746 3.913325-3.188045C3.482939-3.132254 3.482939-2.757659 3.482939-2.749689C3.482939-2.574346 3.618431-2.454795 3.793773-2.454795C4.008966-2.454795 4.24807-2.630137 4.24807-2.956912C4.24807-3.227895 4.056787-3.514819 3.658281-3.514819C3.196015-3.514819 2.781569-3.164134 2.327273-2.709838C1.865006-2.255542 1.665753-2.16787 1.538232-2.11208L2.327273-5.292154Z'/>
+<path id='eq8-g1-117' d='M4.076712-.6934C4.23213-.02391 4.805978 .119552 5.092902 .119552C5.475467 .119552 5.762391-.131507 5.953674-.537983C6.156912-.968369 6.312329-1.673724 6.312329-1.709589C6.312329-1.769365 6.264508-1.817186 6.192777-1.817186C6.085181-1.817186 6.073225-1.75741 6.025405-1.578082C5.810212-.753176 5.595019-.119552 5.116812-.119552C4.758157-.119552 4.758157-.514072 4.758157-.669489C4.758157-.944458 4.794022-1.06401 4.913574-1.566127C4.99726-1.888917 5.080946-2.211706 5.152677-2.546451L5.642839-4.495143C5.726526-4.794022 5.726526-4.817933 5.726526-4.853798C5.726526-5.033126 5.583064-5.152677 5.403736-5.152677C5.057036-5.152677 4.97335-4.853798 4.901619-4.554919C4.782067-4.088667 4.136488-1.518306 4.052802-1.099875C4.040847-1.099875 3.574595-.119552 2.701868-.119552C2.080199-.119552 1.960648-.657534 1.960648-1.099875C1.960648-1.78132 2.295392-2.737733 2.606227-3.53873C2.749689-3.921295 2.809465-4.076712 2.809465-4.315816C2.809465-4.829888 2.438854-5.272229 1.865006-5.272229C.765131-5.272229 .32279-3.53873 .32279-3.443088C.32279-3.395268 .37061-3.335492 .454296-3.335492C.561893-3.335492 .573848-3.383313 .621669-3.550685C.908593-4.578829 1.374844-5.033126 1.829141-5.033126C1.948692-5.033126 2.139975-5.021171 2.139975-4.638605C2.139975-4.327771 2.008468-3.981071 1.829141-3.526775C1.303113-2.10411 1.243337-1.649813 1.243337-1.291158C1.243337-.071731 2.163885 .119552 2.654047 .119552C3.419178 .119552 3.837609-.406476 4.076712-.6934Z'/>
+</defs>
+<g id='eq8-page1'>
+<use x='0' y='0' xlink:href='#eq8-g1-117'/>
+<use x='6.66244' y='1.793263' xlink:href='#eq8-g0-107'/>
+</g>
+</svg> and <svg class="m-math" style="width: 2.303em; height: 0.809em; vertical-align: -0.274em;" viewBox="0 -5.147373 22.104745 7.770897">
+<title>
+$u_{k+1}$
+</title>
+<defs>
+<path id='eq9-g2-43' d='M3.474969-1.809215H5.818182C5.929763-1.809215 6.105106-1.809215 6.105106-1.992528S5.929763-2.175841 5.818182-2.175841H3.474969V-4.527024C3.474969-4.638605 3.474969-4.813948 3.291656-4.813948S3.108344-4.638605 3.108344-4.527024V-2.175841H.757161C.645579-2.175841 .470237-2.175841 .470237-1.992528S.645579-1.809215 .757161-1.809215H3.108344V.541968C3.108344 .653549 3.108344 .828892 3.291656 .828892S3.474969 .653549 3.474969 .541968V-1.809215Z'/>
+<path id='eq9-g2-49' d='M2.502615-5.076961C2.502615-5.292154 2.486675-5.300125 2.271482-5.300125C1.944707-4.98132 1.522291-4.790037 .765131-4.790037V-4.527024C.980324-4.527024 1.41071-4.527024 1.872976-4.742217V-.653549C1.872976-.358655 1.849066-.263014 1.091905-.263014H.812951V0C1.139726-.02391 1.825156-.02391 2.183811-.02391S3.235866-.02391 3.56264 0V-.263014H3.283686C2.526526-.263014 2.502615-.358655 2.502615-.653549V-5.076961Z'/>
+<path id='eq9-g0-107' d='M2.327273-5.292154C2.335243-5.308095 2.359153-5.411706 2.359153-5.419676C2.359153-5.459527 2.327273-5.531258 2.231631-5.531258C2.199751-5.531258 1.952677-5.507347 1.769365-5.491407L1.323039-5.459527C1.147696-5.443587 1.067995-5.435616 1.067995-5.292154C1.067995-5.180573 1.179577-5.180573 1.275218-5.180573C1.657783-5.180573 1.657783-5.132752 1.657783-5.061021C1.657783-5.037111 1.657783-5.021171 1.617933-4.877709L.486177-.342715C.454296-.223163 .454296-.175342 .454296-.167372C.454296-.03188 .565878 .079701 .71731 .079701C.988294 .079701 1.052055-.175342 1.083935-.286924C1.163636-.621669 1.370859-1.466501 1.458531-1.801245C1.896887-1.753425 2.430884-1.601993 2.430884-1.147696C2.430884-1.107846 2.430884-1.067995 2.414944-.988294C2.391034-.884682 2.375093-.773101 2.375093-.73325C2.375093-.263014 2.725778 .079701 3.188045 .079701C3.52279 .079701 3.730012-.167372 3.833624-.318804C4.024907-.613699 4.152428-1.091905 4.152428-1.139726C4.152428-1.219427 4.088667-1.243337 4.032877-1.243337C3.937235-1.243337 3.921295-1.195517 3.889415-1.052055C3.785803-.67746 3.57858-.143462 3.203985-.143462C2.996762-.143462 2.948941-.318804 2.948941-.533998C2.948941-.637609 2.956912-.73325 2.996762-.916563C3.004732-.948443 3.036613-1.075965 3.036613-1.163636C3.036613-1.817186 2.215691-1.960648 1.809215-2.016438C2.10411-2.191781 2.375093-2.462765 2.470735-2.566376C2.909091-2.996762 3.267746-3.291656 3.650311-3.291656C3.753923-3.291656 3.849564-3.267746 3.913325-3.188045C3.482939-3.132254 3.482939-2.757659 3.482939-2.749689C3.482939-2.574346 3.618431-2.454795 3.793773-2.454795C4.008966-2.454795 4.24807-2.630137 4.24807-2.956912C4.24807-3.227895 4.056787-3.514819 3.658281-3.514819C3.196015-3.514819 2.781569-3.164134 2.327273-2.709838C1.865006-2.255542 1.665753-2.16787 1.538232-2.11208L2.327273-5.292154Z'/>
+<path id='eq9-g1-117' d='M4.076712-.6934C4.23213-.02391 4.805978 .119552 5.092902 .119552C5.475467 .119552 5.762391-.131507 5.953674-.537983C6.156912-.968369 6.312329-1.673724 6.312329-1.709589C6.312329-1.769365 6.264508-1.817186 6.192777-1.817186C6.085181-1.817186 6.073225-1.75741 6.025405-1.578082C5.810212-.753176 5.595019-.119552 5.116812-.119552C4.758157-.119552 4.758157-.514072 4.758157-.669489C4.758157-.944458 4.794022-1.06401 4.913574-1.566127C4.99726-1.888917 5.080946-2.211706 5.152677-2.546451L5.642839-4.495143C5.726526-4.794022 5.726526-4.817933 5.726526-4.853798C5.726526-5.033126 5.583064-5.152677 5.403736-5.152677C5.057036-5.152677 4.97335-4.853798 4.901619-4.554919C4.782067-4.088667 4.136488-1.518306 4.052802-1.099875C4.040847-1.099875 3.574595-.119552 2.701868-.119552C2.080199-.119552 1.960648-.657534 1.960648-1.099875C1.960648-1.78132 2.295392-2.737733 2.606227-3.53873C2.749689-3.921295 2.809465-4.076712 2.809465-4.315816C2.809465-4.829888 2.438854-5.272229 1.865006-5.272229C.765131-5.272229 .32279-3.53873 .32279-3.443088C.32279-3.395268 .37061-3.335492 .454296-3.335492C.561893-3.335492 .573848-3.383313 .621669-3.550685C.908593-4.578829 1.374844-5.033126 1.829141-5.033126C1.948692-5.033126 2.139975-5.021171 2.139975-4.638605C2.139975-4.327771 2.008468-3.981071 1.829141-3.526775C1.303113-2.10411 1.243337-1.649813 1.243337-1.291158C1.243337-.071731 2.163885 .119552 2.654047 .119552C3.419178 .119552 3.837609-.406476 4.076712-.6934Z'/>
+</defs>
+<g id='eq9-page1'>
+<use x='0' y='0' xlink:href='#eq9-g1-117'/>
+<use x='6.66244' y='1.793263' xlink:href='#eq9-g0-107'/>
+<use x='11.284055' y='1.793263' xlink:href='#eq9-g2-43'/>
+<use x='17.870562' y='1.793263' xlink:href='#eq9-g2-49'/>
+</g>
+</svg>. Notice that <svg class="m-math" style="width: 2.303em; height: 0.809em; vertical-align: -0.274em;" viewBox="0 -5.147373 22.104745 7.770897">
+<title>
+$u_{k+1}$
+</title>
+<defs>
+<path id='eq10-g2-43' d='M3.474969-1.809215H5.818182C5.929763-1.809215 6.105106-1.809215 6.105106-1.992528S5.929763-2.175841 5.818182-2.175841H3.474969V-4.527024C3.474969-4.638605 3.474969-4.813948 3.291656-4.813948S3.108344-4.638605 3.108344-4.527024V-2.175841H.757161C.645579-2.175841 .470237-2.175841 .470237-1.992528S.645579-1.809215 .757161-1.809215H3.108344V.541968C3.108344 .653549 3.108344 .828892 3.291656 .828892S3.474969 .653549 3.474969 .541968V-1.809215Z'/>
+<path id='eq10-g2-49' d='M2.502615-5.076961C2.502615-5.292154 2.486675-5.300125 2.271482-5.300125C1.944707-4.98132 1.522291-4.790037 .765131-4.790037V-4.527024C.980324-4.527024 1.41071-4.527024 1.872976-4.742217V-.653549C1.872976-.358655 1.849066-.263014 1.091905-.263014H.812951V0C1.139726-.02391 1.825156-.02391 2.183811-.02391S3.235866-.02391 3.56264 0V-.263014H3.283686C2.526526-.263014 2.502615-.358655 2.502615-.653549V-5.076961Z'/>
+<path id='eq10-g0-107' d='M2.327273-5.292154C2.335243-5.308095 2.359153-5.411706 2.359153-5.419676C2.359153-5.459527 2.327273-5.531258 2.231631-5.531258C2.199751-5.531258 1.952677-5.507347 1.769365-5.491407L1.323039-5.459527C1.147696-5.443587 1.067995-5.435616 1.067995-5.292154C1.067995-5.180573 1.179577-5.180573 1.275218-5.180573C1.657783-5.180573 1.657783-5.132752 1.657783-5.061021C1.657783-5.037111 1.657783-5.021171 1.617933-4.877709L.486177-.342715C.454296-.223163 .454296-.175342 .454296-.167372C.454296-.03188 .565878 .079701 .71731 .079701C.988294 .079701 1.052055-.175342 1.083935-.286924C1.163636-.621669 1.370859-1.466501 1.458531-1.801245C1.896887-1.753425 2.430884-1.601993 2.430884-1.147696C2.430884-1.107846 2.430884-1.067995 2.414944-.988294C2.391034-.884682 2.375093-.773101 2.375093-.73325C2.375093-.263014 2.725778 .079701 3.188045 .079701C3.52279 .079701 3.730012-.167372 3.833624-.318804C4.024907-.613699 4.152428-1.091905 4.152428-1.139726C4.152428-1.219427 4.088667-1.243337 4.032877-1.243337C3.937235-1.243337 3.921295-1.195517 3.889415-1.052055C3.785803-.67746 3.57858-.143462 3.203985-.143462C2.996762-.143462 2.948941-.318804 2.948941-.533998C2.948941-.637609 2.956912-.73325 2.996762-.916563C3.004732-.948443 3.036613-1.075965 3.036613-1.163636C3.036613-1.817186 2.215691-1.960648 1.809215-2.016438C2.10411-2.191781 2.375093-2.462765 2.470735-2.566376C2.909091-2.996762 3.267746-3.291656 3.650311-3.291656C3.753923-3.291656 3.849564-3.267746 3.913325-3.188045C3.482939-3.132254 3.482939-2.757659 3.482939-2.749689C3.482939-2.574346 3.618431-2.454795 3.793773-2.454795C4.008966-2.454795 4.24807-2.630137 4.24807-2.956912C4.24807-3.227895 4.056787-3.514819 3.658281-3.514819C3.196015-3.514819 2.781569-3.164134 2.327273-2.709838C1.865006-2.255542 1.665753-2.16787 1.538232-2.11208L2.327273-5.292154Z'/>
+<path id='eq10-g1-117' d='M4.076712-.6934C4.23213-.02391 4.805978 .119552 5.092902 .119552C5.475467 .119552 5.762391-.131507 5.953674-.537983C6.156912-.968369 6.312329-1.673724 6.312329-1.709589C6.312329-1.769365 6.264508-1.817186 6.192777-1.817186C6.085181-1.817186 6.073225-1.75741 6.025405-1.578082C5.810212-.753176 5.595019-.119552 5.116812-.119552C4.758157-.119552 4.758157-.514072 4.758157-.669489C4.758157-.944458 4.794022-1.06401 4.913574-1.566127C4.99726-1.888917 5.080946-2.211706 5.152677-2.546451L5.642839-4.495143C5.726526-4.794022 5.726526-4.817933 5.726526-4.853798C5.726526-5.033126 5.583064-5.152677 5.403736-5.152677C5.057036-5.152677 4.97335-4.853798 4.901619-4.554919C4.782067-4.088667 4.136488-1.518306 4.052802-1.099875C4.040847-1.099875 3.574595-.119552 2.701868-.119552C2.080199-.119552 1.960648-.657534 1.960648-1.099875C1.960648-1.78132 2.295392-2.737733 2.606227-3.53873C2.749689-3.921295 2.809465-4.076712 2.809465-4.315816C2.809465-4.829888 2.438854-5.272229 1.865006-5.272229C.765131-5.272229 .32279-3.53873 .32279-3.443088C.32279-3.395268 .37061-3.335492 .454296-3.335492C.561893-3.335492 .573848-3.383313 .621669-3.550685C.908593-4.578829 1.374844-5.033126 1.829141-5.033126C1.948692-5.033126 2.139975-5.021171 2.139975-4.638605C2.139975-4.327771 2.008468-3.981071 1.829141-3.526775C1.303113-2.10411 1.243337-1.649813 1.243337-1.291158C1.243337-.071731 2.163885 .119552 2.654047 .119552C3.419178 .119552 3.837609-.406476 4.076712-.6934Z'/>
+</defs>
+<g id='eq10-page1'>
+<use x='0' y='0' xlink:href='#eq10-g1-117'/>
+<use x='6.66244' y='1.793263' xlink:href='#eq10-g0-107'/>
+<use x='11.284055' y='1.793263' xlink:href='#eq10-g2-43'/>
+<use x='17.870562' y='1.793263' xlink:href='#eq10-g2-49'/>
+</g>
+</svg> is supposed to be applied at instant (time + dT).</td>
+                </tr>
+                <tr>
+                  <td>dT&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>The time distance between <svg class="m-math" style="width: 1.174em; height: 0.723em; vertical-align: -0.187em;" viewBox="0 -5.147373 11.273703 6.940636">
+<title>
+$x_k$
+</title>
+<defs>
+<path id='eq11-g0-107' d='M2.327273-5.292154C2.335243-5.308095 2.359153-5.411706 2.359153-5.419676C2.359153-5.459527 2.327273-5.531258 2.231631-5.531258C2.199751-5.531258 1.952677-5.507347 1.769365-5.491407L1.323039-5.459527C1.147696-5.443587 1.067995-5.435616 1.067995-5.292154C1.067995-5.180573 1.179577-5.180573 1.275218-5.180573C1.657783-5.180573 1.657783-5.132752 1.657783-5.061021C1.657783-5.037111 1.657783-5.021171 1.617933-4.877709L.486177-.342715C.454296-.223163 .454296-.175342 .454296-.167372C.454296-.03188 .565878 .079701 .71731 .079701C.988294 .079701 1.052055-.175342 1.083935-.286924C1.163636-.621669 1.370859-1.466501 1.458531-1.801245C1.896887-1.753425 2.430884-1.601993 2.430884-1.147696C2.430884-1.107846 2.430884-1.067995 2.414944-.988294C2.391034-.884682 2.375093-.773101 2.375093-.73325C2.375093-.263014 2.725778 .079701 3.188045 .079701C3.52279 .079701 3.730012-.167372 3.833624-.318804C4.024907-.613699 4.152428-1.091905 4.152428-1.139726C4.152428-1.219427 4.088667-1.243337 4.032877-1.243337C3.937235-1.243337 3.921295-1.195517 3.889415-1.052055C3.785803-.67746 3.57858-.143462 3.203985-.143462C2.996762-.143462 2.948941-.318804 2.948941-.533998C2.948941-.637609 2.956912-.73325 2.996762-.916563C3.004732-.948443 3.036613-1.075965 3.036613-1.163636C3.036613-1.817186 2.215691-1.960648 1.809215-2.016438C2.10411-2.191781 2.375093-2.462765 2.470735-2.566376C2.909091-2.996762 3.267746-3.291656 3.650311-3.291656C3.753923-3.291656 3.849564-3.267746 3.913325-3.188045C3.482939-3.132254 3.482939-2.757659 3.482939-2.749689C3.482939-2.574346 3.618431-2.454795 3.793773-2.454795C4.008966-2.454795 4.24807-2.630137 4.24807-2.956912C4.24807-3.227895 4.056787-3.514819 3.658281-3.514819C3.196015-3.514819 2.781569-3.164134 2.327273-2.709838C1.865006-2.255542 1.665753-2.16787 1.538232-2.11208L2.327273-5.292154Z'/>
+<path id='eq11-g1-120' d='M5.66675-4.877709C5.284184-4.805978 5.140722-4.519054 5.140722-4.291905C5.140722-4.004981 5.36787-3.90934 5.535243-3.90934C5.893898-3.90934 6.144956-4.220174 6.144956-4.542964C6.144956-5.045081 5.571108-5.272229 5.068991-5.272229C4.339726-5.272229 3.93325-4.554919 3.825654-4.327771C3.550685-5.224408 2.809465-5.272229 2.594271-5.272229C1.374844-5.272229 .729265-3.706102 .729265-3.443088C.729265-3.395268 .777086-3.335492 .860772-3.335492C.956413-3.335492 .980324-3.407223 1.004234-3.455044C1.41071-4.782067 2.211706-5.033126 2.558406-5.033126C3.096389-5.033126 3.203985-4.531009 3.203985-4.244085C3.203985-3.981071 3.132254-3.706102 2.988792-3.132254L2.582316-1.494396C2.402989-.777086 2.056289-.119552 1.422665-.119552C1.362889-.119552 1.06401-.119552 .812951-.274969C1.243337-.358655 1.338979-.71731 1.338979-.860772C1.338979-1.099875 1.159651-1.243337 .932503-1.243337C.645579-1.243337 .334745-.992279 .334745-.609714C.334745-.107597 .896638 .119552 1.41071 .119552C1.984558 .119552 2.391034-.334745 2.642092-.824907C2.833375-.119552 3.431133 .119552 3.873474 .119552C5.092902 .119552 5.738481-1.446575 5.738481-1.709589C5.738481-1.769365 5.69066-1.817186 5.618929-1.817186C5.511333-1.817186 5.499377-1.75741 5.463512-1.661768C5.140722-.609714 4.447323-.119552 3.90934-.119552C3.490909-.119552 3.263761-.430386 3.263761-.920548C3.263761-1.183562 3.311582-1.374844 3.502864-2.163885L3.921295-3.789788C4.100623-4.507098 4.507098-5.033126 5.057036-5.033126C5.080946-5.033126 5.415691-5.033126 5.66675-4.877709Z'/>
+</defs>
+<g id='eq11-page1'>
+<use x='0' y='0' xlink:href='#eq11-g1-120'/>
+<use x='6.652087' y='1.793263' xlink:href='#eq11-g0-107'/>
+</g>
+</svg> and <svg class="m-math" style="width: 2.301em; height: 0.809em; vertical-align: -0.274em;" viewBox="0 -5.147373 22.094392 7.770897">
+<title>
+$x_{k+1}$
+</title>
+<defs>
+<path id='eq12-g2-43' d='M3.474969-1.809215H5.818182C5.929763-1.809215 6.105106-1.809215 6.105106-1.992528S5.929763-2.175841 5.818182-2.175841H3.474969V-4.527024C3.474969-4.638605 3.474969-4.813948 3.291656-4.813948S3.108344-4.638605 3.108344-4.527024V-2.175841H.757161C.645579-2.175841 .470237-2.175841 .470237-1.992528S.645579-1.809215 .757161-1.809215H3.108344V.541968C3.108344 .653549 3.108344 .828892 3.291656 .828892S3.474969 .653549 3.474969 .541968V-1.809215Z'/>
+<path id='eq12-g2-49' d='M2.502615-5.076961C2.502615-5.292154 2.486675-5.300125 2.271482-5.300125C1.944707-4.98132 1.522291-4.790037 .765131-4.790037V-4.527024C.980324-4.527024 1.41071-4.527024 1.872976-4.742217V-.653549C1.872976-.358655 1.849066-.263014 1.091905-.263014H.812951V0C1.139726-.02391 1.825156-.02391 2.183811-.02391S3.235866-.02391 3.56264 0V-.263014H3.283686C2.526526-.263014 2.502615-.358655 2.502615-.653549V-5.076961Z'/>
+<path id='eq12-g0-107' d='M2.327273-5.292154C2.335243-5.308095 2.359153-5.411706 2.359153-5.419676C2.359153-5.459527 2.327273-5.531258 2.231631-5.531258C2.199751-5.531258 1.952677-5.507347 1.769365-5.491407L1.323039-5.459527C1.147696-5.443587 1.067995-5.435616 1.067995-5.292154C1.067995-5.180573 1.179577-5.180573 1.275218-5.180573C1.657783-5.180573 1.657783-5.132752 1.657783-5.061021C1.657783-5.037111 1.657783-5.021171 1.617933-4.877709L.486177-.342715C.454296-.223163 .454296-.175342 .454296-.167372C.454296-.03188 .565878 .079701 .71731 .079701C.988294 .079701 1.052055-.175342 1.083935-.286924C1.163636-.621669 1.370859-1.466501 1.458531-1.801245C1.896887-1.753425 2.430884-1.601993 2.430884-1.147696C2.430884-1.107846 2.430884-1.067995 2.414944-.988294C2.391034-.884682 2.375093-.773101 2.375093-.73325C2.375093-.263014 2.725778 .079701 3.188045 .079701C3.52279 .079701 3.730012-.167372 3.833624-.318804C4.024907-.613699 4.152428-1.091905 4.152428-1.139726C4.152428-1.219427 4.088667-1.243337 4.032877-1.243337C3.937235-1.243337 3.921295-1.195517 3.889415-1.052055C3.785803-.67746 3.57858-.143462 3.203985-.143462C2.996762-.143462 2.948941-.318804 2.948941-.533998C2.948941-.637609 2.956912-.73325 2.996762-.916563C3.004732-.948443 3.036613-1.075965 3.036613-1.163636C3.036613-1.817186 2.215691-1.960648 1.809215-2.016438C2.10411-2.191781 2.375093-2.462765 2.470735-2.566376C2.909091-2.996762 3.267746-3.291656 3.650311-3.291656C3.753923-3.291656 3.849564-3.267746 3.913325-3.188045C3.482939-3.132254 3.482939-2.757659 3.482939-2.749689C3.482939-2.574346 3.618431-2.454795 3.793773-2.454795C4.008966-2.454795 4.24807-2.630137 4.24807-2.956912C4.24807-3.227895 4.056787-3.514819 3.658281-3.514819C3.196015-3.514819 2.781569-3.164134 2.327273-2.709838C1.865006-2.255542 1.665753-2.16787 1.538232-2.11208L2.327273-5.292154Z'/>
+<path id='eq12-g1-120' d='M5.66675-4.877709C5.284184-4.805978 5.140722-4.519054 5.140722-4.291905C5.140722-4.004981 5.36787-3.90934 5.535243-3.90934C5.893898-3.90934 6.144956-4.220174 6.144956-4.542964C6.144956-5.045081 5.571108-5.272229 5.068991-5.272229C4.339726-5.272229 3.93325-4.554919 3.825654-4.327771C3.550685-5.224408 2.809465-5.272229 2.594271-5.272229C1.374844-5.272229 .729265-3.706102 .729265-3.443088C.729265-3.395268 .777086-3.335492 .860772-3.335492C.956413-3.335492 .980324-3.407223 1.004234-3.455044C1.41071-4.782067 2.211706-5.033126 2.558406-5.033126C3.096389-5.033126 3.203985-4.531009 3.203985-4.244085C3.203985-3.981071 3.132254-3.706102 2.988792-3.132254L2.582316-1.494396C2.402989-.777086 2.056289-.119552 1.422665-.119552C1.362889-.119552 1.06401-.119552 .812951-.274969C1.243337-.358655 1.338979-.71731 1.338979-.860772C1.338979-1.099875 1.159651-1.243337 .932503-1.243337C.645579-1.243337 .334745-.992279 .334745-.609714C.334745-.107597 .896638 .119552 1.41071 .119552C1.984558 .119552 2.391034-.334745 2.642092-.824907C2.833375-.119552 3.431133 .119552 3.873474 .119552C5.092902 .119552 5.738481-1.446575 5.738481-1.709589C5.738481-1.769365 5.69066-1.817186 5.618929-1.817186C5.511333-1.817186 5.499377-1.75741 5.463512-1.661768C5.140722-.609714 4.447323-.119552 3.90934-.119552C3.490909-.119552 3.263761-.430386 3.263761-.920548C3.263761-1.183562 3.311582-1.374844 3.502864-2.163885L3.921295-3.789788C4.100623-4.507098 4.507098-5.033126 5.057036-5.033126C5.080946-5.033126 5.415691-5.033126 5.66675-4.877709Z'/>
+</defs>
+<g id='eq12-page1'>
+<use x='0' y='0' xlink:href='#eq12-g1-120'/>
+<use x='6.652087' y='1.793263' xlink:href='#eq12-g0-107'/>
+<use x='11.273703' y='1.793263' xlink:href='#eq12-g2-43'/>
+<use x='17.860209' y='1.793263' xlink:href='#eq12-g2-49'/>
+</g>
+</svg>.</td>
+                </tr>
+                <tr>
+                  <td>constraintValue&nbsp;<span class="m-label m-flat m-warning">out</span></td>
+                  <td>The result of <svg class="m-math" style="width: 15.280em; height: 1.245em; vertical-align: -0.312em;" viewBox="0 -8.966376 146.692187 11.955168">
+<title>
+$ \phi(x_k, x_{k+1}, u_k, u_{k+1}, t) - x_{k+1}$
+</title>
+<defs>
+<path id='eq13-g3-43' d='M3.474969-1.809215H5.818182C5.929763-1.809215 6.105106-1.809215 6.105106-1.992528S5.929763-2.175841 5.818182-2.175841H3.474969V-4.527024C3.474969-4.638605 3.474969-4.813948 3.291656-4.813948S3.108344-4.638605 3.108344-4.527024V-2.175841H.757161C.645579-2.175841 .470237-2.175841 .470237-1.992528S.645579-1.809215 .757161-1.809215H3.108344V.541968C3.108344 .653549 3.108344 .828892 3.291656 .828892S3.474969 .653549 3.474969 .541968V-1.809215Z'/>
+<path id='eq13-g3-49' d='M2.502615-5.076961C2.502615-5.292154 2.486675-5.300125 2.271482-5.300125C1.944707-4.98132 1.522291-4.790037 .765131-4.790037V-4.527024C.980324-4.527024 1.41071-4.527024 1.872976-4.742217V-.653549C1.872976-.358655 1.849066-.263014 1.091905-.263014H.812951V0C1.139726-.02391 1.825156-.02391 2.183811-.02391S3.235866-.02391 3.56264 0V-.263014H3.283686C2.526526-.263014 2.502615-.358655 2.502615-.653549V-5.076961Z'/>
+<path id='eq13-g0-0' d='M7.878456-2.749689C8.081694-2.749689 8.296887-2.749689 8.296887-2.988792S8.081694-3.227895 7.878456-3.227895H1.41071C1.207472-3.227895 .992279-3.227895 .992279-2.988792S1.207472-2.749689 1.41071-2.749689H7.878456Z'/>
+<path id='eq13-g1-107' d='M2.327273-5.292154C2.335243-5.308095 2.359153-5.411706 2.359153-5.419676C2.359153-5.459527 2.327273-5.531258 2.231631-5.531258C2.199751-5.531258 1.952677-5.507347 1.769365-5.491407L1.323039-5.459527C1.147696-5.443587 1.067995-5.435616 1.067995-5.292154C1.067995-5.180573 1.179577-5.180573 1.275218-5.180573C1.657783-5.180573 1.657783-5.132752 1.657783-5.061021C1.657783-5.037111 1.657783-5.021171 1.617933-4.877709L.486177-.342715C.454296-.223163 .454296-.175342 .454296-.167372C.454296-.03188 .565878 .079701 .71731 .079701C.988294 .079701 1.052055-.175342 1.083935-.286924C1.163636-.621669 1.370859-1.466501 1.458531-1.801245C1.896887-1.753425 2.430884-1.601993 2.430884-1.147696C2.430884-1.107846 2.430884-1.067995 2.414944-.988294C2.391034-.884682 2.375093-.773101 2.375093-.73325C2.375093-.263014 2.725778 .079701 3.188045 .079701C3.52279 .079701 3.730012-.167372 3.833624-.318804C4.024907-.613699 4.152428-1.091905 4.152428-1.139726C4.152428-1.219427 4.088667-1.243337 4.032877-1.243337C3.937235-1.243337 3.921295-1.195517 3.889415-1.052055C3.785803-.67746 3.57858-.143462 3.203985-.143462C2.996762-.143462 2.948941-.318804 2.948941-.533998C2.948941-.637609 2.956912-.73325 2.996762-.916563C3.004732-.948443 3.036613-1.075965 3.036613-1.163636C3.036613-1.817186 2.215691-1.960648 1.809215-2.016438C2.10411-2.191781 2.375093-2.462765 2.470735-2.566376C2.909091-2.996762 3.267746-3.291656 3.650311-3.291656C3.753923-3.291656 3.849564-3.267746 3.913325-3.188045C3.482939-3.132254 3.482939-2.757659 3.482939-2.749689C3.482939-2.574346 3.618431-2.454795 3.793773-2.454795C4.008966-2.454795 4.24807-2.630137 4.24807-2.956912C4.24807-3.227895 4.056787-3.514819 3.658281-3.514819C3.196015-3.514819 2.781569-3.164134 2.327273-2.709838C1.865006-2.255542 1.665753-2.16787 1.538232-2.11208L2.327273-5.292154Z'/>
+<path id='eq13-g4-40' d='M3.88543 2.905106C3.88543 2.86924 3.88543 2.84533 3.682192 2.642092C2.486675 1.43462 1.817186-.537983 1.817186-2.976837C1.817186-5.296139 2.379078-7.292653 3.765878-8.703362C3.88543-8.810959 3.88543-8.834869 3.88543-8.870735C3.88543-8.942466 3.825654-8.966376 3.777833-8.966376C3.622416-8.966376 2.642092-8.105604 2.056289-6.933998C1.446575-5.726526 1.171606-4.447323 1.171606-2.976837C1.171606-1.912827 1.338979-.490162 1.960648 .789041C2.666002 2.223661 3.646326 3.000747 3.777833 3.000747C3.825654 3.000747 3.88543 2.976837 3.88543 2.905106Z'/>
+<path id='eq13-g4-41' d='M3.371357-2.976837C3.371357-3.88543 3.251806-5.36787 2.582316-6.75467C1.876961-8.18929 .896638-8.966376 .765131-8.966376C.71731-8.966376 .657534-8.942466 .657534-8.870735C.657534-8.834869 .657534-8.810959 .860772-8.607721C2.056289-7.400249 2.725778-5.427646 2.725778-2.988792C2.725778-.669489 2.163885 1.327024 .777086 2.737733C.657534 2.84533 .657534 2.86924 .657534 2.905106C.657534 2.976837 .71731 3.000747 .765131 3.000747C.920548 3.000747 1.900872 2.139975 2.486675 .968369C3.096389-.251059 3.371357-1.542217 3.371357-2.976837Z'/>
+<path id='eq13-g2-30' d='M5.140722-8.18929C5.140722-8.296887 5.057036-8.296887 5.021171-8.296887C4.913574-8.296887 4.901619-8.272976 4.853798-8.069738L4.208219-5.499377C4.172354-5.34396 4.160399-5.332005 4.148443-5.32005C4.136488-5.296139 4.052802-5.284184 4.028892-5.284184C2.068244-5.116812 .561893-3.502864 .561893-2.008468C.561893-.71731 1.554172 .071731 2.797509 .143462C2.701868 .514072 2.618182 .896638 2.52254 1.267248C2.355168 1.900872 2.259527 2.295392 2.259527 2.343213C2.259527 2.367123 2.259527 2.438854 2.379078 2.438854C2.414944 2.438854 2.462765 2.438854 2.486675 2.391034C2.510585 2.367123 2.582316 2.080199 2.630137 1.924782L3.072478 .143462C5.116812 .035866 6.670984-1.637858 6.670984-3.144209C6.670984-4.351681 5.762391-5.212453 4.435367-5.296139L5.140722-8.18929ZM4.363636-5.057036C5.152677-5.009215 5.941719-4.566874 5.941719-3.395268C5.941719-2.044334 4.99726-.251059 3.132254-.107597L4.363636-5.057036ZM2.857285-.095641C2.271482-.131507 1.291158-.442341 1.291158-1.75741C1.291158-3.263761 2.379078-4.937484 4.100623-5.045081L2.857285-.095641Z'/>
+<path id='eq13-g2-59' d='M2.331258 .047821C2.331258-.645579 2.10411-1.159651 1.613948-1.159651C1.231382-1.159651 1.0401-.848817 1.0401-.585803S1.219427 0 1.625903 0C1.78132 0 1.912827-.047821 2.020423-.155417C2.044334-.179328 2.056289-.179328 2.068244-.179328C2.092154-.179328 2.092154-.011955 2.092154 .047821C2.092154 .442341 2.020423 1.219427 1.327024 1.996513C1.195517 2.139975 1.195517 2.163885 1.195517 2.187796C1.195517 2.247572 1.255293 2.307347 1.315068 2.307347C1.41071 2.307347 2.331258 1.422665 2.331258 .047821Z'/>
+<path id='eq13-g2-116' d='M2.402989-4.805978H3.502864C3.730012-4.805978 3.849564-4.805978 3.849564-5.021171C3.849564-5.152677 3.777833-5.152677 3.53873-5.152677H2.486675L2.929016-6.898132C2.976837-7.065504 2.976837-7.089415 2.976837-7.173101C2.976837-7.364384 2.82142-7.47198 2.666002-7.47198C2.570361-7.47198 2.295392-7.436115 2.199751-7.053549L1.733499-5.152677H.609714C.37061-5.152677 .263014-5.152677 .263014-4.925529C.263014-4.805978 .3467-4.805978 .573848-4.805978H1.637858L.848817-1.649813C.753176-1.231382 .71731-1.111831 .71731-.956413C.71731-.394521 1.111831 .119552 1.78132 .119552C2.988792 .119552 3.634371-1.625903 3.634371-1.709589C3.634371-1.78132 3.58655-1.817186 3.514819-1.817186C3.490909-1.817186 3.443088-1.817186 3.419178-1.769365C3.407223-1.75741 3.395268-1.745455 3.311582-1.554172C3.060523-.956413 2.510585-.119552 1.817186-.119552C1.458531-.119552 1.43462-.418431 1.43462-.681445C1.43462-.6934 1.43462-.920548 1.470486-1.06401L2.402989-4.805978Z'/>
+<path id='eq13-g2-117' d='M4.076712-.6934C4.23213-.02391 4.805978 .119552 5.092902 .119552C5.475467 .119552 5.762391-.131507 5.953674-.537983C6.156912-.968369 6.312329-1.673724 6.312329-1.709589C6.312329-1.769365 6.264508-1.817186 6.192777-1.817186C6.085181-1.817186 6.073225-1.75741 6.025405-1.578082C5.810212-.753176 5.595019-.119552 5.116812-.119552C4.758157-.119552 4.758157-.514072 4.758157-.669489C4.758157-.944458 4.794022-1.06401 4.913574-1.566127C4.99726-1.888917 5.080946-2.211706 5.152677-2.546451L5.642839-4.495143C5.726526-4.794022 5.726526-4.817933 5.726526-4.853798C5.726526-5.033126 5.583064-5.152677 5.403736-5.152677C5.057036-5.152677 4.97335-4.853798 4.901619-4.554919C4.782067-4.088667 4.136488-1.518306 4.052802-1.099875C4.040847-1.099875 3.574595-.119552 2.701868-.119552C2.080199-.119552 1.960648-.657534 1.960648-1.099875C1.960648-1.78132 2.295392-2.737733 2.606227-3.53873C2.749689-3.921295 2.809465-4.076712 2.809465-4.315816C2.809465-4.829888 2.438854-5.272229 1.865006-5.272229C.765131-5.272229 .32279-3.53873 .32279-3.443088C.32279-3.395268 .37061-3.335492 .454296-3.335492C.561893-3.335492 .573848-3.383313 .621669-3.550685C.908593-4.578829 1.374844-5.033126 1.829141-5.033126C1.948692-5.033126 2.139975-5.021171 2.139975-4.638605C2.139975-4.327771 2.008468-3.981071 1.829141-3.526775C1.303113-2.10411 1.243337-1.649813 1.243337-1.291158C1.243337-.071731 2.163885 .119552 2.654047 .119552C3.419178 .119552 3.837609-.406476 4.076712-.6934Z'/>
+<path id='eq13-g2-120' d='M5.66675-4.877709C5.284184-4.805978 5.140722-4.519054 5.140722-4.291905C5.140722-4.004981 5.36787-3.90934 5.535243-3.90934C5.893898-3.90934 6.144956-4.220174 6.144956-4.542964C6.144956-5.045081 5.571108-5.272229 5.068991-5.272229C4.339726-5.272229 3.93325-4.554919 3.825654-4.327771C3.550685-5.224408 2.809465-5.272229 2.594271-5.272229C1.374844-5.272229 .729265-3.706102 .729265-3.443088C.729265-3.395268 .777086-3.335492 .860772-3.335492C.956413-3.335492 .980324-3.407223 1.004234-3.455044C1.41071-4.782067 2.211706-5.033126 2.558406-5.033126C3.096389-5.033126 3.203985-4.531009 3.203985-4.244085C3.203985-3.981071 3.132254-3.706102 2.988792-3.132254L2.582316-1.494396C2.402989-.777086 2.056289-.119552 1.422665-.119552C1.362889-.119552 1.06401-.119552 .812951-.274969C1.243337-.358655 1.338979-.71731 1.338979-.860772C1.338979-1.099875 1.159651-1.243337 .932503-1.243337C.645579-1.243337 .334745-.992279 .334745-.609714C.334745-.107597 .896638 .119552 1.41071 .119552C1.984558 .119552 2.391034-.334745 2.642092-.824907C2.833375-.119552 3.431133 .119552 3.873474 .119552C5.092902 .119552 5.738481-1.446575 5.738481-1.709589C5.738481-1.769365 5.69066-1.817186 5.618929-1.817186C5.511333-1.817186 5.499377-1.75741 5.463512-1.661768C5.140722-.609714 4.447323-.119552 3.90934-.119552C3.490909-.119552 3.263761-.430386 3.263761-.920548C3.263761-1.183562 3.311582-1.374844 3.502864-2.163885L3.921295-3.789788C4.100623-4.507098 4.507098-5.033126 5.057036-5.033126C5.080946-5.033126 5.415691-5.033126 5.66675-4.877709Z'/>
+</defs>
+<g id='eq13-page1'>
+<use x='0' y='0' xlink:href='#eq13-g2-30'/>
+<use x='6.928102' y='0' xlink:href='#eq13-g4-40'/>
+<use x='11.480428' y='0' xlink:href='#eq13-g2-120'/>
+<use x='18.132515' y='1.793263' xlink:href='#eq13-g1-107'/>
+<use x='23.252262' y='0' xlink:href='#eq13-g2-59'/>
+<use x='28.496421' y='0' xlink:href='#eq13-g2-120'/>
+<use x='35.148508' y='1.793263' xlink:href='#eq13-g1-107'/>
+<use x='39.770124' y='1.793263' xlink:href='#eq13-g3-43'/>
+<use x='46.356631' y='1.793263' xlink:href='#eq13-g3-49'/>
+<use x='51.088945' y='0' xlink:href='#eq13-g2-59'/>
+<use x='56.333104' y='0' xlink:href='#eq13-g2-117'/>
+<use x='62.995544' y='1.793263' xlink:href='#eq13-g1-107'/>
+<use x='68.115291' y='0' xlink:href='#eq13-g2-59'/>
+<use x='73.35945' y='0' xlink:href='#eq13-g2-117'/>
+<use x='80.02189' y='1.793263' xlink:href='#eq13-g1-107'/>
+<use x='84.643505' y='1.793263' xlink:href='#eq13-g3-43'/>
+<use x='91.230012' y='1.793263' xlink:href='#eq13-g3-49'/>
+<use x='95.962327' y='0' xlink:href='#eq13-g2-59'/>
+<use x='101.206486' y='0' xlink:href='#eq13-g2-116'/>
+<use x='105.433645' y='0' xlink:href='#eq13-g4-41'/>
+<use x='112.642635' y='0' xlink:href='#eq13-g0-0'/>
+<use x='124.597795' y='0' xlink:href='#eq13-g2-120'/>
+<use x='131.249882' y='1.793263' xlink:href='#eq13-g1-107'/>
+<use x='135.871498' y='1.793263' xlink:href='#eq13-g3-43'/>
+<use x='142.458004' y='1.793263' xlink:href='#eq13-g3-49'/>
+</g>
+</svg>.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>True if successfull, false otherwise (or if not implemented).</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>In some optimal control solvers, like the <a href="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver.html" class="m-doc">MultipleShootingSolver</a>, we need to discretize the dynamical system associated to the optimal control problem. This function evaluates the discretization error according to specified integration method. The <a href="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator.html" class="m-doc">Integrator</a>, when integrating a dynamical system, is performing the following discretization:</p><div class="m-math"><svg style="width: 15.450em; height: 1.245em;" viewBox="120.109085 -11.955168 148.324805 11.955168">
+<title>
+\[ x_{k+1} = \phi(x_k, x_{k+1}, u_k, u_{k+1}, t) \]
+</title>
+<defs>
+<path id='eq1-g3-40' d='M3.88543 2.905106C3.88543 2.86924 3.88543 2.84533 3.682192 2.642092C2.486675 1.43462 1.817186-.537983 1.817186-2.976837C1.817186-5.296139 2.379078-7.292653 3.765878-8.703362C3.88543-8.810959 3.88543-8.834869 3.88543-8.870735C3.88543-8.942466 3.825654-8.966376 3.777833-8.966376C3.622416-8.966376 2.642092-8.105604 2.056289-6.933998C1.446575-5.726526 1.171606-4.447323 1.171606-2.976837C1.171606-1.912827 1.338979-.490162 1.960648 .789041C2.666002 2.223661 3.646326 3.000747 3.777833 3.000747C3.825654 3.000747 3.88543 2.976837 3.88543 2.905106Z'/>
+<path id='eq1-g3-41' d='M3.371357-2.976837C3.371357-3.88543 3.251806-5.36787 2.582316-6.75467C1.876961-8.18929 .896638-8.966376 .765131-8.966376C.71731-8.966376 .657534-8.942466 .657534-8.870735C.657534-8.834869 .657534-8.810959 .860772-8.607721C2.056289-7.400249 2.725778-5.427646 2.725778-2.988792C2.725778-.669489 2.163885 1.327024 .777086 2.737733C.657534 2.84533 .657534 2.86924 .657534 2.905106C.657534 2.976837 .71731 3.000747 .765131 3.000747C.920548 3.000747 1.900872 2.139975 2.486675 .968369C3.096389-.251059 3.371357-1.542217 3.371357-2.976837Z'/>
+<path id='eq1-g3-61' d='M8.069738-3.873474C8.237111-3.873474 8.452304-3.873474 8.452304-4.088667C8.452304-4.315816 8.249066-4.315816 8.069738-4.315816H1.028144C.860772-4.315816 .645579-4.315816 .645579-4.100623C.645579-3.873474 .848817-3.873474 1.028144-3.873474H8.069738ZM8.069738-1.649813C8.237111-1.649813 8.452304-1.649813 8.452304-1.865006C8.452304-2.092154 8.249066-2.092154 8.069738-2.092154H1.028144C.860772-2.092154 .645579-2.092154 .645579-1.876961C.645579-1.649813 .848817-1.649813 1.028144-1.649813H8.069738Z'/>
+<path id='eq1-g2-43' d='M3.474969-1.809215H5.818182C5.929763-1.809215 6.105106-1.809215 6.105106-1.992528S5.929763-2.175841 5.818182-2.175841H3.474969V-4.527024C3.474969-4.638605 3.474969-4.813948 3.291656-4.813948S3.108344-4.638605 3.108344-4.527024V-2.175841H.757161C.645579-2.175841 .470237-2.175841 .470237-1.992528S.645579-1.809215 .757161-1.809215H3.108344V.541968C3.108344 .653549 3.108344 .828892 3.291656 .828892S3.474969 .653549 3.474969 .541968V-1.809215Z'/>
+<path id='eq1-g2-49' d='M2.502615-5.076961C2.502615-5.292154 2.486675-5.300125 2.271482-5.300125C1.944707-4.98132 1.522291-4.790037 .765131-4.790037V-4.527024C.980324-4.527024 1.41071-4.527024 1.872976-4.742217V-.653549C1.872976-.358655 1.849066-.263014 1.091905-.263014H.812951V0C1.139726-.02391 1.825156-.02391 2.183811-.02391S3.235866-.02391 3.56264 0V-.263014H3.283686C2.526526-.263014 2.502615-.358655 2.502615-.653549V-5.076961Z'/>
+<path id='eq1-g0-107' d='M2.327273-5.292154C2.335243-5.308095 2.359153-5.411706 2.359153-5.419676C2.359153-5.459527 2.327273-5.531258 2.231631-5.531258C2.199751-5.531258 1.952677-5.507347 1.769365-5.491407L1.323039-5.459527C1.147696-5.443587 1.067995-5.435616 1.067995-5.292154C1.067995-5.180573 1.179577-5.180573 1.275218-5.180573C1.657783-5.180573 1.657783-5.132752 1.657783-5.061021C1.657783-5.037111 1.657783-5.021171 1.617933-4.877709L.486177-.342715C.454296-.223163 .454296-.175342 .454296-.167372C.454296-.03188 .565878 .079701 .71731 .079701C.988294 .079701 1.052055-.175342 1.083935-.286924C1.163636-.621669 1.370859-1.466501 1.458531-1.801245C1.896887-1.753425 2.430884-1.601993 2.430884-1.147696C2.430884-1.107846 2.430884-1.067995 2.414944-.988294C2.391034-.884682 2.375093-.773101 2.375093-.73325C2.375093-.263014 2.725778 .079701 3.188045 .079701C3.52279 .079701 3.730012-.167372 3.833624-.318804C4.024907-.613699 4.152428-1.091905 4.152428-1.139726C4.152428-1.219427 4.088667-1.243337 4.032877-1.243337C3.937235-1.243337 3.921295-1.195517 3.889415-1.052055C3.785803-.67746 3.57858-.143462 3.203985-.143462C2.996762-.143462 2.948941-.318804 2.948941-.533998C2.948941-.637609 2.956912-.73325 2.996762-.916563C3.004732-.948443 3.036613-1.075965 3.036613-1.163636C3.036613-1.817186 2.215691-1.960648 1.809215-2.016438C2.10411-2.191781 2.375093-2.462765 2.470735-2.566376C2.909091-2.996762 3.267746-3.291656 3.650311-3.291656C3.753923-3.291656 3.849564-3.267746 3.913325-3.188045C3.482939-3.132254 3.482939-2.757659 3.482939-2.749689C3.482939-2.574346 3.618431-2.454795 3.793773-2.454795C4.008966-2.454795 4.24807-2.630137 4.24807-2.956912C4.24807-3.227895 4.056787-3.514819 3.658281-3.514819C3.196015-3.514819 2.781569-3.164134 2.327273-2.709838C1.865006-2.255542 1.665753-2.16787 1.538232-2.11208L2.327273-5.292154Z'/>
+<path id='eq1-g1-30' d='M5.140722-8.18929C5.140722-8.296887 5.057036-8.296887 5.021171-8.296887C4.913574-8.296887 4.901619-8.272976 4.853798-8.069738L4.208219-5.499377C4.172354-5.34396 4.160399-5.332005 4.148443-5.32005C4.136488-5.296139 4.052802-5.284184 4.028892-5.284184C2.068244-5.116812 .561893-3.502864 .561893-2.008468C.561893-.71731 1.554172 .071731 2.797509 .143462C2.701868 .514072 2.618182 .896638 2.52254 1.267248C2.355168 1.900872 2.259527 2.295392 2.259527 2.343213C2.259527 2.367123 2.259527 2.438854 2.379078 2.438854C2.414944 2.438854 2.462765 2.438854 2.486675 2.391034C2.510585 2.367123 2.582316 2.080199 2.630137 1.924782L3.072478 .143462C5.116812 .035866 6.670984-1.637858 6.670984-3.144209C6.670984-4.351681 5.762391-5.212453 4.435367-5.296139L5.140722-8.18929ZM4.363636-5.057036C5.152677-5.009215 5.941719-4.566874 5.941719-3.395268C5.941719-2.044334 4.99726-.251059 3.132254-.107597L4.363636-5.057036ZM2.857285-.095641C2.271482-.131507 1.291158-.442341 1.291158-1.75741C1.291158-3.263761 2.379078-4.937484 4.100623-5.045081L2.857285-.095641Z'/>
+<path id='eq1-g1-59' d='M2.331258 .047821C2.331258-.645579 2.10411-1.159651 1.613948-1.159651C1.231382-1.159651 1.0401-.848817 1.0401-.585803S1.219427 0 1.625903 0C1.78132 0 1.912827-.047821 2.020423-.155417C2.044334-.179328 2.056289-.179328 2.068244-.179328C2.092154-.179328 2.092154-.011955 2.092154 .047821C2.092154 .442341 2.020423 1.219427 1.327024 1.996513C1.195517 2.139975 1.195517 2.163885 1.195517 2.187796C1.195517 2.247572 1.255293 2.307347 1.315068 2.307347C1.41071 2.307347 2.331258 1.422665 2.331258 .047821Z'/>
+<path id='eq1-g1-116' d='M2.402989-4.805978H3.502864C3.730012-4.805978 3.849564-4.805978 3.849564-5.021171C3.849564-5.152677 3.777833-5.152677 3.53873-5.152677H2.486675L2.929016-6.898132C2.976837-7.065504 2.976837-7.089415 2.976837-7.173101C2.976837-7.364384 2.82142-7.47198 2.666002-7.47198C2.570361-7.47198 2.295392-7.436115 2.199751-7.053549L1.733499-5.152677H.609714C.37061-5.152677 .263014-5.152677 .263014-4.925529C.263014-4.805978 .3467-4.805978 .573848-4.805978H1.637858L.848817-1.649813C.753176-1.231382 .71731-1.111831 .71731-.956413C.71731-.394521 1.111831 .119552 1.78132 .119552C2.988792 .119552 3.634371-1.625903 3.634371-1.709589C3.634371-1.78132 3.58655-1.817186 3.514819-1.817186C3.490909-1.817186 3.443088-1.817186 3.419178-1.769365C3.407223-1.75741 3.395268-1.745455 3.311582-1.554172C3.060523-.956413 2.510585-.119552 1.817186-.119552C1.458531-.119552 1.43462-.418431 1.43462-.681445C1.43462-.6934 1.43462-.920548 1.470486-1.06401L2.402989-4.805978Z'/>
+<path id='eq1-g1-117' d='M4.076712-.6934C4.23213-.02391 4.805978 .119552 5.092902 .119552C5.475467 .119552 5.762391-.131507 5.953674-.537983C6.156912-.968369 6.312329-1.673724 6.312329-1.709589C6.312329-1.769365 6.264508-1.817186 6.192777-1.817186C6.085181-1.817186 6.073225-1.75741 6.025405-1.578082C5.810212-.753176 5.595019-.119552 5.116812-.119552C4.758157-.119552 4.758157-.514072 4.758157-.669489C4.758157-.944458 4.794022-1.06401 4.913574-1.566127C4.99726-1.888917 5.080946-2.211706 5.152677-2.546451L5.642839-4.495143C5.726526-4.794022 5.726526-4.817933 5.726526-4.853798C5.726526-5.033126 5.583064-5.152677 5.403736-5.152677C5.057036-5.152677 4.97335-4.853798 4.901619-4.554919C4.782067-4.088667 4.136488-1.518306 4.052802-1.099875C4.040847-1.099875 3.574595-.119552 2.701868-.119552C2.080199-.119552 1.960648-.657534 1.960648-1.099875C1.960648-1.78132 2.295392-2.737733 2.606227-3.53873C2.749689-3.921295 2.809465-4.076712 2.809465-4.315816C2.809465-4.829888 2.438854-5.272229 1.865006-5.272229C.765131-5.272229 .32279-3.53873 .32279-3.443088C.32279-3.395268 .37061-3.335492 .454296-3.335492C.561893-3.335492 .573848-3.383313 .621669-3.550685C.908593-4.578829 1.374844-5.033126 1.829141-5.033126C1.948692-5.033126 2.139975-5.021171 2.139975-4.638605C2.139975-4.327771 2.008468-3.981071 1.829141-3.526775C1.303113-2.10411 1.243337-1.649813 1.243337-1.291158C1.243337-.071731 2.163885 .119552 2.654047 .119552C3.419178 .119552 3.837609-.406476 4.076712-.6934Z'/>
+<path id='eq1-g1-120' d='M5.66675-4.877709C5.284184-4.805978 5.140722-4.519054 5.140722-4.291905C5.140722-4.004981 5.36787-3.90934 5.535243-3.90934C5.893898-3.90934 6.144956-4.220174 6.144956-4.542964C6.144956-5.045081 5.571108-5.272229 5.068991-5.272229C4.339726-5.272229 3.93325-4.554919 3.825654-4.327771C3.550685-5.224408 2.809465-5.272229 2.594271-5.272229C1.374844-5.272229 .729265-3.706102 .729265-3.443088C.729265-3.395268 .777086-3.335492 .860772-3.335492C.956413-3.335492 .980324-3.407223 1.004234-3.455044C1.41071-4.782067 2.211706-5.033126 2.558406-5.033126C3.096389-5.033126 3.203985-4.531009 3.203985-4.244085C3.203985-3.981071 3.132254-3.706102 2.988792-3.132254L2.582316-1.494396C2.402989-.777086 2.056289-.119552 1.422665-.119552C1.362889-.119552 1.06401-.119552 .812951-.274969C1.243337-.358655 1.338979-.71731 1.338979-.860772C1.338979-1.099875 1.159651-1.243337 .932503-1.243337C.645579-1.243337 .334745-.992279 .334745-.609714C.334745-.107597 .896638 .119552 1.41071 .119552C1.984558 .119552 2.391034-.334745 2.642092-.824907C2.833375-.119552 3.431133 .119552 3.873474 .119552C5.092902 .119552 5.738481-1.446575 5.738481-1.709589C5.738481-1.769365 5.69066-1.817186 5.618929-1.817186C5.511333-1.817186 5.499377-1.75741 5.463512-1.661768C5.140722-.609714 4.447323-.119552 3.90934-.119552C3.490909-.119552 3.263761-.430386 3.263761-.920548C3.263761-1.183562 3.311582-1.374844 3.502864-2.163885L3.921295-3.789788C4.100623-4.507098 4.507098-5.033126 5.057036-5.033126C5.080946-5.033126 5.415691-5.033126 5.66675-4.877709Z'/>
+</defs>
+<g id='eq1-page1'>
+<use x='120.109085' y='-2.988792' xlink:href='#eq1-g1-120'/>
+<use x='126.761172' y='-1.195529' xlink:href='#eq1-g0-107'/>
+<use x='131.382788' y='-1.195529' xlink:href='#eq1-g2-43'/>
+<use x='137.969294' y='-1.195529' xlink:href='#eq1-g2-49'/>
+<use x='146.022438' y='-2.988792' xlink:href='#eq1-g3-61'/>
+<use x='158.447919' y='-2.988792' xlink:href='#eq1-g1-30'/>
+<use x='165.376021' y='-2.988792' xlink:href='#eq1-g3-40'/>
+<use x='169.928347' y='-2.988792' xlink:href='#eq1-g1-120'/>
+<use x='176.580434' y='-1.195529' xlink:href='#eq1-g0-107'/>
+<use x='181.700182' y='-2.988792' xlink:href='#eq1-g1-59'/>
+<use x='186.944341' y='-2.988792' xlink:href='#eq1-g1-120'/>
+<use x='193.596428' y='-1.195529' xlink:href='#eq1-g0-107'/>
+<use x='198.218043' y='-1.195529' xlink:href='#eq1-g2-43'/>
+<use x='204.80455' y='-1.195529' xlink:href='#eq1-g2-49'/>
+<use x='209.536865' y='-2.988792' xlink:href='#eq1-g1-59'/>
+<use x='214.781024' y='-2.988792' xlink:href='#eq1-g1-117'/>
+<use x='221.443463' y='-1.195529' xlink:href='#eq1-g0-107'/>
+<use x='226.563211' y='-2.988792' xlink:href='#eq1-g1-59'/>
+<use x='231.80737' y='-2.988792' xlink:href='#eq1-g1-117'/>
+<use x='238.469809' y='-1.195529' xlink:href='#eq1-g0-107'/>
+<use x='243.091425' y='-1.195529' xlink:href='#eq1-g2-43'/>
+<use x='249.677931' y='-1.195529' xlink:href='#eq1-g2-49'/>
+<use x='254.410246' y='-2.988792' xlink:href='#eq1-g1-59'/>
+<use x='259.654405' y='-2.988792' xlink:href='#eq1-g1-116'/>
+<use x='263.881565' y='-2.988792' xlink:href='#eq1-g3-41'/>
+</g>
+</svg></div><p>where <svg class="m-math" style="width: 2.301em; height: 0.809em; vertical-align: -0.274em;" viewBox="0 -5.147373 22.094392 7.770897">
+<title>
+$ x_{k+1}$
+</title>
+<defs>
+<path id='eq2-g2-43' d='M3.474969-1.809215H5.818182C5.929763-1.809215 6.105106-1.809215 6.105106-1.992528S5.929763-2.175841 5.818182-2.175841H3.474969V-4.527024C3.474969-4.638605 3.474969-4.813948 3.291656-4.813948S3.108344-4.638605 3.108344-4.527024V-2.175841H.757161C.645579-2.175841 .470237-2.175841 .470237-1.992528S.645579-1.809215 .757161-1.809215H3.108344V.541968C3.108344 .653549 3.108344 .828892 3.291656 .828892S3.474969 .653549 3.474969 .541968V-1.809215Z'/>
+<path id='eq2-g2-49' d='M2.502615-5.076961C2.502615-5.292154 2.486675-5.300125 2.271482-5.300125C1.944707-4.98132 1.522291-4.790037 .765131-4.790037V-4.527024C.980324-4.527024 1.41071-4.527024 1.872976-4.742217V-.653549C1.872976-.358655 1.849066-.263014 1.091905-.263014H.812951V0C1.139726-.02391 1.825156-.02391 2.183811-.02391S3.235866-.02391 3.56264 0V-.263014H3.283686C2.526526-.263014 2.502615-.358655 2.502615-.653549V-5.076961Z'/>
+<path id='eq2-g0-107' d='M2.327273-5.292154C2.335243-5.308095 2.359153-5.411706 2.359153-5.419676C2.359153-5.459527 2.327273-5.531258 2.231631-5.531258C2.199751-5.531258 1.952677-5.507347 1.769365-5.491407L1.323039-5.459527C1.147696-5.443587 1.067995-5.435616 1.067995-5.292154C1.067995-5.180573 1.179577-5.180573 1.275218-5.180573C1.657783-5.180573 1.657783-5.132752 1.657783-5.061021C1.657783-5.037111 1.657783-5.021171 1.617933-4.877709L.486177-.342715C.454296-.223163 .454296-.175342 .454296-.167372C.454296-.03188 .565878 .079701 .71731 .079701C.988294 .079701 1.052055-.175342 1.083935-.286924C1.163636-.621669 1.370859-1.466501 1.458531-1.801245C1.896887-1.753425 2.430884-1.601993 2.430884-1.147696C2.430884-1.107846 2.430884-1.067995 2.414944-.988294C2.391034-.884682 2.375093-.773101 2.375093-.73325C2.375093-.263014 2.725778 .079701 3.188045 .079701C3.52279 .079701 3.730012-.167372 3.833624-.318804C4.024907-.613699 4.152428-1.091905 4.152428-1.139726C4.152428-1.219427 4.088667-1.243337 4.032877-1.243337C3.937235-1.243337 3.921295-1.195517 3.889415-1.052055C3.785803-.67746 3.57858-.143462 3.203985-.143462C2.996762-.143462 2.948941-.318804 2.948941-.533998C2.948941-.637609 2.956912-.73325 2.996762-.916563C3.004732-.948443 3.036613-1.075965 3.036613-1.163636C3.036613-1.817186 2.215691-1.960648 1.809215-2.016438C2.10411-2.191781 2.375093-2.462765 2.470735-2.566376C2.909091-2.996762 3.267746-3.291656 3.650311-3.291656C3.753923-3.291656 3.849564-3.267746 3.913325-3.188045C3.482939-3.132254 3.482939-2.757659 3.482939-2.749689C3.482939-2.574346 3.618431-2.454795 3.793773-2.454795C4.008966-2.454795 4.24807-2.630137 4.24807-2.956912C4.24807-3.227895 4.056787-3.514819 3.658281-3.514819C3.196015-3.514819 2.781569-3.164134 2.327273-2.709838C1.865006-2.255542 1.665753-2.16787 1.538232-2.11208L2.327273-5.292154Z'/>
+<path id='eq2-g1-120' d='M5.66675-4.877709C5.284184-4.805978 5.140722-4.519054 5.140722-4.291905C5.140722-4.004981 5.36787-3.90934 5.535243-3.90934C5.893898-3.90934 6.144956-4.220174 6.144956-4.542964C6.144956-5.045081 5.571108-5.272229 5.068991-5.272229C4.339726-5.272229 3.93325-4.554919 3.825654-4.327771C3.550685-5.224408 2.809465-5.272229 2.594271-5.272229C1.374844-5.272229 .729265-3.706102 .729265-3.443088C.729265-3.395268 .777086-3.335492 .860772-3.335492C.956413-3.335492 .980324-3.407223 1.004234-3.455044C1.41071-4.782067 2.211706-5.033126 2.558406-5.033126C3.096389-5.033126 3.203985-4.531009 3.203985-4.244085C3.203985-3.981071 3.132254-3.706102 2.988792-3.132254L2.582316-1.494396C2.402989-.777086 2.056289-.119552 1.422665-.119552C1.362889-.119552 1.06401-.119552 .812951-.274969C1.243337-.358655 1.338979-.71731 1.338979-.860772C1.338979-1.099875 1.159651-1.243337 .932503-1.243337C.645579-1.243337 .334745-.992279 .334745-.609714C.334745-.107597 .896638 .119552 1.41071 .119552C1.984558 .119552 2.391034-.334745 2.642092-.824907C2.833375-.119552 3.431133 .119552 3.873474 .119552C5.092902 .119552 5.738481-1.446575 5.738481-1.709589C5.738481-1.769365 5.69066-1.817186 5.618929-1.817186C5.511333-1.817186 5.499377-1.75741 5.463512-1.661768C5.140722-.609714 4.447323-.119552 3.90934-.119552C3.490909-.119552 3.263761-.430386 3.263761-.920548C3.263761-1.183562 3.311582-1.374844 3.502864-2.163885L3.921295-3.789788C4.100623-4.507098 4.507098-5.033126 5.057036-5.033126C5.080946-5.033126 5.415691-5.033126 5.66675-4.877709Z'/>
+</defs>
+<g id='eq2-page1'>
+<use x='0' y='0' xlink:href='#eq2-g1-120'/>
+<use x='6.652087' y='1.793263' xlink:href='#eq2-g0-107'/>
+<use x='11.273703' y='1.793263' xlink:href='#eq2-g2-43'/>
+<use x='17.860209' y='1.793263' xlink:href='#eq2-g2-49'/>
+</g>
+</svg> is the discretized output. For example, using forward euler, we would have</p><div class="m-math"><svg style="width: 13.156em; height: 1.245em;" viewBox="131.120876 -11.955168 126.301227 11.955168">
+<title>
+\[ x_{k+1} = x_k + f(t, x, u)\mathrm{d}T. \]
+</title>
+<defs>
+<path id='eq3-g3-40' d='M3.88543 2.905106C3.88543 2.86924 3.88543 2.84533 3.682192 2.642092C2.486675 1.43462 1.817186-.537983 1.817186-2.976837C1.817186-5.296139 2.379078-7.292653 3.765878-8.703362C3.88543-8.810959 3.88543-8.834869 3.88543-8.870735C3.88543-8.942466 3.825654-8.966376 3.777833-8.966376C3.622416-8.966376 2.642092-8.105604 2.056289-6.933998C1.446575-5.726526 1.171606-4.447323 1.171606-2.976837C1.171606-1.912827 1.338979-.490162 1.960648 .789041C2.666002 2.223661 3.646326 3.000747 3.777833 3.000747C3.825654 3.000747 3.88543 2.976837 3.88543 2.905106Z'/>
+<path id='eq3-g3-41' d='M3.371357-2.976837C3.371357-3.88543 3.251806-5.36787 2.582316-6.75467C1.876961-8.18929 .896638-8.966376 .765131-8.966376C.71731-8.966376 .657534-8.942466 .657534-8.870735C.657534-8.834869 .657534-8.810959 .860772-8.607721C2.056289-7.400249 2.725778-5.427646 2.725778-2.988792C2.725778-.669489 2.163885 1.327024 .777086 2.737733C.657534 2.84533 .657534 2.86924 .657534 2.905106C.657534 2.976837 .71731 3.000747 .765131 3.000747C.920548 3.000747 1.900872 2.139975 2.486675 .968369C3.096389-.251059 3.371357-1.542217 3.371357-2.976837Z'/>
+<path id='eq3-g3-43' d='M4.770112-2.761644H8.069738C8.237111-2.761644 8.452304-2.761644 8.452304-2.976837C8.452304-3.203985 8.249066-3.203985 8.069738-3.203985H4.770112V-6.503611C4.770112-6.670984 4.770112-6.886177 4.554919-6.886177C4.327771-6.886177 4.327771-6.682939 4.327771-6.503611V-3.203985H1.028144C.860772-3.203985 .645579-3.203985 .645579-2.988792C.645579-2.761644 .848817-2.761644 1.028144-2.761644H4.327771V.537983C4.327771 .705355 4.327771 .920548 4.542964 .920548C4.770112 .920548 4.770112 .71731 4.770112 .537983V-2.761644Z'/>
+<path id='eq3-g3-61' d='M8.069738-3.873474C8.237111-3.873474 8.452304-3.873474 8.452304-4.088667C8.452304-4.315816 8.249066-4.315816 8.069738-4.315816H1.028144C.860772-4.315816 .645579-4.315816 .645579-4.100623C.645579-3.873474 .848817-3.873474 1.028144-3.873474H8.069738ZM8.069738-1.649813C8.237111-1.649813 8.452304-1.649813 8.452304-1.865006C8.452304-2.092154 8.249066-2.092154 8.069738-2.092154H1.028144C.860772-2.092154 .645579-2.092154 .645579-1.876961C.645579-1.649813 .848817-1.649813 1.028144-1.649813H8.069738Z'/>
+<path id='eq3-g3-100' d='M3.58655-8.16538V-7.81868C4.399502-7.81868 4.495143-7.734994 4.495143-7.149191V-4.507098C4.244085-4.853798 3.730012-5.272229 3.000747-5.272229C1.613948-5.272229 .418431-4.100623 .418431-2.570361C.418431-1.052055 1.554172 .119552 2.86924 .119552C3.777833 .119552 4.303861-.478207 4.471233-.705355V.119552L6.156912 0V-.3467C5.34396-.3467 5.248319-.430386 5.248319-1.016189V-8.296887L3.58655-8.16538ZM4.471233-1.398755C4.471233-1.183562 4.471233-1.147696 4.303861-.884682C4.016936-.466252 3.526775-.119552 2.929016-.119552C2.618182-.119552 1.327024-.239103 1.327024-2.558406C1.327024-3.419178 1.470486-3.897385 1.733499-4.291905C1.972603-4.662516 2.450809-5.033126 3.048568-5.033126C3.789788-5.033126 4.208219-4.495143 4.327771-4.303861C4.471233-4.100623 4.471233-4.076712 4.471233-3.861519V-1.398755Z'/>
+<path id='eq3-g2-43' d='M3.474969-1.809215H5.818182C5.929763-1.809215 6.105106-1.809215 6.105106-1.992528S5.929763-2.175841 5.818182-2.175841H3.474969V-4.527024C3.474969-4.638605 3.474969-4.813948 3.291656-4.813948S3.108344-4.638605 3.108344-4.527024V-2.175841H.757161C.645579-2.175841 .470237-2.175841 .470237-1.992528S.645579-1.809215 .757161-1.809215H3.108344V.541968C3.108344 .653549 3.108344 .828892 3.291656 .828892S3.474969 .653549 3.474969 .541968V-1.809215Z'/>
+<path id='eq3-g2-49' d='M2.502615-5.076961C2.502615-5.292154 2.486675-5.300125 2.271482-5.300125C1.944707-4.98132 1.522291-4.790037 .765131-4.790037V-4.527024C.980324-4.527024 1.41071-4.527024 1.872976-4.742217V-.653549C1.872976-.358655 1.849066-.263014 1.091905-.263014H.812951V0C1.139726-.02391 1.825156-.02391 2.183811-.02391S3.235866-.02391 3.56264 0V-.263014H3.283686C2.526526-.263014 2.502615-.358655 2.502615-.653549V-5.076961Z'/>
+<path id='eq3-g0-107' d='M2.327273-5.292154C2.335243-5.308095 2.359153-5.411706 2.359153-5.419676C2.359153-5.459527 2.327273-5.531258 2.231631-5.531258C2.199751-5.531258 1.952677-5.507347 1.769365-5.491407L1.323039-5.459527C1.147696-5.443587 1.067995-5.435616 1.067995-5.292154C1.067995-5.180573 1.179577-5.180573 1.275218-5.180573C1.657783-5.180573 1.657783-5.132752 1.657783-5.061021C1.657783-5.037111 1.657783-5.021171 1.617933-4.877709L.486177-.342715C.454296-.223163 .454296-.175342 .454296-.167372C.454296-.03188 .565878 .079701 .71731 .079701C.988294 .079701 1.052055-.175342 1.083935-.286924C1.163636-.621669 1.370859-1.466501 1.458531-1.801245C1.896887-1.753425 2.430884-1.601993 2.430884-1.147696C2.430884-1.107846 2.430884-1.067995 2.414944-.988294C2.391034-.884682 2.375093-.773101 2.375093-.73325C2.375093-.263014 2.725778 .079701 3.188045 .079701C3.52279 .079701 3.730012-.167372 3.833624-.318804C4.024907-.613699 4.152428-1.091905 4.152428-1.139726C4.152428-1.219427 4.088667-1.243337 4.032877-1.243337C3.937235-1.243337 3.921295-1.195517 3.889415-1.052055C3.785803-.67746 3.57858-.143462 3.203985-.143462C2.996762-.143462 2.948941-.318804 2.948941-.533998C2.948941-.637609 2.956912-.73325 2.996762-.916563C3.004732-.948443 3.036613-1.075965 3.036613-1.163636C3.036613-1.817186 2.215691-1.960648 1.809215-2.016438C2.10411-2.191781 2.375093-2.462765 2.470735-2.566376C2.909091-2.996762 3.267746-3.291656 3.650311-3.291656C3.753923-3.291656 3.849564-3.267746 3.913325-3.188045C3.482939-3.132254 3.482939-2.757659 3.482939-2.749689C3.482939-2.574346 3.618431-2.454795 3.793773-2.454795C4.008966-2.454795 4.24807-2.630137 4.24807-2.956912C4.24807-3.227895 4.056787-3.514819 3.658281-3.514819C3.196015-3.514819 2.781569-3.164134 2.327273-2.709838C1.865006-2.255542 1.665753-2.16787 1.538232-2.11208L2.327273-5.292154Z'/>
+<path id='eq3-g1-58' d='M2.199751-.573848C2.199751-.920548 1.912827-1.159651 1.625903-1.159651C1.279203-1.159651 1.0401-.872727 1.0401-.585803C1.0401-.239103 1.327024 0 1.613948 0C1.960648 0 2.199751-.286924 2.199751-.573848Z'/>
+<path id='eq3-g1-59' d='M2.331258 .047821C2.331258-.645579 2.10411-1.159651 1.613948-1.159651C1.231382-1.159651 1.0401-.848817 1.0401-.585803S1.219427 0 1.625903 0C1.78132 0 1.912827-.047821 2.020423-.155417C2.044334-.179328 2.056289-.179328 2.068244-.179328C2.092154-.179328 2.092154-.011955 2.092154 .047821C2.092154 .442341 2.020423 1.219427 1.327024 1.996513C1.195517 2.139975 1.195517 2.163885 1.195517 2.187796C1.195517 2.247572 1.255293 2.307347 1.315068 2.307347C1.41071 2.307347 2.331258 1.422665 2.331258 .047821Z'/>
+<path id='eq3-g1-84' d='M4.985305-7.292653C5.057036-7.579577 5.080946-7.687173 5.260274-7.734994C5.355915-7.758904 5.750436-7.758904 6.001494-7.758904C7.197011-7.758904 7.758904-7.711083 7.758904-6.77858C7.758904-6.599253 7.711083-6.144956 7.639352-5.702615L7.627397-5.559153C7.627397-5.511333 7.675218-5.439601 7.746949-5.439601C7.866501-5.439601 7.866501-5.499377 7.902366-5.69066L8.249066-7.806725C8.272976-7.914321 8.272976-7.938232 8.272976-7.974097C8.272976-8.105604 8.201245-8.105604 7.962142-8.105604H1.422665C1.147696-8.105604 1.135741-8.093649 1.06401-7.878456L.334745-5.726526C.32279-5.702615 .286924-5.571108 .286924-5.559153C.286924-5.499377 .334745-5.439601 .406476-5.439601C.502117-5.439601 .526027-5.487422 .573848-5.642839C1.075965-7.089415 1.327024-7.758904 2.917061-7.758904H3.718057C4.004981-7.758904 4.124533-7.758904 4.124533-7.627397C4.124533-7.591532 4.124533-7.567621 4.064757-7.352428L2.462765-.932503C2.343213-.466252 2.319303-.3467 1.052055-.3467C.753176-.3467 .669489-.3467 .669489-.119552C.669489 0 .800996 0 .860772 0C1.159651 0 1.470486-.02391 1.769365-.02391H3.634371C3.93325-.02391 4.25604 0 4.554919 0C4.686426 0 4.805978 0 4.805978-.227148C4.805978-.3467 4.722291-.3467 4.411457-.3467C3.335492-.3467 3.335492-.454296 3.335492-.633624C3.335492-.645579 3.335492-.729265 3.383313-.920548L4.985305-7.292653Z'/>
+<path id='eq3-g1-102' d='M5.332005-4.805978C5.571108-4.805978 5.66675-4.805978 5.66675-5.033126C5.66675-5.152677 5.571108-5.152677 5.355915-5.152677H4.387547C4.614695-6.38406 4.782067-7.232877 4.877709-7.615442C4.94944-7.902366 5.200498-8.177335 5.511333-8.177335C5.762391-8.177335 6.01345-8.069738 6.133001-7.962142C5.66675-7.914321 5.523288-7.567621 5.523288-7.364384C5.523288-7.12528 5.702615-6.981818 5.929763-6.981818C6.168867-6.981818 6.527522-7.185056 6.527522-7.639352C6.527522-8.141469 6.025405-8.416438 5.499377-8.416438C4.985305-8.416438 4.483188-8.033873 4.244085-7.567621C4.028892-7.149191 3.90934-6.718804 3.634371-5.152677H2.833375C2.606227-5.152677 2.486675-5.152677 2.486675-4.937484C2.486675-4.805978 2.558406-4.805978 2.797509-4.805978H3.56264C3.347447-3.694147 2.857285-.992279 2.582316 .286924C2.379078 1.327024 2.199751 2.199751 1.601993 2.199751C1.566127 2.199751 1.219427 2.199751 1.004234 1.972603C1.613948 1.924782 1.613948 1.398755 1.613948 1.3868C1.613948 1.147696 1.43462 1.004234 1.207472 1.004234C.968369 1.004234 .609714 1.207472 .609714 1.661768C.609714 2.175841 1.135741 2.438854 1.601993 2.438854C2.82142 2.438854 3.323537 .251059 3.455044-.3467C3.670237-1.267248 4.25604-4.447323 4.315816-4.805978H5.332005Z'/>
+<path id='eq3-g1-116' d='M2.402989-4.805978H3.502864C3.730012-4.805978 3.849564-4.805978 3.849564-5.021171C3.849564-5.152677 3.777833-5.152677 3.53873-5.152677H2.486675L2.929016-6.898132C2.976837-7.065504 2.976837-7.089415 2.976837-7.173101C2.976837-7.364384 2.82142-7.47198 2.666002-7.47198C2.570361-7.47198 2.295392-7.436115 2.199751-7.053549L1.733499-5.152677H.609714C.37061-5.152677 .263014-5.152677 .263014-4.925529C.263014-4.805978 .3467-4.805978 .573848-4.805978H1.637858L.848817-1.649813C.753176-1.231382 .71731-1.111831 .71731-.956413C.71731-.394521 1.111831 .119552 1.78132 .119552C2.988792 .119552 3.634371-1.625903 3.634371-1.709589C3.634371-1.78132 3.58655-1.817186 3.514819-1.817186C3.490909-1.817186 3.443088-1.817186 3.419178-1.769365C3.407223-1.75741 3.395268-1.745455 3.311582-1.554172C3.060523-.956413 2.510585-.119552 1.817186-.119552C1.458531-.119552 1.43462-.418431 1.43462-.681445C1.43462-.6934 1.43462-.920548 1.470486-1.06401L2.402989-4.805978Z'/>
+<path id='eq3-g1-117' d='M4.076712-.6934C4.23213-.02391 4.805978 .119552 5.092902 .119552C5.475467 .119552 5.762391-.131507 5.953674-.537983C6.156912-.968369 6.312329-1.673724 6.312329-1.709589C6.312329-1.769365 6.264508-1.817186 6.192777-1.817186C6.085181-1.817186 6.073225-1.75741 6.025405-1.578082C5.810212-.753176 5.595019-.119552 5.116812-.119552C4.758157-.119552 4.758157-.514072 4.758157-.669489C4.758157-.944458 4.794022-1.06401 4.913574-1.566127C4.99726-1.888917 5.080946-2.211706 5.152677-2.546451L5.642839-4.495143C5.726526-4.794022 5.726526-4.817933 5.726526-4.853798C5.726526-5.033126 5.583064-5.152677 5.403736-5.152677C5.057036-5.152677 4.97335-4.853798 4.901619-4.554919C4.782067-4.088667 4.136488-1.518306 4.052802-1.099875C4.040847-1.099875 3.574595-.119552 2.701868-.119552C2.080199-.119552 1.960648-.657534 1.960648-1.099875C1.960648-1.78132 2.295392-2.737733 2.606227-3.53873C2.749689-3.921295 2.809465-4.076712 2.809465-4.315816C2.809465-4.829888 2.438854-5.272229 1.865006-5.272229C.765131-5.272229 .32279-3.53873 .32279-3.443088C.32279-3.395268 .37061-3.335492 .454296-3.335492C.561893-3.335492 .573848-3.383313 .621669-3.550685C.908593-4.578829 1.374844-5.033126 1.829141-5.033126C1.948692-5.033126 2.139975-5.021171 2.139975-4.638605C2.139975-4.327771 2.008468-3.981071 1.829141-3.526775C1.303113-2.10411 1.243337-1.649813 1.243337-1.291158C1.243337-.071731 2.163885 .119552 2.654047 .119552C3.419178 .119552 3.837609-.406476 4.076712-.6934Z'/>
+<path id='eq3-g1-120' d='M5.66675-4.877709C5.284184-4.805978 5.140722-4.519054 5.140722-4.291905C5.140722-4.004981 5.36787-3.90934 5.535243-3.90934C5.893898-3.90934 6.144956-4.220174 6.144956-4.542964C6.144956-5.045081 5.571108-5.272229 5.068991-5.272229C4.339726-5.272229 3.93325-4.554919 3.825654-4.327771C3.550685-5.224408 2.809465-5.272229 2.594271-5.272229C1.374844-5.272229 .729265-3.706102 .729265-3.443088C.729265-3.395268 .777086-3.335492 .860772-3.335492C.956413-3.335492 .980324-3.407223 1.004234-3.455044C1.41071-4.782067 2.211706-5.033126 2.558406-5.033126C3.096389-5.033126 3.203985-4.531009 3.203985-4.244085C3.203985-3.981071 3.132254-3.706102 2.988792-3.132254L2.582316-1.494396C2.402989-.777086 2.056289-.119552 1.422665-.119552C1.362889-.119552 1.06401-.119552 .812951-.274969C1.243337-.358655 1.338979-.71731 1.338979-.860772C1.338979-1.099875 1.159651-1.243337 .932503-1.243337C.645579-1.243337 .334745-.992279 .334745-.609714C.334745-.107597 .896638 .119552 1.41071 .119552C1.984558 .119552 2.391034-.334745 2.642092-.824907C2.833375-.119552 3.431133 .119552 3.873474 .119552C5.092902 .119552 5.738481-1.446575 5.738481-1.709589C5.738481-1.769365 5.69066-1.817186 5.618929-1.817186C5.511333-1.817186 5.499377-1.75741 5.463512-1.661768C5.140722-.609714 4.447323-.119552 3.90934-.119552C3.490909-.119552 3.263761-.430386 3.263761-.920548C3.263761-1.183562 3.311582-1.374844 3.502864-2.163885L3.921295-3.789788C4.100623-4.507098 4.507098-5.033126 5.057036-5.033126C5.080946-5.033126 5.415691-5.033126 5.66675-4.877709Z'/>
+</defs>
+<g id='eq3-page1'>
+<use x='131.120876' y='-2.988792' xlink:href='#eq3-g1-120'/>
+<use x='137.772963' y='-1.195529' xlink:href='#eq3-g0-107'/>
+<use x='142.394579' y='-1.195529' xlink:href='#eq3-g2-43'/>
+<use x='148.981085' y='-1.195529' xlink:href='#eq3-g2-49'/>
+<use x='157.03423' y='-2.988792' xlink:href='#eq3-g3-61'/>
+<use x='169.45971' y='-2.988792' xlink:href='#eq3-g1-120'/>
+<use x='176.111798' y='-1.195529' xlink:href='#eq3-g0-107'/>
+<use x='183.888209' y='-2.988792' xlink:href='#eq3-g3-43'/>
+<use x='195.649524' y='-2.988792' xlink:href='#eq3-g1-102'/>
+<use x='202.69596' y='-2.988792' xlink:href='#eq3-g3-40'/>
+<use x='207.248286' y='-2.988792' xlink:href='#eq3-g1-116'/>
+<use x='211.475445' y='-2.988792' xlink:href='#eq3-g1-59'/>
+<use x='216.719604' y='-2.988792' xlink:href='#eq3-g1-120'/>
+<use x='223.371691' y='-2.988792' xlink:href='#eq3-g1-59'/>
+<use x='228.61585' y='-2.988792' xlink:href='#eq3-g1-117'/>
+<use x='235.27829' y='-2.988792' xlink:href='#eq3-g3-41'/>
+<use x='239.830616' y='-2.988792' xlink:href='#eq3-g3-100'/>
+<use x='246.333938' y='-2.988792' xlink:href='#eq3-g1-84'/>
+<use x='254.170442' y='-2.988792' xlink:href='#eq3-g1-58'/>
+</g>
+</svg></div><p>This function returns the result of <svg class="m-math" style="width: 15.280em; height: 1.245em; vertical-align: -0.312em;" viewBox="0 -8.966376 146.692187 11.955168">
+<title>
+$ \phi(x_k, x_{k+1}, u_k, u_{k+1}, t) - x_{k+1}$
+</title>
+<defs>
+<path id='eq4-g3-43' d='M3.474969-1.809215H5.818182C5.929763-1.809215 6.105106-1.809215 6.105106-1.992528S5.929763-2.175841 5.818182-2.175841H3.474969V-4.527024C3.474969-4.638605 3.474969-4.813948 3.291656-4.813948S3.108344-4.638605 3.108344-4.527024V-2.175841H.757161C.645579-2.175841 .470237-2.175841 .470237-1.992528S.645579-1.809215 .757161-1.809215H3.108344V.541968C3.108344 .653549 3.108344 .828892 3.291656 .828892S3.474969 .653549 3.474969 .541968V-1.809215Z'/>
+<path id='eq4-g3-49' d='M2.502615-5.076961C2.502615-5.292154 2.486675-5.300125 2.271482-5.300125C1.944707-4.98132 1.522291-4.790037 .765131-4.790037V-4.527024C.980324-4.527024 1.41071-4.527024 1.872976-4.742217V-.653549C1.872976-.358655 1.849066-.263014 1.091905-.263014H.812951V0C1.139726-.02391 1.825156-.02391 2.183811-.02391S3.235866-.02391 3.56264 0V-.263014H3.283686C2.526526-.263014 2.502615-.358655 2.502615-.653549V-5.076961Z'/>
+<path id='eq4-g0-0' d='M7.878456-2.749689C8.081694-2.749689 8.296887-2.749689 8.296887-2.988792S8.081694-3.227895 7.878456-3.227895H1.41071C1.207472-3.227895 .992279-3.227895 .992279-2.988792S1.207472-2.749689 1.41071-2.749689H7.878456Z'/>
+<path id='eq4-g1-107' d='M2.327273-5.292154C2.335243-5.308095 2.359153-5.411706 2.359153-5.419676C2.359153-5.459527 2.327273-5.531258 2.231631-5.531258C2.199751-5.531258 1.952677-5.507347 1.769365-5.491407L1.323039-5.459527C1.147696-5.443587 1.067995-5.435616 1.067995-5.292154C1.067995-5.180573 1.179577-5.180573 1.275218-5.180573C1.657783-5.180573 1.657783-5.132752 1.657783-5.061021C1.657783-5.037111 1.657783-5.021171 1.617933-4.877709L.486177-.342715C.454296-.223163 .454296-.175342 .454296-.167372C.454296-.03188 .565878 .079701 .71731 .079701C.988294 .079701 1.052055-.175342 1.083935-.286924C1.163636-.621669 1.370859-1.466501 1.458531-1.801245C1.896887-1.753425 2.430884-1.601993 2.430884-1.147696C2.430884-1.107846 2.430884-1.067995 2.414944-.988294C2.391034-.884682 2.375093-.773101 2.375093-.73325C2.375093-.263014 2.725778 .079701 3.188045 .079701C3.52279 .079701 3.730012-.167372 3.833624-.318804C4.024907-.613699 4.152428-1.091905 4.152428-1.139726C4.152428-1.219427 4.088667-1.243337 4.032877-1.243337C3.937235-1.243337 3.921295-1.195517 3.889415-1.052055C3.785803-.67746 3.57858-.143462 3.203985-.143462C2.996762-.143462 2.948941-.318804 2.948941-.533998C2.948941-.637609 2.956912-.73325 2.996762-.916563C3.004732-.948443 3.036613-1.075965 3.036613-1.163636C3.036613-1.817186 2.215691-1.960648 1.809215-2.016438C2.10411-2.191781 2.375093-2.462765 2.470735-2.566376C2.909091-2.996762 3.267746-3.291656 3.650311-3.291656C3.753923-3.291656 3.849564-3.267746 3.913325-3.188045C3.482939-3.132254 3.482939-2.757659 3.482939-2.749689C3.482939-2.574346 3.618431-2.454795 3.793773-2.454795C4.008966-2.454795 4.24807-2.630137 4.24807-2.956912C4.24807-3.227895 4.056787-3.514819 3.658281-3.514819C3.196015-3.514819 2.781569-3.164134 2.327273-2.709838C1.865006-2.255542 1.665753-2.16787 1.538232-2.11208L2.327273-5.292154Z'/>
+<path id='eq4-g4-40' d='M3.88543 2.905106C3.88543 2.86924 3.88543 2.84533 3.682192 2.642092C2.486675 1.43462 1.817186-.537983 1.817186-2.976837C1.817186-5.296139 2.379078-7.292653 3.765878-8.703362C3.88543-8.810959 3.88543-8.834869 3.88543-8.870735C3.88543-8.942466 3.825654-8.966376 3.777833-8.966376C3.622416-8.966376 2.642092-8.105604 2.056289-6.933998C1.446575-5.726526 1.171606-4.447323 1.171606-2.976837C1.171606-1.912827 1.338979-.490162 1.960648 .789041C2.666002 2.223661 3.646326 3.000747 3.777833 3.000747C3.825654 3.000747 3.88543 2.976837 3.88543 2.905106Z'/>
+<path id='eq4-g4-41' d='M3.371357-2.976837C3.371357-3.88543 3.251806-5.36787 2.582316-6.75467C1.876961-8.18929 .896638-8.966376 .765131-8.966376C.71731-8.966376 .657534-8.942466 .657534-8.870735C.657534-8.834869 .657534-8.810959 .860772-8.607721C2.056289-7.400249 2.725778-5.427646 2.725778-2.988792C2.725778-.669489 2.163885 1.327024 .777086 2.737733C.657534 2.84533 .657534 2.86924 .657534 2.905106C.657534 2.976837 .71731 3.000747 .765131 3.000747C.920548 3.000747 1.900872 2.139975 2.486675 .968369C3.096389-.251059 3.371357-1.542217 3.371357-2.976837Z'/>
+<path id='eq4-g2-30' d='M5.140722-8.18929C5.140722-8.296887 5.057036-8.296887 5.021171-8.296887C4.913574-8.296887 4.901619-8.272976 4.853798-8.069738L4.208219-5.499377C4.172354-5.34396 4.160399-5.332005 4.148443-5.32005C4.136488-5.296139 4.052802-5.284184 4.028892-5.284184C2.068244-5.116812 .561893-3.502864 .561893-2.008468C.561893-.71731 1.554172 .071731 2.797509 .143462C2.701868 .514072 2.618182 .896638 2.52254 1.267248C2.355168 1.900872 2.259527 2.295392 2.259527 2.343213C2.259527 2.367123 2.259527 2.438854 2.379078 2.438854C2.414944 2.438854 2.462765 2.438854 2.486675 2.391034C2.510585 2.367123 2.582316 2.080199 2.630137 1.924782L3.072478 .143462C5.116812 .035866 6.670984-1.637858 6.670984-3.144209C6.670984-4.351681 5.762391-5.212453 4.435367-5.296139L5.140722-8.18929ZM4.363636-5.057036C5.152677-5.009215 5.941719-4.566874 5.941719-3.395268C5.941719-2.044334 4.99726-.251059 3.132254-.107597L4.363636-5.057036ZM2.857285-.095641C2.271482-.131507 1.291158-.442341 1.291158-1.75741C1.291158-3.263761 2.379078-4.937484 4.100623-5.045081L2.857285-.095641Z'/>
+<path id='eq4-g2-59' d='M2.331258 .047821C2.331258-.645579 2.10411-1.159651 1.613948-1.159651C1.231382-1.159651 1.0401-.848817 1.0401-.585803S1.219427 0 1.625903 0C1.78132 0 1.912827-.047821 2.020423-.155417C2.044334-.179328 2.056289-.179328 2.068244-.179328C2.092154-.179328 2.092154-.011955 2.092154 .047821C2.092154 .442341 2.020423 1.219427 1.327024 1.996513C1.195517 2.139975 1.195517 2.163885 1.195517 2.187796C1.195517 2.247572 1.255293 2.307347 1.315068 2.307347C1.41071 2.307347 2.331258 1.422665 2.331258 .047821Z'/>
+<path id='eq4-g2-116' d='M2.402989-4.805978H3.502864C3.730012-4.805978 3.849564-4.805978 3.849564-5.021171C3.849564-5.152677 3.777833-5.152677 3.53873-5.152677H2.486675L2.929016-6.898132C2.976837-7.065504 2.976837-7.089415 2.976837-7.173101C2.976837-7.364384 2.82142-7.47198 2.666002-7.47198C2.570361-7.47198 2.295392-7.436115 2.199751-7.053549L1.733499-5.152677H.609714C.37061-5.152677 .263014-5.152677 .263014-4.925529C.263014-4.805978 .3467-4.805978 .573848-4.805978H1.637858L.848817-1.649813C.753176-1.231382 .71731-1.111831 .71731-.956413C.71731-.394521 1.111831 .119552 1.78132 .119552C2.988792 .119552 3.634371-1.625903 3.634371-1.709589C3.634371-1.78132 3.58655-1.817186 3.514819-1.817186C3.490909-1.817186 3.443088-1.817186 3.419178-1.769365C3.407223-1.75741 3.395268-1.745455 3.311582-1.554172C3.060523-.956413 2.510585-.119552 1.817186-.119552C1.458531-.119552 1.43462-.418431 1.43462-.681445C1.43462-.6934 1.43462-.920548 1.470486-1.06401L2.402989-4.805978Z'/>
+<path id='eq4-g2-117' d='M4.076712-.6934C4.23213-.02391 4.805978 .119552 5.092902 .119552C5.475467 .119552 5.762391-.131507 5.953674-.537983C6.156912-.968369 6.312329-1.673724 6.312329-1.709589C6.312329-1.769365 6.264508-1.817186 6.192777-1.817186C6.085181-1.817186 6.073225-1.75741 6.025405-1.578082C5.810212-.753176 5.595019-.119552 5.116812-.119552C4.758157-.119552 4.758157-.514072 4.758157-.669489C4.758157-.944458 4.794022-1.06401 4.913574-1.566127C4.99726-1.888917 5.080946-2.211706 5.152677-2.546451L5.642839-4.495143C5.726526-4.794022 5.726526-4.817933 5.726526-4.853798C5.726526-5.033126 5.583064-5.152677 5.403736-5.152677C5.057036-5.152677 4.97335-4.853798 4.901619-4.554919C4.782067-4.088667 4.136488-1.518306 4.052802-1.099875C4.040847-1.099875 3.574595-.119552 2.701868-.119552C2.080199-.119552 1.960648-.657534 1.960648-1.099875C1.960648-1.78132 2.295392-2.737733 2.606227-3.53873C2.749689-3.921295 2.809465-4.076712 2.809465-4.315816C2.809465-4.829888 2.438854-5.272229 1.865006-5.272229C.765131-5.272229 .32279-3.53873 .32279-3.443088C.32279-3.395268 .37061-3.335492 .454296-3.335492C.561893-3.335492 .573848-3.383313 .621669-3.550685C.908593-4.578829 1.374844-5.033126 1.829141-5.033126C1.948692-5.033126 2.139975-5.021171 2.139975-4.638605C2.139975-4.327771 2.008468-3.981071 1.829141-3.526775C1.303113-2.10411 1.243337-1.649813 1.243337-1.291158C1.243337-.071731 2.163885 .119552 2.654047 .119552C3.419178 .119552 3.837609-.406476 4.076712-.6934Z'/>
+<path id='eq4-g2-120' d='M5.66675-4.877709C5.284184-4.805978 5.140722-4.519054 5.140722-4.291905C5.140722-4.004981 5.36787-3.90934 5.535243-3.90934C5.893898-3.90934 6.144956-4.220174 6.144956-4.542964C6.144956-5.045081 5.571108-5.272229 5.068991-5.272229C4.339726-5.272229 3.93325-4.554919 3.825654-4.327771C3.550685-5.224408 2.809465-5.272229 2.594271-5.272229C1.374844-5.272229 .729265-3.706102 .729265-3.443088C.729265-3.395268 .777086-3.335492 .860772-3.335492C.956413-3.335492 .980324-3.407223 1.004234-3.455044C1.41071-4.782067 2.211706-5.033126 2.558406-5.033126C3.096389-5.033126 3.203985-4.531009 3.203985-4.244085C3.203985-3.981071 3.132254-3.706102 2.988792-3.132254L2.582316-1.494396C2.402989-.777086 2.056289-.119552 1.422665-.119552C1.362889-.119552 1.06401-.119552 .812951-.274969C1.243337-.358655 1.338979-.71731 1.338979-.860772C1.338979-1.099875 1.159651-1.243337 .932503-1.243337C.645579-1.243337 .334745-.992279 .334745-.609714C.334745-.107597 .896638 .119552 1.41071 .119552C1.984558 .119552 2.391034-.334745 2.642092-.824907C2.833375-.119552 3.431133 .119552 3.873474 .119552C5.092902 .119552 5.738481-1.446575 5.738481-1.709589C5.738481-1.769365 5.69066-1.817186 5.618929-1.817186C5.511333-1.817186 5.499377-1.75741 5.463512-1.661768C5.140722-.609714 4.447323-.119552 3.90934-.119552C3.490909-.119552 3.263761-.430386 3.263761-.920548C3.263761-1.183562 3.311582-1.374844 3.502864-2.163885L3.921295-3.789788C4.100623-4.507098 4.507098-5.033126 5.057036-5.033126C5.080946-5.033126 5.415691-5.033126 5.66675-4.877709Z'/>
+</defs>
+<g id='eq4-page1'>
+<use x='0' y='0' xlink:href='#eq4-g2-30'/>
+<use x='6.928102' y='0' xlink:href='#eq4-g4-40'/>
+<use x='11.480428' y='0' xlink:href='#eq4-g2-120'/>
+<use x='18.132515' y='1.793263' xlink:href='#eq4-g1-107'/>
+<use x='23.252262' y='0' xlink:href='#eq4-g2-59'/>
+<use x='28.496421' y='0' xlink:href='#eq4-g2-120'/>
+<use x='35.148508' y='1.793263' xlink:href='#eq4-g1-107'/>
+<use x='39.770124' y='1.793263' xlink:href='#eq4-g3-43'/>
+<use x='46.356631' y='1.793263' xlink:href='#eq4-g3-49'/>
+<use x='51.088945' y='0' xlink:href='#eq4-g2-59'/>
+<use x='56.333104' y='0' xlink:href='#eq4-g2-117'/>
+<use x='62.995544' y='1.793263' xlink:href='#eq4-g1-107'/>
+<use x='68.115291' y='0' xlink:href='#eq4-g2-59'/>
+<use x='73.35945' y='0' xlink:href='#eq4-g2-117'/>
+<use x='80.02189' y='1.793263' xlink:href='#eq4-g1-107'/>
+<use x='84.643505' y='1.793263' xlink:href='#eq4-g3-43'/>
+<use x='91.230012' y='1.793263' xlink:href='#eq4-g3-49'/>
+<use x='95.962327' y='0' xlink:href='#eq4-g2-59'/>
+<use x='101.206486' y='0' xlink:href='#eq4-g2-116'/>
+<use x='105.433645' y='0' xlink:href='#eq4-g4-41'/>
+<use x='112.642635' y='0' xlink:href='#eq4-g0-0'/>
+<use x='124.597795' y='0' xlink:href='#eq4-g2-120'/>
+<use x='131.249882' y='1.793263' xlink:href='#eq4-g1-107'/>
+<use x='135.871498' y='1.793263' xlink:href='#eq4-g3-43'/>
+<use x='142.458004' y='1.793263' xlink:href='#eq4-g3-49'/>
+</g>
+</svg>.</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>iDynTree documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/robotology/idyntree/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

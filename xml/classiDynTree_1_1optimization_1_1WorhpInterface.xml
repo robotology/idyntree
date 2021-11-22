@@ -1,0 +1,442 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimization_1_1WorhpInterface" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::optimization::WorhpInterface</compoundname>
+    <basecompoundref refid="classiDynTree_1_1optimization_1_1Optimizer" prot="public" virt="non-virtual">iDynTree::optimization::Optimizer</basecompoundref>
+    <includes local="no">iDynTree/Optimizers/WorhpInterface.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1optimization_1_1WorhpInterface_1a89708f6cbbd76f477bab81b477799355" prot="private" static="no" mutable="no">
+        <type>WorhpInterfaceImplementation *</type>
+        <definition>WorhpInterfaceImplementation* iDynTree::optimization::WorhpInterface::m_pimpl</definition>
+        <argsstring></argsstring>
+        <name>m_pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="39" column="42" bodyfile="iDynTree/Optimizers/WorhpInterface.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1ad8cde6c8dc8a91b5a0dabc0fa2febe73" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimization::WorhpInterface::WorhpInterface</definition>
+        <argsstring>()</argsstring>
+        <name>WorhpInterface</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="43" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1ad41aa251a914e7c6d01fa3a9d83d49c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimization::WorhpInterface::WorhpInterface</definition>
+        <argsstring>(const WorhpInterface &amp;other)=delete</argsstring>
+        <name>WorhpInterface</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimization_1_1WorhpInterface" kindref="compound">WorhpInterface</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="45" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1a380963f35029659a4b3b63272a442a58" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::optimization::WorhpInterface::~WorhpInterface</definition>
+        <argsstring>() override</argsstring>
+        <name>~WorhpInterface</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="47" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1a5fd0174cb2c4419f89534b18c4a9fcb3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::WorhpInterface::isAvailable</definition>
+        <argsstring>() const override</argsstring>
+        <name>isAvailable</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1ac9b2386bef738ad45761103ffa0eed57">isAvailable</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="49" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1a8f72b024854b4ad18dd14a89dfe20e10" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::WorhpInterface::setProblem</definition>
+        <argsstring>(std::shared_ptr&lt; OptimizationProblem &gt; problem) override</argsstring>
+        <name>setProblem</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1a757c3b55008f047dfe23171c9c462d66">setProblem</reimplements>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimization_1_1OptimizationProblem" kindref="compound">OptimizationProblem</ref> &gt;</type>
+          <declname>problem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="51" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1abdabbccff079b4706428685eb6ee59bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::WorhpInterface::solve</definition>
+        <argsstring>() override</argsstring>
+        <name>solve</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1abbb92fc315d49718abffa88b55da1b70">solve</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="53" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1a3b68b3949f3a183f805810d6c7ac8d7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::WorhpInterface::getPrimalVariables</definition>
+        <argsstring>(VectorDynSize &amp;primalVariables) override</argsstring>
+        <name>getPrimalVariables</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1ad6e6de7d98cce8509efb08489d26ba83">getPrimalVariables</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>primalVariables</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="55" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1aca7d7ca4b0a91054f3479a3c37889c8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::WorhpInterface::getDualVariables</definition>
+        <argsstring>(VectorDynSize &amp;constraintsMultipliers, VectorDynSize &amp;lowerBoundsMultipliers, VectorDynSize &amp;upperBoundsMultipliers) override</argsstring>
+        <name>getDualVariables</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1a6b0a3443c0e2f8143a12119093c9338a">getDualVariables</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>constraintsMultipliers</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>lowerBoundsMultipliers</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>upperBoundsMultipliers</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="57" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1a6405789b10b519c1ed2c5b05d1b8ddce" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::WorhpInterface::getOptimalCost</definition>
+        <argsstring>(double &amp;optimalCost) override</argsstring>
+        <name>getOptimalCost</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1a37dfe08c5fd7e4ca9a2509681b2c638e">getOptimalCost</reimplements>
+        <param>
+          <type>double &amp;</type>
+          <declname>optimalCost</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="61" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1a49fea1f330275cebe526e49dd1f445a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::WorhpInterface::getOptimalConstraintsValues</definition>
+        <argsstring>(VectorDynSize &amp;constraintsValues) override</argsstring>
+        <name>getOptimalConstraintsValues</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1a9525d85cf2e4079d22670a25d4413564">getOptimalConstraintsValues</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>constraintsValues</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="63" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1a8329541ca68964315380845bd9e7addd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::optimization::WorhpInterface::minusInfinity</definition>
+        <argsstring>() override</argsstring>
+        <name>minusInfinity</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1a1f41f893f91cb2ab20df84460cec14ad">minusInfinity</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="65" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1af2b305cba632217b158119a5d4cb368f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::optimization::WorhpInterface::plusInfinity</definition>
+        <argsstring>() override</argsstring>
+        <name>plusInfinity</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1af951a371f7556a9551cd97177cb4c5e2">plusInfinity</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="67" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1a1cbed852c7d2c1b3147009408ea584ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::optimization::WorhpInterface::useApproximatedHessians</definition>
+        <argsstring>(bool useApproximatedHessian=true)</argsstring>
+        <name>useApproximatedHessians</name>
+        <param>
+          <type>bool</type>
+          <declname>useApproximatedHessian</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="69" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1af8709c37c0f9e45ebab262aaae355531" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::WorhpInterface::setWorhpParam</definition>
+        <argsstring>(const std::string &amp;paramName, bool value)</argsstring>
+        <name>setWorhpParam</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>paramName</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="71" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1afd129a2498c099bdb9877b206ccb8af5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::WorhpInterface::setWorhpParam</definition>
+        <argsstring>(const std::string &amp;paramName, double value)</argsstring>
+        <name>setWorhpParam</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>paramName</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="73" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1a33260a57883a326f91df436cd8c4a7bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::WorhpInterface::setWorhpParam</definition>
+        <argsstring>(const std::string &amp;paramName, int value)</argsstring>
+        <name>setWorhpParam</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>paramName</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="75" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1a79ff408da56af2d7b1aac5285be5e20a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::WorhpInterface::getWorhpParam</definition>
+        <argsstring>(const std::string &amp;paramName, bool &amp;value)</argsstring>
+        <name>getWorhpParam</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>paramName</declname>
+        </param>
+        <param>
+          <type>bool &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="77" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1ab0163849248ec4317cf6defbbb175dba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::WorhpInterface::getWorhpParam</definition>
+        <argsstring>(const std::string &amp;paramName, double &amp;value)</argsstring>
+        <name>getWorhpParam</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>paramName</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="79" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1acf16805de365f3017efcd7dee1f3e2a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::WorhpInterface::getWorhpParam</definition>
+        <argsstring>(const std::string &amp;paramName, int &amp;value)</argsstring>
+        <name>getWorhpParam</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>paramName</declname>
+        </param>
+        <param>
+          <type>int &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="81" column="18"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::optimization::Optimizer</label>
+        <link refid="classiDynTree_1_1optimization_1_1Optimizer"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::optimization::WorhpInterface</label>
+        <link refid="classiDynTree_1_1optimization_1_1WorhpInterface"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>T</label>
+      </node>
+      <node id="4">
+        <label>std::shared_ptr&lt; T &gt;</label>
+        <childnode refid="5" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::optimization::Optimizer</label>
+        <link refid="classiDynTree_1_1optimization_1_1Optimizer"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_problem</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::shared_ptr&lt; iDynTree::optimization::OptimizationProblem &gt;</label>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; iDynTree::optimization::OptimizationProblem &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::optimization::WorhpInterface</label>
+        <link refid="classiDynTree_1_1optimization_1_1WorhpInterface"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Optimizers/WorhpInterface.h" line="36" column="9" bodyfile="iDynTree/Optimizers/WorhpInterface.h" bodystart="36" bodyend="82"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimization_1_1WorhpInterface_1aca7d7ca4b0a91054f3479a3c37889c8a" prot="public" virt="virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>getDualVariables</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1WorhpInterface_1a49fea1f330275cebe526e49dd1f445a2" prot="public" virt="virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>getOptimalConstraintsValues</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1WorhpInterface_1a6405789b10b519c1ed2c5b05d1b8ddce" prot="public" virt="virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>getOptimalCost</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1WorhpInterface_1a3b68b3949f3a183f805810d6c7ac8d7f" prot="public" virt="virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>getPrimalVariables</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1WorhpInterface_1a79ff408da56af2d7b1aac5285be5e20a" prot="public" virt="non-virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>getWorhpParam</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1WorhpInterface_1ab0163849248ec4317cf6defbbb175dba" prot="public" virt="non-virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>getWorhpParam</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1WorhpInterface_1acf16805de365f3017efcd7dee1f3e2a5" prot="public" virt="non-virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>getWorhpParam</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1WorhpInterface_1a5fd0174cb2c4419f89534b18c4a9fcb3" prot="public" virt="virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>isAvailable</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1WorhpInterface_1a89708f6cbbd76f477bab81b477799355" prot="private" virt="non-virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>m_pimpl</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1Optimizer_1ae3b9609d905cbbf3c3336c9350e94106" prot="protected" virt="non-virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>m_problem</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1WorhpInterface_1a8329541ca68964315380845bd9e7addd" prot="public" virt="virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>minusInfinity</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1Optimizer_1a5fb8e46345b5804f1ab7dbbf024f031c" prot="public" virt="non-virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>Optimizer</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1WorhpInterface_1af2b305cba632217b158119a5d4cb368f" prot="public" virt="virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>plusInfinity</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1Optimizer_1a92b81ff66dc4353fac014fa2e9dfb8e6" prot="public" virt="virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>problem</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1WorhpInterface_1a8f72b024854b4ad18dd14a89dfe20e10" prot="public" virt="virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>setProblem</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1WorhpInterface_1af8709c37c0f9e45ebab262aaae355531" prot="public" virt="non-virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>setWorhpParam</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1WorhpInterface_1afd129a2498c099bdb9877b206ccb8af5" prot="public" virt="non-virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>setWorhpParam</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1WorhpInterface_1a33260a57883a326f91df436cd8c4a7bd" prot="public" virt="non-virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>setWorhpParam</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1WorhpInterface_1abdabbccff079b4706428685eb6ee59bf" prot="public" virt="virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>solve</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1WorhpInterface_1a1cbed852c7d2c1b3147009408ea584ca" prot="public" virt="non-virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>useApproximatedHessians</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1WorhpInterface_1ad8cde6c8dc8a91b5a0dabc0fa2febe73" prot="public" virt="non-virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>WorhpInterface</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1WorhpInterface_1ad41aa251a914e7c6d01fa3a9d83d49c5" prot="public" virt="non-virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>WorhpInterface</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1Optimizer_1abdd338c79ca8ce065fe06006e40249c1" prot="public" virt="virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>~Optimizer</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1WorhpInterface_1a380963f35029659a4b3b63272a442a58" prot="public" virt="virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>~WorhpInterface</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

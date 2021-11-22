@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="ModelTransformersSolidShapes_8h" kind="file" language="C++">
+    <compoundname>ModelTransformersSolidShapes.h</compoundname>
+    <innerclass refid="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions" prot="public">iDynTree::ApproximateSolidShapesWithPrimitiveShapeOptions</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="ModelTransformersSolidShapes_8h_1a6760312b6c7a94affa286e93e5181357" prot="public" static="no" strong="no">
+        <type></type>
+        <name>ApproximateSolidShapesWithPrimitiveShapeConversionType</name>
+        <enumvalue id="ModelTransformersSolidShapes_8h_1a6760312b6c7a94affa286e93e5181357a6486e8af25b0a7add4a835ec17c83e97" prot="public">
+          <name>ConvertSolidShapesWithEnclosingAxisAlignedBoundingBoxes</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTransformersSolidShapes.h" line="22" column="1" bodyfile="iDynTree/ModelTransformersSolidShapes.h" bodystart="22" bodyend="24"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ModelTransformersSolidShapes_8h_1adbe329aea649b6a379dfd7077ceb1eb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::approximateSolidShapesWithPrimitiveShape</definition>
+        <argsstring>(const Model &amp;inputModel, Model &amp;outputModel, ApproximateSolidShapesWithPrimitiveShapeOptions options=ApproximateSolidShapesWithPrimitiveShapeOptions())</argsstring>
+        <name>approximateSolidShapesWithPrimitiveShape</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>inputModel</declname>
+        </param>
+        <param>
+          <type>Model &amp;</type>
+          <declname>outputModel</declname>
+        </param>
+        <param>
+          <type>ApproximateSolidShapesWithPrimitiveShapeOptions</type>
+          <declname>options</declname>
+          <defval>ApproximateSolidShapesWithPrimitiveShapeOptions()</defval>
+        </param>
+        <briefdescription>
+<para>\function Approximate solid shapes of the input model with some primitive shapes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function takes in input a <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref>, and returns in output the same model, but with all solid shapes of the model (both collision and visual) substituted with a primitive shape that approximates in some way the original solid shape.</para>
+<para><simplesect kind="note"><para>At the moment, the only conversion type provided is to approximate each solid shape of the model with its axis aligned bounding box, using the iDynTree::computeBoundingBoxFromShape function. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelTransformersSolidShapes.h" line="43" column="6" declfile="iDynTree/ModelTransformersSolidShapes.h" declline="43" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Collection of function to modify model, related to solid shapes. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/ModelTransformersSolidShapes.h"/>
+  </compounddef>
+</doxygen>

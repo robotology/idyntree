@@ -1,0 +1,281 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::ArticulatedBodyAlgorithmInternalBuffers</compoundname>
+    <includes local="no">iDynTree/Model/Dynamics.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a3650dcf3e59123a82b51473821756c33" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1DOFSpatialMotionArray" kindref="compound">DOFSpatialMotionArray</ref></type>
+        <definition>DOFSpatialMotionArray iDynTree::ArticulatedBodyAlgorithmInternalBuffers::S</definition>
+        <argsstring></argsstring>
+        <name>S</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Dynamics.h" line="131" column="31" bodyfile="iDynTree/Model/Dynamics.h" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a8ad42f2fc2d272d3e7df9daa0a93d348" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1DOFSpatialForceArray" kindref="compound">DOFSpatialForceArray</ref></type>
+        <definition>DOFSpatialForceArray iDynTree::ArticulatedBodyAlgorithmInternalBuffers::U</definition>
+        <argsstring></argsstring>
+        <name>U</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Dynamics.h" line="132" column="30" bodyfile="iDynTree/Model/Dynamics.h" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a3074d9a0482a6493e0d277100fe230bc" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref></type>
+        <definition>JointDOFsDoubleArray iDynTree::ArticulatedBodyAlgorithmInternalBuffers::D</definition>
+        <argsstring></argsstring>
+        <name>D</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Dynamics.h" line="133" column="30" bodyfile="iDynTree/Model/Dynamics.h" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a18705d68a17253e373f1f414174540ba" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref></type>
+        <definition>JointDOFsDoubleArray iDynTree::ArticulatedBodyAlgorithmInternalBuffers::u</definition>
+        <argsstring></argsstring>
+        <name>u</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Dynamics.h" line="134" column="30" bodyfile="iDynTree/Model/Dynamics.h" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1aa3575bb3e88be7382c8fb23c984c0450" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref></type>
+        <definition>LinkVelArray iDynTree::ArticulatedBodyAlgorithmInternalBuffers::linksVel</definition>
+        <argsstring></argsstring>
+        <name>linksVel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Dynamics.h" line="135" column="22" bodyfile="iDynTree/Model/Dynamics.h" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a7a97b87c9dfb97f73b6e5e2a6c75f1c0" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref></type>
+        <definition>LinkAccArray iDynTree::ArticulatedBodyAlgorithmInternalBuffers::linksBiasAcceleration</definition>
+        <argsstring></argsstring>
+        <name>linksBiasAcceleration</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Dynamics.h" line="136" column="22" bodyfile="iDynTree/Model/Dynamics.h" bodystart="136" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a7618ba222a09e0238d34b37921a4d2ba" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref></type>
+        <definition>LinkAccArray iDynTree::ArticulatedBodyAlgorithmInternalBuffers::linksAccelerations</definition>
+        <argsstring></argsstring>
+        <name>linksAccelerations</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Dynamics.h" line="137" column="22" bodyfile="iDynTree/Model/Dynamics.h" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a12af294aa9e5406d910c20f128899ec8" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1LinkArticulatedBodyInertias" kindref="compound">LinkArticulatedBodyInertias</ref></type>
+        <definition>LinkArticulatedBodyInertias iDynTree::ArticulatedBodyAlgorithmInternalBuffers::linkABIs</definition>
+        <argsstring></argsstring>
+        <name>linkABIs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Dynamics.h" line="138" column="37" bodyfile="iDynTree/Model/Dynamics.h" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1ace4d9f7246717e5cb62ac131d5dc3a09" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkWrenches</ref></type>
+        <definition>LinkWrenches iDynTree::ArticulatedBodyAlgorithmInternalBuffers::linksBiasWrench</definition>
+        <argsstring></argsstring>
+        <name>linksBiasWrench</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Dynamics.h" line="139" column="22" bodyfile="iDynTree/Model/Dynamics.h" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1aeae686f2c4221e757dbae74b611db79d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ArticulatedBodyAlgorithmInternalBuffers::ArticulatedBodyAlgorithmInternalBuffers</definition>
+        <argsstring>()</argsstring>
+        <name>ArticulatedBodyAlgorithmInternalBuffers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Dynamics.h" line="112" column="9" bodyfile="iDynTree/Model/Dynamics.h" bodystart="112" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a6cef99970f81b6218d27f8b71ac4bc50" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ArticulatedBodyAlgorithmInternalBuffers::ArticulatedBodyAlgorithmInternalBuffers</definition>
+        <argsstring>(const Model &amp;model)</argsstring>
+        <name>ArticulatedBodyAlgorithmInternalBuffers</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Call resize(model);. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Dynamics.h" line="117" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a0051da05566db4035a0a55856c01424e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::ArticulatedBodyAlgorithmInternalBuffers::resize</definition>
+        <argsstring>(const Model &amp;model)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Resize all the buffers to the right size given the model, and reset all the buffers to 0. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Dynamics.h" line="123" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a9cc877128e38e26e00636e3b82101347" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ArticulatedBodyAlgorithmInternalBuffers::isConsistent</definition>
+        <argsstring>(const Model &amp;model)</argsstring>
+        <name>isConsistent</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Check if the dimension of the buffer is consistent with a model (it should be after a call to resize(model) ). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Dynamics.h" line="129" column="14"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure of buffers required by ArticulatedBodyAlgorithm. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>As the ArticulatedBodyAlgorithm function needs some internal buffers to run, but we don&apos;t want to put memory allocation inside the ArticulatedBodyAlgorithm function, we put all the internal buffers in this structure.</para>
+<para>A convenient resize(Model) function is provided to automatically resize the buffers given a <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref>. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>iDynTree::LinkAccArray</label>
+        <link refid="classiDynTree_1_1LinkAccArray"/>
+      </node>
+      <node id="7">
+        <label>iDynTree::DOFSpatialMotionArray</label>
+        <link refid="classiDynTree_1_1DOFSpatialMotionArray"/>
+      </node>
+      <node id="9">
+        <label>iDynTree::LinkWrenches</label>
+        <link refid="classiDynTree_1_1LinkWrenches"/>
+      </node>
+      <node id="6">
+        <label>iDynTree::VectorDynSize</label>
+        <link refid="classiDynTree_1_1VectorDynSize"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::ArticulatedBodyAlgorithmInternalBuffers</label>
+        <link refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>linksAccelerations</edgelabel>
+          <edgelabel>linksBiasAcceleration</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>U</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>linkABIs</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>D</edgelabel>
+          <edgelabel>u</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>S</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>linksVel</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>linksBiasWrench</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::DOFSpatialForceArray</label>
+        <link refid="classiDynTree_1_1DOFSpatialForceArray"/>
+      </node>
+      <node id="5">
+        <label>iDynTree::JointDOFsDoubleArray</label>
+        <link refid="classiDynTree_1_1JointDOFsDoubleArray"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>iDynTree::LinkVelArray</label>
+        <link refid="classiDynTree_1_1LinkVelArray"/>
+      </node>
+      <node id="4">
+        <label>iDynTree::LinkArticulatedBodyInertias</label>
+        <link refid="classiDynTree_1_1LinkArticulatedBodyInertias"/>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Model/Dynamics.h" line="110" column="5" bodyfile="iDynTree/Model/Dynamics.h" bodystart="111" bodyend="143"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1aeae686f2c4221e757dbae74b611db79d" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyAlgorithmInternalBuffers</scope><name>ArticulatedBodyAlgorithmInternalBuffers</name></member>
+      <member refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a6cef99970f81b6218d27f8b71ac4bc50" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyAlgorithmInternalBuffers</scope><name>ArticulatedBodyAlgorithmInternalBuffers</name></member>
+      <member refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a3074d9a0482a6493e0d277100fe230bc" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyAlgorithmInternalBuffers</scope><name>D</name></member>
+      <member refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a9cc877128e38e26e00636e3b82101347" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyAlgorithmInternalBuffers</scope><name>isConsistent</name></member>
+      <member refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a12af294aa9e5406d910c20f128899ec8" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyAlgorithmInternalBuffers</scope><name>linkABIs</name></member>
+      <member refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a7618ba222a09e0238d34b37921a4d2ba" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyAlgorithmInternalBuffers</scope><name>linksAccelerations</name></member>
+      <member refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a7a97b87c9dfb97f73b6e5e2a6c75f1c0" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyAlgorithmInternalBuffers</scope><name>linksBiasAcceleration</name></member>
+      <member refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1ace4d9f7246717e5cb62ac131d5dc3a09" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyAlgorithmInternalBuffers</scope><name>linksBiasWrench</name></member>
+      <member refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1aa3575bb3e88be7382c8fb23c984c0450" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyAlgorithmInternalBuffers</scope><name>linksVel</name></member>
+      <member refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a0051da05566db4035a0a55856c01424e" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyAlgorithmInternalBuffers</scope><name>resize</name></member>
+      <member refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a3650dcf3e59123a82b51473821756c33" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyAlgorithmInternalBuffers</scope><name>S</name></member>
+      <member refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a8ad42f2fc2d272d3e7df9daa0a93d348" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyAlgorithmInternalBuffers</scope><name>U</name></member>
+      <member refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a18705d68a17253e373f1f414174540ba" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyAlgorithmInternalBuffers</scope><name>u</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

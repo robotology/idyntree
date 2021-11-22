@@ -1,0 +1,224 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classChartsManager_1_1RealTimeChartInfo" kind="class" language="C++" prot="private">
+    <compoundname>ChartsManager::RealTimeChartInfo</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">ChartsManager::ChartInfo</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">yarp::os::TypedReaderCallback&lt; RealTimeStreamData &gt;</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classChartsManager_1_1RealTimeChartInfo_1a0a1e47a8fa82dc7f2e6ca2d217d49ef5" prot="private" static="no" mutable="no">
+        <type>yarp::os::BufferedPort&lt; RealTimeStreamData &gt;</type>
+        <definition>yarp::os::BufferedPort&lt;RealTimeStreamData&gt; ChartsManager::RealTimeChartInfo::m_streamingPort</definition>
+        <argsstring></argsstring>
+        <name>m_streamingPort</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ChartsManager.h" line="66" column="32" bodyfile="ChartsManager.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classChartsManager_1_1RealTimeChartInfo_1abc6feb939da43332a5763bb2827d2636" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::pair&lt; yarp::sig::Vector, yarp::sig::Vector &gt; &gt;</type>
+        <definition>std::vector&lt;std::pair&lt;yarp::sig::Vector, yarp::sig::Vector&gt; &gt; ChartsManager::RealTimeChartInfo::m_buffer</definition>
+        <argsstring></argsstring>
+        <name>m_buffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ChartsManager.h" line="67" column="21" bodyfile="ChartsManager.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classChartsManager_1_1RealTimeChartInfo_1a48695a48c150ea5f179e3c419584e8e6" prot="private" static="no" mutable="no">
+        <type>std::mutex</type>
+        <definition>std::mutex ChartsManager::RealTimeChartInfo::m_bufferMutex</definition>
+        <argsstring></argsstring>
+        <name>m_bufferMutex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ChartsManager.h" line="68" column="20" bodyfile="ChartsManager.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classChartsManager_1_1RealTimeChartInfo_1a17812e0d3f413beefe53d1d26e800d2d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class ChartsManager</definition>
+        <argsstring></argsstring>
+        <name>ChartsManager</name>
+        <param>
+          <type><ref refid="classChartsManager" kindref="compound">ChartsManager</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ChartsManager.h" line="79" column="9" bodyfile="ChartsManager.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classChartsManager_1_1RealTimeChartInfo_1a69ba8bc46a76f944a41aa64130d81d94" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ChartsManager::RealTimeChartInfo::RealTimeChartInfo</definition>
+        <argsstring>(const std::string &amp;id)</argsstring>
+        <name>RealTimeChartInfo</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ChartsManager.h" line="71" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classChartsManager_1_1RealTimeChartInfo_1acf97010cec02147e65c33d8798a3ef18" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual ChartsManager::RealTimeChartInfo::~RealTimeChartInfo</definition>
+        <argsstring>()</argsstring>
+        <name>~RealTimeChartInfo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ChartsManager.h" line="72" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classChartsManager_1_1RealTimeChartInfo_1a1a96bfaf32a240b841320a810b62b4a0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string ChartsManager::RealTimeChartInfo::portName</definition>
+        <argsstring>() const</argsstring>
+        <name>portName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ChartsManager.h" line="74" column="28" bodyfile="ChartsManager.h" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classChartsManager_1_1RealTimeChartInfo_1a898a5d4a149499033708fee0e0809c09" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool ChartsManager::RealTimeChartInfo::init</definition>
+        <argsstring>()</argsstring>
+        <name>init</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ChartsManager.h" line="75" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classChartsManager_1_1RealTimeChartInfo_1a53b24d462a8a35086ce99828052adab7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void ChartsManager::RealTimeChartInfo::onRead</definition>
+        <argsstring>(RealTimeStreamData &amp;datum)</argsstring>
+        <name>onRead</name>
+        <param>
+          <type>RealTimeStreamData &amp;</type>
+          <declname>datum</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ChartsManager.h" line="77" column="22"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>ChartsManager::RealTimeChartInfo</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ChartsManager::ChartInfo</label>
+      </node>
+      <node id="3">
+        <label>yarp::os::TypedReaderCallback&lt; RealTimeStreamData &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>T</label>
+      </node>
+      <node id="3">
+        <label>std::shared_ptr&lt; QMainWindow &gt;</label>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; QMainWindow &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::shared_ptr&lt; T &gt;</label>
+        <childnode refid="5" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>ChartsManager::RealTimeChartInfo</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>std::vector&lt; T &gt;</label>
+        <childnode refid="5" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ChartsManager::ChartInfo</label>
+        <childnode refid="3" relation="usage">
+          <edgelabel>window</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>chartSeries</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>std::vector&lt; QtCharts::QAbstractSeries * &gt;</label>
+        <childnode refid="7" relation="template-instance">
+          <edgelabel>&lt; QtCharts::QAbstractSeries * &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>yarp::os::TypedReaderCallback&lt; RealTimeStreamData &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="ChartsManager.h" line="63" column="5" bodyfile="ChartsManager.h" bodystart="65" bodyend="81"/>
+    <listofallmembers>
+      <member refid="classChartsManager_1_1ChartInfo_1af2121245db91e3574ca1728ac14f3cdc" prot="public" virt="non-virtual"><scope>ChartsManager::RealTimeChartInfo</scope><name>ChartInfo</name></member>
+      <member refid="classChartsManager_1_1ChartInfo_1aab62e93d5f9d514923d97359a05b3e14" prot="public" virt="non-virtual"><scope>ChartsManager::RealTimeChartInfo</scope><name>chartSeries</name></member>
+      <member refid="classChartsManager_1_1ChartInfo_1a249cbf866d9609d6c7210b4e488046fb" prot="public" virt="non-virtual"><scope>ChartsManager::RealTimeChartInfo</scope><name>id</name></member>
+      <member refid="classChartsManager_1_1RealTimeChartInfo_1a898a5d4a149499033708fee0e0809c09" prot="public" virt="virtual"><scope>ChartsManager::RealTimeChartInfo</scope><name>init</name></member>
+      <member refid="classChartsManager_1_1RealTimeChartInfo_1abc6feb939da43332a5763bb2827d2636" prot="private" virt="non-virtual"><scope>ChartsManager::RealTimeChartInfo</scope><name>m_buffer</name></member>
+      <member refid="classChartsManager_1_1RealTimeChartInfo_1a48695a48c150ea5f179e3c419584e8e6" prot="private" virt="non-virtual"><scope>ChartsManager::RealTimeChartInfo</scope><name>m_bufferMutex</name></member>
+      <member refid="classChartsManager_1_1RealTimeChartInfo_1a0a1e47a8fa82dc7f2e6ca2d217d49ef5" prot="private" virt="non-virtual"><scope>ChartsManager::RealTimeChartInfo</scope><name>m_streamingPort</name></member>
+      <member refid="classChartsManager_1_1RealTimeChartInfo_1a53b24d462a8a35086ce99828052adab7" prot="public" virt="virtual"><scope>ChartsManager::RealTimeChartInfo</scope><name>onRead</name></member>
+      <member refid="classChartsManager_1_1RealTimeChartInfo_1a1a96bfaf32a240b841320a810b62b4a0" prot="public" virt="non-virtual"><scope>ChartsManager::RealTimeChartInfo</scope><name>portName</name></member>
+      <member refid="classChartsManager_1_1RealTimeChartInfo_1a69ba8bc46a76f944a41aa64130d81d94" prot="public" virt="non-virtual"><scope>ChartsManager::RealTimeChartInfo</scope><name>RealTimeChartInfo</name></member>
+      <member refid="classChartsManager_1_1ChartInfo_1a4e3b9cdba76cb1233b9e569e5082f901" prot="public" virt="non-virtual"><scope>ChartsManager::RealTimeChartInfo</scope><name>window</name></member>
+      <member refid="classChartsManager_1_1RealTimeChartInfo_1acf97010cec02147e65c33d8798a3ef18" prot="public" virt="virtual"><scope>ChartsManager::RealTimeChartInfo</scope><name>~RealTimeChartInfo</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

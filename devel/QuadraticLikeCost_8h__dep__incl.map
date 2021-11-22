@@ -1,9 +1,0 @@
-<map id="QuadraticLikeCost.h" name="QuadraticLikeCost.h">
-<area shape="rect" id="node1" title=" " alt="" coords="225,5,377,32"/>
-<area shape="rect" id="node2" href="$LinearCost_8h.html" title=" " alt="" coords="109,80,212,107"/>
-<area shape="rect" id="node4" href="$OptimalControlProblem_8cpp.html" title=" " alt="" coords="149,155,351,181"/>
-<area shape="rect" id="node5" href="$QuadraticCost_8h.html" title=" " alt="" coords="288,80,415,107"/>
-<area shape="rect" id="node7" href="$QuadraticLikeCost_8cpp.html" title=" " alt="" coords="439,80,605,107"/>
-<area shape="rect" id="node3" href="$LinearCost_8cpp.html" title=" " alt="" coords="5,155,124,181"/>
-<area shape="rect" id="node6" href="$QuadraticCost_8cpp.html" title=" " alt="" coords="375,155,517,181"/>
-</map>

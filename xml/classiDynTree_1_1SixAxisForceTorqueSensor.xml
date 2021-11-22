@@ -1,0 +1,707 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1SixAxisForceTorqueSensor" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::SixAxisForceTorqueSensor</compoundname>
+    <basecompoundref refid="classiDynTree_1_1JointSensor" prot="public" virt="non-virtual">iDynTree::JointSensor</basecompoundref>
+    <includes local="no">iDynTree/Sensors/SixAxisForceTorqueSensor.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a5b8c746a9d2132f6202a00005a5c7cd9" prot="private" static="no" mutable="no">
+        <type>SixAxisForceTorqueSensorPrivateAttributes *</type>
+        <definition>SixAxisForceTorqueSensorPrivateAttributes* iDynTree::SixAxisForceTorqueSensor::pimpl</definition>
+        <argsstring></argsstring>
+        <name>pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="41" column="52" bodyfile="iDynTree/Sensors/SixAxisForceTorqueSensor.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a549b0f51072a81d6f49cfcdb825b8ee5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SixAxisForceTorqueSensor::SixAxisForceTorqueSensor</definition>
+        <argsstring>()</argsstring>
+        <name>SixAxisForceTorqueSensor</name>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="47" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a22e3fcd77b77f1bf9c938d301fd8ae17" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SixAxisForceTorqueSensor::SixAxisForceTorqueSensor</definition>
+        <argsstring>(const SixAxisForceTorqueSensor &amp;other)</argsstring>
+        <name>SixAxisForceTorqueSensor</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SixAxisForceTorqueSensor" kindref="compound">SixAxisForceTorqueSensor</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="52" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a178cb0438054b6113c73d250ae6a051e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SixAxisForceTorqueSensor" kindref="compound">SixAxisForceTorqueSensor</ref> &amp;</type>
+        <definition>SixAxisForceTorqueSensor&amp; iDynTree::SixAxisForceTorqueSensor::operator=</definition>
+        <argsstring>(const SixAxisForceTorqueSensor &amp;other)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SixAxisForceTorqueSensor" kindref="compound">SixAxisForceTorqueSensor</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy operator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="57" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a0bf5b31da64e7c6c5bd1b11ebdf205fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::SixAxisForceTorqueSensor::~SixAxisForceTorqueSensor</definition>
+        <argsstring>()</argsstring>
+        <name>~SixAxisForceTorqueSensor</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="62" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a445a69b12f7ae15e85e189cecb37a984" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SixAxisForceTorqueSensor::setName</definition>
+        <argsstring>(const std::string &amp;_name)</argsstring>
+        <name>setName</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1a40cafcac5f0c1567e44d53c775641818">setName</reimplements>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>_name</declname>
+        </param>
+        <briefdescription>
+<para>Set the name (id) of the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="68" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a78b02580a6c6c543f36af88b5e9a4d2f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SixAxisForceTorqueSensor::setFirstLinkSensorTransform</definition>
+        <argsstring>(const LinkIndex link_index, const iDynTree::Transform &amp;link_H_sensor) const</argsstring>
+        <name>setFirstLinkSensorTransform</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link_index</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>link_H_sensor</declname>
+        </param>
+        <briefdescription>
+<para>Set the transform from the sensor to a first link attached to the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if link_index is one of the two links attached to the FT sensor, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="75" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1aec7e938209e9dddcbbc696fb658e0a5b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SixAxisForceTorqueSensor::setSecondLinkSensorTransform</definition>
+        <argsstring>(const LinkIndex link_index, const iDynTree::Transform &amp;link_H_sensor) const</argsstring>
+        <name>setSecondLinkSensorTransform</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link_index</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>link_H_sensor</declname>
+        </param>
+        <briefdescription>
+<para>Set the transform from the sensor to a the second link attached to the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if link_index is one of the two links attached to the FT sensor, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="82" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a2add205093853d5a98622f0213c74d55" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::SixAxisForceTorqueSensor::getFirstLinkIndex</definition>
+        <argsstring>() const</argsstring>
+        <name>getFirstLinkIndex</name>
+        <briefdescription>
+<para>Get the index of the first link attached to the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the index of the first link attached to the sensor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="89" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1aeee5343108cf96ad80d76e17719aefa7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::SixAxisForceTorqueSensor::getSecondLinkIndex</definition>
+        <argsstring>() const</argsstring>
+        <name>getSecondLinkIndex</name>
+        <briefdescription>
+<para>Get the index of the first link attached to the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the index of the first link attached to the sensor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="96" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a4023a4689e7be9c6ca254f5beff2a8d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SixAxisForceTorqueSensor::setFirstLinkName</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>setFirstLinkName</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Set the name of the first link at which the FT sensor is attached. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="101" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1ab5e8f251429697fc14ce57b4ae9be8d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SixAxisForceTorqueSensor::setSecondLinkName</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>setSecondLinkName</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Set the name of the first link at which the FT sensor is attached. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="106" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a292081038cae5fc474ceebe27117c1ff" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::SixAxisForceTorqueSensor::getFirstLinkName</definition>
+        <argsstring>() const</argsstring>
+        <name>getFirstLinkName</name>
+        <briefdescription>
+<para>Get the name of the first link at which the FT sensor is attached. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="111" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1afb8fea77a956d20cfbb991bc88e36940" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::SixAxisForceTorqueSensor::getSecondLinkName</definition>
+        <argsstring>() const</argsstring>
+        <name>getSecondLinkName</name>
+        <briefdescription>
+<para>Get the name of the second link at which the FT sensor is attached. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="116" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1afa9c0da7093f9509d3ca71c6d3079a34" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SixAxisForceTorqueSensor::setParentJoint</definition>
+        <argsstring>(const std::string &amp;parent)</argsstring>
+        <name>setParentJoint</name>
+        <reimplements refid="classiDynTree_1_1JointSensor_1a132037b450bd1e276d123066560de435">setParentJoint</reimplements>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>parentJointName</declname>
+        </param>
+        <briefdescription>
+<para>Set the name of the parent Joint. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="119" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a9587c186d30f878760f43fc932675fe7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SixAxisForceTorqueSensor::setParentJointIndex</definition>
+        <argsstring>(const JointIndex &amp;parent_index)</argsstring>
+        <name>setParentJointIndex</name>
+        <reimplements refid="classiDynTree_1_1JointSensor_1a1a2b30a0aaa2c21e8362ecfa94e3d960">setParentJointIndex</reimplements>
+        <param>
+          <type>const JointIndex &amp;</type>
+        </param>
+        <briefdescription>
+<para>Set the numeric index of the parent joint of the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="122" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a17f5b7b97eebf3f15f88ecceaeea5c35" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SixAxisForceTorqueSensor::setAppliedWrenchLink</definition>
+        <argsstring>(const LinkIndex applied_wrench_index)</argsstring>
+        <name>setAppliedWrenchLink</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>applied_wrench_index</declname>
+        </param>
+        <briefdescription>
+<para>The Six <ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref> Force Torque sensor measure the Force Torque (wrench) applied by a link on another link. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method sets the link on which the measured force is applied. <simplesect kind="return"><para>the index of the link on which the measure force is applied. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="130" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a973fc334d1ae6e08d6d189f260a79acf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::SixAxisForceTorqueSensor::getName</definition>
+        <argsstring>() const</argsstring>
+        <name>getName</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1a4a62adb1d4c1e4bedca8762783ab0468">getName</reimplements>
+        <briefdescription>
+<para>Documented in the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="136" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a0e7919d76cf8126f0e270bad03d7d70b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SensorType</type>
+        <definition>SensorType iDynTree::SixAxisForceTorqueSensor::getSensorType</definition>
+        <argsstring>() const</argsstring>
+        <name>getSensorType</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1a6dd712921c150fddd33217694feb3652">getSensorType</reimplements>
+        <briefdescription>
+<para>Documented in <ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="141" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a1dd7d0316793878dac193ebb161879c0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::SixAxisForceTorqueSensor::getParentJoint</definition>
+        <argsstring>() const</argsstring>
+        <name>getParentJoint</name>
+        <reimplements refid="classiDynTree_1_1JointSensor_1a977c869c83855c1373687ef937ff32c4">getParentJoint</reimplements>
+        <briefdescription>
+<para>Get the name of the parent Joint. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="144" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a3bd2224408b97f1c55aa004804b1236e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>JointIndex</type>
+        <definition>JointIndex iDynTree::SixAxisForceTorqueSensor::getParentJointIndex</definition>
+        <argsstring>() const</argsstring>
+        <name>getParentJointIndex</name>
+        <reimplements refid="classiDynTree_1_1JointSensor_1a790a9ef4888573d0a1c49d2b18330263">getParentJointIndex</reimplements>
+        <briefdescription>
+<para>Get the numeric index of the parent of the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Depending on the type of the sensor, the parent could be a Junction or a <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref>.</para>
+<para><simplesect kind="return"><para>the index of the parent (Junction or <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref>) of the sensor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="147" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a816f6f309557a0f69330dad9879cfc14" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SixAxisForceTorqueSensor::isValid</definition>
+        <argsstring>() const</argsstring>
+        <name>isValid</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1ace89679ad53fd11326ec00dc82ebd925">isValid</reimplements>
+        <briefdescription>
+<para>Return true if the sensor has been appropriately configured (all setters where setted, false otherwise. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="152" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a41bc1ed3c1ae3a46b593dc5638fd6725" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> *</type>
+        <definition>Sensor* iDynTree::SixAxisForceTorqueSensor::clone</definition>
+        <argsstring>() const</argsstring>
+        <name>clone</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1a6428f5534e54c607bc5e773073c6c50e">clone</reimplements>
+        <briefdescription>
+<para>Return a pointer to a copy of this sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="157" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1ada92c79d908918bf309936c15f6f0f05" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SixAxisForceTorqueSensor::updateIndices</definition>
+        <argsstring>(const Model &amp;model)</argsstring>
+        <name>updateIndices</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1ae91fc5a5922a99815b0cdc9de9f1ac88">updateIndices</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Update all the indices (link/frames) contained in this sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="162" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a7001ee72b97b7cf9c48abb8ac38aa2a1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::SixAxisForceTorqueSensor::getAppliedWrenchLink</definition>
+        <argsstring>() const</argsstring>
+        <name>getAppliedWrenchLink</name>
+        <briefdescription>
+<para>The Six <ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref> Force Torque sensor measure the Force Torque (wrench) applied by a link on another link. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method returns the link on which the measured force is applied. <simplesect kind="return"><para>the index of the link on which the measure force is applied. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="170" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1ac72818e596a54cd7ae5b2f9f6f8a49ab" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SixAxisForceTorqueSensor::isLinkAttachedToSensor</definition>
+        <argsstring>(const LinkIndex link_index) const</argsstring>
+        <name>isLinkAttachedToSensor</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link_index</declname>
+        </param>
+        <briefdescription>
+<para>Check if a given link is attached to this FT sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if link_index is attached to the ft sensor, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="176" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1acd2d4d5e6e9348dbc1e36dd724f38ca3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SixAxisForceTorqueSensor::getLinkSensorTransform</definition>
+        <argsstring>(const LinkIndex link_index, iDynTree::Transform &amp;link_H_sensor) const</argsstring>
+        <name>getLinkSensorTransform</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link_index</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>link_H_sensor</declname>
+        </param>
+        <briefdescription>
+<para>Get the transform from the sensor to the specified link. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if link_index is one of the two links attached to the FT sensor, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="184" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a3ef36dac1e5968fe728e44e565d8a52b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SixAxisForceTorqueSensor::getWrenchAppliedOnLink</definition>
+        <argsstring>(const LinkIndex link_index, const iDynTree::Wrench &amp;measured_wrench, iDynTree::Wrench &amp;wrench_applied_on_link) const</argsstring>
+        <name>getWrenchAppliedOnLink</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link_index</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Wrench" kindref="compound">iDynTree::Wrench</ref> &amp;</type>
+          <declname>measured_wrench</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">iDynTree::Wrench</ref> &amp;</type>
+          <declname>wrench_applied_on_link</declname>
+        </param>
+        <briefdescription>
+<para>Get wrench applied on the specified link expressed in the specified link frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the F/T sensors is not connected to link_index, the function will return false and the wrench_applied_on_link will be zeroed.</para>
+<para><simplesect kind="return"><para>true if link_index is one of the two links attached to the FT sensor, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="195" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a9f926b5fed9b17da38ab5fb158487b33" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SixAxisForceTorqueSensor::getWrenchAppliedOnLinkMatrix</definition>
+        <argsstring>(const LinkIndex link_index, Matrix6x6 &amp;wrench_applied_on_link_matrix) const</argsstring>
+        <name>getWrenchAppliedOnLinkMatrix</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link_index</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x6</ref> &amp;</type>
+          <declname>wrench_applied_on_link_matrix</declname>
+        </param>
+        <briefdescription>
+<para>Get the 6x6 matrix that multiplied by the wrench returned by the F/T sensors returnes the wrench applied on the specified link expressed in the specified link frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the F/T sensors is not connected to link_index, the function will return false and the matrix will be zeroed.</para>
+<para><simplesect kind="note"><para>This will return and adjoint transformation matrix, possibly with the sign changed depending on the &quot;direction&quot; of the F/T sensor (i.e. if it is measures the wrench applied by a link to another, of viceversa).</para>
+</simplesect>
+<simplesect kind="note"><para>The following condition should always hold : <programlisting><codeline><highlight class="normal">getWrenchAppliedOnLink(link,measured_wrench,wrench_on_link);</highlight></codeline>
+<codeline><highlight class="normal">getWrenchAppliedOnLinkMatrix(link,wrench_applied_on_link_matrix);</highlight></codeline>
+<codeline><highlight class="normal">wrench_applied_on_link_matrix*measured_wrench.toVector()<sp/>==<sp/>wrench_on_link</highlight></codeline>
+</programlisting></para>
+</simplesect>
+<simplesect kind="return"><para>true if link_index is one of the two links attached to the FT sensor, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="219" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1a978eb446cf0f7b11baab9e866a253566" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SixAxisForceTorqueSensor::getWrenchAppliedOnLinkInverseMatrix</definition>
+        <argsstring>(const LinkIndex link_index, Matrix6x6 &amp;wrench_applied_on_link_inverse_matrix) const</argsstring>
+        <name>getWrenchAppliedOnLinkInverseMatrix</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link_index</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x6</ref> &amp;</type>
+          <declname>wrench_applied_on_link_inverse_matrix</declname>
+        </param>
+        <briefdescription>
+<para>Get the 6x6 matrix that multiplied by the wrench applied on the specified link expressed in the specified link frame returns the wrench measured by the F/T sensors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the F/T sensors is not connected to link_index, the function will return false and the matrix will be zeroed.</para>
+<para><simplesect kind="note"><para>This will return an adjoint transformation matrix, possibly with the sign changed depending on the &quot;direction&quot; of the F/T sensor (i.e. if it is measures the wrench applied by a link to another, of viceversa).</para>
+</simplesect>
+<simplesect kind="note"><para>The following condition should always hold : <programlisting><codeline><highlight class="normal">getWrenchAppliedOnLink(link,measured_wrench,wrench_on_link);</highlight></codeline>
+<codeline><highlight class="normal">getWrenchAppliedOnLinkInverseMatrix(link,wrench_applied_on_link_inverse_matrix);</highlight></codeline>
+<codeline><highlight class="normal">measured_wrench.toVector()<sp/>==<sp/>wrench_applied_on_link_inverse_matrix*wrench_on_link</highlight></codeline>
+</programlisting></para>
+</simplesect>
+<simplesect kind="return"><para>true if link_index is one of the two links attached to the FT sensor, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="242" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1aa8fc03efd89977d0e4ca7df9131c1dbc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">iDynTree::Wrench</ref></type>
+        <definition>iDynTree::Wrench iDynTree::SixAxisForceTorqueSensor::predictMeasurement</definition>
+        <argsstring>(const Traversal &amp;traversal, const LinkInternalWrenches &amp;intWrenches)</argsstring>
+        <name>predictMeasurement</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkInternalWrenches</ref> &amp;</type>
+          <declname>intWrenches</declname>
+        </param>
+        <briefdescription>
+<para>Predict sensor measurement when given a vector of internal wrenches computed with a given traversal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the predicted Measurement </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="251" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SixAxisForceTorqueSensor_1af767a41c2680e4bd6af1159f58ab249a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::SixAxisForceTorqueSensor::toString</definition>
+        <argsstring>(const Model &amp;model) const</argsstring>
+        <name>toString</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="256" column="21"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A six axis force torque sensor class implementation of the <ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::JointSensor</label>
+        <link refid="classiDynTree_1_1JointSensor"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::Sensor</label>
+        <link refid="classiDynTree_1_1Sensor"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::SixAxisForceTorqueSensor</label>
+        <link refid="classiDynTree_1_1SixAxisForceTorqueSensor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>iDynTree::JointSensor</label>
+        <link refid="classiDynTree_1_1JointSensor"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::Sensor</label>
+        <link refid="classiDynTree_1_1Sensor"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::SixAxisForceTorqueSensor</label>
+        <link refid="classiDynTree_1_1SixAxisForceTorqueSensor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Sensors/SixAxisForceTorqueSensor.h" line="38" column="5" bodyfile="iDynTree/Sensors/SixAxisForceTorqueSensor.h" bodystart="38" bodyend="258"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a41bc1ed3c1ae3a46b593dc5638fd6725" prot="public" virt="virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>clone</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a7001ee72b97b7cf9c48abb8ac38aa2a1" prot="public" virt="non-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>getAppliedWrenchLink</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a2add205093853d5a98622f0213c74d55" prot="public" virt="non-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>getFirstLinkIndex</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a292081038cae5fc474ceebe27117c1ff" prot="public" virt="non-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>getFirstLinkName</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1acd2d4d5e6e9348dbc1e36dd724f38ca3" prot="public" virt="non-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>getLinkSensorTransform</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a973fc334d1ae6e08d6d189f260a79acf" prot="public" virt="virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>getName</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a1dd7d0316793878dac193ebb161879c0" prot="public" virt="virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>getParentJoint</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a3bd2224408b97f1c55aa004804b1236e" prot="public" virt="virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>getParentJointIndex</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1aeee5343108cf96ad80d76e17719aefa7" prot="public" virt="non-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>getSecondLinkIndex</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1afb8fea77a956d20cfbb991bc88e36940" prot="public" virt="non-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>getSecondLinkName</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a0e7919d76cf8126f0e270bad03d7d70b" prot="public" virt="virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>getSensorType</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a3ef36dac1e5968fe728e44e565d8a52b" prot="public" virt="non-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>getWrenchAppliedOnLink</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a978eb446cf0f7b11baab9e866a253566" prot="public" virt="non-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>getWrenchAppliedOnLinkInverseMatrix</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a9f926b5fed9b17da38ab5fb158487b33" prot="public" virt="non-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>getWrenchAppliedOnLinkMatrix</name></member>
+      <member refid="classiDynTree_1_1JointSensor_1ac71c4fca8476a8af346c5ecfee83a7e9" prot="public" virt="virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>isConsistent</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1ac72818e596a54cd7ae5b2f9f6f8a49ab" prot="public" virt="non-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>isLinkAttachedToSensor</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a816f6f309557a0f69330dad9879cfc14" prot="public" virt="virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>isValid</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a178cb0438054b6113c73d250ae6a051e" prot="public" virt="non-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a5b8c746a9d2132f6202a00005a5c7cd9" prot="private" virt="non-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>pimpl</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1aa8fc03efd89977d0e4ca7df9131c1dbc" prot="public" virt="non-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>predictMeasurement</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a17f5b7b97eebf3f15f88ecceaeea5c35" prot="public" virt="non-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>setAppliedWrenchLink</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a4023a4689e7be9c6ca254f5beff2a8d6" prot="public" virt="non-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>setFirstLinkName</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a78b02580a6c6c543f36af88b5e9a4d2f" prot="public" virt="non-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>setFirstLinkSensorTransform</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a445a69b12f7ae15e85e189cecb37a984" prot="public" virt="virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>setName</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1afa9c0da7093f9509d3ca71c6d3079a34" prot="public" virt="virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>setParentJoint</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a9587c186d30f878760f43fc932675fe7" prot="public" virt="virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>setParentJointIndex</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1ab5e8f251429697fc14ce57b4ae9be8d2" prot="public" virt="non-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>setSecondLinkName</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1aec7e938209e9dddcbbc696fb658e0a5b" prot="public" virt="non-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>setSecondLinkSensorTransform</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a549b0f51072a81d6f49cfcdb825b8ee5" prot="public" virt="non-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>SixAxisForceTorqueSensor</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a22e3fcd77b77f1bf9c938d301fd8ae17" prot="public" virt="non-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>SixAxisForceTorqueSensor</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1af767a41c2680e4bd6af1159f58ab249a" prot="public" virt="non-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>toString</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1ada92c79d908918bf309936c15f6f0f05" prot="public" virt="virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>updateIndices</name></member>
+      <member refid="classiDynTree_1_1JointSensor_1a4ff2c2edf719eb932d8c91d36fbed30a" prot="public" virt="pure-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>~JointSensor</name></member>
+      <member refid="classiDynTree_1_1Sensor_1ab47aa38253b58f2a1c537e5956684e47" prot="public" virt="pure-virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>~Sensor</name></member>
+      <member refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a0bf5b31da64e7c6c5bd1b11ebdf205fd" prot="public" virt="virtual"><scope>iDynTree::SixAxisForceTorqueSensor</scope><name>~SixAxisForceTorqueSensor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>iDynTree::VectorFixSize class | iDynTree master</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="./index.html">iDynTree</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="4">
+            <li>
+              <a href="pages.html">Versions</a>
+              <ol>
+                <li><a href="./index.html">Master</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="pages.html">Contacts</a>
+              <ol>
+                <li><a href="https://github.com/robotology/idyntree">GitHub</a></li>
+                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
+              </ol>
+            </li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="VectorFixSize_8h.html">&lt;iDynTree/Core/VectorFixSize.h&gt;</a></div>
+          <div class="m-doc-template">template&lt;unsigned int VecSize&gt;</div>
+          <span class="m-breadcrumb"><a href="namespaceiDynTree.html">iDynTree</a>::<wbr/></span>VectorFixSize <span class="m-thin">class</span>
+        </h1>
+        <p>Class providing a simple vector of N elements.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#derived-classes">Derived classes</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pro-attribs">Protected variables</a></li>
+                <li><a href="#vector-interface-methods">Vector interface methods.</a></li>
+                <li><a href="#output-helpers">Output helpers.</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<p>The size of the vector is known at compile time, and it enables to avoid using dynamic memory allocation.</p>
+        <section id="derived-classes">
+          <h2><a href="#derived-classes">Derived classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classiDynTree_1_1ClassicalAcc.html" class="m-doc">ClassicalAcc</a>
+            </dt>
+            <dd>Class representing a classical 6D acceleration, i.e.</dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a1ed77487376ad9915912e2118cb228af" class="m-doc">VectorFixSize</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Default constructor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a6e92dc360040bccf652bebb0b0318cd6" class="m-doc">VectorFixSize</a>(</span><span class="m-doc-wrap">const double* in_data,
+              const std::size_t in_size)</span>
+            </dt>
+            <dd>Constructor from a C-style array.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a9fd2c86208c88b1b904564d0a6f5a3b5" class="m-doc">VectorFixSize</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; vec)</span>
+            </dt>
+            <dd>Constructor from an <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a823899b673570f935b649cb98c1ca4f8" class="m-doc">operator=</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; vec) -&gt; <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">VectorFixSize</a>&amp;</span>
+            </dt>
+            <dd>Copy assignment operator for spans.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3bd1389dbdf51e06f4c64451c242397e" class="m-doc">data</a>(</span><span class="m-doc-wrap">) const -&gt; const double*</span>
+            </dt>
+            <dd>Raw data accessor.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab6f044aea32e55a72f6ebed68f93f767" class="m-doc">data</a>(</span><span class="m-doc-wrap">) -&gt; double*</span>
+            </dt>
+            <dd>Raw data accessor.</dd>
+            <dt id="a57b77a6c96f3276ed8e12b5e35b7f442">
+              <span class="m-doc-wrap-bumper">void <a href="#a57b77a6c96f3276ed8e12b5e35b7f442" class="m-doc-self">zero</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Assign all element of the vector to 0.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aee106d61ebb0925fecfa55cbaa515981" class="m-doc">fillBuffer</a>(</span><span class="m-doc-wrap">double* buf) const</span>
+            </dt>
+            <dd>Assume that buf is pointing to a buffer of size() doubles, and fill it with the content of this vector.</dd>
+          </dl>
+        </section>
+        <section id="pro-attribs">
+          <h2><a href="#pro-attribs">Protected variables</a></h2>
+          <dl class="m-doc">
+            <dt>
+              double <a href="#a7bf5cd26b6fc24c9ddaf8854ebb8ec63" class="m-doc">m_data</a>
+            </dt>
+            <dd>Storage for the <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>.</dd>
+          </dl>
+        </section>
+        <section id="vector-interface-methods">
+          <h2><a href="#vector-interface-methods">Vector interface methods.</a></h2>
+<p>Methods exposing a vector-like interface to <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">VectorFixSize</a>.</p>
+          <dl class="m-doc">
+            <dt id="afbdebfe9410180223c2d33f6f5a243a5">
+              <span class="m-doc-wrap-bumper">auto <a href="#afbdebfe9410180223c2d33f6f5a243a5" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">const std::size_t index) const -&gt; double</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aaeeab0c1251340903c447dbc3cd33b01">
+              <span class="m-doc-wrap-bumper">auto <a href="#aaeeab0c1251340903c447dbc3cd33b01" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">const std::size_t index) -&gt; double&amp;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a8345a3e5ee2998a02dd79019ce293421">
+              <span class="m-doc-wrap-bumper">auto <a href="#a8345a3e5ee2998a02dd79019ce293421" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap">const std::size_t index) const -&gt; double</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a21683853dd0b95beea5b091a584fe486">
+              <span class="m-doc-wrap-bumper">auto <a href="#a21683853dd0b95beea5b091a584fe486" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap">const std::size_t index) -&gt; double&amp;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af8b3a33ff82732e94480023aa18cfe98">
+              <span class="m-doc-wrap-bumper">auto <a href="#af8b3a33ff82732e94480023aa18cfe98" class="m-doc-self">getVal</a>(</span><span class="m-doc-wrap">const std::size_t index) const -&gt; double</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ab63541744f87c564754359e4923da4a6">
+              <span class="m-doc-wrap-bumper">auto <a href="#ab63541744f87c564754359e4923da4a6" class="m-doc-self">setVal</a>(</span><span class="m-doc-wrap">const std::size_t index,
+              const double new_el) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#affa1eab2d54d8227d8aeb402dc2dc1f7" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) const -&gt; const double* <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Returns a const iterator to the beginning of the vector.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9409f3724df4aa4de2c8281ba7e67db2" class="m-doc">end</a>(</span><span class="m-doc-wrap">) const -&gt; const double* <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Returns a const iterator to the beginning of the vector.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1420c32072d5c1e21140da111955a6d1" class="m-doc">cbegin</a>(</span><span class="m-doc-wrap">) const -&gt; const double* <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Returns a const iterator to the beginning of the vector.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0b5d60b77fbd7ba982e855453800f776" class="m-doc">cend</a>(</span><span class="m-doc-wrap">) const -&gt; const double* <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Returns a const iterator to the beginning of the vector.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8e64a7875375a8b1b894614ba882ad05" class="m-doc">begin</a>(</span><span class="m-doc-wrap">) -&gt; double* <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Returns a iterator to the beginning of the vector.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8b6f1796eba4d7c3db40e3d14e33b246" class="m-doc">end</a>(</span><span class="m-doc-wrap">) -&gt; double* <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd>Returns a iterator to the beginning of the vector.</dd>
+            <dt id="a92e903cfdf924fee24e71eee1b0dff76">
+              <span class="m-doc-wrap-bumper">auto <a href="#a92e903cfdf924fee24e71eee1b0dff76" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const -&gt; std::size_t</span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="output-helpers">
+          <h2><a href="#output-helpers">Output helpers.</a></h2>
+<p>Output helpers.</p>
+          <dl class="m-doc">
+            <dt id="a11d7cfdce4e1674e2ce73a23c7e29990">
+              <span class="m-doc-wrap-bumper">auto <a href="#a11d7cfdce4e1674e2ce73a23c7e29990" class="m-doc-self">toString</a>(</span><span class="m-doc-wrap">) const -&gt; std::string</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="acae25eb63bcbe6b524849d77134c168d">
+              <span class="m-doc-wrap-bumper">auto <a href="#acae25eb63bcbe6b524849d77134c168d" class="m-doc-self">reservedToString</a>(</span><span class="m-doc-wrap">) const -&gt; std::string</span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a1ed77487376ad9915912e2118cb228af"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;unsigned int VecSize&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> iDynTree::<wbr />VectorFixSize&lt;VecSize&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1ed77487376ad9915912e2118cb228af" class="m-doc-self">VectorFixSize</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Default constructor.</p>
+<p>The data is not reset to 0 for perfomance reason. Please initialize the data in the vector before any use.</p>
+          </div></section>
+          <section class="m-doc-details" id="a6e92dc360040bccf652bebb0b0318cd6"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;unsigned int VecSize&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> iDynTree::<wbr />VectorFixSize&lt;VecSize&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6e92dc360040bccf652bebb0b0318cd6" class="m-doc-self">VectorFixSize</a>(</span><span class="m-doc-wrap">const double* in_data,
+              const std::size_t in_size)</span></span>
+            </h3>
+            <p>Constructor from a C-style array.</p>
+<p>Print an error an build a vector full of zeros if in_size is not size().</p>
+          </div></section>
+          <section class="m-doc-details" id="a9fd2c86208c88b1b904564d0a6f5a3b5"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;unsigned int VecSize&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"> iDynTree::<wbr />VectorFixSize&lt;VecSize&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9fd2c86208c88b1b904564d0a6f5a3b5" class="m-doc-self">VectorFixSize</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; vec)</span></span>
+            </h3>
+            <p>Constructor from an <a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>.</p>
+<p>Print an error an build a vector full of zeros if in_size is not size().</p>
+          </div></section>
+          <section class="m-doc-details" id="a823899b673570f935b649cb98c1ca4f8"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;unsigned int VecSize&gt;
+              </div>
+              <span class="m-doc-wrap-bumper"><a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">VectorFixSize</a>&amp; iDynTree::<wbr />VectorFixSize&lt;VecSize&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a823899b673570f935b649cb98c1ca4f8" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Span.html" class="m-doc">iDynTree::<wbr />Span</a>&lt;const double&gt; vec)</span></span>
+            </h3>
+            <p>Copy assignment operator for spans.</p>
+<p>Checks that dimensions are matching through an assert.</p>
+          </div></section>
+          <section class="m-doc-details" id="a3bd1389dbdf51e06f4c64451c242397e"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;unsigned int VecSize&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">const double* iDynTree::<wbr />VectorFixSize&lt;VecSize&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3bd1389dbdf51e06f4c64451c242397e" class="m-doc-self">data</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Raw data accessor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>a const pointer to a vector of size() doubles</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab6f044aea32e55a72f6ebed68f93f767"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;unsigned int VecSize&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">double* iDynTree::<wbr />VectorFixSize&lt;VecSize&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab6f044aea32e55a72f6ebed68f93f767" class="m-doc-self">data</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Raw data accessor.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>a pointer to a vector of size() doubles</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aee106d61ebb0925fecfa55cbaa515981"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;unsigned int VecSize&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />VectorFixSize&lt;VecSize&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aee106d61ebb0925fecfa55cbaa515981" class="m-doc-self">fillBuffer</a>(</span><span class="m-doc-wrap">double* buf) const</span></span>
+            </h3>
+            <p>Assume that buf is pointing to a buffer of size() doubles, and fill it with the content of this vector.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">buf</td>
+                  <td>pointer to the buffer to fill</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-danger"><h4>Warning</h4><p>use this function only if you are an expert C user</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="affa1eab2d54d8227d8aeb402dc2dc1f7"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;unsigned int VecSize&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">const double* iDynTree::<wbr />VectorFixSize&lt;VecSize&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#affa1eab2d54d8227d8aeb402dc2dc1f7" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Returns a const iterator to the beginning of the vector.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>At the moment iterator is implemented as a pointer, it may change in the future. For this reason it should not be used as a pointer to the data, use <a href="classiDynTree_1_1VectorFixSize.html#ab6f044aea32e55a72f6ebed68f93f767" class="m-doc">data()</a> instead.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a9409f3724df4aa4de2c8281ba7e67db2"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;unsigned int VecSize&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">const double* iDynTree::<wbr />VectorFixSize&lt;VecSize&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9409f3724df4aa4de2c8281ba7e67db2" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Returns a const iterator to the beginning of the vector.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>At the moment iterator is implemented as a pointer, it may change in the future. For this reason it should not be used as a pointer to the data, use <a href="classiDynTree_1_1VectorFixSize.html#ab6f044aea32e55a72f6ebed68f93f767" class="m-doc">data()</a> instead.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a1420c32072d5c1e21140da111955a6d1"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;unsigned int VecSize&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">const double* iDynTree::<wbr />VectorFixSize&lt;VecSize&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1420c32072d5c1e21140da111955a6d1" class="m-doc-self">cbegin</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Returns a const iterator to the beginning of the vector.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>At the moment iterator is implemented as a pointer, it may change in the future. For this reason it should not be used as a pointer to the data, use <a href="classiDynTree_1_1VectorFixSize.html#ab6f044aea32e55a72f6ebed68f93f767" class="m-doc">data()</a> instead.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a0b5d60b77fbd7ba982e855453800f776"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;unsigned int VecSize&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">const double* iDynTree::<wbr />VectorFixSize&lt;VecSize&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0b5d60b77fbd7ba982e855453800f776" class="m-doc-self">cend</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Returns a const iterator to the beginning of the vector.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>At the moment iterator is implemented as a pointer, it may change in the future. For this reason it should not be used as a pointer to the data, use <a href="classiDynTree_1_1VectorFixSize.html#ab6f044aea32e55a72f6ebed68f93f767" class="m-doc">data()</a> instead.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a8e64a7875375a8b1b894614ba882ad05"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;unsigned int VecSize&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">double* iDynTree::<wbr />VectorFixSize&lt;VecSize&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8e64a7875375a8b1b894614ba882ad05" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Returns a iterator to the beginning of the vector.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>At the moment iterator is implemented as a pointer, it may change in the future. For this reason it should not be used as a pointer to the data, use <a href="classiDynTree_1_1VectorFixSize.html#ab6f044aea32e55a72f6ebed68f93f767" class="m-doc">data()</a> instead.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a8b6f1796eba4d7c3db40e3d14e33b246"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;unsigned int VecSize&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">double* iDynTree::<wbr />VectorFixSize&lt;VecSize&gt;::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8b6f1796eba4d7c3db40e3d14e33b246" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">) <span class="m-label m-success">noexcept</span></span></span>
+            </h3>
+            <p>Returns a iterator to the beginning of the vector.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>At the moment iterator is implemented as a pointer, it may change in the future. For this reason it should not be used as a pointer to the data, use <a href="classiDynTree_1_1VectorFixSize.html#ab6f044aea32e55a72f6ebed68f93f767" class="m-doc">data()</a> instead.</p></aside>
+          </div></section>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="a7bf5cd26b6fc24c9ddaf8854ebb8ec63"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;unsigned int VecSize&gt;
+              </div>
+              double iDynTree::<wbr />VectorFixSize&lt;VecSize&gt;::<wbr /><a href="#a7bf5cd26b6fc24c9ddaf8854ebb8ec63" class="m-doc-self">m_data</a> <span class="m-label m-warning">protected</span>
+            </h3>
+            <p>Storage for the <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>.</p>
+<p>Array of VecSize doubles.</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>iDynTree documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/robotology/idyntree/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

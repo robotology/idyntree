@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="group__iDynTreeInverseKinematics" kind="group">
+    <compoundname>iDynTreeInverseKinematics</compoundname>
+    <title>Inverse kinematics algorithms.</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="warning"><para>This component is compiled only if iDynTree is compiled with the CMake flag IDYNTREE_USES_IPOPT set to ON . </para>
+</simplesect>
+</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

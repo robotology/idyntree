@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1FrameInfo" kind="struct" language="C++" prot="private">
+    <compoundname>internal::kinematics::InverseKinematicsNLP::FrameInfo</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1FrameInfo_1ad794a8f141744cddf2d90663a09a089c" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
+        <definition>iDynTree::Transform internal::kinematics::InverseKinematicsNLP::FrameInfo::transform</definition>
+        <argsstring></argsstring>
+        <name>transform</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>frame w.r.t. global frame, i.e. <formula id="37">$ {}^w R_f $</formula> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="230" column="29" bodyfile="private/InverseKinematicsNLP.h" bodystart="230" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1FrameInfo_1a9bb90b4e7fe2b06a1a3bbbebbc60a295" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
+        <definition>iDynTree::MatrixDynSize internal::kinematics::InverseKinematicsNLP::FrameInfo::jacobian</definition>
+        <argsstring></argsstring>
+        <name>jacobian</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Jacobian </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="231" column="33" bodyfile="private/InverseKinematicsNLP.h" bodystart="231" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1FrameInfo_1a0e9c6f90278a9f664c4d063ee9dbacf9" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">iDynTree::MatrixFixSize</ref>&lt; 4, 3 &gt;</type>
+        <definition>iDynTree::MatrixFixSize&lt;4, 3&gt; internal::kinematics::InverseKinematicsNLP::FrameInfo::quaternionDerivativeMap</definition>
+        <argsstring></argsstring>
+        <name>quaternionDerivativeMap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>map used during the derivative if the quaternion representation is used </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="232" column="33" bodyfile="private/InverseKinematicsNLP.h" bodystart="232" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>information about a Frame during optimization All the values are computed given the current robot configuration i.e. the one specified in the IPOPT callbacks (x) </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="12">
+        <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+      </node>
+      <node id="6">
+        <label>iDynTree::Rotation</label>
+        <link refid="classiDynTree_1_1Rotation"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>iDynTree::PositionRaw</label>
+        <link refid="classiDynTree_1_1PositionRaw"/>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::MatrixDynSize</label>
+        <link refid="classiDynTree_1_1MatrixDynSize"/>
+      </node>
+      <node id="8">
+        <label>Matrix3x3</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; 3, 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>iDynTree::RotationRaw</label>
+        <link refid="classiDynTree_1_1RotationRaw"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>iDynTree::Position</label>
+        <link refid="classiDynTree_1_1Position"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>iDynTree::MatrixFixSize&lt; nRows, nCols &gt;</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+      </node>
+      <node id="3">
+        <label>iDynTree::MatrixFixSize&lt; 4, 3 &gt;</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; 4, 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>internal::kinematics::InverseKinematicsNLP::FrameInfo</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>jacobian</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>quaternionDerivativeMap</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>transform</edgelabel>
+        </childnode>
+      </node>
+      <node id="11">
+        <label>Vector3</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+        <childnode refid="12" relation="template-instance">
+          <edgelabel>&lt; 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>iDynTree::Transform</label>
+        <link refid="classiDynTree_1_1Transform"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>rot</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>pos</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="private/InverseKinematicsNLP.h" line="229" column="5" bodyfile="private/InverseKinematicsNLP.h" bodystart="229" bodyend="233"/>
+    <listofallmembers>
+      <member refid="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1FrameInfo_1a9bb90b4e7fe2b06a1a3bbbebbc60a295" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP::FrameInfo</scope><name>jacobian</name></member>
+      <member refid="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1FrameInfo_1a0e9c6f90278a9f664c4d063ee9dbacf9" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP::FrameInfo</scope><name>quaternionDerivativeMap</name></member>
+      <member refid="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1FrameInfo_1ad794a8f141744cddf2d90663a09a089c" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP::FrameInfo</scope><name>transform</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

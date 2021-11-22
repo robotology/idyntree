@@ -1,0 +1,298 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1SensorsList_1_1TypedIterator" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::SensorsList::TypedIterator</compoundname>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classiDynTree_1_1SensorsList_1_1TypedIterator_1a702619539e349f8181d0f477c23653ff" prot="public" static="no">
+        <type>std::ptrdiff_t</type>
+        <definition>typedef std::ptrdiff_t iDynTree::SensorsList::TypedIterator::difference_type</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="382" column="32" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="382" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classiDynTree_1_1SensorsList_1_1TypedIterator_1abbc49cf00ef2ae1676e978a390965762" prot="public" static="no">
+        <type><ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> *</type>
+        <definition>typedef Sensor* iDynTree::SensorsList::TypedIterator::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="383" column="24" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="383" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classiDynTree_1_1SensorsList_1_1TypedIterator_1a68f9e69d544cd2b03d774cea94ad8511" prot="public" static="no">
+        <type><ref refid="classiDynTree_1_1Sensor" kindref="compound">value_type</ref> &amp;</type>
+        <definition>typedef value_type&amp; iDynTree::SensorsList::TypedIterator::reference</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="384" column="28" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="384" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classiDynTree_1_1SensorsList_1_1TypedIterator_1af28534de09c45684f8859ef6319172d1" prot="public" static="no">
+        <type><ref refid="classiDynTree_1_1Sensor" kindref="compound">value_type</ref> *</type>
+        <definition>typedef value_type* iDynTree::SensorsList::TypedIterator::pointer</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="385" column="28" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="385" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classiDynTree_1_1SensorsList_1_1TypedIterator_1ad262dd406adfe039a2862c89f3440890" prot="public" static="no">
+        <type>std::input_iterator_tag</type>
+        <definition>typedef std::input_iterator_tag iDynTree::SensorsList::TypedIterator::iterator_category</definition>
+        <argsstring></argsstring>
+        <name>iterator_category</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="386" column="41" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="386" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classiDynTree_1_1SensorsList_1_1TypedIterator_1a51c57a31c0c18c18341920b6346dc830" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class SensorsList</definition>
+        <argsstring></argsstring>
+        <name>SensorsList</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="376" column="9" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="376" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1SensorsList_1_1TypedIterator_1ac7ee465be4387bc906caaadb91b02f2e" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> * &gt; &amp;</type>
+        <definition>std::vector&lt;Sensor *&gt;&amp; iDynTree::SensorsList::TypedIterator::iteratingList</definition>
+        <argsstring></argsstring>
+        <name>iteratingList</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="378" column="21" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="378" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SensorsList_1_1TypedIterator_1a2d947be93b6bc58e2a6774855797f8f1" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> * &gt;::<ref refid="classiDynTree_1_1SensorsList_1_1Iterator" kindref="compound">iterator</ref></type>
+        <definition>std::vector&lt;Sensor *&gt;::iterator iDynTree::SensorsList::TypedIterator::internalIterator</definition>
+        <argsstring></argsstring>
+        <name>internalIterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="379" column="32" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="379" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1SensorsList_1_1TypedIterator_1a568524cb196337f5fabbbfaf78770623" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SensorsList::TypedIterator::TypedIterator</definition>
+        <argsstring>(std::vector&lt; Sensor * &gt; &amp;list)</argsstring>
+        <name>TypedIterator</name>
+        <param>
+          <type>std::vector&lt; <ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> * &gt; &amp;</type>
+          <declname>list</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="375" column="9"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1SensorsList_1_1TypedIterator_1a7c70b016dee8475aa38e9669bbdc5010" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SensorsList_1_1TypedIterator" kindref="compound">TypedIterator</ref> &amp;</type>
+        <definition>TypedIterator&amp; iDynTree::SensorsList::TypedIterator::operator++</definition>
+        <argsstring>()</argsstring>
+        <name>operator++</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="388" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SensorsList_1_1TypedIterator_1ae54f1c61074c8d3e5648c8cae9b3f5fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SensorsList_1_1TypedIterator" kindref="compound">TypedIterator</ref></type>
+        <definition>TypedIterator iDynTree::SensorsList::TypedIterator::operator++</definition>
+        <argsstring>(int)</argsstring>
+        <name>operator++</name>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="389" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SensorsList_1_1TypedIterator_1af3a4286ed35e11712b53fb7b911c5096" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SensorsList::TypedIterator::operator==</definition>
+        <argsstring>(const TypedIterator &amp;) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SensorsList_1_1TypedIterator" kindref="compound">TypedIterator</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="391" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SensorsList_1_1TypedIterator_1acd6e227887ee48b1aafeedab91569926" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SensorsList::TypedIterator::operator==</definition>
+        <argsstring>(const ConstTypedIterator &amp;) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SensorsList_1_1ConstTypedIterator" kindref="compound">ConstTypedIterator</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="392" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SensorsList_1_1TypedIterator_1a45b158ad291d2a24180ddc44d0401bd3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SensorsList::TypedIterator::operator!=</definition>
+        <argsstring>(const TypedIterator &amp;s) const</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SensorsList_1_1TypedIterator" kindref="compound">TypedIterator</ref> &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="393" column="21" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="393" bodyend="393"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SensorsList_1_1TypedIterator_1a4deb184c66222fc758656d7326f10b9f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SensorsList::TypedIterator::operator!=</definition>
+        <argsstring>(const ConstTypedIterator &amp;s) const</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SensorsList_1_1ConstTypedIterator" kindref="compound">ConstTypedIterator</ref> &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="394" column="21" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="394" bodyend="394"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SensorsList_1_1TypedIterator_1aebf2738930debea7633db70fa04435b4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Sensor" kindref="compound">reference</ref></type>
+        <definition>reference iDynTree::SensorsList::TypedIterator::operator*</definition>
+        <argsstring>() const</argsstring>
+        <name>operator*</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="396" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SensorsList_1_1TypedIterator_1af372b8effbb358e80b47f28445f8768a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Sensor" kindref="compound">pointer</ref></type>
+        <definition>pointer iDynTree::SensorsList::TypedIterator::operator-&gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>operator-&gt;</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="397" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SensorsList_1_1TypedIterator_1a603d7a8936b533aa5b9beb58aae7dc86" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SensorsList::TypedIterator::isValid</definition>
+        <argsstring>() const</argsstring>
+        <name>isValid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="399" column="14"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Sensors/Sensors.h" line="372" column="5" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="373" bodyend="400"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1a702619539e349f8181d0f477c23653ff" prot="public" virt="non-virtual"><scope>iDynTree::SensorsList::TypedIterator</scope><name>difference_type</name></member>
+      <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1a2d947be93b6bc58e2a6774855797f8f1" prot="private" virt="non-virtual"><scope>iDynTree::SensorsList::TypedIterator</scope><name>internalIterator</name></member>
+      <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1a603d7a8936b533aa5b9beb58aae7dc86" prot="public" virt="non-virtual"><scope>iDynTree::SensorsList::TypedIterator</scope><name>isValid</name></member>
+      <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1ac7ee465be4387bc906caaadb91b02f2e" prot="private" virt="non-virtual"><scope>iDynTree::SensorsList::TypedIterator</scope><name>iteratingList</name></member>
+      <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1ad262dd406adfe039a2862c89f3440890" prot="public" virt="non-virtual"><scope>iDynTree::SensorsList::TypedIterator</scope><name>iterator_category</name></member>
+      <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1a45b158ad291d2a24180ddc44d0401bd3" prot="public" virt="non-virtual"><scope>iDynTree::SensorsList::TypedIterator</scope><name>operator!=</name></member>
+      <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1a4deb184c66222fc758656d7326f10b9f" prot="public" virt="non-virtual"><scope>iDynTree::SensorsList::TypedIterator</scope><name>operator!=</name></member>
+      <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1aebf2738930debea7633db70fa04435b4" prot="public" virt="non-virtual"><scope>iDynTree::SensorsList::TypedIterator</scope><name>operator*</name></member>
+      <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1a7c70b016dee8475aa38e9669bbdc5010" prot="public" virt="non-virtual"><scope>iDynTree::SensorsList::TypedIterator</scope><name>operator++</name></member>
+      <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1ae54f1c61074c8d3e5648c8cae9b3f5fe" prot="public" virt="non-virtual"><scope>iDynTree::SensorsList::TypedIterator</scope><name>operator++</name></member>
+      <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1af372b8effbb358e80b47f28445f8768a" prot="public" virt="non-virtual"><scope>iDynTree::SensorsList::TypedIterator</scope><name>operator-&gt;</name></member>
+      <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1af3a4286ed35e11712b53fb7b911c5096" prot="public" virt="non-virtual"><scope>iDynTree::SensorsList::TypedIterator</scope><name>operator==</name></member>
+      <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1acd6e227887ee48b1aafeedab91569926" prot="public" virt="non-virtual"><scope>iDynTree::SensorsList::TypedIterator</scope><name>operator==</name></member>
+      <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1af28534de09c45684f8859ef6319172d1" prot="public" virt="non-virtual"><scope>iDynTree::SensorsList::TypedIterator</scope><name>pointer</name></member>
+      <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1a68f9e69d544cd2b03d774cea94ad8511" prot="public" virt="non-virtual"><scope>iDynTree::SensorsList::TypedIterator</scope><name>reference</name></member>
+      <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1a568524cb196337f5fabbbfaf78770623" prot="private" virt="non-virtual"><scope>iDynTree::SensorsList::TypedIterator</scope><name>TypedIterator</name></member>
+      <member refid="classiDynTree_1_1SensorsList_1_1TypedIterator_1abbc49cf00ef2ae1676e978a390965762" prot="public" virt="non-virtual"><scope>iDynTree::SensorsList::TypedIterator</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

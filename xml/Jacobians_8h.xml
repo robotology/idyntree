@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="Jacobians_8h" kind="file" language="C++">
+    <compoundname>Jacobians.h</compoundname>
+    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__iDynTreeModel_1gab0b6f0ce3e6e175b1532bdd897fd83c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::FreeFloatingJacobianUsingLinkPos</definition>
+        <argsstring>(const Model &amp;model, const Traversal &amp;traversal, const JointPosDoubleArray &amp;jointPositions, const LinkPositions &amp;linkPositions, const LinkIndex linkIndex, const Transform &amp;jacobFrame_X_world, const Transform &amp;baseFrame_X_jacobBaseFrame, const MatrixView&lt; double &gt; &amp;jacobian)</argsstring>
+        <name>FreeFloatingJacobianUsingLinkPos</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const Traversal &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const JointPosDoubleArray &amp;</type>
+          <declname>jointPositions</declname>
+        </param>
+        <param>
+          <type>const LinkPositions &amp;</type>
+          <declname>linkPositions</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>linkIndex</declname>
+        </param>
+        <param>
+          <type>const Transform &amp;</type>
+          <declname>jacobFrame_X_world</declname>
+        </param>
+        <param>
+          <type>const Transform &amp;</type>
+          <declname>baseFrame_X_jacobBaseFrame</declname>
+        </param>
+        <param>
+          <type>const MatrixView&lt; double &gt; &amp;</type>
+          <declname>jacobian</declname>
+        </param>
+        <briefdescription>
+<para>Compute a free floating jacobian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the used model, </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">traversal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the used traversal, </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jointPositions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the vector of (internal) joint positions, </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkPositions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>linkPositions(l) contains the world_H_link transform. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the index of the link of which we compute the jacobian. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jacobFrame_X_world</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>TODO </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">baseFrame_X_jacobBaseFrame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>TODO </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">jacobian</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the computed Jacobian </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Jacobians.h" line="48" column="10" declfile="iDynTree/Model/Jacobians.h" declline="48" declcolumn="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/Jacobians.h"/>
+  </compounddef>
+</doxygen>

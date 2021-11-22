@@ -1,0 +1,229 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1BerdyOptions" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::BerdyOptions</compoundname>
+    <includes local="no">iDynTree/Estimation/BerdyHelper.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1BerdyOptions_1a19628b15cf3bbcf28b976c39b437d006" prot="public" static="no" mutable="no">
+        <type><ref refid="group__iDynTreeExperimental_1ga62aff3167b9df327b4b1db6affadd21f" kindref="member">BerdyVariants</ref></type>
+        <definition>BerdyVariants iDynTree::BerdyOptions::berdyVariant</definition>
+        <argsstring></argsstring>
+        <name>berdyVariant</name>
+        <briefdescription>
+<para>Type of berdy variant implemented. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For description of each type of variant check the BerdyVariants enum documentation.</para>
+<para>Default value: ORIGINAL_BERDY_FIXED_BASE . </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="168" column="19" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="168" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1BerdyOptions_1af051c7f89d8e3dc8d7b455c587344a69" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyOptions::includeAllNetExternalWrenchesAsDynamicVariables</definition>
+        <argsstring></argsstring>
+        <name>includeAllNetExternalWrenchesAsDynamicVariables</name>
+        <briefdescription>
+<para>If true, include the net external wrenches in the dynamic variables vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Default value: true .</para>
+<para><simplesect kind="note"><para>the Net effect of setting this to zero is to consider all the external wrenches to be equal to 0. If berdyVariant is ORIGINAL_BERDY_FIXED_BASE, the &quot;net&quot; external wrenches does not include the wrench at the base.</para>
+</simplesect>
+<simplesect kind="note"><para>if berdyVariant is BERDY_FLOATING_BASE, this option cannot be set to false. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="181" column="10" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="181" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1BerdyOptions_1aea6e6fac0efefbe5add4a140b1dcaccd" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyOptions::includeAllJointAccelerationsAsSensors</definition>
+        <argsstring></argsstring>
+        <name>includeAllJointAccelerationsAsSensors</name>
+        <briefdescription>
+<para>If true, include the joint accelerations in the sensors vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Default value: true . </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="188" column="10" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="188" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1BerdyOptions_1af70033b6bbcded8f40b50946ecb66107" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyOptions::includeAllJointTorquesAsSensors</definition>
+        <argsstring></argsstring>
+        <name>includeAllJointTorquesAsSensors</name>
+        <briefdescription>
+<para>If true, include the joint torques in the sensors vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Default value: false . </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="195" column="10" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="195" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1BerdyOptions_1ae3072e1e8330ff15fb6fbc4f838aeb89" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyOptions::includeAllNetExternalWrenchesAsSensors</definition>
+        <argsstring></argsstring>
+        <name>includeAllNetExternalWrenchesAsSensors</name>
+        <briefdescription>
+<para>If true, include the net external wrenches in the sensors vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It is not compatible with the use of includeAllNetExternalWrenchesAsDynamicVariables set to false.</para>
+<para>Default value: true . </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="203" column="10" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="203" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1BerdyOptions_1ad8132d863ced1232d12fc0ef0053c6d4" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyOptions::includeFixedBaseExternalWrench</definition>
+        <argsstring></argsstring>
+        <name>includeFixedBaseExternalWrench</name>
+        <briefdescription>
+<para>If includeNetExternalWrenchesAsSensors is true and the variant is ORIGINAL_BERDY_FIXED_BASE, if this is true the external wrench acting on the base fixed link is included in the sensors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Default value : false . </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="213" column="10" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="213" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1BerdyOptions_1a963fa2e88833e09594b13a22f788c5cb" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; iDynTree::BerdyOptions::jointOnWhichTheInternalWrenchIsMeasured</definition>
+        <argsstring></argsstring>
+        <name>jointOnWhichTheInternalWrenchIsMeasured</name>
+        <briefdescription>
+<para>Vector of joint names for which we assume that a virtual measurement of the wrench trasmitted on the joint is available. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This measurements are tipically used only for debug, actual internal wrenches are tipically measured using a SIX_AXIS_FORCE_TORQUE_SENSOR . </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="222" column="17" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="222" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1BerdyOptions_1a0fa96e6bdabbcf1165d7027de1977698" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::BerdyOptions::baseLink</definition>
+        <argsstring></argsstring>
+        <name>baseLink</name>
+        <briefdescription>
+<para>Name of the link which will be considered as a base link for Berdy computations. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>If the string is empty the default base link of the model will be used. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="229" column="17" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="229" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structiDynTree_1_1BerdyOptions_1ac9aab7a6f83181df7b667c049665dc03" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::BerdyOptions::BerdyOptions</definition>
+        <argsstring>()</argsstring>
+        <name>BerdyOptions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="150" column="5" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="150" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="structiDynTree_1_1BerdyOptions_1a1b9fc6eff357d120844ee98f48cc28a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyOptions::checkConsistency</definition>
+        <argsstring>()</argsstring>
+        <name>checkConsistency</name>
+        <briefdescription>
+<para>Check that the options are not self-contradicting. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="234" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Options of the <ref refid="classiDynTree_1_1BerdyHelper" kindref="compound">BerdyHelper</ref> class. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Documentation of each option is provided as usual Doxygen documentation. Default values for each options are specified in the contstructor.</para>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="6">
+        <label>T</label>
+      </node>
+      <node id="5">
+        <label>std::vector&lt; T &gt;</label>
+        <childnode refid="6" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="4">
+        <label>std::vector&lt; std::string &gt;</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="template-instance">
+          <edgelabel>&lt; std::string &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::BerdyOptions</label>
+        <link refid="structiDynTree_1_1BerdyOptions"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>baseLink</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>jointOnWhichTheInternalWrenchIsMeasured</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::string</label>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Estimation/BerdyHelper.h" line="147" column="1" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="148" bodyend="235"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1BerdyOptions_1a0fa96e6bdabbcf1165d7027de1977698" prot="public" virt="non-virtual"><scope>iDynTree::BerdyOptions</scope><name>baseLink</name></member>
+      <member refid="structiDynTree_1_1BerdyOptions_1ac9aab7a6f83181df7b667c049665dc03" prot="public" virt="non-virtual"><scope>iDynTree::BerdyOptions</scope><name>BerdyOptions</name></member>
+      <member refid="structiDynTree_1_1BerdyOptions_1a19628b15cf3bbcf28b976c39b437d006" prot="public" virt="non-virtual"><scope>iDynTree::BerdyOptions</scope><name>berdyVariant</name></member>
+      <member refid="structiDynTree_1_1BerdyOptions_1a1b9fc6eff357d120844ee98f48cc28a1" prot="public" virt="non-virtual"><scope>iDynTree::BerdyOptions</scope><name>checkConsistency</name></member>
+      <member refid="structiDynTree_1_1BerdyOptions_1aea6e6fac0efefbe5add4a140b1dcaccd" prot="public" virt="non-virtual"><scope>iDynTree::BerdyOptions</scope><name>includeAllJointAccelerationsAsSensors</name></member>
+      <member refid="structiDynTree_1_1BerdyOptions_1af70033b6bbcded8f40b50946ecb66107" prot="public" virt="non-virtual"><scope>iDynTree::BerdyOptions</scope><name>includeAllJointTorquesAsSensors</name></member>
+      <member refid="structiDynTree_1_1BerdyOptions_1af051c7f89d8e3dc8d7b455c587344a69" prot="public" virt="non-virtual"><scope>iDynTree::BerdyOptions</scope><name>includeAllNetExternalWrenchesAsDynamicVariables</name></member>
+      <member refid="structiDynTree_1_1BerdyOptions_1ae3072e1e8330ff15fb6fbc4f838aeb89" prot="public" virt="non-virtual"><scope>iDynTree::BerdyOptions</scope><name>includeAllNetExternalWrenchesAsSensors</name></member>
+      <member refid="structiDynTree_1_1BerdyOptions_1ad8132d863ced1232d12fc0ef0053c6d4" prot="public" virt="non-virtual"><scope>iDynTree::BerdyOptions</scope><name>includeFixedBaseExternalWrench</name></member>
+      <member refid="structiDynTree_1_1BerdyOptions_1a963fa2e88833e09594b13a22f788c5cb" prot="public" virt="non-virtual"><scope>iDynTree::BerdyOptions</scope><name>jointOnWhichTheInternalWrenchIsMeasured</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

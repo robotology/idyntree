@@ -1,0 +1,262 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimalcontrol_1_1LinearCost" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::optimalcontrol::LinearCost</compoundname>
+    <basecompoundref refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost" prot="public" virt="non-virtual">iDynTree::optimalcontrol::QuadraticLikeCost</basecompoundref>
+    <includes local="no">iDynTree/LinearCost.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearCost_1ad3cbd8d7ecff0a531e40331f2dd75bf6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::LinearCost::LinearCost</definition>
+        <argsstring>(const std::string &amp;costName)</argsstring>
+        <name>LinearCost</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>costName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearCost.h" line="35" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearCost_1a079b0daa1ebe819d5347ee192492365f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::LinearCost::~LinearCost</definition>
+        <argsstring>()</argsstring>
+        <name>~LinearCost</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearCost.h" line="37" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearCost_1abaa2005da7ca4ec420ea50a52dcd38a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::LinearCost::setStateCost</definition>
+        <argsstring>(const iDynTree::VectorDynSize &amp;stateGradient)</argsstring>
+        <name>setStateCost</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>stateGradient</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearCost.h" line="39" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearCost_1a01c7f1d295e40e5e928202492eb4138f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::LinearCost::setStateCost</definition>
+        <argsstring>(std::shared_ptr&lt; iDynTree::optimalcontrol::TimeVaryingVector &gt; timeVaryingStateGradient)</argsstring>
+        <name>setStateCost</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">iDynTree::optimalcontrol::TimeVaryingVector</ref> &gt;</type>
+          <declname>timeVaryingStateGradient</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearCost.h" line="41" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearCost_1a674bdbe0a9903a130c234512d00653dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::LinearCost::setControlCost</definition>
+        <argsstring>(const iDynTree::VectorDynSize &amp;controlGradient)</argsstring>
+        <name>setControlCost</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>controlGradient</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearCost.h" line="43" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearCost_1a222e952bddafb95a5facc3c80fb2c049" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::LinearCost::setControlCost</definition>
+        <argsstring>(std::shared_ptr&lt; iDynTree::optimalcontrol::TimeVaryingVector &gt; timeVaryingControlGradient)</argsstring>
+        <name>setControlCost</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">iDynTree::optimalcontrol::TimeVaryingVector</ref> &gt;</type>
+          <declname>timeVaryingControlGradient</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearCost.h" line="45" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearCost_1a927c791d758f2d81289573702a9a209d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::LinearCost::setCostBias</definition>
+        <argsstring>(double stateCostBias, double controlCostBias)</argsstring>
+        <name>setCostBias</name>
+        <param>
+          <type>double</type>
+          <declname>stateCostBias</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>controlCostBias</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearCost.h" line="47" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearCost_1a4477191cc6fd2d2ecb325feded5d3692" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::LinearCost::setCostBias</definition>
+        <argsstring>(std::shared_ptr&lt; iDynTree::optimalcontrol::TimeVaryingDouble &gt; timeVaryingStateCostBias, std::shared_ptr&lt; iDynTree::optimalcontrol::TimeVaryingDouble &gt; timeVaryingControlCostBias)</argsstring>
+        <name>setCostBias</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">iDynTree::optimalcontrol::TimeVaryingDouble</ref> &gt;</type>
+          <declname>timeVaryingStateCostBias</declname>
+        </param>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">iDynTree::optimalcontrol::TimeVaryingDouble</ref> &gt;</type>
+          <declname>timeVaryingControlCostBias</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearCost.h" line="49" column="18"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::optimalcontrol::LinearCost</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1LinearCost"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::optimalcontrol::QuadraticLikeCost</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::optimalcontrol::Cost</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1Cost"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="6">
+        <label>T</label>
+      </node>
+      <node id="5">
+        <label>std::shared_ptr&lt; T &gt;</label>
+        <childnode refid="6" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>iDynTree::optimalcontrol::SparsityStructure</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::optimalcontrol::LinearCost</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1LinearCost"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::optimalcontrol::QuadraticLikeCost</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_timeVaryingControlCostBias</edgelabel>
+          <edgelabel>m_timeVaryingControlGradient</edgelabel>
+          <edgelabel>m_timeVaryingControlHessian</edgelabel>
+          <edgelabel>m_timeVaryingStateCostBias</edgelabel>
+          <edgelabel>m_timeVaryingStateGradient</edgelabel>
+          <edgelabel>m_timeVaryingStateHessian</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_secondPartialDerivativeWRTControlSparsity</edgelabel>
+          <edgelabel>m_secondPartialDerivativeWRTStateControlSparsity</edgelabel>
+          <edgelabel>m_secondPartialDerivativeWRTStateSparsity</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::shared_ptr&lt; iDynTree::optimalcontrol::TimeVaryingObject &gt;</label>
+        <childnode refid="5" relation="template-instance">
+          <edgelabel>&lt; iDynTree::optimalcontrol::TimeVaryingObject &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::optimalcontrol::Cost</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1Cost"/>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/LinearCost.h" line="32" column="9" bodyfile="iDynTree/LinearCost.h" bodystart="32" bodyend="52"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Cost_1a97ea5427f72a47d5abd6b37ca71a51f5" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>Cost</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1afa7aa964e0221db0c39d9eec020b1bb0" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>costEvaluation</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1abc543d1905aa851fbfcc296b6dc5d276" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>costFirstPartialDerivativeWRTControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1a4475397f2ecdcdf597460c050b32c62d" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>costFirstPartialDerivativeWRTState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1aa30638553d8ff59f9d7e81d096df1fc5" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>costSecondPartialDerivativeWRTControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1ae76e9ba84440737d2a7a7c96266fd847" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>costSecondPartialDerivativeWRTControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1ae8820c08b123bdb321c36fecff42d10d" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>costSecondPartialDerivativeWRTState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1ac2a8f6f8f602edb75ba99fc497f72a07" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>costSecondPartialDerivativeWRTStateControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1a5c23504c3a9f8fabe3431a654073bbc2" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>costSecondPartialDerivativeWRTStateControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1af0cf7c4bb09a7f22b1924c8bed72ed34" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>costSecondPartialDerivativeWRTStateSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearCost_1ad3cbd8d7ecff0a531e40331f2dd75bf6" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>LinearCost</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1aeb28846afd2fe3f4373b646d49fbba97" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>m_hasSecondPartialDerivativeWRTControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1ae00c9061c568494f23b858ad05a0ff02" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>m_hasSecondPartialDerivativeWRTStateControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1ae9c9fd426f107159f3e5354fd3f0562e" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>m_hasSecondPartialDerivativeWRTStateSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1a55d298ac7b70590ad7e9122a21c03b7d" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>m_secondPartialDerivativeWRTControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1aa329727f0449dd78cc65248c5ee2f7ec" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>m_secondPartialDerivativeWRTStateControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1a917cfae65e537e496290046a44d7ca94" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>m_secondPartialDerivativeWRTStateSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1a379ea8c1910865e1ad109cc46ad8bfb6" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>m_timeVaryingControlCostBias</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1a9269110e23af528aae7b78aad054d0c9" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>m_timeVaryingControlGradient</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1a41bc5547c17cf3b7490ea15361fc0de8" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>m_timeVaryingControlHessian</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1a416877725e0df7d52ef0f599b39db143" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>m_timeVaryingStateCostBias</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1abedf340f114e51dacd483fd73f373fe5" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>m_timeVaryingStateGradient</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1abf8b22918021ba6ff7743575d30138c1" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>m_timeVaryingStateHessian</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Cost_1aaaea0b41a2a114e1efcd42e58e9bbb78" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>name</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1a882f483ef58fd779148f92dba7f81ba6" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>QuadraticLikeCost</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearCost_1a674bdbe0a9903a130c234512d00653dc" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>setControlCost</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearCost_1a222e952bddafb95a5facc3c80fb2c049" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>setControlCost</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearCost_1a927c791d758f2d81289573702a9a209d" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>setCostBias</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearCost_1a4477191cc6fd2d2ecb325feded5d3692" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>setCostBias</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearCost_1abaa2005da7ca4ec420ea50a52dcd38a3" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>setStateCost</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearCost_1a01c7f1d295e40e5e928202492eb4138f" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>setStateCost</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Cost_1aa956dac8cebf92d37d7682b5be30ed32" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>~Cost</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearCost_1a079b0daa1ebe819d5347ee192492365f" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>~LinearCost</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1aa0d70085d73533997d1827f954a5a0fc" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearCost</scope><name>~QuadraticLikeCost</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

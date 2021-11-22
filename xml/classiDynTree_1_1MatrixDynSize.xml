@@ -1,0 +1,810 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1MatrixDynSize" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::MatrixDynSize</compoundname>
+    <derivedcompoundref refid="classiDynTree_1_1FrameFreeFloatingJacobian" prot="public" virt="non-virtual">iDynTree::FrameFreeFloatingJacobian</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1FreeFloatingMassMatrix" prot="public" virt="non-virtual">iDynTree::FreeFloatingMassMatrix</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1FreeFloatingStateLinearization" prot="public" virt="non-virtual">iDynTree::FreeFloatingStateLinearization</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1MomentumFreeFloatingJacobian" prot="public" virt="non-virtual">iDynTree::MomentumFreeFloatingJacobian</derivedcompoundref>
+    <includes local="no">iDynTree/Core/MatrixDynSize.h</includes>
+      <sectiondef kind="user-defined">
+      <memberdef kind="typedef" id="classiDynTree_1_1MatrixDynSize_1afbcf1bf37275f811cab76cda68cad818" prot="public" static="no">
+        <type>double</type>
+        <definition>typedef double iDynTree::MatrixDynSize::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <briefdescription>
+<para>Typedefs to enable make_matrix_view. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="237" column="24" bodyfile="iDynTree/Core/MatrixDynSize.h" bodystart="237" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Matrix interface methods.</header>
+      <description><para>Methods exposing a matrix-like interface to <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref>.</para>
+<para><simplesect kind="warning"><para>Notice that using this methods you can damage the underlyng rotation matrix. In doubt, don&apos;t use them and rely on more high level functions. </para>
+</simplesect>
+</para>
+</description>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1aec352e4bfae97705cbe42eb99b91b969" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::MatrixDynSize::operator()</definition>
+        <argsstring>(const std::size_t row, const std::size_t col) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const std::size_t</type>
+          <declname>row</declname>
+        </param>
+        <param>
+          <type>const std::size_t</type>
+          <declname>col</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="144" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1a042335b734c10aa111c4c792f10d169c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double &amp;</type>
+        <definition>double&amp; iDynTree::MatrixDynSize::operator()</definition>
+        <argsstring>(const std::size_t row, const std::size_t col)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const std::size_t</type>
+          <declname>row</declname>
+        </param>
+        <param>
+          <type>const std::size_t</type>
+          <declname>col</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="145" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1a162f9d9077a0d5bbddc1da1b303515e5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::MatrixDynSize::getVal</definition>
+        <argsstring>(const std::size_t row, const std::size_t col) const</argsstring>
+        <name>getVal</name>
+        <param>
+          <type>const std::size_t</type>
+          <declname>row</declname>
+        </param>
+        <param>
+          <type>const std::size_t</type>
+          <declname>col</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="146" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1a34270bc42525a83112307cb480be5604" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::MatrixDynSize::setVal</definition>
+        <argsstring>(const std::size_t row, const std::size_t col, const double new_el)</argsstring>
+        <name>setVal</name>
+        <param>
+          <type>const std::size_t</type>
+          <declname>row</declname>
+        </param>
+        <param>
+          <type>const std::size_t</type>
+          <declname>col</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>new_el</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="147" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1a45a21d9dc00a7c5daadebc1f09ed3fdf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t iDynTree::MatrixDynSize::rows</definition>
+        <argsstring>() const</argsstring>
+        <name>rows</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="148" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1a18a9a6232ac5c967cf541caa21586d71" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t iDynTree::MatrixDynSize::cols</definition>
+        <argsstring>() const</argsstring>
+        <name>cols</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="149" column="21"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Output helpers.</header>
+      <description><para>Output helpers. </para>
+</description>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1a77e45ef11c7624ed8b7e150ebd041825" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::MatrixDynSize::toString</definition>
+        <argsstring>() const</argsstring>
+        <name>toString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="245" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1ae86eb69f39997bd181971d9bd5f56950" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::MatrixDynSize::reservedToString</definition>
+        <argsstring>() const</argsstring>
+        <name>reservedToString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="247" column="21"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1MatrixDynSize_1a80eba7978bcce15f4146f815c557f1bb" prot="protected" static="no" mutable="no">
+        <type>double *</type>
+        <definition>double* iDynTree::MatrixDynSize::m_data</definition>
+        <argsstring></argsstring>
+        <name>m_data</name>
+        <briefdescription>
+<para>Storage for the <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Pointer to an area of <ref refid="classiDynTree_1_1MatrixDynSize_1aacda29701a42c3943a781b9876500daf" kindref="member">capacity()</ref> doubles, managed by this class.</para>
+<para><simplesect kind="warning"><para>this class stores data using the row major order </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="60" column="17" bodyfile="iDynTree/Core/MatrixDynSize.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1MatrixDynSize_1ae25ad33695edf5ec1b43e13ffcfdde2c" prot="protected" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t iDynTree::MatrixDynSize::m_rows</definition>
+        <argsstring></argsstring>
+        <name>m_rows</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="61" column="21" bodyfile="iDynTree/Core/MatrixDynSize.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1MatrixDynSize_1a4c1fb8178a7fa9dfa5863f767b15fe20" prot="protected" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t iDynTree::MatrixDynSize::m_cols</definition>
+        <argsstring></argsstring>
+        <name>m_cols</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="62" column="21" bodyfile="iDynTree/Core/MatrixDynSize.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1MatrixDynSize_1af1d85eadf886d3fb508e2bf9e9788600" prot="protected" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t iDynTree::MatrixDynSize::m_capacity</definition>
+        <argsstring></argsstring>
+        <name>m_capacity</name>
+        <briefdescription>
+<para>The buffer to which m_data is pointing is m_capacity*sizeof(double). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="67" column="21" bodyfile="iDynTree/Core/MatrixDynSize.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1aee1d3a83c62f45ce5d2bfa5e83f57af7" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t iDynTree::MatrixDynSize::rawIndexRowMajor</definition>
+        <argsstring>(std::size_t row, std::size_t col) const</argsstring>
+        <name>rawIndexRowMajor</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>row</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>col</declname>
+        </param>
+        <briefdescription>
+<para>Return the raw index in the data vector of the element corresponding to row and col, using row major ordering. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="34" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1acf4da4d17c79ce7d552ed5b13a3cf109" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t iDynTree::MatrixDynSize::rawIndexColMajor</definition>
+        <argsstring>(std::size_t row, std::size_t col) const</argsstring>
+        <name>rawIndexColMajor</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>row</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>col</declname>
+        </param>
+        <briefdescription>
+<para>Return the raw index in the data vector of the element corresponding to row and col, using col major ordering. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>The class stores data in row major order, this function is used just in the fillColMajorBuffer method. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="45" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1a55d99b394b2bbf8802b3f2b43a5b667f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::MatrixDynSize::changeCapacityAndCopyData</definition>
+        <argsstring>(const std::size_t _newCapacity)</argsstring>
+        <name>changeCapacityAndCopyData</name>
+        <param>
+          <type>const std::size_t</type>
+          <declname>_newCapacity</declname>
+        </param>
+        <briefdescription>
+<para>Set the capacity of the vector, resizing the buffer pointed by m_data. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="50" column="14"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1a062017b1f0958fa8d18edd822ad7018f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::MatrixDynSize::MatrixDynSize</definition>
+        <argsstring>()</argsstring>
+        <name>MatrixDynSize</name>
+        <briefdescription>
+<para>Default constructor: create a 0x0 matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="73" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1a38a30ddc05269a2c8ee66603db7a1a5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::MatrixDynSize::MatrixDynSize</definition>
+        <argsstring>(std::size_t _rows, std::size_t _cols)</argsstring>
+        <name>MatrixDynSize</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>_rows</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>_cols</declname>
+        </param>
+        <briefdescription>
+<para>Constructor from the rows and columns, all the element assigned to 0. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>_rows</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the desired rows of the matrix. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_cols</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the desired cols of the matrix.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="warning"><para>performs dynamic memory allocation operations </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="83" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1aaa27f4111779337ae337dc3ab1abf2e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::MatrixDynSize::MatrixDynSize</definition>
+        <argsstring>(const double *in_data, const std::size_t in_rows, const std::size_t in_cols)</argsstring>
+        <name>MatrixDynSize</name>
+        <param>
+          <type>const double *</type>
+          <declname>in_data</declname>
+        </param>
+        <param>
+          <type>const std::size_t</type>
+          <declname>in_rows</declname>
+        </param>
+        <param>
+          <type>const std::size_t</type>
+          <declname>in_cols</declname>
+        </param>
+        <briefdescription>
+<para>Constructor from a C-style matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>this class stores data using the row major order </para>
+</simplesect>
+<simplesect kind="warning"><para>performs dynamic memory allocation operations </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="92" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1a280957c0323a79009ccee5708668ca5c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::MatrixDynSize::MatrixDynSize</definition>
+        <argsstring>(const MatrixDynSize &amp;other)</argsstring>
+        <name>MatrixDynSize</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the object to copy </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="99" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1a162a5170740ac6bc8c0a3992f9200b1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::MatrixDynSize::MatrixDynSize</definition>
+        <argsstring>(iDynTree::MatrixView&lt; const double &gt; other)</argsstring>
+        <name>MatrixDynSize</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixView" kindref="compound">iDynTree::MatrixView</ref>&lt; const double &gt;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Constructor from <ref refid="classiDynTree_1_1MatrixView" kindref="compound">MatrixView</ref> object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1MatrixView" kindref="compound">MatrixView</ref> to copy </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="warning"><para>performs dynamic memory allocation operations </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="109" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1ab5dc70fe26c9b8e58a7a03a336556749" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+        <definition>MatrixDynSize&amp; iDynTree::MatrixDynSize::operator=</definition>
+        <argsstring>(const MatrixDynSize &amp;other)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Assignment operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the object to copy into self</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>*this </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="118" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1ab4288557b4a3a229c195abfba9384688" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+        <definition>MatrixDynSize&amp; iDynTree::MatrixDynSize::operator=</definition>
+        <argsstring>(iDynTree::MatrixView&lt; const double &gt; other)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixView" kindref="compound">iDynTree::MatrixView</ref>&lt; const double &gt;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Assignment operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the object to copy into self</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>*this </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="127" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1a9cbfeed643bb079a4c2060fb92309be7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::MatrixDynSize::~MatrixDynSize</definition>
+        <argsstring>()</argsstring>
+        <name>~MatrixDynSize</name>
+        <briefdescription>
+<para>Denstructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>performs dynamic memory allocation operations </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="134" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1a326369f52bb74fe3cdc30fc02af81eb8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const double *</type>
+        <definition>const double* iDynTree::MatrixDynSize::data</definition>
+        <argsstring>() const</argsstring>
+        <name>data</name>
+        <briefdescription>
+<para>Raw data accessor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>this class stores matrix data using the row major order </para>
+</simplesect>
+<simplesect kind="return"><para>a const pointer to a vector of size() doubles </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="158" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1a2bfc7c13f386f6d5845e685bbb78daf2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double *</type>
+        <definition>double* iDynTree::MatrixDynSize::data</definition>
+        <argsstring>()</argsstring>
+        <name>data</name>
+        <briefdescription>
+<para>Raw data accessor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>this class stores matrix data using the row major order </para>
+</simplesect>
+<simplesect kind="return"><para>a pointer to a vector of size() doubles </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="166" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1a071eb4583b2bd16399cf4bb460e15db0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::MatrixDynSize::zero</definition>
+        <argsstring>()</argsstring>
+        <name>zero</name>
+        <briefdescription>
+<para>Assign all element of the matrix to 0. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="171" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1a9cf8980628426a135edc1653e8f56496" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::MatrixDynSize::resize</definition>
+        <argsstring>(const std::size_t _newRows, const std::size_t _newCols)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>const std::size_t</type>
+          <declname>_newRows</declname>
+        </param>
+        <param>
+          <type>const std::size_t</type>
+          <declname>_newCols</declname>
+        </param>
+        <briefdescription>
+<para>Change the size of the matrix, without preserving old content. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>_newRows</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the new rows of the matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>_newCols</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the new cols of the matrix</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="warning"><para>performs dynamic memory allocation operations if newRows*newCols &gt; <ref refid="classiDynTree_1_1MatrixDynSize_1aacda29701a42c3943a781b9876500daf" kindref="member">capacity()</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="181" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1a23e474c7161903c18be88d8fac2b4137" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::MatrixDynSize::reserve</definition>
+        <argsstring>(const size_t _newCapacity)</argsstring>
+        <name>reserve</name>
+        <param>
+          <type>const size_t</type>
+          <declname>_newCapacity</declname>
+        </param>
+        <briefdescription>
+<para>Increase the capacity of the matrix, preserving old content. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>performs dynamic memory allocation operations if _newCapacity &gt; <ref refid="classiDynTree_1_1MatrixDynSize_1aacda29701a42c3943a781b9876500daf" kindref="member">capacity()</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="188" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1aacda29701a42c3943a781b9876500daf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::MatrixDynSize::capacity</definition>
+        <argsstring>() const</argsstring>
+        <name>capacity</name>
+        <briefdescription>
+<para>Get the dimension (in doubles) of the buffer to which m_data is pointing. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="193" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1ad5c3a0b1b9ce8c691194c652adf95a5a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::MatrixDynSize::shrink_to_fit</definition>
+        <argsstring>()</argsstring>
+        <name>shrink_to_fit</name>
+        <briefdescription>
+<para>Change the capacity of the matrix such that <ref refid="classiDynTree_1_1MatrixDynSize_1aacda29701a42c3943a781b9876500daf" kindref="member">capacity()</ref> == rows()*cols(), preserving old content. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>performs dynamic memory allocation operations if newRows*newCols != <ref refid="classiDynTree_1_1MatrixDynSize_1aacda29701a42c3943a781b9876500daf" kindref="member">capacity()</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="200" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1aa8af99c672e6a7e188115d2a8144a1c7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::MatrixDynSize::fillRowMajorBuffer</definition>
+        <argsstring>(double *rowMajorBuf) const</argsstring>
+        <name>fillRowMajorBuffer</name>
+        <param>
+          <type>double *</type>
+          <declname>rowMajorBuf</declname>
+        </param>
+        <briefdescription>
+<para>Assume that rowMajorBuf is pointing to a buffer of rows()*cols() doubles, and fill it with the content of this matrix, using row major order. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rowMajorBuf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to the buffer to fill</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+<para><simplesect kind="warning"><para>use this function only if you are an expert C user </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="215" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MatrixDynSize_1ab11629d6f89ef3d4051867e44abdf76e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::MatrixDynSize::fillColMajorBuffer</definition>
+        <argsstring>(double *colMajorBuf) const</argsstring>
+        <name>fillColMajorBuffer</name>
+        <param>
+          <type>double *</type>
+          <declname>colMajorBuf</declname>
+        </param>
+        <briefdescription>
+<para>Assume that colMajorBuf is pointing to a buffer of rows()*cols() doubles, and fill it with the content of this matrix, using column major order. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>colMajorBuf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to the buffer to fill</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+<para><simplesect kind="warning"><para>use this function only if you are an expert C user </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixDynSize.h" line="230" column="14"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class providing a simple form of matrix with dynamic size. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::MatrixDynSize</label>
+        <link refid="classiDynTree_1_1MatrixDynSize"/>
+      </node>
+      <node id="3">
+        <label>iDynTree::FreeFloatingMassMatrix</label>
+        <link refid="classiDynTree_1_1FreeFloatingMassMatrix"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::FrameFreeFloatingJacobian</label>
+        <link refid="classiDynTree_1_1FrameFreeFloatingJacobian"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>iDynTree::FreeFloatingStateLinearization</label>
+        <link refid="classiDynTree_1_1FreeFloatingStateLinearization"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>iDynTree::MomentumFreeFloatingJacobian</label>
+        <link refid="classiDynTree_1_1MomentumFreeFloatingJacobian"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="iDynTree/Core/MatrixDynSize.h" line="26" column="5" bodyfile="iDynTree/Core/MatrixDynSize.h" bodystart="27" bodyend="250"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1MatrixDynSize_1aacda29701a42c3943a781b9876500daf" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>capacity</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a55d99b394b2bbf8802b3f2b43a5b667f" prot="private" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>changeCapacityAndCopyData</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a18a9a6232ac5c967cf541caa21586d71" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>cols</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a326369f52bb74fe3cdc30fc02af81eb8" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>data</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a2bfc7c13f386f6d5845e685bbb78daf2" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>data</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1ab11629d6f89ef3d4051867e44abdf76e" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>fillColMajorBuffer</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1aa8af99c672e6a7e188115d2a8144a1c7" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>fillRowMajorBuffer</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a162f9d9077a0d5bbddc1da1b303515e5" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>getVal</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1af1d85eadf886d3fb508e2bf9e9788600" prot="protected" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>m_capacity</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a4c1fb8178a7fa9dfa5863f767b15fe20" prot="protected" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>m_cols</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a80eba7978bcce15f4146f815c557f1bb" prot="protected" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>m_data</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1ae25ad33695edf5ec1b43e13ffcfdde2c" prot="protected" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>m_rows</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a062017b1f0958fa8d18edd822ad7018f" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>MatrixDynSize</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a38a30ddc05269a2c8ee66603db7a1a5e" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>MatrixDynSize</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1aaa27f4111779337ae337dc3ab1abf2e4" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>MatrixDynSize</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a280957c0323a79009ccee5708668ca5c" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>MatrixDynSize</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a162a5170740ac6bc8c0a3992f9200b1c" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>MatrixDynSize</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1aec352e4bfae97705cbe42eb99b91b969" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a042335b734c10aa111c4c792f10d169c" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1ab5dc70fe26c9b8e58a7a03a336556749" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1ab4288557b4a3a229c195abfba9384688" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1acf4da4d17c79ce7d552ed5b13a3cf109" prot="private" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>rawIndexColMajor</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1aee1d3a83c62f45ce5d2bfa5e83f57af7" prot="private" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>rawIndexRowMajor</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a23e474c7161903c18be88d8fac2b4137" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>reserve</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1ae86eb69f39997bd181971d9bd5f56950" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>reservedToString</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a9cf8980628426a135edc1653e8f56496" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>resize</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a45a21d9dc00a7c5daadebc1f09ed3fdf" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>rows</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a34270bc42525a83112307cb480be5604" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>setVal</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1ad5c3a0b1b9ce8c691194c652adf95a5a" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>shrink_to_fit</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a77e45ef11c7624ed8b7e150ebd041825" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>toString</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1afbcf1bf37275f811cab76cda68cad818" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>value_type</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a071eb4583b2bd16399cf4bb460e15db0" prot="public" virt="non-virtual"><scope>iDynTree::MatrixDynSize</scope><name>zero</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a9cbfeed643bb079a4c2060fb92309be7" prot="public" virt="virtual"><scope>iDynTree::MatrixDynSize</scope><name>~MatrixDynSize</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

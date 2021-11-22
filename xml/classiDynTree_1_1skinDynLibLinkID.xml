@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1skinDynLibLinkID" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::skinDynLibLinkID</compoundname>
+    <includes local="no">iDynTree/skinDynLibConversions.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1skinDynLibLinkID_1af650c500de48fcacfc9618255f9c1a66" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int iDynTree::skinDynLibLinkID::body_part</definition>
+        <argsstring></argsstring>
+        <name>body_part</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/skinDynLibConversions.h" line="36" column="9" bodyfile="iDynTree/skinDynLibConversions.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1skinDynLibLinkID_1a9647fd6dd263bd8d4217c50be892e962" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int iDynTree::skinDynLibLinkID::local_link_index</definition>
+        <argsstring></argsstring>
+        <name>local_link_index</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/skinDynLibConversions.h" line="37" column="9" bodyfile="iDynTree/skinDynLibConversions.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1skinDynLibLinkID_1aacad409a5592c988a93a60e54c109b1d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::skinDynLibLinkID::operator&lt;</definition>
+        <argsstring>(const skinDynLibLinkID &amp;k) const</argsstring>
+        <name>operator&lt;</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1skinDynLibLinkID" kindref="compound">skinDynLibLinkID</ref> &amp;</type>
+          <declname>k</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/skinDynLibConversions.h" line="39" column="5" bodyfile="iDynTree/skinDynLibConversions.h" bodystart="39" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1skinDynLibLinkID_1a5387b3b9594e5d1b09006e844b8f0b9e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::skinDynLibLinkID::operator==</definition>
+        <argsstring>(const skinDynLibLinkID &amp;k) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1skinDynLibLinkID" kindref="compound">skinDynLibLinkID</ref> &amp;</type>
+          <declname>k</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/skinDynLibConversions.h" line="55" column="10" bodyfile="iDynTree/skinDynLibConversions.h" bodystart="55" bodyend="59"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Identifier for a link and a body frame in skinDynLib. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/skinDynLibConversions.h" line="33" column="1" bodyfile="iDynTree/skinDynLibConversions.h" bodystart="34" bodyend="60"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1skinDynLibLinkID_1af650c500de48fcacfc9618255f9c1a66" prot="public" virt="non-virtual"><scope>iDynTree::skinDynLibLinkID</scope><name>body_part</name></member>
+      <member refid="classiDynTree_1_1skinDynLibLinkID_1a9647fd6dd263bd8d4217c50be892e962" prot="public" virt="non-virtual"><scope>iDynTree::skinDynLibLinkID</scope><name>local_link_index</name></member>
+      <member refid="classiDynTree_1_1skinDynLibLinkID_1aacad409a5592c988a93a60e54c109b1d" prot="public" virt="non-virtual"><scope>iDynTree::skinDynLibLinkID</scope><name>operator&lt;</name></member>
+      <member refid="classiDynTree_1_1skinDynLibLinkID_1a5387b3b9594e5d1b09006e844b8f0b9e" prot="public" virt="non-virtual"><scope>iDynTree::skinDynLibLinkID</scope><name>operator==</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

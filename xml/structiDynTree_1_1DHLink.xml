@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1DHLink" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::DHLink</compoundname>
+    <includes local="no">iDynTree/Model/DenavitHartenberg.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1DHLink_1abdf3091a9be9717958dfd34a638a36c1" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::DHLink::A</definition>
+        <argsstring></argsstring>
+        <name>A</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DenavitHartenberg.h" line="31" column="11" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1DHLink_1a8ff447e8d5dbd529df73ebe52942002f" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::DHLink::D</definition>
+        <argsstring></argsstring>
+        <name>D</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DenavitHartenberg.h" line="32" column="11" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1DHLink_1ab0d1b90f8b9426ef971bb1bc9be52c40" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::DHLink::Alpha</definition>
+        <argsstring></argsstring>
+        <name>Alpha</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DenavitHartenberg.h" line="33" column="11" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1DHLink_1a52a155fa9a88620f759833cd1372b2eb" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::DHLink::Offset</definition>
+        <argsstring></argsstring>
+        <name>Offset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DenavitHartenberg.h" line="34" column="11" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1DHLink_1aee26eee6f5b68bc4e1df717737770ddd" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::DHLink::Min</definition>
+        <argsstring></argsstring>
+        <name>Min</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DenavitHartenberg.h" line="35" column="11" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1DHLink_1a926a3e6338c3068e1232ad50b9a73841" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::DHLink::Max</definition>
+        <argsstring></argsstring>
+        <name>Max</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DenavitHartenberg.h" line="36" column="11" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure representing the four DH parameters of a link in a Chain. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/DenavitHartenberg.h" line="29" column="1" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="30" bodyend="37"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1DHLink_1abdf3091a9be9717958dfd34a638a36c1" prot="public" virt="non-virtual"><scope>iDynTree::DHLink</scope><name>A</name></member>
+      <member refid="structiDynTree_1_1DHLink_1ab0d1b90f8b9426ef971bb1bc9be52c40" prot="public" virt="non-virtual"><scope>iDynTree::DHLink</scope><name>Alpha</name></member>
+      <member refid="structiDynTree_1_1DHLink_1a8ff447e8d5dbd529df73ebe52942002f" prot="public" virt="non-virtual"><scope>iDynTree::DHLink</scope><name>D</name></member>
+      <member refid="structiDynTree_1_1DHLink_1a926a3e6338c3068e1232ad50b9a73841" prot="public" virt="non-virtual"><scope>iDynTree::DHLink</scope><name>Max</name></member>
+      <member refid="structiDynTree_1_1DHLink_1aee26eee6f5b68bc4e1df717737770ddd" prot="public" virt="non-virtual"><scope>iDynTree::DHLink</scope><name>Min</name></member>
+      <member refid="structiDynTree_1_1DHLink_1a52a155fa9a88620f759833cd1372b2eb" prot="public" virt="non-virtual"><scope>iDynTree::DHLink</scope><name>Offset</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,613 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1SimpleLeggedOdometry" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::SimpleLeggedOdometry</compoundname>
+    <includes local="no">iDynTree/Estimation/SimpleLeggedOdometry.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1SimpleLeggedOdometry_1a7b22482ade5d736ad064a75fe33c87c9" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref></type>
+        <definition>Model iDynTree::SimpleLeggedOdometry::m_model</definition>
+        <argsstring></argsstring>
+        <name>m_model</name>
+        <briefdescription>
+<para><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> used in odometry. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="59" column="11" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SimpleLeggedOdometry_1ae6fb2285b81cc651d820de9b176f69d4" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref></type>
+        <definition>Traversal iDynTree::SimpleLeggedOdometry::m_traversal</definition>
+        <argsstring></argsstring>
+        <name>m_traversal</name>
+        <briefdescription>
+<para><ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> used for the dynamics computations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="64" column="15" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SimpleLeggedOdometry_1aface6c5d0b430f1521340f6f72b32710" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::SimpleLeggedOdometry::m_isModelValid</definition>
+        <argsstring></argsstring>
+        <name>m_isModelValid</name>
+        <briefdescription>
+<para>False initially, true after a valid model has been loaded. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="69" column="10" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SimpleLeggedOdometry_1a12f477dea8b2c8d9d35ad072c7f3d26b" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::SimpleLeggedOdometry::m_kinematicsUpdated</definition>
+        <argsstring></argsstring>
+        <name>m_kinematicsUpdated</name>
+        <briefdescription>
+<para>False initially, true after updateKinematics was successfully called. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="74" column="10" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SimpleLeggedOdometry_1af49a63a2894a756b7531f6ffa5d3f799" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::SimpleLeggedOdometry::m_isOdometryInitialized</definition>
+        <argsstring></argsstring>
+        <name>m_isOdometryInitialized</name>
+        <briefdescription>
+<para>False initially, true after init was successfully called. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="79" column="10" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SimpleLeggedOdometry_1a2b5c00f05faa080830f9db26f4606d65" prot="private" static="no" mutable="no">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::SimpleLeggedOdometry::m_fixedLinkIndex</definition>
+        <argsstring></argsstring>
+        <name>m_fixedLinkIndex</name>
+        <briefdescription>
+<para>The link index of the link considered fixed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="84" column="15" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SimpleLeggedOdometry_1a0b78d126c5aa732c11ed963115fd0c6c" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1LinkPositions" kindref="compound">LinkPositions</ref></type>
+        <definition>LinkPositions iDynTree::SimpleLeggedOdometry::m_base_H_link</definition>
+        <argsstring></argsstring>
+        <name>m_base_H_link</name>
+        <briefdescription>
+<para><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> of each link with respect to the base link of the traversal (i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>output of the relative forward kinematics). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="91" column="19" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SimpleLeggedOdometry_1a6493052c27a7c745c40ac2435086eeb8" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>Transform iDynTree::SimpleLeggedOdometry::m_world_H_fixedLink</definition>
+        <argsstring></argsstring>
+        <name>m_world_H_fixedLink</name>
+        <briefdescription>
+<para><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> between the link currently considered fixed and the world/inertial frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is initialized in the init method and update by the changeFixedLink method. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="99" column="15" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a189c13e9ff5d64f3b8b05034f7cedb64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SimpleLeggedOdometry::SimpleLeggedOdometry</definition>
+        <argsstring>()</argsstring>
+        <name>SimpleLeggedOdometry</name>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="105" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a6bacff4fe44806f3c951d952ff3374c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SimpleLeggedOdometry::~SimpleLeggedOdometry</definition>
+        <argsstring>()</argsstring>
+        <name>~SimpleLeggedOdometry</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="110" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a98d2477422589b8c6db8aa8b9a251bd6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SimpleLeggedOdometry::setModel</definition>
+        <argsstring>(const Model &amp;_model)</argsstring>
+        <name>setModel</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>_model</declname>
+        </param>
+        <briefdescription>
+<para>Set model used for the odometry. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The model is copied inside the class, to be used for the odometry estimation.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">_model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the kinematic and dynamic model used for the estimation. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well (model is well formed), false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="119" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a7bcd1dcdd997919a6bdf16fe5eb0355a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+        <definition>const Model&amp; iDynTree::SimpleLeggedOdometry::model</definition>
+        <argsstring>() const</argsstring>
+        <name>model</name>
+        <briefdescription>
+<para>Get used model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the kinematic and dynamic model used for estimation. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="126" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a78a57dc95b9f1fa55c04a46d3d9b22dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SimpleLeggedOdometry::updateKinematics</definition>
+        <argsstring>(JointPosDoubleArray &amp;jointPos)</argsstring>
+        <name>updateKinematics</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">JointPosDoubleArray</ref> &amp;</type>
+          <declname>jointPos</declname>
+        </param>
+        <briefdescription>
+<para>Set the measured joint positions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is used to update the joints positions used by the odometry. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="134" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a847b99153a839d0a49d64f04c8a9c49d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SimpleLeggedOdometry::init</definition>
+        <argsstring>(const std::string &amp;initialFixedFrame, const Transform initialFixedFrame_H_world=Transform::Identity())</argsstring>
+        <name>init</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>initialFixedFrame</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+          <declname>initialFixedFrame_H_world</declname>
+          <defval><ref refid="classiDynTree_1_1Transform_1a706809fe4f1904e07634ed3d0c493fcd" kindref="member">Transform::Identity</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>Initialize the odometry. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method initializes the world location w.r.t. to a frame that is not the frame that is initially assumed fixed. For this reason it is necessary to call updateKinematics at least once before calling this method.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">initialFixedFrame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame initially assumed to be fixed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">initialFixedFrame_H_world</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pose of the world w.r.t. the initial fixed frame (default: identity, i.e. the initialFixedFrame is the world). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="146" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a6452e51cce27c452f145a93e5a172320" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SimpleLeggedOdometry::init</definition>
+        <argsstring>(const FrameIndex initialFixedFrameIndex, const Transform initialFixedFrame_H_world=Transform::Identity())</argsstring>
+        <name>init</name>
+        <param>
+          <type>const FrameIndex</type>
+          <declname>initialFixedFrameIndex</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+          <declname>initialFixedFrame_H_world</declname>
+          <defval><ref refid="classiDynTree_1_1Transform_1a706809fe4f1904e07634ed3d0c493fcd" kindref="member">Transform::Identity</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>Initialize the odometry. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method initializes the world location w.r.t. to a frame that is not the frame that is initially assumed fixed. For this reason it is necessary to call updateKinematics at least once before calling this method.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">initialFixedFrameIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame initially assumed to be fixed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">initialFixedFrame_H_world</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pose of the world w.r.t. the initial fixed frame (default: identity, i.e. the initialFixedFrame is the world). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="159" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a178be52aa8212fd7738c477b634ce5e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SimpleLeggedOdometry::init</definition>
+        <argsstring>(const std::string &amp;initialFixedFrame, const std::string &amp;initialReferenceFrameForWorld, const Transform initialReferenceFrame_H_world=Transform::Identity())</argsstring>
+        <name>init</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>initialFixedFrame</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>initialReferenceFrameForWorld</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+          <declname>initialReferenceFrame_H_world</declname>
+          <defval><ref refid="classiDynTree_1_1Transform_1a706809fe4f1904e07634ed3d0c493fcd" kindref="member">Transform::Identity</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>Initialize the odometry, specifying separately initial fixed frame and world. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method initializes the world location w.r.t. to a frame that is not the frame that is initially assumed fixed, for this reason it is necessary to call updateKinematics at least once before calling this method.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">initialFixedFrame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame initially assumed to be fixed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">initialReferenceFrameForWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame in which the initial world is expressed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">initialReferenceFrame_H_world</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pose of the world w.r.t. the initial reference frame (default: identity, i.e. the initialReferenceFrameForWorld is the world). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="173" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a5b928f1cc685b759241d4a17cc2658ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SimpleLeggedOdometry::init</definition>
+        <argsstring>(const FrameIndex initialFixedFrameIndex, const FrameIndex initialReferenceFrameIndexForWorld, const Transform initialReferenceFrame_H_world=Transform::Identity())</argsstring>
+        <name>init</name>
+        <param>
+          <type>const FrameIndex</type>
+          <declname>initialFixedFrameIndex</declname>
+        </param>
+        <param>
+          <type>const FrameIndex</type>
+          <declname>initialReferenceFrameIndexForWorld</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+          <declname>initialReferenceFrame_H_world</declname>
+          <defval><ref refid="classiDynTree_1_1Transform_1a706809fe4f1904e07634ed3d0c493fcd" kindref="member">Transform::Identity</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>Initialize the odometry, specifying separately initial fixed frame and world. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method initializes the world location w.r.t. to a frame that is not the frame that is initially assumed fixed, for this reason it is necessary to call updateKinematics at least once before calling this method.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">initialFixedFrameIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame initially assumed to be fixed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">initialReferenceFrameIndexForWorld</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Frame in which the initial world is expressed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">initialReferenceFrame_H_world</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pose of the world w.r.t. the initial reference frame (default: identity, i.e. the initialReferenceFrameForWorld is the world). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="188" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1ade993eaed828dd9bd464cfc7c5eebee3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SimpleLeggedOdometry::changeFixedFrame</definition>
+        <argsstring>(const std::string &amp;newFixedFrame)</argsstring>
+        <name>changeFixedFrame</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>newFixedFrame</declname>
+        </param>
+        <briefdescription>
+<para>Change the link that the odometry assumes to be fixed with respect to the inertial/world frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="196" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1afa2880fc26e63213a98943041578d34d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SimpleLeggedOdometry::changeFixedFrame</definition>
+        <argsstring>(const FrameIndex newFixedFrame)</argsstring>
+        <name>changeFixedFrame</name>
+        <param>
+          <type>const FrameIndex</type>
+          <declname>newFixedFrame</declname>
+        </param>
+        <briefdescription>
+<para>Change the link that the odometry assumes to be fixed with respect to the inertial/world frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="202" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1aaf23541001dd123e74c42ba44d8f48e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SimpleLeggedOdometry::changeFixedFrame</definition>
+        <argsstring>(const std::string &amp;newFixedFrame, const Transform &amp;world_H_newFixedFrame)</argsstring>
+        <name>changeFixedFrame</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>newFixedFrame</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>world_H_newFixedFrame</declname>
+        </param>
+        <briefdescription>
+<para>Change the link that the odometry assumes to be fixed with respect to the inertial/world frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>The position of the external frame is set by the user </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="210" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a8e8e64afca6ad056a22a1c245e68a0d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SimpleLeggedOdometry::changeFixedFrame</definition>
+        <argsstring>(const FrameIndex newFixedFrame, const Transform &amp;world_H_newFixedFrame)</argsstring>
+        <name>changeFixedFrame</name>
+        <param>
+          <type>const FrameIndex</type>
+          <declname>newFixedFrame</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>world_H_newFixedFrame</declname>
+        </param>
+        <briefdescription>
+<para>Change the link that the odometry assumes to be fixed with respect to the inertial/world frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>The position of the external frame is set by the user </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="219" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1af4eba0d4270edf9a45b3057e3591dac5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::SimpleLeggedOdometry::getCurrentFixedLink</definition>
+        <argsstring>()</argsstring>
+        <name>getCurrentFixedLink</name>
+        <briefdescription>
+<para>Get the link currently considered fixed with respect to the inertial frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This can be diffent from what was set with changeFixedFrame, because multiple frames can belong to the same link.</para>
+</simplesect>
+<simplesect kind="return"><para>the name of the link currently considered fixed. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="230" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a5611d7fcba91a7a4b866a4f524b0574e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
+        <definition>iDynTree::Transform iDynTree::SimpleLeggedOdometry::getWorldLinkTransform</definition>
+        <argsstring>(const LinkIndex frame_index)</argsstring>
+        <name>getWorldLinkTransform</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>frame_index</declname>
+        </param>
+        <briefdescription>
+<para>Get the world_H_link transform for an arbitrary link. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>this method works only for link, not for arbitrary frames. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="237" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a30e3681591c3759b2eb719acafb9bfa9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
+        <definition>iDynTree::Transform iDynTree::SimpleLeggedOdometry::getWorldFrameTransform</definition>
+        <argsstring>(const FrameIndex frame_index)</argsstring>
+        <name>getWorldFrameTransform</name>
+        <param>
+          <type>const FrameIndex</type>
+          <declname>frame_index</declname>
+        </param>
+        <briefdescription>
+<para>Get the world_H_frame transform for an arbitrary frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>this method works also for arbitrary frames. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="244" column="25"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A simple legged odometry for a legged robot. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Under the assumption that at least a link of the robot at the time is not moving (no slippage), it computes the estimate of the transform between a inertial/world frame and the robot floating base.</para>
+<para>The algorithm implemented is the following :</para>
+<para><orderedlist>
+<listitem><para>During initialization the user of the class specifies (through <ref refid="classiDynTree_1_1SimpleLeggedOdometry_1a847b99153a839d0a49d64f04c8a9c49d" kindref="member">init()</ref>):<itemizedlist>
+<listitem><para>a frame that is rigidly attached to a link that is not moving (<computeroutput>initialFixedFrame</computeroutput>)</para>
+</listitem><listitem><para>an optional transform between the desired location of the world and the fixed frame (<computeroutput>world_H_initialFixedFrame</computeroutput>) At the beginning, the <computeroutput>world_H_fixed</computeroutput> is the one specified (default is the identity)</para>
+</listitem></itemizedlist>
+</para>
+</listitem><listitem><para>At this point, the <computeroutput><ref refid="classiDynTree_1_1SimpleLeggedOdometry_1a30e3681591c3759b2eb719acafb9bfa9" kindref="member">getWorldFrameTransform(iDynTree::FrameIndex frame_id)</ref></computeroutput> will return the <computeroutput>world_H_frame</computeroutput> ( <formula id="323">${}^{world} H_{frame}$</formula> ) transform simply by computing the forward kinematics from the fixed frame to the frame specified by <computeroutput>frame_id</computeroutput> : <computeroutput>world_H_frame = world_H_fixed * fixed_H_frame(qj)</computeroutput>, i.e. <formula id="324">${}^{world} H_{frame} = {}^{world} H_{fixed} \cdot {}^{fixed} H_{frame}(q_j)$</formula></para>
+</listitem><listitem><para>If the fixed frame changes, we can simply change the frame used as &quot;fixed&quot; (changeFixedLink()), and consistently update the <computeroutput>world_H_fixed</computeroutput> transform to be equal to <computeroutput>world_H_new_fixed = world_H_old_fixed * old_fixed_H_new_fixed(qj)</computeroutput>, i.e. <formula id="325">${}^{world} H_{new\_fixed} = {}^{world} H_{old\_fixed} \cdot {}^{old\_fixed} H_{new\_fixed}(q_j)$</formula></para>
+</listitem><listitem><para>After the update, the <computeroutput><ref refid="classiDynTree_1_1SimpleLeggedOdometry_1a30e3681591c3759b2eb719acafb9bfa9" kindref="member">getWorldFrameTransform(iDynTree::FrameIndex frame_id)</ref></computeroutput> can be obtained as in point 1b .</para>
+</listitem></orderedlist>
+</para>
+<para>To reset the location of the world, init can simply be called again. </para>
+    </detaileddescription>
+    <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="54" column="1" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="55" bodyend="245"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1ade993eaed828dd9bd464cfc7c5eebee3" prot="public" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>changeFixedFrame</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1afa2880fc26e63213a98943041578d34d" prot="public" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>changeFixedFrame</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1aaf23541001dd123e74c42ba44d8f48e6" prot="public" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>changeFixedFrame</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1a8e8e64afca6ad056a22a1c245e68a0d8" prot="public" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>changeFixedFrame</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1af4eba0d4270edf9a45b3057e3591dac5" prot="public" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>getCurrentFixedLink</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1a30e3681591c3759b2eb719acafb9bfa9" prot="public" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>getWorldFrameTransform</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1a5611d7fcba91a7a4b866a4f524b0574e" prot="public" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>getWorldLinkTransform</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1a847b99153a839d0a49d64f04c8a9c49d" prot="public" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>init</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1a6452e51cce27c452f145a93e5a172320" prot="public" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>init</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1a178be52aa8212fd7738c477b634ce5e8" prot="public" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>init</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1a5b928f1cc685b759241d4a17cc2658ec" prot="public" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>init</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1a0b78d126c5aa732c11ed963115fd0c6c" prot="private" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>m_base_H_link</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1a2b5c00f05faa080830f9db26f4606d65" prot="private" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>m_fixedLinkIndex</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1aface6c5d0b430f1521340f6f72b32710" prot="private" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>m_isModelValid</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1af49a63a2894a756b7531f6ffa5d3f799" prot="private" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>m_isOdometryInitialized</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1a12f477dea8b2c8d9d35ad072c7f3d26b" prot="private" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>m_kinematicsUpdated</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1a7b22482ade5d736ad064a75fe33c87c9" prot="private" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>m_model</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1ae6fb2285b81cc651d820de9b176f69d4" prot="private" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>m_traversal</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1a6493052c27a7c745c40ac2435086eeb8" prot="private" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>m_world_H_fixedLink</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1a7bcd1dcdd997919a6bdf16fe5eb0355a" prot="public" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>model</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1a98d2477422589b8c6db8aa8b9a251bd6" prot="public" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>setModel</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1a189c13e9ff5d64f3b8b05034f7cedb64" prot="public" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>SimpleLeggedOdometry</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1a78a57dc95b9f1fa55c04a46d3d9b22dd" prot="public" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>updateKinematics</name></member>
+      <member refid="classiDynTree_1_1SimpleLeggedOdometry_1a6bacff4fe44806f3c951d952ff3374c8" prot="public" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>~SimpleLeggedOdometry</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

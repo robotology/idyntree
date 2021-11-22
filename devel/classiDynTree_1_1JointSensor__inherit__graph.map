@@ -1,5 +1,0 @@
-<map id="iDynTree::JointSensor" name="iDynTree::JointSensor">
-<area shape="rect" id="node1" title="Interface for Sensor that are associated to a Joint." alt="" coords="32,80,192,107"/>
-<area shape="rect" id="node3" href="$classiDynTree_1_1SixAxisForceTorqueSensor.html" title="A six axis force torque sensor class implementation of the Sensor." alt="" coords="5,155,219,196"/>
-<area shape="rect" id="node2" href="$classiDynTree_1_1Sensor.html" title="Interface for Sensor classes in iDynTree ." alt="" coords="47,5,177,32"/>
-</map>

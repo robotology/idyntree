@@ -1,0 +1,447 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1XMLParser" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::XMLParser</compoundname>
+    <includes local="no">iDynTree/XMLParser.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1XMLParser_1a5a5f98199af392748ea740e7db1a4d7d" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; XMLParserPimpl &gt;</type>
+        <definition>std::unique_ptr&lt;XMLParserPimpl&gt; iDynTree::XMLParser::m_pimpl</definition>
+        <argsstring></argsstring>
+        <name>m_pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLParser.h" line="74" column="21" bodyfile="iDynTree/XMLParser.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1XMLParser_1a3971aff454d18f2e2e0cfdf93b284d44" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::XMLParser::XMLParser</definition>
+        <argsstring>()</argsstring>
+        <name>XMLParser</name>
+        <briefdescription>
+<para>Default constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLParser.h" line="81" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLParser_1ac57715b6b0bbe0a368042d6b1a57ab90" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::XMLParser::~XMLParser</definition>
+        <argsstring>()</argsstring>
+        <name>~XMLParser</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLParser.h" line="86" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLParser_1a380d48c74008493f76bbfa89d27a9c72" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::XMLParser::keepTreeInMemory</definition>
+        <argsstring>() const</argsstring>
+        <name>keepTreeInMemory</name>
+        <briefdescription>
+<para>Returns true if the parsed tree is ketp in memory. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classiDynTree_1_1XMLParser_1a4298a1f57d35727ece02b59197e58026" kindref="member">setKeepTreeInMemory(bool)</ref> </para>
+</simplesect>
+<simplesect kind="return"><para>true if the parsed tree is kept on memory. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLParser.h" line="93" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLParser_1a4298a1f57d35727ece02b59197e58026" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::XMLParser::setKeepTreeInMemory</definition>
+        <argsstring>(bool keepTreeInMemory)</argsstring>
+        <name>setKeepTreeInMemory</name>
+        <param>
+          <type>bool</type>
+          <declname>keepTreeInMemory</declname>
+        </param>
+        <briefdescription>
+<para>Set if the parse tree should be kept in memory. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classiDynTree_1_1XMLParser_1a380d48c74008493f76bbfa89d27a9c72" kindref="member">keepTreeInMemory</ref> </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>keepTreeInMemory</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>true if the tree should be kept in memory. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLParser.h" line="100" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLParser_1af57bd10e7fe04805404009f5fc2f3492" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::XMLParser::logParsing</definition>
+        <argsstring>() const</argsstring>
+        <name>logParsing</name>
+        <briefdescription>
+<para>Returns true if the parser logs the parsing to standard output. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classiDynTree_1_1XMLParser_1a7a13e1f8f9a88d8bbc3c14d9c7cd26f4" kindref="member">setLogParsing(bool)</ref> </para>
+</simplesect>
+<simplesect kind="return"><para>true if log to standard output is enabled. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLParser.h" line="107" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLParser_1a7a13e1f8f9a88d8bbc3c14d9c7cd26f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::XMLParser::setLogParsing</definition>
+        <argsstring>(bool enableLogging)</argsstring>
+        <name>setLogParsing</name>
+        <param>
+          <type>bool</type>
+          <declname>enableLogging</declname>
+        </param>
+        <briefdescription>
+<para>Set the logging option of the parser. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>see logParsing <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>enableLogging</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>true if the parser should log to standard output. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLParser.h" line="114" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLParser_1a53d7a4b6fffcd67e9de72c08440eb0fa" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::XMLParser::validateXML</definition>
+        <argsstring>() const</argsstring>
+        <name>validateXML</name>
+        <briefdescription>
+<para>Returns true if the validation option is enabled. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classiDynTree_1_1XMLParser_1afd804a5fff0adbd9b87b1df2520218cb" kindref="member">setValidateXML(bool)</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classiDynTree_1_1XMLParser_1a3bce709cb8baa967de9cd8521ea1293d" kindref="member">schemaLocation</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classiDynTree_1_1XMLParser_1ad0b611b820cdfd53e93de8b4eab30c6b" kindref="member">setSchemaLocation(std::string)</ref> </para>
+</simplesect>
+<simplesect kind="return"><para>true if the XML should be validated against a schema. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLParser.h" line="123" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLParser_1afd804a5fff0adbd9b87b1df2520218cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::XMLParser::setValidateXML</definition>
+        <argsstring>(bool validate)</argsstring>
+        <name>setValidateXML</name>
+        <param>
+          <type>bool</type>
+          <declname>validate</declname>
+        </param>
+        <briefdescription>
+<para>Set the option to perform Schema validation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>both an XSD schema location and this option should be specified to perform validation.</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classiDynTree_1_1XMLParser_1a53d7a4b6fffcd67e9de72c08440eb0fa" kindref="member">validateXML</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classiDynTree_1_1XMLParser_1a3bce709cb8baa967de9cd8521ea1293d" kindref="member">schemaLocation</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classiDynTree_1_1XMLParser_1ad0b611b820cdfd53e93de8b4eab30c6b" kindref="member">setSchemaLocation(std::string)</ref></para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>validate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>true if the XML should be validated against a XSD. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLParser.h" line="137" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLParser_1a3bce709cb8baa967de9cd8521ea1293d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::XMLParser::schemaLocation</definition>
+        <argsstring>() const</argsstring>
+        <name>schemaLocation</name>
+        <briefdescription>
+<para>Returns the current schema location used for validation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classiDynTree_1_1XMLParser_1a53d7a4b6fffcd67e9de72c08440eb0fa" kindref="member">validateXML</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classiDynTree_1_1XMLParser_1afd804a5fff0adbd9b87b1df2520218cb" kindref="member">setValidateXML(bool)</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classiDynTree_1_1XMLParser_1ad0b611b820cdfd53e93de8b4eab30c6b" kindref="member">setSchemaLocation(std::string)</ref></para>
+</simplesect>
+<simplesect kind="return"><para>the current schema location. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLParser.h" line="148" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLParser_1ad0b611b820cdfd53e93de8b4eab30c6b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::XMLParser::setSchemaLocation</definition>
+        <argsstring>(std::string schemaLocation)</argsstring>
+        <name>setSchemaLocation</name>
+        <param>
+          <type>std::string</type>
+          <declname>schemaLocation</declname>
+        </param>
+        <briefdescription>
+<para>Sets the XSD schema location. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>to perform the validation, the option should be explicitly set, together with the schema location.</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classiDynTree_1_1XMLParser_1a53d7a4b6fffcd67e9de72c08440eb0fa" kindref="member">validateXML</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classiDynTree_1_1XMLParser_1afd804a5fff0adbd9b87b1df2520218cb" kindref="member">setValidateXML(bool)</ref> </para>
+</simplesect>
+<simplesect kind="see"><para>schemaLocation(std::string)</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>schemaLocation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the new XSD schema location. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLParser.h" line="161" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLParser_1ab88dc1c938c5bb0397e2abdcf1064002" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::XMLParser::parseXMLFile</definition>
+        <argsstring>(std::string absoluteFileName)</argsstring>
+        <name>parseXMLFile</name>
+        <param>
+          <type>std::string</type>
+          <declname>absoluteFileName</declname>
+        </param>
+        <briefdescription>
+<para>Parse the specified XML file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the validation option is enabled, the XML file will be also validated against the specified XSD schema.</para>
+<para><simplesect kind="see"><para><ref refid="classiDynTree_1_1XMLParser_1afd804a5fff0adbd9b87b1df2520218cb" kindref="member">setValidateXML(bool)</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classiDynTree_1_1XMLParser_1ad0b611b820cdfd53e93de8b4eab30c6b" kindref="member">setSchemaLocation(std::string)</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classiDynTree_1_1XMLParser_1a4ccc2d4850f255cf9714d51e8fa344d1" kindref="member">parseXMLString(std::string)</ref></para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>absoluteFileName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the XML file to be parsed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the document is valid and successfully parsed. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLParser.h" line="176" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLParser_1a4ccc2d4850f255cf9714d51e8fa344d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::XMLParser::parseXMLString</definition>
+        <argsstring>(std::string xmlString)</argsstring>
+        <name>parseXMLString</name>
+        <param>
+          <type>std::string</type>
+          <declname>xmlString</declname>
+        </param>
+        <briefdescription>
+<para>Parse the specified XML document string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>XSD validation is currently not supported for in-memory parsing. Use <ref refid="classiDynTree_1_1XMLParser_1ab88dc1c938c5bb0397e2abdcf1064002" kindref="member">parseXMLFile(std::string)</ref> instead</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classiDynTree_1_1XMLParser_1ab88dc1c938c5bb0397e2abdcf1064002" kindref="member">parseXMLFile(std::string)</ref></para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>xmlString</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>string containing a valid XML content. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the XML document is valid and successfully parsed. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLParser.h" line="189" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLParser_1aaf18ad736bf7a6ed165e1b533ed29e06" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::XMLParser::setDocumentFactory</definition>
+        <argsstring>(std::function&lt; std::shared_ptr&lt; XMLDocument &gt;()&gt; factory)</argsstring>
+        <name>setDocumentFactory</name>
+        <param>
+          <type>std::function&lt; std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLDocument" kindref="compound">XMLDocument</ref> &gt;()&gt;</type>
+          <declname>factory</declname>
+        </param>
+        <briefdescription>
+<para>Set the factory function responsible of creating a new <ref refid="classiDynTree_1_1XMLDocument" kindref="compound">XMLDocument</ref> element. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>By specifying a new factory function, it is possible to change how the XML document will be represented in memory. The signature of the function is <computeroutput>(void) -&gt; std::shared_ptr&lt;<ref refid="classiDynTree_1_1XMLDocument" kindref="compound">XMLDocument</ref>&gt;</computeroutput>, i.e. a function accepting no arguments and returning a <computeroutput>std::shared_ptr</computeroutput> to an <computeroutput><ref refid="classiDynTree_1_1XMLDocument" kindref="compound">XMLDocument</ref></computeroutput> object.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>factory</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the function that will be called for instantiating a new <ref refid="classiDynTree_1_1XMLDocument" kindref="compound">XMLDocument</ref> object. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLParser.h" line="201" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLParser_1affab248cde90245f3df3d5fb5b50476d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; const <ref refid="classiDynTree_1_1XMLDocument" kindref="compound">XMLDocument</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;const XMLDocument&gt; iDynTree::XMLParser::document</definition>
+        <argsstring>() const</argsstring>
+        <name>document</name>
+        <briefdescription>
+<para>Returns the current parsed document. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the parsed document. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLParser.h" line="210" column="21"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>XML Parser class. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Use this class to parse XML files. It currently supports the following features<itemizedlist>
+<listitem><para>XSD validation</para>
+</listitem><listitem><para>Extensibility (by providing a different root object for the XML hierarchy.</para>
+</listitem></itemizedlist>
+</para>
+<sect2 id="classiDynTree_1_1XMLParser_1autotoc_md2">
+<title>Common usage</title>
+<para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Allocate<sp/>parser</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">std::shared_ptr&lt;XMLParser&gt;<sp/>parser<sp/>=<sp/>std::make_shared&lt;XMLParser&gt;();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>If<sp/>needed,<sp/>you<sp/>can<sp/>customize<sp/>the<sp/>class<sp/>representing<sp/>the<sp/>XML<sp/>Document</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>just<sp/>set<sp/>a<sp/>function<sp/>returning<sp/>a<sp/>subclass<sp/>of<sp/>XMLElement</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">parser-&gt;setDocumentFactory([]{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::shared_ptr&lt;XMLDocument&gt;(</highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>MyCustomXMLDocument);<sp/>});</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Parse</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">parser-&gt;parseXMLFile(filename);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>You<sp/>can<sp/>retrieve<sp/>the<sp/>Document<sp/>after<sp/>the<sp/>parsing</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">std::shared_ptr&lt;const<sp/>XMLDocument&gt;<sp/><ref refid="classiDynTree_1_1XMLParser_1affab248cde90245f3df3d5fb5b50476d" kindref="member">document</ref><sp/>=<sp/>parser-&gt;document();</highlight></codeline>
+</programlisting> </para>
+</sect2>
+<sect2 id="classiDynTree_1_1XMLParser_1autotoc_md3">
+<title>Description</title>
+</sect2>
+<sect2 id="classiDynTree_1_1XMLParser_1autotoc_md4">
+<title>Validation support</title>
+<para>The parser supports XSD schema validation. This options is controlled by two methods:</para>
+<para><itemizedlist>
+<listitem><para><computeroutput>setValidateXML</computeroutput> accepts a boolean, to enable the validation</para>
+</listitem><listitem><para><computeroutput>setSchemaLocation</computeroutput> specifies the location of the XSD schema.</para>
+</listitem></itemizedlist>
+</para>
+<para>If both variables are set, the validation will take place before parsing. Note that currently the errors are output to standard error (or output?) and not handled directly in the code. It might be possible to handle those in code though (feature request).</para>
+</sect2>
+<sect2 id="classiDynTree_1_1XMLParser_1autotoc_md5">
+<title>Todos:</title>
+<para>Possible feature requests:</para>
+<para><itemizedlist>
+<listitem><para>parse entities out of context (xmlSAXParseEntity)</para>
+</listitem><listitem><para>Validation for in memory parsing</para>
+</listitem><listitem><para>Use libxml in memory tree (that can be modified and dumped to file) instead of custom tree </para>
+</listitem></itemizedlist>
+</para>
+</sect2>
+    </detaileddescription>
+    <location file="iDynTree/XMLParser.h" line="71" column="1" bodyfile="iDynTree/XMLParser.h" bodystart="71" bodyend="212"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1XMLParser_1affab248cde90245f3df3d5fb5b50476d" prot="public" virt="non-virtual"><scope>iDynTree::XMLParser</scope><name>document</name></member>
+      <member refid="classiDynTree_1_1XMLParser_1a380d48c74008493f76bbfa89d27a9c72" prot="public" virt="non-virtual"><scope>iDynTree::XMLParser</scope><name>keepTreeInMemory</name></member>
+      <member refid="classiDynTree_1_1XMLParser_1af57bd10e7fe04805404009f5fc2f3492" prot="public" virt="non-virtual"><scope>iDynTree::XMLParser</scope><name>logParsing</name></member>
+      <member refid="classiDynTree_1_1XMLParser_1a5a5f98199af392748ea740e7db1a4d7d" prot="private" virt="non-virtual"><scope>iDynTree::XMLParser</scope><name>m_pimpl</name></member>
+      <member refid="classiDynTree_1_1XMLParser_1ab88dc1c938c5bb0397e2abdcf1064002" prot="public" virt="non-virtual"><scope>iDynTree::XMLParser</scope><name>parseXMLFile</name></member>
+      <member refid="classiDynTree_1_1XMLParser_1a4ccc2d4850f255cf9714d51e8fa344d1" prot="public" virt="non-virtual"><scope>iDynTree::XMLParser</scope><name>parseXMLString</name></member>
+      <member refid="classiDynTree_1_1XMLParser_1a3bce709cb8baa967de9cd8521ea1293d" prot="public" virt="non-virtual"><scope>iDynTree::XMLParser</scope><name>schemaLocation</name></member>
+      <member refid="classiDynTree_1_1XMLParser_1aaf18ad736bf7a6ed165e1b533ed29e06" prot="public" virt="non-virtual"><scope>iDynTree::XMLParser</scope><name>setDocumentFactory</name></member>
+      <member refid="classiDynTree_1_1XMLParser_1a4298a1f57d35727ece02b59197e58026" prot="public" virt="non-virtual"><scope>iDynTree::XMLParser</scope><name>setKeepTreeInMemory</name></member>
+      <member refid="classiDynTree_1_1XMLParser_1a7a13e1f8f9a88d8bbc3c14d9c7cd26f4" prot="public" virt="non-virtual"><scope>iDynTree::XMLParser</scope><name>setLogParsing</name></member>
+      <member refid="classiDynTree_1_1XMLParser_1ad0b611b820cdfd53e93de8b4eab30c6b" prot="public" virt="non-virtual"><scope>iDynTree::XMLParser</scope><name>setSchemaLocation</name></member>
+      <member refid="classiDynTree_1_1XMLParser_1afd804a5fff0adbd9b87b1df2520218cb" prot="public" virt="non-virtual"><scope>iDynTree::XMLParser</scope><name>setValidateXML</name></member>
+      <member refid="classiDynTree_1_1XMLParser_1a53d7a4b6fffcd67e9de72c08440eb0fa" prot="public" virt="non-virtual"><scope>iDynTree::XMLParser</scope><name>validateXML</name></member>
+      <member refid="classiDynTree_1_1XMLParser_1a3971aff454d18f2e2e0cfdf93b284d44" prot="public" virt="non-virtual"><scope>iDynTree::XMLParser</scope><name>XMLParser</name></member>
+      <member refid="classiDynTree_1_1XMLParser_1ac57715b6b0bbe0a368042d6b1a57ab90" prot="public" virt="non-virtual"><scope>iDynTree::XMLParser</scope><name>~XMLParser</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

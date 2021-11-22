@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="InverseKinematics_8h" kind="file" language="C++">
+    <compoundname>InverseKinematics.h</compoundname>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
+    <includes refid="ConvexHullHelpers_8h" local="no">iDynTree/ConvexHullHelpers.h</includes>
+    <includes refid="Direction_8h" local="no">iDynTree/Core/Direction.h</includes>
+    <includedby refid="InverseKinematicsData_8h" local="no">private/InverseKinematicsData.h</includedby>
+    <includedby refid="TransformConstraint_8h" local="no">private/TransformConstraint.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>string</label>
+      </node>
+      <node id="3">
+        <label>vector</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/InverseKinematics.h</label>
+        <link refid="InverseKinematics_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1InverseKinematics" prot="public">iDynTree::InverseKinematics</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="InverseKinematics_8h_1a04da5add9479687cf4c7eb873e717c6c" prot="public" static="no" strong="no">
+        <type></type>
+        <name>InverseKinematicsRotationParametrization</name>
+        <enumvalue id="InverseKinematics_8h_1a04da5add9479687cf4c7eb873e717c6ca6bbd58481084418979b449c46aff99a8" prot="public">
+          <name>InverseKinematicsRotationParametrizationQuaternion</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Quaternion parametrization </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="InverseKinematics_8h_1a04da5add9479687cf4c7eb873e717c6caad8ec2efa81330efbf416e7550113ca5" prot="public">
+          <name>InverseKinematicsRotationParametrizationRollPitchYaw</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Roll Pitch Yaw parametrization </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>type of parametrization for the rotation (SO3) element </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="37" column="5" bodyfile="iDynTree/InverseKinematics.h" bodystart="37" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="enum" id="InverseKinematics_8h_1a5cb905194c9ee61c0a23b32d603b2df2" prot="public" static="no" strong="no">
+        <type></type>
+        <name>InverseKinematicsTreatTargetAsConstraint</name>
+        <enumvalue id="InverseKinematics_8h_1a5cb905194c9ee61c0a23b32d603b2df2aa3f7c6e0138052de9bc8a0d3dcd9d712" prot="public">
+          <name>InverseKinematicsTreatTargetAsConstraintNone</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="InverseKinematics_8h_1a5cb905194c9ee61c0a23b32d603b2df2a786b8aeaff64c77f025cec462c47206b" prot="public">
+          <name>InverseKinematicsTreatTargetAsConstraintPositionOnly</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="InverseKinematics_8h_1a5cb905194c9ee61c0a23b32d603b2df2aad1cbbc20ef9d02ff21364a90f781681" prot="public">
+          <name>InverseKinematicsTreatTargetAsConstraintRotationOnly</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="InverseKinematics_8h_1a5cb905194c9ee61c0a23b32d603b2df2a90e54d63819ec0bff0f8eec68beff50b" prot="public">
+          <name>InverseKinematicsTreatTargetAsConstraintFull</name>
+          <initializer>= InverseKinematicsTreatTargetAsConstraintPositionOnly | InverseKinematicsTreatTargetAsConstraintRotationOnly</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Specify how to solve for the desired target. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>A target frame can be solved as a constraints (i.e. if it cannot be obtained the problem is unfeasible) or as a cost (best-effort to reach the target) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="61" column="5" bodyfile="iDynTree/InverseKinematics.h" bodystart="61" bodyend="66"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="InverseKinematics_8h_1a399f5a8eff425f1036038ee927fb81cb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int iDynTree::sizeOfRotationParametrization</definition>
+        <argsstring>(enum InverseKinematicsRotationParametrization rotationParametrization)</argsstring>
+        <name>sizeOfRotationParametrization</name>
+        <param>
+          <type>enum InverseKinematicsRotationParametrization</type>
+          <declname>rotationParametrization</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="42" column="16" bodyfile="iDynTree/InverseKinematics.h" bodystart="42" bodyend="52"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/InverseKinematics.h"/>
+  </compounddef>
+</doxygen>

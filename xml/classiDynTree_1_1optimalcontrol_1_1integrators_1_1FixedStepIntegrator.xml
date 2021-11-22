@@ -1,0 +1,280 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</compoundname>
+    <basecompoundref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator" prot="public" virt="non-virtual">iDynTree::optimalcontrol::integrators::Integrator</basecompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ForwardEuler" prot="public" virt="non-virtual">iDynTree::optimalcontrol::integrators::ForwardEuler</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal" prot="public" virt="non-virtual">iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4" prot="public" virt="non-virtual">iDynTree::optimalcontrol::integrators::RK4</derivedcompoundref>
+    <includes local="no">iDynTree/Integrators/FixedStepIntegrator.h</includes>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator_1ab5b7266da1fad6d293766fc19a47c905" prot="protected" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::FixedStepIntegrator::oneStepIntegration</definition>
+        <argsstring>(double t0, double dT, const VectorDynSize &amp;x0, VectorDynSize &amp;x)=0</argsstring>
+        <name>oneStepIntegration</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ForwardEuler_1a13a7b130a551480812202a7bddc64d2b">oneStepIntegration</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a33270f7b5cb32789062af5a84ff0c117">oneStepIntegration</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4_1aded7c5bc06f2ce513d5aea5314a5b5bb">oneStepIntegration</reimplementedby>
+        <param>
+          <type>double</type>
+          <declname>t0</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dT</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>x0</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/FixedStepIntegrator.h" line="39" column="30"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator_1a64fe09ecf248c2b8653a452409f49670" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::integrators::FixedStepIntegrator::FixedStepIntegrator</definition>
+        <argsstring>()</argsstring>
+        <name>FixedStepIntegrator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/FixedStepIntegrator.h" line="42" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator_1abe562bb33f310ad9b7c50ebf6190eac2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::integrators::FixedStepIntegrator::FixedStepIntegrator</definition>
+        <argsstring>(const std::shared_ptr&lt; iDynTree::optimalcontrol::DynamicalSystem &gt; dynamicalSystem)</argsstring>
+        <name>FixedStepIntegrator</name>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">iDynTree::optimalcontrol::DynamicalSystem</ref> &gt;</type>
+          <declname>dynamicalSystem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/FixedStepIntegrator.h" line="44" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator_1a8d485df01715d88a67803538965fcbc0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::optimalcontrol::integrators::FixedStepIntegrator::~FixedStepIntegrator</definition>
+        <argsstring>()</argsstring>
+        <name>~FixedStepIntegrator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/FixedStepIntegrator.h" line="46" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator_1a3f254a74a37663a3c8df1e61e88497a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::FixedStepIntegrator::integrate</definition>
+        <argsstring>(double initialTime, double finalTime) override</argsstring>
+        <name>integrate</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1ab95d5885f287e7364630a277d7fe8c56">integrate</reimplements>
+        <param>
+          <type>double</type>
+          <declname>initialTime</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>finalTime</declname>
+        </param>
+        <briefdescription>
+<para>Integrate the dynamical system with specified integration bounds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method should be implemented by the custom integrator. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">initialTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Lower integration bound. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">finalTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Upper integration bound. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successfull. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/FixedStepIntegrator.h" line="48" column="30"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::optimalcontrol::integrators::Integrator</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator"/>
+      </node>
+      <node id="5">
+        <label>iDynTree::optimalcontrol::integrators::RK4</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::optimalcontrol::integrators::ForwardEuler</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ForwardEuler"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="11">
+        <label>iDynTree::optimalcontrol::integrators::IntegratorInfo</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfo"/>
+      </node>
+      <node id="5">
+        <label>T</label>
+      </node>
+      <node id="4">
+        <label>std::shared_ptr&lt; T &gt;</label>
+        <childnode refid="5" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>iDynTree::VectorDynSize</label>
+        <link refid="classiDynTree_1_1VectorDynSize"/>
+      </node>
+      <node id="10">
+        <label>std::vector&lt; T &gt;</label>
+        <childnode refid="5" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::shared_ptr&lt; iDynTree::optimalcontrol::DynamicalSystem &gt;</label>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; iDynTree::optimalcontrol::DynamicalSystem &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::optimalcontrol::integrators::Integrator</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_dynamicalSystem_ptr</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_infoData</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_solution</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>m_info</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>iDynTree::optimalcontrol::integrators::SolutionElement</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement"/>
+        <childnode refid="9" relation="usage">
+          <edgelabel>stateAtT</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>std::vector&lt; iDynTree::optimalcontrol::integrators::SolutionElement &gt;</label>
+        <childnode refid="8" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="template-instance">
+          <edgelabel>&lt; iDynTree::optimalcontrol::integrators::SolutionElement &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>std::shared_ptr&lt; iDynTree::optimalcontrol::integrators::IntegratorInfoData &gt;</label>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; iDynTree::optimalcontrol::integrators::IntegratorInfoData &gt;</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Integrators/FixedStepIntegrator.h" line="35" column="13" bodyfile="iDynTree/Integrators/FixedStepIntegrator.h" bodystart="36" bodyend="50"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a5490ec3615ab91d85a84b85926d43ef1" prot="protected" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>allocateBuffers</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a1594f1f7ce88c5d45f585130c895b0a9" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>clearSolution</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a148992ef6281c95701bd33a8262eb7f9" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>dynamicalSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a4638d9ea1c915b7220e1d9b1dfc1fd08" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>evaluateCollocationConstraint</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a481d99de3957547ce59eb738ee9257d9" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>evaluateCollocationConstraintJacobian</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a4f4f2819f24168c576c5614f98efa1d8" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>evaluateCollocationConstraintSecondDerivatives</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator_1a64fe09ecf248c2b8653a452409f49670" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>FixedStepIntegrator</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator_1abe562bb33f310ad9b7c50ebf6190eac2" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>FixedStepIntegrator</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a717b37e86dd16ae7803889fc65929993" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>getCollocationConstraintJacobianControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1af435b7aec4ebd1702506a9229ff0f738" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>getCollocationConstraintJacobianStateSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1aeae704825f16a03c4a12d282fd525e42" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>getCollocationConstraintSecondDerivativeWRTControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a5867f7987daba0256adfb8d233eccbf6" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>getCollocationConstraintSecondDerivativeWRTStateControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a95763f06583ccbc1f3342673d9aa3779" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>getCollocationConstraintSecondDerivativeWRTStateSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a0b7ed351be29e3ddc4145824aec6b082" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>getFullSolution</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a7fd966d607d393a4dfa056206cd6d003" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>getSolution</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1acbf7100a4b6b9d9e64624bdfa1f32719" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>info</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator_1a3f254a74a37663a3c8df1e61e88497a5" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>integrate</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a06482af463ae25bd99ab513ca1bd8cb1" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>Integrator</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a2b692b4e55ba221411c7ab685d85afeb" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>Integrator</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1aa3887eac25d4dd53962204d0503c8e06" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>Integrator</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a3aeffb4013537d6f849f53a4864acc29" prot="protected" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>interpolatePoints</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a371179a8cb3e4b4a03a3a0d90d2e6cca" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>m_dTmax</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1aa9eb4f3c3a4da99f1ce27b28154e4bfb" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>m_dynamicalSystem_ptr</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a3b03ff054e91a4142240dea337524fa1" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>m_info</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a91cc593e13d13305e81b3e7fc5ae6276" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>m_infoData</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a25b9c2215f3bbf7940214925e3a55ede" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>m_solution</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a0d39d3023f056364a01963b7520a7c21" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>maximumStepSize</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator_1ab5b7266da1fad6d293766fc19a47c905" prot="protected" virt="pure-virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>oneStepIntegration</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a72bf5f94da63280de3c2b3223cd251e6" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>setDynamicalSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a6e2b9052aa9b0638ce7d2f8347b4fe00" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>setMaximumStepSize</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator_1a8d485df01715d88a67803538965fcbc0" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>~FixedStepIntegrator</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1ab0cf81d20474d5f8737e8f8df501f464" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</scope><name>~Integrator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

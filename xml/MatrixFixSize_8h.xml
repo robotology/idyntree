@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="MatrixFixSize_8h" kind="file" language="C++">
+    <compoundname>MatrixFixSize.h</compoundname>
+    <includes refid="Utils_8h" local="no">iDynTree/Core/Utils.h</includes>
+    <includes refid="MatrixView_8h" local="no">iDynTree/Core/MatrixView.h</includes>
+    <includes local="no">cassert</includes>
+    <includes local="no">cstring</includes>
+    <includes local="no">string</includes>
+    <includes local="no">iostream</includes>
+    <includes local="no">sstream</includes>
+    <includedby refid="DynamicsLinearization_8h" local="no">iDynTree/Model/DynamicsLinearization.h</includedby>
+    <includedby refid="DynamicsLinearizationHelpers_8h" local="no">iDynTree/Model/DynamicsLinearizationHelpers.h</includedby>
+    <includedby refid="ArticulatedBodyInertia_8h" local="no">iDynTree/Core/ArticulatedBodyInertia.h</includedby>
+    <includedby refid="EigenHelpers_8h" local="no">iDynTree/Core/EigenHelpers.h</includedby>
+    <includedby refid="RotationalInertiaRaw_8h" local="no">iDynTree/Core/RotationalInertiaRaw.h</includedby>
+    <includedby refid="RotationRaw_8h" local="no">iDynTree/Core/RotationRaw.h</includedby>
+    <includedby refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includedby>
+    <includedby refid="TransformDerivative_8h" local="no">iDynTree/Core/TransformDerivative.h</includedby>
+    <includedby refid="Triplets_8h" local="no">iDynTree/Core/Triplets.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>cassert</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/Core/MatrixFixSize.h</label>
+        <link refid="MatrixFixSize_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>string</label>
+      </node>
+      <node id="6">
+        <label>sstream</label>
+      </node>
+      <node id="5">
+        <label>iostream</label>
+      </node>
+      <node id="3">
+        <label>cstring</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1MatrixFixSize" prot="public">iDynTree::MatrixFixSize</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="MatrixFixSize_8h_1a3f95b4a0200fda604f7717bcb0781b89" prot="public" static="no">
+        <type>MatrixFixSize&lt; 1, 6 &gt;</type>
+        <definition>typedef MatrixFixSize&lt;1,6&gt; iDynTree::Matrix1x6</definition>
+        <argsstring></argsstring>
+        <name>Matrix1x6</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixFixSize.h" line="374" column="27" bodyfile="iDynTree/Core/MatrixFixSize.h" bodystart="374" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="MatrixFixSize_8h_1a2502487a002cb2aec7b06190dfd1e787" prot="public" static="no">
+        <type>MatrixFixSize&lt; 2, 3 &gt;</type>
+        <definition>typedef MatrixFixSize&lt;2,3&gt; iDynTree::Matrix2x3</definition>
+        <argsstring></argsstring>
+        <name>Matrix2x3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixFixSize.h" line="375" column="27" bodyfile="iDynTree/Core/MatrixFixSize.h" bodystart="375" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="MatrixFixSize_8h_1a1ab8ab0012e12e66db217bb4845881cf" prot="public" static="no">
+        <type>MatrixFixSize&lt; 3, 3 &gt;</type>
+        <definition>typedef MatrixFixSize&lt;3,3&gt; iDynTree::Matrix3x3</definition>
+        <argsstring></argsstring>
+        <name>Matrix3x3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixFixSize.h" line="376" column="27" bodyfile="iDynTree/Core/MatrixFixSize.h" bodystart="376" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="MatrixFixSize_8h_1a739bd7039fa167036447689c29104cb4" prot="public" static="no">
+        <type>MatrixFixSize&lt; 4, 4 &gt;</type>
+        <definition>typedef MatrixFixSize&lt;4,4&gt; iDynTree::Matrix4x4</definition>
+        <argsstring></argsstring>
+        <name>Matrix4x4</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixFixSize.h" line="377" column="27" bodyfile="iDynTree/Core/MatrixFixSize.h" bodystart="377" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="MatrixFixSize_8h_1aa8530f3c198c90d18ec29e68f4d5e5fc" prot="public" static="no">
+        <type>MatrixFixSize&lt; 6, 1 &gt;</type>
+        <definition>typedef MatrixFixSize&lt;6,1&gt; iDynTree::Matrix6x1</definition>
+        <argsstring></argsstring>
+        <name>Matrix6x1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixFixSize.h" line="378" column="27" bodyfile="iDynTree/Core/MatrixFixSize.h" bodystart="378" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="MatrixFixSize_8h_1ad298b89bf01794a5de35a255dd269d52" prot="public" static="no">
+        <type>MatrixFixSize&lt; 6, 6 &gt;</type>
+        <definition>typedef MatrixFixSize&lt;6,6&gt; iDynTree::Matrix6x6</definition>
+        <argsstring></argsstring>
+        <name>Matrix6x6</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixFixSize.h" line="379" column="27" bodyfile="iDynTree/Core/MatrixFixSize.h" bodystart="379" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="MatrixFixSize_8h_1a6d63b01d7d6de76185f849d32b9fbd29" prot="public" static="no">
+        <type>MatrixFixSize&lt; 6, 10 &gt;</type>
+        <definition>typedef MatrixFixSize&lt;6,10&gt; iDynTree::Matrix6x10</definition>
+        <argsstring></argsstring>
+        <name>Matrix6x10</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixFixSize.h" line="380" column="27" bodyfile="iDynTree/Core/MatrixFixSize.h" bodystart="380" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="MatrixFixSize_8h_1ad7bb9ef7fdaadb16f95a6e42cf32d622" prot="public" static="no">
+        <type>MatrixFixSize&lt; 10, 16 &gt;</type>
+        <definition>typedef MatrixFixSize&lt;10,16&gt; iDynTree::Matrix10x16</definition>
+        <argsstring></argsstring>
+        <name>Matrix10x16</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/MatrixFixSize.h" line="381" column="27" bodyfile="iDynTree/Core/MatrixFixSize.h" bodystart="381" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/MatrixFixSize.h"/>
+  </compounddef>
+</doxygen>

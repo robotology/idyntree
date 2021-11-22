@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_e92bd7cc5c3faa48a1797a843d5dac1f" kind="dir">
+    <compoundname>iDynTree</compoundname>
+    <innerdir refid="dir_c85dc9e218c42523ff9bc550df3028a9">iDynTree/yarp</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1BerdyDynamicVariable" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::BerdyDynamicVariable</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1BerdyDynamicVariable_1a589e92c8f4542ad8b0bab669103fdac0" prot="public" static="no" mutable="no">
+        <type><ref refid="group__iDynTreeExperimental_1ga83d8f828969dabc7dc82904d8de15312" kindref="member">iDynTree::BerdyDynamicVariablesTypes</ref></type>
+        <definition>iDynTree::BerdyDynamicVariablesTypes iDynTree::BerdyDynamicVariable::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>type of the dynamic variable </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="267" column="42" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="267" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1BerdyDynamicVariable_1aab0a375da4d5da6c8c51da7d076fcaa7" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::BerdyDynamicVariable::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>ID of the dynamic variable </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="268" column="17" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="268" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1BerdyDynamicVariable_1a16199a3b4bd74df1a8578ecf066e1524" prot="public" static="no" mutable="no">
+        <type><ref refid="structiDynTree_1_1IndexRange" kindref="compound">iDynTree::IndexRange</ref></type>
+        <definition>iDynTree::IndexRange iDynTree::BerdyDynamicVariable::range</definition>
+        <argsstring></argsstring>
+        <name>range</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Range of the dynamic variable (starting location in the dynamic equations and number of equations associated with the variable) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="269" column="26" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="269" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structiDynTree_1_1BerdyDynamicVariable_1aec4742379db719b896f9c548c7ce2701" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyDynamicVariable::operator==</definition>
+        <argsstring>(const struct BerdyDynamicVariable &amp;variable) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const struct <ref refid="structiDynTree_1_1BerdyDynamicVariable" kindref="compound">BerdyDynamicVariable</ref> &amp;</type>
+          <declname>variable</declname>
+        </param>
+        <briefdescription>
+<para>Overload of equality operator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Two variables are considered equals if they have the same type and id <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>variable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the variable to which the current variable is compared to </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the two variables are equal. False otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="280" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="structiDynTree_1_1BerdyDynamicVariable_1ab5a01f2e4131b103356568173de952eb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyDynamicVariable::operator&lt;</definition>
+        <argsstring>(const struct BerdyDynamicVariable &amp;variable) const</argsstring>
+        <name>operator&lt;</name>
+        <param>
+          <type>const struct <ref refid="structiDynTree_1_1BerdyDynamicVariable" kindref="compound">BerdyDynamicVariable</ref> &amp;</type>
+          <declname>variable</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="282" column="5"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="4">
+        <label>iDynTree::IndexRange</label>
+        <link refid="structiDynTree_1_1IndexRange"/>
+      </node>
+      <node id="3">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="1">
+        <label>iDynTree::BerdyDynamicVariable</label>
+        <link refid="structiDynTree_1_1BerdyDynamicVariable"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>id</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>range</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::string</label>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Estimation/BerdyHelper.h" line="266" column="1" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="266" bodyend="283"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1BerdyDynamicVariable_1aab0a375da4d5da6c8c51da7d076fcaa7" prot="public" virt="non-virtual"><scope>iDynTree::BerdyDynamicVariable</scope><name>id</name></member>
+      <member refid="structiDynTree_1_1BerdyDynamicVariable_1ab5a01f2e4131b103356568173de952eb" prot="public" virt="non-virtual"><scope>iDynTree::BerdyDynamicVariable</scope><name>operator&lt;</name></member>
+      <member refid="structiDynTree_1_1BerdyDynamicVariable_1aec4742379db719b896f9c548c7ce2701" prot="public" virt="non-virtual"><scope>iDynTree::BerdyDynamicVariable</scope><name>operator==</name></member>
+      <member refid="structiDynTree_1_1BerdyDynamicVariable_1a16199a3b4bd74df1a8578ecf066e1524" prot="public" virt="non-virtual"><scope>iDynTree::BerdyDynamicVariable</scope><name>range</name></member>
+      <member refid="structiDynTree_1_1BerdyDynamicVariable_1a589e92c8f4542ad8b0bab669103fdac0" prot="public" virt="non-virtual"><scope>iDynTree::BerdyDynamicVariable</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

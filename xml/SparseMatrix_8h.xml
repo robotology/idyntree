@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="SparseMatrix_8h" kind="file" language="C++">
+    <compoundname>SparseMatrix.h</compoundname>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/Core/VectorDynSize.h</includes>
+    <includes refid="Triplets_8h" local="no">iDynTree/Core/Triplets.h</includes>
+    <includes refid="Utils_8h" local="no">iDynTree/Core/Utils.h</includes>
+    <includes local="no">vector</includes>
+    <includedby refid="EigenHelpers_8h" local="no">iDynTree/Core/EigenHelpers.h</includedby>
+    <includedby refid="EigenSparseHelpers_8h" local="no">iDynTree/Core/EigenSparseHelpers.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>vector</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/Core/SparseMatrix.h</label>
+        <link refid="SparseMatrix_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1SparseMatrix" prot="public">iDynTree::SparseMatrix</innerclass>
+    <innerclass refid="classiDynTree_1_1SparseMatrix_1_1Iterator" prot="public">iDynTree::SparseMatrix::Iterator</innerclass>
+    <innerclass refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef" prot="public">iDynTree::SparseMatrix::Iterator::TripletRef</innerclass>
+    <innerclass refid="classiDynTree_1_1SparseMatrix_1_1ConstIterator" prot="public">iDynTree::SparseMatrix::ConstIterator</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/SparseMatrix.h"/>
+  </compounddef>
+</doxygen>

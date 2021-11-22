@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1DualSpace" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::DualSpace</compoundname>
+    <includes local="no">iDynTree/Core/SpatialVector.h</includes>
+    <templateparamlist>
+      <param>
+        <type>class SpatialVectorT</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>Helper structure for dual space definition. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/SpatialVector.h" line="55" column="16" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="55" bodyend="55"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

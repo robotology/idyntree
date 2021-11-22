@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1ModelExporterOptions" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::ModelExporterOptions</compoundname>
+    <includes local="no">iDynTree/ModelIO/ModelExporter.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1ModelExporterOptions_1af9ebe6e5ba3d83f9f8bf82a793161e07" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::ModelExporterOptions::baseLink</definition>
+        <argsstring></argsstring>
+        <name>baseLink</name>
+        <briefdescription>
+<para>Specify the base link of the exported model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Differently from the <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> class, some file formats (such as the URDF) represent the multibody structure using a directed tree representation, for which it is necessary to explicitly specify a base link.</para>
+<para>If this string is empty (default value), the default base link contained in the model will be used.</para>
+<para>Default value: &quot;&quot;. Supported formats: urdf. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="43" column="17" bodyfile="iDynTree/ModelIO/ModelExporter.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1ModelExporterOptions_1a776c8f98ae5c58e038e3a1962f9fd318" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::ModelExporterOptions::exportFirstBaseLinkAdditionalFrameAsFakeURDFBase</definition>
+        <argsstring></argsstring>
+        <name>exportFirstBaseLinkAdditionalFrameAsFakeURDFBase</name>
+        <briefdescription>
+<para>Select if the first additional frame of the base link is exported as fake base link. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The URDF exporter by default exports the first additional frame of the base link as a parent &quot;fake&quot; link to the actual base link, as a workaround for <ulink url="https://github.com/ros/kdl_parser/issues/27">https://github.com/ros/kdl_parser/issues/27</ulink>). By setting this option to false, is possible to disable this behaviour, for more info see <ref refid="classiDynTree_1_1ModelExporter" kindref="compound">iDynTree::ModelExporter</ref> docs. This option is ignored in non-URDF exporter.</para>
+<para>Default value: true. Supported formats: urdf. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="56" column="10" bodyfile="iDynTree/ModelIO/ModelExporter.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1ModelExporterOptions_1acc4e1f0ecb310fca1c6c632ff52cbf8a" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::ModelExporterOptions::robotExportedName</definition>
+        <argsstring></argsstring>
+        <name>robotExportedName</name>
+        <briefdescription>
+<para>Specify the robot name. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Default: &quot;iDynTreeURDFModelExportModelName&quot;. Supported formats: urdf. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="64" column="17" bodyfile="iDynTree/ModelIO/ModelExporter.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1ModelExporterOptions_1a5c7580ca273c3bc9c1311e9e4e5aff3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ModelExporterOptions::ModelExporterOptions</definition>
+        <argsstring>()</argsstring>
+        <name>ModelExporterOptions</name>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="69" column="5"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Options for the iDynTree exporter. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="1">
+        <label>iDynTree::ModelExporterOptions</label>
+        <link refid="classiDynTree_1_1ModelExporterOptions"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>baseLink</edgelabel>
+          <edgelabel>robotExportedName</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::string</label>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/ModelIO/ModelExporter.h" line="29" column="1" bodyfile="iDynTree/ModelIO/ModelExporter.h" bodystart="30" bodyend="71"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1ModelExporterOptions_1af9ebe6e5ba3d83f9f8bf82a793161e07" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporterOptions</scope><name>baseLink</name></member>
+      <member refid="classiDynTree_1_1ModelExporterOptions_1a776c8f98ae5c58e038e3a1962f9fd318" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporterOptions</scope><name>exportFirstBaseLinkAdditionalFrameAsFakeURDFBase</name></member>
+      <member refid="classiDynTree_1_1ModelExporterOptions_1a5c7580ca273c3bc9c1311e9e4e5aff3c" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporterOptions</scope><name>ModelExporterOptions</name></member>
+      <member refid="classiDynTree_1_1ModelExporterOptions_1acc4e1f0ecb310fca1c6c632ff52cbf8a" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporterOptions</scope><name>robotExportedName</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

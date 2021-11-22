@@ -1,0 +1,801 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classinternal_1_1kinematics_1_1TransformConstraint" kind="class" language="C++" prot="public">
+    <compoundname>internal::kinematics::TransformConstraint</compoundname>
+    <includes local="no">private/TransformConstraint.h</includes>
+      <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classinternal_1_1kinematics_1_1TransformConstraint_1aae569ceeb375670f5b2121ac7da5d525" prot="public" static="no" strong="no">
+        <type></type>
+        <name>TransformConstraintType</name>
+        <enumvalue id="classinternal_1_1kinematics_1_1TransformConstraint_1aae569ceeb375670f5b2121ac7da5d525a74879ea5bd8514c63144ed2597b64ca6" prot="public">
+          <name>TransformConstraintTypePosition</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>The trasform is related only to the position component (origin of the frame) <linebreak/>
+ </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classinternal_1_1kinematics_1_1TransformConstraint_1aae569ceeb375670f5b2121ac7da5d525a8cf0cfaccb3de41db2ba086380659a77" prot="public">
+          <name>TransformConstraintTypeRotation</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>The trasform is related only to the orientation component </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classinternal_1_1kinematics_1_1TransformConstraint_1aae569ceeb375670f5b2121ac7da5d525acd763304a605e1374ce33208cdab1711" prot="public">
+          <name>TransformConstraintTypeFullTransform</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>The full trasform is considered </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Type of the trasform constraint. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="49" column="5" bodyfile="private/TransformConstraint.h" bodystart="49" bodyend="53"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1TransformConstraint_1acd6dc4f445d7572be0fff5b70d9fae47" prot="private" static="no" mutable="no">
+        <type><ref refid="classinternal_1_1kinematics_1_1TransformConstraint_1aae569ceeb375670f5b2121ac7da5d525" kindref="member">TransformConstraintType</ref></type>
+        <definition>TransformConstraintType internal::kinematics::TransformConstraint::m_type</definition>
+        <argsstring></argsstring>
+        <name>m_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>type of transform </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="63" column="29" bodyfile="private/TransformConstraint.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1TransformConstraint_1a3725ed0da5506706af9c60011f973a91" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
+        <definition>iDynTree::Transform internal::kinematics::TransformConstraint::m_transform</definition>
+        <argsstring></argsstring>
+        <name>m_transform</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Constrained value for ${}^A H_C$. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="64" column="25" bodyfile="private/TransformConstraint.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1TransformConstraint_1a84a257fc4fa3c3af835162bb4d737307" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string internal::kinematics::TransformConstraint::m_frameName</definition>
+        <argsstring></argsstring>
+        <name>m_frameName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>C constrained frame. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="65" column="17" bodyfile="private/TransformConstraint.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1TransformConstraint_1ac0d48237a34c4af8307790bf9717be8b" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double internal::kinematics::TransformConstraint::m_posWeight</definition>
+        <argsstring></argsstring>
+        <name>m_posWeight</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Weight for the (eventual) cost associated with the position part of the task </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="66" column="12" bodyfile="private/TransformConstraint.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1TransformConstraint_1a5509c9a2bf257a41a54f126be1bc4ad1" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double internal::kinematics::TransformConstraint::m_rotWeight</definition>
+        <argsstring></argsstring>
+        <name>m_rotWeight</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Weight for the (eventual) cost associated with the rotation part of the task </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="67" column="12" bodyfile="private/TransformConstraint.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1TransformConstraint_1a37d585da74e44181f5d6eaf1764c53c2" prot="private" static="no" mutable="no">
+        <type>enum iDynTree::InverseKinematicsTreatTargetAsConstraint</type>
+        <definition>enum iDynTree::InverseKinematicsTreatTargetAsConstraint internal::kinematics::TransformConstraint::m_resolutionMode</definition>
+        <argsstring></argsstring>
+        <name>m_resolutionMode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Resolution mode in case of target </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="67" column="12" bodyfile="private/TransformConstraint.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1TransformConstraint_1ab6c83f27bdc1a041b32441dbd3101987" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool internal::kinematics::TransformConstraint::m_isActive</definition>
+        <argsstring></argsstring>
+        <name>m_isActive</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="69" column="10" bodyfile="private/TransformConstraint.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1a54e71f338e1d399a7188ae07e26ea240" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>internal::kinematics::TransformConstraint::TransformConstraint</definition>
+        <argsstring>(const std::string &amp;frameName, TransformConstraintType type)</argsstring>
+        <name>TransformConstraint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type><ref refid="classinternal_1_1kinematics_1_1TransformConstraint_1aae569ceeb375670f5b2121ac7da5d525" kindref="member">TransformConstraintType</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>frameName the name of the frame </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Private constructor</para>
+<para>type type of transfom </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="61" column="5"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1aea63c94ef65f09d03d20e6f5b2f07f0c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classinternal_1_1kinematics_1_1TransformConstraint" kindref="compound">TransformConstraint</ref></type>
+        <definition>static TransformConstraint internal::kinematics::TransformConstraint::positionConstraint</definition>
+        <argsstring>(const std::string &amp;frameName, const iDynTree::Position &amp;position, const double posWeight=1.0)</argsstring>
+        <name>positionConstraint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &amp;</type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>posWeight</declname>
+          <defval>1.0</defval>
+        </param>
+        <briefdescription>
+<para>create a position constraint for the specified frame </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Is the constraint active or not?</para>
+<para><simplesect kind="see"><para><ref refid="classinternal_1_1kinematics_1_1TransformConstraint_1ae04c3fc266f323518ad2beb8a2eca611" kindref="member">fullTransformConstraint</ref></para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>constrainedFrameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the constrained frame, i.e. C </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the position to be considered as constraint for the frame </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>posWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the weight of the position cost if the position is associated with a cost </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>a newly created <ref refid="classinternal_1_1kinematics_1_1TransformConstraint" kindref="compound">TransformConstraint</ref> object </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="82" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1aed8ff59a350a1a980caa5665d025bb93" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classinternal_1_1kinematics_1_1TransformConstraint" kindref="compound">TransformConstraint</ref></type>
+        <definition>static TransformConstraint internal::kinematics::TransformConstraint::rotationConstraint</definition>
+        <argsstring>(const std::string &amp;frameName, const iDynTree::Rotation &amp;rotation, const double rotWeight=1.0)</argsstring>
+        <name>rotationConstraint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Rotation" kindref="compound">iDynTree::Rotation</ref> &amp;</type>
+          <declname>rotation</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>rotWeight</declname>
+          <defval>1.0</defval>
+        </param>
+        <briefdescription>
+<para>create an orientation constraint for the specified frame </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classinternal_1_1kinematics_1_1TransformConstraint_1ae04c3fc266f323518ad2beb8a2eca611" kindref="member">fullTransformConstraint</ref></para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>constrainedFrameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the constrained frame, i.e. C </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the rotation to be considered as constraint for the frame </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rotWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the weight of the rotation cost if the rotation is associated with a cost </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>a newly created Transform object </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="93" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1ae04c3fc266f323518ad2beb8a2eca611" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classinternal_1_1kinematics_1_1TransformConstraint" kindref="compound">TransformConstraint</ref></type>
+        <definition>static TransformConstraint internal::kinematics::TransformConstraint::fullTransformConstraint</definition>
+        <argsstring>(const std::string &amp;constrainedFrameName, const iDynTree::Position &amp;position, const iDynTree::Rotation &amp;rotation, const double posWeight=1.0, const double rotWeight=1.0)</argsstring>
+        <name>fullTransformConstraint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>constrainedFrameName</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &amp;</type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Rotation" kindref="compound">iDynTree::Rotation</ref> &amp;</type>
+          <declname>rotation</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>posWeight</declname>
+          <defval>1.0</defval>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>rotWeight</declname>
+          <defval>1.0</defval>
+        </param>
+        <briefdescription>
+<para>create a full Transform constraint for the specified frame </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Equivalent to <programlisting><codeline><highlight class="normal">iDynTree::Transform<sp/>transform(rotation,<sp/>position);</highlight></codeline>
+<codeline><highlight class="normal">fullTransformConstraint(frameName,<sp/>transform);</highlight></codeline>
+</programlisting></para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>constrainedFrameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the constrained frame, i.e. C </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the position to be considered as constraint for the frame </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the rotation to be considered as constraint for the frame </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>posWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the weight of the position cost if the position is associated with a cost </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rotWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the weight of the rotation cost if the rotation is associated with a cost </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>a newly created Transform object </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="110" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1af1b3c28c5aa19b00d0d4da6959a3d426" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classinternal_1_1kinematics_1_1TransformConstraint" kindref="compound">TransformConstraint</ref></type>
+        <definition>static TransformConstraint internal::kinematics::TransformConstraint::fullTransformConstraint</definition>
+        <argsstring>(const std::string &amp;constrainedFrameName, const iDynTree::Transform &amp;transform, const double posWeight=1.0, const double rotWeight=1.0)</argsstring>
+        <name>fullTransformConstraint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>constrainedFrameName</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>transform</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>posWeight</declname>
+          <defval>1.0</defval>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>rotWeight</declname>
+          <defval>1.0</defval>
+        </param>
+        <briefdescription>
+<para>create a full Transform constraint for the specified frame </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Equivalent to <programlisting><codeline><highlight class="normal">fullTransformConstraint(frameName,<sp/>transform.getPosition(),<sp/>transform.getRotation());</highlight></codeline>
+</programlisting> <simplesect kind="see"><para><ref refid="classinternal_1_1kinematics_1_1TransformConstraint_1ae04c3fc266f323518ad2beb8a2eca611" kindref="member">fullTransformConstraint</ref></para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>constrainedFrameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the constrained frame, i.e. C </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>transform</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the transform to be considered as constraint for the frame </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>posWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the weight of the position cost if the position is associated with a cost </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rotWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the weight of the rotation cost if the rotation is associated with a cost </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>a newly created Transform object </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="130" column="32"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1ab62d89d1640da7c71043af7306e9af1c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned</type>
+        <definition>unsigned internal::kinematics::TransformConstraint::getSize</definition>
+        <argsstring>() const</argsstring>
+        <name>getSize</name>
+        <briefdescription>
+<para>return the size of the constraint identified by this Constrained </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>the rotation constraint is considered to be represented as a quaternion, i.e. size 4 </para>
+</simplesect>
+<simplesect kind="return"><para>size of the constraint </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="141" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1a90ece5b8b117c951e3daa618b5ad3c64" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classinternal_1_1kinematics_1_1TransformConstraint_1aae569ceeb375670f5b2121ac7da5d525" kindref="member">TransformConstraint::TransformConstraintType</ref></type>
+        <definition>TransformConstraint::TransformConstraintType internal::kinematics::TransformConstraint::getType</definition>
+        <argsstring>() const</argsstring>
+        <name>getType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>return the current type of <ref refid="classinternal_1_1kinematics_1_1TransformConstraint" kindref="compound">TransformConstraint</ref> <simplesect kind="return"><para>the transform type </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="147" column="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1a63a141104d6a958e0b406dad7da88f4f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool internal::kinematics::TransformConstraint::hasPositionConstraint</definition>
+        <argsstring>() const</argsstring>
+        <name>hasPositionConstraint</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Return if the current <ref refid="classinternal_1_1kinematics_1_1TransformConstraint" kindref="compound">TransformConstraint</ref> has a position constraint</para>
+<para><simplesect kind="return"><para>true if the <ref refid="classinternal_1_1kinematics_1_1TransformConstraint" kindref="compound">TransformConstraint</ref> has a component in the position part. False otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="153" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1a416cb3eea28f7763135360c443dbb46e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool internal::kinematics::TransformConstraint::hasRotationConstraint</definition>
+        <argsstring>() const</argsstring>
+        <name>hasRotationConstraint</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Return if the current <ref refid="classinternal_1_1kinematics_1_1TransformConstraint" kindref="compound">TransformConstraint</ref> has a rotation constraint</para>
+<para><simplesect kind="return"><para>true if the <ref refid="classinternal_1_1kinematics_1_1TransformConstraint" kindref="compound">TransformConstraint</ref> has a component in the rotation part. False otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="159" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1ae39e15002fe1dd9eb0e1af8c0fa580bd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &amp;</type>
+        <definition>const iDynTree::Position&amp; internal::kinematics::TransformConstraint::getPosition</definition>
+        <argsstring>() const</argsstring>
+        <name>getPosition</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Return the position component of the current constrained value of the Transform. <simplesect kind="return"><para>the transform position component </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="165" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1a7aa03cdc075ce535499bc3f38d8c129b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void internal::kinematics::TransformConstraint::setPosition</definition>
+        <argsstring>(const iDynTree::Position &amp;newPos)</argsstring>
+        <name>setPosition</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &amp;</type>
+          <declname>newPos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set the position component of the current constrained value of the Transform. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="170" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1a8f919f7c07ea7cf1af81de7eb604d64c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Rotation" kindref="compound">iDynTree::Rotation</ref> &amp;</type>
+        <definition>const iDynTree::Rotation&amp; internal::kinematics::TransformConstraint::getRotation</definition>
+        <argsstring>() const</argsstring>
+        <name>getRotation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Return the rotation component of the current constrained value of the Transform. <simplesect kind="return"><para>the transform rotation component </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="176" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1a0b5070a6ccb41e1fa9503aee5b266664" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void internal::kinematics::TransformConstraint::setRotation</definition>
+        <argsstring>(const iDynTree::Rotation &amp;newRot)</argsstring>
+        <name>setRotation</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Rotation" kindref="compound">iDynTree::Rotation</ref> &amp;</type>
+          <declname>newRot</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set the rotation component of the current constrained value of the Transform. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="181" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1a2f559d66390c8bdf5a62b6c2054b8925" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+        <definition>const iDynTree::Transform&amp; internal::kinematics::TransformConstraint::getTransform</definition>
+        <argsstring>() const</argsstring>
+        <name>getTransform</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Return the current constrained value of the Transform. <simplesect kind="return"><para>the transform </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="187" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1a46b04f4eee5f8a88fd637492144d6806" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string&amp; internal::kinematics::TransformConstraint::getFrameName</definition>
+        <argsstring>() const</argsstring>
+        <name>getFrameName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Return the name of the constrained frame <simplesect kind="return"><para>the transform frame name </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="193" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1ade2c7910317b7d5373e2b668aa7e1e47" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const double</type>
+        <definition>const double internal::kinematics::TransformConstraint::getPositionWeight</definition>
+        <argsstring>() const</argsstring>
+        <name>getPositionWeight</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Return the weight for the position <simplesect kind="return"><para>the weight for the position </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="199" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1afb45c0e46b7b181b03ac053fd054aa42" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void internal::kinematics::TransformConstraint::setPositionWeight</definition>
+        <argsstring>(const double newPosWeight)</argsstring>
+        <name>setPositionWeight</name>
+        <param>
+          <type>const double</type>
+          <declname>newPosWeight</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set the weight for the position </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="204" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1adbe7987551ef9ee0a23a8b403014c40b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const double</type>
+        <definition>const double internal::kinematics::TransformConstraint::getRotationWeight</definition>
+        <argsstring>() const</argsstring>
+        <name>getRotationWeight</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Return the weight for the rotation <simplesect kind="return"><para>the weight for the rotation </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="210" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1add76b23dcf1cda8c712935a70f865ea7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void internal::kinematics::TransformConstraint::setRotationWeight</definition>
+        <argsstring>(const double newRotWeight)</argsstring>
+        <name>setRotationWeight</name>
+        <param>
+          <type>const double</type>
+          <declname>newRotWeight</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set the weight for the position </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="215" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1ab101059da0fea68ee61bb18f88878243" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void internal::kinematics::TransformConstraint::setTargetResolutionMode</definition>
+        <argsstring>(enum iDynTree::InverseKinematicsTreatTargetAsConstraint mode)</argsstring>
+        <name>setTargetResolutionMode</name>
+        <param>
+          <type>enum iDynTree::InverseKinematicsTreatTargetAsConstraint</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set how targets should be considered in the optimization problem i.e. as soft or hard constraints</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>how to treat the targets </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="223" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1ad638c83865b64843c7c70fe2ecbd17bc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>enum iDynTree::InverseKinematicsTreatTargetAsConstraint</type>
+        <definition>enum iDynTree::InverseKinematicsTreatTargetAsConstraint internal::kinematics::TransformConstraint::targetResolutionMode</definition>
+        <argsstring>() const</argsstring>
+        <name>targetResolutionMode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Return the current rotation parametrization used by the solver <simplesect kind="return"><para>the current rotation parametrization </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="223" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1a07897a0dcb1a8e50f5dc4053033c94ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void internal::kinematics::TransformConstraint::setActive</definition>
+        <argsstring>(const bool isActive)</argsstring>
+        <name>setActive</name>
+        <param>
+          <type>const bool</type>
+          <declname>isActive</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set if the task is active or not </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="231" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1af305af8528a87aab8d2b85438cfde2a7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool internal::kinematics::TransformConstraint::isActive</definition>
+        <argsstring>() const</argsstring>
+        <name>isActive</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get if the task is active or not </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/TransformConstraint.h" line="234" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class representing a constraint (full or partial) on a transform between a given frame and the absolute frame. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The constraint can be of the following type, where we indicate with <formula id="4">$A$</formula> the absolute (world) frame and with <formula id="38">$C$</formula> the constrained frame.</para>
+<para>Full Transform constraint: the transform ${}^A H_C$ is constrained to a given constant value. Rotation Constraint: the rotation ${}^A R_C$ is constrained to a given constant value. Position Constraint: the linear position ${}^A o_C$ is constrained to a given constant value. </para>
+    </detaileddescription>
+    <location file="private/TransformConstraint.h" line="43" column="1" bodyfile="private/TransformConstraint.h" bodystart="43" bodyend="236"/>
+    <listofallmembers>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1ae04c3fc266f323518ad2beb8a2eca611" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>fullTransformConstraint</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1af1b3c28c5aa19b00d0d4da6959a3d426" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>fullTransformConstraint</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1a46b04f4eee5f8a88fd637492144d6806" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>getFrameName</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1ae39e15002fe1dd9eb0e1af8c0fa580bd" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>getPosition</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1ade2c7910317b7d5373e2b668aa7e1e47" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>getPositionWeight</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1a8f919f7c07ea7cf1af81de7eb604d64c" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>getRotation</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1adbe7987551ef9ee0a23a8b403014c40b" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>getRotationWeight</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1ab62d89d1640da7c71043af7306e9af1c" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>getSize</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1a2f559d66390c8bdf5a62b6c2054b8925" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>getTransform</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1a90ece5b8b117c951e3daa618b5ad3c64" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>getType</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1a63a141104d6a958e0b406dad7da88f4f" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>hasPositionConstraint</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1a416cb3eea28f7763135360c443dbb46e" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>hasRotationConstraint</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1af305af8528a87aab8d2b85438cfde2a7" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>isActive</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1a84a257fc4fa3c3af835162bb4d737307" prot="private" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>m_frameName</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1ab6c83f27bdc1a041b32441dbd3101987" prot="private" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>m_isActive</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1ac0d48237a34c4af8307790bf9717be8b" prot="private" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>m_posWeight</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1a37d585da74e44181f5d6eaf1764c53c2" prot="private" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>m_resolutionMode</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1a5509c9a2bf257a41a54f126be1bc4ad1" prot="private" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>m_rotWeight</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1a3725ed0da5506706af9c60011f973a91" prot="private" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>m_transform</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1acd6dc4f445d7572be0fff5b70d9fae47" prot="private" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>m_type</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1aea63c94ef65f09d03d20e6f5b2f07f0c" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>positionConstraint</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1aed8ff59a350a1a980caa5665d025bb93" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>rotationConstraint</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1a07897a0dcb1a8e50f5dc4053033c94ee" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>setActive</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1a7aa03cdc075ce535499bc3f38d8c129b" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>setPosition</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1afb45c0e46b7b181b03ac053fd054aa42" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>setPositionWeight</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1a0b5070a6ccb41e1fa9503aee5b266664" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>setRotation</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1add76b23dcf1cda8c712935a70f865ea7" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>setRotationWeight</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1ab101059da0fea68ee61bb18f88878243" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>setTargetResolutionMode</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1ad638c83865b64843c7c70fe2ecbd17bc" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>targetResolutionMode</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1a54e71f338e1d399a7188ae07e26ea240" prot="private" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>TransformConstraint</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1aae569ceeb375670f5b2121ac7da5d525" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>TransformConstraintType</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1aae569ceeb375670f5b2121ac7da5d525acd763304a605e1374ce33208cdab1711" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>TransformConstraintTypeFullTransform</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1aae569ceeb375670f5b2121ac7da5d525a74879ea5bd8514c63144ed2597b64ca6" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>TransformConstraintTypePosition</name></member>
+      <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1aae569ceeb375670f5b2121ac7da5d525a8cf0cfaccb3de41db2ba086380659a77" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>TransformConstraintTypeRotation</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

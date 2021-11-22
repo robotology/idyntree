@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1TestMatrixMismatch" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::TestMatrixMismatch</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1TestMatrixMismatch_1a494e7bed6dd1a5177f1b47a8717909fb" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::TestMatrixMismatch::match</definition>
+        <argsstring></argsstring>
+        <name>match</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="58" column="14" bodyfile="iDynTree/Core/TestUtils.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1TestMatrixMismatch_1ab6ffcf5077580483c50bdd7ff94a6aa8" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::TestMatrixMismatch::expected</definition>
+        <argsstring></argsstring>
+        <name>expected</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="59" column="16" bodyfile="iDynTree/Core/TestUtils.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1TestMatrixMismatch_1abb621257176b0e5b3e8d7c0b41a9d401" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::TestMatrixMismatch::realElement</definition>
+        <argsstring></argsstring>
+        <name>realElement</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="60" column="16" bodyfile="iDynTree/Core/TestUtils.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structiDynTree_1_1TestMatrixMismatch_1a678884537e4533bf9936857f3c8d7cb4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::TestMatrixMismatch::TestMatrixMismatch</definition>
+        <argsstring>(bool _match, double _expected, double _realElement)</argsstring>
+        <name>TestMatrixMismatch</name>
+        <param>
+          <type>bool</type>
+          <declname>_match</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>_expected</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>_realElement</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="62" column="9" bodyfile="iDynTree/Core/TestUtils.h" bodystart="62" bodyend="63"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/TestUtils.h" line="57" column="5" bodyfile="iDynTree/Core/TestUtils.h" bodystart="57" bodyend="64"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1TestMatrixMismatch_1ab6ffcf5077580483c50bdd7ff94a6aa8" prot="public" virt="non-virtual"><scope>iDynTree::TestMatrixMismatch</scope><name>expected</name></member>
+      <member refid="structiDynTree_1_1TestMatrixMismatch_1a494e7bed6dd1a5177f1b47a8717909fb" prot="public" virt="non-virtual"><scope>iDynTree::TestMatrixMismatch</scope><name>match</name></member>
+      <member refid="structiDynTree_1_1TestMatrixMismatch_1abb621257176b0e5b3e8d7c0b41a9d401" prot="public" virt="non-virtual"><scope>iDynTree::TestMatrixMismatch</scope><name>realElement</name></member>
+      <member refid="structiDynTree_1_1TestMatrixMismatch_1a678884537e4533bf9936857f3c8d7cb4" prot="public" virt="non-virtual"><scope>iDynTree::TestMatrixMismatch</scope><name>TestMatrixMismatch</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_ecb6d03c0733fbe44a25bdeb4ac364f3" kind="dir">
+    <compoundname>iDynTree</compoundname>
+    <innerdir refid="dir_2ea05bf7eecb6175b20c8dd90e13c33d">iDynTree/Sensors</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,558 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1ConvexHullProjectionConstraint" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::ConvexHullProjectionConstraint</compoundname>
+    <includes local="no">iDynTree/ConvexHullHelpers.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a64b41a74651fe40e58e8e01380732a74" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::ConvexHullProjectionConstraint::m_isActive</definition>
+        <argsstring></argsstring>
+        <name>m_isActive</name>
+        <briefdescription>
+<para>Flag to specify if the constraint is active or not. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="135" column="14" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a2fb8660bb7a22f483fa131afe9f0f0a1" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Polygon2D" kindref="compound">Polygon2D</ref></type>
+        <definition>Polygon2D iDynTree::ConvexHullProjectionConstraint::projectedConvexHull</definition>
+        <argsstring></argsstring>
+        <name>projectedConvexHull</name>
+        <briefdescription>
+<para>Convex hull expressed in the 2D project constraint plane. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is computed by the buildConvexHull method. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="159" column="19" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1ConvexHullProjectionConstraint_1ae9a9c4c0431f2304a4d96fbe05050c02" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
+        <definition>MatrixDynSize iDynTree::ConvexHullProjectionConstraint::A</definition>
+        <argsstring></argsstring>
+        <name>A</name>
+        <briefdescription>
+<para>A constraint matrix, such that Ax &lt;= b iff the com projection x is in the convex hull. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="164" column="23" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="164" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a5b139d3f1537af28205aa35951cf9efc" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref></type>
+        <definition>VectorDynSize iDynTree::ConvexHullProjectionConstraint::b</definition>
+        <argsstring></argsstring>
+        <name>b</name>
+        <briefdescription>
+<para>b vector, such that Ax &lt;= b iff the com projection x is in the convex hull. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="169" column="23" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="169" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a14a6666c07b7422f23842628c06dc869" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix2x3</ref></type>
+        <definition>Matrix2x3 iDynTree::ConvexHullProjectionConstraint::P</definition>
+        <argsstring></argsstring>
+        <name>P</name>
+        <briefdescription>
+<para>Projection matrix P, Note that x = P*(c-o), where x is the projection and c is the 3d COM . </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="175" column="19" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="175" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a1bad4948a74b4d6b609396ab13deea40" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix2x3</ref></type>
+        <definition>Matrix2x3 iDynTree::ConvexHullProjectionConstraint::Pdirection</definition>
+        <argsstring></argsstring>
+        <name>Pdirection</name>
+        <briefdescription>
+<para>Projection matrix &apos;Pdirection&apos; defined by a given direction. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The projection &apos;x&apos; of a 3D point &apos;c&apos; along a given vector is obtained as: x = Pdirection*(c-o). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="182" column="19" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="182" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a6045a81d03a76f3384b3c68ced17cfba" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
+        <definition>MatrixDynSize iDynTree::ConvexHullProjectionConstraint::AtimesP</definition>
+        <argsstring></argsstring>
+        <name>AtimesP</name>
+        <briefdescription>
+<para>Matrix obtained multiplyng the matrix A for the matrix P. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="187" column="23" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="187" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a041fceaaceea5cdc5a53670e26352f8c" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
+        <definition>iDynTree::Position iDynTree::ConvexHullProjectionConstraint::o</definition>
+        <argsstring></argsstring>
+        <name>o</name>
+        <briefdescription>
+<para>Plane offset o Note that x = P*(c-o), where x is the projection and c is the 3d COM . </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="193" column="28" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="193" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1ConvexHullProjectionConstraint_1abecdae2b60c7cbfd13b585679271f99b" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; iDynTree::ConvexHullProjectionConstraint::supportFrameIndices</definition>
+        <argsstring></argsstring>
+        <name>supportFrameIndices</name>
+        <briefdescription>
+<para>List of support frames. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="213" column="21" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="213" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a612270a7771c882f80c76d64a220e54a" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &gt;</type>
+        <definition>std::vector&lt;Transform&gt; iDynTree::ConvexHullProjectionConstraint::absoluteFrame_X_supportFrame</definition>
+        <argsstring></argsstring>
+        <name>absoluteFrame_X_supportFrame</name>
+        <briefdescription>
+<para>List of absolue_X_supportFrames. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="218" column="21" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="218" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a8cb77d8d52aaf5b0f186fde8066ff09c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::ConvexHullProjectionConstraint::buildConstraintMatrix</definition>
+        <argsstring>()</argsstring>
+        <name>buildConstraintMatrix</name>
+        <briefdescription>
+<para>Once you compute the projected convex hull, build the A matrix and the b vector such that Ax &lt;= b iff the center of mass projection x is inside the convex hull. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="130" column="14"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1ConvexHullProjectionConstraint_1ab4c121f74d52ad5644e9d34fa25627ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::ConvexHullProjectionConstraint::setActive</definition>
+        <argsstring>(const bool isActive)</argsstring>
+        <name>setActive</name>
+        <param>
+          <type>const bool</type>
+          <declname>isActive</declname>
+        </param>
+        <briefdescription>
+<para>Set if the constraint is active or not. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="140" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a6f2c6f94c250f829c773ccd57af8c91b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ConvexHullProjectionConstraint::isActive</definition>
+        <argsstring>()</argsstring>
+        <name>isActive</name>
+        <briefdescription>
+<para>Get if the constraint is active or not. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if the constraint is active, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="146" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a352974d52215c352df2b7782e96cea52" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::ConvexHullProjectionConstraint::getNrOfConstraints</definition>
+        <argsstring>()</argsstring>
+        <name>getNrOfConstraints</name>
+        <briefdescription>
+<para>Get the number of constraints (i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>the number rows of the matrix A). <simplesect kind="return"><para>the number of constraints. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="152" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a13e3880c7cbe8c9edefcdf55acc6453c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ConvexHullProjectionConstraint::buildConvexHull</definition>
+        <argsstring>(const iDynTree::Direction xAxisOfPlaneInWorld, const iDynTree::Direction yAxisOfPlaneInWorld, const iDynTree::Position originOfPlaneInWorld, const std::vector&lt; Polygon &gt; &amp;supportPolygonsExpressedInSupportFrame, const std::vector&lt; Transform &gt; &amp;absoluteFrame_X_supportFrame)</argsstring>
+        <name>buildConvexHull</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Direction" kindref="compound">iDynTree::Direction</ref></type>
+          <declname>xAxisOfPlaneInWorld</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Direction" kindref="compound">iDynTree::Direction</ref></type>
+          <declname>yAxisOfPlaneInWorld</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
+          <declname>originOfPlaneInWorld</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="classiDynTree_1_1Polygon" kindref="compound">Polygon</ref> &gt; &amp;</type>
+          <declname>supportPolygonsExpressedInSupportFrame</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &gt; &amp;</type>
+          <declname>absoluteFrame_X_supportFrame</declname>
+        </param>
+        <briefdescription>
+<para>Build the projected convex hull. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>projectionPlaneXaxisInAbsoluteFrame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>X direction of the projection axis, in the absolute frame. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>projectionPlaneYaxisInAbsoluteFrame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Y direction of the projection axis, in the absolute frame. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>supportPolygonsExpressedInSupportFrame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector of the support polygons, expressed in the support frames. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>absoluteFrame_X_supportFrame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Vector of the transform between each support frame and the absolute frame. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="204" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a59453b10a697b26c1bb8412ff6de23bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector2</ref></type>
+        <definition>Vector2 iDynTree::ConvexHullProjectionConstraint::project</definition>
+        <argsstring>(iDynTree::Position &amp;posIn3dInAbsoluteFrame)</argsstring>
+        <name>project</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &amp;</type>
+          <declname>posIn3dInAbsoluteFrame</declname>
+        </param>
+        <briefdescription>
+<para>Project a point in the plane of the convex hull. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The point is expressed in the absolute frame of the constriant. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="224" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a059bd064100e5d7ec355db11d8eb2247" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::ConvexHullProjectionConstraint::computeMargin</definition>
+        <argsstring>(const Vector2 &amp;posIn2D)</argsstring>
+        <name>computeMargin</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector2</ref> &amp;</type>
+          <declname>posIn2D</declname>
+        </param>
+        <briefdescription>
+<para>Compute distance of a 2D point from the convex hull. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The distance is positive if the point is inside the convex hull, zero if the point is on the boundary of the convex hull, and negative if it is outside of the convex hull. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="232" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ConvexHullProjectionConstraint_1abcc2fb91f6aaf4af760ab85f4274aafd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::ConvexHullProjectionConstraint::setProjectionAlongDirection</definition>
+        <argsstring>(const iDynTree::Vector3 &amp;direction)</argsstring>
+        <name>setProjectionAlongDirection</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref> &amp;</type>
+          <declname>direction</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set the projection matrix &apos;Pdirection&apos; given a desired projection direction.</para>
+<para><simplesect kind="author"><para>Aiko Dinale (29/08/2017)</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>direction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector along which we want to project a point </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="241" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ConvexHullProjectionConstraint_1a0da48123b22e79621d2d031a4e8cfc2e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector2</ref></type>
+        <definition>Vector2 iDynTree::ConvexHullProjectionConstraint::projectAlongDirection</definition>
+        <argsstring>(const iDynTree::Position &amp;posIn3dInAbsoluteFrame)</argsstring>
+        <name>projectAlongDirection</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &amp;</type>
+          <declname>posIn3dInAbsoluteFrame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Project a point along a direction defined by the projection matrix &apos;Pdirection&apos;</para>
+<para><simplesect kind="author"><para>Aiko Dinale (29/08/2017)</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>posIn3dInAbsoluteFrame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a point we want to project </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConvexHullHelpers.h" line="250" column="17"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para><ref refid="classiDynTree_1_1ConvexHullProjectionConstraint" kindref="compound">ConvexHullProjectionConstraint</ref> helper. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="10">
+        <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+      </node>
+      <node id="5">
+        <label>T</label>
+      </node>
+      <node id="13">
+        <label>iDynTree::Rotation</label>
+        <link refid="classiDynTree_1_1Rotation"/>
+        <childnode refid="14" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>iDynTree::PositionRaw</label>
+        <link refid="classiDynTree_1_1PositionRaw"/>
+        <childnode refid="18" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::MatrixDynSize</label>
+        <link refid="classiDynTree_1_1MatrixDynSize"/>
+      </node>
+      <node id="11">
+        <label>std::vector&lt; iDynTree::Transform &gt;</label>
+        <childnode refid="12" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; iDynTree::Transform &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="19">
+        <label>iDynTree::VectorDynSize</label>
+        <link refid="classiDynTree_1_1VectorDynSize"/>
+      </node>
+      <node id="4">
+        <label>std::vector&lt; T &gt;</label>
+        <childnode refid="5" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>iDynTree::MatrixFixSize&lt; 2, 3 &gt;</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+        <childnode refid="7" relation="template-instance">
+          <edgelabel>&lt; 2, 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="15">
+        <label>Matrix3x3</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+        <childnode refid="7" relation="template-instance">
+          <edgelabel>&lt; 3, 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="14">
+        <label>iDynTree::RotationRaw</label>
+        <link refid="classiDynTree_1_1RotationRaw"/>
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>iDynTree::Position</label>
+        <link refid="classiDynTree_1_1Position"/>
+        <childnode refid="17" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>iDynTree::MatrixFixSize&lt; nRows, nCols &gt;</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::ConvexHullProjectionConstraint</label>
+        <link refid="classiDynTree_1_1ConvexHullProjectionConstraint"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>A</edgelabel>
+          <edgelabel>AtimesP</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>supportFrameIndices</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>P</edgelabel>
+          <edgelabel>Pdirection</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>projectedConvexHull</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>absoluteFrame_X_supportFrame</edgelabel>
+        </childnode>
+        <childnode refid="16" relation="usage">
+          <edgelabel>o</edgelabel>
+        </childnode>
+        <childnode refid="19" relation="usage">
+          <edgelabel>b</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>std::vector&lt; iDynTree::VectorFixSize &gt;</label>
+        <childnode refid="10" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; iDynTree::VectorFixSize &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>iDynTree::Polygon2D</label>
+        <link refid="classiDynTree_1_1Polygon2D"/>
+        <childnode refid="9" relation="usage">
+          <edgelabel>m_vertices</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::vector&lt; int &gt;</label>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; int &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="18">
+        <label>Vector3</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+        <childnode refid="10" relation="template-instance">
+          <edgelabel>&lt; 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="12">
+        <label>iDynTree::Transform</label>
+        <link refid="classiDynTree_1_1Transform"/>
+        <childnode refid="13" relation="usage">
+          <edgelabel>rot</edgelabel>
+        </childnode>
+        <childnode refid="16" relation="usage">
+          <edgelabel>pos</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/ConvexHullHelpers.h" line="124" column="5" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="125" bodyend="252"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1ConvexHullProjectionConstraint_1ae9a9c4c0431f2304a4d96fbe05050c02" prot="public" virt="non-virtual"><scope>iDynTree::ConvexHullProjectionConstraint</scope><name>A</name></member>
+      <member refid="classiDynTree_1_1ConvexHullProjectionConstraint_1a612270a7771c882f80c76d64a220e54a" prot="public" virt="non-virtual"><scope>iDynTree::ConvexHullProjectionConstraint</scope><name>absoluteFrame_X_supportFrame</name></member>
+      <member refid="classiDynTree_1_1ConvexHullProjectionConstraint_1a6045a81d03a76f3384b3c68ced17cfba" prot="public" virt="non-virtual"><scope>iDynTree::ConvexHullProjectionConstraint</scope><name>AtimesP</name></member>
+      <member refid="classiDynTree_1_1ConvexHullProjectionConstraint_1a5b139d3f1537af28205aa35951cf9efc" prot="public" virt="non-virtual"><scope>iDynTree::ConvexHullProjectionConstraint</scope><name>b</name></member>
+      <member refid="classiDynTree_1_1ConvexHullProjectionConstraint_1a8cb77d8d52aaf5b0f186fde8066ff09c" prot="private" virt="non-virtual"><scope>iDynTree::ConvexHullProjectionConstraint</scope><name>buildConstraintMatrix</name></member>
+      <member refid="classiDynTree_1_1ConvexHullProjectionConstraint_1a13e3880c7cbe8c9edefcdf55acc6453c" prot="public" virt="non-virtual"><scope>iDynTree::ConvexHullProjectionConstraint</scope><name>buildConvexHull</name></member>
+      <member refid="classiDynTree_1_1ConvexHullProjectionConstraint_1a059bd064100e5d7ec355db11d8eb2247" prot="public" virt="non-virtual"><scope>iDynTree::ConvexHullProjectionConstraint</scope><name>computeMargin</name></member>
+      <member refid="classiDynTree_1_1ConvexHullProjectionConstraint_1a352974d52215c352df2b7782e96cea52" prot="public" virt="non-virtual"><scope>iDynTree::ConvexHullProjectionConstraint</scope><name>getNrOfConstraints</name></member>
+      <member refid="classiDynTree_1_1ConvexHullProjectionConstraint_1a6f2c6f94c250f829c773ccd57af8c91b" prot="public" virt="non-virtual"><scope>iDynTree::ConvexHullProjectionConstraint</scope><name>isActive</name></member>
+      <member refid="classiDynTree_1_1ConvexHullProjectionConstraint_1a64b41a74651fe40e58e8e01380732a74" prot="private" virt="non-virtual"><scope>iDynTree::ConvexHullProjectionConstraint</scope><name>m_isActive</name></member>
+      <member refid="classiDynTree_1_1ConvexHullProjectionConstraint_1a041fceaaceea5cdc5a53670e26352f8c" prot="public" virt="non-virtual"><scope>iDynTree::ConvexHullProjectionConstraint</scope><name>o</name></member>
+      <member refid="classiDynTree_1_1ConvexHullProjectionConstraint_1a14a6666c07b7422f23842628c06dc869" prot="public" virt="non-virtual"><scope>iDynTree::ConvexHullProjectionConstraint</scope><name>P</name></member>
+      <member refid="classiDynTree_1_1ConvexHullProjectionConstraint_1a1bad4948a74b4d6b609396ab13deea40" prot="public" virt="non-virtual"><scope>iDynTree::ConvexHullProjectionConstraint</scope><name>Pdirection</name></member>
+      <member refid="classiDynTree_1_1ConvexHullProjectionConstraint_1a59453b10a697b26c1bb8412ff6de23bc" prot="public" virt="non-virtual"><scope>iDynTree::ConvexHullProjectionConstraint</scope><name>project</name></member>
+      <member refid="classiDynTree_1_1ConvexHullProjectionConstraint_1a0da48123b22e79621d2d031a4e8cfc2e" prot="public" virt="non-virtual"><scope>iDynTree::ConvexHullProjectionConstraint</scope><name>projectAlongDirection</name></member>
+      <member refid="classiDynTree_1_1ConvexHullProjectionConstraint_1a2fb8660bb7a22f483fa131afe9f0f0a1" prot="public" virt="non-virtual"><scope>iDynTree::ConvexHullProjectionConstraint</scope><name>projectedConvexHull</name></member>
+      <member refid="classiDynTree_1_1ConvexHullProjectionConstraint_1ab4c121f74d52ad5644e9d34fa25627ce" prot="public" virt="non-virtual"><scope>iDynTree::ConvexHullProjectionConstraint</scope><name>setActive</name></member>
+      <member refid="classiDynTree_1_1ConvexHullProjectionConstraint_1abcc2fb91f6aaf4af760ab85f4274aafd" prot="public" virt="non-virtual"><scope>iDynTree::ConvexHullProjectionConstraint</scope><name>setProjectionAlongDirection</name></member>
+      <member refid="classiDynTree_1_1ConvexHullProjectionConstraint_1abecdae2b60c7cbfd13b585679271f99b" prot="public" virt="non-virtual"><scope>iDynTree::ConvexHullProjectionConstraint</scope><name>supportFrameIndices</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

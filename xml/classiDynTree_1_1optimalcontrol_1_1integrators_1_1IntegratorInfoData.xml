@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfoData" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::optimalcontrol::integrators::IntegratorInfoData</compoundname>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfoData_1ace5bb0fe4232b9b0ced67ff743994e71" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class Integrator</definition>
+        <argsstring></argsstring>
+        <name>Integrator</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator" kindref="compound">Integrator</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="59" column="17" bodyfile="iDynTree/Integrator.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfoData_1a3fa24f62a71726fd3b234e97c80d30d2" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::optimalcontrol::integrators::IntegratorInfoData::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="62" column="29" bodyfile="iDynTree/Integrator.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfoData_1a1dbc7d308a1eb00ee212b595b86b2bec" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::integrators::IntegratorInfoData::isExplicit</definition>
+        <argsstring></argsstring>
+        <name>isExplicit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="64" column="22" bodyfile="iDynTree/Integrator.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfoData_1a025a203d3f50ee91db6876e8c23e6c7c" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t iDynTree::optimalcontrol::integrators::IntegratorInfoData::numberOfStages</definition>
+        <argsstring></argsstring>
+        <name>numberOfStages</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="66" column="24" bodyfile="iDynTree/Integrator.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfoData_1a247184bd5e9844443627527c38b036b6" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::integrators::IntegratorInfoData::IntegratorInfoData</definition>
+        <argsstring>()</argsstring>
+        <name>IntegratorInfoData</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="60" column="17"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="1">
+        <label>iDynTree::optimalcontrol::integrators::IntegratorInfoData</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfoData"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>name</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::string</label>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Integrator.h" line="57" column="13" bodyfile="iDynTree/Integrator.h" bodystart="57" bodyend="67"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfoData_1a247184bd5e9844443627527c38b036b6" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::IntegratorInfoData</scope><name>IntegratorInfoData</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfoData_1a1dbc7d308a1eb00ee212b595b86b2bec" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::IntegratorInfoData</scope><name>isExplicit</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfoData_1a3fa24f62a71726fd3b234e97c80d30d2" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::IntegratorInfoData</scope><name>name</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfoData_1a025a203d3f50ee91db6876e8c23e6c7c" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::IntegratorInfoData</scope><name>numberOfStages</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

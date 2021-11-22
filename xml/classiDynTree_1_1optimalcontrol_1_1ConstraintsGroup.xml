@@ -1,0 +1,1182 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::optimalcontrol::ConstraintsGroup</compoundname>
+    <includes local="no">iDynTree/ConstraintsGroup.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1aab41d4ea8e734c557fdc1c7527ae6685" prot="private" static="no" mutable="no">
+        <type>ConstraintsGroupPimpl *</type>
+        <definition>ConstraintsGroupPimpl* iDynTree::optimalcontrol::ConstraintsGroup::m_pimpl</definition>
+        <argsstring></argsstring>
+        <name>m_pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="318" column="35" bodyfile="iDynTree/ConstraintsGroup.h" bodystart="317" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a593407e913d25676d1bb8fcff0f09b91" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::ConstraintsGroup::ConstraintsGroup</definition>
+        <argsstring>(const std::string &amp;name, unsigned int maxConstraintSize)</argsstring>
+        <name>ConstraintsGroup</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>maxConstraintSize</declname>
+        </param>
+        <briefdescription>
+<para>Default constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Univocal name of the group </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">maxConstraintSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Maximum dimension allowed when adding a constraint. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="56" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a1fec76ff1d42dc7f3adcc3acc99f95b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::ConstraintsGroup::~ConstraintsGroup</definition>
+        <argsstring>()</argsstring>
+        <name>~ConstraintsGroup</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="58" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a66023d93d7bb66ae77c5dc5b1b6cb40a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::ConstraintsGroup::ConstraintsGroup</definition>
+        <argsstring>(const ConstraintsGroup &amp;other)=delete</argsstring>
+        <name>ConstraintsGroup</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup" kindref="compound">ConstraintsGroup</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="60" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a5140627adcedded7849f6714e2e64e28" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::string</type>
+        <definition>const std::string iDynTree::optimalcontrol::ConstraintsGroup::name</definition>
+        <argsstring>() const</argsstring>
+        <name>name</name>
+        <briefdescription>
+<para>Return the name of the group. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The univocal name of the constraint group. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="66" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a5d217c617b0a3f317a5fc3ae259abb35" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int iDynTree::optimalcontrol::ConstraintsGroup::constraintsDimension</definition>
+        <argsstring>() const</argsstring>
+        <name>constraintsDimension</name>
+        <briefdescription>
+<para>Return the maximum constraint dimension of the group. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The maximum constraint dimension of the group. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="72" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1ae0026ebe5c345a6df3cc6eed6ee647b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ConstraintsGroup::addConstraint</definition>
+        <argsstring>(std::shared_ptr&lt; Constraint &gt; constraint, const TimeRange &amp;timeRange)</argsstring>
+        <name>addConstraint</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1Constraint" kindref="compound">Constraint</ref> &gt;</type>
+          <declname>constraint</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref> &amp;</type>
+          <declname>timeRange</declname>
+        </param>
+        <briefdescription>
+<para>Add a constraint to the group. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">constraint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Shared pointer to the user defined constraint. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">timeRange</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time range in which the constraint will be enabled. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull. Posible causes of failures are: empty pointer, dimension bigger than maxConstraintSize, invalid <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="80" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a7e0aa1c237e187d9c99ef55a50226a68" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ConstraintsGroup::addConstraint</definition>
+        <argsstring>(std::shared_ptr&lt; LinearConstraint &gt; linearConstraint, const TimeRange &amp;timeRange)</argsstring>
+        <name>addConstraint</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint" kindref="compound">LinearConstraint</ref> &gt;</type>
+          <declname>linearConstraint</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref> &amp;</type>
+          <declname>timeRange</declname>
+        </param>
+        <briefdescription>
+<para>Add a linear constraint to the group. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">linearConstraint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Shared pointer to a linear constraint. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">timeRange</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time range in which the constraint will be enabled. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull. Posible causes of failures are: empty pointer, dimension bigger than maxConstraintSize, invalid <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="88" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1acc256e4ae98b36e6ad1849348b8ad5d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ConstraintsGroup::updateTimeRange</definition>
+        <argsstring>(const std::string &amp;name, const TimeRange &amp;timeRange)</argsstring>
+        <name>updateTimeRange</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref> &amp;</type>
+          <declname>timeRange</declname>
+        </param>
+        <briefdescription>
+<para>Update the <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref> of a previously added constraint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the constraint whose <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref> has to be updated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">timeRange</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The new <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull. Possible causes of failure: invalid <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref>, a constraint does not exist with the specified name. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="96" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a482696c38527f59f393dc0165a9b134a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ConstraintsGroup::removeConstraint</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>removeConstraint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Remove a previously added constraint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Note: the sparsity pattern is not updated. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the constraint that has to be removed </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull. Possible causes of failure: a constraint does not exist with the specified name. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="105" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a6140b576f1b5b0f65906fd1026ac7dd4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ConstraintsGroup::getTimeRange</definition>
+        <argsstring>(const std::string &amp;name, TimeRange &amp;timeRange)</argsstring>
+        <name>getTimeRange</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref> &amp;</type>
+          <declname>timeRange</declname>
+        </param>
+        <briefdescription>
+<para>Get the <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref> of the specified constraint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the constraint whose <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref> you are interested in. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">timeRange</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The requested <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull. Possible causes of failure: a constraint does not exist with the specified name. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="113" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a2ea442a6a9efebad709345388b3ca202" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref> &gt; &amp;</type>
+        <definition>std::vector&lt;TimeRange&gt;&amp; iDynTree::optimalcontrol::ConstraintsGroup::getTimeRanges</definition>
+        <argsstring>()</argsstring>
+        <name>getTimeRanges</name>
+        <briefdescription>
+<para>Get a vector containing all the TimeRanges of the added constraints. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The order corresponds to the one get via the listConstraints method. <simplesect kind="warning"><para>It may perform dynamic memory allocation when called the first time and when the number of constraint changes. </para>
+</simplesect>
+<simplesect kind="return"><para>A vector containing all the TimeRanges of the added constraints. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="121" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a5379fb2ea07fc4571706b29e53e79c67" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ConstraintsGroup::isFeasibilePoint</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control)</argsstring>
+        <name>isFeasibilePoint</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <briefdescription>
+<para>Check whether, at the specified time, the enabled constraint is satisfied. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Given the time instant, this method search for the constraint to be enabled according to the specified <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref>. Then calls the constraint to check the feasibility of the constraint given the specified state and control. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the constraint group is evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state at which the constraint group is evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">control</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The control at which the constraint group is evaluated. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if, at the specified time, the enabled constraint is satisfied. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="131" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a81013d0cf1b4b71eff111dff2299b604" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ConstraintsGroup::evaluateConstraints</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, VectorDynSize &amp;constraints)</argsstring>
+        <name>evaluateConstraints</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>constraints</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the constraint which is enabled at the specified time. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Given the time instant, this method search for the constraint to be enabled according to the specified <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref>. Then it evaluates it given the specified state and control. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the constraint group is evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state at which the constraint group is evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">control</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The control at which the constraint group is evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">constraints</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value obtained by evaluating the enbled constraint. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the evaluation of the enabled constraint was successfull. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="144" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1ae2555fe639e01afdd35c920395d08d7e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ConstraintsGroup::getLowerBound</definition>
+        <argsstring>(double time, VectorDynSize &amp;lowerBound)</argsstring>
+        <name>getLowerBound</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>lowerBound</declname>
+        </param>
+        <briefdescription>
+<para>Get the constraints lower bound. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This value depends upon the chosen time instant. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time at which querying the lower bound. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">lowerBound</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The lowerBound value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if, for the given instant, a lower bound is set. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="156" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a8532cfbf612aef484fbf70ad9d609596" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ConstraintsGroup::getUpperBound</definition>
+        <argsstring>(double time, VectorDynSize &amp;upperBound)</argsstring>
+        <name>getUpperBound</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>upperBound</declname>
+        </param>
+        <briefdescription>
+<para>Get the constraints upper bound. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This value depends upon the chosen time instant. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time at which querying the upper bound. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">upperBound</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The upperBound value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if, for the given instant, a upper bound is set. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="165" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a8aafbfaebcd05313d6e935749d5b88ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ConstraintsGroup::constraintJacobianWRTState</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, MatrixDynSize &amp;jacobian)</argsstring>
+        <name>constraintJacobianWRTState</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>jacobian</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the constraint jacobian with respect to the state, given the specified time instant. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Given the time instant, this method search for the constraint to be enabled according to the specified <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref>. Then it evaluates its jacobian given the specified state and control. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time at which the jacobian is evaluted. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state at which the jacobian is evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">control</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The control at which the jacobian is evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">jacobian</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output jacobian. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the evaluation of the corresponding method of the enabled constraint return true. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="176" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a68d1dfd82bb37e7e1fe2005aaa730686" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ConstraintsGroup::constraintJacobianWRTControl</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, MatrixDynSize &amp;jacobian)</argsstring>
+        <name>constraintJacobianWRTControl</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>jacobian</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the constraint jacobian with respect to the control, given the specified time instant. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Given the time instant, this method search for the constraint to be enabled according to the specified <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref>. Then it evaluates its jacobian given the specified state and control. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time at which the jacobian is evaluted. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state at which the jacobian is evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">control</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The control at which the jacobian is evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">jacobian</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output jacobian. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if the evaluation of the corresponding method of the enabled constraint return true. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="190" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1ac3e00bf25f6697f52179aaf4308291ad" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ConstraintsGroup::constraintJacobianWRTStateSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;stateSparsity) const</argsstring>
+        <name>constraintJacobianWRTStateSparsity</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>stateSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the state jacobian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stateSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the jacobian wrt state variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="200" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a33a2f63df7da1a82c314f9cb9efa1533" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ConstraintsGroup::constraintJacobianWRTControlSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;controlSparsity) const</argsstring>
+        <name>constraintJacobianWRTControlSparsity</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>controlSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the control jacobian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>controlSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the jacobian wrt control variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="207" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a3e0b81af7e248f4fd7b77439b0b2df22" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ConstraintsGroup::constraintSecondPartialDerivativeWRTState</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, const VectorDynSize &amp;lambda, MatrixDynSize &amp;hessian)</argsstring>
+        <name>constraintSecondPartialDerivativeWRTState</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>hessian</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate constraint second partial derivative wrt the state variables. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It is the result of <formula id="71">$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial x^2}$</formula> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">control</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The control value at which the partial derivative is computed.. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The lagrange multipliers </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">hessian</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="220" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1adc6480876db7aeaf3484ad77f1ab9a8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ConstraintsGroup::constraintSecondPartialDerivativeWRTControl</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, const VectorDynSize &amp;lambda, MatrixDynSize &amp;hessian)</argsstring>
+        <name>constraintSecondPartialDerivativeWRTControl</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>hessian</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate constraint second partial derivative wrt the control. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It is the result of <formula id="72">$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial u^2}$</formula> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">control</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The control value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The lagrange multipliers </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">hessian</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="238" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a0161b4457cf802815a94a8a6eec7ce6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ConstraintsGroup::constraintSecondPartialDerivativeWRTStateControl</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, const VectorDynSize &amp;lambda, MatrixDynSize &amp;hessian)</argsstring>
+        <name>constraintSecondPartialDerivativeWRTStateControl</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>hessian</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate constraint second partial derivative wrt the state and control. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It is the result of <formula id="73">$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial x \partial u}$</formula>, thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">control</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The control value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The lagrange multipliers </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">hessian</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="257" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a92bd3dc34369aa9b8f313227f721a7cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ConstraintsGroup::constraintsSecondPartialDerivativeWRTStateSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;stateSparsity)</argsstring>
+        <name>constraintsSecondPartialDerivativeWRTStateSparsity</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>stateSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the state hessian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>No check is performed in the indeces. They need to be in the range [0, stateDimension) and [0, stateDimension) respectively. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stateSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the jacobian wrt state variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="270" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1ae3c04549670837f5cc2d4613289d7c80" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ConstraintsGroup::constraintsSecondPartialDerivativeWRTStateControlSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;stateControlSparsity)</argsstring>
+        <name>constraintsSecondPartialDerivativeWRTStateControlSparsity</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>stateControlSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the mixed hessian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>No check is performed in the indeces. They need to be in the range [0, stateDimension) and [0, controlDimension) respectively. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stateControlSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the jacobian wrt state and control variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="279" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a7829d4f018f668b295ce0e9443bed555" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ConstraintsGroup::constraintsSecondPartialDerivativeWRTControlSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;controlSparsity)</argsstring>
+        <name>constraintsSecondPartialDerivativeWRTControlSparsity</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>controlSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the control hessian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>No check is performed in the indeces. They need to be in the range [0, constraintDimension) and [0, controlDimension) respectively. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>controlSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the jacobian wrt control variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="288" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a116fdd0435e3dd18526eaef723d021ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ConstraintsGroup::isAnyTimeGroup</definition>
+        <argsstring>()</argsstring>
+        <name>isAnyTimeGroup</name>
+        <briefdescription>
+<para>Flag returning true if the group is an &quot;AnyTime&quot; group. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>An &quot;AnyTime&quot; group contains only one constraint which is always enabled. It corresponds to a simple constraint. <simplesect kind="return"><para>true if the group contains a single constraint always enables. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="295" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a55d7b7ac636d84e0a1859e17ef530edf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int iDynTree::optimalcontrol::ConstraintsGroup::numberOfConstraints</definition>
+        <argsstring>() const</argsstring>
+        <name>numberOfConstraints</name>
+        <briefdescription>
+<para>Number of constraints added in the group. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The number of constraints currently loaded in the group. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="301" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a74d6d204f199714e51838292f78cd535" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::vector&lt; std::string &gt;</type>
+        <definition>const std::vector&lt;std::string&gt; iDynTree::optimalcontrol::ConstraintsGroup::listConstraints</definition>
+        <argsstring>() const</argsstring>
+        <name>listConstraints</name>
+        <briefdescription>
+<para>Lists the available constraints. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>Perform memory allocation while creating the output vector. </para>
+</simplesect>
+<simplesect kind="return"><para>The list of the names of the constraints added to the group. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="308" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a3570a6ba4f5c3d317b05a1afdd607afb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ConstraintsGroup::isLinearGroup</definition>
+        <argsstring>() const</argsstring>
+        <name>isLinearGroup</name>
+        <briefdescription>
+<para>Tells if the groups contains only linear constraints. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if contains only linear constraints. False if at least one generic constraint is added. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ConstraintsGroup.h" line="314" column="18"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class grouping constraints associated with a <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions.</para>
+</simplesect>
+This class allows to define a set of constraints which are enabled only for a particular time range. This allow to change the constraint structure depending on time. Given a specific time instant, only one constraint is enabled (the one whose <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref> contains the instant and has the higher initTime). If the specified time instant does not fall into any time constraint time range, a dummy constraint wil be evaluated, i.e. <formula id="74">$ -1 \leq 0 \leq 1 $</formula>. All the constraints that will be added to the group should have dimension at most equal to maxConstraintSize. If the constraint size is smaller than the maxConstraintSize, dummy constraints as the above will be added on the bottom. This allow to keep a constant structure even if the constraints have different dimensions. A typical example is when a constraint is enabled only for a certain period of time. </para>
+    </detaileddescription>
+    <location file="iDynTree/ConstraintsGroup.h" line="49" column="9" bodyfile="iDynTree/ConstraintsGroup.h" bodystart="49" bodyend="319"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1ae0026ebe5c345a6df3cc6eed6ee647b4" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>addConstraint</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a7e0aa1c237e187d9c99ef55a50226a68" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>addConstraint</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a68d1dfd82bb37e7e1fe2005aaa730686" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>constraintJacobianWRTControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a33a2f63df7da1a82c314f9cb9efa1533" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>constraintJacobianWRTControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a8aafbfaebcd05313d6e935749d5b88ea" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>constraintJacobianWRTState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1ac3e00bf25f6697f52179aaf4308291ad" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>constraintJacobianWRTStateSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a5d217c617b0a3f317a5fc3ae259abb35" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>constraintsDimension</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1adc6480876db7aeaf3484ad77f1ab9a8a" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>constraintSecondPartialDerivativeWRTControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a3e0b81af7e248f4fd7b77439b0b2df22" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>constraintSecondPartialDerivativeWRTState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a0161b4457cf802815a94a8a6eec7ce6a" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>constraintSecondPartialDerivativeWRTStateControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a593407e913d25676d1bb8fcff0f09b91" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>ConstraintsGroup</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a66023d93d7bb66ae77c5dc5b1b6cb40a" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>ConstraintsGroup</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a7829d4f018f668b295ce0e9443bed555" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>constraintsSecondPartialDerivativeWRTControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1ae3c04549670837f5cc2d4613289d7c80" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>constraintsSecondPartialDerivativeWRTStateControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a92bd3dc34369aa9b8f313227f721a7cc" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>constraintsSecondPartialDerivativeWRTStateSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a81013d0cf1b4b71eff111dff2299b604" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>evaluateConstraints</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1ae2555fe639e01afdd35c920395d08d7e" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>getLowerBound</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a6140b576f1b5b0f65906fd1026ac7dd4" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>getTimeRange</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a2ea442a6a9efebad709345388b3ca202" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>getTimeRanges</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a8532cfbf612aef484fbf70ad9d609596" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>getUpperBound</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a116fdd0435e3dd18526eaef723d021ca" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>isAnyTimeGroup</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a5379fb2ea07fc4571706b29e53e79c67" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>isFeasibilePoint</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a3570a6ba4f5c3d317b05a1afdd607afb" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>isLinearGroup</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a74d6d204f199714e51838292f78cd535" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>listConstraints</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1aab41d4ea8e734c557fdc1c7527ae6685" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>m_pimpl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a5140627adcedded7849f6714e2e64e28" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>name</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a55d7b7ac636d84e0a1859e17ef530edf" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>numberOfConstraints</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a482696c38527f59f393dc0165a9b134a" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>removeConstraint</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1acc256e4ae98b36e6ad1849348b8ad5d4" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>updateTimeRange</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup_1a1fec76ff1d42dc7f3adcc3acc99f95b0" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ConstraintsGroup</scope><name>~ConstraintsGroup</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

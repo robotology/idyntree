@@ -1,0 +1,343 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1CubicSpline" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::CubicSpline</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1CubicSpline_1ad739563db38250e24b5e6a5129fbce25" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector4</ref> &gt;</type>
+        <definition>std::vector&lt; iDynTree::Vector4 &gt; iDynTree::CubicSpline::m_coefficients</definition>
+        <argsstring></argsstring>
+        <name>m_coefficients</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/CubicSpline.h" line="22" column="21" bodyfile="iDynTree/Core/CubicSpline.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1CubicSpline_1af337bad6bb4d93873aba9cdeb5c50062" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
+        <definition>iDynTree::VectorDynSize iDynTree::CubicSpline::m_velocities</definition>
+        <argsstring></argsstring>
+        <name>m_velocities</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/CubicSpline.h" line="23" column="33" bodyfile="iDynTree/Core/CubicSpline.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1CubicSpline_1ac5839b1d1a47b59dc60a1a17ea759bb4" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
+        <definition>iDynTree::VectorDynSize iDynTree::CubicSpline::m_time</definition>
+        <argsstring></argsstring>
+        <name>m_time</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/CubicSpline.h" line="24" column="33" bodyfile="iDynTree/Core/CubicSpline.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1CubicSpline_1ab5eacaa424b24623a4a534d3061378ee" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
+        <definition>iDynTree::VectorDynSize iDynTree::CubicSpline::m_y</definition>
+        <argsstring></argsstring>
+        <name>m_y</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/CubicSpline.h" line="25" column="33" bodyfile="iDynTree/Core/CubicSpline.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1CubicSpline_1ab91c8740ea6aa28d2789ac924509a42f" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
+        <definition>iDynTree::VectorDynSize iDynTree::CubicSpline::m_T</definition>
+        <argsstring></argsstring>
+        <name>m_T</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/CubicSpline.h" line="26" column="33" bodyfile="iDynTree/Core/CubicSpline.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1CubicSpline_1ac61f88137643f5e88b7bf1bff5bd4327" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::CubicSpline::m_v0</definition>
+        <argsstring></argsstring>
+        <name>m_v0</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/CubicSpline.h" line="28" column="16" bodyfile="iDynTree/Core/CubicSpline.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1CubicSpline_1a9418a0225f8deb8d2d11fa3f5719e529" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::CubicSpline::m_vf</definition>
+        <argsstring></argsstring>
+        <name>m_vf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/CubicSpline.h" line="29" column="16" bodyfile="iDynTree/Core/CubicSpline.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1CubicSpline_1a1c9a6e82e4cb26a3a80c15c2798113e7" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::CubicSpline::m_a0</definition>
+        <argsstring></argsstring>
+        <name>m_a0</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/CubicSpline.h" line="30" column="16" bodyfile="iDynTree/Core/CubicSpline.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1CubicSpline_1a2834df671057628390d087148e306993" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::CubicSpline::m_af</definition>
+        <argsstring></argsstring>
+        <name>m_af</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/CubicSpline.h" line="31" column="16" bodyfile="iDynTree/Core/CubicSpline.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1CubicSpline_1abed92788a440c10f6bdaf0a4f5cf7876" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::CubicSpline::m_areCoefficientsUpdated</definition>
+        <argsstring></argsstring>
+        <name>m_areCoefficientsUpdated</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/CubicSpline.h" line="37" column="14" bodyfile="iDynTree/Core/CubicSpline.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1CubicSpline_1aed2fb398a04a91df19f8c335428986e6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::CubicSpline::computePhasesDuration</definition>
+        <argsstring>()</argsstring>
+        <name>computePhasesDuration</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/CubicSpline.h" line="33" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1CubicSpline_1a1349e8d034b0702d8d742424c3a47010" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::CubicSpline::computeIntermediateVelocities</definition>
+        <argsstring>()</argsstring>
+        <name>computeIntermediateVelocities</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/CubicSpline.h" line="34" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1CubicSpline_1a034c790773883eda501d882114bc3e7b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::CubicSpline::computeCoefficients</definition>
+        <argsstring>()</argsstring>
+        <name>computeCoefficients</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/CubicSpline.h" line="35" column="14"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1CubicSpline_1a7a8786b8af7dc928ef1b2403e99986ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::CubicSpline::CubicSpline</definition>
+        <argsstring>()</argsstring>
+        <name>CubicSpline</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/CubicSpline.h" line="40" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1CubicSpline_1af8cf647e87fe3bb2b20892c064cc6299" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::CubicSpline::CubicSpline</definition>
+        <argsstring>(unsigned int buffersDimension)</argsstring>
+        <name>CubicSpline</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>buffersDimension</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/CubicSpline.h" line="42" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1CubicSpline_1aa710c371f1764b3ded4c987eaa332d50" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::CubicSpline::setData</definition>
+        <argsstring>(const iDynTree::VectorDynSize &amp;time, const iDynTree::VectorDynSize &amp;yData)</argsstring>
+        <name>setData</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>yData</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/CubicSpline.h" line="44" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1CubicSpline_1a7e3bc04b73fd0eaba3777e792d24d1d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::CubicSpline::setInitialConditions</definition>
+        <argsstring>(double initialVelocity, double initialAcceleration)</argsstring>
+        <name>setInitialConditions</name>
+        <param>
+          <type>double</type>
+          <declname>initialVelocity</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>initialAcceleration</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/CubicSpline.h" line="45" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1CubicSpline_1a1788387538428d08b01fc64d4e14fbbe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::CubicSpline::setFinalConditions</definition>
+        <argsstring>(double finalVelocity, double finalAcceleration)</argsstring>
+        <name>setFinalConditions</name>
+        <param>
+          <type>double</type>
+          <declname>finalVelocity</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>finalAcceleration</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/CubicSpline.h" line="46" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1CubicSpline_1abfee06bdec13637fa531fab8e9af3c32" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::CubicSpline::evaluatePoint</definition>
+        <argsstring>(double t)</argsstring>
+        <name>evaluatePoint</name>
+        <param>
+          <type>double</type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/CubicSpline.h" line="47" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1CubicSpline_1a939f5cc592336be4ff7f92caee1f784b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::CubicSpline::evaluatePoint</definition>
+        <argsstring>(double t, double &amp;velocity, double &amp;acceleration)</argsstring>
+        <name>evaluatePoint</name>
+        <param>
+          <type>double</type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>velocity</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>acceleration</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/CubicSpline.h" line="48" column="16"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/CubicSpline.h" line="21" column="5" bodyfile="iDynTree/Core/CubicSpline.h" bodystart="21" bodyend="49"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1CubicSpline_1a034c790773883eda501d882114bc3e7b" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>computeCoefficients</name></member>
+      <member refid="classiDynTree_1_1CubicSpline_1a1349e8d034b0702d8d742424c3a47010" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>computeIntermediateVelocities</name></member>
+      <member refid="classiDynTree_1_1CubicSpline_1aed2fb398a04a91df19f8c335428986e6" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>computePhasesDuration</name></member>
+      <member refid="classiDynTree_1_1CubicSpline_1a7a8786b8af7dc928ef1b2403e99986ea" prot="public" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>CubicSpline</name></member>
+      <member refid="classiDynTree_1_1CubicSpline_1af8cf647e87fe3bb2b20892c064cc6299" prot="public" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>CubicSpline</name></member>
+      <member refid="classiDynTree_1_1CubicSpline_1abfee06bdec13637fa531fab8e9af3c32" prot="public" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>evaluatePoint</name></member>
+      <member refid="classiDynTree_1_1CubicSpline_1a939f5cc592336be4ff7f92caee1f784b" prot="public" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>evaluatePoint</name></member>
+      <member refid="classiDynTree_1_1CubicSpline_1a1c9a6e82e4cb26a3a80c15c2798113e7" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>m_a0</name></member>
+      <member refid="classiDynTree_1_1CubicSpline_1a2834df671057628390d087148e306993" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>m_af</name></member>
+      <member refid="classiDynTree_1_1CubicSpline_1abed92788a440c10f6bdaf0a4f5cf7876" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>m_areCoefficientsUpdated</name></member>
+      <member refid="classiDynTree_1_1CubicSpline_1ad739563db38250e24b5e6a5129fbce25" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>m_coefficients</name></member>
+      <member refid="classiDynTree_1_1CubicSpline_1ab91c8740ea6aa28d2789ac924509a42f" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>m_T</name></member>
+      <member refid="classiDynTree_1_1CubicSpline_1ac5839b1d1a47b59dc60a1a17ea759bb4" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>m_time</name></member>
+      <member refid="classiDynTree_1_1CubicSpline_1ac61f88137643f5e88b7bf1bff5bd4327" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>m_v0</name></member>
+      <member refid="classiDynTree_1_1CubicSpline_1af337bad6bb4d93873aba9cdeb5c50062" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>m_velocities</name></member>
+      <member refid="classiDynTree_1_1CubicSpline_1a9418a0225f8deb8d2d11fa3f5719e529" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>m_vf</name></member>
+      <member refid="classiDynTree_1_1CubicSpline_1ab5eacaa424b24623a4a534d3061378ee" prot="private" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>m_y</name></member>
+      <member refid="classiDynTree_1_1CubicSpline_1aa710c371f1764b3ded4c987eaa332d50" prot="public" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>setData</name></member>
+      <member refid="classiDynTree_1_1CubicSpline_1a1788387538428d08b01fc64d4e14fbbe" prot="public" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>setFinalConditions</name></member>
+      <member refid="classiDynTree_1_1CubicSpline_1a7e3bc04b73fd0eaba3777e792d24d1d8" prot="public" virt="non-virtual"><scope>iDynTree::CubicSpline</scope><name>setInitialConditions</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

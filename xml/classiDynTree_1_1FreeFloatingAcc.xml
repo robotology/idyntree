@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1FreeFloatingAcc" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::FreeFloatingAcc</compoundname>
+    <includes local="no">iDynTree/Model/FreeFloatingState.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1FreeFloatingAcc_1acbb43c368bdf6f4a3bc7355f77b0072a" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref></type>
+        <definition>SpatialAcc iDynTree::FreeFloatingAcc::m_baseAcc</definition>
+        <argsstring></argsstring>
+        <name>m_baseAcc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="201" column="20" bodyfile="iDynTree/Model/FreeFloatingState.h" bodystart="201" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1FreeFloatingAcc_1a990e5281e7260dfb47fba49d2060b14e" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref></type>
+        <definition>JointDOFsDoubleArray iDynTree::FreeFloatingAcc::m_jointAcc</definition>
+        <argsstring></argsstring>
+        <name>m_jointAcc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="202" column="30" bodyfile="iDynTree/Model/FreeFloatingState.h" bodystart="202" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingAcc_1adf06dab2b5127f59dfe2857477fce5b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::FreeFloatingAcc::FreeFloatingAcc</definition>
+        <argsstring>()</argsstring>
+        <name>FreeFloatingAcc</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="206" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingAcc_1a46bb95f9257aeb2b5b7611a7f82179e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::FreeFloatingAcc::FreeFloatingAcc</definition>
+        <argsstring>(const iDynTree::Model &amp;model)</argsstring>
+        <name>FreeFloatingAcc</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="207" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingAcc_1a1cad94ffbc176207a498dc610351356f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::FreeFloatingAcc::resize</definition>
+        <argsstring>(const iDynTree::Model &amp;model)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Resize the class to match the number of internal DOFs contained in a <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the model from which to get the number and dimension of the joints.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="warning"><para>This method wipes the joint positions if number and dimension of the joints of the model passed are different from the one already stored. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="218" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingAcc_1a64a547a751917fa8ca6776186b439dba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref> &amp;</type>
+        <definition>SpatialAcc&amp; iDynTree::FreeFloatingAcc::baseAcc</definition>
+        <argsstring>()</argsstring>
+        <name>baseAcc</name>
+        <briefdescription>
+<para>Get the base acceleration. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="223" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingAcc_1acb5b0b7ff7a2a8b0caca1066e6b2a87a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
+        <definition>JointDOFsDoubleArray&amp; iDynTree::FreeFloatingAcc::jointAcc</definition>
+        <argsstring>()</argsstring>
+        <name>jointAcc</name>
+        <briefdescription>
+<para>Get the vector of joint accelerations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="228" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingAcc_1ad9c2a152af95dd4fa22323317d722df6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref> &amp;</type>
+        <definition>const SpatialAcc&amp; iDynTree::FreeFloatingAcc::baseAcc</definition>
+        <argsstring>() const</argsstring>
+        <name>baseAcc</name>
+        <briefdescription>
+<para>Get the base acceleration (const version). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="233" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingAcc_1ab4faf25b7240699717517c43ff3fd548" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
+        <definition>const JointDOFsDoubleArray&amp; iDynTree::FreeFloatingAcc::jointAcc</definition>
+        <argsstring>() const</argsstring>
+        <name>jointAcc</name>
+        <briefdescription>
+<para>Get the vector of joint accelerations (const version). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="238" column="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingAcc_1a3a56360f7bb4652150bb615ae9e9eee0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int iDynTree::FreeFloatingAcc::getNrOfDOFs</definition>
+        <argsstring>() const</argsstring>
+        <name>getNrOfDOFs</name>
+        <briefdescription>
+<para>Get the dimension of the joint accelerations vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="243" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingAcc_1a2e64dacc9a5ca428722254bb15a913be" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::FreeFloatingAcc::~FreeFloatingAcc</definition>
+        <argsstring>()</argsstring>
+        <name>~FreeFloatingAcc</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="248" column="17"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class representing the accelerations of a Free Floating robot. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/FreeFloatingState.h" line="198" column="5" bodyfile="iDynTree/Model/FreeFloatingState.h" bodystart="199" bodyend="249"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1FreeFloatingAcc_1a64a547a751917fa8ca6776186b439dba" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingAcc</scope><name>baseAcc</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingAcc_1ad9c2a152af95dd4fa22323317d722df6" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingAcc</scope><name>baseAcc</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingAcc_1adf06dab2b5127f59dfe2857477fce5b4" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingAcc</scope><name>FreeFloatingAcc</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingAcc_1a46bb95f9257aeb2b5b7611a7f82179e5" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingAcc</scope><name>FreeFloatingAcc</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingAcc_1a3a56360f7bb4652150bb615ae9e9eee0" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingAcc</scope><name>getNrOfDOFs</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingAcc_1acb5b0b7ff7a2a8b0caca1066e6b2a87a" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingAcc</scope><name>jointAcc</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingAcc_1ab4faf25b7240699717517c43ff3fd548" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingAcc</scope><name>jointAcc</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingAcc_1acbb43c368bdf6f4a3bc7355f77b0072a" prot="private" virt="non-virtual"><scope>iDynTree::FreeFloatingAcc</scope><name>m_baseAcc</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingAcc_1a990e5281e7260dfb47fba49d2060b14e" prot="private" virt="non-virtual"><scope>iDynTree::FreeFloatingAcc</scope><name>m_jointAcc</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingAcc_1a1cad94ffbc176207a498dc610351356f" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingAcc</scope><name>resize</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingAcc_1a2e64dacc9a5ca428722254bb15a913be" prot="public" virt="virtual"><scope>iDynTree::FreeFloatingAcc</scope><name>~FreeFloatingAcc</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

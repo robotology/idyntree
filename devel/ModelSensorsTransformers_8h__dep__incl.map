@@ -1,6 +1,0 @@
-<map id="ModelSensorsTransformers.h" name="ModelSensorsTransformers.h">
-<area shape="rect" id="node1" title="Collection of function to modify model and sensors in various ways." alt="" coords="201,5,412,32"/>
-<area shape="rect" id="node2" href="$ExtWrenchesAndJointTorquesEstimator_8cpp.html" title=" " alt="" coords="5,80,216,121"/>
-<area shape="rect" id="node3" href="$ModelLoader_8cpp.html" title=" " alt="" coords="241,87,373,114"/>
-<area shape="rect" id="node4" href="$ModelSensorsTransformers_8cpp.html" title=" " alt="" coords="397,87,622,114"/>
-</map>

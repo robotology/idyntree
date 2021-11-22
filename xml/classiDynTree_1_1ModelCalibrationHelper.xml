@@ -1,0 +1,275 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1ModelCalibrationHelper" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::ModelCalibrationHelper</compoundname>
+    <includes local="no">iDynTree/ModelIO/ModelCalibrationHelper.h</includes>
+      <sectiondef kind="user-defined">
+      <header>Constructor/Destructor</header>
+      <memberdef kind="function" id="classiDynTree_1_1ModelCalibrationHelper_1a1ee092e0ff7d45fac63d6d8ccdf56aa7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ModelCalibrationHelper::ModelCalibrationHelper</definition>
+        <argsstring>()</argsstring>
+        <name>ModelCalibrationHelper</name>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelCalibrationHelper.h" line="50" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelCalibrationHelper_1af6c2bcc1b30c17feb10fd76bde44317e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ModelCalibrationHelper::~ModelCalibrationHelper</definition>
+        <argsstring>()</argsstring>
+        <name>~ModelCalibrationHelper</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelCalibrationHelper.h" line="52" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelCalibrationHelper_1a374a9140cd2d14f17ea40f43a5f8f35c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ModelCalibrationHelper::loadModelFromString</definition>
+        <argsstring>(const std::string &amp;modelString, const std::string &amp;filetype=&quot;urdf&quot;)</argsstring>
+        <name>loadModelFromString</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>modelString</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filetype</declname>
+          <defval>&quot;urdf&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Load the model of the robot from a string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>modelString</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>string containg the model of the robot. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>filetype</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>type of the file to load, currently supporting only urdf type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelCalibrationHelper.h" line="63" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelCalibrationHelper_1a22e1119ec00b5a9c3c80ff3e74b35366" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ModelCalibrationHelper::loadModelFromFile</definition>
+        <argsstring>(const std::string &amp;filename, const std::string &amp;filetype=&quot;urdf&quot;)</argsstring>
+        <name>loadModelFromFile</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filetype</declname>
+          <defval>&quot;urdf&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Load the model of the robot from an external file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>path to the file to load </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>filetype</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>type of the file to load, currently supporting only urdf type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelCalibrationHelper.h" line="72" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelCalibrationHelper_1a583dcf51ec22f9d6a875103a6c4e8f76" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ModelCalibrationHelper::updateModelInertialParametersToString</definition>
+        <argsstring>(std::string &amp;modelString, const iDynTree::VectorDynSize &amp;inertialParams, const std::string filetype=&quot;urdf&quot;, const iDynTree::ModelExporterOptions options=iDynTree::ModelExporterOptions())</argsstring>
+        <name>updateModelInertialParametersToString</name>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>modelString</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>inertialParams</declname>
+        </param>
+        <param>
+          <type>const std::string</type>
+          <declname>filetype</declname>
+          <defval>&quot;urdf&quot;</defval>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref></type>
+          <declname>options</declname>
+          <defval><ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>Update the inertial parameters of the loaded model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>the inertial params vector follow the structure of the <ref refid="classiDynTree_1_1Model_1a2c283e000a2d6a5e86770d8616b7e18b" kindref="member">Model::getInertialParameters</ref> method. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelCalibrationHelper.h" line="79" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelCalibrationHelper_1ad3ab40b088a598f6da9b259222b28bb1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ModelCalibrationHelper::updateModelInertialParametersToFile</definition>
+        <argsstring>(const std::string &amp;filename, const iDynTree::VectorDynSize &amp;inertialParams, const std::string filetype=&quot;urdf&quot;, const iDynTree::ModelExporterOptions options=iDynTree::ModelExporterOptions())</argsstring>
+        <name>updateModelInertialParametersToFile</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>inertialParams</declname>
+        </param>
+        <param>
+          <type>const std::string</type>
+          <declname>filetype</declname>
+          <defval>&quot;urdf&quot;</defval>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref></type>
+          <declname>options</declname>
+          <defval><ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>Update the inertial parameters of the loaded model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>the inertial params vector follows the structure of the <ref refid="classiDynTree_1_1Model_1a2c283e000a2d6a5e86770d8616b7e18b" kindref="member">Model::getInertialParameters</ref> method. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelCalibrationHelper.h" line="89" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelCalibrationHelper_1a94ce715abf88213cee30f6ccb804210a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+        <definition>const Model&amp; iDynTree::ModelCalibrationHelper::model</definition>
+        <argsstring>()</argsstring>
+        <name>model</name>
+        <briefdescription>
+<para>Get the loaded model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This always return the model loaded via loadModel methods, and is not affected by the updateModel methods. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelCalibrationHelper.h" line="99" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelCalibrationHelper_1ab73d50123d391c2ddf08bcc1c5f82485" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> &amp;</type>
+        <definition>const SensorsList&amp; iDynTree::ModelCalibrationHelper::sensors</definition>
+        <argsstring>()</argsstring>
+        <name>sensors</name>
+        <briefdescription>
+<para>Get the loaded sensors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This always return the model loaded via loadModel method, and is not affected by the updateModel methods. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelCalibrationHelper.h" line="106" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelCalibrationHelper_1a884bd9c1a6b009191ccb34d1b374fe00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ModelCalibrationHelper::isValid</definition>
+        <argsstring>()</argsstring>
+        <name>isValid</name>
+        <briefdescription>
+<para>Return true if the model have been correctly true. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This always return the validity of the model loaded via loadModel method, and is not affected by the updateModel methods. </para>
+</simplesect>
+<simplesect kind="return"><para>True if the model was loaded correctly. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelCalibrationHelper.h" line="114" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1ModelCalibrationHelper_1aa8c47f0f45dc2985f162f5379be3e653" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; ModelCalibrationHelperPimpl &gt;</type>
+        <definition>std::unique_ptr&lt;ModelCalibrationHelperPimpl&gt; iDynTree::ModelCalibrationHelper::m_pimpl</definition>
+        <argsstring></argsstring>
+        <name>m_pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelCalibrationHelper.h" line="37" column="21" bodyfile="iDynTree/ModelIO/ModelCalibrationHelper.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Helper class to load a model, modify its parameters based on calibration, and save it again to file. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/ModelIO/ModelCalibrationHelper.h" line="33" column="1" bodyfile="iDynTree/ModelIO/ModelCalibrationHelper.h" bodystart="34" bodyend="116"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1ModelCalibrationHelper_1a884bd9c1a6b009191ccb34d1b374fe00" prot="public" virt="non-virtual"><scope>iDynTree::ModelCalibrationHelper</scope><name>isValid</name></member>
+      <member refid="classiDynTree_1_1ModelCalibrationHelper_1a22e1119ec00b5a9c3c80ff3e74b35366" prot="public" virt="non-virtual"><scope>iDynTree::ModelCalibrationHelper</scope><name>loadModelFromFile</name></member>
+      <member refid="classiDynTree_1_1ModelCalibrationHelper_1a374a9140cd2d14f17ea40f43a5f8f35c" prot="public" virt="non-virtual"><scope>iDynTree::ModelCalibrationHelper</scope><name>loadModelFromString</name></member>
+      <member refid="classiDynTree_1_1ModelCalibrationHelper_1aa8c47f0f45dc2985f162f5379be3e653" prot="private" virt="non-virtual"><scope>iDynTree::ModelCalibrationHelper</scope><name>m_pimpl</name></member>
+      <member refid="classiDynTree_1_1ModelCalibrationHelper_1a94ce715abf88213cee30f6ccb804210a" prot="public" virt="non-virtual"><scope>iDynTree::ModelCalibrationHelper</scope><name>model</name></member>
+      <member refid="classiDynTree_1_1ModelCalibrationHelper_1a1ee092e0ff7d45fac63d6d8ccdf56aa7" prot="public" virt="non-virtual"><scope>iDynTree::ModelCalibrationHelper</scope><name>ModelCalibrationHelper</name></member>
+      <member refid="classiDynTree_1_1ModelCalibrationHelper_1ab73d50123d391c2ddf08bcc1c5f82485" prot="public" virt="non-virtual"><scope>iDynTree::ModelCalibrationHelper</scope><name>sensors</name></member>
+      <member refid="classiDynTree_1_1ModelCalibrationHelper_1ad3ab40b088a598f6da9b259222b28bb1" prot="public" virt="non-virtual"><scope>iDynTree::ModelCalibrationHelper</scope><name>updateModelInertialParametersToFile</name></member>
+      <member refid="classiDynTree_1_1ModelCalibrationHelper_1a583dcf51ec22f9d6a875103a6c4e8f76" prot="public" virt="non-virtual"><scope>iDynTree::ModelCalibrationHelper</scope><name>updateModelInertialParametersToString</name></member>
+      <member refid="classiDynTree_1_1ModelCalibrationHelper_1af6c2bcc1b30c17feb10fd76bde44317e" prot="public" virt="non-virtual"><scope>iDynTree::ModelCalibrationHelper</scope><name>~ModelCalibrationHelper</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

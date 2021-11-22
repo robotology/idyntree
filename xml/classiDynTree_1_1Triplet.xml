@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1Triplet" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::Triplet</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1Triplet_1a73e452fd110d3c68e8b705b8bccd05b3" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t iDynTree::Triplet::row</definition>
+        <argsstring></argsstring>
+        <name>row</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Triplets.h" line="46" column="17" bodyfile="iDynTree/Core/Triplets.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Triplet_1a5a3d2f326f0caca51298cfc50192ad65" prot="public" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t iDynTree::Triplet::column</definition>
+        <argsstring></argsstring>
+        <name>column</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Triplets.h" line="47" column="17" bodyfile="iDynTree/Core/Triplets.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Triplet_1acdaf460ce61a536013c84156139a5d76" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::Triplet::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Triplets.h" line="48" column="12" bodyfile="iDynTree/Core/Triplets.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classiDynTree_1_1Triplet_1a0dad21f82030ca9744e0ba5341dbae60" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool iDynTree::Triplet::rowMajorCompare</definition>
+        <argsstring>(const iDynTree::Triplet &amp;a, const iDynTree::Triplet &amp;b)</argsstring>
+        <name>rowMajorCompare</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Triplet" kindref="compound">iDynTree::Triplet</ref> &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Triplet" kindref="compound">iDynTree::Triplet</ref> &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Triplets.h" line="38" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Triplet_1a1523d2be14dbf153ab5f1c6b7f0b65ca" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool iDynTree::Triplet::columnMajorCompare</definition>
+        <argsstring>(const iDynTree::Triplet &amp;a, const iDynTree::Triplet &amp;b)</argsstring>
+        <name>columnMajorCompare</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Triplet" kindref="compound">iDynTree::Triplet</ref> &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Triplet" kindref="compound">iDynTree::Triplet</ref> &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Triplets.h" line="39" column="17"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1Triplet_1a2cc7262b951e84d64cd7c0caea3b0353" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Triplet::Triplet</definition>
+        <argsstring>(std::size_t row, std::size_t column, double value)</argsstring>
+        <name>Triplet</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>row</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>column</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Triplets.h" line="41" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Triplet_1ac9deac2f6706016c2ec6b420021c2b75" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Triplet::operator&lt;</definition>
+        <argsstring>(const iDynTree::Triplet &amp;) const</argsstring>
+        <name>operator&lt;</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Triplet" kindref="compound">iDynTree::Triplet</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Triplets.h" line="43" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Triplet_1a0d0ea030041afd141464944ed27c6ac9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Triplet::operator==</definition>
+        <argsstring>(const iDynTree::Triplet &amp;) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Triplet" kindref="compound">iDynTree::Triplet</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Triplets.h" line="44" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/Triplets.h" line="34" column="1" bodyfile="iDynTree/Core/Triplets.h" bodystart="35" bodyend="49"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1Triplet_1a5a3d2f326f0caca51298cfc50192ad65" prot="public" virt="non-virtual"><scope>iDynTree::Triplet</scope><name>column</name></member>
+      <member refid="classiDynTree_1_1Triplet_1a1523d2be14dbf153ab5f1c6b7f0b65ca" prot="public" virt="non-virtual"><scope>iDynTree::Triplet</scope><name>columnMajorCompare</name></member>
+      <member refid="classiDynTree_1_1Triplet_1ac9deac2f6706016c2ec6b420021c2b75" prot="public" virt="non-virtual"><scope>iDynTree::Triplet</scope><name>operator&lt;</name></member>
+      <member refid="classiDynTree_1_1Triplet_1a0d0ea030041afd141464944ed27c6ac9" prot="public" virt="non-virtual"><scope>iDynTree::Triplet</scope><name>operator==</name></member>
+      <member refid="classiDynTree_1_1Triplet_1a73e452fd110d3c68e8b705b8bccd05b3" prot="public" virt="non-virtual"><scope>iDynTree::Triplet</scope><name>row</name></member>
+      <member refid="classiDynTree_1_1Triplet_1a0dad21f82030ca9744e0ba5341dbae60" prot="public" virt="non-virtual"><scope>iDynTree::Triplet</scope><name>rowMajorCompare</name></member>
+      <member refid="classiDynTree_1_1Triplet_1a2cc7262b951e84d64cd7c0caea3b0353" prot="public" virt="non-virtual"><scope>iDynTree::Triplet</scope><name>Triplet</name></member>
+      <member refid="classiDynTree_1_1Triplet_1acdaf460ce61a536013c84156139a5d76" prot="public" virt="non-virtual"><scope>iDynTree::Triplet</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

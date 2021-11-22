@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1InertialElement" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::InertialElement</compoundname>
+    <basecompoundref refid="classiDynTree_1_1XMLElement" prot="public" virt="non-virtual">iDynTree::XMLElement</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1InertialElement_1ad653f593941c6d19e334506439428769" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>Transform iDynTree::InertialElement::m_centerOfMass</definition>
+        <argsstring></argsstring>
+        <name>m_centerOfMass</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InertialElement.h" line="26" column="15" bodyfile="private/InertialElement.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1InertialElement_1a7683b4416677feab71ec30df7bdd83bb" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::InertialElement::m_mass</definition>
+        <argsstring></argsstring>
+        <name>m_mass</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InertialElement.h" line="27" column="12" bodyfile="private/InertialElement.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1InertialElement_1a9b14d54dac0825d1efccf405b6a26468" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1RotationalInertiaRaw" kindref="compound">RotationalInertiaRaw</ref></type>
+        <definition>RotationalInertiaRaw iDynTree::InertialElement::m_rotationalInertiaWRTCoM</definition>
+        <argsstring></argsstring>
+        <name>m_rotationalInertiaWRTCoM</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InertialElement.h" line="28" column="26" bodyfile="private/InertialElement.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1InertialElement_1ac18d60d227d3868dc73bbcb2034ec904" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Link" kindref="compound">iDynTree::Link</ref> &amp;</type>
+        <definition>iDynTree::Link&amp; iDynTree::InertialElement::m_link</definition>
+        <argsstring></argsstring>
+        <name>m_link</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InertialElement.h" line="29" column="20" bodyfile="private/InertialElement.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1InertialElement_1a75919a0f3285a96e38bc6ae519966215" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::InertialElement::InertialElement</definition>
+        <argsstring>(iDynTree::Link &amp;link)</argsstring>
+        <name>InertialElement</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Link" kindref="compound">iDynTree::Link</ref> &amp;</type>
+          <declname>link</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InertialElement.h" line="32" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InertialElement_1aec2e94c9ffa5a1d2aa6c2e7406cce1a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">iDynTree::XMLElement</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;iDynTree::XMLElement&gt; iDynTree::InertialElement::childElementForName</definition>
+        <argsstring>(const std::string &amp;name) override</argsstring>
+        <name>childElementForName</name>
+        <reimplements refid="classiDynTree_1_1XMLElement_1a94cf11d5e2e9f6a44f17c7439d2b809f">childElementForName</reimplements>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Factory method to create child element given the name. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>name of the element to create </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>a new parser element for the corresponding tag </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InertialElement.h" line="34" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InertialElement_1a38f2684dc9bd018384a0e386bd590240" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::InertialElement::exitElementScope</definition>
+        <argsstring>() override</argsstring>
+        <name>exitElementScope</name>
+        <reimplements refid="classiDynTree_1_1XMLElement_1a327997dec2ced313aad008c376205f36">exitElementScope</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InertialElement.h" line="36" column="18"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::InertialElement</label>
+        <link refid="classiDynTree_1_1InertialElement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::XMLElement</label>
+        <link refid="classiDynTree_1_1XMLElement"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>iDynTree::InertialElement</label>
+        <link refid="classiDynTree_1_1InertialElement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::XMLElement</label>
+        <link refid="classiDynTree_1_1XMLElement"/>
+      </node>
+    </collaborationgraph>
+    <location file="private/InertialElement.h" line="25" column="1" bodyfile="private/InertialElement.h" bodystart="25" bodyend="38"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1XMLElement_1a2a182ac17f5e644b113a67e02c3595e5" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>attributeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1adf74d829fbe4d3d112c0ef2eba8bd3ea" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>attributes</name></member>
+      <member refid="classiDynTree_1_1InertialElement_1aec2e94c9ffa5a1d2aa6c2e7406cce1a0" prot="public" virt="virtual"><scope>iDynTree::InertialElement</scope><name>childElementForName</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a18b5b00729b99a19cb3e8f430656e152" prot="public" virt="virtual"><scope>iDynTree::InertialElement</scope><name>childHasBeenParsed</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1af5c19c2120a4e024149f78ee5bd52e6f" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>children</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a3d8e1b737e614b35e3df0a4f76ac645b" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>description</name></member>
+      <member refid="classiDynTree_1_1InertialElement_1a38f2684dc9bd018384a0e386bd590240" prot="public" virt="virtual"><scope>iDynTree::InertialElement</scope><name>exitElementScope</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1aa6f49fb7b1b204e1a84cbdc51faeaa62" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>exitScopeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1abebc95353394912e187ad70e6078fcdc" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>getParsedTextContent</name></member>
+      <member refid="classiDynTree_1_1InertialElement_1a75919a0f3285a96e38bc6ae519966215" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>InertialElement</name></member>
+      <member refid="classiDynTree_1_1InertialElement_1ad653f593941c6d19e334506439428769" prot="private" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>m_centerOfMass</name></member>
+      <member refid="classiDynTree_1_1InertialElement_1ac18d60d227d3868dc73bbcb2034ec904" prot="private" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>m_link</name></member>
+      <member refid="classiDynTree_1_1InertialElement_1a7683b4416677feab71ec30df7bdd83bb" prot="private" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>m_mass</name></member>
+      <member refid="classiDynTree_1_1InertialElement_1a9b14d54dac0825d1efccf405b6a26468" prot="private" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>m_rotationalInertiaWRTCoM</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a7129fb1e69a5bc819872e65d3965296d" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>name</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1aa44416f43c71e081f6637a91eb733e8d" prot="public" virt="virtual"><scope>iDynTree::InertialElement</scope><name>parsedCharacters</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1ab40851b7629a74107f2183ca36e412e4" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>setAttributeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a2fe23e8a9ee4d2f776f792c9c118db45" prot="public" virt="virtual"><scope>iDynTree::InertialElement</scope><name>setAttributes</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a69171cc4b5c552b97f44375029356a2e" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>setChildHasBeenParsedCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a16759fb450635662dced0eb2ace0228b" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>setExitScopeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a885cb939d74e8ce27ce4c0708c04267e" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a7ad288fac24328b2bb19908500fec39a" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a42ee14ee8b2ec8a9e9e31472e1b17556" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1aa0220e560dfd45a38797cb5209653ad4" prot="public" virt="virtual"><scope>iDynTree::InertialElement</scope><name>~XMLElement</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1FrameFreeFloatingJacobian" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::FrameFreeFloatingJacobian</compoundname>
+    <basecompoundref refid="classiDynTree_1_1MatrixDynSize" prot="public" virt="non-virtual">iDynTree::MatrixDynSize</basecompoundref>
+    <includes local="no">iDynTree/Model/FreeFloatingMatrices.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1FrameFreeFloatingJacobian_1ae28935997944d1e8475eea2cd7883ff1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::FrameFreeFloatingJacobian::FrameFreeFloatingJacobian</definition>
+        <argsstring>(size_t nrOfDofs=0)</argsstring>
+        <name>FrameFreeFloatingJacobian</name>
+        <param>
+          <type>size_t</type>
+          <declname>nrOfDofs</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="45" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FrameFreeFloatingJacobian_1a0a8f549d50ad8f024d9d72144f43a069" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::FrameFreeFloatingJacobian::FrameFreeFloatingJacobian</definition>
+        <argsstring>(const iDynTree::Model &amp;model)</argsstring>
+        <name>FrameFreeFloatingJacobian</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="46" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FrameFreeFloatingJacobian_1a436f8c7443bebd724421dfb3ebc64ee2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::FrameFreeFloatingJacobian::resize</definition>
+        <argsstring>(const iDynTree::Model &amp;model)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="48" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FrameFreeFloatingJacobian_1aea2422f1664a9c0cdf736eec4e7fe291" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::FrameFreeFloatingJacobian::isConsistent</definition>
+        <argsstring>(const iDynTree::Model &amp;model) const</argsstring>
+        <name>isConsistent</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="49" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FrameFreeFloatingJacobian_1a2339eb47e7eb012515e29cd9ccbe6075" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::FrameFreeFloatingJacobian::~FrameFreeFloatingJacobian</definition>
+        <argsstring>()</argsstring>
+        <name>~FrameFreeFloatingJacobian</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="51" column="13"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Jacobian of the 6D frame velocity. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::MatrixDynSize</label>
+        <link refid="classiDynTree_1_1MatrixDynSize"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::FrameFreeFloatingJacobian</label>
+        <link refid="classiDynTree_1_1FrameFreeFloatingJacobian"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>iDynTree::MatrixDynSize</label>
+        <link refid="classiDynTree_1_1MatrixDynSize"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::FrameFreeFloatingJacobian</label>
+        <link refid="classiDynTree_1_1FrameFreeFloatingJacobian"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Model/FreeFloatingMatrices.h" line="42" column="1" bodyfile="iDynTree/Model/FreeFloatingMatrices.h" bodystart="43" bodyend="52"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1MatrixDynSize_1aacda29701a42c3943a781b9876500daf" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>capacity</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a18a9a6232ac5c967cf541caa21586d71" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>cols</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a326369f52bb74fe3cdc30fc02af81eb8" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>data</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a2bfc7c13f386f6d5845e685bbb78daf2" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>data</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1ab11629d6f89ef3d4051867e44abdf76e" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>fillColMajorBuffer</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1aa8af99c672e6a7e188115d2a8144a1c7" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>fillRowMajorBuffer</name></member>
+      <member refid="classiDynTree_1_1FrameFreeFloatingJacobian_1ae28935997944d1e8475eea2cd7883ff1" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>FrameFreeFloatingJacobian</name></member>
+      <member refid="classiDynTree_1_1FrameFreeFloatingJacobian_1a0a8f549d50ad8f024d9d72144f43a069" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>FrameFreeFloatingJacobian</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a162f9d9077a0d5bbddc1da1b303515e5" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>getVal</name></member>
+      <member refid="classiDynTree_1_1FrameFreeFloatingJacobian_1aea2422f1664a9c0cdf736eec4e7fe291" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>isConsistent</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1af1d85eadf886d3fb508e2bf9e9788600" prot="protected" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>m_capacity</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a4c1fb8178a7fa9dfa5863f767b15fe20" prot="protected" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>m_cols</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a80eba7978bcce15f4146f815c557f1bb" prot="protected" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>m_data</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1ae25ad33695edf5ec1b43e13ffcfdde2c" prot="protected" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>m_rows</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a062017b1f0958fa8d18edd822ad7018f" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>MatrixDynSize</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a38a30ddc05269a2c8ee66603db7a1a5e" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>MatrixDynSize</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1aaa27f4111779337ae337dc3ab1abf2e4" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>MatrixDynSize</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a280957c0323a79009ccee5708668ca5c" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>MatrixDynSize</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a162a5170740ac6bc8c0a3992f9200b1c" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>MatrixDynSize</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1aec352e4bfae97705cbe42eb99b91b969" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a042335b734c10aa111c4c792f10d169c" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1ab5dc70fe26c9b8e58a7a03a336556749" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1ab4288557b4a3a229c195abfba9384688" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a23e474c7161903c18be88d8fac2b4137" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>reserve</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1ae86eb69f39997bd181971d9bd5f56950" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>reservedToString</name></member>
+      <member refid="classiDynTree_1_1FrameFreeFloatingJacobian_1a436f8c7443bebd724421dfb3ebc64ee2" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>resize</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a9cf8980628426a135edc1653e8f56496" prot="public" virt="non-virtual" ambiguityscope="iDynTree::MatrixDynSize::"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>resize</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a45a21d9dc00a7c5daadebc1f09ed3fdf" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>rows</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a34270bc42525a83112307cb480be5604" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>setVal</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1ad5c3a0b1b9ce8c691194c652adf95a5a" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>shrink_to_fit</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a77e45ef11c7624ed8b7e150ebd041825" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>toString</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1afbcf1bf37275f811cab76cda68cad818" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>value_type</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a071eb4583b2bd16399cf4bb460e15db0" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>zero</name></member>
+      <member refid="classiDynTree_1_1FrameFreeFloatingJacobian_1a2339eb47e7eb012515e29cd9ccbe6075" prot="public" virt="virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>~FrameFreeFloatingJacobian</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a9cbfeed643bb079a4c2060fb92309be7" prot="public" virt="virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>~MatrixDynSize</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

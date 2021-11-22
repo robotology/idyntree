@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1ICameraAnimator" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::ICameraAnimator</compoundname>
+    <includes local="no">iDynTree/Visualizer.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1ICameraAnimator_1ad88ae2243d7ce5123632d5cd2c16c5d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::ICameraAnimator::enableMouseControl</definition>
+        <argsstring>(bool enabled=true)=0</argsstring>
+        <name>enableMouseControl</name>
+        <param>
+          <type>bool</type>
+          <declname>enabled</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Enable the control of camera via the mouse. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>By default, left button rotates the camera, the right button translates it on the plane. The middle button, translates the camera up and down, while the wheel increases or decreases the zoom. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="41" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ICameraAnimator_1a5c644eb315333d135c15826f00bbf822" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::ICameraAnimator::getMoveSpeed</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getMoveSpeed</name>
+        <briefdescription>
+<para>Returns the speed of movement. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="46" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ICameraAnimator_1a5be446b3f8698c624d8e232c20f775f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::ICameraAnimator::setMoveSpeed</definition>
+        <argsstring>(double moveSpeed)=0</argsstring>
+        <name>setMoveSpeed</name>
+        <param>
+          <type>double</type>
+          <declname>moveSpeed</declname>
+        </param>
+        <briefdescription>
+<para>Sets the speed of movement. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="51" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ICameraAnimator_1a47afefea53aabd94b402132dc08e81be" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::ICameraAnimator::getRotateSpeed</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getRotateSpeed</name>
+        <briefdescription>
+<para>Returns the rotation speed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="56" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ICameraAnimator_1a08e6ecf7bc1c72b267d9dc90fe18e65c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::ICameraAnimator::setRotateSpeed</definition>
+        <argsstring>(double rotateSpeed)=0</argsstring>
+        <name>setRotateSpeed</name>
+        <param>
+          <type>double</type>
+          <declname>rotateSpeed</declname>
+        </param>
+        <briefdescription>
+<para>Set the rotation speed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="61" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ICameraAnimator_1a4b0bd79b5f4529a23b21ac9fc155b291" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::ICameraAnimator::getZoomSpeed</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getZoomSpeed</name>
+        <briefdescription>
+<para>Returns the zoom speed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="66" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ICameraAnimator_1a9c1bcceba875d62b7d2ed373cf64b6bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::ICameraAnimator::setZoomSpeed</definition>
+        <argsstring>(double zoomSpeed)=0</argsstring>
+        <name>setZoomSpeed</name>
+        <param>
+          <type>double</type>
+          <declname>zoomSpeed</declname>
+        </param>
+        <briefdescription>
+<para>Set the zoom speed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="71" column="18"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Interface to animate the camera and control it via the mouse. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Visualizer.h" line="32" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="33" bodyend="72"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1ICameraAnimator_1ad88ae2243d7ce5123632d5cd2c16c5d1" prot="public" virt="pure-virtual"><scope>iDynTree::ICameraAnimator</scope><name>enableMouseControl</name></member>
+      <member refid="classiDynTree_1_1ICameraAnimator_1a5c644eb315333d135c15826f00bbf822" prot="public" virt="pure-virtual"><scope>iDynTree::ICameraAnimator</scope><name>getMoveSpeed</name></member>
+      <member refid="classiDynTree_1_1ICameraAnimator_1a47afefea53aabd94b402132dc08e81be" prot="public" virt="pure-virtual"><scope>iDynTree::ICameraAnimator</scope><name>getRotateSpeed</name></member>
+      <member refid="classiDynTree_1_1ICameraAnimator_1a4b0bd79b5f4529a23b21ac9fc155b291" prot="public" virt="pure-virtual"><scope>iDynTree::ICameraAnimator</scope><name>getZoomSpeed</name></member>
+      <member refid="classiDynTree_1_1ICameraAnimator_1a5be446b3f8698c624d8e232c20f775f6" prot="public" virt="pure-virtual"><scope>iDynTree::ICameraAnimator</scope><name>setMoveSpeed</name></member>
+      <member refid="classiDynTree_1_1ICameraAnimator_1a08e6ecf7bc1c72b267d9dc90fe18e65c" prot="public" virt="pure-virtual"><scope>iDynTree::ICameraAnimator</scope><name>setRotateSpeed</name></member>
+      <member refid="classiDynTree_1_1ICameraAnimator_1a9c1bcceba875d62b7d2ed373cf64b6bc" prot="public" virt="pure-virtual"><scope>iDynTree::ICameraAnimator</scope><name>setZoomSpeed</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

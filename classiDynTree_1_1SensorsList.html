@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>iDynTree::SensorsList class | iDynTree master</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="./index.html">iDynTree</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="4">
+            <li>
+              <a href="pages.html">Versions</a>
+              <ol>
+                <li><a href="./index.html">Master</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="pages.html">Contacts</a>
+              <ol>
+                <li><a href="https://github.com/robotology/idyntree">GitHub</a></li>
+                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
+              </ol>
+            </li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespaceiDynTree.html">iDynTree</a>::<wbr/></span>SensorsList <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="Sensors_8h.html">&lt;iDynTree/Sensors/Sensors.h&gt;</a></div>
+        </h1>
+        <p>Structure representing a group of sensors associated with an UndirectedTree.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classiDynTree_1_1SensorsList_1_1ConstIterator.html" class="m-doc">ConstIterator</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1SensorsList_1_1ConstTypedIterator.html" class="m-doc">ConstTypedIterator</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1SensorsList_1_1Iterator.html" class="m-doc">Iterator</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1SensorsList_1_1TypedIterator.html" class="m-doc">TypedIterator</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aebdb30ea705c5f354aa39cb741ee63a9">
+              using <a href="#aebdb30ea705c5f354aa39cb741ee63a9" class="m-doc-self">typed_iterator</a> = <a href="classiDynTree_1_1SensorsList_1_1TypedIterator.html" class="m-doc">TypedIterator</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a2eb981ba901b6eb4ff2354d5f04b7701">
+              using <a href="#a2eb981ba901b6eb4ff2354d5f04b7701" class="m-doc-self">const_typed_iterator</a> = <a href="classiDynTree_1_1SensorsList_1_1ConstTypedIterator.html" class="m-doc">ConstTypedIterator</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a4143a28a17a2b0884179d095cd0f8c9a">
+              using <a href="#a4143a28a17a2b0884179d095cd0f8c9a" class="m-doc-self">iterator</a> = <a href="classiDynTree_1_1SensorsList_1_1Iterator.html" class="m-doc">Iterator</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a401ffc51c5a62062d291d42af9809ce4">
+              using <a href="#a401ffc51c5a62062d291d42af9809ce4" class="m-doc-self">const_iterator</a> = <a href="classiDynTree_1_1SensorsList_1_1ConstIterator.html" class="m-doc">ConstIterator</a>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="a3df83506e04fc901432d3ce92459ecd5">
+              <span class="m-doc-wrap-bumper"><a href="#a3df83506e04fc901432d3ce92459ecd5" class="m-doc-self">SensorsList</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Constructor.</dd>
+            <dt id="a0fdf85096d1148e6bf8b9b9d97f2befe">
+              <span class="m-doc-wrap-bumper"><a href="#a0fdf85096d1148e6bf8b9b9d97f2befe" class="m-doc-self">SensorsList</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a>&amp; other)</span>
+            </dt>
+            <dd>Copy constructor.</dd>
+            <dt id="a74706c274df024a9c45c910a6d65ece3">
+              <span class="m-doc-wrap-bumper"><a href="#a74706c274df024a9c45c910a6d65ece3" class="m-doc-self">~SensorsList</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Destructor.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt id="af5b05d310b8adbd0939524343b6b35bc">
+              <span class="m-doc-wrap-bumper">auto <a href="#af5b05d310b8adbd0939524343b6b35bc" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a>&amp; other) -&gt; <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a>&amp;</span>
+            </dt>
+            <dd>Copy operator.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ad80ce6e179db6add932264147609bc66" class="m-doc">addSensor</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Sensor.html" class="m-doc">Sensor</a>&amp; sensor) -&gt; std::ptrdiff_t</span>
+            </dt>
+            <dd>Add a sensor to the SensorsTree.</dd>
+            <dt id="a6154db8662dabf186ed7014fdd247374">
+              <span class="m-doc-wrap-bumper">auto <a href="#a6154db8662dabf186ed7014fdd247374" class="m-doc-self">setSerialization</a>(</span><span class="m-doc-wrap">const SensorType&amp; sensor_type,
+              const std::vector&lt;std::string&gt;&amp; serializaton) -&gt; bool</span>
+            </dt>
+            <dd>Change the serialization of a specific sensor type.</dd>
+            <dt id="a674083e12d9a5e673d75db1998020589">
+              <span class="m-doc-wrap-bumper">auto <a href="#a674083e12d9a5e673d75db1998020589" class="m-doc-self">getSerialization</a>(</span><span class="m-doc-wrap">const SensorType&amp; sensor_type,
+              std::vector&lt;std::string&gt;&amp; serializaton) -&gt; bool</span>
+            </dt>
+            <dd>Get the serialization of a specific sensor type.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a561e2e3a6e1002d3ee4af0e96d17efe9" class="m-doc">getNrOfSensors</a>(</span><span class="m-doc-wrap">const SensorType&amp; sensor_type) const -&gt; std::size_t</span>
+            </dt>
+            <dd>Get the number of sensors of type sensor_type in this <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a> .</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a03e95f4b1d11084323e3374bf8ca72b7" class="m-doc">getSensorIndex</a>(</span><span class="m-doc-wrap">const SensorType&amp; sensor_type,
+              const std::string&amp; _sensor_name,
+              std::ptrdiff_t&amp; sensor_index) const -&gt; bool</span>
+            </dt>
+            <dd>Get the index of a sensor of type sensor_type in this SensorList.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa85df07f8e9590e8746011476a12eac7" class="m-doc">getSensorIndex</a>(</span><span class="m-doc-wrap">const SensorType&amp; sensor_type,
+              const std::string&amp; _sensor_name) const -&gt; std::ptrdiff_t</span>
+            </dt>
+            <dd>Get the index of a sensor of type sensor_type and with name sensor_name.</dd>
+            <dt id="a31832ea1ddd81e7e4c9fa0983e33d47e">
+              <span class="m-doc-wrap-bumper">auto <a href="#a31832ea1ddd81e7e4c9fa0983e33d47e" class="m-doc-self">getSizeOfAllSensorsMeasurements</a>(</span><span class="m-doc-wrap">) const -&gt; size_t</span>
+            </dt>
+            <dd>Get the total size of sensor measurements.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#abc051d05660ce2a35b36cd26c573dee9" class="m-doc">getSensor</a>(</span><span class="m-doc-wrap">const SensorType&amp; sensor_type,
+              std::ptrdiff_t sensor_index) const -&gt; <a href="classiDynTree_1_1Sensor.html" class="m-doc">Sensor</a>*</span>
+            </dt>
+            <dd>Get the pointer to the sensor of index sensor_index and of type sensor_type.</dd>
+            <dt id="aa6db282503b0aceb2145d981b5ca5478">
+              <span class="m-doc-wrap-bumper">auto <a href="#aa6db282503b0aceb2145d981b5ca5478" class="m-doc-self">isConsistent</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model) const -&gt; bool</span>
+            </dt>
+            <dd>Check if all the sensors in the list are consistent with the specified model.</dd>
+            <dt id="a17f2ff2224e182ab21916bab483eb5ac">
+              <span class="m-doc-wrap-bumper">auto <a href="#a17f2ff2224e182ab21916bab483eb5ac" class="m-doc-self">removeSensor</a>(</span><span class="m-doc-wrap">const SensorType&amp; sensor_type,
+              const std::string&amp; _sensor_name) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="afc13a8e991877add1ae0fe891e0433f1">
+              <span class="m-doc-wrap-bumper">auto <a href="#afc13a8e991877add1ae0fe891e0433f1" class="m-doc-self">removeSensor</a>(</span><span class="m-doc-wrap">const SensorType&amp; sensor_type,
+              const std::ptrdiff_t sensor_index) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af466948f6df5c1cdbfdcfe7e44d410d1">
+              <span class="m-doc-wrap-bumper">auto <a href="#af466948f6df5c1cdbfdcfe7e44d410d1" class="m-doc-self">removeAllSensorsOfType</a>(</span><span class="m-doc-wrap">const SensorType&amp; sensor_type) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ac33a16f90ea2b150f312eb34670711fa">
+              <span class="m-doc-wrap-bumper">auto <a href="#ac33a16f90ea2b150f312eb34670711fa" class="m-doc-self">allSensorsIterator</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classiDynTree_1_1SensorsList_1_1Iterator.html" class="m-doc">iterator</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a5a258d522fe2d95ce8a7757fbc178a15">
+              <span class="m-doc-wrap-bumper">auto <a href="#a5a258d522fe2d95ce8a7757fbc178a15" class="m-doc-self">allSensorsIterator</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classiDynTree_1_1SensorsList_1_1ConstIterator.html" class="m-doc">const_<wbr />iterator</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1ec968093835c3af65c6cbce72556421">
+              <span class="m-doc-wrap-bumper">auto <a href="#a1ec968093835c3af65c6cbce72556421" class="m-doc-self">sensorsIteratorForType</a>(</span><span class="m-doc-wrap">const iDynTree::SensorType&amp; sensor_type) -&gt; <a href="classiDynTree_1_1SensorsList_1_1TypedIterator.html" class="m-doc">typed_<wbr />iterator</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ab1b2c5c0c17738a644825aa6c47ab095">
+              <span class="m-doc-wrap-bumper">auto <a href="#ab1b2c5c0c17738a644825aa6c47ab095" class="m-doc-self">sensorsIteratorForType</a>(</span><span class="m-doc-wrap">const iDynTree::SensorType&amp; sensor_type) const -&gt; <a href="classiDynTree_1_1SensorsList_1_1ConstTypedIterator.html" class="m-doc">const_<wbr />typed_<wbr />iterator</a></span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="ad80ce6e179db6add932264147609bc66"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::ptrdiff_t iDynTree::<wbr />SensorsList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad80ce6e179db6add932264147609bc66" class="m-doc-self">addSensor</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Sensor.html" class="m-doc">Sensor</a>&amp; sensor)</span></span>
+            </h3>
+            <p>Add a sensor to the SensorsTree.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">sensor&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>constant reference to the <a href="classiDynTree_1_1Sensor.html" class="m-doc">Sensor</a> to add.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>the sensor index of the newly added sensor, or -1 in case of error.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The initial sensor index will depend on the order in which the sensor are added to the sensorsTree. The sensor index can then be changed with a call to the setSerialization method.</p><p>The passed sensor will be dynamic casted to the specified sensor type, and will be copied in the sensors tree only if the dynamic cast will be successful.</p>
+          </div></section>
+          <section class="m-doc-details" id="a561e2e3a6e1002d3ee4af0e96d17efe9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::size_t iDynTree::<wbr />SensorsList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a561e2e3a6e1002d3ee4af0e96d17efe9" class="m-doc-self">getNrOfSensors</a>(</span><span class="m-doc-wrap">const SensorType&amp; sensor_type) const</span></span>
+            </h3>
+            <p>Get the number of sensors of type sensor_type in this <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a> .</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>the number of sensors of type sensor_type</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a03e95f4b1d11084323e3374bf8ca72b7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />SensorsList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a03e95f4b1d11084323e3374bf8ca72b7" class="m-doc-self">getSensorIndex</a>(</span><span class="m-doc-wrap">const SensorType&amp; sensor_type,
+              const std::string&amp; _sensor_name,
+              std::ptrdiff_t&amp; sensor_index) const</span></span>
+            </h3>
+            <p>Get the index of a sensor of type sensor_type in this SensorList.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>true if the sensor name is found, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa85df07f8e9590e8746011476a12eac7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::ptrdiff_t iDynTree::<wbr />SensorsList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa85df07f8e9590e8746011476a12eac7" class="m-doc-self">getSensorIndex</a>(</span><span class="m-doc-wrap">const SensorType&amp; sensor_type,
+              const std::string&amp; _sensor_name) const</span></span>
+            </h3>
+            <p>Get the index of a sensor of type sensor_type and with name sensor_name.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>the sensor index if the sensor_name is found, -1 otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>Some languages do not support well in-output parameters, so we provided this method as an alternative to the three-arguments getSensorIndex</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="abc051d05660ce2a35b36cd26c573dee9"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classiDynTree_1_1Sensor.html" class="m-doc">Sensor</a>* iDynTree::<wbr />SensorsList::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#abc051d05660ce2a35b36cd26c573dee9" class="m-doc-self">getSensor</a>(</span><span class="m-doc-wrap">const SensorType&amp; sensor_type,
+              std::ptrdiff_t sensor_index) const</span></span>
+            </h3>
+            <p>Get the pointer to the sensor of index sensor_index and of type sensor_type.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>the pointer of sensor, of 0 if sensor_index is out of bounds</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>iDynTree documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/robotology/idyntree/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimization_1_1OsqpInterface" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::optimization::OsqpInterface</compoundname>
+    <basecompoundref refid="classiDynTree_1_1optimization_1_1Optimizer" prot="public" virt="non-virtual">iDynTree::optimization::Optimizer</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1optimization_1_1OsqpInterface_1aa2ac7c0a350f5086b50138abebc4dcb0" prot="private" static="no" mutable="no">
+        <type>OsqpInterfaceImplementation *</type>
+        <definition>OsqpInterfaceImplementation* iDynTree::optimization::OsqpInterface::m_pimpl</definition>
+        <argsstring></argsstring>
+        <name>m_pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="63" column="41" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1a8b1d42b0e060f481b2f917b6f0ff5fd8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimization::OsqpInterface::OsqpInterface</definition>
+        <argsstring>()</argsstring>
+        <name>OsqpInterface</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="67" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1a80ed27f2738fbf990537472e42802b73" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimization::OsqpInterface::OsqpInterface</definition>
+        <argsstring>(const OsqpInterface &amp;other)=delete</argsstring>
+        <name>OsqpInterface</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimization_1_1OsqpInterface" kindref="compound">OsqpInterface</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="69" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1ad2146e1d86ba1cad396e9bf48dbaf483" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::optimization::OsqpInterface::~OsqpInterface</definition>
+        <argsstring>() override</argsstring>
+        <name>~OsqpInterface</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="71" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1af7e91800834a28c1893f457e2abd563b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::OsqpInterface::isAvailable</definition>
+        <argsstring>() const override</argsstring>
+        <name>isAvailable</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1ac9b2386bef738ad45761103ffa0eed57">isAvailable</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="73" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1a3306110da1e7dac2351597f9845868c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::OsqpInterface::setProblem</definition>
+        <argsstring>(std::shared_ptr&lt; OptimizationProblem &gt; problem) override</argsstring>
+        <name>setProblem</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1a757c3b55008f047dfe23171c9c462d66">setProblem</reimplements>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimization_1_1OptimizationProblem" kindref="compound">OptimizationProblem</ref> &gt;</type>
+          <declname>problem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="75" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1a3333c2ba38b860387f24704ebf31e32f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::OsqpInterface::solve</definition>
+        <argsstring>() override</argsstring>
+        <name>solve</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1abbb92fc315d49718abffa88b55da1b70">solve</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="77" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1a086d68565c9b9f67452f02d3f31d9baf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::OsqpInterface::getPrimalVariables</definition>
+        <argsstring>(VectorDynSize &amp;primalVariables) override</argsstring>
+        <name>getPrimalVariables</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1ad6e6de7d98cce8509efb08489d26ba83">getPrimalVariables</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>primalVariables</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="79" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1a360dc0119c2019105f8c77cf0cc1762c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::OsqpInterface::getDualVariables</definition>
+        <argsstring>(VectorDynSize &amp;constraintsMultipliers, VectorDynSize &amp;lowerBoundsMultipliers, VectorDynSize &amp;upperBoundsMultipliers) override</argsstring>
+        <name>getDualVariables</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1a6b0a3443c0e2f8143a12119093c9338a">getDualVariables</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>constraintsMultipliers</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>lowerBoundsMultipliers</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>upperBoundsMultipliers</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="81" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1af8db1bceee19d332c86b1cd2bee25f53" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::OsqpInterface::getOptimalCost</definition>
+        <argsstring>(double &amp;optimalCost) override</argsstring>
+        <name>getOptimalCost</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1a37dfe08c5fd7e4ca9a2509681b2c638e">getOptimalCost</reimplements>
+        <param>
+          <type>double &amp;</type>
+          <declname>optimalCost</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="85" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1a12dcd292967e95e732f7b0a7bbe6ad7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::OsqpInterface::getOptimalConstraintsValues</definition>
+        <argsstring>(VectorDynSize &amp;constraintsValues) override</argsstring>
+        <name>getOptimalConstraintsValues</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1a9525d85cf2e4079d22670a25d4413564">getOptimalConstraintsValues</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>constraintsValues</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="87" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1a8f33729498dbe903b9dd39a69fccd22b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::optimization::OsqpInterface::minusInfinity</definition>
+        <argsstring>() override</argsstring>
+        <name>minusInfinity</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1a1f41f893f91cb2ab20df84460cec14ad">minusInfinity</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="89" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1aeda948d7a052a7dbb3bb74130b232c34" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::optimization::OsqpInterface::plusInfinity</definition>
+        <argsstring>() override</argsstring>
+        <name>plusInfinity</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1af951a371f7556a9551cd97177cb4c5e2">plusInfinity</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="91" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1a0babdc07ee961e60837841e097fb9ab6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structiDynTree_1_1optimization_1_1OsqpSettings" kindref="compound">OsqpSettings</ref> &amp;</type>
+        <definition>OsqpSettings&amp; iDynTree::optimization::OsqpInterface::settings</definition>
+        <argsstring>()</argsstring>
+        <name>settings</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="93" column="26"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::optimization::Optimizer</label>
+        <link refid="classiDynTree_1_1optimization_1_1Optimizer"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::optimization::OsqpInterface</label>
+        <link refid="classiDynTree_1_1optimization_1_1OsqpInterface"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>T</label>
+      </node>
+      <node id="4">
+        <label>std::shared_ptr&lt; T &gt;</label>
+        <childnode refid="5" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::optimization::Optimizer</label>
+        <link refid="classiDynTree_1_1optimization_1_1Optimizer"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_problem</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::shared_ptr&lt; iDynTree::optimization::OptimizationProblem &gt;</label>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; iDynTree::optimization::OptimizationProblem &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::optimization::OsqpInterface</label>
+        <link refid="classiDynTree_1_1optimization_1_1OsqpInterface"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Optimizers/OsqpInterface.h" line="60" column="9" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="60" bodyend="94"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimization_1_1OsqpInterface_1a360dc0119c2019105f8c77cf0cc1762c" prot="public" virt="virtual"><scope>iDynTree::optimization::OsqpInterface</scope><name>getDualVariables</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OsqpInterface_1a12dcd292967e95e732f7b0a7bbe6ad7f" prot="public" virt="virtual"><scope>iDynTree::optimization::OsqpInterface</scope><name>getOptimalConstraintsValues</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OsqpInterface_1af8db1bceee19d332c86b1cd2bee25f53" prot="public" virt="virtual"><scope>iDynTree::optimization::OsqpInterface</scope><name>getOptimalCost</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OsqpInterface_1a086d68565c9b9f67452f02d3f31d9baf" prot="public" virt="virtual"><scope>iDynTree::optimization::OsqpInterface</scope><name>getPrimalVariables</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OsqpInterface_1af7e91800834a28c1893f457e2abd563b" prot="public" virt="virtual"><scope>iDynTree::optimization::OsqpInterface</scope><name>isAvailable</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OsqpInterface_1aa2ac7c0a350f5086b50138abebc4dcb0" prot="private" virt="non-virtual"><scope>iDynTree::optimization::OsqpInterface</scope><name>m_pimpl</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1Optimizer_1ae3b9609d905cbbf3c3336c9350e94106" prot="protected" virt="non-virtual"><scope>iDynTree::optimization::OsqpInterface</scope><name>m_problem</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OsqpInterface_1a8f33729498dbe903b9dd39a69fccd22b" prot="public" virt="virtual"><scope>iDynTree::optimization::OsqpInterface</scope><name>minusInfinity</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1Optimizer_1a5fb8e46345b5804f1ab7dbbf024f031c" prot="public" virt="non-virtual"><scope>iDynTree::optimization::OsqpInterface</scope><name>Optimizer</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OsqpInterface_1a8b1d42b0e060f481b2f917b6f0ff5fd8" prot="public" virt="non-virtual"><scope>iDynTree::optimization::OsqpInterface</scope><name>OsqpInterface</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OsqpInterface_1a80ed27f2738fbf990537472e42802b73" prot="public" virt="non-virtual"><scope>iDynTree::optimization::OsqpInterface</scope><name>OsqpInterface</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OsqpInterface_1aeda948d7a052a7dbb3bb74130b232c34" prot="public" virt="virtual"><scope>iDynTree::optimization::OsqpInterface</scope><name>plusInfinity</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1Optimizer_1a92b81ff66dc4353fac014fa2e9dfb8e6" prot="public" virt="virtual"><scope>iDynTree::optimization::OsqpInterface</scope><name>problem</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OsqpInterface_1a3306110da1e7dac2351597f9845868c9" prot="public" virt="virtual"><scope>iDynTree::optimization::OsqpInterface</scope><name>setProblem</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OsqpInterface_1a0babdc07ee961e60837841e097fb9ab6" prot="public" virt="non-virtual"><scope>iDynTree::optimization::OsqpInterface</scope><name>settings</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OsqpInterface_1a3333c2ba38b860387f24704ebf31e32f" prot="public" virt="virtual"><scope>iDynTree::optimization::OsqpInterface</scope><name>solve</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1Optimizer_1abdd338c79ca8ce065fe06006e40249c1" prot="public" virt="virtual"><scope>iDynTree::optimization::OsqpInterface</scope><name>~Optimizer</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OsqpInterface_1ad2146e1d86ba1cad396e9bf48dbaf483" prot="public" virt="virtual"><scope>iDynTree::optimization::OsqpInterface</scope><name>~OsqpInterface</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

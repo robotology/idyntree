@@ -1,0 +1,618 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1Position" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::Position</compoundname>
+    <basecompoundref refid="classiDynTree_1_1PositionRaw" prot="public" virt="non-virtual">iDynTree::PositionRaw</basecompoundref>
+    <includes local="no">iDynTree/Core/Position.h</includes>
+      <sectiondef kind="user-defined">
+      <header>Output helpers.</header>
+      <description><para>Output helpers. </para>
+</description>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1a8b1a9ae6ea05f34d5f3ffdaf655e4b62" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::Position::toString</definition>
+        <argsstring>() const</argsstring>
+        <name>toString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="101" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1aecc777eddc18bb19d4edc2cee6d296b2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::Position::reservedToString</definition>
+        <argsstring>() const</argsstring>
+        <name>reservedToString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="103" column="21"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1Position_1a7586102420b5ad9c679db233b556dc05" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Position::Position</definition>
+        <argsstring>()</argsstring>
+        <name>Position</name>
+        <briefdescription>
+<para>Default constructor: initialize all the coordinates to 0. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="48" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1ab9a911b341e94dce3c12a0b00909bca7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Position::Position</definition>
+        <argsstring>(double x, double y, double z)</argsstring>
+        <name>Position</name>
+        <param>
+          <type>double</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>z</declname>
+        </param>
+        <briefdescription>
+<para>Constructor from 3 doubles: initialize the coordinates with the passed values. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="53" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1a43bb1d57623d1a8723ed4d91b11c84f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Position::Position</definition>
+        <argsstring>(const Position &amp;other)</argsstring>
+        <name>Position</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy constructor: create a <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> from another <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="58" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1a2ec67c9730e953b9b322eed3ab93a327" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Position::Position</definition>
+        <argsstring>(const PositionRaw &amp;other)</argsstring>
+        <name>Position</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1PositionRaw" kindref="compound">PositionRaw</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy constructor: create a <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> from a <ref refid="classiDynTree_1_1PositionRaw" kindref="compound">PositionRaw</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="63" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1a016c1499d097271e726f56b49caba0bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Position::Position</definition>
+        <argsstring>(iDynTree::Span&lt; const double &gt; other)</argsstring>
+        <name>Position</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Create a <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> from a span. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="68" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1ae15e7759f6fa62cfc1dcee22d030571d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+        <definition>const Position&amp; iDynTree::Position::changePoint</definition>
+        <argsstring>(const Position &amp;newPoint)</argsstring>
+        <name>changePoint</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+          <declname>newPoint</declname>
+        </param>
+        <briefdescription>
+<para>Geometric operations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="73" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1ab88fdc6dccec1ee9e1f54c29037305a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+        <definition>const Position&amp; iDynTree::Position::changeRefPoint</definition>
+        <argsstring>(const Position &amp;newRefPoint)</argsstring>
+        <name>changeRefPoint</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+          <declname>newRefPoint</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="74" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1a1a0b1735614deec31cc58bf2aca87233" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+        <definition>const Position&amp; iDynTree::Position::changeCoordinateFrame</definition>
+        <argsstring>(const Rotation &amp;newCoordinateFrame)</argsstring>
+        <name>changeCoordinateFrame</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref> &amp;</type>
+          <declname>newCoordinateFrame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="75" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1a084e7ceda461be06437a1b4bce13ff80" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
+        <definition>SpatialMotionVector iDynTree::Position::changePointOf</definition>
+        <argsstring>(const SpatialMotionVector &amp;other) const</argsstring>
+        <name>changePointOf</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="78" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1a1cb0f61163edd2a5d1270f4f5bd952bb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref></type>
+        <definition>SpatialForceVector iDynTree::Position::changePointOf</definition>
+        <argsstring>(const SpatialForceVector &amp;other) const</argsstring>
+        <name>changePointOf</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="79" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1a88d5d8268549a0c34541d1a8ba521b9a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref></type>
+        <definition>Twist iDynTree::Position::changePointOf</definition>
+        <argsstring>(const Twist &amp;other) const</argsstring>
+        <name>changePointOf</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="80" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1aa93150342775df928536cbdc6504f9d3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref></type>
+        <definition>SpatialAcc iDynTree::Position::changePointOf</definition>
+        <argsstring>(const SpatialAcc &amp;other) const</argsstring>
+        <name>changePointOf</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="81" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1a8b2c15ec5f9cc33f9a1ff0cbdaf98d9f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialMomentum" kindref="compound">SpatialMomentum</ref></type>
+        <definition>SpatialMomentum iDynTree::Position::changePointOf</definition>
+        <argsstring>(const SpatialMomentum &amp;other) const</argsstring>
+        <name>changePointOf</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialMomentum" kindref="compound">SpatialMomentum</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="82" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1a7cfa20dda040d64eca5068b7df0c461e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
+        <definition>Wrench iDynTree::Position::changePointOf</definition>
+        <argsstring>(const Wrench &amp;other) const</argsstring>
+        <name>changePointOf</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="83" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1ae3f22570adb18010ccffcf4ca680ef51" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position iDynTree::Position::operator+</definition>
+        <argsstring>(const Position &amp;other) const</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>overloaded operators </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="88" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1a502889ab010c4355e9ed08aa4452d59a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position iDynTree::Position::operator-</definition>
+        <argsstring>(const Position &amp;other) const</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="89" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1a1fe25ef2a4912d67b692a4649a84df6d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position iDynTree::Position::operator-</definition>
+        <argsstring>() const</argsstring>
+        <name>operator-</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="90" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1a0e9ca2aafa7a4a786fbdd0c83bbdccd1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref></type>
+        <definition>Twist iDynTree::Position::operator*</definition>
+        <argsstring>(const Twist &amp;other) const</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="91" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1a66dc701a9789b4f06badaed2722bdd65" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref></type>
+        <definition>SpatialForceVector iDynTree::Position::operator*</definition>
+        <argsstring>(const SpatialForceVector &amp;other) const</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="92" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1a88c9b6606f756507b5d4755dccda244f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref></type>
+        <definition>SpatialAcc iDynTree::Position::operator*</definition>
+        <argsstring>(const SpatialAcc &amp;other) const</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="93" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1a8e817bcd7259999322b29705f388d9f3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialMomentum" kindref="compound">SpatialMomentum</ref></type>
+        <definition>SpatialMomentum iDynTree::Position::operator*</definition>
+        <argsstring>(const SpatialMomentum &amp;other) const</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialMomentum" kindref="compound">SpatialMomentum</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="94" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1a8712f068ccc27d06cb857efd9061386c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
+        <definition>Wrench iDynTree::Position::operator*</definition>
+        <argsstring>(const Wrench &amp;other) const</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="95" column="18"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classiDynTree_1_1Position_1aacc9b4048ad1e5f9cb7b2c147425bd39" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
+        <definition>static Position iDynTree::Position::compose</definition>
+        <argsstring>(const Position &amp;op1, const Position &amp;op2)</argsstring>
+        <name>compose</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+          <declname>op1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+          <declname>op2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="76" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1ae43c016fee4cfd0f8bbb5c2da2cd9d80" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
+        <definition>static Position iDynTree::Position::inverse</definition>
+        <argsstring>(const Position &amp;op)</argsstring>
+        <name>inverse</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+          <declname>op</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="77" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Position_1a0e6aa3aa05225fb775224d8bcfc56168" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
+        <definition>static Position iDynTree::Position::Zero</definition>
+        <argsstring>()</argsstring>
+        <name>Zero</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="108" column="25"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classiDynTree_1_1Position_1a529088a017261b8a2aad8312e6e23ee7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position Rotation::changeCoordFrameOf</definition>
+        <argsstring>(const Position &amp;op) const</argsstring>
+        <name>Rotation::changeCoordFrameOf</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+          <declname>op</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Position.h" line="106" column="25"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class representation the coordinates of the <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> of a point with respect to another point. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><image type="html" name="position.svg"></image>
+</para>
+<para>The <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> object can briefly described as the position of a <emphasis>point</emphasis> with respect to a <emphasis>refPoint</emphasis>, expressed with respect to an orientation given by <emphasis>orientFrame</emphasis> . </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+      </node>
+      <node id="2">
+        <label>iDynTree::PositionRaw</label>
+        <link refid="classiDynTree_1_1PositionRaw"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::Position</label>
+        <link refid="classiDynTree_1_1Position"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Vector3</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+      </node>
+      <node id="2">
+        <label>iDynTree::PositionRaw</label>
+        <link refid="classiDynTree_1_1PositionRaw"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::Position</label>
+        <link refid="classiDynTree_1_1Position"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Vector3</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Core/Position.h" line="42" column="5" bodyfile="iDynTree/Core/Position.h" bodystart="43" bodyend="109"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1VectorFixSize_1ad0f06a255dc213a5904d232f703a0192" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>allocator_type</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1affa1eab2d54d8227d8aeb402dc2dc1f7" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>begin</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a8e64a7875375a8b1b894614ba882ad05" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>begin</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a1420c32072d5c1e21140da111955a6d1" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>cbegin</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a0b5d60b77fbd7ba982e855453800f776" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>cend</name></member>
+      <member refid="classiDynTree_1_1Position_1a1a0b1735614deec31cc58bf2aca87233" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>changeCoordinateFrame</name></member>
+      <member refid="classiDynTree_1_1Position_1ae15e7759f6fa62cfc1dcee22d030571d" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>changePoint</name></member>
+      <member refid="classiDynTree_1_1PositionRaw_1a890b62a7da3fffa39225b8bffe42b082" prot="public" virt="non-virtual" ambiguityscope="iDynTree::PositionRaw::"><scope>iDynTree::Position</scope><name>changePoint</name></member>
+      <member refid="classiDynTree_1_1Position_1a084e7ceda461be06437a1b4bce13ff80" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>changePointOf</name></member>
+      <member refid="classiDynTree_1_1Position_1a1cb0f61163edd2a5d1270f4f5bd952bb" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>changePointOf</name></member>
+      <member refid="classiDynTree_1_1Position_1a88d5d8268549a0c34541d1a8ba521b9a" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>changePointOf</name></member>
+      <member refid="classiDynTree_1_1Position_1aa93150342775df928536cbdc6504f9d3" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>changePointOf</name></member>
+      <member refid="classiDynTree_1_1Position_1a8b2c15ec5f9cc33f9a1ff0cbdaf98d9f" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>changePointOf</name></member>
+      <member refid="classiDynTree_1_1Position_1a7cfa20dda040d64eca5068b7df0c461e" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>changePointOf</name></member>
+      <member refid="classiDynTree_1_1Position_1ab88fdc6dccec1ee9e1f54c29037305a4" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>changeRefPoint</name></member>
+      <member refid="classiDynTree_1_1PositionRaw_1ac9ae12237eab2576cbd7d72d69a248e5" prot="public" virt="non-virtual" ambiguityscope="iDynTree::PositionRaw::"><scope>iDynTree::Position</scope><name>changeRefPoint</name></member>
+      <member refid="classiDynTree_1_1Position_1aacc9b4048ad1e5f9cb7b2c147425bd39" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>compose</name></member>
+      <member refid="classiDynTree_1_1PositionRaw_1a95bbcdb325604964ac5f7badad015792" prot="public" virt="non-virtual" ambiguityscope="iDynTree::PositionRaw::"><scope>iDynTree::Position</scope><name>compose</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a69b51f8119155d31a254676ae867ae8f" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>const_pointer</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a3bd1389dbdf51e06f4c64451c242397e" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>data</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1ab6f044aea32e55a72f6ebed68f93f767" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>data</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a9409f3724df4aa4de2c8281ba7e67db2" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>end</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a8b6f1796eba4d7c3db40e3d14e33b246" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>end</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1aee106d61ebb0925fecfa55cbaa515981" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>fillBuffer</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1af8b3a33ff82732e94480023aa18cfe98" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>getVal</name></member>
+      <member refid="classiDynTree_1_1Position_1ae43c016fee4cfd0f8bbb5c2da2cd9d80" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>inverse</name></member>
+      <member refid="classiDynTree_1_1PositionRaw_1ad03fd4c796ef99a463767b4f36fe4661" prot="public" virt="non-virtual" ambiguityscope="iDynTree::PositionRaw::"><scope>iDynTree::Position</scope><name>inverse</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a7bf5cd26b6fc24c9ddaf8854ebb8ec63" prot="protected" virt="non-virtual"><scope>iDynTree::Position</scope><name>m_data</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1afbdebfe9410180223c2d33f6f5a243a5" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1aaeeab0c1251340903c447dbc3cd33b01" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1Position_1a0e9ca2aafa7a4a786fbdd0c83bbdccd1" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>operator*</name></member>
+      <member refid="classiDynTree_1_1Position_1a66dc701a9789b4f06badaed2722bdd65" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>operator*</name></member>
+      <member refid="classiDynTree_1_1Position_1a88c9b6606f756507b5d4755dccda244f" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>operator*</name></member>
+      <member refid="classiDynTree_1_1Position_1a8e817bcd7259999322b29705f388d9f3" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>operator*</name></member>
+      <member refid="classiDynTree_1_1Position_1a8712f068ccc27d06cb857efd9061386c" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>operator*</name></member>
+      <member refid="classiDynTree_1_1Position_1ae3f22570adb18010ccffcf4ca680ef51" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>operator+</name></member>
+      <member refid="classiDynTree_1_1Position_1a502889ab010c4355e9ed08aa4452d59a" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>operator-</name></member>
+      <member refid="classiDynTree_1_1Position_1a1fe25ef2a4912d67b692a4649a84df6d" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>operator-</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a823899b673570f935b649cb98c1ca4f8" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a8345a3e5ee2998a02dd79019ce293421" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>operator[]</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a21683853dd0b95beea5b091a584fe486" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>operator[]</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1aa11c3eee00e88dabb7880f6cac2a9b82" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>pointer</name></member>
+      <member refid="classiDynTree_1_1Position_1a7586102420b5ad9c679db233b556dc05" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>Position</name></member>
+      <member refid="classiDynTree_1_1Position_1ab9a911b341e94dce3c12a0b00909bca7" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>Position</name></member>
+      <member refid="classiDynTree_1_1Position_1a43bb1d57623d1a8723ed4d91b11c84f0" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>Position</name></member>
+      <member refid="classiDynTree_1_1Position_1a2ec67c9730e953b9b322eed3ab93a327" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>Position</name></member>
+      <member refid="classiDynTree_1_1Position_1a016c1499d097271e726f56b49caba0bf" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>Position</name></member>
+      <member refid="classiDynTree_1_1PositionRaw_1a262288c2b48b229af89bebb53d92d9f9" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>PositionRaw</name></member>
+      <member refid="classiDynTree_1_1PositionRaw_1a7e7bc8ca7dd0f280f948bd5b68a74be9" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>PositionRaw</name></member>
+      <member refid="classiDynTree_1_1PositionRaw_1a80d840331aaff631f3a20de6c1ad058c" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>PositionRaw</name></member>
+      <member refid="classiDynTree_1_1PositionRaw_1a393b55cd191f8e7d55e1b0f01d34c593" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>PositionRaw</name></member>
+      <member refid="classiDynTree_1_1PositionRaw_1ade679b0251443c8dceb3057b296cd548" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>PositionRaw</name></member>
+      <member refid="classiDynTree_1_1Position_1aecc777eddc18bb19d4edc2cee6d296b2" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>reservedToString</name></member>
+      <member refid="classiDynTree_1_1Position_1a529088a017261b8a2aad8312e6e23ee7" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>Rotation::changeCoordFrameOf</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1ab63541744f87c564754359e4923da4a6" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>setVal</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a92e903cfdf924fee24e71eee1b0dff76" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>size</name></member>
+      <member refid="classiDynTree_1_1Position_1a8b1a9ae6ea05f34d5f3ffdaf655e4b62" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>toString</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1ada7487eff1fee83db8d41165d30f1263" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>value_type</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a1ed77487376ad9915912e2118cb228af" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>VectorFixSize</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a6e92dc360040bccf652bebb0b0318cd6" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>VectorFixSize</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a9fd2c86208c88b1b904564d0a6f5a3b5" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>VectorFixSize</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a57b77a6c96f3276ed8e12b5e35b7f442" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>zero</name></member>
+      <member refid="classiDynTree_1_1Position_1a0e6aa3aa05225fb775224d8bcfc56168" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>Zero</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

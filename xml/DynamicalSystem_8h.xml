@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="DynamicalSystem_8h" kind="file" language="C++">
+    <compoundname>DynamicalSystem.h</compoundname>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/Core/VectorDynSize.h</includes>
+    <includes refid="SparsityStructure_8h" local="no">iDynTree/SparsityStructure.h</includes>
+    <includedby refid="ControlledDynamicalSystem_8h" local="no">iDynTree/ControlledDynamicalSystem.h</includedby>
+    <includedby refid="LinearSystem_8h" local="no">iDynTree/LinearSystem.h</includedby>
+    <includedby refid="MultiBodySystem_8h" local="no">iDynTree/MultiBodySystem.h</includedby>
+    <includedby refid="OptimalControl_8h" local="no">iDynTree/OptimalControl.h</includedby>
+    <innerclass refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" prot="public">iDynTree::optimalcontrol::DynamicalSystem</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <innernamespace refid="namespaceiDynTree_1_1optimalcontrol">iDynTree::optimalcontrol</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/DynamicalSystem.h"/>
+  </compounddef>
+</doxygen>

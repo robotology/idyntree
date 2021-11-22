@@ -1,0 +1,408 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1ModelLoader" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::ModelLoader</compoundname>
+    <includes local="no">iDynTree/ModelIO/ModelLoader.h</includes>
+      <sectiondef kind="user-defined">
+      <header>Constructor/Destructor</header>
+      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a17284e5e46f1f2ff2d3d74a32442d362" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ModelLoader::ModelLoader</definition>
+        <argsstring>()</argsstring>
+        <name>ModelLoader</name>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="91" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a6e6be84f2b3a2009d22949e4b7520de2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ModelLoader::~ModelLoader</definition>
+        <argsstring>()</argsstring>
+        <name>~ModelLoader</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="93" column="5"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Model loading and definition methods</header>
+      <description><para>This methods are used to load the structure of your model. </para>
+</description>
+      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1adfc4ccd100924f832a6fa6b1929a20e6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="structiDynTree_1_1ModelParserOptions" kindref="compound">ModelParserOptions</ref> &amp;</type>
+        <definition>const ModelParserOptions&amp; iDynTree::ModelLoader::parsingOptions</definition>
+        <argsstring>() const</argsstring>
+        <name>parsingOptions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="102" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a1a6f86c7cc5964554458ead6242796a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::ModelLoader::setParsingOptions</definition>
+        <argsstring>(const ModelParserOptions &amp;options)</argsstring>
+        <name>setParsingOptions</name>
+        <param>
+          <type>const <ref refid="structiDynTree_1_1ModelParserOptions" kindref="compound">ModelParserOptions</ref> &amp;</type>
+          <declname>options</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="104" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a44b074a70bd585aecffa44a2329c99b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ModelLoader::loadModelFromString</definition>
+        <argsstring>(const std::string &amp;modelString, const std::string &amp;filetype=&quot;urdf&quot;)</argsstring>
+        <name>loadModelFromString</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>modelString</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filetype</declname>
+          <defval>&quot;urdf&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Load the model of the robot from a string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>modelString</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>string containg the model of the robot. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>filetype</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>type of the file to load, currently supporting only urdf type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="113" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a4731f7a0967a0f88b9ee760027f42c28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ModelLoader::loadModelFromFile</definition>
+        <argsstring>(const std::string &amp;filename, const std::string &amp;filetype=&quot;urdf&quot;)</argsstring>
+        <name>loadModelFromFile</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filetype</declname>
+          <defval>&quot;urdf&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Load the model of the robot from an external file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>path to the file to load </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>filetype</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>type of the file to load, currently supporting only urdf type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="122" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1aa1d105cc4c13bc5c6fd90cc6f8224085" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ModelLoader::loadReducedModelFromFullModel</definition>
+        <argsstring>(const Model &amp;fullModel, const std::vector&lt; std::string &gt; &amp;consideredJoints, const std::string filetype=&quot;&quot;)</argsstring>
+        <name>loadReducedModelFromFullModel</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>fullModel</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>consideredJoints</declname>
+        </param>
+        <param>
+          <type>const std::string</type>
+          <declname>filetype</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Load reduced model from another model, specifyng only the desired joints in the model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>All other joints will be considered to be fixed to their default position, and their child links will be lumped together.</para>
+<para><simplesect kind="note"><para>the order of the degreese of freedom of the newly loaded model will be the one specified by the input joints serialization, i.e. consideredJoints</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>path to the file to load. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">consideredJoints</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>list of joints to consider in the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">filetype</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(optional) explicit definition of the type of the loaded file. Only &quot;urdf&quot; is supported at the moment. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well (files were correctly loaded and consistent), false otherwise.</para>
+</simplesect>
+<simplesect kind="note"><para>Until <ulink url="https://github.com/robotology/idyntree/issues/132">https://github.com/robotology/idyntree/issues/132</ulink> is fixed, this method does not accounts for sensors. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="142" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1af6391e49caad7c349a1f007abb4ec2d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ModelLoader::loadReducedModelFromString</definition>
+        <argsstring>(const std::string modelString, const std::vector&lt; std::string &gt; &amp;consideredJoints, const std::string filetype=&quot;&quot;)</argsstring>
+        <name>loadReducedModelFromString</name>
+        <param>
+          <type>const std::string</type>
+          <declname>modelString</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>consideredJoints</declname>
+        </param>
+        <param>
+          <type>const std::string</type>
+          <declname>filetype</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Load reduced model from string, specifyng only the desired joints in the model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>All other joints will be considered to be fixed to their default position, and their child links will be lumped together.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">modelString</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>string containg the model of the robot. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">consideredJoints</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>list of joints to consider in the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">filetype</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(optional) explicit definiton of the filetype to load. Only &quot;urdf&quot; is supported at the moment. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well (files were correctly loaded and consistent), false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="160" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1ab846e7becb8c98998cb2b05749a95ade" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ModelLoader::loadReducedModelFromFile</definition>
+        <argsstring>(const std::string filename, const std::vector&lt; std::string &gt; &amp;consideredJoints, const std::string filetype=&quot;&quot;)</argsstring>
+        <name>loadReducedModelFromFile</name>
+        <param>
+          <type>const std::string</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>consideredJoints</declname>
+        </param>
+        <param>
+          <type>const std::string</type>
+          <declname>filetype</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Load reduced model from file, specifyng only the desired joints in the model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>All other joints will be considered to be fixed to their default position, and their child links will be lumped together.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>path to the file to load. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">consideredJoints</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>list of joints to consider in the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">filetype</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(optional) explicit definiton of the filetype to load. Only &quot;urdf&quot; is supported at the moment. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well (files were correctly loaded and consistent), false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="178" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1abfea0564c6c01dc8a90bab55df13b533" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+        <definition>const Model&amp; iDynTree::ModelLoader::model</definition>
+        <argsstring>()</argsstring>
+        <name>model</name>
+        <briefdescription>
+<para>Get the loaded model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="186" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a933ace452015e5dd1d0d229315aef980" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> &amp;</type>
+        <definition>const SensorsList&amp; iDynTree::ModelLoader::sensors</definition>
+        <argsstring>()</argsstring>
+        <name>sensors</name>
+        <briefdescription>
+<para>Get the loaded sensors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="191" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a6b78cb43b48ab1b377b5c907f9918077" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ModelLoader::isValid</definition>
+        <argsstring>()</argsstring>
+        <name>isValid</name>
+        <briefdescription>
+<para>Return true if the model have been correctly true. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if the model was loaded correctly. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="198" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1ModelLoader_1a0f029751adcda826ebdde3d40a9a7104" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; ModelLoaderPimpl &gt;</type>
+        <definition>std::unique_ptr&lt;ModelLoaderPimpl&gt; iDynTree::ModelLoader::m_pimpl</definition>
+        <argsstring></argsstring>
+        <name>m_pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="78" column="21" bodyfile="iDynTree/ModelIO/ModelLoader.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Helper class to load a model from a generic format. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Unless the methods for loading a model with an explicit serialization are used, the default joint serialization of the model loaded will be a &quot;normalized&quot; joint serialization based on the default base link, see the iDynTree::createModelWithNormalizedJointNumbering function for more details. </para>
+    </detaileddescription>
+    <location file="iDynTree/ModelIO/ModelLoader.h" line="73" column="1" bodyfile="iDynTree/ModelIO/ModelLoader.h" bodystart="74" bodyend="200"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1ModelLoader_1a6b78cb43b48ab1b377b5c907f9918077" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>isValid</name></member>
+      <member refid="classiDynTree_1_1ModelLoader_1a4731f7a0967a0f88b9ee760027f42c28" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadModelFromFile</name></member>
+      <member refid="classiDynTree_1_1ModelLoader_1a44b074a70bd585aecffa44a2329c99b0" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadModelFromString</name></member>
+      <member refid="classiDynTree_1_1ModelLoader_1ab846e7becb8c98998cb2b05749a95ade" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromFile</name></member>
+      <member refid="classiDynTree_1_1ModelLoader_1aa1d105cc4c13bc5c6fd90cc6f8224085" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromFullModel</name></member>
+      <member refid="classiDynTree_1_1ModelLoader_1af6391e49caad7c349a1f007abb4ec2d4" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromString</name></member>
+      <member refid="classiDynTree_1_1ModelLoader_1a0f029751adcda826ebdde3d40a9a7104" prot="private" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>m_pimpl</name></member>
+      <member refid="classiDynTree_1_1ModelLoader_1abfea0564c6c01dc8a90bab55df13b533" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>model</name></member>
+      <member refid="classiDynTree_1_1ModelLoader_1a17284e5e46f1f2ff2d3d74a32442d362" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>ModelLoader</name></member>
+      <member refid="classiDynTree_1_1ModelLoader_1adfc4ccd100924f832a6fa6b1929a20e6" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>parsingOptions</name></member>
+      <member refid="classiDynTree_1_1ModelLoader_1a933ace452015e5dd1d0d229315aef980" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>sensors</name></member>
+      <member refid="classiDynTree_1_1ModelLoader_1a1a6f86c7cc5964554458ead6242796a9" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>setParsingOptions</name></member>
+      <member refid="classiDynTree_1_1ModelLoader_1a6e6be84f2b3a2009d22949e4b7520de2" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>~ModelLoader</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

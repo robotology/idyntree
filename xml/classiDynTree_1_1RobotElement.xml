@@ -1,0 +1,263 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1RobotElement" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::RobotElement</compoundname>
+    <basecompoundref refid="classiDynTree_1_1XMLElement" prot="public" virt="non-virtual">iDynTree::XMLElement</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1RobotElement_1a0d834288b12e3b8b3225efc0da9a5fa9" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+        <definition>iDynTree::Model&amp; iDynTree::RobotElement::m_model</definition>
+        <argsstring></argsstring>
+        <name>m_model</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/RobotElement.h" line="38" column="21" bodyfile="private/RobotElement.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1RobotElement_1acb1683c61ca990b16364aa0a73db2718" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classiDynTree_1_1SensorHelper" kindref="compound">SensorHelper</ref> &gt; &gt; &amp;</type>
+        <definition>std::vector&lt;std::shared_ptr&lt;SensorHelper&gt; &gt;&amp; iDynTree::RobotElement::m_sensorHelpers</definition>
+        <argsstring></argsstring>
+        <name>m_sensorHelpers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/RobotElement.h" line="39" column="17" bodyfile="private/RobotElement.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1RobotElement_1ab09b5da26c898f26bb0de97a3dca95e2" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, <ref refid="structiDynTree_1_1JointElement_1_1JointInfo" kindref="compound">JointElement::JointInfo</ref> &gt; &amp;</type>
+        <definition>std::unordered_map&lt;std::string, JointElement::JointInfo&gt;&amp; iDynTree::RobotElement::m_joints</definition>
+        <argsstring></argsstring>
+        <name>m_joints</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/RobotElement.h" line="40" column="24" bodyfile="private/RobotElement.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1RobotElement_1a5bdb2f62b6c32f23aff536cefc924803" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, <ref refid="structiDynTree_1_1JointElement_1_1JointInfo" kindref="compound">JointElement::JointInfo</ref> &gt; &amp;</type>
+        <definition>std::unordered_map&lt;std::string, JointElement::JointInfo&gt;&amp; iDynTree::RobotElement::m_fixedJoints</definition>
+        <argsstring></argsstring>
+        <name>m_fixedJoints</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/RobotElement.h" line="41" column="24" bodyfile="private/RobotElement.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1RobotElement_1a7d068ed719492743aee39761979b96ff" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, <ref refid="structiDynTree_1_1MaterialElement_1_1MaterialInfo" kindref="compound">MaterialElement::MaterialInfo</ref> &gt; &amp;</type>
+        <definition>std::unordered_map&lt;std::string, MaterialElement::MaterialInfo&gt;&amp; iDynTree::RobotElement::m_materials</definition>
+        <argsstring></argsstring>
+        <name>m_materials</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/RobotElement.h" line="42" column="24" bodyfile="private/RobotElement.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1RobotElement_1a500aa234fa9377902316dd72b9a3f418" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, std::vector&lt; <ref refid="structiDynTree_1_1VisualElement_1_1VisualInfo" kindref="compound">VisualElement::VisualInfo</ref> &gt; &gt; &amp;</type>
+        <definition>std::unordered_map&lt;std::string, std::vector&lt;VisualElement::VisualInfo&gt; &gt;&amp; iDynTree::RobotElement::m_visuals</definition>
+        <argsstring></argsstring>
+        <name>m_visuals</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/RobotElement.h" line="43" column="24" bodyfile="private/RobotElement.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1RobotElement_1afef2a293604e80daab4903ec5edca168" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, std::vector&lt; <ref refid="structiDynTree_1_1VisualElement_1_1VisualInfo" kindref="compound">VisualElement::VisualInfo</ref> &gt; &gt; &amp;</type>
+        <definition>std::unordered_map&lt;std::string, std::vector&lt;VisualElement::VisualInfo&gt; &gt;&amp; iDynTree::RobotElement::m_collisions</definition>
+        <argsstring></argsstring>
+        <name>m_collisions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/RobotElement.h" line="44" column="24" bodyfile="private/RobotElement.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1RobotElement_1a283a4d40b067ca9f738f49042cd9d11b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::RobotElement::RobotElement</definition>
+        <argsstring>(iDynTree::Model &amp;model, std::vector&lt; std::shared_ptr&lt; SensorHelper &gt;&gt; &amp;sensorHelpers, std::unordered_map&lt; std::string, JointElement::JointInfo &gt; &amp;joints, std::unordered_map&lt; std::string, JointElement::JointInfo &gt; &amp;fixedJoints, std::unordered_map&lt; std::string, MaterialElement::MaterialInfo &gt; &amp;materials, std::unordered_map&lt; std::string, std::vector&lt; VisualElement::VisualInfo &gt;&gt; &amp;visuals, std::unordered_map&lt; std::string, std::vector&lt; VisualElement::VisualInfo &gt;&gt; &amp;collisions)</argsstring>
+        <name>RobotElement</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classiDynTree_1_1SensorHelper" kindref="compound">SensorHelper</ref> &gt;&gt; &amp;</type>
+          <declname>sensorHelpers</declname>
+        </param>
+        <param>
+          <type>std::unordered_map&lt; std::string, <ref refid="structiDynTree_1_1JointElement_1_1JointInfo" kindref="compound">JointElement::JointInfo</ref> &gt; &amp;</type>
+          <declname>joints</declname>
+        </param>
+        <param>
+          <type>std::unordered_map&lt; std::string, <ref refid="structiDynTree_1_1JointElement_1_1JointInfo" kindref="compound">JointElement::JointInfo</ref> &gt; &amp;</type>
+          <declname>fixedJoints</declname>
+        </param>
+        <param>
+          <type>std::unordered_map&lt; std::string, <ref refid="structiDynTree_1_1MaterialElement_1_1MaterialInfo" kindref="compound">MaterialElement::MaterialInfo</ref> &gt; &amp;</type>
+          <declname>materials</declname>
+        </param>
+        <param>
+          <type>std::unordered_map&lt; std::string, std::vector&lt; <ref refid="structiDynTree_1_1VisualElement_1_1VisualInfo" kindref="compound">VisualElement::VisualInfo</ref> &gt;&gt; &amp;</type>
+          <declname>visuals</declname>
+        </param>
+        <param>
+          <type>std::unordered_map&lt; std::string, std::vector&lt; <ref refid="structiDynTree_1_1VisualElement_1_1VisualInfo" kindref="compound">VisualElement::VisualInfo</ref> &gt;&gt; &amp;</type>
+          <declname>collisions</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/RobotElement.h" line="47" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RobotElement_1a4845b8507e624a61d84b7f8211a4e3ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::RobotElement::~RobotElement</definition>
+        <argsstring>()</argsstring>
+        <name>~RobotElement</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/RobotElement.h" line="55" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RobotElement_1a5436ee589d3bb7abe8cf0dd5b314bab8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">iDynTree::XMLElement</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;iDynTree::XMLElement&gt; iDynTree::RobotElement::childElementForName</definition>
+        <argsstring>(const std::string &amp;name) override</argsstring>
+        <name>childElementForName</name>
+        <reimplements refid="classiDynTree_1_1XMLElement_1a94cf11d5e2e9f6a44f17c7439d2b809f">childElementForName</reimplements>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Factory method to create child element given the name. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>name of the element to create </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>a new parser element for the corresponding tag </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/RobotElement.h" line="56" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1RobotElement_1a9e40dc08778e6160b1d0088a9417b669" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void iDynTree::RobotElement::childHasBeenParsed</definition>
+        <argsstring>(std::shared_ptr&lt; iDynTree::XMLElement &gt;) override</argsstring>
+        <name>childHasBeenParsed</name>
+        <reimplements refid="classiDynTree_1_1XMLElement_1a18b5b00729b99a19cb3e8f430656e152">childHasBeenParsed</reimplements>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">iDynTree::XMLElement</ref> &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/RobotElement.h" line="58" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::RobotElement</label>
+        <link refid="classiDynTree_1_1RobotElement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::XMLElement</label>
+        <link refid="classiDynTree_1_1XMLElement"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>iDynTree::RobotElement</label>
+        <link refid="classiDynTree_1_1RobotElement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::XMLElement</label>
+        <link refid="classiDynTree_1_1XMLElement"/>
+      </node>
+    </collaborationgraph>
+    <location file="private/RobotElement.h" line="35" column="1" bodyfile="private/RobotElement.h" bodystart="35" bodyend="60"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1XMLElement_1a2a182ac17f5e644b113a67e02c3595e5" prot="public" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>attributeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1adf74d829fbe4d3d112c0ef2eba8bd3ea" prot="public" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>attributes</name></member>
+      <member refid="classiDynTree_1_1RobotElement_1a5436ee589d3bb7abe8cf0dd5b314bab8" prot="public" virt="virtual"><scope>iDynTree::RobotElement</scope><name>childElementForName</name></member>
+      <member refid="classiDynTree_1_1RobotElement_1a9e40dc08778e6160b1d0088a9417b669" prot="public" virt="virtual"><scope>iDynTree::RobotElement</scope><name>childHasBeenParsed</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1af5c19c2120a4e024149f78ee5bd52e6f" prot="public" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>children</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a3d8e1b737e614b35e3df0a4f76ac645b" prot="public" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>description</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a327997dec2ced313aad008c376205f36" prot="public" virt="virtual"><scope>iDynTree::RobotElement</scope><name>exitElementScope</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1aa6f49fb7b1b204e1a84cbdc51faeaa62" prot="public" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>exitScopeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1abebc95353394912e187ad70e6078fcdc" prot="public" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>getParsedTextContent</name></member>
+      <member refid="classiDynTree_1_1RobotElement_1afef2a293604e80daab4903ec5edca168" prot="private" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>m_collisions</name></member>
+      <member refid="classiDynTree_1_1RobotElement_1a5bdb2f62b6c32f23aff536cefc924803" prot="private" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>m_fixedJoints</name></member>
+      <member refid="classiDynTree_1_1RobotElement_1ab09b5da26c898f26bb0de97a3dca95e2" prot="private" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>m_joints</name></member>
+      <member refid="classiDynTree_1_1RobotElement_1a7d068ed719492743aee39761979b96ff" prot="private" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>m_materials</name></member>
+      <member refid="classiDynTree_1_1RobotElement_1a0d834288b12e3b8b3225efc0da9a5fa9" prot="private" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>m_model</name></member>
+      <member refid="classiDynTree_1_1RobotElement_1acb1683c61ca990b16364aa0a73db2718" prot="private" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>m_sensorHelpers</name></member>
+      <member refid="classiDynTree_1_1RobotElement_1a500aa234fa9377902316dd72b9a3f418" prot="private" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>m_visuals</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a7129fb1e69a5bc819872e65d3965296d" prot="public" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>name</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1aa44416f43c71e081f6637a91eb733e8d" prot="public" virt="virtual"><scope>iDynTree::RobotElement</scope><name>parsedCharacters</name></member>
+      <member refid="classiDynTree_1_1RobotElement_1a283a4d40b067ca9f738f49042cd9d11b" prot="public" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>RobotElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1ab40851b7629a74107f2183ca36e412e4" prot="public" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>setAttributeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a2fe23e8a9ee4d2f776f792c9c118db45" prot="public" virt="virtual"><scope>iDynTree::RobotElement</scope><name>setAttributes</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a69171cc4b5c552b97f44375029356a2e" prot="public" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>setChildHasBeenParsedCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a16759fb450635662dced0eb2ace0228b" prot="public" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>setExitScopeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a885cb939d74e8ce27ce4c0708c04267e" prot="public" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a7ad288fac24328b2bb19908500fec39a" prot="public" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a42ee14ee8b2ec8a9e9e31472e1b17556" prot="public" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1RobotElement_1a4845b8507e624a61d84b7f8211a4e3ce" prot="public" virt="virtual"><scope>iDynTree::RobotElement</scope><name>~RobotElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1aa0220e560dfd45a38797cb5209653ad4" prot="public" virt="virtual"><scope>iDynTree::RobotElement</scope><name>~XMLElement</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

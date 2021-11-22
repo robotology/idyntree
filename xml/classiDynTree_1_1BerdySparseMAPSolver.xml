@@ -1,0 +1,393 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1BerdySparseMAPSolver" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::BerdySparseMAPSolver</compoundname>
+    <includes local="no">iDynTree/Estimation/BerdySparseMAPSolver.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1BerdySparseMAPSolver_1a8dab96e11c1ceda756bb20f5b574df73" prot="private" static="no" mutable="no">
+        <type>BerdySparseMAPSolverPimpl *</type>
+        <definition>BerdySparseMAPSolverPimpl* iDynTree::BerdySparseMAPSolver::m_pimpl</definition>
+        <argsstring></argsstring>
+        <name>m_pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="37" column="35" bodyfile="iDynTree/Estimation/BerdySparseMAPSolver.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a130a453068579e964dfab978436ea81c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::BerdySparseMAPSolver::BerdySparseMAPSolver</definition>
+        <argsstring>(BerdyHelper &amp;berdyHelper)</argsstring>
+        <name>BerdySparseMAPSolver</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1BerdyHelper" kindref="compound">BerdyHelper</ref> &amp;</type>
+          <declname>berdyHelper</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="40" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1abd25b426bcc0dbbe1c46caef70f21593" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::BerdySparseMAPSolver::~BerdySparseMAPSolver</definition>
+        <argsstring>()</argsstring>
+        <name>~BerdySparseMAPSolver</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="41" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a701f6cef4a81edd47dad7dceee9bbf7d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::BerdySparseMAPSolver::setDynamicsConstraintsPriorCovariance</definition>
+        <argsstring>(const iDynTree::SparseMatrix&lt; iDynTree::ColumnMajor &gt; &amp;covariance)</argsstring>
+        <name>setDynamicsConstraintsPriorCovariance</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">iDynTree::SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
+          <declname>covariance</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="43" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a9dce012842a2844047c8619e76f8d580" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::BerdySparseMAPSolver::setDynamicsRegularizationPriorCovariance</definition>
+        <argsstring>(const iDynTree::SparseMatrix&lt; iDynTree::ColumnMajor &gt; &amp;covariance)</argsstring>
+        <name>setDynamicsRegularizationPriorCovariance</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">iDynTree::SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
+          <declname>covariance</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="44" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a8c7420a41f6c78d33d100f93c85e15b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::BerdySparseMAPSolver::setDynamicsRegularizationPriorExpectedValue</definition>
+        <argsstring>(const iDynTree::VectorDynSize &amp;expectedValue)</argsstring>
+        <name>setDynamicsRegularizationPriorExpectedValue</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>expectedValue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="45" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a0c252cfe0ac42168fd3e21d92dac8a5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::BerdySparseMAPSolver::setMeasurementsPriorCovariance</definition>
+        <argsstring>(const iDynTree::SparseMatrix&lt; iDynTree::ColumnMajor &gt; &amp;covariance)</argsstring>
+        <name>setMeasurementsPriorCovariance</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">iDynTree::SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
+          <declname>covariance</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="46" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a89b4db9aaa5f4762a0751a9931e7587d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">iDynTree::SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
+        <definition>const iDynTree::SparseMatrix&lt;iDynTree::ColumnMajor&gt;&amp; iDynTree::BerdySparseMAPSolver::dynamicsConstraintsPriorCovarianceInverse</definition>
+        <argsstring>() const</argsstring>
+        <name>dynamicsConstraintsPriorCovarianceInverse</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="48" column="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a9fb0682401703373f16426faef05209e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">iDynTree::SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
+        <definition>iDynTree::SparseMatrix&lt;iDynTree::ColumnMajor&gt;&amp; iDynTree::BerdySparseMAPSolver::dynamicsConstraintsPriorCovarianceInverse</definition>
+        <argsstring>()</argsstring>
+        <name>dynamicsConstraintsPriorCovarianceInverse</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="49" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a5c0e5f5c818f5d0bc65bd98450eaa221" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">iDynTree::SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
+        <definition>const iDynTree::SparseMatrix&lt;iDynTree::ColumnMajor&gt;&amp; iDynTree::BerdySparseMAPSolver::dynamicsRegularizationPriorCovarianceInverse</definition>
+        <argsstring>() const</argsstring>
+        <name>dynamicsRegularizationPriorCovarianceInverse</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="50" column="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1afa2cdabf4fdaa51d1a6e674235b44017" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">iDynTree::SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
+        <definition>iDynTree::SparseMatrix&lt;iDynTree::ColumnMajor&gt;&amp; iDynTree::BerdySparseMAPSolver::dynamicsRegularizationPriorCovarianceInverse</definition>
+        <argsstring>()</argsstring>
+        <name>dynamicsRegularizationPriorCovarianceInverse</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="51" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a7ffe8c9b6f6a06532da3ea88971a53f9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+        <definition>const iDynTree::VectorDynSize&amp; iDynTree::BerdySparseMAPSolver::dynamicsRegularizationPriorExpectedValue</definition>
+        <argsstring>() const</argsstring>
+        <name>dynamicsRegularizationPriorExpectedValue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="52" column="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a9c3d33204dd0d484502df861c6a4860d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+        <definition>iDynTree::VectorDynSize&amp; iDynTree::BerdySparseMAPSolver::dynamicsRegularizationPriorExpectedValue</definition>
+        <argsstring>()</argsstring>
+        <name>dynamicsRegularizationPriorExpectedValue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="53" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a4e65255aa706b6085dcd21e0385f9824" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">iDynTree::SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
+        <definition>const iDynTree::SparseMatrix&lt;iDynTree::ColumnMajor&gt;&amp; iDynTree::BerdySparseMAPSolver::measurementsPriorCovarianceInverse</definition>
+        <argsstring>() const</argsstring>
+        <name>measurementsPriorCovarianceInverse</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="54" column="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a65bcc26ad5c2238f668f331441fdf897" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">iDynTree::SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
+        <definition>iDynTree::SparseMatrix&lt;iDynTree::ColumnMajor&gt;&amp; iDynTree::BerdySparseMAPSolver::measurementsPriorCovarianceInverse</definition>
+        <argsstring>()</argsstring>
+        <name>measurementsPriorCovarianceInverse</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="55" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1afa78c94fadaeb70a2bc1df863773bb5b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdySparseMAPSolver::isValid</definition>
+        <argsstring>()</argsstring>
+        <name>isValid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="57" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a94b057c0979d8fa75fa757032aff800f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdySparseMAPSolver::initialize</definition>
+        <argsstring>()</argsstring>
+        <name>initialize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="59" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a9688a8bcc6393a250cbd7d06ca17d792" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::BerdySparseMAPSolver::updateEstimateInformationFixedBase</definition>
+        <argsstring>(const JointPosDoubleArray &amp;jointsConfiguration, const JointDOFsDoubleArray &amp;jointsVelocity, const FrameIndex fixedFrame, const Vector3 &amp;gravityInFixedFrame, const VectorDynSize &amp;measurements)</argsstring>
+        <name>updateEstimateInformationFixedBase</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">JointPosDoubleArray</ref> &amp;</type>
+          <declname>jointsConfiguration</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
+          <declname>jointsVelocity</declname>
+        </param>
+        <param>
+          <type>const FrameIndex</type>
+          <declname>fixedFrame</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref> &amp;</type>
+          <declname>gravityInFixedFrame</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>measurements</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="61" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1afc9692b826414fc1590aaf491f9a47fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::BerdySparseMAPSolver::updateEstimateInformationFloatingBase</definition>
+        <argsstring>(const JointPosDoubleArray &amp;jointsConfiguration, const JointDOFsDoubleArray &amp;jointsVelocity, const FrameIndex floatingFrame, const Vector3 &amp;bodyAngularVelocityOfSpecifiedFrame, const VectorDynSize &amp;measurements)</argsstring>
+        <name>updateEstimateInformationFloatingBase</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">JointPosDoubleArray</ref> &amp;</type>
+          <declname>jointsConfiguration</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
+          <declname>jointsVelocity</declname>
+        </param>
+        <param>
+          <type>const FrameIndex</type>
+          <declname>floatingFrame</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref> &amp;</type>
+          <declname>bodyAngularVelocityOfSpecifiedFrame</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>measurements</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="67" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a261899e0a79f8e3fdcc2f22617b8d71f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdySparseMAPSolver::doEstimate</definition>
+        <argsstring>()</argsstring>
+        <name>doEstimate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="73" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a754382b5a9743a48f9762022b6d75289" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::BerdySparseMAPSolver::getLastEstimate</definition>
+        <argsstring>(iDynTree::VectorDynSize &amp;lastEstimate) const</argsstring>
+        <name>getLastEstimate</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>lastEstimate</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="75" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdySparseMAPSolver_1a48e541a067026a24e483ceabbc4542cf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+        <definition>const iDynTree::VectorDynSize&amp; iDynTree::BerdySparseMAPSolver::getLastEstimate</definition>
+        <argsstring>() const</argsstring>
+        <name>getLastEstimate</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="76" column="39"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="iDynTree/Estimation/BerdySparseMAPSolver.h" line="33" column="5" bodyfile="iDynTree/Estimation/BerdySparseMAPSolver.h" bodystart="34" bodyend="79"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1BerdySparseMAPSolver_1a130a453068579e964dfab978436ea81c" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>BerdySparseMAPSolver</name></member>
+      <member refid="classiDynTree_1_1BerdySparseMAPSolver_1a261899e0a79f8e3fdcc2f22617b8d71f" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>doEstimate</name></member>
+      <member refid="classiDynTree_1_1BerdySparseMAPSolver_1a89b4db9aaa5f4762a0751a9931e7587d" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>dynamicsConstraintsPriorCovarianceInverse</name></member>
+      <member refid="classiDynTree_1_1BerdySparseMAPSolver_1a9fb0682401703373f16426faef05209e" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>dynamicsConstraintsPriorCovarianceInverse</name></member>
+      <member refid="classiDynTree_1_1BerdySparseMAPSolver_1a5c0e5f5c818f5d0bc65bd98450eaa221" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>dynamicsRegularizationPriorCovarianceInverse</name></member>
+      <member refid="classiDynTree_1_1BerdySparseMAPSolver_1afa2cdabf4fdaa51d1a6e674235b44017" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>dynamicsRegularizationPriorCovarianceInverse</name></member>
+      <member refid="classiDynTree_1_1BerdySparseMAPSolver_1a7ffe8c9b6f6a06532da3ea88971a53f9" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>dynamicsRegularizationPriorExpectedValue</name></member>
+      <member refid="classiDynTree_1_1BerdySparseMAPSolver_1a9c3d33204dd0d484502df861c6a4860d" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>dynamicsRegularizationPriorExpectedValue</name></member>
+      <member refid="classiDynTree_1_1BerdySparseMAPSolver_1a754382b5a9743a48f9762022b6d75289" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>getLastEstimate</name></member>
+      <member refid="classiDynTree_1_1BerdySparseMAPSolver_1a48e541a067026a24e483ceabbc4542cf" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>getLastEstimate</name></member>
+      <member refid="classiDynTree_1_1BerdySparseMAPSolver_1a94b057c0979d8fa75fa757032aff800f" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>initialize</name></member>
+      <member refid="classiDynTree_1_1BerdySparseMAPSolver_1afa78c94fadaeb70a2bc1df863773bb5b" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>isValid</name></member>
+      <member refid="classiDynTree_1_1BerdySparseMAPSolver_1a8dab96e11c1ceda756bb20f5b574df73" prot="private" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>m_pimpl</name></member>
+      <member refid="classiDynTree_1_1BerdySparseMAPSolver_1a4e65255aa706b6085dcd21e0385f9824" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>measurementsPriorCovarianceInverse</name></member>
+      <member refid="classiDynTree_1_1BerdySparseMAPSolver_1a65bcc26ad5c2238f668f331441fdf897" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>measurementsPriorCovarianceInverse</name></member>
+      <member refid="classiDynTree_1_1BerdySparseMAPSolver_1a701f6cef4a81edd47dad7dceee9bbf7d" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>setDynamicsConstraintsPriorCovariance</name></member>
+      <member refid="classiDynTree_1_1BerdySparseMAPSolver_1a9dce012842a2844047c8619e76f8d580" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>setDynamicsRegularizationPriorCovariance</name></member>
+      <member refid="classiDynTree_1_1BerdySparseMAPSolver_1a8c7420a41f6c78d33d100f93c85e15b8" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>setDynamicsRegularizationPriorExpectedValue</name></member>
+      <member refid="classiDynTree_1_1BerdySparseMAPSolver_1a0c252cfe0ac42168fd3e21d92dac8a5e" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>setMeasurementsPriorCovariance</name></member>
+      <member refid="classiDynTree_1_1BerdySparseMAPSolver_1a9688a8bcc6393a250cbd7d06ca17d792" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>updateEstimateInformationFixedBase</name></member>
+      <member refid="classiDynTree_1_1BerdySparseMAPSolver_1afc9692b826414fc1590aaf491f9a47fd" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>updateEstimateInformationFloatingBase</name></member>
+      <member refid="classiDynTree_1_1BerdySparseMAPSolver_1abd25b426bcc0dbbe1c46caef70f21593" prot="public" virt="non-virtual"><scope>iDynTree::BerdySparseMAPSolver</scope><name>~BerdySparseMAPSolver</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

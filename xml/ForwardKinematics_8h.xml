@@ -1,0 +1,442 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="ForwardKinematics_8h" kind="file" language="C++">
+    <compoundname>ForwardKinematics.h</compoundname>
+    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__iDynTreeModel_1ga41ad76666d447a42318ab5778b3ad18e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ForwardPositionKinematics</definition>
+        <argsstring>(const Model &amp;model, const Traversal &amp;traversal, const Transform &amp;worldHbase, const VectorDynSize &amp;jointPositions, LinkPositions &amp;linkPositions)</argsstring>
+        <name>ForwardPositionKinematics</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const Traversal &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const Transform &amp;</type>
+          <declname>worldHbase</declname>
+        </param>
+        <param>
+          <type>const VectorDynSize &amp;</type>
+          <declname>jointPositions</declname>
+        </param>
+        <param>
+          <type>LinkPositions &amp;</type>
+          <declname>linkPositions</declname>
+        </param>
+        <briefdescription>
+<para>Given a robot floating base configuration (i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>world_H_base and the joint positions) compute for each link the world_H_link transform.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the used model, </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">traversal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the used traversal, </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">worldHbase</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the world_H_base transform, </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jointPositions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the vector of (internal) joint positions, </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">linkPositions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>linkPositions(l) contains the world_H_link transform. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ForwardKinematics.h" line="44" column="10" declfile="iDynTree/Model/ForwardKinematics.h" declline="44" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="ForwardKinematics_8h_1a7d9ed3aeb57a5730beb59828bdf2301c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ForwardPositionKinematics</definition>
+        <argsstring>(const Model &amp;model, const Traversal &amp;traversal, const FreeFloatingPos &amp;jointPos, LinkPositions &amp;linkPos)</argsstring>
+        <name>ForwardPositionKinematics</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const Traversal &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const FreeFloatingPos &amp;</type>
+          <declname>jointPos</declname>
+        </param>
+        <param>
+          <type>LinkPositions &amp;</type>
+          <declname>linkPos</declname>
+        </param>
+        <briefdescription>
+<para>Variant of ForwardPositionKinematics that takes in input a <ref refid="classiDynTree_1_1FreeFloatingPos" kindref="compound">FreeFloatingPos</ref> object instead of a separate couple of (worldHbase,jointPositions) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ForwardKinematics.h" line="55" column="10" declfile="iDynTree/Model/ForwardKinematics.h" declline="55" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="ForwardKinematics_8h_1a11cc6474718df311245c95f5452f7608" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ForwardVelAccKinematics</definition>
+        <argsstring>(const iDynTree::Model &amp;model, const iDynTree::Traversal &amp;traversal, const iDynTree::FreeFloatingPos &amp;robotPos, const iDynTree::FreeFloatingVel &amp;robotVel, const iDynTree::FreeFloatingAcc &amp;robotAcc, iDynTree::LinkVelArray &amp;linkVel, iDynTree::LinkAccArray &amp;linkAcc)</argsstring>
+        <name>ForwardVelAccKinematics</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Traversal" kindref="compound">iDynTree::Traversal</ref> &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1FreeFloatingPos" kindref="compound">iDynTree::FreeFloatingPos</ref> &amp;</type>
+          <declname>robotPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1FreeFloatingVel" kindref="compound">iDynTree::FreeFloatingVel</ref> &amp;</type>
+          <declname>robotVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1FreeFloatingAcc" kindref="compound">iDynTree::FreeFloatingAcc</ref> &amp;</type>
+          <declname>robotAcc</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">iDynTree::LinkVelArray</ref> &amp;</type>
+          <declname>linkVel</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">iDynTree::LinkAccArray</ref> &amp;</type>
+          <declname>linkAcc</declname>
+        </param>
+        <briefdescription>
+<para>Function that compute the links velocities and accelerations given the free floating robot velocities and accelerations. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function implements what is usually known as the &quot;forward pass&quot; of the Recursive Newton Euler algorithm. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ForwardKinematics.h" line="69" column="10" declfile="iDynTree/Model/ForwardKinematics.h" declline="69" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="ForwardKinematics_8h_1af853268cad240fb96e9190b6c07d7dfb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ForwardPosVelAccKinematics</definition>
+        <argsstring>(const iDynTree::Model &amp;model, const iDynTree::Traversal &amp;traversal, const iDynTree::FreeFloatingPos &amp;robotPos, const iDynTree::FreeFloatingVel &amp;robotVel, const iDynTree::FreeFloatingAcc &amp;robotAcc, iDynTree::LinkPositions &amp;linkPos, iDynTree::LinkVelArray &amp;linkVel, iDynTree::LinkAccArray &amp;linkAcc)</argsstring>
+        <name>ForwardPosVelAccKinematics</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Traversal" kindref="compound">iDynTree::Traversal</ref> &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1FreeFloatingPos" kindref="compound">iDynTree::FreeFloatingPos</ref> &amp;</type>
+          <declname>robotPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1FreeFloatingVel" kindref="compound">iDynTree::FreeFloatingVel</ref> &amp;</type>
+          <declname>robotVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1FreeFloatingAcc" kindref="compound">iDynTree::FreeFloatingAcc</ref> &amp;</type>
+          <declname>robotAcc</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkPositions" kindref="compound">iDynTree::LinkPositions</ref> &amp;</type>
+          <declname>linkPos</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">iDynTree::LinkVelArray</ref> &amp;</type>
+          <declname>linkVel</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">iDynTree::LinkAccArray</ref> &amp;</type>
+          <declname>linkAcc</declname>
+        </param>
+        <briefdescription>
+<para>Function that compute the links position, velocities and accelerations given the free floating robot position, velocities and accelerations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ForwardKinematics.h" line="83" column="10" declfile="iDynTree/Model/ForwardKinematics.h" declline="83" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="ForwardKinematics_8h_1a82da15110d52ad717aa6c145f1c8a681" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ForwardPosVelKinematics</definition>
+        <argsstring>(const iDynTree::Model &amp;model, const iDynTree::Traversal &amp;traversal, const iDynTree::FreeFloatingPos &amp;robotPos, const iDynTree::FreeFloatingVel &amp;robotVel, iDynTree::LinkPositions &amp;linkPos, iDynTree::LinkVelArray &amp;linkVel)</argsstring>
+        <name>ForwardPosVelKinematics</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Traversal" kindref="compound">iDynTree::Traversal</ref> &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1FreeFloatingPos" kindref="compound">iDynTree::FreeFloatingPos</ref> &amp;</type>
+          <declname>robotPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1FreeFloatingVel" kindref="compound">iDynTree::FreeFloatingVel</ref> &amp;</type>
+          <declname>robotVel</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkPositions" kindref="compound">iDynTree::LinkPositions</ref> &amp;</type>
+          <declname>linkPos</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">iDynTree::LinkVelArray</ref> &amp;</type>
+          <declname>linkVel</declname>
+        </param>
+        <briefdescription>
+<para>Function that compute the links position and velocities and accelerations given the free floating robot position and velocities. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ForwardKinematics.h" line="98" column="10" declfile="iDynTree/Model/ForwardKinematics.h" declline="98" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="ForwardKinematics_8h_1a2848acd42a384966c3f2bbd760e29baa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ForwardAccKinematics</definition>
+        <argsstring>(const Model &amp;model, const Traversal &amp;traversal, const FreeFloatingPos &amp;robotPos, const FreeFloatingVel &amp;robotVel, const FreeFloatingAcc &amp;robotAcc, const LinkVelArray &amp;linkVel, LinkAccArray &amp;linkAcc)</argsstring>
+        <name>ForwardAccKinematics</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const Traversal &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const FreeFloatingPos &amp;</type>
+          <declname>robotPos</declname>
+        </param>
+        <param>
+          <type>const FreeFloatingVel &amp;</type>
+          <declname>robotVel</declname>
+        </param>
+        <param>
+          <type>const FreeFloatingAcc &amp;</type>
+          <declname>robotAcc</declname>
+        </param>
+        <param>
+          <type>const LinkVelArray &amp;</type>
+          <declname>linkVel</declname>
+        </param>
+        <param>
+          <type>LinkAccArray &amp;</type>
+          <declname>linkAcc</declname>
+        </param>
+        <briefdescription>
+<para>Function that computes the links accelerations given the free floating robot velocities and accelerations. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function implements what is usually known as the acceleration part &quot;forward pass&quot; of the Recursive Newton Euler algorithm. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ForwardKinematics.h" line="112" column="10" declfile="iDynTree/Model/ForwardKinematics.h" declline="112" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="ForwardKinematics_8h_1a16f1071f088ed89178092de7b820558d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ForwardBiasAccKinematics</definition>
+        <argsstring>(const Model &amp;model, const Traversal &amp;traversal, const FreeFloatingPos &amp;robotPos, const FreeFloatingVel &amp;robotVel, const SpatialAcc &amp;baseBiasAcc, const LinkVelArray &amp;linkVel, LinkAccArray &amp;linkBiasAcc)</argsstring>
+        <name>ForwardBiasAccKinematics</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const Traversal &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const FreeFloatingPos &amp;</type>
+          <declname>robotPos</declname>
+        </param>
+        <param>
+          <type>const FreeFloatingVel &amp;</type>
+          <declname>robotVel</declname>
+        </param>
+        <param>
+          <type>const SpatialAcc &amp;</type>
+          <declname>baseBiasAcc</declname>
+        </param>
+        <param>
+          <type>const LinkVelArray &amp;</type>
+          <declname>linkVel</declname>
+        </param>
+        <param>
+          <type>LinkAccArray &amp;</type>
+          <declname>linkBiasAcc</declname>
+        </param>
+        <briefdescription>
+<para>Function that computes the links bias accelerations given the free floating robot velocities. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This function can also consider a non-zero base acceleration, because when computing the bias acc for the MIXED representation, a zero mixed base acceleration is a equivalent to a non-zero BODY_FIXED base acceleration.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the used model, </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">traversal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the used traversal, </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">worldHbase</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the world_H_base transform, </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">robotPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the position of the robot, i.e. <formula id="12">$ ({}^A H_B, s)$</formula>, </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">robotVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the velocity of the robot, with the base velocity expressed in BODY_FIXED representation i.e. <formula id="13">$ \nu = \begin{bmatrix} {}^B \mathrm{v}_{A,B} \newline \dot{s} \end{bmatrix} $</formula>, </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">baseBiasAcc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>base bias acceleration with BODY_FIXED rapresentation, useful when the bias acceleration is considering the MIXED base acceleration to be zero, </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the velocity of each link of the robot, with velocity expressed with BODY_FIXED representation i.e. for each link <formula id="14">$ $</formula> we have <formula id="15">$ {}^L \mathrm{v}_{A,L} $</formula>, </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">linkBiasAcc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the bias acceleration of each link of the robot, with the acceleration expressed with BODY_FIXED representation. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ForwardKinematics.h" line="141" column="10" declfile="iDynTree/Model/ForwardKinematics.h" declline="141" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="ForwardKinematics_8h_1a2249785bd035cf4d2f35851d9eb50d26" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ForwardBiasAccKinematics</definition>
+        <argsstring>(const Model &amp;model, const Traversal &amp;traversal, const FreeFloatingPos &amp;robotPos, const FreeFloatingVel &amp;robotVel, const LinkVelArray &amp;linkVel, LinkAccArray &amp;linkBiasAcc)</argsstring>
+        <name>ForwardBiasAccKinematics</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const Traversal &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const FreeFloatingPos &amp;</type>
+          <declname>robotPos</declname>
+        </param>
+        <param>
+          <type>const FreeFloatingVel &amp;</type>
+          <declname>robotVel</declname>
+        </param>
+        <param>
+          <type>const LinkVelArray &amp;</type>
+          <declname>linkVel</declname>
+        </param>
+        <param>
+          <type>LinkAccArray &amp;</type>
+          <declname>linkBiasAcc</declname>
+        </param>
+        <briefdescription>
+<para>Legacy function, will be deprecated, use the variant with an explicit baseBiasAcc value. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ForwardKinematics.h" line="152" column="10" declfile="iDynTree/Model/ForwardKinematics.h" declline="152" declcolumn="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/ForwardKinematics.h"/>
+  </compounddef>
+</doxygen>

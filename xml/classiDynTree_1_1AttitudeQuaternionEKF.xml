@@ -1,0 +1,1459 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1AttitudeQuaternionEKF" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::AttitudeQuaternionEKF</compoundname>
+    <basecompoundref refid="classiDynTree_1_1IAttitudeEstimator" prot="public" virt="non-virtual">iDynTree::IAttitudeEstimator</basecompoundref>
+    <basecompoundref refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper" prot="public" virt="non-virtual">iDynTree::DiscreteExtendedKalmanFilterHelper</basecompoundref>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1AttitudeQuaternionEKF_1aeba1557b81069aec88408f1d54b1ca9f" prot="protected" static="no" mutable="no">
+        <type><ref refid="structiDynTree_1_1AttitudeEstimatorState" kindref="compound">AttitudeEstimatorState</ref></type>
+        <definition>AttitudeEstimatorState iDynTree::AttitudeQuaternionEKF::m_state_qekf</definition>
+        <argsstring></argsstring>
+        <name>m_state_qekf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="224" column="32" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="224" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1AttitudeQuaternionEKF_1a2f87de8c8b6ab893bee277896ff6f983" prot="protected" static="no" mutable="no">
+        <type><ref refid="structiDynTree_1_1AttitudeEstimatorState" kindref="compound">AttitudeEstimatorState</ref></type>
+        <definition>AttitudeEstimatorState iDynTree::AttitudeQuaternionEKF::m_initial_state_qekf</definition>
+        <argsstring></argsstring>
+        <name>m_initial_state_qekf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="224" column="45" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="224" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1AttitudeQuaternionEKF_1ad6d8453c695937413e0f7885a87aad65" prot="protected" static="no" mutable="no">
+        <type><ref refid="structiDynTree_1_1AttitudeQuaternionEKFParameters" kindref="compound">AttitudeQuaternionEKFParameters</ref></type>
+        <definition>AttitudeQuaternionEKFParameters iDynTree::AttitudeQuaternionEKF::m_params_qekf</definition>
+        <argsstring></argsstring>
+        <name>m_params_qekf</name>
+        <briefdescription>
+<para>struct holding the QEKF parameters </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="225" column="41" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="225" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1AttitudeQuaternionEKF_1ace557f1065335472b15789de5fbe4332" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Rotation" kindref="compound">iDynTree::Rotation</ref></type>
+        <definition>iDynTree::Rotation iDynTree::AttitudeQuaternionEKF::m_orientationInSO3</definition>
+        <argsstring></argsstring>
+        <name>m_orientationInSO3</name>
+        <briefdescription>
+<para>orientation estimate as rotation matrix <formula id="232">$ {^A}R_B $</formula> where <formula id="230">$ A $</formula> is inertial frame and <formula id="231">$ B $</formula> is the frame attached to the body </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="313" column="28" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="313" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1AttitudeQuaternionEKF_1aab053006c80b0de7648ff5927c598d96" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::RPY</ref></type>
+        <definition>iDynTree::RPY iDynTree::AttitudeQuaternionEKF::m_orientationInRPY</definition>
+        <argsstring></argsstring>
+        <name>m_orientationInRPY</name>
+        <briefdescription>
+<para>orientation estimate as a 3D vector in RPY representation, where <formula id="254">$ {^A}R_B = Rot_z(yaw)Rot_y(pitch)Rot_x(roll) $</formula> </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="314" column="23" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="314" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1AttitudeQuaternionEKF_1a833d5ca1b5008678a543d729f1518780" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::GyroscopeMeasurements</ref></type>
+        <definition>iDynTree::GyroscopeMeasurements iDynTree::AttitudeQuaternionEKF::m_Omega_y</definition>
+        <argsstring></argsstring>
+        <name>m_Omega_y</name>
+        <briefdescription>
+<para>3d gyroscope measurement giving angular velocity of body wrt inertial frame, expressed in body frame </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="316" column="41" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="316" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1AttitudeQuaternionEKF_1add299d86505cc3636bf3bf1299f7b8b0" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::LinearAccelerometerMeasurements</ref></type>
+        <definition>iDynTree::LinearAccelerometerMeasurements iDynTree::AttitudeQuaternionEKF::m_Acc_y</definition>
+        <argsstring></argsstring>
+        <name>m_Acc_y</name>
+        <briefdescription>
+<para>3d accelerometer measurement giving proper classical acceleration expressed in body frame </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="317" column="51" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="317" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1AttitudeQuaternionEKF_1a09de7e51d2f0dc755cb3a1e735077f39" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::AttitudeQuaternionEKF::m_Mag_y</definition>
+        <argsstring></argsstring>
+        <name>m_Mag_y</name>
+        <briefdescription>
+<para>magnetometer yaw measurement expressed in body frame </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="318" column="16" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="318" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1AttitudeQuaternionEKF_1a8573af240f3eb89c8863d94373c3b589" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
+        <definition>iDynTree::VectorDynSize iDynTree::AttitudeQuaternionEKF::m_x</definition>
+        <argsstring></argsstring>
+        <name>m_x</name>
+        <briefdescription>
+<para>state vector for the EKF - orientation, angular velocity, gyro bias </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="320" column="33" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="320" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1AttitudeQuaternionEKF_1a14afc0a3f53409cfde58a5626ba7dfa1" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
+        <definition>iDynTree::VectorDynSize iDynTree::AttitudeQuaternionEKF::m_y</definition>
+        <argsstring></argsstring>
+        <name>m_y</name>
+        <briefdescription>
+<para>measurement vector for the EKF - accelerometer (and magnetometer yaw) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="321" column="33" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="321" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1AttitudeQuaternionEKF_1a12bcf66905f434d291b75b227db5ae9f" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
+        <definition>iDynTree::VectorDynSize iDynTree::AttitudeQuaternionEKF::m_u</definition>
+        <argsstring></argsstring>
+        <name>m_u</name>
+        <briefdescription>
+<para>input vector for the EKF - gyroscope measurement </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="322" column="33" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="322" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1AttitudeQuaternionEKF_1ac9f7de575c89861d3499cbdd9b64c586" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t iDynTree::AttitudeQuaternionEKF::m_state_size</definition>
+        <argsstring></argsstring>
+        <name>m_state_size</name>
+        <briefdescription>
+<para>state dimensions </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="324" column="16" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="324" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1AttitudeQuaternionEKF_1a46643a52668222d0b45e8af727b7739d" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t iDynTree::AttitudeQuaternionEKF::m_output_size</definition>
+        <argsstring></argsstring>
+        <name>m_output_size</name>
+        <briefdescription>
+<para>output dimensions </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="325" column="16" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="325" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1AttitudeQuaternionEKF_1a8342914e97ebd0521d9d8e8500340763" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t iDynTree::AttitudeQuaternionEKF::m_input_size</definition>
+        <argsstring></argsstring>
+        <name>m_input_size</name>
+        <briefdescription>
+<para>input dimensions </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="326" column="16" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="326" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1AttitudeQuaternionEKF_1a3938b37debd09518a0d1cee119a6b361" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeQuaternionEKF::m_initialized</definition>
+        <argsstring></argsstring>
+        <name>m_initialized</name>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>flag to check if QEKF is initialized </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="327" column="14" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="327" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1AttitudeQuaternionEKF_1ad00c0142ab53d0c57bb7ba8eaab04263" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">iDynTree::Matrix4x4</ref></type>
+        <definition>iDynTree::Matrix4x4 iDynTree::AttitudeQuaternionEKF::m_Id4</definition>
+        <argsstring></argsstring>
+        <name>m_Id4</name>
+        <briefdescription>
+<para><formula id="287">$ 4 \times 4 $</formula> identity matrix </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="329" column="29" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="329" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1AttitudeQuaternionEKF_1af6b11cfcc7d3fb26b42707a25ce9852a" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">iDynTree::Matrix3x3</ref></type>
+        <definition>iDynTree::Matrix3x3 iDynTree::AttitudeQuaternionEKF::m_Id3</definition>
+        <argsstring></argsstring>
+        <name>m_Id3</name>
+        <briefdescription>
+<para><formula id="131">$ 3 \times 3 $</formula> identity matrix </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="330" column="29" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="330" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1AttitudeQuaternionEKF_1a63fc95468b3cf40a65e4becfdd23de5e" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Direction" kindref="compound">iDynTree::Direction</ref></type>
+        <definition>iDynTree::Direction iDynTree::AttitudeQuaternionEKF::m_gravity_direction</definition>
+        <argsstring></argsstring>
+        <name>m_gravity_direction</name>
+        <briefdescription>
+<para>direction of the gravity vector expressed in the inertial frame denoted by <formula id="230">$ A $</formula>, default set to <formula id="257">$ e_3 = \begin{bmatrix} 0 &amp; 0 &amp; 1.0 \end{bmatrix}^T $</formula> </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="331" column="29" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="331" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1a6ac6c60831a6e6e7d725f4a0fccb89bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::AttitudeQuaternionEKF::AttitudeQuaternionEKF</definition>
+        <argsstring>()</argsstring>
+        <name>AttitudeQuaternionEKF</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="117" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1a72b3f1dfb973ce781b7419d563ba9034" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::AttitudeQuaternionEKF::getParameters</definition>
+        <argsstring>(AttitudeQuaternionEKFParameters &amp;params)</argsstring>
+        <name>getParameters</name>
+        <param>
+          <type><ref refid="structiDynTree_1_1AttitudeQuaternionEKFParameters" kindref="compound">AttitudeQuaternionEKFParameters</ref> &amp;</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+<para>Get filter parameters as a struct. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>object of <ref refid="structiDynTree_1_1AttitudeQuaternionEKFParameters" kindref="compound">AttitudeQuaternionEKFParameters</ref> passed as reference </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="123" column="14" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="123" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1a6e7703c18de1dc271848bfd0dc0ac95e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::AttitudeQuaternionEKF::setParameters</definition>
+        <argsstring>(const AttitudeQuaternionEKFParameters &amp;params)</argsstring>
+        <name>setParameters</name>
+        <param>
+          <type>const <ref refid="structiDynTree_1_1AttitudeQuaternionEKFParameters" kindref="compound">AttitudeQuaternionEKFParameters</ref> &amp;</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+<para>Set filter parameters with the struct members. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This resets filter since it also calls useMagnetometerMeasurements(flag) (if the use_magnetometer_measurements flag has been toggled). <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>object of <ref refid="structiDynTree_1_1AttitudeQuaternionEKFParameters" kindref="compound">AttitudeQuaternionEKFParameters</ref> passed as a const reference </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="132" column="14" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="132" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1aff1960e49e08ce5219426f88ed38d9ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::AttitudeQuaternionEKF::setGravityDirection</definition>
+        <argsstring>(const iDynTree::Direction &amp;gravity_dir)</argsstring>
+        <name>setGravityDirection</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Direction" kindref="compound">iDynTree::Direction</ref> &amp;</type>
+          <declname>gravity_dir</declname>
+        </param>
+        <briefdescription>
+<para>Set the gravity direction assumed by the filter This affects the measurement model function h() and Jacobian H. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">gravity_dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>gravity direction </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="143" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1a56f991f11a96c646dda00856e0c3f2f8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::AttitudeQuaternionEKF::setTimeStepInSeconds</definition>
+        <argsstring>(double time_step_in_seconds)</argsstring>
+        <name>setTimeStepInSeconds</name>
+        <param>
+          <type>double</type>
+          <declname>time_step_in_seconds</declname>
+        </param>
+        <briefdescription>
+<para>set discretization time step in seconds </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time_step_in_seconds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>time step </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="149" column="14" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="149" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1afeea4332a25849b1fd96708d6d7c42ee" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::AttitudeQuaternionEKF::setBiasCorrelationTimeFactor</definition>
+        <argsstring>(double bias_correlation_time_factor)</argsstring>
+        <name>setBiasCorrelationTimeFactor</name>
+        <param>
+          <type>double</type>
+          <declname>bias_correlation_time_factor</declname>
+        </param>
+        <briefdescription>
+<para>set bias correlation time factor </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">bias_correlation_time_factor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>time factor for bias evolution </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="155" column="14" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="155" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1adbc3ebc4d6e60eb849b23ba32abd4a66" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeQuaternionEKF::useMagnetometerMeasurements</definition>
+        <argsstring>(bool use_magnetometer_measurements)</argsstring>
+        <name>useMagnetometerMeasurements</name>
+        <param>
+          <type>bool</type>
+          <declname>use_magnetometer_measurements</declname>
+        </param>
+        <briefdescription>
+<para>set flag to use magnetometer measurements </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">use_magnetometer_measurements</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>enable/disable magnetometer measurements </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>calling this method with the flag same as current flag value will not change anything, meanwhile a new flag setting will reset the filter, reinitialize the filter and set the previous state as filter&apos;s initial state and previous state covariance as filter&apos;s intial state covariance </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="164" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1a1246a70eb1035dfa8f2c6ff7d41b12c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeQuaternionEKF::setMeasurementNoiseVariance</definition>
+        <argsstring>(double acc, double mag)</argsstring>
+        <name>setMeasurementNoiseVariance</name>
+        <param>
+          <type>double</type>
+          <declname>acc</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>mag</declname>
+        </param>
+        <briefdescription>
+<para>prepares the measurement noise covariance matrix and calls ekfSetMeasurementNoiseMeanAndCovariance() measurement noise depends only on accelerometer xyz (and magnetometer z) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>the noise has zero mean (basically passes a zero vector with covariance matrix) </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">acc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>variance for accelerometer measurements </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>variance for magnetometer measurements </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="174" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1a06a0a22738cb1d87a14dea460a56b547" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeQuaternionEKF::setSystemNoiseVariance</definition>
+        <argsstring>(double gyro, double gyro_bias)</argsstring>
+        <name>setSystemNoiseVariance</name>
+        <param>
+          <type>double</type>
+          <declname>gyro</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>gyro_bias</declname>
+        </param>
+        <briefdescription>
+<para>prepares the system noise covariance matrix and calls ekfSetSystemNoiseMeanAndCovariance() process noise depends on gyro measurement and gyro bias estimate - since gyro measurement is passed as input </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>the noise has zero mean (basically passes a zero vector with covariance matrix) measurement noise depends only on accelerometer xyz (and magnetometer z) </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">gyro</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>variance for gyroscope measurements </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gyro_bias</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>variance for gyroscope bias estimates </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="185" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1ab359a33634ff3c1aa789cb1feb3169a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeQuaternionEKF::setInitialStateCovariance</definition>
+        <argsstring>(double orientation_var, double ang_vel_var, double gyro_bias_var)</argsstring>
+        <name>setInitialStateCovariance</name>
+        <param>
+          <type>double</type>
+          <declname>orientation_var</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>ang_vel_var</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>gyro_bias_var</declname>
+        </param>
+        <briefdescription>
+<para>prepares the state covariance matrix and calls <ref refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a557ecd035b2ff1e2267d3f98c0cf3a35" kindref="member">ekfSetStateCovariance()</ref> </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">orientation_var</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>variance for intial orientation state estimate </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ang_vel_var</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>variance for initial angular velocity state estimate </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gyro_bias_var</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>variance for intial gyro bias state estimate </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="194" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1a97c97d04ff819678edc75e694b02a8ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeQuaternionEKF::initializeFilter</definition>
+        <argsstring>()</argsstring>
+        <name>initializeFilter</name>
+        <briefdescription>
+<para>intializes the filter by resizing buffers and setting parameters </para>
+        </briefdescription>
+        <detaileddescription>
+<para><itemizedlist>
+<listitem><para>sets state, output and input dimensions for the ekf</para>
+</listitem><listitem><para>resizes internal buffers</para>
+</listitem><listitem><para>calls <ref refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a37450d1833a7ce6d7b2caec4e00c9a62" kindref="member">ekfInit()</ref></para>
+</listitem><listitem><para>sets system noise, measurement noise and initial state covariance</para>
+</listitem><listitem><para>if successful sets initialized flag to true <simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="205" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1addb65b053f2854685bb193318cfd5e6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeQuaternionEKF::updateFilterWithMeasurements</definition>
+        <argsstring>(const iDynTree::LinearAccelerometerMeasurements &amp;linAccMeas, const iDynTree::GyroscopeMeasurements &amp;gyroMeas) override</argsstring>
+        <name>updateFilterWithMeasurements</name>
+        <reimplements refid="classiDynTree_1_1IAttitudeEstimator_1a9c251ac717cbcfeb75a39fffd5a9b185">updateFilterWithMeasurements</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::LinearAccelerometerMeasurements</ref> &amp;</type>
+          <declname>linAccMeas</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::GyroscopeMeasurements</ref> &amp;</type>
+          <declname>gyroMeas</declname>
+        </param>
+        <briefdescription>
+<para>Update the filter with accelerometer and gyroscope measurements. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">linAccMeas</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>proper (body acceleration - gravity) classical acceleration of the origin of the body frame B expressed in frame B </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gyroMeas</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>angular velocity of body frame B with respect to an inertial fram A, expressed in frame B</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>consider the current behavior of our system does not use magnetometer measurements and is calling this method to update measurements. Then, if we decide to turn the flag use_magnetometer_measurements to true, this will not guarantee that the magnetometer measurements will be used. The magnetometer measurements will be used only if we replace this function call with the other overlaoded function considering the magnetometer measurements.</para>
+</simplesect>
+<simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="208" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1a066e3d8d073c3374c3c49cfc41bb4618" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeQuaternionEKF::updateFilterWithMeasurements</definition>
+        <argsstring>(const iDynTree::LinearAccelerometerMeasurements &amp;linAccMeas, const iDynTree::GyroscopeMeasurements &amp;gyroMeas, const iDynTree::MagnetometerMeasurements &amp;magMeas) override</argsstring>
+        <name>updateFilterWithMeasurements</name>
+        <reimplements refid="classiDynTree_1_1IAttitudeEstimator_1a7121acf85b46be0edb9231588c579013">updateFilterWithMeasurements</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::LinearAccelerometerMeasurements</ref> &amp;</type>
+          <declname>linAccMeas</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::GyroscopeMeasurements</ref> &amp;</type>
+          <declname>gyroMeas</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::MagnetometerMeasurements</ref> &amp;</type>
+          <declname>magMeas</declname>
+        </param>
+        <briefdescription>
+<para>Update the filter with accelerometer, gyroscope and magnetometer measurements. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">linAccMeas</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>proper (body acceleration - gravity) classical acceleration of the origin of the body frame B expressed in frame B </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gyroMeas</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>angular velocity of body frame B with respect to an inertial fram A, expressed in frame B </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">magMeas</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>magnetometer measurements expressed in frame B</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="210" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1a6d06f0744427bd918a7175919176fa05" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeQuaternionEKF::propagateStates</definition>
+        <argsstring>() override</argsstring>
+        <name>propagateStates</name>
+        <reimplements refid="classiDynTree_1_1IAttitudeEstimator_1a6cc4ea7bacb721c67890ceb250857e71">propagateStates</reimplements>
+        <briefdescription>
+<para>Propagate the states and associated uncertainties through properly defined propagation functions The underlying implementation depends on the type of filter being implemented. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="213" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1a0fd7d6c689f0ff66d799469d0fd1dbf0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeQuaternionEKF::getOrientationEstimateAsRotationMatrix</definition>
+        <argsstring>(iDynTree::Rotation &amp;rot) override</argsstring>
+        <name>getOrientationEstimateAsRotationMatrix</name>
+        <reimplements refid="classiDynTree_1_1IAttitudeEstimator_1a3fd8541c4ede713177058251aae24717">getOrientationEstimateAsRotationMatrix</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1Rotation" kindref="compound">iDynTree::Rotation</ref> &amp;</type>
+          <declname>rot</declname>
+        </param>
+        <briefdescription>
+<para>Get orientation of the body with respect to inertial frame, in rotation matrix form If we denote <formula id="230">$ A $</formula> as inertial frame and <formula id="231">$ B $</formula> as the frame attached to the body, then this method gives us <formula id="232">$ {^A}R_B $</formula> as the rotation matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">rot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref> matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="214" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1a01e03a0620f4abf473d8cf42c37528ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeQuaternionEKF::getOrientationEstimateAsQuaternion</definition>
+        <argsstring>(iDynTree::UnitQuaternion &amp;q) override</argsstring>
+        <name>getOrientationEstimateAsQuaternion</name>
+        <reimplements refid="classiDynTree_1_1IAttitudeEstimator_1a72f94711e28d7173869f41492d6ac364">getOrientationEstimateAsQuaternion</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::UnitQuaternion</ref> &amp;</type>
+          <declname>q</declname>
+        </param>
+        <briefdescription>
+<para>Get orientation of the body with respect to inertial frame, in unit quaternion form If we denote <formula id="230">$ A $</formula> as inertial frame and <formula id="231">$ B $</formula> as the frame attached to the body, then this method gives us <formula id="233">$ {^A}q_B as the quaternion $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>quaternion has the form (real, imaginary) and is normalized </para>
+</simplesect>
+<simplesect kind="note"><para>Usually a rotation matrix can be described using two quaternions due to its double-connectedness property Depending on the specific filter, the initial state and the trajectory of the system, we could obtain one quaternion or the other(opposite spin), depending on the system dynamics.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">q</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>UnitQuaternion </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="215" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1a0fc087b7d9adc7384e008c8dae11677b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeQuaternionEKF::getOrientationEstimateAsRPY</definition>
+        <argsstring>(iDynTree::RPY &amp;rpy) override</argsstring>
+        <name>getOrientationEstimateAsRPY</name>
+        <reimplements refid="classiDynTree_1_1IAttitudeEstimator_1add5b1c7109a232bcb3da976792f72a6f">getOrientationEstimateAsRPY</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::RPY</ref> &amp;</type>
+          <declname>rpy</declname>
+        </param>
+        <briefdescription>
+<para>Get orientation of the body with respect to inertial frame, in Euler&apos;s RPY form If we denote <formula id="230">$ A $</formula> as inertial frame and <formula id="231">$ B $</formula> as the frame attached to the body, then this method gives us the RPY 3d vector of Euler Angles when composed together gives us <formula id="232">$ {^A}R_B $</formula> as the rotation matrix where <formula id="234">$ {^A}R_B = Rot_z(yaw)Rot_y(pitch)Rot_x(roll)$</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For more details about the range of the RPY Euler angles, please refer the documentation of <ulink url="https://github.com/robotology/idyntree/blob/c8bf721b771fa4b1e7c3a940632e121060719a19/src/core/include/iDynTree/Core/Rotation.h#L167">GetRPY()</ulink></para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">rpy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>3D vector containing roll pitch yaw angles </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="216" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1aa1f9effb336b40b40893ea402d618389" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::AttitudeQuaternionEKF::getInternalStateSize</definition>
+        <argsstring>() const override</argsstring>
+        <name>getInternalStateSize</name>
+        <reimplements refid="classiDynTree_1_1IAttitudeEstimator_1a7234eb151268d99d90dbe691a6bf3a46">getInternalStateSize</reimplements>
+        <briefdescription>
+<para>Get dimension of the state vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>size_t size of state vector </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="217" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1a38b5c9a6cc64d28e33bb5ccf424b6622" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeQuaternionEKF::getInternalState</definition>
+        <argsstring>(const iDynTree::Span&lt; double &gt; &amp;stateBuffer) const override</argsstring>
+        <name>getInternalState</name>
+        <reimplements refid="classiDynTree_1_1IAttitudeEstimator_1a0360685bed94e086224b1126116dca04">getInternalState</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; double &gt; &amp;</type>
+          <declname>stateBuffer</declname>
+        </param>
+        <briefdescription>
+<para>Get internal state of the estimator The internal state of the estimator is described as <formula id="226">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="227">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="228">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="229">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The default internal state of the estimator would be <formula id="235">$ X = \begin{bmatrix} 1.0 \\ 0_{1 \times 3} \\ 0_{1 \times 3} \\ 0_{1 \times 3} \end{bmatrix}^T $</formula> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">stateBuffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> object as reference of the container where state vector should be copied to </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="218" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1a687b22236d1149388d9dae9bc3eed81f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeQuaternionEKF::getDefaultInternalInitialState</definition>
+        <argsstring>(const iDynTree::Span&lt; double &gt; &amp;stateBuffer) const override</argsstring>
+        <name>getDefaultInternalInitialState</name>
+        <reimplements refid="classiDynTree_1_1IAttitudeEstimator_1a86554ddcfc70601b05ad7cd997851983">getDefaultInternalInitialState</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; double &gt; &amp;</type>
+          <declname>stateBuffer</declname>
+        </param>
+        <briefdescription>
+<para>Get initial internal state of the estimator The internal state of the estimator is described as <formula id="226">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="227">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="228">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="229">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The default internal state of the estimator would be <formula id="235">$ X = \begin{bmatrix} 1.0 \\ 0_{1 \times 3} \\ 0_{1 \times 3} \\ 0_{1 \times 3} \end{bmatrix}^T $</formula> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">stateBuffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> object as reference of the container where state vector should be copied to </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="219" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1af2c3440e43f4a09841e7aacb977fc5f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeQuaternionEKF::setInternalState</definition>
+        <argsstring>(const iDynTree::Span&lt; double &gt; &amp;stateBuffer) override</argsstring>
+        <name>setInternalState</name>
+        <reimplements refid="classiDynTree_1_1IAttitudeEstimator_1a4277465fc6cacfa0fa0ccd1d1c863954">setInternalState</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; double &gt; &amp;</type>
+          <declname>stateBuffer</declname>
+        </param>
+        <briefdescription>
+<para>set internal state of the estimator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The internal state of the estimator is described as <formula id="226">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="227">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="228">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="229">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">stateBuffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> object as reference of the container from which the internal state vector should be assigned. The size of the buffer should be 10. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="220" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1aa7a6ab9ed9227c130dd6edc9fbe02e49" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeQuaternionEKF::setInternalStateInitialOrientation</definition>
+        <argsstring>(const iDynTree::Span&lt; double &gt; &amp;orientationBuffer) override</argsstring>
+        <name>setInternalStateInitialOrientation</name>
+        <reimplements refid="classiDynTree_1_1IAttitudeEstimator_1a8ca76def98fa0bd37975788dc7e1c0c5">setInternalStateInitialOrientation</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; double &gt; &amp;</type>
+          <declname>orientationBuffer</declname>
+        </param>
+        <briefdescription>
+<para>set the initial orientation for the internal state of the estimator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The initial orientation for the internal state of the estimator is described as <formula id="236">$ {^A}q_B $</formula> <formula id="227">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">stateBuffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> object as reference of the container from which the inital orientaiton for internal state vector should be assigned. The size of the buffer should be 4. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="221" column="14"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1af66f7f404d0b4206c2ed084388b93b22" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeQuaternionEKF::ekf_f</definition>
+        <argsstring>(const iDynTree::VectorDynSize &amp;x_k, const iDynTree::VectorDynSize &amp;u_k, iDynTree::VectorDynSize &amp;xhat_k_plus_one) override</argsstring>
+        <name>ekf_f</name>
+        <reimplements refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1aa35db724dab6168cb3d84e44cbb809ea">ekf_f</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>x_k</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>u_k</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>xhat_k_plus_one</declname>
+        </param>
+        <briefdescription>
+<para>discrete system propagation <formula id="275">$ f(X, u) = f(X, y_gyro) $</formula> where <formula id="276">$ X = \begin{bmatrix} q_0 &amp; q_1 &amp; q_2 &amp; q_3 &amp; \omega_x &amp; \omega_y &amp; \omega_z &amp; b_x &amp; b_y &amp; b_z \end{bmatrix}^T $</formula> <formula id="277">$ u = \begin{bmatrix} {y_{gyro}}_x &amp; {y_{gyro}}_y &amp; {y_{gyro}}_z \end{bmatrix}^T $</formula> <formula id="278">$ f(X, u) = \begin{bmatrix} q_{k} \otimes \text{exp}(\omega \Delta T) \\ y_{gyro} - b \\ (1 - \lambda_{b} \Delta t)b \end{bmatrix}$</formula> </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="235" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1ae806e068960235cb5077ff69e2b22d38" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeQuaternionEKF::ekf_h</definition>
+        <argsstring>(const iDynTree::VectorDynSize &amp;xhat_k_plus_one, iDynTree::VectorDynSize &amp;zhat_k_plus_one) override</argsstring>
+        <name>ekf_h</name>
+        <reimplements refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a823fd6ec74999d302d6ba38322de1a82">ekf_h</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>xhat_k_plus_one</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>zhat_k_plus_one</declname>
+        </param>
+        <briefdescription>
+<para>discrete measurement prediction where <formula id="279">$ h(X) = \begin{bmatrix} h_{acc}(X) &amp; h_{mag}(X) \end{bmatrix}^T $</formula> <formula id="280">$ h_{acc}(X) = R^T \begin{bmatrix} 0 \\ 0 \\ -1 \end{bmatrix} $</formula> <formula id="281">$ h_{mag}(X) = atan2(tan(yaw))$</formula> </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="245" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1ae11c2c7e57e67acee77eed585ede8d33" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeQuaternionEKF::ekfComputeJacobianF</definition>
+        <argsstring>(iDynTree::VectorDynSize &amp;x, iDynTree::MatrixDynSize &amp;F) override</argsstring>
+        <name>ekfComputeJacobianF</name>
+        <reimplements refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1acfe816c4328411dcdd86426b1877510f">ekfComputeJacobianF</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>F</declname>
+        </param>
+        <briefdescription>
+<para>Describes the system Jacobian necessary for the propagation of predicted state covariance The analytical Jacobian describing the partial derivative of the system propagation with respect to the state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>system state </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>system Jacobian </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool true/false if successful or not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="255" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1a030099f3dce57a39a2d98c2a92c9c2d1" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeQuaternionEKF::ekfComputeJacobianF</definition>
+        <argsstring>(iDynTree::VectorDynSize &amp;x, iDynTree::VectorDynSize &amp;u, iDynTree::MatrixDynSize &amp;F) override</argsstring>
+        <name>ekfComputeJacobianF</name>
+        <reimplements refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1aa5f048b7cf4b255e9d77b06edf7d4f3d">ekfComputeJacobianF</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>u</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>F</declname>
+        </param>
+        <briefdescription>
+<para>Describes the system Jacobian necessary for the propagation of predicted state covariance The analytical Jacobian describing the partial derivative of the system propagation with respect to the state and the system propagation with respect to the input. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>the detail of this function needs to be implemented by the child class </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>system state </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">u</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>system input </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>system Jacobian </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool true/false if successful or not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="256" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1a9d5187cc8fe2180cf76bcca30307afaf" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeQuaternionEKF::ekfComputeJacobianH</definition>
+        <argsstring>(iDynTree::VectorDynSize &amp;x, iDynTree::MatrixDynSize &amp;H) override</argsstring>
+        <name>ekfComputeJacobianH</name>
+        <reimplements refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a8729efeddce087e809db28749fb2da20">ekfComputeJacobianH</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>H</declname>
+        </param>
+        <briefdescription>
+<para>Describes the measurement Jacobian necessary for computing Kalman gain and updating the predicted state and its covariance The analytical Jacobian describing the partial derivative of the measurement model with respect to the state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>system state </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">H</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>measurement Jacobian </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool true/false if successful or not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="265" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1a41e02b6330f997e9ac96aa954181e4bb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::AttitudeQuaternionEKF::prepareSystemNoiseCovarianceMatrix</definition>
+        <argsstring>(iDynTree::MatrixDynSize &amp;Q)</argsstring>
+        <name>prepareSystemNoiseCovarianceMatrix</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>Q</declname>
+        </param>
+        <briefdescription>
+<para>prepares the system noise covariance matrix using internal struct params system model is as good as gyroscope measurement and bias estimate system noise covariance can be descibed as <formula id="282">$ Q = F_u U {F_u}^T $</formula> where <formula id="283">$ F = \begin{bmatrix} \frac{\partial f}{\partial y_gyro} &amp; \frac{\partial f}{ \partial x_gyrobias} \end{bmatrix} $</formula> <formula id="284">$ = \begin{bmatrix} 0_{4 \times 3} &amp; 0_{4 \times 3} \\ I_{3 \times 3} &amp; 0_{3 \times 3} \\ 0_{3 \times 3} &amp; I_{3 \times 3} \end{bmatrix}$</formula> <formula id="285">$ U = diag(\begin{bmatrix} \sigma_{gyro}^{2} I_{3 \times 3} &amp; \sigma_{gyrobias}^{2} I_{3 \times 3} \end{bmatrix}) $</formula> </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">Q</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>matrix container as reference </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="275" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1a19e04139c7a1f76571c925d409991179" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::AttitudeQuaternionEKF::prepareMeasurementNoiseCovarianceMatrix</definition>
+        <argsstring>(iDynTree::MatrixDynSize &amp;R)</argsstring>
+        <name>prepareMeasurementNoiseCovarianceMatrix</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>R</declname>
+        </param>
+        <briefdescription>
+<para>prepares the measurement noise covariance matrix using internal struct parameters measurement noise depends only on accelerometer measurement along x-,y- and z- directions along with magnetometer z-direction if included measurement noise covariance can be descibed as, <formula id="286">$ R = \begin{bmatrix} \sigma_{acc}^{2} I_{3 \times 3} &amp; 0_{3 \times 1} \\ 0_{1 \times 3} &amp; \sigma_{mag}^{2}$</formula> if magnetometer measurements is also considered. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In case of magnetometer measurements not being considered, it is reduced to the <formula id="131">$ 3 \times 3 $</formula> matrix <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">R</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>matrix container as reference </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="286" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1a10945fde503d54510808be3c8e044209" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::AttitudeQuaternionEKF::serializeStateVector</definition>
+        <argsstring>()</argsstring>
+        <name>serializeStateVector</name>
+        <briefdescription>
+<para>serializes the state struct to state x of <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="291" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1a614dd993cbcf8b6f087189d821984c34" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::AttitudeQuaternionEKF::deserializeStateVector</definition>
+        <argsstring>()</argsstring>
+        <name>deserializeStateVector</name>
+        <briefdescription>
+<para>deserializes state x of <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> to the state struct </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="296" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1a77a619068b5c9b044724be21e8698e2b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::AttitudeQuaternionEKF::serializeMeasurementVector</definition>
+        <argsstring>()</argsstring>
+        <name>serializeMeasurementVector</name>
+        <briefdescription>
+<para>serializes the accelerometer and magenetometer measurements into y vector since DiscreteExtendedKalmanFilter expects a <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> including all necessary measurements </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="302" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AttitudeQuaternionEKF_1a1c09ea9198fff80371ef4ce435bd0b87" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AttitudeQuaternionEKF::callEkfUpdate</definition>
+        <argsstring>()</argsstring>
+        <name>callEkfUpdate</name>
+        <briefdescription>
+<para>serializes measurements, calls ekfUpdate step and gets state estimate corrected by measurements </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true/false, if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="311" column="14"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Quaternion based Discrete Extended Kalman Filter fusing IMU measurements, to give estimates of orientation, angular velocity and gyroscope bias. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>It follows the implementation detailed in <ulink url="https://wuecampus2.uni-wuerzburg.de/moodle/pluginfile.php/1109745/mod_resource/content/1/QEKF_Floatsat_WS16.pdf">Quaternion Based Extended Kalman Filter, slides by Michael Stohmeier</ulink> The filter is used to estimate the states <formula id="226">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> where <formula id="227">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="228">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="229">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. <simplesect kind="note"><para>: we will drop the subscripts and superscripts in the rest of the documentation for convenience</para>
+</simplesect>
+Discretized dynamics during the prediction step, <formula id="271">\[ \hat{{x}}_{k+1} = \begin{bmatrix} q_{k} \otimes \text{exp}(\omega \Delta T) \\ y_{gyro_{k}} - b_{k} \\ (1 - \lambda_{b} \Delta t)b_k \end{bmatrix} \]</formula></para>
+<para>Measurement model for accelerometer is given as, <formula id="272">\[ h_{acc}(\hat{x}_{k+1}) = \begin{bmatrix} 2(q_1q_3 - q_0q_2) \\ 2(q_2q_3 - q_0q_1) \\ q_0^2 - q_1^2 - q_2^2 + q_3^2 \end{bmatrix} \]</formula> obtained from <formula id="273">$ {^w}R_b^T e_3 $</formula> of the assumed gravity direction.</para>
+<para>Measurement model for magnetometer measurement is given as, <formula id="274">\[ h_{mag}(\hat{x}_{k+1}) = atan2( 2(q_0q_3 + q_1q_2),1 - 2(q_2^2 + q_3^2) ) \]</formula></para>
+<para>The linearized system propogation and measurement model is obtained by computing Jacobins F and H with respect to the state.</para>
+<para>The zero mean, additive Gaussian noise can be set using the covariance matrices which will be used during predict and update steps.</para>
+<para>The <ref refid="classiDynTree_1_1AttitudeQuaternionEKF_1a6d06f0744427bd918a7175919176fa05" kindref="member">propagateStates()</ref> method is called to set the input vector for the EKF, then <ref refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a06e0c6ab212f148079af396e0eb69244" kindref="member">ekfPredict()</ref> is called to propagate the state through the propagation function f() and propate the state covariance using the Jacobian F.</para>
+<para>The <ref refid="classiDynTree_1_1AttitudeQuaternionEKF_1addb65b053f2854685bb193318cfd5e6c" kindref="member">updateFilterWithMeasurements()</ref> is called to set the measurement vector for the EKF, and then ekfUpdate is used to correct the state estimate and its covariance using the measurement model function h() and the measurement Jacobian H.</para>
+<para>The usage of the QEKF should follow the decribed procedure below,<itemizedlist>
+<listitem><para>instantiate the filter</para>
+</listitem><listitem><para>set parameters</para>
+</listitem><listitem><para>call <ref refid="classiDynTree_1_1AttitudeQuaternionEKF_1a97c97d04ff819678edc75e694b02a8ef" kindref="member">initializeFilter()</ref> (this is necessary for resizing the buffers, the user should call this method after setting parameters)</para>
+</listitem><listitem><para>use <ref refid="classiDynTree_1_1AttitudeQuaternionEKF_1af2c3440e43f4a09841e7aacb977fc5f6" kindref="member">setInternalState()</ref> to set initial state (The filter will throw an error, if this is not called atleast once, this enforces the user to set intial state)</para>
+</listitem><listitem><para>Once initialized, the following filter methods can be run in a loop to get the orientation estimates,<itemizedlist>
+<listitem><para><ref refid="classiDynTree_1_1AttitudeQuaternionEKF_1a6d06f0744427bd918a7175919176fa05" kindref="member">propagateStates()</ref> method to propagate the states and covariance</para>
+</listitem><listitem><para><ref refid="classiDynTree_1_1AttitudeQuaternionEKF_1addb65b053f2854685bb193318cfd5e6c" kindref="member">updateFilterWithMeasurements()</ref> method to correct the predicted states and covariance</para>
+</listitem><listitem><para><ref refid="classiDynTree_1_1AttitudeQuaternionEKF_1a38b5c9a6cc64d28e33bb5ccf424b6622" kindref="member">getInternalState()</ref> or getOrientationEstimate*() methods to get the entire state estimate or only the attitude estimated in desired representation</para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="warning"><para>calling the method <ref refid="classiDynTree_1_1AttitudeQuaternionEKF_1adbc3ebc4d6e60eb849b23ba32abd4a66" kindref="member">useMagnetometerMeasurements()</ref> while the estimator is running, will reset the filter, reinitialize the filter to resize buffers and sets the previous estiamted state as the inital state. </para>
+</simplesect>
+<simplesect kind="note"><para>calling other set parameter methods does not reset the filter, since they are not associated with changing the output dimensions </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::IAttitudeEstimator</label>
+        <link refid="classiDynTree_1_1IAttitudeEstimator"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::AttitudeQuaternionEKF</label>
+        <link refid="classiDynTree_1_1AttitudeQuaternionEKF"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::DiscreteExtendedKalmanFilterHelper</label>
+        <link refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>iDynTree::IAttitudeEstimator</label>
+        <link refid="classiDynTree_1_1IAttitudeEstimator"/>
+      </node>
+      <node id="5">
+        <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+      </node>
+      <node id="4">
+        <label>iDynTree::AttitudeEstimatorState</label>
+        <link refid="structiDynTree_1_1AttitudeEstimatorState"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_orientation</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_angular_velocity</edgelabel>
+          <edgelabel>m_gyroscope_bias</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::AttitudeQuaternionEKF</label>
+        <link refid="classiDynTree_1_1AttitudeQuaternionEKF"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_initial_state_qekf</edgelabel>
+          <edgelabel>m_state_qekf</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_params_qekf</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>iDynTree::AttitudeQuaternionEKFParameters</label>
+        <link refid="structiDynTree_1_1AttitudeQuaternionEKFParameters"/>
+      </node>
+      <node id="3">
+        <label>iDynTree::DiscreteExtendedKalmanFilterHelper</label>
+        <link refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper"/>
+      </node>
+      <node id="6">
+        <label>iDynTree::VectorFixSize&lt; 3 &gt;</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+        <childnode refid="5" relation="template-instance">
+          <edgelabel>&lt; 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Estimation/AttitudeQuaternionEKF.h" line="113" column="5" bodyfile="iDynTree/Estimation/AttitudeQuaternionEKF.h" bodystart="115" bodyend="332"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a6ac6c60831a6e6e7d725f4a0fccb89bd" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>AttitudeQuaternionEKF</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a1c09ea9198fff80371ef4ce435bd0b87" prot="private" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>callEkfUpdate</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a614dd993cbcf8b6f087189d821984c34" prot="private" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>deserializeStateVector</name></member>
+      <member refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a6cb21a197ab80253529694710473c0fd" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>DiscreteExtendedKalmanFilterHelper</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1af66f7f404d0b4206c2ed084388b93b22" prot="private" virt="virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ekf_f</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1ae806e068960235cb5077ff69e2b22d38" prot="private" virt="virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ekf_h</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1ae11c2c7e57e67acee77eed585ede8d33" prot="private" virt="virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ekfComputeJacobianF</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a030099f3dce57a39a2d98c2a92c9c2d1" prot="private" virt="virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ekfComputeJacobianF</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a9d5187cc8fe2180cf76bcca30307afaf" prot="private" virt="virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ekfComputeJacobianH</name></member>
+      <member refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a65ac546a68e8ee705927c5dd9b57eb11" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ekfGetStateCovariance</name></member>
+      <member refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a46b41687186a840fdd1b15288339c51e" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ekfGetStates</name></member>
+      <member refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a37450d1833a7ce6d7b2caec4e00c9a62" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ekfInit</name></member>
+      <member refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a48dda1a9c2249dc1d7d38dbc6da69b8b" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ekfInit</name></member>
+      <member refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a06e0c6ab212f148079af396e0eb69244" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ekfPredict</name></member>
+      <member refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a236c419106fbe83a4651cdd8f28fb3f8" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ekfReset</name></member>
+      <member refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a5980548288752504e9e4758b532e4c66" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ekfReset</name></member>
+      <member refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1abcc0fd06681f866166e527abf303929e" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ekfSetInitialState</name></member>
+      <member refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a301ab496750472b1681d509e30c75da1" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ekfSetInputSize</name></member>
+      <member refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1af2ec69c3ded347027f494c84af300d45" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ekfSetInputVector</name></member>
+      <member refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a0d1bd4ba94586c78c477a4a3af1fce0b" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ekfSetMeasurementNoiseCovariance</name></member>
+      <member refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a395b24fd4ae30bb88b35179ea80117cb" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ekfSetMeasurementVector</name></member>
+      <member refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1af8e0003290ca166251c7d8bb4a80162d" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ekfSetOutputSize</name></member>
+      <member refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a557ecd035b2ff1e2267d3f98c0cf3a35" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ekfSetStateCovariance</name></member>
+      <member refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a47a4ba3b26206d2607d724866e4bfd1a" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ekfSetStateSize</name></member>
+      <member refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a927eee549a560c68d95cbea5b0cec797" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ekfSetSystemNoiseCovariance</name></member>
+      <member refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a3511ef7000edb1af2f22c750ac5ccb63" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ekfUpdate</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a687b22236d1149388d9dae9bc3eed81f" prot="public" virt="virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>getDefaultInternalInitialState</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a38b5c9a6cc64d28e33bb5ccf424b6622" prot="public" virt="virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>getInternalState</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1aa1f9effb336b40b40893ea402d618389" prot="public" virt="virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>getInternalStateSize</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a01e03a0620f4abf473d8cf42c37528ea" prot="public" virt="virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>getOrientationEstimateAsQuaternion</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a0fd7d6c689f0ff66d799469d0fd1dbf0" prot="public" virt="virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>getOrientationEstimateAsRotationMatrix</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a0fc087b7d9adc7384e008c8dae11677b" prot="public" virt="virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>getOrientationEstimateAsRPY</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a72b3f1dfb973ce781b7419d563ba9034" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>getParameters</name></member>
+      <member refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a540be21bdc4ec8636da39190df3a3157" prot="protected" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>ignore</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a97c97d04ff819678edc75e694b02a8ef" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>initializeFilter</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1add299d86505cc3636bf3bf1299f7b8b0" prot="private" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>m_Acc_y</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a63fc95468b3cf40a65e4becfdd23de5e" prot="private" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>m_gravity_direction</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1af6b11cfcc7d3fb26b42707a25ce9852a" prot="private" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>m_Id3</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1ad00c0142ab53d0c57bb7ba8eaab04263" prot="private" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>m_Id4</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a2f87de8c8b6ab893bee277896ff6f983" prot="protected" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>m_initial_state_qekf</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a3938b37debd09518a0d1cee119a6b361" prot="private" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>m_initialized</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a8342914e97ebd0521d9d8e8500340763" prot="private" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>m_input_size</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a09de7e51d2f0dc755cb3a1e735077f39" prot="private" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>m_Mag_y</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a833d5ca1b5008678a543d729f1518780" prot="private" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>m_Omega_y</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1aab053006c80b0de7648ff5927c598d96" prot="private" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>m_orientationInRPY</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1ace557f1065335472b15789de5fbe4332" prot="private" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>m_orientationInSO3</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a46643a52668222d0b45e8af727b7739d" prot="private" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>m_output_size</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1ad6d8453c695937413e0f7885a87aad65" prot="protected" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>m_params_qekf</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1aeba1557b81069aec88408f1d54b1ca9f" prot="protected" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>m_state_qekf</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1ac9f7de575c89861d3499cbdd9b64c586" prot="private" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>m_state_size</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a12bcf66905f434d291b75b227db5ae9f" prot="private" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>m_u</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a8573af240f3eb89c8863d94373c3b589" prot="private" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>m_x</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a14afc0a3f53409cfde58a5626ba7dfa1" prot="private" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>m_y</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a19e04139c7a1f76571c925d409991179" prot="private" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>prepareMeasurementNoiseCovarianceMatrix</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a41e02b6330f997e9ac96aa954181e4bb" prot="private" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>prepareSystemNoiseCovarianceMatrix</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a6d06f0744427bd918a7175919176fa05" prot="public" virt="virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>propagateStates</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a77a619068b5c9b044724be21e8698e2b" prot="private" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>serializeMeasurementVector</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a10945fde503d54510808be3c8e044209" prot="private" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>serializeStateVector</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1afeea4332a25849b1fd96708d6d7c42ee" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>setBiasCorrelationTimeFactor</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1aff1960e49e08ce5219426f88ed38d9ce" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>setGravityDirection</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1ab359a33634ff3c1aa789cb1feb3169a4" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>setInitialStateCovariance</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1af2c3440e43f4a09841e7aacb977fc5f6" prot="public" virt="virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>setInternalState</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1aa7a6ab9ed9227c130dd6edc9fbe02e49" prot="public" virt="virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>setInternalStateInitialOrientation</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a1246a70eb1035dfa8f2c6ff7d41b12c2" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>setMeasurementNoiseVariance</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a6e7703c18de1dc271848bfd0dc0ac95e" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>setParameters</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a06a0a22738cb1d87a14dea460a56b547" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>setSystemNoiseVariance</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a56f991f11a96c646dda00856e0c3f2f8" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>setTimeStepInSeconds</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1addb65b053f2854685bb193318cfd5e6c" prot="public" virt="virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>updateFilterWithMeasurements</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1a066e3d8d073c3374c3c49cfc41bb4618" prot="public" virt="virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>updateFilterWithMeasurements</name></member>
+      <member refid="classiDynTree_1_1AttitudeQuaternionEKF_1adbc3ebc4d6e60eb849b23ba32abd4a66" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>useMagnetometerMeasurements</name></member>
+      <member refid="classiDynTree_1_1IAttitudeEstimator_1a56527cc0430675ab932469b6f5a2cb60" prot="public" virt="virtual"><scope>iDynTree::AttitudeQuaternionEKF</scope><name>~IAttitudeEstimator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

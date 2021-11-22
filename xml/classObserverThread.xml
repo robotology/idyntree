@@ -1,0 +1,786 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classObserverThread" kind="class" language="C++" prot="public">
+    <compoundname>ObserverThread</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">yarp::os::RateThread</basecompoundref>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classObserverThread_1a6f10ca48c6ed64b0a90266f594499ae5" prot="protected" static="no" mutable="no">
+        <type>yarp::dev::PolyDriver</type>
+        <definition>yarp::dev::PolyDriver ObserverThread::m_wholeBodyDevice</definition>
+        <argsstring></argsstring>
+        <name>m_wholeBodyDevice</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="40" column="27" bodyfile="ObserverThread.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1a37796c9a53d7e074b82c28eeb2b123d8" prot="protected" static="no" mutable="no">
+        <type>yarp::dev::IEncoders *</type>
+        <definition>yarp::dev::IEncoders* ObserverThread::m_iencs</definition>
+        <argsstring></argsstring>
+        <name>m_iencs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="41" column="27" bodyfile="ObserverThread.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1a0dcbe6aadd23df400646c3208ab23f59" prot="protected" static="no" mutable="no">
+        <type>yarp::dev::IPositionDirect *</type>
+        <definition>yarp::dev::IPositionDirect* ObserverThread::m_iposdir</definition>
+        <argsstring></argsstring>
+        <name>m_iposdir</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="42" column="33" bodyfile="ObserverThread.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1a48897dbaf2920981a18ef820a7e872fa" prot="protected" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1KinDynComputations" kindref="compound">iDynTree::KinDynComputations</ref></type>
+        <definition>iDynTree::KinDynComputations ObserverThread::m_kinDyn</definition>
+        <argsstring></argsstring>
+        <name>m_kinDyn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="43" column="34" bodyfile="ObserverThread.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1a5888e7988c70d628e81d2e6c0d9b9dd6" prot="protected" static="no" mutable="no">
+        <type>yarp::sig::Vector</type>
+        <definition>yarp::sig::Vector ObserverThread::m_measuredEncodersInDeg</definition>
+        <argsstring></argsstring>
+        <name>m_measuredEncodersInDeg</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="44" column="23" bodyfile="ObserverThread.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1a966e77e2664f119bec8a6ef2a919776e" prot="protected" static="no" mutable="no">
+        <type>yarp::sig::Vector</type>
+        <definition>yarp::sig::Vector ObserverThread::m_desiredJointPositionsInDeg</definition>
+        <argsstring></argsstring>
+        <name>m_desiredJointPositionsInDeg</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="45" column="23" bodyfile="ObserverThread.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1ad21fd7b440a5b204f27043e289deed17" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string ObserverThread::m_primarySole</definition>
+        <argsstring></argsstring>
+        <name>m_primarySole</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="46" column="17" bodyfile="ObserverThread.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1a88c3faee0b53fac318290f6f946b29e2" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string ObserverThread::m_secondarySole</definition>
+        <argsstring></argsstring>
+        <name>m_secondarySole</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="47" column="17" bodyfile="ObserverThread.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1a7d4052ebfddacd54febe108089ce4516" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ObserverThread::m_skip_pressure</definition>
+        <argsstring></argsstring>
+        <name>m_skip_pressure</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="50" column="10" bodyfile="ObserverThread.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1a07aea9176976803654b4c5e941d64233" prot="protected" static="no" mutable="no">
+        <type>yarp::dev::PolyDriver</type>
+        <definition>yarp::dev::PolyDriver ObserverThread::m_primarySolePressure</definition>
+        <argsstring></argsstring>
+        <name>m_primarySolePressure</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="51" column="27" bodyfile="ObserverThread.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1a2f542c2e0a42c96499f4d12584167e3e" prot="protected" static="no" mutable="no">
+        <type>yarp::dev::IAnalogSensor *</type>
+        <definition>yarp::dev::IAnalogSensor* ObserverThread::m_primaryPressureAnalog</definition>
+        <argsstring></argsstring>
+        <name>m_primaryPressureAnalog</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="52" column="30" bodyfile="ObserverThread.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1aac012eddef57f3ac1966ba3e512330fc" prot="protected" static="no" mutable="no">
+        <type>yarp::dev::PolyDriver</type>
+        <definition>yarp::dev::PolyDriver ObserverThread::m_secondarySolePressure</definition>
+        <argsstring></argsstring>
+        <name>m_secondarySolePressure</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="53" column="27" bodyfile="ObserverThread.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1ad5ec9caf95779dfea80bd61f3a6b7d88" prot="protected" static="no" mutable="no">
+        <type>yarp::dev::IAnalogSensor *</type>
+        <definition>yarp::dev::IAnalogSensor* ObserverThread::m_secondaryPressureAnalog</definition>
+        <argsstring></argsstring>
+        <name>m_secondaryPressureAnalog</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="54" column="30" bodyfile="ObserverThread.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1adda2e83993ee4e514b94691ae1b1760c" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &gt;</type>
+        <definition>std::vector&lt;iDynTree::Position&gt; ObserverThread::m_primaryPressurePadsInPrimarySole</definition>
+        <argsstring></argsstring>
+        <name>m_primaryPressurePadsInPrimarySole</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="55" column="17" bodyfile="ObserverThread.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1a8cec0fad6edf6eff0188ec5154128828" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &gt;</type>
+        <definition>std::vector&lt;iDynTree::Position&gt; ObserverThread::m_secondaryPressurePadsInSecondarySole</definition>
+        <argsstring></argsstring>
+        <name>m_secondaryPressurePadsInSecondarySole</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="56" column="17" bodyfile="ObserverThread.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1a8673f1be590828e17445cbf0f5a60d90" prot="protected" static="no" mutable="no">
+        <type>yarp::sig::Vector</type>
+        <definition>yarp::sig::Vector ObserverThread::m_measuredPressurePrimarySoleInN</definition>
+        <argsstring></argsstring>
+        <name>m_measuredPressurePrimarySoleInN</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="57" column="23" bodyfile="ObserverThread.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1a8dc0178135f0ec75f815369080a8ec9c" prot="protected" static="no" mutable="no">
+        <type>yarp::sig::Vector</type>
+        <definition>yarp::sig::Vector ObserverThread::m_measuredPressureSecondarySoleInN</definition>
+        <argsstring></argsstring>
+        <name>m_measuredPressureSecondarySoleInN</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="58" column="23" bodyfile="ObserverThread.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1aa5b4b9eb50a4fdda3033a94f01990e0d" prot="protected" static="no" mutable="no">
+        <type>yarp::os::BufferedPort&lt; yarp::os::Bottle &gt;</type>
+        <definition>yarp::os::BufferedPort&lt;yarp::os::Bottle&gt; ObserverThread::skin_port</definition>
+        <argsstring></argsstring>
+        <name>skin_port</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="60" column="28" bodyfile="ObserverThread.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1a46a314cd849f89fb117f83a758bfcb93" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ObserverThread::m_skip_gravity</definition>
+        <argsstring></argsstring>
+        <name>m_skip_gravity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="63" column="10" bodyfile="ObserverThread.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1a97a0818e58b397dfa655e9aa631df3c2" prot="protected" static="no" mutable="no">
+        <type>yarp::os::BufferedPort&lt; yarp::sig::Vector &gt;</type>
+        <definition>yarp::os::BufferedPort&lt;yarp::sig::Vector&gt; ObserverThread::m_imuPort</definition>
+        <argsstring></argsstring>
+        <name>m_imuPort</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="64" column="28" bodyfile="ObserverThread.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1ac0fe988dc3141d755b57487783f3cee7" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string ObserverThread::m_imuFrameName</definition>
+        <argsstring></argsstring>
+        <name>m_imuFrameName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="65" column="17" bodyfile="ObserverThread.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1a7a29852f9751e835ddaf95aa03da28b2" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string ObserverThread::m_remoteImuPortName</definition>
+        <argsstring></argsstring>
+        <name>m_remoteImuPortName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="66" column="17" bodyfile="ObserverThread.h" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1a2de83149cbc1832192c4a6fd08a9740b" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string ObserverThread::m_localImuPortName</definition>
+        <argsstring></argsstring>
+        <name>m_localImuPortName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="67" column="17" bodyfile="ObserverThread.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1ade05d344d701c7b28697c032351ff436" prot="protected" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Direction" kindref="compound">iDynTree::Direction</ref></type>
+        <definition>iDynTree::Direction ObserverThread::m_gravityDirection</definition>
+        <argsstring></argsstring>
+        <name>m_gravityDirection</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="68" column="25" bodyfile="ObserverThread.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1ab610f644550c9f5425f16068c1238f63" prot="protected" static="no" mutable="no">
+        <type>iCub::ctrl::FirstOrderLowPassFilter *</type>
+        <definition>iCub::ctrl::FirstOrderLowPassFilter* ObserverThread::filtIMUGravity</definition>
+        <argsstring></argsstring>
+        <name>filtIMUGravity</name>
+        <briefdescription>
+<para>filter the gravity vector received from the IMU </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="69" column="41" bodyfile="ObserverThread.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1ae400d5897ef57a1fcfef697734ba6d6d" prot="protected" static="no" mutable="no">
+        <type>int</type>
+        <definition>int ObserverThread::sensorsNum</definition>
+        <argsstring></argsstring>
+        <name>sensorsNum</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="71" column="9" bodyfile="ObserverThread.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1a8bd71401b55f5bb59fb69b4074a02cd0" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool ObserverThread::mbSimpleDraw</definition>
+        <argsstring></argsstring>
+        <name>mbSimpleDraw</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="72" column="10" bodyfile="ObserverThread.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1aa16cec1b8756757754ed21111ed8da51" prot="protected" static="no" mutable="no">
+        <type>std::mutex</type>
+        <definition>std::mutex ObserverThread::m_mutex</definition>
+        <argsstring></argsstring>
+        <name>m_mutex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="75" column="16" bodyfile="ObserverThread.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1a8fdd3ba613503208cf3bec980ff9d684" prot="protected" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
+        <definition>iDynTree::Position ObserverThread::m_comInPrimarySole</definition>
+        <argsstring></argsstring>
+        <name>m_comInPrimarySole</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="76" column="24" bodyfile="ObserverThread.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1abfbcf155cd7206e36b0412759792bde4" prot="protected" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
+        <definition>iDynTree::Position ObserverThread::m_desiredComInPrimarySole</definition>
+        <argsstring></argsstring>
+        <name>m_desiredComInPrimarySole</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="77" column="24" bodyfile="ObserverThread.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1aacf04a043772353cd3f5acdeb94361b0" prot="protected" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
+        <definition>iDynTree::Position ObserverThread::m_primaryCopInPrimarySole</definition>
+        <argsstring></argsstring>
+        <name>m_primaryCopInPrimarySole</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="79" column="24" bodyfile="ObserverThread.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1a4d05f76dd84e0ce493ed1c4f3e1de99b" prot="protected" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
+        <definition>iDynTree::Position ObserverThread::m_secondaryCopInPrimarySole</definition>
+        <argsstring></argsstring>
+        <name>m_secondaryCopInPrimarySole</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="80" column="24" bodyfile="ObserverThread.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1a4ee7098657bb6a3ce13f7b2473561669" prot="protected" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
+        <definition>iDynTree::Position ObserverThread::m_totalCopInPrimarySole</definition>
+        <argsstring></argsstring>
+        <name>m_totalCopInPrimarySole</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="81" column="24" bodyfile="ObserverThread.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classObserverThread_1a06b785d2c1f7a4b6f6a0e5d73751c62e" prot="protected" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
+        <definition>iDynTree::Transform ObserverThread::m_primarySole_X_secondarySole</definition>
+        <argsstring></argsstring>
+        <name>m_primarySole_X_secondarySole</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="83" column="25" bodyfile="ObserverThread.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classObserverThread_1adc4b4528d70acef32adb7c20cafeb1e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ObserverThread::ObserverThread</definition>
+        <argsstring>(yarp::os::ResourceFinder &amp;config, int period)</argsstring>
+        <name>ObserverThread</name>
+        <param>
+          <type>yarp::os::ResourceFinder &amp;</type>
+          <declname>config</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>period</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="88" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classObserverThread_1a8bfc521c5977bfd16be73d6bfeb9661a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool ObserverThread::init</definition>
+        <argsstring>(yarp::os::ResourceFinder &amp;config)</argsstring>
+        <name>init</name>
+        <param>
+          <type>yarp::os::ResourceFinder &amp;</type>
+          <declname>config</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="89" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classObserverThread_1a990dc3bd0d51e3819ada28606b588a0c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ObserverThread::~ObserverThread</definition>
+        <argsstring>()</argsstring>
+        <name>~ObserverThread</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="90" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classObserverThread_1a852c6d18eba266ac34131c0b899dd051" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool ObserverThread::threadInit</definition>
+        <argsstring>()</argsstring>
+        <name>threadInit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="92" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classObserverThread_1aa6cde18114c5f23b1f6b115568b94813" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void ObserverThread::threadRelease</definition>
+        <argsstring>()</argsstring>
+        <name>threadRelease</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="93" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classObserverThread_1a5ffb8e9608983c9e7f3b7dce5f7c9182" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void ObserverThread::run</definition>
+        <argsstring>()</argsstring>
+        <name>run</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="94" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classObserverThread_1a630067097a000468ccf53d1ba3394a25" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ObserverThread::draw</definition>
+        <argsstring>(QPainter *qpainter, int widthInPixels, int heightInPixels)</argsstring>
+        <name>draw</name>
+        <param>
+          <type>QPainter *</type>
+          <declname>qpainter</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>widthInPixels</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>heightInPixels</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="96" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classObserverThread_1a32cca2e87ea272bf819444e2aed74f0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ObserverThread::drawPolygon</definition>
+        <argsstring>(QPainter *qpainter, iDynTree::Polygon &amp;polygon)</argsstring>
+        <name>drawPolygon</name>
+        <param>
+          <type>QPainter *</type>
+          <declname>qpainter</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Polygon" kindref="compound">iDynTree::Polygon</ref> &amp;</type>
+          <declname>polygon</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ObserverThread.h" line="97" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>ObserverThread</label>
+        <link refid="classObserverThread"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>yarp::os::RateThread</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="7">
+        <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+      </node>
+      <node id="9">
+        <label>T</label>
+      </node>
+      <node id="13">
+        <label>iDynTree::Rotation</label>
+        <link refid="classiDynTree_1_1Rotation"/>
+        <childnode refid="14" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>iDynTree::PositionRaw</label>
+        <link refid="classiDynTree_1_1PositionRaw"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>iDynTree::Direction</label>
+        <link refid="classiDynTree_1_1Direction"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>std::vector&lt; T &gt;</label>
+        <childnode refid="9" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>ObserverThread</label>
+        <link refid="classObserverThread"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_primaryPressurePadsInPrimarySole</edgelabel>
+          <edgelabel>m_secondaryPressurePadsInSecondarySole</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>m_kinDyn</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>m_mutex</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>m_primarySole_X_secondarySole</edgelabel>
+        </childnode>
+        <childnode refid="17" relation="usage">
+          <edgelabel>m_imuFrameName</edgelabel>
+          <edgelabel>m_localImuPortName</edgelabel>
+          <edgelabel>m_primarySole</edgelabel>
+          <edgelabel>m_remoteImuPortName</edgelabel>
+          <edgelabel>m_secondarySole</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_comInPrimarySole</edgelabel>
+          <edgelabel>m_desiredComInPrimarySole</edgelabel>
+          <edgelabel>m_primaryCopInPrimarySole</edgelabel>
+          <edgelabel>m_secondaryCopInPrimarySole</edgelabel>
+          <edgelabel>m_totalCopInPrimarySole</edgelabel>
+        </childnode>
+        <childnode refid="19" relation="usage">
+          <edgelabel>m_gravityDirection</edgelabel>
+        </childnode>
+      </node>
+      <node id="18">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="15">
+        <label>Matrix3x3</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+        <childnode refid="16" relation="template-instance">
+          <edgelabel>&lt; 3, 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="14">
+        <label>iDynTree::RotationRaw</label>
+        <link refid="classiDynTree_1_1RotationRaw"/>
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>iDynTree::Position</label>
+        <link refid="classiDynTree_1_1Position"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>iDynTree::MatrixFixSize&lt; nRows, nCols &gt;</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+      </node>
+      <node id="11">
+        <label>std::mutex</label>
+      </node>
+      <node id="10">
+        <label>iDynTree::KinDynComputations</label>
+        <link refid="classiDynTree_1_1KinDynComputations"/>
+      </node>
+      <node id="3">
+        <label>std::vector&lt; iDynTree::Position &gt;</label>
+        <childnode refid="4" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="template-instance">
+          <edgelabel>&lt; iDynTree::Position &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>yarp::os::RateThread</label>
+      </node>
+      <node id="6">
+        <label>Vector3</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+        <childnode refid="7" relation="template-instance">
+          <edgelabel>&lt; 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="12">
+        <label>iDynTree::Transform</label>
+        <link refid="classiDynTree_1_1Transform"/>
+        <childnode refid="13" relation="usage">
+          <edgelabel>rot</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>pos</edgelabel>
+        </childnode>
+      </node>
+      <node id="17">
+        <label>std::string</label>
+        <childnode refid="18" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="ObserverThread.h" line="36" column="1" bodyfile="ObserverThread.h" bodystart="37" bodyend="98"/>
+    <listofallmembers>
+      <member refid="classObserverThread_1a630067097a000468ccf53d1ba3394a25" prot="public" virt="non-virtual"><scope>ObserverThread</scope><name>draw</name></member>
+      <member refid="classObserverThread_1a32cca2e87ea272bf819444e2aed74f0b" prot="public" virt="non-virtual"><scope>ObserverThread</scope><name>drawPolygon</name></member>
+      <member refid="classObserverThread_1ab610f644550c9f5425f16068c1238f63" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>filtIMUGravity</name></member>
+      <member refid="classObserverThread_1a8bfc521c5977bfd16be73d6bfeb9661a" prot="public" virt="non-virtual"><scope>ObserverThread</scope><name>init</name></member>
+      <member refid="classObserverThread_1a8fdd3ba613503208cf3bec980ff9d684" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_comInPrimarySole</name></member>
+      <member refid="classObserverThread_1abfbcf155cd7206e36b0412759792bde4" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_desiredComInPrimarySole</name></member>
+      <member refid="classObserverThread_1a966e77e2664f119bec8a6ef2a919776e" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_desiredJointPositionsInDeg</name></member>
+      <member refid="classObserverThread_1ade05d344d701c7b28697c032351ff436" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_gravityDirection</name></member>
+      <member refid="classObserverThread_1a37796c9a53d7e074b82c28eeb2b123d8" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_iencs</name></member>
+      <member refid="classObserverThread_1ac0fe988dc3141d755b57487783f3cee7" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_imuFrameName</name></member>
+      <member refid="classObserverThread_1a97a0818e58b397dfa655e9aa631df3c2" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_imuPort</name></member>
+      <member refid="classObserverThread_1a0dcbe6aadd23df400646c3208ab23f59" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_iposdir</name></member>
+      <member refid="classObserverThread_1a48897dbaf2920981a18ef820a7e872fa" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_kinDyn</name></member>
+      <member refid="classObserverThread_1a2de83149cbc1832192c4a6fd08a9740b" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_localImuPortName</name></member>
+      <member refid="classObserverThread_1a5888e7988c70d628e81d2e6c0d9b9dd6" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_measuredEncodersInDeg</name></member>
+      <member refid="classObserverThread_1a8673f1be590828e17445cbf0f5a60d90" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_measuredPressurePrimarySoleInN</name></member>
+      <member refid="classObserverThread_1a8dc0178135f0ec75f815369080a8ec9c" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_measuredPressureSecondarySoleInN</name></member>
+      <member refid="classObserverThread_1aa16cec1b8756757754ed21111ed8da51" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_mutex</name></member>
+      <member refid="classObserverThread_1aacf04a043772353cd3f5acdeb94361b0" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_primaryCopInPrimarySole</name></member>
+      <member refid="classObserverThread_1a2f542c2e0a42c96499f4d12584167e3e" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_primaryPressureAnalog</name></member>
+      <member refid="classObserverThread_1adda2e83993ee4e514b94691ae1b1760c" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_primaryPressurePadsInPrimarySole</name></member>
+      <member refid="classObserverThread_1ad21fd7b440a5b204f27043e289deed17" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_primarySole</name></member>
+      <member refid="classObserverThread_1a06b785d2c1f7a4b6f6a0e5d73751c62e" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_primarySole_X_secondarySole</name></member>
+      <member refid="classObserverThread_1a07aea9176976803654b4c5e941d64233" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_primarySolePressure</name></member>
+      <member refid="classObserverThread_1a7a29852f9751e835ddaf95aa03da28b2" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_remoteImuPortName</name></member>
+      <member refid="classObserverThread_1a4d05f76dd84e0ce493ed1c4f3e1de99b" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_secondaryCopInPrimarySole</name></member>
+      <member refid="classObserverThread_1ad5ec9caf95779dfea80bd61f3a6b7d88" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_secondaryPressureAnalog</name></member>
+      <member refid="classObserverThread_1a8cec0fad6edf6eff0188ec5154128828" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_secondaryPressurePadsInSecondarySole</name></member>
+      <member refid="classObserverThread_1a88c3faee0b53fac318290f6f946b29e2" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_secondarySole</name></member>
+      <member refid="classObserverThread_1aac012eddef57f3ac1966ba3e512330fc" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_secondarySolePressure</name></member>
+      <member refid="classObserverThread_1a46a314cd849f89fb117f83a758bfcb93" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_skip_gravity</name></member>
+      <member refid="classObserverThread_1a7d4052ebfddacd54febe108089ce4516" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_skip_pressure</name></member>
+      <member refid="classObserverThread_1a4ee7098657bb6a3ce13f7b2473561669" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_totalCopInPrimarySole</name></member>
+      <member refid="classObserverThread_1a6f10ca48c6ed64b0a90266f594499ae5" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>m_wholeBodyDevice</name></member>
+      <member refid="classObserverThread_1a8bd71401b55f5bb59fb69b4074a02cd0" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>mbSimpleDraw</name></member>
+      <member refid="classObserverThread_1adc4b4528d70acef32adb7c20cafeb1e2" prot="public" virt="non-virtual"><scope>ObserverThread</scope><name>ObserverThread</name></member>
+      <member refid="classObserverThread_1a5ffb8e9608983c9e7f3b7dce5f7c9182" prot="public" virt="virtual"><scope>ObserverThread</scope><name>run</name></member>
+      <member refid="classObserverThread_1ae400d5897ef57a1fcfef697734ba6d6d" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>sensorsNum</name></member>
+      <member refid="classObserverThread_1aa5b4b9eb50a4fdda3033a94f01990e0d" prot="protected" virt="non-virtual"><scope>ObserverThread</scope><name>skin_port</name></member>
+      <member refid="classObserverThread_1a852c6d18eba266ac34131c0b899dd051" prot="public" virt="virtual"><scope>ObserverThread</scope><name>threadInit</name></member>
+      <member refid="classObserverThread_1aa6cde18114c5f23b1f6b115568b94813" prot="public" virt="virtual"><scope>ObserverThread</scope><name>threadRelease</name></member>
+      <member refid="classObserverThread_1a990dc3bd0d51e3819ada28606b588a0c" prot="public" virt="non-virtual"><scope>ObserverThread</scope><name>~ObserverThread</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

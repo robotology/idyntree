@@ -1,0 +1,473 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1ArticulatedBodyInertia" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::ArticulatedBodyInertia</compoundname>
+    <includes local="no">iDynTree/Core/ArticulatedBodyInertia.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1ArticulatedBodyInertia_1ab15db83d0969682d2f27378827c9d035" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix3x3</ref></type>
+        <definition>Matrix3x3 iDynTree::ArticulatedBodyInertia::linearLinear</definition>
+        <argsstring></argsstring>
+        <name>linearLinear</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="52" column="19" bodyfile="iDynTree/Core/ArticulatedBodyInertia.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1ArticulatedBodyInertia_1acf8196b7c2834672ae5686fb6dee5e7d" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix3x3</ref></type>
+        <definition>Matrix3x3 iDynTree::ArticulatedBodyInertia::linearAngular</definition>
+        <argsstring></argsstring>
+        <name>linearAngular</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="53" column="19" bodyfile="iDynTree/Core/ArticulatedBodyInertia.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1ArticulatedBodyInertia_1a978c8f0cf239e16347abc7449446096e" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix3x3</ref></type>
+        <definition>Matrix3x3 iDynTree::ArticulatedBodyInertia::angularAngular</definition>
+        <argsstring></argsstring>
+        <name>angularAngular</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="54" column="19" bodyfile="iDynTree/Core/ArticulatedBodyInertia.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1ArticulatedBodyInertia_1a12f9a7346c21f9b7984debac097ca635" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ArticulatedBodyInertia::ArticulatedBodyInertia</definition>
+        <argsstring>()</argsstring>
+        <name>ArticulatedBodyInertia</name>
+        <briefdescription>
+<para>The data is not reset to zeo for perfomance reason. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Please initialize the data in the class before any use. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="61" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ArticulatedBodyInertia_1a8ab0ff3fa532512b2a0adf3de8c9b48e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ArticulatedBodyInertia::ArticulatedBodyInertia</definition>
+        <argsstring>(const double *in_data, const unsigned int in_rows, const unsigned int in_cols)</argsstring>
+        <name>ArticulatedBodyInertia</name>
+        <param>
+          <type>const double *</type>
+          <declname>in_data</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>in_rows</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>in_cols</declname>
+        </param>
+        <briefdescription>
+<para>Constructor from a buffer of 36 doubles, stored as a C-style array (i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>row major). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="68" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ArticulatedBodyInertia_1aac26350192a3c1904d96046d89310a3d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ArticulatedBodyInertia::ArticulatedBodyInertia</definition>
+        <argsstring>(const iDynTree::SpatialInertia &amp;rigidBodyInertia)</argsstring>
+        <name>ArticulatedBodyInertia</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">iDynTree::SpatialInertia</ref> &amp;</type>
+          <declname>rigidBodyInertia</declname>
+        </param>
+        <briefdescription>
+<para>Constructor from a Rigid Body Inertia. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="75" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ArticulatedBodyInertia_1a587c378f42665f7d2a873b54a39c90a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ArticulatedBodyInertia::ArticulatedBodyInertia</definition>
+        <argsstring>(const ArticulatedBodyInertia &amp;other)</argsstring>
+        <name>ArticulatedBodyInertia</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ArticulatedBodyInertia" kindref="compound">ArticulatedBodyInertia</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy constructor: create a <ref refid="classiDynTree_1_1ArticulatedBodyInertia" kindref="compound">ArticulatedBodyInertia</ref> from another <ref refid="classiDynTree_1_1ArticulatedBodyInertia" kindref="compound">ArticulatedBodyInertia</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="80" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ArticulatedBodyInertia_1afe0a6c6cae3c24963ea2c51029601046" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix3x3</ref> &amp;</type>
+        <definition>Matrix3x3&amp; iDynTree::ArticulatedBodyInertia::getLinearLinearSubmatrix</definition>
+        <argsstring>()</argsstring>
+        <name>getLinearLinearSubmatrix</name>
+        <briefdescription>
+<para>Low level data getters. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="85" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ArticulatedBodyInertia_1a7ea2b4db0b795d9a802637eac943547f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix3x3</ref> &amp;</type>
+        <definition>Matrix3x3&amp; iDynTree::ArticulatedBodyInertia::getLinearAngularSubmatrix</definition>
+        <argsstring>()</argsstring>
+        <name>getLinearAngularSubmatrix</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="86" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ArticulatedBodyInertia_1af93799b72cab460169ad6a7a15a5871b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix3x3</ref> &amp;</type>
+        <definition>Matrix3x3&amp; iDynTree::ArticulatedBodyInertia::getAngularAngularSubmatrix</definition>
+        <argsstring>()</argsstring>
+        <name>getAngularAngularSubmatrix</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="87" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ArticulatedBodyInertia_1a19b7bfe676b5fe9bb34cf70b15efc1f3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix3x3</ref> &amp;</type>
+        <definition>const Matrix3x3&amp; iDynTree::ArticulatedBodyInertia::getLinearLinearSubmatrix</definition>
+        <argsstring>() const</argsstring>
+        <name>getLinearLinearSubmatrix</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="88" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ArticulatedBodyInertia_1a40e313cc574fcca54aef116822cc6ce1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix3x3</ref> &amp;</type>
+        <definition>const Matrix3x3&amp; iDynTree::ArticulatedBodyInertia::getLinearAngularSubmatrix</definition>
+        <argsstring>() const</argsstring>
+        <name>getLinearAngularSubmatrix</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="89" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ArticulatedBodyInertia_1ad198af27aefa90826179381fb53f4cfc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix3x3</ref> &amp;</type>
+        <definition>const Matrix3x3&amp; iDynTree::ArticulatedBodyInertia::getAngularAngularSubmatrix</definition>
+        <argsstring>() const</argsstring>
+        <name>getAngularAngularSubmatrix</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="90" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ArticulatedBodyInertia_1a45f8719d91c14e05995194781264be13" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref></type>
+        <definition>SpatialAcc iDynTree::ArticulatedBodyInertia::applyInverse</definition>
+        <argsstring>(const Wrench &amp;wrench) const</argsstring>
+        <name>applyInverse</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> &amp;</type>
+          <declname>wrench</declname>
+        </param>
+        <briefdescription>
+<para>Return the inverse of this <ref refid="classiDynTree_1_1ArticulatedBodyInertia" kindref="compound">ArticulatedBodyInertia</ref> applied to the passed wrench. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="100" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ArticulatedBodyInertia_1a1f56026d13ebaa206b443ec6e9540dd1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x6</ref></type>
+        <definition>Matrix6x6 iDynTree::ArticulatedBodyInertia::asMatrix</definition>
+        <argsstring>() const</argsstring>
+        <name>asMatrix</name>
+        <briefdescription>
+<para>Get the <ref refid="classiDynTree_1_1ArticulatedBodyInertia" kindref="compound">ArticulatedBodyInertia</ref> as a 6x6 matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="105" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ArticulatedBodyInertia_1ad1cf87241021c1120cea85b91c1fea67" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x6</ref></type>
+        <definition>Matrix6x6 iDynTree::ArticulatedBodyInertia::getInverse</definition>
+        <argsstring>() const</argsstring>
+        <name>getInverse</name>
+        <briefdescription>
+<para>Get the inverse of the <ref refid="classiDynTree_1_1ArticulatedBodyInertia" kindref="compound">ArticulatedBodyInertia</ref> matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="110" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ArticulatedBodyInertia_1ae8aa194058326ff74c70833b8705edd6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1ArticulatedBodyInertia" kindref="compound">ArticulatedBodyInertia</ref></type>
+        <definition>ArticulatedBodyInertia iDynTree::ArticulatedBodyInertia::operator+</definition>
+        <argsstring>(const ArticulatedBodyInertia &amp;other) const</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ArticulatedBodyInertia" kindref="compound">ArticulatedBodyInertia</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="113" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ArticulatedBodyInertia_1ad64bd042c2320be4600c8871f92f0811" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1ArticulatedBodyInertia" kindref="compound">ArticulatedBodyInertia</ref></type>
+        <definition>ArticulatedBodyInertia iDynTree::ArticulatedBodyInertia::operator-</definition>
+        <argsstring>(const ArticulatedBodyInertia &amp;other) const</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ArticulatedBodyInertia" kindref="compound">ArticulatedBodyInertia</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="114" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ArticulatedBodyInertia_1adc53f56b814a8c24f1a00c06e80a5c9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1ArticulatedBodyInertia" kindref="compound">ArticulatedBodyInertia</ref> &amp;</type>
+        <definition>ArticulatedBodyInertia&amp; iDynTree::ArticulatedBodyInertia::operator+=</definition>
+        <argsstring>(const ArticulatedBodyInertia &amp;other)</argsstring>
+        <name>operator+=</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ArticulatedBodyInertia" kindref="compound">ArticulatedBodyInertia</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="115" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ArticulatedBodyInertia_1aa30a087d496d8e588f4453fdc34df7cf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref></type>
+        <definition>SpatialForceVector iDynTree::ArticulatedBodyInertia::operator*</definition>
+        <argsstring>(const SpatialMotionVector &amp;other) const</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="116" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ArticulatedBodyInertia_1a0a9260283b4c44503746022169e9cb45" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
+        <definition>Wrench iDynTree::ArticulatedBodyInertia::operator*</definition>
+        <argsstring>(const SpatialAcc &amp;other) const</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="117" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ArticulatedBodyInertia_1ac2c93bbab431993fa4a19be898246d22" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::ArticulatedBodyInertia::zero</definition>
+        <argsstring>()</argsstring>
+        <name>zero</name>
+        <briefdescription>
+<para>reset to zero (i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>the inertia of body with zero mass) the <ref refid="classiDynTree_1_1ArticulatedBodyInertia" kindref="compound">ArticulatedBodyInertia</ref> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="121" column="14"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classiDynTree_1_1ArticulatedBodyInertia_1a31cc989bb09d7349efdbd69bc7e4e464" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1ArticulatedBodyInertia" kindref="compound">ArticulatedBodyInertia</ref></type>
+        <definition>static ArticulatedBodyInertia iDynTree::ArticulatedBodyInertia::combine</definition>
+        <argsstring>(const ArticulatedBodyInertia &amp;op1, const ArticulatedBodyInertia &amp;op2)</argsstring>
+        <name>combine</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ArticulatedBodyInertia" kindref="compound">ArticulatedBodyInertia</ref> &amp;</type>
+          <declname>op1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ArticulatedBodyInertia" kindref="compound">ArticulatedBodyInertia</ref> &amp;</type>
+          <declname>op2</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="93" column="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ArticulatedBodyInertia_1a7fcc8a0d53704b77c9f82507fd8baaef" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1ArticulatedBodyInertia" kindref="compound">ArticulatedBodyInertia</ref></type>
+        <definition>static ArticulatedBodyInertia iDynTree::ArticulatedBodyInertia::ABADyadHelper</definition>
+        <argsstring>(const SpatialForceVector &amp;U, const double d)</argsstring>
+        <name>ABADyadHelper</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref> &amp;</type>
+          <declname>U</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>d</declname>
+        </param>
+        <briefdescription>
+<para>Build the ArticulatedInertia <formula id="96">$U d^{-1} U^\top$</formula> . </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Used in the articulated body algorithm . </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="129" column="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ArticulatedBodyInertia_1af3eb51987ad2cefeec31a466904b0e8a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1ArticulatedBodyInertia" kindref="compound">ArticulatedBodyInertia</ref></type>
+        <definition>static ArticulatedBodyInertia iDynTree::ArticulatedBodyInertia::ABADyadHelperLin</definition>
+        <argsstring>(const SpatialForceVector &amp;U, const double inv_d, const SpatialForceVector &amp;dU, const double d_inv_d)</argsstring>
+        <name>ABADyadHelperLin</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref> &amp;</type>
+          <declname>U</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>inv_d</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref> &amp;</type>
+          <declname>dU</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>d_inv_d</declname>
+        </param>
+        <briefdescription>
+<para>Build the ArticulatedInertia dU inv_d U^\top + U d_inv_d U^\top + U inv_d dU^\top Used in the linearization of the articulated body algorithm. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="135" column="39"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class representing an Articulated Body Inertia. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>For more information on Articulated Body Inertia, please check Featherstone 2008, Chapter 7 .</para>
+<para>Storage: The symmetric articulated body inertia is stored as 3 3x3 matrices :<itemizedlist>
+<listitem><para>the linearLinear is the top left submatrix</para>
+</listitem><listitem><para>the linearAngular is the top right submatrix</para>
+</listitem><listitem><para>the angularAngular is the bottom right submatrix</para>
+</listitem></itemizedlist>
+</para>
+<para>The bottom left submatrix can be obtained as the transpose of the linearAngular matrix.</para>
+<para><simplesect kind="warning"><para>This class is exposing for convenience the IMatrix interface. Notice that using this methods you can damage the underlyng articulated body inertia. In doubt, don&apos;t use them and rely on more high level functions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="iDynTree/Core/ArticulatedBodyInertia.h" line="49" column="5" bodyfile="iDynTree/Core/ArticulatedBodyInertia.h" bodystart="50" bodyend="138"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1a7fcc8a0d53704b77c9f82507fd8baaef" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>ABADyadHelper</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1af3eb51987ad2cefeec31a466904b0e8a" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>ABADyadHelperLin</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1a978c8f0cf239e16347abc7449446096e" prot="private" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>angularAngular</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1a45f8719d91c14e05995194781264be13" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>applyInverse</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1a12f9a7346c21f9b7984debac097ca635" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>ArticulatedBodyInertia</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1a8ab0ff3fa532512b2a0adf3de8c9b48e" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>ArticulatedBodyInertia</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1aac26350192a3c1904d96046d89310a3d" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>ArticulatedBodyInertia</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1a587c378f42665f7d2a873b54a39c90a7" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>ArticulatedBodyInertia</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1a1f56026d13ebaa206b443ec6e9540dd1" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>asMatrix</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1a31cc989bb09d7349efdbd69bc7e4e464" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>combine</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1af93799b72cab460169ad6a7a15a5871b" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>getAngularAngularSubmatrix</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1ad198af27aefa90826179381fb53f4cfc" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>getAngularAngularSubmatrix</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1ad1cf87241021c1120cea85b91c1fea67" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>getInverse</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1a7ea2b4db0b795d9a802637eac943547f" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>getLinearAngularSubmatrix</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1a40e313cc574fcca54aef116822cc6ce1" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>getLinearAngularSubmatrix</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1afe0a6c6cae3c24963ea2c51029601046" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>getLinearLinearSubmatrix</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1a19b7bfe676b5fe9bb34cf70b15efc1f3" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>getLinearLinearSubmatrix</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1acf8196b7c2834672ae5686fb6dee5e7d" prot="private" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>linearAngular</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1ab15db83d0969682d2f27378827c9d035" prot="private" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>linearLinear</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1aa30a087d496d8e588f4453fdc34df7cf" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>operator*</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1a0a9260283b4c44503746022169e9cb45" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>operator*</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1ae8aa194058326ff74c70833b8705edd6" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>operator+</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1adc53f56b814a8c24f1a00c06e80a5c9e" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>operator+=</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1ad64bd042c2320be4600c8871f92f0811" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>operator-</name></member>
+      <member refid="classiDynTree_1_1ArticulatedBodyInertia_1ac2c93bbab431993fa4a19be898246d22" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyInertia</scope><name>zero</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1SpanUtils_1_1has__data__method_3_01T_00_01void__t_3_01decltype_07std_1_1declvab6b1e478fbc78504ead5a4d656be7ada" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::SpanUtils::has_data_method&lt; T, void_t&lt; decltype(std::declval&lt; T &gt;().data())&gt; &gt;</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::true_type</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>std::true_type</label>
+      </node>
+      <node id="1">
+        <label>iDynTree::SpanUtils::has_data_method&lt; T, void_t&lt; decltype(std::declval&lt; T &gt;().data())&gt; &gt;</label>
+        <link refid="structiDynTree_1_1SpanUtils_1_1has__data__method_3_01T_00_01void__t_3_01decltype_07std_1_1declvab6b1e478fbc78504ead5a4d656be7ada"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>std::true_type</label>
+      </node>
+      <node id="1">
+        <label>iDynTree::SpanUtils::has_data_method&lt; T, void_t&lt; decltype(std::declval&lt; T &gt;().data())&gt; &gt;</label>
+        <link refid="structiDynTree_1_1SpanUtils_1_1has__data__method_3_01T_00_01void__t_3_01decltype_07std_1_1declvab6b1e478fbc78504ead5a4d656be7ada"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Core/Span.h" line="112" column="1" bodyfile="iDynTree/Core/Span.h" bodystart="113" bodyend="114"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

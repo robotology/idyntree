@@ -1,6 +1,0 @@
-<map id="iDynTree::optimization::WorhpInterface::WorhpInterfaceImplementation" name="iDynTree::optimization::WorhpInterface::WorhpInterfaceImplementation">
-<area shape="rect" id="node1" title=" " alt="" coords="176,212,412,268"/>
-<area shape="rect" id="node2" href="$classiDynTree_1_1MatrixDynSize.html" title="Class providing a simple form of matrix with dynamic size." alt="" coords="5,5,188,32"/>
-<area shape="rect" id="node3" href="$structWorhpVariables.html" title=" " alt="" coords="233,5,355,32"/>
-<area shape="rect" id="node4" href="$classiDynTree_1_1VectorDynSize.html" title="Class providing a simple form of vector with dynamic size." alt="" coords="379,5,561,32"/>
-</map>

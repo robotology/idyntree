@@ -1,0 +1,291 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="BerdyHelper_8h" kind="file" language="C++">
+    <compoundname>BerdyHelper.h</compoundname>
+    <includes refid="Direction_8h" local="no">iDynTree/Core/Direction.h</includes>
+    <includes refid="Position_8h" local="no">iDynTree/Core/Position.h</includes>
+    <includes refid="MatrixDynSize_8h" local="no">iDynTree/Core/MatrixDynSize.h</includes>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/Core/VectorDynSize.h</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
+    <includes refid="Utils_8h" local="no">iDynTree/Core/Utils.h</includes>
+    <includes refid="Triplets_8h" local="no">iDynTree/Core/Triplets.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
+    <includes refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includes>
+    <includes refid="Traversal_8h" local="no">iDynTree/Model/Traversal.h</includes>
+    <includes refid="FreeFloatingState_8h" local="no">iDynTree/Model/FreeFloatingState.h</includes>
+    <includes refid="Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includes>
+    <includes refid="LinkTraversalsCache_8h" local="no">iDynTree/Model/LinkTraversalsCache.h</includes>
+    <includes local="no">vector</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/Estimation/BerdyHelper.h</label>
+        <link refid="BerdyHelper_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structiDynTree_1_1BerdyOptions" prot="public">iDynTree::BerdyOptions</innerclass>
+    <innerclass refid="structiDynTree_1_1BerdySensor" prot="public">iDynTree::BerdySensor</innerclass>
+    <innerclass refid="structiDynTree_1_1BerdyDynamicVariable" prot="public">iDynTree::BerdyDynamicVariable</innerclass>
+    <innerclass refid="classiDynTree_1_1BerdyHelper" prot="public">iDynTree::BerdyHelper</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="group__iDynTreeExperimental_1ga62aff3167b9df327b4b1db6affadd21f" prot="public" static="no" strong="no">
+        <type></type>
+        <name>BerdyVariants</name>
+        <enumvalue id="group__iDynTreeExperimental_1gga62aff3167b9df327b4b1db6affadd21faf59c4a22cd72d6e001dbba40910e9c32" prot="public">
+          <name>ORIGINAL_BERDY_FIXED_BASE</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>Original version of Berdy, as described in: </para>
+          </briefdescription>
+          <detaileddescription>
+<para>Latella, C.; Kuppuswamy, N.; Romano, F.; Traversaro, S.; Nori, F. Whole-Body Human Inverse Dynamics with Distributed Micro-Accelerometers, Gyros and Force Sensing. Sensors 2016, 16, 727. <ulink url="http://www.mdpi.com/1424-8220/16/5/727">http://www.mdpi.com/1424-8220/16/5/727</ulink></para>
+<para>The original version of Berdy is assuming that the joint numbering is a regular ordering of links and joints. For this reason the serialization of link/joints quantities follows the one defined in the traversal.</para>
+<para>Furthremore, this version assumes that all joints have 1 Degree of freedom, so it does not work for models with fixed joints. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__iDynTreeExperimental_1gga62aff3167b9df327b4b1db6affadd21fa1ca580068ec7f491800abeadf68185e5" prot="public">
+          <name>BERDY_FLOATING_BASE</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+<para>Modified version of Berdy for accounting for free floating dynamics and removing the NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV from the dynamic variables. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Enumeration of the Berdy variants implemented in this class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="43" column="1" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="44" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="enum" id="group__iDynTreeExperimental_1ga83d8f828969dabc7dc82904d8de15312" prot="public" static="no" strong="no">
+        <type></type>
+        <name>BerdyDynamicVariablesTypes</name>
+        <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a48b4b26b9b1780cc55a5cbc89c6f0d15" prot="public">
+          <name>LINK_BODY_PROPER_ACCELERATION</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para><formula id="288">$ a_i $</formula> Note that is is the <bold>spatial</bold> proper acceleration expressed, i.e. the time derivative of the left-trivialized velocity minus the gravity expressed in body frame. <formula id="289">$ f^B_i $</formula> </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a4d8110167e729b4fd3a17147bcd1252e" prot="public">
+          <name>NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para><formula id="290">$ f_i $</formula> </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312adaecc7fb3d43b48487ae03dfec685fb8" prot="public">
+          <name>JOINT_WRENCH</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para><formula id="291">$ \tau_i $</formula> </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a80199996cf9e8b7d5171d762533f6c0c" prot="public">
+          <name>DOF_TORQUE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para><formula id="292">$ f^x_i $</formula> </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312aa13efb04f5c05ca865f2aee0fd03fe68" prot="public">
+          <name>NET_EXT_WRENCH</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para><formula id="293">$ \ddot{q}_i $</formula> </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a9a69ec4d25d83b00175dc3adb8edce00" prot="public">
+          <name>DOF_ACCELERATION</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>This is the classical proper acceleration, i.e. the time derivative of the mixed velocity of the body frame minus the gravity expressed in body frame. In Traversaro&apos;s PhD thesis this is called sensor proper acceleration. This is the necessary for avoiding dependencies on the linear velocity of the base in the floating variant of Berdy. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312ac2cfd7190c466bb19a532054700478dc" prot="public">
+          <name>LINK_BODY_PROPER_CLASSICAL_ACCELERATION</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Enumeration describing the dynamic variables types (link acceleration, net wrenches, joint wrenches, joint torques, joint acceleration) used in Berdy. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="75" column="1" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="76" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="enum" id="group__iDynTreeExperimental_1gab629c8d25391838124595ba8961654e4" prot="public" static="no" strong="no">
+        <type></type>
+        <name>BerdySensorTypes</name>
+        <enumvalue id="group__iDynTreeExperimental_1ggab629c8d25391838124595ba8961654e4aeb713f0bede28acb44bffd71c4c8b7c5" prot="public">
+          <name>SIX_AXIS_FORCE_TORQUE_SENSOR</name>
+          <initializer>= SIX_AXIS_FORCE_TORQUE</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__iDynTreeExperimental_1ggab629c8d25391838124595ba8961654e4a7735d104e1d0a81cd5cf6b4d4c6e280c" prot="public">
+          <name>ACCELEROMETER_SENSOR</name>
+          <initializer>= ACCELEROMETER</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__iDynTreeExperimental_1ggab629c8d25391838124595ba8961654e4a0057121dd88c26066f6ea316f78f7e97" prot="public">
+          <name>GYROSCOPE_SENSOR</name>
+          <initializer>= GYROSCOPE</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__iDynTreeExperimental_1ggab629c8d25391838124595ba8961654e4a959f2e93bc56ff32d8dc98a75bdaa0a8" prot="public">
+          <name>THREE_AXIS_ANGULAR_ACCELEROMETER_SENSOR</name>
+          <initializer>= THREE_AXIS_ANGULAR_ACCELEROMETER</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__iDynTreeExperimental_1ggab629c8d25391838124595ba8961654e4a5bcadad8e7702de8f0dbcdbd5108d893" prot="public">
+          <name>THREE_AXIS_FORCE_TORQUE_CONTACT_SENSOR</name>
+          <initializer>= THREE_AXIS_FORCE_TORQUE_CONTACT</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__iDynTreeExperimental_1ggab629c8d25391838124595ba8961654e4a3b05b1fa0daf40ead3bb45631fc1b425" prot="public">
+          <name>DOF_ACCELERATION_SENSOR</name>
+          <initializer>= 1000</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__iDynTreeExperimental_1ggab629c8d25391838124595ba8961654e4afe52ea6ba4b27e76e1fd986700941151" prot="public">
+          <name>DOF_TORQUE_SENSOR</name>
+          <initializer>= 1001</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__iDynTreeExperimental_1ggab629c8d25391838124595ba8961654e4aa295b9c16be05c81c215270381d2b648" prot="public">
+          <name>NET_EXT_WRENCH_SENSOR</name>
+          <initializer>= 1002</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group__iDynTreeExperimental_1ggab629c8d25391838124595ba8961654e4a207d61f7e8d81f6729f6dd080ba8a06c" prot="public">
+          <name>JOINT_WRENCH_SENSOR</name>
+          <initializer>= 1003</initializer>
+          <briefdescription>
+<para>Non-physical sensor that measures the wrench trasmitted by a joint. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Enumeration describing the possible sensor types implemented in Berdy. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Note that the concept of &quot;sensor&quot; in Berdy estimation is more general that just a physical sensor mounted on the robot: for example it can include the information that a link is fixed to the ground (i.e. its angular velocity, angular and linear acceleration are zero) even if this information is not coming from an actual physical sensors. For this reason we do not use directly the iDynTree::SensorTypes enum, even if we reserve the first 1000 elements o of this enum to be compatibile with the iDynTree::SensorTypes enum. Enum values duplicates between BerdySensorTypes and SensorTypes are append a _SENSOR suffix to avoid problems when wrapping such enum wit SWIG.</para>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="118" column="1" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="119" bodyend="132"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="BerdyHelper_8h_1a39f8730ab92b19678c82e418b8c0f2a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::isLinkBerdyDynamicVariable</definition>
+        <argsstring>(const BerdyDynamicVariablesTypes dynamicVariableType)</argsstring>
+        <name>isLinkBerdyDynamicVariable</name>
+        <param>
+          <type>const BerdyDynamicVariablesTypes</type>
+          <declname>dynamicVariableType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="134" column="6" declfile="iDynTree/Estimation/BerdyHelper.h" declline="134" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="BerdyHelper_8h_1a1d21c6d1ea587b6ed88d52bdf43fcf8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::isJointBerdyDynamicVariable</definition>
+        <argsstring>(const BerdyDynamicVariablesTypes dynamicVariableType)</argsstring>
+        <name>isJointBerdyDynamicVariable</name>
+        <param>
+          <type>const BerdyDynamicVariablesTypes</type>
+          <declname>dynamicVariableType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="135" column="6" declfile="iDynTree/Estimation/BerdyHelper.h" declline="135" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="BerdyHelper_8h_1a517a9e2101a59831cf912d8559b4900c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::isDOFBerdyDynamicVariable</definition>
+        <argsstring>(const BerdyDynamicVariablesTypes dynamicVariableType)</argsstring>
+        <name>isDOFBerdyDynamicVariable</name>
+        <param>
+          <type>const BerdyDynamicVariablesTypes</type>
+          <declname>dynamicVariableType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="136" column="6" declfile="iDynTree/Estimation/BerdyHelper.h" declline="136" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Estimation/BerdyHelper.h"/>
+  </compounddef>
+</doxygen>

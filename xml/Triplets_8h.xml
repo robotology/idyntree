@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="Triplets_8h" kind="file" language="C++">
+    <compoundname>Triplets.h</compoundname>
+    <includes refid="MatrixFixSize_8h" local="no">iDynTree/Core/MatrixFixSize.h</includes>
+    <includes refid="Utils_8h" local="no">iDynTree/Core/Utils.h</includes>
+    <includes local="no">iterator</includes>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
+    <includedby refid="SparseMatrix_8h" local="no">iDynTree/Core/SparseMatrix.h</includedby>
+    <includedby refid="BerdyHelper_8h" local="no">iDynTree/Estimation/BerdyHelper.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>iterator</label>
+      </node>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/Core/Triplets.h</label>
+        <link refid="Triplets_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1Triplet" prot="public">iDynTree::Triplet</innerclass>
+    <innerclass refid="classiDynTree_1_1Triplets" prot="public">iDynTree::Triplets</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/Triplets.h"/>
+  </compounddef>
+</doxygen>

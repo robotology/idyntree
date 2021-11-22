@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="FixedStepIntegrator_8h" kind="file" language="C++">
+    <compoundname>FixedStepIntegrator.h</compoundname>
+    <includes refid="Integrator_8h" local="no">iDynTree/Integrator.h</includes>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/Core/VectorDynSize.h</includes>
+    <includedby refid="ForwardEuler_8h" local="no">iDynTree/Integrators/ForwardEuler.h</includedby>
+    <includedby refid="ImplicitTrapezoidal_8h" local="no">iDynTree/Integrators/ImplicitTrapezoidal.h</includedby>
+    <includedby refid="RK4_8h" local="no">iDynTree/Integrators/RK4.h</includedby>
+    <innerclass refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator" prot="public">iDynTree::optimalcontrol::integrators::FixedStepIntegrator</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <innernamespace refid="namespaceiDynTree_1_1optimalcontrol">iDynTree::optimalcontrol</innernamespace>
+    <innernamespace refid="namespaceiDynTree_1_1optimalcontrol_1_1integrators">iDynTree::optimalcontrol::integrators</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Integrators/FixedStepIntegrator.h"/>
+  </compounddef>
+</doxygen>

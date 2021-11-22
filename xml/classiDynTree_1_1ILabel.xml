@@ -1,0 +1,291 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1ILabel" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::ILabel</compoundname>
+    <includes local="no">iDynTree/Visualizer.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1ILabel_1ae101b155ad0897d7abe8adb9fbf72635" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type></type>
+        <definition>virtual iDynTree::ILabel::~ILabel</definition>
+        <argsstring>()=0</argsstring>
+        <name>~ILabel</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="396" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILabel_1a8fec283c953600d28e42a2e3dce868bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::ILabel::setText</definition>
+        <argsstring>(const std::string &amp;text)=0</argsstring>
+        <name>setText</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>text</declname>
+        </param>
+        <briefdescription>
+<para>Set the text of the label. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>text</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The text to be displayed </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="402" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILabel_1a79fd31bc219ebc9da62f4b0e6c10d22d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::string</type>
+        <definition>virtual std::string iDynTree::ILabel::getText</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getText</name>
+        <briefdescription>
+<para>Get the label text. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The text shown in the label. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="408" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILabel_1adec19c38ec2d2928d364472e79425fc0" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::ILabel::setSize</definition>
+        <argsstring>(float height)=0</argsstring>
+        <name>setSize</name>
+        <param>
+          <type>float</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+<para>Set the height of the label. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The width is computed automatically <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>height</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The height to be set </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="414" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILabel_1ae74522507fc6c41fe0bdb711e27cd50f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::ILabel::setSize</definition>
+        <argsstring>(float width, float height)=0</argsstring>
+        <name>setSize</name>
+        <param>
+          <type>float</type>
+          <declname>width</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>height</declname>
+        </param>
+        <briefdescription>
+<para>Set the width and the height of the label. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>width</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The width of the label </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>height</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The height of the label </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="421" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILabel_1ac2d306e9e8ad43a7b4a92dd2597096a8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>float</type>
+        <definition>virtual float iDynTree::ILabel::width</definition>
+        <argsstring>() const =0</argsstring>
+        <name>width</name>
+        <briefdescription>
+<para>Get the width of the label. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The width of the label </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="427" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILabel_1afca95de234c8969b06bfcf8716d5ad45" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>float</type>
+        <definition>virtual float iDynTree::ILabel::height</definition>
+        <argsstring>() const =0</argsstring>
+        <name>height</name>
+        <briefdescription>
+<para>Get the height of the label. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The height of the label </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="433" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILabel_1ade488f13de9f0a40e57f41013f64b49d" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::ILabel::setPosition</definition>
+        <argsstring>(const iDynTree::Position &amp;position)=0</argsstring>
+        <name>setPosition</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &amp;</type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>Set the position of the label. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The position of the label </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="439" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILabel_1ad3804fcc2ffb12a66f02195669a7866d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
+        <definition>virtual iDynTree::Position iDynTree::ILabel::getPosition</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getPosition</name>
+        <briefdescription>
+<para>Get the position of the label. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The position of the label </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="445" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILabel_1ac646f2f233f660edd756043556b08a2a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::ILabel::setColor</definition>
+        <argsstring>(const iDynTree::ColorViz &amp;color)=0</argsstring>
+        <name>setColor</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ColorViz" kindref="compound">iDynTree::ColorViz</ref> &amp;</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+<para>Set the color of the label. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>color</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The color of the label </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="451" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILabel_1a5654d4ad910783d83ad435f920ad3b4c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::ILabel::setVisible</definition>
+        <argsstring>(bool visible=true)=0</argsstring>
+        <name>setVisible</name>
+        <param>
+          <type>bool</type>
+          <declname>visible</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Set the visibility of the label. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>visible</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The visibility of the label </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="457" column="18"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The interface to add a label in the visualizer. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Visualizer.h" line="389" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="390" bodyend="458"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1ILabel_1ad3804fcc2ffb12a66f02195669a7866d" prot="public" virt="pure-virtual"><scope>iDynTree::ILabel</scope><name>getPosition</name></member>
+      <member refid="classiDynTree_1_1ILabel_1a79fd31bc219ebc9da62f4b0e6c10d22d" prot="public" virt="pure-virtual"><scope>iDynTree::ILabel</scope><name>getText</name></member>
+      <member refid="classiDynTree_1_1ILabel_1afca95de234c8969b06bfcf8716d5ad45" prot="public" virt="pure-virtual"><scope>iDynTree::ILabel</scope><name>height</name></member>
+      <member refid="classiDynTree_1_1ILabel_1ac646f2f233f660edd756043556b08a2a" prot="public" virt="pure-virtual"><scope>iDynTree::ILabel</scope><name>setColor</name></member>
+      <member refid="classiDynTree_1_1ILabel_1ade488f13de9f0a40e57f41013f64b49d" prot="public" virt="pure-virtual"><scope>iDynTree::ILabel</scope><name>setPosition</name></member>
+      <member refid="classiDynTree_1_1ILabel_1adec19c38ec2d2928d364472e79425fc0" prot="public" virt="pure-virtual"><scope>iDynTree::ILabel</scope><name>setSize</name></member>
+      <member refid="classiDynTree_1_1ILabel_1ae74522507fc6c41fe0bdb711e27cd50f" prot="public" virt="pure-virtual"><scope>iDynTree::ILabel</scope><name>setSize</name></member>
+      <member refid="classiDynTree_1_1ILabel_1a8fec283c953600d28e42a2e3dce868bc" prot="public" virt="pure-virtual"><scope>iDynTree::ILabel</scope><name>setText</name></member>
+      <member refid="classiDynTree_1_1ILabel_1a5654d4ad910783d83ad435f920ad3b4c" prot="public" virt="pure-virtual"><scope>iDynTree::ILabel</scope><name>setVisible</name></member>
+      <member refid="classiDynTree_1_1ILabel_1ac2d306e9e8ad43a7b4a92dd2597096a8" prot="public" virt="pure-virtual"><scope>iDynTree::ILabel</scope><name>width</name></member>
+      <member refid="classiDynTree_1_1ILabel_1ae101b155ad0897d7abe8adb9fbf72635" prot="public" virt="pure-virtual"><scope>iDynTree::ILabel</scope><name>~ILabel</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

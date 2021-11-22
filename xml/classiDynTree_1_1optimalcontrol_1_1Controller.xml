@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimalcontrol_1_1Controller" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::optimalcontrol::Controller</compoundname>
+    <includes local="no">iDynTree/Controller.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1Controller_1aae4800b98f700d11535586164a466462" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t iDynTree::optimalcontrol::Controller::m_controllerSize</definition>
+        <argsstring></argsstring>
+        <name>m_controllerSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Controller.h" line="37" column="20" bodyfile="iDynTree/Controller.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Controller_1a5c6cef39543689d9432148446c299487" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::Controller::Controller</definition>
+        <argsstring>(size_t controlSpaceSize)</argsstring>
+        <name>Controller</name>
+        <param>
+          <type>size_t</type>
+          <declname>controlSpaceSize</declname>
+        </param>
+        <briefdescription>
+<para><ref refid="classiDynTree_1_1optimalcontrol_1_1Controller" kindref="compound">Controller</ref>&apos;s constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">controlSpaceSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The control space dimension. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Controller.h" line="43" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Controller_1adecf75b211f17d3e35035e21e3e4c7e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::optimalcontrol::Controller::~Controller</definition>
+        <argsstring>()</argsstring>
+        <name>~Controller</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Controller.h" line="45" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Controller_1a9013b3f976e2b5a9e5095d17e4a28d9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::Controller::doControl</definition>
+        <argsstring>(VectorDynSize &amp;controllerOutput)=0</argsstring>
+        <name>doControl</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>controllerOutput</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the control action. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">controllerOutput</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output of the controller. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Controller.h" line="52" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Controller_1a5a3188e349afcb0e87632c7f12245816" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::Controller::setStateFeedback</definition>
+        <argsstring>(double time, const VectorDynSize &amp;stateFeedback)</argsstring>
+        <name>setStateFeedback</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>stateFeedback</declname>
+        </param>
+        <briefdescription>
+<para>Set the state feedback to be used inside the controller. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the controller depends upon some outputs of the dynamical system, those outputs should be computed inside this method using the state and time specified. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time in which the feedback is obtained. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">stateFeedback</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state feedback </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull. In this specific class, this methods always outputs false. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Controller.h" line="61" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Controller_1a8741ab8bc10e852123c11cb87749125b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::optimalcontrol::Controller::controlSpaceSize</definition>
+        <argsstring>()</argsstring>
+        <name>controlSpaceSize</name>
+        <briefdescription>
+<para>The dimension of control space. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The dimension of control space. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Controller.h" line="67" column="20"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class describing a generic controller. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="iDynTree/Controller.h" line="36" column="9" bodyfile="iDynTree/Controller.h" bodystart="36" bodyend="68"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Controller_1a5c6cef39543689d9432148446c299487" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::Controller</scope><name>Controller</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Controller_1a8741ab8bc10e852123c11cb87749125b" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::Controller</scope><name>controlSpaceSize</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Controller_1a9013b3f976e2b5a9e5095d17e4a28d9e" prot="public" virt="pure-virtual"><scope>iDynTree::optimalcontrol::Controller</scope><name>doControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Controller_1aae4800b98f700d11535586164a466462" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::Controller</scope><name>m_controllerSize</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Controller_1a5a3188e349afcb0e87632c7f12245816" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::Controller</scope><name>setStateFeedback</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Controller_1adecf75b211f17d3e35035e21e3e4c7e1" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::Controller</scope><name>~Controller</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

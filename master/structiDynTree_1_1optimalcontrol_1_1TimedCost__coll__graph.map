@@ -1,7 +1,0 @@
-<map id="iDynTree::optimalcontrol::TimedCost" name="iDynTree::optimalcontrol::TimedCost">
-<area shape="rect" id="node1" title=" " alt="" coords="391,117,573,159"/>
-<area shape="rect" id="node2" href="$classiDynTree_1_1optimalcontrol_1_1TimeRange.html" title=" " alt="" coords="5,5,188,47"/>
-<area shape="rect" id="node3" href="$classiDynTree_1_1MatrixDynSize.html" title="Class providing a simple form of matrix with dynamic size." alt="" coords="5,87,188,114"/>
-<area shape="rect" id="node4" href="$classiDynTree_1_1optimalcontrol_1_1SparsityStructure.html" title=" " alt="" coords="5,155,188,196"/>
-<area shape="rect" id="node5" href="$classiDynTree_1_1VectorDynSize.html" title="Class providing a simple form of vector with dynamic size." alt="" coords="6,222,187,249"/>
-</map>

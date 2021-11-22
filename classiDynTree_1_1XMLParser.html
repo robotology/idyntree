@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>iDynTree::XMLParser class | iDynTree master</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="./index.html">iDynTree</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="4">
+            <li>
+              <a href="pages.html">Versions</a>
+              <ol>
+                <li><a href="./index.html">Master</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="pages.html">Contacts</a>
+              <ol>
+                <li><a href="https://github.com/robotology/idyntree">GitHub</a></li>
+                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
+              </ol>
+            </li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespaceiDynTree.html">iDynTree</a>::<wbr/></span>XMLParser <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="XMLParser_8h.html">&lt;iDynTree/XMLParser.h&gt;</a></div>
+        </h1>
+        <p>XML Parser class.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li><a href="#autotoc_md2">Common usage</a></li>
+            <li><a href="#autotoc_md3">Description</a></li>
+            <li><a href="#autotoc_md4">Validation support</a></li>
+            <li><a href="#autotoc_md5">Todos:</a></li>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<p>Use this class to parse XML files. It currently supports the following features</p><ul><li>XSD validation</li><li>Extensibility (by providing a different root object for the XML hierarchy.</li></ul><section id="autotoc_md2"><h3><a href="#autotoc_md2">Common usage</a></h3><pre class="m-code"><span class="c1">// Allocate parser</span>
+<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">XMLParser</span><span class="o">&gt;</span><span class="w"> </span><span class="n">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">XMLParser</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="c1">// If needed, you can customize the class representing the XML Document</span>
+<span class="c1">// just set a function returning a subclass of XMLElement</span>
+<span class="n">parser</span><span class="o">-&gt;</span><span class="n">setDocumentFactory</span><span class="p">([]{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">XMLDocument</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MyCustomXMLDocument</span><span class="p">);</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
+<span class="c1">// Parse</span>
+<span class="n">parser</span><span class="o">-&gt;</span><span class="n">parseXMLFile</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// You can retrieve the Document after the parsing</span>
+<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">XMLDocument</span><span class="o">&gt;</span><span class="w"> </span><span class="n">document</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parser</span><span class="o">-&gt;</span><span class="n">document</span><span class="p">();</span><span class="w"></span></pre></section><section id="autotoc_md3"><h3><a href="#autotoc_md3">Description</a></h3></section><section id="autotoc_md4"><h3><a href="#autotoc_md4">Validation support</a></h3><p>The parser supports XSD schema validation. This options is controlled by two methods:</p><ul><li><code>setValidateXML</code> accepts a boolean, to enable the validation</li><li><code>setSchemaLocation</code> specifies the location of the XSD schema.</li></ul><p>If both variables are set, the validation will take place before parsing. Note that currently the errors are output to standard error (or output?) and not handled directly in the code. It might be possible to handle those in code though (feature request).</p></section><section id="autotoc_md5"><h3><a href="#autotoc_md5">Todos:</a></h3><p>Possible feature requests:</p><ul><li>parse entities out of context (xmlSAXParseEntity)</li><li>Validation for in memory parsing</li><li>Use libxml in memory tree (that can be modified and dumped to file) instead of custom tree</li></ul></section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="a3971aff454d18f2e2e0cfdf93b284d44">
+              <span class="m-doc-wrap-bumper"><a href="#a3971aff454d18f2e2e0cfdf93b284d44" class="m-doc-self">XMLParser</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Default constructor.</dd>
+            <dt id="ac57715b6b0bbe0a368042d6b1a57ab90">
+              <span class="m-doc-wrap-bumper"><a href="#ac57715b6b0bbe0a368042d6b1a57ab90" class="m-doc-self">~XMLParser</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Destructor.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a380d48c74008493f76bbfa89d27a9c72" class="m-doc">keepTreeInMemory</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd>Returns true if the parsed tree is ketp in memory.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a4298a1f57d35727ece02b59197e58026" class="m-doc">setKeepTreeInMemory</a>(</span><span class="m-doc-wrap">bool keepTreeInMemory)</span>
+            </dt>
+            <dd>Set if the parse tree should be kept in memory.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af57bd10e7fe04805404009f5fc2f3492" class="m-doc">logParsing</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd>Returns true if the parser logs the parsing to standard output.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a7a13e1f8f9a88d8bbc3c14d9c7cd26f4" class="m-doc">setLogParsing</a>(</span><span class="m-doc-wrap">bool enableLogging)</span>
+            </dt>
+            <dd>Set the logging option of the parser.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a53d7a4b6fffcd67e9de72c08440eb0fa" class="m-doc">validateXML</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd>Returns true if the validation option is enabled.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#afd804a5fff0adbd9b87b1df2520218cb" class="m-doc">setValidateXML</a>(</span><span class="m-doc-wrap">bool validate)</span>
+            </dt>
+            <dd>Set the option to perform Schema validation.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3bce709cb8baa967de9cd8521ea1293d" class="m-doc">schemaLocation</a>(</span><span class="m-doc-wrap">) const -&gt; std::string</span>
+            </dt>
+            <dd>Returns the current schema location used for validation.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ad0b611b820cdfd53e93de8b4eab30c6b" class="m-doc">setSchemaLocation</a>(</span><span class="m-doc-wrap">std::string schemaLocation)</span>
+            </dt>
+            <dd>Sets the XSD schema location.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab88dc1c938c5bb0397e2abdcf1064002" class="m-doc">parseXMLFile</a>(</span><span class="m-doc-wrap">std::string absoluteFileName) -&gt; bool</span>
+            </dt>
+            <dd>Parse the specified XML file.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4ccc2d4850f255cf9714d51e8fa344d1" class="m-doc">parseXMLString</a>(</span><span class="m-doc-wrap">std::string xmlString) -&gt; bool</span>
+            </dt>
+            <dd>Parse the specified XML document string.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aaf18ad736bf7a6ed165e1b533ed29e06" class="m-doc">setDocumentFactory</a>(</span><span class="m-doc-wrap">std::function&lt;std::shared_ptr&lt;<a href="classiDynTree_1_1XMLDocument.html" class="m-doc">XMLDocument</a>&gt;()&gt; factory)</span>
+            </dt>
+            <dd>Set the factory function responsible of creating a new <a href="classiDynTree_1_1XMLDocument.html" class="m-doc">XMLDocument</a> element.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#affab248cde90245f3df3d5fb5b50476d" class="m-doc">document</a>(</span><span class="m-doc-wrap">) const -&gt; std::shared_ptr&lt;const <a href="classiDynTree_1_1XMLDocument.html" class="m-doc">XMLDocument</a>&gt;</span>
+            </dt>
+            <dd>Returns the current parsed document.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a380d48c74008493f76bbfa89d27a9c72"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />XMLParser::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a380d48c74008493f76bbfa89d27a9c72" class="m-doc-self">keepTreeInMemory</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns true if the parsed tree is ketp in memory.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>true if the parsed tree is kept on memory.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="classiDynTree_1_1XMLParser.html#a4298a1f57d35727ece02b59197e58026" class="m-doc">setKeepTreeInMemory(bool)</a></p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a4298a1f57d35727ece02b59197e58026"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />XMLParser::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4298a1f57d35727ece02b59197e58026" class="m-doc-self">setKeepTreeInMemory</a>(</span><span class="m-doc-wrap">bool keepTreeInMemory)</span></span>
+            </h3>
+            <p>Set if the parse tree should be kept in memory.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">keepTreeInMemory</td>
+                  <td>true if the tree should be kept in memory.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="classiDynTree_1_1XMLParser.html#a380d48c74008493f76bbfa89d27a9c72" class="m-doc">keepTreeInMemory</a></p></aside>
+          </div></section>
+          <section class="m-doc-details" id="af57bd10e7fe04805404009f5fc2f3492"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />XMLParser::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af57bd10e7fe04805404009f5fc2f3492" class="m-doc-self">logParsing</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns true if the parser logs the parsing to standard output.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>true if log to standard output is enabled.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="classiDynTree_1_1XMLParser.html#a7a13e1f8f9a88d8bbc3c14d9c7cd26f4" class="m-doc">setLogParsing(bool)</a></p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a7a13e1f8f9a88d8bbc3c14d9c7cd26f4"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />XMLParser::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7a13e1f8f9a88d8bbc3c14d9c7cd26f4" class="m-doc-self">setLogParsing</a>(</span><span class="m-doc-wrap">bool enableLogging)</span></span>
+            </h3>
+            <p>Set the logging option of the parser.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">enableLogging</td>
+                  <td>true if the parser should log to standard output.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>see logParsing</p>
+          </div></section>
+          <section class="m-doc-details" id="a53d7a4b6fffcd67e9de72c08440eb0fa"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />XMLParser::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a53d7a4b6fffcd67e9de72c08440eb0fa" class="m-doc-self">validateXML</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns true if the validation option is enabled.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>true if the XML should be validated against a schema.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="classiDynTree_1_1XMLParser.html#afd804a5fff0adbd9b87b1df2520218cb" class="m-doc">setValidateXML(bool)</a></p><p><a href="classiDynTree_1_1XMLParser.html#a3bce709cb8baa967de9cd8521ea1293d" class="m-doc">schemaLocation</a></p><p><a href="classiDynTree_1_1XMLParser.html#ad0b611b820cdfd53e93de8b4eab30c6b" class="m-doc">setSchemaLocation(std::<wbr />string)</a></p></aside>
+          </div></section>
+          <section class="m-doc-details" id="afd804a5fff0adbd9b87b1df2520218cb"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />XMLParser::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afd804a5fff0adbd9b87b1df2520218cb" class="m-doc-self">setValidateXML</a>(</span><span class="m-doc-wrap">bool validate)</span></span>
+            </h3>
+            <p>Set the option to perform Schema validation.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">validate</td>
+                  <td>true if the XML should be validated against a XSD.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>both an XSD schema location and this option should be specified to perform validation.</p></aside><aside class="m-note m-default"><h4>See also</h4><p><a href="classiDynTree_1_1XMLParser.html#a53d7a4b6fffcd67e9de72c08440eb0fa" class="m-doc">validateXML</a></p><p><a href="classiDynTree_1_1XMLParser.html#a3bce709cb8baa967de9cd8521ea1293d" class="m-doc">schemaLocation</a></p><p><a href="classiDynTree_1_1XMLParser.html#ad0b611b820cdfd53e93de8b4eab30c6b" class="m-doc">setSchemaLocation(std::<wbr />string)</a></p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a3bce709cb8baa967de9cd8521ea1293d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::string iDynTree::<wbr />XMLParser::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3bce709cb8baa967de9cd8521ea1293d" class="m-doc-self">schemaLocation</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the current schema location used for validation.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>the current schema location.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-default"><h4>See also</h4><p><a href="classiDynTree_1_1XMLParser.html#a53d7a4b6fffcd67e9de72c08440eb0fa" class="m-doc">validateXML</a></p><p><a href="classiDynTree_1_1XMLParser.html#afd804a5fff0adbd9b87b1df2520218cb" class="m-doc">setValidateXML(bool)</a></p><p><a href="classiDynTree_1_1XMLParser.html#ad0b611b820cdfd53e93de8b4eab30c6b" class="m-doc">setSchemaLocation(std::<wbr />string)</a></p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ad0b611b820cdfd53e93de8b4eab30c6b"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />XMLParser::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ad0b611b820cdfd53e93de8b4eab30c6b" class="m-doc-self">setSchemaLocation</a>(</span><span class="m-doc-wrap">std::string schemaLocation)</span></span>
+            </h3>
+            <p>Sets the XSD schema location.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">schemaLocation</td>
+                  <td>the new XSD schema location.</td>
+                </tr>
+              </tbody>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>to perform the validation, the option should be explicitly set, together with the schema location.</p></aside><aside class="m-note m-default"><h4>See also</h4><p><a href="classiDynTree_1_1XMLParser.html#a53d7a4b6fffcd67e9de72c08440eb0fa" class="m-doc">validateXML</a></p><p><a href="classiDynTree_1_1XMLParser.html#afd804a5fff0adbd9b87b1df2520218cb" class="m-doc">setValidateXML(bool)</a></p><p>schemaLocation(std::string)</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ab88dc1c938c5bb0397e2abdcf1064002"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />XMLParser::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab88dc1c938c5bb0397e2abdcf1064002" class="m-doc-self">parseXMLFile</a>(</span><span class="m-doc-wrap">std::string absoluteFileName)</span></span>
+            </h3>
+            <p>Parse the specified XML file.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">absoluteFileName</td>
+                  <td>the XML file to be parsed.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if the document is valid and successfully parsed.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>If the validation option is enabled, the XML file will be also validated against the specified XSD schema.</p><aside class="m-note m-default"><h4>See also</h4><p><a href="classiDynTree_1_1XMLParser.html#afd804a5fff0adbd9b87b1df2520218cb" class="m-doc">setValidateXML(bool)</a></p><p><a href="classiDynTree_1_1XMLParser.html#ad0b611b820cdfd53e93de8b4eab30c6b" class="m-doc">setSchemaLocation(std::<wbr />string)</a></p><p><a href="classiDynTree_1_1XMLParser.html#a4ccc2d4850f255cf9714d51e8fa344d1" class="m-doc">parseXMLString(std::<wbr />string)</a></p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a4ccc2d4850f255cf9714d51e8fa344d1"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />XMLParser::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4ccc2d4850f255cf9714d51e8fa344d1" class="m-doc-self">parseXMLString</a>(</span><span class="m-doc-wrap">std::string xmlString)</span></span>
+            </h3>
+            <p>Parse the specified XML document string.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">xmlString</td>
+                  <td>string containing a valid XML content.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if the XML document is valid and successfully parsed.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>XSD validation is currently not supported for in-memory parsing. Use <a href="classiDynTree_1_1XMLParser.html#ab88dc1c938c5bb0397e2abdcf1064002" class="m-doc">parseXMLFile(std::<wbr />string)</a> instead</p></aside><aside class="m-note m-default"><h4>See also</h4><p><a href="classiDynTree_1_1XMLParser.html#ab88dc1c938c5bb0397e2abdcf1064002" class="m-doc">parseXMLFile(std::<wbr />string)</a></p></aside>
+          </div></section>
+          <section class="m-doc-details" id="aaf18ad736bf7a6ed165e1b533ed29e06"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />XMLParser::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aaf18ad736bf7a6ed165e1b533ed29e06" class="m-doc-self">setDocumentFactory</a>(</span><span class="m-doc-wrap">std::function&lt;std::shared_ptr&lt;<a href="classiDynTree_1_1XMLDocument.html" class="m-doc">XMLDocument</a>&gt;()&gt; factory)</span></span>
+            </h3>
+            <p>Set the factory function responsible of creating a new <a href="classiDynTree_1_1XMLDocument.html" class="m-doc">XMLDocument</a> element.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">factory</td>
+                  <td>the function that will be called for instantiating a new <a href="classiDynTree_1_1XMLDocument.html" class="m-doc">XMLDocument</a> object.</td>
+                </tr>
+              </tbody>
+            </table>
+<p>By specifying a new factory function, it is possible to change how the XML document will be represented in memory. The signature of the function is <code>(void) -&gt; std::shared_ptr&lt;<a href="classiDynTree_1_1XMLDocument.html" class="m-doc">XMLDocument</a>&gt;</code>, i.e. a function accepting no arguments and returning a <code>std::shared_ptr</code> to an <code><a href="classiDynTree_1_1XMLDocument.html" class="m-doc">XMLDocument</a></code> object.</p>
+          </div></section>
+          <section class="m-doc-details" id="affab248cde90245f3df3d5fb5b50476d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::shared_ptr&lt;const <a href="classiDynTree_1_1XMLDocument.html" class="m-doc">XMLDocument</a>&gt; iDynTree::<wbr />XMLParser::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#affab248cde90245f3df3d5fb5b50476d" class="m-doc-self">document</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the current parsed document.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>the parsed document.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>iDynTree documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/robotology/idyntree/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

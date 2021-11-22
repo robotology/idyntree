@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="indexpage" kind="page">
+    <compoundname>index</compoundname>
+    <title>Welcome to iDynTree reference documentation.</title>
+    <briefdescription>
+<para>iDynTree is a library of robots dynamics algorithms for control, estimation and simulation. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>iDynTree is a library of robots dynamics algorithms for control, estimation and simulation. iDynTree is specifically designed for free-floating robots, but it is possible to use it also with fixed-base robots.</para>
+<para>This is iDynTree&apos;s reference documentation, that is automatically generated from the C++ headers. It contains specific details for each class, method and function contained in iDynTree.</para>
+<para>For how to install iDynTree and tutorial on how to use iDynTree, please check the README at <ulink url="https://github.com/robotology/idyntree/blob/master/README.md">https://github.com/robotology/idyntree/blob/master/README.md</ulink> . If you have a problem using iDynTree or you do not understand something in iDynTree documentation, please file an issue: <ulink url="https://github.com/robotology/idyntree/issues/new">https://github.com/robotology/idyntree/issues/new</ulink></para>
+<para>iDynTree is written in C++ language, but thanks to SWIG it is possible to use the iDynTree algorithms in several other languages. Support and documentation is provided in particular for C++, Matlab, Python and Lua. If you are interested in using iDynTree with another programming language, feel free to create a new issue requesting support for it.</para>
+<para>iDynTree is divided in several parts:</para>
+<para><itemizedlist>
+<listitem><para><ref refid="group__iDynTreeCore" kindref="compound">Core</ref> : Basic data structures for kinematics and dynamics of rigid bodies. </para>
+</listitem>
+<listitem><para><ref refid="group__iDynTreeModel" kindref="compound">Model</ref>: Data structures and algorithms for modeling articulated body structures. </para>
+</listitem>
+<listitem><para><ref refid="group__iDynTreeSensors" kindref="compound">Sensors</ref> : Data structures for modeling sensors distribude on articulated body structures. </para>
+</listitem>
+<listitem><para><ref refid="group__iDynTreeModelIO" kindref="compound">ModelIO</ref> : Function to read and write iDynTree models and sensors to external files (such as <ulink url="http://wiki.ros.org/urdf">URDF</ulink> or <ulink url="http://wiki.icub.org/brain/classiCub_1_1iKin_1_1iKinLimb.html#a76c93aae76bb0f7ef9470b81d0da0e26">iKin DH parameters</ulink> ). </para>
+</listitem>
+<listitem><para><ref refid="group__iDynTreeEstimation" kindref="compound">Estimation</ref> : Algorithms related to whole-body estimation. </para>
+</listitem>
+<listitem><para><ref refid="group__iDynTreeHighLevel" kindref="compound">HighLevel</ref> : High level interfaces to access algorithms contained in iDynTree.</para>
+</listitem>
+</itemizedlist>
+<linebreak/>
+</para>
+<para>iDynTree has a few classes that are particular used, those are linked in the following for quick access: <itemizedlist>
+<listitem><para><ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> : Class used to represent a multibody model. </para>
+</listitem>
+<listitem><para><ref refid="classiDynTree_1_1KinDynComputations" kindref="compound">iDynTree::KinDynComputations</ref> : Class used to compute forward kinematics and dynamics quantities.</para>
+</listitem>
+</itemizedlist>
+As iDynTree is mainly developed to support the research effort of <ulink url="https://ami.iit.it">Artificial and Mechanical Intelligence research line</ulink> of the <ulink url="https://www.iit.it">Italian Institute of Technology</ulink>, some parts of it are activly developed and their interface can abroutly change between iDynTree releases. Until this components are ready to be integrated in a proper part of iDynTree, we keep them in the &quot;experimental&quot; part of iDynTree :</para>
+<para><itemizedlist>
+<listitem><para><ref refid="group__iDynTreeExperimental" kindref="compound">Experimental</ref> : Experimental data structures and algorithms, whose interface is not guaranteed to be stable. </para>
+</listitem>
+</itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/idyntree/idyntree/doc/main.dox"/>
+  </compounddef>
+</doxygen>

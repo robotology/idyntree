@@ -1,0 +1,604 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classinternal_1_1kinematics_1_1SparsityHelper" kind="class" language="C++" prot="public">
+    <compoundname>internal::kinematics::SparsityHelper</compoundname>
+    <includes local="no">private/InverseKinematicsNLP.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1SparsityHelper_1a91e3f23b10acddc1248348af95158f29" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; size_t &gt;</type>
+        <definition>std::vector&lt;size_t&gt; internal::kinematics::SparsityHelper::m_numberOfNonZeros</definition>
+        <argsstring></argsstring>
+        <name>m_numberOfNonZeros</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>number of non zeros for each rows </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="41" column="17" bodyfile="private/InverseKinematicsNLP.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1SparsityHelper_1a0c52a44ac07b19bf1ce1efe599056004" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; size_t &gt; &gt;</type>
+        <definition>std::vector&lt;std::vector&lt;size_t&gt; &gt; internal::kinematics::SparsityHelper::m_nonZeroIndices</definition>
+        <argsstring></argsstring>
+        <name>m_nonZeroIndices</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>nonzero columns for each row </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="42" column="17" bodyfile="private/InverseKinematicsNLP.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1SparsityHelper_1a67d032c8da3b302a43da98ff5d71e25a" prot="private" static="yes" mutable="no">
+        <type>const std::vector&lt; size_t &gt;</type>
+        <definition>const std::vector&lt;size_t&gt; internal::kinematics::SparsityHelper::s_nullVector</definition>
+        <argsstring></argsstring>
+        <name>s_nullVector</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>invalid vector </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="44" column="30" bodyfile="private/InverseKinematicsNLP.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1a43c84e879be65719791d317316a24ef0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename MatrixType</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool internal::kinematics::SparsityHelper::addConstraintSparsityPatternTemplated</definition>
+        <argsstring>(const MatrixType &amp;newConstraint, const iDynTree::IndexRange &amp;constraintRange)</argsstring>
+        <name>addConstraintSparsityPatternTemplated</name>
+        <param>
+          <type>const MatrixType &amp;</type>
+          <declname>newConstraint</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structiDynTree_1_1IndexRange" kindref="compound">iDynTree::IndexRange</ref> &amp;</type>
+          <declname>constraintRange</declname>
+        </param>
+        <briefdescription>
+<para>Adds a constraint sparsity pattern from the specified matrix and constraint range. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>this is the templated function that accepts fix and dynamic size matrices </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>newConstraint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the matrix containing the pattern (1 for nonzero, 0 otherwise) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>constraintRange</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>contiguous subset of the newConstraint matrix to be considered </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true on success. False otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="57" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1a9a095a463b0479e73250775028c542c7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::vector&lt; size_t &gt; &amp;</type>
+        <definition>static const std::vector&lt;size_t&gt;&amp; internal::kinematics::SparsityHelper::NullIndicesVector</definition>
+        <argsstring>()</argsstring>
+        <name>NullIndicesVector</name>
+        <briefdescription>
+<para>The invalid null indices vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The invalid null indices vector </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="67" column="30"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1a46025dfa23bf3ca02bd1ebdee9253111" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>internal::kinematics::SparsityHelper::SparsityHelper</definition>
+        <argsstring>()</argsstring>
+        <name>SparsityHelper</name>
+        <briefdescription>
+<para>Default constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="70" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1a72213cf8926e60d27ae3b37b9e0ee2b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>internal::kinematics::SparsityHelper::SparsityHelper</definition>
+        <argsstring>(const SparsityHelper &amp;)=delete</argsstring>
+        <name>SparsityHelper</name>
+        <param>
+          <type>const <ref refid="classinternal_1_1kinematics_1_1SparsityHelper" kindref="compound">SparsityHelper</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="72" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1aad99ca323d055bf5ab1e1dfa29ce6793" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classinternal_1_1kinematics_1_1SparsityHelper" kindref="compound">SparsityHelper</ref> &amp;</type>
+        <definition>SparsityHelper&amp; internal::kinematics::SparsityHelper::operator=</definition>
+        <argsstring>(const SparsityHelper &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classinternal_1_1kinematics_1_1SparsityHelper" kindref="compound">SparsityHelper</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="73" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1a00f6edd2ba0eb16e4a3069780fec3a04" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>internal::kinematics::SparsityHelper::SparsityHelper</definition>
+        <argsstring>(SparsityHelper &amp;&amp;)=default</argsstring>
+        <name>SparsityHelper</name>
+        <param>
+          <type><ref refid="classinternal_1_1kinematics_1_1SparsityHelper" kindref="compound">SparsityHelper</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="75" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1acd284579180fe99c1855c008d88ad32e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classinternal_1_1kinematics_1_1SparsityHelper" kindref="compound">SparsityHelper</ref> &amp;</type>
+        <definition>SparsityHelper&amp; internal::kinematics::SparsityHelper::operator=</definition>
+        <argsstring>(SparsityHelper &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classinternal_1_1kinematics_1_1SparsityHelper" kindref="compound">SparsityHelper</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="76" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1a166accf3388929d9690a76365c2f20d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void internal::kinematics::SparsityHelper::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <briefdescription>
+<para>Remove all constraint sparsity patterns. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="82" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1a6b208df3000cb0d2d2490b0cb08b2489" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool internal::kinematics::SparsityHelper::addConstraintSparsityPattern</definition>
+        <argsstring>(const iDynTree::MatrixDynSize &amp;newConstraint)</argsstring>
+        <name>addConstraintSparsityPattern</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>newConstraint</declname>
+        </param>
+        <briefdescription>
+<para>Adds a constraint sparsity pattern from the specified matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>newConstraint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the matrix containing the pattern (1 for nonzero, 0 otherwise) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true on success. False otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="90" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1a99dcd1e84f9214b4a5f77bd813d89bda" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>unsigned int</type>
+            <declname>nRows</declname>
+            <defname>nRows</defname>
+          </param>
+          <param>
+            <type>unsigned int</type>
+            <declname>nCols</declname>
+            <defname>nCols</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool internal::kinematics::SparsityHelper::addConstraintSparsityPattern</definition>
+        <argsstring>(const iDynTree::MatrixFixSize&lt; nRows, nCols &gt; &amp;newConstraint)</argsstring>
+        <name>addConstraintSparsityPattern</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">iDynTree::MatrixFixSize</ref>&lt; nRows, nCols &gt; &amp;</type>
+          <declname>newConstraint</declname>
+        </param>
+        <briefdescription>
+<para>Adds a constraint sparsity pattern from the specified matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>newConstraint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the matrix containing the pattern (1 for nonzero, 0 otherwise) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true on success. False otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="99" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1a8b3ee065ee574981db57061005421f16" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool internal::kinematics::SparsityHelper::addConstraintSparsityPattern</definition>
+        <argsstring>(const iDynTree::MatrixDynSize &amp;newConstraint, const iDynTree::IndexRange &amp;constraintRange)</argsstring>
+        <name>addConstraintSparsityPattern</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>newConstraint</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structiDynTree_1_1IndexRange" kindref="compound">iDynTree::IndexRange</ref> &amp;</type>
+          <declname>constraintRange</declname>
+        </param>
+        <briefdescription>
+<para>Adds a constraint sparsity pattern from the specified matrix and constraint range. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>newConstraint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the matrix containing the pattern (1 for nonzero, 0 otherwise) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>constraintRange</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>contiguous subset of the newConstraint matrix to be considered </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true on success. False otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="109" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1ae67e37f45fb3a99fd8a57d196fc62e4e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>unsigned int</type>
+            <declname>nRows</declname>
+            <defname>nRows</defname>
+          </param>
+          <param>
+            <type>unsigned int</type>
+            <declname>nCols</declname>
+            <defname>nCols</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool internal::kinematics::SparsityHelper::addConstraintSparsityPattern</definition>
+        <argsstring>(const iDynTree::MatrixFixSize&lt; nRows, nCols &gt; &amp;newConstraint, const iDynTree::IndexRange &amp;constraintRange)</argsstring>
+        <name>addConstraintSparsityPattern</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">iDynTree::MatrixFixSize</ref>&lt; nRows, nCols &gt; &amp;</type>
+          <declname>newConstraint</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structiDynTree_1_1IndexRange" kindref="compound">iDynTree::IndexRange</ref> &amp;</type>
+          <declname>constraintRange</declname>
+        </param>
+        <briefdescription>
+<para>Adds a constraint sparsity pattern from the specified matrix and constraint range. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>newConstraint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the matrix containing the pattern (1 for nonzero, 0 otherwise) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>constraintRange</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>contiguous subset of the newConstraint matrix to be considered </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true on success. False otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="121" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1a1c446d2bce1d6a5467e6a9dc71e03874" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t internal::kinematics::SparsityHelper::numberOfNonZerosForRow</definition>
+        <argsstring>(size_t rowIndex) const</argsstring>
+        <name>numberOfNonZerosForRow</name>
+        <param>
+          <type>size_t</type>
+          <declname>rowIndex</declname>
+        </param>
+        <briefdescription>
+<para>Returns the number of nonzeros in the specified row. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rowIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>index of the row </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>number of nonzeros </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="131" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1ab06c1fd524494a9f573662b197608578" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t internal::kinematics::SparsityHelper::numberOfNonZeros</definition>
+        <argsstring>() const</argsstring>
+        <name>numberOfNonZeros</name>
+        <briefdescription>
+<para>Returns the total number of nonzeros in the sparsity pattern. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the total number of nonzeros in the sparsity pattern </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="139" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1a43cb1e0d1525be72e1989569b044dcba" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t internal::kinematics::SparsityHelper::totalNumberOfNonZerosBeforeRow</definition>
+        <argsstring>(size_t rowIndex) const</argsstring>
+        <name>totalNumberOfNonZerosBeforeRow</name>
+        <param>
+          <type>size_t</type>
+          <declname>rowIndex</declname>
+        </param>
+        <briefdescription>
+<para>Returns the cumulative number of nonzeros in all the rows before the specified one. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rowIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the row (excluded) to compute the cumulative number of nonzeros </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the cumulative number of nonzeros in all the rows before the specified one </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="148" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1a0642d6a8c920a525456fbd2e84de3e2e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::vector&lt; size_t &gt; &amp;</type>
+        <definition>const std::vector&lt;size_t&gt;&amp; internal::kinematics::SparsityHelper::nonZeroIndicesForRow</definition>
+        <argsstring>(size_t rowIndex) const</argsstring>
+        <name>nonZeroIndicesForRow</name>
+        <param>
+          <type>size_t</type>
+          <declname>rowIndex</declname>
+        </param>
+        <briefdescription>
+<para>Returns a vector with the indices of the non zero columns for the specified contraint (row) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rowIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the specified constraint </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>a vector with the indices of the non zero columns </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="157" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1aa11d2449f0c659104ddcf8488910a182" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void internal::kinematics::SparsityHelper::assignActualMatrixValues</definition>
+        <argsstring>(const iDynTree::IndexRange &amp;constraintRange, const iDynTree::MatrixDynSize &amp;fullMatrix, size_t fullMatrixStartingRowIndex, Ipopt::Number *outputBuffer)</argsstring>
+        <name>assignActualMatrixValues</name>
+        <param>
+          <type>const <ref refid="structiDynTree_1_1IndexRange" kindref="compound">iDynTree::IndexRange</ref> &amp;</type>
+          <declname>constraintRange</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>fullMatrix</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>fullMatrixStartingRowIndex</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number *</type>
+          <declname>outputBuffer</declname>
+        </param>
+        <briefdescription>
+<para>Helper function to assign values to a contiguous buffer given the current sparsity pattern. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>constraintRange</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>range of the constraint that should be sparsified </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fullMatrix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>matrix specifying the non sparse constraint </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fullMatrixStartingRowIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>starting row index of the non sparse matrix to be considered. The size is automatically inferred by the constraint size </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>outputBuffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the buffer on which the sparsified values should be written </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="169" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1SparsityHelper_1ae8593fcbf475f77ab3452db4e18fdf9f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string internal::kinematics::SparsityHelper::toString</definition>
+        <argsstring>() const</argsstring>
+        <name>toString</name>
+        <briefdescription>
+<para>Returns a textual description of the sparsity pattern. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Useful for debug <simplesect kind="note"><para>this method perform dynamic memory allocation </para>
+</simplesect>
+<simplesect kind="return"><para>a textual description of the sparsity pattern </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="182" column="17"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Helper class to manage sparsity. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="private/InverseKinematicsNLP.h" line="39" column="1" bodyfile="private/InverseKinematicsNLP.h" bodystart="40" bodyend="184"/>
+    <listofallmembers>
+      <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1a6b208df3000cb0d2d2490b0cb08b2489" prot="public" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>addConstraintSparsityPattern</name></member>
+      <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1a99dcd1e84f9214b4a5f77bd813d89bda" prot="public" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>addConstraintSparsityPattern</name></member>
+      <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1a8b3ee065ee574981db57061005421f16" prot="public" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>addConstraintSparsityPattern</name></member>
+      <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1ae67e37f45fb3a99fd8a57d196fc62e4e" prot="public" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>addConstraintSparsityPattern</name></member>
+      <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1a43c84e879be65719791d317316a24ef0" prot="private" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>addConstraintSparsityPatternTemplated</name></member>
+      <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1aa11d2449f0c659104ddcf8488910a182" prot="public" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>assignActualMatrixValues</name></member>
+      <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1a166accf3388929d9690a76365c2f20d0" prot="public" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>clear</name></member>
+      <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1a0c52a44ac07b19bf1ce1efe599056004" prot="private" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>m_nonZeroIndices</name></member>
+      <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1a91e3f23b10acddc1248348af95158f29" prot="private" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>m_numberOfNonZeros</name></member>
+      <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1a0642d6a8c920a525456fbd2e84de3e2e" prot="public" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>nonZeroIndicesForRow</name></member>
+      <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1a9a095a463b0479e73250775028c542c7" prot="public" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>NullIndicesVector</name></member>
+      <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1ab06c1fd524494a9f573662b197608578" prot="public" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>numberOfNonZeros</name></member>
+      <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1a1c446d2bce1d6a5467e6a9dc71e03874" prot="public" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>numberOfNonZerosForRow</name></member>
+      <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1aad99ca323d055bf5ab1e1dfa29ce6793" prot="public" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>operator=</name></member>
+      <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1acd284579180fe99c1855c008d88ad32e" prot="public" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>operator=</name></member>
+      <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1a67d032c8da3b302a43da98ff5d71e25a" prot="private" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>s_nullVector</name></member>
+      <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1a46025dfa23bf3ca02bd1ebdee9253111" prot="public" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>SparsityHelper</name></member>
+      <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1a72213cf8926e60d27ae3b37b9e0ee2b6" prot="public" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>SparsityHelper</name></member>
+      <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1a00f6edd2ba0eb16e4a3069780fec3a04" prot="public" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>SparsityHelper</name></member>
+      <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1ae8593fcbf475f77ab3452db4e18fdf9f" prot="public" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>toString</name></member>
+      <member refid="classinternal_1_1kinematics_1_1SparsityHelper_1a43cb1e0d1525be72e1989569b044dcba" prot="public" virt="non-virtual"><scope>internal::kinematics::SparsityHelper</scope><name>totalNumberOfNonZerosBeforeRow</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

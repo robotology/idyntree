@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1XMLDocument" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::XMLDocument</compoundname>
+    <derivedcompoundref refid="classiDynTree_1_1URDFDocument" prot="public" virt="non-virtual">iDynTree::URDFDocument</derivedcompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1XMLDocument_1a621f1b4f2785267e52a08aa61bd6a890" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; XMLDocumentPimpl &gt;</type>
+        <definition>std::unique_ptr&lt;XMLDocumentPimpl&gt; iDynTree::XMLDocument::m_pimpl</definition>
+        <argsstring></argsstring>
+        <name>m_pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLDocument.h" line="27" column="21" bodyfile="iDynTree/XMLDocument.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classiDynTree_1_1XMLDocument_1af16c8fed027186b0e7fa53a309273a8d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class XMLParser</definition>
+        <argsstring></argsstring>
+        <name>XMLParser</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1XMLParser" kindref="compound">XMLParser</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLDocument.h" line="29" column="5" bodyfile="iDynTree/XMLDocument.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1XMLDocument_1a3c91a8bd7c0207735fcfb76b5b567132" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::XMLDocument::setRootElement</definition>
+        <argsstring>(std::shared_ptr&lt; XMLElement &gt; root)</argsstring>
+        <name>setRootElement</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">XMLElement</ref> &gt;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLDocument.h" line="30" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1XMLDocument_1a94ea906352e78e3e5b9dde135b102297" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::XMLDocument::XMLDocument</definition>
+        <argsstring>()</argsstring>
+        <name>XMLDocument</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLDocument.h" line="34" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLDocument_1a4d065a940ba5b49300c5566bbccfb9d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::XMLDocument::~XMLDocument</definition>
+        <argsstring>()</argsstring>
+        <name>~XMLDocument</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLDocument.h" line="35" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLDocument_1a3cdb084e6ae5b9f678a3290000e345f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">XMLElement</ref> &gt;</type>
+        <definition>virtual std::shared_ptr&lt;XMLElement&gt; iDynTree::XMLDocument::rootElementForName</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>rootElementForName</name>
+        <reimplementedby refid="classiDynTree_1_1URDFDocument_1a20cc305f59f08294b43e048d4ed30076">rootElementForName</reimplementedby>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Factory method to create the XML root element given for the specified name. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>name of the element to create </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>a new parser element for the corresponding tag </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLDocument.h" line="43" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLDocument_1a605ab0c832b7f5de4cff8a45e94b8f56" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::XMLDocument::documentHasBeenParsed</definition>
+        <argsstring>()</argsstring>
+        <name>documentHasBeenParsed</name>
+        <reimplementedby refid="classiDynTree_1_1URDFDocument_1af4b51c607132c29d08581fc16033ca4b">documentHasBeenParsed</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLDocument.h" line="46" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLDocument_1afb50b3119f4c453c96c80925dd6a6791" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">XMLElement</ref> &gt;</type>
+        <definition>const std::shared_ptr&lt;XMLElement&gt; iDynTree::XMLDocument::root</definition>
+        <argsstring>() const</argsstring>
+        <name>root</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLDocument.h" line="48" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLDocument_1a09f709b05c0f1f12670763848deeebf8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::XMLDocument::description</definition>
+        <argsstring>() const</argsstring>
+        <name>description</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLDocument.h" line="49" column="17"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::XMLDocument</label>
+        <link refid="classiDynTree_1_1XMLDocument"/>
+      </node>
+      <node id="2">
+        <label>iDynTree::URDFDocument</label>
+        <link refid="classiDynTree_1_1URDFDocument"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="iDynTree/XMLDocument.h" line="25" column="1" bodyfile="iDynTree/XMLDocument.h" bodystart="25" bodyend="50"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1XMLDocument_1a09f709b05c0f1f12670763848deeebf8" prot="public" virt="non-virtual"><scope>iDynTree::XMLDocument</scope><name>description</name></member>
+      <member refid="classiDynTree_1_1XMLDocument_1a605ab0c832b7f5de4cff8a45e94b8f56" prot="public" virt="virtual"><scope>iDynTree::XMLDocument</scope><name>documentHasBeenParsed</name></member>
+      <member refid="classiDynTree_1_1XMLDocument_1a621f1b4f2785267e52a08aa61bd6a890" prot="private" virt="non-virtual"><scope>iDynTree::XMLDocument</scope><name>m_pimpl</name></member>
+      <member refid="classiDynTree_1_1XMLDocument_1afb50b3119f4c453c96c80925dd6a6791" prot="public" virt="non-virtual"><scope>iDynTree::XMLDocument</scope><name>root</name></member>
+      <member refid="classiDynTree_1_1XMLDocument_1a3cdb084e6ae5b9f678a3290000e345f5" prot="public" virt="virtual"><scope>iDynTree::XMLDocument</scope><name>rootElementForName</name></member>
+      <member refid="classiDynTree_1_1XMLDocument_1a3c91a8bd7c0207735fcfb76b5b567132" prot="private" virt="non-virtual"><scope>iDynTree::XMLDocument</scope><name>setRootElement</name></member>
+      <member refid="classiDynTree_1_1XMLDocument_1a94ea906352e78e3e5b9dde135b102297" prot="public" virt="non-virtual"><scope>iDynTree::XMLDocument</scope><name>XMLDocument</name></member>
+      <member refid="classiDynTree_1_1XMLDocument_1a4d065a940ba5b49300c5566bbccfb9d5" prot="public" virt="virtual"><scope>iDynTree::XMLDocument</scope><name>~XMLDocument</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

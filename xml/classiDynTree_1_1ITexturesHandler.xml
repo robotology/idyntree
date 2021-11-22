@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1ITexturesHandler" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::ITexturesHandler</compoundname>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1ITexturesHandler_1a28ecd72848f561cd9a96deb74078ca93" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type></type>
+        <definition>virtual iDynTree::ITexturesHandler::~ITexturesHandler</definition>
+        <argsstring>()=0</argsstring>
+        <name>~ITexturesHandler</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="801" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ITexturesHandler_1a24295be20a80e131edb753f3c8028524" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1ITexture" kindref="compound">ITexture</ref> *</type>
+        <definition>virtual ITexture* iDynTree::ITexturesHandler::add</definition>
+        <argsstring>(const std::string &amp;name, const VisualizerOptions &amp;textureOptions=VisualizerOptions())=0</argsstring>
+        <name>add</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structiDynTree_1_1VisualizerOptions" kindref="compound">VisualizerOptions</ref> &amp;</type>
+          <declname>textureOptions</declname>
+          <defval><ref refid="structiDynTree_1_1VisualizerOptions" kindref="compound">VisualizerOptions</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>Add a texture. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>The</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>name of the texture </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>visualizerOptions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The options for the texture </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>The pointer should not be deleted. Its lifespan coincides with the one of the ITextureHandler. </para>
+</simplesect>
+<simplesect kind="return"><para>A <ref refid="classiDynTree_1_1ITexture" kindref="compound">ITexture</ref> pointer in case of success. A nullptr otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="810" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ITexturesHandler_1a65ff5e3485df6258e805616a05997b6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1ITexture" kindref="compound">ITexture</ref> *</type>
+        <definition>virtual ITexture* iDynTree::ITexturesHandler::get</definition>
+        <argsstring>(const std::string &amp;name)=0</argsstring>
+        <name>get</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Get a specific texture. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>The</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>name of the texture to get. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>The pointer should not be deleted. Its lifespan coincides with the one of the ITextureHandler. </para>
+</simplesect>
+<simplesect kind="return"><para>the pointer to the texture. A nullptr if that texture does not exists. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="818" column="22"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Visualizer.h" line="794" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="795" bodyend="819"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1ITexturesHandler_1a24295be20a80e131edb753f3c8028524" prot="public" virt="pure-virtual"><scope>iDynTree::ITexturesHandler</scope><name>add</name></member>
+      <member refid="classiDynTree_1_1ITexturesHandler_1a65ff5e3485df6258e805616a05997b6a" prot="public" virt="pure-virtual"><scope>iDynTree::ITexturesHandler</scope><name>get</name></member>
+      <member refid="classiDynTree_1_1ITexturesHandler_1a28ecd72848f561cd9a96deb74078ca93" prot="public" virt="pure-virtual"><scope>iDynTree::ITexturesHandler</scope><name>~ITexturesHandler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

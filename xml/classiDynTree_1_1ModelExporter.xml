@@ -1,0 +1,320 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1ModelExporter" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::ModelExporter</compoundname>
+    <includes local="no">iDynTree/ModelIO/ModelExporter.h</includes>
+      <sectiondef kind="user-defined">
+      <header>Constructor/Destructor</header>
+      <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1afb8051cba34b2e3e60d0b375c0e790bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ModelExporter::ModelExporter</definition>
+        <argsstring>()</argsstring>
+        <name>ModelExporter</name>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="130" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1a0797985ef2e2cebb8bf25c0c0e4ed18b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ModelExporter::~ModelExporter</definition>
+        <argsstring>()</argsstring>
+        <name>~ModelExporter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="132" column="5"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Model exporting and definition methods</header>
+      <description><para>This methods are used to export the structure of your model. </para>
+</description>
+      <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1ac7eee90d88819d3697225c412d6717d0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref> &amp;</type>
+        <definition>const ModelExporterOptions&amp; iDynTree::ModelExporter::exportingOptions</definition>
+        <argsstring>() const</argsstring>
+        <name>exportingOptions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="141" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1aa7babe5fc2794ed01d3ba46c4a0ae041" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::ModelExporter::setExportingOptions</definition>
+        <argsstring>(const ModelExporterOptions &amp;options)</argsstring>
+        <name>setExportingOptions</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref> &amp;</type>
+          <declname>options</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="143" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1a9fb6599971ddb3e6b081321952818042" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ModelExporter::init</definition>
+        <argsstring>(const Model &amp;model, const SensorsList &amp;sensors=SensorsList(), const ModelExporterOptions options=ModelExporterOptions())</argsstring>
+        <name>init</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> &amp;</type>
+          <declname>sensors</declname>
+          <defval><ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref>()</defval>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref></type>
+          <declname>options</declname>
+          <defval><ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>Specifies the model of the robot to export. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The used model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sensors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The used sensors. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">options</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The used options. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="153" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1a2a8eff680e7a14c66dafe5a9360d89a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+        <definition>const Model&amp; iDynTree::ModelExporter::model</definition>
+        <argsstring>()</argsstring>
+        <name>model</name>
+        <briefdescription>
+<para>Get the loaded model that will be exported. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="161" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1a8c208f8c87d5f6fae8faef6460a561ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> &amp;</type>
+        <definition>const SensorsList&amp; iDynTree::ModelExporter::sensors</definition>
+        <argsstring>()</argsstring>
+        <name>sensors</name>
+        <briefdescription>
+<para>Get the loaded sensors that will be exported. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="166" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1abcbf9a179e9f6a2da5c2fc59ea2c83e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ModelExporter::isValid</definition>
+        <argsstring>()</argsstring>
+        <name>isValid</name>
+        <briefdescription>
+<para>Return true if the model have been correctly loaded, and can be exported. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if the model was loaded correctly. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="173" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1ab5523d12f0411456625313c8e51f8d8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ModelExporter::exportModelToString</definition>
+        <argsstring>(std::string &amp;modelString, const std::string filetype=&quot;urdf&quot;)</argsstring>
+        <name>exportModelToString</name>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>modelString</declname>
+        </param>
+        <param>
+          <type>const std::string</type>
+          <declname>filetype</declname>
+          <defval>&quot;urdf&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Export the model of the robot to a string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>modelString</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>string containg the model of the robot. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>filetype</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>type of the file to load, currently supporting only urdf type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="182" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1ad528cdb40626b05dabd44ada1f322692" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ModelExporter::exportModelToFile</definition>
+        <argsstring>(const std::string &amp;filename, const std::string filetype=&quot;urdf&quot;)</argsstring>
+        <name>exportModelToFile</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>const std::string</type>
+          <declname>filetype</declname>
+          <defval>&quot;urdf&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Export the model of the robot to an external file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>path to the file to export. It can be either a relative filename with respect to the current working directory, or an absolute filename. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>filetype</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>type of the file to load, currently supporting only urdf type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="193" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1ModelExporter_1ac60db32473a7c24daac48ac9627563db" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; Pimpl &gt;</type>
+        <definition>std::unique_ptr&lt;Pimpl&gt; iDynTree::ModelExporter::m_pimpl</definition>
+        <argsstring></argsstring>
+        <name>m_pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="118" column="21" bodyfile="iDynTree/ModelIO/ModelExporter.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Helper class to export a model to the supported textual formats. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Currently the only format supported for export is the URDF format, as it is described in <ulink url="http://wiki.ros.org/urdf/XML">http://wiki.ros.org/urdf/XML</ulink> .</para>
+<para>Only <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> classes that represent multibody system with no loops can be exported.</para>
+<para>Furthermore, currently the model exporter only exports a subset of the features supported in <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref>. In particular, the following features are not exported:</para>
+<para><itemizedlist>
+<listitem><para>Sensors</para>
+</listitem><listitem><para>Joint limits, damping and static friction.</para>
+</listitem></itemizedlist>
+</para>
+<sect1 id="classiDynTree_1_1ModelExporter_1autotoc_md0">
+<title>Format documentation</title>
+<para>The following format are supported by the exporter.</para>
+<para><table rows="2" cols="4"><row>
+<entry thead="yes" align='center'><para>Format   </para>
+</entry><entry thead="yes" align='center'><para>Extendend Name   </para>
+</entry><entry thead="yes" align='center'><para>Website   </para>
+</entry><entry thead="yes" align='center'><para>String for filetype argument    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>URDF   </para>
+</entry><entry thead="no" align='center'><para>Unified Robot Description Format   </para>
+</entry><entry thead="no" align='center'><para><ulink url="http://wiki.ros.org/urdf">http://wiki.ros.org/urdf</ulink>   </para>
+</entry><entry thead="no" align='center'><para><computeroutput>urdf</computeroutput>   </para>
+</entry></row>
+</table>
+</para>
+<sect2 id="classiDynTree_1_1ModelExporter_1autotoc_md1">
+<title>URDF</title>
+<para>As the URDF format does not distinguish between frames and links (see <ulink url="https://discourse.ros.org/t/urdf-ng-link-and-frame-concepts/56">https://discourse.ros.org/t/urdf-ng-link-and-frame-concepts/56</ulink> for an extensive discussion on this) the URDF model exporter converts iDynTree&apos;s <emphasis>additional frames</emphasis> to mass-less and shape-less <emphasis>fake</emphasis> URDF links that are connected as child links via <computeroutput>fixed</computeroutput> joints to the corresponding <bold>real</bold> URDF links.</para>
+<para>Furthermore, it is widespread use in URDF models to never use a real link (with mass) as the root link of a model, mainly due to workaround a bug in official KDL parser used in ROS (see <ulink url="https://github.com/ros/kdl_parser/issues/27">https://github.com/ros/kdl_parser/issues/27</ulink> for more info). For this reason, if the selected base_link has at least one additional frame, by default the first additional frame of the base link is added as a <bold>parent</bold> fake URDF link, instead as a <bold>child</bold> fake URDF link as done with the rest of iDynTree&apos;s additional frames. If no additional frame is available for the base link, the base link of the URDF will have a mass, and will generate a warning then used with the ROS&apos;s <ulink url="https://github.com/ros/kdl_parser"><computeroutput>kdl_parser</computeroutput></ulink> . This behaviour can be disabled by setting to false the <computeroutput>exportFirstBaseLinkAdditionalFrameAsFakeURDFBase</computeroutput> attribute of <ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref>. </para>
+</sect2>
+</sect1>
+    </detaileddescription>
+    <location file="iDynTree/ModelIO/ModelExporter.h" line="113" column="1" bodyfile="iDynTree/ModelIO/ModelExporter.h" bodystart="114" bodyend="195"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1ModelExporter_1ac7eee90d88819d3697225c412d6717d0" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporter</scope><name>exportingOptions</name></member>
+      <member refid="classiDynTree_1_1ModelExporter_1ad528cdb40626b05dabd44ada1f322692" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporter</scope><name>exportModelToFile</name></member>
+      <member refid="classiDynTree_1_1ModelExporter_1ab5523d12f0411456625313c8e51f8d8b" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporter</scope><name>exportModelToString</name></member>
+      <member refid="classiDynTree_1_1ModelExporter_1a9fb6599971ddb3e6b081321952818042" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporter</scope><name>init</name></member>
+      <member refid="classiDynTree_1_1ModelExporter_1abcbf9a179e9f6a2da5c2fc59ea2c83e4" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporter</scope><name>isValid</name></member>
+      <member refid="classiDynTree_1_1ModelExporter_1ac60db32473a7c24daac48ac9627563db" prot="private" virt="non-virtual"><scope>iDynTree::ModelExporter</scope><name>m_pimpl</name></member>
+      <member refid="classiDynTree_1_1ModelExporter_1a2a8eff680e7a14c66dafe5a9360d89a8" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporter</scope><name>model</name></member>
+      <member refid="classiDynTree_1_1ModelExporter_1afb8051cba34b2e3e60d0b375c0e790bf" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporter</scope><name>ModelExporter</name></member>
+      <member refid="classiDynTree_1_1ModelExporter_1a8c208f8c87d5f6fae8faef6460a561ef" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporter</scope><name>sensors</name></member>
+      <member refid="classiDynTree_1_1ModelExporter_1aa7babe5fc2794ed01d3ba46c4a0ae041" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporter</scope><name>setExportingOptions</name></member>
+      <member refid="classiDynTree_1_1ModelExporter_1a0797985ef2e2cebb8bf25c0c0e4ed18b" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporter</scope><name>~ModelExporter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

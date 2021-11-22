@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_cfadca6e97d0bca47f319c90dd0dd9db" kind="dir">
+    <compoundname>iDynTree/Optimizers</compoundname>
+    <innerfile refid="AlglibInterface_8h">AlglibInterface.h</innerfile>
+    <innerfile refid="IpoptInterface_8h">IpoptInterface.h</innerfile>
+    <innerfile refid="OsqpInterface_8h">OsqpInterface.h</innerfile>
+    <innerfile refid="WorhpInterface_8h">WorhpInterface.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Optimizers/"/>
+  </compounddef>
+</doxygen>

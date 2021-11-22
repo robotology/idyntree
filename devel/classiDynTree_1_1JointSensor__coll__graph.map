@@ -1,4 +1,0 @@
-<map id="iDynTree::JointSensor" name="iDynTree::JointSensor">
-<area shape="rect" id="node1" title="Interface for Sensor that are associated to a Joint." alt="" coords="5,80,165,107"/>
-<area shape="rect" id="node2" href="$classiDynTree_1_1Sensor.html" title="Interface for Sensor classes in iDynTree ." alt="" coords="20,5,151,32"/>
-</map>

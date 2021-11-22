@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::optimalcontrol::integrators::CollocationHessianIndex</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex_1aa42e4513fa791d8366057d742ee335dd" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t iDynTree::optimalcontrol::integrators::CollocationHessianIndex::m_first</definition>
+        <argsstring></argsstring>
+        <name>m_first</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="111" column="24" bodyfile="iDynTree/Integrator.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex_1a7dd252c9aa27ef9a7336721417bd988f" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t iDynTree::optimalcontrol::integrators::CollocationHessianIndex::m_second</definition>
+        <argsstring></argsstring>
+        <name>m_second</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="112" column="24" bodyfile="iDynTree/Integrator.h" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex_1af60bc2893f839a14b141c16821ac7a13" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::integrators::CollocationHessianIndex::CollocationHessianIndex</definition>
+        <argsstring>()=delete</argsstring>
+        <name>CollocationHessianIndex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="116" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex_1ab2fb941b5f2ca3e2819c5fb3cdd6e7c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::integrators::CollocationHessianIndex::CollocationHessianIndex</definition>
+        <argsstring>(size_t first, size_t second)</argsstring>
+        <name>CollocationHessianIndex</name>
+        <param>
+          <type>size_t</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>second</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="118" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex_1aab39ac7479d2ce7b28a263d6d661f6b0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::integrators::CollocationHessianIndex::operator&lt;</definition>
+        <argsstring>(const CollocationHessianIndex &amp;rhs) const</argsstring>
+        <name>operator&lt;</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex" kindref="compound">CollocationHessianIndex</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="120" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex_1aedc919144a19ad3e4842dc926cb4c69d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::optimalcontrol::integrators::CollocationHessianIndex::first</definition>
+        <argsstring>() const</argsstring>
+        <name>first</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="122" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex_1a2a1a49e122b10a948b46d9eb88ae4598" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::optimalcontrol::integrators::CollocationHessianIndex::second</definition>
+        <argsstring>() const</argsstring>
+        <name>second</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="124" column="24"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Integrator.h" line="110" column="13" bodyfile="iDynTree/Integrator.h" bodystart="110" bodyend="125"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex_1af60bc2893f839a14b141c16821ac7a13" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::CollocationHessianIndex</scope><name>CollocationHessianIndex</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex_1ab2fb941b5f2ca3e2819c5fb3cdd6e7c0" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::CollocationHessianIndex</scope><name>CollocationHessianIndex</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex_1aedc919144a19ad3e4842dc926cb4c69d" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::CollocationHessianIndex</scope><name>first</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex_1aa42e4513fa791d8366057d742ee335dd" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::CollocationHessianIndex</scope><name>m_first</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex_1a7dd252c9aa27ef9a7336721417bd988f" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::CollocationHessianIndex</scope><name>m_second</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex_1aab39ac7479d2ce7b28a263d6d661f6b0" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::CollocationHessianIndex</scope><name>operator&lt;</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex_1a2a1a49e122b10a948b46d9eb88ae4598" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::CollocationHessianIndex</scope><name>second</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

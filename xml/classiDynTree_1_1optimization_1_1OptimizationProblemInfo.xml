@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimization_1_1OptimizationProblemInfo" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::optimization::OptimizationProblemInfo</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1affda64855e09a2b5b6c079e5c0f8c38e" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimization_1_1OptimizationProblemInfoData" kindref="compound">OptimizationProblemInfoData</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;OptimizationProblemInfoData&gt; iDynTree::optimization::OptimizationProblemInfo::m_data</definition>
+        <argsstring></argsstring>
+        <name>m_data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimizationProblem.h" line="61" column="29" bodyfile="iDynTree/OptimizationProblem.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1a1ee3914e8cf6e63d2d7534ead8f33661" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimization::OptimizationProblemInfo::OptimizationProblemInfo</definition>
+        <argsstring>(std::shared_ptr&lt; OptimizationProblemInfoData &gt; data)</argsstring>
+        <name>OptimizationProblemInfo</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimization_1_1OptimizationProblemInfoData" kindref="compound">OptimizationProblemInfoData</ref> &gt;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimizationProblem.h" line="63" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1a171939b84a2d70892a4d08594b3bdd25" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimization::OptimizationProblemInfo::OptimizationProblemInfo</definition>
+        <argsstring>()=delete</argsstring>
+        <name>OptimizationProblemInfo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimizationProblem.h" line="65" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1ae97c3bc302bb0dace5ddb128bbff1cb6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimization::OptimizationProblemInfo::OptimizationProblemInfo</definition>
+        <argsstring>(const OptimizationProblemInfo &amp;other)=delete</argsstring>
+        <name>OptimizationProblemInfo</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimization_1_1OptimizationProblemInfo" kindref="compound">OptimizationProblemInfo</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimizationProblem.h" line="67" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1a25cbea0758f0bef437ed38b5a737be1b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::OptimizationProblemInfo::hasLinearConstraints</definition>
+        <argsstring>() const</argsstring>
+        <name>hasLinearConstraints</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimizationProblem.h" line="69" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1aa506b682bc43707324352b820ce57d10" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::OptimizationProblemInfo::hasNonLinearConstraints</definition>
+        <argsstring>() const</argsstring>
+        <name>hasNonLinearConstraints</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimizationProblem.h" line="71" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1ad00d6ded2c25cb08f85415fd923b11d7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::OptimizationProblemInfo::costIsLinear</definition>
+        <argsstring>() const</argsstring>
+        <name>costIsLinear</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimizationProblem.h" line="73" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1a39a9d027984958096f297b96a1b4f45f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::OptimizationProblemInfo::costIsQuadratic</definition>
+        <argsstring>() const</argsstring>
+        <name>costIsQuadratic</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimizationProblem.h" line="75" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1a49337ee241bdd763596b91d497e333e3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::OptimizationProblemInfo::costIsNonLinear</definition>
+        <argsstring>() const</argsstring>
+        <name>costIsNonLinear</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimizationProblem.h" line="77" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1a493519e80848f076a4f1c99ac07321c4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::OptimizationProblemInfo::hasSparseConstraintJacobian</definition>
+        <argsstring>() const</argsstring>
+        <name>hasSparseConstraintJacobian</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimizationProblem.h" line="79" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1aa91a3afea8b4a95903c40878a49d1a3f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::OptimizationProblemInfo::hasSparseHessian</definition>
+        <argsstring>() const</argsstring>
+        <name>hasSparseHessian</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimizationProblem.h" line="81" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1afe9b1a57f3b7ff07228c875590db5789" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::OptimizationProblemInfo::hessianIsProvided</definition>
+        <argsstring>() const</argsstring>
+        <name>hessianIsProvided</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/OptimizationProblem.h" line="83" column="18"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/OptimizationProblem.h" line="59" column="9" bodyfile="iDynTree/OptimizationProblem.h" bodystart="59" bodyend="84"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1ad00d6ded2c25cb08f85415fd923b11d7" prot="public" virt="non-virtual"><scope>iDynTree::optimization::OptimizationProblemInfo</scope><name>costIsLinear</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1a49337ee241bdd763596b91d497e333e3" prot="public" virt="non-virtual"><scope>iDynTree::optimization::OptimizationProblemInfo</scope><name>costIsNonLinear</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1a39a9d027984958096f297b96a1b4f45f" prot="public" virt="non-virtual"><scope>iDynTree::optimization::OptimizationProblemInfo</scope><name>costIsQuadratic</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1a25cbea0758f0bef437ed38b5a737be1b" prot="public" virt="non-virtual"><scope>iDynTree::optimization::OptimizationProblemInfo</scope><name>hasLinearConstraints</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1aa506b682bc43707324352b820ce57d10" prot="public" virt="non-virtual"><scope>iDynTree::optimization::OptimizationProblemInfo</scope><name>hasNonLinearConstraints</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1a493519e80848f076a4f1c99ac07321c4" prot="public" virt="non-virtual"><scope>iDynTree::optimization::OptimizationProblemInfo</scope><name>hasSparseConstraintJacobian</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1aa91a3afea8b4a95903c40878a49d1a3f" prot="public" virt="non-virtual"><scope>iDynTree::optimization::OptimizationProblemInfo</scope><name>hasSparseHessian</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1afe9b1a57f3b7ff07228c875590db5789" prot="public" virt="non-virtual"><scope>iDynTree::optimization::OptimizationProblemInfo</scope><name>hessianIsProvided</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1affda64855e09a2b5b6c079e5c0f8c38e" prot="private" virt="non-virtual"><scope>iDynTree::optimization::OptimizationProblemInfo</scope><name>m_data</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1a1ee3914e8cf6e63d2d7534ead8f33661" prot="public" virt="non-virtual"><scope>iDynTree::optimization::OptimizationProblemInfo</scope><name>OptimizationProblemInfo</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1a171939b84a2d70892a4d08594b3bdd25" prot="public" virt="non-virtual"><scope>iDynTree::optimization::OptimizationProblemInfo</scope><name>OptimizationProblemInfo</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1OptimizationProblemInfo_1ae97c3bc302bb0dace5ddb128bbff1cb6" prot="public" virt="non-virtual"><scope>iDynTree::optimization::OptimizationProblemInfo</scope><name>OptimizationProblemInfo</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

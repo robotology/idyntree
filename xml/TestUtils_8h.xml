@@ -1,0 +1,969 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="TestUtils_8h" kind="file" language="C++">
+    <compoundname>TestUtils.h</compoundname>
+    <includes refid="MatrixDynSize_8h" local="no">iDynTree/Core/MatrixDynSize.h</includes>
+    <includes refid="Utils_8h" local="no">iDynTree/Core/Utils.h</includes>
+    <includes local="no">algorithm</includes>
+    <includes local="no">iomanip</includes>
+    <includes local="no">iostream</includes>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
+    <includes local="no">cstdlib</includes>
+    <includes local="no">cmath</includes>
+    <includedby refid="ModelTestUtils_8h" local="no">iDynTree/Model/ModelTestUtils.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>iomanip</label>
+      </node>
+      <node id="8">
+        <label>cmath</label>
+      </node>
+      <node id="5">
+        <label>string</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/Core/TestUtils.h</label>
+        <link refid="TestUtils_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>vector</label>
+      </node>
+      <node id="7">
+        <label>cstdlib</label>
+      </node>
+      <node id="4">
+        <label>iostream</label>
+      </node>
+      <node id="2">
+        <label>algorithm</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structiDynTree_1_1TestMatrixMismatch" prot="public">iDynTree::TestMatrixMismatch</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="TestUtils_8h_1a187efc872711557e58cc6e85475ec53f" prot="public" static="no">
+        <name>ASSERT_IS_TRUE</name>
+        <param><defname>prop</defname></param>
+        <initializer>iDynTree::assertTrue(prop,__FILE__,__LINE__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="40" column="9" bodyfile="iDynTree/Core/TestUtils.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="TestUtils_8h_1a6bd7df9ed662cc61bb377703a5476a5f" prot="public" static="no">
+        <name>ASSERT_IS_FALSE</name>
+        <param><defname>prop</defname></param>
+        <initializer>iDynTree::assertTrue(!(prop),__FILE__,__LINE__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="41" column="9" bodyfile="iDynTree/Core/TestUtils.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="TestUtils_8h_1ab6e6df4db528a1a4e2392fc726d69243" prot="public" static="no">
+        <name>ASSERT_EQUAL_STRING</name>
+        <param><defname>val1</defname></param>
+        <param><defname>val2</defname></param>
+        <initializer>iDynTree::assertStringAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="42" column="9" bodyfile="iDynTree/Core/TestUtils.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="TestUtils_8h_1a8358fe401a2b1aecfe83504deea8579f" prot="public" static="no">
+        <name>ASSERT_EQUAL_DOUBLE</name>
+        <param><defname>val1</defname></param>
+        <param><defname>val2</defname></param>
+        <initializer>iDynTree::assertDoubleAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="43" column="9" bodyfile="iDynTree/Core/TestUtils.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="TestUtils_8h_1abfd2b5a0c975689666d785260b7512fb" prot="public" static="no">
+        <name>ASSERT_EQUAL_DOUBLE_TOL</name>
+        <param><defname>val1</defname></param>
+        <param><defname>val2</defname></param>
+        <param><defname>tol</defname></param>
+        <initializer>iDynTree::assertDoubleAreEqual(val1,val2,tol,__FILE__,__LINE__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="44" column="9" bodyfile="iDynTree/Core/TestUtils.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="TestUtils_8h_1a2845c548a6ff5828b1e521aed1c4cf08" prot="public" static="no">
+        <name>ASSERT_EQUAL_VECTOR</name>
+        <param><defname>val1</defname></param>
+        <param><defname>val2</defname></param>
+        <initializer>assertVectorAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="45" column="9" bodyfile="iDynTree/Core/TestUtils.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="TestUtils_8h_1ab13d2e5a259c103fd03e24f6a95d5212" prot="public" static="no">
+        <name>ASSERT_EQUAL_VECTOR_TOL</name>
+        <param><defname>val1</defname></param>
+        <param><defname>val2</defname></param>
+        <param><defname>tol</defname></param>
+        <initializer>assertVectorAreEqual(val1,val2,tol,__FILE__,__LINE__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="46" column="9" bodyfile="iDynTree/Core/TestUtils.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="TestUtils_8h_1a2f0028972e244cb04d56af33b61a45fd" prot="public" static="no">
+        <name>ASSERT_EQUAL_VECTOR_REL_TOL</name>
+        <param><defname>val1</defname></param>
+        <param><defname>val2</defname></param>
+        <param><defname>relTol</defname></param>
+        <param><defname>minAbsTol</defname></param>
+        <initializer>assertVectorAreEqualWithRelativeTol(val1,val2,relTol,minAbsTol,__FILE__,__LINE__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="47" column="9" bodyfile="iDynTree/Core/TestUtils.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="TestUtils_8h_1a0c45c03414419c518b44c8a386aed6a6" prot="public" static="no">
+        <name>ASSERT_EQUAL_SPATIAL_MOTION</name>
+        <param><defname>val1</defname></param>
+        <param><defname>val2</defname></param>
+        <initializer>assertSpatialMotionAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="48" column="9" bodyfile="iDynTree/Core/TestUtils.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="TestUtils_8h_1a0020d3bf4ab892c0a95af429d92e0330" prot="public" static="no">
+        <name>ASSERT_EQUAL_SPATIAL_FORCE</name>
+        <param><defname>val1</defname></param>
+        <param><defname>val2</defname></param>
+        <initializer>assertSpatialForceAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="49" column="9" bodyfile="iDynTree/Core/TestUtils.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="TestUtils_8h_1a89834a776ba0a06401b30d32b2e3698b" prot="public" static="no">
+        <name>ASSERT_EQUAL_SPATIAL_FORCE_TOL</name>
+        <param><defname>val1</defname></param>
+        <param><defname>val2</defname></param>
+        <param><defname>tol</defname></param>
+        <initializer>assertSpatialForceAreEqual(val1,val2,tol,__FILE__,__LINE__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="50" column="9" bodyfile="iDynTree/Core/TestUtils.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="TestUtils_8h_1a68e554e8d27aca5a55c7a29621e93306" prot="public" static="no">
+        <name>ASSERT_EQUAL_MATRIX</name>
+        <param><defname>val1</defname></param>
+        <param><defname>val2</defname></param>
+        <initializer>assertMatrixAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="51" column="9" bodyfile="iDynTree/Core/TestUtils.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="TestUtils_8h_1a9a977b732f304f9f725a068cbf474eff" prot="public" static="no">
+        <name>ASSERT_EQUAL_MATRIX_TOL</name>
+        <param><defname>val1</defname></param>
+        <param><defname>val2</defname></param>
+        <param><defname>tol</defname></param>
+        <initializer>assertMatrixAreEqual(val1,val2,tol,__FILE__,__LINE__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="52" column="9" bodyfile="iDynTree/Core/TestUtils.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="TestUtils_8h_1a42c3c48d507c766d464ccf2502c6031c" prot="public" static="no">
+        <name>ASSERT_EQUAL_TRANSFORM</name>
+        <param><defname>val1</defname></param>
+        <param><defname>val2</defname></param>
+        <initializer>assertTransformsAreEqual(val1,val2,iDynTree::DEFAULT_TOL,__FILE__,__LINE__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="53" column="9" bodyfile="iDynTree/Core/TestUtils.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="TestUtils_8h_1a7747a8a71ec7815e6558bf6f6295f6b3" prot="public" static="no">
+        <name>ASSERT_EQUAL_TRANSFORM_TOL</name>
+        <param><defname>val1</defname></param>
+        <param><defname>val2</defname></param>
+        <param><defname>tol</defname></param>
+        <initializer>assertTransformsAreEqual(val1,val2,tol,__FILE__,__LINE__)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="54" column="9" bodyfile="iDynTree/Core/TestUtils.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="TestUtils_8h_1a43c6e7afb45c2e3d1430924cf65c4b14" prot="public" static="no">
+        <name>IDYNTREE_MATCH_CHARACTER</name>
+        <initializer>&quot;\u2714&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="233" column="9"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="TestUtils_8h_1a668ee99a790b7af845958d4673161135" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::assertStringAreEqual</definition>
+        <argsstring>(const std::string &amp;val1, const std::string &amp;val2, double tol=DEFAULT_TOL, std::string file=&quot;&quot;, int line=-1)</argsstring>
+        <name>assertStringAreEqual</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>val1</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>val2</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>tol</declname>
+          <defval>DEFAULT_TOL</defval>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>file</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="66" column="10" declfile="iDynTree/Core/TestUtils.h" declline="66" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1a274077496ffac0ee45107923c3fe9cee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::assertDoubleAreEqual</definition>
+        <argsstring>(const double &amp;val1, const double &amp;val2, double tol=DEFAULT_TOL, std::string file=&quot;&quot;, int line=-1)</argsstring>
+        <name>assertDoubleAreEqual</name>
+        <param>
+          <type>const double &amp;</type>
+          <declname>val1</declname>
+        </param>
+        <param>
+          <type>const double &amp;</type>
+          <declname>val2</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>tol</declname>
+          <defval>DEFAULT_TOL</defval>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>file</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="69" column="10" declfile="iDynTree/Core/TestUtils.h" declline="69" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1ac18550f459dae84f3a502274b39193cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::assertTransformsAreEqual</definition>
+        <argsstring>(const Transform &amp;trans1, const Transform &amp;trans2, double tol=DEFAULT_TOL, std::string file=&quot;&quot;, int line=-1)</argsstring>
+        <name>assertTransformsAreEqual</name>
+        <param>
+          <type>const Transform &amp;</type>
+          <declname>trans1</declname>
+        </param>
+        <param>
+          <type>const Transform &amp;</type>
+          <declname>trans2</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>tol</declname>
+          <defval>DEFAULT_TOL</defval>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>file</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+<para>Assert that two transforms are equal, and exit with EXIT_FAILURE if they are not. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="76" column="10" declfile="iDynTree/Core/TestUtils.h" declline="76" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1ae326a16295b6efe5e6023665cb2a012f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::assertSpatialMotionAreEqual</definition>
+        <argsstring>(const SpatialMotionVector &amp;t1, const SpatialMotionVector &amp;t2, double tol=DEFAULT_TOL, std::string file=&quot;&quot;, int line=-1)</argsstring>
+        <name>assertSpatialMotionAreEqual</name>
+        <param>
+          <type>const SpatialMotionVector &amp;</type>
+          <declname>t1</declname>
+        </param>
+        <param>
+          <type>const SpatialMotionVector &amp;</type>
+          <declname>t2</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>tol</declname>
+          <defval>DEFAULT_TOL</defval>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>file</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+<para>Assert that two spatial motion vectors are equal, and exit with EXIT_FAILURE if they are not. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="83" column="10" declfile="iDynTree/Core/TestUtils.h" declline="83" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1a0c0a527efda465b7b190e726c148b5dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::assertSpatialForceAreEqual</definition>
+        <argsstring>(const SpatialForceVector &amp;f1, const SpatialForceVector &amp;f2, double tol=DEFAULT_TOL, std::string file=&quot;&quot;, int line=-1)</argsstring>
+        <name>assertSpatialForceAreEqual</name>
+        <param>
+          <type>const SpatialForceVector &amp;</type>
+          <declname>f1</declname>
+        </param>
+        <param>
+          <type>const SpatialForceVector &amp;</type>
+          <declname>f2</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>tol</declname>
+          <defval>DEFAULT_TOL</defval>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>file</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+<para>Assert that two spatial force vectors are equal, and exit with EXIT_FAILURE if they are not. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="90" column="10" declfile="iDynTree/Core/TestUtils.h" declline="90" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1a1289062400b0dd99e49653356d569e8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::assertTrue</definition>
+        <argsstring>(bool prop, std::string file=&quot;&quot;, int line=-1)</argsstring>
+        <name>assertTrue</name>
+        <param>
+          <type>bool</type>
+          <declname>prop</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>file</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="92" column="10" declfile="iDynTree/Core/TestUtils.h" declline="92" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1a2296e58922e46f4fc2d91689f9e59da9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::getRandomBool</definition>
+        <argsstring>()</argsstring>
+        <name>getRandomBool</name>
+        <briefdescription>
+<para>Get random bool. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="97" column="10" declfile="iDynTree/Core/TestUtils.h" declline="97" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1a051e689c0d7974b18929629680c95619" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::getRandomDouble</definition>
+        <argsstring>(double min=0.0, double max=1.0)</argsstring>
+        <name>getRandomDouble</name>
+        <param>
+          <type>double</type>
+          <declname>min</declname>
+          <defval>0.0</defval>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>max</declname>
+          <defval>1.0</defval>
+        </param>
+        <briefdescription>
+<para>Get a random double between min and max . </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="102" column="12" declfile="iDynTree/Core/TestUtils.h" declline="102" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1ab3920b4ee524d6bb9062435d7c9d7065" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int iDynTree::getRandomInteger</definition>
+        <argsstring>(int min, int max)</argsstring>
+        <name>getRandomInteger</name>
+        <param>
+          <type>int</type>
+          <declname>min</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+<para>Get a random integer between min and max (included). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For example a dice could be simulated with getRandomInteger(1,6); </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="108" column="9" declfile="iDynTree/Core/TestUtils.h" declline="108" declcolumn="9"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1a30e37efb8be6e98f4bf9aabd7493748c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename VectorType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void iDynTree::getRandomVector</definition>
+        <argsstring>(VectorType &amp;vec, double min=0.0, double max=1.0)</argsstring>
+        <name>getRandomVector</name>
+        <param>
+          <type>VectorType &amp;</type>
+          <declname>vec</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>min</declname>
+          <defval>0.0</defval>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>max</declname>
+          <defval>1.0</defval>
+        </param>
+        <briefdescription>
+<para>Fill a vector with random double. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="114" column="10" bodyfile="iDynTree/Core/TestUtils.h" bodystart="114" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1a8960c4bd871d87f67470f2ab8f8b5e8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename MatrixType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void iDynTree::getRandomMatrix</definition>
+        <argsstring>(MatrixType &amp;mat)</argsstring>
+        <name>getRandomMatrix</name>
+        <param>
+          <type>MatrixType &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <briefdescription>
+<para>Fill a matrix of random doubles. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="126" column="10" bodyfile="iDynTree/Core/TestUtils.h" bodystart="126" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1a553049a8d951cbad14dd59168935a7b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Position</type>
+        <definition>Position iDynTree::getRandomPosition</definition>
+        <argsstring>()</argsstring>
+        <name>getRandomPosition</name>
+        <briefdescription>
+<para>Get a random position. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="140" column="14" declfile="iDynTree/Core/TestUtils.h" declline="140" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1a9929fdbd53800f02bd76305f9d985942" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Rotation</type>
+        <definition>Rotation iDynTree::getRandomRotation</definition>
+        <argsstring>()</argsstring>
+        <name>getRandomRotation</name>
+        <briefdescription>
+<para>Get a random rotation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="145" column="14" declfile="iDynTree/Core/TestUtils.h" declline="145" declcolumn="14"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1a977a15d73114a87fd6705dd9a8f7c736" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Transform</type>
+        <definition>Transform iDynTree::getRandomTransform</definition>
+        <argsstring>()</argsstring>
+        <name>getRandomTransform</name>
+        <briefdescription>
+<para>Get a random transform. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="150" column="15" declfile="iDynTree/Core/TestUtils.h" declline="150" declcolumn="15"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1ae4c3a6982c0bec99386eb3f4c05632d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Axis</type>
+        <definition>Axis iDynTree::getRandomAxis</definition>
+        <argsstring>()</argsstring>
+        <name>getRandomAxis</name>
+        <briefdescription>
+<para>Get a random axis. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="155" column="10" declfile="iDynTree/Core/TestUtils.h" declline="155" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1a293fa271f52f72d795f4858b34273ed6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SpatialInertia</type>
+        <definition>SpatialInertia iDynTree::getRandomInertia</definition>
+        <argsstring>()</argsstring>
+        <name>getRandomInertia</name>
+        <briefdescription>
+<para>Get a random (but physically consistent) inertia. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="160" column="20" declfile="iDynTree/Core/TestUtils.h" declline="160" declcolumn="20"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1a088ed6a480496334ee1dd51f088c6bb8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SpatialMotionVector</type>
+        <definition>SpatialMotionVector iDynTree::getRandomTwist</definition>
+        <argsstring>()</argsstring>
+        <name>getRandomTwist</name>
+        <briefdescription>
+<para>Get a random twist-like 6D vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="165" column="25" declfile="iDynTree/Core/TestUtils.h" declline="165" declcolumn="25"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1a04bcdc7077b46c1944825327875cb65b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SpatialForceVector</type>
+        <definition>SpatialForceVector iDynTree::getRandomWrench</definition>
+        <argsstring>()</argsstring>
+        <name>getRandomWrench</name>
+        <briefdescription>
+<para>Get a random wrench-like 6D object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="170" column="24" declfile="iDynTree/Core/TestUtils.h" declline="170" declcolumn="24"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1a91197a36381e2fa990a0b54da40abee9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename VectorType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void iDynTree::printVector</definition>
+        <argsstring>(std::string, const VectorType &amp;vec)</argsstring>
+        <name>printVector</name>
+        <param>
+          <type>std::string</type>
+        </param>
+        <param>
+          <type>const VectorType &amp;</type>
+          <declname>vec</declname>
+        </param>
+        <briefdescription>
+<para>Helper for printing vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="176" column="10" bodyfile="iDynTree/Core/TestUtils.h" bodystart="176" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1a2e5af240e2fab62a2527d450c4bdcabd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename VectorType1</type>
+          </param>
+          <param>
+            <type>typename VectorType2</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void iDynTree::printVectorDifference</definition>
+        <argsstring>(std::string name, const VectorType1 &amp;vec1, const VectorType2 &amp;vec2)</argsstring>
+        <name>printVectorDifference</name>
+        <param>
+          <type>std::string</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const VectorType1 &amp;</type>
+          <declname>vec1</declname>
+        </param>
+        <param>
+          <type>const VectorType2 &amp;</type>
+          <declname>vec2</declname>
+        </param>
+        <briefdescription>
+<para>Helper for printing difference of two vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="189" column="10" bodyfile="iDynTree/Core/TestUtils.h" bodystart="189" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1aa25d97acb2792de12937a70d01e75ae7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::printVectorWrongElements</definition>
+        <argsstring>(std::string name, std::vector&lt; bool &gt; &amp;correctElems)</argsstring>
+        <name>printVectorWrongElements</name>
+        <param>
+          <type>std::string</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; bool &gt; &amp;</type>
+          <declname>correctElems</declname>
+        </param>
+        <briefdescription>
+<para>Helper for printing the patter of wrong elements in between two vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="209" column="17" bodyfile="iDynTree/Core/TestUtils.h" bodystart="209" bodyend="224"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1a456896bb82abd7daca7ac57546380e94" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::printMatrixWrongElements</definition>
+        <argsstring>(std::string name, std::vector&lt; std::vector&lt; TestMatrixMismatch &gt; &gt; &amp;correctElems)</argsstring>
+        <name>printMatrixWrongElements</name>
+        <param>
+          <type>std::string</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::vector&lt; TestMatrixMismatch &gt; &gt; &amp;</type>
+          <declname>correctElems</declname>
+        </param>
+        <briefdescription>
+<para>Helper for printing the patter of wrong elements in between two matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="230" column="17" bodyfile="iDynTree/Core/TestUtils.h" bodystart="230" bodyend="260"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1a004eafd55ec8125ba2842dc2458088be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename MatrixType1</type>
+          </param>
+          <param>
+            <type>typename MatrixType2</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void iDynTree::printMatrixPercentageError</definition>
+        <argsstring>(const MatrixType1 &amp;mat1, const MatrixType2 &amp;mat2)</argsstring>
+        <name>printMatrixPercentageError</name>
+        <param>
+          <type>const MatrixType1 &amp;</type>
+          <declname>mat1</declname>
+        </param>
+        <param>
+          <type>const MatrixType2 &amp;</type>
+          <declname>mat2</declname>
+        </param>
+        <briefdescription>
+<para>Helper for printing the patter of wrong elements in between two matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="267" column="10" bodyfile="iDynTree/Core/TestUtils.h" bodystart="267" bodyend="283"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1aa20d8a80e1de786a905ee0e897e45586" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename VectorType1</type>
+          </param>
+          <param>
+            <type>typename VectorType2</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void iDynTree::assertVectorAreEqual</definition>
+        <argsstring>(const VectorType1 &amp;vec1, const VectorType2 &amp;vec2, double tol, std::string file, int line)</argsstring>
+        <name>assertVectorAreEqual</name>
+        <param>
+          <type>const VectorType1 &amp;</type>
+          <declname>vec1</declname>
+        </param>
+        <param>
+          <type>const VectorType2 &amp;</type>
+          <declname>vec2</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>tol</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>file</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Assert that two vectors are equal, and exit with EXIT_FAILURE if they are not. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="291" column="10" bodyfile="iDynTree/Core/TestUtils.h" bodystart="291" bodyend="321"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1a6b4c4d79f076ed9013708a5ab40e9273" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename VectorType1</type>
+          </param>
+          <param>
+            <type>typename VectorType2</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void iDynTree::assertVectorAreEqualWithRelativeTol</definition>
+        <argsstring>(const VectorType1 &amp;vec1, const VectorType2 &amp;vec2, double relativeTol, double minAbsoluteTol, std::string file, int line)</argsstring>
+        <name>assertVectorAreEqualWithRelativeTol</name>
+        <param>
+          <type>const VectorType1 &amp;</type>
+          <declname>vec1</declname>
+        </param>
+        <param>
+          <type>const VectorType2 &amp;</type>
+          <declname>vec2</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>relativeTol</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>minAbsoluteTol</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>file</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Assert that two vectors are equal, and exit with EXIT_FAILURE if they are not. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The tolerance passed in this function is a relative tolerance on the max element of the comparison, i.e. absoluteTol = max(relativeTol*max(val1,val2), minAbsoluteTol) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="330" column="10" bodyfile="iDynTree/Core/TestUtils.h" bodystart="330" bodyend="361"/>
+      </memberdef>
+      <memberdef kind="function" id="TestUtils_8h_1ac3a22c22491b65545bdfbab336950530" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename MatrixType1</type>
+          </param>
+          <param>
+            <type>typename MatrixType2</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void iDynTree::assertMatrixAreEqual</definition>
+        <argsstring>(const MatrixType1 &amp;mat1, const MatrixType2 &amp;mat2, double tol, std::string file, int line)</argsstring>
+        <name>assertMatrixAreEqual</name>
+        <param>
+          <type>const MatrixType1 &amp;</type>
+          <declname>mat1</declname>
+        </param>
+        <param>
+          <type>const MatrixType2 &amp;</type>
+          <declname>mat2</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>tol</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>file</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>Assert that two matrices are equal, and exit with EXIT_FAILURE if they are not. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/TestUtils.h" line="369" column="10" bodyfile="iDynTree/Core/TestUtils.h" bodystart="369" bodyend="405"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/TestUtils.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,1032 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1SparseMatrix" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::SparseMatrix</compoundname>
+    <includes local="no">iDynTree/Core/SparseMatrix.h</includes>
+    <innerclass refid="classiDynTree_1_1SparseMatrix_1_1ConstIterator" prot="public">iDynTree::SparseMatrix::ConstIterator</innerclass>
+    <innerclass refid="classiDynTree_1_1SparseMatrix_1_1Iterator" prot="public">iDynTree::SparseMatrix::Iterator</innerclass>
+    <templateparamlist>
+      <param>
+        <type>iDynTree::MatrixStorageOrdering</type>
+        <declname>ordering</declname>
+        <defname>ordering</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classiDynTree_1_1SparseMatrix_1a24f2ff77f8a365363a8e653aa0eb4fc6" prot="public" static="no">
+        <type><ref refid="classiDynTree_1_1SparseMatrix_1_1Iterator" kindref="compound">Iterator</ref></type>
+        <definition>typedef Iterator iDynTree::SparseMatrix&lt; ordering &gt;::iterator</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="270" column="22" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="268" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classiDynTree_1_1SparseMatrix_1ac0c797f9d94c6c57f2960b171979e653" prot="public" static="no">
+        <type><ref refid="classiDynTree_1_1SparseMatrix_1_1ConstIterator" kindref="compound">ConstIterator</ref></type>
+        <definition>typedef ConstIterator iDynTree::SparseMatrix&lt; ordering &gt;::const_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="271" column="27" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="271" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1SparseMatrix_1abf1ba539a688d5243f0635d78d4a4cb0" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
+        <definition>iDynTree::VectorDynSize iDynTree::SparseMatrix&lt; ordering &gt;::m_values</definition>
+        <argsstring></argsstring>
+        <name>m_values</name>
+        <briefdescription>
+<para>Contains all the non zero (NZ) elements. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="43" column="29" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SparseMatrix_1a0588cded62c075e1bf3b877c2b274125" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; iDynTree::SparseMatrix&lt; ordering &gt;::m_innerIndices</definition>
+        <argsstring></argsstring>
+        <name>m_innerIndices</name>
+        <briefdescription>
+<para>column index of the NZ elements <linebreak/>
+ </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="45" column="17" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SparseMatrix_1aea1e508066b17d84a9e167e79847cf3a" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; iDynTree::SparseMatrix&lt; ordering &gt;::m_outerStarts</definition>
+        <argsstring></argsstring>
+        <name>m_outerStarts</name>
+        <briefdescription>
+<para>for each row contains the index of the first NZ in the previous two arrays </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="46" column="17" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SparseMatrix_1a86fc38b6dea5fcb388c7679595fef329" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t iDynTree::SparseMatrix&lt; ordering &gt;::m_allocatedSize</definition>
+        <argsstring></argsstring>
+        <name>m_allocatedSize</name>
+        <briefdescription>
+<para>size of the memory allocated for m_values and m_innerIndices </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="51" column="17" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SparseMatrix_1a049d6fe4a9710f4e40260379c646ee6f" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t iDynTree::SparseMatrix&lt; ordering &gt;::m_rows</definition>
+        <argsstring></argsstring>
+        <name>m_rows</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="53" column="17" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SparseMatrix_1aebbdae0a0f21a4b5c1ba506a68d7fd87" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t iDynTree::SparseMatrix&lt; ordering &gt;::m_columns</definition>
+        <argsstring></argsstring>
+        <name>m_columns</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="54" column="17" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a8ddd7214a52040b046cecf691dd1b0ae" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SparseMatrix&lt; ordering &gt;::initializeMatrix</definition>
+        <argsstring>(std::size_t outerSize, const double *vector, std::size_t vectorSize)</argsstring>
+        <name>initializeMatrix</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>outerSize</declname>
+        </param>
+        <param>
+          <type>const double *</type>
+          <declname>vector</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>vectorSize</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="56" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1aecc7b6b4a639cbabbdf786a6eb93d332" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t iDynTree::SparseMatrix&lt; ordering &gt;::insert</definition>
+        <argsstring>(std::size_t row, std::size_t col, double value)</argsstring>
+        <name>insert</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>row</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>col</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>Insert a new element at the specified position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It returns the index in m_values of the inserted element <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>row</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>row of the new element </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>col</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>column of the new element </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>value to be inserted </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>index in m_values of the inserted element </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="67" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a351ac8ff6ea79ef48784a2ce656a17e6" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SparseMatrix&lt; ordering &gt;::valueIndexForOuterAndInnerIndices</definition>
+        <argsstring>(std::size_t outerIndex, std::size_t innerIndex, std::size_t &amp;valueIndex) const</argsstring>
+        <name>valueIndexForOuterAndInnerIndices</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>outerIndex</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>innerIndex</declname>
+        </param>
+        <param>
+          <type>std::size_t &amp;</type>
+          <declname>valueIndex</declname>
+        </param>
+        <briefdescription>
+<para>Check if the element at row-col is present in the matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If it is present the function returns true and the index in the out parameter index, otherwise it returns false and index will contain the index of the next element in the value array</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">row</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>row index </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">col</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>column index </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if found contains the index, if not the index of the next element </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the value has been found </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="81" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a7f47cbee94400a310cee00c87b54ae8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SparseMatrix&lt; ordering &gt;::SparseMatrix</definition>
+        <argsstring>()</argsstring>
+        <name>SparseMatrix</name>
+        <briefdescription>
+<para>Creates an empty sparse matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="88" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1ab3fda3a862b41c5183ddefdf2ea98dd5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SparseMatrix&lt; ordering &gt;::SparseMatrix</definition>
+        <argsstring>(std::size_t rows, std::size_t cols)</argsstring>
+        <name>SparseMatrix</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>rows</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>cols</declname>
+        </param>
+        <briefdescription>
+<para>Creates a zero sparse matrix with the specified dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="94" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a87bdf81a388171471cb740731e45ef24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SparseMatrix&lt; ordering &gt;::SparseMatrix</definition>
+        <argsstring>(std::size_t rows, std::size_t cols, const iDynTree::VectorDynSize &amp;memoryReserveDescription)</argsstring>
+        <name>SparseMatrix</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>rows</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>cols</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>memoryReserveDescription</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="97" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a5b69f06f3e4a624b72a7f20efc4d17cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>iDynTree::MatrixStorageOrdering</type>
+            <declname>otherOrdering</declname>
+            <defname>otherOrdering</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>iDynTree::SparseMatrix&lt; ordering &gt;::SparseMatrix</definition>
+        <argsstring>(const SparseMatrix&lt; otherOrdering &gt; &amp;)</argsstring>
+        <name>SparseMatrix</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">SparseMatrix</ref>&lt; otherOrdering &gt; &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="101" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1af4b703b6aed159a4c435b28caca49b12" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>iDynTree::MatrixStorageOrdering</type>
+            <declname>otherOrdering</declname>
+            <defname>otherOrdering</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">SparseMatrix</ref> &amp;</type>
+        <definition>SparseMatrix&amp; iDynTree::SparseMatrix&lt; ordering &gt;::operator=</definition>
+        <argsstring>(const SparseMatrix&lt; otherOrdering &gt; &amp;)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">SparseMatrix</ref>&lt; otherOrdering &gt; &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="104" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1abfbbcd22a139de15a170835299116f30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SparseMatrix&lt; ordering &gt;::~SparseMatrix</definition>
+        <argsstring>()</argsstring>
+        <name>~SparseMatrix</name>
+        <briefdescription>
+<para>Default destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="110" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1abd7191cc9ed4ee2962ef8a1100c34605" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t iDynTree::SparseMatrix&lt; ordering &gt;::numberOfNonZeros</definition>
+        <argsstring>() const</argsstring>
+        <name>numberOfNonZeros</name>
+        <briefdescription>
+<para>Returns the number of nonzero elements in this sparse matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the number of non zero elements </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="117" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1ad4fc0c67e5e53b62591fbbc5a638ecf1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SparseMatrix&lt; ordering &gt;::resize</definition>
+        <argsstring>(std::size_t rows, std::size_t columns)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>rows</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>columns</declname>
+        </param>
+        <briefdescription>
+<para>Resize the matrix to the specified new dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>the content of the matrix is not preserved in any case </para>
+</simplesect>
+<simplesect kind="warning"><para>this function may perform memory allocation </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rows</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the new number of rows of this matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>columns</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the new number of columns of this matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="127" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1ad4fd25bdfb662d7083991c27933f3054" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SparseMatrix&lt; ordering &gt;::resize</definition>
+        <argsstring>(std::size_t rows, std::size_t columns, const iDynTree::VectorDynSize &amp;innerIndicesInformation)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>rows</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>columns</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>innerIndicesInformation</declname>
+        </param>
+        <briefdescription>
+<para>Resize the matrix to the specified new dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>the content of the matrix is not preserved in any case </para>
+</simplesect>
+<simplesect kind="warning"><para>this function may perform memory allocation </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rows</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the new number of rows of this matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>columns</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the new number of columns of this matrix </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>innerIndicesInformation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>information on the NNZ for each column (row), used to reserve memory in advance. It depends on the storage ordering </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="138" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a89ed74f5439e7959763b4b602b858efd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SparseMatrix&lt; ordering &gt;::reserve</definition>
+        <argsstring>(std::size_t nonZeroElements)</argsstring>
+        <name>reserve</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>nonZeroElements</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="140" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a08e7b1d008307f13ae8513746f29d85c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SparseMatrix&lt; ordering &gt;::zero</definition>
+        <argsstring>()</argsstring>
+        <name>zero</name>
+        <briefdescription>
+<para>Set the sparse matrix to be zero. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>In C++11 it is not guaranteed that this function performs no memory allocation, depending on the standard library implementation. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="149" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a48cb8c9c1703b5746d70051ebbfe548e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SparseMatrix&lt; ordering &gt;::setFromConstTriplets</definition>
+        <argsstring>(const iDynTree::Triplets &amp;triplets)</argsstring>
+        <name>setFromConstTriplets</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Triplets" kindref="compound">iDynTree::Triplets</ref> &amp;</type>
+          <declname>triplets</declname>
+        </param>
+        <briefdescription>
+<para>Sets the content of this sparse matrix to the content of triplets. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function does not set the dimensions of the matrix which must be set beforehand. If the dimensions are wrong the behaviour is undefined.</para>
+<para><simplesect kind="note"><para>duplicate elements in triplets will be summed up </para>
+</simplesect>
+<simplesect kind="note"><para>the content of this matrix will be totally overwritten</para>
+</simplesect>
+<simplesect kind="warning"><para>this function performs a copy of the triplets parameter so that it does not modify the input parameter. Use <ref refid="classiDynTree_1_1SparseMatrix_1a29ee8a8299132878d559670986295057" kindref="member">setFromTriplets(iDynTree::Triplets&amp; triplets)</ref> if you accept to have triplets modified.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>triplets</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>triplets containing the non zero elements </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="169" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a29ee8a8299132878d559670986295057" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SparseMatrix&lt; ordering &gt;::setFromTriplets</definition>
+        <argsstring>(iDynTree::Triplets &amp;triplets)</argsstring>
+        <name>setFromTriplets</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Triplets" kindref="compound">iDynTree::Triplets</ref> &amp;</type>
+          <declname>triplets</declname>
+        </param>
+        <briefdescription>
+<para>Sets the content of this sparse matrix to the content of triplets. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function does not set the dimensions of the matrix which must be set beforehand. If the dimensions are wrong the behaviour is undefined.</para>
+<para><simplesect kind="note"><para>duplicate elements in triplets will be summed up </para>
+</simplesect>
+<simplesect kind="note"><para>the content of this matrix will be totally overwritten</para>
+</simplesect>
+<simplesect kind="warning"><para>this function modifies the input parameter triplets. Use <ref refid="classiDynTree_1_1SparseMatrix_1a48cb8c9c1703b5746d70051ebbfe548e" kindref="member">setFromConstTriplets(const iDynTree::Triplets&amp; triplets)</ref> if you want to preserve the content of triplets.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>triplets</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>triplets containing the non zero elements </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="187" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1ab72e13cf19b07f3fbdad16628ed22c9a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::SparseMatrix&lt; ordering &gt;::operator()</definition>
+        <argsstring>(std::size_t row, std::size_t col) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>row</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>col</declname>
+        </param>
+        <briefdescription>
+<para>Access operation to the element of the matrix identified by row-col. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>this method is slow as it has to look for the proper index (it performs a linear search) </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>row</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>row index </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>col</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>column index </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the value at the specified row and column </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="202" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a06b919a46157e5ec967ddec1645919bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double &amp;</type>
+        <definition>double&amp; iDynTree::SparseMatrix&lt; ordering &gt;::operator()</definition>
+        <argsstring>(std::size_t row, std::size_t col)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>row</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>col</declname>
+        </param>
+        <briefdescription>
+<para>Access operation to the element of the matrix identified by row-col. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>this method is slow as it has to look for the proper index (it performs a linear search) </para>
+</simplesect>
+<simplesect kind="warning"><para>if no elements are found, this method insert a zero value at the specified position </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>row</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>row index </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>col</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>column index </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>reference to the value at the specified row and column </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="213" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a950011e2e956f72f3fdd21fc399cf376" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::SparseMatrix&lt; ordering &gt;::getValue</definition>
+        <argsstring>(std::size_t row, std::size_t col) const</argsstring>
+        <name>getValue</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>row</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>col</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="215" column="19" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="215" bodyend="218"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a18301103400395c4929b49ae6186319a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SparseMatrix&lt; ordering &gt;::setValue</definition>
+        <argsstring>(std::size_t row, std::size_t col, double newValue)</argsstring>
+        <name>setValue</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>row</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>col</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>newValue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="220" column="17" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="220" bodyend="224"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a22d6e9d316ee0ae91633bd6a232e7e1d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t iDynTree::SparseMatrix&lt; ordering &gt;::rows</definition>
+        <argsstring>() const</argsstring>
+        <name>rows</name>
+        <briefdescription>
+<para>Returns the number of rows of the matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the number of rows </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="231" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a1de8b7a4771b755c2dd6348b15af184a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t iDynTree::SparseMatrix&lt; ordering &gt;::columns</definition>
+        <argsstring>() const</argsstring>
+        <name>columns</name>
+        <briefdescription>
+<para>Returns the number of columns of the matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the number of columns </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="237" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a448ae77863e8a5687946ffc6ea6f68d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double *</type>
+        <definition>double* iDynTree::SparseMatrix&lt; ordering &gt;::valuesBuffer</definition>
+        <argsstring>()</argsstring>
+        <name>valuesBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="240" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1ae872a9018f8693cdaee2823739926f73" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double const  *</type>
+        <definition>double const* iDynTree::SparseMatrix&lt; ordering &gt;::valuesBuffer</definition>
+        <argsstring>() const</argsstring>
+        <name>valuesBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="242" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a1101b4d764330352150925bab064484f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int *</type>
+        <definition>int* iDynTree::SparseMatrix&lt; ordering &gt;::innerIndicesBuffer</definition>
+        <argsstring>()</argsstring>
+        <name>innerIndicesBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="244" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1ae5214eb0040f8eb1dbd24600d57107e5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int const  *</type>
+        <definition>int const* iDynTree::SparseMatrix&lt; ordering &gt;::innerIndicesBuffer</definition>
+        <argsstring>() const</argsstring>
+        <name>innerIndicesBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="246" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a0dc994408183cc6ac39ba29f63bf10af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int *</type>
+        <definition>int* iDynTree::SparseMatrix&lt; ordering &gt;::outerIndicesBuffer</definition>
+        <argsstring>()</argsstring>
+        <name>outerIndicesBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="248" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1ae6ac3d5cb21c9dd00d39f96ec8ee846f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int const  *</type>
+        <definition>int const* iDynTree::SparseMatrix&lt; ordering &gt;::outerIndicesBuffer</definition>
+        <argsstring>() const</argsstring>
+        <name>outerIndicesBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="250" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a17fa321f04e7f09c14f162665a850502" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::SparseMatrix&lt; ordering &gt;::description</definition>
+        <argsstring>(bool fullMatrix=false) const</argsstring>
+        <name>description</name>
+        <param>
+          <type>bool</type>
+          <declname>fullMatrix</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Returns a textual description of the matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If true is passed, the whole matrix (with also zero elements) is printed Default to false <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fullMatrix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>true to return the full matrix, false for only the non zero elements. Default to false </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>a textual representation of the matrix </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="261" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a4c848a05bea9d0e504e52c09d399572a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::SparseMatrix&lt; ordering &gt;::internalDescription</definition>
+        <argsstring>() const</argsstring>
+        <name>internalDescription</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="264" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a804a8020e247807116212ae8afbca7f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SparseMatrix_1_1Iterator" kindref="compound">iterator</ref></type>
+        <definition>iterator iDynTree::SparseMatrix&lt; ordering &gt;::begin</definition>
+        <argsstring>()</argsstring>
+        <name>begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="275" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a12bfd109d081181b2fa14d9da5350df5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SparseMatrix_1_1ConstIterator" kindref="compound">const_iterator</ref></type>
+        <definition>const_iterator iDynTree::SparseMatrix&lt; ordering &gt;::begin</definition>
+        <argsstring>() const</argsstring>
+        <name>begin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="276" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a9cece7123668e765d663f36569c9f0f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SparseMatrix_1_1Iterator" kindref="compound">iterator</ref></type>
+        <definition>iterator iDynTree::SparseMatrix&lt; ordering &gt;::end</definition>
+        <argsstring>()</argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="278" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a0a5f824e65b90ab435bba78bf29f2391" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SparseMatrix_1_1ConstIterator" kindref="compound">const_iterator</ref></type>
+        <definition>const_iterator iDynTree::SparseMatrix&lt; ordering &gt;::end</definition>
+        <argsstring>() const</argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="279" column="20"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1a964464a51c1efe8306fae326523ebdb9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">SparseMatrix</ref></type>
+        <definition>static SparseMatrix iDynTree::SparseMatrix&lt; ordering &gt;::sparseMatrixFromTriplets</definition>
+        <argsstring>(std::size_t rows, std::size_t cols, const iDynTree::Triplets &amp;nonZeroElements)</argsstring>
+        <name>sparseMatrixFromTriplets</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>rows</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>cols</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Triplets" kindref="compound">iDynTree::Triplets</ref> &amp;</type>
+          <declname>nonZeroElements</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="189" column="25"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Sparse Matrix class. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This class uses the Compressed Column (Row) Storage scheme (see <ulink url="https://en.wikipedia.org/wiki/Sparse_matrix#Compressed_sparse_row_.28CSR.2C_CRS_or_Yale_format.29">https://en.wikipedia.org/wiki/Sparse_matrix#Compressed_sparse_row_.28CSR.2C_CRS_or_Yale_format.29</ulink>) which is compatible with the format used in the Eigen library (by using Map). </para>
+    </detaileddescription>
+    <location file="iDynTree/Core/SparseMatrix.h" line="39" column="1" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="40" bodyend="281"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1SparseMatrix_1a804a8020e247807116212ae8afbca7f0" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>begin</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a12bfd109d081181b2fa14d9da5350df5" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>begin</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a1de8b7a4771b755c2dd6348b15af184a" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>columns</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1ac0c797f9d94c6c57f2960b171979e653" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>const_iterator</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a17fa321f04e7f09c14f162665a850502" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>description</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a9cece7123668e765d663f36569c9f0f5" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>end</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a0a5f824e65b90ab435bba78bf29f2391" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>end</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a950011e2e956f72f3fdd21fc399cf376" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>getValue</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a8ddd7214a52040b046cecf691dd1b0ae" prot="private" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>initializeMatrix</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a1101b4d764330352150925bab064484f" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>innerIndicesBuffer</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1ae5214eb0040f8eb1dbd24600d57107e5" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>innerIndicesBuffer</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1aecc7b6b4a639cbabbdf786a6eb93d332" prot="private" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>insert</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a4c848a05bea9d0e504e52c09d399572a" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>internalDescription</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a24f2ff77f8a365363a8e653aa0eb4fc6" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>iterator</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a86fc38b6dea5fcb388c7679595fef329" prot="private" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>m_allocatedSize</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1aebbdae0a0f21a4b5c1ba506a68d7fd87" prot="private" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>m_columns</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a0588cded62c075e1bf3b877c2b274125" prot="private" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>m_innerIndices</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1aea1e508066b17d84a9e167e79847cf3a" prot="private" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>m_outerStarts</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a049d6fe4a9710f4e40260379c646ee6f" prot="private" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>m_rows</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1abf1ba539a688d5243f0635d78d4a4cb0" prot="private" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>m_values</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1abd7191cc9ed4ee2962ef8a1100c34605" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>numberOfNonZeros</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1ab72e13cf19b07f3fbdad16628ed22c9a" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a06b919a46157e5ec967ddec1645919bc" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1af4b703b6aed159a4c435b28caca49b12" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a0dc994408183cc6ac39ba29f63bf10af" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>outerIndicesBuffer</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1ae6ac3d5cb21c9dd00d39f96ec8ee846f" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>outerIndicesBuffer</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a89ed74f5439e7959763b4b602b858efd" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>reserve</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1ad4fc0c67e5e53b62591fbbc5a638ecf1" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>resize</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1ad4fd25bdfb662d7083991c27933f3054" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>resize</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a22d6e9d316ee0ae91633bd6a232e7e1d" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>rows</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a48cb8c9c1703b5746d70051ebbfe548e" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>setFromConstTriplets</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a29ee8a8299132878d559670986295057" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>setFromTriplets</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a18301103400395c4929b49ae6186319a" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>setValue</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a7f47cbee94400a310cee00c87b54ae8b" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>SparseMatrix</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1ab3fda3a862b41c5183ddefdf2ea98dd5" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>SparseMatrix</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a87bdf81a388171471cb740731e45ef24" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>SparseMatrix</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a5b69f06f3e4a624b72a7f20efc4d17cf" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>SparseMatrix</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a964464a51c1efe8306fae326523ebdb9" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>sparseMatrixFromTriplets</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a351ac8ff6ea79ef48784a2ce656a17e6" prot="private" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>valueIndexForOuterAndInnerIndices</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a448ae77863e8a5687946ffc6ea6f68d8" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>valuesBuffer</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1ae872a9018f8693cdaee2823739926f73" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>valuesBuffer</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1a08e7b1d008307f13ae8513746f29d85c" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>zero</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1abfbbcd22a139de15a170835299116f30" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix</scope><name>~SparseMatrix</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

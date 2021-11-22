@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::SparseMatrix::Iterator::TripletRef</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef_1a53220a6541d7cfa5ee911e9babb23ee6" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::TripletRef::m_row</definition>
+        <argsstring></argsstring>
+        <name>m_row</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="293" column="13" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="293" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef_1af8b8f7ff12e05b84750af64eefa60834" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::TripletRef::m_column</definition>
+        <argsstring></argsstring>
+        <name>m_column</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="294" column="13" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="294" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef_1a21f2f544c52af536e2a4fd5be948b1a0" prot="private" static="no" mutable="no">
+        <type>double *</type>
+        <definition>double* iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::TripletRef::m_value</definition>
+        <argsstring></argsstring>
+        <name>m_value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="295" column="16" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="295" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef_1a51f3228516b9a86409fd86fc26f45c56" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::TripletRef::TripletRef</definition>
+        <argsstring>(std::size_t row, std::size_t column, double *value)</argsstring>
+        <name>TripletRef</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>row</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>column</declname>
+        </param>
+        <param>
+          <type>double *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="297" column="9"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef_1aaf01469392ba6c1cdef4fd54a5ef1aa7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::TripletRef::row</definition>
+        <argsstring>() const</argsstring>
+        <name>row</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="302" column="20" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="302" bodyend="302"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef_1a3fe7d4922113535a6d3698b5260b2d55" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::TripletRef::column</definition>
+        <argsstring>() const</argsstring>
+        <name>column</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="303" column="20" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="303" bodyend="303"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef_1abc438ee2fc85f6303c9f5c6ed9d2874e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double &amp;</type>
+        <definition>double&amp; iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::TripletRef::value</definition>
+        <argsstring>()</argsstring>
+        <name>value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="304" column="23" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="304" bodyend="304"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef_1a1270d5949746de61c59505d67177a4da" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::TripletRef::value</definition>
+        <argsstring>() const</argsstring>
+        <name>value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="305" column="23" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="305" bodyend="305"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/SparseMatrix.h" line="291" column="5" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="291" bodyend="307"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef_1a3fe7d4922113535a6d3698b5260b2d55" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator::TripletRef</scope><name>column</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef_1af8b8f7ff12e05b84750af64eefa60834" prot="private" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator::TripletRef</scope><name>m_column</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef_1a53220a6541d7cfa5ee911e9babb23ee6" prot="private" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator::TripletRef</scope><name>m_row</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef_1a21f2f544c52af536e2a4fd5be948b1a0" prot="private" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator::TripletRef</scope><name>m_value</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef_1aaf01469392ba6c1cdef4fd54a5ef1aa7" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator::TripletRef</scope><name>row</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef_1a51f3228516b9a86409fd86fc26f45c56" prot="private" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator::TripletRef</scope><name>TripletRef</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef_1abc438ee2fc85f6303c9f5c6ed9d2874e" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator::TripletRef</scope><name>value</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef_1a1270d5949746de61c59505d67177a4da" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator::TripletRef</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

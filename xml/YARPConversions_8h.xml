@@ -1,0 +1,648 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="YARPConversions_8h" kind="file" language="C++">
+    <compoundname>YARPConversions.h</compoundname>
+    <includes local="no">yarp/sig/Matrix.h</includes>
+    <includes local="no">yarp/sig/Vector.h</includes>
+    <includes refid="Wrench_8h" local="no">iDynTree/Core/Wrench.h</includes>
+    <includes refid="YARPConversionsImplementation_8h" local="yes">YARPConversionsImplementation.h</includes>
+    <includedby refid="iKinConversionsImplementation_8h" local="no">iDynTree/iKinConversionsImplementation.h</includedby>
+    <includedby refid="skinDynLibConversionsImplementation_8h" local="no">iDynTree/skinDynLibConversionsImplementation.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>yarp/sig/Matrix.h</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/yarp/YARPConversions.h</label>
+        <link refid="YARPConversions_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>yarp/sig/Vector.h</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__iDynTreeYARP_1ga5043dfa20b4ffc99d8dbdae5b15c0dae" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::toiDynTree</definition>
+        <argsstring>(const yarp::sig::Vector &amp;yarpVector, iDynTree::Wrench &amp;iDynTreeWrench)</argsstring>
+        <name>toiDynTree</name>
+        <param>
+          <type>const yarp::sig::Vector &amp;</type>
+          <declname>yarpVector</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">iDynTree::Wrench</ref> &amp;</type>
+          <declname>iDynTreeWrench</declname>
+        </param>
+        <briefdescription>
+<para>Convert a yarp::sig::Vector to a <ref refid="classiDynTree_1_1Wrench" kindref="compound">iDynTree::Wrench</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>yarpVector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>yarp::sig::Vector input </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>iDynTreeWrench</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1Wrench" kindref="compound">iDynTree::Wrench</ref> output </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if conversion was successful, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/yarp/YARPConversionsImplementation.h" line="26" column="13" bodyfile="iDynTree/yarp/YARPConversionsImplementation.h" bodystart="26" bodyend="36" declfile="iDynTree/yarp/YARPConversions.h" declline="33" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeYARP_1gaa28c5100610c33e81bafbdad8cd65f74" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::toYarp</definition>
+        <argsstring>(const iDynTree::Wrench &amp;iDynTreeWrench, yarp::sig::Vector &amp;yarpVector)</argsstring>
+        <name>toYarp</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Wrench" kindref="compound">iDynTree::Wrench</ref> &amp;</type>
+          <declname>iDynTreeWrench</declname>
+        </param>
+        <param>
+          <type>yarp::sig::Vector &amp;</type>
+          <declname>yarpVector</declname>
+        </param>
+        <briefdescription>
+<para>Convert a <ref refid="classiDynTree_1_1Wrench" kindref="compound">iDynTree::Wrench</ref> to a yarp::sig::Vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>iDynTreeWrench</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1Wrench" kindref="compound">iDynTree::Wrench</ref> input </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>yarpVector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>yarp::sig::Vector output </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if conversion was successful, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/yarp/YARPConversionsImplementation.h" line="39" column="13" bodyfile="iDynTree/yarp/YARPConversionsImplementation.h" bodystart="39" bodyend="49" declfile="iDynTree/yarp/YARPConversions.h" declline="42" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeYARP_1gaf7ed1a24bb847b7742685eb9f59bb92b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::toiDynTree</definition>
+        <argsstring>(const yarp::sig::Vector &amp;yarpVector, iDynTree::Position &amp;iDynTreePosition)</argsstring>
+        <name>toiDynTree</name>
+        <param>
+          <type>const yarp::sig::Vector &amp;</type>
+          <declname>yarpVector</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &amp;</type>
+          <declname>iDynTreePosition</declname>
+        </param>
+        <briefdescription>
+<para>Convert a yarp::sig::Vector to a <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>yarpVector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>yarp::sig::Vector input </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>iDynTreePosition</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> output </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if conversion was successful, false otherwise (if the input yarpVector has size different from 3) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/yarp/YARPConversionsImplementation.h" line="51" column="13" bodyfile="iDynTree/yarp/YARPConversionsImplementation.h" bodystart="51" bodyend="60" declfile="iDynTree/yarp/YARPConversions.h" declline="51" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeYARP_1gafcb81129ef0d16f5f1eb1cc6e1df4252" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::toiDynTree</definition>
+        <argsstring>(const yarp::sig::Vector &amp;yarpVector, iDynTree::Vector3 &amp;iDynTreeVector3)</argsstring>
+        <name>toiDynTree</name>
+        <param>
+          <type>const yarp::sig::Vector &amp;</type>
+          <declname>yarpVector</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref> &amp;</type>
+          <declname>iDynTreeVector3</declname>
+        </param>
+        <briefdescription>
+<para>Convert a yarp::sig::Vector to a iDynTree::Vector3. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>yarpVector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>yarp::sig::Vector input </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>iDynTreePosition</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>iDynTree::Vector3 output </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if conversion was successful, false otherwise (if the input yarpVector has size different from 3) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/yarp/YARPConversionsImplementation.h" line="62" column="13" bodyfile="iDynTree/yarp/YARPConversionsImplementation.h" bodystart="62" bodyend="71" declfile="iDynTree/yarp/YARPConversions.h" declline="60" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeYARP_1ga9020f2412b884fd0ef63e726c1342947" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::toYarp</definition>
+        <argsstring>(const iDynTree::Position &amp;iDynTreePosition, yarp::sig::Vector &amp;yarpVector)</argsstring>
+        <name>toYarp</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &amp;</type>
+          <declname>iDynTreePosition</declname>
+        </param>
+        <param>
+          <type>yarp::sig::Vector &amp;</type>
+          <declname>yarpVector</declname>
+        </param>
+        <briefdescription>
+<para>Convert a <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> to a yarp::sig::Vector of 3 elements. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>iDynTreePosition</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> input </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>yarpVector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>yarp::sig::Vector output </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if conversion was sucessful, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/yarp/YARPConversionsImplementation.h" line="73" column="13" bodyfile="iDynTree/yarp/YARPConversionsImplementation.h" bodystart="73" bodyend="82" declfile="iDynTree/yarp/YARPConversions.h" declline="69" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeYARP_1gaea2d5b8825259e8fa15c166cb843ee40" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::toiDynTree</definition>
+        <argsstring>(const yarp::sig::Vector &amp;yarpVector, iDynTree::Direction &amp;iDynTreeDirection)</argsstring>
+        <name>toiDynTree</name>
+        <param>
+          <type>const yarp::sig::Vector &amp;</type>
+          <declname>yarpVector</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Direction" kindref="compound">iDynTree::Direction</ref> &amp;</type>
+          <declname>iDynTreeDirection</declname>
+        </param>
+        <briefdescription>
+<para>Convert a yarp::sig::Vector of 3 elements to a <ref refid="classiDynTree_1_1Direction" kindref="compound">iDynTree::Direction</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>yarpVector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>yarp::sig::Vector input </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>iDynTreeDirection</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1Direction" kindref="compound">iDynTree::Direction</ref> output </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if conversion was successful, false otherwise (if the input yarpVector has size different from 3)</para>
+</simplesect>
+<simplesect kind="note"><para>the direction vector will be normalized to have unit norm. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/yarp/YARPConversionsImplementation.h" line="84" column="13" bodyfile="iDynTree/yarp/YARPConversionsImplementation.h" bodystart="84" bodyend="97" declfile="iDynTree/yarp/YARPConversions.h" declline="81" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeYARP_1ga6b716f09fcb568a6b3eea04b44160f19" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::toYarp</definition>
+        <argsstring>(const iDynTree::Vector3 &amp;iDynTreeDirection, yarp::sig::Vector &amp;yarpVector)</argsstring>
+        <name>toYarp</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref> &amp;</type>
+          <declname>iDynTreeDirection</declname>
+        </param>
+        <param>
+          <type>yarp::sig::Vector &amp;</type>
+          <declname>yarpVector</declname>
+        </param>
+        <briefdescription>
+<para>Convert a <ref refid="classiDynTree_1_1Direction" kindref="compound">iDynTree::Direction</ref> to a yarp::sig::Vector of 3 elements. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>iDynTreeDirection</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> input </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>yarpVector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>yarp::sig::Vector output </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if conversion was sucessful, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/yarp/YARPConversionsImplementation.h" line="99" column="13" bodyfile="iDynTree/yarp/YARPConversionsImplementation.h" bodystart="99" bodyend="108" declfile="iDynTree/yarp/YARPConversions.h" declline="91" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeYARP_1gaa01de51e3acfd87599aa688e4c3d32c0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::toiDynTree</definition>
+        <argsstring>(const yarp::sig::Matrix &amp;yarpHomogeneousMatrix, iDynTree::Transform &amp;iDynTreeTransform)</argsstring>
+        <name>toiDynTree</name>
+        <param>
+          <type>const yarp::sig::Matrix &amp;</type>
+          <declname>yarpHomogeneousMatrix</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>iDynTreeTransform</declname>
+        </param>
+        <briefdescription>
+<para>Convert a 4x4 yarp::sig::Matrix representing an homegeneous matrix to a <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>yarpHomogeneousMatrix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>yarp::sig::Matrix 4x4 homegeneous matrix input </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>iDynTreeTransform</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> output </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if conversion was successful, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/yarp/YARPConversionsImplementation.h" line="117" column="13" bodyfile="iDynTree/yarp/YARPConversionsImplementation.h" bodystart="117" bodyend="146" declfile="iDynTree/yarp/YARPConversions.h" declline="101" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeYARP_1ga0c1a2189345fb926b98f2d82219d5dd1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::toYarp</definition>
+        <argsstring>(const iDynTree::Transform &amp;iDynTreeTransform, yarp::sig::Matrix &amp;yarpHomogeneousMatrix)</argsstring>
+        <name>toYarp</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>iDynTreeTransform</declname>
+        </param>
+        <param>
+          <type>yarp::sig::Matrix &amp;</type>
+          <declname>yarpHomogeneousMatrix</declname>
+        </param>
+        <briefdescription>
+<para>Convert a <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> to a 4x4 yarp::sig::Matrix representing an homegeneous matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>iDynTreeTransform</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> input </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>yarpHomogeneousMatrix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>yarp::sig::Matrix 4x4 homegeneous matrix output </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if conversion was successful, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/yarp/YARPConversionsImplementation.h" line="148" column="13" bodyfile="iDynTree/yarp/YARPConversionsImplementation.h" bodystart="148" bodyend="156" declfile="iDynTree/yarp/YARPConversions.h" declline="111" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeYARP_1ga8c4d32377000e6629f2855a6d5aebf72" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::toiDynTree</definition>
+        <argsstring>(const yarp::sig::Vector &amp;yarpVector, iDynTree::VectorDynSize &amp;iDynTreeVector)</argsstring>
+        <name>toiDynTree</name>
+        <param>
+          <type>const yarp::sig::Vector &amp;</type>
+          <declname>yarpVector</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>iDynTreeVector</declname>
+        </param>
+        <briefdescription>
+<para>Convert a yarp::sig::Vector to a <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>yarpVector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>yarp::sig::Vector input </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>iDynTreeVector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> output </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if conversion was successful, false otherwise </para>
+</simplesect>
+<simplesect kind="note"><para>the output <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> will be resized if necessary. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/yarp/YARPConversionsImplementation.h" line="110" column="13" bodyfile="iDynTree/yarp/YARPConversionsImplementation.h" bodystart="110" bodyend="115" declfile="iDynTree/yarp/YARPConversions.h" declline="122" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeYARP_1ga3e0ac29c597c34c171d29fb18127ab3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename VectorType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void iDynTree::toYarp</definition>
+        <argsstring>(const VectorType &amp;iDynTreeVector, yarp::sig::Vector &amp;yarpVector)</argsstring>
+        <name>toYarp</name>
+        <param>
+          <type>const VectorType &amp;</type>
+          <declname>iDynTreeVector</declname>
+        </param>
+        <param>
+          <type>yarp::sig::Vector &amp;</type>
+          <declname>yarpVector</declname>
+        </param>
+        <briefdescription>
+<para>Convert a <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::VectorFixSize</ref> to a yarp::sig::Vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>iDynTreeVector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::VectorFixSize</ref> input </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>yarpVector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>yarp::sig::Vector output </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>the output yarp::sig::Vector will be resized if necessary. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/yarp/YARPConversions.h" line="133" column="6" bodyfile="iDynTree/yarp/YARPConversions.h" bodystart="133" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeYARP_1ga63598edaacfc53e5728e944a0dab5ebb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename MatrixType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void iDynTree::toYarp</definition>
+        <argsstring>(const MatrixType &amp;iDynTreeMatrix, yarp::sig::Matrix &amp;yarpMatrix)</argsstring>
+        <name>toYarp</name>
+        <param>
+          <type>const MatrixType &amp;</type>
+          <declname>iDynTreeMatrix</declname>
+        </param>
+        <param>
+          <type>yarp::sig::Matrix &amp;</type>
+          <declname>yarpMatrix</declname>
+        </param>
+        <briefdescription>
+<para>Convert a <ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">iDynTree::MatrixFixSize</ref> to a yarp::sig::Matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>iDynTreeMatrix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">iDynTree::MatrixFixSize</ref> input </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>yarpMatrix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>yarp::sig::Matrix output </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>the output yarp::sig::Matrix will be resized if necessary. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/yarp/YARPConversions.h" line="153" column="6" bodyfile="iDynTree/yarp/YARPConversions.h" bodystart="153" bodyend="167"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeYARP_1ga056a45c2887a5f314c963c89bb16a270" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename VectorType</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool iDynTree::toiDynTree</definition>
+        <argsstring>(const yarp::sig::Vector &amp;yarpVector, VectorType &amp;iDynTreeVector)</argsstring>
+        <name>toiDynTree</name>
+        <param>
+          <type>const yarp::sig::Vector &amp;</type>
+          <declname>yarpVector</declname>
+        </param>
+        <param>
+          <type>VectorType &amp;</type>
+          <declname>iDynTreeVector</declname>
+        </param>
+        <briefdescription>
+<para>Convert a yarp::sig::Vector to a <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::VectorFixSize</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>yarpVector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>yarp::sig::Vector input </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>iDynTreeVector</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::VectorFixSize</ref> output </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if conversion was successful, false otherwise (if the input yarpMatrix has size different from the output <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">VectorFixSize</ref>) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/yarp/YARPConversions.h" line="179" column="6" bodyfile="iDynTree/yarp/YARPConversions.h" bodystart="179" bodyend="189"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeYARP_1gae1c1d7e3baf33d9b84f593330a3cf199" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename MatrixType</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool iDynTree::toiDynTree</definition>
+        <argsstring>(const yarp::sig::Matrix &amp;yarpMatrix, MatrixType &amp;iDynTreeMatrix)</argsstring>
+        <name>toiDynTree</name>
+        <param>
+          <type>const yarp::sig::Matrix &amp;</type>
+          <declname>yarpMatrix</declname>
+        </param>
+        <param>
+          <type>MatrixType &amp;</type>
+          <declname>iDynTreeMatrix</declname>
+        </param>
+        <briefdescription>
+<para>Convert a yarp::sig::Matrix to a <ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">iDynTree::MatrixFixSize</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>yarpMatrix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>yarp::sig::Matrix input </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>iDynTreeMatrix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">iDynTree::MatrixFixSize</ref> output </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if conversion was successful, false otherwise (if the input yarpMatrix has size different from the <ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">MatrixFixSize</ref>) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/yarp/YARPConversions.h" line="201" column="6" bodyfile="iDynTree/yarp/YARPConversions.h" bodystart="201" bodyend="217"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/yarp/YARPConversions.h"/>
+  </compounddef>
+</doxygen>

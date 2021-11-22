@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_1869e44917a5876f38a85eeb33c91cd1" kind="dir">
+    <compoundname>iDynTree</compoundname>
+    <innerdir refid="dir_95b075728cf7547ec50495102e6a3dc3">iDynTree/Integrators</innerdir>
+    <innerdir refid="dir_d456b7abddf290dd744d4368f3af0eff">iDynTree/OCSolvers</innerdir>
+    <innerdir refid="dir_cfadca6e97d0bca47f319c90dd0dd9db">iDynTree/Optimizers</innerdir>
+    <innerfile refid="Constraint_8h">Constraint.h</innerfile>
+    <innerfile refid="ConstraintsGroup_8h">ConstraintsGroup.h</innerfile>
+    <innerfile refid="ControlledDynamicalSystem_8h">ControlledDynamicalSystem.h</innerfile>
+    <innerfile refid="Controller_8h">Controller.h</innerfile>
+    <innerfile refid="Cost_8h">Cost.h</innerfile>
+    <innerfile refid="DynamicalSystem_8h">DynamicalSystem.h</innerfile>
+    <innerfile refid="Integrator_8h">Integrator.h</innerfile>
+    <innerfile refid="L2NormCost_8h">L2NormCost.h</innerfile>
+    <innerfile refid="LinearConstraint_8h">LinearConstraint.h</innerfile>
+    <innerfile refid="LinearCost_8h">LinearCost.h</innerfile>
+    <innerfile refid="LinearMPC_8h">LinearMPC.h</innerfile>
+    <innerfile refid="LinearSystem_8h">LinearSystem.h</innerfile>
+    <innerfile refid="MPC_8h">MPC.h</innerfile>
+    <innerfile refid="MultiBodySystem_8h">MultiBodySystem.h</innerfile>
+    <innerfile refid="OptimalControl_8h">OptimalControl.h</innerfile>
+    <innerfile refid="OptimalControlProblem_8h">OptimalControlProblem.h</innerfile>
+    <innerfile refid="OptimalControlSolver_8h">OptimalControlSolver.h</innerfile>
+    <innerfile refid="OptimizationProblem_8h">OptimizationProblem.h</innerfile>
+    <innerfile refid="Optimizer_8h">Optimizer.h</innerfile>
+    <innerfile refid="QuadraticCost_8h">QuadraticCost.h</innerfile>
+    <innerfile refid="QuadraticLikeCost_8h">QuadraticLikeCost.h</innerfile>
+    <innerfile refid="SparsityStructure_8h">SparsityStructure.h</innerfile>
+    <innerfile refid="SystemLineariser_8h">SystemLineariser.h</innerfile>
+    <innerfile refid="TimeRange_8h">TimeRange.h</innerfile>
+    <innerfile refid="TimeVaryingObject_8h">TimeVaryingObject.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/"/>
+  </compounddef>
+</doxygen>

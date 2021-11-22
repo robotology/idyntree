@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1ModelParserOptions" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::ModelParserOptions</compoundname>
+    <includes local="no">iDynTree/ModelIO/ModelLoader.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1ModelParserOptions_1acca6da96631f8577cc259f939872d156" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::ModelParserOptions::addSensorFramesAsAdditionalFrames</definition>
+        <argsstring></argsstring>
+        <name>addSensorFramesAsAdditionalFrames</name>
+        <briefdescription>
+<para>If true, add to the model the sensor frames as additional frames with the same name of the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If there is already a link or additional frame with the same name of the sensor, a warning is printed and no frame is added. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="41" column="10" bodyfile="iDynTree/ModelIO/ModelLoader.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ModelParserOptions_1a7bbd5bfdb0a83af64bcc10e955714bc4" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::ModelParserOptions::originalFilename</definition>
+        <argsstring></argsstring>
+        <name>originalFilename</name>
+        <briefdescription>
+<para>Original filename of the URDF sensor parsed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This attribute is the original filename of the URDF sensor parsed. It is useful when loading a model from a string, if that URDF string has &lt;geometry&gt; tags that point to external meshes. To find the location of this external meshes, we need also the original filename of the URDF file. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="51" column="17" bodyfile="iDynTree/ModelIO/ModelLoader.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structiDynTree_1_1ModelParserOptions_1aace65fc753b0bc44d5a88f8de61a0276" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ModelParserOptions::ModelParserOptions</definition>
+        <argsstring>()</argsstring>
+        <name>ModelParserOptions</name>
+        <briefdescription>
+<para>Default options. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><itemizedlist>
+<listitem><para>addSensorFramesAsAdditionalFrames = True</para>
+</listitem><listitem><para>originalFilename = empty string </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="58" column="5"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Options for the iDynTree parser. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="1">
+        <label>iDynTree::ModelParserOptions</label>
+        <link refid="structiDynTree_1_1ModelParserOptions"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>originalFilename</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::string</label>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/ModelIO/ModelLoader.h" line="29" column="1" bodyfile="iDynTree/ModelIO/ModelLoader.h" bodystart="30" bodyend="60"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1ModelParserOptions_1acca6da96631f8577cc259f939872d156" prot="public" virt="non-virtual"><scope>iDynTree::ModelParserOptions</scope><name>addSensorFramesAsAdditionalFrames</name></member>
+      <member refid="structiDynTree_1_1ModelParserOptions_1aace65fc753b0bc44d5a88f8de61a0276" prot="public" virt="non-virtual"><scope>iDynTree::ModelParserOptions</scope><name>ModelParserOptions</name></member>
+      <member refid="structiDynTree_1_1ModelParserOptions_1a7bbd5bfdb0a83af64bcc10e955714bc4" prot="public" virt="non-virtual"><scope>iDynTree::ModelParserOptions</scope><name>originalFilename</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,247 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1LinkSensor" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::LinkSensor</compoundname>
+    <basecompoundref refid="classiDynTree_1_1Sensor" prot="public" virt="non-virtual">iDynTree::Sensor</basecompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1AccelerometerSensor" prot="public" virt="non-virtual">iDynTree::AccelerometerSensor</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1GyroscopeSensor" prot="public" virt="non-virtual">iDynTree::GyroscopeSensor</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor" prot="public" virt="non-virtual">iDynTree::ThreeAxisAngularAccelerometerSensor</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor" prot="public" virt="non-virtual">iDynTree::ThreeAxisForceTorqueContactSensor</derivedcompoundref>
+    <includes local="no">iDynTree/Sensors/Sensors.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1LinkSensor_1a6d58c4792a359f962a64f800f56ecb5a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type></type>
+        <definition>virtual iDynTree::LinkSensor::~LinkSensor</definition>
+        <argsstring>()=0</argsstring>
+        <name>~LinkSensor</name>
+        <briefdescription>
+<para>Virtual destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="206" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkSensor_1a4d664e0bb40e93c9c966f286a5205ed6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::string</type>
+        <definition>virtual std::string iDynTree::LinkSensor::getParentLink</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getParentLink</name>
+        <reimplementedby refid="classiDynTree_1_1AccelerometerSensor_1aa718fb58c93b02f9365df195d8aba8cf">getParentLink</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1GyroscopeSensor_1a8d610e5ce1ab010dd1aa3710b32e4bc0">getParentLink</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a9e1daa37dc2f4d2dcae646e01cb06a5b">getParentLink</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a6d1bf2bf8184f0a079f0c0bffc2c7b1f">getParentLink</reimplementedby>
+        <briefdescription>
+<para>Get the name of the parent <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="211" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkSensor_1a45fc4c098204d10e64c4c82ae58ddd2c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>LinkIndex</type>
+        <definition>virtual LinkIndex iDynTree::LinkSensor::getParentLinkIndex</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getParentLinkIndex</name>
+        <reimplementedby refid="classiDynTree_1_1AccelerometerSensor_1a6bb847043704ad6f4524aa4a11eb789d">getParentLinkIndex</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1GyroscopeSensor_1a5aacbe3a66640b3ce644cfded2ca67a4">getParentLinkIndex</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a9cb57d1b01e563b914a00182ad15a6ca">getParentLinkIndex</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1ad956d3ad8f4670cf87047ca3d9971698">getParentLinkIndex</reimplementedby>
+        <briefdescription>
+<para>Get the numeric index of the parent <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the index of the parent <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> of the sensor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="218" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkSensor_1ad5cb2901457ca5e0dedee1a6230ac858" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>virtual Transform iDynTree::LinkSensor::getLinkSensorTransform</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getLinkSensorTransform</name>
+        <reimplementedby refid="classiDynTree_1_1AccelerometerSensor_1ab009666f7115b8591e516087d89e5dca">getLinkSensorTransform</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1GyroscopeSensor_1a36450e27fe86b188ec0f1a002444bcf6">getLinkSensorTransform</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a2eda12416407060776056a95c375d554">getLinkSensorTransform</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1aeb7e44f72ffbb9991b0d9995c1040627">getLinkSensorTransform</reimplementedby>
+        <briefdescription>
+<para>Return the transform that applied on a element expressed in sensor frames it transform it in one expressed in the link frame (. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="95">\[ {}^l H_s \]</formula>).</para>
+<para><simplesect kind="return"><para>the link_H_sensor transform </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="227" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkSensor_1a9420746600b52d524f2c6fde5023147d" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::LinkSensor::setParentLink</definition>
+        <argsstring>(const std::string &amp;parentLinkName)=0</argsstring>
+        <name>setParentLink</name>
+        <reimplementedby refid="classiDynTree_1_1AccelerometerSensor_1aa7fafe90845ba06b008191e59f983406">setParentLink</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1GyroscopeSensor_1a221b7c3ebb5d1915ab13cf14b7a496c9">setParentLink</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a52e9392105c1194d30238ff2df75e782">setParentLink</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a7e2978a17832c1405d6667db5515aa8b">setParentLink</reimplementedby>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>parentLinkName</declname>
+        </param>
+        <briefdescription>
+<para>Set the name of the parent <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="232" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkSensor_1aec8002495ae7ca62e3e8b516c55e5a0c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::LinkSensor::setParentLinkIndex</definition>
+        <argsstring>(const LinkIndex &amp;)=0</argsstring>
+        <name>setParentLinkIndex</name>
+        <reimplementedby refid="classiDynTree_1_1AccelerometerSensor_1adc7fb955a4aa6ce83dbb621da9ab7e8e">setParentLinkIndex</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1GyroscopeSensor_1ab0e964fe971d4e569e5a6cae3fd2cd5c">setParentLinkIndex</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a0d83d703d9273361a697fd33e64286a2">setParentLinkIndex</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1ae29362a072ca8c3dcace8c39b553c83a">setParentLinkIndex</reimplementedby>
+        <param>
+          <type>const LinkIndex &amp;</type>
+        </param>
+        <briefdescription>
+<para>Set the numeric index of the parent link of the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="237" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkSensor_1a716a29b8598842583ac5c92903a978f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::LinkSensor::setLinkSensorTransform</definition>
+        <argsstring>(const iDynTree::Transform &amp;)=0</argsstring>
+        <name>setLinkSensorTransform</name>
+        <reimplementedby refid="classiDynTree_1_1AccelerometerSensor_1ad91ec3dc73a1d4f298a0b87ed62c07a7">setLinkSensorTransform</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1GyroscopeSensor_1ae0e36ae99719844f4553cfa2e5782902">setLinkSensorTransform</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor_1a0c6420e2d828d4d95c399f847bada325">setLinkSensorTransform</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor_1a137df78d69f448d6a1e1876158167eec">setLinkSensorTransform</reimplementedby>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>Set the transform from the sensor to the parent link sensor is attached to. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if link_index is the link attached to the link sensor, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="244" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkSensor_1a371122608cfbaf0c9fdf562b2780c786" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::LinkSensor::isConsistent</definition>
+        <argsstring>(const Model &amp;model) const</argsstring>
+        <name>isConsistent</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1a247d7d8b8dcdf828cf7172aabf05457c">isConsistent</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Check if the sensor is consistent with the specified model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="249" column="22"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Interface for <ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> that are associated to a <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>All link sensor classes inherit from this base class. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="6">
+        <label>iDynTree::ThreeAxisForceTorqueContactSensor</label>
+        <link refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::AccelerometerSensor</label>
+        <link refid="classiDynTree_1_1AccelerometerSensor"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>iDynTree::GyroscopeSensor</label>
+        <link refid="classiDynTree_1_1GyroscopeSensor"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::LinkSensor</label>
+        <link refid="classiDynTree_1_1LinkSensor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::Sensor</label>
+        <link refid="classiDynTree_1_1Sensor"/>
+      </node>
+      <node id="5">
+        <label>iDynTree::ThreeAxisAngularAccelerometerSensor</label>
+        <link refid="classiDynTree_1_1ThreeAxisAngularAccelerometerSensor"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>iDynTree::LinkSensor</label>
+        <link refid="classiDynTree_1_1LinkSensor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::Sensor</label>
+        <link refid="classiDynTree_1_1Sensor"/>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Sensors/Sensors.h" line="200" column="5" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="201" bodyend="250"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1Sensor_1a6428f5534e54c607bc5e773073c6c50e" prot="public" virt="pure-virtual"><scope>iDynTree::LinkSensor</scope><name>clone</name></member>
+      <member refid="classiDynTree_1_1LinkSensor_1ad5cb2901457ca5e0dedee1a6230ac858" prot="public" virt="pure-virtual"><scope>iDynTree::LinkSensor</scope><name>getLinkSensorTransform</name></member>
+      <member refid="classiDynTree_1_1Sensor_1a4a62adb1d4c1e4bedca8762783ab0468" prot="public" virt="pure-virtual"><scope>iDynTree::LinkSensor</scope><name>getName</name></member>
+      <member refid="classiDynTree_1_1LinkSensor_1a4d664e0bb40e93c9c966f286a5205ed6" prot="public" virt="pure-virtual"><scope>iDynTree::LinkSensor</scope><name>getParentLink</name></member>
+      <member refid="classiDynTree_1_1LinkSensor_1a45fc4c098204d10e64c4c82ae58ddd2c" prot="public" virt="pure-virtual"><scope>iDynTree::LinkSensor</scope><name>getParentLinkIndex</name></member>
+      <member refid="classiDynTree_1_1Sensor_1a6dd712921c150fddd33217694feb3652" prot="public" virt="pure-virtual"><scope>iDynTree::LinkSensor</scope><name>getSensorType</name></member>
+      <member refid="classiDynTree_1_1LinkSensor_1a371122608cfbaf0c9fdf562b2780c786" prot="public" virt="virtual"><scope>iDynTree::LinkSensor</scope><name>isConsistent</name></member>
+      <member refid="classiDynTree_1_1Sensor_1ace89679ad53fd11326ec00dc82ebd925" prot="public" virt="pure-virtual"><scope>iDynTree::LinkSensor</scope><name>isValid</name></member>
+      <member refid="classiDynTree_1_1LinkSensor_1a716a29b8598842583ac5c92903a978f5" prot="public" virt="pure-virtual"><scope>iDynTree::LinkSensor</scope><name>setLinkSensorTransform</name></member>
+      <member refid="classiDynTree_1_1Sensor_1a40cafcac5f0c1567e44d53c775641818" prot="public" virt="pure-virtual"><scope>iDynTree::LinkSensor</scope><name>setName</name></member>
+      <member refid="classiDynTree_1_1LinkSensor_1a9420746600b52d524f2c6fde5023147d" prot="public" virt="pure-virtual"><scope>iDynTree::LinkSensor</scope><name>setParentLink</name></member>
+      <member refid="classiDynTree_1_1LinkSensor_1aec8002495ae7ca62e3e8b516c55e5a0c" prot="public" virt="pure-virtual"><scope>iDynTree::LinkSensor</scope><name>setParentLinkIndex</name></member>
+      <member refid="classiDynTree_1_1Sensor_1ae91fc5a5922a99815b0cdc9de9f1ac88" prot="public" virt="pure-virtual"><scope>iDynTree::LinkSensor</scope><name>updateIndices</name></member>
+      <member refid="classiDynTree_1_1LinkSensor_1a6d58c4792a359f962a64f800f56ecb5a" prot="public" virt="pure-virtual"><scope>iDynTree::LinkSensor</scope><name>~LinkSensor</name></member>
+      <member refid="classiDynTree_1_1Sensor_1ab47aa38253b58f2a1c537e5956684e47" prot="public" virt="pure-virtual"><scope>iDynTree::LinkSensor</scope><name>~Sensor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

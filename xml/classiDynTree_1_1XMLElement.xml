@@ -1,0 +1,564 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1XMLElement" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::XMLElement</compoundname>
+    <derivedcompoundref refid="classiDynTree_1_1ForceTorqueSensorElement" prot="public" virt="non-virtual">iDynTree::ForceTorqueSensorElement</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1GeometryElement" prot="public" virt="non-virtual">iDynTree::GeometryElement</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1InertialElement" prot="public" virt="non-virtual">iDynTree::InertialElement</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1JointElement" prot="public" virt="non-virtual">iDynTree::JointElement</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1LinkElement" prot="public" virt="non-virtual">iDynTree::LinkElement</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1MaterialElement" prot="public" virt="non-virtual">iDynTree::MaterialElement</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1OriginElement" prot="public" virt="non-virtual">iDynTree::OriginElement</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1RobotElement" prot="public" virt="non-virtual">iDynTree::RobotElement</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1SensorElement" prot="public" virt="non-virtual">iDynTree::SensorElement</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1VisualElement" prot="public" virt="non-virtual">iDynTree::VisualElement</derivedcompoundref>
+    <includes local="no">iDynTree/XMLElement.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1XMLElement_1ad50b37eadf648eaa7746a8818095f04f" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; XMLElementPimpl &gt;</type>
+        <definition>std::unique_ptr&lt;XMLElementPimpl&gt; iDynTree::XMLElement::m_pimpl</definition>
+        <argsstring></argsstring>
+        <name>m_pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLElement.h" line="38" column="21" bodyfile="iDynTree/XMLElement.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classiDynTree_1_1XMLElement_1af16c8fed027186b0e7fa53a309273a8d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class XMLParser</definition>
+        <argsstring></argsstring>
+        <name>XMLParser</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1XMLParser" kindref="compound">XMLParser</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLElement.h" line="40" column="5" bodyfile="iDynTree/XMLElement.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1XMLElement_1a5e36029c866b14631dda4a8eacf3436b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::XMLElement::addChildElement</definition>
+        <argsstring>(std::shared_ptr&lt; XMLElement &gt; child)</argsstring>
+        <name>addChildElement</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">XMLElement</ref> &gt;</type>
+          <declname>child</declname>
+        </param>
+        <briefdescription>
+<para>Adds a child element to the current element. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>child</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the child element </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLElement.h" line="47" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1XMLElement_1a885cb939d74e8ce27ce4c0708c04267e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::XMLElement::XMLElement</definition>
+        <argsstring>()</argsstring>
+        <name>XMLElement</name>
+        <briefdescription>
+<para>Default constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Constructs an unnamed XML Element with no attributes. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLElement.h" line="55" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLElement_1a7ad288fac24328b2bb19908500fec39a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::XMLElement::XMLElement</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>XMLElement</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a named XML Element with no attributes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the XML element. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLElement.h" line="61" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLElement_1a42ee14ee8b2ec8a9e9e31472e1b17556" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::XMLElement::XMLElement</definition>
+        <argsstring>(const std::string &amp;name, const std::unordered_map&lt; std::string, std::shared_ptr&lt; iDynTree::XMLAttribute &gt;&gt; &amp;attributes)</argsstring>
+        <name>XMLElement</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const std::unordered_map&lt; std::string, std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLAttribute" kindref="compound">iDynTree::XMLAttribute</ref> &gt;&gt; &amp;</type>
+          <declname>attributes</declname>
+        </param>
+        <briefdescription>
+<para>Constructs a named XML Element with the specified attributes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is the designated initializer. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the XML element. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>attributes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the attributes of the XML element. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLElement.h" line="70" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLElement_1aa0220e560dfd45a38797cb5209653ad4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::XMLElement::~XMLElement</definition>
+        <argsstring>()</argsstring>
+        <name>~XMLElement</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLElement.h" line="76" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLElement_1ab40851b7629a74107f2183ca36e412e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::XMLElement::setAttributeCallback</definition>
+        <argsstring>(std::function&lt; bool(const std::unordered_map&lt; std::string, std::shared_ptr&lt; iDynTree::XMLAttribute &gt;&gt; &amp;)&gt; callback)</argsstring>
+        <name>setAttributeCallback</name>
+        <param>
+          <type>std::function&lt; bool(const std::unordered_map&lt; std::string, std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLAttribute" kindref="compound">iDynTree::XMLAttribute</ref> &gt;&gt; &amp;)&gt;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+<para>Sets a callback that will be called when attributes will be parsed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The function should have the following signature <computeroutput>const std::unordered_map&lt;std::string, std::shared_ptr&lt;<ref refid="classiDynTree_1_1XMLAttribute" kindref="compound">iDynTree::XMLAttribute</ref>&gt;&gt;&amp; -&gt; bool</computeroutput>. The attributes parsed from the XML will be passed as argument to the function. In case of error, it should return false, true otherwise. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>callback</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the callback to be set </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLElement.h" line="86" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLElement_1a16759fb450635662dced0eb2ace0228b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::XMLElement::setExitScopeCallback</definition>
+        <argsstring>(std::function&lt; void()&gt; callback)</argsstring>
+        <name>setExitScopeCallback</name>
+        <param>
+          <type>std::function&lt; void()&gt;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+<para>Sets a callback that will be called when the element has been finished parsing. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The function should have the following signature <computeroutput>void -&gt; void</computeroutput>. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>callback</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the callback </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLElement.h" line="94" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLElement_1a69171cc4b5c552b97f44375029356a2e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::XMLElement::setChildHasBeenParsedCallback</definition>
+        <argsstring>(std::function&lt; void(std::shared_ptr&lt; XMLElement &gt;)&gt; callback)</argsstring>
+        <name>setChildHasBeenParsedCallback</name>
+        <param>
+          <type>std::function&lt; void(std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">XMLElement</ref> &gt;)&gt;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+<para>Sets a callback that will be called when a child element has been finished parsing. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The callback should have the following signature <computeroutput>std::shared_ptr&lt;<ref refid="classiDynTree_1_1XMLElement" kindref="compound">XMLElement</ref>&gt; -&gt; void</computeroutput>, where the element passed is the child element that has been parsed. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>callback</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the callback </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLElement.h" line="103" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLElement_1a2a182ac17f5e644b113a67e02c3595e5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::function&lt; bool(const std::unordered_map&lt; std::string, std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLAttribute" kindref="compound">iDynTree::XMLAttribute</ref> &gt;&gt; &amp;)&gt;</type>
+        <definition>std::function&lt;bool(const std::unordered_map&lt;std::string, std::shared_ptr&lt;iDynTree::XMLAttribute&gt;&gt;&amp;)&gt; iDynTree::XMLElement::attributeCallback</definition>
+        <argsstring>() const</argsstring>
+        <name>attributeCallback</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLElement.h" line="105" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLElement_1aa6f49fb7b1b204e1a84cbdc51faeaa62" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::function&lt; void()&gt;</type>
+        <definition>std::function&lt;void()&gt; iDynTree::XMLElement::exitScopeCallback</definition>
+        <argsstring>() const</argsstring>
+        <name>exitScopeCallback</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLElement.h" line="106" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLElement_1a7129fb1e69a5bc819872e65d3965296d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::XMLElement::name</definition>
+        <argsstring>() const</argsstring>
+        <name>name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLElement.h" line="108" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLElement_1af5c19c2120a4e024149f78ee5bd52e6f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::vector&lt; std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">XMLElement</ref> &gt; &gt;</type>
+        <definition>const std::vector&lt;std::shared_ptr&lt;XMLElement&gt; &gt; iDynTree::XMLElement::children</definition>
+        <argsstring>() const</argsstring>
+        <name>children</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLElement.h" line="109" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLElement_1adf74d829fbe4d3d112c0ef2eba8bd3ea" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::unordered_map&lt; std::string, std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLAttribute" kindref="compound">iDynTree::XMLAttribute</ref> &gt; &gt;</type>
+        <definition>const std::unordered_map&lt;std::string, std::shared_ptr&lt;iDynTree::XMLAttribute&gt; &gt; iDynTree::XMLElement::attributes</definition>
+        <argsstring>() const</argsstring>
+        <name>attributes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLElement.h" line="111" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLElement_1a94cf11d5e2e9f6a44f17c7439d2b809f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">XMLElement</ref> &gt;</type>
+        <definition>virtual std::shared_ptr&lt;XMLElement&gt; iDynTree::XMLElement::childElementForName</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>childElementForName</name>
+        <reimplementedby refid="classiDynTree_1_1ForceTorqueSensorElement_1aa4c6d5b64e0290c93ccd0f963701b816">childElementForName</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1GeometryElement_1a1131aa77ea69a8eb9652742e70155e47">childElementForName</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1InertialElement_1aec2e94c9ffa5a1d2aa6c2e7406cce1a0">childElementForName</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1JointElement_1a38083484b2799575b507ba2865c6b4f3">childElementForName</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1LinkElement_1abc38b119e1a884cbbbe9eb7ef66eeeb0">childElementForName</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1MaterialElement_1afb72b35f8217ecf0c377ed20fd605eb9">childElementForName</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RobotElement_1a5436ee589d3bb7abe8cf0dd5b314bab8">childElementForName</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1SensorElement_1aef0cf31cdb9edd9ed82866bb4be8d7e5">childElementForName</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1VisualElement_1a1411f595ab1cf35b492e564a8c111bed">childElementForName</reimplementedby>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Factory method to create child element given the name. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>name of the element to create </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>a new parser element for the corresponding tag </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLElement.h" line="119" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLElement_1a327997dec2ced313aad008c376205f36" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::XMLElement::exitElementScope</definition>
+        <argsstring>()</argsstring>
+        <name>exitElementScope</name>
+        <reimplementedby refid="classiDynTree_1_1InertialElement_1a38f2684dc9bd018384a0e386bd590240">exitElementScope</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1JointElement_1af69cd132219910893eb013a8d2d0d95c">exitElementScope</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1LinkElement_1aed8591a7d1c2a43fa4671cf3d28df1b6">exitElementScope</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLElement.h" line="121" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLElement_1a18b5b00729b99a19cb3e8f430656e152" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::XMLElement::childHasBeenParsed</definition>
+        <argsstring>(std::shared_ptr&lt; XMLElement &gt; parsedChild)</argsstring>
+        <name>childHasBeenParsed</name>
+        <reimplementedby refid="classiDynTree_1_1LinkElement_1a93a63088eacd944a772bc7a60e3928ec">childHasBeenParsed</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RobotElement_1a9e40dc08778e6160b1d0088a9417b669">childHasBeenParsed</reimplementedby>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">XMLElement</ref> &gt;</type>
+          <declname>parsedChild</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLElement.h" line="123" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLElement_1a2fe23e8a9ee4d2f776f792c9c118db45" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::XMLElement::setAttributes</definition>
+        <argsstring>(const std::unordered_map&lt; std::string, std::shared_ptr&lt; iDynTree::XMLAttribute &gt;&gt; &amp;attributes)</argsstring>
+        <name>setAttributes</name>
+        <reimplementedby refid="classiDynTree_1_1LinkElement_1a69e757ba5c3e6949b847ecff39e84c07">setAttributes</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1MaterialElement_1a562850e48a98db643e05148e4cf21248">setAttributes</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1OriginElement_1a82a9b00d78ef244faca75274786dad3b">setAttributes</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1SensorElement_1a89602903716a20070be91a2eef07940f">setAttributes</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1VisualElement_1aafcde4f7f8a04701de0d07935bc93a7e">setAttributes</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1JointElement_1a48e357fff5a0e1fb9899792b4192960d">setAttributes</reimplementedby>
+        <param>
+          <type>const std::unordered_map&lt; std::string, std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLAttribute" kindref="compound">iDynTree::XMLAttribute</ref> &gt;&gt; &amp;</type>
+          <declname>attributes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLElement.h" line="125" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLElement_1aa44416f43c71e081f6637a91eb733e8d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::XMLElement::parsedCharacters</definition>
+        <argsstring>(const std::string &amp;characters)</argsstring>
+        <name>parsedCharacters</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>characters</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLElement.h" line="127" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLElement_1abebc95353394912e187ad70e6078fcdc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::XMLElement::getParsedTextContent</definition>
+        <argsstring>() const</argsstring>
+        <name>getParsedTextContent</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLElement.h" line="129" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLElement_1a3d8e1b737e614b35e3df0a4f76ac645b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::XMLElement::description</definition>
+        <argsstring>() const</argsstring>
+        <name>description</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLElement.h" line="131" column="17"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class representing an XML element. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This class represents an XML element encountered during parsing, i.e. the XML part between (and comprising) &lt;tag&gt; ... &lt;/tag&gt; </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="9">
+        <label>iDynTree::RobotElement</label>
+        <link refid="classiDynTree_1_1RobotElement"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>iDynTree::MaterialElement</label>
+        <link refid="classiDynTree_1_1MaterialElement"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::GeometryElement</label>
+        <link refid="classiDynTree_1_1GeometryElement"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>iDynTree::LinkElement</label>
+        <link refid="classiDynTree_1_1LinkElement"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>iDynTree::SensorElement</label>
+        <link refid="classiDynTree_1_1SensorElement"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>iDynTree::InertialElement</label>
+        <link refid="classiDynTree_1_1InertialElement"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::XMLElement</label>
+        <link refid="classiDynTree_1_1XMLElement"/>
+      </node>
+      <node id="11">
+        <label>iDynTree::VisualElement</label>
+        <link refid="classiDynTree_1_1VisualElement"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>iDynTree::OriginElement</label>
+        <link refid="classiDynTree_1_1OriginElement"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>iDynTree::JointElement</label>
+        <link refid="classiDynTree_1_1JointElement"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::ForceTorqueSensorElement</label>
+        <link refid="classiDynTree_1_1ForceTorqueSensorElement"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="iDynTree/XMLElement.h" line="35" column="1" bodyfile="iDynTree/XMLElement.h" bodystart="35" bodyend="133"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1XMLElement_1a5e36029c866b14631dda4a8eacf3436b" prot="private" virt="non-virtual"><scope>iDynTree::XMLElement</scope><name>addChildElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a2a182ac17f5e644b113a67e02c3595e5" prot="public" virt="non-virtual"><scope>iDynTree::XMLElement</scope><name>attributeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1adf74d829fbe4d3d112c0ef2eba8bd3ea" prot="public" virt="non-virtual"><scope>iDynTree::XMLElement</scope><name>attributes</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a94cf11d5e2e9f6a44f17c7439d2b809f" prot="public" virt="virtual"><scope>iDynTree::XMLElement</scope><name>childElementForName</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a18b5b00729b99a19cb3e8f430656e152" prot="public" virt="virtual"><scope>iDynTree::XMLElement</scope><name>childHasBeenParsed</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1af5c19c2120a4e024149f78ee5bd52e6f" prot="public" virt="non-virtual"><scope>iDynTree::XMLElement</scope><name>children</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a3d8e1b737e614b35e3df0a4f76ac645b" prot="public" virt="non-virtual"><scope>iDynTree::XMLElement</scope><name>description</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a327997dec2ced313aad008c376205f36" prot="public" virt="virtual"><scope>iDynTree::XMLElement</scope><name>exitElementScope</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1aa6f49fb7b1b204e1a84cbdc51faeaa62" prot="public" virt="non-virtual"><scope>iDynTree::XMLElement</scope><name>exitScopeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1abebc95353394912e187ad70e6078fcdc" prot="public" virt="non-virtual"><scope>iDynTree::XMLElement</scope><name>getParsedTextContent</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1ad50b37eadf648eaa7746a8818095f04f" prot="private" virt="non-virtual"><scope>iDynTree::XMLElement</scope><name>m_pimpl</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a7129fb1e69a5bc819872e65d3965296d" prot="public" virt="non-virtual"><scope>iDynTree::XMLElement</scope><name>name</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1aa44416f43c71e081f6637a91eb733e8d" prot="public" virt="virtual"><scope>iDynTree::XMLElement</scope><name>parsedCharacters</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1ab40851b7629a74107f2183ca36e412e4" prot="public" virt="non-virtual"><scope>iDynTree::XMLElement</scope><name>setAttributeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a2fe23e8a9ee4d2f776f792c9c118db45" prot="public" virt="virtual"><scope>iDynTree::XMLElement</scope><name>setAttributes</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a69171cc4b5c552b97f44375029356a2e" prot="public" virt="non-virtual"><scope>iDynTree::XMLElement</scope><name>setChildHasBeenParsedCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a16759fb450635662dced0eb2ace0228b" prot="public" virt="non-virtual"><scope>iDynTree::XMLElement</scope><name>setExitScopeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a885cb939d74e8ce27ce4c0708c04267e" prot="public" virt="non-virtual"><scope>iDynTree::XMLElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a7ad288fac24328b2bb19908500fec39a" prot="public" virt="non-virtual"><scope>iDynTree::XMLElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a42ee14ee8b2ec8a9e9e31472e1b17556" prot="public" virt="non-virtual"><scope>iDynTree::XMLElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1aa0220e560dfd45a38797cb5209653ad4" prot="public" virt="virtual"><scope>iDynTree::XMLElement</scope><name>~XMLElement</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimalcontrol_1_1SystemLineariser" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::optimalcontrol::SystemLineariser</compoundname>
+    <includes local="no">iDynTree/SystemLineariser.h</includes>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="iDynTree/SystemLineariser.h" line="29" column="9" bodyfile="iDynTree/SystemLineariser.h" bodystart="29" bodyend="31"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

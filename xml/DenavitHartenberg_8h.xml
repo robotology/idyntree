@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="DenavitHartenberg_8h" kind="file" language="C++">
+    <compoundname>DenavitHartenberg.h</compoundname>
+    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
+    <includes refid="Model_8h" local="no">iDynTree/Model/Model.h</includes>
+    <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
+    <includes local="no">vector</includes>
+    <includedby refid="iKinConversionsImplementation_8h" local="no">iDynTree/iKinConversionsImplementation.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>vector</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/Model/DenavitHartenberg.h</label>
+        <link refid="DenavitHartenberg_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structiDynTree_1_1DHLink" prot="public">iDynTree::DHLink</innerclass>
+    <innerclass refid="classiDynTree_1_1DHChain" prot="public">iDynTree::DHChain</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="DenavitHartenberg_8h_1a9f5fda0dc8377f9fad3f8b60d73f1c7c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Transform</type>
+        <definition>Transform iDynTree::TransformFromDHCraig1989</definition>
+        <argsstring>(double a, double alpha, double d, double theta)</argsstring>
+        <name>TransformFromDHCraig1989</name>
+        <param>
+          <type>double</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>alpha</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>d</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>theta</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DenavitHartenberg.h" line="145" column="11" declfile="iDynTree/Model/DenavitHartenberg.h" declline="145" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="DenavitHartenberg_8h_1a259b4c68b0f4b9ae9ce389ed14f4c712" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Transform</type>
+        <definition>Transform iDynTree::TransformFromDH</definition>
+        <argsstring>(double a, double alpha, double d, double theta)</argsstring>
+        <name>TransformFromDH</name>
+        <param>
+          <type>double</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>alpha</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>d</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>theta</declname>
+        </param>
+        <briefdescription>
+<para>DH : constructs a transformationmatrix T_link(i-1)_link(i) with the Denavit-Hartenberg convention as described in the original publictation: Denavit, J. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>and Hartenberg, R. S., A kinematic notation for lower-pair mechanisms based on matrices, ASME Journal of Applied Mechanics, 23:215-221, 1955.</para>
+<para>Function compatible on KDL&apos;s Frame::DH method. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DenavitHartenberg.h" line="156" column="11" declfile="iDynTree/Model/DenavitHartenberg.h" declline="156" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="DenavitHartenberg_8h_1ada11245ee6d17f4d64ccf59eeead8f07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ExtractDHChainFromModel</definition>
+        <argsstring>(const iDynTree::Model &amp;model, const std::string baseFrame, const std::string eeFrame, DHChain &amp;outputChain, double tolerance=1e-5)</argsstring>
+        <name>ExtractDHChainFromModel</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const std::string</type>
+          <declname>baseFrame</declname>
+        </param>
+        <param>
+          <type>const std::string</type>
+          <declname>eeFrame</declname>
+        </param>
+        <param>
+          <type>DHChain &amp;</type>
+          <declname>outputChain</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>tolerance</declname>
+          <defval>1e-5</defval>
+        </param>
+        <briefdescription>
+<para>Extract a Denavit Hartenberg Chain from a <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In particular you can specify the base frame and the end effector frame of the chain. The chain is then extracted using the algorithm found in: Chapter 3, Spong, Mark W., Seth Hutchinson, and M. Vidyasagar. &quot;Robot modeling and control&quot;. 2006. (section 3.2.3 of <ulink url="http://www.cs.duke.edu/brd/Teaching/Bio/asmb/current/Papers/chap3-forward-kinematics.pdf">http://www.cs.duke.edu/brd/Teaching/Bio/asmb/current/Papers/chap3-forward-kinematics.pdf</ulink>)</para>
+<para><simplesect kind="note"><para>The DH representation supports only revolute and translational 1-DOF joints. In this implementation only revolute joints are supported. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DenavitHartenberg.h" line="169" column="6" declfile="iDynTree/Model/DenavitHartenberg.h" declline="169" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="DenavitHartenberg_8h_1ac94534b93496e2703a218b38774c64a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::CreateModelFromDHChain</definition>
+        <argsstring>(const DHChain &amp;inputChain, Model &amp;outputModel)</argsstring>
+        <name>CreateModelFromDHChain</name>
+        <param>
+          <type>const DHChain &amp;</type>
+          <declname>inputChain</declname>
+        </param>
+        <param>
+          <type>Model &amp;</type>
+          <declname>outputModel</declname>
+        </param>
+        <briefdescription>
+<para>Create an <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> from a <ref refid="classiDynTree_1_1DHChain" kindref="compound">DHChain</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>The names of the links will be link0, link1, ... linkN, furthermore there are two additional frame for the base and endEffector frames, named baseFrame and distalFrame . </para>
+</simplesect>
+<simplesect kind="note"><para>The inertia of the links will be set to 1 kg in the origin of the link.</para>
+</simplesect>
+<simplesect kind="return"><para>true if all went ok, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DenavitHartenberg.h" line="185" column="6" declfile="iDynTree/Model/DenavitHartenberg.h" declline="185" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/DenavitHartenberg.h"/>
+  </compounddef>
+</doxygen>

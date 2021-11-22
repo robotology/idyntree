@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1DOFSpatialMotionArray" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::DOFSpatialMotionArray</compoundname>
+    <includes local="no">iDynTree/Model/JointState.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1DOFSpatialMotionArray_1a920d1f8d41fc04c76cfdfea9b9824d31" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">iDynTree::SpatialMotionVector</ref> &gt;</type>
+        <definition>std::vector&lt;iDynTree::SpatialMotionVector&gt; iDynTree::DOFSpatialMotionArray::m_dofSpatialMotion</definition>
+        <argsstring></argsstring>
+        <name>m_dofSpatialMotion</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/JointState.h" line="97" column="21" bodyfile="iDynTree/Model/JointState.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1DOFSpatialMotionArray_1a374aefc02190f47c0280738cfbe18749" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::DOFSpatialMotionArray::DOFSpatialMotionArray</definition>
+        <argsstring>(std::size_t nrOfDOFs=0)</argsstring>
+        <name>DOFSpatialMotionArray</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>nrOfDOFs</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/JointState.h" line="100" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DOFSpatialMotionArray_1a48e1e7e2f8d578b983220ab091274482" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::DOFSpatialMotionArray::DOFSpatialMotionArray</definition>
+        <argsstring>(const iDynTree::Model &amp;model)</argsstring>
+        <name>DOFSpatialMotionArray</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/JointState.h" line="101" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DOFSpatialMotionArray_1a1d54c21999e0d2934da0c3e1edc562d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::DOFSpatialMotionArray::resize</definition>
+        <argsstring>(const std::size_t nrOfDOFs)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>const std::size_t</type>
+          <declname>nrOfDOFs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/JointState.h" line="103" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DOFSpatialMotionArray_1a2c03aa02d558e139337d061e4b471785" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::DOFSpatialMotionArray::resize</definition>
+        <argsstring>(const iDynTree::Model &amp;model)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/JointState.h" line="104" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DOFSpatialMotionArray_1a84105fd3e858f5a55645a4436e125ec5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::DOFSpatialMotionArray::isConsistent</definition>
+        <argsstring>(const iDynTree::Model &amp;model) const</argsstring>
+        <name>isConsistent</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/JointState.h" line="106" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DOFSpatialMotionArray_1a90e18ed78dd1010e7b158abe6e47ee9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">iDynTree::SpatialMotionVector</ref> &amp;</type>
+        <definition>iDynTree::SpatialMotionVector&amp; iDynTree::DOFSpatialMotionArray::operator()</definition>
+        <argsstring>(const size_t dof)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const size_t</type>
+          <declname>dof</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/JointState.h" line="108" column="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DOFSpatialMotionArray_1aa8225eb16e3c8b009c2ae46aef1ac0f7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">iDynTree::SpatialMotionVector</ref> &amp;</type>
+        <definition>const iDynTree::SpatialMotionVector&amp; iDynTree::DOFSpatialMotionArray::operator()</definition>
+        <argsstring>(const size_t dof) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const size_t</type>
+          <declname>dof</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/JointState.h" line="109" column="46"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1DOFSpatialMotionArray_1ab5331dbe1432a3442f2ed81a6d3eb621" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::DOFSpatialMotionArray::~DOFSpatialMotionArray</definition>
+        <argsstring>()</argsstring>
+        <name>~DOFSpatialMotionArray</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/JointState.h" line="111" column="9"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class for storing a vector of spatial motion vectors, one for each (internal) dof in a model. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/JointState.h" line="94" column="5" bodyfile="iDynTree/Model/JointState.h" bodystart="95" bodyend="112"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1DOFSpatialMotionArray_1a374aefc02190f47c0280738cfbe18749" prot="public" virt="non-virtual"><scope>iDynTree::DOFSpatialMotionArray</scope><name>DOFSpatialMotionArray</name></member>
+      <member refid="classiDynTree_1_1DOFSpatialMotionArray_1a48e1e7e2f8d578b983220ab091274482" prot="public" virt="non-virtual"><scope>iDynTree::DOFSpatialMotionArray</scope><name>DOFSpatialMotionArray</name></member>
+      <member refid="classiDynTree_1_1DOFSpatialMotionArray_1a84105fd3e858f5a55645a4436e125ec5" prot="public" virt="non-virtual"><scope>iDynTree::DOFSpatialMotionArray</scope><name>isConsistent</name></member>
+      <member refid="classiDynTree_1_1DOFSpatialMotionArray_1a920d1f8d41fc04c76cfdfea9b9824d31" prot="private" virt="non-virtual"><scope>iDynTree::DOFSpatialMotionArray</scope><name>m_dofSpatialMotion</name></member>
+      <member refid="classiDynTree_1_1DOFSpatialMotionArray_1a90e18ed78dd1010e7b158abe6e47ee9d" prot="public" virt="non-virtual"><scope>iDynTree::DOFSpatialMotionArray</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1DOFSpatialMotionArray_1aa8225eb16e3c8b009c2ae46aef1ac0f7" prot="public" virt="non-virtual"><scope>iDynTree::DOFSpatialMotionArray</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1DOFSpatialMotionArray_1a1d54c21999e0d2934da0c3e1edc562d2" prot="public" virt="non-virtual"><scope>iDynTree::DOFSpatialMotionArray</scope><name>resize</name></member>
+      <member refid="classiDynTree_1_1DOFSpatialMotionArray_1a2c03aa02d558e139337d061e4b471785" prot="public" virt="non-virtual"><scope>iDynTree::DOFSpatialMotionArray</scope><name>resize</name></member>
+      <member refid="classiDynTree_1_1DOFSpatialMotionArray_1ab5331dbe1432a3442f2ed81a6d3eb621" prot="public" virt="non-virtual"><scope>iDynTree::DOFSpatialMotionArray</scope><name>~DOFSpatialMotionArray</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

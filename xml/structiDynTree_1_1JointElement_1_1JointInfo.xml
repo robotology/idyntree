@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1JointElement_1_1JointInfo" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::JointElement::JointInfo</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1JointElement_1_1JointInfo_1abdef7db922e065f44be965be7c2abb90" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1IJoint" kindref="compound">IJoint</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;IJoint&gt; iDynTree::JointElement::JointInfo::joint</definition>
+        <argsstring></argsstring>
+        <name>joint</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="38" column="25" bodyfile="private/JointElement.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1JointElement_1_1JointInfo_1adfd0d29071e4d58fd7f7a16931e61984" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Axis" kindref="compound">iDynTree::Axis</ref></type>
+        <definition>iDynTree::Axis iDynTree::JointElement::JointInfo::axis</definition>
+        <argsstring></argsstring>
+        <name>axis</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="39" column="24" bodyfile="private/JointElement.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1JointElement_1_1JointInfo_1a9cf00a788a755396d038e6a689dfabdf" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::JointElement::JointInfo::parentLinkName</definition>
+        <argsstring></argsstring>
+        <name>parentLinkName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="40" column="21" bodyfile="private/JointElement.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1JointElement_1_1JointInfo_1ab5f290de2faa0b6c57fe348a1221abe0" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::JointElement::JointInfo::childLinkName</definition>
+        <argsstring></argsstring>
+        <name>childLinkName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="41" column="21" bodyfile="private/JointElement.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="7">
+        <label>iDynTree::Axis</label>
+        <link refid="classiDynTree_1_1Axis"/>
+      </node>
+      <node id="4">
+        <label>T</label>
+      </node>
+      <node id="3">
+        <label>std::shared_ptr&lt; T &gt;</label>
+        <childnode refid="4" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="2">
+        <label>std::shared_ptr&lt; iDynTree::IJoint &gt;</label>
+        <childnode refid="3" relation="template-instance">
+          <edgelabel>&lt; iDynTree::IJoint &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::JointElement::JointInfo</label>
+        <link refid="structiDynTree_1_1JointElement_1_1JointInfo"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>joint</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>childLinkName</edgelabel>
+          <edgelabel>parentLinkName</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>axis</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>std::string</label>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="private/JointElement.h" line="37" column="5" bodyfile="private/JointElement.h" bodystart="37" bodyend="42"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1JointElement_1_1JointInfo_1adfd0d29071e4d58fd7f7a16931e61984" prot="public" virt="non-virtual"><scope>iDynTree::JointElement::JointInfo</scope><name>axis</name></member>
+      <member refid="structiDynTree_1_1JointElement_1_1JointInfo_1ab5f290de2faa0b6c57fe348a1221abe0" prot="public" virt="non-virtual"><scope>iDynTree::JointElement::JointInfo</scope><name>childLinkName</name></member>
+      <member refid="structiDynTree_1_1JointElement_1_1JointInfo_1abdef7db922e065f44be965be7c2abb90" prot="public" virt="non-virtual"><scope>iDynTree::JointElement::JointInfo</scope><name>joint</name></member>
+      <member refid="structiDynTree_1_1JointElement_1_1JointInfo_1a9cf00a788a755396d038e6a689dfabdf" prot="public" virt="non-virtual"><scope>iDynTree::JointElement::JointInfo</scope><name>parentLinkName</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

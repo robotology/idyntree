@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1details_1_1is__allowed__extent__conversion" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::details::is_allowed_extent_conversion</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::integral_constant&lt; bool, From==To||From==iDynTree::dynamic_extent||To==iDynTree::dynamic_extent &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>std::ptrdiff_t</type>
+        <declname>From</declname>
+        <defname>From</defname>
+      </param>
+      <param>
+        <type>std::ptrdiff_t</type>
+        <declname>To</declname>
+        <defname>To</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>std::integral_constant&lt; bool, From==To||From==iDynTree::dynamic_extent||To==iDynTree::dynamic_extent &gt;</label>
+      </node>
+      <node id="1">
+        <label>iDynTree::details::is_allowed_extent_conversion&lt; From, To &gt;</label>
+        <link refid="structiDynTree_1_1details_1_1is__allowed__extent__conversion"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>std::integral_constant&lt; bool, From==To||From==iDynTree::dynamic_extent||To==iDynTree::dynamic_extent &gt;</label>
+      </node>
+      <node id="1">
+        <label>iDynTree::details::is_allowed_extent_conversion&lt; From, To &gt;</label>
+        <link refid="structiDynTree_1_1details_1_1is__allowed__extent__conversion"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Core/Span.h" line="169" column="5" bodyfile="iDynTree/Core/Span.h" bodystart="172" bodyend="173"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

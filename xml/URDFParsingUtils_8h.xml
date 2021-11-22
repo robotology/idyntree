@@ -1,0 +1,266 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="URDFParsingUtils_8h" kind="file" language="C++">
+    <compoundname>URDFParsingUtils.h</compoundname>
+    <includes local="no">cmath</includes>
+    <includes local="no">cstdlib</includes>
+    <includes local="no">sstream</includes>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
+    <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
+    <includes local="no">fpconv.h</includes>
+    <incdepgraph>
+      <node id="2">
+        <label>cmath</label>
+      </node>
+      <node id="5">
+        <label>string</label>
+      </node>
+      <node id="7">
+        <label>fpconv.h</label>
+      </node>
+      <node id="6">
+        <label>vector</label>
+      </node>
+      <node id="4">
+        <label>sstream</label>
+      </node>
+      <node id="3">
+        <label>cstdlib</label>
+      </node>
+      <node id="1">
+        <label>private/URDFParsingUtils.h</label>
+        <link refid="URDFParsingUtils_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="URDFParsingUtils_8h_1a91b6a382b3717636fb3a45a8ba4f8850" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::stringToDoubleWithClassicLocale</definition>
+        <argsstring>(const std::string &amp;inStr, double &amp;outDouble)</argsstring>
+        <name>stringToDoubleWithClassicLocale</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>inStr</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>outDouble</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/URDFParsingUtils.h" line="29" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="29" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="URDFParsingUtils_8h_1a9c8ea4244ff5dc2276f8008b53a609e8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::stringToIntWithClassicLocale</definition>
+        <argsstring>(const std::string &amp;inStr, int &amp;outInt)</argsstring>
+        <name>stringToIntWithClassicLocale</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>inStr</declname>
+        </param>
+        <param>
+          <type>int &amp;</type>
+          <declname>outInt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/URDFParsingUtils.h" line="37" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="37" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="URDFParsingUtils_8h_1ab5e3c195abc73e35657df0f831daab96" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::stringToUnsignedIntWithClassicLocale</definition>
+        <argsstring>(const std::string &amp;inStr, unsigned int &amp;outInt)</argsstring>
+        <name>stringToUnsignedIntWithClassicLocale</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>inStr</declname>
+        </param>
+        <param>
+          <type>unsigned int &amp;</type>
+          <declname>outInt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/URDFParsingUtils.h" line="45" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="45" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="URDFParsingUtils_8h_1a072b6eff9a6c9173d96ebef185343d90" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::doubleToStringWithClassicLocale</definition>
+        <argsstring>(const double &amp;inDouble, std::string &amp;outStr)</argsstring>
+        <name>doubleToStringWithClassicLocale</name>
+        <param>
+          <type>const double &amp;</type>
+          <declname>inDouble</declname>
+        </param>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>outStr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/URDFParsingUtils.h" line="53" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="53" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="URDFParsingUtils_8h_1adffeb935ed6aad8d6f30705238117df8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::intToString</definition>
+        <argsstring>(const int inInt)</argsstring>
+        <name>intToString</name>
+        <param>
+          <type>const int</type>
+          <declname>inInt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/URDFParsingUtils.h" line="68" column="20" bodyfile="private/URDFParsingUtils.h" bodystart="68" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="URDFParsingUtils_8h_1a49c5650f4d8f43d3af304224dcf880c0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::intToString</definition>
+        <argsstring>(const size_t inInt)</argsstring>
+        <name>intToString</name>
+        <param>
+          <type>const size_t</type>
+          <declname>inInt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/URDFParsingUtils.h" line="75" column="20" bodyfile="private/URDFParsingUtils.h" bodystart="75" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="URDFParsingUtils_8h_1ab77f7c41e63dbfbfc327283490b7cb92" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::splitString</definition>
+        <argsstring>(const std::string &amp;inStr, std::vector&lt; std::string &gt; &amp;pieces)</argsstring>
+        <name>splitString</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>inStr</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt; &amp;</type>
+          <declname>pieces</declname>
+        </param>
+        <briefdescription>
+<para>Split string along spaces. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/URDFParsingUtils.h" line="86" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="86" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="URDFParsingUtils_8h_1a8645d0238ce891d16d8d7be074bd33dc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::vector3FromString</definition>
+        <argsstring>(const std::string &amp;vector_str, Vector3 &amp;out)</argsstring>
+        <name>vector3FromString</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>vector_str</declname>
+        </param>
+        <param>
+          <type>Vector3 &amp;</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/URDFParsingUtils.h" line="109" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="109" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="URDFParsingUtils_8h_1a5872c10e6e9f23dbeeb87ad4b503a5ba" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename iDynTreeVectorType</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool iDynTree::vectorToString</definition>
+        <argsstring>(const iDynTreeVectorType &amp;in, std::string &amp;out_str)</argsstring>
+        <name>vectorToString</name>
+        <param>
+          <type>const iDynTreeVectorType &amp;</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>out_str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/URDFParsingUtils.h" line="146" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="146" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="URDFParsingUtils_8h_1ab55f4fdf60c8947b61adde47e0495b10" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::vector4FromString</definition>
+        <argsstring>(const std::string &amp;vector_str, Vector4 &amp;out)</argsstring>
+        <name>vector4FromString</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>vector_str</declname>
+        </param>
+        <param>
+          <type>Vector4 &amp;</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/URDFParsingUtils.h" line="167" column="13" bodyfile="private/URDFParsingUtils.h" bodystart="167" bodyend="202"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="private/URDFParsingUtils.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::optimalcontrol::ControlledDynamicalSystem</compoundname>
+    <includes local="no">iDynTree/ControlledDynamicalSystem.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1af74df0f0b8e668417811d0431be47df0" prot="private" static="no" mutable="no">
+        <type>ControlledDynamicalSystemImplementation *</type>
+        <definition>ControlledDynamicalSystemImplementation* iDynTree::optimalcontrol::ControlledDynamicalSystem::m_pimpl</definition>
+        <argsstring></argsstring>
+        <name>m_pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ControlledDynamicalSystem.h" line="72" column="53" bodyfile="iDynTree/ControlledDynamicalSystem.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1a9a54ab23ab86a89d1385c3715dd9f74c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::ControlledDynamicalSystem::ControlledDynamicalSystem</definition>
+        <argsstring>()</argsstring>
+        <name>ControlledDynamicalSystem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ControlledDynamicalSystem.h" line="41" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1ab52ff2a4d3b4710dcae26c474debf1e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::ControlledDynamicalSystem::ControlledDynamicalSystem</definition>
+        <argsstring>(const ControlledDynamicalSystem &amp;other)=delete</argsstring>
+        <name>ControlledDynamicalSystem</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem" kindref="compound">ControlledDynamicalSystem</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ControlledDynamicalSystem.h" line="43" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1adc948b7d3046a17f7095e3f09a624d23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::ControlledDynamicalSystem::~ControlledDynamicalSystem</definition>
+        <argsstring>()</argsstring>
+        <name>~ControlledDynamicalSystem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ControlledDynamicalSystem.h" line="45" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1abb44051465e3022d2cbdd60b6fd7bea3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ControlledDynamicalSystem::setDynamicalSystem</definition>
+        <argsstring>(std::shared_ptr&lt; DynamicalSystem &gt; autonomousSystem, bool usePreviousController=false)</argsstring>
+        <name>setDynamicalSystem</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> &gt;</type>
+          <declname>autonomousSystem</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>usePreviousController</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Set the <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> pointer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The usePreviousController flag allows to use again the controller stored in memory after a previous call to setController. This allow to call the method setController before setting the dynamical system. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">autonomousSystem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> pointer. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>usePreviousController</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A flag specifying whether the previously specified controller should be used. Default is false. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull. Possible sources of failures: empty pointer, usePreviouController is true and the dynamicalSystem and the previous controller are not compatible. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ControlledDynamicalSystem.h" line="54" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1aecd92e0995c2d54416a8f81c3e5c1426" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::ControlledDynamicalSystem::setController</definition>
+        <argsstring>(std::shared_ptr&lt; Controller &gt; controller)</argsstring>
+        <name>setController</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1Controller" kindref="compound">Controller</ref> &gt;</type>
+          <declname>controller</declname>
+        </param>
+        <briefdescription>
+<para>Set the controller pointer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">controller</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1optimalcontrol_1_1Controller" kindref="compound">Controller</ref> pointer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull. Possible causes of failures: empty pointer, the controller is not compatible with the already specified dynamical system. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ControlledDynamicalSystem.h" line="61" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1a00d059049dda80a4c044654d5cc0fe16" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;DynamicalSystem&gt; iDynTree::optimalcontrol::ControlledDynamicalSystem::asDynamicalSystem</definition>
+        <argsstring>()</argsstring>
+        <name>asDynamicalSystem</name>
+        <briefdescription>
+<para>Returns a pointer to a <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> pointer can be used inside an Integrator. <simplesect kind="return"><para>A pointer to a <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> object. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ControlledDynamicalSystem.h" line="68" column="29"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The <ref refid="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem" kindref="compound">ControlledDynamicalSystem</ref> class allows to easily connect a <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> with a <ref refid="classiDynTree_1_1optimalcontrol_1_1Controller" kindref="compound">Controller</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>It defines a controlled dynamical system that can be integrated using an Integrator class. <simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="iDynTree/ControlledDynamicalSystem.h" line="39" column="9" bodyfile="iDynTree/ControlledDynamicalSystem.h" bodystart="39" bodyend="73"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1a00d059049dda80a4c044654d5cc0fe16" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ControlledDynamicalSystem</scope><name>asDynamicalSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1a9a54ab23ab86a89d1385c3715dd9f74c" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ControlledDynamicalSystem</scope><name>ControlledDynamicalSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1ab52ff2a4d3b4710dcae26c474debf1e8" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ControlledDynamicalSystem</scope><name>ControlledDynamicalSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1af74df0f0b8e668417811d0431be47df0" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::ControlledDynamicalSystem</scope><name>m_pimpl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1aecd92e0995c2d54416a8f81c3e5c1426" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ControlledDynamicalSystem</scope><name>setController</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1abb44051465e3022d2cbdd60b6fd7bea3" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ControlledDynamicalSystem</scope><name>setDynamicalSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1adc948b7d3046a17f7095e3f09a624d23" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ControlledDynamicalSystem</scope><name>~ControlledDynamicalSystem</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

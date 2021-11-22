@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_eeba5a9ee7993fb95e69618edbde8baf" kind="dir">
+    <compoundname>private</compoundname>
+    <innerfile refid="ForceTorqueSensorElement_8h">ForceTorqueSensorElement.h</innerfile>
+    <innerfile refid="GeometryElement_8h">GeometryElement.h</innerfile>
+    <innerfile refid="InertialElement_8h">InertialElement.h</innerfile>
+    <innerfile refid="JointElement_8h">JointElement.h</innerfile>
+    <innerfile refid="LinkElement_8h">LinkElement.h</innerfile>
+    <innerfile refid="MaterialElement_8h">MaterialElement.h</innerfile>
+    <innerfile refid="OriginElement_8h">OriginElement.h</innerfile>
+    <innerfile refid="RobotElement_8h">RobotElement.h</innerfile>
+    <innerfile refid="SensorElement_8h">SensorElement.h</innerfile>
+    <innerfile refid="URDFDocument_8h">URDFDocument.h</innerfile>
+    <innerfile refid="URDFModelExport_8h">URDFModelExport.h</innerfile>
+    <innerfile refid="URDFParsingUtils_8h">URDFParsingUtils.h</innerfile>
+    <innerfile refid="VisualElement_8h">VisualElement.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="private/"/>
+  </compounddef>
+</doxygen>

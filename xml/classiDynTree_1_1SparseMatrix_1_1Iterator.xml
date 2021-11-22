@@ -1,0 +1,347 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1SparseMatrix_1_1Iterator" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::SparseMatrix::Iterator</compoundname>
+    <innerclass refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef" prot="public">iDynTree::SparseMatrix::Iterator::TripletRef</innerclass>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1a116a4c928ec90f022493f19d8aa51b7a" prot="public" static="no">
+        <type>std::ptrdiff_t</type>
+        <definition>typedef std::ptrdiff_t iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::difference_type</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="329" column="28" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="329" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1a771a56e49407184b3625b07912dbbbbc" prot="public" static="no">
+        <type><ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">iDynTree::SparseMatrix</ref>&lt; ordering &gt;::<ref refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef" kindref="compound">Iterator::TripletRef</ref></type>
+        <definition>typedef iDynTree::SparseMatrix&lt;ordering&gt;::Iterator::TripletRef iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="330" column="68" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="330" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1a137ace02de6dda2267e1e7043c65ea41" prot="public" static="no">
+        <type><ref refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef" kindref="compound">value_type</ref> &amp;</type>
+        <definition>typedef value_type&amp; iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::reference</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="331" column="24" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="331" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1a876c832e5902093b6b4d3ca6da8f4257" prot="public" static="no">
+        <type><ref refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef" kindref="compound">value_type</ref> *</type>
+        <definition>typedef value_type* iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::pointer</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="332" column="24" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="332" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1a5d15979d6978775e75f8da86869e9fdb" prot="public" static="no">
+        <type>std::output_iterator_tag</type>
+        <definition>typedef std::output_iterator_tag iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::iterator_category</definition>
+        <argsstring></argsstring>
+        <name>iterator_category</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="333" column="38" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="333" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1ab9790b6810d755f7039211fc34e4117c" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">iDynTree::SparseMatrix</ref>&lt; ordering &gt; &amp;</type>
+        <definition>iDynTree::SparseMatrix&lt;ordering&gt;&amp; iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::m_matrix</definition>
+        <argsstring></argsstring>
+        <name>m_matrix</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="319" column="28" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="319" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1adcb4e144f6e139ede82fbf0dfc950f6c" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::m_index</definition>
+        <argsstring></argsstring>
+        <name>m_index</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="321" column="9" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="321" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1a1bf6ecb4fe85c5c470e6265f46dc8e86" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef" kindref="compound">TripletRef</ref></type>
+        <definition>TripletRef iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::m_currentTriplet</definition>
+        <argsstring></argsstring>
+        <name>m_currentTriplet</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="322" column="16" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="322" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1ad957f0edf06f4e872d1a1bf7688723b1" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::m_nonZerosInOuterDirection</definition>
+        <argsstring></argsstring>
+        <name>m_nonZerosInOuterDirection</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="323" column="9" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="323" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1aae5936901904c98f52787f32eeaed8ee" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::Iterator</definition>
+        <argsstring>(iDynTree::SparseMatrix&lt; ordering &gt; &amp;matrix, bool valid=true)</argsstring>
+        <name>Iterator</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">iDynTree::SparseMatrix</ref>&lt; ordering &gt; &amp;</type>
+          <declname>matrix</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>valid</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Construct a new iterator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>matrix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the sparse matrix to iterate </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>valid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>false if the created iterator is invalid. True by default </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="316" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1af2e2972b6842307bcc9760c79b7e4138" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::updateTriplet</definition>
+        <argsstring>()</argsstring>
+        <name>updateTriplet</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="325" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1a1599b8491f07f30c7f650940cfa4e8ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SparseMatrix_1_1Iterator" kindref="compound">Iterator</ref> &amp;</type>
+        <definition>Iterator&amp; iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::operator++</definition>
+        <argsstring>()</argsstring>
+        <name>operator++</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="336" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1ad52c05c22c0dffc72db7c6c9696f3e31" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SparseMatrix_1_1Iterator" kindref="compound">Iterator</ref></type>
+        <definition>Iterator iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::operator++</definition>
+        <argsstring>(int)</argsstring>
+        <name>operator++</name>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="337" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1acd35f8327e10724fc97fd990be570f32" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::operator==</definition>
+        <argsstring>(const Iterator &amp;) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SparseMatrix_1_1Iterator" kindref="compound">Iterator</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="340" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1a45d0ea23aaee93e0e5a686811c24a738" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::operator==</definition>
+        <argsstring>(const ConstIterator &amp;) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SparseMatrix_1_1ConstIterator" kindref="compound">ConstIterator</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="341" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1a57d01398150390afd4c8e91d49f6ea13" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::operator!=</definition>
+        <argsstring>(const Iterator &amp;s) const</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SparseMatrix_1_1Iterator" kindref="compound">Iterator</ref> &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="342" column="17" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="342" bodyend="342"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1a60b60be40293122adcc4ff224d016ae6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::operator!=</definition>
+        <argsstring>(const ConstIterator &amp;s) const</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SparseMatrix_1_1ConstIterator" kindref="compound">ConstIterator</ref> &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="343" column="17" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="343" bodyend="343"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1a192b6772e99d2720bcc24b15eca7ccf7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef" kindref="compound">reference</ref></type>
+        <definition>reference iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::operator*</definition>
+        <argsstring>()</argsstring>
+        <name>operator*</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="347" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1afb818ec705a35332e30846b9977eb5dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef" kindref="compound">pointer</ref></type>
+        <definition>pointer iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::operator-&gt;</definition>
+        <argsstring>()</argsstring>
+        <name>operator-&gt;</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="348" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1Iterator_1aab6c5403229cec2e99c4fc9a6400c381" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SparseMatrix&lt; ordering &gt;::Iterator::isValid</definition>
+        <argsstring>() const</argsstring>
+        <name>isValid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SparseMatrix.h" line="350" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/SparseMatrix.h" line="288" column="1" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="289" bodyend="351"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1a116a4c928ec90f022493f19d8aa51b7a" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator</scope><name>difference_type</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1aab6c5403229cec2e99c4fc9a6400c381" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator</scope><name>isValid</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1aae5936901904c98f52787f32eeaed8ee" prot="private" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator</scope><name>Iterator</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1a5d15979d6978775e75f8da86869e9fdb" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator</scope><name>iterator_category</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1a1bf6ecb4fe85c5c470e6265f46dc8e86" prot="private" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator</scope><name>m_currentTriplet</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1adcb4e144f6e139ede82fbf0dfc950f6c" prot="private" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator</scope><name>m_index</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1ab9790b6810d755f7039211fc34e4117c" prot="private" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator</scope><name>m_matrix</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1ad957f0edf06f4e872d1a1bf7688723b1" prot="private" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator</scope><name>m_nonZerosInOuterDirection</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1a57d01398150390afd4c8e91d49f6ea13" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator</scope><name>operator!=</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1a60b60be40293122adcc4ff224d016ae6" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator</scope><name>operator!=</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1a192b6772e99d2720bcc24b15eca7ccf7" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator</scope><name>operator*</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1a1599b8491f07f30c7f650940cfa4e8ce" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator</scope><name>operator++</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1ad52c05c22c0dffc72db7c6c9696f3e31" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator</scope><name>operator++</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1afb818ec705a35332e30846b9977eb5dd" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator</scope><name>operator-&gt;</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1acd35f8327e10724fc97fd990be570f32" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator</scope><name>operator==</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1a45d0ea23aaee93e0e5a686811c24a738" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator</scope><name>operator==</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1a876c832e5902093b6b4d3ca6da8f4257" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator</scope><name>pointer</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1a137ace02de6dda2267e1e7043c65ea41" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator</scope><name>reference</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1af2e2972b6842307bcc9760c79b7e4138" prot="private" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator</scope><name>updateTriplet</name></member>
+      <member refid="classiDynTree_1_1SparseMatrix_1_1Iterator_1a771a56e49407184b3625b07912dbbbbc" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix::Iterator</scope><name>value_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

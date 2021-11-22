@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_dffea4b92cacc2f3de0172caac576a81" kind="dir">
+    <compoundname>private</compoundname>
+    <innerfile refid="InverseKinematicsData_8h">InverseKinematicsData.h</innerfile>
+    <innerfile refid="InverseKinematicsNLP_8h">InverseKinematicsNLP.h</innerfile>
+    <innerfile refid="TransformConstraint_8h">TransformConstraint.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="private/"/>
+  </compounddef>
+</doxygen>

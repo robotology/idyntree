@@ -1,0 +1,627 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="Span_8h" kind="file" language="C++">
+    <compoundname>Span.h</compoundname>
+    <includes local="no">cassert</includes>
+    <includes local="no">algorithm</includes>
+    <includes local="no">array</includes>
+    <includes local="no">cstddef</includes>
+    <includes local="no">iterator</includes>
+    <includes local="no">limits</includes>
+    <includes local="no">stdexcept</includes>
+    <includes local="no">type_traits</includes>
+    <includes local="no">utility</includes>
+    <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
+    <includedby refid="MatrixView_8h" local="no">iDynTree/Core/MatrixView.h</includedby>
+    <includedby refid="VectorDynSize_8h" local="no">iDynTree/Core/VectorDynSize.h</includedby>
+    <includedby refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includedby>
+    <incdepgraph>
+      <node id="7">
+        <label>limits</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/Core/Span.h</label>
+        <link refid="Span_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>iterator</label>
+      </node>
+      <node id="2">
+        <label>cassert</label>
+      </node>
+      <node id="8">
+        <label>stdexcept</label>
+      </node>
+      <node id="10">
+        <label>utility</label>
+      </node>
+      <node id="4">
+        <label>array</label>
+      </node>
+      <node id="5">
+        <label>cstddef</label>
+      </node>
+      <node id="9">
+        <label>type_traits</label>
+      </node>
+      <node id="3">
+        <label>algorithm</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structiDynTree_1_1SpanUtils_1_1make__void" prot="public">iDynTree::SpanUtils::make_void</innerclass>
+    <innerclass refid="structiDynTree_1_1SpanUtils_1_1is__value__defined" prot="public">iDynTree::SpanUtils::is_value_defined</innerclass>
+    <innerclass refid="structiDynTree_1_1SpanUtils_1_1is__value__defined_3_01T_00_01void__t_3_01typename_01T_1_1value__type_01_4_01_4" prot="public">iDynTree::SpanUtils::is_value_defined&lt; T, void_t&lt; typename T::value_type &gt; &gt;</innerclass>
+    <innerclass refid="structiDynTree_1_1SpanUtils_1_1is__element__defined" prot="public">iDynTree::SpanUtils::is_element_defined</innerclass>
+    <innerclass refid="structiDynTree_1_1SpanUtils_1_1is__element__defined_3_01T_00_01void__t_3_01typename_01T_1_1element__type_01_4_01_4" prot="public">iDynTree::SpanUtils::is_element_defined&lt; T, void_t&lt; typename T::element_type &gt; &gt;</innerclass>
+    <innerclass refid="structiDynTree_1_1SpanUtils_1_1has__data__method" prot="public">iDynTree::SpanUtils::has_data_method</innerclass>
+    <innerclass refid="structiDynTree_1_1SpanUtils_1_1has__data__method_3_01T_00_01void__t_3_01decltype_07std_1_1declvab6b1e478fbc78504ead5a4d656be7ada" prot="public">iDynTree::SpanUtils::has_data_method&lt; T, void_t&lt; decltype(std::declval&lt; T &gt;().data())&gt; &gt;</innerclass>
+    <innerclass refid="structiDynTree_1_1SpanUtils_1_1has__size__method" prot="public">iDynTree::SpanUtils::has_size_method</innerclass>
+    <innerclass refid="structiDynTree_1_1SpanUtils_1_1has__size__method_3_01T_00_01void__t_3_01decltype_07std_1_1declvae1bc7a5e579508da24d014f467d8f210" prot="public">iDynTree::SpanUtils::has_size_method&lt; T, void_t&lt; decltype(std::declval&lt; T &gt;().size())&gt; &gt;</innerclass>
+    <innerclass refid="structiDynTree_1_1details_1_1is__span__oracle" prot="public">iDynTree::details::is_span_oracle</innerclass>
+    <innerclass refid="structiDynTree_1_1details_1_1is__span__oracle_3_01iDynTree_1_1Span_3_01ElementType_00_01Extent_01_4_01_4" prot="public">iDynTree::details::is_span_oracle&lt; iDynTree::Span&lt; ElementType, Extent &gt; &gt;</innerclass>
+    <innerclass refid="structiDynTree_1_1details_1_1is__span" prot="public">iDynTree::details::is_span</innerclass>
+    <innerclass refid="structiDynTree_1_1details_1_1is__std__array__oracle" prot="public">iDynTree::details::is_std_array_oracle</innerclass>
+    <innerclass refid="structiDynTree_1_1details_1_1is__std__array__oracle_3_01std_1_1array_3_01ElementType_00_01Extent_01_4_01_4" prot="public">iDynTree::details::is_std_array_oracle&lt; std::array&lt; ElementType, Extent &gt; &gt;</innerclass>
+    <innerclass refid="structiDynTree_1_1details_1_1is__std__array" prot="public">iDynTree::details::is_std_array</innerclass>
+    <innerclass refid="structiDynTree_1_1details_1_1is__allowed__extent__conversion" prot="public">iDynTree::details::is_allowed_extent_conversion</innerclass>
+    <innerclass refid="structiDynTree_1_1details_1_1is__allowed__element__type__conversion" prot="public">iDynTree::details::is_allowed_element_type_conversion</innerclass>
+    <innerclass refid="classiDynTree_1_1details_1_1span__iterator" prot="public">iDynTree::details::span_iterator</innerclass>
+    <innerclass refid="classiDynTree_1_1details_1_1extent__type" prot="public">iDynTree::details::extent_type</innerclass>
+    <innerclass refid="classiDynTree_1_1details_1_1extent__type_3_01dynamic__extent_01_4" prot="public">iDynTree::details::extent_type&lt; dynamic_extent &gt;</innerclass>
+    <innerclass refid="structiDynTree_1_1details_1_1calculate__subspan__type" prot="public">iDynTree::details::calculate_subspan_type</innerclass>
+    <innerclass refid="classiDynTree_1_1Span" prot="public">iDynTree::Span</innerclass>
+    <innerclass refid="structiDynTree_1_1Span_1_1KnownNotNull" prot="private">iDynTree::Span::KnownNotNull</innerclass>
+    <innerclass refid="classiDynTree_1_1Span_1_1storage__type" prot="private">iDynTree::Span::storage_type</innerclass>
+    <innerclass refid="classiDynTree_1_1Span_1_1subspan__selector" prot="private">iDynTree::Span::subspan_selector</innerclass>
+    <innerclass refid="structiDynTree_1_1details_1_1calculate__byte__size" prot="public">iDynTree::details::calculate_byte_size</innerclass>
+    <innerclass refid="structiDynTree_1_1details_1_1calculate__byte__size_3_01ElementType_00_01dynamic__extent_01_4" prot="public">iDynTree::details::calculate_byte_size&lt; ElementType, dynamic_extent &gt;</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <innernamespace refid="namespaceiDynTree_1_1SpanUtils">iDynTree::SpanUtils</innernamespace>
+    <innernamespace refid="namespaceiDynTree_1_1details">iDynTree::details</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="Span_8h_1a243167d9388652a87880135833c55737" prot="public" static="no">
+        <name>IDYNTREE_USE_STATIC_CONSTEXPR_WORKAROUND</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="65" column="9" bodyfile="iDynTree/Core/Span.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="Span_8h_1a347aa032e680c7848af88b7a3b840829" prot="public" static="no">
+        <name>IDYNTREE_CONSTEXPR</name>
+        <initializer>constexpr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="74" column="10" bodyfile="iDynTree/Core/Span.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="Span_8h_1a27ad8bb96b7bc89403877a10e99534d4" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Ts</declname>
+            <defname>Ts</defname>
+          </param>
+        </templateparamlist>
+        <type>typename make_void&lt; Ts... &gt;::type</type>
+        <definition>using iDynTree::SpanUtils::void_t = typedef typename make_void&lt;Ts...&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>void_t</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="84" column="13" bodyfile="iDynTree/Core/Span.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="Span_8h_1a10c045523612bc8183a496020fecf982" prot="public" static="no" mutable="no">
+        <type>IDYNTREE_CONSTEXPR const std::ptrdiff_t</type>
+        <definition>IDYNTREE_CONSTEXPR const std::ptrdiff_t iDynTree::dynamic_extent</definition>
+        <argsstring></argsstring>
+        <name>dynamic_extent</name>
+        <initializer>= -1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="130" column="41" bodyfile="iDynTree/Core/Span.h" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="Span_8h_1adf168de4de79fc034114dd1bb64d9cca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Span</type>
+          </param>
+          <param>
+            <type>bool</type>
+            <declname>IsConst</declname>
+            <defname>IsConst</defname>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR span_iterator&lt; Span, IsConst &gt;</type>
+        <definition>IDYNTREE_CONSTEXPR span_iterator&lt;Span, IsConst&gt; iDynTree::details::operator+</definition>
+        <argsstring>(typename span_iterator&lt; Span, IsConst &gt;::difference_type n, span_iterator&lt; Span, IsConst &gt; rhs)</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>typename span_iterator&lt; Span, IsConst &gt;::difference_type</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>span_iterator&lt; Span, IsConst &gt;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="323" column="5" bodyfile="iDynTree/Core/Span.h" bodystart="323" bodyend="327"/>
+      </memberdef>
+      <memberdef kind="function" id="Span_8h_1a55d28afb3a3294ddb652f947185eba19" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Span</type>
+          </param>
+          <param>
+            <type>bool</type>
+            <declname>IsConst</declname>
+            <defname>IsConst</defname>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR span_iterator&lt; Span, IsConst &gt;</type>
+        <definition>IDYNTREE_CONSTEXPR span_iterator&lt;Span, IsConst&gt; iDynTree::details::operator-</definition>
+        <argsstring>(typename span_iterator&lt; Span, IsConst &gt;::difference_type n, span_iterator&lt; Span, IsConst &gt; rhs)</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>typename span_iterator&lt; Span, IsConst &gt;::difference_type</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>span_iterator&lt; Span, IsConst &gt;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="331" column="5" bodyfile="iDynTree/Core/Span.h" bodystart="331" bodyend="335"/>
+      </memberdef>
+      <memberdef kind="function" id="Span_8h_1affda5f6a0111301c3e8c09f46ae84887" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+          <param>
+            <type>std::ptrdiff_t</type>
+            <declname>FirstExtent</declname>
+            <defname>FirstExtent</defname>
+          </param>
+          <param>
+            <type>std::ptrdiff_t</type>
+            <declname>SecondExtent</declname>
+            <defname>SecondExtent</defname>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR bool</type>
+        <definition>IDYNTREE_CONSTEXPR bool iDynTree::operator==</definition>
+        <argsstring>(Span&lt; ElementType, FirstExtent &gt; l, Span&lt; ElementType, SecondExtent &gt; r)</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>Span&lt; ElementType, FirstExtent &gt;</type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>Span&lt; ElementType, SecondExtent &gt;</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="649" column="25" bodyfile="iDynTree/Core/Span.h" bodystart="649" bodyend="653"/>
+      </memberdef>
+      <memberdef kind="function" id="Span_8h_1abc78e202932a5b364ccc6952143736a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+          <param>
+            <type>std::ptrdiff_t</type>
+            <declname>Extent</declname>
+            <defname>Extent</defname>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR bool</type>
+        <definition>IDYNTREE_CONSTEXPR bool iDynTree::operator!=</definition>
+        <argsstring>(Span&lt; ElementType, Extent &gt; l, Span&lt; ElementType, Extent &gt; r)</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type>Span&lt; ElementType, Extent &gt;</type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>Span&lt; ElementType, Extent &gt;</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="656" column="25" bodyfile="iDynTree/Core/Span.h" bodystart="656" bodyend="660"/>
+      </memberdef>
+      <memberdef kind="function" id="Span_8h_1a42627470960988b6f18ca9a7037dac03" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+          <param>
+            <type>std::ptrdiff_t</type>
+            <declname>Extent</declname>
+            <defname>Extent</defname>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR bool</type>
+        <definition>IDYNTREE_CONSTEXPR bool iDynTree::operator&lt;</definition>
+        <argsstring>(Span&lt; ElementType, Extent &gt; l, Span&lt; ElementType, Extent &gt; r)</argsstring>
+        <name>operator&lt;</name>
+        <param>
+          <type>Span&lt; ElementType, Extent &gt;</type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>Span&lt; ElementType, Extent &gt;</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="663" column="20" bodyfile="iDynTree/Core/Span.h" bodystart="663" bodyend="667"/>
+      </memberdef>
+      <memberdef kind="function" id="Span_8h_1ae774056f8c53958ea2448c4921080471" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+          <param>
+            <type>std::ptrdiff_t</type>
+            <declname>Extent</declname>
+            <defname>Extent</defname>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR bool</type>
+        <definition>IDYNTREE_CONSTEXPR bool iDynTree::operator&lt;=</definition>
+        <argsstring>(Span&lt; ElementType, Extent &gt; l, Span&lt; ElementType, Extent &gt; r)</argsstring>
+        <name>operator&lt;=</name>
+        <param>
+          <type>Span&lt; ElementType, Extent &gt;</type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>Span&lt; ElementType, Extent &gt;</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="670" column="20" bodyfile="iDynTree/Core/Span.h" bodystart="670" bodyend="674"/>
+      </memberdef>
+      <memberdef kind="function" id="Span_8h_1ac28edf035d889d4c6218848e5007d4ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+          <param>
+            <type>std::ptrdiff_t</type>
+            <declname>Extent</declname>
+            <defname>Extent</defname>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR bool</type>
+        <definition>IDYNTREE_CONSTEXPR bool iDynTree::operator&gt;</definition>
+        <argsstring>(Span&lt; ElementType, Extent &gt; l, Span&lt; ElementType, Extent &gt; r)</argsstring>
+        <name>operator&gt;</name>
+        <param>
+          <type>Span&lt; ElementType, Extent &gt;</type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>Span&lt; ElementType, Extent &gt;</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="677" column="25" bodyfile="iDynTree/Core/Span.h" bodystart="677" bodyend="681"/>
+      </memberdef>
+      <memberdef kind="function" id="Span_8h_1a249acd1b49049d01403046ea4fa61513" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+          <param>
+            <type>std::ptrdiff_t</type>
+            <declname>Extent</declname>
+            <defname>Extent</defname>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR bool</type>
+        <definition>IDYNTREE_CONSTEXPR bool iDynTree::operator&gt;=</definition>
+        <argsstring>(Span&lt; ElementType, Extent &gt; l, Span&lt; ElementType, Extent &gt; r)</argsstring>
+        <name>operator&gt;=</name>
+        <param>
+          <type>Span&lt; ElementType, Extent &gt;</type>
+          <declname>l</declname>
+        </param>
+        <param>
+          <type>Span&lt; ElementType, Extent &gt;</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="684" column="25" bodyfile="iDynTree/Core/Span.h" bodystart="684" bodyend="688"/>
+      </memberdef>
+      <memberdef kind="function" id="Span_8h_1afea09daa42453877437d4a0bfb11ce3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR Span&lt; ElementType &gt;</type>
+        <definition>IDYNTREE_CONSTEXPR Span&lt;ElementType&gt; iDynTree::make_span</definition>
+        <argsstring>(ElementType *ptr, typename Span&lt; ElementType &gt;::index_type count)</argsstring>
+        <name>make_span</name>
+        <param>
+          <type>ElementType *</type>
+          <declname>ptr</declname>
+        </param>
+        <param>
+          <type>typename Span&lt; ElementType &gt;::index_type</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="721" column="25" bodyfile="iDynTree/Core/Span.h" bodystart="721" bodyend="724"/>
+      </memberdef>
+      <memberdef kind="function" id="Span_8h_1a32b250386639651e4c79f31d35094ca9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR Span&lt; ElementType &gt;</type>
+        <definition>IDYNTREE_CONSTEXPR Span&lt;ElementType&gt; iDynTree::make_span</definition>
+        <argsstring>(ElementType *firstElem, ElementType *lastElem)</argsstring>
+        <name>make_span</name>
+        <param>
+          <type>ElementType *</type>
+          <declname>firstElem</declname>
+        </param>
+        <param>
+          <type>ElementType *</type>
+          <declname>lastElem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="727" column="25" bodyfile="iDynTree/Core/Span.h" bodystart="727" bodyend="730"/>
+      </memberdef>
+      <memberdef kind="function" id="Span_8h_1aef2273818c22b800f0296005f678539f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+          <param>
+            <type>std::size_t</type>
+            <declname>N</declname>
+            <defname>N</defname>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR Span&lt; ElementType, N &gt;</type>
+        <definition>IDYNTREE_CONSTEXPR Span&lt;ElementType, N&gt; iDynTree::make_span</definition>
+        <argsstring>(ElementType(&amp;arr)[N]) noexcept</argsstring>
+        <name>make_span</name>
+        <param>
+          <type>ElementType(&amp;)</type>
+          <declname>arr</declname>
+          <array>[N]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="733" column="25" bodyfile="iDynTree/Core/Span.h" bodystart="733" bodyend="736"/>
+      </memberdef>
+      <memberdef kind="function" id="Span_8h_1ae39036a1440abb3b9e4897272394317a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Container</type>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR Span&lt; typename Container::value_type &gt;</type>
+        <definition>IDYNTREE_CONSTEXPR Span&lt;typename Container::value_type&gt; iDynTree::make_span</definition>
+        <argsstring>(Container &amp;cont)</argsstring>
+        <name>make_span</name>
+        <param>
+          <type>Container &amp;</type>
+          <declname>cont</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="739" column="25" bodyfile="iDynTree/Core/Span.h" bodystart="739" bodyend="742"/>
+      </memberdef>
+      <memberdef kind="function" id="Span_8h_1a9ecfc7eaccb7475c951c97cdf20a2b65" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Container</type>
+          </param>
+          <param>
+            <type>typename</type>
+            <defval>typename std::enable_if&lt;SpanUtils::is_value_defined&lt;Container&gt;::value&gt;::type</defval>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR Span&lt; const typename Container::value_type &gt;</type>
+        <definition>IDYNTREE_CONSTEXPR Span&lt;const typename Container::value_type&gt; iDynTree::make_span</definition>
+        <argsstring>(const Container &amp;cont)</argsstring>
+        <name>make_span</name>
+        <param>
+          <type>const Container &amp;</type>
+          <declname>cont</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="745" column="25" bodyfile="iDynTree/Core/Span.h" bodystart="745" bodyend="748"/>
+      </memberdef>
+      <memberdef kind="function" id="Span_8h_1a7f2bdb0504977bcc9abcd0790dbd3a10" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Ptr</type>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR Span&lt; typename Ptr::element_type &gt;</type>
+        <definition>IDYNTREE_CONSTEXPR Span&lt;typename Ptr::element_type&gt; iDynTree::make_span</definition>
+        <argsstring>(Ptr &amp;cont, std::ptrdiff_t count)</argsstring>
+        <name>make_span</name>
+        <param>
+          <type>Ptr &amp;</type>
+          <declname>cont</declname>
+        </param>
+        <param>
+          <type>std::ptrdiff_t</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="751" column="25" bodyfile="iDynTree/Core/Span.h" bodystart="751" bodyend="754"/>
+      </memberdef>
+      <memberdef kind="function" id="Span_8h_1acaebdb9ef4dfce796979f9392e238616" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Ptr</type>
+          </param>
+          <param>
+            <type>typename</type>
+            <defval>typename std::enable_if&lt;!SpanUtils::is_value_defined&lt;Ptr&gt;::value &amp;&amp; SpanUtils::is_element_defined&lt;Ptr&gt;::value&gt;::type</defval>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR Span&lt; typename Ptr::element_type &gt;</type>
+        <definition>IDYNTREE_CONSTEXPR Span&lt;typename Ptr::element_type&gt; iDynTree::make_span</definition>
+        <argsstring>(Ptr &amp;cont)</argsstring>
+        <name>make_span</name>
+        <param>
+          <type>Ptr &amp;</type>
+          <declname>cont</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="757" column="25" bodyfile="iDynTree/Core/Span.h" bodystart="757" bodyend="760"/>
+      </memberdef>
+      <memberdef kind="function" id="Span_8h_1a30a50da99346e81a568b2d5629347b92" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Container</type>
+          </param>
+          <param>
+            <type>typename</type>
+            <defval>typename std::enable_if&lt;!SpanUtils::is_value_defined&lt;Container&gt;::value &amp;&amp;                                                             !SpanUtils::is_element_defined&lt;Container&gt;::value &amp;&amp;                                                             SpanUtils::has_data_method&lt;Container&gt;::value&gt;::type</defval>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR Span&lt; typename std::remove_pointer&lt; decltype(std::declval&lt; Container &gt;).data())&gt;::type &gt;</type>
+        <definition>IDYNTREE_CONSTEXPR Span&lt;typename std::remove_pointer&lt;decltype (std::declval&lt;Container&gt;).data())&gt;::type&gt; iDynTree::make_span</definition>
+        <argsstring>(Container &amp;cont)</argsstring>
+        <name>make_span</name>
+        <param>
+          <type>Container &amp;</type>
+          <declname>cont</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="765" column="28" bodyfile="iDynTree/Core/Span.h" bodystart="765" bodyend="768"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/Span.h"/>
+  </compounddef>
+</doxygen>

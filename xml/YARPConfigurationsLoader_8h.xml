@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="YARPConfigurationsLoader_8h" kind="file" language="C++">
+    <compoundname>YARPConfigurationsLoader.h</compoundname>
+    <includes local="no">yarp/os/Searchable.h</includes>
+    <includes refid="Rotation_8h" local="no">iDynTree/Core/Rotation.h</includes>
+    <includes local="no">string</includes>
+    <includes refid="YARPConfigurationsLoaderImplementation_8h" local="yes">YARPConfigurationsLoaderImplementation.h</includes>
+    <incdepgraph>
+      <node id="2">
+        <label>yarp/os/Searchable.h</label>
+      </node>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/yarp/YARPConfigurationsLoader.h</label>
+        <link refid="YARPConfigurationsLoader_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="YARPConfigurationsLoader_8h_1a51e39202a162fa642eed01df66c75878" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::parseRotationMatrix</definition>
+        <argsstring>(const yarp::os::Searchable &amp;rf, const std::string &amp;key, iDynTree::Rotation &amp;rotation)</argsstring>
+        <name>parseRotationMatrix</name>
+        <param>
+          <type>const yarp::os::Searchable &amp;</type>
+          <declname>rf</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Rotation" kindref="compound">iDynTree::Rotation</ref> &amp;</type>
+          <declname>rotation</declname>
+        </param>
+        <briefdescription>
+<para>Takes a rotation matrix from configuration file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Notice, the matrix is parsed row-wise. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>yarp::os::Searchable The input searchable </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name corresponding to the matrix to be read </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output rotation </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successfull </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/yarp/YARPConfigurationsLoader.h" line="28" column="10" bodyfile="iDynTree/yarp/YARPConfigurationsLoaderImplementation.h" bodystart="16" bodyend="46" declfile="iDynTree/yarp/YARPConfigurationsLoader.h" declline="28" declcolumn="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/yarp/YARPConfigurationsLoader.h"/>
+  </compounddef>
+</doxygen>

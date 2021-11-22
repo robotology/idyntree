@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="EigenSparseHelpers_8h" kind="file" language="C++">
+    <compoundname>EigenSparseHelpers.h</compoundname>
+    <includes local="no">Eigen/SparseCore</includes>
+    <includes refid="SparseMatrix_8h" local="no">iDynTree/Core/SparseMatrix.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/Core/EigenSparseHelpers.h</label>
+        <link refid="EigenSparseHelpers_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Eigen/SparseCore</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="EigenSparseHelpers_8h_1ade809da6861adf8889108908fd931ee5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::Map&lt; Eigen::SparseMatrix&lt; double, Eigen::RowMajor &gt; &gt;</type>
+        <definition>Eigen::Map&lt; Eigen::SparseMatrix&lt;double, Eigen::RowMajor&gt; &gt; iDynTree::toEigen</definition>
+        <argsstring>(iDynTree::SparseMatrix&lt; iDynTree::RowMajor &gt; &amp;mat)</argsstring>
+        <name>toEigen</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">iDynTree::SparseMatrix</ref>&lt; iDynTree::RowMajor &gt; &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenSparseHelpers.h" line="21" column="19" bodyfile="iDynTree/Core/EigenSparseHelpers.h" bodystart="21" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenSparseHelpers_8h_1a3c0db1fc07367309957972bd66454c7e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::Map&lt; const Eigen::SparseMatrix&lt; double, Eigen::RowMajor &gt; &gt;</type>
+        <definition>Eigen::Map&lt;const Eigen::SparseMatrix&lt;double, Eigen::RowMajor&gt; &gt; iDynTree::toEigen</definition>
+        <argsstring>(const iDynTree::SparseMatrix&lt; iDynTree::RowMajor &gt; &amp;mat)</argsstring>
+        <name>toEigen</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">iDynTree::SparseMatrix</ref>&lt; iDynTree::RowMajor &gt; &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenSparseHelpers.h" line="32" column="19" bodyfile="iDynTree/Core/EigenSparseHelpers.h" bodystart="32" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenSparseHelpers_8h_1a90ae57e2a42e7bad1cedda56db4ee3d4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::Map&lt; Eigen::SparseMatrix&lt; double, Eigen::ColMajor &gt; &gt;</type>
+        <definition>Eigen::Map&lt; Eigen::SparseMatrix&lt;double, Eigen::ColMajor&gt; &gt; iDynTree::toEigen</definition>
+        <argsstring>(iDynTree::SparseMatrix&lt; iDynTree::ColumnMajor &gt; &amp;mat)</argsstring>
+        <name>toEigen</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">iDynTree::SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenSparseHelpers.h" line="43" column="19" bodyfile="iDynTree/Core/EigenSparseHelpers.h" bodystart="43" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenSparseHelpers_8h_1ae48cfcc0f75e51f21ae1ac34de84efc1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::Map&lt; const Eigen::SparseMatrix&lt; double, Eigen::ColMajor &gt; &gt;</type>
+        <definition>Eigen::Map&lt;const Eigen::SparseMatrix&lt;double, Eigen::ColMajor&gt; &gt; iDynTree::toEigen</definition>
+        <argsstring>(const iDynTree::SparseMatrix&lt; iDynTree::ColumnMajor &gt; &amp;mat)</argsstring>
+        <name>toEigen</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">iDynTree::SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenSparseHelpers.h" line="54" column="19" bodyfile="iDynTree/Core/EigenSparseHelpers.h" bodystart="54" bodyend="63"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/EigenSparseHelpers.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,1501 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1Model" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::Model</compoundname>
+    <includes local="no">iDynTree/Model/Model.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1Model_1a50093f9efe3d556d3c02ca287e7e4450" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> &gt;</type>
+        <definition>std::vector&lt;Link&gt; iDynTree::Model::links</definition>
+        <argsstring></argsstring>
+        <name>links</name>
+        <briefdescription>
+<para>Vector of links. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For each link its index indicates its location in this vector </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="78" column="21" bodyfile="iDynTree/Model/Model.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Model_1a29cae490ae0b99ab9eb301bbafbae005" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1IJoint" kindref="compound">IJointPtr</ref> &gt;</type>
+        <definition>std::vector&lt;IJointPtr&gt; iDynTree::Model::joints</definition>
+        <argsstring></argsstring>
+        <name>joints</name>
+        <briefdescription>
+<para>Vector of joints. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For each joint its index indicates its location in this vector </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="81" column="21" bodyfile="iDynTree/Model/Model.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Model_1abc6612a340646ead0a7eae8df5bf5bbc" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &gt;</type>
+        <definition>std::vector&lt;Transform&gt; iDynTree::Model::additionalFrames</definition>
+        <argsstring></argsstring>
+        <name>additionalFrames</name>
+        <briefdescription>
+<para>Vector of additional frames. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The element additionalFrames[frameOffset] will be the link_H_frame transform of the frame with FrameIndex <ref refid="classiDynTree_1_1Model_1aca270a902d0b0328c0d8afb1727d2154" kindref="member">getNrOfLinks()</ref> + frameOffset . </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="87" column="21" bodyfile="iDynTree/Model/Model.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Model_1ac96b6c1f63733c8187b6f6d0995d09d8" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; LinkIndex &gt;</type>
+        <definition>std::vector&lt;LinkIndex&gt; iDynTree::Model::additionalFramesLinks</definition>
+        <argsstring></argsstring>
+        <name>additionalFramesLinks</name>
+        <briefdescription>
+<para>Vector of link indices corresponding to an additional frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The element additionalFrameNames[frameOffset] will be the link_H_frame transform of the frame with FrameIndex <ref refid="classiDynTree_1_1Model_1aca270a902d0b0328c0d8afb1727d2154" kindref="member">getNrOfLinks()</ref> + frameOffset . </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="94" column="21" bodyfile="iDynTree/Model/Model.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Model_1a3e5f1bc51f4bd89f9c5450c61165dac8" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; iDynTree::Model::linkNames</definition>
+        <argsstring></argsstring>
+        <name>linkNames</name>
+        <briefdescription>
+<para>Vector of link names, matches the index of each link to its name. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="97" column="21" bodyfile="iDynTree/Model/Model.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Model_1a6fd86eb6b7a813c89ef71ffda31e0210" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; iDynTree::Model::jointNames</definition>
+        <argsstring></argsstring>
+        <name>jointNames</name>
+        <briefdescription>
+<para>Vector of joint names, matches the index of each joint to its name. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="100" column="21" bodyfile="iDynTree/Model/Model.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Model_1a7918eb0613b28e50c92f5af609875bda" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; iDynTree::Model::frameNames</definition>
+        <argsstring></argsstring>
+        <name>frameNames</name>
+        <briefdescription>
+<para>Vector of additional frame names. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The element frameNames[frameOffset] will be the name of the frame with FrameIndex <ref refid="classiDynTree_1_1Model_1aca270a902d0b0328c0d8afb1727d2154" kindref="member">getNrOfLinks()</ref> + frameOffset . </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="107" column="21" bodyfile="iDynTree/Model/Model.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Model_1ac70249ac612e3cf157cd89d1e90b7538" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; <ref refid="structiDynTree_1_1Neighbor" kindref="compound">Neighbor</ref> &gt; &gt;</type>
+        <definition>std::vector&lt; std::vector&lt;Neighbor&gt; &gt; iDynTree::Model::neighbors</definition>
+        <argsstring></argsstring>
+        <name>neighbors</name>
+        <briefdescription>
+<para>Adjacency lists: match each link index to a list of its neighbors, and the joint connecting to them. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="111" column="21" bodyfile="iDynTree/Model/Model.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Model_1aba9b3e5e28b33093537fbb4d6d454560" prot="private" static="no" mutable="no">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::Model::defaultBaseLink</definition>
+        <argsstring></argsstring>
+        <name>defaultBaseLink</name>
+        <briefdescription>
+<para>Most data structures are not undirected, so we store the original root of the tree, to provide a default root for <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> generation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="117" column="19" bodyfile="iDynTree/Model/Model.h" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Model_1a7258bf4d518366514fc8caa4666f2485" prot="private" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int iDynTree::Model::nrOfPosCoords</definition>
+        <argsstring></argsstring>
+        <name>nrOfPosCoords</name>
+        <briefdescription>
+<para>Cache number of position coordinaties of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If all joints are 0 or 1 dofs, this is equal to nrOfDOFs. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="123" column="22" bodyfile="iDynTree/Model/Model.h" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Model_1a6731df1e65f92cc0052bfe043ec60ee4" prot="private" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int iDynTree::Model::nrOfDOFs</definition>
+        <argsstring></argsstring>
+        <name>nrOfDOFs</name>
+        <briefdescription>
+<para>Cached number of (internal) DOFs of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is just the sum of all the getNrOfDOFs of the joint in the model. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="129" column="22" bodyfile="iDynTree/Model/Model.h" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Model_1abd5ba08c0e5cd02c99afb3c12d10b75c" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1ModelSolidShapes" kindref="compound">ModelSolidShapes</ref></type>
+        <definition>ModelSolidShapes iDynTree::Model::m_visualSolidShapes</definition>
+        <argsstring></argsstring>
+        <name>m_visualSolidShapes</name>
+        <briefdescription>
+<para>Solid shapes used for visualization. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="134" column="26" bodyfile="iDynTree/Model/Model.h" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Model_1a12f992f6ba249137e188ac9a2ada7775" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1ModelSolidShapes" kindref="compound">ModelSolidShapes</ref></type>
+        <definition>ModelSolidShapes iDynTree::Model::m_collisionSolidShapes</definition>
+        <argsstring></argsstring>
+        <name>m_collisionSolidShapes</name>
+        <briefdescription>
+<para>Solid shapes used for collision checking. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="139" column="26" bodyfile="iDynTree/Model/Model.h" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a0b77841c02285a358b6a8b0e42ccf919" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::Model::copy</definition>
+        <argsstring>(const Model &amp;model)</argsstring>
+        <name>copy</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Copy the structure of the model from another instance of a model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="144" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a6a08210de977eab57082a75b363d5ade" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::Model::destroy</definition>
+        <argsstring>()</argsstring>
+        <name>destroy</name>
+        <briefdescription>
+<para>Destroy the object, properly deallocating memory. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="149" column="14"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a0c58c94f8c55be9f63d31f04f174cf0d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Model::Model</definition>
+        <argsstring>()</argsstring>
+        <name>Model</name>
+        <briefdescription>
+<para>Costructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="156" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a96e83863f4c01d3ef034dd9ebd85bf5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Model::Model</definition>
+        <argsstring>(const Model &amp;other)</argsstring>
+        <name>Model</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy costructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="161" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a87ed3b079e81106a66290f55bd518759" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+        <definition>Model&amp; iDynTree::Model::operator=</definition>
+        <argsstring>(const Model &amp;other)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy operator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="166" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1ae5291043dfff013ca1a1d4270285a974" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref></type>
+        <definition>Model iDynTree::Model::copy</definition>
+        <argsstring>() const</argsstring>
+        <name>copy</name>
+        <briefdescription>
+<para>Copy the model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Get a copy of the model. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="173" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a74d155b1e7ede1524c5781d7862fd573" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::Model::~Model</definition>
+        <argsstring>()</argsstring>
+        <name>~Model</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="179" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1aca270a902d0b0328c0d8afb1727d2154" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::Model::getNrOfLinks</definition>
+        <argsstring>() const</argsstring>
+        <name>getNrOfLinks</name>
+        <briefdescription>
+<para>Get the number of links in the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="184" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1aac86147dd37cd977de054e55635cd718" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::Model::getLinkName</definition>
+        <argsstring>(const LinkIndex linkIndex) const</argsstring>
+        <name>getLinkName</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>linkIndex</declname>
+        </param>
+        <briefdescription>
+<para>Get the name of a link given its index, or an LINK_INVALID_NAME string if linkIndex &lt; 0 or &gt;= <ref refid="classiDynTree_1_1Model_1aca270a902d0b0328c0d8afb1727d2154" kindref="member">getNrOfLinks()</ref> </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="190" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1ae9557eba54c8845eb69c79259299fddb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::Model::getLinkIndex</definition>
+        <argsstring>(const std::string &amp;linkName) const</argsstring>
+        <name>getLinkIndex</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>linkName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="192" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1aa5d6b472a34f852a7e3671e41f7e90e8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Model::isValidLinkIndex</definition>
+        <argsstring>(const LinkIndex index) const</argsstring>
+        <name>isValidLinkIndex</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Check if a given LinkIndex is valid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>A link index is valid if is different from LINK_INVALID_INDEX and 0 =&lt; index &lt; <ref refid="classiDynTree_1_1Model_1aca270a902d0b0328c0d8afb1727d2154" kindref="member">getNrOfLinks()</ref>-1</para>
+<para><simplesect kind="return"><para>true if the index is valid, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="202" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1ae87129dc71ea30e448842b6bb5d96bd8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Link" kindref="compound">LinkPtr</ref></type>
+        <definition>LinkPtr iDynTree::Model::getLink</definition>
+        <argsstring>(const LinkIndex linkIndex)</argsstring>
+        <name>getLink</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>linkIndex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="204" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a7dacd5618b5f212df82da101dd4d6415" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Link" kindref="compound">LinkConstPtr</ref></type>
+        <definition>LinkConstPtr iDynTree::Model::getLink</definition>
+        <argsstring>(const LinkIndex linkIndex) const</argsstring>
+        <name>getLink</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>linkIndex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="205" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a217617e53c6a0d0efb237ba3556fe8b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::Model::addLink</definition>
+        <argsstring>(const std::string &amp;name, const Link &amp;link)</argsstring>
+        <name>addLink</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> &amp;</type>
+          <declname>link</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="207" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1ab69c340d5fde147645854c880fbded18" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::Model::getNrOfJoints</definition>
+        <argsstring>() const</argsstring>
+        <name>getNrOfJoints</name>
+        <briefdescription>
+<para>Get number of joints in the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="212" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a276aca07d27ee16dd9f53afb9e46f730" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::Model::getJointName</definition>
+        <argsstring>(const JointIndex index) const</argsstring>
+        <name>getJointName</name>
+        <param>
+          <type>const JointIndex</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Get the name of a joint given its index, or an JOINT_INVALID_NAME if linkIndex &lt; 0 or &gt;= <ref refid="classiDynTree_1_1Model_1aca270a902d0b0328c0d8afb1727d2154" kindref="member">getNrOfLinks()</ref> </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="218" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a36a23bd3f7e2740f721b87c6b2d89464" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::Model::getTotalMass</definition>
+        <argsstring>() const</argsstring>
+        <name>getTotalMass</name>
+        <briefdescription>
+<para>Get the total mass of the robot. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="223" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a9e586e10ab288a30401b767c160181e9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>JointIndex</type>
+        <definition>JointIndex iDynTree::Model::getJointIndex</definition>
+        <argsstring>(const std::string &amp;jointName) const</argsstring>
+        <name>getJointIndex</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>jointName</declname>
+        </param>
+        <briefdescription>
+<para>Get the index of a joint, given a jointName. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the jointName is not found in the model, return JOINT_INVALID_INDEX . </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="231" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a4c236d6f7cc088912d469f6ff1127450" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1IJoint" kindref="compound">IJointPtr</ref></type>
+        <definition>IJointPtr iDynTree::Model::getJoint</definition>
+        <argsstring>(const JointIndex index)</argsstring>
+        <name>getJoint</name>
+        <param>
+          <type>const JointIndex</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="233" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1ad1166f43e7a70e4ee2a04a5d45bb7028" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1IJoint" kindref="compound">IJointConstPtr</ref></type>
+        <definition>IJointConstPtr iDynTree::Model::getJoint</definition>
+        <argsstring>(const JointIndex index) const</argsstring>
+        <name>getJoint</name>
+        <param>
+          <type>const JointIndex</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="235" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a9a149aed5e8a9b933a8e6c4c4a715f78" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Model::isValidJointIndex</definition>
+        <argsstring>(const JointIndex index) const</argsstring>
+        <name>isValidJointIndex</name>
+        <param>
+          <type>const JointIndex</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Check if a given JointIndex is valid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>A joint index is valid if is different from JOINT_INVALID_INDEX and 0 =&lt; index &lt; <ref refid="classiDynTree_1_1Model_1ab69c340d5fde147645854c880fbded18" kindref="member">getNrOfJoints()</ref>-1</para>
+<para><simplesect kind="return"><para>true if the index is valid, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="245" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a21bdfccdb54557700c4babc278d52323" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Model::isLinkNameUsed</definition>
+        <argsstring>(const std::string linkName) const</argsstring>
+        <name>isLinkNameUsed</name>
+        <param>
+          <type>const std::string</type>
+          <declname>linkName</declname>
+        </param>
+        <briefdescription>
+<para>Check if a name is already used for a link in the model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if a name is used by a link in a model, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="252" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a3a7a786baeeae8a5f3c08aca06d5ab35" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Model::isJointNameUsed</definition>
+        <argsstring>(const std::string jointName) const</argsstring>
+        <name>isJointNameUsed</name>
+        <param>
+          <type>const std::string</type>
+          <declname>jointName</declname>
+        </param>
+        <briefdescription>
+<para>Check if a name is already used for a joint in the model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if a name is used by a joint in a model, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="259" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a6da12797ce7fd9bc747a6192e1a8632d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Model::isFrameNameUsed</definition>
+        <argsstring>(const std::string frameName) const</argsstring>
+        <name>isFrameNameUsed</name>
+        <param>
+          <type>const std::string</type>
+          <declname>frameName</declname>
+        </param>
+        <briefdescription>
+<para>Check if a name is already used for a frame in the model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>this function will check the name of the links and the names of the additional frames. </para>
+</simplesect>
+<simplesect kind="return"><para>true if a name is used by a frame in a model, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="267" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1aaead8cb8c5367589131a877ea121c573" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>JointIndex</type>
+        <definition>JointIndex iDynTree::Model::addJoint</definition>
+        <argsstring>(const std::string &amp;jointName, IJointConstPtr joint)</argsstring>
+        <name>addJoint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>jointName</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1IJoint" kindref="compound">IJointConstPtr</ref></type>
+          <declname>joint</declname>
+        </param>
+        <briefdescription>
+<para>Add a joint to the model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The two links to which the joint is connected are specified in the joint itself, throught the appropriate methods. <simplesect kind="return"><para>the JointIndex of the added joint, or JOINT_INVALID_INDEX if there was an error in adding the joint. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="276" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a6b550b42785b54510ea704dbaa4f47c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>JointIndex</type>
+        <definition>JointIndex iDynTree::Model::addJoint</definition>
+        <argsstring>(const std::string &amp;link1, const std::string &amp;link2, const std::string &amp;jointName, IJointConstPtr joint)</argsstring>
+        <name>addJoint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>link1</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>link2</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>jointName</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1IJoint" kindref="compound">IJointConstPtr</ref></type>
+          <declname>joint</declname>
+        </param>
+        <briefdescription>
+<para>Add a joint to the model, and specify the two links that are connected by the specified joints. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The setAttachedLinks of the passed joint is called appropriately, to ensure consistency in the model. <simplesect kind="return"><para>the JointIndex of the added joint, or JOINT_INVALID_INDEX if there was an error in adding the joint. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="285" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a764763adb198032da5bdfcfc5f6a0748" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>JointIndex</type>
+        <definition>JointIndex iDynTree::Model::addJointAndLink</definition>
+        <argsstring>(const std::string &amp;existingLink, const std::string &amp;jointName, IJointConstPtr joint, const std::string &amp;newLinkName, Link &amp;newLink)</argsstring>
+        <name>addJointAndLink</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>existingLink</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>jointName</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1IJoint" kindref="compound">IJointConstPtr</ref></type>
+          <declname>joint</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>newLinkName</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> &amp;</type>
+          <declname>newLink</declname>
+        </param>
+        <briefdescription>
+<para>Add a joint to the model, and add also a link. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The added joints connects an existing link of the model to the newly added link. The setAttachedLinks of the passed joint is called appropriately, to ensure consistency in the model. <simplesect kind="return"><para>the JointIndex of the added joint, or JOINT_INVALID_INDEX if there was an error in adding the joint. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="297" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a4d1a4e182102ae3c29c97fd2245f4497" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>JointIndex</type>
+        <definition>JointIndex iDynTree::Model::insertLinkToExistingJointAndAddJointForDisplacedLink</definition>
+        <argsstring>(const std::string &amp;existingJoint, const std::string &amp;unmovableLink, const Transform &amp;_unmovableLink_X_newLink, const std::string &amp;jointName, IJointConstPtr joint, const std::string &amp;newLinkName, Link &amp;newLink)</argsstring>
+        <name>insertLinkToExistingJointAndAddJointForDisplacedLink</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>existingJoint</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>unmovableLink</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>_unmovableLink_X_newLink</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>jointName</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1IJoint" kindref="compound">IJointConstPtr</ref></type>
+          <declname>joint</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>newLinkName</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> &amp;</type>
+          <declname>newLink</declname>
+        </param>
+        <briefdescription>
+<para>Displace a link by inserting a new link and a new joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Displace a link by replacing it with a new link in the existing joint and insert new joint between the new link and the displaced link. Inputs: <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">existingJoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is where the new link will be inserted. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">unmovableLink</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the link that was previously connected to the displaced link by the existingJoint. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">_unmovable_X_newLink</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the transformation matrix from the unmovableLink to the new <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jointName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the name of the new joint. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">joint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the new joint connecting the new link and the link that was displaced. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">newLinkName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the name of the new link. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">newLink</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the new link that will be attached to the unmovable link using the existingJoint. The setAttachedLinks of the new joint and the existing joint are edited appropriately, to ensure consistency in the model. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the JointIndex of the added joint, or JOINT_INVALID_INDEX if there was an error in adding the joint. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="317" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a14bde5abaf794aa4160f09ba50c64c2e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::Model::getNrOfPosCoords</definition>
+        <argsstring>() const</argsstring>
+        <name>getNrOfPosCoords</name>
+        <briefdescription>
+<para>Get the dimension of the vector used to parametrize the positions of the joints of the robot. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This number can be obtained by summing the getNrOfPosCoords of all the joints of the model.</para>
+<para><simplesect kind="warning"><para>This is <emphasis>not</emphasis> including the 6 degrees of freedom of the base. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="329" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1aca35ec05d4b7358b38df769deb0513a6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::Model::getNrOfDOFs</definition>
+        <argsstring>() const</argsstring>
+        <name>getNrOfDOFs</name>
+        <briefdescription>
+<para>Get the number of degrees of freedom of the joint of the robot. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This number can be obtained by summing the getNrOfDOFs of all the joints of the model.</para>
+<para><simplesect kind="warning"><para>This is <emphasis>not</emphasis> including the 6 degrees of freedom of the base. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="337" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1ace5ed1d2735cda051cdd50f9e46c4dd8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::Model::getNrOfFrames</definition>
+        <argsstring>() const</argsstring>
+        <name>getNrOfFrames</name>
+        <briefdescription>
+<para>Get the number of frames in the model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>this will return the sum of the number of link (as each link has an attached frame) and the total number of additional frames.</para>
+</simplesect>
+<simplesect kind="return"><para>the number of frames in the model. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="348" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1ab67ec3bb2074412c1002befff50e2f57" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Model::addAdditionalFrameToLink</definition>
+        <argsstring>(const std::string &amp;linkName, const std::string &amp;frameName, iDynTree::Transform link_H_frame)</argsstring>
+        <name>addAdditionalFrameToLink</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>linkName</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
+          <declname>link_H_frame</declname>
+        </param>
+        <briefdescription>
+<para>Add an additional frame to a link. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This function has signature different from addJoint/addLink because the FrameIndex of the additional frame are invalidated at each call to the addLink. So we don&apos;t return the FrameIndex in this function, as the model construction should be completed before that FrameIndex are stored.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">linkName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the link to which attach the additional frame. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame added to the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">link_H_frame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the pose of added frame with respect to the link main frame, expressed with a transform with: refFrame: the main link frame frame: the added frame </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false if an error occured. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="369" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a9aaf343086bebc57ec349061d3b24956" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::Model::getFrameName</definition>
+        <argsstring>(const FrameIndex frameIndex) const</argsstring>
+        <name>getFrameName</name>
+        <param>
+          <type>const FrameIndex</type>
+          <declname>frameIndex</declname>
+        </param>
+        <briefdescription>
+<para>Get the name of a frame given its index. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">frameIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the index of the frame whose name is requested. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the name of a frame given its index, or a FRAME_INVALID_NAME string if frameIndex &lt; 0 or &gt;= <ref refid="classiDynTree_1_1Model_1ace5ed1d2735cda051cdd50f9e46c4dd8" kindref="member">getNrOfFrames()</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="380" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1af64e0e775f931371f0bfb5544adb7375" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>FrameIndex</type>
+        <definition>FrameIndex iDynTree::Model::getFrameIndex</definition>
+        <argsstring>(const std::string &amp;frameName) const</argsstring>
+        <name>getFrameIndex</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <briefdescription>
+<para>Get the index of a frame given its name. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame for which the index is requested. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the index of the frame, of FRAME_INVALID_INDEX if frameName is not not a frame name. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="389" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1ada72d786e1453f211a7d79f4dc0de8df" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Model::isValidFrameIndex</definition>
+        <argsstring>(const FrameIndex index) const</argsstring>
+        <name>isValidFrameIndex</name>
+        <param>
+          <type>const FrameIndex</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Check if a given FrameIndex is valid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>A frame index is valid if is different from FRAME_INVALID_INDEX and 0 =&lt; index &lt; <ref refid="classiDynTree_1_1Model_1ace5ed1d2735cda051cdd50f9e46c4dd8" kindref="member">getNrOfFrames()</ref>-1</para>
+<para><simplesect kind="return"><para>true if the index is valid, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="399" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1ad3e8276d1ec7e275aadeb75c1add80b6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>Transform iDynTree::Model::getFrameTransform</definition>
+        <argsstring>(const FrameIndex frameIndex) const</argsstring>
+        <name>getFrameTransform</name>
+        <param>
+          <type>const FrameIndex</type>
+          <declname>frameIndex</declname>
+        </param>
+        <briefdescription>
+<para>Get the tranform of the frame with respect to the main frame of the link, returned as link_H_frame tranform with refFrame : the link main frame and frame : the frame with index frameIndex . </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">frameIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the index of the frame for which transform is requested. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the link_H_frame transform, or an identity tranform if frameIndex &lt; 0 or frameIndex &gt;= getNrOfFrames . </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="411" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a64e8453f19a7c6f4e9dd0d9063062854" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::Model::getFrameLink</definition>
+        <argsstring>(const FrameIndex frameIndex) const</argsstring>
+        <name>getFrameLink</name>
+        <param>
+          <type>const FrameIndex</type>
+          <declname>frameIndex</declname>
+        </param>
+        <briefdescription>
+<para>Get the link at which the frame with index frameIndex is attached. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="418" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1aa10729a2d397c325b1c5b130ec2e36e6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Model::getLinkAdditionalFrames</definition>
+        <argsstring>(const LinkIndex lnkIndex, std::vector&lt; FrameIndex &gt; &amp;frameIndeces) const</argsstring>
+        <name>getLinkAdditionalFrames</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>lnkIndex</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; FrameIndex &gt; &amp;</type>
+          <declname>frameIndeces</declname>
+        </param>
+        <briefdescription>
+<para>Get the additional frames of a specified link. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>The vector of returned frame index is ordered according to the frame index. </para>
+</simplesect>
+<simplesect kind="warning"><para>This method searches linearly over all the frames.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a LinkIndex of the specified link, </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">frames</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a vector of FrameIndex of the frame indeces attached to the specified link index, </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the specified link is a valid link, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="430" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a7f1740784d873282ad0f0a5da9a56ddf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int iDynTree::Model::getNrOfNeighbors</definition>
+        <argsstring>(const LinkIndex link) const</argsstring>
+        <name>getNrOfNeighbors</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link</declname>
+        </param>
+        <briefdescription>
+<para>Get the nr of neighbors of a given link. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="435" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1ab5ab577f364a9592ee074a71bbafeb9b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structiDynTree_1_1Neighbor" kindref="compound">Neighbor</ref></type>
+        <definition>Neighbor iDynTree::Model::getNeighbor</definition>
+        <argsstring>(const LinkIndex link, unsigned int neighborIndex) const</argsstring>
+        <name>getNeighbor</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>neighborIndex</declname>
+        </param>
+        <briefdescription>
+<para>Get the neighbor of a link. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>neighborIndex should be &gt;= 0 and &lt;= getNrOfNeighbors(link) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="441" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a9e9f250f80cd292f5d9009aad2689ffa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Model::setDefaultBaseLink</definition>
+        <argsstring>(const LinkIndex linkIndex)</argsstring>
+        <name>setDefaultBaseLink</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>linkIndex</declname>
+        </param>
+        <briefdescription>
+<para>Set the default base link, used for generation of the default traversal. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="446" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a1a8dc1c97b99ffc51dbf93ecff20e8c1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::Model::getDefaultBaseLink</definition>
+        <argsstring>() const</argsstring>
+        <name>getDefaultBaseLink</name>
+        <briefdescription>
+<para>Get the default base link, used for generation of the default traversal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If no link are present in model, returns LINK_INVALID_INDEX. If setDefaultBaseLink was never called but at least a link has been added to the model, returns 0 (i.e. the index of the first link added to the model.</para>
+<para><simplesect kind="return"><para>index of the default base link, if valid </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="457" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a72469e19312e70ae804a90953989a009" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Model::computeFullTreeTraversal</definition>
+        <argsstring>(Traversal &amp;traversal) const</argsstring>
+        <name>computeFullTreeTraversal</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <briefdescription>
+<para>Compute a <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> of all the links in the <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref>, doing a Depth First Search starting at the default base. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>The traversal computed with this function contains pointers to the joints and links present in this model. Whenever these pointers are invalidated, for example because a link or a joint is added or the model is copied, the traversal need to be recomputed.</para>
+</simplesect>
+<simplesect kind="warning"><para>this function works only on Models without cycles. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">traversal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>traversal of all links in the model </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="472" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a72909f545efbc21f9b2097cd20716e5f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Model::computeFullTreeTraversal</definition>
+        <argsstring>(Traversal &amp;traversal, const LinkIndex traversalBase) const</argsstring>
+        <name>computeFullTreeTraversal</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>traversalBase</declname>
+        </param>
+        <briefdescription>
+<para>Compute a <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> of all the links in the <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref>, doing a Depth First Search starting at the given traversalBase. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>The traversal computed with this function contains pointers to the joints and links present in this model. Whenever these pointers are invalidated, for example because a link or a joint is added or the model is copied, the traversal need to be recomputed. </para>
+</simplesect>
+<simplesect kind="warning"><para>this function works only on Models without cycles. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">traversal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>traversal of all links in the model </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">traversalBase</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>base (root) link in the traversal </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="488" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a2c283e000a2d6a5e86770d8616b7e18b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Model::getInertialParameters</definition>
+        <argsstring>(VectorDynSize &amp;modelInertialParams) const</argsstring>
+        <name>getInertialParameters</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>modelInertialParams</declname>
+        </param>
+        <briefdescription>
+<para>Get the inertial parameters of the links of the model in vector forms. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This methods gets the inertial parameters (mass, center of mass, 3D inertia matrix) of the links of the robot.</para>
+<para>The output vector of inertial parameters must have 10*getNrOfLinks() elements, each 10 elements subvector corresponds to the inertial parameters of one link, following the serialization induced by the link indices (link 0 corresponds to elements 0-9, link 1 to 10-19, etc).</para>
+<para>The mapping between the <ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref> class and the Vector10 elements is the one defined in <ref refid="classiDynTree_1_1SpatialInertia_1ac1bfbb66868419b1fd9fd635c8b779a1" kindref="member">SpatialInertia::asVector()</ref> method.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">modelInertialParams</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of inertial parameters </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="508" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a629860714a6975c091a90c9586bad57e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Model::updateInertialParameters</definition>
+        <argsstring>(const VectorDynSize &amp;modelInertialParams)</argsstring>
+        <name>updateInertialParameters</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>modelInertialParams</declname>
+        </param>
+        <briefdescription>
+<para>Update the inertial parameters of the links of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This methods modifies the inertial parameters (mass, center of mass, 3D inertia matrix) of the links of the robot.</para>
+<para>The input vector of inertial parameters must have 10*getNrOfLinks() elements, each 10 elements subvector corresponds to the inertial parameters of one link, following the serialization induced by the link indices (link 0 corresponds to elements 0-9, link 1 to 10-19, etc).</para>
+<para>The mapping between the <ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref> class and the Vector10 elements is the one defined in <ref refid="classiDynTree_1_1SpatialInertia_1ac1bfbb66868419b1fd9fd635c8b779a1" kindref="member">SpatialInertia::asVector()</ref> method.</para>
+<para><simplesect kind="note"><para>For efficency reason, inertial parameters are not checked for full physical consistency before being update.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">modelInertialParams</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of inertial parameters </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="531" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a62d3d30e55a1b02170e70bd773a3212d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1ModelSolidShapes" kindref="compound">ModelSolidShapes</ref> &amp;</type>
+        <definition>ModelSolidShapes&amp; iDynTree::Model::visualSolidShapes</definition>
+        <argsstring>()</argsstring>
+        <name>visualSolidShapes</name>
+        <briefdescription>
+<para>Get the <ref refid="classiDynTree_1_1ModelSolidShapes" kindref="compound">ModelSolidShapes</ref> meant for visualization. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>a reference to <ref refid="classiDynTree_1_1ModelSolidShapes" kindref="compound">ModelSolidShapes</ref> meant for visualization. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="538" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1af68aaae6690c95229ade6eeba1627f6b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1ModelSolidShapes" kindref="compound">ModelSolidShapes</ref> &amp;</type>
+        <definition>const ModelSolidShapes&amp; iDynTree::Model::visualSolidShapes</definition>
+        <argsstring>() const</argsstring>
+        <name>visualSolidShapes</name>
+        <briefdescription>
+<para>Get the <ref refid="classiDynTree_1_1ModelSolidShapes" kindref="compound">ModelSolidShapes</ref> meant for visualization (const version) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>a reference to <ref refid="classiDynTree_1_1ModelSolidShapes" kindref="compound">ModelSolidShapes</ref> meant for visualization. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="545" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1ad2a504bd113005539effec1c49094d36" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1ModelSolidShapes" kindref="compound">ModelSolidShapes</ref> &amp;</type>
+        <definition>ModelSolidShapes&amp; iDynTree::Model::collisionSolidShapes</definition>
+        <argsstring>()</argsstring>
+        <name>collisionSolidShapes</name>
+        <briefdescription>
+<para>Get the <ref refid="classiDynTree_1_1ModelSolidShapes" kindref="compound">ModelSolidShapes</ref> meant for collision checking. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>a reference to <ref refid="classiDynTree_1_1ModelSolidShapes" kindref="compound">ModelSolidShapes</ref> meant for visualization. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="552" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1acbb988f29beafe0e9a8540f486271c08" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1ModelSolidShapes" kindref="compound">ModelSolidShapes</ref> &amp;</type>
+        <definition>const ModelSolidShapes&amp; iDynTree::Model::collisionSolidShapes</definition>
+        <argsstring>() const</argsstring>
+        <name>collisionSolidShapes</name>
+        <briefdescription>
+<para>Get the <ref refid="classiDynTree_1_1ModelSolidShapes" kindref="compound">ModelSolidShapes</ref> meant for collision checking (const version) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>a reference to <ref refid="classiDynTree_1_1ModelSolidShapes" kindref="compound">ModelSolidShapes</ref> meant for visualization. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="560" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Model_1a0691a75a1750e3973431c41929ea7da4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::Model::toString</definition>
+        <argsstring>() const</argsstring>
+        <name>toString</name>
+        <briefdescription>
+<para>Get a printable representation of the <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Useful for debugging. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="567" column="21"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class that represents a generic multibody model. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>A model is composed by rigid bodies (i.e. links) connected by joints. Each joint can have from 0 to 6 degrees of freedom.</para>
+<para>Each link has a &quot;link frame&quot; rigidly attached to it. Additionally, other rigidly attachable frames can be defined for each link.</para>
+<para>The model contains also a serialization for the different elements, i.e. a function between:<itemizedlist>
+<listitem><para>joint names and the integers 0..<ref refid="classiDynTree_1_1Model_1ab69c340d5fde147645854c880fbded18" kindref="member">getNrOfJoints()</ref>-1</para>
+</listitem><listitem><para>dof names and the integers 0..<ref refid="classiDynTree_1_1Model_1aca35ec05d4b7358b38df769deb0513a6" kindref="member">getNrOfDOFs()</ref>-1</para>
+</listitem><listitem><para>link names and the integers 0..<ref refid="classiDynTree_1_1Model_1aca270a902d0b0328c0d8afb1727d2154" kindref="member">getNrOfLinks()</ref>-1</para>
+</listitem><listitem><para>frame names and the integers 0..<ref refid="classiDynTree_1_1Model_1ace5ed1d2735cda051cdd50f9e46c4dd8" kindref="member">getNrOfFrames()</ref>-1</para>
+</listitem></itemizedlist>
+</para>
+<para>For simplicity, these mappings are build when building the model. In particular the link and joint indices are assigned when the links and joint are added to the model using the <computeroutput>addLink</computeroutput> and <computeroutput>addJoint</computeroutput> methods.</para>
+<para>The DOF indices are also assigned when the joint is added to the model with the addJoint method. For example if a model is composed only of 0 or 1 DOF joints and the 1 DOFs joints are added before the 0 DOFs then the joint index and dof index for 1 DOF joints will be coincident (this is how the URDF parser is actually implemented). For this reason the current implementation does not have a concept of DOF explicit identifier, i.e. a getDOFName(DOFIndex dofIndex) method does not exist.</para>
+<para>The frame indices between 0 and <ref refid="classiDynTree_1_1Model_1aca270a902d0b0328c0d8afb1727d2154" kindref="member">getNrOfLinks()</ref>-1 are always assigned to the &quot;main&quot; link frame of the link with the same index. The frame indices between <ref refid="classiDynTree_1_1Model_1aca270a902d0b0328c0d8afb1727d2154" kindref="member">getNrOfLinks()</ref> and <ref refid="classiDynTree_1_1Model_1ace5ed1d2735cda051cdd50f9e46c4dd8" kindref="member">getNrOfFrames()</ref>-1 are assigned when the additional frame is added to the model with the addAdditionalFrameToLink call. All the additional frame indices are incremented by 1 whenever a new link is added, to ensure that its &quot;link frame&quot; has a frame index in the 0...<ref refid="classiDynTree_1_1Model_1aca270a902d0b0328c0d8afb1727d2154" kindref="member">getNrOfLinks()</ref>-1 range. </para>
+    </detaileddescription>
+    <location file="iDynTree/Model/Model.h" line="74" column="5" bodyfile="iDynTree/Model/Model.h" bodystart="75" bodyend="569"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1Model_1ab67ec3bb2074412c1002befff50e2f57" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>addAdditionalFrameToLink</name></member>
+      <member refid="classiDynTree_1_1Model_1abc6612a340646ead0a7eae8df5bf5bbc" prot="private" virt="non-virtual"><scope>iDynTree::Model</scope><name>additionalFrames</name></member>
+      <member refid="classiDynTree_1_1Model_1ac96b6c1f63733c8187b6f6d0995d09d8" prot="private" virt="non-virtual"><scope>iDynTree::Model</scope><name>additionalFramesLinks</name></member>
+      <member refid="classiDynTree_1_1Model_1aaead8cb8c5367589131a877ea121c573" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>addJoint</name></member>
+      <member refid="classiDynTree_1_1Model_1a6b550b42785b54510ea704dbaa4f47c6" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>addJoint</name></member>
+      <member refid="classiDynTree_1_1Model_1a764763adb198032da5bdfcfc5f6a0748" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>addJointAndLink</name></member>
+      <member refid="classiDynTree_1_1Model_1a217617e53c6a0d0efb237ba3556fe8b6" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>addLink</name></member>
+      <member refid="classiDynTree_1_1Model_1ad2a504bd113005539effec1c49094d36" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>collisionSolidShapes</name></member>
+      <member refid="classiDynTree_1_1Model_1acbb988f29beafe0e9a8540f486271c08" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>collisionSolidShapes</name></member>
+      <member refid="classiDynTree_1_1Model_1a72469e19312e70ae804a90953989a009" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>computeFullTreeTraversal</name></member>
+      <member refid="classiDynTree_1_1Model_1a72909f545efbc21f9b2097cd20716e5f" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>computeFullTreeTraversal</name></member>
+      <member refid="classiDynTree_1_1Model_1a0b77841c02285a358b6a8b0e42ccf919" prot="private" virt="non-virtual"><scope>iDynTree::Model</scope><name>copy</name></member>
+      <member refid="classiDynTree_1_1Model_1ae5291043dfff013ca1a1d4270285a974" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>copy</name></member>
+      <member refid="classiDynTree_1_1Model_1aba9b3e5e28b33093537fbb4d6d454560" prot="private" virt="non-virtual"><scope>iDynTree::Model</scope><name>defaultBaseLink</name></member>
+      <member refid="classiDynTree_1_1Model_1a6a08210de977eab57082a75b363d5ade" prot="private" virt="non-virtual"><scope>iDynTree::Model</scope><name>destroy</name></member>
+      <member refid="classiDynTree_1_1Model_1a7918eb0613b28e50c92f5af609875bda" prot="private" virt="non-virtual"><scope>iDynTree::Model</scope><name>frameNames</name></member>
+      <member refid="classiDynTree_1_1Model_1a1a8dc1c97b99ffc51dbf93ecff20e8c1" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getDefaultBaseLink</name></member>
+      <member refid="classiDynTree_1_1Model_1af64e0e775f931371f0bfb5544adb7375" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getFrameIndex</name></member>
+      <member refid="classiDynTree_1_1Model_1a64e8453f19a7c6f4e9dd0d9063062854" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getFrameLink</name></member>
+      <member refid="classiDynTree_1_1Model_1a9aaf343086bebc57ec349061d3b24956" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getFrameName</name></member>
+      <member refid="classiDynTree_1_1Model_1ad3e8276d1ec7e275aadeb75c1add80b6" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getFrameTransform</name></member>
+      <member refid="classiDynTree_1_1Model_1a2c283e000a2d6a5e86770d8616b7e18b" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getInertialParameters</name></member>
+      <member refid="classiDynTree_1_1Model_1a4c236d6f7cc088912d469f6ff1127450" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getJoint</name></member>
+      <member refid="classiDynTree_1_1Model_1ad1166f43e7a70e4ee2a04a5d45bb7028" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getJoint</name></member>
+      <member refid="classiDynTree_1_1Model_1a9e586e10ab288a30401b767c160181e9" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getJointIndex</name></member>
+      <member refid="classiDynTree_1_1Model_1a276aca07d27ee16dd9f53afb9e46f730" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getJointName</name></member>
+      <member refid="classiDynTree_1_1Model_1ae87129dc71ea30e448842b6bb5d96bd8" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getLink</name></member>
+      <member refid="classiDynTree_1_1Model_1a7dacd5618b5f212df82da101dd4d6415" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getLink</name></member>
+      <member refid="classiDynTree_1_1Model_1aa10729a2d397c325b1c5b130ec2e36e6" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getLinkAdditionalFrames</name></member>
+      <member refid="classiDynTree_1_1Model_1ae9557eba54c8845eb69c79259299fddb" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getLinkIndex</name></member>
+      <member refid="classiDynTree_1_1Model_1aac86147dd37cd977de054e55635cd718" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getLinkName</name></member>
+      <member refid="classiDynTree_1_1Model_1ab5ab577f364a9592ee074a71bbafeb9b" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getNeighbor</name></member>
+      <member refid="classiDynTree_1_1Model_1aca35ec05d4b7358b38df769deb0513a6" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getNrOfDOFs</name></member>
+      <member refid="classiDynTree_1_1Model_1ace5ed1d2735cda051cdd50f9e46c4dd8" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getNrOfFrames</name></member>
+      <member refid="classiDynTree_1_1Model_1ab69c340d5fde147645854c880fbded18" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getNrOfJoints</name></member>
+      <member refid="classiDynTree_1_1Model_1aca270a902d0b0328c0d8afb1727d2154" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getNrOfLinks</name></member>
+      <member refid="classiDynTree_1_1Model_1a7f1740784d873282ad0f0a5da9a56ddf" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getNrOfNeighbors</name></member>
+      <member refid="classiDynTree_1_1Model_1a14bde5abaf794aa4160f09ba50c64c2e" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getNrOfPosCoords</name></member>
+      <member refid="classiDynTree_1_1Model_1a36a23bd3f7e2740f721b87c6b2d89464" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>getTotalMass</name></member>
+      <member refid="classiDynTree_1_1Model_1a4d1a4e182102ae3c29c97fd2245f4497" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>insertLinkToExistingJointAndAddJointForDisplacedLink</name></member>
+      <member refid="classiDynTree_1_1Model_1a6da12797ce7fd9bc747a6192e1a8632d" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>isFrameNameUsed</name></member>
+      <member refid="classiDynTree_1_1Model_1a3a7a786baeeae8a5f3c08aca06d5ab35" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>isJointNameUsed</name></member>
+      <member refid="classiDynTree_1_1Model_1a21bdfccdb54557700c4babc278d52323" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>isLinkNameUsed</name></member>
+      <member refid="classiDynTree_1_1Model_1ada72d786e1453f211a7d79f4dc0de8df" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>isValidFrameIndex</name></member>
+      <member refid="classiDynTree_1_1Model_1a9a149aed5e8a9b933a8e6c4c4a715f78" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>isValidJointIndex</name></member>
+      <member refid="classiDynTree_1_1Model_1aa5d6b472a34f852a7e3671e41f7e90e8" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>isValidLinkIndex</name></member>
+      <member refid="classiDynTree_1_1Model_1a6fd86eb6b7a813c89ef71ffda31e0210" prot="private" virt="non-virtual"><scope>iDynTree::Model</scope><name>jointNames</name></member>
+      <member refid="classiDynTree_1_1Model_1a29cae490ae0b99ab9eb301bbafbae005" prot="private" virt="non-virtual"><scope>iDynTree::Model</scope><name>joints</name></member>
+      <member refid="classiDynTree_1_1Model_1a3e5f1bc51f4bd89f9c5450c61165dac8" prot="private" virt="non-virtual"><scope>iDynTree::Model</scope><name>linkNames</name></member>
+      <member refid="classiDynTree_1_1Model_1a50093f9efe3d556d3c02ca287e7e4450" prot="private" virt="non-virtual"><scope>iDynTree::Model</scope><name>links</name></member>
+      <member refid="classiDynTree_1_1Model_1a12f992f6ba249137e188ac9a2ada7775" prot="private" virt="non-virtual"><scope>iDynTree::Model</scope><name>m_collisionSolidShapes</name></member>
+      <member refid="classiDynTree_1_1Model_1abd5ba08c0e5cd02c99afb3c12d10b75c" prot="private" virt="non-virtual"><scope>iDynTree::Model</scope><name>m_visualSolidShapes</name></member>
+      <member refid="classiDynTree_1_1Model_1a0c58c94f8c55be9f63d31f04f174cf0d" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>Model</name></member>
+      <member refid="classiDynTree_1_1Model_1a96e83863f4c01d3ef034dd9ebd85bf5e" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>Model</name></member>
+      <member refid="classiDynTree_1_1Model_1ac70249ac612e3cf157cd89d1e90b7538" prot="private" virt="non-virtual"><scope>iDynTree::Model</scope><name>neighbors</name></member>
+      <member refid="classiDynTree_1_1Model_1a6731df1e65f92cc0052bfe043ec60ee4" prot="private" virt="non-virtual"><scope>iDynTree::Model</scope><name>nrOfDOFs</name></member>
+      <member refid="classiDynTree_1_1Model_1a7258bf4d518366514fc8caa4666f2485" prot="private" virt="non-virtual"><scope>iDynTree::Model</scope><name>nrOfPosCoords</name></member>
+      <member refid="classiDynTree_1_1Model_1a87ed3b079e81106a66290f55bd518759" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1Model_1a9e9f250f80cd292f5d9009aad2689ffa" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>setDefaultBaseLink</name></member>
+      <member refid="classiDynTree_1_1Model_1a0691a75a1750e3973431c41929ea7da4" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>toString</name></member>
+      <member refid="classiDynTree_1_1Model_1a629860714a6975c091a90c9586bad57e" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>updateInertialParameters</name></member>
+      <member refid="classiDynTree_1_1Model_1a62d3d30e55a1b02170e70bd773a3212d" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>visualSolidShapes</name></member>
+      <member refid="classiDynTree_1_1Model_1af68aaae6690c95229ade6eeba1627f6b" prot="public" virt="non-virtual"><scope>iDynTree::Model</scope><name>visualSolidShapes</name></member>
+      <member refid="classiDynTree_1_1Model_1a74d155b1e7ede1524c5781d7862fd573" prot="public" virt="virtual"><scope>iDynTree::Model</scope><name>~Model</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

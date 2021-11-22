@@ -1,7 +1,0 @@
-<map id="iDynTree::SolidShape" name="iDynTree::SolidShape">
-<area shape="rect" id="node1" title=" " alt="" coords="223,5,382,32"/>
-<area shape="rect" id="node2" href="$classiDynTree_1_1Box.html" title="Box, i.e." alt="" coords="5,80,117,107"/>
-<area shape="rect" id="node3" href="$classiDynTree_1_1Cylinder.html" title=" " alt="" coords="141,80,283,107"/>
-<area shape="rect" id="node4" href="$classiDynTree_1_1ExternalMesh.html" title=" " alt="" coords="307,80,483,107"/>
-<area shape="rect" id="node5" href="$classiDynTree_1_1Sphere.html" title=" " alt="" coords="507,80,639,107"/>
-</map>

@@ -1,0 +1,392 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1AccelerometerSensor" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::AccelerometerSensor</compoundname>
+    <basecompoundref refid="classiDynTree_1_1LinkSensor" prot="public" virt="non-virtual">iDynTree::LinkSensor</basecompoundref>
+    <includes local="no">iDynTree/Sensors/AccelerometerSensor.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1AccelerometerSensor_1a3e3600054ac65aa7ee39a88d09c65c9d" prot="private" static="no" mutable="no">
+        <type>AccelerometerPrivateAttributes *</type>
+        <definition>AccelerometerPrivateAttributes* iDynTree::AccelerometerSensor::pimpl</definition>
+        <argsstring></argsstring>
+        <name>pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/AccelerometerSensor.h" line="41" column="41" bodyfile="iDynTree/Sensors/AccelerometerSensor.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1AccelerometerSensor_1a86c0607b1918169ea6d81f0b4c6145c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::AccelerometerSensor::AccelerometerSensor</definition>
+        <argsstring>()</argsstring>
+        <name>AccelerometerSensor</name>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/AccelerometerSensor.h" line="47" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AccelerometerSensor_1aa5b186782694e96fc3e1e4add9b4c52a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::AccelerometerSensor::AccelerometerSensor</definition>
+        <argsstring>(const AccelerometerSensor &amp;other)</argsstring>
+        <name>AccelerometerSensor</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1AccelerometerSensor" kindref="compound">AccelerometerSensor</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/AccelerometerSensor.h" line="52" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AccelerometerSensor_1aa61c1dee43a0959e9f9338c8918094b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1AccelerometerSensor" kindref="compound">AccelerometerSensor</ref> &amp;</type>
+        <definition>AccelerometerSensor&amp; iDynTree::AccelerometerSensor::operator=</definition>
+        <argsstring>(const AccelerometerSensor &amp;other)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1AccelerometerSensor" kindref="compound">AccelerometerSensor</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy operator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/AccelerometerSensor.h" line="57" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AccelerometerSensor_1ad13b612c747ce74c0c9195775f7fe13f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::AccelerometerSensor::~AccelerometerSensor</definition>
+        <argsstring>()</argsstring>
+        <name>~AccelerometerSensor</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/AccelerometerSensor.h" line="62" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AccelerometerSensor_1af6e1ad0f6ae149b8cb6591ceb6359648" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AccelerometerSensor::setName</definition>
+        <argsstring>(const std::string &amp;_name)</argsstring>
+        <name>setName</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1a40cafcac5f0c1567e44d53c775641818">setName</reimplements>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>_name</declname>
+        </param>
+        <briefdescription>
+<para>Set the name (id) of the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/AccelerometerSensor.h" line="68" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AccelerometerSensor_1ad91ec3dc73a1d4f298a0b87ed62c07a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AccelerometerSensor::setLinkSensorTransform</definition>
+        <argsstring>(const iDynTree::Transform &amp;link_H_sensor)</argsstring>
+        <name>setLinkSensorTransform</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1a716a29b8598842583ac5c92903a978f5">setLinkSensorTransform</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>link_H_sensor</declname>
+        </param>
+        <briefdescription>
+<para>Set the transform from the sensor to the parent link attached to the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if link_index is parent link attached to the accelerometer sensor, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/AccelerometerSensor.h" line="75" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AccelerometerSensor_1aa7fafe90845ba06b008191e59f983406" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AccelerometerSensor::setParentLink</definition>
+        <argsstring>(const std::string &amp;parent)</argsstring>
+        <name>setParentLink</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1a9420746600b52d524f2c6fde5023147d">setParentLink</reimplements>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>parentLinkName</declname>
+        </param>
+        <briefdescription>
+<para>Set the name of the parent <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/AccelerometerSensor.h" line="80" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AccelerometerSensor_1adc7fb955a4aa6ce83dbb621da9ab7e8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AccelerometerSensor::setParentLinkIndex</definition>
+        <argsstring>(const LinkIndex &amp;parent_index)</argsstring>
+        <name>setParentLinkIndex</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1aec8002495ae7ca62e3e8b516c55e5a0c">setParentLinkIndex</reimplements>
+        <param>
+          <type>const LinkIndex &amp;</type>
+        </param>
+        <briefdescription>
+<para>Set the numeric index of the parent link of the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/AccelerometerSensor.h" line="85" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AccelerometerSensor_1aa9d4f983bdf10f65edb53ae79fd93436" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::AccelerometerSensor::getName</definition>
+        <argsstring>() const</argsstring>
+        <name>getName</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1a4a62adb1d4c1e4bedca8762783ab0468">getName</reimplements>
+        <briefdescription>
+<para>Get the id (name) of sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/AccelerometerSensor.h" line="91" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AccelerometerSensor_1a991cf7c3abd0ff5d6117d30603d1b003" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SensorType</type>
+        <definition>SensorType iDynTree::AccelerometerSensor::getSensorType</definition>
+        <argsstring>() const</argsstring>
+        <name>getSensorType</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1a6dd712921c150fddd33217694feb3652">getSensorType</reimplements>
+        <briefdescription>
+<para>Get the type of the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the type of the sensor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/AccelerometerSensor.h" line="96" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AccelerometerSensor_1aa718fb58c93b02f9365df195d8aba8cf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::AccelerometerSensor::getParentLink</definition>
+        <argsstring>() const</argsstring>
+        <name>getParentLink</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1a4d664e0bb40e93c9c966f286a5205ed6">getParentLink</reimplements>
+        <briefdescription>
+<para>Get the name of the parent <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/AccelerometerSensor.h" line="102" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AccelerometerSensor_1a6bb847043704ad6f4524aa4a11eb789d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::AccelerometerSensor::getParentLinkIndex</definition>
+        <argsstring>() const</argsstring>
+        <name>getParentLinkIndex</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1a45fc4c098204d10e64c4c82ae58ddd2c">getParentLinkIndex</reimplements>
+        <briefdescription>
+<para>Get the numeric index of the parent <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the index of the parent <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> of the sensor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/AccelerometerSensor.h" line="107" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AccelerometerSensor_1ab009666f7115b8591e516087d89e5dca" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>Transform iDynTree::AccelerometerSensor::getLinkSensorTransform</definition>
+        <argsstring>() const</argsstring>
+        <name>getLinkSensorTransform</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1ad5cb2901457ca5e0dedee1a6230ac858">getLinkSensorTransform</reimplements>
+        <briefdescription>
+<para>Return the transform that applied on a element expressed in sensor frames it transform it in one expressed in the link frame (. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="95">\[ {}^l H_s \]</formula>).</para>
+<para><simplesect kind="return"><para>the link_H_sensor transform </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/AccelerometerSensor.h" line="110" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AccelerometerSensor_1a05bf54b4a247b4536c5846ef93702b46" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AccelerometerSensor::isValid</definition>
+        <argsstring>() const</argsstring>
+        <name>isValid</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1ace89679ad53fd11326ec00dc82ebd925">isValid</reimplements>
+        <briefdescription>
+<para>Return true if the sensor has been appropriately configured (all setters where setted, false otherwise. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/AccelerometerSensor.h" line="115" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AccelerometerSensor_1a8d35a19908ac5fcc03abcd6b7bfda077" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> *</type>
+        <definition>Sensor* iDynTree::AccelerometerSensor::clone</definition>
+        <argsstring>() const</argsstring>
+        <name>clone</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1a6428f5534e54c607bc5e773073c6c50e">clone</reimplements>
+        <briefdescription>
+<para>Return a pointer to a copy of this sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/AccelerometerSensor.h" line="120" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AccelerometerSensor_1a4b8a0d3c55a3341ad98b9490864512d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::AccelerometerSensor::updateIndices</definition>
+        <argsstring>(const Model &amp;model)</argsstring>
+        <name>updateIndices</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1ae91fc5a5922a99815b0cdc9de9f1ac88">updateIndices</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Update all the indices (link/frames) contained in this sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/AccelerometerSensor.h" line="125" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1AccelerometerSensor_1a555cdf1769fc219c8d91bce7d4b4ce0f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1GeomVector3" kindref="compound">iDynTree::LinAcceleration</ref></type>
+        <definition>iDynTree::LinAcceleration iDynTree::AccelerometerSensor::predictMeasurement</definition>
+        <argsstring>(const iDynTree::SpatialAcc &amp;linkAcc, const iDynTree::Twist &amp;linkTwist)</argsstring>
+        <name>predictMeasurement</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">iDynTree::SpatialAcc</ref> &amp;</type>
+          <declname>linkAcc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Twist" kindref="compound">iDynTree::Twist</ref> &amp;</type>
+          <declname>linkTwist</declname>
+        </param>
+        <briefdescription>
+<para>Following method is to be implemented after defining the interface Get wrench applied on the specified link expressed in the specified link frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the predicted measurement as a LinAcceleration </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/AccelerometerSensor.h" line="133" column="34"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Interface to the Accelerometer class. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>An implementation of the Accelerometer <ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::AccelerometerSensor</label>
+        <link refid="classiDynTree_1_1AccelerometerSensor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::LinkSensor</label>
+        <link refid="classiDynTree_1_1LinkSensor"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::Sensor</label>
+        <link refid="classiDynTree_1_1Sensor"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>iDynTree::AccelerometerSensor</label>
+        <link refid="classiDynTree_1_1AccelerometerSensor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::LinkSensor</label>
+        <link refid="classiDynTree_1_1LinkSensor"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::Sensor</label>
+        <link refid="classiDynTree_1_1Sensor"/>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Sensors/AccelerometerSensor.h" line="37" column="5" bodyfile="iDynTree/Sensors/AccelerometerSensor.h" bodystart="38" bodyend="134"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1AccelerometerSensor_1a86c0607b1918169ea6d81f0b4c6145c8" prot="public" virt="non-virtual"><scope>iDynTree::AccelerometerSensor</scope><name>AccelerometerSensor</name></member>
+      <member refid="classiDynTree_1_1AccelerometerSensor_1aa5b186782694e96fc3e1e4add9b4c52a" prot="public" virt="non-virtual"><scope>iDynTree::AccelerometerSensor</scope><name>AccelerometerSensor</name></member>
+      <member refid="classiDynTree_1_1AccelerometerSensor_1a8d35a19908ac5fcc03abcd6b7bfda077" prot="public" virt="virtual"><scope>iDynTree::AccelerometerSensor</scope><name>clone</name></member>
+      <member refid="classiDynTree_1_1AccelerometerSensor_1ab009666f7115b8591e516087d89e5dca" prot="public" virt="virtual"><scope>iDynTree::AccelerometerSensor</scope><name>getLinkSensorTransform</name></member>
+      <member refid="classiDynTree_1_1AccelerometerSensor_1aa9d4f983bdf10f65edb53ae79fd93436" prot="public" virt="virtual"><scope>iDynTree::AccelerometerSensor</scope><name>getName</name></member>
+      <member refid="classiDynTree_1_1AccelerometerSensor_1aa718fb58c93b02f9365df195d8aba8cf" prot="public" virt="virtual"><scope>iDynTree::AccelerometerSensor</scope><name>getParentLink</name></member>
+      <member refid="classiDynTree_1_1AccelerometerSensor_1a6bb847043704ad6f4524aa4a11eb789d" prot="public" virt="virtual"><scope>iDynTree::AccelerometerSensor</scope><name>getParentLinkIndex</name></member>
+      <member refid="classiDynTree_1_1AccelerometerSensor_1a991cf7c3abd0ff5d6117d30603d1b003" prot="public" virt="virtual"><scope>iDynTree::AccelerometerSensor</scope><name>getSensorType</name></member>
+      <member refid="classiDynTree_1_1LinkSensor_1a371122608cfbaf0c9fdf562b2780c786" prot="public" virt="virtual"><scope>iDynTree::AccelerometerSensor</scope><name>isConsistent</name></member>
+      <member refid="classiDynTree_1_1AccelerometerSensor_1a05bf54b4a247b4536c5846ef93702b46" prot="public" virt="virtual"><scope>iDynTree::AccelerometerSensor</scope><name>isValid</name></member>
+      <member refid="classiDynTree_1_1AccelerometerSensor_1aa61c1dee43a0959e9f9338c8918094b1" prot="public" virt="non-virtual"><scope>iDynTree::AccelerometerSensor</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1AccelerometerSensor_1a3e3600054ac65aa7ee39a88d09c65c9d" prot="private" virt="non-virtual"><scope>iDynTree::AccelerometerSensor</scope><name>pimpl</name></member>
+      <member refid="classiDynTree_1_1AccelerometerSensor_1a555cdf1769fc219c8d91bce7d4b4ce0f" prot="public" virt="non-virtual"><scope>iDynTree::AccelerometerSensor</scope><name>predictMeasurement</name></member>
+      <member refid="classiDynTree_1_1AccelerometerSensor_1ad91ec3dc73a1d4f298a0b87ed62c07a7" prot="public" virt="virtual"><scope>iDynTree::AccelerometerSensor</scope><name>setLinkSensorTransform</name></member>
+      <member refid="classiDynTree_1_1AccelerometerSensor_1af6e1ad0f6ae149b8cb6591ceb6359648" prot="public" virt="virtual"><scope>iDynTree::AccelerometerSensor</scope><name>setName</name></member>
+      <member refid="classiDynTree_1_1AccelerometerSensor_1aa7fafe90845ba06b008191e59f983406" prot="public" virt="virtual"><scope>iDynTree::AccelerometerSensor</scope><name>setParentLink</name></member>
+      <member refid="classiDynTree_1_1AccelerometerSensor_1adc7fb955a4aa6ce83dbb621da9ab7e8e" prot="public" virt="virtual"><scope>iDynTree::AccelerometerSensor</scope><name>setParentLinkIndex</name></member>
+      <member refid="classiDynTree_1_1AccelerometerSensor_1a4b8a0d3c55a3341ad98b9490864512d0" prot="public" virt="virtual"><scope>iDynTree::AccelerometerSensor</scope><name>updateIndices</name></member>
+      <member refid="classiDynTree_1_1AccelerometerSensor_1ad13b612c747ce74c0c9195775f7fe13f" prot="public" virt="virtual"><scope>iDynTree::AccelerometerSensor</scope><name>~AccelerometerSensor</name></member>
+      <member refid="classiDynTree_1_1LinkSensor_1a6d58c4792a359f962a64f800f56ecb5a" prot="public" virt="pure-virtual"><scope>iDynTree::AccelerometerSensor</scope><name>~LinkSensor</name></member>
+      <member refid="classiDynTree_1_1Sensor_1ab47aa38253b58f2a1c537e5956684e47" prot="public" virt="pure-virtual"><scope>iDynTree::AccelerometerSensor</scope><name>~Sensor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

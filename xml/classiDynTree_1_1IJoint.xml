@@ -1,0 +1,959 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1IJoint" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::IJoint</compoundname>
+    <derivedcompoundref refid="classiDynTree_1_1FixedJoint" prot="public" virt="non-virtual">iDynTree::FixedJoint</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1MovableJointImpl" prot="public" virt="non-virtual">iDynTree::MovableJointImpl&lt; nrOfPosCoords, nrOfDOFs &gt;</derivedcompoundref>
+    <includes local="no">iDynTree/Model/IJoint.h</includes>
+      <sectiondef kind="user-defined">
+      <header>Methods to set joint</header>
+      <description><para>Methods to set joint informations (used when building a model) </para>
+</description>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1aafd1101e91ea337a451d62f0160a819c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::IJoint::setAttachedLinks</definition>
+        <argsstring>(const LinkIndex link1, const LinkIndex link2)=0</argsstring>
+        <name>setAttachedLinks</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a252dce83332fd752932d3c112512a733">setAttachedLinks</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1acc37e809466dbaa48c63d710172466d7">setAttachedLinks</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1ab0054852e1d734677a145eba7d855259">setAttachedLinks</reimplementedby>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link1</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link2</declname>
+        </param>
+        <briefdescription>
+<para>Set the two links at which the joint is attached. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the first link </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>link2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the second link </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="99" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a770aadc1a6e13bce3af213707fcf2d84" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::IJoint::setRestTransform</definition>
+        <argsstring>(const Transform &amp;link1_X_link2)=0</argsstring>
+        <name>setRestTransform</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a1d24cec7f90a2b916a9f3ed7d3d49dab">setRestTransform</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1ac6cf334be17f178a4b1a8b8877a034d6">setRestTransform</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1a01e2fa3bcf4c67533d2869d73124aa45">setRestTransform</reimplementedby>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>link1_X_link2</declname>
+        </param>
+        <briefdescription>
+<para>Set the transform between the link2 frame and link1 frame at joint position 0 (or at the identity configuration element for complex joints). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The link1_T_link2 is transform that transforms a quantity expressed in link2 frame in a quantity expressed in the link1 frame, when the joint is in the 0 position : p_link1 = link1_T_link2*p_link2 . </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="110" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1abe3efda09a0c3d94c021891de447aaa8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>LinkIndex</type>
+        <definition>virtual LinkIndex iDynTree::IJoint::getFirstAttachedLink</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getFirstAttachedLink</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a826fcc8006393854c2309de92d3fbef2">getFirstAttachedLink</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a213fda83fc530f350e8bde91a04e2b4e">getFirstAttachedLink</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1a5b22e4e2870280815c24f1e1fb0084ce">getFirstAttachedLink</reimplementedby>
+        <briefdescription>
+<para>Get the first link attached to the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="117" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a1c55168bcc2dbd7b1fd58737a6bb46d8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>LinkIndex</type>
+        <definition>virtual LinkIndex iDynTree::IJoint::getSecondAttachedLink</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getSecondAttachedLink</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1ac7311235bf7b08357a153c1321bed081">getSecondAttachedLink</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a742bd7aeca927a280704ae37daa6c55d">getSecondAttachedLink</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1ab51ac6ab6659dfdba43232dfedd24ea4">getSecondAttachedLink</reimplementedby>
+        <briefdescription>
+<para>Get the second link attached to the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="122" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a7b6fb4c82687601810f3696e9605f1e0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>virtual Transform iDynTree::IJoint::getRestTransform</definition>
+        <argsstring>(const LinkIndex child, const LinkIndex parent) const =0</argsstring>
+        <name>getRestTransform</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a11d92b8cc4f0df088f0eb972e9c70b63">getRestTransform</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a373f69a06f669b0696732484469a0000">getRestTransform</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1addfd7a524a8b455fed2e119e5337a5ef">getRestTransform</reimplementedby>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Get the transform between the link parent and the link child at joint position 0 (or at the identity configuration element for complex joints). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Such that: p_child = child_H_parent*p_parent where p_child is a quantity expressed in the child frame, and p_parent is a quantity expressed in the child frame. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="133" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a2b0c23cad4da4e748ecdaf009805f767" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+        <definition>virtual const Transform&amp; iDynTree::IJoint::getTransform</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const LinkIndex child, const LinkIndex parent) const =0</argsstring>
+        <name>getTransform</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a09dddd2e6d0fc043c6ffa0681b15404c">getTransform</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1aa496c937ad1ca73bb90e7da79cc646b2">getTransform</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1a4dd07d55b77a7b6063c4f677b9900499">getTransform</reimplementedby>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Get the transform between the parent and the child, such that: p_child = child_H_parent*p_parent, where p_child is a quantity expressed in the child frame, and p_parent is a quantity expressed in the parent frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="142" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a0dd24dad1882bc1df35a1832275fbfbb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref></type>
+        <definition>virtual TransformDerivative iDynTree::IJoint::getTransformDerivative</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const LinkIndex child, const LinkIndex parent, const int posCoord_i) const =0</argsstring>
+        <name>getTransformDerivative</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1aac231749bf30745780aec0d876fd82ed">getTransformDerivative</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a0ce9b9cd049657c73cf6b1e2461210b9">getTransformDerivative</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1afb136bbf0c99f9bcf571dfe1d3937e18">getTransformDerivative</reimplementedby>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>posCoord_i</declname>
+        </param>
+        <briefdescription>
+<para>Get the derivative of the transform with respect to a position coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In particular, if the selected position coordinate is <formula id="19">$q$</formula>, return the derivative: <formula id="20">\[ \frac{\partial {}^\texttt{child} H_\texttt{parent} }{\partial q} \]</formula></para>
+<para>If posCoord_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a149ddcf05f6328fdd3ecbe38a0fca4a0" kindref="member">getNrOfPosCoords()</ref>, the returned value is undefined. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="158" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a3a89b6fd2358c8435e7f794d3857045f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
+        <definition>virtual SpatialMotionVector iDynTree::IJoint::getMotionSubspaceVector</definition>
+        <argsstring>(int dof_i, const LinkIndex child, const LinkIndex parent) const =0</argsstring>
+        <name>getMotionSubspaceVector</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1aa103b6aee2a08ed32b7688f01e3c10fe">getMotionSubspaceVector</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a6e6fb431a49f7a0215f7d4b5faa3f9f9">getMotionSubspaceVector</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1ab21df5f6c5075952811c700a9c5cd51a">getMotionSubspaceVector</reimplementedby>
+        <param>
+          <type>int</type>
+          <declname>dof_i</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Get the motion subspace vector corresponding to the i-th dof of the joint, i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>the i-th column of the motion subspace matrix. The motion subspace matrix is the matrix that maps the joint velocity to the relative twist between the two links.</para>
+<para>In particular the motion subspace vector of the i-th dof is the S vector such that v_child = S_{child,parent}*dq_i + child_X_parent*v_parent if the velocities associated to all other DOFs of the joint are considered zero, where v_child and v_parent are the left-trivialized (body) velocities of the link child and parent.</para>
+<para>See &quot;Modelling, Estimation and Identification of Humanoid Robots Dynamics&quot; Silvio Traversaro - Section 3.2 <ulink url="https://traversaro.github.io/preprints/traversaro-phd-thesis.pdf">https://traversaro.github.io/preprints/traversaro-phd-thesis.pdf</ulink> for more details.</para>
+<para><simplesect kind="return"><para>the motion subspace vector.</para>
+</simplesect>
+If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a495e097b8cf534059516440" kindref="member">getNrOfDOFs()</ref>, the returned value is undefined.</para>
+<para><simplesect kind="note"><para>The motion subspace matrix is also known in literature as hinge matrix, hinge map matrix, joint map matrix or joint motion map matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="190" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1aa41dbb76816e2621d6924ca052b07881" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::IJoint::computeChildPosVelAcc</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, const VectorDynSize &amp;jntAcc, LinkPositions &amp;linkPositions, LinkVelArray &amp;linkVels, LinkAccArray &amp;linkAccs, const LinkIndex child, const LinkIndex parent) const =0</argsstring>
+        <name>computeChildPosVelAcc</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a5b6ba1d1c8e77ba3a6b4e2c91078388c">computeChildPosVelAcc</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a254a889ad22326e340e31893aa3b3a17">computeChildPosVelAcc</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1a4e54ab1a66775c23d867d96bc4981d89">computeChildPosVelAcc</reimplementedby>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntAcc</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkPositions" kindref="compound">LinkPositions</ref> &amp;</type>
+          <declname>linkPositions</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVels</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
+          <declname>linkAccs</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Compute the position, velocity and acceleration of link child, given the position, velocty and acceleration of link parent and the joint position, velocity and acceleration. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The position, velocity and acceleration of link child are directly saved in the linkPositions, linkVels and linkAccs arguments. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="203" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a6d0853757008a1db34d41da9276df81e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::IJoint::computeChildVelAcc</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, const VectorDynSize &amp;jntAcc, LinkVelArray &amp;linkVels, LinkAccArray &amp;linkAccs, const LinkIndex child, const LinkIndex parent) const =0</argsstring>
+        <name>computeChildVelAcc</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1accd64e95d5df5c12cf0d15d71584cfd6">computeChildVelAcc</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a3f60b0d78a2065d4a6d4f470496894b7">computeChildVelAcc</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1aefd91d85490aac0b9231c4624ac61175">computeChildVelAcc</reimplementedby>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntAcc</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVels</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
+          <declname>linkAccs</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Compute the velocity and acceleration of child, given the velocity and acceleration of parent and the joint position, velocity and acceleration. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="217" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a70c9055aafb46f65fe767664c873625e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::IJoint::computeChildVel</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, LinkVelArray &amp;linkVels, const LinkIndex child, const LinkIndex parent) const =0</argsstring>
+        <name>computeChildVel</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1afb8391d3ca02525af959e282e9d914ae">computeChildVel</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1ab7ee688d192b918dfb9efbe8afda0f09">computeChildVel</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1adaae229eae185031300bf171a513d181">computeChildVel</reimplementedby>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntVel</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVels</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Compute the velocity of child, given the velocity of parent and the joint position, velocity. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="229" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a65509300297221192cb46189b2a473d1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::IJoint::computeChildAcc</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, const LinkVelArray &amp;linkVels, const VectorDynSize &amp;jntAcc, LinkAccArray &amp;linkAccs, const LinkIndex child, const LinkIndex parent) const =0</argsstring>
+        <name>computeChildAcc</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1aa8a7f22a0c0211286337ad6618356f01">computeChildAcc</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a35f4eda7506082ee7a520df7f976da60">computeChildAcc</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1a8cc08db7802d2b4f0978efc6ca6c947d">computeChildAcc</reimplementedby>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVels</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntAcc</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
+          <declname>linkAccs</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Compute the (body-fixed) acceleration of a child link given the (body-fixed) acceleration of the parent. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="239" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a3c16a316f95e25ad0af2768cb4c991a3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::IJoint::computeChildBiasAcc</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, const LinkVelArray &amp;linkVels, LinkAccArray &amp;linkBiasAccs, const LinkIndex child, const LinkIndex parent) const =0</argsstring>
+        <name>computeChildBiasAcc</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a188836bc8b00a32bff5adbd1ac4549e8">computeChildBiasAcc</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a808c5b7e92112d346dce43905ea0a671">computeChildBiasAcc</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1a60ddcf0fd610a2d3ec72c05341621f09">computeChildBiasAcc</reimplementedby>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVels</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
+          <declname>linkBiasAccs</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Compute the (body-fixed) bias acceleration of a child link given the (body-fixed) bias acceleration of the parent. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="251" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a495a50c9623710812f49cf6258ecb68e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::IJoint::computeJointTorque</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const Wrench &amp;internalWrench, const LinkIndex linkThatAppliesWrench, const LinkIndex linkOnWhichWrenchIsApplied, VectorDynSize &amp;jntTorques) const =0</argsstring>
+        <name>computeJointTorque</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a64f7e46c83d98bb5f533bee54346880a">computeJointTorque</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1ad2033d545ccada271a36eeecf73ccacd">computeJointTorque</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1a4d73857202239a3e54de8defafaf62a2">computeJointTorque</reimplementedby>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> &amp;</type>
+          <declname>internalWrench</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>linkThatAppliesWrench</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>linkOnWhichWrenchIsApplied</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntTorques</declname>
+        </param>
+        <briefdescription>
+<para>Compute the internal torque of joint, given the internal wrench that the linkThatAppliesWrench applies on the linkOnWhichWrenchIsApplied, expressed in the link frame of the linkOnWhichWrenchIsApplied. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">jntPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of joint positions. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">internalWrench</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>internal wrench that the linkThatAppliesWrench applies on the linkOnWhichWrenchIsApplied, expressed in the link frame of the linkOnWhichWrenchIsApplied </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkThatAppliesWrench</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>link index of the link that applies the considered internal wrench. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkOnWhichWrenchIsApplied</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>link index of the link on which the considered internal wrench is applied. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">jntTorques</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of joint torques. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="270" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1ac0d964dac9538e66a922b1ae50e7b662" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::IJoint::setIndex</definition>
+        <argsstring>(JointIndex &amp;_index)=0</argsstring>
+        <name>setIndex</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1aff64953756add9df5c66cb2dedd08107">setIndex</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1MovableJointImpl_1a4b1807b06b92f64c41502c17b8ecd5a6">setIndex</reimplementedby>
+        <param>
+          <type>JointIndex &amp;</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Set the index of the joint in the <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> Joint serialization. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="280" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a2accdcd6fbf7e222a3c7c6b99130934e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>JointIndex</type>
+        <definition>virtual JointIndex iDynTree::IJoint::getIndex</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getIndex</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a2932d75d7bcb8717a7dc66de9f8f4ea4">getIndex</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1MovableJointImpl_1a717d5ccedc215f53b75e918229d98bab">getIndex</reimplementedby>
+        <briefdescription>
+<para>Get the index of the joint in the model Joint serialization. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="285" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a6c80be1fe40e5a71cc56c4fbe625535f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::IJoint::setPosCoordsOffset</definition>
+        <argsstring>(const size_t _index)=0</argsstring>
+        <name>setPosCoordsOffset</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a9d0e650f359f3bfec60fffe44ae7e879">setPosCoordsOffset</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1MovableJointImpl_1afbbbe860f34622d4d8ae1d938fd65b98">setPosCoordsOffset</reimplementedby>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Set the offset of the position coordinates of this joint in the position coordiantes serialization of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="292" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1afc71b67f79c9bbdd8f2925ee08ca0323" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>size_t</type>
+        <definition>virtual size_t iDynTree::IJoint::getPosCoordsOffset</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getPosCoordsOffset</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a6b71751bb05328e175f152276351c137">getPosCoordsOffset</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1MovableJointImpl_1a599c535eb4fced80019a72e126752a0c">getPosCoordsOffset</reimplementedby>
+        <briefdescription>
+<para>Get the offset of the position coordinates of this joint in the position coordiantes serialization of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="298" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1af65fc0f65b8367404848bc41ea87347c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::IJoint::setDOFsOffset</definition>
+        <argsstring>(const size_t _index)=0</argsstring>
+        <name>setDOFsOffset</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1ac94388992a67d161d7b6498219e26da7">setDOFsOffset</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1MovableJointImpl_1aa9cb6e7141a84e23c7d7fca9c900c6bc">setDOFsOffset</reimplementedby>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Set the offset of the coordinates of this joint in the velocity/acceleration coordiantes serialization of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="304" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a64aa264a72088da07844f25176a25bee" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>size_t</type>
+        <definition>virtual size_t iDynTree::IJoint::getDOFsOffset</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getDOFsOffset</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1ac88c5b5c3731a56715fea48c2cf87323">getDOFsOffset</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1MovableJointImpl_1a593be2dc005f1580c341bc723ed36b5e">getDOFsOffset</reimplementedby>
+        <briefdescription>
+<para>Get the offset of the position coordinates of joint in the velocity/acceleration coordiantes serialization of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="310" column="24"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Limit handling methods.</header>
+      <description><para>Methods for handling physical limits of joints.</para>
+<para>The model used for limits is rather simple: a joint can have limits (being bounded) or not.</para>
+<para>In the current version the limits are supported only for simple joints in which the velocity is the derivative of the position coordinate, and then <ref refid="classiDynTree_1_1IJoint_1a149ddcf05f6328fdd3ecbe38a0fca4a0" kindref="member">getNrOfPosCoords()</ref> is equal to <ref refid="classiDynTree_1_1IJoint_1a83027b41a495e097b8cf534059516440" kindref="member">getNrOfDOFs()</ref> . The limits for such joints are specified by two constant vectors of dimension <ref refid="classiDynTree_1_1IJoint_1a83027b41a495e097b8cf534059516440" kindref="member">getNrOfDOFs()</ref>, the vector of minimum positions and the vector of maximum positions. </para>
+</description>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1af4badbd5891621e847a61d767cffd25e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IJoint::hasPosLimits</definition>
+        <argsstring>() const =0</argsstring>
+        <name>hasPosLimits</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1ac14e8020830993efd145171a5c098197">hasPosLimits</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a0d0c74fb7e7ad6f9e9ddf9bef7528068">hasPosLimits</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1a14b6333b82f42a82d644d341ed627c73">hasPosLimits</reimplementedby>
+        <briefdescription>
+<para>Method to check if the joint has limits. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if the joints has limits </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="331" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a4f0f02e57295ad4b0ec94fe19fc3e0c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IJoint::enablePosLimits</definition>
+        <argsstring>(const bool enable)=0</argsstring>
+        <name>enablePosLimits</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1ac91261597acef05ed961fd5acc04dfd9">enablePosLimits</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a4028e7e729f7665ed75f852e46475769">enablePosLimits</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1a1adadb8bf7bdc3335dfb8b90556edc94">enablePosLimits</reimplementedby>
+        <param>
+          <type>const bool</type>
+          <declname>enable</declname>
+        </param>
+        <briefdescription>
+<para>Method to set if the joint has limits. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if everything went correctly, false otherwise (for example if the joint does not support joint position limits) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="339" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1ab734574da90b6d2ae24169ea180a081b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IJoint::getPosLimits</definition>
+        <argsstring>(const size_t _index, double &amp;min, double &amp;max) const =0</argsstring>
+        <name>getPosLimits</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a768fb933c761bdcc63ee9d60ea1a9214">getPosLimits</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a906a19995a2749717bca458338f26cc6">getPosLimits</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1a4d3db4e8079ec53967f00b2451e9651a">getPosLimits</reimplementedby>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>min</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+<para>Get min and max position limits of the joint, for the _index dof. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>index of the dof for which the limit are obtained. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if everything is correct, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="346" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a46dbe9dec3ef79f6d5662269f6fe8f65" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::IJoint::getMinPosLimit</definition>
+        <argsstring>(const size_t _index) const =0</argsstring>
+        <name>getMinPosLimit</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a1d2f185b2a43a3efd46e3d40a90ea653">getMinPosLimit</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a8c978202c47f891a9060c8a6c8cfbb5c">getMinPosLimit</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1ad67f412133c3e07b6c49fd7b67b6c4aa">getMinPosLimit</reimplementedby>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Get the min position limit of the joint, bindings-friendly version. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="351" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a047913be4f7bdeb35d785e4ad71d5395" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::IJoint::getMaxPosLimit</definition>
+        <argsstring>(const size_t _index) const =0</argsstring>
+        <name>getMaxPosLimit</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a68f354b50ed5b9c073085f58686236e0">getMaxPosLimit</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a8824f586b55d5a1c4c6348ed1264c7b1">getMaxPosLimit</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1a3580e3bc0eeb67b1497cbfec5945641d">getMaxPosLimit</reimplementedby>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Get the max position limit of the joint, bindings-friendly version. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="356" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a63c57d91c3d80a610671f04fcbdd22ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IJoint::setPosLimits</definition>
+        <argsstring>(const size_t _index, double &amp;min, double &amp;max)=0</argsstring>
+        <name>setPosLimits</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1ab64556dab725cdd0634d3ad4fca9311b">setPosLimits</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a52256e40dd9de343d01815f8b5020569">setPosLimits</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1abbea73315ff8ea7f81b9c3d27d32f05c">setPosLimits</reimplementedby>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>min</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+<para>Set the position limits for a dof the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This just sets the internal position limits of the joint. To set them as enabled, you need to call the enablePosLimits(true) method. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="364" column="22"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1ac989ee81d08959eca68666aa6740cb16" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type></type>
+        <definition>virtual iDynTree::IJoint::~IJoint</definition>
+        <argsstring>()=0</argsstring>
+        <name>~IJoint</name>
+        <briefdescription>
+<para>Denstructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="59" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a021ac00a8b2e9e519f930baad1bc1fa2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1IJoint" kindref="compound">IJoint</ref> *</type>
+        <definition>virtual IJoint* iDynTree::IJoint::clone</definition>
+        <argsstring>() const =0</argsstring>
+        <name>clone</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1ae7ca38464efead3a54939a67e7e45077">clone</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a1ac21ca360862669e3e90dcd2674ce37">clone</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1a3dfbe0ccbbf399581aab181f86727ded">clone</reimplementedby>
+        <briefdescription>
+<para>Clone the joint object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="64" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a149ddcf05f6328fdd3ecbe38a0fca4a0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>unsigned int</type>
+        <definition>virtual unsigned int iDynTree::IJoint::getNrOfPosCoords</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getNrOfPosCoords</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a465ef7c7fa02bc8a571b57a60f4b14b6">getNrOfPosCoords</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1MovableJointImpl_1a045d13488a7d6481fcf2db951655922a">getNrOfPosCoords</reimplementedby>
+        <briefdescription>
+<para>Get the number of coordinates used to represent the position of the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For joints whose configuration is in R^n, the number of position coordinates should match the number of degrees of freedom of the joint.</para>
+<para><simplesect kind="return"><para>the number of position coordinates. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="76" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a83027b41a495e097b8cf534059516440" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>unsigned int</type>
+        <definition>virtual unsigned int iDynTree::IJoint::getNrOfDOFs</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getNrOfDOFs</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a1970824dcfc4876b8258fce6ccf6843b">getNrOfDOFs</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1MovableJointImpl_1af9d78ba6c319f68f16f9ff9ef58fd124">getNrOfDOFs</reimplementedby>
+        <briefdescription>
+<para>Get the number of degrees of freedom of the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This should be a number between 0 (fixed joint) and 6 (free joint).</para>
+<para><simplesect kind="return"><para>the number of degrees of freedom of the joint. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="85" column="30"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Interface (i.e. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>abstract class) exposed by classes that implement a Joint. A Joint is the basic representation of the motion allowed between two links.</para>
+<para>This interface is mean to be used by kinematics and dynamics algorithm to query informations related to a joint and the relations (relative position, relative twist, relative acceleration) that it imposes to the connected links.</para>
+<para>The design of this class is heavily inspired by the Simbody implementation of joints, as described in this article:</para>
+<para>Seth, Ajay, et al. &quot;Minimal formulation of joint motion for biomechanisms.&quot; Nonlinear dynamics 62.1-2 (2010): 291-303.</para>
+<para>Other sources of inspiration are RBDL, DART and Featherstone book.</para>
+<para>With respect to all this implementation we model the joints as undirected quantities, i.e. as object in which information can be queryied in symmetric way with respect to the attached links. This mean there is no parent and child link, but the joint is attached to two link, and the interface is agnostic with respect to which link the code considers as &quot;parent&quot; or &quot;child&quot;. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="5">
+        <label>iDynTree::RevoluteJoint&lt; 1, 1 &gt;</label>
+        <link refid="classiDynTree_1_1RevoluteJoint"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::IJoint</label>
+        <link refid="classiDynTree_1_1IJoint"/>
+      </node>
+      <node id="2">
+        <label>iDynTree::FixedJoint</label>
+        <link refid="classiDynTree_1_1FixedJoint"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::MovableJointImpl&lt; nrOfPosCoords, nrOfDOFs &gt;</label>
+        <link refid="classiDynTree_1_1MovableJointImpl"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>iDynTree::PrismaticJoint&lt; 1, 1 &gt;</label>
+        <link refid="classiDynTree_1_1PrismaticJoint"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="iDynTree/Model/IJoint.h" line="52" column="5" bodyfile="iDynTree/Model/IJoint.h" bodystart="53" bodyend="367"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1IJoint_1a021ac00a8b2e9e519f930baad1bc1fa2" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>clone</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a65509300297221192cb46189b2a473d1" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>computeChildAcc</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a3c16a316f95e25ad0af2768cb4c991a3" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>computeChildBiasAcc</name></member>
+      <member refid="classiDynTree_1_1IJoint_1aa41dbb76816e2621d6924ca052b07881" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>computeChildPosVelAcc</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a70c9055aafb46f65fe767664c873625e" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>computeChildVel</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a6d0853757008a1db34d41da9276df81e" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>computeChildVelAcc</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a495a50c9623710812f49cf6258ecb68e" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>computeJointTorque</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a4f0f02e57295ad4b0ec94fe19fc3e0c0" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>enablePosLimits</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a64aa264a72088da07844f25176a25bee" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getDOFsOffset</name></member>
+      <member refid="classiDynTree_1_1IJoint_1abe3efda09a0c3d94c021891de447aaa8" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getFirstAttachedLink</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a2accdcd6fbf7e222a3c7c6b99130934e" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getIndex</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a047913be4f7bdeb35d785e4ad71d5395" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getMaxPosLimit</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a46dbe9dec3ef79f6d5662269f6fe8f65" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getMinPosLimit</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a3a89b6fd2358c8435e7f794d3857045f" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getMotionSubspaceVector</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a83027b41a495e097b8cf534059516440" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getNrOfDOFs</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a149ddcf05f6328fdd3ecbe38a0fca4a0" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getNrOfPosCoords</name></member>
+      <member refid="classiDynTree_1_1IJoint_1afc71b67f79c9bbdd8f2925ee08ca0323" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getPosCoordsOffset</name></member>
+      <member refid="classiDynTree_1_1IJoint_1ab734574da90b6d2ae24169ea180a081b" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getPosLimits</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a7b6fb4c82687601810f3696e9605f1e0" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getRestTransform</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a1c55168bcc2dbd7b1fd58737a6bb46d8" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getSecondAttachedLink</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a2b0c23cad4da4e748ecdaf009805f767" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getTransform</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a0dd24dad1882bc1df35a1832275fbfbb" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getTransformDerivative</name></member>
+      <member refid="classiDynTree_1_1IJoint_1af4badbd5891621e847a61d767cffd25e" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>hasPosLimits</name></member>
+      <member refid="classiDynTree_1_1IJoint_1aafd1101e91ea337a451d62f0160a819c" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setAttachedLinks</name></member>
+      <member refid="classiDynTree_1_1IJoint_1af65fc0f65b8367404848bc41ea87347c" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setDOFsOffset</name></member>
+      <member refid="classiDynTree_1_1IJoint_1ac0d964dac9538e66a922b1ae50e7b662" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setIndex</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a6c80be1fe40e5a71cc56c4fbe625535f" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setPosCoordsOffset</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a63c57d91c3d80a610671f04fcbdd22ff" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setPosLimits</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a770aadc1a6e13bce3af213707fcf2d84" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setRestTransform</name></member>
+      <member refid="classiDynTree_1_1IJoint_1ac989ee81d08959eca68666aa6740cb16" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>~IJoint</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

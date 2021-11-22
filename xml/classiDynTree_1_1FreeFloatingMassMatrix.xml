@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1FreeFloatingMassMatrix" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::FreeFloatingMassMatrix</compoundname>
+    <basecompoundref refid="classiDynTree_1_1MatrixDynSize" prot="public" virt="non-virtual">iDynTree::MatrixDynSize</basecompoundref>
+    <includes local="no">iDynTree/Model/FreeFloatingMatrices.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingMassMatrix_1ab1604b341525e3b08e9d4b0fc0034263" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::FreeFloatingMassMatrix::FreeFloatingMassMatrix</definition>
+        <argsstring>(size_t nrOfDofs=0)</argsstring>
+        <name>FreeFloatingMassMatrix</name>
+        <param>
+          <type>size_t</type>
+          <declname>nrOfDofs</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="78" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingMassMatrix_1a9a21f03cb252d6600dcd7a474ae13667" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::FreeFloatingMassMatrix::FreeFloatingMassMatrix</definition>
+        <argsstring>(const iDynTree::Model &amp;model)</argsstring>
+        <name>FreeFloatingMassMatrix</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Constructor from a model, to get the appropriate size of the mass matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="84" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingMassMatrix_1a8ac1a8cf3d2010f53263b2bc14d2358d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::FreeFloatingMassMatrix::resize</definition>
+        <argsstring>(const iDynTree::Model &amp;model)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Resize the class to match the dimension of the dofs contained in a <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the model from which to get the number and dimension of the joints.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="warning"><para>This method wipes the content of the mass matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="94" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingMassMatrix_1aaa699e09cc550c03596074c35b38f2b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::FreeFloatingMassMatrix::~FreeFloatingMassMatrix</definition>
+        <argsstring>()</argsstring>
+        <name>~FreeFloatingMassMatrix</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="100" column="13"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class representing the mass matrix of a Free Floating robot. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::MatrixDynSize</label>
+        <link refid="classiDynTree_1_1MatrixDynSize"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::FreeFloatingMassMatrix</label>
+        <link refid="classiDynTree_1_1FreeFloatingMassMatrix"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>iDynTree::MatrixDynSize</label>
+        <link refid="classiDynTree_1_1MatrixDynSize"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::FreeFloatingMassMatrix</label>
+        <link refid="classiDynTree_1_1FreeFloatingMassMatrix"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Model/FreeFloatingMatrices.h" line="75" column="1" bodyfile="iDynTree/Model/FreeFloatingMatrices.h" bodystart="76" bodyend="101"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1MatrixDynSize_1aacda29701a42c3943a781b9876500daf" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>capacity</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a18a9a6232ac5c967cf541caa21586d71" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>cols</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a326369f52bb74fe3cdc30fc02af81eb8" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>data</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a2bfc7c13f386f6d5845e685bbb78daf2" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>data</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1ab11629d6f89ef3d4051867e44abdf76e" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>fillColMajorBuffer</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1aa8af99c672e6a7e188115d2a8144a1c7" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>fillRowMajorBuffer</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingMassMatrix_1ab1604b341525e3b08e9d4b0fc0034263" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>FreeFloatingMassMatrix</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingMassMatrix_1a9a21f03cb252d6600dcd7a474ae13667" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>FreeFloatingMassMatrix</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a162f9d9077a0d5bbddc1da1b303515e5" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>getVal</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1af1d85eadf886d3fb508e2bf9e9788600" prot="protected" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>m_capacity</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a4c1fb8178a7fa9dfa5863f767b15fe20" prot="protected" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>m_cols</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a80eba7978bcce15f4146f815c557f1bb" prot="protected" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>m_data</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1ae25ad33695edf5ec1b43e13ffcfdde2c" prot="protected" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>m_rows</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a062017b1f0958fa8d18edd822ad7018f" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>MatrixDynSize</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a38a30ddc05269a2c8ee66603db7a1a5e" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>MatrixDynSize</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1aaa27f4111779337ae337dc3ab1abf2e4" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>MatrixDynSize</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a280957c0323a79009ccee5708668ca5c" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>MatrixDynSize</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a162a5170740ac6bc8c0a3992f9200b1c" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>MatrixDynSize</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1aec352e4bfae97705cbe42eb99b91b969" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a042335b734c10aa111c4c792f10d169c" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1ab5dc70fe26c9b8e58a7a03a336556749" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1ab4288557b4a3a229c195abfba9384688" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a23e474c7161903c18be88d8fac2b4137" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>reserve</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1ae86eb69f39997bd181971d9bd5f56950" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>reservedToString</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingMassMatrix_1a8ac1a8cf3d2010f53263b2bc14d2358d" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>resize</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a9cf8980628426a135edc1653e8f56496" prot="public" virt="non-virtual" ambiguityscope="iDynTree::MatrixDynSize::"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>resize</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a45a21d9dc00a7c5daadebc1f09ed3fdf" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>rows</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a34270bc42525a83112307cb480be5604" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>setVal</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1ad5c3a0b1b9ce8c691194c652adf95a5a" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>shrink_to_fit</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a77e45ef11c7624ed8b7e150ebd041825" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>toString</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1afbcf1bf37275f811cab76cda68cad818" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>value_type</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a071eb4583b2bd16399cf4bb460e15db0" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>zero</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingMassMatrix_1aaa699e09cc550c03596074c35b38f2b3" prot="public" virt="virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>~FreeFloatingMassMatrix</name></member>
+      <member refid="classiDynTree_1_1MatrixDynSize_1a9cbfeed643bb079a4c2060fb92309be7" prot="public" virt="virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>~MatrixDynSize</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

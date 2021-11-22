@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="SolidShapes_8h" kind="file" language="C++">
+    <compoundname>SolidShapes.h</compoundname>
+    <includes local="no">cstdlib</includes>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
+    <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
+    <includedby refid="Model_8h" local="no">iDynTree/Model/Model.h</includedby>
+    <includedby refid="VisualElement_8h" local="no">private/VisualElement.h</includedby>
+    <includedby refid="InertialParametersSolidShapesHelpers_8h" local="no">iDynTree/InertialParametersSolidShapesHelpers.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/Model/SolidShapes.h</label>
+        <link refid="SolidShapes_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>vector</label>
+      </node>
+      <node id="2">
+        <label>cstdlib</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1Material" prot="public">iDynTree::Material</innerclass>
+    <innerclass refid="classiDynTree_1_1SolidShape" prot="public">iDynTree::SolidShape</innerclass>
+    <innerclass refid="classiDynTree_1_1Sphere" prot="public">iDynTree::Sphere</innerclass>
+    <innerclass refid="classiDynTree_1_1Box" prot="public">iDynTree::Box</innerclass>
+    <innerclass refid="classiDynTree_1_1Cylinder" prot="public">iDynTree::Cylinder</innerclass>
+    <innerclass refid="classiDynTree_1_1ExternalMesh" prot="public">iDynTree::ExternalMesh</innerclass>
+    <innerclass refid="classiDynTree_1_1ModelSolidShapes" prot="public">iDynTree::ModelSolidShapes</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/SolidShapes.h"/>
+  </compounddef>
+</doxygen>

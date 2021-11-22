@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1OriginElement" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::OriginElement</compoundname>
+    <basecompoundref refid="classiDynTree_1_1XMLElement" prot="public" virt="non-virtual">iDynTree::XMLElement</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1OriginElement_1a1d7dc7f0b3b47d52e463c97f6b7d8811" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+        <definition>iDynTree::Transform&amp; iDynTree::OriginElement::m_jointOrigin</definition>
+        <argsstring></argsstring>
+        <name>m_jointOrigin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/OriginElement.h" line="29" column="25" bodyfile="private/OriginElement.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1OriginElement_1a3d354e347389e691ba7ec62b0984abb3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::OriginElement::OriginElement</definition>
+        <argsstring>(iDynTree::Transform &amp;jointOrigin)</argsstring>
+        <name>OriginElement</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>jointOrigin</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/OriginElement.h" line="32" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1OriginElement_1a82a9b00d78ef244faca75274786dad3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::OriginElement::setAttributes</definition>
+        <argsstring>(const std::unordered_map&lt; std::string, std::shared_ptr&lt; iDynTree::XMLAttribute &gt;&gt; &amp;attributes) override</argsstring>
+        <name>setAttributes</name>
+        <reimplements refid="classiDynTree_1_1XMLElement_1a2fe23e8a9ee4d2f776f792c9c118db45">setAttributes</reimplements>
+        <param>
+          <type>const std::unordered_map&lt; std::string, std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLAttribute" kindref="compound">iDynTree::XMLAttribute</ref> &gt;&gt; &amp;</type>
+          <declname>attributes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/OriginElement.h" line="34" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::XMLElement</label>
+        <link refid="classiDynTree_1_1XMLElement"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::OriginElement</label>
+        <link refid="classiDynTree_1_1OriginElement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>iDynTree::XMLElement</label>
+        <link refid="classiDynTree_1_1XMLElement"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::OriginElement</label>
+        <link refid="classiDynTree_1_1OriginElement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="private/OriginElement.h" line="27" column="1" bodyfile="private/OriginElement.h" bodystart="27" bodyend="36"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1XMLElement_1a2a182ac17f5e644b113a67e02c3595e5" prot="public" virt="non-virtual"><scope>iDynTree::OriginElement</scope><name>attributeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1adf74d829fbe4d3d112c0ef2eba8bd3ea" prot="public" virt="non-virtual"><scope>iDynTree::OriginElement</scope><name>attributes</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a94cf11d5e2e9f6a44f17c7439d2b809f" prot="public" virt="virtual"><scope>iDynTree::OriginElement</scope><name>childElementForName</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a18b5b00729b99a19cb3e8f430656e152" prot="public" virt="virtual"><scope>iDynTree::OriginElement</scope><name>childHasBeenParsed</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1af5c19c2120a4e024149f78ee5bd52e6f" prot="public" virt="non-virtual"><scope>iDynTree::OriginElement</scope><name>children</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a3d8e1b737e614b35e3df0a4f76ac645b" prot="public" virt="non-virtual"><scope>iDynTree::OriginElement</scope><name>description</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a327997dec2ced313aad008c376205f36" prot="public" virt="virtual"><scope>iDynTree::OriginElement</scope><name>exitElementScope</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1aa6f49fb7b1b204e1a84cbdc51faeaa62" prot="public" virt="non-virtual"><scope>iDynTree::OriginElement</scope><name>exitScopeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1abebc95353394912e187ad70e6078fcdc" prot="public" virt="non-virtual"><scope>iDynTree::OriginElement</scope><name>getParsedTextContent</name></member>
+      <member refid="classiDynTree_1_1OriginElement_1a1d7dc7f0b3b47d52e463c97f6b7d8811" prot="private" virt="non-virtual"><scope>iDynTree::OriginElement</scope><name>m_jointOrigin</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a7129fb1e69a5bc819872e65d3965296d" prot="public" virt="non-virtual"><scope>iDynTree::OriginElement</scope><name>name</name></member>
+      <member refid="classiDynTree_1_1OriginElement_1a3d354e347389e691ba7ec62b0984abb3" prot="public" virt="non-virtual"><scope>iDynTree::OriginElement</scope><name>OriginElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1aa44416f43c71e081f6637a91eb733e8d" prot="public" virt="virtual"><scope>iDynTree::OriginElement</scope><name>parsedCharacters</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1ab40851b7629a74107f2183ca36e412e4" prot="public" virt="non-virtual"><scope>iDynTree::OriginElement</scope><name>setAttributeCallback</name></member>
+      <member refid="classiDynTree_1_1OriginElement_1a82a9b00d78ef244faca75274786dad3b" prot="public" virt="virtual"><scope>iDynTree::OriginElement</scope><name>setAttributes</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a69171cc4b5c552b97f44375029356a2e" prot="public" virt="non-virtual"><scope>iDynTree::OriginElement</scope><name>setChildHasBeenParsedCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a16759fb450635662dced0eb2ace0228b" prot="public" virt="non-virtual"><scope>iDynTree::OriginElement</scope><name>setExitScopeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a885cb939d74e8ce27ce4c0708c04267e" prot="public" virt="non-virtual"><scope>iDynTree::OriginElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a7ad288fac24328b2bb19908500fec39a" prot="public" virt="non-virtual"><scope>iDynTree::OriginElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a42ee14ee8b2ec8a9e9e31472e1b17556" prot="public" virt="non-virtual"><scope>iDynTree::OriginElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1aa0220e560dfd45a38797cb5209653ad4" prot="public" virt="virtual"><scope>iDynTree::OriginElement</scope><name>~XMLElement</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

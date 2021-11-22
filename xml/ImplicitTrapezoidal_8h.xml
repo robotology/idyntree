@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="ImplicitTrapezoidal_8h" kind="file" language="C++">
+    <compoundname>ImplicitTrapezoidal.h</compoundname>
+    <includes refid="FixedStepIntegrator_8h" local="no">iDynTree/Integrators/FixedStepIntegrator.h</includes>
+    <innerclass refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal" prot="public">iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <innernamespace refid="namespaceiDynTree_1_1optimalcontrol">iDynTree::optimalcontrol</innernamespace>
+    <innernamespace refid="namespaceiDynTree_1_1optimalcontrol_1_1integrators">iDynTree::optimalcontrol::integrators</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Integrators/ImplicitTrapezoidal.h"/>
+  </compounddef>
+</doxygen>

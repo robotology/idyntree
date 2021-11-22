@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1ForceTorqueSensorHelper" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>iDynTree::ForceTorqueSensorHelper</compoundname>
+    <basecompoundref refid="classiDynTree_1_1SensorHelper" prot="public" virt="non-virtual">iDynTree::SensorHelper</basecompoundref>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classiDynTree_1_1ForceTorqueSensorHelper_1a0e2ee63fc978cbe9dba87fa44c8337b4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class ForceTorqueSensorElement</definition>
+        <argsstring></argsstring>
+        <name>ForceTorqueSensorElement</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1ForceTorqueSensorElement" kindref="compound">ForceTorqueSensorElement</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/ForceTorqueSensorElement.h" line="38" column="5" bodyfile="private/ForceTorqueSensorElement.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1ForceTorqueSensorHelper_1a9502e4925bf6dc639f10e798183a88f2" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::ForceTorqueSensorHelper::m_measuredFrame</definition>
+        <argsstring></argsstring>
+        <name>m_measuredFrame</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/ForceTorqueSensorElement.h" line="40" column="17" bodyfile="private/ForceTorqueSensorElement.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1ForceTorqueSensorHelper_1a0fa97b68c5c95ae9e78bde3c4e95a9f1" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::ForceTorqueSensorHelper::m_measureDirection</definition>
+        <argsstring></argsstring>
+        <name>m_measureDirection</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/ForceTorqueSensorElement.h" line="41" column="17" bodyfile="private/ForceTorqueSensorElement.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1ForceTorqueSensorHelper_1a29590c3cc2a836f05f1af29fed18db97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ForceTorqueSensorHelper::ForceTorqueSensorHelper</definition>
+        <argsstring>(std::shared_ptr&lt; const SensorElement::SensorInfo &gt; sensorInfo)</argsstring>
+        <name>ForceTorqueSensorHelper</name>
+        <param>
+          <type>std::shared_ptr&lt; const <ref refid="structiDynTree_1_1SensorElement_1_1SensorInfo" kindref="compound">SensorElement::SensorInfo</ref> &gt;</type>
+          <declname>sensorInfo</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/ForceTorqueSensorElement.h" line="43" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ForceTorqueSensorHelper_1a79d3a6260d4b95ce3509168d1dc03157" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> *</type>
+        <definition>Sensor* iDynTree::ForceTorqueSensorHelper::generateSensor</definition>
+        <argsstring>(const Model &amp;model) const override</argsstring>
+        <name>generateSensor</name>
+        <reimplements refid="classiDynTree_1_1SensorHelper_1a5bdee23a7596be29f49d791ee306c31e">generateSensor</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/ForceTorqueSensorElement.h" line="44" column="12"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::SensorHelper</label>
+        <link refid="classiDynTree_1_1SensorHelper"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::ForceTorqueSensorHelper</label>
+        <link refid="classiDynTree_1_1ForceTorqueSensorHelper"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>std::shared_ptr&lt; const iDynTree::SensorElement::SensorInfo &gt;</label>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; const iDynTree::SensorElement::SensorInfo &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>T</label>
+      </node>
+      <node id="4">
+        <label>std::shared_ptr&lt; T &gt;</label>
+        <childnode refid="5" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::SensorHelper</label>
+        <link refid="classiDynTree_1_1SensorHelper"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_sensorInfo</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::ForceTorqueSensorHelper</label>
+        <link refid="classiDynTree_1_1ForceTorqueSensorHelper"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="private/ForceTorqueSensorElement.h" line="37" column="1" bodyfile="private/ForceTorqueSensorElement.h" bodystart="37" bodyend="45"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1ForceTorqueSensorHelper_1a29590c3cc2a836f05f1af29fed18db97" prot="public" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorHelper</scope><name>ForceTorqueSensorHelper</name></member>
+      <member refid="classiDynTree_1_1ForceTorqueSensorHelper_1a79d3a6260d4b95ce3509168d1dc03157" prot="public" virt="virtual"><scope>iDynTree::ForceTorqueSensorHelper</scope><name>generateSensor</name></member>
+      <member refid="classiDynTree_1_1ForceTorqueSensorHelper_1a9502e4925bf6dc639f10e798183a88f2" prot="private" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorHelper</scope><name>m_measuredFrame</name></member>
+      <member refid="classiDynTree_1_1ForceTorqueSensorHelper_1a0fa97b68c5c95ae9e78bde3c4e95a9f1" prot="private" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorHelper</scope><name>m_measureDirection</name></member>
+      <member refid="classiDynTree_1_1SensorHelper_1ac726e84fbbcc59662ab2bf0c531b1270" prot="protected" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorHelper</scope><name>m_sensorInfo</name></member>
+      <member refid="classiDynTree_1_1SensorHelper_1ad5fbaf3d8c8df33cc7c30b689bccd97a" prot="public" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorHelper</scope><name>SensorHelper</name></member>
+      <member refid="classiDynTree_1_1SensorHelper_1a4ab30e6befa21a0a38f811ccfd539a38" prot="public" virt="virtual"><scope>iDynTree::ForceTorqueSensorHelper</scope><name>~SensorHelper</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

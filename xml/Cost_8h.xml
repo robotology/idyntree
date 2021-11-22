@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="Cost_8h" kind="file" language="C++">
+    <compoundname>Cost.h</compoundname>
+    <includes local="no">string</includes>
+    <includes refid="SparsityStructure_8h" local="no">iDynTree/SparsityStructure.h</includes>
+    <includedby refid="L2NormCost_8h" local="no">iDynTree/L2NormCost.h</includedby>
+    <includedby refid="OptimalControl_8h" local="no">iDynTree/OptimalControl.h</includedby>
+    <includedby refid="QuadraticLikeCost_8h" local="no">iDynTree/QuadraticLikeCost.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/Cost.h</label>
+        <link refid="Cost_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>string</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1optimalcontrol_1_1Cost" prot="public">iDynTree::optimalcontrol::Cost</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <innernamespace refid="namespaceiDynTree_1_1optimalcontrol">iDynTree::optimalcontrol</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Cost.h"/>
+  </compounddef>
+</doxygen>

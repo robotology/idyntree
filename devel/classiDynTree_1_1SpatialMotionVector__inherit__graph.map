@@ -1,7 +1,0 @@
-<map id="iDynTree::SpatialMotionVector" name="iDynTree::SpatialMotionVector">
-<area shape="rect" id="node1" title="Class providing the raw coordinates for any motion spatial vector (i.e." alt="" coords="53,185,272,212"/>
-<area shape="rect" id="node4" href="$classiDynTree_1_1SpatialAcc.html" title="Class representing a spatial acceleration, i.e." alt="" coords="5,261,160,288"/>
-<area shape="rect" id="node5" href="$classiDynTree_1_1Twist.html" title="Class representing a twist, i.e." alt="" coords="184,261,304,288"/>
-<area shape="rect" id="node2" href="$classiDynTree_1_1SpatialVector.html" title=" " alt="" coords="71,95,254,136"/>
-<area shape="rect" id="node3" href="$classiDynTree_1_1SpatialVector.html" title=" " alt="" coords="76,5,249,32"/>
-</map>

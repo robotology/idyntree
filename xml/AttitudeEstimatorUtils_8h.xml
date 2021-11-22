@@ -1,0 +1,279 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="AttitudeEstimatorUtils_8h" kind="file" language="C++">
+    <compoundname>AttitudeEstimatorUtils.h</compoundname>
+    <includes refid="AttitudeEstimator_8h" local="no">iDynTree/Estimation/AttitudeEstimator.h</includes>
+    <includes refid="EigenHelpers_8h" local="no">iDynTree/Core/EigenHelpers.h</includes>
+    <includes local="no">cmath</includes>
+    <includes local="no">vector</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/Estimation/AttitudeEstimatorUtils.h</label>
+        <link refid="AttitudeEstimatorUtils_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>cmath</label>
+      </node>
+      <node id="3">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="AttitudeEstimatorUtils_8h_1a525335710b53cb064ca56b936120431e" prot="public" static="no">
+        <name>_USE_MATH_DEFINES</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="16" column="11" bodyfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="AttitudeEstimatorUtils_8h_1a0230cf20ab367604a0aafb70a21d6733" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool checkValidMeasurement</definition>
+        <argsstring>(const iDynTree::Vector3 &amp;in, const std::string &amp;measurement_type, bool check_also_zero_vector)</argsstring>
+        <name>checkValidMeasurement</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref> &amp;</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>measurement_type</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>check_also_zero_vector</declname>
+        </param>
+        <briefdescription>
+<para>check a valid measurement </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector3 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool true/false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="26" column="6" declfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" declline="26" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="AttitudeEstimatorUtils_8h_1a5178baddf6f11f110fb923bc97d82d2d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool getUnitVector</definition>
+        <argsstring>(const iDynTree::Vector3 &amp;in, iDynTree::Vector3 &amp;out)</argsstring>
+        <name>getUnitVector</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref> &amp;</type>
+          <declname>in</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref> &amp;</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+<para>get unit vector </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector3 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool false if input vector has zero norm </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="34" column="6" declfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" declline="34" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="AttitudeEstimatorUtils_8h_1a699bd96c30f376d8a7faae5851cae0a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool isVectorNaN</definition>
+        <argsstring>(const iDynTree::Vector3 &amp;vec)</argsstring>
+        <name>isVectorNaN</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref> &amp;</type>
+          <declname>vec</declname>
+        </param>
+        <briefdescription>
+<para>checks if vector has NaN values any element of vector is NaN implies a NaN vector </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">vec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector3 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool true/false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="43" column="6" declfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" declline="43" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="AttitudeEstimatorUtils_8h_1a369c58aadb5e813e34fc5f4c36c017d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool isZeroVector</definition>
+        <argsstring>(const iDynTree::Vector3 &amp;vec)</argsstring>
+        <name>isZeroVector</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref> &amp;</type>
+          <declname>vec</declname>
+        </param>
+        <briefdescription>
+<para>checks if vector is a zero vector all elements of vector are zero implies a zero vector </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">vec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector3 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool true/false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="52" column="6" declfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" declline="52" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="AttitudeEstimatorUtils_8h_1a60120ce6e1d4c5d9d436539c43d248e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref></type>
+        <definition>iDynTree::Vector3 crossVector</definition>
+        <argsstring>(const iDynTree::Vector3 &amp;a, const iDynTree::Vector3 &amp;b)</argsstring>
+        <name>crossVector</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref> &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref> &amp;</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>computes the cross vector of two 3D vectors </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>3D vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>3D vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>iDynTree::Vector3 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="61" column="19" declfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" declline="61" declcolumn="19"/>
+      </memberdef>
+      <memberdef kind="function" id="AttitudeEstimatorUtils_8h_1a810ee43797b075ff113b46c0b83796d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">iDynTree::Matrix3x3</ref></type>
+        <definition>iDynTree::Matrix3x3 mapR3Toso3</definition>
+        <argsstring>(const iDynTree::Vector3 &amp;omega)</argsstring>
+        <name>mapR3Toso3</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref> &amp;</type>
+          <declname>omega</declname>
+        </param>
+        <briefdescription>
+<para>computes <formula id="131">$ 3 \times 3 $</formula> skew-symmetric matrix ( <formula id="237">$ \mathbb{so}(3) $</formula> space) for a given 3d vector ( <formula id="225">$ \mathbb{R}^3 $</formula> space) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">omega</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>3d vector (usually angular velocity) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>iDynTree::Matrix3x3 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="69" column="21" declfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" declline="69" declcolumn="21"/>
+      </memberdef>
+      <memberdef kind="function" id="AttitudeEstimatorUtils_8h_1ae22926f6b4098d795734502bfa284aff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool checkSkewSymmetricity</definition>
+        <argsstring>(const iDynTree::Matrix3x3 &amp;S)</argsstring>
+        <name>checkSkewSymmetricity</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">iDynTree::Matrix3x3</ref> &amp;</type>
+          <declname>S</declname>
+        </param>
+        <briefdescription>
+<para>checks if the <formula id="131">$ 3 \times 3 $</formula> matrix is skew-symmetric </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="238">\[ S + S^T = 0 \]</formula> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">S</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><formula id="131">$ 3 \times 3 $</formula> matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>bool true/false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="77" column="6" declfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" declline="77" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h"/>
+  </compounddef>
+</doxygen>

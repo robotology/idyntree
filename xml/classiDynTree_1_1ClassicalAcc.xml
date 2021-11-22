@@ -1,0 +1,239 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1ClassicalAcc" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::ClassicalAcc</compoundname>
+    <basecompoundref refid="classiDynTree_1_1VectorFixSize" prot="public" virt="non-virtual">iDynTree::VectorFixSize&lt; 6 &gt;</basecompoundref>
+    <includes local="no">iDynTree/Core/ClassicalAcc.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1ClassicalAcc_1af2840c213b585301e38240715afbb360" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ClassicalAcc::ClassicalAcc</definition>
+        <argsstring>()</argsstring>
+        <name>ClassicalAcc</name>
+        <briefdescription>
+<para>Default constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The data is not reset to the default for perfomance reason. Please initialize the data in the class before any use. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ClassicalAcc.h" line="49" column="16" bodyfile="iDynTree/Core/ClassicalAcc.h" bodystart="49" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ClassicalAcc_1acb7b4a36b251b50c79af8b06037977cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ClassicalAcc::ClassicalAcc</definition>
+        <argsstring>(const double *in_data, const unsigned int in_size)</argsstring>
+        <name>ClassicalAcc</name>
+        <param>
+          <type>const double *</type>
+          <declname>in_data</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>in_size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ClassicalAcc.h" line="50" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ClassicalAcc_1a9ce69cc1e892338d4e2d0b5c13ebbedf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ClassicalAcc::ClassicalAcc</definition>
+        <argsstring>(const ClassicalAcc &amp;other)</argsstring>
+        <name>ClassicalAcc</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ClassicalAcc" kindref="compound">ClassicalAcc</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ClassicalAcc.h" line="51" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ClassicalAcc_1aca1ce7ef6cd00e20ae9cf786eb0c8d00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1ClassicalAcc" kindref="compound">ClassicalAcc</ref> &amp;</type>
+        <definition>const ClassicalAcc&amp; iDynTree::ClassicalAcc::changeCoordFrame</definition>
+        <argsstring>(const RotationRaw &amp;newCoordFrame)</argsstring>
+        <name>changeCoordFrame</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1RotationRaw" kindref="compound">RotationRaw</ref> &amp;</type>
+          <declname>newCoordFrame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ClassicalAcc.h" line="54" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ClassicalAcc_1ab0e6e43ee966f2533517c85785b0caf1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref></type>
+        <definition>Vector3 iDynTree::ClassicalAcc::getLinearVec3</definition>
+        <argsstring>() const</argsstring>
+        <name>getLinearVec3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ClassicalAcc.h" line="59" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ClassicalAcc_1a3379201467dbcfad92ee7c3db9568513" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref></type>
+        <definition>Vector3 iDynTree::ClassicalAcc::getAngularVec3</definition>
+        <argsstring>() const</argsstring>
+        <name>getAngularVec3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ClassicalAcc.h" line="60" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ClassicalAcc_1aa79bec4d759003f661270ac600dd5712" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::ClassicalAcc::fromSpatial</definition>
+        <argsstring>(const SpatialAcc &amp;spatialAcc, const Twist &amp;vel)</argsstring>
+        <name>fromSpatial</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref> &amp;</type>
+          <declname>spatialAcc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref> &amp;</type>
+          <declname>vel</declname>
+        </param>
+        <briefdescription>
+<para>Build a classical acceleration from a spatial acceleation and spatial twist of a body. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ClassicalAcc.h" line="66" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ClassicalAcc_1aae939ebabb53cb1270daffc48b62571c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::ClassicalAcc::toSpatial</definition>
+        <argsstring>(SpatialAcc &amp;spatialAcc, const Twist &amp;vel) const</argsstring>
+        <name>toSpatial</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref> &amp;</type>
+          <declname>spatialAcc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref> &amp;</type>
+          <declname>vel</declname>
+        </param>
+        <briefdescription>
+<para>Convert a classical acceleation to a spatial one. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ClassicalAcc.h" line="71" column="14"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classiDynTree_1_1ClassicalAcc_1a7d9d85b4a28bd6b698a1a43457fbb2a0" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1ClassicalAcc" kindref="compound">ClassicalAcc</ref></type>
+        <definition>static ClassicalAcc iDynTree::ClassicalAcc::Zero</definition>
+        <argsstring>()</argsstring>
+        <name>Zero</name>
+        <briefdescription>
+<para>constructor helpers </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/ClassicalAcc.h" line="57" column="29"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class representing a classical 6D acceleration, i.e. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>the concatenation of the 3d vector of the acceleration of a point and of the 3d vector of the derivative of an angular velocity.</para>
+<para><simplesect kind="note"><para>Given that the classical acceleration is just a combination of two 3d vectors and not a spatial quantity, you cannot directly express a classical acceleration in a different reference frame. You have to convert it before in a spatial acceleration, and then transform the spatial acceleration in a new reference frame (and the corresponding twist) and then convert them back to a classical acceleation. However you can still change the orientation frame of the two 3d vector that compose the classical acceleration without any conversion. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::ClassicalAcc</label>
+        <link refid="classiDynTree_1_1ClassicalAcc"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Vector6</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>iDynTree::ClassicalAcc</label>
+        <link refid="classiDynTree_1_1ClassicalAcc"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>Vector6</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Core/ClassicalAcc.h" line="41" column="5" bodyfile="iDynTree/Core/ClassicalAcc.h" bodystart="42" bodyend="73"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1VectorFixSize_1ad0f06a255dc213a5904d232f703a0192" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>allocator_type</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1affa1eab2d54d8227d8aeb402dc2dc1f7" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>begin</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a8e64a7875375a8b1b894614ba882ad05" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>begin</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a1420c32072d5c1e21140da111955a6d1" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>cbegin</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a0b5d60b77fbd7ba982e855453800f776" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>cend</name></member>
+      <member refid="classiDynTree_1_1ClassicalAcc_1aca1ce7ef6cd00e20ae9cf786eb0c8d00" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>changeCoordFrame</name></member>
+      <member refid="classiDynTree_1_1ClassicalAcc_1af2840c213b585301e38240715afbb360" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>ClassicalAcc</name></member>
+      <member refid="classiDynTree_1_1ClassicalAcc_1acb7b4a36b251b50c79af8b06037977cf" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>ClassicalAcc</name></member>
+      <member refid="classiDynTree_1_1ClassicalAcc_1a9ce69cc1e892338d4e2d0b5c13ebbedf" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>ClassicalAcc</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a69b51f8119155d31a254676ae867ae8f" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>const_pointer</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a3bd1389dbdf51e06f4c64451c242397e" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>data</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1ab6f044aea32e55a72f6ebed68f93f767" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>data</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a9409f3724df4aa4de2c8281ba7e67db2" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>end</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a8b6f1796eba4d7c3db40e3d14e33b246" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>end</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1aee106d61ebb0925fecfa55cbaa515981" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>fillBuffer</name></member>
+      <member refid="classiDynTree_1_1ClassicalAcc_1aa79bec4d759003f661270ac600dd5712" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>fromSpatial</name></member>
+      <member refid="classiDynTree_1_1ClassicalAcc_1a3379201467dbcfad92ee7c3db9568513" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>getAngularVec3</name></member>
+      <member refid="classiDynTree_1_1ClassicalAcc_1ab0e6e43ee966f2533517c85785b0caf1" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>getLinearVec3</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1af8b3a33ff82732e94480023aa18cfe98" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>getVal</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a7bf5cd26b6fc24c9ddaf8854ebb8ec63" prot="protected" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>m_data</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1afbdebfe9410180223c2d33f6f5a243a5" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1aaeeab0c1251340903c447dbc3cd33b01" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a823899b673570f935b649cb98c1ca4f8" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a8345a3e5ee2998a02dd79019ce293421" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>operator[]</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a21683853dd0b95beea5b091a584fe486" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>operator[]</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1aa11c3eee00e88dabb7880f6cac2a9b82" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>pointer</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1acae25eb63bcbe6b524849d77134c168d" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>reservedToString</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1ab63541744f87c564754359e4923da4a6" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>setVal</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a92e903cfdf924fee24e71eee1b0dff76" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>size</name></member>
+      <member refid="classiDynTree_1_1ClassicalAcc_1aae939ebabb53cb1270daffc48b62571c" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>toSpatial</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a11d7cfdce4e1674e2ce73a23c7e29990" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>toString</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1ada7487eff1fee83db8d41165d30f1263" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>value_type</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a1ed77487376ad9915912e2118cb228af" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>VectorFixSize</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a6e92dc360040bccf652bebb0b0318cd6" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>VectorFixSize</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a9fd2c86208c88b1b904564d0a6f5a3b5" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>VectorFixSize</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a57b77a6c96f3276ed8e12b5e35b7f442" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>zero</name></member>
+      <member refid="classiDynTree_1_1ClassicalAcc_1a7d9d85b4a28bd6b698a1a43457fbb2a0" prot="public" virt="non-virtual"><scope>iDynTree::ClassicalAcc</scope><name>Zero</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

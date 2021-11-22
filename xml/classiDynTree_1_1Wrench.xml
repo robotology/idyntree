@@ -1,0 +1,247 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1Wrench" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::Wrench</compoundname>
+    <basecompoundref refid="classiDynTree_1_1SpatialForceVector" prot="public" virt="non-virtual">iDynTree::SpatialForceVector</basecompoundref>
+    <includes local="no">iDynTree/Core/Wrench.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1Wrench_1a000d5f5d5e4ad90736e6a57ab13d5ecb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Wrench::Wrench</definition>
+        <argsstring>()</argsstring>
+        <name>Wrench</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Wrench.h" line="27" column="16" bodyfile="iDynTree/Core/Wrench.h" bodystart="27" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Wrench_1a7d3b8ee3ef7f6024acb26428a393415c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Wrench::Wrench</definition>
+        <argsstring>(const Force &amp;_linearVec3, const Torque &amp;_angularVec3)</argsstring>
+        <name>Wrench</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1GeomVector3" kindref="compound">Force</ref> &amp;</type>
+          <declname>_linearVec3</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1GeomVector3" kindref="compound">Torque</ref> &amp;</type>
+          <declname>_angularVec3</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Wrench.h" line="28" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Wrench_1a99c5191f4b6abfe0b72d1dab0a02bb0c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Wrench::Wrench</definition>
+        <argsstring>(const SpatialForceVector &amp;other)</argsstring>
+        <name>Wrench</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Wrench.h" line="29" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Wrench_1af66e21abd0dd2721b0ca8db613355648" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Wrench::Wrench</definition>
+        <argsstring>(const Wrench &amp;other)</argsstring>
+        <name>Wrench</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Wrench.h" line="30" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Wrench_1a2fcff32a02a287e62f3bd666b0a4328d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
+        <definition>Wrench iDynTree::Wrench::operator+</definition>
+        <argsstring>(const Wrench &amp;other) const</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Wrench.h" line="33" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Wrench_1a061d3e56d593d54bae7c1d717d70e8b6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
+        <definition>Wrench iDynTree::Wrench::operator-</definition>
+        <argsstring>(const Wrench &amp;other) const</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Wrench.h" line="34" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Wrench_1ae43f980d914019c767a6bc1e2f7d65d2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
+        <definition>Wrench iDynTree::Wrench::operator-</definition>
+        <argsstring>() const</argsstring>
+        <name>operator-</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Wrench.h" line="35" column="16"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class representing a wrench, i.e. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>a 6D combination of linear force an angular torque. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>iDynTree::SpatialVector&lt; SpatialForceVector &gt;</label>
+        <link refid="classiDynTree_1_1SpatialVector"/>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; SpatialForceVector &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::SpatialForceVector</label>
+        <link refid="classiDynTree_1_1SpatialForceVector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>iDynTree::SpatialVector</label>
+        <link refid="classiDynTree_1_1SpatialVector"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::Wrench</label>
+        <link refid="classiDynTree_1_1Wrench"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>iDynTree::SpatialVector&lt; SpatialForceVector &gt;</label>
+        <link refid="classiDynTree_1_1SpatialVector"/>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; SpatialForceVector &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::SpatialForceVector</label>
+        <link refid="classiDynTree_1_1SpatialForceVector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>iDynTree::SpatialVector</label>
+        <link refid="classiDynTree_1_1SpatialVector"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>angularVec3</edgelabel>
+          <edgelabel>linearVec3</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>iDynTree::SpatialMotionForceVectorT_traits&lt; DerivedSpatialVecT &gt;</label>
+        <link refid="classiDynTree_1_1SpatialMotionForceVectorT__traits"/>
+        <childnode refid="6" relation="template-instance">
+          <edgelabel>&lt; DerivedSpatialVecT &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::Wrench</label>
+        <link refid="classiDynTree_1_1Wrench"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>iDynTree::SpatialMotionForceVectorT_traits&lt; SpatialMotionForceVectorT &gt;</label>
+        <link refid="classiDynTree_1_1SpatialMotionForceVectorT__traits"/>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Core/Wrench.h" line="24" column="5" bodyfile="iDynTree/Core/Wrench.h" bodystart="25" bodyend="36"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1SpatialVector_1a45a617c3a2fbf58cb8f14be36a9f0ff5" prot="protected" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>angularOffset</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a7713fdb080783747a894974f5c4b44a6" prot="protected" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>angularVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialForceVector_1a6302c479904a175eb6c61c9de390d287" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>AngularVector3T</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a28178bda574859bc9cda8e51f23ffc07" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>asVector</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1af55844354af98084b8fd52a9240b2d5f" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>changeCoordFrame</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1aaf50d0723aa1bf73962f05224a56bd8b" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>changePoint</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a0f1211dba411c4efe1a7c9d0944d2a38" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>compose</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a676b41872e9165b9795a9706149a8e17" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>dot</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a7910d803e3b8c3ef52db0bdc0b2bec42" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>DualVectorT</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a8b9ae18e77c2af17ec1d369d196e0c10" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>getAngularVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a67479f75f4632e397d7c38394f499ca5" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>getAngularVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a705aa7e917215639cf8088da8a279031" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>getLinearVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1aef471e533b923fca899adfcac5703173" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>getLinearVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a74a991f1f695825378e5b1765e743e42" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>getVal</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1aa1ad54ef1ef1c37676cf7c231242f9fb" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>inverse</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1aa6aa22433d0a6c29e37a4efc5970e1d8" prot="protected" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>linearOffset</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a404b99c91ecaa2269ed0e891df474720" prot="protected" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>linearVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialForceVector_1a2d86d89ba38e46bfe38631258bd8571a" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>LinearVector3T</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a176d715e9026aee5a3cad9ff9dde198c" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a583e1a9062c0d7f72da539e521e597b5" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1SpatialForceVector_1ac96276a6d073a19752aea3ef4183d608" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>operator*</name></member>
+      <member refid="classiDynTree_1_1Wrench_1a2fcff32a02a287e62f3bd666b0a4328d" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>operator+</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1aee117ebb24cae309a169f678019f1181" prot="public" virt="non-virtual" ambiguityscope="iDynTree::SpatialForceVector::"><scope>iDynTree::Wrench</scope><name>operator+</name></member>
+      <member refid="classiDynTree_1_1Wrench_1a061d3e56d593d54bae7c1d717d70e8b6" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>operator-</name></member>
+      <member refid="classiDynTree_1_1Wrench_1ae43f980d914019c767a6bc1e2f7d65d2" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>operator-</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1afcf112b3ddd4e01fc0389dd2319eb383" prot="public" virt="non-virtual" ambiguityscope="iDynTree::SpatialForceVector::"><scope>iDynTree::Wrench</scope><name>operator-</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a73b398dd07e9f3dd5c252692380a6b02" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>reservedToString</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a719a64c179d736390f48b6ddd0ccf6fa" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>setAngularVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a171e7cf6e215e67eb32ac791526a044f" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>setLinearVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a0fe3633e4ccf66267b01b7302a1658ec" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>setVal</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1af1f3a2d0e7522b63b2dc0d729a33f5a5" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>size</name></member>
+      <member refid="classiDynTree_1_1SpatialForceVector_1a0db0813f6b4ce9f042999679cea6928c" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>SpatialForceVector</name></member>
+      <member refid="classiDynTree_1_1SpatialForceVector_1af876de5a159ec7941aa102a9ba2c9511" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>SpatialForceVector</name></member>
+      <member refid="classiDynTree_1_1SpatialForceVector_1a1524ab2d4869030e0afd4b3039a22b08" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>SpatialForceVector</name></member>
+      <member refid="classiDynTree_1_1SpatialForceVector_1a64cb561fa22a1fa8149764d64dd2c6cf" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>SpatialForceVector</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a787b62017e61e1dc49e0bc753cb0516b" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>SpatialVector</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a3d7d78e133ab83dfadb346539f70df96" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>SpatialVector</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1aff082c865731b86ad00f3901b1f487cb" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>SpatialVector</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a1000a5a67bd77de13aabe6e41b320587" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>SpatialVector</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1aea482fe4d53b76b02a0438d9561e1fd0" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>toString</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1adfea1ab56aa331af032a7f7d31ac0afc" prot="protected" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>totalSize</name></member>
+      <member refid="classiDynTree_1_1Wrench_1a000d5f5d5e4ad90736e6a57ab13d5ecb" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>Wrench</name></member>
+      <member refid="classiDynTree_1_1Wrench_1a7d3b8ee3ef7f6024acb26428a393415c" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>Wrench</name></member>
+      <member refid="classiDynTree_1_1Wrench_1a99c5191f4b6abfe0b72d1dab0a02bb0c" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>Wrench</name></member>
+      <member refid="classiDynTree_1_1Wrench_1af66e21abd0dd2721b0ca8db613355648" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>Wrench</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a8414377bb976157317aeb070b4ed235d" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>zero</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1ae2ae611372d0a0f53dd983e3598bcc58" prot="public" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>Zero</name></member>
+      <member refid="classiDynTree_1_1SpatialForceVector_1a276d6b32c67b5a7ba365cf03411e8790" prot="public" virt="virtual"><scope>iDynTree::Wrench</scope><name>~SpatialForceVector</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

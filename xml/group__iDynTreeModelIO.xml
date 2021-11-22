@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="group__iDynTreeModelIO" kind="group">
+    <compoundname>iDynTreeModelIO</compoundname>
+    <title>%iDynTree model data structures</title>
+    <innerclass refid="classiDynTree_1_1ModelCalibrationHelper" prot="public">iDynTree::ModelCalibrationHelper</innerclass>
+    <innerclass refid="classiDynTree_1_1ModelExporterOptions" prot="public">iDynTree::ModelExporterOptions</innerclass>
+    <innerclass refid="classiDynTree_1_1ModelExporter" prot="public">iDynTree::ModelExporter</innerclass>
+    <innerclass refid="structiDynTree_1_1ModelParserOptions" prot="public">iDynTree::ModelParserOptions</innerclass>
+    <innerclass refid="classiDynTree_1_1ModelLoader" prot="public">iDynTree::ModelLoader</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__iDynTreeModelIO_1ga80941e03b0209a745a76fadc3264879a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::dofsListFromURDF</definition>
+        <argsstring>(const std::string &amp;urdf_filename, std::vector&lt; std::string &gt; &amp;dofs)</argsstring>
+        <name>dofsListFromURDF</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>urdf_filename</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt; &amp;</type>
+          <declname>dofs</declname>
+        </param>
+        <briefdescription>
+<para>Load a list of dofs names from a URDF file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if all went ok, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/URDFDofsImport.h" line="29" column="6" declfile="iDynTree/ModelIO/URDFDofsImport.h" declline="29" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeModelIO_1ga657c7f9a0eedd9b8f71a54e6a83acdc0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::dofsListFromURDFString</definition>
+        <argsstring>(const std::string &amp;urdf_string, std::vector&lt; std::string &gt; &amp;dofs)</argsstring>
+        <name>dofsListFromURDFString</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>urdf_string</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; std::string &gt; &amp;</type>
+          <declname>dofs</declname>
+        </param>
+        <briefdescription>
+<para>Load a list of dofs object from a URDF string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if all went ok, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/ModelIO/URDFDofsImport.h" line="39" column="6" declfile="iDynTree/ModelIO/URDFDofsImport.h" declline="39" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeModelIO_1gaeaa7b0320760138dab8d2e7ba5525b2a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::URDFFromModel</definition>
+        <argsstring>(const iDynTree::Model &amp;model, const std::string &amp;urdf_filename, const ModelExporterOptions options=ModelExporterOptions())</argsstring>
+        <name>URDFFromModel</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>urdf_filename</declname>
+        </param>
+        <param>
+          <type>const ModelExporterOptions</type>
+          <declname>options</declname>
+          <defval>ModelExporterOptions()</defval>
+        </param>
+        <briefdescription>
+<para>Export a <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> object to a URDF file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref> for more details on supported and default options.</para>
+</simplesect>
+<simplesect kind="warning"><para>This function does not support exporting sensor or solid shapes at the moment.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">urdf_filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Path to the URDF file that will be created. It can be either a relative filename with respect to the current working directory, or an absolute filename. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">options</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the <ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref> struct of options passed to the parser. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went ok, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/URDFModelExport.h" line="35" column="6" declfile="private/URDFModelExport.h" declline="35" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeModelIO_1gab9223d51ca118bea013bbbde14d6e054" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::URDFStringFromModel</definition>
+        <argsstring>(const iDynTree::Model &amp;output, std::string &amp;urdf_string, const ModelExporterOptions options=ModelExporterOptions())</argsstring>
+        <name>URDFStringFromModel</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>output</declname>
+        </param>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>urdf_string</declname>
+        </param>
+        <param>
+          <type>const ModelExporterOptions</type>
+          <declname>options</declname>
+          <defval>ModelExporterOptions()</defval>
+        </param>
+        <briefdescription>
+<para>Export a <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> object to a URDF string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="see"><para><ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref> for more details on supported and default options.</para>
+</simplesect>
+<simplesect kind="warning"><para>This function does not support exporting sensor or solid shapes at the moment.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">options</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the <ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref> struct of options passed to the parser. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went ok, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/URDFModelExport.h" line="51" column="6" declfile="private/URDFModelExport.h" declline="51" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Functions to read and write iDynTree models and sensors in external formats (URDF at the moment). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

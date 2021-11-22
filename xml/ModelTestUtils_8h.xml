@@ -1,0 +1,256 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="ModelTestUtils_8h" kind="file" language="C++">
+    <compoundname>ModelTestUtils.h</compoundname>
+    <includes refid="Model_8h" local="no">iDynTree/Model/Model.h</includes>
+    <includes refid="FixedJoint_8h" local="no">iDynTree/Model/FixedJoint.h</includes>
+    <includes refid="RevoluteJoint_8h" local="no">iDynTree/Model/RevoluteJoint.h</includes>
+    <includes refid="FreeFloatingState_8h" local="no">iDynTree/Model/FreeFloatingState.h</includes>
+    <includes refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includes>
+    <includes refid="TestUtils_8h" local="no">iDynTree/Core/TestUtils.h</includes>
+    <includes local="no">cassert</includes>
+    <includes refid="IJoint_8h" local="yes">IJoint.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/Model/ModelTestUtils.h</label>
+        <link refid="ModelTestUtils_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>cassert</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ModelTestUtils_8h_1ae3c9d8004d8849d347af71dfbbc998f1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Link</type>
+        <definition>Link iDynTree::getRandomLink</definition>
+        <argsstring>()</argsstring>
+        <name>getRandomLink</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="29" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="29" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTestUtils_8h_1af2050e6090e689f7dba9bcd2905c7104" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::addRandomLinkToModel</definition>
+        <argsstring>(Model &amp;model, std::string parentLink, std::string newLinkName, bool noFixed=false)</argsstring>
+        <name>addRandomLinkToModel</name>
+        <param>
+          <type>Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>parentLink</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>newLinkName</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>noFixed</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>Add a random link with random model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="54" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="54" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTestUtils_8h_1abbc9efd0eed3caf7826a0f67056972f8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::addRandomAdditionalFrameToModel</definition>
+        <argsstring>(Model &amp;model, std::string parentLink, std::string newFrameName)</argsstring>
+        <name>addRandomAdditionalFrameToModel</name>
+        <param>
+          <type>Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>parentLink</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>newFrameName</declname>
+        </param>
+        <briefdescription>
+<para>Add a random additional frame to a model model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="90" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="90" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTestUtils_8h_1a6480b737c82af8b72b95857960254bad" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::getRandomLinkIndexOfModel</definition>
+        <argsstring>(const Model &amp;model)</argsstring>
+        <name>getRandomLinkIndexOfModel</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="95" column="18" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="95" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTestUtils_8h_1a75223c9a86126d90e70857cc48ff302e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::getRandomLinkOfModel</definition>
+        <argsstring>(const Model &amp;model)</argsstring>
+        <name>getRandomLinkOfModel</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="102" column="20" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="102" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTestUtils_8h_1a2f8e6bff5b6a359c5bb88792dde90ac3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::int2string</definition>
+        <argsstring>(int i)</argsstring>
+        <name>int2string</name>
+        <param>
+          <type>int</type>
+          <declname>i</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="109" column="20" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="109" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTestUtils_8h_1ab524c8553e271868a40123e2e7d9ae7d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Model</type>
+        <definition>Model iDynTree::getRandomModel</definition>
+        <argsstring>(unsigned int nrOfJoints, size_t nrOfAdditionalFrames=10)</argsstring>
+        <name>getRandomModel</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>nrOfJoints</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>nrOfAdditionalFrames</declname>
+          <defval>10</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="118" column="14" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="118" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTestUtils_8h_1a89ca09ae32e8673219c9beda06b11272" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Model</type>
+        <definition>Model iDynTree::getRandomChain</definition>
+        <argsstring>(unsigned int nrOfJoints, size_t nrOfAdditionalFrames=10, bool noFixed=false)</argsstring>
+        <name>getRandomChain</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>nrOfJoints</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>nrOfAdditionalFrames</declname>
+          <defval>10</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>noFixed</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="141" column="14" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="141" bodyend="163"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTestUtils_8h_1aff4391c79fb7cd4b59feed20b012d1d5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::getRandomJointPositions</definition>
+        <argsstring>(VectorDynSize &amp;vec, const Model &amp;model)</argsstring>
+        <name>getRandomJointPositions</name>
+        <param>
+          <type>VectorDynSize &amp;</type>
+          <declname>vec</declname>
+        </param>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Get random joint position consistently with the limits of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the input vector has the wrong size, it will be resized. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="169" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="169" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="function" id="ModelTestUtils_8h_1a72bed46cd07c0617f3f59ffbbb0823a0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::getRandomInverseDynamicsInputs</definition>
+        <argsstring>(FreeFloatingPos &amp;pos, FreeFloatingVel &amp;vel, FreeFloatingAcc &amp;acc, LinkNetExternalWrenches &amp;extWrenches)</argsstring>
+        <name>getRandomInverseDynamicsInputs</name>
+        <param>
+          <type>FreeFloatingPos &amp;</type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>FreeFloatingVel &amp;</type>
+          <declname>vel</declname>
+        </param>
+        <param>
+          <type>FreeFloatingAcc &amp;</type>
+          <declname>acc</declname>
+        </param>
+        <param>
+          <type>LinkNetExternalWrenches &amp;</type>
+          <declname>extWrenches</declname>
+        </param>
+        <briefdescription>
+<para>Get random robot positions, velocities and accelerations and external wrenches to be given as an input to InverseDynamics. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="200" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="200" bodyend="222"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/ModelTestUtils.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>iDynTree::SolidShape class | iDynTree master</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="./index.html">iDynTree</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="4">
+            <li>
+              <a href="pages.html">Versions</a>
+              <ol>
+                <li><a href="./index.html">Master</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="pages.html">Contacts</a>
+              <ol>
+                <li><a href="https://github.com/robotology/idyntree">GitHub</a></li>
+                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
+              </ol>
+            </li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespaceiDynTree.html">iDynTree</a>::<wbr/></span>SolidShape <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="SolidShapes_8h.html">&lt;iDynTree/Model/SolidShapes.h&gt;</a></div>
+        </h1>
+        <p><span></span></p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#derived-classes">Derived classes</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <section id="derived-classes">
+          <h2><a href="#derived-classes">Derived classes</a></h2>
+          <dl class="m-doc">
+            <dt>
+              class <a href="classiDynTree_1_1Box.html" class="m-doc">Box</a>
+            </dt>
+            <dd><a href="classiDynTree_1_1Box.html" class="m-doc">Box</a>, i.e.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1Cylinder.html" class="m-doc">Cylinder</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1ExternalMesh.html" class="m-doc">ExternalMesh</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1Sphere.html" class="m-doc">Sphere</a>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="a3c9b74bfd7460cce67d604f66517a44c">
+              <span class="m-doc-wrap-bumper"><a href="#a3c9b74bfd7460cce67d604f66517a44c" class="m-doc-self">SolidShape</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">explicit</span> </span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a3ed24e3713a3832408ee0ee8b95dfa82">
+              <span class="m-doc-wrap-bumper"><a href="#a3ed24e3713a3832408ee0ee8b95dfa82" class="m-doc-self">~SolidShape</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt id="a0e17798de0579d18260b629fdd8b09a8">
+              <span class="m-doc-wrap-bumper">auto <a href="#a0e17798de0579d18260b629fdd8b09a8" class="m-doc-self">clone</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classiDynTree_1_1SolidShape.html" class="m-doc">SolidShape</a>* <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a0c3339721b95e2e969f7725d21c25e40">
+              <span class="m-doc-wrap-bumper">auto <a href="#a0c3339721b95e2e969f7725d21c25e40" class="m-doc-self">getName</a>(</span><span class="m-doc-wrap">) const -&gt; const std::string&amp;</span>
+            </dt>
+            <dd>Returns the name of the shape.</dd>
+            <dt id="a6850e739d426711814a1563fea31bce3">
+              <span class="m-doc-wrap-bumper">void <a href="#a6850e739d426711814a1563fea31bce3" class="m-doc-self">setName</a>(</span><span class="m-doc-wrap">const std::string&amp; name)</span>
+            </dt>
+            <dd>Sets the specified name.</dd>
+            <dt id="ad0773a7e9c79fb39689fe57776c6f8b3">
+              <span class="m-doc-wrap-bumper">auto <a href="#ad0773a7e9c79fb39689fe57776c6f8b3" class="m-doc-self">isNameValid</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd>Returns if the name is valid.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#adf7c9968426d13ca501bf91eb3440d65" class="m-doc">getLink_H_geometry</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&amp;</span>
+            </dt>
+            <dd>Returns the homogeneus transformation of the geometry w.r.t.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a99c8cb2ba950c03a59302428fc52cf30" class="m-doc">setLink_H_geometry</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&amp; newTransform)</span>
+            </dt>
+            <dd>Sets the homogeneus transformation of the geometry w.r.t.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a79698fa4e4ec3278dcb1f22dfaee0c04" class="m-doc">isMaterialSet</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd>Returns if the material is valid, i.e.</dd>
+            <dt id="a4b0b5a8cc055ce533bbd79f804bae432">
+              <span class="m-doc-wrap-bumper">auto <a href="#a4b0b5a8cc055ce533bbd79f804bae432" class="m-doc-self">getMaterial</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classiDynTree_1_1Material.html" class="m-doc">Material</a>&amp;</span>
+            </dt>
+            <dd>Returns the current material.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a0a3a0215c4d1d729e3dfb284232037fe" class="m-doc">setMaterial</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Material.html" class="m-doc">Material</a>&amp; material)</span>
+            </dt>
+            <dd>Sets the material.</dd>
+            <dt id="a8ba065f0e60ad78baad071a3a870faf6">
+              <span class="m-doc-wrap-bumper">auto <a href="#a8ba065f0e60ad78baad071a3a870faf6" class="m-doc-self">isSphere</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a661c33c6139a4cde9c9eeb55ebcd915e">
+              <span class="m-doc-wrap-bumper">auto <a href="#a661c33c6139a4cde9c9eeb55ebcd915e" class="m-doc-self">isBox</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a8218783b444c4f651ebc5517399a04bd">
+              <span class="m-doc-wrap-bumper">auto <a href="#a8218783b444c4f651ebc5517399a04bd" class="m-doc-self">isCylinder</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aeef66627d452a2b192c9d62ac6e6b908">
+              <span class="m-doc-wrap-bumper">auto <a href="#aeef66627d452a2b192c9d62ac6e6b908" class="m-doc-self">isExternalMesh</a>(</span><span class="m-doc-wrap">) const -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="afb0d282d22dce28a6f45de0c1d81d494">
+              <span class="m-doc-wrap-bumper">auto <a href="#afb0d282d22dce28a6f45de0c1d81d494" class="m-doc-self">asSphere</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classiDynTree_1_1Sphere.html" class="m-doc">Sphere</a>*</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a9d8ee4804ecf2c25181a65f1f44b9a3b">
+              <span class="m-doc-wrap-bumper">auto <a href="#a9d8ee4804ecf2c25181a65f1f44b9a3b" class="m-doc-self">asBox</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classiDynTree_1_1Box.html" class="m-doc">Box</a>*</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a0afa36f27380de580ca2d37ae79d66dc">
+              <span class="m-doc-wrap-bumper">auto <a href="#a0afa36f27380de580ca2d37ae79d66dc" class="m-doc-self">asCylinder</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classiDynTree_1_1Cylinder.html" class="m-doc">Cylinder</a>*</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="abce98ace11abc423faab5418fe74b72a">
+              <span class="m-doc-wrap-bumper">auto <a href="#abce98ace11abc423faab5418fe74b72a" class="m-doc-self">asExternalMesh</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classiDynTree_1_1ExternalMesh.html" class="m-doc">ExternalMesh</a>*</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a01f73fdb47553ba4f1d817a6feb6beef">
+              <span class="m-doc-wrap-bumper">auto <a href="#a01f73fdb47553ba4f1d817a6feb6beef" class="m-doc-self">asSphere</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classiDynTree_1_1Sphere.html" class="m-doc">Sphere</a>*</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1249bfe8e2fefc34b749c7878b83e462">
+              <span class="m-doc-wrap-bumper">auto <a href="#a1249bfe8e2fefc34b749c7878b83e462" class="m-doc-self">asBox</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classiDynTree_1_1Box.html" class="m-doc">Box</a>*</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aa7d4851d00a44b21e87d85ecfe4ece4c">
+              <span class="m-doc-wrap-bumper">auto <a href="#aa7d4851d00a44b21e87d85ecfe4ece4c" class="m-doc-self">asCylinder</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classiDynTree_1_1Cylinder.html" class="m-doc">Cylinder</a>*</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a18dc4e95d85822018507b4a813f69340">
+              <span class="m-doc-wrap-bumper">auto <a href="#a18dc4e95d85822018507b4a813f69340" class="m-doc-self">asExternalMesh</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classiDynTree_1_1ExternalMesh.html" class="m-doc">ExternalMesh</a>*</span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="adf7c9968426d13ca501bf91eb3440d65"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&amp; iDynTree::<wbr />SolidShape::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adf7c9968426d13ca501bf91eb3440d65" class="m-doc-self">getLink_H_geometry</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the homogeneus transformation of the geometry w.r.t.</p>
+<p>the attached link.</p>
+          </div></section>
+          <section class="m-doc-details" id="a99c8cb2ba950c03a59302428fc52cf30"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />SolidShape::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a99c8cb2ba950c03a59302428fc52cf30" class="m-doc-self">setLink_H_geometry</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&amp; newTransform)</span></span>
+            </h3>
+            <p>Sets the homogeneus transformation of the geometry w.r.t.</p>
+<p>the attached link.</p>
+          </div></section>
+          <section class="m-doc-details" id="a79698fa4e4ec3278dcb1f22dfaee0c04"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />SolidShape::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a79698fa4e4ec3278dcb1f22dfaee0c04" class="m-doc-self">isMaterialSet</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns if the material is valid, i.e.</p>
+<p>you can call <a href="classiDynTree_1_1SolidShape.html#a4b0b5a8cc055ce533bbd79f804bae432" class="m-doc">getMaterial()</a>.</p>
+          </div></section>
+          <section class="m-doc-details" id="a0a3a0215c4d1d729e3dfb284232037fe"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />SolidShape::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0a3a0215c4d1d729e3dfb284232037fe" class="m-doc-self">setMaterial</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Material.html" class="m-doc">Material</a>&amp; material)</span></span>
+            </h3>
+            <p>Sets the material.</p>
+<p>isMaterialSet will return true after this call.</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>iDynTree documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/robotology/idyntree/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

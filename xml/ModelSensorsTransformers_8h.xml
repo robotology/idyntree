@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="ModelSensorsTransformers_8h" kind="file" language="C++">
+    <compoundname>ModelSensorsTransformers.h</compoundname>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ModelSensorsTransformers_8h_1af8355a73b30d3b5797fddae1f80ac778" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::createReducedModelAndSensors</definition>
+        <argsstring>(const Model &amp;fullModel, const SensorsList &amp;fullSensors, const std::vector&lt; std::string &gt; &amp;jointsInReducedModel, Model &amp;reducedModel, SensorsList &amp;reducedSensors)</argsstring>
+        <name>createReducedModelAndSensors</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>fullModel</declname>
+        </param>
+        <param>
+          <type>const SensorsList &amp;</type>
+          <declname>fullSensors</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>jointsInReducedModel</declname>
+        </param>
+        <param>
+          <type>Model &amp;</type>
+          <declname>reducedModel</declname>
+        </param>
+        <param>
+          <type>SensorsList &amp;</type>
+          <declname>reducedSensors</declname>
+        </param>
+        <briefdescription>
+<para>Variant of createReducedModel function that also process the sensorList . </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Note </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/ModelSensorsTransformers.h" line="32" column="6" declfile="iDynTree/Sensors/ModelSensorsTransformers.h" declline="32" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Collection of function to modify model and sensors in various ways. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Sensors/ModelSensorsTransformers.h"/>
+  </compounddef>
+</doxygen>

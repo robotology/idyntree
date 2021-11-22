@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="AllSensorsTypes_8h" kind="file" language="C++">
+    <compoundname>AllSensorsTypes.h</compoundname>
+    <includes refid="SixAxisForceTorqueSensor_8h" local="no">iDynTree/Sensors/SixAxisForceTorqueSensor.h</includes>
+    <includes refid="AccelerometerSensor_8h" local="no">iDynTree/Sensors/AccelerometerSensor.h</includes>
+    <includes refid="GyroscopeSensor_8h" local="no">iDynTree/Sensors/GyroscopeSensor.h</includes>
+    <includes refid="ThreeAxisAngularAccelerometerSensor_8h" local="no">iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h</includes>
+    <includes refid="ThreeAxisForceTorqueContactSensor_8h" local="no">iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h</includes>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Sensors/AllSensorsTypes.h"/>
+  </compounddef>
+</doxygen>

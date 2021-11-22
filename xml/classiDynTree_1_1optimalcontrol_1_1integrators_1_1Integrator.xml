@@ -1,0 +1,817 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::optimalcontrol::integrators::Integrator</compoundname>
+    <derivedcompoundref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator" prot="public" virt="non-virtual">iDynTree::optimalcontrol::integrators::FixedStepIntegrator</derivedcompoundref>
+    <includes local="no">iDynTree/Integrator.h</includes>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a371179a8cb3e4b4a03a3a0d90d2e6cca" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::optimalcontrol::integrators::Integrator::m_dTmax</definition>
+        <argsstring></argsstring>
+        <name>m_dTmax</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="281" column="24" bodyfile="iDynTree/Integrator.h" bodystart="281" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1aa9eb4f3c3a4da99f1ce27b28154e4bfb" prot="protected" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;DynamicalSystem&gt; iDynTree::optimalcontrol::integrators::Integrator::m_dynamicalSystem_ptr</definition>
+        <argsstring></argsstring>
+        <name>m_dynamicalSystem_ptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="282" column="33" bodyfile="iDynTree/Integrator.h" bodystart="282" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a25b9c2215f3bbf7940214925e3a55ede" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement" kindref="compound">SolutionElement</ref> &gt;</type>
+        <definition>std::vector&lt;SolutionElement&gt; iDynTree::optimalcontrol::integrators::Integrator::m_solution</definition>
+        <argsstring></argsstring>
+        <name>m_solution</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="283" column="29" bodyfile="iDynTree/Integrator.h" bodystart="283" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a91cc593e13d13305e81b3e7fc5ae6276" prot="protected" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfoData" kindref="compound">IntegratorInfoData</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;IntegratorInfoData&gt; iDynTree::optimalcontrol::integrators::Integrator::m_infoData</definition>
+        <argsstring></argsstring>
+        <name>m_infoData</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="284" column="33" bodyfile="iDynTree/Integrator.h" bodystart="284" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a3b03ff054e91a4142240dea337524fa1" prot="protected" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfo" kindref="compound">IntegratorInfo</ref></type>
+        <definition>IntegratorInfo iDynTree::optimalcontrol::integrators::Integrator::m_info</definition>
+        <argsstring></argsstring>
+        <name>m_info</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="285" column="32" bodyfile="iDynTree/Integrator.h" bodystart="285" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a06482af463ae25bd99ab513ca1bd8cb1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::integrators::Integrator::Integrator</definition>
+        <argsstring>()</argsstring>
+        <name>Integrator</name>
+        <briefdescription>
+<para><ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator" kindref="compound">Integrator</ref> default constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This constructor allows to create an <ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator" kindref="compound">Integrator</ref> object without specifying a <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> yet. This has to be done via the method setDynamicalSystem before calling the integrate method. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="151" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a2b692b4e55ba221411c7ab685d85afeb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::integrators::Integrator::Integrator</definition>
+        <argsstring>(const std::shared_ptr&lt; iDynTree::optimalcontrol::DynamicalSystem &gt; dynamicalSystem)</argsstring>
+        <name>Integrator</name>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">iDynTree::optimalcontrol::DynamicalSystem</ref> &gt;</type>
+          <declname>dynamicalSystem</declname>
+        </param>
+        <briefdescription>
+<para><ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator" kindref="compound">Integrator</ref> constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">dynamicalSystem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Pointer to the <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> to be integrated. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="157" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1aa3887eac25d4dd53962204d0503c8e06" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::integrators::Integrator::Integrator</definition>
+        <argsstring>(const Integrator &amp;other)=delete</argsstring>
+        <name>Integrator</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator" kindref="compound">Integrator</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="159" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1ab0cf81d20474d5f8737e8f8df501f464" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::optimalcontrol::integrators::Integrator::~Integrator</definition>
+        <argsstring>()</argsstring>
+        <name>~Integrator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="161" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1ab95d5885f287e7364630a277d7fe8c56" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::Integrator::integrate</definition>
+        <argsstring>(double initialTime, double finalTime)=0</argsstring>
+        <name>integrate</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator_1a3f254a74a37663a3c8df1e61e88497a5">integrate</reimplementedby>
+        <param>
+          <type>double</type>
+          <declname>initialTime</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>finalTime</declname>
+        </param>
+        <briefdescription>
+<para>Integrate the dynamical system with specified integration bounds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method should be implemented by the custom integrator. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">initialTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Lower integration bound. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">finalTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Upper integration bound. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successfull. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="171" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a6e2b9052aa9b0638ce7d2f8347b4fe00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::integrators::Integrator::setMaximumStepSize</definition>
+        <argsstring>(const double dT)</argsstring>
+        <name>setMaximumStepSize</name>
+        <param>
+          <type>const double</type>
+          <declname>dT</declname>
+        </param>
+        <briefdescription>
+<para>Specify the maximum integration step size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This parameter is considered when integrating a <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref>. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">dT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The masimum step size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successfull, false otherwise (for example if dT is not strictly positive) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="180" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a0d39d3023f056364a01963b7520a7c21" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::optimalcontrol::integrators::Integrator::maximumStepSize</definition>
+        <argsstring>() const</argsstring>
+        <name>maximumStepSize</name>
+        <briefdescription>
+<para>Return the maximum step size set with setMaximumStepSize. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="185" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a72bf5f94da63280de3c2b3223cd251e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::integrators::Integrator::setDynamicalSystem</definition>
+        <argsstring>(const std::shared_ptr&lt; iDynTree::optimalcontrol::DynamicalSystem &gt; dynamicalSystem)</argsstring>
+        <name>setDynamicalSystem</name>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">iDynTree::optimalcontrol::DynamicalSystem</ref> &gt;</type>
+          <declname>dynamicalSystem</declname>
+        </param>
+        <briefdescription>
+<para>Set the <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> to be considered. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This methods changes the dynamical system only if it was not already set. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">dynamicalSystem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dynamical system pointer </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successfull, false otherwise, for example if a <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> was already set. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="194" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a148992ef6281c95701bd33a8262eb7f9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::weak_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> &gt;</type>
+        <definition>const std::weak_ptr&lt;DynamicalSystem&gt; iDynTree::optimalcontrol::integrators::Integrator::dynamicalSystem</definition>
+        <argsstring>() const</argsstring>
+        <name>dynamicalSystem</name>
+        <briefdescription>
+<para>Weak pointer to the specified <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="199" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a7fd966d607d393a4dfa056206cd6d003" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::Integrator::getSolution</definition>
+        <argsstring>(double time, VectorDynSize &amp;solution) const</argsstring>
+        <name>getSolution</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>solution</declname>
+        </param>
+        <briefdescription>
+<para>Retrieve integration solution at a specified time. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The method integrate should have been called first, and time should be within the integration bounds, otherwise returns false.</para>
+<para>It sould not be necessary to override this method. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Instant of interest. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>solution</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>State corresponding to the specified time. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successfull. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="211" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a0b7ed351be29e3ddc4145824aec6b082" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>const std::vector&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement" kindref="compound">SolutionElement</ref> &gt; &amp;</type>
+        <definition>virtual const std::vector&lt;SolutionElement&gt;&amp; iDynTree::optimalcontrol::integrators::Integrator::getFullSolution</definition>
+        <argsstring>() const</argsstring>
+        <name>getFullSolution</name>
+        <briefdescription>
+<para>Retrieve the full buffer of <ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement" kindref="compound">SolutionElement</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The method integrate should have been called first, and time should be within the integration bounds, otherwise returns false.</para>
+<para>It sould not be necessary to override this method. <simplesect kind="return"><para>A const reference to the internal buffer contaning the full output of the integration routine. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="221" column="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a1594f1f7ce88c5d45f585130c895b0a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::optimalcontrol::integrators::Integrator::clearSolution</definition>
+        <argsstring>()</argsstring>
+        <name>clearSolution</name>
+        <briefdescription>
+<para>Clear the solution buffer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="226" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a4638d9ea1c915b7220e1d9b1dfc1fd08" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::Integrator::evaluateCollocationConstraint</definition>
+        <argsstring>(double time, const std::vector&lt; VectorDynSize &gt; &amp;collocationPoints, const std::vector&lt; VectorDynSize &gt; &amp;controlInputs, double dT, VectorDynSize &amp;constraintValue)</argsstring>
+        <name>evaluateCollocationConstraint</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ForwardEuler_1ae95a00e825ba60722855c7975978467f">evaluateCollocationConstraint</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a0864bcb0de92814ed05b4ffb1c1a351a">evaluateCollocationConstraint</reimplementedby>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &gt; &amp;</type>
+          <declname>collocationPoints</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &gt; &amp;</type>
+          <declname>controlInputs</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dT</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>constraintValue</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the collocation constraint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In some optimal control solvers, like the <ref refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver" kindref="compound">MultipleShootingSolver</ref>, we need to discretize the dynamical system associated to the optimal control problem. This function evaluates the discretization error according to specified integration method. The <ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator" kindref="compound">Integrator</ref>, when integrating a dynamical system, is performing the following discretization: <formula id="87">\[ x_{k+1} = \phi(x_k, x_{k+1}, u_k, u_{k+1}, t) \]</formula> where <formula id="88">$ x_{k+1}$</formula> is the discretized output. For example, using forward euler, we would have <formula id="89">\[ x_{k+1} = x_k + f(t, x, u)\mathrm{d}T. \]</formula></para>
+<para>This function returns the result of <formula id="90">$ \phi(x_k, x_{k+1}, u_k, u_{k+1}, t) - x_{k+1}$</formula>.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Instant at which the collocation constraint is evaluated </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">collocationPoints</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector containing <formula id="91">$x_k$</formula> and <formula id="92">$x_{k+1}$</formula>. Notice that <formula id="92">$x_{k+1}$</formula> corresponds to the state at instant (time + dT). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">controlInputs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector containing <formula id="93">$u_k$</formula> and <formula id="94">$u_{k+1}$</formula>. Notice that <formula id="94">$u_{k+1}$</formula> is supposed to be applied at instant (time + dT). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time distance between <formula id="91">$x_k$</formula> and <formula id="92">$x_{k+1}$</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">constraintValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The result of <formula id="90">$ \phi(x_k, x_{k+1}, u_k, u_{k+1}, t) - x_{k+1}$</formula>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="251" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a481d99de3957547ce59eb738ee9257d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::Integrator::evaluateCollocationConstraintJacobian</definition>
+        <argsstring>(double time, const std::vector&lt; VectorDynSize &gt; &amp;collocationPoints, const std::vector&lt; VectorDynSize &gt; &amp;controlInputs, double dT, std::vector&lt; MatrixDynSize &gt; &amp;stateJacobianValues, std::vector&lt; MatrixDynSize &gt; &amp;controlJacobianValues)</argsstring>
+        <name>evaluateCollocationConstraintJacobian</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ForwardEuler_1a45c9c91ce896c6531b48052807a37aa2">evaluateCollocationConstraintJacobian</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ab7eb3b3cea697f03ee6cf104a3490d6a">evaluateCollocationConstraintJacobian</reimplementedby>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &gt; &amp;</type>
+          <declname>collocationPoints</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &gt; &amp;</type>
+          <declname>controlInputs</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dT</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &gt; &amp;</type>
+          <declname>stateJacobianValues</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &gt; &amp;</type>
+          <declname>controlJacobianValues</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="255" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1af435b7aec4ebd1702506a9229ff0f738" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::Integrator::getCollocationConstraintJacobianStateSparsity</definition>
+        <argsstring>(std::vector&lt; SparsityStructure &gt; &amp;stateJacobianSparsity)</argsstring>
+        <name>getCollocationConstraintJacobianStateSparsity</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ForwardEuler_1a926012c88240f92bac8cc53bfe913a9c">getCollocationConstraintJacobianStateSparsity</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1aa0c7beeea875f93ad63836ffd677a3e8">getCollocationConstraintJacobianStateSparsity</reimplementedby>
+        <param>
+          <type>std::vector&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">SparsityStructure</ref> &gt; &amp;</type>
+          <declname>stateJacobianSparsity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="260" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a717b37e86dd16ae7803889fc65929993" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::Integrator::getCollocationConstraintJacobianControlSparsity</definition>
+        <argsstring>(std::vector&lt; SparsityStructure &gt; &amp;controlJacobianSparsity)</argsstring>
+        <name>getCollocationConstraintJacobianControlSparsity</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ForwardEuler_1ac4dea272a0e1b1865a2f87d7b32a1bb3">getCollocationConstraintJacobianControlSparsity</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a3b74a8ce81433ba877405eb2bdeab37c">getCollocationConstraintJacobianControlSparsity</reimplementedby>
+        <param>
+          <type>std::vector&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">SparsityStructure</ref> &gt; &amp;</type>
+          <declname>controlJacobianSparsity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="262" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a4f4f2819f24168c576c5614f98efa1d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::Integrator::evaluateCollocationConstraintSecondDerivatives</definition>
+        <argsstring>(double time, const std::vector&lt; VectorDynSize &gt; &amp;collocationPoints, const std::vector&lt; VectorDynSize &gt; &amp;controlInputs, double dT, const VectorDynSize &amp;lambda, CollocationHessianMap &amp;stateSecondDerivative, CollocationHessianMap &amp;controlSecondDerivative, CollocationHessianMap &amp;stateControlSecondDerivative)</argsstring>
+        <name>evaluateCollocationConstraintSecondDerivatives</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ForwardEuler_1a39059705dedb183f35a08193bdfeffa2">evaluateCollocationConstraintSecondDerivatives</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1aab5857ef9222733fed8a2bcd155e8ac0">evaluateCollocationConstraintSecondDerivatives</reimplementedby>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &gt; &amp;</type>
+          <declname>collocationPoints</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &gt; &amp;</type>
+          <declname>controlInputs</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dT</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type>CollocationHessianMap &amp;</type>
+          <declname>stateSecondDerivative</declname>
+        </param>
+        <param>
+          <type>CollocationHessianMap &amp;</type>
+          <declname>controlSecondDerivative</declname>
+        </param>
+        <param>
+          <type>CollocationHessianMap &amp;</type>
+          <declname>stateControlSecondDerivative</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="265" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a95763f06583ccbc1f3342673d9aa3779" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::Integrator::getCollocationConstraintSecondDerivativeWRTStateSparsity</definition>
+        <argsstring>(CollocationHessianSparsityMap &amp;stateDerivativeSparsity)</argsstring>
+        <name>getCollocationConstraintSecondDerivativeWRTStateSparsity</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ForwardEuler_1a02c4cdfc8b15b9cd943df804c3005eb3">getCollocationConstraintSecondDerivativeWRTStateSparsity</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a33881d4da853f92e4a96bb6b9fdaa823">getCollocationConstraintSecondDerivativeWRTStateSparsity</reimplementedby>
+        <param>
+          <type>CollocationHessianSparsityMap &amp;</type>
+          <declname>stateDerivativeSparsity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="272" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1aeae704825f16a03c4a12d282fd525e42" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::Integrator::getCollocationConstraintSecondDerivativeWRTControlSparsity</definition>
+        <argsstring>(CollocationHessianSparsityMap &amp;controlDerivativeSparsity)</argsstring>
+        <name>getCollocationConstraintSecondDerivativeWRTControlSparsity</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ForwardEuler_1a578619b7501e0fd54fbb1f5bfe0c81a2">getCollocationConstraintSecondDerivativeWRTControlSparsity</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ad50abcf8b967813771828b858823ff9d">getCollocationConstraintSecondDerivativeWRTControlSparsity</reimplementedby>
+        <param>
+          <type>CollocationHessianSparsityMap &amp;</type>
+          <declname>controlDerivativeSparsity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="274" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a5867f7987daba0256adfb8d233eccbf6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::Integrator::getCollocationConstraintSecondDerivativeWRTStateControlSparsity</definition>
+        <argsstring>(CollocationHessianSparsityMap &amp;stateControlDerivativeSparsity)</argsstring>
+        <name>getCollocationConstraintSecondDerivativeWRTStateControlSparsity</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ForwardEuler_1a6ab9ea2af353b8d364ac46fe0c9d32e4">getCollocationConstraintSecondDerivativeWRTStateControlSparsity</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a04a337a768584f1d14c153fff7fdf9a3">getCollocationConstraintSecondDerivativeWRTStateControlSparsity</reimplementedby>
+        <param>
+          <type>CollocationHessianSparsityMap &amp;</type>
+          <declname>stateControlDerivativeSparsity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="276" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1acbf7100a4b6b9d9e64624bdfa1f32719" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfo" kindref="compound">IntegratorInfo</ref> &amp;</type>
+        <definition>const IntegratorInfo&amp; iDynTree::optimalcontrol::integrators::Integrator::info</definition>
+        <argsstring>() const</argsstring>
+        <name>info</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="278" column="38"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a3aeffb4013537d6f849f53a4864acc29" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::Integrator::interpolatePoints</definition>
+        <argsstring>(const std::vector&lt; SolutionElement &gt;::const_iterator &amp;first, const std::vector&lt; SolutionElement &gt;::const_iterator &amp;second, double time, VectorDynSize &amp;outputPoint) const</argsstring>
+        <name>interpolatePoints</name>
+        <param>
+          <type>const std::vector&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement" kindref="compound">SolutionElement</ref> &gt;::const_iterator &amp;</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement" kindref="compound">SolutionElement</ref> &gt;::const_iterator &amp;</type>
+          <declname>second</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>outputPoint</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="287" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a5490ec3615ab91d85a84b85926d43ef1" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::Integrator::allocateBuffers</definition>
+        <argsstring>()</argsstring>
+        <name>allocateBuffers</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ForwardEuler_1a9c611237ac812979aaa8b9d45b4d93c4">allocateBuffers</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a46652f280e132bf3151e8244dce719b3">allocateBuffers</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4_1a121f048a7c8bf087f886ffb1ca0b22cd">allocateBuffers</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="291" column="30"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>The <ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator" kindref="compound">Integrator</ref> base class. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions.</para>
+</simplesect>
+Inherit publicly from this class in order to specify a custom integration method. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="4">
+        <label>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::optimalcontrol::integrators::Integrator</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator"/>
+      </node>
+      <node id="5">
+        <label>iDynTree::optimalcontrol::integrators::RK4</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::optimalcontrol::integrators::ForwardEuler</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ForwardEuler"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="10">
+        <label>iDynTree::optimalcontrol::integrators::IntegratorInfo</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfo"/>
+      </node>
+      <node id="4">
+        <label>T</label>
+      </node>
+      <node id="3">
+        <label>std::shared_ptr&lt; T &gt;</label>
+        <childnode refid="4" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>iDynTree::VectorDynSize</label>
+        <link refid="classiDynTree_1_1VectorDynSize"/>
+      </node>
+      <node id="9">
+        <label>std::vector&lt; T &gt;</label>
+        <childnode refid="4" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::shared_ptr&lt; iDynTree::optimalcontrol::DynamicalSystem &gt;</label>
+        <childnode refid="3" relation="template-instance">
+          <edgelabel>&lt; iDynTree::optimalcontrol::DynamicalSystem &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::optimalcontrol::integrators::Integrator</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_dynamicalSystem_ptr</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_infoData</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_solution</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>m_info</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>iDynTree::optimalcontrol::integrators::SolutionElement</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement"/>
+        <childnode refid="8" relation="usage">
+          <edgelabel>stateAtT</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>std::vector&lt; iDynTree::optimalcontrol::integrators::SolutionElement &gt;</label>
+        <childnode refid="7" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="template-instance">
+          <edgelabel>&lt; iDynTree::optimalcontrol::integrators::SolutionElement &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>std::shared_ptr&lt; iDynTree::optimalcontrol::integrators::IntegratorInfoData &gt;</label>
+        <childnode refid="3" relation="template-instance">
+          <edgelabel>&lt; iDynTree::optimalcontrol::integrators::IntegratorInfoData &gt;</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Integrator.h" line="141" column="13" bodyfile="iDynTree/Integrator.h" bodystart="141" bodyend="292"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a5490ec3615ab91d85a84b85926d43ef1" prot="protected" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>allocateBuffers</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a1594f1f7ce88c5d45f585130c895b0a9" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>clearSolution</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a148992ef6281c95701bd33a8262eb7f9" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>dynamicalSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a4638d9ea1c915b7220e1d9b1dfc1fd08" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>evaluateCollocationConstraint</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a481d99de3957547ce59eb738ee9257d9" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>evaluateCollocationConstraintJacobian</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a4f4f2819f24168c576c5614f98efa1d8" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>evaluateCollocationConstraintSecondDerivatives</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a717b37e86dd16ae7803889fc65929993" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>getCollocationConstraintJacobianControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1af435b7aec4ebd1702506a9229ff0f738" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>getCollocationConstraintJacobianStateSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1aeae704825f16a03c4a12d282fd525e42" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>getCollocationConstraintSecondDerivativeWRTControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a5867f7987daba0256adfb8d233eccbf6" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>getCollocationConstraintSecondDerivativeWRTStateControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a95763f06583ccbc1f3342673d9aa3779" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>getCollocationConstraintSecondDerivativeWRTStateSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a0b7ed351be29e3ddc4145824aec6b082" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>getFullSolution</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a7fd966d607d393a4dfa056206cd6d003" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>getSolution</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1acbf7100a4b6b9d9e64624bdfa1f32719" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>info</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1ab95d5885f287e7364630a277d7fe8c56" prot="public" virt="pure-virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>integrate</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a06482af463ae25bd99ab513ca1bd8cb1" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>Integrator</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a2b692b4e55ba221411c7ab685d85afeb" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>Integrator</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1aa3887eac25d4dd53962204d0503c8e06" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>Integrator</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a3aeffb4013537d6f849f53a4864acc29" prot="protected" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>interpolatePoints</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a371179a8cb3e4b4a03a3a0d90d2e6cca" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>m_dTmax</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1aa9eb4f3c3a4da99f1ce27b28154e4bfb" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>m_dynamicalSystem_ptr</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a3b03ff054e91a4142240dea337524fa1" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>m_info</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a91cc593e13d13305e81b3e7fc5ae6276" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>m_infoData</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a25b9c2215f3bbf7940214925e3a55ede" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>m_solution</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a0d39d3023f056364a01963b7520a7c21" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>maximumStepSize</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a72bf5f94da63280de3c2b3223cd251e6" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>setDynamicalSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a6e2b9052aa9b0638ce7d2f8347b4fe00" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>setMaximumStepSize</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1ab0cf81d20474d5f8737e8f8df501f464" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>~Integrator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

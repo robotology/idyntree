@@ -1,6 +1,0 @@
-<map id="iDynTree::optimalcontrol::integrators::RK4" name="iDynTree::optimalcontrol::integrators::RK4">
-<area shape="rect" id="node1" title=" " alt="" coords="32,291,215,332"/>
-<area shape="rect" id="node2" href="$classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator.html" title=" " alt="" coords="5,200,241,241"/>
-<area shape="rect" id="node3" href="$classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator.html" title="The Integrator base class." alt="" coords="32,109,215,151"/>
-<area shape="rect" id="node4" href="$classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfo.html" title="Class containing infos about the implemented integrator." alt="" coords="24,5,223,47"/>
-</map>

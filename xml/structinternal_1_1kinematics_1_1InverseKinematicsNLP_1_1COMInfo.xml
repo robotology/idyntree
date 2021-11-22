@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1COMInfo" kind="struct" language="C++" prot="private">
+    <compoundname>internal::kinematics::InverseKinematicsNLP::COMInfo</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1COMInfo_1a41d6a2088ab38e4d65948fe335f89585" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
+        <definition>iDynTree::Position internal::kinematics::InverseKinematicsNLP::COMInfo::com</definition>
+        <argsstring></argsstring>
+        <name>com</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>COM position w.r.t. global frame </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="246" column="28" bodyfile="private/InverseKinematicsNLP.h" bodystart="246" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1COMInfo_1a0d842cd8f5943de0128b00f750b7066b" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector2</ref></type>
+        <definition>iDynTree::Vector2 internal::kinematics::InverseKinematicsNLP::COMInfo::projectedCom</definition>
+        <argsstring></argsstring>
+        <name>projectedCom</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>COM projection in the support plane </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="247" column="27" bodyfile="private/InverseKinematicsNLP.h" bodystart="247" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1COMInfo_1afa954baa503b862ea2373b880a71e142" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
+        <definition>iDynTree::MatrixDynSize internal::kinematics::InverseKinematicsNLP::COMInfo::comJacobian</definition>
+        <argsstring></argsstring>
+        <name>comJacobian</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>3 X (6 + nDofs) center of mass jacobian </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="248" column="33" bodyfile="private/InverseKinematicsNLP.h" bodystart="248" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1COMInfo_1ad4d5852c3dc23274de212bfe1dcd3fd9" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
+        <definition>iDynTree::MatrixDynSize internal::kinematics::InverseKinematicsNLP::COMInfo::comJacobianAnalytical</definition>
+        <argsstring></argsstring>
+        <name>comJacobianAnalytical</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>3 x ( 3 + sizeOfRotationParams + nDofs) processed jacobian </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="249" column="33" bodyfile="private/InverseKinematicsNLP.h" bodystart="249" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1COMInfo_1a0e9b458350d2bcb60d74296c4a644141" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
+        <definition>iDynTree::MatrixDynSize internal::kinematics::InverseKinematicsNLP::COMInfo::projectedComJacobian</definition>
+        <argsstring></argsstring>
+        <name>projectedComJacobian</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>2 x ( 3 + sizeOfRotationParams + nDofs) processed jacobian </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="250" column="33" bodyfile="private/InverseKinematicsNLP.h" bodystart="250" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="6">
+        <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+      </node>
+      <node id="1">
+        <label>internal::kinematics::InverseKinematicsNLP::COMInfo</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>comJacobian</edgelabel>
+          <edgelabel>comJacobianAnalytical</edgelabel>
+          <edgelabel>projectedComJacobian</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>com</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>iDynTree::PositionRaw</label>
+        <link refid="classiDynTree_1_1PositionRaw"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::MatrixDynSize</label>
+        <link refid="classiDynTree_1_1MatrixDynSize"/>
+      </node>
+      <node id="3">
+        <label>iDynTree::Position</label>
+        <link refid="classiDynTree_1_1Position"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>Vector3</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+        <childnode refid="6" relation="template-instance">
+          <edgelabel>&lt; 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="private/InverseKinematicsNLP.h" line="245" column="5" bodyfile="private/InverseKinematicsNLP.h" bodystart="245" bodyend="251"/>
+    <listofallmembers>
+      <member refid="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1COMInfo_1a41d6a2088ab38e4d65948fe335f89585" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP::COMInfo</scope><name>com</name></member>
+      <member refid="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1COMInfo_1afa954baa503b862ea2373b880a71e142" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP::COMInfo</scope><name>comJacobian</name></member>
+      <member refid="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1COMInfo_1ad4d5852c3dc23274de212bfe1dcd3fd9" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP::COMInfo</scope><name>comJacobianAnalytical</name></member>
+      <member refid="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1COMInfo_1a0d842cd8f5943de0128b00f750b7066b" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP::COMInfo</scope><name>projectedCom</name></member>
+      <member refid="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1COMInfo_1a0e9b458350d2bcb60d74296c4a644141" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP::COMInfo</scope><name>projectedComJacobian</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

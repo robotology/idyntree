@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1MatrixViewInternal_1_1has__IsRowMajor" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::MatrixViewInternal::has_IsRowMajor</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::false_type</basecompoundref>
+    <includes local="no">iDynTree/Core/MatrixView.h</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename</type>
+        <defval>void</defval>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para><ref refid="structiDynTree_1_1MatrixViewInternal_1_1has__IsRowMajor" kindref="compound">has_IsRowMajor</ref> is used to build a type-dependent expression that check if an element has IsRowMajor argument. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This specific implementation is used when the the object has not IsRowMajor. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>std::false_type</label>
+      </node>
+      <node id="1">
+        <label>iDynTree::MatrixViewInternal::has_IsRowMajor&lt; T, typename &gt;</label>
+        <link refid="structiDynTree_1_1MatrixViewInternal_1_1has__IsRowMajor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>std::false_type</label>
+      </node>
+      <node id="1">
+        <label>iDynTree::MatrixViewInternal::has_IsRowMajor&lt; T, typename &gt;</label>
+        <link refid="structiDynTree_1_1MatrixViewInternal_1_1has__IsRowMajor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Core/MatrixView.h" line="41" column="9" bodyfile="iDynTree/Core/MatrixView.h" bodystart="41" bodyend="41"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

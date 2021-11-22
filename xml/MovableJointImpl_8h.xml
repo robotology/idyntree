@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="MovableJointImpl_8h" kind="file" language="C++">
+    <compoundname>MovableJointImpl.h</compoundname>
+    <includes refid="IJoint_8h" local="no">iDynTree/Model/IJoint.h</includes>
+    <includedby refid="PrismaticJoint_8h" local="no">iDynTree/Model/PrismaticJoint.h</includedby>
+    <includedby refid="RevoluteJoint_8h" local="no">iDynTree/Model/RevoluteJoint.h</includedby>
+    <innerclass refid="classiDynTree_1_1MovableJointImpl" prot="public">iDynTree::MovableJointImpl</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="MovableJointImpl_8h_1ac4ab72af9658e6e1503c06a97786db7f" prot="public" static="no">
+        <type>MovableJointImpl&lt; 1, 1 &gt;</type>
+        <definition>typedef MovableJointImpl&lt;1,1&gt; iDynTree::MovableJointImpl1</definition>
+        <argsstring></argsstring>
+        <name>MovableJointImpl1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/MovableJointImpl.h" line="164" column="30" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="164" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="MovableJointImpl_8h_1a24b411fa2a181857fd60881b7a1fa644" prot="public" static="no">
+        <type>MovableJointImpl&lt; 2, 2 &gt;</type>
+        <definition>typedef MovableJointImpl&lt;2,2&gt; iDynTree::MovableJointImpl2</definition>
+        <argsstring></argsstring>
+        <name>MovableJointImpl2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/MovableJointImpl.h" line="165" column="30" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="165" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="MovableJointImpl_8h_1ae4671e7929209092bc1d6a72f460872a" prot="public" static="no">
+        <type>MovableJointImpl&lt; 3, 3 &gt;</type>
+        <definition>typedef MovableJointImpl&lt;3,3&gt; iDynTree::MovableJointImpl3</definition>
+        <argsstring></argsstring>
+        <name>MovableJointImpl3</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/MovableJointImpl.h" line="166" column="30" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="MovableJointImpl_8h_1a66158274373829ef7c8694995a9d6929" prot="public" static="no">
+        <type>MovableJointImpl&lt; 4, 4 &gt;</type>
+        <definition>typedef MovableJointImpl&lt;4,4&gt; iDynTree::MovableJointImpl4</definition>
+        <argsstring></argsstring>
+        <name>MovableJointImpl4</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/MovableJointImpl.h" line="167" column="30" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="167" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="MovableJointImpl_8h_1a5b8dfe13ce097fa3e505f492b7906c63" prot="public" static="no">
+        <type>MovableJointImpl&lt; 5, 5 &gt;</type>
+        <definition>typedef MovableJointImpl&lt;5,5&gt; iDynTree::MovableJointImpl5</definition>
+        <argsstring></argsstring>
+        <name>MovableJointImpl5</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/MovableJointImpl.h" line="168" column="30" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="168" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="MovableJointImpl_8h_1af1c9c077a2177994db5ee45257af1d48" prot="public" static="no">
+        <type>MovableJointImpl&lt; 6, 6 &gt;</type>
+        <definition>typedef MovableJointImpl&lt;6,6&gt; iDynTree::MovableJointImpl6</definition>
+        <argsstring></argsstring>
+        <name>MovableJointImpl6</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/MovableJointImpl.h" line="169" column="30" bodyfile="iDynTree/Model/MovableJointImpl.h" bodystart="169" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/MovableJointImpl.h"/>
+  </compounddef>
+</doxygen>

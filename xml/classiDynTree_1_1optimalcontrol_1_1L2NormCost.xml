@@ -1,0 +1,871 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimalcontrol_1_1L2NormCost" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::optimalcontrol::L2NormCost</compoundname>
+    <basecompoundref refid="classiDynTree_1_1optimalcontrol_1_1Cost" prot="public" virt="non-virtual">iDynTree::optimalcontrol::Cost</basecompoundref>
+    <includes local="no">iDynTree/L2NormCost.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a8cf2638eab66bd25d978a25aebaf2e3d" prot="private" static="no" mutable="no">
+        <type>L2NormCostImplementation *</type>
+        <definition>L2NormCostImplementation* iDynTree::optimalcontrol::L2NormCost::m_pimpl</definition>
+        <argsstring></argsstring>
+        <name>m_pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="41" column="38" bodyfile="iDynTree/L2NormCost.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a129cc600b320501343ddb583e25149b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::L2NormCost::L2NormCost</definition>
+        <argsstring>(const std::string &amp;name, unsigned int stateDimension, unsigned int controlDimension)</argsstring>
+        <name>L2NormCost</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>stateDimension</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>controlDimension</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="45" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a4a596f8df129f4972905d25782df29aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::L2NormCost::L2NormCost</definition>
+        <argsstring>(const std::string &amp;name, const MatrixDynSize &amp;stateSelector, const MatrixDynSize &amp;controlSelector)</argsstring>
+        <name>L2NormCost</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>stateSelector</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>controlSelector</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="47" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a827513852904995430db8b99bc7febb6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::L2NormCost::L2NormCost</definition>
+        <argsstring>(const std::string &amp;name, const IndexRange &amp;stateSelector, unsigned int totalStateDimension, const IndexRange &amp;controlSelector, unsigned int totalControlDimension)</argsstring>
+        <name>L2NormCost</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structiDynTree_1_1IndexRange" kindref="compound">IndexRange</ref> &amp;</type>
+          <declname>stateSelector</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>totalStateDimension</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structiDynTree_1_1IndexRange" kindref="compound">IndexRange</ref> &amp;</type>
+          <declname>controlSelector</declname>
+        </param>
+        <param>
+          <type>unsigned int</type>
+          <declname>totalControlDimension</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="49" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1ad897190eb9467a68c28de85128588550" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::L2NormCost::L2NormCost</definition>
+        <argsstring>(const L2NormCost &amp;other)=delete</argsstring>
+        <name>L2NormCost</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost" kindref="compound">L2NormCost</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="52" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1ae6dfb58aaf066a2a3365e0df355aa117" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::L2NormCost::~L2NormCost</definition>
+        <argsstring>()</argsstring>
+        <name>~L2NormCost</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="54" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a58f5478e3342aed232a87841678308fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::L2NormCost::setStateWeight</definition>
+        <argsstring>(const MatrixDynSize &amp;stateWeights)</argsstring>
+        <name>setStateWeight</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>stateWeights</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="56" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a2dba183b88f4839c919770425c6fdcd7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::L2NormCost::setStateWeight</definition>
+        <argsstring>(const VectorDynSize &amp;stateWeights)</argsstring>
+        <name>setStateWeight</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>stateWeights</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="58" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1ae96ca55b2de34d54df735ca217653d89" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::L2NormCost::setStateDesiredPoint</definition>
+        <argsstring>(const VectorDynSize &amp;desiredPoint)</argsstring>
+        <name>setStateDesiredPoint</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>desiredPoint</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="60" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a757e141da2f2cb07a21da1f2590ad61e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::L2NormCost::setStateDesiredTrajectory</definition>
+        <argsstring>(std::shared_ptr&lt; TimeVaryingVector &gt; stateDesiredTrajectory)</argsstring>
+        <name>setStateDesiredTrajectory</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">TimeVaryingVector</ref> &gt;</type>
+          <declname>stateDesiredTrajectory</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="62" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a49d38bf02747c1389b5caf507574a686" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::L2NormCost::setControlWeight</definition>
+        <argsstring>(const MatrixDynSize &amp;controlWeights)</argsstring>
+        <name>setControlWeight</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>controlWeights</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="64" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a0744764fd4805b658691eccd9010f2b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::L2NormCost::setControlWeight</definition>
+        <argsstring>(const VectorDynSize &amp;controlWeights)</argsstring>
+        <name>setControlWeight</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>controlWeights</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="66" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1ab8e1fe588d944b161c1f0f537476faae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::L2NormCost::setControlDesiredPoint</definition>
+        <argsstring>(const VectorDynSize &amp;desiredPoint)</argsstring>
+        <name>setControlDesiredPoint</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>desiredPoint</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="68" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a350103a7b08ce9018cacc4ee85ce740b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::L2NormCost::setControlDesiredTrajectory</definition>
+        <argsstring>(std::shared_ptr&lt; TimeVaryingVector &gt; controlDesiredTrajectory)</argsstring>
+        <name>setControlDesiredTrajectory</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">TimeVaryingVector</ref> &gt;</type>
+          <declname>controlDesiredTrajectory</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="70" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1acd78337156f1e67fd4186ec44819d29e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::L2NormCost::updatStateSelector</definition>
+        <argsstring>(const MatrixDynSize &amp;stateSelector)</argsstring>
+        <name>updatStateSelector</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>stateSelector</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="72" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1acdd749180561fae6ceb63aa609bd5e22" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::L2NormCost::updatControlSelector</definition>
+        <argsstring>(const MatrixDynSize &amp;controlSelector)</argsstring>
+        <name>updatControlSelector</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>controlSelector</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="74" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a767f6dfb60b68f8b42039f90681ca7ae" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::L2NormCost::costEvaluation</definition>
+        <argsstring>(double time, const iDynTree::VectorDynSize &amp;state, const iDynTree::VectorDynSize &amp;control, double &amp;costValue) final</argsstring>
+        <name>costEvaluation</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1Cost_1a1bb0880783d8f4ed6baff2b922a571f0">costEvaluation</reimplements>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>costValue</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the cost function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the cost is evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state value with which the cost has to be evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">control</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The control value with which the cost has to be evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">costValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The cost value given the above inputs. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="76" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a2a1676b41897f303239d940fb5251069" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::L2NormCost::costFirstPartialDerivativeWRTState</definition>
+        <argsstring>(double time, const iDynTree::VectorDynSize &amp;state, const iDynTree::VectorDynSize &amp;, iDynTree::VectorDynSize &amp;partialDerivative) final</argsstring>
+        <name>costFirstPartialDerivativeWRTState</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1Cost_1a632e5dfae0ce8c117ea636daf417c5bd">costFirstPartialDerivativeWRTState</reimplements>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>partialDerivative</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate cost first partial derivative wrt the state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It is the result of <formula id="75">$\frac{\partial g(t, x, u)}{\partial x}$</formula> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">control</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The control value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">partialDerivative</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="81" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a2643cfc2bfeea418ac078008cf958044" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::L2NormCost::costFirstPartialDerivativeWRTControl</definition>
+        <argsstring>(double time, const iDynTree::VectorDynSize &amp;, const iDynTree::VectorDynSize &amp;control, iDynTree::VectorDynSize &amp;partialDerivative) final</argsstring>
+        <name>costFirstPartialDerivativeWRTControl</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1Cost_1acce9d7b5bb53e71d0c2e55340636d531">costFirstPartialDerivativeWRTControl</reimplements>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>partialDerivative</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate cost first partial derivative wrt the control variables. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It is the result of <formula id="76">$\frac{\partial g(t, x, u)}{\partial u}$</formula> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">control</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The control value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">partialDerivative</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="85" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1aafe8b0119577c71b8be51f0764a0337a" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::L2NormCost::costSecondPartialDerivativeWRTState</definition>
+        <argsstring>(double, const iDynTree::VectorDynSize &amp;state, const iDynTree::VectorDynSize &amp;, iDynTree::MatrixDynSize &amp;partialDerivative) final</argsstring>
+        <name>costSecondPartialDerivativeWRTState</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1Cost_1a79f931220587a1922770067c0833f0a9">costSecondPartialDerivativeWRTState</reimplements>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>partialDerivative</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate cost second partial derivative wrt the state variables. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It is the result of <formula id="77">$\frac{\partial^2 g(t, x, u)}{\partial x^2}$</formula> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">control</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The control value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">partialDerivative</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="89" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1ae323109122ca5e29a3abad40251cc7c7" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::L2NormCost::costSecondPartialDerivativeWRTControl</definition>
+        <argsstring>(double, const iDynTree::VectorDynSize &amp;, const iDynTree::VectorDynSize &amp;control, iDynTree::MatrixDynSize &amp;partialDerivative) final</argsstring>
+        <name>costSecondPartialDerivativeWRTControl</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1Cost_1a9870c1daad9a147705e3d44be7357a2e">costSecondPartialDerivativeWRTControl</reimplements>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>partialDerivative</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate cost second partial derivative wrt the control. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It is the result of <formula id="78">$\frac{\partial^2 g(t, x, u)}{\partial u^2}$</formula> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">control</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The control value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">partialDerivative</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="93" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a08ce88799d5efb59e04f10078ff89461" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::L2NormCost::costSecondPartialDerivativeWRTStateControl</definition>
+        <argsstring>(double, const iDynTree::VectorDynSize &amp;state, const iDynTree::VectorDynSize &amp;control, iDynTree::MatrixDynSize &amp;partialDerivative) final</argsstring>
+        <name>costSecondPartialDerivativeWRTStateControl</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1Cost_1abb75feccd10750af47e792723e187c82">costSecondPartialDerivativeWRTStateControl</reimplements>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>partialDerivative</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate cost second partial derivative wrt the state and control. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It is the result of <formula id="79">$\frac{\partial^2 g(t, x, u)}{\partial x \partial u}$</formula>, thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">control</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The control value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">partialDerivative</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="98" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a45ad1128dd1578ab803a17af4afd8321" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::L2NormCost::costSecondPartialDerivativeWRTStateSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;stateSparsity) final</argsstring>
+        <name>costSecondPartialDerivativeWRTStateSparsity</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1Cost_1a4b1d17aa266ad7bcdc421a71aa141d46">costSecondPartialDerivativeWRTStateSparsity</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>stateSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the state hessian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>No check is performed in the indeces. They need to be in the range [0, stateDimension) and [0, stateDimension) respectively. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">stateSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the gradient wrt state variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="103" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a4a81990229431b7f94ffd2e5f870a15d" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::L2NormCost::costSecondPartialDerivativeWRTStateControlSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;stateControlSparsity) final</argsstring>
+        <name>costSecondPartialDerivativeWRTStateControlSparsity</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1Cost_1ad4a1b35416b75e61b2491152a784f175">costSecondPartialDerivativeWRTStateControlSparsity</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>stateControlSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the mixed hessian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>No check is performed in the indeces. They need to be in the range [0, stateDimension) and [0, controlDimension) respectively. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">stateControlSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the gradient wrt state and control variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="105" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1acf527d676e32d5c4d62e4ed63c7bdc64" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::L2NormCost::costSecondPartialDerivativeWRTControlSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;controlSparsity) final</argsstring>
+        <name>costSecondPartialDerivativeWRTControlSparsity</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1Cost_1a983297b5309a3d379935733dcb8a5ddf">costSecondPartialDerivativeWRTControlSparsity</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>controlSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the control hessian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>No check is performed in the indeces. They need to be in the range [0, constraintDimension) and [0, controlDimension) respectively. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">controlSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the gradient wrt control variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/L2NormCost.h" line="107" column="26"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::optimalcontrol::L2NormCost</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::optimalcontrol::Cost</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1Cost"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>iDynTree::optimalcontrol::L2NormCost</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::optimalcontrol::Cost</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1Cost"/>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/L2NormCost.h" line="39" column="9" bodyfile="iDynTree/L2NormCost.h" bodystart="39" bodyend="108"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Cost_1a97ea5427f72a47d5abd6b37ca71a51f5" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>Cost</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a767f6dfb60b68f8b42039f90681ca7ae" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>costEvaluation</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a2643cfc2bfeea418ac078008cf958044" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>costFirstPartialDerivativeWRTControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a2a1676b41897f303239d940fb5251069" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>costFirstPartialDerivativeWRTState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1ae323109122ca5e29a3abad40251cc7c7" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>costSecondPartialDerivativeWRTControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1acf527d676e32d5c4d62e4ed63c7bdc64" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>costSecondPartialDerivativeWRTControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1aafe8b0119577c71b8be51f0764a0337a" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>costSecondPartialDerivativeWRTState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a08ce88799d5efb59e04f10078ff89461" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>costSecondPartialDerivativeWRTStateControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a4a81990229431b7f94ffd2e5f870a15d" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>costSecondPartialDerivativeWRTStateControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a45ad1128dd1578ab803a17af4afd8321" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>costSecondPartialDerivativeWRTStateSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a129cc600b320501343ddb583e25149b3" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>L2NormCost</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a4a596f8df129f4972905d25782df29aa" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>L2NormCost</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a827513852904995430db8b99bc7febb6" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>L2NormCost</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1ad897190eb9467a68c28de85128588550" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>L2NormCost</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a8cf2638eab66bd25d978a25aebaf2e3d" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>m_pimpl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Cost_1aaaea0b41a2a114e1efcd42e58e9bbb78" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>name</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1ab8e1fe588d944b161c1f0f537476faae" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>setControlDesiredPoint</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a350103a7b08ce9018cacc4ee85ce740b" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>setControlDesiredTrajectory</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a49d38bf02747c1389b5caf507574a686" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>setControlWeight</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a0744764fd4805b658691eccd9010f2b5" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>setControlWeight</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1ae96ca55b2de34d54df735ca217653d89" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>setStateDesiredPoint</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a757e141da2f2cb07a21da1f2590ad61e" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>setStateDesiredTrajectory</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a58f5478e3342aed232a87841678308fb" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>setStateWeight</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a2dba183b88f4839c919770425c6fdcd7" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>setStateWeight</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1acdd749180561fae6ceb63aa609bd5e22" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>updatControlSelector</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1acd78337156f1e67fd4186ec44819d29e" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>updatStateSelector</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Cost_1aa956dac8cebf92d37d7682b5be30ed32" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>~Cost</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1ae6dfb58aaf066a2a3365e0df355aa117" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>~L2NormCost</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

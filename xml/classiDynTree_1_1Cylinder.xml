@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1Cylinder" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::Cylinder</compoundname>
+    <basecompoundref refid="classiDynTree_1_1SolidShape" prot="public" virt="non-virtual">iDynTree::SolidShape</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1Cylinder_1a75133a2141be7b8e56b314032774964c" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::Cylinder::length</definition>
+        <argsstring></argsstring>
+        <name>length</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="228" column="16" bodyfile="iDynTree/Model/SolidShapes.h" bodystart="228" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Cylinder_1abc2eb4a54c374743547791509fe532a4" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::Cylinder::radius</definition>
+        <argsstring></argsstring>
+        <name>radius</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="229" column="16" bodyfile="iDynTree/Model/SolidShapes.h" bodystart="229" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1Cylinder_1a29b17e1bb131bd6ffbb784a6406e79ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::Cylinder::~Cylinder</definition>
+        <argsstring>()</argsstring>
+        <name>~Cylinder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="204" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Cylinder_1a04da4696382d74f3e63456189c9495bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1SolidShape" kindref="compound">SolidShape</ref> *</type>
+        <definition>virtual SolidShape* iDynTree::Cylinder::clone</definition>
+        <argsstring>()</argsstring>
+        <name>clone</name>
+        <reimplements refid="classiDynTree_1_1SolidShape_1a0e17798de0579d18260b629fdd8b09a8">clone</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="205" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Cylinder_1a15dab5b1b1a07f61ab0dc9e200245868" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::Cylinder::getLength</definition>
+        <argsstring>() const</argsstring>
+        <name>getLength</name>
+        <briefdescription>
+<para>Returns the current cylinder length. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="210" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Cylinder_1a52fbfb79a56776e8e92e4a69b9f77557" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::Cylinder::setLength</definition>
+        <argsstring>(double length)</argsstring>
+        <name>setLength</name>
+        <param>
+          <type>double</type>
+          <declname>length</declname>
+        </param>
+        <briefdescription>
+<para>Sets the cylinder length. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="215" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Cylinder_1a7f40fff40b7c1ff7721f78911f5b752d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::Cylinder::getRadius</definition>
+        <argsstring>() const</argsstring>
+        <name>getRadius</name>
+        <briefdescription>
+<para>Returns the current cylinder radius. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="220" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Cylinder_1a850f9a1e41afa3c1584633a30ec3a8ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::Cylinder::setRadius</definition>
+        <argsstring>(double radius)</argsstring>
+        <name>setRadius</name>
+        <param>
+          <type>double</type>
+          <declname>radius</declname>
+        </param>
+        <briefdescription>
+<para>Sets the cylinder radius. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="225" column="14"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::SolidShape</label>
+        <link refid="classiDynTree_1_1SolidShape"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::Cylinder</label>
+        <link refid="classiDynTree_1_1Cylinder"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>iDynTree::SolidShape</label>
+        <link refid="classiDynTree_1_1SolidShape"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::Cylinder</label>
+        <link refid="classiDynTree_1_1Cylinder"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Model/SolidShapes.h" line="201" column="5" bodyfile="iDynTree/Model/SolidShapes.h" bodystart="202" bodyend="230"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1SolidShape_1a9d8ee4804ecf2c25181a65f1f44b9a3b" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>asBox</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a1249bfe8e2fefc34b749c7878b83e462" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>asBox</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a0afa36f27380de580ca2d37ae79d66dc" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>asCylinder</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1aa7d4851d00a44b21e87d85ecfe4ece4c" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>asCylinder</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1abce98ace11abc423faab5418fe74b72a" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>asExternalMesh</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a18dc4e95d85822018507b4a813f69340" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>asExternalMesh</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1afb0d282d22dce28a6f45de0c1d81d494" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>asSphere</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a01f73fdb47553ba4f1d817a6feb6beef" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>asSphere</name></member>
+      <member refid="classiDynTree_1_1Cylinder_1a04da4696382d74f3e63456189c9495bb" prot="public" virt="virtual"><scope>iDynTree::Cylinder</scope><name>clone</name></member>
+      <member refid="classiDynTree_1_1Cylinder_1a15dab5b1b1a07f61ab0dc9e200245868" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>getLength</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1adf7c9968426d13ca501bf91eb3440d65" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>getLink_H_geometry</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a4b0b5a8cc055ce533bbd79f804bae432" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>getMaterial</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a0c3339721b95e2e969f7725d21c25e40" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>getName</name></member>
+      <member refid="classiDynTree_1_1Cylinder_1a7f40fff40b7c1ff7721f78911f5b752d" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>getRadius</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a661c33c6139a4cde9c9eeb55ebcd915e" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>isBox</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a8218783b444c4f651ebc5517399a04bd" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>isCylinder</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1aeef66627d452a2b192c9d62ac6e6b908" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>isExternalMesh</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a79698fa4e4ec3278dcb1f22dfaee0c04" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>isMaterialSet</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1ad0773a7e9c79fb39689fe57776c6f8b3" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>isNameValid</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a8ba065f0e60ad78baad071a3a870faf6" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>isSphere</name></member>
+      <member refid="classiDynTree_1_1Cylinder_1a75133a2141be7b8e56b314032774964c" prot="private" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>length</name></member>
+      <member refid="classiDynTree_1_1Cylinder_1abc2eb4a54c374743547791509fe532a4" prot="private" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>radius</name></member>
+      <member refid="classiDynTree_1_1Cylinder_1a52fbfb79a56776e8e92e4a69b9f77557" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>setLength</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a99c8cb2ba950c03a59302428fc52cf30" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>setLink_H_geometry</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a0a3a0215c4d1d729e3dfb284232037fe" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>setMaterial</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a6850e739d426711814a1563fea31bce3" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>setName</name></member>
+      <member refid="classiDynTree_1_1Cylinder_1a850f9a1e41afa3c1584633a30ec3a8ef" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>setRadius</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a3c9b74bfd7460cce67d604f66517a44c" prot="public" virt="non-virtual"><scope>iDynTree::Cylinder</scope><name>SolidShape</name></member>
+      <member refid="classiDynTree_1_1Cylinder_1a29b17e1bb131bd6ffbb784a6406e79ee" prot="public" virt="virtual"><scope>iDynTree::Cylinder</scope><name>~Cylinder</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a3ed24e3713a3832408ee0ee8b95dfa82" prot="public" virt="pure-virtual"><scope>iDynTree::Cylinder</scope><name>~SolidShape</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

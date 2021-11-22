@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespaceiDynTree_1_1details" kind="namespace" language="C++">
+    <compoundname>iDynTree::details</compoundname>
+    <innerclass refid="structiDynTree_1_1details_1_1is__span__oracle" prot="public">iDynTree::details::is_span_oracle</innerclass>
+    <innerclass refid="structiDynTree_1_1details_1_1is__span__oracle_3_01iDynTree_1_1Span_3_01ElementType_00_01Extent_01_4_01_4" prot="public">iDynTree::details::is_span_oracle&lt; iDynTree::Span&lt; ElementType, Extent &gt; &gt;</innerclass>
+    <innerclass refid="structiDynTree_1_1details_1_1is__span" prot="public">iDynTree::details::is_span</innerclass>
+    <innerclass refid="structiDynTree_1_1details_1_1is__std__array__oracle" prot="public">iDynTree::details::is_std_array_oracle</innerclass>
+    <innerclass refid="structiDynTree_1_1details_1_1is__std__array__oracle_3_01std_1_1array_3_01ElementType_00_01Extent_01_4_01_4" prot="public">iDynTree::details::is_std_array_oracle&lt; std::array&lt; ElementType, Extent &gt; &gt;</innerclass>
+    <innerclass refid="structiDynTree_1_1details_1_1is__std__array" prot="public">iDynTree::details::is_std_array</innerclass>
+    <innerclass refid="structiDynTree_1_1details_1_1is__allowed__extent__conversion" prot="public">iDynTree::details::is_allowed_extent_conversion</innerclass>
+    <innerclass refid="structiDynTree_1_1details_1_1is__allowed__element__type__conversion" prot="public">iDynTree::details::is_allowed_element_type_conversion</innerclass>
+    <innerclass refid="classiDynTree_1_1details_1_1span__iterator" prot="public">iDynTree::details::span_iterator</innerclass>
+    <innerclass refid="classiDynTree_1_1details_1_1extent__type" prot="public">iDynTree::details::extent_type</innerclass>
+    <innerclass refid="classiDynTree_1_1details_1_1extent__type_3_01dynamic__extent_01_4" prot="public">iDynTree::details::extent_type&lt; dynamic_extent &gt;</innerclass>
+    <innerclass refid="structiDynTree_1_1details_1_1calculate__subspan__type" prot="public">iDynTree::details::calculate_subspan_type</innerclass>
+    <innerclass refid="structiDynTree_1_1details_1_1calculate__byte__size" prot="public">iDynTree::details::calculate_byte_size</innerclass>
+    <innerclass refid="structiDynTree_1_1details_1_1calculate__byte__size_3_01ElementType_00_01dynamic__extent_01_4" prot="public">iDynTree::details::calculate_byte_size&lt; ElementType, dynamic_extent &gt;</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="Span_8h_1adf168de4de79fc034114dd1bb64d9cca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Span</type>
+          </param>
+          <param>
+            <type>bool</type>
+            <declname>IsConst</declname>
+            <defname>IsConst</defname>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR <ref refid="classiDynTree_1_1details_1_1span__iterator" kindref="compound">span_iterator</ref>&lt; <ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref>, IsConst &gt;</type>
+        <definition>IDYNTREE_CONSTEXPR span_iterator&lt;Span, IsConst&gt; iDynTree::details::operator+</definition>
+        <argsstring>(typename span_iterator&lt; Span, IsConst &gt;::difference_type n, span_iterator&lt; Span, IsConst &gt; rhs)</argsstring>
+        <name>operator+</name>
+        <param>
+          <type>typename <ref refid="classiDynTree_1_1details_1_1span__iterator" kindref="compound">span_iterator</ref>&lt; <ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref>, IsConst &gt;::difference_type</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1details_1_1span__iterator" kindref="compound">span_iterator</ref>&lt; <ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref>, IsConst &gt;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="323" column="5" bodyfile="iDynTree/Core/Span.h" bodystart="323" bodyend="327"/>
+      </memberdef>
+      <memberdef kind="function" id="Span_8h_1a55d28afb3a3294ddb652f947185eba19" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Span</type>
+          </param>
+          <param>
+            <type>bool</type>
+            <declname>IsConst</declname>
+            <defname>IsConst</defname>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR <ref refid="classiDynTree_1_1details_1_1span__iterator" kindref="compound">span_iterator</ref>&lt; <ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref>, IsConst &gt;</type>
+        <definition>IDYNTREE_CONSTEXPR span_iterator&lt;Span, IsConst&gt; iDynTree::details::operator-</definition>
+        <argsstring>(typename span_iterator&lt; Span, IsConst &gt;::difference_type n, span_iterator&lt; Span, IsConst &gt; rhs)</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>typename <ref refid="classiDynTree_1_1details_1_1span__iterator" kindref="compound">span_iterator</ref>&lt; <ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref>, IsConst &gt;::difference_type</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1details_1_1span__iterator" kindref="compound">span_iterator</ref>&lt; <ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref>, IsConst &gt;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="331" column="5" bodyfile="iDynTree/Core/Span.h" bodystart="331" bodyend="335"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/Span.h" line="136" column="1"/>
+  </compounddef>
+</doxygen>

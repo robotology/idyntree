@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1SpanUtils_1_1has__data__method" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::SpanUtils::has_data_method</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::false_type</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename</type>
+        <defval>void</defval>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::SpanUtils::has_data_method&lt; T, typename &gt;</label>
+        <link refid="structiDynTree_1_1SpanUtils_1_1has__data__method"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::false_type</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>iDynTree::SpanUtils::has_data_method&lt; T, typename &gt;</label>
+        <link refid="structiDynTree_1_1SpanUtils_1_1has__data__method"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::false_type</label>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Core/Span.h" line="107" column="15" bodyfile="iDynTree/Core/Span.h" bodystart="108" bodyend="109"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

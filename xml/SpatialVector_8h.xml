@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="SpatialVector_8h" kind="file" language="C++">
+    <compoundname>SpatialVector.h</compoundname>
+    <includes refid="Position_8h" local="yes">Position.h</includes>
+    <includes refid="Rotation_8h" local="yes">Rotation.h</includes>
+    <includes refid="Utils_8h" local="yes">Utils.h</includes>
+    <includes refid="GeomVector3_8h" local="no">iDynTree/Core/GeomVector3.h</includes>
+    <includes local="no">iostream</includes>
+    <includes local="no">sstream</includes>
+    <includedby refid="SpatialForceVector_8h" local="no">iDynTree/Core/SpatialForceVector.h</includedby>
+    <includedby refid="SpatialMotionVector_8h" local="no">iDynTree/Core/SpatialMotionVector.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/Core/SpatialVector.h</label>
+        <link refid="SpatialVector_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>sstream</label>
+      </node>
+      <node id="2">
+        <label>iostream</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1SpatialMotionForceVectorT__traits" prot="public">iDynTree::SpatialMotionForceVectorT_traits</innerclass>
+    <innerclass refid="classiDynTree_1_1SpatialMotionForceVectorT__traits_3_01SpatialMotionVector_01_4" prot="public">iDynTree::SpatialMotionForceVectorT_traits&lt; SpatialMotionVector &gt;</innerclass>
+    <innerclass refid="classiDynTree_1_1SpatialMotionForceVectorT__traits_3_01SpatialForceVector_01_4" prot="public">iDynTree::SpatialMotionForceVectorT_traits&lt; SpatialForceVector &gt;</innerclass>
+    <innerclass refid="structiDynTree_1_1DualSpace" prot="public">iDynTree::DualSpace</innerclass>
+    <innerclass refid="structiDynTree_1_1DualSpace_3_01SpatialMotionVector_01_4" prot="public">iDynTree::DualSpace&lt; SpatialMotionVector &gt;</innerclass>
+    <innerclass refid="structiDynTree_1_1DualSpace_3_01SpatialForceVector_01_4" prot="public">iDynTree::DualSpace&lt; SpatialForceVector &gt;</innerclass>
+    <innerclass refid="classiDynTree_1_1SpatialVector" prot="public">iDynTree::SpatialVector</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="group__iDynTreeCore_1ga92610f375c318c6d08be7c5fb29c7222" prot="public" static="no">
+        <name>SPATIALVECTOR_TEMPLATE_HDR</name>
+        <initializer>template &lt;typename DerivedSpatialVecT&gt;</initializer>
+        <briefdescription>
+<para>Class providing an interface to any spatial motion or force vector, which provides raw coordinates. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>A motion spatial vector can be used to describe twist, spatial acceleration, and derivatives.</para>
+<para>A force spatial vector can be used to describe spatial momentum, wrench, and derivatives.</para>
+<para><simplesect kind="note"><para>in iDynTree, the spatial vector follows this serialization: the first three elements are the linear part and the second three elements are the angular part. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="76" column="9" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="SpatialVector_8h_1a13ae9b40bef45da6de6dc13e80735b9d" prot="public" static="no">
+        <name>SPATIALVECTOR_INSTANCE_HDR</name>
+        <initializer>SpatialVector&lt;DerivedSpatialVecT&gt;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="79" column="9" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/SpatialVector.h"/>
+  </compounddef>
+</doxygen>

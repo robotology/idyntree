@@ -1,0 +1,319 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="PredictSensorsMeasurements_8h" kind="file" language="C++">
+    <compoundname>PredictSensorsMeasurements.h</compoundname>
+    <includes refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includes>
+    <includes refid="GeomVector3_8h" local="no">iDynTree/Core/GeomVector3.h</includes>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__iDynTreeSensors_1gacf87de6a0acc7c79369e4ea587ef19bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::predictSensorsMeasurements</definition>
+        <argsstring>(const Model &amp;model, const SensorsList &amp;sensorList, const Traversal &amp;traversal, const FreeFloatingPos &amp;robotPos, const FreeFloatingVel &amp;robotVel, const FreeFloatingAcc &amp;robotAcc, const LinAcceleration &amp;gravity, const LinkNetExternalWrenches &amp;externalWrenches, FreeFloatingAcc &amp;buf_properRobotAcc, LinkPositions &amp;buf_linkPos, LinkVelArray &amp;buf_linkVel, LinkAccArray &amp;buf_linkProperAcc, LinkInternalWrenches &amp;buf_internalWrenches, FreeFloatingGeneralizedTorques &amp;buf_outputTorques, SensorsMeasurements &amp;predictedMeasurement)</argsstring>
+        <name>predictSensorsMeasurements</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const SensorsList &amp;</type>
+          <declname>sensorList</declname>
+        </param>
+        <param>
+          <type>const Traversal &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const FreeFloatingPos &amp;</type>
+          <declname>robotPos</declname>
+        </param>
+        <param>
+          <type>const FreeFloatingVel &amp;</type>
+          <declname>robotVel</declname>
+        </param>
+        <param>
+          <type>const FreeFloatingAcc &amp;</type>
+          <declname>robotAcc</declname>
+        </param>
+        <param>
+          <type>const LinAcceleration &amp;</type>
+          <declname>gravity</declname>
+        </param>
+        <param>
+          <type>const LinkNetExternalWrenches &amp;</type>
+          <declname>externalWrenches</declname>
+        </param>
+        <param>
+          <type>FreeFloatingAcc &amp;</type>
+          <declname>buf_properRobotAcc</declname>
+        </param>
+        <param>
+          <type>LinkPositions &amp;</type>
+          <declname>buf_linkPos</declname>
+        </param>
+        <param>
+          <type>LinkVelArray &amp;</type>
+          <declname>buf_linkVel</declname>
+        </param>
+        <param>
+          <type>LinkAccArray &amp;</type>
+          <declname>buf_linkProperAcc</declname>
+        </param>
+        <param>
+          <type>LinkInternalWrenches &amp;</type>
+          <declname>buf_internalWrenches</declname>
+        </param>
+        <param>
+          <type>FreeFloatingGeneralizedTorques &amp;</type>
+          <declname>buf_outputTorques</declname>
+        </param>
+        <param>
+          <type>SensorsMeasurements &amp;</type>
+          <declname>predictedMeasurement</declname>
+        </param>
+        <briefdescription>
+<para>Predict the measurement of a set of sensors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Given a SensorList object describing a list of sensor of a model fill the output argument predictedMeasurement with the predicted measurement of the sensors consistent with the state and the acceleration/torques and forces of the <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref>.</para>
+<para>This function takes in input the internal buffers used for the computation to avoid dynamic memory allocation.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the model used to predict the sensor measurements. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sensorList</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the sensors list used to predict the sensors measurements. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">traversal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> used for predict the sensor measurements. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">robotPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the position of the model used for prediction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">robotVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the velocity of the model used for prediction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">robotAcc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the acceleration of the model used for prediction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gravity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the gravity acceleration (in world frame) used for prediction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">externalWrenches</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the net external wrench acting on each link. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">buf_properRobotAcc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>internal buffer, storing the proper acceleration of the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">buf_linkPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>internal buffer, storing the position of every link in the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">buf_linkVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>internal buffer, storing the velocity of every link in the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">buf_linkProperAcc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>internal buffer, storing the proper acceleration of every link in the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">buf_internalWrenches</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>internal buffer, storing the internal wrenches. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">buf_outputTorques</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>internal buffer, storing the generalized joint torques. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">predictedMeasurement</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the predicted measurements for the sensors.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sensors in the list are all valid </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/PredictSensorsMeasurements.h" line="69" column="11" declfile="iDynTree/Sensors/PredictSensorsMeasurements.h" declline="69" declcolumn="11"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeSensors_1gaa68c8cac6b85223f729cd8855627d35e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::predictSensorsMeasurementsFromRawBuffers</definition>
+        <argsstring>(const Model &amp;model, const SensorsList &amp;sensorList, const Traversal &amp;traversal, const LinkVelArray &amp;buf_linkVel, const LinkAccArray &amp;buf_linkProperAcc, const LinkInternalWrenches &amp;buf_internalWrenches, SensorsMeasurements &amp;predictedMeasurement)</argsstring>
+        <name>predictSensorsMeasurementsFromRawBuffers</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const SensorsList &amp;</type>
+          <declname>sensorList</declname>
+        </param>
+        <param>
+          <type>const Traversal &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const LinkVelArray &amp;</type>
+          <declname>buf_linkVel</declname>
+        </param>
+        <param>
+          <type>const LinkAccArray &amp;</type>
+          <declname>buf_linkProperAcc</declname>
+        </param>
+        <param>
+          <type>const LinkInternalWrenches &amp;</type>
+          <declname>buf_internalWrenches</declname>
+        </param>
+        <param>
+          <type>SensorsMeasurements &amp;</type>
+          <declname>predictedMeasurement</declname>
+        </param>
+        <briefdescription>
+<para>Predict the measurement of a set of sensors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Helper function that works on buffers already compute with Dynamics functions</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the model used to predict the sensor measurements. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sensorList</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the sensors list used to predict the sensors measurements. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">traversal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> used for predict the sensor measurements. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">buf_linkVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>internal buffer, storing the velocity of every link in the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">buf_linkProperAcc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>internal buffer, storing the proper acceleration of every link in the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">buf_internalWrenches</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>internal buffer, storing the internal wrenches. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">predictedMeasurement</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the predicted measurements for the sensors.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sensors in the list are all valid </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/PredictSensorsMeasurements.h" line="102" column="11" declfile="iDynTree/Sensors/PredictSensorsMeasurements.h" declline="102" declcolumn="11"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Sensors/PredictSensorsMeasurements.h"/>
+  </compounddef>
+</doxygen>

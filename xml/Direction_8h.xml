@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="Direction_8h" kind="file" language="C++">
+    <compoundname>Direction.h</compoundname>
+    <includes local="no">string</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
+    <includes refid="Utils_8h" local="no">iDynTree/Core/Utils.h</includes>
+    <includedby refid="InverseKinematics_8h" local="no">iDynTree/InverseKinematics.h</includedby>
+    <includedby refid="Visualizer_8h" local="no">iDynTree/Visualizer.h</includedby>
+    <includedby refid="ObserverThread_8h" local="no">ObserverThread.h</includedby>
+    <includedby refid="Axis_8h" local="no">iDynTree/Core/Axis.h</includedby>
+    <includedby refid="YARPConversionsImplementation_8h" local="no">iDynTree/yarp/YARPConversionsImplementation.h</includedby>
+    <includedby refid="AttitudeMahonyFilter_8h" local="no">iDynTree/Estimation/AttitudeMahonyFilter.h</includedby>
+    <includedby refid="AttitudeQuaternionEKF_8h" local="no">iDynTree/Estimation/AttitudeQuaternionEKF.h</includedby>
+    <includedby refid="BerdyHelper_8h" local="no">iDynTree/Estimation/BerdyHelper.h</includedby>
+    <includedby refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/Estimation/ExternalWrenchesEstimation.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>string</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/Core/Direction.h</label>
+        <link refid="Direction_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1Direction" prot="public">iDynTree::Direction</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/Direction.h"/>
+  </compounddef>
+</doxygen>

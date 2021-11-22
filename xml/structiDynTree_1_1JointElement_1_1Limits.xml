@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1JointElement_1_1Limits" kind="struct" language="C++" prot="private">
+    <compoundname>iDynTree::JointElement::Limits</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1JointElement_1_1Limits_1ae9d791d5f1002fe6307c34680b21a230" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::JointElement::Limits::positionLower</definition>
+        <argsstring></argsstring>
+        <name>positionLower</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="56" column="16" bodyfile="private/JointElement.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1JointElement_1_1Limits_1a35617d7eec38445b76e30ff7d035a861" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::JointElement::Limits::positionUpper</definition>
+        <argsstring></argsstring>
+        <name>positionUpper</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="57" column="16" bodyfile="private/JointElement.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1JointElement_1_1Limits_1a9586747998acbb9963671488e3c6b93c" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::JointElement::Limits::effort</definition>
+        <argsstring></argsstring>
+        <name>effort</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="58" column="16" bodyfile="private/JointElement.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1JointElement_1_1Limits_1ad154ed47268fe8dda6a70d9599f98294" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::JointElement::Limits::velocity</definition>
+        <argsstring></argsstring>
+        <name>velocity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="59" column="16" bodyfile="private/JointElement.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="private/JointElement.h" line="55" column="5" bodyfile="private/JointElement.h" bodystart="55" bodyend="60"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1JointElement_1_1Limits_1a9586747998acbb9963671488e3c6b93c" prot="public" virt="non-virtual"><scope>iDynTree::JointElement::Limits</scope><name>effort</name></member>
+      <member refid="structiDynTree_1_1JointElement_1_1Limits_1ae9d791d5f1002fe6307c34680b21a230" prot="public" virt="non-virtual"><scope>iDynTree::JointElement::Limits</scope><name>positionLower</name></member>
+      <member refid="structiDynTree_1_1JointElement_1_1Limits_1a35617d7eec38445b76e30ff7d035a861" prot="public" virt="non-virtual"><scope>iDynTree::JointElement::Limits</scope><name>positionUpper</name></member>
+      <member refid="structiDynTree_1_1JointElement_1_1Limits_1ad154ed47268fe8dda6a70d9599f98294" prot="public" virt="non-virtual"><scope>iDynTree::JointElement::Limits</scope><name>velocity</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

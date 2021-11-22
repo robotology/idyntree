@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="FreeFloatingState_8h" kind="file" language="C++">
+    <compoundname>FreeFloatingState.h</compoundname>
+    <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
+    <includes refid="Twist_8h" local="no">iDynTree/Core/Twist.h</includes>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/Core/VectorDynSize.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
+    <includes refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includes>
+    <includes refid="JointState_8h" local="no">iDynTree/Model/JointState.h</includes>
+    <includes local="no">vector</includes>
+    <includedby refid="ModelTestUtils_8h" local="no">iDynTree/Model/ModelTestUtils.h</includedby>
+    <includedby refid="BerdyHelper_8h" local="no">iDynTree/Estimation/BerdyHelper.h</includedby>
+    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h</includedby>
+    <includedby refid="GravityCompensationHelpers_8h" local="no">iDynTree/Estimation/GravityCompensationHelpers.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/Model/FreeFloatingState.h</label>
+        <link refid="FreeFloatingState_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1FreeFloatingPos" prot="public">iDynTree::FreeFloatingPos</innerclass>
+    <innerclass refid="classiDynTree_1_1FreeFloatingGeneralizedTorques" prot="public">iDynTree::FreeFloatingGeneralizedTorques</innerclass>
+    <innerclass refid="classiDynTree_1_1FreeFloatingVel" prot="public">iDynTree::FreeFloatingVel</innerclass>
+    <innerclass refid="classiDynTree_1_1FreeFloatingAcc" prot="public">iDynTree::FreeFloatingAcc</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/FreeFloatingState.h"/>
+  </compounddef>
+</doxygen>

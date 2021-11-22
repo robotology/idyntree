@@ -1,9 +1,0 @@
-<map id="iDynTree::BerdySparseMAPSolver::BerdySparseMAPSolverPimpl" name="iDynTree::BerdySparseMAPSolver::BerdySparseMAPSolverPimpl">
-<area shape="rect" id="node1" title=" " alt="" coords="916,242,1155,283"/>
-<area shape="rect" id="node2" href="$classiDynTree_1_1JointPosDoubleArray.html" title="Class for storing a vector of scalar values, one for each internal position coordinate in a model." alt="" coords="431,177,616,218"/>
-<area shape="rect" id="node3" href="$classiDynTree_1_1VectorDynSize.html" title="Class providing a simple form of vector with dynamic size." alt="" coords="5,184,187,211"/>
-<area shape="rect" id="node4" href="$classiDynTree_1_1JointDOFsDoubleArray.html" title="Class for storing a vector of scalar values, one for each internal coordinate in a model." alt="" coords="425,242,622,283"/>
-<area shape="rect" id="node5" href="$classiDynTree_1_1BerdyHelper.html" title="Helper class for computing Berdy matrices." alt="" coords="439,308,607,335"/>
-<area shape="rect" id="node6" href="$classiDynTree_1_1SparseMatrix.html" title=" " alt="" coords="421,442,625,483"/>
-<area shape="rect" id="node7" href="$classiDynTree_1_1SparseMatrix.html" title="Sparse Matrix class." alt="" coords="9,442,183,483"/>
-</map>

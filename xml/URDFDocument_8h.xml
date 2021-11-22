@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="URDFDocument_8h" kind="file" language="C++">
+    <compoundname>URDFDocument.h</compoundname>
+    <includes refid="XMLDocument_8h" local="no">iDynTree/XMLDocument.h</includes>
+    <includes refid="JointElement_8h" local="yes">JointElement.h</includes>
+    <includes refid="MaterialElement_8h" local="yes">MaterialElement.h</includes>
+    <includes refid="SensorElement_8h" local="yes">SensorElement.h</includes>
+    <includes refid="VisualElement_8h" local="yes">VisualElement.h</includes>
+    <includes refid="ModelLoader_8h" local="yes">iDynTree/ModelIO/ModelLoader.h</includes>
+    <includes refid="Model_8h" local="no">iDynTree/Model/Model.h</includes>
+    <includes refid="Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includes>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
+    <includes local="no">unordered_map</includes>
+    <incdepgraph>
+      <node id="2">
+        <label>string</label>
+      </node>
+      <node id="3">
+        <label>vector</label>
+      </node>
+      <node id="4">
+        <label>unordered_map</label>
+      </node>
+      <node id="1">
+        <label>private/URDFDocument.h</label>
+        <link refid="URDFDocument_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1URDFDocument" prot="public">iDynTree::URDFDocument</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="private/URDFDocument.h"/>
+  </compounddef>
+</doxygen>

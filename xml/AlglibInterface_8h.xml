@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="AlglibInterface_8h" kind="file" language="C++">
+    <compoundname>AlglibInterface.h</compoundname>
+    <includes refid="Optimizer_8h" local="no">iDynTree/Optimizer.h</includes>
+    <innerclass refid="classiDynTree_1_1optimization_1_1AlglibInterface" prot="public">iDynTree::optimization::AlglibInterface</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <innernamespace refid="namespaceiDynTree_1_1optimization">iDynTree::optimization</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Optimizers/AlglibInterface.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1PixelViz" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::PixelViz</compoundname>
+    <basecompoundref refid="classiDynTree_1_1ColorViz" prot="public" virt="non-virtual">iDynTree::ColorViz</basecompoundref>
+    <includes local="no">iDynTree/Visualizer.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1PixelViz_1aa60faa5ba2911f09b3103b05087d9e92" prot="public" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int iDynTree::PixelViz::width</definition>
+        <argsstring></argsstring>
+        <name>width</name>
+        <briefdescription>
+<para>Width position of the pixel. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="171" column="18" bodyfile="iDynTree/Visualizer.h" bodystart="171" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1PixelViz_1a6ddc11ba6a301e09ac9a2644a87f28fc" prot="public" static="no" mutable="no">
+        <type>unsigned int</type>
+        <definition>unsigned int iDynTree::PixelViz::height</definition>
+        <argsstring></argsstring>
+        <name>height</name>
+        <briefdescription>
+<para>Height position of the pixel. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="176" column="18" bodyfile="iDynTree/Visualizer.h" bodystart="176" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Basic structure to encode pixel information. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::PixelViz</label>
+        <link refid="classiDynTree_1_1PixelViz"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::ColorViz</label>
+        <link refid="classiDynTree_1_1ColorViz"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>iDynTree::PixelViz</label>
+        <link refid="classiDynTree_1_1PixelViz"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::ColorViz</label>
+        <link refid="classiDynTree_1_1ColorViz"/>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Visualizer.h" line="164" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="165" bodyend="178"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1ColorViz_1a097c11ce78907c8cca1f932bb53f9a15" prot="public" virt="non-virtual"><scope>iDynTree::PixelViz</scope><name>a</name></member>
+      <member refid="classiDynTree_1_1ColorViz_1ab7bb92c9c5bc5d9b83190143136f277a" prot="public" virt="non-virtual"><scope>iDynTree::PixelViz</scope><name>b</name></member>
+      <member refid="classiDynTree_1_1ColorViz_1a76f94a49b08d57cfcbd1153324f5cc42" prot="public" virt="non-virtual"><scope>iDynTree::PixelViz</scope><name>ColorViz</name></member>
+      <member refid="classiDynTree_1_1ColorViz_1afa1267993192af9e91a8a4b63a9f41f9" prot="public" virt="non-virtual"><scope>iDynTree::PixelViz</scope><name>ColorViz</name></member>
+      <member refid="classiDynTree_1_1ColorViz_1a66c1f26b9f0ab71c5a0424b7138e4801" prot="public" virt="non-virtual"><scope>iDynTree::PixelViz</scope><name>ColorViz</name></member>
+      <member refid="classiDynTree_1_1ColorViz_1a55604c0ff20631284b127b85cef9ed3b" prot="public" virt="non-virtual"><scope>iDynTree::PixelViz</scope><name>g</name></member>
+      <member refid="classiDynTree_1_1PixelViz_1a6ddc11ba6a301e09ac9a2644a87f28fc" prot="public" virt="non-virtual"><scope>iDynTree::PixelViz</scope><name>height</name></member>
+      <member refid="classiDynTree_1_1ColorViz_1ac0d868d2b5eccab6808bab3d092fb0fe" prot="public" virt="non-virtual"><scope>iDynTree::PixelViz</scope><name>r</name></member>
+      <member refid="classiDynTree_1_1PixelViz_1aa60faa5ba2911f09b3103b05087d9e92" prot="public" virt="non-virtual"><scope>iDynTree::PixelViz</scope><name>width</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

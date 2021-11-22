@@ -1,0 +1,813 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</compoundname>
+    <basecompoundref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator" prot="public" virt="non-virtual">iDynTree::optimalcontrol::integrators::FixedStepIntegrator</basecompoundref>
+    <includes local="no">iDynTree/Integrators/ImplicitTrapezoidal.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a8c3fbe2a1411e3a80e8b1822c7d13d4f" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref></type>
+        <definition>VectorDynSize iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::m_computationBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_computationBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="36" column="31" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a57b8870bbf02c9ec26d4ecf9c48f81da" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref></type>
+        <definition>VectorDynSize iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::m_computationBuffer2</definition>
+        <argsstring></argsstring>
+        <name>m_computationBuffer2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="36" column="51" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a6123f06bb562a3b4ec2f057e569ef5a9" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
+        <definition>MatrixDynSize iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::m_identity</definition>
+        <argsstring></argsstring>
+        <name>m_identity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="37" column="31" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ac908a5926b081d56b2b2adb73fb91024" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
+        <definition>MatrixDynSize iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::m_stateJacBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_stateJacBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="37" column="42" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ac42fa78d5e0b875ce87ca6705f409b43" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
+        <definition>MatrixDynSize iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::m_controlJacBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_controlJacBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="37" column="59" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ab5d66c565ab1f8c8b07af50c0fa8ea2c" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
+        <definition>MatrixDynSize iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::m_zeroNxNxBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_zeroNxNxBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="38" column="31" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1aeb5830d76f13b9c56099a9b46dc4d75e" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
+        <definition>MatrixDynSize iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::m_zeroNuNuBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_zeroNuNuBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="38" column="48" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a3f90a470d545b1de2bc61ca02f163d37" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
+        <definition>MatrixDynSize iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::m_zeroNxNuBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_zeroNxNuBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="38" column="65" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a0a82c7b5ad788115761b1d076f2131ff" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
+        <definition>MatrixDynSize iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::m_stateHessianBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_stateHessianBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="39" column="31" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a5e939c14fc7b8310f421c62fe588e4e0" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
+        <definition>MatrixDynSize iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::m_controlHessianBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_controlHessianBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="39" column="52" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a17b78b4db36af773e30e603e5a97d0b7" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
+        <definition>MatrixDynSize iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::m_mixedHessianBuffer</definition>
+        <argsstring></argsstring>
+        <name>m_mixedHessianBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="39" column="75" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ada7fd6b8c04c8eb3e2f40b659e95aa5f" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref></type>
+        <definition>VectorDynSize iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::m_lambda</definition>
+        <argsstring></argsstring>
+        <name>m_lambda</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="40" column="31" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a97a0b714f48d4f537470be605f3cfda3" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::m_hasStateJacobianSparsity</definition>
+        <argsstring></argsstring>
+        <name>m_hasStateJacobianSparsity</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="41" column="22" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a3f13934987727738fe033ed283470092" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::m_hasControlJacobianSparsity</definition>
+        <argsstring></argsstring>
+        <name>m_hasControlJacobianSparsity</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="42" column="22" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a2574fbc5b732d4d97ae805b1e20dd48b" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">SparsityStructure</ref> &gt;</type>
+        <definition>std::vector&lt;SparsityStructure&gt; iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::m_stateJacobianSparsity</definition>
+        <argsstring></argsstring>
+        <name>m_stateJacobianSparsity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="43" column="29" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a159e4447ca4ebdd513041fa6e2ab9bdd" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">SparsityStructure</ref> &gt;</type>
+        <definition>std::vector&lt;SparsityStructure&gt; iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::m_controlJacobianSparsity</definition>
+        <argsstring></argsstring>
+        <name>m_controlJacobianSparsity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="44" column="29" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1af6f309124441aaadca41d1194b9890dc" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::m_hasStateHessianSparsity</definition>
+        <argsstring></argsstring>
+        <name>m_hasStateHessianSparsity</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="45" column="22" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ae495aa983704182db09bbc271e019261" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::m_hasStateControlHessianSparsity</definition>
+        <argsstring></argsstring>
+        <name>m_hasStateControlHessianSparsity</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="46" column="22" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ad9e1e3c4b13a972a0eebc19b9a4fbb1a" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::m_hasControlHessianSparsity</definition>
+        <argsstring></argsstring>
+        <name>m_hasControlHessianSparsity</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="47" column="22" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1aaf80297957dcb4699598532c58ea45d2" prot="private" static="no" mutable="no">
+        <type>CollocationHessianSparsityMap</type>
+        <definition>CollocationHessianSparsityMap iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::m_stateHessianSparsity</definition>
+        <argsstring></argsstring>
+        <name>m_stateHessianSparsity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="48" column="47" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a187b52e871994a6ef6de082b13b9d478" prot="private" static="no" mutable="no">
+        <type>CollocationHessianSparsityMap</type>
+        <definition>CollocationHessianSparsityMap iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::m_stateControlHessianSparsity</definition>
+        <argsstring></argsstring>
+        <name>m_stateControlHessianSparsity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="49" column="47" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a192cce68cfe6e63fc3c77a30b9fcad49" prot="private" static="no" mutable="no">
+        <type>CollocationHessianSparsityMap</type>
+        <definition>CollocationHessianSparsityMap iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::m_controlHessianSparsity</definition>
+        <argsstring></argsstring>
+        <name>m_controlHessianSparsity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="50" column="47" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a46652f280e132bf3151e8244dce719b3" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::allocateBuffers</definition>
+        <argsstring>() override</argsstring>
+        <name>allocateBuffers</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a5490ec3615ab91d85a84b85926d43ef1">allocateBuffers</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="52" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a33270f7b5cb32789062af5a84ff0c117" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::oneStepIntegration</definition>
+        <argsstring>(double t0, double dT, const VectorDynSize &amp;x0, VectorDynSize &amp;x) override</argsstring>
+        <name>oneStepIntegration</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator_1ab5b7266da1fad6d293766fc19a47c905">oneStepIntegration</reimplements>
+        <param>
+          <type>double</type>
+          <declname>t0</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dT</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>x0</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="54" column="30"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a8b7bba12a73be0c21c626bd47f2ea34a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::ImplicitTrapezoidal</definition>
+        <argsstring>()</argsstring>
+        <name>ImplicitTrapezoidal</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="58" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a706eaae151b094d5d3e58080e9b91bdb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::ImplicitTrapezoidal</definition>
+        <argsstring>(const std::shared_ptr&lt; iDynTree::optimalcontrol::DynamicalSystem &gt; dynamicalSystem)</argsstring>
+        <name>ImplicitTrapezoidal</name>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">iDynTree::optimalcontrol::DynamicalSystem</ref> &gt;</type>
+          <declname>dynamicalSystem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="60" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a25c426b2f18d74a360e8dcb1ddba855b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::~ImplicitTrapezoidal</definition>
+        <argsstring>() override</argsstring>
+        <name>~ImplicitTrapezoidal</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="62" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a0864bcb0de92814ed05b4ffb1c1a351a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::evaluateCollocationConstraint</definition>
+        <argsstring>(double time, const std::vector&lt; VectorDynSize &gt; &amp;collocationPoints, const std::vector&lt; VectorDynSize &gt; &amp;controlInputs, double dT, VectorDynSize &amp;constraintValue) override</argsstring>
+        <name>evaluateCollocationConstraint</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a4638d9ea1c915b7220e1d9b1dfc1fd08">evaluateCollocationConstraint</reimplements>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &gt; &amp;</type>
+          <declname>collocationPoints</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &gt; &amp;</type>
+          <declname>controlInputs</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dT</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>constraintValue</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the collocation constraint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In some optimal control solvers, like the <ref refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver" kindref="compound">MultipleShootingSolver</ref>, we need to discretize the dynamical system associated to the optimal control problem. This function evaluates the discretization error according to specified integration method. The <ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator" kindref="compound">Integrator</ref>, when integrating a dynamical system, is performing the following discretization: <formula id="87">\[ x_{k+1} = \phi(x_k, x_{k+1}, u_k, u_{k+1}, t) \]</formula> where <formula id="88">$ x_{k+1}$</formula> is the discretized output. For example, using forward euler, we would have <formula id="89">\[ x_{k+1} = x_k + f(t, x, u)\mathrm{d}T. \]</formula></para>
+<para>This function returns the result of <formula id="90">$ \phi(x_k, x_{k+1}, u_k, u_{k+1}, t) - x_{k+1}$</formula>.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Instant at which the collocation constraint is evaluated </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">collocationPoints</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector containing <formula id="91">$x_k$</formula> and <formula id="92">$x_{k+1}$</formula>. Notice that <formula id="92">$x_{k+1}$</formula> corresponds to the state at instant (time + dT). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">controlInputs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector containing <formula id="93">$u_k$</formula> and <formula id="94">$u_{k+1}$</formula>. Notice that <formula id="94">$u_{k+1}$</formula> is supposed to be applied at instant (time + dT). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dT</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time distance between <formula id="91">$x_k$</formula> and <formula id="92">$x_{k+1}$</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">constraintValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The result of <formula id="90">$ \phi(x_k, x_{k+1}, u_k, u_{k+1}, t) - x_{k+1}$</formula>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="64" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ab7eb3b3cea697f03ee6cf104a3490d6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::evaluateCollocationConstraintJacobian</definition>
+        <argsstring>(double time, const std::vector&lt; VectorDynSize &gt; &amp;collocationPoints, const std::vector&lt; VectorDynSize &gt; &amp;controlInputs, double dT, std::vector&lt; MatrixDynSize &gt; &amp;stateJacobianValues, std::vector&lt; MatrixDynSize &gt; &amp;controlJacobianValues) override</argsstring>
+        <name>evaluateCollocationConstraintJacobian</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a481d99de3957547ce59eb738ee9257d9">evaluateCollocationConstraintJacobian</reimplements>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &gt; &amp;</type>
+          <declname>collocationPoints</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &gt; &amp;</type>
+          <declname>controlInputs</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dT</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &gt; &amp;</type>
+          <declname>stateJacobianValues</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &gt; &amp;</type>
+          <declname>controlJacobianValues</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="68" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1aa0c7beeea875f93ad63836ffd677a3e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::getCollocationConstraintJacobianStateSparsity</definition>
+        <argsstring>(std::vector&lt; SparsityStructure &gt; &amp;stateJacobianSparsity) override</argsstring>
+        <name>getCollocationConstraintJacobianStateSparsity</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1af435b7aec4ebd1702506a9229ff0f738">getCollocationConstraintJacobianStateSparsity</reimplements>
+        <param>
+          <type>std::vector&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">SparsityStructure</ref> &gt; &amp;</type>
+          <declname>stateJacobianSparsity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="73" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a3b74a8ce81433ba877405eb2bdeab37c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::getCollocationConstraintJacobianControlSparsity</definition>
+        <argsstring>(std::vector&lt; SparsityStructure &gt; &amp;controlJacobianSparsity) override</argsstring>
+        <name>getCollocationConstraintJacobianControlSparsity</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a717b37e86dd16ae7803889fc65929993">getCollocationConstraintJacobianControlSparsity</reimplements>
+        <param>
+          <type>std::vector&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">SparsityStructure</ref> &gt; &amp;</type>
+          <declname>controlJacobianSparsity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="75" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1aab5857ef9222733fed8a2bcd155e8ac0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::evaluateCollocationConstraintSecondDerivatives</definition>
+        <argsstring>(double time, const std::vector&lt; VectorDynSize &gt; &amp;collocationPoints, const std::vector&lt; VectorDynSize &gt; &amp;controlInputs, double dT, const VectorDynSize &amp;lambda, CollocationHessianMap &amp;stateSecondDerivative, CollocationHessianMap &amp;controlSecondDerivative, CollocationHessianMap &amp;stateControlSecondDerivative) override</argsstring>
+        <name>evaluateCollocationConstraintSecondDerivatives</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a4f4f2819f24168c576c5614f98efa1d8">evaluateCollocationConstraintSecondDerivatives</reimplements>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &gt; &amp;</type>
+          <declname>collocationPoints</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &gt; &amp;</type>
+          <declname>controlInputs</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dT</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type>CollocationHessianMap &amp;</type>
+          <declname>stateSecondDerivative</declname>
+        </param>
+        <param>
+          <type>CollocationHessianMap &amp;</type>
+          <declname>controlSecondDerivative</declname>
+        </param>
+        <param>
+          <type>CollocationHessianMap &amp;</type>
+          <declname>stateControlSecondDerivative</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="77" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a33881d4da853f92e4a96bb6b9fdaa823" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::getCollocationConstraintSecondDerivativeWRTStateSparsity</definition>
+        <argsstring>(CollocationHessianSparsityMap &amp;stateDerivativeSparsity) override</argsstring>
+        <name>getCollocationConstraintSecondDerivativeWRTStateSparsity</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a95763f06583ccbc1f3342673d9aa3779">getCollocationConstraintSecondDerivativeWRTStateSparsity</reimplements>
+        <param>
+          <type>CollocationHessianSparsityMap &amp;</type>
+          <declname>stateDerivativeSparsity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="84" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ad50abcf8b967813771828b858823ff9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::getCollocationConstraintSecondDerivativeWRTControlSparsity</definition>
+        <argsstring>(CollocationHessianSparsityMap &amp;controlDerivativeSparsity) override</argsstring>
+        <name>getCollocationConstraintSecondDerivativeWRTControlSparsity</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1aeae704825f16a03c4a12d282fd525e42">getCollocationConstraintSecondDerivativeWRTControlSparsity</reimplements>
+        <param>
+          <type>CollocationHessianSparsityMap &amp;</type>
+          <declname>controlDerivativeSparsity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="86" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a04a337a768584f1d14c153fff7fdf9a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal::getCollocationConstraintSecondDerivativeWRTStateControlSparsity</definition>
+        <argsstring>(CollocationHessianSparsityMap &amp;stateControlDerivativeSparsity) override</argsstring>
+        <name>getCollocationConstraintSecondDerivativeWRTStateControlSparsity</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a5867f7987daba0256adfb8d233eccbf6">getCollocationConstraintSecondDerivativeWRTStateControlSparsity</reimplements>
+        <param>
+          <type>CollocationHessianSparsityMap &amp;</type>
+          <declname>stateControlDerivativeSparsity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="88" column="30"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::optimalcontrol::integrators::Integrator</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator"/>
+      </node>
+      <node id="2">
+        <label>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="12">
+        <label>iDynTree::optimalcontrol::integrators::IntegratorInfo</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfo"/>
+      </node>
+      <node id="6">
+        <label>T</label>
+      </node>
+      <node id="5">
+        <label>std::shared_ptr&lt; T &gt;</label>
+        <childnode refid="6" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="10">
+        <label>iDynTree::VectorDynSize</label>
+        <link refid="classiDynTree_1_1VectorDynSize"/>
+      </node>
+      <node id="11">
+        <label>std::vector&lt; T &gt;</label>
+        <childnode refid="6" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>std::shared_ptr&lt; iDynTree::optimalcontrol::DynamicalSystem &gt;</label>
+        <childnode refid="5" relation="template-instance">
+          <edgelabel>&lt; iDynTree::optimalcontrol::DynamicalSystem &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::optimalcontrol::integrators::Integrator</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>m_dynamicalSystem_ptr</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>m_infoData</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>m_solution</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>m_info</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>iDynTree::optimalcontrol::integrators::SolutionElement</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement"/>
+        <childnode refid="10" relation="usage">
+          <edgelabel>stateAtT</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>std::vector&lt; iDynTree::optimalcontrol::integrators::SolutionElement &gt;</label>
+        <childnode refid="9" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="template-instance">
+          <edgelabel>&lt; iDynTree::optimalcontrol::integrators::SolutionElement &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>std::shared_ptr&lt; iDynTree::optimalcontrol::integrators::IntegratorInfoData &gt;</label>
+        <childnode refid="5" relation="template-instance">
+          <edgelabel>&lt; iDynTree::optimalcontrol::integrators::IntegratorInfoData &gt;</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="34" column="13" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="34" bodyend="90"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a46652f280e132bf3151e8244dce719b3" prot="private" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>allocateBuffers</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a1594f1f7ce88c5d45f585130c895b0a9" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>clearSolution</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a148992ef6281c95701bd33a8262eb7f9" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>dynamicalSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a0864bcb0de92814ed05b4ffb1c1a351a" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>evaluateCollocationConstraint</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ab7eb3b3cea697f03ee6cf104a3490d6a" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>evaluateCollocationConstraintJacobian</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1aab5857ef9222733fed8a2bcd155e8ac0" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>evaluateCollocationConstraintSecondDerivatives</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator_1a64fe09ecf248c2b8653a452409f49670" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>FixedStepIntegrator</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator_1abe562bb33f310ad9b7c50ebf6190eac2" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>FixedStepIntegrator</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a3b74a8ce81433ba877405eb2bdeab37c" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>getCollocationConstraintJacobianControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1aa0c7beeea875f93ad63836ffd677a3e8" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>getCollocationConstraintJacobianStateSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ad50abcf8b967813771828b858823ff9d" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>getCollocationConstraintSecondDerivativeWRTControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a04a337a768584f1d14c153fff7fdf9a3" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>getCollocationConstraintSecondDerivativeWRTStateControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a33881d4da853f92e4a96bb6b9fdaa823" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>getCollocationConstraintSecondDerivativeWRTStateSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a0b7ed351be29e3ddc4145824aec6b082" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>getFullSolution</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a7fd966d607d393a4dfa056206cd6d003" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>getSolution</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a8b7bba12a73be0c21c626bd47f2ea34a" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>ImplicitTrapezoidal</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a706eaae151b094d5d3e58080e9b91bdb" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>ImplicitTrapezoidal</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1acbf7100a4b6b9d9e64624bdfa1f32719" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>info</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator_1a3f254a74a37663a3c8df1e61e88497a5" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>integrate</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a06482af463ae25bd99ab513ca1bd8cb1" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>Integrator</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a2b692b4e55ba221411c7ab685d85afeb" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>Integrator</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1aa3887eac25d4dd53962204d0503c8e06" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>Integrator</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a3aeffb4013537d6f849f53a4864acc29" prot="protected" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>interpolatePoints</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a8c3fbe2a1411e3a80e8b1822c7d13d4f" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_computationBuffer</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a57b8870bbf02c9ec26d4ecf9c48f81da" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_computationBuffer2</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a5e939c14fc7b8310f421c62fe588e4e0" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_controlHessianBuffer</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a192cce68cfe6e63fc3c77a30b9fcad49" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_controlHessianSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ac42fa78d5e0b875ce87ca6705f409b43" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_controlJacBuffer</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a159e4447ca4ebdd513041fa6e2ab9bdd" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_controlJacobianSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a371179a8cb3e4b4a03a3a0d90d2e6cca" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_dTmax</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1aa9eb4f3c3a4da99f1ce27b28154e4bfb" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_dynamicalSystem_ptr</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ad9e1e3c4b13a972a0eebc19b9a4fbb1a" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_hasControlHessianSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a3f13934987727738fe033ed283470092" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_hasControlJacobianSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ae495aa983704182db09bbc271e019261" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_hasStateControlHessianSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1af6f309124441aaadca41d1194b9890dc" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_hasStateHessianSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a97a0b714f48d4f537470be605f3cfda3" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_hasStateJacobianSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a6123f06bb562a3b4ec2f057e569ef5a9" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_identity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a3b03ff054e91a4142240dea337524fa1" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_info</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a91cc593e13d13305e81b3e7fc5ae6276" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_infoData</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ada7fd6b8c04c8eb3e2f40b659e95aa5f" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_lambda</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a17b78b4db36af773e30e603e5a97d0b7" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_mixedHessianBuffer</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a25b9c2215f3bbf7940214925e3a55ede" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_solution</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a187b52e871994a6ef6de082b13b9d478" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_stateControlHessianSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a0a82c7b5ad788115761b1d076f2131ff" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_stateHessianBuffer</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1aaf80297957dcb4699598532c58ea45d2" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_stateHessianSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ac908a5926b081d56b2b2adb73fb91024" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_stateJacBuffer</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a2574fbc5b732d4d97ae805b1e20dd48b" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_stateJacobianSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1aeb5830d76f13b9c56099a9b46dc4d75e" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_zeroNuNuBuffer</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a3f90a470d545b1de2bc61ca02f163d37" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_zeroNxNuBuffer</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ab5d66c565ab1f8c8b07af50c0fa8ea2c" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>m_zeroNxNxBuffer</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a0d39d3023f056364a01963b7520a7c21" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>maximumStepSize</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a33270f7b5cb32789062af5a84ff0c117" prot="private" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>oneStepIntegration</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a72bf5f94da63280de3c2b3223cd251e6" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>setDynamicalSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a6e2b9052aa9b0638ce7d2f8347b4fe00" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>setMaximumStepSize</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator_1a8d485df01715d88a67803538965fcbc0" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>~FixedStepIntegrator</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a25c426b2f18d74a360e8dcb1ddba855b" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>~ImplicitTrapezoidal</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1ab0cf81d20474d5f8737e8f8df501f464" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>~Integrator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

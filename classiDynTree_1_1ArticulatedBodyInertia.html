@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>iDynTree::ArticulatedBodyInertia class | iDynTree master</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="./index.html">iDynTree</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="4">
+            <li>
+              <a href="pages.html">Versions</a>
+              <ol>
+                <li><a href="./index.html">Master</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="pages.html">Contacts</a>
+              <ol>
+                <li><a href="https://github.com/robotology/idyntree">GitHub</a></li>
+                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
+              </ol>
+            </li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespaceiDynTree.html">iDynTree</a>::<wbr/></span>ArticulatedBodyInertia <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="ArticulatedBodyInertia_8h.html">&lt;iDynTree/Core/ArticulatedBodyInertia.h&gt;</a></div>
+        </h1>
+        <p>Class representing an Articulated Body Inertia.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-static-methods">Public static functions</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<p>For more information on Articulated Body Inertia, please check Featherstone 2008, Chapter 7 .</p><p>Storage: The symmetric articulated body inertia is stored as 3 3x3 matrices :</p><ul><li>the linearLinear is the top left submatrix</li><li>the linearAngular is the top right submatrix</li><li>the angularAngular is the bottom right submatrix</li></ul><p>The bottom left submatrix can be obtained as the transpose of the linearAngular matrix.</p><aside class="m-note m-danger"><h4>Warning</h4><p>This class is exposing for convenience the IMatrix interface. Notice that using this methods you can damage the underlyng articulated body inertia. In doubt, don&#x27;t use them and rely on more high level functions.</p></aside>
+        <section id="pub-static-methods">
+          <h2><a href="#pub-static-methods">Public static functions</a></h2>
+          <dl class="m-doc">
+            <dt id="a31cc989bb09d7349efdbd69bc7e4e464">
+              <span class="m-doc-wrap-bumper">static auto <a href="#a31cc989bb09d7349efdbd69bc7e4e464" class="m-doc-self">combine</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1ArticulatedBodyInertia.html" class="m-doc">ArticulatedBodyInertia</a>&amp; op1,
+              const <a href="classiDynTree_1_1ArticulatedBodyInertia.html" class="m-doc">ArticulatedBodyInertia</a>&amp; op2) -&gt; <a href="classiDynTree_1_1ArticulatedBodyInertia.html" class="m-doc">ArticulatedBodyInertia</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a7fcc8a0d53704b77c9f82507fd8baaef" class="m-doc">ABADyadHelper</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1SpatialForceVector.html" class="m-doc">SpatialForceVector</a>&amp; U,
+              const double d) -&gt; <a href="classiDynTree_1_1ArticulatedBodyInertia.html" class="m-doc">ArticulatedBodyInertia</a></span>
+            </dt>
+            <dd>Build the ArticulatedInertia <svg class="m-math" style="width: 4.415em; height: 1.028em; vertical-align: -0.000em;" viewBox="0 -9.873238 42.386123 9.873238">
+<title>
+$U d^{-1} U^\top$
+</title>
+<defs>
+<path id='eq1-g0-0' d='M5.571108-1.809215C5.69863-1.809215 5.873973-1.809215 5.873973-1.992528S5.69863-2.175841 5.571108-2.175841H1.004234C.876712-2.175841 .70137-2.175841 .70137-1.992528S.876712-1.809215 1.004234-1.809215H5.571108Z'/>
+<path id='eq1-g0-62' d='M3.474969-5.164633H5.810212C5.937733-5.164633 6.113076-5.164633 6.113076-5.347945S5.937733-5.531258 5.810212-5.531258H.781071C.645579-5.531258 .470237-5.531258 .470237-5.347945S.645579-5.164633 .781071-5.164633H3.108344V-.310834C3.108344-.175342 3.108344 0 3.291656 0S3.474969-.175342 3.474969-.302864V-5.164633Z'/>
+<path id='eq1-g2-49' d='M2.502615-5.076961C2.502615-5.292154 2.486675-5.300125 2.271482-5.300125C1.944707-4.98132 1.522291-4.790037 .765131-4.790037V-4.527024C.980324-4.527024 1.41071-4.527024 1.872976-4.742217V-.653549C1.872976-.358655 1.849066-.263014 1.091905-.263014H.812951V0C1.139726-.02391 1.825156-.02391 2.183811-.02391S3.235866-.02391 3.56264 0V-.263014H3.283686C2.526526-.263014 2.502615-.358655 2.502615-.653549V-5.076961Z'/>
+<path id='eq1-g1-85' d='M6.049315-2.749689C5.630884-1.075965 4.244085-.095641 3.120299-.095641C2.259527-.095641 1.673724-.669489 1.673724-1.661768C1.673724-1.709589 1.673724-2.068244 1.80523-2.594271L2.976837-7.292653C3.084433-7.699128 3.108344-7.81868 3.957161-7.81868C4.172354-7.81868 4.291905-7.81868 4.291905-8.033873C4.291905-8.16538 4.184309-8.16538 4.112578-8.16538C3.897385-8.16538 3.646326-8.141469 3.419178-8.141469H2.008468C1.78132-8.141469 1.530262-8.16538 1.303113-8.16538C1.219427-8.16538 1.075965-8.16538 1.075965-7.938232C1.075965-7.81868 1.159651-7.81868 1.3868-7.81868C2.10411-7.81868 2.10411-7.723039 2.10411-7.591532C2.10411-7.519801 2.020423-7.173101 1.960648-6.969863L.920548-2.785554C.884682-2.654047 .812951-2.331258 .812951-2.008468C.812951-.6934 1.75741 .251059 3.060523 .251059C4.267995 .251059 5.606974-.705355 6.216687-2.223661C6.300374-2.426899 6.40797-2.84533 6.479701-3.16812C6.599253-3.598506 6.850311-4.65056 6.933998-4.961395L7.388294-6.75467C7.543711-7.376339 7.639352-7.770859 8.691407-7.81868C8.787049-7.830635 8.834869-7.926276 8.834869-8.033873C8.834869-8.16538 8.727273-8.16538 8.679452-8.16538C8.51208-8.16538 8.296887-8.141469 8.129514-8.141469H7.567621C6.826401-8.141469 6.443836-8.16538 6.43188-8.16538C6.360149-8.16538 6.216687-8.16538 6.216687-7.938232C6.216687-7.81868 6.312329-7.81868 6.396015-7.81868C7.113325-7.79477 7.161146-7.519801 7.161146-7.304608C7.161146-7.197011 7.161146-7.161146 7.113325-6.993773L6.049315-2.749689Z'/>
+<path id='eq1-g1-100' d='M6.01345-7.998007C6.025405-8.045828 6.049315-8.117559 6.049315-8.177335C6.049315-8.296887 5.929763-8.296887 5.905853-8.296887C5.893898-8.296887 5.308095-8.249066 5.248319-8.237111C5.045081-8.225156 4.865753-8.201245 4.65056-8.18929C4.351681-8.16538 4.267995-8.153425 4.267995-7.938232C4.267995-7.81868 4.363636-7.81868 4.531009-7.81868C5.116812-7.81868 5.128767-7.711083 5.128767-7.591532C5.128767-7.519801 5.104857-7.424159 5.092902-7.388294L4.363636-4.483188C4.23213-4.794022 3.90934-5.272229 3.287671-5.272229C1.936737-5.272229 .478207-3.526775 .478207-1.75741C.478207-.573848 1.171606 .119552 1.984558 .119552C2.642092 .119552 3.203985-.394521 3.53873-.789041C3.658281-.083686 4.220174 .119552 4.578829 .119552S5.224408-.095641 5.439601-.526027C5.630884-.932503 5.798257-1.661768 5.798257-1.709589C5.798257-1.769365 5.750436-1.817186 5.678705-1.817186C5.571108-1.817186 5.559153-1.75741 5.511333-1.578082C5.332005-.872727 5.104857-.119552 4.614695-.119552C4.267995-.119552 4.244085-.430386 4.244085-.669489C4.244085-.71731 4.244085-.968369 4.327771-1.303113L6.01345-7.998007ZM3.598506-1.422665C3.53873-1.219427 3.53873-1.195517 3.371357-.968369C3.108344-.633624 2.582316-.119552 2.020423-.119552C1.530262-.119552 1.255293-.561893 1.255293-1.267248C1.255293-1.924782 1.625903-3.263761 1.853051-3.765878C2.259527-4.60274 2.82142-5.033126 3.287671-5.033126C4.076712-5.033126 4.23213-4.052802 4.23213-3.957161C4.23213-3.945205 4.196264-3.789788 4.184309-3.765878L3.598506-1.422665Z'/>
+</defs>
+<g id='eq1-page1'>
+<use x='0' y='0' xlink:href='#eq1-g1-85'/>
+<use x='9.199051' y='0' xlink:href='#eq1-g1-100'/>
+<use x='15.281744' y='-4.338437' xlink:href='#eq1-g0-0'/>
+<use x='21.86825' y='-4.338437' xlink:href='#eq1-g2-49'/>
+<use x='26.600565' y='0' xlink:href='#eq1-g1-85'/>
+<use x='35.799616' y='-4.338437' xlink:href='#eq1-g0-62'/>
+</g>
+</svg> .</dd>
+            <dt id="af3eb51987ad2cefeec31a466904b0e8a">
+              <span class="m-doc-wrap-bumper">static auto <a href="#af3eb51987ad2cefeec31a466904b0e8a" class="m-doc-self">ABADyadHelperLin</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1SpatialForceVector.html" class="m-doc">SpatialForceVector</a>&amp; U,
+              const double inv_d,
+              const <a href="classiDynTree_1_1SpatialForceVector.html" class="m-doc">SpatialForceVector</a>&amp; dU,
+              const double d_inv_d) -&gt; <a href="classiDynTree_1_1ArticulatedBodyInertia.html" class="m-doc">ArticulatedBodyInertia</a></span>
+            </dt>
+            <dd>Build the ArticulatedInertia dU inv_d U^\top + U d_inv_d U^\top + U inv_d dU^\top Used in the linearization of the articulated body algorithm.</dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a12f9a7346c21f9b7984debac097ca635" class="m-doc">ArticulatedBodyInertia</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>The data is not reset to zeo for perfomance reason.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper"><a href="#a8ab0ff3fa532512b2a0adf3de8c9b48e" class="m-doc">ArticulatedBodyInertia</a>(</span><span class="m-doc-wrap">const double* in_data,
+              const unsigned int in_rows,
+              const unsigned int in_cols)</span>
+            </dt>
+            <dd>Constructor from a buffer of 36 doubles, stored as a C-style array (i.e.</dd>
+            <dt id="aac26350192a3c1904d96046d89310a3d">
+              <span class="m-doc-wrap-bumper"><a href="#aac26350192a3c1904d96046d89310a3d" class="m-doc-self">ArticulatedBodyInertia</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1SpatialInertia.html" class="m-doc">iDynTree::<wbr />SpatialInertia</a>&amp; rigidBodyInertia)</span>
+            </dt>
+            <dd>Constructor from a Rigid Body Inertia.</dd>
+            <dt id="a587c378f42665f7d2a873b54a39c90a7">
+              <span class="m-doc-wrap-bumper"><a href="#a587c378f42665f7d2a873b54a39c90a7" class="m-doc-self">ArticulatedBodyInertia</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1ArticulatedBodyInertia.html" class="m-doc">ArticulatedBodyInertia</a>&amp; other)</span>
+            </dt>
+            <dd>Copy constructor: create a <a href="classiDynTree_1_1ArticulatedBodyInertia.html" class="m-doc">ArticulatedBodyInertia</a> from another <a href="classiDynTree_1_1ArticulatedBodyInertia.html" class="m-doc">ArticulatedBodyInertia</a>.</dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt id="afe0a6c6cae3c24963ea2c51029601046">
+              <span class="m-doc-wrap-bumper">auto <a href="#afe0a6c6cae3c24963ea2c51029601046" class="m-doc-self">getLinearLinearSubmatrix</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">Matrix3x3</a>&amp;</span>
+            </dt>
+            <dd>Low level data getters.</dd>
+            <dt id="a7ea2b4db0b795d9a802637eac943547f">
+              <span class="m-doc-wrap-bumper">auto <a href="#a7ea2b4db0b795d9a802637eac943547f" class="m-doc-self">getLinearAngularSubmatrix</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">Matrix3x3</a>&amp;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af93799b72cab460169ad6a7a15a5871b">
+              <span class="m-doc-wrap-bumper">auto <a href="#af93799b72cab460169ad6a7a15a5871b" class="m-doc-self">getAngularAngularSubmatrix</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">Matrix3x3</a>&amp;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a19b7bfe676b5fe9bb34cf70b15efc1f3">
+              <span class="m-doc-wrap-bumper">auto <a href="#a19b7bfe676b5fe9bb34cf70b15efc1f3" class="m-doc-self">getLinearLinearSubmatrix</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">Matrix3x3</a>&amp;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a40e313cc574fcca54aef116822cc6ce1">
+              <span class="m-doc-wrap-bumper">auto <a href="#a40e313cc574fcca54aef116822cc6ce1" class="m-doc-self">getLinearAngularSubmatrix</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">Matrix3x3</a>&amp;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ad198af27aefa90826179381fb53f4cfc">
+              <span class="m-doc-wrap-bumper">auto <a href="#ad198af27aefa90826179381fb53f4cfc" class="m-doc-self">getAngularAngularSubmatrix</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">Matrix3x3</a>&amp;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a45f8719d91c14e05995194781264be13">
+              <span class="m-doc-wrap-bumper">auto <a href="#a45f8719d91c14e05995194781264be13" class="m-doc-self">applyInverse</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Wrench.html" class="m-doc">Wrench</a>&amp; wrench) const -&gt; <a href="classiDynTree_1_1SpatialAcc.html" class="m-doc">SpatialAcc</a></span>
+            </dt>
+            <dd>Return the inverse of this <a href="classiDynTree_1_1ArticulatedBodyInertia.html" class="m-doc">ArticulatedBodyInertia</a> applied to the passed wrench.</dd>
+            <dt id="a1f56026d13ebaa206b443ec6e9540dd1">
+              <span class="m-doc-wrap-bumper">auto <a href="#a1f56026d13ebaa206b443ec6e9540dd1" class="m-doc-self">asMatrix</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">Matrix6x6</a></span>
+            </dt>
+            <dd>Get the <a href="classiDynTree_1_1ArticulatedBodyInertia.html" class="m-doc">ArticulatedBodyInertia</a> as a 6x6 matrix.</dd>
+            <dt id="ad1cf87241021c1120cea85b91c1fea67">
+              <span class="m-doc-wrap-bumper">auto <a href="#ad1cf87241021c1120cea85b91c1fea67" class="m-doc-self">getInverse</a>(</span><span class="m-doc-wrap">) const -&gt; <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">Matrix6x6</a></span>
+            </dt>
+            <dd>Get the inverse of the <a href="classiDynTree_1_1ArticulatedBodyInertia.html" class="m-doc">ArticulatedBodyInertia</a> matrix.</dd>
+            <dt id="ae8aa194058326ff74c70833b8705edd6">
+              <span class="m-doc-wrap-bumper">auto <a href="#ae8aa194058326ff74c70833b8705edd6" class="m-doc-self">operator+</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1ArticulatedBodyInertia.html" class="m-doc">ArticulatedBodyInertia</a>&amp; other) const -&gt; <a href="classiDynTree_1_1ArticulatedBodyInertia.html" class="m-doc">ArticulatedBodyInertia</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ad64bd042c2320be4600c8871f92f0811">
+              <span class="m-doc-wrap-bumper">auto <a href="#ad64bd042c2320be4600c8871f92f0811" class="m-doc-self">operator-</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1ArticulatedBodyInertia.html" class="m-doc">ArticulatedBodyInertia</a>&amp; other) const -&gt; <a href="classiDynTree_1_1ArticulatedBodyInertia.html" class="m-doc">ArticulatedBodyInertia</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="adc53f56b814a8c24f1a00c06e80a5c9e">
+              <span class="m-doc-wrap-bumper">auto <a href="#adc53f56b814a8c24f1a00c06e80a5c9e" class="m-doc-self">operator+=</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1ArticulatedBodyInertia.html" class="m-doc">ArticulatedBodyInertia</a>&amp; other) -&gt; <a href="classiDynTree_1_1ArticulatedBodyInertia.html" class="m-doc">ArticulatedBodyInertia</a>&amp;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aa30a087d496d8e588f4453fdc34df7cf">
+              <span class="m-doc-wrap-bumper">auto <a href="#aa30a087d496d8e588f4453fdc34df7cf" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1SpatialMotionVector.html" class="m-doc">SpatialMotionVector</a>&amp; other) const -&gt; <a href="classiDynTree_1_1SpatialForceVector.html" class="m-doc">SpatialForceVector</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a0a9260283b4c44503746022169e9cb45">
+              <span class="m-doc-wrap-bumper">auto <a href="#a0a9260283b4c44503746022169e9cb45" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1SpatialAcc.html" class="m-doc">SpatialAcc</a>&amp; other) const -&gt; <a href="classiDynTree_1_1Wrench.html" class="m-doc">Wrench</a></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ac2c93bbab431993fa4a19be898246d22" class="m-doc">zero</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>reset to zero (i.e.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a7fcc8a0d53704b77c9f82507fd8baaef"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static <a href="classiDynTree_1_1ArticulatedBodyInertia.html" class="m-doc">ArticulatedBodyInertia</a> iDynTree::<wbr />ArticulatedBodyInertia::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7fcc8a0d53704b77c9f82507fd8baaef" class="m-doc-self">ABADyadHelper</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1SpatialForceVector.html" class="m-doc">SpatialForceVector</a>&amp; U,
+              const double d)</span></span>
+            </h3>
+            <p>Build the ArticulatedInertia <svg class="m-math" style="width: 4.415em; height: 1.028em; vertical-align: -0.000em;" viewBox="0 -9.873238 42.386123 9.873238">
+<title>
+$U d^{-1} U^\top$
+</title>
+<defs>
+<path id='eq1-g0-0' d='M5.571108-1.809215C5.69863-1.809215 5.873973-1.809215 5.873973-1.992528S5.69863-2.175841 5.571108-2.175841H1.004234C.876712-2.175841 .70137-2.175841 .70137-1.992528S.876712-1.809215 1.004234-1.809215H5.571108Z'/>
+<path id='eq1-g0-62' d='M3.474969-5.164633H5.810212C5.937733-5.164633 6.113076-5.164633 6.113076-5.347945S5.937733-5.531258 5.810212-5.531258H.781071C.645579-5.531258 .470237-5.531258 .470237-5.347945S.645579-5.164633 .781071-5.164633H3.108344V-.310834C3.108344-.175342 3.108344 0 3.291656 0S3.474969-.175342 3.474969-.302864V-5.164633Z'/>
+<path id='eq1-g2-49' d='M2.502615-5.076961C2.502615-5.292154 2.486675-5.300125 2.271482-5.300125C1.944707-4.98132 1.522291-4.790037 .765131-4.790037V-4.527024C.980324-4.527024 1.41071-4.527024 1.872976-4.742217V-.653549C1.872976-.358655 1.849066-.263014 1.091905-.263014H.812951V0C1.139726-.02391 1.825156-.02391 2.183811-.02391S3.235866-.02391 3.56264 0V-.263014H3.283686C2.526526-.263014 2.502615-.358655 2.502615-.653549V-5.076961Z'/>
+<path id='eq1-g1-85' d='M6.049315-2.749689C5.630884-1.075965 4.244085-.095641 3.120299-.095641C2.259527-.095641 1.673724-.669489 1.673724-1.661768C1.673724-1.709589 1.673724-2.068244 1.80523-2.594271L2.976837-7.292653C3.084433-7.699128 3.108344-7.81868 3.957161-7.81868C4.172354-7.81868 4.291905-7.81868 4.291905-8.033873C4.291905-8.16538 4.184309-8.16538 4.112578-8.16538C3.897385-8.16538 3.646326-8.141469 3.419178-8.141469H2.008468C1.78132-8.141469 1.530262-8.16538 1.303113-8.16538C1.219427-8.16538 1.075965-8.16538 1.075965-7.938232C1.075965-7.81868 1.159651-7.81868 1.3868-7.81868C2.10411-7.81868 2.10411-7.723039 2.10411-7.591532C2.10411-7.519801 2.020423-7.173101 1.960648-6.969863L.920548-2.785554C.884682-2.654047 .812951-2.331258 .812951-2.008468C.812951-.6934 1.75741 .251059 3.060523 .251059C4.267995 .251059 5.606974-.705355 6.216687-2.223661C6.300374-2.426899 6.40797-2.84533 6.479701-3.16812C6.599253-3.598506 6.850311-4.65056 6.933998-4.961395L7.388294-6.75467C7.543711-7.376339 7.639352-7.770859 8.691407-7.81868C8.787049-7.830635 8.834869-7.926276 8.834869-8.033873C8.834869-8.16538 8.727273-8.16538 8.679452-8.16538C8.51208-8.16538 8.296887-8.141469 8.129514-8.141469H7.567621C6.826401-8.141469 6.443836-8.16538 6.43188-8.16538C6.360149-8.16538 6.216687-8.16538 6.216687-7.938232C6.216687-7.81868 6.312329-7.81868 6.396015-7.81868C7.113325-7.79477 7.161146-7.519801 7.161146-7.304608C7.161146-7.197011 7.161146-7.161146 7.113325-6.993773L6.049315-2.749689Z'/>
+<path id='eq1-g1-100' d='M6.01345-7.998007C6.025405-8.045828 6.049315-8.117559 6.049315-8.177335C6.049315-8.296887 5.929763-8.296887 5.905853-8.296887C5.893898-8.296887 5.308095-8.249066 5.248319-8.237111C5.045081-8.225156 4.865753-8.201245 4.65056-8.18929C4.351681-8.16538 4.267995-8.153425 4.267995-7.938232C4.267995-7.81868 4.363636-7.81868 4.531009-7.81868C5.116812-7.81868 5.128767-7.711083 5.128767-7.591532C5.128767-7.519801 5.104857-7.424159 5.092902-7.388294L4.363636-4.483188C4.23213-4.794022 3.90934-5.272229 3.287671-5.272229C1.936737-5.272229 .478207-3.526775 .478207-1.75741C.478207-.573848 1.171606 .119552 1.984558 .119552C2.642092 .119552 3.203985-.394521 3.53873-.789041C3.658281-.083686 4.220174 .119552 4.578829 .119552S5.224408-.095641 5.439601-.526027C5.630884-.932503 5.798257-1.661768 5.798257-1.709589C5.798257-1.769365 5.750436-1.817186 5.678705-1.817186C5.571108-1.817186 5.559153-1.75741 5.511333-1.578082C5.332005-.872727 5.104857-.119552 4.614695-.119552C4.267995-.119552 4.244085-.430386 4.244085-.669489C4.244085-.71731 4.244085-.968369 4.327771-1.303113L6.01345-7.998007ZM3.598506-1.422665C3.53873-1.219427 3.53873-1.195517 3.371357-.968369C3.108344-.633624 2.582316-.119552 2.020423-.119552C1.530262-.119552 1.255293-.561893 1.255293-1.267248C1.255293-1.924782 1.625903-3.263761 1.853051-3.765878C2.259527-4.60274 2.82142-5.033126 3.287671-5.033126C4.076712-5.033126 4.23213-4.052802 4.23213-3.957161C4.23213-3.945205 4.196264-3.789788 4.184309-3.765878L3.598506-1.422665Z'/>
+</defs>
+<g id='eq1-page1'>
+<use x='0' y='0' xlink:href='#eq1-g1-85'/>
+<use x='9.199051' y='0' xlink:href='#eq1-g1-100'/>
+<use x='15.281744' y='-4.338437' xlink:href='#eq1-g0-0'/>
+<use x='21.86825' y='-4.338437' xlink:href='#eq1-g2-49'/>
+<use x='26.600565' y='0' xlink:href='#eq1-g1-85'/>
+<use x='35.799616' y='-4.338437' xlink:href='#eq1-g0-62'/>
+</g>
+</svg> .</p>
+<p>Used in the articulated body algorithm .</p>
+          </div></section>
+          <section class="m-doc-details" id="a12f9a7346c21f9b7984debac097ca635"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> iDynTree::<wbr />ArticulatedBodyInertia::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a12f9a7346c21f9b7984debac097ca635" class="m-doc-self">ArticulatedBodyInertia</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>The data is not reset to zeo for perfomance reason.</p>
+<p>Please initialize the data in the class before any use.</p>
+          </div></section>
+          <section class="m-doc-details" id="a8ab0ff3fa532512b2a0adf3de8c9b48e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"> iDynTree::<wbr />ArticulatedBodyInertia::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8ab0ff3fa532512b2a0adf3de8c9b48e" class="m-doc-self">ArticulatedBodyInertia</a>(</span><span class="m-doc-wrap">const double* in_data,
+              const unsigned int in_rows,
+              const unsigned int in_cols)</span></span>
+            </h3>
+            <p>Constructor from a buffer of 36 doubles, stored as a C-style array (i.e.</p>
+<p>row major).</p>
+          </div></section>
+          <section class="m-doc-details" id="ac2c93bbab431993fa4a19be898246d22"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />ArticulatedBodyInertia::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac2c93bbab431993fa4a19be898246d22" class="m-doc-self">zero</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>reset to zero (i.e.</p>
+<p>the inertia of body with zero mass) the <a href="classiDynTree_1_1ArticulatedBodyInertia.html" class="m-doc">ArticulatedBodyInertia</a></p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>iDynTree documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/robotology/idyntree/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

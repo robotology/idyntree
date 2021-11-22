@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="MaterialElement_8h" kind="file" language="C++">
+    <compoundname>MaterialElement.h</compoundname>
+    <includes refid="XMLElement_8h" local="no">iDynTree/XMLElement.h</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">string</includes>
+    <includedby refid="RobotElement_8h" local="yes">private/RobotElement.h</includedby>
+    <includedby refid="URDFDocument_8h" local="yes">private/URDFDocument.h</includedby>
+    <includedby refid="VisualElement_8h" local="yes">private/VisualElement.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="1">
+        <label>private/MaterialElement.h</label>
+        <link refid="MaterialElement_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1MaterialElement" prot="public">iDynTree::MaterialElement</innerclass>
+    <innerclass refid="structiDynTree_1_1MaterialElement_1_1MaterialInfo" prot="public">iDynTree::MaterialElement::MaterialInfo</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="private/MaterialElement.h"/>
+  </compounddef>
+</doxygen>

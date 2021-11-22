@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1details_1_1extent__type" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::details::extent_type</compoundname>
+    <derivedcompoundref refid="classiDynTree_1_1Span_1_1storage__type" prot="public" virt="non-virtual">iDynTree::Span&lt; ElementType, Extent &gt;::storage_type&lt; iDynTree::details::extent_type&lt; Extent &gt; &gt;</derivedcompoundref>
+    <templateparamlist>
+      <param>
+        <type>std::ptrdiff_t</type>
+        <declname>Ext</declname>
+        <defname>Ext</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classiDynTree_1_1details_1_1extent__type_1a05acb6a92ccf5c1c3f66b34c37bb08c1" prot="public" static="no">
+        <type>std::ptrdiff_t</type>
+        <definition>using iDynTree::details::extent_type&lt; Ext &gt;::index_type =  std::ptrdiff_t</definition>
+        <argsstring></argsstring>
+        <name>index_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="341" column="9" bodyfile="iDynTree/Core/Span.h" bodystart="341" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1details_1_1extent__type_1a46854e836fbb721623e957d561e6fa10" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>IDYNTREE_CONSTEXPR</type>
+        <definition>IDYNTREE_CONSTEXPR iDynTree::details::extent_type&lt; Ext &gt;::extent_type</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>extent_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="345" column="28" bodyfile="iDynTree/Core/Span.h" bodystart="345" bodyend="345"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1details_1_1extent__type_1abeb2370674effef407cfdec253237646" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>index_type</type>
+            <declname>Other</declname>
+            <defname>Other</defname>
+          </param>
+        </templateparamlist>
+        <type>IDYNTREE_CONSTEXPR</type>
+        <definition>IDYNTREE_CONSTEXPR iDynTree::details::extent_type&lt; Ext &gt;::extent_type</definition>
+        <argsstring>(extent_type&lt; Other &gt; ext)</argsstring>
+        <name>extent_type</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1details_1_1extent__type" kindref="compound">extent_type</ref>&lt; Other &gt;</type>
+          <declname>ext</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="348" column="28" bodyfile="iDynTree/Core/Span.h" bodystart="348" bodyend="353"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1details_1_1extent__type_1a7cd2e47572b105561bfe9aae5eb4ce5e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>IDYNTREE_CONSTEXPR</type>
+        <definition>IDYNTREE_CONSTEXPR iDynTree::details::extent_type&lt; Ext &gt;::extent_type</definition>
+        <argsstring>(index_type size)</argsstring>
+        <name>extent_type</name>
+        <param>
+          <type>index_type</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="355" column="28" bodyfile="iDynTree/Core/Span.h" bodystart="355" bodyend="355"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1details_1_1extent__type_1a0604686e44d5c986dbb789ffe264862e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>IDYNTREE_CONSTEXPR index_type</type>
+        <definition>IDYNTREE_CONSTEXPR index_type iDynTree::details::extent_type&lt; Ext &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Span.h" line="357" column="39" bodyfile="iDynTree/Core/Span.h" bodystart="357" bodyend="357"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::Span&lt; ElementType, Extent &gt;::storage_type&lt; iDynTree::details::extent_type&lt; Extent &gt; &gt;</label>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::details::extent_type&lt; Ext &gt;</label>
+        <link refid="classiDynTree_1_1details_1_1extent__type"/>
+      </node>
+    </inheritancegraph>
+    <location file="iDynTree/Core/Span.h" line="338" column="5" bodyfile="iDynTree/Core/Span.h" bodystart="339" bodyend="358"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1details_1_1extent__type_1a46854e836fbb721623e957d561e6fa10" prot="public" virt="non-virtual"><scope>iDynTree::details::extent_type</scope><name>extent_type</name></member>
+      <member refid="classiDynTree_1_1details_1_1extent__type_1abeb2370674effef407cfdec253237646" prot="public" virt="non-virtual"><scope>iDynTree::details::extent_type</scope><name>extent_type</name></member>
+      <member refid="classiDynTree_1_1details_1_1extent__type_1a7cd2e47572b105561bfe9aae5eb4ce5e" prot="public" virt="non-virtual"><scope>iDynTree::details::extent_type</scope><name>extent_type</name></member>
+      <member refid="classiDynTree_1_1details_1_1extent__type_1a05acb6a92ccf5c1c3f66b34c37bb08c1" prot="public" virt="non-virtual"><scope>iDynTree::details::extent_type</scope><name>index_type</name></member>
+      <member refid="classiDynTree_1_1details_1_1extent__type_1a0604686e44d5c986dbb789ffe264862e" prot="public" virt="non-virtual"><scope>iDynTree::details::extent_type</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

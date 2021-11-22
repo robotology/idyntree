@@ -1,0 +1,584 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="ExternalWrenchesEstimation_8h" kind="file" language="C++">
+    <compoundname>ExternalWrenchesEstimation.h</compoundname>
+    <includes refid="Direction_8h" local="no">iDynTree/Core/Direction.h</includes>
+    <includes refid="Position_8h" local="no">iDynTree/Core/Position.h</includes>
+    <includes refid="MatrixDynSize_8h" local="no">iDynTree/Core/MatrixDynSize.h</includes>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/Core/VectorDynSize.h</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
+    <includes refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includes>
+    <includes local="no">vector</includes>
+    <includedby refid="skinDynLibConversions_8h" local="no">iDynTree/skinDynLibConversions.h</includedby>
+    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h</includedby>
+    <includedby refid="GravityCompensationHelpers_8h" local="no">iDynTree/Estimation/GravityCompensationHelpers.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/Estimation/ExternalWrenchesEstimation.h</label>
+        <link refid="ExternalWrenchesEstimation_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structiDynTree_1_1UnknownWrenchContact" prot="public">iDynTree::UnknownWrenchContact</innerclass>
+    <innerclass refid="classiDynTree_1_1LinkUnknownWrenchContacts" prot="public">iDynTree::LinkUnknownWrenchContacts</innerclass>
+    <innerclass refid="structiDynTree_1_1estimateExternalWrenchesBuffers" prot="public">iDynTree::estimateExternalWrenchesBuffers</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="ExternalWrenchesEstimation_8h_1a3af0bfcd7989e409b610847e3b397b26" prot="public" static="no" strong="no">
+        <type></type>
+        <name>UnknownWrenchContactType</name>
+        <enumvalue id="ExternalWrenchesEstimation_8h_1a3af0bfcd7989e409b610847e3b397b26a6abd6bcbc638153015ff2229a4cc6c3f" prot="public">
+          <name>FULL_WRENCH</name>
+          <briefdescription>
+<para>Contact for which the complete wrench is unknown. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="ExternalWrenchesEstimation_8h_1a3af0bfcd7989e409b610847e3b397b26aeb51903155017085b84cc6aac2e2bba6" prot="public">
+          <name>PURE_FORCE</name>
+          <briefdescription>
+<para>Contact assumed to be a pure force excerted on the contact point. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="ExternalWrenchesEstimation_8h_1a3af0bfcd7989e409b610847e3b397b26a7e0e568e396d7cd82bf2fa23ca525a3a" prot="public">
+          <name>PURE_FORCE_WITH_KNOWN_DIRECTION</name>
+          <briefdescription>
+<para>Contact assumed to be a pure force with a known direction excerted on the contact point. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="ExternalWrenchesEstimation_8h_1a3af0bfcd7989e409b610847e3b397b26a40b36711643e2573ff0f03773c0555e2" prot="public">
+          <name>NO_UNKNOWNS</name>
+          <briefdescription>
+<para>The contact forces is assumed to be known. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Type of a <ref refid="structiDynTree_1_1UnknownWrenchContact" kindref="compound">UnknownWrenchContact</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="41" column="1" bodyfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" bodystart="42" bodyend="62"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1ad96bdadc6f50434261b8fdab971904e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::estimateExternalWrenchesWithoutInternalFT</definition>
+        <argsstring>(const Model &amp;model, const Traversal &amp;traversal, const LinkUnknownWrenchContacts &amp;unknownWrenches, const JointPosDoubleArray &amp;jointPos, const LinkVelArray &amp;linkVel, const LinkAccArray &amp;linkProperAcc, estimateExternalWrenchesBuffers &amp;bufs, LinkContactWrenches &amp;outputContactWrenches)</argsstring>
+        <name>estimateExternalWrenchesWithoutInternalFT</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const Traversal &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const LinkUnknownWrenchContacts &amp;</type>
+          <declname>unknownWrenches</declname>
+        </param>
+        <param>
+          <type>const JointPosDoubleArray &amp;</type>
+          <declname>jointPos</declname>
+        </param>
+        <param>
+          <type>const LinkVelArray &amp;</type>
+          <declname>linkVel</declname>
+        </param>
+        <param>
+          <type>const LinkAccArray &amp;</type>
+          <declname>linkProperAcc</declname>
+        </param>
+        <param>
+          <type>estimateExternalWrenchesBuffers &amp;</type>
+          <declname>bufs</declname>
+        </param>
+        <param>
+          <type>LinkContactWrenches &amp;</type>
+          <declname>outputContactWrenches</declname>
+        </param>
+        <briefdescription>
+<para>Estimate the external contact wrenches using the MultiBody Newton-Euler equations. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function is used to estimate the external contacts forces <bold>without</bold> using any measurement of the internal FT sensors. It is tipically used to get data for calibrating the offset of the internal FT sensors. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="269" column="6" declfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" declline="269" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1a4c628669d7801fee070c5ac32312b45d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::estimateExternalWrenches</definition>
+        <argsstring>(const Model &amp;model, const SubModelDecomposition &amp;subModels, const SensorsList &amp;sensors, const LinkUnknownWrenchContacts &amp;unknownWrenches, const JointPosDoubleArray &amp;jointPos, const LinkVelArray &amp;linkVel, const LinkAccArray &amp;linkProperAcc, const SensorsMeasurements &amp;ftSensorsMeasurements, estimateExternalWrenchesBuffers &amp;bufs, LinkContactWrenches &amp;outputContactWrenches)</argsstring>
+        <name>estimateExternalWrenches</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const SubModelDecomposition &amp;</type>
+          <declname>subModels</declname>
+        </param>
+        <param>
+          <type>const SensorsList &amp;</type>
+          <declname>sensors</declname>
+        </param>
+        <param>
+          <type>const LinkUnknownWrenchContacts &amp;</type>
+          <declname>unknownWrenches</declname>
+        </param>
+        <param>
+          <type>const JointPosDoubleArray &amp;</type>
+          <declname>jointPos</declname>
+        </param>
+        <param>
+          <type>const LinkVelArray &amp;</type>
+          <declname>linkVel</declname>
+        </param>
+        <param>
+          <type>const LinkAccArray &amp;</type>
+          <declname>linkProperAcc</declname>
+        </param>
+        <param>
+          <type>const SensorsMeasurements &amp;</type>
+          <declname>ftSensorsMeasurements</declname>
+        </param>
+        <param>
+          <type>estimateExternalWrenchesBuffers &amp;</type>
+          <declname>bufs</declname>
+        </param>
+        <param>
+          <type>LinkContactWrenches &amp;</type>
+          <declname>outputContactWrenches</declname>
+        </param>
+        <briefdescription>
+<para>Estimate the external wrenches trasmitted by the contacts between the model and the external environment. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function exploits the measurements of internal FT sensors (whose structure is contained in the sensors parameters and which measurements are contained in the ftSensorsMeasurements parameters) to compute an estimation of the values of the unknown wrenches specified in the unknownWrenches parameter.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the considered model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">subModels</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a decomposition of the model along the joint of the six axis F/T sensors. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sensors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a description of the sensors available in the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">unknownWrenches</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a description of the contacts for which the contact wrench is unknown. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a vector of link twists, expressed w.r.t to the link orientation and the link origin </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkProperAcc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a vector of link spatial (in the Featherstone sense) and proper accelerations, expressed w.r.t to the link orientation and the link origin </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">ftSensorsMeasurements</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the measurements of the internal six axis F/T sensors. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">outputContactWrenches</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the estimated contact wrenches. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well (the dimension of the inputs are consistent), false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="297" column="6" declfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" declline="297" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1a4552fdf67855209419f189466fbb8e69" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::dynamicsEstimationForwardVelAccKinematics</definition>
+        <argsstring>(const Model &amp;model, const Traversal &amp;traversal, const Vector3 &amp;base_classicalProperAcc, const Vector3 &amp;base_angularVel, const Vector3 &amp;base_angularAcc, const JointPosDoubleArray &amp;jointPos, const JointDOFsDoubleArray &amp;jointVel, const JointDOFsDoubleArray &amp;jointAcc, LinkVelArray &amp;linkVel, LinkAccArray &amp;linkProperAcc)</argsstring>
+        <name>dynamicsEstimationForwardVelAccKinematics</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const Traversal &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const Vector3 &amp;</type>
+          <declname>base_classicalProperAcc</declname>
+        </param>
+        <param>
+          <type>const Vector3 &amp;</type>
+          <declname>base_angularVel</declname>
+        </param>
+        <param>
+          <type>const Vector3 &amp;</type>
+          <declname>base_angularAcc</declname>
+        </param>
+        <param>
+          <type>const JointPosDoubleArray &amp;</type>
+          <declname>jointPos</declname>
+        </param>
+        <param>
+          <type>const JointDOFsDoubleArray &amp;</type>
+          <declname>jointVel</declname>
+        </param>
+        <param>
+          <type>const JointDOFsDoubleArray &amp;</type>
+          <declname>jointAcc</declname>
+        </param>
+        <param>
+          <type>LinkVelArray &amp;</type>
+          <declname>linkVel</declname>
+        </param>
+        <param>
+          <type>LinkAccArray &amp;</type>
+          <declname>linkProperAcc</declname>
+        </param>
+        <briefdescription>
+<para>Modified forward kinematics for torque/force estimation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is a version of forward kinematics modified to fit the needs of joint torques/external wrenches estimation.</para>
+<para>There are several difference with respect to the classical forward kinematics. The first one is that the only inputs necessary related to the base link are the base link classical proper acceleration, the base link angular velocity and the base link angular acceleration. This is because the dynamics of an articulated system does not depend on an offset in linear velocity, and hence the estimation of joint torques/external wrenches is not affected by the base link linear velocity. This will mean that the link velocitity computed by this algorithm are not the velocity of the links with respect to an inertial frame. Nevertherless they can still be used for estimation.</para>
+<para>There are two main ways in which the base information is computed: one is exploiting the knoledge that a link is not moving with respect to an inertial frame: in this case the classical proper acceleration boils down to the inverted gravitational acceleration, while the angular velocity and angular accelerations are equal to zero. The other way is to exploit the measure of an accelerometer and of a gyroscope mounted on the base link of the traversal: the accelerometer will then measure directly the classical proper acceleration, while the gyroscope will measure the angular velocity. The angular acceleration can be computed by numerical derivation, or simply neglected if its effect on the estimation is minimal.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the input model </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">traversal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the traversal used to propagate the velocity and the proper acceleration </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">base_classicalProperAcc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>classical proper acceleration of the base origin </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">base_angularVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>angular velocity of the base link frame </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">base_angularAcc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>angular acceleration of the base link frame </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jointPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>joint positions </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jointVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>joint velocities </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jointAcc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>joint accelerations </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">linkVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of link twists, expressed in the link frame for both orientation and origin </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">linkProperAcc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of link proper spatial acceleration, expressed in the link frame for both orientation and origin </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="349" column="6" declfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" declline="349" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1a9c5c034c8fc89c4d0d19f17d2134a7a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::dynamicsEstimationForwardVelKinematics</definition>
+        <argsstring>(const Model &amp;model, const Traversal &amp;traversal, const Vector3 &amp;base_angularVel, const JointPosDoubleArray &amp;jointPos, const JointDOFsDoubleArray &amp;jointVel, LinkVelArray &amp;linkVel)</argsstring>
+        <name>dynamicsEstimationForwardVelKinematics</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const Traversal &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const Vector3 &amp;</type>
+          <declname>base_angularVel</declname>
+        </param>
+        <param>
+          <type>const JointPosDoubleArray &amp;</type>
+          <declname>jointPos</declname>
+        </param>
+        <param>
+          <type>const JointDOFsDoubleArray &amp;</type>
+          <declname>jointVel</declname>
+        </param>
+        <param>
+          <type>LinkVelArray &amp;</type>
+          <declname>linkVel</declname>
+        </param>
+        <briefdescription>
+<para>Modified forward kinematics for floating basedynamics estimation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is a version of velocity forward kinematics modified to fit the needs of free floating dynamics estimation.</para>
+<para>There are several difference with respect to the classical forward kinematics. The first one is that the only inputs necessary related to the base link is the base link angular velocity. This is because the dynamics of an articulated system does not depend on an offset in linear velocity. This will mean that the link velocities computed by this algorithm are not the velocity of the links with respect to an inertial frame. Nevertherless they can still be used for estimation.</para>
+<para>There are two main ways in which the base information is computed: one is exploiting the knoledge that a link is not moving with respect to an inertial frame: in this case the angular velocity is equal to zero. The other way is to exploit the measure of a gyroscope mounted on the base link of the traversal: the gyroscope will measure the link angular velocity.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the input model </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">traversal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the traversal used to propagate the velocity and the proper acceleration </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">base_angularVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>angular velocity of the base link frame </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jointPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>joint positions </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jointVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>joint velocities </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">linkVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of link twists, expressed in the link frame for both orientation and origin </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="390" column="6" declfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" declline="390" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1a2cf3011d218d8a98440bdcafdd1d54e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::computeLinkNetWrenchesWithoutGravity</definition>
+        <argsstring>(const Model &amp;model, const LinkVelArray &amp;linkVel, const LinkAccArray &amp;linkProperAcc, LinkNetTotalWrenchesWithoutGravity &amp;linkNetWrenchesWithoutGravity)</argsstring>
+        <name>computeLinkNetWrenchesWithoutGravity</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const LinkVelArray &amp;</type>
+          <declname>linkVel</declname>
+        </param>
+        <param>
+          <type>const LinkAccArray &amp;</type>
+          <declname>linkProperAcc</declname>
+        </param>
+        <param>
+          <type>LinkNetTotalWrenchesWithoutGravity &amp;</type>
+          <declname>linkNetWrenchesWithoutGravity</declname>
+        </param>
+        <briefdescription>
+<para>Compute the net internal and external wrenches (excluding gravity forces) acting on the links. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the input model </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a vector of link twists, expressed w.r.t to the link orientation and the link origin </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkProperAcc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a vector of link spatial (in the Featherstone sense) and proper accelerations, expressed w.r.t to the link orientation and the link origin </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkNetWrenchesWithoutGravity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the vector of the sum of all the wrenches (both internal and external, excluding gravity) acting on link i, expressed (both orientation and point) with respect to the reference frame of link i </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="404" column="6" declfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" declline="404" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="ExternalWrenchesEstimation_8h_1ab6c0784c22088705cc07732b5b29dd4b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::estimateLinkContactWrenchesFromLinkNetExternalWrenches</definition>
+        <argsstring>(const Model &amp;model, const LinkUnknownWrenchContacts &amp;unknownWrenches, const LinkNetExternalWrenches &amp;netExtWrenches, LinkContactWrenches &amp;outputContactWrenches)</argsstring>
+        <name>estimateLinkContactWrenchesFromLinkNetExternalWrenches</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const LinkUnknownWrenchContacts &amp;</type>
+          <declname>unknownWrenches</declname>
+        </param>
+        <param>
+          <type>const LinkNetExternalWrenches &amp;</type>
+          <declname>netExtWrenches</declname>
+        </param>
+        <param>
+          <type>LinkContactWrenches &amp;</type>
+          <declname>outputContactWrenches</declname>
+        </param>
+        <briefdescription>
+<para>Compute the link contact wrenches from the net external wrenches. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If there are more than 6 unknows for link, the problem becomes ill-defined and the function just assign all the external wrench to the first contact.  </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="418" column="6" declfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" declline="418" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h"/>
+  </compounddef>
+</doxygen>

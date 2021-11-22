@@ -1,8 +1,0 @@
-<map id="iDynTree::SpatialAcc" name="iDynTree::SpatialAcc">
-<area shape="rect" id="node1" title="Class representing a spatial acceleration, i.e." alt="" coords="1752,40,1907,67"/>
-<area shape="rect" id="node2" href="$classiDynTree_1_1SpatialMotionVector.html" title="Class providing the raw coordinates for any motion spatial vector (i.e." alt="" coords="1484,40,1703,67"/>
-<area shape="rect" id="node3" href="$classiDynTree_1_1SpatialVector.html" title=" " alt="" coords="1252,33,1435,74"/>
-<area shape="rect" id="node4" href="$classiDynTree_1_1SpatialMotionForceVectorT__traits.html" title=" " alt="" coords="467,33,736,74"/>
-<area shape="rect" id="node6" href="$classiDynTree_1_1SpatialVector.html" title=" " alt="" coords="865,71,1039,97"/>
-<area shape="rect" id="node5" href="$classiDynTree_1_1SpatialMotionForceVectorT__traits.html" title="Traits class for SpatialMotionVector and SpatialForceVector classes." alt="" coords="5,25,257,81"/>
-</map>

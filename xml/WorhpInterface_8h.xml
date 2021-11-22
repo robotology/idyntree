@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="WorhpInterface_8h" kind="file" language="C++">
+    <compoundname>WorhpInterface.h</compoundname>
+    <includes refid="Optimizer_8h" local="no">iDynTree/Optimizer.h</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">string</includes>
+    <incdepgraph>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="2">
+        <label>memory</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/Optimizers/WorhpInterface.h</label>
+        <link refid="WorhpInterface_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1optimization_1_1WorhpInterface" prot="public">iDynTree::optimization::WorhpInterface</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <innernamespace refid="namespaceiDynTree_1_1optimization">iDynTree::optimization</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Optimizers/WorhpInterface.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1IJetsVisualization" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::IJetsVisualization</compoundname>
+    <includes local="no">iDynTree/Visualizer.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1IJetsVisualization_1ab8366cfe76261b91126ec105f30dbb49" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type></type>
+        <definition>virtual iDynTree::IJetsVisualization::~IJetsVisualization</definition>
+        <argsstring>()=0</argsstring>
+        <name>~IJetsVisualization</name>
+        <briefdescription>
+<para>Denstructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="341" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJetsVisualization_1a564022ab25087667da7492d1e6e93d69" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IJetsVisualization::setJetsFrames</definition>
+        <argsstring>(const std::vector&lt; std::string &gt; &amp;jetsFrames)=0</argsstring>
+        <name>setJetsFrames</name>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>jetsFrames</declname>
+        </param>
+        <briefdescription>
+<para>Set the frame on the model on which the jets are visualized. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>this will delete any state related to jets visualization. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="348" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJetsVisualization_1a8de5e560eb90bc9fe3f20a8eb24fd2fa" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>size_t</type>
+        <definition>virtual size_t iDynTree::IJetsVisualization::getNrOfJets</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getNrOfJets</name>
+        <briefdescription>
+<para>Get the number of visualized jets. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="354" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJetsVisualization_1a0b2356c320266c2566c449956bf644de" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref></type>
+        <definition>virtual Direction iDynTree::IJetsVisualization::getJetDirection</definition>
+        <argsstring>(const int jetIndex) const =0</argsstring>
+        <name>getJetDirection</name>
+        <param>
+          <type>const int</type>
+          <declname>jetIndex</declname>
+        </param>
+        <briefdescription>
+<para>Get jet direction. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="359" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJetsVisualization_1a2a1ac3d77f35e9fd79ddbddd7b1b29ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IJetsVisualization::setJetDirection</definition>
+        <argsstring>(const int jetIndex, const Direction &amp;jetDirection)=0</argsstring>
+        <name>setJetDirection</name>
+        <param>
+          <type>const int</type>
+          <declname>jetIndex</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref> &amp;</type>
+          <declname>jetDirection</declname>
+        </param>
+        <briefdescription>
+<para>Set jet direction. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="364" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJetsVisualization_1ad78993849e33e33935774736e1f5904c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IJetsVisualization::setJetColor</definition>
+        <argsstring>(const int jetIndex, const ColorViz &amp;jetColor)=0</argsstring>
+        <name>setJetColor</name>
+        <param>
+          <type>const int</type>
+          <declname>jetIndex</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ColorViz" kindref="compound">ColorViz</ref> &amp;</type>
+          <declname>jetColor</declname>
+        </param>
+        <briefdescription>
+<para>Set jet color. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="369" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJetsVisualization_1aae1281372be9cc3d335ff796dbcda829" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IJetsVisualization::setJetsDimensions</definition>
+        <argsstring>(const double &amp;minRadius, const double &amp;maxRadius, const double &amp;maxLenght)=0</argsstring>
+        <name>setJetsDimensions</name>
+        <param>
+          <type>const double &amp;</type>
+          <declname>minRadius</declname>
+        </param>
+        <param>
+          <type>const double &amp;</type>
+          <declname>maxRadius</declname>
+        </param>
+        <param>
+          <type>const double &amp;</type>
+          <declname>maxLenght</declname>
+        </param>
+        <briefdescription>
+<para>The jets are visualized as cones attached to the frame,. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="374" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJetsVisualization_1a826b623bcedb5e79bcb97b17c1a39372" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IJetsVisualization::setJetsIntensity</definition>
+        <argsstring>(const VectorDynSize &amp;jetsIntensity)=0</argsstring>
+        <name>setJetsIntensity</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jetsIntensity</declname>
+        </param>
+        <briefdescription>
+<para>Set the jets intensity. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">jetsIntensity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a vector of getNrOfJets values, from 0 (no thrust) 1 (max thrust). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="382" column="18"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Interface to the visualization of jets attached to a model. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Visualizer.h" line="335" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="336" bodyend="383"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1IJetsVisualization_1a0b2356c320266c2566c449956bf644de" prot="public" virt="pure-virtual"><scope>iDynTree::IJetsVisualization</scope><name>getJetDirection</name></member>
+      <member refid="classiDynTree_1_1IJetsVisualization_1a8de5e560eb90bc9fe3f20a8eb24fd2fa" prot="public" virt="pure-virtual"><scope>iDynTree::IJetsVisualization</scope><name>getNrOfJets</name></member>
+      <member refid="classiDynTree_1_1IJetsVisualization_1ad78993849e33e33935774736e1f5904c" prot="public" virt="pure-virtual"><scope>iDynTree::IJetsVisualization</scope><name>setJetColor</name></member>
+      <member refid="classiDynTree_1_1IJetsVisualization_1a2a1ac3d77f35e9fd79ddbddd7b1b29ac" prot="public" virt="pure-virtual"><scope>iDynTree::IJetsVisualization</scope><name>setJetDirection</name></member>
+      <member refid="classiDynTree_1_1IJetsVisualization_1aae1281372be9cc3d335ff796dbcda829" prot="public" virt="pure-virtual"><scope>iDynTree::IJetsVisualization</scope><name>setJetsDimensions</name></member>
+      <member refid="classiDynTree_1_1IJetsVisualization_1a564022ab25087667da7492d1e6e93d69" prot="public" virt="pure-virtual"><scope>iDynTree::IJetsVisualization</scope><name>setJetsFrames</name></member>
+      <member refid="classiDynTree_1_1IJetsVisualization_1a826b623bcedb5e79bcb97b17c1a39372" prot="public" virt="pure-virtual"><scope>iDynTree::IJetsVisualization</scope><name>setJetsIntensity</name></member>
+      <member refid="classiDynTree_1_1IJetsVisualization_1ab8366cfe76261b91126ec105f30dbb49" prot="public" virt="pure-virtual"><scope>iDynTree::IJetsVisualization</scope><name>~IJetsVisualization</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

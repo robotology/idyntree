@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1ICamera" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::ICamera</compoundname>
+    <includes local="no">iDynTree/Visualizer.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1ICamera_1aa5d72accc8332b5aa7d23860d0505768" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type></type>
+        <definition>virtual iDynTree::ICamera::~ICamera</definition>
+        <argsstring>()=0</argsstring>
+        <name>~ICamera</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="83" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ICamera_1a1a253a1e5244c6626f97bd39cc8db538" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::ICamera::setPosition</definition>
+        <argsstring>(const iDynTree::Position &amp;cameraPos)=0</argsstring>
+        <name>setPosition</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &amp;</type>
+          <declname>cameraPos</declname>
+        </param>
+        <briefdescription>
+<para>Set the linear position of the camera w.r.t to the world. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="88" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ICamera_1a2e794876aeb9c6a2dfbf943b6ce264ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::ICamera::setTarget</definition>
+        <argsstring>(const iDynTree::Position &amp;cameraPos)=0</argsstring>
+        <name>setTarget</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &amp;</type>
+          <declname>cameraPos</declname>
+        </param>
+        <briefdescription>
+<para>Set the target of the camera (i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>the point the camera is looking into) w.r.t. the world. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="93" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ICamera_1a42dc67363b38c6f2ef75015772757df8" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
+        <definition>virtual iDynTree::Position iDynTree::ICamera::getPosition</definition>
+        <argsstring>()=0</argsstring>
+        <name>getPosition</name>
+        <briefdescription>
+<para>Get the linear position of the camera w.r.t to the world. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="98" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ICamera_1a77884911bd56a3b0db5e212ab7036647" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
+        <definition>virtual iDynTree::Position iDynTree::ICamera::getTarget</definition>
+        <argsstring>()=0</argsstring>
+        <name>getTarget</name>
+        <briefdescription>
+<para>Get the target of the camera (i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>the point the camera is looking into) w.r.t. the world. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="103" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ICamera_1a265930a8fb324692f7775228ed61f041" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::ICamera::setUpVector</definition>
+        <argsstring>(const Direction &amp;upVector)=0</argsstring>
+        <name>setUpVector</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref> &amp;</type>
+          <declname>upVector</declname>
+        </param>
+        <briefdescription>
+<para>Set the up vector of the camera w.r.t to the world. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="108" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ICamera_1a00fe788c2ad34ff3e8c62f18a42693ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1ICameraAnimator" kindref="compound">ICameraAnimator</ref> *</type>
+        <definition>virtual ICameraAnimator* iDynTree::ICamera::animator</definition>
+        <argsstring>()=0</argsstring>
+        <name>animator</name>
+        <briefdescription>
+<para>Get a pointer to the CameraAnimator object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It is not supposed to be deallocated, and its lifespan coincides with the one of the <ref refid="classiDynTree_1_1ICamera" kindref="compound">ICamera</ref> It is accessible only after the visualizer has been initialized. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="115" column="29"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Interface to manipulate the camera parameters. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Visualizer.h" line="77" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="78" bodyend="117"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1ICamera_1a00fe788c2ad34ff3e8c62f18a42693ac" prot="public" virt="pure-virtual"><scope>iDynTree::ICamera</scope><name>animator</name></member>
+      <member refid="classiDynTree_1_1ICamera_1a42dc67363b38c6f2ef75015772757df8" prot="public" virt="pure-virtual"><scope>iDynTree::ICamera</scope><name>getPosition</name></member>
+      <member refid="classiDynTree_1_1ICamera_1a77884911bd56a3b0db5e212ab7036647" prot="public" virt="pure-virtual"><scope>iDynTree::ICamera</scope><name>getTarget</name></member>
+      <member refid="classiDynTree_1_1ICamera_1a1a253a1e5244c6626f97bd39cc8db538" prot="public" virt="pure-virtual"><scope>iDynTree::ICamera</scope><name>setPosition</name></member>
+      <member refid="classiDynTree_1_1ICamera_1a2e794876aeb9c6a2dfbf943b6ce264ae" prot="public" virt="pure-virtual"><scope>iDynTree::ICamera</scope><name>setTarget</name></member>
+      <member refid="classiDynTree_1_1ICamera_1a265930a8fb324692f7775228ed61f041" prot="public" virt="pure-virtual"><scope>iDynTree::ICamera</scope><name>setUpVector</name></member>
+      <member refid="classiDynTree_1_1ICamera_1aa5d72accc8332b5aa7d23860d0505768" prot="public" virt="pure-virtual"><scope>iDynTree::ICamera</scope><name>~ICamera</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

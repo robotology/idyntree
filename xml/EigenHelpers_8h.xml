@@ -1,0 +1,854 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="EigenHelpers_8h" kind="file" language="C++">
+    <compoundname>EigenHelpers.h</compoundname>
+    <includes local="no">cstddef</includes>
+    <includes local="no">Eigen/Dense</includes>
+    <includes refid="VectorDynSize_8h" local="no">iDynTree/Core/VectorDynSize.h</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
+    <includes refid="MatrixDynSize_8h" local="no">iDynTree/Core/MatrixDynSize.h</includes>
+    <includes refid="MatrixFixSize_8h" local="no">iDynTree/Core/MatrixFixSize.h</includes>
+    <includes refid="SpatialMotionVector_8h" local="no">iDynTree/Core/SpatialMotionVector.h</includes>
+    <includes refid="SpatialForceVector_8h" local="no">iDynTree/Core/SpatialForceVector.h</includes>
+    <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
+    <includes refid="Utils_8h" local="no">iDynTree/Core/Utils.h</includes>
+    <includes refid="SparseMatrix_8h" local="no">iDynTree/Core/SparseMatrix.h</includes>
+    <includedby refid="PrivateUtils_8h" local="no">iDynTree/Core/PrivateUtils.h</includedby>
+    <includedby refid="AttitudeEstimatorUtils_8h" local="no">iDynTree/Estimation/AttitudeEstimatorUtils.h</includedby>
+    <includedby refid="GravityCompensationHelpers_8h" local="no">iDynTree/Estimation/GravityCompensationHelpers.h</includedby>
+    <includedby refid="KalmanFilter_8h" local="no">iDynTree/Estimation/KalmanFilter.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>Eigen/Dense</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/Core/EigenHelpers.h</label>
+        <link refid="EigenHelpers_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>cstddef</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structiDynTree_1_1is__sparsematrix" prot="public">iDynTree::is_sparsematrix</innerclass>
+    <innerclass refid="structiDynTree_1_1is__sparsematrix_3_01iDynTree_1_1SparseMatrix_3_01ordering_01_4_01_4" prot="public">iDynTree::is_sparsematrix&lt; iDynTree::SparseMatrix&lt; ordering &gt; &gt;</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="EigenHelpers_8h_1acad81b92d9885b5eec826b3066af8960" prot="public" static="no">
+        <type>Eigen::Map&lt; Eigen::VectorXd &gt;</type>
+        <definition>typedef Eigen::Map&lt;Eigen::VectorXd&gt; iDynTree::iDynTreeEigenVector</definition>
+        <argsstring></argsstring>
+        <name>iDynTreeEigenVector</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="35" column="24" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="EigenHelpers_8h_1a60faf8b72189d4496f7b7920d5ea3b01" prot="public" static="no">
+        <type>Eigen::Map&lt; const Eigen::VectorXd &gt;</type>
+        <definition>typedef Eigen::Map&lt;const Eigen::VectorXd&gt; iDynTree::iDynTreeEigenConstVector</definition>
+        <argsstring></argsstring>
+        <name>iDynTreeEigenConstVector</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="36" column="24" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="EigenHelpers_8h_1a8dd9b043a4e3ceaa1b9a173e826020aa" prot="public" static="no">
+        <type>Eigen::Matrix&lt; double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor &gt;</type>
+        <definition>typedef Eigen::Matrix&lt;double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor&gt; iDynTree::iDynTreeEigenMatrix</definition>
+        <argsstring></argsstring>
+        <name>iDynTreeEigenMatrix</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="37" column="27" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="EigenHelpers_8h_1a2d3ea8f566b9d5684e3b008a1f8c8d6f" prot="public" static="no">
+        <type>const Eigen::Matrix&lt; double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor &gt;</type>
+        <definition>typedef const Eigen::Matrix&lt;double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor&gt; iDynTree::iDynTreeEigenConstMatrix</definition>
+        <argsstring></argsstring>
+        <name>iDynTreeEigenConstMatrix</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="38" column="33" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="EigenHelpers_8h_1a26eec6588ddf3f8a8546b9f7899590eb" prot="public" static="no">
+        <type>Eigen::Map&lt; iDynTreeEigenMatrix &gt;</type>
+        <definition>typedef Eigen::Map&lt;iDynTreeEigenMatrix&gt; iDynTree::iDynTreeEigenMatrixMap</definition>
+        <argsstring></argsstring>
+        <name>iDynTreeEigenMatrixMap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="39" column="24" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="EigenHelpers_8h_1a2b2522205c120424f4e8740b30bad6aa" prot="public" static="no">
+        <type>Eigen::Map&lt; iDynTreeEigenConstMatrix &gt;</type>
+        <definition>typedef Eigen::Map&lt;iDynTreeEigenConstMatrix&gt; iDynTree::iDynTreeEigenConstMatrixMap</definition>
+        <argsstring></argsstring>
+        <name>iDynTreeEigenConstMatrixMap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="40" column="24" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="EigenHelpers_8h_1a5481a54f7c787fd4cf55a0f5fd21bbb0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::Map&lt; Eigen::VectorXd &gt;</type>
+        <definition>Eigen::Map&lt;Eigen::VectorXd&gt; iDynTree::toEigen</definition>
+        <argsstring>(VectorDynSize &amp;vec)</argsstring>
+        <name>toEigen</name>
+        <param>
+          <type>VectorDynSize &amp;</type>
+          <declname>vec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="53" column="19" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="53" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1a0d2e67fee79a1191ed16ab1d522b0078" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::Map&lt; Eigen::Matrix&lt; double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor &gt; &gt;</type>
+        <definition>Eigen::Map&lt; Eigen::Matrix&lt;double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor&gt; &gt; iDynTree::toEigen</definition>
+        <argsstring>(MatrixDynSize &amp;mat)</argsstring>
+        <name>toEigen</name>
+        <param>
+          <type>MatrixDynSize &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="58" column="19" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="58" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1a3f48b18c53414248343c3adaf5db988c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::Map&lt; const Eigen::VectorXd &gt;</type>
+        <definition>Eigen::Map&lt;const Eigen::VectorXd&gt; iDynTree::toEigen</definition>
+        <argsstring>(const VectorDynSize &amp;vec)</argsstring>
+        <name>toEigen</name>
+        <param>
+          <type>const VectorDynSize &amp;</type>
+          <declname>vec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="63" column="19" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="63" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1a3d1f28b899ee110b8af0c92c9945455c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::Map&lt; const Eigen::VectorXd &gt;</type>
+        <definition>Eigen::Map&lt; Eigen::VectorXd &gt; iDynTree::toEigen</definition>
+        <argsstring>(Span&lt; const double &gt; vec)</argsstring>
+        <name>toEigen</name>
+        <param>
+          <type>Span&lt; const double &gt;</type>
+          <declname>vec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="69" column="19" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="69" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1a529708f2899d75d6491fce5823c6c069" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::Map&lt; const Eigen::Matrix&lt; double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor &gt;, 0, Eigen::Stride&lt; Eigen::Dynamic, Eigen::Dynamic &gt; &gt;</type>
+        <definition>Eigen::Map&lt;const Eigen::Matrix&lt;double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor&gt;, 0, Eigen::Stride&lt;Eigen::Dynamic, Eigen::Dynamic&gt; &gt; iDynTree::toEigen</definition>
+        <argsstring>(const MatrixView&lt; const double &gt; &amp;mat)</argsstring>
+        <name>toEigen</name>
+        <param>
+          <type>const MatrixView&lt; const double &gt; &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="82" column="1" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="82" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1a0007fc5ab429e207c6244ac715f82dc0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::Map&lt; Eigen::Matrix&lt; double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor &gt;, 0, Eigen::Stride&lt; Eigen::Dynamic, Eigen::Dynamic &gt; &gt;</type>
+        <definition>Eigen::Map&lt;Eigen::Matrix&lt;double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor&gt;, 0, Eigen::Stride&lt;Eigen::Dynamic, Eigen::Dynamic&gt; &gt; iDynTree::toEigen</definition>
+        <argsstring>(const MatrixView&lt; double &gt; &amp;mat)</argsstring>
+        <name>toEigen</name>
+        <param>
+          <type>const MatrixView&lt; double &gt; &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="131" column="1" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="131" bodyend="175"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1af9123b8fa68b1799fd197ab4a1acc618" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Eigen::Map&lt; const Eigen::Matrix&lt; double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor &gt; &gt;</type>
+        <definition>Eigen::Map&lt;const Eigen::Matrix&lt;double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor&gt; &gt; iDynTree::toEigen</definition>
+        <argsstring>(const MatrixDynSize &amp;mat)</argsstring>
+        <name>toEigen</name>
+        <param>
+          <type>const MatrixDynSize &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="179" column="19" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="179" bodyend="182"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1a4dc3574842fc660108111d96dac71b23" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>unsigned int</type>
+            <declname>VecSize</declname>
+            <defname>VecSize</defname>
+          </param>
+        </templateparamlist>
+        <type>Eigen::Map&lt; Eigen::Matrix&lt; double, VecSize, 1 &gt; &gt;</type>
+        <definition>Eigen::Map&lt;Eigen::Matrix&lt;double,VecSize,1&gt; &gt; iDynTree::toEigen</definition>
+        <argsstring>(VectorFixSize&lt; VecSize &gt; &amp;vec)</argsstring>
+        <name>toEigen</name>
+        <param>
+          <type>VectorFixSize&lt; VecSize &gt; &amp;</type>
+          <declname>vec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="186" column="19" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="186" bodyend="189"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1a17939782b66cf87bba581ac4d6db6270" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>unsigned int</type>
+            <declname>VecSize</declname>
+            <defname>VecSize</defname>
+          </param>
+        </templateparamlist>
+        <type>Eigen::Map&lt; const Eigen::Matrix&lt; double, VecSize, 1 &gt; &gt;</type>
+        <definition>Eigen::Map&lt;const Eigen::Matrix&lt;double,VecSize,1&gt; &gt; iDynTree::toEigen</definition>
+        <argsstring>(const VectorFixSize&lt; VecSize &gt; &amp;vec)</argsstring>
+        <name>toEigen</name>
+        <param>
+          <type>const VectorFixSize&lt; VecSize &gt; &amp;</type>
+          <declname>vec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="192" column="19" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="192" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1ac34e051a03bd114394e71919b795171e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>unsigned int</type>
+            <declname>nRows</declname>
+            <defname>nRows</defname>
+          </param>
+          <param>
+            <type>unsigned int</type>
+            <declname>nCols</declname>
+            <defname>nCols</defname>
+          </param>
+        </templateparamlist>
+        <type>Eigen::Map&lt; Eigen::Matrix&lt; double, nRows, nCols, Eigen::RowMajor &gt; &gt;</type>
+        <definition>Eigen::Map&lt; Eigen::Matrix&lt;double,nRows,nCols,Eigen::RowMajor&gt; &gt; iDynTree::toEigen</definition>
+        <argsstring>(MatrixFixSize&lt; nRows, nCols &gt; &amp;mat)</argsstring>
+        <name>toEigen</name>
+        <param>
+          <type>MatrixFixSize&lt; nRows, nCols &gt; &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="198" column="19" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="198" bodyend="201"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1ab60f7d72717e939931bf139b222b2832" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>unsigned int</type>
+            <declname>nRows</declname>
+            <defname>nRows</defname>
+          </param>
+        </templateparamlist>
+        <type>Eigen::Map&lt; Eigen::Matrix&lt; double, nRows, 1 &gt; &gt;</type>
+        <definition>Eigen::Map&lt; Eigen::Matrix&lt;double,nRows,1&gt; &gt; iDynTree::toEigen</definition>
+        <argsstring>(MatrixFixSize&lt; nRows, 1 &gt; &amp;mat)</argsstring>
+        <name>toEigen</name>
+        <param>
+          <type>MatrixFixSize&lt; nRows, 1 &gt; &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="204" column="19" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="204" bodyend="207"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1a3153f5d1e97e538fae73b906b511c518" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>unsigned int</type>
+            <declname>nCols</declname>
+            <defname>nCols</defname>
+          </param>
+        </templateparamlist>
+        <type>Eigen::Map&lt; Eigen::Matrix&lt; double, 1, nCols &gt; &gt;</type>
+        <definition>Eigen::Map&lt; Eigen::Matrix&lt;double,1,nCols&gt; &gt; iDynTree::toEigen</definition>
+        <argsstring>(MatrixFixSize&lt; 1, nCols &gt; &amp;mat)</argsstring>
+        <name>toEigen</name>
+        <param>
+          <type>MatrixFixSize&lt; 1, nCols &gt; &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="210" column="19" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="210" bodyend="213"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1a9639a283e2caa3460084f5e3ac48aa49" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>unsigned int</type>
+            <declname>nRows</declname>
+            <defname>nRows</defname>
+          </param>
+          <param>
+            <type>unsigned int</type>
+            <declname>nCols</declname>
+            <defname>nCols</defname>
+          </param>
+        </templateparamlist>
+        <type>Eigen::Map&lt; const Eigen::Matrix&lt; double, nRows, nCols, Eigen::RowMajor &gt; &gt;</type>
+        <definition>Eigen::Map&lt; const Eigen::Matrix&lt;double,nRows,nCols,Eigen::RowMajor&gt; &gt; iDynTree::toEigen</definition>
+        <argsstring>(const MatrixFixSize&lt; nRows, nCols &gt; &amp;mat)</argsstring>
+        <name>toEigen</name>
+        <param>
+          <type>const MatrixFixSize&lt; nRows, nCols &gt; &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="216" column="19" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="216" bodyend="219"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1af643aa15e4ab96c1e19f5364893d4b0b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const Eigen::Matrix&lt; double, 6, 1 &gt;</type>
+        <definition>const Eigen::Matrix&lt;double,6,1&gt; iDynTree::toEigen</definition>
+        <argsstring>(const SpatialMotionVector &amp;vec)</argsstring>
+        <name>toEigen</name>
+        <param>
+          <type>const SpatialMotionVector &amp;</type>
+          <declname>vec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="222" column="28" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="222" bodyend="230"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1a4bb2e73fb98abd04aed4da600567b24b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const Eigen::Matrix&lt; double, 6, 1 &gt;</type>
+        <definition>const Eigen::Matrix&lt;double,6,1&gt; iDynTree::toEigen</definition>
+        <argsstring>(const SpatialForceVector &amp;vec)</argsstring>
+        <name>toEigen</name>
+        <param>
+          <type>const SpatialForceVector &amp;</type>
+          <declname>vec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="232" column="28" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="232" bodyend="240"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1acf2d7088e9fd094e6aa9c79bd4364b69" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::fromEigen</definition>
+        <argsstring>(SpatialMotionVector &amp;vec, const Eigen::Matrix&lt; double, 6, 1 &gt; &amp;eigVec)</argsstring>
+        <name>fromEigen</name>
+        <param>
+          <type>SpatialMotionVector &amp;</type>
+          <declname>vec</declname>
+        </param>
+        <param>
+          <type>const Eigen::Matrix&lt; double, 6, 1 &gt; &amp;</type>
+          <declname>eigVec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="243" column="13" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="243" bodyend="247"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1a1943bf2f7027929dd5a9203b35d60b82" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::fromEigen</definition>
+        <argsstring>(SpatialForceVector &amp;vec, const Eigen::Matrix&lt; double, 6, 1 &gt; &amp;eigVec)</argsstring>
+        <name>fromEigen</name>
+        <param>
+          <type>SpatialForceVector &amp;</type>
+          <declname>vec</declname>
+        </param>
+        <param>
+          <type>const Eigen::Matrix&lt; double, 6, 1 &gt; &amp;</type>
+          <declname>eigVec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="249" column="13" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="249" bodyend="253"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1ad32fda4b9fa803472c83dea084ec14d8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::fromEigen</definition>
+        <argsstring>(Transform &amp;trans, const Eigen::Matrix4d &amp;eigMat)</argsstring>
+        <name>fromEigen</name>
+        <param>
+          <type>Transform &amp;</type>
+          <declname>trans</declname>
+        </param>
+        <param>
+          <type>const Eigen::Matrix4d &amp;</type>
+          <declname>eigMat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="255" column="13" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="255" bodyend="265"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1ae5b49ed3e6ce87e8262be598d41b01bb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Derived</type>
+          </param>
+        </templateparamlist>
+        <type>Eigen::Matrix&lt; typename Derived::Scalar, 3, 3, Eigen::RowMajor &gt;</type>
+        <definition>Eigen::Matrix&lt;typename Derived::Scalar, 3, 3, Eigen::RowMajor&gt; iDynTree::skew</definition>
+        <argsstring>(const Eigen::MatrixBase&lt; Derived &gt; &amp;vec)</argsstring>
+        <name>skew</name>
+        <param>
+          <type>const Eigen::MatrixBase&lt; Derived &gt; &amp;</type>
+          <declname>vec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="268" column="22" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="268" bodyend="274"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1a8e4347585aaeb967bfb2916b135b9357" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Derived</type>
+          </param>
+        </templateparamlist>
+        <type>Eigen::Matrix&lt; typename Derived::Scalar, 3, 1 &gt;</type>
+        <definition>Eigen::Matrix&lt;typename Derived::Scalar, 3, 1&gt; iDynTree::unskew</definition>
+        <argsstring>(const Eigen::MatrixBase&lt; Derived &gt; &amp;mat)</argsstring>
+        <name>unskew</name>
+        <param>
+          <type>const Eigen::MatrixBase&lt; Derived &gt; &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="277" column="22" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="277" bodyend="281"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1ab923f233e9624344a28e361ddc2c4c10" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>unsigned int</type>
+            <declname>nRows</declname>
+            <defname>nRows</defname>
+          </param>
+          <param>
+            <type>unsigned int</type>
+            <declname>nCols</declname>
+            <defname>nCols</defname>
+          </param>
+          <param>
+            <type>typename iDynTreeMatrixType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void iDynTree::setSubMatrix</definition>
+        <argsstring>(iDynTreeMatrixType &amp;mat, const IndexRange rowRange, const IndexRange colRange, const MatrixFixSize&lt; nRows, nCols &gt; &amp;subMat)</argsstring>
+        <name>setSubMatrix</name>
+        <param>
+          <type>iDynTreeMatrixType &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <param>
+          <type>const IndexRange</type>
+          <declname>rowRange</declname>
+        </param>
+        <param>
+          <type>const IndexRange</type>
+          <declname>colRange</declname>
+        </param>
+        <param>
+          <type>const MatrixFixSize&lt; nRows, nCols &gt; &amp;</type>
+          <declname>subMat</declname>
+        </param>
+        <briefdescription>
+<para>Submatrix helpers. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="288" column="13" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="288" bodyend="299"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1a46433c21ed1226e759f6d2471731ff20" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename iDynTreeMatrixType</type>
+          </param>
+          <param>
+            <type>typename EigMatType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void iDynTree::setSubMatrix</definition>
+        <argsstring>(iDynTreeMatrixType &amp;mat, const IndexRange rowRange, const IndexRange colRange, const EigMatType &amp;subMat)</argsstring>
+        <name>setSubMatrix</name>
+        <param>
+          <type>iDynTreeMatrixType &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <param>
+          <type>const IndexRange</type>
+          <declname>rowRange</declname>
+        </param>
+        <param>
+          <type>const IndexRange</type>
+          <declname>colRange</declname>
+        </param>
+        <param>
+          <type>const EigMatType &amp;</type>
+          <declname>subMat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="302" column="13" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="302" bodyend="312"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1a15eb97c903bd5a5a44d7b36997a383f4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename iDynTreeMatrixType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void iDynTree::setSubMatrix</definition>
+        <argsstring>(iDynTreeMatrixType &amp;mat, const IndexRange rowRange, const IndexRange colRange, const double subMat)</argsstring>
+        <name>setSubMatrix</name>
+        <param>
+          <type>iDynTreeMatrixType &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <param>
+          <type>const IndexRange</type>
+          <declname>rowRange</declname>
+        </param>
+        <param>
+          <type>const IndexRange</type>
+          <declname>colRange</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>subMat</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="315" column="13" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="315" bodyend="327"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1acab405374af27aa1405539284ac1c79a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename iDynTreeMatrixType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void iDynTree::setSubMatrixToIdentity</definition>
+        <argsstring>(iDynTreeMatrixType &amp;mat, const IndexRange rowRange, const IndexRange colRange)</argsstring>
+        <name>setSubMatrixToIdentity</name>
+        <param>
+          <type>iDynTreeMatrixType &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <param>
+          <type>const IndexRange</type>
+          <declname>rowRange</declname>
+        </param>
+        <param>
+          <type>const IndexRange</type>
+          <declname>colRange</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="330" column="13" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="330" bodyend="343"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1a05bb9e8c80231289997f79ffc0b2e97c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename iDynTreeMatrixType</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void iDynTree::setSubMatrixToMinusIdentity</definition>
+        <argsstring>(iDynTreeMatrixType &amp;mat, const IndexRange rowRange, const IndexRange colRange)</argsstring>
+        <name>setSubMatrixToMinusIdentity</name>
+        <param>
+          <type>iDynTreeMatrixType &amp;</type>
+          <declname>mat</declname>
+        </param>
+        <param>
+          <type>const IndexRange</type>
+          <declname>rowRange</declname>
+        </param>
+        <param>
+          <type>const IndexRange</type>
+          <declname>colRange</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="346" column="13" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="346" bodyend="359"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1a6dd6e3fecb51492464bb6648090d9785" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>unsigned int</type>
+            <declname>size</declname>
+            <defname>size</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void iDynTree::setSubVector</definition>
+        <argsstring>(VectorDynSize &amp;vec, const IndexRange range, const VectorFixSize&lt; size &gt; &amp;subVec)</argsstring>
+        <name>setSubVector</name>
+        <param>
+          <type>VectorDynSize &amp;</type>
+          <declname>vec</declname>
+        </param>
+        <param>
+          <type>const IndexRange</type>
+          <declname>range</declname>
+        </param>
+        <param>
+          <type>const VectorFixSize&lt; size &gt; &amp;</type>
+          <declname>subVec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="363" column="13" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="363" bodyend="369"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1ac065bee2dbb9521e07df4d769992ccd6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::setSubVector</definition>
+        <argsstring>(VectorDynSize &amp;vec, const IndexRange range, double subVec)</argsstring>
+        <name>setSubVector</name>
+        <param>
+          <type>VectorDynSize &amp;</type>
+          <declname>vec</declname>
+        </param>
+        <param>
+          <type>const IndexRange</type>
+          <declname>range</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>subVec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="371" column="13" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="371" bodyend="378"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1a60fc528e9cb5bb8f0a41ad51ae464ac5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::setSubVector</definition>
+        <argsstring>(VectorDynSize &amp;vec, const IndexRange range, const SpatialMotionVector &amp;twist)</argsstring>
+        <name>setSubVector</name>
+        <param>
+          <type>VectorDynSize &amp;</type>
+          <declname>vec</declname>
+        </param>
+        <param>
+          <type>const IndexRange</type>
+          <declname>range</declname>
+        </param>
+        <param>
+          <type>const SpatialMotionVector &amp;</type>
+          <declname>twist</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="380" column="13" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="380" bodyend="387"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1a6c26a20e65041a0023677f35f84563f4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::setSubVector</definition>
+        <argsstring>(VectorDynSize &amp;vec, const IndexRange range, const SpatialForceVector &amp;wrench)</argsstring>
+        <name>setSubVector</name>
+        <param>
+          <type>VectorDynSize &amp;</type>
+          <declname>vec</declname>
+        </param>
+        <param>
+          <type>const IndexRange</type>
+          <declname>range</declname>
+        </param>
+        <param>
+          <type>const SpatialForceVector &amp;</type>
+          <declname>wrench</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="389" column="13" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="389" bodyend="396"/>
+      </memberdef>
+      <memberdef kind="function" id="EigenHelpers_8h_1a3707e4cd79954877014299710fee2607" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void iDynTree::setSubVector</definition>
+        <argsstring>(VectorDynSize &amp;vec, const IndexRange range, const T &amp;subVec)</argsstring>
+        <name>setSubVector</name>
+        <param>
+          <type>VectorDynSize &amp;</type>
+          <declname>vec</declname>
+        </param>
+        <param>
+          <type>const IndexRange</type>
+          <declname>range</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>subVec</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/EigenHelpers.h" line="399" column="13" bodyfile="iDynTree/Core/EigenHelpers.h" bodystart="399" bodyend="405"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/EigenHelpers.h"/>
+  </compounddef>
+</doxygen>

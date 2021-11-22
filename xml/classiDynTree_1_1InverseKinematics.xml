@@ -1,0 +1,3304 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1InverseKinematics" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::InverseKinematics</compoundname>
+    <includes local="no">iDynTree/InverseKinematics.h</includes>
+      <sectiondef kind="user-defined">
+      <header>Parameters-related methods</header>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1abd8b70a018553ec30f0998092ea28c62" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::InverseKinematics::setMaxIterations</definition>
+        <argsstring>(const int max_iter)</argsstring>
+        <name>setMaxIterations</name>
+        <param>
+          <type>const int</type>
+          <declname>max_iter</declname>
+        </param>
+        <briefdescription>
+<para>Sets Maximum Iteration. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The default value for this parameter is 3000 .</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>max_iter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>exits if iter&gt;=max_iter (max_iter&lt;0 disables this check). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="228" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a2e1534f0883aa48bbd7396fb03ab9cc3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int iDynTree::InverseKinematics::maxIterations</definition>
+        <argsstring>() const</argsstring>
+        <name>maxIterations</name>
+        <briefdescription>
+<para>Retrieves the current value of Maximum Iteration. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>max_iter. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="234" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a94fbd05f09b0fa2d7f98af110992dd02" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::InverseKinematics::setMaxCPUTime</definition>
+        <argsstring>(const double max_cpu_time)</argsstring>
+        <name>setMaxCPUTime</name>
+        <param>
+          <type>const double</type>
+          <declname>max_cpu_time</declname>
+        </param>
+        <briefdescription>
+<para>Sets Maximum CPU seconds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The default value for this parameter is \frac$ 10^{6} \frac$ .</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>max_cpu_time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>exits if cpu_time&gt;=max_cpu_time given in seconds. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="244" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a7022f8652423611388707ad40ca71205" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::InverseKinematics::maxCPUTime</definition>
+        <argsstring>() const</argsstring>
+        <name>maxCPUTime</name>
+        <briefdescription>
+<para>Retrieves the current value of Maximum CPU seconds. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>max_cpu_time. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="250" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a972eaa443d246d15a411b8b0c5e70a62" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::InverseKinematics::setCostTolerance</definition>
+        <argsstring>(const double tol)</argsstring>
+        <name>setCostTolerance</name>
+        <param>
+          <type>const double</type>
+          <declname>tol</declname>
+        </param>
+        <briefdescription>
+<para>Sets cost function tolerance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The default value for this parameter is \frac$ 10^{-8} \frac$ .</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>tolerance. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="259" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a902ce28213d60568f68456511f57493e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::InverseKinematics::costTolerance</definition>
+        <argsstring>() const</argsstring>
+        <name>costTolerance</name>
+        <briefdescription>
+<para>Retrieves cost function tolerance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>tolerance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="265" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a963881a6913d92c4a224b68af44918fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::InverseKinematics::setConstraintsTolerance</definition>
+        <argsstring>(const double constr_tol)</argsstring>
+        <name>setConstraintsTolerance</name>
+        <param>
+          <type>const double</type>
+          <declname>constr_tol</declname>
+        </param>
+        <briefdescription>
+<para>Sets constraints tolerance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The default value for this parameter is \frac$ 10^{-4} \frac$ .</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>tolerance. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="274" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a431451fac26b849ab7b9157170926461" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::InverseKinematics::constraintsTolerance</definition>
+        <argsstring>() const</argsstring>
+        <name>constraintsTolerance</name>
+        <briefdescription>
+<para>Retrieves constraints tolerance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>tolerance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="280" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a7fd58eaeec333ffe4a8b1cf68f48199a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::InverseKinematics::setVerbosity</definition>
+        <argsstring>(const unsigned int verbose)</argsstring>
+        <name>setVerbosity</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>verbose</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Sets Verbosity. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>verbose</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is a integer number which progressively enables different levels of warning messages or status dump. The larger this value the more detailed is the output. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="289" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a79c65c3b6ecb3b1de2cf84b319dbcca0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::InverseKinematics::linearSolverName</definition>
+        <argsstring>()</argsstring>
+        <name>linearSolverName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="291" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1af45198b610d4f871a7fd0ed8b5b66846" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::InverseKinematics::setLinearSolverName</definition>
+        <argsstring>(const std::string &amp;solverName)</argsstring>
+        <name>setLinearSolverName</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>solverName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="292" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Constraints-related methods</header>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a7e721cd49fb9d2910dab79677a3febc0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::addFrameConstraint</definition>
+        <argsstring>(const std::string &amp;frameName)</argsstring>
+        <name>addFrameConstraint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Adds a (constancy) constraint for the specified frame</para>
+<para>The constraint is <formula id="27">$ {}^w X_{frame}(q) = {}^w X_{frame}(q^0) $</formula> where the robot configuration <formula id="19">$q$</formula> is the one specified with setRobotConfiguration <simplesect kind="note"><para>you should specify first the robot configuration. Otherwise call the versions with explicit constraint value </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the frame name</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="313" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1ad32732917055324e9e43b665f10d6d89" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::addFrameConstraint</definition>
+        <argsstring>(const std::string &amp;frameName, const iDynTree::Transform &amp;constraintValue)</argsstring>
+        <name>addFrameConstraint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>constraintValue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Adds a (constancy) constraint for the specified frame</para>
+<para>The homogeneous trasformation of the specified frame w.r.t. the inertial frame will remain constant and equal to the specified second parameter</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame on which to attach the constraint </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>constraintValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the transform to associate to the constraint.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="326" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a7a0e4da328fbddd0614297870557a259" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::addFrameConstraint</definition>
+        <argsstring>(const std::string &amp;frameName, iDynTree::MatrixView&lt; const double &gt; constraintValue)</argsstring>
+        <name>addFrameConstraint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixView" kindref="compound">iDynTree::MatrixView</ref>&lt; const double &gt;</type>
+          <declname>constraintValue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Adds a (constancy) constraint for the specified frame</para>
+<para>The homogeneous trasformation of the specified frame w.r.t. the inertial frame will remain constant and equal to the specified second parameter</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame on which to attach the constraint </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>constraintValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the 4x4 homogeneous transformation to associate to the constraint.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="warning"><para>the <ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> and the <ref refid="classiDynTree_1_1MatrixView" kindref="compound">MatrixView</ref> objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects. </para>
+</simplesect>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="341" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a8247e588e7c6a6caf37a52345c58a2a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::addFramePositionConstraint</definition>
+        <argsstring>(const std::string &amp;frameName, const iDynTree::Position &amp;constraintValue)</argsstring>
+        <name>addFramePositionConstraint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &amp;</type>
+          <declname>constraintValue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Adds a (constancy) position constraint for the specified frame</para>
+<para>Only the position component of the frame is constrained <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame on which to attach the constraint </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>constraintValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the position associated to the constraint</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="354" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1af1cc1ffb80358f6f2f8dbc91fe6d2ff9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::addFramePositionConstraint</definition>
+        <argsstring>(const std::string &amp;frameName, iDynTree::Span&lt; const double &gt; constraintValue)</argsstring>
+        <name>addFramePositionConstraint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt;</type>
+          <declname>constraintValue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Adds a (constancy) position constraint for the specified frame</para>
+<para>Only the position component of the frame is constrained <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame on which to attach the constraint </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>constraintValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the position associated to the constraint</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="warning"><para>the <ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> and the <ref refid="classiDynTree_1_1MatrixView" kindref="compound">MatrixView</ref> objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects. </para>
+</simplesect>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="367" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a08094142e67312af1c8dc6d43fcc5c54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::addFramePositionConstraint</definition>
+        <argsstring>(const std::string &amp;frameName, const iDynTree::Transform &amp;constraintValue)</argsstring>
+        <name>addFramePositionConstraint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>constraintValue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Adds a (constancy) position constraint for the specified frame</para>
+<para>Only the position component of the frame is constrained <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame on which to attach the constraint </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>constraintValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the position associated to the constraint</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="380" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1afe57acc1e517f7a6037bcb0205048843" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::addFramePositionConstraint</definition>
+        <argsstring>(const std::string &amp;frameName, iDynTree::MatrixView&lt; const double &gt; constraintValue)</argsstring>
+        <name>addFramePositionConstraint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixView" kindref="compound">iDynTree::MatrixView</ref>&lt; const double &gt;</type>
+          <declname>constraintValue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Adds a (constancy) position constraint for the specified frame</para>
+<para>Only the position component of the frame is constrained <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame on which to attach the constraint </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>constraintValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the 4x4 homogeneous transformation to associate to the constraint.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="warning"><para>the <ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> and the <ref refid="classiDynTree_1_1MatrixView" kindref="compound">MatrixView</ref> objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects. </para>
+</simplesect>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="393" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a2581274da87dbf2b9cf8a8d1c34184fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::addFrameRotationConstraint</definition>
+        <argsstring>(const std::string &amp;frameName, const iDynTree::Rotation &amp;constraintValue)</argsstring>
+        <name>addFrameRotationConstraint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Rotation" kindref="compound">iDynTree::Rotation</ref> &amp;</type>
+          <declname>constraintValue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Adds a (constancy) orientation constraint for the specified frame</para>
+<para>Only the orientation component of the frame is constrained <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame on which to attach the constraint </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>constraintValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the orientation associated to the constraint</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="406" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a77e8b8de565f8a5a72f8042b21c03039" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::addFrameRotationConstraint</definition>
+        <argsstring>(const std::string &amp;frameName, iDynTree::MatrixView&lt; const double &gt; constraintValue)</argsstring>
+        <name>addFrameRotationConstraint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixView" kindref="compound">iDynTree::MatrixView</ref>&lt; const double &gt;</type>
+          <declname>constraintValue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Adds a (constancy) orientation constraint for the specified frame</para>
+<para>Only the orientation component of the frame is constrained <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame on which to attach the constraint </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>constraintValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if constraintValue is a 4x4 matrix is considered as homogeneous transformation, if it is a 3x3 is considered as rotation matrix.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="warning"><para>the <ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> and the <ref refid="classiDynTree_1_1MatrixView" kindref="compound">MatrixView</ref> objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects. </para>
+</simplesect>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="419" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a053a41c48598e472cfc5acb69a707810" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::addFrameRotationConstraint</definition>
+        <argsstring>(const std::string &amp;frameName, const iDynTree::Transform &amp;constraintValue)</argsstring>
+        <name>addFrameRotationConstraint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>constraintValue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Adds a (constancy) orientation constraint for the specified frame</para>
+<para>Only the orientation component of the frame is constrained <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame on which to attach the constraint </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>constraintValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the orientation associated to the constraint</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="431" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a30de8c616c200e28c9e1a88f5a3b7bf9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::activateFrameConstraint</definition>
+        <argsstring>(const std::string &amp;frameName, iDynTree::MatrixView&lt; const double &gt; newConstraintValue)</argsstring>
+        <name>activateFrameConstraint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixView" kindref="compound">iDynTree::MatrixView</ref>&lt; const double &gt;</type>
+          <declname>newConstraintValue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Activate a given constraint previously added with an addFrame**Constraint method.</para>
+<para><simplesect kind="note"><para>In this version of iDynTree, it is not possible to change the nature of the constraint (Full, <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> or <ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref>) when activating it again.</para>
+</simplesect>
+<simplesect kind="note"><para>This method returns true even if the frame constraint was already activate, it only returns false if the constraint was never added. </para>
+</simplesect>
+<simplesect kind="warning"><para>This method is not meant to be called at each IK loop, and it can increase the computational time of the next call to solve.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame on which to attach the constraint </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>newConstraintValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the 4x4 homogeneous transformation to associate to the pose of the constrained frame (r) in the world frame (w), i.e. ʷHᵣ. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="warning"><para>the <ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> and the <ref refid="classiDynTree_1_1MatrixView" kindref="compound">MatrixView</ref> objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects. </para>
+</simplesect>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="450" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a2e2da211d3d7091ad07a0b384b3ff48d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::activateFrameConstraint</definition>
+        <argsstring>(const std::string &amp;frameName, const Transform &amp;newConstraintValue)</argsstring>
+        <name>activateFrameConstraint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>newConstraintValue</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Activate a given constraint previously added with an addFrame**Constraint method.</para>
+<para><simplesect kind="note"><para>In this version of iDynTree, it is not possible to change the nature of the constraint (Full, <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> or <ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref>) when activating it again.</para>
+</simplesect>
+<simplesect kind="note"><para>This method returns true even if the frame constraint was already activate, it only returns false if the constraint was never added. </para>
+</simplesect>
+<simplesect kind="warning"><para>This method is not meant to be called at each IK loop, and it can increase the computational time of the next call to solve.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame on which to attach the constraint </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>newConstraintValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the pose of the constrained frame (r) in the world frame (w), i.e. ʷHᵣ . </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="468" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a71611b4b312177be7c3682164742304a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::deactivateFrameConstraint</definition>
+        <argsstring>(const std::string &amp;frameName)</argsstring>
+        <name>deactivateFrameConstraint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Deactivate a given constraint previously added with an addFrame**Constraint method.</para>
+<para><simplesect kind="note"><para>This method returns true even if the frame constraint was already deactivated, it only returns false if the constraint was never added.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame on which to attach the constraint </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful (i.e. the constraint is present) , false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="481" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a762635dbe437ce96d4e5e597267be87d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::isFrameConstraintActive</definition>
+        <argsstring>(const std::string &amp;frameName) const</argsstring>
+        <name>isFrameConstraintActive</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Check if a given constraint is active or not.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the constrained frame </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the constraint is active, false if it is not active or it does not exist, or if the frame does not exist. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="490" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1af42335e61bf9fcb4fb62a7d48904e517" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::addCenterOfMassProjectionConstraint</definition>
+        <argsstring>(const std::string &amp;firstSupportFrame, const Polygon &amp;firstSupportPolygon, const iDynTree::Direction xAxisOfPlaneInWorld, const iDynTree::Direction yAxisOfPlaneInWorld, const iDynTree::Position originOfPlaneInWorld=iDynTree::Position::Zero())</argsstring>
+        <name>addCenterOfMassProjectionConstraint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>firstSupportFrame</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Polygon" kindref="compound">Polygon</ref> &amp;</type>
+          <declname>firstSupportPolygon</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Direction" kindref="compound">iDynTree::Direction</ref></type>
+          <declname>xAxisOfPlaneInWorld</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Direction" kindref="compound">iDynTree::Direction</ref></type>
+          <declname>yAxisOfPlaneInWorld</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
+          <declname>originOfPlaneInWorld</declname>
+          <defval>iDynTree::Position::Zero()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Specialization of addCenterOfMassProjectionConstraint when only two support frames are specified. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="495" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a9bdeb6bdba32b5b98f8942bd73bdf70c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::addCenterOfMassProjectionConstraint</definition>
+        <argsstring>(const std::string &amp;firstSupportFrame, const Polygon &amp;firstSupportPolygon, const std::string &amp;secondSupportFrame, const Polygon &amp;secondSupportPolygon, const iDynTree::Direction xAxisOfPlaneInWorld, const iDynTree::Direction yAxisOfPlaneInWorld, const iDynTree::Position originOfPlaneInWorld=iDynTree::Position::Zero())</argsstring>
+        <name>addCenterOfMassProjectionConstraint</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>firstSupportFrame</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Polygon" kindref="compound">Polygon</ref> &amp;</type>
+          <declname>firstSupportPolygon</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>secondSupportFrame</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Polygon" kindref="compound">Polygon</ref> &amp;</type>
+          <declname>secondSupportPolygon</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Direction" kindref="compound">iDynTree::Direction</ref></type>
+          <declname>xAxisOfPlaneInWorld</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Direction" kindref="compound">iDynTree::Direction</ref></type>
+          <declname>yAxisOfPlaneInWorld</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
+          <declname>originOfPlaneInWorld</declname>
+          <defval>iDynTree::Position::Zero()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Specialization of addCenterOfMassProjectionConstraint when only two support frames are specified. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="504" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a5b7509e262a0293039b0ca99daf6344d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::addCenterOfMassProjectionConstraint</definition>
+        <argsstring>(const std::vector&lt; std::string &gt; &amp;supportFrames, const std::vector&lt; Polygon &gt; &amp;supportPolygons, const iDynTree::Direction xAxisOfPlaneInWorld, const iDynTree::Direction yAxisOfPlaneInWorld, const iDynTree::Position originOfPlaneInWorld)</argsstring>
+        <name>addCenterOfMassProjectionConstraint</name>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>supportFrames</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; <ref refid="classiDynTree_1_1Polygon" kindref="compound">Polygon</ref> &gt; &amp;</type>
+          <declname>supportPolygons</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Direction" kindref="compound">iDynTree::Direction</ref></type>
+          <declname>xAxisOfPlaneInWorld</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Direction" kindref="compound">iDynTree::Direction</ref></type>
+          <declname>yAxisOfPlaneInWorld</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
+          <declname>originOfPlaneInWorld</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Add a constant inequality constraint on the projection of the center of mass, assuming an arbitrary number of support links.</para>
+<para>If a subset of the supportFrames is contrained by a FrameConstraint (both position and constraint) and such constraint is active, this constraint adds a inequality constraint to ensure that the center of mass projection lies on the convex hull of the contact polygons. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="520" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1ab430e2a8abbea4b7b02fc7535109ad9f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::InverseKinematics::getCenterOfMassProjectionMargin</definition>
+        <argsstring>()</argsstring>
+        <name>getCenterOfMassProjectionMargin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the distance between the projection of the center of mass projection for the current configuration (set through setRobotConfiguration) and the limit of the convex hull (positive if the center of mass is inside the convex hull, negative if the com is outside the convex hull).</para>
+<para>If no constraint has been added through a call to addCenterOfMassProjectionConstraint, return 0.0 .</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="534" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a30e3692826f3c14bc9d0948285451bfa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::getCenterOfMassProjectConstraintConvexHull</definition>
+        <argsstring>(Polygon2D &amp;convexHull)</argsstring>
+        <name>getCenterOfMassProjectConstraintConvexHull</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Polygon2D" kindref="compound">Polygon2D</ref> &amp;</type>
+          <declname>convexHull</declname>
+        </param>
+        <briefdescription>
+<para>Get the active convex hull. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The convex hull returned is expressed in the plane defined by the xAxisOfPlaneInWorld, yAxisOfPlaneInWorld and originOfPlaneInWorld arguments of the addCenterOfMassProjectionConstraint methods.</para>
+<para>The transform world_H_constraintFrame that describe how the support polygon for each support frame is transformed in the world frame are the one set in the addFrameConstraint method.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">convexHull</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>constraint convex hull for the projected center of mass. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the center of mass projection constraint is active, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="550" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Target-related methods</header>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1af97c2d5f44b64f7e422e70d20c0d49c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::addTarget</definition>
+        <argsstring>(const std::string &amp;frameName, const iDynTree::Transform &amp;targetValue, const double positionWeight=1.0, const double rotationWeight=1.0)</argsstring>
+        <name>addTarget</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>targetValue</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>positionWeight</declname>
+          <defval>1.0</defval>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>rotationWeight</declname>
+          <defval>1.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Adds a target for the specified frame</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame which represents the target </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>targetValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>value that the frame should reach </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">positionWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the position part of the target is handled as a term in the cost function, this specify the weight of this term in the cost function. Default value is 1.0 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rotationWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the rotation part of the target is handled as a term in the cost function, this specify the weight of this term in the cost function. Default value is 1.0 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="571" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a5baa4df2f22184a22f2f2384add29444" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::addTarget</definition>
+        <argsstring>(const std::string &amp;frameName, iDynTree::MatrixView&lt; const double &gt; targetValue, const double positionWeight=1.0, const double rotationWeight=1.0)</argsstring>
+        <name>addTarget</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixView" kindref="compound">iDynTree::MatrixView</ref>&lt; const double &gt;</type>
+          <declname>targetValue</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>positionWeight</declname>
+          <defval>1.0</defval>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>rotationWeight</declname>
+          <defval>1.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Adds a target for the specified frame</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame which represents the target </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>targetValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the 4x4 homogeneous transformation to associate to target. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">positionWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the position part of the target is handled as a term in the cost function, this specify the weight of this term in the cost function. Default value is 1.0 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rotationWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the rotation part of the target is handled as a term in the cost function, this specify the weight of this term in the cost function. Default value is 1.0 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="589" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a9f9571f744198e189b3635cf18b01fa6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::addPositionTarget</definition>
+        <argsstring>(const std::string &amp;frameName, const iDynTree::Position &amp;targetValue, const double positionWeight=1.0)</argsstring>
+        <name>addPositionTarget</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &amp;</type>
+          <declname>targetValue</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>positionWeight</declname>
+          <defval>1.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Adds a position (3D) target for the specified frame</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame which represents the target </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>targetValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>value that the origin of the frame frameName should reach </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">positionWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the position part of the target is handled as a term in the cost function, this specify the weight of this term in the cost function. Default value is 1.0 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="604" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a50394481f87512001d62b14c3121e3c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::addPositionTarget</definition>
+        <argsstring>(const std::string &amp;frameName, iDynTree::Span&lt; const double &gt; targetValue, const double positionWeight=1.0)</argsstring>
+        <name>addPositionTarget</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt;</type>
+          <declname>targetValue</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>positionWeight</declname>
+          <defval>1.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Adds a position (3D) target for the specified frame</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame which represents the target </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>targetValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>value that the origin of the frame frameName should reach </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">positionWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the position part of the target is handled as a term in the cost function, this specify the weight of this term in the cost function. Default value is 1.0 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="618" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a43517efef7345effef2c64ed792293d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::addPositionTarget</definition>
+        <argsstring>(const std::string &amp;frameName, const iDynTree::Transform &amp;targetValue, const double positionWeight=1.0)</argsstring>
+        <name>addPositionTarget</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>targetValue</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>positionWeight</declname>
+          <defval>1.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Adds a position (3D) target for the specified frame</para>
+<para><simplesect kind="note"><para>only the position component of the targetValue parameter will be considered </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame which represents the target </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>targetValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>value that the origin of the frame frameName should reach </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">positionWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the position part of the target is handled as a term in the cost function, this specify the weight of this term in the cost function. Default value is 1.0 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="635" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a60929f94a8fc02358df7018b08edb145" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::addPositionTarget</definition>
+        <argsstring>(const std::string &amp;frameName, iDynTree::MatrixView&lt; const double &gt; targetValue, const double positionWeight=1.0)</argsstring>
+        <name>addPositionTarget</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixView" kindref="compound">iDynTree::MatrixView</ref>&lt; const double &gt;</type>
+          <declname>targetValue</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>positionWeight</declname>
+          <defval>1.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Adds a target for the specified frame</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame which represents the target </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>targetValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the 4x4 homogeneous transformation to associate to target. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">positionWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the position part of the target is handled as a term in the cost function, this specify the weight of this term in the cost function. Default value is 1.0 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rotationWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the rotation part of the target is handled as a term in the cost function, this specify the weight of this term in the cost function. Default value is 1.0 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="652" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1aed8c88ba1c622755f8f6060d7c23f1b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::addRotationTarget</definition>
+        <argsstring>(const std::string &amp;frameName, const iDynTree::Rotation &amp;targetValue, const double rotationWeight=1.0)</argsstring>
+        <name>addRotationTarget</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Rotation" kindref="compound">iDynTree::Rotation</ref> &amp;</type>
+          <declname>targetValue</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>rotationWeight</declname>
+          <defval>1.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Adds an orientation target for the specified frame</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame which represents the target </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>targetValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>value that the orientation of the frame frameName should reach </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rotationWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the rotation part of the target is handled as a term in the cost function, this specify the weight of this term in the cost function. Default value is 1.0 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="666" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1aef054698a036960b0cd9c4201553adee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::addRotationTarget</definition>
+        <argsstring>(const std::string &amp;frameName, const iDynTree::Transform &amp;targetValue, const double rotationWeight=1.0)</argsstring>
+        <name>addRotationTarget</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>targetValue</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>rotationWeight</declname>
+          <defval>1.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Adds an orientation target for the specified frame</para>
+<para><simplesect kind="note"><para>only the orientation component of the targetValue parameter will be considered</para>
+</simplesect>
+This call is equivalent to call <programlisting><codeline><highlight class="normal">addRotationTarget(frameName,<sp/>targetValue.rotation());</highlight></codeline>
+</programlisting> <simplesect kind="see"><para>addRotationTarget(const std::string&amp;, const iDynTree::Rotation&amp;) addTarget(const std::string&amp;, const iDynTree::Transform&amp;)</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame which represents the target </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>targetValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>value that the orientation of the frame frameName should reach </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rotationWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the rotation part of the target is handled as a term in the cost function, this specify the weight of this term in the cost function. Default value is 1.0 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="691" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a4b1859df197c5937202c69f84f525bb8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::addRotationTarget</definition>
+        <argsstring>(const std::string &amp;frameName, iDynTree::MatrixView&lt; const double &gt; targetValue, const double rotationWeight=1.0)</argsstring>
+        <name>addRotationTarget</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixView" kindref="compound">iDynTree::MatrixView</ref>&lt; const double &gt;</type>
+          <declname>targetValue</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>rotationWeight</declname>
+          <defval>1.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Adds an orientation target for the specified frame</para>
+<para><simplesect kind="note"><para>only the orientation component of the targetValue parameter will be considered</para>
+</simplesect>
+This call is equivalent to call <programlisting><codeline><highlight class="normal">addRotationTarget(frameName,<sp/>targetValue.rotation());</highlight></codeline>
+</programlisting> <simplesect kind="see"><para>addRotationTarget(const std::string&amp;, const iDynTree::Rotation&amp;) addTarget(const std::string&amp;, const iDynTree::Transform&amp;)</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame which represents the target </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>targetValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if constraintValue is a 4x4 matrix is considered as homogeneous transformation, if it is a 3x3 is considered as rotation matrix. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rotationWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the rotation part of the target is handled as a term in the cost function, this specify the weight of this term in the cost function. Default value is 1.0 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="717" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1afc04477ad6b4db5fe0ed87eaec33a366" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::updateTarget</definition>
+        <argsstring>(const std::string &amp;frameName, const iDynTree::Transform &amp;targetValue, const double positionWeight=-1.0, const double rotationWeight=-1.0)</argsstring>
+        <name>updateTarget</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>targetValue</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>positionWeight</declname>
+          <defval>-1.0</defval>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>rotationWeight</declname>
+          <defval>-1.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Update the desired target and weights for the specified frame.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame which represents the target </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>targetValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>value that the frame should reach </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">positionWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the position part of the target is handled as a term in the cost function, this specify the weight of this term in the cost function. Default value is the the last one previously set. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rotationWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the rotation part of the target is handled as a term in the cost function, this specify the weight of this term in the cost function. Default value is the the last one previously set. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise, for example if the specified frame target was not previously added with addTarget . </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="735" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a874ce19892a1dfdc52866b5b36f5a6ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::updateTarget</definition>
+        <argsstring>(const std::string &amp;frameName, iDynTree::MatrixView&lt; const double &gt; targetValue, const double positionWeight=-1.0, const double rotationWeight=-1.0)</argsstring>
+        <name>updateTarget</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixView" kindref="compound">iDynTree::MatrixView</ref>&lt; const double &gt;</type>
+          <declname>targetValue</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>positionWeight</declname>
+          <defval>-1.0</defval>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>rotationWeight</declname>
+          <defval>-1.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Update the desired target and weights for the specified frame.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame which represents the target </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>targetValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>4x4 homogeneous transformation to associate to target. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">positionWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the position part of the target is handled as a term in the cost function, this specify the weight of this term in the cost function. Default value is the the last one previously set. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rotationWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the rotation part of the target is handled as a term in the cost function, this specify the weight of this term in the cost function. Default value is the the last one previously set. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise, for example if the specified frame target was not previously added with addTarget . </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="753" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a242d903b37077336e8a7401390968e6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::updatePositionTarget</definition>
+        <argsstring>(const std::string &amp;frameName, const iDynTree::Position &amp;targetValue, const double positionWeight=-1.0)</argsstring>
+        <name>updatePositionTarget</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &amp;</type>
+          <declname>targetValue</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>positionWeight</declname>
+          <defval>-1.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Update the position (3D) target for the specified frame</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame which represents the target </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>targetValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>value that the origin of the frame frameName should reach </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">positionWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the position part of the target is handled as a term in the cost function, this specify the weight of this term in the cost function. Default value is the last one previously set. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise, for example if the specified frame target was not previously added with addTarget or addPositionTarget . </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="768" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1ad60720e6e09de94935c6dc3ab5a31651" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::updatePositionTarget</definition>
+        <argsstring>(const std::string &amp;frameName, iDynTree::Span&lt; const double &gt; targetValue, const double positionWeight=-1.0)</argsstring>
+        <name>updatePositionTarget</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt;</type>
+          <declname>targetValue</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>positionWeight</declname>
+          <defval>-1.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Update the position (3D) target for the specified frame</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame which represents the target </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>targetValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>value that the origin of the frame frameName should reach </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">positionWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the position part of the target is handled as a term in the cost function, this specify the weight of this term in the cost function. Default value is the last one previously set. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise, for example if the specified frame target was not previously added with addTarget or addPositionTarget . </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="783" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a39d99a353d47eae1b831969affc69a38" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::updateRotationTarget</definition>
+        <argsstring>(const std::string &amp;frameName, const iDynTree::Rotation &amp;targetValue, const double rotationWeight=-1.0)</argsstring>
+        <name>updateRotationTarget</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Rotation" kindref="compound">iDynTree::Rotation</ref> &amp;</type>
+          <declname>targetValue</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>rotationWeight</declname>
+          <defval>-1.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Update an orientation target for the specified frame</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame which represents the target </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>targetValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>value that the orientation of the frame frameName should reach </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rotationWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the rotation part of the target is handled as a term in the cost function, this specify the weight of this term in the cost function. Default value is the last one previously set. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise, for example if the specified frame target was not previously added with addTarget or addRotationTarget . </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="797" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1af0f09a2512439c08af78248ec51b12f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::updateRotationTarget</definition>
+        <argsstring>(const std::string &amp;frameName, iDynTree::MatrixView&lt; const double &gt; targetValue, const double rotationWeight=-1.0)</argsstring>
+        <name>updateRotationTarget</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixView" kindref="compound">iDynTree::MatrixView</ref>&lt; const double &gt;</type>
+          <declname>targetValue</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>rotationWeight</declname>
+          <defval>-1.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Update an orientation target for the specified frame</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>frameName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the frame which represents the target </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>targetValue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>3x3 rotation matrix representing the orientation of the frame frameName should reach </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rotationWeight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if the rotation part of the target is handled as a term in the cost function, this specify the weight of this term in the cost function. Default value is the last one previously set. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise, for example if the specified frame target was not previously added with addTarget or addRotationTarget . </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="812" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1ac55e7751070535950a098125d6064d46" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::InverseKinematics::setDefaultTargetResolutionMode</definition>
+        <argsstring>(enum iDynTree::InverseKinematicsTreatTargetAsConstraint mode)</argsstring>
+        <name>setDefaultTargetResolutionMode</name>
+        <param>
+          <type>enum iDynTree::InverseKinematicsTreatTargetAsConstraint</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Specify the default method to solve all the specified targets</para>
+<para>Targets can be solved fully as cost, partially (position or orientation) as cost and the other component as hard constraint or fully as hard constraints <simplesect kind="see"><para><ref refid="classiDynTree_1_1InverseKinematics_1ae5dff5d4891a60e0aeb2c8c66c25c43a" kindref="member">targetResolutionMode()</ref> All the newly added target will have as default resolution mode the one specified in this function. Existing targets will remain unchanged</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the target resolution mode</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="830" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1ada2c44f94a48893d064e90c3400e593d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>enum iDynTree::InverseKinematicsTreatTargetAsConstraint</type>
+        <definition>enum iDynTree::InverseKinematicsTreatTargetAsConstraint iDynTree::InverseKinematics::defaultTargetResolutionMode</definition>
+        <argsstring>()</argsstring>
+        <name>defaultTargetResolutionMode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns the default method to solve all the specified targets</para>
+<para><simplesect kind="see"><para><ref refid="classiDynTree_1_1InverseKinematics_1ac55e7751070535950a098125d6064d46" kindref="member">setDefaultTargetResolutionMode()</ref> All the newly added target will have as default resolution mode the one returned in this function.</para>
+</simplesect>
+<simplesect kind="return"><para>the current default method to solve targets </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="830" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a40c0473418948bdaeb1b002ff167e550" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::setTargetResolutionMode</definition>
+        <argsstring>(const std::string &amp;targetName, enum InverseKinematicsTreatTargetAsConstraint mode)</argsstring>
+        <name>setTargetResolutionMode</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>targetName</declname>
+        </param>
+        <param>
+          <type>enum InverseKinematicsTreatTargetAsConstraint</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Specify the method to solve the specified target</para>
+<para>Targets can be solved fully as cost, partially (position or orientation) as cost and the other component as hard constraint or fully as hard constraints <simplesect kind="see"><para><ref refid="classiDynTree_1_1InverseKinematics_1ae5dff5d4891a60e0aeb2c8c66c25c43a" kindref="member">targetResolutionMode()</ref></para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the target resolution mode </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>targetName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name (frame) identified the target </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise, for example if the specified frame target was not previously added with addTarget or addRotationTarget . </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="855" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1ae5dff5d4891a60e0aeb2c8c66c25c43a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>enum InverseKinematicsTreatTargetAsConstraint</type>
+        <definition>enum InverseKinematicsTreatTargetAsConstraint iDynTree::InverseKinematics::targetResolutionMode</definition>
+        <argsstring>(const std::string &amp;frameName)</argsstring>
+        <name>targetResolutionMode</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Return the target resolution mode</para>
+<para><simplesect kind="see"><para><ref refid="classiDynTree_1_1InverseKinematics_1a40c0473418948bdaeb1b002ff167e550" kindref="member">setTargetResolutionMode</ref> </para>
+</simplesect>
+<simplesect kind="note"><para>If the target hasn&apos;t been specified yet, it returns &quot;InverseKinematicsTreatTargetAsConstraintNone&quot; </para>
+</simplesect>
+<simplesect kind="return"><para>the current target resolution mode, or InverseKinematicsTreatTargetAsConstraintNone if the target cannot be found </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="855" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Solution-related methods</header>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a82b937b35239f7b262391961f4c448ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::InverseKinematics::getFullJointsSolution</definition>
+        <argsstring>(iDynTree::Transform &amp;baseTransformSolution, iDynTree::VectorDynSize &amp;shapeSolution)</argsstring>
+        <name>getFullJointsSolution</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>baseTransformSolution</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>shapeSolution</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="1021" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1acc82ae729ec02fa78d613c1ecec0f8aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::getFullJointsSolution</definition>
+        <argsstring>(iDynTree::MatrixView&lt; double &gt; baseTransformSolution, iDynTree::Span&lt; double &gt; shapeSolution)</argsstring>
+        <name>getFullJointsSolution</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixView" kindref="compound">iDynTree::MatrixView</ref>&lt; double &gt;</type>
+          <declname>baseTransformSolution</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; double &gt;</type>
+          <declname>shapeSolution</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="1024" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a0fe2c9cd84677f6dfd83fdc31e6e39e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::InverseKinematics::getReducedSolution</definition>
+        <argsstring>(iDynTree::Transform &amp;baseTransformSolution, iDynTree::VectorDynSize &amp;shapeSolution)</argsstring>
+        <name>getReducedSolution</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>baseTransformSolution</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>shapeSolution</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Return the last solution of the inverse kinematics problem</para>
+<para>This method returns in the shapeSolution variable only the joints that have been optimised viz. only the joints specified in the consideredJoints variable in the initialization <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">baseTransformSolution</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>solution for the base position </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">shapeSolution</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>solution for the shape (the internal configurations) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="1035" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a67177ec87abea5b38f90d9763e48f28b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::getReducedSolution</definition>
+        <argsstring>(iDynTree::MatrixView&lt; double &gt; baseTransformSolution, iDynTree::Span&lt; double &gt; shapeSolution)</argsstring>
+        <name>getReducedSolution</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixView" kindref="compound">iDynTree::MatrixView</ref>&lt; double &gt;</type>
+          <declname>baseTransformSolution</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; double &gt;</type>
+          <declname>shapeSolution</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Return the last solution of the inverse kinematics problem</para>
+<para>This method returns in the shapeSolution variable only the joints that have been optimised viz. only the joints specified in the consideredJoints variable in the initialization <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">baseTransformSolution</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>4x4 homogeneous matrix solution for the base pose </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">shapeSolution</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>solution for the shape (the internal configurations) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="warning"><para>the <ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> and the <ref refid="classiDynTree_1_1MatrixView" kindref="compound">MatrixView</ref> objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects. </para>
+</simplesect>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="1048" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1InverseKinematics_1a7730e85c13fdeaa4fdc35d96c7866e54" prot="private" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* iDynTree::InverseKinematics::m_pimpl</definition>
+        <argsstring></argsstring>
+        <name>m_pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>private implementation </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="1098" column="10" bodyfile="iDynTree/InverseKinematics.h" bodystart="1098" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a2c7549b37f43c5fdf07cac67aaf0ca87" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::InverseKinematics::InverseKinematics</definition>
+        <argsstring>()</argsstring>
+        <name>InverseKinematics</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Default constructor </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="103" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a0d9e4d4db2a590dad2f6b530b159cd06" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::InverseKinematics::~InverseKinematics</definition>
+        <argsstring>()</argsstring>
+        <name>~InverseKinematics</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Destructor </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="108" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1ac3e893981cbfa2afc88a231d1cace9a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::loadModelFromFile</definition>
+        <argsstring>(const std::string &amp;filename, const std::vector&lt; std::string &gt; &amp;consideredJoints=std::vector&lt; std::string &gt;(), const std::string &amp;filetype=&quot;urdf&quot;)</argsstring>
+        <name>loadModelFromFile</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>consideredJoints</declname>
+          <defval>std::vector&lt; std::string &gt;()</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filetype</declname>
+          <defval>&quot;urdf&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Loads the kinematic model from an external file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>You can specify an optional list specifying which joints are considered as optimization variables (all the joints not contained in the list are considered fixed joint). If the vector is empty all the joints in the model will be considered as optimization variables.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">urdfFile</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>path to the urdf file describing the model </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">consideredJoints</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>list of internal joints describing which joints are optimized </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">filetype</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(optional) explicit definition of the type of the loaded file. Only &quot;urdf&quot; is supported at the moment. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful. False otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="123" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1abb9706235b5fe16f951731ba285582ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::setModel</definition>
+        <argsstring>(const iDynTree::Model &amp;model, const std::vector&lt; std::string &gt; &amp;consideredJoints=std::vector&lt; std::string &gt;())</argsstring>
+        <name>setModel</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>consideredJoints</declname>
+          <defval>std::vector&lt; std::string &gt;()</defval>
+        </param>
+        <briefdescription>
+<para>set the kinematic model to be used in the optimization </para>
+        </briefdescription>
+        <detaileddescription>
+<para>All the degrees of freedom listed in the second parameters will be used as optimization variables. If the vector is empty, all the joints will be used.</para>
+<para><simplesect kind="note"><para>you may want to simplify the model by calling loadReducedModelFromFullModel method contained in the <ref refid="classiDynTree_1_1ModelLoader" kindref="compound">ModelLoader</ref> class.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the kinematic model to be used in the optimization </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful. False otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="140" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1aa6e7d22dbc79871a62a0ba4c6e79fb97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::setJointLimits</definition>
+        <argsstring>(std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;jointLimits)</argsstring>
+        <name>setJointLimits</name>
+        <param>
+          <type>std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;</type>
+          <declname>jointLimits</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set new joint limits <simplesect kind="author"><para>Yue Hu </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>jointLimits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of new joint limits to be imposed </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successfull, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="149" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a1ad4371be984af63072d7f7ffa1f79ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::getJointLimits</definition>
+        <argsstring>(std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;jointLimits)</argsstring>
+        <name>getJointLimits</name>
+        <param>
+          <type>std::vector&lt; std::pair&lt; double, double &gt; &gt; &amp;</type>
+          <declname>jointLimits</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get current joint limits <simplesect kind="author"><para>Yue Hu </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>jointLimits</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of current joint limits </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successfull, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="157" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a1d54045ad46403179e3cd3c076802978" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::InverseKinematics::clearProblem</definition>
+        <argsstring>()</argsstring>
+        <name>clearProblem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Reset the variables. <simplesect kind="note"><para>the model is not removed </para>
+</simplesect>
+<simplesect kind="note"><para>The parameters such as max iterations, max cpu time and verbosity are resetted with this method. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="164" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a238847f4a1308b661cdf14ac4d10caf7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::setFloatingBaseOnFrameNamed</definition>
+        <argsstring>(const std::string &amp;floatingBaseFrameName)</argsstring>
+        <name>setFloatingBaseOnFrameNamed</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>floatingBaseFrameName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="166" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a4ed57acc6905dcaeb4596c46ab6d7a47" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::setCurrentRobotConfiguration</definition>
+        <argsstring>(const iDynTree::Transform &amp;baseConfiguration, const iDynTree::VectorDynSize &amp;jointConfiguration)</argsstring>
+        <name>setCurrentRobotConfiguration</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>baseConfiguration</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>jointConfiguration</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Sets the robot current configuration</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>baseConfiguration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>transformation identifying the base pose with respect to the world frame </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>robotConfiguration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the robot configuration</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>the size (and order) of jointConfiguration must match the joints in the model, not in the consideredJoints variable</para>
+</simplesect>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="180" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a5fa024ea1d7ce12a6baf236c7ccd0457" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::setCurrentRobotConfiguration</definition>
+        <argsstring>(iDynTree::MatrixView&lt; const double &gt; baseConfiguration, iDynTree::Span&lt; const double &gt; jointConfiguration)</argsstring>
+        <name>setCurrentRobotConfiguration</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixView" kindref="compound">iDynTree::MatrixView</ref>&lt; const double &gt;</type>
+          <declname>baseConfiguration</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt;</type>
+          <declname>jointConfiguration</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Sets the robot current configuration</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>baseConfiguration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the 4x4 homogeneous transformation that transforms position vectors expressed in the base reference frame in position frames expressed in the world reference frame (i.e. pos_world = baseConfiguration*pos_base). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>robotConfiguration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the robot configuration</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>the size (and order) of jointConfiguration must match the joints in the model, not in the consideredJoints variable</para>
+</simplesect>
+<simplesect kind="warning"><para>the <ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> and the <ref refid="classiDynTree_1_1MatrixView" kindref="compound">MatrixView</ref> objects should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects. </para>
+</simplesect>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="197" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a321cd9fba3a93857acbf81ee7ce89d6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::setJointConfiguration</definition>
+        <argsstring>(const std::string &amp;jointName, const double jointConfiguration)</argsstring>
+        <name>setJointConfiguration</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>jointName</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>jointConfiguration</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set configuration for the specified joint</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>jointName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>name of the joint </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>jointConfiguration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>new value for the joint</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="209" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a1f3be372eb31516aeb39e3e0a6ae8724" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::InverseKinematics::setRotationParametrization</definition>
+        <argsstring>(enum InverseKinematicsRotationParametrization parametrization)</argsstring>
+        <name>setRotationParametrization</name>
+        <param>
+          <type>enum InverseKinematicsRotationParametrization</type>
+          <declname>parametrization</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="212" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a16f3902ff47fbafeb219c2e22529857d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>enum InverseKinematicsRotationParametrization</type>
+        <definition>enum InverseKinematicsRotationParametrization iDynTree::InverseKinematics::rotationParametrization</definition>
+        <argsstring>()</argsstring>
+        <name>rotationParametrization</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="212" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a30597bf9cef5da3d0c30118a1c132a2c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::setDesiredFullJointsConfiguration</definition>
+        <argsstring>(const iDynTree::VectorDynSize &amp;desiredJointConfiguration, double weight=-1.0)</argsstring>
+        <name>setDesiredFullJointsConfiguration</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>desiredJointConfiguration</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>weight</declname>
+          <defval>-1.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Sets a desired final configuration for all the robot joints.</para>
+<para>The solver will try to obtain solutions as similar to the specified configuration as possible</para>
+<para><simplesect kind="note"><para>the desiredJointConfiguration have the same serialisation of the joints in the specified model</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">desiredJointConfiguration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>configuration for the joints </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">weight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>weight for the joint configuration cost. If it is not passed, the previous passed value will be mantained. If the value was never passed, its value is 1e-6 .</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="882" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a18df94c58e4c3fdbb1026ced7f8541db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::setDesiredFullJointsConfiguration</definition>
+        <argsstring>(iDynTree::Span&lt; const double &gt; desiredJointConfiguration, double weight=-1.0)</argsstring>
+        <name>setDesiredFullJointsConfiguration</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt;</type>
+          <declname>desiredJointConfiguration</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>weight</declname>
+          <defval>-1.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Sets a desired final configuration for all the robot joints.</para>
+<para>The solver will try to obtain solutions as similar to the specified configuration as possible</para>
+<para><simplesect kind="note"><para>the desiredJointConfiguration have the same serialisation of the joints in the specified model</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">desiredJointConfiguration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>configuration for the joints </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">weight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>weight for the joint configuration cost. If it is not passed, the previous passed value will be mantained. If the value was never passed, its value is 1e-6 .</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="898" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a50c9eede82cbe551388baceed52240ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::setDesiredFullJointsConfiguration</definition>
+        <argsstring>(const iDynTree::VectorDynSize &amp;desiredJointConfiguration, const iDynTree::VectorDynSize &amp;weights)</argsstring>
+        <name>setDesiredFullJointsConfiguration</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>desiredJointConfiguration</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>weights</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Sets a desired final configuration for all the robot joints.</para>
+<para>The solver will try to obtain solutions as similar to the specified configuration as possible</para>
+<para><simplesect kind="note"><para>the desiredJointConfiguration have the same serialisation of the joints in the specified model</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">desiredJointConfiguration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>configuration for the joints </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">weights</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Joint-wise weights for the joint configuration cost. This vector should have the same dimension of the desiredJointConfiguration. If one of its elements is negative, the previous value will be kept. If the value was never passed, its value is 1e-6, equal for all joints.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="916" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a04cc9fea6a73e234cc42c9740cf75f6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::setDesiredFullJointsConfiguration</definition>
+        <argsstring>(iDynTree::Span&lt; const double &gt; desiredJointConfiguration, iDynTree::Span&lt; const double &gt; weights)</argsstring>
+        <name>setDesiredFullJointsConfiguration</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt;</type>
+          <declname>desiredJointConfiguration</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt;</type>
+          <declname>weights</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Sets a desired final configuration for all the robot joints.</para>
+<para>The solver will try to obtain solutions as similar to the specified configuration as possible</para>
+<para><simplesect kind="note"><para>the desiredJointConfiguration have the same serialisation of the joints in the specified model</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">desiredJointConfiguration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>configuration for the joints </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">weights</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Joint-wise weights for the joint configuration cost. This vector should have the same dimension of the desiredJointConfiguration. If one of its elements is negative, the previous value will be kept. If the value was never passed, its value is 1e-6, equal for all joints.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="933" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1af22154b11fa87fbb0be902f85e4a4a37" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::setDesiredReducedJointConfiguration</definition>
+        <argsstring>(const iDynTree::VectorDynSize &amp;desiredJointConfiguration, double weight=-1.0)</argsstring>
+        <name>setDesiredReducedJointConfiguration</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>desiredJointConfiguration</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>weight</declname>
+          <defval>-1.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Sets a desired final configuration for the set of considered joints.</para>
+<para>The solver will try to obtain solutions as similar to the specified configuration as possible</para>
+<para><simplesect kind="note"><para>the desiredJointConfiguration have the same order of the joints in the consideredJoints list.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">desiredJointConfiguration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>configuration for the joints </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">weight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>weight for the joint configuration cost. If it is not passed, the previous passed value will be mantained. If the value was never passed, its value is 1e-6 .</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="951" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a78719fcf5564a9f1831d109c3cc69970" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::setDesiredReducedJointConfiguration</definition>
+        <argsstring>(iDynTree::Span&lt; const double &gt; desiredJointConfiguration, double weight=-1.0)</argsstring>
+        <name>setDesiredReducedJointConfiguration</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt;</type>
+          <declname>desiredJointConfiguration</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>weight</declname>
+          <defval>-1.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Sets a desired final configuration for the set of considered joints.</para>
+<para>The solver will try to obtain solutions as similar to the specified configuration as possible</para>
+<para><simplesect kind="note"><para>the desiredJointConfiguration have the same order of the joints in the consideredJoints list.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">desiredJointConfiguration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>configuration for the joints </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">weight</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>weight for the joint configuration cost. If it is not passed, the previous passed value will be mantained. If the value was never passed, its value is 1e-6 .</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="968" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1ae084dff57455232ec11cfe81f9888eda" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::setDesiredReducedJointConfiguration</definition>
+        <argsstring>(const iDynTree::VectorDynSize &amp;desiredJointConfiguration, const iDynTree::VectorDynSize &amp;weights)</argsstring>
+        <name>setDesiredReducedJointConfiguration</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>desiredJointConfiguration</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>weights</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Sets a desired final configuration for the set of considered joints.</para>
+<para>The solver will try to obtain solutions as similar to the specified configuration as possible</para>
+<para><simplesect kind="note"><para>the desiredJointConfiguration have the same order of the joints in the consideredJoints list.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">desiredJointConfiguration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>configuration for the joints </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">weights</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Joint-wise weights for the joint configuration cost. This vector should have the same dimension of the desiredJointConfiguration. If one of its elements is negative, the previous value will be kept. If the value was never passed, its value is 1e-6, equal for all joints.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="987" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a707a36a5a3a9363bf8c2a92c7b31d8a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::setDesiredReducedJointConfiguration</definition>
+        <argsstring>(iDynTree::Span&lt; const double &gt; desiredJointConfiguration, iDynTree::Span&lt; const double &gt; weights)</argsstring>
+        <name>setDesiredReducedJointConfiguration</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt;</type>
+          <declname>desiredJointConfiguration</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt;</type>
+          <declname>weights</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Sets a desired final configuration for the set of considered joints.</para>
+<para>The solver will try to obtain solutions as similar to the specified configuration as possible</para>
+<para><simplesect kind="note"><para>the desiredJointConfiguration have the same order of the joints in the consideredJoints list.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">desiredJointConfiguration</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>configuration for the joints </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">weights</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Joint-wise weights for the joint configuration cost. This vector should have the same dimension of the desiredJointConfiguration. If one of its elements is negative, the previous value will be kept. If the value was never passed, its value is 1e-6, equal for all joints.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="1005" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a79edd849ba6eb8d0b549cad3c9c00106" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::setFullJointsInitialCondition</definition>
+        <argsstring>(const iDynTree::Transform *baseTransform, const iDynTree::VectorDynSize *initialCondition)</argsstring>
+        <name>setFullJointsInitialCondition</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> *</type>
+          <declname>baseTransform</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> *</type>
+          <declname>initialCondition</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="1009" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1af16eec79ccbccf5a180d46e874712e53" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::setReducedInitialCondition</definition>
+        <argsstring>(const iDynTree::Transform *baseTransform, const iDynTree::VectorDynSize *initialCondition)</argsstring>
+        <name>setReducedInitialCondition</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> *</type>
+          <declname>baseTransform</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> *</type>
+          <declname>initialCondition</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="1011" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1af4d51059431c6fed8e83983379e143d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::solve</definition>
+        <argsstring>()</argsstring>
+        <name>solve</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="1015" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1af672ccd4e2c30ac0ebbff58146ded4a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::getPoseForFrame</definition>
+        <argsstring>(const std::string &amp;frameName, iDynTree::Transform &amp;transform)</argsstring>
+        <name>getPoseForFrame</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>transform</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="1054" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a23b43854dd578c1f0317488dc7c31487" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::getPoseForFrame</definition>
+        <argsstring>(const std::string &amp;frameName, iDynTree::MatrixView&lt; double &gt; transform)</argsstring>
+        <name>getPoseForFrame</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>frameName</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixView" kindref="compound">iDynTree::MatrixView</ref>&lt; double &gt;</type>
+          <declname>transform</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="1056" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1af53e1651988418a787b956240d9da855" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+        <definition>const Model&amp; iDynTree::InverseKinematics::fullModel</definition>
+        <argsstring>() const</argsstring>
+        <name>fullModel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="1068" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a08682d742b4dcbe7cc3a359d77926e15" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+        <definition>const Model&amp; iDynTree::InverseKinematics::reducedModel</definition>
+        <argsstring>() const</argsstring>
+        <name>reducedModel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="1070" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a1edaecf608d2780adea491a03fa70b2e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::InverseKinematics::setCOMTarget</definition>
+        <argsstring>(const iDynTree::Position &amp;desiredPosition, double weight=1.0)</argsstring>
+        <name>setCOMTarget</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &amp;</type>
+          <declname>desiredPosition</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>weight</declname>
+          <defval>1.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="1072" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a8e7d4e0d6a4f6fcc1c19d429ea0d09aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::setCOMTarget</definition>
+        <argsstring>(iDynTree::Span&lt; const double &gt; desiredPosition, double weight=1.0)</argsstring>
+        <name>setCOMTarget</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt;</type>
+          <declname>desiredPosition</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>weight</declname>
+          <defval>1.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="1074" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a557041738a620f4ce2ef433083b9b3a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::InverseKinematics::setCOMAsConstraint</definition>
+        <argsstring>(bool asConstraint=true)</argsstring>
+        <name>setCOMAsConstraint</name>
+        <param>
+          <type>bool</type>
+          <declname>asConstraint</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="1076" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1ab2776f60ee744d261552c5685bec170f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::InverseKinematics::setCOMAsConstraintTolerance</definition>
+        <argsstring>(double tolerance=1e-8)</argsstring>
+        <name>setCOMAsConstraintTolerance</name>
+        <param>
+          <type>double</type>
+          <declname>tolerance</declname>
+          <defval>1e-8</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="1078" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1acc2d97dd6ed312e557fbee2a5d91e313" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::isCOMAConstraint</definition>
+        <argsstring>()</argsstring>
+        <name>isCOMAConstraint</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="1080" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a20284b4e939d67add4a1a90bba06dc0c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::isCOMTargetActive</definition>
+        <argsstring>()</argsstring>
+        <name>isCOMTargetActive</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="1082" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1ae834df2d99d5332143bb3ab617ea54e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::InverseKinematics::deactivateCOMTarget</definition>
+        <argsstring>()</argsstring>
+        <name>deactivateCOMTarget</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="1084" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a9311a6549a06f0cf8e6e3d2dc884aa12" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::InverseKinematics::setCOMConstraintProjectionDirection</definition>
+        <argsstring>(const iDynTree::Vector3 &amp;direction)</argsstring>
+        <name>setCOMConstraintProjectionDirection</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref> &amp;</type>
+          <declname>direction</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Set the directions along which a point will be projected.</para>
+<para><simplesect kind="author"><para>Aiko Dinale (29/08/2017)</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>direction</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector along which we want to project a point </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="1093" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a222d4e73db789db16adbf14d4b78442d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::InverseKinematics::setCOMConstraintProjectionDirection</definition>
+        <argsstring>(iDynTree::Span&lt; const double &gt; direction)</argsstring>
+        <name>setCOMConstraintProjectionDirection</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt;</type>
+          <declname>direction</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/InverseKinematics.h" line="1095" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>NLP-based Inverse kinematics. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Given a mechanical structure configuration <formula id="21">\[ q \in \operatorname{SE}(3) \times \mathbb{R}^n \]</formula> and possibly multiple target frames <formula id="22">\[ F_i^d \in \operatorname{SE}(3) \]</formula> the inverse kinematics is responsible to find the configuration <formula id="23">$ q^* $</formula> such that <formula id="24">\[ F_i(q^*) = F_i^d \forall i, \]</formula> where the meaning of the <formula id="25">$=$</formula> and <formula id="26">$\forall$</formula> depends on the resolution mode and on the references specified</para>
+<para>Example <programlisting><codeline><highlight class="normal">//Allocate<sp/>an<sp/>inverse<sp/>kinematics<sp/>object</highlight></codeline>
+<codeline><highlight class="normal">iDynTree::InverseKinematric<sp/>ik;</highlight></codeline>
+</programlisting></para>
+<para><simplesect kind="note"><para>all the cartesian frames must be specified w.r.t. the same global frame. This library does not assume any particular global frame</para>
+</simplesect>
+<simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="iDynTree/InverseKinematics.h" line="96" column="1" bodyfile="iDynTree/InverseKinematics.h" bodystart="97" bodyend="1100"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1InverseKinematics_1a30de8c616c200e28c9e1a88f5a3b7bf9" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>activateFrameConstraint</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a2e2da211d3d7091ad07a0b384b3ff48d" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>activateFrameConstraint</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1af42335e61bf9fcb4fb62a7d48904e517" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>addCenterOfMassProjectionConstraint</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a9bdeb6bdba32b5b98f8942bd73bdf70c" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>addCenterOfMassProjectionConstraint</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a5b7509e262a0293039b0ca99daf6344d" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>addCenterOfMassProjectionConstraint</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a7e721cd49fb9d2910dab79677a3febc0" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>addFrameConstraint</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1ad32732917055324e9e43b665f10d6d89" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>addFrameConstraint</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a7a0e4da328fbddd0614297870557a259" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>addFrameConstraint</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a8247e588e7c6a6caf37a52345c58a2a3" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>addFramePositionConstraint</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1af1cc1ffb80358f6f2f8dbc91fe6d2ff9" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>addFramePositionConstraint</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a08094142e67312af1c8dc6d43fcc5c54" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>addFramePositionConstraint</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1afe57acc1e517f7a6037bcb0205048843" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>addFramePositionConstraint</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a2581274da87dbf2b9cf8a8d1c34184fb" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>addFrameRotationConstraint</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a77e8b8de565f8a5a72f8042b21c03039" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>addFrameRotationConstraint</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a053a41c48598e472cfc5acb69a707810" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>addFrameRotationConstraint</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a9f9571f744198e189b3635cf18b01fa6" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>addPositionTarget</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a50394481f87512001d62b14c3121e3c9" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>addPositionTarget</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a43517efef7345effef2c64ed792293d6" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>addPositionTarget</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a60929f94a8fc02358df7018b08edb145" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>addPositionTarget</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1aed8c88ba1c622755f8f6060d7c23f1b0" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>addRotationTarget</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1aef054698a036960b0cd9c4201553adee" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>addRotationTarget</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a4b1859df197c5937202c69f84f525bb8" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>addRotationTarget</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1af97c2d5f44b64f7e422e70d20c0d49c9" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>addTarget</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a5baa4df2f22184a22f2f2384add29444" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>addTarget</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a1d54045ad46403179e3cd3c076802978" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>clearProblem</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a431451fac26b849ab7b9157170926461" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>constraintsTolerance</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a902ce28213d60568f68456511f57493e" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>costTolerance</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1ae834df2d99d5332143bb3ab617ea54e7" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>deactivateCOMTarget</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a71611b4b312177be7c3682164742304a" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>deactivateFrameConstraint</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1ada2c44f94a48893d064e90c3400e593d" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>defaultTargetResolutionMode</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1af53e1651988418a787b956240d9da855" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>fullModel</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a30e3692826f3c14bc9d0948285451bfa" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>getCenterOfMassProjectConstraintConvexHull</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1ab430e2a8abbea4b7b02fc7535109ad9f" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>getCenterOfMassProjectionMargin</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a82b937b35239f7b262391961f4c448ea" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>getFullJointsSolution</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1acc82ae729ec02fa78d613c1ecec0f8aa" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>getFullJointsSolution</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a1ad4371be984af63072d7f7ffa1f79ca" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>getJointLimits</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1af672ccd4e2c30ac0ebbff58146ded4a9" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>getPoseForFrame</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a23b43854dd578c1f0317488dc7c31487" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>getPoseForFrame</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a0fe2c9cd84677f6dfd83fdc31e6e39e6" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>getReducedSolution</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a67177ec87abea5b38f90d9763e48f28b" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>getReducedSolution</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a2c7549b37f43c5fdf07cac67aaf0ca87" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>InverseKinematics</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1acc2d97dd6ed312e557fbee2a5d91e313" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>isCOMAConstraint</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a20284b4e939d67add4a1a90bba06dc0c" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>isCOMTargetActive</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a762635dbe437ce96d4e5e597267be87d" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>isFrameConstraintActive</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a79c65c3b6ecb3b1de2cf84b319dbcca0" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>linearSolverName</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1ac3e893981cbfa2afc88a231d1cace9a4" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>loadModelFromFile</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a7730e85c13fdeaa4fdc35d96c7866e54" prot="private" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>m_pimpl</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a7022f8652423611388707ad40ca71205" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>maxCPUTime</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a2e1534f0883aa48bbd7396fb03ab9cc3" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>maxIterations</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a08682d742b4dcbe7cc3a359d77926e15" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>reducedModel</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a16f3902ff47fbafeb219c2e22529857d" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>rotationParametrization</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a557041738a620f4ce2ef433083b9b3a0" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setCOMAsConstraint</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1ab2776f60ee744d261552c5685bec170f" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setCOMAsConstraintTolerance</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a9311a6549a06f0cf8e6e3d2dc884aa12" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setCOMConstraintProjectionDirection</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a222d4e73db789db16adbf14d4b78442d" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setCOMConstraintProjectionDirection</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a1edaecf608d2780adea491a03fa70b2e" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setCOMTarget</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a8e7d4e0d6a4f6fcc1c19d429ea0d09aa" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setCOMTarget</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a963881a6913d92c4a224b68af44918fb" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setConstraintsTolerance</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a972eaa443d246d15a411b8b0c5e70a62" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setCostTolerance</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a4ed57acc6905dcaeb4596c46ab6d7a47" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setCurrentRobotConfiguration</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a5fa024ea1d7ce12a6baf236c7ccd0457" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setCurrentRobotConfiguration</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1ac55e7751070535950a098125d6064d46" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setDefaultTargetResolutionMode</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a30597bf9cef5da3d0c30118a1c132a2c" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setDesiredFullJointsConfiguration</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a18df94c58e4c3fdbb1026ced7f8541db" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setDesiredFullJointsConfiguration</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a50c9eede82cbe551388baceed52240ee" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setDesiredFullJointsConfiguration</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a04cc9fea6a73e234cc42c9740cf75f6d" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setDesiredFullJointsConfiguration</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1af22154b11fa87fbb0be902f85e4a4a37" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setDesiredReducedJointConfiguration</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a78719fcf5564a9f1831d109c3cc69970" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setDesiredReducedJointConfiguration</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1ae084dff57455232ec11cfe81f9888eda" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setDesiredReducedJointConfiguration</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a707a36a5a3a9363bf8c2a92c7b31d8a6" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setDesiredReducedJointConfiguration</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a238847f4a1308b661cdf14ac4d10caf7" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setFloatingBaseOnFrameNamed</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a79edd849ba6eb8d0b549cad3c9c00106" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setFullJointsInitialCondition</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a321cd9fba3a93857acbf81ee7ce89d6f" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setJointConfiguration</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1aa6e7d22dbc79871a62a0ba4c6e79fb97" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setJointLimits</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1af45198b610d4f871a7fd0ed8b5b66846" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setLinearSolverName</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a94fbd05f09b0fa2d7f98af110992dd02" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setMaxCPUTime</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1abd8b70a018553ec30f0998092ea28c62" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setMaxIterations</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1abb9706235b5fe16f951731ba285582ae" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setModel</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1af16eec79ccbccf5a180d46e874712e53" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setReducedInitialCondition</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a1f3be372eb31516aeb39e3e0a6ae8724" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setRotationParametrization</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a40c0473418948bdaeb1b002ff167e550" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setTargetResolutionMode</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a7fd58eaeec333ffe4a8b1cf68f48199a" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>setVerbosity</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1af4d51059431c6fed8e83983379e143d3" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>solve</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1ae5dff5d4891a60e0aeb2c8c66c25c43a" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>targetResolutionMode</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a242d903b37077336e8a7401390968e6c" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>updatePositionTarget</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1ad60720e6e09de94935c6dc3ab5a31651" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>updatePositionTarget</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a39d99a353d47eae1b831969affc69a38" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>updateRotationTarget</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1af0f09a2512439c08af78248ec51b12f4" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>updateRotationTarget</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1afc04477ad6b4db5fe0ed87eaec33a366" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>updateTarget</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a874ce19892a1dfdc52866b5b36f5a6ee" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>updateTarget</name></member>
+      <member refid="classiDynTree_1_1InverseKinematics_1a0d9e4d4db2a590dad2f6b530b159cd06" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>~InverseKinematics</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

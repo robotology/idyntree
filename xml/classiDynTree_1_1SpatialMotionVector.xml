@@ -1,0 +1,310 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1SpatialMotionVector" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::SpatialMotionVector</compoundname>
+    <basecompoundref refid="classiDynTree_1_1SpatialVector" prot="public" virt="non-virtual">iDynTree::SpatialVector&lt; SpatialMotionVector &gt;</basecompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1SpatialAcc" prot="public" virt="non-virtual">iDynTree::SpatialAcc</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1Twist" prot="public" virt="non-virtual">iDynTree::Twist</derivedcompoundref>
+    <includes local="no">iDynTree/Core/SpatialMotionVector.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1SpatialMotionVector_1a0fb7aa781b8ab353a0e21bc163e7c1e2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SpatialMotionVector::SpatialMotionVector</definition>
+        <argsstring>()</argsstring>
+        <name>SpatialMotionVector</name>
+        <briefdescription>
+<para>constructors </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialMotionVector.h" line="51" column="16" bodyfile="iDynTree/Core/SpatialMotionVector.h" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialMotionVector_1a7132bf38ebc1773c0d5d7c0f1f5b630c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SpatialMotionVector::SpatialMotionVector</definition>
+        <argsstring>(const LinearMotionVector3 &amp;_linearVec3, const AngularMotionVector3 &amp;_angularVec3)</argsstring>
+        <name>SpatialMotionVector</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1GeomVector3" kindref="compound">LinearMotionVector3</ref> &amp;</type>
+          <declname>_linearVec3</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1GeomVector3" kindref="compound">AngularMotionVector3</ref> &amp;</type>
+          <declname>_angularVec3</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialMotionVector.h" line="52" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialMotionVector_1a469d555799e3942b020dc94910998dd4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SpatialMotionVector::SpatialMotionVector</definition>
+        <argsstring>(const SpatialMotionVector &amp;other)</argsstring>
+        <name>SpatialMotionVector</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialMotionVector.h" line="53" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialMotionVector_1a9c27f65454a05a5c770b3e8ae23ab3a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SpatialMotionVector::SpatialMotionVector</definition>
+        <argsstring>(const SpatialVector&lt; SpatialMotionVector &gt; &amp;other)</argsstring>
+        <name>SpatialMotionVector</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialVector" kindref="compound">SpatialVector</ref>&lt; <ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref> &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialMotionVector.h" line="54" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialMotionVector_1a22816c9ea7c88ea880bbe547366c2dad" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
+        <definition>SpatialMotionVector iDynTree::SpatialMotionVector::operator*</definition>
+        <argsstring>(const double scalar) const</argsstring>
+        <name>operator*</name>
+        <param>
+          <type>const double</type>
+          <declname>scalar</declname>
+        </param>
+        <briefdescription>
+<para>Multiplication for a scalar. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Mainly used if <ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref> is used to represent a motion subspace. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialMotionVector.h" line="60" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialMotionVector_1a00b69fb5887ebaab90f53bf3f43927ae" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
+        <definition>SpatialMotionVector iDynTree::SpatialMotionVector::cross</definition>
+        <argsstring>(const SpatialMotionVector &amp;other) const</argsstring>
+        <name>cross</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Cross product between two 6D motion vectors <formula id="158">$ V_1 = \begin{bmatrix} v_1 \\ \omega_1 \end{bmatrix} $</formula> and <formula id="159">$ V_2 = \begin{bmatrix} v_2 \\ \omega_2 \end{bmatrix} $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns: <formula id="160">\[ V_1 \times V_2 = \begin{bmatrix} v_1 \times \omega_2 + \omega_1 \times v_2 \\ \omega_1 \times \omega_2 \end{bmatrix} \]</formula> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialMotionVector.h" line="77" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialMotionVector_1a1230a70db77b4cf2ebb2c643b62d37e9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref></type>
+        <definition>SpatialForceVector iDynTree::SpatialMotionVector::cross</definition>
+        <argsstring>(const SpatialForceVector &amp;other) const</argsstring>
+        <name>cross</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Cross product between a 6D motion vector <formula id="161">$ V = \begin{bmatrix} v \\ \omega \end{bmatrix} $</formula> and a 6D force vector <formula id="162">$ F = \begin{bmatrix} f \\ \mu \end{bmatrix} $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns: <formula id="163">\[ V \bar{\times}^* F = \begin{bmatrix} \omega \times f \\ v \times f + \omega \times \mu \end{bmatrix} \]</formula> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialMotionVector.h" line="92" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialMotionVector_1a0afe65574d10fd441e294b01b9d59328" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x6</ref></type>
+        <definition>Matrix6x6 iDynTree::SpatialMotionVector::asCrossProductMatrix</definition>
+        <argsstring>() const</argsstring>
+        <name>asCrossProductMatrix</name>
+        <briefdescription>
+<para>Cross product matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If this object is <formula id="161">$ V = \begin{bmatrix} v \\ \omega \end{bmatrix} $</formula>, return the 6x6 matrix <formula id="164">$ V\times $</formula> such that, if U is a <ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref> : <formula id="165">\[ (V \times) U = V\texttt{.cross}(U) \]</formula></para>
+<para>The returned matrix is then the following one: <formula id="166">\[ V \times = \begin{bmatrix} \omega \times &amp; v \times \\ 0_{3\times3} &amp; \omega \times \end{bmatrix} \]</formula> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialMotionVector.h" line="115" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialMotionVector_1aa12336105b40e215151dc40e02d85533" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x6</ref></type>
+        <definition>Matrix6x6 iDynTree::SpatialMotionVector::asCrossProductMatrixWrench</definition>
+        <argsstring>() const</argsstring>
+        <name>asCrossProductMatrixWrench</name>
+        <briefdescription>
+<para>If this object is <formula id="161">$ V = \begin{bmatrix} v \\ \omega \end{bmatrix} $</formula>, return the 6x6 matrix <formula id="164">$ V\times $</formula> such that, if F is a <ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref> : </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="167">\[ (V \bar{\times}^*) F = V\texttt{.cross}(F) \]</formula></para>
+<para>The returned matrix is then the following one: <formula id="168">\[ V \bar{\times}^* = \begin{bmatrix} \omega \times &amp; 0_{3\times3} \\ v \times &amp; \omega \times \end{bmatrix} \]</formula> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialMotionVector.h" line="133" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialMotionVector_1a3d13bde6997132732cac8cc942dba7ef" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>Transform iDynTree::SpatialMotionVector::exp</definition>
+        <argsstring>() const</argsstring>
+        <name>exp</name>
+        <briefdescription>
+<para>Exp mapping between a generic element of se(3) (<ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">iDynTree::SpatialMotionVector</ref>) to the corresponding element of SE(3) (<ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref>). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialMotionVector.h" line="140" column="19"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class providing the raw coordinates for any motion spatial vector (i.e. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>vector form of an element of se(3)).</para>
+<para>A motion spatial vector can be used to to describe a twist, twist acceleration or their derivatives.</para>
+<para>A generic motion spatial vector can also be used to store the logarithm of an <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> (i.e. an element of SE(3)).</para>
+<para>This is just a basic vector, used to implement the adjoint transformations in a general way. The relative adjoint transformation is contained in TransformRaw::apply(SpatialMotionRaw), for consistency with the <ref refid="classiDynTree_1_1PositionRaw" kindref="compound">iDynTree::PositionRaw</ref> class.</para>
+<para><simplesect kind="note"><para>in iDynTree, the spatial vector follows this serialization: the first three elements are the linear part and the second three elements are the angular part. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="5">
+        <label>iDynTree::Twist</label>
+        <link refid="classiDynTree_1_1Twist"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::SpatialVector&lt; SpatialMotionVector &gt;</label>
+        <link refid="classiDynTree_1_1SpatialVector"/>
+        <childnode refid="3" relation="template-instance">
+          <edgelabel>&lt; SpatialMotionVector &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::SpatialVector</label>
+        <link refid="classiDynTree_1_1SpatialVector"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::SpatialMotionVector</label>
+        <link refid="classiDynTree_1_1SpatialMotionVector"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>iDynTree::SpatialAcc</label>
+        <link refid="classiDynTree_1_1SpatialAcc"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>iDynTree::SpatialVector&lt; SpatialMotionVector &gt;</label>
+        <link refid="classiDynTree_1_1SpatialVector"/>
+        <childnode refid="3" relation="template-instance">
+          <edgelabel>&lt; SpatialMotionVector &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::SpatialVector</label>
+        <link refid="classiDynTree_1_1SpatialVector"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>angularVec3</edgelabel>
+          <edgelabel>linearVec3</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>iDynTree::SpatialMotionForceVectorT_traits&lt; DerivedSpatialVecT &gt;</label>
+        <link refid="classiDynTree_1_1SpatialMotionForceVectorT__traits"/>
+        <childnode refid="5" relation="template-instance">
+          <edgelabel>&lt; DerivedSpatialVecT &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::SpatialMotionVector</label>
+        <link refid="classiDynTree_1_1SpatialMotionVector"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>iDynTree::SpatialMotionForceVectorT_traits&lt; SpatialMotionForceVectorT &gt;</label>
+        <link refid="classiDynTree_1_1SpatialMotionForceVectorT__traits"/>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Core/SpatialMotionVector.h" line="45" column="5" bodyfile="iDynTree/Core/SpatialMotionVector.h" bodystart="46" bodyend="141"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1SpatialVector_1a45a617c3a2fbf58cb8f14be36a9f0ff5" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>angularOffset</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a7713fdb080783747a894974f5c4b44a6" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>angularVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a13a172b06a7af17f6220a90a4163b3f8" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>AngularVector3T</name></member>
+      <member refid="classiDynTree_1_1SpatialMotionVector_1a0afe65574d10fd441e294b01b9d59328" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>asCrossProductMatrix</name></member>
+      <member refid="classiDynTree_1_1SpatialMotionVector_1aa12336105b40e215151dc40e02d85533" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>asCrossProductMatrixWrench</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a28178bda574859bc9cda8e51f23ffc07" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>asVector</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1af55844354af98084b8fd52a9240b2d5f" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>changeCoordFrame</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1aaf50d0723aa1bf73962f05224a56bd8b" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>changePoint</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a0f1211dba411c4efe1a7c9d0944d2a38" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>compose</name></member>
+      <member refid="classiDynTree_1_1SpatialMotionVector_1a00b69fb5887ebaab90f53bf3f43927ae" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>cross</name></member>
+      <member refid="classiDynTree_1_1SpatialMotionVector_1a1230a70db77b4cf2ebb2c643b62d37e9" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>cross</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a676b41872e9165b9795a9706149a8e17" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>dot</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a7910d803e3b8c3ef52db0bdc0b2bec42" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>DualVectorT</name></member>
+      <member refid="classiDynTree_1_1SpatialMotionVector_1a3d13bde6997132732cac8cc942dba7ef" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>exp</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a8b9ae18e77c2af17ec1d369d196e0c10" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>getAngularVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a67479f75f4632e397d7c38394f499ca5" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>getAngularVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a705aa7e917215639cf8088da8a279031" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>getLinearVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1aef471e533b923fca899adfcac5703173" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>getLinearVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a74a991f1f695825378e5b1765e743e42" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>getVal</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1aa1ad54ef1ef1c37676cf7c231242f9fb" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>inverse</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1aa6aa22433d0a6c29e37a4efc5970e1d8" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>linearOffset</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a404b99c91ecaa2269ed0e891df474720" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>linearVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a4ca8db3255a63370cb6fb9c5b8e4bc6c" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>LinearVector3T</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a176d715e9026aee5a3cad9ff9dde198c" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a583e1a9062c0d7f72da539e521e597b5" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1SpatialMotionVector_1a22816c9ea7c88ea880bbe547366c2dad" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>operator*</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1aee117ebb24cae309a169f678019f1181" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>operator+</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1afcf112b3ddd4e01fc0389dd2319eb383" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>operator-</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a3ac59b03e3786339836b9b7d190f39e3" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>operator-</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a73b398dd07e9f3dd5c252692380a6b02" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>reservedToString</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a719a64c179d736390f48b6ddd0ccf6fa" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>setAngularVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a171e7cf6e215e67eb32ac791526a044f" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>setLinearVec3</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a0fe3633e4ccf66267b01b7302a1658ec" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>setVal</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1af1f3a2d0e7522b63b2dc0d729a33f5a5" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>size</name></member>
+      <member refid="classiDynTree_1_1SpatialMotionVector_1a0fb7aa781b8ab353a0e21bc163e7c1e2" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>SpatialMotionVector</name></member>
+      <member refid="classiDynTree_1_1SpatialMotionVector_1a7132bf38ebc1773c0d5d7c0f1f5b630c" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>SpatialMotionVector</name></member>
+      <member refid="classiDynTree_1_1SpatialMotionVector_1a469d555799e3942b020dc94910998dd4" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>SpatialMotionVector</name></member>
+      <member refid="classiDynTree_1_1SpatialMotionVector_1a9c27f65454a05a5c770b3e8ae23ab3a0" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>SpatialMotionVector</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a787b62017e61e1dc49e0bc753cb0516b" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>SpatialVector</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a3d7d78e133ab83dfadb346539f70df96" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>SpatialVector</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1aff082c865731b86ad00f3901b1f487cb" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>SpatialVector</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a1000a5a67bd77de13aabe6e41b320587" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>SpatialVector</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1aea482fe4d53b76b02a0438d9561e1fd0" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>toString</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1adfea1ab56aa331af032a7f7d31ac0afc" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>totalSize</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1a8414377bb976157317aeb070b4ed235d" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>zero</name></member>
+      <member refid="classiDynTree_1_1SpatialVector_1ae2ae611372d0a0f53dd983e3598bcc58" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionVector</scope><name>Zero</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

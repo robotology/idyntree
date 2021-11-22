@@ -1,0 +1,317 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1skinDynLibConversionsHelper" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::skinDynLibConversionsHelper</compoundname>
+    <includes local="no">iDynTree/skinDynLibConversions.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1skinDynLibConversionsHelper_1aa0bfcb35a45db3895df970060d3899c1" prot="private" static="no" mutable="no">
+        <type>std::map&lt; <ref refid="classiDynTree_1_1skinDynLibLinkID" kindref="compound">skinDynLibLinkID</ref>, <ref refid="classiDynTree_1_1iDynTreeLinkAndFrame" kindref="compound">iDynTreeLinkAndFrame</ref> &gt;</type>
+        <definition>std::map&lt;skinDynLibLinkID,iDynTreeLinkAndFrame&gt; iDynTree::skinDynLibConversionsHelper::skinDynLibLinkMap</definition>
+        <argsstring></argsstring>
+        <name>skinDynLibLinkMap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/skinDynLibConversions.h" line="92" column="14" bodyfile="iDynTree/skinDynLibConversions.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1skinDynLibConversionsHelper_1a43bea15e71e84b0012407c758e3053a0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::skinDynLibConversionsHelper::addSkinDynLibAlias</definition>
+        <argsstring>(const Model &amp;model, const std::string iDynTree_link_name, const std::string iDynTree_frame_name, const int skinDynLib_body_part, const int skinDynLib_link_index)</argsstring>
+        <name>addSkinDynLibAlias</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const std::string</type>
+          <declname>iDynTree_link_name</declname>
+        </param>
+        <param>
+          <type>const std::string</type>
+          <declname>iDynTree_frame_name</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>skinDynLib_body_part</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>skinDynLib_link_index</declname>
+        </param>
+        <briefdescription>
+<para>This function enables interoperability between the iDynTree library and the iCub skinDynLib library. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function can be used to assign a match between a skinDynLib link, and a iDynTree link.</para>
+<para>In skinDynLib a link is represented by two numbers:<itemizedlist>
+<listitem><para>the bodyPart, a numeric id representing a part of the robot</para>
+</listitem><listitem><para>the linkIndex, a progressive numeric id uniquely identifyng the link in the part We associate this to two iDynTree concept</para>
+</listitem><listitem><para>the link_name of the considered link</para>
+</listitem><listitem><para>the frame_name of the frame used by skinDynLib when dealing with that link. This frame can be the link frame, in this case frame_name == link_name, otherwise another frame can be used, under the constraint that this frame must be rigidly attached to the considered link. </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/skinDynLibConversions.h" line="113" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="30" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1skinDynLibConversionsHelper_1a55341267530b46337d2e359eb875de51" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::skinDynLibConversionsHelper::getSkinDynLibAlias</definition>
+        <argsstring>(const Model &amp;model, const std::string iDynTree_link_name, std::string &amp;iDynTree_frame_name, int &amp;skinDynLib_body_part, int &amp;skinDynLib_link_index) const</argsstring>
+        <name>getSkinDynLibAlias</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const std::string</type>
+          <declname>iDynTree_link_name</declname>
+        </param>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>iDynTree_frame_name</declname>
+        </param>
+        <param>
+          <type>int &amp;</type>
+          <declname>skinDynLib_body_part</declname>
+        </param>
+        <param>
+          <type>int &amp;</type>
+          <declname>skinDynLib_link_index</declname>
+        </param>
+        <briefdescription>
+<para>Retrieve the skinDynLib alias of a link, added to the class using the addSkinDynLibAlias method. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/skinDynLibConversions.h" line="120" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="61" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1skinDynLibConversionsHelper_1a0f89c9920c1df4564651fbb1e2b107fa" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::skinDynLibConversionsHelper::getSkinDynLibAlias</definition>
+        <argsstring>(const Model &amp;model, const LinkIndex iDynTree_link_index, FrameIndex &amp;iDynTree_frame_index, int &amp;skinDynLib_body_part, int &amp;skinDynLib_link_index) const</argsstring>
+        <name>getSkinDynLibAlias</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>iDynTree_link_index</declname>
+        </param>
+        <param>
+          <type>FrameIndex &amp;</type>
+          <declname>iDynTree_frame_index</declname>
+        </param>
+        <param>
+          <type>int &amp;</type>
+          <declname>skinDynLib_body_part</declname>
+        </param>
+        <param>
+          <type>int &amp;</type>
+          <declname>skinDynLib_link_index</declname>
+        </param>
+        <briefdescription>
+<para>Retrieve the skinDynLib alias of a link, added to the class using the addSkinDynLibAlias method. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/skinDynLibConversions.h" line="129" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="91" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1skinDynLibConversionsHelper_1a27867ec736ae24bb1c0ecde40cfca599" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::skinDynLibConversionsHelper::skinDynLib2iDynTree</definition>
+        <argsstring>(const int skinDynLib_body_part, const int skinDynLib_link_index, LinkIndex &amp;iDynTree_link_index, FrameIndex &amp;iDynTree_frame_index) const</argsstring>
+        <name>skinDynLib2iDynTree</name>
+        <param>
+          <type>const int</type>
+          <declname>skinDynLib_body_part</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>skinDynLib_link_index</declname>
+        </param>
+        <param>
+          <type>LinkIndex &amp;</type>
+          <declname>iDynTree_link_index</declname>
+        </param>
+        <param>
+          <type>FrameIndex &amp;</type>
+          <declname>iDynTree_frame_index</declname>
+        </param>
+        <briefdescription>
+<para>Convert a skinDynLib identifier to a iDynTree link/frame identifier. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/skinDynLibConversions.h" line="138" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="135" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1skinDynLibConversionsHelper_1a4fef354b543feefb5de09d5fc77b4ce1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::skinDynLibConversionsHelper::removeSkinDynLibAlias</definition>
+        <argsstring>(const Model &amp;model, const std::string linkName)</argsstring>
+        <name>removeSkinDynLibAlias</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const std::string</type>
+          <declname>linkName</declname>
+        </param>
+        <briefdescription>
+<para>Remove a alias in the form (body_part, link_index) for a link. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/skinDynLibConversions.h" line="145" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="114" bodyend="133"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1skinDynLibConversionsHelper_1a3d45ff7de330afbaedd94d07d1abf840" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::skinDynLibConversionsHelper::fromSkinDynLibToiDynTree</definition>
+        <argsstring>(const Model &amp;model, const iCub::skinDynLib::dynContactList &amp;dynList, LinkUnknownWrenchContacts &amp;unknowns)</argsstring>
+        <name>fromSkinDynLibToiDynTree</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const iCub::skinDynLib::dynContactList &amp;</type>
+          <declname>dynList</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkUnknownWrenchContacts" kindref="compound">LinkUnknownWrenchContacts</ref> &amp;</type>
+          <declname>unknowns</declname>
+        </param>
+        <briefdescription>
+<para>Convert a dynContactList to a <ref refid="classiDynTree_1_1LinkUnknownWrenchContacts" kindref="compound">LinkUnknownWrenchContacts</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The contactId contained in the dynContactList is preserved and saved in the appropriate attribute in the <ref refid="classiDynTree_1_1LinkUnknownWrenchContacts" kindref="compound">LinkUnknownWrenchContacts</ref> class. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/skinDynLibConversions.h" line="153" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="242" bodyend="247"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1skinDynLibConversionsHelper_1a72db7b0625839e6556ef3b2d8dcd024f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::skinDynLibConversionsHelper::fromSkinDynLibToiDynTree</definition>
+        <argsstring>(const Model &amp;model, const iCub::skinDynLib::skinContactList &amp;skinList, LinkUnknownWrenchContacts &amp;unknowns)</argsstring>
+        <name>fromSkinDynLibToiDynTree</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const iCub::skinDynLib::skinContactList &amp;</type>
+          <declname>skinList</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkUnknownWrenchContacts" kindref="compound">LinkUnknownWrenchContacts</ref> &amp;</type>
+          <declname>unknowns</declname>
+        </param>
+        <briefdescription>
+<para>Convert a skinContactList to a <ref refid="classiDynTree_1_1LinkUnknownWrenchContacts" kindref="compound">LinkUnknownWrenchContacts</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The contactId contained in the skinContactList is preserved and saved in the appropriate attribute in the <ref refid="classiDynTree_1_1LinkUnknownWrenchContacts" kindref="compound">LinkUnknownWrenchContacts</ref> class. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/skinDynLibConversions.h" line="163" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="249" bodyend="254"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1skinDynLibConversionsHelper_1aa6c96e112f58f04fb79c95e27bac5d47" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::skinDynLibConversionsHelper::fromiDynTreeToSkinDynLib</definition>
+        <argsstring>(const Model &amp;model, const LinkContactWrenches &amp;contactWrenches, iCub::skinDynLib::dynContactList &amp;dynList)</argsstring>
+        <name>fromiDynTreeToSkinDynLib</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkContactWrenches" kindref="compound">LinkContactWrenches</ref> &amp;</type>
+          <declname>contactWrenches</declname>
+        </param>
+        <param>
+          <type>iCub::skinDynLib::dynContactList &amp;</type>
+          <declname>dynList</declname>
+        </param>
+        <briefdescription>
+<para>Convert a <ref refid="classiDynTree_1_1LinkContactWrenches" kindref="compound">LinkContactWrenches</ref> to a iCub::skinDynLib::dynContactList. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function creates a new dynContactList. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/skinDynLibConversions.h" line="173" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="258" bodyend="313"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1skinDynLibConversionsHelper_1accc52dda49d5c917cea780fdde35a3cd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::skinDynLibConversionsHelper::updateSkinContactListFromLinkContactWrenches</definition>
+        <argsstring>(const Model &amp;model, const LinkContactWrenches &amp;contactWrenches, iCub::skinDynLib::skinContactList &amp;skinContactListToUpdate)</argsstring>
+        <name>updateSkinContactListFromLinkContactWrenches</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkContactWrenches" kindref="compound">LinkContactWrenches</ref> &amp;</type>
+          <declname>contactWrenches</declname>
+        </param>
+        <param>
+          <type>iCub::skinDynLib::skinContactList &amp;</type>
+          <declname>skinContactListToUpdate</declname>
+        </param>
+        <briefdescription>
+<para>Update an existing skinContactList in which some forces and torque are unknown using the estimated contact wrenches contained in a <ref refid="classiDynTree_1_1LinkContactWrenches" kindref="compound">LinkContactWrenches</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The matching between the skinContactList and the <ref refid="classiDynTree_1_1LinkContactWrenches" kindref="compound">LinkContactWrenches</ref> contacts is done through the contactId, that then should be consistent between the two functions. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/skinDynLibConversions.h" line="184" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="315" bodyend="390"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Helper for conversion between iDynTree data structures and skinDynLib data structures. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>There are several differences to handle:<itemizedlist>
+<listitem><para>In iDynTree, link and frames and identified by name and (in the context of an instantiated model) by their index, while in skinDynLib link are identified by the bodyPart, a numeric id representing a part of the robot the linkIndex, a progressive numeric id uniquely identifyng the link in the part.</para>
+</listitem><listitem><para>The link frame of a link in iDynTree does not match the link frame assumed in skinDynLib. For this reason we need to specify an additional frame to specify the frame of the link used by skinDynLib, to properly convert the contact data back and forth. </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="iDynTree/skinDynLibConversions.h" line="89" column="1" bodyfile="iDynTree/skinDynLibConversions.h" bodystart="90" bodyend="187"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1skinDynLibConversionsHelper_1a43bea15e71e84b0012407c758e3053a0" prot="public" virt="non-virtual"><scope>iDynTree::skinDynLibConversionsHelper</scope><name>addSkinDynLibAlias</name></member>
+      <member refid="classiDynTree_1_1skinDynLibConversionsHelper_1aa6c96e112f58f04fb79c95e27bac5d47" prot="public" virt="non-virtual"><scope>iDynTree::skinDynLibConversionsHelper</scope><name>fromiDynTreeToSkinDynLib</name></member>
+      <member refid="classiDynTree_1_1skinDynLibConversionsHelper_1a3d45ff7de330afbaedd94d07d1abf840" prot="public" virt="non-virtual"><scope>iDynTree::skinDynLibConversionsHelper</scope><name>fromSkinDynLibToiDynTree</name></member>
+      <member refid="classiDynTree_1_1skinDynLibConversionsHelper_1a72db7b0625839e6556ef3b2d8dcd024f" prot="public" virt="non-virtual"><scope>iDynTree::skinDynLibConversionsHelper</scope><name>fromSkinDynLibToiDynTree</name></member>
+      <member refid="classiDynTree_1_1skinDynLibConversionsHelper_1a55341267530b46337d2e359eb875de51" prot="public" virt="non-virtual"><scope>iDynTree::skinDynLibConversionsHelper</scope><name>getSkinDynLibAlias</name></member>
+      <member refid="classiDynTree_1_1skinDynLibConversionsHelper_1a0f89c9920c1df4564651fbb1e2b107fa" prot="public" virt="non-virtual"><scope>iDynTree::skinDynLibConversionsHelper</scope><name>getSkinDynLibAlias</name></member>
+      <member refid="classiDynTree_1_1skinDynLibConversionsHelper_1a4fef354b543feefb5de09d5fc77b4ce1" prot="public" virt="non-virtual"><scope>iDynTree::skinDynLibConversionsHelper</scope><name>removeSkinDynLibAlias</name></member>
+      <member refid="classiDynTree_1_1skinDynLibConversionsHelper_1a27867ec736ae24bb1c0ecde40cfca599" prot="public" virt="non-virtual"><scope>iDynTree::skinDynLibConversionsHelper</scope><name>skinDynLib2iDynTree</name></member>
+      <member refid="classiDynTree_1_1skinDynLibConversionsHelper_1aa0bfcb35a45db3895df970060d3899c1" prot="private" virt="non-virtual"><scope>iDynTree::skinDynLibConversionsHelper</scope><name>skinDynLibLinkMap</name></member>
+      <member refid="classiDynTree_1_1skinDynLibConversionsHelper_1accc52dda49d5c917cea780fdde35a3cd" prot="public" virt="non-virtual"><scope>iDynTree::skinDynLibConversionsHelper</scope><name>updateSkinContactListFromLinkContactWrenches</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

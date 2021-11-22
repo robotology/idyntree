@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="PrivateUtils_8h" kind="file" language="C++">
+    <compoundname>PrivateUtils.h</compoundname>
+    <includes local="no">Eigen/Dense</includes>
+    <includes refid="EigenHelpers_8h" local="no">iDynTree/Core/EigenHelpers.h</includes>
+    <incdepgraph>
+      <node id="2">
+        <label>Eigen/Dense</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/Core/PrivateUtils.h</label>
+        <link refid="PrivateUtils_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="PrivateUtils_8h_1a5cb90836a26ae5bb773be45bad7dad54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Eigen::Matrix3d</type>
+        <definition>Eigen::Matrix3d iDynTree::squareCrossProductMatrix</definition>
+        <argsstring>(const Eigen::Vector3d &amp;v)</argsstring>
+        <name>squareCrossProductMatrix</name>
+        <param>
+          <type>const Eigen::Vector3d &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+<para>Maps a 3d vector to the square of the cross product matrix: v --&gt; (v\times)^2 or, if you prefer another notation: v --&gt; S^2(v) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/PrivateUtils.h" line="27" column="21" declfile="iDynTree/Core/PrivateUtils.h" declline="27" declcolumn="21"/>
+      </memberdef>
+      <memberdef kind="function" id="PrivateUtils_8h_1a8dac2640419d7eaba00586c252ab99e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Eigen::Matrix3d</type>
+        <definition>Eigen::Matrix3d iDynTree::skew</definition>
+        <argsstring>(const Eigen::Vector3d &amp;vec)</argsstring>
+        <name>skew</name>
+        <param>
+          <type>const Eigen::Vector3d &amp;</type>
+          <declname>vec</declname>
+        </param>
+        <briefdescription>
+<para>Maps a 3d vector to the cross product matrix: v --&gt; (v\times) or, if you prefer another notation: v --&gt; S(v) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/PrivateUtils.h" line="35" column="21" declfile="iDynTree/Core/PrivateUtils.h" declline="35" declcolumn="21"/>
+      </memberdef>
+      <memberdef kind="function" id="PrivateUtils_8h_1ab4c72168cc4cc9909da74c433345e8d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename vector6d</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void iDynTree::efficient6dCopy</definition>
+        <argsstring>(vector6d *pthis, const vector6d &amp;other)</argsstring>
+        <name>efficient6dCopy</name>
+        <param>
+          <type>vector6d *</type>
+          <declname>pthis</declname>
+        </param>
+        <param>
+          <type>const vector6d &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Efficient version of the copy from one 6D vector to another. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/PrivateUtils.h" line="41" column="10" bodyfile="iDynTree/Core/PrivateUtils.h" bodystart="41" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="PrivateUtils_8h_1a9f173fe7a9b0aabdbfa0169513dd0afa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename vector6d</type>
+          </param>
+        </templateparamlist>
+        <type>vector6d</type>
+        <definition>vector6d iDynTree::efficient6dSum</definition>
+        <argsstring>(const vector6d &amp;op1, const vector6d &amp;op2)</argsstring>
+        <name>efficient6dSum</name>
+        <param>
+          <type>const vector6d &amp;</type>
+          <declname>op1</declname>
+        </param>
+        <param>
+          <type>const vector6d &amp;</type>
+          <declname>op2</declname>
+        </param>
+        <briefdescription>
+<para>Efficient version of the sum of two 6D vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/PrivateUtils.h" line="52" column="14" bodyfile="iDynTree/Core/PrivateUtils.h" bodystart="52" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="PrivateUtils_8h_1ad44d09b939590fde0dca95ebd7f899c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename vector6d</type>
+          </param>
+        </templateparamlist>
+        <type>vector6d</type>
+        <definition>vector6d iDynTree::efficient6ddifference</definition>
+        <argsstring>(const vector6d &amp;op1, const vector6d &amp;op2)</argsstring>
+        <name>efficient6ddifference</name>
+        <param>
+          <type>const vector6d &amp;</type>
+          <declname>op1</declname>
+        </param>
+        <param>
+          <type>const vector6d &amp;</type>
+          <declname>op2</declname>
+        </param>
+        <briefdescription>
+<para>Efficient version of the different of two 6D vectors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/PrivateUtils.h" line="64" column="14" bodyfile="iDynTree/Core/PrivateUtils.h" bodystart="64" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="PrivateUtils_8h_1ada26d16396f1cd9f82b2e7c921fe202e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename twistType</type>
+          </param>
+          <param>
+            <type>typename motionVectorType</type>
+          </param>
+          <param>
+            <type>typename resultType</type>
+          </param>
+        </templateparamlist>
+        <type>resultType</type>
+        <definition>resultType iDynTree::efficientTwistCrossTwist</definition>
+        <argsstring>(const twistType &amp;op1, const motionVectorType &amp;op2)</argsstring>
+        <name>efficientTwistCrossTwist</name>
+        <param>
+          <type>const twistType &amp;</type>
+          <declname>op1</declname>
+        </param>
+        <param>
+          <type>const motionVectorType &amp;</type>
+          <declname>op2</declname>
+        </param>
+        <briefdescription>
+<para>Efficient version of the cross product between a twist and a spatial motion vector (another twist, acceleration, ..) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/PrivateUtils.h" line="77" column="16" bodyfile="iDynTree/Core/PrivateUtils.h" bodystart="77" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="PrivateUtils_8h_1a2941457a02de10e9de1dea4106588921" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename twistType</type>
+          </param>
+          <param>
+            <type>typename momentumVectorType</type>
+          </param>
+          <param>
+            <type>typename resultType</type>
+          </param>
+        </templateparamlist>
+        <type>resultType</type>
+        <definition>resultType iDynTree::efficientTwistCrossMomentum</definition>
+        <argsstring>(const twistType &amp;op1, const momentumVectorType &amp;op2)</argsstring>
+        <name>efficientTwistCrossMomentum</name>
+        <param>
+          <type>const twistType &amp;</type>
+          <declname>op1</declname>
+        </param>
+        <param>
+          <type>const momentumVectorType &amp;</type>
+          <declname>op2</declname>
+        </param>
+        <briefdescription>
+<para>Efficient version of the cross product between a twist and a spatial force vector (momentum, wrench, ..) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/PrivateUtils.h" line="95" column="16" bodyfile="iDynTree/Core/PrivateUtils.h" bodystart="95" bodyend="104"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/PrivateUtils.h"/>
+  </compounddef>
+</doxygen>

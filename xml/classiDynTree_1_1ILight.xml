@@ -1,0 +1,251 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1ILight" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::ILight</compoundname>
+    <includes local="no">iDynTree/Visualizer.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1ILight_1aa0f35a497ec4ae5c99676d09cb2405c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type></type>
+        <definition>virtual iDynTree::ILight::~ILight</definition>
+        <argsstring>()=0</argsstring>
+        <name>~ILight</name>
+        <briefdescription>
+<para>Denstructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="197" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILight_1a02bc591f676443c5f4819b2e7b4e0052" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>const std::string &amp;</type>
+        <definition>virtual const std::string&amp; iDynTree::ILight::getName</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getName</name>
+        <briefdescription>
+<para>Get the name. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="202" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILight_1a3e4d47366695389be0c404989aeefe9a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::ILight::setType</definition>
+        <argsstring>(const LightType type)=0</argsstring>
+        <name>setType</name>
+        <param>
+          <type>const LightType</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Set the light type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="207" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILight_1a3961e631d5d488f6186ad526e56a6484" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>LightType</type>
+        <definition>virtual LightType iDynTree::ILight::getType</definition>
+        <argsstring>()=0</argsstring>
+        <name>getType</name>
+        <briefdescription>
+<para>Get the light type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="212" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILight_1a2fc31019584faf778feeca251c53e532" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::ILight::setPosition</definition>
+        <argsstring>(const iDynTree::Position &amp;cameraPos)=0</argsstring>
+        <name>setPosition</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &amp;</type>
+          <declname>cameraPos</declname>
+        </param>
+        <briefdescription>
+<para>Set the linear position of the light w.r.t to the world. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="217" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILight_1a8cfd7f00d979aef04e491ad96052b6a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
+        <definition>virtual iDynTree::Position iDynTree::ILight::getPosition</definition>
+        <argsstring>()=0</argsstring>
+        <name>getPosition</name>
+        <briefdescription>
+<para>Get the linear position of the light w.r.t to the world. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="222" column="32"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILight_1a79ad79bcb170f0832d2797c0f9b4dab4" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::ILight::setDirection</definition>
+        <argsstring>(const Direction &amp;lightDirection)=0</argsstring>
+        <name>setDirection</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref> &amp;</type>
+          <declname>lightDirection</declname>
+        </param>
+        <briefdescription>
+<para>Set the light direction (only meaningful if the light is DIRECTIONAL_LIGHT). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="227" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILight_1aa527fd62b167d7521076619bf6a1ebd8" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref></type>
+        <definition>virtual Direction iDynTree::ILight::getDirection</definition>
+        <argsstring>()=0</argsstring>
+        <name>getDirection</name>
+        <briefdescription>
+<para>Get the light direction (only meaningful if the light is DIRECTIONAL_LIGHT). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="232" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILight_1a58ff9a230c6a871b0cb5bf78c15ab0e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::ILight::setAmbientColor</definition>
+        <argsstring>(const ColorViz &amp;ambientColor)=0</argsstring>
+        <name>setAmbientColor</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ColorViz" kindref="compound">ColorViz</ref> &amp;</type>
+          <declname>ambientColor</declname>
+        </param>
+        <briefdescription>
+<para>Set ambient color of the light. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="237" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILight_1a40f048da7681b93d29e2ff20658e66e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1ColorViz" kindref="compound">ColorViz</ref></type>
+        <definition>virtual ColorViz iDynTree::ILight::getAmbientColor</definition>
+        <argsstring>()=0</argsstring>
+        <name>getAmbientColor</name>
+        <briefdescription>
+<para>Get ambient color of the light. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="242" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILight_1a2f9c33f94d5c606b5dbbacaa9507e950" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::ILight::setSpecularColor</definition>
+        <argsstring>(const ColorViz &amp;ambientColor)=0</argsstring>
+        <name>setSpecularColor</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ColorViz" kindref="compound">ColorViz</ref> &amp;</type>
+          <declname>ambientColor</declname>
+        </param>
+        <briefdescription>
+<para>Set specular color of the light. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="247" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILight_1a6aa174b0fbd96c011880bdf2fa137737" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1ColorViz" kindref="compound">ColorViz</ref></type>
+        <definition>virtual ColorViz iDynTree::ILight::getSpecularColor</definition>
+        <argsstring>()=0</argsstring>
+        <name>getSpecularColor</name>
+        <briefdescription>
+<para>Get specular color of the light. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="252" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILight_1a0992a9767b6e8834c97de5125639e27f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::ILight::setDiffuseColor</definition>
+        <argsstring>(const ColorViz &amp;ambientColor)=0</argsstring>
+        <name>setDiffuseColor</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ColorViz" kindref="compound">ColorViz</ref> &amp;</type>
+          <declname>ambientColor</declname>
+        </param>
+        <briefdescription>
+<para>Set ambient color of the light. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="257" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1ILight_1a0b173883888a9e197d118615af387610" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1ColorViz" kindref="compound">ColorViz</ref></type>
+        <definition>virtual ColorViz iDynTree::ILight::getDiffuseColor</definition>
+        <argsstring>()=0</argsstring>
+        <name>getDiffuseColor</name>
+        <briefdescription>
+<para>Get ambient color of the light. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="262" column="22"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Interface to a light visualization. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Visualizer.h" line="191" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="192" bodyend="263"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1ILight_1a40f048da7681b93d29e2ff20658e66e0" prot="public" virt="pure-virtual"><scope>iDynTree::ILight</scope><name>getAmbientColor</name></member>
+      <member refid="classiDynTree_1_1ILight_1a0b173883888a9e197d118615af387610" prot="public" virt="pure-virtual"><scope>iDynTree::ILight</scope><name>getDiffuseColor</name></member>
+      <member refid="classiDynTree_1_1ILight_1aa527fd62b167d7521076619bf6a1ebd8" prot="public" virt="pure-virtual"><scope>iDynTree::ILight</scope><name>getDirection</name></member>
+      <member refid="classiDynTree_1_1ILight_1a02bc591f676443c5f4819b2e7b4e0052" prot="public" virt="pure-virtual"><scope>iDynTree::ILight</scope><name>getName</name></member>
+      <member refid="classiDynTree_1_1ILight_1a8cfd7f00d979aef04e491ad96052b6a8" prot="public" virt="pure-virtual"><scope>iDynTree::ILight</scope><name>getPosition</name></member>
+      <member refid="classiDynTree_1_1ILight_1a6aa174b0fbd96c011880bdf2fa137737" prot="public" virt="pure-virtual"><scope>iDynTree::ILight</scope><name>getSpecularColor</name></member>
+      <member refid="classiDynTree_1_1ILight_1a3961e631d5d488f6186ad526e56a6484" prot="public" virt="pure-virtual"><scope>iDynTree::ILight</scope><name>getType</name></member>
+      <member refid="classiDynTree_1_1ILight_1a58ff9a230c6a871b0cb5bf78c15ab0e8" prot="public" virt="pure-virtual"><scope>iDynTree::ILight</scope><name>setAmbientColor</name></member>
+      <member refid="classiDynTree_1_1ILight_1a0992a9767b6e8834c97de5125639e27f" prot="public" virt="pure-virtual"><scope>iDynTree::ILight</scope><name>setDiffuseColor</name></member>
+      <member refid="classiDynTree_1_1ILight_1a79ad79bcb170f0832d2797c0f9b4dab4" prot="public" virt="pure-virtual"><scope>iDynTree::ILight</scope><name>setDirection</name></member>
+      <member refid="classiDynTree_1_1ILight_1a2fc31019584faf778feeca251c53e532" prot="public" virt="pure-virtual"><scope>iDynTree::ILight</scope><name>setPosition</name></member>
+      <member refid="classiDynTree_1_1ILight_1a2f9c33f94d5c606b5dbbacaa9507e950" prot="public" virt="pure-virtual"><scope>iDynTree::ILight</scope><name>setSpecularColor</name></member>
+      <member refid="classiDynTree_1_1ILight_1a3e4d47366695389be0c404989aeefe9a" prot="public" virt="pure-virtual"><scope>iDynTree::ILight</scope><name>setType</name></member>
+      <member refid="classiDynTree_1_1ILight_1aa0f35a497ec4ae5c99676d09cb2405c9" prot="public" virt="pure-virtual"><scope>iDynTree::ILight</scope><name>~ILight</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

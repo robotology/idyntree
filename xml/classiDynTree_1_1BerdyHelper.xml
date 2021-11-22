@@ -1,0 +1,1854 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1BerdyHelper" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::BerdyHelper</compoundname>
+    <includes local="no">iDynTree/Estimation/BerdyHelper.h</includes>
+      <sectiondef kind="user-defined">
+      <header>Methods to submit the input data for dynamics computations.</header>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a0fca122aca01f6020d2ee1b42a24dab5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::updateKinematicsFromFloatingBase</definition>
+        <argsstring>(const JointPosDoubleArray &amp;jointPos, const JointDOFsDoubleArray &amp;jointVel, const FrameIndex &amp;floatingFrame, const Vector3 &amp;angularVel)</argsstring>
+        <name>updateKinematicsFromFloatingBase</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">JointPosDoubleArray</ref> &amp;</type>
+          <declname>jointPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
+          <declname>jointVel</declname>
+        </param>
+        <param>
+          <type>const FrameIndex &amp;</type>
+          <declname>floatingFrame</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref> &amp;</type>
+          <declname>angularVel</declname>
+        </param>
+        <briefdescription>
+<para>Set the kinematic information necessary for the dynamics estimation using the angular velocity information of a floating frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This method cannot be used if the selected BerdyVariant is ORIGINAL_BERDY_FIXED_BASE. </para>
+</simplesect>
+<simplesect kind="note"><para>we not require to give the linear velocity of floating base because the dynamics equations are invariant with respect to an offset in linear velocity. This convenient to avoid any dependency on any prior floating base estimation.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">jointPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the position of the joints of the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jointVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the velocities of the joints of the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">floatingFrame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the index of the frame for which kinematic information is provided. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">angularVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>angular velocity (wrt to any inertial frame) of the specified floating frame, expressed in the specified floating frame orientation. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went ok, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="687" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1adb2510174af7732d539cba93525917d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::updateKinematicsFromFixedBase</definition>
+        <argsstring>(const JointPosDoubleArray &amp;jointPos, const JointDOFsDoubleArray &amp;jointVel, const FrameIndex &amp;fixedFrame, const Vector3 &amp;gravity)</argsstring>
+        <name>updateKinematicsFromFixedBase</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">JointPosDoubleArray</ref> &amp;</type>
+          <declname>jointPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
+          <declname>jointVel</declname>
+        </param>
+        <param>
+          <type>const FrameIndex &amp;</type>
+          <declname>fixedFrame</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref> &amp;</type>
+          <declname>gravity</declname>
+        </param>
+        <briefdescription>
+<para>Set the kinematic information necessary for the dynamics estimation assuming that a given frame is not accelerating with respect to the inertial frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">jointPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the position of the joints of the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jointVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the velocities of the joints of the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">fixedFrame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the index of the frame that is not accelerating with respect to the inertial frame. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gravity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the gravity acceleration vector, expressed in the specified fixed frame.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>gravity is used only if selected BerdyVariant is ORIGINAL_BERDY_FIXED_BASE.</para>
+</simplesect>
+<simplesect kind="return"><para>true if all went ok, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="705" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a09a6af1d970848a25f78cac46ddd4aab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::updateKinematicsFromTraversalFixedBase</definition>
+        <argsstring>(const JointPosDoubleArray &amp;jointPos, const JointDOFsDoubleArray &amp;jointVel, const Vector3 &amp;gravity)</argsstring>
+        <name>updateKinematicsFromTraversalFixedBase</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">JointPosDoubleArray</ref> &amp;</type>
+          <declname>jointPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
+          <declname>jointVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref> &amp;</type>
+          <declname>gravity</declname>
+        </param>
+        <briefdescription>
+<para>Set the kinematic information necessary for the dynamics estimation assuming that a given baseframe (specified by the m_dynamicsTraversal) is not accelerating with respect to the inertial frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">jointPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the position of the joints of the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jointVel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the velocities of the joints of the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gravity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the gravity acceleration vector, expressed in the specified fixed frame.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>gravity is used only if selected BerdyVariant is ORIGINAL_BERDY_FIXED_BASE.</para>
+</simplesect>
+<simplesect kind="return"><para>true if all went ok, false otherwise.</para>
+</simplesect>
+<simplesect kind="note"><para>this is equivalent to <programlisting><codeline><highlight class="normal">updateKinematicsFromFixedBase(jointPos,jointVel,m_dynamicsTraversal.getBaseLink()-&gt;getIndex(),gravity);</highlight></codeline>
+</programlisting> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="727" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a71dbc8dc62b4f35ddb6eecee36701493" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::setNetExternalWrenchMeasurementFrame</definition>
+        <argsstring>(const LinkIndex lnkIndex, const Transform &amp;link_H_contact)</argsstring>
+        <name>setNetExternalWrenchMeasurementFrame</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>lnkIndex</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>link_H_contact</declname>
+        </param>
+        <briefdescription>
+<para>Set/get the transformation link_H_contact between the link frame and the frame in which the measured net ext wrench is expressed. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The default value is the identity. This is extremly useful to correctly tune the variances when only a subset of the external net wrench is known (for example when it is known that the external net wrench is a pure force on a point different from the link frame.</para>
+<para><simplesect kind="note"><para>This will only change the frame in which the measurent equation of the net external wrench is expressed, not how the Newton-Euler equation of the link are expressed or how the net ext wrenches are serialized in the LinkNetExternalWrenches class. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="745" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1adeff7572b3c19f5e0b265384f8eba8f4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::getNetExternalWrenchMeasurementFrame</definition>
+        <argsstring>(const LinkIndex lnkIndex, Transform &amp;link_H_contact) const</argsstring>
+        <name>getNetExternalWrenchMeasurementFrame</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>lnkIndex</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>link_H_contact</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="746" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1ae5d57a085cbecb7c8f1dbac1c9d25b42" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref></type>
+        <definition>Model iDynTree::BerdyHelper::m_model</definition>
+        <argsstring></argsstring>
+        <name>m_model</name>
+        <briefdescription>
+<para><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> used in this class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="336" column="11" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="336" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a63a587fc249390a04b5a9d42d597367f" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref></type>
+        <definition>SensorsList iDynTree::BerdyHelper::m_sensors</definition>
+        <argsstring></argsstring>
+        <name>m_sensors</name>
+        <briefdescription>
+<para>Sensors used in this class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="341" column="17" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="341" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a3116e5473b0226ec7972d2f0c899cc69" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref></type>
+        <definition>Traversal iDynTree::BerdyHelper::m_dynamicsTraversal</definition>
+        <argsstring></argsstring>
+        <name>m_dynamicsTraversal</name>
+        <briefdescription>
+<para><ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> used for the dynamics computations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="346" column="15" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="346" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a37afa830080fdd16dd3a24f1f3cef646" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1LinkTraversalsCache" kindref="compound">LinkTraversalsCache</ref></type>
+        <definition>LinkTraversalsCache iDynTree::BerdyHelper::m_kinematicTraversals</definition>
+        <argsstring></argsstring>
+        <name>m_kinematicTraversals</name>
+        <briefdescription>
+<para>Caches of traversals used for kinematic computations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="351" column="25" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="351" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a61a6965cd25feadf32c6b249c30ec54c" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::m_areModelAndSensorsValid</definition>
+        <argsstring></argsstring>
+        <name>m_areModelAndSensorsValid</name>
+        <briefdescription>
+<para>False initially, true after a valid model and sensors have been loaded. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="356" column="10" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="356" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a503efedc4622658cfcf23cef1b01eb0e" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::m_kinematicsUpdated</definition>
+        <argsstring></argsstring>
+        <name>m_kinematicsUpdated</name>
+        <briefdescription>
+<para>False initially, true after updateKinematics was successfully called. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="361" column="10" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="361" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a65ba6e583488cb2ff4369e602b2e9414" prot="private" static="no" mutable="no">
+        <type><ref refid="structiDynTree_1_1BerdyOptions" kindref="compound">BerdyOptions</ref></type>
+        <definition>BerdyOptions iDynTree::BerdyHelper::m_options</definition>
+        <argsstring></argsstring>
+        <name>m_options</name>
+        <briefdescription>
+<para>Options of the current berdy variant used. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="366" column="18" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="366" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a0f8302d0a85c93489943cc22b23f08e9" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t iDynTree::BerdyHelper::m_nrOfDynamicalVariables</definition>
+        <argsstring></argsstring>
+        <name>m_nrOfDynamicalVariables</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="368" column="12" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="368" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a6bbbac1f4ff794b687fe4b261d9fe790" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t iDynTree::BerdyHelper::m_nrOfDynamicEquations</definition>
+        <argsstring></argsstring>
+        <name>m_nrOfDynamicEquations</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="369" column="12" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="369" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a3727b98de605cb042abcb904b30650c2" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t iDynTree::BerdyHelper::m_nrOfSensorsMeasurements</definition>
+        <argsstring></argsstring>
+        <name>m_nrOfSensorsMeasurements</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="370" column="12" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="370" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a3d52f55276eb4104868ddf98e3128c2e" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">JointPosDoubleArray</ref></type>
+        <definition>JointPosDoubleArray iDynTree::BerdyHelper::m_jointPos</definition>
+        <argsstring></argsstring>
+        <name>m_jointPos</name>
+        <briefdescription>
+<para>Buffer of link-specific body velocities. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Joint positions </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="379" column="25" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="379" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a4dfa9622c34cccf67a72a03a870288e3" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref></type>
+        <definition>JointDOFsDoubleArray iDynTree::BerdyHelper::m_jointVel</definition>
+        <argsstring></argsstring>
+        <name>m_jointVel</name>
+        <briefdescription>
+<para>Joint velocities. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="384" column="26" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="384" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1acff86d3333eca4390cc609ffe76d0bbd" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref></type>
+        <definition>LinkVelArray iDynTree::BerdyHelper::m_linkVels</definition>
+        <argsstring></argsstring>
+        <name>m_linkVels</name>
+        <briefdescription>
+<para><ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> body velocities (i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>6D velocity of the link, expressed in the link frame orientation and with respect to the link origin). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="391" column="18" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="391" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a9f17f5889c18e070184a2e0ed31dde8f" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector3</ref></type>
+        <definition>Vector3 iDynTree::BerdyHelper::m_gravity</definition>
+        <argsstring></argsstring>
+        <name>m_gravity</name>
+        <briefdescription>
+<para>Gravity expressed in the base link frame, used only if getBerdyVariant is equal to ORIGINAL_BERDY_FIXED_BASE. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="397" column="13" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="397" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1aab5cbb8e0187ac20df7e7ccf0342f5f3" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref></type>
+        <definition>SpatialAcc iDynTree::BerdyHelper::m_gravity6D</definition>
+        <argsstring></argsstring>
+        <name>m_gravity6D</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="398" column="16" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="398" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a9199987d73bb7818735b2ccfad40e0ca" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structiDynTree_1_1BerdySensor" kindref="compound">BerdySensor</ref> &gt;</type>
+        <definition>std::vector&lt;BerdySensor&gt; iDynTree::BerdyHelper::m_sensorsOrdering</definition>
+        <argsstring></argsstring>
+        <name>m_sensorsOrdering</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> ordering. Created on init </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="400" column="17" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="400" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1acb4ec319e7c1c1481297d94c71e4d3ad" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structiDynTree_1_1BerdyDynamicVariable" kindref="compound">BerdyDynamicVariable</ref> &gt;</type>
+        <definition>std::vector&lt;BerdyDynamicVariable&gt; iDynTree::BerdyHelper::m_dynamicVariablesOrdering</definition>
+        <argsstring></argsstring>
+        <name>m_dynamicVariablesOrdering</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Dynamic variable ordering. Created on init </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="401" column="17" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="401" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a0cf55af18ea120483ffe24977af429ba" prot="private" static="no" mutable="no">
+        <type>struct iDynTree::BerdyHelper::@4</type>
+        <definition>struct iDynTree::BerdyHelper::@4 iDynTree::BerdyHelper::berdySensorTypeOffsets</definition>
+        <argsstring></argsstring>
+        <name>berdySensorTypeOffsets</name>
+        <briefdescription>
+<para>Helper for mapping sensors measurements to the Y vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="462" column="28"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a1aa1f1d7bdedf9968246e890c761ba8c" prot="private" static="no" mutable="no">
+        <type>struct iDynTree::BerdyHelper::@5</type>
+        <definition>struct iDynTree::BerdyHelper::@5 iDynTree::BerdyHelper::berdySensorsInfo</definition>
+        <argsstring></argsstring>
+        <name>berdySensorsInfo</name>
+        <briefdescription>
+<para>Helper of additional sensors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="476" column="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a2ffb47e9c2d0c53eb40365ccf9a95ed0" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref></type>
+        <definition>VectorDynSize iDynTree::BerdyHelper::realSensorMeas</definition>
+        <argsstring></argsstring>
+        <name>realSensorMeas</name>
+        <briefdescription>
+<para>Buffer for sensor serialization. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="481" column="19" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="481" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a9c2b3c0f577603272c653eef00342af2" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Triplets" kindref="compound">Triplets</ref></type>
+        <definition>Triplets iDynTree::BerdyHelper::matrixDElements</definition>
+        <argsstring></argsstring>
+        <name>matrixDElements</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="483" column="14" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="483" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a31d9ada4e61268c6de0020f916204d09" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Triplets" kindref="compound">Triplets</ref></type>
+        <definition>Triplets iDynTree::BerdyHelper::matrixYElements</definition>
+        <argsstring></argsstring>
+        <name>matrixYElements</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="484" column="14" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="484" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a697c80cd73d90381d74b4a2a26436fc1" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &gt;</type>
+        <definition>std::vector&lt;Transform&gt; iDynTree::BerdyHelper::m_link_H_externalWrenchMeasurementFrame</definition>
+        <argsstring></argsstring>
+        <name>m_link_H_externalWrenchMeasurementFrame</name>
+        <briefdescription>
+<para><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> between the frame in which the external net wrench measurements are expressed and the link frames. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="490" column="17" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="490" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1aad48a7580411076dee094425eaf68b75" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t iDynTree::BerdyHelper::dofAccelerationOffset</definition>
+        <argsstring></argsstring>
+        <name>dofAccelerationOffset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="458" column="16" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="458" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1adc34fedb4bf6b7f1b18f66fa66aed308" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t iDynTree::BerdyHelper::dofTorquesOffset</definition>
+        <argsstring></argsstring>
+        <name>dofTorquesOffset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="459" column="16" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="459" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a0da9493e128ce7800adb90aa7cca8a84" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t iDynTree::BerdyHelper::netExtWrenchOffset</definition>
+        <argsstring></argsstring>
+        <name>netExtWrenchOffset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="460" column="16" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="460" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a624f21fbf5ecdc33119f707d39528e8c" prot="public" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t iDynTree::BerdyHelper::jointWrenchOffset</definition>
+        <argsstring></argsstring>
+        <name>jointWrenchOffset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="461" column="16" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="461" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1a1bf2f8c62b8afde8b687a02191a3501b" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; JointIndex &gt;</type>
+        <definition>std::vector&lt;JointIndex&gt; iDynTree::BerdyHelper::wrenchSensors</definition>
+        <argsstring></argsstring>
+        <name>wrenchSensors</name>
+        <briefdescription>
+<para>List of joint wrench sensors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="471" column="19" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="471" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BerdyHelper_1af8a24a4b0fae237d14a8b4931c706f40" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; size_t &gt;</type>
+        <definition>std::vector&lt;size_t&gt; iDynTree::BerdyHelper::jntIdxToOffset</definition>
+        <argsstring></argsstring>
+        <name>jntIdxToOffset</name>
+        <briefdescription>
+<para>Mapping between jndIx in wrenchSensor and. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="475" column="19" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="475" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a1ceb40aa0d982d92d69c74bda7d478b3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::initOriginalBerdyFixedBase</definition>
+        <argsstring>()</argsstring>
+        <name>initOriginalBerdyFixedBase</name>
+        <briefdescription>
+<para>Helpers method for initialization. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="406" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a03994c76ebae7f3a5c9a9556092ab30a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::initBerdyFloatingBase</definition>
+        <argsstring>()</argsstring>
+        <name>initBerdyFloatingBase</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="407" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1ab3bd5c8ade693ccc8e45f613b64d9ba1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::initSensorsMeasurements</definition>
+        <argsstring>()</argsstring>
+        <name>initSensorsMeasurements</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="408" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1ae8cbf1b19d66aaa1ee6424da9022edf9" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structiDynTree_1_1IndexRange" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange iDynTree::BerdyHelper::getRangeOriginalBerdyFixedBase</definition>
+        <argsstring>(const BerdyDynamicVariablesTypes dynamicVariableType, const TraversalIndex idx) const</argsstring>
+        <name>getRangeOriginalBerdyFixedBase</name>
+        <param>
+          <type>const <ref refid="group__iDynTreeExperimental_1ga83d8f828969dabc7dc82904d8de15312" kindref="member">BerdyDynamicVariablesTypes</ref></type>
+          <declname>dynamicVariableType</declname>
+        </param>
+        <param>
+          <type>const TraversalIndex</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="410" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1aab1c52ad98552636a3b1299c8da419b0" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structiDynTree_1_1IndexRange" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange iDynTree::BerdyHelper::getRangeLinkProperAccDynEqFixedBase</definition>
+        <argsstring>(const LinkIndex idx) const</argsstring>
+        <name>getRangeLinkProperAccDynEqFixedBase</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Ranges for specific dynamics equations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="418" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1aafa7df53a47e74e6a209328a6a1a16a0" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structiDynTree_1_1IndexRange" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange iDynTree::BerdyHelper::getRangeLinkNetTotalWrenchDynEqFixedBase</definition>
+        <argsstring>(const LinkIndex idx) const</argsstring>
+        <name>getRangeLinkNetTotalWrenchDynEqFixedBase</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="419" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1ad773be6d5bbde123de4f9d648dc3764c" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structiDynTree_1_1IndexRange" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange iDynTree::BerdyHelper::getRangeJointWrenchDynEqFixedBase</definition>
+        <argsstring>(const JointIndex idx) const</argsstring>
+        <name>getRangeJointWrenchDynEqFixedBase</name>
+        <param>
+          <type>const JointIndex</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="420" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a4cbe1a9adc1edb9e86b96df426aa32a1" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structiDynTree_1_1IndexRange" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange iDynTree::BerdyHelper::getRangeDOFTorqueDynEqFixedBase</definition>
+        <argsstring>(const DOFIndex idx) const</argsstring>
+        <name>getRangeDOFTorqueDynEqFixedBase</name>
+        <param>
+          <type>const DOFIndex</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="421" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1afffc632658b7c029b2c62d57ebd3f353" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structiDynTree_1_1IndexRange" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange iDynTree::BerdyHelper::getRangeAccelerationPropagationFloatingBase</definition>
+        <argsstring>(const LinkIndex idx) const</argsstring>
+        <name>getRangeAccelerationPropagationFloatingBase</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="424" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1aee1970c64b9d3110df6988330f2415b5" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structiDynTree_1_1IndexRange" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange iDynTree::BerdyHelper::getRangeNewtonEulerEquationsFloatingBase</definition>
+        <argsstring>(const LinkIndex idx) const</argsstring>
+        <name>getRangeNewtonEulerEquationsFloatingBase</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="425" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1aa405d2d256e5244db088639451c7d057" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::computeBerdySensorMatrices</definition>
+        <argsstring>(SparseMatrix&lt; iDynTree::ColumnMajor &gt; &amp;Y, VectorDynSize &amp;bY)</argsstring>
+        <name>computeBerdySensorMatrices</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
+          <declname>Y</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>bY</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="427" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a681e97c1b55663f291e193b273202e2f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::computeBerdyDynamicsMatricesFixedBase</definition>
+        <argsstring>(SparseMatrix&lt; iDynTree::ColumnMajor &gt; &amp;D, VectorDynSize &amp;bD)</argsstring>
+        <name>computeBerdyDynamicsMatricesFixedBase</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
+          <declname>D</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>bD</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="428" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1ab709ba38ea3e420a4ecb76aebc6f0a95" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::computeBerdyDynamicsMatricesFloatingBase</definition>
+        <argsstring>(SparseMatrix&lt; iDynTree::ColumnMajor &gt; &amp;D, VectorDynSize &amp;bD)</argsstring>
+        <name>computeBerdyDynamicsMatricesFloatingBase</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
+          <declname>D</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>bD</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="429" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a0fa7f63a4363f102670c407e07e49932" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x1</ref></type>
+        <definition>Matrix6x1 iDynTree::BerdyHelper::getBiasTermJointAccelerationPropagation</definition>
+        <argsstring>(IJointConstPtr joint, const LinkIndex parentLinkIdx, const LinkIndex childLinkIdx, const Transform &amp;child_X_parent)</argsstring>
+        <name>getBiasTermJointAccelerationPropagation</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1IJoint" kindref="compound">IJointConstPtr</ref></type>
+          <declname>joint</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parentLinkIdx</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>childLinkIdx</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>child_X_parent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="432" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a7ca82a37bb80c55ffd40a86e2332b6d0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::BerdyHelper::cacheSensorsOrdering</definition>
+        <argsstring>()</argsstring>
+        <name>cacheSensorsOrdering</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="436" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1ad2aec3a74eb905d5a733c59391b9abce" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::BerdyHelper::cacheDynamicVariablesOrderingFixedBase</definition>
+        <argsstring>()</argsstring>
+        <name>cacheDynamicVariablesOrderingFixedBase</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="437" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1ab4eb30b66c27eb28854bef166d6f6768" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::BerdyHelper::cacheDynamicVariablesOrderingFloatingBase</definition>
+        <argsstring>()</argsstring>
+        <name>cacheDynamicVariablesOrderingFloatingBase</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="438" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a080c57374e6b6e33dd3134741bebc08b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::serializeDynamicVariablesFixedBase</definition>
+        <argsstring>(LinkProperAccArray &amp;properAccs, LinkNetTotalWrenchesWithoutGravity &amp;netTotalWrenchesWithoutGrav, LinkNetExternalWrenches &amp;netExtWrenches, LinkInternalWrenches &amp;linkJointWrenches, JointDOFsDoubleArray &amp;jointTorques, JointDOFsDoubleArray &amp;jointAccs, VectorDynSize &amp;d)</argsstring>
+        <name>serializeDynamicVariablesFixedBase</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkProperAccArray</ref> &amp;</type>
+          <declname>properAccs</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkNetTotalWrenchesWithoutGravity</ref> &amp;</type>
+          <declname>netTotalWrenchesWithoutGrav</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkNetExternalWrenches</ref> &amp;</type>
+          <declname>netExtWrenches</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkInternalWrenches</ref> &amp;</type>
+          <declname>linkJointWrenches</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
+          <declname>jointTorques</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
+          <declname>jointAccs</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>d</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="439" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1af88cabedaedec0b597d6c83a32e403c0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::serializeDynamicVariablesFloatingBase</definition>
+        <argsstring>(LinkProperAccArray &amp;properAccs, LinkNetTotalWrenchesWithoutGravity &amp;netTotalWrenchesWithoutGrav, LinkNetExternalWrenches &amp;netExtWrenches, LinkInternalWrenches &amp;linkJointWrenches, JointDOFsDoubleArray &amp;jointTorques, JointDOFsDoubleArray &amp;jointAccs, VectorDynSize &amp;d)</argsstring>
+        <name>serializeDynamicVariablesFloatingBase</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkProperAccArray</ref> &amp;</type>
+          <declname>properAccs</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkNetTotalWrenchesWithoutGravity</ref> &amp;</type>
+          <declname>netTotalWrenchesWithoutGrav</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkNetExternalWrenches</ref> &amp;</type>
+          <declname>netExtWrenches</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkInternalWrenches</ref> &amp;</type>
+          <declname>linkJointWrenches</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
+          <declname>jointTorques</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
+          <declname>jointAccs</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>d</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="446" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a87d946099a5c1491b7b5143eea33cbea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::BerdyHelper::BerdyHelper</definition>
+        <argsstring>()</argsstring>
+        <name>BerdyHelper</name>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="497" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a6efe4294c385105c4087cdc23a771dcb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+        <definition>Model&amp; iDynTree::BerdyHelper::model</definition>
+        <argsstring>()</argsstring>
+        <name>model</name>
+        <briefdescription>
+<para>Access the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="502" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1afdde616aae946ca1286d18a1ceaa95da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> &amp;</type>
+        <definition>SensorsList&amp; iDynTree::BerdyHelper::sensors</definition>
+        <argsstring>()</argsstring>
+        <name>sensors</name>
+        <briefdescription>
+<para>Access the sensors. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="507" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a039a1fa1dd3bf8b5213c53d29fecd1d9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> &amp;</type>
+        <definition>const Traversal&amp; iDynTree::BerdyHelper::dynamicTraversal</definition>
+        <argsstring>() const</argsstring>
+        <name>dynamicTraversal</name>
+        <briefdescription>
+<para>Acces the traveral used for the dynamics computations (const version) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="512" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1aff495b4e0e0bef4ad757f8521d119e58" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+        <definition>const Model&amp; iDynTree::BerdyHelper::model</definition>
+        <argsstring>() const</argsstring>
+        <name>model</name>
+        <briefdescription>
+<para>Access the model (const version). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="517" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1ae9808ba9d9c2e8e680d70580d2c07712" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> &amp;</type>
+        <definition>const SensorsList&amp; iDynTree::BerdyHelper::sensors</definition>
+        <argsstring>() const</argsstring>
+        <name>sensors</name>
+        <briefdescription>
+<para>Access the model (const version). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="522" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a1e159c73e14672efc1a4ad5db4e4c070" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::isValid</definition>
+        <argsstring>() const</argsstring>
+        <name>isValid</name>
+        <briefdescription>
+<para>Returns if the helper is valid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The helper is valid if the model and the sensors have been loaded <simplesect kind="return"><para>true if the helper is valid. False otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="529" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a4570e41df3b6dfedd00fe4dfcc2bc02b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::init</definition>
+        <argsstring>(const Model &amp;model, const SensorsList &amp;sensors, const BerdyOptions options=BerdyOptions())</argsstring>
+        <name>init</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> &amp;</type>
+          <declname>sensors</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structiDynTree_1_1BerdyOptions" kindref="compound">BerdyOptions</ref></type>
+          <declname>options</declname>
+          <defval><ref refid="structiDynTree_1_1BerdyOptions" kindref="compound">BerdyOptions</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>Init the class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The used model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">sensors</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The used sensors. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">options</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The used options, check <ref refid="structiDynTree_1_1BerdyOptions" kindref="compound">BerdyOptions</ref> docs. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="539" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a744e3d20ec3a98f80ab341f2201c204e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structiDynTree_1_1BerdyOptions" kindref="compound">BerdyOptions</ref></type>
+        <definition>BerdyOptions iDynTree::BerdyHelper::getOptions</definition>
+        <argsstring>() const</argsstring>
+        <name>getOptions</name>
+        <briefdescription>
+<para>Get currently used options. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="546" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a47b69a027609e28259584304ed786ff9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::BerdyHelper::getNrOfDynamicVariables</definition>
+        <argsstring>() const</argsstring>
+        <name>getNrOfDynamicVariables</name>
+        <briefdescription>
+<para>Get the number of columns of the D matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This depends on the Berdy variant selected. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="552" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a8d104eb5b61cea207e4d2655530d5c61" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::BerdyHelper::getNrOfDynamicEquations</definition>
+        <argsstring>() const</argsstring>
+        <name>getNrOfDynamicEquations</name>
+        <briefdescription>
+<para>Get the number of dynamics equations used in the Berdy equations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="558" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a5931a1798fdabdcd745790b3e76270c5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::BerdyHelper::getNrOfSensorsMeasurements</definition>
+        <argsstring>() const</argsstring>
+        <name>getNrOfSensorsMeasurements</name>
+        <briefdescription>
+<para>Get the number of sensors measurements. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="563" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a07ac9f8c9edc4a8f1790b12bb8d2afb2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::resizeAndZeroBerdyMatrices</definition>
+        <argsstring>(SparseMatrix&lt; iDynTree::ColumnMajor &gt; &amp;D, VectorDynSize &amp;bD, SparseMatrix&lt; iDynTree::ColumnMajor &gt; &amp;Y, VectorDynSize &amp;bY)</argsstring>
+        <name>resizeAndZeroBerdyMatrices</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
+          <declname>D</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>bD</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
+          <declname>Y</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>bY</declname>
+        </param>
+        <briefdescription>
+<para>Resize and set to zero Berdy matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="568" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a227c6d0eb94a11aa3a37888e36e0b407" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::resizeAndZeroBerdyMatrices</definition>
+        <argsstring>(MatrixDynSize &amp;D, VectorDynSize &amp;bD, MatrixDynSize &amp;Y, VectorDynSize &amp;bY)</argsstring>
+        <name>resizeAndZeroBerdyMatrices</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>D</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>bD</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>Y</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>bY</declname>
+        </param>
+        <briefdescription>
+<para>Resize and set to zero Berdy matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="575" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a2ae3488e237da8123143073239a9392a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::getBerdyMatrices</definition>
+        <argsstring>(SparseMatrix&lt; iDynTree::ColumnMajor &gt; &amp;D, VectorDynSize &amp;bD, SparseMatrix&lt; iDynTree::ColumnMajor &gt; &amp;Y, VectorDynSize &amp;bY)</argsstring>
+        <name>getBerdyMatrices</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
+          <declname>D</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>bD</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1SparseMatrix" kindref="compound">SparseMatrix</ref>&lt; iDynTree::ColumnMajor &gt; &amp;</type>
+          <declname>Y</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>bY</declname>
+        </param>
+        <briefdescription>
+<para>Get Berdy matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="581" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1adb30abcc23e36497be55219958a10f4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::getBerdyMatrices</definition>
+        <argsstring>(MatrixDynSize &amp;D, VectorDynSize &amp;bD, MatrixDynSize &amp;Y, VectorDynSize &amp;bY)</argsstring>
+        <name>getBerdyMatrices</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>D</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>bD</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>Y</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>bY</declname>
+        </param>
+        <briefdescription>
+<para>Get Berdy matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>internally this function uses sparse matrices Prefer the use of resizeAndZeroBerdyMatrices(SparseMatrix &amp;, VectorDynSize &amp;, SparseMatrix &amp;, VectorDynSize &amp;) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="589" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1ac5f9f3dd120d88458150782f3156f9d0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::vector&lt; <ref refid="structiDynTree_1_1BerdySensor" kindref="compound">BerdySensor</ref> &gt; &amp;</type>
+        <definition>const std::vector&lt;BerdySensor&gt;&amp; iDynTree::BerdyHelper::getSensorsOrdering</definition>
+        <argsstring>() const</argsstring>
+        <name>getSensorsOrdering</name>
+        <briefdescription>
+<para>Return the internal ordering of the sensors. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Measurements are expected to respect the internal sensors ordering Use this function to obtain the sensors ordering.</para>
+<para><simplesect kind="return"><para>the sensors ordering </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="601" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1afec80ee26f3dc3314b9adf89d9a48ea7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structiDynTree_1_1IndexRange" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange iDynTree::BerdyHelper::getRangeSensorVariable</definition>
+        <argsstring>(const SensorType type, const unsigned int sensorIdx) const</argsstring>
+        <name>getRangeSensorVariable</name>
+        <param>
+          <type>const SensorType</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>const unsigned int</type>
+          <declname>sensorIdx</declname>
+        </param>
+        <briefdescription>
+<para>Get the range of the specified sensor in. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="606" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a872306fd0944d855f90f4c02af249911" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structiDynTree_1_1IndexRange" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange iDynTree::BerdyHelper::getRangeDOFSensorVariable</definition>
+        <argsstring>(const BerdySensorTypes sensorType, const DOFIndex idx) const</argsstring>
+        <name>getRangeDOFSensorVariable</name>
+        <param>
+          <type>const <ref refid="group__iDynTreeExperimental_1gab629c8d25391838124595ba8961654e4" kindref="member">BerdySensorTypes</ref></type>
+          <declname>sensorType</declname>
+        </param>
+        <param>
+          <type>const DOFIndex</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="607" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1adeea4eb63a190a5cb05223e877d1cd73" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structiDynTree_1_1IndexRange" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange iDynTree::BerdyHelper::getRangeJointSensorVariable</definition>
+        <argsstring>(const BerdySensorTypes sensorType, const JointIndex idx) const</argsstring>
+        <name>getRangeJointSensorVariable</name>
+        <param>
+          <type>const <ref refid="group__iDynTreeExperimental_1gab629c8d25391838124595ba8961654e4" kindref="member">BerdySensorTypes</ref></type>
+          <declname>sensorType</declname>
+        </param>
+        <param>
+          <type>const JointIndex</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="608" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1aaef6e11574a175497e3788a6f21b2121" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structiDynTree_1_1IndexRange" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange iDynTree::BerdyHelper::getRangeLinkSensorVariable</definition>
+        <argsstring>(const BerdySensorTypes sensorType, const LinkIndex idx) const</argsstring>
+        <name>getRangeLinkSensorVariable</name>
+        <param>
+          <type>const <ref refid="group__iDynTreeExperimental_1gab629c8d25391838124595ba8961654e4" kindref="member">BerdySensorTypes</ref></type>
+          <declname>sensorType</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="609" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1adba971ab3536d551efc4cfb0ed101486" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structiDynTree_1_1IndexRange" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange iDynTree::BerdyHelper::getRangeLinkVariable</definition>
+        <argsstring>(const BerdyDynamicVariablesTypes dynamicVariableType, const LinkIndex idx) const</argsstring>
+        <name>getRangeLinkVariable</name>
+        <param>
+          <type>const <ref refid="group__iDynTreeExperimental_1ga83d8f828969dabc7dc82904d8de15312" kindref="member">BerdyDynamicVariablesTypes</ref></type>
+          <declname>dynamicVariableType</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Ranges of dynamic variables. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="614" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1aaa87e8a4cbe18717bfe1b85d8507d283" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structiDynTree_1_1IndexRange" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange iDynTree::BerdyHelper::getRangeJointVariable</definition>
+        <argsstring>(const BerdyDynamicVariablesTypes dynamicVariableType, const JointIndex idx) const</argsstring>
+        <name>getRangeJointVariable</name>
+        <param>
+          <type>const <ref refid="group__iDynTreeExperimental_1ga83d8f828969dabc7dc82904d8de15312" kindref="member">BerdyDynamicVariablesTypes</ref></type>
+          <declname>dynamicVariableType</declname>
+        </param>
+        <param>
+          <type>const JointIndex</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="615" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a46de7046800d2515c76f07c82806234a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structiDynTree_1_1IndexRange" kindref="compound">IndexRange</ref></type>
+        <definition>IndexRange iDynTree::BerdyHelper::getRangeDOFVariable</definition>
+        <argsstring>(const BerdyDynamicVariablesTypes dynamicVariableType, const DOFIndex idx) const</argsstring>
+        <name>getRangeDOFVariable</name>
+        <param>
+          <type>const <ref refid="group__iDynTreeExperimental_1ga83d8f828969dabc7dc82904d8de15312" kindref="member">BerdyDynamicVariablesTypes</ref></type>
+          <declname>dynamicVariableType</declname>
+        </param>
+        <param>
+          <type>const DOFIndex</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="616" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a6e31e5e33d4977abd91ff8ae5f946c06" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::vector&lt; <ref refid="structiDynTree_1_1BerdyDynamicVariable" kindref="compound">BerdyDynamicVariable</ref> &gt; &amp;</type>
+        <definition>const std::vector&lt;BerdyDynamicVariable&gt;&amp; iDynTree::BerdyHelper::getDynamicVariablesOrdering</definition>
+        <argsstring>() const</argsstring>
+        <name>getDynamicVariablesOrdering</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="618" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1ab36505d65fe931c1457d1f3401816d6b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::serializeDynamicVariables</definition>
+        <argsstring>(LinkProperAccArray &amp;properAccs, LinkNetTotalWrenchesWithoutGravity &amp;netTotalWrenchesWithoutGrav, LinkNetExternalWrenches &amp;netExtWrenches, LinkInternalWrenches &amp;linkJointWrenches, JointDOFsDoubleArray &amp;jointTorques, JointDOFsDoubleArray &amp;jointAccs, VectorDynSize &amp;d)</argsstring>
+        <name>serializeDynamicVariables</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkProperAccArray</ref> &amp;</type>
+          <declname>properAccs</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkNetTotalWrenchesWithoutGravity</ref> &amp;</type>
+          <declname>netTotalWrenchesWithoutGrav</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkNetExternalWrenches</ref> &amp;</type>
+          <declname>netExtWrenches</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkInternalWrenches</ref> &amp;</type>
+          <declname>linkJointWrenches</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
+          <declname>jointTorques</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
+          <declname>jointAccs</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>d</declname>
+        </param>
+        <briefdescription>
+<para>Serialized dynamic variables from the separate buffers. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="623" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a7d6d9e5c9e4a9f226ebccecfa2caf6c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::serializeSensorVariables</definition>
+        <argsstring>(SensorsMeasurements &amp;sensMeas, LinkNetExternalWrenches &amp;netExtWrenches, JointDOFsDoubleArray &amp;jointTorques, JointDOFsDoubleArray &amp;jointAccs, LinkInternalWrenches &amp;linkJointWrenches, VectorDynSize &amp;y)</argsstring>
+        <name>serializeSensorVariables</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1SensorsMeasurements" kindref="compound">SensorsMeasurements</ref> &amp;</type>
+          <declname>sensMeas</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkNetExternalWrenches</ref> &amp;</type>
+          <declname>netExtWrenches</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
+          <declname>jointTorques</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
+          <declname>jointAccs</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkInternalWrenches</ref> &amp;</type>
+          <declname>linkJointWrenches</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>y</declname>
+        </param>
+        <briefdescription>
+<para>Serialize sensor variable from separate buffers. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="633" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1ab2bd06be1f6e8bdc30192c4a2f1daa56" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::serializeDynamicVariablesComputedFromFixedBaseRNEA</definition>
+        <argsstring>(JointDOFsDoubleArray &amp;jointAccs, LinkNetExternalWrenches &amp;netExtWrenches, VectorDynSize &amp;d)</argsstring>
+        <name>serializeDynamicVariablesComputedFromFixedBaseRNEA</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
+          <declname>jointAccs</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkNetExternalWrenches</ref> &amp;</type>
+          <declname>netExtWrenches</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>d</declname>
+        </param>
+        <briefdescription>
+<para>Debug function: </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This method has been added for debug, and could be removed soon. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="647" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a4d20c43dafa947578e70ee7205bc8888" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::extractJointTorquesFromDynamicVariables</definition>
+        <argsstring>(const VectorDynSize &amp;d, const VectorDynSize &amp;jointPos, VectorDynSize &amp;jointTorques) const</argsstring>
+        <name>extractJointTorquesFromDynamicVariables</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>d</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jointPos</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jointTorques</declname>
+        </param>
+        <briefdescription>
+<para>Extract the joint torques from the dynamic variables. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="655" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BerdyHelper_1a27f4613ae2247590ff8040b123d425ef" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BerdyHelper::extractLinkNetExternalWrenchesFromDynamicVariables</definition>
+        <argsstring>(const VectorDynSize &amp;d, LinkNetExternalWrenches &amp;netExtWrenches) const</argsstring>
+        <name>extractLinkNetExternalWrenchesFromDynamicVariables</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>d</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkNetExternalWrenches</ref> &amp;</type>
+          <declname>netExtWrenches</declname>
+        </param>
+        <briefdescription>
+<para>Extract the net external force-torques from the dynamic variables. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="662" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Helper class for computing Berdy matrices. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Berdy refers to a class for algorithms to compute the Maximum A Posteriori (MAP) estimation of the dynamic variables of a multibody model (accelerations, external forces, joint torques) assuming the knowledge the measurements of an arbitrary set of sensors and of the kinematics and inertial characteristics of the model.</para>
+<para>The MAP estimation is computed using a sparse matrix representation of the multibody dynamics Newton-Euler equations, originally described in:</para>
+<para>Latella, C.; Kuppuswamy, N.; Romano, F.; Traversaro, S.; Nori, F. Whole-Body Human Inverse Dynamics with Distributed Micro-Accelerometers, Gyros and Force Sensing. Sensors 2016, 16, 727. <ulink url="http://www.mdpi.com/1424-8220/16/5/727">http://www.mdpi.com/1424-8220/16/5/727</ulink></para>
+<para>Nori F, Kuppuswamy N, Traversaro S. Simultaneous state and dynamics estimation in articulated structures. In Intelligent Robots and Systems (IROS), 2015 IEEE/RSJ International Conference on 2015 Sep 28 (pp. 3380-3386). IEEE. <ulink url="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=7353848">http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=7353848</ulink></para>
+<para>This helper class implements two different variants of the Berdy dynamics representation, identified with the BerdyVariants enum:<itemizedlist>
+<listitem><para>The ORIGINAL_BERDY_FIXED_BASE is the original BERDY representation described in the papers, that was assuming a fixed base model with all the joints with 1-DOF .</para>
+</listitem><listitem><para>The BERDY_FLOATING_BASE is a variant in which the model is assumed to be floating, does not need the position or linear velocity of the floating base and supports joints with an arbitrary number of DOF .</para>
+</listitem></itemizedlist>
+</para>
+<para>The sensors supported by this class are the one contained in the <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> representation, which can be loaded directly from an URDF representation, see <ulink url="https://github.com/robotology/idyntree/blob/master/doc/model_loading.md#sensor-extensions">https://github.com/robotology/idyntree/blob/master/doc/model_loading.md#sensor-extensions</ulink> . Using this representation the following sensors can be loaded:<itemizedlist>
+<listitem><para>Internal Six-Axis Force Torque sensors</para>
+</listitem><listitem><para>Gyroscopes</para>
+</listitem><listitem><para>Accelerometers Support for joint torques/acceleration or external wrenches measurements still needs to be added.</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>The dynamics representation of Berdy is highly dependent on the link assumed to be the floating base of the robot, even in the case that BERDY_FLOATING_BASE is used. The assumed traversal (i.e. which link is the floating base and how the link are visited) is accessible with the <ref refid="classiDynTree_1_1BerdyHelper_1a039a1fa1dd3bf8b5213c53d29fecd1d9" kindref="member">dynamicTraversal()</ref> method.</para>
+</simplesect>
+<simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="5">
+        <label>std::vector&lt; JointIndex &gt;</label>
+        <childnode refid="3" relation="template-instance">
+          <edgelabel>&lt; JointIndex &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>T</label>
+      </node>
+      <node id="3">
+        <label>std::vector&lt; T &gt;</label>
+        <childnode refid="4" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::BerdyHelper</label>
+        <link refid="classiDynTree_1_1BerdyHelper"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>jntIdxToOffset</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>wrenchSensors</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::vector&lt; size_t &gt;</label>
+        <childnode refid="3" relation="template-instance">
+          <edgelabel>&lt; size_t &gt;</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Estimation/BerdyHelper.h" line="331" column="1" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="332" bodyend="764"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1BerdyHelper_1a87d946099a5c1491b7b5143eea33cbea" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>BerdyHelper</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a1aa1f1d7bdedf9968246e890c761ba8c" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>berdySensorsInfo</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a0cf55af18ea120483ffe24977af429ba" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>berdySensorTypeOffsets</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1ad2aec3a74eb905d5a733c59391b9abce" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>cacheDynamicVariablesOrderingFixedBase</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1ab4eb30b66c27eb28854bef166d6f6768" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>cacheDynamicVariablesOrderingFloatingBase</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a7ca82a37bb80c55ffd40a86e2332b6d0" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>cacheSensorsOrdering</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a681e97c1b55663f291e193b273202e2f" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>computeBerdyDynamicsMatricesFixedBase</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1ab709ba38ea3e420a4ecb76aebc6f0a95" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>computeBerdyDynamicsMatricesFloatingBase</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1aa405d2d256e5244db088639451c7d057" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>computeBerdySensorMatrices</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1aad48a7580411076dee094425eaf68b75" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>dofAccelerationOffset</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1adc34fedb4bf6b7f1b18f66fa66aed308" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>dofTorquesOffset</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a039a1fa1dd3bf8b5213c53d29fecd1d9" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>dynamicTraversal</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a4d20c43dafa947578e70ee7205bc8888" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>extractJointTorquesFromDynamicVariables</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a27f4613ae2247590ff8040b123d425ef" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>extractLinkNetExternalWrenchesFromDynamicVariables</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a2ae3488e237da8123143073239a9392a" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getBerdyMatrices</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1adb30abcc23e36497be55219958a10f4a" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getBerdyMatrices</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a0fa7f63a4363f102670c407e07e49932" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getBiasTermJointAccelerationPropagation</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a6e31e5e33d4977abd91ff8ae5f946c06" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getDynamicVariablesOrdering</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1adeff7572b3c19f5e0b265384f8eba8f4" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getNetExternalWrenchMeasurementFrame</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a8d104eb5b61cea207e4d2655530d5c61" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getNrOfDynamicEquations</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a47b69a027609e28259584304ed786ff9" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getNrOfDynamicVariables</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a5931a1798fdabdcd745790b3e76270c5" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getNrOfSensorsMeasurements</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a744e3d20ec3a98f80ab341f2201c204e" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getOptions</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1afffc632658b7c029b2c62d57ebd3f353" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getRangeAccelerationPropagationFloatingBase</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a872306fd0944d855f90f4c02af249911" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getRangeDOFSensorVariable</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a4cbe1a9adc1edb9e86b96df426aa32a1" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getRangeDOFTorqueDynEqFixedBase</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a46de7046800d2515c76f07c82806234a" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getRangeDOFVariable</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1adeea4eb63a190a5cb05223e877d1cd73" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getRangeJointSensorVariable</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1aaa87e8a4cbe18717bfe1b85d8507d283" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getRangeJointVariable</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1ad773be6d5bbde123de4f9d648dc3764c" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getRangeJointWrenchDynEqFixedBase</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1aafa7df53a47e74e6a209328a6a1a16a0" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getRangeLinkNetTotalWrenchDynEqFixedBase</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1aab1c52ad98552636a3b1299c8da419b0" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getRangeLinkProperAccDynEqFixedBase</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1aaef6e11574a175497e3788a6f21b2121" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getRangeLinkSensorVariable</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1adba971ab3536d551efc4cfb0ed101486" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getRangeLinkVariable</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1aee1970c64b9d3110df6988330f2415b5" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getRangeNewtonEulerEquationsFloatingBase</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1ae8cbf1b19d66aaa1ee6424da9022edf9" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getRangeOriginalBerdyFixedBase</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1afec80ee26f3dc3314b9adf89d9a48ea7" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getRangeSensorVariable</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1ac5f9f3dd120d88458150782f3156f9d0" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>getSensorsOrdering</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a4570e41df3b6dfedd00fe4dfcc2bc02b" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>init</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a03994c76ebae7f3a5c9a9556092ab30a" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>initBerdyFloatingBase</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a1ceb40aa0d982d92d69c74bda7d478b3" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>initOriginalBerdyFixedBase</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1ab3bd5c8ade693ccc8e45f613b64d9ba1" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>initSensorsMeasurements</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a1e159c73e14672efc1a4ad5db4e4c070" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>isValid</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1af8a24a4b0fae237d14a8b4931c706f40" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>jntIdxToOffset</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a624f21fbf5ecdc33119f707d39528e8c" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>jointWrenchOffset</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a61a6965cd25feadf32c6b249c30ec54c" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>m_areModelAndSensorsValid</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a3116e5473b0226ec7972d2f0c899cc69" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>m_dynamicsTraversal</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1acb4ec319e7c1c1481297d94c71e4d3ad" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>m_dynamicVariablesOrdering</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a9f17f5889c18e070184a2e0ed31dde8f" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>m_gravity</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1aab5cbb8e0187ac20df7e7ccf0342f5f3" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>m_gravity6D</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a3d52f55276eb4104868ddf98e3128c2e" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>m_jointPos</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a4dfa9622c34cccf67a72a03a870288e3" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>m_jointVel</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a503efedc4622658cfcf23cef1b01eb0e" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>m_kinematicsUpdated</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a37afa830080fdd16dd3a24f1f3cef646" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>m_kinematicTraversals</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a697c80cd73d90381d74b4a2a26436fc1" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>m_link_H_externalWrenchMeasurementFrame</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1acff86d3333eca4390cc609ffe76d0bbd" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>m_linkVels</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1ae5d57a085cbecb7c8f1dbac1c9d25b42" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>m_model</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a0f8302d0a85c93489943cc22b23f08e9" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>m_nrOfDynamicalVariables</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a6bbbac1f4ff794b687fe4b261d9fe790" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>m_nrOfDynamicEquations</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a3727b98de605cb042abcb904b30650c2" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>m_nrOfSensorsMeasurements</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a65ba6e583488cb2ff4369e602b2e9414" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>m_options</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a63a587fc249390a04b5a9d42d597367f" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>m_sensors</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a9199987d73bb7818735b2ccfad40e0ca" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>m_sensorsOrdering</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a9c2b3c0f577603272c653eef00342af2" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>matrixDElements</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a31d9ada4e61268c6de0020f916204d09" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>matrixYElements</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a6efe4294c385105c4087cdc23a771dcb" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>model</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1aff495b4e0e0bef4ad757f8521d119e58" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>model</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a0da9493e128ce7800adb90aa7cca8a84" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>netExtWrenchOffset</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a2ffb47e9c2d0c53eb40365ccf9a95ed0" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>realSensorMeas</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a07ac9f8c9edc4a8f1790b12bb8d2afb2" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>resizeAndZeroBerdyMatrices</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a227c6d0eb94a11aa3a37888e36e0b407" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>resizeAndZeroBerdyMatrices</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1afdde616aae946ca1286d18a1ceaa95da" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>sensors</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1ae9808ba9d9c2e8e680d70580d2c07712" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>sensors</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1ab36505d65fe931c1457d1f3401816d6b" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>serializeDynamicVariables</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1ab2bd06be1f6e8bdc30192c4a2f1daa56" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>serializeDynamicVariablesComputedFromFixedBaseRNEA</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a080c57374e6b6e33dd3134741bebc08b" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>serializeDynamicVariablesFixedBase</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1af88cabedaedec0b597d6c83a32e403c0" prot="private" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>serializeDynamicVariablesFloatingBase</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a7d6d9e5c9e4a9f226ebccecfa2caf6c6" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>serializeSensorVariables</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a71dbc8dc62b4f35ddb6eecee36701493" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>setNetExternalWrenchMeasurementFrame</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1adb2510174af7732d539cba93525917d1" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>updateKinematicsFromFixedBase</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a0fca122aca01f6020d2ee1b42a24dab5" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>updateKinematicsFromFloatingBase</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a09a6af1d970848a25f78cac46ddd4aab" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>updateKinematicsFromTraversalFixedBase</name></member>
+      <member refid="classiDynTree_1_1BerdyHelper_1a1bf2f8c62b8afde8b687a02191a3501b" prot="public" virt="non-virtual"><scope>iDynTree::BerdyHelper</scope><name>wrenchSensors</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

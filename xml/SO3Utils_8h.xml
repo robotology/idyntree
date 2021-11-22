@@ -1,0 +1,226 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="SO3Utils_8h" kind="file" language="C++">
+    <compoundname>SO3Utils.h</compoundname>
+    <includes refid="Rotation_8h" local="no">iDynTree/Core/Rotation.h</includes>
+    <includes refid="GeomVector3_8h" local="no">iDynTree/Core/GeomVector3.h</includes>
+    <includes local="no">vector</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/Core/SO3Utils.h</label>
+        <link refid="SO3Utils_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structiDynTree_1_1GeodesicL2MeanOptions" prot="public">iDynTree::GeodesicL2MeanOptions</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="SO3Utils_8h_1a72d7e0a9ca21815a7dadb8ea94f5aef4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::isValidRotationMatrix</definition>
+        <argsstring>(const iDynTree::Rotation &amp;r)</argsstring>
+        <name>isValidRotationMatrix</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Rotation" kindref="compound">iDynTree::Rotation</ref> &amp;</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+<para>Check if the rotation matrix is valid. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It checks that the determinant is 1, that the Frobenius norm is finite and that it is orthogonal. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>r</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The input rotation </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if it is a rotation matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SO3Utils.h" line="40" column="10" declfile="iDynTree/Core/SO3Utils.h" declline="40" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="SO3Utils_8h_1a7950f68e2a23c633dc53411db5b5b573" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::geodesicL2Distance</definition>
+        <argsstring>(const iDynTree::Rotation &amp;rotation1, const iDynTree::Rotation &amp;rotation2)</argsstring>
+        <name>geodesicL2Distance</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Rotation" kindref="compound">iDynTree::Rotation</ref> &amp;</type>
+          <declname>rotation1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Rotation" kindref="compound">iDynTree::Rotation</ref> &amp;</type>
+          <declname>rotation2</declname>
+        </param>
+        <briefdescription>
+<para>Computes the geodesic distance between two rotation matrices. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It implements the angular distance presented in Sec. 4 of &quot;Rotation Averaging&quot; (available at <ulink url="http://users.cecs.anu.edu.au/~hongdong/rotationaveraging.pdf">http://users.cecs.anu.edu.au/~hongdong/rotationaveraging.pdf</ulink>), in particular <formula id="133">$d = ||log(R_1^\top R_2)||^2 $</formula>. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rotation1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first rotation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rotation2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The other rotation. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the geodesic L2 distance between the two rotation matrices. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SO3Utils.h" line="51" column="12" declfile="iDynTree/Core/SO3Utils.h" declline="51" declcolumn="12"/>
+      </memberdef>
+      <memberdef kind="function" id="SO3Utils_8h_1a2c019748c0b171a73279ba732546d87a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::geodesicL2MeanRotation</definition>
+        <argsstring>(const std::vector&lt; iDynTree::Rotation &gt; &amp;inputRotations, iDynTree::Rotation &amp;meanRotation, const GeodesicL2MeanOptions &amp;options=GeodesicL2MeanOptions())</argsstring>
+        <name>geodesicL2MeanRotation</name>
+        <param>
+          <type>const std::vector&lt; <ref refid="classiDynTree_1_1Rotation" kindref="compound">iDynTree::Rotation</ref> &gt; &amp;</type>
+          <declname>inputRotations</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Rotation" kindref="compound">iDynTree::Rotation</ref> &amp;</type>
+          <declname>meanRotation</declname>
+        </param>
+        <param>
+          <type>const GeodesicL2MeanOptions &amp;</type>
+          <declname>options</declname>
+          <defval>GeodesicL2MeanOptions()</defval>
+        </param>
+        <briefdescription>
+<para>Computes the geodesic mean amongst the provided rotations. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It implements Algorithm 1 in Sec. 5.3 of &quot;Rotation Averaging&quot; (available at <ulink url="http://users.cecs.anu.edu.au/~hongdong/rotationaveraging.pdf">http://users.cecs.anu.edu.au/~hongdong/rotationaveraging.pdf</ulink>).</para>
+<para>Inside it calls geodesicL2WeightedMeanRotation.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>inputRotations</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The rotations to average. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>meanRotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mean rotation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>options</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The options for the inner optimization (refinement) loop. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>false in case of failure, true otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SO3Utils.h" line="65" column="10" declfile="iDynTree/Core/SO3Utils.h" declline="65" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="SO3Utils_8h_1a07cf035073cc1e3f95ef18eda4928db5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::geodesicL2WeightedMeanRotation</definition>
+        <argsstring>(const std::vector&lt; iDynTree::Rotation &gt; &amp;inputRotations, const std::vector&lt; double &gt; &amp;weights, iDynTree::Rotation &amp;meanRotation, const GeodesicL2MeanOptions &amp;options=GeodesicL2MeanOptions())</argsstring>
+        <name>geodesicL2WeightedMeanRotation</name>
+        <param>
+          <type>const std::vector&lt; <ref refid="classiDynTree_1_1Rotation" kindref="compound">iDynTree::Rotation</ref> &gt; &amp;</type>
+          <declname>inputRotations</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; double &gt; &amp;</type>
+          <declname>weights</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Rotation" kindref="compound">iDynTree::Rotation</ref> &amp;</type>
+          <declname>meanRotation</declname>
+        </param>
+        <param>
+          <type>const GeodesicL2MeanOptions &amp;</type>
+          <declname>options</declname>
+          <defval>GeodesicL2MeanOptions()</defval>
+        </param>
+        <briefdescription>
+<para>Computes the weighted geodesic mean amongst the provided rotations. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It implements Algorithm 1 in Sec. 5.3 of &quot;Rotation Averaging&quot; (available at <ulink url="http://users.cecs.anu.edu.au/~hongdong/rotationaveraging.pdf">http://users.cecs.anu.edu.au/~hongdong/rotationaveraging.pdf</ulink>), with a small modification to take into accounts weights different from 1.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>inputRotations</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The rotations to average. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>weights</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The weights for each rotation. If this vector is null assumes that each weight is 1.0 (equivalent to geodesicL2MeanRotation) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>meanRotation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The weighted mean rotation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>options</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The options for the inner optimization (refinement) loop. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>false in case of failure, true otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SO3Utils.h" line="81" column="10" declfile="iDynTree/Core/SO3Utils.h" declline="81" declcolumn="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/SO3Utils.h"/>
+  </compounddef>
+</doxygen>

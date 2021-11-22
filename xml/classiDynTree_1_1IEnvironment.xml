@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1IEnvironment" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::IEnvironment</compoundname>
+    <includes local="no">iDynTree/Visualizer.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1IEnvironment_1a9ee189f0fd82eb822962dd02e781c1fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type></type>
+        <definition>virtual iDynTree::IEnvironment::~IEnvironment</definition>
+        <argsstring>()=0</argsstring>
+        <name>~IEnvironment</name>
+        <briefdescription>
+<para>Denstructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="274" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IEnvironment_1a9eab024267277ef34b72162a9078279b" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>virtual std::vector&lt;std::string&gt; iDynTree::IEnvironment::getElements</definition>
+        <argsstring>()=0</argsstring>
+        <name>getElements</name>
+        <briefdescription>
+<para>Get the list of the elements in the enviroment. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The function returns the following list:</para>
+<para><table rows="3" cols="2"><row>
+<entry thead="yes" align='center'><para>Element name   </para>
+</entry><entry thead="yes" align='center'><para>Description    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>floor_grid   </para>
+</entry><entry thead="no" align='center'><para>Grid used to indicated the z = 0 plane.    </para>
+</entry></row>
+<row>
+<entry thead="no" align='center'><para>world_frame   </para>
+</entry><entry thead="no" align='center'><para>XYZ (RBG) arrows indicating the world frame.   </para>
+</entry></row>
+</table>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="286" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IEnvironment_1a72dc9003e4a04055b609f460b7d9933f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IEnvironment::setElementVisibility</definition>
+        <argsstring>(const std::string elementKey, bool isVisible)=0</argsstring>
+        <name>setElementVisibility</name>
+        <param>
+          <type>const std::string</type>
+          <declname>elementKey</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isVisible</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if the visibility is correctly setted, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="292" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IEnvironment_1ab9f9324ea401ffd927ffd68edb02f83c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::IEnvironment::setBackgroundColor</definition>
+        <argsstring>(const ColorViz &amp;backgroundColor)=0</argsstring>
+        <name>setBackgroundColor</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ColorViz" kindref="compound">ColorViz</ref> &amp;</type>
+          <declname>backgroundColor</declname>
+        </param>
+        <briefdescription>
+<para>Set the background color. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="297" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IEnvironment_1a7e55a8f816921ef541fa344c29647f6b" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::IEnvironment::setFloorGridColor</definition>
+        <argsstring>(const ColorViz &amp;floorGridColor)=0</argsstring>
+        <name>setFloorGridColor</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ColorViz" kindref="compound">ColorViz</ref> &amp;</type>
+          <declname>floorGridColor</declname>
+        </param>
+        <briefdescription>
+<para>Set the floor grid color. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="302" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IEnvironment_1a917b00f49bb0e40624f0205c345c321b" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::IEnvironment::setAmbientLight</definition>
+        <argsstring>(const ColorViz &amp;ambientLight)=0</argsstring>
+        <name>setAmbientLight</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1ColorViz" kindref="compound">ColorViz</ref> &amp;</type>
+          <declname>ambientLight</declname>
+        </param>
+        <briefdescription>
+<para>Set the ambient light of the enviroment. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="307" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IEnvironment_1ab946ada0d5467ab34a274166a4c4c7d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>virtual std::vector&lt;std::string&gt; iDynTree::IEnvironment::getLights</definition>
+        <argsstring>()=0</argsstring>
+        <name>getLights</name>
+        <briefdescription>
+<para>Get the list of lights present in the visualization. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="312" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IEnvironment_1ac5a5c9b4cef69340d8605ae19070ee1b" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IEnvironment::addLight</definition>
+        <argsstring>(const std::string &amp;lightName)=0</argsstring>
+        <name>addLight</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>lightName</declname>
+        </param>
+        <briefdescription>
+<para>Add a light. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="317" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IEnvironment_1a092a848d34d6d9a302ca82c2ec4e5945" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1ILight" kindref="compound">ILight</ref> &amp;</type>
+        <definition>virtual ILight&amp; iDynTree::IEnvironment::lightViz</definition>
+        <argsstring>(const std::string &amp;lightName)=0</argsstring>
+        <name>lightViz</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>lightName</declname>
+        </param>
+        <briefdescription>
+<para>Return an interface to a light. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="322" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IEnvironment_1a1521913a2962b4e47ed33547c6f33965" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IEnvironment::removeLight</definition>
+        <argsstring>(const std::string &amp;lightName)=0</argsstring>
+        <name>removeLight</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>lightName</declname>
+        </param>
+        <briefdescription>
+<para>Remove a light from visualization. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if the light was present and was removed, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="329" column="18"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Interface to manipulate the elements in the enviroment (background, root frame, reference lines) </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Visualizer.h" line="268" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="269" bodyend="330"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1IEnvironment_1ac5a5c9b4cef69340d8605ae19070ee1b" prot="public" virt="pure-virtual"><scope>iDynTree::IEnvironment</scope><name>addLight</name></member>
+      <member refid="classiDynTree_1_1IEnvironment_1a9eab024267277ef34b72162a9078279b" prot="public" virt="pure-virtual"><scope>iDynTree::IEnvironment</scope><name>getElements</name></member>
+      <member refid="classiDynTree_1_1IEnvironment_1ab946ada0d5467ab34a274166a4c4c7d7" prot="public" virt="pure-virtual"><scope>iDynTree::IEnvironment</scope><name>getLights</name></member>
+      <member refid="classiDynTree_1_1IEnvironment_1a092a848d34d6d9a302ca82c2ec4e5945" prot="public" virt="pure-virtual"><scope>iDynTree::IEnvironment</scope><name>lightViz</name></member>
+      <member refid="classiDynTree_1_1IEnvironment_1a1521913a2962b4e47ed33547c6f33965" prot="public" virt="pure-virtual"><scope>iDynTree::IEnvironment</scope><name>removeLight</name></member>
+      <member refid="classiDynTree_1_1IEnvironment_1a917b00f49bb0e40624f0205c345c321b" prot="public" virt="pure-virtual"><scope>iDynTree::IEnvironment</scope><name>setAmbientLight</name></member>
+      <member refid="classiDynTree_1_1IEnvironment_1ab9f9324ea401ffd927ffd68edb02f83c" prot="public" virt="pure-virtual"><scope>iDynTree::IEnvironment</scope><name>setBackgroundColor</name></member>
+      <member refid="classiDynTree_1_1IEnvironment_1a72dc9003e4a04055b609f460b7d9933f" prot="public" virt="pure-virtual"><scope>iDynTree::IEnvironment</scope><name>setElementVisibility</name></member>
+      <member refid="classiDynTree_1_1IEnvironment_1a7e55a8f816921ef541fa344c29647f6b" prot="public" virt="pure-virtual"><scope>iDynTree::IEnvironment</scope><name>setFloorGridColor</name></member>
+      <member refid="classiDynTree_1_1IEnvironment_1a9ee189f0fd82eb822962dd02e781c1fd" prot="public" virt="pure-virtual"><scope>iDynTree::IEnvironment</scope><name>~IEnvironment</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

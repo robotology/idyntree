@@ -1,5 +1,0 @@
-<map id="iDynTree::GyroscopeSensor" name="iDynTree::GyroscopeSensor">
-<area shape="rect" id="node1" title="Interface to the Gyroscope class." alt="" coords="5,155,205,181"/>
-<area shape="rect" id="node2" href="$classiDynTree_1_1LinkSensor.html" title="Interface for Sensor that are associated to a Link." alt="" coords="26,80,185,107"/>
-<area shape="rect" id="node3" href="$classiDynTree_1_1Sensor.html" title="Interface for Sensor classes in iDynTree ." alt="" coords="40,5,171,32"/>
-</map>

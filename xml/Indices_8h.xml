@@ -1,0 +1,247 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="Indices_8h" kind="file" language="C++">
+    <compoundname>Indices.h</compoundname>
+    <includes local="no">cstddef</includes>
+    <includes local="no">string</includes>
+    <includes local="yes">ModelExport.h</includes>
+    <includedby refid="Centroidal_8h" local="no">iDynTree/Model/Centroidal.h</includedby>
+    <includedby refid="ContactWrench_8h" local="no">iDynTree/Model/ContactWrench.h</includedby>
+    <includedby refid="DenavitHartenberg_8h" local="no">iDynTree/Model/DenavitHartenberg.h</includedby>
+    <includedby refid="Dynamics_8h" local="no">iDynTree/Model/Dynamics.h</includedby>
+    <includedby refid="FixedJoint_8h" local="no">iDynTree/Model/FixedJoint.h</includedby>
+    <includedby refid="ForwardKinematics_8h" local="no">iDynTree/Model/ForwardKinematics.h</includedby>
+    <includedby refid="FreeFloatingState_8h" local="no">iDynTree/Model/FreeFloatingState.h</includedby>
+    <includedby refid="IJoint_8h" local="no">iDynTree/Model/IJoint.h</includedby>
+    <includedby refid="Jacobians_8h" local="no">iDynTree/Model/Jacobians.h</includedby>
+    <includedby refid="Link_8h" local="no">iDynTree/Model/Link.h</includedby>
+    <includedby refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includedby>
+    <includedby refid="LinkTraversalsCache_8h" local="no">iDynTree/Model/LinkTraversalsCache.h</includedby>
+    <includedby refid="Model_8h" local="no">iDynTree/Model/Model.h</includedby>
+    <includedby refid="PrismaticJoint_8h" local="no">iDynTree/Model/PrismaticJoint.h</includedby>
+    <includedby refid="RevoluteJoint_8h" local="no">iDynTree/Model/RevoluteJoint.h</includedby>
+    <includedby refid="SolidShapes_8h" local="no">iDynTree/Model/SolidShapes.h</includedby>
+    <includedby refid="SubModel_8h" local="no">iDynTree/Model/SubModel.h</includedby>
+    <includedby refid="Traversal_8h" local="no">iDynTree/Model/Traversal.h</includedby>
+    <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
+    <includedby refid="Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includedby>
+    <includedby refid="skinDynLibConversions_8h" local="no">iDynTree/skinDynLibConversions.h</includedby>
+    <includedby refid="BerdyHelper_8h" local="no">iDynTree/Estimation/BerdyHelper.h</includedby>
+    <includedby refid="BerdySparseMAPSolver_8h" local="no">iDynTree/Estimation/BerdySparseMAPSolver.h</includedby>
+    <includedby refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/Estimation/ExternalWrenchesEstimation.h</includedby>
+    <includedby refid="SimpleLeggedOdometry_8h" local="no">iDynTree/Estimation/SimpleLeggedOdometry.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/Model/Indices.h</label>
+        <link refid="Indices_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="2">
+        <label>cstddef</label>
+      </node>
+      <node id="4">
+        <label>ModelExport.h</label>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="Indices_8h_1a7b1bbb834d5bf0d3c64cdf91ab3d6e72" prot="public" static="no">
+        <type>std::ptrdiff_t</type>
+        <definition>typedef std::ptrdiff_t iDynTree::LinkIndex</definition>
+        <argsstring></argsstring>
+        <name>LinkIndex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Indices.h" line="26" column="28" bodyfile="iDynTree/Model/Indices.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="Indices_8h_1a52bed44082992c37ef913adaa76e6c3c" prot="public" static="no">
+        <type>std::ptrdiff_t</type>
+        <definition>typedef std::ptrdiff_t iDynTree::JointIndex</definition>
+        <argsstring></argsstring>
+        <name>JointIndex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Indices.h" line="30" column="28" bodyfile="iDynTree/Model/Indices.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="Indices_8h_1ae732811edba33ac282fd0834dc0bdfd5" prot="public" static="no">
+        <type>std::ptrdiff_t</type>
+        <definition>typedef std::ptrdiff_t iDynTree::DOFIndex</definition>
+        <argsstring></argsstring>
+        <name>DOFIndex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Indices.h" line="34" column="28" bodyfile="iDynTree/Model/Indices.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="Indices_8h_1aa29f3a0bcb161b96b72e593c2bdf0419" prot="public" static="no">
+        <type>std::ptrdiff_t</type>
+        <definition>typedef std::ptrdiff_t iDynTree::FrameIndex</definition>
+        <argsstring></argsstring>
+        <name>FrameIndex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Indices.h" line="38" column="28" bodyfile="iDynTree/Model/Indices.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="Indices_8h_1a5d98b515bfdfd0764e5dc7c27e65de23" prot="public" static="no">
+        <type>std::ptrdiff_t</type>
+        <definition>typedef std::ptrdiff_t iDynTree::TraversalIndex</definition>
+        <argsstring></argsstring>
+        <name>TraversalIndex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Indices.h" line="42" column="28" bodyfile="iDynTree/Model/Indices.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="Indices_8h_1abb454ae2b12be8622ba842c70450352d" prot="public" static="no" mutable="no">
+        <type>IDYNTREE_MODEL_EXPORT LinkIndex</type>
+        <definition>IDYNTREE_MODEL_EXPORT LinkIndex iDynTree::LINK_INVALID_INDEX</definition>
+        <argsstring></argsstring>
+        <name>LINK_INVALID_INDEX</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Indices.h" line="27" column="44" declfile="iDynTree/Model/Indices.h" declline="27" declcolumn="44"/>
+      </memberdef>
+      <memberdef kind="variable" id="Indices_8h_1a159509c5b039dff9c6d63dd349e5b11b" prot="public" static="no" mutable="no">
+        <type>IDYNTREE_MODEL_EXPORT std::string</type>
+        <definition>IDYNTREE_MODEL_EXPORT std::string iDynTree::LINK_INVALID_NAME</definition>
+        <argsstring></argsstring>
+        <name>LINK_INVALID_NAME</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Indices.h" line="28" column="46" declfile="iDynTree/Model/Indices.h" declline="28" declcolumn="46"/>
+      </memberdef>
+      <memberdef kind="variable" id="Indices_8h_1a00a66679a08e686adb0ee06a7bd1aabc" prot="public" static="no" mutable="no">
+        <type>IDYNTREE_MODEL_EXPORT std::ptrdiff_t</type>
+        <definition>IDYNTREE_MODEL_EXPORT std::ptrdiff_t iDynTree::JOINT_INVALID_INDEX</definition>
+        <argsstring></argsstring>
+        <name>JOINT_INVALID_INDEX</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Indices.h" line="31" column="49" declfile="iDynTree/Model/Indices.h" declline="31" declcolumn="49"/>
+      </memberdef>
+      <memberdef kind="variable" id="Indices_8h_1aeead77d4aba2563231da9fcda8ffa415" prot="public" static="no" mutable="no">
+        <type>IDYNTREE_MODEL_EXPORT std::string</type>
+        <definition>IDYNTREE_MODEL_EXPORT std::string iDynTree::JOINT_INVALID_NAME</definition>
+        <argsstring></argsstring>
+        <name>JOINT_INVALID_NAME</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Indices.h" line="32" column="46" declfile="iDynTree/Model/Indices.h" declline="32" declcolumn="46"/>
+      </memberdef>
+      <memberdef kind="variable" id="Indices_8h_1ab7a1cc7b2d03127963a3d2661c8ccdcc" prot="public" static="no" mutable="no">
+        <type>IDYNTREE_MODEL_EXPORT std::ptrdiff_t</type>
+        <definition>IDYNTREE_MODEL_EXPORT std::ptrdiff_t iDynTree::DOF_INVALID_INDEX</definition>
+        <argsstring></argsstring>
+        <name>DOF_INVALID_INDEX</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Indices.h" line="35" column="49" declfile="iDynTree/Model/Indices.h" declline="35" declcolumn="49"/>
+      </memberdef>
+      <memberdef kind="variable" id="Indices_8h_1ab0ace312f6cbe8ee7fd51549a9caf79f" prot="public" static="no" mutable="no">
+        <type>IDYNTREE_MODEL_EXPORT std::string</type>
+        <definition>IDYNTREE_MODEL_EXPORT std::string iDynTree::DOF_INVALID_NAME</definition>
+        <argsstring></argsstring>
+        <name>DOF_INVALID_NAME</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Indices.h" line="36" column="46" declfile="iDynTree/Model/Indices.h" declline="36" declcolumn="46"/>
+      </memberdef>
+      <memberdef kind="variable" id="Indices_8h_1a1a81b3c4ae6873a80debbb71bdc43218" prot="public" static="no" mutable="no">
+        <type>IDYNTREE_MODEL_EXPORT std::ptrdiff_t</type>
+        <definition>IDYNTREE_MODEL_EXPORT std::ptrdiff_t iDynTree::FRAME_INVALID_INDEX</definition>
+        <argsstring></argsstring>
+        <name>FRAME_INVALID_INDEX</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Indices.h" line="39" column="49" declfile="iDynTree/Model/Indices.h" declline="39" declcolumn="49"/>
+      </memberdef>
+      <memberdef kind="variable" id="Indices_8h_1a6d57d4391d58c8fd9470846d4a72118f" prot="public" static="no" mutable="no">
+        <type>IDYNTREE_MODEL_EXPORT std::string</type>
+        <definition>IDYNTREE_MODEL_EXPORT std::string iDynTree::FRAME_INVALID_NAME</definition>
+        <argsstring></argsstring>
+        <name>FRAME_INVALID_NAME</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Indices.h" line="40" column="46" declfile="iDynTree/Model/Indices.h" declline="40" declcolumn="46"/>
+      </memberdef>
+      <memberdef kind="variable" id="Indices_8h_1a1ceb2215b00eb2c21af358eb9b7d88f4" prot="public" static="no" mutable="no">
+        <type>IDYNTREE_MODEL_EXPORT TraversalIndex</type>
+        <definition>IDYNTREE_MODEL_EXPORT TraversalIndex iDynTree::TRAVERSAL_INVALID_INDEX</definition>
+        <argsstring></argsstring>
+        <name>TRAVERSAL_INVALID_INDEX</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Indices.h" line="43" column="49" declfile="iDynTree/Model/Indices.h" declline="43" declcolumn="49"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/Indices.h"/>
+  </compounddef>
+</doxygen>

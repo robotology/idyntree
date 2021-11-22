@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1IndexRange" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::IndexRange</compoundname>
+    <includes local="no">iDynTree/Core/Utils.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1IndexRange_1afad5350e0cba2d8dbc38ecc30a74eb61" prot="public" static="no" mutable="no">
+        <type>std::ptrdiff_t</type>
+        <definition>std::ptrdiff_t iDynTree::IndexRange::offset</definition>
+        <argsstring></argsstring>
+        <name>offset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Utils.h" line="114" column="24" bodyfile="iDynTree/Core/Utils.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1IndexRange_1a2d8b0e8ce529b462041191553ad7886a" prot="public" static="no" mutable="no">
+        <type>std::ptrdiff_t</type>
+        <definition>std::ptrdiff_t iDynTree::IndexRange::size</definition>
+        <argsstring></argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Utils.h" line="115" column="24" bodyfile="iDynTree/Core/Utils.h" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structiDynTree_1_1IndexRange_1a1aab0a47e16b1282e907838558cdc512" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::IndexRange::isValid</definition>
+        <argsstring>() const</argsstring>
+        <name>isValid</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Utils.h" line="117" column="14"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structiDynTree_1_1IndexRange_1affd7afc62a97a9d638e7024733e13b4b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structiDynTree_1_1IndexRange" kindref="compound">IndexRange</ref></type>
+        <definition>static IndexRange iDynTree::IndexRange::InvalidRange</definition>
+        <argsstring>()</argsstring>
+        <name>InvalidRange</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/Utils.h" line="118" column="27"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Simple structure describing a range of rows or columns in a vector or a matrix. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The offset attributes indicates the index of the first element of the range, while the size indicates the size of the range.</para>
+<para>Example: offset = 2, size = 3 measn the elements 2 3 4 . </para>
+    </detaileddescription>
+    <location file="iDynTree/Core/Utils.h" line="112" column="5" bodyfile="iDynTree/Core/Utils.h" bodystart="113" bodyend="119"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1IndexRange_1affd7afc62a97a9d638e7024733e13b4b" prot="public" virt="non-virtual"><scope>iDynTree::IndexRange</scope><name>InvalidRange</name></member>
+      <member refid="structiDynTree_1_1IndexRange_1a1aab0a47e16b1282e907838558cdc512" prot="public" virt="non-virtual"><scope>iDynTree::IndexRange</scope><name>isValid</name></member>
+      <member refid="structiDynTree_1_1IndexRange_1afad5350e0cba2d8dbc38ecc30a74eb61" prot="public" virt="non-virtual"><scope>iDynTree::IndexRange</scope><name>offset</name></member>
+      <member refid="structiDynTree_1_1IndexRange_1a2d8b0e8ce529b462041191553ad7886a" prot="public" virt="non-virtual"><scope>iDynTree::IndexRange</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

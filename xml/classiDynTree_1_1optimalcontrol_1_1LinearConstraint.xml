@@ -1,0 +1,835 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::optimalcontrol::LinearConstraint</compoundname>
+    <basecompoundref refid="classiDynTree_1_1optimalcontrol_1_1Constraint" prot="public" virt="non-virtual">iDynTree::optimalcontrol::Constraint</basecompoundref>
+    <includes local="no">iDynTree/LinearConstraint.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a5f8396003b67ee5149d22cc6a8751137" prot="private" static="no" mutable="no">
+        <type>LinearConstraintImplementation *</type>
+        <definition>LinearConstraintImplementation* iDynTree::optimalcontrol::LinearConstraint::m_pimpl</definition>
+        <argsstring></argsstring>
+        <name>m_pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearConstraint.h" line="108" column="44" bodyfile="iDynTree/LinearConstraint.h" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a5238901b13b5bf5484b526e4ce727d49" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::LinearConstraint::LinearConstraint</definition>
+        <argsstring>(size_t size, const std::string name)</argsstring>
+        <name>LinearConstraint</name>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>const std::string</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearConstraint.h" line="46" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a7bf3bcd6529073e24c5f7886b50b1e47" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::LinearConstraint::LinearConstraint</definition>
+        <argsstring>(size_t size, const std::string name, const SparsityStructure &amp;stateSparsity, const SparsityStructure &amp;controlSparsity)</argsstring>
+        <name>LinearConstraint</name>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <param>
+          <type>const std::string</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">SparsityStructure</ref> &amp;</type>
+          <declname>stateSparsity</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">SparsityStructure</ref> &amp;</type>
+          <declname>controlSparsity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearConstraint.h" line="48" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1aa1256071135738cfe1cd7a36d7dd57c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::optimalcontrol::LinearConstraint::~LinearConstraint</definition>
+        <argsstring>() override</argsstring>
+        <name>~LinearConstraint</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearConstraint.h" line="52" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1ad7b55df7d1120ab2c1c8b854894933cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::LinearConstraint::setStateConstraintMatrix</definition>
+        <argsstring>(const MatrixDynSize &amp;constraintMatrix)</argsstring>
+        <name>setStateConstraintMatrix</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>constraintMatrix</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearConstraint.h" line="54" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a97636ee49fcd639404f7ba3d5d0e06b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::LinearConstraint::setControlConstraintMatrix</definition>
+        <argsstring>(const MatrixDynSize &amp;constraintMatrix)</argsstring>
+        <name>setControlConstraintMatrix</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>constraintMatrix</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearConstraint.h" line="56" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a507d1dc0e3f9505cf06aa7da163133cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::LinearConstraint::setStateConstraintMatrix</definition>
+        <argsstring>(std::shared_ptr&lt; TimeVaryingMatrix &gt; constraintMatrix)</argsstring>
+        <name>setStateConstraintMatrix</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">TimeVaryingMatrix</ref> &gt;</type>
+          <declname>constraintMatrix</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearConstraint.h" line="58" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1aaf7235110d9aa561c2cff6d12f860c56" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimalcontrol::LinearConstraint::setControlConstraintMatrix</definition>
+        <argsstring>(std::shared_ptr&lt; TimeVaryingMatrix &gt; constraintMatrix)</argsstring>
+        <name>setControlConstraintMatrix</name>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">TimeVaryingMatrix</ref> &gt;</type>
+          <declname>constraintMatrix</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearConstraint.h" line="60" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1abe10de5dd153d7004ab9e613cd1d335f" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::LinearConstraint::evaluateConstraint</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, VectorDynSize &amp;constraint) final</argsstring>
+        <name>evaluateConstraint</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1a9a7d980f35aebb6c3d60ba8f52b3829d">evaluateConstraint</reimplements>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>constraint</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the constraint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method has to be overriden when defining the constraint. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the constraint is evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state at which the constraint is evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">control</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The control at which the constraint is evaluated </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">constraint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The constraint right hand value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearConstraint.h" line="62" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1ae3ca83828d9389fffbf6fec959cd3aad" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::LinearConstraint::constraintJacobianWRTState</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, MatrixDynSize &amp;jacobian) final</argsstring>
+        <name>constraintJacobianWRTState</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1a0d23eb7e58ba321bfa402bbb88f2e778">constraintJacobianWRTState</reimplements>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>jacobian</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the constraint jacobian with respect to the state variables This methods evaluates the partial derivative of the constraint wrt to the state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>By default, the implementation return false. The user needs to override this method if the constraint will be used, for example, within an optimal control problem that will be solved using an optimizer that needs this information (i.e. Ipopt). <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the constraint jacobian is evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state at which the constraint jacobian is evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">control</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The control at which the constraint jacobian is evaluated </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">jacobian</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The jacobian right hand side value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successful. False otherwise (or by default). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearConstraint.h" line="67" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1af0c90206bfbd3a85d5560f174b21c9d2" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::LinearConstraint::constraintJacobianWRTControl</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, MatrixDynSize &amp;jacobian) final</argsstring>
+        <name>constraintJacobianWRTControl</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1abc4b05e1f91c36591a0d63852bdbf40d">constraintJacobianWRTControl</reimplements>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>jacobian</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the constraint jacobian with respect to the control variables This methods evaluates the partial derivative of the constraint wrt to the control. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>By default, the implementation return false. The user needs to override this method if the constraint will be used, for example, within an optimal control problem that will be solved using an optimizer that needs this information (i.e. Ipopt). <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the constraint jacobian is evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state at which the constraint jacobian is evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">control</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The control at which the constraint jacobian is evaluated </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">jacobian</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The jacobian right hand side value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successful. False otherwise (or by default). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearConstraint.h" line="72" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1adb1f5a0a12386abc216d6e753ad6d44b" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::LinearConstraint::constraintJacobianWRTStateSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;stateSparsity) final</argsstring>
+        <name>constraintJacobianWRTStateSparsity</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1af82131c7ea2c278f44c91a0039ea6b03">constraintJacobianWRTStateSparsity</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>stateSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the state jacobian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>No check is performed in the indeces. They need to be in the range [0, constraintDimension) and [0, stateDimension) respectively. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stateSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the constraint wrt state variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearConstraint.h" line="77" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a6abcef0d23ca5e97e8a3bd979c503364" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::LinearConstraint::constraintJacobianWRTControlSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;controlSparsity) final</argsstring>
+        <name>constraintJacobianWRTControlSparsity</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1a9c3b6a333881fced8d5e7cc0c3684d21">constraintJacobianWRTControlSparsity</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>controlSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the control jacobian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>No check is performed in the indeces. They need to be in the range [0, constraintDimension) and [0, controlDimension) respectively. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>controlSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the constraint wrt control variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearConstraint.h" line="79" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a2901af2910fd692234b0bd498974dcbe" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::LinearConstraint::constraintSecondPartialDerivativeWRTState</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, const VectorDynSize &amp;lambda, MatrixDynSize &amp;hessian) final</argsstring>
+        <name>constraintSecondPartialDerivativeWRTState</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1a3e5ae8a1de6f5140882f5e4fdf4f56cb">constraintSecondPartialDerivativeWRTState</reimplements>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>hessian</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate constraint second partial derivative wrt the state variables. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It is the result of <formula id="71">$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial x^2}$</formula> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">control</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The control value at which the partial derivative is computed.. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The lagrange multipliers </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">hessian</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearConstraint.h" line="81" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a98e3c9d5a91e0c9b176afa8fcafb73b8" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::LinearConstraint::constraintSecondPartialDerivativeWRTControl</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, const VectorDynSize &amp;lambda, MatrixDynSize &amp;hessian) final</argsstring>
+        <name>constraintSecondPartialDerivativeWRTControl</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1a36eca7d3d179539aacd227e56074dbf4">constraintSecondPartialDerivativeWRTControl</reimplements>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>hessian</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate constraint second partial derivative wrt the control. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It is the result of <formula id="72">$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial u^2}$</formula> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">control</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The control value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The lagrange multipliers </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">hessian</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearConstraint.h" line="87" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a4125811b81075d31f422e37c53307b53" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::LinearConstraint::constraintSecondPartialDerivativeWRTStateControl</definition>
+        <argsstring>(double time, const VectorDynSize &amp;state, const VectorDynSize &amp;control, const VectorDynSize &amp;lambda, MatrixDynSize &amp;hessian) final</argsstring>
+        <name>constraintSecondPartialDerivativeWRTStateControl</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1ac2a4fb546efaae5819d84b2f0847d95c">constraintSecondPartialDerivativeWRTStateControl</reimplements>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>hessian</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate constraint second partial derivative wrt the state and control. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It is the result of <formula id="73">$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial x \partial u}$</formula>, thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">control</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The control value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The lagrange multipliers </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">hessian</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearConstraint.h" line="94" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1aebd1c3a36cd6b7803dc20372de507309" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::LinearConstraint::constraintSecondPartialDerivativeWRTStateSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;stateSparsity) final</argsstring>
+        <name>constraintSecondPartialDerivativeWRTStateSparsity</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1ad11fbd41db2c6366579962d55737c08a">constraintSecondPartialDerivativeWRTStateSparsity</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>stateSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the state hessian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>No check is performed in the indeces. They need to be in the range [0, stateDimension) and [0, stateDimension) respectively. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stateSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the jacobian wrt state variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearConstraint.h" line="100" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a1fe0c90185a607c25b596b53997eb779" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::LinearConstraint::constraintSecondPartialDerivativeWRTStateControlSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;stateControlSparsity) final</argsstring>
+        <name>constraintSecondPartialDerivativeWRTStateControlSparsity</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1aa7ff11cc4a6d9b34d05c820320c8cc71">constraintSecondPartialDerivativeWRTStateControlSparsity</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>stateControlSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the mixed hessian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>No check is performed in the indeces. They need to be in the range [0, stateDimension) and [0, controlDimension) respectively. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stateControlSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the jacobian wrt state and control variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearConstraint.h" line="102" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a0f0c8a6c45220b51c744057afaf4df13" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::LinearConstraint::constraintSecondPartialDerivativeWRTControlSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;controlSparsity) final</argsstring>
+        <name>constraintSecondPartialDerivativeWRTControlSparsity</name>
+        <reimplements refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1ab7e2298abf8ee28ab5658dae49c9bce2">constraintSecondPartialDerivativeWRTControlSparsity</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>controlSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the control hessian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>No check is performed in the indeces. They need to be in the range [0, constraintDimension) and [0, controlDimension) respectively. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>controlSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the jacobian wrt control variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/LinearConstraint.h" line="104" column="26"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::optimalcontrol::LinearConstraint</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::optimalcontrol::Constraint</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1Constraint"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>iDynTree::VectorDynSize</label>
+        <link refid="classiDynTree_1_1VectorDynSize"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::optimalcontrol::LinearConstraint</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::optimalcontrol::Constraint</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1Constraint"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_lowerBound</edgelabel>
+          <edgelabel>m_upperBound</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/LinearConstraint.h" line="42" column="9" bodyfile="iDynTree/LinearConstraint.h" bodystart="43" bodyend="109"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1a48bd2962ef941257545801ed45a3550e" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>Constraint</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1af0c90206bfbd3a85d5560f174b21c9d2" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>constraintJacobianWRTControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a6abcef0d23ca5e97e8a3bd979c503364" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>constraintJacobianWRTControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1ae3ca83828d9389fffbf6fec959cd3aad" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>constraintJacobianWRTState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1adb1f5a0a12386abc216d6e753ad6d44b" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>constraintJacobianWRTStateSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a98e3c9d5a91e0c9b176afa8fcafb73b8" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>constraintSecondPartialDerivativeWRTControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a0f0c8a6c45220b51c744057afaf4df13" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>constraintSecondPartialDerivativeWRTControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a2901af2910fd692234b0bd498974dcbe" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>constraintSecondPartialDerivativeWRTState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a4125811b81075d31f422e37c53307b53" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>constraintSecondPartialDerivativeWRTStateControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a1fe0c90185a607c25b596b53997eb779" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>constraintSecondPartialDerivativeWRTStateControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1aebd1c3a36cd6b7803dc20372de507309" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>constraintSecondPartialDerivativeWRTStateSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1a1df753c970a78df754d6ca54943dea93" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>constraintSize</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1abe10de5dd153d7004ab9e613cd1d335f" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>evaluateConstraint</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1a8481bdc1ba131e8e10229ff756a612c5" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>expectedControlSpaceSize</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1ada3b1bca20bec3239323a79a375e211f" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>expectedStateSpaceSize</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1a9322706b7f88baa02e4924097605827b" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>getLowerBound</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1a41d21a8cfc855439a2601650e9c130ba" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>getUpperBound</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1a9b63601a7ea03cfc2315fa74c62c1ce3" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>isFeasiblePoint</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a5238901b13b5bf5484b526e4ce727d49" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>LinearConstraint</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a7bf3bcd6529073e24c5f7886b50b1e47" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>LinearConstraint</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1a5805024ea2d6064d0ce0c263cae83c8e" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>m_isLowerBounded</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1a39b0f7fd8ff9ead00ce7010f7fc81896" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>m_isUpperBounded</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1ac485074ba8861bae196497dbf6256761" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>m_lowerBound</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a5f8396003b67ee5149d22cc6a8751137" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>m_pimpl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1a14742944fcb6cb9011b728dad5a688f9" prot="protected" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>m_upperBound</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1a9b37070e58ce5d75baf90855f4f04808" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>name</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a97636ee49fcd639404f7ba3d5d0e06b7" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>setControlConstraintMatrix</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1aaf7235110d9aa561c2cff6d12f860c56" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>setControlConstraintMatrix</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1a3e3f580470ce860c9964d6e24b3ded5d" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>setLowerBound</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1ad7b55df7d1120ab2c1c8b854894933cb" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>setStateConstraintMatrix</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a507d1dc0e3f9505cf06aa7da163133cd" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>setStateConstraintMatrix</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1a2b1b9fb5134c4d2e7bc52f20a9963173" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>setUpperBound</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1aac7f9267eb8509b7828dd2e955c606e8" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>~Constraint</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1aa1256071135738cfe1cd7a36d7dd57c6" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>~LinearConstraint</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

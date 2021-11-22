@@ -1,0 +1,383 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1GyroscopeSensor" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::GyroscopeSensor</compoundname>
+    <basecompoundref refid="classiDynTree_1_1LinkSensor" prot="public" virt="non-virtual">iDynTree::LinkSensor</basecompoundref>
+    <includes local="no">iDynTree/Sensors/GyroscopeSensor.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1GyroscopeSensor_1a352271aab96a9c4a34c891e88dbfdad1" prot="private" static="no" mutable="no">
+        <type>GyroscopePrivateAttributes *</type>
+        <definition>GyroscopePrivateAttributes* iDynTree::GyroscopeSensor::pimpl</definition>
+        <argsstring></argsstring>
+        <name>pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/GyroscopeSensor.h" line="39" column="37" bodyfile="iDynTree/Sensors/GyroscopeSensor.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1aa5fa67c8fecb5127180692f512dce994" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::GyroscopeSensor::GyroscopeSensor</definition>
+        <argsstring>()</argsstring>
+        <name>GyroscopeSensor</name>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/GyroscopeSensor.h" line="45" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1aeb3a9d504f9809fd1d3f9796cc17820b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::GyroscopeSensor::GyroscopeSensor</definition>
+        <argsstring>(const GyroscopeSensor &amp;other)</argsstring>
+        <name>GyroscopeSensor</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1GyroscopeSensor" kindref="compound">GyroscopeSensor</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/GyroscopeSensor.h" line="50" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1a550dcf5e73745d696665f01e2043b45b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1GyroscopeSensor" kindref="compound">GyroscopeSensor</ref> &amp;</type>
+        <definition>GyroscopeSensor&amp; iDynTree::GyroscopeSensor::operator=</definition>
+        <argsstring>(const GyroscopeSensor &amp;other)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1GyroscopeSensor" kindref="compound">GyroscopeSensor</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy operator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/GyroscopeSensor.h" line="55" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1abac1374d86237be72167f83607116d0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::GyroscopeSensor::~GyroscopeSensor</definition>
+        <argsstring>()</argsstring>
+        <name>~GyroscopeSensor</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/GyroscopeSensor.h" line="60" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1a056d2caa535815b23a6b8732180d7c8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::GyroscopeSensor::setName</definition>
+        <argsstring>(const std::string &amp;_name)</argsstring>
+        <name>setName</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1a40cafcac5f0c1567e44d53c775641818">setName</reimplements>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>_name</declname>
+        </param>
+        <briefdescription>
+<para>Set the name (id) of the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/GyroscopeSensor.h" line="66" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1ae0e36ae99719844f4553cfa2e5782902" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::GyroscopeSensor::setLinkSensorTransform</definition>
+        <argsstring>(const iDynTree::Transform &amp;link_H_sensor)</argsstring>
+        <name>setLinkSensorTransform</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1a716a29b8598842583ac5c92903a978f5">setLinkSensorTransform</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>link_H_sensor</declname>
+        </param>
+        <briefdescription>
+<para>Set the transform from the sensor to the parent link sensor is attached to. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if link_index is the link attached to the Gyroscope, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/GyroscopeSensor.h" line="73" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1a221b7c3ebb5d1915ab13cf14b7a496c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::GyroscopeSensor::setParentLink</definition>
+        <argsstring>(const std::string &amp;parent)</argsstring>
+        <name>setParentLink</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1a9420746600b52d524f2c6fde5023147d">setParentLink</reimplements>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Documented in <ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/GyroscopeSensor.h" line="78" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1ab0e964fe971d4e569e5a6cae3fd2cd5c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::GyroscopeSensor::setParentLinkIndex</definition>
+        <argsstring>(const LinkIndex &amp;parent_index)</argsstring>
+        <name>setParentLinkIndex</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1aec8002495ae7ca62e3e8b516c55e5a0c">setParentLinkIndex</reimplements>
+        <param>
+          <type>const LinkIndex &amp;</type>
+          <declname>parent_index</declname>
+        </param>
+        <briefdescription>
+<para>Documented in <ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/GyroscopeSensor.h" line="84" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1a752a648315e33507e9d4ac7f76c5377e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::GyroscopeSensor::getName</definition>
+        <argsstring>() const</argsstring>
+        <name>getName</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1a4a62adb1d4c1e4bedca8762783ab0468">getName</reimplements>
+        <briefdescription>
+<para>Documented in the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/GyroscopeSensor.h" line="90" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1a162084c8f8d22edf2c21b822c50f325a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>SensorType</type>
+        <definition>SensorType iDynTree::GyroscopeSensor::getSensorType</definition>
+        <argsstring>() const</argsstring>
+        <name>getSensorType</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1a6dd712921c150fddd33217694feb3652">getSensorType</reimplements>
+        <briefdescription>
+<para>Documented in <ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/GyroscopeSensor.h" line="95" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1a8d610e5ce1ab010dd1aa3710b32e4bc0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::GyroscopeSensor::getParentLink</definition>
+        <argsstring>() const</argsstring>
+        <name>getParentLink</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1a4d664e0bb40e93c9c966f286a5205ed6">getParentLink</reimplements>
+        <briefdescription>
+<para>Documented in <ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/GyroscopeSensor.h" line="101" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1a5aacbe3a66640b3ce644cfded2ca67a4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::GyroscopeSensor::getParentLinkIndex</definition>
+        <argsstring>() const</argsstring>
+        <name>getParentLinkIndex</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1a45fc4c098204d10e64c4c82ae58ddd2c">getParentLinkIndex</reimplements>
+        <briefdescription>
+<para>Documented in <ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/GyroscopeSensor.h" line="106" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1a36450e27fe86b188ec0f1a002444bcf6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>Transform iDynTree::GyroscopeSensor::getLinkSensorTransform</definition>
+        <argsstring>() const</argsstring>
+        <name>getLinkSensorTransform</name>
+        <reimplements refid="classiDynTree_1_1LinkSensor_1ad5cb2901457ca5e0dedee1a6230ac858">getLinkSensorTransform</reimplements>
+        <briefdescription>
+<para>Return the transform that applied on a element expressed in sensor frames it transform it in one expressed in the link frame (. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="95">\[ {}^l H_s \]</formula>).</para>
+<para><simplesect kind="return"><para>the link_H_sensor transform </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/GyroscopeSensor.h" line="109" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1a29f2d548c97f8a945a0dd79647249f43" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::GyroscopeSensor::isValid</definition>
+        <argsstring>() const</argsstring>
+        <name>isValid</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1ace89679ad53fd11326ec00dc82ebd925">isValid</reimplements>
+        <briefdescription>
+<para>Documented in <ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/GyroscopeSensor.h" line="114" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1aa4629cd992fe475e9287fdebf51e0c53" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> *</type>
+        <definition>Sensor* iDynTree::GyroscopeSensor::clone</definition>
+        <argsstring>() const</argsstring>
+        <name>clone</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1a6428f5534e54c607bc5e773073c6c50e">clone</reimplements>
+        <briefdescription>
+<para>Documented in <ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/GyroscopeSensor.h" line="119" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1af9fba9009f28b235bc9ebaae469b6f4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::GyroscopeSensor::updateIndices</definition>
+        <argsstring>(const Model &amp;model)</argsstring>
+        <name>updateIndices</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1ae91fc5a5922a99815b0cdc9de9f1ac88">updateIndices</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Update all the indices (link/frames) contained in this sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/GyroscopeSensor.h" line="124" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensor_1ad5861db8a983722ef0b746be10bb1e5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1GeomVector3" kindref="compound">iDynTree::AngVelocity</ref></type>
+        <definition>iDynTree::AngVelocity iDynTree::GyroscopeSensor::predictMeasurement</definition>
+        <argsstring>(const iDynTree::Twist &amp;linkVel)</argsstring>
+        <name>predictMeasurement</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Twist" kindref="compound">iDynTree::Twist</ref> &amp;</type>
+          <declname>linkVel</declname>
+        </param>
+        <briefdescription>
+<para>Predict sensor measurement when given the parent link spatial velocity, expressed in the link orientation and wrt the link origin. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the predicted Measurement of an iDynTree::AngVelocity </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/GyroscopeSensor.h" line="132" column="31"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Interface to the Gyroscope class. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>An implementation of the Gyroscope <ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::GyroscopeSensor</label>
+        <link refid="classiDynTree_1_1GyroscopeSensor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::LinkSensor</label>
+        <link refid="classiDynTree_1_1LinkSensor"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::Sensor</label>
+        <link refid="classiDynTree_1_1Sensor"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>iDynTree::GyroscopeSensor</label>
+        <link refid="classiDynTree_1_1GyroscopeSensor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::LinkSensor</label>
+        <link refid="classiDynTree_1_1LinkSensor"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::Sensor</label>
+        <link refid="classiDynTree_1_1Sensor"/>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Sensors/GyroscopeSensor.h" line="36" column="5" bodyfile="iDynTree/Sensors/GyroscopeSensor.h" bodystart="36" bodyend="133"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1GyroscopeSensor_1aa4629cd992fe475e9287fdebf51e0c53" prot="public" virt="virtual"><scope>iDynTree::GyroscopeSensor</scope><name>clone</name></member>
+      <member refid="classiDynTree_1_1GyroscopeSensor_1a36450e27fe86b188ec0f1a002444bcf6" prot="public" virt="virtual"><scope>iDynTree::GyroscopeSensor</scope><name>getLinkSensorTransform</name></member>
+      <member refid="classiDynTree_1_1GyroscopeSensor_1a752a648315e33507e9d4ac7f76c5377e" prot="public" virt="virtual"><scope>iDynTree::GyroscopeSensor</scope><name>getName</name></member>
+      <member refid="classiDynTree_1_1GyroscopeSensor_1a8d610e5ce1ab010dd1aa3710b32e4bc0" prot="public" virt="virtual"><scope>iDynTree::GyroscopeSensor</scope><name>getParentLink</name></member>
+      <member refid="classiDynTree_1_1GyroscopeSensor_1a5aacbe3a66640b3ce644cfded2ca67a4" prot="public" virt="virtual"><scope>iDynTree::GyroscopeSensor</scope><name>getParentLinkIndex</name></member>
+      <member refid="classiDynTree_1_1GyroscopeSensor_1a162084c8f8d22edf2c21b822c50f325a" prot="public" virt="virtual"><scope>iDynTree::GyroscopeSensor</scope><name>getSensorType</name></member>
+      <member refid="classiDynTree_1_1GyroscopeSensor_1aa5fa67c8fecb5127180692f512dce994" prot="public" virt="non-virtual"><scope>iDynTree::GyroscopeSensor</scope><name>GyroscopeSensor</name></member>
+      <member refid="classiDynTree_1_1GyroscopeSensor_1aeb3a9d504f9809fd1d3f9796cc17820b" prot="public" virt="non-virtual"><scope>iDynTree::GyroscopeSensor</scope><name>GyroscopeSensor</name></member>
+      <member refid="classiDynTree_1_1LinkSensor_1a371122608cfbaf0c9fdf562b2780c786" prot="public" virt="virtual"><scope>iDynTree::GyroscopeSensor</scope><name>isConsistent</name></member>
+      <member refid="classiDynTree_1_1GyroscopeSensor_1a29f2d548c97f8a945a0dd79647249f43" prot="public" virt="virtual"><scope>iDynTree::GyroscopeSensor</scope><name>isValid</name></member>
+      <member refid="classiDynTree_1_1GyroscopeSensor_1a550dcf5e73745d696665f01e2043b45b" prot="public" virt="non-virtual"><scope>iDynTree::GyroscopeSensor</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1GyroscopeSensor_1a352271aab96a9c4a34c891e88dbfdad1" prot="private" virt="non-virtual"><scope>iDynTree::GyroscopeSensor</scope><name>pimpl</name></member>
+      <member refid="classiDynTree_1_1GyroscopeSensor_1ad5861db8a983722ef0b746be10bb1e5e" prot="public" virt="non-virtual"><scope>iDynTree::GyroscopeSensor</scope><name>predictMeasurement</name></member>
+      <member refid="classiDynTree_1_1GyroscopeSensor_1ae0e36ae99719844f4553cfa2e5782902" prot="public" virt="virtual"><scope>iDynTree::GyroscopeSensor</scope><name>setLinkSensorTransform</name></member>
+      <member refid="classiDynTree_1_1GyroscopeSensor_1a056d2caa535815b23a6b8732180d7c8e" prot="public" virt="virtual"><scope>iDynTree::GyroscopeSensor</scope><name>setName</name></member>
+      <member refid="classiDynTree_1_1GyroscopeSensor_1a221b7c3ebb5d1915ab13cf14b7a496c9" prot="public" virt="virtual"><scope>iDynTree::GyroscopeSensor</scope><name>setParentLink</name></member>
+      <member refid="classiDynTree_1_1GyroscopeSensor_1ab0e964fe971d4e569e5a6cae3fd2cd5c" prot="public" virt="virtual"><scope>iDynTree::GyroscopeSensor</scope><name>setParentLinkIndex</name></member>
+      <member refid="classiDynTree_1_1GyroscopeSensor_1af9fba9009f28b235bc9ebaae469b6f4a" prot="public" virt="virtual"><scope>iDynTree::GyroscopeSensor</scope><name>updateIndices</name></member>
+      <member refid="classiDynTree_1_1GyroscopeSensor_1abac1374d86237be72167f83607116d0a" prot="public" virt="virtual"><scope>iDynTree::GyroscopeSensor</scope><name>~GyroscopeSensor</name></member>
+      <member refid="classiDynTree_1_1LinkSensor_1a6d58c4792a359f962a64f800f56ecb5a" prot="public" virt="pure-virtual"><scope>iDynTree::GyroscopeSensor</scope><name>~LinkSensor</name></member>
+      <member refid="classiDynTree_1_1Sensor_1ab47aa38253b58f2a1c537e5956684e47" prot="public" virt="pure-virtual"><scope>iDynTree::GyroscopeSensor</scope><name>~Sensor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

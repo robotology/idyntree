@@ -1,0 +1,1164 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classinternal_1_1kinematics_1_1InverseKinematicsNLP" kind="class" language="C++" prot="public">
+    <compoundname>internal::kinematics::InverseKinematicsNLP</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">Ipopt::TNLP</basecompoundref>
+    <includes local="no">private/InverseKinematicsNLP.h</includes>
+    <innerclass refid="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1COMInfo" prot="private">internal::kinematics::InverseKinematicsNLP::COMInfo</innerclass>
+    <innerclass refid="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1FrameInfo" prot="private">internal::kinematics::InverseKinematicsNLP::FrameInfo</innerclass>
+      <sectiondef kind="private-type">
+      <memberdef kind="enum" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a0a87d6c1191722c52eb6ffb096076c42" prot="private" static="no" strong="no">
+        <type></type>
+        <name>ComputeContraintJacobianOption</name>
+        <enumvalue id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a0a87d6c1191722c52eb6ffb096076c42adfe2cb3a4faec06b4de377e02d7e0b6d" prot="private">
+          <name>ComputeContraintJacobianOptionLinearPart</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Update the linear (position) part, i.e. first 3 lines </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a0a87d6c1191722c52eb6ffb096076c42ab5d327d70a32a1b05ca3c32646a56ad2" prot="private">
+          <name>ComputeContraintJacobianOptionAngularPart</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>Update the angular part, i.e. last 3/4 lines depending on the orientation parametrization </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Specify which part of the Jacobian should be computed/updated </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="274" column="5" bodyfile="private/InverseKinematicsNLP.h" bodystart="274" bodyend="277"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a5c8d9601169b9c1a6bb796517fda4dea" prot="private" static="no">
+        <type>std::map&lt; int, FrameInfo &gt;</type>
+        <definition>typedef std::map&lt;int, FrameInfo&gt; internal::kinematics::InverseKinematicsNLP::FrameInfoMap</definition>
+        <argsstring></argsstring>
+        <name>FrameInfoMap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="234" column="22" bodyfile="private/InverseKinematicsNLP.h" bodystart="234" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1ae4e1a945e7c9e3ed126358eb83e395b1" prot="private" static="no" mutable="no">
+        <type><ref refid="classinternal_1_1kinematics_1_1SparsityHelper" kindref="compound">SparsityHelper</ref></type>
+        <definition>SparsityHelper internal::kinematics::InverseKinematicsNLP::m_jacobianSparsityHelper</definition>
+        <argsstring></argsstring>
+        <name>m_jacobianSparsityHelper</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="223" column="20" bodyfile="private/InverseKinematicsNLP.h" bodystart="223" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a1450f2677a42eb1706f11fc335309217" prot="private" static="no" mutable="no">
+        <type><ref refid="classinternal_1_1kinematics_1_1InverseKinematicsData" kindref="compound">InverseKinematicsData</ref> &amp;</type>
+        <definition>InverseKinematicsData&amp; internal::kinematics::InverseKinematicsNLP::m_data</definition>
+        <argsstring></argsstring>
+        <name>m_data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Reference to the <ref refid="classinternal_1_1kinematics_1_1InverseKinematicsData" kindref="compound">InverseKinematicsData</ref> object. Non IPOPT-specific data are saved and accessed in that object </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="236" column="27" bodyfile="private/InverseKinematicsNLP.h" bodystart="236" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a51a201a9797042e025c3e536006e91ed" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">iDynTree::MatrixFixSize</ref>&lt; 3, 4 &gt;</type>
+        <definition>iDynTree::MatrixFixSize&lt;3, 4&gt; internal::kinematics::InverseKinematicsNLP::quaternionDerivativeInverseMapBuffer</definition>
+        <argsstring></argsstring>
+        <name>quaternionDerivativeInverseMapBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>this is used to contain the quaternionDerivativeInverseMap, computed once for each optimization step </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="239" column="29" bodyfile="private/InverseKinematicsNLP.h" bodystart="239" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1ad852cebb6d68178f25072629a730b41d" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
+        <definition>iDynTree::MatrixDynSize internal::kinematics::InverseKinematicsNLP::finalJacobianBuffer</definition>
+        <argsstring></argsstring>
+        <name>finalJacobianBuffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Buffer to contain the Jacobian as modified to handle quaternions </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="240" column="29" bodyfile="private/InverseKinematicsNLP.h" bodystart="240" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1ac9720762f81e4667cb600a2095cb91b0" prot="private" static="no" mutable="no">
+        <type>FrameInfoMap</type>
+        <definition>FrameInfoMap internal::kinematics::InverseKinematicsNLP::constraintsInfo</definition>
+        <argsstring></argsstring>
+        <name>constraintsInfo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>FrameInfo map for the constraints </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="242" column="18" bodyfile="private/InverseKinematicsNLP.h" bodystart="242" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a97acf7321a31800353286fbb24ce3164" prot="private" static="no" mutable="no">
+        <type>FrameInfoMap</type>
+        <definition>FrameInfoMap internal::kinematics::InverseKinematicsNLP::targetsInfo</definition>
+        <argsstring></argsstring>
+        <name>targetsInfo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>FrameInfo map for the targets </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="243" column="18" bodyfile="private/InverseKinematicsNLP.h" bodystart="243" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a22652dd5cab7c9961fb5f848d24aa0f4" prot="private" static="no" mutable="no">
+        <type>COMInfo</type>
+        <definition>COMInfo internal::kinematics::InverseKinematicsNLP::comInfo</definition>
+        <argsstring></argsstring>
+        <name>comInfo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="253" column="13" bodyfile="private/InverseKinematicsNLP.h" bodystart="253" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a369a475af01621d7624be97ed7afa6d5" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
+        <definition>iDynTree::Position internal::kinematics::InverseKinematicsNLP::optimizedBasePosition</definition>
+        <argsstring></argsstring>
+        <name>optimizedBasePosition</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Hold the base frame origin at an optimization step </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="256" column="24" bodyfile="private/InverseKinematicsNLP.h" bodystart="256" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a3ce92924c9c68fd54a715322ee1effd0" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector4</ref></type>
+        <definition>iDynTree::Vector4 internal::kinematics::InverseKinematicsNLP::optimizedBaseOrientation</definition>
+        <argsstring></argsstring>
+        <name>optimizedBaseOrientation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Hold the base frame orientation at an optimization step. Note that if orientation is RPY, the last component should not be accessed </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="257" column="23" bodyfile="private/InverseKinematicsNLP.h" bodystart="257" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1ac76130341cb33736ab2559e66b84a4f4" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
+        <definition>iDynTree::VectorDynSize internal::kinematics::InverseKinematicsNLP::jointsAtOptimisationStep</definition>
+        <argsstring></argsstring>
+        <name>jointsAtOptimisationStep</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Hold the joints configuration at an optimization step </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="258" column="29" bodyfile="private/InverseKinematicsNLP.h" bodystart="258" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1adecf820c96ee0648af3a2eda4d5ffa72" prot="private" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool internal::kinematics::InverseKinematicsNLP::eval_f_called</definition>
+        <argsstring></argsstring>
+        <name>eval_f_called</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="348" column="17" bodyfile="private/InverseKinematicsNLP.h" bodystart="348" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a1698ffdd96cd0dcff188016b101b64dd" prot="private" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool internal::kinematics::InverseKinematicsNLP::eval_grad_f_called</definition>
+        <argsstring></argsstring>
+        <name>eval_grad_f_called</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="349" column="17" bodyfile="private/InverseKinematicsNLP.h" bodystart="349" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1ad76275da4e4f3821ba15f5dcdccc3613" prot="private" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool internal::kinematics::InverseKinematicsNLP::eval_g_called</definition>
+        <argsstring></argsstring>
+        <name>eval_g_called</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="350" column="17" bodyfile="private/InverseKinematicsNLP.h" bodystart="350" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a6b1277656aee9972271425b88e84a1bb" prot="private" static="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool internal::kinematics::InverseKinematicsNLP::eval_jac_g_called</definition>
+        <argsstring></argsstring>
+        <name>eval_jac_g_called</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="351" column="17" bodyfile="private/InverseKinematicsNLP.h" bodystart="351" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1ab606f74bd5a46ea737472a6585b6872e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool internal::kinematics::InverseKinematicsNLP::updateState</definition>
+        <argsstring>(const Ipopt::Number *x)</argsstring>
+        <name>updateState</name>
+        <param>
+          <type>const Ipopt::Number *</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>update all the configuration dependent variables </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Update the robot configuration, the tranforms the jacobian and all the variables depending on the actual value of the optimization state <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the current optimization state </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if successfull, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="269" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a6075b85db6f90cfc2689c225a3097e4c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void internal::kinematics::InverseKinematicsNLP::computeConstraintJacobian</definition>
+        <argsstring>(const iDynTree::MatrixDynSize &amp;transformJacobian, const iDynTree::MatrixFixSize&lt; 4, 3 &gt; &amp;quaternionDerivativeMapBuffer, const iDynTree::MatrixFixSize&lt; 3, 4 &gt; &amp;quaternionDerivativeInverseMapBuffer, const int computationOption, iDynTree::MatrixDynSize &amp;constraintJacobianBuffer)</argsstring>
+        <name>computeConstraintJacobian</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>transformJacobian</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">iDynTree::MatrixFixSize</ref>&lt; 4, 3 &gt; &amp;</type>
+          <declname>quaternionDerivativeMapBuffer</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">iDynTree::MatrixFixSize</ref>&lt; 3, 4 &gt; &amp;</type>
+          <declname>quaternionDerivativeInverseMapBuffer</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>computationOption</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>constraintJacobianBuffer</declname>
+        </param>
+        <briefdescription>
+<para>compute the IPOPT Jacobian given an iDynTree Jacobian </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Jacobians as outputted by iDynTree relates linear and angular velocities with &quot;internal&quot; velocity (the velocity of the robot). IPOPT is interested in the Jacobian as the derivative of the constraints w.r.t. a variation of the optimization variable (not the time derivative). This function is responsible of adapting the iDynTree Jacobian to obtain a Jacobian usable by IPOPT</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">transformJacobian</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the Jacobian of the frame Transform </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">quaternionDerivativeMapBuffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>map for the quaternion derivative </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">quaternionDerivativeInverseMapBuffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>inverse map for the quaternion derivative </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">computationOption</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>bitwise mask of ComputeContraintJacobianOption </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">constraintJacobianBuffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>resulting IPOPT compatible Jacobian </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="295" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a1264db941b0b12117530a2040b25940a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void internal::kinematics::InverseKinematicsNLP::computeConstraintJacobianRPY</definition>
+        <argsstring>(const iDynTree::MatrixDynSize &amp;transformJacobian, const iDynTree::MatrixFixSize&lt; 3, 3 &gt; &amp;rpyDerivativeMapBuffer, const iDynTree::MatrixFixSize&lt; 3, 3 &gt; &amp;rpyDerivativeInverseMapBuffer, const int computationOption, iDynTree::MatrixDynSize &amp;constraintJacobianBuffer)</argsstring>
+        <name>computeConstraintJacobianRPY</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>transformJacobian</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">iDynTree::MatrixFixSize</ref>&lt; 3, 3 &gt; &amp;</type>
+          <declname>rpyDerivativeMapBuffer</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">iDynTree::MatrixFixSize</ref>&lt; 3, 3 &gt; &amp;</type>
+          <declname>rpyDerivativeInverseMapBuffer</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>computationOption</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>constraintJacobianBuffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="301" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a33c3a5b237a4da4c62f2a3a1a2842f64" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void internal::kinematics::InverseKinematicsNLP::computeConstraintJacobianCOMRPY</definition>
+        <argsstring>(const iDynTree::MatrixDynSize &amp;comJacobianBuffer, const iDynTree::MatrixFixSize&lt; 3, 3 &gt; &amp;_rpyDerivativeInverseMap, iDynTree::MatrixDynSize &amp;constraintComJacobianBuffer)</argsstring>
+        <name>computeConstraintJacobianCOMRPY</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>comJacobianBuffer</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">iDynTree::MatrixFixSize</ref>&lt; 3, 3 &gt; &amp;</type>
+          <declname>_rpyDerivativeInverseMap</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>constraintComJacobianBuffer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="307" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a130e6839f62101ede263b9fdaa6a47f6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void internal::kinematics::InverseKinematicsNLP::omegaToRPYParameters</definition>
+        <argsstring>(const iDynTree::Vector3 &amp;rpyAngles, iDynTree::Matrix3x3 &amp;map)</argsstring>
+        <name>omegaToRPYParameters</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref> &amp;</type>
+          <declname>rpyAngles</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">iDynTree::Matrix3x3</ref> &amp;</type>
+          <declname>map</declname>
+        </param>
+        <briefdescription>
+<para>Map between RPY angles and angular velocity in the inertial frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The angular velocity <formula id="34">$ \omega $</formula> is related with the derivative of the RPY angles by a 3x3 matrix, i.e. <formula id="35">\[ {}^I \omega = M(w) \frac{d w}{dt}, \]</formula> where <formula id="36">$ w \in \mathbb{R}^3 $</formula> are the roll, pitch and yaw angles. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">rpyAngles</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>roll, pitch, yaw angles </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">map</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>resulting 3x3 matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="323" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a304dacba90eaddf7d65c9862edae646f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void internal::kinematics::InverseKinematicsNLP::addSparsityInformationForConstraint</definition>
+        <argsstring>(int constraintID, const internal::kinematics::TransformConstraint &amp;constraint)</argsstring>
+        <name>addSparsityInformationForConstraint</name>
+        <param>
+          <type>int</type>
+          <declname>constraintID</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classinternal_1_1kinematics_1_1TransformConstraint" kindref="compound">internal::kinematics::TransformConstraint</ref> &amp;</type>
+          <declname>constraint</declname>
+        </param>
+        <briefdescription>
+<para>Helper method to create sparity information for a specific constraint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>constraintID</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>id of the constraint </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>constraint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>constraint object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="333" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1ab3b086048389870a36f17000f1effb08" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void internal::kinematics::InverseKinematicsNLP::initializeSparsityInformation</definition>
+        <argsstring>()</argsstring>
+        <name>initializeSparsityInformation</name>
+        <briefdescription>
+<para>Initialize the sparsity information. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>this method should be called after all constraints have been specified. It also uses the buffers created for the constraints, so it should not be called at runtime </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="340" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a66b4b7e061e263c77ed3b3522387873f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>internal::kinematics::InverseKinematicsNLP::InverseKinematicsNLP</definition>
+        <argsstring>(InverseKinematicsData &amp;data)</argsstring>
+        <name>InverseKinematicsNLP</name>
+        <param>
+          <type><ref refid="classinternal_1_1kinematics_1_1InverseKinematicsData" kindref="compound">InverseKinematicsData</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Constructor <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>reference to the <ref refid="classinternal_1_1kinematics_1_1InverseKinematicsData" kindref="compound">InverseKinematicsData</ref> object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="358" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a621e6ac530bac07010f5f951e4f01ca0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual internal::kinematics::InverseKinematicsNLP::~InverseKinematicsNLP</definition>
+        <argsstring>()</argsstring>
+        <name>~InverseKinematicsNLP</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="360" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a5101116fc4a577ac8a1fc3170e4cbaac" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void internal::kinematics::InverseKinematicsNLP::initializeInternalData</definition>
+        <argsstring>()</argsstring>
+        <name>initializeInternalData</name>
+        <briefdescription>
+<para>Initialize buffers given the specified problem size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>size of the optimization variable </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>m</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>size of the constraints </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="368" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1acc6ed278f52c48771a2004c18bf0be35" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool internal::kinematics::InverseKinematicsNLP::get_nlp_info</definition>
+        <argsstring>(Ipopt::Index &amp;n, Ipopt::Index &amp;m, Ipopt::Index &amp;nnz_jac_g, Ipopt::Index &amp;nnz_h_lag, IndexStyleEnum &amp;index_style)</argsstring>
+        <name>get_nlp_info</name>
+        <param>
+          <type>Ipopt::Index &amp;</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>Ipopt::Index &amp;</type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type>Ipopt::Index &amp;</type>
+          <declname>nnz_jac_g</declname>
+        </param>
+        <param>
+          <type>Ipopt::Index &amp;</type>
+          <declname>nnz_h_lag</declname>
+        </param>
+        <param>
+          <type>IndexStyleEnum &amp;</type>
+          <declname>index_style</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="372" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1adc349c58bd4bdd13fb57311affa45347" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool internal::kinematics::InverseKinematicsNLP::get_bounds_info</definition>
+        <argsstring>(Ipopt::Index n, Ipopt::Number *x_l, Ipopt::Number *x_u, Ipopt::Index m, Ipopt::Number *g_l, Ipopt::Number *g_u)</argsstring>
+        <name>get_bounds_info</name>
+        <param>
+          <type>Ipopt::Index</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number *</type>
+          <declname>x_l</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number *</type>
+          <declname>x_u</declname>
+        </param>
+        <param>
+          <type>Ipopt::Index</type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number *</type>
+          <declname>g_l</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number *</type>
+          <declname>g_u</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="378" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a08950dd1b24eb1023b774130673d7204" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool internal::kinematics::InverseKinematicsNLP::get_starting_point</definition>
+        <argsstring>(Ipopt::Index n, bool init_x, Ipopt::Number *x, bool init_z, Ipopt::Number *z_L, Ipopt::Number *z_U, Ipopt::Index m, bool init_lambda, Ipopt::Number *lambda)</argsstring>
+        <name>get_starting_point</name>
+        <param>
+          <type>Ipopt::Index</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>init_x</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>init_z</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number *</type>
+          <declname>z_L</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number *</type>
+          <declname>z_U</declname>
+        </param>
+        <param>
+          <type>Ipopt::Index</type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>init_lambda</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number *</type>
+          <declname>lambda</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="381" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a88c3fb57f34a5ed876b122d0ca9b98b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool internal::kinematics::InverseKinematicsNLP::eval_f</definition>
+        <argsstring>(Ipopt::Index n, const Ipopt::Number *x, bool new_x, Ipopt::Number &amp;obj_value)</argsstring>
+        <name>eval_f</name>
+        <param>
+          <type>Ipopt::Index</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const Ipopt::Number *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>new_x</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number &amp;</type>
+          <declname>obj_value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="386" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1aea9791edf5f4bb14a8ad90c3064c9832" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool internal::kinematics::InverseKinematicsNLP::eval_grad_f</definition>
+        <argsstring>(Ipopt::Index n, const Ipopt::Number *x, bool new_x, Ipopt::Number *grad_f)</argsstring>
+        <name>eval_grad_f</name>
+        <param>
+          <type>Ipopt::Index</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const Ipopt::Number *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>new_x</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number *</type>
+          <declname>grad_f</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="389" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a9ccb613e5e1fbf083d25cdb09f6f5fc7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool internal::kinematics::InverseKinematicsNLP::eval_g</definition>
+        <argsstring>(Ipopt::Index n, const Ipopt::Number *x, bool new_x, Ipopt::Index m, Ipopt::Number *g)</argsstring>
+        <name>eval_g</name>
+        <param>
+          <type>Ipopt::Index</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const Ipopt::Number *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>new_x</declname>
+        </param>
+        <param>
+          <type>Ipopt::Index</type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number *</type>
+          <declname>g</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="392" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1adf6c1b305d2e9914e953dc51e34b961d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool internal::kinematics::InverseKinematicsNLP::eval_jac_g</definition>
+        <argsstring>(Ipopt::Index n, const Ipopt::Number *x, bool new_x, Ipopt::Index m, Ipopt::Index nele_jac, Ipopt::Index *iRow, Ipopt::Index *jCol, Ipopt::Number *values)</argsstring>
+        <name>eval_jac_g</name>
+        <param>
+          <type>Ipopt::Index</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const Ipopt::Number *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>new_x</declname>
+        </param>
+        <param>
+          <type>Ipopt::Index</type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type>Ipopt::Index</type>
+          <declname>nele_jac</declname>
+        </param>
+        <param>
+          <type>Ipopt::Index *</type>
+          <declname>iRow</declname>
+        </param>
+        <param>
+          <type>Ipopt::Index *</type>
+          <declname>jCol</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number *</type>
+          <declname>values</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="395" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1ab431f8ad6fa8541792e38f773ee719b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool internal::kinematics::InverseKinematicsNLP::eval_h</definition>
+        <argsstring>(Ipopt::Index n, const Ipopt::Number *x, bool new_x, Ipopt::Number obj_factor, Ipopt::Index m, const Ipopt::Number *lambda, bool new_lambda, Ipopt::Index nele_hess, Ipopt::Index *iRow, Ipopt::Index *jCol, Ipopt::Number *values)</argsstring>
+        <name>eval_h</name>
+        <param>
+          <type>Ipopt::Index</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const Ipopt::Number *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>new_x</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number</type>
+          <declname>obj_factor</declname>
+        </param>
+        <param>
+          <type>Ipopt::Index</type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type>const Ipopt::Number *</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>new_lambda</declname>
+        </param>
+        <param>
+          <type>Ipopt::Index</type>
+          <declname>nele_hess</declname>
+        </param>
+        <param>
+          <type>Ipopt::Index *</type>
+          <declname>iRow</declname>
+        </param>
+        <param>
+          <type>Ipopt::Index *</type>
+          <declname>jCol</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number *</type>
+          <declname>values</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="399" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a2b91e0f231d2b65fa11016a7fb722ad7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void internal::kinematics::InverseKinematicsNLP::finalize_solution</definition>
+        <argsstring>(Ipopt::SolverReturn status, Ipopt::Index n, const Ipopt::Number *x, const Ipopt::Number *z_L, const Ipopt::Number *z_U, Ipopt::Index m, const Ipopt::Number *g, const Ipopt::Number *lambda, Ipopt::Number obj_value, const Ipopt::IpoptData *ip_data, Ipopt::IpoptCalculatedQuantities *ip_cq)</argsstring>
+        <name>finalize_solution</name>
+        <param>
+          <type>Ipopt::SolverReturn</type>
+          <declname>status</declname>
+        </param>
+        <param>
+          <type>Ipopt::Index</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const Ipopt::Number *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>const Ipopt::Number *</type>
+          <declname>z_L</declname>
+        </param>
+        <param>
+          <type>const Ipopt::Number *</type>
+          <declname>z_U</declname>
+        </param>
+        <param>
+          <type>Ipopt::Index</type>
+          <declname>m</declname>
+        </param>
+        <param>
+          <type>const Ipopt::Number *</type>
+          <declname>g</declname>
+        </param>
+        <param>
+          <type>const Ipopt::Number *</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number</type>
+          <declname>obj_value</declname>
+        </param>
+        <param>
+          <type>const Ipopt::IpoptData *</type>
+          <declname>ip_data</declname>
+        </param>
+        <param>
+          <type>Ipopt::IpoptCalculatedQuantities *</type>
+          <declname>ip_cq</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="404" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a7f4acc157127dc4a4b6420fe91277f07" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>Ipopt::Index</type>
+        <definition>virtual Ipopt::Index internal::kinematics::InverseKinematicsNLP::get_number_of_nonlinear_variables</definition>
+        <argsstring>()</argsstring>
+        <name>get_number_of_nonlinear_variables</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="411" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1aa5804d08c2a4f934bb2f2a17f70400af" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool internal::kinematics::InverseKinematicsNLP::get_list_of_nonlinear_variables</definition>
+        <argsstring>(Ipopt::Index num_nonlin_vars, Ipopt::Index *pos_nonlin_vars)</argsstring>
+        <name>get_list_of_nonlinear_variables</name>
+        <param>
+          <type>Ipopt::Index</type>
+          <declname>num_nonlin_vars</declname>
+        </param>
+        <param>
+          <type>Ipopt::Index *</type>
+          <declname>pos_nonlin_vars</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="413" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1aa57b45a83c4fc124b2588b685733d864" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool internal::kinematics::InverseKinematicsNLP::intermediate_callback</definition>
+        <argsstring>(Ipopt::AlgorithmMode mode, Ipopt::Index iter, Ipopt::Number obj_value, Ipopt::Number inf_pr, Ipopt::Number inf_du, Ipopt::Number mu, Ipopt::Number d_norm, Ipopt::Number regularization_size, Ipopt::Number alpha_du, Ipopt::Number alpha_pr, Ipopt::Index ls_trials, const Ipopt::IpoptData *ip_data, Ipopt::IpoptCalculatedQuantities *ip_cq)</argsstring>
+        <name>intermediate_callback</name>
+        <param>
+          <type>Ipopt::AlgorithmMode</type>
+          <declname>mode</declname>
+        </param>
+        <param>
+          <type>Ipopt::Index</type>
+          <declname>iter</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number</type>
+          <declname>obj_value</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number</type>
+          <declname>inf_pr</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number</type>
+          <declname>inf_du</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number</type>
+          <declname>mu</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number</type>
+          <declname>d_norm</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number</type>
+          <declname>regularization_size</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number</type>
+          <declname>alpha_du</declname>
+        </param>
+        <param>
+          <type>Ipopt::Number</type>
+          <declname>alpha_pr</declname>
+        </param>
+        <param>
+          <type>Ipopt::Index</type>
+          <declname>ls_trials</declname>
+        </param>
+        <param>
+          <type>const Ipopt::IpoptData *</type>
+          <declname>ip_data</declname>
+        </param>
+        <param>
+          <type>Ipopt::IpoptCalculatedQuantities *</type>
+          <declname>ip_cq</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="416" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a9913323824e6cb6d8545b00f4073ca10" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void internal::kinematics::InverseKinematicsNLP::testDerivatives</definition>
+        <argsstring>(const iDynTree::VectorDynSize &amp;derivativePoint, int frameIndex, double epsilon, double tolerance, int parametrization)</argsstring>
+        <name>testDerivatives</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>derivativePoint</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>frameIndex</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>epsilon</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>tolerance</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>parametrization</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/InverseKinematicsNLP.h" line="426" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Implementation of the inverse kinematics with IPOPT. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Implements the following optimization problem <formula id="32">\begin{align} \min_{x} &amp; \sum_i || {}^w H_{f_i} ( {}^w H_{f_i}^d)^{-1} ||^2 + w_q || q_j - q_j^d ||^2 \\ \text{s.t.} &amp; {}^w H_{f_i} = {}^w H_{f_i}^d \\ &amp; q_{min} \leq q \leq q_{max} \end{align}</formula> where <formula id="33">\begin{align} &amp; q = \{ {}^w H_{base}, q_j\} \in SE(3) \times \mathbb{R}^n \\ &amp; {}^w H_{f_i} \in SE(3) \end{align}</formula></para>
+<para>A target (entirely or partially, with partial meaning the two components composing a tranform, i.e. position and orientation) can be enforced by either considering it as a constraint or as a cost</para>
+<para><simplesect kind="note"><para>Implementation details this class coordinates with <ref refid="classinternal_1_1kinematics_1_1InverseKinematicsData" kindref="compound">InverseKinematicsData</ref> to manages internal data In particular to manages constraints and targets it uses an std::map which is an ordered container. Once the order is defined at configuration time, it is exploited during the optimization by iterating on its elements. As this order is the same as the IPOPT variables the fact that we use a map instead of an unordered_map (which is faster at construction and for random access) is relevant.</para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>Ipopt::TNLP</label>
+      </node>
+      <node id="1">
+        <label>internal::kinematics::InverseKinematicsNLP</label>
+        <link refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>Ipopt::TNLP</label>
+      </node>
+      <node id="1">
+        <label>internal::kinematics::InverseKinematicsNLP</label>
+        <link refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="private/InverseKinematicsNLP.h" line="221" column="1" bodyfile="private/InverseKinematicsNLP.h" bodystart="221" bodyend="428"/>
+    <listofallmembers>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a304dacba90eaddf7d65c9862edae646f" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>addSparsityInformationForConstraint</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a22652dd5cab7c9961fb5f848d24aa0f4" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>comInfo</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a6075b85db6f90cfc2689c225a3097e4c" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>computeConstraintJacobian</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a33c3a5b237a4da4c62f2a3a1a2842f64" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>computeConstraintJacobianCOMRPY</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a1264db941b0b12117530a2040b25940a" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>computeConstraintJacobianRPY</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a0a87d6c1191722c52eb6ffb096076c42" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>ComputeContraintJacobianOption</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a0a87d6c1191722c52eb6ffb096076c42ab5d327d70a32a1b05ca3c32646a56ad2" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>ComputeContraintJacobianOptionAngularPart</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a0a87d6c1191722c52eb6ffb096076c42adfe2cb3a4faec06b4de377e02d7e0b6d" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>ComputeContraintJacobianOptionLinearPart</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1ac9720762f81e4667cb600a2095cb91b0" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>constraintsInfo</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a88c3fb57f34a5ed876b122d0ca9b98b2" prot="public" virt="virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>eval_f</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1adecf820c96ee0648af3a2eda4d5ffa72" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>eval_f_called</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a9ccb613e5e1fbf083d25cdb09f6f5fc7" prot="public" virt="virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>eval_g</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1ad76275da4e4f3821ba15f5dcdccc3613" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>eval_g_called</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1aea9791edf5f4bb14a8ad90c3064c9832" prot="public" virt="virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>eval_grad_f</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a1698ffdd96cd0dcff188016b101b64dd" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>eval_grad_f_called</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1ab431f8ad6fa8541792e38f773ee719b2" prot="public" virt="virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>eval_h</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1adf6c1b305d2e9914e953dc51e34b961d" prot="public" virt="virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>eval_jac_g</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a6b1277656aee9972271425b88e84a1bb" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>eval_jac_g_called</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a2b91e0f231d2b65fa11016a7fb722ad7" prot="public" virt="virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>finalize_solution</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1ad852cebb6d68178f25072629a730b41d" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>finalJacobianBuffer</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a5c8d9601169b9c1a6bb796517fda4dea" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>FrameInfoMap</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1adc349c58bd4bdd13fb57311affa45347" prot="public" virt="virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>get_bounds_info</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1aa5804d08c2a4f934bb2f2a17f70400af" prot="public" virt="virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>get_list_of_nonlinear_variables</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1acc6ed278f52c48771a2004c18bf0be35" prot="public" virt="virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>get_nlp_info</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a7f4acc157127dc4a4b6420fe91277f07" prot="public" virt="virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>get_number_of_nonlinear_variables</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a08950dd1b24eb1023b774130673d7204" prot="public" virt="virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>get_starting_point</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a5101116fc4a577ac8a1fc3170e4cbaac" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>initializeInternalData</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1ab3b086048389870a36f17000f1effb08" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>initializeSparsityInformation</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1aa57b45a83c4fc124b2588b685733d864" prot="public" virt="virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>intermediate_callback</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a66b4b7e061e263c77ed3b3522387873f" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>InverseKinematicsNLP</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1ac76130341cb33736ab2559e66b84a4f4" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>jointsAtOptimisationStep</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a1450f2677a42eb1706f11fc335309217" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>m_data</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1ae4e1a945e7c9e3ed126358eb83e395b1" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>m_jacobianSparsityHelper</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a130e6839f62101ede263b9fdaa6a47f6" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>omegaToRPYParameters</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a3ce92924c9c68fd54a715322ee1effd0" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>optimizedBaseOrientation</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a369a475af01621d7624be97ed7afa6d5" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>optimizedBasePosition</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a51a201a9797042e025c3e536006e91ed" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>quaternionDerivativeInverseMapBuffer</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a97acf7321a31800353286fbb24ce3164" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>targetsInfo</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a9913323824e6cb6d8545b00f4073ca10" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>testDerivatives</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1ab606f74bd5a46ea737472a6585b6872e" prot="private" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>updateState</name></member>
+      <member refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP_1a621e6ac530bac07010f5f951e4f01ca0" prot="public" virt="virtual"><scope>internal::kinematics::InverseKinematicsNLP</scope><name>~InverseKinematicsNLP</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

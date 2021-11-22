@@ -1,6 +1,0 @@
-<map id="iDynTree::optimization::AlglibInterface::AlglibInterfaceImplementation" name="iDynTree::optimization::AlglibInterface::AlglibInterfaceImplementation">
-<area shape="rect" id="node1" title=" " alt="" coords="205,275,433,331"/>
-<area shape="rect" id="node2" href="$structiDynTree_1_1optimization_1_1SharedData.html" title=" " alt="" coords="164,147,333,189"/>
-<area shape="rect" id="node3" href="$classiDynTree_1_1MatrixDynSize.html" title="Class providing a simple form of matrix with dynamic size." alt="" coords="5,5,188,32"/>
-<area shape="rect" id="node4" href="$classiDynTree_1_1VectorDynSize.html" title="Class providing a simple form of vector with dynamic size." alt="" coords="255,5,437,32"/>
-</map>

@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1IFrameVisualization" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::IFrameVisualization</compoundname>
+    <includes local="no">iDynTree/Visualizer.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1IFrameVisualization_1a5627f4a5bb9b60db4833e64c154652d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type></type>
+        <definition>virtual iDynTree::IFrameVisualization::~IFrameVisualization</definition>
+        <argsstring>()=0</argsstring>
+        <name>~IFrameVisualization</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="559" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IFrameVisualization_1aedf3c222bdb2424008d4f11fa2c6950c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>size_t</type>
+        <definition>virtual size_t iDynTree::IFrameVisualization::addFrame</definition>
+        <argsstring>(const Transform &amp;transformation, double arrowLength=1.0)=0</argsstring>
+        <name>addFrame</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>transformation</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>arrowLength</declname>
+          <defval>1.0</defval>
+        </param>
+        <briefdescription>
+<para>Add a frame in the visualization Returns the frame index. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="565" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IFrameVisualization_1a65103965686c9a821034bb77b4df7c1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IFrameVisualization::setVisible</definition>
+        <argsstring>(size_t frameIndex, bool isVisible)=0</argsstring>
+        <name>setVisible</name>
+        <param>
+          <type>size_t</type>
+          <declname>frameIndex</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isVisible</declname>
+        </param>
+        <briefdescription>
+<para>Set the specified frame visible or not. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns true in case of success, false otherwise (for example if the frame does not exists). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="571" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IFrameVisualization_1a90152872bbbd16ef21e9a8c4e58274de" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>size_t</type>
+        <definition>virtual size_t iDynTree::IFrameVisualization::getNrOfFrames</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getNrOfFrames</name>
+        <briefdescription>
+<para>Get the number of visualized frames. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="577" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IFrameVisualization_1aae2ffba4369ca31174b22485ed437ad4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IFrameVisualization::getFrameTransform</definition>
+        <argsstring>(size_t frameIndex, Transform &amp;currentTransform) const =0</argsstring>
+        <name>getFrameTransform</name>
+        <param>
+          <type>size_t</type>
+          <declname>frameIndex</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>currentTransform</declname>
+        </param>
+        <briefdescription>
+<para>Get frame transform. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="582" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IFrameVisualization_1a23f8d062de4ab19c7cdcc29fc9c329e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IFrameVisualization::updateFrame</definition>
+        <argsstring>(size_t frameIndex, const Transform &amp;transformation)=0</argsstring>
+        <name>updateFrame</name>
+        <param>
+          <type>size_t</type>
+          <declname>frameIndex</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>transformation</declname>
+        </param>
+        <briefdescription>
+<para>Update Frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="587" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IFrameVisualization_1ae7d29e6ef3940b5cd519b1772f459c56" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1ILabel" kindref="compound">ILabel</ref> *</type>
+        <definition>virtual ILabel* iDynTree::IFrameVisualization::getFrameLabel</definition>
+        <argsstring>(size_t frameIndex)=0</argsstring>
+        <name>getFrameLabel</name>
+        <param>
+          <type>size_t</type>
+          <declname>frameIndex</declname>
+        </param>
+        <briefdescription>
+<para>Get the label of a frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Returns nullptr of the frame index is out of bounds. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="594" column="20"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Interface to the visualization of frames. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Visualizer.h" line="552" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="553" bodyend="595"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1IFrameVisualization_1aedf3c222bdb2424008d4f11fa2c6950c" prot="public" virt="pure-virtual"><scope>iDynTree::IFrameVisualization</scope><name>addFrame</name></member>
+      <member refid="classiDynTree_1_1IFrameVisualization_1ae7d29e6ef3940b5cd519b1772f459c56" prot="public" virt="pure-virtual"><scope>iDynTree::IFrameVisualization</scope><name>getFrameLabel</name></member>
+      <member refid="classiDynTree_1_1IFrameVisualization_1aae2ffba4369ca31174b22485ed437ad4" prot="public" virt="pure-virtual"><scope>iDynTree::IFrameVisualization</scope><name>getFrameTransform</name></member>
+      <member refid="classiDynTree_1_1IFrameVisualization_1a90152872bbbd16ef21e9a8c4e58274de" prot="public" virt="pure-virtual"><scope>iDynTree::IFrameVisualization</scope><name>getNrOfFrames</name></member>
+      <member refid="classiDynTree_1_1IFrameVisualization_1a65103965686c9a821034bb77b4df7c1c" prot="public" virt="pure-virtual"><scope>iDynTree::IFrameVisualization</scope><name>setVisible</name></member>
+      <member refid="classiDynTree_1_1IFrameVisualization_1a23f8d062de4ab19c7cdcc29fc9c329e4" prot="public" virt="pure-virtual"><scope>iDynTree::IFrameVisualization</scope><name>updateFrame</name></member>
+      <member refid="classiDynTree_1_1IFrameVisualization_1a5627f4a5bb9b60db4833e64c154652d8" prot="public" virt="pure-virtual"><scope>iDynTree::IFrameVisualization</scope><name>~IFrameVisualization</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

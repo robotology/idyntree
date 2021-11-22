@@ -1,0 +1,621 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1Traversal" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::Traversal</compoundname>
+    <includes local="no">iDynTree/Model/Traversal.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1Traversal_1afa7f5826509aa0c4c8251d52764ed3a9" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; const <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> * &gt;</type>
+        <definition>std::vector&lt;const Link *&gt; iDynTree::Traversal::links</definition>
+        <argsstring></argsstring>
+        <name>links</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="46" column="21" bodyfile="iDynTree/Model/Traversal.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Traversal_1a1f6041d6cd6979509cff97cbebb2d74b" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; const <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> * &gt;</type>
+        <definition>std::vector&lt;const Link *&gt; iDynTree::Traversal::parents</definition>
+        <argsstring></argsstring>
+        <name>parents</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="47" column="21" bodyfile="iDynTree/Model/Traversal.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Traversal_1ac757e3901013df9b3ae714d7be572a41" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; const <ref refid="classiDynTree_1_1IJoint" kindref="compound">IJoint</ref> * &gt;</type>
+        <definition>std::vector&lt;const IJoint *&gt; iDynTree::Traversal::toParentJoints</definition>
+        <argsstring></argsstring>
+        <name>toParentJoints</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="48" column="21" bodyfile="iDynTree/Model/Traversal.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Traversal_1ad39f554385ae05abbc7ba59ca65662dc" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; int &gt;</type>
+        <definition>std::vector&lt;int&gt; iDynTree::Traversal::linkIndexToTraversalIndex</definition>
+        <argsstring></argsstring>
+        <name>linkIndexToTraversalIndex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="49" column="32" bodyfile="iDynTree/Model/Traversal.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1Traversal_1a1ec59e52bbb337808e95102b1b56e1b8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Traversal::Traversal</definition>
+        <argsstring>(const Traversal &amp;other)</argsstring>
+        <name>Traversal</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy constructor is forbidden. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="54" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Traversal_1ab66800da2bc0b6dff8bc44142a212ba7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> &amp;</type>
+        <definition>Traversal&amp; iDynTree::Traversal::operator=</definition>
+        <argsstring>(const Traversal &amp;other)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy operator is forbidden. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="59" column="19"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1Traversal_1ae4970440869a8eb807f960325524e6e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Traversal::Traversal</definition>
+        <argsstring>()</argsstring>
+        <name>Traversal</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="62" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Traversal_1a70220dfc59ce52d03d330e4fed7f11da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Traversal::~Traversal</definition>
+        <argsstring>()</argsstring>
+        <name>~Traversal</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="64" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Traversal_1a9399131b8326438aa1b669b5a44fb720" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int iDynTree::Traversal::getNrOfVisitedLinks</definition>
+        <argsstring>() const</argsstring>
+        <name>getNrOfVisitedLinks</name>
+        <briefdescription>
+<para>Get the number of visited links. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the number of links in the <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="71" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Traversal_1a5ab819796b110f8b2026aeb9d63af2fc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> *</type>
+        <definition>const Link* iDynTree::Traversal::getLink</definition>
+        <argsstring>(const TraversalIndex traversalIndex) const</argsstring>
+        <name>getLink</name>
+        <param>
+          <type>const TraversalIndex</type>
+          <declname>traversalIndex</declname>
+        </param>
+        <briefdescription>
+<para>Get the traversalIndex-th link of the traversal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>a pointer to the traversalIndex-th link of the traversal. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="78" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Traversal_1a4dc1f2a88ab51dc42dc7f89fab39d235" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> *</type>
+        <definition>const Link* iDynTree::Traversal::getBaseLink</definition>
+        <argsstring>() const</argsstring>
+        <name>getBaseLink</name>
+        <briefdescription>
+<para>Get the base link of the traversal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>this is equivalent to getLink(0), as the base link is by definition the first link of the traversal. </para>
+</simplesect>
+<simplesect kind="return"><para>a pointer to the base link of the traversal. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="87" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Traversal_1a098638f9c2519ffed4bd2afdbf800eba" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> *</type>
+        <definition>const Link* iDynTree::Traversal::getParentLink</definition>
+        <argsstring>(const TraversalIndex traversalIndex) const</argsstring>
+        <name>getParentLink</name>
+        <param>
+          <type>const TraversalIndex</type>
+          <declname>traversalIndex</declname>
+        </param>
+        <briefdescription>
+<para>Get the parent link of the traversalIndex-th link of the traversal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>a pointer to the parent link of the traversalIndex-th link of the traversal. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="94" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Traversal_1a1b677cb37a12edc52a2255dc630b03bd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1IJoint" kindref="compound">IJoint</ref> *</type>
+        <definition>const IJoint* iDynTree::Traversal::getParentJoint</definition>
+        <argsstring>(const TraversalIndex traversalIndex) const</argsstring>
+        <name>getParentJoint</name>
+        <param>
+          <type>const TraversalIndex</type>
+          <declname>traversalIndex</declname>
+        </param>
+        <briefdescription>
+<para>Get the joint connecting the traversalIndex-th link of the traversal to its parent. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>a pointer to the joint connecting the link traversalIndex-th link of the traversal. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="102" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Traversal_1ad0d0137c30e0162f94b81f7dcde44f5f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> *</type>
+        <definition>const Link* iDynTree::Traversal::getParentLinkFromLinkIndex</definition>
+        <argsstring>(const LinkIndex linkIndex) const</argsstring>
+        <name>getParentLinkFromLinkIndex</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>linkIndex</declname>
+        </param>
+        <briefdescription>
+<para>Get the parent link of the link with index linkIndex of the traversal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>a pointer to the parent link of the traversalIndex-th link of the traversal. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="109" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Traversal_1af337bfb778303028fca6637f99dd54d2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1IJoint" kindref="compound">IJoint</ref> *</type>
+        <definition>const IJoint* iDynTree::Traversal::getParentJointFromLinkIndex</definition>
+        <argsstring>(const LinkIndex linkIndex) const</argsstring>
+        <name>getParentJointFromLinkIndex</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>linkIndex</declname>
+        </param>
+        <briefdescription>
+<para>Get the joint connecting the link with index linkIndex to its parent. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>a pointer to the joint connecting the link traversalIndex-th link of the traversal. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="117" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Traversal_1a34685ec218439e50f5c69979eccf1a0b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>TraversalIndex</type>
+        <definition>TraversalIndex iDynTree::Traversal::getTraversalIndexFromLinkIndex</definition>
+        <argsstring>(const LinkIndex linkIndex) const</argsstring>
+        <name>getTraversalIndexFromLinkIndex</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>linkIndex</declname>
+        </param>
+        <briefdescription>
+<para>Get the traversal index of the specified link. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>the traversalIndex of the specified link, or TRAVERSAL_INDEX_INVALID if the link does not belong to the traversal. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="124" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Traversal_1a3805f4b2d3ced7e603919e96520dfa14" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Traversal::reset</definition>
+        <argsstring>(const unsigned int nrOfLinksInModel)</argsstring>
+        <name>reset</name>
+        <param>
+          <type>const unsigned int</type>
+          <declname>nrOfLinksInModel</declname>
+        </param>
+        <briefdescription>
+<para>Reset the <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>After a call to reset, the <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> will contain no visited links, so it needs to be approprately populated with the addTraversalBase and addTraversalElement methods.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">nrOfLinksInModel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>total number of links in the model, not the number of visited links in the <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="139" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Traversal_1a50152ca9efd43c153817875717868c01" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Traversal::reset</definition>
+        <argsstring>(const Model &amp;model)</argsstring>
+        <name>reset</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Reset the <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>After a call to reset, all the pointers in the <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> are set to 0, and the <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> should be approprialy populated with the setters before use.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> on which this traversal will be used, used to initialize the internal data structure using the getNrOfLinks() method.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="154" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Traversal_1a3f59fac9f81f21568320ee3d2e803e80" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Traversal::addTraversalBase</definition>
+        <argsstring>(const Link *link)</argsstring>
+        <name>addTraversalBase</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <briefdescription>
+<para>Add a base to traversal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Equivalent to addTraversalElement(link,NULL,NULL), but will print an error and return false if it is called with a traversal that already has a base, i.e. <ref refid="classiDynTree_1_1Traversal_1a9399131b8326438aa1b669b5a44fb720" kindref="member">getNrOfVisitedLinks()</ref> &gt; 0</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a pointer to the base link </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="166" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Traversal_1a83d3620b6f58c32789e9911c37a9618d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Traversal::addTraversalElement</definition>
+        <argsstring>(const Link *link, const IJoint *jointToParent, const Link *parentLink)</argsstring>
+        <name>addTraversalElement</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> *</type>
+          <declname>link</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1IJoint" kindref="compound">IJoint</ref> *</type>
+          <declname>jointToParent</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> *</type>
+          <declname>parentLink</declname>
+        </param>
+        <briefdescription>
+<para>Add an element to the traversal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>After a call to this method, the <ref refid="classiDynTree_1_1Traversal_1a9399131b8326438aa1b669b5a44fb720" kindref="member">getNrOfVisitedLinks()</ref> will be increased of 1 unit.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a pointer to the link to add to the traversal </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jointToParent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a pointer to the joint that connects the added link to its parent in this traversal </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">parentLink</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a pointer to the parent on this link in this traversal. It should be a link already contained in this traversal. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="181" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Traversal_1afe6e4f14929306f0246609666bf7c53c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Traversal::isParentOf</definition>
+        <argsstring>(const LinkIndex parentCandidate, const LinkIndex childCandidate) const</argsstring>
+        <name>isParentOf</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parentCandidate</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>childCandidate</declname>
+        </param>
+        <briefdescription>
+<para>Check if a link is the parent of another link for this traversal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">parentCandidate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the link candidate to be the parent of childCandidate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">childCandidate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the link candidate to be a child of parentCandidate. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if parentCandidate is actually the parent of childCandidate, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="193" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Traversal_1af511b057b56553be5db56e34ca17c9a9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::Traversal::getChildLinkIndexFromJointIndex</definition>
+        <argsstring>(const Model &amp;model, const JointIndex jntIdx) const</argsstring>
+        <name>getChildLinkIndexFromJointIndex</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const JointIndex</type>
+          <declname>jntIdx</declname>
+        </param>
+        <briefdescription>
+<para>Get the child link (according to the traversal) of a Joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">m_model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the considered model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jntIdx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the index of the joint of which we want to get the child link. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the index of the child link if all went well, LINK_INVALID_INDEX otherwise . </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="202" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Traversal_1a7c82fa00d69ac54fefdd89abcf1b2a5f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::Traversal::getParentLinkIndexFromJointIndex</definition>
+        <argsstring>(const Model &amp;model, const JointIndex jntIdx) const</argsstring>
+        <name>getParentLinkIndexFromJointIndex</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const JointIndex</type>
+          <declname>jntIdx</declname>
+        </param>
+        <briefdescription>
+<para>Get the parent link (according to the traversal) of a Joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">m_model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the considered model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jntIdx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the index of the joint of which we want to get the parent link. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the index of the parent link if all went well, LINK_INVALID_INDEX otherwise . </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="211" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Traversal_1a46e66828b90f0455f3fc4c00fd112411" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::Traversal::toString</definition>
+        <argsstring>(const Model &amp;model) const</argsstring>
+        <name>toString</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Return a human-readable representation of the traversal. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Traversal.h" line="216" column="21"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class that represents a traversal of a set of links of a <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The traversal is represented by an ordered vector of links. For a given model, the traversal is always built in such a way that there exist a spanning tree that has as a root the first link (with traversal index 0) of the traversal, and such that every link comes after its spanning tree parent.</para>
+<para>For every link in the traversal are provided:<itemizedlist>
+<listitem><para>a pointer to the link itself</para>
+</listitem><listitem><para>a pointer to the parent link in the spanning tree</para>
+</listitem><listitem><para>a pointer to the joint connecting the link to the parent</para>
+</listitem></itemizedlist>
+</para>
+<para>For the first link of the traversal (i.e. base of the traversal) there is not spanning tree parent, so the point to the parent link/joint are NULL. </para>
+    </detaileddescription>
+    <location file="iDynTree/Model/Traversal.h" line="43" column="5" bodyfile="iDynTree/Model/Traversal.h" bodystart="44" bodyend="218"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1Traversal_1a3f59fac9f81f21568320ee3d2e803e80" prot="public" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>addTraversalBase</name></member>
+      <member refid="classiDynTree_1_1Traversal_1a83d3620b6f58c32789e9911c37a9618d" prot="public" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>addTraversalElement</name></member>
+      <member refid="classiDynTree_1_1Traversal_1a4dc1f2a88ab51dc42dc7f89fab39d235" prot="public" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>getBaseLink</name></member>
+      <member refid="classiDynTree_1_1Traversal_1af511b057b56553be5db56e34ca17c9a9" prot="public" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>getChildLinkIndexFromJointIndex</name></member>
+      <member refid="classiDynTree_1_1Traversal_1a5ab819796b110f8b2026aeb9d63af2fc" prot="public" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>getLink</name></member>
+      <member refid="classiDynTree_1_1Traversal_1a9399131b8326438aa1b669b5a44fb720" prot="public" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>getNrOfVisitedLinks</name></member>
+      <member refid="classiDynTree_1_1Traversal_1a1b677cb37a12edc52a2255dc630b03bd" prot="public" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>getParentJoint</name></member>
+      <member refid="classiDynTree_1_1Traversal_1af337bfb778303028fca6637f99dd54d2" prot="public" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>getParentJointFromLinkIndex</name></member>
+      <member refid="classiDynTree_1_1Traversal_1a098638f9c2519ffed4bd2afdbf800eba" prot="public" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>getParentLink</name></member>
+      <member refid="classiDynTree_1_1Traversal_1ad0d0137c30e0162f94b81f7dcde44f5f" prot="public" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>getParentLinkFromLinkIndex</name></member>
+      <member refid="classiDynTree_1_1Traversal_1a7c82fa00d69ac54fefdd89abcf1b2a5f" prot="public" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>getParentLinkIndexFromJointIndex</name></member>
+      <member refid="classiDynTree_1_1Traversal_1a34685ec218439e50f5c69979eccf1a0b" prot="public" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>getTraversalIndexFromLinkIndex</name></member>
+      <member refid="classiDynTree_1_1Traversal_1afe6e4f14929306f0246609666bf7c53c" prot="public" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>isParentOf</name></member>
+      <member refid="classiDynTree_1_1Traversal_1ad39f554385ae05abbc7ba59ca65662dc" prot="private" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>linkIndexToTraversalIndex</name></member>
+      <member refid="classiDynTree_1_1Traversal_1afa7f5826509aa0c4c8251d52764ed3a9" prot="private" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>links</name></member>
+      <member refid="classiDynTree_1_1Traversal_1ab66800da2bc0b6dff8bc44142a212ba7" prot="private" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1Traversal_1a1f6041d6cd6979509cff97cbebb2d74b" prot="private" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>parents</name></member>
+      <member refid="classiDynTree_1_1Traversal_1a3805f4b2d3ced7e603919e96520dfa14" prot="public" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>reset</name></member>
+      <member refid="classiDynTree_1_1Traversal_1a50152ca9efd43c153817875717868c01" prot="public" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>reset</name></member>
+      <member refid="classiDynTree_1_1Traversal_1ac757e3901013df9b3ae714d7be572a41" prot="private" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>toParentJoints</name></member>
+      <member refid="classiDynTree_1_1Traversal_1a46e66828b90f0455f3fc4c00fd112411" prot="public" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>toString</name></member>
+      <member refid="classiDynTree_1_1Traversal_1a1ec59e52bbb337808e95102b1b56e1b8" prot="private" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>Traversal</name></member>
+      <member refid="classiDynTree_1_1Traversal_1ae4970440869a8eb807f960325524e6e9" prot="public" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>Traversal</name></member>
+      <member refid="classiDynTree_1_1Traversal_1a70220dfc59ce52d03d330e4fed7f11da" prot="public" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>~Traversal</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

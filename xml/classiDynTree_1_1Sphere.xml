@@ -1,0 +1,141 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1Sphere" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::Sphere</compoundname>
+    <basecompoundref refid="classiDynTree_1_1SolidShape" prot="public" virt="non-virtual">iDynTree::SolidShape</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1Sphere_1ab5bea69eecc9147f77ac2defcdfe1442" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::Sphere::radius</definition>
+        <argsstring></argsstring>
+        <name>radius</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="148" column="16" bodyfile="iDynTree/Model/SolidShapes.h" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1Sphere_1ac321c9308a1023e7f0e51cc5d9a325ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::Sphere::~Sphere</definition>
+        <argsstring>()</argsstring>
+        <name>~Sphere</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="133" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Sphere_1ae179a7e32a293586ff3e27e28858bc5f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1SolidShape" kindref="compound">SolidShape</ref> *</type>
+        <definition>virtual SolidShape* iDynTree::Sphere::clone</definition>
+        <argsstring>()</argsstring>
+        <name>clone</name>
+        <reimplements refid="classiDynTree_1_1SolidShape_1a0e17798de0579d18260b629fdd8b09a8">clone</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="135" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Sphere_1a93470b75fe93a3066be33307aaf7d918" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::Sphere::getRadius</definition>
+        <argsstring>() const</argsstring>
+        <name>getRadius</name>
+        <briefdescription>
+<para>Returns the current radius. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="140" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Sphere_1a9b7ad07891cd9b85fb3648b05b97e63b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::Sphere::setRadius</definition>
+        <argsstring>(double radius)</argsstring>
+        <name>setRadius</name>
+        <param>
+          <type>double</type>
+          <declname>radius</declname>
+        </param>
+        <briefdescription>
+<para>Sets the new radius. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="145" column="14"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::Sphere</label>
+        <link refid="classiDynTree_1_1Sphere"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::SolidShape</label>
+        <link refid="classiDynTree_1_1SolidShape"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>iDynTree::Sphere</label>
+        <link refid="classiDynTree_1_1Sphere"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::SolidShape</label>
+        <link refid="classiDynTree_1_1SolidShape"/>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Model/SolidShapes.h" line="130" column="5" bodyfile="iDynTree/Model/SolidShapes.h" bodystart="131" bodyend="149"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1SolidShape_1a9d8ee4804ecf2c25181a65f1f44b9a3b" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>asBox</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a1249bfe8e2fefc34b749c7878b83e462" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>asBox</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a0afa36f27380de580ca2d37ae79d66dc" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>asCylinder</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1aa7d4851d00a44b21e87d85ecfe4ece4c" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>asCylinder</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1abce98ace11abc423faab5418fe74b72a" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>asExternalMesh</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a18dc4e95d85822018507b4a813f69340" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>asExternalMesh</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1afb0d282d22dce28a6f45de0c1d81d494" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>asSphere</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a01f73fdb47553ba4f1d817a6feb6beef" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>asSphere</name></member>
+      <member refid="classiDynTree_1_1Sphere_1ae179a7e32a293586ff3e27e28858bc5f" prot="public" virt="virtual"><scope>iDynTree::Sphere</scope><name>clone</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1adf7c9968426d13ca501bf91eb3440d65" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>getLink_H_geometry</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a4b0b5a8cc055ce533bbd79f804bae432" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>getMaterial</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a0c3339721b95e2e969f7725d21c25e40" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>getName</name></member>
+      <member refid="classiDynTree_1_1Sphere_1a93470b75fe93a3066be33307aaf7d918" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>getRadius</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a661c33c6139a4cde9c9eeb55ebcd915e" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>isBox</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a8218783b444c4f651ebc5517399a04bd" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>isCylinder</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1aeef66627d452a2b192c9d62ac6e6b908" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>isExternalMesh</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a79698fa4e4ec3278dcb1f22dfaee0c04" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>isMaterialSet</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1ad0773a7e9c79fb39689fe57776c6f8b3" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>isNameValid</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a8ba065f0e60ad78baad071a3a870faf6" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>isSphere</name></member>
+      <member refid="classiDynTree_1_1Sphere_1ab5bea69eecc9147f77ac2defcdfe1442" prot="private" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>radius</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a99c8cb2ba950c03a59302428fc52cf30" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>setLink_H_geometry</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a0a3a0215c4d1d729e3dfb284232037fe" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>setMaterial</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a6850e739d426711814a1563fea31bce3" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>setName</name></member>
+      <member refid="classiDynTree_1_1Sphere_1a9b7ad07891cd9b85fb3648b05b97e63b" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>setRadius</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a3c9b74bfd7460cce67d604f66517a44c" prot="public" virt="non-virtual"><scope>iDynTree::Sphere</scope><name>SolidShape</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a3ed24e3713a3832408ee0ee8b95dfa82" prot="public" virt="pure-virtual"><scope>iDynTree::Sphere</scope><name>~SolidShape</name></member>
+      <member refid="classiDynTree_1_1Sphere_1ac321c9308a1023e7f0e51cc5d9a325ba" prot="public" virt="virtual"><scope>iDynTree::Sphere</scope><name>~Sphere</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

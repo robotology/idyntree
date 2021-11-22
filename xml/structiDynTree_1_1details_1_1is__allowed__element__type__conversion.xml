@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1details_1_1is__allowed__element__type__conversion" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::details::is_allowed_element_type_conversion</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::integral_constant&lt; bool, std::is_convertible&lt; From(*)[], To(*)[]&gt;::value &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>class From</type>
+      </param>
+      <param>
+        <type>class To</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::details::is_allowed_element_type_conversion&lt; From, To &gt;</label>
+        <link refid="structiDynTree_1_1details_1_1is__allowed__element__type__conversion"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::integral_constant&lt; bool, std::is_convertible&lt; From(*)[], To(*)[]&gt;::value &gt;</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>iDynTree::details::is_allowed_element_type_conversion&lt; From, To &gt;</label>
+        <link refid="structiDynTree_1_1details_1_1is__allowed__element__type__conversion"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::integral_constant&lt; bool, std::is_convertible&lt; From(*)[], To(*)[]&gt;::value &gt;</label>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Core/Span.h" line="176" column="5" bodyfile="iDynTree/Core/Span.h" bodystart="178" bodyend="179"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

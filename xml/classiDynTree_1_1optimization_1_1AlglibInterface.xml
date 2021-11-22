@@ -1,0 +1,363 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimization_1_1AlglibInterface" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::optimization::AlglibInterface</compoundname>
+    <basecompoundref refid="classiDynTree_1_1optimization_1_1Optimizer" prot="public" virt="non-virtual">iDynTree::optimization::Optimizer</basecompoundref>
+    <includes local="no">iDynTree/Optimizers/AlglibInterface.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1optimization_1_1AlglibInterface_1a8d0f6d0f6bf2f589a9f3cddd2a74f7b5" prot="private" static="no" mutable="no">
+        <type>AlglibInterfaceImplementation *</type>
+        <definition>AlglibInterfaceImplementation* iDynTree::optimization::AlglibInterface::m_pimpl</definition>
+        <argsstring></argsstring>
+        <name>m_pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="36" column="43" bodyfile="iDynTree/Optimizers/AlglibInterface.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1af0ff7776b5d9cd8a0d5df7c5ade10f00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimization::AlglibInterface::AlglibInterface</definition>
+        <argsstring>()</argsstring>
+        <name>AlglibInterface</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="40" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1ac4f37167d1e64a8e1aa6306afd0c52e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimization::AlglibInterface::AlglibInterface</definition>
+        <argsstring>(const AlglibInterface &amp;other)=delete</argsstring>
+        <name>AlglibInterface</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimization_1_1AlglibInterface" kindref="compound">AlglibInterface</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="42" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1ac698d9589486cbb49f17491f687ce60a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::optimization::AlglibInterface::~AlglibInterface</definition>
+        <argsstring>() override</argsstring>
+        <name>~AlglibInterface</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="44" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1a80ad087c14b3239acb961d927b6083cd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::AlglibInterface::isAvailable</definition>
+        <argsstring>() const override</argsstring>
+        <name>isAvailable</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1ac9b2386bef738ad45761103ffa0eed57">isAvailable</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="46" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1a1dc44d7ecc5a6471d7bc917ecefb93a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::AlglibInterface::setProblem</definition>
+        <argsstring>(std::shared_ptr&lt; OptimizationProblem &gt; problem) override</argsstring>
+        <name>setProblem</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1a757c3b55008f047dfe23171c9c462d66">setProblem</reimplements>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimization_1_1OptimizationProblem" kindref="compound">OptimizationProblem</ref> &gt;</type>
+          <declname>problem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="48" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1ac0ad93f0388c0e5e6cd056e78cda394d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::AlglibInterface::solve</definition>
+        <argsstring>() override</argsstring>
+        <name>solve</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1abbb92fc315d49718abffa88b55da1b70">solve</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="50" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1ad7dd69a482d4bc1089a3fed7513a3f1e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::AlglibInterface::getPrimalVariables</definition>
+        <argsstring>(VectorDynSize &amp;primalVariables) override</argsstring>
+        <name>getPrimalVariables</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1ad6e6de7d98cce8509efb08489d26ba83">getPrimalVariables</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>primalVariables</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="52" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1ab801617d62df843d5dcf17f9be66dade" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::AlglibInterface::getDualVariables</definition>
+        <argsstring>(VectorDynSize &amp;constraintsMultipliers, VectorDynSize &amp;lowerBoundsMultipliers, VectorDynSize &amp;upperBoundsMultipliers) override</argsstring>
+        <name>getDualVariables</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1a6b0a3443c0e2f8143a12119093c9338a">getDualVariables</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>constraintsMultipliers</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>lowerBoundsMultipliers</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>upperBoundsMultipliers</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="54" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1a2eb7870523596630e3227139aa156ca3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::AlglibInterface::getOptimalCost</definition>
+        <argsstring>(double &amp;optimalCost) override</argsstring>
+        <name>getOptimalCost</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1a37dfe08c5fd7e4ca9a2509681b2c638e">getOptimalCost</reimplements>
+        <param>
+          <type>double &amp;</type>
+          <declname>optimalCost</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="58" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1a1dd9be58967c3aec2cb3dd4d4c20c6d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::AlglibInterface::getOptimalConstraintsValues</definition>
+        <argsstring>(VectorDynSize &amp;constraintsValues) override</argsstring>
+        <name>getOptimalConstraintsValues</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1a9525d85cf2e4079d22670a25d4413564">getOptimalConstraintsValues</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>constraintsValues</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="60" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1a8069547af492b5083bc1466e0177bc4b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::optimization::AlglibInterface::minusInfinity</definition>
+        <argsstring>() override</argsstring>
+        <name>minusInfinity</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1a1f41f893f91cb2ab20df84460cec14ad">minusInfinity</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="62" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1a41214364444e99a8d6ef2b851dad8178" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::optimization::AlglibInterface::plusInfinity</definition>
+        <argsstring>() override</argsstring>
+        <name>plusInfinity</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1af951a371f7556a9551cd97177cb4c5e2">plusInfinity</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="64" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1a4ad21bf2abc77e0922703e4abe4c5872" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::AlglibInterface::setRHO</definition>
+        <argsstring>(double rho)</argsstring>
+        <name>setRHO</name>
+        <param>
+          <type>double</type>
+          <declname>rho</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="68" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1ae905e002bdf61fa04658aa37ba744df1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::AlglibInterface::setOuterIterations</definition>
+        <argsstring>(unsigned int outerIterations)</argsstring>
+        <name>setOuterIterations</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>outerIterations</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="72" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1afcd881d4d01f47a54b6dde187bc6e3bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::AlglibInterface::setStoppingCondition</definition>
+        <argsstring>(double epsX)</argsstring>
+        <name>setStoppingCondition</name>
+        <param>
+          <type>double</type>
+          <declname>epsX</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="76" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1a70134b5ad77e1cc3b4b8be78c4473efb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::AlglibInterface::setMaximumIterations</definition>
+        <argsstring>(unsigned int maxIter)</argsstring>
+        <name>setMaximumIterations</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>maxIter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="78" column="18"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::optimization::AlglibInterface</label>
+        <link refid="classiDynTree_1_1optimization_1_1AlglibInterface"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::optimization::Optimizer</label>
+        <link refid="classiDynTree_1_1optimization_1_1Optimizer"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>T</label>
+      </node>
+      <node id="4">
+        <label>std::shared_ptr&lt; T &gt;</label>
+        <childnode refid="5" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::optimization::AlglibInterface</label>
+        <link refid="classiDynTree_1_1optimization_1_1AlglibInterface"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::optimization::Optimizer</label>
+        <link refid="classiDynTree_1_1optimization_1_1Optimizer"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_problem</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::shared_ptr&lt; iDynTree::optimization::OptimizationProblem &gt;</label>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; iDynTree::optimization::OptimizationProblem &gt;</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Optimizers/AlglibInterface.h" line="33" column="9" bodyfile="iDynTree/Optimizers/AlglibInterface.h" bodystart="33" bodyend="80"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimization_1_1AlglibInterface_1af0ff7776b5d9cd8a0d5df7c5ade10f00" prot="public" virt="non-virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>AlglibInterface</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1AlglibInterface_1ac4f37167d1e64a8e1aa6306afd0c52e0" prot="public" virt="non-virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>AlglibInterface</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1AlglibInterface_1ab801617d62df843d5dcf17f9be66dade" prot="public" virt="virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>getDualVariables</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1AlglibInterface_1a1dd9be58967c3aec2cb3dd4d4c20c6d8" prot="public" virt="virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>getOptimalConstraintsValues</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1AlglibInterface_1a2eb7870523596630e3227139aa156ca3" prot="public" virt="virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>getOptimalCost</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1AlglibInterface_1ad7dd69a482d4bc1089a3fed7513a3f1e" prot="public" virt="virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>getPrimalVariables</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1AlglibInterface_1a80ad087c14b3239acb961d927b6083cd" prot="public" virt="virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>isAvailable</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1AlglibInterface_1a8d0f6d0f6bf2f589a9f3cddd2a74f7b5" prot="private" virt="non-virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>m_pimpl</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1Optimizer_1ae3b9609d905cbbf3c3336c9350e94106" prot="protected" virt="non-virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>m_problem</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1AlglibInterface_1a8069547af492b5083bc1466e0177bc4b" prot="public" virt="virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>minusInfinity</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1Optimizer_1a5fb8e46345b5804f1ab7dbbf024f031c" prot="public" virt="non-virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>Optimizer</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1AlglibInterface_1a41214364444e99a8d6ef2b851dad8178" prot="public" virt="virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>plusInfinity</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1Optimizer_1a92b81ff66dc4353fac014fa2e9dfb8e6" prot="public" virt="virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>problem</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1AlglibInterface_1a70134b5ad77e1cc3b4b8be78c4473efb" prot="public" virt="non-virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>setMaximumIterations</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1AlglibInterface_1ae905e002bdf61fa04658aa37ba744df1" prot="public" virt="non-virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>setOuterIterations</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1AlglibInterface_1a1dc44d7ecc5a6471d7bc917ecefb93a6" prot="public" virt="virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>setProblem</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1AlglibInterface_1a4ad21bf2abc77e0922703e4abe4c5872" prot="public" virt="non-virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>setRHO</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1AlglibInterface_1afcd881d4d01f47a54b6dde187bc6e3bb" prot="public" virt="non-virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>setStoppingCondition</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1AlglibInterface_1ac0ad93f0388c0e5e6cd056e78cda394d" prot="public" virt="virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>solve</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1AlglibInterface_1ac698d9589486cbb49f17491f687ce60a" prot="public" virt="virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>~AlglibInterface</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1Optimizer_1abdd338c79ca8ce065fe06006e40249c1" prot="public" virt="virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>~Optimizer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

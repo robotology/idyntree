@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1JointSensor" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::JointSensor</compoundname>
+    <basecompoundref refid="classiDynTree_1_1Sensor" prot="public" virt="non-virtual">iDynTree::Sensor</basecompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1SixAxisForceTorqueSensor" prot="public" virt="non-virtual">iDynTree::SixAxisForceTorqueSensor</derivedcompoundref>
+    <includes local="no">iDynTree/Sensors/Sensors.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1JointSensor_1a4ff2c2edf719eb932d8c91d36fbed30a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type></type>
+        <definition>virtual iDynTree::JointSensor::~JointSensor</definition>
+        <argsstring>()=0</argsstring>
+        <name>~JointSensor</name>
+        <briefdescription>
+<para>Virtual destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="160" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1JointSensor_1a977c869c83855c1373687ef937ff32c4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>std::string</type>
+        <definition>virtual std::string iDynTree::JointSensor::getParentJoint</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getParentJoint</name>
+        <reimplementedby refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a1dd7d0316793878dac193ebb161879c0">getParentJoint</reimplementedby>
+        <briefdescription>
+<para>Get the name of the parent Joint. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="165" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1JointSensor_1a790a9ef4888573d0a1c49d2b18330263" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>JointIndex</type>
+        <definition>virtual JointIndex iDynTree::JointSensor::getParentJointIndex</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getParentJointIndex</name>
+        <reimplementedby refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a3bd2224408b97f1c55aa004804b1236e">getParentJointIndex</reimplementedby>
+        <briefdescription>
+<para>Get the numeric index of the parent of the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Depending on the type of the sensor, the parent could be a Junction or a <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref>.</para>
+<para><simplesect kind="return"><para>the index of the parent (Junction or <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref>) of the sensor. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="174" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1JointSensor_1a132037b450bd1e276d123066560de435" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::JointSensor::setParentJoint</definition>
+        <argsstring>(const std::string &amp;parentJointName)=0</argsstring>
+        <name>setParentJoint</name>
+        <reimplementedby refid="classiDynTree_1_1SixAxisForceTorqueSensor_1afa9c0da7093f9509d3ca71c6d3079a34">setParentJoint</reimplementedby>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>parentJointName</declname>
+        </param>
+        <briefdescription>
+<para>Set the name of the parent Joint. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="179" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1JointSensor_1a1a2b30a0aaa2c21e8362ecfa94e3d960" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::JointSensor::setParentJointIndex</definition>
+        <argsstring>(const JointIndex &amp;)=0</argsstring>
+        <name>setParentJointIndex</name>
+        <reimplementedby refid="classiDynTree_1_1SixAxisForceTorqueSensor_1a9587c186d30f878760f43fc932675fe7">setParentJointIndex</reimplementedby>
+        <param>
+          <type>const JointIndex &amp;</type>
+        </param>
+        <briefdescription>
+<para>Set the numeric index of the parent joint of the sensor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="184" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1JointSensor_1ac71c4fca8476a8af346c5ecfee83a7e9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::JointSensor::isConsistent</definition>
+        <argsstring>(const Model &amp;model) const</argsstring>
+        <name>isConsistent</name>
+        <reimplements refid="classiDynTree_1_1Sensor_1a247d7d8b8dcdf828cf7172aabf05457c">isConsistent</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Check if the sensor is consistent with the specified model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/Sensors.h" line="189" column="22"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Interface for <ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> that are associated to a Joint. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>All joint sensor classes inherit from this base class. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::JointSensor</label>
+        <link refid="classiDynTree_1_1JointSensor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::Sensor</label>
+        <link refid="classiDynTree_1_1Sensor"/>
+      </node>
+      <node id="3">
+        <label>iDynTree::SixAxisForceTorqueSensor</label>
+        <link refid="classiDynTree_1_1SixAxisForceTorqueSensor"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>iDynTree::JointSensor</label>
+        <link refid="classiDynTree_1_1JointSensor"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::Sensor</label>
+        <link refid="classiDynTree_1_1Sensor"/>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Sensors/Sensors.h" line="154" column="5" bodyfile="iDynTree/Sensors/Sensors.h" bodystart="155" bodyend="190"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1Sensor_1a6428f5534e54c607bc5e773073c6c50e" prot="public" virt="pure-virtual"><scope>iDynTree::JointSensor</scope><name>clone</name></member>
+      <member refid="classiDynTree_1_1Sensor_1a4a62adb1d4c1e4bedca8762783ab0468" prot="public" virt="pure-virtual"><scope>iDynTree::JointSensor</scope><name>getName</name></member>
+      <member refid="classiDynTree_1_1JointSensor_1a977c869c83855c1373687ef937ff32c4" prot="public" virt="pure-virtual"><scope>iDynTree::JointSensor</scope><name>getParentJoint</name></member>
+      <member refid="classiDynTree_1_1JointSensor_1a790a9ef4888573d0a1c49d2b18330263" prot="public" virt="pure-virtual"><scope>iDynTree::JointSensor</scope><name>getParentJointIndex</name></member>
+      <member refid="classiDynTree_1_1Sensor_1a6dd712921c150fddd33217694feb3652" prot="public" virt="pure-virtual"><scope>iDynTree::JointSensor</scope><name>getSensorType</name></member>
+      <member refid="classiDynTree_1_1JointSensor_1ac71c4fca8476a8af346c5ecfee83a7e9" prot="public" virt="virtual"><scope>iDynTree::JointSensor</scope><name>isConsistent</name></member>
+      <member refid="classiDynTree_1_1Sensor_1ace89679ad53fd11326ec00dc82ebd925" prot="public" virt="pure-virtual"><scope>iDynTree::JointSensor</scope><name>isValid</name></member>
+      <member refid="classiDynTree_1_1Sensor_1a40cafcac5f0c1567e44d53c775641818" prot="public" virt="pure-virtual"><scope>iDynTree::JointSensor</scope><name>setName</name></member>
+      <member refid="classiDynTree_1_1JointSensor_1a132037b450bd1e276d123066560de435" prot="public" virt="pure-virtual"><scope>iDynTree::JointSensor</scope><name>setParentJoint</name></member>
+      <member refid="classiDynTree_1_1JointSensor_1a1a2b30a0aaa2c21e8362ecfa94e3d960" prot="public" virt="pure-virtual"><scope>iDynTree::JointSensor</scope><name>setParentJointIndex</name></member>
+      <member refid="classiDynTree_1_1Sensor_1ae91fc5a5922a99815b0cdc9de9f1ac88" prot="public" virt="pure-virtual"><scope>iDynTree::JointSensor</scope><name>updateIndices</name></member>
+      <member refid="classiDynTree_1_1JointSensor_1a4ff2c2edf719eb932d8c91d36fbed30a" prot="public" virt="pure-virtual"><scope>iDynTree::JointSensor</scope><name>~JointSensor</name></member>
+      <member refid="classiDynTree_1_1Sensor_1ab47aa38253b58f2a1c537e5956684e47" prot="public" virt="pure-virtual"><scope>iDynTree::JointSensor</scope><name>~Sensor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

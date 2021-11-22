@@ -1,0 +1,1068 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1FixedJoint" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::FixedJoint</compoundname>
+    <basecompoundref refid="classiDynTree_1_1IJoint" prot="public" virt="non-virtual">iDynTree::IJoint</basecompoundref>
+    <includes local="no">iDynTree/Model/FixedJoint.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1FixedJoint_1a12646ce63f11cc02abde41fe13e1487f" prot="private" static="no" mutable="no">
+        <type>JointIndex</type>
+        <definition>JointIndex iDynTree::FixedJoint::m_index</definition>
+        <argsstring></argsstring>
+        <name>m_index</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="29" column="21" bodyfile="iDynTree/Model/FixedJoint.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1FixedJoint_1a3f18fa59745d646643153a82e76ccb24" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t iDynTree::FixedJoint::m_posCoordsOffset</definition>
+        <argsstring></argsstring>
+        <name>m_posCoordsOffset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="30" column="21" bodyfile="iDynTree/Model/FixedJoint.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1FixedJoint_1a107a14ac433c9d562a48ccc188701dff" prot="private" static="no" mutable="no">
+        <type>std::size_t</type>
+        <definition>std::size_t iDynTree::FixedJoint::m_DOFsOffset</definition>
+        <argsstring></argsstring>
+        <name>m_DOFsOffset</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="31" column="21" bodyfile="iDynTree/Model/FixedJoint.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1FixedJoint_1a64782f86c39d8ac5ef97fb3225272c51" prot="private" static="no" mutable="no">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::FixedJoint::link1</definition>
+        <argsstring></argsstring>
+        <name>link1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="32" column="19" bodyfile="iDynTree/Model/FixedJoint.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1FixedJoint_1a6e5c06528bbbfc6153337a081b23c38d" prot="private" static="no" mutable="no">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::FixedJoint::link2</definition>
+        <argsstring></argsstring>
+        <name>link2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="33" column="19" bodyfile="iDynTree/Model/FixedJoint.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1FixedJoint_1a850bac913ec25cab817c88cd0f630b99" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>Transform iDynTree::FixedJoint::link1_X_link2</definition>
+        <argsstring></argsstring>
+        <name>link1_X_link2</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="34" column="19" bodyfile="iDynTree/Model/FixedJoint.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1FixedJoint_1acdebb8061da99da30f832789149f215a" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>Transform iDynTree::FixedJoint::link2_X_link1</definition>
+        <argsstring></argsstring>
+        <name>link2_X_link1</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="35" column="19" bodyfile="iDynTree/Model/FixedJoint.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1abddfe9fab44759169c3fc0b0836e3581" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::FixedJoint::FixedJoint</definition>
+        <argsstring>()</argsstring>
+        <name>FixedJoint</name>
+        <briefdescription>
+<para>Default constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The joint is initialized with an Identity rest transform. You can call setRestTransform to set the rest transform at a second stage. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="45" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a0cfd93dca7169f99a116c46270432b9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::FixedJoint::FixedJoint</definition>
+        <argsstring>(const LinkIndex link1, const LinkIndex link2, const Transform &amp;link1_X_link2)</argsstring>
+        <name>FixedJoint</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link1</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link2</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>link1_X_link2</declname>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="50" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a2d8b3c4a9c19bf932775d5a83d7d2c67" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::FixedJoint::FixedJoint</definition>
+        <argsstring>(const Transform &amp;link1_X_link2)</argsstring>
+        <name>FixedJoint</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>link1_X_link2</declname>
+        </param>
+        <briefdescription>
+<para>Constructor in which the LinkIndex to which the joint is attached are not specified. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This constructor is tipically used together with the <ref refid="classiDynTree_1_1Model_1aaead8cb8c5367589131a877ea121c573" kindref="member">Model::addJoint</ref> or <ref refid="classiDynTree_1_1Model_1a764763adb198032da5bdfcfc5f6a0748" kindref="member">Model::addJointAndLink</ref> methods, in which the links to which the joint is attached are specified by the other arguments of the method. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="59" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1aa625db20fbc6f0683efe90b49ee8f9be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::FixedJoint::FixedJoint</definition>
+        <argsstring>(const FixedJoint &amp;other)</argsstring>
+        <name>FixedJoint</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1FixedJoint" kindref="compound">FixedJoint</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Copy constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="64" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a77f5cd096856c52a5694b7431d743d35" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::FixedJoint::~FixedJoint</definition>
+        <argsstring>()</argsstring>
+        <name>~FixedJoint</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="69" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ae7ca38464efead3a54939a67e7e45077" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1IJoint" kindref="compound">IJoint</ref> *</type>
+        <definition>virtual IJoint* iDynTree::FixedJoint::clone</definition>
+        <argsstring>() const</argsstring>
+        <name>clone</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a021ac00a8b2e9e519f930baad1bc1fa2">clone</reimplements>
+        <briefdescription>
+<para>Clone the joint object. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="72" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a465ef7c7fa02bc8a571b57a60f4b14b6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>unsigned int</type>
+        <definition>virtual unsigned int iDynTree::FixedJoint::getNrOfPosCoords</definition>
+        <argsstring>() const</argsstring>
+        <name>getNrOfPosCoords</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a149ddcf05f6328fdd3ecbe38a0fca4a0">getNrOfPosCoords</reimplements>
+        <briefdescription>
+<para>Get the number of coordinates used to represent the position of the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For joints whose configuration is in R^n, the number of position coordinates should match the number of degrees of freedom of the joint.</para>
+<para><simplesect kind="return"><para>the number of position coordinates. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="75" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a1970824dcfc4876b8258fce6ccf6843b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>unsigned int</type>
+        <definition>virtual unsigned int iDynTree::FixedJoint::getNrOfDOFs</definition>
+        <argsstring>() const</argsstring>
+        <name>getNrOfDOFs</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a83027b41a495e097b8cf534059516440">getNrOfDOFs</reimplements>
+        <briefdescription>
+<para>Get the number of degrees of freedom of the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This should be a number between 0 (fixed joint) and 6 (free joint).</para>
+<para><simplesect kind="return"><para>the number of degrees of freedom of the joint. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="78" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a252dce83332fd752932d3c112512a733" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::FixedJoint::setAttachedLinks</definition>
+        <argsstring>(const LinkIndex link1, const LinkIndex link2)</argsstring>
+        <name>setAttachedLinks</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1aafd1101e91ea337a451d62f0160a819c">setAttachedLinks</reimplements>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link1</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link2</declname>
+        </param>
+        <briefdescription>
+<para>Set the two links at which the joint is attached. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>link1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the first link </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>link2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>is the second link </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="81" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a1d24cec7f90a2b916a9f3ed7d3d49dab" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::FixedJoint::setRestTransform</definition>
+        <argsstring>(const Transform &amp;link1_X_link2)</argsstring>
+        <name>setRestTransform</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a770aadc1a6e13bce3af213707fcf2d84">setRestTransform</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>link1_X_link2</declname>
+        </param>
+        <briefdescription>
+<para>Set the transform between the link2 frame and link1 frame at joint position 0 (or at the identity configuration element for complex joints). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The link1_T_link2 is transform that transforms a quantity expressed in link2 frame in a quantity expressed in the link1 frame, when the joint is in the 0 position : p_link1 = link1_T_link2*p_link2 . </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="84" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a826fcc8006393854c2309de92d3fbef2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>LinkIndex</type>
+        <definition>virtual LinkIndex iDynTree::FixedJoint::getFirstAttachedLink</definition>
+        <argsstring>() const</argsstring>
+        <name>getFirstAttachedLink</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1abe3efda09a0c3d94c021891de447aaa8">getFirstAttachedLink</reimplements>
+        <briefdescription>
+<para>Get the first link attached to the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="87" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ac7311235bf7b08357a153c1321bed081" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>LinkIndex</type>
+        <definition>virtual LinkIndex iDynTree::FixedJoint::getSecondAttachedLink</definition>
+        <argsstring>() const</argsstring>
+        <name>getSecondAttachedLink</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a1c55168bcc2dbd7b1fd58737a6bb46d8">getSecondAttachedLink</reimplements>
+        <briefdescription>
+<para>Get the second link attached to the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="90" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a11d92b8cc4f0df088f0eb972e9c70b63" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>virtual Transform iDynTree::FixedJoint::getRestTransform</definition>
+        <argsstring>(const LinkIndex child, const LinkIndex parent) const</argsstring>
+        <name>getRestTransform</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a7b6fb4c82687601810f3696e9605f1e0">getRestTransform</reimplements>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Get the transform between the link parent and the link child at joint position 0 (or at the identity configuration element for complex joints). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Such that: p_child = child_H_parent*p_parent where p_child is a quantity expressed in the child frame, and p_parent is a quantity expressed in the child frame. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="93" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a09dddd2e6d0fc043c6ffa0681b15404c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+        <definition>virtual const Transform&amp; iDynTree::FixedJoint::getTransform</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const LinkIndex child, const LinkIndex parent) const</argsstring>
+        <name>getTransform</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a2b0c23cad4da4e748ecdaf009805f767">getTransform</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Get the transform between the parent and the child, such that: p_child = child_H_parent*p_parent, where p_child is a quantity expressed in the child frame, and p_parent is a quantity expressed in the parent frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="98" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1aac231749bf30745780aec0d876fd82ed" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref></type>
+        <definition>TransformDerivative iDynTree::FixedJoint::getTransformDerivative</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const LinkIndex child, const LinkIndex parent, const int posCoord_i) const</argsstring>
+        <name>getTransformDerivative</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a0dd24dad1882bc1df35a1832275fbfbb">getTransformDerivative</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>posCoord_i</declname>
+        </param>
+        <briefdescription>
+<para>Get the derivative of the transform with respect to a position coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In particular, if the selected position coordinate is <formula id="19">$q$</formula>, return the derivative: <formula id="20">\[ \frac{\partial {}^\texttt{child} H_\texttt{parent} }{\partial q} \]</formula></para>
+<para>If posCoord_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a465ef7c7fa02bc8a571b57a60f4b14b6" kindref="member">getNrOfPosCoords()</ref>, the returned value is undefined. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="103" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1aa103b6aee2a08ed32b7688f01e3c10fe" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
+        <definition>virtual SpatialMotionVector iDynTree::FixedJoint::getMotionSubspaceVector</definition>
+        <argsstring>(int dof_i, const LinkIndex child, const LinkIndex parent) const</argsstring>
+        <name>getMotionSubspaceVector</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a3a89b6fd2358c8435e7f794d3857045f">getMotionSubspaceVector</reimplements>
+        <param>
+          <type>int</type>
+          <declname>dof_i</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Get the motion subspace vector corresponding to the i-th dof of the joint, i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>the i-th column of the motion subspace matrix. The motion subspace matrix is the matrix that maps the joint velocity to the relative twist between the two links.</para>
+<para>In particular the motion subspace vector of the i-th dof is the S vector such that v_child = S_{child,parent}*dq_i + child_X_parent*v_parent if the velocities associated to all other DOFs of the joint are considered zero, where v_child and v_parent are the left-trivialized (body) velocities of the link child and parent.</para>
+<para>See &quot;Modelling, Estimation and Identification of Humanoid Robots Dynamics&quot; Silvio Traversaro - Section 3.2 <ulink url="https://traversaro.github.io/preprints/traversaro-phd-thesis.pdf">https://traversaro.github.io/preprints/traversaro-phd-thesis.pdf</ulink> for more details.</para>
+<para><simplesect kind="return"><para>the motion subspace vector.</para>
+</simplesect>
+If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a1970824dcfc4876b8258fce6ccf6843b" kindref="member">getNrOfDOFs()</ref>, the returned value is undefined.</para>
+<para><simplesect kind="note"><para>The motion subspace matrix is also known in literature as hinge matrix, hinge map matrix, joint map matrix or joint motion map matrix. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="109" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a5b6ba1d1c8e77ba3a6b4e2c91078388c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::FixedJoint::computeChildPosVelAcc</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, const VectorDynSize &amp;jntAcc, LinkPositions &amp;linkPositions, LinkVelArray &amp;linkVels, LinkAccArray &amp;linkAccs, const LinkIndex child, const LinkIndex parent) const</argsstring>
+        <name>computeChildPosVelAcc</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1aa41dbb76816e2621d6924ca052b07881">computeChildPosVelAcc</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntAcc</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkPositions" kindref="compound">LinkPositions</ref> &amp;</type>
+          <declname>linkPositions</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVels</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
+          <declname>linkAccs</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Compute the position, velocity and acceleration of link child, given the position, velocty and acceleration of link parent and the joint position, velocity and acceleration. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The position, velocity and acceleration of link child are directly saved in the linkPositions, linkVels and linkAccs arguments. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="114" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1accd64e95d5df5c12cf0d15d71584cfd6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::FixedJoint::computeChildVelAcc</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, const VectorDynSize &amp;jntAcc, LinkVelArray &amp;linkVels, LinkAccArray &amp;linkAccs, const LinkIndex child, const LinkIndex parent) const</argsstring>
+        <name>computeChildVelAcc</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a6d0853757008a1db34d41da9276df81e">computeChildVelAcc</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntAcc</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVels</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
+          <declname>linkAccs</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Compute the velocity and acceleration of child, given the velocity and acceleration of parent and the joint position, velocity and acceleration. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="124" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1afb8391d3ca02525af959e282e9d914ae" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::FixedJoint::computeChildVel</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, LinkVelArray &amp;linkVels, const LinkIndex child, const LinkIndex parent) const</argsstring>
+        <name>computeChildVel</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a70c9055aafb46f65fe767664c873625e">computeChildVel</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntVel</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVels</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Compute the velocity of child, given the velocity of parent and the joint position, velocity. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="132" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1aa8a7f22a0c0211286337ad6618356f01" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::FixedJoint::computeChildAcc</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, const LinkVelArray &amp;linkVels, const VectorDynSize &amp;jntAcc, LinkAccArray &amp;linkAccs, const LinkIndex child, const LinkIndex parent) const</argsstring>
+        <name>computeChildAcc</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a65509300297221192cb46189b2a473d1">computeChildAcc</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVels</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntAcc</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
+          <declname>linkAccs</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Compute the (body-fixed) acceleration of a child link given the (body-fixed) acceleration of the parent. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="139" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a188836bc8b00a32bff5adbd1ac4549e8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::FixedJoint::computeChildBiasAcc</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const VectorDynSize &amp;jntVel, const LinkVelArray &amp;linkVels, LinkAccArray &amp;linkBiasAccs, const LinkIndex child, const LinkIndex parent) const</argsstring>
+        <name>computeChildBiasAcc</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a3c16a316f95e25ad0af2768cb4c991a3">computeChildBiasAcc</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntVel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref> &amp;</type>
+          <declname>linkVels</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref> &amp;</type>
+          <declname>linkBiasAccs</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>child</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+<para>Compute the (body-fixed) bias acceleration of a child link given the (body-fixed) bias acceleration of the parent. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="148" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a64f7e46c83d98bb5f533bee54346880a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::FixedJoint::computeJointTorque</definition>
+        <argsstring>(const VectorDynSize &amp;jntPos, const Wrench &amp;internalWrench, const LinkIndex linkThatAppliesWrench, const LinkIndex linkOnWhichWrenchIsApplied, VectorDynSize &amp;jntTorques) const</argsstring>
+        <name>computeJointTorque</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a495a50c9623710812f49cf6258ecb68e">computeJointTorque</reimplements>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntPos</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> &amp;</type>
+          <declname>internalWrench</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>linkThatAppliesWrench</declname>
+        </param>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>linkOnWhichWrenchIsApplied</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>jntTorques</declname>
+        </param>
+        <briefdescription>
+<para>Compute the internal torque of joint, given the internal wrench that the linkThatAppliesWrench applies on the linkOnWhichWrenchIsApplied, expressed in the link frame of the linkOnWhichWrenchIsApplied. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">jntPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of joint positions. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">internalWrench</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>internal wrench that the linkThatAppliesWrench applies on the linkOnWhichWrenchIsApplied, expressed in the link frame of the linkOnWhichWrenchIsApplied </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkThatAppliesWrench</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>link index of the link that applies the considered internal wrench. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">linkOnWhichWrenchIsApplied</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>link index of the link on which the considered internal wrench is applied. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">jntTorques</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector of joint torques. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="156" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1aff64953756add9df5c66cb2dedd08107" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::FixedJoint::setIndex</definition>
+        <argsstring>(JointIndex &amp;_index)</argsstring>
+        <name>setIndex</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1ac0d964dac9538e66a922b1ae50e7b662">setIndex</reimplements>
+        <param>
+          <type>JointIndex &amp;</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Set the index of the joint in the <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> Joint serialization. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="161" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a2932d75d7bcb8717a7dc66de9f8f4ea4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>JointIndex</type>
+        <definition>virtual JointIndex iDynTree::FixedJoint::getIndex</definition>
+        <argsstring>() const</argsstring>
+        <name>getIndex</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a2accdcd6fbf7e222a3c7c6b99130934e">getIndex</reimplements>
+        <briefdescription>
+<para>Get the index of the joint in the model Joint serialization. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="164" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a9d0e650f359f3bfec60fffe44ae7e879" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::FixedJoint::setPosCoordsOffset</definition>
+        <argsstring>(const size_t _index)</argsstring>
+        <name>setPosCoordsOffset</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a6c80be1fe40e5a71cc56c4fbe625535f">setPosCoordsOffset</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Set the offset of the position coordinates of this joint in the position coordiantes serialization of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="167" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a6b71751bb05328e175f152276351c137" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>size_t</type>
+        <definition>virtual size_t iDynTree::FixedJoint::getPosCoordsOffset</definition>
+        <argsstring>() const</argsstring>
+        <name>getPosCoordsOffset</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1afc71b67f79c9bbdd8f2925ee08ca0323">getPosCoordsOffset</reimplements>
+        <briefdescription>
+<para>Get the offset of the position coordinates of this joint in the position coordiantes serialization of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="170" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ac94388992a67d161d7b6498219e26da7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::FixedJoint::setDOFsOffset</definition>
+        <argsstring>(const size_t _index)</argsstring>
+        <name>setDOFsOffset</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1af65fc0f65b8367404848bc41ea87347c">setDOFsOffset</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Set the offset of the coordinates of this joint in the velocity/acceleration coordiantes serialization of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="173" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ac88c5b5c3731a56715fea48c2cf87323" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>size_t</type>
+        <definition>virtual size_t iDynTree::FixedJoint::getDOFsOffset</definition>
+        <argsstring>() const</argsstring>
+        <name>getDOFsOffset</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a64aa264a72088da07844f25176a25bee">getDOFsOffset</reimplements>
+        <briefdescription>
+<para>Get the offset of the position coordinates of joint in the velocity/acceleration coordiantes serialization of the model. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="176" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ac14e8020830993efd145171a5c098197" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::FixedJoint::hasPosLimits</definition>
+        <argsstring>() const</argsstring>
+        <name>hasPosLimits</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1af4badbd5891621e847a61d767cffd25e">hasPosLimits</reimplements>
+        <briefdescription>
+<para>Method to check if the joint has limits. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if the joints has limits </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="179" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ac91261597acef05ed961fd5acc04dfd9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::FixedJoint::enablePosLimits</definition>
+        <argsstring>(const bool enable)</argsstring>
+        <name>enablePosLimits</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a4f0f02e57295ad4b0ec94fe19fc3e0c0">enablePosLimits</reimplements>
+        <param>
+          <type>const bool</type>
+          <declname>enable</declname>
+        </param>
+        <briefdescription>
+<para>Method to set if the joint has limits. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if everything went correctly, false otherwise (for example if the joint does not support joint position limits) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="180" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a768fb933c761bdcc63ee9d60ea1a9214" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::FixedJoint::getPosLimits</definition>
+        <argsstring>(const size_t _index, double &amp;min, double &amp;max) const</argsstring>
+        <name>getPosLimits</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1ab734574da90b6d2ae24169ea180a081b">getPosLimits</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>min</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+<para>Get min and max position limits of the joint, for the _index dof. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>index of the dof for which the limit are obtained. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if everything is correct, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="181" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a1d2f185b2a43a3efd46e3d40a90ea653" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::FixedJoint::getMinPosLimit</definition>
+        <argsstring>(const size_t _index) const</argsstring>
+        <name>getMinPosLimit</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a46dbe9dec3ef79f6d5662269f6fe8f65">getMinPosLimit</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Get the min position limit of the joint, bindings-friendly version. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="182" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a68f354b50ed5b9c073085f58686236e0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::FixedJoint::getMaxPosLimit</definition>
+        <argsstring>(const size_t _index) const</argsstring>
+        <name>getMaxPosLimit</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a047913be4f7bdeb35d785e4ad71d5395">getMaxPosLimit</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Get the max position limit of the joint, bindings-friendly version. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="183" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ab64556dab725cdd0634d3ad4fca9311b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::FixedJoint::setPosLimits</definition>
+        <argsstring>(const size_t _index, double &amp;min, double &amp;max)</argsstring>
+        <name>setPosLimits</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a63c57d91c3d80a610671f04fcbdd22ff">setPosLimits</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>min</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+<para>Set the position limits for a dof the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This just sets the internal position limits of the joint. To set them as enabled, you need to call the enablePosLimits(true) method. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="184" column="22"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class representing a fixed joint, i.e. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>a joint that rigidly attaches two links. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::IJoint</label>
+        <link refid="classiDynTree_1_1IJoint"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::FixedJoint</label>
+        <link refid="classiDynTree_1_1FixedJoint"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>iDynTree::IJoint</label>
+        <link refid="classiDynTree_1_1IJoint"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::FixedJoint</label>
+        <link refid="classiDynTree_1_1FixedJoint"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Model/FixedJoint.h" line="26" column="5" bodyfile="iDynTree/Model/FixedJoint.h" bodystart="27" bodyend="185"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1FixedJoint_1ae7ca38464efead3a54939a67e7e45077" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>clone</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1aa8a7f22a0c0211286337ad6618356f01" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>computeChildAcc</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a188836bc8b00a32bff5adbd1ac4549e8" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>computeChildBiasAcc</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a5b6ba1d1c8e77ba3a6b4e2c91078388c" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>computeChildPosVelAcc</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1afb8391d3ca02525af959e282e9d914ae" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>computeChildVel</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1accd64e95d5df5c12cf0d15d71584cfd6" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>computeChildVelAcc</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a64f7e46c83d98bb5f533bee54346880a" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>computeJointTorque</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1ac91261597acef05ed961fd5acc04dfd9" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>enablePosLimits</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1abddfe9fab44759169c3fc0b0836e3581" prot="public" virt="non-virtual"><scope>iDynTree::FixedJoint</scope><name>FixedJoint</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a0cfd93dca7169f99a116c46270432b9c" prot="public" virt="non-virtual"><scope>iDynTree::FixedJoint</scope><name>FixedJoint</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a2d8b3c4a9c19bf932775d5a83d7d2c67" prot="public" virt="non-virtual"><scope>iDynTree::FixedJoint</scope><name>FixedJoint</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1aa625db20fbc6f0683efe90b49ee8f9be" prot="public" virt="non-virtual"><scope>iDynTree::FixedJoint</scope><name>FixedJoint</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1ac88c5b5c3731a56715fea48c2cf87323" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getDOFsOffset</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a826fcc8006393854c2309de92d3fbef2" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getFirstAttachedLink</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a2932d75d7bcb8717a7dc66de9f8f4ea4" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getIndex</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a68f354b50ed5b9c073085f58686236e0" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getMaxPosLimit</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a1d2f185b2a43a3efd46e3d40a90ea653" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getMinPosLimit</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1aa103b6aee2a08ed32b7688f01e3c10fe" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getMotionSubspaceVector</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a1970824dcfc4876b8258fce6ccf6843b" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getNrOfDOFs</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a465ef7c7fa02bc8a571b57a60f4b14b6" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getNrOfPosCoords</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a6b71751bb05328e175f152276351c137" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getPosCoordsOffset</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a768fb933c761bdcc63ee9d60ea1a9214" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getPosLimits</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a11d92b8cc4f0df088f0eb972e9c70b63" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getRestTransform</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1ac7311235bf7b08357a153c1321bed081" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getSecondAttachedLink</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a09dddd2e6d0fc043c6ffa0681b15404c" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getTransform</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1aac231749bf30745780aec0d876fd82ed" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getTransformDerivative</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1ac14e8020830993efd145171a5c098197" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>hasPosLimits</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a64782f86c39d8ac5ef97fb3225272c51" prot="private" virt="non-virtual"><scope>iDynTree::FixedJoint</scope><name>link1</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a850bac913ec25cab817c88cd0f630b99" prot="private" virt="non-virtual"><scope>iDynTree::FixedJoint</scope><name>link1_X_link2</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a6e5c06528bbbfc6153337a081b23c38d" prot="private" virt="non-virtual"><scope>iDynTree::FixedJoint</scope><name>link2</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1acdebb8061da99da30f832789149f215a" prot="private" virt="non-virtual"><scope>iDynTree::FixedJoint</scope><name>link2_X_link1</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a107a14ac433c9d562a48ccc188701dff" prot="private" virt="non-virtual"><scope>iDynTree::FixedJoint</scope><name>m_DOFsOffset</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a12646ce63f11cc02abde41fe13e1487f" prot="private" virt="non-virtual"><scope>iDynTree::FixedJoint</scope><name>m_index</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a3f18fa59745d646643153a82e76ccb24" prot="private" virt="non-virtual"><scope>iDynTree::FixedJoint</scope><name>m_posCoordsOffset</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a252dce83332fd752932d3c112512a733" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setAttachedLinks</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1ac94388992a67d161d7b6498219e26da7" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setDOFsOffset</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1aff64953756add9df5c66cb2dedd08107" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setIndex</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a9d0e650f359f3bfec60fffe44ae7e879" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setPosCoordsOffset</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1ab64556dab725cdd0634d3ad4fca9311b" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setPosLimits</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a1d24cec7f90a2b916a9f3ed7d3d49dab" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setRestTransform</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a77f5cd096856c52a5694b7431d743d35" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>~FixedJoint</name></member>
+      <member refid="classiDynTree_1_1IJoint_1ac989ee81d08959eca68666aa6740cb16" prot="public" virt="pure-virtual"><scope>iDynTree::FixedJoint</scope><name>~IJoint</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

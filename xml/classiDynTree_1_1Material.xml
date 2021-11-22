@@ -1,0 +1,211 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1Material" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::Material</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1Material_1a4dbe4e19eea1a628b8fd4be33e59b5af" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector4</ref></type>
+        <definition>Vector4 iDynTree::Material::m_color</definition>
+        <argsstring></argsstring>
+        <name>m_color</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="38" column="17" bodyfile="iDynTree/Model/SolidShapes.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Material_1adf40ce722c0b4ca77f4eb526d33b6e90" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::Material::m_isColorSet</definition>
+        <argsstring></argsstring>
+        <name>m_isColorSet</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="39" column="14" bodyfile="iDynTree/Model/SolidShapes.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Material_1a37642f5efeaeeb3a1c6540c679d417ea" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::Material::m_texture</definition>
+        <argsstring></argsstring>
+        <name>m_texture</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="40" column="21" bodyfile="iDynTree/Model/SolidShapes.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Material_1a4dbbf24419fbf0322ed0e6b8d1ec8702" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::Material::m_name</definition>
+        <argsstring></argsstring>
+        <name>m_name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="41" column="21" bodyfile="iDynTree/Model/SolidShapes.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1Material_1af9d03a29cd5e03d02d876dca4e6b89f1" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Material::Material</definition>
+        <argsstring>()</argsstring>
+        <name>Material</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="24" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Material_1a6a82ef7224dfe2cfb0df00faae1526ca" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Material::Material</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>Material</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="25" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Material_1afec2c67808ff6b77af6deb8a9927c753" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::Material::name</definition>
+        <argsstring>() const</argsstring>
+        <name>name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="27" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Material_1ac62e16c4c29c970c1220da2fc49f1575" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Material::hasColor</definition>
+        <argsstring>() const</argsstring>
+        <name>hasColor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="29" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Material_1a3f767174f2ef613b009f97efc1378fb8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector4</ref></type>
+        <definition>Vector4 iDynTree::Material::color</definition>
+        <argsstring>() const</argsstring>
+        <name>color</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="30" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Material_1a0562cc90576dec117befdbfc6f3af43e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::Material::setColor</definition>
+        <argsstring>(const Vector4 &amp;color)</argsstring>
+        <name>setColor</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector4</ref> &amp;</type>
+          <declname>color</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="31" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Material_1a22528f521366b576932b9209efebebf8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Material::hasTexture</definition>
+        <argsstring>() const</argsstring>
+        <name>hasTexture</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="33" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Material_1a8da3dcaec328f9524659e59a27cc590d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::Material::texture</definition>
+        <argsstring>() const</argsstring>
+        <name>texture</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="34" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Material_1a12d09696458094abba1c262460f7e051" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::Material::setTexture</definition>
+        <argsstring>(const std::string &amp;texture)</argsstring>
+        <name>setTexture</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>texture</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="35" column="14"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/SolidShapes.h" line="22" column="5" bodyfile="iDynTree/Model/SolidShapes.h" bodystart="22" bodyend="42"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1Material_1a3f767174f2ef613b009f97efc1378fb8" prot="public" virt="non-virtual"><scope>iDynTree::Material</scope><name>color</name></member>
+      <member refid="classiDynTree_1_1Material_1ac62e16c4c29c970c1220da2fc49f1575" prot="public" virt="non-virtual"><scope>iDynTree::Material</scope><name>hasColor</name></member>
+      <member refid="classiDynTree_1_1Material_1a22528f521366b576932b9209efebebf8" prot="public" virt="non-virtual"><scope>iDynTree::Material</scope><name>hasTexture</name></member>
+      <member refid="classiDynTree_1_1Material_1a4dbe4e19eea1a628b8fd4be33e59b5af" prot="private" virt="non-virtual"><scope>iDynTree::Material</scope><name>m_color</name></member>
+      <member refid="classiDynTree_1_1Material_1adf40ce722c0b4ca77f4eb526d33b6e90" prot="private" virt="non-virtual"><scope>iDynTree::Material</scope><name>m_isColorSet</name></member>
+      <member refid="classiDynTree_1_1Material_1a4dbbf24419fbf0322ed0e6b8d1ec8702" prot="private" virt="non-virtual"><scope>iDynTree::Material</scope><name>m_name</name></member>
+      <member refid="classiDynTree_1_1Material_1a37642f5efeaeeb3a1c6540c679d417ea" prot="private" virt="non-virtual"><scope>iDynTree::Material</scope><name>m_texture</name></member>
+      <member refid="classiDynTree_1_1Material_1af9d03a29cd5e03d02d876dca4e6b89f1" prot="public" virt="non-virtual"><scope>iDynTree::Material</scope><name>Material</name></member>
+      <member refid="classiDynTree_1_1Material_1a6a82ef7224dfe2cfb0df00faae1526ca" prot="public" virt="non-virtual"><scope>iDynTree::Material</scope><name>Material</name></member>
+      <member refid="classiDynTree_1_1Material_1afec2c67808ff6b77af6deb8a9927c753" prot="public" virt="non-virtual"><scope>iDynTree::Material</scope><name>name</name></member>
+      <member refid="classiDynTree_1_1Material_1a0562cc90576dec117befdbfc6f3af43e" prot="public" virt="non-virtual"><scope>iDynTree::Material</scope><name>setColor</name></member>
+      <member refid="classiDynTree_1_1Material_1a12d09696458094abba1c262460f7e051" prot="public" virt="non-virtual"><scope>iDynTree::Material</scope><name>setTexture</name></member>
+      <member refid="classiDynTree_1_1Material_1a8da3dcaec328f9524659e59a27cc590d" prot="public" virt="non-virtual"><scope>iDynTree::Material</scope><name>texture</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

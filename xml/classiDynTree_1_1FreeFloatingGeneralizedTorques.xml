@@ -1,0 +1,197 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1FreeFloatingGeneralizedTorques" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::FreeFloatingGeneralizedTorques</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1FreeFloatingGeneralizedTorques_1aa06c473d290b46c6651c94a460fd1153" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
+        <definition>Wrench iDynTree::FreeFloatingGeneralizedTorques::m_baseWrench</definition>
+        <argsstring></argsstring>
+        <name>m_baseWrench</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="93" column="16" bodyfile="iDynTree/Model/FreeFloatingState.h" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1FreeFloatingGeneralizedTorques_1afc23533156de2aa1a9536a18a1bf2dcf" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref></type>
+        <definition>JointDOFsDoubleArray iDynTree::FreeFloatingGeneralizedTorques::m_jointTorques</definition>
+        <argsstring></argsstring>
+        <name>m_jointTorques</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="94" column="30" bodyfile="iDynTree/Model/FreeFloatingState.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingGeneralizedTorques_1a5a5f1ec8fdc1c4df9a32d4376c9dab64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::FreeFloatingGeneralizedTorques::FreeFloatingGeneralizedTorques</definition>
+        <argsstring>()</argsstring>
+        <name>FreeFloatingGeneralizedTorques</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="98" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingGeneralizedTorques_1af8745d49ca9d8070f571d54af5ca6a6e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::FreeFloatingGeneralizedTorques::FreeFloatingGeneralizedTorques</definition>
+        <argsstring>(const iDynTree::Model &amp;model)</argsstring>
+        <name>FreeFloatingGeneralizedTorques</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="99" column="8"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingGeneralizedTorques_1a3767b5dff094576e64bcbbf888570c8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::FreeFloatingGeneralizedTorques::resize</definition>
+        <argsstring>(const iDynTree::Model &amp;model)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Resize the class to match the dimension of the joints contained in a <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the model from which to get the number and dimension of the joints.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="warning"><para>This method wipes the joint torques if number and dimension of the joints of the model passed are different from the one already stored. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="110" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingGeneralizedTorques_1a12d629a4355c695d823d5c8a896e4bca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> &amp;</type>
+        <definition>Wrench&amp; iDynTree::FreeFloatingGeneralizedTorques::baseWrench</definition>
+        <argsstring>()</argsstring>
+        <name>baseWrench</name>
+        <briefdescription>
+<para>Get the base wrench. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="115" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingGeneralizedTorques_1a37692b2dd5b3f3a4484982cad02f39de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
+        <definition>JointDOFsDoubleArray&amp; iDynTree::FreeFloatingGeneralizedTorques::jointTorques</definition>
+        <argsstring>()</argsstring>
+        <name>jointTorques</name>
+        <briefdescription>
+<para>Get the joint torques vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="120" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingGeneralizedTorques_1afab934defd1fb77d4f87bd5ebe2f1902" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> &amp;</type>
+        <definition>const Wrench&amp; iDynTree::FreeFloatingGeneralizedTorques::baseWrench</definition>
+        <argsstring>() const</argsstring>
+        <name>baseWrench</name>
+        <briefdescription>
+<para>Get the base wrench (const version). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="125" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingGeneralizedTorques_1a9c36bae89798ee2ff869c3c3c4de890c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref> &amp;</type>
+        <definition>const JointDOFsDoubleArray&amp; iDynTree::FreeFloatingGeneralizedTorques::jointTorques</definition>
+        <argsstring>() const</argsstring>
+        <name>jointTorques</name>
+        <briefdescription>
+<para>Get the joint torques vector (const version). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="130" column="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingGeneralizedTorques_1a2b5a306d487019b2b529c4f4756af168" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned int</type>
+        <definition>unsigned int iDynTree::FreeFloatingGeneralizedTorques::getNrOfDOFs</definition>
+        <argsstring>() const</argsstring>
+        <name>getNrOfDOFs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="132" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FreeFloatingGeneralizedTorques_1a99cbac618487f817aac94c095fcf8241" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::FreeFloatingGeneralizedTorques::~FreeFloatingGeneralizedTorques</definition>
+        <argsstring>()</argsstring>
+        <name>~FreeFloatingGeneralizedTorques</name>
+        <briefdescription>
+<para>Destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FreeFloatingState.h" line="137" column="17"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/FreeFloatingState.h" line="90" column="5" bodyfile="iDynTree/Model/FreeFloatingState.h" bodystart="91" bodyend="138"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1FreeFloatingGeneralizedTorques_1a12d629a4355c695d823d5c8a896e4bca" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingGeneralizedTorques</scope><name>baseWrench</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingGeneralizedTorques_1afab934defd1fb77d4f87bd5ebe2f1902" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingGeneralizedTorques</scope><name>baseWrench</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingGeneralizedTorques_1a5a5f1ec8fdc1c4df9a32d4376c9dab64" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingGeneralizedTorques</scope><name>FreeFloatingGeneralizedTorques</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingGeneralizedTorques_1af8745d49ca9d8070f571d54af5ca6a6e" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingGeneralizedTorques</scope><name>FreeFloatingGeneralizedTorques</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingGeneralizedTorques_1a2b5a306d487019b2b529c4f4756af168" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingGeneralizedTorques</scope><name>getNrOfDOFs</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingGeneralizedTorques_1a37692b2dd5b3f3a4484982cad02f39de" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingGeneralizedTorques</scope><name>jointTorques</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingGeneralizedTorques_1a9c36bae89798ee2ff869c3c3c4de890c" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingGeneralizedTorques</scope><name>jointTorques</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingGeneralizedTorques_1aa06c473d290b46c6651c94a460fd1153" prot="private" virt="non-virtual"><scope>iDynTree::FreeFloatingGeneralizedTorques</scope><name>m_baseWrench</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingGeneralizedTorques_1afc23533156de2aa1a9536a18a1bf2dcf" prot="private" virt="non-virtual"><scope>iDynTree::FreeFloatingGeneralizedTorques</scope><name>m_jointTorques</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingGeneralizedTorques_1a3767b5dff094576e64bcbbf888570c8a" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingGeneralizedTorques</scope><name>resize</name></member>
+      <member refid="classiDynTree_1_1FreeFloatingGeneralizedTorques_1a99cbac618487f817aac94c095fcf8241" prot="public" virt="virtual"><scope>iDynTree::FreeFloatingGeneralizedTorques</scope><name>~FreeFloatingGeneralizedTorques</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

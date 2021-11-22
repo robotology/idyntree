@@ -1,0 +1,361 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::ForwardDynamicsLinearizationInternalBuffers</compoundname>
+    <includes local="no">iDynTree/Model/DynamicsLinearization.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1aacdc3cee9e5ab6debe145bb100fad6d5" prot="public" static="no" mutable="no">
+        <type><ref refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers" kindref="compound">ArticulatedBodyAlgorithmInternalBuffers</ref></type>
+        <definition>ArticulatedBodyAlgorithmInternalBuffers iDynTree::ForwardDynamicsLinearizationInternalBuffers::aba</definition>
+        <argsstring></argsstring>
+        <name>aba</name>
+        <briefdescription>
+<para>Buffers used for computing the ABA algorithm. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="44" column="49" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1a8e8077614597ee1b792b0cdb7a3fcc65" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers" kindref="compound">ArticulatedBodyAlgorithmInternalBuffers</ref> &gt;</type>
+        <definition>std::vector&lt;ArticulatedBodyAlgorithmInternalBuffers&gt; iDynTree::ForwardDynamicsLinearizationInternalBuffers::dPos</definition>
+        <argsstring></argsstring>
+        <name>dPos</name>
+        <briefdescription>
+<para>Buffers used for computing the derivative of ABA with respect to the joint DOFs position. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="50" column="21" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1aa2864c3524539d4fa6f7e25ee7d1a708" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1LinkPositions" kindref="compound">LinkPositions</ref></type>
+        <definition>LinkPositions iDynTree::ForwardDynamicsLinearizationInternalBuffers::linkPos</definition>
+        <argsstring></argsstring>
+        <name>linkPos</name>
+        <briefdescription>
+<para>Buffers used to compute the derivative with respect to the base velocity. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="55" column="23" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1a40496ec94c434ff7511a74c5e2d7284e" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1SpatialForceWrtMotionDerivative" kindref="compound">SpatialForceWrtMotionDerivative</ref> &gt;</type>
+        <definition>std::vector&lt;SpatialForceWrtMotionDerivative&gt; iDynTree::ForwardDynamicsLinearizationInternalBuffers::dVb_linkBiasWrench</definition>
+        <argsstring></argsstring>
+        <name>dVb_linkBiasWrench</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="56" column="21" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1a47ec31687c5d0d6003fba8347d7e0583" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix1x6</ref> &gt;</type>
+        <definition>std::vector&lt;Matrix1x6&gt; iDynTree::ForwardDynamicsLinearizationInternalBuffers::dVb_u</definition>
+        <argsstring></argsstring>
+        <name>dVb_u</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="57" column="21" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1a618ea9ee2ee5fbf8ad69f2ea79d6ce4f" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1SpatialMotionWrtMotionDerivative" kindref="compound">SpatialMotionWrtMotionDerivative</ref> &gt;</type>
+        <definition>std::vector&lt;SpatialMotionWrtMotionDerivative&gt; iDynTree::ForwardDynamicsLinearizationInternalBuffers::dVb_linkBiasAcceleration</definition>
+        <argsstring></argsstring>
+        <name>dVb_linkBiasAcceleration</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="58" column="21" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1aa38ccefb07d49586aebeeaf56754be5a" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1SpatialMotionWrtMotionDerivative" kindref="compound">SpatialMotionWrtMotionDerivative</ref> &gt;</type>
+        <definition>std::vector&lt;SpatialMotionWrtMotionDerivative&gt; iDynTree::ForwardDynamicsLinearizationInternalBuffers::dVb_linksAccelerations</definition>
+        <argsstring></argsstring>
+        <name>dVb_linksAccelerations</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="59" column="21" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1aafc407754d41f666bd58d5d58f83c3b8" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1SpatialForceWrtMotionDerivative" kindref="compound">SpatialForceWrtMotionDerivative</ref> &gt;</type>
+        <definition>std::vector&lt;SpatialForceWrtMotionDerivative&gt; iDynTree::ForwardDynamicsLinearizationInternalBuffers::dVl_linkLocalBiasWrench</definition>
+        <argsstring></argsstring>
+        <name>dVl_linkLocalBiasWrench</name>
+        <briefdescription>
+<para>Buffer to store the derivative of the product. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><formula id="7">\[ V_l \bar\times^* M_l V_l \]</formula></para>
+<para>with respect to V_l </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="70" column="21" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1afe38324182bdde34d1fb5736adecac4c" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers" kindref="compound">ArticulatedBodyAlgorithmInternalBuffers</ref> &gt;</type>
+        <definition>std::vector&lt;ArticulatedBodyAlgorithmInternalBuffers&gt; iDynTree::ForwardDynamicsLinearizationInternalBuffers::dVel</definition>
+        <argsstring></argsstring>
+        <name>dVel</name>
+        <briefdescription>
+<para>Buffers used for computing the derivative of ABA with respect to the joint DOFs velocities. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="77" column="21" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1a67ceed1a6075dd318e8f8becdf907a84" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ForwardDynamicsLinearizationInternalBuffers::ForwardDynamicsLinearizationInternalBuffers</definition>
+        <argsstring>()</argsstring>
+        <name>ForwardDynamicsLinearizationInternalBuffers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="28" column="9" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1a1816c8a74000bd02bf897a94dac61dd5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::ForwardDynamicsLinearizationInternalBuffers::ForwardDynamicsLinearizationInternalBuffers</definition>
+        <argsstring>(const Model &amp;model)</argsstring>
+        <name>ForwardDynamicsLinearizationInternalBuffers</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Call resize(model);. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="33" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1ae228e32ef93aef6fd9ad11882ab5f2fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::ForwardDynamicsLinearizationInternalBuffers::resize</definition>
+        <argsstring>(const Model &amp;model)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Resize all the buffers to the right size given the model, and reset all the buffers to 0. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="39" column="14"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Structure containing the internal buffers used by the ForwardDynamicsLinearization function. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="17">
+        <label>iDynTree::LinkPositions</label>
+        <link refid="classiDynTree_1_1LinkPositions"/>
+      </node>
+      <node id="9">
+        <label>iDynTree::LinkAccArray</label>
+        <link refid="classiDynTree_1_1LinkAccArray"/>
+      </node>
+      <node id="6">
+        <label>T</label>
+      </node>
+      <node id="14">
+        <label>iDynTree::DOFSpatialMotionArray</label>
+        <link refid="classiDynTree_1_1DOFSpatialMotionArray"/>
+      </node>
+      <node id="16">
+        <label>iDynTree::LinkWrenches</label>
+        <link refid="classiDynTree_1_1LinkWrenches"/>
+      </node>
+      <node id="13">
+        <label>iDynTree::VectorDynSize</label>
+        <link refid="classiDynTree_1_1VectorDynSize"/>
+      </node>
+      <node id="5">
+        <label>std::vector&lt; T &gt;</label>
+        <childnode refid="6" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
+      <node id="21">
+        <label>iDynTree::SpatialForceWrtMotionDerivative</label>
+        <link refid="classiDynTree_1_1SpatialForceWrtMotionDerivative"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>iDynTree::ArticulatedBodyAlgorithmInternalBuffers</label>
+        <link refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers"/>
+        <childnode refid="9" relation="usage">
+          <edgelabel>linksAccelerations</edgelabel>
+          <edgelabel>linksBiasAcceleration</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>U</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>linkABIs</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>D</edgelabel>
+          <edgelabel>u</edgelabel>
+        </childnode>
+        <childnode refid="14" relation="usage">
+          <edgelabel>S</edgelabel>
+        </childnode>
+        <childnode refid="15" relation="usage">
+          <edgelabel>linksVel</edgelabel>
+        </childnode>
+        <childnode refid="16" relation="usage">
+          <edgelabel>linksBiasWrench</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::ForwardDynamicsLinearizationInternalBuffers</label>
+        <link refid="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>dVb_linkBiasAcceleration</edgelabel>
+          <edgelabel>dVb_linksAccelerations</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>dPos</edgelabel>
+          <edgelabel>dVel</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>aba</edgelabel>
+        </childnode>
+        <childnode refid="17" relation="usage">
+          <edgelabel>linkPos</edgelabel>
+        </childnode>
+        <childnode refid="18" relation="usage">
+          <edgelabel>dVb_u</edgelabel>
+        </childnode>
+        <childnode refid="20" relation="usage">
+          <edgelabel>dVb_linkBiasWrench</edgelabel>
+          <edgelabel>dVl_linkLocalBiasWrench</edgelabel>
+        </childnode>
+      </node>
+      <node id="10">
+        <label>iDynTree::DOFSpatialForceArray</label>
+        <link refid="classiDynTree_1_1DOFSpatialForceArray"/>
+      </node>
+      <node id="19">
+        <label>iDynTree::MatrixFixSize&lt; nRows, nCols &gt;</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+      </node>
+      <node id="12">
+        <label>iDynTree::JointDOFsDoubleArray</label>
+        <link refid="classiDynTree_1_1JointDOFsDoubleArray"/>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>std::vector&lt; iDynTree::SpatialForceWrtMotionDerivative &gt;</label>
+        <childnode refid="21" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="template-instance">
+          <edgelabel>&lt; iDynTree::SpatialForceWrtMotionDerivative &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::SpatialMotionWrtMotionDerivative</label>
+        <link refid="classiDynTree_1_1SpatialMotionWrtMotionDerivative"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>Matrix6x6</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+      </node>
+      <node id="15">
+        <label>iDynTree::LinkVelArray</label>
+        <link refid="classiDynTree_1_1LinkVelArray"/>
+      </node>
+      <node id="11">
+        <label>iDynTree::LinkArticulatedBodyInertias</label>
+        <link refid="classiDynTree_1_1LinkArticulatedBodyInertias"/>
+      </node>
+      <node id="2">
+        <label>std::vector&lt; iDynTree::SpatialMotionWrtMotionDerivative &gt;</label>
+        <childnode refid="3" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="template-instance">
+          <edgelabel>&lt; iDynTree::SpatialMotionWrtMotionDerivative &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>std::vector&lt; iDynTree::ArticulatedBodyAlgorithmInternalBuffers &gt;</label>
+        <childnode refid="8" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="template-instance">
+          <edgelabel>&lt; iDynTree::ArticulatedBodyAlgorithmInternalBuffers &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="18">
+        <label>std::vector&lt; iDynTree::MatrixFixSize &gt;</label>
+        <childnode refid="19" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="template-instance">
+          <edgelabel>&lt; iDynTree::MatrixFixSize &gt;</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Model/DynamicsLinearization.h" line="26" column="5" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="27" bodyend="78"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1aacdc3cee9e5ab6debe145bb100fad6d5" prot="public" virt="non-virtual"><scope>iDynTree::ForwardDynamicsLinearizationInternalBuffers</scope><name>aba</name></member>
+      <member refid="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1a8e8077614597ee1b792b0cdb7a3fcc65" prot="public" virt="non-virtual"><scope>iDynTree::ForwardDynamicsLinearizationInternalBuffers</scope><name>dPos</name></member>
+      <member refid="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1a618ea9ee2ee5fbf8ad69f2ea79d6ce4f" prot="public" virt="non-virtual"><scope>iDynTree::ForwardDynamicsLinearizationInternalBuffers</scope><name>dVb_linkBiasAcceleration</name></member>
+      <member refid="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1a40496ec94c434ff7511a74c5e2d7284e" prot="public" virt="non-virtual"><scope>iDynTree::ForwardDynamicsLinearizationInternalBuffers</scope><name>dVb_linkBiasWrench</name></member>
+      <member refid="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1aa38ccefb07d49586aebeeaf56754be5a" prot="public" virt="non-virtual"><scope>iDynTree::ForwardDynamicsLinearizationInternalBuffers</scope><name>dVb_linksAccelerations</name></member>
+      <member refid="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1a47ec31687c5d0d6003fba8347d7e0583" prot="public" virt="non-virtual"><scope>iDynTree::ForwardDynamicsLinearizationInternalBuffers</scope><name>dVb_u</name></member>
+      <member refid="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1afe38324182bdde34d1fb5736adecac4c" prot="public" virt="non-virtual"><scope>iDynTree::ForwardDynamicsLinearizationInternalBuffers</scope><name>dVel</name></member>
+      <member refid="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1aafc407754d41f666bd58d5d58f83c3b8" prot="public" virt="non-virtual"><scope>iDynTree::ForwardDynamicsLinearizationInternalBuffers</scope><name>dVl_linkLocalBiasWrench</name></member>
+      <member refid="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1a67ceed1a6075dd318e8f8becdf907a84" prot="public" virt="non-virtual"><scope>iDynTree::ForwardDynamicsLinearizationInternalBuffers</scope><name>ForwardDynamicsLinearizationInternalBuffers</name></member>
+      <member refid="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1a1816c8a74000bd02bf897a94dac61dd5" prot="public" virt="non-virtual"><scope>iDynTree::ForwardDynamicsLinearizationInternalBuffers</scope><name>ForwardDynamicsLinearizationInternalBuffers</name></member>
+      <member refid="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1aa2864c3524539d4fa6f7e25ee7d1a708" prot="public" virt="non-virtual"><scope>iDynTree::ForwardDynamicsLinearizationInternalBuffers</scope><name>linkPos</name></member>
+      <member refid="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1ae228e32ef93aef6fd9ad11882ab5f2fb" prot="public" virt="non-virtual"><scope>iDynTree::ForwardDynamicsLinearizationInternalBuffers</scope><name>resize</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="GyroscopeSensor_8h" kind="file" language="C++">
+    <compoundname>GyroscopeSensor.h</compoundname>
+    <includes refid="GeomVector3_8h" local="no">iDynTree/Core/GeomVector3.h</includes>
+    <includes refid="Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includes>
+    <includes local="no">vector</includes>
+    <includedby refid="AllSensorsTypes_8h" local="no">iDynTree/Sensors/AllSensorsTypes.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>vector</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/Sensors/GyroscopeSensor.h</label>
+        <link refid="GyroscopeSensor_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1GyroscopeSensor" prot="public">iDynTree::GyroscopeSensor</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="GyroscopeSensor_8h_1a303a7b672a9817d74c5a6279fbfe5e34" prot="public" static="no">
+        <type>AngularMotionVector3</type>
+        <definition>typedef AngularMotionVector3 iDynTree::AngVelocity</definition>
+        <argsstring></argsstring>
+        <name>AngVelocity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/GyroscopeSensor.h" line="20" column="34" bodyfile="iDynTree/Sensors/GyroscopeSensor.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Sensors/GyroscopeSensor.h"/>
+  </compounddef>
+</doxygen>

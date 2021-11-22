@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1iKinLimbImported" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::iKinLimbImported</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">iCub::iKin::iKinLimb</basecompoundref>
+    <includes local="no">iDynTree/iKinConversions.h</includes>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1iKinLimbImported_1a1ddb6cd3ab0129374cc29ddaa0820e84" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::iKinLimbImported::iKinLimbImported</definition>
+        <argsstring>()</argsstring>
+        <name>iKinLimbImported</name>
+        <briefdescription>
+<para>Default constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/iKinConversions.h" line="56" column="5" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="87" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1iKinLimbImported_1a9b2de9e21aa8ef978d19a72a910df2ed" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type></type>
+        <definition>iDynTree::iKinLimbImported::~iKinLimbImported</definition>
+        <argsstring>()</argsstring>
+        <name>~iKinLimbImported</name>
+        <briefdescription>
+<para>Default destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/iKinConversions.h" line="61" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="91" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1iKinLimbImported_1abac4ec18c88cc235078afb933d55ec30" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::iKinLimbImported::fromModel</definition>
+        <argsstring>(const Model &amp;model, const std::string &amp;baseFrame, const std::string &amp;distalFrame)</argsstring>
+        <name>fromModel</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>baseFrame</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>distalFrame</declname>
+        </param>
+        <briefdescription>
+<para>Initialize the limb properties from a chain in a <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/iKinConversions.h" line="66" column="10" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="116" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1iKinLimbImported_1a6f9556ef95fec1cf115c08eadbcc4910" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::iKinLimbImported::fromDHChain</definition>
+        <argsstring>(const DHChain &amp;dhChain)</argsstring>
+        <name>fromDHChain</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1DHChain" kindref="compound">DHChain</ref> &amp;</type>
+          <declname>dhChain</declname>
+        </param>
+        <briefdescription>
+<para>Initialize the limb properties from a <ref refid="classiDynTree_1_1DHChain" kindref="compound">iDynTree::DHChain</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/iKinConversions.h" line="73" column="10" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="94" bodyend="114"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>iKinLimb class to extract a iKinLimb from iDynTree structures. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::iKinLimbImported</label>
+        <link refid="classiDynTree_1_1iKinLimbImported"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iCub::iKin::iKinLimb</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>iDynTree::iKinLimbImported</label>
+        <link refid="classiDynTree_1_1iKinLimbImported"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iCub::iKin::iKinLimb</label>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/iKinConversions.h" line="50" column="1" bodyfile="iDynTree/iKinConversions.h" bodystart="51" bodyend="74"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1iKinLimbImported_1a6f9556ef95fec1cf115c08eadbcc4910" prot="public" virt="non-virtual"><scope>iDynTree::iKinLimbImported</scope><name>fromDHChain</name></member>
+      <member refid="classiDynTree_1_1iKinLimbImported_1abac4ec18c88cc235078afb933d55ec30" prot="public" virt="non-virtual"><scope>iDynTree::iKinLimbImported</scope><name>fromModel</name></member>
+      <member refid="classiDynTree_1_1iKinLimbImported_1a1ddb6cd3ab0129374cc29ddaa0820e84" prot="public" virt="non-virtual"><scope>iDynTree::iKinLimbImported</scope><name>iKinLimbImported</name></member>
+      <member refid="classiDynTree_1_1iKinLimbImported_1a9b2de9e21aa8ef978d19a72a910df2ed" prot="public" virt="virtual"><scope>iDynTree::iKinLimbImported</scope><name>~iKinLimbImported</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

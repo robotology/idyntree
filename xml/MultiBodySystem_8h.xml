@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="MultiBodySystem_8h" kind="file" language="C++">
+    <compoundname>MultiBodySystem.h</compoundname>
+    <includes refid="DynamicalSystem_8h" local="no">iDynTree/DynamicalSystem.h</includes>
+    <innerclass refid="classiDynTree_1_1optimalcontrol_1_1MultiBodySystem" prot="public">iDynTree::optimalcontrol::MultiBodySystem</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <innernamespace refid="namespaceiDynTree_1_1optimalcontrol">iDynTree::optimalcontrol</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/MultiBodySystem.h"/>
+  </compounddef>
+</doxygen>

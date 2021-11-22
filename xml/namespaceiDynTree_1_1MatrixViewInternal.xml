@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespaceiDynTree_1_1MatrixViewInternal" kind="namespace" language="C++">
+    <compoundname>iDynTree::MatrixViewInternal</compoundname>
+    <innerclass refid="structiDynTree_1_1MatrixViewInternal_1_1has__IsRowMajor" prot="public">iDynTree::MatrixViewInternal::has_IsRowMajor</innerclass>
+    <innerclass refid="structiDynTree_1_1MatrixViewInternal_1_1has__IsRowMajor_3_01T_00_01SpanUtils_1_1void__t_3_01decl7e9aca95d34952fed609ee84e1af283d" prot="public">iDynTree::MatrixViewInternal::has_IsRowMajor&lt; T, SpanUtils::void_t&lt; decltype(T::IsRowMajor)&gt; &gt;</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/MatrixView.h" line="32" column="5"/>
+  </compounddef>
+</doxygen>

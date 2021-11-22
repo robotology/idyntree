@@ -1,9 +1,0 @@
-<map id="AccelerometerSensor.h" name="AccelerometerSensor.h">
-<area shape="rect" id="node1" title=" " alt="" coords="346,5,518,32"/>
-<area shape="rect" id="node2" href="$SensorElement_8cpp.html" title=" " alt="" coords="5,80,152,107"/>
-<area shape="rect" id="node3" href="$AllSensorsTypes_8h.html" title=" " alt="" coords="176,80,315,107"/>
-<area shape="rect" id="node5" href="$AccelerometerSensor_8cpp.html" title=" " alt="" coords="339,80,525,107"/>
-<area shape="rect" id="node6" href="$PredictSensorsMeasurements_8cpp.html" title=" " alt="" coords="549,80,792,107"/>
-<area shape="rect" id="node7" href="$Sensors_8cpp.html" title=" " alt="" coords="817,80,917,107"/>
-<area shape="rect" id="node4" href="$BerdyHelper_8cpp.html" title=" " alt="" coords="181,155,310,181"/>
-</map>

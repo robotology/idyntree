@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>iDynTree::DHChain class | iDynTree master</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="./index.html">iDynTree</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="4">
+            <li>
+              <a href="pages.html">Versions</a>
+              <ol>
+                <li><a href="./index.html">Master</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="pages.html">Contacts</a>
+              <ol>
+                <li><a href="https://github.com/robotology/idyntree">GitHub</a></li>
+                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
+              </ol>
+            </li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespaceiDynTree.html">iDynTree</a>::<wbr/></span>DHChain <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="DenavitHartenberg_8h.html">&lt;iDynTree/Model/DenavitHartenberg.h&gt;</a></div>
+        </h1>
+        <p>Simple representation of a chain described with Denavit-Hartenberg Parameters.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+<p>Directly inspiered by the iCub::iKin::iKinChain class.</p>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt id="ac8509771f5d1f9488791bbf352302a37">
+              <span class="m-doc-wrap-bumper">void <a href="#ac8509771f5d1f9488791bbf352302a37" class="m-doc-self">setNrOfDOFs</a>(</span><span class="m-doc-wrap">size_t nDofs)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ac8ec2b05145ff21bd09102050f41be52">
+              <span class="m-doc-wrap-bumper">auto <a href="#ac8ec2b05145ff21bd09102050f41be52" class="m-doc-self">getNrOfDOFs</a>(</span><span class="m-doc-wrap">) const -&gt; size_t</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ac1e61774269fcf4ca8ed17a610ff2e1a">
+              <span class="m-doc-wrap-bumper">void <a href="#ac1e61774269fcf4ca8ed17a610ff2e1a" class="m-doc-self">setH0</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>&amp; _H0)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a451ed04b6a79015e210df0ff015d3d22">
+              <span class="m-doc-wrap-bumper">auto <a href="#a451ed04b6a79015e210df0ff015d3d22" class="m-doc-self">getH0</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>&amp;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aa08991e4469d716726dea2904b7659e7">
+              <span class="m-doc-wrap-bumper">void <a href="#aa08991e4469d716726dea2904b7659e7" class="m-doc-self">setHN</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&amp; _HN)</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a76186ab04dc0e7f53679570a32705238">
+              <span class="m-doc-wrap-bumper">auto <a href="#a76186ab04dc0e7f53679570a32705238" class="m-doc-self">getHN</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&amp;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a6c8806befe921857a962d7620e00f3f6">
+              <span class="m-doc-wrap-bumper">auto <a href="#a6c8806befe921857a962d7620e00f3f6" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">const size_t i) -&gt; <a href="structiDynTree_1_1DHLink.html" class="m-doc">DHLink</a>&amp;</span>
+            </dt>
+            <dd>Return a reference to the i-th link of the chain.</dd>
+            <dt id="a5d475054d91c46ebe509784d2b5c4c6e">
+              <span class="m-doc-wrap-bumper">auto <a href="#a5d475054d91c46ebe509784d2b5c4c6e" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">const size_t i) const -&gt; const <a href="structiDynTree_1_1DHLink.html" class="m-doc">DHLink</a>&amp;</span>
+            </dt>
+            <dd>Return a reference to the i-th link of the chain (const version).</dd>
+            <dt id="ae0d3f071d632ec173a33fa5d38e2bcdb">
+              <span class="m-doc-wrap-bumper">auto <a href="#ae0d3f071d632ec173a33fa5d38e2bcdb" class="m-doc-self">getDOFName</a>(</span><span class="m-doc-wrap">size_t dofIdx) const -&gt; std::string</span>
+            </dt>
+            <dd>Get the name of the i-th DOF.</dd>
+            <dt id="af1384b7f4385bfb88a1fb5031d5eb467">
+              <span class="m-doc-wrap-bumper">void <a href="#af1384b7f4385bfb88a1fb5031d5eb467" class="m-doc-self">setDOFName</a>(</span><span class="m-doc-wrap">size_t dofIdx,
+              const std::string&amp; dofName)</span>
+            </dt>
+            <dd>Get the name of the i-th DOF.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6131ce652566c6f82cee9e51cfb15010" class="m-doc">toModel</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; outputModel) const -&gt; bool</span>
+            </dt>
+            <dd>Create an <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> from this <a href="classiDynTree_1_1DHChain.html" class="m-doc">DHChain</a>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a2ba930d39c99e692f39a9649f3588099" class="m-doc">fromModel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; model,
+              std::string baseFrame,
+              std::string eeFrame) -&gt; bool</span>
+            </dt>
+            <dd>Create a <a href="classiDynTree_1_1DHChain.html" class="m-doc">DHChain</a> from a <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a6131ce652566c6f82cee9e51cfb15010"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />DHChain::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6131ce652566c6f82cee9e51cfb15010" class="m-doc-self">toModel</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; outputModel) const</span></span>
+            </h3>
+            <p>Create an <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> from this <a href="classiDynTree_1_1DHChain.html" class="m-doc">DHChain</a>.</p>
+<aside class="m-note m-default"><h4>See also</h4><p>CreateModelFromDHChain .</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a2ba930d39c99e692f39a9649f3588099"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />DHChain::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2ba930d39c99e692f39a9649f3588099" class="m-doc-self">fromModel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; model,
+              std::string baseFrame,
+              std::string eeFrame)</span></span>
+            </h3>
+            <p>Create a <a href="classiDynTree_1_1DHChain.html" class="m-doc">DHChain</a> from a <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>.</p>
+<aside class="m-note m-default"><h4>See also</h4><p>ExtractDHChainFromModel .</p></aside>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>iDynTree documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/robotology/idyntree/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

@@ -1,0 +1,495 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1Visualizer" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::Visualizer</compoundname>
+    <includes local="no">iDynTree/Visualizer.h</includes>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classiDynTree_1_1Visualizer_1a62fa7ce6e4b7f0e02925f62df919bc42" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class ModelVisualization</definition>
+        <argsstring></argsstring>
+        <name>ModelVisualization</name>
+        <param>
+          <type>ModelVisualization</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="826" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="826" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1Visualizer_1a61384870bdbb7d700bc77fdefbc91575" prot="private" static="no" mutable="no">
+        <type>VisualizerPimpl *</type>
+        <definition>VisualizerPimpl* iDynTree::Visualizer::pimpl</definition>
+        <argsstring></argsstring>
+        <name>pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="830" column="22" bodyfile="iDynTree/Visualizer.h" bodystart="829" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1a4889d6118d8394dda45b24c4dda45f9d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Visualizer::Visualizer</definition>
+        <argsstring>(const Visualizer &amp;other)</argsstring>
+        <name>Visualizer</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Visualizer" kindref="compound">Visualizer</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="833" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1a5ac4a01f4aa46994a7fa818a217044f2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Visualizer" kindref="compound">Visualizer</ref> &amp;</type>
+        <definition>Visualizer&amp; iDynTree::Visualizer::operator=</definition>
+        <argsstring>(const Visualizer &amp;other)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Visualizer" kindref="compound">Visualizer</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="834" column="16"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1abbecaabb17b53ac73f061d91a0de3328" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Visualizer::Visualizer</definition>
+        <argsstring>()</argsstring>
+        <name>Visualizer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="836" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1a32db55b05090aaea00df53f7ef037c0d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::Visualizer::~Visualizer</definition>
+        <argsstring>()</argsstring>
+        <name>~Visualizer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="837" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1ab238b4d8b6dd251b94686a6faa6e2a30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Visualizer::init</definition>
+        <argsstring>(const VisualizerOptions &amp;visualizerOptions=VisualizerOptions())</argsstring>
+        <name>init</name>
+        <param>
+          <type>const <ref refid="structiDynTree_1_1VisualizerOptions" kindref="compound">VisualizerOptions</ref> &amp;</type>
+          <declname>visualizerOptions</declname>
+          <defval><ref refid="structiDynTree_1_1VisualizerOptions" kindref="compound">VisualizerOptions</ref>()</defval>
+        </param>
+        <briefdescription>
+<para>Initialize the visualization. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>this is called implicitly when addModel is called for the first time. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="844" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1a231ab6ab8555d41b58b43aa202a0023d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::Visualizer::getNrOfVisualizedModels</definition>
+        <argsstring>()</argsstring>
+        <name>getNrOfVisualizedModels</name>
+        <briefdescription>
+<para>Get number of models visualized. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="849" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1a2a254803f63b1cabaaeec22ac8cb4b9b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::Visualizer::getModelInstanceName</definition>
+        <argsstring>(size_t modelInstanceIndex)</argsstring>
+        <name>getModelInstanceName</name>
+        <param>
+          <type>size_t</type>
+          <declname>modelInstanceIndex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="854" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1a9d5069cc3f91df42de386a7bf57a84be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int iDynTree::Visualizer::getModelInstanceIndex</definition>
+        <argsstring>(const std::string instanceName)</argsstring>
+        <name>getModelInstanceIndex</name>
+        <param>
+          <type>const std::string</type>
+          <declname>instanceName</declname>
+        </param>
+        <briefdescription>
+<para>Get the index of a given model instance, or -1 if there is not such model instance. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="859" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1a25ef54501162c7afee6d5f15ebba373f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Visualizer::addModel</definition>
+        <argsstring>(const iDynTree::Model &amp;model, const std::string &amp;instanceName)</argsstring>
+        <name>addModel</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>instanceName</declname>
+        </param>
+        <briefdescription>
+<para>Add an instance of a given model to the visualization. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">instanceName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>name of the instance of the model added. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went well, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="868" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1acffed34d598dcfcbe7ec467c63df02b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1IModelVisualization" kindref="compound">IModelVisualization</ref> &amp;</type>
+        <definition>IModelVisualization&amp; iDynTree::Visualizer::modelViz</definition>
+        <argsstring>(size_t modelIdx)</argsstring>
+        <name>modelViz</name>
+        <param>
+          <type>size_t</type>
+          <declname>modelIdx</declname>
+        </param>
+        <briefdescription>
+<para>Return an interface to a visualization of a model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>the modelIdx is invalidated whenever a model is removed from the visualization.</para>
+</simplesect>
+<simplesect kind="return"><para>a reference to a valid ModelVisualization if instanceName is the name of a model instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="878" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1ae4b712ffad9dd8dabfea93b87bbcaa08" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1IModelVisualization" kindref="compound">IModelVisualization</ref> &amp;</type>
+        <definition>IModelVisualization&amp; iDynTree::Visualizer::modelViz</definition>
+        <argsstring>(const std::string &amp;instanceName)</argsstring>
+        <name>modelViz</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>instanceName</declname>
+        </param>
+        <briefdescription>
+<para>Return an interface to a visualization of a model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>a reference to a valid ModelVisualization if instanceName is the name of a model instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="885" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1a47223d048b3a13b751e89762aa65a55c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1ICamera" kindref="compound">ICamera</ref> &amp;</type>
+        <definition>ICamera&amp; iDynTree::Visualizer::camera</definition>
+        <argsstring>()</argsstring>
+        <name>camera</name>
+        <briefdescription>
+<para>Return an interface to manipulate the camera in the visualization. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="890" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1afaf0268b1cbd07b4ce22f237f863beab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1IEnvironment" kindref="compound">IEnvironment</ref> &amp;</type>
+        <definition>IEnvironment&amp; iDynTree::Visualizer::enviroment</definition>
+        <argsstring>()</argsstring>
+        <name>enviroment</name>
+        <briefdescription>
+<para>Return an interface to manipulate the visualization environment. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="895" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1ad4761debeba7c653950ab787eb6ef8b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1IVectorsVisualization" kindref="compound">IVectorsVisualization</ref> &amp;</type>
+        <definition>IVectorsVisualization&amp; iDynTree::Visualizer::vectors</definition>
+        <argsstring>()</argsstring>
+        <name>vectors</name>
+        <briefdescription>
+<para>Get a reference to the internal <ref refid="classiDynTree_1_1IVectorsVisualization" kindref="compound">IVectorsVisualization</ref> interface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="900" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1a3f444edda1dfd065fadc647f2f1db9e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1IFrameVisualization" kindref="compound">IFrameVisualization</ref> &amp;</type>
+        <definition>IFrameVisualization&amp; iDynTree::Visualizer::frames</definition>
+        <argsstring>()</argsstring>
+        <name>frames</name>
+        <briefdescription>
+<para>Get a reference to the internal <ref refid="classiDynTree_1_1IFrameVisualization" kindref="compound">IFrameVisualization</ref> interface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="905" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1a15f64be8e23de06b9a99fd7920380c71" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1ITexturesHandler" kindref="compound">ITexturesHandler</ref> &amp;</type>
+        <definition>ITexturesHandler&amp; iDynTree::Visualizer::textures</definition>
+        <argsstring>()</argsstring>
+        <name>textures</name>
+        <briefdescription>
+<para>Get a reference to the internal <ref refid="classiDynTree_1_1ITexturesHandler" kindref="compound">ITexturesHandler</ref> interface. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="910" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1a346dd8b22b45d1251581ccbcc8882e57" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1ILabel" kindref="compound">ILabel</ref> &amp;</type>
+        <definition>ILabel&amp; iDynTree::Visualizer::getLabel</definition>
+        <argsstring>(const std::string &amp;labelName)</argsstring>
+        <name>getLabel</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>labelName</declname>
+        </param>
+        <briefdescription>
+<para>Get a label given a name. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Note: this does not set the text in the label. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="915" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1abfa7aed891eb9df40e200892567be8c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Visualizer::run</definition>
+        <argsstring>()</argsstring>
+        <name>run</name>
+        <briefdescription>
+<para>Wrap the run method of the Irrlicht device. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="920" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1a1517692d3f37e28a7e51b1c5b4117571" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::Visualizer::draw</definition>
+        <argsstring>()</argsstring>
+        <name>draw</name>
+        <briefdescription>
+<para>Draw the visualization. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="925" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1ac3c119f56b8b892f93391b66cc22b90c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Visualizer::drawToFile</definition>
+        <argsstring>(const std::string filename=&quot;iDynTreeVisualizerScreenshot.png&quot;)</argsstring>
+        <name>drawToFile</name>
+        <param>
+          <type>const std::string</type>
+          <declname>filename</declname>
+          <defval>&quot;iDynTreeVisualizerScreenshot.png&quot;</defval>
+        </param>
+        <briefdescription>
+<para>Right the current visualization to a image file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The format of the image is desumed from the filename.</para>
+<para>For more info on the process of writing the image, check irr::video::IVideoDriver::writeImageToFile irrlicht method.</para>
+<para><simplesect kind="return"><para>true if all went ok, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="937" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1a7326dfca30d383941d1fd0968b476a9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::Visualizer::close</definition>
+        <argsstring>()</argsstring>
+        <name>close</name>
+        <briefdescription>
+<para>Close the visualizer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="942" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1afeb9911ec0c555084847462a0a2959e2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Visualizer::isWindowActive</definition>
+        <argsstring>() const</argsstring>
+        <name>isWindowActive</name>
+        <briefdescription>
+<para>Get if the visualizer window is active (to allow drawing only if necessary) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if the window is active, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="948" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Visualizer_1a6bfaee81e42d7cd60971f7a552b1c9cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::Visualizer::setColorPalette</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>setColorPalette</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Set the color palette. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>name of the color palette. Currently only vanilla and meshcat are supported. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all went ok, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Visualizer.h" line="955" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class to visualize a set of iDynTree models. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Visualizer.h" line="824" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="825" bodyend="956"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1Visualizer_1a25ef54501162c7afee6d5f15ebba373f" prot="public" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>addModel</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1a47223d048b3a13b751e89762aa65a55c" prot="public" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>camera</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1a7326dfca30d383941d1fd0968b476a9e" prot="public" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>close</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1a1517692d3f37e28a7e51b1c5b4117571" prot="public" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>draw</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1ac3c119f56b8b892f93391b66cc22b90c" prot="public" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>drawToFile</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1afaf0268b1cbd07b4ce22f237f863beab" prot="public" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>enviroment</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1a3f444edda1dfd065fadc647f2f1db9e1" prot="public" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>frames</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1a346dd8b22b45d1251581ccbcc8882e57" prot="public" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>getLabel</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1a9d5069cc3f91df42de386a7bf57a84be" prot="public" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>getModelInstanceIndex</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1a2a254803f63b1cabaaeec22ac8cb4b9b" prot="public" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>getModelInstanceName</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1a231ab6ab8555d41b58b43aa202a0023d" prot="public" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>getNrOfVisualizedModels</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1ab238b4d8b6dd251b94686a6faa6e2a30" prot="public" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>init</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1afeb9911ec0c555084847462a0a2959e2" prot="public" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>isWindowActive</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1acffed34d598dcfcbe7ec467c63df02b2" prot="public" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>modelViz</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1ae4b712ffad9dd8dabfea93b87bbcaa08" prot="public" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>modelViz</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1a5ac4a01f4aa46994a7fa818a217044f2" prot="private" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1a61384870bdbb7d700bc77fdefbc91575" prot="private" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>pimpl</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1abfa7aed891eb9df40e200892567be8c7" prot="public" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>run</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1a6bfaee81e42d7cd60971f7a552b1c9cb" prot="public" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>setColorPalette</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1a15f64be8e23de06b9a99fd7920380c71" prot="public" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>textures</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1ad4761debeba7c653950ab787eb6ef8b0" prot="public" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>vectors</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1a4889d6118d8394dda45b24c4dda45f9d" prot="private" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>Visualizer</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1abbecaabb17b53ac73f061d91a0de3328" prot="public" virt="non-virtual"><scope>iDynTree::Visualizer</scope><name>Visualizer</name></member>
+      <member refid="classiDynTree_1_1Visualizer_1a32db55b05090aaea00df53f7ef037c0d" prot="public" virt="virtual"><scope>iDynTree::Visualizer</scope><name>~Visualizer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

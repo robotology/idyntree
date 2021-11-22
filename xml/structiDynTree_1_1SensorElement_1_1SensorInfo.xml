@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1SensorElement_1_1SensorInfo" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::SensorElement::SensorInfo</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1SensorElement_1_1SensorInfo_1ad29f9d79c6b6172e1da5d1aa5c86fe32" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::SensorElement::SensorInfo::m_name</definition>
+        <argsstring></argsstring>
+        <name>m_name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/SensorElement.h" line="44" column="21" bodyfile="private/SensorElement.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1SensorElement_1_1SensorInfo_1a4f8ca12987d70d269cdc393b56fc88ab" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::SensorElement::SensorInfo::m_attachedLink</definition>
+        <argsstring></argsstring>
+        <name>m_attachedLink</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/SensorElement.h" line="46" column="21" bodyfile="private/SensorElement.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1SensorElement_1_1SensorInfo_1ad81c753355d8677067c87f69ccb4f3ac" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::SensorElement::SensorInfo::m_attachedJoint</definition>
+        <argsstring></argsstring>
+        <name>m_attachedJoint</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/SensorElement.h" line="47" column="21" bodyfile="private/SensorElement.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1SensorElement_1_1SensorInfo_1a9c2c4aef4bc89e059d38de0cd7c9aeef" prot="public" static="no" mutable="no">
+        <type>iDynTree::SensorType</type>
+        <definition>iDynTree::SensorType iDynTree::SensorElement::SensorInfo::m_sensorType</definition>
+        <argsstring></argsstring>
+        <name>m_sensorType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/SensorElement.h" line="48" column="30" bodyfile="private/SensorElement.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1SensorElement_1_1SensorInfo_1af2c8d387af6970b4438a2f270db9e017" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
+        <definition>iDynTree::Transform iDynTree::SensorElement::SensorInfo::m_origin</definition>
+        <argsstring></argsstring>
+        <name>m_origin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/SensorElement.h" line="50" column="29" bodyfile="private/SensorElement.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="10">
+        <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+      </node>
+      <node id="3">
+        <label>iDynTree::Rotation</label>
+        <link refid="classiDynTree_1_1Rotation"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>iDynTree::PositionRaw</label>
+        <link refid="classiDynTree_1_1PositionRaw"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="5">
+        <label>Matrix3x3</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+        <childnode refid="6" relation="template-instance">
+          <edgelabel>&lt; 3, 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>iDynTree::RotationRaw</label>
+        <link refid="classiDynTree_1_1RotationRaw"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>iDynTree::Position</label>
+        <link refid="classiDynTree_1_1Position"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>iDynTree::MatrixFixSize&lt; nRows, nCols &gt;</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::SensorElement::SensorInfo</label>
+        <link refid="structiDynTree_1_1SensorElement_1_1SensorInfo"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_origin</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>m_attachedJoint</edgelabel>
+          <edgelabel>m_attachedLink</edgelabel>
+          <edgelabel>m_name</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>Vector3</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+        <childnode refid="10" relation="template-instance">
+          <edgelabel>&lt; 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::Transform</label>
+        <link refid="classiDynTree_1_1Transform"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>rot</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>pos</edgelabel>
+        </childnode>
+      </node>
+      <node id="11">
+        <label>std::string</label>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="private/SensorElement.h" line="42" column="5" bodyfile="private/SensorElement.h" bodystart="42" bodyend="51"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1SensorElement_1_1SensorInfo_1ad81c753355d8677067c87f69ccb4f3ac" prot="public" virt="non-virtual"><scope>iDynTree::SensorElement::SensorInfo</scope><name>m_attachedJoint</name></member>
+      <member refid="structiDynTree_1_1SensorElement_1_1SensorInfo_1a4f8ca12987d70d269cdc393b56fc88ab" prot="public" virt="non-virtual"><scope>iDynTree::SensorElement::SensorInfo</scope><name>m_attachedLink</name></member>
+      <member refid="structiDynTree_1_1SensorElement_1_1SensorInfo_1ad29f9d79c6b6172e1da5d1aa5c86fe32" prot="public" virt="non-virtual"><scope>iDynTree::SensorElement::SensorInfo</scope><name>m_name</name></member>
+      <member refid="structiDynTree_1_1SensorElement_1_1SensorInfo_1af2c8d387af6970b4438a2f270db9e017" prot="public" virt="non-virtual"><scope>iDynTree::SensorElement::SensorInfo</scope><name>m_origin</name></member>
+      <member refid="structiDynTree_1_1SensorElement_1_1SensorInfo_1a9c2c4aef4bc89e059d38de0cd7c9aeef" prot="public" virt="non-virtual"><scope>iDynTree::SensorElement::SensorInfo</scope><name>m_sensorType</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

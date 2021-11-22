@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="Position_8h" kind="file" language="C++">
+    <compoundname>Position.h</compoundname>
+    <includes refid="PositionRaw_8h" local="no">iDynTree/Core/PositionRaw.h</includes>
+    <includes refid="Rotation_8h" local="no">iDynTree/Core/Rotation.h</includes>
+    <includes local="no">string</includes>
+    <includedby refid="ContactWrench_8h" local="no">iDynTree/Model/ContactWrench.h</includedby>
+    <includedby refid="BoundingBoxHelpers_8h" local="no">iDynTree/BoundingBoxHelpers.h</includedby>
+    <includedby refid="ConvexHullHelpers_8h" local="no">iDynTree/ConvexHullHelpers.h</includedby>
+    <includedby refid="Visualizer_8h" local="no">iDynTree/Visualizer.h</includedby>
+    <includedby refid="skinDynLibConversionsImplementation_8h" local="no">iDynTree/skinDynLibConversionsImplementation.h</includedby>
+    <includedby refid="Axis_8h" local="no">iDynTree/Core/Axis.h</includedby>
+    <includedby refid="SpatialVector_8h" local="yes">iDynTree/Core/SpatialVector.h</includedby>
+    <includedby refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includedby>
+    <includedby refid="BerdyHelper_8h" local="no">iDynTree/Estimation/BerdyHelper.h</includedby>
+    <includedby refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/Estimation/ExternalWrenchesEstimation.h</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>string</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/Core/Position.h</label>
+        <link refid="Position_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>iDynTree/BoundingBoxHelpers.h</label>
+        <link refid="BoundingBoxHelpers_8h"/>
+      </node>
+      <node id="1">
+        <label>iDynTree/Core/Position.h</label>
+        <link refid="Position_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classiDynTree_1_1Position" prot="public">iDynTree::Position</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/Position.h"/>
+  </compounddef>
+</doxygen>

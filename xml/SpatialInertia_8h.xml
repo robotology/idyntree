@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="SpatialInertia_8h" kind="file" language="C++">
+    <compoundname>SpatialInertia.h</compoundname>
+    <includes refid="SpatialInertiaRaw_8h" local="no">iDynTree/Core/SpatialInertiaRaw.h</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
+    <includes refid="Twist_8h" local="no">iDynTree/Core/Twist.h</includes>
+    <includes refid="SpatialMomentum_8h" local="no">iDynTree/Core/SpatialMomentum.h</includes>
+    <includes refid="SpatialAcc_8h" local="no">iDynTree/Core/SpatialAcc.h</includes>
+    <includes refid="Wrench_8h" local="no">iDynTree/Core/Wrench.h</includes>
+    <includedby refid="DynamicsUtils_8h" local="no">iDynTree/Model/DynamicsUtils.h</includedby>
+    <includedby refid="Link_8h" local="no">iDynTree/Model/Link.h</includedby>
+    <innerclass refid="classiDynTree_1_1SpatialInertia" prot="public">iDynTree::SpatialInertia</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/SpatialInertia.h"/>
+  </compounddef>
+</doxygen>

@@ -1,5 +1,0 @@
-<map id="iDynTree::AttitudeQuaternionEKF" name="iDynTree::AttitudeQuaternionEKF">
-<area shape="rect" id="node1" title=" " alt="" coords="105,95,341,121"/>
-<area shape="rect" id="node2" href="$classiDynTree_1_1IAttitudeEstimator.html" title=" " alt="" coords="5,13,212,39"/>
-<area shape="rect" id="node3" href="$classiDynTree_1_1DiscreteExtendedKalmanFilterHelper.html" title=" " alt="" coords="237,5,439,47"/>
-</map>

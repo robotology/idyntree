@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="LinkElement_8h" kind="file" language="C++">
+    <compoundname>LinkElement.h</compoundname>
+    <includes refid="XMLElement_8h" local="no">iDynTree/XMLElement.h</includes>
+    <includes refid="VisualElement_8h" local="yes">VisualElement.h</includes>
+    <includes refid="Link_8h" local="no">iDynTree/Model/Link.h</includes>
+    <innerclass refid="classiDynTree_1_1LinkElement" prot="public">iDynTree::LinkElement</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="private/LinkElement.h"/>
+  </compounddef>
+</doxygen>

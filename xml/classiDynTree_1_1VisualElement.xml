@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1VisualElement" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::VisualElement</compoundname>
+    <basecompoundref refid="classiDynTree_1_1XMLElement" prot="public" virt="non-virtual">iDynTree::XMLElement</basecompoundref>
+    <innerclass refid="structiDynTree_1_1VisualElement_1_1VisualInfo" prot="public">iDynTree::VisualElement::VisualInfo</innerclass>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1VisualElement_1aeb22ea6db6cb2df5960d97953cf1c1f3" prot="private" static="no" mutable="no">
+        <type><ref refid="structiDynTree_1_1VisualElement_1_1VisualInfo" kindref="compound">VisualInfo</ref></type>
+        <definition>VisualInfo iDynTree::VisualElement::m_info</definition>
+        <argsstring></argsstring>
+        <name>m_info</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/VisualElement.h" line="46" column="16" bodyfile="private/VisualElement.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1VisualElement_1aa36ef6f44abb9c979267b2e73d9c3be6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::VisualElement::VisualElement</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>VisualElement</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/VisualElement.h" line="49" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VisualElement_1a6c6d3c6ad896e9fececea30461130655" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="structiDynTree_1_1VisualElement_1_1VisualInfo" kindref="compound">VisualInfo</ref> &amp;</type>
+        <definition>const VisualInfo&amp; iDynTree::VisualElement::visualInfo</definition>
+        <argsstring>() const</argsstring>
+        <name>visualInfo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/VisualElement.h" line="51" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VisualElement_1aafcde4f7f8a04701de0d07935bc93a7e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::VisualElement::setAttributes</definition>
+        <argsstring>(const std::unordered_map&lt; std::string, std::shared_ptr&lt; iDynTree::XMLAttribute &gt;&gt; &amp;attributes) override</argsstring>
+        <name>setAttributes</name>
+        <reimplements refid="classiDynTree_1_1XMLElement_1a2fe23e8a9ee4d2f776f792c9c118db45">setAttributes</reimplements>
+        <param>
+          <type>const std::unordered_map&lt; std::string, std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLAttribute" kindref="compound">iDynTree::XMLAttribute</ref> &gt;&gt; &amp;</type>
+          <declname>attributes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/VisualElement.h" line="53" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VisualElement_1a1411f595ab1cf35b492e564a8c111bed" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">iDynTree::XMLElement</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;iDynTree::XMLElement&gt; iDynTree::VisualElement::childElementForName</definition>
+        <argsstring>(const std::string &amp;name) override</argsstring>
+        <name>childElementForName</name>
+        <reimplements refid="classiDynTree_1_1XMLElement_1a94cf11d5e2e9f6a44f17c7439d2b809f">childElementForName</reimplements>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Factory method to create child element given the name. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>name of the element to create </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>a new parser element for the corresponding tag </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/VisualElement.h" line="54" column="21"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::XMLElement</label>
+        <link refid="classiDynTree_1_1XMLElement"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::VisualElement</label>
+        <link refid="classiDynTree_1_1VisualElement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>iDynTree::XMLElement</label>
+        <link refid="classiDynTree_1_1XMLElement"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::VisualElement</label>
+        <link refid="classiDynTree_1_1VisualElement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="private/VisualElement.h" line="34" column="1" bodyfile="private/VisualElement.h" bodystart="35" bodyend="55"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1XMLElement_1a2a182ac17f5e644b113a67e02c3595e5" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement</scope><name>attributeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1adf74d829fbe4d3d112c0ef2eba8bd3ea" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement</scope><name>attributes</name></member>
+      <member refid="classiDynTree_1_1VisualElement_1a1411f595ab1cf35b492e564a8c111bed" prot="public" virt="virtual"><scope>iDynTree::VisualElement</scope><name>childElementForName</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a18b5b00729b99a19cb3e8f430656e152" prot="public" virt="virtual"><scope>iDynTree::VisualElement</scope><name>childHasBeenParsed</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1af5c19c2120a4e024149f78ee5bd52e6f" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement</scope><name>children</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a3d8e1b737e614b35e3df0a4f76ac645b" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement</scope><name>description</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a327997dec2ced313aad008c376205f36" prot="public" virt="virtual"><scope>iDynTree::VisualElement</scope><name>exitElementScope</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1aa6f49fb7b1b204e1a84cbdc51faeaa62" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement</scope><name>exitScopeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1abebc95353394912e187ad70e6078fcdc" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement</scope><name>getParsedTextContent</name></member>
+      <member refid="classiDynTree_1_1VisualElement_1aeb22ea6db6cb2df5960d97953cf1c1f3" prot="private" virt="non-virtual"><scope>iDynTree::VisualElement</scope><name>m_info</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a7129fb1e69a5bc819872e65d3965296d" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement</scope><name>name</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1aa44416f43c71e081f6637a91eb733e8d" prot="public" virt="virtual"><scope>iDynTree::VisualElement</scope><name>parsedCharacters</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1ab40851b7629a74107f2183ca36e412e4" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement</scope><name>setAttributeCallback</name></member>
+      <member refid="classiDynTree_1_1VisualElement_1aafcde4f7f8a04701de0d07935bc93a7e" prot="public" virt="virtual"><scope>iDynTree::VisualElement</scope><name>setAttributes</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a69171cc4b5c552b97f44375029356a2e" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement</scope><name>setChildHasBeenParsedCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a16759fb450635662dced0eb2ace0228b" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement</scope><name>setExitScopeCallback</name></member>
+      <member refid="classiDynTree_1_1VisualElement_1aa36ef6f44abb9c979267b2e73d9c3be6" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement</scope><name>VisualElement</name></member>
+      <member refid="classiDynTree_1_1VisualElement_1a6c6d3c6ad896e9fececea30461130655" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement</scope><name>visualInfo</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a885cb939d74e8ce27ce4c0708c04267e" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a7ad288fac24328b2bb19908500fec39a" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a42ee14ee8b2ec8a9e9e31472e1b17556" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1aa0220e560dfd45a38797cb5209653ad4" prot="public" virt="virtual"><scope>iDynTree::VisualElement</scope><name>~XMLElement</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

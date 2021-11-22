@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1DualSpace_3_01SpatialForceVector_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::DualSpace&lt; SpatialForceVector &gt;</compoundname>
+    <templateparamlist>
+    </templateparamlist>
+      <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structiDynTree_1_1DualSpace_3_01SpatialForceVector_01_4_1a3c9d35b241e2d343f91eac6c3db04123" prot="public" static="no">
+        <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
+        <definition>typedef SpatialMotionVector iDynTree::DualSpace&lt; SpatialForceVector &gt;::Type</definition>
+        <argsstring></argsstring>
+        <name>Type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialVector.h" line="59" column="60" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/SpatialVector.h" line="59" column="15" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="59" bodyend="59"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1DualSpace_3_01SpatialForceVector_01_4_1a3c9d35b241e2d343f91eac6c3db04123" prot="public" virt="non-virtual"><scope>iDynTree::DualSpace&lt; SpatialForceVector &gt;</scope><name>Type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="iKinConversions_8h" kind="file" language="C++">
+    <compoundname>iKinConversions.h</compoundname>
+    <includes local="no">string</includes>
+    <includes local="no">iCub/iKin/iKinFwd.h</includes>
+    <includes refid="iKinConversionsImplementation_8h" local="yes">iKinConversionsImplementation.h</includes>
+    <includedby refid="iKinConversionsImplementation_8h" local="no">iDynTree/iKinConversionsImplementation.h</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>iCub/iKin/iKinFwd.h</label>
+      </node>
+      <node id="2">
+        <label>string</label>
+      </node>
+      <node id="1">
+        <label>iDynTree/iKinConversions.h</label>
+        <link refid="iKinConversions_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1iKinLimbImported" prot="public">iDynTree::iKinLimbImported</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="group__iDynTreeICUB_1ga93e84fbc1880a920199aae0cbabd76ea" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::DHChainFromiKinChain</definition>
+        <argsstring>(iCub::iKin::iKinChain &amp;ikinChain, DHChain &amp;out)</argsstring>
+        <name>DHChainFromiKinChain</name>
+        <param>
+          <type>iCub::iKin::iKinChain &amp;</type>
+          <declname>ikinChain</declname>
+        </param>
+        <param>
+          <type>DHChain &amp;</type>
+          <declname>out</declname>
+        </param>
+        <briefdescription>
+<para>Load a <ref refid="classiDynTree_1_1DHChain" kindref="compound">iDynTree::DHChain</ref> object from a iCub::iKin::iKinChain . </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if all went ok, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/iKinConversionsImplementation.h" line="47" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="47" bodyend="70" declfile="iDynTree/iKinConversions.h" declline="32" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeICUB_1gadb9ad80c8043481f2bb8f013542db690" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::modelFromiKinChain</definition>
+        <argsstring>(iCub::iKin::iKinChain &amp;ikinChain, Model &amp;output)</argsstring>
+        <name>modelFromiKinChain</name>
+        <param>
+          <type>iCub::iKin::iKinChain &amp;</type>
+          <declname>ikinChain</declname>
+        </param>
+        <param>
+          <type>Model &amp;</type>
+          <declname>output</declname>
+        </param>
+        <briefdescription>
+<para>Load a <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> object from a iCub::iKin::iKinChain . </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if all went ok, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/iKinConversionsImplementation.h" line="72" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="72" bodyend="85" declfile="iDynTree/iKinConversions.h" declline="42" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeICUB_1ga681d23161951646fcb60dc7681e59482" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::iKinLimbFromModel</definition>
+        <argsstring>(const Model &amp;model, const std::string &amp;baseFrame, const std::string &amp;distalFrame, iCub::iKin::iKinLimb &amp;ikinLimb)</argsstring>
+        <name>iKinLimbFromModel</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>baseFrame</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>distalFrame</declname>
+        </param>
+        <param>
+          <type>iCub::iKin::iKinLimb &amp;</type>
+          <declname>ikinLimb</declname>
+        </param>
+        <briefdescription>
+<para>Extract an iCub::iKin::iKinLimb from an <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> . </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if all went ok, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/iKinConversionsImplementation.h" line="138" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="138" bodyend="147" declfile="iDynTree/iKinConversions.h" declline="83" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="group__iDynTreeICUB_1gaaedc638580c296a9a355975268ea25bb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::iKinLimbFromDHChain</definition>
+        <argsstring>(const DHChain &amp;dhChain, iCub::iKin::iKinLimb &amp;ikinLimb)</argsstring>
+        <name>iKinLimbFromDHChain</name>
+        <param>
+          <type>const DHChain &amp;</type>
+          <declname>dhChain</declname>
+        </param>
+        <param>
+          <type>iCub::iKin::iKinLimb &amp;</type>
+          <declname>ikinLimb</declname>
+        </param>
+        <briefdescription>
+<para>Create a iCub::iKin::iKinLimb from an <ref refid="classiDynTree_1_1DHChain" kindref="compound">iDynTree::DHChain</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/iKinConversionsImplementation.h" line="126" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="126" bodyend="136" declfile="iDynTree/iKinConversions.h" declline="93" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/iKinConversions.h"/>
+  </compounddef>
+</doxygen>

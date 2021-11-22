@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1Neighbor" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::Neighbor</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1Neighbor_1af598faae51121c98f4731c705f7d9359" prot="public" static="no" mutable="no">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::Neighbor::neighborLink</definition>
+        <argsstring></argsstring>
+        <name>neighborLink</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="30" column="19" bodyfile="iDynTree/Model/Model.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1Neighbor_1a89630624e755423ef2d82cab0912303d" prot="public" static="no" mutable="no">
+        <type>JointIndex</type>
+        <definition>JointIndex iDynTree::Neighbor::neighborJoint</definition>
+        <argsstring></argsstring>
+        <name>neighborJoint</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Model.h" line="31" column="20" bodyfile="iDynTree/Model/Model.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/Model.h" line="28" column="5" bodyfile="iDynTree/Model/Model.h" bodystart="29" bodyend="32"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1Neighbor_1a89630624e755423ef2d82cab0912303d" prot="public" virt="non-virtual"><scope>iDynTree::Neighbor</scope><name>neighborJoint</name></member>
+      <member refid="structiDynTree_1_1Neighbor_1af598faae51121c98f4731c705f7d9359" prot="public" virt="non-virtual"><scope>iDynTree::Neighbor</scope><name>neighborLink</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

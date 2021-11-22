@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structChartsManager_1_1ChartInfo_1_1Axis" kind="struct" language="C++" prot="public">
+    <compoundname>ChartsManager::ChartInfo::Axis</compoundname>
+      <sectiondef kind="public-type">
+      <memberdef kind="enum" id="structChartsManager_1_1ChartInfo_1_1Axis_1a21fc2288a3267eab5cb93ec63f374831" prot="public" static="no" strong="no">
+        <type></type>
+        <name>AxisType</name>
+        <enumvalue id="structChartsManager_1_1ChartInfo_1_1Axis_1a21fc2288a3267eab5cb93ec63f374831aaeaad0a569d7bfbf35bbbe47b8ec2c4c" prot="public">
+          <name>AxisTypeFixed</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structChartsManager_1_1ChartInfo_1_1Axis_1a21fc2288a3267eab5cb93ec63f374831a5635ce6d70a027005f073bf274e9d5a3" prot="public">
+          <name>AxisTypeAuto</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structChartsManager_1_1ChartInfo_1_1Axis_1a21fc2288a3267eab5cb93ec63f374831a36d548f1e28043a12a33710f7aff7d8e" prot="public">
+          <name>AxisTypeDynamic</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ChartsManager.h" line="32" column="13" bodyfile="ChartsManager.h" bodystart="32" bodyend="36"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structChartsManager_1_1ChartInfo_1_1Axis_1a91fe4559ef892229509a3793b351729a" prot="public" static="no" mutable="no">
+        <type>enum ChartsManager::ChartInfo::Axis::AxisType</type>
+        <definition>enum ChartsManager::ChartInfo::Axis::AxisType ChartsManager::ChartInfo::Axis::axisType</definition>
+        <argsstring></argsstring>
+        <name>axisType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ChartsManager.h" line="36" column="22"/>
+      </memberdef>
+      <memberdef kind="variable" id="structChartsManager_1_1ChartInfo_1_1Axis_1a3ca57c1b87f2dc38154d965cd7ac498d" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double ChartsManager::ChartInfo::Axis::min</definition>
+        <argsstring></argsstring>
+        <name>min</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ChartsManager.h" line="38" column="20" bodyfile="ChartsManager.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structChartsManager_1_1ChartInfo_1_1Axis_1a48e1bedb2ea6454068b7a04febca90f8" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double ChartsManager::ChartInfo::Axis::max</definition>
+        <argsstring></argsstring>
+        <name>max</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="ChartsManager.h" line="39" column="20" bodyfile="ChartsManager.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="ChartsManager.h" line="31" column="9" bodyfile="ChartsManager.h" bodystart="31" bodyend="40"/>
+    <listofallmembers>
+      <member refid="structChartsManager_1_1ChartInfo_1_1Axis_1a21fc2288a3267eab5cb93ec63f374831" prot="public" virt="non-virtual"><scope>ChartsManager::ChartInfo::Axis</scope><name>AxisType</name></member>
+      <member refid="structChartsManager_1_1ChartInfo_1_1Axis_1a91fe4559ef892229509a3793b351729a" prot="public" virt="non-virtual"><scope>ChartsManager::ChartInfo::Axis</scope><name>axisType</name></member>
+      <member refid="structChartsManager_1_1ChartInfo_1_1Axis_1a21fc2288a3267eab5cb93ec63f374831a5635ce6d70a027005f073bf274e9d5a3" prot="public" virt="non-virtual"><scope>ChartsManager::ChartInfo::Axis</scope><name>AxisTypeAuto</name></member>
+      <member refid="structChartsManager_1_1ChartInfo_1_1Axis_1a21fc2288a3267eab5cb93ec63f374831a36d548f1e28043a12a33710f7aff7d8e" prot="public" virt="non-virtual"><scope>ChartsManager::ChartInfo::Axis</scope><name>AxisTypeDynamic</name></member>
+      <member refid="structChartsManager_1_1ChartInfo_1_1Axis_1a21fc2288a3267eab5cb93ec63f374831aaeaad0a569d7bfbf35bbbe47b8ec2c4c" prot="public" virt="non-virtual"><scope>ChartsManager::ChartInfo::Axis</scope><name>AxisTypeFixed</name></member>
+      <member refid="structChartsManager_1_1ChartInfo_1_1Axis_1a48e1bedb2ea6454068b7a04febca90f8" prot="public" virt="non-virtual"><scope>ChartsManager::ChartInfo::Axis</scope><name>max</name></member>
+      <member refid="structChartsManager_1_1ChartInfo_1_1Axis_1a3ca57c1b87f2dc38154d965cd7ac498d" prot="public" virt="non-virtual"><scope>ChartsManager::ChartInfo::Axis</scope><name>min</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

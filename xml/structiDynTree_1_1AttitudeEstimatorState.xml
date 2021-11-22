@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1AttitudeEstimatorState" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::AttitudeEstimatorState</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1AttitudeEstimatorState_1af52c5dec19f0d8b86adfd86d9aa826a7" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::UnitQuaternion</ref></type>
+        <definition>iDynTree::UnitQuaternion iDynTree::AttitudeEstimatorState::m_orientation</definition>
+        <argsstring></argsstring>
+        <name>m_orientation</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="38" column="38" bodyfile="iDynTree/Estimation/AttitudeEstimator.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1AttitudeEstimatorState_1a980cefaadc8f87a0d276cfd83b5b2c5f" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref></type>
+        <definition>iDynTree::Vector3 iDynTree::AttitudeEstimatorState::m_angular_velocity</definition>
+        <argsstring></argsstring>
+        <name>m_angular_velocity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="39" column="31" bodyfile="iDynTree/Estimation/AttitudeEstimator.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1AttitudeEstimatorState_1ae6279b61ae1fe0a734ccbc5cc32b6a2b" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref></type>
+        <definition>iDynTree::Vector3 iDynTree::AttitudeEstimatorState::m_gyroscope_bias</definition>
+        <argsstring></argsstring>
+        <name>m_gyroscope_bias</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="40" column="31" bodyfile="iDynTree/Estimation/AttitudeEstimator.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::AttitudeEstimatorState</label>
+        <link refid="structiDynTree_1_1AttitudeEstimatorState"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_orientation</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_angular_velocity</edgelabel>
+          <edgelabel>m_gyroscope_bias</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::VectorFixSize&lt; 3 &gt;</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+        <childnode refid="2" relation="template-instance">
+          <edgelabel>&lt; 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Estimation/AttitudeEstimator.h" line="36" column="9" bodyfile="iDynTree/Estimation/AttitudeEstimator.h" bodystart="37" bodyend="41"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1AttitudeEstimatorState_1a980cefaadc8f87a0d276cfd83b5b2c5f" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeEstimatorState</scope><name>m_angular_velocity</name></member>
+      <member refid="structiDynTree_1_1AttitudeEstimatorState_1ae6279b61ae1fe0a734ccbc5cc32b6a2b" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeEstimatorState</scope><name>m_gyroscope_bias</name></member>
+      <member refid="structiDynTree_1_1AttitudeEstimatorState_1af52c5dec19f0d8b86adfd86d9aa826a7" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeEstimatorState</scope><name>m_orientation</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

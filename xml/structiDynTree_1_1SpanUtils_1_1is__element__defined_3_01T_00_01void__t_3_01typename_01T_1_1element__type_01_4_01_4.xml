@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1SpanUtils_1_1is__element__defined_3_01T_00_01void__t_3_01typename_01T_1_1element__type_01_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::SpanUtils::is_element_defined&lt; T, void_t&lt; typename T::element_type &gt; &gt;</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::true_type</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>std::true_type</label>
+      </node>
+      <node id="1">
+        <label>iDynTree::SpanUtils::is_element_defined&lt; T, void_t&lt; typename T::element_type &gt; &gt;</label>
+        <link refid="structiDynTree_1_1SpanUtils_1_1is__element__defined_3_01T_00_01void__t_3_01typename_01T_1_1element__type_01_4_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>std::true_type</label>
+      </node>
+      <node id="1">
+        <label>iDynTree::SpanUtils::is_element_defined&lt; T, void_t&lt; typename T::element_type &gt; &gt;</label>
+        <link refid="structiDynTree_1_1SpanUtils_1_1is__element__defined_3_01T_00_01void__t_3_01typename_01T_1_1element__type_01_4_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Core/Span.h" line="102" column="1" bodyfile="iDynTree/Core/Span.h" bodystart="103" bodyend="104"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

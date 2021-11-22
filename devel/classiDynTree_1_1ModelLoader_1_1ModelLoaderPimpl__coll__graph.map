@@ -1,6 +1,0 @@
-<map id="iDynTree::ModelLoader::ModelLoaderPimpl" name="iDynTree::ModelLoader::ModelLoaderPimpl">
-<area shape="rect" id="node1" title=" " alt="" coords="225,95,395,136"/>
-<area shape="rect" id="node2" href="$structiDynTree_1_1ModelParserOptions.html" title=" " alt="" coords="5,5,223,32"/>
-<area shape="rect" id="node3" href="$classiDynTree_1_1Model.html" title="Class that represents a generic multibody model." alt="" coords="247,5,373,32"/>
-<area shape="rect" id="node4" href="$classiDynTree_1_1SensorsList.html" title="Structure representing a group of sensors associated with an UndirectedTree." alt="" coords="397,5,559,32"/>
-</map>

@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1VisualElement_1_1VisualInfo" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::VisualElement::VisualInfo</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1VisualElement_1_1VisualInfo_1addd6cb61f3472731a93dffb9ef562573" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::VisualElement::VisualInfo::m_name</definition>
+        <argsstring></argsstring>
+        <name>m_name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/VisualElement.h" line="38" column="21" bodyfile="private/VisualElement.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1VisualElement_1_1VisualInfo_1a429e0158b37e2da9617c8a48428a809c" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::VisualElement::VisualInfo::m_nameAttributeFound</definition>
+        <argsstring></argsstring>
+        <name>m_nameAttributeFound</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/VisualElement.h" line="39" column="14" bodyfile="private/VisualElement.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1VisualElement_1_1VisualInfo_1a566a985b0ce45197f131ec3f6db41934" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
+        <definition>iDynTree::Transform iDynTree::VisualElement::VisualInfo::m_origin</definition>
+        <argsstring></argsstring>
+        <name>m_origin</name>
+        <initializer>{<ref refid="classiDynTree_1_1Transform_1a706809fe4f1904e07634ed3d0c493fcd" kindref="member">iDynTree::Transform::Identity</ref>()}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/VisualElement.h" line="40" column="29" bodyfile="private/VisualElement.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1VisualElement_1_1VisualInfo_1a496c6ab2de95ba796a8ce5c9419d9f0e" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1SolidShape" kindref="compound">SolidShape</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;SolidShape&gt; iDynTree::VisualElement::VisualInfo::m_solidShape</definition>
+        <argsstring></argsstring>
+        <name>m_solidShape</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/VisualElement.h" line="41" column="25" bodyfile="private/VisualElement.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1VisualElement_1_1VisualInfo_1a3f794cb64ecbc25a8dee3bf3a1401f9a" prot="public" static="no" mutable="no">
+        <type>std::shared_ptr&lt; <ref refid="structiDynTree_1_1MaterialElement_1_1MaterialInfo" kindref="compound">MaterialElement::MaterialInfo</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;MaterialElement::MaterialInfo&gt; iDynTree::VisualElement::VisualInfo::m_material</definition>
+        <argsstring></argsstring>
+        <name>m_material</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/VisualElement.h" line="42" column="25" bodyfile="private/VisualElement.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="14">
+        <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+      </node>
+      <node id="4">
+        <label>T</label>
+      </node>
+      <node id="3">
+        <label>std::shared_ptr&lt; T &gt;</label>
+        <childnode refid="4" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>iDynTree::Rotation</label>
+        <link refid="classiDynTree_1_1Rotation"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>iDynTree::PositionRaw</label>
+        <link refid="classiDynTree_1_1PositionRaw"/>
+        <childnode refid="13" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::VisualElement::VisualInfo</label>
+        <link refid="structiDynTree_1_1VisualElement_1_1VisualInfo"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_material</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>m_solidShape</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>m_origin</edgelabel>
+        </childnode>
+        <childnode refid="15" relation="usage">
+          <edgelabel>m_name</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::shared_ptr&lt; iDynTree::MaterialElement::MaterialInfo &gt;</label>
+        <childnode refid="3" relation="template-instance">
+          <edgelabel>&lt; iDynTree::MaterialElement::MaterialInfo &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="16">
+        <label>std::basic_string&lt; Char &gt;</label>
+      </node>
+      <node id="9">
+        <label>Matrix3x3</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+        <childnode refid="10" relation="template-instance">
+          <edgelabel>&lt; 3, 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>iDynTree::RotationRaw</label>
+        <link refid="classiDynTree_1_1RotationRaw"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>std::shared_ptr&lt; iDynTree::SolidShape &gt;</label>
+        <childnode refid="3" relation="template-instance">
+          <edgelabel>&lt; iDynTree::SolidShape &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="11">
+        <label>iDynTree::Position</label>
+        <link refid="classiDynTree_1_1Position"/>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>iDynTree::MatrixFixSize&lt; nRows, nCols &gt;</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+      </node>
+      <node id="13">
+        <label>Vector3</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+        <childnode refid="14" relation="template-instance">
+          <edgelabel>&lt; 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>iDynTree::Transform</label>
+        <link refid="classiDynTree_1_1Transform"/>
+        <childnode refid="7" relation="usage">
+          <edgelabel>rot</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>pos</edgelabel>
+        </childnode>
+      </node>
+      <node id="15">
+        <label>std::string</label>
+        <childnode refid="16" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="private/VisualElement.h" line="37" column="5" bodyfile="private/VisualElement.h" bodystart="37" bodyend="43"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1VisualElement_1_1VisualInfo_1a3f794cb64ecbc25a8dee3bf3a1401f9a" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement::VisualInfo</scope><name>m_material</name></member>
+      <member refid="structiDynTree_1_1VisualElement_1_1VisualInfo_1addd6cb61f3472731a93dffb9ef562573" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement::VisualInfo</scope><name>m_name</name></member>
+      <member refid="structiDynTree_1_1VisualElement_1_1VisualInfo_1a429e0158b37e2da9617c8a48428a809c" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement::VisualInfo</scope><name>m_nameAttributeFound</name></member>
+      <member refid="structiDynTree_1_1VisualElement_1_1VisualInfo_1a566a985b0ce45197f131ec3f6db41934" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement::VisualInfo</scope><name>m_origin</name></member>
+      <member refid="structiDynTree_1_1VisualElement_1_1VisualInfo_1a496c6ab2de95ba796a8ce5c9419d9f0e" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement::VisualInfo</scope><name>m_solidShape</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="ThreeAxisForceTorqueContactSensor_8h" kind="file" language="C++">
+    <compoundname>ThreeAxisForceTorqueContactSensor.h</compoundname>
+    <includes refid="GeomVector3_8h" local="no">iDynTree/Core/GeomVector3.h</includes>
+    <includes refid="Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includes>
+    <includedby refid="AllSensorsTypes_8h" local="no">iDynTree/Sensors/AllSensorsTypes.h</includedby>
+    <innerclass refid="classiDynTree_1_1ThreeAxisForceTorqueContactSensor" prot="public">iDynTree::ThreeAxisForceTorqueContactSensor</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h"/>
+  </compounddef>
+</doxygen>

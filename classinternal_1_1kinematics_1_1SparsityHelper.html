@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>internal::kinematics::SparsityHelper class | iDynTree master</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="./index.html">iDynTree</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="4">
+            <li>
+              <a href="pages.html">Versions</a>
+              <ol>
+                <li><a href="./index.html">Master</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="pages.html">Contacts</a>
+              <ol>
+                <li><a href="https://github.com/robotology/idyntree">GitHub</a></li>
+                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
+              </ol>
+            </li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespaceinternal.html">internal</a>::<wbr/></span><span class="m-breadcrumb"><a href="namespaceinternal_1_1kinematics.html">kinematics</a>::<wbr/></span>SparsityHelper <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="InverseKinematicsNLP_8h.html">&lt;private/InverseKinematicsNLP.h&gt;</a></div>
+        </h1>
+        <p>Helper class to manage sparsity.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-static-methods">Public static functions</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <section id="pub-static-methods">
+          <h2><a href="#pub-static-methods">Public static functions</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">static auto <a href="#a9a095a463b0479e73250775028c542c7" class="m-doc">NullIndicesVector</a>(</span><span class="m-doc-wrap">) -&gt; const std::vector&lt;size_t&gt;&amp;</span>
+            </dt>
+            <dd>The invalid null indices vector.</dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="a46025dfa23bf3ca02bd1ebdee9253111">
+              <span class="m-doc-wrap-bumper"><a href="#a46025dfa23bf3ca02bd1ebdee9253111" class="m-doc-self">SparsityHelper</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Default constructor.</dd>
+            <dt id="a72213cf8926e60d27ae3b37b9e0ee2b6">
+              <span class="m-doc-wrap-bumper"><a href="#a72213cf8926e60d27ae3b37b9e0ee2b6" class="m-doc-self">SparsityHelper</a>(</span><span class="m-doc-wrap">const <a href="classinternal_1_1kinematics_1_1SparsityHelper.html" class="m-doc">SparsityHelper</a>&amp;) <span class="m-label m-flat m-danger">deleted</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a00f6edd2ba0eb16e4a3069780fec3a04">
+              <span class="m-doc-wrap-bumper"><a href="#a00f6edd2ba0eb16e4a3069780fec3a04" class="m-doc-self">SparsityHelper</a>(</span><span class="m-doc-wrap"><a href="classinternal_1_1kinematics_1_1SparsityHelper.html" class="m-doc">SparsityHelper</a>&amp;&amp;) <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt id="aad99ca323d055bf5ab1e1dfa29ce6793">
+              <span class="m-doc-wrap-bumper">auto <a href="#aad99ca323d055bf5ab1e1dfa29ce6793" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classinternal_1_1kinematics_1_1SparsityHelper.html" class="m-doc">SparsityHelper</a>&amp;) -&gt; <a href="classinternal_1_1kinematics_1_1SparsityHelper.html" class="m-doc">SparsityHelper</a>&amp; <span class="m-label m-flat m-danger">deleted</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="acd284579180fe99c1855c008d88ad32e">
+              <span class="m-doc-wrap-bumper">auto <a href="#acd284579180fe99c1855c008d88ad32e" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap"><a href="classinternal_1_1kinematics_1_1SparsityHelper.html" class="m-doc">SparsityHelper</a>&amp;&amp;) -&gt; <a href="classinternal_1_1kinematics_1_1SparsityHelper.html" class="m-doc">SparsityHelper</a>&amp; <span class="m-label m-flat m-info">defaulted</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a166accf3388929d9690a76365c2f20d0">
+              <span class="m-doc-wrap-bumper">void <a href="#a166accf3388929d9690a76365c2f20d0" class="m-doc-self">clear</a>(</span><span class="m-doc-wrap">)</span>
+            </dt>
+            <dd>Remove all constraint sparsity patterns.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a6b208df3000cb0d2d2490b0cb08b2489" class="m-doc">addConstraintSparsityPattern</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">iDynTree::<wbr />MatrixDynSize</a>&amp; newConstraint) -&gt; bool</span>
+            </dt>
+            <dd>Adds a constraint sparsity pattern from the specified matrix.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;unsigned int nRows, unsigned int nCols&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a99dcd1e84f9214b4a5f77bd813d89bda" class="m-doc">addConstraintSparsityPattern</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">iDynTree::<wbr />MatrixFixSize</a>&lt;nRows, nCols&gt;&amp; newConstraint) -&gt; bool</span>
+            </dt>
+            <dd>Adds a constraint sparsity pattern from the specified matrix.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8b3ee065ee574981db57061005421f16" class="m-doc">addConstraintSparsityPattern</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">iDynTree::<wbr />MatrixDynSize</a>&amp; newConstraint,
+              const <a href="structiDynTree_1_1IndexRange.html" class="m-doc">iDynTree::<wbr />IndexRange</a>&amp; constraintRange) -&gt; bool</span>
+            </dt>
+            <dd>Adds a constraint sparsity pattern from the specified matrix and constraint range.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;unsigned int nRows, unsigned int nCols&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae67e37f45fb3a99fd8a57d196fc62e4e" class="m-doc">addConstraintSparsityPattern</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">iDynTree::<wbr />MatrixFixSize</a>&lt;nRows, nCols&gt;&amp; newConstraint,
+              const <a href="structiDynTree_1_1IndexRange.html" class="m-doc">iDynTree::<wbr />IndexRange</a>&amp; constraintRange) -&gt; bool</span>
+            </dt>
+            <dd>Adds a constraint sparsity pattern from the specified matrix and constraint range.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1c446d2bce1d6a5467e6a9dc71e03874" class="m-doc">numberOfNonZerosForRow</a>(</span><span class="m-doc-wrap">size_t rowIndex) const -&gt; size_t</span>
+            </dt>
+            <dd>Returns the number of nonzeros in the specified row.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab06c1fd524494a9f573662b197608578" class="m-doc">numberOfNonZeros</a>(</span><span class="m-doc-wrap">) const -&gt; size_t</span>
+            </dt>
+            <dd>Returns the total number of nonzeros in the sparsity pattern.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a43cb1e0d1525be72e1989569b044dcba" class="m-doc">totalNumberOfNonZerosBeforeRow</a>(</span><span class="m-doc-wrap">size_t rowIndex) const -&gt; size_t</span>
+            </dt>
+            <dd>Returns the cumulative number of nonzeros in all the rows before the specified one.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0642d6a8c920a525456fbd2e84de3e2e" class="m-doc">nonZeroIndicesForRow</a>(</span><span class="m-doc-wrap">size_t rowIndex) const -&gt; const std::vector&lt;size_t&gt;&amp;</span>
+            </dt>
+            <dd>Returns a vector with the indices of the non zero columns for the specified contraint (row)</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#aa11d2449f0c659104ddcf8488910a182" class="m-doc">assignActualMatrixValues</a>(</span><span class="m-doc-wrap">const <a href="structiDynTree_1_1IndexRange.html" class="m-doc">iDynTree::<wbr />IndexRange</a>&amp; constraintRange,
+              const <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">iDynTree::<wbr />MatrixDynSize</a>&amp; fullMatrix,
+              size_t fullMatrixStartingRowIndex,
+              Ipopt::Number* outputBuffer)</span>
+            </dt>
+            <dd>Helper function to assign values to a contiguous buffer given the current sparsity pattern.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ae8593fcbf475f77ab3452db4e18fdf9f" class="m-doc">toString</a>(</span><span class="m-doc-wrap">) const -&gt; std::string</span>
+            </dt>
+            <dd>Returns a textual description of the sparsity pattern.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a9a095a463b0479e73250775028c542c7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">static const std::vector&lt;size_t&gt;&amp; internal::<wbr />kinematics::<wbr />SparsityHelper::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9a095a463b0479e73250775028c542c7" class="m-doc-self">NullIndicesVector</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>The invalid null indices vector.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>The invalid null indices vector</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a6b208df3000cb0d2d2490b0cb08b2489"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool internal::<wbr />kinematics::<wbr />SparsityHelper::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a6b208df3000cb0d2d2490b0cb08b2489" class="m-doc-self">addConstraintSparsityPattern</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">iDynTree::<wbr />MatrixDynSize</a>&amp; newConstraint)</span></span>
+            </h3>
+            <p>Adds a constraint sparsity pattern from the specified matrix.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">newConstraint</td>
+                  <td>the matrix containing the pattern (1 for nonzero, 0 otherwise)</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true on success. False otherwise</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a99dcd1e84f9214b4a5f77bd813d89bda"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;unsigned int nRows, unsigned int nCols&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">bool internal::<wbr />kinematics::<wbr />SparsityHelper::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a99dcd1e84f9214b4a5f77bd813d89bda" class="m-doc-self">addConstraintSparsityPattern</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">iDynTree::<wbr />MatrixFixSize</a>&lt;nRows, nCols&gt;&amp; newConstraint)</span></span>
+            </h3>
+            <p>Adds a constraint sparsity pattern from the specified matrix.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">newConstraint</td>
+                  <td>the matrix containing the pattern (1 for nonzero, 0 otherwise)</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true on success. False otherwise</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a8b3ee065ee574981db57061005421f16"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool internal::<wbr />kinematics::<wbr />SparsityHelper::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8b3ee065ee574981db57061005421f16" class="m-doc-self">addConstraintSparsityPattern</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">iDynTree::<wbr />MatrixDynSize</a>&amp; newConstraint,
+              const <a href="structiDynTree_1_1IndexRange.html" class="m-doc">iDynTree::<wbr />IndexRange</a>&amp; constraintRange)</span></span>
+            </h3>
+            <p>Adds a constraint sparsity pattern from the specified matrix and constraint range.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">newConstraint</td>
+                  <td>the matrix containing the pattern (1 for nonzero, 0 otherwise)</td>
+                </tr>
+                <tr>
+                  <td>constraintRange</td>
+                  <td>contiguous subset of the newConstraint matrix to be considered</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true on success. False otherwise</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae67e37f45fb3a99fd8a57d196fc62e4e"><div>
+            <h3>
+              <div class="m-doc-template">
+                template&lt;unsigned int nRows, unsigned int nCols&gt;
+              </div>
+              <span class="m-doc-wrap-bumper">bool internal::<wbr />kinematics::<wbr />SparsityHelper::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae67e37f45fb3a99fd8a57d196fc62e4e" class="m-doc-self">addConstraintSparsityPattern</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">iDynTree::<wbr />MatrixFixSize</a>&lt;nRows, nCols&gt;&amp; newConstraint,
+              const <a href="structiDynTree_1_1IndexRange.html" class="m-doc">iDynTree::<wbr />IndexRange</a>&amp; constraintRange)</span></span>
+            </h3>
+            <p>Adds a constraint sparsity pattern from the specified matrix and constraint range.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">newConstraint</td>
+                  <td>the matrix containing the pattern (1 for nonzero, 0 otherwise)</td>
+                </tr>
+                <tr>
+                  <td>constraintRange</td>
+                  <td>contiguous subset of the newConstraint matrix to be considered</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true on success. False otherwise</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a1c446d2bce1d6a5467e6a9dc71e03874"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">size_t internal::<wbr />kinematics::<wbr />SparsityHelper::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1c446d2bce1d6a5467e6a9dc71e03874" class="m-doc-self">numberOfNonZerosForRow</a>(</span><span class="m-doc-wrap">size_t rowIndex) const</span></span>
+            </h3>
+            <p>Returns the number of nonzeros in the specified row.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">rowIndex</td>
+                  <td>index of the row</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>number of nonzeros</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ab06c1fd524494a9f573662b197608578"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">size_t internal::<wbr />kinematics::<wbr />SparsityHelper::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab06c1fd524494a9f573662b197608578" class="m-doc-self">numberOfNonZeros</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns the total number of nonzeros in the sparsity pattern.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>the total number of nonzeros in the sparsity pattern</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a43cb1e0d1525be72e1989569b044dcba"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">size_t internal::<wbr />kinematics::<wbr />SparsityHelper::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a43cb1e0d1525be72e1989569b044dcba" class="m-doc-self">totalNumberOfNonZerosBeforeRow</a>(</span><span class="m-doc-wrap">size_t rowIndex) const</span></span>
+            </h3>
+            <p>Returns the cumulative number of nonzeros in all the rows before the specified one.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">rowIndex</td>
+                  <td>the row (excluded) to compute the cumulative number of nonzeros</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>the cumulative number of nonzeros in all the rows before the specified one</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a0642d6a8c920a525456fbd2e84de3e2e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">const std::vector&lt;size_t&gt;&amp; internal::<wbr />kinematics::<wbr />SparsityHelper::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0642d6a8c920a525456fbd2e84de3e2e" class="m-doc-self">nonZeroIndicesForRow</a>(</span><span class="m-doc-wrap">size_t rowIndex) const</span></span>
+            </h3>
+            <p>Returns a vector with the indices of the non zero columns for the specified contraint (row)</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">rowIndex</td>
+                  <td>the specified constraint</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>a vector with the indices of the non zero columns</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aa11d2449f0c659104ddcf8488910a182"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void internal::<wbr />kinematics::<wbr />SparsityHelper::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa11d2449f0c659104ddcf8488910a182" class="m-doc-self">assignActualMatrixValues</a>(</span><span class="m-doc-wrap">const <a href="structiDynTree_1_1IndexRange.html" class="m-doc">iDynTree::<wbr />IndexRange</a>&amp; constraintRange,
+              const <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">iDynTree::<wbr />MatrixDynSize</a>&amp; fullMatrix,
+              size_t fullMatrixStartingRowIndex,
+              Ipopt::Number* outputBuffer)</span></span>
+            </h3>
+            <p>Helper function to assign values to a contiguous buffer given the current sparsity pattern.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">constraintRange</td>
+                  <td>range of the constraint that should be sparsified</td>
+                </tr>
+                <tr>
+                  <td>fullMatrix</td>
+                  <td>matrix specifying the non sparse constraint</td>
+                </tr>
+                <tr>
+                  <td>fullMatrixStartingRowIndex</td>
+                  <td>starting row index of the non sparse matrix to be considered. The size is automatically inferred by the constraint size</td>
+                </tr>
+                <tr>
+                  <td>outputBuffer</td>
+                  <td>the buffer on which the sparsified values should be written</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="ae8593fcbf475f77ab3452db4e18fdf9f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">std::string internal::<wbr />kinematics::<wbr />SparsityHelper::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ae8593fcbf475f77ab3452db4e18fdf9f" class="m-doc-self">toString</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Returns a textual description of the sparsity pattern.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>a textual description of the sparsity pattern</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>Useful for debug</p><aside class="m-note m-info"><h4>Note</h4><p>this method perform dynamic memory allocation</p></aside>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>iDynTree documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/robotology/idyntree/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

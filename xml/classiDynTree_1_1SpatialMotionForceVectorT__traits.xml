@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1SpatialMotionForceVectorT__traits" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::SpatialMotionForceVectorT_traits</compoundname>
+    <includes local="no">iDynTree/Core/SpatialVector.h</includes>
+    <templateparamlist>
+      <param>
+        <type>class SpatialMotionForceVectorT</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>Traits class for <ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref> and <ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref> classes. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::SpatialMotionForceVectorT_traits&lt; DerivedSpatialVecT &gt;</label>
+        <link refid="classiDynTree_1_1SpatialMotionForceVectorT__traits"/>
+        <childnode refid="1" relation="template-instance">
+          <edgelabel>&lt; DerivedSpatialVecT &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::SpatialMotionForceVectorT_traits&lt; SpatialMotionForceVectorT &gt;</label>
+        <link refid="classiDynTree_1_1SpatialMotionForceVectorT__traits"/>
+      </node>
+    </inheritancegraph>
+    <location file="iDynTree/Core/SpatialVector.h" line="34" column="5" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="34" bodyend="34"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

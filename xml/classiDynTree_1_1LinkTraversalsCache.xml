@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1LinkTraversalsCache" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::LinkTraversalsCache</compoundname>
+    <includes local="no">iDynTree/Model/LinkTraversalsCache.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1LinkTraversalsCache_1aef790ef44a22115fa03a4889d777a0bb" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1Traversal" kindref="compound">iDynTree::Traversal</ref> * &gt;</type>
+        <definition>std::vector&lt;iDynTree::Traversal *&gt; iDynTree::LinkTraversalsCache::m_linkTraversals</definition>
+        <argsstring></argsstring>
+        <name>m_linkTraversals</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkTraversalsCache.h" line="34" column="17" bodyfile="iDynTree/Model/LinkTraversalsCache.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1LinkTraversalsCache_1ab7d325eeb7a92cddf4e29015a7a7820e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::LinkTraversalsCache::deleteTraversals</definition>
+        <argsstring>()</argsstring>
+        <name>deleteTraversals</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkTraversalsCache.h" line="35" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1LinkTraversalsCache_1ae978ab8498e4ffcacad8e0ecba45689f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::LinkTraversalsCache::LinkTraversalsCache</definition>
+        <argsstring>()</argsstring>
+        <name>LinkTraversalsCache</name>
+        <briefdescription>
+<para>Default constructur. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkTraversalsCache.h" line="41" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkTraversalsCache_1aac83b2dea2a31b8066c5a25c4945f02a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::LinkTraversalsCache::~LinkTraversalsCache</definition>
+        <argsstring>()</argsstring>
+        <name>~LinkTraversalsCache</name>
+        <briefdescription>
+<para>Default destructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkTraversalsCache.h" line="46" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkTraversalsCache_1a26383ef1b495477b0a6b074c9d420fb3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::LinkTraversalsCache::resize</definition>
+        <argsstring>(unsigned int nrOfLinks)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>nrOfLinks</declname>
+        </param>
+        <briefdescription>
+<para>Resize the cache to contains the specified number of Traversals. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>nrOfLinks</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of traversal </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkTraversalsCache.h" line="54" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkTraversalsCache_1af75c2b1b4dd62e24dcf0abb5666b5f94" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::LinkTraversalsCache::resize</definition>
+        <argsstring>(const iDynTree::Model &amp;model)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Resize the cache to contains the number of Traversals for the specified model. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the model </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkTraversalsCache.h" line="62" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkTraversalsCache_1a7f3c518053ab374caefaa698ad2e6ce3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> &amp;</type>
+        <definition>Traversal&amp; iDynTree::LinkTraversalsCache::getTraversalWithLinkAsBase</definition>
+        <argsstring>(const iDynTree::Model &amp;model, const iDynTree::LinkIndex linkIdx)</argsstring>
+        <name>getTraversalWithLinkAsBase</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const iDynTree::LinkIndex</type>
+          <declname>linkIdx</declname>
+        </param>
+        <briefdescription>
+<para>return the traversal for the specified link in the specified model </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If the traversal has been cached this function returns the cached traversal otherwise it creates the new traversal, caches it and returns it, thus performin a memory allocation.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the model </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>linkIdx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the index to be considered as base </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the traversal for the specified model link </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkTraversalsCache.h" line="76" column="15"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para><ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> traversal cache, store a traversal for each link in the model. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Class that stores a traversal for each link in the model. It actually computes the traversal on the first time that a given traversal is requested </para>
+    </detaileddescription>
+    <location file="iDynTree/Model/LinkTraversalsCache.h" line="31" column="1" bodyfile="iDynTree/Model/LinkTraversalsCache.h" bodystart="32" bodyend="78"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1LinkTraversalsCache_1ab7d325eeb7a92cddf4e29015a7a7820e" prot="private" virt="non-virtual"><scope>iDynTree::LinkTraversalsCache</scope><name>deleteTraversals</name></member>
+      <member refid="classiDynTree_1_1LinkTraversalsCache_1a7f3c518053ab374caefaa698ad2e6ce3" prot="public" virt="non-virtual"><scope>iDynTree::LinkTraversalsCache</scope><name>getTraversalWithLinkAsBase</name></member>
+      <member refid="classiDynTree_1_1LinkTraversalsCache_1ae978ab8498e4ffcacad8e0ecba45689f" prot="public" virt="non-virtual"><scope>iDynTree::LinkTraversalsCache</scope><name>LinkTraversalsCache</name></member>
+      <member refid="classiDynTree_1_1LinkTraversalsCache_1aef790ef44a22115fa03a4889d777a0bb" prot="private" virt="non-virtual"><scope>iDynTree::LinkTraversalsCache</scope><name>m_linkTraversals</name></member>
+      <member refid="classiDynTree_1_1LinkTraversalsCache_1a26383ef1b495477b0a6b074c9d420fb3" prot="public" virt="non-virtual"><scope>iDynTree::LinkTraversalsCache</scope><name>resize</name></member>
+      <member refid="classiDynTree_1_1LinkTraversalsCache_1af75c2b1b4dd62e24dcf0abb5666b5f94" prot="public" virt="non-virtual"><scope>iDynTree::LinkTraversalsCache</scope><name>resize</name></member>
+      <member refid="classiDynTree_1_1LinkTraversalsCache_1aac83b2dea2a31b8066c5a25c4945f02a" prot="public" virt="non-virtual"><scope>iDynTree::LinkTraversalsCache</scope><name>~LinkTraversalsCache</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

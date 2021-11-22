@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="ControlledDynamicalSystem_8h" kind="file" language="C++">
+    <compoundname>ControlledDynamicalSystem.h</compoundname>
+    <includes refid="DynamicalSystem_8h" local="no">iDynTree/DynamicalSystem.h</includes>
+    <includes refid="Controller_8h" local="no">iDynTree/Controller.h</includes>
+    <includes local="no">memory</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/ControlledDynamicalSystem.h</label>
+        <link refid="ControlledDynamicalSystem_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem" prot="public">iDynTree::optimalcontrol::ControlledDynamicalSystem</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <innernamespace refid="namespaceiDynTree_1_1optimalcontrol">iDynTree::optimalcontrol</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/ControlledDynamicalSystem.h"/>
+  </compounddef>
+</doxygen>

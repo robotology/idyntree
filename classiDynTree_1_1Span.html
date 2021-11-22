@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>iDynTree::Span class | iDynTree master</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="./index.html">iDynTree</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="4">
+            <li>
+              <a href="pages.html">Versions</a>
+              <ol>
+                <li><a href="./index.html">Master</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="pages.html">Contacts</a>
+              <ol>
+                <li><a href="https://github.com/robotology/idyntree">GitHub</a></li>
+                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
+              </ol>
+            </li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <div class="m-doc-include m-code m-inverted m-right-m m-text-right"><span class="cp">#include</span> <a class="cpf" href="Span_8h.html">&lt;iDynTree/Core/Span.h&gt;</a></div>
+          <div class="m-doc-template">template&lt;class ElementType, std::ptrdiff_t Extent&gt;</div>
+          <span class="m-breadcrumb"><a href="namespaceiDynTree.html">iDynTree</a>::<wbr/></span>Span <span class="m-thin">class</span>
+        </h1>
+        <p><span></span></p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-types">Public types</a></li>
+                <li><a href="#pub-static-attribs">Public static variables</a></li>
+                <li><a href="#typeless-methods">Constructors, destructors, conversion operators</a></li>
+                <li><a href="#pub-methods">Public functions</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <section id="pub-types">
+          <h2><a href="#pub-types">Public types</a></h2>
+          <dl class="m-doc">
+            <dt id="a70db7c45968e3bd56ca981811e237f40">
+              using <a href="#a70db7c45968e3bd56ca981811e237f40" class="m-doc-self">element_type</a> = ElementType
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a731b2a8e595a3b6e03df9c843856d7c1">
+              using <a href="#a731b2a8e595a3b6e03df9c843856d7c1" class="m-doc-self">value_type</a> = std::remove_cv_t&lt;ElementType&gt;
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a5f39b58d1f1f24fa826e8afed2f0a47d">
+              using <a href="#a5f39b58d1f1f24fa826e8afed2f0a47d" class="m-doc-self">index_type</a> = std::ptrdiff_t
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a36b24ad88f7035362135d713f5210caf">
+              using <a href="#a36b24ad88f7035362135d713f5210caf" class="m-doc-self">pointer</a> = element_type*
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ae2642271b87b800d7233fa17d521e1f5">
+              using <a href="#ae2642271b87b800d7233fa17d521e1f5" class="m-doc-self">reference</a> = element_type&amp;
+            </dt>
+            <dd><span></span></dd>
+            <dt id="afb25a7eef81ba47110192e3d6f906f68">
+              using <a href="#afb25a7eef81ba47110192e3d6f906f68" class="m-doc-self">const_reference</a> = const element_type&amp;
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a756d7b9397c34924e72785d050024b2d">
+              using <a href="#a756d7b9397c34924e72785d050024b2d" class="m-doc-self">iterator</a> = <a href="classiDynTree_1_1details_1_1span__iterator.html" class="m-doc">details::<wbr />span_iterator</a>&lt;<a href="classiDynTree_1_1Span.html" class="m-doc">Span</a>&lt;ElementType, Extent&gt;, false&gt;
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aa7f215f49b5509cc0be76c103716698e">
+              using <a href="#aa7f215f49b5509cc0be76c103716698e" class="m-doc-self">const_iterator</a> = <a href="classiDynTree_1_1details_1_1span__iterator.html" class="m-doc">details::<wbr />span_iterator</a>&lt;<a href="classiDynTree_1_1Span.html" class="m-doc">Span</a>&lt;ElementType, Extent&gt;, true&gt;
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ad03f65546eccd46d2866a12d9eea6aa4">
+              using <a href="#ad03f65546eccd46d2866a12d9eea6aa4" class="m-doc-self">reverse_iterator</a> = std::reverse_iterator&lt;<a href="classiDynTree_1_1details_1_1span__iterator.html" class="m-doc">iterator</a>&gt;
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a6c64cd168935d8f52052a6d37c6088a8">
+              using <a href="#a6c64cd168935d8f52052a6d37c6088a8" class="m-doc-self">const_reverse_iterator</a> = std::reverse_iterator&lt;<a href="classiDynTree_1_1details_1_1span__iterator.html" class="m-doc">const_<wbr />iterator</a>&gt;
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a679606e2b5ef53d99bb437b9b42f51d3">
+              using <a href="#a679606e2b5ef53d99bb437b9b42f51d3" class="m-doc-self">size_type</a> = index_type
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="pub-static-attribs">
+          <h2><a href="#pub-static-attribs">Public static variables</a></h2>
+          <dl class="m-doc">
+            <dt id="a769d61d5d758537d47cabfd3a3074858">
+              static const index_type <a href="#a769d61d5d758537d47cabfd3a3074858" class="m-doc-self">extent</a> <span class="m-label m-flat m-primary">constexpr</span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="typeless-methods">
+          <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
+          <dl class="m-doc">
+            <dt id="a96e1b612c73489bc0543e1b281348d03">
+              <span class="m-doc-wrap-bumper"><a href="#a96e1b612c73489bc0543e1b281348d03" class="m-doc-self">~Span</a>(</span><span class="m-doc-wrap">) <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt id="abc012d28574a8641a5ab3f7bafa7b6d5">
+              <div class="m-doc-template">template&lt;bool Dependent = false, class = std::enable_if_t&lt;(Dependent || Extent &lt;= 0)&gt;&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#abc012d28574a8641a5ab3f7bafa7b6d5" class="m-doc-self">Span</a>(</span><span class="m-doc-wrap">) -&gt; IDYNTREE_CONSTEXPR <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ad91a5ef1ecfacfd0f1bc8c549ec6eb2a">
+              <span class="m-doc-wrap-bumper">auto <a href="#ad91a5ef1ecfacfd0f1bc8c549ec6eb2a" class="m-doc-self">Span</a>(</span><span class="m-doc-wrap">pointer ptr,
+              index_type count) -&gt; IDYNTREE_CONSTEXPR</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a9c962214e112e643a0f4898e2455ed85">
+              <span class="m-doc-wrap-bumper">auto <a href="#a9c962214e112e643a0f4898e2455ed85" class="m-doc-self">Span</a>(</span><span class="m-doc-wrap">pointer firstElem,
+              pointer lastElem) -&gt; IDYNTREE_CONSTEXPR</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1fbbfad7a9b0967334d878cd3c68a7f6">
+              <div class="m-doc-template">template&lt;std::size_t N&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1fbbfad7a9b0967334d878cd3c68a7f6" class="m-doc-self">Span</a>(</span><span class="m-doc-wrap">element_type(&amp;arr)[N]) -&gt; IDYNTREE_CONSTEXPR <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a8e5b0b1eb6ae07cc346c1358e82c162d">
+              <div class="m-doc-template">template&lt;std::size_t N, class ArrayElementType = std::remove_const_t&lt;element_type&gt;&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8e5b0b1eb6ae07cc346c1358e82c162d" class="m-doc-self">Span</a>(</span><span class="m-doc-wrap">std::array&lt;ArrayElementType, N&gt;&amp; arr) -&gt; IDYNTREE_CONSTEXPR <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a24a3f7b3832c3a78bf42529776960db6">
+              <div class="m-doc-template">template&lt;std::size_t N&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a24a3f7b3832c3a78bf42529776960db6" class="m-doc-self">Span</a>(</span><span class="m-doc-wrap">const std::array&lt;std::remove_const_t&lt;element_type&gt;, N&gt;&amp; arr) -&gt; IDYNTREE_CONSTEXPR <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aae7fac87b82c44524b67bca5e6a98bfd">
+              <div class="m-doc-template">template&lt;class Container, class = std::enable_if_t&lt;<a href="structiDynTree_1_1SpanUtils_1_1has__data__method.html" class="m-doc">SpanUtils::<wbr />has_data_method</a>&lt;Container&gt;::value&amp;&amp; <a href="structiDynTree_1_1SpanUtils_1_1has__size__method.html" class="m-doc">SpanUtils::<wbr />has_size_method</a>&lt;Container&gt;::value&gt;&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#aae7fac87b82c44524b67bca5e6a98bfd" class="m-doc-self">Span</a>(</span><span class="m-doc-wrap">Container&amp; cont) -&gt; IDYNTREE_CONSTEXPR</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="afedf7aaf714bef1be9c70590340655c8">
+              <div class="m-doc-template">template&lt;class Container, class = std::enable_if_t&lt;<a href="structiDynTree_1_1SpanUtils_1_1has__data__method.html" class="m-doc">SpanUtils::<wbr />has_data_method</a>&lt;Container&gt;::value&amp;&amp; <a href="structiDynTree_1_1SpanUtils_1_1has__size__method.html" class="m-doc">SpanUtils::<wbr />has_size_method</a>&lt;Container&gt;::value&gt;&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#afedf7aaf714bef1be9c70590340655c8" class="m-doc-self">Span</a>(</span><span class="m-doc-wrap">const Container&amp; cont) -&gt; IDYNTREE_CONSTEXPR</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a2f5eb3aa82cd1bd72f8d90b5e6653a50">
+              <span class="m-doc-wrap-bumper">auto <a href="#a2f5eb3aa82cd1bd72f8d90b5e6653a50" class="m-doc-self">Span</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Span.html" class="m-doc">Span</a>&amp; other) -&gt; IDYNTREE_CONSTEXPR <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a537095cae4195e7f8653c99f4b90d41e">
+              <div class="m-doc-template">template&lt;class OtherElementType, std::ptrdiff_t OtherExtent, class = std::enable_if_t&lt;           <a href="structiDynTree_1_1details_1_1is__allowed__extent__conversion.html" class="m-doc">details::<wbr />is_allowed_extent_conversion</a>&lt;OtherExtent, Extent&gt;::value&amp;&amp;            <a href="structiDynTree_1_1details_1_1is__allowed__element__type__conversion.html" class="m-doc">details::<wbr />is_allowed_element_type_conversion</a>&lt;OtherElementType, element_type&gt;::value&gt;&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a537095cae4195e7f8653c99f4b90d41e" class="m-doc-self">Span</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Span.html" class="m-doc">Span</a>&lt;OtherElementType, OtherExtent&gt;&amp; other) -&gt; IDYNTREE_CONSTEXPR</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a210a813bcd52fcfbf12997430237b533">
+              <span class="m-doc-wrap-bumper">auto <a href="#a210a813bcd52fcfbf12997430237b533" class="m-doc-self">operator=</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Span.html" class="m-doc">Span</a>&amp; other) -&gt; IDYNTREE_CONSTEXPR <a href="classiDynTree_1_1Span.html" class="m-doc">Span</a>&amp; <span class="m-label m-flat m-info">defaulted</span> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a8adb813162ff11a568a0fdc425e492d4">
+              <div class="m-doc-template">template&lt;std::ptrdiff_t Count&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a8adb813162ff11a568a0fdc425e492d4" class="m-doc-self">first</a>(</span><span class="m-doc-wrap">) const -&gt; IDYNTREE_CONSTEXPR <a href="classiDynTree_1_1Span.html" class="m-doc">Span</a>&lt;element_type, Count&gt;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a18120c4d63ac40bb3490edfb6ceb226e">
+              <div class="m-doc-template">template&lt;std::ptrdiff_t Count&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a18120c4d63ac40bb3490edfb6ceb226e" class="m-doc-self">last</a>(</span><span class="m-doc-wrap">) const -&gt; IDYNTREE_CONSTEXPR <a href="classiDynTree_1_1Span.html" class="m-doc">Span</a>&lt;element_type, Count&gt;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a7586e4325dd1765618d301ce4551682a">
+              <div class="m-doc-template">template&lt;std::ptrdiff_t Offset, std::ptrdiff_t Count = dynamic_extent&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7586e4325dd1765618d301ce4551682a" class="m-doc-self">subspan</a>(</span><span class="m-doc-wrap">) const -&gt; typename details::calculate_subspan_type&lt; ElementType, Extent, Offset, Count &gt;::type -&gt; IDYNTREE_CONSTEXPR auto</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a21d66395cac09a76a56d9d230d5bfc26">
+              <span class="m-doc-wrap-bumper">auto <a href="#a21d66395cac09a76a56d9d230d5bfc26" class="m-doc-self">first</a>(</span><span class="m-doc-wrap">index_type count) const -&gt; IDYNTREE_CONSTEXPR <a href="classiDynTree_1_1Span.html" class="m-doc">Span</a>&lt;element_type, dynamic_extent&gt;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a640d4ee52e067a94dc1de648f79c5edc">
+              <span class="m-doc-wrap-bumper">auto <a href="#a640d4ee52e067a94dc1de648f79c5edc" class="m-doc-self">last</a>(</span><span class="m-doc-wrap">index_type count) const -&gt; IDYNTREE_CONSTEXPR <a href="classiDynTree_1_1Span.html" class="m-doc">Span</a>&lt;element_type, dynamic_extent&gt;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a982781643e6a4a5a5ea31c6013bebde5">
+              <span class="m-doc-wrap-bumper">auto <a href="#a982781643e6a4a5a5ea31c6013bebde5" class="m-doc-self">subspan</a>(</span><span class="m-doc-wrap">index_type offset,
+              index_type count = dynamic_extent) const -&gt; IDYNTREE_CONSTEXPR <a href="classiDynTree_1_1Span.html" class="m-doc">Span</a>&lt;element_type, dynamic_extent&gt;</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af304ba80cabe3c1a7d00f1cbb81b803f">
+              <span class="m-doc-wrap-bumper">auto <a href="#af304ba80cabe3c1a7d00f1cbb81b803f" class="m-doc-self">size</a>(</span><span class="m-doc-wrap">) const -&gt; IDYNTREE_CONSTEXPR index_type <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="aba35de3ae6d57c9fb20a8f801060b90b">
+              <span class="m-doc-wrap-bumper">auto <a href="#aba35de3ae6d57c9fb20a8f801060b90b" class="m-doc-self">size_bytes</a>(</span><span class="m-doc-wrap">) const -&gt; IDYNTREE_CONSTEXPR index_type <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a1666613569f4e2f24db16a112a41c8e9">
+              <span class="m-doc-wrap-bumper">auto <a href="#a1666613569f4e2f24db16a112a41c8e9" class="m-doc-self">empty</a>(</span><span class="m-doc-wrap">) const -&gt; IDYNTREE_CONSTEXPR bool <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="af79f016b2ac1e691005cc20ebdd179ba">
+              <span class="m-doc-wrap-bumper">auto <a href="#af79f016b2ac1e691005cc20ebdd179ba" class="m-doc-self">operator[]</a>(</span><span class="m-doc-wrap">index_type idx) const -&gt; IDYNTREE_CONSTEXPR reference</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="abb1c0032e5b8b0559bd79ecb22592f17">
+              <span class="m-doc-wrap-bumper">auto <a href="#abb1c0032e5b8b0559bd79ecb22592f17" class="m-doc-self">getVal</a>(</span><span class="m-doc-wrap">index_type idx) const -&gt; IDYNTREE_CONSTEXPR const_reference</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a227ad4ae67fc259cc8a44df883b92557">
+              <span class="m-doc-wrap-bumper">auto <a href="#a227ad4ae67fc259cc8a44df883b92557" class="m-doc-self">setVal</a>(</span><span class="m-doc-wrap">index_type idx,
+              const_reference val) -&gt; IDYNTREE_CONSTEXPR bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ac7629c2d787e91ae8501db3c5699428b">
+              <span class="m-doc-wrap-bumper">auto <a href="#ac7629c2d787e91ae8501db3c5699428b" class="m-doc-self">at</a>(</span><span class="m-doc-wrap">index_type idx) const -&gt; IDYNTREE_CONSTEXPR reference</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ab50f91a19ed1d88f7bb10367fa59412e">
+              <span class="m-doc-wrap-bumper">auto <a href="#ab50f91a19ed1d88f7bb10367fa59412e" class="m-doc-self">operator()</a>(</span><span class="m-doc-wrap">index_type idx) const -&gt; IDYNTREE_CONSTEXPR reference</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a348108e3280c4ef8c8e3ec35d4f6d7bf">
+              <span class="m-doc-wrap-bumper">auto <a href="#a348108e3280c4ef8c8e3ec35d4f6d7bf" class="m-doc-self">data</a>(</span><span class="m-doc-wrap">) const -&gt; IDYNTREE_CONSTEXPR pointer <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a3ffa753817b222a0f9c83232f4c5c141">
+              <span class="m-doc-wrap-bumper">auto <a href="#a3ffa753817b222a0f9c83232f4c5c141" class="m-doc-self">begin</a>(</span><span class="m-doc-wrap">) const -&gt; IDYNTREE_CONSTEXPR <a href="classiDynTree_1_1details_1_1span__iterator.html" class="m-doc">iterator</a> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="afb67f31bc6c4da128044733f940b7e55">
+              <span class="m-doc-wrap-bumper">auto <a href="#afb67f31bc6c4da128044733f940b7e55" class="m-doc-self">end</a>(</span><span class="m-doc-wrap">) const -&gt; IDYNTREE_CONSTEXPR <a href="classiDynTree_1_1details_1_1span__iterator.html" class="m-doc">iterator</a> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a56af802b85a3ad0aea91e63f117c05b7">
+              <span class="m-doc-wrap-bumper">auto <a href="#a56af802b85a3ad0aea91e63f117c05b7" class="m-doc-self">cbegin</a>(</span><span class="m-doc-wrap">) const -&gt; IDYNTREE_CONSTEXPR <a href="classiDynTree_1_1details_1_1span__iterator.html" class="m-doc">const_<wbr />iterator</a> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a81c64d2257e3e0f665e06168ea941b45">
+              <span class="m-doc-wrap-bumper">auto <a href="#a81c64d2257e3e0f665e06168ea941b45" class="m-doc-self">cend</a>(</span><span class="m-doc-wrap">) const -&gt; IDYNTREE_CONSTEXPR <a href="classiDynTree_1_1details_1_1span__iterator.html" class="m-doc">const_<wbr />iterator</a> <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a700dd4216eb5a5fccc6aaa7751c46abd">
+              <span class="m-doc-wrap-bumper">auto <a href="#a700dd4216eb5a5fccc6aaa7751c46abd" class="m-doc-self">rbegin</a>(</span><span class="m-doc-wrap">) const -&gt; IDYNTREE_CONSTEXPR reverse_iterator <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a373be1ad1db1e1f4c8ebd87d838c0dc6">
+              <span class="m-doc-wrap-bumper">auto <a href="#a373be1ad1db1e1f4c8ebd87d838c0dc6" class="m-doc-self">rend</a>(</span><span class="m-doc-wrap">) const -&gt; IDYNTREE_CONSTEXPR reverse_iterator <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="ab79906017e317d4147909338f2705649">
+              <span class="m-doc-wrap-bumper">auto <a href="#ab79906017e317d4147909338f2705649" class="m-doc-self">crbegin</a>(</span><span class="m-doc-wrap">) const -&gt; IDYNTREE_CONSTEXPR const_reverse_iterator <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a3da51a5c1535128edd711b64325511fe">
+              <span class="m-doc-wrap-bumper">auto <a href="#a3da51a5c1535128edd711b64325511fe" class="m-doc-self">crend</a>(</span><span class="m-doc-wrap">) const -&gt; IDYNTREE_CONSTEXPR const_reverse_iterator <span class="m-label m-flat m-success">noexcept</span></span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>iDynTree documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/robotology/idyntree/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

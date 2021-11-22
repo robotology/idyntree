@@ -1,6 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classiDynTree_1_1SpatialVector.html" title=" " alt="" coords="5,23,179,65"/>
-<area shape="rect" id="node2" href="$classiDynTree_1_1SpatialForceVector.html" title="Class providing the raw coordinates for any spatial force vector, (i.e." alt="" coords="227,31,435,57"/>
-<area shape="rect" id="node3" href="$classiDynTree_1_1SpatialMomentum.html" title="Class representing a spatial momentum, i.e." alt="" coords="483,5,689,32"/>
-<area shape="rect" id="node4" href="$classiDynTree_1_1Wrench.html" title="Class representing a wrench, i.e." alt="" coords="518,56,654,83"/>
-</map>

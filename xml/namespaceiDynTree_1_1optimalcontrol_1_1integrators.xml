@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespaceiDynTree_1_1optimalcontrol_1_1integrators" kind="namespace" language="C++">
+    <compoundname>iDynTree::optimalcontrol::integrators</compoundname>
+    <innerclass refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement" prot="public">iDynTree::optimalcontrol::integrators::SolutionElement</innerclass>
+    <innerclass refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfoData" prot="public">iDynTree::optimalcontrol::integrators::IntegratorInfoData</innerclass>
+    <innerclass refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfo" prot="public">iDynTree::optimalcontrol::integrators::IntegratorInfo</innerclass>
+    <innerclass refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex" prot="public">iDynTree::optimalcontrol::integrators::CollocationHessianIndex</innerclass>
+    <innerclass refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator" prot="public">iDynTree::optimalcontrol::integrators::Integrator</innerclass>
+    <innerclass refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator" prot="public">iDynTree::optimalcontrol::integrators::FixedStepIntegrator</innerclass>
+    <innerclass refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ForwardEuler" prot="public">iDynTree::optimalcontrol::integrators::ForwardEuler</innerclass>
+    <innerclass refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal" prot="public">iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</innerclass>
+    <innerclass refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4" prot="public">iDynTree::optimalcontrol::integrators::RK4</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="Integrator_8h_1aa5c8ad68150707a78233d30d14b183b2" prot="public" static="no">
+        <type>std::map&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex" kindref="compound">CollocationHessianIndex</ref>, <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &gt;</type>
+        <definition>using iDynTree::optimalcontrol::integrators::CollocationHessianMap = typedef std::map&lt;CollocationHessianIndex, MatrixDynSize&gt;</definition>
+        <argsstring></argsstring>
+        <name>CollocationHessianMap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="127" column="13" bodyfile="iDynTree/Integrator.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="Integrator_8h_1a7a03df16db0b979f0c465865aaf2c5c4" prot="public" static="no">
+        <type>std::map&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex" kindref="compound">CollocationHessianIndex</ref>, <ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">SparsityStructure</ref> &gt;</type>
+        <definition>using iDynTree::optimalcontrol::integrators::CollocationHessianSparsityMap = typedef std::map&lt;CollocationHessianIndex, SparsityStructure&gt;</definition>
+        <argsstring></argsstring>
+        <name>CollocationHessianSparsityMap</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Integrator.h" line="129" column="13" bodyfile="iDynTree/Integrator.h" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Integrator.h" line="34" column="9"/>
+  </compounddef>
+</doxygen>

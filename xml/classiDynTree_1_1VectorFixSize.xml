@@ -1,0 +1,588 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1VectorFixSize" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::VectorFixSize</compoundname>
+    <derivedcompoundref refid="classiDynTree_1_1ClassicalAcc" prot="public" virt="non-virtual">iDynTree::ClassicalAcc</derivedcompoundref>
+    <includes local="no">iDynTree/Core/VectorFixSize.h</includes>
+    <templateparamlist>
+      <param>
+        <type>unsigned int</type>
+        <declname>VecSize</declname>
+        <defname>VecSize</defname>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="user-defined">
+      <memberdef kind="typedef" id="classiDynTree_1_1VectorFixSize_1ada7487eff1fee83db8d41165d30f1263" prot="public" static="no">
+        <type>double</type>
+        <definition>typedef double iDynTree::VectorFixSize&lt; VecSize &gt;::value_type</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <briefdescription>
+<para>Typedefs to enable make_span. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="187" column="24" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="187" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classiDynTree_1_1VectorFixSize_1ad0f06a255dc213a5904d232f703a0192" prot="public" static="no">
+        <type>std::allocator&lt; double &gt;</type>
+        <definition>typedef std::allocator&lt;double&gt; iDynTree::VectorFixSize&lt; VecSize &gt;::allocator_type</definition>
+        <argsstring></argsstring>
+        <name>allocator_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="189" column="32" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="189" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classiDynTree_1_1VectorFixSize_1aa11c3eee00e88dabb7880f6cac2a9b82" prot="public" static="no">
+        <type>std::allocator_traits&lt; std::allocator&lt; double &gt; &gt;::pointer</type>
+        <definition>typedef std::allocator_traits&lt;std::allocator&lt;double&gt; &gt;::pointer iDynTree::VectorFixSize&lt; VecSize &gt;::pointer</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="191" column="58" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="191" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classiDynTree_1_1VectorFixSize_1a69b51f8119155d31a254676ae867ae8f" prot="public" static="no">
+        <type>std::allocator_traits&lt; std::allocator&lt; double &gt; &gt;::const_pointer</type>
+        <definition>typedef std::allocator_traits&lt;std::allocator&lt;double&gt; &gt;::const_pointer iDynTree::VectorFixSize&lt; VecSize &gt;::const_pointer</definition>
+        <argsstring></argsstring>
+        <name>const_pointer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="193" column="64" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="193" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Vector interface methods.</header>
+      <description><para>Methods exposing a vector-like interface to <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">VectorFixSize</ref>. </para>
+</description>
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1afbdebfe9410180223c2d33f6f5a243a5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::VectorFixSize&lt; VecSize &gt;::operator()</definition>
+        <argsstring>(const std::size_t index) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="72" column="16" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="305" bodyend="309"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1aaeeab0c1251340903c447dbc3cd33b01" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double &amp;</type>
+        <definition>double &amp; iDynTree::VectorFixSize&lt; VecSize &gt;::operator()</definition>
+        <argsstring>(const std::size_t index)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="74" column="16" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="312" bodyend="316"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a8345a3e5ee2998a02dd79019ce293421" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::VectorFixSize&lt; VecSize &gt;::operator[]</definition>
+        <argsstring>(const std::size_t index) const</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type>const std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="76" column="16" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="319" bodyend="323"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a21683853dd0b95beea5b091a584fe486" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double &amp;</type>
+        <definition>double &amp; iDynTree::VectorFixSize&lt; VecSize &gt;::operator[]</definition>
+        <argsstring>(const std::size_t index)</argsstring>
+        <name>operator[]</name>
+        <param>
+          <type>const std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="78" column="16" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="326" bodyend="330"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1af8b3a33ff82732e94480023aa18cfe98" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::VectorFixSize&lt; VecSize &gt;::getVal</definition>
+        <argsstring>(const std::size_t index) const</argsstring>
+        <name>getVal</name>
+        <param>
+          <type>const std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="80" column="16" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="333" bodyend="342"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1ab63541744f87c564754359e4923da4a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::VectorFixSize&lt; VecSize &gt;::setVal</definition>
+        <argsstring>(const std::size_t index, const double new_el)</argsstring>
+        <name>setVal</name>
+        <param>
+          <type>const std::size_t</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const double</type>
+          <declname>new_el</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="82" column="14" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="345" bodyend="356"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1affa1eab2d54d8227d8aeb402dc2dc1f7" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const double *</type>
+        <definition>const double * iDynTree::VectorFixSize&lt; VecSize &gt;::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <briefdescription>
+<para>Returns a const iterator to the beginning of the vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>At the moment iterator is implemented as a pointer, it may change in the future. For this reason it should not be used as a pointer to the data, use <ref refid="classiDynTree_1_1VectorFixSize_1ab6f044aea32e55a72f6ebed68f93f767" kindref="member">data()</ref> instead. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="89" column="22" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="254" bodyend="257"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a9409f3724df4aa4de2c8281ba7e67db2" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const double *</type>
+        <definition>const double * iDynTree::VectorFixSize&lt; VecSize &gt;::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <briefdescription>
+<para>Returns a const iterator to the beginning of the vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>At the moment iterator is implemented as a pointer, it may change in the future. For this reason it should not be used as a pointer to the data, use <ref refid="classiDynTree_1_1VectorFixSize_1ab6f044aea32e55a72f6ebed68f93f767" kindref="member">data()</ref> instead. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="96" column="22" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="260" bodyend="263"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a1420c32072d5c1e21140da111955a6d1" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const double *</type>
+        <definition>const double * iDynTree::VectorFixSize&lt; VecSize &gt;::cbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cbegin</name>
+        <briefdescription>
+<para>Returns a const iterator to the beginning of the vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>At the moment iterator is implemented as a pointer, it may change in the future. For this reason it should not be used as a pointer to the data, use <ref refid="classiDynTree_1_1VectorFixSize_1ab6f044aea32e55a72f6ebed68f93f767" kindref="member">data()</ref> instead. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="103" column="22" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="266" bodyend="269"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a0b5d60b77fbd7ba982e855453800f776" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const double *</type>
+        <definition>const double * iDynTree::VectorFixSize&lt; VecSize &gt;::cend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cend</name>
+        <briefdescription>
+<para>Returns a const iterator to the beginning of the vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>At the moment iterator is implemented as a pointer, it may change in the future. For this reason it should not be used as a pointer to the data, use <ref refid="classiDynTree_1_1VectorFixSize_1ab6f044aea32e55a72f6ebed68f93f767" kindref="member">data()</ref> instead. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="110" column="22" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="272" bodyend="275"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a8e64a7875375a8b1b894614ba882ad05" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>double *</type>
+        <definition>double * iDynTree::VectorFixSize&lt; VecSize &gt;::begin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>begin</name>
+        <briefdescription>
+<para>Returns a iterator to the beginning of the vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>At the moment iterator is implemented as a pointer, it may change in the future. For this reason it should not be used as a pointer to the data, use <ref refid="classiDynTree_1_1VectorFixSize_1ab6f044aea32e55a72f6ebed68f93f767" kindref="member">data()</ref> instead. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="117" column="16" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="278" bodyend="281"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a8b6f1796eba4d7c3db40e3d14e33b246" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>double *</type>
+        <definition>double * iDynTree::VectorFixSize&lt; VecSize &gt;::end</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>end</name>
+        <briefdescription>
+<para>Returns a iterator to the beginning of the vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>At the moment iterator is implemented as a pointer, it may change in the future. For this reason it should not be used as a pointer to the data, use <ref refid="classiDynTree_1_1VectorFixSize_1ab6f044aea32e55a72f6ebed68f93f767" kindref="member">data()</ref> instead. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="124" column="16" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="284" bodyend="287"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a92e903cfdf924fee24e71eee1b0dff76" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t iDynTree::VectorFixSize&lt; VecSize &gt;::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="126" column="21" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="290" bodyend="293"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Output helpers.</header>
+      <description><para>Output helpers. </para>
+</description>
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a11d7cfdce4e1674e2ce73a23c7e29990" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::VectorFixSize&lt; VecSize &gt;::toString</definition>
+        <argsstring>() const</argsstring>
+        <name>toString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="178" column="21" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="368" bodyend="378"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1acae25eb63bcbe6b524849d77134c168d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::VectorFixSize&lt; VecSize &gt;::reservedToString</definition>
+        <argsstring>() const</argsstring>
+        <name>reservedToString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="180" column="21" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="381" bodyend="391"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1VectorFixSize_1a7bf5cd26b6fc24c9ddaf8854ebb8ec63" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::VectorFixSize&lt; VecSize &gt;::m_data[VecSize]</definition>
+        <argsstring>[VecSize]</argsstring>
+        <name>m_data</name>
+        <briefdescription>
+<para>Storage for the <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Array of VecSize doubles. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="41" column="16" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a1ed77487376ad9915912e2118cb228af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::VectorFixSize&lt; VecSize &gt;::VectorFixSize</definition>
+        <argsstring>()</argsstring>
+        <name>VectorFixSize</name>
+        <briefdescription>
+<para>Default constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The data is not reset to 0 for perfomance reason. Please initialize the data in the vector before any use. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="49" column="9" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="201" bodyend="204"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a6e92dc360040bccf652bebb0b0318cd6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::VectorFixSize&lt; VecSize &gt;::VectorFixSize</definition>
+        <argsstring>(const double *in_data, const std::size_t in_size)</argsstring>
+        <name>VectorFixSize</name>
+        <param>
+          <type>const double *</type>
+          <declname>in_data</declname>
+        </param>
+        <param>
+          <type>const std::size_t</type>
+          <declname>in_size</declname>
+        </param>
+        <briefdescription>
+<para>Constructor from a C-style array. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Print an error an build a vector full of zeros if in_size is not size(). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="56" column="9" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="208" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a9fd2c86208c88b1b904564d0a6f5a3b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::VectorFixSize&lt; VecSize &gt;::VectorFixSize</definition>
+        <argsstring>(iDynTree::Span&lt; const double &gt; vec)</argsstring>
+        <name>VectorFixSize</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt;</type>
+          <declname>vec</declname>
+        </param>
+        <briefdescription>
+<para>Constructor from an <ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Print an error an build a vector full of zeros if in_size is not size(). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="64" column="9" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="225" bodyend="227"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a823899b673570f935b649cb98c1ca4f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">VectorFixSize</ref> &amp;</type>
+        <definition>VectorFixSize&lt; VecSize &gt; &amp; iDynTree::VectorFixSize&lt; VecSize &gt;::operator=</definition>
+        <argsstring>(iDynTree::Span&lt; const double &gt; vec)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt;</type>
+          <declname>vec</declname>
+        </param>
+        <briefdescription>
+<para>Copy assignment operator for spans. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Checks that dimensions are matching through an assert. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="137" column="24" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="297" bodyend="301"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a3bd1389dbdf51e06f4c64451c242397e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const double *</type>
+        <definition>const double * iDynTree::VectorFixSize&lt; VecSize &gt;::data</definition>
+        <argsstring>() const</argsstring>
+        <name>data</name>
+        <briefdescription>
+<para>Raw data accessor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>a const pointer to a vector of size() doubles </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="145" column="23" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="248" bodyend="251"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1ab6f044aea32e55a72f6ebed68f93f767" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double *</type>
+        <definition>double * iDynTree::VectorFixSize&lt; VecSize &gt;::data</definition>
+        <argsstring>()</argsstring>
+        <name>data</name>
+        <briefdescription>
+<para>Raw data accessor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>a pointer to a vector of size() doubles </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="152" column="17" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="242" bodyend="245"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1a57b77a6c96f3276ed8e12b5e35b7f442" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::VectorFixSize&lt; VecSize &gt;::zero</definition>
+        <argsstring>()</argsstring>
+        <name>zero</name>
+        <briefdescription>
+<para>Assign all element of the vector to 0. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="157" column="14" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="232" bodyend="238"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1VectorFixSize_1aee106d61ebb0925fecfa55cbaa515981" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::VectorFixSize&lt; VecSize &gt;::fillBuffer</definition>
+        <argsstring>(double *buf) const</argsstring>
+        <name>fillBuffer</name>
+        <param>
+          <type>double *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+<para>Assume that buf is pointing to a buffer of size() doubles, and fill it with the content of this vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>buf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to the buffer to fill</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+<para><simplesect kind="warning"><para>use this function only if you are an expert C user </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/VectorFixSize.h" line="171" column="14" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="359" bodyend="365"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class providing a simple vector of N elements. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The size of the vector is known at compile time, and it enables to avoid using dynamic memory allocation. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+      </node>
+      <node id="6">
+        <label>iDynTree::PositionRaw</label>
+        <link refid="classiDynTree_1_1PositionRaw"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>iDynTree::Direction</label>
+        <link refid="classiDynTree_1_1Direction"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>iDynTree::Position</label>
+        <link refid="classiDynTree_1_1Position"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>iDynTree::GeomVector3</label>
+        <link refid="classiDynTree_1_1GeomVector3"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>iDynTree::VectorFixSize&lt; 4 &gt;</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+        <childnode refid="1" relation="template-instance">
+          <edgelabel>&lt; 4 &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::ClassicalAcc&lt; 6 &gt;</label>
+        <link refid="classiDynTree_1_1ClassicalAcc"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::VectorFixSize&lt; 3 &gt;</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+        <childnode refid="1" relation="template-instance">
+          <edgelabel>&lt; 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="iDynTree/Core/VectorFixSize.h" line="33" column="16" bodyfile="iDynTree/Core/VectorFixSize.h" bodystart="34" bodyend="197"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1VectorFixSize_1ad0f06a255dc213a5904d232f703a0192" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>allocator_type</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1affa1eab2d54d8227d8aeb402dc2dc1f7" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>begin</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a8e64a7875375a8b1b894614ba882ad05" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>begin</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a1420c32072d5c1e21140da111955a6d1" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>cbegin</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a0b5d60b77fbd7ba982e855453800f776" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>cend</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a69b51f8119155d31a254676ae867ae8f" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>const_pointer</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a3bd1389dbdf51e06f4c64451c242397e" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>data</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1ab6f044aea32e55a72f6ebed68f93f767" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>data</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a9409f3724df4aa4de2c8281ba7e67db2" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>end</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a8b6f1796eba4d7c3db40e3d14e33b246" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>end</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1aee106d61ebb0925fecfa55cbaa515981" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>fillBuffer</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1af8b3a33ff82732e94480023aa18cfe98" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>getVal</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a7bf5cd26b6fc24c9ddaf8854ebb8ec63" prot="protected" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>m_data</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1afbdebfe9410180223c2d33f6f5a243a5" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1aaeeab0c1251340903c447dbc3cd33b01" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a823899b673570f935b649cb98c1ca4f8" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>operator=</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a8345a3e5ee2998a02dd79019ce293421" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>operator[]</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a21683853dd0b95beea5b091a584fe486" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>operator[]</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1aa11c3eee00e88dabb7880f6cac2a9b82" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>pointer</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1acae25eb63bcbe6b524849d77134c168d" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>reservedToString</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1ab63541744f87c564754359e4923da4a6" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>setVal</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a92e903cfdf924fee24e71eee1b0dff76" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>size</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a11d7cfdce4e1674e2ce73a23c7e29990" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>toString</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1ada7487eff1fee83db8d41165d30f1263" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>value_type</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a1ed77487376ad9915912e2118cb228af" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>VectorFixSize</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a6e92dc360040bccf652bebb0b0318cd6" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>VectorFixSize</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a9fd2c86208c88b1b904564d0a6f5a3b5" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>VectorFixSize</name></member>
+      <member refid="classiDynTree_1_1VectorFixSize_1a57b77a6c96f3276ed8e12b5e35b7f442" prot="public" virt="non-virtual"><scope>iDynTree::VectorFixSize</scope><name>zero</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

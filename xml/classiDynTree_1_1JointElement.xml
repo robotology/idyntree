@@ -1,0 +1,274 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1JointElement" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::JointElement</compoundname>
+    <basecompoundref refid="classiDynTree_1_1XMLElement" prot="public" virt="non-virtual">iDynTree::XMLElement</basecompoundref>
+    <innerclass refid="structiDynTree_1_1JointElement_1_1JointInfo" prot="public">iDynTree::JointElement::JointInfo</innerclass>
+    <innerclass refid="structiDynTree_1_1JointElement_1_1Limits" prot="private">iDynTree::JointElement::Limits</innerclass>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1JointElement_1aa9e5ae922e60cabb1f039d1dfeeaa12c" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, <ref refid="structiDynTree_1_1JointElement_1_1JointInfo" kindref="compound">JointElement::JointInfo</ref> &gt; &amp;</type>
+        <definition>std::unordered_map&lt;std::string, JointElement::JointInfo&gt;&amp; iDynTree::JointElement::m_joints</definition>
+        <argsstring></argsstring>
+        <name>m_joints</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="45" column="24" bodyfile="private/JointElement.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1JointElement_1a4ddeca6abcd6d252e73380714a912b0d" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, <ref refid="structiDynTree_1_1JointElement_1_1JointInfo" kindref="compound">JointElement::JointInfo</ref> &gt; &amp;</type>
+        <definition>std::unordered_map&lt;std::string, JointElement::JointInfo&gt;&amp; iDynTree::JointElement::m_fixedJoints</definition>
+        <argsstring></argsstring>
+        <name>m_fixedJoints</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="46" column="24" bodyfile="private/JointElement.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1JointElement_1a7f07257c3ab3e78ac3ef00c215e5ae27" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::JointElement::m_jointName</definition>
+        <argsstring></argsstring>
+        <name>m_jointName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="48" column="17" bodyfile="private/JointElement.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1JointElement_1a539ae59c74583d647d282f7abbe9a769" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::JointElement::m_jointType</definition>
+        <argsstring></argsstring>
+        <name>m_jointType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="49" column="17" bodyfile="private/JointElement.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1JointElement_1afc6dca76541790f0c0be47b6329c11fe" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
+        <definition>iDynTree::Transform iDynTree::JointElement::m_jointFrame</definition>
+        <argsstring></argsstring>
+        <name>m_jointFrame</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="50" column="25" bodyfile="private/JointElement.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1JointElement_1a2e245b018028d4042bd532a4f5300e6b" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Axis" kindref="compound">iDynTree::Axis</ref></type>
+        <definition>iDynTree::Axis iDynTree::JointElement::m_axis</definition>
+        <argsstring></argsstring>
+        <name>m_axis</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="51" column="20" bodyfile="private/JointElement.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1JointElement_1a640e6ef4d4464ca3d3d4552359e8d0ca" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::JointElement::m_parentLink</definition>
+        <argsstring></argsstring>
+        <name>m_parentLink</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="52" column="17" bodyfile="private/JointElement.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1JointElement_1a61a914cdd9f991767029c7c48f9ca90d" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::JointElement::m_childLink</definition>
+        <argsstring></argsstring>
+        <name>m_childLink</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="53" column="17" bodyfile="private/JointElement.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1JointElement_1a2db2092f3d3eb70ef1eb6a638d4050ef" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; Limits &gt;</type>
+        <definition>std::shared_ptr&lt;Limits&gt; iDynTree::JointElement::m_limits</definition>
+        <argsstring></argsstring>
+        <name>m_limits</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="62" column="21" bodyfile="private/JointElement.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1JointElement_1a71610159d5c52264e323143081ef9c0a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::JointElement::JointElement</definition>
+        <argsstring>(std::unordered_map&lt; std::string, JointElement::JointInfo &gt; &amp;joints, std::unordered_map&lt; std::string, JointElement::JointInfo &gt; &amp;fixedJoints)</argsstring>
+        <name>JointElement</name>
+        <param>
+          <type>std::unordered_map&lt; std::string, <ref refid="structiDynTree_1_1JointElement_1_1JointInfo" kindref="compound">JointElement::JointInfo</ref> &gt; &amp;</type>
+          <declname>joints</declname>
+        </param>
+        <param>
+          <type>std::unordered_map&lt; std::string, <ref refid="structiDynTree_1_1JointElement_1_1JointInfo" kindref="compound">JointElement::JointInfo</ref> &gt; &amp;</type>
+          <declname>fixedJoints</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="65" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1JointElement_1a48e357fff5a0e1fb9899792b4192960d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::JointElement::setAttributes</definition>
+        <argsstring>(const std::unordered_map&lt; std::string, std::shared_ptr&lt; XMLAttribute &gt;&gt; &amp;attributes) override</argsstring>
+        <name>setAttributes</name>
+        <reimplements refid="classiDynTree_1_1XMLElement_1a2fe23e8a9ee4d2f776f792c9c118db45">setAttributes</reimplements>
+        <param>
+          <type>const std::unordered_map&lt; std::string, std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLAttribute" kindref="compound">XMLAttribute</ref> &gt;&gt; &amp;</type>
+          <declname>attributes</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="68" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1JointElement_1a38083484b2799575b507ba2865c6b4f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">XMLElement</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;XMLElement&gt; iDynTree::JointElement::childElementForName</definition>
+        <argsstring>(const std::string &amp;name) override</argsstring>
+        <name>childElementForName</name>
+        <reimplements refid="classiDynTree_1_1XMLElement_1a94cf11d5e2e9f6a44f17c7439d2b809f">childElementForName</reimplements>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Factory method to create child element given the name. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>name of the element to create </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>a new parser element for the corresponding tag </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="70" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1JointElement_1af69cd132219910893eb013a8d2d0d95c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void iDynTree::JointElement::exitElementScope</definition>
+        <argsstring>() override</argsstring>
+        <name>exitElementScope</name>
+        <reimplements refid="classiDynTree_1_1XMLElement_1a327997dec2ced313aad008c376205f36">exitElementScope</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="72" column="18"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::XMLElement</label>
+        <link refid="classiDynTree_1_1XMLElement"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::JointElement</label>
+        <link refid="classiDynTree_1_1JointElement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>iDynTree::XMLElement</label>
+        <link refid="classiDynTree_1_1XMLElement"/>
+      </node>
+      <node id="1">
+        <label>iDynTree::JointElement</label>
+        <link refid="classiDynTree_1_1JointElement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="private/JointElement.h" line="33" column="1" bodyfile="private/JointElement.h" bodystart="33" bodyend="74"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1XMLElement_1a2a182ac17f5e644b113a67e02c3595e5" prot="public" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>attributeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1adf74d829fbe4d3d112c0ef2eba8bd3ea" prot="public" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>attributes</name></member>
+      <member refid="classiDynTree_1_1JointElement_1a38083484b2799575b507ba2865c6b4f3" prot="public" virt="virtual"><scope>iDynTree::JointElement</scope><name>childElementForName</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a18b5b00729b99a19cb3e8f430656e152" prot="public" virt="virtual"><scope>iDynTree::JointElement</scope><name>childHasBeenParsed</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1af5c19c2120a4e024149f78ee5bd52e6f" prot="public" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>children</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a3d8e1b737e614b35e3df0a4f76ac645b" prot="public" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>description</name></member>
+      <member refid="classiDynTree_1_1JointElement_1af69cd132219910893eb013a8d2d0d95c" prot="public" virt="virtual"><scope>iDynTree::JointElement</scope><name>exitElementScope</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1aa6f49fb7b1b204e1a84cbdc51faeaa62" prot="public" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>exitScopeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1abebc95353394912e187ad70e6078fcdc" prot="public" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>getParsedTextContent</name></member>
+      <member refid="classiDynTree_1_1JointElement_1a71610159d5c52264e323143081ef9c0a" prot="public" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>JointElement</name></member>
+      <member refid="classiDynTree_1_1JointElement_1a2e245b018028d4042bd532a4f5300e6b" prot="private" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>m_axis</name></member>
+      <member refid="classiDynTree_1_1JointElement_1a61a914cdd9f991767029c7c48f9ca90d" prot="private" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>m_childLink</name></member>
+      <member refid="classiDynTree_1_1JointElement_1a4ddeca6abcd6d252e73380714a912b0d" prot="private" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>m_fixedJoints</name></member>
+      <member refid="classiDynTree_1_1JointElement_1afc6dca76541790f0c0be47b6329c11fe" prot="private" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>m_jointFrame</name></member>
+      <member refid="classiDynTree_1_1JointElement_1a7f07257c3ab3e78ac3ef00c215e5ae27" prot="private" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>m_jointName</name></member>
+      <member refid="classiDynTree_1_1JointElement_1aa9e5ae922e60cabb1f039d1dfeeaa12c" prot="private" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>m_joints</name></member>
+      <member refid="classiDynTree_1_1JointElement_1a539ae59c74583d647d282f7abbe9a769" prot="private" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>m_jointType</name></member>
+      <member refid="classiDynTree_1_1JointElement_1a2db2092f3d3eb70ef1eb6a638d4050ef" prot="private" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>m_limits</name></member>
+      <member refid="classiDynTree_1_1JointElement_1a640e6ef4d4464ca3d3d4552359e8d0ca" prot="private" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>m_parentLink</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a7129fb1e69a5bc819872e65d3965296d" prot="public" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>name</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1aa44416f43c71e081f6637a91eb733e8d" prot="public" virt="virtual"><scope>iDynTree::JointElement</scope><name>parsedCharacters</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1ab40851b7629a74107f2183ca36e412e4" prot="public" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>setAttributeCallback</name></member>
+      <member refid="classiDynTree_1_1JointElement_1a48e357fff5a0e1fb9899792b4192960d" prot="public" virt="virtual"><scope>iDynTree::JointElement</scope><name>setAttributes</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a69171cc4b5c552b97f44375029356a2e" prot="public" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>setChildHasBeenParsedCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a16759fb450635662dced0eb2ace0228b" prot="public" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>setExitScopeCallback</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a885cb939d74e8ce27ce4c0708c04267e" prot="public" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a7ad288fac24328b2bb19908500fec39a" prot="public" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a42ee14ee8b2ec8a9e9e31472e1b17556" prot="public" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1aa0220e560dfd45a38797cb5209653ad4" prot="public" virt="virtual"><scope>iDynTree::JointElement</scope><name>~XMLElement</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

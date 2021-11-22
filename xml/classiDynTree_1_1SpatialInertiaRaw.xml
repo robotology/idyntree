@@ -1,0 +1,343 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1SpatialInertiaRaw" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::SpatialInertiaRaw</compoundname>
+    <derivedcompoundref refid="classiDynTree_1_1SpatialInertia" prot="public" virt="non-virtual">iDynTree::SpatialInertia</derivedcompoundref>
+    <includes local="no">iDynTree/Core/SpatialInertiaRaw.h</includes>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1SpatialInertiaRaw_1a94039efc9f52c01fc0111fb5c17cbd87" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::SpatialInertiaRaw::m_mass</definition>
+        <argsstring></argsstring>
+        <name>m_mass</name>
+        <briefdescription>
+<para>Mass. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="34" column="16" bodyfile="iDynTree/Core/SpatialInertiaRaw.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SpatialInertiaRaw_1adffed809529bfbc044e8c330374c611a" prot="protected" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::SpatialInertiaRaw::m_mcom[3]</definition>
+        <argsstring>[3]</argsstring>
+        <name>m_mcom</name>
+        <briefdescription>
+<para>First moment of mass (i.e. mass * center of mass). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="35" column="16" bodyfile="iDynTree/Core/SpatialInertiaRaw.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SpatialInertiaRaw_1aae4c95f1309e827a915431c58dad3666" prot="protected" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1RotationalInertiaRaw" kindref="compound">RotationalInertiaRaw</ref></type>
+        <definition>RotationalInertiaRaw iDynTree::SpatialInertiaRaw::m_rotInertia</definition>
+        <argsstring></argsstring>
+        <name>m_rotInertia</name>
+        <briefdescription>
+<para>Three dimensional rotational inertia. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="36" column="30" bodyfile="iDynTree/Core/SpatialInertiaRaw.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertiaRaw_1a9075739a88cf8d456be6c9346955c267" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SpatialInertiaRaw::SpatialInertiaRaw</definition>
+        <argsstring>()</argsstring>
+        <name>SpatialInertiaRaw</name>
+        <briefdescription>
+<para>Default constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The data is not reset to zero for perfomance reason. Please initialize the data in the vector before any use. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="44" column="16" bodyfile="iDynTree/Core/SpatialInertiaRaw.h" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertiaRaw_1aae32215a7b93c1f160bdf449dc76c60f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SpatialInertiaRaw::SpatialInertiaRaw</definition>
+        <argsstring>(const double mass, const PositionRaw &amp;com, const RotationalInertiaRaw &amp;rotInertia)</argsstring>
+        <name>SpatialInertiaRaw</name>
+        <param>
+          <type>const double</type>
+          <declname>mass</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1PositionRaw" kindref="compound">PositionRaw</ref> &amp;</type>
+          <declname>com</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1RotationalInertiaRaw" kindref="compound">RotationalInertiaRaw</ref> &amp;</type>
+          <declname>rotInertia</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mass</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>mass of the rigid body </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>com</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>center of mass of the rigid body, expressed in the frame in which the spatial inertia is expressed </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rotInertia</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>rotational inertia expressed with respect to the origin of the frame.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="warning"><para>the KDL::RigidBodyInertia class has a similar constructor, but in that one the rotational inerta in input is expressed in the center of mass of the body. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="55" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertiaRaw_1a5e43484f889736ad717282bb72bdac92" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SpatialInertiaRaw::SpatialInertiaRaw</definition>
+        <argsstring>(const SpatialInertiaRaw &amp;other)</argsstring>
+        <name>SpatialInertiaRaw</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialInertiaRaw" kindref="compound">SpatialInertiaRaw</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="56" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertiaRaw_1a910d0f719839f786b22a9bcc1b945371" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SpatialInertiaRaw::fromRotationalInertiaWrtCenterOfMass</definition>
+        <argsstring>(const double mass, const PositionRaw &amp;com, const RotationalInertiaRaw &amp;rotInertia)</argsstring>
+        <name>fromRotationalInertiaWrtCenterOfMass</name>
+        <param>
+          <type>const double</type>
+          <declname>mass</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1PositionRaw" kindref="compound">PositionRaw</ref> &amp;</type>
+          <declname>com</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1RotationalInertiaRaw" kindref="compound">RotationalInertiaRaw</ref> &amp;</type>
+          <declname>rotInertia</declname>
+        </param>
+        <briefdescription>
+<para>Helper constructor-like function that takes mass, center of mass and the rotational inertia expressed in the center of mass. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="63" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertiaRaw_1a38d60687fb01182e2d6cc9970e697b98" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double iDynTree::SpatialInertiaRaw::getMass</definition>
+        <argsstring>() const</argsstring>
+        <name>getMass</name>
+        <briefdescription>
+<para>multiplication operator </para>
+        </briefdescription>
+        <detaileddescription>
+<para>overloading happens on proper classes Getter functions</para>
+<para><simplesect kind="note"><para>for preserving consistency, no setters are implemented.. if you want to modify a spatial inertia create a new one, and assign it to the spatial inertia that you want modify. Given that no memory allocation happens it should be still efficient. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="82" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertiaRaw_1a37cb05817ed6e158eb96a8d5d7519941" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1PositionRaw" kindref="compound">PositionRaw</ref></type>
+        <definition>PositionRaw iDynTree::SpatialInertiaRaw::getCenterOfMass</definition>
+        <argsstring>() const</argsstring>
+        <name>getCenterOfMass</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="83" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertiaRaw_1ae13758f1b92ba30c1c02e5076ccb8940" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1RotationalInertiaRaw" kindref="compound">RotationalInertiaRaw</ref> &amp;</type>
+        <definition>const RotationalInertiaRaw&amp; iDynTree::SpatialInertiaRaw::getRotationalInertiaWrtFrameOrigin</definition>
+        <argsstring>() const</argsstring>
+        <name>getRotationalInertiaWrtFrameOrigin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="84" column="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertiaRaw_1a890bf2876d229c14b3ae24277bccebba" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1RotationalInertiaRaw" kindref="compound">RotationalInertiaRaw</ref></type>
+        <definition>RotationalInertiaRaw iDynTree::SpatialInertiaRaw::getRotationalInertiaWrtCenterOfMass</definition>
+        <argsstring>() const</argsstring>
+        <name>getRotationalInertiaWrtCenterOfMass</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="85" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertiaRaw_1adda5a778ebf6d876fa24d8d8b48a49ef" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref></type>
+        <definition>SpatialForceVector iDynTree::SpatialInertiaRaw::multiply</definition>
+        <argsstring>(const SpatialMotionVector &amp;op) const</argsstring>
+        <name>multiply</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref> &amp;</type>
+          <declname>op</declname>
+        </param>
+        <briefdescription>
+<para>Multiplication function. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="98" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertiaRaw_1ab545a454ffbd8144ce1b13fbb280d787" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SpatialInertiaRaw::zero</definition>
+        <argsstring>()</argsstring>
+        <name>zero</name>
+        <briefdescription>
+<para>reset to zero (i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>the inertia of body with zero mass) the <ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="101" column="14"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classiDynTree_1_1SpatialInertiaRaw_1aec240d29470a4bb7d7aebaa434ffef3c" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialInertiaRaw" kindref="compound">SpatialInertiaRaw</ref></type>
+        <definition>static SpatialInertiaRaw iDynTree::SpatialInertiaRaw::combine</definition>
+        <argsstring>(const SpatialInertiaRaw &amp;op1, const SpatialInertiaRaw &amp;op2)</argsstring>
+        <name>combine</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialInertiaRaw" kindref="compound">SpatialInertiaRaw</ref> &amp;</type>
+          <declname>op1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1SpatialInertiaRaw" kindref="compound">SpatialInertiaRaw</ref> &amp;</type>
+          <declname>op2</declname>
+        </param>
+        <briefdescription>
+<para>Function to combine the rigid body inertia of two different rigid bodies, giving the rigid body inertia of of the rigid body obtanined by welding the two bodies. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="92" column="34"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class providing the raw coordinates for a spatial inertia, i.e. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>a spatial dyadic mapping the motion space to the force space.</para>
+<para><simplesect kind="note"><para>in iDynTree, the spatial vector follows this serialization: the first three elements are the linear part and the second three elements are the angular part. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>iDynTree::SpatialInertia</label>
+        <link refid="classiDynTree_1_1SpatialInertia"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::SpatialInertiaRaw</label>
+        <link refid="classiDynTree_1_1SpatialInertiaRaw"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>iDynTree::RotationalInertiaRaw</label>
+        <link refid="classiDynTree_1_1RotationalInertiaRaw"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::SpatialInertiaRaw</label>
+        <link refid="classiDynTree_1_1SpatialInertiaRaw"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_rotInertia</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Matrix3x3</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; 3, 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>iDynTree::MatrixFixSize&lt; nRows, nCols &gt;</label>
+        <link refid="classiDynTree_1_1MatrixFixSize"/>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Core/SpatialInertiaRaw.h" line="31" column="5" bodyfile="iDynTree/Core/SpatialInertiaRaw.h" bodystart="32" bodyend="102"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1aec240d29470a4bb7d7aebaa434ffef3c" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertiaRaw</scope><name>combine</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1a910d0f719839f786b22a9bcc1b945371" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertiaRaw</scope><name>fromRotationalInertiaWrtCenterOfMass</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1a37cb05817ed6e158eb96a8d5d7519941" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertiaRaw</scope><name>getCenterOfMass</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1a38d60687fb01182e2d6cc9970e697b98" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertiaRaw</scope><name>getMass</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1a890bf2876d229c14b3ae24277bccebba" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertiaRaw</scope><name>getRotationalInertiaWrtCenterOfMass</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1ae13758f1b92ba30c1c02e5076ccb8940" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertiaRaw</scope><name>getRotationalInertiaWrtFrameOrigin</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1a94039efc9f52c01fc0111fb5c17cbd87" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialInertiaRaw</scope><name>m_mass</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1adffed809529bfbc044e8c330374c611a" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialInertiaRaw</scope><name>m_mcom</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1aae4c95f1309e827a915431c58dad3666" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialInertiaRaw</scope><name>m_rotInertia</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1adda5a778ebf6d876fa24d8d8b48a49ef" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertiaRaw</scope><name>multiply</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1a9075739a88cf8d456be6c9346955c267" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertiaRaw</scope><name>SpatialInertiaRaw</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1aae32215a7b93c1f160bdf449dc76c60f" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertiaRaw</scope><name>SpatialInertiaRaw</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1a5e43484f889736ad717282bb72bdac92" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertiaRaw</scope><name>SpatialInertiaRaw</name></member>
+      <member refid="classiDynTree_1_1SpatialInertiaRaw_1ab545a454ffbd8144ce1b13fbb280d787" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertiaRaw</scope><name>zero</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

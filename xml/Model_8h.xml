@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="Model_8h" kind="file" language="C++">
+    <compoundname>Model.h</compoundname>
+    <includes refid="IJoint_8h" local="no">iDynTree/Model/IJoint.h</includes>
+    <includes refid="Link_8h" local="no">iDynTree/Model/Link.h</includes>
+    <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
+    <includes refid="SolidShapes_8h" local="no">iDynTree/Model/SolidShapes.h</includes>
+    <includes local="no">cstdlib</includes>
+    <includes local="no">vector</includes>
+    <includedby refid="DenavitHartenberg_8h" local="no">iDynTree/Model/DenavitHartenberg.h</includedby>
+    <includedby refid="ModelTestUtils_8h" local="no">iDynTree/Model/ModelTestUtils.h</includedby>
+    <includedby refid="InverseKinematicsData_8h" local="no">private/InverseKinematicsData.h</includedby>
+    <includedby refid="ModelCalibrationHelper_8h" local="no">iDynTree/ModelIO/ModelCalibrationHelper.h</includedby>
+    <includedby refid="ModelExporter_8h" local="no">iDynTree/ModelIO/ModelExporter.h</includedby>
+    <includedby refid="ModelLoader_8h" local="no">iDynTree/ModelIO/ModelLoader.h</includedby>
+    <includedby refid="InertialElement_8h" local="no">private/InertialElement.h</includedby>
+    <includedby refid="URDFDocument_8h" local="no">private/URDFDocument.h</includedby>
+    <includedby refid="Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includedby>
+    <includedby refid="skinDynLibConversionsImplementation_8h" local="no">iDynTree/skinDynLibConversionsImplementation.h</includedby>
+    <includedby refid="InertialParametersSolidShapesHelpers_8h" local="no">iDynTree/InertialParametersSolidShapesHelpers.h</includedby>
+    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h</includedby>
+    <includedby refid="GravityCompensationHelpers_8h" local="no">iDynTree/Estimation/GravityCompensationHelpers.h</includedby>
+    <includedby refid="SimpleLeggedOdometry_8h" local="no">iDynTree/Estimation/SimpleLeggedOdometry.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/Model/Model.h</label>
+        <link refid="Model_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>vector</label>
+      </node>
+      <node id="2">
+        <label>cstdlib</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structiDynTree_1_1Neighbor" prot="public">iDynTree::Neighbor</innerclass>
+    <innerclass refid="classiDynTree_1_1Model" prot="public">iDynTree::Model</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/Model.h"/>
+  </compounddef>
+</doxygen>

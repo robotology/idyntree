@@ -1,0 +1,245 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1XMLAttribute" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::XMLAttribute</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1XMLAttribute_1a8d6f997c0217776efdf42a4fa32affd0" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::XMLAttribute::m_name</definition>
+        <argsstring></argsstring>
+        <name>m_name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLAttribute.h" line="24" column="17" bodyfile="iDynTree/XMLAttribute.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1XMLAttribute_1a63bccf51095d4bae50d13bb08dc477db" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::XMLAttribute::m_value</definition>
+        <argsstring></argsstring>
+        <name>m_value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLAttribute.h" line="25" column="17" bodyfile="iDynTree/XMLAttribute.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1XMLAttribute_1ab11448c5ba529166e76a8151795c8b85" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::XMLAttribute::m_prefix</definition>
+        <argsstring></argsstring>
+        <name>m_prefix</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLAttribute.h" line="26" column="17" bodyfile="iDynTree/XMLAttribute.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1XMLAttribute_1a509a8736545acd798569d6548ad92dcf" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::XMLAttribute::m_uri</definition>
+        <argsstring></argsstring>
+        <name>m_uri</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLAttribute.h" line="27" column="17" bodyfile="iDynTree/XMLAttribute.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1XMLAttribute_1a255e025528fde4f5e1f7e11b2f13dfdb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::XMLAttribute::XMLAttribute</definition>
+        <argsstring>(std::string name, std::string value, std::string prefix, std::string uri)</argsstring>
+        <name>XMLAttribute</name>
+        <param>
+          <type>std::string</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>prefix</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>uri</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLAttribute.h" line="30" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLAttribute_1aeaaa85b7a1e2d59856a120e00a43e5c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::XMLAttribute::setName</definition>
+        <argsstring>(std::string name)</argsstring>
+        <name>setName</name>
+        <param>
+          <type>std::string</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLAttribute.h" line="35" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLAttribute_1a9dab18a16f1ffa891d0b07d9a22093ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::XMLAttribute::setValue</definition>
+        <argsstring>(std::string value)</argsstring>
+        <name>setValue</name>
+        <param>
+          <type>std::string</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLAttribute.h" line="36" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLAttribute_1a82c2a869d99feea7dab9fb0abc49542e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::XMLAttribute::setPrefix</definition>
+        <argsstring>(std::string prefix)</argsstring>
+        <name>setPrefix</name>
+        <param>
+          <type>std::string</type>
+          <declname>prefix</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLAttribute.h" line="37" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLAttribute_1a10d9efd1d5dc3507dc9b1143748e57dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::XMLAttribute::setURI</definition>
+        <argsstring>(std::string uri)</argsstring>
+        <name>setURI</name>
+        <param>
+          <type>std::string</type>
+          <declname>uri</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLAttribute.h" line="38" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLAttribute_1a4da70f85ee7d440b99fcc75bf6d79257" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::XMLAttribute::name</definition>
+        <argsstring>() const</argsstring>
+        <name>name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLAttribute.h" line="40" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLAttribute_1aa36978c289e48e40a95abb4b8b69576a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::XMLAttribute::value</definition>
+        <argsstring>() const</argsstring>
+        <name>value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLAttribute.h" line="41" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLAttribute_1a447232923ee05fad897ce5d6e3430e6d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::XMLAttribute::prefix</definition>
+        <argsstring>() const</argsstring>
+        <name>prefix</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLAttribute.h" line="42" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLAttribute_1aa1c81b78ad45eb6b8240a2c9ce21a22b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::XMLAttribute::uri</definition>
+        <argsstring>() const</argsstring>
+        <name>uri</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLAttribute.h" line="43" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLAttribute_1ae3fde3b73dfebc2d6e899a6b60d237ce" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::string</type>
+        <definition>const std::string iDynTree::XMLAttribute::description</definition>
+        <argsstring>() const</argsstring>
+        <name>description</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLAttribute.h" line="45" column="23"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/XMLAttribute.h" line="22" column="1" bodyfile="iDynTree/XMLAttribute.h" bodystart="22" bodyend="46"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1XMLAttribute_1ae3fde3b73dfebc2d6e899a6b60d237ce" prot="public" virt="non-virtual"><scope>iDynTree::XMLAttribute</scope><name>description</name></member>
+      <member refid="classiDynTree_1_1XMLAttribute_1a8d6f997c0217776efdf42a4fa32affd0" prot="private" virt="non-virtual"><scope>iDynTree::XMLAttribute</scope><name>m_name</name></member>
+      <member refid="classiDynTree_1_1XMLAttribute_1ab11448c5ba529166e76a8151795c8b85" prot="private" virt="non-virtual"><scope>iDynTree::XMLAttribute</scope><name>m_prefix</name></member>
+      <member refid="classiDynTree_1_1XMLAttribute_1a509a8736545acd798569d6548ad92dcf" prot="private" virt="non-virtual"><scope>iDynTree::XMLAttribute</scope><name>m_uri</name></member>
+      <member refid="classiDynTree_1_1XMLAttribute_1a63bccf51095d4bae50d13bb08dc477db" prot="private" virt="non-virtual"><scope>iDynTree::XMLAttribute</scope><name>m_value</name></member>
+      <member refid="classiDynTree_1_1XMLAttribute_1a4da70f85ee7d440b99fcc75bf6d79257" prot="public" virt="non-virtual"><scope>iDynTree::XMLAttribute</scope><name>name</name></member>
+      <member refid="classiDynTree_1_1XMLAttribute_1a447232923ee05fad897ce5d6e3430e6d" prot="public" virt="non-virtual"><scope>iDynTree::XMLAttribute</scope><name>prefix</name></member>
+      <member refid="classiDynTree_1_1XMLAttribute_1aeaaa85b7a1e2d59856a120e00a43e5c8" prot="public" virt="non-virtual"><scope>iDynTree::XMLAttribute</scope><name>setName</name></member>
+      <member refid="classiDynTree_1_1XMLAttribute_1a82c2a869d99feea7dab9fb0abc49542e" prot="public" virt="non-virtual"><scope>iDynTree::XMLAttribute</scope><name>setPrefix</name></member>
+      <member refid="classiDynTree_1_1XMLAttribute_1a10d9efd1d5dc3507dc9b1143748e57dc" prot="public" virt="non-virtual"><scope>iDynTree::XMLAttribute</scope><name>setURI</name></member>
+      <member refid="classiDynTree_1_1XMLAttribute_1a9dab18a16f1ffa891d0b07d9a22093ed" prot="public" virt="non-virtual"><scope>iDynTree::XMLAttribute</scope><name>setValue</name></member>
+      <member refid="classiDynTree_1_1XMLAttribute_1aa1c81b78ad45eb6b8240a2c9ce21a22b" prot="public" virt="non-virtual"><scope>iDynTree::XMLAttribute</scope><name>uri</name></member>
+      <member refid="classiDynTree_1_1XMLAttribute_1aa36978c289e48e40a95abb4b8b69576a" prot="public" virt="non-virtual"><scope>iDynTree::XMLAttribute</scope><name>value</name></member>
+      <member refid="classiDynTree_1_1XMLAttribute_1a255e025528fde4f5e1f7e11b2f13dfdb" prot="public" virt="non-virtual"><scope>iDynTree::XMLAttribute</scope><name>XMLAttribute</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

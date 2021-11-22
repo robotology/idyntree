@@ -1,6 +1,0 @@
-<map id="iDynTree::SensorHelper" name="iDynTree::SensorHelper">
-<area shape="rect" id="node1" title=" " alt="" coords="5,78,180,105"/>
-<area shape="rect" id="node2" href="$classiDynTree_1_1AccelerometerSensorHelper.html" title=" " alt="" coords="228,5,455,47"/>
-<area shape="rect" id="node3" href="$classiDynTree_1_1ForceTorqueSensorHelper.html" title=" " alt="" coords="237,71,446,112"/>
-<area shape="rect" id="node4" href="$classiDynTree_1_1GyroscopeSensorHelper.html" title=" " alt="" coords="241,136,441,177"/>
-</map>

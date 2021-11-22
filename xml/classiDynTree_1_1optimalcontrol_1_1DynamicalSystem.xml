@@ -1,0 +1,915 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::optimalcontrol::DynamicalSystem</compoundname>
+    <derivedcompoundref refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem" prot="public" virt="non-virtual">iDynTree::optimalcontrol::LinearSystem</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1optimalcontrol_1_1MultiBodySystem" prot="public" virt="non-virtual">iDynTree::optimalcontrol::MultiBodySystem</derivedcompoundref>
+    <includes local="no">iDynTree/DynamicalSystem.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1adf0a0a6080d0696f0c13226a5b7ad17c" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t iDynTree::optimalcontrol::DynamicalSystem::m_stateSize</definition>
+        <argsstring></argsstring>
+        <name>m_stateSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="262" column="16" bodyfile="iDynTree/DynamicalSystem.h" bodystart="262" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a00d839c40133273c474849e70fce9bcf" prot="private" static="no" mutable="no">
+        <type>size_t</type>
+        <definition>size_t iDynTree::optimalcontrol::DynamicalSystem::m_controlSize</definition>
+        <argsstring></argsstring>
+        <name>m_controlSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="263" column="16" bodyfile="iDynTree/DynamicalSystem.h" bodystart="263" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a0b4d67d17951d879a161733a1fdc303c" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref></type>
+        <definition>VectorDynSize iDynTree::optimalcontrol::DynamicalSystem::m_initialState</definition>
+        <argsstring></argsstring>
+        <name>m_initialState</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="264" column="23" bodyfile="iDynTree/DynamicalSystem.h" bodystart="264" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a83ade897f2b42bfb09bec0e4c2d2ff5a" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref></type>
+        <definition>VectorDynSize iDynTree::optimalcontrol::DynamicalSystem::m_controlInput</definition>
+        <argsstring></argsstring>
+        <name>m_controlInput</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="265" column="23" bodyfile="iDynTree/DynamicalSystem.h" bodystart="265" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1af4b91c95d739fd82a0013560fa051233" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::DynamicalSystem::DynamicalSystem</definition>
+        <argsstring>()=delete</argsstring>
+        <name>DynamicalSystem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="45" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ab82065e18425aa56e59b030519d5e123" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::DynamicalSystem::DynamicalSystem</definition>
+        <argsstring>(size_t stateSpaceSize, size_t controlSpaceSize)</argsstring>
+        <name>DynamicalSystem</name>
+        <param>
+          <type>size_t</type>
+          <declname>stateSpaceSize</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>controlSpaceSize</declname>
+        </param>
+        <briefdescription>
+<para>Default constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">stateSpaceSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Dimension of the state space. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">controlSpaceSize</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Dimension of the control space. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="53" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a4020c60fe630d1f5b6b4baf06e7b42a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimalcontrol::DynamicalSystem::DynamicalSystem</definition>
+        <argsstring>(const DynamicalSystem &amp;other)=delete</argsstring>
+        <name>DynamicalSystem</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="56" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a99a0776f0a23fd9a672c1be966839e81" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::optimalcontrol::DynamicalSystem::~DynamicalSystem</definition>
+        <argsstring>()</argsstring>
+        <name>~DynamicalSystem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="58" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a1fdc25cc07f3bc2d02ac0cc2c74e8abc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::optimalcontrol::DynamicalSystem::stateSpaceSize</definition>
+        <argsstring>() const</argsstring>
+        <name>stateSpaceSize</name>
+        <briefdescription>
+<para>Returns the state space dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="63" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ae9048969fa6bb586f08332aa279ac01a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::optimalcontrol::DynamicalSystem::controlSpaceSize</definition>
+        <argsstring>() const</argsstring>
+        <name>controlSpaceSize</name>
+        <briefdescription>
+<para>Returns the control space dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="68" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aa10bd35bc49f5dfaea48ffeecf945312" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::DynamicalSystem::dynamics</definition>
+        <argsstring>(const VectorDynSize &amp;state, double time, VectorDynSize &amp;stateDynamics)=0</argsstring>
+        <name>dynamics</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a2596766c2b5a2346fc00633b1fcebc85">dynamics</reimplementedby>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>stateDynamics</declname>
+        </param>
+        <briefdescription>
+<para>Computes the system dynamics. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It return <formula id="81">$ f(t,x) $</formula>. Notice that here the dependency from the control input is removed, so that basically we are assuming an autonomous system. If the system is controlled, the control input will be set separately with the method setControlInput. This was necessary since the Integrator class needs an autonomous system to be integrated. See <ref refid="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem" kindref="compound">ControlledDynamicalSystem</ref> class in case you want to join a <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> with a <ref refid="classiDynTree_1_1optimalcontrol_1_1Controller" kindref="compound">Controller</ref>. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state point in which the dynamics is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the dynamics is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">stateDynamics</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value of the state derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="81" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aa7075f1f51fa22e426b6dd94f2297530" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::DynamicalSystem::setControlInput</definition>
+        <argsstring>(const VectorDynSize &amp;control)</argsstring>
+        <name>setControlInput</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>control</declname>
+        </param>
+        <briefdescription>
+<para>Set the control input to the dynamical system. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In principle, there is no need to override this method. This value is stored in an internal buffer which can be accessed through the method <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a9106ad9134ccfe7eed374dbd9e0192d2" kindref="member">controlInput()</ref>. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">control</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The control input value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successful, false otherwise (for example if size do not match). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="93" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a9106ad9134ccfe7eed374dbd9e0192d2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+        <definition>virtual const VectorDynSize&amp; iDynTree::optimalcontrol::DynamicalSystem::controlInput</definition>
+        <argsstring>() const</argsstring>
+        <name>controlInput</name>
+        <briefdescription>
+<para>Access the control input. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In principle, there is no need to override this method. This has to be set with the method <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aa7075f1f51fa22e426b6dd94f2297530" kindref="member">setControlInput()</ref>. <simplesect kind="return"><para>Const reference to the control input buffer. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="102" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a07c72447bba26fad4be33d3d629fb9e9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::optimalcontrol::DynamicalSystem::controlInput</definition>
+        <argsstring>(unsigned int index) const</argsstring>
+        <name>controlInput</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Access the control input. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In principle, there is no need to override this method. This has to be set with the method <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aa7075f1f51fa22e426b6dd94f2297530" kindref="member">setControlInput()</ref>. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index at which accessing the control input buffer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Value corresponding to the specified index. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="112" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a8d4e1f2401927edd62ab3236f787bda0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+        <definition>virtual const VectorDynSize&amp; iDynTree::optimalcontrol::DynamicalSystem::initialState</definition>
+        <argsstring>() const</argsstring>
+        <name>initialState</name>
+        <briefdescription>
+<para>Access the initial state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In principle, there is no need to override this method. This has to be set with the method <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a5a08463a75e03ef33a3b945a47c03120" kindref="member">setInitialState()</ref>. <simplesect kind="return"><para>Const reference to the initial state buffer. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="121" column="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aacad7dc34a95cc980482026aa0340ea5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::optimalcontrol::DynamicalSystem::initialState</definition>
+        <argsstring>(unsigned int index) const</argsstring>
+        <name>initialState</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>Access the initial state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In principle, there is no need to override this method. This has to be set with the method <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a5a08463a75e03ef33a3b945a47c03120" kindref="member">setInitialState()</ref>. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index at which accessing the initial state buffer. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Value corresponding to the specified index. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="131" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a5a08463a75e03ef33a3b945a47c03120" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::DynamicalSystem::setInitialState</definition>
+        <argsstring>(const VectorDynSize &amp;state)</argsstring>
+        <name>setInitialState</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+<para>Set the initial state to the dynamical system. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In principle, there is no need to override this method. This value is stored in an internal buffer which can be accessed through the method <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a8d4e1f2401927edd62ab3236f787bda0" kindref="member">initialState()</ref>. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The initial state value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successful, false otherwise (for example if size do not match). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="141" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ae107a97a87ddc0f796e169c6de2cc39b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::DynamicalSystem::dynamicsStateFirstDerivative</definition>
+        <argsstring>(const VectorDynSize &amp;state, double time, MatrixDynSize &amp;dynamicsDerivative)</argsstring>
+        <name>dynamicsStateFirstDerivative</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a8a775ab121adc0f62c2d2203801a331e">dynamicsStateFirstDerivative</reimplementedby>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>dynamicsDerivative</declname>
+        </param>
+        <briefdescription>
+<para>Compute the partial derivative of the state dynamics wrt the state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Namely it computes, <formula id="82">$ \frac{\partial f(t,x,u)}{\partial x}$</formula>. By default it return false;</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state value at which computing the partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which computing the partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">dynamicsDerivative</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output derivative. It has to be a square matrix with dimension equal to the state size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successful, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="154" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1adb980635dc572a927cef8bd46e6d5fb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::DynamicalSystem::dynamicsControlFirstDerivative</definition>
+        <argsstring>(const VectorDynSize &amp;state, double time, MatrixDynSize &amp;dynamicsDerivative)</argsstring>
+        <name>dynamicsControlFirstDerivative</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1ae6521cb2dad7a528732ea7f6933a8071">dynamicsControlFirstDerivative</reimplementedby>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &amp;</type>
+          <declname>dynamicsDerivative</declname>
+        </param>
+        <briefdescription>
+<para>Compute the partial derivative of the state dynamics wrt the control. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Namely it computes, <formula id="83">$ \frac{\partial f(t,x,u)}{\partial u}$</formula>. By default it return false;</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state value at which computing the partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which computing the partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">dynamicsDerivative</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output derivative. It has to be a matrix with number of rows equal to the state size and number of columns equal to the control size. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successful, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="169" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a53c392202df88d48e4066a52e1ef3299" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::DynamicalSystem::dynamicsStateFirstDerivativeSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;stateSparsity)</argsstring>
+        <name>dynamicsStateFirstDerivativeSparsity</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1ab50cd1fb480d10395eb58f5b978f0abb">dynamicsStateFirstDerivativeSparsity</reimplementedby>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>stateSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the state jacobian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stateSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the jacobian wrt state variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="179" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1adce1c8de3d7c21ff9b349337c45526bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::DynamicalSystem::dynamicsControlFirstDerivativeSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;controlSparsity)</argsstring>
+        <name>dynamicsControlFirstDerivativeSparsity</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a766c7b4d1388006e06b4e985f32c4913">dynamicsControlFirstDerivativeSparsity</reimplementedby>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>controlSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the control jacobian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>controlSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the jacobian wrt state variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="186" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a7525017f74a6be06a5b33f6ab1a534de" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::DynamicalSystem::dynamicsSecondPartialDerivativeWRTState</definition>
+        <argsstring>(double time, const iDynTree::VectorDynSize &amp;state, const iDynTree::VectorDynSize &amp;lambda, iDynTree::MatrixDynSize &amp;partialDerivative)</argsstring>
+        <name>dynamicsSecondPartialDerivativeWRTState</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1aad45c1bcb83441937a1724bee499f58c">dynamicsSecondPartialDerivativeWRTState</reimplementedby>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>partialDerivative</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the dynamics second partial derivative wrt the state variables. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It is the result of <formula id="84">$\frac{\partial^2 f(t, x, u)}{\partial x^2}$</formula> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The associated lagrange multipliers </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">partialDerivative</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="198" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a2fe62ab7639384a183bedce734aa6056" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::DynamicalSystem::dynamicsSecondPartialDerivativeWRTControl</definition>
+        <argsstring>(double time, const iDynTree::VectorDynSize &amp;state, const iDynTree::VectorDynSize &amp;lambda, iDynTree::MatrixDynSize &amp;partialDerivative)</argsstring>
+        <name>dynamicsSecondPartialDerivativeWRTControl</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a95d0eec0bfd0634ad3f0bf4c977b9a0b">dynamicsSecondPartialDerivativeWRTControl</reimplementedby>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>partialDerivative</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the dynamics second partial derivative wrt the control. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It is the result of <formula id="85">$\frac{\partial^2 f(t, x, u)}{\partial u^2}$</formula> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The associated lagrange multipliers </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">partialDerivative</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="213" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aa05844446c984946204dfda39a13aa8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::DynamicalSystem::dynamicsSecondPartialDerivativeWRTStateControl</definition>
+        <argsstring>(double time, const iDynTree::VectorDynSize &amp;state, const iDynTree::VectorDynSize &amp;lambda, iDynTree::MatrixDynSize &amp;partialDerivative)</argsstring>
+        <name>dynamicsSecondPartialDerivativeWRTStateControl</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a51e2fb08d78286e68b3bc15d720b943a">dynamicsSecondPartialDerivativeWRTStateControl</reimplementedby>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>lambda</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref> &amp;</type>
+          <declname>partialDerivative</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the dynamics second partial derivative wrt the state and control. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>It is the result of <formula id="86">$\frac{\partial^2 f(t, x, u)}{\partial x \partial u}$</formula>, thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">state</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The state value at which the partial derivative is computed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The associated lagrange multipliers </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">partialDerivative</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The output partial derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True if successfull, false otherwise (or if not implemented). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="229" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a59b187545289936a58b328dd879d1804" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::DynamicalSystem::dynamicsSecondPartialDerivativeWRTStateSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;stateSparsity)</argsstring>
+        <name>dynamicsSecondPartialDerivativeWRTStateSparsity</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1ac7591a0eaa5140d4894f1a911a5b995f">dynamicsSecondPartialDerivativeWRTStateSparsity</reimplementedby>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>stateSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the state hessian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>No check is performed in the indeces. They need to be in the range [0, stateDimension) and [0, stateDimension) respectively. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">stateSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the jacobian wrt state variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="241" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ae146dece07aaff9858da1f9ab0bb8464" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::DynamicalSystem::dynamicsSecondPartialDerivativeWRTStateControlSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;stateControlSparsity)</argsstring>
+        <name>dynamicsSecondPartialDerivativeWRTStateControlSparsity</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a3fcadc398984a481f0509bded638bd05">dynamicsSecondPartialDerivativeWRTStateControlSparsity</reimplementedby>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>stateControlSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the mixed hessian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>No check is performed in the indeces. They need to be in the range [0, stateDimension) and [0, controlDimension) respectively. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">stateControlSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the jacobian wrt state and control variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="250" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1adde7e5979c176b76d4334635210ead91" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimalcontrol::DynamicalSystem::dynamicsSecondPartialDerivativeWRTControlSparsity</definition>
+        <argsstring>(iDynTree::optimalcontrol::SparsityStructure &amp;controlSparsity)</argsstring>
+        <name>dynamicsSecondPartialDerivativeWRTControlSparsity</name>
+        <reimplementedby refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a16b0a2f2acb0e0226510a15bcd578882">dynamicsSecondPartialDerivativeWRTControlSparsity</reimplementedby>
+        <param>
+          <type><ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">iDynTree::optimalcontrol::SparsityStructure</ref> &amp;</type>
+          <declname>controlSparsity</declname>
+        </param>
+        <briefdescription>
+<para>Returns the set of nonzeros elements in terms of row and colun index, in the control hessian. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>No check is performed in the indeces. They need to be in the range [0, constraintDimension) and [0, controlDimension) respectively. </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">controlSparsity</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Sparsity structure of the partial derivative of the jacobian wrt control variables. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the sparsity is available. False otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/DynamicalSystem.h" line="259" column="22"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para><ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> base class. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions.</para>
+</simplesect>
+It defines a continuos time dynamical system, i.e. <formula id="80">$ \dot{x} = f(t,x,u) $</formula> Inherit publicly from this class in order to define your custiom dynamical system. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::optimalcontrol::DynamicalSystem</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem"/>
+      </node>
+      <node id="2">
+        <label>iDynTree::optimalcontrol::LinearSystem</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1LinearSystem"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::optimalcontrol::MultiBodySystem</label>
+        <link refid="classiDynTree_1_1optimalcontrol_1_1MultiBodySystem"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="iDynTree/DynamicalSystem.h" line="41" column="5" bodyfile="iDynTree/DynamicalSystem.h" bodystart="41" bodyend="266"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a9106ad9134ccfe7eed374dbd9e0192d2" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>controlInput</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a07c72447bba26fad4be33d3d629fb9e9" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>controlInput</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ae9048969fa6bb586f08332aa279ac01a" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>controlSpaceSize</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1af4b91c95d739fd82a0013560fa051233" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>DynamicalSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ab82065e18425aa56e59b030519d5e123" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>DynamicalSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a4020c60fe630d1f5b6b4baf06e7b42a4" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>DynamicalSystem</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aa10bd35bc49f5dfaea48ffeecf945312" prot="public" virt="pure-virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>dynamics</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1adb980635dc572a927cef8bd46e6d5fb9" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>dynamicsControlFirstDerivative</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1adce1c8de3d7c21ff9b349337c45526bc" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>dynamicsControlFirstDerivativeSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a2fe62ab7639384a183bedce734aa6056" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>dynamicsSecondPartialDerivativeWRTControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1adde7e5979c176b76d4334635210ead91" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>dynamicsSecondPartialDerivativeWRTControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a7525017f74a6be06a5b33f6ab1a534de" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>dynamicsSecondPartialDerivativeWRTState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aa05844446c984946204dfda39a13aa8a" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>dynamicsSecondPartialDerivativeWRTStateControl</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ae146dece07aaff9858da1f9ab0bb8464" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>dynamicsSecondPartialDerivativeWRTStateControlSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a59b187545289936a58b328dd879d1804" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>dynamicsSecondPartialDerivativeWRTStateSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ae107a97a87ddc0f796e169c6de2cc39b" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>dynamicsStateFirstDerivative</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a53c392202df88d48e4066a52e1ef3299" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>dynamicsStateFirstDerivativeSparsity</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a8d4e1f2401927edd62ab3236f787bda0" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>initialState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aacad7dc34a95cc980482026aa0340ea5" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>initialState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a83ade897f2b42bfb09bec0e4c2d2ff5a" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>m_controlInput</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a00d839c40133273c474849e70fce9bcf" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>m_controlSize</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a0b4d67d17951d879a161733a1fdc303c" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>m_initialState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1adf0a0a6080d0696f0c13226a5b7ad17c" prot="private" virt="non-virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>m_stateSize</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aa7075f1f51fa22e426b6dd94f2297530" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>setControlInput</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a5a08463a75e03ef33a3b945a47c03120" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>setInitialState</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a1fdc25cc07f3bc2d02ac0cc2c74e8abc" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>stateSpaceSize</name></member>
+      <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a99a0776f0a23fd9a672c1be966839e81" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>~DynamicalSystem</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

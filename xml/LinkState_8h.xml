@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="LinkState_8h" kind="file" language="C++">
+    <compoundname>LinkState.h</compoundname>
+    <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
+    <includes refid="Twist_8h" local="no">iDynTree/Core/Twist.h</includes>
+    <includes refid="SpatialAcc_8h" local="no">iDynTree/Core/SpatialAcc.h</includes>
+    <includes refid="Wrench_8h" local="no">iDynTree/Core/Wrench.h</includes>
+    <includes refid="ArticulatedBodyInertia_8h" local="no">iDynTree/Core/ArticulatedBodyInertia.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
+    <includes local="no">vector</includes>
+    <includedby refid="ContactWrench_8h" local="no">iDynTree/Model/ContactWrench.h</includedby>
+    <includedby refid="Dynamics_8h" local="no">iDynTree/Model/Dynamics.h</includedby>
+    <includedby refid="FreeFloatingState_8h" local="no">iDynTree/Model/FreeFloatingState.h</includedby>
+    <includedby refid="ModelTestUtils_8h" local="no">iDynTree/Model/ModelTestUtils.h</includedby>
+    <includedby refid="Visualizer_8h" local="no">iDynTree/Visualizer.h</includedby>
+    <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
+    <includedby refid="PredictSensorsMeasurements_8h" local="no">iDynTree/Sensors/PredictSensorsMeasurements.h</includedby>
+    <includedby refid="SixAxisForceTorqueSensor_8h" local="no">iDynTree/Sensors/SixAxisForceTorqueSensor.h</includedby>
+    <includedby refid="BerdyHelper_8h" local="no">iDynTree/Estimation/BerdyHelper.h</includedby>
+    <includedby refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/Estimation/ExternalWrenchesEstimation.h</includedby>
+    <includedby refid="SimpleLeggedOdometry_8h" local="no">iDynTree/Estimation/SimpleLeggedOdometry.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/Model/LinkState.h</label>
+        <link refid="LinkState_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1LinkPositions" prot="public">iDynTree::LinkPositions</innerclass>
+    <innerclass refid="classiDynTree_1_1LinkWrenches" prot="public">iDynTree::LinkWrenches</innerclass>
+    <innerclass refid="classiDynTree_1_1LinkInertias" prot="public">iDynTree::LinkInertias</innerclass>
+    <innerclass refid="classiDynTree_1_1LinkArticulatedBodyInertias" prot="public">iDynTree::LinkArticulatedBodyInertias</innerclass>
+    <innerclass refid="classiDynTree_1_1LinkVelArray" prot="public">iDynTree::LinkVelArray</innerclass>
+    <innerclass refid="classiDynTree_1_1LinkAccArray" prot="public">iDynTree::LinkAccArray</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="LinkState_8h_1ac93f1a5870ffbdb40436a8ab17b4df5a" prot="public" static="no">
+        <type>LinkWrenches</type>
+        <definition>typedef LinkWrenches iDynTree::LinkNetExternalWrenches</definition>
+        <argsstring></argsstring>
+        <name>LinkNetExternalWrenches</name>
+        <briefdescription>
+<para>Vector of the sum of all the external wrenches excerted on each link. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The wrench returned by operator(i) is the sum of all external wrenches (thus excluding the wrench applied on the link by other links in the model) that the environment applies on the link $i$, expressed ( both orientation and point) with respect to the reference frame of link i. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkState.h" line="111" column="26" bodyfile="iDynTree/Model/LinkState.h" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="LinkState_8h_1ab0304c1c94e9d9f0bbd646fceaad6e40" prot="public" static="no">
+        <type>LinkWrenches</type>
+        <definition>typedef LinkWrenches iDynTree::LinkInternalWrenches</definition>
+        <argsstring></argsstring>
+        <name>LinkInternalWrenches</name>
+        <briefdescription>
+<para>Vector of the wrenches acting that a link excert on his parent, given a <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Given a <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> with base link b, the wrench returned by operator(i) is the wrench the parent of link i excerts on link i, expressed (both orientation and point) with respect to the reference frame of link i. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkState.h" line="121" column="26" bodyfile="iDynTree/Model/LinkState.h" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="LinkState_8h_1a8467b5079b622cd683df2fcdfd16b07c" prot="public" static="no">
+        <type>LinkWrenches</type>
+        <definition>typedef LinkWrenches iDynTree::LinkNetTotalWrenchesWithoutGravity</definition>
+        <argsstring></argsstring>
+        <name>LinkNetTotalWrenchesWithoutGravity</name>
+        <briefdescription>
+<para>Vector of the sum of all the wrenches (both internal and external, excluding gravity) acting on link i, expressed (both orientation and point) with respect to the reference frame of link i. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is tipically computed as I*a+v*(I*v) , where a is the proper acceleration. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkState.h" line="130" column="26" bodyfile="iDynTree/Model/LinkState.h" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="LinkState_8h_1a4eebfd4c3b5feb2154a1de101578fb4a" prot="public" static="no">
+        <type>LinkInertias</type>
+        <definition>typedef LinkInertias iDynTree::LinkCompositeRigidBodyInertias</definition>
+        <argsstring></argsstring>
+        <name>LinkCompositeRigidBodyInertias</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkState.h" line="155" column="26" bodyfile="iDynTree/Model/LinkState.h" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="LinkState_8h_1a104b2ec0864d4c37b58b808b43630171" prot="public" static="no">
+        <type>LinkAccArray</type>
+        <definition>typedef LinkAccArray iDynTree::LinkProperAccArray</definition>
+        <argsstring></argsstring>
+        <name>LinkProperAccArray</name>
+        <briefdescription>
+<para>Typedef used when the vector is meant to be a vector of link proper accelerations. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkState.h" line="238" column="26" bodyfile="iDynTree/Model/LinkState.h" bodystart="238" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/LinkState.h"/>
+  </compounddef>
+</doxygen>

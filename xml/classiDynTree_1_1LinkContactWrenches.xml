@@ -1,0 +1,289 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1LinkContactWrenches" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::LinkContactWrenches</compoundname>
+    <includes local="no">iDynTree/Model/ContactWrench.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1LinkContactWrenches_1af94cb7fd3571e84afd0d89249827abb9" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; <ref refid="classiDynTree_1_1ContactWrench" kindref="compound">ContactWrench</ref> &gt; &gt;</type>
+        <definition>std::vector&lt; std::vector&lt;ContactWrench&gt; &gt; iDynTree::LinkContactWrenches::m_linkContactWrenches</definition>
+        <argsstring></argsstring>
+        <name>m_linkContactWrenches</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ContactWrench.h" line="90" column="21" bodyfile="iDynTree/Model/ContactWrench.h" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1LinkContactWrenches_1a705f417ac0ec4fd0b7529b4f454c110a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::LinkContactWrenches::LinkContactWrenches</definition>
+        <argsstring>(std::size_t nrOfLinks=0)</argsstring>
+        <name>LinkContactWrenches</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>nrOfLinks</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Create a <ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkWrenches</ref> vector, with the size given by nrOfLinks . </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">nrOfLinks</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the size of the vector. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ContactWrench.h" line="99" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkContactWrenches_1a0516116ada91381967e333d5e6cc908b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::LinkContactWrenches::LinkContactWrenches</definition>
+        <argsstring>(const Model &amp;model)</argsstring>
+        <name>LinkContactWrenches</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ContactWrench.h" line="100" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkContactWrenches_1ac785af8075bfcaaa89fac52ab10cc38e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::LinkContactWrenches::resize</definition>
+        <argsstring>(std::size_t nrOfLinks)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>nrOfLinks</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">nrOfLinks</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the number of links to which resize this object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ContactWrench.h" line="107" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkContactWrenches_1a6c2ffb02bbc0db3d742d38eb5321def3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::LinkContactWrenches::resize</definition>
+        <argsstring>(const Model &amp;model)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ContactWrench.h" line="108" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkContactWrenches_1a90dc46c5c87c617a17fdc56fa81fc7b8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::LinkContactWrenches::getNrOfContactsForLink</definition>
+        <argsstring>(const LinkIndex linkIndex) const</argsstring>
+        <name>getNrOfContactsForLink</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>linkIndex</declname>
+        </param>
+        <briefdescription>
+<para>Get the number of external contacts for a given link. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ContactWrench.h" line="113" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkContactWrenches_1a1a3f966de005610435707f3ee8c5f18c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::LinkContactWrenches::setNrOfContactsForLink</definition>
+        <argsstring>(const LinkIndex linkIndex, const size_t nrOfContacts)</argsstring>
+        <name>setNrOfContactsForLink</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>linkIndex</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>nrOfContacts</declname>
+        </param>
+        <briefdescription>
+<para>Set the number of external contacts for a given link. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ContactWrench.h" line="118" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkContactWrenches_1a64a542c1c49ae2a22455ff5a3793d043" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::LinkContactWrenches::getNrOfLinks</definition>
+        <argsstring>() const</argsstring>
+        <name>getNrOfLinks</name>
+        <briefdescription>
+<para>Get the number of links. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ContactWrench.h" line="123" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkContactWrenches_1aa887236855b6912850f3cc6a62a78f9f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1ContactWrench" kindref="compound">ContactWrench</ref> &amp;</type>
+        <definition>ContactWrench&amp; iDynTree::LinkContactWrenches::contactWrench</definition>
+        <argsstring>(const LinkIndex linkIndex, const size_t contactIndex)</argsstring>
+        <name>contactWrench</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>linkIndex</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>contactIndex</declname>
+        </param>
+        <briefdescription>
+<para>Get a specific <ref refid="classiDynTree_1_1ContactWrench" kindref="compound">ContactWrench</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">linkIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the index of the link for which the contact is retrieved </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">contactIndex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a index (between 0 and getNrOfContactsForLink(link)-1 ) identifing the specific contact. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ContactWrench.h" line="131" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkContactWrenches_1ae2bc12401d4305ad800bff6821a46ca5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1ContactWrench" kindref="compound">ContactWrench</ref> &amp;</type>
+        <definition>const ContactWrench&amp; iDynTree::LinkContactWrenches::contactWrench</definition>
+        <argsstring>(const LinkIndex linkIndex, const size_t contactIndex) const</argsstring>
+        <name>contactWrench</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>linkIndex</declname>
+        </param>
+        <param>
+          <type>const size_t</type>
+          <declname>contactIndex</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ContactWrench.h" line="133" column="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkContactWrenches_1af2fa68582633a61f84a0865baba0a22b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::LinkContactWrenches::computeNetWrenches</definition>
+        <argsstring>(LinkNetExternalWrenches &amp;netWrenches) const</argsstring>
+        <name>computeNetWrenches</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkNetExternalWrenches</ref> &amp;</type>
+          <declname>netWrenches</declname>
+        </param>
+        <briefdescription>
+<para>Compute the net wrenches vector from the contacts wrenches vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is just a loop that sums all the contact wrenches for every link and store the results (expressed in the link frame) in the netWrenches vector.</para>
+<para><simplesect kind="return"><para>true if all went well, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ContactWrench.h" line="144" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkContactWrenches_1a4277c1b8738d1b6bdf5620bdf9d6d850" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::LinkContactWrenches::toString</definition>
+        <argsstring>(const Model &amp;model) const</argsstring>
+        <name>toString</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+<para>Get a human readable description of the <ref refid="classiDynTree_1_1LinkUnknownWrenchContacts" kindref="compound">LinkUnknownWrenchContacts</ref> (for debug) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ContactWrench.h" line="150" column="21"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A set of <ref refid="classiDynTree_1_1ContactWrench" kindref="compound">ContactWrench</ref> for each link, representing all the contacts between the model and the external environment. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/ContactWrench.h" line="87" column="5" bodyfile="iDynTree/Model/ContactWrench.h" bodystart="88" bodyend="151"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1LinkContactWrenches_1af2fa68582633a61f84a0865baba0a22b" prot="public" virt="non-virtual"><scope>iDynTree::LinkContactWrenches</scope><name>computeNetWrenches</name></member>
+      <member refid="classiDynTree_1_1LinkContactWrenches_1aa887236855b6912850f3cc6a62a78f9f" prot="public" virt="non-virtual"><scope>iDynTree::LinkContactWrenches</scope><name>contactWrench</name></member>
+      <member refid="classiDynTree_1_1LinkContactWrenches_1ae2bc12401d4305ad800bff6821a46ca5" prot="public" virt="non-virtual"><scope>iDynTree::LinkContactWrenches</scope><name>contactWrench</name></member>
+      <member refid="classiDynTree_1_1LinkContactWrenches_1a90dc46c5c87c617a17fdc56fa81fc7b8" prot="public" virt="non-virtual"><scope>iDynTree::LinkContactWrenches</scope><name>getNrOfContactsForLink</name></member>
+      <member refid="classiDynTree_1_1LinkContactWrenches_1a64a542c1c49ae2a22455ff5a3793d043" prot="public" virt="non-virtual"><scope>iDynTree::LinkContactWrenches</scope><name>getNrOfLinks</name></member>
+      <member refid="classiDynTree_1_1LinkContactWrenches_1a705f417ac0ec4fd0b7529b4f454c110a" prot="public" virt="non-virtual"><scope>iDynTree::LinkContactWrenches</scope><name>LinkContactWrenches</name></member>
+      <member refid="classiDynTree_1_1LinkContactWrenches_1a0516116ada91381967e333d5e6cc908b" prot="public" virt="non-virtual"><scope>iDynTree::LinkContactWrenches</scope><name>LinkContactWrenches</name></member>
+      <member refid="classiDynTree_1_1LinkContactWrenches_1af94cb7fd3571e84afd0d89249827abb9" prot="private" virt="non-virtual"><scope>iDynTree::LinkContactWrenches</scope><name>m_linkContactWrenches</name></member>
+      <member refid="classiDynTree_1_1LinkContactWrenches_1ac785af8075bfcaaa89fac52ab10cc38e" prot="public" virt="non-virtual"><scope>iDynTree::LinkContactWrenches</scope><name>resize</name></member>
+      <member refid="classiDynTree_1_1LinkContactWrenches_1a6c2ffb02bbc0db3d742d38eb5321def3" prot="public" virt="non-virtual"><scope>iDynTree::LinkContactWrenches</scope><name>resize</name></member>
+      <member refid="classiDynTree_1_1LinkContactWrenches_1a1a3f966de005610435707f3ee8c5f18c" prot="public" virt="non-virtual"><scope>iDynTree::LinkContactWrenches</scope><name>setNrOfContactsForLink</name></member>
+      <member refid="classiDynTree_1_1LinkContactWrenches_1a4277c1b8738d1b6bdf5620bdf9d6d850" prot="public" virt="non-virtual"><scope>iDynTree::LinkContactWrenches</scope><name>toString</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

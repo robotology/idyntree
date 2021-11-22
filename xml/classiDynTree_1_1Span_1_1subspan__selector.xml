@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1Span_1_1subspan__selector" kind="class" language="C++" prot="private">
+    <compoundname>iDynTree::Span::subspan_selector</compoundname>
+    <templateparamlist>
+      <param>
+        <type>std::ptrdiff_t</type>
+        <declname>CallerExtent</declname>
+        <defname>CallerExtent</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Core/Span.h" line="615" column="5" bodyfile="iDynTree/Core/Span.h" bodystart="615" bodyend="615"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

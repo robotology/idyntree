@@ -1,0 +1,442 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1optimization_1_1IpoptInterface" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::optimization::IpoptInterface</compoundname>
+    <basecompoundref refid="classiDynTree_1_1optimization_1_1Optimizer" prot="public" virt="non-virtual">iDynTree::optimization::Optimizer</basecompoundref>
+    <includes local="no">iDynTree/Optimizers/IpoptInterface.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1optimization_1_1IpoptInterface_1a484f771a0f97f7270f8fcb2254b06021" prot="private" static="no" mutable="no">
+        <type>IpoptInterfaceImplementation *</type>
+        <definition>IpoptInterfaceImplementation* iDynTree::optimization::IpoptInterface::m_pimpl</definition>
+        <argsstring></argsstring>
+        <name>m_pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="38" column="42" bodyfile="iDynTree/Optimizers/IpoptInterface.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1a4bf2f27672ec21a6583f477437b610ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimization::IpoptInterface::IpoptInterface</definition>
+        <argsstring>()</argsstring>
+        <name>IpoptInterface</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="42" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1ac5141d4d0cc1750b5530b5b3b87a5c3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::optimization::IpoptInterface::IpoptInterface</definition>
+        <argsstring>(const IpoptInterface &amp;other)=delete</argsstring>
+        <name>IpoptInterface</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1optimization_1_1IpoptInterface" kindref="compound">IpoptInterface</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="44" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1a475875511043ee501bb6caed944eeb91" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::optimization::IpoptInterface::~IpoptInterface</definition>
+        <argsstring>() override</argsstring>
+        <name>~IpoptInterface</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="46" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1a089c7f20fdce126254416f387af6c57e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::IpoptInterface::isAvailable</definition>
+        <argsstring>() const override</argsstring>
+        <name>isAvailable</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1ac9b2386bef738ad45761103ffa0eed57">isAvailable</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="48" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1aca5c413a3dab3acb19e3860dc844c393" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::IpoptInterface::setProblem</definition>
+        <argsstring>(std::shared_ptr&lt; OptimizationProblem &gt; problem) override</argsstring>
+        <name>setProblem</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1a757c3b55008f047dfe23171c9c462d66">setProblem</reimplements>
+        <param>
+          <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimization_1_1OptimizationProblem" kindref="compound">OptimizationProblem</ref> &gt;</type>
+          <declname>problem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="50" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1a85ecc212dde478f7855c3039a8100d8d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::IpoptInterface::solve</definition>
+        <argsstring>() override</argsstring>
+        <name>solve</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1abbb92fc315d49718abffa88b55da1b70">solve</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="52" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1a4e2c8b348723cd9d1cd087d609702df5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::IpoptInterface::getPrimalVariables</definition>
+        <argsstring>(VectorDynSize &amp;primalVariables) override</argsstring>
+        <name>getPrimalVariables</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1ad6e6de7d98cce8509efb08489d26ba83">getPrimalVariables</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>primalVariables</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="54" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1ad582791ed3ce532afa7c6d925928700c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::IpoptInterface::getDualVariables</definition>
+        <argsstring>(VectorDynSize &amp;constraintsMultipliers, VectorDynSize &amp;lowerBoundsMultipliers, VectorDynSize &amp;upperBoundsMultipliers) override</argsstring>
+        <name>getDualVariables</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1a6b0a3443c0e2f8143a12119093c9338a">getDualVariables</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>constraintsMultipliers</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>lowerBoundsMultipliers</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>upperBoundsMultipliers</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="56" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1aab7302666ab28fb1f1561abf56425ae2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::IpoptInterface::getOptimalCost</definition>
+        <argsstring>(double &amp;optimalCost) override</argsstring>
+        <name>getOptimalCost</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1a37dfe08c5fd7e4ca9a2509681b2c638e">getOptimalCost</reimplements>
+        <param>
+          <type>double &amp;</type>
+          <declname>optimalCost</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="60" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1afc4e639fd1f2e0aea1ebeb5ef53122e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::optimization::IpoptInterface::getOptimalConstraintsValues</definition>
+        <argsstring>(VectorDynSize &amp;constraintsValues) override</argsstring>
+        <name>getOptimalConstraintsValues</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1a9525d85cf2e4079d22670a25d4413564">getOptimalConstraintsValues</reimplements>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
+          <declname>constraintsValues</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="62" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1ac2e51e749f6b40f759120da04fa58b10" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::optimization::IpoptInterface::minusInfinity</definition>
+        <argsstring>() override</argsstring>
+        <name>minusInfinity</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1a1f41f893f91cb2ab20df84460cec14ad">minusInfinity</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="64" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1a0af5ae4b855b94e18f0128aca1c1ff4c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::optimization::IpoptInterface::plusInfinity</definition>
+        <argsstring>() override</argsstring>
+        <name>plusInfinity</name>
+        <reimplements refid="classiDynTree_1_1optimization_1_1Optimizer_1af951a371f7556a9551cd97177cb4c5e2">plusInfinity</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="66" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1aed43e933635e4ad444b4f44e7b2888b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::optimization::IpoptInterface::useApproximatedHessians</definition>
+        <argsstring>(bool useApproximatedHessian=true)</argsstring>
+        <name>useApproximatedHessians</name>
+        <param>
+          <type>bool</type>
+          <declname>useApproximatedHessian</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="68" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1ab3ee907bc233ae9ddfded61088e6f154" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::IpoptInterface::setIpoptOption</definition>
+        <argsstring>(const std::string &amp;tag, const std::string &amp;value)</argsstring>
+        <name>setIpoptOption</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>tag</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="70" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1a16324d7ee5ae51ca24860e2755011d18" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::IpoptInterface::setIpoptOption</definition>
+        <argsstring>(const std::string &amp;tag, double value)</argsstring>
+        <name>setIpoptOption</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>tag</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="72" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1a8178b244c990043d6cb4c08c70ce0b00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::IpoptInterface::setIpoptOption</definition>
+        <argsstring>(const std::string &amp;tag, int value)</argsstring>
+        <name>setIpoptOption</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>tag</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="74" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1ae0fdb7057b6378e3fbbc4994962274c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::IpoptInterface::getIpoptOption</definition>
+        <argsstring>(const std::string &amp;tag, std::string &amp;value)</argsstring>
+        <name>getIpoptOption</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>tag</declname>
+        </param>
+        <param>
+          <type>std::string &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="76" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1a7d231456ae1fa20f31dfca46ffb293cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::IpoptInterface::getIpoptOption</definition>
+        <argsstring>(const std::string &amp;tag, double &amp;value)</argsstring>
+        <name>getIpoptOption</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>tag</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="78" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1a60b455c11875a0c87b1824d82d539da4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::optimization::IpoptInterface::getIpoptOption</definition>
+        <argsstring>(const std::string &amp;tag, int &amp;value)</argsstring>
+        <name>getIpoptOption</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>tag</declname>
+        </param>
+        <param>
+          <type>int &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="80" column="18"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::optimization::IpoptInterface</label>
+        <link refid="classiDynTree_1_1optimization_1_1IpoptInterface"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::optimization::Optimizer</label>
+        <link refid="classiDynTree_1_1optimization_1_1Optimizer"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="5">
+        <label>T</label>
+      </node>
+      <node id="4">
+        <label>std::shared_ptr&lt; T &gt;</label>
+        <childnode refid="5" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::optimization::IpoptInterface</label>
+        <link refid="classiDynTree_1_1optimization_1_1IpoptInterface"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::optimization::Optimizer</label>
+        <link refid="classiDynTree_1_1optimization_1_1Optimizer"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>m_problem</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>std::shared_ptr&lt; iDynTree::optimization::OptimizationProblem &gt;</label>
+        <childnode refid="4" relation="template-instance">
+          <edgelabel>&lt; iDynTree::optimization::OptimizationProblem &gt;</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Optimizers/IpoptInterface.h" line="35" column="9" bodyfile="iDynTree/Optimizers/IpoptInterface.h" bodystart="35" bodyend="81"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1optimization_1_1IpoptInterface_1ad582791ed3ce532afa7c6d925928700c" prot="public" virt="virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>getDualVariables</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1IpoptInterface_1ae0fdb7057b6378e3fbbc4994962274c4" prot="public" virt="non-virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>getIpoptOption</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1IpoptInterface_1a7d231456ae1fa20f31dfca46ffb293cf" prot="public" virt="non-virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>getIpoptOption</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1IpoptInterface_1a60b455c11875a0c87b1824d82d539da4" prot="public" virt="non-virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>getIpoptOption</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1IpoptInterface_1afc4e639fd1f2e0aea1ebeb5ef53122e7" prot="public" virt="virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>getOptimalConstraintsValues</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1IpoptInterface_1aab7302666ab28fb1f1561abf56425ae2" prot="public" virt="virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>getOptimalCost</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1IpoptInterface_1a4e2c8b348723cd9d1cd087d609702df5" prot="public" virt="virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>getPrimalVariables</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1IpoptInterface_1a4bf2f27672ec21a6583f477437b610ec" prot="public" virt="non-virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>IpoptInterface</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1IpoptInterface_1ac5141d4d0cc1750b5530b5b3b87a5c3b" prot="public" virt="non-virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>IpoptInterface</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1IpoptInterface_1a089c7f20fdce126254416f387af6c57e" prot="public" virt="virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>isAvailable</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1IpoptInterface_1a484f771a0f97f7270f8fcb2254b06021" prot="private" virt="non-virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>m_pimpl</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1Optimizer_1ae3b9609d905cbbf3c3336c9350e94106" prot="protected" virt="non-virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>m_problem</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1IpoptInterface_1ac2e51e749f6b40f759120da04fa58b10" prot="public" virt="virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>minusInfinity</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1Optimizer_1a5fb8e46345b5804f1ab7dbbf024f031c" prot="public" virt="non-virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>Optimizer</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1IpoptInterface_1a0af5ae4b855b94e18f0128aca1c1ff4c" prot="public" virt="virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>plusInfinity</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1Optimizer_1a92b81ff66dc4353fac014fa2e9dfb8e6" prot="public" virt="virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>problem</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1IpoptInterface_1ab3ee907bc233ae9ddfded61088e6f154" prot="public" virt="non-virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>setIpoptOption</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1IpoptInterface_1a16324d7ee5ae51ca24860e2755011d18" prot="public" virt="non-virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>setIpoptOption</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1IpoptInterface_1a8178b244c990043d6cb4c08c70ce0b00" prot="public" virt="non-virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>setIpoptOption</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1IpoptInterface_1aca5c413a3dab3acb19e3860dc844c393" prot="public" virt="virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>setProblem</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1IpoptInterface_1a85ecc212dde478f7855c3039a8100d8d" prot="public" virt="virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>solve</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1IpoptInterface_1aed43e933635e4ad444b4f44e7b2888b1" prot="public" virt="non-virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>useApproximatedHessians</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1IpoptInterface_1a475875511043ee501bb6caed944eeb91" prot="public" virt="virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>~IpoptInterface</name></member>
+      <member refid="classiDynTree_1_1optimization_1_1Optimizer_1abdd338c79ca8ce065fe06006e40249c1" prot="public" virt="virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>~Optimizer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

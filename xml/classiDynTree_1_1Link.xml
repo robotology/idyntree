@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1Link" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::Link</compoundname>
+    <includes local="no">iDynTree/Model/Link.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1Link_1ae3b2c806295cc52e2c0b8a540d517ebb" prot="private" static="no" mutable="no">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::Link::m_index</definition>
+        <argsstring></argsstring>
+        <name>m_index</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Link.h" line="31" column="19" bodyfile="iDynTree/Model/Link.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1Link_1a84b0da9614844a0fe40dd08c27c0521b" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref></type>
+        <definition>SpatialInertia iDynTree::Link::m_inertia</definition>
+        <argsstring></argsstring>
+        <name>m_inertia</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Link.h" line="32" column="24" bodyfile="iDynTree/Model/Link.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1Link_1a19dcc0fa4d7a40b052980f0583e43c8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::Link::Link</definition>
+        <argsstring>()</argsstring>
+        <name>Link</name>
+        <briefdescription>
+<para>Costructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Link.h" line="38" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Link_1afc2afa5934c345524d7fb32553e66713" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref> &amp;</type>
+        <definition>SpatialInertia&amp; iDynTree::Link::inertia</definition>
+        <argsstring>()</argsstring>
+        <name>inertia</name>
+        <briefdescription>
+<para>Low-level accessor to the link inertia. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Link.h" line="43" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Link_1ac58569b324c87f8395d980b4930df892" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref> &amp;</type>
+        <definition>const SpatialInertia&amp; iDynTree::Link::inertia</definition>
+        <argsstring>() const</argsstring>
+        <name>inertia</name>
+        <briefdescription>
+<para>Low-level const accessor to the link inertia. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Link.h" line="49" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Link_1ae229f60dd8e8c7d3eb42c244c9620f90" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::Link::setInertia</definition>
+        <argsstring>(SpatialInertia &amp;_inertia)</argsstring>
+        <name>setInertia</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref> &amp;</type>
+          <declname>_inertia</declname>
+        </param>
+        <briefdescription>
+<para>Set the spatial inertia of the link, expressed in the link reference frame (i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>with respect to the link reference frame origin and with the orientation of the link reference frame). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Link.h" line="58" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Link_1aa1d67c0e6f2e5e696e2bb18f8e1789a6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref> &amp;</type>
+        <definition>const SpatialInertia&amp; iDynTree::Link::getInertia</definition>
+        <argsstring>() const</argsstring>
+        <name>getInertia</name>
+        <briefdescription>
+<para>Get the spatial inertia of the link, expressed in the link reference frame (i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>with respect to the link reference frame origin and with the orientation of the link reference frame).</para>
+<para><simplesect kind="return"><para>a reference to the inertia of the link. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Link.h" line="69" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Link_1ac85aab728b2a369cf169a642dbd1fdca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::Link::setIndex</definition>
+        <argsstring>(LinkIndex &amp;_index)</argsstring>
+        <name>setIndex</name>
+        <param>
+          <type>LinkIndex &amp;</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Set the index of the link. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Link.h" line="74" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1Link_1a50d8196029ce8e674a2fd57cca75d078" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>LinkIndex</type>
+        <definition>LinkIndex iDynTree::Link::getIndex</definition>
+        <argsstring>() const</argsstring>
+        <name>getIndex</name>
+        <briefdescription>
+<para>Get the index of the link. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Link.h" line="79" column="19"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class that represents a link. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/Link.h" line="28" column="5" bodyfile="iDynTree/Model/Link.h" bodystart="29" bodyend="80"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1Link_1a50d8196029ce8e674a2fd57cca75d078" prot="public" virt="non-virtual"><scope>iDynTree::Link</scope><name>getIndex</name></member>
+      <member refid="classiDynTree_1_1Link_1aa1d67c0e6f2e5e696e2bb18f8e1789a6" prot="public" virt="non-virtual"><scope>iDynTree::Link</scope><name>getInertia</name></member>
+      <member refid="classiDynTree_1_1Link_1afc2afa5934c345524d7fb32553e66713" prot="public" virt="non-virtual"><scope>iDynTree::Link</scope><name>inertia</name></member>
+      <member refid="classiDynTree_1_1Link_1ac58569b324c87f8395d980b4930df892" prot="public" virt="non-virtual"><scope>iDynTree::Link</scope><name>inertia</name></member>
+      <member refid="classiDynTree_1_1Link_1a19dcc0fa4d7a40b052980f0583e43c8b" prot="public" virt="non-virtual"><scope>iDynTree::Link</scope><name>Link</name></member>
+      <member refid="classiDynTree_1_1Link_1ae3b2c806295cc52e2c0b8a540d517ebb" prot="private" virt="non-virtual"><scope>iDynTree::Link</scope><name>m_index</name></member>
+      <member refid="classiDynTree_1_1Link_1a84b0da9614844a0fe40dd08c27c0521b" prot="private" virt="non-virtual"><scope>iDynTree::Link</scope><name>m_inertia</name></member>
+      <member refid="classiDynTree_1_1Link_1ac85aab728b2a369cf169a642dbd1fdca" prot="public" virt="non-virtual"><scope>iDynTree::Link</scope><name>setIndex</name></member>
+      <member refid="classiDynTree_1_1Link_1ae229f60dd8e8c7d3eb42c244c9620f90" prot="public" virt="non-virtual"><scope>iDynTree::Link</scope><name>setInertia</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

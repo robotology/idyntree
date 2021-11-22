@@ -1,0 +1,487 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1SolidShape" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::SolidShape</compoundname>
+    <derivedcompoundref refid="classiDynTree_1_1Box" prot="public" virt="non-virtual">iDynTree::Box</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1Cylinder" prot="public" virt="non-virtual">iDynTree::Cylinder</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1ExternalMesh" prot="public" virt="non-virtual">iDynTree::ExternalMesh</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1Sphere" prot="public" virt="non-virtual">iDynTree::Sphere</derivedcompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1SolidShape_1a5026e44f557e25b407642e95dd7bbb4c" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string iDynTree::SolidShape::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="114" column="21" bodyfile="iDynTree/Model/SolidShapes.h" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SolidShape_1adca1aa44db797c0122b0479b2a65ff9b" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::SolidShape::nameIsValid</definition>
+        <argsstring></argsstring>
+        <name>nameIsValid</name>
+        <briefdescription>
+<para>True if the name is valid, false otherwise. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="118" column="14" bodyfile="iDynTree/Model/SolidShapes.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SolidShape_1a8be2a1e24878ac8de853123219a6ac64" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
+        <definition>Transform iDynTree::SolidShape::link_H_geometry</definition>
+        <argsstring></argsstring>
+        <name>link_H_geometry</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="120" column="19" bodyfile="iDynTree/Model/SolidShapes.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SolidShape_1a61f1577ee526add690666ad2e07e21c2" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector4</ref></type>
+        <definition>Vector4 iDynTree::SolidShape::material</definition>
+        <argsstring></argsstring>
+        <name>material</name>
+        <briefdescription>
+<para><ref refid="classiDynTree_1_1Material" kindref="compound">Material</ref> of the geometry, encoded as a rgba vector. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="125" column="17" bodyfile="iDynTree/Model/SolidShapes.h" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SolidShape_1a6139ff6ce2fc054d9b89d8357d31a070" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::SolidShape::m_isMaterialSet</definition>
+        <argsstring></argsstring>
+        <name>m_isMaterialSet</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="126" column="14" bodyfile="iDynTree/Model/SolidShapes.h" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1SolidShape_1aa79087c11e815a64ca599223cc973dd9" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Material" kindref="compound">Material</ref></type>
+        <definition>Material iDynTree::SolidShape::m_material</definition>
+        <argsstring></argsstring>
+        <name>m_material</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="127" column="18" bodyfile="iDynTree/Model/SolidShapes.h" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1a3c9b74bfd7460cce67d604f66517a44c" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::SolidShape::SolidShape</definition>
+        <argsstring>()</argsstring>
+        <name>SolidShape</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="53" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1a3ed24e3713a3832408ee0ee8b95dfa82" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type></type>
+        <definition>virtual iDynTree::SolidShape::~SolidShape</definition>
+        <argsstring>()=0</argsstring>
+        <name>~SolidShape</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="55" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1a0e17798de0579d18260b629fdd8b09a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classiDynTree_1_1SolidShape" kindref="compound">SolidShape</ref> *</type>
+        <definition>virtual SolidShape* iDynTree::SolidShape::clone</definition>
+        <argsstring>()=0</argsstring>
+        <name>clone</name>
+        <reimplementedby refid="classiDynTree_1_1Sphere_1ae179a7e32a293586ff3e27e28858bc5f">clone</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1Box_1ab7328592c2163c117835f224e1a5c5b1">clone</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1Cylinder_1a04da4696382d74f3e63456189c9495bb">clone</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1ExternalMesh_1a9f3ed8fc497fd41ddb1d7dfef6caa24d">clone</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="56" column="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1a0c3339721b95e2e969f7725d21c25e40" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string&amp; iDynTree::SolidShape::getName</definition>
+        <argsstring>() const</argsstring>
+        <name>getName</name>
+        <briefdescription>
+<para>Returns the name of the shape. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="61" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1a6850e739d426711814a1563fea31bce3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SolidShape::setName</definition>
+        <argsstring>(const std::string &amp;name)</argsstring>
+        <name>setName</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>Sets the specified name. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="66" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1ad0773a7e9c79fb39689fe57776c6f8b3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SolidShape::isNameValid</definition>
+        <argsstring>() const</argsstring>
+        <name>isNameValid</name>
+        <briefdescription>
+<para>Returns if the name is valid. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="71" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1adf7c9968426d13ca501bf91eb3440d65" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+        <definition>const Transform&amp; iDynTree::SolidShape::getLink_H_geometry</definition>
+        <argsstring>() const</argsstring>
+        <name>getLink_H_geometry</name>
+        <briefdescription>
+<para>Returns the homogeneus transformation of the geometry w.r.t. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>the attached link. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="76" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1a99c8cb2ba950c03a59302428fc52cf30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SolidShape::setLink_H_geometry</definition>
+        <argsstring>(const Transform &amp;newTransform)</argsstring>
+        <name>setLink_H_geometry</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
+          <declname>newTransform</declname>
+        </param>
+        <briefdescription>
+<para>Sets the homogeneus transformation of the geometry w.r.t. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>the attached link. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="81" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1a79698fa4e4ec3278dcb1f22dfaee0c04" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SolidShape::isMaterialSet</definition>
+        <argsstring>() const</argsstring>
+        <name>isMaterialSet</name>
+        <briefdescription>
+<para>Returns if the material is valid, i.e. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>you can call <ref refid="classiDynTree_1_1SolidShape_1a4b0b5a8cc055ce533bbd79f804bae432" kindref="member">getMaterial()</ref>. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="86" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1a4b0b5a8cc055ce533bbd79f804bae432" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Material" kindref="compound">Material</ref> &amp;</type>
+        <definition>const Material&amp; iDynTree::SolidShape::getMaterial</definition>
+        <argsstring>() const</argsstring>
+        <name>getMaterial</name>
+        <briefdescription>
+<para>Returns the current material. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="91" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1a0a3a0215c4d1d729e3dfb284232037fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::SolidShape::setMaterial</definition>
+        <argsstring>(const Material &amp;material)</argsstring>
+        <name>setMaterial</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Material" kindref="compound">Material</ref> &amp;</type>
+          <declname>material</declname>
+        </param>
+        <briefdescription>
+<para>Sets the material. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>isMaterialSet will return true after this call. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="96" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1a8ba065f0e60ad78baad071a3a870faf6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SolidShape::isSphere</definition>
+        <argsstring>() const</argsstring>
+        <name>isSphere</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="98" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1a661c33c6139a4cde9c9eeb55ebcd915e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SolidShape::isBox</definition>
+        <argsstring>() const</argsstring>
+        <name>isBox</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="99" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1a8218783b444c4f651ebc5517399a04bd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SolidShape::isCylinder</definition>
+        <argsstring>() const</argsstring>
+        <name>isCylinder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="100" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1aeef66627d452a2b192c9d62ac6e6b908" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::SolidShape::isExternalMesh</definition>
+        <argsstring>() const</argsstring>
+        <name>isExternalMesh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="101" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1afb0d282d22dce28a6f45de0c1d81d494" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Sphere" kindref="compound">Sphere</ref> *</type>
+        <definition>Sphere* iDynTree::SolidShape::asSphere</definition>
+        <argsstring>()</argsstring>
+        <name>asSphere</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="104" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1a9d8ee4804ecf2c25181a65f1f44b9a3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Box" kindref="compound">Box</ref> *</type>
+        <definition>Box* iDynTree::SolidShape::asBox</definition>
+        <argsstring>()</argsstring>
+        <name>asBox</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="105" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1a0afa36f27380de580ca2d37ae79d66dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Cylinder" kindref="compound">Cylinder</ref> *</type>
+        <definition>Cylinder* iDynTree::SolidShape::asCylinder</definition>
+        <argsstring>()</argsstring>
+        <name>asCylinder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="106" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1abce98ace11abc423faab5418fe74b72a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1ExternalMesh" kindref="compound">ExternalMesh</ref> *</type>
+        <definition>ExternalMesh* iDynTree::SolidShape::asExternalMesh</definition>
+        <argsstring>()</argsstring>
+        <name>asExternalMesh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="107" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1a01f73fdb47553ba4f1d817a6feb6beef" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Sphere" kindref="compound">Sphere</ref> *</type>
+        <definition>const Sphere* iDynTree::SolidShape::asSphere</definition>
+        <argsstring>() const</argsstring>
+        <name>asSphere</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="109" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1a1249bfe8e2fefc34b749c7878b83e462" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Box" kindref="compound">Box</ref> *</type>
+        <definition>const Box* iDynTree::SolidShape::asBox</definition>
+        <argsstring>() const</argsstring>
+        <name>asBox</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="110" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1aa7d4851d00a44b21e87d85ecfe4ece4c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Cylinder" kindref="compound">Cylinder</ref> *</type>
+        <definition>const Cylinder* iDynTree::SolidShape::asCylinder</definition>
+        <argsstring>() const</argsstring>
+        <name>asCylinder</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="111" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1SolidShape_1a18dc4e95d85822018507b4a813f69340" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1ExternalMesh" kindref="compound">ExternalMesh</ref> *</type>
+        <definition>const ExternalMesh* iDynTree::SolidShape::asExternalMesh</definition>
+        <argsstring>() const</argsstring>
+        <name>asExternalMesh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SolidShapes.h" line="112" column="28"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="5">
+        <label>iDynTree::Sphere</label>
+        <link refid="classiDynTree_1_1Sphere"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>iDynTree::ExternalMesh</label>
+        <link refid="classiDynTree_1_1ExternalMesh"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::Box</label>
+        <link refid="classiDynTree_1_1Box"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::SolidShape</label>
+        <link refid="classiDynTree_1_1SolidShape"/>
+      </node>
+      <node id="3">
+        <label>iDynTree::Cylinder</label>
+        <link refid="classiDynTree_1_1Cylinder"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="iDynTree/Model/SolidShapes.h" line="50" column="5" bodyfile="iDynTree/Model/SolidShapes.h" bodystart="51" bodyend="128"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1SolidShape_1a9d8ee4804ecf2c25181a65f1f44b9a3b" prot="public" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>asBox</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a1249bfe8e2fefc34b749c7878b83e462" prot="public" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>asBox</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a0afa36f27380de580ca2d37ae79d66dc" prot="public" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>asCylinder</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1aa7d4851d00a44b21e87d85ecfe4ece4c" prot="public" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>asCylinder</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1abce98ace11abc423faab5418fe74b72a" prot="public" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>asExternalMesh</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a18dc4e95d85822018507b4a813f69340" prot="public" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>asExternalMesh</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1afb0d282d22dce28a6f45de0c1d81d494" prot="public" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>asSphere</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a01f73fdb47553ba4f1d817a6feb6beef" prot="public" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>asSphere</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a0e17798de0579d18260b629fdd8b09a8" prot="public" virt="pure-virtual"><scope>iDynTree::SolidShape</scope><name>clone</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1adf7c9968426d13ca501bf91eb3440d65" prot="public" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>getLink_H_geometry</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a4b0b5a8cc055ce533bbd79f804bae432" prot="public" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>getMaterial</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a0c3339721b95e2e969f7725d21c25e40" prot="public" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>getName</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a661c33c6139a4cde9c9eeb55ebcd915e" prot="public" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>isBox</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a8218783b444c4f651ebc5517399a04bd" prot="public" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>isCylinder</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1aeef66627d452a2b192c9d62ac6e6b908" prot="public" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>isExternalMesh</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a79698fa4e4ec3278dcb1f22dfaee0c04" prot="public" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>isMaterialSet</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1ad0773a7e9c79fb39689fe57776c6f8b3" prot="public" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>isNameValid</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a8ba065f0e60ad78baad071a3a870faf6" prot="public" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>isSphere</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a8be2a1e24878ac8de853123219a6ac64" prot="private" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>link_H_geometry</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a6139ff6ce2fc054d9b89d8357d31a070" prot="private" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>m_isMaterialSet</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1aa79087c11e815a64ca599223cc973dd9" prot="private" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>m_material</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a61f1577ee526add690666ad2e07e21c2" prot="private" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>material</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a5026e44f557e25b407642e95dd7bbb4c" prot="private" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>name</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1adca1aa44db797c0122b0479b2a65ff9b" prot="private" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>nameIsValid</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a99c8cb2ba950c03a59302428fc52cf30" prot="public" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>setLink_H_geometry</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a0a3a0215c4d1d729e3dfb284232037fe" prot="public" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>setMaterial</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a6850e739d426711814a1563fea31bce3" prot="public" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>setName</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a3c9b74bfd7460cce67d604f66517a44c" prot="public" virt="non-virtual"><scope>iDynTree::SolidShape</scope><name>SolidShape</name></member>
+      <member refid="classiDynTree_1_1SolidShape_1a3ed24e3713a3832408ee0ee8b95dfa82" prot="public" virt="pure-virtual"><scope>iDynTree::SolidShape</scope><name>~SolidShape</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

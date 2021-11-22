@@ -1,0 +1,245 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1LinkWrenches" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::LinkWrenches</compoundname>
+    <includes local="no">iDynTree/Model/LinkState.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1LinkWrenches_1a299c5b22f9903c8351db21ed9c6af7c1" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classiDynTree_1_1Wrench" kindref="compound">iDynTree::Wrench</ref> &gt;</type>
+        <definition>std::vector&lt;iDynTree::Wrench&gt; iDynTree::LinkWrenches::m_linkWrenches</definition>
+        <argsstring></argsstring>
+        <name>m_linkWrenches</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkState.h" line="67" column="21" bodyfile="iDynTree/Model/LinkState.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1LinkWrenches_1a182f80cecd4cb4e0757e2afeb9ac2913" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::LinkWrenches::LinkWrenches</definition>
+        <argsstring>(std::size_t nrOfLinks=0)</argsstring>
+        <name>LinkWrenches</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>nrOfLinks</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>Create a <ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkWrenches</ref> vector, with the size given by nrOfLinks . </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">nrOfLinks</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the size of the vector. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkState.h" line="76" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkWrenches_1aee6e5ba77e931866ae075a5ce4375894" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::LinkWrenches::LinkWrenches</definition>
+        <argsstring>(const iDynTree::Model &amp;model)</argsstring>
+        <name>LinkWrenches</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkState.h" line="77" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkWrenches_1a6671c5e2ab25ea2233af1c5ea1817134" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::LinkWrenches::resize</definition>
+        <argsstring>(std::size_t nrOfLinks)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>nrOfLinks</declname>
+        </param>
+        <briefdescription>
+<para>Resize the vector to have size nrOfLinks. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">nrOfLinks</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>new size for the vector </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkState.h" line="84" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkWrenches_1a26256673c3fcf477288fb2e8282af8e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::LinkWrenches::resize</definition>
+        <argsstring>(const iDynTree::Model &amp;model)</argsstring>
+        <name>resize</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkState.h" line="85" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkWrenches_1a08cc512f023f204ac15cb4838c240faa" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::LinkWrenches::isConsistent</definition>
+        <argsstring>(const Model &amp;model) const</argsstring>
+        <name>isConsistent</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkState.h" line="87" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkWrenches_1ab0f166bd81c570277f51fe1a50d9e114" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>size_t</type>
+        <definition>size_t iDynTree::LinkWrenches::getNrOfLinks</definition>
+        <argsstring>() const</argsstring>
+        <name>getNrOfLinks</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkState.h" line="88" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkWrenches_1a11d1400f6b0373ea6ef7253dcc72ef74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">iDynTree::Wrench</ref> &amp;</type>
+        <definition>iDynTree::Wrench&amp; iDynTree::LinkWrenches::operator()</definition>
+        <argsstring>(const LinkIndex link)</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkState.h" line="90" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkWrenches_1a5d6805f872b880f17efcefe25bab335c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classiDynTree_1_1Wrench" kindref="compound">iDynTree::Wrench</ref> &amp;</type>
+        <definition>const iDynTree::Wrench&amp; iDynTree::LinkWrenches::operator()</definition>
+        <argsstring>(const LinkIndex link) const</argsstring>
+        <name>operator()</name>
+        <param>
+          <type>const LinkIndex</type>
+          <declname>link</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkState.h" line="91" column="33"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkWrenches_1a0d308fcf519f4e5122108bb4ca4ac779" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string iDynTree::LinkWrenches::toString</definition>
+        <argsstring>(const Model &amp;model) const</argsstring>
+        <name>toString</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkState.h" line="93" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkWrenches_1a47bc3d85d4e5d3dc9e89f1a763d3a28d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::LinkWrenches::zero</definition>
+        <argsstring>()</argsstring>
+        <name>zero</name>
+        <briefdescription>
+<para>Set all the elements to zero. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkState.h" line="98" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1LinkWrenches_1ab12b1696db02585a9ef573530d7fb3fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::LinkWrenches::~LinkWrenches</definition>
+        <argsstring>()</argsstring>
+        <name>~LinkWrenches</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/LinkState.h" line="100" column="9"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Vector of wrenches connected in some way to the link of a model. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>It is used to model both the total external wrench acting on a link (LinkExternalWrenches), or the internal wrenches that a link excerts on his parent (given a <ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref>) computed as a by product by the dynamic loop of the RNEA ( RNEADynamicPhase ).</para>
+<para>In both cases the <ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> corresponding to the link with LinkIndex i is always expressed with the orientation of the link frame and with respect to the link frame origin. </para>
+    </detaileddescription>
+    <location file="iDynTree/Model/LinkState.h" line="64" column="5" bodyfile="iDynTree/Model/LinkState.h" bodystart="65" bodyend="101"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1LinkWrenches_1ab0f166bd81c570277f51fe1a50d9e114" prot="public" virt="non-virtual"><scope>iDynTree::LinkWrenches</scope><name>getNrOfLinks</name></member>
+      <member refid="classiDynTree_1_1LinkWrenches_1a08cc512f023f204ac15cb4838c240faa" prot="public" virt="non-virtual"><scope>iDynTree::LinkWrenches</scope><name>isConsistent</name></member>
+      <member refid="classiDynTree_1_1LinkWrenches_1a182f80cecd4cb4e0757e2afeb9ac2913" prot="public" virt="non-virtual"><scope>iDynTree::LinkWrenches</scope><name>LinkWrenches</name></member>
+      <member refid="classiDynTree_1_1LinkWrenches_1aee6e5ba77e931866ae075a5ce4375894" prot="public" virt="non-virtual"><scope>iDynTree::LinkWrenches</scope><name>LinkWrenches</name></member>
+      <member refid="classiDynTree_1_1LinkWrenches_1a299c5b22f9903c8351db21ed9c6af7c1" prot="private" virt="non-virtual"><scope>iDynTree::LinkWrenches</scope><name>m_linkWrenches</name></member>
+      <member refid="classiDynTree_1_1LinkWrenches_1a11d1400f6b0373ea6ef7253dcc72ef74" prot="public" virt="non-virtual"><scope>iDynTree::LinkWrenches</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1LinkWrenches_1a5d6805f872b880f17efcefe25bab335c" prot="public" virt="non-virtual"><scope>iDynTree::LinkWrenches</scope><name>operator()</name></member>
+      <member refid="classiDynTree_1_1LinkWrenches_1a6671c5e2ab25ea2233af1c5ea1817134" prot="public" virt="non-virtual"><scope>iDynTree::LinkWrenches</scope><name>resize</name></member>
+      <member refid="classiDynTree_1_1LinkWrenches_1a26256673c3fcf477288fb2e8282af8e0" prot="public" virt="non-virtual"><scope>iDynTree::LinkWrenches</scope><name>resize</name></member>
+      <member refid="classiDynTree_1_1LinkWrenches_1a0d308fcf519f4e5122108bb4ca4ac779" prot="public" virt="non-virtual"><scope>iDynTree::LinkWrenches</scope><name>toString</name></member>
+      <member refid="classiDynTree_1_1LinkWrenches_1a47bc3d85d4e5d3dc9e89f1a763d3a28d" prot="public" virt="non-virtual"><scope>iDynTree::LinkWrenches</scope><name>zero</name></member>
+      <member refid="classiDynTree_1_1LinkWrenches_1ab12b1696db02585a9ef573530d7fb3fd" prot="public" virt="non-virtual"><scope>iDynTree::LinkWrenches</scope><name>~LinkWrenches</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

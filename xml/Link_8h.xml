@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="Link_8h" kind="file" language="C++">
+    <compoundname>Link.h</compoundname>
+    <includes refid="SpatialInertia_8h" local="no">iDynTree/Core/SpatialInertia.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
+    <includedby refid="Model_8h" local="no">iDynTree/Model/Model.h</includedby>
+    <includedby refid="LinkElement_8h" local="no">private/LinkElement.h</includedby>
+    <innerclass refid="classiDynTree_1_1Link" prot="public">iDynTree::Link</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="Link_8h_1a39bc17f697110e44c09c2e6e1aa7fa57" prot="public" static="no">
+        <type>Link *</type>
+        <definition>typedef Link* iDynTree::LinkPtr</definition>
+        <argsstring></argsstring>
+        <name>LinkPtr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Link.h" line="82" column="19" bodyfile="iDynTree/Model/Link.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="Link_8h_1a34779dc4741f85944c0e2f736dc7def2" prot="public" static="no">
+        <type>const Link *</type>
+        <definition>typedef const Link* iDynTree::LinkConstPtr</definition>
+        <argsstring></argsstring>
+        <name>LinkConstPtr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/Link.h" line="83" column="25" bodyfile="iDynTree/Model/Link.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/Link.h"/>
+  </compounddef>
+</doxygen>

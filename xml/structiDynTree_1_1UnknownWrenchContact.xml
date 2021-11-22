@@ -1,0 +1,231 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1UnknownWrenchContact" kind="struct" language="C++" prot="public">
+    <compoundname>iDynTree::UnknownWrenchContact</compoundname>
+    <includes local="no">iDynTree/Estimation/ExternalWrenchesEstimation.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1UnknownWrenchContact_1a3b66b4adb16d8ec490a51bc5852bafbb" prot="public" static="no" mutable="no">
+        <type>UnknownWrenchContactType</type>
+        <definition>UnknownWrenchContactType iDynTree::UnknownWrenchContact::unknownType</definition>
+        <argsstring></argsstring>
+        <name>unknownType</name>
+        <briefdescription>
+<para>Type of the unknown contact. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="95" column="30" bodyfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1UnknownWrenchContact_1a0fd828593dab7ca27f2c2959c568736d" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
+        <definition>Position iDynTree::UnknownWrenchContact::contactPoint</definition>
+        <argsstring></argsstring>
+        <name>contactPoint</name>
+        <briefdescription>
+<para><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> of the center of the contact, in the link frame. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="100" column="14" bodyfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1UnknownWrenchContact_1a40fd8ee73d9423a40a8e280d72b6b886" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref></type>
+        <definition>Direction iDynTree::UnknownWrenchContact::forceDirection</definition>
+        <argsstring></argsstring>
+        <name>forceDirection</name>
+        <briefdescription>
+<para>If unknownType is PURE_FORCE_WITH_KNOWN_DIRECTION, contains the known direction (in link frame) of the force. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="106" column="15" bodyfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1UnknownWrenchContact_1a4b96dc6c0dad0f2d4cda49d65381b7d0" prot="public" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
+        <definition>Wrench iDynTree::UnknownWrenchContact::knownWrench</definition>
+        <argsstring></argsstring>
+        <name>knownWrench</name>
+        <briefdescription>
+<para>If unknownType is NO_UNKNOWNS, contains the value of the contact force, with the orientation of the link frame, and w.r.t. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>to the origin of the link frame, i.e. it ignores the contactPoint attribute. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="113" column="12" bodyfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1UnknownWrenchContact_1a7e7bfe7d8a3bf766d096ca3d627adb44" prot="public" static="no" mutable="no">
+        <type>unsigned long</type>
+        <definition>unsigned long iDynTree::UnknownWrenchContact::contactId</definition>
+        <argsstring></argsstring>
+        <name>contactId</name>
+        <briefdescription>
+<para>Unique id identifing the contact. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This id is propagated to the contact wrench data structure. It is implemented mainly for compatibility with the skinDynLib library. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="120" column="19" bodyfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structiDynTree_1_1UnknownWrenchContact_1afbafed415f76f254f947239babd53821" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::UnknownWrenchContact::UnknownWrenchContact</definition>
+        <argsstring>()</argsstring>
+        <name>UnknownWrenchContact</name>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="78" column="5" bodyfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" bodystart="78" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="structiDynTree_1_1UnknownWrenchContact_1ae0e92ae72a85b022854b0a2f9c35c3a0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::UnknownWrenchContact::UnknownWrenchContact</definition>
+        <argsstring>(const UnknownWrenchContactType _unknownType, const Position &amp;_contactPoint, const Direction &amp;_forceDirection=iDynTree::Direction::Default(), const Wrench &amp;_knownWrench=iDynTree::Wrench(), const unsigned long &amp;_contactId=0)</argsstring>
+        <name>UnknownWrenchContact</name>
+        <param>
+          <type>const UnknownWrenchContactType</type>
+          <declname>_unknownType</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
+          <declname>_contactPoint</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref> &amp;</type>
+          <declname>_forceDirection</declname>
+          <defval>iDynTree::Direction::Default()</defval>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> &amp;</type>
+          <declname>_knownWrench</declname>
+          <defval><ref refid="classiDynTree_1_1Wrench" kindref="compound">iDynTree::Wrench</ref>()</defval>
+        </param>
+        <param>
+          <type>const unsigned long &amp;</type>
+          <declname>_contactId</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="81" column="5" bodyfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" bodystart="81" bodyend="90"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A contact whose wrench is unknown. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Class representing a contact for which the approximate center of the contact surface is known, but the wrench is unknown. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="11">
+        <label>iDynTree::VectorFixSize&lt; VecSize &gt;</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+      </node>
+      <node id="9">
+        <label>iDynTree::PositionRaw</label>
+        <link refid="classiDynTree_1_1PositionRaw"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>iDynTree::SpatialVector&lt; SpatialForceVector &gt;</label>
+        <link refid="classiDynTree_1_1SpatialVector"/>
+        <childnode refid="5" relation="template-instance">
+          <edgelabel>&lt; SpatialForceVector &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="12">
+        <label>iDynTree::Direction</label>
+        <link refid="classiDynTree_1_1Direction"/>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>iDynTree::SpatialForceVector</label>
+        <link refid="classiDynTree_1_1SpatialForceVector"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>iDynTree::SpatialVector</label>
+        <link refid="classiDynTree_1_1SpatialVector"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>angularVec3</edgelabel>
+          <edgelabel>linearVec3</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::UnknownWrenchContact</label>
+        <link refid="structiDynTree_1_1UnknownWrenchContact"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>knownWrench</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>contactPoint</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>forceDirection</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>iDynTree::Position</label>
+        <link refid="classiDynTree_1_1Position"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>iDynTree::SpatialMotionForceVectorT_traits&lt; DerivedSpatialVecT &gt;</label>
+        <link refid="classiDynTree_1_1SpatialMotionForceVectorT__traits"/>
+        <childnode refid="7" relation="template-instance">
+          <edgelabel>&lt; DerivedSpatialVecT &gt;</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::Wrench</label>
+        <link refid="classiDynTree_1_1Wrench"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>iDynTree::SpatialMotionForceVectorT_traits&lt; SpatialMotionForceVectorT &gt;</label>
+        <link refid="classiDynTree_1_1SpatialMotionForceVectorT__traits"/>
+      </node>
+      <node id="10">
+        <label>Vector3</label>
+        <link refid="classiDynTree_1_1VectorFixSize"/>
+        <childnode refid="11" relation="template-instance">
+          <edgelabel>&lt; 3 &gt;</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="73" column="1" bodyfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" bodystart="74" bodyend="121"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1UnknownWrenchContact_1a7e7bfe7d8a3bf766d096ca3d627adb44" prot="public" virt="non-virtual"><scope>iDynTree::UnknownWrenchContact</scope><name>contactId</name></member>
+      <member refid="structiDynTree_1_1UnknownWrenchContact_1a0fd828593dab7ca27f2c2959c568736d" prot="public" virt="non-virtual"><scope>iDynTree::UnknownWrenchContact</scope><name>contactPoint</name></member>
+      <member refid="structiDynTree_1_1UnknownWrenchContact_1a40fd8ee73d9423a40a8e280d72b6b886" prot="public" virt="non-virtual"><scope>iDynTree::UnknownWrenchContact</scope><name>forceDirection</name></member>
+      <member refid="structiDynTree_1_1UnknownWrenchContact_1a4b96dc6c0dad0f2d4cda49d65381b7d0" prot="public" virt="non-virtual"><scope>iDynTree::UnknownWrenchContact</scope><name>knownWrench</name></member>
+      <member refid="structiDynTree_1_1UnknownWrenchContact_1a3b66b4adb16d8ec490a51bc5852bafbb" prot="public" virt="non-virtual"><scope>iDynTree::UnknownWrenchContact</scope><name>unknownType</name></member>
+      <member refid="structiDynTree_1_1UnknownWrenchContact_1afbafed415f76f254f947239babd53821" prot="public" virt="non-virtual"><scope>iDynTree::UnknownWrenchContact</scope><name>UnknownWrenchContact</name></member>
+      <member refid="structiDynTree_1_1UnknownWrenchContact_1ae0e92ae72a85b022854b0a2f9c35c3a0" prot="public" virt="non-virtual"><scope>iDynTree::UnknownWrenchContact</scope><name>UnknownWrenchContact</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

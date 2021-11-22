@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_95b075728cf7547ec50495102e6a3dc3" kind="dir">
+    <compoundname>iDynTree/Integrators</compoundname>
+    <innerfile refid="FixedStepIntegrator_8h">FixedStepIntegrator.h</innerfile>
+    <innerfile refid="ForwardEuler_8h">ForwardEuler.h</innerfile>
+    <innerfile refid="ImplicitTrapezoidal_8h">ImplicitTrapezoidal.h</innerfile>
+    <innerfile refid="RK4_8h">RK4.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Integrators/"/>
+  </compounddef>
+</doxygen>

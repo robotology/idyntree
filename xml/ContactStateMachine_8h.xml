@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="ContactStateMachine_8h" kind="file" language="C++">
+    <compoundname>ContactStateMachine.h</compoundname>
+    <includes local="no">iostream</includes>
+    <includes local="no">memory</includes>
+    <includes refid="SchmittTrigger_8h" local="yes">SchmittTrigger.h</includes>
+    <includedby refid="BipedFootContactClassifier_8h" local="yes">iDynTree/Estimation/BipedFootContactClassifier.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/Estimation/ContactStateMachine.h</label>
+        <link refid="ContactStateMachine_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iostream</label>
+      </node>
+      <node id="3">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structiDynTree_1_1SchmittParams" prot="public">iDynTree::SchmittParams</innerclass>
+    <innerclass refid="classiDynTree_1_1ContactStateMachine" prot="public">iDynTree::ContactStateMachine</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Estimation/ContactStateMachine.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="DynamicsLinearization_8h" kind="file" language="C++">
+    <compoundname>DynamicsLinearization.h</compoundname>
+    <includes refid="MatrixFixSize_8h" local="no">iDynTree/Core/MatrixFixSize.h</includes>
+    <includes refid="MatrixDynSize_8h" local="no">iDynTree/Core/MatrixDynSize.h</includes>
+    <includes refid="Dynamics_8h" local="no">iDynTree/Model/Dynamics.h</includes>
+    <includes refid="DynamicsLinearizationHelpers_8h" local="no">iDynTree/Model/DynamicsLinearizationHelpers.h</includes>
+    <innerclass refid="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers" prot="public">iDynTree::ForwardDynamicsLinearizationInternalBuffers</innerclass>
+    <innerclass refid="classiDynTree_1_1FreeFloatingStateLinearization" prot="public">iDynTree::FreeFloatingStateLinearization</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="DynamicsLinearization_8h_1a0c9b6d083f99f1b6ffd1a6c3a7ae5e07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::ForwardDynamicsLinearization</definition>
+        <argsstring>(const Model &amp;model, const Traversal &amp;traversal, const FreeFloatingPos &amp;robotPos, const FreeFloatingVel &amp;robotVel, const LinkNetExternalWrenches &amp;linkExtWrenches, const JointDOFsDoubleArray &amp;jointTorques, ForwardDynamicsLinearizationInternalBuffers &amp;bufs, FreeFloatingAcc &amp;robotAcc, FreeFloatingStateLinearization &amp;A)</argsstring>
+        <name>ForwardDynamicsLinearization</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const Traversal &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const FreeFloatingPos &amp;</type>
+          <declname>robotPos</declname>
+        </param>
+        <param>
+          <type>const FreeFloatingVel &amp;</type>
+          <declname>robotVel</declname>
+        </param>
+        <param>
+          <type>const LinkNetExternalWrenches &amp;</type>
+          <declname>linkExtWrenches</declname>
+        </param>
+        <param>
+          <type>const JointDOFsDoubleArray &amp;</type>
+          <declname>jointTorques</declname>
+        </param>
+        <param>
+          <type>ForwardDynamicsLinearizationInternalBuffers &amp;</type>
+          <declname>bufs</declname>
+        </param>
+        <param>
+          <type>FreeFloatingAcc &amp;</type>
+          <declname>robotAcc</declname>
+        </param>
+        <param>
+          <type>FreeFloatingStateLinearization &amp;</type>
+          <declname>A</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="96" column="10" declfile="iDynTree/Model/DynamicsLinearization.h" declline="96" declcolumn="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/DynamicsLinearization.h"/>
+  </compounddef>
+</doxygen>

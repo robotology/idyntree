@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>iDynTree::BoundingBoxProjectionConstraint class | iDynTree master</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600" />
+  <link rel="stylesheet" href="m-dark+documentation.compiled.css" />
+  <link rel="icon" href="favicon-dark.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <span id="m-navbar-brand" class="m-col-t-8 m-col-m-none m-left-m">
+        <a href="./index.html">iDynTree</a> <span class="m-breadcrumb">|</span> <a href="index.html" class="m-thin">master</a>
+      </span>
+      <div class="m-col-t-4 m-hide-m m-text-right m-nopadr">
+        <a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+          <path id="m-doc-search-icon-path" d="m6 0c-3.31 0-6 2.69-6 6 0 3.31 2.69 6 6 6 1.49 0 2.85-0.541 3.89-1.44-0.0164 0.338 0.147 0.759 0.5 1.15l3.22 3.79c0.552 0.614 1.45 0.665 2 0.115 0.55-0.55 0.499-1.45-0.115-2l-3.79-3.22c-0.392-0.353-0.812-0.515-1.15-0.5 0.895-1.05 1.44-2.41 1.44-3.89 0-3.31-2.69-6-6-6zm0 1.56a4.44 4.44 0 0 1 4.44 4.44 4.44 4.44 0 0 1-4.44 4.44 4.44 4.44 0 0 1-4.44-4.44 4.44 4.44 0 0 1 4.44-4.44z"/>
+        </svg></a>
+        <a id="m-navbar-show" href="#navigation" title="Show navigation"></a>
+        <a id="m-navbar-hide" href="#" title="Hide navigation"></a>
+      </div>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-6 m-col-m-none">
+            <li><a href="pages.html">Pages</a></li>
+            <li><a href="annotated.html">Classes</a></li>
+            <li><a href="files.html">Files</a></li>
+          </ol>
+          <ol class="m-col-t-6 m-col-m-none" start="4">
+            <li>
+              <a href="pages.html">Versions</a>
+              <ol>
+                <li><a href="./index.html">Master</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="pages.html">Contacts</a>
+              <ol>
+                <li><a href="https://github.com/robotology/idyntree">GitHub</a></li>
+                <li><a href="https://www.iit.it/web/ami/">Lab website</a></li>
+              </ol>
+            </li>
+            <li class="m-show-m"><a href="#search" class="m-doc-search-icon" title="Search" onclick="return showSearch()"><svg style="height: 0.9rem;" viewBox="0 0 16 16">
+              <use href="#m-doc-search-icon-path" />
+            </svg></a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main><article>
+  <div class="m-container m-container-inflatable">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <h1>
+          <span class="m-breadcrumb"><a href="namespaceiDynTree.html">iDynTree</a>::<wbr/></span>BoundingBoxProjectionConstraint <span class="m-thin">class</span>
+          <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="BoundingBoxHelpers_8h.html">&lt;iDynTree/BoundingBoxHelpers.h&gt;</a></div>
+        </h1>
+        <p><a href="classiDynTree_1_1BoundingBoxProjectionConstraint.html" class="m-doc">BoundingBoxProjectionConstraint</a> helper.</p>
+        <div class="m-block m-default">
+          <h3>Contents</h3>
+          <ul>
+            <li>
+              Reference
+              <ul>
+                <li><a href="#pub-methods">Public functions</a></li>
+                <li><a href="#pub-attribs">Public variables</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <section id="pub-methods">
+          <h2><a href="#pub-methods">Public functions</a></h2>
+          <dl class="m-doc">
+            <dt id="ad950afd6663135de4b7656d7be278235">
+              <span class="m-doc-wrap-bumper">void <a href="#ad950afd6663135de4b7656d7be278235" class="m-doc-self">setActive</a>(</span><span class="m-doc-wrap">const bool isActive)</span>
+            </dt>
+            <dd>Set if the constraint is active or not.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a81936e6f83d733acb670173d3b30141d" class="m-doc">isActive</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
+            </dt>
+            <dd>Get if the constraint is active or not.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a804e9f94e56b62cf35d269eb0fed0639" class="m-doc">getNrOfConstraints</a>(</span><span class="m-doc-wrap">) -&gt; size_t</span>
+            </dt>
+            <dd>Get the number of constraints (i.e.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#af283e0be96a667d9446be6a737569804" class="m-doc">buildBoundingBox</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Direction.html" class="m-doc">iDynTree::<wbr />Direction</a> xAxisOfPlaneInWorld,
+              const <a href="classiDynTree_1_1Direction.html" class="m-doc">iDynTree::<wbr />Direction</a> yAxisOfPlaneInWorld,
+              const <a href="classiDynTree_1_1Position.html" class="m-doc">iDynTree::<wbr />Position</a> originOfPlaneInWorld,
+              const std::vector&lt;<a href="classiDynTree_1_1Polygon.html" class="m-doc">Polygon</a>&gt;&amp; supportPolygonsExpressedInSupportFrame,
+              const std::vector&lt;<a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&gt;&amp; absoluteFrame_X_supportFrame) -&gt; bool</span>
+            </dt>
+            <dd>Build the projected bounding box.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a9d97dc9a2a54e958ed345faae3d51f54" class="m-doc">project</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Position.html" class="m-doc">iDynTree::<wbr />Position</a>&amp; posIn3dInAbsoluteFrame) -&gt; <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector2</a></span>
+            </dt>
+            <dd>Project a point in the plane of the bounding box.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a8b0076cd2583bcc73035920345fc8c1c" class="m-doc">setProjectionAlongDirection</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector3</a> direction)</span>
+            </dt>
+            <dd></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a930823fe7cb62c1ff65a5c1b2ad33863" class="m-doc">projectAlongDirection</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Position.html" class="m-doc">iDynTree::<wbr />Position</a>&amp; posIn3dInAbsoluteFrame) -&gt; <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector2</a></span>
+            </dt>
+            <dd></dd>
+          </dl>
+        </section>
+        <section id="pub-attribs">
+          <h2><a href="#pub-attribs">Public variables</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <a href="classiDynTree_1_1Polygon2D.html" class="m-doc">Polygon2D</a> <a href="#a4d968d97432efec2b3f0e279b5314dec" class="m-doc">projectedBoundingBox</a>
+            </dt>
+            <dd>bounding box expressed in the 2D project constraint plane.</dd>
+            <dt id="a67e2db7524cabbada251ebfec6118d76">
+              <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a> <a href="#a67e2db7524cabbada251ebfec6118d76" class="m-doc-self">A</a>
+            </dt>
+            <dd>A constraint matrix, such that Ax &lt;= b iff the com projection x is in the bounding box.</dd>
+            <dt id="a174e78fcbd73beb939c18fc7793819ca">
+              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a> <a href="#a174e78fcbd73beb939c18fc7793819ca" class="m-doc-self">b</a>
+            </dt>
+            <dd>b vector, such that Ax &lt;= b iff the com projection x is in the bounding box.</dd>
+            <dt id="a0965c5b8cf5d35b5eb6359e813ee08f4">
+              <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">Matrix2x3</a> <a href="#a0965c5b8cf5d35b5eb6359e813ee08f4" class="m-doc-self">P</a>
+            </dt>
+            <dd>Projection matrix P, Note that x = P*(c-o), where x is the projection and c is the 3d COM .</dd>
+            <dt>
+              <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">Matrix2x3</a> <a href="#aabea435e6e536c29f835e2253eb58b51" class="m-doc">Pdirection</a>
+            </dt>
+            <dd>Projection matrix &#x27;Pdirection&#x27; defined by a given direction.</dd>
+            <dt id="aed4485913893e4e6392ff5be2a5ca82c">
+              <a href="classiDynTree_1_1MatrixDynSize.html" class="m-doc">MatrixDynSize</a> <a href="#aed4485913893e4e6392ff5be2a5ca82c" class="m-doc-self">AtimesP</a>
+            </dt>
+            <dd>Matrix obtained multiplying the matrix A for the matrix P.</dd>
+            <dt id="a1a1819a14597fd17e759b6b1a1ede95e">
+              <a href="classiDynTree_1_1Position.html" class="m-doc">iDynTree::<wbr />Position</a> <a href="#a1a1819a14597fd17e759b6b1a1ede95e" class="m-doc-self">o</a>
+            </dt>
+            <dd>Plane offset o Note that x = P*(c-o), where x is the projection and c is the 3d COM .</dd>
+            <dt id="a3e1874b20406c550cc38d335b8753f8c">
+              std::vector&lt;int&gt; <a href="#a3e1874b20406c550cc38d335b8753f8c" class="m-doc-self">supportFrameIndices</a>
+            </dt>
+            <dd>List of support frames.</dd>
+            <dt id="aec7064bb7cb6d238bf0c8473984d293c">
+              std::vector&lt;<a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&gt; <a href="#aec7064bb7cb6d238bf0c8473984d293c" class="m-doc-self">absoluteFrame_X_supportFrame</a>
+            </dt>
+            <dd>List of absolue_X_supportFrames.</dd>
+          </dl>
+        </section>
+        <section>
+          <h2>Function documentation</h2>
+          <section class="m-doc-details" id="a81936e6f83d733acb670173d3b30141d"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />BoundingBoxProjectionConstraint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a81936e6f83d733acb670173d3b30141d" class="m-doc-self">isActive</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get if the constraint is active or not.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>true if the constraint is active, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a804e9f94e56b62cf35d269eb0fed0639"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">size_t iDynTree::<wbr />BoundingBoxProjectionConstraint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a804e9f94e56b62cf35d269eb0fed0639" class="m-doc-self">getNrOfConstraints</a>(</span><span class="m-doc-wrap">)</span></span>
+            </h3>
+            <p>Get the number of constraints (i.e.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>the number of constraints.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>the number rows of the matrix A).</p>
+          </div></section>
+          <section class="m-doc-details" id="af283e0be96a667d9446be6a737569804"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />BoundingBoxProjectionConstraint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af283e0be96a667d9446be6a737569804" class="m-doc-self">buildBoundingBox</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Direction.html" class="m-doc">iDynTree::<wbr />Direction</a> xAxisOfPlaneInWorld,
+              const <a href="classiDynTree_1_1Direction.html" class="m-doc">iDynTree::<wbr />Direction</a> yAxisOfPlaneInWorld,
+              const <a href="classiDynTree_1_1Position.html" class="m-doc">iDynTree::<wbr />Position</a> originOfPlaneInWorld,
+              const std::vector&lt;<a href="classiDynTree_1_1Polygon.html" class="m-doc">Polygon</a>&gt;&amp; supportPolygonsExpressedInSupportFrame,
+              const std::vector&lt;<a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&gt;&amp; absoluteFrame_X_supportFrame)</span></span>
+            </h3>
+            <p>Build the projected bounding box.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">xAxisOfPlaneInWorld</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>yAxisOfPlaneInWorld</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>originOfPlaneInWorld</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>supportPolygonsExpressedInSupportFrame</td>
+                  <td>Vector of the support polygons, expressed in the support frames.</td>
+                </tr>
+                <tr>
+                  <td>absoluteFrame_X_supportFrame</td>
+                  <td>Vector of the transform between each support frame and the absolute frame.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if all went well, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="a9d97dc9a2a54e958ed345faae3d51f54"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector2</a> iDynTree::<wbr />BoundingBoxProjectionConstraint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9d97dc9a2a54e958ed345faae3d51f54" class="m-doc-self">project</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Position.html" class="m-doc">iDynTree::<wbr />Position</a>&amp; posIn3dInAbsoluteFrame)</span></span>
+            </h3>
+            <p>Project a point in the plane of the bounding box.</p>
+<p>The point is expressed in the absolute frame of the constriant.</p>
+          </div></section>
+          <section class="m-doc-details" id="a8b0076cd2583bcc73035920345fc8c1c"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />BoundingBoxProjectionConstraint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a8b0076cd2583bcc73035920345fc8c1c" class="m-doc-self">setProjectionAlongDirection</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector3</a> direction)</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">direction</td>
+                  <td>vector along which we want to project a point</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Set the projection matrix &#x27;Pdirection&#x27; given a desired projection direction.</p><aside class="m-note m-default"><h4>Author</h4><p>Aiko Dinale (29/08/2017)</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a930823fe7cb62c1ff65a5c1b2ad33863"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper"><a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector2</a> iDynTree::<wbr />BoundingBoxProjectionConstraint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a930823fe7cb62c1ff65a5c1b2ad33863" class="m-doc-self">projectAlongDirection</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1Position.html" class="m-doc">iDynTree::<wbr />Position</a>&amp; posIn3dInAbsoluteFrame)</span></span>
+            </h3>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">posIn3dInAbsoluteFrame</td>
+                  <td>a point we want to project</td>
+                </tr>
+              </tbody>
+            </table>
+<p>Project a point along a direction defined by the projection matrix &#x27;Pdirection&#x27;</p><aside class="m-note m-default"><h4>Author</h4><p>Aiko Dinale (29/08/2017)</p></aside>
+          </div></section>
+        </section>
+        <section>
+          <h2>Variable documentation</h2>
+          <section class="m-doc-details" id="a4d968d97432efec2b3f0e279b5314dec"><div>
+            <h3>
+              <a href="classiDynTree_1_1Polygon2D.html" class="m-doc">Polygon2D</a> iDynTree::<wbr />BoundingBoxProjectionConstraint::<wbr /><a href="#a4d968d97432efec2b3f0e279b5314dec" class="m-doc-self">projectedBoundingBox</a>
+            </h3>
+            <p>bounding box expressed in the 2D project constraint plane.</p>
+<p>This is computed by the buildBoundingBox method.</p>
+          </div></section>
+          <section class="m-doc-details" id="aabea435e6e536c29f835e2253eb58b51"><div>
+            <h3>
+              <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">Matrix2x3</a> iDynTree::<wbr />BoundingBoxProjectionConstraint::<wbr /><a href="#aabea435e6e536c29f835e2253eb58b51" class="m-doc-self">Pdirection</a>
+            </h3>
+            <p>Projection matrix &#x27;Pdirection&#x27; defined by a given direction.</p>
+<p>The projection &#x27;x&#x27; of a 3D point &#x27;c&#x27; along a given vector is obtained as: x = Pdirection*(c-o).</p>
+          </div></section>
+        </section>
+      </div>
+    </div>
+  </div>
+</article></main>
+<div class="m-doc-search" id="search">
+  <a href="#!" onclick="return hideSearch()"></a>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-m-8 m-push-m-2">
+        <div class="m-doc-search-header m-text m-small">
+          <div><span class="m-label m-default">Tab</span> / <span class="m-label m-default">T</span> to search, <span class="m-label m-default">Esc</span> to close</div>
+          <div id="search-symbolcount">&hellip;</div>
+        </div>
+        <div class="m-doc-search-content">
+          <form>
+            <input type="search" name="q" id="search-input" placeholder="Loading &hellip;" disabled="disabled" autofocus="autofocus" autocomplete="off" spellcheck="false" />
+          </form>
+          <noscript class="m-text m-danger m-text-center">Unlike everything else in the docs, the search functionality <em>requires</em> JavaScript.</noscript>
+          <div id="search-help" class="m-text m-dim m-text-center">
+            <p class="m-noindent">Search for symbols, directories, files, pages or
+            modules. You can omit any prefix from the symbol or file path; adding a
+            <code>:</code> or <code>/</code> suffix lists all members of given symbol or
+            directory.</p>
+            <p class="m-noindent">Use <span class="m-label m-dim">&darr;</span>
+            / <span class="m-label m-dim">&uarr;</span> to navigate through the list,
+            <span class="m-label m-dim">Enter</span> to go.
+            <span class="m-label m-dim">Tab</span> autocompletes common prefix, you can
+            copy a link to the result using <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">L</span> while <span class="m-label m-dim">⌘</span>
+            <span class="m-label m-dim">M</span> produces a Markdown link.</p>
+          </div>
+          <div id="search-notfound" class="m-text m-warning m-text-center">Sorry, nothing was found.</div>
+          <ul id="search-results"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="search-v1.js"></script>
+<script src="searchdata-v1.js" async="async"></script>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>iDynTree documentation. Licensed under the <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU Lesser General Public License v3.0</a>. Project maintained by the <a href="https://www.iit.it/web/ami/">Artificial and Mechanical Intelligence Lab</a>. Contact the team via <a href="https://github.com/robotology/idyntree/issues/new">GitHub</a>.<br />Generated by <a href="https://doxygen.org/">Doxygen</a> 1.9.1 and <a href="https://mcss.mosra.cz/">m.css</a>.
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

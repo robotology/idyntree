@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="KinDynComputations_8h" kind="file" language="C++">
+    <compoundname>KinDynComputations.h</compoundname>
+    <includes local="no">string</includes>
+    <includes local="no">vector</includes>
+    <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
+    <includes refid="MatrixDynSize_8h" local="no">iDynTree/Core/MatrixDynSize.h</includes>
+    <includes refid="MatrixView_8h" local="no">iDynTree/Core/MatrixView.h</includes>
+    <includes refid="Utils_8h" local="no">iDynTree/Core/Utils.h</includes>
+    <includes refid="Span_8h" local="no">iDynTree/Core/Span.h</includes>
+    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
+    <includes refid="FreeFloatingMatrices_8h" local="no">iDynTree/Model/FreeFloatingMatrices.h</includes>
+    <includes refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includes>
+    <includedby refid="InverseKinematicsData_8h" local="no">private/InverseKinematicsData.h</includedby>
+    <includedby refid="robotstatepublisher_8h" local="no">robotstatepublisher.h</includedby>
+    <includedby refid="ObserverThread_8h" local="no">ObserverThread.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/KinDynComputations.h</label>
+        <link refid="KinDynComputations_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>string</label>
+      </node>
+      <node id="3">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>iDynTree/KinDynComputations.h</label>
+        <link refid="KinDynComputations_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>robotstatepublisher.h</label>
+        <link refid="robotstatepublisher_8h"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classiDynTree_1_1KinDynComputations" prot="public">iDynTree::KinDynComputations</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/KinDynComputations.h"/>
+  </compounddef>
+</doxygen>

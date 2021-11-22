@@ -1,0 +1,443 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1IAttitudeEstimator" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>iDynTree::IAttitudeEstimator</compoundname>
+    <derivedcompoundref refid="classiDynTree_1_1AttitudeMahonyFilter" prot="public" virt="non-virtual">iDynTree::AttitudeMahonyFilter</derivedcompoundref>
+    <derivedcompoundref refid="classiDynTree_1_1AttitudeQuaternionEKF" prot="public" virt="non-virtual">iDynTree::AttitudeQuaternionEKF</derivedcompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1a56527cc0430675ab932469b6f5a2cb60" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual iDynTree::IAttitudeEstimator::~IAttitudeEstimator</definition>
+        <argsstring>()</argsstring>
+        <name>~IAttitudeEstimator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="68" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1a9c251ac717cbcfeb75a39fffd5a9b185" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IAttitudeEstimator::updateFilterWithMeasurements</definition>
+        <argsstring>(const iDynTree::LinearAccelerometerMeasurements &amp;linAccMeas, const iDynTree::GyroscopeMeasurements &amp;gyroMeas)=0</argsstring>
+        <name>updateFilterWithMeasurements</name>
+        <reimplementedby refid="classiDynTree_1_1AttitudeMahonyFilter_1a761c1ce98405a7bf629e1e523e3649f5">updateFilterWithMeasurements</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1AttitudeQuaternionEKF_1addb65b053f2854685bb193318cfd5e6c">updateFilterWithMeasurements</reimplementedby>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::LinearAccelerometerMeasurements</ref> &amp;</type>
+          <declname>linAccMeas</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::GyroscopeMeasurements</ref> &amp;</type>
+          <declname>gyroMeas</declname>
+        </param>
+        <briefdescription>
+<para>Update the filter with accelerometer and gyroscope measurements. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">linAccMeas</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>proper (body acceleration - gravity) classical acceleration of the origin of the body frame B expressed in frame B </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gyroMeas</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>angular velocity of body frame B with respect to an inertial fram A, expressed in frame B</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>consider the current behavior of our system does not use magnetometer measurements and is calling this method to update measurements. Then, if we decide to turn the flag use_magnetometer_measurements to true, this will not guarantee that the magnetometer measurements will be used. The magnetometer measurements will be used only if we replace this function call with the other overlaoded function considering the magnetometer measurements.</para>
+</simplesect>
+<simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="83" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1a7121acf85b46be0edb9231588c579013" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IAttitudeEstimator::updateFilterWithMeasurements</definition>
+        <argsstring>(const iDynTree::LinearAccelerometerMeasurements &amp;linAccMeas, const iDynTree::GyroscopeMeasurements &amp;gyroMeas, const iDynTree::MagnetometerMeasurements &amp;magMeas)=0</argsstring>
+        <name>updateFilterWithMeasurements</name>
+        <reimplementedby refid="classiDynTree_1_1AttitudeMahonyFilter_1aa87977f5cb6afd23f73aa526dc993ade">updateFilterWithMeasurements</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1AttitudeQuaternionEKF_1a066e3d8d073c3374c3c49cfc41bb4618">updateFilterWithMeasurements</reimplementedby>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::LinearAccelerometerMeasurements</ref> &amp;</type>
+          <declname>linAccMeas</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::GyroscopeMeasurements</ref> &amp;</type>
+          <declname>gyroMeas</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::MagnetometerMeasurements</ref> &amp;</type>
+          <declname>magMeas</declname>
+        </param>
+        <briefdescription>
+<para>Update the filter with accelerometer, gyroscope and magnetometer measurements. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">linAccMeas</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>proper (body acceleration - gravity) classical acceleration of the origin of the body frame B expressed in frame B </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">gyroMeas</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>angular velocity of body frame B with respect to an inertial fram A, expressed in frame B </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">magMeas</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>magnetometer measurements expressed in frame B</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="95" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1a6cc4ea7bacb721c67890ceb250857e71" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IAttitudeEstimator::propagateStates</definition>
+        <argsstring>()=0</argsstring>
+        <name>propagateStates</name>
+        <reimplementedby refid="classiDynTree_1_1AttitudeMahonyFilter_1af743b419ed9b87c50cc3d3bd87c09ce0">propagateStates</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1AttitudeQuaternionEKF_1a6d06f0744427bd918a7175919176fa05">propagateStates</reimplementedby>
+        <briefdescription>
+<para>Propagate the states and associated uncertainties through properly defined propagation functions The underlying implementation depends on the type of filter being implemented. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="105" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1a3fd8541c4ede713177058251aae24717" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IAttitudeEstimator::getOrientationEstimateAsRotationMatrix</definition>
+        <argsstring>(iDynTree::Rotation &amp;rot)=0</argsstring>
+        <name>getOrientationEstimateAsRotationMatrix</name>
+        <reimplementedby refid="classiDynTree_1_1AttitudeMahonyFilter_1a17791aee32f963e4b1117625fb19a509">getOrientationEstimateAsRotationMatrix</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1AttitudeQuaternionEKF_1a0fd7d6c689f0ff66d799469d0fd1dbf0">getOrientationEstimateAsRotationMatrix</reimplementedby>
+        <param>
+          <type><ref refid="classiDynTree_1_1Rotation" kindref="compound">iDynTree::Rotation</ref> &amp;</type>
+          <declname>rot</declname>
+        </param>
+        <briefdescription>
+<para>Get orientation of the body with respect to inertial frame, in rotation matrix form If we denote <formula id="230">$ A $</formula> as inertial frame and <formula id="231">$ B $</formula> as the frame attached to the body, then this method gives us <formula id="232">$ {^A}R_B $</formula> as the rotation matrix. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">rot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref> matrix </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="114" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1a72f94711e28d7173869f41492d6ac364" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IAttitudeEstimator::getOrientationEstimateAsQuaternion</definition>
+        <argsstring>(iDynTree::UnitQuaternion &amp;q)=0</argsstring>
+        <name>getOrientationEstimateAsQuaternion</name>
+        <reimplementedby refid="classiDynTree_1_1AttitudeMahonyFilter_1a12b66b4f277bb7942e82eb970550878a">getOrientationEstimateAsQuaternion</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1AttitudeQuaternionEKF_1a01e03a0620f4abf473d8cf42c37528ea">getOrientationEstimateAsQuaternion</reimplementedby>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::UnitQuaternion</ref> &amp;</type>
+          <declname>q</declname>
+        </param>
+        <briefdescription>
+<para>Get orientation of the body with respect to inertial frame, in unit quaternion form If we denote <formula id="230">$ A $</formula> as inertial frame and <formula id="231">$ B $</formula> as the frame attached to the body, then this method gives us <formula id="233">$ {^A}q_B as the quaternion $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>quaternion has the form (real, imaginary) and is normalized </para>
+</simplesect>
+<simplesect kind="note"><para>Usually a rotation matrix can be described using two quaternions due to its double-connectedness property Depending on the specific filter, the initial state and the trajectory of the system, we could obtain one quaternion or the other(opposite spin), depending on the system dynamics.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">q</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>UnitQuaternion </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="129" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1add5b1c7109a232bcb3da976792f72a6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IAttitudeEstimator::getOrientationEstimateAsRPY</definition>
+        <argsstring>(iDynTree::RPY &amp;rpy)=0</argsstring>
+        <name>getOrientationEstimateAsRPY</name>
+        <reimplementedby refid="classiDynTree_1_1AttitudeMahonyFilter_1acae8174e86843da647341949ca29e17a">getOrientationEstimateAsRPY</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1AttitudeQuaternionEKF_1a0fc087b7d9adc7384e008c8dae11677b">getOrientationEstimateAsRPY</reimplementedby>
+        <param>
+          <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::RPY</ref> &amp;</type>
+          <declname>rpy</declname>
+        </param>
+        <briefdescription>
+<para>Get orientation of the body with respect to inertial frame, in Euler&apos;s RPY form If we denote <formula id="230">$ A $</formula> as inertial frame and <formula id="231">$ B $</formula> as the frame attached to the body, then this method gives us the RPY 3d vector of Euler Angles when composed together gives us <formula id="232">$ {^A}R_B $</formula> as the rotation matrix where <formula id="234">$ {^A}R_B = Rot_z(yaw)Rot_y(pitch)Rot_x(roll)$</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For more details about the range of the RPY Euler angles, please refer the documentation of <ulink url="https://github.com/robotology/idyntree/blob/c8bf721b771fa4b1e7c3a940632e121060719a19/src/core/include/iDynTree/Core/Rotation.h#L167">GetRPY()</ulink></para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">rpy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>3D vector containing roll pitch yaw angles </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="142" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1a7234eb151268d99d90dbe691a6bf3a46" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>size_t</type>
+        <definition>virtual size_t iDynTree::IAttitudeEstimator::getInternalStateSize</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getInternalStateSize</name>
+        <reimplementedby refid="classiDynTree_1_1AttitudeMahonyFilter_1a14a59acedee3a36d1cb1a57c863f6e21">getInternalStateSize</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1AttitudeQuaternionEKF_1aa1f9effb336b40b40893ea402d618389">getInternalStateSize</reimplementedby>
+        <briefdescription>
+<para>Get dimension of the state vector. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>size_t size of state vector </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="148" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1a0360685bed94e086224b1126116dca04" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IAttitudeEstimator::getInternalState</definition>
+        <argsstring>(const iDynTree::Span&lt; double &gt; &amp;stateBuffer) const =0</argsstring>
+        <name>getInternalState</name>
+        <reimplementedby refid="classiDynTree_1_1AttitudeMahonyFilter_1ae5f871007add5e65389039743a88ab71">getInternalState</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1AttitudeQuaternionEKF_1a38b5c9a6cc64d28e33bb5ccf424b6622">getInternalState</reimplementedby>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; double &gt; &amp;</type>
+          <declname>stateBuffer</declname>
+        </param>
+        <briefdescription>
+<para>Get internal state of the estimator The internal state of the estimator is described as <formula id="226">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="227">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="228">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="229">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The default internal state of the estimator would be <formula id="235">$ X = \begin{bmatrix} 1.0 \\ 0_{1 \times 3} \\ 0_{1 \times 3} \\ 0_{1 \times 3} \end{bmatrix}^T $</formula> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">stateBuffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> object as reference of the container where state vector should be copied to </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="160" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1a86554ddcfc70601b05ad7cd997851983" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IAttitudeEstimator::getDefaultInternalInitialState</definition>
+        <argsstring>(const iDynTree::Span&lt; double &gt; &amp;stateBuffer) const =0</argsstring>
+        <name>getDefaultInternalInitialState</name>
+        <reimplementedby refid="classiDynTree_1_1AttitudeMahonyFilter_1af275b53472f9fa6f5f146f1f5a302bdc">getDefaultInternalInitialState</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1AttitudeQuaternionEKF_1a687b22236d1149388d9dae9bc3eed81f">getDefaultInternalInitialState</reimplementedby>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; double &gt; &amp;</type>
+          <declname>stateBuffer</declname>
+        </param>
+        <briefdescription>
+<para>Get initial internal state of the estimator The internal state of the estimator is described as <formula id="226">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="227">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="228">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="229">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The default internal state of the estimator would be <formula id="235">$ X = \begin{bmatrix} 1.0 \\ 0_{1 \times 3} \\ 0_{1 \times 3} \\ 0_{1 \times 3} \end{bmatrix}^T $</formula> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">stateBuffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> object as reference of the container where state vector should be copied to </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="172" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1a4277465fc6cacfa0fa0ccd1d1c863954" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IAttitudeEstimator::setInternalState</definition>
+        <argsstring>(const iDynTree::Span&lt; double &gt; &amp;stateBuffer)=0</argsstring>
+        <name>setInternalState</name>
+        <reimplementedby refid="classiDynTree_1_1AttitudeMahonyFilter_1a056cbfe2f712924c67609afcda054271">setInternalState</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1AttitudeQuaternionEKF_1af2c3440e43f4a09841e7aacb977fc5f6">setInternalState</reimplementedby>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; double &gt; &amp;</type>
+          <declname>stateBuffer</declname>
+        </param>
+        <briefdescription>
+<para>set internal state of the estimator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The internal state of the estimator is described as <formula id="226">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="227">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="228">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="229">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">stateBuffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> object as reference of the container from which the internal state vector should be assigned. The size of the buffer should be 10. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="183" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IAttitudeEstimator_1a8ca76def98fa0bd37975788dc7e1c0c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IAttitudeEstimator::setInternalStateInitialOrientation</definition>
+        <argsstring>(const iDynTree::Span&lt; double &gt; &amp;orientationBuffer)=0</argsstring>
+        <name>setInternalStateInitialOrientation</name>
+        <reimplementedby refid="classiDynTree_1_1AttitudeMahonyFilter_1a9f0c070353e6da5b2ad7b478de1eb7dd">setInternalStateInitialOrientation</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1AttitudeQuaternionEKF_1aa7a6ab9ed9227c130dd6edc9fbe02e49">setInternalStateInitialOrientation</reimplementedby>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; double &gt; &amp;</type>
+          <declname>orientationBuffer</declname>
+        </param>
+        <briefdescription>
+<para>set the initial orientation for the internal state of the estimator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The initial orientation for the internal state of the estimator is described as <formula id="236">$ {^A}q_B $</formula> <formula id="227">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">stateBuffer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> object as reference of the container from which the inital orientaiton for internal state vector should be assigned. The size of the buffer should be 4. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true/false if successful/not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/AttitudeEstimator.h" line="192" column="22"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>for attitude estimator classes </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The aim is to implement different attitude estimators as a block that takes IMU measurements as inputs and gives attitude estimates as outputs. This way the underlying implementation is abstracted and the user only has to set a few parameters and run the estimator.</para>
+<para>The general procedure to use the estimators would be,<itemizedlist>
+<listitem><para>instantiate the filter,</para>
+</listitem><listitem><para>set initial internal state</para>
+</listitem><listitem><para>in a loop,<itemizedlist>
+<listitem><para>update the filter with measurements</para>
+</listitem><listitem><para>propagate the states</para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+<para>However, additional methods to set and get parameters for the filter might be available with respect to the filters.</para>
+<para>The internal state of the estimator is described as <formula id="226">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="227">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="228">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="229">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>iDynTree::IAttitudeEstimator</label>
+        <link refid="classiDynTree_1_1IAttitudeEstimator"/>
+      </node>
+      <node id="3">
+        <label>iDynTree::AttitudeQuaternionEKF</label>
+        <link refid="classiDynTree_1_1AttitudeQuaternionEKF"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>iDynTree::AttitudeMahonyFilter</label>
+        <link refid="classiDynTree_1_1AttitudeMahonyFilter"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="iDynTree/Estimation/AttitudeEstimator.h" line="65" column="5" bodyfile="iDynTree/Estimation/AttitudeEstimator.h" bodystart="66" bodyend="193"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1IAttitudeEstimator_1a86554ddcfc70601b05ad7cd997851983" prot="public" virt="pure-virtual"><scope>iDynTree::IAttitudeEstimator</scope><name>getDefaultInternalInitialState</name></member>
+      <member refid="classiDynTree_1_1IAttitudeEstimator_1a0360685bed94e086224b1126116dca04" prot="public" virt="pure-virtual"><scope>iDynTree::IAttitudeEstimator</scope><name>getInternalState</name></member>
+      <member refid="classiDynTree_1_1IAttitudeEstimator_1a7234eb151268d99d90dbe691a6bf3a46" prot="public" virt="pure-virtual"><scope>iDynTree::IAttitudeEstimator</scope><name>getInternalStateSize</name></member>
+      <member refid="classiDynTree_1_1IAttitudeEstimator_1a72f94711e28d7173869f41492d6ac364" prot="public" virt="pure-virtual"><scope>iDynTree::IAttitudeEstimator</scope><name>getOrientationEstimateAsQuaternion</name></member>
+      <member refid="classiDynTree_1_1IAttitudeEstimator_1a3fd8541c4ede713177058251aae24717" prot="public" virt="pure-virtual"><scope>iDynTree::IAttitudeEstimator</scope><name>getOrientationEstimateAsRotationMatrix</name></member>
+      <member refid="classiDynTree_1_1IAttitudeEstimator_1add5b1c7109a232bcb3da976792f72a6f" prot="public" virt="pure-virtual"><scope>iDynTree::IAttitudeEstimator</scope><name>getOrientationEstimateAsRPY</name></member>
+      <member refid="classiDynTree_1_1IAttitudeEstimator_1a6cc4ea7bacb721c67890ceb250857e71" prot="public" virt="pure-virtual"><scope>iDynTree::IAttitudeEstimator</scope><name>propagateStates</name></member>
+      <member refid="classiDynTree_1_1IAttitudeEstimator_1a4277465fc6cacfa0fa0ccd1d1c863954" prot="public" virt="pure-virtual"><scope>iDynTree::IAttitudeEstimator</scope><name>setInternalState</name></member>
+      <member refid="classiDynTree_1_1IAttitudeEstimator_1a8ca76def98fa0bd37975788dc7e1c0c5" prot="public" virt="pure-virtual"><scope>iDynTree::IAttitudeEstimator</scope><name>setInternalStateInitialOrientation</name></member>
+      <member refid="classiDynTree_1_1IAttitudeEstimator_1a9c251ac717cbcfeb75a39fffd5a9b185" prot="public" virt="pure-virtual"><scope>iDynTree::IAttitudeEstimator</scope><name>updateFilterWithMeasurements</name></member>
+      <member refid="classiDynTree_1_1IAttitudeEstimator_1a7121acf85b46be0edb9231588c579013" prot="public" virt="pure-virtual"><scope>iDynTree::IAttitudeEstimator</scope><name>updateFilterWithMeasurements</name></member>
+      <member refid="classiDynTree_1_1IAttitudeEstimator_1a56527cc0430675ab932469b6f5a2cb60" prot="public" virt="virtual"><scope>iDynTree::IAttitudeEstimator</scope><name>~IAttitudeEstimator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

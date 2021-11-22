@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="OptimizationProblem_8h" kind="file" language="C++">
+    <compoundname>OptimizationProblem.h</compoundname>
+    <includes local="no">vector</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">cstddef</includes>
+    <includedby refid="Optimizer_8h" local="no">iDynTree/Optimizer.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/OptimizationProblem.h</label>
+        <link refid="OptimizationProblem_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>vector</label>
+      </node>
+      <node id="4">
+        <label>cstddef</label>
+      </node>
+      <node id="3">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1optimization_1_1OptimizationProblemInfoData" prot="public">iDynTree::optimization::OptimizationProblemInfoData</innerclass>
+    <innerclass refid="classiDynTree_1_1optimization_1_1OptimizationProblemInfo" prot="public">iDynTree::optimization::OptimizationProblemInfo</innerclass>
+    <innerclass refid="classiDynTree_1_1optimization_1_1OptimizationProblem" prot="public">iDynTree::optimization::OptimizationProblem</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+    <innernamespace refid="namespaceiDynTree_1_1optimization">iDynTree::optimization</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/OptimizationProblem.h"/>
+  </compounddef>
+</doxygen>

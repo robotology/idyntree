@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="SubModel_8h" kind="file" language="C++">
+    <compoundname>SubModel.h</compoundname>
+    <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
+    <includes local="no">vector</includes>
+    <includes local="no">string</includes>
+    <includes local="no">cstddef</includes>
+    <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>iDynTree/Model/SubModel.h</label>
+        <link refid="SubModel_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>string</label>
+      </node>
+      <node id="2">
+        <label>vector</label>
+      </node>
+      <node id="4">
+        <label>cstddef</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classiDynTree_1_1SubModelDecomposition" prot="public">iDynTree::SubModelDecomposition</innerclass>
+    <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="SubModel_8h_1a2f7475185a0d9ae6c7dcd2048d4a23fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::computeTransformToTraversalBase</definition>
+        <argsstring>(const Model &amp;fullModel, const Traversal &amp;traversal, const JointPosDoubleArray &amp;jointPos, LinkPositions &amp;traversalBase_H_link)</argsstring>
+        <name>computeTransformToTraversalBase</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>fullModel</declname>
+        </param>
+        <param>
+          <type>const Traversal &amp;</type>
+          <declname>traversal</declname>
+        </param>
+        <param>
+          <type>const JointPosDoubleArray &amp;</type>
+          <declname>jointPos</declname>
+        </param>
+        <param>
+          <type>LinkPositions &amp;</type>
+          <declname>traversalBase_H_link</declname>
+        </param>
+        <briefdescription>
+<para>Helper loop to compute the position of each link wrt to the frame of the subModel base. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">fullModel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>full model </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">traversal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>traversal on which to run the loop </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jointPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>joint positions for the full model </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">traversalBase_H_link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>traversalBase_H_link[i] will store the traversalBase_H_i transform </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SubModel.h" line="134" column="10" declfile="iDynTree/Model/SubModel.h" declline="134" declcolumn="10"/>
+      </memberdef>
+      <memberdef kind="function" id="SubModel_8h_1a3f3b031bdaab68634b5cc61f5e1e14b4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::computeTransformToSubModelBase</definition>
+        <argsstring>(const Model &amp;fullModel, const SubModelDecomposition &amp;subModelDecomposition, const JointPosDoubleArray &amp;jointPos, LinkPositions &amp;subModelBase_H_link)</argsstring>
+        <name>computeTransformToSubModelBase</name>
+        <param>
+          <type>const Model &amp;</type>
+          <declname>fullModel</declname>
+        </param>
+        <param>
+          <type>const SubModelDecomposition &amp;</type>
+          <declname>subModelDecomposition</declname>
+        </param>
+        <param>
+          <type>const JointPosDoubleArray &amp;</type>
+          <declname>jointPos</declname>
+        </param>
+        <param>
+          <type>LinkPositions &amp;</type>
+          <declname>subModelBase_H_link</declname>
+        </param>
+        <briefdescription>
+<para>Run the computeTransformToTraversalBase for all the traversal in the subModelDecomposition, and store the results in the linkPos array. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">fullModel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>full model </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">subModelDecomposition</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>model decomposition on which the loop will run </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">jointPos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>joint positions for the full model </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">subModelBase_H_link</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>subModelBase_H_link[i] will store the subModelBase_H_i transform </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/SubModel.h" line="149" column="10" declfile="iDynTree/Model/SubModel.h" declline="149" declcolumn="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/Model/SubModel.h"/>
+  </compounddef>
+</doxygen>

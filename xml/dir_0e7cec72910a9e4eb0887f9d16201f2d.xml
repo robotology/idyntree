@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_0e7cec72910a9e4eb0887f9d16201f2d" kind="dir">
+    <compoundname>iDynTree</compoundname>
+    <innerfile refid="InertialParametersSolidShapesHelpers_8h">InertialParametersSolidShapesHelpers.h</innerfile>
+    <innerfile refid="ModelTransformersSolidShapes_8h">ModelTransformersSolidShapes.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/"/>
+  </compounddef>
+</doxygen>

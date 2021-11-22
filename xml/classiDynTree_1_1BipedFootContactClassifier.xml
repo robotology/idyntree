@@ -1,0 +1,374 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1BipedFootContactClassifier" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::BipedFootContactClassifier</compoundname>
+      <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classiDynTree_1_1BipedFootContactClassifier_1af20af239a0c6b136d86155c97f12d49c" prot="public" static="no" strong="no">
+        <type></type>
+        <name>contactFoot</name>
+        <enumvalue id="classiDynTree_1_1BipedFootContactClassifier_1af20af239a0c6b136d86155c97f12d49ca585e09db1a02009343fb9a4b16876ce0" prot="public">
+          <name>LEFT_FOOT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classiDynTree_1_1BipedFootContactClassifier_1af20af239a0c6b136d86155c97f12d49ca0b9fe2ce907f396ca3b39082ae8ed18e" prot="public">
+          <name>RIGHT_FOOT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classiDynTree_1_1BipedFootContactClassifier_1af20af239a0c6b136d86155c97f12d49cae186a4c36f4ad5cd9df0373aec20aac2" prot="public">
+          <name>UNKNOWN_FOOT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Enumeration of foot in contact. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BipedFootContactClassifier.h" line="72" column="9" bodyfile="iDynTree/Estimation/BipedFootContactClassifier.h" bodystart="73" bodyend="77"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1BipedFootContactClassifier_1a4f87e55eb99efdd923345b87ac31fd1c" prot="public" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classiDynTree_1_1ContactStateMachine" kindref="compound">ContactStateMachine</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;ContactStateMachine&gt; iDynTree::BipedFootContactClassifier::m_leftFootContactClassifier</definition>
+        <argsstring></argsstring>
+        <name>m_leftFootContactClassifier</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BipedFootContactClassifier.h" line="131" column="25" bodyfile="iDynTree/Estimation/BipedFootContactClassifier.h" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BipedFootContactClassifier_1a3b3376779f100d06906e53cd32ebd7ac" prot="public" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classiDynTree_1_1ContactStateMachine" kindref="compound">ContactStateMachine</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;ContactStateMachine&gt; iDynTree::BipedFootContactClassifier::m_rightFootContactClassifier</definition>
+        <argsstring></argsstring>
+        <name>m_rightFootContactClassifier</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BipedFootContactClassifier.h" line="134" column="25" bodyfile="iDynTree/Estimation/BipedFootContactClassifier.h" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1BipedFootContactClassifier_1af77a45375af8c69345a6dcf0470cd1be" prot="private" static="no" mutable="no">
+        <type><ref refid="classiDynTree_1_1BipedFootContactClassifier_1af20af239a0c6b136d86155c97f12d49c" kindref="member">contactFoot</ref></type>
+        <definition>contactFoot iDynTree::BipedFootContactClassifier::m_primaryFoot</definition>
+        <argsstring></argsstring>
+        <name>m_primaryFoot</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BipedFootContactClassifier.h" line="145" column="21" bodyfile="iDynTree/Estimation/BipedFootContactClassifier.h" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BipedFootContactClassifier_1a5bcc6a78b1834f2eec5f783fdd4f642d" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::BipedFootContactClassifier::m_leftFootContactState</definition>
+        <argsstring></argsstring>
+        <name>m_leftFootContactState</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BipedFootContactClassifier.h" line="148" column="14" bodyfile="iDynTree/Estimation/BipedFootContactClassifier.h" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BipedFootContactClassifier_1a999a6ab3adbfd65aaa8f701629e05e33" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::BipedFootContactClassifier::m_rightFootContactState</definition>
+        <argsstring></argsstring>
+        <name>m_rightFootContactState</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BipedFootContactClassifier.h" line="151" column="14" bodyfile="iDynTree/Estimation/BipedFootContactClassifier.h" bodystart="151" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1BipedFootContactClassifier_1a24cec8aeced7d73dc16ad22d40b02f79" prot="private" static="no" mutable="no">
+        <type>SwitchingPattern</type>
+        <definition>SwitchingPattern iDynTree::BipedFootContactClassifier::m_pattern</definition>
+        <argsstring></argsstring>
+        <name>m_pattern</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BipedFootContactClassifier.h" line="154" column="26" bodyfile="iDynTree/Estimation/BipedFootContactClassifier.h" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1BipedFootContactClassifier_1a6ef3012ada7c652d5b0fe42e4a0f7a99" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::BipedFootContactClassifier::BipedFootContactClassifier</definition>
+        <argsstring>(const SchmittParams &amp;leftFootSchmittParams, const SchmittParams &amp;rightFootSchmittParams)</argsstring>
+        <name>BipedFootContactClassifier</name>
+        <param>
+          <type>const <ref refid="structiDynTree_1_1SchmittParams" kindref="compound">SchmittParams</ref> &amp;</type>
+          <declname>leftFootSchmittParams</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structiDynTree_1_1SchmittParams" kindref="compound">SchmittParams</ref> &amp;</type>
+          <declname>rightFootSchmittParams</declname>
+        </param>
+        <briefdescription>
+<para>Constructor @params leftFootSchmittParams const ref to struct containing parameters for the left foot schmitt trigger device @params rightFootSchmittParams const ref to struct containing parameters for the right foot schmitt trigger device. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BipedFootContactClassifier.h" line="84" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BipedFootContactClassifier_1abcca793ac3370f48466c7ccd03d3745c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::BipedFootContactClassifier::updateFootContactState</definition>
+        <argsstring>(double currentTime, double leftFootNormalForce, double rightFootNormalForce)</argsstring>
+        <name>updateFootContactState</name>
+        <param>
+          <type>double</type>
+          <declname>currentTime</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>leftFootNormalForce</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>rightFootNormalForce</declname>
+        </param>
+        <briefdescription>
+<para>Updates the contact state machine for both the foot, determines the current state and detects foot transition for setting the primary foot(active foot) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>currentTime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>time </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>leftNormalForce</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>z-component of the force acting on the left foot </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rightNormalForce</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>z-component of the force acting on the right foot </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BipedFootContactClassifier.h" line="93" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BipedFootContactClassifier_1a3670a1ea2e0a0daf25c774239207bc64" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classiDynTree_1_1BipedFootContactClassifier_1af20af239a0c6b136d86155c97f12d49c" kindref="member">contactFoot</ref></type>
+        <definition>contactFoot iDynTree::BipedFootContactClassifier::getPrimaryFoot</definition>
+        <argsstring>()</argsstring>
+        <name>getPrimaryFoot</name>
+        <briefdescription>
+<para>Get the primary foot. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>contactFoot left, right or unknown </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BipedFootContactClassifier.h" line="99" column="21" bodyfile="iDynTree/Estimation/BipedFootContactClassifier.h" bodystart="99" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BipedFootContactClassifier_1aacebedbb7eb0332f2184ac2c5ce30015" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BipedFootContactClassifier::getLeftFootContactState</definition>
+        <argsstring>()</argsstring>
+        <name>getLeftFootContactState</name>
+        <briefdescription>
+<para>Get left foot contact state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if in contact, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BipedFootContactClassifier.h" line="105" column="14" bodyfile="iDynTree/Estimation/BipedFootContactClassifier.h" bodystart="105" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BipedFootContactClassifier_1a7ce32a5902d9ebe0fd46d0be2ef7dc12" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::BipedFootContactClassifier::getRightFootContactState</definition>
+        <argsstring>()</argsstring>
+        <name>getRightFootContactState</name>
+        <briefdescription>
+<para>Get right foot contact state. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if in contact, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BipedFootContactClassifier.h" line="111" column="14" bodyfile="iDynTree/Estimation/BipedFootContactClassifier.h" bodystart="111" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BipedFootContactClassifier_1a2bc82cacefd7f593f8fd1ac5a086a8b4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::BipedFootContactClassifier::setContactSwitchingPattern</definition>
+        <argsstring>(SwitchingPattern pattern)</argsstring>
+        <name>setContactSwitchingPattern</name>
+        <param>
+          <type>SwitchingPattern</type>
+          <declname>pattern</declname>
+        </param>
+        <briefdescription>
+<para>set switching pattern to be considered for determining primary foot </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>no default value is considered, remember to call this method after instantiation </para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pattern</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>switching pattern </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BipedFootContactClassifier.h" line="118" column="14" bodyfile="iDynTree/Estimation/BipedFootContactClassifier.h" bodystart="118" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1BipedFootContactClassifier_1a9fd24cc710528f2f992b28c858fde974" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::BipedFootContactClassifier::setPrimaryFoot</definition>
+        <argsstring>(contactFoot foot)</argsstring>
+        <name>setPrimaryFoot</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1BipedFootContactClassifier_1af20af239a0c6b136d86155c97f12d49c" kindref="member">contactFoot</ref></type>
+          <declname>foot</declname>
+        </param>
+        <briefdescription>
+<para>set primary foot This method was mainly intended to be called by an external process to set the primary foot in the initial setting, before any contact is broken. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>In case it is set to UNKNOWN_FOOT, it waits for the foot normal force measurements (checks left first and then right), and activates corresponding foot, handled in the detectTransitions() method. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>foot</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>primary foot </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BipedFootContactClassifier.h" line="128" column="14" bodyfile="iDynTree/Estimation/BipedFootContactClassifier.h" bodystart="128" bodyend="128"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1BipedFootContactClassifier_1ad292173ffe41072b369854ec56c7c676" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::BipedFootContactClassifier::detectFeetTransition</definition>
+        <argsstring>()</argsstring>
+        <name>detectFeetTransition</name>
+        <briefdescription>
+<para>Determine the primary foot depending on the switching pattern compares the contact transition modes on each foot and sets the primary foot accordingly. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Estimation/BipedFootContactClassifier.h" line="142" column="14"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="4">
+        <label>T</label>
+      </node>
+      <node id="3">
+        <label>std::unique_ptr&lt; T &gt;</label>
+        <childnode refid="4" relation="usage">
+          <edgelabel>ptr</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>iDynTree::BipedFootContactClassifier</label>
+        <link refid="classiDynTree_1_1BipedFootContactClassifier"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>m_leftFootContactClassifier</edgelabel>
+          <edgelabel>m_rightFootContactClassifier</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::unique_ptr&lt; iDynTree::ContactStateMachine &gt;</label>
+        <childnode refid="3" relation="template-instance">
+          <edgelabel>&lt; iDynTree::ContactStateMachine &gt;</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="iDynTree/Estimation/BipedFootContactClassifier.h" line="66" column="5" bodyfile="iDynTree/Estimation/BipedFootContactClassifier.h" bodystart="67" bodyend="155"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1BipedFootContactClassifier_1a6ef3012ada7c652d5b0fe42e4a0f7a99" prot="public" virt="non-virtual"><scope>iDynTree::BipedFootContactClassifier</scope><name>BipedFootContactClassifier</name></member>
+      <member refid="classiDynTree_1_1BipedFootContactClassifier_1af20af239a0c6b136d86155c97f12d49c" prot="public" virt="non-virtual"><scope>iDynTree::BipedFootContactClassifier</scope><name>contactFoot</name></member>
+      <member refid="classiDynTree_1_1BipedFootContactClassifier_1ad292173ffe41072b369854ec56c7c676" prot="private" virt="non-virtual"><scope>iDynTree::BipedFootContactClassifier</scope><name>detectFeetTransition</name></member>
+      <member refid="classiDynTree_1_1BipedFootContactClassifier_1aacebedbb7eb0332f2184ac2c5ce30015" prot="public" virt="non-virtual"><scope>iDynTree::BipedFootContactClassifier</scope><name>getLeftFootContactState</name></member>
+      <member refid="classiDynTree_1_1BipedFootContactClassifier_1a3670a1ea2e0a0daf25c774239207bc64" prot="public" virt="non-virtual"><scope>iDynTree::BipedFootContactClassifier</scope><name>getPrimaryFoot</name></member>
+      <member refid="classiDynTree_1_1BipedFootContactClassifier_1a7ce32a5902d9ebe0fd46d0be2ef7dc12" prot="public" virt="non-virtual"><scope>iDynTree::BipedFootContactClassifier</scope><name>getRightFootContactState</name></member>
+      <member refid="classiDynTree_1_1BipedFootContactClassifier_1af20af239a0c6b136d86155c97f12d49ca585e09db1a02009343fb9a4b16876ce0" prot="public" virt="non-virtual"><scope>iDynTree::BipedFootContactClassifier</scope><name>LEFT_FOOT</name></member>
+      <member refid="classiDynTree_1_1BipedFootContactClassifier_1a4f87e55eb99efdd923345b87ac31fd1c" prot="public" virt="non-virtual"><scope>iDynTree::BipedFootContactClassifier</scope><name>m_leftFootContactClassifier</name></member>
+      <member refid="classiDynTree_1_1BipedFootContactClassifier_1a5bcc6a78b1834f2eec5f783fdd4f642d" prot="private" virt="non-virtual"><scope>iDynTree::BipedFootContactClassifier</scope><name>m_leftFootContactState</name></member>
+      <member refid="classiDynTree_1_1BipedFootContactClassifier_1a24cec8aeced7d73dc16ad22d40b02f79" prot="private" virt="non-virtual"><scope>iDynTree::BipedFootContactClassifier</scope><name>m_pattern</name></member>
+      <member refid="classiDynTree_1_1BipedFootContactClassifier_1af77a45375af8c69345a6dcf0470cd1be" prot="private" virt="non-virtual"><scope>iDynTree::BipedFootContactClassifier</scope><name>m_primaryFoot</name></member>
+      <member refid="classiDynTree_1_1BipedFootContactClassifier_1a3b3376779f100d06906e53cd32ebd7ac" prot="public" virt="non-virtual"><scope>iDynTree::BipedFootContactClassifier</scope><name>m_rightFootContactClassifier</name></member>
+      <member refid="classiDynTree_1_1BipedFootContactClassifier_1a999a6ab3adbfd65aaa8f701629e05e33" prot="private" virt="non-virtual"><scope>iDynTree::BipedFootContactClassifier</scope><name>m_rightFootContactState</name></member>
+      <member refid="classiDynTree_1_1BipedFootContactClassifier_1af20af239a0c6b136d86155c97f12d49ca0b9fe2ce907f396ca3b39082ae8ed18e" prot="public" virt="non-virtual"><scope>iDynTree::BipedFootContactClassifier</scope><name>RIGHT_FOOT</name></member>
+      <member refid="classiDynTree_1_1BipedFootContactClassifier_1a2bc82cacefd7f593f8fd1ac5a086a8b4" prot="public" virt="non-virtual"><scope>iDynTree::BipedFootContactClassifier</scope><name>setContactSwitchingPattern</name></member>
+      <member refid="classiDynTree_1_1BipedFootContactClassifier_1a9fd24cc710528f2f992b28c858fde974" prot="public" virt="non-virtual"><scope>iDynTree::BipedFootContactClassifier</scope><name>setPrimaryFoot</name></member>
+      <member refid="classiDynTree_1_1BipedFootContactClassifier_1af20af239a0c6b136d86155c97f12d49cae186a4c36f4ad5cd9df0373aec20aac2" prot="public" virt="non-virtual"><scope>iDynTree::BipedFootContactClassifier</scope><name>UNKNOWN_FOOT</name></member>
+      <member refid="classiDynTree_1_1BipedFootContactClassifier_1abcca793ac3370f48466c7ccd03d3745c" prot="public" virt="non-virtual"><scope>iDynTree::BipedFootContactClassifier</scope><name>updateFootContactState</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

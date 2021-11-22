@@ -1,6 +1,0 @@
-<map id="iDynTree::RotationRaw" name="iDynTree::RotationRaw">
-<area shape="rect" id="node1" title="Class providing the raw coordinates for iDynTree::Rotation class." alt="" coords="7,185,178,212"/>
-<area shape="rect" id="node4" href="$classiDynTree_1_1Rotation.html" title="Class representation the rotation of an orientation frame with respect to a reference orientation fra..." alt="" coords="21,261,164,288"/>
-<area shape="rect" id="node2" href="$classiDynTree_1_1MatrixFixSize.html" title=" " alt="" coords="49,109,137,136"/>
-<area shape="rect" id="node3" href="$classiDynTree_1_1MatrixFixSize.html" title="Class providing a simple form of matrix with dynamic size." alt="" coords="5,5,180,47"/>
-</map>

@@ -1,6 +1,0 @@
-<map id="iDynTree::optimalcontrol::TimedConstraint" name="iDynTree::optimalcontrol::TimedConstraint">
-<area shape="rect" id="node1" title=" " alt="" coords="376,65,559,107"/>
-<area shape="rect" id="node2" href="$classiDynTree_1_1optimalcontrol_1_1TimeRange.html" title=" " alt="" coords="5,5,188,47"/>
-<area shape="rect" id="node3" href="$classiDynTree_1_1MatrixDynSize.html" title="Class providing a simple form of matrix with dynamic size." alt="" coords="5,73,188,99"/>
-<area shape="rect" id="node4" href="$classiDynTree_1_1VectorDynSize.html" title="Class providing a simple form of vector with dynamic size." alt="" coords="6,133,187,159"/>
-</map>
