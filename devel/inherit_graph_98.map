@@ -1,3 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classiDynTree_1_1MatrixView.html" title="MatrixView implements a view interface of Matrices." alt="" coords="5,5,167,47"/>
+<area shape="rect" id="node1" href="$classiDynTree_1_1MatrixFixSize.html" title="Class providing a simple form of matrix with dynamic size." alt="" coords="5,57,180,98"/>
+<area shape="rect" id="node2" href="$classiDynTree_1_1RotationalInertiaRaw.html" title="Class providing the raw coordinates for a 3d inertia matrix." alt="" coords="228,5,452,32"/>
+<area shape="rect" id="node3" href="$classiDynTree_1_1SpatialForceWrtMotionDerivative.html" title="Class representing the derivative of a spatial force vector with respect to a spatial motion vector." alt="" coords="245,57,435,98"/>
+<area shape="rect" id="node4" href="$classiDynTree_1_1SpatialMotionWrtMotionDerivative.html" title="Class representing the derivative of a spatial motion vector with respect to another spatial motion v..." alt="" coords="240,122,440,163"/>
 </map>

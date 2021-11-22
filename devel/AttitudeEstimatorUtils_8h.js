@@ -6,5 +6,6 @@ var AttitudeEstimatorUtils_8h =
     [ "isVectorNaN", "AttitudeEstimatorUtils_8h.html#a699bd96c30f376d8a7faae5851cae0a7", null ],
     [ "isZeroVector", "AttitudeEstimatorUtils_8h.html#a369c58aadb5e813e34fc5f4c36c017d2", null ],
     [ "crossVector", "AttitudeEstimatorUtils_8h.html#a60120ce6e1d4c5d9d436539c43d248e6", null ],
+    [ "mapR3Toso3", "AttitudeEstimatorUtils_8h.html#a810ee43797b075ff113b46c0b83796d5", null ],
     [ "checkSkewSymmetricity", "AttitudeEstimatorUtils_8h.html#ae22926f6b4098d795734502bfa284aff", null ]
 ];

@@ -36,7 +36,8 @@ var NAVTREEINDEX0 =
 "AttitudeEstimatorUtils_8h.html#a525335710b53cb064ca56b936120431e":[6,0,11,0],
 "AttitudeEstimatorUtils_8h.html#a60120ce6e1d4c5d9d436539c43d248e6":[6,0,11,5],
 "AttitudeEstimatorUtils_8h.html#a699bd96c30f376d8a7faae5851cae0a7":[6,0,11,3],
-"AttitudeEstimatorUtils_8h.html#ae22926f6b4098d795734502bfa284aff":[6,0,11,6],
+"AttitudeEstimatorUtils_8h.html#a810ee43797b075ff113b46c0b83796d5":[6,0,11,6],
+"AttitudeEstimatorUtils_8h.html#ae22926f6b4098d795734502bfa284aff":[6,0,11,7],
 "AttitudeEstimator_8cpp.html":[6,0,8],
 "AttitudeEstimator_8h.html":[6,0,9],
 "AttitudeEstimator_8h.html#a48e2955e462d28103d57a10634d0654d":[6,0,9,6],
@@ -248,6 +249,5 @@ var NAVTREEINDEX0 =
 "ExternalWrenchesEstimation_8cpp.html":[6,0,74],
 "ExternalWrenchesEstimation_8cpp.html#a208b8a11d479b53928ea9f3c4be32c6f":[6,0,74,3],
 "ExternalWrenchesEstimation_8cpp.html#a26b63a06d4d2a0ec184ceabb8ce0b0dc":[6,0,74,5],
-"ExternalWrenchesEstimation_8cpp.html#a2cf3011d218d8a98440bdcafdd1d54e6":[6,0,74,9],
-"ExternalWrenchesEstimation_8cpp.html#a4552fdf67855209419f189466fbb8e69":[6,0,74,8]
+"ExternalWrenchesEstimation_8cpp.html#a2cf3011d218d8a98440bdcafdd1d54e6":[6,0,74,9]
 };

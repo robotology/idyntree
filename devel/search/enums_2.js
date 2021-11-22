@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['exportadditionalframedirectionoption_6107',['exportAdditionalFrameDirectionOption',['../namespaceiDynTree.html#ac4b1a735b11402fa88e96321d976c5a7',1,'iDynTree']]],
-  ['exportsolidshapepropertytype_6108',['exportSolidShapePropertyType',['../namespaceiDynTree.html#a97acc3ec57195595c1e90baf6e5301e0',1,'iDynTree']]]
+  ['contactfoot_6122',['contactFoot',['../classiDynTree_1_1BipedFootContactClassifier.html#af20af239a0c6b136d86155c97f12d49c',1,'iDynTree::BipedFootContactClassifier']]],
+  ['contacttransition_6123',['contactTransition',['../classiDynTree_1_1ContactStateMachine.html#a3ff1e2de3b160f0a4a4b3b6de6593a49',1,'iDynTree::ContactStateMachine']]]
 ];

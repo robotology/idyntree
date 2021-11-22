@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['lighttype_6112',['LightType',['../namespaceiDynTree.html#aad6844bb3e20ca63bfe9e3ee6e26515a',1,'iDynTree']]]
+  ['inversekinematicsrotationparametrization_6127',['InverseKinematicsRotationParametrization',['../namespaceiDynTree.html#a04da5add9479687cf4c7eb873e717c6c',1,'iDynTree']]],
+  ['inversekinematicstreattargetasconstraint_6128',['InverseKinematicsTreatTargetAsConstraint',['../namespaceiDynTree.html#a5cb905194c9ee61c0a23b32d603b2df2',1,'iDynTree']]]
 ];

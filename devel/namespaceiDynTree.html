@@ -121,6 +121,8 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classiDynTree_1_1AccelerometerSensorHelper.html">AccelerometerSensorHelper</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions.html">ApproximateSolidShapesWithPrimitiveShapeOptions</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers.html">ArticulatedBodyAlgorithmInternalBuffers</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Structure of buffers required by ArticulatedBodyAlgorithm.  <a href="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -822,6 +824,9 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:ad291b88efdf5262d744d33f642daf8b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6760312b6c7a94affa286e93e5181357"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiDynTree.html#a6760312b6c7a94affa286e93e5181357">ApproximateSolidShapesWithPrimitiveShapeConversionType</a> { <a class="el" href="namespaceiDynTree.html#a6760312b6c7a94affa286e93e5181357a6486e8af25b0a7add4a835ec17c83e97">ConvertSolidShapesWithEnclosingAxisAlignedBoundingBoxes</a>
+ }</td></tr>
+<tr class="separator:a6760312b6c7a94affa286e93e5181357"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad6844bb3e20ca63bfe9e3ee6e26515a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiDynTree.html#aad6844bb3e20ca63bfe9e3ee6e26515a">LightType</a> { <a class="el" href="namespaceiDynTree.html#aad6844bb3e20ca63bfe9e3ee6e26515aa7552ee08212d810760cfcca2c9e26976">POINT_LIGHT</a>, 
 <a class="el" href="namespaceiDynTree.html#aad6844bb3e20ca63bfe9e3ee6e26515aac19ca7f555771da916a01ed3fa781d21">DIRECTIONAL_LIGHT</a>
  }</td></tr>
@@ -1487,10 +1492,15 @@ Functions</h2></td></tr>
 <tr class="memitem:a5c6f34ccb724685e3587aff5c2bda59b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classiDynTree_1_1Position.html">Position</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiDynTree.html#a5c6f34ccb724685e3587aff5c2bda59b">computeBoxVertices</a> (const <a class="el" href="classiDynTree_1_1Box.html">Box</a> box)</td></tr>
 <tr class="memdesc:a5c6f34ccb724685e3587aff5c2bda59b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the bounding box vertices in the link frame.  <a href="namespaceiDynTree.html#a5c6f34ccb724685e3587aff5c2bda59b">More...</a><br /></td></tr>
 <tr class="separator:a5c6f34ccb724685e3587aff5c2bda59b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbe329aea649b6a379dfd7077ceb1eb9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiDynTree.html#adbe329aea649b6a379dfd7077ceb1eb9">approximateSolidShapesWithPrimitiveShape</a> (const <a class="el" href="classiDynTree_1_1Model.html">Model</a> &amp;inputModel, <a class="el" href="classiDynTree_1_1Model.html">Model</a> &amp;outputModel, <a class="el" href="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions.html">ApproximateSolidShapesWithPrimitiveShapeOptions</a> options=<a class="el" href="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions.html">ApproximateSolidShapesWithPrimitiveShapeOptions</a>())</td></tr>
+<tr class="memdesc:adbe329aea649b6a379dfd7077ceb1eb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">\function Approximate solid shapes of the input model with some primitive shapes.  <a href="namespaceiDynTree.html#adbe329aea649b6a379dfd7077ceb1eb9">More...</a><br /></td></tr>
+<tr class="separator:adbe329aea649b6a379dfd7077ceb1eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1721e736c017a040878679afdd8558f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classiDynTree_1_1SpatialInertia.html">SpatialInertia</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiDynTree.html#ae1721e736c017a040878679afdd8558f">boxGet6DInertiaInLinkFrameFromDensity</a> (const <a class="el" href="classiDynTree_1_1Box.html">Box</a> &amp;box, double density)</td></tr>
 <tr class="separator:ae1721e736c017a040878679afdd8558f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4166c081425b5445cf4974edb52ad68c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiDynTree.html#a4166c081425b5445cf4974edb52ad68c">boxGetVolume</a> (const <a class="el" href="classiDynTree_1_1Box.html">Box</a> &amp;box)</td></tr>
 <tr class="separator:a4166c081425b5445cf4974edb52ad68c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a604df518a9d3e83b2ca15d2745531186"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiDynTree.html#a604df518a9d3e83b2ca15d2745531186">approximateSolidShapesWithBoundingBoxes</a> (const <a class="el" href="classiDynTree_1_1ModelSolidShapes.html">iDynTree::ModelSolidShapes</a> &amp;inputSolidShapes, <a class="el" href="classiDynTree_1_1ModelSolidShapes.html">iDynTree::ModelSolidShapes</a> &amp;outputSolidShapes)</td></tr>
+<tr class="separator:a604df518a9d3e83b2ca15d2745531186"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8129c15673f95b55d4402d11525130e"><td class="memItemLeft" align="right" valign="top">irr::video::SColorf&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiDynTree.html#ac8129c15673f95b55d4402d11525130e">idyntree2irrlicht</a> (<a class="el" href="classiDynTree_1_1ColorViz.html">iDynTree::ColorViz</a> color)</td></tr>
 <tr class="separator:ac8129c15673f95b55d4402d11525130e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59fd2dec92ea659b06c35cc0774e3e27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classiDynTree_1_1ColorViz.html">iDynTree::ColorViz</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceiDynTree.html#a59fd2dec92ea659b06c35cc0774e3e27">irrlicht2idyntree</a> (irr::video::SColorf color)</td></tr>
@@ -2684,6 +2694,23 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="ad291b88efdf5262d744d33f642daf8b9af18877b600b6d3bb9828709115fc0f7d"></a>GYROSCOPE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ad291b88efdf5262d744d33f642daf8b9a442e40fb46ceb1796cb5d6b7d7e7e167"></a>THREE_AXIS_ANGULAR_ACCELEROMETER&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ad291b88efdf5262d744d33f642daf8b9a92de2e46732f84e720c99cd5a3588190"></a>THREE_AXIS_FORCE_TORQUE_CONTACT&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="a6760312b6c7a94affa286e93e5181357"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6760312b6c7a94affa286e93e5181357">&#9670;&nbsp;</a></span>ApproximateSolidShapesWithPrimitiveShapeConversionType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespaceiDynTree.html#a6760312b6c7a94affa286e93e5181357">iDynTree::ApproximateSolidShapesWithPrimitiveShapeConversionType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a6760312b6c7a94affa286e93e5181357a6486e8af25b0a7add4a835ec17c83e97"></a>ConvertSolidShapesWithEnclosingAxisAlignedBoundingBoxes&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
@@ -8276,7 +8303,7 @@ The inertia of the links will be set to 1 kg in the origin of the link.</dd></dl
 
 <p>Given a rigid body inertia \(M\) and spatial motion vector \(V\), the bias wrench \(B\) of rigid body is defined as: </p>
 <p class="formulaDsp">
-\[ B = \cross \]
+\[ B = \times \]
 </p>
  
 </div>
@@ -11069,6 +11096,44 @@ If the shape is an <a class="el" href="classiDynTree_1_1ExternalMesh.html">Exter
 
 </div>
 </div>
+<a id="adbe329aea649b6a379dfd7077ceb1eb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbe329aea649b6a379dfd7077ceb1eb9">&#9670;&nbsp;</a></span>approximateSolidShapesWithPrimitiveShape()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool iDynTree::approximateSolidShapesWithPrimitiveShape </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classiDynTree_1_1Model.html">Model</a> &amp;&#160;</td>
+          <td class="paramname"><em>inputModel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classiDynTree_1_1Model.html">Model</a> &amp;&#160;</td>
+          <td class="paramname"><em>outputModel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions.html">ApproximateSolidShapesWithPrimitiveShapeOptions</a>&#160;</td>
+          <td class="paramname"><em>options</em> = <code><a class="el" href="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions.html">ApproximateSolidShapesWithPrimitiveShapeOptions</a>()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>\function Approximate solid shapes of the input model with some primitive shapes. </p>
+<p>This function takes in input a <a class="el" href="classiDynTree_1_1Model.html" title="Class that represents a generic multibody model.">Model</a>, and returns in output the same model, but with all solid shapes of the model (both collision and visual) substituted with a primitive shape that approximates in some way the original solid shape.</p>
+<dl class="section note"><dt>Note</dt><dd>At the moment, the only conversion type provided is to approximate each solid shape of the model with its axis aligned bounding box, using the <a class="el" href="namespaceiDynTree.html#a3fc080109daad044981533bc143d1bee" title="Compute bounding box from a solid shape object.">iDynTree::computeBoundingBoxFromShape</a> function. </dd></dl>
+
+</div>
+</div>
 <a id="ae1721e736c017a040878679afdd8558f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae1721e736c017a040878679afdd8558f">&#9670;&nbsp;</a></span>boxGet6DInertiaInLinkFrameFromDensity()</h2>
 
@@ -11109,6 +11174,34 @@ If the shape is an <a class="el" href="classiDynTree_1_1ExternalMesh.html">Exter
           <td class="paramtype">const <a class="el" href="classiDynTree_1_1Box.html">Box</a> &amp;&#160;</td>
           <td class="paramname"><em>box</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a604df518a9d3e83b2ca15d2745531186"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a604df518a9d3e83b2ca15d2745531186">&#9670;&nbsp;</a></span>approximateSolidShapesWithBoundingBoxes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool iDynTree::approximateSolidShapesWithBoundingBoxes </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classiDynTree_1_1ModelSolidShapes.html">iDynTree::ModelSolidShapes</a> &amp;&#160;</td>
+          <td class="paramname"><em>inputSolidShapes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classiDynTree_1_1ModelSolidShapes.html">iDynTree::ModelSolidShapes</a> &amp;&#160;</td>
+          <td class="paramname"><em>outputSolidShapes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -12339,7 +12432,7 @@ If the shape is an <a class="el" href="classiDynTree_1_1ExternalMesh.html">Exter
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespaceiDynTree.html">iDynTree</a></li>
-    <li class="footer">Generated on Mon Nov 22 2021 09:26:03 for iDynTree by
+    <li class="footer">Generated on Mon Nov 22 2021 09:28:07 for iDynTree by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

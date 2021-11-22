@@ -1,5 +1,13 @@
 var NAVTREEINDEX19 =
 {
+"classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html#a4020c60fe630d1f5b6b4baf06e7b42a4":[3,7,10,2],
+"classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html#a4337e4f4965ca5ddfe86ecc25e200da9":[3,7,10,18],
+"classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html#a643ace9059ca3fa31cd05037a1531fa3":[3,7,10,16],
+"classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html#a69465218303f6778b70906c8f7e38914":[3,7,10,3],
+"classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html#a91ba05fa8d7fd40b9336f33130ec48ed":[3,7,10,11],
+"classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html#aa10bd35bc49f5dfaea48ffeecf945312":[3,7,10,6],
+"classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html#aa75c7d3cf8bf63b622bc6b83d392a100":[3,7,10,22],
+"classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html#ab43abf8cf7f671213184e811e815b10f":[3,7,10,21],
 "classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html#ab82065e18425aa56e59b030519d5e123":[3,7,10,1],
 "classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html#ab843117494f9eaa4b11b380bb3eb6737":[3,7,10,20],
 "classiDynTree_1_1optimalcontrol_1_1DynamicalSystem.html#abb552b6be02127013c69f1106ad09497":[3,7,10,12],
@@ -241,13 +249,5 @@ var NAVTREEINDEX19 =
 "classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver.html#adfd907c9a95cb2cf47452ab80db6cb77":[3,7,25,10],
 "classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver.html#aeb670ccc7f2a7c147748b1af1be8aac2":[3,7,25,3],
 "classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver.html#afc73c7ee29cbefd15de8cc9fd209334e":[3,7,25,14],
-"classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1_1MultipleShootingTranscription.html":[3,7,25,0],
-"classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1_1MultipleShootingTranscription.html#a01891161195a01c7c2aefb9b7853e0b4":[3,7,25,0,2],
-"classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1_1MultipleShootingTranscription.html#a02b7df40f1dfdfdc2a3991ee891047e6":[3,7,25,0,7],
-"classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1_1MultipleShootingTranscription.html#a08a06e2ff7ebffd459199dd460598908":[3,7,25,0,22],
-"classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1_1MultipleShootingTranscription.html#a1b0b30bf7432de116779b3f4dade787d":[3,7,25,0,0],
-"classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1_1MultipleShootingTranscription.html#a33f97b42130978cd561c30f615f44987":[3,7,25,0,5],
-"classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1_1MultipleShootingTranscription.html#a35dcee70d9a650c6a3edc0cc1d0490fd":[3,7,25,0,15],
-"classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1_1MultipleShootingTranscription.html#a38ea0b9e4f8d97c8fd55ef04addfad4f":[3,7,25,0,24],
-"classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1_1MultipleShootingTranscription.html#a421a66074d8c74d0879d947e4af811bb":[3,7,25,0,18]
+"classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1_1MultipleShootingTranscription.html":[3,7,25,0]
 };

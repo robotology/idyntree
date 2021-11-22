@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['framevelocityrepresentation_6109',['FrameVelocityRepresentation',['../namespaceiDynTree.html#a0089c6dac34bc6a4f623d9e9e565375a',1,'iDynTree']]]
+  ['exportadditionalframedirectionoption_6124',['exportAdditionalFrameDirectionOption',['../namespaceiDynTree.html#ac4b1a735b11402fa88e96321d976c5a7',1,'iDynTree']]],
+  ['exportsolidshapepropertytype_6125',['exportSolidShapePropertyType',['../namespaceiDynTree.html#a97acc3ec57195595c1e90baf6e5301e0',1,'iDynTree']]]
 ];

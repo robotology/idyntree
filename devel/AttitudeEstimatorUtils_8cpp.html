@@ -122,9 +122,10 @@ Functions</h2></td></tr>
 <tr class="memdesc:a60120ce6e1d4c5d9d436539c43d248e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">computes the cross vector of two 3D vectors  <a href="AttitudeEstimatorUtils_8cpp.html#a60120ce6e1d4c5d9d436539c43d248e6">More...</a><br /></td></tr>
 <tr class="separator:a60120ce6e1d4c5d9d436539c43d248e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a810ee43797b075ff113b46c0b83796d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceiDynTree.html#a1ab8ab0012e12e66db217bb4845881cf">iDynTree::Matrix3x3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="AttitudeEstimatorUtils_8cpp.html#a810ee43797b075ff113b46c0b83796d5">mapR3Toso3</a> (const <a class="el" href="namespaceiDynTree.html#a6ba91315448cf1d275f460097e36d134">iDynTree::Vector3</a> &amp;omega)</td></tr>
+<tr class="memdesc:a810ee43797b075ff113b46c0b83796d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">computes \( 3 \times 3 \) skew-symmetric matrix ( \( \mathbb{so}(3) \) space) for a given 3d vector ( \( \mathbb{R}^3 \) space)  <a href="AttitudeEstimatorUtils_8cpp.html#a810ee43797b075ff113b46c0b83796d5">More...</a><br /></td></tr>
 <tr class="separator:a810ee43797b075ff113b46c0b83796d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae22926f6b4098d795734502bfa284aff"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="AttitudeEstimatorUtils_8cpp.html#ae22926f6b4098d795734502bfa284aff">checkSkewSymmetricity</a> (const <a class="el" href="namespaceiDynTree.html#a1ab8ab0012e12e66db217bb4845881cf">iDynTree::Matrix3x3</a> &amp;S)</td></tr>
-<tr class="memdesc:ae22926f6b4098d795734502bfa284aff"><td class="mdescLeft">&#160;</td><td class="mdescRight">computes \( 3 \times 3 \) skew-symmetric matrix ( \( \mathbb{so}(3) \$ space) for a given 3d vector (\) \mathbb{R}^3 \( space) @param[in] omega 3d vector (usually angular velocity) @return iDynTree::Matrix3x3 */ iDynTree::Matrix3x3 mapR3Toso3(const iDynTree::Vector3&amp; omega); /** @brief checks if the \) 3 \times 3 \( matrix is skew-symmetric \f[ S + S^T = 0 \f] @param[in] S \) 3 \times 3  <a href="AttitudeEstimatorUtils_8cpp.html#ae22926f6b4098d795734502bfa284aff">More...</a><br /></td></tr>
+<tr class="memdesc:ae22926f6b4098d795734502bfa284aff"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if the \( 3 \times 3 \) matrix is skew-symmetric  <a href="AttitudeEstimatorUtils_8cpp.html#ae22926f6b4098d795734502bfa284aff">More...</a><br /></td></tr>
 <tr class="separator:ae22926f6b4098d795734502bfa284aff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21e08ef1e6279fa81e33468facdbc24a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceiDynTree.html#a6ba91315448cf1d275f460097e36d134">iDynTree::Vector3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="AttitudeEstimatorUtils_8cpp.html#a21e08ef1e6279fa81e33468facdbc24a">mapso3ToR3</a> (const <a class="el" href="namespaceiDynTree.html#a1ab8ab0012e12e66db217bb4845881cf">iDynTree::Matrix3x3</a> &amp;S)</td></tr>
 <tr class="separator:a21e08ef1e6279fa81e33468facdbc24a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -334,6 +335,15 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>computes \( 3 \times 3 \) skew-symmetric matrix ( \( \mathbb{so}(3) \) space) for a given 3d vector ( \( \mathbb{R}^3 \) space) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">omega</td><td>3d vector (usually angular velocity) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="namespaceiDynTree.html#a1ab8ab0012e12e66db217bb4845881cf">iDynTree::Matrix3x3</a> </dd></dl>
+
 </div>
 </div>
 <a id="ae22926f6b4098d795734502bfa284aff"></a>
@@ -352,7 +362,17 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>computes \( 3 \times 3 \) skew-symmetric matrix ( \( \mathbb{so}(3) \$ space) for a given 3d vector (\) \mathbb{R}^3 \( space) @param[in] omega 3d vector (usually angular velocity) @return iDynTree::Matrix3x3 */ iDynTree::Matrix3x3 mapR3Toso3(const iDynTree::Vector3&amp; omega); /** @brief checks if the \) 3 \times 3 \( matrix is skew-symmetric \f[ S + S^T = 0 \f] @param[in] S \) 3 \times 3 </p>
+<p>checks if the \( 3 \times 3 \) matrix is skew-symmetric </p>
+<p class="formulaDsp">
+\[ S + S^T = 0 \]
+</p>
+ <dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">S</td><td>\( 3 \times 3 \) matrix </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>bool true/false </dd></dl>
 
 </div>
 </div>
@@ -570,7 +590,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_710615f1fcb70e449001c5bcbae9c23a.html">estimation</a></li><li class="navelem"><a class="el" href="dir_c0a19cd8a90bd2ff9eaf571ff5da9093.html">src</a></li><li class="navelem"><a class="el" href="AttitudeEstimatorUtils_8cpp.html">AttitudeEstimatorUtils.cpp</a></li>
-    <li class="footer">Generated on Mon Nov 22 2021 09:26:03 for iDynTree by
+    <li class="footer">Generated on Mon Nov 22 2021 09:28:06 for iDynTree by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
   </ul>

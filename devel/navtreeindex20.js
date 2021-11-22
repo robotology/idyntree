@@ -1,5 +1,13 @@
 var NAVTREEINDEX20 =
 {
+"classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1_1MultipleShootingTranscription.html#a01891161195a01c7c2aefb9b7853e0b4":[3,7,25,0,2],
+"classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1_1MultipleShootingTranscription.html#a02b7df40f1dfdfdc2a3991ee891047e6":[3,7,25,0,7],
+"classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1_1MultipleShootingTranscription.html#a08a06e2ff7ebffd459199dd460598908":[3,7,25,0,22],
+"classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1_1MultipleShootingTranscription.html#a1b0b30bf7432de116779b3f4dade787d":[3,7,25,0,0],
+"classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1_1MultipleShootingTranscription.html#a33f97b42130978cd561c30f615f44987":[3,7,25,0,5],
+"classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1_1MultipleShootingTranscription.html#a35dcee70d9a650c6a3edc0cc1d0490fd":[3,7,25,0,15],
+"classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1_1MultipleShootingTranscription.html#a38ea0b9e4f8d97c8fd55ef04addfad4f":[3,7,25,0,24],
+"classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1_1MultipleShootingTranscription.html#a421a66074d8c74d0879d947e4af811bb":[3,7,25,0,18],
 "classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1_1MultipleShootingTranscription.html#a47ed9d286479b86abfb06be71ccc09a5":[3,7,25,0,3],
 "classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1_1MultipleShootingTranscription.html#a7372277e58152b95255688c1b4bc8633":[3,7,25,0,20],
 "classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1_1MultipleShootingTranscription.html#a81fe567b6393857d59d1ec0f99a6d0d2":[3,7,25,0,21],
@@ -241,13 +249,5 @@ var NAVTREEINDEX20 =
 "classiDynTree_1_1optimalcontrol_1_1TimeRange.html#abf9e5ee1e08f815bf4661216d4dd14dd":[3,7,37,4],
 "classiDynTree_1_1optimalcontrol_1_1TimeRange.html#ae08c84a663dbdef2bd7707794ad76b6f":[3,7,37,11],
 "classiDynTree_1_1optimalcontrol_1_1TimeRange.html#ae3eab5a642f5a8101b64dc7bdd72976b":[3,7,37,7],
-"classiDynTree_1_1optimalcontrol_1_1TimeRange.html#ae5c421bd30acf3a9770848e114f3b8e5":[3,7,37,10],
-"classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject.html":[3,7,38],
-"classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject.html#ab8ad0577c4e724e8a91dec1447e150e7":[3,7,38,1],
-"classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject.html#af506565632a9133a63152880682c2b85":[3,7,38,2],
-"classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject.html#afc82e0bb632774bbb9573548be0449a1":[3,7,38,0],
-"classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex.html":[5,0,1,2,0,0],
-"classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex.html#a2a1a49e122b10a948b46d9eb88ae4598":[5,0,1,2,0,0,4],
-"classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex.html#aab39ac7479d2ce7b28a263d6d661f6b0":[5,0,1,2,0,0,2],
-"classiDynTree_1_1optimalcontrol_1_1integrators_1_1CollocationHessianIndex.html#ab2fb941b5f2ca3e2819c5fb3cdd6e7c0":[5,0,1,2,0,0,1]
+"classiDynTree_1_1optimalcontrol_1_1TimeRange.html#ae5c421bd30acf3a9770848e114f3b8e5":[3,7,37,10]
 };

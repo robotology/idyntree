@@ -1,5 +1,13 @@
 var NAVTREEINDEX22 =
 {
+"classiDynTree_1_1optimization_1_1NLPImplementation.html#a3a1900b1de6eebd748705ba7f16fff5b":[5,0,1,3,4,30],
+"classiDynTree_1_1optimization_1_1NLPImplementation.html#a3df4436b884807fc6961273ef44ccee3":[5,0,1,3,4,13],
+"classiDynTree_1_1optimization_1_1NLPImplementation.html#a4c3e4b7278577896e3d3046721c45e1c":[5,0,1,3,4,5],
+"classiDynTree_1_1optimization_1_1NLPImplementation.html#a6bb6d94e8356c7cc3409264c231583a2":[5,0,1,3,4,29],
+"classiDynTree_1_1optimization_1_1NLPImplementation.html#a71bca17406744ff5cb130eb6b9a92a1c":[5,0,1,3,4,9],
+"classiDynTree_1_1optimization_1_1NLPImplementation.html#a73f08c3975f1da2706feaaafb247a1ae":[5,0,1,3,4,17],
+"classiDynTree_1_1optimization_1_1NLPImplementation.html#a76e9fabb4bd15c423be9968e5f0b9fcb":[5,0,1,3,4,23],
+"classiDynTree_1_1optimization_1_1NLPImplementation.html#a7939cce99113094e0d7edf1160ab6d91":[5,0,1,3,4,16],
 "classiDynTree_1_1optimization_1_1NLPImplementation.html#a7f8f99effd6ddc439b75c6d7022d1ed4":[5,0,1,3,4,22],
 "classiDynTree_1_1optimization_1_1NLPImplementation.html#a862ae3e969fea2d8c751bc22432864be":[5,0,1,3,4,15],
 "classiDynTree_1_1optimization_1_1NLPImplementation.html#a885ca02c9faf11626c261823b7858c9a":[5,0,1,3,4,7],
@@ -241,13 +249,5 @@ var NAVTREEINDEX22 =
 "classinternal_1_1kinematics_1_1InverseKinematicsData.html#a9ad38c44a5a093e42cb9c5ebc63e5a6e":[5,0,2,0,0,62],
 "classinternal_1_1kinematics_1_1InverseKinematicsData.html#a9dbae09b4a9023cdd1fefe40029e1766":[5,0,2,0,0,43],
 "classinternal_1_1kinematics_1_1InverseKinematicsData.html#a9e48974fb8f66b5bad0c711050e17ba0":[5,0,2,0,0,4],
-"classinternal_1_1kinematics_1_1InverseKinematicsData.html#aa0472bed5ec2d61dbcfce0d1c3d75373":[5,0,2,0,0,29],
-"classinternal_1_1kinematics_1_1InverseKinematicsData.html#aa8f65f9250c8a39ae91cf01bf28a40ae":[5,0,2,0,0,17],
-"classinternal_1_1kinematics_1_1InverseKinematicsData.html#aa9604e8cabf70ec1756c26f0584f9f50":[5,0,2,0,0,20],
-"classinternal_1_1kinematics_1_1InverseKinematicsData.html#aab5189ec5428a2f06d2bd159aca76c8f":[5,0,2,0,0,7],
-"classinternal_1_1kinematics_1_1InverseKinematicsData.html#aacbe9650fd690849c7bcf68180ed9087":[5,0,2,0,0,27],
-"classinternal_1_1kinematics_1_1InverseKinematicsData.html#aad369db9c76d864b74e07d458f347687":[5,0,2,0,0,0],
-"classinternal_1_1kinematics_1_1InverseKinematicsData.html#aad4430aa77416246314c5d41ee4988ff":[5,0,2,0,0,76],
-"classinternal_1_1kinematics_1_1InverseKinematicsData.html#aae291af11b60f27d604ebe65de01531d":[5,0,2,0,0,2],
-"classinternal_1_1kinematics_1_1InverseKinematicsData.html#aae45e2f08dd38410d10fd73430596b3a":[5,0,2,0,0,70]
+"classinternal_1_1kinematics_1_1InverseKinematicsData.html#aa0472bed5ec2d61dbcfce0d1c3d75373":[5,0,2,0,0,29]
 };
