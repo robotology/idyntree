@@ -72,9 +72,9 @@ namespace iDynTree {
  * @brief NLP-based Inverse kinematics
  *
  * Given a mechanical structure configuration
- * \f[ q \in SE(3) \times \mathbb{R}^n \f] and
+ * \f[ q \in \operatorname{SE}(3) \times \mathbb{R}^n \f] and
  * possibly multiple target frames
- * \f[ F_i^d \in \SE(3) \f]
+ * \f[ F_i^d \in \operatorname{SE}(3) \f]
  * the inverse kinematics is responsible to find the
  * configuration \f$ q^* \f$ such that
  * \f[ F_i(q^*) = F_i^d \forall i, \f]
@@ -302,7 +302,7 @@ public:
      * Adds a (constancy) constraint for the specified frame
      *
      * The constraint is
-     * \f$ {}^w_X_{frame}(q) = {}^w_X_{frame}(q^0) \f$
+     * \f$ {}^w X_{frame}(q) = {}^w X_{frame}(q^0) \f$
      * where the robot configuration \f$q\f$ is the one specified with setRobotConfiguration
      * @note you should specify first the robot configuration. Otherwise call the versions
      * with explicit constraint value

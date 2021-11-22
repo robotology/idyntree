@@ -107,6 +107,18 @@ Example: Visualize a given model
 idyntree-model-view -m <location-of-the-model>
 ~~~
 
+### `idyntree-model-simplify-shapes`
+
+Tool that reads a model from a file, and returns in output the same model, but with all 
+solid shapes of the model (both collision and visual) substituted with a primitive shape 
+that approximates in some way the original solid shape. At the moment, the only conversion 
+type provided is to approximate each solid shape of the model with its axis aligned bounding box.
+
+Example: Approximate a given model
+~~~
+idyntree-model-simplify-shapes -m <location-of-the-input-model> -o <desired-location-of-the-output-model>
+~~~
+
 
 ## Reference Documentation
 The documentation for the complete API of iDynTree is automatically extracted from the C++ code using [Doxygen](http://www.doxygen.org),

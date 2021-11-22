@@ -62,7 +62,7 @@ namespace iDynTree
          * Buffer to store the derivative of
          * the product
          * \f[
-         *   V_l \bar\cross^* M_l V_l
+         *   V_l \bar\times^* M_l V_l
          * \f]
          *
          * with respect to V_l

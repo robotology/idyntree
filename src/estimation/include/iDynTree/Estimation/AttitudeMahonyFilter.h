@@ -50,8 +50,8 @@ struct AttitudeMahonyFilterParameters {
  * @note: we will drop the subscripts and superscripts in the rest of the documentation for convenience
  *
  * The discretized dynamics of the filter is implemented in the propagateStates() method and is described by the following equations,
- * \f$ q_{k+1} = q_{k} + \Delta t \frac{1}{2}q_{k} \circ \begin{bmatrix} 0 \\ \Omega_y_{k+1} - b_k + K_p \omega_{mes_{k+1}}\end{bmatrix}\f$
- * \f$ \Omega_{k+1} = \Omega_y_{k+1} - b_k \f$
+ * \f$ q_{k+1} = q_{k} + \Delta t \frac{1}{2}q_{k} \circ \begin{bmatrix} 0 \\ {\Omega_y}_{k+1} - b_k + K_p \omega_{mes_{k+1}}\end{bmatrix}\f$
+ * \f$ \Omega_{k+1} = {\Omega_y}_{k+1} - b_k \f$
  * \f$ b_{k+1} = b_k - K_i \Delta t \frac{1}{2} \omega_{mes_{k+1}} \f$
  *
  * The updateFilterWithMeasurements() uses the recent IMU measurements to compute the term \f$ \omega_{mes} \f$ which gives the vectorial from accelerometer and magnetometer measurements

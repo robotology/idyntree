@@ -688,22 +688,22 @@ public:
     virtual IJetsVisualization& jets() = 0;
 
     /**
-     * Get the transformation of given link with respect to visualizer world \f$ w_H_{link}\f$
+     * Get the transformation of given link with respect to visualizer world \f$ {}^w wH_{link}\f$
      */
     virtual Transform getWorldLinkTransform(const LinkIndex& linkIndex) = 0;
 
     /**
-     * Get the transformation of given link with respect to visualizer world \f$ w_H_{link}\f$
+     * Get the transformation of given link with respect to visualizer world \f$ {}^w H_{link}\f$
      */
     virtual Transform getWorldLinkTransform(const std::string& linkName) = 0;
 
     /**
-     * Get the transformation of given frame with respect to visualizer world \f$ w_H_{frame}\f$
+     * Get the transformation of given frame with respect to visualizer world \f$ {}^w H_{frame}\f$
      */
     virtual Transform getWorldFrameTransform(const FrameIndex& frameIndex) = 0;
 
     /**
-     * Get the transformation of given frame with respect to visualizer world \f$ w_H_{frame}\f$
+     * Get the transformation of given frame with respect to visualizer world \f$ {}^w H_{frame}\f$
      */
     virtual Transform getWorldFrameTransform(const std::string& frameName) = 0;
 

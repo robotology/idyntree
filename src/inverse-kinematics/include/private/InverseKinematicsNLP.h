@@ -189,14 +189,14 @@ public:
  *
  * Implements the following optimization problem
  * \f{align}{
- * \min_{x} & \Sum_i || w_H_{f_i} (w_H_{f_i}^d)^{-1} ||^2 + w_q || q_j - q_j^d ||^2 \\
- * \text{s.t.} & w_H_{f_i} = w_H_{f_i}^d \\
+ * \min_{x} & \sum_i || {}^w H_{f_i} ( {}^w H_{f_i}^d)^{-1} ||^2 + w_q || q_j - q_j^d ||^2 \\
+ * \text{s.t.} & {}^w H_{f_i} = {}^w H_{f_i}^d \\
  *             & q_{min} \leq q \leq q_{max}
  * \f}
  * where
  * \f{align}{
- * & q = \{w_H_{base}, q_j\} \in SE(3) \times \mathbb{R}^n \\
- * & w_H_{f_i} \in SE(3)
+ * & q = \{ {}^w H_{base}, q_j\} \in SE(3) \times \mathbb{R}^n \\
+ * & {}^w H_{f_i} \in SE(3)
  * \f}
  *
  * A target (entirely or partially, with partial meaning the two components composing
