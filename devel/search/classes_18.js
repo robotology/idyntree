@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['yarprobotstatepublishermodule_3444',['YARPRobotStatePublisherModule',['../classYARPRobotStatePublisherModule.html',1,'']]]
+  ['yarprobotstatepublishermodule_3454',['YARPRobotStatePublisherModule',['../classYARPRobotStatePublisherModule.html',1,'']]]
 ];

@@ -14,7 +14,7 @@
 <g id="a_node1"><a xlink:href="classiDynTree_1_1MatrixFixSize.html" target="_top" xlink:title=" ">
 <polygon fill="none" stroke="black" points="0,-0.5 0,-30.5 131,-30.5 131,-0.5 0,-0.5"/>
 <text text-anchor="start" x="8" y="-18.5" font-family="FreeSans.ttf" font-size="10.00">iDynTree::MatrixFixSize</text>
-<text text-anchor="middle" x="65.5" y="-7.5" font-family="FreeSans.ttf" font-size="10.00">&lt; 4, 4 &gt;</text>
+<text text-anchor="middle" x="65.5" y="-7.5" font-family="FreeSans.ttf" font-size="10.00">&lt; 4, 3 &gt;</text>
 </a>
 </g>
 </g>

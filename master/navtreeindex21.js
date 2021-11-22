@@ -1,5 +1,12 @@
 var NAVTREEINDEX21 =
 {
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#abedf340f114e51dacd483fd73f373fe5":[3,7,34,21],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#abf8b22918021ba6ff7743575d30138c1":[3,7,34,20],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ac26021f3cd107bb7612a34f4b079a9d5":[3,7,34,8],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ac5f5e3bbb989ce5482cd2a690ed1687b":[3,7,34,5],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#accb30d2b375cd93bbf7776d2d63d2100":[3,7,34,13],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ad928571c75286252a7cf8e04675913c5":[3,7,34,6],
+"classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#adba80cb374b9480383565e3b401219f4":[3,7,34,11],
 "classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ae00c9061c568494f23b858ad05a0ff02":[3,7,34,28],
 "classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ae1726e0a4c497e0dc23c5c1bdc352863":[3,7,34,10],
 "classiDynTree_1_1optimalcontrol_1_1QuadraticCost.html#ae9c9fd426f107159f3e5354fd3f0562e":[3,7,34,26],
@@ -242,12 +249,5 @@ var NAVTREEINDEX21 =
 "classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4.html#ae44f7ecb211132d6280df85e23378a05":[3,7,17,12],
 "classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4.html#aebc2c1544ef18998b7701205549f2cd7":[3,7,17,15],
 "classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4.html#af85f59a77039faf74a30efcac87d8d2f":[3,7,17,0],
-"classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4.html#af8bc003555c01266bf9a2b7d2edb4689":[3,7,17,1],
-"classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement.html":[3,7,11],
-"classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement.html#a0012c763c79c5c2e212bbfc30dca8f64":[3,7,11,1],
-"classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement.html#a1d874717c6479a5c043b1cac0e4489f8":[3,7,11,0],
-"classiDynTree_1_1optimization_1_1AlglibInterface.html":[3,7,30],
-"classiDynTree_1_1optimization_1_1AlglibInterface.html#a059093f5710fc6bca4bfb52c1f192fe3":[3,7,30,10],
-"classiDynTree_1_1optimization_1_1AlglibInterface.html#a08953636337b1414052f329f42649f0f":[3,7,30,8],
-"classiDynTree_1_1optimization_1_1AlglibInterface.html#a21aebbcc1e60dd526f74f996fe1d9e22":[3,7,30,11]
+"classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4.html#af8bc003555c01266bf9a2b7d2edb4689":[3,7,17,1]
 };

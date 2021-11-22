@@ -1,5 +1,12 @@
 var NAVTREEINDEX22 =
 {
+"classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement.html":[3,7,11],
+"classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement.html#a0012c763c79c5c2e212bbfc30dca8f64":[3,7,11,1],
+"classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement.html#a1d874717c6479a5c043b1cac0e4489f8":[3,7,11,0],
+"classiDynTree_1_1optimization_1_1AlglibInterface.html":[3,7,30],
+"classiDynTree_1_1optimization_1_1AlglibInterface.html#a059093f5710fc6bca4bfb52c1f192fe3":[3,7,30,10],
+"classiDynTree_1_1optimization_1_1AlglibInterface.html#a08953636337b1414052f329f42649f0f":[3,7,30,8],
+"classiDynTree_1_1optimization_1_1AlglibInterface.html#a21aebbcc1e60dd526f74f996fe1d9e22":[3,7,30,11],
 "classiDynTree_1_1optimization_1_1AlglibInterface.html#a237d586b135d79150a50d6fea5ea9cf2":[3,7,30,12],
 "classiDynTree_1_1optimization_1_1AlglibInterface.html#a33e40b7437e55dd6f36104d1a4d914cf":[3,7,30,13],
 "classiDynTree_1_1optimization_1_1AlglibInterface.html#a6836c50c97f711451f5c0f011a2efddb":[3,7,30,17],
@@ -242,12 +249,5 @@ var NAVTREEINDEX22 =
 "classiDynTree_1_1optimization_1_1WorhpInterface.html#a18674e03f4e9fc3664fc309e06f90800":[3,7,33,12],
 "classiDynTree_1_1optimization_1_1WorhpInterface.html#a1f7bd656637950029be9d28a704854b2":[3,7,33,19],
 "classiDynTree_1_1optimization_1_1WorhpInterface.html#a26679b5e8bad29b9a3c63011d8409b2b":[3,7,33,3],
-"classiDynTree_1_1optimization_1_1WorhpInterface.html#a3f61d9a1ea6760c2d3c6f4be732074f2":[3,7,33,11],
-"classiDynTree_1_1optimization_1_1WorhpInterface.html#a6836c50c97f711451f5c0f011a2efddb":[3,7,33,20],
-"classiDynTree_1_1optimization_1_1WorhpInterface.html#a7014b23b1fa584fdcba9c26de1ee4ffd":[3,7,33,6],
-"classiDynTree_1_1optimization_1_1WorhpInterface.html#a74f9698c545d20cb1abcecc38362d088":[3,7,33,1],
-"classiDynTree_1_1optimization_1_1WorhpInterface.html#a760fc0096c8aa84d8cdfec3b99bdcf6e":[3,7,33,18],
-"classiDynTree_1_1optimization_1_1WorhpInterface.html#a89652754b5118eeccc4dd2de81b0b928":[3,7,33,9],
-"classiDynTree_1_1optimization_1_1WorhpInterface.html#a8d6880db4f6662854bfe7e893a10ec77":[3,7,33,14],
-"classiDynTree_1_1optimization_1_1WorhpInterface.html#a91500eb3955a0c6bfb8574bc16e335e9":[3,7,33,7]
+"classiDynTree_1_1optimization_1_1WorhpInterface.html#a3f61d9a1ea6760c2d3c6f4be732074f2":[3,7,33,11]
 };

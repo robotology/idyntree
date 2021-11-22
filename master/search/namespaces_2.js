@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['qtcharts_3456',['QtCharts',['../namespaceQtCharts.html',1,'']]]
+  ['qtcharts_3466',['QtCharts',['../namespaceQtCharts.html',1,'']]]
 ];

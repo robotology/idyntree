@@ -178,6 +178,7 @@ var files_dup =
     ] ],
     [ "GyroscopeSensor.h", "GyroscopeSensor_8h.html", null ],
     [ "idyntree-model-info.cpp", "idyntree-model-info_8cpp.html", "idyntree-model-info_8cpp" ],
+    [ "idyntree-model-simplify-shapes.cpp", "idyntree-model-simplify-shapes_8cpp.html", "idyntree-model-simplify-shapes_8cpp" ],
     [ "idyntree-model-view.cpp", "idyntree-model-view_8cpp.html", "idyntree-model-view_8cpp" ],
     [ "IJoint.h", "IJoint_8h.html", "IJoint_8h" ],
     [ "iKinConversions.h", "iKinConversions_8h.html", "iKinConversions_8h" ],
@@ -306,6 +307,8 @@ var files_dup =
     [ "ModelTestUtils.h", "ModelTestUtils_8h.html", "ModelTestUtils_8h" ],
     [ "ModelTransformers.cpp", "ModelTransformers_8cpp.html", "ModelTransformers_8cpp" ],
     [ "ModelTransformers.h", "ModelTransformers_8h.html", "ModelTransformers_8h" ],
+    [ "ModelTransformersSolidShapes.cpp", "ModelTransformersSolidShapes_8cpp.html", "ModelTransformersSolidShapes_8cpp" ],
+    [ "ModelTransformersSolidShapes.h", "ModelTransformersSolidShapes_8h.html", "ModelTransformersSolidShapes_8h" ],
     [ "ModelVisualization.cpp", "ModelVisualization_8cpp.html", [
       [ "ModelVisualizationPimpl", "structiDynTree_1_1ModelVisualization_1_1ModelVisualizationPimpl.html", "structiDynTree_1_1ModelVisualization_1_1ModelVisualizationPimpl" ]
     ] ],

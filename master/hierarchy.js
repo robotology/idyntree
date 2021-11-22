@@ -2,6 +2,7 @@ var hierarchy =
 [
     [ "iDynTree::AccelerometerSensor::AccelerometerPrivateAttributes", "structiDynTree_1_1AccelerometerSensor_1_1AccelerometerPrivateAttributes.html", null ],
     [ "iDynTree::optimization::AlglibInterface::AlglibInterfaceImplementation", "classiDynTree_1_1optimization_1_1AlglibInterface_1_1AlglibInterfaceImplementation.html", null ],
+    [ "iDynTree::ApproximateSolidShapesWithPrimitiveShapeOptions", "structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions.html", null ],
     [ "iDynTree::ArticulatedBodyAlgorithmInternalBuffers", "structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers.html", null ],
     [ "iDynTree::ArticulatedBodyInertia", "classiDynTree_1_1ArticulatedBodyInertia.html", null ],
     [ "iDynTree::AttitudeEstimatorState", "structiDynTree_1_1AttitudeEstimatorState.html", null ],
@@ -174,8 +175,8 @@ var hierarchy =
     [ "ISceneNodeAnimator", null, [
       [ "iDynTree::CameraAnimator", "classiDynTree_1_1CameraAnimator.html", null ]
     ] ],
-    [ "iDynTree::SparseMatrix< ordering >::Iterator", "classiDynTree_1_1SparseMatrix_1_1Iterator.html", null ],
     [ "iDynTree::SensorsList::Iterator", "classiDynTree_1_1SensorsList_1_1Iterator.html", null ],
+    [ "iDynTree::SparseMatrix< ordering >::Iterator", "classiDynTree_1_1SparseMatrix_1_1Iterator.html", null ],
     [ "iterator", null, [
       [ "iDynTree::optimization::DenseIterator", "classiDynTree_1_1optimization_1_1DenseIterator.html", null ],
       [ "iDynTree::optimization::TripletIterator", "classiDynTree_1_1optimization_1_1TripletIterator.html", null ]
@@ -381,8 +382,8 @@ var hierarchy =
     [ "internal::kinematics::TransformConstraint", "classinternal_1_1kinematics_1_1TransformConstraint.html", null ],
     [ "iDynTree::TransformDerivative", "classiDynTree_1_1TransformDerivative.html", null ],
     [ "iDynTree::Traversal", "classiDynTree_1_1Traversal.html", null ],
-    [ "iDynTree::Triplet", "classiDynTree_1_1Triplet.html", null ],
     [ "iDynTree::optimization::Triplet", "classiDynTree_1_1optimization_1_1Triplet.html", null ],
+    [ "iDynTree::Triplet", "classiDynTree_1_1Triplet.html", null ],
     [ "iDynTree::SparseMatrix< ordering >::Iterator::TripletRef", "classiDynTree_1_1SparseMatrix_1_1Iterator_1_1TripletRef.html", null ],
     [ "iDynTree::Triplets", "classiDynTree_1_1Triplets.html", null ],
     [ "true_type", null, [

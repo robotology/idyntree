@@ -7,6 +7,7 @@ var namespaceiDynTree =
     [ "SpanUtils", "namespaceiDynTree_1_1SpanUtils.html", "namespaceiDynTree_1_1SpanUtils" ],
     [ "AccelerometerSensor", "classiDynTree_1_1AccelerometerSensor.html", "classiDynTree_1_1AccelerometerSensor" ],
     [ "AccelerometerSensorHelper", "classiDynTree_1_1AccelerometerSensorHelper.html", "classiDynTree_1_1AccelerometerSensorHelper" ],
+    [ "ApproximateSolidShapesWithPrimitiveShapeOptions", "structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions.html", "structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions" ],
     [ "ArticulatedBodyAlgorithmInternalBuffers", "structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers.html", "structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers" ],
     [ "ArticulatedBodyInertia", "classiDynTree_1_1ArticulatedBodyInertia.html", "classiDynTree_1_1ArticulatedBodyInertia" ],
     [ "AttitudeEstimatorState", "structiDynTree_1_1AttitudeEstimatorState.html", "structiDynTree_1_1AttitudeEstimatorState" ],
