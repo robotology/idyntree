@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.3.0] - 2021-11-22
+
 ### Added
 - Added support for exporting joint position limits to URDF for 1-DoF joints
   (prismatic and revolute).
