@@ -1,6 +1,6 @@
 
 /*
- * Copyright (C) 2015 Fondazione Istituto Italiano di Tecnologia
+ * Copyright (C) 2015-2021 Fondazione Istituto Italiano di Tecnologia
  * Authors: See AUTHORS file.
  * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
  *
@@ -92,46 +92,41 @@
 
 
 
-
-
 /**
-\mainpage Welcome to %iDynTree
+\mainpage Welcome to %iDynTree reference documentation.
 
-%iDynTree is a library of robots dynamics algorithms for control, estimation and simulation.
+%iDynTree is a library of robots dynamics algorithms for control, estimation and simulation. %iDynTree is specifically designed for free-floating robots, but it is possible to use it also with fixed-base robots.
 
-%iDynTree is specifically designed for free-floating robots, but it is possible to use it also with fixed-base robots.
+This is %iDynTree's reference documentation, that is automatically generated from the C++ headers.
+It contains specific details for each class, method and function contained in %iDynTree.
 
-\li Source code: https://github.com/robotology/idyntree
-\li File an issue: https://github.com/robotology/idyntree/issues/new
-\li Installation and Tutorials: https://github.com/robotology/idyntree/blob/master/README.md
+For how to install iDynTree and tutorial on how to use iDynTree, please check the README at https://github.com/robotology/idyntree/blob/master/README.md .
+If you have a problem using iDynTree or you do not understand something in iDynTree documentation, please file an issue: https://github.com/robotology/idyntree/issues/new
 
 %iDynTree is written in C++ language, but thanks to SWIG it is possible to use the iDynTree algorithms in several other languages. Support and documentation is provided in particular for C++, Matlab, Python and Lua. If you are interested in using %iDynTree with another programming language, feel free to create a new issue requesting support for it.
 
-This documentation is automatically generated from the C++ headers, and
-can be used as a reference documentation for the classes and functions
-contained in iDynTree .
-
 %iDynTree is divided in several parts:
-\li  \ref iDynTreeCore "Core" :  Basic data structures for kinematics and dynamics of rigid bodies.
-\li  \ref iDynTreeModel "Model": Data structures and algorithms for modeling articulated body structures.
-\li  \ref iDynTreeSensors "Sensors" : Data structures for modeling sensors distribude on articulated body structures.
+
+\li \ref iDynTreeCore "Core" :  Basic data structures for kinematics and dynamics of rigid bodies.
+\li \ref iDynTreeModel "Model": Data structures and algorithms for modeling articulated body structures.
+\li \ref iDynTreeSensors "Sensors" : Data structures for modeling sensors distribude on articulated body structures.
 \li  \ref iDynTreeModelIO "ModelIO" : Function to read and write %iDynTree models and sensors to external files (such as [URDF](http://wiki.ros.org/urdf) or [iKin DH parameters](http://wiki.icub.org/brain/classiCub_1_1iKin_1_1iKinLimb.html#a76c93aae76bb0f7ef9470b81d0da0e26) ).
 \li  \ref iDynTreeEstimation "Estimation" : Algorithms related to whole-body estimation.
-\li  \ref iDynTreeRegressors "Regressors" : Algorithms related to whole-body dynamics identification.
 \li  \ref iDynTreeHighLevel "HighLevel"   : High level interfaces to access algorithms contained in %iDynTree.
-\li  \ref iDynTreeYARP "YARP" : Function and classes for simplifying integration of %iDynTree with [YARP](http://yarp.it/).
+
 <br>
 
-As iDynTree is mainly developed to support the research effort of [iCub Facility department](https://www.iit.it/research/lines/icub) of the [Italian Institute of Technology](https://www.iit.it),
+%iDynTree has a few classes that are particular used, those are linked in the following for quick access:
+\li iDynTree::Model : Class used to represent a multibody model.
+\li iDynTree::KinDynComputations : Class used to compute forward kinematics and dynamics quantities.
+
+
+As iDynTree is mainly developed to support the research effort of [Artificial and Mechanical Intelligence research line](https://ami.iit.it) of the [Italian Institute of Technology](https://www.iit.it),
 some parts of it are activly developed and their interface can abroutly change between iDynTree releases.
 Until this components are ready to be integrated in a proper part of iDynTree, we keep them in the "experimental" part of iDynTree :
 
 \li  \ref iDynTreeExperimental "Experimental" : Experimental data structures and algorithms, whose interface is not guaranteed to be stable.
 
-iDynTree started as a tiny wrapper of code between [YARP](http://yarp.it/) and [KDL](https://github.com/orocos/orocos_kinematics_dynamics).
-For this reason, in the repository there is still some legacy code, that should not be used by users, as it is going to be removed from iDynTree.
-
-\li  \ref iDynTreeDeprecated "Deprecated" : Deprecated data structures and algorithms, that are going to be removed from iDynTree.
 
 
  *
