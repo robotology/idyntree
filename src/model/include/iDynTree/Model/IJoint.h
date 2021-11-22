@@ -149,7 +149,7 @@ namespace iDynTree
          *
          * In particular, if the selected position coordinate is \f$q\f$, return the derivative:
          * \f[
-         * \frac{partial \texttt{child}_H_\texttt{parent} }{\partial q}
+         * \frac{\partial {}^\texttt{child} H_\texttt{parent} }{\partial q}
          * \f]
          *
          * If posCoord_i is not >= 0 and < getNrOfPosCoords(), the returned value is undefined.

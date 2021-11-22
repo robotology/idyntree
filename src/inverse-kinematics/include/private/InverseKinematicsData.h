@@ -83,7 +83,7 @@ public:
      */
     struct {
         iDynTree::VectorDynSize jointsConfiguration; /*!< joint configuration \f$ q_j \in \mathbb{R}^n \f$ */
-        iDynTree::Transform basePose; /*!< base position \f$ w_H_{base} \in SE(3) \f$ */
+        iDynTree::Transform basePose; /*!< base position \f$ {}^w H_{base} \in SE(3) \f$ */
         iDynTree::VectorDynSize jointsVelocity; /*!< joint velotiy \f$ \dot{q}_j \in \mathbb{R}^n \f$ */
         iDynTree::Twist baseTwist; /*!< base velocity \f$ [\dot{p}, {}^I \omega] \in se(3) \f$ */
         iDynTree::Vector3 worldGravity; /*!< gravity acceleration in inertial frame, i.e. -9.81 along z */
