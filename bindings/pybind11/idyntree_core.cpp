@@ -31,7 +31,7 @@ void transformClassDefinition(py::class_<Transform>& transform) {
       .def(py::init<const MatrixFixSize<4, 4>&>())
       .def_static("Identity", &Transform::Identity)
       .def_property("rotation", &Transform::getRotation, &Transform::setRotation)
-      .def_property("position", &Transform::getPosition,  &Transform::setPosition)
+      .def_property("position", &Transform::getPosition, &Transform::setPosition)
       .def("inverse", &Transform::inverse)
       .def(py::self * py::self)
       .def(
@@ -55,12 +55,10 @@ void iDynTreeCoreBindings(pybind11::module& module) {
       // Do not expose constructor as we do not want users to use this class.
       .def("__repr__", &PositionRaw::toString);
 
-
   py::class_<Position, PositionRaw>(module, "Position")
       .def(py::init())
       .def(py::init<double, double, double>())
-      .def(py::init([](const VectorFixSize<3>& position)
-                    {
+      .def(py::init([](const VectorFixSize<3>& position) {
                         return Position(position(0), position(1), position(2));
                     }))
       .def(py::self + py::self)
@@ -78,8 +76,7 @@ void iDynTreeCoreBindings(pybind11::module& module) {
       .def(py::init<double, double, double,  //
                     double, double, double,  //
                     double, double, double>())
-      .def(py::init([](const MatrixFixSize<3,3>& rotation)
-                    {
+      .def(py::init([](const MatrixFixSize<3,3>& rotation) {
                         return Rotation(rotation);
                     }))
       .def("inverse", &Rotation::inverse)
