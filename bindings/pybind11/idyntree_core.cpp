@@ -1,6 +1,6 @@
 #include "idyntree_core.h"
-#include "idyntree_vector_casters.h"
 
+#include <iDynTree/pybind11/VectorCasters.h>
 #include <iDynTree/Core/Axis.h>
 #include <iDynTree/Core/Direction.h>
 #include <iDynTree/Core/MatrixDynSize.h>

@@ -67,6 +67,8 @@ if(NOT IDYNTREE_ONLY_DOCS)
         list(APPEND _IDYNTREE_EXPORTED_DEPENDENCIES_ONLY_STATIC assimp)
     endif()
 
+    add_subdirectory(bindings)
+
     include(InstallBasicPackageFiles)
     install_basic_package_files(iDynTree VARS_PREFIX ${VARS_PREFIX}
                                          VERSION ${${VARS_PREFIX}_VERSION}
@@ -78,8 +80,6 @@ if(NOT IDYNTREE_ONLY_DOCS)
                                          PRIVATE_DEPENDENCIES ${_IDYNTREE_EXPORTED_DEPENDENCIES_ONLY_STATIC})
 
     include(AddUninstallTarget)
-
-    add_subdirectory(bindings)
 endif()
 
 # add a dox target to generate doxygen documentation

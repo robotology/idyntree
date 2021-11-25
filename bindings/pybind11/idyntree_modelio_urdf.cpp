@@ -1,5 +1,6 @@
+#include <iDynTree/pybind11/VectorCasters.h>
+
 #include "idyntree_modelio_urdf.h"
-#include "idyntree_vector_casters.h"
 
 #include "error_utilities.h"
 

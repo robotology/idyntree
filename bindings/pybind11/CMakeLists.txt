@@ -1,3 +1,26 @@
+set(libraryname idyntree-pybind11)
+
+add_library(${libraryname} INTERFACE)
+target_link_libraries(${libraryname} INTERFACE idyntree-core)
+
+# Specify include directories for both compilation and installation process.
+# The $<INSTALL_PREFIX> generator expression is useful to ensure to create
+# relocatable configuration files, see https://cmake.org/cmake/help/latest/manual/cmake-packages.7.html
+# creating-relocatable-packages
+target_include_directories(${libraryname} INTERFACE
+  "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+  "$<INSTALL_INTERFACE:<INSTALL_PREFIX>/${CMAKE_INSTALL_INCLUDEDIR}>")
+
+# Specify installation targets, typology and destination folders.
+install(TARGETS        ${libraryname}
+  EXPORT               ${PROJECT_NAME})
+
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/include/iDynTree/pybind11/VectorCasters.h"
+  DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/iDynTree/pybind11")
+
+add_library(iDynTree::${libraryname} ALIAS ${libraryname})
+set_property(GLOBAL APPEND PROPERTY ${VARS_PREFIX}_TARGETS ${libraryname})
+
 pybind11_add_module(pybind11_idyntree SYSTEM idyntree.cpp
                                     error_utilities.h error_utilities.cpp
                                     idyntree_core.h idyntree_core.cpp
@@ -5,12 +28,13 @@ pybind11_add_module(pybind11_idyntree SYSTEM idyntree.cpp
                                     idyntree_model.h idyntree_model.cpp
                                     idyntree_sensors.h idyntree_sensors.cpp
                                     idyntree_modelio_urdf.h idyntree_modelio_urdf.cpp
-                                    idyntree_vector_casters.h)
+                                    )
 
 target_link_libraries(pybind11_idyntree PUBLIC idyntree-core
                                                idyntree-model
                                                idyntree-sensors
-                                               idyntree-modelio)
+                                               idyntree-modelio
+                                               iDynTree::idyntree-pybind11)
 
 # The generated Python dynamic module must have the same name as the pybind11
 # module, i.e. `bindings`.

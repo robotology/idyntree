@@ -1,5 +1,5 @@
 
-#include "idyntree_vector_casters.h"
+#include <iDynTree/pybind11/VectorCasters.h>
 #include "idyntree_sensors.h"
 #include "error_utilities.h"
 
