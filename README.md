@@ -122,8 +122,7 @@ idyntree-model-simplify-shapes -m <location-of-the-input-model> -o <desired-loca
 
 ## Reference Documentation
 The documentation for the complete API of iDynTree is automatically extracted from the C++ code using [Doxygen](http://www.doxygen.org),
-and is available at the URL : [https://robotology.github.io/idyntree/master/](https://robotology.github.io/idyntree/master/).
-The documentation generated from the `devel` branch is available at the URL : [https://robotology.github.io/idyntree/devel/](https://robotology.github.io/idyntree/devel/).
+and is available at the URL : [https://robotology.github.io/idyntree](https://robotology.github.io/idyntree).
 
 ## Announcements
 Announcements on new releases, API changes or other news are done on [`robotology/QA` GitHub repository](https://github.com/robotology/QA). You can watch that repository to get all the iDynTree-related announcements, that will always tagged with the `announcement` tag.
