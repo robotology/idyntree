@@ -135,7 +135,8 @@ public:
     {
         namespace py = ::pybind11;
 
-        if (!convert && array_t<double>::check_(src))
+        // If we're in no-convert mode, only load if given an array of the correct type
+        if (!convert && !py::isinstance<array_t<double>>(src))
         {
             return false;
         }
@@ -223,7 +224,8 @@ public:
     {
         namespace py = ::pybind11;
 
-        if (!convert && array_t<double>::check_(src))
+        // If we're in no-convert mode, only load if given an array of the correct type
+        if (!convert && !py::isinstance<array_t<double>>(src))
         {
             return false;
         }
