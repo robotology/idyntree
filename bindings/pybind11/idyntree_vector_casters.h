@@ -1,5 +1,5 @@
-#ifndef IDYNTREE_PYBIND11_IDYNTREE_TYPE_CASTER_H
-#define IDYNTREE_PYBIND11_IDYNTREE_TYPE_CASTER_H
+#ifndef IDYNTREE_PYBIND11_IDYNTREE_VECTOR_CASTERS_H
+#define IDYNTREE_PYBIND11_IDYNTREE_VECTOR_CASTERS_H
 
 #include <type_traits>
 
@@ -272,4 +272,4 @@ public:
 } // namespace detail
 } // namespace pybind11
 
-#endif /* end of include guard: IDYNTREE_PYBIND11_IDYNTREE_TYPE_CASTER_H */
+#endif /* end of include guard: IDYNTREE_PYBIND11_IDYNTREE_VECTOR_CASTERS_H */

@@ -1,5 +1,5 @@
 #include "idyntree_core.h"
-#include "idyntree_type_caster.h"
+#include "idyntree_vector_casters.h"
 
 #include <iDynTree/Core/Axis.h>
 #include <iDynTree/Core/Direction.h>

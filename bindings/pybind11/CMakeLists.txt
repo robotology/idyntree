@@ -5,7 +5,7 @@ pybind11_add_module(pybind11_idyntree SYSTEM idyntree.cpp
                                     idyntree_model.h idyntree_model.cpp
                                     idyntree_sensors.h idyntree_sensors.cpp
                                     idyntree_modelio_urdf.h idyntree_modelio_urdf.cpp
-                                    idyntree_type_caster.h)
+                                    idyntree_vector_casters.h)
 
 target_link_libraries(pybind11_idyntree PUBLIC idyntree-core
                                                idyntree-model
