@@ -44,7 +44,7 @@ set_target_properties(pybind11_idyntree PROPERTIES
 
 # if compile tests execute also python tests
 if(IDYNTREE_COMPILE_TESTS)
-    add_subdirectory(tests)
+    add_subdirectory(tests idyntree_pybind11_test)
 endif()
 
 # Output package is:
