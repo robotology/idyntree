@@ -3,7 +3,6 @@ import itertools
 import unittest
 
 import idyntree.pybind as iDynTree
-import numpy as np
 
 
 class IDynTreeMaterialTest(unittest.TestCase):
@@ -17,7 +16,11 @@ class IDynTreeMaterialTest(unittest.TestCase):
 
   def test_color(self):
     material = iDynTree.Material()
-    color = [1, 0, 0, 1]
+    color = iDynTree.Vector4()
+    color[0] = 1.0
+    color[1] = 0.0
+    color[2] = 0.0
+    color[3] = 1.0
     material.color = color
     self.assertEqual(list(material.color), list(color))
 
@@ -35,7 +38,7 @@ class IDynTreeSolidShapesTest(unittest.TestCase):
     self.assertEqual(mesh.name, "a_name")
 
   def test_transform(self):
-    position = [1, 2, 3]
+    position = iDynTree.Position(1, 2, 3)
     rotation = iDynTree.Rotation(0, 0, 1,
                                  1, 0, 0,
                                  0, 1, 0)
@@ -67,7 +70,10 @@ class IDynTreeSolidShapesTest(unittest.TestCase):
 
   def test_mesh_scale(self):
     mesh = iDynTree.ExternalMesh()
-    scale = [1, 2, 3]
+    scale = iDynTree.Vector3()
+    scale[0] = 1
+    scale[1] = 2
+    scale[2] = 3
     mesh.scale = scale
     self.assertEqual(list(mesh.scale), list(scale))
 
@@ -108,8 +114,8 @@ class IDynTreeLinkTest(unittest.TestCase):
 
   def test_inertia(self):
     mass = 3.14
-    position = [1, 2, 3]
-    rotational_inertia = np.zeros([3,3])
+    position = iDynTree.Position(1, 2, 3)
+    rotational_inertia = iDynTree.RotationalInertia()
     rotational_inertia[1, 1] = 1
 
     inertia = iDynTree.SpatialInertia(mass, position, rotational_inertia)
@@ -127,7 +133,7 @@ class IDynTreeRevoluteJointTest(unittest.TestCase):
     self.assertEqual(joint.get_second_attached_link(), 2)
 
   def test_rest_transform(self):
-    position = (1, 2, 3)
+    position = iDynTree.Position(1, 2, 3)
     rotation = iDynTree.Rotation(0, 0, 1,
                                  1, 0, 0,
                                  0, 1, 0)
@@ -161,7 +167,7 @@ class IDynTreePrismaticJointTest(unittest.TestCase):
     self.assertEqual(joint.get_second_attached_link(), 2)
 
   def test_rest_transform(self):
-    position = (1, 2, 3)
+    position = iDynTree.Position(1, 2, 3)
     rotation = iDynTree.Rotation(0, 0, 1,
                                  1, 0, 0,
                                  0, 1, 0)
@@ -195,7 +201,7 @@ class IDynTreeFixedJointTest(unittest.TestCase):
     self.assertEqual(joint.get_second_attached_link(), 2)
 
   def test_rest_transform(self):
-    position = (1, 2, 3)
+    position = iDynTree.Position(1, 2, 3)
     rotation = iDynTree.Rotation(0, 0, 1,
                                  1, 0, 0,
                                  0, 1, 0)
@@ -349,7 +355,7 @@ class IDynTreeModelTest(unittest.TestCase):
     self.assertIsNotNone(model.get_joint(0))
 
   def test_model_frame(self):
-    position = (1, 2, 3)
+    position = iDynTree.Position(1, 2, 3)
     rotation = iDynTree.Rotation(0, 0, 1,
                                  1, 0, 0,
                                  0, 1, 0)

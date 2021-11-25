@@ -6,6 +6,165 @@ import idyntree.pybind as iDynTree
 import numpy as np
 
 
+class IDynTreeDynVectorTest(unittest.TestCase):
+
+  def test_dyn_vector_accessor(self):
+    vector = iDynTree.VectorDynSize(5)
+    vector[1] = 3.14
+    self.assertEqual(3.14, vector[1])
+
+  def test_dyn_vector_size(self):
+    vector = iDynTree.VectorDynSize(5)
+    self.assertEqual(len(vector), 5)
+
+  def test_set_zero(self):
+    vector = iDynTree.VectorDynSize(2)
+    vector[0] = 10
+    vector[1] = -6
+    vector.set_zero()
+    for element in vector:
+      self.assertEqual(element, 0)
+
+  def test_buffer(self):
+    vector = iDynTree.VectorDynSize(5)
+    np_array = np.array(vector, copy=False)
+    self.assertEqual(len(np_array), len(vector))
+    np_array[0] = 3.14
+    self.assertEqual(3.14, vector[0])
+
+
+class IDynTreeFixVectorTest(unittest.TestCase):
+
+  def test_fix_vector_accessor(self):
+    vector = iDynTree.Vector3()
+    vector[1] = 3.14
+    self.assertEqual(3.14, vector[1])
+
+  def test_fix_vector_size(self):
+    vector = iDynTree.Vector4()
+    self.assertEqual(len(vector), 4)
+
+  def test_set_zero(self):
+    vector = iDynTree.Vector3()
+    vector[0] = 10
+    vector[1] = -6
+    vector[2] = 1.4
+    vector.set_zero()
+    for element in vector:
+      self.assertEqual(element, 0)
+
+  def test_buffer(self):
+    vector = iDynTree.Vector3()
+    np_array = np.array(vector, copy=False)
+    self.assertEqual(len(np_array), len(vector))
+    np_array[0] = 3.14
+    self.assertEqual(3.14, vector[0])
+
+
+class IDynTreeDynMatrixTest(unittest.TestCase):
+
+  def test_dyn_matrix_accessor(self):
+    matrix = iDynTree.MatrixDynSize(3, 3)
+    matrix[1, 1] = 3.14
+    self.assertEqual(3.14, matrix[1, 1])
+
+  def test_dyn_matrix_size(self):
+    matrix = iDynTree.MatrixDynSize(3, 4)
+    self.assertEqual(3, matrix.rows())
+    self.assertEqual(4, matrix.cols())
+
+  def test_set_zero(self):
+    matrix = iDynTree.MatrixDynSize(3, 4)
+    matrix[0, 2] = 10
+    matrix.set_zero()
+    for r in range(matrix.rows()):
+      for c in range(matrix.cols()):
+        self.assertEqual(matrix[r, c], 0)
+
+  def test_buffer(self):
+    matrix = iDynTree.MatrixDynSize(3, 4)
+    np_mat = np.array(matrix, copy=False)
+    self.assertEqual(np_mat.shape[0], matrix.rows())
+    self.assertEqual(np_mat.shape[1], matrix.cols())
+    np_mat[0, 0] = 3.14
+    self.assertEqual(3.14, matrix[0, 0])
+
+
+class IDynTreeFixMatrixTest(unittest.TestCase):
+
+  def test_fix_matrix_accessor(self):
+    matrix = iDynTree.Matrix3x3()
+    matrix[1, 1] = 3.14
+    self.assertEqual(3.14, matrix[1, 1])
+
+  def test_fix_matrix_size(self):
+    matrix = iDynTree.Matrix4x4()
+    self.assertEqual(4, matrix.rows())
+    self.assertEqual(4, matrix.cols())
+
+  def test_set_zero(self):
+    matrix = iDynTree.Matrix4x4()
+    matrix[0, 1] = 10
+    matrix.set_zero()
+    for r in range(matrix.rows()):
+      for c in range(matrix.cols()):
+        self.assertEqual(matrix[r, c], 0)
+
+  def test_buffer(self):
+    matrix = iDynTree.Matrix4x4()
+    np_mat = np.array(matrix, copy=False)
+    self.assertEqual(np_mat.shape[0], matrix.rows())
+    self.assertEqual(np_mat.shape[1], matrix.cols())
+    np_mat[0, 0] = 3.14
+    self.assertEqual(3.14, matrix[0, 0])
+
+
+class IDynTreePositionTest(unittest.TestCase):
+
+  def test_zero_position(self):
+    pos = iDynTree.Position.Zero()
+    self.assertEqual(len(pos), 3)
+    for element in pos:
+      self.assertEqual(element, 0)
+
+  def test_non_zero_creation(self):
+    pos = iDynTree.Position(1, 2, 3)
+    self.assertEqual(pos[0], 1)
+    self.assertEqual(pos[1], 2)
+    self.assertEqual(pos[2], 3)
+
+  def test_negate_operator(self):
+    pos = iDynTree.Position(1, 2, 3)
+    neg_pos = -pos
+    self.assertEqual(neg_pos[0], -1)
+    self.assertEqual(neg_pos[1], -2)
+    self.assertEqual(neg_pos[2], -3)
+    # Original object is unmodified.
+    self.assertEqual(tuple(pos), (1, 2, 3))
+
+  def test_add_operation(self):
+    pos1 = iDynTree.Position(1, 2, 3)
+    pos2 = iDynTree.Position(4, 5, 6)
+    sum_pos = pos1 + pos2
+    self.assertEqual(sum_pos[0], 5)
+    self.assertEqual(sum_pos[1], 7)
+    self.assertEqual(sum_pos[2], 9)
+    # Original objects are unmodified.
+    self.assertEqual(tuple(pos1), (1, 2, 3))
+    self.assertEqual(tuple(pos2), (4, 5, 6))
+
+  def test_subtract_operation(self):
+    pos1 = iDynTree.Position(1, 2, 3)
+    pos2 = iDynTree.Position(4, 5, 6)
+    sum_pos = pos1 - pos2
+    self.assertEqual(sum_pos[0], -3)
+    self.assertEqual(sum_pos[1], -3)
+    self.assertEqual(sum_pos[2], -3)
+    # Original objects are unmodified.
+    self.assertEqual(tuple(pos1), (1, 2, 3))
+    self.assertEqual(tuple(pos2), (4, 5, 6))
+
+
 class IDynTreeRotationTest(unittest.TestCase):
 
   def test_create_identity(self):
@@ -55,9 +214,9 @@ class IDynTreeRotationTest(unittest.TestCase):
     rotation = iDynTree.Rotation(0, 0, 1,
                                  1, 0, 0,
                                  0, 1, 0)
-    pos =[0, 0, 1]
+    pos = iDynTree.Position(0, 0, 1)
     pos_rotated = rotation * pos
-    expected_pos = [1, 0, 0]
+    expected_pos = iDynTree.Position(1, 0, 0)
     for i in range(3):
       self.assertAlmostEqual(pos_rotated[i], expected_pos[i])
 
@@ -65,7 +224,7 @@ class IDynTreeRotationTest(unittest.TestCase):
 class IDynTreeTransformTest(unittest.TestCase):
 
   def test_creation(self):
-    position =[1, 2, 3]
+    position = iDynTree.Position(1, 2, 3)
     rotation = iDynTree.Rotation(0, 0, 1,
                                  1, 0, 0,
                                  0, 1, 0)
@@ -88,24 +247,24 @@ class IDynTreeTransformTest(unittest.TestCase):
         self.assertEqual(transform.rotation[r, c], 0)
 
   def test_position_transform(self):
-    position = [1, 2, 3]
+    position = iDynTree.Position(1, 2, 3)
     rotation = iDynTree.Rotation(0, 0, 1,
                                  1, 0, 0,
                                  0, 1, 0)
     transform = iDynTree.Transform(rotation, position)
-    pos = [0, 0, 1]
+    pos = iDynTree.Position(0, 0, 1)
     pos_transformed = transform * pos
-    expected_pos = [2, 2, 3]
+    expected_pos = iDynTree.Position(2, 2, 3)
     for i in range(3):
       self.assertAlmostEqual(pos_transformed[i], expected_pos[i])
 
   def test_transform_composition(self):
-    position = [1, 2, 3]
+    position = iDynTree.Position(1, 2, 3)
     rotation = iDynTree.Rotation(0, 0, 1,
                                  1, 0, 0,
                                  0, 1, 0)
     t1 = iDynTree.Transform(rotation, position)
-    position = [3, 4, 5]
+    position = iDynTree.Position(3, 4, 5)
     rotation = iDynTree.Rotation(0, -1,  0,
                                  0,  0, -1,
                                  1,  0,  0)
@@ -125,7 +284,7 @@ class IDynTreeDirectionTest(unittest.TestCase):
     n_factor = np.linalg.norm([1, 2, 3])
     raw_dir = [1 / (n_factor), 2 / n_factor, 3 / n_factor]
 
-    direction = raw_dir
+    direction = iDynTree.Direction(raw_dir[0], raw_dir[1], raw_dir[2])
     self.assertEqual(list(direction), raw_dir)
 
 
@@ -134,8 +293,8 @@ class IDynTreeAxisTest(unittest.TestCase):
   def test_read_origin_and_direction_properties(self):
     n_factor = np.linalg.norm([1, 2, 3])
     raw_dir = [1 / (n_factor), 2 / n_factor, 3 / n_factor]
-    direction = raw_dir
-    origin = [3, 4, 5]
+    direction = iDynTree.Direction(raw_dir[0], raw_dir[1], raw_dir[2])
+    origin = iDynTree.Position(3, 4, 5)
     axis = iDynTree.Axis(direction, origin)
     self.assertEqual(list(axis.direction), raw_dir)
     self.assertEqual(list(axis.origin), [3, 4, 5])
@@ -145,8 +304,8 @@ class IDynTreeSpatialInertiaTest(unittest.TestCase):
 
   def test_creation(self):
     mass = 3.14
-    position = [1, 2, 3]
-    rotational_inertia = np.zeros((3, 3))
+    position = iDynTree.Position(1, 2, 3)
+    rotational_inertia = iDynTree.RotationalInertia()
     rotational_inertia[1, 1] = 1
 
     inertia = iDynTree.SpatialInertia(mass, position, rotational_inertia)
@@ -181,15 +340,15 @@ class IDynTreeSpatialInertiaTest(unittest.TestCase):
 
   def test_sum(self):
     mass = 3.14
-    position = [1, 2, 3]
-    rotational_inertia = np.zeros((3, 3))
+    position = iDynTree.Position(1, 2, 3)
+    rotational_inertia = iDynTree.RotationalInertia()
     rotational_inertia[1, 1] = 1
 
     inertia1 = iDynTree.SpatialInertia(mass, position, rotational_inertia)
 
     mass = 6.28
-    position = [4, 5, 6]
-    rotational_inertia = np.zeros((3, 3))
+    position = iDynTree.Position(4, 5, 6)
+    rotational_inertia = iDynTree.RotationalInertia()
     rotational_inertia[2, 2] = 1
 
     inertia2 = iDynTree.SpatialInertia(mass, position, rotational_inertia)
@@ -217,15 +376,15 @@ class IDynTreeSpatialInertiaTest(unittest.TestCase):
     # We do not explicitly define this operation.
     # Check if Python does the correct thing by using the elementary + operator.
     mass = 3.14
-    position = [1, 2, 3]
-    rotational_inertia = np.zeros((3, 3))
+    position = iDynTree.Position(1, 2, 3)
+    rotational_inertia = iDynTree.RotationalInertia()
     rotational_inertia[1, 1] = 1
 
     inertia1 = iDynTree.SpatialInertia(mass, position, rotational_inertia)
 
     mass = 6.28
-    position = [4, 5, 6]
-    rotational_inertia = np.zeros((3, 3))
+    position = iDynTree.Position(4, 5, 6)
+    rotational_inertia = iDynTree.RotationalInertia()
     rotational_inertia[2, 2] = 1
 
     inertia_sum = iDynTree.SpatialInertia(mass, position, rotational_inertia)
