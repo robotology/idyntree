@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.16)
-project(iDynTreeBindings)
 
 # Detect if we are doing a standalone build of the bindings, using an external iDynTree
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
@@ -9,6 +8,7 @@ else()
 endif()
 
 if(IDYNTREE_BINDINGS_BUILD_STANDALONE)
+  project(iDynTreeBindings)
   # Add CMake helpers
   list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/../cmake)
   find_package(iDynTree REQUIRED)
