@@ -1,3 +1,4 @@
+#include "idyntree_type_caster.h"
 #include "idyntree_sensors.h"
 #include "error_utilities.h"
 
