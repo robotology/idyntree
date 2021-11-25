@@ -34,7 +34,7 @@ target_link_libraries(pybind11_idyntree PUBLIC idyntree-core
                                                idyntree-model
                                                idyntree-sensors
                                                idyntree-modelio
-                                               iDynTree::idyntree-pybind11)
+                                               idyntree-pybind11)
 
 # The generated Python dynamic module must have the same name as the pybind11
 # module, i.e. `bindings`.
