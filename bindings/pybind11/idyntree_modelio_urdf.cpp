@@ -1,6 +1,6 @@
 #include "idyntree_modelio_urdf.h"
+
 #include "error_utilities.h"
-#include "idyntree_type_caster.h"
 
 #include <string>
 #include <iDynTree/ModelIO/ModelExporter.h>

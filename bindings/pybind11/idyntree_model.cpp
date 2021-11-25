@@ -1,5 +1,4 @@
 #include "idyntree_model.h"
-#include "idyntree_type_caster.h"
 
 #include "error_utilities.h"
 

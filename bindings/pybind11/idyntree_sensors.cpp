@@ -1,6 +1,5 @@
 #include "idyntree_sensors.h"
 #include "error_utilities.h"
-#include "idyntree_type_caster.h"
 
 #include <pybind11/operators.h>
 #include <pybind11/pybind11.h>
