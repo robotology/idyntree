@@ -82,13 +82,14 @@ struct type_caster<VectorType,
 {
 private:
 
-    template <typename U>
+    template <typename U,
+	      typename std::enable_if_t<std::is_same<U, iDynTree::VectorDynSize>::value>* = nullptr>
     static bool checkSize(const std::size_t size, const U& value) {
         return true;
     }
 
     template <typename U,
-              typename std::enable_if_t<is_vector_fixsize<U>::value>>
+              typename std::enable_if_t<is_vector_fixsize<U>::value>* = nullptr>
     static bool checkSize(const std::size_t size, const U& value) {
         return size == value.size();
     }
@@ -161,13 +162,14 @@ struct type_caster<MatrixType,
 {
 private:
 
-    template <typename U>
+    template <typename U,
+              typename std::enable_if_t<std::is_same<U, iDynTree::MatrixDynSize>::value>* = nullptr>
     static bool checkSize(const std::size_t size, const U& value) {
         return true;
     }
 
     template <typename U,
-              typename std::enable_if_t<is_matrix_fixsize<U>::value>>
+              typename std::enable_if_t<is_matrix_fixsize<U>::value>* = nullptr>
     static bool checkSize(const std::size_t size, const U& value) {
         return size == value.rows() * value.cols();
     }
