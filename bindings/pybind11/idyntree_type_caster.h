@@ -1,13 +1,10 @@
 #ifndef IDYNTREE_PYBIND11_IDYNTREE_TYPE_CASTER_H
 #define IDYNTREE_PYBIND11_IDYNTREE_TYPE_CASTER_H
 
-#include <iostream>
-#include <string>
 #include <type_traits>
 
 #include <iDynTree/Core/MatrixDynSize.h>
 #include <iDynTree/Core/MatrixFixSize.h>
-#include <iDynTree/Core/Rotation.h>
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/VectorFixSize.h>
 
@@ -18,139 +15,149 @@ namespace pybind11
 {
 namespace detail
 {
-template <template <unsigned int...> class base, typename derived>
-struct is_base_of_template_int_impl
+
+/**
+ * is_vector_fixsize is used to build a type-dependent expression that check if an element
+ * has is an iDynTree::VectorFixSize. This specific implementation is used
+ * when the the object is not an iDynTree::VectorFixSize
+ */
+template<typename>
+struct is_vector_fixsize : std::false_type {};
+
+/**
+ * is_vector_fixsize is used to build a type-dependent expression that check if an element
+ * has is an iDynTree::VectorFixSize. This specific implementation is used
+ * when the the object not an iDynTree::VectorFixSize
+ */
+template<unsigned int N>
+struct is_vector_fixsize<::iDynTree::VectorFixSize<N>> : std::true_type {};
+
+/**
+ * is_matrix_fixsize is used to build a type-dependent expression that check if an element
+ * has is an iDynTree::MatrixFixSize. This specific implementation is used
+ * when the the object is not an iDynTree::MatrixFixSize
+ */
+template<typename>
+struct is_matrix_fixsize : std::false_type {};
+
+/**
+ * is_matrix_fixsize is used to build a type-dependent expression that check if an element
+ * has is an iDynTree::MatrixFixSize. This specific implementation is used
+ * when the the object is an iDynTree::MatrixFixSize
+ */
+template<unsigned int nRows, unsigned int nCols>
+struct is_matrix_fixsize<::iDynTree::MatrixFixSize<nRows, nCols>> : std::true_type {};
+
+/**
+ * vector_size_at_compile_time is a utility metafunction to get the compile-time size of an iDynTree
+ * vector. This specific implementation is used with VectorDynSize.
+ */
+template<typename>
+struct vector_size_at_compile_time
 {
-    template <unsigned int... Ts> static constexpr std::true_type test(const base<Ts...>*);
-    static constexpr std::false_type test(...);
-    using type = decltype(test(std::declval<derived*>()));
+    constexpr static int value = -1;
 };
 
-template <template <unsigned int...> class base, typename derived>
-using is_base_of_template_int = typename is_base_of_template_int_impl<base, derived>::type;
-
-template <typename Type>
-using is_idyntree_vector_fix_size = is_base_of_template_int<iDynTree::VectorFixSize, Type>;
-template <typename Type>
-using is_idyntree_matrix_fix_size = is_base_of_template_int<iDynTree::MatrixFixSize, Type>;
-
-// Type caster for all the classes that inherits from VectorDynSize
-template <typename Type>
-struct type_caster<Type, enable_if_t<std::is_base_of<iDynTree::VectorDynSize, Type>::value>>
+/**
+ * vector_size_at_compile_time is a utility metafunction to get the compile-time size of an iDynTree
+ * vector. This specific implementation is used with VectorFixSize.
+ */
+template<unsigned int N>
+struct vector_size_at_compile_time<::iDynTree::VectorFixSize<N>>
 {
-    PYBIND11_TYPE_CASTER(Type, _(PYBIND11_TOSTRING(Type)));
+    constexpr static int value = N;
+};
 
-    /**
-     * Conversion from Python to C++
-     */
-    bool load(handle src, bool convert)
+/**
+ * matrix_size_at_compile_time is a utility metafunction to get the compile-time rows and cols of
+ * an iDynTree matrix. This specific implementation is used with MatrixDynSize.
+ */
+template<typename>
+struct matrix_size_at_compile_time
+{
+    constexpr static int rows = -1;
+    constexpr static int cols = -1;
+};
+
+/**
+ * matrix_size_at_compile_time is a utility metafunction to get the compile-time rows and cols of
+ * an iDynTree matrix. This specific implementation is used with MatrixFixSize.
+ */
+template<unsigned int nRows, unsigned int nCols>
+struct matrix_size_at_compile_time<::iDynTree::MatrixFixSize<nRows, nCols>>
+{
+    constexpr static int rows = nRows;
+    constexpr static int cols = nCols;
+};
+
+
+
+/**
+ * type_caster implementation for the iDynTree Vectors (both fixed and dynamical size)
+ */
+template <typename Type>
+struct type_caster<Type,
+                   enable_if_t<is_vector_fixsize<Type>::value
+                               || std::is_same<Type, iDynTree::VectorDynSize>::value>>
+{
+private:
+
+    template <typename U>
+    static bool checkSize(const std::size_t size, const U& value)
     {
-        if (!convert && array_t<double>::check_(src))
-        {
-            return false;
-        }
-
-        auto buf
-            = pybind11::array_t<double,
-                                pybind11::array::c_style | pybind11::array::forcecast>::ensure(src);
-        if (!buf)
-            return false;
-
-        // the number of dimension must be equal to 1 since it is a vector
-        const auto dims = buf.ndim();
-        if (dims != 1)
-            return false;
-
-        // store the data
-        value = Type(buf.data(), buf.size());
         return true;
     }
 
-    /**
-     * Conversion from C++ to Python
-     */
-    static handle cast(Type src, return_value_policy policy, handle parent)
+    template <typename U,
+              typename std::enable_if_t<is_vector_fixsize<U>::value>>
+    static bool checkSize(const std::size_t size, const U& value)
     {
-        pybind11::array a(src.size(), src.data());
-        return a.release();
+        return size == value.size();
     }
-};
-
-// Type caster for all the classes that inherits from MatriDynSize
-template <typename Type>
-struct type_caster<Type, enable_if_t<std::is_base_of<iDynTree::MatrixDynSize, Type>::value>>
-{
-    PYBIND11_TYPE_CASTER(Type, _(PYBIND11_TOSTRING(Type)));
 
     /**
-     * Conversion from Python to C++
+     * Python name description
      */
-    bool load(handle src, bool convert)
-    {
-        if (!convert && array_t<double>::check_(src))
-        {
-            return false;
-        }
+    static constexpr auto descriptor = _("numpy.ndarray[")
+        + npy_format_descriptor<double>::name
+        + _("[")
+        + _<is_vector_fixsize<Type>::value>(_<(size_t) vector_size_at_compile_time<Type>::value>(),
+                                             _("m"))
+        + _(", 1]]");
 
-        auto buf
-            = pybind11::array_t<double,
-                                pybind11::array::c_style | pybind11::array::forcecast>::ensure(src);
-        if (!buf)
-            return false;
-
-        // Since it is a matrix the buffer must have 2 dimensions
-        const auto dims = buf.ndim();
-        if (dims != 2)
-            return false;
-
-        // this can be done since numpy and iDynTree store matrices in Row-Major order
-        const auto rows = buf.shape(0);
-        const auto cols = buf.shape(1);
-        value = Type(buf.data(), rows, cols);
-
-        return true;
-    }
-
-    static handle cast(Type src, return_value_policy policy, handle parent)
-    {
-        // this can be done since numpy and iDynTree store matrices in Row-Major order
-        pybind11::array a({src.rows(), src.cols()}, src.data());
-        return a.release();
-    }
-};
-
-// Type caster for all the classes that inherits from VectorFixSize
-template <typename Type>
-struct type_caster<Type, enable_if_t<is_idyntree_vector_fix_size<Type>::value>>
-{
-    PYBIND11_TYPE_CASTER(Type, _(PYBIND11_TOSTRING(Type)));
+public:
+    PYBIND11_TYPE_CASTER(Type, descriptor);
 
     /**
      * Conversion from Python to C++
      */
     bool load(handle src, bool convert)
     {
+        namespace py = ::pybind11;
+
         if (!convert && array_t<double>::check_(src))
         {
             return false;
         }
 
-        auto buf
-            = pybind11::array_t<double,
-                                pybind11::array::c_style | pybind11::array::forcecast>::ensure(src);
+        const auto buf = py::array_t<double, py::array::c_style | py::array::forcecast>::ensure(src);
         if (!buf)
             return false;
 
         // It must be a vector
-        const auto dims = buf.ndim();
+        const std::size_t dims = buf.ndim();
         if (dims != 1)
+        {
             return false;
+        }
 
-        // since the vector is fixed size it is not possible to resize it. This check if the size is
-        // correct
-        if (buf.size() != value.size())
+        // Check if the size of the vector is correct.
+        if (!this->checkSize(buf.size(), value))
+        {
             return false;
+        }
 
+        // Copy the content of the python vector in to the iDynTree vector
         value = Type(buf.data(), buf.size());
 
         return true;
@@ -161,47 +168,88 @@ struct type_caster<Type, enable_if_t<is_idyntree_vector_fix_size<Type>::value>>
      */
     static handle cast(Type src, return_value_policy policy, handle parent)
     {
-        pybind11::array a(src.size(), src.data());
+        namespace py = ::pybind11;
+
+        // copy the content of the iDynTree vector in the python one
+        py::array a(src.size(), src.data());
         return a.release();
     }
 };
 
-// Type caster for all the classes that inherits from MatrixFixSize but that are not rotations
+/**
+ * type_caster implementation for the iDynTree Matrices (both fixed and dynamical size)
+ */
 template <typename Type>
 struct type_caster<Type,
-                   enable_if_t<is_idyntree_matrix_fix_size<Type>::value
-                               && !std::is_same<iDynTree::Rotation, Type>::value>>
+                   enable_if_t<is_matrix_fixsize<Type>::value
+                               || std::is_same<Type, iDynTree::MatrixDynSize>::value>>
 {
-    PYBIND11_TYPE_CASTER(Type, _(PYBIND11_TOSTRING(Type)));
+private:
+
+    template <typename U>
+    static bool checkSize(const std::size_t size, const U& value)
+    {
+        return true;
+    }
+
+    template <typename U,
+              typename std::enable_if_t<is_matrix_fixsize<U>::value>>
+    static bool checkSize(const std::size_t size, const U& value)
+    {
+        return size == value.rows() * value.cols();
+    }
+
+    /**
+     * Python name description
+     */
+    static constexpr auto descriptor = _("numpy.ndarray[")
+        + npy_format_descriptor<double>::name
+        + _("[")
+        + _<is_matrix_fixsize<Type>::value>(_<(size_t) matrix_size_at_compile_time<Type>::rows>(),
+                                             _("m"))
+        + _(", ")
+        + _<is_matrix_fixsize<Type>::value>(_<(size_t) matrix_size_at_compile_time<Type>::rows>(),
+                                            _("n"))
+        + _("]]");
+
+public:
+
+    PYBIND11_TYPE_CASTER(Type, descriptor);
 
     /**
      * Conversion from Python to C++
      */
     bool load(handle src, bool convert)
     {
+        namespace py = ::pybind11;
+
         if (!convert && array_t<double>::check_(src))
         {
             return false;
         }
 
-        auto buf
-            = pybind11::array_t<double,
-                                pybind11::array::c_style | pybind11::array::forcecast>::ensure(src);
+        const auto buf = py::array_t<double, py::array::c_style | py::array::forcecast>::ensure(src);
         if (!buf)
+        {
             return false;
+        }
 
         // since it is a matrix the number of dimension must be equal to 2
-        auto dims = buf.ndim();
+        const std::size_t dims = buf.ndim();
         if (dims != 2)
             return false;
 
-        // the matrix is fix size so it is not possible to change it's size
-        if (buf.size() != value.rows() * value.cols())
+        // Check if the size of the vector is correct.
+        if (!this->checkSize(buf.size(), value))
+        {
             return false;
+        }
 
-        // this can be done since numpy and iDynTree store matrices in Row-Major order
-        const auto rows = buf.shape(0);
-        const auto cols = buf.shape(1);
+        // Copy the content of the python matrix into an iDynTree Matrix
+        // Here there is the assumption that the iDynTree matrices are stored using row-major
+        // order
+        const std::size_t rows = buf.shape(0);
+        const std::size_t cols = buf.shape(1);
         value = Type(buf.data(), rows, cols);
 
         return true;
@@ -212,8 +260,11 @@ struct type_caster<Type,
      */
     static handle cast(Type src, return_value_policy policy, handle parent)
     {
+        namespace py = ::pybind11;
+
+        // Copy the content of the iDynTree matrix into the python one
         // this can be done since numpy and iDynTree store matrices in Row-Major order
-        pybind11::array a({src.rows(), src.cols()}, src.data());
+        py::array a({src.rows(), src.cols()}, src.data());
         return a.release();
     }
 };
