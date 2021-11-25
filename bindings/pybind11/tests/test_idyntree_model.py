@@ -16,11 +16,7 @@ class IDynTreeMaterialTest(unittest.TestCase):
 
   def test_color(self):
     material = iDynTree.Material()
-    color = iDynTree.Vector4()
-    color[0] = 1.0
-    color[1] = 0.0
-    color[2] = 0.0
-    color[3] = 1.0
+    color = [1., 0., 0., 1.]
     material.color = color
     self.assertEqual(list(material.color), list(color))
 
@@ -70,10 +66,7 @@ class IDynTreeSolidShapesTest(unittest.TestCase):
 
   def test_mesh_scale(self):
     mesh = iDynTree.ExternalMesh()
-    scale = iDynTree.Vector3()
-    scale[0] = 1
-    scale[1] = 2
-    scale[2] = 3
+    scale = [1, 2, 3]
     mesh.scale = scale
     self.assertEqual(list(mesh.scale), list(scale))
 

@@ -6,119 +6,6 @@ import idyntree.pybind as iDynTree
 import numpy as np
 
 
-class IDynTreeDynVectorTest(unittest.TestCase):
-
-  def test_dyn_vector_accessor(self):
-    vector = iDynTree.VectorDynSize(5)
-    vector[1] = 3.14
-    self.assertEqual(3.14, vector[1])
-
-  def test_dyn_vector_size(self):
-    vector = iDynTree.VectorDynSize(5)
-    self.assertEqual(len(vector), 5)
-
-  def test_set_zero(self):
-    vector = iDynTree.VectorDynSize(2)
-    vector[0] = 10
-    vector[1] = -6
-    vector.set_zero()
-    for element in vector:
-      self.assertEqual(element, 0)
-
-  def test_buffer(self):
-    vector = iDynTree.VectorDynSize(5)
-    np_array = np.array(vector, copy=False)
-    self.assertEqual(len(np_array), len(vector))
-    np_array[0] = 3.14
-    self.assertEqual(3.14, vector[0])
-
-
-class IDynTreeFixVectorTest(unittest.TestCase):
-
-  def test_fix_vector_accessor(self):
-    vector = iDynTree.Vector3()
-    vector[1] = 3.14
-    self.assertEqual(3.14, vector[1])
-
-  def test_fix_vector_size(self):
-    vector = iDynTree.Vector4()
-    self.assertEqual(len(vector), 4)
-
-  def test_set_zero(self):
-    vector = iDynTree.Vector3()
-    vector[0] = 10
-    vector[1] = -6
-    vector[2] = 1.4
-    vector.set_zero()
-    for element in vector:
-      self.assertEqual(element, 0)
-
-  def test_buffer(self):
-    vector = iDynTree.Vector3()
-    np_array = np.array(vector, copy=False)
-    self.assertEqual(len(np_array), len(vector))
-    np_array[0] = 3.14
-    self.assertEqual(3.14, vector[0])
-
-
-class IDynTreeDynMatrixTest(unittest.TestCase):
-
-  def test_dyn_matrix_accessor(self):
-    matrix = iDynTree.MatrixDynSize(3, 3)
-    matrix[1, 1] = 3.14
-    self.assertEqual(3.14, matrix[1, 1])
-
-  def test_dyn_matrix_size(self):
-    matrix = iDynTree.MatrixDynSize(3, 4)
-    self.assertEqual(3, matrix.rows())
-    self.assertEqual(4, matrix.cols())
-
-  def test_set_zero(self):
-    matrix = iDynTree.MatrixDynSize(3, 4)
-    matrix[0, 2] = 10
-    matrix.set_zero()
-    for r in range(matrix.rows()):
-      for c in range(matrix.cols()):
-        self.assertEqual(matrix[r, c], 0)
-
-  def test_buffer(self):
-    matrix = iDynTree.MatrixDynSize(3, 4)
-    np_mat = np.array(matrix, copy=False)
-    self.assertEqual(np_mat.shape[0], matrix.rows())
-    self.assertEqual(np_mat.shape[1], matrix.cols())
-    np_mat[0, 0] = 3.14
-    self.assertEqual(3.14, matrix[0, 0])
-
-
-class IDynTreeFixMatrixTest(unittest.TestCase):
-
-  def test_fix_matrix_accessor(self):
-    matrix = iDynTree.Matrix3x3()
-    matrix[1, 1] = 3.14
-    self.assertEqual(3.14, matrix[1, 1])
-
-  def test_fix_matrix_size(self):
-    matrix = iDynTree.Matrix4x4()
-    self.assertEqual(4, matrix.rows())
-    self.assertEqual(4, matrix.cols())
-
-  def test_set_zero(self):
-    matrix = iDynTree.Matrix4x4()
-    matrix[0, 1] = 10
-    matrix.set_zero()
-    for r in range(matrix.rows()):
-      for c in range(matrix.cols()):
-        self.assertEqual(matrix[r, c], 0)
-
-  def test_buffer(self):
-    matrix = iDynTree.Matrix4x4()
-    np_mat = np.array(matrix, copy=False)
-    self.assertEqual(np_mat.shape[0], matrix.rows())
-    self.assertEqual(np_mat.shape[1], matrix.cols())
-    np_mat[0, 0] = 3.14
-    self.assertEqual(3.14, matrix[0, 0])
-
-
 class IDynTreePositionTest(unittest.TestCase):
 
   def test_zero_position(self):
@@ -228,6 +115,17 @@ class IDynTreeTransformTest(unittest.TestCase):
     rotation = iDynTree.Rotation(0, 0, 1,
                                  1, 0, 0,
                                  0, 1, 0)
+    transform = iDynTree.Transform(rotation, position)
+
+    # Assert the content is the same.
+    for r, c in itertools.product(range(3), range(3)):
+      self.assertEqual(transform.rotation[r, c], rotation[r, c])
+    for i in range(3):
+      self.assertEqual(transform.position[i], position[i])
+
+  def test_creation_from_numpy(self):
+    position = np.array([1., 2., 3.])
+    rotation = np.array([[0., 0., 1.], [1., 0., 0.], [0., 1., 0.]])
     transform = iDynTree.Transform(rotation, position)
 
     # Assert the content is the same.
