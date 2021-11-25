@@ -131,7 +131,7 @@ public:
     /**
      * Conversion from Python to C++
      */
-    bool load(handle src, bool convert)
+    bool load(pybind11::handle src, bool convert)
     {
         namespace py = ::pybind11;
 
@@ -167,7 +167,7 @@ public:
     /**
      * Conversion from C++ to Python
      */
-    static handle cast(Type src, return_value_policy policy, handle parent)
+    static handle cast(Type src, pybind11::return_value_policy policy, pybind11::handle parent)
     {
         namespace py = ::pybind11;
 
@@ -220,7 +220,7 @@ public:
     /**
      * Conversion from Python to C++
      */
-    bool load(handle src, bool convert)
+    bool load(pybind11::handle src, bool convert)
     {
         namespace py = ::pybind11;
 
@@ -260,7 +260,7 @@ public:
     /**
      * Conversion from C++ to Python
      */
-    static handle cast(Type src, return_value_policy policy, handle parent)
+    static handle cast(Type src, pybind11::return_value_policy policy, pybind11::handle parent)
     {
         namespace py = ::pybind11;
 
