@@ -73,11 +73,6 @@ namespace iDynTree
     {
     }
 
-    Position::Position(const double* in_data, const unsigned int in_size)
-        : PositionRaw(in_data, in_size)
-    {
-    }
-
     const Position& Position::changePoint(const Position& newPoint)
     {
         this->PositionRaw::changePoint(newPoint);

@@ -68,11 +68,6 @@ namespace iDynTree
         Position(iDynTree::Span<const double> other);
 
         /**
-         * Constructor from a raw buffer of 3 doubles.
-         */
-        Position(const double* in_data, const unsigned int in_size);
-
-        /**
          * Geometric operations
          */
         const Position & changePoint(const Position & newPoint);
