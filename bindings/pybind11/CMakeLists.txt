@@ -9,7 +9,7 @@ target_link_libraries(${libraryname} INTERFACE idyntree-core)
 # creating-relocatable-packages
 target_include_directories(${libraryname} INTERFACE
   "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-  "$<INSTALL_INTERFACE:<INSTALL_PREFIX>/${CMAKE_INSTALL_INCLUDEDIR}>")
+  "$<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${CMAKE_INSTALL_INCLUDEDIR}>")
 
 # Specify installation targets, typology and destination folders.
 install(TARGETS        ${libraryname}
