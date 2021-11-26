@@ -1,0 +1,5 @@
+[master]
+main_page = "doc/main.dox"
+additional_pages = []
+src_folder = "src"
+

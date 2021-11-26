@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased Major]
 
+## [4.3.0] - 2021-11-22
+
 ### Added
 - Added the possibility to draw in different portions of the visualizer window and textures at the same time. Allow disabling the drawing on textures (https://github.com/robotology/idyntree/pull/903).
 
