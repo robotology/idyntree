@@ -17,7 +17,6 @@
 #include <cmath>
 #include <vector>
 
-
 /**
  *
  * @brief check a valid measurement
@@ -62,7 +61,7 @@ bool isZeroVector(const iDynTree::Vector3& vec);
 iDynTree::Vector3 crossVector(const iDynTree::Vector3& a, const iDynTree::Vector3& b);
 
 /**
- * @brief computes \f$ 3 \times 3 \f$ skew-symmetric matrix (\f$ \mathbb{so}(3) \$ space) for a given 3d vector (\f$ \mathbb{R}^3 \f$ space)
+ * @brief computes \f$ 3 \times 3 \f$ skew-symmetric matrix (\f$ \mathbb{so}(3) \f$ space) for a given 3d vector (\f$ \mathbb{R}^3 \f$ space)
  *
  * @param[in] omega 3d vector (usually angular velocity)
  * @return iDynTree::Matrix3x3
@@ -192,3 +191,4 @@ inline bool check_are_almost_equal(const T& x, const T& y, int units_in_last_pla
 }
 
 #endif
+

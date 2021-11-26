@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased Major]
 
+## [4.3.0] - 2021-11-22
+
 ### Added
 - Added the possibility to draw in different portions of the visualizer window and textures at the same time. Allow disabling the drawing on textures (https://github.com/robotology/idyntree/pull/903).
 - Implement iDynTree base type `type_caster` for pybind11 bindings. In other word, `VectorDynSize`,`VectorFixSize`, `MatrixDynSize` and `MatrixFixSize` are now automatically converted in `NumPy` objects (https://github.com/robotology/idyntree/pull/931).
@@ -14,9 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The `iDynTree::Visualizer::enviroment()` was deprecated. Please use the `iDynTree::Visualizer::environment()` method instead (https://github.com/robotology/idyntree/pull/903).
 - The `iDynTree::idyntree-modelio-urdf` CMake imported target used when using classes such as `iDynTree::ModelLoader` and `iDynTree::ModelExporter`  was deprecated. Please use the `iDynTree::idyntree-modelio` imported target instead. 
 
+### Removed 
+- The tools that depend on YARP (`urdf2dh`, `yarprobotstatepublisher`, `idyntree-sole-gui`, `iDynTreePlotter`) have been moved in [`idyntree-yarp-tools`](https://github.com/robotology/idyntree-yarp-tools) and their have been removed from iDynTree, together with the the option `IDYNTREE_COMPILES_YARP_TOOLS` that was been introduced to disable their compilation in iDynTree 3 (https://github.com/robotology/idyntree/pull/940).
+
 ### Fixed
 - Fixed the conversion from irrlicht pixels to iDynTree pixels. Fixed a typo in the environment method of the visualizer. Fixed the running of two visualizer instances in the same process (https://github.com/robotology/idyntree/pull/903).
 - Fixed the update of the vectors in the visualization that caused the FPS to drop (https://github.com/robotology/idyntree/pull/921).
+- Fixed compatibility with pybind11 >= 2.6.0 (https://github.com/robotology/idyntree/issues/867, https://github.com/robotology/idyntree/pull/937).
 
 ## [Unreleased]
 
@@ -24,6 +30,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added support for exporting joint position limits to URDF for 1-DoF joints
   (prismatic and revolute).
 - Added pybind11 python bindings for adding and reading joint limits.
+- Added the `ModelTransformsSolidShapes.h` header in the `iDynTree::idyntree-solid-shapes` library.
+  At the moment, this header contains just the `iDynTree::approximateSolidShapesWithPrimitiveShape`
+  function, useful to approximate the solid shapes of a given iDynTree::Model to a series of bounding boxes (https://github.com/robotology/idyntree/pull/941).
+- Added `idyntree-model-simplify-shapes` command line tool. This tool is useful to take in input a model, and 
+  return in output the same model, but with all the geometries of the model approximated with their axis aligned 
+  bounding boxes (https://github.com/robotology/idyntree/issues/933, https://github.com/robotology/idyntree/pull/941).
 
 ### Fixed 
 - In the URDF exporter, export only frames attached to the exported traversal [#914](https://github.com/robotology/idyntree/pull/914).

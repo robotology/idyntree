@@ -228,8 +228,8 @@ namespace iDynTree
     private:
         /**
          * discrete system propagation \f$ f(X, u) = f(X, y_gyro) \f$
-         * where \f$ X = \begin{bmatrix} q_0 &  q_1 & q_2 & q_3 & \omega_x & \omega_y & \omega_z & \b_x & \b_y & \b_z \end{bmatrix}^T \f$
-         * \f$ u = \begin{bmatrix} y_{gyro}_x & y_{gyro}_y & y_{gyro}_z \end{bmatrix}^T \f$
+         * where \f$ X = \begin{bmatrix} q_0 &  q_1 & q_2 & q_3 & \omega_x & \omega_y & \omega_z & b_x & b_y & b_z \end{bmatrix}^T \f$
+         * \f$ u = \begin{bmatrix} {y_{gyro}}_x & {y_{gyro}}_y & {y_{gyro}}_z \end{bmatrix}^T \f$
          * \f$ f(X, u) = \begin{bmatrix} q_{k} \otimes \text{exp}(\omega \Delta T) \\ y_{gyro} - b \\ (1 - \lambda_{b} \Delta t)b \end{bmatrix}\f$
          */
         bool ekf_f(const iDynTree::VectorDynSize& x_k,

@@ -21,7 +21,7 @@ namespace iDynTree
      * Given a rigid body inertia \f$M\f$ and spatial motion vector \f$V\f$,
      * the bias wrench \f$B\f$ of rigid body is defined as:
      * \f[
-     *   B =  \cross
+     *   B =  \times
      * \f]
      *
      */
