@@ -83,7 +83,7 @@ struct type_caster<VectorType,
 private:
 
     template <typename U,
-	      typename std::enable_if_t<std::is_same<U, iDynTree::VectorDynSize>::value>* = nullptr>
+              typename std::enable_if_t<std::is_same<U, iDynTree::VectorDynSize>::value>* = nullptr>
     static bool checkSize(const std::size_t size, const U& value) {
         return true;
     }
@@ -121,7 +121,7 @@ public:
         const auto buf = py::array_t<double, py::array::c_style | py::array::forcecast>::ensure(src);
         if (!buf) {
             return false;
-	}
+        }
 
         // It must be a vector
         const std::size_t dims = buf.ndim();
@@ -143,7 +143,8 @@ public:
     /**
      * Conversion from C++ to Python
      */
-    static handle cast(VectorType src, pybind11::return_value_policy policy, pybind11::handle parent) {
+    static handle cast(const VectorType& src, pybind11::return_value_policy policy,
+                       pybind11::handle parent) {
         namespace py = ::pybind11;
 
         // copy the content of the iDynTree vector in the python one
@@ -211,7 +212,7 @@ public:
         const std::size_t dims = buf.ndim();
         if (dims != 2) {
             return false;
-	}
+        }
 
         // Check if the size of the vector is correct.
         if (!this->checkSize(buf.size(), value)) {
@@ -231,7 +232,8 @@ public:
     /**
      * Conversion from C++ to Python
      */
-    static handle cast(MatrixType src, pybind11::return_value_policy policy, pybind11::handle parent) {
+    static handle cast(const MatrixType& src, pybind11::return_value_policy policy,
+                       pybind11::handle parent) {
         namespace py = ::pybind11;
 
         // Copy the content of the iDynTree matrix into the python one
