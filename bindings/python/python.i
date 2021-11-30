@@ -76,6 +76,38 @@ import_array();
     %}
 %enddef
 
+
+// Magic Python method for using [] on vectors associated to the links
+%define PYTHON_MAGIC_SET_GET_LEN_LINK_ARRAY(ElementType)
+     const ElementType& __getitem__(unsigned int index) {
+        if (index >= self->getNrOfLinks()) {
+            const std::string error = "Index " + std::to_string(index)
+                                    + " not valid. The vector has a size of "
+                                    + std::to_string(self->getNrOfLinks());
+            throw std::out_of_range(error);
+        }
+
+        return (*self)(index);
+     }
+
+     void __setitem__(unsigned int index, const ElementType& element) {
+        if (index >= self->getNrOfLinks()) {
+            const std::string error = "Index " + std::to_string(index)
+                                    + " not valid. The vector has a size of "
+                                    + std::to_string(self->getNrOfLinks());
+            throw std::out_of_range(error);
+        }
+
+        (*self)(index) = element;
+     }
+
+     %pythoncode %{
+        def __len__(self):
+            return self.getNrOfLinks()
+     %}
+%enddef
+
+
 // Magic Python method for using [] on matrices
 %define PYTHON_MAGIC_SET_GET_LEN_MATRIX()
     %pythoncode %{
@@ -263,4 +295,19 @@ import_array();
     CPP_SPATIAL_CLASS_LINANG_CONSTRUCTOR(SpatialAcc);
     CPP_TO_NUMPY_SPATIAL_VECTOR(iDynTree::SpatialAcc)
 
+};
+
+//
+// Vector associated to the links
+//
+%extend iDynTree::LinkPositions {
+    PYTHON_MAGIC_SET_GET_LEN_LINK_ARRAY(iDynTree::Transform)
+};
+
+%extend iDynTree::LinkVelArray {
+    PYTHON_MAGIC_SET_GET_LEN_LINK_ARRAY(iDynTree::Twist)
+};
+
+%extend iDynTree::LinkAccArray {
+    PYTHON_MAGIC_SET_GET_LEN_LINK_ARRAY(iDynTree::SpatialAcc)
 };
