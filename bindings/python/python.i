@@ -311,3 +311,7 @@ import_array();
 %extend iDynTree::LinkAccArray {
     PYTHON_MAGIC_SET_GET_LEN_LINK_ARRAY(iDynTree::SpatialAcc)
 };
+
+%extend iDynTree::LinkWrenches {
+    PYTHON_MAGIC_SET_GET_LEN_LINK_ARRAY(iDynTree::Wrench)
+};
