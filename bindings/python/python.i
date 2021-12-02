@@ -15,6 +15,9 @@
 // Include NumPy typemaps
 %include "numpy.i"
 
+// Include attributes
+%include <attribute.i>
+
 // Initialize NumPy
 %init %{
 import_array();
@@ -315,3 +318,10 @@ import_array();
 %extend iDynTree::LinkWrenches {
     PYTHON_MAGIC_SET_GET_LEN_LINK_ARRAY(iDynTree::Wrench)
 };
+
+%attributeref(iDynTree::FreeFloatingPos, iDynTree::Transform&, worldBasePos)
+%attributeref(iDynTree::FreeFloatingPos, iDynTree::JointPosDoubleArray&, jointPos)
+%attributeref(iDynTree::FreeFloatingVel, iDynTree::Twist&, baseVel)
+%attributeref(iDynTree::FreeFloatingVel, iDynTree::JointDOFsDoubleArray&, jointVel)
+%attributeref(iDynTree::FreeFloatingAcc, iDynTree::SpatialAcc&, baseAcc)
+%attributeref(iDynTree::FreeFloatingAcc, iDynTree::JointDOFsDoubleArray&, jointAcc)
