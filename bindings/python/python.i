@@ -15,6 +15,9 @@
 // Include NumPy typemaps
 %include "numpy.i"
 
+// Include attributes
+%include <attribute.i>
+
 // Initialize NumPy
 %init %{
 import_array();
@@ -75,6 +78,38 @@ import_array();
             return self.size()
     %}
 %enddef
+
+
+// Magic Python method for using [] on vectors associated to the links
+%define PYTHON_MAGIC_SET_GET_LEN_LINK_ARRAY(ElementType)
+     const ElementType& __getitem__(unsigned int index) {
+        if (index >= self->getNrOfLinks()) {
+            const std::string error = "Index " + std::to_string(index)
+                                    + " not valid. The vector has a size of "
+                                    + std::to_string(self->getNrOfLinks());
+            throw std::out_of_range(error);
+        }
+
+        return (*self)(index);
+     }
+
+     void __setitem__(unsigned int index, const ElementType& element) {
+        if (index >= self->getNrOfLinks()) {
+            const std::string error = "Index " + std::to_string(index)
+                                    + " not valid. The vector has a size of "
+                                    + std::to_string(self->getNrOfLinks());
+            throw std::out_of_range(error);
+        }
+
+        (*self)(index) = element;
+     }
+
+     %pythoncode %{
+        def __len__(self):
+            return self.getNrOfLinks()
+     %}
+%enddef
+
 
 // Magic Python method for using [] on matrices
 %define PYTHON_MAGIC_SET_GET_LEN_MATRIX()
@@ -264,3 +299,29 @@ import_array();
     CPP_TO_NUMPY_SPATIAL_VECTOR(iDynTree::SpatialAcc)
 
 };
+
+//
+// Vector associated to the links
+//
+%extend iDynTree::LinkPositions {
+    PYTHON_MAGIC_SET_GET_LEN_LINK_ARRAY(iDynTree::Transform)
+};
+
+%extend iDynTree::LinkVelArray {
+    PYTHON_MAGIC_SET_GET_LEN_LINK_ARRAY(iDynTree::Twist)
+};
+
+%extend iDynTree::LinkAccArray {
+    PYTHON_MAGIC_SET_GET_LEN_LINK_ARRAY(iDynTree::SpatialAcc)
+};
+
+%extend iDynTree::LinkWrenches {
+    PYTHON_MAGIC_SET_GET_LEN_LINK_ARRAY(iDynTree::Wrench)
+};
+
+%attributeref(iDynTree::FreeFloatingPos, iDynTree::Transform&, worldBasePos)
+%attributeref(iDynTree::FreeFloatingPos, iDynTree::JointPosDoubleArray&, jointPos)
+%attributeref(iDynTree::FreeFloatingVel, iDynTree::Twist&, baseVel)
+%attributeref(iDynTree::FreeFloatingVel, iDynTree::JointDOFsDoubleArray&, jointVel)
+%attributeref(iDynTree::FreeFloatingAcc, iDynTree::SpatialAcc&, baseAcc)
+%attributeref(iDynTree::FreeFloatingAcc, iDynTree::JointDOFsDoubleArray&, jointAcc)

@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Added the possibility to draw in different portions of the visualizer window and textures at the same time. Allow disabling the drawing on textures (https://github.com/robotology/idyntree/pull/903).
+- Implement the `operator[]` for `LinkPositions`, `LinkVelArray` and `LinkAccArray` in the swig python bindings (https://github.com/robotology/idyntree/pull/949)
+- Expose `ModelTestUtils` in swig bindings (https://github.com/robotology/idyntree/pull/949)
+- Define base and joints attributes for `FreeFloatingPos`, `FreeFloatingVel` and `FreeFloatingAcc` in swig bindings (https://github.com/robotology/idyntree/pull/949)
 
 ### Deprecated
 - The `iDynTree::Visualizer::enviroment()` was deprecated. Please use the `iDynTree::Visualizer::environment()` method instead (https://github.com/robotology/idyntree/pull/903).
