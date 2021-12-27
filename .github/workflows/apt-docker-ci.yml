@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build_type: [Debug,Release]
+        build_type: [Release]
         cmake_generator:
           - "Ninja"
         docker_image:
