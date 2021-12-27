@@ -34,7 +34,7 @@ jobs:
       run: |
         apt-get update
         apt-get -y upgrade
-        apt-get install \
+        apt-get -y install \
             git build-essential cmake libace-dev coinor-libipopt-dev libeigen3-dev swig \
             libxml2-dev python-dev python3-numpy valgrind libassimp-dev libirrlicht-dev
 
