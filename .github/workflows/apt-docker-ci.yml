@@ -33,7 +33,7 @@ jobs:
     - name: Dependencies
       run: |
         apt-get update
-        apt-get upgrade
+        apt-get -y upgrade
         apt-get install \
             git build-essential cmake libace-dev coinor-libipopt-dev libeigen3-dev swig \
             libxml2-dev python-dev python3-numpy valgrind libassimp-dev libirrlicht-dev
