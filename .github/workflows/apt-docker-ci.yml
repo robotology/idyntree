@@ -1,0 +1,57 @@
+name: Docker Apt C++ CI Workflow
+
+on:
+  push:
+  pull_request:
+  schedule:
+  # * is a special character in YAML so you have to quote this string
+  # Execute a "nightly" build at 2 AM UTC 
+  - cron:  '0 2 * * *'
+  
+jobs:
+  docker-build:
+    name: '[docker:Tags:${{ matrix.project_tags }}@${{ matrix.docker_image }}@${{ matrix.build_type }}]'
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type: [Debug,Release]
+        cmake_generator:
+          - "Ninja"
+        docker_image:
+          - "ubuntu:focal"
+          - "debian:testing"
+          - "debian:sid"
+
+    container:
+      image: ${{ matrix.docker_image }}
+
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get upgrade
+        sudo apt-get install \
+            git build-essential cmake libace-dev coinor-libipopt-dev libeigen3-dev swig \
+            libxml2-dev python-dev python3-numpy valgrind libassimp-dev libirrlicht-dev
+
+    - name: Configure
+      run: |
+        mkdir -p build
+        cd build
+        cmake -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DIDYNTREE_USES_ASSIMP:BOOL=ON \
+              -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_OCTAVE:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
+
+    - name: Build
+      run: |
+        cd build
+        cmake --build . --config ${{ matrix.build_type }}
+        
+    - name: Test
+      shell: bash
+      run: |
+        cd build
+        # Visualizer tests excluded as a workaround for https://github.com/robotology/idyntree/issues/808
+        ctest --output-on-failure -C ${{ matrix.build_type }} -E "Visualizer|matlab" . 
