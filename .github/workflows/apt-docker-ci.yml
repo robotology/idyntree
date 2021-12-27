@@ -20,6 +20,7 @@ jobs:
           - "Ninja"
         docker_image:
           - "ubuntu:focal"
+          - "ubuntu:jammy"
           - "debian:testing"
           - "debian:sid"
 
