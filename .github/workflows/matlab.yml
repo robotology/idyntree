@@ -19,7 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         build_type: [Release]
-        os: [ubuntu-20.04]
+        os: [ubuntu-20.04, windows-2019, macos-10.15]
         matlab_version: [R2020a, R2020b, R2021a, latest]
 
     steps:
@@ -59,12 +59,29 @@ jobs:
         # See https://github.com/robotology/robotology-superbuild/issues/477
         mamba install expat-cos6-x86_64 freeglut libselinux-cos6-x86_64 libxau-cos6-x86_64 libxcb-cos6-x86_64 libxdamage-cos6-x86_64 libxext-cos6-x86_64 libxfixes-cos6-x86_64 libxxf86vm-cos6-x86_64 mesa-libgl-cos6-x86_64 mesa-libgl-devel-cos6-x86_64
 
-    - name: Configure
+    # Additional dependencies useful only on Windows
+    - name: Dependencies [Conda/Windows]
+      if: contains(matrix.os, 'windows') 
+      run: |
+        # Additional dependencies only useful on Windows
+        # See https://github.com/robotology/robotology-superbuild/issues/477
+        mamba install vs2019_win-64
+
+
+    - name: Configure [Conda - Linux or  macOS]
       if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
       run: |
         mkdir build
         cd build
         cmake -GNinja -DCMAKE_INSTALL_PREFIX=${CONDA_PREFIX} -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DMATLAB_FIND_DEBUG:BOOL=ON -DIDYNTREE_USES_MATLAB:BOOL=ON -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_QT5:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_USES_OSQPEIGEN:BOOL=ON ..
+
+    - name: Configure [Conda - Windows]
+      if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
+      run: |
+        mkdir build
+        cd build
+        cmake -GNinja -DCMAKE_INSTALL_PREFIX=${CONDA_PREFIX}\Library -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DMATLAB_FIND_DEBUG:BOOL=ON -DIDYNTREE_USES_MATLAB:BOOL=ON -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_QT5:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=OFF -DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF -DIDYNTREE_USES_OSQPEIGEN:BOOL=ON ..
+
 
     - name: Build
       run: |
