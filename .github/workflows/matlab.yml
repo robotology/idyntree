@@ -21,6 +21,14 @@ jobs:
         build_type: [Release]
         os: [ubuntu-20.04, windows-2019, macos-10.15]
         matlab_version: [R2020a, R2020b, R2021a, latest]
+        exclude:
+          # R2020* is not supported on Windows on GitHub Actions
+          - os: windows-2019
+            matlab_version: R2020a
+            build_type: Release
+          - os: windows-2019
+            matlab_version: R2020b
+            build_type: Release
 
     steps:
     - uses: actions/checkout@v2
