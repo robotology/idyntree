@@ -9,15 +9,15 @@
     <includes refid="SolidShapes_8h" local="no">iDynTree/Model/SolidShapes.h</includes>
     <includes local="no">cstdlib</includes>
     <includes local="no">vector</includes>
-    <includedby refid="InverseKinematicsData_8h" local="no">private/InverseKinematicsData.h</includedby>
-    <includedby refid="InertialParametersSolidShapesHelpers_8h" local="no">iDynTree/InertialParametersSolidShapesHelpers.h</includedby>
-    <includedby refid="skinDynLibConversionsImplementation_8h" local="no">iDynTree/skinDynLibConversionsImplementation.h</includedby>
+    <includedby refid="DenavitHartenberg_8h" local="no">iDynTree/Model/DenavitHartenberg.h</includedby>
+    <includedby refid="ModelTestUtils_8h" local="no">iDynTree/Model/ModelTestUtils.h</includedby>
     <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h</includedby>
     <includedby refid="GravityCompensationHelpers_8h" local="no">iDynTree/Estimation/GravityCompensationHelpers.h</includedby>
     <includedby refid="SimpleLeggedOdometry_8h" local="no">iDynTree/Estimation/SimpleLeggedOdometry.h</includedby>
-    <includedby refid="DenavitHartenberg_8h" local="no">iDynTree/Model/DenavitHartenberg.h</includedby>
-    <includedby refid="ModelTestUtils_8h" local="no">iDynTree/Model/ModelTestUtils.h</includedby>
     <includedby refid="Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includedby>
+    <includedby refid="skinDynLibConversionsImplementation_8h" local="no">iDynTree/skinDynLibConversionsImplementation.h</includedby>
+    <includedby refid="InverseKinematicsData_8h" local="no">private/InverseKinematicsData.h</includedby>
+    <includedby refid="InertialParametersSolidShapesHelpers_8h" local="no">iDynTree/InertialParametersSolidShapesHelpers.h</includedby>
     <includedby refid="ModelCalibrationHelper_8h" local="no">iDynTree/ModelIO/ModelCalibrationHelper.h</includedby>
     <includedby refid="ModelExporter_8h" local="no">iDynTree/ModelIO/ModelExporter.h</includedby>
     <includedby refid="ModelLoader_8h" local="no">iDynTree/ModelIO/ModelLoader.h</includedby>

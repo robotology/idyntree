@@ -3,7 +3,6 @@
   <compounddef id="group__iDynTreeExperimental" kind="group">
     <compoundname>iDynTreeExperimental</compoundname>
     <title>Experimental classes, for which the interface is currently under active development and is not stable.</title>
-    <innerclass refid="classiDynTree_1_1InverseKinematics" prot="public">iDynTree::InverseKinematics</innerclass>
     <innerclass refid="classiDynTree_1_1optimalcontrol_1_1Constraint" prot="public">iDynTree::optimalcontrol::Constraint</innerclass>
     <innerclass refid="classiDynTree_1_1optimalcontrol_1_1ConstraintsGroup" prot="public">iDynTree::optimalcontrol::ConstraintsGroup</innerclass>
     <innerclass refid="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem" prot="public">iDynTree::optimalcontrol::ControlledDynamicalSystem</innerclass>
@@ -43,6 +42,7 @@
     <innerclass refid="structiDynTree_1_1BerdySensor" prot="public">iDynTree::BerdySensor</innerclass>
     <innerclass refid="classiDynTree_1_1BerdyHelper" prot="public">iDynTree::BerdyHelper</innerclass>
     <innerclass refid="classiDynTree_1_1BerdySparseMAPSolver" prot="public">iDynTree::BerdySparseMAPSolver</innerclass>
+    <innerclass refid="classiDynTree_1_1InverseKinematics" prot="public">iDynTree::InverseKinematics</innerclass>
       <sectiondef kind="enum">
       <memberdef kind="enum" id="group__iDynTreeExperimental_1ga62aff3167b9df327b4b1db6affadd21f" prot="public" static="no" strong="no">
         <type></type>

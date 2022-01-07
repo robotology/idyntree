@@ -5,7 +5,7 @@
     <includes local="no">iDynTree/Core/Transform.h</includes>
       <sectiondef kind="user-defined">
       <header>Overloaded operators.</header>
-      <description><para>This operators are used to change the frame in which a quantity is expressed from the <formula id="101">$\texttt{frame}$</formula> to the <formula id="102">$\texttt{refFrame}$</formula> of the transform. </para>
+      <description><para>This operators are used to change the frame in which a quantity is expressed from the <formula id="139">$\texttt{frame}$</formula> to the <formula id="140">$\texttt{refFrame}$</formula> of the transform. </para>
 </description>
       <memberdef kind="function" id="classiDynTree_1_1Transform_1a83a88c7dbba949bfced19dac0a133f4e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -20,9 +20,9 @@
 <para>Combine two transforms. </para>
         </briefdescription>
         <detaileddescription>
-<para>If this object is <formula id="103">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula> and the argument is <formula id="104">\[ (p&apos;,R&apos;) = ( {}^{\texttt{orient}} p_{\texttt{point},\texttt{newPoint}} , {}^{\texttt{orient}} R_{\texttt{newOrient}} ) \]</formula>.</para>
-<para>The resulting transform will be: <formula id="105">\[ (p+Rp&apos;, RR&apos;) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{newPoint}} , {}^{\texttt{refOrient}} R_{\texttt{newOrient}} ) \]</formula>.</para>
-<para>Notice that this is equivalent to multiply the associated homogemeous matrices: <formula id="106">\[ {}^{\texttt{refFrame}} H_{\texttt{newFrame}} = {}^{\texttt{refFrame}} H_{\texttt{frame}} {}^{\texttt{frame}} H_{\texttt{newFrame}} \]</formula> or the associated adjoint matrices : <formula id="107">\[ {}^{\texttt{refFrame}} X_{\texttt{newFrame}} = {}^{\texttt{refFrame}} X_{\texttt{frame}} {}^{\texttt{frame}} X_{\texttt{newFrame}} \]</formula> </para>
+<para>If this object is <formula id="141">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula> and the argument is <formula id="142">\[ (p&apos;,R&apos;) = ( {}^{\texttt{orient}} p_{\texttt{point},\texttt{newPoint}} , {}^{\texttt{orient}} R_{\texttt{newOrient}} ) \]</formula>.</para>
+<para>The resulting transform will be: <formula id="143">\[ (p+Rp&apos;, RR&apos;) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{newPoint}} , {}^{\texttt{refOrient}} R_{\texttt{newOrient}} ) \]</formula>.</para>
+<para>Notice that this is equivalent to multiply the associated homogemeous matrices: <formula id="144">\[ {}^{\texttt{refFrame}} H_{\texttt{newFrame}} = {}^{\texttt{refFrame}} H_{\texttt{frame}} {}^{\texttt{frame}} H_{\texttt{newFrame}} \]</formula> or the associated adjoint matrices : <formula id="145">\[ {}^{\texttt{refFrame}} X_{\texttt{newFrame}} = {}^{\texttt{refFrame}} X_{\texttt{frame}} {}^{\texttt{frame}} X_{\texttt{newFrame}} \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -37,7 +37,7 @@
 <para>Return the inverse of this <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref>. </para>
         </briefdescription>
         <detaileddescription>
-<para>If this object is <formula id="103">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula> this function will return: <formula id="108">\[ (-R^\top p , R^\top) = ( {}^{\texttt{orient}} p_{\texttt{point},\texttt{refPoint}} , {}^{\texttt{orient}} R_{\texttt{refOrient}} ) \]</formula> </para>
+<para>If this object is <formula id="141">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula> this function will return: <formula id="146">\[ (-R^\top p , R^\top) = ( {}^{\texttt{orient}} p_{\texttt{point},\texttt{refPoint}} , {}^{\texttt{orient}} R_{\texttt{refOrient}} ) \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -56,9 +56,9 @@
 <para>Change reference frame of a point. </para>
         </briefdescription>
         <detaileddescription>
-<para>If this object is <formula id="103">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula></para>
-<para>And the <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> argument represent a point: <formula id="109">\[ p&apos; = {}^{\texttt{orient}} p_{\texttt{point},\texttt{newPoint}} \]</formula></para>
-<para>The result of the operation is: <formula id="110">\[ Rp&apos; + p = {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{newPoint}} \]</formula> </para>
+<para>If this object is <formula id="141">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula></para>
+<para>And the <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> argument represent a point: <formula id="147">\[ p&apos; = {}^{\texttt{orient}} p_{\texttt{point},\texttt{newPoint}} \]</formula></para>
+<para>The result of the operation is: <formula id="148">\[ Rp&apos; + p = {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{newPoint}} \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -77,9 +77,9 @@
 <para>Change frame in which a <ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> is expressed. </para>
         </briefdescription>
         <detaileddescription>
-<para>If this object is <formula id="103">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula></para>
-<para>And the argument is a wrench: <formula id="111">\[ {}_{\texttt{frame}} F = \begin{bmatrix} f \\ \tau \end{bmatrix} \]</formula></para>
-<para>The result of this operation is : <formula id="112">\[ {}_{\texttt{refFrame}} F = {}_{\texttt{refFrame}}X^{\texttt{frame}} {}_{\texttt{frame}} F = \begin{bmatrix} R &amp; 0_{3\times3} \\ p \times R &amp; R \end{bmatrix} \begin{bmatrix} f \\ \tau \end{bmatrix} = \begin{bmatrix} Rf \\ p \times R f + R\tau \end{bmatrix} \]</formula> </para>
+<para>If this object is <formula id="141">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula></para>
+<para>And the argument is a wrench: <formula id="149">\[ {}_{\texttt{frame}} F = \begin{bmatrix} f \\ \tau \end{bmatrix} \]</formula></para>
+<para>The result of this operation is : <formula id="150">\[ {}_{\texttt{refFrame}} F = {}_{\texttt{refFrame}}X^{\texttt{frame}} {}_{\texttt{frame}} F = \begin{bmatrix} R &amp; 0_{3\times3} \\ p \times R &amp; R \end{bmatrix} \begin{bmatrix} f \\ \tau \end{bmatrix} = \begin{bmatrix} Rf \\ p \times R f + R\tau \end{bmatrix} \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -98,9 +98,9 @@
 <para>Change the frame in which a <ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref> is expressed. </para>
         </briefdescription>
         <detaileddescription>
-<para>If this object is <formula id="103">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula></para>
-<para>And the argument is a twist: <formula id="113">\[ {}^{\texttt{frame}} V = \begin{bmatrix} v \\ \omega \end{bmatrix} \]</formula></para>
-<para>The result of this operation is : <formula id="114">\[ {}^{\texttt{refFrame}} V = {}^{\texttt{refFrame}}X_{\texttt{frame}} {}^{\texttt{frame}} V = \begin{bmatrix} R &amp; p \times R\\ 0_{3\times3} &amp; R \end{bmatrix} \begin{bmatrix} v \\ \omega \end{bmatrix} = \begin{bmatrix} R v + p \times R \omega \\ R\omega \end{bmatrix} \]</formula> </para>
+<para>If this object is <formula id="141">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula></para>
+<para>And the argument is a twist: <formula id="151">\[ {}^{\texttt{frame}} V = \begin{bmatrix} v \\ \omega \end{bmatrix} \]</formula></para>
+<para>The result of this operation is : <formula id="152">\[ {}^{\texttt{refFrame}} V = {}^{\texttt{refFrame}}X_{\texttt{frame}} {}^{\texttt{frame}} V = \begin{bmatrix} R &amp; p \times R\\ 0_{3\times3} &amp; R \end{bmatrix} \begin{bmatrix} v \\ \omega \end{bmatrix} = \begin{bmatrix} R v + p \times R \omega \\ R\omega \end{bmatrix} \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -231,9 +231,9 @@
 <para>Change the frame in which a <ref refid="classiDynTree_1_1Direction" kindref="compound">Direction</ref> is expressed. </para>
         </briefdescription>
         <detaileddescription>
-<para>If this object is <formula id="103">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula></para>
-<para>And the argument is a direction represented by a unit norm 3d vector : <formula id="115">\[ {}^{\texttt{orient}} d \]</formula></para>
-<para>The result of this operation is: <formula id="116">\[ {}^{\texttt{refOrient}} d = R {}^{\texttt{orient}} d \]</formula> </para>
+<para>If this object is <formula id="141">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula></para>
+<para>And the argument is a direction represented by a unit norm 3d vector : <formula id="153">\[ {}^{\texttt{orient}} d \]</formula></para>
+<para>The result of this operation is: <formula id="154">\[ {}^{\texttt{refOrient}} d = R {}^{\texttt{orient}} d \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -252,9 +252,9 @@
 <para>Change the frame in which a <ref refid="classiDynTree_1_1Axis" kindref="compound">Axis</ref> is expressed. </para>
         </briefdescription>
         <detaileddescription>
-<para>If this object is <formula id="103">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula></para>
-<para>And the argument is an axis, specified by the axis origin and the axis direction: <formula id="117">\[ {}^{\texttt{frame}} A = ({}^{\texttt{orient}} p_{\texttt{point},\texttt{axisOrigin}} , {}^{\texttt{orient}} d) = (p&apos;,d) \]</formula></para>
-<para>The result of this operation is: <formula id="118">\[ {}^{\texttt{refFrame}} A = ({}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{axisOrigin}} , {}^{\texttt{refOrient}} d) = ( Rp&apos; + p , Rd) \]</formula> </para>
+<para>If this object is <formula id="141">\[ (p,R) = ( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} ) \]</formula></para>
+<para>And the argument is an axis, specified by the axis origin and the axis direction: <formula id="155">\[ {}^{\texttt{frame}} A = ({}^{\texttt{orient}} p_{\texttt{point},\texttt{axisOrigin}} , {}^{\texttt{orient}} d) = (p&apos;,d) \]</formula></para>
+<para>The result of this operation is: <formula id="156">\[ {}^{\texttt{refFrame}} A = ({}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{axisOrigin}} , {}^{\texttt{refOrient}} d) = ( Rp&apos; + p , Rd) \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -275,8 +275,8 @@
         </briefdescription>
         <detaileddescription>
 <para>The returned matrix is the one with this structure:</para>
-<para><formula id="120">\[ {}^{\texttt{refFrame}} H_{\texttt{frame}} = \begin{bmatrix} {}^{\texttt{refOrient}} R_{\texttt{orient}} &amp; {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} \\ 0_{1\times3} &amp; 1 \end{bmatrix} \]</formula> Where <formula id="100">${}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3 \times 3}$</formula> is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame.</para>
-<para><formula id="121">${}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} \in \mathbb{R}^3$</formula> is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame. </para>
+<para><formula id="158">\[ {}^{\texttt{refFrame}} H_{\texttt{frame}} = \begin{bmatrix} {}^{\texttt{refOrient}} R_{\texttt{orient}} &amp; {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} \\ 0_{1\times3} &amp; 1 \end{bmatrix} \]</formula> Where <formula id="138">${}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3 \times 3}$</formula> is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame.</para>
+<para><formula id="159">${}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} \in \mathbb{R}^3$</formula> is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -292,9 +292,9 @@
         </briefdescription>
         <detaileddescription>
 <para>The returned matrix is the one with this structure:</para>
-<para><formula id="122">\[ {}^{\texttt{refFrame}} X_{\texttt{frame}} = \begin{bmatrix} R &amp; p \times R \\ 0_{3\times3} &amp; R \end{bmatrix} \]</formula></para>
-<para>Where <formula id="123">$R = {}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3\times3}$</formula> is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame.</para>
-<para><formula id="124">$p = p_{\texttt{refPoint},\texttt{point}} \in \mathbb{R}^3$</formula> is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame <formula id="125">$p \times$</formula> is the skew simmetric matrix such that <formula id="126">$(p \times) v = p \times v$</formula> .</para>
+<para><formula id="160">\[ {}^{\texttt{refFrame}} X_{\texttt{frame}} = \begin{bmatrix} R &amp; p \times R \\ 0_{3\times3} &amp; R \end{bmatrix} \]</formula></para>
+<para>Where <formula id="161">$R = {}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3\times3}$</formula> is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame.</para>
+<para><formula id="162">$p = p_{\texttt{refPoint},\texttt{point}} \in \mathbb{R}^3$</formula> is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame <formula id="163">$p \times$</formula> is the skew simmetric matrix such that <formula id="164">$(p \times) v = p \times v$</formula> .</para>
 <para><simplesect kind="warning"><para>Note that in iDynTree the matrix are stored in row major order, and the 6d quantites are serialized in linear/angular order. </para>
 </simplesect>
 </para>
@@ -313,9 +313,9 @@
         </briefdescription>
         <detaileddescription>
 <para>The returned matrix is the one with this structure:</para>
-<para><formula id="127">\[ {}_{\texttt{refFrame}} X^{\texttt{frame}} = \begin{bmatrix} R &amp; 0_{3\times3} \\ p \times R &amp; R \end{bmatrix} \]</formula></para>
-<para>Where <formula id="123">$R = {}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3\times3}$</formula> is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame.</para>
-<para><formula id="124">$p = p_{\texttt{refPoint},\texttt{point}} \in \mathbb{R}^3$</formula> is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame <formula id="125">$p \times$</formula> is the skew simmetric matrix such that <formula id="126">$(p \times) v = p \times v$</formula> .</para>
+<para><formula id="165">\[ {}_{\texttt{refFrame}} X^{\texttt{frame}} = \begin{bmatrix} R &amp; 0_{3\times3} \\ p \times R &amp; R \end{bmatrix} \]</formula></para>
+<para>Where <formula id="161">$R = {}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3\times3}$</formula> is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame.</para>
+<para><formula id="162">$p = p_{\texttt{refPoint},\texttt{point}} \in \mathbb{R}^3$</formula> is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame <formula id="163">$p \times$</formula> is the skew simmetric matrix such that <formula id="164">$(p \times) v = p \times v$</formula> .</para>
 <para><simplesect kind="warning"><para>Note that in iDynTree the matrix are stored in row major order, and the 6d quantites are serialized in linear/angular order. </para>
 </simplesect>
 </para>
@@ -379,7 +379,7 @@
 <para>The position part of the transform. </para>
         </briefdescription>
         <detaileddescription>
-<para>The 3d vector <formula id="93">${}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}}$</formula>, that is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame. </para>
+<para>The 3d vector <formula id="131">${}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}}$</formula>, that is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -394,7 +394,7 @@
 <para>The rotation part of the transform. </para>
         </briefdescription>
         <detaileddescription>
-<para>Set the rotation matrix <formula id="100">${}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3 \times 3}$</formula>, that is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame. </para>
+<para>Set the rotation matrix <formula id="138">${}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3 \times 3}$</formula>, that is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -552,7 +552,7 @@
 <para>Get the rotation part of the transform. </para>
         </briefdescription>
         <detaileddescription>
-<para>Get the rotation matrix <formula id="100">${}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3 \times 3}$</formula>, that is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame. </para>
+<para>Get the rotation matrix <formula id="138">${}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3 \times 3}$</formula>, that is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -567,7 +567,7 @@
 <para>Get the translation part of the transform. </para>
         </briefdescription>
         <detaileddescription>
-<para>Get 3d vector <formula id="93">${}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}}$</formula>, that is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame. </para>
+<para>Get 3d vector <formula id="131">${}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}}$</formula>, that is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -586,7 +586,7 @@
 <para>Set the rotation part of the transform. </para>
         </briefdescription>
         <detaileddescription>
-<para>Set the rotation matrix <formula id="100">${}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3 \times 3}$</formula>, that is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame. </para>
+<para>Set the rotation matrix <formula id="138">${}^{\texttt{refOrient}} R_{\texttt{orient}} \in \mathbb{R}^{3 \times 3}$</formula>, that is the rotation matrix that takes a 3d vector expressed in the orientationFrame and transform it in a 3d vector expressed in the reference orientation frame. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -605,7 +605,7 @@
 <para>Set the translation part of the transform. </para>
         </briefdescription>
         <detaileddescription>
-<para>Set 3d vector <formula id="93">${}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}}$</formula>, that is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame. </para>
+<para>Set 3d vector <formula id="131">${}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}}$</formula>, that is the vector between the point and the reference point, pointing toward the point and expressed in the reference orientation frame. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -660,7 +660,7 @@
 <para>Return an identity transfom. </para>
         </briefdescription>
         <detaileddescription>
-<para>Set the rotation to the identity and the translation to 0 : <formula id="119">\[ (0_{3 \times 1}, I_{3 \times 3}) \]</formula></para>
+<para>Set the rotation to the identity and the translation to 0 : <formula id="157">\[ (0_{3 \times 1}, I_{3 \times 3}) \]</formula></para>
 <para><simplesect kind="return"><para>an identity transform. </para>
 </simplesect>
 </para>
@@ -677,11 +677,11 @@
 <para><image type="html" name="transform.svg"></image>
 </para>
 <para>This class is designed to be an easy to use proxy to perform change of frame of expression for <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref>, <ref refid="classiDynTree_1_1Twist" kindref="compound">iDynTree::Twist</ref>, <ref refid="classiDynTree_1_1Wrench" kindref="compound">iDynTree::Wrench</ref> and other data structure in <ref refid="group__iDynTreeCore" kindref="compound">iDynTree core data structures</ref>. For this reason the class is called &quot;Transform&quot;, because it will be mainly used to transform quantities between frames.</para>
-<para>Given that this class it may used to represent homogeneous transform matrix as well as adjoint matrix, no raw access to the underline storage ( data() method ) is provided, because it does not have a canonical representation. Instead, access is given to the two elements of a transform: The position vector <formula id="93">${}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}}$</formula> and the rotation matrix <formula id="94">${}^{\texttt{refOrient}} R_{\texttt{orient}}$</formula>.</para>
-<para>We will indicate this tranform as <formula id="95">$( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} )$</formula></para>
-<para>The frame whose origin is the reference point and whose orientation the reference orientation is often indicated as <formula id="96">$ \texttt{refFrame} = (\texttt{refPoint},\texttt{refOrient}) $</formula>.</para>
-<para>Similarly the frame whose origin is the point and whose orientation is the orientation is indicated as <formula id="97">$ \texttt{frame} = (\texttt{point},\texttt{orient}) $</formula>.</para>
-<para>This transform object can be obtained as the <formula id="98">${}^{\texttt{refFrame}} H_{\texttt{frame}}$</formula> 4x4 homogeneous matrix using the asHomogeneousTransform method, or as the <formula id="99">${}^{\texttt{refFrame}} X_{\texttt{frame}}$</formula> 6x6 adjoint matrix using the asAdjointTransform . </para>
+<para>Given that this class it may used to represent homogeneous transform matrix as well as adjoint matrix, no raw access to the underline storage ( data() method ) is provided, because it does not have a canonical representation. Instead, access is given to the two elements of a transform: The position vector <formula id="131">${}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}}$</formula> and the rotation matrix <formula id="132">${}^{\texttt{refOrient}} R_{\texttt{orient}}$</formula>.</para>
+<para>We will indicate this tranform as <formula id="133">$( {}^{\texttt{refOrient}} p_{\texttt{refPoint},\texttt{point}} , {}^{\texttt{refOrient}} R_{\texttt{orient}} )$</formula></para>
+<para>The frame whose origin is the reference point and whose orientation the reference orientation is often indicated as <formula id="134">$ \texttt{refFrame} = (\texttt{refPoint},\texttt{refOrient}) $</formula>.</para>
+<para>Similarly the frame whose origin is the point and whose orientation is the orientation is indicated as <formula id="135">$ \texttt{frame} = (\texttt{point},\texttt{orient}) $</formula>.</para>
+<para>This transform object can be obtained as the <formula id="136">${}^{\texttt{refFrame}} H_{\texttt{frame}}$</formula> 4x4 homogeneous matrix using the asHomogeneousTransform method, or as the <formula id="137">${}^{\texttt{refFrame}} X_{\texttt{frame}}$</formula> 6x6 adjoint matrix using the asAdjointTransform . </para>
     </detaileddescription>
     <collaborationgraph>
       <node id="9">

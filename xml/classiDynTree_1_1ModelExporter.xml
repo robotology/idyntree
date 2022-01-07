@@ -278,7 +278,7 @@
 </listitem><listitem><para>Joint limits, damping and static friction.</para>
 </listitem></itemizedlist>
 </para>
-<sect1 id="classiDynTree_1_1ModelExporter_1autotoc_md1">
+<sect1 id="classiDynTree_1_1ModelExporter_1autotoc_md5">
 <title>Format documentation</title>
 <para>The following format are supported by the exporter.</para>
 <para><table rows="2" cols="4"><row>
@@ -295,7 +295,7 @@
 </entry></row>
 </table>
 </para>
-<sect2 id="classiDynTree_1_1ModelExporter_1autotoc_md2">
+<sect2 id="classiDynTree_1_1ModelExporter_1autotoc_md6">
 <title>URDF</title>
 <para>As the URDF format does not distinguish between frames and links (see <ulink url="https://discourse.ros.org/t/urdf-ng-link-and-frame-concepts/56">https://discourse.ros.org/t/urdf-ng-link-and-frame-concepts/56</ulink> for an extensive discussion on this) the URDF model exporter converts iDynTree&apos;s <emphasis>additional frames</emphasis> to mass-less and shape-less <emphasis>fake</emphasis> URDF links that are connected as child links via <computeroutput>fixed</computeroutput> joints to the corresponding <bold>real</bold> URDF links.</para>
 <para>Furthermore, it is widespread use in URDF models to never use a real link (with mass) as the root link of a model, mainly due to workaround a bug in official KDL parser used in ROS (see <ulink url="https://github.com/ros/kdl_parser/issues/27">https://github.com/ros/kdl_parser/issues/27</ulink> for more info). For this reason, if the selected base_link has at least one additional frame, by default the first additional frame of the base link is added as a <bold>parent</bold> fake URDF link, instead as a <bold>child</bold> fake URDF link as done with the rest of iDynTree&apos;s additional frames. If no additional frame is available for the base link, the base link of the URDF will have a mass, and will generate a warning then used with the ROS&apos;s <ulink url="https://github.com/ros/kdl_parser"><computeroutput>kdl_parser</computeroutput></ulink> . This behaviour can be disabled by setting to false the <computeroutput>exportFirstBaseLinkAdditionalFrameAsFakeURDFBase</computeroutput> attribute of <ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref>. </para>

@@ -236,7 +236,7 @@
         <argsstring></argsstring>
         <name>m_Id3</name>
         <briefdescription>
-<para><formula id="55">$ 3 \times 3 $</formula> identity matrix </para>
+<para><formula id="93">$ 3 \times 3 $</formula> identity matrix </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -1205,7 +1205,7 @@
 <para>prepares the measurement noise covariance matrix using internal struct parameters measurement noise depends only on accelerometer measurement along x-,y- and z- directions along with magnetometer z-direction if included measurement noise covariance can be descibed as, <formula id="268">$ R = \begin{bmatrix} \sigma_{acc}^{2} I_{3 \times 3} &amp; 0_{3 \times 1} \\ 0_{1 \times 3} &amp; \sigma_{mag}^{2}$</formula> if magnetometer measurements is also considered. </para>
         </briefdescription>
         <detaileddescription>
-<para>In case of magnetometer measurements not being considered, it is reduced to the <formula id="55">$ 3 \times 3 $</formula> matrix <parameterlist kind="param"><parameteritem>
+<para>In case of magnetometer measurements not being considered, it is reduced to the <formula id="93">$ 3 \times 3 $</formula> matrix <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">R</parametername>
 </parameternamelist>
