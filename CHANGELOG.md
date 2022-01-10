@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.3.1] - 2022-01-10
+
+### Fixed
+- Fixed `iDynTree::ModelExporter` class and `idyntree-model-simplify-shapes` utility to generate standard-conforming URDF files, by adding huge velocity and effort limits to joints, as these limits are currently not stored inside the `iDynTree::Model` class (https://github.com/robotology/idyntree/pull/957, https://github.com/robotology/idyntree/issues/955).
+
 ## [4.3.0] - 2021-11-22
 
 ### Added
