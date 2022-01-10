@@ -396,6 +396,13 @@ bool exportJoint(IJointConstPtr joint, LinkConstPtr parentLink, LinkConstPtr chi
         xmlNewProp(limit_xml, BAD_CAST "lower", BAD_CAST bufStr.c_str());
         ok = ok && doubleToStringWithClassicLocale(max, bufStr);
         xmlNewProp(limit_xml, BAD_CAST "upper", BAD_CAST bufStr.c_str());
+
+        // Workaround for https://github.com/robotology/idyntree/issues/955
+        double reallyHighLimit = 1e9;
+        ok = ok && doubleToStringWithClassicLocale(reallyHighLimit, bufStr);
+        xmlNewProp(limit_xml, BAD_CAST "effort", BAD_CAST bufStr.c_str());
+        ok = ok && doubleToStringWithClassicLocale(reallyHighLimit, bufStr);
+        xmlNewProp(limit_xml, BAD_CAST "velocity", BAD_CAST bufStr.c_str());
     }
 
     // TODO(traversaro) : handle friction
