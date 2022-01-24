@@ -319,6 +319,24 @@ import_array();
     PYTHON_MAGIC_SET_GET_LEN_LINK_ARRAY(iDynTree::Wrench)
 };
 
+%extend iDynTree::Rotation {
+    static iDynTree::Rotation FromPython(double* in, int i, int j) {
+        if (i != 3 || j != 3)
+            throw std::runtime_error("Wrong size of input matrix");
+
+        return iDynTree::RotationRaw(in, static_cast<unsigned>(i), static_cast<unsigned>(j));
+    }
+};
+
+%extend iDynTree::Position {
+    static iDynTree::Position FromPython(double* in, int size) {
+        if (size != 3)
+            throw std::runtime_error("Wrong size of input array");
+
+        return iDynTree::PositionRaw(in, static_cast<unsigned>(size));
+    }
+};
+
 %attributeref(iDynTree::FreeFloatingPos, iDynTree::Transform&, worldBasePos)
 %attributeref(iDynTree::FreeFloatingPos, iDynTree::JointPosDoubleArray&, jointPos)
 %attributeref(iDynTree::FreeFloatingVel, iDynTree::Twist&, baseVel)
