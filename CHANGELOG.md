@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased Major]
 
+### Added
+- Implement the possibility to use `FromPython` to generate rotation and position in the python
+  SWIG bindings starting from arrays (https://github.com/robotology/idyntree/pull/959)
+
 ## [4.3.0] - 2021-11-22
 
 ### Added
