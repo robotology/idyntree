@@ -37,11 +37,11 @@ public:
     };
 
 private:
-    std::shared_ptr<MaterialInfo> m_info;
+    std::shared_ptr<MaterialInfo>& m_info;
 
 public:
 
-    MaterialElement(std::shared_ptr<MaterialInfo> materialInfo);
+    MaterialElement(std::shared_ptr<MaterialInfo>& materialInfo);
     const std::shared_ptr<MaterialInfo> materialInfo() const;
 
     bool setAttributes(const std::unordered_map<std::string, std::shared_ptr<iDynTree::XMLAttribute>>& attributes) override;

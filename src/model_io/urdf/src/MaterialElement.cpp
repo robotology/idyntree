@@ -20,13 +20,14 @@
 
 namespace iDynTree {
 
-    MaterialElement::MaterialElement(std::shared_ptr<MaterialInfo> materialInfo)
+    MaterialElement::MaterialElement(std::shared_ptr<MaterialInfo>& materialInfo)
     : iDynTree::XMLElement("material")
     , m_info(materialInfo)
     {
         if (!m_info) {
             m_info = std::make_shared<MaterialInfo>();
         }
+
     }
 
     const std::shared_ptr<MaterialElement::MaterialInfo> MaterialElement::materialInfo() const { return m_info; }
