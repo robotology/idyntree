@@ -53,7 +53,8 @@ namespace iDynTree {
         } else if (name == "material") {
             // These materials constitute a model-level database of materials
             // TODO: the result of the parsing should be added to the database
-            return std::make_shared<MaterialElement>(nullptr);
+            std::shared_ptr<MaterialElement::MaterialInfo> dummyMaterial;
+            return std::make_shared<MaterialElement>(dummyMaterial);
         }
         //TODO: What to do with an unexpected tag?
         // we would like to support two modes: strict (raise an error for an unexpected tag)
