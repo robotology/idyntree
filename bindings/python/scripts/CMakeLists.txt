@@ -1,0 +1,4 @@
+install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/idyntree-model-view-meshcat.py
+  RENAME idyntree-model-view-meshcat
+  PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ
+  DESTINATION "${CMAKE_INSTALL_BINDIR}")
