@@ -62,7 +62,7 @@
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="BerdyHelper_8h.html">&lt;iDynTree/Estimation/BerdyHelper.h&gt;</a></div>
         </h1>
         <p>Helper class for computing Berdy matrices.</p>
-        <div class="m-block m-default">
+        <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
@@ -75,7 +75,7 @@
               </ul>
             </li>
           </ul>
-        </div>
+        </nav>
 <p>Berdy refers to a class for algorithms to compute the Maximum A Posteriori (MAP) estimation of the dynamic variables of a multibody model (accelerations, external forces, joint torques) assuming the knowledge the measurements of an arbitrary set of sensors and of the kinematics and inertial characteristics of the model.</p><p>The MAP estimation is computed using a sparse matrix representation of the multibody dynamics Newton-Euler equations, originally described in:</p><p>Latella, C.; Kuppuswamy, N.; Romano, F.; Traversaro, S.; Nori, F. Whole-Body Human Inverse Dynamics with Distributed Micro-Accelerometers, Gyros and Force Sensing. Sensors 2016, 16, 727. <a href="http://www.mdpi.com/1424-8220/16/5/727">http:/<wbr />/<wbr />www.mdpi.com/<wbr />1424-8220/<wbr />16/<wbr />5/<wbr />727</a></p><p>Nori F, Kuppuswamy N, Traversaro S. Simultaneous state and dynamics estimation in articulated structures. In Intelligent Robots and Systems (IROS), 2015 IEEE/RSJ International Conference on 2015 Sep 28 (pp. 3380-3386). IEEE. <a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=7353848">http:/<wbr />/<wbr />ieeexplore.ieee.org/<wbr />xpl/<wbr />articleDetails.jsp?arnumber=7353848</a></p><p>This helper class implements two different variants of the Berdy dynamics representation, identified with the BerdyVariants enum:</p><ul><li>The ORIGINAL_BERDY_FIXED_BASE is the original BERDY representation described in the papers, that was assuming a fixed base model with all the joints with 1-DOF .</li><li>The BERDY_FLOATING_BASE is a variant in which the model is assumed to be floating, does not need the position or linear velocity of the floating base and supports joints with an arbitrary number of DOF .</li></ul><p>The sensors supported by this class are the one contained in the <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a> representation, which can be loaded directly from an URDF representation, see <a href="https://github.com/robotology/idyntree/blob/master/doc/model_loading.md#sensor-extensions">https://github.com/robotology/idyntree/blob/master/doc/model_<wbr />loading.md#sensor-extensions</a> . Using this representation the following sensors can be loaded:</p><ul><li>Internal Six-Axis Force Torque sensors</li><li>Gyroscopes</li><li>Accelerometers Support for joint torques/acceleration or external wrenches measurements still needs to be added.</li></ul><aside class="m-note m-info"><h4>Note</h4><p>The dynamics representation of Berdy is highly dependent on the link assumed to be the floating base of the robot, even in the case that BERDY_FLOATING_BASE is used. The assumed traversal (i.e. which link is the floating base and how the link are visited) is accessible with the <a href="classiDynTree_1_1BerdyHelper.html#a039a1fa1dd3bf8b5213c53d29fecd1d9" class="m-doc">dynamicTraversal()</a> method.</p></aside><aside class="m-note m-danger"><h4>Warning</h4><p>This class is still in active development, and so API interface can change between iDynTree versions.</p></aside>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
@@ -558,8 +558,8 @@
     </div>
   </div>
 </div>
-<script src="search-v1.js"></script>
-<script src="searchdata-v1.js" async="async"></script>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
 <footer><nav>
   <div class="m-container">
     <div class="m-row">

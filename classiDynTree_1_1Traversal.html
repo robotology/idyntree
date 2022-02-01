@@ -62,7 +62,7 @@
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="Traversal_8h.html">&lt;iDynTree/Model/Traversal.h&gt;</a></div>
         </h1>
         <p>Class that represents a traversal of a set of links of a <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>.</p>
-        <div class="m-block m-default">
+        <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
@@ -73,7 +73,7 @@
               </ul>
             </li>
           </ul>
-        </div>
+        </nav>
 <p>The traversal is represented by an ordered vector of links. For a given model, the traversal is always built in such a way that there exist a spanning tree that has as a root the first link (with traversal index 0) of the traversal, and such that every link comes after its spanning tree parent.</p><p>For every link in the traversal are provided:</p><ul><li>a pointer to the link itself</li><li>a pointer to the parent link in the spanning tree</li><li>a pointer to the joint connecting the link to the parent</li></ul><p>For the first link of the traversal (i.e. base of the traversal) there is not spanning tree parent, so the point to the parent link/joint are NULL.</p>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
@@ -506,8 +506,8 @@
     </div>
   </div>
 </div>
-<script src="search-v1.js"></script>
-<script src="searchdata-v1.js" async="async"></script>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
 <footer><nav>
   <div class="m-container">
     <div class="m-row">

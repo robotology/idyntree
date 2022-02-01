@@ -19,6 +19,21 @@
     </incdepgraph>
     <innerclass refid="classiDynTree_1_1GyroscopeSensor" prot="public">iDynTree::GyroscopeSensor</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="GyroscopeSensor_8h_1a303a7b672a9817d74c5a6279fbfe5e34" prot="public" static="no">
+        <type>AngularMotionVector3</type>
+        <definition>typedef AngularMotionVector3 iDynTree::AngVelocity</definition>
+        <argsstring></argsstring>
+        <name>AngVelocity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/GyroscopeSensor.h" line="20" column="34" bodyfile="iDynTree/Sensors/GyroscopeSensor.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

@@ -62,7 +62,7 @@
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="Model_8h.html">&lt;iDynTree/Model/Model.h&gt;</a></div>
         </h1>
         <p>Class that represents a generic multibody model.</p>
-        <div class="m-block m-default">
+        <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
@@ -73,7 +73,7 @@
               </ul>
             </li>
           </ul>
-        </div>
+        </nav>
 <p>A model is composed by rigid bodies (i.e. links) connected by joints. Each joint can have from 0 to 6 degrees of freedom.</p><p>Each link has a &quot;link frame&quot; rigidly attached to it. Additionally, other rigidly attachable frames can be defined for each link.</p><p>The model contains also a serialization for the different elements, i.e. a function between:</p><ul><li>joint names and the integers 0..<a href="classiDynTree_1_1Model.html#ab69c340d5fde147645854c880fbded18" class="m-doc">getNrOfJoints()</a>-1</li><li>dof names and the integers 0..<a href="classiDynTree_1_1Model.html#aca35ec05d4b7358b38df769deb0513a6" class="m-doc">getNrOfDOFs()</a>-1</li><li>link names and the integers 0..<a href="classiDynTree_1_1Model.html#aca270a902d0b0328c0d8afb1727d2154" class="m-doc">getNrOfLinks()</a>-1</li><li>frame names and the integers 0..<a href="classiDynTree_1_1Model.html#ace5ed1d2735cda051cdd50f9e46c4dd8" class="m-doc">getNrOfFrames()</a>-1</li></ul><p>For simplicity, these mappings are build when building the model. In particular the link and joint indices are assigned when the links and joint are added to the model using the <code>addLink</code> and <code>addJoint</code> methods.</p><p>The DOF indices are also assigned when the joint is added to the model with the addJoint method. For example if a model is composed only of 0 or 1 DOF joints and the 1 DOFs joints are added before the 0 DOFs then the joint index and dof index for 1 DOF joints will be coincident (this is how the URDF parser is actually implemented). For this reason the current implementation does not have a concept of DOF explicit identifier, i.e. a getDOFName(DOFIndex dofIndex) method does not exist.</p><p>The frame indices between 0 and <a href="classiDynTree_1_1Model.html#aca270a902d0b0328c0d8afb1727d2154" class="m-doc">getNrOfLinks()</a>-1 are always assigned to the &quot;main&quot; link frame of the link with the same index. The frame indices between <a href="classiDynTree_1_1Model.html#aca270a902d0b0328c0d8afb1727d2154" class="m-doc">getNrOfLinks()</a> and <a href="classiDynTree_1_1Model.html#ace5ed1d2735cda051cdd50f9e46c4dd8" class="m-doc">getNrOfFrames()</a>-1 are assigned when the additional frame is added to the model with the addAdditionalFrameToLink call. All the additional frame indices are incremented by 1 whenever a new link is added, to ensure that its &quot;link frame&quot; has a frame index in the 0...<a href="classiDynTree_1_1Model.html#aca270a902d0b0328c0d8afb1727d2154" class="m-doc">getNrOfLinks()</a>-1 range.</p>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
@@ -886,8 +886,8 @@
     </div>
   </div>
 </div>
-<script src="search-v1.js"></script>
-<script src="searchdata-v1.js" async="async"></script>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
 <footer><nav>
   <div class="m-container">
     <div class="m-row">

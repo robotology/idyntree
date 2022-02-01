@@ -62,7 +62,7 @@
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="ArticulatedBodyInertia_8h.html">&lt;iDynTree/Core/ArticulatedBodyInertia.h&gt;</a></div>
         </h1>
         <p>Class representing an Articulated Body Inertia.</p>
-        <div class="m-block m-default">
+        <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
@@ -74,7 +74,7 @@
               </ul>
             </li>
           </ul>
-        </div>
+        </nav>
 <p>For more information on Articulated Body Inertia, please check Featherstone 2008, Chapter 7 .</p><p>Storage: The symmetric articulated body inertia is stored as 3 3x3 matrices :</p><ul><li>the linearLinear is the top left submatrix</li><li>the linearAngular is the top right submatrix</li><li>the angularAngular is the bottom right submatrix</li></ul><p>The bottom left submatrix can be obtained as the transpose of the linearAngular matrix.</p><aside class="m-note m-danger"><h4>Warning</h4><p>This class is exposing for convenience the IMatrix interface. Notice that using this methods you can damage the underlyng articulated body inertia. In doubt, don&#x27;t use them and rely on more high level functions.</p></aside>
         <section id="pub-static-methods">
           <h2><a href="#pub-static-methods">Public static functions</a></h2>
@@ -296,8 +296,8 @@ $U d^{-1} U^\top$
     </div>
   </div>
 </div>
-<script src="search-v1.js"></script>
-<script src="searchdata-v1.js" async="async"></script>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
 <footer><nav>
   <div class="m-container">
     <div class="m-row">

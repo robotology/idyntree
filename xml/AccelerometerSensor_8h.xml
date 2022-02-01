@@ -7,6 +7,21 @@
     <includedby refid="AllSensorsTypes_8h" local="no">iDynTree/Sensors/AllSensorsTypes.h</includedby>
     <innerclass refid="classiDynTree_1_1AccelerometerSensor" prot="public">iDynTree::AccelerometerSensor</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="AccelerometerSensor_8h_1ae032ae81e0b23b33446033eefb13e629" prot="public" static="no">
+        <type>LinearMotionVector3</type>
+        <definition>typedef LinearMotionVector3 iDynTree::LinAcceleration</definition>
+        <argsstring></argsstring>
+        <name>LinAcceleration</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Sensors/AccelerometerSensor.h" line="20" column="33" bodyfile="iDynTree/Sensors/AccelerometerSensor.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

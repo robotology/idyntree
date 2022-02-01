@@ -62,7 +62,7 @@
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="IJoint_8h.html">&lt;iDynTree/Model/IJoint.h&gt;</a></div>
         </h1>
         <p>Interface (i.e.</p>
-        <div class="m-block m-default">
+        <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
@@ -76,7 +76,7 @@
               </ul>
             </li>
           </ul>
-        </div>
+        </nav>
 <p>abstract class) exposed by classes that implement a Joint. A Joint is the basic representation of the motion allowed between two links.</p><p>This interface is mean to be used by kinematics and dynamics algorithm to query informations related to a joint and the relations (relative position, relative twist, relative acceleration) that it imposes to the connected links.</p><p>The design of this class is heavily inspired by the Simbody implementation of joints, as described in this article:</p><p>Seth, Ajay, et al. &quot;Minimal formulation of joint motion for biomechanisms.&quot; Nonlinear dynamics 62.1-2 (2010): 291-303.</p><p>Other sources of inspiration are RBDL, DART and Featherstone book.</p><p>With respect to all this implementation we model the joints as undirected quantities, i.e. as object in which information can be queryied in symmetric way with respect to the attached links. This mean there is no parent and child link, but the joint is attached to two link, and the interface is agnostic with respect to which link the code considers as &quot;parent&quot; or &quot;child&quot;.</p>
         <section id="derived-classes">
           <h2><a href="#derived-classes">Derived classes</a></h2>
@@ -583,8 +583,8 @@ $q$
     </div>
   </div>
 </div>
-<script src="search-v1.js"></script>
-<script src="searchdata-v1.js" async="async"></script>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
 <footer><nav>
   <div class="m-container">
     <div class="m-row">

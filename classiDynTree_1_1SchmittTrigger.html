@@ -62,7 +62,7 @@
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="SchmittTrigger_8h.html">&lt;iDynTree/Estimation/SchmittTrigger.h&gt;</a></div>
         </h1>
         <p>Schmitt Trigger class for binary state detection This device is used to obtain a binary state (ON/OFF) at some time instant depending on a value inputted to the device.</p>
-        <div class="m-block m-default">
+        <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
@@ -79,7 +79,7 @@
               </ul>
             </li>
           </ul>
-        </div>
+        </nav>
 <p>It is initialized with 4 parameters,</p><table class="m-table"><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>stableOFFTime</td><td>double</td><td>Time to elapse to switch to OFF state, once low threshold is triggered</td></tr><tr><td>stableONTime</td><td>double</td><td>Time to elapse to switch to ON state, once high threshold is triggered</td></tr><tr><td>lowValueThreshold</td><td>double</td><td>Threshold Value to turn state OFF</td></tr><tr><td>highValueThreshold</td><td>double</td><td>Threshold Value to turn state ON</td></tr></tbody></table><p>The device is first configured with the user-defined parameter settings, but is not activated until the first call of updateDevice method. The updateDevice method must be called at every iteration with the current time and the value to be compared, for continuously updating the binary state of the device.</p><p>For instance, if the current state is OFF and there is a call to updateDevice with current time and an input value greater than the highValueThreshold, then a timer is activated and is updated at every call to updateMethod. If there are consecutive calls to the updateMethod with input values greater than the highValueThreshold, until the timer lapses stableONTime, then the state is switched to ON, otherwise it is remains OFF.</p><p>NOTE: Time is specified relative to the process that is instantiating this device. Default state is set to ON during instantiation. This can be changed accordingly using the setInitialState method.</p><p>NOTE: There are no default parameters to the Schmitt Trigger. These parameters are set through the constructor during instantiation.</p>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
@@ -456,8 +456,8 @@
     </div>
   </div>
 </div>
-<script src="search-v1.js"></script>
-<script src="searchdata-v1.js" async="async"></script>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
 <footer><nav>
   <div class="m-container">
     <div class="m-row">

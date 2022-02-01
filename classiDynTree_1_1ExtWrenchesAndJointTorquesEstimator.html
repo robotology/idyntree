@@ -62,7 +62,7 @@
           <div class="m-doc-include m-code m-inverted m-text-right"><span class="cp">#include</span> <a class="cpf" href="ExtWrenchesAndJointTorquesEstimator_8h.html">&lt;iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h&gt;</a></div>
         </h1>
         <p>Estimator for external wrenches and joint torques using internal F/T sensors.</p>
-        <div class="m-block m-default">
+        <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
             <li>
@@ -73,7 +73,7 @@
               </ul>
             </li>
           </ul>
-        </div>
+        </nav>
 <p>This is a class for estimating external wrenches and joint torques using as an input the robot velocities and the accelerations and the measurement of internal six axis F/T sensors.</p><p>The kinematic information (position,velocity and acceleration) necessary for the estimation can be provided in two ways:</p><ul><li>using the updateKinematicsFromFloatingBase</li><li>using the updateKinematicsFromFixedBase</li></ul><p>Note that in both ways there is no need (for the estimation) to provide the absolute position and linear velocity of the robot with respect to the inertial frame. The effect of gravity is considered by directly using the proper acceleration in the case of the floating frame (proper acceleration can be directly measured by an accelerometer) or by directly providing the gravity vector in the fixed frame case.</p>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
@@ -570,8 +570,8 @@
     </div>
   </div>
 </div>
-<script src="search-v1.js"></script>
-<script src="searchdata-v1.js" async="async"></script>
+<script src="search-v2.js"></script>
+<script src="searchdata-v2.js" async="async"></script>
 <footer><nav>
   <div class="m-container">
     <div class="m-row">
