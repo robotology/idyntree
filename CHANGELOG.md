@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Implement `idyntree-model-view-meshcat` application. (https://github.com/robotology/idyntree/pull/961)
 ### Fixed
-- Once `VisualElement::childElementForName` is called with input equal to `material` a pointer to the `materialInfo` is stored inside the `VisualElement`. (https://github.com/robotology/idyntree/pull/961)
+- Fix loading material and color information from URDF files. (https://github.com/robotology/idyntree/pull/961)
 
 ## [4.3.1] - 2022-01-10
 
