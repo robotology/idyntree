@@ -11,6 +11,7 @@
 #ifndef IDYNTREE_IRRLICHT_UTILS_H
 #define IDYNTREE_IRRLICHT_UTILS_H
 
+#include <EMaterialTypes.h>
 #include <iDynTree/Model/SolidShapes.h>
 #include <iDynTree/Visualizer.h>
 
@@ -78,7 +79,7 @@ inline const irr::core::vector3df idyntree2irr_rot(const iDynTree::Rotation & ro
 
 inline irr::video::SMaterial idyntree2irr(const iDynTree::Vector4 & rgbaMaterialId)
 {
-    double ambientCoeff = 1.0;
+    double ambientCoeff = 0.6;
     double diffuseCoeff = 1.0;
     irr::video::SMaterial ret;
     ret.AmbientColor = irr::video::SColorf(ambientCoeff*rgbaMaterialId(0),

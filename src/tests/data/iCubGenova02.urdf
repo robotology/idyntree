@@ -17,9 +17,7 @@
       <geometry>
         <mesh filename="model://iCubGenova02/meshes/dae/root.dae" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="green">
-        <color rgba="0 1 0 1"/>
-      </material>
+      <material name="green"/>
     </visual>
     <collision>
       <origin xyz="-0.0364 0 0.032" rpy="1.57079632679 0 -1.57079632679"/>
@@ -53,9 +51,7 @@
       <geometry>
         <mesh filename="model://iCubGenova02/meshes/dae/r_hip_1.dae" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="black">
-        <color rgba="0 0 0 1"/>
-      </material>
+      <material name="black"/>
     </visual>
     <collision>
       <origin xyz="0.0233655 0.151913 0.0428515000001" rpy="0 0 0"/>
@@ -83,9 +79,7 @@
       <geometry>
         <mesh filename="model://iCubGenova02/meshes/dae/r_hip_2.dae" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="red">
-        <color rgba="1 0 0 1"/>
-      </material>
+      <material name="red"/>
     </visual>
     <collision>
       <origin xyz="0.0701 0.151913 0.0691961998093" rpy="0 0 0"/>
@@ -113,9 +107,7 @@
       <geometry>
         <mesh filename="model://iCubGenova02/meshes/dae/r_hip_3.dae" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="blue">
-        <color rgba="0 0 1 1"/>
-      </material>
+      <material name="blue"/>
     </visual>
     <collision>
       <origin xyz="0.0437089998093 -0.0700999999999 -0.226213" rpy="-1.57079632679 0 -1.57079632679"/>
@@ -141,9 +133,7 @@
       <geometry>
         <mesh filename="model://iCubGenova02/meshes/dae/r_upper_leg.dae" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="yellow">
-        <color rgba="1 1 0 1"/>
-      </material>
+      <material name="yellow"/>
     </visual>
     <collision>
       <origin xyz="0.0700999999999 0.241013 0.0437089998093" rpy="0 0 0"/>
@@ -248,9 +238,7 @@
       <geometry>
         <mesh filename="model://iCubGenova02/meshes/dae/r_lower_leg.dae" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="pink">
-        <color rgba="1 0 1 1"/>
-      </material>
+      <material name="pink"/>
     </visual>
     <collision>
       <origin xyz="0.0462961001907 0.386638 0.0437089998095" rpy="0 0 0"/>
@@ -320,9 +308,7 @@
       <geometry>
         <mesh filename="model://iCubGenova02/meshes/dae/r_ankle_1.dae" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="cyan">
-        <color rgba="0 1 1 1"/>
-      </material>
+      <material name="cyan"/>
     </visual>
     <collision>
       <origin xyz="0.105600000191 0.587138 0.0437089998095" rpy="0 0 0"/>
@@ -378,9 +364,7 @@
       <geometry>
         <mesh filename="model://iCubGenova02/meshes/dae/r_foot.dae" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="white">
-        <color rgba="1 1 1 1"/>
-      </material>
+      <material name="white"/>
     </visual>
     <collision>
       <origin xyz="0.0472089996187 -0.0701000001907 -0.647438" rpy="-1.57079632679 0 -1.57079632679"/>
@@ -427,9 +411,7 @@
       <geometry>
         <mesh filename="model://iCubGenova02/meshes/dae/l_hip_1.dae" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="dblue">
-        <color rgba="0 0 0.8 1"/>
-      </material>
+      <material name="dblue"/>
     </visual>
     <collision>
       <origin xyz="-0.0223861 0.151913 0.0428515000001" rpy="0 0 0"/>
@@ -457,9 +439,7 @@
       <geometry>
         <mesh filename="model://iCubGenova02/meshes/dae/l_hip_2.dae" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="dgreen">
-        <color rgba="0.1 0.8 0.1 1"/>
-      </material>
+      <material name="dgreen"/>
     </visual>
     <collision>
       <origin xyz="-0.0701 0.151913 0.0683914998093" rpy="0 0 0"/>
@@ -487,9 +467,7 @@
       <geometry>
         <mesh filename="model://iCubGenova02/meshes/dae/l_hip_3.dae" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="gray">
-        <color rgba="0.5 0.5 0.5 1"/>
-      </material>
+      <material name="gray"/>
     </visual>
     <collision>
       <origin xyz="-0.0701 0.043409 -0.226213" rpy="-1.57079632679 0 0"/>
@@ -1581,4 +1559,39 @@
 		<robotNamefromConfigFile>model://iCubGenova02/conf/gazebo_iCubGenova02_robotname.ini</robotNamefromConfigFile>
 	</plugin>
 	</gazebo>
+
+
+<material name="green">
+  <color rgba="0 1 0 1"/>
+</material>
+<material name="black">
+  <color rgba="0 0 0 1"/>
+</material>
+<material name="red">
+  <color rgba="1 0 0 1"/>
+</material>
+<material name="blue">
+  <color rgba="0 0 1 1"/>
+</material>
+<material name="yellow">
+  <color rgba="1 1 0 1"/>
+</material>
+<material name="pink">
+  <color rgba="1 0 1 1"/>
+</material>
+<material name="cyan">
+  <color rgba="0 1 1 1"/>
+</material>
+<material name="white">
+  <color rgba="1 1 1 1"/>
+</material>
+<material name="dblue">
+  <color rgba="0 0 0.8 1"/>
+</material>
+<material name="dgreen">
+  <color rgba="0.1 0.8 0.1 1"/>
+</material>
+<material name="gray">
+  <color rgba="0.5 0.5 0.5 1"/>
+</material>
 </robot>
