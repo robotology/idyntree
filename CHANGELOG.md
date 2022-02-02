@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Fix loading material and color information from URDF files (https://github.com/robotology/idyntree/pull/961).
-- Make sure that `pip` is aware of the `idyntree` Python package if iDynTree is installed just via CMake ().
+- Make sure that `pip` is aware of the `idyntree` Python package if iDynTree is installed just via CMake (https://github.com/robotology/idyntree/pull/963).
 
 ## [4.3.1] - 2022-01-10
 
