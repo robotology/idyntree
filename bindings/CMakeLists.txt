@@ -156,15 +156,18 @@ if (IDYNTREE_USES_PYTHON_PYBIND11 OR IDYNTREE_USES_PYTHON)
         COMPONENT python)
 
     # Install METADATA file to make pip aware of the idyntree Python package
-    option(IDYNTREE_INSTALL_PYTHON_PIP_METADATA "Use CMake to install Python pip metadata" TRUE)
-    if(IDYNTREE_INSTALL_PYTHON_PIP_METADATA)
+    option(IDYNTREE_PYTHON_PIP_METADATA_INSTALL "Use CMake to install Python pip metadata. Set to false if someone else install it." TRUE)
+    mark_as_advanced(IDYNTREE_PYTHON_PIP_METADATA_INSTALL)
+    set(IDYNTREE_PYTHON_PIP_METADATA_INSTALLER "cmake" CACHE STRING "Specify the string to identify the pip Installer. Default: cmake, change this if you are using another tool.")
+    if(IDYNTREE_PYTHON_PIP_METADATA_INSTALL)
         get_filename_component(PYTHON_METADATA_PARENT_DIR ${PYTHON_INSTDIR} DIRECTORY)
         file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/METADATA "")
         file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/METADATA "Metadata-Version: 2.1${NEW_LINE}")
         file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/METADATA "Name: idyntree${NEW_LINE}")
         file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/METADATA "Version: ${iDynTree_VERSION}${NEW_LINE}")
+        file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/INSTALLER "${IDYNTREE_PYTHON_PIP_METADATA_INSTALLER}${NEW_LINE}")
         install(
-            FILES "${CMAKE_CURRENT_BINARY_DIR}/METADATA"
+            FILES "${CMAKE_CURRENT_BINARY_DIR}/METADATA" "${CMAKE_CURRENT_BINARY_DIR}/INSTALLER"
             DESTINATION ${PYTHON_METADATA_PARENT_DIR}/idyntree-${iDynTree_VERSION}.dist-info
             COMPONENT python)
     endif()
