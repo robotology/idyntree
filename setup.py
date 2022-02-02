@@ -62,6 +62,7 @@ setup(
                            "-DIDYNTREE_USES_WORHP:BOOL=OFF",
                            "-DIDYNTREE_USES_YARP:BOOL=OFF",
                            "-DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF",
+                           "-DIDYNTREE_INSTALL_PYTHON_PIP_METADATA:BOOL=OFF",
                        ] + CIBW_CMAKE_OPTIONS),
     ],
     cmdclass=dict(build_ext=BuildExtension),

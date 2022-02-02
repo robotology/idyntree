@@ -124,13 +124,14 @@ if (IDYNTREE_USES_PYTHON_PYBIND11)
     add_subdirectory(pybind11)
 endif()
 
-# Install main __init__.py file.
 if (IDYNTREE_USES_PYTHON_PYBIND11 OR IDYNTREE_USES_PYTHON)
     if (WIN32)
         set(NEW_LINE "\n\r")
     else()
         set(NEW_LINE "\n")
     endif()
+
+    # Install main __init__.py
     # Clear the file first if it exists.
     file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/__init__.py "")
     # If pybind is enabled, add the corresponding import.
@@ -153,4 +154,19 @@ if (IDYNTREE_USES_PYTHON_PYBIND11 OR IDYNTREE_USES_PYTHON)
         FILES "${CMAKE_CURRENT_BINARY_DIR}/__init__.py"
         DESTINATION ${PYTHON_INSTDIR}
         COMPONENT python)
+
+    # Install METADATA file to make pip aware of the idyntree Python package
+    option(IDYNTREE_INSTALL_PYTHON_PIP_METADATA "Use CMake to install Python pip metadata" TRUE)
+    if(IDYNTREE_INSTALL_PYTHON_PIP_METADATA)
+        get_filename_component(PYTHON_METADATA_PARENT_DIR ${PYTHON_INSTDIR} DIRECTORY)
+        file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/METADATA "")
+        file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/METADATA "Metadata-Version: 2.1${NEW_LINE}")
+        file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/METADATA "Name: idyntree${NEW_LINE}")
+        file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/METADATA "Version: ${iDynTree_VERSION}${NEW_LINE}")
+        install(
+            FILES "${CMAKE_CURRENT_BINARY_DIR}/METADATA"
+            DESTINATION ${PYTHON_METADATA_PARENT_DIR}/idyntree-${iDynTree_VERSION}.dist-info
+            COMPONENT python)
+    endif()
+
 endif()
