@@ -11,19 +11,27 @@
 #include "Texture.h"
 #include "DummyImplementations.h"
 
-void iDynTree::Texture::init(irr::video::IVideoDriver *irrDriver,
+void iDynTree::Texture::init(irr::video::IVideoDriver *irrDriverInput,
                              irr::scene::ISceneManager* sceneManager,
                              const std::string &name,
                              const VisualizerOptions &textureOptions)
 {
-    irrTexture = irrDriver->addRenderTargetTexture(irr::core::dimension2d<irr::u32>(textureOptions.winWidth, textureOptions.winHeight), name.c_str());
+    irrTexture = irrDriverInput->addRenderTargetTexture(irr::core::dimension2d<irr::u32>(textureOptions.winWidth, textureOptions.winHeight), name.c_str());
+    viewport = {0, 0, textureOptions.winWidth, textureOptions.winHeight};
     textureEnvironment.init(sceneManager, textureOptions.rootFrameArrowsDimension);
     textureEnvironment.m_envNode->setVisible(false);
+    irrDriver = irrDriverInput;
+    irrDriver->grab();
 }
 
 iDynTree::Texture::~Texture()
 {
     irrTexture = 0;
+    if (irrDriver)
+    {
+        irrDriver->drop();
+        irrDriver = nullptr;
+    }
 }
 
 iDynTree::IEnvironment &iDynTree::Texture::environment()
@@ -64,10 +72,11 @@ iDynTree::ColorViz iDynTree::Texture::getPixelColor(unsigned int width, unsigned
         irrTexture->unlock();
     }
 
-    pixelOut.r = pixelIrrlicht.getRed();
-    pixelOut.g = pixelIrrlicht.getGreen();
-    pixelOut.b = pixelIrrlicht.getBlue();
-    pixelOut.a = pixelIrrlicht.getAlpha();
+    irr::video::SColorf pixelIrrlichtFloat(pixelIrrlicht);
+    pixelOut.r = pixelIrrlichtFloat.getRed();
+    pixelOut.g = pixelIrrlichtFloat.getGreen();
+    pixelOut.b = pixelIrrlichtFloat.getBlue();
+    pixelOut.a = pixelIrrlichtFloat.getAlpha();
 
     return pixelOut;
 }
@@ -99,18 +108,115 @@ bool iDynTree::Texture::getPixels(std::vector<iDynTree::PixelViz> &pixels) const
             for (size_t height = 0; height < textureDim.Height; ++height)
             {
                 pixelIrrlicht = irr::video::SColor(*(unsigned int*)(buffer + (height * pitch) + (width * bytes)));
+                irr::video::SColorf pixelIrrlichtFloat(pixelIrrlicht);
                 pixels[i].width = width;
                 pixels[i].height = height;
-                pixels[i].r = pixelIrrlicht.getRed();
-                pixels[i].g = pixelIrrlicht.getGreen();
-                pixels[i].b = pixelIrrlicht.getBlue();
-                pixels[i].a = pixelIrrlicht.getAlpha();
+                pixels[i].r = pixelIrrlichtFloat.getRed();
+                pixels[i].g = pixelIrrlichtFloat.getGreen();
+                pixels[i].b = pixelIrrlichtFloat.getBlue();
+                pixels[i].a = pixelIrrlichtFloat.getAlpha();
                 ++i;
             }
         }
 
         irrTexture->unlock();
     }
+
+    return true;
+}
+
+bool iDynTree::Texture::drawToFile(const std::string filename) const
+{
+    if (!irrTexture)
+    {
+        reportError("Texture","drawToFile","Cannot save the texture to file. It has not properly initialized.");
+        return false;
+    }
+
+    auto textureDim = irrTexture->getSize();
+    irr::video::IImage* const image = irrDriver->createImage(irrTexture,
+                                                             irr::core::position2d<irr::s32>(0, 0),
+                                                             textureDim);
+    bool retValue = false;
+    if (image) //should always be true, but you never know
+    {
+        //write screenshot to file
+        if (!irrDriver->writeImageToFile(image, filename.c_str()))
+        {
+            std::stringstream ss;
+            ss << "Impossible to write image file to " << filename;
+            reportError("Texture","drawToFile",ss.str().c_str());
+            retValue = false;
+        }
+        else
+        {
+            retValue = true;
+        }
+
+        //Don't forget to drop image since we don't need it anymore.
+        image->drop();
+    }
+    else
+    {
+        reportError("Texture","drawToFile","Failed to create image from texture.");
+        return false;
+    }
+
+    return retValue;
+}
+
+void iDynTree::Texture::enableDraw(bool enabled)
+{
+    shouldDraw = enabled;
+    forceClear = enabled; //in case the texture has been enabled between one subDraw and the other.
+}
+
+int iDynTree::Texture::width() const
+{
+    if (!irrTexture)
+    {
+        return 0;
+    }
+
+    return irrTexture->getSize().Width;
+}
+
+int iDynTree::Texture::height() const
+{
+    if (!irrTexture)
+    {
+        return 0;
+    }
+
+    return irrTexture->getSize().Height;
+}
+
+bool iDynTree::Texture::setSubDrawArea(int xOffsetFromTopLeft, int yOffsetFromTopLeft, int subImageWidth, int subImageHeight)
+{
+    if (!irrTexture)
+    {
+        reportError("Texture","setSubDrawArea","Cannot get pixel color. The video texture has not been properly initialized.");
+        return false;
+    }
+
+    if (xOffsetFromTopLeft + subImageWidth > width())
+    {
+        reportError("Texture","setSubDrawArea","The specified draw coordinates are out of bounds. The sum of the xOffsetFromTopLeft and width are greater than the texture width.");
+        return false;
+    }
+
+    if (yOffsetFromTopLeft + subImageHeight > height())
+    {
+        reportError("Texture","setSubDrawArea","The specified draw coordinates are out of bounds. The sum of the yOffsetFromTopLeft and height are greater than the texture height.");
+        return false;
+    }
+
+    if (subImageHeight <= 0)
+    {
+        return false;
+    }
+
+    viewport = {xOffsetFromTopLeft, yOffsetFromTopLeft, xOffsetFromTopLeft + subImageWidth, yOffsetFromTopLeft + subImageHeight};
 
     return true;
 }

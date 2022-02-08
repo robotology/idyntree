@@ -854,15 +854,15 @@ public:
     bool getCenterOfMassVelocity(iDynTree::Span<double> vel);
 
     /**
-     * Return the center of mass jacobian, i.e. the 3 \times (n+6) matrix such that:
-     *  getCenterOfMassVelocity() == getCenterOfMassJacobian() * \nu .
+     * Return the center of mass jacobian, i.e. the \f$3 \times (n+6)\f$ matrix such that:
+     *  getCenterOfMassVelocity() == getCenterOfMassJacobian() * \f$ \nu\f$.
      *
      */
     bool getCenterOfMassJacobian(MatrixDynSize & comJacobian);
 
     /**
-     * Return the center of mass jacobian, i.e. the 3 \times (n+6) matrix such that:
-     *  getCenterOfMassVelocity() == getCenterOfMassJacobian() * \nu .
+     * Return the center of mass jacobian, i.e. the \f$3 \times (n+6)\f$ matrix such that:
+     *  getCenterOfMassVelocity() == getCenterOfMassJacobian() * \f$\nu \f$.
      *
      * @warning the MatrixView object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects.
      * @return true on success, false otherwise.

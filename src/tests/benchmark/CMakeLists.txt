@@ -10,7 +10,7 @@ macro(add_benchmark benchmarkName)
     set(testsrc ${benchmarkName}Benchmark.cpp)
     set(testbinary ${benchmarkName}Benchmark)
     add_executable(${testbinary} ${testsrc})
-    target_link_libraries(${testbinary} PRIVATE idyntree-modelio-urdf idyntree-modelio-urdf-kdl idyntree-core
+    target_link_libraries(${testbinary} PRIVATE idyntree-modelio idyntree-modelio-kdl idyntree-core
                                                 idyntree-kdl idyntree-model idyntree-testmodels Eigen3::Eigen)
 endmacro()
 

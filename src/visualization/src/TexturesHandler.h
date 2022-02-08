@@ -37,7 +37,7 @@ public:
     void init(irr::video::IVideoDriver* irrDriver,
               irr::scene::ISceneManager *sceneManager);
 
-    void draw(Environment &defaultEnvironment, Camera& defaultCamera);
+    void draw(Environment &defaultEnvironment, Camera& defaultCamera, bool clearBuffers);
 
     /**
      * @brief Add a texture

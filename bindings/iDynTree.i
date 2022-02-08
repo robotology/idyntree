@@ -83,6 +83,7 @@
 #include "iDynTree/Model/FreeFloatingMatrices.h"
 #include "iDynTree/Model/FreeFloatingState.h"
 #include "iDynTree/Model/ContactWrench.h"
+#include "iDynTree/Model/ModelTestUtils.h"
 
 // Kinematics & Dynamics related functions
 #include "iDynTree/Model/ForwardKinematics.h"
@@ -247,6 +248,7 @@ namespace std {
 %include "iDynTree/Model/FreeFloatingMatrices.h"
 %include "iDynTree/Model/FreeFloatingState.h"
 %include "iDynTree/Model/ContactWrench.h"
+%include "iDynTree/Model/ModelTestUtils.h"
 
 %include "joints.i"
 

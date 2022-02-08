@@ -24,17 +24,31 @@ public:
 
 
     irr::video::ITexture* irrTexture{nullptr};
+    irr::video::IVideoDriver* irrDriver{nullptr};
+    irr::core::rect<irr::s32> viewport;
     Environment textureEnvironment;
+    bool shouldDraw{true};
+    bool forceClear{false};
 
-    void init(irr::video::IVideoDriver* irrDriver, irr::scene::ISceneManager *sceneManager, const std::string& name, const VisualizerOptions& textureOptions);
+    void init(irr::video::IVideoDriver* irrDriverInput, irr::scene::ISceneManager *sceneManager, const std::string& name, const VisualizerOptions& textureOptions);
 
     virtual ~Texture();
 
-    virtual IEnvironment& environment();
+    virtual IEnvironment& environment() override;
 
-    virtual ColorViz getPixelColor(unsigned int width, unsigned int height) const;
+    virtual ColorViz getPixelColor(unsigned int width, unsigned int height) const override;
 
-    virtual bool getPixels(std::vector<PixelViz>& pixels) const;
+    virtual bool getPixels(std::vector<PixelViz>& pixels) const override;
+
+    virtual bool drawToFile(const std::string filename="iDynTreeVisualizerTextureScreenshot.png") const override;
+
+    virtual void enableDraw(bool enabled = true) override;
+
+    virtual int width() const override;
+
+    virtual int height() const override;
+
+    virtual bool setSubDrawArea(int xOffsetFromTopLeft, int yOffsetFromTopLeft, int subImageWidth, int subImageHeight) override;
 
 };
 

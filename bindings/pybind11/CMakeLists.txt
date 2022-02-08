@@ -1,4 +1,4 @@
-pybind11_add_module(pybind11_idyntree SYSTEM idyntree.cpp
+pybind11_add_module(pybind11_idyntree idyntree.cpp
                                     error_utilities.h error_utilities.cpp
                                     idyntree_core.h idyntree_core.cpp
                                     error_utilities.h error_utilities.cpp
@@ -9,7 +9,7 @@ pybind11_add_module(pybind11_idyntree SYSTEM idyntree.cpp
 target_link_libraries(pybind11_idyntree PUBLIC idyntree-core
                                                idyntree-model
                                                idyntree-sensors
-                                               idyntree-modelio-urdf)
+                                               idyntree-modelio)
 
 # The generated Python dynamic module must have the same name as the pybind11
 # module, i.e. `bindings`.

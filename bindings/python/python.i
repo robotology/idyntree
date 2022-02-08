@@ -15,6 +15,9 @@
 // Include NumPy typemaps
 %include "numpy.i"
 
+// Include attributes
+%include <attribute.i>
+
 // Initialize NumPy
 %init %{
 import_array();
@@ -75,6 +78,38 @@ import_array();
             return self.size()
     %}
 %enddef
+
+
+// Magic Python method for using [] on vectors associated to the links
+%define PYTHON_MAGIC_SET_GET_LEN_LINK_ARRAY(ElementType)
+     const ElementType& __getitem__(unsigned int index) {
+        if (index >= self->getNrOfLinks()) {
+            const std::string error = "Index " + std::to_string(index)
+                                    + " not valid. The vector has a size of "
+                                    + std::to_string(self->getNrOfLinks());
+            throw std::out_of_range(error);
+        }
+
+        return (*self)(index);
+     }
+
+     void __setitem__(unsigned int index, const ElementType& element) {
+        if (index >= self->getNrOfLinks()) {
+            const std::string error = "Index " + std::to_string(index)
+                                    + " not valid. The vector has a size of "
+                                    + std::to_string(self->getNrOfLinks());
+            throw std::out_of_range(error);
+        }
+
+        (*self)(index) = element;
+     }
+
+     %pythoncode %{
+        def __len__(self):
+            return self.getNrOfLinks()
+     %}
+%enddef
+
 
 // Magic Python method for using [] on matrices
 %define PYTHON_MAGIC_SET_GET_LEN_MATRIX()
@@ -264,3 +299,75 @@ import_array();
     CPP_TO_NUMPY_SPATIAL_VECTOR(iDynTree::SpatialAcc)
 
 };
+
+//
+// Vector associated to the links
+//
+%extend iDynTree::LinkPositions {
+    PYTHON_MAGIC_SET_GET_LEN_LINK_ARRAY(iDynTree::Transform)
+};
+
+%extend iDynTree::LinkVelArray {
+    PYTHON_MAGIC_SET_GET_LEN_LINK_ARRAY(iDynTree::Twist)
+};
+
+%extend iDynTree::LinkAccArray {
+    PYTHON_MAGIC_SET_GET_LEN_LINK_ARRAY(iDynTree::SpatialAcc)
+};
+
+%extend iDynTree::LinkWrenches {
+    PYTHON_MAGIC_SET_GET_LEN_LINK_ARRAY(iDynTree::Wrench)
+};
+
+%extend iDynTree::Rotation {
+    static iDynTree::Rotation FromPython(double* in, int i, int j) {
+        if (i != 3 || j != 3)
+            throw std::runtime_error("Wrong size of input matrix");
+
+        return iDynTree::RotationRaw(in, static_cast<unsigned>(i), static_cast<unsigned>(j));
+    }
+
+    Rotation(const double* in_data, const std::ptrdiff_t in_rows, const std::ptrdiff_t in_cols) {
+        iDynTree::Rotation* rot = new iDynTree::Rotation(iDynTree::RotationRaw(in_data,
+                                                                               static_cast<unsigned>(in_rows),
+                                                                               static_cast<unsigned>(in_cols)));
+        return rot;
+    }
+};
+
+%extend iDynTree::Position {
+    static iDynTree::Position FromPython(double* in, int size) {
+        if (size != 3)
+            throw std::runtime_error("Wrong size of input array");
+
+        return iDynTree::PositionRaw(in, static_cast<unsigned>(size));
+    }
+
+    Position(const double* in_data, const unsigned in_size) {
+        iDynTree::Position* pos = new iDynTree::Position(iDynTree::PositionRaw(in_data, in_size));
+        return pos;
+    }
+};
+
+%extend iDynTree::Transform {
+
+    void setPosition(const double* in_data, const unsigned in_size) {
+        $self->setPosition(iDynTree::PositionRaw(in_data, static_cast<unsigned>(in_size)));
+    }
+
+    void setRotation(const double* in_data,
+                     const std::ptrdiff_t in_rows,
+                     const std::ptrdiff_t in_cols) {
+        $self->setRotation(iDynTree::RotationRaw(in_data,
+                                                 static_cast<unsigned>(in_rows),
+                                                 static_cast<unsigned>(in_cols)));
+    }
+};
+
+
+%attributeref(iDynTree::FreeFloatingPos, iDynTree::Transform&, worldBasePos)
+%attributeref(iDynTree::FreeFloatingPos, iDynTree::JointPosDoubleArray&, jointPos)
+%attributeref(iDynTree::FreeFloatingVel, iDynTree::Twist&, baseVel)
+%attributeref(iDynTree::FreeFloatingVel, iDynTree::JointDOFsDoubleArray&, jointVel)
+%attributeref(iDynTree::FreeFloatingAcc, iDynTree::SpatialAcc&, baseAcc)
+%attributeref(iDynTree::FreeFloatingAcc, iDynTree::JointDOFsDoubleArray&, jointAcc)

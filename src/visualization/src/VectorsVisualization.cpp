@@ -46,8 +46,6 @@ void VectorsVisualization::drawVector(size_t vectorIndex)
 
     irr::core::vector3df arrowRotation = idyntree2irr_rot(arrowRotationMatrix);
 
-    irr::scene::ISceneNode * frameNode = m_smgr->addEmptySceneNode();
-
     irr::scene::IMesh* arrowMesh = m_smgr->getGeometryCreator()->createArrowMesh(4, 8, arrowHeight, 0.9f * arrowHeight,
                                                                                  arrowWidth, 2.0f * arrowWidth);
 
@@ -57,6 +55,7 @@ void VectorsVisualization::drawVector(size_t vectorIndex)
     }
     else
     {
+        irr::scene::ISceneNode * frameNode = m_smgr->addEmptySceneNode();
         m_vectors[vectorIndex].visualizationNode = m_smgr->addMeshSceneNode(arrowMesh,frameNode);
     }
     m_vectors[vectorIndex].visualizationNode->setPosition(arrowPosition);

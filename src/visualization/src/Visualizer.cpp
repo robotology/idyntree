@@ -130,6 +130,11 @@ struct Visualizer::VisualizerPimpl
     irr::video::IVideoDriver* m_irrDriver;
 
     /**
+     * Irrlicht video data.
+     */
+    irr::video::SExposedVideoData m_irrVideoData;
+
+    /**
      * Camera used by the visualization.
      */
     Camera m_camera;
@@ -163,6 +168,11 @@ struct Visualizer::VisualizerPimpl
      * Set of labels
      */
     std::unordered_map<std::string, Label> m_labels;
+
+    /**
+     * The scene was started but not ended yet
+     */
+    bool m_subDrawStarted{false};
 
     struct ColorPalette
     {
@@ -291,6 +301,10 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
     // Get video driver
     pimpl->m_irrDriver = pimpl->m_irrDevice->getVideoDriver();
 
+    pimpl->m_irrVideoData = pimpl->m_irrDriver->getExposedVideoData(); //save the current window settings.
+                                                                       //This is helpful in case other Viualizer objects are created
+                                                                       // since Irrlicht by default draws on the last window opened.
+
     // Always visualize the mouse cursor
     pimpl->m_irrDevice->getCursorControl()->setVisible(true);
 
@@ -405,18 +419,29 @@ void Visualizer::draw()
         return;
     }
 
+    if (!pimpl->m_subDrawStarted)
+    {
+        int winWidth = width();
+        int winHeight = height();
 
-    pimpl->m_irrDriver->beginScene(true,true, pimpl->m_environment.m_backgroundColor.toSColor());
+        if (winHeight <= 0)
+        {
+            return;
+        }
 
-    pimpl->m_textures.draw(pimpl->m_environment, pimpl->m_camera);
+        pimpl->m_irrDriver->beginScene(true,true, pimpl->m_environment.m_backgroundColor.toSColor(), pimpl->m_irrVideoData);
 
-    auto winDimensions = pimpl->m_irrDriver->getScreenSize();
+        pimpl->m_irrDriver->setViewPort(irr::core::rect<irr::s32>(0, 0, winWidth, winHeight));
 
-    pimpl->m_camera.setAspectRatio(winDimensions.Width/ (float)winDimensions.Height);
+        pimpl->m_textures.draw(pimpl->m_environment, pimpl->m_camera, true);
 
-    pimpl->m_irrSmgr->drawAll();
+        pimpl->m_camera.setAspectRatio(winWidth/ (float)winHeight);
+
+        pimpl->m_irrSmgr->drawAll();
+    }
 
     pimpl->m_irrDriver->endScene();
+    pimpl->m_subDrawStarted = false;
 
     int fps = pimpl->m_irrDriver->getFPS();
 
@@ -433,7 +458,56 @@ void Visualizer::draw()
     }
 
 #else
-    reportError("Visualizer","init","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
+    reportError("Visualizer","draw","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
+#endif
+}
+
+void Visualizer::subDraw(int xOffsetFromTopLeft, int yOffsetFromTopLeft, int subImageWidth, int subImageHeight)
+{
+#ifdef IDYNTREE_USES_IRRLICHT
+    if( !pimpl->m_isInitialized )
+    {
+        reportError("Visualizer","subDraw","Impossible to run not initialized visualizer");
+        return;
+    }
+
+    if (xOffsetFromTopLeft + subImageWidth > width())
+    {
+        reportError("Visualizer","subDraw","The specified draw coordinates are out of bounds. The sum of the xOffsetFromTopLeft and width are greater than the window width.");
+        return;
+    }
+
+    if (yOffsetFromTopLeft + subImageHeight > height())
+    {
+        reportError("Visualizer","subDraw","The specified draw coordinates are out of bounds. The sum of the yOffsetFromTopLeft and height are greater than the window height.");
+        return;
+    }
+
+    if (subImageHeight <= 0)
+    {
+        return;
+    }
+
+    bool clearTextureBuffers = false;
+    if (!pimpl->m_subDrawStarted)
+    {
+        pimpl->m_irrDriver->beginScene(true,true, pimpl->m_environment.m_backgroundColor.toSColor(), pimpl->m_irrVideoData);
+        pimpl->m_subDrawStarted = true;
+        clearTextureBuffers = true;
+    }
+
+    pimpl->m_textures.draw(pimpl->m_environment, pimpl->m_camera, clearTextureBuffers);
+
+    pimpl->m_camera.setAspectRatio(subImageWidth/ (float)subImageHeight);
+
+    pimpl->m_irrDriver->setViewPort(irr::core::rect<irr::s32>(0, 0, width(), height())); //workaround for http://irrlicht.sourceforge.net/forum/viewtopic.php?f=7&t=47004
+    pimpl->m_irrDriver->setViewPort(irr::core::rect<irr::s32>(xOffsetFromTopLeft, yOffsetFromTopLeft,
+                                                              xOffsetFromTopLeft + subImageWidth, yOffsetFromTopLeft + subImageHeight));
+
+    pimpl->m_irrSmgr->drawAll();
+
+#else
+    reportError("Visualizer","subDraw","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
 #endif
 }
 
@@ -460,16 +534,18 @@ bool Visualizer::drawToFile(const std::string filename)
             reportError("Visualizer","drawToFile",ss.str().c_str());
             retValue = false;
         }
+        else
+        {
+            retValue = true;
+        }
 
         //Don't forget to drop image since we don't need it anymore.
         image->drop();
-
-        retValue = true;
     }
     else
     {
         reportError("Visualizer","drawToFile","Error in calling irr::video::IVideoDriver::createScreenShot method");
-        return retValue = false;
+        return false;
     }
 #else
     IDYNTREE_UNUSED(filename);
@@ -509,6 +585,11 @@ ICamera& Visualizer::camera()
 }
 
 IEnvironment& Visualizer::enviroment()
+{
+    return environment();
+}
+
+IEnvironment &Visualizer::environment()
 {
     return pimpl->m_environment;
 }
@@ -566,6 +647,38 @@ ILabel &Visualizer::getLabel(const std::string &labelName)
 #endif
 }
 
+int Visualizer::width() const
+{
+#ifdef IDYNTREE_USES_IRRLICHT
+    if( !pimpl->m_isInitialized )
+    {
+        reportError("Visualizer","width","Visualizer not initialized.");
+        return 0;
+    }
+
+    auto winDimensions = pimpl->m_irrDriver->getScreenSize();
+    return winDimensions.Width;
+#else
+    return 0;
+#endif
+}
+
+int Visualizer::height() const
+{
+#ifdef IDYNTREE_USES_IRRLICHT
+    if( !pimpl->m_isInitialized )
+    {
+        reportError("Visualizer","height","Visualizer not initialized.");
+        return 0;
+    }
+
+    auto winDimensions = pimpl->m_irrDriver->getScreenSize();
+    return winDimensions.Height;
+#else
+    return 0;
+#endif
+}
+
 bool Visualizer::run()
 {
 #ifdef IDYNTREE_USES_IRRLICHT
@@ -617,6 +730,10 @@ void Visualizer::close()
 bool Visualizer::isWindowActive() const
 {
 #ifdef IDYNTREE_USES_IRRLICHT
+    if( !pimpl->m_isInitialized )
+    {
+        return false;
+    }
     return pimpl->m_irrDevice->isWindowActive();
 #else
     return false;
@@ -652,8 +769,8 @@ bool Visualizer::setColorPalette(const std::string &name)
         return false;
     }
 
-    this->enviroment().setBackgroundColor(irrlicht2idyntree(colors->second.background));
-    this->enviroment().setFloorGridColor(irrlicht2idyntree(colors->second.gridColor));
+    this->environment().setBackgroundColor(irrlicht2idyntree(colors->second.background));
+    this->environment().setFloorGridColor(irrlicht2idyntree(colors->second.gridColor));
 
     this->vectors().setVectorsColor(irrlicht2idyntree(colors->second.vector));
     this->vectors().setVectorsDefaultColor(irrlicht2idyntree(colors->second.vector));

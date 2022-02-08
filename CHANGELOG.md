@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). 
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [Unreleased Major]
+
+### Added
+- Implement the possibility to use `FromPython` to generate rotation and position in the python
+  SWIG bindings starting from arrays (https://github.com/robotology/idyntree/pull/959)
 
 ## [4.4.0] - 2022-02-08
 
@@ -23,6 +27,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.3.0] - 2021-11-22
 
 ### Added
+- Added the possibility to draw in different portions of the visualizer window and textures at the same time. Allow disabling the drawing on textures (https://github.com/robotology/idyntree/pull/903).
+- Implement the `operator[]` for `LinkPositions`, `LinkVelArray` and `LinkAccArray` in the swig python bindings (https://github.com/robotology/idyntree/pull/949)
+- Expose `ModelTestUtils` in swig bindings (https://github.com/robotology/idyntree/pull/949)
+- Define base and joints attributes for `FreeFloatingPos`, `FreeFloatingVel` and `FreeFloatingAcc` in swig bindings (https://github.com/robotology/idyntree/pull/949)
+
+### Deprecated
+- The `iDynTree::Visualizer::enviroment()` was deprecated. Please use the `iDynTree::Visualizer::environment()` method instead (https://github.com/robotology/idyntree/pull/903).
+- The `iDynTree::idyntree-modelio-urdf` CMake imported target used when using classes such as `iDynTree::ModelLoader` and `iDynTree::ModelExporter`  was deprecated. Please use the `iDynTree::idyntree-modelio` imported target instead. 
+
+### Removed 
+- The tools that depend on YARP (`urdf2dh`, `yarprobotstatepublisher`, `idyntree-sole-gui`, `iDynTreePlotter`) have been moved in [`idyntree-yarp-tools`](https://github.com/robotology/idyntree-yarp-tools) and their have been removed from iDynTree, together with the the option `IDYNTREE_COMPILES_YARP_TOOLS` that was been introduced to disable their compilation in iDynTree 3 (https://github.com/robotology/idyntree/pull/940).
+
+### Fixed
+- Fixed the conversion from irrlicht pixels to iDynTree pixels. Fixed a typo in the environment method of the visualizer. Fixed the running of two visualizer instances in the same process (https://github.com/robotology/idyntree/pull/903).
+- Fixed the update of the vectors in the visualization that caused the FPS to drop (https://github.com/robotology/idyntree/pull/921).
+- Fixed compatibility with pybind11 >= 2.6.0 (https://github.com/robotology/idyntree/issues/867, https://github.com/robotology/idyntree/pull/937).
+
+## [Unreleased]
+
+### Added 
 - Added support for exporting joint position limits to URDF for 1-DoF joints
   (prismatic and revolute).
 - Added pybind11 python bindings for adding and reading joint limits.
@@ -44,6 +68,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [4.2.0] - 2021-07-23
 
+### Added
 - Add the possibility to pass the zmq url to the meshcat visualizer, to simplify its use in [Google Colab](https://colab.research.google.com) (https://github.com/robotology/idyntree/pull/905).
 
 ## [4.1.0] - 2021-07-22
@@ -442,7 +467,7 @@ As this is an `inline` function, this modification does not affect `iDynTree`'s 
 - The `IVector`, `IRawVector`, `IMatrix` and `IRawMatrix` interfaces have been removed for performance reasons, 
   see https://github.com/robotology/idyntree/issues/98#issuecomment-158823148 . If you want to write generic 
   code in C++ you can rely on templates, and on Matlab and Python you can rely on the native dynamic type system. 
-   
+  
 - All the core classes that have a fixed size (`Position`, `Rotation`, `Transform`, `SpatialMotionVector`, etc, etc) are 
   not initialized by their empty constructor for performance reasons, see https://github.com/robotology/idyntree/issues/98#issuecomment-158795881 .
   From now on, make sure that initialize them before any use. Most of those classes should have a `zero()` method to
