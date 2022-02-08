@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.4.0] - 2022-02-08
+
 ### Added
 - Implement `idyntree-model-view-meshcat` application (https://github.com/robotology/idyntree/pull/961).
 
