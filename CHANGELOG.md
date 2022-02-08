@@ -10,6 +10,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Implement the possibility to use `FromPython` to generate rotation and position in the python
   SWIG bindings starting from arrays (https://github.com/robotology/idyntree/pull/959)
 
+### Added
+- Implement `idyntree-model-view-meshcat` application (https://github.com/robotology/idyntree/pull/961).
+
+### Fixed
+- Fix loading material and color information from URDF files (https://github.com/robotology/idyntree/pull/961).
+- Make sure that `pip` is aware of the `idyntree` Python package if iDynTree is installed just via CMake (https://github.com/robotology/idyntree/pull/963).
+
+## [4.3.1] - 2022-01-10
+
+### Fixed
+- Fixed `iDynTree::ModelExporter` class and `idyntree-model-simplify-shapes` utility to generate specification-conforming URDF files, by adding huge velocity and effort limits to joints, as these limits are currently not stored inside the `iDynTree::Model` class (https://github.com/robotology/idyntree/pull/957, https://github.com/robotology/idyntree/issues/955).
+
 ## [4.3.0] - 2021-11-22
 
 ### Added

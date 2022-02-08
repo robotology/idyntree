@@ -29,6 +29,7 @@ setuptools.setup(
                 "-DIDYNTREE_USES_WORHP:BOOL=OFF",
                 "-DIDYNTREE_USES_YARP:BOOL=OFF",
                 "-DIDYNTREE_USES_ICUB_MAIN:BOOL=OFF",
+                "-DIDYNTREE_PYTHON_PIP_METADATA_INSTALL:BOOL=OFF",
             ]
             + CIBW_CMAKE_OPTIONS,
         ),

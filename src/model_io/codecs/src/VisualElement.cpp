@@ -48,7 +48,9 @@ namespace iDynTree {
         } else if (name == "geometry") {
             return std::make_shared<GeometryElement>(m_info.m_solidShape);
         } else if (name == "material") {
-            return std::make_shared<MaterialElement>(m_info.m_material);
+            auto ptr = std::make_shared<MaterialElement>(nullptr);
+            m_info.m_material = ptr->materialInfo();
+            return ptr;
         }
         return std::make_shared<XMLElement>(name);
     }

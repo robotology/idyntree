@@ -22,7 +22,7 @@ Development of new features follows the [GitHub Flow](https://guides.github.com/
 In a nutshell, development of new features/bugfixes happens in separated branch. When you believe your contribution is stable you can open a pull request against master, where your code will be review by other contributors prior to merging it.  
 
 ## Continuous Integration 
-We use [https://en.wikipedia.org/wiki/Continuous_integration](Continuous Integration) to make 
+We use [Continuous Integration](https://en.wikipedia.org/wiki/Continuous_integration) to make 
 sure that proposed changes in the library do not cause regression. In particular we use 
 [GitHub Actions](https://travis-ci.org/robotology/idyntree) for Continuous Integration on Linux, macOS and Windows. 
 
