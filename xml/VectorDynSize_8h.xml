@@ -20,7 +20,6 @@
     <includedby refid="EigenHelpers_8h" local="no">iDynTree/Core/EigenHelpers.h</includedby>
     <includedby refid="SparseMatrix_8h" local="no">iDynTree/Core/SparseMatrix.h</includedby>
     <includedby refid="Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includedby>
-    <includedby refid="robotstatepublisher_8h" local="no">robotstatepublisher.h</includedby>
     <includedby refid="BoundingBoxHelpers_8h" local="no">iDynTree/BoundingBoxHelpers.h</includedby>
     <includedby refid="ConvexHullHelpers_8h" local="no">iDynTree/ConvexHullHelpers.h</includedby>
     <includedby refid="InverseKinematicsData_8h" local="no">private/InverseKinematicsData.h</includedby>
@@ -39,20 +38,14 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="3">
+      <node id="2">
         <label>iDynTree/BoundingBoxHelpers.h</label>
         <link refid="BoundingBoxHelpers_8h"/>
-      </node>
-      <node id="2">
-        <label>robotstatepublisher.h</label>
-        <link refid="robotstatepublisher_8h"/>
       </node>
       <node id="1">
         <label>iDynTree/Core/VectorDynSize.h</label>
         <link refid="VectorDynSize_8h"/>
         <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
         </childnode>
       </node>
     </invincdepgraph>

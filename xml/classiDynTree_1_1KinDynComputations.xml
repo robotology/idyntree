@@ -2153,7 +2153,7 @@
 <para>Return the center of mass jacobian, i.e. </para>
         </briefdescription>
         <detaileddescription>
-<para>the 3 \times (n+6) matrix such that: <ref refid="classiDynTree_1_1KinDynComputations_1a8e020a81ee67ae7eb4a288471f4d06ca" kindref="member">getCenterOfMassVelocity()</ref> == <ref refid="classiDynTree_1_1KinDynComputations_1ac320cbe545e36b4d00c0f63f528e578b" kindref="member">getCenterOfMassJacobian()</ref> * \nu . </para>
+<para>the <formula id="260">$3 \times (n+6)$</formula> matrix such that: <ref refid="classiDynTree_1_1KinDynComputations_1a8e020a81ee67ae7eb4a288471f4d06ca" kindref="member">getCenterOfMassVelocity()</ref> == <ref refid="classiDynTree_1_1KinDynComputations_1ac320cbe545e36b4d00c0f63f528e578b" kindref="member">getCenterOfMassJacobian()</ref> * <formula id="261">$ \nu$</formula>. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -2172,7 +2172,7 @@
 <para>Return the center of mass jacobian, i.e. </para>
         </briefdescription>
         <detaileddescription>
-<para>the 3 \times (n+6) matrix such that: <ref refid="classiDynTree_1_1KinDynComputations_1a8e020a81ee67ae7eb4a288471f4d06ca" kindref="member">getCenterOfMassVelocity()</ref> == <ref refid="classiDynTree_1_1KinDynComputations_1ac320cbe545e36b4d00c0f63f528e578b" kindref="member">getCenterOfMassJacobian()</ref> * \nu .</para>
+<para>the <formula id="260">$3 \times (n+6)$</formula> matrix such that: <ref refid="classiDynTree_1_1KinDynComputations_1a8e020a81ee67ae7eb4a288471f4d06ca" kindref="member">getCenterOfMassVelocity()</ref> == <ref refid="classiDynTree_1_1KinDynComputations_1ac320cbe545e36b4d00c0f63f528e578b" kindref="member">getCenterOfMassJacobian()</ref> * <formula id="262">$\nu $</formula>.</para>
 <para><simplesect kind="warning"><para>the <ref refid="classiDynTree_1_1MatrixView" kindref="compound">MatrixView</ref> object should point an already existing memory. Memory allocation and resizing cannot be achieved with this kind of objects. </para>
 </simplesect>
 <simplesect kind="return"><para>true on success, false otherwise. </para>
@@ -2606,22 +2606,22 @@
       <header>Methods to get quantities related to unconstrained free floating equation of motions.</header>
       <description><para>This methods permits to compute several quantities related to free floating equation of methods.</para>
 <para>Note that this equations needs to be coupled with a description of the interaction between the model and the enviroment (such as a contant model, a bilateral constraint on some links or by considering some external forces as inputs) to actually obtain a dynamical system description of the mechanical model evolution.</para>
-<para>The equations of motion of a free floating mechanical system under the effect of a uniform gravitational field are: <formula id="260">\[ M(q) \dot{\nu} + C(q, \nu) \nu + G(q) = \begin{bmatrix} 0_{6\times1} \newline \tau \end{bmatrix} + \sum_{L \in \mathcal{L}} J_L^T \mathrm{f}_L^x \]</formula></para>
+<para>The equations of motion of a free floating mechanical system under the effect of a uniform gravitational field are: <formula id="263">\[ M(q) \dot{\nu} + C(q, \nu) \nu + G(q) = \begin{bmatrix} 0_{6\times1} \newline \tau \end{bmatrix} + \sum_{L \in \mathcal{L}} J_L^T \mathrm{f}_L^x \]</formula></para>
 <para>where:</para>
 <para><itemizedlist>
-<listitem><para><formula id="261">$n_{PC}$</formula> is the value returned by <ref refid="classiDynTree_1_1Model_1a14bde5abaf794aa4160f09ba50c64c2e" kindref="member">Model::getNrOfPosCoords</ref>,</para>
-</listitem><listitem><para><formula id="262">$n_{DOF}$</formula> is the value returned by <ref refid="classiDynTree_1_1Model_1aca35ec05d4b7358b38df769deb0513a6" kindref="member">Model::getNrOfDOFs</ref>,</para>
-</listitem><listitem><para><formula id="263">$n_{L}$</formula> is the value returned by <ref refid="classiDynTree_1_1Model_1aca270a902d0b0328c0d8afb1727d2154" kindref="member">Model::getNrOfLinks</ref>,</para>
-</listitem><listitem><para><formula id="264">$q \in \mathbb{R}^3 \times \textrm{SO}(3) \times \mathbb{R}^{n_{PC}}$</formula> is the robot position,</para>
-</listitem><listitem><para><formula id="265">$\nu \in \mathbb{R}^{6+n_{DOF}}$</formula> is the robot velocity,</para>
-</listitem><listitem><para><formula id="266">$\dot{\nu} \in \mathbb{R}^{6+n_{DOF}}$</formula> is the robot acceleration,</para>
-</listitem><listitem><para><formula id="267">$M(q) \in \mathbb{R}^{(6+n_{DOF}) \times (6+n_{DOF})}$</formula> is the free floating mass matrix,</para>
-</listitem><listitem><para><formula id="268">$C(q, \nu) \in \mathbb{R}^{(6+n_{DOF}) \times (6+n_{DOF})}$</formula> is the coriolis matrix,</para>
-</listitem><listitem><para><formula id="269">$G(q) \in \mathbb{R}^{6+n_{DOF}}$</formula> is the vector of gravity generalized forces,</para>
-</listitem><listitem><para><formula id="270">$\tau \in \mathbb{R}^6$</formula> is the vector of torques applied on the joint of the multibody model,</para>
-</listitem><listitem><para><formula id="271">$\mathcal{L}$</formula> is the set of all the links contained in the multibody model,</para>
-</listitem><listitem><para><formula id="272">$J_L \in \mathbb{R}^{6+n_{DOF}}$</formula> is the free floating jacobian of link <formula id="273">$L$</formula> as obtained by <ref refid="classiDynTree_1_1KinDynComputations_1a27ae295bad4b1a53f7b26dc454edd52b" kindref="member">KinDynComputations::getFrameFreeFloatingJacobian</ref>,</para>
-</listitem><listitem><para><formula id="274">$\mathrm{f}_L^x$</formula> is the 6D force/torque applied by the enviroment on link <formula id="273">$L$</formula>.</para>
+<listitem><para><formula id="264">$n_{PC}$</formula> is the value returned by <ref refid="classiDynTree_1_1Model_1a14bde5abaf794aa4160f09ba50c64c2e" kindref="member">Model::getNrOfPosCoords</ref>,</para>
+</listitem><listitem><para><formula id="265">$n_{DOF}$</formula> is the value returned by <ref refid="classiDynTree_1_1Model_1aca35ec05d4b7358b38df769deb0513a6" kindref="member">Model::getNrOfDOFs</ref>,</para>
+</listitem><listitem><para><formula id="266">$n_{L}$</formula> is the value returned by <ref refid="classiDynTree_1_1Model_1aca270a902d0b0328c0d8afb1727d2154" kindref="member">Model::getNrOfLinks</ref>,</para>
+</listitem><listitem><para><formula id="267">$q \in \mathbb{R}^3 \times \textrm{SO}(3) \times \mathbb{R}^{n_{PC}}$</formula> is the robot position,</para>
+</listitem><listitem><para><formula id="268">$\nu \in \mathbb{R}^{6+n_{DOF}}$</formula> is the robot velocity,</para>
+</listitem><listitem><para><formula id="269">$\dot{\nu} \in \mathbb{R}^{6+n_{DOF}}$</formula> is the robot acceleration,</para>
+</listitem><listitem><para><formula id="270">$M(q) \in \mathbb{R}^{(6+n_{DOF}) \times (6+n_{DOF})}$</formula> is the free floating mass matrix,</para>
+</listitem><listitem><para><formula id="271">$C(q, \nu) \in \mathbb{R}^{(6+n_{DOF}) \times (6+n_{DOF})}$</formula> is the coriolis matrix,</para>
+</listitem><listitem><para><formula id="272">$G(q) \in \mathbb{R}^{6+n_{DOF}}$</formula> is the vector of gravity generalized forces,</para>
+</listitem><listitem><para><formula id="273">$\tau \in \mathbb{R}^6$</formula> is the vector of torques applied on the joint of the multibody model,</para>
+</listitem><listitem><para><formula id="274">$\mathcal{L}$</formula> is the set of all the links contained in the multibody model,</para>
+</listitem><listitem><para><formula id="275">$J_L \in \mathbb{R}^{6+n_{DOF}}$</formula> is the free floating jacobian of link <formula id="276">$L$</formula> as obtained by <ref refid="classiDynTree_1_1KinDynComputations_1a27ae295bad4b1a53f7b26dc454edd52b" kindref="member">KinDynComputations::getFrameFreeFloatingJacobian</ref>,</para>
+</listitem><listitem><para><formula id="277">$\mathrm{f}_L^x$</formula> is the 6D force/torque applied by the enviroment on link <formula id="276">$L$</formula>.</para>
 </listitem></itemizedlist>
 </para>
 <para>The precise definition of each quantity (in particular the part related to the base) actually depends on the choice of FrameVelocityRepresentation, specified with the setFrameVelocityRepresentation method. </para>
@@ -2639,7 +2639,7 @@
 <para>Get the free floating mass matrix of the system. </para>
         </briefdescription>
         <detaileddescription>
-<para>This method computes <formula id="267">$M(q) \in \mathbb{R}^{(6+n_{DOF}) \times (6+n_{DOF})}$</formula>.</para>
+<para>This method computes <formula id="270">$M(q) \in \mathbb{R}^{(6+n_{DOF}) \times (6+n_{DOF})}$</formula>.</para>
 <para>The mass matrix depends on the joint positions, specified by the setRobotState methods. If the chosen FrameVelocityRepresentation is MIXED_REPRESENTATION or INERTIAL_FIXED_REPRESENTATION, the mass matrix depends also on the base orientation with respect to the inertial frame, that is also set by the setRobotState methods.</para>
 <para>For more details on the structure of the free floating mass matrix, please check: S. Traversaro, A. Saccon Multibody Dynamics Notation <ulink url="http://repository.tue.nl/849895">http://repository.tue.nl/849895</ulink></para>
 <para><parameterlist kind="param"><parameteritem>
@@ -2672,7 +2672,7 @@
 <para>Get the free floating mass matrix of the system (<ref refid="classiDynTree_1_1MatrixView" kindref="compound">MatrixView</ref> version). </para>
         </briefdescription>
         <detaileddescription>
-<para>This method computes <formula id="267">$M(q) \in \mathbb{R}^{(6+n_{DOF}) \times (6+n_{DOF})}$</formula>.</para>
+<para>This method computes <formula id="270">$M(q) \in \mathbb{R}^{(6+n_{DOF}) \times (6+n_{DOF})}$</formula>.</para>
 <para>The mass matrix depends on the joint positions, specified by the setRobotState methods. If the chosen FrameVelocityRepresentation is MIXED_REPRESENTATION or INERTIAL_FIXED_REPRESENTATION, the mass matrix depends also on the base orientation with respect to the inertial frame, that is also set by the setRobotState methods.</para>
 <para>For more details on the structure of the free floating mass matrix, please check: S. Traversaro, A. Saccon Multibody Dynamics Notation <ulink url="http://repository.tue.nl/849895">http://repository.tue.nl/849895</ulink></para>
 <para><parameterlist kind="param"><parameteritem>
@@ -2719,7 +2719,7 @@
 <para>Compute the free floating inverse dynamics. </para>
         </briefdescription>
         <detaileddescription>
-<para>This method computes <formula id="275">$M(q) \dot{\nu} + C(q, \nu) \nu + G(q) - \sum_{L \in \mathcal{L}} J_L^T \mathrm{f}_L^x \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
+<para>This method computes <formula id="278">$M(q) \dot{\nu} + C(q, \nu) \nu + G(q) - \sum_{L \in \mathcal{L}} J_L^T \mathrm{f}_L^x \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
 <para>The semantics of baseAcc, the base part of baseForceAndJointTorques and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .</para>
 <para>The state is the one given set by the setRobotState method.</para>
 <para><parameterlist kind="param"><parameteritem>
@@ -2788,7 +2788,7 @@
 <para>Compute the free floating inverse dynamics (<ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> version). </para>
         </briefdescription>
         <detaileddescription>
-<para>This method computes <formula id="275">$M(q) \dot{\nu} + C(q, \nu) \nu + G(q) - \sum_{L \in \mathcal{L}} J_L^T \mathrm{f}_L^x \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
+<para>This method computes <formula id="278">$M(q) \dot{\nu} + C(q, \nu) \nu + G(q) - \sum_{L \in \mathcal{L}} J_L^T \mathrm{f}_L^x \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
 <para>The semantics of baseAcc, the base part of baseForceAndJointTorques and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .</para>
 <para>The state is the one given set by the setRobotState method.</para>
 <para><parameterlist kind="param"><parameteritem>
@@ -2863,27 +2863,27 @@
 <para>This method is similar to inverseDynamics, but provides as an additional output the internal 6D force/torques (aka wrenches) excerted by the two links connected to each joint, in the linkInternalWrenches argument. </para>
         </briefdescription>
         <detaileddescription>
-<para>The <computeroutput>linkInternalWrenches</computeroutput> is a container of <formula id="263">$n_{L}$</formula> (number of links) 6D Force/Torques, one associated to each link. In particular, if the link <formula id="273">$L$</formula> is the link with index <formula id="273">$L$</formula> the element linkInternalWrenches(i) contains, depending on the choice of <computeroutput>FrameVelocityRepresentation</computeroutput>:</para>
+<para>The <computeroutput>linkInternalWrenches</computeroutput> is a container of <formula id="266">$n_{L}$</formula> (number of links) 6D Force/Torques, one associated to each link. In particular, if the link <formula id="276">$L$</formula> is the link with index <formula id="276">$L$</formula> the element linkInternalWrenches(i) contains, depending on the choice of <computeroutput>FrameVelocityRepresentation</computeroutput>:</para>
 <para><table rows="4" cols="2"><row>
 <entry thead="yes" align='center'><para><computeroutput>FrameVelocityRepresentation</computeroutput>   </para>
 </entry><entry thead="yes" align='center'><para><computeroutput>linkInternalWrenches(i)</computeroutput>    </para>
 </entry></row>
 <row>
 <entry thead="no" align='center'><para><computeroutput>MIXED_REPRESENTATION</computeroutput> (default)   </para>
-</entry><entry thead="no" align='center'><para><formula id="276">$ {}_{L[A]} \mathrm{f}_{\lambda(L), L} $</formula>    </para>
+</entry><entry thead="no" align='center'><para><formula id="279">$ {}_{L[A]} \mathrm{f}_{\lambda(L), L} $</formula>    </para>
 </entry></row>
 <row>
 <entry thead="no" align='center'><para><computeroutput>BODY_FIXED_REPRESENTATION</computeroutput>   </para>
-</entry><entry thead="no" align='center'><para><formula id="277">$ {}_{L} \mathrm{f}_{\lambda(L), L} $</formula>    </para>
+</entry><entry thead="no" align='center'><para><formula id="280">$ {}_{L} \mathrm{f}_{\lambda(L), L} $</formula>    </para>
 </entry></row>
 <row>
 <entry thead="no" align='center'><para><computeroutput>INERTIAL_FIXED_REPRESENTATION</computeroutput>   </para>
-</entry><entry thead="no" align='center'><para><formula id="278">$ {}_{A} \mathrm{f}_{\lambda(L), L} $</formula>   </para>
+</entry><entry thead="no" align='center'><para><formula id="281">$ {}_{A} \mathrm{f}_{\lambda(L), L} $</formula>   </para>
 </entry></row>
 </table>
 </para>
-<para>Where if <formula id="279">$C$</formula> is a given frame, <formula id="280">$ {}_{C} \mathrm{f}_{\lambda(L), L} $</formula> is the 6D force/torque that the parent link <formula id="281">$\lambda(L)$</formula> excerts on its child <formula id="273">$L$</formula> expressed in frame <formula id="279">$C$</formula>.</para>
-<para><simplesect kind="warning"><para>Note that this definition strictly depends on the floating base specified in the <ref refid="classiDynTree_1_1KinDynComputations" kindref="compound">KinDynComputations</ref> instances, as given a link <formula id="273">$L$</formula>, its parent \lambda(L) depends on the choosen base link. </para>
+<para>Where if <formula id="282">$C$</formula> is a given frame, <formula id="283">$ {}_{C} \mathrm{f}_{\lambda(L), L} $</formula> is the 6D force/torque that the parent link <formula id="284">$\lambda(L)$</formula> excerts on its child <formula id="276">$L$</formula> expressed in frame <formula id="282">$C$</formula>.</para>
+<para><simplesect kind="warning"><para>Note that this definition strictly depends on the floating base specified in the <ref refid="classiDynTree_1_1KinDynComputations" kindref="compound">KinDynComputations</ref> instances, as given a link <formula id="276">$L$</formula>, its parent \lambda(L) depends on the choosen base link. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -2939,7 +2939,7 @@
 <para>Compute the getNrOfDOFS()+6 vector of generalized bias (gravity+coriolis) forces. </para>
         </briefdescription>
         <detaileddescription>
-<para>This method computes <formula id="282">$C(q, \nu) \nu + G(q) \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
+<para>This method computes <formula id="285">$C(q, \nu) \nu + G(q) \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
 <para>The semantics of the base part of generalizedBiasForces depend of the chosen FrameVelocityRepresentation .</para>
 <para>The state is the one given set by the setRobotState method.</para>
 <para><parameterlist kind="param"><parameteritem>
@@ -2973,7 +2973,7 @@
         </briefdescription>
         <detaileddescription>
 <para>(<ref refid="classiDynTree_1_1Span" kindref="compound">Span</ref> version)</para>
-<para>This method computes <formula id="282">$C(q, \nu) \nu + G(q) \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
+<para>This method computes <formula id="285">$C(q, \nu) \nu + G(q) \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
 <para>The semantics of the base part of generalizedBiasForces depend of the chosen FrameVelocityRepresentation .</para>
 <para>The state is the one given set by the setRobotState method.</para>
 <para><simplesect kind="note"><para>generalizedBiasForces has to be a (6 + dofs)-d vector. The first 6 elements will contain the bias forces related to the system base, while the last dofs elements related to the joints.</para>
@@ -3001,7 +3001,7 @@
 <para>Compute the getNrOfDOFS()+6 vector of generalized gravity forces. </para>
         </briefdescription>
         <detaileddescription>
-<para>This method computes <formula id="269">$G(q) \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
+<para>This method computes <formula id="272">$G(q) \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
 <para>The semantics of the base part of generalizedGravityForces depend of the chosen FrameVelocityRepresentation .</para>
 <para>The state is the one given set by the setRobotState method.</para>
 <para><parameterlist kind="param"><parameteritem>
@@ -3034,7 +3034,7 @@
 <para>Compute the getNrOfDOFS()+6 vector of generalized gravity forces. </para>
         </briefdescription>
         <detaileddescription>
-<para>This method computes <formula id="269">$G(q) \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
+<para>This method computes <formula id="272">$G(q) \in \mathbb{R}^{6+n_{DOF}}$</formula>.</para>
 <para>The semantics of the base part of generalizedGravityForces depend of the chosen FrameVelocityRepresentation .</para>
 <para>The state is the one given set by the setRobotState method.</para>
 <para><simplesect kind="note"><para>generalizedGravityForces has to be a (6 + dofs)-d vector. The first 6 elements will contain the bias forces related to the system base, while the last dofs elements related to the joints.</para>
@@ -3066,7 +3066,7 @@
 <para>Compute the getNrOfDOFS()+6 vector of generalized external forces. </para>
         </briefdescription>
         <detaileddescription>
-<para>This method computes <formula id="283">$ -\sum_{L \in \mathcal{L}} J_L^T \mathrm{f}_L^x \in \mathbb{R}^{6+n_{DOF}} $</formula>.</para>
+<para>This method computes <formula id="286">$ -\sum_{L \in \mathcal{L}} J_L^T \mathrm{f}_L^x \in \mathbb{R}^{6+n_{DOF}} $</formula>.</para>
 <para><simplesect kind="warning"><para>Note that this method returns the <bold>negated</bold> sum of the product of jacobian and the external force, consistently with how the generalized external forces are computed in the <ref refid="classiDynTree_1_1KinDynComputations_1a60870f0f43c035fc63527ad42394f963" kindref="member">KinDynComputations::inverseDynamics</ref> method.</para>
 </simplesect>
 The semantics of the base part of generalizedExternalForces and of the elements of linkExtWrenches depend of the chosen FrameVelocityRepresentation .</para>
@@ -3109,8 +3109,8 @@ The semantics of the base part of generalizedExternalForces and of the elements 
 <para>Compute the free floating inverse dynamics as a linear function of inertial parameters. </para>
         </briefdescription>
         <detaileddescription>
-<para>This methods computes the <formula id="284">$ Y(\dot{\nu}, \nu, q) \in \mathbb{R}^{ (6+n_{DOF}) \times (10n_{L}) } $</formula> matrix such that: <formula id="285">\[ Y(\dot{\nu}, \nu, q) \phi = M(q) \dot{\nu} + C(q, \nu) \nu + G(q) \]</formula></para>
-<para>where <formula id="286">$\phi \in \mathbb{R}^{10n_{L}}$</formula> is the vector of inertial parameters returned by the <ref refid="classiDynTree_1_1Model_1a2c283e000a2d6a5e86770d8616b7e18b" kindref="member">Model::getInertialParameters</ref> .</para>
+<para>This methods computes the <formula id="287">$ Y(\dot{\nu}, \nu, q) \in \mathbb{R}^{ (6+n_{DOF}) \times (10n_{L}) } $</formula> matrix such that: <formula id="288">\[ Y(\dot{\nu}, \nu, q) \phi = M(q) \dot{\nu} + C(q, \nu) \nu + G(q) \]</formula></para>
+<para>where <formula id="289">$\phi \in \mathbb{R}^{10n_{L}}$</formula> is the vector of inertial parameters returned by the <ref refid="classiDynTree_1_1Model_1a2c283e000a2d6a5e86770d8616b7e18b" kindref="member">Model::getInertialParameters</ref> .</para>
 <para>The semantics of baseAcc, the base part (first six rows) of baseForceAndJointTorquesRegressor depend of the chosen FrameVelocityRepresentation .</para>
 <para>The state is the one given set by the setRobotState method.</para>
 <para><simplesect kind="see"><para>iDynTree::InverseDynamicsInertialParametersRegressor for more info on the underlying algorithm.</para>

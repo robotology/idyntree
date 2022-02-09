@@ -1,11 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
-  <compounddef id="namespaceQtCharts" kind="namespace" language="C++">
-    <compoundname>QtCharts</compoundname>
+  <compounddef id="dir_bee4db886efdb85971375e4ac361013b" kind="dir">
+    <compoundname>iDynTree</compoundname>
+    <innerdir refid="dir_52266d84fa8cdfa7d5e17899a30a301e">iDynTree/ModelIO</innerdir>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="ChartsManager.h" line="17" column="1"/>
+    <location file="iDynTree/"/>
   </compounddef>
 </doxygen>

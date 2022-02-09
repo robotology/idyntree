@@ -13,9 +13,6 @@
       <node id="3">
         <label>string</label>
       </node>
-      <node id="4">
-        <label>vector</label>
-      </node>
       <node id="1">
         <label>iDynTree/ModelIO/ModelExporter.h</label>
         <link refid="ModelExporter_8h"/>
@@ -25,6 +22,9 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
+      </node>
+      <node id="4">
+        <label>vector</label>
       </node>
       <node id="2">
         <label>memory</label>

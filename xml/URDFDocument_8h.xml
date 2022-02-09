@@ -14,15 +14,6 @@
     <includes local="no">vector</includes>
     <includes local="no">unordered_map</includes>
     <incdepgraph>
-      <node id="2">
-        <label>string</label>
-      </node>
-      <node id="3">
-        <label>vector</label>
-      </node>
-      <node id="4">
-        <label>unordered_map</label>
-      </node>
       <node id="1">
         <label>private/URDFDocument.h</label>
         <link refid="URDFDocument_8h"/>
@@ -32,6 +23,15 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
+      </node>
+      <node id="2">
+        <label>string</label>
+      </node>
+      <node id="3">
+        <label>vector</label>
+      </node>
+      <node id="4">
+        <label>unordered_map</label>
       </node>
     </incdepgraph>
     <innerclass refid="classiDynTree_1_1URDFDocument" prot="public">iDynTree::URDFDocument</innerclass>

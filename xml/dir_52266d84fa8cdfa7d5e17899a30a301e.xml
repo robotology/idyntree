@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
-  <compounddef id="dir_d0f3ec5752d795bf12d1ad0257cbe3de" kind="dir">
+  <compounddef id="dir_52266d84fa8cdfa7d5e17899a30a301e" kind="dir">
     <compoundname>iDynTree/ModelIO</compoundname>
     <innerfile refid="ModelCalibrationHelper_8h">ModelCalibrationHelper.h</innerfile>
     <innerfile refid="ModelExporter_8h">ModelExporter.h</innerfile>

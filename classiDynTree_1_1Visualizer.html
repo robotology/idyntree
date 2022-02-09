@@ -127,6 +127,10 @@
               <span class="m-doc-wrap-bumper">auto <a href="#afaf0268b1cbd07b4ce22f237f863beab" class="m-doc-self">enviroment</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classiDynTree_1_1IEnvironment.html" class="m-doc">IEnvironment</a>&amp;</span>
             </dt>
             <dd>Return an interface to manipulate the visualization environment.</dd>
+            <dt id="a8234a676b0a25e9bb9ac34e175b7fb27">
+              <span class="m-doc-wrap-bumper">auto <a href="#a8234a676b0a25e9bb9ac34e175b7fb27" class="m-doc-self">environment</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classiDynTree_1_1IEnvironment.html" class="m-doc">IEnvironment</a>&amp;</span>
+            </dt>
+            <dd>Return an interface to manipulate the visualization environment.</dd>
             <dt id="ad4761debeba7c653950ab787eb6ef8b0">
               <span class="m-doc-wrap-bumper">auto <a href="#ad4761debeba7c653950ab787eb6ef8b0" class="m-doc-self">vectors</a>(</span><span class="m-doc-wrap">) -&gt; <a href="classiDynTree_1_1IVectorsVisualization.html" class="m-doc">IVectorsVisualization</a>&amp;</span>
             </dt>
@@ -143,6 +147,14 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a346dd8b22b45d1251581ccbcc8882e57" class="m-doc">getLabel</a>(</span><span class="m-doc-wrap">const std::string&amp; labelName) -&gt; <a href="classiDynTree_1_1ILabel.html" class="m-doc">ILabel</a>&amp;</span>
             </dt>
             <dd>Get a label given a name.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aa95587b7992c90383ff4ab25c9fc4102" class="m-doc">width</a>(</span><span class="m-doc-wrap">) const -&gt; int</span>
+            </dt>
+            <dd>Get the visualizer width.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#acb040534c8e4e16e5a067c2319dfedb7" class="m-doc">height</a>(</span><span class="m-doc-wrap">) const -&gt; int</span>
+            </dt>
+            <dd>Get the visualizer height.</dd>
             <dt id="abfa7aed891eb9df40e200892567be8c7">
               <span class="m-doc-wrap-bumper">auto <a href="#abfa7aed891eb9df40e200892567be8c7" class="m-doc-self">run</a>(</span><span class="m-doc-wrap">) -&gt; bool</span>
             </dt>
@@ -152,9 +164,16 @@
             </dt>
             <dd>Draw the visualization.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ab7b33000ce83db290dafcd9485612e9a" class="m-doc">subDraw</a>(</span><span class="m-doc-wrap">int xOffsetFromTopLeft,
+              int yOffsetFromTopLeft,
+              int subImageWidth,
+              int subImageHeight)</span>
+            </dt>
+            <dd>Draw the visualization in a subportion of the window.</dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#ac3c119f56b8b892f93391b66cc22b90c" class="m-doc">drawToFile</a>(</span><span class="m-doc-wrap">const std::string filename = &quot;iDynTreeVisualizerScreenshot.png&quot;) -&gt; bool</span>
             </dt>
-            <dd>Right the current visualization to a image file.</dd>
+            <dd>Draw the current visualization to a image file.</dd>
             <dt id="a7326dfca30d383941d1fd0968b476a9e">
               <span class="m-doc-wrap-bumper">void <a href="#a7326dfca30d383941d1fd0968b476a9e" class="m-doc-self">close</a>(</span><span class="m-doc-wrap">)</span>
             </dt>
@@ -242,11 +261,35 @@
             <p>Get a label given a name.</p>
 <p>Note: this does not set the text in the label.</p>
           </div></section>
+          <section class="m-doc-details" id="aa95587b7992c90383ff4ab25c9fc4102"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">int iDynTree::<wbr />Visualizer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aa95587b7992c90383ff4ab25c9fc4102" class="m-doc-self">width</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the visualizer width.</p>
+<p>Note: if the window is resized, this returns the correct size only if run is called first.</p>
+          </div></section>
+          <section class="m-doc-details" id="acb040534c8e4e16e5a067c2319dfedb7"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">int iDynTree::<wbr />Visualizer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#acb040534c8e4e16e5a067c2319dfedb7" class="m-doc-self">height</a>(</span><span class="m-doc-wrap">) const</span></span>
+            </h3>
+            <p>Get the visualizer height.</p>
+<p>Note: if the window is resized, this returns the correct size only if run is called first.</p>
+          </div></section>
+          <section class="m-doc-details" id="ab7b33000ce83db290dafcd9485612e9a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />Visualizer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab7b33000ce83db290dafcd9485612e9a" class="m-doc-self">subDraw</a>(</span><span class="m-doc-wrap">int xOffsetFromTopLeft,
+              int yOffsetFromTopLeft,
+              int subImageWidth,
+              int subImageHeight)</span></span>
+            </h3>
+            <p>Draw the visualization in a subportion of the window.</p>
+<p>Need to call draw once done.</p>
+          </div></section>
           <section class="m-doc-details" id="ac3c119f56b8b892f93391b66cc22b90c"><div>
             <h3>
               <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />Visualizer::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac3c119f56b8b892f93391b66cc22b90c" class="m-doc-self">drawToFile</a>(</span><span class="m-doc-wrap">const std::string filename = &quot;iDynTreeVisualizerScreenshot.png&quot;)</span></span>
             </h3>
-            <p>Right the current visualization to a image file.</p>
+            <p>Draw the current visualization to a image file.</p>
             <table class="m-table m-fullwidth m-flat">
               <tfoot>
                 <tr>

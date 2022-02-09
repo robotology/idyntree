@@ -100,6 +100,29 @@
               <span class="m-doc-wrap-bumper">auto <a href="#accfd16dd44c6bb16c076398081965bce" class="m-doc">getPixels</a>(</span><span class="m-doc-wrap">std::vector&lt;<a href="classiDynTree_1_1PixelViz.html" class="m-doc">PixelViz</a>&gt;&amp; pixels) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
             </dt>
             <dd>Get the pixels of the texture.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a54b05365c8136ec72b76bac964d3b403" class="m-doc">drawToFile</a>(</span><span class="m-doc-wrap">const std::string filename = &quot;iDynTreeVisualizerTextureScreenshot.png&quot;) const -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Draw the current texture to a image file.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#ac37428ca8f11fb8fa749f2cddb328c7a" class="m-doc">enableDraw</a>(</span><span class="m-doc-wrap">bool enabled = true) <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Enable/disable the drawing on the texture.</dd>
+            <dt id="acd258bc165fe99ed6fe987ed2aab682d">
+              <span class="m-doc-wrap-bumper">auto <a href="#acd258bc165fe99ed6fe987ed2aab682d" class="m-doc-self">width</a>(</span><span class="m-doc-wrap">) const -&gt; int <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Get the texture width.</dd>
+            <dt id="a92644f4603752dccf3188b6de6b26288">
+              <span class="m-doc-wrap-bumper">auto <a href="#a92644f4603752dccf3188b6de6b26288" class="m-doc-self">height</a>(</span><span class="m-doc-wrap">) const -&gt; int <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Get the texture height.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#aabd49737df8e97ee6e76c7f96ce41950" class="m-doc">setSubDrawArea</a>(</span><span class="m-doc-wrap">int xOffsetFromTopLeft,
+              int yOffsetFromTopLeft,
+              int subImageWidth,
+              int subImageHeight) -&gt; bool <span class="m-label m-flat m-warning">pure virtual</span></span>
+            </dt>
+            <dd>Set the area used for drawing operations.</dd>
           </dl>
         </section>
         <section>
@@ -156,6 +179,48 @@
               </tfoot>
             </table>
 <p>Remember to call draw() first.</p><aside class="m-note m-info"><h4>Note</h4><p>This operation may affect the time performances of the visualizer, especially if the texture is large.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a54b05365c8136ec72b76bac964d3b403"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ITexture::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a54b05365c8136ec72b76bac964d3b403" class="m-doc-self">drawToFile</a>(</span><span class="m-doc-wrap">const std::string filename = &quot;iDynTreeVisualizerTextureScreenshot.png&quot;) const <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Draw the current texture to a image file.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>true if all went ok, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The format of the image is desumed from the filename.</p><p>For more info on the process of writing the image, check irr::video::IVideoDriver::writeImageToFile irrlicht method.</p>
+          </div></section>
+          <section class="m-doc-details" id="ac37428ca8f11fb8fa749f2cddb328c7a"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />ITexture::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ac37428ca8f11fb8fa749f2cddb328c7a" class="m-doc-self">enableDraw</a>(</span><span class="m-doc-wrap">bool enabled = true) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Enable/disable the drawing on the texture.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">enabled</td>
+                  <td>If true (default), the visualizer will draw on the texture when calling draw();</td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
+          <section class="m-doc-details" id="aabd49737df8e97ee6e76c7f96ce41950"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ITexture::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aabd49737df8e97ee6e76c7f96ce41950" class="m-doc-self">setSubDrawArea</a>(</span><span class="m-doc-wrap">int xOffsetFromTopLeft,
+              int yOffsetFromTopLeft,
+              int subImageWidth,
+              int subImageHeight) <span class="m-label m-warning">pure virtual</span></span></span>
+            </h3>
+            <p>Set the area used for drawing operations.</p>
+<p>The entirety of the texture is cleared between two draw() calls. Use this in conjunction with subDraw() to draw on different parts of the same texture. Use call it with (0, 0, <a href="classiDynTree_1_1ITexture.html#acd258bc165fe99ed6fe987ed2aab682d" class="m-doc">width()</a>, <a href="classiDynTree_1_1ITexture.html#a92644f4603752dccf3188b6de6b26288" class="m-doc">height()</a>) to draw on the full texture (this is done by default).</p>
           </div></section>
         </section>
       </div>

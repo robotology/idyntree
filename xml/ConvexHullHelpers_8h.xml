@@ -8,7 +8,6 @@
     <includes refid="Position_8h" local="no">iDynTree/Core/Position.h</includes>
     <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
     <includes refid="VectorDynSize_8h" local="no">iDynTree/Core/VectorDynSize.h</includes>
-    <includedby refid="ObserverThread_8h" local="no">ObserverThread.h</includedby>
     <includedby refid="BoundingBoxHelpers_8h" local="no">iDynTree/BoundingBoxHelpers.h</includedby>
     <includedby refid="InverseKinematics_8h" local="no">iDynTree/InverseKinematics.h</includedby>
     <includedby refid="InverseKinematicsData_8h" local="no">private/InverseKinematicsData.h</includedby>

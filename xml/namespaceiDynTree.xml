@@ -145,10 +145,6 @@
     <innerclass refid="classiDynTree_1_1ModelSolidShapes" prot="public">iDynTree::ModelSolidShapes</innerclass>
     <innerclass refid="classiDynTree_1_1SubModelDecomposition" prot="public">iDynTree::SubModelDecomposition</innerclass>
     <innerclass refid="classiDynTree_1_1Traversal" prot="public">iDynTree::Traversal</innerclass>
-    <innerclass refid="classiDynTree_1_1XMLAttribute" prot="public">iDynTree::XMLAttribute</innerclass>
-    <innerclass refid="classiDynTree_1_1XMLDocument" prot="public">iDynTree::XMLDocument</innerclass>
-    <innerclass refid="classiDynTree_1_1XMLElement" prot="public">iDynTree::XMLElement</innerclass>
-    <innerclass refid="classiDynTree_1_1XMLParser" prot="public">iDynTree::XMLParser</innerclass>
     <innerclass refid="classiDynTree_1_1ModelCalibrationHelper" prot="public">iDynTree::ModelCalibrationHelper</innerclass>
     <innerclass refid="classiDynTree_1_1ModelExporterOptions" prot="public">iDynTree::ModelExporterOptions</innerclass>
     <innerclass refid="classiDynTree_1_1ModelExporter" prot="public">iDynTree::ModelExporter</innerclass>
@@ -169,6 +165,10 @@
     <innerclass refid="classiDynTree_1_1GyroscopeSensorHelper" prot="public">iDynTree::GyroscopeSensorHelper</innerclass>
     <innerclass refid="classiDynTree_1_1URDFDocument" prot="public">iDynTree::URDFDocument</innerclass>
     <innerclass refid="classiDynTree_1_1VisualElement" prot="public">iDynTree::VisualElement</innerclass>
+    <innerclass refid="classiDynTree_1_1XMLAttribute" prot="public">iDynTree::XMLAttribute</innerclass>
+    <innerclass refid="classiDynTree_1_1XMLDocument" prot="public">iDynTree::XMLDocument</innerclass>
+    <innerclass refid="classiDynTree_1_1XMLElement" prot="public">iDynTree::XMLElement</innerclass>
+    <innerclass refid="classiDynTree_1_1XMLParser" prot="public">iDynTree::XMLParser</innerclass>
     <innerclass refid="classiDynTree_1_1iKinLimbImported" prot="public">iDynTree::iKinLimbImported</innerclass>
     <innerclass refid="classiDynTree_1_1skinDynLibLinkID" prot="public">iDynTree::skinDynLibLinkID</innerclass>
     <innerclass refid="classiDynTree_1_1iDynTreeLinkAndFrame" prot="public">iDynTree::iDynTreeLinkAndFrame</innerclass>
@@ -687,10 +687,10 @@
 <para>Possible frame velocity representation convention. </para>
         </briefdescription>
         <detaileddescription>
-<para>Given a link <formula id="273">$L$</formula> and an absolute frame <formula id="308">$A$</formula>, the the possible frame velocity representation are the following:<itemizedlist>
-<listitem><para><computeroutput>INERTIAL_FIXED_REPRESENTATION</computeroutput> : Velocity representation is <formula id="322">${}^{A} \mathrm{v}_{A,B}$</formula>,</para>
-</listitem><listitem><para><computeroutput>BODY_FIXED_REPRESENTATION</computeroutput> : Velocity representation is <formula id="323">${}^{B} \mathrm{v}_{A,B}$</formula>,</para>
-</listitem><listitem><para><computeroutput>MIXED_REPRESENTATION</computeroutput> : Velocity representation is <formula id="324">${}^{B[A]} \mathrm{v}_{A,B}$</formula>.</para>
+<para>Given a link <formula id="276">$L$</formula> and an absolute frame <formula id="311">$A$</formula>, the the possible frame velocity representation are the following:<itemizedlist>
+<listitem><para><computeroutput>INERTIAL_FIXED_REPRESENTATION</computeroutput> : Velocity representation is <formula id="325">${}^{A} \mathrm{v}_{A,B}$</formula>,</para>
+</listitem><listitem><para><computeroutput>BODY_FIXED_REPRESENTATION</computeroutput> : Velocity representation is <formula id="326">${}^{B} \mathrm{v}_{A,B}$</formula>,</para>
+</listitem><listitem><para><computeroutput>MIXED_REPRESENTATION</computeroutput> : Velocity representation is <formula id="327">${}^{B[A]} \mathrm{v}_{A,B}$</formula>.</para>
 </listitem></itemizedlist>
 </para>
 <para>See <ref refid="classiDynTree_1_1KinDynComputations" kindref="compound">iDynTree::KinDynComputations</ref> documentation for more details. </para>
@@ -6668,7 +6668,7 @@
 <parametername direction="in">linksVel</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Vector of left-trivialized velocities for each link of the model (for each link <formula id="273">$L$</formula>, the corresponding velocity is <formula id="309">${}^L \mathrm{v}_{A, L}$</formula>). </para>
+<para>Vector of left-trivialized velocities for each link of the model (for each link <formula id="276">$L$</formula>, the corresponding velocity is <formula id="312">${}^L \mathrm{v}_{A, L}$</formula>). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -6676,7 +6676,7 @@
 <parametername direction="in">linksProperAcc</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Vector of left-trivialized proper acceleration for each link of the model (for each link <formula id="273">$L$</formula>, the corresponding proper acceleration is <formula id="310">${}^L \dot{\mathrm{v}}_{A, L} - \begin{bmatrix} {}^L R_A {}^A g \\ 0_{3\times1} \end{bmatrix} $</formula>), where <formula id="311">$ {}^A g \in \mathbb{R}^3 $</formula> is the gravity acceleration expressed in an inertial frame <formula id="308">$A$</formula> . See iDynTree::LinkNetExternalWrenches . </para>
+<para>Vector of left-trivialized proper acceleration for each link of the model (for each link <formula id="276">$L$</formula>, the corresponding proper acceleration is <formula id="313">${}^L \dot{\mathrm{v}}_{A, L} - \begin{bmatrix} {}^L R_A {}^A g \\ 0_{3\times1} \end{bmatrix} $</formula>), where <formula id="314">$ {}^A g \in \mathbb{R}^3 $</formula> is the gravity acceleration expressed in an inertial frame <formula id="311">$A$</formula> . See iDynTree::LinkNetExternalWrenches . </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -6684,7 +6684,7 @@
 <parametername direction="in">linkExtForces</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Vector of external 6D force/torques applied to the links. For each link <formula id="273">$L$</formula>, the corresponding external force is <formula id="312">${}_L \mathrm{f}^x_L$</formula>, i.e. the force that the enviroment applies on the on the link <formula id="273">$L$</formula>, expressed in the link frame <formula id="273">$L$</formula>. </para>
+<para>Vector of external 6D force/torques applied to the links. For each link <formula id="276">$L$</formula>, the corresponding external force is <formula id="315">${}_L \mathrm{f}^x_L$</formula>, i.e. the force that the enviroment applies on the on the link <formula id="276">$L$</formula>, expressed in the link frame <formula id="276">$L$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -6848,7 +6848,7 @@
 <parametername direction="in">referenceFrame_H_link</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> of each link w.r.t. to given frame D (tipically an inertial frame A, the base frame B or the mixed frame B[A]). For each link <formula id="273">$L$</formula>, the corresponding transform is <formula id="313">${}^D H_L$</formula>. </para>
+<para><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> of each link w.r.t. to given frame D (tipically an inertial frame A, the base frame B or the mixed frame B[A]). For each link <formula id="276">$L$</formula>, the corresponding transform is <formula id="316">${}^D H_L$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -6856,7 +6856,7 @@
 <parametername direction="in">linksVel</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Vector of left-trivialized velocities for each link of the model (for each link <formula id="273">$L$</formula>, the corresponding velocity is <formula id="309">${}^L \mathrm{v}_{A, L}$</formula>). </para>
+<para>Vector of left-trivialized velocities for each link of the model (for each link <formula id="276">$L$</formula>, the corresponding velocity is <formula id="312">${}^L \mathrm{v}_{A, L}$</formula>). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -6864,7 +6864,7 @@
 <parametername direction="in">linksProperAcc</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Vector of left-trivialized proper acceleration for each link of the model (for each link <formula id="273">$L$</formula>, the corresponding proper acceleration is <formula id="310">${}^L \dot{\mathrm{v}}_{A, L} - \begin{bmatrix} {}^L R_A {}^A g \\ 0_{3\times1} \end{bmatrix} $</formula>), where <formula id="311">$ {}^A g \in \mathbb{R}^3 $</formula> is the gravity acceleration expressed in an inertial frame <formula id="308">$A$</formula> . </para>
+<para>Vector of left-trivialized proper acceleration for each link of the model (for each link <formula id="276">$L$</formula>, the corresponding proper acceleration is <formula id="313">${}^L \dot{\mathrm{v}}_{A, L} - \begin{bmatrix} {}^L R_A {}^A g \\ 0_{3\times1} \end{bmatrix} $</formula>), where <formula id="314">$ {}^A g \in \mathbb{R}^3 $</formula> is the gravity acceleration expressed in an inertial frame <formula id="311">$A$</formula> . </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -6997,10 +6997,10 @@
           <declname>V</declname>
         </param>
         <briefdescription>
-<para>Given a rigid body inertia <formula id="315">$M$</formula> and spatial motion vector <formula id="253">$V$</formula>, the bias wrench <formula id="316">$B$</formula> of rigid body is defined as: </para>
+<para>Given a rigid body inertia <formula id="318">$M$</formula> and spatial motion vector <formula id="253">$V$</formula>, the bias wrench <formula id="319">$B$</formula> of rigid body is defined as: </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="317">\[ B = \times \]</formula> </para>
+<para><formula id="320">\[ B = \times \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -7353,7 +7353,7 @@
 <parametername direction="in">robotPos</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>the position of the robot, i.e. <formula id="318">$ ({}^A H_B, s)$</formula>, </para>
+<para>the position of the robot, i.e. <formula id="321">$ ({}^A H_B, s)$</formula>, </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -7361,7 +7361,7 @@
 <parametername direction="in">robotVel</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>the velocity of the robot, with the base velocity expressed in BODY_FIXED representation i.e. <formula id="319">$ \nu = \begin{bmatrix} {}^B \mathrm{v}_{A,B} \newline \dot{s} \end{bmatrix} $</formula>, </para>
+<para>the velocity of the robot, with the base velocity expressed in BODY_FIXED representation i.e. <formula id="322">$ \nu = \begin{bmatrix} {}^B \mathrm{v}_{A,B} \newline \dot{s} \end{bmatrix} $</formula>, </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -7377,7 +7377,7 @@
 <parametername direction="in">linkVel</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>the velocity of each link of the robot, with velocity expressed with BODY_FIXED representation i.e. for each link <formula id="320">$ $</formula> we have <formula id="321">$ {}^L \mathrm{v}_{A,L} $</formula>, </para>
+<para>the velocity of each link of the robot, with velocity expressed with BODY_FIXED representation i.e. for each link <formula id="323">$ $</formula> we have <formula id="324">$ {}^L \mathrm{v}_{A,L} $</formula>, </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>

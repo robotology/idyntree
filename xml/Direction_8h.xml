@@ -11,7 +11,6 @@
     <includedby refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/Estimation/ExternalWrenchesEstimation.h</includedby>
     <includedby refid="YARPConversionsImplementation_8h" local="no">iDynTree/yarp/YARPConversionsImplementation.h</includedby>
     <includedby refid="Axis_8h" local="no">iDynTree/Core/Axis.h</includedby>
-    <includedby refid="ObserverThread_8h" local="no">ObserverThread.h</includedby>
     <includedby refid="Visualizer_8h" local="no">iDynTree/Visualizer.h</includedby>
     <includedby refid="InverseKinematics_8h" local="no">iDynTree/InverseKinematics.h</includedby>
     <incdepgraph>

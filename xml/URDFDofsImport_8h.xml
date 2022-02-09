@@ -5,6 +5,9 @@
     <includes local="no">vector</includes>
     <includes local="no">string</includes>
     <incdepgraph>
+      <node id="3">
+        <label>string</label>
+      </node>
       <node id="1">
         <label>iDynTree/ModelIO/URDFDofsImport.h</label>
         <link refid="URDFDofsImport_8h"/>
@@ -12,9 +15,6 @@
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-      </node>
-      <node id="3">
-        <label>string</label>
       </node>
       <node id="2">
         <label>vector</label>

@@ -196,15 +196,6 @@
     <member refid="structiDynTree_1_1AttitudeQuaternionEKFParameters_1a746a917e3743a21c74d46d21970c3ce1" kind="variable"><name>initial_gyro_bias_error_variance</name></member>
     <member refid="structiDynTree_1_1AttitudeQuaternionEKFParameters_1ad6736d3272d84629e5e78fe9e5b60d96" kind="variable"><name>use_magnetometer_measurements</name></member>
   </compound>
-  <compound refid="structChartsManager_1_1ChartInfo_1_1Axis" kind="struct"><name>ChartsManager::ChartInfo::Axis</name>
-    <member refid="structChartsManager_1_1ChartInfo_1_1Axis_1a21fc2288a3267eab5cb93ec63f374831" kind="enum"><name>AxisType</name></member>
-    <member refid="structChartsManager_1_1ChartInfo_1_1Axis_1a21fc2288a3267eab5cb93ec63f374831aaeaad0a569d7bfbf35bbbe47b8ec2c4c" kind="enumvalue"><name>AxisTypeFixed</name></member>
-    <member refid="structChartsManager_1_1ChartInfo_1_1Axis_1a21fc2288a3267eab5cb93ec63f374831a5635ce6d70a027005f073bf274e9d5a3" kind="enumvalue"><name>AxisTypeAuto</name></member>
-    <member refid="structChartsManager_1_1ChartInfo_1_1Axis_1a21fc2288a3267eab5cb93ec63f374831a36d548f1e28043a12a33710f7aff7d8e" kind="enumvalue"><name>AxisTypeDynamic</name></member>
-    <member refid="structChartsManager_1_1ChartInfo_1_1Axis_1a91fe4559ef892229509a3793b351729a" kind="variable"><name>axisType</name></member>
-    <member refid="structChartsManager_1_1ChartInfo_1_1Axis_1a3ca57c1b87f2dc38154d965cd7ac498d" kind="variable"><name>min</name></member>
-    <member refid="structChartsManager_1_1ChartInfo_1_1Axis_1a48e1bedb2ea6454068b7a04febca90f8" kind="variable"><name>max</name></member>
-  </compound>
   <compound refid="classiDynTree_1_1Axis" kind="class"><name>iDynTree::Axis</name>
     <member refid="classiDynTree_1_1Axis_1ad33d0ab60bc41164780144474606f4e2" kind="function"><name>toString</name></member>
     <member refid="classiDynTree_1_1Axis_1a80528ce33353f585f61f967e86f9e9ee" kind="function"><name>reservedToString</name></member>
@@ -423,41 +414,6 @@
   </compound>
   <compound refid="structiDynTree_1_1details_1_1calculate__subspan__type" kind="struct"><name>iDynTree::details::calculate_subspan_type</name>
     <member refid="structiDynTree_1_1details_1_1calculate__subspan__type_1aa2737e67ca087bb17788bbaf284f374f" kind="typedef"><name>type</name></member>
-  </compound>
-  <compound refid="classChartsManager_1_1ChartInfo" kind="class"><name>ChartsManager::ChartInfo</name>
-    <member refid="classChartsManager_1_1ChartInfo_1aff4e6cc3667217821c0cd5b73e41f836" kind="variable"><name>m_id</name></member>
-    <member refid="classChartsManager_1_1ChartInfo_1aa4958f260baf692ae4be9e93e718d2bd" kind="variable"><name>m_xAxis</name></member>
-    <member refid="classChartsManager_1_1ChartInfo_1af7e79701e54e280a9c842ad88dc1a7c1" kind="variable"><name>m_yAxis</name></member>
-    <member refid="classChartsManager_1_1ChartInfo_1a4e3b9cdba76cb1233b9e569e5082f901" kind="variable"><name>window</name></member>
-    <member refid="classChartsManager_1_1ChartInfo_1aab62e93d5f9d514923d97359a05b3e14" kind="variable"><name>chartSeries</name></member>
-    <member refid="classChartsManager_1_1ChartInfo_1a17812e0d3f413beefe53d1d26e800d2d" kind="friend"><name>ChartsManager</name></member>
-    <member refid="classChartsManager_1_1ChartInfo_1af2121245db91e3574ca1728ac14f3cdc" kind="function"><name>ChartInfo</name></member>
-    <member refid="classChartsManager_1_1ChartInfo_1a249cbf866d9609d6c7210b4e488046fb" kind="function"><name>id</name></member>
-    <member refid="classChartsManager_1_1ChartInfo_1abcd4aeeaada64e1e67d8fe82bd6a26fd" kind="function"><name>init</name></member>
-  </compound>
-  <compound refid="classChartsManager" kind="class"><name>ChartsManager</name>
-    <member refid="classChartsManager_1a82582aa674686b59d326a685944916f6" kind="typedef"><name>ChartsMap</name></member>
-    <member refid="classChartsManager_1a81f97f6a3128692c2b47ceffb2500dfd" kind="variable"><name>m_mainWindow</name></member>
-    <member refid="classChartsManager_1a260439ee8d525a4f33f1c0678dd1ec27" kind="variable"><name>m_rpcPort</name></member>
-    <member refid="classChartsManager_1a31d07dd648efb58259639785e3db7315" kind="variable"><name>m_chartsMutex</name></member>
-    <member refid="classChartsManager_1a33cc065fd9e7524f761a46165f87defb" kind="variable"><name>m_charts</name></member>
-    <member refid="classChartsManager_1a309040e83778b4ec6c3ccf6f7197eff2" kind="function"><name>initializeChart</name></member>
-    <member refid="classChartsManager_1accf3a29335e71ddfed371082dd9594fc" kind="function"><name>createNewBatchChart</name></member>
-    <member refid="classChartsManager_1a26363f1c465cef5439e10bafb2f7a742" kind="function"><name>createNewRealTimeChart</name></member>
-    <member refid="classChartsManager_1a21afc85f3d9e29cc3c14f60b40cddcf3" kind="function"><name>createChartKey</name></member>
-    <member refid="classChartsManager_1ad25df8d47bd2fbee256acf982984769c" kind="function"><name>~ChartsManager</name></member>
-    <member refid="classChartsManager_1a6536db1e0c7b991995c308166fc3edc9" kind="function"><name>initialize</name></member>
-    <member refid="classChartsManager_1afc4cc466bddf04e5aaf00aa0bbee5a43" kind="function"><name>close</name></member>
-    <member refid="classChartsManager_1a9945ef93a1de1f58454a1b3c1e021fbb" kind="function"><name>plotBatchChart</name></member>
-    <member refid="classChartsManager_1ac62de851edf97c62376718d58002a7f2" kind="function"><name>plotRealTimeChart</name></member>
-    <member refid="classChartsManager_1ac511bea176179deff6e0945b71fbdce6" kind="function"><name>closeAllCharts</name></member>
-    <member refid="classChartsManager_1a208beee2bbc251f78299c4bd20011410" kind="function"><name>closeChart</name></member>
-    <member refid="classChartsManager_1a906e8cb70012ae9203b5ff034c0df567" kind="function"><name>listAllCharts</name></member>
-  </compound>
-  <compound refid="classChartsManagerWindow" kind="class"><name>ChartsManagerWindow</name>
-    <member refid="classChartsManagerWindow_1a30230392e930855d48a67c14c0baf194" kind="function"><name>ChartsManagerWindow</name></member>
-    <member refid="classChartsManagerWindow_1a47919bc858c1755e26d3d1e8dd8f11f7" kind="function"><name>~ChartsManagerWindow</name></member>
-    <member refid="classChartsManagerWindow_1a6cea40b84476266b167c3204238f6935" kind="function"><name>event</name></member>
   </compound>
   <compound refid="classiDynTree_1_1ClassicalAcc" kind="class"><name>iDynTree::ClassicalAcc</name>
     <member refid="classiDynTree_1_1ClassicalAcc_1af2840c213b585301e38240715afbb360" kind="function"><name>ClassicalAcc</name></member>
@@ -1859,6 +1815,11 @@
     <member refid="classiDynTree_1_1ITexture_1acc2e8c7c5e02bf901b7df10c4b7d1af3" kind="function"><name>environment</name></member>
     <member refid="classiDynTree_1_1ITexture_1ad2c45cf8667d339d91567bfd58c33471" kind="function"><name>getPixelColor</name></member>
     <member refid="classiDynTree_1_1ITexture_1accfd16dd44c6bb16c076398081965bce" kind="function"><name>getPixels</name></member>
+    <member refid="classiDynTree_1_1ITexture_1a54b05365c8136ec72b76bac964d3b403" kind="function"><name>drawToFile</name></member>
+    <member refid="classiDynTree_1_1ITexture_1ac37428ca8f11fb8fa749f2cddb328c7a" kind="function"><name>enableDraw</name></member>
+    <member refid="classiDynTree_1_1ITexture_1acd258bc165fe99ed6fe987ed2aab682d" kind="function"><name>width</name></member>
+    <member refid="classiDynTree_1_1ITexture_1a92644f4603752dccf3188b6de6b26288" kind="function"><name>height</name></member>
+    <member refid="classiDynTree_1_1ITexture_1aabd49737df8e97ee6e76c7f96ce41950" kind="function"><name>setSubDrawArea</name></member>
   </compound>
   <compound refid="classiDynTree_1_1ITexturesHandler" kind="class"><name>iDynTree::ITexturesHandler</name>
     <member refid="classiDynTree_1_1ITexturesHandler_1a28ecd72848f561cd9a96deb74078ca93" kind="function"><name>~ITexturesHandler</name></member>
@@ -1925,12 +1886,6 @@
     <member refid="classiDynTree_1_1JointSensor_1a132037b450bd1e276d123066560de435" kind="function"><name>setParentJoint</name></member>
     <member refid="classiDynTree_1_1JointSensor_1a1a2b30a0aaa2c21e8362ecfa94e3d960" kind="function"><name>setParentJointIndex</name></member>
     <member refid="classiDynTree_1_1JointSensor_1ac71c4fca8476a8af346c5ecfee83a7e9" kind="function"><name>isConsistent</name></member>
-  </compound>
-  <compound refid="classJointStateSubscriber" kind="class"><name>JointStateSubscriber</name>
-    <member refid="classJointStateSubscriber_1ae178101cf22e6d7ab04ee836cbd1c879" kind="variable"><name>m_module</name></member>
-    <member refid="classJointStateSubscriber_1a538643abd929d49216aced2f1e4d3f34" kind="function"><name>JointStateSubscriber</name></member>
-    <member refid="classJointStateSubscriber_1a8145664446c3d5727cddcd1750614ba1" kind="function"><name>attach</name></member>
-    <member refid="classJointStateSubscriber_1a8a457e5c9ede90aac04116d15b37406c" kind="function"><name>onRead</name></member>
   </compound>
   <compound refid="classiDynTree_1_1KinDynComputations" kind="class"><name>iDynTree::KinDynComputations</name>
     <member refid="classiDynTree_1_1KinDynComputations_1ae5a13daafda43dd17c1def2441a1bba3" kind="function"><name>KinDynComputations</name></member>
@@ -2595,50 +2550,6 @@
     <member refid="structiDynTree_1_1optimalcontrol_1_1NonZero_1ac9b89eb6ae228935b94ba08e6a961b0f" kind="variable"><name>row</name></member>
     <member refid="structiDynTree_1_1optimalcontrol_1_1NonZero_1a4b6cc2101249912a4557b45ba0c91404" kind="variable"><name>col</name></member>
   </compound>
-  <compound refid="classObserverThread" kind="class"><name>ObserverThread</name>
-    <member refid="classObserverThread_1a6f10ca48c6ed64b0a90266f594499ae5" kind="variable"><name>m_wholeBodyDevice</name></member>
-    <member refid="classObserverThread_1a37796c9a53d7e074b82c28eeb2b123d8" kind="variable"><name>m_iencs</name></member>
-    <member refid="classObserverThread_1a0dcbe6aadd23df400646c3208ab23f59" kind="variable"><name>m_iposdir</name></member>
-    <member refid="classObserverThread_1a48897dbaf2920981a18ef820a7e872fa" kind="variable"><name>m_kinDyn</name></member>
-    <member refid="classObserverThread_1a5888e7988c70d628e81d2e6c0d9b9dd6" kind="variable"><name>m_measuredEncodersInDeg</name></member>
-    <member refid="classObserverThread_1a966e77e2664f119bec8a6ef2a919776e" kind="variable"><name>m_desiredJointPositionsInDeg</name></member>
-    <member refid="classObserverThread_1ad21fd7b440a5b204f27043e289deed17" kind="variable"><name>m_primarySole</name></member>
-    <member refid="classObserverThread_1a88c3faee0b53fac318290f6f946b29e2" kind="variable"><name>m_secondarySole</name></member>
-    <member refid="classObserverThread_1a7d4052ebfddacd54febe108089ce4516" kind="variable"><name>m_skip_pressure</name></member>
-    <member refid="classObserverThread_1a07aea9176976803654b4c5e941d64233" kind="variable"><name>m_primarySolePressure</name></member>
-    <member refid="classObserverThread_1a2f542c2e0a42c96499f4d12584167e3e" kind="variable"><name>m_primaryPressureAnalog</name></member>
-    <member refid="classObserverThread_1aac012eddef57f3ac1966ba3e512330fc" kind="variable"><name>m_secondarySolePressure</name></member>
-    <member refid="classObserverThread_1ad5ec9caf95779dfea80bd61f3a6b7d88" kind="variable"><name>m_secondaryPressureAnalog</name></member>
-    <member refid="classObserverThread_1adda2e83993ee4e514b94691ae1b1760c" kind="variable"><name>m_primaryPressurePadsInPrimarySole</name></member>
-    <member refid="classObserverThread_1a8cec0fad6edf6eff0188ec5154128828" kind="variable"><name>m_secondaryPressurePadsInSecondarySole</name></member>
-    <member refid="classObserverThread_1a8673f1be590828e17445cbf0f5a60d90" kind="variable"><name>m_measuredPressurePrimarySoleInN</name></member>
-    <member refid="classObserverThread_1a8dc0178135f0ec75f815369080a8ec9c" kind="variable"><name>m_measuredPressureSecondarySoleInN</name></member>
-    <member refid="classObserverThread_1aa5b4b9eb50a4fdda3033a94f01990e0d" kind="variable"><name>skin_port</name></member>
-    <member refid="classObserverThread_1a46a314cd849f89fb117f83a758bfcb93" kind="variable"><name>m_skip_gravity</name></member>
-    <member refid="classObserverThread_1a97a0818e58b397dfa655e9aa631df3c2" kind="variable"><name>m_imuPort</name></member>
-    <member refid="classObserverThread_1ac0fe988dc3141d755b57487783f3cee7" kind="variable"><name>m_imuFrameName</name></member>
-    <member refid="classObserverThread_1a7a29852f9751e835ddaf95aa03da28b2" kind="variable"><name>m_remoteImuPortName</name></member>
-    <member refid="classObserverThread_1a2de83149cbc1832192c4a6fd08a9740b" kind="variable"><name>m_localImuPortName</name></member>
-    <member refid="classObserverThread_1ade05d344d701c7b28697c032351ff436" kind="variable"><name>m_gravityDirection</name></member>
-    <member refid="classObserverThread_1ab610f644550c9f5425f16068c1238f63" kind="variable"><name>filtIMUGravity</name></member>
-    <member refid="classObserverThread_1ae400d5897ef57a1fcfef697734ba6d6d" kind="variable"><name>sensorsNum</name></member>
-    <member refid="classObserverThread_1a8bd71401b55f5bb59fb69b4074a02cd0" kind="variable"><name>mbSimpleDraw</name></member>
-    <member refid="classObserverThread_1aa16cec1b8756757754ed21111ed8da51" kind="variable"><name>m_mutex</name></member>
-    <member refid="classObserverThread_1a8fdd3ba613503208cf3bec980ff9d684" kind="variable"><name>m_comInPrimarySole</name></member>
-    <member refid="classObserverThread_1abfbcf155cd7206e36b0412759792bde4" kind="variable"><name>m_desiredComInPrimarySole</name></member>
-    <member refid="classObserverThread_1aacf04a043772353cd3f5acdeb94361b0" kind="variable"><name>m_primaryCopInPrimarySole</name></member>
-    <member refid="classObserverThread_1a4d05f76dd84e0ce493ed1c4f3e1de99b" kind="variable"><name>m_secondaryCopInPrimarySole</name></member>
-    <member refid="classObserverThread_1a4ee7098657bb6a3ce13f7b2473561669" kind="variable"><name>m_totalCopInPrimarySole</name></member>
-    <member refid="classObserverThread_1a06b785d2c1f7a4b6f6a0e5d73751c62e" kind="variable"><name>m_primarySole_X_secondarySole</name></member>
-    <member refid="classObserverThread_1adc4b4528d70acef32adb7c20cafeb1e2" kind="function"><name>ObserverThread</name></member>
-    <member refid="classObserverThread_1a8bfc521c5977bfd16be73d6bfeb9661a" kind="function"><name>init</name></member>
-    <member refid="classObserverThread_1a990dc3bd0d51e3819ada28606b588a0c" kind="function"><name>~ObserverThread</name></member>
-    <member refid="classObserverThread_1a852c6d18eba266ac34131c0b899dd051" kind="function"><name>threadInit</name></member>
-    <member refid="classObserverThread_1aa6cde18114c5f23b1f6b115568b94813" kind="function"><name>threadRelease</name></member>
-    <member refid="classObserverThread_1a5ffb8e9608983c9e7f3b7dce5f7c9182" kind="function"><name>run</name></member>
-    <member refid="classObserverThread_1a630067097a000468ccf53d1ba3394a25" kind="function"><name>draw</name></member>
-    <member refid="classObserverThread_1a32cca2e87ea272bf819444e2aed74f0b" kind="function"><name>drawPolygon</name></member>
-  </compound>
   <compound refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem" kind="class"><name>iDynTree::optimalcontrol::OptimalControlProblem</name>
     <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a388070b1c4e154ccbdea7c9b7592a309" kind="variable"><name>m_pimpl</name></member>
     <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlProblem_1a8f8f15343f3681e867a3a1497815b3a6" kind="function"><name>OptimalControlProblem</name></member>
@@ -2992,17 +2903,6 @@
     <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1a5c23504c3a9f8fabe3431a654073bbc2" kind="function"><name>costSecondPartialDerivativeWRTStateControlSparsity</name></member>
     <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1ae76e9ba84440737d2a7a7c96266fd847" kind="function"><name>costSecondPartialDerivativeWRTControlSparsity</name></member>
     <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1a882f483ef58fd779148f92dba7f81ba6" kind="function"><name>QuadraticLikeCost</name></member>
-  </compound>
-  <compound refid="classChartsManager_1_1RealTimeChartInfo" kind="class"><name>ChartsManager::RealTimeChartInfo</name>
-    <member refid="classChartsManager_1_1RealTimeChartInfo_1a0a1e47a8fa82dc7f2e6ca2d217d49ef5" kind="variable"><name>m_streamingPort</name></member>
-    <member refid="classChartsManager_1_1RealTimeChartInfo_1abc6feb939da43332a5763bb2827d2636" kind="variable"><name>m_buffer</name></member>
-    <member refid="classChartsManager_1_1RealTimeChartInfo_1a48695a48c150ea5f179e3c419584e8e6" kind="variable"><name>m_bufferMutex</name></member>
-    <member refid="classChartsManager_1_1RealTimeChartInfo_1a17812e0d3f413beefe53d1d26e800d2d" kind="friend"><name>ChartsManager</name></member>
-    <member refid="classChartsManager_1_1RealTimeChartInfo_1a69ba8bc46a76f944a41aa64130d81d94" kind="function"><name>RealTimeChartInfo</name></member>
-    <member refid="classChartsManager_1_1RealTimeChartInfo_1acf97010cec02147e65c33d8798a3ef18" kind="function"><name>~RealTimeChartInfo</name></member>
-    <member refid="classChartsManager_1_1RealTimeChartInfo_1a1a96bfaf32a240b841320a810b62b4a0" kind="function"><name>portName</name></member>
-    <member refid="classChartsManager_1_1RealTimeChartInfo_1a898a5d4a149499033708fee0e0809c09" kind="function"><name>init</name></member>
-    <member refid="classChartsManager_1_1RealTimeChartInfo_1a53b24d462a8a35086ce99828052adab7" kind="function"><name>onRead</name></member>
   </compound>
   <compound refid="classiDynTree_1_1RevoluteJoint" kind="class"><name>iDynTree::RevoluteJoint</name>
     <member refid="classiDynTree_1_1RevoluteJoint_1a64e64e4c7b80737e16af12d405479737" kind="variable"><name>link1</name></member>
@@ -4146,12 +4046,16 @@
     <member refid="classiDynTree_1_1Visualizer_1ae4b712ffad9dd8dabfea93b87bbcaa08" kind="function"><name>modelViz</name></member>
     <member refid="classiDynTree_1_1Visualizer_1a47223d048b3a13b751e89762aa65a55c" kind="function"><name>camera</name></member>
     <member refid="classiDynTree_1_1Visualizer_1afaf0268b1cbd07b4ce22f237f863beab" kind="function"><name>enviroment</name></member>
+    <member refid="classiDynTree_1_1Visualizer_1a8234a676b0a25e9bb9ac34e175b7fb27" kind="function"><name>environment</name></member>
     <member refid="classiDynTree_1_1Visualizer_1ad4761debeba7c653950ab787eb6ef8b0" kind="function"><name>vectors</name></member>
     <member refid="classiDynTree_1_1Visualizer_1a3f444edda1dfd065fadc647f2f1db9e1" kind="function"><name>frames</name></member>
     <member refid="classiDynTree_1_1Visualizer_1a15f64be8e23de06b9a99fd7920380c71" kind="function"><name>textures</name></member>
     <member refid="classiDynTree_1_1Visualizer_1a346dd8b22b45d1251581ccbcc8882e57" kind="function"><name>getLabel</name></member>
+    <member refid="classiDynTree_1_1Visualizer_1aa95587b7992c90383ff4ab25c9fc4102" kind="function"><name>width</name></member>
+    <member refid="classiDynTree_1_1Visualizer_1acb040534c8e4e16e5a067c2319dfedb7" kind="function"><name>height</name></member>
     <member refid="classiDynTree_1_1Visualizer_1abfa7aed891eb9df40e200892567be8c7" kind="function"><name>run</name></member>
     <member refid="classiDynTree_1_1Visualizer_1a1517692d3f37e28a7e51b1c5b4117571" kind="function"><name>draw</name></member>
+    <member refid="classiDynTree_1_1Visualizer_1ab7b33000ce83db290dafcd9485612e9a" kind="function"><name>subDraw</name></member>
     <member refid="classiDynTree_1_1Visualizer_1ac3c119f56b8b892f93391b66cc22b90c" kind="function"><name>drawToFile</name></member>
     <member refid="classiDynTree_1_1Visualizer_1a7326dfca30d383941d1fd0968b476a9e" kind="function"><name>close</name></member>
     <member refid="classiDynTree_1_1Visualizer_1afeb9911ec0c555084847462a0a2959e2" kind="function"><name>isWindowActive</name></member>
@@ -4262,30 +4166,6 @@
     <member refid="classiDynTree_1_1XMLParser_1a4ccc2d4850f255cf9714d51e8fa344d1" kind="function"><name>parseXMLString</name></member>
     <member refid="classiDynTree_1_1XMLParser_1aaf18ad736bf7a6ed165e1b533ed29e06" kind="function"><name>setDocumentFactory</name></member>
     <member refid="classiDynTree_1_1XMLParser_1affab248cde90245f3df3d5fb5b50476d" kind="function"><name>document</name></member>
-  </compound>
-  <compound refid="classYARPRobotStatePublisherModule" kind="class"><name>YARPRobotStatePublisherModule</name>
-    <member refid="classYARPRobotStatePublisherModule_1a3490ff0ed9a923065b58861f26ef84ec" kind="variable"><name>m_period</name></member>
-    <member refid="classYARPRobotStatePublisherModule_1acbd03495623098fbeef82cd52d81a351" kind="variable"><name>m_ddtransformclient</name></member>
-    <member refid="classYARPRobotStatePublisherModule_1af5d4cc6617cb35941cfde79aed169dbe" kind="variable"><name>m_iframetrans</name></member>
-    <member refid="classYARPRobotStatePublisherModule_1a5a1aa91bb7f263b6b4c3acd2f848e0c0" kind="variable"><name>m_tfPrefix</name></member>
-    <member refid="classYARPRobotStatePublisherModule_1a7223e203db41e157224177f7e17a4b04" kind="variable"><name>m_treeType</name></member>
-    <member refid="classYARPRobotStatePublisherModule_1a06ecc9fb39bba9d97c988bea5a14d57e" kind="variable"><name>m_usingNetworkClock</name></member>
-    <member refid="classYARPRobotStatePublisherModule_1ac08ae3f5121597069040e277b0155f75" kind="variable"><name>m_netClock</name></member>
-    <member refid="classYARPRobotStatePublisherModule_1a89d5c6e6b7d6d611bdca2b50f3937af1" kind="variable"><name>reducedModelOption</name></member>
-    <member refid="classYARPRobotStatePublisherModule_1a992f18ab37c0e66f3413a39e194bd779" kind="variable"><name>m_kinDynComp</name></member>
-    <member refid="classYARPRobotStatePublisherModule_1aa27bd972c922b488fd9a287e0704aba3" kind="variable"><name>m_jointPos</name></member>
-    <member refid="classYARPRobotStatePublisherModule_1aa4d777beba6b38403ec9154d82f59a87" kind="variable"><name>m_baseFrameName</name></member>
-    <member refid="classYARPRobotStatePublisherModule_1a2fed9d8d4a5a71120be32250bec1ce50" kind="variable"><name>m_baseFrameIndex</name></member>
-    <member refid="classYARPRobotStatePublisherModule_1acff86f6b67ca9313bbfe84c90f586125" kind="variable"><name>m_buf4x4</name></member>
-    <member refid="classYARPRobotStatePublisherModule_1aa407045b1ea8b9ab5bce3f5df5db8cc7" kind="variable"><name>m_mutex</name></member>
-    <member refid="classYARPRobotStatePublisherModule_1a902f33a9c4928de29aa7e83af2752e02" kind="variable"><name>m_rosNode</name></member>
-    <member refid="classYARPRobotStatePublisherModule_1a873492a01589058495b305e17221e002" kind="variable"><name>m_jointStateSubscriber</name></member>
-    <member refid="classYARPRobotStatePublisherModule_1a04bc33d54ba6af3776cec14204efc895" kind="function"><name>YARPRobotStatePublisherModule</name></member>
-    <member refid="classYARPRobotStatePublisherModule_1abe0321d3bcf142041fba64e7a1c9906b" kind="function"><name>configure</name></member>
-    <member refid="classYARPRobotStatePublisherModule_1a455f09cb206705715b14eec3b6c1d8cd" kind="function"><name>close</name></member>
-    <member refid="classYARPRobotStatePublisherModule_1a146542f44b0f8f1c6825afe965cdd325" kind="function"><name>getPeriod</name></member>
-    <member refid="classYARPRobotStatePublisherModule_1ac0a16c131c4b021307fe66cf49c9a6fa" kind="function"><name>updateModule</name></member>
-    <member refid="classYARPRobotStatePublisherModule_1a02745957b5043d51cc41ab70dff396d8" kind="function"><name>onRead</name></member>
   </compound>
   <compound refid="namespaceiCub" kind="namespace"><name>iCub</name>
   </compound>
@@ -4660,17 +4540,9 @@
   </compound>
   <compound refid="namespaceIpopt" kind="namespace"><name>Ipopt</name>
   </compound>
-  <compound refid="namespaceQtCharts" kind="namespace"><name>QtCharts</name>
-  </compound>
   <compound refid="namespacestd" kind="namespace"><name>std</name>
   </compound>
-  <compound refid="namespaceyarp" kind="namespace"><name>yarp</name>
-  </compound>
-  <compound refid="namespaceyarp_1_1dev" kind="namespace"><name>yarp::dev</name>
-  </compound>
   <compound refid="namespaceyarp_1_1math" kind="namespace"><name>yarp::math</name>
-  </compound>
-  <compound refid="namespaceyarp_1_1os" kind="namespace"><name>yarp::os</name>
   </compound>
   <compound refid="main_8dox" kind="file"><name>main.dox</name>
   </compound>
@@ -5355,14 +5227,6 @@
     <member refid="ModelTransformersSolidShapes_8h_1a6760312b6c7a94affa286e93e5181357a6486e8af25b0a7add4a835ec17c83e97" kind="enumvalue"><name>ConvertSolidShapesWithEnclosingAxisAlignedBoundingBoxes</name></member>
     <member refid="ModelTransformersSolidShapes_8h_1adbe329aea649b6a379dfd7077ceb1eb9" kind="function"><name>approximateSolidShapesWithPrimitiveShape</name></member>
   </compound>
-  <compound refid="ObserverThread_8h" kind="file"><name>ObserverThread.h</name>
-  </compound>
-  <compound refid="ChartsManager_8h" kind="file"><name>ChartsManager.h</name>
-  </compound>
-  <compound refid="ChartsManagerWindow_8h" kind="file"><name>ChartsManagerWindow.h</name>
-  </compound>
-  <compound refid="robotstatepublisher_8h" kind="file"><name>robotstatepublisher.h</name>
-  </compound>
   <compound refid="Visualizer_8h" kind="file"><name>Visualizer.h</name>
     <member refid="Visualizer_8h_1aad6844bb3e20ca63bfe9e3ee6e26515a" kind="enum"><name>LightType</name></member>
     <member refid="Visualizer_8h_1aad6844bb3e20ca63bfe9e3ee6e26515aa7552ee08212d810760cfcca2c9e26976" kind="enumvalue"><name>POINT_LIGHT</name></member>
@@ -5503,7 +5367,7 @@
   </compound>
   <compound refid="dir_30e5997e332243feb7f49058feeba2a4" kind="dir"><name>iDynTree</name>
   </compound>
-  <compound refid="dir_7ab716ed06828ed1645e1d373a35452a" kind="dir"><name>iDynTree</name>
+  <compound refid="dir_bee4db886efdb85971375e4ac361013b" kind="dir"><name>iDynTree</name>
   </compound>
   <compound refid="dir_e92bd7cc5c3faa48a1797a843d5dac1f" kind="dir"><name>iDynTree</name>
   </compound>
@@ -5521,13 +5385,13 @@
   </compound>
   <compound refid="dir_77cdb3a72d5a00eea7dab51220307fb7" kind="dir"><name>iDynTree/Model</name>
   </compound>
-  <compound refid="dir_d0f3ec5752d795bf12d1ad0257cbe3de" kind="dir"><name>iDynTree/ModelIO</name>
+  <compound refid="dir_52266d84fa8cdfa7d5e17899a30a301e" kind="dir"><name>iDynTree/ModelIO</name>
   </compound>
   <compound refid="dir_d456b7abddf290dd744d4368f3af0eff" kind="dir"><name>iDynTree/OCSolvers</name>
   </compound>
   <compound refid="dir_cfadca6e97d0bca47f319c90dd0dd9db" kind="dir"><name>iDynTree/Optimizers</name>
   </compound>
-  <compound refid="dir_eeba5a9ee7993fb95e69618edbde8baf" kind="dir"><name>private</name>
+  <compound refid="dir_d5d512a5df73702cc22b268130b830ea" kind="dir"><name>private</name>
   </compound>
   <compound refid="dir_dffea4b92cacc2f3de0172caac576a81" kind="dir"><name>private</name>
   </compound>

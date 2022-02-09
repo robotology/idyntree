@@ -12,8 +12,6 @@
     <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
     <includes refid="FreeFloatingMatrices_8h" local="no">iDynTree/Model/FreeFloatingMatrices.h</includes>
     <includes refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includes>
-    <includedby refid="ObserverThread_8h" local="no">ObserverThread.h</includedby>
-    <includedby refid="robotstatepublisher_8h" local="no">robotstatepublisher.h</includedby>
     <includedby refid="InverseKinematicsData_8h" local="no">private/InverseKinematicsData.h</includedby>
     <incdepgraph>
       <node id="1">
@@ -31,18 +29,6 @@
         <label>vector</label>
       </node>
     </incdepgraph>
-    <invincdepgraph>
-      <node id="1">
-        <label>iDynTree/KinDynComputations.h</label>
-        <link refid="KinDynComputations_8h"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-      </node>
-      <node id="2">
-        <label>robotstatepublisher.h</label>
-        <link refid="robotstatepublisher_8h"/>
-      </node>
-    </invincdepgraph>
     <innerclass refid="classiDynTree_1_1KinDynComputations" prot="public">iDynTree::KinDynComputations</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>
