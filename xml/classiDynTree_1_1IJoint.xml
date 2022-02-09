@@ -191,7 +191,7 @@
 <para>Get the derivative of the transform with respect to a position coordinate. </para>
         </briefdescription>
         <detaileddescription>
-<para>In particular, if the selected position coordinate is <formula id="294">$q$</formula>, return the derivative: <formula id="322">\[ \frac{\partial {}^\texttt{child} H_\texttt{parent} }{\partial q} \]</formula></para>
+<para>In particular, if the selected position coordinate is <formula id="297">$q$</formula>, return the derivative: <formula id="325">\[ \frac{\partial {}^\texttt{child} H_\texttt{parent} }{\partial q} \]</formula></para>
 <para>If posCoord_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a149ddcf05f6328fdd3ecbe38a0fca4a0" kindref="member">getNrOfPosCoords()</ref>, the returned value is undefined. </para>
         </detaileddescription>
         <inbodydescription>

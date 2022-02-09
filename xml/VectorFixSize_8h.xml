@@ -26,10 +26,10 @@
     <includedby refid="SpatialMotionVector_8h" local="no">iDynTree/Core/SpatialMotionVector.h</includedby>
     <includedby refid="TransformDerivative_8h" local="no">iDynTree/Core/TransformDerivative.h</includedby>
     <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
-    <includedby refid="MaterialElement_8h" local="no">private/MaterialElement.h</includedby>
-    <includedby refid="URDFParsingUtils_8h" local="no">private/URDFParsingUtils.h</includedby>
     <includedby refid="InverseKinematicsNLP_8h" local="no">private/InverseKinematicsNLP.h</includedby>
     <includedby refid="JointState_8h" local="no">iDynTree/Model/JointState.h</includedby>
+    <includedby refid="MaterialElement_8h" local="no">private/MaterialElement.h</includedby>
+    <includedby refid="URDFParsingUtils_8h" local="no">private/URDFParsingUtils.h</includedby>
     <incdepgraph>
       <node id="1">
         <label>iDynTree/Core/VectorFixSize.h</label>
