@@ -75,6 +75,11 @@ jobs:
         # See https://github.com/robotology/robotology-superbuild/issues/477
         mamba install vs2019_win-64
 
+    - name: Print used environment [Conda]
+      shell: bash -l {0}
+      run: |
+        mamba list
+        env
 
     - name: Configure [Conda - Linux or  macOS]
       if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
