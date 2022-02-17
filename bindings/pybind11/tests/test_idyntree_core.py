@@ -220,6 +220,48 @@ class IDynTreeRotationTest(unittest.TestCase):
     for i in range(3):
       self.assertAlmostEqual(pos_rotated[i], expected_pos[i])
 
+  def test_simple_rotation_x(self):
+    angle = np.pi / 3
+    rot_x = iDynTree.Rotation.RotX(angle)
+    expected_rotation = iDynTree.Rotation(1, 0, 0,
+                                          0, np.cos(angle), -np.sin(angle),
+                                          0, np.sin(angle), np.cos(angle))
+    for r in range(3):
+      for c in range(3):
+        self.assertAlmostEqual(rot_x[r, c], expected_rotation[r, c])
+
+  def test_simple_rotation_y(self):
+    angle = np.pi / 3
+    rot_x = iDynTree.Rotation.RotY(angle)
+    expected_rotation = iDynTree.Rotation(np.cos(angle), 0, np.sin(angle),
+                                          0, 1, 0,
+                                          -np.sin(angle), 0, np.cos(angle))
+    for r in range(3):
+      for c in range(3):
+        self.assertAlmostEqual(rot_x[r, c], expected_rotation[r, c])
+
+  def test_simple_rotation_z(self):
+    angle = np.pi / 3
+    rot_x = iDynTree.Rotation.RotZ(angle)
+    expected_rotation = iDynTree.Rotation(np.cos(angle), -np.sin(angle), 0,
+                                          np.sin(angle), np.cos(angle), 0,
+                                          0, 0, 1)
+    for r in range(3):
+      for c in range(3):
+        self.assertAlmostEqual(rot_x[r, c], expected_rotation[r, c])
+
+  def test_rpy(self):
+    roll = np.pi / 3
+    pitch = np.pi / 2
+    yaw = np.pi / 6
+    rotation = iDynTree.Rotation.RPY(roll, pitch, yaw)
+    expected_rotation = (
+        iDynTree.Rotation.RotZ(yaw) * iDynTree.Rotation.RotY(pitch) *
+        iDynTree.Rotation.RotX(roll))
+    for r in range(3):
+      for c in range(3):
+        self.assertAlmostEqual(rotation[r, c], expected_rotation[r, c])
+
 
 class IDynTreeTransformTest(unittest.TestCase):
 
