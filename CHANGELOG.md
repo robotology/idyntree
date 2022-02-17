@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased Major]
 
+### Added
+- Expose some Rotation conversion functions for pybind11 bindings (https://github.com/robotology/idyntree/pull/973)
+
+
 ## [5.0.0] - 2022-02-08
 
 ### Added
