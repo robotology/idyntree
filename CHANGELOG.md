@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Avoid to use iDynTree material when `.obj` meshes are loaded in the Irrlicht visualizer (https://github.com/robotology/idyntree/pull/974).
+- Avoid to use iDynTree material (for example the one specified in URDF) when `.obj` meshes are loaded in the Irrlicht visualizer (https://github.com/robotology/idyntree/pull/974).
 
 ## [5.0.0] - 2022-02-08
 
