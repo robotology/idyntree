@@ -218,7 +218,7 @@ inline irr::scene::ISceneNode * addGeometryToSceneManager(const iDynTree::SolidS
         }
 
         // If multiple mesh are loaded, add them
-        if (getFileExt(externalMesh->getFilename()) == "dae")
+        if (getFileExt(externalMesh->getFilename()) == "dae" || getFileExt(externalMesh->getFilename()) == "obj")
         {
             use_iDynTree_material = false;
         }
