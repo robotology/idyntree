@@ -267,6 +267,12 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
 
     irr::SIrrlichtCreationParameters irrDevParams;
 
+// If we are on Windows and the SDL backend of Irrlicht is available,
+// let's use it to avoid spurios WM_QUIT signal being raised in the
+// close() method, see https://github.com/robotology/idyntree/issues/975
+#if defined(_WIN32) && defined(_IRR_COMPILE_WITH_SDL_DEVICE_)
+    irrDevParams.DeviceType = irr::EIDT_SDL;
+#endif
     irrDevParams.DriverType = irr::video::EDT_OPENGL;
     irrDevParams.WindowSize = irr::core::dimension2d<irr::u32>(visualizerOptions.winWidth, visualizerOptions.winHeight);
     irrDevParams.WithAlphaChannel = true;
