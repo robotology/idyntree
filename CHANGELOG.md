@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Avoid to use iDynTree material (for example the one specified in URDF) when `.obj` meshes are loaded in the Irrlicht visualizer (https://github.com/robotology/idyntree/pull/974).
-- Fix crash on `Visualizer::close` on Windows (). The fix works only if the used Irrlicht is compiled with SDL support.
+- Fix crash on `Visualizer::close` on Windows (https://github.com/robotology/idyntree/pull/976). The fix works only if the used Irrlicht is compiled with SDL support.
 
 ## [5.0.0] - 2022-02-08
 
