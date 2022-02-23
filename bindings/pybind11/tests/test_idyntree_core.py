@@ -228,7 +228,7 @@ class IDynTreeRotationTest(unittest.TestCase):
                                           0, np.sin(angle), np.cos(angle))
     for r in range(3):
       for c in range(3):
-        self.assertAlmostEqual(rot_x[r, c], expected_rotation[r, c])
+        self.assertAlmostEqual(rot_x[r, c], expected_rotation[r, c]/2)
 
   def test_simple_rotation_y(self):
     angle = np.pi / 3
