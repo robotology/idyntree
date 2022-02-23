@@ -224,7 +224,14 @@ void iDynTreeCoreBindings(pybind11::module& module) {
             return r * p;
           },
           py::is_operator())
-      .def_static("Identity", &Rotation::Identity);
+      .def("as_rpy", &Rotation::asRPY)
+      .def("as_quaternion", &Rotation::asQuaternion)
+      .def_static("Identity", &Rotation::Identity)
+      .def_static("RotX", &Rotation::RotX)
+      .def_static("RotY", &Rotation::RotY)
+      .def_static("RotZ", &Rotation::RotZ)
+      .def_static("RPY", &Rotation::RPY)
+      .def_static("Quaternion", &Rotation::RotationFromQuaternion);
 
   py::class_<Transform> transform(module, "Transform");
   transformClassDefinition(transform);
