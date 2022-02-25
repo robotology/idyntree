@@ -6,8 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased Major]
 
+## [5.1.0] - 2022-02-25
+
 ### Added
-- Expose some Rotation conversion functions for pybind11 bindings (https://github.com/robotology/idyntree/pull/973)
+- Expose some Rotation conversion functions for pybind11 bindings (https://github.com/robotology/idyntree/pull/973).
+
+### Fixed
+- Fixed compatibility at CMake level on macOS with MATLAB R2021a and R2021b (https://github.com/robotology/idyntree/pull/978).
 
 ## [5.0.1] - 2022-02-23
 
