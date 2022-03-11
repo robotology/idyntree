@@ -62,7 +62,20 @@ enum BerdyVariants
      * for accounting for free floating dynamics and removing the NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV from the dynamic variables.
      *
      */
-    BERDY_FLOATING_BASE = 1
+    BERDY_FLOATING_BASE = 1,
+
+    /**
+     * Modified version of floating base Berdy
+     * for accounting centroidal dynamics constraints towards estimating the external link wrench independently of the internal joint torque estimates.
+     */
+    HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK = 2,
+
+    /**
+     * Modified version of floating base Berdy
+     * for accounting full dynamics using estimated external forces
+     * (aka Stack of Tasks Berdy Berdy i.e., SOT Berdy)
+     */
+    HIERARCHICAL_BERDY_FLOATING_BASE_FULL_DYNAMICS_TASK = 3
 };
 
 /**
@@ -128,7 +141,13 @@ enum BerdySensorTypes
     /**
      * Non-physical sensor that measures the wrench trasmitted by a joint.
      */
-    JOINT_WRENCH_SENSOR     = 1003
+    JOINT_WRENCH_SENSOR     = 1003,
+
+    /**
+     * Non-physical sensor that holds the value of Rate of Change of Momentum (ROCM) of the system
+     * for centroidal dynamics constraint used in HIERARCHICAL_BERDY_FLOATING_BASE Berdy variation
+     */
+    ROCM_SENSOR = 1004
 };
 
 bool isLinkBerdyDynamicVariable(const BerdyDynamicVariablesTypes dynamicVariableType);
@@ -152,6 +171,7 @@ public:
                      includeAllJointAccelerationsAsSensors(true),
                      includeAllJointTorquesAsSensors(false),
                      includeAllNetExternalWrenchesAsSensors(true),
+                     includeROCMAsSensor(false),
                      includeFixedBaseExternalWrench(false),
                      baseLink("")
     {
@@ -201,6 +221,21 @@ public:
      * Default value: true .
      */
     bool includeAllNetExternalWrenchesAsSensors;
+
+    /*
+     * If true, includes the Rate of Change of Momentum (ROCM) in the task sensors vector.
+     * It is compatible only with HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK and HIERARCHICAL_BERDY_FLOATING_BASE_FULL_DYNAMICS_TASK
+     *
+     * Default value: false .
+     */
+    bool includeROCMAsSensor;
+
+    /**
+     * Vector of link names that are considered for rate of change of momentum constraint using
+     * Rate of Change of Momentum (ROCM) sensor for HIERARCHICAL_BERDY_FLOATING_BASE variation
+     * The default value is set to contains all the links present in the model
+     */
+    std::vector<std::string> rocmConstraintLinkNamesVector;
 
     /**
      * If includeNetExternalWrenchesAsSensors is true and the
@@ -374,6 +409,12 @@ class BerdyHelper
      */
 
     /**
+     * Base transform
+     */
+    Transform m_baseTransform;
+
+
+    /**
      * Joint positions
      */
     JointPosDoubleArray m_jointPos;
@@ -408,7 +449,6 @@ class BerdyHelper
     bool initSensorsMeasurements();
 
     IndexRange getRangeOriginalBerdyFixedBase(const BerdyDynamicVariablesTypes dynamicVariableType, const TraversalIndex idx) const;
-
 
     /**
      * Ranges for specific dynamics equations
@@ -459,6 +499,7 @@ class BerdyHelper
         size_t dofTorquesOffset;
         size_t netExtWrenchOffset;
         size_t jointWrenchOffset;
+        size_t rocmOffset;
     } berdySensorTypeOffsets;
 
     /**
@@ -488,6 +529,12 @@ class BerdyHelper
      * and the link frames.
      */
     std::vector<Transform> m_link_H_externalWrenchMeasurementFrame;
+
+    /*
+     * LinkPositions variable containing the transforms between the base and the model links
+     *
+     */
+    LinkPositions world_H_links;
 
 
 public:
@@ -574,21 +621,20 @@ public:
      */
     bool resizeAndZeroBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
                                     MatrixDynSize & Y, VectorDynSize & bY);
-
     /**
-     * Get Berdy matrices
+     * Get Berdy matrices.
      */
     bool getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize &bD,
                           SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize &bY);
+
     /**
-     * Get Berdy matrices
+     * Get Berdy matrices - new method
      *
      * \note internally this function uses sparse matrices
      * Prefer the use of resizeAndZeroBerdyMatrices(SparseMatrix &, VectorDynSize &, SparseMatrix &, VectorDynSize &)
      */
     bool getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
                           MatrixDynSize & Y, VectorDynSize & bY);
-
 
     /**
      * Return the internal ordering of the sensors
@@ -607,6 +653,7 @@ public:
     IndexRange getRangeDOFSensorVariable(const BerdySensorTypes sensorType, const DOFIndex idx) const;
     IndexRange getRangeJointSensorVariable(const BerdySensorTypes sensorType, const JointIndex idx) const;
     IndexRange getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx) const;
+    IndexRange getRangeROCMSensorVariable(const BerdySensorTypes sensorType) const;
 
     /**
      * Ranges of dynamic variables
@@ -635,8 +682,8 @@ public:
                                   JointDOFsDoubleArray    & jointTorques,
                                   JointDOFsDoubleArray    & jointAccs,
                                   LinkInternalWrenches    & linkJointWrenches,
-                                  VectorDynSize& y);
-
+                                  VectorDynSize           & y,
+                                  SpatialMomentum           rocm = SpatialMomentum::Zero()); // Rate of Change of Momentum (rocm ) denoted through 6x1 spatial momentum vector. //TODO Double check this
 
 
     /**
@@ -647,7 +694,6 @@ public:
     bool serializeDynamicVariablesComputedFromFixedBaseRNEA(JointDOFsDoubleArray  & jointAccs,
                                                             LinkNetExternalWrenches & netExtWrenches,
                                                             VectorDynSize& d);
-
 
     /**
      * Extract the joint torques from the dynamic variables
@@ -661,7 +707,6 @@ public:
      */
     bool extractLinkNetExternalWrenchesFromDynamicVariables(const VectorDynSize& d,
                                                             LinkNetExternalWrenches& netExtWrenches) const;
-
 
     /**
       * @name Methods to submit the input data for dynamics computations.
@@ -677,17 +722,20 @@ public:
      *       are invariant with respect to an offset in linear velocity. This convenient to avoid
      *       any dependency on any prior floating base estimation.
      *
+     * @param[in] baseTransform the transformation from floating base to world
      * @param[in] jointPos the position of the joints of the model.
      * @param[in] jointVel the velocities of the joints of the model.
      * @param[in] floatingFrame the index of the frame for which kinematic information is provided.
      * @param[in] angularVel angular velocity (wrt to any inertial frame) of the specified floating frame,
      *                       expressed in the specified floating frame orientation.
+     * @param[in] w_H_b wptional transformation between floating base and world with default value set to Identity
      * @return true if all went ok, false otherwise.
      */
     bool updateKinematicsFromFloatingBase(const JointPosDoubleArray  & jointPos,
                                           const JointDOFsDoubleArray & jointVel,
                                           const FrameIndex & floatingFrame,
-                                          const Vector3 & angularVel);
+                                          const Vector3 & angularVel,
+                                          const Transform & w_H_b = iDynTree::Transform::Identity());
 
     /**
      * Set the kinematic information necessary for the dynamics estimation assuming that a

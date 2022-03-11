@@ -50,7 +50,7 @@ add_library(iDynTree::${libraryname} ALIAS ${libraryname})
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 
-target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model idyntree-sensors idyntree-modelio
+target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model idyntree-sensors idyntree-modelio iDynTree::idyntree-high-level
                                      PRIVATE Eigen3::Eigen)
 
 target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
