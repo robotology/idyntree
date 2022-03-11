@@ -17,6 +17,7 @@
 #include <iDynTree/Core/EigenSparseHelpers.h>
 
 #include <Eigen/SparseCore>
+#include<Eigen/SparseQR>
 #include <Eigen/SparseCholesky>
 
 #include <cassert>
@@ -200,7 +201,8 @@ namespace iDynTree {
                                                                      const iDynTree::JointDOFsDoubleArray& jointsVelocity,
                                                                      const FrameIndex floatingFrame,
                                                                      const Vector3& bodyAngularVelocityOfSpecifiedFrame,
-                                                                     const iDynTree::VectorDynSize& measurements)
+                                                                     const iDynTree::VectorDynSize& measurements,
+                                                                     const Transform& w_H_b)
     {
         assert(m_pimpl);
 
@@ -209,7 +211,7 @@ namespace iDynTree {
         m_pimpl->measurements = measurements;
 
         m_pimpl->berdy.updateKinematicsFromFloatingBase(m_pimpl->jointsConfiguration, m_pimpl->jointsVelocity,
-                                                        floatingFrame, bodyAngularVelocityOfSpecifiedFrame);
+                                                        floatingFrame, bodyAngularVelocityOfSpecifiedFrame, w_H_b);
     }
 
     bool BerdySparseMAPSolver::doEstimate()
@@ -220,6 +222,7 @@ namespace iDynTree {
         Eigen::internal::set_is_malloc_allowed(false);
 #endif
         bool computePermutation = false;
+
         m_pimpl->computeMAP(computePermutation);
 
 #ifdef EIGEN_RUNTIME_NO_MALLOC
@@ -231,6 +234,7 @@ namespace iDynTree {
     void BerdySparseMAPSolver::getLastEstimate(iDynTree::VectorDynSize& lastEstimate) const
     {
         assert(m_pimpl);
+
         lastEstimate = m_pimpl->expectedDynamicsAPosteriori;
     }
 
@@ -250,35 +254,37 @@ namespace iDynTree {
                                measurementsMatrix,
                                measurementsBias);
 
-
         // Compute the maximum a posteriori probability
         // See Latella et al., "Whole-Body Human Inverse Dynamics with
         // Distributed Micro-Accelerometers, Gyros and Force Sensing" in Sensors, 2016
 
         // Intermediate quantities
 
-        // Covariance matrix of the prior of the dynamics: var[p(d)], Eq. 10a
-        //TODO: find a way to map to iDynTree::SparseMatrix
-        covarianceDynamicsPriorInverse
-        //    toEigen(m_intermediateQuantities.covarianceDynamicsPriorInverse)
-        //Better to assign the "sum" before, and adding the product part later
-        = toEigen(priorDynamicsRegularizationCovarianceInverse);
+        if(berdy.getOptions().berdyVariant!=HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK)
+        {
+            // Covariance matrix of the prior of the dynamics: var[p(d)], Eq. 10a
+            //TODO: find a way to map to iDynTree::SparseMatrix
+            covarianceDynamicsPriorInverse
+            //    toEigen(m_intermediateQuantities.covarianceDynamicsPriorInverse)
+            //Better to assign the "sum" before, and adding the product part later
+            = toEigen(priorDynamicsRegularizationCovarianceInverse);
 
-        covarianceDynamicsPriorInverse += toEigen(dynamicsConstraintsMatrix).transpose() * toEigen(priorDynamicsConstraintsCovarianceInverse) * toEigen(dynamicsConstraintsMatrix);
+            covarianceDynamicsPriorInverse += toEigen(dynamicsConstraintsMatrix).transpose() * toEigen(priorDynamicsConstraintsCovarianceInverse) * toEigen(dynamicsConstraintsMatrix);
 
-        // decompose m_covarianceDynamicsPriorInverse
-        if (computePermutation) {
-            covarianceDynamicsPriorInverseDecomposition.analyzePattern(covarianceDynamicsPriorInverse);
+            // decompose m_covarianceDynamicsPriorInverse
+            if (computePermutation) {
+                covarianceDynamicsPriorInverseDecomposition.analyzePattern(covarianceDynamicsPriorInverse);
+            }
+            //    m_intermediateQuantities.covarianceDynamicsPriorInverseDecomposition.factorize(toEigen(m_intermediateQuantities.covarianceDynamicsPriorInverse));
+            covarianceDynamicsPriorInverseDecomposition.factorize(covarianceDynamicsPriorInverse);
+
+            // Expected value of the prior of the dynamics: E[p(d)], Eq. 10b
+            toEigen(expectedDynamicsPriorRHS) = toEigen(priorDynamicsRegularizationCovarianceInverse) * toEigen(priorDynamicsRegularizationExpectedValue) - toEigen(dynamicsConstraintsMatrix).transpose() * toEigen(priorDynamicsConstraintsCovarianceInverse) * toEigen(dynamicsConstraintsBias);
+
+            toEigen(expectedDynamicsPrior) =
+            covarianceDynamicsPriorInverseDecomposition.solve(toEigen(expectedDynamicsPriorRHS));
         }
-        //    m_intermediateQuantities.covarianceDynamicsPriorInverseDecomposition.factorize(toEigen(m_intermediateQuantities.covarianceDynamicsPriorInverse));
-        covarianceDynamicsPriorInverseDecomposition.factorize(covarianceDynamicsPriorInverse);
-
-        // Expected value of the prior of the dynamics: E[p(d)], Eq. 10b
-        toEigen(expectedDynamicsPriorRHS) = toEigen(priorDynamicsRegularizationCovarianceInverse) * toEigen(priorDynamicsRegularizationExpectedValue) - toEigen(dynamicsConstraintsMatrix).transpose() * toEigen(priorDynamicsConstraintsCovarianceInverse) * toEigen(dynamicsConstraintsBias);
-
-        toEigen(expectedDynamicsPrior) =
-        covarianceDynamicsPriorInverseDecomposition.solve(toEigen(expectedDynamicsPriorRHS));
-
+        
         // Final result: covariance matrix of the whole-body dynamics, Eq. 11a
         //TODO: find a way to map to iDynTree::SparseMatrix
         covarianceDynamicsAPosterioriInverse = covarianceDynamicsPriorInverse;
@@ -353,7 +359,8 @@ namespace iDynTree {
         initialGravity(2) = -9.81;
 
         berdy.updateKinematicsFromFixedBase(jointsConfiguration, jointsVelocity, berdy.dynamicTraversal().getBaseLink()->getIndex(), initialGravity);
-        computeMAP(true);
+
+        computeMAP(true); //TODO check
 
         valid = true;
         return true;
