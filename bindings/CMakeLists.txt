@@ -32,6 +32,7 @@ option(IDYNTREE_USES_MATLAB "Do you want to create the MATLAB bindings" FALSE)
 option(IDYNTREE_USES_OCTAVE "Do you want to create the OCTAVE bindings" FALSE)
 option(IDYNTREE_GENERATE_MATLAB "Enable if you have the experimental version of SWIG necessary for generating the Matlab wrapper" FALSE)
 option(IDYNTREE_DETECT_ACTIVE_PYTHON_SITEPACKAGES "Do you want iDynTree to detect and install in the active site-package directory? (it could be a system dir)" FALSE)
+option(IDYNTREE_PACKAGE_FOR_PYPI "Are you packaging iDynTree for upload in PyPI?" FALSE)
 
 find_package(SWIG)
 
