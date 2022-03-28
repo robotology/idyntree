@@ -125,11 +125,7 @@ if (IDYNTREE_USES_PYTHON_PYBIND11)
 endif()
 
 if (IDYNTREE_USES_PYTHON_PYBIND11 OR IDYNTREE_USES_PYTHON)
-    if (WIN32)
-        set(NEW_LINE "\n\r")
-    else()
-        set(NEW_LINE "\n")
-    endif()
+    set(NEW_LINE "\n")
 
     # Install main __init__.py
     # Clear the file first if it exists.
