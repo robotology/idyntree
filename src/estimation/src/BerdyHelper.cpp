@@ -260,7 +260,15 @@ bool BerdyHelper::initSensorsMeasurements()
     // contained in the robot model) plus the additional/fictious sensors
     // specified in the BerdyOptions
     // List is empty if Berdy variant is HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK
-    m_nrOfSensorsMeasurements = m_sensors.getSizeOfAllSensorsMeasurements();
+    if(m_options.berdyVariant != HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK)
+    {
+        m_nrOfSensorsMeasurements = m_sensors.getSizeOfAllSensorsMeasurements();
+    }
+    else
+    {
+        m_nrOfSensorsMeasurements = 0;
+    }
+    
 
     // The offset of joint accelerations
     berdySensorTypeOffsets.dofAccelerationOffset = m_nrOfSensorsMeasurements;
@@ -513,7 +521,7 @@ IndexRange BerdyHelper::getRangeJointVariable(BerdyDynamicVariablesTypes dynamic
     else
     {
         IndexRange ret;
-        assert(m_options.berdyVariant == BERDY_FLOATING_BASE);
+        assert(m_options.berdyVariant == BERDY_FLOATING_BASE || isBerdyVariantHierarchical(m_options.berdyVariant));
         assert(m_options.includeAllNetExternalWrenchesAsDynamicVariables);
 
         int totalSizeOfLinkVariables  = 12*m_model.getNrOfLinks();
@@ -550,7 +558,7 @@ IndexRange BerdyHelper::getRangeDOFVariable(BerdyDynamicVariablesTypes dynamicVa
     else
     {
         IndexRange ret;
-        assert(m_options.berdyVariant == BERDY_FLOATING_BASE);
+        assert(m_options.berdyVariant == BERDY_FLOATING_BASE || isBerdyVariantHierarchical(m_options.berdyVariant));
         assert(m_options.includeAllNetExternalWrenchesAsDynamicVariables);
 
         int totalSizeOfLinkVariables  = 12*m_model.getNrOfLinks();
@@ -786,7 +794,7 @@ IndexRange BerdyHelper::getRangeAccelerationPropagationFloatingBase(const JointI
 
 IndexRange BerdyHelper::getRangeNewtonEulerEquationsFloatingBase(const LinkIndex idx) const
 {
-    assert(m_options.berdyVariant == BERDY_FLOATING_BASE);
+    assert(m_options.berdyVariant == BERDY_FLOATING_BASE || isBerdyVariantHierarchical(m_options.berdyVariant));
     IndexRange ret;
     ret.offset = 6*idx;
     ret.size = 6;
