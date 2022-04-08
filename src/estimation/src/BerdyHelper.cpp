@@ -702,7 +702,7 @@ IndexRange BerdyHelper::getRangeROCMSensorVariable(const BerdySensorTypes sensor
         iDynTree::reportWarning("BerdyHelpers","getRangeROCMSensorVariable","Wrong sensor types passed for retrieving sensor range");
     }
 
-    if (isBerdyVariantHierarchical(m_options.berdyVariant))
+    if (!isBerdyVariantHierarchical(m_options.berdyVariant))
     {
         iDynTree::reportWarning("BerdyHelpers","getRangeROCMSensorVariable","Rate of Change of Momentum (ROCM) sensor is only available in HIERARCHICAL_BERDY_FLOATING_BASE_X_TASK");
     }
@@ -1988,7 +1988,7 @@ void BerdyHelper::cacheDynamicVariablesOrderingFixedBase()
         BerdyDynamicVariable jointTorque;
         jointTorque.type = DOF_TORQUE;
         jointTorque.id = parentJointName;
-        //TODO: for now assume 1 dof joint
+        //TODO[yeshi]: for now assume 1 dof joint
         jointTorque.range = getRangeDOFVariable(jointTorque.type, jointIndex);
 
         BerdyDynamicVariable netExternalWrench;
@@ -1999,7 +1999,7 @@ void BerdyHelper::cacheDynamicVariablesOrderingFixedBase()
         BerdyDynamicVariable jointAcceleration;
         jointAcceleration.type = DOF_ACCELERATION;
         jointAcceleration.id = parentJointName;
-        //TODO: for now assume 1 dof joint
+        //TODO[yeshi]: for now assume 1 dof joint
         jointAcceleration.range = getRangeDOFVariable(jointAcceleration.type, jointIndex);
 
         m_dynamicVariablesOrdering.push_back(acceleration);
