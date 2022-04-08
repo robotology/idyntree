@@ -405,14 +405,9 @@ class BerdyHelper
     size_t m_nrOfSensorsMeasurements;
 
     /**
-     * Buffer of link-specific body velocities.
-     */
-
-    /**
      * Base transform
      */
     Transform m_baseTransform;
-
 
     /**
      * Joint positions
@@ -621,14 +616,15 @@ public:
      */
     bool resizeAndZeroBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
                                     MatrixDynSize & Y, VectorDynSize & bY);
+
     /**
-     * Get Berdy matrices.
+     * Get Berdy matrices
      */
     bool getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize &bD,
                           SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize &bY);
 
     /**
-     * Get Berdy matrices - new method
+     * Get Berdy matrices
      *
      * \note internally this function uses sparse matrices
      * Prefer the use of resizeAndZeroBerdyMatrices(SparseMatrix &, VectorDynSize &, SparseMatrix &, VectorDynSize &)
@@ -722,7 +718,6 @@ public:
      *       are invariant with respect to an offset in linear velocity. This convenient to avoid
      *       any dependency on any prior floating base estimation.
      *
-     * @param[in] baseTransform the transformation from floating base to world
      * @param[in] jointPos the position of the joints of the model.
      * @param[in] jointVel the velocities of the joints of the model.
      * @param[in] floatingFrame the index of the frame for which kinematic information is provided.
