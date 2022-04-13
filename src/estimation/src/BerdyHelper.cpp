@@ -1148,6 +1148,8 @@ bool BerdyHelper::computeBerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree
     }
     else
     {
+        //TODO should D and bD be used in the centroidal problem??? 
+
         // Add the equation of the Newton-Euler for a link
         for (LinkIndex lnkIdx=0; lnkIdx < static_cast<LinkIndex>(m_model.getNrOfLinks()); lnkIdx++)
         {
@@ -1250,18 +1252,8 @@ bool BerdyHelper::computeBerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree
     return true;
 }**/
 
-bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize& bY)
+bool BerdyHelper::computeBerdySensorsMatricesFromModel(SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize& bY)
 {
-    Y.resize(m_nrOfSensorsMeasurements,m_nrOfDynamicalVariables);
-    bY.resize(m_nrOfSensorsMeasurements);
-    // \todo TODO check if this is a bottleneck
-//    Y.zero();
-    matrixYElements.clear();
-    bY.zero();
-
-
-    // For now handle all sensor types explicitly TODO clean this up
-
     ////////////////////////////////////////////////////////////////////////
     ///// SIX AXIS F/T SENSORS
     ////////////////////////////////////////////////////////////////////////
@@ -1406,6 +1398,26 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
         // bY is zero
     }
 
+    return true;
+}
+
+bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize& bY)
+{
+    Y.resize(m_nrOfSensorsMeasurements,m_nrOfDynamicalVariables);
+    bY.resize(m_nrOfSensorsMeasurements);
+    // \todo TODO check if this is a bottleneck
+//    Y.zero();
+    matrixYElements.clear();
+    bY.zero();
+
+    // For now handle all sensor types explicitly TODO clean this up
+    
+    if(m_options.berdyVariant!=HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK)
+    {
+        //TODO check return
+        computeBerdySensorsMatricesFromModel(Y, bY);
+    }
+    
     ////////////////////////////////////////////////////////////////////////
     ///// JOINT ACCELERATIONS
     ////////////////////////////////////////////////////////////////////////
@@ -1804,13 +1816,22 @@ bool BerdyHelper::getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, Vecto
     bool res = true;
 
     // Compute D matrix of dynamics equations
-    if (m_options.berdyVariant == ORIGINAL_BERDY_FIXED_BASE)
+    switch(m_options.berdyVariant)
     {
+    case ORIGINAL_BERDY_FIXED_BASE:
         res = res && computeBerdyDynamicsMatricesFixedBase(D, bD);
-    }
-    else
-    {
+        break;
+    case BERDY_FLOATING_BASE:
+    case HIERARCHICAL_BERDY_FLOATING_BASE_FULL_DYNAMICS_TASK: //TODO same as BERDY_FLOATING_BASE ?
         res = res && computeBerdyDynamicsMatricesFloatingBase(D, bD);
+        break;
+    case HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK:
+        // D and bD are not used with this variant
+        break;
+    default:
+        reportError("BerdyHelpers", "getBerdyMatrices", "unknown berdy variant");
+        assert(false);
+        res = false;
     }
 
     // Compute Y matrix of sensors
@@ -2117,12 +2138,13 @@ bool BerdyHelper::serializeDynamicVariables(LinkProperAccArray& properAccs,
             break;
 
         case BERDY_FLOATING_BASE :
-        case HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK:
-        case HIERARCHICAL_BERDY_FLOATING_BASE_FULL_DYNAMICS_TASK:
+        case HIERARCHICAL_BERDY_FLOATING_BASE_FULL_DYNAMICS_TASK: //TODO check if is the same of BERDY_FLOATING_BASE
             res = serializeDynamicVariablesFloatingBase(properAccs, netTotalWrenchesWithoutGrav, netExtWrenches,
                                                         linkJointWrenches, jointTorques, jointAccs, d);
             break;
-
+        case HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK:
+            res = serializeDynamicVariablesNonCollocatedWrenches(netExtWrenches, d);
+            break;
         default:
             reportError("BerdyHelpers", "serializeDynamicVariablesFixedBase", "unknown berdy variant");
             assert(false);
@@ -2173,6 +2195,19 @@ bool BerdyHelper::serializeDynamicVariablesFixedBase(LinkProperAccArray& properA
         }
     }
 
+    return true;
+}
+
+bool BerdyHelper::serializeDynamicVariablesNonCollocatedWrenches(LinkNetExternalWrenches& netExtWrenches,
+                                                                VectorDynSize& d)
+{
+    assert(m_options.berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK);
+
+    for (LinkIndex link = 0; link < static_cast<LinkIndex>(m_model.getNrOfLinks()); ++link)
+    {
+        /// Handle external force
+        setSubVector(d, getRangeLinkVariable(NET_EXT_WRENCH, link), toEigen(netExtWrenches(link)));
+    }
     return true;
 }
 
@@ -2283,8 +2318,8 @@ bool BerdyHelper::serializeSensorVariables(SensorsMeasurements& sensMeas,
                                            JointDOFsDoubleArray& jointTorques,
                                            JointDOFsDoubleArray& jointAccs,
                                            LinkInternalWrenches& linkJointWrenches,
-                                           VectorDynSize& y,
-                                           SpatialMomentum rocm)
+                                           SpatialMomentum& rocm,
+                                           VectorDynSize& y)
 {
     bool ret=true;
     assert(y.size() == this->getNrOfSensorsMeasurements());

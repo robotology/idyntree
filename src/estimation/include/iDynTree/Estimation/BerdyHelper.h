@@ -459,7 +459,11 @@ class BerdyHelper
     IndexRange getRangeAccelerationPropagationFloatingBase(const LinkIndex idx) const;
     IndexRange getRangeNewtonEulerEquationsFloatingBase(const LinkIndex idx) const;
 
+    // Y matrices computation 
     bool computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize& bY);
+    bool computeBerdySensorsMatricesFromModel(SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize& bY);
+
+    // D matrices computation
     bool computeBerdyDynamicsMatricesFixedBase(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD);
     bool computeBerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD);
 
@@ -486,6 +490,8 @@ class BerdyHelper
                                                JointDOFsDoubleArray    & jointAccs,
                                                VectorDynSize& d);
 
+    bool serializeDynamicVariablesNonCollocatedWrenches(LinkNetExternalWrenches& netExtWrenches,
+                                                        VectorDynSize& d);
     /**
      * Helper for mapping sensors measurements to the Y vector.
      */
@@ -678,8 +684,8 @@ public:
                                   JointDOFsDoubleArray    & jointTorques,
                                   JointDOFsDoubleArray    & jointAccs,
                                   LinkInternalWrenches    & linkJointWrenches,
-                                  VectorDynSize           & y,
-                                  SpatialMomentum           rocm = SpatialMomentum::Zero()); // Rate of Change of Momentum (rocm ) denoted through 6x1 spatial momentum vector. //TODO Double check this
+                                  SpatialMomentum         & rocm,
+                                  VectorDynSize           & y); // Rate of Change of Momentum (rocm ) denoted through 6x1 spatial momentum vector. //TODO Double check this
 
 
     /**
