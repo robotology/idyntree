@@ -17,7 +17,6 @@
 #include <iDynTree/Core/EigenSparseHelpers.h>
 
 #include <Eigen/SparseCore>
-#include<Eigen/SparseQR>
 #include <Eigen/SparseCholesky>
 
 #include <cassert>
@@ -222,7 +221,6 @@ namespace iDynTree {
         Eigen::internal::set_is_malloc_allowed(false);
 #endif
         bool computePermutation = false;
-
         m_pimpl->computeMAP(computePermutation);
 
 #ifdef EIGEN_RUNTIME_NO_MALLOC
@@ -234,7 +232,6 @@ namespace iDynTree {
     void BerdySparseMAPSolver::getLastEstimate(iDynTree::VectorDynSize& lastEstimate) const
     {
         assert(m_pimpl);
-
         lastEstimate = m_pimpl->expectedDynamicsAPosteriori;
     }
 
@@ -254,11 +251,14 @@ namespace iDynTree {
                                measurementsMatrix,
                                measurementsBias);
 
+
         // Compute the maximum a posteriori probability
         // See Latella et al., "Whole-Body Human Inverse Dynamics with
         // Distributed Micro-Accelerometers, Gyros and Force Sensing" in Sensors, 2016
 
         // Intermediate quantities
+		
+		//TODO check HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK solution!
 
         if(berdy.getOptions().berdyVariant!=HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK)
         {
@@ -299,7 +299,11 @@ namespace iDynTree {
         covarianceDynamicsAPosterioriInverseDecomposition.factorize(covarianceDynamicsAPosterioriInverse);
 
         // Final result: expected value of the whole-body dynamics, Eq. 11b
-        toEigen(expectedDynamicsAPosterioriRHS) = (toEigen(measurementsMatrix).transpose() * toEigen(priorMeasurementsCovarianceInverse) * (toEigen(measurements) - toEigen(measurementsBias)) + covarianceDynamicsPriorInverse * toEigen(expectedDynamicsPrior));
+        toEigen(expectedDynamicsAPosterioriRHS) = toEigen(measurementsMatrix).transpose() * toEigen(priorMeasurementsCovarianceInverse) * (toEigen(measurements) - toEigen(measurementsBias));
+        if(berdy.getOptions().berdyVariant!=HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK) //TODO check
+        {
+            toEigen(expectedDynamicsAPosterioriRHS) += covarianceDynamicsPriorInverse * toEigen(expectedDynamicsPrior);
+        }
         toEigen(expectedDynamicsAPosteriori) =
         covarianceDynamicsAPosterioriInverseDecomposition.solve(toEigen(expectedDynamicsAPosterioriRHS));
     }
@@ -359,8 +363,7 @@ namespace iDynTree {
         initialGravity(2) = -9.81;
 
         berdy.updateKinematicsFromFixedBase(jointsConfiguration, jointsVelocity, berdy.dynamicTraversal().getBaseLink()->getIndex(), initialGravity);
-
-        computeMAP(true); //TODO check
+        computeMAP(true);
 
         valid = true;
         return true;
