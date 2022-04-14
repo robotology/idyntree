@@ -802,9 +802,7 @@ IndexRange BerdyHelper::getRangeAccelerationPropagationFloatingBase(const JointI
 
 IndexRange BerdyHelper::getRangeNewtonEulerEquationsFloatingBase(const LinkIndex idx) const
 {
-	//TODO HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK can be removed from assert
-	// if computeBerdyDynamicsMatricesFloatingBase does not call this method with this variant
-    assert(m_options.berdyVariant == BERDY_FLOATING_BASE || isBerdyVariantHierarchical(m_options.berdyVariant));
+    assert(m_options.berdyVariant == BERDY_FLOATING_BASE);
     IndexRange ret;
     ret.offset = 6*idx;
     ret.size = 6;
@@ -1062,122 +1060,96 @@ bool BerdyHelper::computeBerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree
     matrixDElements.clear();
     bD.zero();
 
-    if(m_options.berdyVariant != HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK)
+    // Add the equation of the Newton-Euler for a link
+    for (LinkIndex lnkIdx=0; lnkIdx < static_cast<LinkIndex>(m_model.getNrOfLinks()); lnkIdx++)
     {
-        // Add the equation of the Newton-Euler for a link
-        for (LinkIndex lnkIdx=0; lnkIdx < static_cast<LinkIndex>(m_model.getNrOfLinks()); lnkIdx++)
+        LinkConstPtr link = m_model.getLink(lnkIdx);
+
+        // Term depending on the sensor acceleration
+        matrixDElements.addSubMatrix(getRangeNewtonEulerEquationsFloatingBase(lnkIdx).offset,
+                                     getRangeLinkVariable(LINK_BODY_PROPER_CLASSICAL_ACCELERATION, lnkIdx).offset,
+                                     link->getInertia().asMatrix());
+
+        // Term depending on external force-torque
+        matrixDElements.addDiagonalMatrix(getRangeNewtonEulerEquationsFloatingBase(lnkIdx),
+                                          getRangeLinkVariable(NET_EXT_WRENCH, lnkIdx),
+                                          -1);
+
+        // Term depending on the force exchanged with the parent link, if this link is not the base of the traversal
+        LinkIndex parentLinkIdx = LINK_INVALID_INDEX;
+        if (lnkIdx != m_dynamicsTraversal.getBaseLink()->getIndex())
         {
-            LinkConstPtr link = m_model.getLink(lnkIdx);
-
-            // Term depending on the sensor acceleration
-            matrixDElements.addSubMatrix(getRangeNewtonEulerEquationsFloatingBase(lnkIdx).offset,
-                                        getRangeLinkVariable(LINK_BODY_PROPER_CLASSICAL_ACCELERATION, lnkIdx).offset,
-                                        link->getInertia().asMatrix());
-
-            // Term depending on external force-torque
+            JointIndex parentJointIdx = m_dynamicsTraversal.getParentJointFromLinkIndex(lnkIdx)->getIndex();
+            parentLinkIdx = m_dynamicsTraversal.getParentLinkFromLinkIndex(lnkIdx)->getIndex();
             matrixDElements.addDiagonalMatrix(getRangeNewtonEulerEquationsFloatingBase(lnkIdx),
-                                            getRangeLinkVariable(NET_EXT_WRENCH, lnkIdx),
-                                            -1);
-
-            // Term depending on the force exchanged with the parent link, if this link is not the base of the traversal
-            LinkIndex parentLinkIdx = LINK_INVALID_INDEX;
-            if (lnkIdx != m_dynamicsTraversal.getBaseLink()->getIndex())
-            {
-                JointIndex parentJointIdx = m_dynamicsTraversal.getParentJointFromLinkIndex(lnkIdx)->getIndex();
-                parentLinkIdx = m_dynamicsTraversal.getParentLinkFromLinkIndex(lnkIdx)->getIndex();
-                matrixDElements.addDiagonalMatrix(getRangeNewtonEulerEquationsFloatingBase(lnkIdx),
-                                                getRangeJointVariable(JOINT_WRENCH, parentJointIdx),
-                                                -1);
-            }
-
-            // Term depending on the force exchanged with the children links
-            for (unsigned int neigh_i = 0; neigh_i < m_model.getNrOfNeighbors(lnkIdx); neigh_i++)
-            {
-                LinkIndex neighborIndex = m_model.getNeighbor(lnkIdx, neigh_i).neighborLink;
-                if (neighborIndex != parentLinkIdx)
-                {
-                    LinkIndex childIndex = neighborIndex;
-                    IJointConstPtr neighborJoint = m_model.getJoint(
-                            m_model.getNeighbor(lnkIdx, neigh_i).neighborJoint);
-                    const Transform &visitedLink_X_child = neighborJoint->getTransform(m_jointPos, lnkIdx,
-                                                                                    childIndex);
-
-                    matrixDElements.addSubMatrix(getRangeNewtonEulerEquationsFloatingBase(lnkIdx).offset,
-                                                getRangeJointVariable(JOINT_WRENCH, neighborJoint->getIndex()).offset,
-                                                visitedLink_X_child.asAdjointTransformWrench());
-
-                }
-            }
-
-            // bias Term
-            Twist angularPartOfLeftTrivializedVel = Twist(LinearMotionVector3(0.0, 0.0, 0.0), m_linkVels(lnkIdx).getAngularVec3());
-            setSubVector(bD,
-                        getRangeNewtonEulerEquationsFloatingBase(lnkIdx),
-                        toEigen(angularPartOfLeftTrivializedVel.cross(
-                                link->getInertia() * angularPartOfLeftTrivializedVel)));
+                                              getRangeJointVariable(JOINT_WRENCH, parentJointIdx),
+                                              -1);
         }
 
-        // Add the equation of the kinematic propagation of sensor acceleration
-        for (JointIndex jntIdx=0; jntIdx < static_cast<JointIndex>(m_model.getNrOfJoints()); jntIdx++)
+        // Term depending on the force exchanged with the children links
+        for (unsigned int neigh_i = 0; neigh_i < m_model.getNrOfNeighbors(lnkIdx); neigh_i++)
         {
-            // This equation is one of the few place in which we use the parent-child relations
-            LinkIndex childLinkIdx = m_dynamicsTraversal.getChildLinkIndexFromJointIndex(m_model, jntIdx);
-            LinkIndex parentLinkIdx = m_dynamicsTraversal.getParentLinkIndexFromJointIndex(m_model, jntIdx);
+            LinkIndex neighborIndex = m_model.getNeighbor(lnkIdx, neigh_i).neighborLink;
+            if (neighborIndex != parentLinkIdx)
+            {
+                LinkIndex childIndex = neighborIndex;
+                IJointConstPtr neighborJoint = m_model.getJoint(
+                        m_model.getNeighbor(lnkIdx, neigh_i).neighborJoint);
+                const Transform &visitedLink_X_child = neighborJoint->getTransform(m_jointPos, lnkIdx,
+                                                                                   childIndex);
 
-            matrixDElements.addDiagonalMatrix(getRangeAccelerationPropagationFloatingBase(jntIdx),
-                                            getRangeLinkVariable(LINK_BODY_PROPER_CLASSICAL_ACCELERATION, childLinkIdx),
-                                            -1);
+                matrixDElements.addSubMatrix(getRangeNewtonEulerEquationsFloatingBase(lnkIdx).offset,
+                                             getRangeJointVariable(JOINT_WRENCH, neighborJoint->getIndex()).offset,
+                                             visitedLink_X_child.asAdjointTransformWrench());
 
-            IJointConstPtr joint = m_model.getJoint(jntIdx);
-            const Transform &child_X_parent = joint->getTransform(m_jointPos, childLinkIdx, parentLinkIdx);
+            }
+        }
+
+        // bias Term
+        Twist angularPartOfLeftTrivializedVel = Twist(LinearMotionVector3(0.0, 0.0, 0.0), m_linkVels(lnkIdx).getAngularVec3());
+        setSubVector(bD,
+                     getRangeNewtonEulerEquationsFloatingBase(lnkIdx),
+                     toEigen(angularPartOfLeftTrivializedVel.cross(
+                             link->getInertia() * angularPartOfLeftTrivializedVel)));
+    }
+
+    // Add the equation of the kinematic propagation of sensor acceleration
+    for (JointIndex jntIdx=0; jntIdx < static_cast<JointIndex>(m_model.getNrOfJoints()); jntIdx++)
+    {
+        // This equation is one of the few place in which we use the parent-child relations
+        LinkIndex childLinkIdx = m_dynamicsTraversal.getChildLinkIndexFromJointIndex(m_model, jntIdx);
+        LinkIndex parentLinkIdx = m_dynamicsTraversal.getParentLinkIndexFromJointIndex(m_model, jntIdx);
+
+        matrixDElements.addDiagonalMatrix(getRangeAccelerationPropagationFloatingBase(jntIdx),
+                                          getRangeLinkVariable(LINK_BODY_PROPER_CLASSICAL_ACCELERATION, childLinkIdx),
+                                          -1);
+
+        IJointConstPtr joint = m_model.getJoint(jntIdx);
+        const Transform &child_X_parent = joint->getTransform(m_jointPos, childLinkIdx, parentLinkIdx);
+
+        matrixDElements.addSubMatrix(getRangeAccelerationPropagationFloatingBase(jntIdx).offset,
+                                     getRangeLinkVariable(LINK_BODY_PROPER_CLASSICAL_ACCELERATION, parentLinkIdx).offset,
+                                     child_X_parent.asAdjointTransform());
+
+        // This for automatically handles joint with any number of DOFs
+        for (size_t localDof=0; localDof < joint->getNrOfDOFs(); localDof++)
+        {
+            SpatialMotionVector S = joint->getMotionSubspaceVector(localDof, childLinkIdx, parentLinkIdx);
+            Matrix6x1 SdynTree;
+            toEigen(SdynTree) = toEigen(S);
 
             matrixDElements.addSubMatrix(getRangeAccelerationPropagationFloatingBase(jntIdx).offset,
-                                        getRangeLinkVariable(LINK_BODY_PROPER_CLASSICAL_ACCELERATION, parentLinkIdx).offset,
-                                        child_X_parent.asAdjointTransform());
-
-            // This for automatically handles joint with any number of DOFs
-            for (size_t localDof=0; localDof < joint->getNrOfDOFs(); localDof++)
-            {
-                SpatialMotionVector S = joint->getMotionSubspaceVector(localDof, childLinkIdx, parentLinkIdx);
-                Matrix6x1 SdynTree;
-                toEigen(SdynTree) = toEigen(S);
-
-                matrixDElements.addSubMatrix(getRangeAccelerationPropagationFloatingBase(jntIdx).offset,
-                                            getRangeDOFVariable(DOF_ACCELERATION, joint->getDOFsOffset() + localDof).offset,
-                                            SdynTree);
-            }
-
-            // The known term for kinematic calibration is quite complicate due to the use of sensor proper acceleration,
-            // for this reason it is implemented in a separate function
-            Matrix6x1 biasTerm = getBiasTermJointAccelerationPropagation(joint, parentLinkIdx, childLinkIdx, child_X_parent);
-            setSubVector(bD,
-                        getRangeAccelerationPropagationFloatingBase(jntIdx),
-                        toEigen(biasTerm));
-
+                                         getRangeDOFVariable(DOF_ACCELERATION, joint->getDOFsOffset() + localDof).offset,
+                                         SdynTree);
         }
-    }
-    else
-    {
-        //TODO should D and bD be used in the centroidal problem??? 
 
-        // Add the equation of the Newton-Euler for a link
-        for (LinkIndex lnkIdx=0; lnkIdx < static_cast<LinkIndex>(m_model.getNrOfLinks()); lnkIdx++)
-        {
-            LinkConstPtr link = m_model.getLink(lnkIdx);
+        // The known term for kinematic calibration is quite complicate due to the use of sensor proper acceleration,
+        // for this reason it is implemented in a separate function
+        Matrix6x1 biasTerm = getBiasTermJointAccelerationPropagation(joint, parentLinkIdx, childLinkIdx, child_X_parent);
+        setSubVector(bD,
+                     getRangeAccelerationPropagationFloatingBase(jntIdx),
+                     toEigen(biasTerm));
 
-            // Term depending on external force-torque
-            matrixDElements.addDiagonalMatrix(getRangeNewtonEulerEquationsFloatingBase(lnkIdx),
-                                              getRangeLinkVariable(NET_EXT_WRENCH, lnkIdx),
-                                              -1);
-
-            // TODO[YESHI]: Double check this bias term
-            // bias Term
-            Twist angularPartOfLeftTrivializedVel = Twist(LinearMotionVector3(0.0, 0.0, 0.0), m_linkVels(lnkIdx).getAngularVec3());
-            setSubVector(bD,
-                        getRangeNewtonEulerEquationsFloatingBase(lnkIdx),
-                        toEigen(angularPartOfLeftTrivializedVel.cross(
-                                link->getInertia() * angularPartOfLeftTrivializedVel)));
-        }
     }
 
     D.setFromTriplets(matrixDElements);
@@ -1753,7 +1725,7 @@ bool BerdyHelper::getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, Vecto
         res = res && computeBerdyDynamicsMatricesFloatingBase(D, bD);
         break;
     case HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK:
-        //TODO D and bD are not used with this variant
+        // D and bD are not used with this variant
         break;
     default:
         reportError("BerdyHelpers", "getBerdyMatrices", "unknown berdy variant");
