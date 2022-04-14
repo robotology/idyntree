@@ -128,6 +128,12 @@ bool BerdyOptions::checkConsistency()
             reportError("BerdyOptions","checkConsistency","Impossible to load berdy, as HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK does not support includeAllJointTorquesAsSensors");
             return false;
         }
+
+        if(!this->includeAllNetExternalWrenchesAsSensors)
+        {
+            reportError("BerdyOptions","checkConsistency","Impossible to load berdy, as HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK requires includeAllNetExternalWrenchesAsSensors");
+            return false;
+        }
     }
 
     if(this->includeROCMAsSensor && !isBerdyVariantHierarchical(this->berdyVariant))
