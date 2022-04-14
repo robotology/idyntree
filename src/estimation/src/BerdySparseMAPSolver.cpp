@@ -256,18 +256,16 @@ namespace iDynTree {
         // Distributed Micro-Accelerometers, Gyros and Force Sensing" in Sensors, 2016
 
         // Intermediate quantities
-		
-		//TODO check BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES solution!
+
+        // Covariance matrix of the prior of the dynamics: var[p(d)], Eq. 10a
+        //TODO: find a way to map to iDynTree::SparseMatrix
+        covarianceDynamicsPriorInverse
+        //    toEigen(m_intermediateQuantities.covarianceDynamicsPriorInverse)
+        //Better to assign the "sum" before, and adding the product part later
+        = toEigen(priorDynamicsRegularizationCovarianceInverse);
 
         if(berdy.getOptions().berdyVariant!=BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES)
         {
-            // Covariance matrix of the prior of the dynamics: var[p(d)], Eq. 10a
-            //TODO: find a way to map to iDynTree::SparseMatrix
-            covarianceDynamicsPriorInverse
-            //    toEigen(m_intermediateQuantities.covarianceDynamicsPriorInverse)
-            //Better to assign the "sum" before, and adding the product part later
-            = toEigen(priorDynamicsRegularizationCovarianceInverse);
-
             covarianceDynamicsPriorInverse += toEigen(dynamicsConstraintsMatrix).transpose() * toEigen(priorDynamicsConstraintsCovarianceInverse) * toEigen(dynamicsConstraintsMatrix);
 
             // decompose m_covarianceDynamicsPriorInverse
@@ -282,6 +280,11 @@ namespace iDynTree {
 
             toEigen(expectedDynamicsPrior) =
             covarianceDynamicsPriorInverseDecomposition.solve(toEigen(expectedDynamicsPriorRHS));
+        }
+        else
+        {
+			//TODO this workaround to leave the following lines as the original problem
+            expectedDynamicsPrior = priorDynamicsRegularizationExpectedValue;
         }
         
         // Final result: covariance matrix of the whole-body dynamics, Eq. 11a
@@ -298,11 +301,7 @@ namespace iDynTree {
         covarianceDynamicsAPosterioriInverseDecomposition.factorize(covarianceDynamicsAPosterioriInverse);
 
         // Final result: expected value of the whole-body dynamics, Eq. 11b
-        toEigen(expectedDynamicsAPosterioriRHS) = toEigen(measurementsMatrix).transpose() * toEigen(priorMeasurementsCovarianceInverse) * (toEigen(measurements) - toEigen(measurementsBias));
-        if(berdy.getOptions().berdyVariant!=BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES) //TODO check
-        {
-            toEigen(expectedDynamicsAPosterioriRHS) += covarianceDynamicsPriorInverse * toEigen(expectedDynamicsPrior);
-        }
+        toEigen(expectedDynamicsAPosterioriRHS) = (toEigen(measurementsMatrix).transpose() * toEigen(priorMeasurementsCovarianceInverse) * (toEigen(measurements) - toEigen(measurementsBias)) + covarianceDynamicsPriorInverse * toEigen(expectedDynamicsPrior));
         toEigen(expectedDynamicsAPosteriori) =
         covarianceDynamicsAPosterioriInverseDecomposition.solve(toEigen(expectedDynamicsAPosterioriRHS));
     }
