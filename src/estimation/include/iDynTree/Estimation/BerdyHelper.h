@@ -404,10 +404,6 @@ class BerdyHelper
     size_t m_nrOfDynamicEquations;
     size_t m_nrOfSensorsMeasurements;
 
-    /**
-     * Base transform
-     */
-    Transform m_baseTransform;
 
     /**
      * Joint positions
@@ -535,7 +531,7 @@ class BerdyHelper
      * LinkPositions variable containing the transforms between the base and the model links
      *
      */
-    LinkPositions world_H_links;
+    LinkPositions base_H_links;
 
 
 public:
@@ -729,14 +725,12 @@ public:
      * @param[in] floatingFrame the index of the frame for which kinematic information is provided.
      * @param[in] angularVel angular velocity (wrt to any inertial frame) of the specified floating frame,
      *                       expressed in the specified floating frame orientation.
-     * @param[in] w_H_b wptional transformation between floating base and world with default value set to Identity
      * @return true if all went ok, false otherwise.
      */
     bool updateKinematicsFromFloatingBase(const JointPosDoubleArray  & jointPos,
                                           const JointDOFsDoubleArray & jointVel,
                                           const FrameIndex & floatingFrame,
-                                          const Vector3 & angularVel,
-                                          const Transform & w_H_b = iDynTree::Transform::Identity());
+                                          const Vector3 & angularVel);
 
     /**
      * Set the kinematic information necessary for the dynamics estimation assuming that a

@@ -200,8 +200,7 @@ namespace iDynTree {
                                                                      const iDynTree::JointDOFsDoubleArray& jointsVelocity,
                                                                      const FrameIndex floatingFrame,
                                                                      const Vector3& bodyAngularVelocityOfSpecifiedFrame,
-                                                                     const iDynTree::VectorDynSize& measurements,
-                                                                     const Transform& w_H_b)
+                                                                     const iDynTree::VectorDynSize& measurements)
     {
         assert(m_pimpl);
 
@@ -210,7 +209,7 @@ namespace iDynTree {
         m_pimpl->measurements = measurements;
 
         m_pimpl->berdy.updateKinematicsFromFloatingBase(m_pimpl->jointsConfiguration, m_pimpl->jointsVelocity,
-                                                        floatingFrame, bodyAngularVelocityOfSpecifiedFrame, w_H_b);
+                                                        floatingFrame, bodyAngularVelocityOfSpecifiedFrame);
     }
 
     bool BerdySparseMAPSolver::doEstimate()

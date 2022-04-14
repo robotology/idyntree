@@ -204,14 +204,13 @@ bool BerdyHelper::init(const Model& model,
 
     m_model.computeFullTreeTraversal(m_dynamicsTraversal,baseLinkIndex);
     m_kinematicTraversals.resize(m_model);
-    m_baseTransform = iDynTree::Transform::Identity();
     m_jointPos.resize(m_model);
     m_jointVel.resize(m_model);
     m_linkVels.resize(m_model);
     m_link_H_externalWrenchMeasurementFrame.resize(m_model.getNrOfLinks(),Transform::Identity());
 
     // Initialize links to base transform to identity
-    world_H_links.resize(m_model.getNrOfLinks());
+    base_H_links.resize(m_model.getNrOfLinks());
 
     bool res = m_options.checkConsistency();
 
@@ -1518,8 +1517,8 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
             // Get the column index corresponding to the net link external wrench sensor
             IndexRange netExternalWrenchSensor = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR, idx);
 
-            // TODO[YESHI]: Ensure that world_H_links is correctly updated after the forward kinematics
-            Transform base_X_link = world_H_links(idx);
+            // Get base to link transform
+            Transform base_X_link = base_H_links(idx);
 
             // Get link to base rotation
             matrixYElements.addSubMatrix(rocmRange.offset,
@@ -1679,8 +1678,7 @@ bool BerdyHelper::updateKinematicsFromFixedBase(const JointPosDoubleArray& joint
 bool BerdyHelper::updateKinematicsFromFloatingBase(const JointPosDoubleArray& jointPos,
                                                    const JointDOFsDoubleArray& jointVel,
                                                    const FrameIndex& floatingFrame,
-                                                   const Vector3& angularVel,
-                                                   const Transform & w_H_b)
+                                                   const Vector3& angularVel)
 {
     if( !m_areModelAndSensorsValid )
     {
@@ -1715,8 +1713,6 @@ bool BerdyHelper::updateKinematicsFromFloatingBase(const JointPosDoubleArray& jo
                                                         base_vel_link.getAngularVec3(),
                                                         jointPos,jointVel,
                                                         m_linkVels);
-    // Set base transform
-    m_baseTransform = w_H_b;
 
     // The jointPos and joint vel are stored directly, as are then passed to the Model object to get adjacent links transforms
     m_jointPos = jointPos;
@@ -1725,9 +1721,9 @@ bool BerdyHelper::updateKinematicsFromFloatingBase(const JointPosDoubleArray& jo
     // Compute forward kinematics
     ok = ForwardPositionKinematics(m_model,
                                    m_dynamicsTraversal,
-                                   m_baseTransform,
+                                   iDynTree::Transform::Identity(),
                                    m_jointPos,
-                                   world_H_links);
+                                   base_H_links);
 
     m_kinematicsUpdated = ok;
     return ok;
