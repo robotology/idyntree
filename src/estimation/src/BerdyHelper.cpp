@@ -99,11 +99,6 @@ bool isDOFBerdyDynamicVariable(const BerdyDynamicVariablesTypes dynamicVariableT
     }
 }
 
-inline bool isBerdyVariantHierarchical(const BerdyVariants variant)
-{
-    return variant==HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK || variant==HIERARCHICAL_BERDY_FLOATING_BASE_FULL_DYNAMICS_TASK;
-}
-
 bool BerdyOptions::checkConsistency()
 {
     if( this->includeAllNetExternalWrenchesAsSensors )
@@ -115,30 +110,31 @@ bool BerdyOptions::checkConsistency()
         }
     }
 
-    if(this->berdyVariant==HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK)
+    if(this->berdyVariant==BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES)
     {
         if(this->includeAllJointAccelerationsAsSensors)
         {
-            reportError("BerdyOptions","checkConsistency","Impossible to load berdy, as HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK does not support includeAllJointAccelerationsAsSensors");
+            reportError("BerdyOptions","checkConsistency","Impossible to load berdy, as BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES does not support includeAllJointAccelerationsAsSensors");
             return false;
         }
 
         if(this->includeAllJointTorquesAsSensors)
         {
-            reportError("BerdyOptions","checkConsistency","Impossible to load berdy, as HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK does not support includeAllJointTorquesAsSensors");
+            reportError("BerdyOptions","checkConsistency","Impossible to load berdy, as BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES does not support includeAllJointTorquesAsSensors");
             return false;
         }
 
         if(!this->includeAllNetExternalWrenchesAsSensors)
         {
-            reportError("BerdyOptions","checkConsistency","Impossible to load berdy, as HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK requires includeAllNetExternalWrenchesAsSensors");
+            reportError("BerdyOptions","checkConsistency","Impossible to load berdy, as BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES requires includeAllNetExternalWrenchesAsSensors");
             return false;
         }
     }
 
-    if(this->includeROCMAsSensor && !isBerdyVariantHierarchical(this->berdyVariant))
+    if(this->includeROCMAsSensor &&
+       !(this->berdyVariant==BERDY_FLOATING_BASE || this->berdyVariant==BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES))
     {
-        reportError("BerdyOptions","checkConsistency","Impossible to load berdy, as includeROCMAsSensor is supported only by HIERARCHICAL_BERDY variants");
+        reportError("BerdyOptions","checkConsistency","Impossible to load berdy, as includeROCMAsSensor is supported only by BERDY_FLOATING_BASE or BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES variants");
         return false;
     }
 
@@ -185,7 +181,7 @@ bool BerdyHelper::init(const Model& model,
     m_areModelAndSensorsValid = false;
 
     m_model = model;
-    if(options.berdyVariant!=HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK)
+    if(options.berdyVariant!=BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES)
     {
         m_sensors = sensors;
     }
@@ -234,8 +230,7 @@ bool BerdyHelper::init(const Model& model,
             break;
 
         case BERDY_FLOATING_BASE:
-        case HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK: //TODO for this case too?
-        case HIERARCHICAL_BERDY_FLOATING_BASE_FULL_DYNAMICS_TASK:
+        case BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES: //TODO for this case too?
             res = initBerdyFloatingBase();
             cacheDynamicVariablesOrderingFloatingBase();
             break;
@@ -266,11 +261,11 @@ BerdyOptions BerdyHelper::getOptions() const
 bool BerdyHelper::initSensorsMeasurements()
 {
     // The number of sensors measurements is given by the sensors contained
-    // in sensorsList (informally: the number of measurments of sensors
-    // contained in the robot model) plus the additional/fictious sensors
+    // in sensorsList (informally: the number of measurements of sensors
+    // contained in the robot model) plus the additional/fictitious sensors
     // specified in the BerdyOptions
-    // List is empty if Berdy variant is HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK
-    if(m_options.berdyVariant != HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK)
+    // List is empty if Berdy variant is BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES
+    if(m_options.berdyVariant != BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES)
     {
         m_nrOfSensorsMeasurements = m_sensors.getSizeOfAllSensorsMeasurements();
     }
@@ -311,7 +306,7 @@ bool BerdyHelper::initSensorsMeasurements()
     berdySensorTypeOffsets.jointWrenchOffset = m_nrOfSensorsMeasurements;
 
     // Check the considered joint wrenches are actually part of the model
-    if(m_options.berdyVariant!=HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK)
+    if(m_options.berdyVariant!=BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES)
     {
         berdySensorsInfo.jntIdxToOffset.resize(m_model.getNrOfJoints(),JOINT_INVALID_INDEX);
         berdySensorsInfo.wrenchSensors.clear();
@@ -476,7 +471,7 @@ IndexRange BerdyHelper::getRangeLinkVariable(BerdyDynamicVariablesTypes dynamicV
     else
     {
         IndexRange ret;
-        assert(m_options.berdyVariant == BERDY_FLOATING_BASE || isBerdyVariantHierarchical(m_options.berdyVariant));
+        assert(m_options.berdyVariant == BERDY_FLOATING_BASE || m_options.berdyVariant == BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES);
         assert(m_options.includeAllNetExternalWrenchesAsDynamicVariables);
         // For BERDY_FLOATING_BASE, the only two link dynamic variable are the proper classical acceleration and the
         // external force-torque
@@ -487,8 +482,7 @@ IndexRange BerdyHelper::getRangeLinkVariable(BerdyDynamicVariablesTypes dynamicV
                 ret.size = 6;
                 break;
             case NET_EXT_WRENCH:
-                //TODO check the offset of net_ext_wrench are dynamic variables for HIERARCHICAL_BERDY_FLOATING_BASE_FULL_DYNAMICS_TASK
-                if (m_options.berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK) {
+                if (m_options.berdyVariant == BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES) {
                     ret.offset = 6*idx;
                 }
                 else {
@@ -532,8 +526,8 @@ IndexRange BerdyHelper::getRangeJointVariable(BerdyDynamicVariablesTypes dynamic
     else
     {
         IndexRange ret;
-		//TODO remove HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK?
-        assert(m_options.berdyVariant == BERDY_FLOATING_BASE || isBerdyVariantHierarchical(m_options.berdyVariant));
+		//TODO remove BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES?
+        assert(m_options.berdyVariant == BERDY_FLOATING_BASE || m_options.berdyVariant == BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES);
         assert(m_options.includeAllNetExternalWrenchesAsDynamicVariables);
 
         int totalSizeOfLinkVariables  = 12*m_model.getNrOfLinks();
@@ -570,8 +564,8 @@ IndexRange BerdyHelper::getRangeDOFVariable(BerdyDynamicVariablesTypes dynamicVa
     else
     {
         IndexRange ret;
-		//TODO remove HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK?
-        assert(m_options.berdyVariant == BERDY_FLOATING_BASE || isBerdyVariantHierarchical(m_options.berdyVariant));
+		//TODO remove BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES?
+        assert(m_options.berdyVariant == BERDY_FLOATING_BASE || m_options.berdyVariant == BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES);
         assert(m_options.includeAllNetExternalWrenchesAsDynamicVariables);
 
         int totalSizeOfLinkVariables  = 12*m_model.getNrOfLinks();
@@ -724,9 +718,9 @@ IndexRange BerdyHelper::getRangeROCMSensorVariable(const BerdySensorTypes sensor
         iDynTree::reportWarning("BerdyHelpers","getRangeROCMSensorVariable","Wrong sensor types passed for retrieving sensor range");
     }
 
-    if (!isBerdyVariantHierarchical(m_options.berdyVariant))
+    if (m_options.berdyVariant != BERDY_FLOATING_BASE && m_options.berdyVariant != BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES )
     {
-        iDynTree::reportWarning("BerdyHelpers","getRangeROCMSensorVariable","Rate of Change of Momentum (ROCM) sensor is only available in HIERARCHICAL_BERDY_FLOATING_BASE_X_TASK");
+        iDynTree::reportWarning("BerdyHelpers","getRangeROCMSensorVariable","Rate of Change of Momentum (ROCM) sensor is only available in BERDY_FLOATING_BASE and BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES");
     }
 
     // Set sensor size and offset
@@ -1217,7 +1211,6 @@ bool BerdyHelper::computeBerdySensorsMatricesFromModel(SparseMatrix<iDynTree::Co
         }
         else
         {
-            //TODO what about HIERARCHICAL_BERDY_FLOATING_BASE_FULL_DYNAMICS_TASK?
             assert(m_options.berdyVariant == BERDY_FLOATING_BASE);
             // Y(sensorRange,linkBodyProperAcRange) for the accelerometer is the first three rows of the sensor_X_link adjoint matrix
             MatrixFixSize<3, 6> xLinkLinear;
@@ -1276,7 +1269,6 @@ bool BerdyHelper::computeBerdySensorsMatricesFromModel(SparseMatrix<iDynTree::Co
         }
         else
         {
-            //TODO what about HIERARCHICAL_BERDY_FLOATING_BASE_FULL_DYNAMICS_TASK?
             assert(m_options.berdyVariant == BERDY_FLOATING_BASE);
             IndexRange linkBodyProperAcRange = this->getRangeLinkVariable(LINK_BODY_PROPER_CLASSICAL_ACCELERATION, parentLinkId);
             matrixYElements.addSubMatrix(sensorRange.offset,
@@ -1324,7 +1316,7 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
 
     // For now handle all sensor types explicitly TODO clean this up
     
-    if(m_options.berdyVariant!=HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK)
+    if(m_options.berdyVariant!=BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES)
     {
         //TODO check return
         computeBerdySensorsMatricesFromModel(Y, bY);
@@ -1369,7 +1361,6 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
         }
         else 
         {
-            //TODO what about HIERARCHICAL_BERDY_FLOATING_BASE_FULL_DYNAMICS_TASK?
             assert(m_options.berdyVariant == BERDY_FLOATING_BASE);
             // We have to map the joint wrench to the joint torques, since joint wrench is considered as dynamic variable
             for (TraversalIndex traversalEl = 1;
@@ -1520,9 +1511,9 @@ bool BerdyHelper::initBerdyFloatingBase()
 
     assert(m_options.includeAllNetExternalWrenchesAsDynamicVariables);
 
-    if(m_options.berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK)
+    if(m_options.berdyVariant == BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES)
     {
-        // Centroidal task dynamic variables include 6*nrOfLinks for the net external wrenches
+        // Non-collocated wrenches dynamic variables include 6*nrOfLinks for the net external wrenches
         m_nrOfDynamicalVariables = 6*m_model.getNrOfLinks();
 
         //TODO[YESHI]: Double check this
@@ -1537,18 +1528,16 @@ bool BerdyHelper::initBerdyFloatingBase()
         m_nrOfDynamicEquations   = 6*m_model.getNrOfLinks() + 6*m_model.getNrOfJoints();
     }
 
-    if (isBerdyVariantHierarchical(m_options.berdyVariant))
-    {
-        //TODO[YESHI] check comConstraintLinkNamesVector is correctly set
-        if (m_options.includeROCMAsSensor) {
-            if (m_options.rocmConstraintLinkNamesVector.size() == 0)
+    
+    //TODO[YESHI] check comConstraintLinkNamesVector is correctly set
+    if (m_options.includeROCMAsSensor) {
+        if (m_options.rocmConstraintLinkNamesVector.size() == 0)
+        {
+            reportInfo("BerdyHelpers","initBerdyFloatingBase","rocmConstraintLinkNamesVector is not initialized using berdy helper options. Considering all the model links");
+            m_options.rocmConstraintLinkNamesVector.resize(m_model.getNrOfLinks());
+            for (size_t l = 0; l < m_model.getNrOfLinks(); l++)
             {
-                reportInfo("BerdyHelpers","initBerdyFloatingBase","rocmConstraintLinkNamesVector is not initialized using berdy helper options. Considering all the model links for centroidal dynamics constraint");
-                m_options.rocmConstraintLinkNamesVector.resize(m_model.getNrOfLinks());
-                for (size_t l = 0; l < m_model.getNrOfLinks(); l++)
-                {
-                    m_options.rocmConstraintLinkNamesVector.at(l) = m_model.getLinkName(l);
-                }
+                m_options.rocmConstraintLinkNamesVector.at(l) = m_model.getLinkName(l);
             }
         }
     }
@@ -1727,10 +1716,9 @@ bool BerdyHelper::getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, Vecto
         res = res && computeBerdyDynamicsMatricesFixedBase(D, bD);
         break;
     case BERDY_FLOATING_BASE:
-    case HIERARCHICAL_BERDY_FLOATING_BASE_FULL_DYNAMICS_TASK: //TODO same as BERDY_FLOATING_BASE ?
         res = res && computeBerdyDynamicsMatricesFloatingBase(D, bD);
         break;
-    case HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK:
+    case BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES:
         // D and bD are not used with this variant
         break;
     default:
@@ -2042,11 +2030,10 @@ bool BerdyHelper::serializeDynamicVariables(LinkProperAccArray& properAccs,
             break;
 
         case BERDY_FLOATING_BASE :
-        case HIERARCHICAL_BERDY_FLOATING_BASE_FULL_DYNAMICS_TASK: //TODO check if is the same of BERDY_FLOATING_BASE
             res = serializeDynamicVariablesFloatingBase(properAccs, netTotalWrenchesWithoutGrav, netExtWrenches,
                                                         linkJointWrenches, jointTorques, jointAccs, d);
             break;
-        case HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK:
+        case BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES:
             res = serializeDynamicVariablesNonCollocatedWrenches(netExtWrenches, d);
             break;
         default:
@@ -2105,7 +2092,7 @@ bool BerdyHelper::serializeDynamicVariablesFixedBase(LinkProperAccArray& properA
 bool BerdyHelper::serializeDynamicVariablesNonCollocatedWrenches(LinkNetExternalWrenches& netExtWrenches,
                                                                 VectorDynSize& d)
 {
-    assert(m_options.berdyVariant == HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK);
+    assert(m_options.berdyVariant == BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES);
 
     for (LinkIndex link = 0; link < static_cast<LinkIndex>(m_model.getNrOfLinks()); ++link)
     {
@@ -2124,8 +2111,7 @@ bool BerdyHelper::serializeDynamicVariablesFloatingBase(LinkProperAccArray& prop
                                                      VectorDynSize& d)
 {
     d.resize(this->getNrOfDynamicVariables());
-	//TODO same for HIERARCHICAL_BERDY_FLOATING_BASE_FULL_DYNAMICS_TASK?
-    assert(this->m_options.berdyVariant == BERDY_FLOATING_BASE || HIERARCHICAL_BERDY_FLOATING_BASE_FULL_DYNAMICS_TASK);
+    assert(this->m_options.berdyVariant == BERDY_FLOATING_BASE);
 
     for (LinkIndex link = 0; link < static_cast<LinkIndex>(m_model.getNrOfLinks()); ++link)
     {

@@ -68,14 +68,8 @@ enum BerdyVariants
      * Modified version of floating base Berdy
      * for accounting centroidal dynamics constraints towards estimating the external link wrench independently of the internal joint torque estimates.
      */
-    HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK = 2,
+    BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES = 2
 
-    /**
-     * Modified version of floating base Berdy
-     * for accounting full dynamics using estimated external forces
-     * (aka Stack of Tasks Berdy Berdy i.e., SOT Berdy)
-     */
-    HIERARCHICAL_BERDY_FLOATING_BASE_FULL_DYNAMICS_TASK = 3
 };
 
 /**
@@ -145,7 +139,7 @@ enum BerdySensorTypes
 
     /**
      * Non-physical sensor that holds the value of Rate of Change of Momentum (ROCM) of the system
-     * for centroidal dynamics constraint used in HIERARCHICAL_BERDY_FLOATING_BASE Berdy variation
+     * for centroidal dynamics constraint
      */
     ROCM_SENSOR = 1004
 };
@@ -224,7 +218,7 @@ public:
 
     /*
      * If true, includes the Rate of Change of Momentum (ROCM) in the task sensors vector.
-     * It is compatible only with HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK and HIERARCHICAL_BERDY_FLOATING_BASE_FULL_DYNAMICS_TASK
+     * It is compatible only with BERDY_FLOATING_BASE and BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES
      *
      * Default value: false .
      */
@@ -232,8 +226,8 @@ public:
 
     /**
      * Vector of link names that are considered for rate of change of momentum constraint using
-     * Rate of Change of Momentum (ROCM) sensor for HIERARCHICAL_BERDY_FLOATING_BASE variation
-     * The default value is set to contains all the links present in the model
+     * Rate of Change of Momentum (ROCM) sensor
+     * The default value is set to contain all the links present in the model
      */
     std::vector<std::string> rocmConstraintLinkNamesVector;
 

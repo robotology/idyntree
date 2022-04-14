@@ -257,9 +257,9 @@ namespace iDynTree {
 
         // Intermediate quantities
 		
-		//TODO check HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK solution!
+		//TODO check BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES solution!
 
-        if(berdy.getOptions().berdyVariant!=HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK)
+        if(berdy.getOptions().berdyVariant!=BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES)
         {
             // Covariance matrix of the prior of the dynamics: var[p(d)], Eq. 10a
             //TODO: find a way to map to iDynTree::SparseMatrix
@@ -299,7 +299,7 @@ namespace iDynTree {
 
         // Final result: expected value of the whole-body dynamics, Eq. 11b
         toEigen(expectedDynamicsAPosterioriRHS) = toEigen(measurementsMatrix).transpose() * toEigen(priorMeasurementsCovarianceInverse) * (toEigen(measurements) - toEigen(measurementsBias));
-        if(berdy.getOptions().berdyVariant!=HIERARCHICAL_BERDY_FLOATING_BASE_CENTROIDAL_TASK) //TODO check
+        if(berdy.getOptions().berdyVariant!=BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES) //TODO check
         {
             toEigen(expectedDynamicsAPosterioriRHS) += covarianceDynamicsPriorInverse * toEigen(expectedDynamicsPrior);
         }
