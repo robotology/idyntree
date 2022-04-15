@@ -2209,7 +2209,7 @@ bool BerdyHelper::serializeSensorVariables(SensorsMeasurements& sensMeas,
                                            JointDOFsDoubleArray& jointTorques,
                                            JointDOFsDoubleArray& jointAccs,
                                            LinkInternalWrenches& linkJointWrenches,
-                                           SpatialMomentum& rocm,
+                                           Vector6& rocm,
                                            VectorDynSize& y)
 {
     bool ret=true;
@@ -2289,7 +2289,7 @@ bool BerdyHelper::serializeSensorVariables(SensorsMeasurements& sensMeas,
     {
         IndexRange sensorRange = this->getRangeROCMSensorVariable(ROCM_SENSOR);
 
-        setSubVector(y, sensorRange, static_cast<SpatialForceVector>(rocm));
+        setSubVector(y, sensorRange, rocm);
     }
 
     return ret;
