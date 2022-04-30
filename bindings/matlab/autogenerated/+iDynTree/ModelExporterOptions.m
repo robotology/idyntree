@@ -7,30 +7,30 @@ classdef ModelExporterOptions < iDynTreeSwigRef
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1405, self);
+        varargout{1} = iDynTreeMEX(1446, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1406, self, varargin{1});
+        iDynTreeMEX(1447, self, varargin{1});
       end
     end
     function varargout = exportFirstBaseLinkAdditionalFrameAsFakeURDFBase(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1407, self);
+        varargout{1} = iDynTreeMEX(1448, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1408, self, varargin{1});
+        iDynTreeMEX(1449, self, varargin{1});
       end
     end
     function varargout = robotExportedName(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1409, self);
+        varargout{1} = iDynTreeMEX(1450, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1410, self, varargin{1});
+        iDynTreeMEX(1451, self, varargin{1});
       end
     end
     function self = ModelExporterOptions(varargin)
@@ -39,14 +39,14 @@ classdef ModelExporterOptions < iDynTreeSwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1411, varargin{:});
+        tmp = iDynTreeMEX(1452, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1412, self);
+        iDynTreeMEX(1453, self);
         self.SwigClear();
       end
     end
