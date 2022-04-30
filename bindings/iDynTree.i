@@ -88,6 +88,7 @@
 // Kinematics & Dynamics related functions
 #include "iDynTree/Model/ForwardKinematics.h"
 #include "iDynTree/Model/Dynamics.h"
+#include "iDynTree/Model/DenavitHartenberg.h"
 
 // Sensors related data structures
 #include "iDynTree/Sensors/Sensors.h"
@@ -259,6 +260,7 @@ namespace std {
 // Kinematics & Dynamics related functions
 %include "iDynTree/Model/ForwardKinematics.h"
 %include "iDynTree/Model/Dynamics.h"
+%include "iDynTree/Model/DenavitHartenberg.h"
 
 // Sensors related data structures
 %include "iDynTree/Sensors/Sensors.h"

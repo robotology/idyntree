@@ -1,10 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). 
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased Major]
+
+### Added
+- Added `DHChain` class to the bindings.
 
 ## [5.1.0] - 2022-02-25
 
@@ -51,9 +54,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Deprecated
 - The `iDynTree::Visualizer::enviroment()` was deprecated. Please use the `iDynTree::Visualizer::environment()` method instead (https://github.com/robotology/idyntree/pull/903).
-- The `iDynTree::idyntree-modelio-urdf` CMake imported target used when using classes such as `iDynTree::ModelLoader` and `iDynTree::ModelExporter`  was deprecated. Please use the `iDynTree::idyntree-modelio` imported target instead. 
+- The `iDynTree::idyntree-modelio-urdf` CMake imported target used when using classes such as `iDynTree::ModelLoader` and `iDynTree::ModelExporter`  was deprecated. Please use the `iDynTree::idyntree-modelio` imported target instead.
 
-### Removed 
+### Removed
 - The tools that depend on YARP (`urdf2dh`, `yarprobotstatepublisher`, `idyntree-sole-gui`, `iDynTreePlotter`) have been moved in [`idyntree-yarp-tools`](https://github.com/robotology/idyntree-yarp-tools) and their have been removed from iDynTree, together with the the option `IDYNTREE_COMPILES_YARP_TOOLS` that was been introduced to disable their compilation in iDynTree 3 (https://github.com/robotology/idyntree/pull/940).
 
 ### Fixed
@@ -63,18 +66,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added 
+### Added
 - Added support for exporting joint position limits to URDF for 1-DoF joints
   (prismatic and revolute).
 - Added pybind11 python bindings for adding and reading joint limits.
 - Added the `ModelTransformsSolidShapes.h` header in the `iDynTree::idyntree-solid-shapes` library.
   At the moment, this header contains just the `iDynTree::approximateSolidShapesWithPrimitiveShape`
   function, useful to approximate the solid shapes of a given iDynTree::Model to a series of bounding boxes (https://github.com/robotology/idyntree/pull/941).
-- Added `idyntree-model-simplify-shapes` command line tool. This tool is useful to take in input a model, and 
-  return in output the same model, but with all the geometries of the model approximated with their axis aligned 
+- Added `idyntree-model-simplify-shapes` command line tool. This tool is useful to take in input a model, and
+  return in output the same model, but with all the geometries of the model approximated with their axis aligned
   bounding boxes (https://github.com/robotology/idyntree/issues/933, https://github.com/robotology/idyntree/pull/941).
 
-### Fixed 
+### Fixed
 - In the URDF exporter, export only frames attached to the exported traversal [#914](https://github.com/robotology/idyntree/pull/914).
 - Fixed handling of the AMENT_PREFIX_PATH environment variable (https://github.com/robotology/idyntree/pull/915).
 - `__is_mesh` in the `MeshcatVisualizer` now returns `false` for non-meshes, and instead was raising an error (https://github.com/robotology/idyntree/pull/925).
@@ -104,7 +107,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.3.1] - 2021-07-16
 
-### Fixed 
+### Fixed
 - Fixed the possibility of installing the bindings of iDynTree (`bindings` directory) on their own, against an already compiled system iDynTree (https://github.com/robotology/idyntree/pull/896).
 
 ## [3.3.0] - 2021-07-08
@@ -138,7 +141,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - The wheels uploaded to PyPI are now `manylinux_2_24` compliant (https://github.com/robotology/idyntree/pull/844)
 
-### Fixed 
+### Fixed
 - Dynamics: In RNEA Dynamic Loop, return zero for wrench corresponding to non-existing parent joint of base link (https://github.com/robotology/idyntree/pull/857).
 - Fixed compilation when using Eigen 3.4 (https://github.com/robotology/idyntree/pull/861).
 
@@ -481,13 +484,13 @@ As this is an `inline` function, this modification does not affect `iDynTree`'s 
 
 ### Changed
 
-- The `IVector`, `IRawVector`, `IMatrix` and `IRawMatrix` interfaces have been removed for performance reasons, 
-  see https://github.com/robotology/idyntree/issues/98#issuecomment-158823148 . If you want to write generic 
-  code in C++ you can rely on templates, and on Matlab and Python you can rely on the native dynamic type system. 
-  
-- All the core classes that have a fixed size (`Position`, `Rotation`, `Transform`, `SpatialMotionVector`, etc, etc) are 
+- The `IVector`, `IRawVector`, `IMatrix` and `IRawMatrix` interfaces have been removed for performance reasons,
+  see https://github.com/robotology/idyntree/issues/98#issuecomment-158823148 . If you want to write generic
+  code in C++ you can rely on templates, and on Matlab and Python you can rely on the native dynamic type system.
+
+- All the core classes that have a fixed size (`Position`, `Rotation`, `Transform`, `SpatialMotionVector`, etc, etc) are
   not initialized by their empty constructor for performance reasons, see https://github.com/robotology/idyntree/issues/98#issuecomment-158795881 .
   From now on, make sure that initialize them before any use. Most of those classes should have a `zero()` method to
-  zero its content, or a `Zero()` static method that return a instance with its content set to zero. 
+  zero its content, or a `Zero()` static method that return a instance with its content set to zero.
   For ensuring that no regression happened on the iDynTree codebase, a CMake advanced option `IDYNTREE_RUN_VALGRIND_TESTS`
-  has been added to make that no use of initialized memory occurs. 
+  has been added to make that no use of initialized memory occurs.
