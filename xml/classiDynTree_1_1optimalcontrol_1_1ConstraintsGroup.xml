@@ -765,7 +765,7 @@
 <para>Evaluate constraint second partial derivative wrt the state variables. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="103">$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial x^2}$</formula> <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="305">$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial x^2}$</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -843,7 +843,7 @@
 <para>Evaluate constraint second partial derivative wrt the control. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="104">$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial u^2}$</formula> <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="306">$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial u^2}$</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -921,7 +921,7 @@
 <para>Evaluate constraint second partial derivative wrt the state and control. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="105">$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial x \partial u}$</formula>, thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs. <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="307">$\sum \lambda_i \frac{\partial^2 c(t, x, u)}{\partial x \partial u}$</formula>, thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs. <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -1143,7 +1143,7 @@
     <detaileddescription>
 <para><simplesect kind="warning"><para>This class is still in active development, and so API interface can change between iDynTree versions.</para>
 </simplesect>
-This class allows to define a set of constraints which are enabled only for a particular time range. This allow to change the constraint structure depending on time. Given a specific time instant, only one constraint is enabled (the one whose <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref> contains the instant and has the higher initTime). If the specified time instant does not fall into any time constraint time range, a dummy constraint wil be evaluated, i.e. <formula id="106">$ -1 \leq 0 \leq 1 $</formula>. All the constraints that will be added to the group should have dimension at most equal to maxConstraintSize. If the constraint size is smaller than the maxConstraintSize, dummy constraints as the above will be added on the bottom. This allow to keep a constant structure even if the constraints have different dimensions. A typical example is when a constraint is enabled only for a certain period of time. </para>
+This class allows to define a set of constraints which are enabled only for a particular time range. This allow to change the constraint structure depending on time. Given a specific time instant, only one constraint is enabled (the one whose <ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref> contains the instant and has the higher initTime). If the specified time instant does not fall into any time constraint time range, a dummy constraint wil be evaluated, i.e. <formula id="308">$ -1 \leq 0 \leq 1 $</formula>. All the constraints that will be added to the group should have dimension at most equal to maxConstraintSize. If the constraint size is smaller than the maxConstraintSize, dummy constraints as the above will be added on the bottom. This allow to keep a constant structure even if the constraints have different dimensions. A typical example is when a constraint is enabled only for a certain period of time. </para>
     </detaileddescription>
     <location file="iDynTree/ConstraintsGroup.h" line="49" column="9" bodyfile="iDynTree/ConstraintsGroup.h" bodystart="49" bodyend="319"/>
     <listofallmembers>

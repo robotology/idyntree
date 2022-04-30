@@ -396,7 +396,7 @@
 <para>Evaluate cost first partial derivative wrt the state. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="107">$\frac{\partial g(t, x, u)}{\partial x}$</formula> <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="309">$\frac{\partial g(t, x, u)}{\partial x}$</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -463,7 +463,7 @@
 <para>Evaluate cost first partial derivative wrt the control variables. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="108">$\frac{\partial g(t, x, u)}{\partial u}$</formula> <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="310">$\frac{\partial g(t, x, u)}{\partial u}$</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -530,7 +530,7 @@
 <para>Evaluate cost second partial derivative wrt the state variables. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="109">$\frac{\partial^2 g(t, x, u)}{\partial x^2}$</formula> <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="311">$\frac{\partial^2 g(t, x, u)}{\partial x^2}$</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -597,7 +597,7 @@
 <para>Evaluate cost second partial derivative wrt the control. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="110">$\frac{\partial^2 g(t, x, u)}{\partial u^2}$</formula> <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="312">$\frac{\partial^2 g(t, x, u)}{\partial u^2}$</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -664,7 +664,7 @@
 <para>Evaluate cost second partial derivative wrt the state and control. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="111">$\frac{\partial^2 g(t, x, u)}{\partial x \partial u}$</formula>, thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs. <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="313">$\frac{\partial^2 g(t, x, u)}{\partial x \partial u}$</formula>, thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs. <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>

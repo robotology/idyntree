@@ -382,8 +382,8 @@
 <para>Evaluate the collocation constraint. </para>
         </briefdescription>
         <detaileddescription>
-<para>In some optimal control solvers, like the <ref refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver" kindref="compound">MultipleShootingSolver</ref>, we need to discretize the dynamical system associated to the optimal control problem. This function evaluates the discretization error according to specified integration method. The <ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator" kindref="compound">Integrator</ref>, when integrating a dynamical system, is performing the following discretization: <formula id="119">\[ x_{k+1} = \phi(x_k, x_{k+1}, u_k, u_{k+1}, t) \]</formula> where <formula id="120">$ x_{k+1}$</formula> is the discretized output. For example, using forward euler, we would have <formula id="121">\[ x_{k+1} = x_k + f(t, x, u)\mathrm{d}T. \]</formula></para>
-<para>This function returns the result of <formula id="122">$ \phi(x_k, x_{k+1}, u_k, u_{k+1}, t) - x_{k+1}$</formula>.</para>
+<para>In some optimal control solvers, like the <ref refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver" kindref="compound">MultipleShootingSolver</ref>, we need to discretize the dynamical system associated to the optimal control problem. This function evaluates the discretization error according to specified integration method. The <ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator" kindref="compound">Integrator</ref>, when integrating a dynamical system, is performing the following discretization: <formula id="321">\[ x_{k+1} = \phi(x_k, x_{k+1}, u_k, u_{k+1}, t) \]</formula> where <formula id="322">$ x_{k+1}$</formula> is the discretized output. For example, using forward euler, we would have <formula id="323">\[ x_{k+1} = x_k + f(t, x, u)\mathrm{d}T. \]</formula></para>
+<para>This function returns the result of <formula id="324">$ \phi(x_k, x_{k+1}, u_k, u_{k+1}, t) - x_{k+1}$</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
@@ -397,7 +397,7 @@
 <parametername direction="in">collocationPoints</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A vector containing <formula id="123">$x_k$</formula> and <formula id="124">$x_{k+1}$</formula>. Notice that <formula id="124">$x_{k+1}$</formula> corresponds to the state at instant (time + dT). </para>
+<para>A vector containing <formula id="325">$x_k$</formula> and <formula id="326">$x_{k+1}$</formula>. Notice that <formula id="326">$x_{k+1}$</formula> corresponds to the state at instant (time + dT). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -405,7 +405,7 @@
 <parametername direction="in">controlInputs</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A vector containing <formula id="125">$u_k$</formula> and <formula id="126">$u_{k+1}$</formula>. Notice that <formula id="126">$u_{k+1}$</formula> is supposed to be applied at instant (time + dT). </para>
+<para>A vector containing <formula id="327">$u_k$</formula> and <formula id="328">$u_{k+1}$</formula>. Notice that <formula id="328">$u_{k+1}$</formula> is supposed to be applied at instant (time + dT). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -413,7 +413,7 @@
 <parametername direction="in">dT</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The time distance between <formula id="123">$x_k$</formula> and <formula id="124">$x_{k+1}$</formula>. </para>
+<para>The time distance between <formula id="325">$x_k$</formula> and <formula id="326">$x_{k+1}$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -421,7 +421,7 @@
 <parametername direction="out">constraintValue</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The result of <formula id="122">$ \phi(x_k, x_{k+1}, u_k, u_{k+1}, t) - x_{k+1}$</formula>. </para>
+<para>The result of <formula id="324">$ \phi(x_k, x_{k+1}, u_k, u_{k+1}, t) - x_{k+1}$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>

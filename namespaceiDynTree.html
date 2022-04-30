@@ -96,102 +96,41 @@
           <h2><a href="#nested-classes">Classes</a></h2>
           <dl class="m-doc">
             <dt>
-              struct <a href="structiDynTree_1_1AttitudeEstimatorState.html" class="m-doc">AttitudeEstimatorState</a>
+              class <a href="classiDynTree_1_1BoundingBoxProjectionConstraint.html" class="m-doc">BoundingBoxProjectionConstraint</a>
             </dt>
-            <dd><span></span></dd>
+            <dd><a href="classiDynTree_1_1BoundingBoxProjectionConstraint.html" class="m-doc">BoundingBoxProjectionConstraint</a> helper.</dd>
             <dt>
-              class <a href="classiDynTree_1_1IAttitudeEstimator.html" class="m-doc">IAttitudeEstimator</a>
+              class <a href="classiDynTree_1_1Polygon.html" class="m-doc">Polygon</a>
             </dt>
-            <dd>for attitude estimator classes</dd>
+            <dd>Class representing a 2D <a href="classiDynTree_1_1Polygon.html" class="m-doc">Polygon</a> expressed in the 3D space.</dd>
             <dt>
-              struct <a href="structiDynTree_1_1AttitudeMahonyFilterParameters.html" class="m-doc">AttitudeMahonyFilterParameters</a>
+              class <a href="classiDynTree_1_1Polygon2D.html" class="m-doc">Polygon2D</a>
             </dt>
-            <dd>set up the quaternion EKF</dd>
+            <dd>Class representing a 2D <a href="classiDynTree_1_1Polygon.html" class="m-doc">Polygon</a> expressed in the 2D space.</dd>
             <dt>
-              class <a href="classiDynTree_1_1AttitudeMahonyFilter.html" class="m-doc">AttitudeMahonyFilter</a>
+              class <a href="classiDynTree_1_1ConvexHullProjectionConstraint.html" class="m-doc">ConvexHullProjectionConstraint</a>
             </dt>
-            <dd>explicit passive complementary filter on quaternion groups described in the paper <a href="https://hal.archives-ouvertes.fr/hal-00488376/document">Non-linear complementary filters on SO3 groups</a></dd>
+            <dd><a href="classiDynTree_1_1ConvexHullProjectionConstraint.html" class="m-doc">ConvexHullProjectionConstraint</a> helper.</dd>
             <dt>
-              struct <a href="structiDynTree_1_1AttitudeQuaternionEKFParameters.html" class="m-doc">AttitudeQuaternionEKFParameters</a>
+              class <a href="classiDynTree_1_1InverseKinematics.html" class="m-doc">InverseKinematics</a>
             </dt>
-            <dd>set up the quaternion EKF</dd>
+            <dd>NLP-based Inverse kinematics.</dd>
             <dt>
-              class <a href="classiDynTree_1_1AttitudeQuaternionEKF.html" class="m-doc">AttitudeQuaternionEKF</a>
+              class <a href="classiDynTree_1_1iKinLimbImported.html" class="m-doc">iKinLimbImported</a>
             </dt>
-            <dd>Quaternion based Discrete Extended Kalman Filter fusing IMU measurements, to give estimates of orientation, angular velocity and gyroscope bias.</dd>
+            <dd>iKinLimb class to extract a iKinLimb from iDynTree structures.</dd>
             <dt>
-              struct <a href="structiDynTree_1_1BerdyOptions.html" class="m-doc">BerdyOptions</a>
+              class <a href="classiDynTree_1_1skinDynLibLinkID.html" class="m-doc">skinDynLibLinkID</a>
             </dt>
-            <dd>Options of the <a href="classiDynTree_1_1BerdyHelper.html" class="m-doc">BerdyHelper</a> class.</dd>
+            <dd>Identifier for a link and a body frame in skinDynLib.</dd>
             <dt>
-              struct <a href="structiDynTree_1_1BerdySensor.html" class="m-doc">BerdySensor</a>
+              class <a href="classiDynTree_1_1iDynTreeLinkAndFrame.html" class="m-doc">iDynTreeLinkAndFrame</a>
             </dt>
-            <dd>Structure which describes the essential information about a sensor used in berdy A sensor is identified by the pair (type, id)</dd>
+            <dd>Identifier for a link and frame couple in an iDynTree model.</dd>
             <dt>
-              struct <a href="structiDynTree_1_1BerdyDynamicVariable.html" class="m-doc">BerdyDynamicVariable</a>
+              class <a href="classiDynTree_1_1skinDynLibConversionsHelper.html" class="m-doc">skinDynLibConversionsHelper</a>
             </dt>
-            <dd><span></span></dd>
-            <dt>
-              class <a href="classiDynTree_1_1BerdyHelper.html" class="m-doc">BerdyHelper</a>
-            </dt>
-            <dd>Helper class for computing Berdy matrices.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;iDynTree::MatrixStorageOrdering ordering&gt;</div>
-              class <a href="classiDynTree_1_1SparseMatrix.html" class="m-doc">SparseMatrix</a>
-            </dt>
-            <dd>Sparse Matrix class.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1BerdySparseMAPSolver.html" class="m-doc">BerdySparseMAPSolver</a>
-            </dt>
-            <dd></dd>
-            <dt>
-              class <a href="classiDynTree_1_1BipedFootContactClassifier.html" class="m-doc">BipedFootContactClassifier</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              struct <a href="structiDynTree_1_1SchmittParams.html" class="m-doc">SchmittParams</a>
-            </dt>
-            <dd>struct to hold schmitt trigger device parameters</dd>
-            <dt>
-              class <a href="classiDynTree_1_1ContactStateMachine.html" class="m-doc">ContactStateMachine</a>
-            </dt>
-            <dd>Contact State Machine class for binary contact state detection Contains a Schmitt Trigger device for updating the contact states using the contact normal force acting on the contact link and Determines contact transitions using simple binary switching logic.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper.html" class="m-doc">DiscreteExtendedKalmanFilterHelper</a>
-            </dt>
-            <dd>class implementation of discrete EKF with additive Gaussian noise</dd>
-            <dt>
-              struct <a href="structiDynTree_1_1UnknownWrenchContact.html" class="m-doc">UnknownWrenchContact</a>
-            </dt>
-            <dd>A contact whose wrench is unknown.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1LinkUnknownWrenchContacts.html" class="m-doc">LinkUnknownWrenchContacts</a>
-            </dt>
-            <dd>A set of <a href="structiDynTree_1_1UnknownWrenchContact.html" class="m-doc">UnknownWrenchContact</a> for each link, representing all the contacts between the model and the external environment whose wrench is unkwnon.</dd>
-            <dt>
-              struct <a href="structiDynTree_1_1estimateExternalWrenchesBuffers.html" class="m-doc">estimateExternalWrenchesBuffers</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              class <a href="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html" class="m-doc">ExtWrenchesAndJointTorquesEstimator</a>
-            </dt>
-            <dd>Estimator for external wrenches and joint torques using internal F/T sensors.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1GravityCompensationHelper.html" class="m-doc">GravityCompensationHelper</a>
-            </dt>
-            <dd>Class computing the gravity compensation torques using accelerometer measurements.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1DiscreteKalmanFilterHelper.html" class="m-doc">DiscreteKalmanFilterHelper</a>
-            </dt>
-            <dd>Discrete Kalman Filter with additive Gaussian noise.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1SchmittTrigger.html" class="m-doc">SchmittTrigger</a>
-            </dt>
-            <dd>Schmitt Trigger class for binary state detection This device is used to obtain a binary state (ON/OFF) at some time instant depending on a value inputted to the device.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1SimpleLeggedOdometry.html" class="m-doc">SimpleLeggedOdometry</a>
-            </dt>
-            <dd>A simple legged odometry for a legged robot.</dd>
+            <dd>Helper for conversion between iDynTree data structures and skinDynLib data structures.</dd>
             <dt>
               class <a href="classiDynTree_1_1ArticulatedBodyInertia.html" class="m-doc">ArticulatedBodyInertia</a>
             </dt>
@@ -273,6 +212,11 @@
               class <a href="classiDynTree_1_1Span.html" class="m-doc">Span</a>
             </dt>
             <dd><span></span></dd>
+            <dt>
+              <div class="m-doc-template">template&lt;iDynTree::MatrixStorageOrdering ordering&gt;</div>
+              class <a href="classiDynTree_1_1SparseMatrix.html" class="m-doc">SparseMatrix</a>
+            </dt>
+            <dd>Sparse Matrix class.</dd>
             <dt>
               class <a href="classiDynTree_1_1SpatialAcc.html" class="m-doc">SpatialAcc</a>
             </dt>
@@ -377,6 +321,106 @@
             </dt>
             <dd>Class representing a wrench, i.e.</dd>
             <dt>
+              class <a href="classiDynTree_1_1ModelCalibrationHelper.html" class="m-doc">ModelCalibrationHelper</a>
+            </dt>
+            <dd>Helper class to load a model, modify its parameters based on calibration, and save it again to file.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a>
+            </dt>
+            <dd>Options for the iDynTree exporter.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1ModelExporter.html" class="m-doc">ModelExporter</a>
+            </dt>
+            <dd>Helper class to export a model to the supported textual formats.</dd>
+            <dt>
+              struct <a href="structiDynTree_1_1ModelParserOptions.html" class="m-doc">ModelParserOptions</a>
+            </dt>
+            <dd>Options for the iDynTree parser.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1ModelLoader.html" class="m-doc">ModelLoader</a>
+            </dt>
+            <dd>Helper class to load a model from a generic format.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1ForceTorqueSensorElement.html" class="m-doc">ForceTorqueSensorElement</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1ForceTorqueSensorHelper.html" class="m-doc">ForceTorqueSensorHelper</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1GeometryElement.html" class="m-doc">GeometryElement</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1InertialElement.html" class="m-doc">InertialElement</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1JointElement.html" class="m-doc">JointElement</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1LinkElement.html" class="m-doc">LinkElement</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1MaterialElement.html" class="m-doc">MaterialElement</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1OriginElement.html" class="m-doc">OriginElement</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1RobotElement.html" class="m-doc">RobotElement</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1SensorElement.html" class="m-doc">SensorElement</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1SensorHelper.html" class="m-doc">SensorHelper</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1AccelerometerSensorHelper.html" class="m-doc">AccelerometerSensorHelper</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1GyroscopeSensorHelper.html" class="m-doc">GyroscopeSensorHelper</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1URDFDocument.html" class="m-doc">URDFDocument</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1VisualElement.html" class="m-doc">VisualElement</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1XMLAttribute.html" class="m-doc">XMLAttribute</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1XMLDocument.html" class="m-doc">XMLDocument</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              class <a href="classiDynTree_1_1XMLElement.html" class="m-doc">XMLElement</a>
+            </dt>
+            <dd>Class representing an XML element.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1XMLParser.html" class="m-doc">XMLParser</a>
+            </dt>
+            <dd>XML Parser class.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1KinDynComputations.html" class="m-doc">KinDynComputations</a>
+            </dt>
+            <dd>High level stateful class wrapping several kinematics and dynamics algorithms.</dd>
+            <dt>
               class <a href="classiDynTree_1_1AccelerometerSensor.html" class="m-doc">AccelerometerSensor</a>
             </dt>
             <dd>Interface to the Accelerometer class.</dd>
@@ -416,94 +460,6 @@
               class <a href="classiDynTree_1_1ThreeAxisForceTorqueContactSensor.html" class="m-doc">ThreeAxisForceTorqueContactSensor</a>
             </dt>
             <dd>Class representing a three axis force-torque contact sensor.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1KinDynComputations.html" class="m-doc">KinDynComputations</a>
-            </dt>
-            <dd>High level stateful class wrapping several kinematics and dynamics algorithms.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1ICameraAnimator.html" class="m-doc">ICameraAnimator</a>
-            </dt>
-            <dd>Interface to animate the camera and control it via the mouse.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1ICamera.html" class="m-doc">ICamera</a>
-            </dt>
-            <dd>Interface to manipulate the camera parameters.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1ColorViz.html" class="m-doc">ColorViz</a>
-            </dt>
-            <dd>Basic structure to encode color information.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1PixelViz.html" class="m-doc">PixelViz</a>
-            </dt>
-            <dd>Basic structure to encode pixel information.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1ILight.html" class="m-doc">ILight</a>
-            </dt>
-            <dd>Interface to a light visualization.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1IEnvironment.html" class="m-doc">IEnvironment</a>
-            </dt>
-            <dd>Interface to manipulate the elements in the enviroment (background, root frame, reference lines)</dd>
-            <dt>
-              class <a href="classiDynTree_1_1IJetsVisualization.html" class="m-doc">IJetsVisualization</a>
-            </dt>
-            <dd>Interface to the visualization of jets attached to a model.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1ILabel.html" class="m-doc">ILabel</a>
-            </dt>
-            <dd>The interface to add a label in the visualizer.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1IVectorsVisualization.html" class="m-doc">IVectorsVisualization</a>
-            </dt>
-            <dd>Interface to the visualization of vectors.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1IFrameVisualization.html" class="m-doc">IFrameVisualization</a>
-            </dt>
-            <dd>Interface to the visualization of frames.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1IModelVisualization.html" class="m-doc">IModelVisualization</a>
-            </dt>
-            <dd>Interface to the visualization of a model istance.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1ITexture.html" class="m-doc">ITexture</a>
-            </dt>
-            <dd>The interface for an object that can be used as an additional target for the renderer.</dd>
-            <dt>
-              struct <a href="structiDynTree_1_1VisualizerOptions.html" class="m-doc">VisualizerOptions</a>
-            </dt>
-            <dd><a href="classiDynTree_1_1Visualizer.html" class="m-doc">Visualizer</a> options.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1ITexturesHandler.html" class="m-doc">ITexturesHandler</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              class <a href="classiDynTree_1_1Visualizer.html" class="m-doc">Visualizer</a>
-            </dt>
-            <dd>Class to visualize a set of iDynTree models.</dd>
-            <dt>
-              struct <a href="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions.html" class="m-doc">ApproximateSolidShapesWithPrimitiveShapeOptions</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              class <a href="classiDynTree_1_1BoundingBoxProjectionConstraint.html" class="m-doc">BoundingBoxProjectionConstraint</a>
-            </dt>
-            <dd><a href="classiDynTree_1_1BoundingBoxProjectionConstraint.html" class="m-doc">BoundingBoxProjectionConstraint</a> helper.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1Polygon.html" class="m-doc">Polygon</a>
-            </dt>
-            <dd>Class representing a 2D <a href="classiDynTree_1_1Polygon.html" class="m-doc">Polygon</a> expressed in the 3D space.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1Polygon2D.html" class="m-doc">Polygon2D</a>
-            </dt>
-            <dd>Class representing a 2D <a href="classiDynTree_1_1Polygon.html" class="m-doc">Polygon</a> expressed in the 2D space.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1ConvexHullProjectionConstraint.html" class="m-doc">ConvexHullProjectionConstraint</a>
-            </dt>
-            <dd><a href="classiDynTree_1_1ConvexHullProjectionConstraint.html" class="m-doc">ConvexHullProjectionConstraint</a> helper.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1InverseKinematics.html" class="m-doc">InverseKinematics</a>
-            </dt>
-            <dd>NLP-based Inverse kinematics.</dd>
             <dt>
               class <a href="classiDynTree_1_1ContactWrench.html" class="m-doc">ContactWrench</a>
             </dt>
@@ -682,122 +638,197 @@
             </dt>
             <dd>Class that represents a traversal of a set of links of a <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>.</dd>
             <dt>
-              class <a href="classiDynTree_1_1ModelCalibrationHelper.html" class="m-doc">ModelCalibrationHelper</a>
-            </dt>
-            <dd>Helper class to load a model, modify its parameters based on calibration, and save it again to file.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a>
-            </dt>
-            <dd>Options for the iDynTree exporter.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1ModelExporter.html" class="m-doc">ModelExporter</a>
-            </dt>
-            <dd>Helper class to export a model to the supported textual formats.</dd>
-            <dt>
-              struct <a href="structiDynTree_1_1ModelParserOptions.html" class="m-doc">ModelParserOptions</a>
-            </dt>
-            <dd>Options for the iDynTree parser.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1ModelLoader.html" class="m-doc">ModelLoader</a>
-            </dt>
-            <dd>Helper class to load a model from a generic format.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1ForceTorqueSensorElement.html" class="m-doc">ForceTorqueSensorElement</a>
+              struct <a href="structiDynTree_1_1AttitudeEstimatorState.html" class="m-doc">AttitudeEstimatorState</a>
             </dt>
             <dd><span></span></dd>
             <dt>
-              class <a href="classiDynTree_1_1ForceTorqueSensorHelper.html" class="m-doc">ForceTorqueSensorHelper</a>
+              class <a href="classiDynTree_1_1IAttitudeEstimator.html" class="m-doc">IAttitudeEstimator</a>
+            </dt>
+            <dd>for attitude estimator classes</dd>
+            <dt>
+              struct <a href="structiDynTree_1_1AttitudeMahonyFilterParameters.html" class="m-doc">AttitudeMahonyFilterParameters</a>
+            </dt>
+            <dd>set up the quaternion EKF</dd>
+            <dt>
+              class <a href="classiDynTree_1_1AttitudeMahonyFilter.html" class="m-doc">AttitudeMahonyFilter</a>
+            </dt>
+            <dd>explicit passive complementary filter on quaternion groups described in the paper <a href="https://hal.archives-ouvertes.fr/hal-00488376/document">Non-linear complementary filters on SO3 groups</a></dd>
+            <dt>
+              struct <a href="structiDynTree_1_1AttitudeQuaternionEKFParameters.html" class="m-doc">AttitudeQuaternionEKFParameters</a>
+            </dt>
+            <dd>set up the quaternion EKF</dd>
+            <dt>
+              class <a href="classiDynTree_1_1AttitudeQuaternionEKF.html" class="m-doc">AttitudeQuaternionEKF</a>
+            </dt>
+            <dd>Quaternion based Discrete Extended Kalman Filter fusing IMU measurements, to give estimates of orientation, angular velocity and gyroscope bias.</dd>
+            <dt>
+              struct <a href="structiDynTree_1_1BerdyOptions.html" class="m-doc">BerdyOptions</a>
+            </dt>
+            <dd>Options of the <a href="classiDynTree_1_1BerdyHelper.html" class="m-doc">BerdyHelper</a> class.</dd>
+            <dt>
+              struct <a href="structiDynTree_1_1BerdySensor.html" class="m-doc">BerdySensor</a>
+            </dt>
+            <dd>Structure which describes the essential information about a sensor used in berdy A sensor is identified by the pair (type, id)</dd>
+            <dt>
+              struct <a href="structiDynTree_1_1BerdyDynamicVariable.html" class="m-doc">BerdyDynamicVariable</a>
             </dt>
             <dd><span></span></dd>
             <dt>
-              class <a href="classiDynTree_1_1GeometryElement.html" class="m-doc">GeometryElement</a>
+              class <a href="classiDynTree_1_1BerdyHelper.html" class="m-doc">BerdyHelper</a>
+            </dt>
+            <dd>Helper class for computing Berdy matrices.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1BerdySparseMAPSolver.html" class="m-doc">BerdySparseMAPSolver</a>
+            </dt>
+            <dd></dd>
+            <dt>
+              class <a href="classiDynTree_1_1BipedFootContactClassifier.html" class="m-doc">BipedFootContactClassifier</a>
             </dt>
             <dd><span></span></dd>
             <dt>
-              class <a href="classiDynTree_1_1InertialElement.html" class="m-doc">InertialElement</a>
+              struct <a href="structiDynTree_1_1SchmittParams.html" class="m-doc">SchmittParams</a>
+            </dt>
+            <dd>struct to hold schmitt trigger device parameters</dd>
+            <dt>
+              class <a href="classiDynTree_1_1ContactStateMachine.html" class="m-doc">ContactStateMachine</a>
+            </dt>
+            <dd>Contact State Machine class for binary contact state detection Contains a Schmitt Trigger device for updating the contact states using the contact normal force acting on the contact link and Determines contact transitions using simple binary switching logic.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper.html" class="m-doc">DiscreteExtendedKalmanFilterHelper</a>
+            </dt>
+            <dd>class implementation of discrete EKF with additive Gaussian noise</dd>
+            <dt>
+              struct <a href="structiDynTree_1_1UnknownWrenchContact.html" class="m-doc">UnknownWrenchContact</a>
+            </dt>
+            <dd>A contact whose wrench is unknown.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1LinkUnknownWrenchContacts.html" class="m-doc">LinkUnknownWrenchContacts</a>
+            </dt>
+            <dd>A set of <a href="structiDynTree_1_1UnknownWrenchContact.html" class="m-doc">UnknownWrenchContact</a> for each link, representing all the contacts between the model and the external environment whose wrench is unkwnon.</dd>
+            <dt>
+              struct <a href="structiDynTree_1_1estimateExternalWrenchesBuffers.html" class="m-doc">estimateExternalWrenchesBuffers</a>
             </dt>
             <dd><span></span></dd>
             <dt>
-              class <a href="classiDynTree_1_1JointElement.html" class="m-doc">JointElement</a>
+              class <a href="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator.html" class="m-doc">ExtWrenchesAndJointTorquesEstimator</a>
+            </dt>
+            <dd>Estimator for external wrenches and joint torques using internal F/T sensors.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1GravityCompensationHelper.html" class="m-doc">GravityCompensationHelper</a>
+            </dt>
+            <dd>Class computing the gravity compensation torques using accelerometer measurements.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1DiscreteKalmanFilterHelper.html" class="m-doc">DiscreteKalmanFilterHelper</a>
+            </dt>
+            <dd>Discrete Kalman Filter with additive Gaussian noise.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1SchmittTrigger.html" class="m-doc">SchmittTrigger</a>
+            </dt>
+            <dd>Schmitt Trigger class for binary state detection This device is used to obtain a binary state (ON/OFF) at some time instant depending on a value inputted to the device.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1SimpleLeggedOdometry.html" class="m-doc">SimpleLeggedOdometry</a>
+            </dt>
+            <dd>A simple legged odometry for a legged robot.</dd>
+            <dt>
+              struct <a href="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions.html" class="m-doc">ApproximateSolidShapesWithPrimitiveShapeOptions</a>
             </dt>
             <dd><span></span></dd>
             <dt>
-              class <a href="classiDynTree_1_1LinkElement.html" class="m-doc">LinkElement</a>
+              class <a href="classiDynTree_1_1ICameraAnimator.html" class="m-doc">ICameraAnimator</a>
+            </dt>
+            <dd>Interface to animate the camera and control it via the mouse.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1ICamera.html" class="m-doc">ICamera</a>
+            </dt>
+            <dd>Interface to manipulate the camera parameters.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1ColorViz.html" class="m-doc">ColorViz</a>
+            </dt>
+            <dd>Basic structure to encode color information.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1PixelViz.html" class="m-doc">PixelViz</a>
+            </dt>
+            <dd>Basic structure to encode pixel information.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1ILight.html" class="m-doc">ILight</a>
+            </dt>
+            <dd>Interface to a light visualization.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1IEnvironment.html" class="m-doc">IEnvironment</a>
+            </dt>
+            <dd>Interface to manipulate the elements in the enviroment (background, root frame, reference lines)</dd>
+            <dt>
+              class <a href="classiDynTree_1_1IJetsVisualization.html" class="m-doc">IJetsVisualization</a>
+            </dt>
+            <dd>Interface to the visualization of jets attached to a model.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1ILabel.html" class="m-doc">ILabel</a>
+            </dt>
+            <dd>The interface to add a label in the visualizer.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1IVectorsVisualization.html" class="m-doc">IVectorsVisualization</a>
+            </dt>
+            <dd>Interface to the visualization of vectors.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1IFrameVisualization.html" class="m-doc">IFrameVisualization</a>
+            </dt>
+            <dd>Interface to the visualization of frames.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1IModelVisualization.html" class="m-doc">IModelVisualization</a>
+            </dt>
+            <dd>Interface to the visualization of a model istance.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1ITexture.html" class="m-doc">ITexture</a>
+            </dt>
+            <dd>The interface for an object that can be used as an additional target for the renderer.</dd>
+            <dt>
+              struct <a href="structiDynTree_1_1VisualizerOptions.html" class="m-doc">VisualizerOptions</a>
+            </dt>
+            <dd><a href="classiDynTree_1_1Visualizer.html" class="m-doc">Visualizer</a> options.</dd>
+            <dt>
+              class <a href="classiDynTree_1_1ITexturesHandler.html" class="m-doc">ITexturesHandler</a>
             </dt>
             <dd><span></span></dd>
             <dt>
-              class <a href="classiDynTree_1_1MaterialElement.html" class="m-doc">MaterialElement</a>
+              class <a href="classiDynTree_1_1Visualizer.html" class="m-doc">Visualizer</a>
             </dt>
-            <dd><span></span></dd>
-            <dt>
-              class <a href="classiDynTree_1_1OriginElement.html" class="m-doc">OriginElement</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              class <a href="classiDynTree_1_1RobotElement.html" class="m-doc">RobotElement</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              class <a href="classiDynTree_1_1SensorElement.html" class="m-doc">SensorElement</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              class <a href="classiDynTree_1_1SensorHelper.html" class="m-doc">SensorHelper</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              class <a href="classiDynTree_1_1AccelerometerSensorHelper.html" class="m-doc">AccelerometerSensorHelper</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              class <a href="classiDynTree_1_1GyroscopeSensorHelper.html" class="m-doc">GyroscopeSensorHelper</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              class <a href="classiDynTree_1_1URDFDocument.html" class="m-doc">URDFDocument</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              class <a href="classiDynTree_1_1VisualElement.html" class="m-doc">VisualElement</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              class <a href="classiDynTree_1_1XMLAttribute.html" class="m-doc">XMLAttribute</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              class <a href="classiDynTree_1_1XMLDocument.html" class="m-doc">XMLDocument</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              class <a href="classiDynTree_1_1XMLElement.html" class="m-doc">XMLElement</a>
-            </dt>
-            <dd>Class representing an XML element.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1XMLParser.html" class="m-doc">XMLParser</a>
-            </dt>
-            <dd>XML Parser class.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1iKinLimbImported.html" class="m-doc">iKinLimbImported</a>
-            </dt>
-            <dd>iKinLimb class to extract a iKinLimb from iDynTree structures.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1skinDynLibLinkID.html" class="m-doc">skinDynLibLinkID</a>
-            </dt>
-            <dd>Identifier for a link and a body frame in skinDynLib.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1iDynTreeLinkAndFrame.html" class="m-doc">iDynTreeLinkAndFrame</a>
-            </dt>
-            <dd>Identifier for a link and frame couple in an iDynTree model.</dd>
-            <dt>
-              class <a href="classiDynTree_1_1skinDynLibConversionsHelper.html" class="m-doc">skinDynLibConversionsHelper</a>
-            </dt>
-            <dd>Helper for conversion between iDynTree data structures and skinDynLib data structures.</dd>
+            <dd>Class to visualize a set of iDynTree models.</dd>
           </dl>
         </section>
         <section id="enum-members">
           <h2><a href="#enum-members">Enums</a></h2>
           <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="InverseKinematics_8h.html#a04da5add9479687cf4c7eb873e717c6c" class="m-doc">InverseKinematicsRotationParametrization</a> { </span><span class="m-doc-wrap"><a href="#a04da5add9479687cf4c7eb873e717c6ca6bbd58481084418979b449c46aff99a8" class="m-doc">InverseKinematicsRotationParametrizationQuaternion</a>,
+              <a href="#a04da5add9479687cf4c7eb873e717c6caad8ec2efa81330efbf416e7550113ca5" class="m-doc">InverseKinematicsRotationParametrizationRollPitchYaw</a> }</span>
+            </dt>
+            <dd>type of parametrization for the rotation (SO3) element</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="InverseKinematics_8h.html#a5cb905194c9ee61c0a23b32d603b2df2" class="m-doc">InverseKinematicsTreatTargetAsConstraint</a> { </span><span class="m-doc-wrap"><a href="#a5cb905194c9ee61c0a23b32d603b2df2aa3f7c6e0138052de9bc8a0d3dcd9d712" class="m-doc">InverseKinematicsTreatTargetAsConstraintNone</a> = 0,
+              <a href="#a5cb905194c9ee61c0a23b32d603b2df2a786b8aeaff64c77f025cec462c47206b" class="m-doc">InverseKinematicsTreatTargetAsConstraintPositionOnly</a> = 1,
+              <a href="#a5cb905194c9ee61c0a23b32d603b2df2aad1cbbc20ef9d02ff21364a90f781681" class="m-doc">InverseKinematicsTreatTargetAsConstraintRotationOnly</a> = 1 &lt;&lt; 1,
+              <a href="#a5cb905194c9ee61c0a23b32d603b2df2a90e54d63819ec0bff0f8eec68beff50b" class="m-doc">InverseKinematicsTreatTargetAsConstraintFull</a> = InverseKinematicsTreatTargetAsConstraintPositionOnly | InverseKinematicsTreatTargetAsConstraintRotationOnly }</span>
+            </dt>
+            <dd>Specify how to solve for the desired target.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="Utils_8h.html#a1d9848852f7effdff0a7206e361759dc" class="m-doc">MatrixStorageOrdering</a> { </span><span class="m-doc-wrap"><a href="#a1d9848852f7effdff0a7206e361759dca2b26025c525aa73dc7d5a8ab6b75c277" class="m-doc">RowMajor</a>,
+              <a href="#a1d9848852f7effdff0a7206e361759dcaa2d6963e41f11651763298147696f0dc" class="m-doc">ColumnMajor</a> }</span>
+            </dt>
+            <dd>Enum describing the possible matrix storage ordering.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="Sensors_8h.html#ad291b88efdf5262d744d33f642daf8b9" class="m-doc">SensorType</a> { </span><span class="m-doc-wrap"><a href="#ad291b88efdf5262d744d33f642daf8b9a7006069f3fbbdb2dfdd42a73646eb0c2" class="m-doc">SIX_AXIS_FORCE_TORQUE</a> = 0,
+              <a href="#ad291b88efdf5262d744d33f642daf8b9acaffc97afec9d7a74f00e940a440e27c" class="m-doc">ACCELEROMETER</a> = 1,
+              <a href="#ad291b88efdf5262d744d33f642daf8b9af18877b600b6d3bb9828709115fc0f7d" class="m-doc">GYROSCOPE</a> = 2,
+              <a href="#ad291b88efdf5262d744d33f642daf8b9a442e40fb46ceb1796cb5d6b7d7e7e167" class="m-doc">THREE_AXIS_ANGULAR_ACCELEROMETER</a> = 3,
+              <a href="#ad291b88efdf5262d744d33f642daf8b9a92de2e46732f84e720c99cd5a3588190" class="m-doc">THREE_AXIS_FORCE_TORQUE_CONTACT</a> = 4 }</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="FreeFloatingMatrices_8h.html#a0089c6dac34bc6a4f623d9e9e565375a" class="m-doc">FrameVelocityRepresentation</a> { </span><span class="m-doc-wrap"><a href="#a0089c6dac34bc6a4f623d9e9e565375aaf9e6abb240a3f5f6f3eb386c21277eeb" class="m-doc">INERTIAL_FIXED_REPRESENTATION</a>,
+              <a href="#a0089c6dac34bc6a4f623d9e9e565375aad3aa0f715d4709ae83c826d14ffb1dad" class="m-doc">BODY_FIXED_REPRESENTATION</a>,
+              <a href="#a0089c6dac34bc6a4f623d9e9e565375aacfd8cfdeac3248d26f145bd0998f93b8" class="m-doc">MIXED_REPRESENTATION</a> }</span>
+            </dt>
+            <dd>Possible frame velocity representation convention.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">enum <a href="group__iDynTreeExperimental.html#ga62aff3167b9df327b4b1db6affadd21f" class="m-doc">BerdyVariants</a> { </span><span class="m-doc-wrap"><a href="#gga62aff3167b9df327b4b1db6affadd21faf59c4a22cd72d6e001dbba40910e9c32" class="m-doc">ORIGINAL_BERDY_FIXED_BASE</a> = 0,
               <a href="#gga62aff3167b9df327b4b1db6affadd21fa1ca580068ec7f491800abeadf68185e5" class="m-doc">BERDY_FLOATING_BASE</a> = 1 }</span>
@@ -839,16 +870,7 @@
             </dt>
             <dd>Type of a <a href="structiDynTree_1_1UnknownWrenchContact.html" class="m-doc">UnknownWrenchContact</a>.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">enum <a href="Utils_8h.html#a1d9848852f7effdff0a7206e361759dc" class="m-doc">MatrixStorageOrdering</a> { </span><span class="m-doc-wrap"><a href="#a1d9848852f7effdff0a7206e361759dca2b26025c525aa73dc7d5a8ab6b75c277" class="m-doc">RowMajor</a>,
-              <a href="#a1d9848852f7effdff0a7206e361759dcaa2d6963e41f11651763298147696f0dc" class="m-doc">ColumnMajor</a> }</span>
-            </dt>
-            <dd>Enum describing the possible matrix storage ordering.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">enum <a href="Sensors_8h.html#ad291b88efdf5262d744d33f642daf8b9" class="m-doc">SensorType</a> { </span><span class="m-doc-wrap"><a href="#ad291b88efdf5262d744d33f642daf8b9a7006069f3fbbdb2dfdd42a73646eb0c2" class="m-doc">SIX_AXIS_FORCE_TORQUE</a> = 0,
-              <a href="#ad291b88efdf5262d744d33f642daf8b9acaffc97afec9d7a74f00e940a440e27c" class="m-doc">ACCELEROMETER</a> = 1,
-              <a href="#ad291b88efdf5262d744d33f642daf8b9af18877b600b6d3bb9828709115fc0f7d" class="m-doc">GYROSCOPE</a> = 2,
-              <a href="#ad291b88efdf5262d744d33f642daf8b9a442e40fb46ceb1796cb5d6b7d7e7e167" class="m-doc">THREE_AXIS_ANGULAR_ACCELEROMETER</a> = 3,
-              <a href="#ad291b88efdf5262d744d33f642daf8b9a92de2e46732f84e720c99cd5a3588190" class="m-doc">THREE_AXIS_FORCE_TORQUE_CONTACT</a> = 4 }</span>
+              <span class="m-doc-wrap-bumper">enum <a href="ModelTransformersSolidShapes_8h.html#a6760312b6c7a94affa286e93e5181357" class="m-doc">ApproximateSolidShapesWithPrimitiveShapeConversionType</a> { </span><span class="m-doc-wrap"><a href="#a6760312b6c7a94affa286e93e5181357a6486e8af25b0a7add4a835ec17c83e97" class="m-doc">ConvertSolidShapesWithEnclosingAxisAlignedBoundingBoxes</a> }</span>
             </dt>
             <dd><span></span></dd>
             <dt>
@@ -856,53 +878,11 @@
               <a href="#aad6844bb3e20ca63bfe9e3ee6e26515aac19ca7f555771da916a01ed3fa781d21" class="m-doc">DIRECTIONAL_LIGHT</a> }</span>
             </dt>
             <dd><span></span></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">enum <a href="ModelTransformersSolidShapes_8h.html#a6760312b6c7a94affa286e93e5181357" class="m-doc">ApproximateSolidShapesWithPrimitiveShapeConversionType</a> { </span><span class="m-doc-wrap"><a href="#a6760312b6c7a94affa286e93e5181357a6486e8af25b0a7add4a835ec17c83e97" class="m-doc">ConvertSolidShapesWithEnclosingAxisAlignedBoundingBoxes</a> }</span>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">enum <a href="InverseKinematics_8h.html#a04da5add9479687cf4c7eb873e717c6c" class="m-doc">InverseKinematicsRotationParametrization</a> { </span><span class="m-doc-wrap"><a href="#a04da5add9479687cf4c7eb873e717c6ca6bbd58481084418979b449c46aff99a8" class="m-doc">InverseKinematicsRotationParametrizationQuaternion</a>,
-              <a href="#a04da5add9479687cf4c7eb873e717c6caad8ec2efa81330efbf416e7550113ca5" class="m-doc">InverseKinematicsRotationParametrizationRollPitchYaw</a> }</span>
-            </dt>
-            <dd>type of parametrization for the rotation (SO3) element</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">enum <a href="InverseKinematics_8h.html#a5cb905194c9ee61c0a23b32d603b2df2" class="m-doc">InverseKinematicsTreatTargetAsConstraint</a> { </span><span class="m-doc-wrap"><a href="#a5cb905194c9ee61c0a23b32d603b2df2aa3f7c6e0138052de9bc8a0d3dcd9d712" class="m-doc">InverseKinematicsTreatTargetAsConstraintNone</a> = 0,
-              <a href="#a5cb905194c9ee61c0a23b32d603b2df2a786b8aeaff64c77f025cec462c47206b" class="m-doc">InverseKinematicsTreatTargetAsConstraintPositionOnly</a> = 1,
-              <a href="#a5cb905194c9ee61c0a23b32d603b2df2aad1cbbc20ef9d02ff21364a90f781681" class="m-doc">InverseKinematicsTreatTargetAsConstraintRotationOnly</a> = 1 &lt;&lt; 1,
-              <a href="#a5cb905194c9ee61c0a23b32d603b2df2a90e54d63819ec0bff0f8eec68beff50b" class="m-doc">InverseKinematicsTreatTargetAsConstraintFull</a> = InverseKinematicsTreatTargetAsConstraintPositionOnly | InverseKinematicsTreatTargetAsConstraintRotationOnly }</span>
-            </dt>
-            <dd>Specify how to solve for the desired target.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">enum <a href="FreeFloatingMatrices_8h.html#a0089c6dac34bc6a4f623d9e9e565375a" class="m-doc">FrameVelocityRepresentation</a> { </span><span class="m-doc-wrap"><a href="#a0089c6dac34bc6a4f623d9e9e565375aaf9e6abb240a3f5f6f3eb386c21277eeb" class="m-doc">INERTIAL_FIXED_REPRESENTATION</a>,
-              <a href="#a0089c6dac34bc6a4f623d9e9e565375aad3aa0f715d4709ae83c826d14ffb1dad" class="m-doc">BODY_FIXED_REPRESENTATION</a>,
-              <a href="#a0089c6dac34bc6a4f623d9e9e565375aacfd8cfdeac3248d26f145bd0998f93b8" class="m-doc">MIXED_REPRESENTATION</a> }</span>
-            </dt>
-            <dd>Possible frame velocity representation convention.</dd>
           </dl>
         </section>
         <section id="typedef-members">
           <h2><a href="#typedef-members">Typedefs</a></h2>
           <dl class="m-doc">
-            <dt>
-              using <a href="AttitudeEstimator_8h.html#adcfa60b3d3580f517fd47c8864534b36" class="m-doc">LinearAccelerometerMeasurements</a> = <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />Vector3</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              using <a href="AttitudeEstimator_8h.html#a94dcb1f9c90a22269981469e229ed6ce" class="m-doc">GyroscopeMeasurements</a> = <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />Vector3</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              using <a href="AttitudeEstimator_8h.html#ad170eb4fd0bd13bfb0bdbdb6460d28bc" class="m-doc">MagnetometerMeasurements</a> = <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />Vector3</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              using <a href="AttitudeEstimator_8h.html#a8953e202971beb38867767ab9f002c42" class="m-doc">UnitQuaternion</a> = <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />Vector4</a>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              using <a href="AttitudeEstimator_8h.html#a48e2955e462d28103d57a10634d0654d" class="m-doc">RPY</a> = <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />Vector3</a>
-            </dt>
-            <dd><span></span></dd>
             <dt>
               using <a href="EigenHelpers_8h.html#acad81b92d9885b5eec826b3066af8960" class="m-doc">iDynTreeEigenVector</a> = Eigen::Map&lt;Eigen::VectorXd&gt;
             </dt>
@@ -1115,179 +1095,73 @@
               using <a href="MovableJointImpl_8h.html#af1c9c077a2177994db5ee45257af1d48" class="m-doc">MovableJointImpl6</a> = <a href="classiDynTree_1_1MovableJointImpl.html" class="m-doc">MovableJointImpl</a>&lt;6, 6&gt;
             </dt>
             <dd><span></span></dd>
+            <dt>
+              using <a href="AttitudeEstimator_8h.html#adcfa60b3d3580f517fd47c8864534b36" class="m-doc">LinearAccelerometerMeasurements</a> = <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />Vector3</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              using <a href="AttitudeEstimator_8h.html#a94dcb1f9c90a22269981469e229ed6ce" class="m-doc">GyroscopeMeasurements</a> = <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />Vector3</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              using <a href="AttitudeEstimator_8h.html#ad170eb4fd0bd13bfb0bdbdb6460d28bc" class="m-doc">MagnetometerMeasurements</a> = <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />Vector3</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              using <a href="AttitudeEstimator_8h.html#a8953e202971beb38867767ab9f002c42" class="m-doc">UnitQuaternion</a> = <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />Vector4</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              using <a href="AttitudeEstimator_8h.html#a48e2955e462d28103d57a10634d0654d" class="m-doc">RPY</a> = <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />Vector3</a>
+            </dt>
+            <dd><span></span></dd>
           </dl>
         </section>
         <section id="func-members">
           <h2><a href="#func-members">Functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="BerdyHelper_8h.html#a39f8730ab92b19678c82e418b8c0f2a3" class="m-doc">isLinkBerdyDynamicVariable</a>(</span><span class="m-doc-wrap">const <a href="group__iDynTreeExperimental.html#ga83d8f828969dabc7dc82904d8de15312" class="m-doc">BerdyDynamicVariablesTypes</a> dynamicVariableType) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="InverseKinematics_8h.html#a399f5a8eff425f1036038ee927fb81cb" class="m-doc">sizeOfRotationParametrization</a>(</span><span class="m-doc-wrap">enum InverseKinematicsRotationParametrization rotationParametrization) -&gt; int</span>
             </dt>
             <dd><span></span></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="BerdyHelper_8h.html#a1d21c6d1ea587b6ed88d52bdf43fcf8b" class="m-doc">isJointBerdyDynamicVariable</a>(</span><span class="m-doc-wrap">const <a href="group__iDynTreeExperimental.html#ga83d8f828969dabc7dc82904d8de15312" class="m-doc">BerdyDynamicVariablesTypes</a> dynamicVariableType) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeICUB.html#ga93e84fbc1880a920199aae0cbabd76ea" class="m-doc">DHChainFromiKinChain</a>(</span><span class="m-doc-wrap">iCub::iKin::iKinChain&amp; ikinChain,
+              <a href="classiDynTree_1_1DHChain.html" class="m-doc">DHChain</a>&amp; out) -&gt; bool</span>
+            </dt>
+            <dd>Load a <a href="classiDynTree_1_1DHChain.html" class="m-doc">iDynTree::<wbr />DHChain</a> object from a iCub::iKin::iKinChain .</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeICUB.html#gadb9ad80c8043481f2bb8f013542db690" class="m-doc">modelFromiKinChain</a>(</span><span class="m-doc-wrap">iCub::iKin::iKinChain&amp; ikinChain,
+              <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; output) -&gt; bool</span>
+            </dt>
+            <dd>Load a <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> object from a iCub::iKin::iKinChain .</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeICUB.html#ga681d23161951646fcb60dc7681e59482" class="m-doc">iKinLimbFromModel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
+              const std::string&amp; baseFrame,
+              const std::string&amp; distalFrame,
+              iCub::iKin::iKinLimb&amp; ikinLimb) -&gt; bool</span>
+            </dt>
+            <dd>Extract an iCub::iKin::iKinLimb from an <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> .</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeICUB.html#gaaedc638580c296a9a355975268ea25bb" class="m-doc">iKinLimbFromDHChain</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1DHChain.html" class="m-doc">DHChain</a>&amp; dhChain,
+              iCub::iKin::iKinLimb&amp; ikinLimb) -&gt; bool</span>
+            </dt>
+            <dd>Create a iCub::iKin::iKinLimb from an <a href="classiDynTree_1_1DHChain.html" class="m-doc">iDynTree::<wbr />DHChain</a>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="iKinConversionsImplementation_8h.html#a907871ccc9e6e56fb19fa0af4c0854c8" class="m-doc">iKinLink2DHLink</a>(</span><span class="m-doc-wrap">const iCub::iKin::iKinLink&amp; ikinlink) -&gt; <a href="structiDynTree_1_1DHLink.html" class="m-doc">DHLink</a></span>
             </dt>
             <dd><span></span></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="BerdyHelper_8h.html#a517a9e2101a59831cf912d8559b4900c" class="m-doc">isDOFBerdyDynamicVariable</a>(</span><span class="m-doc-wrap">const <a href="group__iDynTreeExperimental.html#ga83d8f828969dabc7dc82904d8de15312" class="m-doc">BerdyDynamicVariablesTypes</a> dynamicVariableType) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="iKinConversionsImplementation_8h.html#ae6d845189d4491128320b2c78c6082ec" class="m-doc">DHLink2iKinLink</a>(</span><span class="m-doc-wrap">const <a href="structiDynTree_1_1DHLink.html" class="m-doc">DHLink</a>&amp; dhLink) -&gt; iCub::iKin::iKinLink</span>
             </dt>
             <dd><span></span></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="ExternalWrenchesEstimation_8h.html#ad96bdadc6f50434261b8fdab971904e6" class="m-doc">estimateExternalWrenchesWithoutInternalFT</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
-              const <a href="classiDynTree_1_1Traversal.html" class="m-doc">Traversal</a>&amp; traversal,
-              const <a href="classiDynTree_1_1LinkUnknownWrenchContacts.html" class="m-doc">LinkUnknownWrenchContacts</a>&amp; unknownWrenches,
-              const <a href="classiDynTree_1_1JointPosDoubleArray.html" class="m-doc">JointPosDoubleArray</a>&amp; jointPos,
-              const <a href="classiDynTree_1_1LinkVelArray.html" class="m-doc">LinkVelArray</a>&amp; linkVel,
-              const <a href="classiDynTree_1_1LinkAccArray.html" class="m-doc">LinkAccArray</a>&amp; linkProperAcc,
-              <a href="structiDynTree_1_1estimateExternalWrenchesBuffers.html" class="m-doc">estimateExternalWrenchesBuffers</a>&amp; bufs,
-              <a href="classiDynTree_1_1LinkContactWrenches.html" class="m-doc">LinkContactWrenches</a>&amp; outputContactWrenches) -&gt; bool</span>
+              <div class="m-doc-template">template&lt;class contactsList&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="skinDynLibConversionsImplementation_8h.html#abd0cb602d0a91817a13e042d47004d79" class="m-doc">fromSkinDynLibToiDynTreeHelper</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
+              const contactsList&amp; dynList,
+              <a href="classiDynTree_1_1LinkUnknownWrenchContacts.html" class="m-doc">LinkUnknownWrenchContacts</a>&amp; unknowns,
+              const <a href="classiDynTree_1_1skinDynLibConversionsHelper.html" class="m-doc">skinDynLibConversionsHelper</a>&amp; conversionHelper) -&gt; bool</span>
             </dt>
-            <dd>Estimate the external contact wrenches using the MultiBody Newton-Euler equations.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="ExternalWrenchesEstimation_8h.html#a4c628669d7801fee070c5ac32312b45d" class="m-doc">estimateExternalWrenches</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
-              const <a href="classiDynTree_1_1SubModelDecomposition.html" class="m-doc">SubModelDecomposition</a>&amp; subModels,
-              const <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a>&amp; sensors,
-              const <a href="classiDynTree_1_1LinkUnknownWrenchContacts.html" class="m-doc">LinkUnknownWrenchContacts</a>&amp; unknownWrenches,
-              const <a href="classiDynTree_1_1JointPosDoubleArray.html" class="m-doc">JointPosDoubleArray</a>&amp; jointPos,
-              const <a href="classiDynTree_1_1LinkVelArray.html" class="m-doc">LinkVelArray</a>&amp; linkVel,
-              const <a href="classiDynTree_1_1LinkAccArray.html" class="m-doc">LinkAccArray</a>&amp; linkProperAcc,
-              const <a href="classiDynTree_1_1SensorsMeasurements.html" class="m-doc">SensorsMeasurements</a>&amp; ftSensorsMeasurements,
-              <a href="structiDynTree_1_1estimateExternalWrenchesBuffers.html" class="m-doc">estimateExternalWrenchesBuffers</a>&amp; bufs,
-              <a href="classiDynTree_1_1LinkContactWrenches.html" class="m-doc">LinkContactWrenches</a>&amp; outputContactWrenches) -&gt; bool</span>
-            </dt>
-            <dd>Estimate the external wrenches trasmitted by the contacts between the model and the external environment.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="ExternalWrenchesEstimation_8h.html#a4552fdf67855209419f189466fbb8e69" class="m-doc">dynamicsEstimationForwardVelAccKinematics</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
-              const <a href="classiDynTree_1_1Traversal.html" class="m-doc">Traversal</a>&amp; traversal,
-              const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector3</a>&amp; base_classicalProperAcc,
-              const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector3</a>&amp; base_angularVel,
-              const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector3</a>&amp; base_angularAcc,
-              const <a href="classiDynTree_1_1JointPosDoubleArray.html" class="m-doc">JointPosDoubleArray</a>&amp; jointPos,
-              const <a href="classiDynTree_1_1JointDOFsDoubleArray.html" class="m-doc">JointDOFsDoubleArray</a>&amp; jointVel,
-              const <a href="classiDynTree_1_1JointDOFsDoubleArray.html" class="m-doc">JointDOFsDoubleArray</a>&amp; jointAcc,
-              <a href="classiDynTree_1_1LinkVelArray.html" class="m-doc">LinkVelArray</a>&amp; linkVel,
-              <a href="classiDynTree_1_1LinkAccArray.html" class="m-doc">LinkAccArray</a>&amp; linkProperAcc) -&gt; bool</span>
-            </dt>
-            <dd>Modified forward kinematics for torque/force estimation.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="ExternalWrenchesEstimation_8h.html#a9c5c034c8fc89c4d0d19f17d2134a7a4" class="m-doc">dynamicsEstimationForwardVelKinematics</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
-              const <a href="classiDynTree_1_1Traversal.html" class="m-doc">Traversal</a>&amp; traversal,
-              const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector3</a>&amp; base_angularVel,
-              const <a href="classiDynTree_1_1JointPosDoubleArray.html" class="m-doc">JointPosDoubleArray</a>&amp; jointPos,
-              const <a href="classiDynTree_1_1JointDOFsDoubleArray.html" class="m-doc">JointDOFsDoubleArray</a>&amp; jointVel,
-              <a href="classiDynTree_1_1LinkVelArray.html" class="m-doc">LinkVelArray</a>&amp; linkVel) -&gt; bool</span>
-            </dt>
-            <dd>Modified forward kinematics for floating basedynamics estimation.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="ExternalWrenchesEstimation_8h.html#a2cf3011d218d8a98440bdcafdd1d54e6" class="m-doc">computeLinkNetWrenchesWithoutGravity</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
-              const <a href="classiDynTree_1_1LinkVelArray.html" class="m-doc">LinkVelArray</a>&amp; linkVel,
-              const <a href="classiDynTree_1_1LinkAccArray.html" class="m-doc">LinkAccArray</a>&amp; linkProperAcc,
-              <a href="classiDynTree_1_1LinkWrenches.html" class="m-doc">LinkNetTotalWrenchesWithoutGravity</a>&amp; linkNetWrenchesWithoutGravity) -&gt; bool</span>
-            </dt>
-            <dd>Compute the net internal and external wrenches (excluding gravity forces) acting on the links.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="ExternalWrenchesEstimation_8h.html#ab6c0784c22088705cc07732b5b29dd4b" class="m-doc">estimateLinkContactWrenchesFromLinkNetExternalWrenches</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
-              const <a href="classiDynTree_1_1LinkUnknownWrenchContacts.html" class="m-doc">LinkUnknownWrenchContacts</a>&amp; unknownWrenches,
-              const <a href="classiDynTree_1_1LinkWrenches.html" class="m-doc">LinkNetExternalWrenches</a>&amp; netExtWrenches,
-              <a href="classiDynTree_1_1LinkContactWrenches.html" class="m-doc">LinkContactWrenches</a>&amp; outputContactWrenches) -&gt; bool</span>
-            </dt>
-            <dd>Compute the link contact wrenches from the net external wrenches.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="YARPConfigurationsLoader_8h.html#a51e39202a162fa642eed01df66c75878" class="m-doc">parseRotationMatrix</a>(</span><span class="m-doc-wrap">const yarp::os::Searchable&amp; rf,
-              const std::string&amp; key,
-              <a href="classiDynTree_1_1Rotation.html" class="m-doc">iDynTree::<wbr />Rotation</a>&amp; rotation) -&gt; bool</span>
-            </dt>
-            <dd>Takes a rotation matrix from configuration file.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#ga5043dfa20b4ffc99d8dbdae5b15c0dae" class="m-doc">toiDynTree</a>(</span><span class="m-doc-wrap">const yarp::sig::Vector&amp; yarpVector,
-              <a href="classiDynTree_1_1Wrench.html" class="m-doc">iDynTree::<wbr />Wrench</a>&amp; iDynTreeWrench) -&gt; bool</span>
-            </dt>
-            <dd>Convert a yarp::sig::Vector to a <a href="classiDynTree_1_1Wrench.html" class="m-doc">iDynTree::<wbr />Wrench</a>.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#gaa28c5100610c33e81bafbdad8cd65f74" class="m-doc">toYarp</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Wrench.html" class="m-doc">iDynTree::<wbr />Wrench</a>&amp; iDynTreeWrench,
-              yarp::sig::Vector&amp; yarpVector) -&gt; bool</span>
-            </dt>
-            <dd>Convert a <a href="classiDynTree_1_1Wrench.html" class="m-doc">iDynTree::<wbr />Wrench</a> to a yarp::sig::Vector.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#gaf7ed1a24bb847b7742685eb9f59bb92b" class="m-doc">toiDynTree</a>(</span><span class="m-doc-wrap">const yarp::sig::Vector&amp; yarpVector,
-              <a href="classiDynTree_1_1Position.html" class="m-doc">iDynTree::<wbr />Position</a>&amp; iDynTreePosition) -&gt; bool</span>
-            </dt>
-            <dd>Convert a yarp::sig::Vector to a <a href="classiDynTree_1_1Position.html" class="m-doc">iDynTree::<wbr />Position</a>.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#gafcb81129ef0d16f5f1eb1cc6e1df4252" class="m-doc">toiDynTree</a>(</span><span class="m-doc-wrap">const yarp::sig::Vector&amp; yarpVector,
-              <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />Vector3</a>&amp; iDynTreeVector3) -&gt; bool</span>
-            </dt>
-            <dd>Convert a yarp::sig::Vector to a iDynTree::Vector3.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#ga9020f2412b884fd0ef63e726c1342947" class="m-doc">toYarp</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Position.html" class="m-doc">iDynTree::<wbr />Position</a>&amp; iDynTreePosition,
-              yarp::sig::Vector&amp; yarpVector) -&gt; bool</span>
-            </dt>
-            <dd>Convert a <a href="classiDynTree_1_1Position.html" class="m-doc">iDynTree::<wbr />Position</a> to a yarp::sig::Vector of 3 elements.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#gaea2d5b8825259e8fa15c166cb843ee40" class="m-doc">toiDynTree</a>(</span><span class="m-doc-wrap">const yarp::sig::Vector&amp; yarpVector,
-              <a href="classiDynTree_1_1Direction.html" class="m-doc">iDynTree::<wbr />Direction</a>&amp; iDynTreeDirection) -&gt; bool</span>
-            </dt>
-            <dd>Convert a yarp::sig::Vector of 3 elements to a <a href="classiDynTree_1_1Direction.html" class="m-doc">iDynTree::<wbr />Direction</a>.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#ga6b716f09fcb568a6b3eea04b44160f19" class="m-doc">toYarp</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />Vector3</a>&amp; iDynTreeDirection,
-              yarp::sig::Vector&amp; yarpVector) -&gt; bool</span>
-            </dt>
-            <dd>Convert a <a href="classiDynTree_1_1Direction.html" class="m-doc">iDynTree::<wbr />Direction</a> to a yarp::sig::Vector of 3 elements.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#gaa01de51e3acfd87599aa688e4c3d32c0" class="m-doc">toiDynTree</a>(</span><span class="m-doc-wrap">const yarp::sig::Matrix&amp; yarpHomogeneousMatrix,
-              <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>&amp; iDynTreeTransform) -&gt; bool</span>
-            </dt>
-            <dd>Convert a 4x4 yarp::sig::Matrix representing an homegeneous matrix to a <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#ga0c1a2189345fb926b98f2d82219d5dd1" class="m-doc">toYarp</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>&amp; iDynTreeTransform,
-              yarp::sig::Matrix&amp; yarpHomogeneousMatrix) -&gt; bool</span>
-            </dt>
-            <dd>Convert a <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a> to a 4x4 yarp::sig::Matrix representing an homegeneous matrix.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#ga8c4d32377000e6629f2855a6d5aebf72" class="m-doc">toiDynTree</a>(</span><span class="m-doc-wrap">const yarp::sig::Vector&amp; yarpVector,
-              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">iDynTree::<wbr />VectorDynSize</a>&amp; iDynTreeVector) -&gt; bool</span>
-            </dt>
-            <dd>Convert a yarp::sig::Vector to a <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">iDynTree::<wbr />VectorDynSize</a>.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename VectorType&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="group__iDynTreeYARP.html#ga3e0ac29c597c34c171d29fb18127ab3b" class="m-doc">toYarp</a>(</span><span class="m-doc-wrap">const VectorType&amp; iDynTreeVector,
-              yarp::sig::Vector&amp; yarpVector)</span>
-            </dt>
-            <dd>Convert a <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />VectorFixSize</a> to a yarp::sig::Vector.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename MatrixType&gt;</div>
-              <span class="m-doc-wrap-bumper">void <a href="group__iDynTreeYARP.html#ga63598edaacfc53e5728e944a0dab5ebb" class="m-doc">toYarp</a>(</span><span class="m-doc-wrap">const MatrixType&amp; iDynTreeMatrix,
-              yarp::sig::Matrix&amp; yarpMatrix)</span>
-            </dt>
-            <dd>Convert a <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">iDynTree::<wbr />MatrixFixSize</a> to a yarp::sig::Matrix.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename VectorType&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#ga056a45c2887a5f314c963c89bb16a270" class="m-doc">toiDynTree</a>(</span><span class="m-doc-wrap">const yarp::sig::Vector&amp; yarpVector,
-              VectorType&amp; iDynTreeVector) -&gt; bool</span>
-            </dt>
-            <dd>Convert a yarp::sig::Vector to a <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />VectorFixSize</a>.</dd>
-            <dt>
-              <div class="m-doc-template">template&lt;typename MatrixType&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#gae1c1d7e3baf33d9b84f593330a3cf199" class="m-doc">toiDynTree</a>(</span><span class="m-doc-wrap">const yarp::sig::Matrix&amp; yarpMatrix,
-              MatrixType&amp; iDynTreeMatrix) -&gt; bool</span>
-            </dt>
-            <dd>Convert a yarp::sig::Matrix to a <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">iDynTree::<wbr />MatrixFixSize</a>.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="YARPEigenConversions_8h.html#ae7c28c545c2775b437536fd84dabc97d" class="m-doc">toEigen</a>(</span><span class="m-doc-wrap">yarp::sig::Vector&amp; yarpVector) -&gt; Eigen::Map&lt;Eigen::VectorXd&gt;</span>
-            </dt>
-            <dd>Convert a yarp::sig::Vector to a Eigen::Map&lt;Eigen::VectorXd&gt; object.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="YARPEigenConversions_8h.html#a19f060a1b963d4cdd58a142372675f6b" class="m-doc">toEigen</a>(</span><span class="m-doc-wrap">yarp::sig::Matrix&amp; yarpMatrix) -&gt; Eigen::Map&lt;Eigen::Matrix&lt;double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor&gt;&gt;</span>
-            </dt>
-            <dd>Convert a yarp::sig::Matrix to a Eigen::Map&lt; Eigen::Matrix&lt;double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor&gt; &gt; object.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="YARPEigenConversions_8h.html#a0fc1ec0d7de0f823d4a8c32524aaecd7" class="m-doc">toEigen</a>(</span><span class="m-doc-wrap">const yarp::sig::Vector&amp; yarpVector) -&gt; Eigen::Map&lt;const Eigen::VectorXd&gt;</span>
-            </dt>
-            <dd>Convert a const yarp::sig::Vector to a Eigen::Map&lt;const Eigen::VectorXd&gt; object.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="YARPEigenConversions_8h.html#a4f400cf54f7b7757adbaa768205b9df9" class="m-doc">toEigen</a>(</span><span class="m-doc-wrap">const yarp::sig::Matrix&amp; yarpMatrix) -&gt; Eigen::Map&lt;const Eigen::Matrix&lt;double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor&gt;&gt;</span>
-            </dt>
-            <dd>Convert a const yarp::sig::Matrix to a Eigen::Map&lt; const Eigen::Matrix&lt;double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor&gt; &gt; object.</dd>
+            <dd>Templated version of fromSkinDynLibToiDynTree, useful to implement the exact same function for dynContactList and skinContactList, that have exactly the same interface, but they don&#x27;t have any common ancestor in the class structure.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="EigenHelpers_8h.html#a5481a54f7c787fd4cf55a0f5fd21bbb0" class="m-doc">toEigen</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; vec) -&gt; Eigen::Map&lt;Eigen::VectorXd&gt;</span>
             </dt>
@@ -1874,6 +1748,77 @@
             </dt>
             <dd>Check whether two doubles are equal given a tolerance tol.</dd>
             <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeModelIO.html#ga80941e03b0209a745a76fadc3264879a" class="m-doc">dofsListFromURDF</a>(</span><span class="m-doc-wrap">const std::string&amp; urdf_filename,
+              std::vector&lt;std::string&gt;&amp; dofs) -&gt; bool</span>
+            </dt>
+            <dd>Load a list of dofs names from a URDF file.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeModelIO.html#ga657c7f9a0eedd9b8f71a54e6a83acdc0" class="m-doc">dofsListFromURDFString</a>(</span><span class="m-doc-wrap">const std::string&amp; urdf_string,
+              std::vector&lt;std::string&gt;&amp; dofs) -&gt; bool</span>
+            </dt>
+            <dd>Load a list of dofs object from a URDF string.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeModelIO.html#gaeaa7b0320760138dab8d2e7ba5525b2a" class="m-doc">URDFFromModel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; model,
+              const std::string&amp; urdf_filename,
+              const <a href="classiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a> options = <a href="classiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a>()) -&gt; bool</span>
+            </dt>
+            <dd>Export a <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> object to a URDF file.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeModelIO.html#gab9223d51ca118bea013bbbde14d6e054" class="m-doc">URDFStringFromModel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; output,
+              std::string&amp; urdf_string,
+              const <a href="classiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a> options = <a href="classiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a>()) -&gt; bool</span>
+            </dt>
+            <dd>Export a <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> object to a URDF string.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="URDFParsingUtils_8h.html#a91b6a382b3717636fb3a45a8ba4f8850" class="m-doc">stringToDoubleWithClassicLocale</a>(</span><span class="m-doc-wrap">const std::string&amp; inStr,
+              double&amp; outDouble) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="URDFParsingUtils_8h.html#a9c8ea4244ff5dc2276f8008b53a609e8" class="m-doc">stringToIntWithClassicLocale</a>(</span><span class="m-doc-wrap">const std::string&amp; inStr,
+              int&amp; outInt) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="URDFParsingUtils_8h.html#ab5e3c195abc73e35657df0f831daab96" class="m-doc">stringToUnsignedIntWithClassicLocale</a>(</span><span class="m-doc-wrap">const std::string&amp; inStr,
+              unsigned int&amp; outInt) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="URDFParsingUtils_8h.html#a072b6eff9a6c9173d96ebef185343d90" class="m-doc">doubleToStringWithClassicLocale</a>(</span><span class="m-doc-wrap">const double&amp; inDouble,
+              std::string&amp; outStr) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="URDFParsingUtils_8h.html#adffeb935ed6aad8d6f30705238117df8" class="m-doc">intToString</a>(</span><span class="m-doc-wrap">const int inInt) -&gt; std::string</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="URDFParsingUtils_8h.html#a49c5650f4d8f43d3af304224dcf880c0" class="m-doc">intToString</a>(</span><span class="m-doc-wrap">const size_t inInt) -&gt; std::string</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="URDFParsingUtils_8h.html#ab77f7c41e63dbfbfc327283490b7cb92" class="m-doc">splitString</a>(</span><span class="m-doc-wrap">const std::string&amp; inStr,
+              std::vector&lt;std::string&gt;&amp; pieces) -&gt; bool</span>
+            </dt>
+            <dd>Split string along spaces.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="URDFParsingUtils_8h.html#a8645d0238ce891d16d8d7be074bd33dc" class="m-doc">vector3FromString</a>(</span><span class="m-doc-wrap">const std::string&amp; vector_str,
+              <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector3</a>&amp; out) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename iDynTreeVectorType&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="URDFParsingUtils_8h.html#a5872c10e6e9f23dbeeb87ad4b503a5ba" class="m-doc">vectorToString</a>(</span><span class="m-doc-wrap">const iDynTreeVectorType&amp; in,
+              std::string&amp; out_str) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="URDFParsingUtils_8h.html#ab55f4fdf60c8947b61adde47e0495b10" class="m-doc">vector4FromString</a>(</span><span class="m-doc-wrap">const std::string&amp; vector_str,
+              <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector4</a>&amp; out) -&gt; bool</span>
+            </dt>
+            <dd><span></span></dd>
+            <dt>
               <span class="m-doc-wrap-bumper">auto <a href="ModelSensorsTransformers_8h.html#af8355a73b30d3b5797fddae1f80ac778" class="m-doc">createReducedModelAndSensors</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; fullModel,
               const <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a>&amp; fullSensors,
               const std::vector&lt;std::string&gt;&amp; jointsInReducedModel,
@@ -1919,31 +1864,6 @@
             <dd>Short function to check if a SensorType is.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="Sensors_8h.html#a6b73f760e18bf9860c623ddc8a0f376c" class="m-doc">getSensorTypeSize</a>(</span><span class="m-doc-wrap">const SensorType type) -&gt; std::size_t</span>
-            </dt>
-            <dd><span></span></dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="InertialParametersSolidShapesHelpers_8h.html#a4ed7d9dcd80664b1b86236a0f1086cda" class="m-doc">estimateInertialParametersFromLinkBoundingBoxesAndTotalMass</a>(</span><span class="m-doc-wrap">const double totalMass,
-              <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; model,
-              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; estimatedInertialParams) -&gt; bool</span>
-            </dt>
-            <dd>Estimate the inertial parameters of a model using link bounding boxes and the total mass.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="InertialParametersSolidShapesHelpers_8h.html#a3fc080109daad044981533bc143d1bee" class="m-doc">computeBoundingBoxFromShape</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1SolidShape.html" class="m-doc">SolidShape</a>&amp; geom,
-              <a href="classiDynTree_1_1Box.html" class="m-doc">Box</a>&amp; box) -&gt; bool</span>
-            </dt>
-            <dd>Compute bounding box from a solid shape object.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="InertialParametersSolidShapesHelpers_8h.html#a22b1c506654dc8a1589bbccc2ba32deb" class="m-doc">computeBoxVertices</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Box.html" class="m-doc">Box</a> box) -&gt; std::vector&lt;<a href="classiDynTree_1_1Position.html" class="m-doc">Position</a>&gt;</span>
-            </dt>
-            <dd>Get the bounding box vertices in the link frame.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="ModelTransformersSolidShapes_8h.html#adbe329aea649b6a379dfd7077ceb1eb9" class="m-doc">approximateSolidShapesWithPrimitiveShape</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; inputModel,
-              <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; outputModel,
-              <a href="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions.html" class="m-doc">ApproximateSolidShapesWithPrimitiveShapeOptions</a> options = <a href="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions.html" class="m-doc">ApproximateSolidShapesWithPrimitiveShapeOptions</a>()) -&gt; bool</span>
-            </dt>
-            <dd>\function Approximate solid shapes of the input model with some primitive shapes.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="InverseKinematics_8h.html#a399f5a8eff425f1036038ee927fb81cb" class="m-doc">sizeOfRotationParametrization</a>(</span><span class="m-doc-wrap">enum InverseKinematicsRotationParametrization rotationParametrization) -&gt; int</span>
             </dt>
             <dd><span></span></dd>
             <dt>
@@ -2253,170 +2173,199 @@ $B$
             </dt>
             <dd>Run the computeTransformToTraversalBase for all the traversal in the subModelDecomposition, and store the results in the linkPos array.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeModelIO.html#ga80941e03b0209a745a76fadc3264879a" class="m-doc">dofsListFromURDF</a>(</span><span class="m-doc-wrap">const std::string&amp; urdf_filename,
-              std::vector&lt;std::string&gt;&amp; dofs) -&gt; bool</span>
-            </dt>
-            <dd>Load a list of dofs names from a URDF file.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeModelIO.html#ga657c7f9a0eedd9b8f71a54e6a83acdc0" class="m-doc">dofsListFromURDFString</a>(</span><span class="m-doc-wrap">const std::string&amp; urdf_string,
-              std::vector&lt;std::string&gt;&amp; dofs) -&gt; bool</span>
-            </dt>
-            <dd>Load a list of dofs object from a URDF string.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeModelIO.html#gaeaa7b0320760138dab8d2e7ba5525b2a" class="m-doc">URDFFromModel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; model,
-              const std::string&amp; urdf_filename,
-              const <a href="classiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a> options = <a href="classiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a>()) -&gt; bool</span>
-            </dt>
-            <dd>Export a <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> object to a URDF file.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeModelIO.html#gab9223d51ca118bea013bbbde14d6e054" class="m-doc">URDFStringFromModel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; output,
-              std::string&amp; urdf_string,
-              const <a href="classiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a> options = <a href="classiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a>()) -&gt; bool</span>
-            </dt>
-            <dd>Export a <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> object to a URDF string.</dd>
-            <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="URDFParsingUtils_8h.html#a91b6a382b3717636fb3a45a8ba4f8850" class="m-doc">stringToDoubleWithClassicLocale</a>(</span><span class="m-doc-wrap">const std::string&amp; inStr,
-              double&amp; outDouble) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="BerdyHelper_8h.html#a39f8730ab92b19678c82e418b8c0f2a3" class="m-doc">isLinkBerdyDynamicVariable</a>(</span><span class="m-doc-wrap">const <a href="group__iDynTreeExperimental.html#ga83d8f828969dabc7dc82904d8de15312" class="m-doc">BerdyDynamicVariablesTypes</a> dynamicVariableType) -&gt; bool</span>
             </dt>
             <dd><span></span></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="URDFParsingUtils_8h.html#a9c8ea4244ff5dc2276f8008b53a609e8" class="m-doc">stringToIntWithClassicLocale</a>(</span><span class="m-doc-wrap">const std::string&amp; inStr,
-              int&amp; outInt) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="BerdyHelper_8h.html#a1d21c6d1ea587b6ed88d52bdf43fcf8b" class="m-doc">isJointBerdyDynamicVariable</a>(</span><span class="m-doc-wrap">const <a href="group__iDynTreeExperimental.html#ga83d8f828969dabc7dc82904d8de15312" class="m-doc">BerdyDynamicVariablesTypes</a> dynamicVariableType) -&gt; bool</span>
             </dt>
             <dd><span></span></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="URDFParsingUtils_8h.html#ab5e3c195abc73e35657df0f831daab96" class="m-doc">stringToUnsignedIntWithClassicLocale</a>(</span><span class="m-doc-wrap">const std::string&amp; inStr,
-              unsigned int&amp; outInt) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="BerdyHelper_8h.html#a517a9e2101a59831cf912d8559b4900c" class="m-doc">isDOFBerdyDynamicVariable</a>(</span><span class="m-doc-wrap">const <a href="group__iDynTreeExperimental.html#ga83d8f828969dabc7dc82904d8de15312" class="m-doc">BerdyDynamicVariablesTypes</a> dynamicVariableType) -&gt; bool</span>
             </dt>
             <dd><span></span></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="URDFParsingUtils_8h.html#a072b6eff9a6c9173d96ebef185343d90" class="m-doc">doubleToStringWithClassicLocale</a>(</span><span class="m-doc-wrap">const double&amp; inDouble,
-              std::string&amp; outStr) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="ExternalWrenchesEstimation_8h.html#ad96bdadc6f50434261b8fdab971904e6" class="m-doc">estimateExternalWrenchesWithoutInternalFT</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
+              const <a href="classiDynTree_1_1Traversal.html" class="m-doc">Traversal</a>&amp; traversal,
+              const <a href="classiDynTree_1_1LinkUnknownWrenchContacts.html" class="m-doc">LinkUnknownWrenchContacts</a>&amp; unknownWrenches,
+              const <a href="classiDynTree_1_1JointPosDoubleArray.html" class="m-doc">JointPosDoubleArray</a>&amp; jointPos,
+              const <a href="classiDynTree_1_1LinkVelArray.html" class="m-doc">LinkVelArray</a>&amp; linkVel,
+              const <a href="classiDynTree_1_1LinkAccArray.html" class="m-doc">LinkAccArray</a>&amp; linkProperAcc,
+              <a href="structiDynTree_1_1estimateExternalWrenchesBuffers.html" class="m-doc">estimateExternalWrenchesBuffers</a>&amp; bufs,
+              <a href="classiDynTree_1_1LinkContactWrenches.html" class="m-doc">LinkContactWrenches</a>&amp; outputContactWrenches) -&gt; bool</span>
             </dt>
-            <dd><span></span></dd>
+            <dd>Estimate the external contact wrenches using the MultiBody Newton-Euler equations.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="URDFParsingUtils_8h.html#adffeb935ed6aad8d6f30705238117df8" class="m-doc">intToString</a>(</span><span class="m-doc-wrap">const int inInt) -&gt; std::string</span>
+              <span class="m-doc-wrap-bumper">auto <a href="ExternalWrenchesEstimation_8h.html#a4c628669d7801fee070c5ac32312b45d" class="m-doc">estimateExternalWrenches</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
+              const <a href="classiDynTree_1_1SubModelDecomposition.html" class="m-doc">SubModelDecomposition</a>&amp; subModels,
+              const <a href="classiDynTree_1_1SensorsList.html" class="m-doc">SensorsList</a>&amp; sensors,
+              const <a href="classiDynTree_1_1LinkUnknownWrenchContacts.html" class="m-doc">LinkUnknownWrenchContacts</a>&amp; unknownWrenches,
+              const <a href="classiDynTree_1_1JointPosDoubleArray.html" class="m-doc">JointPosDoubleArray</a>&amp; jointPos,
+              const <a href="classiDynTree_1_1LinkVelArray.html" class="m-doc">LinkVelArray</a>&amp; linkVel,
+              const <a href="classiDynTree_1_1LinkAccArray.html" class="m-doc">LinkAccArray</a>&amp; linkProperAcc,
+              const <a href="classiDynTree_1_1SensorsMeasurements.html" class="m-doc">SensorsMeasurements</a>&amp; ftSensorsMeasurements,
+              <a href="structiDynTree_1_1estimateExternalWrenchesBuffers.html" class="m-doc">estimateExternalWrenchesBuffers</a>&amp; bufs,
+              <a href="classiDynTree_1_1LinkContactWrenches.html" class="m-doc">LinkContactWrenches</a>&amp; outputContactWrenches) -&gt; bool</span>
             </dt>
-            <dd><span></span></dd>
+            <dd>Estimate the external wrenches trasmitted by the contacts between the model and the external environment.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="URDFParsingUtils_8h.html#a49c5650f4d8f43d3af304224dcf880c0" class="m-doc">intToString</a>(</span><span class="m-doc-wrap">const size_t inInt) -&gt; std::string</span>
+              <span class="m-doc-wrap-bumper">auto <a href="ExternalWrenchesEstimation_8h.html#a4552fdf67855209419f189466fbb8e69" class="m-doc">dynamicsEstimationForwardVelAccKinematics</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
+              const <a href="classiDynTree_1_1Traversal.html" class="m-doc">Traversal</a>&amp; traversal,
+              const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector3</a>&amp; base_classicalProperAcc,
+              const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector3</a>&amp; base_angularVel,
+              const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector3</a>&amp; base_angularAcc,
+              const <a href="classiDynTree_1_1JointPosDoubleArray.html" class="m-doc">JointPosDoubleArray</a>&amp; jointPos,
+              const <a href="classiDynTree_1_1JointDOFsDoubleArray.html" class="m-doc">JointDOFsDoubleArray</a>&amp; jointVel,
+              const <a href="classiDynTree_1_1JointDOFsDoubleArray.html" class="m-doc">JointDOFsDoubleArray</a>&amp; jointAcc,
+              <a href="classiDynTree_1_1LinkVelArray.html" class="m-doc">LinkVelArray</a>&amp; linkVel,
+              <a href="classiDynTree_1_1LinkAccArray.html" class="m-doc">LinkAccArray</a>&amp; linkProperAcc) -&gt; bool</span>
             </dt>
-            <dd><span></span></dd>
+            <dd>Modified forward kinematics for torque/force estimation.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="URDFParsingUtils_8h.html#ab77f7c41e63dbfbfc327283490b7cb92" class="m-doc">splitString</a>(</span><span class="m-doc-wrap">const std::string&amp; inStr,
-              std::vector&lt;std::string&gt;&amp; pieces) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="ExternalWrenchesEstimation_8h.html#a9c5c034c8fc89c4d0d19f17d2134a7a4" class="m-doc">dynamicsEstimationForwardVelKinematics</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
+              const <a href="classiDynTree_1_1Traversal.html" class="m-doc">Traversal</a>&amp; traversal,
+              const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector3</a>&amp; base_angularVel,
+              const <a href="classiDynTree_1_1JointPosDoubleArray.html" class="m-doc">JointPosDoubleArray</a>&amp; jointPos,
+              const <a href="classiDynTree_1_1JointDOFsDoubleArray.html" class="m-doc">JointDOFsDoubleArray</a>&amp; jointVel,
+              <a href="classiDynTree_1_1LinkVelArray.html" class="m-doc">LinkVelArray</a>&amp; linkVel) -&gt; bool</span>
             </dt>
-            <dd>Split string along spaces.</dd>
+            <dd>Modified forward kinematics for floating basedynamics estimation.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="URDFParsingUtils_8h.html#a8645d0238ce891d16d8d7be074bd33dc" class="m-doc">vector3FromString</a>(</span><span class="m-doc-wrap">const std::string&amp; vector_str,
-              <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector3</a>&amp; out) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="ExternalWrenchesEstimation_8h.html#a2cf3011d218d8a98440bdcafdd1d54e6" class="m-doc">computeLinkNetWrenchesWithoutGravity</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
+              const <a href="classiDynTree_1_1LinkVelArray.html" class="m-doc">LinkVelArray</a>&amp; linkVel,
+              const <a href="classiDynTree_1_1LinkAccArray.html" class="m-doc">LinkAccArray</a>&amp; linkProperAcc,
+              <a href="classiDynTree_1_1LinkWrenches.html" class="m-doc">LinkNetTotalWrenchesWithoutGravity</a>&amp; linkNetWrenchesWithoutGravity) -&gt; bool</span>
             </dt>
-            <dd><span></span></dd>
+            <dd>Compute the net internal and external wrenches (excluding gravity forces) acting on the links.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;typename iDynTreeVectorType&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="URDFParsingUtils_8h.html#a5872c10e6e9f23dbeeb87ad4b503a5ba" class="m-doc">vectorToString</a>(</span><span class="m-doc-wrap">const iDynTreeVectorType&amp; in,
-              std::string&amp; out_str) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="ExternalWrenchesEstimation_8h.html#ab6c0784c22088705cc07732b5b29dd4b" class="m-doc">estimateLinkContactWrenchesFromLinkNetExternalWrenches</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
+              const <a href="classiDynTree_1_1LinkUnknownWrenchContacts.html" class="m-doc">LinkUnknownWrenchContacts</a>&amp; unknownWrenches,
+              const <a href="classiDynTree_1_1LinkWrenches.html" class="m-doc">LinkNetExternalWrenches</a>&amp; netExtWrenches,
+              <a href="classiDynTree_1_1LinkContactWrenches.html" class="m-doc">LinkContactWrenches</a>&amp; outputContactWrenches) -&gt; bool</span>
             </dt>
-            <dd><span></span></dd>
+            <dd>Compute the link contact wrenches from the net external wrenches.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="URDFParsingUtils_8h.html#ab55f4fdf60c8947b61adde47e0495b10" class="m-doc">vector4FromString</a>(</span><span class="m-doc-wrap">const std::string&amp; vector_str,
-              <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">Vector4</a>&amp; out) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="InertialParametersSolidShapesHelpers_8h.html#a4ed7d9dcd80664b1b86236a0f1086cda" class="m-doc">estimateInertialParametersFromLinkBoundingBoxesAndTotalMass</a>(</span><span class="m-doc-wrap">const double totalMass,
+              <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; model,
+              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; estimatedInertialParams) -&gt; bool</span>
             </dt>
-            <dd><span></span></dd>
+            <dd>Estimate the inertial parameters of a model using link bounding boxes and the total mass.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeICUB.html#ga93e84fbc1880a920199aae0cbabd76ea" class="m-doc">DHChainFromiKinChain</a>(</span><span class="m-doc-wrap">iCub::iKin::iKinChain&amp; ikinChain,
-              <a href="classiDynTree_1_1DHChain.html" class="m-doc">DHChain</a>&amp; out) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="InertialParametersSolidShapesHelpers_8h.html#a3fc080109daad044981533bc143d1bee" class="m-doc">computeBoundingBoxFromShape</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1SolidShape.html" class="m-doc">SolidShape</a>&amp; geom,
+              <a href="classiDynTree_1_1Box.html" class="m-doc">Box</a>&amp; box) -&gt; bool</span>
             </dt>
-            <dd>Load a <a href="classiDynTree_1_1DHChain.html" class="m-doc">iDynTree::<wbr />DHChain</a> object from a iCub::iKin::iKinChain .</dd>
+            <dd>Compute bounding box from a solid shape object.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeICUB.html#gadb9ad80c8043481f2bb8f013542db690" class="m-doc">modelFromiKinChain</a>(</span><span class="m-doc-wrap">iCub::iKin::iKinChain&amp; ikinChain,
-              <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; output) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="InertialParametersSolidShapesHelpers_8h.html#a22b1c506654dc8a1589bbccc2ba32deb" class="m-doc">computeBoxVertices</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Box.html" class="m-doc">Box</a> box) -&gt; std::vector&lt;<a href="classiDynTree_1_1Position.html" class="m-doc">Position</a>&gt;</span>
             </dt>
-            <dd>Load a <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> object from a iCub::iKin::iKinChain .</dd>
+            <dd>Get the bounding box vertices in the link frame.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeICUB.html#ga681d23161951646fcb60dc7681e59482" class="m-doc">iKinLimbFromModel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
-              const std::string&amp; baseFrame,
-              const std::string&amp; distalFrame,
-              iCub::iKin::iKinLimb&amp; ikinLimb) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="ModelTransformersSolidShapes_8h.html#adbe329aea649b6a379dfd7077ceb1eb9" class="m-doc">approximateSolidShapesWithPrimitiveShape</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; inputModel,
+              <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; outputModel,
+              <a href="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions.html" class="m-doc">ApproximateSolidShapesWithPrimitiveShapeOptions</a> options = <a href="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions.html" class="m-doc">ApproximateSolidShapesWithPrimitiveShapeOptions</a>()) -&gt; bool</span>
             </dt>
-            <dd>Extract an iCub::iKin::iKinLimb from an <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> .</dd>
+            <dd>\function Approximate solid shapes of the input model with some primitive shapes.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeICUB.html#gaaedc638580c296a9a355975268ea25bb" class="m-doc">iKinLimbFromDHChain</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1DHChain.html" class="m-doc">DHChain</a>&amp; dhChain,
-              iCub::iKin::iKinLimb&amp; ikinLimb) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="YARPConfigurationsLoader_8h.html#a51e39202a162fa642eed01df66c75878" class="m-doc">parseRotationMatrix</a>(</span><span class="m-doc-wrap">const yarp::os::Searchable&amp; rf,
+              const std::string&amp; key,
+              <a href="classiDynTree_1_1Rotation.html" class="m-doc">iDynTree::<wbr />Rotation</a>&amp; rotation) -&gt; bool</span>
             </dt>
-            <dd>Create a iCub::iKin::iKinLimb from an <a href="classiDynTree_1_1DHChain.html" class="m-doc">iDynTree::<wbr />DHChain</a>.</dd>
+            <dd>Takes a rotation matrix from configuration file.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="iKinConversionsImplementation_8h.html#a907871ccc9e6e56fb19fa0af4c0854c8" class="m-doc">iKinLink2DHLink</a>(</span><span class="m-doc-wrap">const iCub::iKin::iKinLink&amp; ikinlink) -&gt; <a href="structiDynTree_1_1DHLink.html" class="m-doc">DHLink</a></span>
+              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#ga5043dfa20b4ffc99d8dbdae5b15c0dae" class="m-doc">toiDynTree</a>(</span><span class="m-doc-wrap">const yarp::sig::Vector&amp; yarpVector,
+              <a href="classiDynTree_1_1Wrench.html" class="m-doc">iDynTree::<wbr />Wrench</a>&amp; iDynTreeWrench) -&gt; bool</span>
             </dt>
-            <dd><span></span></dd>
+            <dd>Convert a yarp::sig::Vector to a <a href="classiDynTree_1_1Wrench.html" class="m-doc">iDynTree::<wbr />Wrench</a>.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="iKinConversionsImplementation_8h.html#ae6d845189d4491128320b2c78c6082ec" class="m-doc">DHLink2iKinLink</a>(</span><span class="m-doc-wrap">const <a href="structiDynTree_1_1DHLink.html" class="m-doc">DHLink</a>&amp; dhLink) -&gt; iCub::iKin::iKinLink</span>
+              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#gaa28c5100610c33e81bafbdad8cd65f74" class="m-doc">toYarp</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Wrench.html" class="m-doc">iDynTree::<wbr />Wrench</a>&amp; iDynTreeWrench,
+              yarp::sig::Vector&amp; yarpVector) -&gt; bool</span>
             </dt>
-            <dd><span></span></dd>
+            <dd>Convert a <a href="classiDynTree_1_1Wrench.html" class="m-doc">iDynTree::<wbr />Wrench</a> to a yarp::sig::Vector.</dd>
             <dt>
-              <div class="m-doc-template">template&lt;class contactsList&gt;</div>
-              <span class="m-doc-wrap-bumper">auto <a href="skinDynLibConversionsImplementation_8h.html#abd0cb602d0a91817a13e042d47004d79" class="m-doc">fromSkinDynLibToiDynTreeHelper</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">Model</a>&amp; model,
-              const contactsList&amp; dynList,
-              <a href="classiDynTree_1_1LinkUnknownWrenchContacts.html" class="m-doc">LinkUnknownWrenchContacts</a>&amp; unknowns,
-              const <a href="classiDynTree_1_1skinDynLibConversionsHelper.html" class="m-doc">skinDynLibConversionsHelper</a>&amp; conversionHelper) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#gaf7ed1a24bb847b7742685eb9f59bb92b" class="m-doc">toiDynTree</a>(</span><span class="m-doc-wrap">const yarp::sig::Vector&amp; yarpVector,
+              <a href="classiDynTree_1_1Position.html" class="m-doc">iDynTree::<wbr />Position</a>&amp; iDynTreePosition) -&gt; bool</span>
             </dt>
-            <dd>Templated version of fromSkinDynLibToiDynTree, useful to implement the exact same function for dynContactList and skinContactList, that have exactly the same interface, but they don&#x27;t have any common ancestor in the class structure.</dd>
+            <dd>Convert a yarp::sig::Vector to a <a href="classiDynTree_1_1Position.html" class="m-doc">iDynTree::<wbr />Position</a>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#gafcb81129ef0d16f5f1eb1cc6e1df4252" class="m-doc">toiDynTree</a>(</span><span class="m-doc-wrap">const yarp::sig::Vector&amp; yarpVector,
+              <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />Vector3</a>&amp; iDynTreeVector3) -&gt; bool</span>
+            </dt>
+            <dd>Convert a yarp::sig::Vector to a iDynTree::Vector3.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#ga9020f2412b884fd0ef63e726c1342947" class="m-doc">toYarp</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Position.html" class="m-doc">iDynTree::<wbr />Position</a>&amp; iDynTreePosition,
+              yarp::sig::Vector&amp; yarpVector) -&gt; bool</span>
+            </dt>
+            <dd>Convert a <a href="classiDynTree_1_1Position.html" class="m-doc">iDynTree::<wbr />Position</a> to a yarp::sig::Vector of 3 elements.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#gaea2d5b8825259e8fa15c166cb843ee40" class="m-doc">toiDynTree</a>(</span><span class="m-doc-wrap">const yarp::sig::Vector&amp; yarpVector,
+              <a href="classiDynTree_1_1Direction.html" class="m-doc">iDynTree::<wbr />Direction</a>&amp; iDynTreeDirection) -&gt; bool</span>
+            </dt>
+            <dd>Convert a yarp::sig::Vector of 3 elements to a <a href="classiDynTree_1_1Direction.html" class="m-doc">iDynTree::<wbr />Direction</a>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#ga6b716f09fcb568a6b3eea04b44160f19" class="m-doc">toYarp</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />Vector3</a>&amp; iDynTreeDirection,
+              yarp::sig::Vector&amp; yarpVector) -&gt; bool</span>
+            </dt>
+            <dd>Convert a <a href="classiDynTree_1_1Direction.html" class="m-doc">iDynTree::<wbr />Direction</a> to a yarp::sig::Vector of 3 elements.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#gaa01de51e3acfd87599aa688e4c3d32c0" class="m-doc">toiDynTree</a>(</span><span class="m-doc-wrap">const yarp::sig::Matrix&amp; yarpHomogeneousMatrix,
+              <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>&amp; iDynTreeTransform) -&gt; bool</span>
+            </dt>
+            <dd>Convert a 4x4 yarp::sig::Matrix representing an homegeneous matrix to a <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#ga0c1a2189345fb926b98f2d82219d5dd1" class="m-doc">toYarp</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a>&amp; iDynTreeTransform,
+              yarp::sig::Matrix&amp; yarpHomogeneousMatrix) -&gt; bool</span>
+            </dt>
+            <dd>Convert a <a href="classiDynTree_1_1Transform.html" class="m-doc">iDynTree::<wbr />Transform</a> to a 4x4 yarp::sig::Matrix representing an homegeneous matrix.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#ga8c4d32377000e6629f2855a6d5aebf72" class="m-doc">toiDynTree</a>(</span><span class="m-doc-wrap">const yarp::sig::Vector&amp; yarpVector,
+              <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">iDynTree::<wbr />VectorDynSize</a>&amp; iDynTreeVector) -&gt; bool</span>
+            </dt>
+            <dd>Convert a yarp::sig::Vector to a <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">iDynTree::<wbr />VectorDynSize</a>.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename VectorType&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="group__iDynTreeYARP.html#ga3e0ac29c597c34c171d29fb18127ab3b" class="m-doc">toYarp</a>(</span><span class="m-doc-wrap">const VectorType&amp; iDynTreeVector,
+              yarp::sig::Vector&amp; yarpVector)</span>
+            </dt>
+            <dd>Convert a <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />VectorFixSize</a> to a yarp::sig::Vector.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename MatrixType&gt;</div>
+              <span class="m-doc-wrap-bumper">void <a href="group__iDynTreeYARP.html#ga63598edaacfc53e5728e944a0dab5ebb" class="m-doc">toYarp</a>(</span><span class="m-doc-wrap">const MatrixType&amp; iDynTreeMatrix,
+              yarp::sig::Matrix&amp; yarpMatrix)</span>
+            </dt>
+            <dd>Convert a <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">iDynTree::<wbr />MatrixFixSize</a> to a yarp::sig::Matrix.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename VectorType&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#ga056a45c2887a5f314c963c89bb16a270" class="m-doc">toiDynTree</a>(</span><span class="m-doc-wrap">const yarp::sig::Vector&amp; yarpVector,
+              VectorType&amp; iDynTreeVector) -&gt; bool</span>
+            </dt>
+            <dd>Convert a yarp::sig::Vector to a <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />VectorFixSize</a>.</dd>
+            <dt>
+              <div class="m-doc-template">template&lt;typename MatrixType&gt;</div>
+              <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeYARP.html#gae1c1d7e3baf33d9b84f593330a3cf199" class="m-doc">toiDynTree</a>(</span><span class="m-doc-wrap">const yarp::sig::Matrix&amp; yarpMatrix,
+              MatrixType&amp; iDynTreeMatrix) -&gt; bool</span>
+            </dt>
+            <dd>Convert a yarp::sig::Matrix to a <a href="classiDynTree_1_1MatrixFixSize.html" class="m-doc">iDynTree::<wbr />MatrixFixSize</a>.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="YARPEigenConversions_8h.html#ae7c28c545c2775b437536fd84dabc97d" class="m-doc">toEigen</a>(</span><span class="m-doc-wrap">yarp::sig::Vector&amp; yarpVector) -&gt; Eigen::Map&lt;Eigen::VectorXd&gt;</span>
+            </dt>
+            <dd>Convert a yarp::sig::Vector to a Eigen::Map&lt;Eigen::VectorXd&gt; object.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="YARPEigenConversions_8h.html#a19f060a1b963d4cdd58a142372675f6b" class="m-doc">toEigen</a>(</span><span class="m-doc-wrap">yarp::sig::Matrix&amp; yarpMatrix) -&gt; Eigen::Map&lt;Eigen::Matrix&lt;double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor&gt;&gt;</span>
+            </dt>
+            <dd>Convert a yarp::sig::Matrix to a Eigen::Map&lt; Eigen::Matrix&lt;double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor&gt; &gt; object.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="YARPEigenConversions_8h.html#a0fc1ec0d7de0f823d4a8c32524aaecd7" class="m-doc">toEigen</a>(</span><span class="m-doc-wrap">const yarp::sig::Vector&amp; yarpVector) -&gt; Eigen::Map&lt;const Eigen::VectorXd&gt;</span>
+            </dt>
+            <dd>Convert a const yarp::sig::Vector to a Eigen::Map&lt;const Eigen::VectorXd&gt; object.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="YARPEigenConversions_8h.html#a4f400cf54f7b7757adbaa768205b9df9" class="m-doc">toEigen</a>(</span><span class="m-doc-wrap">const yarp::sig::Matrix&amp; yarpMatrix) -&gt; Eigen::Map&lt;const Eigen::Matrix&lt;double, Eigen::Dynamic, Eigen::Dynamic, Eigen::RowMajor&gt;&gt;</span>
+            </dt>
+            <dd>Convert a const yarp::sig::Matrix to a Eigen::Map&lt; const Eigen::Matrix&lt;double,Eigen::Dynamic,Eigen::Dynamic,Eigen::RowMajor&gt; &gt; object.</dd>
           </dl>
         </section>
         <section id="var-members">
           <h2><a href="#var-members">Variables</a></h2>
           <dl class="m-doc">
-            <dt>
-              const unsigned int <a href="AttitudeQuaternionEKF_8h.html#a0dd93cfe8edb7763d1f57d6454c1c25f" class="m-doc">output_dimensions_with_magnetometer</a>
-            </dt>
-            <dd>dimension of <svg class="m-math" style="width: 3.814em; height: 1.091em; vertical-align: -0.104em;" viewBox="0 -9.474739 36.612763 10.471011">
-<title>
-$ \mathbb{R}^3 \times \mathbb{R} $
-</title>
-<defs>
-<path id='eq12-g1-2' d='M4.65056-3.323537L2.259527-5.702615C2.116065-5.846077 2.092154-5.869988 1.996513-5.869988C1.876961-5.869988 1.75741-5.762391 1.75741-5.630884C1.75741-5.547198 1.78132-5.523288 1.912827-5.391781L4.303861-2.988792L1.912827-.585803C1.78132-.454296 1.75741-.430386 1.75741-.3467C1.75741-.215193 1.876961-.107597 1.996513-.107597C2.092154-.107597 2.116065-.131507 2.259527-.274969L4.638605-2.654047L7.113325-.179328C7.137235-.167372 7.220922-.107597 7.292653-.107597C7.436115-.107597 7.531756-.215193 7.531756-.3467C7.531756-.37061 7.531756-.418431 7.49589-.478207C7.483935-.502117 5.583064-2.379078 4.985305-2.988792L7.173101-5.176588C7.232877-5.248319 7.412204-5.403736 7.47198-5.475467C7.483935-5.499377 7.531756-5.547198 7.531756-5.630884C7.531756-5.762391 7.436115-5.869988 7.292653-5.869988C7.197011-5.869988 7.149191-5.822167 7.017684-5.69066L4.65056-3.323537Z'/>
-<path id='eq12-g2-51' d='M2.016438-2.662017C2.646077-2.662017 3.044583-2.199751 3.044583-1.362889C3.044583-.366625 2.478705-.071731 2.056289-.071731C1.617933-.071731 1.020174-.231133 .74122-.653549C1.028144-.653549 1.227397-.836862 1.227397-1.099875C1.227397-1.354919 1.044085-1.538232 .789041-1.538232C.573848-1.538232 .350685-1.40274 .350685-1.083935C.350685-.326775 1.163636 .167372 2.072229 .167372C3.132254 .167372 3.873474-.565878 3.873474-1.362889C3.873474-2.024408 3.347447-2.630137 2.534496-2.805479C3.164134-3.028643 3.634371-3.57061 3.634371-4.208219S2.917061-5.300125 2.088169-5.300125C1.235367-5.300125 .589788-4.837858 .589788-4.23213C.589788-3.937235 .789041-3.809714 .996264-3.809714C1.243337-3.809714 1.40274-3.985056 1.40274-4.216189C1.40274-4.511083 1.147696-4.622665 .972354-4.630635C1.307098-5.068991 1.920797-5.092902 2.064259-5.092902C2.271482-5.092902 2.87721-5.029141 2.87721-4.208219C2.87721-3.650311 2.646077-3.315567 2.534496-3.188045C2.295392-2.940971 2.11208-2.925031 1.625903-2.893151C1.474471-2.885181 1.41071-2.87721 1.41071-2.773599C1.41071-2.662017 1.482441-2.662017 1.617933-2.662017H2.016438Z'/>
-<path id='eq12-g0-82' d='M3.203985-3.753923H3.634371L5.427646-.980324C5.547198-.789041 5.834122-.32279 5.965629-.143462C6.049315 0 6.085181 0 6.360149 0H8.009963C8.225156 0 8.404483 0 8.404483-.215193C8.404483-.310834 8.332752-.394521 8.225156-.418431C7.782814-.514072 7.197011-1.303113 6.910087-1.685679C6.826401-1.80523 6.228643-2.594271 5.427646-3.88543C6.491656-4.076712 7.519801-4.531009 7.519801-5.953674C7.519801-7.615442 5.762391-8.18929 4.351681-8.18929H.597758C.382565-8.18929 .191283-8.18929 .191283-7.974097C.191283-7.770859 .418431-7.770859 .514072-7.770859C1.195517-7.770859 1.255293-7.687173 1.255293-7.089415V-1.099875C1.255293-.502117 1.195517-.418431 .514072-.418431C.418431-.418431 .191283-.418431 .191283-.215193C.191283 0 .382565 0 .597758 0H3.873474C4.088667 0 4.267995 0 4.267995-.215193C4.267995-.418431 4.064757-.418431 3.93325-.418431C3.251806-.418431 3.203985-.514072 3.203985-1.099875V-3.753923ZM5.511333-4.339726C5.846077-4.782067 5.881943-5.415691 5.881943-5.941719C5.881943-6.515567 5.810212-7.149191 5.427646-7.639352C5.917808-7.531756 7.10137-7.161146 7.10137-5.953674C7.10137-5.176588 6.742715-4.566874 5.511333-4.339726ZM3.203985-7.12528C3.203985-7.376339 3.203985-7.770859 3.945205-7.770859C4.961395-7.770859 5.463512-7.352428 5.463512-5.941719C5.463512-4.399502 5.092902-4.172354 3.203985-4.172354V-7.12528ZM1.578082-.418431C1.673724-.633624 1.673724-.968369 1.673724-1.075965V-7.113325C1.673724-7.232877 1.673724-7.555666 1.578082-7.770859H2.940971C2.785554-7.579577 2.785554-7.340473 2.785554-7.161146V-1.075965C2.785554-.956413 2.785554-.633624 2.881196-.418431H1.578082ZM4.124533-3.753923C4.208219-3.765878 4.25604-3.777833 4.351681-3.777833C4.531009-3.777833 4.794022-3.801743 4.97335-3.825654C5.152677-3.53873 6.443836-1.41071 7.436115-.418431H6.276463L4.124533-3.753923Z'/>
-</defs>
-<g id='eq12-page1'>
-<use x='0' y='0' xlink:href='#eq12-g0-82'/>
-<use x='8.634312' y='-4.338437' xlink:href='#eq12-g2-51'/>
-<use x='16.02329' y='0' xlink:href='#eq12-g1-2'/>
-<use x='27.978451' y='0' xlink:href='#eq12-g0-82'/>
-</g>
-</svg> accelerometer measurements and magnetometer yaw measurement</dd>
-            <dt>
-              const unsigned int <a href="AttitudeQuaternionEKF_8h.html#a8772fb8ad891bd276db791f2e815de11" class="m-doc">output_dimensions_without_magnetometer</a>
-            </dt>
-            <dd>dimension of <svg class="m-math" style="width: 1.340em; height: 0.987em; vertical-align: -0.000em;" viewBox="0 -9.474739 12.868495 9.474739">
-<title>
-$ \mathbb{R}^3 $
-</title>
-<defs>
-<path id='eq13-g1-51' d='M2.016438-2.662017C2.646077-2.662017 3.044583-2.199751 3.044583-1.362889C3.044583-.366625 2.478705-.071731 2.056289-.071731C1.617933-.071731 1.020174-.231133 .74122-.653549C1.028144-.653549 1.227397-.836862 1.227397-1.099875C1.227397-1.354919 1.044085-1.538232 .789041-1.538232C.573848-1.538232 .350685-1.40274 .350685-1.083935C.350685-.326775 1.163636 .167372 2.072229 .167372C3.132254 .167372 3.873474-.565878 3.873474-1.362889C3.873474-2.024408 3.347447-2.630137 2.534496-2.805479C3.164134-3.028643 3.634371-3.57061 3.634371-4.208219S2.917061-5.300125 2.088169-5.300125C1.235367-5.300125 .589788-4.837858 .589788-4.23213C.589788-3.937235 .789041-3.809714 .996264-3.809714C1.243337-3.809714 1.40274-3.985056 1.40274-4.216189C1.40274-4.511083 1.147696-4.622665 .972354-4.630635C1.307098-5.068991 1.920797-5.092902 2.064259-5.092902C2.271482-5.092902 2.87721-5.029141 2.87721-4.208219C2.87721-3.650311 2.646077-3.315567 2.534496-3.188045C2.295392-2.940971 2.11208-2.925031 1.625903-2.893151C1.474471-2.885181 1.41071-2.87721 1.41071-2.773599C1.41071-2.662017 1.482441-2.662017 1.617933-2.662017H2.016438Z'/>
-<path id='eq13-g0-82' d='M3.203985-3.753923H3.634371L5.427646-.980324C5.547198-.789041 5.834122-.32279 5.965629-.143462C6.049315 0 6.085181 0 6.360149 0H8.009963C8.225156 0 8.404483 0 8.404483-.215193C8.404483-.310834 8.332752-.394521 8.225156-.418431C7.782814-.514072 7.197011-1.303113 6.910087-1.685679C6.826401-1.80523 6.228643-2.594271 5.427646-3.88543C6.491656-4.076712 7.519801-4.531009 7.519801-5.953674C7.519801-7.615442 5.762391-8.18929 4.351681-8.18929H.597758C.382565-8.18929 .191283-8.18929 .191283-7.974097C.191283-7.770859 .418431-7.770859 .514072-7.770859C1.195517-7.770859 1.255293-7.687173 1.255293-7.089415V-1.099875C1.255293-.502117 1.195517-.418431 .514072-.418431C.418431-.418431 .191283-.418431 .191283-.215193C.191283 0 .382565 0 .597758 0H3.873474C4.088667 0 4.267995 0 4.267995-.215193C4.267995-.418431 4.064757-.418431 3.93325-.418431C3.251806-.418431 3.203985-.514072 3.203985-1.099875V-3.753923ZM5.511333-4.339726C5.846077-4.782067 5.881943-5.415691 5.881943-5.941719C5.881943-6.515567 5.810212-7.149191 5.427646-7.639352C5.917808-7.531756 7.10137-7.161146 7.10137-5.953674C7.10137-5.176588 6.742715-4.566874 5.511333-4.339726ZM3.203985-7.12528C3.203985-7.376339 3.203985-7.770859 3.945205-7.770859C4.961395-7.770859 5.463512-7.352428 5.463512-5.941719C5.463512-4.399502 5.092902-4.172354 3.203985-4.172354V-7.12528ZM1.578082-.418431C1.673724-.633624 1.673724-.968369 1.673724-1.075965V-7.113325C1.673724-7.232877 1.673724-7.555666 1.578082-7.770859H2.940971C2.785554-7.579577 2.785554-7.340473 2.785554-7.161146V-1.075965C2.785554-.956413 2.785554-.633624 2.881196-.418431H1.578082ZM4.124533-3.753923C4.208219-3.765878 4.25604-3.777833 4.351681-3.777833C4.531009-3.777833 4.794022-3.801743 4.97335-3.825654C5.152677-3.53873 6.443836-1.41071 7.436115-.418431H6.276463L4.124533-3.753923Z'/>
-</defs>
-<g id='eq13-page1'>
-<use x='0' y='0' xlink:href='#eq13-g0-82'/>
-<use x='8.634312' y='-4.338437' xlink:href='#eq13-g1-51'/>
-</g>
-</svg> accelerometer measurements</dd>
-            <dt>
-              const unsigned int <a href="AttitudeQuaternionEKF_8h.html#ae4a3a4ece8b00835bf57f387795ba015" class="m-doc">input_dimensions</a>
-            </dt>
-            <dd>dimension of <svg class="m-math" style="width: 1.340em; height: 0.987em; vertical-align: -0.000em;" viewBox="0 -9.474739 12.868495 9.474739">
-<title>
-$ \mathbb{R}^3 $
-</title>
-<defs>
-<path id='eq14-g1-51' d='M2.016438-2.662017C2.646077-2.662017 3.044583-2.199751 3.044583-1.362889C3.044583-.366625 2.478705-.071731 2.056289-.071731C1.617933-.071731 1.020174-.231133 .74122-.653549C1.028144-.653549 1.227397-.836862 1.227397-1.099875C1.227397-1.354919 1.044085-1.538232 .789041-1.538232C.573848-1.538232 .350685-1.40274 .350685-1.083935C.350685-.326775 1.163636 .167372 2.072229 .167372C3.132254 .167372 3.873474-.565878 3.873474-1.362889C3.873474-2.024408 3.347447-2.630137 2.534496-2.805479C3.164134-3.028643 3.634371-3.57061 3.634371-4.208219S2.917061-5.300125 2.088169-5.300125C1.235367-5.300125 .589788-4.837858 .589788-4.23213C.589788-3.937235 .789041-3.809714 .996264-3.809714C1.243337-3.809714 1.40274-3.985056 1.40274-4.216189C1.40274-4.511083 1.147696-4.622665 .972354-4.630635C1.307098-5.068991 1.920797-5.092902 2.064259-5.092902C2.271482-5.092902 2.87721-5.029141 2.87721-4.208219C2.87721-3.650311 2.646077-3.315567 2.534496-3.188045C2.295392-2.940971 2.11208-2.925031 1.625903-2.893151C1.474471-2.885181 1.41071-2.87721 1.41071-2.773599C1.41071-2.662017 1.482441-2.662017 1.617933-2.662017H2.016438Z'/>
-<path id='eq14-g0-82' d='M3.203985-3.753923H3.634371L5.427646-.980324C5.547198-.789041 5.834122-.32279 5.965629-.143462C6.049315 0 6.085181 0 6.360149 0H8.009963C8.225156 0 8.404483 0 8.404483-.215193C8.404483-.310834 8.332752-.394521 8.225156-.418431C7.782814-.514072 7.197011-1.303113 6.910087-1.685679C6.826401-1.80523 6.228643-2.594271 5.427646-3.88543C6.491656-4.076712 7.519801-4.531009 7.519801-5.953674C7.519801-7.615442 5.762391-8.18929 4.351681-8.18929H.597758C.382565-8.18929 .191283-8.18929 .191283-7.974097C.191283-7.770859 .418431-7.770859 .514072-7.770859C1.195517-7.770859 1.255293-7.687173 1.255293-7.089415V-1.099875C1.255293-.502117 1.195517-.418431 .514072-.418431C.418431-.418431 .191283-.418431 .191283-.215193C.191283 0 .382565 0 .597758 0H3.873474C4.088667 0 4.267995 0 4.267995-.215193C4.267995-.418431 4.064757-.418431 3.93325-.418431C3.251806-.418431 3.203985-.514072 3.203985-1.099875V-3.753923ZM5.511333-4.339726C5.846077-4.782067 5.881943-5.415691 5.881943-5.941719C5.881943-6.515567 5.810212-7.149191 5.427646-7.639352C5.917808-7.531756 7.10137-7.161146 7.10137-5.953674C7.10137-5.176588 6.742715-4.566874 5.511333-4.339726ZM3.203985-7.12528C3.203985-7.376339 3.203985-7.770859 3.945205-7.770859C4.961395-7.770859 5.463512-7.352428 5.463512-5.941719C5.463512-4.399502 5.092902-4.172354 3.203985-4.172354V-7.12528ZM1.578082-.418431C1.673724-.633624 1.673724-.968369 1.673724-1.075965V-7.113325C1.673724-7.232877 1.673724-7.555666 1.578082-7.770859H2.940971C2.785554-7.579577 2.785554-7.340473 2.785554-7.161146V-1.075965C2.785554-.956413 2.785554-.633624 2.881196-.418431H1.578082ZM4.124533-3.753923C4.208219-3.765878 4.25604-3.777833 4.351681-3.777833C4.531009-3.777833 4.794022-3.801743 4.97335-3.825654C5.152677-3.53873 6.443836-1.41071 7.436115-.418431H6.276463L4.124533-3.753923Z'/>
-</defs>
-<g id='eq14-page1'>
-<use x='0' y='0' xlink:href='#eq14-g0-82'/>
-<use x='8.634312' y='-4.338437' xlink:href='#eq14-g1-51'/>
-</g>
-</svg> gyroscope measurements</dd>
             <dt>
               IDYNTREE_CONSTEXPR const std::ptrdiff_t <a href="Span_8h.html#a10c045523612bc8183a496020fecf982" class="m-doc">dynamic_extent</a>
             </dt>
@@ -2469,6 +2418,57 @@ $ \mathbb{R}^3 $
               IDYNTREE_MODEL_EXPORT TraversalIndex <a href="Indices_8h.html#a1ceb2215b00eb2c21af358eb9b7d88f4" class="m-doc">TRAVERSAL_INVALID_INDEX</a>
             </dt>
             <dd><span></span></dd>
+            <dt>
+              const unsigned int <a href="AttitudeQuaternionEKF_8h.html#a0dd93cfe8edb7763d1f57d6454c1c25f" class="m-doc">output_dimensions_with_magnetometer</a>
+            </dt>
+            <dd>dimension of <svg class="m-math" style="width: 3.814em; height: 1.091em; vertical-align: -0.104em;" viewBox="0 -9.474739 36.612763 10.471011">
+<title>
+$ \mathbb{R}^3 \times \mathbb{R} $
+</title>
+<defs>
+<path id='eq12-g1-2' d='M4.65056-3.323537L2.259527-5.702615C2.116065-5.846077 2.092154-5.869988 1.996513-5.869988C1.876961-5.869988 1.75741-5.762391 1.75741-5.630884C1.75741-5.547198 1.78132-5.523288 1.912827-5.391781L4.303861-2.988792L1.912827-.585803C1.78132-.454296 1.75741-.430386 1.75741-.3467C1.75741-.215193 1.876961-.107597 1.996513-.107597C2.092154-.107597 2.116065-.131507 2.259527-.274969L4.638605-2.654047L7.113325-.179328C7.137235-.167372 7.220922-.107597 7.292653-.107597C7.436115-.107597 7.531756-.215193 7.531756-.3467C7.531756-.37061 7.531756-.418431 7.49589-.478207C7.483935-.502117 5.583064-2.379078 4.985305-2.988792L7.173101-5.176588C7.232877-5.248319 7.412204-5.403736 7.47198-5.475467C7.483935-5.499377 7.531756-5.547198 7.531756-5.630884C7.531756-5.762391 7.436115-5.869988 7.292653-5.869988C7.197011-5.869988 7.149191-5.822167 7.017684-5.69066L4.65056-3.323537Z'/>
+<path id='eq12-g2-51' d='M2.016438-2.662017C2.646077-2.662017 3.044583-2.199751 3.044583-1.362889C3.044583-.366625 2.478705-.071731 2.056289-.071731C1.617933-.071731 1.020174-.231133 .74122-.653549C1.028144-.653549 1.227397-.836862 1.227397-1.099875C1.227397-1.354919 1.044085-1.538232 .789041-1.538232C.573848-1.538232 .350685-1.40274 .350685-1.083935C.350685-.326775 1.163636 .167372 2.072229 .167372C3.132254 .167372 3.873474-.565878 3.873474-1.362889C3.873474-2.024408 3.347447-2.630137 2.534496-2.805479C3.164134-3.028643 3.634371-3.57061 3.634371-4.208219S2.917061-5.300125 2.088169-5.300125C1.235367-5.300125 .589788-4.837858 .589788-4.23213C.589788-3.937235 .789041-3.809714 .996264-3.809714C1.243337-3.809714 1.40274-3.985056 1.40274-4.216189C1.40274-4.511083 1.147696-4.622665 .972354-4.630635C1.307098-5.068991 1.920797-5.092902 2.064259-5.092902C2.271482-5.092902 2.87721-5.029141 2.87721-4.208219C2.87721-3.650311 2.646077-3.315567 2.534496-3.188045C2.295392-2.940971 2.11208-2.925031 1.625903-2.893151C1.474471-2.885181 1.41071-2.87721 1.41071-2.773599C1.41071-2.662017 1.482441-2.662017 1.617933-2.662017H2.016438Z'/>
+<path id='eq12-g0-82' d='M3.203985-3.753923H3.634371L5.427646-.980324C5.547198-.789041 5.834122-.32279 5.965629-.143462C6.049315 0 6.085181 0 6.360149 0H8.009963C8.225156 0 8.404483 0 8.404483-.215193C8.404483-.310834 8.332752-.394521 8.225156-.418431C7.782814-.514072 7.197011-1.303113 6.910087-1.685679C6.826401-1.80523 6.228643-2.594271 5.427646-3.88543C6.491656-4.076712 7.519801-4.531009 7.519801-5.953674C7.519801-7.615442 5.762391-8.18929 4.351681-8.18929H.597758C.382565-8.18929 .191283-8.18929 .191283-7.974097C.191283-7.770859 .418431-7.770859 .514072-7.770859C1.195517-7.770859 1.255293-7.687173 1.255293-7.089415V-1.099875C1.255293-.502117 1.195517-.418431 .514072-.418431C.418431-.418431 .191283-.418431 .191283-.215193C.191283 0 .382565 0 .597758 0H3.873474C4.088667 0 4.267995 0 4.267995-.215193C4.267995-.418431 4.064757-.418431 3.93325-.418431C3.251806-.418431 3.203985-.514072 3.203985-1.099875V-3.753923ZM5.511333-4.339726C5.846077-4.782067 5.881943-5.415691 5.881943-5.941719C5.881943-6.515567 5.810212-7.149191 5.427646-7.639352C5.917808-7.531756 7.10137-7.161146 7.10137-5.953674C7.10137-5.176588 6.742715-4.566874 5.511333-4.339726ZM3.203985-7.12528C3.203985-7.376339 3.203985-7.770859 3.945205-7.770859C4.961395-7.770859 5.463512-7.352428 5.463512-5.941719C5.463512-4.399502 5.092902-4.172354 3.203985-4.172354V-7.12528ZM1.578082-.418431C1.673724-.633624 1.673724-.968369 1.673724-1.075965V-7.113325C1.673724-7.232877 1.673724-7.555666 1.578082-7.770859H2.940971C2.785554-7.579577 2.785554-7.340473 2.785554-7.161146V-1.075965C2.785554-.956413 2.785554-.633624 2.881196-.418431H1.578082ZM4.124533-3.753923C4.208219-3.765878 4.25604-3.777833 4.351681-3.777833C4.531009-3.777833 4.794022-3.801743 4.97335-3.825654C5.152677-3.53873 6.443836-1.41071 7.436115-.418431H6.276463L4.124533-3.753923Z'/>
+</defs>
+<g id='eq12-page1'>
+<use x='0' y='0' xlink:href='#eq12-g0-82'/>
+<use x='8.634312' y='-4.338437' xlink:href='#eq12-g2-51'/>
+<use x='16.02329' y='0' xlink:href='#eq12-g1-2'/>
+<use x='27.978451' y='0' xlink:href='#eq12-g0-82'/>
+</g>
+</svg> accelerometer measurements and magnetometer yaw measurement</dd>
+            <dt>
+              const unsigned int <a href="AttitudeQuaternionEKF_8h.html#a8772fb8ad891bd276db791f2e815de11" class="m-doc">output_dimensions_without_magnetometer</a>
+            </dt>
+            <dd>dimension of <svg class="m-math" style="width: 1.340em; height: 0.987em; vertical-align: -0.000em;" viewBox="0 -9.474739 12.868495 9.474739">
+<title>
+$ \mathbb{R}^3 $
+</title>
+<defs>
+<path id='eq13-g1-51' d='M2.016438-2.662017C2.646077-2.662017 3.044583-2.199751 3.044583-1.362889C3.044583-.366625 2.478705-.071731 2.056289-.071731C1.617933-.071731 1.020174-.231133 .74122-.653549C1.028144-.653549 1.227397-.836862 1.227397-1.099875C1.227397-1.354919 1.044085-1.538232 .789041-1.538232C.573848-1.538232 .350685-1.40274 .350685-1.083935C.350685-.326775 1.163636 .167372 2.072229 .167372C3.132254 .167372 3.873474-.565878 3.873474-1.362889C3.873474-2.024408 3.347447-2.630137 2.534496-2.805479C3.164134-3.028643 3.634371-3.57061 3.634371-4.208219S2.917061-5.300125 2.088169-5.300125C1.235367-5.300125 .589788-4.837858 .589788-4.23213C.589788-3.937235 .789041-3.809714 .996264-3.809714C1.243337-3.809714 1.40274-3.985056 1.40274-4.216189C1.40274-4.511083 1.147696-4.622665 .972354-4.630635C1.307098-5.068991 1.920797-5.092902 2.064259-5.092902C2.271482-5.092902 2.87721-5.029141 2.87721-4.208219C2.87721-3.650311 2.646077-3.315567 2.534496-3.188045C2.295392-2.940971 2.11208-2.925031 1.625903-2.893151C1.474471-2.885181 1.41071-2.87721 1.41071-2.773599C1.41071-2.662017 1.482441-2.662017 1.617933-2.662017H2.016438Z'/>
+<path id='eq13-g0-82' d='M3.203985-3.753923H3.634371L5.427646-.980324C5.547198-.789041 5.834122-.32279 5.965629-.143462C6.049315 0 6.085181 0 6.360149 0H8.009963C8.225156 0 8.404483 0 8.404483-.215193C8.404483-.310834 8.332752-.394521 8.225156-.418431C7.782814-.514072 7.197011-1.303113 6.910087-1.685679C6.826401-1.80523 6.228643-2.594271 5.427646-3.88543C6.491656-4.076712 7.519801-4.531009 7.519801-5.953674C7.519801-7.615442 5.762391-8.18929 4.351681-8.18929H.597758C.382565-8.18929 .191283-8.18929 .191283-7.974097C.191283-7.770859 .418431-7.770859 .514072-7.770859C1.195517-7.770859 1.255293-7.687173 1.255293-7.089415V-1.099875C1.255293-.502117 1.195517-.418431 .514072-.418431C.418431-.418431 .191283-.418431 .191283-.215193C.191283 0 .382565 0 .597758 0H3.873474C4.088667 0 4.267995 0 4.267995-.215193C4.267995-.418431 4.064757-.418431 3.93325-.418431C3.251806-.418431 3.203985-.514072 3.203985-1.099875V-3.753923ZM5.511333-4.339726C5.846077-4.782067 5.881943-5.415691 5.881943-5.941719C5.881943-6.515567 5.810212-7.149191 5.427646-7.639352C5.917808-7.531756 7.10137-7.161146 7.10137-5.953674C7.10137-5.176588 6.742715-4.566874 5.511333-4.339726ZM3.203985-7.12528C3.203985-7.376339 3.203985-7.770859 3.945205-7.770859C4.961395-7.770859 5.463512-7.352428 5.463512-5.941719C5.463512-4.399502 5.092902-4.172354 3.203985-4.172354V-7.12528ZM1.578082-.418431C1.673724-.633624 1.673724-.968369 1.673724-1.075965V-7.113325C1.673724-7.232877 1.673724-7.555666 1.578082-7.770859H2.940971C2.785554-7.579577 2.785554-7.340473 2.785554-7.161146V-1.075965C2.785554-.956413 2.785554-.633624 2.881196-.418431H1.578082ZM4.124533-3.753923C4.208219-3.765878 4.25604-3.777833 4.351681-3.777833C4.531009-3.777833 4.794022-3.801743 4.97335-3.825654C5.152677-3.53873 6.443836-1.41071 7.436115-.418431H6.276463L4.124533-3.753923Z'/>
+</defs>
+<g id='eq13-page1'>
+<use x='0' y='0' xlink:href='#eq13-g0-82'/>
+<use x='8.634312' y='-4.338437' xlink:href='#eq13-g1-51'/>
+</g>
+</svg> accelerometer measurements</dd>
+            <dt>
+              const unsigned int <a href="AttitudeQuaternionEKF_8h.html#ae4a3a4ece8b00835bf57f387795ba015" class="m-doc">input_dimensions</a>
+            </dt>
+            <dd>dimension of <svg class="m-math" style="width: 1.340em; height: 0.987em; vertical-align: -0.000em;" viewBox="0 -9.474739 12.868495 9.474739">
+<title>
+$ \mathbb{R}^3 $
+</title>
+<defs>
+<path id='eq14-g1-51' d='M2.016438-2.662017C2.646077-2.662017 3.044583-2.199751 3.044583-1.362889C3.044583-.366625 2.478705-.071731 2.056289-.071731C1.617933-.071731 1.020174-.231133 .74122-.653549C1.028144-.653549 1.227397-.836862 1.227397-1.099875C1.227397-1.354919 1.044085-1.538232 .789041-1.538232C.573848-1.538232 .350685-1.40274 .350685-1.083935C.350685-.326775 1.163636 .167372 2.072229 .167372C3.132254 .167372 3.873474-.565878 3.873474-1.362889C3.873474-2.024408 3.347447-2.630137 2.534496-2.805479C3.164134-3.028643 3.634371-3.57061 3.634371-4.208219S2.917061-5.300125 2.088169-5.300125C1.235367-5.300125 .589788-4.837858 .589788-4.23213C.589788-3.937235 .789041-3.809714 .996264-3.809714C1.243337-3.809714 1.40274-3.985056 1.40274-4.216189C1.40274-4.511083 1.147696-4.622665 .972354-4.630635C1.307098-5.068991 1.920797-5.092902 2.064259-5.092902C2.271482-5.092902 2.87721-5.029141 2.87721-4.208219C2.87721-3.650311 2.646077-3.315567 2.534496-3.188045C2.295392-2.940971 2.11208-2.925031 1.625903-2.893151C1.474471-2.885181 1.41071-2.87721 1.41071-2.773599C1.41071-2.662017 1.482441-2.662017 1.617933-2.662017H2.016438Z'/>
+<path id='eq14-g0-82' d='M3.203985-3.753923H3.634371L5.427646-.980324C5.547198-.789041 5.834122-.32279 5.965629-.143462C6.049315 0 6.085181 0 6.360149 0H8.009963C8.225156 0 8.404483 0 8.404483-.215193C8.404483-.310834 8.332752-.394521 8.225156-.418431C7.782814-.514072 7.197011-1.303113 6.910087-1.685679C6.826401-1.80523 6.228643-2.594271 5.427646-3.88543C6.491656-4.076712 7.519801-4.531009 7.519801-5.953674C7.519801-7.615442 5.762391-8.18929 4.351681-8.18929H.597758C.382565-8.18929 .191283-8.18929 .191283-7.974097C.191283-7.770859 .418431-7.770859 .514072-7.770859C1.195517-7.770859 1.255293-7.687173 1.255293-7.089415V-1.099875C1.255293-.502117 1.195517-.418431 .514072-.418431C.418431-.418431 .191283-.418431 .191283-.215193C.191283 0 .382565 0 .597758 0H3.873474C4.088667 0 4.267995 0 4.267995-.215193C4.267995-.418431 4.064757-.418431 3.93325-.418431C3.251806-.418431 3.203985-.514072 3.203985-1.099875V-3.753923ZM5.511333-4.339726C5.846077-4.782067 5.881943-5.415691 5.881943-5.941719C5.881943-6.515567 5.810212-7.149191 5.427646-7.639352C5.917808-7.531756 7.10137-7.161146 7.10137-5.953674C7.10137-5.176588 6.742715-4.566874 5.511333-4.339726ZM3.203985-7.12528C3.203985-7.376339 3.203985-7.770859 3.945205-7.770859C4.961395-7.770859 5.463512-7.352428 5.463512-5.941719C5.463512-4.399502 5.092902-4.172354 3.203985-4.172354V-7.12528ZM1.578082-.418431C1.673724-.633624 1.673724-.968369 1.673724-1.075965V-7.113325C1.673724-7.232877 1.673724-7.555666 1.578082-7.770859H2.940971C2.785554-7.579577 2.785554-7.340473 2.785554-7.161146V-1.075965C2.785554-.956413 2.785554-.633624 2.881196-.418431H1.578082ZM4.124533-3.753923C4.208219-3.765878 4.25604-3.777833 4.351681-3.777833C4.531009-3.777833 4.794022-3.801743 4.97335-3.825654C5.152677-3.53873 6.443836-1.41071 7.436115-.418431H6.276463L4.124533-3.753923Z'/>
+</defs>
+<g id='eq14-page1'>
+<use x='0' y='0' xlink:href='#eq14-g0-82'/>
+<use x='8.634312' y='-4.338437' xlink:href='#eq14-g1-51'/>
+</g>
+</svg> gyroscope measurements</dd>
           </dl>
         </section>
       </div>

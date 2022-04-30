@@ -190,7 +190,7 @@
 <para>Computes the system dynamics. </para>
         </briefdescription>
         <detaileddescription>
-<para>It return <formula id="113">$ f(t,x) $</formula>. Notice that here the dependency from the control input is removed, so that basically we are assuming an autonomous system. If the system is controlled, the control input will be set separately with the method setControlInput. This was necessary since the Integrator class needs an autonomous system to be integrated. See <ref refid="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem" kindref="compound">ControlledDynamicalSystem</ref> class in case you want to join a <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> with a <ref refid="classiDynTree_1_1optimalcontrol_1_1Controller" kindref="compound">Controller</ref>. <parameterlist kind="param"><parameteritem>
+<para>It return <formula id="315">$ f(t,x) $</formula>. Notice that here the dependency from the control input is removed, so that basically we are assuming an autonomous system. If the system is controlled, the control input will be set separately with the method setControlInput. This was necessary since the Integrator class needs an autonomous system to be integrated. See <ref refid="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem" kindref="compound">ControlledDynamicalSystem</ref> class in case you want to join a <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> with a <ref refid="classiDynTree_1_1optimalcontrol_1_1Controller" kindref="compound">Controller</ref>. <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">state</parametername>
 </parameternamelist>
@@ -245,7 +245,7 @@
 <para>Compute the partial derivative of the state dynamics wrt the state. </para>
         </briefdescription>
         <detaileddescription>
-<para>Namely it computes, <formula id="114">$ \frac{\partial f(t,x,u)}{\partial x}$</formula>. By default it return false;</para>
+<para>Namely it computes, <formula id="316">$ \frac{\partial f(t,x,u)}{\partial x}$</formula>. By default it return false;</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">state</parametername>
@@ -301,7 +301,7 @@
 <para>Compute the partial derivative of the state dynamics wrt the control. </para>
         </briefdescription>
         <detaileddescription>
-<para>Namely it computes, <formula id="115">$ \frac{\partial f(t,x,u)}{\partial u}$</formula>. By default it return false;</para>
+<para>Namely it computes, <formula id="317">$ \frac{\partial f(t,x,u)}{\partial u}$</formula>. By default it return false;</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">state</parametername>
@@ -423,7 +423,7 @@
 <para>Evaluate the dynamics second partial derivative wrt the state variables. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="116">$\frac{\partial^2 f(t, x, u)}{\partial x^2}$</formula> <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="318">$\frac{\partial^2 f(t, x, u)}{\partial x^2}$</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -490,7 +490,7 @@
 <para>Evaluate the dynamics second partial derivative wrt the control. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="117">$\frac{\partial^2 f(t, x, u)}{\partial u^2}$</formula> <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="319">$\frac{\partial^2 f(t, x, u)}{\partial u^2}$</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>
@@ -557,7 +557,7 @@
 <para>Evaluate the dynamics second partial derivative wrt the state and control. </para>
         </briefdescription>
         <detaileddescription>
-<para>It is the result of <formula id="118">$\frac{\partial^2 f(t, x, u)}{\partial x \partial u}$</formula>, thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs. <parameterlist kind="param"><parameteritem>
+<para>It is the result of <formula id="320">$\frac{\partial^2 f(t, x, u)}{\partial x \partial u}$</formula>, thus it has number of rows equals to the number of states and number of cols equal to the number of control inputs. <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">time</parametername>
 </parameternamelist>

@@ -5,14 +5,14 @@
     <includes local="no">string</includes>
     <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
     <includes refid="Utils_8h" local="no">iDynTree/Core/Utils.h</includes>
+    <includedby refid="InverseKinematics_8h" local="no">iDynTree/InverseKinematics.h</includedby>
+    <includedby refid="Axis_8h" local="no">iDynTree/Core/Axis.h</includedby>
     <includedby refid="AttitudeMahonyFilter_8h" local="no">iDynTree/Estimation/AttitudeMahonyFilter.h</includedby>
     <includedby refid="AttitudeQuaternionEKF_8h" local="no">iDynTree/Estimation/AttitudeQuaternionEKF.h</includedby>
     <includedby refid="BerdyHelper_8h" local="no">iDynTree/Estimation/BerdyHelper.h</includedby>
     <includedby refid="ExternalWrenchesEstimation_8h" local="no">iDynTree/Estimation/ExternalWrenchesEstimation.h</includedby>
     <includedby refid="YARPConversionsImplementation_8h" local="no">iDynTree/yarp/YARPConversionsImplementation.h</includedby>
-    <includedby refid="Axis_8h" local="no">iDynTree/Core/Axis.h</includedby>
     <includedby refid="Visualizer_8h" local="no">iDynTree/Visualizer.h</includedby>
-    <includedby refid="InverseKinematics_8h" local="no">iDynTree/InverseKinematics.h</includedby>
     <incdepgraph>
       <node id="2">
         <label>string</label>
