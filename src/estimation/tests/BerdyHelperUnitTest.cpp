@@ -264,8 +264,8 @@ Vector6 computeROCMInBaseUsingMeasurements(BerdyHelper& berdy,
     iDynTree::SpatialMomentum centroidalMom = iDynTree::SpatialMomentum(SpatialVector<SpatialForceVector>(centroidalMomentum));
 
     // Compute base_dotX*_centroidal * centroidal momentum
-    iDynTree::SpatialForceVector biasTermFromCentroidalMomentum; 
-    biasTermFromCentroidalMomentum = base_dotH_centroidal.transform(base_H_centroidal, centroidalMom);
+    iDynTree::Vector6 biasTermFromCentroidalMomentum; 
+    iDynTree::toEigen(biasTermFromCentroidalMomentum) = iDynTree::toEigen(base_dotH_centroidal.asAdjointTransformWrenchDerivative(base_H_centroidal)) * iDynTree::toEigen(centroidalMom);
 
     std::cerr<<"Computed ROCM:"<<
                 std::endl<<"ROCM in base: "<<rocmInBaseRaw.toString()<<
@@ -278,7 +278,7 @@ Vector6 computeROCMInBaseUsingMeasurements(BerdyHelper& berdy,
     // Computed rate of change of momentum
     Vector6 rocmInBase;
     iDynTree::toEigen(rocmInBase) = iDynTree::toEigen(rocmInBaseRaw)
-                                    - iDynTree::toEigen(biasTermFromCentroidalMomentum.asVector())
+                                    - iDynTree::toEigen(biasTermFromCentroidalMomentum)
                                     - iDynTree::toEigen(gravitationalWrenchInBase);
 
     return rocmInBase;
