@@ -7,10 +7,10 @@ classdef Polygon2D < iDynTreeSwigRef
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1952, self);
+        varargout{1} = iDynTreeMEX(2002, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1953, self, varargin{1});
+        iDynTreeMEX(2003, self, varargin{1});
       end
     end
     function self = Polygon2D(varargin)
@@ -19,26 +19,26 @@ classdef Polygon2D < iDynTreeSwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1954, varargin{:});
+        tmp = iDynTreeMEX(2004, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function varargout = setNrOfVertices(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1955, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2005, self, varargin{:});
     end
     function varargout = getNrOfVertices(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1956, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2006, self, varargin{:});
     end
     function varargout = isValid(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1957, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2007, self, varargin{:});
     end
     function varargout = paren(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1958, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(2008, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1959, self);
+        iDynTreeMEX(2009, self);
         self.SwigClear();
       end
     end

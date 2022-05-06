@@ -5,39 +5,39 @@ classdef IVectorsVisualization < iDynTreeSwigRef
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1869, self);
+        iDynTreeMEX(1910, self);
         self.SwigClear();
       end
     end
     function varargout = addVector(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1870, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1911, self, varargin{:});
     end
     function varargout = getNrOfVectors(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1871, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1912, self, varargin{:});
     end
     function varargout = getVector(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1872, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1913, self, varargin{:});
     end
     function varargout = updateVector(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1873, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1914, self, varargin{:});
     end
     function varargout = setVectorColor(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1874, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1915, self, varargin{:});
     end
     function varargout = setVectorsDefaultColor(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1875, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1916, self, varargin{:});
     end
     function varargout = setVectorsColor(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1876, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1917, self, varargin{:});
     end
     function varargout = setVectorsAspect(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1877, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1918, self, varargin{:});
     end
     function varargout = setVisible(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1878, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1919, self, varargin{:});
     end
     function varargout = getVectorLabel(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1879, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1920, self, varargin{:});
     end
     function self = IVectorsVisualization(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
