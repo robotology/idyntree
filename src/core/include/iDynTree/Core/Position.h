@@ -43,7 +43,8 @@ namespace iDynTree
     {
     public:
         /**
-         * Default constructor: initialize all the coordinates to 0
+         * Default constructor.
+         * The data is not initialized, please initialize the data in the created object before use.
          */
         Position();
 
