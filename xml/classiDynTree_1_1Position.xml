@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="101" column="21"/>
+        <location file="iDynTree/Core/Position.h" line="102" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1aecc777eddc18bb19d4edc2cee6d296b2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="103" column="21"/>
+        <location file="iDynTree/Core/Position.h" line="104" column="21"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -42,13 +42,14 @@
         <argsstring>()</argsstring>
         <name>Position</name>
         <briefdescription>
-<para>Default constructor: initialize all the coordinates to 0. </para>
+<para>Default constructor. </para>
         </briefdescription>
         <detaileddescription>
+<para>The data is not initialized, please initialize the data in the created object before use. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="48" column="9"/>
+        <location file="iDynTree/Core/Position.h" line="49" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1ab9a911b341e94dce3c12a0b00909bca7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -74,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="53" column="9"/>
+        <location file="iDynTree/Core/Position.h" line="54" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1a43bb1d57623d1a8723ed4d91b11c84f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -92,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="58" column="9"/>
+        <location file="iDynTree/Core/Position.h" line="59" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1a2ec67c9730e953b9b322eed3ab93a327" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -110,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="63" column="9"/>
+        <location file="iDynTree/Core/Position.h" line="64" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1a016c1499d097271e726f56b49caba0bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -128,7 +129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="68" column="9"/>
+        <location file="iDynTree/Core/Position.h" line="69" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1ae15e7759f6fa62cfc1dcee22d030571d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
@@ -146,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="73" column="25"/>
+        <location file="iDynTree/Core/Position.h" line="74" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1ab88fdc6dccec1ee9e1f54c29037305a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
@@ -163,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="74" column="25"/>
+        <location file="iDynTree/Core/Position.h" line="75" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1a1a0b1735614deec31cc58bf2aca87233" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
@@ -180,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="75" column="25"/>
+        <location file="iDynTree/Core/Position.h" line="76" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1a084e7ceda461be06437a1b4bce13ff80" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -197,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="78" column="30"/>
+        <location file="iDynTree/Core/Position.h" line="79" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1a1cb0f61163edd2a5d1270f4f5bd952bb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref></type>
@@ -214,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="79" column="30"/>
+        <location file="iDynTree/Core/Position.h" line="80" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1a88d5d8268549a0c34541d1a8ba521b9a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref></type>
@@ -231,7 +232,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="80" column="16"/>
+        <location file="iDynTree/Core/Position.h" line="81" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1aa93150342775df928536cbdc6504f9d3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref></type>
@@ -248,7 +249,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="81" column="25"/>
+        <location file="iDynTree/Core/Position.h" line="82" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1a8b2c15ec5f9cc33f9a1ff0cbdaf98d9f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMomentum" kindref="compound">SpatialMomentum</ref></type>
@@ -265,7 +266,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="82" column="25"/>
+        <location file="iDynTree/Core/Position.h" line="83" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1a7cfa20dda040d64eca5068b7df0c461e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
@@ -282,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="83" column="16"/>
+        <location file="iDynTree/Core/Position.h" line="84" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1ae3f22570adb18010ccffcf4ca680ef51" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
@@ -300,7 +301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="88" column="18"/>
+        <location file="iDynTree/Core/Position.h" line="89" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1a502889ab010c4355e9ed08aa4452d59a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
@@ -317,7 +318,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="89" column="18"/>
+        <location file="iDynTree/Core/Position.h" line="90" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1a1fe25ef2a4912d67b692a4649a84df6d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
@@ -330,7 +331,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="90" column="18"/>
+        <location file="iDynTree/Core/Position.h" line="91" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1a0e9ca2aafa7a4a786fbdd0c83bbdccd1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref></type>
@@ -347,7 +348,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="91" column="18"/>
+        <location file="iDynTree/Core/Position.h" line="92" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1a66dc701a9789b4f06badaed2722bdd65" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref></type>
@@ -364,7 +365,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="92" column="28"/>
+        <location file="iDynTree/Core/Position.h" line="93" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1a88c9b6606f756507b5d4755dccda244f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">SpatialAcc</ref></type>
@@ -381,7 +382,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="93" column="25"/>
+        <location file="iDynTree/Core/Position.h" line="94" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1a8e817bcd7259999322b29705f388d9f3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMomentum" kindref="compound">SpatialMomentum</ref></type>
@@ -398,7 +399,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="94" column="25"/>
+        <location file="iDynTree/Core/Position.h" line="95" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1a8712f068ccc27d06cb857efd9061386c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
@@ -415,7 +416,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="95" column="18"/>
+        <location file="iDynTree/Core/Position.h" line="96" column="18"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
@@ -438,7 +439,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="76" column="25"/>
+        <location file="iDynTree/Core/Position.h" line="77" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1ae43c016fee4cfd0f8bbb5c2da2cd9d80" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
@@ -455,7 +456,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="77" column="25"/>
+        <location file="iDynTree/Core/Position.h" line="78" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Position_1a0e6aa3aa05225fb775224d8bcfc56168" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref></type>
@@ -468,7 +469,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="108" column="25"/>
+        <location file="iDynTree/Core/Position.h" line="109" column="25"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="friend">
@@ -487,7 +488,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Position.h" line="106" column="25"/>
+        <location file="iDynTree/Core/Position.h" line="107" column="25"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -548,7 +549,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Core/Position.h" line="42" column="5" bodyfile="iDynTree/Core/Position.h" bodystart="43" bodyend="109"/>
+    <location file="iDynTree/Core/Position.h" line="42" column="5" bodyfile="iDynTree/Core/Position.h" bodystart="43" bodyend="110"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1VectorFixSize_1ad0f06a255dc213a5904d232f703a0192" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>allocator_type</name></member>
       <member refid="classiDynTree_1_1VectorFixSize_1affa1eab2d54d8227d8aeb402dc2dc1f7" prot="public" virt="non-virtual"><scope>iDynTree::Position</scope><name>begin</name></member>
