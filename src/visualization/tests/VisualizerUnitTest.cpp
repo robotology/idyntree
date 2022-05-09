@@ -28,6 +28,12 @@ void checkVizLoading(const iDynTree::Model & model)
     label.setSize(1.0);
     label.setPosition(iDynTree::Position(-1.0, -1.0, 0.3));
 
+    // Check if run is returning true
+    // Regression test for https://github.com/robotology/idyntree/issues/986
+    ok = viz.run();
+    ASSERT_IS_TRUE(ok);
+
+
     for(int i=0; i < 5; i++)
     {
         viz.draw();

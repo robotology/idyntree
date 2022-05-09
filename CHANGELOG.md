@@ -6,8 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased Major]
 
+## [5.2.0] - 2022-05-09
+
 ### Added
-- Added `DHChain` class to the bindings.
+- Added `DHChain` class to the bindings (https://github.com/robotology/idyntree/pull/984).
+
+### Fixed
+- Fixed problems of running two (or more) times the `iDynTree.Visualizer` class on Windows when using SDL >= 1.2.52 (https://github.com/robotology/idyntree/pull/988, https://github.com/robotology/idyntree/pull/986).
 
 ## [5.1.0] - 2022-02-25
 
