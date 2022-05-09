@@ -16,7 +16,6 @@
 #include "testModels.h"
 #include <iDynTree/Core/EigenHelpers.h>
 #include <iDynTree/Core/EigenSparseHelpers.h>
-#include <iDynTree/Core/TransformDerivative.h>
 #include <iDynTree/Core/TestUtils.h>
 #include <iDynTree/Core/SparseMatrix.h>
 #include <iDynTree/Model/ModelTestUtils.h>
@@ -31,63 +30,14 @@
 
 using namespace iDynTree;
 
-//TODO remove
-/**
- * Get random robot positions, velocities and accelerations
- * and external wrenches to be given as an input to InverseDynamics.
- */
-inline bool getRandomInverseDynamicsInputsCustom(FreeFloatingPos& pos,
-                                                FreeFloatingVel& vel,
-                                                FreeFloatingAcc& acc,
-                                                LinkNetExternalWrenches& extWrenches)
-{
-    //srand(time(NULL));
-    pos.worldBasePos() = Transform::Identity();
-    //pos.worldBasePos().setPosition(getRandomPosition());
-    //pos.worldBasePos().setPosition(Position(3,5,0));
-    //pos.worldBasePos().setRotation(Rotation::RPY(0., M_PI/2., 0.));
-    //pos.worldBasePos() = getRandomTransform();
-    
-    vel.baseVel().zero();
-    acc.baseAcc().zero();
 
 
-    //acc.baseAcc()(0) = 17;
-    //for(int i=0;i<6; i++) acc.baseAcc()(i) = 17;
-
-    //acc.baseAcc() = getRandomTwist();
-    //acc.baseAcc()(0) = 11.;
-    //acc.baseAcc()(1) = 13.;
-    //acc.baseAcc()(2) = 17.;
-    //acc.baseAcc()(3) = 7.;
-    //acc.baseAcc()(4) = 7.;
-    //acc.baseAcc()(5) = 9.;
-    
-    //vel.baseVel() =  getRandomTwist();
-    //vel.baseVel()(0) = 2.;
-    //vel.baseVel()(1) = 3.;
-    //vel.baseVel()(2) = 5.;
-    //vel.baseVel()(3) = 7.;
-
-    for(unsigned int jnt=0; jnt < pos.getNrOfPosCoords(); jnt++)
-    {
-        pos.jointPos()(jnt) = 0;
-    }
-
-    for(unsigned int jnt=0; jnt < vel.getNrOfDOFs(); jnt++)
-    {
-        vel.jointVel()(jnt) = 0;
-        acc.jointAcc()(jnt) = 0;
-    }
-
-    return true;
-}
-
+//computes \sum{{}^{B}X^{*}_{L} {}^{L}f^{x}_{L}}{L} = {}^{B}X^{*}_{G} {}^{G}hdot  
 Vector6 computeROCMInBaseUsingMeasurements(BerdyHelper& berdy,
                                           KinDynComputations& kinDynComputations,
                                           LinkPositions& linkPos,
                                           LinkVelArray&  linkVels,
-                                          LinkAccArray&  linkProperAccs, //TODO check if prop acc
+                                          LinkAccArray&  linkProperAccs,
                                           LinkNetExternalWrenches& extWrenches,
                                           LinkIndex baseIdx)
 {
@@ -98,62 +48,17 @@ Vector6 computeROCMInBaseUsingMeasurements(BerdyHelper& berdy,
         linkInertias(linkIdx) = berdy.model().getLink(linkIdx)->getInertia();
     }
 
-    // Set gravitational wrench vector
-    iDynTree::SpatialForceVector gravitationalWrenchInCentroidal;
-    gravitationalWrenchInCentroidal.zero();
-    gravitationalWrenchInCentroidal(2) = berdy.model().getTotalMass() * -9.81;
-
-    iDynTree::Vector6 centroidalMomentum;
-    centroidalMomentum.zero();
-
-    iDynTree::Vector6 rocmInBaseRaw;
-    rocmInBaseRaw.zero();
-
-    // {}^B_X*dot_Gbar {}^Gbar_h
-    iDynTree::Vector6 rocmInBaseBias;
-    rocmInBaseBias.zero();
+    iDynTree::SpatialForceVector rocm;
+    rocm.zero();
 
     // Set centroidal to world transform
-    iDynTree::Transform world_H_centroidal = iDynTree::Transform::Identity();
-    world_H_centroidal.setPosition(kinDynComputations.getCenterOfMassPosition());
-    std::cerr<<"Center of mass position: "<<kinDynComputations.getCenterOfMassPosition().toString()<<std::endl;
-    std::cerr<<"Base link idx: " <<baseIdx<<std::endl;
-
-    // base_H_centroidal transform
-    const iDynTree::Transform base_H_centroidal = kinDynComputations.getWorldBaseTransform().inverse() * world_H_centroidal;
-
-    // Compute gravitational wrench expressed in base
-    iDynTree::Vector6 gravitationalWrenchInBase;
-    gravitationalWrenchInBase.zero();
-    iDynTree::toEigen(gravitationalWrenchInBase) = iDynTree::toEigen(base_H_centroidal.asAdjointTransformWrench()) * iDynTree::toEigen(gravitationalWrenchInCentroidal);
-
-    // Get base transform A_H_B
-    const iDynTree::Transform world_H_base = linkPos(baseIdx);
-
-    // Get base velocity B_v_A,B
-    const iDynTree::Twist baseVelocityExpressedInBase = linkVels(baseIdx);
-
-    // Get base velocity expressed in world A_v_A,B = A_X_B * B_v_A,B
-    iDynTree::Vector6 baseVelocityExpressedInWorld;
-    iDynTree::toEigen(baseVelocityExpressedInWorld) = iDynTree::toEigen(world_H_base.asAdjointTransform()) * iDynTree::toEigen(baseVelocityExpressedInBase);
-
-    const iDynTree::Twist baseVelocityExpressedInWorldTwist = Twist(SpatialVector<SpatialMotionVector>(baseVelocityExpressedInWorld));
-
-    // Get base acceleration B_a_A,B
-    const iDynTree::Twist baseAccelerationExpressedInBase = linkProperAccs(baseIdx);
-
-    // Get base acceleration A_a_A,B = A_X*_B * B_a_A,B
-    iDynTree::Vector6 baseAccelerationExpressedInWorld;
-    iDynTree::toEigen(baseAccelerationExpressedInWorld) = iDynTree::toEigen(world_H_base.asAdjointTransformWrench()) * iDynTree::toEigen(baseAccelerationExpressedInBase);
+    iDynTree::Transform world_H_centroidal = iDynTree::Transform(iDynTree::Rotation::Identity(), kinDynComputations.getCenterOfMassPosition());
 
     // Iterate over measurements
     for(LinkIndex visitedLinkIndex = 0; visitedLinkIndex < berdy.model().getNrOfLinks(); visitedLinkIndex++)
     {
         // Get world_H_link transform
         const iDynTree::Transform world_H_link = linkPos(visitedLinkIndex);
-
-        // Get link to base transform
-        const iDynTree::Transform base_H_link = world_H_base.inverse() * world_H_link;
 
         // Compute link to centroidal transform
         const iDynTree::Transform centroidal_H_link = world_H_centroidal.inverse() * world_H_link;
@@ -162,137 +67,23 @@ Vector6 computeROCMInBaseUsingMeasurements(BerdyHelper& berdy,
         const iDynTree::Twist linkVelocityExpressedInLink = linkVels(visitedLinkIndex);
 
         // Get link acceleration L_a_A,L
-        const iDynTree::Twist linkAccelerationExpressedInLink = linkProperAccs(visitedLinkIndex);
+        const iDynTree::SpatialAcc linkAccelerationExpressedInLink = linkProperAccs(visitedLinkIndex);
 
-        // Get L_v_A,L = L_X_A * L_v_A,L
-        iDynTree::Vector6 linkVelocityExpressedInWorld;
-        {
-            linkVelocityExpressedInWorld.zero();
-            iDynTree::toEigen(linkVelocityExpressedInWorld) = iDynTree::toEigen(world_H_link.asAdjointTransform()) * iDynTree::toEigen(linkVelocityExpressedInLink);
-        }
+        // velocity contribution
+        const iDynTree::SpatialForceVector linkInertiaMultipliedVelocity = linkInertias(visitedLinkIndex).multiply(linkVelocityExpressedInLink);
+        const iDynTree::SpatialForceVector rocmLinkVelContrib = centroidal_H_link * (linkVelocityExpressedInLink.cross(linkInertiaMultipliedVelocity));
+        
+        // acceleration contribution
+        const iDynTree::SpatialForceVector rocmLinkAccContrib = centroidal_H_link * (linkInertias(visitedLinkIndex).multiply(linkAccelerationExpressedInLink));
 
-        // Get L_v_B,L = (L_X_A * A_v_A,L) - (L_X_B * B_X_A * A_v_A,B) = L_X_A * (A_v_A,L - A_v_A,B)
-        // from Eq (3.5a) from silvio's thesis https://traversaro.github.io/phd-thesis/traversaro-phd-thesis.pdf (Broken reference)
-        iDynTree::Vector6 linkVelocityWrtBaseExpressedInLink;
-        {
-            linkVelocityWrtBaseExpressedInLink.zero();
-            iDynTree::toEigen(linkVelocityWrtBaseExpressedInLink) = iDynTree::toEigen(world_H_link.inverse().asAdjointTransform()) * (iDynTree::toEigen(linkVelocityExpressedInWorld) - iDynTree::toEigen(baseVelocityExpressedInWorld));
-        }
-        const iDynTree::Twist linkVelocityWrtBaseExpressedInLinkTwist = Twist(SpatialVector<SpatialMotionVector>(linkVelocityWrtBaseExpressedInLink));
-
-        // Get L_a_A,L = L_X*_A * A_a_A,L 
-        //iDynTree::Vector6 linkAccelerationExpressedInLink;
-        //{
-        //    linkAccelerationExpressedInLink.zero();
-        //    iDynTree::toEigen(linkAccelerationExpressedInLink) = iDynTree::toEigen(world_H_link.inverse().asAdjointTransformWrench()) * iDynTree::toEigen(linkAccelerationExpressedInWorld);
-        //    std::cerr<<std::endl<<"L_a_A,L:"
-        //             <<std::endl<<"L_X*_A: "<<std::endl<<world_H_link.inverse().asAdjointTransformWrench().toString()
-        //             <<std::endl<<"A_a_A,L: "<<linkAccelerationExpressedInWorld.toString()<<std::endl;
-        //}
-
-        // Compute link momentum - G_X*_L * I_L * L_v_A,L
-        iDynTree::Vector6 linkMomentum;
-        {
-            linkMomentum.zero();
-            iDynTree::toEigen(linkMomentum) = iDynTree::toEigen(centroidal_H_link.asAdjointTransformWrench()) *
-                                              iDynTree::toEigen(linkInertias(visitedLinkIndex).asMatrix()) *
-                                              iDynTree::toEigen(linkVelocityExpressedInLink);
-
-            //std::cerr<<std::endl<<"Link momentum for link "<<visitedLinkIndex<<": "<<std::endl<<
-            //            "G_H*_L:"<< std::endl<<centroidal_H_link.asAdjointTransformWrench().toString()<<
-            //            "L_I_L: "<< std::endl<<linkInertias(visitedLinkIndex).asMatrix().toString()<<
-            //            "L_v_A,L: "<< std::endl<<linkVelocityExpressedInLink.toString()<<std::endl<<std::endl;
-                    
-        }
-
-        // Update centroidal momentum
-        iDynTree::toEigen(centroidalMomentum) += iDynTree::toEigen(linkMomentum);
-        std::cerr<<"Link "<<visitedLinkIndex<<" momentum: "<<linkMomentum.toString()<<std::endl;
-
-        // Compute link rate of change of momentum (expressed in base) term with accelerations -  B_X*_L * I_L * L_a_A,L
-        //TODO is it okay with B_X*_L * I_L * L_a_A,L?? check inertia
-        iDynTree::Vector6 linkROCMInBase_acc_term;
-        iDynTree::toEigen(linkROCMInBase_acc_term) = iDynTree::toEigen(base_H_link.asAdjointTransformWrench()) *
-                                                     iDynTree::toEigen(linkInertias(visitedLinkIndex).asMatrix()) *
-                                                     iDynTree::toEigen(linkAccelerationExpressedInLink);
-
-        std::cerr<<std::endl<<
-        "Link rocm in base acceleration term:"<<std::endl<<
-        "B_X*_L: "<<std::endl<<base_H_link.asAdjointTransformWrench().toString()<<std::endl<<
-        "L_I_L: "<<std::endl<<linkInertias(visitedLinkIndex).asMatrix().toString()<<std::endl<<
-        "L_a_A,L: "<<linkAccelerationExpressedInLink.toString()<<std::endl;
-                    
-
-        // Compute link rate of change of momentum (expressed in base) term with velocity - B_Xdot*_L * I_L * L_v_A,L
-        iDynTree::Vector6 linkROCMInBase_vel_term;
-        iDynTree::toEigen(linkROCMInBase_vel_term) = iDynTree::toEigen(base_H_link.asAdjointTransformWrench()) *
-                                                      iDynTree::toEigen(linkVelocityWrtBaseExpressedInLinkTwist.asCrossProductMatrixWrench()) *
-                                                      iDynTree::toEigen(linkInertias(visitedLinkIndex).asMatrix()) *
-                                                      iDynTree::toEigen(linkVelocityExpressedInLink);
-
-        // Update ROCM in base
-        // Update rate of change of momentum
-        iDynTree::toEigen(rocmInBaseRaw) += iDynTree::toEigen(linkROCMInBase_acc_term) +
-                                        iDynTree::toEigen(linkROCMInBase_vel_term);
-
-        std::cerr<<"ROCM: "<<
-                    std::endl<<"ROCM in base: "<<rocmInBaseRaw.toString()<<
-                    std::endl<<"Acc term: "<<linkROCMInBase_acc_term.toString()<<
-                    std::endl<<"Vel term: "<<linkROCMInBase_vel_term.toString()<<std::endl;
-
+        // update rocm
+        rocm = rocm + rocmLinkVelContrib + rocmLinkAccContrib;
     }
 
+    // base_H_centroidal transform
+    const iDynTree::Transform base_H_centroidal = kinDynComputations.getWorldBaseTransform().inverse() * world_H_centroidal;
 
-
-    // Compute position derivative (comVel - baseLinVel)
-    iDynTree::Vector3 posDerivative;
-    {
-        posDerivative.setVal(0, kinDynComputations.getCenterOfMassVelocity().getVal(0) - baseVelocityExpressedInWorldTwist.getLinearVec3().getVal(0));
-        posDerivative.setVal(1, kinDynComputations.getCenterOfMassVelocity().getVal(1) - baseVelocityExpressedInWorldTwist.getLinearVec3().getVal(1));
-        posDerivative.setVal(2, kinDynComputations.getCenterOfMassVelocity().getVal(2) - baseVelocityExpressedInWorldTwist.getLinearVec3().getVal(2));
-    }
-    
-    // Compute rotation derivative ( base_dotR_world = ( Skew(baseAngVel) * world_R_base)' )
-    //iDynTree::Matrix3x3 rotDerivative;
-    //iDynTree::toEigen(rotDerivative) = iDynTree::toEigen(world_H_base.getRotation()).transpose() *
-    //                                   iDynTree::skew( iDynTree::toEigen(baseVelocityExpressedInWorld.getAngularVec3() ) ).transpose();
-
-    iDynTree::AngularMotionVector3 baseAngularVelocityExpressedInBase = baseVelocityExpressedInWorldTwist.getAngularVec3().changeCoordFrame(world_H_base.inverse().getRotation());
-    std::cerr<<"B_w_B: "<< baseAngularVelocityExpressedInBase.toString()<<std::endl;
-
-    auto rotDerivativeSkew = iDynTree::skew(-iDynTree::toEigen(baseAngularVelocityExpressedInBase));
-
-    iDynTree::Matrix3x3 rotDerivative;
-    iDynTree::toEigen(rotDerivative) = rotDerivativeSkew * iDynTree::toEigen(world_H_base.inverse().getRotation());
-    
-    std::cerr<<"ROT derivative: "<<rotDerivative.toString()<<std::endl;
-    std::cerr<<"Skew for rotation derivative :"<<rotDerivativeSkew<<std::endl;
-    std::cerr<<"Rot :"<<world_H_base.inverse().getRotation().toString()<<std::endl;
-
-    iDynTree::TransformDerivative base_dotH_centroidal(rotDerivative, posDerivative);
-
-    // Compute the bias term with centroidal momentum
-    iDynTree::SpatialMomentum centroidalMom = iDynTree::SpatialMomentum(SpatialVector<SpatialForceVector>(centroidalMomentum));
-
-    // Compute base_dotX*_centroidal * centroidal momentum
-    iDynTree::Vector6 biasTermFromCentroidalMomentum; 
-    iDynTree::toEigen(biasTermFromCentroidalMomentum) = iDynTree::toEigen(base_dotH_centroidal.asAdjointTransformWrenchDerivative(base_H_centroidal)) * iDynTree::toEigen(centroidalMom);
-
-    std::cerr<<"B_X*dot_G: "<<base_dotH_centroidal.asAdjointTransformWrenchDerivative(base_H_centroidal).toString()<<std::endl;
-
-    std::cerr<<"Computed ROCM:"<<
-                std::endl<<"ROCM in base: "<<rocmInBaseRaw.toString()<<
-                std::endl<<"Bias term: "<<biasTermFromCentroidalMomentum.toString()<<
-                "Gravitational wrench in base:"<<gravitationalWrenchInBase.toString()<<std::endl;
-    
-    //TODO check this
-    gravitationalWrenchInBase.zero();
-
-    // Computed rate of change of momentum
-    Vector6 rocmInBase;
-    iDynTree::toEigen(rocmInBase) = iDynTree::toEigen(rocmInBaseRaw)
-                                    - iDynTree::toEigen(biasTermFromCentroidalMomentum)
-                                    - iDynTree::toEigen(gravitationalWrenchInBase);
+    const iDynTree::Vector6 rocmInBase = (base_H_centroidal * rocm).asVector(); 
 
     return rocmInBase;
 }
@@ -306,7 +97,6 @@ void testBerdySensorMatrices(BerdyHelper & berdy, std::string filename)
     FreeFloatingAcc generalizedProperAccs(berdy.model());
     LinkNetExternalWrenches extWrenches(berdy.model());
 
-    //getRandomInverseDynamicsInputsCustom(pos,vel,generalizedProperAccs,extWrenches);
     getRandomInverseDynamicsInputs(pos,vel,generalizedProperAccs,extWrenches);
 
     // Force the base linear velocity to be zero for ensure consistency with the compute buffers
@@ -323,30 +113,15 @@ void testBerdySensorMatrices(BerdyHelper & berdy, std::string filename)
     ForwardPosVelAccKinematics(berdy.model(),berdy.dynamicTraversal(),
                                pos, vel, generalizedProperAccs,
                                linkPos,linkVels,linkProperAccs);
-    
-    LinkAccArray linkAccs(berdy.model());
-    for(LinkIndex visitedLinkIndex = 0; visitedLinkIndex < berdy.model().getNrOfLinks(); visitedLinkIndex++)
-    {
-        linkAccs(visitedLinkIndex).setLinearVec3(linkProperAccs(visitedLinkIndex).getLinearVec3());
-        linkAccs(visitedLinkIndex).setAngularVec3(linkProperAccs(visitedLinkIndex).getAngularVec3());
-        //TODO gravity?
-        //linkAccs(visitedLinkIndex).getLinearVec3()(2) += -9.81;
-    }
-
     RNEADynamicPhase(berdy.model(),berdy.dynamicTraversal(),
-                     pos.jointPos(),linkVels,linkAccs,//linkAccs,linkProperAccs
+                     pos.jointPos(),linkVels,linkProperAccs,
                      extWrenches,intWrenches,genTrqs);
 
     // Propagate kinematics also inside berdy
 
-    std::cerr<<"LINK PROP ACC: "<< linkProperAccs.toString(berdy.model());
-    std::cerr<<"LINK accelerations used: "<< linkProperAccs.toString(berdy.model());
-    std::cerr<<"Link vels: "<<linkVels.toString(berdy.model());
-    std::cerr<<"Link positions: "<<std::endl<<linkPos.toString(berdy.model());
-
     // Correct for the unconsistency between the input net wrenches and the residual of the RNEA
     extWrenches(berdy.dynamicTraversal().getBaseLink()->getIndex()) = extWrenches(berdy.dynamicTraversal().getBaseLink()->getIndex())+genTrqs.baseWrench();
-    // extWrenches(berdy.dynamicTraversal().getBaseLink()->getIndex())(2) = 9.81;
+
     // Generate the d vector of dynamical variables
     VectorDynSize d(berdy.getNrOfDynamicVariables());
 
@@ -366,8 +141,6 @@ void testBerdySensorMatrices(BerdyHelper & berdy, std::string filename)
     // Get the angular v
     LinkIndex baseIdx = berdy.dynamicTraversal().getBaseLink()->getIndex();
     berdy.updateKinematicsFromFloatingBase(pos.jointPos(),vel.jointVel(),baseIdx,linkVels(baseIdx).getAngularVec3());
-
-    std::cerr<<"Ext wrenches are: "<<std::endl<<extWrenches.toString(berdy.model());
 
     berdy.serializeDynamicVariables(linkProperAccs,
                                     linkNetWrenchesWithoutGravity,
@@ -413,39 +186,34 @@ void testBerdySensorMatrices(BerdyHelper & berdy, std::string filename)
         y.zero();
         SensorsMeasurements sensMeas(berdy.sensors());
         bool ok = predictSensorsMeasurementsFromRawBuffers(berdy.model(),berdy.sensors(),berdy.dynamicTraversal(),
-                                                           linkVels,linkAccs,intWrenches,sensMeas);
+                                                           linkVels,linkProperAccs,intWrenches,sensMeas);
  
+	    // Handle rate of change of momentum in base
         Vector6 rocm;
         rocm.zero();
         if(berdy.getOptions().includeROCMAsSensor)
         {
-            // set kyndyncomputations object for ROCM computation
+            // set KinDynComputations object for CoM computation
             KinDynComputations kinDynComputations;
             kinDynComputations.setFrameVelocityRepresentation(iDynTree::BODY_FIXED_REPRESENTATION);
             kinDynComputations.loadRobotModel(berdy.model());
 
             Vector3 worldGravityAcc;
             worldGravityAcc.zero();
-            //worldGravityAcc[2] = -9.81;
 
-            if(true)
-            {
-                kinDynComputations.setRobotState(linkPos(baseIdx), //w_T_base
-                                                pos.jointPos(), //joint positions
-                                                linkVels(baseIdx), //base velocity
-                                                vel.jointVel(), // joint velocities
-                                                worldGravityAcc); // world gravity
-            }
+            kinDynComputations.setRobotState(linkPos(baseIdx), //w_T_base
+                                            pos.jointPos(), //joint positions
+                                            linkVels(baseIdx), //base velocity
+                                            vel.jointVel(), // joint velocities
+                                            worldGravityAcc); // world gravity
 
             rocm = computeROCMInBaseUsingMeasurements(berdy,
                                                       kinDynComputations,
                                                       linkPos,
                                                       linkVels,
-                                                      linkAccs,
+                                                      linkProperAccs,
                                                       extWrenches,
                                                       baseIdx);
-            
-            std::cerr<<std::endl<<"Rocm is "<<rocm.toString()<<std::endl<<std::endl;
         }
 
         ASSERT_IS_TRUE(ok);
@@ -463,14 +231,13 @@ void testBerdySensorMatrices(BerdyHelper & berdy, std::string filename)
         //std::cerr << "Y : " << std::endl;
         //std::cerr << Y.description(true) << std::endl;
         //std::cerr << "d :\n" << d.toString() << std::endl;
-        
+        /*
         std::cerr << "Y*d :\n" << toEigen(Y)*toEigen(d) << std::endl;
         std::cerr << "bY :\n" << bY.toString() << std::endl;
         std::cerr << "y from model:\n" << y.toString() << std::endl;
-        
+        */
 
         // Check if the two vectors are equal
-        std::cerr << "Testing y and yFromBerdy" << std::endl;
         ASSERT_EQUAL_VECTOR(y,yFromBerdy);
     }
 }
@@ -600,6 +367,7 @@ void testBerdyOriginalFixedBase(BerdyHelper & berdy, std::string filename)
         ok = predictSensorsMeasurementsFromRawBuffers(berdy.model(),berdy.sensors(),berdy.dynamicTraversal(),
                                                       linkVels,linkProperAccs,intWrenches,sensMeas);
         ASSERT_IS_TRUE(ok);
+	    // rocm is not used with this variant
         Vector6 dummyRocm;
         dummyRocm.zero();
         ok = berdy.serializeSensorVariables(sensMeas,extWrenches,genTrqs.jointTorques(),generalizedProperAccs.jointAcc(),intWrenches,dummyRocm,y);
@@ -699,7 +467,7 @@ void testBerdyHelpers(std::string fileName)
     ok = berdyHelper.init(estimator.model(), estimator.sensors(), options);
     ASSERT_IS_TRUE(ok);
     testBerdySensorMatrices(berdyHelper, fileName);
-    std::cerr<<"OK DONE"<<std::endl;ASSERT_IS_TRUE(false);
+    //std::cerr<<"OK DONE"<<std::endl;ASSERT_IS_TRUE(false);
 }
 
 int main()
