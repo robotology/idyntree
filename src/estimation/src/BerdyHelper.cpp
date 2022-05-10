@@ -20,7 +20,6 @@
 #include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Sensors/Sensors.h>
 #include <iDynTree/Sensors/AllSensorsTypes.h>
-#include <iDynTree/KinDynComputations.h>
 
 #include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
 
@@ -181,10 +180,7 @@ bool BerdyHelper::init(const Model& model,
     m_areModelAndSensorsValid = false;
 
     m_model = model;
-    if(options.berdyVariant!=BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES)
-    {
-        m_sensors = sensors;
-    }
+    m_sensors = sensors;
     m_options = options;
 
     LinkIndex baseLinkIndex;
@@ -215,6 +211,15 @@ bool BerdyHelper::init(const Model& model,
     base_H_links.resize(m_model.getNrOfLinks());
 
     bool res = m_options.checkConsistency();
+    for(std::string& rocmConstraintLinkName : m_options.rocmConstraintLinkNamesVector)
+    {
+        if(!m_model.isLinkNameUsed(rocmConstraintLinkName))
+        {
+            
+            reportError("BerdyHelpers","init",("Link name "+rocmConstraintLinkName+" specified in rocmConstraintLinkNamesVector does not exist.").c_str());
+            res = false;
+        }
+    }
 
     if( !res )
     {
@@ -306,10 +311,10 @@ bool BerdyHelper::initSensorsMeasurements()
     berdySensorTypeOffsets.jointWrenchOffset = m_nrOfSensorsMeasurements;
 
     // Check the considered joint wrenches are actually part of the model
+    berdySensorsInfo.wrenchSensors.clear();
     if(m_options.berdyVariant!=BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES)
     {
         berdySensorsInfo.jntIdxToOffset.resize(m_model.getNrOfJoints(),JOINT_INVALID_INDEX);
-        berdySensorsInfo.wrenchSensors.clear();
         berdySensorsInfo.wrenchSensors.reserve(m_options.jointOnWhichTheInternalWrenchIsMeasured.size());
         for(size_t i=0; i < m_options.jointOnWhichTheInternalWrenchIsMeasured.size(); i++)
         {
@@ -1318,8 +1323,10 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
     
     if(m_options.berdyVariant!=BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES)
     {
-        //TODO check return
-        computeBerdySensorsMatricesFromModel(Y, bY);
+        if(!computeBerdySensorsMatricesFromModel(Y, bY))
+        {
+            return false;
+        }
     }
     
     ////////////////////////////////////////////////////////////////////////
@@ -1516,8 +1523,7 @@ bool BerdyHelper::initBerdyFloatingBase()
         // Non-collocated wrenches dynamic variables include 6*nrOfLinks for the net external wrenches
         m_nrOfDynamicalVariables = 6*m_model.getNrOfLinks();
 
-        //TODO[YESHI]: Double check this
-        m_nrOfDynamicEquations = 6*m_model.getNrOfLinks();
+        m_nrOfDynamicEquations = 0;
     }
     else
     {
@@ -1528,8 +1534,6 @@ bool BerdyHelper::initBerdyFloatingBase()
         m_nrOfDynamicEquations   = 6*m_model.getNrOfLinks() + 6*m_model.getNrOfJoints();
     }
 
-    
-    //TODO[YESHI] check comConstraintLinkNamesVector is correctly set
     if (m_options.includeROCMAsSensor) {
         if (m_options.rocmConstraintLinkNamesVector.size() == 0)
         {
