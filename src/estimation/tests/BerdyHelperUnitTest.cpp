@@ -33,7 +33,7 @@ using namespace iDynTree;
 
 
 //computes \sum{{}^{B}X^{*}_{L} {}^{L}f^{x}_{L}}{L} = {}^{B}X^{*}_{G} {}^{G}hdot  
-Vector6 computeROCMInBaseUsingMeasurements(BerdyHelper& berdy,
+SpatialForceVector computeROCMInBaseUsingMeasurements(BerdyHelper& berdy,
                                           KinDynComputations& kinDynComputations,
                                           LinkPositions& linkPos,
                                           LinkVelArray&  linkVels,
@@ -83,9 +83,7 @@ Vector6 computeROCMInBaseUsingMeasurements(BerdyHelper& berdy,
     // base_H_centroidal transform
     const iDynTree::Transform base_H_centroidal = kinDynComputations.getWorldBaseTransform().inverse() * world_H_centroidal;
 
-    const iDynTree::Vector6 rocmInBase = (base_H_centroidal * rocm).asVector(); 
-
-    return rocmInBase;
+    return base_H_centroidal * rocm;
 }
 
 void testBerdySensorMatrices(BerdyHelper & berdy, std::string filename)
@@ -185,7 +183,7 @@ void testBerdySensorMatrices(BerdyHelper & berdy, std::string filename)
                                                            linkVels,linkProperAccs,intWrenches,sensMeas);
  
 	    // Handle rate of change of momentum in base
-        Vector6 rocm;
+        SpatialForceVector rocm;
         rocm.zero();
         if(berdy.getOptions().includeROCMAsSensor)
         {
@@ -364,7 +362,7 @@ void testBerdyOriginalFixedBase(BerdyHelper & berdy, std::string filename)
                                                       linkVels,linkProperAccs,intWrenches,sensMeas);
         ASSERT_IS_TRUE(ok);
 	    // rocm is not used with this variant
-        Vector6 dummyRocm;
+        SpatialForceVector dummyRocm;
         dummyRocm.zero();
         ok = berdy.serializeSensorVariables(sensMeas,extWrenches,genTrqs.jointTorques(),generalizedProperAccs.jointAcc(),intWrenches,dummyRocm,y);
         ASSERT_IS_TRUE(ok);

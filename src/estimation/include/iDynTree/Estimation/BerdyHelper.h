@@ -674,8 +674,8 @@ public:
                                   JointDOFsDoubleArray    & jointTorques,
                                   JointDOFsDoubleArray    & jointAccs,
                                   LinkInternalWrenches    & linkJointWrenches,
-                                  Vector6                 & rocm,
-                                  VectorDynSize           & y); // Rate of Change of Momentum (rocm ) denoted through 6x1 spatial momentum vector. //TODO Double check this
+                                  SpatialForceVector      & rocm, // Rate of Change of Momentum (rocm )
+                                  VectorDynSize           & y);
 
 
     /**

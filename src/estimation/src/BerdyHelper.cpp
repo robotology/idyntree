@@ -2213,7 +2213,7 @@ bool BerdyHelper::serializeSensorVariables(SensorsMeasurements& sensMeas,
                                            JointDOFsDoubleArray& jointTorques,
                                            JointDOFsDoubleArray& jointAccs,
                                            LinkInternalWrenches& linkJointWrenches,
-                                           Vector6& rocm,
+                                           SpatialForceVector& rocm,
                                            VectorDynSize& y)
 {
     bool ret=true;
