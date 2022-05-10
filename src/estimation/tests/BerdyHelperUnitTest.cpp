@@ -159,24 +159,20 @@ void testBerdySensorMatrices(BerdyHelper & berdy, std::string filename)
     bool ok = berdy.getBerdyMatrices(D,bD,Y,bY);
     ASSERT_IS_TRUE(ok);
 
-    // Variant BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES does not have D and bD
-    if(berdy.getOptions().berdyVariant != BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES)
-    {
-        VectorDynSize dynamicsResidual(berdy.getNrOfDynamicEquations()), zeroRes(berdy.getNrOfDynamicEquations());
+    VectorDynSize dynamicsResidual(berdy.getNrOfDynamicEquations()), zeroRes(berdy.getNrOfDynamicEquations());
 
-        toEigen(dynamicsResidual) = toEigen(D)*toEigen(d) + toEigen(bD);
+    toEigen(dynamicsResidual) = toEigen(D)*toEigen(d) + toEigen(bD);
 
-        /*
-        std::cerr << "D : " << std::endl;
-        std::cerr << D.description(true) << std::endl;
-        std::cerr << "d :\n" << d.toString() << std::endl;
-        std::cerr << "D*d :\n" << toEigen(D)*toEigen(d) << std::endl;
-        std::cerr << "bD :\n" << bD.toString() << std::endl;
-        */
+    /*
+    std::cerr << "D : " << std::endl;
+    std::cerr << D.description(true) << std::endl;
+    std::cerr << "d :\n" << d.toString() << std::endl;
+    std::cerr << "D*d :\n" << toEigen(D)*toEigen(d) << std::endl;
+    std::cerr << "bD :\n" << bD.toString() << std::endl;
+    */
 
-        ASSERT_EQUAL_VECTOR(dynamicsResidual, zeroRes);
-    }
-
+    ASSERT_EQUAL_VECTOR(dynamicsResidual, zeroRes);
+    
     if( berdy.getNrOfSensorsMeasurements() > 0 )
     {
         std::cout << "BerdyHelperUnitTest, testing sensors matrix for model " << filename <<  std::endl;
@@ -439,7 +435,7 @@ void testBerdyHelpers(std::string fileName)
         std::cerr << "Skipping ORIGINAL_BERDY_FIXED_BASE tests for model " << fileName << " because some assumptions of ORIGINAL_BERDY_FIXED_BASE are not respected" << std::endl;
     }
 
-    /*// We test the floating base BERDY
+    // We test the floating base BERDY
     options.berdyVariant = iDynTree::BERDY_FLOATING_BASE;
     // For now floating berdy needs all the ext wrenches as dynamic variables
     options.includeAllNetExternalWrenchesAsDynamicVariables = true;
@@ -455,7 +451,7 @@ void testBerdyHelpers(std::string fileName)
     ok = berdyHelper.init(estimator.model(), estimator.sensors(), options);
     ASSERT_IS_TRUE(ok);
     testBerdySensorMatrices(berdyHelper, fileName);
-*/
+
     // We test the floating base BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES
     options.berdyVariant = iDynTree::BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES;
     // Include Rate Of Change of Momentum
@@ -463,11 +459,11 @@ void testBerdyHelpers(std::string fileName)
     options.includeAllJointTorquesAsSensors = false;
     options.includeAllJointAccelerationsAsSensors = false;
     options.includeAllNetExternalWrenchesAsSensors = true;
-    //options.jointOnWhichTheInternalWrenchIsMeasured.clear();
+    options.includeAllNetExternalWrenchesAsDynamicVariables = true;
     ok = berdyHelper.init(estimator.model(), estimator.sensors(), options);
     ASSERT_IS_TRUE(ok);
     testBerdySensorMatrices(berdyHelper, fileName);
-    //std::cerr<<"OK DONE"<<std::endl;ASSERT_IS_TRUE(false);
+
 }
 
 int main()
