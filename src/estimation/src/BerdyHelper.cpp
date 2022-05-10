@@ -269,7 +269,8 @@ bool BerdyHelper::initSensorsMeasurements()
     // in sensorsList (informally: the number of measurements of sensors
     // contained in the robot model) plus the additional/fictitious sensors
     // specified in the BerdyOptions
-    // List is empty if Berdy variant is BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES
+    // The sensors in the robot model are not used if 
+    // Berdy variant is BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES
     if(m_options.berdyVariant != BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES)
     {
         m_nrOfSensorsMeasurements = m_sensors.getSizeOfAllSensorsMeasurements();
@@ -476,7 +477,8 @@ IndexRange BerdyHelper::getRangeLinkVariable(BerdyDynamicVariablesTypes dynamicV
     else
     {
         IndexRange ret;
-        assert(m_options.berdyVariant == BERDY_FLOATING_BASE || m_options.berdyVariant == BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES);
+        assert(m_options.berdyVariant == BERDY_FLOATING_BASE ||
+               (m_options.berdyVariant == BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES && dynamicVariableType == NET_EXT_WRENCH));
         assert(m_options.includeAllNetExternalWrenchesAsDynamicVariables);
         // For BERDY_FLOATING_BASE, the only two link dynamic variable are the proper classical acceleration and the
         // external force-torque
@@ -531,8 +533,7 @@ IndexRange BerdyHelper::getRangeJointVariable(BerdyDynamicVariablesTypes dynamic
     else
     {
         IndexRange ret;
-		//TODO remove BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES?
-        assert(m_options.berdyVariant == BERDY_FLOATING_BASE || m_options.berdyVariant == BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES);
+        assert(m_options.berdyVariant == BERDY_FLOATING_BASE);
         assert(m_options.includeAllNetExternalWrenchesAsDynamicVariables);
 
         int totalSizeOfLinkVariables  = 12*m_model.getNrOfLinks();
@@ -569,8 +570,7 @@ IndexRange BerdyHelper::getRangeDOFVariable(BerdyDynamicVariablesTypes dynamicVa
     else
     {
         IndexRange ret;
-		//TODO remove BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES?
-        assert(m_options.berdyVariant == BERDY_FLOATING_BASE || m_options.berdyVariant == BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES);
+        assert(m_options.berdyVariant == BERDY_FLOATING_BASE);
         assert(m_options.includeAllNetExternalWrenchesAsDynamicVariables);
 
         int totalSizeOfLinkVariables  = 12*m_model.getNrOfLinks();
@@ -1954,52 +1954,64 @@ void BerdyHelper::cacheDynamicVariablesOrderingFloatingBase()
      * * All the dof variables (dof acceleration), ordered using the dof index.
      */
 
+    if(m_options.berdyVariant!=BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES)
+    {
+        // The non collocated external wrenches problem does not use joint/dof variables
+        // or links proper classical accelerations 
+
+        for (LinkIndex link = 0; link < static_cast<LinkIndex>(m_model.getNrOfLinks()); ++link)
+        {
+            std::string linkName = m_model.getLinkName(link);
+
+            BerdyDynamicVariable acceleration;
+            acceleration.type = LINK_BODY_PROPER_CLASSICAL_ACCELERATION;
+            acceleration.id = linkName;
+            acceleration.range = getRangeLinkVariable(acceleration.type , link);
+
+            m_dynamicVariablesOrdering.push_back(acceleration);
+
+        }
+
+        for (JointIndex jntIdx = 0; jntIdx < static_cast<JointIndex>(m_model.getNrOfJoints()); ++jntIdx)
+        {
+            IJointPtr joint = m_model.getJoint(jntIdx);
+
+            BerdyDynamicVariable jointForceTorque;
+            jointForceTorque.type = JOINT_WRENCH;
+            jointForceTorque.id = m_model.getJointName(jntIdx);
+            jointForceTorque.range = getRangeJointVariable(jointForceTorque.type , jntIdx);
+
+            m_dynamicVariablesOrdering.push_back(jointForceTorque);
+
+            // If the joint is not fixed, we also add the descriptor of the acceleration of the relative dof
+            // The internal order of the descriptors will be fixed by the call to std::sort
+            if (joint->getNrOfDOFs() > 0)
+            {
+                // TODO(traversaro) At the time of implementing this (late 2017) the concept of dof name is not
+                // present in iDynTree . We will then just assume that the joint have at maximum one dof.
+                // This can be fixed in the future by introducing a proper dof name
+                assert(joint->getNrOfDOFs() == 1);
+
+                BerdyDynamicVariable dofAcceleration;
+                dofAcceleration.type = DOF_ACCELERATION;
+                dofAcceleration.id = m_model.getJointName(jntIdx);
+                dofAcceleration.range = getRangeDOFVariable(dofAcceleration.type, joint->getDOFsOffset());
+
+                m_dynamicVariablesOrdering.push_back(dofAcceleration);
+            }
+        }
+    }
+
     for (LinkIndex link = 0; link < static_cast<LinkIndex>(m_model.getNrOfLinks()); ++link)
     {
         std::string linkName = m_model.getLinkName(link);
-
-        BerdyDynamicVariable acceleration;
-        acceleration.type = LINK_BODY_PROPER_CLASSICAL_ACCELERATION;
-        acceleration.id = linkName;
-        acceleration.range = getRangeLinkVariable(acceleration.type , link);
 
         BerdyDynamicVariable netExtWrench;
         netExtWrench.type = NET_EXT_WRENCH;
         netExtWrench.id = linkName;
         netExtWrench.range = getRangeLinkVariable(netExtWrench.type , link);
 
-        m_dynamicVariablesOrdering.push_back(acceleration);
         m_dynamicVariablesOrdering.push_back(netExtWrench);
-
-    }
-
-    for (JointIndex jntIdx = 0; jntIdx < static_cast<JointIndex>(m_model.getNrOfJoints()); ++jntIdx)
-    {
-        IJointPtr joint = m_model.getJoint(jntIdx);
-
-        BerdyDynamicVariable jointForceTorque;
-        jointForceTorque.type = JOINT_WRENCH;
-        jointForceTorque.id = m_model.getJointName(jntIdx);
-        jointForceTorque.range = getRangeJointVariable(jointForceTorque.type , jntIdx);
-
-        m_dynamicVariablesOrdering.push_back(jointForceTorque);
-
-        // If the joint is not fixed, we also add the descriptor of the acceleration of the relative dof
-        // The internal order of the descriptors will be fixed by the call to std::sort
-        if (joint->getNrOfDOFs() > 0)
-        {
-            // TODO(traversaro) At the time of implementing this (late 2017) the concept of dof name is not
-            // present in iDynTree . We will then just assume that the joint have at maximum one dof.
-            // This can be fixed in the future by introducing a proper dof name
-            assert(joint->getNrOfDOFs() == 1);
-
-            BerdyDynamicVariable dofAcceleration;
-            dofAcceleration.type = DOF_ACCELERATION;
-            dofAcceleration.id = m_model.getJointName(jntIdx);
-            dofAcceleration.range = getRangeDOFVariable(dofAcceleration.type, joint->getDOFsOffset());
-
-            m_dynamicVariablesOrdering.push_back(dofAcceleration);
-        }
     }
 
     //To avoid any problem, sort m_dynamicVariablesOrdering by range.offset
