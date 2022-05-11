@@ -1724,6 +1724,10 @@ bool BerdyHelper::getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, Vecto
         break;
     case BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES:
         // D and bD are not used with this variant
+        D.resize(m_nrOfDynamicEquations,m_nrOfDynamicalVariables);
+        bD.resize(m_nrOfDynamicEquations);
+        matrixDElements.clear();
+        bD.zero();
         break;
     default:
         reportError("BerdyHelpers", "getBerdyMatrices", "unknown berdy variant");
