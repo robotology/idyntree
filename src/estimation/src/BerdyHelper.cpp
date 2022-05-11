@@ -1497,14 +1497,14 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
             LinkIndex idx = m_model.getLinkIndex(linkName);
 
             // Get the column index corresponding to the net link external wrench sensor
-            IndexRange netExternalWrenchSensor = this->getRangeLinkSensorVariable(NET_EXT_WRENCH_SENSOR, idx);
+            IndexRange netExternalWrenchVariableIndexRange = this->getRangeLinkVariable(NET_EXT_WRENCH, idx);
 
             // Get base to link transform
             Transform base_X_link = base_H_links(idx);
 
             // Get link to base rotation
             matrixYElements.addSubMatrix(rocmRange.offset,
-                                         netExternalWrenchSensor.offset,
+                                         netExternalWrenchVariableIndexRange.offset,
                                          base_X_link.asAdjointTransformWrench());
 
         }
