@@ -137,6 +137,12 @@ bool BerdyOptions::checkConsistency()
         return false;
     }
 
+    if(this->includeROCMAsSensor && !this->includeAllNetExternalWrenchesAsDynamicVariables)
+    {
+        reportError("BerdyOptions","checkConsistency","Impossible to load berdy, as includeROCMAsSensor can be used only if includeAllNetExternalWrenchesAsDynamicVariables is enabled");
+        return false;
+    }
+
     return true;
 }
 
