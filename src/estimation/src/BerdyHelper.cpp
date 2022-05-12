@@ -130,16 +130,16 @@ bool BerdyOptions::checkConsistency()
         }
     }
 
-    if(this->includeROCMAsSensor &&
+    if(this->includeRcmAsSensor &&
        !(this->berdyVariant==BERDY_FLOATING_BASE || this->berdyVariant==BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES))
     {
-        reportError("BerdyOptions","checkConsistency","Impossible to load berdy, as includeROCMAsSensor is supported only by BERDY_FLOATING_BASE or BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES variants");
+        reportError("BerdyOptions","checkConsistency","Impossible to load berdy, as includeRcmAsSensor is supported only by BERDY_FLOATING_BASE or BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES variants");
         return false;
     }
 
-    if(this->includeROCMAsSensor && !this->includeAllNetExternalWrenchesAsDynamicVariables)
+    if(this->includeRcmAsSensor && !this->includeAllNetExternalWrenchesAsDynamicVariables)
     {
-        reportError("BerdyOptions","checkConsistency","Impossible to load berdy, as includeROCMAsSensor can be used only if includeAllNetExternalWrenchesAsDynamicVariables is enabled");
+        reportError("BerdyOptions","checkConsistency","Impossible to load berdy, as includeRcmAsSensor can be used only if includeAllNetExternalWrenchesAsDynamicVariables is enabled");
         return false;
     }
 
@@ -217,12 +217,12 @@ bool BerdyHelper::init(const Model& model,
     base_H_links.resize(m_model.getNrOfLinks());
 
     bool res = m_options.checkConsistency();
-    for(std::string& rocmConstraintLinkName : m_options.rocmConstraintLinkNamesVector)
+    for(std::string& rcmConstraintLinkName : m_options.rcmConstraintLinkNamesVector)
     {
-        if(!m_model.isLinkNameUsed(rocmConstraintLinkName))
+        if(!m_model.isLinkNameUsed(rcmConstraintLinkName))
         {
             
-            reportError("BerdyHelpers","init",("Link name "+rocmConstraintLinkName+" specified in rocmConstraintLinkNamesVector does not exist.").c_str());
+            reportError("BerdyHelpers","init",("Link name "+rcmConstraintLinkName+" specified in rcmConstraintLinkNamesVector does not exist.").c_str());
             res = false;
         }
     }
@@ -341,10 +341,10 @@ bool BerdyHelper::initSensorsMeasurements()
         }
     }
 
-    // Add Rate of Change of Momentum (ROCM) sensor
-    if (m_options.includeROCMAsSensor)
+    // Add Rate of Change of Momentum (RCM) sensor
+    if (m_options.includeRcmAsSensor)
     {
-        berdySensorTypeOffsets.rocmOffset = m_nrOfSensorsMeasurements;
+        berdySensorTypeOffsets.rcmOffset = m_nrOfSensorsMeasurements;
         m_nrOfSensorsMeasurements += 6;
     }
 
@@ -720,23 +720,23 @@ IndexRange BerdyHelper::getRangeLinkSensorVariable(const BerdySensorTypes sensor
 }
 
 
-IndexRange BerdyHelper::getRangeROCMSensorVariable(const BerdySensorTypes sensorType) const
+IndexRange BerdyHelper::getRangeRCMSensorVariable(const BerdySensorTypes sensorType) const
 {
     IndexRange ret = IndexRange::InvalidRange();
 
-    if (sensorType != ROCM_SENSOR)
+    if (sensorType != RCM_SENSOR)
     {
-        iDynTree::reportWarning("BerdyHelpers","getRangeROCMSensorVariable","Wrong sensor types passed for retrieving sensor range");
+        iDynTree::reportWarning("BerdyHelpers","getRangeRCMSensorVariable","Wrong sensor types passed for retrieving sensor range");
     }
 
     if (m_options.berdyVariant != BERDY_FLOATING_BASE && m_options.berdyVariant != BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES )
     {
-        iDynTree::reportWarning("BerdyHelpers","getRangeROCMSensorVariable","Rate of Change of Momentum (ROCM) sensor is only available in BERDY_FLOATING_BASE and BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES");
+        iDynTree::reportWarning("BerdyHelpers","getRangeRCMSensorVariable","Rate of Change of Momentum (RCM) sensor is only available in BERDY_FLOATING_BASE and BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES");
     }
 
     // Set sensor size and offset
     ret.size = 6;
-    ret.offset = berdySensorTypeOffsets.rocmOffset;
+    ret.offset = berdySensorTypeOffsets.rcmOffset;
 
     assert(ret.isValid());
     return ret;
@@ -1481,17 +1481,17 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
     }
 
     ////////////////////////////////////////////////////////////////////////
-    ///// Rate of Change of Momentum (ROCM) SENSOR
+    ///// Rate of Change of Momentum (RCM) SENSOR
     ////////////////////////////////////////////////////////////////////////
-    if (m_options.includeROCMAsSensor)
+    if (m_options.includeRcmAsSensor)
     {
-        // Get the row index corresponding to the rocm sensor
-        IndexRange rocmRange = this->getRangeROCMSensorVariable(ROCM_SENSOR);
+        // Get the row index corresponding to the RCM sensor
+        IndexRange rcmRange = this->getRangeRCMSensorVariable(RCM_SENSOR);
 
-        for(size_t i = 0; i < m_options.rocmConstraintLinkNamesVector.size(); i++)
+        for(size_t i = 0; i < m_options.rcmConstraintLinkNamesVector.size(); i++)
         {
             // Get link name from the vector
-            std::string linkName = m_options.rocmConstraintLinkNamesVector.at(i);
+            std::string linkName = m_options.rcmConstraintLinkNamesVector.at(i);
 
             // Get link index from the vector
             LinkIndex idx = m_model.getLinkIndex(linkName);
@@ -1503,14 +1503,14 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
             Transform base_X_link = base_H_links(idx);
 
             // Get link to base rotation
-            matrixYElements.addSubMatrix(rocmRange.offset,
+            matrixYElements.addSubMatrix(rcmRange.offset,
                                          netExternalWrenchVariableIndexRange.offset,
                                          base_X_link.asAdjointTransformWrench());
 
         }
 
 
-        // bY for the rocm sensor is zero
+        // bY for the RCM sensor is zero
     }
 
     Y.setFromTriplets(matrixYElements);
@@ -1540,14 +1540,14 @@ bool BerdyHelper::initBerdyFloatingBase()
         m_nrOfDynamicEquations   = 6*m_model.getNrOfLinks() + 6*m_model.getNrOfJoints();
     }
 
-    if (m_options.includeROCMAsSensor) {
-        if (m_options.rocmConstraintLinkNamesVector.size() == 0)
+    if (m_options.includeRcmAsSensor) {
+        if (m_options.rcmConstraintLinkNamesVector.size() == 0)
         {
-            reportInfo("BerdyHelpers","initBerdyFloatingBase","rocmConstraintLinkNamesVector is not initialized using berdy helper options. Considering all the model links");
-            m_options.rocmConstraintLinkNamesVector.resize(m_model.getNrOfLinks());
+            reportInfo("BerdyHelpers","initBerdyFloatingBase","rcmConstraintLinkNamesVector is not initialized using berdy helper options. Considering all the model links");
+            m_options.rcmConstraintLinkNamesVector.resize(m_model.getNrOfLinks());
             for (size_t l = 0; l < m_model.getNrOfLinks(); l++)
             {
-                m_options.rocmConstraintLinkNamesVector.at(l) = m_model.getLinkName(l);
+                m_options.rcmConstraintLinkNamesVector.at(l) = m_model.getLinkName(l);
             }
         }
     }
@@ -1859,12 +1859,12 @@ void BerdyHelper::cacheSensorsOrdering()
         m_sensorsOrdering.push_back(jointSens);
     }
 
-    if(m_options.includeROCMAsSensor) {
+    if(m_options.includeRcmAsSensor) {
 
-        IndexRange sensorRange = this->getRangeROCMSensorVariable(ROCM_SENSOR);
+        IndexRange sensorRange = this->getRangeRCMSensorVariable(RCM_SENSOR);
 
         BerdySensor linkSensor;
-        linkSensor.type = ROCM_SENSOR;
+        linkSensor.type = RCM_SENSOR;
         linkSensor.id = m_options.baseLink;
         linkSensor.range = sensorRange;
 
@@ -2235,7 +2235,7 @@ bool BerdyHelper::serializeSensorVariables(SensorsMeasurements& sensMeas,
                                            JointDOFsDoubleArray& jointTorques,
                                            JointDOFsDoubleArray& jointAccs,
                                            LinkInternalWrenches& linkJointWrenches,
-                                           SpatialForceVector& rocm,
+                                           SpatialForceVector& rcm,
                                            VectorDynSize& y)
 {
     bool ret=true;
@@ -2308,14 +2308,14 @@ bool BerdyHelper::serializeSensorVariables(SensorsMeasurements& sensMeas,
     }
 
     ////////////////////////////////////////////////////////////////////////
-    ///// Rate of Change of Momentum (ROCM)
+    ///// Rate of Change of Momentum (RCM)
     ////////////////////////////////////////////////////////////////////////
     /// This method serializeSensorVariables is used in Testing for the Berdy estimator helper class
-    if (m_options.includeROCMAsSensor)
+    if (m_options.includeRcmAsSensor)
     {
-        IndexRange sensorRange = this->getRangeROCMSensorVariable(ROCM_SENSOR);
+        IndexRange sensorRange = this->getRangeRCMSensorVariable(RCM_SENSOR);
 
-        setSubVector(y, sensorRange, rocm);
+        setSubVector(y, sensorRange, rcm);
     }
 
     return ret;

@@ -138,10 +138,10 @@ enum BerdySensorTypes
     JOINT_WRENCH_SENSOR     = 1003,
 
     /**
-     * Non-physical sensor that holds the value of Rate of Change of Momentum (ROCM) of the system
+     * Non-physical sensor that holds the value of Rate of Change of Momentum (RCM) of the system
      * for centroidal dynamics constraint
      */
-    ROCM_SENSOR = 1004
+    RCM_SENSOR = 1004
 };
 
 bool isLinkBerdyDynamicVariable(const BerdyDynamicVariablesTypes dynamicVariableType);
@@ -165,7 +165,7 @@ public:
                      includeAllJointAccelerationsAsSensors(true),
                      includeAllJointTorquesAsSensors(false),
                      includeAllNetExternalWrenchesAsSensors(true),
-                     includeROCMAsSensor(false),
+                     includeRcmAsSensor(false),
                      includeFixedBaseExternalWrench(false),
                      baseLink("")
     {
@@ -217,19 +217,19 @@ public:
     bool includeAllNetExternalWrenchesAsSensors;
 
     /*
-     * If true, includes the Rate of Change of Momentum (ROCM) in the task sensors vector.
+     * If true, includes the Rate of Change of Momentum (RCM) in the task sensors vector.
      * It is compatible only with BERDY_FLOATING_BASE and BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES
      *
      * Default value: false .
      */
-    bool includeROCMAsSensor;
+    bool includeRcmAsSensor;
 
     /**
      * Vector of link names that are considered for rate of change of momentum constraint using
-     * Rate of Change of Momentum (ROCM) sensor
+     * Rate of Change of Momentum (RCM) sensor
      * The default value is set to contain all the links present in the model
      */
-    std::vector<std::string> rocmConstraintLinkNamesVector;
+    std::vector<std::string> rcmConstraintLinkNamesVector;
 
     /**
      * If includeNetExternalWrenchesAsSensors is true and the
@@ -490,7 +490,7 @@ class BerdyHelper
         size_t dofTorquesOffset;
         size_t netExtWrenchOffset;
         size_t jointWrenchOffset;
-        size_t rocmOffset;
+        size_t rcmOffset;
     } berdySensorTypeOffsets;
 
     /**
@@ -645,7 +645,7 @@ public:
     IndexRange getRangeDOFSensorVariable(const BerdySensorTypes sensorType, const DOFIndex idx) const;
     IndexRange getRangeJointSensorVariable(const BerdySensorTypes sensorType, const JointIndex idx) const;
     IndexRange getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx) const;
-    IndexRange getRangeROCMSensorVariable(const BerdySensorTypes sensorType) const;
+    IndexRange getRangeRCMSensorVariable(const BerdySensorTypes sensorType) const;
 
     /**
      * Ranges of dynamic variables
@@ -674,7 +674,7 @@ public:
                                   JointDOFsDoubleArray    & jointTorques,
                                   JointDOFsDoubleArray    & jointAccs,
                                   LinkInternalWrenches    & linkJointWrenches,
-                                  SpatialForceVector      & rocm, // Rate of Change of Momentum (rocm )
+                                  SpatialForceVector      & rcm, // Rate of Change of Momentum (RCM)
                                   VectorDynSize           & y);
 
 

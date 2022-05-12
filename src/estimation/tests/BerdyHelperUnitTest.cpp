@@ -125,18 +125,18 @@ void testBerdySensorMatrices(BerdyHelper & berdy, std::string filename)
         bool ok = predictSensorsMeasurementsFromRawBuffers(berdy.model(),berdy.sensors(),berdy.dynamicTraversal(),
                                                            linkVels,linkProperAccs,intWrenches,sensMeas);
  
-	    // Handle rate of change of momentum (transformed in base)
-        SpatialForceVector rocm;
-        rocm.zero();
+	    // Handle rate of change of momentum in base
+        SpatialForceVector rcm;
+        rcm.zero();
         for(int linkIdx = 0; linkIdx<extWrenches.getNrOfLinks(); linkIdx++)
         {
             // compute {}^{B}H_{L}
             Transform base_H_link = linkPos(baseIdx).inverse() * linkPos(linkIdx); 
-            rocm = rocm + (base_H_link * extWrenches(linkIdx));
+            rcm = rcm + (base_H_link * extWrenches(linkIdx));
         }
 
         ASSERT_IS_TRUE(ok);
-        ok = berdy.serializeSensorVariables(sensMeas,extWrenches,genTrqs.jointTorques(),generalizedProperAccs.jointAcc(),intWrenches,rocm,y);
+        ok = berdy.serializeSensorVariables(sensMeas,extWrenches,genTrqs.jointTorques(),generalizedProperAccs.jointAcc(),intWrenches,rcm,y);
         ASSERT_IS_TRUE(ok);
 
         // Check that y = Y*d + bY
@@ -286,10 +286,10 @@ void testBerdyOriginalFixedBase(BerdyHelper & berdy, std::string filename)
         ok = predictSensorsMeasurementsFromRawBuffers(berdy.model(),berdy.sensors(),berdy.dynamicTraversal(),
                                                       linkVels,linkProperAccs,intWrenches,sensMeas);
         ASSERT_IS_TRUE(ok);
-	    // rocm is not used with this variant
-        SpatialForceVector dummyRocm;
-        dummyRocm.zero();
-        ok = berdy.serializeSensorVariables(sensMeas,extWrenches,genTrqs.jointTorques(),generalizedProperAccs.jointAcc(),intWrenches,dummyRocm,y);
+	    // Rate of Change of Momentum (RCM) is not used with this variant
+        SpatialForceVector dummyRcm;
+        dummyRcm.zero();
+        ok = berdy.serializeSensorVariables(sensMeas,extWrenches,genTrqs.jointTorques(),generalizedProperAccs.jointAcc(),intWrenches,dummyRcm,y);
         ASSERT_IS_TRUE(ok);
 
         // Check that y = Y*d + bY
@@ -377,8 +377,8 @@ void testBerdyHelpers(std::string fileName)
 
     // We test the floating base BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES
     options.berdyVariant = iDynTree::BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES;
-    // Include Rate Of Change of Momentum
-    options.includeROCMAsSensor = true;
+    // Include Rate Of Change of Momentum (RCM)
+    options.includeRcmAsSensor = true;
     options.includeAllJointTorquesAsSensors = false;
     options.includeAllJointAccelerationsAsSensors = false;
     options.includeAllNetExternalWrenchesAsSensors = true;
