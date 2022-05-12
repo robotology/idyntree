@@ -23,68 +23,11 @@
 #include <iDynTree/Model/ForwardKinematics.h>
 #include <iDynTree/Model/Dynamics.h>
 
-#include <iDynTree/KinDynComputations.h>
-
 #include <cstdio>
 #include <cstdlib>
 
 using namespace iDynTree;
 
-
-
-//computes \sum{{}^{B}X^{*}_{L} {}^{L}f^{x}_{L}}{L} = {}^{B}X^{*}_{G} {}^{G}hdot  
-SpatialForceVector computeROCMInBaseUsingMeasurements(BerdyHelper& berdy,
-                                          KinDynComputations& kinDynComputations,
-                                          LinkPositions& linkPos,
-                                          LinkVelArray&  linkVels,
-                                          LinkAccArray&  linkProperAccs,
-                                          LinkNetExternalWrenches& extWrenches,
-                                          LinkIndex baseIdx)
-{
-    // Get link spatial inertias
-    LinkInertias linkInertias(berdy.model());
-    for(size_t linkIdx = 0; linkIdx < berdy.model().getNrOfLinks(); linkIdx++)
-    {
-        linkInertias(linkIdx) = berdy.model().getLink(linkIdx)->getInertia();
-    }
-
-    iDynTree::SpatialForceVector rocm;
-    rocm.zero();
-
-    // Set centroidal to world transform
-    iDynTree::Transform world_H_centroidal = iDynTree::Transform(iDynTree::Rotation::Identity(), kinDynComputations.getCenterOfMassPosition());
-
-    // Iterate over measurements
-    for(LinkIndex visitedLinkIndex = 0; visitedLinkIndex < berdy.model().getNrOfLinks(); visitedLinkIndex++)
-    {
-        // Get world_H_link transform
-        const iDynTree::Transform world_H_link = linkPos(visitedLinkIndex);
-
-        // Compute link to centroidal transform
-        const iDynTree::Transform centroidal_H_link = world_H_centroidal.inverse() * world_H_link;
-
-        // Get link velocity L_v_A,L
-        const iDynTree::Twist linkVelocityExpressedInLink = linkVels(visitedLinkIndex);
-
-        // Get link acceleration L_a_A,L
-        const iDynTree::SpatialAcc linkAccelerationExpressedInLink = linkProperAccs(visitedLinkIndex);
-
-        // velocity contribution
-        const iDynTree::SpatialForceVector linkInertiaMultipliedVelocity = linkInertias(visitedLinkIndex).multiply(linkVelocityExpressedInLink);
-        const iDynTree::SpatialForceVector rocmLinkVelContrib = centroidal_H_link * (linkVelocityExpressedInLink.cross(linkInertiaMultipliedVelocity));
-        
-        // acceleration contribution
-        const iDynTree::SpatialForceVector rocmLinkAccContrib = centroidal_H_link * (linkInertias(visitedLinkIndex).multiply(linkAccelerationExpressedInLink));
-
-        // update rocm
-        rocm = rocm + rocmLinkVelContrib + rocmLinkAccContrib;
-    }
-
-    // base_H_centroidal transform
-    const iDynTree::Transform base_H_centroidal = kinDynComputations.getWorldBaseTransform().inverse() * world_H_centroidal;
-
-    return base_H_centroidal * rocm;
-}
 
 void testBerdySensorMatrices(BerdyHelper & berdy, std::string filename)
 {
@@ -182,32 +125,14 @@ void testBerdySensorMatrices(BerdyHelper & berdy, std::string filename)
         bool ok = predictSensorsMeasurementsFromRawBuffers(berdy.model(),berdy.sensors(),berdy.dynamicTraversal(),
                                                            linkVels,linkProperAccs,intWrenches,sensMeas);
  
-	    // Handle rate of change of momentum in base
+	    // Handle rate of change of momentum (transformed in base)
         SpatialForceVector rocm;
         rocm.zero();
-        if(berdy.getOptions().includeROCMAsSensor)
+        for(int linkIdx = 0; linkIdx<extWrenches.getNrOfLinks(); linkIdx++)
         {
-            // set KinDynComputations object for CoM computation
-            KinDynComputations kinDynComputations;
-            kinDynComputations.setFrameVelocityRepresentation(iDynTree::BODY_FIXED_REPRESENTATION);
-            kinDynComputations.loadRobotModel(berdy.model());
-
-            Vector3 worldGravityAcc;
-            worldGravityAcc.zero();
-
-            kinDynComputations.setRobotState(linkPos(baseIdx), //w_T_base
-                                            pos.jointPos(), //joint positions
-                                            linkVels(baseIdx), //base velocity
-                                            vel.jointVel(), // joint velocities
-                                            worldGravityAcc); // world gravity
-
-            rocm = computeROCMInBaseUsingMeasurements(berdy,
-                                                      kinDynComputations,
-                                                      linkPos,
-                                                      linkVels,
-                                                      linkProperAccs,
-                                                      extWrenches,
-                                                      baseIdx);
+            // compute {}^{B}H_{L}
+            Transform base_H_link = linkPos(baseIdx).inverse() * linkPos(linkIdx); 
+            rocm = rocm + (base_H_link * extWrenches(linkIdx));
         }
 
         ASSERT_IS_TRUE(ok);
