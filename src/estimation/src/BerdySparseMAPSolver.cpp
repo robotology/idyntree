@@ -92,6 +92,7 @@ namespace iDynTree {
     void BerdySparseMAPSolver::setDynamicsConstraintsPriorCovariance(const iDynTree::SparseMatrix<iDynTree::ColumnMajor>& covariance)
     {
         assert(m_pimpl);
+        assert(m_pimpl->berdy.getOptions().berdyVariant!=BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES);
         assert(covariance.rows() == m_pimpl->priorDynamicsConstraintsCovarianceInverse.rows()
                && covariance.columns() == m_pimpl->priorDynamicsConstraintsCovarianceInverse.columns());
         BerdySparseMAPSolver::BerdySparseMAPSolverPimpl::invertSparseMatrix(covariance, m_pimpl->priorDynamicsConstraintsCovarianceInverse);
@@ -283,7 +284,7 @@ namespace iDynTree {
         }
         else
         {
-			//TODO this workaround to leave the following lines as the original problem
+			// \bar{mu_D} = mu_d
             expectedDynamicsPrior = priorDynamicsRegularizationExpectedValue;
         }
         
