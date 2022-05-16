@@ -241,7 +241,7 @@ bool BerdyHelper::init(const Model& model,
             break;
 
         case BERDY_FLOATING_BASE:
-        case BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES: //TODO for this case too?
+        case BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES:
             res = initBerdyFloatingBase();
             cacheDynamicVariablesOrderingFloatingBase();
             break;
