@@ -39,7 +39,7 @@ inline bool iDynTree::parseRotationMatrix(const yarp::os::Searchable& rf, const 
         }
         for (int column = 0; column < innerList->size(); ++column)
         {
-            rotation.setVal(row, column, innerList->get(column).asDouble());
+            rotation.setVal(row, column, innerList->get(column).asFloat64());
         }
     }
     return true;
