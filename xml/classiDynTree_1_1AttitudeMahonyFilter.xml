@@ -52,7 +52,7 @@
         <argsstring></argsstring>
         <name>m_orientationInSO3</name>
         <briefdescription>
-<para>orientation estimate as rotation matrix <formula id="208">$ {^A}R_B $</formula> where <formula id="206">$ A $</formula> is inertial frame and <formula id="207">$ B $</formula> is the frame attached to the body </para>
+<para>orientation estimate as rotation matrix <formula id="235">$ {^A}R_B $</formula> where <formula id="233">$ A $</formula> is inertial frame and <formula id="234">$ B $</formula> is the frame attached to the body </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -66,7 +66,7 @@
         <argsstring></argsstring>
         <name>m_orientationInRPY</name>
         <briefdescription>
-<para>orientation estimate as a 3D vector in RPY representation, where <formula id="230">$ {^A}R_B = Rot_z(yaw)Rot_y(pitch)Rot_x(roll) $</formula> </para>
+<para>orientation estimate as a 3D vector in RPY representation, where <formula id="257">$ {^A}R_B = Rot_z(yaw)Rot_y(pitch)Rot_x(roll) $</formula> </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -80,7 +80,7 @@
         <argsstring></argsstring>
         <name>m_omega_mes</name>
         <briefdescription>
-<para>vectorial estimate from accelerometer and magnetometer measurements, <formula id="231">$ \omega_{mes} \in \mathbb{R}^3 $</formula>, notation from the paper Non linear complementary filters on the special orthogonal group </para>
+<para>vectorial estimate from accelerometer and magnetometer measurements, <formula id="258">$ \omega_{mes} \in \mathbb{R}^3 $</formula>, notation from the paper Non linear complementary filters on the special orthogonal group </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -94,7 +94,7 @@
         <argsstring></argsstring>
         <name>m_Omega_y</name>
         <briefdescription>
-<para>gyroscope measurement, <formula id="232">$ \Omega_{y} \in \mathbb{R}^3 $</formula>, notation from the paper Non linear complementary filters on the special orthogonal group </para>
+<para>gyroscope measurement, <formula id="259">$ \Omega_{y} \in \mathbb{R}^3 $</formula>, notation from the paper Non linear complementary filters on the special orthogonal group </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -108,7 +108,7 @@
         <argsstring></argsstring>
         <name>m_gravity_direction</name>
         <briefdescription>
-<para>direction of the gravity vector expressed in the inertial frame denoted by <formula id="206">$ A $</formula>, default set to <formula id="233">$ e_3 = \begin{bmatrix} 0 &amp; 0 &amp; 1.0 \end{bmatrix}^T $</formula> </para>
+<para>direction of the gravity vector expressed in the inertial frame denoted by <formula id="233">$ A $</formula>, default set to <formula id="260">$ e_3 = \begin{bmatrix} 0 &amp; 0 &amp; 1.0 \end{bmatrix}^T $</formula> </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -122,7 +122,7 @@
         <argsstring></argsstring>
         <name>m_earth_magnetic_field_direction</name>
         <briefdescription>
-<para>direction of absolute magnetic field expressed in the inertial frame denoted by <formula id="206">$ A $</formula>, default set to <formula id="234">$ {^A}m = \begin{bmatrix} 0 &amp; 0 &amp; 1.0 \end{bmatrix}^T $</formula> </para>
+<para>direction of absolute magnetic field expressed in the inertial frame denoted by <formula id="233">$ A $</formula>, default set to <formula id="261">$ {^A}m = \begin{bmatrix} 0 &amp; 0 &amp; 1.0 \end{bmatrix}^T $</formula> </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -191,7 +191,7 @@
 <parametername direction="in">confidence</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>can take values between <formula id="229">$ [0, 1] $</formula> </para>
+<para>can take values between <formula id="256">$ [0, 1] $</formula> </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -500,7 +500,7 @@
           <declname>rot</declname>
         </param>
         <briefdescription>
-<para>Get orientation of the body with respect to inertial frame, in rotation matrix form If we denote <formula id="206">$ A $</formula> as inertial frame and <formula id="207">$ B $</formula> as the frame attached to the body, then this method gives us <formula id="208">$ {^A}R_B $</formula> as the rotation matrix. </para>
+<para>Get orientation of the body with respect to inertial frame, in rotation matrix form If we denote <formula id="233">$ A $</formula> as inertial frame and <formula id="234">$ B $</formula> as the frame attached to the body, then this method gives us <formula id="235">$ {^A}R_B $</formula> as the rotation matrix. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -531,7 +531,7 @@
           <declname>q</declname>
         </param>
         <briefdescription>
-<para>Get orientation of the body with respect to inertial frame, in unit quaternion form If we denote <formula id="206">$ A $</formula> as inertial frame and <formula id="207">$ B $</formula> as the frame attached to the body, then this method gives us <formula id="209">$ {^A}q_B as the quaternion $</formula>. </para>
+<para>Get orientation of the body with respect to inertial frame, in unit quaternion form If we denote <formula id="233">$ A $</formula> as inertial frame and <formula id="234">$ B $</formula> as the frame attached to the body, then this method gives us <formula id="236">$ {^A}q_B as the quaternion $</formula>. </para>
         </briefdescription>
         <detaileddescription>
 <para><simplesect kind="note"><para>quaternion has the form (real, imaginary) and is normalized </para>
@@ -566,7 +566,7 @@
           <declname>rpy</declname>
         </param>
         <briefdescription>
-<para>Get orientation of the body with respect to inertial frame, in Euler&apos;s RPY form If we denote <formula id="206">$ A $</formula> as inertial frame and <formula id="207">$ B $</formula> as the frame attached to the body, then this method gives us the RPY 3d vector of Euler Angles when composed together gives us <formula id="208">$ {^A}R_B $</formula> as the rotation matrix where <formula id="210">$ {^A}R_B = Rot_z(yaw)Rot_y(pitch)Rot_x(roll)$</formula>. </para>
+<para>Get orientation of the body with respect to inertial frame, in Euler&apos;s RPY form If we denote <formula id="233">$ A $</formula> as inertial frame and <formula id="234">$ B $</formula> as the frame attached to the body, then this method gives us the RPY 3d vector of Euler Angles when composed together gives us <formula id="235">$ {^A}R_B $</formula> as the rotation matrix where <formula id="237">$ {^A}R_B = Rot_z(yaw)Rot_y(pitch)Rot_x(roll)$</formula>. </para>
         </briefdescription>
         <detaileddescription>
 <para>For more details about the range of the RPY Euler angles, please refer the documentation of <ulink url="https://github.com/robotology/idyntree/blob/c8bf721b771fa4b1e7c3a940632e121060719a19/src/core/include/iDynTree/Core/Rotation.h#L167">GetRPY()</ulink></para>
@@ -616,10 +616,10 @@
           <declname>stateBuffer</declname>
         </param>
         <briefdescription>
-<para>Get internal state of the estimator The internal state of the estimator is described as <formula id="202">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="203">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="204">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="205">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. </para>
+<para>Get internal state of the estimator The internal state of the estimator is described as <formula id="229">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="230">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="231">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="232">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. </para>
         </briefdescription>
         <detaileddescription>
-<para>The default internal state of the estimator would be <formula id="211">$ X = \begin{bmatrix} 1.0 \\ 0_{1 \times 3} \\ 0_{1 \times 3} \\ 0_{1 \times 3} \end{bmatrix}^T $</formula> <parameterlist kind="param"><parameteritem>
+<para>The default internal state of the estimator would be <formula id="238">$ X = \begin{bmatrix} 1.0 \\ 0_{1 \times 3} \\ 0_{1 \times 3} \\ 0_{1 \times 3} \end{bmatrix}^T $</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="out">stateBuffer</parametername>
 </parameternamelist>
@@ -647,10 +647,10 @@
           <declname>stateBuffer</declname>
         </param>
         <briefdescription>
-<para>Get initial internal state of the estimator The internal state of the estimator is described as <formula id="202">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="203">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="204">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="205">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. </para>
+<para>Get initial internal state of the estimator The internal state of the estimator is described as <formula id="229">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="230">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="231">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="232">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. </para>
         </briefdescription>
         <detaileddescription>
-<para>The default internal state of the estimator would be <formula id="211">$ X = \begin{bmatrix} 1.0 \\ 0_{1 \times 3} \\ 0_{1 \times 3} \\ 0_{1 \times 3} \end{bmatrix}^T $</formula> <parameterlist kind="param"><parameteritem>
+<para>The default internal state of the estimator would be <formula id="238">$ X = \begin{bmatrix} 1.0 \\ 0_{1 \times 3} \\ 0_{1 \times 3} \\ 0_{1 \times 3} \end{bmatrix}^T $</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="out">stateBuffer</parametername>
 </parameternamelist>
@@ -681,7 +681,7 @@
 <para>set internal state of the estimator. </para>
         </briefdescription>
         <detaileddescription>
-<para>The internal state of the estimator is described as <formula id="202">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="203">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="204">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="205">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. <parameterlist kind="param"><parameteritem>
+<para>The internal state of the estimator is described as <formula id="229">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="230">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="231">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="232">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">stateBuffer</parametername>
 </parameternamelist>
@@ -712,7 +712,7 @@
 <para>set the initial orientation for the internal state of the estimator. </para>
         </briefdescription>
         <detaileddescription>
-<para>The initial orientation for the internal state of the estimator is described as <formula id="212">$ {^A}q_B $</formula> <formula id="203">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <parameterlist kind="param"><parameteritem>
+<para>The initial orientation for the internal state of the estimator is described as <formula id="239">$ {^A}q_B $</formula> <formula id="230">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">stateBuffer</parametername>
 </parameternamelist>
@@ -734,10 +734,10 @@
 <para>explicit passive complementary filter on quaternion groups described in the paper <ulink url="https://hal.archives-ouvertes.fr/hal-00488376/document">Non-linear complementary filters on SO3 groups</ulink> </para>
     </briefdescription>
     <detaileddescription>
-<para>The filter is used to estimate the states <formula id="202">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> where <formula id="203">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="204">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="205">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. <simplesect kind="note"><para>: we will drop the subscripts and superscripts in the rest of the documentation for convenience</para>
+<para>The filter is used to estimate the states <formula id="229">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> where <formula id="230">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="231">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="232">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. <simplesect kind="note"><para>: we will drop the subscripts and superscripts in the rest of the documentation for convenience</para>
 </simplesect>
-The discretized dynamics of the filter is implemented in the <ref refid="classiDynTree_1_1AttitudeMahonyFilter_1af743b419ed9b87c50cc3d3bd87c09ce0" kindref="member">propagateStates()</ref> method and is described by the following equations, <formula id="220">$ q_{k+1} = q_{k} + \Delta t \frac{1}{2}q_{k} \circ \begin{bmatrix} 0 \\ {\Omega_y}_{k+1} - b_k + K_p \omega_{mes_{k+1}}\end{bmatrix}$</formula> <formula id="221">$ \Omega_{k+1} = {\Omega_y}_{k+1} - b_k $</formula> <formula id="222">$ b_{k+1} = b_k - K_i \Delta t \frac{1}{2} \omega_{mes_{k+1}} $</formula></para>
-<para>The <ref refid="classiDynTree_1_1AttitudeMahonyFilter_1a761c1ce98405a7bf629e1e523e3649f5" kindref="member">updateFilterWithMeasurements()</ref> uses the recent IMU measurements to compute the term <formula id="223">$ \omega_{mes} $</formula> which gives the vectorial from accelerometer and magnetometer measurements <formula id="224">$ \omega_{mes} = -(\Sigma{n}{i=1} \frac{k_i}{2} (v_i \hat{v}_i^T - \hat{v}_i v_i^T) )^{\vee} $</formula> where <formula id="225">$ v_i $</formula> is the normalized accelerometer or magnetometer measurement, <formula id="226">$ \hat{v_i} $</formula> is the vector obtained from the orientation estimated combined with gravity direction or absolute magnetic field direction, for e.g, <formula id="227">$ \hat{v_acc} = {^w}R_b^T e_3 $</formula> and <formula id="228">$ k_i $</formula> is the confidence weight on the i-th measurement. In our case, i = 1 or 2.</para>
+The discretized dynamics of the filter is implemented in the <ref refid="classiDynTree_1_1AttitudeMahonyFilter_1af743b419ed9b87c50cc3d3bd87c09ce0" kindref="member">propagateStates()</ref> method and is described by the following equations, <formula id="247">$ q_{k+1} = q_{k} + \Delta t \frac{1}{2}q_{k} \circ \begin{bmatrix} 0 \\ {\Omega_y}_{k+1} - b_k + K_p \omega_{mes_{k+1}}\end{bmatrix}$</formula> <formula id="248">$ \Omega_{k+1} = {\Omega_y}_{k+1} - b_k $</formula> <formula id="249">$ b_{k+1} = b_k - K_i \Delta t \frac{1}{2} \omega_{mes_{k+1}} $</formula></para>
+<para>The <ref refid="classiDynTree_1_1AttitudeMahonyFilter_1a761c1ce98405a7bf629e1e523e3649f5" kindref="member">updateFilterWithMeasurements()</ref> uses the recent IMU measurements to compute the term <formula id="250">$ \omega_{mes} $</formula> which gives the vectorial from accelerometer and magnetometer measurements <formula id="251">$ \omega_{mes} = -(\Sigma{n}{i=1} \frac{k_i}{2} (v_i \hat{v}_i^T - \hat{v}_i v_i^T) )^{\vee} $</formula> where <formula id="252">$ v_i $</formula> is the normalized accelerometer or magnetometer measurement, <formula id="253">$ \hat{v_i} $</formula> is the vector obtained from the orientation estimated combined with gravity direction or absolute magnetic field direction, for e.g, <formula id="254">$ \hat{v_acc} = {^w}R_b^T e_3 $</formula> and <formula id="255">$ k_i $</formula> is the confidence weight on the i-th measurement. In our case, i = 1 or 2.</para>
 <para>The usage of the attitude estimator can be as follows,<itemizedlist>
 <listitem><para>After instantiation, the parameters of the filter can be set using the individual parameter methods or the struct method.</para>
 </listitem><listitem><para>The filter state can be initialized by calling the <ref refid="classiDynTree_1_1AttitudeMahonyFilter_1a056cbfe2f712924c67609afcda054271" kindref="member">setInternalState()</ref> method</para>

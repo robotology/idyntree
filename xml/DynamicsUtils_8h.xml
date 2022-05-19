@@ -21,10 +21,10 @@
           <declname>V</declname>
         </param>
         <briefdescription>
-<para>Given a rigid body inertia <formula id="189">$M$</formula> and spatial motion vector <formula id="147">$V$</formula>, the bias wrench <formula id="190">$B$</formula> of rigid body is defined as: </para>
+<para>Given a rigid body inertia <formula id="55">$M$</formula> and spatial motion vector <formula id="56">$V$</formula>, the bias wrench <formula id="57">$B$</formula> of rigid body is defined as: </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="191">\[ B = \times \]</formula> </para>
+<para><formula id="58">\[ B = \times \]</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>

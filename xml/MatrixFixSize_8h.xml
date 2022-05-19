@@ -9,6 +9,8 @@
     <includes local="no">string</includes>
     <includes local="no">iostream</includes>
     <includes local="no">sstream</includes>
+    <includedby refid="DynamicsLinearization_8h" local="no">iDynTree/Model/DynamicsLinearization.h</includedby>
+    <includedby refid="DynamicsLinearizationHelpers_8h" local="no">iDynTree/Model/DynamicsLinearizationHelpers.h</includedby>
     <includedby refid="ArticulatedBodyInertia_8h" local="no">iDynTree/Core/ArticulatedBodyInertia.h</includedby>
     <includedby refid="EigenHelpers_8h" local="no">iDynTree/Core/EigenHelpers.h</includedby>
     <includedby refid="RotationalInertiaRaw_8h" local="no">iDynTree/Core/RotationalInertiaRaw.h</includedby>
@@ -16,8 +18,6 @@
     <includedby refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includedby>
     <includedby refid="TransformDerivative_8h" local="no">iDynTree/Core/TransformDerivative.h</includedby>
     <includedby refid="Triplets_8h" local="no">iDynTree/Core/Triplets.h</includedby>
-    <includedby refid="DynamicsLinearization_8h" local="no">iDynTree/Model/DynamicsLinearization.h</includedby>
-    <includedby refid="DynamicsLinearizationHelpers_8h" local="no">iDynTree/Model/DynamicsLinearizationHelpers.h</includedby>
     <incdepgraph>
       <node id="2">
         <label>cassert</label>

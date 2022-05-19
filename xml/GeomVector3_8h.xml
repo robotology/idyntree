@@ -3,17 +3,17 @@
   <compounddef id="GeomVector3_8h" kind="file" language="C++">
     <compoundname>GeomVector3.h</compoundname>
     <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
-    <includedby refid="Rotation_8h" local="no">iDynTree/Core/Rotation.h</includedby>
-    <includedby refid="SO3Utils_8h" local="no">iDynTree/Core/SO3Utils.h</includedby>
-    <includedby refid="SpatialForceVector_8h" local="no">iDynTree/Core/SpatialForceVector.h</includedby>
-    <includedby refid="SpatialMotionVector_8h" local="no">iDynTree/Core/SpatialMotionVector.h</includedby>
-    <includedby refid="SpatialVector_8h" local="no">iDynTree/Core/SpatialVector.h</includedby>
     <includedby refid="AccelerometerSensor_8h" local="no">iDynTree/Sensors/AccelerometerSensor.h</includedby>
     <includedby refid="GyroscopeSensor_8h" local="no">iDynTree/Sensors/GyroscopeSensor.h</includedby>
     <includedby refid="PredictSensorsMeasurements_8h" local="no">iDynTree/Sensors/PredictSensorsMeasurements.h</includedby>
     <includedby refid="Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includedby>
     <includedby refid="ThreeAxisAngularAccelerometerSensor_8h" local="no">iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h</includedby>
     <includedby refid="ThreeAxisForceTorqueContactSensor_8h" local="no">iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h</includedby>
+    <includedby refid="Rotation_8h" local="no">iDynTree/Core/Rotation.h</includedby>
+    <includedby refid="SO3Utils_8h" local="no">iDynTree/Core/SO3Utils.h</includedby>
+    <includedby refid="SpatialForceVector_8h" local="no">iDynTree/Core/SpatialForceVector.h</includedby>
+    <includedby refid="SpatialMotionVector_8h" local="no">iDynTree/Core/SpatialMotionVector.h</includedby>
+    <includedby refid="SpatialVector_8h" local="no">iDynTree/Core/SpatialVector.h</includedby>
     <innerclass refid="classiDynTree_1_1GeomVector3" prot="public">iDynTree::GeomVector3</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
       <sectiondef kind="typedef">
@@ -43,19 +43,6 @@
         </inbodydescription>
         <location file="iDynTree/Core/GeomVector3.h" line="39" column="29" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="39" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="GeomVector3_8h_1ae032ae81e0b23b33446033eefb13e629" prot="public" static="no">
-        <type>LinearMotionVector3</type>
-        <definition>typedef LinearMotionVector3 iDynTree::LinAcceleration</definition>
-        <argsstring></argsstring>
-        <name>LinAcceleration</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="40" column="29" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="40" bodyend="-1"/>
-      </memberdef>
       <memberdef kind="typedef" id="GeomVector3_8h_1aff2ac4b45bb6926622fcfbf47dbe82b1" prot="public" static="no">
         <type>GeomVector3</type>
         <definition>typedef GeomVector3 iDynTree::AngularMotionVector3</definition>
@@ -68,19 +55,6 @@
         <inbodydescription>
         </inbodydescription>
         <location file="iDynTree/Core/GeomVector3.h" line="41" column="21" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="41" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="GeomVector3_8h_1a303a7b672a9817d74c5a6279fbfe5e34" prot="public" static="no">
-        <type>AngularMotionVector3</type>
-        <definition>typedef AngularMotionVector3 iDynTree::AngVelocity</definition>
-        <argsstring></argsstring>
-        <name>AngVelocity</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="42" column="30" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="GeomVector3_8h_1adb7dac766ffa576a0213970d650eda15" prot="public" static="no">
         <type>AngularMotionVector3</type>
