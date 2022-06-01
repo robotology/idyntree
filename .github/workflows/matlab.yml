@@ -74,7 +74,7 @@ jobs:
     - name: Do not use MATLAB's stdc++ to avoid incompatibilities with other libraries
       if: contains(matrix.os, 'ubuntu')
       run:
-          echo 'LD_PRELOAD=${CONDA_PREFIX}/lib/libstdc++.so.6' >> $GITHUB_ENV
+          echo 'LD_PRELOAD=${{ env.CONDA_PREFIX }}/lib/libstdc++.so.6' >> $GITHUB_ENV
 
     - name: Print used environment [Conda]
       shell: bash -l {0}
