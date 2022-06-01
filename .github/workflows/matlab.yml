@@ -44,12 +44,6 @@ jobs:
       with:
         release: ${{ matrix.matlab_version }}
 
-    # workaround for https://github.com/robotology/robotology-superbuild/issues/64
-    - name: Do not use MATLAB's stdc++ to avoid incompatibilities with other libraries
-      if: contains(matrix.os, 'ubuntu')
-      run:
-          echo 'LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6' >> $GITHUB_ENV
-
     - name: Dependencies
       run: |
         # Workaround for https://github.com/conda-incubator/setup-miniconda/issues/186
@@ -74,6 +68,13 @@ jobs:
         # Additional dependencies only useful on Windows
         # See https://github.com/robotology/robotology-superbuild/issues/477
         mamba install vs2019_win-64
+
+    # workaround for https://github.com/robotology/robotology-superbuild/issues/64
+    # and https://github.com/robotology/idyntree/issues/995
+    - name: Do not use MATLAB's stdc++ to avoid incompatibilities with other libraries
+      if: contains(matrix.os, 'ubuntu')
+      run:
+          echo 'LD_PRELOAD=${CONDA_PREFIX}/lib/libstdc++.so.6' >> $GITHUB_ENV
 
     - name: Print used environment [Conda]
       shell: bash -l {0}
