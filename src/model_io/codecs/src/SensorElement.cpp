@@ -96,8 +96,9 @@ namespace iDynTree {
         } else if (type == "force_torque") {
             m_info->m_sensorType = SIX_AXIS_FORCE_TORQUE;
         } else {
-            std::string message = "iDynTree does not support sensor of type " + type;
-            reportWarning("SensorElement", "setAttributes", message.c_str());
+            // See 
+            // std::string message = "iDynTree does not support sensor of type " + type;
+            // reportWarning("SensorElement", "setAttributes", message.c_str());
         }
 
         return true;
