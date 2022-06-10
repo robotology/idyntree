@@ -96,7 +96,7 @@ namespace iDynTree {
         } else if (type == "force_torque") {
             m_info->m_sensorType = SIX_AXIS_FORCE_TORQUE;
         } else {
-            // See 
+            // See https://github.com/robotology/idyntree/pull/997
             // std::string message = "iDynTree does not support sensor of type " + type;
             // reportWarning("SensorElement", "setAttributes", message.c_str());
         }
