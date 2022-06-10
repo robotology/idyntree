@@ -51,7 +51,7 @@ jobs:
         # Compilation related dependencies 
         mamba install cmake compilers make ninja pkg-config
         # Actual dependencies
-        mamba install eigen libxml2 assimp ipopt qt irrlicht osqp-eigen
+        mamba install eigen libxml2 assimp ipopt irrlicht osqp-eigen
 
     # Additional dependencies useful only on Linux
     - name: Dependencies [Conda/Linux]
