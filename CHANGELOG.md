@@ -6,7 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased Major]
 
+## [Unreleased]
+
+### Changed
+- No warning is printed if a sensor not supported by iDynTree is found in an URDF file (https://github.com/robotology/idyntree/pull/997).
+
 ## [5.2.1] - 2022-05-19
+
+### Fixed 
 - Fixed compatibility with YARP 3.7  (https://github.com/robotology/idyntree/pull/992).
 
 ## [5.2.0] - 2022-05-09
