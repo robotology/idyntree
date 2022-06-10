@@ -68,7 +68,7 @@ jobs:
         # Compilation related dependencies
         mamba install cmake compilers make ninja pkg-config
         # Actual dependencies
-        mamba install eigen libxml2 assimp ipopt qt irrlicht swig pybind11 python numpy
+        mamba install eigen libxml2 assimp ipopt irrlicht swig pybind11 python numpy
         # robotology dependencies
         mamba install yarp icub-main osqp-eigen
 
