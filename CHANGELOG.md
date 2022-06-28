@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased Major]
 
+### Added
+- Additional functionalities for pybind11 bindings (https://github.com/robotology/idyntree/pull/1001):
+     - `Twist` class
+     - `ModelLoader` class
+     - Basic kinematics support in `KinDynComputations`
+
 ## [5.2.0] - 2022-05-09
 
 ### Added
