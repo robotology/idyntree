@@ -195,7 +195,7 @@ public:
     /**
      * Set the link that is used as the floating base link.
      *
-     *
+     * Currently supports only links. See https://github.com/robotology/idyntree/issues/422.
      * @return true if all went well, false otherwise (for example if the link name was not found).
      */
     bool setFloatingBase(const std::string & floatingBaseName);
