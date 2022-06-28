@@ -11,12 +11,14 @@
 #include <iDynTree/Core/RotationalInertiaRaw.h>
 #include <iDynTree/Core/SpatialInertia.h>
 #include <iDynTree/Core/Transform.h>
+#include <iDynTree/Core/Twist.h>
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/VectorFixSize.h>
 #include <pybind11/operators.h>
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 
+#include <array>
 #include <cstddef>
 
 namespace iDynTree {
@@ -269,6 +271,15 @@ void iDynTreeCoreBindings(pybind11::module& module) {
       .def("__repr__", [](const SpatialInertia& inertia) {
         return inertia.asMatrix().toString();
       });
+
+  // Basic twist interface.
+  py::class_<Twist>(module, "Twist")
+      .def(py::init([](const std::array<double, 3>& lin_velocity,
+                       const std::array<double, 3>& ang_velocity) {
+        LinVelocity lin_vel(lin_velocity.data(), 3);
+        AngVelocity ang_vel(ang_velocity.data(), 3);
+        return Twist(lin_vel, ang_vel);
+      }));
 }
 }  // namespace bindings
 }  // namespace iDynTree
