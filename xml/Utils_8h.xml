@@ -4,6 +4,7 @@
     <compoundname>Utils.h</compoundname>
     <includes local="no">cstddef</includes>
     <includes local="yes">CoreExport.h</includes>
+    <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
     <includedby refid="BerdyHelper_8h" local="no">iDynTree/Estimation/BerdyHelper.h</includedby>
     <includedby refid="BerdySparseMAPSolver_8h" local="no">iDynTree/Estimation/BerdySparseMAPSolver.h</includedby>
     <includedby refid="ExtendedKalmanFilter_8h" local="no">iDynTree/Estimation/ExtendedKalmanFilter.h</includedby>
@@ -22,7 +23,6 @@
     <includedby refid="L2NormCost_8h" local="no">iDynTree/L2NormCost.h</includedby>
     <includedby refid="OptimalControlProblem_8h" local="no">iDynTree/OptimalControlProblem.h</includedby>
     <includedby refid="SparsityStructure_8h" local="no">iDynTree/SparsityStructure.h</includedby>
-    <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
     <incdepgraph>
       <node id="3">
         <label>CoreExport.h</label>

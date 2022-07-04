@@ -8,9 +8,9 @@
     <includes local="no">vector</includes>
     <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h</includedby>
     <includedby refid="SimpleLeggedOdometry_8h" local="no">iDynTree/Estimation/SimpleLeggedOdometry.h</includedby>
-    <includedby refid="Visualizer_8h" local="no">iDynTree/Visualizer.h</includedby>
     <includedby refid="Dynamics_8h" local="no">iDynTree/Model/Dynamics.h</includedby>
     <includedby refid="FreeFloatingState_8h" local="no">iDynTree/Model/FreeFloatingState.h</includedby>
+    <includedby refid="Visualizer_8h" local="no">iDynTree/Visualizer.h</includedby>
     <incdepgraph>
       <node id="1">
         <label>iDynTree/Model/JointState.h</label>

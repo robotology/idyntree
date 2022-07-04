@@ -6,20 +6,8 @@
     <includes refid="Rotation_8h" local="no">iDynTree/Core/Rotation.h</includes>
     <includes refid="MatrixFixSize_8h" local="no">iDynTree/Core/MatrixFixSize.h</includes>
     <includes local="no">string</includes>
-    <includedby refid="BoundingBoxHelpers_8h" local="no">iDynTree/BoundingBoxHelpers.h</includedby>
-    <includedby refid="ConvexHullHelpers_8h" local="no">iDynTree/ConvexHullHelpers.h</includedby>
-    <includedby refid="InverseKinematicsData_8h" local="no">private/InverseKinematicsData.h</includedby>
-    <includedby refid="InverseKinematicsNLP_8h" local="no">private/InverseKinematicsNLP.h</includedby>
-    <includedby refid="TransformConstraint_8h" local="no">private/TransformConstraint.h</includedby>
-    <includedby refid="SimpleLeggedOdometry_8h" local="no">iDynTree/Estimation/SimpleLeggedOdometry.h</includedby>
-    <includedby refid="EigenHelpers_8h" local="no">iDynTree/Core/EigenHelpers.h</includedby>
-    <includedby refid="InertiaNonLinearParametrization_8h" local="no">iDynTree/Core/InertiaNonLinearParametrization.h</includedby>
-    <includedby refid="InertialElement_8h" local="no">private/InertialElement.h</includedby>
-    <includedby refid="JointElement_8h" local="no">private/JointElement.h</includedby>
-    <includedby refid="SensorElement_8h" local="no">private/SensorElement.h</includedby>
-    <includedby refid="URDFParsingUtils_8h" local="no">private/URDFParsingUtils.h</includedby>
-    <includedby refid="VisualElement_8h" local="no">private/VisualElement.h</includedby>
     <includedby refid="YARPConversionsImplementation_8h" local="no">iDynTree/yarp/YARPConversionsImplementation.h</includedby>
+    <includedby refid="SimpleLeggedOdometry_8h" local="no">iDynTree/Estimation/SimpleLeggedOdometry.h</includedby>
     <includedby refid="DenavitHartenberg_8h" local="no">iDynTree/Model/DenavitHartenberg.h</includedby>
     <includedby refid="FixedJoint_8h" local="no">iDynTree/Model/FixedJoint.h</includedby>
     <includedby refid="FreeFloatingState_8h" local="no">iDynTree/Model/FreeFloatingState.h</includedby>
@@ -28,7 +16,19 @@
     <includedby refid="PrismaticJoint_8h" local="no">iDynTree/Model/PrismaticJoint.h</includedby>
     <includedby refid="RevoluteJoint_8h" local="no">iDynTree/Model/RevoluteJoint.h</includedby>
     <includedby refid="SolidShapes_8h" local="no">iDynTree/Model/SolidShapes.h</includedby>
+    <includedby refid="BoundingBoxHelpers_8h" local="no">iDynTree/BoundingBoxHelpers.h</includedby>
+    <includedby refid="ConvexHullHelpers_8h" local="no">iDynTree/ConvexHullHelpers.h</includedby>
+    <includedby refid="InverseKinematicsData_8h" local="no">private/InverseKinematicsData.h</includedby>
+    <includedby refid="InverseKinematicsNLP_8h" local="no">private/InverseKinematicsNLP.h</includedby>
+    <includedby refid="TransformConstraint_8h" local="no">private/TransformConstraint.h</includedby>
+    <includedby refid="EigenHelpers_8h" local="no">iDynTree/Core/EigenHelpers.h</includedby>
+    <includedby refid="InertiaNonLinearParametrization_8h" local="no">iDynTree/Core/InertiaNonLinearParametrization.h</includedby>
     <includedby refid="TimeVaryingObject_8h" local="no">iDynTree/TimeVaryingObject.h</includedby>
+    <includedby refid="InertialElement_8h" local="no">private/InertialElement.h</includedby>
+    <includedby refid="JointElement_8h" local="no">private/JointElement.h</includedby>
+    <includedby refid="SensorElement_8h" local="no">private/SensorElement.h</includedby>
+    <includedby refid="URDFParsingUtils_8h" local="no">private/URDFParsingUtils.h</includedby>
+    <includedby refid="VisualElement_8h" local="no">private/VisualElement.h</includedby>
     <incdepgraph>
       <node id="1">
         <label>iDynTree/Core/Transform.h</label>

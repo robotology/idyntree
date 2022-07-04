@@ -388,7 +388,7 @@
 </listitem><listitem><para>Extensibility (by providing a different root object for the XML hierarchy.</para>
 </listitem></itemizedlist>
 </para>
-<sect2 id="classiDynTree_1_1XMLParser_1autotoc_md3">
+<sect2 id="classiDynTree_1_1XMLParser_1autotoc_md1">
 <title>Common usage</title>
 <para><programlisting filename=".cpp"><codeline><highlight class="comment">//<sp/>Allocate<sp/>parser</highlight><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal">std::shared_ptr&lt;XMLParser&gt;<sp/>parser<sp/>=<sp/>std::make_shared&lt;XMLParser&gt;();</highlight></codeline>
@@ -401,10 +401,10 @@
 <codeline><highlight class="normal">std::shared_ptr&lt;const<sp/>XMLDocument&gt;<sp/><ref refid="classiDynTree_1_1XMLParser_1affab248cde90245f3df3d5fb5b50476d" kindref="member">document</ref><sp/>=<sp/>parser-&gt;document();</highlight></codeline>
 </programlisting> </para>
 </sect2>
-<sect2 id="classiDynTree_1_1XMLParser_1autotoc_md4">
+<sect2 id="classiDynTree_1_1XMLParser_1autotoc_md2">
 <title>Description</title>
 </sect2>
-<sect2 id="classiDynTree_1_1XMLParser_1autotoc_md5">
+<sect2 id="classiDynTree_1_1XMLParser_1autotoc_md3">
 <title>Validation support</title>
 <para>The parser supports XSD schema validation. This options is controlled by two methods:</para>
 <para><itemizedlist>
@@ -414,7 +414,7 @@
 </para>
 <para>If both variables are set, the validation will take place before parsing. Note that currently the errors are output to standard error (or output?) and not handled directly in the code. It might be possible to handle those in code though (feature request).</para>
 </sect2>
-<sect2 id="classiDynTree_1_1XMLParser_1autotoc_md6">
+<sect2 id="classiDynTree_1_1XMLParser_1autotoc_md4">
 <title>Todos:</title>
 <para>Possible feature requests:</para>
 <para><itemizedlist>

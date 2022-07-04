@@ -323,7 +323,7 @@
           <declname>xhat_k_plus_one</declname>
         </param>
         <briefdescription>
-<para>Describes the state propagation for a given dynamical system If state of the system is denoted by <formula id="92">$ x $</formula> and the control input by <formula id="93">$ u $</formula>, then the system dynamics is given as <formula id="94">$ x_{k+1} = f(x_k, u_k) $</formula>. </para>
+<para>Describes the state propagation for a given dynamical system If state of the system is denoted by <formula id="106">$ x $</formula> and the control input by <formula id="107">$ u $</formula>, then the system dynamics is given as <formula id="108">$ x_{k+1} = f(x_k, u_k) $</formula>. </para>
         </briefdescription>
         <detaileddescription>
 <para><simplesect kind="note"><para>the detail of this function needs to be implemented by the child class </para>
@@ -376,7 +376,7 @@
           <declname>zhat_k_plus_one</declname>
         </param>
         <briefdescription>
-<para>Describes the measurement model of the system, i.e., how the measurements can be described as a function of states, Given a state of the system described by <formula id="92">$ x $</formula>, what would be the measurement <formula id="95">$ z $</formula> observed from this state <formula id="96">$ z_{k+1} = h(\hat{x}_{k+1}) $</formula>. </para>
+<para>Describes the measurement model of the system, i.e., how the measurements can be described as a function of states, Given a state of the system described by <formula id="106">$ x $</formula>, what would be the measurement <formula id="109">$ z $</formula> observed from this state <formula id="110">$ z_{k+1} = h(\hat{x}_{k+1}) $</formula>. </para>
         </briefdescription>
         <detaileddescription>
 <para><simplesect kind="note"><para>the detail of this function needs to be implemented by the child class </para>
@@ -537,7 +537,7 @@
         <argsstring>()</argsstring>
         <name>ekfPredict</name>
         <briefdescription>
-<para>Implements the Discrete EKF prediction equation described by <formula id="97">$ \hat{x}_{k+1} = f(x_k, u_k) $</formula> is given by the <ref refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1aa35db724dab6168cb3d84e44cbb809ea" kindref="member">ekf_f()</ref> method <formula id="98">$ \hat{P}_{k+1} = F_k P_k F_k^T + Q $</formula> where, <formula id="99">$ F \mid_{x = x_k} $</formula> is given by the ekfComputejacobianF() method. </para>
+<para>Implements the Discrete EKF prediction equation described by <formula id="111">$ \hat{x}_{k+1} = f(x_k, u_k) $</formula> is given by the <ref refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1aa35db724dab6168cb3d84e44cbb809ea" kindref="member">ekf_f()</ref> method <formula id="112">$ \hat{P}_{k+1} = F_k P_k F_k^T + Q $</formula> where, <formula id="113">$ F \mid_{x = x_k} $</formula> is given by the ekfComputejacobianF() method. </para>
         </briefdescription>
         <detaileddescription>
 <para><simplesect kind="warning"><para>this function can be called only after setting up the filter properly through <ref refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a37450d1833a7ce6d7b2caec4e00c9a62" kindref="member">ekfInit()</ref> step </para>
@@ -560,7 +560,7 @@
         <argsstring>()</argsstring>
         <name>ekfUpdate</name>
         <briefdescription>
-<para>Implements the Discrete EKF update equation described by <formula id="96">$ z_{k+1} = h(\hat{x}_{k+1}) $</formula> is given by <ref refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a823fd6ec74999d302d6ba38322de1a82" kindref="member">ekf_h()</ref> method innovation <formula id="100">$ \tilde{y}_{k+1} = y_{k+1} - z_{k+1} $</formula> innovation covariance <formula id="101">$ S_{k+1} = H_{k+1} \hat{P}_{k+1} H_{k+1}^T + R $</formula>, where <formula id="102">$ H \mid_{x = \hat{x}_{k+1}} $</formula> is given by ekfComputejacobianH() method Kalman gain <formula id="103">$ K_{k+1} = \hat{P}_{k+1} H_{k+1}^T S_{k+1}^{-1} $</formula> Updated covariance <formula id="104">$ P_{k+1} = \hat{P}_{k+1} - (K_{k+1} H \hat{P}_{k+1}) $</formula> Updated state estimate <formula id="105">$ x_{k+1} = \hat{x}_{k+1} + K_{k+1} \tilde{y}_{k+1} $</formula>. </para>
+<para>Implements the Discrete EKF update equation described by <formula id="110">$ z_{k+1} = h(\hat{x}_{k+1}) $</formula> is given by <ref refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a823fd6ec74999d302d6ba38322de1a82" kindref="member">ekf_h()</ref> method innovation <formula id="114">$ \tilde{y}_{k+1} = y_{k+1} - z_{k+1} $</formula> innovation covariance <formula id="115">$ S_{k+1} = H_{k+1} \hat{P}_{k+1} H_{k+1}^T + R $</formula>, where <formula id="116">$ H \mid_{x = \hat{x}_{k+1}} $</formula> is given by ekfComputejacobianH() method Kalman gain <formula id="117">$ K_{k+1} = \hat{P}_{k+1} H_{k+1}^T S_{k+1}^{-1} $</formula> Updated covariance <formula id="118">$ P_{k+1} = \hat{P}_{k+1} - (K_{k+1} H \hat{P}_{k+1}) $</formula> Updated state estimate <formula id="119">$ x_{k+1} = \hat{x}_{k+1} + K_{k+1} \tilde{y}_{k+1} $</formula>. </para>
         </briefdescription>
         <detaileddescription>
 <para><simplesect kind="warning"><para>this function can be called only after setting up the filter properly through <ref refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a37450d1833a7ce6d7b2caec4e00c9a62" kindref="member">ekfInit()</ref> step </para>

@@ -5,11 +5,11 @@
     <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
     <includes refid="GeomVector3_8h" local="no">iDynTree/Core/GeomVector3.h</includes>
     <includes refid="SpatialVector_8h" local="no">iDynTree/Core/SpatialVector.h</includes>
+    <includedby refid="DynamicsUtils_8h" local="no">iDynTree/Model/DynamicsUtils.h</includedby>
+    <includedby refid="JointState_8h" local="no">iDynTree/Model/JointState.h</includedby>
     <includedby refid="EigenHelpers_8h" local="no">iDynTree/Core/EigenHelpers.h</includedby>
     <includedby refid="SpatialMomentum_8h" local="no">iDynTree/Core/SpatialMomentum.h</includedby>
     <includedby refid="Wrench_8h" local="no">iDynTree/Core/Wrench.h</includedby>
-    <includedby refid="DynamicsUtils_8h" local="no">iDynTree/Model/DynamicsUtils.h</includedby>
-    <includedby refid="JointState_8h" local="no">iDynTree/Model/JointState.h</includedby>
     <innerclass refid="classiDynTree_1_1SpatialForceVector" prot="public">iDynTree::SpatialForceVector</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>

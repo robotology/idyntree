@@ -65,10 +65,10 @@
         <nav class="m-block m-default">
           <h3>Contents</h3>
           <ul>
-            <li><a href="#autotoc_md3">Common usage</a></li>
-            <li><a href="#autotoc_md4">Description</a></li>
-            <li><a href="#autotoc_md5">Validation support</a></li>
-            <li><a href="#autotoc_md6">Todos:</a></li>
+            <li><a href="#autotoc_md1">Common usage</a></li>
+            <li><a href="#autotoc_md2">Description</a></li>
+            <li><a href="#autotoc_md3">Validation support</a></li>
+            <li><a href="#autotoc_md4">Todos:</a></li>
             <li>
               Reference
               <ul>
@@ -78,7 +78,7 @@
             </li>
           </ul>
         </nav>
-<p>Use this class to parse XML files. It currently supports the following features</p><ul><li>XSD validation</li><li>Extensibility (by providing a different root object for the XML hierarchy.</li></ul><section id="autotoc_md3"><h3><a href="#autotoc_md3">Common usage</a></h3><pre class="m-code"><span class="c1">// Allocate parser</span>
+<p>Use this class to parse XML files. It currently supports the following features</p><ul><li>XSD validation</li><li>Extensibility (by providing a different root object for the XML hierarchy.</li></ul><section id="autotoc_md1"><h3><a href="#autotoc_md1">Common usage</a></h3><pre class="m-code"><span class="c1">// Allocate parser</span>
 <span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">XMLParser</span><span class="o">&gt;</span><span class="w"> </span><span class="n">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">XMLParser</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
 <span class="c1">// If needed, you can customize the class representing the XML Document</span>
 <span class="c1">// just set a function returning a subclass of XMLElement</span>
@@ -86,7 +86,7 @@
 <span class="c1">// Parse</span>
 <span class="n">parser</span><span class="o">-&gt;</span><span class="n">parseXMLFile</span><span class="p">(</span><span class="n">filename</span><span class="p">);</span><span class="w"></span>
 <span class="c1">// You can retrieve the Document after the parsing</span>
-<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">XMLDocument</span><span class="o">&gt;</span><span class="w"> </span><span class="n">document</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parser</span><span class="o">-&gt;</span><span class="n">document</span><span class="p">();</span><span class="w"></span></pre></section><section id="autotoc_md4"><h3><a href="#autotoc_md4">Description</a></h3></section><section id="autotoc_md5"><h3><a href="#autotoc_md5">Validation support</a></h3><p>The parser supports XSD schema validation. This options is controlled by two methods:</p><ul><li><code>setValidateXML</code> accepts a boolean, to enable the validation</li><li><code>setSchemaLocation</code> specifies the location of the XSD schema.</li></ul><p>If both variables are set, the validation will take place before parsing. Note that currently the errors are output to standard error (or output?) and not handled directly in the code. It might be possible to handle those in code though (feature request).</p></section><section id="autotoc_md6"><h3><a href="#autotoc_md6">Todos:</a></h3><p>Possible feature requests:</p><ul><li>parse entities out of context (xmlSAXParseEntity)</li><li>Validation for in memory parsing</li><li>Use libxml in memory tree (that can be modified and dumped to file) instead of custom tree</li></ul></section>
+<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">XMLDocument</span><span class="o">&gt;</span><span class="w"> </span><span class="n">document</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parser</span><span class="o">-&gt;</span><span class="n">document</span><span class="p">();</span><span class="w"></span></pre></section><section id="autotoc_md2"><h3><a href="#autotoc_md2">Description</a></h3></section><section id="autotoc_md3"><h3><a href="#autotoc_md3">Validation support</a></h3><p>The parser supports XSD schema validation. This options is controlled by two methods:</p><ul><li><code>setValidateXML</code> accepts a boolean, to enable the validation</li><li><code>setSchemaLocation</code> specifies the location of the XSD schema.</li></ul><p>If both variables are set, the validation will take place before parsing. Note that currently the errors are output to standard error (or output?) and not handled directly in the code. It might be possible to handle those in code though (feature request).</p></section><section id="autotoc_md4"><h3><a href="#autotoc_md4">Todos:</a></h3><p>Possible feature requests:</p><ul><li>parse entities out of context (xmlSAXParseEntity)</li><li>Validation for in memory parsing</li><li>Use libxml in memory tree (that can be modified and dumped to file) instead of custom tree</li></ul></section>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
