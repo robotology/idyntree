@@ -1,7 +1,7 @@
 iDynTree [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0) [![License: LGPL v2](https://img.shields.io/badge/License-LGPL%20v2-blue.svg)](https://www.gnu.org/licenses/lgpl-2.1)  [![ZenHub](https://img.shields.io/badge/Shipping_faster_with-ZenHub-435198.svg)](https://zenhub.com)
 ===========
 
-iDynTree is a library of robots dynamics algorithms for control, estimation and simulation. It is specifically designed for free-floating robots, but it is possible to use it also  with fixed-base robots. 
+iDynTree is a library of robots dynamics algorithms for control, estimation and simulation. It is specifically designed for free-floating robots, but it is possible to use it also  with fixed-base robots.
 
 The **major characteristic features** of iDynTree are:
 * It is written in **C++**, with **Python** and **MATLAB** bindings.
