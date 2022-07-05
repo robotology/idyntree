@@ -165,7 +165,6 @@ public:
                      includeAllJointAccelerationsAsSensors(true),
                      includeAllJointTorquesAsSensors(false),
                      includeAllNetExternalWrenchesAsSensors(true),
-                     includeRcmAsSensor(false),
                      includeFixedBaseExternalWrench(false),
                      baseLink("")
     {
@@ -215,14 +214,6 @@ public:
      * Default value: true .
      */
     bool includeAllNetExternalWrenchesAsSensors;
-
-    /*
-     * If true, includes the Rate of Change of Momentum (RCM) in the task sensors vector.
-     * It is compatible only with BERDY_FLOATING_BASE and BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES
-     *
-     * Default value: false .
-     */
-    bool includeRcmAsSensor;
 
     /**
      * Vector of link names that are considered for rate of change of momentum constraint using

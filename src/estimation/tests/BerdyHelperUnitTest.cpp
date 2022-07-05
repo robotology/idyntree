@@ -377,8 +377,6 @@ void testBerdyHelpers(std::string fileName)
 
     // We test the floating base BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES
     options.berdyVariant = iDynTree::BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES;
-    // Include Rate Of Change of Momentum (RCM)
-    options.includeRcmAsSensor = true;
     options.includeAllJointTorquesAsSensors = false;
     options.includeAllJointAccelerationsAsSensors = false;
     options.includeAllNetExternalWrenchesAsSensors = true;
