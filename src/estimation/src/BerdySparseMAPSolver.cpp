@@ -285,7 +285,10 @@ namespace iDynTree {
         else
         {
 			// \bar{mu_D} = mu_d
-            expectedDynamicsPrior = priorDynamicsRegularizationExpectedValue;
+            expectedDynamicsPrior.zero();
+
+            // \bar{Sigma_D^{-1}} = 0
+            covarianceDynamicsPriorInverse = covarianceDynamicsPriorInverse * 0;
         }
         
         // Final result: covariance matrix of the whole-body dynamics, Eq. 11a
