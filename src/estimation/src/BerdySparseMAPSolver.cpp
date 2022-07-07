@@ -258,15 +258,15 @@ namespace iDynTree {
 
         // Intermediate quantities
 
-        // Covariance matrix of the prior of the dynamics: var[p(d)], Eq. 10a
-        //TODO: find a way to map to iDynTree::SparseMatrix
-        covarianceDynamicsPriorInverse
-        //    toEigen(m_intermediateQuantities.covarianceDynamicsPriorInverse)
-        //Better to assign the "sum" before, and adding the product part later
-        = toEigen(priorDynamicsRegularizationCovarianceInverse);
-
         if(berdy.getOptions().berdyVariant!=BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES)
         {
+            // Covariance matrix of the prior of the dynamics: var[p(d)], Eq. 10a
+            //TODO: find a way to map to iDynTree::SparseMatrix
+            covarianceDynamicsPriorInverse
+            //    toEigen(m_intermediateQuantities.covarianceDynamicsPriorInverse)
+            //Better to assign the "sum" before, and adding the product part later
+            = toEigen(priorDynamicsRegularizationCovarianceInverse);
+
             covarianceDynamicsPriorInverse += toEigen(dynamicsConstraintsMatrix).transpose() * toEigen(priorDynamicsConstraintsCovarianceInverse) * toEigen(dynamicsConstraintsMatrix);
 
             // decompose m_covarianceDynamicsPriorInverse
@@ -282,19 +282,15 @@ namespace iDynTree {
             toEigen(expectedDynamicsPrior) =
             covarianceDynamicsPriorInverseDecomposition.solve(toEigen(expectedDynamicsPriorRHS));
         }
-        else
-        {
-			// \bar{mu_D} = mu_d
-            expectedDynamicsPrior.zero();
-
-            // \bar{Sigma_D^{-1}} = 0
-            covarianceDynamicsPriorInverse = covarianceDynamicsPriorInverse * 0;
-        }
         
         // Final result: covariance matrix of the whole-body dynamics, Eq. 11a
         //TODO: find a way to map to iDynTree::SparseMatrix
-        covarianceDynamicsAPosterioriInverse = covarianceDynamicsPriorInverse;
-        covarianceDynamicsAPosterioriInverse += toEigen(measurementsMatrix).transpose() * toEigen(priorMeasurementsCovarianceInverse) * toEigen(measurementsMatrix);
+        covarianceDynamicsAPosterioriInverse = toEigen(measurementsMatrix).transpose() * toEigen(priorMeasurementsCovarianceInverse) * toEigen(measurementsMatrix);
+        if(berdy.getOptions().berdyVariant!=BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES)
+        {
+            covarianceDynamicsAPosterioriInverse += covarianceDynamicsPriorInverse;
+        }
+
 
         // decompose m_covarianceDynamicsAPosterioriInverse
         if (computePermutation) {
@@ -305,7 +301,11 @@ namespace iDynTree {
         covarianceDynamicsAPosterioriInverseDecomposition.factorize(covarianceDynamicsAPosterioriInverse);
 
         // Final result: expected value of the whole-body dynamics, Eq. 11b
-        toEigen(expectedDynamicsAPosterioriRHS) = (toEigen(measurementsMatrix).transpose() * toEigen(priorMeasurementsCovarianceInverse) * (toEigen(measurements) - toEigen(measurementsBias)) + covarianceDynamicsPriorInverse * toEigen(expectedDynamicsPrior));
+        toEigen(expectedDynamicsAPosterioriRHS) = toEigen(measurementsMatrix).transpose() * toEigen(priorMeasurementsCovarianceInverse) * (toEigen(measurements) - toEigen(measurementsBias));
+        if(berdy.getOptions().berdyVariant!=BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES)
+        {
+            toEigen(expectedDynamicsAPosterioriRHS) += covarianceDynamicsPriorInverse * toEigen(expectedDynamicsPrior);
+        }
         toEigen(expectedDynamicsAPosteriori) =
         covarianceDynamicsAPosterioriInverseDecomposition.solve(toEigen(expectedDynamicsAPosterioriRHS));
     }
