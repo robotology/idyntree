@@ -1527,7 +1527,7 @@ bool BerdyHelper::initBerdyFloatingBase()
         m_nrOfDynamicEquations   = 6*m_model.getNrOfLinks() + 6*m_model.getNrOfJoints();
     }
 
-    if (m_options.berdyVariant!=BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES) {
+    if (m_options.berdyVariant==BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES) {
         if (m_options.rcmConstraintLinkNamesVector.size() == 0)
         {
             reportInfo("BerdyHelpers","initBerdyFloatingBase","rcmConstraintLinkNamesVector is not initialized using berdy helper options. Considering all the model links");
