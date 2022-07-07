@@ -1,3 +1,3 @@
 function varargout = sizeOfRotationParametrization(varargin)
-  [varargout{1:nargout}] = iDynTreeMEX(2041, varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(2039, varargin{:});
 end

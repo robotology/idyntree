@@ -1,3 +1,3 @@
 function v = input_dimensions()
-  v = iDynTreeMEX(1710);
+  v = iDynTreeMEX(1708);
 end
