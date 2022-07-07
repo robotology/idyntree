@@ -64,7 +64,7 @@ classdef BerdyOptions < iDynTreeSwigRef
         iDynTreeMEX(1557, self, varargin{1});
       end
     end
-    function varargout = includeFixedBaseExternalWrench(self, varargin)
+    function varargout = rcmConstraintLinkNamesVector(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
@@ -74,7 +74,7 @@ classdef BerdyOptions < iDynTreeSwigRef
         iDynTreeMEX(1559, self, varargin{1});
       end
     end
-    function varargout = jointOnWhichTheInternalWrenchIsMeasured(self, varargin)
+    function varargout = includeFixedBaseExternalWrench(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
@@ -84,7 +84,7 @@ classdef BerdyOptions < iDynTreeSwigRef
         iDynTreeMEX(1561, self, varargin{1});
       end
     end
-    function varargout = baseLink(self, varargin)
+    function varargout = jointOnWhichTheInternalWrenchIsMeasured(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
@@ -94,12 +94,22 @@ classdef BerdyOptions < iDynTreeSwigRef
         iDynTreeMEX(1563, self, varargin{1});
       end
     end
+    function varargout = baseLink(self, varargin)
+      narginchk(1, 2)
+      if nargin==1
+        nargoutchk(0, 1)
+        varargout{1} = iDynTreeMEX(1564, self);
+      else
+        nargoutchk(0, 0)
+        iDynTreeMEX(1565, self, varargin{1});
+      end
+    end
     function varargout = checkConsistency(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1564, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1566, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1565, self);
+        iDynTreeMEX(1567, self);
         self.SwigClear();
       end
     end

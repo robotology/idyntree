@@ -5,27 +5,27 @@ classdef IFrameVisualization < iDynTreeSwigRef
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1921, self);
+        iDynTreeMEX(1924, self);
         self.SwigClear();
       end
     end
     function varargout = addFrame(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1922, self, varargin{:});
-    end
-    function varargout = setVisible(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1923, self, varargin{:});
-    end
-    function varargout = getNrOfFrames(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1924, self, varargin{:});
-    end
-    function varargout = getFrameTransform(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1925, self, varargin{:});
     end
-    function varargout = updateFrame(self,varargin)
+    function varargout = setVisible(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1926, self, varargin{:});
     end
-    function varargout = getFrameLabel(self,varargin)
+    function varargout = getNrOfFrames(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1927, self, varargin{:});
+    end
+    function varargout = getFrameTransform(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1928, self, varargin{:});
+    end
+    function varargout = updateFrame(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1929, self, varargin{:});
+    end
+    function varargout = getFrameLabel(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1930, self, varargin{:});
     end
     function self = IFrameVisualization(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')

@@ -1,3 +1,3 @@
 function v = output_dimensions_without_magnetometer()
-  v = iDynTreeMEX(1706);
+  v = iDynTreeMEX(1709);
 end

@@ -9,82 +9,82 @@ classdef Visualizer < iDynTreeSwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1968, varargin{:});
+        tmp = iDynTreeMEX(1971, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1969, self);
+        iDynTreeMEX(1972, self);
         self.SwigClear();
       end
     end
     function varargout = init(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1970, self, varargin{:});
-    end
-    function varargout = getNrOfVisualizedModels(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1971, self, varargin{:});
-    end
-    function varargout = getModelInstanceName(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1972, self, varargin{:});
-    end
-    function varargout = getModelInstanceIndex(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1973, self, varargin{:});
     end
-    function varargout = addModel(self,varargin)
+    function varargout = getNrOfVisualizedModels(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1974, self, varargin{:});
     end
-    function varargout = modelViz(self,varargin)
+    function varargout = getModelInstanceName(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1975, self, varargin{:});
     end
-    function varargout = camera(self,varargin)
+    function varargout = getModelInstanceIndex(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1976, self, varargin{:});
     end
-    function varargout = enviroment(self,varargin)
+    function varargout = addModel(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1977, self, varargin{:});
     end
-    function varargout = environment(self,varargin)
+    function varargout = modelViz(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1978, self, varargin{:});
     end
-    function varargout = vectors(self,varargin)
+    function varargout = camera(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1979, self, varargin{:});
     end
-    function varargout = frames(self,varargin)
+    function varargout = enviroment(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1980, self, varargin{:});
     end
-    function varargout = textures(self,varargin)
+    function varargout = environment(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1981, self, varargin{:});
     end
-    function varargout = getLabel(self,varargin)
+    function varargout = vectors(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1982, self, varargin{:});
     end
-    function varargout = width(self,varargin)
+    function varargout = frames(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1983, self, varargin{:});
     end
-    function varargout = height(self,varargin)
+    function varargout = textures(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1984, self, varargin{:});
     end
-    function varargout = run(self,varargin)
+    function varargout = getLabel(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1985, self, varargin{:});
     end
-    function varargout = draw(self,varargin)
+    function varargout = width(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1986, self, varargin{:});
     end
-    function varargout = subDraw(self,varargin)
+    function varargout = height(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1987, self, varargin{:});
     end
-    function varargout = drawToFile(self,varargin)
+    function varargout = run(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1988, self, varargin{:});
     end
-    function varargout = close(self,varargin)
+    function varargout = draw(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1989, self, varargin{:});
     end
-    function varargout = isWindowActive(self,varargin)
+    function varargout = subDraw(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1990, self, varargin{:});
     end
-    function varargout = setColorPalette(self,varargin)
+    function varargout = drawToFile(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(1991, self, varargin{:});
+    end
+    function varargout = close(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1992, self, varargin{:});
+    end
+    function varargout = isWindowActive(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1993, self, varargin{:});
+    end
+    function varargout = setColorPalette(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(1994, self, varargin{:});
     end
   end
   methods(Static)
