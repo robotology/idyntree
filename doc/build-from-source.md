@@ -12,7 +12,7 @@ In case they are disabled, tipically some functionality of iDynTree is not provi
 |:-----:|:-----------------:|:------------------------:|:-------------------------------:|:------------------------------------------:|
 | [Eigen](http://eigen.tuxfamily.org) | **Yes** |  n.a. | ✔️ | ✔️ |
 | [Libxml2](http://xmlsoft.org/) | **Yes** |  n.a.      | ✔️ | ✔️ |
-| [Assimp](http://www.assimp.org/) | No|  `IDYNTREE_USES_ASSIMP` | ❌ |  ❌ | 
+| [Assimp](http://www.assimp.org/) | No|  `IDYNTREE_USES_ASSIMP` | ✔️ |  ✔️ | 
 | [IPOPT](https://projects.coin-or.org/Ipopt) | No |  `IDYNTREE_USES_IPOPT` | ✔️ | ✔️ |
 | [irrlicht](http://irrlicht.sourceforge.net/) | No | `IDYNTREE_USES_IRRLICHT` | ✔️ | ✔️ |
 | [osqp-eigen](https://github.com/robotology/osqp-eigen) | No | `IDYNTREE_USES_OSQPEIGEN` | ✔️ | ✔️ |
