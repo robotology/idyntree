@@ -216,13 +216,6 @@ public:
     bool includeAllNetExternalWrenchesAsSensors;
 
     /**
-     * Vector of link names that are considered for rate of change of momentum constraint using
-     * Rate of Change of Momentum (RCM) sensor
-     * The default value is set to contain all the links present in the model
-     */
-    std::vector<std::string> rcmConstraintLinkNamesVector;
-
-    /**
      * If includeNetExternalWrenchesAsSensors is true and the
      * variant is ORIGINAL_BERDY_FIXED_BASE, if this is
      * true the external wrench acting on the base fixed link

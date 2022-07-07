@@ -204,15 +204,6 @@ bool BerdyHelper::init(const Model& model,
     base_H_links.resize(m_model.getNrOfLinks());
 
     bool res = m_options.checkConsistency();
-    for(std::string& rcmConstraintLinkName : m_options.rcmConstraintLinkNamesVector)
-    {
-        if(!m_model.isLinkNameUsed(rcmConstraintLinkName))
-        {
-            
-            reportError("BerdyHelpers","init",("Link name "+rcmConstraintLinkName+" specified in rcmConstraintLinkNamesVector does not exist.").c_str());
-            res = false;
-        }
-    }
 
     if( !res )
     {
@@ -1475,14 +1466,8 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
         // Get the row index corresponding to the RCM sensor
         IndexRange rcmRange = this->getRangeRCMSensorVariable(RCM_SENSOR);
 
-        for(size_t i = 0; i < m_options.rcmConstraintLinkNamesVector.size(); i++)
+        for(LinkIndex idx = 0 ; idx < m_model.getNrOfLinks(); idx++)
         {
-            // Get link name from the vector
-            std::string linkName = m_options.rcmConstraintLinkNamesVector.at(i);
-
-            // Get link index from the vector
-            LinkIndex idx = m_model.getLinkIndex(linkName);
-
             // Get the column index corresponding to the net link external wrench sensor
             IndexRange netExternalWrenchVariableIndexRange = this->getRangeLinkVariable(NET_EXT_WRENCH, idx);
 
@@ -1493,9 +1478,7 @@ bool BerdyHelper::computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>
             matrixYElements.addSubMatrix(rcmRange.offset,
                                          netExternalWrenchVariableIndexRange.offset,
                                          base_X_link.asAdjointTransformWrench());
-
         }
-
 
         // bY for the RCM sensor is zero
     }
@@ -1525,18 +1508,6 @@ bool BerdyHelper::initBerdyFloatingBase()
         // The dynamics equations considered by floating berdy are the acceleration propagation for each joint and the
         // Newton-Euler equations for each link
         m_nrOfDynamicEquations   = 6*m_model.getNrOfLinks() + 6*m_model.getNrOfJoints();
-    }
-
-    if (m_options.berdyVariant==BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES) {
-        if (m_options.rcmConstraintLinkNamesVector.size() == 0)
-        {
-            reportInfo("BerdyHelpers","initBerdyFloatingBase","rcmConstraintLinkNamesVector is not initialized using berdy helper options. Considering all the model links");
-            m_options.rcmConstraintLinkNamesVector.resize(m_model.getNrOfLinks());
-            for (size_t l = 0; l < m_model.getNrOfLinks(); l++)
-            {
-                m_options.rcmConstraintLinkNamesVector.at(l) = m_model.getLinkName(l);
-            }
-        }
     }
 
     initSensorsMeasurements();
