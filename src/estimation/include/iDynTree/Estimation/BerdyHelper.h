@@ -62,7 +62,14 @@ enum BerdyVariants
      * for accounting for free floating dynamics and removing the NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV from the dynamic variables.
      *
      */
-    BERDY_FLOATING_BASE = 1
+    BERDY_FLOATING_BASE = 1,
+
+    /**
+     * Modified version of floating base Berdy
+     * for accounting centroidal dynamics constraints towards estimating the external link wrench independently of the internal joint torque estimates.
+     */
+    BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES = 2
+
 };
 
 /**
@@ -128,7 +135,13 @@ enum BerdySensorTypes
     /**
      * Non-physical sensor that measures the wrench trasmitted by a joint.
      */
-    JOINT_WRENCH_SENSOR     = 1003
+    JOINT_WRENCH_SENSOR     = 1003,
+
+    /**
+     * Non-physical sensor that holds the value of Rate of Change of Momentum (RCM) of the system
+     * for centroidal dynamics constraint
+     */
+    RCM_SENSOR = 1004
 };
 
 bool isLinkBerdyDynamicVariable(const BerdyDynamicVariablesTypes dynamicVariableType);
@@ -369,9 +382,6 @@ class BerdyHelper
     size_t m_nrOfDynamicEquations;
     size_t m_nrOfSensorsMeasurements;
 
-    /**
-     * Buffer of link-specific body velocities.
-     */
 
     /**
      * Joint positions
@@ -409,7 +419,6 @@ class BerdyHelper
 
     IndexRange getRangeOriginalBerdyFixedBase(const BerdyDynamicVariablesTypes dynamicVariableType, const TraversalIndex idx) const;
 
-
     /**
      * Ranges for specific dynamics equations
      */
@@ -424,7 +433,11 @@ class BerdyHelper
     IndexRange getRangeAccelerationPropagationFloatingBase(const LinkIndex idx) const;
     IndexRange getRangeNewtonEulerEquationsFloatingBase(const LinkIndex idx) const;
 
+    // Y matrices computation 
     bool computeBerdySensorMatrices(SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize& bY);
+    bool computeBerdySensorsMatricesFromModel(SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize& bY);
+
+    // D matrices computation
     bool computeBerdyDynamicsMatricesFixedBase(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD);
     bool computeBerdyDynamicsMatricesFloatingBase(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize& bD);
 
@@ -451,6 +464,8 @@ class BerdyHelper
                                                JointDOFsDoubleArray    & jointAccs,
                                                VectorDynSize& d);
 
+    bool serializeDynamicVariablesNonCollocatedWrenches(LinkNetExternalWrenches& netExtWrenches,
+                                                        VectorDynSize& d);
     /**
      * Helper for mapping sensors measurements to the Y vector.
      */
@@ -459,6 +474,7 @@ class BerdyHelper
         size_t dofTorquesOffset;
         size_t netExtWrenchOffset;
         size_t jointWrenchOffset;
+        size_t rcmOffset;
     } berdySensorTypeOffsets;
 
     /**
@@ -488,6 +504,12 @@ class BerdyHelper
      * and the link frames.
      */
     std::vector<Transform> m_link_H_externalWrenchMeasurementFrame;
+
+    /*
+     * LinkPositions variable containing the transforms between the base and the model links
+     *
+     */
+    LinkPositions base_H_links;
 
 
 public:
@@ -580,6 +602,7 @@ public:
      */
     bool getBerdyMatrices(SparseMatrix<iDynTree::ColumnMajor>& D, VectorDynSize &bD,
                           SparseMatrix<iDynTree::ColumnMajor>& Y, VectorDynSize &bY);
+
     /**
      * Get Berdy matrices
      *
@@ -588,7 +611,6 @@ public:
      */
     bool getBerdyMatrices(MatrixDynSize & D, VectorDynSize & bD,
                           MatrixDynSize & Y, VectorDynSize & bY);
-
 
     /**
      * Return the internal ordering of the sensors
@@ -607,6 +629,7 @@ public:
     IndexRange getRangeDOFSensorVariable(const BerdySensorTypes sensorType, const DOFIndex idx) const;
     IndexRange getRangeJointSensorVariable(const BerdySensorTypes sensorType, const JointIndex idx) const;
     IndexRange getRangeLinkSensorVariable(const BerdySensorTypes sensorType, const LinkIndex idx) const;
+    IndexRange getRangeRCMSensorVariable(const BerdySensorTypes sensorType) const;
 
     /**
      * Ranges of dynamic variables
@@ -635,8 +658,8 @@ public:
                                   JointDOFsDoubleArray    & jointTorques,
                                   JointDOFsDoubleArray    & jointAccs,
                                   LinkInternalWrenches    & linkJointWrenches,
-                                  VectorDynSize& y);
-
+                                  SpatialForceVector      & rcm, // Rate of Change of Momentum (RCM)
+                                  VectorDynSize           & y);
 
 
     /**
@@ -647,7 +670,6 @@ public:
     bool serializeDynamicVariablesComputedFromFixedBaseRNEA(JointDOFsDoubleArray  & jointAccs,
                                                             LinkNetExternalWrenches & netExtWrenches,
                                                             VectorDynSize& d);
-
 
     /**
      * Extract the joint torques from the dynamic variables
@@ -661,7 +683,6 @@ public:
      */
     bool extractLinkNetExternalWrenchesFromDynamicVariables(const VectorDynSize& d,
                                                             LinkNetExternalWrenches& netExtWrenches) const;
-
 
     /**
       * @name Methods to submit the input data for dynamics computations.

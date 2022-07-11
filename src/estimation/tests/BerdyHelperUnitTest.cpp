@@ -28,6 +28,7 @@
 
 using namespace iDynTree;
 
+
 void testBerdySensorMatrices(BerdyHelper & berdy, std::string filename)
 {
     // Check the concistency of the sensor matrices
@@ -123,9 +124,19 @@ void testBerdySensorMatrices(BerdyHelper & berdy, std::string filename)
         SensorsMeasurements sensMeas(berdy.sensors());
         bool ok = predictSensorsMeasurementsFromRawBuffers(berdy.model(),berdy.sensors(),berdy.dynamicTraversal(),
                                                            linkVels,linkProperAccs,intWrenches,sensMeas);
+ 
+	    // Handle rate of change of momentum in base
+        SpatialForceVector rcm;
+        rcm.zero();
+        for(int linkIdx = 0; linkIdx<extWrenches.getNrOfLinks(); linkIdx++)
+        {
+            // compute {}^{B}H_{L}
+            Transform base_H_link = linkPos(baseIdx).inverse() * linkPos(linkIdx); 
+            rcm = rcm + (base_H_link * extWrenches(linkIdx));
+        }
 
         ASSERT_IS_TRUE(ok);
-        ok = berdy.serializeSensorVariables(sensMeas,extWrenches,genTrqs.jointTorques(),generalizedProperAccs.jointAcc(),intWrenches,y);
+        ok = berdy.serializeSensorVariables(sensMeas,extWrenches,genTrqs.jointTorques(),generalizedProperAccs.jointAcc(),intWrenches,rcm,y);
         ASSERT_IS_TRUE(ok);
 
         // Check that y = Y*d + bY
@@ -275,8 +286,10 @@ void testBerdyOriginalFixedBase(BerdyHelper & berdy, std::string filename)
         ok = predictSensorsMeasurementsFromRawBuffers(berdy.model(),berdy.sensors(),berdy.dynamicTraversal(),
                                                       linkVels,linkProperAccs,intWrenches,sensMeas);
         ASSERT_IS_TRUE(ok);
-
-        ok = berdy.serializeSensorVariables(sensMeas,extWrenches,genTrqs.jointTorques(),generalizedProperAccs.jointAcc(),intWrenches,y);
+	    // Rate of Change of Momentum (RCM) is not used with this variant
+        SpatialForceVector dummyRcm;
+        dummyRcm.zero();
+        ok = berdy.serializeSensorVariables(sensMeas,extWrenches,genTrqs.jointTorques(),generalizedProperAccs.jointAcc(),intWrenches,dummyRcm,y);
         ASSERT_IS_TRUE(ok);
 
         // Check that y = Y*d + bY
@@ -358,6 +371,16 @@ void testBerdyHelpers(std::string fileName)
     // For now floating berdy needs all the ext wrenches as dynamic variables
     options.includeAllNetExternalWrenchesAsDynamicVariables = true;
     options.includeAllJointTorquesAsSensors = true;
+    ok = berdyHelper.init(estimator.model(), estimator.sensors(), options);
+    ASSERT_IS_TRUE(ok);
+    testBerdySensorMatrices(berdyHelper, fileName);
+
+    // We test the floating base BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES
+    options.berdyVariant = iDynTree::BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES;
+    options.includeAllJointTorquesAsSensors = false;
+    options.includeAllJointAccelerationsAsSensors = false;
+    options.includeAllNetExternalWrenchesAsSensors = true;
+    options.includeAllNetExternalWrenchesAsDynamicVariables = true;
     ok = berdyHelper.init(estimator.model(), estimator.sensors(), options);
     ASSERT_IS_TRUE(ok);
     testBerdySensorMatrices(berdyHelper, fileName);
