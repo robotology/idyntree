@@ -10,7 +10,7 @@
         <name>time_step_in_seconds</name>
         <initializer>{0.01}</initializer>
         <briefdescription>
-<para>discretization time step in seconds, default value: <formula id="72">$ 0.01 s $</formula> </para>
+<para>discretization time step in seconds, default value: <formula id="61">$ 0.01 s $</formula> </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -25,7 +25,7 @@
         <name>bias_correlation_time_factor</name>
         <initializer>{0.01}</initializer>
         <briefdescription>
-<para>time factor modeling how fast the bias can vary, default value: <formula id="73">$ 0.01 $</formula> </para>
+<para>time factor modeling how fast the bias can vary, default value: <formula id="62">$ 0.01 $</formula> </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -40,7 +40,7 @@
         <name>accelerometer_noise_variance</name>
         <initializer>{0.001}</initializer>
         <briefdescription>
-<para>measurement noise covariance <formula id="74">$ \sigma_{acc}^{2} $</formula> of accelerometer measurement, default value: <formula id="75">$ 0.001 $</formula> </para>
+<para>measurement noise covariance <formula id="63">$ \sigma_{acc}^{2} $</formula> of accelerometer measurement, default value: <formula id="64">$ 0.001 $</formula> </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -55,7 +55,7 @@
         <name>magnetometer_noise_variance</name>
         <initializer>{0.001}</initializer>
         <briefdescription>
-<para>measurement noise covariance <formula id="76">$ \sigma_{mag}^{2} $</formula> of magnetometer measurement, default value: <formula id="75">$ 0.001 $</formula> </para>
+<para>measurement noise covariance <formula id="65">$ \sigma_{mag}^{2} $</formula> of magnetometer measurement, default value: <formula id="64">$ 0.001 $</formula> </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -70,7 +70,7 @@
         <name>gyroscope_noise_variance</name>
         <initializer>{0.001}</initializer>
         <briefdescription>
-<para>system noise covariance <formula id="77">$ \sigma_{gyro}^{2} $</formula> of gyroscope measurement, since it is the input to the system, default value: <formula id="75">$ 0.001 $</formula> </para>
+<para>system noise covariance <formula id="66">$ \sigma_{gyro}^{2} $</formula> of gyroscope measurement, since it is the input to the system, default value: <formula id="64">$ 0.001 $</formula> </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -85,7 +85,7 @@
         <name>gyro_bias_noise_variance</name>
         <initializer>{0.0001}</initializer>
         <briefdescription>
-<para>system noise covariance <formula id="78">$ \sigma_{gyrobias}^{2} $</formula> of gyroscope bias estimate, default value: <formula id="79">$ 0.0001 $</formula> </para>
+<para>system noise covariance <formula id="67">$ \sigma_{gyrobias}^{2} $</formula> of gyroscope bias estimate, default value: <formula id="68">$ 0.0001 $</formula> </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -100,7 +100,7 @@
         <name>initial_orientation_error_variance</name>
         <initializer>{10}</initializer>
         <briefdescription>
-<para>initial state covariance <formula id="80">$ \sigma_{q_0}^{2} $</formula> of orientation, default value: <formula id="81">$ 10 $</formula> </para>
+<para>initial state covariance <formula id="69">$ \sigma_{q_0}^{2} $</formula> of orientation, default value: <formula id="70">$ 10 $</formula> </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -115,7 +115,7 @@
         <name>initial_ang_vel_error_variance</name>
         <initializer>{10}</initializer>
         <briefdescription>
-<para>initial state covariance <formula id="82">$ \sigma_{\omega_0}^{2} $</formula> of angular velocity, default value: <formula id="81">$ 10 $</formula> </para>
+<para>initial state covariance <formula id="71">$ \sigma_{\omega_0}^{2} $</formula> of angular velocity, default value: <formula id="70">$ 10 $</formula> </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -130,7 +130,7 @@
         <name>initial_gyro_bias_error_variance</name>
         <initializer>{10}</initializer>
         <briefdescription>
-<para>measurement noise covariance <formula id="74">$ \sigma_{acc}^{2} $</formula> of gyroscope bias, default value: <formula id="81">$ 10 $</formula> </para>
+<para>measurement noise covariance <formula id="63">$ \sigma_{acc}^{2} $</formula> of gyroscope bias, default value: <formula id="70">$ 10 $</formula> </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
