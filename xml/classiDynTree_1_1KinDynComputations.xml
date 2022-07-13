@@ -237,7 +237,7 @@
 <para>Set the link that is used as the floating base link. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>true if all went well, false otherwise (for example if the link name was not found). </para>
+<para>Currently supports only links. See <ulink url="https://github.com/robotology/idyntree/issues/422">https://github.com/robotology/idyntree/issues/422</ulink>. <simplesect kind="return"><para>true if all went well, false otherwise (for example if the link name was not found). </para>
 </simplesect>
 </para>
         </detaileddescription>
