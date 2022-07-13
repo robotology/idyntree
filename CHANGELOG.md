@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Additional functionalities for pybind11 bindings (https://github.com/robotology/idyntree/pull/1001):
+     - `Twist` class
+     - `ModelLoader` class
+     - Basic kinematics support in `KinDynComputations`
+
 ### Changed
 - No warning is printed if a sensor not supported by iDynTree is found in an URDF file (https://github.com/robotology/idyntree/pull/997).
 
