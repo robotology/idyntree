@@ -6,14 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased Major]
 
-## [Unreleased]
-
 ### Added
 - Added a new Berdy variant that accounts for estimating the external link wrenches independently of the internal joint torque estimates (https://github.com/robotology/idyntree/pull/991).
 
 ### Changed
-- No warning is printed if a sensor not supported by iDynTree is found in an URDF file (https://github.com/robotology/idyntree/pull/997).
 - Changed signature of the method `BerdyHelper::serializeDynamicVariables` in order to serialize also the `RCM_SENSOR` (https://github.com/robotology/idyntree/pull/991).
+
+
+## [Unreleased]
+
+### Added
+- Additional functionalities for pybind11 bindings (https://github.com/robotology/idyntree/pull/1001):
+     - `Twist` class
+     - `ModelLoader` class
+     - Basic kinematics support in `KinDynComputations`
+
+### Changed
+- No warning is printed if a sensor not supported by iDynTree is found in an URDF file (https://github.com/robotology/idyntree/pull/997).
 
 ## [5.2.1] - 2022-05-19
 
