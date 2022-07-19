@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.3.0] - 2022-07-19
+
 ### Added
 - Additional functionalities for pybind11 bindings (https://github.com/robotology/idyntree/pull/1001):
      - `Twist` class
