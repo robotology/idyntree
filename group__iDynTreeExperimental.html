@@ -244,7 +244,8 @@
           <dl class="m-doc">
             <dt>
               <span class="m-doc-wrap-bumper">enum <a href="#ga62aff3167b9df327b4b1db6affadd21f" class="m-doc">BerdyVariants</a> { </span><span class="m-doc-wrap"><a href="#gga62aff3167b9df327b4b1db6affadd21faf59c4a22cd72d6e001dbba40910e9c32" class="m-doc">ORIGINAL_BERDY_FIXED_BASE</a> = 0,
-              <a href="#gga62aff3167b9df327b4b1db6affadd21fa1ca580068ec7f491800abeadf68185e5" class="m-doc">BERDY_FLOATING_BASE</a> = 1 }</span>
+              <a href="#gga62aff3167b9df327b4b1db6affadd21fa1ca580068ec7f491800abeadf68185e5" class="m-doc">BERDY_FLOATING_BASE</a> = 1,
+              <a href="#gga62aff3167b9df327b4b1db6affadd21fa02a303d789d6ebc0a5c3829cd72d4b4d" class="m-doc">BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES</a> = 2 }</span>
             </dt>
             <dd>Enumeration of the Berdy variants implemented in this class.</dd>
             <dt>
@@ -266,7 +267,8 @@
               <a href="#ggab629c8d25391838124595ba8961654e4a3b05b1fa0daf40ead3bb45631fc1b425" class="m-doc">DOF_ACCELERATION_SENSOR</a> = 1000,
               <a href="#ggab629c8d25391838124595ba8961654e4afe52ea6ba4b27e76e1fd986700941151" class="m-doc">DOF_TORQUE_SENSOR</a> = 1001,
               <a href="#ggab629c8d25391838124595ba8961654e4aa295b9c16be05c81c215270381d2b648" class="m-doc">NET_EXT_WRENCH_SENSOR</a> = 1002,
-              <a href="#ggab629c8d25391838124595ba8961654e4a207d61f7e8d81f6729f6dd080ba8a06c" class="m-doc">JOINT_WRENCH_SENSOR</a> = 1003 }</span>
+              <a href="#ggab629c8d25391838124595ba8961654e4a207d61f7e8d81f6729f6dd080ba8a06c" class="m-doc">JOINT_WRENCH_SENSOR</a> = 1003,
+              <a href="#ggab629c8d25391838124595ba8961654e4a86f8f9556695317ef66bb0adef6cd978" class="m-doc">RCM_SENSOR</a> = 1004 }</span>
             </dt>
             <dd>Enumeration describing the possible sensor types implemented in Berdy.</dd>
           </dl>
@@ -294,6 +296,12 @@
                   <td><a href="#gga62aff3167b9df327b4b1db6affadd21fa1ca580068ec7f491800abeadf68185e5" class="m-doc-self" id="gga62aff3167b9df327b4b1db6affadd21fa1ca580068ec7f491800abeadf68185e5">BERDY_FLOATING_BASE</a></td>
                   <td>
                   <p>Modified version of Berdy for accounting for free floating dynamics and removing the NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV from the dynamic variables.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#gga62aff3167b9df327b4b1db6affadd21fa02a303d789d6ebc0a5c3829cd72d4b4d" class="m-doc-self" id="gga62aff3167b9df327b4b1db6affadd21fa02a303d789d6ebc0a5c3829cd72d4b4d">BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES</a></td>
+                  <td>
+                  <p>Modified version of floating base Berdy for accounting centroidal dynamics constraints towards estimating the external link wrench independently of the internal joint torque estimates.</p>
                   </td>
                 </tr>
               </tbody>
@@ -494,6 +502,12 @@ $ \ddot{q}_i $
                   <td><a href="#ggab629c8d25391838124595ba8961654e4a207d61f7e8d81f6729f6dd080ba8a06c" class="m-doc-self" id="ggab629c8d25391838124595ba8961654e4a207d61f7e8d81f6729f6dd080ba8a06c">JOINT_WRENCH_SENSOR</a></td>
                   <td>
                   <p>Non-physical sensor that measures the wrench trasmitted by a joint.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#ggab629c8d25391838124595ba8961654e4a86f8f9556695317ef66bb0adef6cd978" class="m-doc-self" id="ggab629c8d25391838124595ba8961654e4a86f8f9556695317ef66bb0adef6cd978">RCM_SENSOR</a></td>
+                  <td>
+                  <p>Non-physical sensor that holds the value of Rate of Change of Momentum (RCM) of the system for centroidal dynamics constraint.</p>
                   </td>
                 </tr>
               </tbody>

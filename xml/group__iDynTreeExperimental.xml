@@ -68,6 +68,15 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
+        <enumvalue id="group__iDynTreeExperimental_1gga62aff3167b9df327b4b1db6affadd21fa02a303d789d6ebc0a5c3829cd72d4b4d" prot="public">
+          <name>BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+<para>Modified version of floating base Berdy for accounting centroidal dynamics constraints towards estimating the external link wrench independently of the internal joint torque estimates. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
         <briefdescription>
 <para>Enumeration of the Berdy variants implemented in this class. </para>
         </briefdescription>
@@ -78,7 +87,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BerdyHelper.h" line="43" column="1" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="44" bodyend="66"/>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="43" column="1" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="44" bodyend="73"/>
       </memberdef>
       <memberdef kind="enum" id="group__iDynTreeExperimental_1ga83d8f828969dabc7dc82904d8de15312" prot="public" static="no" strong="no">
         <type></type>
@@ -148,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BerdyHelper.h" line="75" column="1" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="76" bodyend="100"/>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="82" column="1" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="83" bodyend="107"/>
       </memberdef>
       <memberdef kind="enum" id="group__iDynTreeExperimental_1gab629c8d25391838124595ba8961654e4" prot="public" static="no" strong="no">
         <type></type>
@@ -226,6 +235,15 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
+        <enumvalue id="group__iDynTreeExperimental_1ggab629c8d25391838124595ba8961654e4a86f8f9556695317ef66bb0adef6cd978" prot="public">
+          <name>RCM_SENSOR</name>
+          <initializer>= 1004</initializer>
+          <briefdescription>
+<para>Non-physical sensor that holds the value of Rate of Change of Momentum (RCM) of the system for centroidal dynamics constraint. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
         <briefdescription>
 <para>Enumeration describing the possible sensor types implemented in Berdy. </para>
         </briefdescription>
@@ -237,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BerdyHelper.h" line="118" column="1" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="119" bodyend="132"/>
+        <location file="iDynTree/Estimation/BerdyHelper.h" line="125" column="1" bodyfile="iDynTree/Estimation/BerdyHelper.h" bodystart="126" bodyend="145"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

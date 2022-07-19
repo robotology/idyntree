@@ -187,6 +187,10 @@
               const LinkIndex idx) const -&gt; <a href="structiDynTree_1_1IndexRange.html" class="m-doc">IndexRange</a></span>
             </dt>
             <dd><span></span></dd>
+            <dt id="a890a556758682e0612d97ea7460d8068">
+              <span class="m-doc-wrap-bumper">auto <a href="#a890a556758682e0612d97ea7460d8068" class="m-doc-self">getRangeRCMSensorVariable</a>(</span><span class="m-doc-wrap">const <a href="group__iDynTreeExperimental.html#gab629c8d25391838124595ba8961654e4" class="m-doc">BerdySensorTypes</a> sensorType) const -&gt; <a href="structiDynTree_1_1IndexRange.html" class="m-doc">IndexRange</a></span>
+            </dt>
+            <dd><span></span></dd>
             <dt id="adba971ab3536d551efc4cfb0ed101486">
               <span class="m-doc-wrap-bumper">auto <a href="#adba971ab3536d551efc4cfb0ed101486" class="m-doc-self">getRangeLinkVariable</a>(</span><span class="m-doc-wrap">const <a href="group__iDynTreeExperimental.html#ga83d8f828969dabc7dc82904d8de15312" class="m-doc">BerdyDynamicVariablesTypes</a> dynamicVariableType,
               const LinkIndex idx) const -&gt; <a href="structiDynTree_1_1IndexRange.html" class="m-doc">IndexRange</a></span>
@@ -216,12 +220,13 @@
               <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; d) -&gt; bool</span>
             </dt>
             <dd>Serialized dynamic variables from the separate buffers.</dd>
-            <dt id="a7d6d9e5c9e4a9f226ebccecfa2caf6c6">
-              <span class="m-doc-wrap-bumper">auto <a href="#a7d6d9e5c9e4a9f226ebccecfa2caf6c6" class="m-doc-self">serializeSensorVariables</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1SensorsMeasurements.html" class="m-doc">SensorsMeasurements</a>&amp; sensMeas,
+            <dt id="a7d5979ecd721b88574818835db8883b7">
+              <span class="m-doc-wrap-bumper">auto <a href="#a7d5979ecd721b88574818835db8883b7" class="m-doc-self">serializeSensorVariables</a>(</span><span class="m-doc-wrap"><a href="classiDynTree_1_1SensorsMeasurements.html" class="m-doc">SensorsMeasurements</a>&amp; sensMeas,
               <a href="classiDynTree_1_1LinkWrenches.html" class="m-doc">LinkNetExternalWrenches</a>&amp; netExtWrenches,
               <a href="classiDynTree_1_1JointDOFsDoubleArray.html" class="m-doc">JointDOFsDoubleArray</a>&amp; jointTorques,
               <a href="classiDynTree_1_1JointDOFsDoubleArray.html" class="m-doc">JointDOFsDoubleArray</a>&amp; jointAccs,
               <a href="classiDynTree_1_1LinkWrenches.html" class="m-doc">LinkInternalWrenches</a>&amp; linkJointWrenches,
+              <a href="classiDynTree_1_1SpatialForceVector.html" class="m-doc">SpatialForceVector</a>&amp; rcm,
               <a href="classiDynTree_1_1VectorDynSize.html" class="m-doc">VectorDynSize</a>&amp; y) -&gt; bool</span>
             </dt>
             <dd>Serialize sensor variable from separate buffers.</dd>
@@ -261,6 +266,10 @@
             <dd><span></span></dd>
             <dt id="a624f21fbf5ecdc33119f707d39528e8c">
               size_t <a href="#a624f21fbf5ecdc33119f707d39528e8c" class="m-doc-self">jointWrenchOffset</a>
+            </dt>
+            <dd><span></span></dd>
+            <dt id="a63d1b9ff4e9bdebf861a20d7d36fd4ed">
+              size_t <a href="#a63d1b9ff4e9bdebf861a20d7d36fd4ed" class="m-doc-self">rcmOffset</a>
             </dt>
             <dd><span></span></dd>
             <dt id="a1bf2f8c62b8afde8b687a02191a3501b">

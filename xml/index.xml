@@ -256,10 +256,12 @@
     <member refid="classiDynTree_1_1BerdyHelper_1a9c2b3c0f577603272c653eef00342af2" kind="variable"><name>matrixDElements</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a31d9ada4e61268c6de0020f916204d09" kind="variable"><name>matrixYElements</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a697c80cd73d90381d74b4a2a26436fc1" kind="variable"><name>m_link_H_externalWrenchMeasurementFrame</name></member>
+    <member refid="classiDynTree_1_1BerdyHelper_1a09ecc1252e06ed4a98e8f2346bbda095" kind="variable"><name>base_H_links</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1aad48a7580411076dee094425eaf68b75" kind="variable"><name>dofAccelerationOffset</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1adc34fedb4bf6b7f1b18f66fa66aed308" kind="variable"><name>dofTorquesOffset</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a0da9493e128ce7800adb90aa7cca8a84" kind="variable"><name>netExtWrenchOffset</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a624f21fbf5ecdc33119f707d39528e8c" kind="variable"><name>jointWrenchOffset</name></member>
+    <member refid="classiDynTree_1_1BerdyHelper_1a63d1b9ff4e9bdebf861a20d7d36fd4ed" kind="variable"><name>rcmOffset</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a1bf2f8c62b8afde8b687a02191a3501b" kind="variable"><name>wrenchSensors</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1af8a24a4b0fae237d14a8b4931c706f40" kind="variable"><name>jntIdxToOffset</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a1ceb40aa0d982d92d69c74bda7d478b3" kind="function"><name>initOriginalBerdyFixedBase</name></member>
@@ -273,6 +275,7 @@
     <member refid="classiDynTree_1_1BerdyHelper_1afffc632658b7c029b2c62d57ebd3f353" kind="function"><name>getRangeAccelerationPropagationFloatingBase</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1aee1970c64b9d3110df6988330f2415b5" kind="function"><name>getRangeNewtonEulerEquationsFloatingBase</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1aa405d2d256e5244db088639451c7d057" kind="function"><name>computeBerdySensorMatrices</name></member>
+    <member refid="classiDynTree_1_1BerdyHelper_1ae3de1b8b0d8c27acd5c6614fb9bbc4db" kind="function"><name>computeBerdySensorsMatricesFromModel</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a681e97c1b55663f291e193b273202e2f" kind="function"><name>computeBerdyDynamicsMatricesFixedBase</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1ab709ba38ea3e420a4ecb76aebc6f0a95" kind="function"><name>computeBerdyDynamicsMatricesFloatingBase</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a0fa7f63a4363f102670c407e07e49932" kind="function"><name>getBiasTermJointAccelerationPropagation</name></member>
@@ -281,6 +284,7 @@
     <member refid="classiDynTree_1_1BerdyHelper_1ab4eb30b66c27eb28854bef166d6f6768" kind="function"><name>cacheDynamicVariablesOrderingFloatingBase</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a080c57374e6b6e33dd3134741bebc08b" kind="function"><name>serializeDynamicVariablesFixedBase</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1af88cabedaedec0b597d6c83a32e403c0" kind="function"><name>serializeDynamicVariablesFloatingBase</name></member>
+    <member refid="classiDynTree_1_1BerdyHelper_1aa5645ca0084b69e6bc8a5dc0579899be" kind="function"><name>serializeDynamicVariablesNonCollocatedWrenches</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a87d946099a5c1491b7b5143eea33cbea" kind="function"><name>BerdyHelper</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a6efe4294c385105c4087cdc23a771dcb" kind="function"><name>model</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1afdde616aae946ca1286d18a1ceaa95da" kind="function"><name>sensors</name></member>
@@ -302,12 +306,13 @@
     <member refid="classiDynTree_1_1BerdyHelper_1a872306fd0944d855f90f4c02af249911" kind="function"><name>getRangeDOFSensorVariable</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1adeea4eb63a190a5cb05223e877d1cd73" kind="function"><name>getRangeJointSensorVariable</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1aaef6e11574a175497e3788a6f21b2121" kind="function"><name>getRangeLinkSensorVariable</name></member>
+    <member refid="classiDynTree_1_1BerdyHelper_1a890a556758682e0612d97ea7460d8068" kind="function"><name>getRangeRCMSensorVariable</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1adba971ab3536d551efc4cfb0ed101486" kind="function"><name>getRangeLinkVariable</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1aaa87e8a4cbe18717bfe1b85d8507d283" kind="function"><name>getRangeJointVariable</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a46de7046800d2515c76f07c82806234a" kind="function"><name>getRangeDOFVariable</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a6e31e5e33d4977abd91ff8ae5f946c06" kind="function"><name>getDynamicVariablesOrdering</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1ab36505d65fe931c1457d1f3401816d6b" kind="function"><name>serializeDynamicVariables</name></member>
-    <member refid="classiDynTree_1_1BerdyHelper_1a7d6d9e5c9e4a9f226ebccecfa2caf6c6" kind="function"><name>serializeSensorVariables</name></member>
+    <member refid="classiDynTree_1_1BerdyHelper_1a7d5979ecd721b88574818835db8883b7" kind="function"><name>serializeSensorVariables</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1ab2bd06be1f6e8bdc30192c4a2f1daa56" kind="function"><name>serializeDynamicVariablesComputedFromFixedBaseRNEA</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a4d20c43dafa947578e70ee7205bc8888" kind="function"><name>extractJointTorquesFromDynamicVariables</name></member>
     <member refid="classiDynTree_1_1BerdyHelper_1a27f4613ae2247590ff8040b123d425ef" kind="function"><name>extractLinkNetExternalWrenchesFromDynamicVariables</name></member>
@@ -4175,6 +4180,7 @@
     <member refid="group__iDynTreeExperimental_1ga62aff3167b9df327b4b1db6affadd21f" kind="enum"><name>BerdyVariants</name></member>
     <member refid="group__iDynTreeExperimental_1gga62aff3167b9df327b4b1db6affadd21faf59c4a22cd72d6e001dbba40910e9c32" kind="enumvalue"><name>ORIGINAL_BERDY_FIXED_BASE</name></member>
     <member refid="group__iDynTreeExperimental_1gga62aff3167b9df327b4b1db6affadd21fa1ca580068ec7f491800abeadf68185e5" kind="enumvalue"><name>BERDY_FLOATING_BASE</name></member>
+    <member refid="group__iDynTreeExperimental_1gga62aff3167b9df327b4b1db6affadd21fa02a303d789d6ebc0a5c3829cd72d4b4d" kind="enumvalue"><name>BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES</name></member>
     <member refid="group__iDynTreeExperimental_1ga83d8f828969dabc7dc82904d8de15312" kind="enum"><name>BerdyDynamicVariablesTypes</name></member>
     <member refid="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a48b4b26b9b1780cc55a5cbc89c6f0d15" kind="enumvalue"><name>LINK_BODY_PROPER_ACCELERATION</name></member>
     <member refid="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a4d8110167e729b4fd3a17147bcd1252e" kind="enumvalue"><name>NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV</name></member>
@@ -4193,6 +4199,7 @@
     <member refid="group__iDynTreeExperimental_1ggab629c8d25391838124595ba8961654e4afe52ea6ba4b27e76e1fd986700941151" kind="enumvalue"><name>DOF_TORQUE_SENSOR</name></member>
     <member refid="group__iDynTreeExperimental_1ggab629c8d25391838124595ba8961654e4aa295b9c16be05c81c215270381d2b648" kind="enumvalue"><name>NET_EXT_WRENCH_SENSOR</name></member>
     <member refid="group__iDynTreeExperimental_1ggab629c8d25391838124595ba8961654e4a207d61f7e8d81f6729f6dd080ba8a06c" kind="enumvalue"><name>JOINT_WRENCH_SENSOR</name></member>
+    <member refid="group__iDynTreeExperimental_1ggab629c8d25391838124595ba8961654e4a86f8f9556695317ef66bb0adef6cd978" kind="enumvalue"><name>RCM_SENSOR</name></member>
     <member refid="BipedFootContactClassifier_8h_1a87e9224ed19ef268687c0d2522048946" kind="enum"><name>SwitchingPattern</name></member>
     <member refid="BipedFootContactClassifier_8h_1a87e9224ed19ef268687c0d2522048946a524b0c6a15e4d5b55f396a39e42ab305" kind="enumvalue"><name>ALTERNATE_CONTACT</name></member>
     <member refid="BipedFootContactClassifier_8h_1a87e9224ed19ef268687c0d2522048946ad1645067b3ead8a700e7551ff0af01d9" kind="enumvalue"><name>LATEST_ACTIVE_CONTACT</name></member>
@@ -4820,6 +4827,7 @@
     <member refid="group__iDynTreeExperimental_1ga62aff3167b9df327b4b1db6affadd21f" kind="enum"><name>BerdyVariants</name></member>
     <member refid="group__iDynTreeExperimental_1gga62aff3167b9df327b4b1db6affadd21faf59c4a22cd72d6e001dbba40910e9c32" kind="enumvalue"><name>ORIGINAL_BERDY_FIXED_BASE</name></member>
     <member refid="group__iDynTreeExperimental_1gga62aff3167b9df327b4b1db6affadd21fa1ca580068ec7f491800abeadf68185e5" kind="enumvalue"><name>BERDY_FLOATING_BASE</name></member>
+    <member refid="group__iDynTreeExperimental_1gga62aff3167b9df327b4b1db6affadd21fa02a303d789d6ebc0a5c3829cd72d4b4d" kind="enumvalue"><name>BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES</name></member>
     <member refid="group__iDynTreeExperimental_1ga83d8f828969dabc7dc82904d8de15312" kind="enum"><name>BerdyDynamicVariablesTypes</name></member>
     <member refid="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a48b4b26b9b1780cc55a5cbc89c6f0d15" kind="enumvalue"><name>LINK_BODY_PROPER_ACCELERATION</name></member>
     <member refid="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a4d8110167e729b4fd3a17147bcd1252e" kind="enumvalue"><name>NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV</name></member>
@@ -4838,6 +4846,7 @@
     <member refid="group__iDynTreeExperimental_1ggab629c8d25391838124595ba8961654e4afe52ea6ba4b27e76e1fd986700941151" kind="enumvalue"><name>DOF_TORQUE_SENSOR</name></member>
     <member refid="group__iDynTreeExperimental_1ggab629c8d25391838124595ba8961654e4aa295b9c16be05c81c215270381d2b648" kind="enumvalue"><name>NET_EXT_WRENCH_SENSOR</name></member>
     <member refid="group__iDynTreeExperimental_1ggab629c8d25391838124595ba8961654e4a207d61f7e8d81f6729f6dd080ba8a06c" kind="enumvalue"><name>JOINT_WRENCH_SENSOR</name></member>
+    <member refid="group__iDynTreeExperimental_1ggab629c8d25391838124595ba8961654e4a86f8f9556695317ef66bb0adef6cd978" kind="enumvalue"><name>RCM_SENSOR</name></member>
     <member refid="BerdyHelper_8h_1a39f8730ab92b19678c82e418b8c0f2a3" kind="function"><name>isLinkBerdyDynamicVariable</name></member>
     <member refid="BerdyHelper_8h_1a1d21c6d1ea587b6ed88d52bdf43fcf8b" kind="function"><name>isJointBerdyDynamicVariable</name></member>
     <member refid="BerdyHelper_8h_1a517a9e2101a59831cf912d8559b4900c" kind="function"><name>isDOFBerdyDynamicVariable</name></member>
@@ -5302,6 +5311,7 @@
     <member refid="group__iDynTreeExperimental_1ga62aff3167b9df327b4b1db6affadd21f" kind="enum"><name>BerdyVariants</name></member>
     <member refid="group__iDynTreeExperimental_1gga62aff3167b9df327b4b1db6affadd21faf59c4a22cd72d6e001dbba40910e9c32" kind="enumvalue"><name>ORIGINAL_BERDY_FIXED_BASE</name></member>
     <member refid="group__iDynTreeExperimental_1gga62aff3167b9df327b4b1db6affadd21fa1ca580068ec7f491800abeadf68185e5" kind="enumvalue"><name>BERDY_FLOATING_BASE</name></member>
+    <member refid="group__iDynTreeExperimental_1gga62aff3167b9df327b4b1db6affadd21fa02a303d789d6ebc0a5c3829cd72d4b4d" kind="enumvalue"><name>BERDY_FLOATING_BASE_NON_COLLOCATED_EXT_WRENCHES</name></member>
     <member refid="group__iDynTreeExperimental_1ga83d8f828969dabc7dc82904d8de15312" kind="enum"><name>BerdyDynamicVariablesTypes</name></member>
     <member refid="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a48b4b26b9b1780cc55a5cbc89c6f0d15" kind="enumvalue"><name>LINK_BODY_PROPER_ACCELERATION</name></member>
     <member refid="group__iDynTreeExperimental_1gga83d8f828969dabc7dc82904d8de15312a4d8110167e729b4fd3a17147bcd1252e" kind="enumvalue"><name>NET_INT_AND_EXT_WRENCHES_ON_LINK_WITHOUT_GRAV</name></member>
@@ -5320,6 +5330,7 @@
     <member refid="group__iDynTreeExperimental_1ggab629c8d25391838124595ba8961654e4afe52ea6ba4b27e76e1fd986700941151" kind="enumvalue"><name>DOF_TORQUE_SENSOR</name></member>
     <member refid="group__iDynTreeExperimental_1ggab629c8d25391838124595ba8961654e4aa295b9c16be05c81c215270381d2b648" kind="enumvalue"><name>NET_EXT_WRENCH_SENSOR</name></member>
     <member refid="group__iDynTreeExperimental_1ggab629c8d25391838124595ba8961654e4a207d61f7e8d81f6729f6dd080ba8a06c" kind="enumvalue"><name>JOINT_WRENCH_SENSOR</name></member>
+    <member refid="group__iDynTreeExperimental_1ggab629c8d25391838124595ba8961654e4a86f8f9556695317ef66bb0adef6cd978" kind="enumvalue"><name>RCM_SENSOR</name></member>
   </compound>
   <compound refid="group__iDynTreeInverseKinematics" kind="group"><name>iDynTreeInverseKinematics</name>
   </compound>
