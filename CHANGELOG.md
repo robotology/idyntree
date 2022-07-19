@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased Major]
 
+### Added
+- Added a new Berdy variant that accounts for estimating the external link wrenches independently of the internal joint torque estimates (https://github.com/robotology/idyntree/pull/991).
+
+### Changed
+- Changed signature of the method `BerdyHelper::serializeDynamicVariables` in order to serialize also the `RCM_SENSOR` (https://github.com/robotology/idyntree/pull/991).
+
+
 ## [Unreleased]
 
 ## [5.3.0] - 2022-07-19
