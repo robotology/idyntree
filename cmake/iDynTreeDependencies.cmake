@@ -63,7 +63,7 @@ if(NOT TARGET Eigen3::Eigen)
 endif()
 
 if(NOT TARGET LibXml2::LibXml2)
-  find_package(LibXml2 REQUIRED)
+  find_package(LibXml2 REQUIRED CONFIG)
 endif()
 
 idyntree_handle_dependency(YARP COMPONENTS os dev math rosmsg idl_tools MAIN_TARGET YARP::YARP_os)
