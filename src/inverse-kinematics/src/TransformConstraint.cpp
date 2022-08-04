@@ -87,7 +87,7 @@ namespace kinematics {
     const double TransformConstraint::getPositionWeight() const { return m_posWeight; }
     void TransformConstraint::setPositionWeight(const double newPosWeight) { if (newPosWeight >= 0.0) m_posWeight = newPosWeight; }
     const double TransformConstraint::getRotationWeight() const { return m_rotWeight; }
-    void TransformConstraint::setRotationWeight(const double newRotWeight) { if (newRotWeight >= 0.0) m_posWeight = newRotWeight; }
+    void TransformConstraint::setRotationWeight(const double newRotWeight) { if (newRotWeight >= 0.0) m_rotWeight = newRotWeight; }
 
     void TransformConstraint::setTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraint mode){ m_resolutionMode = mode; }
     iDynTree::InverseKinematicsTreatTargetAsConstraint TransformConstraint::targetResolutionMode() const{ return m_resolutionMode; }
