@@ -833,13 +833,7 @@ int main()
     testModelConsistencyAllRepresentations("iCubGenova02.urdf");
     testModelConsistencyAllRepresentations("icalibrate.urdf");
 
-    testModelConsistencyAllRepresentations("oneLink.urdf");
-    testModelConsistencyAllRepresentations("twoLinks.urdf");
-    testSubModelConsistencyAllRepresentations("threeLinks.urdf");
-    testModelConsistencyAllRepresentations("bigman.urdf");
-    testModelConsistencyAllRepresentations("icub_skin_frames.urdf");
-    testModelConsistencyAllRepresentations("iCubGenova02.urdf");
-    testModelConsistencyAllRepresentations("icalibrate.urdf");
+    testSubModelConsistencyAllRepresentations("iCubGenova02.urdf");
 
     testSparsityPatternAllRepresentations("oneLink.urdf");
     testSparsityPatternAllRepresentations("twoLinks.urdf");
