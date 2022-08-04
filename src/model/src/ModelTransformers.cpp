@@ -558,12 +558,6 @@ bool createModelWithNormalizedJointNumbering(const Model& model,
 bool extractSubModel(const iDynTree::Model& fullModel, const iDynTree::Traversal& subModelTraversal,
                      iDynTree::Model& outputSubModel)
 {
-    if (&subModelTraversal == NULL)
-    {
-        std::cerr << "[ERROR] subModelTraversal is null" << std::endl;
-        return false;
-    }
-
     size_t nrOfLinksInReducedModel = subModelTraversal.getNrOfVisitedLinks();
 
     LinkPositions subModelBase_X_link(fullModel);
