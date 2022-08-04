@@ -88,6 +88,20 @@ bool createModelWithNormalizedJointNumbering(const Model& model,
                                              Model& reducedModel);
 
 
+/**
+ * Extract sub model from sub model traversal.
+ *
+ * This function creates a new iDynTree::Model containing links and joints composing the subModelTraversal.
+ * The function takes in input a iDynTree::Model and a iDynTree::Traversal. The new model will contain joints
+ * and links composing the subModelTraversal, with the same order.
+ * The FT sensor frames are added as additional frames.
+ *
+ * @return true if all went well, false if there was an error in creating the sub model.
+ */
+bool extractSubModel(const iDynTree::Model& fullModel, const iDynTree::Traversal& subModelTraversal,
+                     iDynTree::Model& outputSubModel);
+
 }
+
 
 #endif
