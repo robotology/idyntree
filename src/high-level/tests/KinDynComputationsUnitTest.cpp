@@ -604,8 +604,6 @@ void testSubModelConsistency(std::string modelFilePath, const FrameVelocityRepre
             ok = dynCompReducedModel.setFrameVelocityRepresentation(frameVelRepr);
             ASSERT_IS_TRUE(ok);
 
-            int dofsReducedModel = reducedModel.getNrOfDOFs();
-
             // Get robot state from kinDynFullModel
             iDynTree::VectorDynSize qjFullModel(dofsFullModel), dqjFullModel(dofsFullModel);
             Vector3 gravity;
@@ -620,10 +618,9 @@ void testSubModelConsistency(std::string modelFilePath, const FrameVelocityRepre
             baseVelReducedModel = dynCompFullModel.getFrameVel(subModelTraversal.getLink(0)->getIndex());
 
             // Find indeces of fullModel joints corresponding to subModel joints
-            VectorDynSize idxJntReducedModelInFullModel(reducedModel.getNrOfDOFs());
-            idxJntReducedModelInFullModel.zero();
+            VectorDynSize idxJntReducedModelInFullModel(reducedModel.getNrOfJoints());
 
-            for(size_t jntIdx = 0; jntIdx < reducedModel.getNrOfDOFs(); jntIdx++)
+            for(JointIndex jntIdx = 0; jntIdx < reducedModel.getNrOfJoints(); jntIdx++)
             {
                 std::string jntName = reducedModel.getJointName(jntIdx);
 
@@ -631,19 +628,44 @@ void testSubModelConsistency(std::string modelFilePath, const FrameVelocityRepre
             }
 
             // Get q and dq from kinDynFullModel of joints contained in subModel
-            VectorDynSize qReducedModel(dofsReducedModel),
-                          dqReducedModel(dofsReducedModel);
-            for(size_t jntIdx = 0; jntIdx < reducedModel.getNrOfDOFs(); jntIdx++)
+            VectorDynSize qReducedModel(reducedModel.getNrOfDOFs()),
+                          dqReducedModel(reducedModel.getNrOfDOFs());
+
+            for(JointIndex jntIdx = 0; jntIdx < reducedModel.getNrOfJoints(); jntIdx++)
+             {
+                // Check if it is not a fixed joint
+                if (reducedModel.getJoint(jntIdx)->getNrOfDOFs() > 0)
+                {
+                    size_t posCoordsOffsetReducedModel = reducedModel.getJoint(jntIdx)->getPosCoordsOffset();
+                    JointIndex jntIdxFullModel = idxJntReducedModelInFullModel(jntIdx);
+                    size_t posCoordsOffsetFullModel = fullModel.getJoint(jntIdxFullModel)->getPosCoordsOffset();
+                    for(size_t localPosCoords = 0; localPosCoords < reducedModel.getJoint(jntIdx)->getNrOfPosCoords(); localPosCoords ++)
+                    {
+                        qReducedModel(posCoordsOffsetReducedModel+localPosCoords) = qjFullModel(posCoordsOffsetFullModel+localPosCoords);
+                    }
+                }
+             }
+
+            for(JointIndex jntIdx = 0; jntIdx < reducedModel.getNrOfJoints(); jntIdx++)
             {
-                qReducedModel(jntIdx) = qjFullModel(idxJntReducedModelInFullModel(jntIdx));
-                dqReducedModel(jntIdx) = dqjFullModel(idxJntReducedModelInFullModel(jntIdx));
+                // Check if it is not a fixed joint
+                if (reducedModel.getJoint(jntIdx)->getNrOfDOFs() > 0)
+                {
+                    size_t dofsOffsetReducedModel = reducedModel.getJoint(jntIdx)->getDOFsOffset();
+                    JointIndex jntIdxFullModel = idxJntReducedModelInFullModel(jntIdx);
+                    size_t dofsOffsetFullModel = fullModel.getJoint(jntIdxFullModel)->getDOFsOffset();
+                    for(size_t localDofs = 0; localDofs < reducedModel.getJoint(jntIdx)->getNrOfDOFs(); localDofs++)
+                    {
+                        dqReducedModel(dofsOffsetReducedModel+localDofs ) = dqjFullModel(dofsOffsetFullModel+localDofs);
+                    }
+                }
             }
 
             ok = dynCompReducedModel.setRobotState(baseFullTbaseReduced, qReducedModel, baseVelReducedModel, dqReducedModel, gravity);
             ASSERT_IS_TRUE(ok);
 
             // Compare pose and velocity per each link from full model and from reduced model
-            for(size_t frameIdxReducedModel = 0; frameIdxReducedModel < reducedModel.getNrOfFrames(); frameIdxReducedModel++)
+            for(FrameIndex frameIdxReducedModel = 0; frameIdxReducedModel < reducedModel.getNrOfFrames(); frameIdxReducedModel++)
             {
                 std::string frameName = reducedModel.getFrameName(frameIdxReducedModel);
 
@@ -833,7 +855,13 @@ int main()
     testModelConsistencyAllRepresentations("iCubGenova02.urdf");
     testModelConsistencyAllRepresentations("icalibrate.urdf");
 
+    testSubModelConsistencyAllRepresentations("oneLink.urdf");
+    testSubModelConsistencyAllRepresentations("twoLinks.urdf");
+    testSubModelConsistencyAllRepresentations("threeLinks.urdf");
+    testSubModelConsistencyAllRepresentations("bigman.urdf");
+    testSubModelConsistencyAllRepresentations("icub_skin_frames.urdf");
     testSubModelConsistencyAllRepresentations("iCubGenova02.urdf");
+    testSubModelConsistencyAllRepresentations("icalibrate.urdf");
 
     testSparsityPatternAllRepresentations("oneLink.urdf");
     testSparsityPatternAllRepresentations("twoLinks.urdf");
