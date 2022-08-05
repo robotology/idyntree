@@ -633,31 +633,23 @@ void testSubModelConsistency(std::string modelFilePath, const FrameVelocityRepre
 
             for(JointIndex jntIdx = 0; jntIdx < reducedModel.getNrOfJoints(); jntIdx++)
              {
-                // Check if it is not a fixed joint
-                if (reducedModel.getJoint(jntIdx)->getNrOfDOFs() > 0)
+                size_t posCoordsOffsetReducedModel = reducedModel.getJoint(jntIdx)->getPosCoordsOffset();
+                JointIndex jntIdxFullModel = idxJntReducedModelInFullModel(jntIdx);
+                size_t posCoordsOffsetFullModel = fullModel.getJoint(jntIdxFullModel)->getPosCoordsOffset();
+                for(size_t localPosCoords = 0; localPosCoords < reducedModel.getJoint(jntIdx)->getNrOfPosCoords(); localPosCoords ++)
                 {
-                    size_t posCoordsOffsetReducedModel = reducedModel.getJoint(jntIdx)->getPosCoordsOffset();
-                    JointIndex jntIdxFullModel = idxJntReducedModelInFullModel(jntIdx);
-                    size_t posCoordsOffsetFullModel = fullModel.getJoint(jntIdxFullModel)->getPosCoordsOffset();
-                    for(size_t localPosCoords = 0; localPosCoords < reducedModel.getJoint(jntIdx)->getNrOfPosCoords(); localPosCoords ++)
-                    {
-                        qReducedModel(posCoordsOffsetReducedModel+localPosCoords) = qjFullModel(posCoordsOffsetFullModel+localPosCoords);
-                    }
+                    qReducedModel(posCoordsOffsetReducedModel+localPosCoords) = qjFullModel(posCoordsOffsetFullModel+localPosCoords);
                 }
              }
 
             for(JointIndex jntIdx = 0; jntIdx < reducedModel.getNrOfJoints(); jntIdx++)
             {
-                // Check if it is not a fixed joint
-                if (reducedModel.getJoint(jntIdx)->getNrOfDOFs() > 0)
+                size_t dofsOffsetReducedModel = reducedModel.getJoint(jntIdx)->getDOFsOffset();
+                JointIndex jntIdxFullModel = idxJntReducedModelInFullModel(jntIdx);
+                size_t dofsOffsetFullModel = fullModel.getJoint(jntIdxFullModel)->getDOFsOffset();
+                for(size_t localDofs = 0; localDofs < reducedModel.getJoint(jntIdx)->getNrOfDOFs(); localDofs++)
                 {
-                    size_t dofsOffsetReducedModel = reducedModel.getJoint(jntIdx)->getDOFsOffset();
-                    JointIndex jntIdxFullModel = idxJntReducedModelInFullModel(jntIdx);
-                    size_t dofsOffsetFullModel = fullModel.getJoint(jntIdxFullModel)->getDOFsOffset();
-                    for(size_t localDofs = 0; localDofs < reducedModel.getJoint(jntIdx)->getNrOfDOFs(); localDofs++)
-                    {
-                        dqReducedModel(dofsOffsetReducedModel+localDofs ) = dqjFullModel(dofsOffsetFullModel+localDofs);
-                    }
+                    dqReducedModel(dofsOffsetReducedModel+localDofs ) = dqjFullModel(dofsOffsetFullModel+localDofs);
                 }
             }
 
