@@ -555,4 +555,67 @@ bool createModelWithNormalizedJointNumbering(const Model& model,
 }
 
 
+bool extractSubModel(const iDynTree::Model& fullModel, const iDynTree::Traversal& subModelTraversal,
+                     iDynTree::Model& outputSubModel)
+{
+    size_t nrOfLinksInReducedModel = subModelTraversal.getNrOfVisitedLinks();
+
+    LinkPositions subModelBase_X_link(fullModel);
+
+    for (size_t subModelTraversalEl = 0; subModelTraversalEl < nrOfLinksInReducedModel; subModelTraversalEl++)
+    {
+        // Add the new link to the reducedModel
+
+        LinkConstPtr visitedLink = subModelTraversal.getLink(subModelTraversalEl);
+
+        outputSubModel.addLink(fullModel.getLinkName(visitedLink->getIndex()), *visitedLink);
+
+        bool isLinkBaseOfTreeTraversal = (subModelTraversalEl == 0);
+
+        if (!isLinkBaseOfTreeTraversal)
+        {
+            // Add the new joint to the reducedModel
+
+            IJointConstPtr visitedParentJoint = subModelTraversal.getParentJoint(subModelTraversalEl);
+
+            std::string jointName = fullModel.getJointName(visitedParentJoint->getIndex());
+
+            // We get the two links that the joint connects in the old
+            // full model
+            JointIndex fullModelJointIndex = fullModel.getJointIndex(jointName);
+
+            IJointConstPtr oldJoint = fullModel.getJoint(fullModelJointIndex);
+            const std::string link1 = fullModel.getLinkName(subModelTraversal.getParentLinkIndexFromJointIndex(fullModel, fullModelJointIndex));
+            const std::string link2 = fullModel.getLinkName(visitedLink->getIndex());
+
+            outputSubModel.addJoint(link1, link2, jointName, oldJoint);
+        }
+
+        auto visitedLinkIndex = visitedLink->getIndex();
+
+        // Add the additional frames
+        std::vector<FrameIndex> frameIndeces;
+        fullModel.getLinkAdditionalFrames(visitedLinkIndex, frameIndeces);
+
+        // For all the link of the submodel, transfer their additional frame
+        // to the link in the reduced model
+
+        for(size_t i = 0; i < frameIndeces.size(); i++)
+        {
+            FrameIndex additionalFrame = frameIndeces[i];
+            std::string additionalFrameName = fullModel.getFrameName(additionalFrame);
+
+            Transform visitedLink_H_additionalFrame  = fullModel.getFrameTransform(additionalFrame);
+            Transform subModelBase_H_visitedLink     = subModelBase_X_link(visitedLinkIndex);
+            Transform subModelBase_H_additionalFrame =
+                subModelBase_H_visitedLink*visitedLink_H_additionalFrame;
+
+            outputSubModel.addAdditionalFrameToLink(fullModel.getFrameName(visitedLinkIndex),
+                                                    additionalFrameName, subModelBase_H_additionalFrame);
+        }
+    }
+
+    return  true;
+}
+
 }

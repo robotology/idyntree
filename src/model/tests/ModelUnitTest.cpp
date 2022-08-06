@@ -27,6 +27,7 @@
 #include <iDynTree/Model/ForwardKinematics.h>
 #include <iDynTree/Model/Dynamics.h>
 #include <iDynTree/Model/FreeFloatingState.h>
+#include <iDynTree/Model/SubModel.h>
 
 using namespace iDynTree;
 
@@ -257,11 +258,50 @@ void checkReducedModel(const Model & model)
 
 }
 
+void checkExtractSubModel(const Model & model)
+{
+    for(size_t jnts=1; jnts < model.getNrOfJoints(); jnts += 5)
+    {
+
+        Traversal traversal;
+        bool ok = model.computeFullTreeTraversal(traversal);
+
+        ASSERT_EQUAL_DOUBLE(ok,true);
+
+        std::vector<std::string> jointInReducedModel;
+        getRandomSubsetOfJoints(model,jnts,jointInReducedModel);
+
+        iDynTree::SubModelDecomposition subModels;
+        ok = subModels.splitModelAlongJoints(model,traversal,jointInReducedModel);
+
+        ASSERT_EQUAL_DOUBLE(ok,true);
+
+        for(int subModelIdx = 0; subModelIdx < subModels.getNrOfSubModels(); subModelIdx++)
+        {
+            const Traversal & subModelTraversal = subModels.getTraversal(subModelIdx);
+
+            Model reducedModel;
+            ok = extractSubModel(model, subModelTraversal, reducedModel);
+
+            ASSERT_EQUAL_DOUBLE(ok,true);
+
+            for (int linkIdx = 0; linkIdx < subModelTraversal.getNrOfVisitedLinks(); linkIdx++)
+            {
+                auto linkSubModel = subModelTraversal.getLink(linkIdx);
+                auto linkModel = model.getLink(model.getLinkIndex(reducedModel.getLinkName(linkIdx)));
+
+                ASSERT_EQUAL_MATRIX(linkSubModel->getInertia().asMatrix(), linkModel->getInertia().asMatrix());
+            }
+        }
+    }
+}
+
 void checkAll(const Model & model)
 {
     createCopyAndDestroy(model);
     checkNeighborSanity(model,false);
     checkComputeTraversal(model);
+    checkExtractSubModel(model);
 }
 
 void checkSimpleModel()
