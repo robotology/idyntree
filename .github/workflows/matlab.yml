@@ -19,7 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         build_type: [Release]
-        os: [ubuntu-20.04, windows-2019, macos-10.15]
+        os: [ubuntu-20.04, windows-2019, macos-latest]
         matlab_version: [R2020a, R2020b, R2021a, latest]
         exclude:
           # R2020* is not supported on Windows on GitHub Actions
