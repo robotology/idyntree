@@ -25,6 +25,8 @@
 #include <iDynTree/Model/Traversal.h>
 #include <iDynTree/Model/JointState.h>
 #include <iDynTree/Model/FreeFloatingState.h>
+#include <iDynTree/Model/SubModel.h>
+#include <iDynTree/Model/ModelTransformers.h>
 
 #include <iDynTree/ModelIO/ModelLoader.h>
 
@@ -530,9 +532,161 @@ void testInverseDynamicsWithInternalJointForceTorques(KinDynComputations & dynCo
 
 }
 
+bool isStringInVector(const std::string & str,
+                      const std::vector<std::string> & vec)
+{
+    return std::find(vec.begin(), vec.end(), str) != vec.end();
+}
+
+void getRandomSubsetOfJoints(const Model & model,
+                             size_t nrOfJointsInSubset,
+                             std::vector<std::string>& subsetOfJoints)
+{
+    while( subsetOfJoints.size() < nrOfJointsInSubset )
+    {
+        JointIndex randomJoint = (JointIndex) getRandomInteger(0,model.getNrOfJoints()-1);
+        std::string randomJointName = model.getJointName(randomJoint);
+
+        // If the random added joint is not in the vector, add it
+        if( !isStringInVector(randomJointName,subsetOfJoints) )
+        {
+            subsetOfJoints.push_back(randomJointName);
+        }
+    }
+}
+
+void testSubModelConsistency(std::string modelFilePath, const FrameVelocityRepresentation frameVelRepr)
+{
+    iDynTree::ModelLoader mdlLoader;
+    bool ok = mdlLoader.loadModelFromFile(modelFilePath);
+    ASSERT_IS_TRUE(ok);
+
+    iDynTree::KinDynComputations dynCompFullModel;
+    ok = dynCompFullModel.loadRobotModel(mdlLoader.model());
+    ASSERT_IS_TRUE(ok);
+
+    ok = dynCompFullModel.setFrameVelocityRepresentation(frameVelRepr);
+    ASSERT_IS_TRUE(ok);
+
+    setRandomState(dynCompFullModel);
+
+    Model fullModel = mdlLoader.model();
+
+    int dofsFullModel = fullModel.getNrOfDOFs();
+
+    for(size_t jnts=1; jnts < fullModel.getNrOfJoints(); jnts += 5)
+    {
+        Traversal traversal;
+        ok = fullModel.computeFullTreeTraversal(traversal);
+
+        ASSERT_IS_TRUE(ok);
+
+        // Define set of joints which split the model in submodels
+        std::vector<std::string> jointInReducedModel;
+        getRandomSubsetOfJoints(fullModel, jnts, jointInReducedModel);
+
+        iDynTree::SubModelDecomposition subModels;
+        ok = subModels.splitModelAlongJoints(fullModel, traversal, jointInReducedModel);
+        ASSERT_IS_TRUE(ok);
+
+        for(int subModelIdx = 0; subModelIdx < subModels.getNrOfSubModels(); subModelIdx++)
+        {
+            const Traversal & subModelTraversal = subModels.getTraversal(subModelIdx);
+
+            Model reducedModel;
+            ok = extractSubModel(fullModel, subModelTraversal, reducedModel);
+            ASSERT_IS_TRUE(ok);
+
+            iDynTree::KinDynComputations dynCompReducedModel;
+            ok = dynCompReducedModel.loadRobotModel(reducedModel);
+            ASSERT_IS_TRUE(ok);
+
+            ok = dynCompReducedModel.setFrameVelocityRepresentation(frameVelRepr);
+            ASSERT_IS_TRUE(ok);
+
+            // Get robot state from kinDynFullModel
+            iDynTree::VectorDynSize qjFullModel(dofsFullModel), dqjFullModel(dofsFullModel);
+            Vector3 gravity;
+            Transform    worldTbaseFullModel;
+            Twist        baseVelFullModel;
+            dynCompFullModel.getRobotState(worldTbaseFullModel, qjFullModel, baseVelFullModel, dqjFullModel, gravity);
+
+            // Get transform between base of full model and base of reduced model
+            Transform baseFullTbaseReduced;
+            baseFullTbaseReduced = dynCompFullModel.getWorldTransform(subModelTraversal.getLink(0)->getIndex());
+            Twist baseVelReducedModel;
+            baseVelReducedModel = dynCompFullModel.getFrameVel(subModelTraversal.getLink(0)->getIndex());
+
+            // Find indeces of fullModel joints corresponding to subModel joints
+            VectorDynSize idxJntReducedModelInFullModel(reducedModel.getNrOfJoints());
+
+            for(JointIndex jntIdx = 0; jntIdx < reducedModel.getNrOfJoints(); jntIdx++)
+            {
+                std::string jntName = reducedModel.getJointName(jntIdx);
+
+                idxJntReducedModelInFullModel(jntIdx) = fullModel.getJointIndex(jntName);
+            }
+
+            // Get q and dq from kinDynFullModel of joints contained in subModel
+            VectorDynSize qReducedModel(reducedModel.getNrOfDOFs()),
+                          dqReducedModel(reducedModel.getNrOfDOFs());
+
+            for(JointIndex jntIdx = 0; jntIdx < reducedModel.getNrOfJoints(); jntIdx++)
+             {
+                size_t posCoordsOffsetReducedModel = reducedModel.getJoint(jntIdx)->getPosCoordsOffset();
+                JointIndex jntIdxFullModel = idxJntReducedModelInFullModel(jntIdx);
+                size_t posCoordsOffsetFullModel = fullModel.getJoint(jntIdxFullModel)->getPosCoordsOffset();
+                for(size_t localPosCoords = 0; localPosCoords < reducedModel.getJoint(jntIdx)->getNrOfPosCoords(); localPosCoords ++)
+                {
+                    qReducedModel(posCoordsOffsetReducedModel+localPosCoords) = qjFullModel(posCoordsOffsetFullModel+localPosCoords);
+                }
+             }
+
+            for(JointIndex jntIdx = 0; jntIdx < reducedModel.getNrOfJoints(); jntIdx++)
+            {
+                size_t dofsOffsetReducedModel = reducedModel.getJoint(jntIdx)->getDOFsOffset();
+                JointIndex jntIdxFullModel = idxJntReducedModelInFullModel(jntIdx);
+                size_t dofsOffsetFullModel = fullModel.getJoint(jntIdxFullModel)->getDOFsOffset();
+                for(size_t localDofs = 0; localDofs < reducedModel.getJoint(jntIdx)->getNrOfDOFs(); localDofs++)
+                {
+                    dqReducedModel(dofsOffsetReducedModel+localDofs ) = dqjFullModel(dofsOffsetFullModel+localDofs);
+                }
+            }
+
+            ok = dynCompReducedModel.setRobotState(baseFullTbaseReduced, qReducedModel, baseVelReducedModel, dqReducedModel, gravity);
+            ASSERT_IS_TRUE(ok);
+
+            // Compare pose and velocity per each link from full model and from reduced model
+            for(FrameIndex frameIdxReducedModel = 0; frameIdxReducedModel < reducedModel.getNrOfFrames(); frameIdxReducedModel++)
+            {
+                std::string frameName = reducedModel.getFrameName(frameIdxReducedModel);
+
+                int frameIdxFullModel = fullModel.getFrameIndex(frameName);
+
+                // Frame pose from full model
+                Transform framePoseFullModel = dynCompFullModel.getWorldTransform(frameIdxFullModel);
+
+                // Frame pose from reduced model
+                Transform framePoseReducedModel = dynCompReducedModel.getWorldTransform(frameIdxReducedModel);
+
+                ASSERT_EQUAL_TRANSFORM(framePoseFullModel, framePoseReducedModel);
+
+                // Frame velicity from full model
+                Twist frameVelFullModel = dynCompFullModel.getFrameVel(frameName);
+
+                // Frame velocity from reduced model
+                Twist frameVelReducedModel = dynCompReducedModel.getFrameVel(frameName);
+
+                ASSERT_EQUAL_VECTOR(frameVelFullModel, frameVelReducedModel);
+            }
+
+        }
+    }
+}
+
 void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresentation frameVelRepr)
 {
-	iDynTree::KinDynComputations dynComp;
+    iDynTree::KinDynComputations dynComp;
     iDynTree::ModelLoader mdlLoader;
     bool ok = mdlLoader.loadModelFromFile(modelFilePath);
     ok = ok && dynComp.loadRobotModel(mdlLoader.model());
@@ -551,6 +705,18 @@ void testModelConsistency(std::string modelFilePath, const FrameVelocityRepresen
         testAbsoluteJacobiansAndFrameBiasAcc(dynComp);
     }
 
+}
+
+void testSubModelConsistencyAllRepresentations(std::string modelName)
+{
+    std::string urdfFileName = getAbsModelPath(modelName);
+    std::cout << "Testing file " << urdfFileName <<  std::endl;
+    std::cout << "Testing MIXED_REPRESENTATION " << urdfFileName <<  std::endl;
+    testSubModelConsistency(urdfFileName,iDynTree::MIXED_REPRESENTATION);
+    std::cout << "Testing BODY_FIXED_REPRESENTATION " << urdfFileName <<  std::endl;
+    testSubModelConsistency(urdfFileName,iDynTree::BODY_FIXED_REPRESENTATION);
+    std::cout << "Testing INERTIAL_FIXED_REPRESENTATION " << urdfFileName <<  std::endl;
+    testSubModelConsistency(urdfFileName,iDynTree::INERTIAL_FIXED_REPRESENTATION);
 }
 
 void testModelConsistencyAllRepresentations(std::string modelName)
@@ -680,6 +846,14 @@ int main()
     testModelConsistencyAllRepresentations("icub_skin_frames.urdf");
     testModelConsistencyAllRepresentations("iCubGenova02.urdf");
     testModelConsistencyAllRepresentations("icalibrate.urdf");
+
+    testSubModelConsistencyAllRepresentations("oneLink.urdf");
+    testSubModelConsistencyAllRepresentations("twoLinks.urdf");
+    testSubModelConsistencyAllRepresentations("threeLinks.urdf");
+    testSubModelConsistencyAllRepresentations("bigman.urdf");
+    testSubModelConsistencyAllRepresentations("icub_skin_frames.urdf");
+    testSubModelConsistencyAllRepresentations("iCubGenova02.urdf");
+    testSubModelConsistencyAllRepresentations("icalibrate.urdf");
 
     testSparsityPatternAllRepresentations("oneLink.urdf");
     testSparsityPatternAllRepresentations("twoLinks.urdf");
