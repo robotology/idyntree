@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [6.1.0] - 2022-08-07
+
 ### Added
 - Added creation of sub model object starting from the full model and a sub traversal (https://github.com/robotology/idyntree/pull/1011).
 
