@@ -101,6 +101,12 @@
               Model&amp; reducedModel) -&gt; bool</span>
             </dt>
             <dd>Given a specified base, return a model with a &quot;normalized&quot; joint numbering for that base.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a3800ea0a0da713ba27da022845601b2f" class="m-doc">extractSubModel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; fullModel,
+              const <a href="classiDynTree_1_1Traversal.html" class="m-doc">iDynTree::<wbr />Traversal</a>&amp; subModelTraversal,
+              <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; outputSubModel) -&gt; bool</span>
+            </dt>
+            <dd>Extract sub model from sub model traversal.</dd>
           </dl>
         </section>
         <section>
@@ -138,6 +144,23 @@
               </tfoot>
             </table>
 <p>This function takes in input a <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> and a name of a link in that model. It returns a model identical to the one in input, but with the joint serialization of the non-fixed joint modified in such a way that a non-fixed joint has an index higher than all the non-fixed joints on the path between it and the base. After all the non-fixed joints, the fixed joints are also added with the same criteria, but applied to fixed joints.</p><aside class="m-note m-info"><h4>Note</h4><p>This method make sure that the non-fixed joint in the model have a &quot;regular numbering&quot; as described in Featherstone &quot;Rigid Body Dynamics Algorithm&quot;, section 4.1.2 . Note that this numbering is not required by any algorithm in iDynTree, but it may be useful for example to ensure that for a chain model the joint numbering is the one induced by the kinematic structure.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a3800ea0a0da713ba27da022845601b2f"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool </span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3800ea0a0da713ba27da022845601b2f" class="m-doc-self">extractSubModel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; fullModel,
+              const <a href="classiDynTree_1_1Traversal.html" class="m-doc">iDynTree::<wbr />Traversal</a>&amp; subModelTraversal,
+              <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; outputSubModel)</span></span>
+            </h3>
+            <p>Extract sub model from sub model traversal.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>true if all went well, false if there was an error in creating the sub model.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>This function creates a new <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> containing links and joints composing the subModelTraversal. The function takes in input a <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> and a <a href="classiDynTree_1_1Traversal.html" class="m-doc">iDynTree::<wbr />Traversal</a>. The new model will contain joints and links composing the subModelTraversal, with the same order. The FT sensor frames are added as additional frames.</p>
           </div></section>
         </section>
       </div>

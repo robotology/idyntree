@@ -96,6 +96,36 @@
         </inbodydescription>
         <location file="iDynTree/Model/ModelTransformers.h" line="86" column="6" declfile="iDynTree/Model/ModelTransformers.h" declline="86" declcolumn="6"/>
       </memberdef>
+      <memberdef kind="function" id="ModelTransformers_8h_1a3800ea0a0da713ba27da022845601b2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::extractSubModel</definition>
+        <argsstring>(const iDynTree::Model &amp;fullModel, const iDynTree::Traversal &amp;subModelTraversal, iDynTree::Model &amp;outputSubModel)</argsstring>
+        <name>extractSubModel</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>fullModel</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Traversal" kindref="compound">iDynTree::Traversal</ref> &amp;</type>
+          <declname>subModelTraversal</declname>
+        </param>
+        <param>
+          <type><ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>outputSubModel</declname>
+        </param>
+        <briefdescription>
+<para>Extract sub model from sub model traversal. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function creates a new <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> containing links and joints composing the subModelTraversal. The function takes in input a <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> and a <ref refid="classiDynTree_1_1Traversal" kindref="compound">iDynTree::Traversal</ref>. The new model will contain joints and links composing the subModelTraversal, with the same order. The FT sensor frames are added as additional frames.</para>
+<para><simplesect kind="return"><para>true if all went well, false if there was an error in creating the sub model. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/ModelTransformers.h" line="101" column="6" declfile="iDynTree/Model/ModelTransformers.h" declline="101" declcolumn="6"/>
+      </memberdef>
       </sectiondef>
     <briefdescription>
 <para>Collection of function to modify model in various ways. </para>
