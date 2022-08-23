@@ -29,6 +29,14 @@ jobs:
           - os: windows-2019
             matlab_version: R2020b
             build_type: Release
+          # R2020* is not working on macOS
+          # See https://github.com/robotology/idyntree/issues/1015
+          - os: macos-latest
+            matlab_version: R2020a
+            build_type: Release
+          - os: macos-latest
+            matlab_version: R2020b
+            build_type: Release
 
     steps:
     - uses: actions/checkout@v2
