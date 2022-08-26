@@ -242,7 +242,6 @@ struct estimateExternalWrenchesBuffers
     std::vector<MatrixDynSize> A;
     std::vector<VectorDynSize> x;
     std::vector<Vector6> b;
-    std::vector<MatrixDynSize> pinvA;
 
     /**
      * We compute the b term for each subtree
