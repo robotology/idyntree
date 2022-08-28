@@ -101,8 +101,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        # -DIDYNTREE_USES_IPOPT:BOOL=OFF is a workaround for https://github.com/robotology/idyntree/issues/1019
-        cmake -G"Visual Studio 16 2019" -DCMAKE_INSTALL_PREFIX=${CONDA_PREFIX}/Library -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DMATLAB_FIND_DEBUG:BOOL=ON  -DIDYNTREE_USES_MATLAB:BOOL=ON -DMatlab_ROOT_DIR=${GHA_Matlab_ROOT_DIR} -DMatlab_MEX_EXTENSION:STRING=${GHA_Matlab_MEX_EXTENSION} -DIDYNTREE_DISABLE_MATLAB_TESTS:BOOL=ON  -DIDYNTREE_COMPILE_TESTS:BOOL=ON  -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=OFF -DIDYNTREE_USES_IRRLICHT:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=ON -DIDYNTREE_USES_ICUB_MAIN:BOOL=ON -DIDYNTREE_USES_OSQPEIGEN:BOOL=ON -DIDYNTREE_USES_PYTHON:BOOL=ON -DIDYNTREE_USES_PYTHON_PYBIND11:BOOL=ON  ..
+        cmake -G"Visual Studio 16 2019" -DCMAKE_INSTALL_PREFIX=${CONDA_PREFIX}/Library -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DMATLAB_FIND_DEBUG:BOOL=ON  -DIDYNTREE_USES_MATLAB:BOOL=ON -DMatlab_ROOT_DIR=${GHA_Matlab_ROOT_DIR} -DMatlab_MEX_EXTENSION:STRING=${GHA_Matlab_MEX_EXTENSION} -DIDYNTREE_DISABLE_MATLAB_TESTS:BOOL=ON  -DIDYNTREE_COMPILE_TESTS:BOOL=ON  -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=ON -DIDYNTREE_USES_ICUB_MAIN:BOOL=ON -DIDYNTREE_USES_OSQPEIGEN:BOOL=ON -DIDYNTREE_USES_PYTHON:BOOL=ON -DIDYNTREE_USES_PYTHON_PYBIND11:BOOL=ON  ..
 
     - name: Build [Conda]
       shell: bash -l {0}
@@ -132,7 +131,8 @@ jobs:
         cd build
         # Visualizer tests excluded as a workaround for https://github.com/robotology/idyntree/issues/808
         # Python tests excluded as a workaround for https://github.com/robotology/idyntree/issues/939
-        ctest --output-on-failure -C ${{ matrix.build_type }} -E "Visualizer|matlab|Python|pybind" .
+        # InverseKinematics tests are excluded as a workaround for https://github.com/robotology/idyntree/issues/1019
+        ctest --output-on-failure -C ${{ matrix.build_type }} -E "Visualizer|matlab|Python|pybind|InverseKinematics" .
 
     - name: Install [Conda]
       shell: bash -l {0}
