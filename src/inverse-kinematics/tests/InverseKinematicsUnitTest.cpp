@@ -380,7 +380,7 @@ void simpleHumanoidWholeBodyIKCoMConsistency(const iDynTree::InverseKinematicsRo
     kinDynOpt.setRobotState(basePosOptimized, sOptimized, dummyVel, dummyJointVel, dummyGrav);
 
     // Check that the contraint and the targets are respected
-    double tolConstraints = 1e-7;
+    double tolConstraints = 1e-6;
     double tolTargets     = 1e-6;
     ASSERT_EQUAL_TRANSFORM_TOL(kinDynDes.getWorldTransform("l_foot"), kinDynOpt.getWorldTransform("l_foot"), tolConstraints);
     ASSERT_EQUAL_TRANSFORM_TOL(kinDynDes.getWorldTransform("r_sole"), kinDynOpt.getWorldTransform("r_sole"), tolConstraints);
