@@ -279,7 +279,7 @@ void simpleHumanoidWholeBodyIKCoMConsistency(const iDynTree::InverseKinematicsRo
 {
     iDynTree::InverseKinematics ik;
 
-    ik.setVerbosity(0);
+    ik.setVerbosity(6);
 
     std::vector<std::string> consideredJoints;
     iDynTree::ModelLoader loader;
