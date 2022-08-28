@@ -628,7 +628,8 @@ int main()
     // Improve repetability (at least in the same platform)
     srand(1);
 
-    simpleChainIK(2, 13, iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw);
+    // 12 was selected due to  https://github.com/robotology/idyntree/issues/1019
+    simpleChainIK(2, 12, iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw);
 
     // This is not working at the moment, there is some problem with quaternion constraints
     //simpleChainIK(10,iDynTree::InverseKinematicsRotationParametrizationQuaternion);
