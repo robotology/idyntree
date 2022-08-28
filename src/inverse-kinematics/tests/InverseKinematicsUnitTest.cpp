@@ -273,7 +273,7 @@ void simpleHumanoidWholeBodyIKCoMConsistency(const iDynTree::InverseKinematicsRo
 {
     iDynTree::InverseKinematics ik;
 
-    ik.setVerbosity(0);
+    ik.setVerbosity(6);
 
     std::vector<std::string> consideredJoints;
     iDynTree::ModelLoader loader;
@@ -398,7 +398,7 @@ void simpleHumanoidWholeBodyIKCoMandChestConsistency(const iDynTree::InverseKine
     iDynTree::InverseKinematics ik;
 
     ik.setMaxIterations(500);
-    ik.setVerbosity(0);
+    ik.setVerbosity(6);
     
     bool ok = ik.loadModelFromFile(getAbsModelPath("iCubGenova02.urdf"));
     ASSERT_IS_TRUE(ok);
