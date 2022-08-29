@@ -7,60 +7,60 @@ classdef DHLink < iDynTreeSwigRef
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1249, self);
+        varargout{1} = iDynTreeMEX(1264, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1250, self, varargin{1});
+        iDynTreeMEX(1265, self, varargin{1});
       end
     end
     function varargout = D(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1251, self);
+        varargout{1} = iDynTreeMEX(1266, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1252, self, varargin{1});
+        iDynTreeMEX(1267, self, varargin{1});
       end
     end
     function varargout = Alpha(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1253, self);
+        varargout{1} = iDynTreeMEX(1268, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1254, self, varargin{1});
+        iDynTreeMEX(1269, self, varargin{1});
       end
     end
     function varargout = Offset(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1255, self);
+        varargout{1} = iDynTreeMEX(1270, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1256, self, varargin{1});
+        iDynTreeMEX(1271, self, varargin{1});
       end
     end
     function varargout = Min(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1257, self);
+        varargout{1} = iDynTreeMEX(1272, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1258, self, varargin{1});
+        iDynTreeMEX(1273, self, varargin{1});
       end
     end
     function varargout = Max(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1259, self);
+        varargout{1} = iDynTreeMEX(1274, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1260, self, varargin{1});
+        iDynTreeMEX(1275, self, varargin{1});
       end
     end
     function self = DHLink(varargin)
@@ -69,14 +69,14 @@ classdef DHLink < iDynTreeSwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1261, varargin{:});
+        tmp = iDynTreeMEX(1276, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1262, self);
+        iDynTreeMEX(1277, self);
         self.SwigClear();
       end
     end

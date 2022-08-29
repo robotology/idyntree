@@ -5,15 +5,15 @@ classdef ITexturesHandler < iDynTreeSwigRef
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1966, self);
+        iDynTreeMEX(1979, self);
         self.SwigClear();
       end
     end
     function varargout = add(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1967, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1980, self, varargin{:});
     end
     function varargout = get(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1968, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1981, self, varargin{:});
     end
     function self = ITexturesHandler(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
