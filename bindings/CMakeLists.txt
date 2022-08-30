@@ -54,6 +54,7 @@ if(IDYNTREE_USES_PYTHON OR IDYNTREE_USES_PYTHON_PYBIND11)
         string(STRIP ${_PYTHON_INSTDIR} IDYNTREE_PYTHON_INSTALL_DIR)
         set(PYTHON_INSTDIR ${IDYNTREE_PYTHON_INSTALL_DIR}/idyntree)
     endif()
+    file(TO_CMAKE_PATH "${PYTHON_INSTDIR}" PYTHON_INSTDIR)
 endif()
 
 # It is possible to compile matlab/octave bindings without using SWIG
