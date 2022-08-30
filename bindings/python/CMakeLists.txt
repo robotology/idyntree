@@ -23,6 +23,21 @@ set_property(
     TARGET ${target_name}
     PROPERTY SWIG_DEPENDS python.i numpy.i)
 
+if(WIN32)
+    set_target_properties(${target_name} PROPERTIES SUFFIX ".pyd")
+endif(WIN32)
+
+# Fix for PyPy
+# See https://gitlab.kitware.com/cmake/cmake/-/issues/23651
+# See https://github.com/conda-forge/idyntree-feedstock/pull/44
+if(Python3_INTERPRETER_ID STREQUAL "PyPy")
+    execute_process(COMMAND ${Python3_EXECUTABLE}
+                    -c "import sysconfig; print(sysconfig.get_config_var('EXT_SUFFIX'))"
+                    OUTPUT_VARIABLE IDYNTREE_PYTHON_EXT_SUFFIX)
+    string(STRIP ${IDYNTREE_PYTHON_EXT_SUFFIX} IDYNTREE_PYTHON_EXT_SUFFIX)
+    set_property (TARGET ${target_name} PROPERTY SUFFIX "${IDYNTREE_PYTHON_EXT_SUFFIX}")
+endif()
+
 if(NOT MSVC)
     set_property(
         TARGET ${target_name}
@@ -47,10 +62,6 @@ install(
     DIRECTORY visualize
     DESTINATION ${PYTHON_INSTDIR}
     COMPONENT python)
-
-if(WIN32)
-    set_target_properties(${target_name} PROPERTIES SUFFIX ".pyd")
-endif(WIN32)
 
 add_subdirectory(scripts)
 
