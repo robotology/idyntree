@@ -131,7 +131,8 @@ jobs:
         cd build
         # Visualizer tests excluded as a workaround for https://github.com/robotology/idyntree/issues/808
         # Python tests excluded as a workaround for https://github.com/robotology/idyntree/issues/939
-        ctest --output-on-failure -C ${{ matrix.build_type }} -E "Visualizer|matlab|Python|pybind" .
+        # InverseKinematics tests are excluded as a workaround for https://github.com/robotology/idyntree/issues/1019
+        ctest --output-on-failure -C ${{ matrix.build_type }} -E "Visualizer|matlab|Python|pybind|InverseKinematics" .
 
     - name: Install [Conda]
       shell: bash -l {0}

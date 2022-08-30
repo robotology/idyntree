@@ -205,7 +205,6 @@ void estimateExternalWrenchesBuffers::resize(const size_t nrOfSubModels, const s
     A.resize(nrOfSubModels);
     x.resize(nrOfSubModels);
     b.resize(nrOfSubModels);
-    pinvA.resize(nrOfSubModels);
 
     b_contacts_subtree.resize(nrOfLinks);
 
@@ -439,7 +438,6 @@ void computeMatrixOfEstimationEquationAndExtWrenchKnownTerms(const Model& model,
      assert(unknowns > 0);
      bufs.A[subModelIndex].resize(6,unknowns);
      bufs.x[subModelIndex].resize(unknowns);
-     bufs.pinvA[subModelIndex].resize(unknowns,6);
 
      // As a first step, we need to compute the transform between each link and the base
      // of its submodel (we are computing the estimation equation in the submodel base frame
@@ -605,12 +603,12 @@ bool estimateExternalWrenchesWithoutInternalFT(const Model& model,
    // In that case, we do not compute the x vector because it will have zero elements 
    if (bufs.A[subModelIndex].rows() > 0 && bufs.A[subModelIndex].cols() > 0) {
        // Now we compute the pseudo inverse
-       pseudoInverse(toEigen(bufs.A[subModelIndex]),
-                     toEigen(bufs.pinvA[subModelIndex]),
-                     tol);
+       // pseudoInverse(toEigen(bufs.A[subModelIndex]),
+       //               toEigen(bufs.pinvA[subModelIndex]),
+       //               tol);
 
        // Now we compute the unknowns
-       toEigen(bufs.x[subModelIndex]) = toEigen(bufs.pinvA[subModelIndex])*toEigen(bufs.b[subModelIndex]);
+       toEigen(bufs.x[subModelIndex]) = toEigen(bufs.A[subModelIndex]).colPivHouseholderQr().solve(toEigen(bufs.b[subModelIndex]));
    }
 
    // We copy the estimated unknowns in the outputContactWrenches
@@ -660,13 +658,7 @@ bool estimateExternalWrenches(const Model& model,
         // If A has no unkowns then pseudoInverse can not be computed
         // In that case, we do not compute the x vector because it will have zero elements 
         if (bufs.A[sm].rows() > 0 && bufs.A[sm].cols() > 0) {
-            // Now we compute the pseudo inverse
-            pseudoInverse(toEigen(bufs.A[sm]),
-                          toEigen(bufs.pinvA[sm]),
-                          tol);
-
-            // Now we compute the unknowns
-            toEigen(bufs.x[sm]) = toEigen(bufs.pinvA[sm])*toEigen(bufs.b[sm]);
+	    toEigen(bufs.x[sm]) = toEigen(bufs.A[sm]).colPivHouseholderQr().solve(toEigen(bufs.b[sm]));	    
         }
 
         // Check if there are any nan in the estimation results
