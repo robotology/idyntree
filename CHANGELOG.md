@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.0.0] - 2022-08-31
+
 ### Fixed
 - Fix compilation against PyPy (https://github.com/robotology/idyntree/pull/1018).
 
