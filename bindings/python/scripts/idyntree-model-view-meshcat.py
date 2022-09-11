@@ -17,8 +17,10 @@ from idyntree.visualize import MeshcatVisualizer
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Display the model in the meshcat visualizer.')
-    parser.add_argument('--model', '-m', type = str, required = True, help='Model path.')
+    parser = argparse.ArgumentParser(
+        description="Display the model in the meshcat visualizer."
+    )
+    parser.add_argument("--model", "-m", type=str, required=True, help="Model path.")
 
     args = parser.parse_args()
 
@@ -29,8 +31,8 @@ def main():
 
     run = True
     while run:
-        quit = input('Enter q or Q to Quit: ')
-        run = (quit != 'q') and (quit != 'Q')
+        quit = input("Enter q or Q to Quit: ")
+        run = (quit != "q") and (quit != "Q")
 
 
 if __name__ == "__main__":
