@@ -24,8 +24,7 @@ def main():
 
     # Load the visualizer
     viz = MeshcatVisualizer()
-    viz.set_model_from_file(args.model)
-    viz.load_model()
+    viz.load_model_from_file(args.model)
     viz.open()
 
     run = True
