@@ -17,21 +17,22 @@ from idyntree.visualize import MeshcatVisualizer
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Display the model in the meshcat visualizer.')
-    parser.add_argument('--model', '-m', type = str, required = True, help='Model path.')
+    parser = argparse.ArgumentParser(
+        description="Display the model in the meshcat visualizer."
+    )
+    parser.add_argument("--model", "-m", type=str, required=True, help="Model path.")
 
     args = parser.parse_args()
 
     # Load the visualizer
     viz = MeshcatVisualizer()
-    viz.set_model_from_file(args.model)
-    viz.load_model()
+    viz.load_model_from_file(args.model)
     viz.open()
 
     run = True
     while run:
-        quit = input('Enter q or Q to Quit: ')
-        run = (quit != 'q') and (quit != 'Q')
+        quit = input("Enter q or Q to Quit: ")
+        run = (quit != "q") and (quit != "Q")
 
 
 if __name__ == "__main__":
