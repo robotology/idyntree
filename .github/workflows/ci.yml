@@ -132,7 +132,8 @@ jobs:
         # Visualizer tests excluded as a workaround for https://github.com/robotology/idyntree/issues/808
         # Python tests excluded as a workaround for https://github.com/robotology/idyntree/issues/939
         # InverseKinematics tests are excluded as a workaround for https://github.com/robotology/idyntree/issues/1019
-        ctest --output-on-failure -C ${{ matrix.build_type }} -E "Visualizer|matlab|Python|pybind|InverseKinematics" .
+        # ConsistencyTestiKin tests are excluded as a workaround for https://github.com/robotology/idyntree/issues/1029
+        ctest --output-on-failure -C ${{ matrix.build_type }} -E "Visualizer|matlab|Python|pybind|InverseKinematics|ConsistencyTestiKin" .
 
     - name: Install [Conda]
       shell: bash -l {0}
