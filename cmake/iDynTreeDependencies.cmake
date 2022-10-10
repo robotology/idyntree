@@ -113,3 +113,23 @@ if(TARGET assimp::assimp)
                  "${assimp_LOCATION_RELEASE}")
   endif()
 endif()
+# Workaround for malformed .pc problem in LibXml2::LibXml2
+if(TARGET LibXml2::LibXml2)
+  get_property(libxml2_INTERFACE_INCLUDE_DIRECTORIES
+               TARGET LibXml2::LibXml2
+               PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
+  if(libxml2_INTERFACE_INCLUDE_DIRECTORIES MATCHES "lib/include")
+    string(REPLACE "lib/include" "include" libxml2_INTERFACE_INCLUDE_DIRECTORIES "${libxml2_INTERFACE_INCLUDE_DIRECTORIES}")
+    set_property(TARGET LibXml2::LibXml2
+                 PROPERTY INTERFACE_INCLUDE_DIRECTORIES
+                 "${libxml2_INTERFACE_INCLUDE_DIRECTORIES}")
+    get_property(libxml2_IMPORTED_LOCATION
+                 TARGET LibXml2::LibXml2
+                 PROPERTY IMPORTED_LOCATION)
+    string(REPLACE "lib/lib" "lib" libxml2_IMPORTED_LOCATION "${libxml2_IMPORTED_LOCATION}")
+    set_property(TARGET LibXml2::LibXml2
+                 PROPERTY IMPORTED_LOCATION
+                 "${libxml2_IMPORTED_LOCATION}")
+  endif()
+endif()
+
