@@ -158,8 +158,31 @@ class MeshcatVisualizer:
     def __primitive_geometry_exists(self, geometry_name: str):
         return geometry_name in self.primitive_geometries_names
 
+    def __get_color_from_shape(self, solid_shape, color):
+        if color is None:
+            mesh_color = solid_shape.getMaterial().color()
+        elif isinstance(color, float):
+            mesh_color = solid_shape.getMaterial().color()
+            mesh_color[3] = color
+        elif isinstance(color, list):
+            if len(color) == 4:
+                mesh_color = color
+            elif len(color) == 3:
+                mesh_color = color
+                mesh_color.append(1.0)
+            else:
+                mesh_color = [1.0, 1.0, 1.0, 1.0]
+                msg = "Not compatible color type. Please pass a list if you want to specify the rgb and the alpha or just a float to specify the alpha channel."
+                warnings.warn(msg, category=UserWarning, stacklevel=2)
+        else:
+            mesh_color = [1.0, 1.0, 1.0, 1.0]
+            msg = "Not compatible color type. Please pass a list if you want to specify the rgb and the alpha or just a float to specify the alpha channel."
+            warnings.warn(msg, category=UserWarning, stacklevel=2)
+
+        return mesh_color
+
     def __add_model_geometry_to_viewer(
-        self, model_geometry: idyn.ModelSolidShapes, model_name: str, color: list
+        self, model_geometry: idyn.ModelSolidShapes, model_name: str, color
     ):
         import meshcat
 
@@ -223,12 +246,8 @@ class MeshcatVisualizer:
                     self.viewer[viewer_name].set_object(obj)
                 elif isinstance(obj, meshcat.geometry.Geometry):
                     material = meshcat.geometry.MeshPhongMaterial()
-                    # Set material color from URDF, converting for triplet of doubles to a single int.
-                    if color is None:
-                        mesh_color = solid_shape.getMaterial().color()
-                    else:
-                        mesh_color = color
 
+                    mesh_color = self.__get_color_from_shape(solid_shape, color)
                     material.color = (
                         int(mesh_color[0] * 255) * 256 ** 2
                         + int(mesh_color[1] * 255) * 256
@@ -347,12 +366,8 @@ class MeshcatVisualizer:
             self.viewer[viewer_name].set_object(obj)
         elif isinstance(obj, meshcat.geometry.Geometry):
             material = meshcat.geometry.MeshPhongMaterial()
-            # Set material color from URDF, converting for triplet of doubles to a single int.
-            if color is None:
-                mesh_color = solid_shape.getMaterial().color()
-            else:
-                mesh_color = color
 
+            mesh_color = self.__get_color_from_shape(solid_shape, color)
             material.color = (
                 int(mesh_color[0] * 255) * 256 ** 2
                 + int(mesh_color[1] * 255) * 256
