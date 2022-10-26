@@ -9,6 +9,7 @@
     <includes local="no">cassert</includes>
     <includes local="no">cstddef</includes>
     <includes local="no">cstring</includes>
+    <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
     <includedby refid="MaterialElement_8h" local="no">private/MaterialElement.h</includedby>
     <includedby refid="URDFParsingUtils_8h" local="no">private/URDFParsingUtils.h</includedby>
     <includedby refid="ClassicalAcc_8h" local="no">iDynTree/Core/ClassicalAcc.h</includedby>
@@ -24,7 +25,6 @@
     <includedby refid="SpatialMotionVector_8h" local="no">iDynTree/Core/SpatialMotionVector.h</includedby>
     <includedby refid="TransformDerivative_8h" local="no">iDynTree/Core/TransformDerivative.h</includedby>
     <includedby refid="InverseKinematicsNLP_8h" local="no">private/InverseKinematicsNLP.h</includedby>
-    <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
     <includedby refid="AttitudeEstimator_8h" local="no">iDynTree/Estimation/AttitudeEstimator.h</includedby>
     <includedby refid="BerdyHelper_8h" local="no">iDynTree/Estimation/BerdyHelper.h</includedby>
     <includedby refid="BerdySparseMAPSolver_8h" local="no">iDynTree/Estimation/BerdySparseMAPSolver.h</includedby>
