@@ -17,11 +17,24 @@
 #include <cassert>
 #include <deque>
 #include <sstream>
+#include <string>
 
 namespace iDynTree
 {
 
-Model::Model(): defaultBaseLink(LINK_INVALID_INDEX), nrOfPosCoords(0), nrOfDOFs(0)
+Model::Model()
+    : defaultBaseLink(LINK_INVALID_INDEX)
+    , nrOfPosCoords(0)
+    , nrOfDOFs(0)
+{
+
+}
+
+Model::Model(const std::vector<std::string>& packageDirs)
+    : defaultBaseLink(LINK_INVALID_INDEX)
+    , nrOfPosCoords(0)
+    , nrOfDOFs(0)
+    , packageDirs(packageDirs)
 {
 
 }
@@ -30,6 +43,8 @@ void Model::copy(const Model& other)
 {
     // reset the base link, the real one will be copied later
     this->defaultBaseLink = LINK_INVALID_INDEX;
+
+    this->packageDirs = other.packageDirs;
 
     // Add all the links, preserving the numbering
     for(unsigned int lnk=0; lnk < other.getNrOfLinks(); lnk++ )
@@ -98,6 +113,7 @@ void Model::destroy()
     additionalFramesLinks.resize(0);
     frameNames.resize(0);
     neighbors.resize(0);
+    packageDirs.clear();
 }
 
 Model::~Model()
@@ -108,6 +124,11 @@ Model::~Model()
 Model Model::copy() const
 {
     return Model(*this);
+}
+
+const std::vector<std::string>& Model::getPackageDirs() const
+{
+    return this->packageDirs;
 }
 
 size_t Model::getNrOfLinks() const

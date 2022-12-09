@@ -241,9 +241,15 @@ namespace iDynTree
         const std::string& getFilename() const;
 
         /**
+         * Returns the current package directories.
+         */
+        const std::vector<std::string>& getPackageDirs() const;
+
+        /**
          * Returns the filename substituting the prefix "package://" with the corresponding absolute path.
          * The absolute path is determined by searching for the file using the paths specified in the
-         * "GAZEBO_MODEL_PATH", "ROS_PACKAGE_PATH" and "AMENT_PREFIX_PATH" environmental variables.
+         * packageDirs vector or if empty in the "GAZEBO_MODEL_PATH", "ROS_PACKAGE_PATH" and
+         * "AMENT_PREFIX_PATH" environmental variables.
          */
         std::string getFileLocationOnLocalFileSystem() const;
 
@@ -251,6 +257,14 @@ namespace iDynTree
          * Sets the filename.
          */
         void setFilename(const std::string& filename);
+
+        /**
+         * Sets the the package directories.
+         * @note if not set the absolute path is determined by searching for the file using the
+         * paths specified in the "GAZEBO_MODEL_PATH", "ROS_PACKAGE_PATH" and "AMENT_PREFIX_PATH"
+         * environmental variables.
+         */
+        void setPackageDirs(const std::vector<std::string>& packageDirs);
 
         /**
          * Returns the current scale.
@@ -264,6 +278,7 @@ namespace iDynTree
 
     private:
         std::string filename;
+        std::vector<std::string> packageDirs;
         iDynTree::Vector3 scale;
     };
 

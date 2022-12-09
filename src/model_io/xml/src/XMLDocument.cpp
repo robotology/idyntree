@@ -39,7 +39,8 @@ namespace iDynTree {
         return m_pimpl->m_root;
     }
     
-    std::shared_ptr<XMLElement> XMLDocument::rootElementForName(const std::string& name)
+    std::shared_ptr<XMLElement> XMLDocument::rootElementForName(const std::string& name,
+                                                                const std::vector<std::string>& packageDirs)
     {
         return std::make_shared<XMLElement>(name);
     }

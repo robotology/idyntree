@@ -14,6 +14,7 @@
 #define IDYNTREE_MODELIO_XML_XMLDOCUMENT_H
 
 #include <memory>
+#include <vector>
 #include <string>
 
 namespace iDynTree {
@@ -40,7 +41,8 @@ public:
      * @param name name of the element to create
      * @return a new parser element for the corresponding tag
      */
-    virtual std::shared_ptr<XMLElement> rootElementForName(const std::string& name);
+    virtual std::shared_ptr<XMLElement> rootElementForName(const std::string& name,
+                                                           const std::vector<std::string>& packageDirs);
 
     // TODO: find a better name
     virtual bool documentHasBeenParsed();

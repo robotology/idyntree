@@ -20,9 +20,10 @@
 
 namespace iDynTree{
 
-    GeometryElement::GeometryElement(std::shared_ptr<SolidShape>& shape)
+    GeometryElement::GeometryElement(std::shared_ptr<SolidShape>& shape, const std::vector<std::string>& packageDirs)
     : iDynTree::XMLElement("geometry")
-    , m_shape(shape) {}
+    , m_shape(shape)
+    , packageDirs(packageDirs) {}
 
     std::shared_ptr<iDynTree::XMLElement> GeometryElement::childElementForName(const std::string& name)
     {
@@ -111,6 +112,7 @@ namespace iDynTree{
                     // https://github.com/bulletphysics/bullet3/tree/master/data
                     ExternalMesh * externalMesh = new ExternalMesh();
                     externalMesh->setFilename(found->second->value());
+                    externalMesh->setPackageDirs(this->packageDirs);
                     //                    pExternalMesh->filename = getURDFMeshAbsolutePathFilename(urdf_filename,localName);
                     iDynTree::Vector3 scale;
                     scale(0) = scale(1) = scale(2) = 1.0;
