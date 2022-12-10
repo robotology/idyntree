@@ -107,19 +107,23 @@ public:
      * Load the model of the robot  from a string.
      *
      * @param modelString string containg the model of the robot.
-     * @param filetype type of the file to load, currently supporting only urdf type.
-     *
+     * @param filetype type of the file to load, currently supporting only urdf type
+     * @param packageDirs a vector containing the different directories where to search for model meshes
      */
-    bool loadModelFromString(const std::string & modelString, const std::string & filetype="urdf");
+    bool loadModelFromString(const std::string & modelString,
+                             const std::string & filetype="urdf",
+                             const std::vector<std::string>& packageDirs = {});
 
     /**
      * Load the model of the robot from an external file.
      *
      * @param filename path to the file to load
      * @param filetype type of the file to load, currently supporting only urdf type.
-     *
+     * @param packageDirs a vector containing the different directories where to search for model meshes
      */
-    bool loadModelFromFile(const std::string & filename, const std::string & filetype="urdf");
+    bool loadModelFromFile(const std::string & filename,
+                           const std::string & filetype="urdf",
+                           const std::vector<std::string>& packageDirs = {});
 
     /**
      * Load reduced model from another model, specifyng only the desired joints in the model.
@@ -153,13 +157,16 @@ public:
      * @param[in] consideredJoints list of joints to consider in the model.
      * @param[in] filetype (optional) explicit definiton of the filetype to load.
      *                     Only "urdf" is supported at the moment.
+     * @param[in] packageDirs (optional) a vector containing the different directories where to
+     *                        search for model meshes
      * @return true if all went well (files were correctly loaded and consistent), false otherwise.
      *
      *
      */
     bool loadReducedModelFromString(const std::string modelString,
                                     const std::vector<std::string> & consideredJoints,
-                                    const std::string filetype="");
+                                    const std::string filetype="",
+                                    const std::vector<std::string>& packageDirs = {});
 
     /**
      * Load reduced model from file, specifyng only the desired joints in the model.
@@ -171,13 +178,16 @@ public:
      * @param[in] consideredJoints list of joints to consider in the model.
      * @param[in] filetype (optional) explicit definiton of the filetype to load.
      *                     Only "urdf" is supported at the moment.
+     * @param[in] packageDirs (optional) a vector containing the different directories where to
+     *                        search for model meshes
      * @return true if all went well (files were correctly loaded and consistent), false otherwise.
      *
      *
      */
     bool loadReducedModelFromFile(const std::string filename,
                                   const std::vector<std::string> & consideredJoints,
-                                  const std::string filetype="");
+                                  const std::string filetype="",
+                                  const std::vector<std::string>& packageDirs = {});
 
     /**
      * Get the loaded model.
