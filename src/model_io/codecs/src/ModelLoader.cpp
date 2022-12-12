@@ -139,7 +139,8 @@ namespace iDynTree
                                                     const std::string /*filetype*/)
     {
         SensorsList _sensorsFull, _sensorsReduced;
-        Model _modelReduced(fullModel.getPackageDirs());
+        Model _modelReduced;
+        _modelReduced.setPackageDirs(fullModel.getPackageDirs());
         bool ok = createReducedModelAndSensors(fullModel,_sensorsFull,consideredJoints,_modelReduced,_sensorsReduced);
 
         if( !ok )
@@ -158,7 +159,8 @@ namespace iDynTree
         bool parsingCorrect = loadModelFromString(modelString, filetype, packageDirs);
         if (!parsingCorrect) return false;
         SensorsList _sensorsFull = m_pimpl->m_sensors, _sensorsReduced;
-        Model _modelFull = m_pimpl->m_model, _modelReduced(packageDirs);
+        Model _modelFull = m_pimpl->m_model, _modelReduced;
+        _modelReduced.setPackageDirs(packageDirs);
 
         parsingCorrect = createReducedModelAndSensors(_modelFull, _sensorsFull,
                                                       consideredJoints,
@@ -180,7 +182,8 @@ namespace iDynTree
         bool parsingCorrect = loadModelFromFile(filename, filetype, packageDirs);
         if (!parsingCorrect) return false;
         SensorsList _sensorsFull = m_pimpl->m_sensors, _sensorsReduced;
-        Model _modelFull = m_pimpl->m_model, _modelReduced(packageDirs);
+        Model _modelFull = m_pimpl->m_model, _modelReduced;
+        _modelReduced.setPackageDirs(packageDirs);
 
         parsingCorrect = createReducedModelAndSensors(_modelFull,_sensorsFull,consideredJoints,_modelReduced,_sensorsReduced);
 

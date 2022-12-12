@@ -10,6 +10,7 @@
 
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/Traversal.h>
+#include <iDynTree/Model/SolidShapes.h>
 
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/EigenHelpers.h>
@@ -19,6 +20,7 @@
 #include <sstream>
 #include <string>
 
+
 namespace iDynTree
 {
 
@@ -26,15 +28,6 @@ Model::Model()
     : defaultBaseLink(LINK_INVALID_INDEX)
     , nrOfPosCoords(0)
     , nrOfDOFs(0)
-{
-
-}
-
-Model::Model(const std::vector<std::string>& packageDirs)
-    : defaultBaseLink(LINK_INVALID_INDEX)
-    , nrOfPosCoords(0)
-    , nrOfDOFs(0)
-    , packageDirs(packageDirs)
 {
 
 }
@@ -129,6 +122,29 @@ Model Model::copy() const
 const std::vector<std::string>& Model::getPackageDirs() const
 {
     return this->packageDirs;
+}
+
+void Model::setPackageDirs(const std::vector<std::string>& packageDirs)
+{
+    this->packageDirs = packageDirs;
+
+    auto updatePackageDirs = [this](ModelSolidShapes& modelShapes) -> void
+                             {
+                                 for (auto& shapes : modelShapes.getLinkSolidShapes())
+                                 {
+                                     for (auto& shape : shapes)
+                                     {
+                                         if (shape != nullptr && shape->isExternalMesh())
+                                         {
+                                             shape->asExternalMesh()->setPackageDirs(this->packageDirs);
+                                         }
+                                     }
+                                 }
+
+                             };
+
+    updatePackageDirs(this->collisionSolidShapes());
+    updatePackageDirs(this->visualSolidShapes());
 }
 
 size_t Model::getNrOfLinks() const

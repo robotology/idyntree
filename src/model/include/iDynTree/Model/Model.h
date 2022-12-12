@@ -160,12 +160,6 @@ namespace iDynTree
         Model();
 
         /**
-         * Costructor
-         * @param packageDirs A vector of string containing the path to the directories of the meshes
-         */
-        Model(const std::vector<std::string>& packageDirs);
-
-        /**
          * Copy costructor
          */
         Model(const Model & other);
@@ -197,6 +191,8 @@ namespace iDynTree
          * @return a vector containing all the directories of the meshes
          */
         const std::vector<std::string>& getPackageDirs() const;
+
+        void setPackageDirs(const std::vector<std::string>& packageDirs);
 
         /**
          * Get the name of a link given its index, or

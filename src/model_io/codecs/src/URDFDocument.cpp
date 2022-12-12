@@ -60,7 +60,8 @@ namespace iDynTree {
     {
         // allowed tag is <robot>
         if (name == "robot") {
-            m_model = iDynTree::Model(packageDirs);
+            m_model = iDynTree::Model();
+            m_model.setPackageDirs(packageDirs);
             m_buffers.sensorHelpers.clear();
             m_buffers.joints.clear();
             m_buffers.fixedJoints.clear();
@@ -120,7 +121,9 @@ namespace iDynTree {
 
         // set the default root in the model
         m_model.setDefaultBaseLink(m_model.getLinkIndex(rootCandidates[0]));
-        iDynTree::Model newModel(m_model.getPackageDirs()), normalizedModel(m_model.getPackageDirs());
+        iDynTree::Model newModel, normalizedModel;
+        newModel.setPackageDirs(m_model.getPackageDirs());
+        normalizedModel.setPackageDirs(m_model.getPackageDirs());
 
         if (!removeFakeLinks(m_model, newModel)) {
             reportError("URDFDocument", "documentHasBeenParsed", "Failed to remove fake links from the model");
