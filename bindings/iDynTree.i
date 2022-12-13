@@ -1,6 +1,8 @@
 
 /* File : iDynTree.i */
 %module iDynTree
+%implicitconv;
+
 
 %include "std_string.i"
 %include "std_vector.i"
