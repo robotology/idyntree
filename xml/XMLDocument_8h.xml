@@ -3,11 +3,15 @@
   <compounddef id="XMLDocument_8h" kind="file" language="C++">
     <compoundname>XMLDocument.h</compoundname>
     <includes local="no">memory</includes>
+    <includes local="no">vector</includes>
     <includes local="no">string</includes>
     <includedby refid="URDFDocument_8h" local="no">private/URDFDocument.h</includedby>
     <incdepgraph>
-      <node id="3">
+      <node id="4">
         <label>string</label>
+      </node>
+      <node id="3">
+        <label>vector</label>
       </node>
       <node id="1">
         <label>iDynTree/XMLDocument.h</label>
@@ -15,6 +19,8 @@
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
         </childnode>
       </node>
       <node id="2">

@@ -8,7 +8,7 @@
     <detaileddescription>
 <para><variablelist>
 <varlistentry><term>Member <ref refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1af366663099c8b4772ab27485bc3581f8" kindref="member">iDynTree::ExtWrenchesAndJointTorquesEstimator::loadModelAndSensorsFromFile</ref>  (const std::string filename, const std::string filetype=&quot;&quot;)</term></varlistentry>
-<listitem><para><anchor id="deprecated_1_deprecated000001"/>Use <ref refid="classiDynTree_1_1ModelLoader_1a4731f7a0967a0f88b9ee760027f42c28" kindref="member">iDynTree::ModelLoader::loadModelFromFile</ref> and call setModelAndSensors on the parsed <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> and <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref></para>
+<listitem><para><anchor id="deprecated_1_deprecated000001"/>Use <ref refid="classiDynTree_1_1ModelLoader_1a665a7ab1c8f6749f050d8e891c586276" kindref="member">iDynTree::ModelLoader::loadModelFromFile</ref> and call setModelAndSensors on the parsed <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> and <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref></para>
 </listitem>
 </variablelist>
 </para>

@@ -69,6 +69,38 @@
         </inbodydescription>
         <location file="private/VisualElement.h" line="42" column="25" bodyfile="private/VisualElement.h" bodystart="42" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1VisualElement_1_1VisualInfo_1ad9e003d5a212fddda549ff373d3f8252" prot="public" static="no" mutable="no">
+        <type>const std::vector&lt; std::string &gt; &amp;</type>
+        <definition>const std::vector&lt;std::string&gt;&amp; iDynTree::VisualElement::VisualInfo::m_packageDirs</definition>
+        <argsstring></argsstring>
+        <name>m_packageDirs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/VisualElement.h" line="43" column="27" bodyfile="private/VisualElement.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structiDynTree_1_1VisualElement_1_1VisualInfo_1ae92188f15f72ac57237306421e7bb5b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::VisualElement::VisualInfo::VisualInfo</definition>
+        <argsstring>(const std::vector&lt; std::string &gt; &amp;packageDirs)</argsstring>
+        <name>VisualInfo</name>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>packageDirs</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/VisualElement.h" line="45" column="9"/>
+      </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
@@ -100,6 +132,12 @@
         <childnode refid="13" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="18">
+        <label>std::vector&lt; T &gt;</label>
+        <childnode refid="4" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+      </node>
       <node id="1">
         <label>iDynTree::VisualElement::VisualInfo</label>
         <link refid="structiDynTree_1_1VisualElement_1_1VisualInfo"/>
@@ -114,6 +152,9 @@
         </childnode>
         <childnode refid="15" relation="usage">
           <edgelabel>m_name</edgelabel>
+        </childnode>
+        <childnode refid="17" relation="usage">
+          <edgelabel>m_packageDirs</edgelabel>
         </childnode>
       </node>
       <node id="2">
@@ -154,6 +195,15 @@
         <label>iDynTree::MatrixFixSize&lt; nRows, nCols &gt;</label>
         <link refid="classiDynTree_1_1MatrixFixSize"/>
       </node>
+      <node id="17">
+        <label>std::vector&lt; std::string &gt;</label>
+        <childnode refid="15" relation="usage">
+          <edgelabel>elements</edgelabel>
+        </childnode>
+        <childnode refid="18" relation="template-instance">
+          <edgelabel>&lt; std::string &gt;</edgelabel>
+        </childnode>
+      </node>
       <node id="13">
         <label>Vector3</label>
         <link refid="classiDynTree_1_1VectorFixSize"/>
@@ -177,13 +227,15 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="private/VisualElement.h" line="37" column="5" bodyfile="private/VisualElement.h" bodystart="37" bodyend="43"/>
+    <location file="private/VisualElement.h" line="37" column="5" bodyfile="private/VisualElement.h" bodystart="37" bodyend="46"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1VisualElement_1_1VisualInfo_1a3f794cb64ecbc25a8dee3bf3a1401f9a" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement::VisualInfo</scope><name>m_material</name></member>
       <member refid="structiDynTree_1_1VisualElement_1_1VisualInfo_1addd6cb61f3472731a93dffb9ef562573" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement::VisualInfo</scope><name>m_name</name></member>
       <member refid="structiDynTree_1_1VisualElement_1_1VisualInfo_1a429e0158b37e2da9617c8a48428a809c" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement::VisualInfo</scope><name>m_nameAttributeFound</name></member>
       <member refid="structiDynTree_1_1VisualElement_1_1VisualInfo_1a566a985b0ce45197f131ec3f6db41934" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement::VisualInfo</scope><name>m_origin</name></member>
+      <member refid="structiDynTree_1_1VisualElement_1_1VisualInfo_1ad9e003d5a212fddda549ff373d3f8252" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement::VisualInfo</scope><name>m_packageDirs</name></member>
       <member refid="structiDynTree_1_1VisualElement_1_1VisualInfo_1a496c6ab2de95ba796a8ce5c9419d9f0e" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement::VisualInfo</scope><name>m_solidShape</name></member>
+      <member refid="structiDynTree_1_1VisualElement_1_1VisualInfo_1ae92188f15f72ac57237306421e7bb5b6" prot="public" virt="non-virtual"><scope>iDynTree::VisualElement::VisualInfo</scope><name>VisualInfo</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

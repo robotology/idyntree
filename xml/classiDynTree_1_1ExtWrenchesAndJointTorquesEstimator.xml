@@ -329,7 +329,7 @@
 <para>Load model and sensors from file. </para>
         </briefdescription>
         <detaileddescription>
-<para><xrefsect id="deprecated_1_deprecated000001"><xreftitle>Deprecated</xreftitle><xrefdescription><para>Use <ref refid="classiDynTree_1_1ModelLoader_1a4731f7a0967a0f88b9ee760027f42c28" kindref="member">iDynTree::ModelLoader::loadModelFromFile</ref> and call setModelAndSensors on the parsed <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> and <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref></para>
+<para><xrefsect id="deprecated_1_deprecated000001"><xreftitle>Deprecated</xreftitle><xrefdescription><para>Use <ref refid="classiDynTree_1_1ModelLoader_1a665a7ab1c8f6749f050d8e891c586276" kindref="member">iDynTree::ModelLoader::loadModelFromFile</ref> and call setModelAndSensors on the parsed <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> and <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref></para>
 </xrefdescription></xrefsect></para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>

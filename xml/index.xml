@@ -923,12 +923,15 @@
   </compound>
   <compound refid="classiDynTree_1_1ExternalMesh" kind="class"><name>iDynTree::ExternalMesh</name>
     <member refid="classiDynTree_1_1ExternalMesh_1addb8f54db0f412195238d5f478b63fa6" kind="variable"><name>filename</name></member>
+    <member refid="classiDynTree_1_1ExternalMesh_1a1f64220901075472cba91fda117688c1" kind="variable"><name>packageDirs</name></member>
     <member refid="classiDynTree_1_1ExternalMesh_1a89a2829549de18df5a546a3e066761cf" kind="variable"><name>scale</name></member>
     <member refid="classiDynTree_1_1ExternalMesh_1aadedfe0c6c25dde6622e203089619b89" kind="function"><name>~ExternalMesh</name></member>
     <member refid="classiDynTree_1_1ExternalMesh_1a9f3ed8fc497fd41ddb1d7dfef6caa24d" kind="function"><name>clone</name></member>
     <member refid="classiDynTree_1_1ExternalMesh_1a86f36de36504433e33b596144100419b" kind="function"><name>getFilename</name></member>
+    <member refid="classiDynTree_1_1ExternalMesh_1abccd713f646d9b2a2806b1c84e170f4e" kind="function"><name>getPackageDirs</name></member>
     <member refid="classiDynTree_1_1ExternalMesh_1a4cbaeab3dab062b9b838d3d677e92e3f" kind="function"><name>getFileLocationOnLocalFileSystem</name></member>
     <member refid="classiDynTree_1_1ExternalMesh_1a857a7996ef73a5fb7f69aef3613a14c7" kind="function"><name>setFilename</name></member>
+    <member refid="classiDynTree_1_1ExternalMesh_1a9a8d15b22fd6521bfafeb4147ccec918" kind="function"><name>setPackageDirs</name></member>
     <member refid="classiDynTree_1_1ExternalMesh_1a965dca15bd88b220d6a752eb51a24774" kind="function"><name>getScale</name></member>
     <member refid="classiDynTree_1_1ExternalMesh_1aa26df4c28f55f50dc21f5c085ad8dbb7" kind="function"><name>setScale</name></member>
   </compound>
@@ -1162,7 +1165,8 @@
   </compound>
   <compound refid="classiDynTree_1_1GeometryElement" kind="class"><name>iDynTree::GeometryElement</name>
     <member refid="classiDynTree_1_1GeometryElement_1ae105439ae36d5d7170befb77deb150bb" kind="variable"><name>m_shape</name></member>
-    <member refid="classiDynTree_1_1GeometryElement_1a40e037650d78ff9d2fa1ca10934bf880" kind="function"><name>GeometryElement</name></member>
+    <member refid="classiDynTree_1_1GeometryElement_1a2b9ba4f1afad2d18b15163b5e12b9bb6" kind="variable"><name>packageDirs</name></member>
+    <member refid="classiDynTree_1_1GeometryElement_1a47119341781d625af7289100f1900416" kind="function"><name>GeometryElement</name></member>
     <member refid="classiDynTree_1_1GeometryElement_1a1131aa77ea69a8eb9652742e70155e47" kind="function"><name>childElementForName</name></member>
   </compound>
   <compound refid="classiDynTree_1_1GeomVector3" kind="class"><name>iDynTree::GeomVector3</name>
@@ -2375,6 +2379,7 @@
     <member refid="classiDynTree_1_1Model_1a6fd86eb6b7a813c89ef71ffda31e0210" kind="variable"><name>jointNames</name></member>
     <member refid="classiDynTree_1_1Model_1a7918eb0613b28e50c92f5af609875bda" kind="variable"><name>frameNames</name></member>
     <member refid="classiDynTree_1_1Model_1ac70249ac612e3cf157cd89d1e90b7538" kind="variable"><name>neighbors</name></member>
+    <member refid="classiDynTree_1_1Model_1a774db17a0420685ac979959453f80ad4" kind="variable"><name>packageDirs</name></member>
     <member refid="classiDynTree_1_1Model_1aba9b3e5e28b33093537fbb4d6d454560" kind="variable"><name>defaultBaseLink</name></member>
     <member refid="classiDynTree_1_1Model_1a7258bf4d518366514fc8caa4666f2485" kind="variable"><name>nrOfPosCoords</name></member>
     <member refid="classiDynTree_1_1Model_1a6731df1e65f92cc0052bfe043ec60ee4" kind="variable"><name>nrOfDOFs</name></member>
@@ -2388,6 +2393,8 @@
     <member refid="classiDynTree_1_1Model_1ae5291043dfff013ca1a1d4270285a974" kind="function"><name>copy</name></member>
     <member refid="classiDynTree_1_1Model_1a74d155b1e7ede1524c5781d7862fd573" kind="function"><name>~Model</name></member>
     <member refid="classiDynTree_1_1Model_1aca270a902d0b0328c0d8afb1727d2154" kind="function"><name>getNrOfLinks</name></member>
+    <member refid="classiDynTree_1_1Model_1af084aa0a158b53693f1c63572ed8ef18" kind="function"><name>getPackageDirs</name></member>
+    <member refid="classiDynTree_1_1Model_1a9c7c704722ddc9601e35cdba9c0da62a" kind="function"><name>setPackageDirs</name></member>
     <member refid="classiDynTree_1_1Model_1aac86147dd37cd977de054e55635cd718" kind="function"><name>getLinkName</name></member>
     <member refid="classiDynTree_1_1Model_1ae9557eba54c8845eb69c79259299fddb" kind="function"><name>getLinkIndex</name></member>
     <member refid="classiDynTree_1_1Model_1aa5d6b472a34f852a7e3671e41f7e90e8" kind="function"><name>isValidLinkIndex</name></member>
@@ -2468,11 +2475,11 @@
     <member refid="classiDynTree_1_1ModelLoader_1a6e6be84f2b3a2009d22949e4b7520de2" kind="function"><name>~ModelLoader</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1adfc4ccd100924f832a6fa6b1929a20e6" kind="function"><name>parsingOptions</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1a1a6f86c7cc5964554458ead6242796a9" kind="function"><name>setParsingOptions</name></member>
-    <member refid="classiDynTree_1_1ModelLoader_1a44b074a70bd585aecffa44a2329c99b0" kind="function"><name>loadModelFromString</name></member>
-    <member refid="classiDynTree_1_1ModelLoader_1a4731f7a0967a0f88b9ee760027f42c28" kind="function"><name>loadModelFromFile</name></member>
+    <member refid="classiDynTree_1_1ModelLoader_1afefe79c0d50cfbaad54d5b076a90f00d" kind="function"><name>loadModelFromString</name></member>
+    <member refid="classiDynTree_1_1ModelLoader_1a665a7ab1c8f6749f050d8e891c586276" kind="function"><name>loadModelFromFile</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1aa1d105cc4c13bc5c6fd90cc6f8224085" kind="function"><name>loadReducedModelFromFullModel</name></member>
-    <member refid="classiDynTree_1_1ModelLoader_1af6391e49caad7c349a1f007abb4ec2d4" kind="function"><name>loadReducedModelFromString</name></member>
-    <member refid="classiDynTree_1_1ModelLoader_1ab846e7becb8c98998cb2b05749a95ade" kind="function"><name>loadReducedModelFromFile</name></member>
+    <member refid="classiDynTree_1_1ModelLoader_1af8431aff629c8c73db87b549d7f804b1" kind="function"><name>loadReducedModelFromString</name></member>
+    <member refid="classiDynTree_1_1ModelLoader_1a15df3e0647d7de8fc286c37c2fdbd6d0" kind="function"><name>loadReducedModelFromFile</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1abfea0564c6c01dc8a90bab55df13b533" kind="function"><name>model</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1a933ace452015e5dd1d0d229315aef980" kind="function"><name>sensors</name></member>
     <member refid="classiDynTree_1_1ModelLoader_1a6b78cb43b48ab1b377b5c907f9918077" kind="function"><name>isValid</name></member>
@@ -3946,7 +3953,7 @@
     <member refid="classiDynTree_1_1URDFDocument_1a64b806c80262d0b823a9e0224752aec6" kind="function"><name>options</name></member>
     <member refid="classiDynTree_1_1URDFDocument_1a6d7027a9bf0d1ac747aead3ad89ea385" kind="function"><name>model</name></member>
     <member refid="classiDynTree_1_1URDFDocument_1ac6370e22cd6cd18196c63bcc9b5e6f9f" kind="function"><name>sensors</name></member>
-    <member refid="classiDynTree_1_1URDFDocument_1a20cc305f59f08294b43e048d4ed30076" kind="function"><name>rootElementForName</name></member>
+    <member refid="classiDynTree_1_1URDFDocument_1a767a44a4d8c3db4bcc7e78fb2273e2ef" kind="function"><name>rootElementForName</name></member>
     <member refid="classiDynTree_1_1URDFDocument_1af4b51c607132c29d08581fc16033ca4b" kind="function"><name>documentHasBeenParsed</name></member>
   </compound>
   <compound refid="classiDynTree_1_1VectorDynSize" kind="class"><name>iDynTree::VectorDynSize</name>
@@ -4022,7 +4029,7 @@
   </compound>
   <compound refid="classiDynTree_1_1VisualElement" kind="class"><name>iDynTree::VisualElement</name>
     <member refid="classiDynTree_1_1VisualElement_1aeb22ea6db6cb2df5960d97953cf1c1f3" kind="variable"><name>m_info</name></member>
-    <member refid="classiDynTree_1_1VisualElement_1aa36ef6f44abb9c979267b2e73d9c3be6" kind="function"><name>VisualElement</name></member>
+    <member refid="classiDynTree_1_1VisualElement_1ac78c191608afc18999e1903db4403424" kind="function"><name>VisualElement</name></member>
     <member refid="classiDynTree_1_1VisualElement_1a6c6d3c6ad896e9fececea30461130655" kind="function"><name>visualInfo</name></member>
     <member refid="classiDynTree_1_1VisualElement_1aafcde4f7f8a04701de0d07935bc93a7e" kind="function"><name>setAttributes</name></member>
     <member refid="classiDynTree_1_1VisualElement_1a1411f595ab1cf35b492e564a8c111bed" kind="function"><name>childElementForName</name></member>
@@ -4033,6 +4040,8 @@
     <member refid="structiDynTree_1_1VisualElement_1_1VisualInfo_1a566a985b0ce45197f131ec3f6db41934" kind="variable"><name>m_origin</name></member>
     <member refid="structiDynTree_1_1VisualElement_1_1VisualInfo_1a496c6ab2de95ba796a8ce5c9419d9f0e" kind="variable"><name>m_solidShape</name></member>
     <member refid="structiDynTree_1_1VisualElement_1_1VisualInfo_1a3f794cb64ecbc25a8dee3bf3a1401f9a" kind="variable"><name>m_material</name></member>
+    <member refid="structiDynTree_1_1VisualElement_1_1VisualInfo_1ad9e003d5a212fddda549ff373d3f8252" kind="variable"><name>m_packageDirs</name></member>
+    <member refid="structiDynTree_1_1VisualElement_1_1VisualInfo_1ae92188f15f72ac57237306421e7bb5b6" kind="function"><name>VisualInfo</name></member>
   </compound>
   <compound refid="classiDynTree_1_1Visualizer" kind="class"><name>iDynTree::Visualizer</name>
     <member refid="classiDynTree_1_1Visualizer_1a62fa7ce6e4b7f0e02925f62df919bc42" kind="friend"><name>ModelVisualization</name></member>
@@ -4125,7 +4134,7 @@
     <member refid="classiDynTree_1_1XMLDocument_1a3c91a8bd7c0207735fcfb76b5b567132" kind="function"><name>setRootElement</name></member>
     <member refid="classiDynTree_1_1XMLDocument_1a94ea906352e78e3e5b9dde135b102297" kind="function"><name>XMLDocument</name></member>
     <member refid="classiDynTree_1_1XMLDocument_1a4d065a940ba5b49300c5566bbccfb9d5" kind="function"><name>~XMLDocument</name></member>
-    <member refid="classiDynTree_1_1XMLDocument_1a3cdb084e6ae5b9f678a3290000e345f5" kind="function"><name>rootElementForName</name></member>
+    <member refid="classiDynTree_1_1XMLDocument_1a7ad456c9c0449f8d342fbc82bf0a3aa0" kind="function"><name>rootElementForName</name></member>
     <member refid="classiDynTree_1_1XMLDocument_1a605ab0c832b7f5de4cff8a45e94b8f56" kind="function"><name>documentHasBeenParsed</name></member>
     <member refid="classiDynTree_1_1XMLDocument_1afb50b3119f4c453c96c80925dd6a6791" kind="function"><name>root</name></member>
     <member refid="classiDynTree_1_1XMLDocument_1a09f709b05c0f1f12670763848deeebf8" kind="function"><name>description</name></member>
@@ -4160,6 +4169,8 @@
     <member refid="classiDynTree_1_1XMLParser_1ac57715b6b0bbe0a368042d6b1a57ab90" kind="function"><name>~XMLParser</name></member>
     <member refid="classiDynTree_1_1XMLParser_1a380d48c74008493f76bbfa89d27a9c72" kind="function"><name>keepTreeInMemory</name></member>
     <member refid="classiDynTree_1_1XMLParser_1a4298a1f57d35727ece02b59197e58026" kind="function"><name>setKeepTreeInMemory</name></member>
+    <member refid="classiDynTree_1_1XMLParser_1a9f4f1a5f3bfa86f6889bf993e303b3e3" kind="function"><name>setPackageDirs</name></member>
+    <member refid="classiDynTree_1_1XMLParser_1a076df024000c7efbd63e5b858d790cf7" kind="function"><name>packageDirs</name></member>
     <member refid="classiDynTree_1_1XMLParser_1af57bd10e7fe04805404009f5fc2f3492" kind="function"><name>logParsing</name></member>
     <member refid="classiDynTree_1_1XMLParser_1a7a13e1f8f9a88d8bbc3c14d9c7cd26f4" kind="function"><name>setLogParsing</name></member>
     <member refid="classiDynTree_1_1XMLParser_1a53d7a4b6fffcd67e9de72c08440eb0fa" kind="function"><name>validateXML</name></member>

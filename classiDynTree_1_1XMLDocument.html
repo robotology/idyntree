@@ -101,7 +101,8 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a3cdb084e6ae5b9f678a3290000e345f5" class="m-doc">rootElementForName</a>(</span><span class="m-doc-wrap">const std::string&amp; name) -&gt; std::shared_ptr&lt;<a href="classiDynTree_1_1XMLElement.html" class="m-doc">XMLElement</a>&gt; <span class="m-label m-flat m-warning">virtual</span></span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a7ad456c9c0449f8d342fbc82bf0a3aa0" class="m-doc">rootElementForName</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              const std::vector&lt;std::string&gt;&amp; packageDirs) -&gt; std::shared_ptr&lt;<a href="classiDynTree_1_1XMLElement.html" class="m-doc">XMLElement</a>&gt; <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Factory method to create the XML root element given for the specified name.</dd>
             <dt id="a605ab0c832b7f5de4cff8a45e94b8f56">
@@ -120,9 +121,10 @@
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a3cdb084e6ae5b9f678a3290000e345f5"><div>
+          <section class="m-doc-details" id="a7ad456c9c0449f8d342fbc82bf0a3aa0"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">std::shared_ptr&lt;<a href="classiDynTree_1_1XMLElement.html" class="m-doc">XMLElement</a>&gt; iDynTree::<wbr />XMLDocument::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a3cdb084e6ae5b9f678a3290000e345f5" class="m-doc-self">rootElementForName</a>(</span><span class="m-doc-wrap">const std::string&amp; name) <span class="m-label m-warning">virtual</span></span></span>
+              <span class="m-doc-wrap-bumper">std::shared_ptr&lt;<a href="classiDynTree_1_1XMLElement.html" class="m-doc">XMLElement</a>&gt; iDynTree::<wbr />XMLDocument::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a7ad456c9c0449f8d342fbc82bf0a3aa0" class="m-doc-self">rootElementForName</a>(</span><span class="m-doc-wrap">const std::string&amp; name,
+              const std::vector&lt;std::string&gt;&amp; packageDirs) <span class="m-label m-warning">virtual</span></span></span>
             </h3>
             <p>Factory method to create the XML root element given for the specified name.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -133,6 +135,10 @@
                 <tr>
                   <td style="width: 1%">name</td>
                   <td>name of the element to create</td>
+                </tr>
+                <tr>
+                  <td>packageDirs</td>
+                  <td></td>
                 </tr>
               </tbody>
               <tfoot>

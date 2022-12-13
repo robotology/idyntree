@@ -3,6 +3,18 @@
   <compounddef id="GeometryElement_8h" kind="file" language="C++">
     <compoundname>GeometryElement.h</compoundname>
     <includes refid="XMLElement_8h" local="no">iDynTree/XMLElement.h</includes>
+    <includes local="no">vector</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>private/GeometryElement.h</label>
+        <link refid="GeometryElement_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>vector</label>
+      </node>
+    </incdepgraph>
     <innerclass refid="classiDynTree_1_1GeometryElement" prot="public">iDynTree::GeometryElement</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>

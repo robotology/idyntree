@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLDocument.h" line="27" column="21" bodyfile="iDynTree/XMLDocument.h" bodystart="26" bodyend="-1"/>
+        <location file="iDynTree/XMLDocument.h" line="28" column="21" bodyfile="iDynTree/XMLDocument.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="friend">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLDocument.h" line="29" column="5" bodyfile="iDynTree/XMLDocument.h" bodystart="29" bodyend="-1"/>
+        <location file="iDynTree/XMLDocument.h" line="30" column="5" bodyfile="iDynTree/XMLDocument.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -52,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLDocument.h" line="30" column="10"/>
+        <location file="iDynTree/XMLDocument.h" line="31" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLDocument.h" line="34" column="5"/>
+        <location file="iDynTree/XMLDocument.h" line="35" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLDocument_1a4d065a940ba5b49300c5566bbccfb9d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -80,17 +80,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLDocument.h" line="35" column="13"/>
+        <location file="iDynTree/XMLDocument.h" line="36" column="13"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1XMLDocument_1a3cdb084e6ae5b9f678a3290000e345f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classiDynTree_1_1XMLDocument_1a7ad456c9c0449f8d342fbc82bf0a3aa0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">XMLElement</ref> &gt;</type>
         <definition>virtual std::shared_ptr&lt;XMLElement&gt; iDynTree::XMLDocument::rootElementForName</definition>
-        <argsstring>(const std::string &amp;name)</argsstring>
+        <argsstring>(const std::string &amp;name, const std::vector&lt; std::string &gt; &amp;packageDirs)</argsstring>
         <name>rootElementForName</name>
-        <reimplementedby refid="classiDynTree_1_1URDFDocument_1a20cc305f59f08294b43e048d4ed30076">rootElementForName</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1URDFDocument_1a767a44a4d8c3db4bcc7e78fb2273e2ef">rootElementForName</reimplementedby>
         <param>
           <type>const std::string &amp;</type>
           <declname>name</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>packageDirs</declname>
         </param>
         <briefdescription>
 <para>Factory method to create the XML root element given for the specified name. </para>
@@ -111,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLDocument.h" line="43" column="29"/>
+        <location file="iDynTree/XMLDocument.h" line="44" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLDocument_1a605ab0c832b7f5de4cff8a45e94b8f56" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -125,7 +129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLDocument.h" line="46" column="18"/>
+        <location file="iDynTree/XMLDocument.h" line="48" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLDocument_1afb50b3119f4c453c96c80925dd6a6791" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">XMLElement</ref> &gt;</type>
@@ -138,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLDocument.h" line="48" column="27"/>
+        <location file="iDynTree/XMLDocument.h" line="50" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLDocument_1a09f709b05c0f1f12670763848deeebf8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -151,7 +155,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLDocument.h" line="49" column="17"/>
+        <location file="iDynTree/XMLDocument.h" line="51" column="17"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -170,13 +174,13 @@
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="iDynTree/XMLDocument.h" line="25" column="1" bodyfile="iDynTree/XMLDocument.h" bodystart="25" bodyend="50"/>
+    <location file="iDynTree/XMLDocument.h" line="26" column="1" bodyfile="iDynTree/XMLDocument.h" bodystart="26" bodyend="52"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1XMLDocument_1a09f709b05c0f1f12670763848deeebf8" prot="public" virt="non-virtual"><scope>iDynTree::XMLDocument</scope><name>description</name></member>
       <member refid="classiDynTree_1_1XMLDocument_1a605ab0c832b7f5de4cff8a45e94b8f56" prot="public" virt="virtual"><scope>iDynTree::XMLDocument</scope><name>documentHasBeenParsed</name></member>
       <member refid="classiDynTree_1_1XMLDocument_1a621f1b4f2785267e52a08aa61bd6a890" prot="private" virt="non-virtual"><scope>iDynTree::XMLDocument</scope><name>m_pimpl</name></member>
       <member refid="classiDynTree_1_1XMLDocument_1afb50b3119f4c453c96c80925dd6a6791" prot="public" virt="non-virtual"><scope>iDynTree::XMLDocument</scope><name>root</name></member>
-      <member refid="classiDynTree_1_1XMLDocument_1a3cdb084e6ae5b9f678a3290000e345f5" prot="public" virt="virtual"><scope>iDynTree::XMLDocument</scope><name>rootElementForName</name></member>
+      <member refid="classiDynTree_1_1XMLDocument_1a7ad456c9c0449f8d342fbc82bf0a3aa0" prot="public" virt="virtual"><scope>iDynTree::XMLDocument</scope><name>rootElementForName</name></member>
       <member refid="classiDynTree_1_1XMLDocument_1a3c91a8bd7c0207735fcfb76b5b567132" prot="private" virt="non-virtual"><scope>iDynTree::XMLDocument</scope><name>setRootElement</name></member>
       <member refid="classiDynTree_1_1XMLDocument_1a94ea906352e78e3e5b9dde135b102297" prot="public" virt="non-virtual"><scope>iDynTree::XMLDocument</scope><name>XMLDocument</name></member>
       <member refid="classiDynTree_1_1XMLDocument_1a4d065a940ba5b49300c5566bbccfb9d5" prot="public" virt="virtual"><scope>iDynTree::XMLDocument</scope><name>~XMLDocument</name></member>

@@ -104,6 +104,10 @@
               <span class="m-doc-wrap-bumper">auto <a href="#a86f36de36504433e33b596144100419b" class="m-doc-self">getFilename</a>(</span><span class="m-doc-wrap">) const -&gt; const std::string&amp;</span>
             </dt>
             <dd>Returns the current filename.</dd>
+            <dt id="abccd713f646d9b2a2806b1c84e170f4e">
+              <span class="m-doc-wrap-bumper">auto <a href="#abccd713f646d9b2a2806b1c84e170f4e" class="m-doc-self">getPackageDirs</a>(</span><span class="m-doc-wrap">) const -&gt; const std::vector&lt;std::string&gt;&amp;</span>
+            </dt>
+            <dd>Returns the current package directories.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="#a4cbaeab3dab062b9b838d3d677e92e3f" class="m-doc">getFileLocationOnLocalFileSystem</a>(</span><span class="m-doc-wrap">) const -&gt; std::string</span>
             </dt>
@@ -112,6 +116,10 @@
               <span class="m-doc-wrap-bumper">void <a href="#a857a7996ef73a5fb7f69aef3613a14c7" class="m-doc-self">setFilename</a>(</span><span class="m-doc-wrap">const std::string&amp; filename)</span>
             </dt>
             <dd>Sets the filename.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">void <a href="#a9a8d15b22fd6521bfafeb4147ccec918" class="m-doc">setPackageDirs</a>(</span><span class="m-doc-wrap">const std::vector&lt;std::string&gt;&amp; packageDirs)</span>
+            </dt>
+            <dd>Sets the the package directories.</dd>
             <dt id="a965dca15bd88b220d6a752eb51a24774">
               <span class="m-doc-wrap-bumper">auto <a href="#a965dca15bd88b220d6a752eb51a24774" class="m-doc-self">getScale</a>(</span><span class="m-doc-wrap">) const -&gt; const <a href="classiDynTree_1_1VectorFixSize.html" class="m-doc">iDynTree::<wbr />Vector3</a>&amp;</span>
             </dt>
@@ -129,7 +137,14 @@
               <span class="m-doc-wrap-bumper">std::string iDynTree::<wbr />ExternalMesh::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4cbaeab3dab062b9b838d3d677e92e3f" class="m-doc-self">getFileLocationOnLocalFileSystem</a>(</span><span class="m-doc-wrap">) const</span></span>
             </h3>
             <p>Returns the filename substituting the prefix &quot;package://&quot; with the corresponding absolute path.</p>
-<p>The absolute path is determined by searching for the file using the paths specified in the &quot;GAZEBO_MODEL_PATH&quot;, &quot;ROS_PACKAGE_PATH&quot; and &quot;AMENT_PREFIX_PATH&quot; environmental variables.</p>
+<p>The absolute path is determined by searching for the file using the paths specified in the packageDirs vector or if empty in the &quot;GAZEBO_MODEL_PATH&quot;, &quot;ROS_PACKAGE_PATH&quot; and &quot;AMENT_PREFIX_PATH&quot; environmental variables.</p>
+          </div></section>
+          <section class="m-doc-details" id="a9a8d15b22fd6521bfafeb4147ccec918"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />ExternalMesh::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a9a8d15b22fd6521bfafeb4147ccec918" class="m-doc-self">setPackageDirs</a>(</span><span class="m-doc-wrap">const std::vector&lt;std::string&gt;&amp; packageDirs)</span></span>
+            </h3>
+            <p>Sets the the package directories.</p>
+<aside class="m-note m-info"><h4>Note</h4><p>if not set the absolute path is determined by searching for the file using the paths specified in the &quot;GAZEBO_MODEL_PATH&quot;, &quot;ROS_PACKAGE_PATH&quot; and &quot;AMENT_PREFIX_PATH&quot; environmental variables.</p></aside>
           </div></section>
         </section>
       </div>

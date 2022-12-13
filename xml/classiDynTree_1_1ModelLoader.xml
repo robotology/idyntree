@@ -67,10 +67,10 @@
         </inbodydescription>
         <location file="iDynTree/ModelIO/ModelLoader.h" line="104" column="10"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a44b074a70bd585aecffa44a2329c99b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1afefe79c0d50cfbaad54d5b076a90f00d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
         <definition>bool iDynTree::ModelLoader::loadModelFromString</definition>
-        <argsstring>(const std::string &amp;modelString, const std::string &amp;filetype=&quot;urdf&quot;)</argsstring>
+        <argsstring>(const std::string &amp;modelString, const std::string &amp;filetype=&quot;urdf&quot;, const std::vector&lt; std::string &gt; &amp;packageDirs={})</argsstring>
         <name>loadModelFromString</name>
         <param>
           <type>const std::string &amp;</type>
@@ -80,6 +80,11 @@
           <type>const std::string &amp;</type>
           <declname>filetype</declname>
           <defval>&quot;urdf&quot;</defval>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>packageDirs</declname>
+          <defval>{}</defval>
         </param>
         <briefdescription>
 <para>Load the model of the robot from a string. </para>
@@ -98,20 +103,32 @@
 <parametername>filetype</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>type of the file to load, currently supporting only urdf type. </para>
+<para>type of the file to load, currently supporting only urdf type </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>packageDirs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a vector containing the different directories where to search for model meshes </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
+<simplesect kind="note"><para>In case no package is specified <ref refid="classiDynTree_1_1ModelLoader" kindref="compound">ModelLoader</ref> will look for the meshes in <computeroutput>GAZEBO_MODEL_PATH</computeroutput>, <computeroutput>ROS_PACKAGE_PATH</computeroutput> and <computeroutput>AMENT_PREFIX_PATH</computeroutput> </para>
+</simplesect>
+<simplesect kind="note"><para>If a given model searches for the meshes in <computeroutput>package://StrangeModel/Nested/mesh.stl</computeroutput>, and the actual mesh is in <computeroutput>/usr/local/share/StrangeModel/Nested/mesh.stl</computeroutput>, <computeroutput>packageDirs</computeroutput> should contain <computeroutput>/usr/local/share</computeroutput>. </para>
+</simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="113" column="10"/>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="118" column="10"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a4731f7a0967a0f88b9ee760027f42c28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a665a7ab1c8f6749f050d8e891c586276" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
         <definition>bool iDynTree::ModelLoader::loadModelFromFile</definition>
-        <argsstring>(const std::string &amp;filename, const std::string &amp;filetype=&quot;urdf&quot;)</argsstring>
+        <argsstring>(const std::string &amp;filename, const std::string &amp;filetype=&quot;urdf&quot;, const std::vector&lt; std::string &gt; &amp;packageDirs={})</argsstring>
         <name>loadModelFromFile</name>
         <param>
           <type>const std::string &amp;</type>
@@ -121,6 +138,11 @@
           <type>const std::string &amp;</type>
           <declname>filetype</declname>
           <defval>&quot;urdf&quot;</defval>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>packageDirs</declname>
+          <defval>{}</defval>
         </param>
         <briefdescription>
 <para>Load the model of the robot from an external file. </para>
@@ -142,12 +164,24 @@
 <para>type of the file to load, currently supporting only urdf type. </para>
 </parameterdescription>
 </parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>packageDirs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a vector containing the different directories where to search for model meshes </para>
+</parameterdescription>
+</parameteritem>
 </parameterlist>
+<simplesect kind="note"><para>In case no package is specified <ref refid="classiDynTree_1_1ModelLoader" kindref="compound">ModelLoader</ref> will look for the meshes in <computeroutput>GAZEBO_MODEL_PATH</computeroutput>, <computeroutput>ROS_PACKAGE_PATH</computeroutput> and <computeroutput>AMENT_PREFIX_PATH</computeroutput> </para>
+</simplesect>
+<simplesect kind="note"><para>If a given model searches for the meshes in <computeroutput>package://StrangeModel/Nested/mesh.stl</computeroutput>, and the actual mesh is in <computeroutput>/usr/local/share/StrangeModel/Nested/mesh.stl</computeroutput>, <computeroutput>packageDirs</computeroutput> should contain <computeroutput>/usr/local/share</computeroutput>. </para>
+</simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="122" column="10"/>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="134" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1aa1d105cc4c13bc5c6fd90cc6f8224085" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -207,12 +241,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="142" column="10"/>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="156" column="10"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1af6391e49caad7c349a1f007abb4ec2d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1af8431aff629c8c73db87b549d7f804b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
         <definition>bool iDynTree::ModelLoader::loadReducedModelFromString</definition>
-        <argsstring>(const std::string modelString, const std::vector&lt; std::string &gt; &amp;consideredJoints, const std::string filetype=&quot;&quot;)</argsstring>
+        <argsstring>(const std::string modelString, const std::vector&lt; std::string &gt; &amp;consideredJoints, const std::string filetype=&quot;&quot;, const std::vector&lt; std::string &gt; &amp;packageDirs={})</argsstring>
         <name>loadReducedModelFromString</name>
         <param>
           <type>const std::string</type>
@@ -226,6 +260,11 @@
           <type>const std::string</type>
           <declname>filetype</declname>
           <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>packageDirs</declname>
+          <defval>{}</defval>
         </param>
         <briefdescription>
 <para>Load reduced model from string, specifyng only the desired joints in the model. </para>
@@ -256,19 +295,31 @@
 <para>(optional) explicit definiton of the filetype to load. Only &quot;urdf&quot; is supported at the moment. </para>
 </parameterdescription>
 </parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">packageDirs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(optional) a vector containing the different directories where to search for model meshes </para>
+</parameterdescription>
+</parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>true if all went well (files were correctly loaded and consistent), false otherwise. </para>
+<simplesect kind="return"><para>true if all went well (files were correctly loaded and consistent), false otherwise.</para>
+</simplesect>
+<simplesect kind="note"><para>In case no package is specified <ref refid="classiDynTree_1_1ModelLoader" kindref="compound">ModelLoader</ref> will look for the meshes in <computeroutput>GAZEBO_MODEL_PATH</computeroutput>, <computeroutput>ROS_PACKAGE_PATH</computeroutput> and <computeroutput>AMENT_PREFIX_PATH</computeroutput> </para>
+</simplesect>
+<simplesect kind="note"><para>If a given model searches for the meshes in <computeroutput>package://StrangeModel/Nested/mesh.stl</computeroutput>, and the actual mesh is in <computeroutput>/usr/local/share/StrangeModel/Nested/mesh.stl</computeroutput>, <computeroutput>packageDirs</computeroutput> should contain <computeroutput>/usr/local/share</computeroutput>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="160" column="10"/>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="181" column="10"/>
       </memberdef>
-      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1ab846e7becb8c98998cb2b05749a95ade" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a15df3e0647d7de8fc286c37c2fdbd6d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
         <definition>bool iDynTree::ModelLoader::loadReducedModelFromFile</definition>
-        <argsstring>(const std::string filename, const std::vector&lt; std::string &gt; &amp;consideredJoints, const std::string filetype=&quot;&quot;)</argsstring>
+        <argsstring>(const std::string filename, const std::vector&lt; std::string &gt; &amp;consideredJoints, const std::string filetype=&quot;&quot;, const std::vector&lt; std::string &gt; &amp;packageDirs={})</argsstring>
         <name>loadReducedModelFromFile</name>
         <param>
           <type>const std::string</type>
@@ -282,6 +333,11 @@
           <type>const std::string</type>
           <declname>filetype</declname>
           <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>packageDirs</declname>
+          <defval>{}</defval>
         </param>
         <briefdescription>
 <para>Load reduced model from file, specifyng only the desired joints in the model. </para>
@@ -312,14 +368,26 @@
 <para>(optional) explicit definiton of the filetype to load. Only &quot;urdf&quot; is supported at the moment. </para>
 </parameterdescription>
 </parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">packageDirs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>(optional) a vector containing the different directories where to search for model meshes </para>
+</parameterdescription>
+</parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>true if all went well (files were correctly loaded and consistent), false otherwise. </para>
+<simplesect kind="return"><para>true if all went well (files were correctly loaded and consistent), false otherwise.</para>
+</simplesect>
+<simplesect kind="note"><para>In case no package is specified <ref refid="classiDynTree_1_1ModelLoader" kindref="compound">ModelLoader</ref> will look for the meshes in <computeroutput>GAZEBO_MODEL_PATH</computeroutput>, <computeroutput>ROS_PACKAGE_PATH</computeroutput> and <computeroutput>AMENT_PREFIX_PATH</computeroutput> </para>
+</simplesect>
+<simplesect kind="note"><para>If a given model searches for the meshes in <computeroutput>package://StrangeModel/Nested/mesh.stl</computeroutput>, and the actual mesh is in <computeroutput>/usr/local/share/StrangeModel/Nested/mesh.stl</computeroutput>, <computeroutput>packageDirs</computeroutput> should contain <computeroutput>/usr/local/share</computeroutput>. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="178" column="10"/>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="206" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1abfea0564c6c01dc8a90bab55df13b533" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
@@ -333,7 +401,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="186" column="18"/>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="215" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a933ace452015e5dd1d0d229315aef980" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> &amp;</type>
@@ -347,7 +415,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="191" column="24"/>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="220" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a6b78cb43b48ab1b377b5c907f9918077" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -364,7 +432,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="198" column="10"/>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="227" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -388,14 +456,14 @@
     <detaileddescription>
 <para>Unless the methods for loading a model with an explicit serialization are used, the default joint serialization of the model loaded will be a &quot;normalized&quot; joint serialization based on the default base link, see the iDynTree::createModelWithNormalizedJointNumbering function for more details. </para>
     </detaileddescription>
-    <location file="iDynTree/ModelIO/ModelLoader.h" line="73" column="1" bodyfile="iDynTree/ModelIO/ModelLoader.h" bodystart="74" bodyend="200"/>
+    <location file="iDynTree/ModelIO/ModelLoader.h" line="73" column="1" bodyfile="iDynTree/ModelIO/ModelLoader.h" bodystart="74" bodyend="229"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1ModelLoader_1a6b78cb43b48ab1b377b5c907f9918077" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>isValid</name></member>
-      <member refid="classiDynTree_1_1ModelLoader_1a4731f7a0967a0f88b9ee760027f42c28" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadModelFromFile</name></member>
-      <member refid="classiDynTree_1_1ModelLoader_1a44b074a70bd585aecffa44a2329c99b0" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadModelFromString</name></member>
-      <member refid="classiDynTree_1_1ModelLoader_1ab846e7becb8c98998cb2b05749a95ade" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromFile</name></member>
+      <member refid="classiDynTree_1_1ModelLoader_1a665a7ab1c8f6749f050d8e891c586276" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadModelFromFile</name></member>
+      <member refid="classiDynTree_1_1ModelLoader_1afefe79c0d50cfbaad54d5b076a90f00d" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadModelFromString</name></member>
+      <member refid="classiDynTree_1_1ModelLoader_1a15df3e0647d7de8fc286c37c2fdbd6d0" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromFile</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1aa1d105cc4c13bc5c6fd90cc6f8224085" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromFullModel</name></member>
-      <member refid="classiDynTree_1_1ModelLoader_1af6391e49caad7c349a1f007abb4ec2d4" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromString</name></member>
+      <member refid="classiDynTree_1_1ModelLoader_1af8431aff629c8c73db87b549d7f804b1" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadReducedModelFromString</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1a0f029751adcda826ebdde3d40a9a7104" prot="private" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>m_pimpl</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1abfea0564c6c01dc8a90bab55df13b533" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>model</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1a17284e5e46f1f2ff2d3d74a32442d362" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>ModelLoader</name></member>

@@ -101,13 +101,15 @@
             </dt>
             <dd><span></span></dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a44b074a70bd585aecffa44a2329c99b0" class="m-doc">loadModelFromString</a>(</span><span class="m-doc-wrap">const std::string&amp; modelString,
-              const std::string&amp; filetype = &quot;urdf&quot;) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#afefe79c0d50cfbaad54d5b076a90f00d" class="m-doc">loadModelFromString</a>(</span><span class="m-doc-wrap">const std::string&amp; modelString,
+              const std::string&amp; filetype = &quot;urdf&quot;,
+              const std::vector&lt;std::string&gt;&amp; packageDirs = {}) -&gt; bool</span>
             </dt>
             <dd>Load the model of the robot from a string.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#a4731f7a0967a0f88b9ee760027f42c28" class="m-doc">loadModelFromFile</a>(</span><span class="m-doc-wrap">const std::string&amp; filename,
-              const std::string&amp; filetype = &quot;urdf&quot;) -&gt; bool</span>
+              <span class="m-doc-wrap-bumper">auto <a href="#a665a7ab1c8f6749f050d8e891c586276" class="m-doc">loadModelFromFile</a>(</span><span class="m-doc-wrap">const std::string&amp; filename,
+              const std::string&amp; filetype = &quot;urdf&quot;,
+              const std::vector&lt;std::string&gt;&amp; packageDirs = {}) -&gt; bool</span>
             </dt>
             <dd>Load the model of the robot from an external file.</dd>
             <dt>
@@ -117,15 +119,17 @@
             </dt>
             <dd>Load reduced model from another model, specifyng only the desired joints in the model.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#af6391e49caad7c349a1f007abb4ec2d4" class="m-doc">loadReducedModelFromString</a>(</span><span class="m-doc-wrap">const std::string modelString,
+              <span class="m-doc-wrap-bumper">auto <a href="#af8431aff629c8c73db87b549d7f804b1" class="m-doc">loadReducedModelFromString</a>(</span><span class="m-doc-wrap">const std::string modelString,
               const std::vector&lt;std::string&gt;&amp; consideredJoints,
-              const std::string filetype = &quot;&quot;) -&gt; bool</span>
+              const std::string filetype = &quot;&quot;,
+              const std::vector&lt;std::string&gt;&amp; packageDirs = {}) -&gt; bool</span>
             </dt>
             <dd>Load reduced model from string, specifyng only the desired joints in the model.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">auto <a href="#ab846e7becb8c98998cb2b05749a95ade" class="m-doc">loadReducedModelFromFile</a>(</span><span class="m-doc-wrap">const std::string filename,
+              <span class="m-doc-wrap-bumper">auto <a href="#a15df3e0647d7de8fc286c37c2fdbd6d0" class="m-doc">loadReducedModelFromFile</a>(</span><span class="m-doc-wrap">const std::string filename,
               const std::vector&lt;std::string&gt;&amp; consideredJoints,
-              const std::string filetype = &quot;&quot;) -&gt; bool</span>
+              const std::string filetype = &quot;&quot;,
+              const std::vector&lt;std::string&gt;&amp; packageDirs = {}) -&gt; bool</span>
             </dt>
             <dd>Load reduced model from file, specifyng only the desired joints in the model.</dd>
             <dt id="abfea0564c6c01dc8a90bab55df13b533">
@@ -144,10 +148,11 @@
         </section>
         <section>
           <h2>Function documentation</h2>
-          <section class="m-doc-details" id="a44b074a70bd585aecffa44a2329c99b0"><div>
+          <section class="m-doc-details" id="afefe79c0d50cfbaad54d5b076a90f00d"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ModelLoader::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a44b074a70bd585aecffa44a2329c99b0" class="m-doc-self">loadModelFromString</a>(</span><span class="m-doc-wrap">const std::string&amp; modelString,
-              const std::string&amp; filetype = &quot;urdf&quot;)</span></span>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ModelLoader::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#afefe79c0d50cfbaad54d5b076a90f00d" class="m-doc-self">loadModelFromString</a>(</span><span class="m-doc-wrap">const std::string&amp; modelString,
+              const std::string&amp; filetype = &quot;urdf&quot;,
+              const std::vector&lt;std::string&gt;&amp; packageDirs = {})</span></span>
             </h3>
             <p>Load the model of the robot from a string.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -161,15 +166,21 @@
                 </tr>
                 <tr>
                   <td>filetype</td>
-                  <td>type of the file to load, currently supporting only urdf type.</td>
+                  <td>type of the file to load, currently supporting only urdf type</td>
+                </tr>
+                <tr>
+                  <td>packageDirs</td>
+                  <td>a vector containing the different directories where to search for model meshes</td>
                 </tr>
               </tbody>
             </table>
+<aside class="m-note m-info"><h4>Note</h4><p>In case no package is specified <a href="classiDynTree_1_1ModelLoader.html" class="m-doc">ModelLoader</a> will look for the meshes in <code>GAZEBO_MODEL_PATH</code>, <code>ROS_PACKAGE_PATH</code> and <code>AMENT_PREFIX_PATH</code></p><p>If a given model searches for the meshes in <code>package://StrangeModel/Nested/mesh.stl</code>, and the actual mesh is in <code>/usr/local/share/StrangeModel/Nested/mesh.stl</code>, <code>packageDirs</code> should contain <code>/usr/local/share</code>.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="a4731f7a0967a0f88b9ee760027f42c28"><div>
+          <section class="m-doc-details" id="a665a7ab1c8f6749f050d8e891c586276"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ModelLoader::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4731f7a0967a0f88b9ee760027f42c28" class="m-doc-self">loadModelFromFile</a>(</span><span class="m-doc-wrap">const std::string&amp; filename,
-              const std::string&amp; filetype = &quot;urdf&quot;)</span></span>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ModelLoader::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a665a7ab1c8f6749f050d8e891c586276" class="m-doc-self">loadModelFromFile</a>(</span><span class="m-doc-wrap">const std::string&amp; filename,
+              const std::string&amp; filetype = &quot;urdf&quot;,
+              const std::vector&lt;std::string&gt;&amp; packageDirs = {})</span></span>
             </h3>
             <p>Load the model of the robot from an external file.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -185,8 +196,13 @@
                   <td>filetype</td>
                   <td>type of the file to load, currently supporting only urdf type.</td>
                 </tr>
+                <tr>
+                  <td>packageDirs</td>
+                  <td>a vector containing the different directories where to search for model meshes</td>
+                </tr>
               </tbody>
             </table>
+<aside class="m-note m-info"><h4>Note</h4><p>In case no package is specified <a href="classiDynTree_1_1ModelLoader.html" class="m-doc">ModelLoader</a> will look for the meshes in <code>GAZEBO_MODEL_PATH</code>, <code>ROS_PACKAGE_PATH</code> and <code>AMENT_PREFIX_PATH</code></p><p>If a given model searches for the meshes in <code>package://StrangeModel/Nested/mesh.stl</code>, and the actual mesh is in <code>/usr/local/share/StrangeModel/Nested/mesh.stl</code>, <code>packageDirs</code> should contain <code>/usr/local/share</code>.</p></aside>
           </div></section>
           <section class="m-doc-details" id="aa1d105cc4c13bc5c6fd90cc6f8224085"><div>
             <h3>
@@ -222,11 +238,12 @@
             </table>
 <p>All other joints will be considered to be fixed to their default position, and their child links will be lumped together.</p><aside class="m-note m-info"><h4>Note</h4><p>the order of the degreese of freedom of the newly loaded model will be the one specified by the input joints serialization, i.e. consideredJoints</p></aside><aside class="m-note m-info"><h4>Note</h4><p>Until <a href="https://github.com/robotology/idyntree/issues/132">https:/<wbr />/<wbr />github.com/<wbr />robotology/<wbr />idyntree/<wbr />issues/<wbr />132</a> is fixed, this method does not accounts for sensors.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="af6391e49caad7c349a1f007abb4ec2d4"><div>
+          <section class="m-doc-details" id="af8431aff629c8c73db87b549d7f804b1"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ModelLoader::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af6391e49caad7c349a1f007abb4ec2d4" class="m-doc-self">loadReducedModelFromString</a>(</span><span class="m-doc-wrap">const std::string modelString,
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ModelLoader::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#af8431aff629c8c73db87b549d7f804b1" class="m-doc-self">loadReducedModelFromString</a>(</span><span class="m-doc-wrap">const std::string modelString,
               const std::vector&lt;std::string&gt;&amp; consideredJoints,
-              const std::string filetype = &quot;&quot;)</span></span>
+              const std::string filetype = &quot;&quot;,
+              const std::vector&lt;std::string&gt;&amp; packageDirs = {})</span></span>
             </h3>
             <p>Load reduced model from string, specifyng only the desired joints in the model.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -246,6 +263,10 @@
                   <td>filetype&nbsp;<span class="m-label m-flat m-info">in</span></td>
                   <td>(optional) explicit definiton of the filetype to load. Only &quot;urdf&quot; is supported at the moment.</td>
                 </tr>
+                <tr>
+                  <td>packageDirs&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>(optional) a vector containing the different directories where to search for model meshes</td>
+                </tr>
               </tbody>
               <tfoot>
                 <tr>
@@ -254,13 +275,14 @@
                 </tr>
               </tfoot>
             </table>
-<p>All other joints will be considered to be fixed to their default position, and their child links will be lumped together.</p>
+<p>All other joints will be considered to be fixed to their default position, and their child links will be lumped together.</p><aside class="m-note m-info"><h4>Note</h4><p>In case no package is specified <a href="classiDynTree_1_1ModelLoader.html" class="m-doc">ModelLoader</a> will look for the meshes in <code>GAZEBO_MODEL_PATH</code>, <code>ROS_PACKAGE_PATH</code> and <code>AMENT_PREFIX_PATH</code></p><p>If a given model searches for the meshes in <code>package://StrangeModel/Nested/mesh.stl</code>, and the actual mesh is in <code>/usr/local/share/StrangeModel/Nested/mesh.stl</code>, <code>packageDirs</code> should contain <code>/usr/local/share</code>.</p></aside>
           </div></section>
-          <section class="m-doc-details" id="ab846e7becb8c98998cb2b05749a95ade"><div>
+          <section class="m-doc-details" id="a15df3e0647d7de8fc286c37c2fdbd6d0"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ModelLoader::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab846e7becb8c98998cb2b05749a95ade" class="m-doc-self">loadReducedModelFromFile</a>(</span><span class="m-doc-wrap">const std::string filename,
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />ModelLoader::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a15df3e0647d7de8fc286c37c2fdbd6d0" class="m-doc-self">loadReducedModelFromFile</a>(</span><span class="m-doc-wrap">const std::string filename,
               const std::vector&lt;std::string&gt;&amp; consideredJoints,
-              const std::string filetype = &quot;&quot;)</span></span>
+              const std::string filetype = &quot;&quot;,
+              const std::vector&lt;std::string&gt;&amp; packageDirs = {})</span></span>
             </h3>
             <p>Load reduced model from file, specifyng only the desired joints in the model.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -280,6 +302,10 @@
                   <td>filetype&nbsp;<span class="m-label m-flat m-info">in</span></td>
                   <td>(optional) explicit definiton of the filetype to load. Only &quot;urdf&quot; is supported at the moment.</td>
                 </tr>
+                <tr>
+                  <td>packageDirs&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>(optional) a vector containing the different directories where to search for model meshes</td>
+                </tr>
               </tbody>
               <tfoot>
                 <tr>
@@ -288,7 +314,7 @@
                 </tr>
               </tfoot>
             </table>
-<p>All other joints will be considered to be fixed to their default position, and their child links will be lumped together.</p>
+<p>All other joints will be considered to be fixed to their default position, and their child links will be lumped together.</p><aside class="m-note m-info"><h4>Note</h4><p>In case no package is specified <a href="classiDynTree_1_1ModelLoader.html" class="m-doc">ModelLoader</a> will look for the meshes in <code>GAZEBO_MODEL_PATH</code>, <code>ROS_PACKAGE_PATH</code> and <code>AMENT_PREFIX_PATH</code></p><p>If a given model searches for the meshes in <code>package://StrangeModel/Nested/mesh.stl</code>, and the actual mesh is in <code>/usr/local/share/StrangeModel/Nested/mesh.stl</code>, <code>packageDirs</code> should contain <code>/usr/local/share</code>.</p></aside>
           </div></section>
           <section class="m-doc-details" id="a6b78cb43b48ab1b377b5c907f9918077"><div>
             <h3>
