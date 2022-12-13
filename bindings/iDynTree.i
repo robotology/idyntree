@@ -1,8 +1,11 @@
 
 /* File : iDynTree.i */
 %module iDynTree
+    
+// implicitconv is currently supported only for python bindings
+#ifdef SWIGPYTHON
 %implicitconv;
-
+#endif
 
 %include "std_string.i"
 %include "std_vector.i"
