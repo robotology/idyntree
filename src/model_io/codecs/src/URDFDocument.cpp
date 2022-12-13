@@ -20,6 +20,7 @@
 
 #include <algorithm>
 #include <unordered_set>
+#include <vector>
 
 namespace iDynTree {
 
@@ -54,11 +55,13 @@ namespace iDynTree {
     }
     
     URDFDocument::~URDFDocument() {}
-    std::shared_ptr<XMLElement> URDFDocument::rootElementForName(const std::string& name)
+    std::shared_ptr<XMLElement> URDFDocument::rootElementForName(const std::string& name,
+                                                                 const std::vector<std::string>& packageDirs)
     {
         // allowed tag is <robot>
         if (name == "robot") {
             m_model = iDynTree::Model();
+            m_model.setPackageDirs(packageDirs);
             m_buffers.sensorHelpers.clear();
             m_buffers.joints.clear();
             m_buffers.fixedJoints.clear();
@@ -119,6 +122,8 @@ namespace iDynTree {
         // set the default root in the model
         m_model.setDefaultBaseLink(m_model.getLinkIndex(rootCandidates[0]));
         iDynTree::Model newModel, normalizedModel;
+        newModel.setPackageDirs(m_model.getPackageDirs());
+        normalizedModel.setPackageDirs(m_model.getPackageDirs());
 
         if (!removeFakeLinks(m_model, newModel)) {
             reportError("URDFDocument", "documentHasBeenParsed", "Failed to remove fake links from the model");
@@ -148,7 +153,6 @@ namespace iDynTree {
         }
 
         // Assign visual properties to objects
-
         if (!addVisualPropertiesToModel(m_model,
                                         m_buffers.visuals,
                                         m_buffers.materials,

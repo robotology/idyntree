@@ -14,6 +14,7 @@
 #define IDYNTREE_MODELIO_URDF_GEOMETRYELEMENT_H
 
 #include <iDynTree/XMLElement.h>
+#include <vector>
 
 namespace iDynTree {
     class GeometryElement;
@@ -24,9 +25,9 @@ namespace iDynTree {
 class iDynTree::GeometryElement: public iDynTree::XMLElement {
 private:
     std::shared_ptr<SolidShape>& m_shape;
-    
+    const std::vector<std::string>& packageDirs;
 public:
-    GeometryElement(std::shared_ptr<SolidShape>& shape);
+    GeometryElement(std::shared_ptr<SolidShape>& shape, const std::vector<std::string>& packageDirs);
 
     std::shared_ptr<iDynTree::XMLElement> childElementForName(const std::string& name) override;
 };

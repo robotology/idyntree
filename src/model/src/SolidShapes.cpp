@@ -202,6 +202,8 @@ namespace iDynTree
 
     const std::string& ExternalMesh::getFilename() const { return filename; }
 
+    const std::vector<std::string>& ExternalMesh::getPackageDirs() const { return this->packageDirs; }
+
     std::string ExternalMesh::getFileLocationOnLocalFileSystem() const
     {
         bool isWindows = false;
@@ -210,46 +212,53 @@ namespace iDynTree
     #endif
 
         std::unordered_set<std::string> pathList;
-        // List of variables that contain <prefix>/share paths
-        std::vector<std::string> envListShare = {"GAZEBO_MODEL_PATH", "ROS_PACKAGE_PATH"};
-        // List of variables that contains <prefix> paths (to which /share needs to be added)
-        std::vector<std::string> envListPrefix = {"AMENT_PREFIX_PATH"};
 
-        for (size_t i = 0; i < envListShare.size(); ++i)
+        // if the user provides the packageDirs we do not check inside the dirs listed in the
+        // environment variables
+        if (!this->packageDirs.empty())
         {
-            const char * env_var_value = std::getenv(envListShare[i].c_str());
+            pathList = std::unordered_set<std::string>(this->packageDirs.begin(),
+                                                       this->packageDirs.end());
+        } else {
+            // List of variables that contain <prefix>/share paths
+            std::vector<std::string> envListShare = {"GAZEBO_MODEL_PATH", "ROS_PACKAGE_PATH"};
+            // List of variables that contains <prefix> paths (to which /share needs to be added)
+            std::vector<std::string> envListPrefix = {"AMENT_PREFIX_PATH"};
 
-            if (env_var_value)
+            for (size_t i = 0; i < envListShare.size(); ++i)
             {
-                std::stringstream env_var_string(env_var_value);
+                const char * env_var_value = std::getenv(envListShare[i].c_str());
 
-                std::string individualPath;
-
-                while(std::getline(env_var_string, individualPath, isWindows ? ';' : ':'))
+                if (env_var_value)
                 {
-                    pathList.insert(individualPath);
+                    std::stringstream env_var_string(env_var_value);
+
+                    std::string individualPath;
+
+                    while(std::getline(env_var_string, individualPath, isWindows ? ';' : ':'))
+                    {
+                        pathList.insert(individualPath);
+                    }
+                }
+            }
+
+            for (size_t i = 0; i < envListPrefix.size(); ++i)
+            {
+                const char * env_var_value = std::getenv(envListPrefix[i].c_str());
+
+                if (env_var_value)
+                {
+                    std::stringstream env_var_string(env_var_value);
+
+                    std::string individualPath;
+
+                    while(std::getline(env_var_string, individualPath, isWindows ? ';' : ':'))
+                    {
+                        pathList.insert(individualPath + "/share");
+                    }
                 }
             }
         }
-        
-        
-        for (size_t i = 0; i < envListPrefix.size(); ++i)
-        {
-            const char * env_var_value = std::getenv(envListPrefix[i].c_str());
-
-            if (env_var_value)
-            {
-                std::stringstream env_var_string(env_var_value);
-
-                std::string individualPath;
-
-                while(std::getline(env_var_string, individualPath, isWindows ? ';' : ':'))
-                {
-                    pathList.insert(individualPath + "/share");
-                }
-            }
-        }
-
         auto cleanPathSeparator = [isWindows](const std::string& filename)->std::string
         {
             std::string output = filename;
@@ -291,8 +300,7 @@ namespace iDynTree
                 filename_noprefix.erase(0, prefixToRemove.size());
                 for (const std::string& path : paths)
                 {
-                    std::string testPath;
-                    testPath = cleanPathSeparator(path + filename_noprefix);
+                    const std::string testPath  = cleanPathSeparator(path + filename_noprefix);
                     if (isFileExisting(testPath))
                     {
                         return testPath;
@@ -309,6 +317,10 @@ namespace iDynTree
 
     void ExternalMesh::setFilename(const std::string& filename) {
         this->filename = filename;
+    }
+
+    void ExternalMesh::setPackageDirs(const std::vector<std::string>& packageDirs) {
+        this->packageDirs = packageDirs;
     }
 
     const iDynTree::Vector3& ExternalMesh::getScale() const { return scale; }

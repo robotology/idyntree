@@ -55,9 +55,9 @@ namespace iDynTree {
         if (name == "inertial") {
             return std::make_shared<InertialElement>(m_link);
         } else if (name == "visual") {
-            return std::make_shared<VisualElement>("visual");
+            return std::make_shared<VisualElement>("visual", m_model.getPackageDirs());
         } else if (name == "collision") {
-            return std::make_shared<VisualElement>("collision");
+            return std::make_shared<VisualElement>("collision", m_model.getPackageDirs());
         }
         return std::make_shared<iDynTree::XMLElement>(name);
     }

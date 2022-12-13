@@ -15,6 +15,7 @@
 
 #include <functional>
 #include <memory>
+#include <vector>
 #include <string>
 #include <unordered_map>
 
@@ -98,6 +99,10 @@ public:
      * @param keepTreeInMemory true if the tree should be kept in memory.
      */
     void setKeepTreeInMemory(bool keepTreeInMemory);
+
+
+    void setPackageDirs(const std::vector<std::string>& packageDirs);
+    const std::vector<std::string>& packageDirs() const;
 
     /**
      * Returns true if the parser logs the parsing to standard output.

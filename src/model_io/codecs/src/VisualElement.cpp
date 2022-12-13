@@ -21,8 +21,16 @@
 
 namespace iDynTree {
 
-    VisualElement::VisualElement(const std::string& name)
-    : iDynTree::XMLElement(name){}
+    iDynTree::VisualElement::VisualInfo::VisualInfo(const std::vector<std::string>& packageDirs)
+        : m_packageDirs(packageDirs)
+    {
+    }
+
+    VisualElement::VisualElement(const std::string& name, const std::vector<std::string>& packageDirs)
+    : iDynTree::XMLElement(name)
+    , m_info(packageDirs)
+    {
+    }
 
     const VisualElement::VisualInfo& VisualElement::visualInfo() const
     {
@@ -46,7 +54,7 @@ namespace iDynTree {
         if (name == "origin") {
             return std::make_shared<OriginElement>(m_info.m_origin);
         } else if (name == "geometry") {
-            return std::make_shared<GeometryElement>(m_info.m_solidShape);
+            return std::make_shared<GeometryElement>(m_info.m_solidShape, m_info.m_packageDirs);
         } else if (name == "material") {
             auto ptr = std::make_shared<MaterialElement>(nullptr);
             m_info.m_material = ptr->materialInfo();

@@ -40,13 +40,16 @@ public:
         iDynTree::Transform m_origin{iDynTree::Transform::Identity()};
         std::shared_ptr<SolidShape> m_solidShape;
         std::shared_ptr<MaterialElement::MaterialInfo> m_material;
+        const std::vector<std::string>& m_packageDirs;
+
+        VisualInfo(const std::vector<std::string>& packageDirs);
     };
 
 private:
     VisualInfo m_info;
 
 public:
-    VisualElement(const std::string& name);
+    VisualElement(const std::string& name, const std::vector<std::string>& packageDirs);
 
     const VisualInfo& visualInfo() const;
 

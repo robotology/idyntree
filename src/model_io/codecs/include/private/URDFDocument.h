@@ -60,7 +60,8 @@ public:
     const iDynTree::Model& model() const;
     const iDynTree::SensorsList& sensors() const;
     
-    std::shared_ptr<XMLElement> rootElementForName(const std::string& name) override;
+    std::shared_ptr<XMLElement> rootElementForName(const std::string& name,
+                                                   const std::vector<std::string>& packageDirs) override;
     bool documentHasBeenParsed() override;
 };
 

@@ -67,7 +67,8 @@ namespace iDynTree {
         bool m_logParsing;
         
         bool m_keepInMemory;
-        
+        std::vector<std::string> m_packageDirs;
+
     public:
         XMLParserPimpl() {
             // ???: SAX2 structure initialization is kept in PIMPL constructor
@@ -220,7 +221,8 @@ namespace iDynTree {
         // Document object
         if (state->m_pimpl->m_parsedTrace.empty()) {
             // it is the root
-            nextElement = state->m_pimpl->m_document->rootElementForName(localNameString);
+            nextElement = state->m_pimpl->m_document->rootElementForName(localNameString,
+                                                                         state->m_pimpl->m_packageDirs);
             if (state->m_pimpl->m_keepInMemory) {
                 state->m_pimpl->m_document->setRootElement(nextElement);
             }
@@ -389,6 +391,9 @@ namespace iDynTree {
     
     bool XMLParser::keepTreeInMemory() const { return m_pimpl->m_keepInMemory; }
     void XMLParser::setKeepTreeInMemory(bool keepTreeInMemory) { m_pimpl->m_keepInMemory = keepTreeInMemory; }
+
+    void XMLParser::setPackageDirs(const std::vector<std::string>& packageDirs) { m_pimpl->m_packageDirs = packageDirs; }
+    const std::vector<std::string>& XMLParser::packageDirs() const { return m_pimpl->m_packageDirs; }
 
 }
 

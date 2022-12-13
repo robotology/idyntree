@@ -89,11 +89,13 @@ namespace iDynTree
     }
 
     bool ModelLoader::loadModelFromFile(const std::string& filename,
-                                        const std::string& /*filetype*/)
+                                        const std::string& /*filetype*/,
+                                        const std::vector<std::string>& packageDirs /* = {} */)
     {
         // Allocate parser
         std::shared_ptr<XMLParser> parser = std::make_shared<XMLParser>();
         parser->setDocumentFactory([]{ return std::shared_ptr<XMLDocument>(new URDFDocument); });
+        parser->setPackageDirs(packageDirs);
         if (!parser->parseXMLFile(filename)) {
             reportError("ModelLoader", "loadModelFromFile", "Error in parsing model from URDF.");
             return false;
@@ -110,11 +112,13 @@ namespace iDynTree
     }
 
     bool ModelLoader::loadModelFromString(const std::string& modelString,
-                                          const std::string& /*filetype*/)
+                                          const std::string& /*filetype*/,
+                                          const std::vector<std::string>& packageDirs /* = {} */)
     {
         // Allocate parser
         std::shared_ptr<XMLParser> parser = std::make_shared<XMLParser>();
         parser->setDocumentFactory([]{ return std::shared_ptr<XMLDocument>(new URDFDocument); });
+        parser->setPackageDirs(packageDirs);
         if (!parser->parseXMLString(modelString)) {
             reportError("ModelLoader", "loadModelFromString", "Error in parsing model from URDF.");
             return false;
@@ -136,6 +140,7 @@ namespace iDynTree
     {
         SensorsList _sensorsFull, _sensorsReduced;
         Model _modelReduced;
+        _modelReduced.setPackageDirs(fullModel.getPackageDirs());
         bool ok = createReducedModelAndSensors(fullModel,_sensorsFull,consideredJoints,_modelReduced,_sensorsReduced);
 
         if( !ok )
@@ -148,12 +153,14 @@ namespace iDynTree
 
     bool ModelLoader::loadReducedModelFromString(const std::string modelString,
                                                  const std::vector< std::string >& consideredJoints,
-                                                 const std::string /*filetype*/)
+                                                 const std::string filetype,
+                                                 const std::vector<std::string>& packageDirs /*= {}*/)
     {
-        bool parsingCorrect = loadModelFromString(modelString);
+        bool parsingCorrect = loadModelFromString(modelString, filetype, packageDirs);
         if (!parsingCorrect) return false;
         SensorsList _sensorsFull = m_pimpl->m_sensors, _sensorsReduced;
         Model _modelFull = m_pimpl->m_model, _modelReduced;
+        _modelReduced.setPackageDirs(packageDirs);
 
         parsingCorrect = createReducedModelAndSensors(_modelFull, _sensorsFull,
                                                       consideredJoints,
@@ -169,12 +176,14 @@ namespace iDynTree
 
     bool ModelLoader::loadReducedModelFromFile(const std::string filename,
                                                const std::vector< std::string >& consideredJoints,
-                                               const std::string /*filetype*/)
+                                               const std::string filetype,
+                                               const std::vector<std::string>& packageDirs /*= {}*/)
     {
-        bool parsingCorrect = loadModelFromFile(filename);
+        bool parsingCorrect = loadModelFromFile(filename, filetype, packageDirs);
         if (!parsingCorrect) return false;
         SensorsList _sensorsFull = m_pimpl->m_sensors, _sensorsReduced;
         Model _modelFull = m_pimpl->m_model, _modelReduced;
+        _modelReduced.setPackageDirs(packageDirs);
 
         parsingCorrect = createReducedModelAndSensors(_modelFull,_sensorsFull,consideredJoints,_modelReduced,_sensorsReduced);
 

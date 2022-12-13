@@ -19,6 +19,7 @@
 #include <iDynTree/Model/SolidShapes.h>
 
 #include <cstdlib>
+#include <string>
 #include <vector>
 
 namespace iDynTree
@@ -110,6 +111,9 @@ namespace iDynTree
             and the joint connecting to them. */
         std::vector< std::vector<Neighbor> > neighbors;
 
+        /** Vector containing the package directories associated to the model. */
+        std::vector<std::string> packageDirs;
+
         /**
          * Most data structures are not undirected, so we store the original
          * root of the tree, to provide a default root for Traversal generation.
@@ -182,6 +186,13 @@ namespace iDynTree
          * Get the number of links in the model.
          */
         size_t getNrOfLinks() const;
+
+        /**
+         * @return a vector containing all the directories of the meshes
+         */
+        const std::vector<std::string>& getPackageDirs() const;
+
+        void setPackageDirs(const std::vector<std::string>& packageDirs);
 
         /**
          * Get the name of a link given its index, or

@@ -10,6 +10,7 @@
 
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/Traversal.h>
+#include <iDynTree/Model/SolidShapes.h>
 
 #include <iDynTree/Core/VectorDynSize.h>
 #include <iDynTree/Core/EigenHelpers.h>
@@ -17,11 +18,16 @@
 #include <cassert>
 #include <deque>
 #include <sstream>
+#include <string>
+
 
 namespace iDynTree
 {
 
-Model::Model(): defaultBaseLink(LINK_INVALID_INDEX), nrOfPosCoords(0), nrOfDOFs(0)
+Model::Model()
+    : defaultBaseLink(LINK_INVALID_INDEX)
+    , nrOfPosCoords(0)
+    , nrOfDOFs(0)
 {
 
 }
@@ -30,6 +36,8 @@ void Model::copy(const Model& other)
 {
     // reset the base link, the real one will be copied later
     this->defaultBaseLink = LINK_INVALID_INDEX;
+
+    this->packageDirs = other.packageDirs;
 
     // Add all the links, preserving the numbering
     for(unsigned int lnk=0; lnk < other.getNrOfLinks(); lnk++ )
@@ -98,6 +106,7 @@ void Model::destroy()
     additionalFramesLinks.resize(0);
     frameNames.resize(0);
     neighbors.resize(0);
+    packageDirs.clear();
 }
 
 Model::~Model()
@@ -108,6 +117,34 @@ Model::~Model()
 Model Model::copy() const
 {
     return Model(*this);
+}
+
+const std::vector<std::string>& Model::getPackageDirs() const
+{
+    return this->packageDirs;
+}
+
+void Model::setPackageDirs(const std::vector<std::string>& packageDirs)
+{
+    this->packageDirs = packageDirs;
+
+    auto updatePackageDirs = [this](ModelSolidShapes& modelShapes) -> void
+                             {
+                                 for (auto& shapes : modelShapes.getLinkSolidShapes())
+                                 {
+                                     for (auto& shape : shapes)
+                                     {
+                                         if (shape != nullptr && shape->isExternalMesh())
+                                         {
+                                             shape->asExternalMesh()->setPackageDirs(this->packageDirs);
+                                         }
+                                     }
+                                 }
+
+                             };
+
+    updatePackageDirs(this->collisionSolidShapes());
+    updatePackageDirs(this->visualSolidShapes());
 }
 
 size_t Model::getNrOfLinks() const
