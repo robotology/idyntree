@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Added the possibility to set the alpha channel while loading a model in the meshcat visualizer (https://github.com/robotology/idyntree/pull/1033).
+- Add the possibility to pass the list containing the mesh path while building the model (https://github.com/robotology/idyntree/pull/1036).
 
 ## [7.0.0] - 2022-08-31
 
