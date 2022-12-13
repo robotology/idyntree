@@ -1,8 +1,9 @@
 
 /* File : iDynTree.i */
 %module iDynTree
+#ifdef SWIGPYTHON
 %implicitconv;
-
+#endif
 
 %include "std_string.i"
 %include "std_vector.i"
