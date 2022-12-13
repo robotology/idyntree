@@ -1,9 +1,17 @@
 
 /* File : iDynTree.i */
 %module iDynTree
+#ifdef SWIGPYTHON
+%implicitconv;
+#endif
 
 %include "std_string.i"
 %include "std_vector.i"
+
+// std::shared_ptr holder is currently supported only for python bindings
+#ifdef SWIGPYTHON
+%include "std_shared_ptr.i"
+#endif
 
 // Wrap the std::vector<std::string> params
 %template(StringVector) std::vector<std::string>;
@@ -298,6 +306,9 @@ namespace std {
 %include "iDynTree/InertialParametersSolidShapesHelpers.h"
 
 // High level interfaces
+#ifdef SWIGPYTHON
+%shared_ptr(iDynTree::KinDynComputations)
+#endif
 %include "iDynTree/KinDynComputations.h"
 
 #ifdef SWIGMATLAB
