@@ -6,6 +6,7 @@
 
 %include "std_string.i"
 %include "std_vector.i"
+%include "std_shared_ptr.i"
 
 // Wrap the std::vector<std::string> params
 %template(StringVector) std::vector<std::string>;
@@ -300,6 +301,7 @@ namespace std {
 %include "iDynTree/InertialParametersSolidShapesHelpers.h"
 
 // High level interfaces
+%shared_ptr(iDynTree::KinDynComputations)
 %include "iDynTree/KinDynComputations.h"
 
 #ifdef SWIGMATLAB
