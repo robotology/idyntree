@@ -109,6 +109,11 @@ public:
      * @param modelString string containg the model of the robot.
      * @param filetype type of the file to load, currently supporting only urdf type
      * @param packageDirs a vector containing the different directories where to search for model meshes
+     * @note In case no package is specified ModelLoader will look for the meshes in `GAZEBO_MODEL_PATH`,
+     * `ROS_PACKAGE_PATH` and `AMENT_PREFIX_PATH`
+     * @note If a given model searches for the meshes in `package://StrangeModel/Nested/mesh.stl`,
+     * and the actual mesh is in `/usr/local/share/StrangeModel/Nested/mesh.stl`, `packageDirs`
+     * should contain `/usr/local/share`.
      */
     bool loadModelFromString(const std::string & modelString,
                              const std::string & filetype="urdf",
@@ -120,6 +125,11 @@ public:
      * @param filename path to the file to load
      * @param filetype type of the file to load, currently supporting only urdf type.
      * @param packageDirs a vector containing the different directories where to search for model meshes
+     * @note In case no package is specified ModelLoader will look for the meshes in `GAZEBO_MODEL_PATH`,
+     * `ROS_PACKAGE_PATH` and `AMENT_PREFIX_PATH`
+     * @note If a given model searches for the meshes in `package://StrangeModel/Nested/mesh.stl`,
+     * and the actual mesh is in `/usr/local/share/StrangeModel/Nested/mesh.stl`, `packageDirs`
+     * should contain `/usr/local/share`.
      */
     bool loadModelFromFile(const std::string & filename,
                            const std::string & filetype="urdf",
@@ -161,6 +171,11 @@ public:
      *                        search for model meshes
      * @return true if all went well (files were correctly loaded and consistent), false otherwise.
      *
+     * @note In case no package is specified ModelLoader will look for the meshes in `GAZEBO_MODEL_PATH`,
+     * `ROS_PACKAGE_PATH` and `AMENT_PREFIX_PATH`
+     * @note If a given model searches for the meshes in `package://StrangeModel/Nested/mesh.stl`,
+     * and the actual mesh is in `/usr/local/share/StrangeModel/Nested/mesh.stl`, `packageDirs`
+     * should contain `/usr/local/share`.
      *
      */
     bool loadReducedModelFromString(const std::string modelString,
@@ -182,7 +197,11 @@ public:
      *                        search for model meshes
      * @return true if all went well (files were correctly loaded and consistent), false otherwise.
      *
-     *
+     * @note In case no package is specified ModelLoader will look for the meshes in `GAZEBO_MODEL_PATH`,
+     * `ROS_PACKAGE_PATH` and `AMENT_PREFIX_PATH`
+     * @note If a given model searches for the meshes in `package://StrangeModel/Nested/mesh.stl`,
+     * and the actual mesh is in `/usr/local/share/StrangeModel/Nested/mesh.stl`, `packageDirs`
+     * should contain `/usr/local/share`.
      */
     bool loadReducedModelFromFile(const std::string filename,
                                   const std::vector<std::string> & consideredJoints,
