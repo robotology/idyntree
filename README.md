@@ -13,7 +13,7 @@ https://pure.tue.nl/ws/portalfiles/portal/139293126/A_Multibody_Dynamics_Notatio
 
 To avoid confusion, it is also useful to clarify what **iDynTree is not**:
 * It is not the **fastest C++ library** for kinematics and dynamics multibody computations for robotics. It is not slow, but if have an application in which you need the absolute fastest library, check out [Pinocchio](https://github.com/stack-of-tasks/pinocchio).
-* It is not a **multibody simulator** library. It provides the building blocks that you could use to build a multibody simulator, but it is not a multibody simulator per se. If you need a simulator library in C++, check out [DART](https://dartsim.github.io/), [Simbody](https://github.com/simbody/simbody), [Drake](https://drake.mit.edu/), [MuJoCo](https://mujoco.org/) or the abstraction layer [`ignition-physics`](https://github.com/ignitionrobotics/ign-physics). If you need a simulator implemented in MATLAB/Simulink (built on iDynTree), check [`matlab-whole-body-simulator`](https://github.com/ami-iit/matlab-whole-body-simulator).
+* It is not a **multibody simulator** library. It provides the building blocks that you could use to build a multibody simulator, but it is not a multibody simulator per se. If you need a simulator library in C++, check out [DART](https://dartsim.github.io/), [Simbody](https://github.com/simbody/simbody), [Drake](https://drake.mit.edu/), [MuJoCo](https://mujoco.org/) or the abstraction layer [`Gazebo Physics`](https://github.com/gazebosim/gz-physics). If you need a simulator implemented in MATLAB/Simulink (built on iDynTree), check [`matlab-whole-body-simulator`](https://github.com/ami-iit/matlab-whole-body-simulator).
 
 
 ##  Contents
