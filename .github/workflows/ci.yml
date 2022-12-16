@@ -338,6 +338,8 @@ jobs:
             # Deselect missing dependency and build
             cmake -DIDYNTREE_USES_${missing_dep}:BOOL=OFF .
             cmake --build . --config ${{ matrix.build_type }}
+            # Visualizer tests excluded as a workaround for https://github.com/robotology/idyntree/issues/808
+            ctest --output-on-failure -C ${{ matrix.build_type }} -E "Visualizer|matlab" .
             # Enable again dependency
             cmake -DIDYNTREE_USES_${missing_dep}:BOOL=ON .
         done
