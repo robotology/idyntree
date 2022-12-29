@@ -14,33 +14,26 @@
 #include <cstddef>
 #include <string>
 
-// Workaround for SWIG problems with GenerateExportHeader-generated code
-#if defined(SWIG)
-#define IDYNTREE_MODEL_EXPORT
-#else
-#include "ModelExport.h"
-#endif
-
 namespace iDynTree
 {
     typedef std::ptrdiff_t LinkIndex;
-    IDYNTREE_MODEL_EXPORT extern LinkIndex LINK_INVALID_INDEX;
-    IDYNTREE_MODEL_EXPORT extern std::string LINK_INVALID_NAME;
+    constexpr LinkIndex LINK_INVALID_INDEX = -1;
+    constexpr char[] LINK_INVALID_NAME = "";
 
     typedef std::ptrdiff_t JointIndex;
-    IDYNTREE_MODEL_EXPORT extern std::ptrdiff_t JOINT_INVALID_INDEX;
-    IDYNTREE_MODEL_EXPORT extern std::string JOINT_INVALID_NAME;
+    constexpr std::ptrdiff_t JOINT_INVALID_INDEX = -1;
+    constexpr char[] JOINT_INVALID_NAME = "";
 
     typedef std::ptrdiff_t DOFIndex;
-    IDYNTREE_MODEL_EXPORT extern std::ptrdiff_t DOF_INVALID_INDEX;
-    IDYNTREE_MODEL_EXPORT extern std::string DOF_INVALID_NAME;
+    constexpr std::ptrdiff_t DOF_INVALID_INDEX = -1;
+    constexpr char[] DOF_INVALID_NAME = "";
 
     typedef std::ptrdiff_t FrameIndex;
-    IDYNTREE_MODEL_EXPORT extern std::ptrdiff_t FRAME_INVALID_INDEX;
-    IDYNTREE_MODEL_EXPORT extern std::string FRAME_INVALID_NAME;
+    constexpr std::ptrdiff_t FRAME_INVALID_INDEX = -1;
+    constexpr char[] FRAME_INVALID_NAME = "";
 
     typedef std::ptrdiff_t TraversalIndex;
-    IDYNTREE_MODEL_EXPORT extern TraversalIndex TRAVERSAL_INVALID_INDEX;
+    constexpr TraversalIndex TRAVERSAL_INVALID_INDEX = -1;
 
 }
 

@@ -38,7 +38,6 @@ set(IDYNTREE_MODEL_SOURCES src/ContactWrench.cpp
                            src/ForwardKinematics.cpp
                            src/FreeFloatingState.cpp
                            src/FreeFloatingMatrices.cpp
-                           src/Indices.cpp
                            src/Dynamics.cpp
                            src/DynamicsLinearization.cpp
                            src/DynamicsLinearizationHelpers.cpp
@@ -68,23 +67,6 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
 
 target_link_libraries(${libraryname} PUBLIC idyntree-core
                                      PRIVATE Eigen3::Eigen)
-
-# On Windows we need to correctly export global constants that are not inlined with the use of GenerateExportHeader
-# vtk 6.3 installs a GenerateExportHeader CMake module that shadows the official CMake module if find_package(VTK)
-# is invoked, the issue has been solved in vtk >= 7.1, see https://gitlab.kitware.com/vtk/vtk/-/merge_requests/1593 .
-# To ensure that the build works even if find_package(VTK) is invoked and VTK 6 is found, we manually include exactly the
-# GenerateExportHeader that is shipped with CMake, extracting the CMake install prefix from the CMAKE_COMMAND variable
-# This workaround can be removed once we will not support anymore platforms that ship with vtk 6.3 as main vtk version (Ubuntu 18.04).
-get_filename_component(CMAKE_UPSTREAM_MODULE_LOCATION ${CMAKE_COMMAND} PATH)
-get_filename_component(CMAKE_UPSTREAM_MODULE_LOCATION ${CMAKE_UPSTREAM_MODULE_LOCATION} PATH)
-set(CMAKE_UPSTREAM_MODULE_LOCATION ${CMAKE_UPSTREAM_MODULE_LOCATION}/share/cmake-${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}/Modules)
-if(EXISTS ${CMAKE_UPSTREAM_MODULE_LOCATION}/GenerateExportHeader.cmake)
-    include(${CMAKE_UPSTREAM_MODULE_LOCATION}/GenerateExportHeader.cmake)
-else()
-    include(GenerateExportHeader)
-endif()
-generate_export_header(${libraryname} EXPORT_FILE_NAME ModelExport.h)
-list(APPEND IDYNTREE_MODEL_HEADERS ${CMAKE_CURRENT_BINARY_DIR}/ModelExport.h)
 
 target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>")
 

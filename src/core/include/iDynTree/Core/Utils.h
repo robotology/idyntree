@@ -32,21 +32,18 @@
 #if defined(SWIG)
 #define IDYNTREE_DEPRECATED
 #define IDYNTREE_DEPRECATED_WITH_MSG(msg)
-// Workaround for SWIG problems with GenerateExportHeader-generated code
-#define IDYNTREE_CORE_EXPORT
 #else
 #define IDYNTREE_DEPRECATED [[deprecated]]
 #define IDYNTREE_DEPRECATED_WITH_MSG(msg) [[deprecated(msg)]]
-#include "CoreExport.h"
 #endif
 
 
 namespace iDynTree
 {
-    IDYNTREE_CORE_EXPORT extern int UNKNOWN;
+    constexpr int UNKNOWN = -1;
 
     /// Default tolerance for methods with a tolerance, setted to 1e-10
-    IDYNTREE_CORE_EXPORT extern double DEFAULT_TOL;
+    constexpr double DEFAULT_TOL = 1e-10;
 
     /**
      * Function embedding the semantic checks
