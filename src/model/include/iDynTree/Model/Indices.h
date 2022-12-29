@@ -18,19 +18,19 @@ namespace iDynTree
 {
     typedef std::ptrdiff_t LinkIndex;
     constexpr LinkIndex LINK_INVALID_INDEX = -1;
-    constexpr char[] LINK_INVALID_NAME = "";
+    constexpr char LINK_INVALID_NAME[] = "";
 
     typedef std::ptrdiff_t JointIndex;
     constexpr std::ptrdiff_t JOINT_INVALID_INDEX = -1;
-    constexpr char[] JOINT_INVALID_NAME = "";
+    constexpr char JOINT_INVALID_NAME[] = "";
 
     typedef std::ptrdiff_t DOFIndex;
     constexpr std::ptrdiff_t DOF_INVALID_INDEX = -1;
-    constexpr char[] DOF_INVALID_NAME = "";
+    constexpr char DOF_INVALID_NAME[] = "";
 
     typedef std::ptrdiff_t FrameIndex;
     constexpr std::ptrdiff_t FRAME_INVALID_INDEX = -1;
-    constexpr char[] FRAME_INVALID_NAME = "";
+    constexpr char FRAME_INVALID_NAME[] = "";
 
     typedef std::ptrdiff_t TraversalIndex;
     constexpr TraversalIndex TRAVERSAL_INVALID_INDEX = -1;
