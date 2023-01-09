@@ -6,8 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased Major]
 
-
 ## [Unreleased]
+
+## [8.0.1] - 2023-01-09
+
+### Fix
+- Fix `MatrixView` constructor when `MatrixView<const T>` is built from `MatrixView<T>` (https://github.com/robotology/idyntree/pull/1044).
 
 ## [8.0.0] - 2022-12-14
 
@@ -15,9 +19,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added the possibility to set the alpha channel while loading a model in the meshcat visualizer (https://github.com/robotology/idyntree/pull/1033).
 - Add the possibility to pass the list containing the mesh path while building the model (https://github.com/robotology/idyntree/pull/1036).
 - Enable implicit conversion and change KinDynComputations holder in the iDynTree bindings (https://github.com/robotology/idyntree/pull/1037).
-
-### Fix
-- Fix `MatrixView` constructor when `MatrixView<const T>` is built from `MatrixView<T>` (https://github.com/robotology/idyntree/pull/1044).
 
 ## [7.0.0] - 2022-08-31
 
