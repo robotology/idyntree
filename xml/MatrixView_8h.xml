@@ -6,9 +6,9 @@
     <includes local="no">type_traits</includes>
     <includes refid="Span_8h" local="no">iDynTree/Core/Span.h</includes>
     <includes refid="Utils_8h" local="no">iDynTree/Core/Utils.h</includes>
+    <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
     <includedby refid="MatrixDynSize_8h" local="no">iDynTree/Core/MatrixDynSize.h</includedby>
     <includedby refid="MatrixFixSize_8h" local="no">iDynTree/Core/MatrixFixSize.h</includedby>
-    <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
     <incdepgraph>
       <node id="2">
         <label>cassert</label>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/MatrixView.h" line="241" column="5" bodyfile="iDynTree/Core/MatrixView.h" bodystart="241" bodyend="247"/>
+        <location file="iDynTree/Core/MatrixView.h" line="245" column="5" bodyfile="iDynTree/Core/MatrixView.h" bodystart="245" bodyend="251"/>
       </memberdef>
       <memberdef kind="function" id="MatrixView_8h_1a6bbb3790549d807aa71d5ed22512411f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/MatrixView.h" line="254" column="35" bodyfile="iDynTree/Core/MatrixView.h" bodystart="254" bodyend="257"/>
+        <location file="iDynTree/Core/MatrixView.h" line="258" column="35" bodyfile="iDynTree/Core/MatrixView.h" bodystart="258" bodyend="261"/>
       </memberdef>
       <memberdef kind="function" id="MatrixView_8h_1ace02c0a5e7df4f19a28615bbea0b2d49" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -129,7 +129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/MatrixView.h" line="264" column="35" bodyfile="iDynTree/Core/MatrixView.h" bodystart="264" bodyend="267"/>
+        <location file="iDynTree/Core/MatrixView.h" line="268" column="35" bodyfile="iDynTree/Core/MatrixView.h" bodystart="268" bodyend="271"/>
       </memberdef>
       <memberdef kind="function" id="MatrixView_8h_1a60ffec30976d99d36dda278b50600853" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -160,7 +160,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/MatrixView.h" line="275" column="5" bodyfile="iDynTree/Core/MatrixView.h" bodystart="275" bodyend="279"/>
+        <location file="iDynTree/Core/MatrixView.h" line="279" column="5" bodyfile="iDynTree/Core/MatrixView.h" bodystart="279" bodyend="283"/>
       </memberdef>
       <memberdef kind="function" id="MatrixView_8h_1a6c7864c31a89d1f9f3a5196a21d8cf23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -191,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/MatrixView.h" line="287" column="5" bodyfile="iDynTree/Core/MatrixView.h" bodystart="287" bodyend="291"/>
+        <location file="iDynTree/Core/MatrixView.h" line="291" column="5" bodyfile="iDynTree/Core/MatrixView.h" bodystart="291" bodyend="295"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

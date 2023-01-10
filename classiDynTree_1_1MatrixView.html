@@ -130,9 +130,9 @@
               <span class="m-doc-wrap-bumper"><a href="#a7dd144664967816eb02580823507197e" class="m-doc-self">MatrixView</a>(</span><span class="m-doc-wrap">Container&amp; matrix)</span>
             </dt>
             <dd><span></span></dd>
-            <dt id="a5aa9fcdc459ce16fb9ad3b297965affb">
-              <div class="m-doc-template">template&lt;class Container, std::enable_if_t&lt;std::is_convertible&lt;decltype(std::declval&lt;Container&gt;().data()), pointer&gt;::value &amp;&amp; !<a href="structiDynTree_1_1MatrixViewInternal_1_1has__IsRowMajor.html" class="m-doc">MatrixViewInternal::<wbr />has_IsRowMajor</a>&lt;Container&gt;::value &amp;&amp; !std::is_same&lt;Container, <a href="classiDynTree_1_1MatrixView.html" class="m-doc">MatrixView</a>&gt;::value, int&gt;</div>
-              <span class="m-doc-wrap-bumper"><a href="#a5aa9fcdc459ce16fb9ad3b297965affb" class="m-doc-self">MatrixView</a>(</span><span class="m-doc-wrap">Container&amp; matrix,
+            <dt id="abe72c8a6694437d844fe24fd5685248a">
+              <div class="m-doc-template">template&lt;class Container, std::enable_if_t&lt;std::is_convertible&lt;decltype(std::declval&lt;Container&gt;().data()), pointer&gt;::value &amp;&amp; !<a href="structiDynTree_1_1MatrixViewInternal_1_1has__IsRowMajor.html" class="m-doc">MatrixViewInternal::<wbr />has_IsRowMajor</a>&lt;Container&gt;::value &amp;&amp; !std::is_same&lt;Container, <a href="classiDynTree_1_1MatrixView.html" class="m-doc">MatrixView</a>&gt;::value &amp;&amp; !std::is_same&lt;Container, <a href="classiDynTree_1_1MatrixView.html" class="m-doc">MatrixView</a>&lt;std::remove_pointer_t&lt;decltype(std::declval&lt;Container&gt;().data())&gt;&gt;, ::value, int&gt;</div>
+              <span class="m-doc-wrap-bumper"><a href="#abe72c8a6694437d844fe24fd5685248a" class="m-doc-self">MatrixView</a>(</span><span class="m-doc-wrap">Container&amp; matrix,
               const MatrixStorageOrdering&amp; order = MatrixStorageOrdering::RowMajor)</span>
             </dt>
             <dd><span></span></dd>
@@ -149,7 +149,7 @@
           <h2><a href="#pub-methods">Public functions</a></h2>
           <dl class="m-doc">
             <dt id="abb709adaca2698acb0120730d5ca68a6">
-              <div class="m-doc-template">template&lt;class OtherElementType, class = std::enable_if_t&lt;               <a href="structiDynTree_1_1details_1_1is__allowed__element__type__conversion.html" class="m-doc">details::<wbr />is_allowed_element_type_conversion</a>&lt;OtherElementType, element_type&gt;::value&gt;&gt;</div>
+              <div class="m-doc-template">template&lt;class OtherElementType, class = std::enable_if_t&lt;               <a href="structiDynTree_1_1details_1_1is__allowed__element__type__conversion.html" class="m-doc">details::<wbr />is_allowed_element_type_conversion</a>&lt;typename <a href="classiDynTree_1_1MatrixView.html" class="m-doc">MatrixView</a>&lt;OtherElementType&gt;::value_type,                                                            value_type&gt;::value&gt;&gt;</div>
               <span class="m-doc-wrap-bumper">auto <a href="#abb709adaca2698acb0120730d5ca68a6" class="m-doc-self">MatrixView</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1MatrixView.html" class="m-doc">MatrixView</a>&lt;OtherElementType&gt;&amp; other) -&gt; IDYNTREE_CONSTEXPR</span>
             </dt>
             <dd><span></span></dd>

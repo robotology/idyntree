@@ -197,7 +197,7 @@ $\forall$
 <use x='0' y='0' xlink:href='#eq6-g0-56'/>
 </g>
 </svg> depends on the resolution mode and on the references specified</p><p>Example</p><pre class="m-code"><span class="c1">//Allocate an inverse kinematics object</span>
-<span class="n">iDynTree</span><span class="o">::</span><span class="n">InverseKinematric</span><span class="w"> </span><span class="n">ik</span><span class="p">;</span><span class="w"></span></pre><aside class="m-note m-info"><h4>Note</h4><p>all the cartesian frames must be specified w.r.t. the same global frame. This library does not assume any particular global frame</p></aside><aside class="m-note m-danger"><h4>Warning</h4><p>This class is still in active development, and so API interface can change between iDynTree versions.</p></aside>
+<span class="n">iDynTree</span><span class="o">::</span><span class="n">InverseKinematric</span><span class="w"> </span><span class="n">ik</span><span class="p">;</span></pre><aside class="m-note m-info"><h4>Note</h4><p>all the cartesian frames must be specified w.r.t. the same global frame. This library does not assume any particular global frame</p></aside><aside class="m-note m-danger"><h4>Warning</h4><p>This class is still in active development, and so API interface can change between iDynTree versions.</p></aside>
         <section id="typeless-methods">
           <h2><a href="#typeless-methods">Constructors, destructors, conversion operators</a></h2>
           <dl class="m-doc">
@@ -2023,7 +2023,7 @@ $q$
                 </tr>
               </tfoot>
             </table>
-<p>Adds an orientation target for the specified frame</p><aside class="m-note m-info"><h4>Note</h4><p>only the orientation component of the targetValue parameter will be considered</p></aside><p>This call is equivalent to call <code class="m-code"><span class="n">addRotationTarget</span><span class="p">(</span><span class="n">frameName</span><span class="p">,</span><span class="w"> </span><span class="n">targetValue</span><span class="p">.</span><span class="n">rotation</span><span class="p">());</span><span class="w"></span></code></p><aside class="m-note m-default"><h4>See also</h4><p>addRotationTarget(const std::string&amp;, const iDynTree::Rotation&amp;) addTarget(const std::string&amp;, const iDynTree::Transform&amp;)</p></aside>
+<p>Adds an orientation target for the specified frame</p><aside class="m-note m-info"><h4>Note</h4><p>only the orientation component of the targetValue parameter will be considered</p></aside><p>This call is equivalent to call <code class="m-code"><span class="n">addRotationTarget</span><span class="p">(</span><span class="n">frameName</span><span class="p">,</span><span class="w"> </span><span class="n">targetValue</span><span class="p">.</span><span class="n">rotation</span><span class="p">());</span></code></p><aside class="m-note m-default"><h4>See also</h4><p>addRotationTarget(const std::string&amp;, const iDynTree::Rotation&amp;) addTarget(const std::string&amp;, const iDynTree::Transform&amp;)</p></aside>
           </div></section>
           <section class="m-doc-details" id="a4b1859df197c5937202c69f84f525bb8"><div>
             <h3>
@@ -2056,7 +2056,7 @@ $q$
                 </tr>
               </tfoot>
             </table>
-<p>Adds an orientation target for the specified frame</p><aside class="m-note m-info"><h4>Note</h4><p>only the orientation component of the targetValue parameter will be considered</p></aside><p>This call is equivalent to call <code class="m-code"><span class="n">addRotationTarget</span><span class="p">(</span><span class="n">frameName</span><span class="p">,</span><span class="w"> </span><span class="n">targetValue</span><span class="p">.</span><span class="n">rotation</span><span class="p">());</span><span class="w"></span></code></p><aside class="m-note m-default"><h4>See also</h4><p>addRotationTarget(const std::string&amp;, const iDynTree::Rotation&amp;) addTarget(const std::string&amp;, const iDynTree::Transform&amp;)</p></aside>
+<p>Adds an orientation target for the specified frame</p><aside class="m-note m-info"><h4>Note</h4><p>only the orientation component of the targetValue parameter will be considered</p></aside><p>This call is equivalent to call <code class="m-code"><span class="n">addRotationTarget</span><span class="p">(</span><span class="n">frameName</span><span class="p">,</span><span class="w"> </span><span class="n">targetValue</span><span class="p">.</span><span class="n">rotation</span><span class="p">());</span></code></p><aside class="m-note m-default"><h4>See also</h4><p>addRotationTarget(const std::string&amp;, const iDynTree::Rotation&amp;) addTarget(const std::string&amp;, const iDynTree::Transform&amp;)</p></aside>
           </div></section>
           <section class="m-doc-details" id="afc04477ad6b4db5fe0ed87eaec33a366"><div>
             <h3>

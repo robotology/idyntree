@@ -100,9 +100,9 @@
               <span class="m-doc-wrap-bumper"><a href="classiDynTree_1_1SpatialMotionWrtMotionDerivative.html" class="m-doc">SpatialMotionWrtMotionDerivative</a> iDynTree::<wbr />SpatialMotionWrtMotionDerivative::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a2bde02a54e1cce3b70169b468a51feae" class="m-doc-self">operator*</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Transform.html" class="m-doc">Transform</a>&amp; a_X_b)</span></span>
             </h3>
             <p>Equivalent to:</p>
-<pre class="m-code"><span class="n">SpatialMotionWrtMotionDerivative</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span><span class="w"></span>
-<span class="n">toEigen</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">toEigen</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span><span class="o">*</span><span class="n">toEigen</span><span class="p">(</span><span class="n">transform</span><span class="p">.</span><span class="n">asAdjointMatrix</span><span class="p">())</span><span class="w"></span>
-<span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span><span class="w"></span></pre>
+<pre class="m-code"><span class="n">SpatialMotionWrtMotionDerivative</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+<span class="n">toEigen</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">toEigen</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span><span class="o">*</span><span class="n">toEigen</span><span class="p">(</span><span class="n">transform</span><span class="p">.</span><span class="n">asAdjointMatrix</span><span class="p">())</span>
+<span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span></pre>
           </div></section>
         </section>
       </div>

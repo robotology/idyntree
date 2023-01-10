@@ -5,12 +5,12 @@
     <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
     <includes refid="GeomVector3_8h" local="no">iDynTree/Core/GeomVector3.h</includes>
     <includes refid="SpatialVector_8h" local="no">iDynTree/Core/SpatialVector.h</includes>
-    <includedby refid="EigenHelpers_8h" local="no">iDynTree/Core/EigenHelpers.h</includedby>
-    <includedby refid="SpatialAcc_8h" local="no">iDynTree/Core/SpatialAcc.h</includedby>
-    <includedby refid="Twist_8h" local="no">iDynTree/Core/Twist.h</includedby>
     <includedby refid="DynamicsUtils_8h" local="no">iDynTree/Model/DynamicsUtils.h</includedby>
     <includedby refid="PrismaticJoint_8h" local="no">iDynTree/Model/PrismaticJoint.h</includedby>
     <includedby refid="RevoluteJoint_8h" local="no">iDynTree/Model/RevoluteJoint.h</includedby>
+    <includedby refid="EigenHelpers_8h" local="no">iDynTree/Core/EigenHelpers.h</includedby>
+    <includedby refid="SpatialAcc_8h" local="no">iDynTree/Core/SpatialAcc.h</includedby>
+    <includedby refid="Twist_8h" local="no">iDynTree/Core/Twist.h</includedby>
     <innerclass refid="classiDynTree_1_1Dummy" prot="public">iDynTree::Dummy</innerclass>
     <innerclass refid="classiDynTree_1_1SpatialMotionVector" prot="public">iDynTree::SpatialMotionVector</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
