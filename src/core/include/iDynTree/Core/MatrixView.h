@@ -105,11 +105,13 @@ namespace iDynTree
         template <
             class OtherElementType,
             class = std::enable_if_t<
-                details::is_allowed_element_type_conversion<OtherElementType, element_type>::value>>
+                details::is_allowed_element_type_conversion<typename MatrixView<OtherElementType>::value_type,
+                                                            value_type>::value>>
         IDYNTREE_CONSTEXPR MatrixView(const MatrixView<OtherElementType>& other)
             : MatrixView(other.data(), other.rows(), other.cols(), other.storageOrder())
         {
         }
+
 
         template <
             class Container,
@@ -160,7 +162,9 @@ namespace iDynTree
                   std::enable_if_t<
                       std::is_convertible<decltype(std::declval<Container>().data()), pointer>::value
                           && !MatrixViewInternal::has_IsRowMajor<Container>::value
-                          && !std::is_same<Container, MatrixView>::value,
+                          && !std::is_same<Container, MatrixView>::value
+                          && !std::is_same<Container,
+                                           MatrixView<std::remove_pointer_t<decltype(std::declval<Container>().data())>>>::value,
                       int> = 0>
         MatrixView(Container& matrix, const MatrixStorageOrdering& order = MatrixStorageOrdering::RowMajor)
             : MatrixView(matrix.data(), matrix.rows(), matrix.cols(), order)
