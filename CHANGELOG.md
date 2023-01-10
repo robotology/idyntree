@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [8.0.1] - 2023-01-09
+## [8.0.1] - 2023-01-10
 
 ### Fix
 - Fix `MatrixView` constructor when `MatrixView<const T>` is built from `MatrixView<T>` (https://github.com/robotology/idyntree/pull/1044).
