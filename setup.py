@@ -22,7 +22,7 @@ setuptools.setup(
                 "-DIDYNTREE_PACKAGE_FOR_PYPI:BOOL=ON",
                 "-DIDYNTREE_USES_IPOPT:BOOL=ON",
                 "-DIDYNTREE_USES_ASSIMP:BOOL=ON",
-                "-DIDYNTREE_USES_IRRLICHT:BOOL=OFF",
+                "-DIDYNTREE_USES_IRRLICHT:BOOL=ON",
                 "-DIDYNTREE_USES_OSQPEIGEN:BOOL=OFF",
                 "-DIDYNTREE_USES_ALGLIB:BOOL=OFF",
                 "-DIDYNTREE_USES_WORHP:BOOL=OFF",

@@ -44,7 +44,8 @@ jobs:
             libeigen3-dev \
             swig \
             libxml2-dev \
-            libassimp-dev
+            libassimp-dev \
+            libirrlicht-dev
           pip install build
 
       - name: Build sdist
@@ -96,7 +97,7 @@ jobs:
           CIBW_ENVIRONMENT_LINUX: AUDITWHEEL_PLAT=manylinux_2_24_x86_64
           CIBW_BEFORE_BUILD_LINUX: |
             apt-get update &&\
-            apt-get install -y libeigen3-dev libassimp-dev libxml2-dev coinor-libipopt-dev
+            apt-get install -y libeigen3-dev libassimp-dev libxml2-dev coinor-libipopt-dev libirrlicht-dev
           CIBW_TEST_COMMAND: "python -c 'import idyntree.bindings'"
 
       - uses: actions/upload-artifact@v2
