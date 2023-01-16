@@ -6,9 +6,9 @@
     <includes local="no">type_traits</includes>
     <includes refid="Span_8h" local="no">iDynTree/Core/Span.h</includes>
     <includes refid="Utils_8h" local="no">iDynTree/Core/Utils.h</includes>
-    <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
     <includedby refid="MatrixDynSize_8h" local="no">iDynTree/Core/MatrixDynSize.h</includedby>
     <includedby refid="MatrixFixSize_8h" local="no">iDynTree/Core/MatrixFixSize.h</includedby>
+    <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
     <incdepgraph>
       <node id="2">
         <label>cassert</label>
