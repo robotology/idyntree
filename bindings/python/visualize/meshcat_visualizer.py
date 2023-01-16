@@ -23,7 +23,10 @@ class MeshcatVisualizer:
     """
 
     def __init__(self, zmq_url=None):
-        import meshcat
+        try:
+            import meshcat
+        except ModuleNotFoundError:
+            raise ModuleNotFoundError("the meshcat module is not found by the idyntree MeshcatVisualizer. Please install explicitly meshcat-python (as it is not an idyntree dependency) and try again.")
 
         if zmq_url is not None:
             print("Connecting to meshcat-server at zmq_url=" + zmq_url + ".")
