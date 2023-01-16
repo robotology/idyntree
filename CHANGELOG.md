@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [8.1.0] - 2023-01-16
 
 ### Added
-- Enabled the use of irrlicht dependency in PyPI builds (https://github.com/robotology/idyntree/pull/1044).
+- Enabled the use of irrlicht dependency in PyPI builds (https://github.com/robotology/idyntree/pull/1045).
 
 
 ## [8.0.1] - 2023-01-10
