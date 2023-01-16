@@ -44,7 +44,8 @@ jobs:
             libeigen3-dev \
             swig \
             libxml2-dev \
-            libassimp-dev
+            libassimp-dev \
+            libirrlicht-dev
           pip install build
 
       - name: Build sdist
