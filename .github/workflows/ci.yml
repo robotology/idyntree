@@ -32,6 +32,11 @@ jobs:
         miniforge-version: latest
         channels: conda-forge,robotology
 
+    - name: Print used environment (no conda) [Conda]
+      shell: bash
+      run: |
+        env
+
     - name: Install files to enable compilation of mex files [Conda/Linux]
       if: contains(matrix.os, 'ubuntu')
       run: |
@@ -64,7 +69,7 @@ jobs:
       if: contains(matrix.os, 'windows')
       shell: bash -l {0}
       run: |
-        compiler_path=C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\bin\Hostx64\x64\cl.exe
+        compiler_path=C:/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio/2019/Enterprise/bin/Hostx64/x64/cl.exe
         echo "CC=${compiler_path}" >> $GITHUB_ENV
         echo "CXX=${compiler_path}" >> $GITHUB_ENV
         echo "CONDA_CXX_LIBRARIES_INSTALL_PREFIX=${CONDA_PREFIX}\Library" >> $GITHUB_ENV
@@ -107,11 +112,6 @@ jobs:
       shell: bash -l {0}
       run: |
         mamba list
-        env
-
-    - name: Print used environment (no conda) [Conda]
-      shell: bash
-      run: |
         env
 
     - name: Configure [Conda]
