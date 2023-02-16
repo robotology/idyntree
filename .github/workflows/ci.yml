@@ -65,11 +65,16 @@ jobs:
         echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2020a_mexw64" >> $GITHUB_ENV
         echo "GHA_Matlab_MEX_EXTENSION=mexw64" >> $GITHUB_ENV
 
+    - name: Configure VS Toolchain (Windows)
+      if: contains(matrix.os, 'windows')
+      uses: ilammy/msvc-dev-cmd@v1.12.1
+
     - name: Setup compilation env variables [Conda/Windows]
       if: contains(matrix.os, 'windows')
       shell: bash -l {0}
       run: |
-        compiler_path=C:/Program\ Files\ \(x86\)/Microsoft\ Visual\ Studio/2019/Enterprise/bin/Hostx64/x64/cl.exe
+        bash_vc_install=${VCToolsInstallDir//\\//}        
+        compiler_path=${bash_vc_install}bin/Hostx64/x64/cl.exe
         echo "CC=${compiler_path}" >> $GITHUB_ENV
         echo "CXX=${compiler_path}" >> $GITHUB_ENV
         echo "CONDA_CXX_LIBRARIES_INSTALL_PREFIX=${CONDA_PREFIX}\Library" >> $GITHUB_ENV
