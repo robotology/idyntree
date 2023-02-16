@@ -32,6 +32,11 @@ jobs:
         miniforge-version: latest
         channels: conda-forge,robotology
 
+    - name: Print used environment (no conda) [Conda]
+      shell: bash
+      run: |
+        env
+
     - name: Install files to enable compilation of mex files [Conda/Linux]
       if: contains(matrix.os, 'ubuntu')
       run: |
@@ -60,6 +65,33 @@ jobs:
         echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2020a_mexw64" >> $GITHUB_ENV
         echo "GHA_Matlab_MEX_EXTENSION=mexw64" >> $GITHUB_ENV
 
+    - name: Configure VS Toolchain (Windows)
+      if: contains(matrix.os, 'windows')
+      uses: ilammy/msvc-dev-cmd@v1.12.1
+
+    - name: Setup compilation env variables [Conda/Windows]
+      if: contains(matrix.os, 'windows')
+      shell: bash -l {0}
+      run: |
+        bash_vc_install=${VCToolsInstallDir//\\//}        
+        compiler_path=${bash_vc_install}bin/Hostx64/x64/cl.exe
+        echo "CC=${compiler_path}" >> $GITHUB_ENV
+        echo "CXX=${compiler_path}" >> $GITHUB_ENV
+        echo "CONDA_CXX_LIBRARIES_INSTALL_PREFIX=${CONDA_PREFIX}\Library" >> $GITHUB_ENV
+        # Visualizer tests excluded as a workaround for https://github.com/robotology/idyntree/issues/808
+        # Python tests excluded as a workaround for https://github.com/robotology/idyntree/issues/939
+        # InverseKinematics tests are excluded as a workaround for https://github.com/robotology/idyntree/issues/1019
+        # ConsistencyTestiKin tests are excluded as a workaround for https://github.com/robotology/idyntree/issues/1029
+        echo "IDYNTREE_TEST_TO_SKIP=Visualizer|matlab|Python|pybind|InverseKinematics|ConsistencyTestiKin" >> $GITHUB_ENV
+
+    - name: Setup compilation env variables [Conda/Linux&macOS]
+      if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
+      shell: bash -l {0}
+      run: |
+        echo "CONDA_CXX_LIBRARIES_INSTALL_PREFIX=${CONDA_PREFIX}" >> $GITHUB_ENV
+        # Visualizer tests excluded as a workaround for https://github.com/robotology/idyntree/issues/808
+        echo "IDYNTREE_TEST_TO_SKIP=Visualizer|matlab" >> $GITHUB_ENV
+
     - name: Dependencies [Conda]
       shell: bash -l {0}
       run: |
@@ -87,21 +119,12 @@ jobs:
         mamba list
         env
 
-    - name: Configure [Conda/Linux&macOS]
-      if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
+    - name: Configure [Conda]
       shell: bash -l {0}
       run: |
         mkdir build
         cd build
-        cmake -GNinja -DCMAKE_INSTALL_PREFIX=${CONDA_PREFIX} -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DMATLAB_FIND_DEBUG:BOOL=ON -DIDYNTREE_USES_MATLAB:BOOL=ON -DMatlab_ROOT_DIR=${GHA_Matlab_ROOT_DIR} -DMatlab_MEX_EXTENSION:STRING=${GHA_Matlab_MEX_EXTENSION} -DIDYNTREE_DISABLE_MATLAB_TESTS:BOOL=ON -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=ON -DIDYNTREE_USES_ICUB_MAIN:BOOL=ON -DIDYNTREE_USES_OSQPEIGEN:BOOL=ON -DIDYNTREE_USES_PYTHON:BOOL=ON -DIDYNTREE_USES_PYTHON_PYBIND11:BOOL=ON  ..
-
-    - name: Configure [Conda/Windows]
-      if: contains(matrix.os, 'windows')
-      shell: bash -l {0}
-      run: |
-        mkdir build
-        cd build
-        cmake -G"Visual Studio 16 2019" -DCMAKE_INSTALL_PREFIX=${CONDA_PREFIX}/Library -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DMATLAB_FIND_DEBUG:BOOL=ON  -DIDYNTREE_USES_MATLAB:BOOL=ON -DMatlab_ROOT_DIR=${GHA_Matlab_ROOT_DIR} -DMatlab_MEX_EXTENSION:STRING=${GHA_Matlab_MEX_EXTENSION} -DIDYNTREE_DISABLE_MATLAB_TESTS:BOOL=ON  -DIDYNTREE_COMPILE_TESTS:BOOL=ON  -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=ON -DIDYNTREE_USES_ICUB_MAIN:BOOL=ON -DIDYNTREE_USES_OSQPEIGEN:BOOL=ON -DIDYNTREE_USES_PYTHON:BOOL=ON -DIDYNTREE_USES_PYTHON_PYBIND11:BOOL=ON  ..
+        cmake -GNinja -DCMAKE_INSTALL_PREFIX=${CONDA_CXX_LIBRARIES_INSTALL_PREFIX} -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DMATLAB_FIND_DEBUG:BOOL=ON -DIDYNTREE_USES_MATLAB:BOOL=ON -DMatlab_ROOT_DIR=${GHA_Matlab_ROOT_DIR} -DMatlab_MEX_EXTENSION:STRING=${GHA_Matlab_MEX_EXTENSION} -DIDYNTREE_DISABLE_MATLAB_TESTS:BOOL=ON -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_ASSIMP:BOOL=ON -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=ON -DIDYNTREE_USES_ICUB_MAIN:BOOL=ON -DIDYNTREE_USES_OSQPEIGEN:BOOL=ON -DIDYNTREE_USES_PYTHON:BOOL=ON -DIDYNTREE_USES_PYTHON_PYBIND11:BOOL=ON  ..
 
     - name: Build [Conda]
       shell: bash -l {0}
@@ -116,24 +139,12 @@ jobs:
         cd build
         ldd ./lib/iDynTreeMEX.mexa64
 
-    - name: Test [Conda/Linux&macOS]
+    - name: Test [Conda]
       if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
       shell: bash -l {0}
       run: |
         cd build
-        # Visualizer tests excluded as a workaround for https://github.com/robotology/idyntree/issues/808
-        ctest --output-on-failure -C ${{ matrix.build_type }} -E "Visualizer|matlab" .
-
-    - name: Test [Conda/Windows]
-      if: contains(matrix.os, 'windows')
-      shell: bash -l {0}
-      run: |
-        cd build
-        # Visualizer tests excluded as a workaround for https://github.com/robotology/idyntree/issues/808
-        # Python tests excluded as a workaround for https://github.com/robotology/idyntree/issues/939
-        # InverseKinematics tests are excluded as a workaround for https://github.com/robotology/idyntree/issues/1019
-        # ConsistencyTestiKin tests are excluded as a workaround for https://github.com/robotology/idyntree/issues/1029
-        ctest --output-on-failure -C ${{ matrix.build_type }} -E "Visualizer|matlab|Python|pybind|InverseKinematics|ConsistencyTestiKin" .
+        ctest --output-on-failure -C ${{ matrix.build_type }} -E "${IDYNTREE_TEST_TO_SKIP}" .
 
     - name: Install [Conda]
       shell: bash -l {0}
@@ -141,27 +152,17 @@ jobs:
         cd build
         cmake --install . --config ${{ matrix.build_type }}
 
-    - name: Test standalone installation of MATLAB bindings [Conda/Linux&macOS]
+    - name: Test standalone installation of MATLAB bindings [Conda]
       if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
       shell: bash -l {0}
       run: |
         cd bindings
         mkdir build
         cd build
-        cmake -GNinja  -DCMAKE_INSTALL_PREFIX=${CONDA_PREFIX}/idyntree_bindings_install_test -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DMATLAB_FIND_DEBUG:BOOL=ON -DIDYNTREE_USES_MATLAB:BOOL=ON -DMatlab_ROOT_DIR=${GHA_Matlab_ROOT_DIR} -DMatlab_MEX_EXTENSION:STRING=${GHA_Matlab_MEX_EXTENSION} -DIDYNTREE_DISABLE_MATLAB_TESTS:BOOL=ON ..
+        cmake -GNinja  -DCMAKE_INSTALL_PREFIX=${CONDA_CXX_LIBRARIES_INSTALL_PREFIX}/idyntree_bindings_install_test -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DMATLAB_FIND_DEBUG:BOOL=ON -DIDYNTREE_USES_MATLAB:BOOL=ON -DMatlab_ROOT_DIR=${GHA_Matlab_ROOT_DIR} -DMatlab_MEX_EXTENSION:STRING=${GHA_Matlab_MEX_EXTENSION} -DIDYNTREE_DISABLE_MATLAB_TESTS:BOOL=ON ..
         cmake --build . --config ${{ matrix.build_type }}
         cmake --install . --config ${{ matrix.build_type }}
 
-    - name: Test standalone installation of MATLAB bindings [Conda/Windows]
-      if: contains(matrix.os, 'windows')
-      shell: bash -l {0}
-      run: |
-        cd bindings
-        mkdir build
-        cd build
-        cmake -G"Visual Studio 16 2019" -DCMAKE_INSTALL_PREFIX=${CONDA_PREFIX}/Library/idyntree_bindings_install_test -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DMATLAB_FIND_DEBUG:BOOL=ON -DIDYNTREE_USES_MATLAB:BOOL=ON -DMatlab_ROOT_DIR=${GHA_Matlab_ROOT_DIR} -DMatlab_MEX_EXTENSION:STRING=${GHA_Matlab_MEX_EXTENSION} -DIDYNTREE_DISABLE_MATLAB_TESTS:BOOL=ON ..
-        cmake --build . --config ${{ matrix.build_type }}
-        cmake --install . --config ${{ matrix.build_type }}
 
   build-with-system-dependencies:
     name: '[${{ matrix.os }}@${{ matrix.build_type }}]'
