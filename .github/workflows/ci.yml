@@ -109,6 +109,11 @@ jobs:
         mamba list
         env
 
+    - name: Print used environment (no conda) [Conda]
+      shell: bash
+      run: |
+        env
+
     - name: Configure [Conda]
       shell: bash -l {0}
       run: |
