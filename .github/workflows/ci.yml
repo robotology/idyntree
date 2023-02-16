@@ -111,7 +111,6 @@ jobs:
         env
 
     - name: Configure [Conda]
-      if: contains(matrix.os, 'macos') || contains(matrix.os, 'ubuntu')
       shell: bash -l {0}
       run: |
         mkdir build
