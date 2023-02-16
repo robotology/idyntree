@@ -219,7 +219,7 @@
           <declname>omega</declname>
         </param>
         <briefdescription>
-<para>computes <formula id="56">$ 3 \times 3 $</formula> skew-symmetric matrix ( <formula id="216">$ \mathbb{so}(3) $</formula> space) for a given 3d vector ( <formula id="204">$ \mathbb{R}^3 $</formula> space) </para>
+<para>computes <formula id="35">$ 3 \times 3 $</formula> skew-symmetric matrix ( <formula id="162">$ \mathbb{so}(3) $</formula> space) for a given 3d vector ( <formula id="150">$ \mathbb{R}^3 $</formula> space) </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -249,15 +249,15 @@
           <declname>S</declname>
         </param>
         <briefdescription>
-<para>checks if the <formula id="56">$ 3 \times 3 $</formula> matrix is skew-symmetric </para>
+<para>checks if the <formula id="35">$ 3 \times 3 $</formula> matrix is skew-symmetric </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="217">\[ S + S^T = 0 \]</formula> <parameterlist kind="param"><parameteritem>
+<para><formula id="163">\[ S + S^T = 0 \]</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">S</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><formula id="56">$ 3 \times 3 $</formula> matrix </para>
+<para><formula id="35">$ 3 \times 3 $</formula> matrix </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
