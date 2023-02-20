@@ -1,4 +1,9 @@
 import sys
+
+sys.path.append("../../python/")
+sys.path.append("../../../lib/python/")
+sys.path.append("../../../lib/python/Debug/")
+
 import unittest
 import numpy as np
 import idyntree.swig as iDynTree
