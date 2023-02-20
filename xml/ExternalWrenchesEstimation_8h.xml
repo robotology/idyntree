@@ -10,9 +10,9 @@
     <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
     <includes refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includes>
     <includes local="no">vector</includes>
+    <includedby refid="skinDynLibConversions_8h" local="no">iDynTree/skinDynLibConversions.h</includedby>
     <includedby refid="ExtWrenchesAndJointTorquesEstimator_8h" local="no">iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h</includedby>
     <includedby refid="GravityCompensationHelpers_8h" local="no">iDynTree/Estimation/GravityCompensationHelpers.h</includedby>
-    <includedby refid="skinDynLibConversions_8h" local="no">iDynTree/skinDynLibConversions.h</includedby>
     <incdepgraph>
       <node id="1">
         <label>iDynTree/Estimation/ExternalWrenchesEstimation.h</label>

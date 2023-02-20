@@ -3,8 +3,8 @@
   <compounddef id="SpatialAcc_8h" kind="file" language="C++">
     <compoundname>SpatialAcc.h</compoundname>
     <includes refid="SpatialMotionVector_8h" local="no">iDynTree/Core/SpatialMotionVector.h</includes>
-    <includedby refid="SpatialInertia_8h" local="no">iDynTree/Core/SpatialInertia.h</includedby>
     <includedby refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includedby>
+    <includedby refid="SpatialInertia_8h" local="no">iDynTree/Core/SpatialInertia.h</includedby>
     <innerclass refid="classiDynTree_1_1SpatialAcc" prot="public">iDynTree::SpatialAcc</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>
