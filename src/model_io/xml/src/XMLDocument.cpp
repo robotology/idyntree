@@ -22,10 +22,14 @@ namespace iDynTree {
     {
     public:
         std::shared_ptr<XMLElement> m_root;
+        XMLParserState& m_parserState;
+
+        explicit XMLDocumentPimpl(XMLParserState& parserState)
+        : m_parserState(parserState) {}
     };
     
-    XMLDocument::XMLDocument()
-    : m_pimpl(new XMLDocumentPimpl()) {}
+    XMLDocument::XMLDocument(XMLParserState& parserState)
+    : m_pimpl(new XMLDocumentPimpl(parserState)) {}
     
     XMLDocument::~XMLDocument() {}
     
@@ -42,7 +46,7 @@ namespace iDynTree {
     std::shared_ptr<XMLElement> XMLDocument::rootElementForName(const std::string& name,
                                                                 const std::vector<std::string>& packageDirs)
     {
-        return std::make_shared<XMLElement>(name);
+        return std::make_shared<XMLElement>(m_pimpl->m_parserState, name);
     }
 
     bool XMLDocument::documentHasBeenParsed() { return true; }
@@ -55,4 +59,6 @@ namespace iDynTree {
         }
         return str.str();
     }
+
+    XMLParserState& XMLDocument::getParserState() { return m_pimpl->m_parserState; }
 }

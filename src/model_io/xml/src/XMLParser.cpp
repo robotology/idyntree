@@ -23,6 +23,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <mutex>
 #include <stack>
 #include <vector>
 #include <cstdarg>
@@ -57,17 +58,19 @@ namespace iDynTree {
         
     public:
         std::stack<std::shared_ptr<XMLElement>> m_parsedTrace;
-        std::function<std::shared_ptr<XMLDocument>()> f_documentFactory;
-        
+        std::function<std::shared_ptr<XMLDocument>(XMLParserState&)> f_documentFactory;
+
         std::shared_ptr<XMLDocument> m_document;
-        
+
         std::string m_schemaLocation;
         bool m_performValidation;
-        
+
         bool m_logParsing;
-        
+
         bool m_keepInMemory;
         std::vector<std::string> m_packageDirs;
+
+        XMLParserState m_parserState;
 
     public:
         XMLParserPimpl() {
@@ -164,7 +167,8 @@ namespace iDynTree {
         // clear stack
         state->m_pimpl->m_parsedTrace = std::stack<std::shared_ptr<XMLElement>>();
         // create a Document type
-        state->m_pimpl->m_document = std::shared_ptr<XMLDocument>(state->m_pimpl->f_documentFactory());
+        state->m_pimpl->m_document = std::shared_ptr<XMLDocument>(
+            state->m_pimpl->f_documentFactory(state->m_pimpl->m_parserState));
     }
     
     void XMLParser::XMLParserPimpl::parserCallbackEndDocument(void* context)
@@ -305,7 +309,7 @@ namespace iDynTree {
     : m_pimpl(new XMLParserPimpl())
     {
         assert(m_pimpl);
-        m_pimpl->f_documentFactory = []{ return std::shared_ptr<XMLDocument>(new XMLDocument()); };
+        m_pimpl->f_documentFactory = [](XMLParserState& state){ return std::shared_ptr<XMLDocument>(new XMLDocument(state)); };
         m_pimpl->m_performValidation = false;
         m_pimpl->m_logParsing = false;
         m_pimpl->m_keepInMemory = false;
@@ -313,14 +317,14 @@ namespace iDynTree {
     
     XMLParser::~XMLParser() {}
     
-    void XMLParser::setDocumentFactory(std::function<std::shared_ptr<XMLDocument> ()> factory)
+    void XMLParser::setDocumentFactory(std::function<std::shared_ptr<XMLDocument>(XMLParserState& state)> factory)
     {
         assert(m_pimpl);
         if (factory) {
             m_pimpl->f_documentFactory = factory;
         } else {
             // Restore the default function
-            m_pimpl->f_documentFactory = []{ return std::shared_ptr<XMLDocument>(new XMLDocument()); };
+            m_pimpl->f_documentFactory = [](XMLParserState& state){ return std::shared_ptr<XMLDocument>(new XMLDocument(state)); };
         }
     }
 
@@ -328,6 +332,9 @@ namespace iDynTree {
     {
         assert(m_pimpl);
         LIBXML_TEST_VERSION
+
+        // Reset the failure state.
+        m_pimpl->m_parserState.resetState();
         
         if (m_pimpl->m_performValidation) {
             if (m_pimpl->m_schemaLocation.empty()) {
@@ -360,7 +367,7 @@ namespace iDynTree {
 //                                                                 this, NULL, 0, absoluteFileName.c_str());
 
         int result = xmlSAXUserParseFile(m_pimpl->callbackHandler(), this, absoluteFileName.c_str());
-        return result == 0;
+        return result == 0 && !m_pimpl->m_parserState.getParsingErrorState();
     }
 
     bool XMLParser::parseXMLString(std::string xmlString)
@@ -368,10 +375,13 @@ namespace iDynTree {
         assert(m_pimpl);
         LIBXML_TEST_VERSION
 
+        // Reset the failure state.
+        m_pimpl->m_parserState.resetState();
+
         // For now we do not support validation on the fly
 
         int result = xmlSAXUserParseMemory(m_pimpl->callbackHandler(), this, xmlString.c_str(), xmlString.length());
-        return result == 0;
+        return result == 0 && !m_pimpl->m_parserState.getParsingErrorState();
     }
     
     std::shared_ptr<const XMLDocument> XMLParser::document() const
@@ -395,5 +405,19 @@ namespace iDynTree {
     void XMLParser::setPackageDirs(const std::vector<std::string>& packageDirs) { m_pimpl->m_packageDirs = packageDirs; }
     const std::vector<std::string>& XMLParser::packageDirs() const { return m_pimpl->m_packageDirs; }
 
+    void XMLParserState::setParsingError() {
+        std::lock_guard<std::mutex> lock(m_mutex);
+        m_parsing_error = true;
+    }
+
+    void XMLParserState::resetState() {
+        std::lock_guard<std::mutex> lock(m_mutex);
+        m_parsing_error = false;
+    }
+
+    bool XMLParserState::getParsingErrorState() {
+        std::lock_guard<std::mutex> lock(m_mutex);
+        return m_parsing_error;
+    }
 }
 

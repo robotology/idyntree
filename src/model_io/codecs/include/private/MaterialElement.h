@@ -25,6 +25,7 @@ namespace iDynTree {
     class MaterialElement;
 
     class XMLAttribute;
+    class XMLParserState;
 }
 
 class iDynTree::MaterialElement: public iDynTree::XMLElement
@@ -40,8 +41,10 @@ private:
     std::shared_ptr<MaterialInfo> m_info;
 
 public:
+    explicit MaterialElement(
+        XMLParserState& parserState, 
+        std::shared_ptr<MaterialInfo> materialInfo);
 
-    MaterialElement(std::shared_ptr<MaterialInfo> materialInfo);
     const std::shared_ptr<MaterialInfo> materialInfo() const;
 
     bool setAttributes(const std::unordered_map<std::string, std::shared_ptr<iDynTree::XMLAttribute>>& attributes) override;

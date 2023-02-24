@@ -94,7 +94,9 @@ namespace iDynTree
     {
         // Allocate parser
         std::shared_ptr<XMLParser> parser = std::make_shared<XMLParser>();
-        parser->setDocumentFactory([]{ return std::shared_ptr<XMLDocument>(new URDFDocument); });
+        parser->setDocumentFactory([](XMLParserState& state){ 
+            return std::shared_ptr<XMLDocument>(new URDFDocument(state)); 
+            });
         parser->setPackageDirs(packageDirs);
         if (!parser->parseXMLFile(filename)) {
             reportError("ModelLoader", "loadModelFromFile", "Error in parsing model from URDF.");
@@ -117,7 +119,9 @@ namespace iDynTree
     {
         // Allocate parser
         std::shared_ptr<XMLParser> parser = std::make_shared<XMLParser>();
-        parser->setDocumentFactory([]{ return std::shared_ptr<XMLDocument>(new URDFDocument); });
+        parser->setDocumentFactory([](XMLParserState& state){
+            return std::shared_ptr<XMLDocument>(new URDFDocument(state)); 
+            });
         parser->setPackageDirs(packageDirs);
         if (!parser->parseXMLString(modelString)) {
             reportError("ModelLoader", "loadModelFromString", "Error in parsing model from URDF.");

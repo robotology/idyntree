@@ -27,8 +27,8 @@ namespace iDynTree {
     class XMLAttribute;
     
     class IJoint;
+    class XMLParserState;
 }
-
 
 class iDynTree::JointElement : public iDynTree::XMLElement {
     
@@ -62,8 +62,10 @@ private:
     std::shared_ptr<Limits> m_limits;
     
 public:
-    JointElement(std::unordered_map<std::string, JointElement::JointInfo>& joints,
-                 std::unordered_map<std::string, JointElement::JointInfo>& fixedJoints);
+    explicit JointElement(
+        XMLParserState& parserState, 
+        std::unordered_map<std::string, JointElement::JointInfo>& joints,
+        std::unordered_map<std::string, JointElement::JointInfo>& fixedJoints);
     
     bool setAttributes(const std::unordered_map<std::string, std::shared_ptr<XMLAttribute>>& attributes) override;
     

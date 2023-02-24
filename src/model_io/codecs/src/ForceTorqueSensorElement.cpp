@@ -102,8 +102,10 @@ namespace iDynTree {
         return sensor;
     }
 
-    ForceTorqueSensorElement::ForceTorqueSensorElement(std::shared_ptr<const SensorElement::SensorInfo> sensorInfo)
-    : iDynTree::XMLElement("force_torque")
+    ForceTorqueSensorElement::ForceTorqueSensorElement(
+        XMLParserState& parserState,
+        std::shared_ptr<const SensorElement::SensorInfo> sensorInfo)
+    : iDynTree::XMLElement(parserState, "force_torque")
     , m_helper(std::make_shared<ForceTorqueSensorHelper>(sensorInfo)) {}
 
     const std::shared_ptr<iDynTree::SensorHelper> ForceTorqueSensorElement::helper() const
@@ -113,7 +115,8 @@ namespace iDynTree {
 
     std::shared_ptr<XMLElement> ForceTorqueSensorElement::childElementForName(const std::string& name)
     {
-        std::shared_ptr<XMLElement> element = std::make_shared<XMLElement>(name);
+        std::shared_ptr<XMLElement> element = std::make_shared<XMLElement>(
+            getParserState(), name);
         if (name == "frame") {
             std::weak_ptr<XMLElement> weakElement(element);
             element->setExitScopeCallback([this, weakElement]{

@@ -20,6 +20,7 @@ namespace iDynTree {
     class GeometryElement;
     
     class SolidShape;
+    class XMLParserState;
 }
 
 class iDynTree::GeometryElement: public iDynTree::XMLElement {
@@ -27,7 +28,10 @@ private:
     std::shared_ptr<SolidShape>& m_shape;
     const std::vector<std::string>& packageDirs;
 public:
-    GeometryElement(std::shared_ptr<SolidShape>& shape, const std::vector<std::string>& packageDirs);
+    explicit GeometryElement(
+        XMLParserState& parserState, 
+        std::shared_ptr<SolidShape>& shape, 
+        const std::vector<std::string>& packageDirs);
 
     std::shared_ptr<iDynTree::XMLElement> childElementForName(const std::string& name) override;
 };

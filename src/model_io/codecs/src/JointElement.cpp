@@ -16,6 +16,7 @@
 #include "URDFParsingUtils.h"
 
 #include <iDynTree/XMLAttribute.h>
+#include <iDynTree/XMLParser.h>
 
 #include <iDynTree/Model/IJoint.h>
 #include <iDynTree/Model/FixedJoint.h>
@@ -26,9 +27,11 @@
 
 namespace iDynTree {
     
-    JointElement::JointElement(std::unordered_map<std::string, JointElement::JointInfo>& joints,
-                 std::unordered_map<std::string, JointElement::JointInfo>& fixedJoints)
-    : iDynTree::XMLElement("joint")
+    JointElement::JointElement(
+        XMLParserState& parserState, 
+        std::unordered_map<std::string, JointElement::JointInfo>& joints,
+        std::unordered_map<std::string, JointElement::JointInfo>& fixedJoints)
+    : iDynTree::XMLElement(parserState, "joint")
     , m_joints(joints)
     , m_fixedJoints(fixedJoints)
     , m_jointFrame(Transform::Identity())
@@ -61,10 +64,10 @@ namespace iDynTree {
         // As an alternative for simple elements, instead of creating other classes,
         // I implement the simple functions of the generic element
         if (name == "origin") {
-            return std::make_shared<OriginElement>(m_jointFrame);
+            return std::make_shared<OriginElement>(getParserState(), m_jointFrame);
         } else if (name == "parent" || name == "child") {
             std::string& ref = (name == "parent") ? m_parentLink : m_childLink;
-            XMLElement* element = new XMLElement(name);
+            XMLElement* element = new XMLElement(getParserState(), name);
             element->setAttributeCallback([&ref](const std::unordered_map<std::string, std::shared_ptr<XMLAttribute>>& attributes) {
                 auto linkName = attributes.find("link");
                 if (linkName != attributes.end()) {
@@ -74,7 +77,7 @@ namespace iDynTree {
             });
             return std::shared_ptr<XMLElement>(element);
         } else if (name == "axis") {
-            XMLElement* element = new XMLElement(name);
+            XMLElement* element = new XMLElement(getParserState(), name);
             element->setAttributeCallback([this](const std::unordered_map<std::string, std::shared_ptr<XMLAttribute>>& attributes) {
                 auto xyz = attributes.find("xyz");
                 if (xyz != attributes.end()) {
@@ -93,7 +96,7 @@ namespace iDynTree {
             m_limits->positionUpper = .0;
 
             // TODO: check how the defaults/required works
-            XMLElement* element = new XMLElement(name);
+            XMLElement* element = new XMLElement(getParserState(), name);
             element->setAttributeCallback([this](const std::unordered_map<std::string, std::shared_ptr<XMLAttribute>>& attributes) {
 
                 auto found = attributes.find("lower");
@@ -130,7 +133,7 @@ namespace iDynTree {
             });
             return std::shared_ptr<XMLElement>(element);
         }
-        return std::make_shared<XMLElement>(name);
+        return std::make_shared<XMLElement>(getParserState(), name);
     }
     
     void JointElement::exitElementScope()
@@ -173,7 +176,11 @@ namespace iDynTree {
                 reportWarning("JointElement", "", errStr.c_str());
             }
             
-            map->insert(std::unordered_map<std::string, JointElement::JointInfo>::value_type(m_jointName, info));
+            if (!map->insert(std::unordered_map<std::string, JointElement::JointInfo>::value_type(m_jointName, info)).second) {
+                std::string errStr = "Duplicate joint " + m_jointName + " found.";
+                reportError("JointElement", "", errStr.c_str());
+                getParserState().setParsingError();
+            }
         }
     }
 }

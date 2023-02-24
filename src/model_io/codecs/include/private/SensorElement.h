@@ -32,6 +32,7 @@ namespace iDynTree {
     class XMLAttribute;
     class Sensor;
     class Model;
+    class XMLParserState;
 }
 
 
@@ -57,7 +58,9 @@ public:
 
     // I didn't find another clean way to return the generated Helper, instead of manually adding to
     // the vector
-    SensorElement(std::vector<std::shared_ptr<SensorHelper>>& sensors);
+    explicit SensorElement(
+        XMLParserState& parserState, 
+        std::vector<std::shared_ptr<SensorHelper>>& sensors);
 
     std::shared_ptr<XMLElement> childElementForName(const std::string& name) override;
     bool setAttributes(const std::unordered_map<std::string, std::shared_ptr<iDynTree::XMLAttribute>>& attributes) override;

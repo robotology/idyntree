@@ -21,13 +21,16 @@ namespace iDynTree {
     class ForceTorqueSensorHelper;
 
     class XMLAttribute;
+    class XMLParserState;
 }
 
 class iDynTree::ForceTorqueSensorElement: public iDynTree::XMLElement {
 private:
     std::shared_ptr<iDynTree::ForceTorqueSensorHelper> m_helper;
 public:
-    ForceTorqueSensorElement(std::shared_ptr<const SensorElement::SensorInfo> sensorInfo);
+    explicit ForceTorqueSensorElement(
+        XMLParserState& parserState, 
+        std::shared_ptr<const SensorElement::SensorInfo> sensorInfo);
 
     std::shared_ptr<XMLElement> childElementForName(const std::string& name) override;
 

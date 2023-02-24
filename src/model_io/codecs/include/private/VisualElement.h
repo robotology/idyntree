@@ -29,6 +29,7 @@ namespace iDynTree {
     class VisualElement;
 
     class XMLAttribute;
+    class XMLParserState;
 }
 
 class iDynTree::VisualElement: public iDynTree::XMLElement
@@ -49,7 +50,10 @@ private:
     VisualInfo m_info;
 
 public:
-    VisualElement(const std::string& name, const std::vector<std::string>& packageDirs);
+    explicit VisualElement(
+        XMLParserState& parserState,
+        const std::string& name,
+        const std::vector<std::string>& packageDirs);
 
     const VisualInfo& visualInfo() const;
 

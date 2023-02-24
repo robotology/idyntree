@@ -21,6 +21,7 @@ namespace iDynTree {
     class XMLDocument;
     class XMLElement;
     class XMLParser;
+    class XMLParserState;
 }
 
 class iDynTree::XMLDocument {
@@ -32,7 +33,7 @@ class iDynTree::XMLDocument {
     
 public:
     
-    XMLDocument();
+    explicit XMLDocument(XMLParserState& parserState);
     virtual ~XMLDocument();
 
     /**
@@ -49,6 +50,9 @@ public:
     
     const std::shared_ptr<XMLElement> root() const;
     std::string description() const;
+
+protected:
+    XMLParserState& getParserState();
 };
 
 #endif /* end of include guard: IDYNTREE_MODELIO_XML_XMLDOCUMENT_H */

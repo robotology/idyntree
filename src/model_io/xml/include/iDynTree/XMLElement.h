@@ -23,6 +23,7 @@ namespace iDynTree {
     class XMLAttribute;
     class XMLElement;
     class XMLParser;
+    class XMLParserState;
 }
 
 
@@ -51,24 +52,28 @@ public:
      * Default constructor.
      *
      * Constructs an unnamed XML Element with no attributes.
+     * @param parserState a reference to the parser state to propagate to the elements.
      */
-    XMLElement();
+    explicit XMLElement(XMLParserState& parserState);
     
     /**
      * Constructs a named XML Element with no attributes.
+     * @param parserState a reference to the parser state to propagate to the elements.
      * @param name the name of the XML element.
      */
-    XMLElement(const std::string& name);
+    explicit XMLElement(XMLParserState& parserState, const std::string& name);
     
     /**
      * Constructs a named XML Element with the specified attributes.
      *
      * This is the designated initializer.
+     * @param parserState a reference to the parser state to propagate to the elements.
      * @param name the name of the XML element.
      * @param attributes the attributes of the XML element.
      */
-    XMLElement(const std::string& name,
-               const std::unordered_map<std::string, std::shared_ptr<iDynTree::XMLAttribute>>& attributes);
+    explicit XMLElement(XMLParserState& parserState, 
+                        const std::string& name,
+                        const std::unordered_map<std::string, std::shared_ptr<iDynTree::XMLAttribute>>& attributes);
     
     /**
      * Destructor
@@ -129,6 +134,9 @@ public:
     std::string getParsedTextContent() const;
     
     std::string description() const;
+
+protected:
+    XMLParserState& getParserState();
 
 };
 

@@ -218,7 +218,45 @@ void checkLoadReducedModelOrderIsKept(std::string urdfFileName)
             ASSERT_IS_TRUE(dofsName[joint->getDOFsOffset() + dof] == jointName);
         }
     }
+}
 
+void checkDuplicateJointsReturnsError() {
+    std::string urdf = R"(
+<robot name="robot">
+  <link name="link_1">
+    <inertial>
+      <mass value="1"/>
+    </inertial>
+  </link>
+  <link name="link_2">
+    <inertial>
+      <mass value="2"/>
+    </inertial>
+  </link>
+  <link name="link_3">
+    <inertial>
+      <mass value="3"/>
+    </inertial>
+  </link>
+  <joint name="joint_1" type="revolute">
+    <origin xyz="0.0 0.0 0.0"/>
+    <axis xyz="0 0 1"/>
+    <parent link="link_1"/>
+    <child link="link_2"/>
+    <limit lower="-1.0" upper="1.0"/>
+  </joint>
+  <joint name="joint_1" type="revolute">
+    <origin xyz="0.0 0.0 0.0"/>
+    <axis xyz="0 0 1"/>
+    <parent link="link_1"/>
+    <child link="link_3"/>
+    <limit lower="-2.0" upper="2.0"/>
+  </joint>
+</robot>
+)";
+
+    ModelLoader loader;
+    ASSERT_IS_FALSE(loader.loadModelFromString(urdf));
 
 }
 

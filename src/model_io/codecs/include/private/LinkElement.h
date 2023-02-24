@@ -24,6 +24,7 @@ namespace iDynTree {
     class XMLAttribute;
     
     class Model;
+    class XMLParserState;
 }
 
 class iDynTree::LinkElement : public iDynTree::XMLElement {
@@ -35,7 +36,7 @@ class iDynTree::LinkElement : public iDynTree::XMLElement {
     std::vector<VisualElement::VisualInfo> m_collisions;
     
 public:
-    LinkElement(iDynTree::Model &model);
+    explicit LinkElement(XMLParserState& parserState, iDynTree::Model &model);
 
     // Exposing useful properties
     const std::string& linkName() const;

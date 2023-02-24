@@ -29,8 +29,10 @@ namespace iDynTree {
     SensorHelper::~SensorHelper() {}
 
 
-    SensorElement::SensorElement(std::vector<std::shared_ptr<SensorHelper>>& sensors)
-    : iDynTree::XMLElement("sensor")
+    SensorElement::SensorElement(
+        XMLParserState& parserState, 
+        std::vector<std::shared_ptr<SensorHelper>>& sensors)
+    : iDynTree::XMLElement(parserState, "sensor")
     , m_info(std::make_shared<SensorInfo>())
     , m_sensors(sensors)
     {
@@ -41,9 +43,10 @@ namespace iDynTree {
     std::shared_ptr<XMLElement> SensorElement::childElementForName(const std::string& name)
     {
         if (name == "origin") {
-            return std::make_shared<OriginElement>(m_info->m_origin);
+            return std::make_shared<OriginElement>(getParserState(), m_info->m_origin);
         } else if (name == "parent") {
-            std::shared_ptr<XMLElement> element = std::make_shared<XMLElement>(name);
+            std::shared_ptr<XMLElement> element = std::make_shared<XMLElement>(
+                getParserState(), name);
             element->setAttributeCallback([this](const std::unordered_map<std::string, std::shared_ptr<iDynTree::XMLAttribute>>& attributes) {
                 auto found = attributes.find("link");
                 if (found != attributes.end()) {
@@ -61,13 +64,14 @@ namespace iDynTree {
                 // Error
             }
 
-            std::shared_ptr<ForceTorqueSensorElement> element = std::make_shared<ForceTorqueSensorElement>(m_info);
+            std::shared_ptr<ForceTorqueSensorElement> element = std::make_shared<ForceTorqueSensorElement>(
+                getParserState(), m_info);
             // We have to save the helper which is responsible of generating the iDynTree::Sensor class
             // after the XML parsing.
             m_sensors.push_back(element->helper());
             return element;
         }
-        return std::make_shared<XMLElement>(name);
+        return std::make_shared<XMLElement>(getParserState(), name);
     }
 
     bool SensorElement::setAttributes(const std::unordered_map<std::string, std::shared_ptr<iDynTree::XMLAttribute>>& attributes)

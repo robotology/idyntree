@@ -38,9 +38,8 @@ namespace iDynTree {
                                            const std::unordered_map<std::string, MaterialElement::MaterialInfo>& materialDatabase,
                                            ModelSolidShapes &modelGeometries);
     
-    URDFDocument::URDFDocument()
-    {
-    }
+    URDFDocument::URDFDocument(XMLParserState& parserState)
+    : XMLDocument(parserState) {}
 
     iDynTree::ModelParserOptions& URDFDocument::options() { return m_options; }
     
@@ -67,7 +66,8 @@ namespace iDynTree {
             m_buffers.fixedJoints.clear();
             m_buffers.materials.clear();
 
-            return std::make_shared<RobotElement>(m_model,
+            return std::make_shared<RobotElement>(getParserState(), 
+                                                  m_model,
                                                   m_buffers.sensorHelpers,
                                                   m_buffers.joints,
                                                   m_buffers.fixedJoints,
@@ -76,7 +76,7 @@ namespace iDynTree {
                                                   m_buffers.collisions);
         }
         // TODO: raise an error here
-        return std::shared_ptr<XMLElement>(new XMLElement());
+        return std::shared_ptr<XMLElement>(new XMLElement(getParserState()));
     }
 
     bool URDFDocument::documentHasBeenParsed()

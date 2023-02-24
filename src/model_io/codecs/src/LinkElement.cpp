@@ -25,8 +25,10 @@
 
 namespace iDynTree {
     
-    LinkElement::LinkElement(iDynTree::Model &model)
-    : iDynTree::XMLElement("link")
+    LinkElement::LinkElement(
+        XMLParserState& parserState, 
+        iDynTree::Model &model)
+    : iDynTree::XMLElement(parserState, "link")
     , m_model(model)
     {
         iDynTree::SpatialInertia zeroInertia = iDynTree::SpatialInertia::Zero();
@@ -53,13 +55,13 @@ namespace iDynTree {
     
     std::shared_ptr<iDynTree::XMLElement> LinkElement::childElementForName(const std::string& name) {
         if (name == "inertial") {
-            return std::make_shared<InertialElement>(m_link);
+            return std::make_shared<InertialElement>(getParserState(), m_link);
         } else if (name == "visual") {
-            return std::make_shared<VisualElement>("visual", m_model.getPackageDirs());
+            return std::make_shared<VisualElement>(getParserState(), "visual", m_model.getPackageDirs());
         } else if (name == "collision") {
-            return std::make_shared<VisualElement>("collision", m_model.getPackageDirs());
+            return std::make_shared<VisualElement>(getParserState(), "collision", m_model.getPackageDirs());
         }
-        return std::make_shared<iDynTree::XMLElement>(name);
+        return std::make_shared<iDynTree::XMLElement>(getParserState(), name);
     }
 
     void LinkElement::childHasBeenParsed(std::shared_ptr<iDynTree::XMLElement> child)

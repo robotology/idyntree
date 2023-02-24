@@ -15,6 +15,7 @@
 
 #include <functional>
 #include <memory>
+#include <mutex>
 #include <vector>
 #include <string>
 #include <unordered_map>
@@ -24,6 +25,7 @@ namespace iDynTree {
     class XMLParser;
     class XMLElement;
     class XMLDocument;
+    class XMLParserState;
 }
 
 //TODO: handle errors
@@ -198,12 +200,12 @@ public:
      *
      * By specifying a new factory function, it is possible to change how the XML document will be
      * represented in memory.
-     * The signature of the function is `(void) -> std::shared_ptr<XMLDocument>`, i.e. a function
-     * accepting no arguments and returning a `std::shared_ptr` to an `XMLDocument` object.
+     * The signature of the function is `(XMLParserState&) -> std::shared_ptr<XMLDocument>`, i.e. a function
+     * accepting a reference to the parser state and returning a `std::shared_ptr` to an `XMLDocument` object.
      *
      @param factory the function that will be called for instantiating a new XMLDocument object.
      */
-    void setDocumentFactory(std::function<std::shared_ptr<XMLDocument>()> factory);
+    void setDocumentFactory(std::function<std::shared_ptr<XMLDocument>(XMLParserState&)> factory);
     
     // TODO: check if we want to return a copy, a const or something
 
@@ -215,6 +217,21 @@ public:
     std::shared_ptr<const XMLDocument> document() const;
     
 };
+
+
+class iDynTree::XMLParserState {
+public:
+    void setParsingError();
+  
+private:
+    friend XMLParser;
+    void resetState();  // Acquires m_mutex.
+    bool getParsingErrorState();  // Acquires m_mutex.
+
+    mutable std::mutex m_mutex;
+    bool m_parsing_error;  // Protected by m_mutex.
+};
+
 
 
 #endif /* end of include guard: IDYNTREE_MODELIO_XML_XMLPARSER_H */

@@ -22,6 +22,7 @@ namespace iDynTree {
 
     class XMLAttribute;
     class Transform;
+    class XMLParserState;
 }
 
 class iDynTree::OriginElement: public iDynTree::XMLElement {
@@ -29,7 +30,7 @@ private:
     iDynTree::Transform& m_jointOrigin;
 
 public:
-    OriginElement(iDynTree::Transform& jointOrigin);
+    explicit OriginElement(XMLParserState& parserState, iDynTree::Transform& jointOrigin);
     
     bool setAttributes(const std::unordered_map<std::string, std::shared_ptr<iDynTree::XMLAttribute>>& attributes) override;
 

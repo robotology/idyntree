@@ -19,8 +19,10 @@
 #include <iDynTree/Core/Transform.h>
 
 namespace iDynTree {
-    OriginElement::OriginElement(iDynTree::Transform& jointOrigin)
-    : iDynTree::XMLElement("origin")
+    OriginElement::OriginElement(
+        XMLParserState& parserState,
+        iDynTree::Transform& jointOrigin)
+    : iDynTree::XMLElement(parserState, "origin")
     , m_jointOrigin(jointOrigin) {}
 
     bool OriginElement::setAttributes(const std::unordered_map<std::string, std::shared_ptr<iDynTree::XMLAttribute>>& attributes)
