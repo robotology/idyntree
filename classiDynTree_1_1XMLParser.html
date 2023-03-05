@@ -152,7 +152,7 @@
             </dt>
             <dd>Parse the specified XML document string.</dd>
             <dt>
-              <span class="m-doc-wrap-bumper">void <a href="#aaf18ad736bf7a6ed165e1b533ed29e06" class="m-doc">setDocumentFactory</a>(</span><span class="m-doc-wrap">std::function&lt;std::shared_ptr&lt;<a href="classiDynTree_1_1XMLDocument.html" class="m-doc">XMLDocument</a>&gt;()&gt; factory)</span>
+              <span class="m-doc-wrap-bumper">void <a href="#aba282c9be204df3c5e3f03f18161a446" class="m-doc">setDocumentFactory</a>(</span><span class="m-doc-wrap">std::function&lt;std::shared_ptr&lt;<a href="classiDynTree_1_1XMLDocument.html" class="m-doc">XMLDocument</a>&gt;(<a href="classiDynTree_1_1XMLParserState.html" class="m-doc">XMLParserState</a>&amp;)&gt; factory)</span>
             </dt>
             <dd>Set the factory function responsible of creating a new <a href="classiDynTree_1_1XMLDocument.html" class="m-doc">XMLDocument</a> element.</dd>
             <dt>
@@ -343,9 +343,9 @@
             </table>
 <aside class="m-note m-info"><h4>Note</h4><p>XSD validation is currently not supported for in-memory parsing. Use <a href="classiDynTree_1_1XMLParser.html#ab88dc1c938c5bb0397e2abdcf1064002" class="m-doc">parseXMLFile(std::<wbr />string)</a> instead</p></aside><aside class="m-note m-default"><h4>See also</h4><p><a href="classiDynTree_1_1XMLParser.html#ab88dc1c938c5bb0397e2abdcf1064002" class="m-doc">parseXMLFile(std::<wbr />string)</a></p></aside>
           </div></section>
-          <section class="m-doc-details" id="aaf18ad736bf7a6ed165e1b533ed29e06"><div>
+          <section class="m-doc-details" id="aba282c9be204df3c5e3f03f18161a446"><div>
             <h3>
-              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />XMLParser::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aaf18ad736bf7a6ed165e1b533ed29e06" class="m-doc-self">setDocumentFactory</a>(</span><span class="m-doc-wrap">std::function&lt;std::shared_ptr&lt;<a href="classiDynTree_1_1XMLDocument.html" class="m-doc">XMLDocument</a>&gt;()&gt; factory)</span></span>
+              <span class="m-doc-wrap-bumper">void iDynTree::<wbr />XMLParser::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#aba282c9be204df3c5e3f03f18161a446" class="m-doc-self">setDocumentFactory</a>(</span><span class="m-doc-wrap">std::function&lt;std::shared_ptr&lt;<a href="classiDynTree_1_1XMLDocument.html" class="m-doc">XMLDocument</a>&gt;(<a href="classiDynTree_1_1XMLParserState.html" class="m-doc">XMLParserState</a>&amp;)&gt; factory)</span></span>
             </h3>
             <p>Set the factory function responsible of creating a new <a href="classiDynTree_1_1XMLDocument.html" class="m-doc">XMLDocument</a> element.</p>
             <table class="m-table m-fullwidth m-flat">
@@ -359,7 +359,7 @@
                 </tr>
               </tbody>
             </table>
-<p>By specifying a new factory function, it is possible to change how the XML document will be represented in memory. The signature of the function is <code>(void) -&gt; std::shared_ptr&lt;<a href="classiDynTree_1_1XMLDocument.html" class="m-doc">XMLDocument</a>&gt;</code>, i.e. a function accepting no arguments and returning a <code>std::shared_ptr</code> to an <code><a href="classiDynTree_1_1XMLDocument.html" class="m-doc">XMLDocument</a></code> object.</p>
+<p>By specifying a new factory function, it is possible to change how the XML document will be represented in memory. The signature of the function is <code>(<a href="classiDynTree_1_1XMLParserState.html" class="m-doc">XMLParserState</a>&amp;) -&gt; std::shared_ptr&lt;<a href="classiDynTree_1_1XMLDocument.html" class="m-doc">XMLDocument</a>&gt;</code>, i.e. a function accepting a reference to the parser state and returning a <code>std::shared_ptr</code> to an <code><a href="classiDynTree_1_1XMLDocument.html" class="m-doc">XMLDocument</a></code> object.</p>
           </div></section>
           <section class="m-doc-details" id="affab248cde90245f3df3d5fb5b50476d"><div>
             <h3>

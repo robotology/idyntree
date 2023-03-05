@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/ForceTorqueSensorElement.h" line="38" column="5" bodyfile="private/ForceTorqueSensorElement.h" bodystart="38" bodyend="-1"/>
+        <location file="private/ForceTorqueSensorElement.h" line="41" column="5" bodyfile="private/ForceTorqueSensorElement.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/ForceTorqueSensorElement.h" line="40" column="17" bodyfile="private/ForceTorqueSensorElement.h" bodystart="40" bodyend="-1"/>
+        <location file="private/ForceTorqueSensorElement.h" line="43" column="17" bodyfile="private/ForceTorqueSensorElement.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ForceTorqueSensorHelper_1a0fa97b68c5c95ae9e78bde3c4e95a9f1" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/ForceTorqueSensorElement.h" line="41" column="17" bodyfile="private/ForceTorqueSensorElement.h" bodystart="41" bodyend="-1"/>
+        <location file="private/ForceTorqueSensorElement.h" line="44" column="17" bodyfile="private/ForceTorqueSensorElement.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/ForceTorqueSensorElement.h" line="43" column="5"/>
+        <location file="private/ForceTorqueSensorElement.h" line="46" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ForceTorqueSensorHelper_1a79d3a6260d4b95ce3509168d1dc03157" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> *</type>
@@ -83,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/ForceTorqueSensorElement.h" line="44" column="12"/>
+        <location file="private/ForceTorqueSensorElement.h" line="47" column="12"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -132,7 +132,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="private/ForceTorqueSensorElement.h" line="37" column="1" bodyfile="private/ForceTorqueSensorElement.h" bodystart="37" bodyend="45"/>
+    <location file="private/ForceTorqueSensorElement.h" line="40" column="1" bodyfile="private/ForceTorqueSensorElement.h" bodystart="40" bodyend="48"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1ForceTorqueSensorHelper_1a29590c3cc2a836f05f1af29fed18db97" prot="public" virt="non-virtual"><scope>iDynTree::ForceTorqueSensorHelper</scope><name>ForceTorqueSensorHelper</name></member>
       <member refid="classiDynTree_1_1ForceTorqueSensorHelper_1a79d3a6260d4b95ce3509168d1dc03157" prot="public" virt="virtual"><scope>iDynTree::ForceTorqueSensorHelper</scope><name>generateSensor</name></member>

@@ -27,6 +27,7 @@
     <innerclass refid="classiDynTree_1_1XMLDocument" prot="public">iDynTree::XMLDocument</innerclass>
     <innerclass refid="classiDynTree_1_1XMLElement" prot="public">iDynTree::XMLElement</innerclass>
     <innerclass refid="classiDynTree_1_1XMLParser" prot="public">iDynTree::XMLParser</innerclass>
+    <innerclass refid="classiDynTree_1_1XMLParserState" prot="public">iDynTree::XMLParserState</innerclass>
     <innerclass refid="classiDynTree_1_1BoundingBoxProjectionConstraint" prot="public">iDynTree::BoundingBoxProjectionConstraint</innerclass>
     <innerclass refid="classiDynTree_1_1Polygon" prot="public">iDynTree::Polygon</innerclass>
     <innerclass refid="classiDynTree_1_1Polygon2D" prot="public">iDynTree::Polygon2D</innerclass>

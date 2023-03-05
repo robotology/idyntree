@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InertialElement.h" line="26" column="15" bodyfile="private/InertialElement.h" bodystart="26" bodyend="-1"/>
+        <location file="private/InertialElement.h" line="27" column="15" bodyfile="private/InertialElement.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1InertialElement_1a7683b4416677feab71ec30df7bdd83bb" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -28,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InertialElement.h" line="27" column="12" bodyfile="private/InertialElement.h" bodystart="27" bodyend="-1"/>
+        <location file="private/InertialElement.h" line="28" column="12" bodyfile="private/InertialElement.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1InertialElement_1a9b14d54dac0825d1efccf405b6a26468" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1RotationalInertiaRaw" kindref="compound">RotationalInertiaRaw</ref></type>
@@ -41,7 +41,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InertialElement.h" line="28" column="26" bodyfile="private/InertialElement.h" bodystart="28" bodyend="-1"/>
+        <location file="private/InertialElement.h" line="29" column="26" bodyfile="private/InertialElement.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1InertialElement_1ac18d60d227d3868dc73bbcb2034ec904" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Link" kindref="compound">iDynTree::Link</ref> &amp;</type>
@@ -54,15 +54,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InertialElement.h" line="29" column="20" bodyfile="private/InertialElement.h" bodystart="29" bodyend="-1"/>
+        <location file="private/InertialElement.h" line="30" column="20" bodyfile="private/InertialElement.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="classiDynTree_1_1InertialElement_1a75919a0f3285a96e38bc6ae519966215" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1InertialElement_1a50533db788c3c43e6c7910ad97e0bf5d" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
         <type></type>
         <definition>iDynTree::InertialElement::InertialElement</definition>
-        <argsstring>(iDynTree::Link &amp;link)</argsstring>
+        <argsstring>(XMLParserState &amp;parserState, iDynTree::Link &amp;link)</argsstring>
         <name>InertialElement</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1XMLParserState" kindref="compound">XMLParserState</ref> &amp;</type>
+          <declname>parserState</declname>
+        </param>
         <param>
           <type><ref refid="classiDynTree_1_1Link" kindref="compound">iDynTree::Link</ref> &amp;</type>
           <declname>link</declname>
@@ -73,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InertialElement.h" line="32" column="5"/>
+        <location file="private/InertialElement.h" line="33" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InertialElement_1aec2e94c9ffa5a1d2aa6c2e7406cce1a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">iDynTree::XMLElement</ref> &gt;</type>
@@ -104,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InertialElement.h" line="34" column="21"/>
+        <location file="private/InertialElement.h" line="35" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InertialElement_1a38f2684dc9bd018384a0e386bd590240" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -118,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InertialElement.h" line="36" column="18"/>
+        <location file="private/InertialElement.h" line="37" column="18"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -149,7 +153,7 @@
         <link refid="classiDynTree_1_1XMLElement"/>
       </node>
     </collaborationgraph>
-    <location file="private/InertialElement.h" line="25" column="1" bodyfile="private/InertialElement.h" bodystart="25" bodyend="38"/>
+    <location file="private/InertialElement.h" line="26" column="1" bodyfile="private/InertialElement.h" bodystart="26" bodyend="39"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1XMLElement_1a2a182ac17f5e644b113a67e02c3595e5" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>attributeCallback</name></member>
       <member refid="classiDynTree_1_1XMLElement_1adf74d829fbe4d3d112c0ef2eba8bd3ea" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>attributes</name></member>
@@ -160,7 +164,8 @@
       <member refid="classiDynTree_1_1InertialElement_1a38f2684dc9bd018384a0e386bd590240" prot="public" virt="virtual"><scope>iDynTree::InertialElement</scope><name>exitElementScope</name></member>
       <member refid="classiDynTree_1_1XMLElement_1aa6f49fb7b1b204e1a84cbdc51faeaa62" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>exitScopeCallback</name></member>
       <member refid="classiDynTree_1_1XMLElement_1abebc95353394912e187ad70e6078fcdc" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>getParsedTextContent</name></member>
-      <member refid="classiDynTree_1_1InertialElement_1a75919a0f3285a96e38bc6ae519966215" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>InertialElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a2bccce24401b1812a6f485df6098c61f" prot="protected" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>getParserState</name></member>
+      <member refid="classiDynTree_1_1InertialElement_1a50533db788c3c43e6c7910ad97e0bf5d" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>InertialElement</name></member>
       <member refid="classiDynTree_1_1InertialElement_1ad653f593941c6d19e334506439428769" prot="private" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>m_centerOfMass</name></member>
       <member refid="classiDynTree_1_1InertialElement_1ac18d60d227d3868dc73bbcb2034ec904" prot="private" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>m_link</name></member>
       <member refid="classiDynTree_1_1InertialElement_1a7683b4416677feab71ec30df7bdd83bb" prot="private" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>m_mass</name></member>
@@ -171,9 +176,9 @@
       <member refid="classiDynTree_1_1XMLElement_1a2fe23e8a9ee4d2f776f792c9c118db45" prot="public" virt="virtual"><scope>iDynTree::InertialElement</scope><name>setAttributes</name></member>
       <member refid="classiDynTree_1_1XMLElement_1a69171cc4b5c552b97f44375029356a2e" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>setChildHasBeenParsedCallback</name></member>
       <member refid="classiDynTree_1_1XMLElement_1a16759fb450635662dced0eb2ace0228b" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>setExitScopeCallback</name></member>
-      <member refid="classiDynTree_1_1XMLElement_1a885cb939d74e8ce27ce4c0708c04267e" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>XMLElement</name></member>
-      <member refid="classiDynTree_1_1XMLElement_1a7ad288fac24328b2bb19908500fec39a" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>XMLElement</name></member>
-      <member refid="classiDynTree_1_1XMLElement_1a42ee14ee8b2ec8a9e9e31472e1b17556" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a33b172d683ef0118cd0421cc6a84aa22" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1abf02729e927560aec4a97004cb50388e" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a119a37b509545e9a265d4cc9913613eb" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>XMLElement</name></member>
       <member refid="classiDynTree_1_1XMLElement_1aa0220e560dfd45a38797cb5209653ad4" prot="public" virt="virtual"><scope>iDynTree::InertialElement</scope><name>~XMLElement</name></member>
     </listofallmembers>
   </compounddef>

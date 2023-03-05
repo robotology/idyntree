@@ -16,15 +16,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/MaterialElement.h" line="40" column="21" bodyfile="private/MaterialElement.h" bodystart="40" bodyend="-1"/>
+        <location file="private/MaterialElement.h" line="41" column="21" bodyfile="private/MaterialElement.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="classiDynTree_1_1MaterialElement_1a3977b40f5c35c3fac5daa366535a9655" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1MaterialElement_1a222021bbea609c6d2afbb40251306f05" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
         <type></type>
         <definition>iDynTree::MaterialElement::MaterialElement</definition>
-        <argsstring>(std::shared_ptr&lt; MaterialInfo &gt; materialInfo)</argsstring>
+        <argsstring>(XMLParserState &amp;parserState, std::shared_ptr&lt; MaterialInfo &gt; materialInfo)</argsstring>
         <name>MaterialElement</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1XMLParserState" kindref="compound">XMLParserState</ref> &amp;</type>
+          <declname>parserState</declname>
+        </param>
         <param>
           <type>std::shared_ptr&lt; <ref refid="structiDynTree_1_1MaterialElement_1_1MaterialInfo" kindref="compound">MaterialInfo</ref> &gt;</type>
           <declname>materialInfo</declname>
@@ -35,7 +39,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/MaterialElement.h" line="44" column="5"/>
+        <location file="private/MaterialElement.h" line="44" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1MaterialElement_1a9c25cd1ba1daed8be2f1d3a5465b24bd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const std::shared_ptr&lt; <ref refid="structiDynTree_1_1MaterialElement_1_1MaterialInfo" kindref="compound">MaterialInfo</ref> &gt;</type>
@@ -48,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/MaterialElement.h" line="45" column="27"/>
+        <location file="private/MaterialElement.h" line="48" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1MaterialElement_1a562850e48a98db643e05148e4cf21248" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -66,7 +70,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/MaterialElement.h" line="47" column="10"/>
+        <location file="private/MaterialElement.h" line="50" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1MaterialElement_1afb72b35f8217ecf0c377ed20fd605eb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">XMLElement</ref> &gt;</type>
@@ -97,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/MaterialElement.h" line="48" column="21"/>
+        <location file="private/MaterialElement.h" line="51" column="21"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -128,7 +132,7 @@
         <link refid="classiDynTree_1_1XMLElement"/>
       </node>
     </collaborationgraph>
-    <location file="private/MaterialElement.h" line="30" column="1" bodyfile="private/MaterialElement.h" bodystart="31" bodyend="49"/>
+    <location file="private/MaterialElement.h" line="31" column="1" bodyfile="private/MaterialElement.h" bodystart="32" bodyend="52"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1XMLElement_1a2a182ac17f5e644b113a67e02c3595e5" prot="public" virt="non-virtual"><scope>iDynTree::MaterialElement</scope><name>attributeCallback</name></member>
       <member refid="classiDynTree_1_1XMLElement_1adf74d829fbe4d3d112c0ef2eba8bd3ea" prot="public" virt="non-virtual"><scope>iDynTree::MaterialElement</scope><name>attributes</name></member>
@@ -139,8 +143,9 @@
       <member refid="classiDynTree_1_1XMLElement_1a327997dec2ced313aad008c376205f36" prot="public" virt="virtual"><scope>iDynTree::MaterialElement</scope><name>exitElementScope</name></member>
       <member refid="classiDynTree_1_1XMLElement_1aa6f49fb7b1b204e1a84cbdc51faeaa62" prot="public" virt="non-virtual"><scope>iDynTree::MaterialElement</scope><name>exitScopeCallback</name></member>
       <member refid="classiDynTree_1_1XMLElement_1abebc95353394912e187ad70e6078fcdc" prot="public" virt="non-virtual"><scope>iDynTree::MaterialElement</scope><name>getParsedTextContent</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a2bccce24401b1812a6f485df6098c61f" prot="protected" virt="non-virtual"><scope>iDynTree::MaterialElement</scope><name>getParserState</name></member>
       <member refid="classiDynTree_1_1MaterialElement_1a4bb7e925e77ef5417292cba159e99d69" prot="private" virt="non-virtual"><scope>iDynTree::MaterialElement</scope><name>m_info</name></member>
-      <member refid="classiDynTree_1_1MaterialElement_1a3977b40f5c35c3fac5daa366535a9655" prot="public" virt="non-virtual"><scope>iDynTree::MaterialElement</scope><name>MaterialElement</name></member>
+      <member refid="classiDynTree_1_1MaterialElement_1a222021bbea609c6d2afbb40251306f05" prot="public" virt="non-virtual"><scope>iDynTree::MaterialElement</scope><name>MaterialElement</name></member>
       <member refid="classiDynTree_1_1MaterialElement_1a9c25cd1ba1daed8be2f1d3a5465b24bd" prot="public" virt="non-virtual"><scope>iDynTree::MaterialElement</scope><name>materialInfo</name></member>
       <member refid="classiDynTree_1_1XMLElement_1a7129fb1e69a5bc819872e65d3965296d" prot="public" virt="non-virtual"><scope>iDynTree::MaterialElement</scope><name>name</name></member>
       <member refid="classiDynTree_1_1XMLElement_1aa44416f43c71e081f6637a91eb733e8d" prot="public" virt="virtual"><scope>iDynTree::MaterialElement</scope><name>parsedCharacters</name></member>
@@ -148,9 +153,9 @@
       <member refid="classiDynTree_1_1MaterialElement_1a562850e48a98db643e05148e4cf21248" prot="public" virt="virtual"><scope>iDynTree::MaterialElement</scope><name>setAttributes</name></member>
       <member refid="classiDynTree_1_1XMLElement_1a69171cc4b5c552b97f44375029356a2e" prot="public" virt="non-virtual"><scope>iDynTree::MaterialElement</scope><name>setChildHasBeenParsedCallback</name></member>
       <member refid="classiDynTree_1_1XMLElement_1a16759fb450635662dced0eb2ace0228b" prot="public" virt="non-virtual"><scope>iDynTree::MaterialElement</scope><name>setExitScopeCallback</name></member>
-      <member refid="classiDynTree_1_1XMLElement_1a885cb939d74e8ce27ce4c0708c04267e" prot="public" virt="non-virtual"><scope>iDynTree::MaterialElement</scope><name>XMLElement</name></member>
-      <member refid="classiDynTree_1_1XMLElement_1a7ad288fac24328b2bb19908500fec39a" prot="public" virt="non-virtual"><scope>iDynTree::MaterialElement</scope><name>XMLElement</name></member>
-      <member refid="classiDynTree_1_1XMLElement_1a42ee14ee8b2ec8a9e9e31472e1b17556" prot="public" virt="non-virtual"><scope>iDynTree::MaterialElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a33b172d683ef0118cd0421cc6a84aa22" prot="public" virt="non-virtual"><scope>iDynTree::MaterialElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1abf02729e927560aec4a97004cb50388e" prot="public" virt="non-virtual"><scope>iDynTree::MaterialElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a119a37b509545e9a265d4cc9913613eb" prot="public" virt="non-virtual"><scope>iDynTree::MaterialElement</scope><name>XMLElement</name></member>
       <member refid="classiDynTree_1_1XMLElement_1aa0220e560dfd45a38797cb5209653ad4" prot="public" virt="virtual"><scope>iDynTree::MaterialElement</scope><name>~XMLElement</name></member>
     </listofallmembers>
   </compounddef>

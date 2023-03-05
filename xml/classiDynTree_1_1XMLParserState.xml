@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1XMLParserState" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::XMLParserState</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1XMLParserState_1a4bcca093eff4fcb242f759ad8720ccff" prot="private" static="no" mutable="no">
+        <type>friend</type>
+        <definition>friend iDynTree::XMLParserState::XMLParser</definition>
+        <argsstring></argsstring>
+        <name>XMLParser</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLParser.h" line="227" column="12" bodyfile="iDynTree/XMLParser.h" bodystart="227" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1XMLParserState_1a7f18df5941f3c33b68f8f7be75bc5b59" prot="private" static="no" mutable="yes">
+        <type>std::mutex</type>
+        <definition>std::mutex iDynTree::XMLParserState::m_mutex</definition>
+        <argsstring></argsstring>
+        <name>m_mutex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLParser.h" line="231" column="24" bodyfile="iDynTree/XMLParser.h" bodystart="231" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1XMLParserState_1a10e7df05986c7cdb58760cae07df9ded" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool iDynTree::XMLParserState::m_parsing_error</definition>
+        <argsstring></argsstring>
+        <name>m_parsing_error</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLParser.h" line="232" column="10" bodyfile="iDynTree/XMLParser.h" bodystart="232" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1XMLParserState_1a3290aa195b316a1db75c0ff37dc70f59" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::XMLParserState::setParsingError</definition>
+        <argsstring>()</argsstring>
+        <name>setParsingError</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLParser.h" line="224" column="10"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classiDynTree_1_1XMLParserState_1afa84b5c79c20e1ae04fcb288a8903271" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::XMLParserState::resetState</definition>
+        <argsstring>()</argsstring>
+        <name>resetState</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLParser.h" line="228" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1XMLParserState_1aeef88abbd9af5534e8610efaadbd3e15" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::XMLParserState::getParsingErrorState</definition>
+        <argsstring>()</argsstring>
+        <name>getParsingErrorState</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/XMLParser.h" line="229" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="iDynTree/XMLParser.h" line="222" column="1" bodyfile="iDynTree/XMLParser.h" bodystart="222" bodyend="233"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1XMLParserState_1aeef88abbd9af5534e8610efaadbd3e15" prot="private" virt="non-virtual"><scope>iDynTree::XMLParserState</scope><name>getParsingErrorState</name></member>
+      <member refid="classiDynTree_1_1XMLParserState_1a7f18df5941f3c33b68f8f7be75bc5b59" prot="private" virt="non-virtual"><scope>iDynTree::XMLParserState</scope><name>m_mutex</name></member>
+      <member refid="classiDynTree_1_1XMLParserState_1a10e7df05986c7cdb58760cae07df9ded" prot="private" virt="non-virtual"><scope>iDynTree::XMLParserState</scope><name>m_parsing_error</name></member>
+      <member refid="classiDynTree_1_1XMLParserState_1afa84b5c79c20e1ae04fcb288a8903271" prot="private" virt="non-virtual"><scope>iDynTree::XMLParserState</scope><name>resetState</name></member>
+      <member refid="classiDynTree_1_1XMLParserState_1a3290aa195b316a1db75c0ff37dc70f59" prot="public" virt="non-virtual"><scope>iDynTree::XMLParserState</scope><name>setParsingError</name></member>
+      <member refid="classiDynTree_1_1XMLParserState_1a4bcca093eff4fcb242f759ad8720ccff" prot="private" virt="non-virtual"><scope>iDynTree::XMLParserState</scope><name>XMLParser</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

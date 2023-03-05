@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/SensorElement.h" line="54" column="21" bodyfile="private/SensorElement.h" bodystart="54" bodyend="-1"/>
+        <location file="private/SensorElement.h" line="55" column="21" bodyfile="private/SensorElement.h" bodystart="55" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SensorElement_1a8f7b1dc1ee30b4d255c785c7fabfdcc0" prot="private" static="no" mutable="no">
         <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classiDynTree_1_1SensorHelper" kindref="compound">SensorHelper</ref> &gt; &gt; &amp;</type>
@@ -29,15 +29,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/SensorElement.h" line="55" column="17" bodyfile="private/SensorElement.h" bodystart="55" bodyend="-1"/>
+        <location file="private/SensorElement.h" line="56" column="17" bodyfile="private/SensorElement.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
-      <memberdef kind="function" id="classiDynTree_1_1SensorElement_1ad36cb30cdb1e829f3154655b13afb516" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classiDynTree_1_1SensorElement_1a63b821f787f27bdf0d05cee48f9797c2" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
         <type></type>
         <definition>iDynTree::SensorElement::SensorElement</definition>
-        <argsstring>(std::vector&lt; std::shared_ptr&lt; SensorHelper &gt;&gt; &amp;sensors)</argsstring>
+        <argsstring>(XMLParserState &amp;parserState, std::vector&lt; std::shared_ptr&lt; SensorHelper &gt;&gt; &amp;sensors)</argsstring>
         <name>SensorElement</name>
+        <param>
+          <type><ref refid="classiDynTree_1_1XMLParserState" kindref="compound">XMLParserState</ref> &amp;</type>
+          <declname>parserState</declname>
+        </param>
         <param>
           <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classiDynTree_1_1SensorHelper" kindref="compound">SensorHelper</ref> &gt;&gt; &amp;</type>
           <declname>sensors</declname>
@@ -48,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/SensorElement.h" line="60" column="5"/>
+        <location file="private/SensorElement.h" line="61" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorElement_1aef0cf31cdb9edd9ed82866bb4be8d7e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">XMLElement</ref> &gt;</type>
@@ -79,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/SensorElement.h" line="62" column="21"/>
+        <location file="private/SensorElement.h" line="65" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorElement_1a89602903716a20070be91a2eef07940f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -97,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/SensorElement.h" line="63" column="10"/>
+        <location file="private/SensorElement.h" line="66" column="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -128,7 +132,7 @@
         <link refid="classiDynTree_1_1XMLElement"/>
       </node>
     </collaborationgraph>
-    <location file="private/SensorElement.h" line="38" column="1" bodyfile="private/SensorElement.h" bodystart="38" bodyend="64"/>
+    <location file="private/SensorElement.h" line="39" column="1" bodyfile="private/SensorElement.h" bodystart="39" bodyend="67"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1XMLElement_1a2a182ac17f5e644b113a67e02c3595e5" prot="public" virt="non-virtual"><scope>iDynTree::SensorElement</scope><name>attributeCallback</name></member>
       <member refid="classiDynTree_1_1XMLElement_1adf74d829fbe4d3d112c0ef2eba8bd3ea" prot="public" virt="non-virtual"><scope>iDynTree::SensorElement</scope><name>attributes</name></member>
@@ -139,18 +143,19 @@
       <member refid="classiDynTree_1_1XMLElement_1a327997dec2ced313aad008c376205f36" prot="public" virt="virtual"><scope>iDynTree::SensorElement</scope><name>exitElementScope</name></member>
       <member refid="classiDynTree_1_1XMLElement_1aa6f49fb7b1b204e1a84cbdc51faeaa62" prot="public" virt="non-virtual"><scope>iDynTree::SensorElement</scope><name>exitScopeCallback</name></member>
       <member refid="classiDynTree_1_1XMLElement_1abebc95353394912e187ad70e6078fcdc" prot="public" virt="non-virtual"><scope>iDynTree::SensorElement</scope><name>getParsedTextContent</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a2bccce24401b1812a6f485df6098c61f" prot="protected" virt="non-virtual"><scope>iDynTree::SensorElement</scope><name>getParserState</name></member>
       <member refid="classiDynTree_1_1SensorElement_1a6b26d2397ceaf1a353edc8a6539a9ded" prot="private" virt="non-virtual"><scope>iDynTree::SensorElement</scope><name>m_info</name></member>
       <member refid="classiDynTree_1_1SensorElement_1a8f7b1dc1ee30b4d255c785c7fabfdcc0" prot="private" virt="non-virtual"><scope>iDynTree::SensorElement</scope><name>m_sensors</name></member>
       <member refid="classiDynTree_1_1XMLElement_1a7129fb1e69a5bc819872e65d3965296d" prot="public" virt="non-virtual"><scope>iDynTree::SensorElement</scope><name>name</name></member>
       <member refid="classiDynTree_1_1XMLElement_1aa44416f43c71e081f6637a91eb733e8d" prot="public" virt="virtual"><scope>iDynTree::SensorElement</scope><name>parsedCharacters</name></member>
-      <member refid="classiDynTree_1_1SensorElement_1ad36cb30cdb1e829f3154655b13afb516" prot="public" virt="non-virtual"><scope>iDynTree::SensorElement</scope><name>SensorElement</name></member>
+      <member refid="classiDynTree_1_1SensorElement_1a63b821f787f27bdf0d05cee48f9797c2" prot="public" virt="non-virtual"><scope>iDynTree::SensorElement</scope><name>SensorElement</name></member>
       <member refid="classiDynTree_1_1XMLElement_1ab40851b7629a74107f2183ca36e412e4" prot="public" virt="non-virtual"><scope>iDynTree::SensorElement</scope><name>setAttributeCallback</name></member>
       <member refid="classiDynTree_1_1SensorElement_1a89602903716a20070be91a2eef07940f" prot="public" virt="virtual"><scope>iDynTree::SensorElement</scope><name>setAttributes</name></member>
       <member refid="classiDynTree_1_1XMLElement_1a69171cc4b5c552b97f44375029356a2e" prot="public" virt="non-virtual"><scope>iDynTree::SensorElement</scope><name>setChildHasBeenParsedCallback</name></member>
       <member refid="classiDynTree_1_1XMLElement_1a16759fb450635662dced0eb2ace0228b" prot="public" virt="non-virtual"><scope>iDynTree::SensorElement</scope><name>setExitScopeCallback</name></member>
-      <member refid="classiDynTree_1_1XMLElement_1a885cb939d74e8ce27ce4c0708c04267e" prot="public" virt="non-virtual"><scope>iDynTree::SensorElement</scope><name>XMLElement</name></member>
-      <member refid="classiDynTree_1_1XMLElement_1a7ad288fac24328b2bb19908500fec39a" prot="public" virt="non-virtual"><scope>iDynTree::SensorElement</scope><name>XMLElement</name></member>
-      <member refid="classiDynTree_1_1XMLElement_1a42ee14ee8b2ec8a9e9e31472e1b17556" prot="public" virt="non-virtual"><scope>iDynTree::SensorElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a33b172d683ef0118cd0421cc6a84aa22" prot="public" virt="non-virtual"><scope>iDynTree::SensorElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1abf02729e927560aec4a97004cb50388e" prot="public" virt="non-virtual"><scope>iDynTree::SensorElement</scope><name>XMLElement</name></member>
+      <member refid="classiDynTree_1_1XMLElement_1a119a37b509545e9a265d4cc9913613eb" prot="public" virt="non-virtual"><scope>iDynTree::SensorElement</scope><name>XMLElement</name></member>
       <member refid="classiDynTree_1_1XMLElement_1aa0220e560dfd45a38797cb5209653ad4" prot="public" virt="virtual"><scope>iDynTree::SensorElement</scope><name>~XMLElement</name></member>
     </listofallmembers>
   </compounddef>
