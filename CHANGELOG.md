@@ -8,6 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [8.999.0] - 2023-03-05
+
+### Changed
+The XML parser API has changed. Now an additional `XMLParserState` context object is propagated while parsing.
+To catch logic errors (which are not pure XML errors that are currently caught by the parser itself) the `XMLParserState` contains a `bool` variable. Further logic can be added to the context state.
+
+The following errors are currently check:
+- Duplicate joints in the URDF will cause an error.
+
+
 ## [8.1.0] - 2023-01-16
 
 ### Added
