@@ -20,8 +20,10 @@
 
 namespace iDynTree {
     
-    InertialElement::InertialElement(iDynTree::Link &link)
-    : iDynTree::XMLElement("inertial")
+    InertialElement::InertialElement(
+        XMLParserState& parserState, 
+        iDynTree::Link &link)
+    : iDynTree::XMLElement(parserState, "inertial")
     , m_centerOfMass(iDynTree::Transform::Identity())
     , m_mass(0)
     , m_link(link) {}
@@ -30,10 +32,11 @@ namespace iDynTree {
         // As an alternative for simple elements, instead of creating other classes,
         // I implement the simple functions of the generic element
         if (name == "origin") {
-            return std::make_shared<OriginElement>(m_centerOfMass);
+            return std::make_shared<OriginElement>(getParserState(), m_centerOfMass);
         }
         if (name == "mass") {
-            std::shared_ptr<iDynTree::XMLElement> element = std::make_shared<iDynTree::XMLElement>(name);
+            std::shared_ptr<iDynTree::XMLElement> element = std::make_shared<iDynTree::XMLElement>(
+                getParserState(), name);
             element->setAttributeCallback([this](const std::unordered_map<std::string, std::shared_ptr<XMLAttribute>>& attributes) {
                 m_mass = 0;
                 auto mass = attributes.find("value");
@@ -46,7 +49,8 @@ namespace iDynTree {
             return element;
         }
         if (name == "inertia") {
-            std::shared_ptr<iDynTree::XMLElement> element = std::make_shared<iDynTree::XMLElement>(name);
+            std::shared_ptr<iDynTree::XMLElement> element = std::make_shared<iDynTree::XMLElement>(
+                getParserState(), name);
             element->setAttributeCallback([this](const std::unordered_map<std::string, std::shared_ptr<XMLAttribute>>& attributes) {
                 auto ixx = attributes.find("ixx");
                 auto ixy = attributes.find("ixy");
@@ -90,7 +94,7 @@ namespace iDynTree {
             });
             return element;
         }
-        return std::make_shared<iDynTree::XMLElement>(name);
+        return std::make_shared<iDynTree::XMLElement>(getParserState(), name);
     }
     
     void InertialElement::exitElementScope() {

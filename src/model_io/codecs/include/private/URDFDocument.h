@@ -30,6 +30,7 @@
 
 namespace iDynTree {
     class URDFDocument;
+    class XMLParserState;
 }
 
 
@@ -52,7 +53,7 @@ class iDynTree::URDFDocument: public iDynTree::XMLDocument {
     } m_buffers;
 
 public:
-    URDFDocument();
+    explicit URDFDocument(XMLParserState& parserState);
     virtual ~URDFDocument();
 
     iDynTree::ModelParserOptions& options();

@@ -20,14 +20,17 @@
 
 namespace iDynTree{
 
-    GeometryElement::GeometryElement(std::shared_ptr<SolidShape>& shape, const std::vector<std::string>& packageDirs)
-    : iDynTree::XMLElement("geometry")
+    GeometryElement::GeometryElement(
+        XMLParserState& parserState, 
+        std::shared_ptr<SolidShape>& shape, const std::vector<std::string>& packageDirs)
+    : iDynTree::XMLElement(parserState, "geometry")
     , m_shape(shape)
     , packageDirs(packageDirs) {}
 
     std::shared_ptr<iDynTree::XMLElement> GeometryElement::childElementForName(const std::string& name)
     {
-        std::shared_ptr<XMLElement> element = std::make_shared<XMLElement>(name);
+        std::shared_ptr<XMLElement> element = std::make_shared<XMLElement>(
+            getParserState(), name);
         if (name == "box") {
             element->setAttributeCallback([this](const std::unordered_map<std::string, std::shared_ptr<iDynTree::XMLAttribute>> &attributes){
 

@@ -29,6 +29,7 @@ namespace iDynTree {
     class SensorHelper;
     
     class Model;
+    class XMLParserState;
 }
 
 
@@ -44,13 +45,15 @@ private:
     std::unordered_map<std::string, std::vector<VisualElement::VisualInfo>> &m_collisions;
 
 public:
-    RobotElement(iDynTree::Model& model,
-                 std::vector<std::shared_ptr<SensorHelper>>& sensorHelpers,
-                 std::unordered_map<std::string, JointElement::JointInfo>& joints,
-                 std::unordered_map<std::string, JointElement::JointInfo>& fixedJoints,
-                 std::unordered_map<std::string, MaterialElement::MaterialInfo>& materials,
-                 std::unordered_map<std::string, std::vector<VisualElement::VisualInfo>> &visuals,
-                 std::unordered_map<std::string, std::vector<VisualElement::VisualInfo>> &collisions);
+    explicit RobotElement(
+        XMLParserState& parserState, 
+        iDynTree::Model& model,
+        std::vector<std::shared_ptr<SensorHelper>>& sensorHelpers,
+        std::unordered_map<std::string, JointElement::JointInfo>& joints,
+        std::unordered_map<std::string, JointElement::JointInfo>& fixedJoints,
+        std::unordered_map<std::string, MaterialElement::MaterialInfo>& materials,
+        std::unordered_map<std::string, std::vector<VisualElement::VisualInfo>> &visuals,
+        std::unordered_map<std::string, std::vector<VisualElement::VisualInfo>> &collisions);
     
     virtual ~RobotElement();
     std::shared_ptr<iDynTree::XMLElement> childElementForName(const std::string& name) override;

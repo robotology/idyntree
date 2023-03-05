@@ -26,8 +26,11 @@ namespace iDynTree {
     {
     }
 
-    VisualElement::VisualElement(const std::string& name, const std::vector<std::string>& packageDirs)
-    : iDynTree::XMLElement(name)
+    VisualElement::VisualElement(
+        XMLParserState& parserState, 
+        const std::string& name, 
+        const std::vector<std::string>& packageDirs)
+    : iDynTree::XMLElement(parserState, name)
     , m_info(packageDirs)
     {
     }
@@ -52,15 +55,16 @@ namespace iDynTree {
 
     std::shared_ptr<iDynTree::XMLElement> VisualElement::childElementForName(const std::string& name) {
         if (name == "origin") {
-            return std::make_shared<OriginElement>(m_info.m_origin);
+            return std::make_shared<OriginElement>(getParserState(), m_info.m_origin);
         } else if (name == "geometry") {
-            return std::make_shared<GeometryElement>(m_info.m_solidShape, m_info.m_packageDirs);
+            return std::make_shared<GeometryElement>(
+                getParserState(), m_info.m_solidShape, m_info.m_packageDirs);
         } else if (name == "material") {
-            auto ptr = std::make_shared<MaterialElement>(nullptr);
+            auto ptr = std::make_shared<MaterialElement>(getParserState(), nullptr);
             m_info.m_material = ptr->materialInfo();
             return ptr;
         }
-        return std::make_shared<XMLElement>(name);
+        return std::make_shared<XMLElement>(getParserState(), name);
     }
 
 }

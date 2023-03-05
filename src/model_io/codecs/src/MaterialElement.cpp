@@ -20,8 +20,10 @@
 
 namespace iDynTree {
 
-    MaterialElement::MaterialElement(std::shared_ptr<MaterialInfo> materialInfo)
-    : iDynTree::XMLElement("material")
+    MaterialElement::MaterialElement(
+        XMLParserState& parserState, 
+        std::shared_ptr<MaterialInfo> materialInfo)
+    : iDynTree::XMLElement(parserState, "material")
     , m_info(materialInfo)
     {
         if (!m_info) {
@@ -33,7 +35,8 @@ namespace iDynTree {
 
     std::shared_ptr<XMLElement> MaterialElement::childElementForName(const std::string& name)
     {
-        std::shared_ptr<XMLElement> element = std::make_shared<XMLElement>(name);
+        std::shared_ptr<XMLElement> element = std::make_shared<XMLElement>(
+            getParserState(), name);
         if (name == "color") {
             element->setAttributeCallback([this](const std::unordered_map<std::string, std::shared_ptr<iDynTree::XMLAttribute>>& attributes){
                 auto found = attributes.find("rgba");

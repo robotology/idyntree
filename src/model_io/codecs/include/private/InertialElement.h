@@ -20,6 +20,7 @@
 
 namespace iDynTree {
     class InertialElement;
+    class XMLParserState;
 }
 
 class iDynTree::InertialElement: public iDynTree::XMLElement {
@@ -29,7 +30,7 @@ class iDynTree::InertialElement: public iDynTree::XMLElement {
     iDynTree::Link &m_link;
     
 public:
-    InertialElement(iDynTree::Link &link);
+    explicit InertialElement(XMLParserState& parserState, iDynTree::Link &link);
     
     std::shared_ptr<iDynTree::XMLElement> childElementForName(const std::string& name) override;
     

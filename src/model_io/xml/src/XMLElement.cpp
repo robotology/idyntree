@@ -37,23 +37,26 @@ namespace iDynTree {
         std::string m_name;
         std::vector<std::shared_ptr<XMLElement>> m_children;
         std::unordered_map<std::string, std::shared_ptr<XMLAttribute>> m_attributes;
+
+        XMLParserState& m_parserState;
+    
+        explicit XMLElementPimpl(XMLParserState& parserState,
+                                 const std::string& name,
+                                 const std::unordered_map<std::string, std::shared_ptr<XMLAttribute>>& attributes)
+                                 : m_name(name), m_attributes(attributes), m_parserState(parserState) {}
     };
     
     //MARK: - XMLElement definition
     
-    XMLElement::XMLElement()
-    : XMLElement("") {}
+    XMLElement::XMLElement(XMLParserState& parserState)
+    : XMLElement(parserState, "") {}
     
-    XMLElement::XMLElement(const std::string& name)
-    : XMLElement(name, std::unordered_map<std::string, std::shared_ptr<XMLAttribute>>()) {}
+    XMLElement::XMLElement(XMLParserState& parserState, const std::string& name)
+    : XMLElement(parserState, name, std::unordered_map<std::string, std::shared_ptr<XMLAttribute>>()) {}
     
-    XMLElement::XMLElement(const std::string& name,
+    XMLElement::XMLElement(XMLParserState& parserState, const std::string& name,
                            const std::unordered_map<std::string, std::shared_ptr<XMLAttribute>>& attributes)
-    : m_pimpl(new XMLElementPimpl())
-    {
-        m_pimpl->m_name = name;
-        m_pimpl->m_attributes = attributes;
-    }
+    : m_pimpl(new XMLElementPimpl(parserState, name, attributes)) {}
     
     XMLElement::~XMLElement() {}
     
@@ -95,7 +98,7 @@ namespace iDynTree {
     
     std::shared_ptr<XMLElement> XMLElement::childElementForName(const std::string& name)
     {
-        return std::make_shared<XMLElement>(name);
+        return std::make_shared<XMLElement>(m_pimpl->m_parserState, name);
     }
     
     void XMLElement::exitElementScope()
@@ -149,4 +152,6 @@ namespace iDynTree {
         str << "</" << m_pimpl->m_name << ">" << std::endl;
         return str.str();
     }
+
+    XMLParserState& XMLElement::getParserState() { return m_pimpl->m_parserState; }
 }
