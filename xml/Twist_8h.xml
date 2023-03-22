@@ -3,11 +3,11 @@
   <compounddef id="Twist_8h" kind="file" language="C++">
     <compoundname>Twist.h</compoundname>
     <includes refid="SpatialMotionVector_8h" local="no">iDynTree/Core/SpatialMotionVector.h</includes>
-    <includedby refid="InverseKinematicsData_8h" local="no">private/InverseKinematicsData.h</includedby>
-    <includedby refid="InverseKinematicsNLP_8h" local="no">private/InverseKinematicsNLP.h</includedby>
+    <includedby refid="SpatialInertia_8h" local="no">iDynTree/Core/SpatialInertia.h</includedby>
     <includedby refid="FreeFloatingState_8h" local="no">iDynTree/Model/FreeFloatingState.h</includedby>
     <includedby refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includedby>
-    <includedby refid="SpatialInertia_8h" local="no">iDynTree/Core/SpatialInertia.h</includedby>
+    <includedby refid="InverseKinematicsData_8h" local="no">private/InverseKinematicsData.h</includedby>
+    <includedby refid="InverseKinematicsNLP_8h" local="no">private/InverseKinematicsNLP.h</includedby>
     <innerclass refid="classiDynTree_1_1Twist" prot="public">iDynTree::Twist</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>

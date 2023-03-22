@@ -7,6 +7,7 @@
     <includes refid="Axis_8h" local="no">iDynTree/Core/Axis.h</includes>
     <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
     <includes refid="MovableJointImpl_8h" local="no">iDynTree/Model/MovableJointImpl.h</includes>
+    <includedby refid="ModelTestUtils_8h" local="no">iDynTree/Model/ModelTestUtils.h</includedby>
     <innerclass refid="classiDynTree_1_1PrismaticJoint" prot="public">iDynTree::PrismaticJoint</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>

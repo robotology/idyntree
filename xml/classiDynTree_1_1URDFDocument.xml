@@ -43,9 +43,9 @@
         </inbodydescription>
         <location file="private/URDFDocument.h" line="42" column="34" bodyfile="private/URDFDocument.h" bodystart="42" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classiDynTree_1_1URDFDocument_1a3a5265471f7ef8f2af0013a04eac2acf" prot="private" static="no" mutable="no">
-        <type>struct iDynTree::URDFDocument::@0</type>
-        <definition>struct iDynTree::URDFDocument::@0 iDynTree::URDFDocument::m_buffers</definition>
+      <memberdef kind="variable" id="classiDynTree_1_1URDFDocument_1a14013c1dc4ee995073743b530ccbe537" prot="private" static="no" mutable="no">
+        <type>struct iDynTree::URDFDocument::@2</type>
+        <definition>struct iDynTree::URDFDocument::@2 iDynTree::URDFDocument::m_buffers</definition>
         <argsstring></argsstring>
         <name>m_buffers</name>
         <briefdescription>
@@ -539,7 +539,7 @@
       <member refid="classiDynTree_1_1URDFDocument_1af869c50633a0784f6452ed0e6a5ed176" prot="public" virt="non-virtual"><scope>iDynTree::URDFDocument</scope><name>fixedJoints</name></member>
       <member refid="classiDynTree_1_1XMLDocument_1a50a4ed8a7c02beff7438e100ad0e70dd" prot="protected" virt="non-virtual"><scope>iDynTree::URDFDocument</scope><name>getParserState</name></member>
       <member refid="classiDynTree_1_1URDFDocument_1a94c9fb5372fff427e6eefa501fa9d2a8" prot="public" virt="non-virtual"><scope>iDynTree::URDFDocument</scope><name>joints</name></member>
-      <member refid="classiDynTree_1_1URDFDocument_1a3a5265471f7ef8f2af0013a04eac2acf" prot="private" virt="non-virtual"><scope>iDynTree::URDFDocument</scope><name>m_buffers</name></member>
+      <member refid="classiDynTree_1_1URDFDocument_1a14013c1dc4ee995073743b530ccbe537" prot="private" virt="non-virtual"><scope>iDynTree::URDFDocument</scope><name>m_buffers</name></member>
       <member refid="classiDynTree_1_1URDFDocument_1a02d7c7d35dce069c5665f177896f6a60" prot="private" virt="non-virtual"><scope>iDynTree::URDFDocument</scope><name>m_model</name></member>
       <member refid="classiDynTree_1_1URDFDocument_1a549f3e8d21c8ac65721bc9b49c1b1f51" prot="private" virt="non-virtual"><scope>iDynTree::URDFDocument</scope><name>m_options</name></member>
       <member refid="classiDynTree_1_1URDFDocument_1a77a9951974208787eb904b6ec546247f" prot="private" virt="non-virtual"><scope>iDynTree::URDFDocument</scope><name>m_sensors</name></member>
