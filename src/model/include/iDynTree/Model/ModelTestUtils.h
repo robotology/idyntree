@@ -64,7 +64,10 @@ inline void addRandomLinkToModel(Model & model, std::string parentLink, std::str
 
     int jointType = rand() % nrOfJointTypes;
 
-    if( noFixed ) jointType = 1;
+    if (noFixed && jointType == 0) 
+    {
+        jointType = (rand() % (nrOfJointTypes - 1)) + 1;
+    }
 
     if( jointType == 0 )
     {
