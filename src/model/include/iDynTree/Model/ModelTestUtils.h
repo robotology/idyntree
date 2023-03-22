@@ -15,6 +15,7 @@
 #include <iDynTree/Model/Model.h>
 #include <iDynTree/Model/FixedJoint.h>
 #include <iDynTree/Model/RevoluteJoint.h>
+#include <iDynTree/Model/PrismaticJoint.h>
 #include <iDynTree/Model/FreeFloatingState.h>
 #include <iDynTree/Model/LinkState.h>
 
@@ -59,7 +60,7 @@ inline void addRandomLinkToModel(Model & model, std::string parentLink, std::str
     // Now add joint
     LinkIndex parentLinkIndex = model.getLinkIndex(parentLink);
 
-    int nrOfJointTypes = 2;
+    int nrOfJointTypes = 3;
 
     int jointType = rand() % nrOfJointTypes;
 
@@ -77,6 +78,14 @@ inline void addRandomLinkToModel(Model & model, std::string parentLink, std::str
         revJoint.setRestTransform(getRandomTransform());
         revJoint.setAxis(getRandomAxis(),newLinkIndex);
         model.addJoint(newLinkName+"joint",&revJoint);
+    }
+    else if( jointType == 2 )
+    {
+        PrismaticJoint prismJoint;
+        prismJoint.setAttachedLinks(parentLinkIndex,newLinkIndex);
+        prismJoint.setRestTransform(getRandomTransform());
+        prismJoint.setAxis(getRandomAxis(),newLinkIndex);
+        model.addJoint(newLinkName+"joint",&prismJoint);
     }
     else
     {
