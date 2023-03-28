@@ -10,11 +10,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [8.999.0] - 2023-03-05
 
+### Fixed
+- Fix export of `iDynTree::PrismaticJoint` in `iDynTree::getRandomModel` (https://github.com/robotology/idyntree/pull/1057).
+
 ### Changed
 
 - Use iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw as default parametrization in iDynTree::InverseKinematics (https://github.com/robotology/idyntree/pull/1058).
 
-#### XML parser API change
+#### URDF XML parser change 
 
 The XML parser API has changed. Now an additional `XMLParserState` context object is propagated while parsing.
 To catch logic errors (which are not pure XML errors that are currently caught by the parser itself) the `XMLParserState` contains a `bool` variable. Further logic can be added to the context state.
