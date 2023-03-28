@@ -35,8 +35,20 @@ namespace iDynTree {
      * @brief type of parametrization for the rotation (SO3) element
      */
     enum InverseKinematicsRotationParametrization {
-        InverseKinematicsRotationParametrizationQuaternion, /*!< Quaternion parametrization */
-        InverseKinematicsRotationParametrizationRollPitchYaw, /*!< Roll Pitch Yaw parametrization */
+	/**
+	 * Quaternion parametrization.
+	 * In theory this parametrization does not suffer from discontinuity like the,
+	 * InverseKinematicsRotationParametrizationRollPitchYaw one, but the existing
+	 * implementation does not work as expected, and so its use is discouraged.
+	 * See https://github.com/robotology/idyntree/issues/1059 for more details.
+	 */
+        InverseKinematicsRotationParametrizationQuaternion, 
+        /**
+	 * Roll Pitch Yaw parametrization. 
+	 * This parametrization is the one used by default, but it may not work 
+	 * properly near the points in which the parametrization has discontinuities.
+	 */
+        InverseKinematicsRotationParametrizationRollPitchYaw,
     };
 
     inline int sizeOfRotationParametrization(enum InverseKinematicsRotationParametrization rotationParametrization)

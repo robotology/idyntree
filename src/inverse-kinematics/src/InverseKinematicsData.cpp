@@ -30,7 +30,7 @@ namespace kinematics {
     InverseKinematicsData::InverseKinematicsData()
     : m_defaultTargetResolutionMode(iDynTree::InverseKinematicsTreatTargetAsConstraintNone)
     , m_dofs(0)
-    , m_rotationParametrization(iDynTree::InverseKinematicsRotationParametrizationQuaternion)
+    , m_rotationParametrization(iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw)
     , m_areBaseInitialConditionsSet(false)
     , m_areJointsInitialConditionsSet(InverseKinematicsInitialConditionNotSet)
     , m_problemInitialized(false)
