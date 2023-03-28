@@ -187,7 +187,7 @@ namespace iDynTree {
         return IK_PIMPL(m_pimpl)->rotationParametrization();
 #else
         missingIpoptErrorReport();
-        return InverseKinematicsRotationParametrizationQuaternion;
+        return InverseKinematicsRotationParametrizationRollPitchYaw;
 #endif
     }
 
