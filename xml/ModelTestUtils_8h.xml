@@ -37,10 +37,10 @@
         </inbodydescription>
         <location file="iDynTree/Model/ModelTestUtils.h" line="30" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="30" bodyend="50"/>
       </memberdef>
-      <memberdef kind="function" id="ModelTestUtils_8h_1af2050e6090e689f7dba9bcd2905c7104" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="ModelTestUtils_8h_1aea1ae47d4bec72e35885ee56cf39578b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
         <definition>void iDynTree::addRandomLinkToModel</definition>
-        <argsstring>(Model &amp;model, std::string parentLink, std::string newLinkName, bool noFixed=false)</argsstring>
+        <argsstring>(Model &amp;model, std::string parentLink, std::string newLinkName, bool onlyRevoluteJoints=false)</argsstring>
         <name>addRandomLinkToModel</name>
         <param>
           <type>Model &amp;</type>
@@ -56,7 +56,7 @@
         </param>
         <param>
           <type>bool</type>
-          <declname>noFixed</declname>
+          <declname>onlyRevoluteJoints</declname>
           <defval>false</defval>
         </param>
         <briefdescription>
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTestUtils.h" line="55" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="55" bodyend="94"/>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="55" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="55" bodyend="97"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1abbc9efd0eed3caf7826a0f67056972f8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -92,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTestUtils.h" line="99" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="99" bodyend="102"/>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="102" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="102" bodyend="105"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1a6480b737c82af8b72b95857960254bad" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>LinkIndex</type>
@@ -109,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTestUtils.h" line="104" column="18" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="104" bodyend="109"/>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="107" column="18" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="107" bodyend="112"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1a75223c9a86126d90e70857cc48ff302e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string</type>
@@ -126,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTestUtils.h" line="111" column="20" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="111" bodyend="116"/>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="114" column="20" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="114" bodyend="119"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1a2f8e6bff5b6a359c5bb88792dde90ac3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string</type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTestUtils.h" line="118" column="20" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="118" bodyend="125"/>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="121" column="20" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="121" bodyend="128"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1ab524c8553e271868a40123e2e7d9ae7d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Model</type>
@@ -165,12 +165,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTestUtils.h" line="127" column="14" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="127" bodyend="148"/>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="130" column="14" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="130" bodyend="151"/>
       </memberdef>
-      <memberdef kind="function" id="ModelTestUtils_8h_1a89ca09ae32e8673219c9beda06b11272" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="ModelTestUtils_8h_1aced0d1a54a20c982a5d1ec11f40d8b2f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Model</type>
         <definition>Model iDynTree::getRandomChain</definition>
-        <argsstring>(unsigned int nrOfJoints, size_t nrOfAdditionalFrames=10, bool noFixed=false)</argsstring>
+        <argsstring>(unsigned int nrOfJoints, size_t nrOfAdditionalFrames=10, bool onlyRevoluteJoints=false)</argsstring>
         <name>getRandomChain</name>
         <param>
           <type>unsigned int</type>
@@ -183,7 +183,7 @@
         </param>
         <param>
           <type>bool</type>
-          <declname>noFixed</declname>
+          <declname>onlyRevoluteJoints</declname>
           <defval>false</defval>
         </param>
         <briefdescription>
@@ -192,7 +192,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTestUtils.h" line="150" column="14" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="150" bodyend="172"/>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="153" column="14" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="153" bodyend="175"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1aff4391c79fb7cd4b59feed20b012d1d5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTestUtils.h" line="178" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="178" bodyend="203"/>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="181" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="181" bodyend="206"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1a72bed46cd07c0617f3f59ffbbb0823a0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -245,7 +245,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTestUtils.h" line="209" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="209" bodyend="231"/>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="212" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="212" bodyend="234"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
