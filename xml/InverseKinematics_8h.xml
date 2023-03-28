@@ -33,17 +33,19 @@
         <enumvalue id="InverseKinematics_8h_1a04da5add9479687cf4c7eb873e717c6ca6bbd58481084418979b449c46aff99a8" prot="public">
           <name>InverseKinematicsRotationParametrizationQuaternion</name>
           <briefdescription>
+<para>Quaternion parametrization. </para>
           </briefdescription>
           <detaileddescription>
-<para>Quaternion parametrization </para>
+<para>In theory this parametrization does not suffer from discontinuity like the, InverseKinematicsRotationParametrizationRollPitchYaw one, but the existing implementation does not work as expected, and so its use is discouraged. See <ulink url="https://github.com/robotology/idyntree/issues/1059">https://github.com/robotology/idyntree/issues/1059</ulink> for more details. </para>
           </detaileddescription>
         </enumvalue>
         <enumvalue id="InverseKinematics_8h_1a04da5add9479687cf4c7eb873e717c6caad8ec2efa81330efbf416e7550113ca5" prot="public">
           <name>InverseKinematicsRotationParametrizationRollPitchYaw</name>
           <briefdescription>
+<para>Roll Pitch Yaw parametrization. </para>
           </briefdescription>
           <detaileddescription>
-<para>Roll Pitch Yaw parametrization </para>
+<para>This parametrization is the one used by default, but it may not work properly near the points in which the parametrization has discontinuities. </para>
           </detaileddescription>
         </enumvalue>
         <briefdescription>
@@ -53,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="37" column="5" bodyfile="iDynTree/InverseKinematics.h" bodystart="37" bodyend="40"/>
+        <location file="iDynTree/InverseKinematics.h" line="37" column="5" bodyfile="iDynTree/InverseKinematics.h" bodystart="37" bodyend="52"/>
       </memberdef>
       <memberdef kind="enum" id="InverseKinematics_8h_1a5cb905194c9ee61c0a23b32d603b2df2" prot="public" static="no" strong="no">
         <type></type>
@@ -98,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="61" column="5" bodyfile="iDynTree/InverseKinematics.h" bodystart="61" bodyend="66"/>
+        <location file="iDynTree/InverseKinematics.h" line="73" column="5" bodyfile="iDynTree/InverseKinematics.h" bodystart="73" bodyend="78"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -117,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="42" column="16" bodyfile="iDynTree/InverseKinematics.h" bodystart="42" bodyend="52"/>
+        <location file="iDynTree/InverseKinematics.h" line="54" column="16" bodyfile="iDynTree/InverseKinematics.h" bodystart="54" bodyend="64"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

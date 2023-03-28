@@ -130,13 +130,15 @@
                 <tr>
                   <td><a href="#a04da5add9479687cf4c7eb873e717c6ca6bbd58481084418979b449c46aff99a8" class="m-doc-self" id="a04da5add9479687cf4c7eb873e717c6ca6bbd58481084418979b449c46aff99a8">InverseKinematicsRotationParametrizationQuaternion</a></td>
                   <td>
-<p>Quaternion parametrization</p>
+                  <p>Quaternion parametrization.</p>
+<p>In theory this parametrization does not suffer from discontinuity like the, InverseKinematicsRotationParametrizationRollPitchYaw one, but the existing implementation does not work as expected, and so its use is discouraged. See <a href="https://github.com/robotology/idyntree/issues/1059">https:/<wbr />/<wbr />github.com/<wbr />robotology/<wbr />idyntree/<wbr />issues/<wbr />1059</a> for more details.</p>
                   </td>
                 </tr>
                 <tr>
                   <td><a href="#a04da5add9479687cf4c7eb873e717c6caad8ec2efa81330efbf416e7550113ca5" class="m-doc-self" id="a04da5add9479687cf4c7eb873e717c6caad8ec2efa81330efbf416e7550113ca5">InverseKinematicsRotationParametrizationRollPitchYaw</a></td>
                   <td>
-<p>Roll Pitch Yaw parametrization</p>
+                  <p>Roll Pitch Yaw parametrization.</p>
+<p>This parametrization is the one used by default, but it may not work properly near the points in which the parametrization has discontinuities.</p>
                   </td>
                 </tr>
               </tbody>
