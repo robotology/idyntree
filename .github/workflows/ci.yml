@@ -98,11 +98,7 @@ jobs:
         # Workaround for https://github.com/conda-incubator/setup-miniconda/issues/186
         conda config --remove channels defaults
         # Compilation related dependencies
-        mamba install cmake compilers make ninja pkg-config
-        # Actual dependencies
-        mamba install eigen libxml2 assimp ipopt irrlicht swig pybind11 python numpy
-        # robotology dependencies
-        mamba install yarp icub-main osqp-eigen
+        mamba install cmake compilers make ninja pkg-config eigen libxml2 assimp ipopt irrlicht swig pybind11 python numpy yarp icub-main osqp-eigen
 
     # Additional dependencies useful only on Linux
     - name: Dependencies [Conda/Linux]
@@ -171,7 +167,7 @@ jobs:
       fail-fast: false
       matrix:
         build_type: [Release]
-        os: [ubuntu-18.04, ubuntu-20.04, macOS-latest]
+        os: [ubuntu-20.04, macOS-latest]
 
     steps:
     - uses: actions/checkout@master
