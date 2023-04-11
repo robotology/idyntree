@@ -19,11 +19,11 @@ jobs:
   # sdist can be built from any os and against any python version
   build_sdist:
     name: Build source distribution
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         python-version:
-          - 3.8
+          - 3.10
 
     steps:
 
@@ -69,9 +69,9 @@ jobs:
       fail-fast: false
       matrix:
         python-version:
-          - 3.8
+          - 3.10
         os:
-          - ubuntu-20.04
+          - ubuntu-22.04
           #- macos-latest
           #- windows-latest
 
@@ -92,7 +92,7 @@ jobs:
         run: python -m cibuildwheel --output-dir wheelhouse
         env:
           CIBW_BUILD_VERBOSITY: 1
-          CIBW_BUILD: cp37-*manylinux*_x86_64 cp38-*manylinux*_x86_64 cp39-*manylinux*_x86_64
+          CIBW_BUILD: cp37-*manylinux*_x86_64 cp38-*manylinux*_x86_64 cp39-*manylinux*_x86_64 cp310-*manylinux*_x86_64
           CIBW_MANYLINUX_X86_64_IMAGE: manylinux_2_24
           CIBW_ENVIRONMENT_LINUX: AUDITWHEEL_PLAT=manylinux_2_24_x86_64
           CIBW_BEFORE_BUILD_LINUX: |
