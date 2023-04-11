@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Use iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw as default parametrization in iDynTree::InverseKinematics (https://github.com/robotology/idyntree/pull/1058).
 
+### Added
+
+- Build and deploy PyPI wheels for Python 3.10 (https://github.com/robotology/idyntree/pull/1061)
+
 #### URDF XML parser change 
 
 The XML parser API has changed. Now an additional `XMLParserState` context object is propagated while parsing.
