@@ -262,7 +262,7 @@
         </briefdescription>
         <detaileddescription>
 <para>Adds a (constancy) constraint for the specified frame</para>
-<para>The constraint is <formula id="318">$ {}^w X_{frame}(q) = {}^w X_{frame}(q^0) $</formula> where the robot configuration <formula id="286">$q$</formula> is the one specified with setRobotConfiguration <simplesect kind="note"><para>you should specify first the robot configuration. Otherwise call the versions with explicit constraint value </para>
+<para>The constraint is <formula id="318">$ {}^w X_{frame}(q) = {}^w X_{frame}(q^0) $</formula> where the robot configuration <formula id="310">$q$</formula> is the one specified with setRobotConfiguration <simplesect kind="note"><para>you should specify first the robot configuration. Otherwise call the versions with explicit constraint value </para>
 </simplesect>
 <parameterlist kind="param"><parameteritem>
 <parameternamelist>
