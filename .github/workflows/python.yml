@@ -19,19 +19,20 @@ jobs:
   # sdist can be built from any os and against any python version
   build_sdist:
     name: Build source distribution
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         python-version:
-          - 3.8
+          - "3.10"
 
     steps:
 
-      - uses: actions/checkout@master
-      - run: git fetch --prune --unshallow
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Install Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -57,7 +58,7 @@ jobs:
       - name: Test import
         run: python -c 'import idyntree.bindings'
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: dist
           path: dist/*.tar.gz
@@ -69,19 +70,20 @@ jobs:
       fail-fast: false
       matrix:
         python-version:
-          - 3.8
+          - "3.10"
         os:
-          - ubuntu-20.04
+          - ubuntu-22.04
           #- macos-latest
           #- windows-latest
 
     steps:
 
-      - uses: actions/checkout@master
-      - run: git fetch --prune --unshallow
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -92,7 +94,7 @@ jobs:
         run: python -m cibuildwheel --output-dir wheelhouse
         env:
           CIBW_BUILD_VERBOSITY: 1
-          CIBW_BUILD: cp37-*manylinux*_x86_64 cp38-*manylinux*_x86_64 cp39-*manylinux*_x86_64
+          CIBW_BUILD: cp37-*manylinux*_x86_64 cp38-*manylinux*_x86_64 cp39-*manylinux*_x86_64 cp310-*manylinux*_x86_64
           CIBW_MANYLINUX_X86_64_IMAGE: manylinux_2_24
           CIBW_ENVIRONMENT_LINUX: AUDITWHEEL_PLAT=manylinux_2_24_x86_64
           CIBW_BEFORE_BUILD_LINUX: |
@@ -100,7 +102,7 @@ jobs:
             apt-get install -y libeigen3-dev libassimp-dev libxml2-dev coinor-libipopt-dev libirrlicht-dev
           CIBW_TEST_COMMAND: "python -c 'import idyntree.bindings'"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: dist
           path: ./wheelhouse/*.whl
@@ -115,7 +117,7 @@ jobs:
 
     steps:
 
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
           name: dist
           path: dist
@@ -123,7 +125,7 @@ jobs:
       - name: Inspect dist folder
         run: ls -lah dist/
 
-      - uses: pypa/gh-action-pypi-publish@master
+      - uses: pypa/gh-action-pypi-publish@release/v1
         if: |
           github.repository == 'robotology/idyntree' &&
           ((github.event_name == 'release' && github.event.action == 'published') ||
