@@ -205,7 +205,7 @@ jobs:
 
     - name: Cache Source-based Dependencies
       id: cache-source-deps
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       with:
         path: ${{ github.workspace }}/install/deps
         key: source-deps-${{ matrix.docker_image }}-ycm-${{ env.YCM_TAG }}-yarp-${{ env.YARP_TAG }}-icub-${{ env.ICUB_TAG }}
