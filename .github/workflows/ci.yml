@@ -181,7 +181,6 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Install files to enable compilation of mex files [apt]
-      if: contains(matrix.os, 'ubuntu')
       run: |
         curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020b_mexa64.zip
         unzip msdk_R2020b_mexa64.zip
@@ -199,7 +198,6 @@ jobs:
     # ============
 
     - name: Dependencies [apt]
-      if: contains(matrix.os, 'ubuntu')
       run: |
         apt-get update
         apt-get install \
@@ -207,7 +205,7 @@ jobs:
             libxml2-dev liboctave-dev python-dev python3-numpy valgrind libassimp-dev libirrlicht-dev
 
     - name: Source-based Dependencies [apt]
-      if: steps.cache-source-deps.outputs.cache-hit != 'true' && (contains(matrix.os, 'ubuntu')
+      if: steps.cache-source-deps.outputs.cache-hit != 'true' && contains(matrix.os, 'ubuntu')
       shell: bash
       run: |
         # YCM
@@ -237,7 +235,6 @@ jobs:
     # ===================
 
     - name: Configure [apt]
-      if: contains(matrix.os, 'ubuntu')
       shell: bash
       run: |
         mkdir -p build
@@ -262,14 +259,12 @@ jobs:
 
 
     - name: Install [apt]
-      if: contains(matrix.os, 'ubuntu')
       shell: bash
       run: |
         cd build
         cmake --build . --config ${{ matrix.build_type }} --target install
 
     - name: Compile Examples [apt]
-      if: contains(matrix.os, 'ubuntu')
       shell: bash
       run: |
         cd examples
@@ -279,7 +274,6 @@ jobs:
         cmake --build . --config ${{ matrix.build_type }}
 
     - name: Check build if some dependencies are not enabled [apt]
-      if: contains(matrix.os, 'ubuntu')
       shell: bash
       run: |
         cd build
