@@ -182,6 +182,9 @@ jobs:
 
     - name: Dependencies [apt]
       run: |
+        # See  https://stackoverflow.com/questions/44331836/apt-get-install-tzdata-noninteractive,
+        # only required by Ubuntu 20.04
+        export DEBIAN_FRONTEND=noninteractive
         apt-get -y update
         apt-get -y install \
             git build-essential cmake libace-dev coinor-libipopt-dev libeigen3-dev swig \
