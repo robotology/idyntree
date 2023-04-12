@@ -180,9 +180,15 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Dependencies [apt]
+      run: |
+        apt-get update
+        apt-get install \
+            git build-essential cmake libace-dev coinor-libipopt-dev libeigen3-dev swig \
+            libxml2-dev liboctave-dev python-dev python3-numpy valgrind libassimp-dev libirrlicht-dev curl unzip
+
     - name: Install files to enable compilation of mex files [apt]
       run: |
-        apt-get install curl unzip
         curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020b_mexa64.zip
         unzip msdk_R2020b_mexa64.zip
         rm msdk_R2020b_mexa64.zip
@@ -193,17 +199,6 @@ jobs:
     - name: Environment Variables
       shell: bash
       run: env
-
-    # ============
-    # DEPENDENCIES
-    # ============
-
-    - name: Dependencies [apt]
-      run: |
-        apt-get update
-        apt-get install \
-            git build-essential cmake libace-dev coinor-libipopt-dev libeigen3-dev swig \
-            libxml2-dev liboctave-dev python-dev python3-numpy valgrind libassimp-dev libirrlicht-dev
 
     - name: Source-based Dependencies [apt]
       if: steps.cache-source-deps.outputs.cache-hit != 'true' && contains(matrix.os, 'ubuntu')
