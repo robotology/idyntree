@@ -182,6 +182,7 @@ jobs:
 
     - name: Install files to enable compilation of mex files [apt]
       run: |
+        apt-get install curl unzip
         curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020b_mexa64.zip
         unzip msdk_R2020b_mexa64.zip
         rm msdk_R2020b_mexa64.zip
