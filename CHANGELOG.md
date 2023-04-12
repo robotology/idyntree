@@ -25,6 +25,9 @@ To catch logic errors (which are not pure XML errors that are currently caught b
 The following errors are currently check:
 - Duplicate joints in the URDF will cause an error.
 
+### Added
+
+- Build and deploy PyPI wheels for Python 3.10 (https://github.com/robotology/idyntree/pull/1061)
 
 ## [8.1.0] - 2023-01-16
 
