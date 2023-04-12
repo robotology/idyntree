@@ -185,7 +185,7 @@ jobs:
         apt-get update
         apt-get install \
             git build-essential cmake libace-dev coinor-libipopt-dev libeigen3-dev swig \
-            libxml2-dev liboctave-dev python-dev python3-numpy valgrind libassimp-dev libirrlicht-dev curl unzip
+            libxml2-dev liboctave-dev python3-dev python3-numpy valgrind libassimp-dev libirrlicht-dev curl unzip
 
     - name: Install files to enable compilation of mex files [apt]
       run: |
