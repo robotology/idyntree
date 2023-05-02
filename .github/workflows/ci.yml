@@ -37,7 +37,6 @@ jobs:
       with:
         environment-file: ci_env.yml
         cache-environment-key: environment-${{ steps.week.outputs.week }}
-        cache-downloads-key: downloads-${{ steps.week.outputs.week }}
 
 
     - name: Install files to enable compilation of mex files [Conda/Linux]
