@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Binary wheels available on PyPI now target `manylinux_2_28`, and the options `IDYNTREE_USES_ASSIMP`, `IDYNTREE_USES_IPOPT` and `IDYNTREE_USES_IRRLICHT` are disable in binary wheels on PyPI. If you need these options enabled, please use conda-forge binaries or build iDynTree from source (https://github.com/robotology/idyntree/pull/1068).
 - Use iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw as default parametrization in iDynTree::InverseKinematics (https://github.com/robotology/idyntree/pull/1058).
 
 #### URDF XML parser change 
