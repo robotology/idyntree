@@ -9,7 +9,6 @@
     <includes refid="ArticulatedBodyInertia_8h" local="no">iDynTree/Core/ArticulatedBodyInertia.h</includes>
     <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
     <includes local="no">vector</includes>
-    <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
     <includedby refid="PredictSensorsMeasurements_8h" local="no">iDynTree/Sensors/PredictSensorsMeasurements.h</includedby>
     <includedby refid="SixAxisForceTorqueSensor_8h" local="no">iDynTree/Sensors/SixAxisForceTorqueSensor.h</includedby>
     <includedby refid="Visualizer_8h" local="no">iDynTree/Visualizer.h</includedby>
@@ -20,6 +19,7 @@
     <includedby refid="Dynamics_8h" local="no">iDynTree/Model/Dynamics.h</includedby>
     <includedby refid="FreeFloatingState_8h" local="no">iDynTree/Model/FreeFloatingState.h</includedby>
     <includedby refid="ModelTestUtils_8h" local="no">iDynTree/Model/ModelTestUtils.h</includedby>
+    <includedby refid="KinDynComputations_8h" local="no">iDynTree/KinDynComputations.h</includedby>
     <incdepgraph>
       <node id="1">
         <label>iDynTree/Model/LinkState.h</label>
