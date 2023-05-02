@@ -97,12 +97,12 @@ jobs:
       run: |
         # Additional dependencies only useful on Linux
         # See https://github.com/robotology/robotology-superbuild/issues/477
-        mamba install expat-cos6-x86_64 freeglut libselinux-cos6-x86_64 libxau-cos6-x86_64 libxcb-cos6-x86_64 libxdamage-cos6-x86_64 libxext-cos6-x86_64 libxfixes-cos6-x86_64 libxxf86vm-cos6-x86_64 mesa-libgl-cos6-x86_64 mesa-libgl-devel-cos6-x86_64
+        micromamba install expat-cos6-x86_64 freeglut libselinux-cos6-x86_64 libxau-cos6-x86_64 libxcb-cos6-x86_64 libxdamage-cos6-x86_64 libxext-cos6-x86_64 libxfixes-cos6-x86_64 libxxf86vm-cos6-x86_64 mesa-libgl-cos6-x86_64 mesa-libgl-devel-cos6-x86_64
 
     - name: Print used environment [Conda]
       shell: bash -l {0}
       run: |
-        mamba list
+        micromamba list
         env
 
     - name: Configure [Conda]
