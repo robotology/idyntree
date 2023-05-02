@@ -26,16 +26,14 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - uses: conda-incubator/setup-miniconda@v2
-      with:
-        miniforge-variant: Mambaforge
-        miniforge-version: latest
-        channels: conda-forge,robotology
-
     - name: Print used environment (no conda) [Conda]
       shell: bash
       run: |
         env
+
+    - uses: mamba-org/setup-micromamba@v1
+      with:
+        environment-file: ci_env.yml
 
     - name: Install files to enable compilation of mex files [Conda/Linux]
       if: contains(matrix.os, 'ubuntu')
@@ -91,14 +89,6 @@ jobs:
         echo "CONDA_CXX_LIBRARIES_INSTALL_PREFIX=${CONDA_PREFIX}" >> $GITHUB_ENV
         # Visualizer tests excluded as a workaround for https://github.com/robotology/idyntree/issues/808
         echo "IDYNTREE_TEST_TO_SKIP=Visualizer|matlab" >> $GITHUB_ENV
-
-    - name: Dependencies [Conda]
-      shell: bash -l {0}
-      run: |
-        # Workaround for https://github.com/conda-incubator/setup-miniconda/issues/186
-        conda config --remove channels defaults
-        # Compilation related dependencies
-        mamba install cmake compilers make ninja pkg-config eigen libxml2 assimp ipopt irrlicht swig pybind11 python numpy yarp icub-main osqp-eigen
 
     # Additional dependencies useful only on Linux
     - name: Dependencies [Conda/Linux]
