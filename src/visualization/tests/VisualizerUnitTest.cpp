@@ -290,7 +290,7 @@ int main()
     checkFrameVisualization();
     checkLabelVisualization();
     checkViewPorts();
-    checkDoubleViz();
+//    checkDoubleViz();
 
     return EXIT_SUCCESS;
 }

@@ -24,6 +24,21 @@
 #include "CameraAnimator.h"
 #include "Label.h"
 
+#if defined(_WIN32)
+ #define GLFW_EXPOSE_NATIVE_WIN32
+ #define GLFW_EXPOSE_NATIVE_WGL
+#elif defined(__APPLE__)
+ #define GLFW_EXPOSE_NATIVE_COCOA
+ #define GLFW_EXPOSE_NATIVE_NSGL
+ #include <GL/glx.h>
+#elif defined(__linux__)
+ #define GLFW_EXPOSE_NATIVE_X11
+ #define GLFW_EXPOSE_NATIVE_GLX
+#endif
+
+#include <GLFW/glfw3.h>
+#include <GLFW/glfw3native.h>
+
 #if defined(_WIN32) && defined(_IRR_COMPILE_WITH_SDL_DEVICE_)
 // Required by SetEnvironmentVariableA, _putenv is not unsetting
 // correctly the variables
@@ -118,6 +133,20 @@ struct Visualizer::VisualizerPimpl
     int lastFPS;
 
 #ifdef IDYNTREE_USES_IRRLICHT
+
+    /**
+     * Custom window object
+     */
+    GLFWwindow* m_window{nullptr};
+
+#if defined(_WIN32)
+    HWND.m_windowId;
+#elif defined(__APPLE__)
+    id m_windowId;
+#elif defined(__linux__)
+    Window m_windowId;
+#endif
+
     /**
      * Collection of model visualization.
      */
@@ -274,6 +303,21 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
     // initialize the color palette
     pimpl->initializePalette();
 
+    if (!glfwInit()) {
+        reportError("Visualizer","init","Unable to initialize GLFW");
+        return false;
+    }
+
+    glfwWindowHint(GLFW_DEPTH_BITS, 16);
+    pimpl->m_window = glfwCreateWindow(visualizerOptions.winWidth, visualizerOptions.winHeight, "iDynTree Visualizer", nullptr, nullptr);
+    if (!pimpl->m_window) {
+        reportError("Visualizer","init","Could not create window");
+        return false;
+    }
+
+    glfwMakeContextCurrent(pimpl->m_window);
+    glfwSwapInterval(1);
+
     irr::SIrrlichtCreationParameters irrDevParams;
 
 // If we are on Windows and the SDL backend of Irrlicht is available,
@@ -286,6 +330,18 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
     irrDevParams.WindowSize = irr::core::dimension2d<irr::u32>(visualizerOptions.winWidth, visualizerOptions.winHeight);
     irrDevParams.WithAlphaChannel = true;
     irrDevParams.AntiAlias = 4;
+
+#if defined(_WIN32)
+    ipimpl->m_windowId = glfwGetWin32Window(pimpl->m_window);
+    irrDevParams.WindowId = (void*)(pimpl->m_windowId);
+#elif defined(__APPLE__)
+    ipimpl->m_windowId = glfwGetCocoaWindow(pimpl->m_window);
+    irrDevParams.WindowId = (void*)(pimpl->m_windowId);
+#elif defined(__linux__)
+    pimpl->m_windowId = glfwGetX11Window(pimpl->m_window);
+    irrDevParams.WindowId = (void*)pimpl->m_windowId;
+#endif
+
 
     if( visualizerOptions.verbose )
     {
@@ -466,6 +522,8 @@ void Visualizer::draw()
 
         pimpl->m_irrDriver->setViewPort(irr::core::rect<irr::s32>(0, 0, winWidth, winHeight));
 
+        pimpl->m_irrDriver->OnResize(irr::core::dimension2d<irr::u32>(winWidth, winHeight));
+
         pimpl->m_textures.draw(pimpl->m_environment, pimpl->m_camera, true);
 
         pimpl->m_camera.setAspectRatio(winWidth/ (float)winHeight);
@@ -476,6 +534,8 @@ void Visualizer::draw()
     pimpl->m_irrDriver->endScene();
     pimpl->m_subDrawStarted = false;
 
+    glfwPollEvents();
+
     int fps = pimpl->m_irrDriver->getFPS();
 
     if (pimpl->lastFPS != fps)
@@ -485,8 +545,10 @@ void Visualizer::draw()
         str += "] FPS:";
         str += fps;
         str += " ";
+        irr::core::stringc strc(str);
 
         pimpl->m_irrDevice->setWindowCaption(str.c_str());
+        glfwSetWindowTitle(pimpl->m_window, strc.c_str());
         pimpl->lastFPS = fps;
     }
 
@@ -533,7 +595,10 @@ void Visualizer::subDraw(int xOffsetFromTopLeft, int yOffsetFromTopLeft, int sub
 
     pimpl->m_camera.setAspectRatio(subImageWidth/ (float)subImageHeight);
 
-    pimpl->m_irrDriver->setViewPort(irr::core::rect<irr::s32>(0, 0, width(), height())); //workaround for http://irrlicht.sourceforge.net/forum/viewtopic.php?f=7&t=47004
+    int winWidth = width();
+    int winHeight = height();
+    pimpl->m_irrDriver->OnResize(irr::core::dimension2d<irr::u32>(winWidth, winHeight));
+    pimpl->m_irrDriver->setViewPort(irr::core::rect<irr::s32>(0, 0, winWidth, winHeight)); //workaround for http://irrlicht.sourceforge.net/forum/viewtopic.php?f=7&t=47004
     pimpl->m_irrDriver->setViewPort(irr::core::rect<irr::s32>(xOffsetFromTopLeft, yOffsetFromTopLeft,
                                                               xOffsetFromTopLeft + subImageWidth, yOffsetFromTopLeft + subImageHeight));
 
@@ -689,8 +754,10 @@ int Visualizer::width() const
         return 0;
     }
 
-    auto winDimensions = pimpl->m_irrDriver->getScreenSize();
-    return winDimensions.Width;
+    GLint ww, wh;
+    glfwGetWindowSize(pimpl->m_window, &ww, &wh);
+
+    return ww;
 #else
     return 0;
 #endif
@@ -705,8 +772,9 @@ int Visualizer::height() const
         return 0;
     }
 
-    auto winDimensions = pimpl->m_irrDriver->getScreenSize();
-    return winDimensions.Height;
+    GLint ww, wh;
+    glfwGetWindowSize(pimpl->m_window, &ww, &wh);
+    return wh;
 #else
     return 0;
 #endif
@@ -721,7 +789,7 @@ bool Visualizer::run()
         return false;
     }
 
-    return pimpl->m_irrDevice->run();
+    return pimpl->m_irrDevice->run() && !glfwWindowShouldClose(pimpl->m_window);
 #else
     reportError("Visualizer","run","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
     return false;
@@ -755,6 +823,13 @@ void Visualizer::close()
     }
 
     pimpl->m_modelViz.resize(0);
+
+    if (pimpl->m_window)
+    {
+        glfwDestroyWindow(pimpl->m_window);
+        glfwTerminate();
+        pimpl->m_window = nullptr;
+    }
 
     return;
 #endif
