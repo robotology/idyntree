@@ -280,6 +280,9 @@ void checkDoubleViz()
         viz1.draw();
         viz2.draw();
     }
+
+    viz1.close();
+    viz2.close();
 }
 
 int main()
@@ -290,7 +293,7 @@ int main()
     checkFrameVisualization();
     checkLabelVisualization();
     checkViewPorts();
-//    checkDoubleViz();
+    checkDoubleViz();
 
     return EXIT_SUCCESS;
 }

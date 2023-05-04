@@ -518,6 +518,8 @@ void Visualizer::draw()
             return;
         }
 
+        glfwMakeContextCurrent(pimpl->m_window);
+
         pimpl->m_irrDriver->beginScene(true,true, pimpl->m_environment.m_backgroundColor.toSColor(), pimpl->m_irrVideoData);
 
         pimpl->m_irrDriver->setViewPort(irr::core::rect<irr::s32>(0, 0, winWidth, winHeight));
@@ -586,6 +588,7 @@ void Visualizer::subDraw(int xOffsetFromTopLeft, int yOffsetFromTopLeft, int sub
     bool clearTextureBuffers = false;
     if (!pimpl->m_subDrawStarted)
     {
+        glfwMakeContextCurrent(pimpl->m_window);
         pimpl->m_irrDriver->beginScene(true,true, pimpl->m_environment.m_backgroundColor.toSColor(), pimpl->m_irrVideoData);
         pimpl->m_subDrawStarted = true;
         clearTextureBuffers = true;
@@ -803,6 +806,7 @@ void Visualizer::close()
     {
         return;
     }
+    glfwMakeContextCurrent(pimpl->m_window);
 
     pimpl->m_vectors.close();
     pimpl->m_frames.close();
@@ -826,8 +830,8 @@ void Visualizer::close()
 
     if (pimpl->m_window)
     {
+        glfwMakeContextCurrent(pimpl->m_window);
         glfwDestroyWindow(pimpl->m_window);
-        glfwTerminate();
         pimpl->m_window = nullptr;
     }
 
