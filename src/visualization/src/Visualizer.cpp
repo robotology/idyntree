@@ -139,6 +139,8 @@ struct Visualizer::VisualizerPimpl
      */
     GLFWwindow* m_window{nullptr};
 
+    static unsigned int m_glfwInstances;
+
 #if defined(_WIN32)
     HWND.m_windowId;
 #elif defined(__APPLE__)
@@ -266,6 +268,7 @@ struct Visualizer::VisualizerPimpl
     }
 };
 
+unsigned int Visualizer::VisualizerPimpl::m_glfwInstances = 0;
 
 Visualizer::Visualizer(const Visualizer& /*other*/)
 {
@@ -308,7 +311,12 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
         return false;
     }
 
-    glfwWindowHint(GLFW_DEPTH_BITS, 16);
+    if (pimpl->m_glfwInstances == 0)
+    {
+        glfwWindowHint(GLFW_DEPTH_BITS, 16);
+    }
+    pimpl->m_glfwInstances++;
+
     pimpl->m_window = glfwCreateWindow(visualizerOptions.winWidth, visualizerOptions.winHeight, "iDynTree Visualizer", nullptr, nullptr);
     if (!pimpl->m_window) {
         reportError("Visualizer","init","Could not create window");
@@ -833,6 +841,12 @@ void Visualizer::close()
         glfwMakeContextCurrent(pimpl->m_window);
         glfwDestroyWindow(pimpl->m_window);
         pimpl->m_window = nullptr;
+    }
+
+    pimpl->m_glfwInstances--;
+    if (pimpl->m_glfwInstances == 0)
+    {
+        glfwTerminate();
     }
 
     return;
