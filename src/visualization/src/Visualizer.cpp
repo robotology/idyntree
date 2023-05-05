@@ -30,7 +30,6 @@
 #elif defined(__APPLE__)
  #define GLFW_EXPOSE_NATIVE_COCOA
  #define GLFW_EXPOSE_NATIVE_NSGL
- #include <GL/glx.h>
 #elif defined(__linux__)
  #define GLFW_EXPOSE_NATIVE_X11
  #define GLFW_EXPOSE_NATIVE_GLX
@@ -142,7 +141,7 @@ struct Visualizer::VisualizerPimpl
     static unsigned int m_glfwInstances;
 
 #if defined(_WIN32)
-    HWND.m_windowId;
+    HWND m_windowId;
 #elif defined(__APPLE__)
     id m_windowId;
 #elif defined(__linux__)
@@ -477,10 +476,10 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
     irrDevParams.AntiAlias = 4;
 
 #if defined(_WIN32)
-    ipimpl->m_windowId = glfwGetWin32Window(pimpl->m_window);
+    pimpl->m_windowId = glfwGetWin32Window(pimpl->m_window);
     irrDevParams.WindowId = (void*)(pimpl->m_windowId);
 #elif defined(__APPLE__)
-    ipimpl->m_windowId = glfwGetCocoaWindow(pimpl->m_window);
+    pimpl->m_windowId = glfwGetCocoaWindow(pimpl->m_window);
     irrDevParams.WindowId = (void*)(pimpl->m_windowId);
 #elif defined(__linux__)
     pimpl->m_windowId = glfwGetX11Window(pimpl->m_window);

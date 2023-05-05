@@ -5,11 +5,11 @@ on:
   pull_request:
   schedule:
   # * is a special character in YAML so you have to quote this string
-  # Execute a "nightly" build at 2 AM UTC 
+  # Execute a "nightly" build at 2 AM UTC
   - cron:  '0 2 * * *'
-  
+
 jobs:
-  build-matlab-tests:    
+  build-matlab-tests:
     name: '[matlab:${{ matrix.matlab_version }}:${{ matrix.os }}]'
     runs-on: ${{ matrix.os }}
     defaults:
@@ -56,14 +56,14 @@ jobs:
       run: |
         # Workaround for https://github.com/conda-incubator/setup-miniconda/issues/186
         conda config --remove channels defaults
-        # Compilation related dependencies 
+        # Compilation related dependencies
         mamba install cmake compilers make ninja pkg-config
         # Actual dependencies
-        mamba install eigen libxml2 assimp ipopt irrlicht osqp-eigen
+        mamba install eigen libxml2 assimp ipopt irrlicht osqp-eigen glfw
 
     # Additional dependencies useful only on Linux
     - name: Dependencies [Conda/Linux]
-      if: contains(matrix.os, 'ubuntu') 
+      if: contains(matrix.os, 'ubuntu')
       run: |
         # Additional dependencies only useful on Linux
         # See https://github.com/robotology/robotology-superbuild/issues/477
@@ -71,7 +71,7 @@ jobs:
 
     # Additional dependencies useful only on Windows
     - name: Dependencies [Conda/Windows]
-      if: contains(matrix.os, 'windows') 
+      if: contains(matrix.os, 'windows')
       run: |
         # Additional dependencies only useful on Windows
         # See https://github.com/robotology/robotology-superbuild/issues/477
@@ -120,8 +120,8 @@ jobs:
       run: |
         cd build
         # Only run matlab tests as the rest of tests are already run by other jobs
-        ctest --output-on-failure -C ${{ matrix.build_type }} -R "matlab" -VV . 
-     
+        ctest --output-on-failure -C ${{ matrix.build_type }} -R "matlab" -VV .
+
     - name: Install [Conda]
       run: |
         cd build

@@ -46,7 +46,8 @@ jobs:
             swig \
             libxml2-dev \
             libassimp-dev \
-            libirrlicht-dev
+            libirrlicht-dev \
+            libglfw3-dev
           pip install build
 
       - name: Build sdist
