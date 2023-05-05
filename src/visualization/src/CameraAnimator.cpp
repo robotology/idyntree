@@ -16,21 +16,16 @@ namespace iDynTree
 {
 
 //! constructor
-CameraAnimator::CameraAnimator(irr::gui::ICursorControl* cursor, irr::scene::ISceneNode *cameraAxis,
+CameraAnimator::CameraAnimator(irr::scene::ISceneNode *cameraAxis, unsigned int windowWidth, unsigned int windowHeight,
     double rotateSpeed, double zoomSpeed, double translateSpeed)
-    : m_cursorControl(cursor), m_mousePos(0.5f, 0.5f), m_initialMousePosition(m_mousePos),
+    : m_mousePos(0.5f, 0.5f), m_initialMousePosition(m_mousePos),
     m_zoomSpeed(zoomSpeed), m_rotateSpeed(rotateSpeed), m_translateSpeed(translateSpeed),
-    m_zooming(false), m_rotating(false), m_movingUp(false), m_translating(false), m_isEnabled(false)
+    m_zooming(false), m_rotating(false), m_movingUp(false), m_translating(false), m_isEnabled(false),
+    m_width(windowWidth), m_height(windowHeight)
 {
     #ifdef _DEBUG
     setDebugName("iDynTreeCameraAnimator");
     #endif
-
-    if (m_cursorControl)
-    {
-        m_cursorControl->grab();
-        m_mousePos = m_cursorControl->getRelativePosition();
-    }
 
     allKeysUp();
     m_cameraAxis = cameraAxis;
@@ -41,8 +36,13 @@ CameraAnimator::CameraAnimator(irr::gui::ICursorControl* cursor, irr::scene::ISc
 //! destructor
 CameraAnimator::~CameraAnimator()
 {
-    if (m_cursorControl)
-        m_cursorControl->drop();
+
+}
+
+void CameraAnimator::setWindowDimensions(unsigned int width, unsigned int height)
+{
+    m_width = width;
+    m_height = height;
 }
 
 
@@ -60,11 +60,11 @@ bool CameraAnimator::OnEvent(const irr::SEvent& event)
     {
     case irr::EMIE_LMOUSE_PRESSED_DOWN:
         m_mouseKeys[0] = true;
-        m_initialMousePosition = m_cursorControl->getRelativePosition();
+        m_initialMousePosition = m_mousePos;
         break;
     case irr::EMIE_RMOUSE_PRESSED_DOWN:
         m_mouseKeys[2] = true;
-        m_initialMousePosition = m_cursorControl->getRelativePosition();
+        m_initialMousePosition = m_mousePos;
         break;
     case irr::EMIE_MMOUSE_PRESSED_DOWN:
         m_mouseKeys[1] = true;
@@ -79,7 +79,7 @@ bool CameraAnimator::OnEvent(const irr::SEvent& event)
         m_mouseKeys[1] = false;
         break;
     case irr::EMIE_MOUSE_MOVED:
-        m_mousePos = m_cursorControl->getRelativePosition();
+        m_mousePos.set(static_cast<float>(event.MouseInput.X) / m_width, static_cast<float>(event.MouseInput.Y) / m_height);
         break;
     case irr::EMIE_MOUSE_WHEEL:
         m_wheelMoving = true;
@@ -328,7 +328,7 @@ double CameraAnimator::getZoomSpeed() const
 irr::scene::ISceneNodeAnimator* CameraAnimator::createClone(irr::scene::ISceneNode* /*node*/, irr::scene::ISceneManager* /*newManager*/)
 {
     CameraAnimator * newAnimator =
-        new CameraAnimator(m_cursorControl, m_cameraAxis->clone(), m_rotateSpeed, m_zoomSpeed, m_translateSpeed);
+        new CameraAnimator(m_cameraAxis->clone(), m_width, m_height, m_rotateSpeed, m_zoomSpeed, m_translateSpeed);
     return newAnimator;
 }
 

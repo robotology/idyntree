@@ -21,11 +21,13 @@ namespace iDynTree
     {
     public:
         //! Constructor
-        CameraAnimator(irr::gui::ICursorControl* cursor, irr::scene::ISceneNode *cameraAxis, double rotateSpeed = 10.0f,
+        CameraAnimator(irr::scene::ISceneNode *cameraAxis, unsigned int windowWidth, unsigned int windowHeight, double rotateSpeed = 10.0f,
             double zoomSpeed = 0.5f, double translationSpeed = 10.0f);
 
         //! Destructor
         virtual ~CameraAnimator();
+
+        void setWindowDimensions(unsigned int width, unsigned int height);
 
         //! Animates the scene node, currently only works on cameras
         virtual void animateNode(irr::scene::ISceneNode* node, irr::u32 timeMs) override;
@@ -78,7 +80,6 @@ namespace iDynTree
         bool m_wheelMoving;
         irr::f32 m_wheelDirection;
 
-        irr::gui::ICursorControl *m_cursorControl;
         irr::scene::ISceneNode *m_cameraAxis;
         irr::core::position2df m_mousePos;
         irr::core::position2df m_initialMousePosition;
@@ -90,6 +91,8 @@ namespace iDynTree
         bool m_movingUp;
         bool m_translating;
         bool m_isEnabled;
+        unsigned int m_width;
+        unsigned int m_height;
     };
 
 } // end namespace irr

@@ -245,6 +245,145 @@ struct Visualizer::VisualizerPimpl
         m_palette["meshcat"].zAxis = irr::video::SColor(alphaLev,66,133,244);
         m_palette["meshcat"].vector = irr::video::SColor(255,253,98,2);
     }
+
+    void cursorPositionCallback(GLFWwindow* window, double xpos, double ypos)
+    {
+        if (window != m_window)
+        {
+            return;
+        }
+
+        if (!m_isInitialized)
+        {
+            return;
+        }
+
+        GLint ww, wh;
+        glfwGetWindowSize(window, &ww, &wh);
+
+        irr::SEvent::SMouseInput mouseEvent;
+
+        mouseEvent.Event = irr::EMOUSE_INPUT_EVENT::EMIE_MOUSE_MOVED;
+        mouseEvent.X = xpos;
+        mouseEvent.Y = ypos;
+
+        irr::SEvent event;
+        event.EventType = irr::EEVENT_TYPE::EET_MOUSE_INPUT_EVENT;
+        event.MouseInput = mouseEvent;
+
+        m_irrDevice->postEventFromUser(event);
+    }
+
+    void mouseButtonCallback(GLFWwindow* window, int button, int action, int)
+    {
+        if (window != m_window)
+        {
+            return;
+        }
+
+        if (!m_isInitialized)
+        {
+            return;
+        }
+
+        irr::SEvent::SMouseInput mouseEvent;
+
+        if (button == GLFW_MOUSE_BUTTON_RIGHT)
+        {
+            if (action == GLFW_PRESS)
+            {
+                mouseEvent.Event = irr::EMOUSE_INPUT_EVENT::EMIE_RMOUSE_PRESSED_DOWN;
+            }
+            else if (action == GLFW_RELEASE)
+            {
+                mouseEvent.Event = irr::EMOUSE_INPUT_EVENT::EMIE_RMOUSE_LEFT_UP;
+            }
+            else
+            {
+                return;
+            }
+        }
+        else if (button == GLFW_MOUSE_BUTTON_LEFT)
+        {
+            if (action == GLFW_PRESS)
+            {
+                mouseEvent.Event = irr::EMOUSE_INPUT_EVENT::EMIE_LMOUSE_PRESSED_DOWN;
+            }
+            else if (action == GLFW_RELEASE)
+            {
+                mouseEvent.Event = irr::EMOUSE_INPUT_EVENT::EMIE_LMOUSE_LEFT_UP;
+            }
+            else
+            {
+                return;
+            }
+        }
+        else if (button == GLFW_MOUSE_BUTTON_MIDDLE)
+        {
+            if (action == GLFW_PRESS)
+            {
+                mouseEvent.Event = irr::EMOUSE_INPUT_EVENT::EMIE_MMOUSE_PRESSED_DOWN;
+            }
+            else if (action == GLFW_RELEASE)
+            {
+                mouseEvent.Event = irr::EMOUSE_INPUT_EVENT::EMIE_MMOUSE_LEFT_UP;
+            }
+            else
+            {
+                return;
+            }
+        }
+        else
+        {
+            return;
+        }
+
+        irr::SEvent event;
+        event.EventType = irr::EEVENT_TYPE::EET_MOUSE_INPUT_EVENT;
+        event.MouseInput = mouseEvent;
+
+        m_irrDevice->postEventFromUser(event);
+    }
+
+    void scrollCallback(GLFWwindow* window, double, double yoffset)
+    {
+        if (window != m_window)
+        {
+            return;
+        }
+
+        if (!m_isInitialized)
+        {
+            return;
+        }
+
+        irr::SEvent::SMouseInput mouseEvent;
+
+        mouseEvent.Event = irr::EMOUSE_INPUT_EVENT::EMIE_MOUSE_WHEEL;
+        mouseEvent.Wheel = yoffset;
+
+        irr::SEvent event;
+        event.EventType = irr::EEVENT_TYPE::EET_MOUSE_INPUT_EVENT;
+        event.MouseInput = mouseEvent;
+
+        m_irrDevice->postEventFromUser(event);
+    }
+
+    static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
+    {
+        static_cast<Visualizer::VisualizerPimpl*>(glfwGetWindowUserPointer(window))->cursorPositionCallback(window, xpos, ypos);
+    }
+
+    static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+    {
+        static_cast<Visualizer::VisualizerPimpl*>(glfwGetWindowUserPointer(window))->mouseButtonCallback(window, button, action, mods);
+    }
+
+    static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+    {
+        static_cast<Visualizer::VisualizerPimpl*>(glfwGetWindowUserPointer(window))->scrollCallback(window, xoffset, yoffset);
+    }
+
 #else
     DummyCamera m_camera;
     DummyEnvironment m_environment;
@@ -268,7 +407,11 @@ struct Visualizer::VisualizerPimpl
     }
 };
 
+#ifdef IDYNTREE_USES_IRRLICHT
+
 unsigned int Visualizer::VisualizerPimpl::m_glfwInstances = 0;
+
+#endif
 
 Visualizer::Visualizer(const Visualizer& /*other*/)
 {
@@ -328,12 +471,6 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
 
     irr::SIrrlichtCreationParameters irrDevParams;
 
-// If we are on Windows and the SDL backend of Irrlicht is available,
-// let's use it to avoid spurios WM_QUIT signal being raised in the
-// close() method, see https://github.com/robotology/idyntree/issues/975
-#if defined(_WIN32) && defined(_IRR_COMPILE_WITH_SDL_DEVICE_)
-    irrDevParams.DeviceType = irr::EIDT_SDL;
-#endif
     irrDevParams.DriverType = irr::video::EDT_OPENGL;
     irrDevParams.WindowSize = irr::core::dimension2d<irr::u32>(visualizerOptions.winWidth, visualizerOptions.winHeight);
     irrDevParams.WithAlphaChannel = true;
@@ -359,25 +496,7 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
 
     pimpl->m_irrDevice = 0;
 
-// The Irrlicht SDL device overwrites the value of the SDL_VIDEODRIVER
-// environment variable, and this prevents the driver to work correctly.
-// For this reason, we save the value before the irr::createDeviceEx call,
-// and we restore it (or we unset it) after call
-// Workaround for https://github.com/robotology/idyntree/issues/986
-#if defined(_WIN32) && defined(_IRR_COMPILE_WITH_SDL_DEVICE_)
-    const char * SDL_VIDEODRIVER_value = NULL;
-    if (irrDevParams.DeviceType == irr::EIDT_SDL) {
-        SDL_VIDEODRIVER_value = std::getenv("SDL_VIDEODRIVER");
-    }
-#endif
-
     pimpl->m_irrDevice = irr::createDeviceEx(irrDevParams);
-
-#if defined(_WIN32) && defined(_IRR_COMPILE_WITH_SDL_DEVICE_)
-    if (irrDevParams.DeviceType == irr::EIDT_SDL) {
-        SetEnvironmentVariableA("SDL_VIDEODRIVER", SDL_VIDEODRIVER_value);
-    }
-#endif
 
     if (pimpl->m_irrDevice == 0)
     {
@@ -410,14 +529,18 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
     pimpl->m_environment.init(pimpl->m_irrSmgr, pimpl->rootFrameArrowsDimension);
 
     pimpl->m_camera.setIrrlichtCamera(addVizCamera(pimpl->m_irrSmgr));
-    pimpl->m_camera.setCameraAnimator(new CameraAnimator(pimpl->m_irrDevice->getCursorControl(),
-                                                         addFrameAxes(pimpl->m_irrSmgr, 0, 0.1)));
+    pimpl->m_camera.setCameraAnimator(new CameraAnimator(addFrameAxes(pimpl->m_irrSmgr, 0, 0.1), visualizerOptions.winWidth, visualizerOptions.winHeight));
 
     pimpl->m_vectors.init(pimpl->m_irrSmgr);
 
     pimpl->m_frames.init(pimpl->m_irrSmgr);
 
     pimpl->m_textures.init(pimpl->m_irrDriver, pimpl->m_irrSmgr);
+
+    glfwSetWindowUserPointer(pimpl->m_window, pimpl);
+    glfwSetCursorPosCallback(pimpl->m_window, VisualizerPimpl::cursor_position_callback);
+    glfwSetMouseButtonCallback(pimpl->m_window, VisualizerPimpl::mouse_button_callback);
+    glfwSetScrollCallback(pimpl->m_window, VisualizerPimpl::scroll_callback);
 
     pimpl->m_isInitialized = true;
     pimpl->lastFPS         = -1;
@@ -536,7 +659,7 @@ void Visualizer::draw()
 
         pimpl->m_textures.draw(pimpl->m_environment, pimpl->m_camera, true);
 
-        pimpl->m_camera.setAspectRatio(winWidth/ (float)winHeight);
+        pimpl->m_camera.setWindowDimensions(winWidth, winHeight);
 
         pimpl->m_irrSmgr->drawAll();
     }
