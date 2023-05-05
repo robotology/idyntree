@@ -470,10 +470,11 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
 
     irr::SIrrlichtCreationParameters irrDevParams;
 
-// If we are on Windows and the SDL backend of Irrlicht is available,
-// let's use it to avoid spurios WM_QUIT signal being raised in the
-// close() method, see https://github.com/robotology/idyntree/issues/975
-#if defined(_WIN32) && defined(_IRR_COMPILE_WITH_SDL_DEVICE_)
+// If we are on Windows, only SDL works with the external window
+#if defined(_WIN32)
+#ifndef _IRR_COMPILE_WITH_SDL_DEVICE_
+#error "On Windows it is necessary to use Irrlicht with SDL"
+#endif
     irrDevParams.DeviceType = irr::EIDT_SDL;
 #endif
 
