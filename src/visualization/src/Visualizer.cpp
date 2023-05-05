@@ -448,14 +448,14 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
     // initialize the color palette
     pimpl->initializePalette();
 
-    if (!glfwInit()) {
-        reportError("Visualizer","init","Unable to initialize GLFW");
-        return false;
-    }
-
     if (pimpl->m_glfwInstances == 0)
     {
-        glfwWindowHint(GLFW_DEPTH_BITS, 16);
+        if (!glfwInit()) {
+            reportError("Visualizer", "init", "Unable to initialize GLFW");
+            return false;
+        }
+
+        glfwWindowHint(GLFW_SAMPLES, 4); //Antialiasing
     }
     pimpl->m_glfwInstances++;
 
@@ -469,6 +469,13 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
     glfwSwapInterval(1);
 
     irr::SIrrlichtCreationParameters irrDevParams;
+
+// If we are on Windows and the SDL backend of Irrlicht is available,
+// let's use it to avoid spurios WM_QUIT signal being raised in the
+// close() method, see https://github.com/robotology/idyntree/issues/975
+#if defined(_WIN32) && defined(_IRR_COMPILE_WITH_SDL_DEVICE_)
+    irrDevParams.DeviceType = irr::EIDT_SDL;
+#endif
 
     irrDevParams.DriverType = irr::video::EDT_OPENGL;
     irrDevParams.WindowSize = irr::core::dimension2d<irr::u32>(visualizerOptions.winWidth, visualizerOptions.winHeight);
@@ -683,6 +690,8 @@ void Visualizer::draw()
 
     pimpl->m_irrDriver->endScene();
     pimpl->m_subDrawStarted = false;
+
+    glfwSwapBuffers(pimpl->m_window);
 
     glfwPollEvents();
 
