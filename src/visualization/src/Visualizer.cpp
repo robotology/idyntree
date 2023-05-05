@@ -495,7 +495,25 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
 
     pimpl->m_irrDevice = 0;
 
+// The Irrlicht SDL device overwrites the value of the SDL_VIDEODRIVER
+// environment variable, and this prevents the driver to work correctly.
+// For this reason, we save the value before the irr::createDeviceEx call,
+// and we restore it (or we unset it) after call
+// Workaround for https://github.com/robotology/idyntree/issues/986
+#if defined(_WIN32) && defined(_IRR_COMPILE_WITH_SDL_DEVICE_)
+    const char * SDL_VIDEODRIVER_value = NULL;
+    if (irrDevParams.DeviceType == irr::EIDT_SDL) {
+        SDL_VIDEODRIVER_value = std::getenv("SDL_VIDEODRIVER");
+    }
+#endif
+
     pimpl->m_irrDevice = irr::createDeviceEx(irrDevParams);
+
+#if defined(_WIN32) && defined(_IRR_COMPILE_WITH_SDL_DEVICE_)
+    if (irrDevParams.DeviceType == irr::EIDT_SDL) {
+        SetEnvironmentVariableA("SDL_VIDEODRIVER", SDL_VIDEODRIVER_value);
+    }
+#endif
 
     if (pimpl->m_irrDevice == 0)
     {
