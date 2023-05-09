@@ -72,7 +72,7 @@ target_compile_options(${libraryname} PRIVATE ${IDYNTREE_WARNING_FLAGS})
 if(IDYNTREE_USES_IRRLICHT)
     find_package(OpenGL)
     find_package(Irrlicht REQUIRED)
-    find_package(GLFW3 REQUIRED)
+    find_package(glfw3 REQUIRED)
 
     target_link_libraries(${libraryname} PRIVATE Irrlicht::Irrlicht glfw)
     if(TARGET OpenGL::GL)

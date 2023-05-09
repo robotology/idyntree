@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [8.999.0] - 2023-03-05
+## [8.999.0] - YYYY-MM-DD
 
 ### Fixed
 - Fix export of `iDynTree::PrismaticJoint` in `iDynTree::getRandomModel` (https://github.com/robotology/idyntree/pull/1057).
@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Binary wheels available on PyPI now target `manylinux_2_28`, and the options `IDYNTREE_USES_ASSIMP`, `IDYNTREE_USES_IPOPT` and `IDYNTREE_USES_IRRLICHT` are disable in binary wheels on PyPI. If you need these options enabled, please use conda-forge binaries or build iDynTree from source (https://github.com/robotology/idyntree/pull/1068).
+- Compilation with `IDYNTREE_USES_IRRLICHT` set to `ON` now requires `glfw` library. Furthermore, now `IDYNTREE_USES_IRRLICHT`  on Windows requires irrlicht to be compiled with SDL support. This changes have been done to support resizable visualizer windows on Windows (https://github.com/robotology/idyntree/issues/1070, https://github.com/robotology/idyntree/pull/1071). 
 - Use iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw as default parametrization in iDynTree::InverseKinematics (https://github.com/robotology/idyntree/pull/1058).
 
 #### URDF XML parser change 
