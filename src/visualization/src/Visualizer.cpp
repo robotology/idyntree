@@ -491,7 +491,7 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
     irrDevParams.WindowId = (void*)(pimpl->m_windowId);
 #elif defined(__linux__)
     pimpl->m_windowId = glfwGetX11Window(pimpl->m_window);
-    irrDevParams.WindowId = (void*)pimpl->m_windowId;
+    irrDevParams.WindowId = (void*)(pimpl->m_windowId);
 #endif
 
 
@@ -990,13 +990,14 @@ void Visualizer::close()
     {
         glfwMakeContextCurrent(pimpl->m_window);
         glfwDestroyWindow(pimpl->m_window);
-        pimpl->m_window = nullptr;
-    }
 
-    pimpl->m_glfwInstances--;
-    if (pimpl->m_glfwInstances == 0)
-    {
-        glfwTerminate();
+        pimpl->m_glfwInstances--;
+        if (pimpl->m_glfwInstances == 0)
+        {
+            glfwTerminate();
+        }
+
+        pimpl->m_window = nullptr;
     }
 
     return;
