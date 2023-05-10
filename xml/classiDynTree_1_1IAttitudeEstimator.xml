@@ -151,7 +151,7 @@
           <declname>rot</declname>
         </param>
         <briefdescription>
-<para>Get orientation of the body with respect to inertial frame, in rotation matrix form If we denote <formula id="30">$ A $</formula> as inertial frame and <formula id="31">$ B $</formula> as the frame attached to the body, then this method gives us <formula id="32">$ {^A}R_B $</formula> as the rotation matrix. </para>
+<para>Get orientation of the body with respect to inertial frame, in rotation matrix form If we denote <formula id="233">$ A $</formula> as inertial frame and <formula id="234">$ B $</formula> as the frame attached to the body, then this method gives us <formula id="235">$ {^A}R_B $</formula> as the rotation matrix. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -183,7 +183,7 @@
           <declname>q</declname>
         </param>
         <briefdescription>
-<para>Get orientation of the body with respect to inertial frame, in unit quaternion form If we denote <formula id="30">$ A $</formula> as inertial frame and <formula id="31">$ B $</formula> as the frame attached to the body, then this method gives us <formula id="33">$ {^A}q_B as the quaternion $</formula>. </para>
+<para>Get orientation of the body with respect to inertial frame, in unit quaternion form If we denote <formula id="233">$ A $</formula> as inertial frame and <formula id="234">$ B $</formula> as the frame attached to the body, then this method gives us <formula id="236">$ {^A}q_B as the quaternion $</formula>. </para>
         </briefdescription>
         <detaileddescription>
 <para><simplesect kind="note"><para>quaternion has the form (real, imaginary) and is normalized </para>
@@ -219,7 +219,7 @@
           <declname>rpy</declname>
         </param>
         <briefdescription>
-<para>Get orientation of the body with respect to inertial frame, in Euler&apos;s RPY form If we denote <formula id="30">$ A $</formula> as inertial frame and <formula id="31">$ B $</formula> as the frame attached to the body, then this method gives us the RPY 3d vector of Euler Angles when composed together gives us <formula id="32">$ {^A}R_B $</formula> as the rotation matrix where <formula id="34">$ {^A}R_B = Rot_z(yaw)Rot_y(pitch)Rot_x(roll)$</formula>. </para>
+<para>Get orientation of the body with respect to inertial frame, in Euler&apos;s RPY form If we denote <formula id="233">$ A $</formula> as inertial frame and <formula id="234">$ B $</formula> as the frame attached to the body, then this method gives us the RPY 3d vector of Euler Angles when composed together gives us <formula id="235">$ {^A}R_B $</formula> as the rotation matrix where <formula id="237">$ {^A}R_B = Rot_z(yaw)Rot_y(pitch)Rot_x(roll)$</formula>. </para>
         </briefdescription>
         <detaileddescription>
 <para>For more details about the range of the RPY Euler angles, please refer the documentation of <ulink url="https://github.com/robotology/idyntree/blob/c8bf721b771fa4b1e7c3a940632e121060719a19/src/core/include/iDynTree/Core/Rotation.h#L167">GetRPY()</ulink></para>
@@ -271,10 +271,10 @@
           <declname>stateBuffer</declname>
         </param>
         <briefdescription>
-<para>Get internal state of the estimator The internal state of the estimator is described as <formula id="26">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="27">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="28">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="29">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. </para>
+<para>Get internal state of the estimator The internal state of the estimator is described as <formula id="229">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="230">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="231">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="232">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. </para>
         </briefdescription>
         <detaileddescription>
-<para>The default internal state of the estimator would be <formula id="35">$ X = \begin{bmatrix} 1.0 \\ 0_{1 \times 3} \\ 0_{1 \times 3} \\ 0_{1 \times 3} \end{bmatrix}^T $</formula> <parameterlist kind="param"><parameteritem>
+<para>The default internal state of the estimator would be <formula id="238">$ X = \begin{bmatrix} 1.0 \\ 0_{1 \times 3} \\ 0_{1 \times 3} \\ 0_{1 \times 3} \end{bmatrix}^T $</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="out">stateBuffer</parametername>
 </parameternamelist>
@@ -303,10 +303,10 @@
           <declname>stateBuffer</declname>
         </param>
         <briefdescription>
-<para>Get initial internal state of the estimator The internal state of the estimator is described as <formula id="26">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="27">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="28">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="29">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. </para>
+<para>Get initial internal state of the estimator The internal state of the estimator is described as <formula id="229">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="230">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="231">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="232">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. </para>
         </briefdescription>
         <detaileddescription>
-<para>The default internal state of the estimator would be <formula id="35">$ X = \begin{bmatrix} 1.0 \\ 0_{1 \times 3} \\ 0_{1 \times 3} \\ 0_{1 \times 3} \end{bmatrix}^T $</formula> <parameterlist kind="param"><parameteritem>
+<para>The default internal state of the estimator would be <formula id="238">$ X = \begin{bmatrix} 1.0 \\ 0_{1 \times 3} \\ 0_{1 \times 3} \\ 0_{1 \times 3} \end{bmatrix}^T $</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="out">stateBuffer</parametername>
 </parameternamelist>
@@ -338,7 +338,7 @@
 <para>set internal state of the estimator. </para>
         </briefdescription>
         <detaileddescription>
-<para>The internal state of the estimator is described as <formula id="26">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="27">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="28">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="29">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. <parameterlist kind="param"><parameteritem>
+<para>The internal state of the estimator is described as <formula id="229">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="230">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="231">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="232">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">stateBuffer</parametername>
 </parameternamelist>
@@ -370,7 +370,7 @@
 <para>set the initial orientation for the internal state of the estimator. </para>
         </briefdescription>
         <detaileddescription>
-<para>The initial orientation for the internal state of the estimator is described as <formula id="36">$ {^A}q_B $</formula> <formula id="27">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <parameterlist kind="param"><parameteritem>
+<para>The initial orientation for the internal state of the estimator is described as <formula id="239">$ {^A}q_B $</formula> <formula id="230">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">stateBuffer</parametername>
 </parameternamelist>
@@ -404,7 +404,7 @@
 </listitem></itemizedlist>
 </para>
 <para>However, additional methods to set and get parameters for the filter might be available with respect to the filters.</para>
-<para>The internal state of the estimator is described as <formula id="26">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="27">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="28">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="29">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. </para>
+<para>The internal state of the estimator is described as <formula id="229">$ X = \begin{bmatrix} {^A}q_B \\ {^B}\Omega_{A,B} \\ {^B}b \end{bmatrix}^T $</formula> <formula id="230">$ {^A}q_B \in \mathbb{R}^4 $</formula> is the quaternion representing the orientation of a body(IMU) frame with respect to an inertial frame , <formula id="231">$ {^B}\Omega_{A,B} \in \mathbb{R}^3 $</formula> is the angular velocity of a body(IMU) frame with respect to an inertial frame, expressed in the body frame and <formula id="232">$ {^B}b \in \mathbb{R}^3 $</formula> is the gyroscope bias expressed in the body frame. </para>
     </detaileddescription>
     <inheritancegraph>
       <node id="1">

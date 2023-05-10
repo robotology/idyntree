@@ -6,13 +6,13 @@
     <includes refid="GeomVector3_8h" local="no">iDynTree/Core/GeomVector3.h</includes>
     <includes refid="RotationRaw_8h" local="no">iDynTree/Core/RotationRaw.h</includes>
     <includes refid="VectorFixSize_8h" local="no">iDynTree/Core/VectorFixSize.h</includes>
-    <includedby refid="YARPConfigurationsLoader_8h" local="no">iDynTree/yarp/YARPConfigurationsLoader.h</includedby>
-    <includedby refid="AttitudeEstimator_8h" local="no">iDynTree/Estimation/AttitudeEstimator.h</includedby>
     <includedby refid="InertiaNonLinearParametrization_8h" local="no">iDynTree/Core/InertiaNonLinearParametrization.h</includedby>
     <includedby refid="Position_8h" local="no">iDynTree/Core/Position.h</includedby>
     <includedby refid="SO3Utils_8h" local="no">iDynTree/Core/SO3Utils.h</includedby>
     <includedby refid="SpatialVector_8h" local="yes">iDynTree/Core/SpatialVector.h</includedby>
     <includedby refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includedby>
+    <includedby refid="YARPConfigurationsLoader_8h" local="no">iDynTree/yarp/YARPConfigurationsLoader.h</includedby>
+    <includedby refid="AttitudeEstimator_8h" local="no">iDynTree/Estimation/AttitudeEstimator.h</includedby>
     <incdepgraph>
       <node id="1">
         <label>iDynTree/Core/Rotation.h</label>
