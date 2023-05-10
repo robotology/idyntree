@@ -75,7 +75,7 @@ jobs:
       if: contains(matrix.os, 'windows')
       shell: bash -l {0}
       run: |
-        bash_vc_install=${VCToolsInstallDir//\\//}        
+        bash_vc_install=${VCToolsInstallDir//\\//}
         compiler_path=${bash_vc_install}bin/Hostx64/x64/cl.exe
         echo "CC=${compiler_path}" >> $GITHUB_ENV
         echo "CXX=${compiler_path}" >> $GITHUB_ENV
@@ -182,7 +182,7 @@ jobs:
         apt-get -y update
         apt-get -y install \
             git build-essential cmake libace-dev coinor-libipopt-dev libeigen3-dev swig \
-            libxml2-dev liboctave-dev python3-dev python3-numpy valgrind libassimp-dev libirrlicht-dev curl unzip
+            libxml2-dev liboctave-dev python3-dev python3-numpy valgrind libassimp-dev libirrlicht-dev curl unzip libglfw3-dev
 
     - name: Install files to enable compilation of mex files [apt]
       run: |

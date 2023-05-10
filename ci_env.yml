@@ -13,6 +13,7 @@ dependencies:
   - assimp
   - ipopt
   - irrlicht
+  - glfw
   - swig
   - pybind11
   - python

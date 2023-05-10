@@ -24,6 +24,20 @@
 #include "CameraAnimator.h"
 #include "Label.h"
 
+#if defined(_WIN32)
+ #define GLFW_EXPOSE_NATIVE_WIN32
+ #define GLFW_EXPOSE_NATIVE_WGL
+#elif defined(__APPLE__)
+ #define GLFW_EXPOSE_NATIVE_COCOA
+ #define GLFW_EXPOSE_NATIVE_NSGL
+#elif defined(__linux__)
+ #define GLFW_EXPOSE_NATIVE_X11
+ #define GLFW_EXPOSE_NATIVE_GLX
+#endif
+
+#include <GLFW/glfw3.h>
+#include <GLFW/glfw3native.h>
+
 #if defined(_WIN32) && defined(_IRR_COMPILE_WITH_SDL_DEVICE_)
 // Required by SetEnvironmentVariableA, _putenv is not unsetting
 // correctly the variables
@@ -118,6 +132,22 @@ struct Visualizer::VisualizerPimpl
     int lastFPS;
 
 #ifdef IDYNTREE_USES_IRRLICHT
+
+    /**
+     * Custom window object
+     */
+    GLFWwindow* m_window{nullptr};
+
+    static unsigned int m_glfwInstances;
+
+#if defined(_WIN32)
+    HWND m_windowId;
+#elif defined(__APPLE__)
+    id m_windowId;
+#elif defined(__linux__)
+    Window m_windowId;
+#endif
+
     /**
      * Collection of model visualization.
      */
@@ -214,6 +244,145 @@ struct Visualizer::VisualizerPimpl
         m_palette["meshcat"].zAxis = irr::video::SColor(alphaLev,66,133,244);
         m_palette["meshcat"].vector = irr::video::SColor(255,253,98,2);
     }
+
+    void cursorPositionCallback(GLFWwindow* window, double xpos, double ypos)
+    {
+        if (window != m_window)
+        {
+            return;
+        }
+
+        if (!m_isInitialized)
+        {
+            return;
+        }
+
+        GLint ww, wh;
+        glfwGetWindowSize(window, &ww, &wh);
+
+        irr::SEvent::SMouseInput mouseEvent;
+
+        mouseEvent.Event = irr::EMOUSE_INPUT_EVENT::EMIE_MOUSE_MOVED;
+        mouseEvent.X = xpos;
+        mouseEvent.Y = ypos;
+
+        irr::SEvent event;
+        event.EventType = irr::EEVENT_TYPE::EET_MOUSE_INPUT_EVENT;
+        event.MouseInput = mouseEvent;
+
+        m_irrDevice->postEventFromUser(event);
+    }
+
+    void mouseButtonCallback(GLFWwindow* window, int button, int action, int)
+    {
+        if (window != m_window)
+        {
+            return;
+        }
+
+        if (!m_isInitialized)
+        {
+            return;
+        }
+
+        irr::SEvent::SMouseInput mouseEvent;
+
+        if (button == GLFW_MOUSE_BUTTON_RIGHT)
+        {
+            if (action == GLFW_PRESS)
+            {
+                mouseEvent.Event = irr::EMOUSE_INPUT_EVENT::EMIE_RMOUSE_PRESSED_DOWN;
+            }
+            else if (action == GLFW_RELEASE)
+            {
+                mouseEvent.Event = irr::EMOUSE_INPUT_EVENT::EMIE_RMOUSE_LEFT_UP;
+            }
+            else
+            {
+                return;
+            }
+        }
+        else if (button == GLFW_MOUSE_BUTTON_LEFT)
+        {
+            if (action == GLFW_PRESS)
+            {
+                mouseEvent.Event = irr::EMOUSE_INPUT_EVENT::EMIE_LMOUSE_PRESSED_DOWN;
+            }
+            else if (action == GLFW_RELEASE)
+            {
+                mouseEvent.Event = irr::EMOUSE_INPUT_EVENT::EMIE_LMOUSE_LEFT_UP;
+            }
+            else
+            {
+                return;
+            }
+        }
+        else if (button == GLFW_MOUSE_BUTTON_MIDDLE)
+        {
+            if (action == GLFW_PRESS)
+            {
+                mouseEvent.Event = irr::EMOUSE_INPUT_EVENT::EMIE_MMOUSE_PRESSED_DOWN;
+            }
+            else if (action == GLFW_RELEASE)
+            {
+                mouseEvent.Event = irr::EMOUSE_INPUT_EVENT::EMIE_MMOUSE_LEFT_UP;
+            }
+            else
+            {
+                return;
+            }
+        }
+        else
+        {
+            return;
+        }
+
+        irr::SEvent event;
+        event.EventType = irr::EEVENT_TYPE::EET_MOUSE_INPUT_EVENT;
+        event.MouseInput = mouseEvent;
+
+        m_irrDevice->postEventFromUser(event);
+    }
+
+    void scrollCallback(GLFWwindow* window, double, double yoffset)
+    {
+        if (window != m_window)
+        {
+            return;
+        }
+
+        if (!m_isInitialized)
+        {
+            return;
+        }
+
+        irr::SEvent::SMouseInput mouseEvent;
+
+        mouseEvent.Event = irr::EMOUSE_INPUT_EVENT::EMIE_MOUSE_WHEEL;
+        mouseEvent.Wheel = yoffset;
+
+        irr::SEvent event;
+        event.EventType = irr::EEVENT_TYPE::EET_MOUSE_INPUT_EVENT;
+        event.MouseInput = mouseEvent;
+
+        m_irrDevice->postEventFromUser(event);
+    }
+
+    static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
+    {
+        static_cast<Visualizer::VisualizerPimpl*>(glfwGetWindowUserPointer(window))->cursorPositionCallback(window, xpos, ypos);
+    }
+
+    static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+    {
+        static_cast<Visualizer::VisualizerPimpl*>(glfwGetWindowUserPointer(window))->mouseButtonCallback(window, button, action, mods);
+    }
+
+    static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+    {
+        static_cast<Visualizer::VisualizerPimpl*>(glfwGetWindowUserPointer(window))->scrollCallback(window, xoffset, yoffset);
+    }
+
 #else
     DummyCamera m_camera;
     DummyEnvironment m_environment;
@@ -237,6 +406,11 @@ struct Visualizer::VisualizerPimpl
     }
 };
 
+#ifdef IDYNTREE_USES_IRRLICHT
+
+unsigned int Visualizer::VisualizerPimpl::m_glfwInstances = 0;
+
+#endif
 
 Visualizer::Visualizer(const Visualizer& /*other*/)
 {
@@ -274,18 +448,52 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
     // initialize the color palette
     pimpl->initializePalette();
 
+    if (pimpl->m_glfwInstances == 0)
+    {
+        if (!glfwInit()) {
+            reportError("Visualizer", "init", "Unable to initialize GLFW");
+            return false;
+        }
+
+        glfwWindowHint(GLFW_SAMPLES, 4); //Antialiasing
+    }
+    pimpl->m_glfwInstances++;
+
+    pimpl->m_window = glfwCreateWindow(visualizerOptions.winWidth, visualizerOptions.winHeight, "iDynTree Visualizer", nullptr, nullptr);
+    if (!pimpl->m_window) {
+        reportError("Visualizer","init","Could not create window");
+        return false;
+    }
+
+    glfwMakeContextCurrent(pimpl->m_window);
+    glfwSwapInterval(1);
+
     irr::SIrrlichtCreationParameters irrDevParams;
 
-// If we are on Windows and the SDL backend of Irrlicht is available,
-// let's use it to avoid spurios WM_QUIT signal being raised in the
-// close() method, see https://github.com/robotology/idyntree/issues/975
-#if defined(_WIN32) && defined(_IRR_COMPILE_WITH_SDL_DEVICE_)
+// If we are on Windows, only SDL works with the external window
+#if defined(_WIN32)
+#ifndef _IRR_COMPILE_WITH_SDL_DEVICE_
+#error "On Windows it is necessary to use Irrlicht with SDL"
+#endif
     irrDevParams.DeviceType = irr::EIDT_SDL;
 #endif
+
     irrDevParams.DriverType = irr::video::EDT_OPENGL;
     irrDevParams.WindowSize = irr::core::dimension2d<irr::u32>(visualizerOptions.winWidth, visualizerOptions.winHeight);
     irrDevParams.WithAlphaChannel = true;
     irrDevParams.AntiAlias = 4;
+
+#if defined(_WIN32)
+    pimpl->m_windowId = glfwGetWin32Window(pimpl->m_window);
+    irrDevParams.WindowId = (void*)(pimpl->m_windowId);
+#elif defined(__APPLE__)
+    pimpl->m_windowId = glfwGetCocoaWindow(pimpl->m_window);
+    irrDevParams.WindowId = (void*)(pimpl->m_windowId);
+#elif defined(__linux__)
+    pimpl->m_windowId = glfwGetX11Window(pimpl->m_window);
+    irrDevParams.WindowId = (void*)(pimpl->m_windowId);
+#endif
+
 
     if( visualizerOptions.verbose )
     {
@@ -346,14 +554,18 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
     pimpl->m_environment.init(pimpl->m_irrSmgr, pimpl->rootFrameArrowsDimension);
 
     pimpl->m_camera.setIrrlichtCamera(addVizCamera(pimpl->m_irrSmgr));
-    pimpl->m_camera.setCameraAnimator(new CameraAnimator(pimpl->m_irrDevice->getCursorControl(),
-                                                         addFrameAxes(pimpl->m_irrSmgr, 0, 0.1)));
+    pimpl->m_camera.setCameraAnimator(new CameraAnimator(addFrameAxes(pimpl->m_irrSmgr, 0, 0.1), visualizerOptions.winWidth, visualizerOptions.winHeight));
 
     pimpl->m_vectors.init(pimpl->m_irrSmgr);
 
     pimpl->m_frames.init(pimpl->m_irrSmgr);
 
     pimpl->m_textures.init(pimpl->m_irrDriver, pimpl->m_irrSmgr);
+
+    glfwSetWindowUserPointer(pimpl->m_window, pimpl);
+    glfwSetCursorPosCallback(pimpl->m_window, VisualizerPimpl::cursor_position_callback);
+    glfwSetMouseButtonCallback(pimpl->m_window, VisualizerPimpl::mouse_button_callback);
+    glfwSetScrollCallback(pimpl->m_window, VisualizerPimpl::scroll_callback);
 
     pimpl->m_isInitialized = true;
     pimpl->lastFPS         = -1;
@@ -462,19 +674,27 @@ void Visualizer::draw()
             return;
         }
 
+        glfwMakeContextCurrent(pimpl->m_window);
+
         pimpl->m_irrDriver->beginScene(true,true, pimpl->m_environment.m_backgroundColor.toSColor(), pimpl->m_irrVideoData);
 
         pimpl->m_irrDriver->setViewPort(irr::core::rect<irr::s32>(0, 0, winWidth, winHeight));
 
+        pimpl->m_irrDriver->OnResize(irr::core::dimension2d<irr::u32>(winWidth, winHeight));
+
         pimpl->m_textures.draw(pimpl->m_environment, pimpl->m_camera, true);
 
-        pimpl->m_camera.setAspectRatio(winWidth/ (float)winHeight);
+        pimpl->m_camera.setWindowDimensions(winWidth, winHeight);
 
         pimpl->m_irrSmgr->drawAll();
     }
 
     pimpl->m_irrDriver->endScene();
     pimpl->m_subDrawStarted = false;
+
+    glfwSwapBuffers(pimpl->m_window);
+
+    glfwPollEvents();
 
     int fps = pimpl->m_irrDriver->getFPS();
 
@@ -485,8 +705,10 @@ void Visualizer::draw()
         str += "] FPS:";
         str += fps;
         str += " ";
+        irr::core::stringc strc(str);
 
         pimpl->m_irrDevice->setWindowCaption(str.c_str());
+        glfwSetWindowTitle(pimpl->m_window, strc.c_str());
         pimpl->lastFPS = fps;
     }
 
@@ -524,6 +746,7 @@ void Visualizer::subDraw(int xOffsetFromTopLeft, int yOffsetFromTopLeft, int sub
     bool clearTextureBuffers = false;
     if (!pimpl->m_subDrawStarted)
     {
+        glfwMakeContextCurrent(pimpl->m_window);
         pimpl->m_irrDriver->beginScene(true,true, pimpl->m_environment.m_backgroundColor.toSColor(), pimpl->m_irrVideoData);
         pimpl->m_subDrawStarted = true;
         clearTextureBuffers = true;
@@ -533,7 +756,10 @@ void Visualizer::subDraw(int xOffsetFromTopLeft, int yOffsetFromTopLeft, int sub
 
     pimpl->m_camera.setAspectRatio(subImageWidth/ (float)subImageHeight);
 
-    pimpl->m_irrDriver->setViewPort(irr::core::rect<irr::s32>(0, 0, width(), height())); //workaround for http://irrlicht.sourceforge.net/forum/viewtopic.php?f=7&t=47004
+    int winWidth = width();
+    int winHeight = height();
+    pimpl->m_irrDriver->OnResize(irr::core::dimension2d<irr::u32>(winWidth, winHeight));
+    pimpl->m_irrDriver->setViewPort(irr::core::rect<irr::s32>(0, 0, winWidth, winHeight)); //workaround for http://irrlicht.sourceforge.net/forum/viewtopic.php?f=7&t=47004
     pimpl->m_irrDriver->setViewPort(irr::core::rect<irr::s32>(xOffsetFromTopLeft, yOffsetFromTopLeft,
                                                               xOffsetFromTopLeft + subImageWidth, yOffsetFromTopLeft + subImageHeight));
 
@@ -689,8 +915,10 @@ int Visualizer::width() const
         return 0;
     }
 
-    auto winDimensions = pimpl->m_irrDriver->getScreenSize();
-    return winDimensions.Width;
+    GLint ww, wh;
+    glfwGetWindowSize(pimpl->m_window, &ww, &wh);
+
+    return ww;
 #else
     return 0;
 #endif
@@ -705,8 +933,9 @@ int Visualizer::height() const
         return 0;
     }
 
-    auto winDimensions = pimpl->m_irrDriver->getScreenSize();
-    return winDimensions.Height;
+    GLint ww, wh;
+    glfwGetWindowSize(pimpl->m_window, &ww, &wh);
+    return wh;
 #else
     return 0;
 #endif
@@ -721,7 +950,7 @@ bool Visualizer::run()
         return false;
     }
 
-    return pimpl->m_irrDevice->run();
+    return pimpl->m_irrDevice->run() && !glfwWindowShouldClose(pimpl->m_window);
 #else
     reportError("Visualizer","run","Impossible to use iDynTree::Visualizer, as iDynTree has been compiled without Irrlicht.");
     return false;
@@ -735,6 +964,7 @@ void Visualizer::close()
     {
         return;
     }
+    glfwMakeContextCurrent(pimpl->m_window);
 
     pimpl->m_vectors.close();
     pimpl->m_frames.close();
@@ -755,6 +985,20 @@ void Visualizer::close()
     }
 
     pimpl->m_modelViz.resize(0);
+
+    if (pimpl->m_window)
+    {
+        glfwMakeContextCurrent(pimpl->m_window);
+        glfwDestroyWindow(pimpl->m_window);
+
+        pimpl->m_glfwInstances--;
+        if (pimpl->m_glfwInstances == 0)
+        {
+            glfwTerminate();
+        }
+
+        pimpl->m_window = nullptr;
+    }
 
     return;
 #endif
