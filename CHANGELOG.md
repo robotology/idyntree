@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [8.999.0] - YYYY-MM-DD
+## [9.0.0] - 2023-05-11
 
 ### Fixed
 - Fix export of `iDynTree::PrismaticJoint` in `iDynTree::getRandomModel` (https://github.com/robotology/idyntree/pull/1057).
