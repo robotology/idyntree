@@ -15,6 +15,7 @@ In case they are disabled, tipically some functionality of iDynTree is not provi
 | [Assimp](http://www.assimp.org/) | No|  `IDYNTREE_USES_ASSIMP` | ✔️ |  ✔️ | 
 | [IPOPT](https://projects.coin-or.org/Ipopt) | No |  `IDYNTREE_USES_IPOPT` | ✔️ | ✔️ |
 | [irrlicht](http://irrlicht.sourceforge.net/) | No | `IDYNTREE_USES_IRRLICHT` | ✔️ | ✔️ |
+| [glfw](https://www.glfw.org/) | No | `IDYNTREE_USES_IRRLICHT` | ✔️ | ✔️ |
 | [osqp-eigen](https://github.com/robotology/osqp-eigen) | No | `IDYNTREE_USES_OSQPEIGEN` | ✔️ | ✔️ |
 
 
@@ -22,14 +23,14 @@ In case they are disabled, tipically some functionality of iDynTree is not provi
 
 If you are using conda, the dependencies of iDynTree can be installed with:
 ~~~
-conda install -c conda-forge cmake compilers  make ninja pkg-config eigen libxml2 assimp ipopt irrlicht osqp-eigen swig python
+conda install -c conda-forge cmake compilers  make ninja pkg-config eigen libxml2 assimp ipopt irrlicht osqp-eigen swig python glfw
 ~~~
 
 ### Install dependencies with apt
 
 If you are using an apt-based distribution such as Ubuntu and you want to use apt, the dependencies can be installed via:
 ~~~
-sudo apt-get install build-essential libeigen3-dev libxml2-dev coinor-libipopt-dev libassimp-dev libirrlicht-dev
+sudo apt-get install build-essential libeigen3-dev libxml2-dev coinor-libipopt-dev libassimp-dev libirrlicht-dev libglfw3-dev
 ~~~
 
 
