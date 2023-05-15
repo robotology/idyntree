@@ -82,6 +82,7 @@ endif ()
 
 idyntree_handle_dependency(IPOPT)
 idyntree_handle_dependency(Irrlicht DO_NOT_SILENTLY_SEARCH)
+idyntree_handle_dependency(MeshcatCpp MAIN_TARGET MeshcatCpp::MeshcatCpp DO_NOT_SILENTLY_SEARCH)
 idyntree_handle_dependency(OsqpEigen MAIN_TARGET OsqpEigen::OsqpEigen)
 idyntree_handle_dependency(ALGLIB DO_NOT_SILENTLY_SEARCH)
 set(ALGLIB_REQUIRED_VERSION 3.14.0)
