@@ -70,7 +70,11 @@ struct MeshcatVisualizer::Impl
         return format == "dae" || format == "stl" || format == "obj";
     }
 
-    std::string getAbsoluteMeshPath(const std::string &modelName, const std::string &linkName, const iDynTree::ExternalMesh &externalMesh)
+
+    // extact the path of the mesh from the meshcat tree
+    std::string getMeshPathInMeshcatTree(const std::string &modelName,
+                                         const std::string &linkName,
+                                         const iDynTree::ExternalMesh &externalMesh)
     {
         const std::string fileName = externalMesh.getFileLocationOnLocalFileSystem();
         std::size_t pos_dot = fileName.find_last_of(".");
@@ -123,7 +127,7 @@ struct MeshcatVisualizer::Impl
                 }
 
                 iDynTree::ExternalMesh *externalMesh = linkSolidShape->asExternalMesh();
-                const std::string viewerName = this->getAbsoluteMeshPath(modelName, linkName, *externalMesh);
+                const std::string viewerName = this->getMeshPathInMeshcatTree(modelName, linkName, *externalMesh);
 
                 MeshcatCpp::Mesh mesh(externalMesh->getFileLocationOnLocalFileSystem(),
                                       externalMesh->getScale()(0));
@@ -193,7 +197,7 @@ struct MeshcatVisualizer::Impl
                 }
 
                 iDynTree::ExternalMesh *externalMesh = linkSolidShape->asExternalMesh();
-                const std::string viewerName = this->getAbsoluteMeshPath(modelName, linkName, *externalMesh);
+                const std::string viewerName = this->getMeshPathInMeshcatTree(modelName, linkName, *externalMesh);
 
                 const iDynTree::Transform transform = (world_H_frame * linkSolidShape->getLink_H_geometry());
 
@@ -235,7 +239,7 @@ bool MeshcatVisualizer::loadModel(const iDynTree::Model &model,
     ;
 }
 
-bool MeshcatVisualizer::setModelState(const iDynTree::Transform &basePose,
+bool MeshcatVisualizer::setModelState(const iDynTree::Transform &world_T_base,
                                       const iDynTree::VectorDynSize &jointPositions,
                                       const std::string &modelName)
 {
@@ -247,8 +251,27 @@ bool MeshcatVisualizer::setModelState(const iDynTree::Transform &basePose,
     }
 
     Impl::ModelData &storedModel = m_pimpl->storedModels[modelName];
-    return m_pimpl->updateModelGeometry(storedModel, basePose, jointPositions, modelName);
+    return m_pimpl->updateModelGeometry(storedModel, world_T_base, jointPositions, modelName);
 }
+
+bool MeshcatVisualizer::setModelState(const iDynTree::MatrixView<const double> &world_T_base,
+                                      const iDynTree::Span<const double> &jointPositions,
+                                      const std::string &modelName)
+{
+    if (world_T_base.rows() != world_T_base.cols() || world_T_base.rows() != 4)
+    {
+        const std::string msg = "world_T_base needs to be a 4x4 matrix. Provided a "
+                              + std::to_string(world_T_base.rows()) + "x"
+                              + std::to_string(world_T_base.cols()) + " matrix.";
+        reportError("MeshcatVisualizer", "setModelState", msg.c_str());
+        return false;
+    }
+
+    return this->setModelState(iDynTree::Transform(world_T_base),
+                               iDynTree::VectorDynSize(jointPositions),
+                               modelName);
+}
+
 
 void MeshcatVisualizer::join()
 {
