@@ -135,7 +135,6 @@
 
 // Visualization
 #include "iDynTree/Visualizer.h"
-#include "iDynTree/MeshcatVisualizer.h"
 
 // Inverse Kinematics
 #include "iDynTree/ConvexHullHelpers.h"
@@ -321,7 +320,6 @@ namespace std {
 
 // Visualization
 %include "iDynTree/Visualizer.h"
-%include "iDynTree/MeshcatVisualizer.h"
 
 // Inverse Kinematics
 %include "iDynTree/ConvexHullHelpers.h"
