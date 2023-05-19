@@ -6,6 +6,7 @@
     <innerclass refid="classiDynTree_1_1skinDynLibLinkID" prot="public">iDynTree::skinDynLibLinkID</innerclass>
     <innerclass refid="classiDynTree_1_1iDynTreeLinkAndFrame" prot="public">iDynTree::iDynTreeLinkAndFrame</innerclass>
     <innerclass refid="classiDynTree_1_1skinDynLibConversionsHelper" prot="public">iDynTree::skinDynLibConversionsHelper</innerclass>
+    <innerclass refid="classiDynTree_1_1MeshcatVisualizer" prot="public">iDynTree::MeshcatVisualizer</innerclass>
     <innerclass refid="classiDynTree_1_1ICameraAnimator" prot="public">iDynTree::ICameraAnimator</innerclass>
     <innerclass refid="classiDynTree_1_1ICamera" prot="public">iDynTree::ICamera</innerclass>
     <innerclass refid="classiDynTree_1_1ColorViz" prot="public">iDynTree::ColorViz</innerclass>

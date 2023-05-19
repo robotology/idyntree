@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
   <compounddef id="dir_30e5997e332243feb7f49058feeba2a4" kind="dir">
     <compoundname>iDynTree</compoundname>
+    <innerfile refid="MeshcatVisualizer_8h">MeshcatVisualizer.h</innerfile>
     <innerfile refid="Visualizer_8h">Visualizer.h</innerfile>
     <briefdescription>
     </briefdescription>

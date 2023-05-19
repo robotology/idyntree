@@ -4,6 +4,7 @@
     <compoundname>VectorDynSize.h</compoundname>
     <includes refid="Span_8h" local="no">iDynTree/Core/Span.h</includes>
     <includes local="no">string</includes>
+    <includedby refid="MeshcatVisualizer_8h" local="no">iDynTree/MeshcatVisualizer.h</includedby>
     <includedby refid="FreeFloatingState_8h" local="no">iDynTree/Model/FreeFloatingState.h</includedby>
     <includedby refid="JointState_8h" local="no">iDynTree/Model/JointState.h</includedby>
     <includedby refid="Sensors_8h" local="no">iDynTree/Sensors/Sensors.h</includedby>

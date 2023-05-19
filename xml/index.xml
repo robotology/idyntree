@@ -2370,6 +2370,15 @@
     <member refid="classiDynTree_1_1MatrixView_1accb2fba67d5ab1bcb604481f27cad9db" kind="function"><name>data</name></member>
     <member refid="classiDynTree_1_1MatrixView_1a6db1a78ec1d4fd9e6f92695e37d921d6" kind="function"><name>block</name></member>
   </compound>
+  <compound refid="classiDynTree_1_1MeshcatVisualizer" kind="class"><name>iDynTree::MeshcatVisualizer</name>
+    <member refid="classiDynTree_1_1MeshcatVisualizer_1a3ff0ac700a72f9642bb4179d0ffa8f4e" kind="variable"><name>m_pimpl</name></member>
+    <member refid="classiDynTree_1_1MeshcatVisualizer_1a1a9cf617bbdba399b2cba950980b5133" kind="function"><name>MeshcatVisualizer</name></member>
+    <member refid="classiDynTree_1_1MeshcatVisualizer_1a220d9b2aa9d24c20e293e7e0748cf05a" kind="function"><name>~MeshcatVisualizer</name></member>
+    <member refid="classiDynTree_1_1MeshcatVisualizer_1a677342cec357d16a5612108375a8eabf" kind="function"><name>loadModel</name></member>
+    <member refid="classiDynTree_1_1MeshcatVisualizer_1a2ce0912f6f5526cb7189565922b39f3d" kind="function"><name>setModelState</name></member>
+    <member refid="classiDynTree_1_1MeshcatVisualizer_1a254be39b40e8904b0970f7f91841c552" kind="function"><name>setModelState</name></member>
+    <member refid="classiDynTree_1_1MeshcatVisualizer_1ab28b37d1585d8379895900981dc62ab9" kind="function"><name>join</name></member>
+  </compound>
   <compound refid="classiDynTree_1_1Model" kind="class"><name>iDynTree::Model</name>
     <member refid="classiDynTree_1_1Model_1a50093f9efe3d556d3c02ca287e7e4450" kind="variable"><name>links</name></member>
     <member refid="classiDynTree_1_1Model_1a29cae490ae0b99ab9eb301bbafbae005" kind="variable"><name>joints</name></member>
@@ -5257,6 +5266,8 @@
     <member refid="ModelTransformersSolidShapes_8h_1a6760312b6c7a94affa286e93e5181357" kind="enum"><name>ApproximateSolidShapesWithPrimitiveShapeConversionType</name></member>
     <member refid="ModelTransformersSolidShapes_8h_1a6760312b6c7a94affa286e93e5181357a6486e8af25b0a7add4a835ec17c83e97" kind="enumvalue"><name>ConvertSolidShapesWithEnclosingAxisAlignedBoundingBoxes</name></member>
     <member refid="ModelTransformersSolidShapes_8h_1adbe329aea649b6a379dfd7077ceb1eb9" kind="function"><name>approximateSolidShapesWithPrimitiveShape</name></member>
+  </compound>
+  <compound refid="MeshcatVisualizer_8h" kind="file"><name>MeshcatVisualizer.h</name>
   </compound>
   <compound refid="Visualizer_8h" kind="file"><name>Visualizer.h</name>
     <member refid="Visualizer_8h_1aad6844bb3e20ca63bfe9e3ee6e26515a" kind="enum"><name>LightType</name></member>

@@ -6,6 +6,7 @@
     <includes refid="Rotation_8h" local="no">iDynTree/Core/Rotation.h</includes>
     <includes refid="MatrixFixSize_8h" local="no">iDynTree/Core/MatrixFixSize.h</includes>
     <includes local="no">string</includes>
+    <includedby refid="MeshcatVisualizer_8h" local="no">iDynTree/MeshcatVisualizer.h</includedby>
     <includedby refid="DenavitHartenberg_8h" local="no">iDynTree/Model/DenavitHartenberg.h</includedby>
     <includedby refid="FixedJoint_8h" local="no">iDynTree/Model/FixedJoint.h</includedby>
     <includedby refid="FreeFloatingState_8h" local="no">iDynTree/Model/FreeFloatingState.h</includedby>

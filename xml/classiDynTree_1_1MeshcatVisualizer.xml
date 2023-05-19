@@ -1,0 +1,234 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classiDynTree_1_1MeshcatVisualizer" kind="class" language="C++" prot="public">
+    <compoundname>iDynTree::MeshcatVisualizer</compoundname>
+    <includes local="no">iDynTree/MeshcatVisualizer.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classiDynTree_1_1MeshcatVisualizer_1a3ff0ac700a72f9642bb4179d0ffa8f4e" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; Impl &gt;</type>
+        <definition>std::unique_ptr&lt;Impl&gt; iDynTree::MeshcatVisualizer::m_pimpl</definition>
+        <argsstring></argsstring>
+        <name>m_pimpl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/MeshcatVisualizer.h" line="76" column="21" bodyfile="iDynTree/MeshcatVisualizer.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classiDynTree_1_1MeshcatVisualizer_1a1a9cf617bbdba399b2cba950980b5133" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::MeshcatVisualizer::MeshcatVisualizer</definition>
+        <argsstring>()</argsstring>
+        <name>MeshcatVisualizer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/MeshcatVisualizer.h" line="33" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MeshcatVisualizer_1a220d9b2aa9d24c20e293e7e0748cf05a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>iDynTree::MeshcatVisualizer::~MeshcatVisualizer</definition>
+        <argsstring>()</argsstring>
+        <name>~MeshcatVisualizer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/MeshcatVisualizer.h" line="34" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MeshcatVisualizer_1a677342cec357d16a5612108375a8eabf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::MeshcatVisualizer::loadModel</definition>
+        <argsstring>(const iDynTree::Model &amp;model, const std::string &amp;modelName)</argsstring>
+        <name>loadModel</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> &amp;</type>
+          <declname>model</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>modelName</declname>
+        </param>
+        <briefdescription>
+<para>Load a given model in the visualizer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>model</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the model that should be loaded. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>modelName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the model used in the visualizer. Each model you add needs to have an unique name. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True in case of success false otherwise/ </para>
+</simplesect>
+<simplesect kind="warning"><para>Only meshes are supported. The support to the primary shapes needs to be added. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/MeshcatVisualizer.h" line="43" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MeshcatVisualizer_1a2ce0912f6f5526cb7189565922b39f3d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::MeshcatVisualizer::setModelState</definition>
+        <argsstring>(const iDynTree::Transform &amp;world_T_base, const iDynTree::VectorDynSize &amp;jointPositions, const std::string &amp;modelName)</argsstring>
+        <name>setModelState</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
+          <declname>world_T_base</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref> &amp;</type>
+          <declname>jointPositions</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>modelName</declname>
+        </param>
+        <briefdescription>
+<para>Set the state of an already existing model in the visualizer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>world_T_base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pose of the base of the model. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>jointPositions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>position of the joints. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>modelName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the model specified in <ref refid="classiDynTree_1_1MeshcatVisualizer_1a677342cec357d16a5612108375a8eabf" kindref="member">MeshcatVisualizer::loadModel()</ref>, </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True in case of success false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/MeshcatVisualizer.h" line="53" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MeshcatVisualizer_1a254be39b40e8904b0970f7f91841c552" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool iDynTree::MeshcatVisualizer::setModelState</definition>
+        <argsstring>(const iDynTree::MatrixView&lt; const double &gt; &amp;world_T_base, const iDynTree::Span&lt; const double &gt; &amp;jointPositions, const std::string &amp;modelName)</argsstring>
+        <name>setModelState</name>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1MatrixView" kindref="compound">iDynTree::MatrixView</ref>&lt; const double &gt; &amp;</type>
+          <declname>world_T_base</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classiDynTree_1_1Span" kindref="compound">iDynTree::Span</ref>&lt; const double &gt; &amp;</type>
+          <declname>jointPositions</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>modelName</declname>
+        </param>
+        <briefdescription>
+<para>Set the state of an already existing model in the visualizer. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>world_T_base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>4x4 matrix representing the homogeneous transformation, </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>jointPositions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>position of the joints, </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>modelName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>the name of the model specified in <ref refid="classiDynTree_1_1MeshcatVisualizer_1a677342cec357d16a5612108375a8eabf" kindref="member">MeshcatVisualizer::loadModel()</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>True in case of success false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/MeshcatVisualizer.h" line="64" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1MeshcatVisualizer_1ab28b37d1585d8379895900981dc62ab9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void iDynTree::MeshcatVisualizer::join</definition>
+        <argsstring>()</argsstring>
+        <name>join</name>
+        <briefdescription>
+<para>Utility function to make the meshcat interface run forever (until the user stops the application) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/MeshcatVisualizer.h" line="72" column="10"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para><ref refid="classiDynTree_1_1MeshcatVisualizer" kindref="compound">MeshcatVisualizer</ref> is an iDynTree-based wrapper to the <ulink url="https://github.com/ami-iit/meshcat-cpp">meshcat-cpp</ulink> visualizer. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><simplesect kind="note"><para>Only meshes are supported and the color is taken from the <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="iDynTree/MeshcatVisualizer.h" line="30" column="1" bodyfile="iDynTree/MeshcatVisualizer.h" bodystart="31" bodyend="77"/>
+    <listofallmembers>
+      <member refid="classiDynTree_1_1MeshcatVisualizer_1ab28b37d1585d8379895900981dc62ab9" prot="public" virt="non-virtual"><scope>iDynTree::MeshcatVisualizer</scope><name>join</name></member>
+      <member refid="classiDynTree_1_1MeshcatVisualizer_1a677342cec357d16a5612108375a8eabf" prot="public" virt="non-virtual"><scope>iDynTree::MeshcatVisualizer</scope><name>loadModel</name></member>
+      <member refid="classiDynTree_1_1MeshcatVisualizer_1a3ff0ac700a72f9642bb4179d0ffa8f4e" prot="private" virt="non-virtual"><scope>iDynTree::MeshcatVisualizer</scope><name>m_pimpl</name></member>
+      <member refid="classiDynTree_1_1MeshcatVisualizer_1a1a9cf617bbdba399b2cba950980b5133" prot="public" virt="non-virtual"><scope>iDynTree::MeshcatVisualizer</scope><name>MeshcatVisualizer</name></member>
+      <member refid="classiDynTree_1_1MeshcatVisualizer_1a2ce0912f6f5526cb7189565922b39f3d" prot="public" virt="non-virtual"><scope>iDynTree::MeshcatVisualizer</scope><name>setModelState</name></member>
+      <member refid="classiDynTree_1_1MeshcatVisualizer_1a254be39b40e8904b0970f7f91841c552" prot="public" virt="non-virtual"><scope>iDynTree::MeshcatVisualizer</scope><name>setModelState</name></member>
+      <member refid="classiDynTree_1_1MeshcatVisualizer_1a220d9b2aa9d24c20e293e7e0748cf05a" prot="public" virt="non-virtual"><scope>iDynTree::MeshcatVisualizer</scope><name>~MeshcatVisualizer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

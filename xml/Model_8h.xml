@@ -11,6 +11,7 @@
     <includes local="no">string</includes>
     <includes local="no">vector</includes>
     <includedby refid="skinDynLibConversionsImplementation_8h" local="no">iDynTree/skinDynLibConversionsImplementation.h</includedby>
+    <includedby refid="MeshcatVisualizer_8h" local="no">iDynTree/MeshcatVisualizer.h</includedby>
     <includedby refid="InertialParametersSolidShapesHelpers_8h" local="no">iDynTree/InertialParametersSolidShapesHelpers.h</includedby>
     <includedby refid="DenavitHartenberg_8h" local="no">iDynTree/Model/DenavitHartenberg.h</includedby>
     <includedby refid="ModelTestUtils_8h" local="no">iDynTree/Model/ModelTestUtils.h</includedby>
