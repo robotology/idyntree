@@ -37,6 +37,11 @@ if(IDYNTREE_USES_IRRLICHT)
                                                src/FloorGridSceneNode.cpp)
 endif()
 
+if(IDYNTREE_USES_MESHCATCPP)
+    set(iDynTree_visualization_header ${iDynTree_visualization_header} include/iDynTree/MeshcatVisualizer.h)
+    set(iDynTree_visualization_source  ${iDynTree_visualization_source} src/MeshcatVisualizer.cpp)
+endif()
+
 source_group("Source Files" FILES ${iDynTree_visualization_source})
 source_group("Header Files" FILES ${iDynTree_visualization_header})
 source_group("Private Source Files" FILES ${iDynTree_visualization_source})
@@ -91,6 +96,13 @@ if(IDYNTREE_USES_IRRLICHT)
         target_link_libraries(${libraryname} LINK_PRIVATE ${CARBON_LIBRARY} ${COCOA_LIBRARY} ${IOKIT_LIBRARY})
     endif ()
 endif()
+
+if(IDYNTREE_USES_MESHCATCPP)
+    find_package(MeshcatCpp REQUIRED)
+    target_link_libraries(${libraryname} PRIVATE MeshcatCpp::MeshcatCpp)
+endif()
+
+
 
 install(TARGETS ${libraryname}
         EXPORT iDynTree
