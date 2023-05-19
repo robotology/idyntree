@@ -24,7 +24,8 @@ namespace iDynTree
 {
 
 /**
- *  MeshcatVisualizer is a wrapper to the meshcat-cpp visualizer.
+ *  MeshcatVisualizer is an iDynTree-based wrapper to the [meshcat-cpp](https://github.com/ami-iit/meshcat-cpp) visualizer.
+ * \note Only meshes are supported and the color is taken from the iDynTree::Model
  */
 class MeshcatVisualizer
 {
