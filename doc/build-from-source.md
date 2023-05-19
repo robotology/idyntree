@@ -17,6 +17,7 @@ In case they are disabled, tipically some functionality of iDynTree is not provi
 | [irrlicht](http://irrlicht.sourceforge.net/) | No | `IDYNTREE_USES_IRRLICHT` | ✔️ | ✔️ |
 | [glfw](https://www.glfw.org/) | No | `IDYNTREE_USES_IRRLICHT` | ✔️ | ✔️ |
 | [osqp-eigen](https://github.com/robotology/osqp-eigen) | No | `IDYNTREE_USES_OSQPEIGEN` | ✔️ | ✔️ |
+| [meshcat-cpp](https://github.com/ami-iit/meshcat-cpp) | No | `IDYNTREE_USES_MESHCATCPP` | ❌ | ❌ |
 
 
 ### Install dependencies with conda-forge
