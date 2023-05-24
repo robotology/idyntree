@@ -471,9 +471,9 @@ bool Visualizer::init(const VisualizerOptions &visualizerOptions)
     irr::SIrrlichtCreationParameters irrDevParams;
 
 // If we are on Windows, only SDL works with the external window
-#if defined(_WIN32)
+#if defined(_WIN32) ||  defined(__APPLE__)
 #ifndef _IRR_COMPILE_WITH_SDL_DEVICE_
-#error "On Windows it is necessary to use Irrlicht with SDL"
+#error "On Windows and MacOS it is necessary to use Irrlicht with SDL"
 #endif
     irrDevParams.DeviceType = irr::EIDT_SDL;
 #endif

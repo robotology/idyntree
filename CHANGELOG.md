@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added optional dependency on [meshcat-cpp](https://github.com/ami-iit/meshcat-cpp) (https://github.com/robotology/idyntree/pull/1074).
 - Added `iDynTree::MeshcatVisualizer` C++ class (https://github.com/robotology/idyntree/pull/1074).
 
+### Fixed
+
+- Fixed the `iDynTree::Visualizer` class to work on macOS, after it was broken in 9.0.0 . To do so, now the compilation with `IDYNTREE_USES_IRRLICHT` set to `ON` on macOS requires irrlicht to be compiled with SDL support (https://github.com/robotology/idyntree/issues/1076, https://github.com/robotology/idyntree/pull/1077). 
+
 ## [9.0.0] - 2023-05-11
 
 ### Fixed
