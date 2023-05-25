@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [9.1.0] - 2023-05-25
+
 ### Added
 
 - Added optional dependency on [meshcat-cpp](https://github.com/ami-iit/meshcat-cpp) (https://github.com/robotology/idyntree/pull/1074).
