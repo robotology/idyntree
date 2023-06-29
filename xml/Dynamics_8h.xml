@@ -6,9 +6,9 @@
     <includes refid="Indices_8h" local="no">iDynTree/Model/Indices.h</includes>
     <includes refid="LinkState_8h" local="no">iDynTree/Model/LinkState.h</includes>
     <includes refid="JointState_8h" local="no">iDynTree/Model/JointState.h</includes>
+    <includedby refid="GravityCompensationHelpers_8h" local="no">iDynTree/Estimation/GravityCompensationHelpers.h</includedby>
     <includedby refid="DynamicsLinearization_8h" local="no">iDynTree/Model/DynamicsLinearization.h</includedby>
     <includedby refid="DynamicsLinearizationHelpers_8h" local="no">iDynTree/Model/DynamicsLinearizationHelpers.h</includedby>
-    <includedby refid="GravityCompensationHelpers_8h" local="no">iDynTree/Estimation/GravityCompensationHelpers.h</includedby>
     <innerclass refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers" prot="public">iDynTree::ArticulatedBodyAlgorithmInternalBuffers</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
       <sectiondef kind="func">
@@ -186,7 +186,7 @@
 <parametername direction="in">linksVel</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Vector of left-trivialized velocities for each link of the model (for each link <formula id="23">$L$</formula>, the corresponding velocity is <formula id="37">${}^L \mathrm{v}_{A, L}$</formula>). </para>
+<para>Vector of left-trivialized velocities for each link of the model (for each link <formula id="148">$L$</formula>, the corresponding velocity is <formula id="149">${}^L \mathrm{v}_{A, L}$</formula>). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -194,7 +194,7 @@
 <parametername direction="in">linksProperAcc</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Vector of left-trivialized proper acceleration for each link of the model (for each link <formula id="23">$L$</formula>, the corresponding proper acceleration is <formula id="38">${}^L \dot{\mathrm{v}}_{A, L} - \begin{bmatrix} {}^L R_A {}^A g \\ 0_{3\times1} \end{bmatrix} $</formula>), where <formula id="39">$ {}^A g \in \mathbb{R}^3 $</formula> is the gravity acceleration expressed in an inertial frame <formula id="40">$A$</formula> . See iDynTree::LinkNetExternalWrenches . </para>
+<para>Vector of left-trivialized proper acceleration for each link of the model (for each link <formula id="148">$L$</formula>, the corresponding proper acceleration is <formula id="150">${}^L \dot{\mathrm{v}}_{A, L} - \begin{bmatrix} {}^L R_A {}^A g \\ 0_{3\times1} \end{bmatrix} $</formula>), where <formula id="151">$ {}^A g \in \mathbb{R}^3 $</formula> is the gravity acceleration expressed in an inertial frame <formula id="18">$A$</formula> . See iDynTree::LinkNetExternalWrenches . </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -202,7 +202,7 @@
 <parametername direction="in">linkExtForces</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Vector of external 6D force/torques applied to the links. For each link <formula id="23">$L$</formula>, the corresponding external force is <formula id="41">${}_L \mathrm{f}^x_L$</formula>, i.e. the force that the enviroment applies on the on the link <formula id="23">$L$</formula>, expressed in the link frame <formula id="23">$L$</formula>. </para>
+<para>Vector of external 6D force/torques applied to the links. For each link <formula id="148">$L$</formula>, the corresponding external force is <formula id="152">${}_L \mathrm{f}^x_L$</formula>, i.e. the force that the enviroment applies on the on the link <formula id="148">$L$</formula>, expressed in the link frame <formula id="148">$L$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -366,7 +366,7 @@
 <parametername direction="in">referenceFrame_H_link</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> of each link w.r.t. to given frame D (tipically an inertial frame A, the base frame B or the mixed frame B[A]). For each link <formula id="23">$L$</formula>, the corresponding transform is <formula id="42">${}^D H_L$</formula>. </para>
+<para><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> of each link w.r.t. to given frame D (tipically an inertial frame A, the base frame B or the mixed frame B[A]). For each link <formula id="148">$L$</formula>, the corresponding transform is <formula id="153">${}^D H_L$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -374,7 +374,7 @@
 <parametername direction="in">linksVel</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Vector of left-trivialized velocities for each link of the model (for each link <formula id="23">$L$</formula>, the corresponding velocity is <formula id="37">${}^L \mathrm{v}_{A, L}$</formula>). </para>
+<para>Vector of left-trivialized velocities for each link of the model (for each link <formula id="148">$L$</formula>, the corresponding velocity is <formula id="149">${}^L \mathrm{v}_{A, L}$</formula>). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -382,7 +382,7 @@
 <parametername direction="in">linksProperAcc</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Vector of left-trivialized proper acceleration for each link of the model (for each link <formula id="23">$L$</formula>, the corresponding proper acceleration is <formula id="38">${}^L \dot{\mathrm{v}}_{A, L} - \begin{bmatrix} {}^L R_A {}^A g \\ 0_{3\times1} \end{bmatrix} $</formula>), where <formula id="39">$ {}^A g \in \mathbb{R}^3 $</formula> is the gravity acceleration expressed in an inertial frame <formula id="40">$A$</formula> . </para>
+<para>Vector of left-trivialized proper acceleration for each link of the model (for each link <formula id="148">$L$</formula>, the corresponding proper acceleration is <formula id="150">${}^L \dot{\mathrm{v}}_{A, L} - \begin{bmatrix} {}^L R_A {}^A g \\ 0_{3\times1} \end{bmatrix} $</formula>), where <formula id="151">$ {}^A g \in \mathbb{R}^3 $</formula> is the gravity acceleration expressed in an inertial frame <formula id="18">$A$</formula> . </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>

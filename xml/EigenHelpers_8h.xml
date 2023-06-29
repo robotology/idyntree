@@ -13,10 +13,10 @@
     <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
     <includes refid="Utils_8h" local="no">iDynTree/Core/Utils.h</includes>
     <includes refid="SparseMatrix_8h" local="no">iDynTree/Core/SparseMatrix.h</includes>
-    <includedby refid="PrivateUtils_8h" local="no">iDynTree/Core/PrivateUtils.h</includedby>
     <includedby refid="AttitudeEstimatorUtils_8h" local="no">iDynTree/Estimation/AttitudeEstimatorUtils.h</includedby>
     <includedby refid="GravityCompensationHelpers_8h" local="no">iDynTree/Estimation/GravityCompensationHelpers.h</includedby>
     <includedby refid="KalmanFilter_8h" local="no">iDynTree/Estimation/KalmanFilter.h</includedby>
+    <includedby refid="PrivateUtils_8h" local="no">iDynTree/Core/PrivateUtils.h</includedby>
     <incdepgraph>
       <node id="3">
         <label>Eigen/Dense</label>

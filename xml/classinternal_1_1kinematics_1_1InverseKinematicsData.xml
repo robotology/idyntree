@@ -584,7 +584,7 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>joint configuration <formula id="217">$ q_j \in \mathbb{R}^n $</formula> </para>
+<para>joint configuration <formula id="8">$ q_j \in \mathbb{R}^n $</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -598,7 +598,7 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>base position <formula id="218">$ {}^w H_{base} \in SE(3) $</formula> </para>
+<para>base position <formula id="9">$ {}^w H_{base} \in SE(3) $</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -612,7 +612,7 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>joint velotiy <formula id="219">$ \dot{q}_j \in \mathbb{R}^n $</formula> </para>
+<para>joint velotiy <formula id="10">$ \dot{q}_j \in \mathbb{R}^n $</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
@@ -626,7 +626,7 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>base velocity <formula id="220">$ [\dot{p}, {}^I \omega] \in se(3) $</formula> </para>
+<para>base velocity <formula id="11">$ [\dot{p}, {}^I \omega] \in se(3) $</formula> </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
