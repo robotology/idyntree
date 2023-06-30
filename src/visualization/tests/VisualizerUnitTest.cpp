@@ -280,6 +280,9 @@ void checkDoubleViz()
         viz1.draw();
         viz2.draw();
     }
+
+    viz1.close();
+    viz2.close();
 }
 
 int main()

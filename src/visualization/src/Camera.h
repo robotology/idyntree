@@ -36,6 +36,8 @@ public:
 
     void setAspectRatio(double aspectRatio);
 
+    void setWindowDimensions(unsigned int width, unsigned int height);
+
     virtual void setPosition(const Position& cameraPos);
     virtual void setTarget(const Position& targetPos);
     virtual void setUpVector(const Direction& upVector);

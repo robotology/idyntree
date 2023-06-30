@@ -9,9 +9,9 @@ on:
   - cron:  '0 2 * * *'
 
 env:
-  YCM_TAG: v0.14.2
-  YARP_TAG: v3.7.2
-  ICUB_TAG: v2.0.2
+  YCM_TAG: v0.15.1
+  YARP_TAG: v3.8.0
+  ICUB_TAG: v2.1.1
 
 jobs:
   build-with-conda-dependencies:
@@ -24,18 +24,20 @@ jobs:
         os: [ubuntu-20.04, macos-latest, windows-2019]
 
     steps:
-    - uses: actions/checkout@v2
-
-    - uses: conda-incubator/setup-miniconda@v2
-      with:
-        miniforge-variant: Mambaforge
-        miniforge-version: latest
-        channels: conda-forge,robotology
+    - uses: actions/checkout@v3
 
     - name: Print used environment (no conda) [Conda]
       shell: bash
       run: |
         env
+    - name: Get current week
+      id: week
+      run: echo "week=$(date +%Y-%U)" >> "${GITHUB_OUTPUT}"
+    - uses: mamba-org/setup-micromamba@v1
+      with:
+        environment-file: ci_env.yml
+        cache-environment-key: environment-${{ steps.week.outputs.week }}
+
 
     - name: Install files to enable compilation of mex files [Conda/Linux]
       if: contains(matrix.os, 'ubuntu')
@@ -73,7 +75,7 @@ jobs:
       if: contains(matrix.os, 'windows')
       shell: bash -l {0}
       run: |
-        bash_vc_install=${VCToolsInstallDir//\\//}        
+        bash_vc_install=${VCToolsInstallDir//\\//}
         compiler_path=${bash_vc_install}bin/Hostx64/x64/cl.exe
         echo "CC=${compiler_path}" >> $GITHUB_ENV
         echo "CXX=${compiler_path}" >> $GITHUB_ENV
@@ -92,14 +94,6 @@ jobs:
         # Visualizer tests excluded as a workaround for https://github.com/robotology/idyntree/issues/808
         echo "IDYNTREE_TEST_TO_SKIP=Visualizer|matlab" >> $GITHUB_ENV
 
-    - name: Dependencies [Conda]
-      shell: bash -l {0}
-      run: |
-        # Workaround for https://github.com/conda-incubator/setup-miniconda/issues/186
-        conda config --remove channels defaults
-        # Compilation related dependencies
-        mamba install cmake compilers make ninja pkg-config eigen libxml2 assimp ipopt irrlicht swig pybind11 python numpy yarp icub-main osqp-eigen
-
     # Additional dependencies useful only on Linux
     - name: Dependencies [Conda/Linux]
       if: contains(matrix.os, 'ubuntu')
@@ -107,12 +101,12 @@ jobs:
       run: |
         # Additional dependencies only useful on Linux
         # See https://github.com/robotology/robotology-superbuild/issues/477
-        mamba install expat-cos6-x86_64 freeglut libselinux-cos6-x86_64 libxau-cos6-x86_64 libxcb-cos6-x86_64 libxdamage-cos6-x86_64 libxext-cos6-x86_64 libxfixes-cos6-x86_64 libxxf86vm-cos6-x86_64 mesa-libgl-cos6-x86_64 mesa-libgl-devel-cos6-x86_64
+        micromamba install expat-cos6-x86_64 freeglut libselinux-cos6-x86_64 libxau-cos6-x86_64 libxcb-cos6-x86_64 libxdamage-cos6-x86_64 libxext-cos6-x86_64 libxfixes-cos6-x86_64 libxxf86vm-cos6-x86_64 mesa-libgl-cos6-x86_64 mesa-libgl-devel-cos6-x86_64
 
     - name: Print used environment [Conda]
       shell: bash -l {0}
       run: |
-        mamba list
+        micromamba list
         env
 
     - name: Configure [Conda]
@@ -160,21 +154,37 @@ jobs:
         cmake --install . --config ${{ matrix.build_type }}
 
 
-  build-with-system-dependencies:
-    name: '[${{ matrix.os }}@${{ matrix.build_type }}]'
+  build-with-apt-dependencies:
+    name: '[apt:${{ matrix.docker_image }}@${{ matrix.build_type }}]'
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         build_type: [Release]
-        os: [ubuntu-20.04, macOS-latest]
+        os:
+          - ubuntu-latest
+        docker_image:
+          - "ubuntu:20.04"
+          - "ubuntu:22.04"
+          - "debian:sid"
+
+    container:
+      image: ${{ matrix.docker_image }}
 
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v3
 
+    - name: Dependencies [apt]
+      run: |
+        # See  https://stackoverflow.com/questions/44331836/apt-get-install-tzdata-noninteractive,
+        # only required by Ubuntu 20.04
+        export DEBIAN_FRONTEND=noninteractive
+        apt-get -y update
+        apt-get -y install \
+            git build-essential cmake libace-dev coinor-libipopt-dev libeigen3-dev swig \
+            libxml2-dev liboctave-dev python3-dev python3-numpy valgrind libassimp-dev libirrlicht-dev curl unzip libglfw3-dev
 
-    - name: Install files to enable compilation of mex files [Linux]
-      if: contains(matrix.os, 'ubuntu')
+    - name: Install files to enable compilation of mex files [apt]
       run: |
         curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020b_mexa64.zip
         unzip msdk_R2020b_mexa64.zip
@@ -182,57 +192,20 @@ jobs:
         echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2020b_mexa64" >> $GITHUB_ENV
         echo "GHA_Matlab_MEX_EXTENSION=mexa64" >> $GITHUB_ENV
 
-    - name: Install files to enable compilation of mex files [macOS]
-      if: contains(matrix.os, 'macos')
-      run: |
-        curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020a_mexmaci64.zip
-        unzip msdk_R2020a_mexmaci64.zip
-        rm msdk_R2020a_mexmaci64.zip
-        echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2020a_mexmaci64" >> $GITHUB_ENV
-        echo "GHA_Matlab_MEX_EXTENSION=mexmaci64" >> $GITHUB_ENV
-
-    - name: Install files to enable compilation of mex files [Windows]
-      if: contains(matrix.os, 'windows')
-      shell: bash
-      run: |
-        curl -L -O https://github.com/robotology/robotology-vcpkg-ports/releases/download/storage/msdk_R2020a_mexw64.zip
-        unzip msdk_R2020a_mexw64.zip
-        rm msdk_R2020a_mexw64.zip
-        echo "GHA_Matlab_ROOT_DIR=${GITHUB_WORKSPACE}/msdk_R2020a_mexw64" >> $GITHUB_ENV
-        echo "GHA_Matlab_MEX_EXTENSION=mexw64" >> $GITHUB_ENV
-
     # Print environment variables to simplify development and debugging
     - name: Environment Variables
       shell: bash
       run: env
 
-    # Remove apt repos that are known to break from time to time
-    # See https://github.com/actions/virtual-environments/issues/323
-    - name: Remove broken apt repos [Ubuntu]
-      if: contains(matrix.os, 'ubuntu')
-      run: |
-        for apt_file in `grep -lr microsoft /etc/apt/sources.list.d/`; do sudo rm $apt_file; done
+    - name: Cache Source-based Dependencies
+      id: cache-source-deps
+      uses: actions/cache@v3
+      with:
+        path: ${{ github.workspace }}/install/deps
+        key: source-deps-${{ matrix.docker_image }}-ycm-${{ env.YCM_TAG }}-yarp-${{ env.YARP_TAG }}-icub-${{ env.ICUB_TAG }}
 
-    # ============
-    # DEPENDENCIES
-    # ============
-
-    - name: Dependencies [macOS]
-      if: matrix.os == 'macOS-latest'
-      run: |
-        brew install ace assimp boost eigen ipopt irrlicht swig
-
-    - name: Dependencies [Ubuntu]
-      if: contains(matrix.os, 'ubuntu')
-      run: |
-        sudo apt-get update
-        sudo apt-get install \
-            git build-essential cmake libace-dev coinor-libipopt-dev libeigen3-dev swig \
-            libxml2-dev liboctave-dev python-dev python3-numpy valgrind libassimp-dev libirrlicht-dev
-
-
-    - name: Source-based Dependencies [Ubuntu/macOS]
-      if: steps.cache-source-deps.outputs.cache-hit != 'true' && (contains(matrix.os, 'ubuntu') || matrix.os == 'macOS-latest')
+    - name: Source-based Dependencies [apt]
+      if: steps.cache-source-deps.outputs.cache-hit != 'true' && contains(matrix.os, 'ubuntu')
       shell: bash
       run: |
         # YCM
@@ -257,18 +230,11 @@ jobs:
         cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install/deps -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install/deps ..
         cmake --build . --config ${{ matrix.build_type }} --target install
 
-
-    - name: Dependencies (workaround for portaudio YCM problem) [macOS]
-      if: matrix.os == 'macOS-latest'
-      run: |
-        brew install octave
-
     # ===================
     # CMAKE-BASED PROJECT
     # ===================
 
-    - name: Configure [Ubuntu/macOS]
-      if: contains(matrix.os, 'ubuntu') || matrix.os == 'macOS-latest'
+    - name: Configure [apt]
       shell: bash
       run: |
         mkdir -p build
@@ -276,28 +242,13 @@ jobs:
         cmake -DCMAKE_PREFIX_PATH=${GITHUB_WORKSPACE}/install/deps -DIDYNTREE_COMPILE_TESTS:BOOL=ON -DIDYNTREE_USES_YARP:BOOL=ON \
               -DIDYNTREE_USES_ICUB_MAIN:BOOL=ON -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -DIDYNTREE_USES_ASSIMP:BOOL=ON \
               -DIDYNTREE_USES_MATLAB:BOOL=ON -DMatlab_ROOT_DIR=${GHA_Matlab_ROOT_DIR} -DMatlab_MEX_EXTENSION:STRING=${GHA_Matlab_MEX_EXTENSION} -DIDYNTREE_DISABLE_MATLAB_TESTS:BOOL=ON  \
-              -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_OCTAVE:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
-
-    - name: Enable additional Ubuntu options (Valgrind, Python) [Ubuntu]
-      if: contains(matrix.os, 'ubuntu')
-      run: |
-        cd build
-        # Assimp is disabled on Ubuntu as a workaround for https://github.com/robotology/idyntree/issues/663
-        cmake -DIDYNTREE_USES_PYTHON:BOOL=ON -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=ON .
-        # For some reason, Ubuntu 18.04 image in GitHub Actions contain OpenBLAS 0.3.5, that is affected by https://github.com/xianyi/OpenBLAS/issues/2003
-        # As a workaround, we test against the regular blas instead of openblas
-        sudo apt-get install libblas-dev libatlas-base-dev
-        sudo apt-get remove libopenblas-base
+              -DIDYNTREE_USES_IPOPT:BOOL=ON -DIDYNTREE_USES_PYTHON:BOOL=ON -DIDYNTREE_RUN_VALGRIND_TESTS:BOOL=ON -DIDYNTREE_USES_OCTAVE:BOOL=ON -DIDYNTREE_USES_IRRLICHT:BOOL=ON -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/install ..
 
     - name: Build
       shell: bash
       run: |
         cd build
-        # Attempt of fix for using YARP idl generators (that link ACE) in Windows
-        # See https://github.com/robotology/idyntree/issues/569
-        export PATH=$PATH:${GITHUB_WORKSPACE}/install/bin:${VCPKG_INSTALLATION_ROOT}/installed/x64-windows/bin:${VCPKG_INSTALLATION_ROOT}/installed/x64-windows/debug/bin
         cmake --build . --config ${{ matrix.build_type }}
-
 
     - name: Test
       shell: bash
@@ -307,15 +258,13 @@ jobs:
         ctest --output-on-failure -C ${{ matrix.build_type }} -E "Visualizer|matlab" .
 
 
-    - name: Install [Ubuntu/macOS]
-      if: contains(matrix.os, 'ubuntu') || matrix.os == 'macOS-latest'
+    - name: Install [apt]
       shell: bash
       run: |
         cd build
         cmake --build . --config ${{ matrix.build_type }} --target install
 
-    - name: Compile Examples [Ubuntu/macOS]
-      if: contains(matrix.os, 'ubuntu') || matrix.os == 'macOS-latest'
+    - name: Compile Examples [apt]
       shell: bash
       run: |
         cd examples
@@ -324,9 +273,7 @@ jobs:
         cmake -DCMAKE_PREFIX_PATH="${GITHUB_WORKSPACE}/install/deps;${GITHUB_WORKSPACE}/install" ..
         cmake --build . --config ${{ matrix.build_type }}
 
-
-    - name: Check build if some dependencies are not enabled [Ubuntu]
-      if: contains(matrix.os, 'ubuntu')
+    - name: Check build if some dependencies are not enabled [apt]
       shell: bash
       run: |
         cd build

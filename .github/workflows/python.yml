@@ -46,7 +46,8 @@ jobs:
             swig \
             libxml2-dev \
             libassimp-dev \
-            libirrlicht-dev
+            libirrlicht-dev \
+            libglfw3-dev
           pip install build
 
       - name: Build sdist
@@ -94,12 +95,12 @@ jobs:
         run: python -m cibuildwheel --output-dir wheelhouse
         env:
           CIBW_BUILD_VERBOSITY: 1
-          CIBW_BUILD: cp37-*manylinux*_x86_64 cp38-*manylinux*_x86_64 cp39-*manylinux*_x86_64 cp310-*manylinux*_x86_64
-          CIBW_MANYLINUX_X86_64_IMAGE: manylinux_2_24
-          CIBW_ENVIRONMENT_LINUX: AUDITWHEEL_PLAT=manylinux_2_24_x86_64
+          CIBW_BUILD: cp37-*manylinux*_x86_64 cp38-*manylinux*_x86_64 cp39-*manylinux*_x86_64 cp310-*manylinux*_x86_64 cp311-*manylinux*_x86_64
+          CIBW_MANYLINUX_X86_64_IMAGE: manylinux_2_28
+          CIBW_ENVIRONMENT_LINUX: AUDITWHEEL_PLAT=manylinux_2_28_x86_64
           CIBW_BEFORE_BUILD_LINUX: |
-            apt-get update &&\
-            apt-get install -y libeigen3-dev libassimp-dev libxml2-dev coinor-libipopt-dev libirrlicht-dev
+            dnf update -y &&\
+            dnf install -y eigen3-devel libxml2-devel
           CIBW_TEST_COMMAND: "python -c 'import idyntree.bindings'"
 
       - uses: actions/upload-artifact@v3

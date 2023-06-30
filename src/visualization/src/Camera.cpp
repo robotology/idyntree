@@ -51,6 +51,12 @@ void Camera::setAspectRatio(double aspectRatio)
     }
 }
 
+void Camera::setWindowDimensions(unsigned int width, unsigned int height)
+{
+    setAspectRatio(width/ (float)height);
+    m_animator->setWindowDimensions(width, height);
+}
+
 void Camera::setIrrlichtCamera(irr::scene::ICameraSceneNode* cam)
 {
     m_irrCamera = cam;

@@ -8,13 +8,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [8.999.0] - 2023-03-05
+## [9.1.0] - 2023-05-25
+
+### Added
+
+- Added optional dependency on [meshcat-cpp](https://github.com/ami-iit/meshcat-cpp) (https://github.com/robotology/idyntree/pull/1074).
+- Added `iDynTree::MeshcatVisualizer` C++ class (https://github.com/robotology/idyntree/pull/1074).
+
+### Fixed
+
+- Fixed the `iDynTree::Visualizer` class to work on macOS, after it was broken in 9.0.0 . To do so, now the compilation with `IDYNTREE_USES_IRRLICHT` set to `ON` on macOS requires irrlicht to be compiled with SDL support (https://github.com/robotology/idyntree/issues/1076, https://github.com/robotology/idyntree/pull/1077). 
+
+## [9.0.0] - 2023-05-11
 
 ### Fixed
 - Fix export of `iDynTree::PrismaticJoint` in `iDynTree::getRandomModel` (https://github.com/robotology/idyntree/pull/1057).
 
 ### Changed
 
+- Binary wheels available on PyPI now target `manylinux_2_28`, and the options `IDYNTREE_USES_ASSIMP`, `IDYNTREE_USES_IPOPT` and `IDYNTREE_USES_IRRLICHT` are disable in binary wheels on PyPI. If you need these options enabled, please use conda-forge binaries or build iDynTree from source (https://github.com/robotology/idyntree/pull/1068).
+- Compilation with `IDYNTREE_USES_IRRLICHT` set to `ON` now requires `glfw` library. Furthermore, now `IDYNTREE_USES_IRRLICHT`  on Windows requires irrlicht to be compiled with SDL support. This changes have been done to support resizable visualizer windows on Windows (https://github.com/robotology/idyntree/issues/1070, https://github.com/robotology/idyntree/pull/1071). 
 - Use iDynTree::InverseKinematicsRotationParametrizationRollPitchYaw as default parametrization in iDynTree::InverseKinematics (https://github.com/robotology/idyntree/pull/1058).
 
 #### URDF XML parser change 
