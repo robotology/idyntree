@@ -33,6 +33,7 @@ class MeshcatVisualizer:
         self.model = dict()
         self.link_pos = dict()
         self.primitive_geometries_names = []
+        self.arrow_names = []
 
     @staticmethod
     def __is_mesh(geometry_object: idyn.SolidShape) -> bool:
@@ -50,6 +51,12 @@ class MeshcatVisualizer:
             return True
 
         return False
+
+    @staticmethod
+    def __skew(x):
+        return np.array([[0, -x[2], x[1]],
+                         [x[2], 0, -x[0]],
+                         [-x[1], x[0], 0]])
 
     @staticmethod
     def __load_mesh(geometry_object: idyn.SolidShape):
@@ -157,6 +164,9 @@ class MeshcatVisualizer:
 
     def __primitive_geometry_exists(self, geometry_name: str):
         return geometry_name in self.primitive_geometries_names
+
+    def __arrow_exists(self, arrow_name: str):
+        return arrow_name in self.arrow_names
 
     def __get_color_from_shape(self, solid_shape, color):
         if color is None:
@@ -392,6 +402,40 @@ class MeshcatVisualizer:
             transform[3, 3] = 1
             self.viewer[shape_name].set_transform(transform)
 
+    def set_arrow_transform(self, origin, vector, shape_name="iDynTree"):
+        if not self.__arrow_exists(shape_name):
+            warnings.warn("The arrow named: " + shape_name + " does not exist.", category=UserWarning, stacklevel=2)
+            return
+
+        # compute the scaling matrix
+        S = np.diag([1, 1, np.linalg.norm(vector)])
+        transform = np.zeros((4, 4))
+        transform[0:3, 3] = np.array(origin) + np.array(vector) / 2
+        transform[3, 3] = 1
+
+        if np.linalg.norm(vector) < 1e-6:
+            warnings.warn("The vector is too small to be visualized.", category=UserWarning, stacklevel=2)
+            return
+
+        # extract rotation matrix from a normalized vector
+        vector = vector / np.linalg.norm(vector)
+        dummy_vector = np.array([0, 0, 1])
+
+        # compute the rotation matrix bewteen the two vectors
+        # math taken from
+        # https://math.stackexchange.com/questions/180418/calculate-rotation-matrix-to-align-vector-a-to-vector-b-in-3d
+        v = np.cross(dummy_vector, vector)
+        s = np.linalg.norm(v)
+        if s < 1e-6:
+            R = np.eye(3)
+        else:
+            c = np.dot(dummy_vector, vector)
+            skew_symmetric_matrix = self.__skew(v)
+            R = np.eye(3) + skew_symmetric_matrix + np.dot(skew_symmetric_matrix, skew_symmetric_matrix) * ((1 - c) / (s ** 2))
+
+        transform[0:3, 0:3] = R @ S
+        self.viewer[shape_name].set_transform(transform)
+
     def load_model_from_file(
         self, model_path: str, considered_joints=None, model_name="iDynTree", color=None
     ):
@@ -457,6 +501,11 @@ class MeshcatVisualizer:
         self.load_primitive_geometry(
             solid_shape=cylinder, shape_name=shape_name, color=color
         )
+
+    def load_arrow(self, radius, shape_name="iDynTree", color=None):
+        self.load_cylinder(radius, 1.0, shape_name=shape_name, color=color)
+        if self.__primitive_geometry_exists(shape_name):
+            self.arrow_names.append(shape_name)
 
     def load_box(self, x, y, z, shape_name="iDynTree", color=None):
         box = idyn.Box()
