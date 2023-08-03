@@ -414,7 +414,7 @@ class MeshcatVisualizer:
         transform[3, 3] = 1
 
         if np.linalg.norm(vector) < 1e-6:
-            warnings.warn("The vector is too small to be visualized.", category=UserWarning, stacklevel=2)
+            self.viewer[shape_name].set_transform(transform)
             return
 
         # extract rotation matrix from a normalized vector
