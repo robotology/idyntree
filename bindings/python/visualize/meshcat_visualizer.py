@@ -421,7 +421,7 @@ class MeshcatVisualizer:
         vector = vector / np.linalg.norm(vector)
         dummy_vector = np.array([0, 0, 1])
 
-        # compute the rotation matrix bewteen the two vectors
+        # compute the rotation matrix between the two vectors
         # math taken from
         # https://math.stackexchange.com/questions/180418/calculate-rotation-matrix-to-align-vector-a-to-vector-b-in-3d
         v = np.cross(dummy_vector, vector)
