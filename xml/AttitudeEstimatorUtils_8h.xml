@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="16" column="9" bodyfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" bodystart="16" bodyend="-1"/>
+        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="16" column="11" bodyfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" bodystart="16" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -219,7 +219,7 @@
           <declname>omega</declname>
         </param>
         <briefdescription>
-<para>computes <formula id="34">$ 3 \times 3 $</formula> skew-symmetric matrix ( <formula id="35">$ \mathbb{so}(3) $</formula> space) for a given 3d vector ( <formula id="22">$ \mathbb{R}^3 $</formula> space) </para>
+<para>computes <formula id="35">$ 3 \times 3 $</formula> skew-symmetric matrix ( <formula id="198">$ \mathbb{so}(3) $</formula> space) for a given 3d vector ( <formula id="186">$ \mathbb{R}^3 $</formula> space) </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -249,15 +249,15 @@
           <declname>S</declname>
         </param>
         <briefdescription>
-<para>checks if the <formula id="34">$ 3 \times 3 $</formula> matrix is skew-symmetric </para>
+<para>checks if the <formula id="35">$ 3 \times 3 $</formula> matrix is skew-symmetric </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="36">\[ S + S^T = 0 \]</formula> <parameterlist kind="param"><parameteritem>
+<para><formula id="199">\[ S + S^T = 0 \]</formula> <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">S</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><formula id="34">$ 3 \times 3 $</formula> matrix </para>
+<para><formula id="35">$ 3 \times 3 $</formula> matrix </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>

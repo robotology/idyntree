@@ -385,7 +385,7 @@
           <declname>d</declname>
         </param>
         <briefdescription>
-<para>Build the ArticulatedInertia <formula id="199">$U d^{-1} U^\top$</formula> . </para>
+<para>Build the ArticulatedInertia <formula id="0">$U d^{-1} U^\top$</formula> . </para>
         </briefdescription>
         <detaileddescription>
 <para>Used in the articulated body algorithm . </para>
