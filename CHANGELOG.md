@@ -8,7 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- Added the possibility of exporting xml blobs w/ ModelExporter (https://github.com/robotology/idyntree/pull/1088)
+### Added
+
+- Added the possibility of exporting additional XML elements that are added as child of the `<robot>` element in URDF ModelExporter (https://github.com/robotology/idyntree/pull/1088).
+
+### Changed
+
+- The `iDynTree::ModelExporterOptions` class was changed to be defined as a struct (https://github.com/robotology/idyntree/pull/1088).
 
 ## [9.1.0] - 2023-05-25
 
