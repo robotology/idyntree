@@ -433,6 +433,19 @@ enum exportAdditionalFrameDirectionOption {
     FAKE_LINK_IS_CHILD,
     FAKE_LINK_IS_PARENT
 };
+bool exportXMLBlob(std::string xmlBlob, xmlNodePtr parent_element) {
+     xmlNodePtr new_node = nullptr;
+     // Let's remove non printable characters
+     xmlBlob.erase(std::remove_if(xmlBlob.begin(), xmlBlob.end(),
+         [](unsigned char c) {
+             return !std::isprint(c);
+         }),
+         xmlBlob.end());
+    // we assume that 'parent_element' node is already defined
+    xmlParseInNodeContext(parent_element, xmlBlob.c_str(), strlen(xmlBlob.c_str()), 0, &new_node);
+    if (new_node) xmlAddChild(parent_element, new_node);
+    return true;
+}
 bool exportAdditionalFrame(const std::string frame_name, Transform link_H_frame, const std::string link_name, exportAdditionalFrameDirectionOption direction_option, xmlNodePtr parent_element)
 {
     bool ok=true;
@@ -569,7 +582,9 @@ bool URDFStringFromModel(const iDynTree::Model & model,
                                              robot);
         }
     }
-
+    for (auto& xmlBlob : options.xmlBlobs) {
+        ok = ok && exportXMLBlob(xmlBlob, robot);
+    }
     xmlChar *xmlbuff=0;
     int buffersize=0;
     xmlDocDumpFormatMemory(urdf_xml, &xmlbuff, &buffersize, 1);
