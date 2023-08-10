@@ -26,9 +26,8 @@ namespace iDynTree
  *
  * Options for the iDynTree exporter.
  */
-class ModelExporterOptions
+struct ModelExporterOptions
 {
-public:
     /**
      * Specify the base link of the exported model.
      *
@@ -62,6 +61,13 @@ public:
      * Supported formats: urdf.
      */
     std::string robotExportedName;
+    /**
+     * Specify the xml blobs to be exported at the end of the urdf as child of the robot tag.
+     *
+     * Default: {}.
+     * Supported formats: urdf.
+     */
+    std::vector<std::string> xmlBlobs;
 
     /**
      * Constructor.
