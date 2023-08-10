@@ -64,7 +64,7 @@ struct ModelExporterOptions
     /**
      * Specify the xml blobs to be exported at the end of the urdf as child of the robot tag.
      *
-     * Default: {""}.
+     * Default: {}.
      * Supported formats: urdf.
      */
     std::vector<std::string> xmlBlobs;
