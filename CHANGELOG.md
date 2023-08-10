@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Added the possibility of exporting xml blobs w/ ModelExporter (https://github.com/robotology/idyntree/pull/1088)
+
 ## [9.1.0] - 2023-05-25
 
 ### Added
