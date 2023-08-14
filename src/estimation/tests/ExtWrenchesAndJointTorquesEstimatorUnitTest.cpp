@@ -13,6 +13,7 @@
 
 #include "testModels.h"
 
+#include <iDynTree/Core/EigenHelpers.h>
 #include <iDynTree/Core/TestUtils.h>
 
 
@@ -114,13 +115,15 @@ int main()
 
     setDOFsSubSetPositionsInDegrees(estimatorIMU.model(),dofNames,dofPositionsInDegrees,qj);
 
+
+    double accelerationOfGravity = 9.81;
     Vector3 gravityOnRootLink;
     gravityOnRootLink.zero();
-    gravityOnRootLink(2) = -9.81;
+    gravityOnRootLink(2) = -accelerationOfGravity;
 
     Vector3 properAccelerationInIMU;
     properAccelerationInIMU.zero();
-    properAccelerationInIMU(2) = 9.81;
+    properAccelerationInIMU(2) = accelerationOfGravity;
 
     Vector3 zero;
     zero.zero();
@@ -200,7 +203,48 @@ int main()
     }
 
     // The sum of the netWrenchesWithoutGravity of all the links should be equal to the sum of the external wrenches
-    ASSERT_EQUAL_SPATIAL_FORCE_TOL(momentumDerivative,externalForces,1e-8);
+    ASSERT_EQUAL_SPATIAL_FORCE_TOL(momentumDerivative,externalForces, 1e-8);
+
+    // Test computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics method
+    // First of all, we build the 6*nrOfFTsensors vector composed by the known FT sensors measures
+    size_t nrOfFTSensors = estimatorIMU.sensors().getNrOfSensors(iDynTree::SIX_AXIS_FORCE_TORQUE);
+    Eigen::VectorXd w(6*nrOfFTSensors);
+    w.setZero();
+
+    for(size_t ft=0; ft < nrOfFTSensors; ft++)
+    {
+        iDynTree::Wrench ftMeas;
+        sensOffsetIMU.getMeasurement(iDynTree::SIX_AXIS_FORCE_TORQUE,ft,ftMeas);
+        w.segment<6>(6*ft) = iDynTree::toEigen(ftMeas);
+    }
+
+    // Then, we compute the A and b matrices
+    std::vector<iDynTree::MatrixDynSize> A;
+    std::vector<iDynTree::VectorDynSize> b;
+    std::vector<size_t> subModelIDs;
+    std::vector<iDynTree::LinkIndex> baseLinkIndeces;
+    ok = estimatorIMU.computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics(fullBodyUnknowns,A,b,subModelIDs,baseLinkIndeces);
+    ASSERT_IS_TRUE(ok);
+
+    ASSERT_IS_TRUE(A.size() == b.size());
+    ASSERT_IS_TRUE(A.size() == subModelIDs.size());
+    ASSERT_IS_TRUE(A.size() == baseLinkIndeces.size());
+
+    std::cerr << "Testing computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics method" << std::endl;
+    for(size_t l=0; l < A.size(); l++)
+    {
+        std::cerr << "Testing submodel with base " << estimatorIMU.model().getLinkName(baseLinkIndeces[l])  << std::endl;
+
+        iDynTree::VectorDynSize bCheck(b[l].size());
+        toEigen(bCheck) = toEigen(A[l])*w;
+        /*
+        std::cerr << "A: " << toEigen(A[l]) << std::endl;
+        std::cerr << "w: " << w << std::endl;
+        std::cerr << "b: " << toEigen(b[l]) << std::endl;
+        std::cerr << "bCheck: " << toEigen(bCheck) << std::endl;*/
+        ASSERT_EQUAL_VECTOR_TOL(b[l], bCheck, 1e-7);
+    }
+
 
 
     return EXIT_SUCCESS;
