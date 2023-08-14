@@ -1,9 +1,5 @@
-#  iDynTree
-#  Copyright: (C) 2016 iCub Facility, Istituto Italiano di Tecnologia
-#  Authors: Silvio Traversaro <silvio.traversaro@iit.it>
-#
-#  Copy Policy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
-#
+# SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
+# SPDX-License-Identifier: BSD-3-Clause
 
 # MOxUnit ( https://github.com/MOxUnit/MOxUnit ) is an xUnit testing
 # framework for Matlab and Octave, it is only included if testing

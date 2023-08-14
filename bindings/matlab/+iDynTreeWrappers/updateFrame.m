@@ -6,9 +6,8 @@ function updateFrame(frame, newTransform)
 %    - frame: The struct output by plotFrame
 %    - newTransform : The new 3D transformation (4x4 matrix)
 %
-% Copyright (C) 2020 Istituto Italiano di Tecnologia (IIT). All rights reserved.
-% This software may be modified and distributed under the terms of the
-% GNU Lesser General Public License v2.1 or any later version.
+% SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
+% SPDX-License-Identifier: BSD-3-Clause
 
 R = newTransform(1:3, 1:3);
 

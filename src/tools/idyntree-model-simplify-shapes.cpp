@@ -1,7 +1,5 @@
-/*
- * SPDX-FileCopyrightText: 2006-2021 Istituto Italiano di Tecnologia (IIT)
- * SPDX-License-Identifier: LGPL-2.1-or-later
- */
+// SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
+// SPDX-License-Identifier: BSD-3-Clause
 
 #include <iDynTree/Model/Model.h>
 

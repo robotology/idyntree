@@ -1,12 +1,13 @@
+// SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
+// SPDX-License-Identifier: BSD-3-Clause
+
 /**
 * @ingroup idyntree_tutorials
 *
 * A tutorial on how to use the KinDynComputations class
 * with Eigen data structures.
 *
-* \author Silvio Traversaro
 *
-* CopyPolicy: Released under the terms of LGPL 2.0+ or later
 */
 
 // C headers

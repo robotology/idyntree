@@ -1,8 +1,6 @@
-/*
- * Copyright (C) 2017 Fondazione Istituto Italiano di Tecnologia
- * Authors: Silvio Traversaro
- * CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
- */
+// SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
+// SPDX-License-Identifier: BSD-3-Clause
+
 
 #include "URDFModelExport.h"
 

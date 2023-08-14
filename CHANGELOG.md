@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- The license of the library is changed to `BSD-3-Clause` (https://github.com/robotology/idyntree/pull/1089).
+
 ## [9.1.0] - 2023-05-25
 
 ### Added

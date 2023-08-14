@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
+// SPDX-License-Identifier: BSD-3-Clause
 
 // TODO: change this to correct include
 #include <iDynTree/OptimalControl.h>

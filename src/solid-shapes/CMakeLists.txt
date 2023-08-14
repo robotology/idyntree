@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
+# SPDX-License-Identifier: BSD-3-Clause
+
 set(libraryname idyntree-solid-shapes)
 
 set(IDYNTREE_SOLID_SHAPES_SOURCES src/InertialParametersSolidShapesHelpers.cpp
