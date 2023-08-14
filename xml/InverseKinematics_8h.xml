@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="37" column="5" bodyfile="iDynTree/InverseKinematics.h" bodystart="37" bodyend="52"/>
+        <location file="iDynTree/InverseKinematics.h" line="30" column="5" bodyfile="iDynTree/InverseKinematics.h" bodystart="30" bodyend="45"/>
       </memberdef>
       <memberdef kind="enum" id="InverseKinematics_8h_1a5cb905194c9ee61c0a23b32d603b2df2" prot="public" static="no" strong="no">
         <type></type>
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="73" column="5" bodyfile="iDynTree/InverseKinematics.h" bodystart="73" bodyend="78"/>
+        <location file="iDynTree/InverseKinematics.h" line="66" column="5" bodyfile="iDynTree/InverseKinematics.h" bodystart="66" bodyend="71"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="54" column="16" bodyfile="iDynTree/InverseKinematics.h" bodystart="54" bodyend="64"/>
+        <location file="iDynTree/InverseKinematics.h" line="47" column="16" bodyfile="iDynTree/InverseKinematics.h" bodystart="47" bodyend="57"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

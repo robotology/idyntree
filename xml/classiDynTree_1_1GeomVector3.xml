@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="22" column="1"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="15" column="1"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1aeeac1dd21b65b6b5dd12904b1351a233" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="23" column="1"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="16" column="1"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1ae01e910747f89c27767ff5b1beb8d8c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="24" column="1"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="17" column="1"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1aa8e87fc1d7b70fb2de0277c5286a706d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="25" column="1"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="18" column="1"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1a12571a756d72fa98e06747f574b4a4dc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1GeomVector3" kindref="compound">GeomVector3</ref></type>
@@ -95,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="26" column="21"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="19" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1a59ff22e4e2aa19f11ad14e59ab1eafac" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1GeomVector3" kindref="compound">GeomVector3</ref></type>
@@ -116,7 +116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="27" column="21"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="20" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1a260a44b180c936550835a3a14eb2bc6c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1GeomVector3" kindref="compound">GeomVector3</ref></type>
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="28" column="21"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="21" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1aec60050de711b7ec1ddeda437cf84b5b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -150,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="29" column="16"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="22" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1a8cf0b58f2f1ea26e394c415c1c56642c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1GeomVector3" kindref="compound">GeomVector3</ref></type>
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="30" column="21"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="23" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1a880ecfcf6738f3f442676c092ca22343" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1GeomVector3" kindref="compound">GeomVector3</ref></type>
@@ -184,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="31" column="13"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="24" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1a1f7f7ed06f7e26132e0bde70639cf522" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1GeomVector3" kindref="compound">GeomVector3</ref></type>
@@ -197,7 +197,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="32" column="13"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="25" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1ad6e4d00636f3149d76ebce520f30ae4a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref></type>
@@ -210,7 +210,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="33" column="10"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="26" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GeomVector3_1a4425d5277734d6ad621023e5b6bc6439" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1GeomVector3" kindref="compound">GeomVector3</ref></type>
@@ -227,7 +227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="34" column="13"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="27" column="13"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -272,7 +272,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Core/GeomVector3.h" line="20" column="1" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="20" bodyend="36"/>
+    <location file="iDynTree/Core/GeomVector3.h" line="13" column="1" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="13" bodyend="29"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1VectorFixSize_1ad0f06a255dc213a5904d232f703a0192" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>allocator_type</name></member>
       <member refid="classiDynTree_1_1VectorFixSize_1affa1eab2d54d8227d8aeb402dc2dc1f7" prot="public" virt="non-virtual"><scope>iDynTree::GeomVector3</scope><name>begin</name></member>

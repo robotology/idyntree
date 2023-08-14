@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="128" column="11" bodyfile="iDynTree/Visualizer.h" bodystart="128" bodyend="-1"/>
+        <location file="iDynTree/Visualizer.h" line="121" column="11" bodyfile="iDynTree/Visualizer.h" bodystart="121" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ColorViz_1a55604c0ff20631284b127b85cef9ed3b" prot="public" static="no" mutable="no">
         <type>float</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="133" column="11" bodyfile="iDynTree/Visualizer.h" bodystart="133" bodyend="-1"/>
+        <location file="iDynTree/Visualizer.h" line="126" column="11" bodyfile="iDynTree/Visualizer.h" bodystart="126" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ColorViz_1ab7bb92c9c5bc5d9b83190143136f277a" prot="public" static="no" mutable="no">
         <type>float</type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="138" column="11" bodyfile="iDynTree/Visualizer.h" bodystart="138" bodyend="-1"/>
+        <location file="iDynTree/Visualizer.h" line="131" column="11" bodyfile="iDynTree/Visualizer.h" bodystart="131" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ColorViz_1a097c11ce78907c8cca1f932bb53f9a15" prot="public" static="no" mutable="no">
         <type>float</type>
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="143" column="11" bodyfile="iDynTree/Visualizer.h" bodystart="143" bodyend="-1"/>
+        <location file="iDynTree/Visualizer.h" line="136" column="11" bodyfile="iDynTree/Visualizer.h" bodystart="136" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="148" column="5"/>
+        <location file="iDynTree/Visualizer.h" line="141" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ColorViz_1afa1267993192af9e91a8a4b63a9f41f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="153" column="5"/>
+        <location file="iDynTree/Visualizer.h" line="146" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ColorViz_1a66c1f26b9f0ab71c5a0424b7138e4801" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="158" column="5"/>
+        <location file="iDynTree/Visualizer.h" line="151" column="5"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -143,7 +143,7 @@
         <link refid="classiDynTree_1_1ColorViz"/>
       </node>
     </inheritancegraph>
-    <location file="iDynTree/Visualizer.h" line="122" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="123" bodyend="159"/>
+    <location file="iDynTree/Visualizer.h" line="115" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="116" bodyend="152"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1ColorViz_1a097c11ce78907c8cca1f932bb53f9a15" prot="public" virt="non-virtual"><scope>iDynTree::ColorViz</scope><name>a</name></member>
       <member refid="classiDynTree_1_1ColorViz_1ab7bb92c9c5bc5d9b83190143136f277a" prot="public" virt="non-virtual"><scope>iDynTree::ColorViz</scope><name>b</name></member>

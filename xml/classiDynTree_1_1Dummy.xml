@@ -6,7 +6,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/SpatialMotionVector.h" line="22" column="5" bodyfile="iDynTree/Core/SpatialMotionVector.h" bodystart="22" bodyend="22"/>
+    <location file="iDynTree/Core/SpatialMotionVector.h" line="15" column="5" bodyfile="iDynTree/Core/SpatialMotionVector.h" bodystart="15" bodyend="15"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

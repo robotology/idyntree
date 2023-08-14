@@ -39,7 +39,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeVaryingObject.h" line="43" column="35" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="43" bodyend="-1"/>
+        <location file="iDynTree/TimeVaryingObject.h" line="37" column="35" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="TimeVaryingObject_8h_1a5aea3cc692810bc6e1be00cb4a545f44" prot="public" static="no">
         <type><ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">TimeVaryingObject</ref>&lt; <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &gt;</type>
@@ -52,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeVaryingObject.h" line="45" column="35" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="45" bodyend="-1"/>
+        <location file="iDynTree/TimeVaryingObject.h" line="39" column="35" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="TimeVaryingObject_8h_1aca822c5e004f5783e8701849c3ae6475" prot="public" static="no">
         <type><ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">TimeVaryingObject</ref>&lt; double &gt;</type>
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeVaryingObject.h" line="47" column="35" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="47" bodyend="-1"/>
+        <location file="iDynTree/TimeVaryingObject.h" line="41" column="35" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="TimeVaryingObject_8h_1a7fd874777a60870ea07d3353c7dba8ab" prot="public" static="no">
         <type><ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">TimeVaryingObject</ref>&lt; <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &gt;</type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeVaryingObject.h" line="49" column="35" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="49" bodyend="-1"/>
+        <location file="iDynTree/TimeVaryingObject.h" line="43" column="35" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="TimeVaryingObject_8h_1ad88b6bd7b0b87dde8db826d5361a1612" prot="public" static="no">
         <type><ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">TimeVaryingObject</ref>&lt; <ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref> &gt;</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeVaryingObject.h" line="51" column="35" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="51" bodyend="-1"/>
+        <location file="iDynTree/TimeVaryingObject.h" line="45" column="35" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="TimeVaryingObject_8h_1a7a9dc96e57041de2c1ce2d7b11a2e8f8" prot="public" static="no">
         <type><ref refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject" kindref="compound">TimeVaryingObject</ref>&lt; <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &gt;</type>
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeVaryingObject.h" line="53" column="35" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="53" bodyend="-1"/>
+        <location file="iDynTree/TimeVaryingObject.h" line="47" column="35" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="TimeVaryingObject_8h_1a12323181a553470ad11b2a7853cdd25a" prot="public" static="no">
         <type><ref refid="classiDynTree_1_1optimalcontrol_1_1TimeInvariantObject" kindref="compound">TimeInvariantObject</ref>&lt; double &gt;</type>
@@ -117,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeVaryingObject.h" line="88" column="37" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="88" bodyend="-1"/>
+        <location file="iDynTree/TimeVaryingObject.h" line="82" column="37" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="82" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="TimeVaryingObject_8h_1af42385f609150bd66b3ad68a4bd29722" prot="public" static="no">
         <type><ref refid="classiDynTree_1_1optimalcontrol_1_1TimeInvariantObject" kindref="compound">TimeInvariantObject</ref>&lt; <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &gt;</type>
@@ -130,7 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeVaryingObject.h" line="90" column="37" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="90" bodyend="-1"/>
+        <location file="iDynTree/TimeVaryingObject.h" line="84" column="37" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="TimeVaryingObject_8h_1a61df4a467909edce7f12456c47539f78" prot="public" static="no">
         <type><ref refid="classiDynTree_1_1optimalcontrol_1_1TimeInvariantObject" kindref="compound">TimeInvariantObject</ref>&lt; <ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref> &gt;</type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeVaryingObject.h" line="92" column="37" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="92" bodyend="-1"/>
+        <location file="iDynTree/TimeVaryingObject.h" line="86" column="37" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="86" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="TimeVaryingObject_8h_1aa49b07229644a80b5a960072f076def9" prot="public" static="no">
         <type><ref refid="classiDynTree_1_1optimalcontrol_1_1TimeInvariantObject" kindref="compound">TimeInvariantObject</ref>&lt; <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &gt;</type>
@@ -156,7 +156,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeVaryingObject.h" line="94" column="37" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="94" bodyend="-1"/>
+        <location file="iDynTree/TimeVaryingObject.h" line="88" column="37" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="88" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="TimeVaryingObject_8h_1a434327935f65cbdfc7ed0c1b3999d0b1" prot="public" static="no">
         <type><ref refid="classiDynTree_1_1optimalcontrol_1_1TimeInvariantObject" kindref="compound">TimeInvariantObject</ref>&lt; <ref refid="classiDynTree_1_1Rotation" kindref="compound">Rotation</ref> &gt;</type>
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeVaryingObject.h" line="96" column="37" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="96" bodyend="-1"/>
+        <location file="iDynTree/TimeVaryingObject.h" line="90" column="37" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="90" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="TimeVaryingObject_8h_1abc9508a4f067c4b7e8412e75ac0b388a" prot="public" static="no">
         <type><ref refid="classiDynTree_1_1optimalcontrol_1_1TimeInvariantObject" kindref="compound">TimeInvariantObject</ref>&lt; <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &gt;</type>
@@ -182,13 +182,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeVaryingObject.h" line="98" column="37" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="98" bodyend="-1"/>
+        <location file="iDynTree/TimeVaryingObject.h" line="92" column="37" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="92" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Constraint.h" line="29" column="5"/>
+    <location file="iDynTree/Constraint.h" line="23" column="5"/>
   </compounddef>
 </doxygen>

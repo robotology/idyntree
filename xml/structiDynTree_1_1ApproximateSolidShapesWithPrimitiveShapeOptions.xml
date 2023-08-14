@@ -15,14 +15,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTransformersSolidShapes.h" line="28" column="60" bodyfile="iDynTree/ModelTransformersSolidShapes.h" bodystart="28" bodyend="-1"/>
+        <location file="iDynTree/ModelTransformersSolidShapes.h" line="27" column="60" bodyfile="iDynTree/ModelTransformersSolidShapes.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/ModelTransformersSolidShapes.h" line="26" column="1" bodyfile="iDynTree/ModelTransformersSolidShapes.h" bodystart="27" bodyend="29"/>
+    <location file="iDynTree/ModelTransformersSolidShapes.h" line="25" column="1" bodyfile="iDynTree/ModelTransformersSolidShapes.h" bodystart="26" bodyend="28"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1ApproximateSolidShapesWithPrimitiveShapeOptions_1af59917507bdd294e0e71b23860c39a27" prot="public" virt="non-virtual"><scope>iDynTree::ApproximateSolidShapesWithPrimitiveShapeOptions</scope><name>conversionType</name></member>
     </listofallmembers>

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/RK4.h" line="39" column="37" bodyfile="iDynTree/Integrators/RK4.h" bodystart="39" bodyend="-1"/>
+        <location file="iDynTree/Integrators/RK4.h" line="33" column="37" bodyfile="iDynTree/Integrators/RK4.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4_1a5f14f8c6460d1295e72b1e6dd53c1559" prot="private" static="no" mutable="no">
         <type>Eigen::VectorXd</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/RK4.h" line="40" column="33" bodyfile="iDynTree/Integrators/RK4.h" bodystart="40" bodyend="-1"/>
+        <location file="iDynTree/Integrators/RK4.h" line="34" column="33" bodyfile="iDynTree/Integrators/RK4.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4_1a7b74a2548f100fad15be8454e6a879e1" prot="private" static="no" mutable="no">
         <type>Eigen::VectorXd</type>
@@ -42,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/RK4.h" line="41" column="33" bodyfile="iDynTree/Integrators/RK4.h" bodystart="41" bodyend="-1"/>
+        <location file="iDynTree/Integrators/RK4.h" line="35" column="33" bodyfile="iDynTree/Integrators/RK4.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4_1adbb7e694fd7897c52843c060b0d61a06" prot="private" static="no" mutable="no">
         <type>Eigen::MatrixXd</type>
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/RK4.h" line="42" column="33" bodyfile="iDynTree/Integrators/RK4.h" bodystart="42" bodyend="-1"/>
+        <location file="iDynTree/Integrators/RK4.h" line="36" column="33" bodyfile="iDynTree/Integrators/RK4.h" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4_1a5b01f08e2ed5fe1256f6f46df0e4723a" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref></type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/RK4.h" line="43" column="31" bodyfile="iDynTree/Integrators/RK4.h" bodystart="43" bodyend="-1"/>
+        <location file="iDynTree/Integrators/RK4.h" line="37" column="31" bodyfile="iDynTree/Integrators/RK4.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/RK4.h" line="45" column="22"/>
+        <location file="iDynTree/Integrators/RK4.h" line="39" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4_1a121f048a7c8bf087f886ffb1ca0b22cd" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -114,7 +114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/RK4.h" line="47" column="22"/>
+        <location file="iDynTree/Integrators/RK4.h" line="41" column="22"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -129,7 +129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/RK4.h" line="50" column="17"/>
+        <location file="iDynTree/Integrators/RK4.h" line="44" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4_1af8bc003555c01266bf9a2b7d2edb4689" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/RK4.h" line="52" column="17"/>
+        <location file="iDynTree/Integrators/RK4.h" line="46" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4_1a79806b561d1dac963a6ee025e45f4a00" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/RK4.h" line="54" column="25"/>
+        <location file="iDynTree/Integrators/RK4.h" line="48" column="25"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -268,7 +268,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Integrators/RK4.h" line="37" column="13" bodyfile="iDynTree/Integrators/RK4.h" bodystart="38" bodyend="55"/>
+    <location file="iDynTree/Integrators/RK4.h" line="31" column="13" bodyfile="iDynTree/Integrators/RK4.h" bodystart="32" bodyend="49"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1RK4_1a121f048a7c8bf087f886ffb1ca0b22cd" prot="private" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::RK4</scope><name>allocateBuffers</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a1594f1f7ce88c5d45f585130c895b0a9" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::RK4</scope><name>clearSolution</name></member>

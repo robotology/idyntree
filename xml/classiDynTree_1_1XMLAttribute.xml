@@ -14,7 +14,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLAttribute.h" line="24" column="17" bodyfile="iDynTree/XMLAttribute.h" bodystart="24" bodyend="-1"/>
+        <location file="iDynTree/XMLAttribute.h" line="15" column="17" bodyfile="iDynTree/XMLAttribute.h" bodystart="15" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1XMLAttribute_1a63bccf51095d4bae50d13bb08dc477db" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -27,7 +27,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLAttribute.h" line="25" column="17" bodyfile="iDynTree/XMLAttribute.h" bodystart="25" bodyend="-1"/>
+        <location file="iDynTree/XMLAttribute.h" line="16" column="17" bodyfile="iDynTree/XMLAttribute.h" bodystart="16" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1XMLAttribute_1ab11448c5ba529166e76a8151795c8b85" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -40,7 +40,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLAttribute.h" line="26" column="17" bodyfile="iDynTree/XMLAttribute.h" bodystart="26" bodyend="-1"/>
+        <location file="iDynTree/XMLAttribute.h" line="17" column="17" bodyfile="iDynTree/XMLAttribute.h" bodystart="17" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1XMLAttribute_1a509a8736545acd798569d6548ad92dcf" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -53,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLAttribute.h" line="27" column="17" bodyfile="iDynTree/XMLAttribute.h" bodystart="27" bodyend="-1"/>
+        <location file="iDynTree/XMLAttribute.h" line="18" column="17" bodyfile="iDynTree/XMLAttribute.h" bodystart="18" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLAttribute.h" line="30" column="5"/>
+        <location file="iDynTree/XMLAttribute.h" line="21" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLAttribute_1aeaaa85b7a1e2d59856a120e00a43e5c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLAttribute.h" line="35" column="10"/>
+        <location file="iDynTree/XMLAttribute.h" line="26" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLAttribute_1a9dab18a16f1ffa891d0b07d9a22093ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLAttribute.h" line="36" column="10"/>
+        <location file="iDynTree/XMLAttribute.h" line="27" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLAttribute_1a82c2a869d99feea7dab9fb0abc49542e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -135,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLAttribute.h" line="37" column="10"/>
+        <location file="iDynTree/XMLAttribute.h" line="28" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLAttribute_1a10d9efd1d5dc3507dc9b1143748e57dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -152,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLAttribute.h" line="38" column="10"/>
+        <location file="iDynTree/XMLAttribute.h" line="29" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLAttribute_1a4da70f85ee7d440b99fcc75bf6d79257" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -165,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLAttribute.h" line="40" column="17"/>
+        <location file="iDynTree/XMLAttribute.h" line="31" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLAttribute_1aa36978c289e48e40a95abb4b8b69576a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -178,7 +178,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLAttribute.h" line="41" column="17"/>
+        <location file="iDynTree/XMLAttribute.h" line="32" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLAttribute_1a447232923ee05fad897ce5d6e3430e6d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -191,7 +191,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLAttribute.h" line="42" column="17"/>
+        <location file="iDynTree/XMLAttribute.h" line="33" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLAttribute_1aa1c81b78ad45eb6b8240a2c9ce21a22b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -204,7 +204,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLAttribute.h" line="43" column="17"/>
+        <location file="iDynTree/XMLAttribute.h" line="34" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLAttribute_1ae3fde3b73dfebc2d6e899a6b60d237ce" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const std::string</type>
@@ -217,14 +217,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLAttribute.h" line="45" column="23"/>
+        <location file="iDynTree/XMLAttribute.h" line="36" column="23"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/XMLAttribute.h" line="22" column="1" bodyfile="iDynTree/XMLAttribute.h" bodystart="22" bodyend="46"/>
+    <location file="iDynTree/XMLAttribute.h" line="13" column="1" bodyfile="iDynTree/XMLAttribute.h" bodystart="13" bodyend="37"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1XMLAttribute_1ae3fde3b73dfebc2d6e899a6b60d237ce" prot="public" virt="non-virtual"><scope>iDynTree::XMLAttribute</scope><name>description</name></member>
       <member refid="classiDynTree_1_1XMLAttribute_1a8d6f997c0217776efdf42a4fa32affd0" prot="private" virt="non-virtual"><scope>iDynTree::XMLAttribute</scope><name>m_name</name></member>

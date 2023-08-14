@@ -38,7 +38,7 @@
         <label>std::false_type</label>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Core/Span.h" line="97" column="15" bodyfile="iDynTree/Core/Span.h" bodystart="98" bodyend="99"/>
+    <location file="iDynTree/Core/Span.h" line="90" column="15" bodyfile="iDynTree/Core/Span.h" bodystart="91" bodyend="92"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

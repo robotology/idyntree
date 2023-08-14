@@ -21,7 +21,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="78" column="5"/>
+        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="71" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingMassMatrix_1a9a21f03cb252d6600dcd7a474ae13667" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -39,7 +39,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="84" column="5"/>
+        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="77" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingMassMatrix_1a8ac1a8cf3d2010f53263b2bc14d2358d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -69,7 +69,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="94" column="10"/>
+        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="87" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FreeFloatingMassMatrix_1aaa699e09cc550c03596074c35b38f2b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -83,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="100" column="13"/>
+        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="93" column="13"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -115,7 +115,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Model/FreeFloatingMatrices.h" line="75" column="1" bodyfile="iDynTree/Model/FreeFloatingMatrices.h" bodystart="76" bodyend="101"/>
+    <location file="iDynTree/Model/FreeFloatingMatrices.h" line="68" column="1" bodyfile="iDynTree/Model/FreeFloatingMatrices.h" bodystart="69" bodyend="94"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1MatrixDynSize_1aacda29701a42c3943a781b9876500daf" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>capacity</name></member>
       <member refid="classiDynTree_1_1MatrixDynSize_1a18a9a6232ac5c967cf541caa21586d71" prot="public" virt="non-virtual"><scope>iDynTree::FreeFloatingMassMatrix</scope><name>cols</name></member>

@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/URDFModelExport.h" line="35" column="6" declfile="private/URDFModelExport.h" declline="35" declcolumn="6"/>
+        <location file="private/URDFModelExport.h" line="32" column="6" declfile="private/URDFModelExport.h" declline="32" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeModelIO_1gab9223d51ca118bea013bbbde14d6e054" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -109,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/URDFModelExport.h" line="51" column="6" declfile="private/URDFModelExport.h" declline="51" declcolumn="6"/>
+        <location file="private/URDFModelExport.h" line="48" column="6" declfile="private/URDFModelExport.h" declline="48" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

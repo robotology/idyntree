@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/iKinConversionsImplementation.h" line="47" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="47" bodyend="70" declfile="iDynTree/iKinConversions.h" declline="32" declcolumn="6"/>
+        <location file="iDynTree/iKinConversionsImplementation.h" line="40" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="40" bodyend="63" declfile="iDynTree/iKinConversions.h" declline="25" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeICUB_1gadb9ad80c8043481f2bb8f013542db690" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/iKinConversionsImplementation.h" line="72" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="72" bodyend="85" declfile="iDynTree/iKinConversions.h" declline="42" declcolumn="6"/>
+        <location file="iDynTree/iKinConversionsImplementation.h" line="65" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="65" bodyend="78" declfile="iDynTree/iKinConversions.h" declline="35" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeICUB_1ga681d23161951646fcb60dc7681e59482" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/iKinConversionsImplementation.h" line="138" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="138" bodyend="147" declfile="iDynTree/iKinConversions.h" declline="83" declcolumn="6"/>
+        <location file="iDynTree/iKinConversionsImplementation.h" line="131" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="131" bodyend="140" declfile="iDynTree/iKinConversions.h" declline="76" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeICUB_1gaaedc638580c296a9a355975268ea25bb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -111,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/iKinConversionsImplementation.h" line="126" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="126" bodyend="136" declfile="iDynTree/iKinConversions.h" declline="93" declcolumn="6"/>
+        <location file="iDynTree/iKinConversionsImplementation.h" line="119" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="119" bodyend="129" declfile="iDynTree/iKinConversions.h" declline="86" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

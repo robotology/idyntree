@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="41" column="38" bodyfile="iDynTree/L2NormCost.h" bodystart="40" bodyend="-1"/>
+        <location file="iDynTree/L2NormCost.h" line="35" column="38" bodyfile="iDynTree/L2NormCost.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="45" column="13"/>
+        <location file="iDynTree/L2NormCost.h" line="39" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a4a596f8df129f4972905d25782df29aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="47" column="13"/>
+        <location file="iDynTree/L2NormCost.h" line="41" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a827513852904995430db8b99bc7febb6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="49" column="13"/>
+        <location file="iDynTree/L2NormCost.h" line="43" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1ad897190eb9467a68c28de85128588550" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="52" column="13"/>
+        <location file="iDynTree/L2NormCost.h" line="46" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1ae6dfb58aaf066a2a3365e0df355aa117" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -131,7 +131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="54" column="13"/>
+        <location file="iDynTree/L2NormCost.h" line="48" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a58f5478e3342aed232a87841678308fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -148,7 +148,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="56" column="18"/>
+        <location file="iDynTree/L2NormCost.h" line="50" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a2dba183b88f4839c919770425c6fdcd7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -165,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="58" column="18"/>
+        <location file="iDynTree/L2NormCost.h" line="52" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1ae96ca55b2de34d54df735ca217653d89" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -182,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="60" column="18"/>
+        <location file="iDynTree/L2NormCost.h" line="54" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a757e141da2f2cb07a21da1f2590ad61e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -199,7 +199,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="62" column="18"/>
+        <location file="iDynTree/L2NormCost.h" line="56" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a49d38bf02747c1389b5caf507574a686" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -216,7 +216,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="64" column="18"/>
+        <location file="iDynTree/L2NormCost.h" line="58" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a0744764fd4805b658691eccd9010f2b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -233,7 +233,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="66" column="18"/>
+        <location file="iDynTree/L2NormCost.h" line="60" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1ab8e1fe588d944b161c1f0f537476faae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -250,7 +250,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="68" column="18"/>
+        <location file="iDynTree/L2NormCost.h" line="62" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a350103a7b08ce9018cacc4ee85ce740b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -267,7 +267,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="70" column="18"/>
+        <location file="iDynTree/L2NormCost.h" line="64" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1acd78337156f1e67fd4186ec44819d29e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -284,7 +284,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="72" column="18"/>
+        <location file="iDynTree/L2NormCost.h" line="66" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1acdd749180561fae6ceb63aa609bd5e22" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -301,7 +301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="74" column="18"/>
+        <location file="iDynTree/L2NormCost.h" line="68" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a767f6dfb60b68f8b42039f90681ca7ae" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -368,7 +368,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="76" column="26"/>
+        <location file="iDynTree/L2NormCost.h" line="70" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a2a1676b41897f303239d940fb5251069" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -435,7 +435,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="81" column="26"/>
+        <location file="iDynTree/L2NormCost.h" line="75" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a2643cfc2bfeea418ac078008cf958044" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -502,7 +502,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="85" column="26"/>
+        <location file="iDynTree/L2NormCost.h" line="79" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1aafe8b0119577c71b8be51f0764a0337a" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -569,7 +569,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="89" column="26"/>
+        <location file="iDynTree/L2NormCost.h" line="83" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1ae323109122ca5e29a3abad40251cc7c7" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -636,7 +636,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="93" column="26"/>
+        <location file="iDynTree/L2NormCost.h" line="87" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a08ce88799d5efb59e04f10078ff89461" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -703,7 +703,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="98" column="26"/>
+        <location file="iDynTree/L2NormCost.h" line="92" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a45ad1128dd1578ab803a17af4afd8321" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -736,7 +736,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="103" column="26"/>
+        <location file="iDynTree/L2NormCost.h" line="97" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a4a81990229431b7f94ffd2e5f870a15d" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -769,7 +769,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="105" column="26"/>
+        <location file="iDynTree/L2NormCost.h" line="99" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1acf527d676e32d5c4d62e4ed63c7bdc64" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -802,7 +802,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/L2NormCost.h" line="107" column="26"/>
+        <location file="iDynTree/L2NormCost.h" line="101" column="26"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -836,7 +836,7 @@
         <link refid="classiDynTree_1_1optimalcontrol_1_1Cost"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/L2NormCost.h" line="39" column="9" bodyfile="iDynTree/L2NormCost.h" bodystart="39" bodyend="108"/>
+    <location file="iDynTree/L2NormCost.h" line="33" column="9" bodyfile="iDynTree/L2NormCost.h" bodystart="33" bodyend="102"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1Cost_1a97ea5427f72a47d5abd6b37ca71a51f5" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>Cost</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1L2NormCost_1a767f6dfb60b68f8b42039f90681ca7ae" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::L2NormCost</scope><name>costEvaluation</name></member>

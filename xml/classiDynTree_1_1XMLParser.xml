@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLParser.h" line="77" column="21" bodyfile="iDynTree/XMLParser.h" bodystart="76" bodyend="-1"/>
+        <location file="iDynTree/XMLParser.h" line="68" column="21" bodyfile="iDynTree/XMLParser.h" bodystart="67" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLParser.h" line="84" column="5"/>
+        <location file="iDynTree/XMLParser.h" line="75" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLParser_1ac57715b6b0bbe0a368042d6b1a57ab90" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLParser.h" line="89" column="5"/>
+        <location file="iDynTree/XMLParser.h" line="80" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLParser_1a380d48c74008493f76bbfa89d27a9c72" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLParser.h" line="96" column="10"/>
+        <location file="iDynTree/XMLParser.h" line="87" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLParser_1a4298a1f57d35727ece02b59197e58026" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLParser.h" line="103" column="10"/>
+        <location file="iDynTree/XMLParser.h" line="94" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLParser_1a9f4f1a5f3bfa86f6889bf993e303b3e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -111,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLParser.h" line="106" column="10"/>
+        <location file="iDynTree/XMLParser.h" line="97" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLParser_1a076df024000c7efbd63e5b858d790cf7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const std::vector&lt; std::string &gt; &amp;</type>
@@ -124,7 +124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLParser.h" line="107" column="23"/>
+        <location file="iDynTree/XMLParser.h" line="98" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLParser_1af57bd10e7fe04805404009f5fc2f3492" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLParser.h" line="114" column="10"/>
+        <location file="iDynTree/XMLParser.h" line="105" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLParser_1a7a13e1f8f9a88d8bbc3c14d9c7cd26f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -171,7 +171,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLParser.h" line="121" column="10"/>
+        <location file="iDynTree/XMLParser.h" line="112" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLParser_1a53d7a4b6fffcd67e9de72c08440eb0fa" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -194,7 +194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLParser.h" line="130" column="10"/>
+        <location file="iDynTree/XMLParser.h" line="121" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLParser_1afd804a5fff0adbd9b87b1df2520218cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -230,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLParser.h" line="144" column="10"/>
+        <location file="iDynTree/XMLParser.h" line="135" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLParser_1a3bce709cb8baa967de9cd8521ea1293d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -253,7 +253,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLParser.h" line="155" column="17"/>
+        <location file="iDynTree/XMLParser.h" line="146" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLParser_1ad0b611b820cdfd53e93de8b4eab30c6b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -289,7 +289,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLParser.h" line="168" column="10"/>
+        <location file="iDynTree/XMLParser.h" line="159" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLParser_1ab88dc1c938c5bb0397e2abdcf1064002" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -326,7 +326,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLParser.h" line="183" column="10"/>
+        <location file="iDynTree/XMLParser.h" line="174" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLParser_1a4ccc2d4850f255cf9714d51e8fa344d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -360,7 +360,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLParser.h" line="196" column="10"/>
+        <location file="iDynTree/XMLParser.h" line="187" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLParser_1aba282c9be204df3c5e3f03f18161a446" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -389,7 +389,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLParser.h" line="208" column="10"/>
+        <location file="iDynTree/XMLParser.h" line="199" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1XMLParser_1affab248cde90245f3df3d5fb5b50476d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::shared_ptr&lt; const <ref refid="classiDynTree_1_1XMLDocument" kindref="compound">XMLDocument</ref> &gt;</type>
@@ -406,7 +406,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/XMLParser.h" line="217" column="21"/>
+        <location file="iDynTree/XMLParser.h" line="208" column="21"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -455,7 +455,7 @@
 </para>
 </sect2>
     </detaileddescription>
-    <location file="iDynTree/XMLParser.h" line="74" column="1" bodyfile="iDynTree/XMLParser.h" bodystart="74" bodyend="219"/>
+    <location file="iDynTree/XMLParser.h" line="65" column="1" bodyfile="iDynTree/XMLParser.h" bodystart="65" bodyend="210"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1XMLParser_1affab248cde90245f3df3d5fb5b50476d" prot="public" virt="non-virtual"><scope>iDynTree::XMLParser</scope><name>document</name></member>
       <member refid="classiDynTree_1_1XMLParser_1a380d48c74008493f76bbfa89d27a9c72" prot="public" virt="non-virtual"><scope>iDynTree::XMLParser</scope><name>keepTreeInMemory</name></member>

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="303" column="16" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="303" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="296" column="16" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="296" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a9502f47ee9446248f2b8934e7c9d9887" prot="private" static="no" mutable="no">
         <type>size_t</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="304" column="16" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="304" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="297" column="16" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="297" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a2a95aa02137a413c3237bd7362f9bc4d" prot="private" static="no" mutable="no">
         <type>size_t</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="305" column="16" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="305" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="298" column="16" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="298" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1aae90e1fb12443e8e623dd4347dcfa816" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="306" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="306" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="299" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="299" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a0d561063639f9a05bfea14154d3743a6" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="307" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="307" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="300" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="300" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a8a0666cdf0620be263fb3c40f17a9488" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="308" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="308" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="301" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="301" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a9c4cccf0ae916e4e0c7985493896098e" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="309" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="309" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="302" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="302" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1aa814ef982a3c12f7334a90e70f0efb60" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
@@ -114,7 +114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="311" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="311" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="304" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="304" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1ab0a8b13300cfa48ec3cba7964a1111df" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="312" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="312" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="305" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="305" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a082daee629d453167954808a01ea38ed" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="313" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="313" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="306" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="306" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a36c544763abca506feb62e310da39243" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
@@ -156,7 +156,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="314" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="314" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="307" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="307" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1acf72281d746752c1bb0e1344d18f8953" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
@@ -170,7 +170,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="315" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="315" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="308" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="308" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1aec9dada63b1ec1e8615e0df84f689145" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
@@ -184,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="316" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="316" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="309" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="309" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1ae044dab201af0db624b2a4d226a458e1" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
@@ -198,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="317" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="317" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="310" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="310" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1aa94f1760f669eb3593520242cf5ca8c2" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
@@ -212,7 +212,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="318" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="318" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="311" column="33" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="311" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a2b72cdfa083a5621fe101853cf3fbb3c" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -227,7 +227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="319" column="14" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="319" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="312" column="14" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="312" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1afc0d03cdd056e314872bad6f72677b22" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -242,7 +242,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="320" column="14" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="320" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="313" column="14" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="313" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a485c4ecbbc55ccbf3ead849a7ed18b2a" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -257,7 +257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="321" column="14" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="321" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="314" column="14" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="314" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1ad24668616d892e4e515bf2a30e1134fa" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -272,7 +272,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="322" column="14" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="322" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="315" column="14" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="315" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a0d4f6bb9440bc731b0a574eef86d42a1" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -287,7 +287,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="323" column="14" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="323" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="316" column="14" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="316" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -302,7 +302,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="63" column="9"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="56" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1aa35db724dab6168cb3d84e44cbb809ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -359,7 +359,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="75" column="22"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="68" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a823fd6ec74999d302d6ba38322de1a82" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -404,7 +404,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="89" column="22"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="82" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1acfe816c4328411dcdd86426b1877510f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -427,7 +427,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="95" column="22"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="88" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1aa5f048b7cf4b255e9d77b06edf7d4f3d" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -484,7 +484,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="107" column="22"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="100" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a8729efeddce087e809db28749fb2da20" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -529,7 +529,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="117" column="22"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="110" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a06e0c6ab212f148079af396e0eb69244" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -552,7 +552,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="132" column="14"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="125" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a3511ef7000edb1af2f22c750ac5ccb63" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -575,7 +575,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="150" column="14"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="143" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a37450d1833a7ce6d7b2caec4e00c9a62" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -594,7 +594,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="160" column="14"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="153" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a48dda1a9c2249dc1d7d38dbc6da69b8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -650,7 +650,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="173" column="14"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="166" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a236c419106fbe83a4651cdd8f28fb3f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -665,7 +665,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="181" column="14"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="174" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a5980548288752504e9e4758b532e4c66" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -716,7 +716,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="194" column="14"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="187" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a395b24fd4ae30bb88b35179ea80117cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -746,7 +746,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="208" column="14"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="201" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1af2ec69c3ded347027f494c84af300d45" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -776,7 +776,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="216" column="14"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="209" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1abcc0fd06681f866166e527abf303929e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -808,7 +808,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="225" column="14"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="218" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a557ecd035b2ff1e2267d3f98c0cf3a35" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -842,7 +842,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="235" column="14"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="228" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a927eee549a560c68d95cbea5b0cec797" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -874,7 +874,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="244" column="14"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="237" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a0d1bd4ba94586c78c477a4a3af1fce0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -906,7 +906,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="253" column="14"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="246" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a47a4ba3b26206d2607d724866e4bfd1a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -938,7 +938,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="261" column="14" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="261" bodyend="261"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="254" column="14" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="254" bodyend="254"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a301ab496750472b1681d509e30c75da1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -970,7 +970,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="269" column="14" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="269" bodyend="269"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="262" column="14" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="262" bodyend="262"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1af8e0003290ca166251c7d8bb4a80162d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1002,7 +1002,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="277" column="14" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="277" bodyend="277"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="270" column="14" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="270" bodyend="270"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a46b41687186a840fdd1b15288339c51e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1032,7 +1032,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="285" column="14"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="278" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a65ac546a68e8ee705927c5dd9b57eb11" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1062,7 +1062,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="293" column="14"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="286" column="14"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="protected-func">
@@ -1086,7 +1086,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="300" column="14" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="300" bodyend="300"/>
+        <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="293" column="14" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="293" bodyend="293"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -1132,7 +1132,7 @@ The derived class must must set the size for states, inputs and outputs using <r
         <link refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper"/>
       </node>
     </inheritancegraph>
-    <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="60" column="5" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="61" bodyend="324"/>
+    <location file="iDynTree/Estimation/ExtendedKalmanFilter.h" line="53" column="5" bodyfile="iDynTree/Estimation/ExtendedKalmanFilter.h" bodystart="54" bodyend="317"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1a6cb21a197ab80253529694710473c0fd" prot="public" virt="non-virtual"><scope>iDynTree::DiscreteExtendedKalmanFilterHelper</scope><name>DiscreteExtendedKalmanFilterHelper</name></member>
       <member refid="classiDynTree_1_1DiscreteExtendedKalmanFilterHelper_1aa35db724dab6168cb3d84e44cbb809ea" prot="public" virt="pure-virtual"><scope>iDynTree::DiscreteExtendedKalmanFilterHelper</scope><name>ekf_f</name></member>

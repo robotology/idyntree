@@ -41,18 +41,6 @@
         <label>string</label>
       </node>
     </incdepgraph>
-    <invincdepgraph>
-      <node id="1">
-        <label>iDynTree/Core/Transform.h</label>
-        <link refid="Transform_8h"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-      </node>
-      <node id="2">
-        <label>iDynTree/BoundingBoxHelpers.h</label>
-        <link refid="BoundingBoxHelpers_8h"/>
-      </node>
-    </invincdepgraph>
     <innerclass refid="classiDynTree_1_1Transform" prot="public">iDynTree::Transform</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>

@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/RobotElement.h" line="39" column="21" bodyfile="private/RobotElement.h" bodystart="39" bodyend="-1"/>
+        <location file="private/RobotElement.h" line="30" column="21" bodyfile="private/RobotElement.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1RobotElement_1acb1683c61ca990b16364aa0a73db2718" prot="private" static="no" mutable="no">
         <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classiDynTree_1_1SensorHelper" kindref="compound">SensorHelper</ref> &gt; &gt; &amp;</type>
@@ -28,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/RobotElement.h" line="40" column="17" bodyfile="private/RobotElement.h" bodystart="40" bodyend="-1"/>
+        <location file="private/RobotElement.h" line="31" column="17" bodyfile="private/RobotElement.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1RobotElement_1ab09b5da26c898f26bb0de97a3dca95e2" prot="private" static="no" mutable="no">
         <type>std::unordered_map&lt; std::string, <ref refid="structiDynTree_1_1JointElement_1_1JointInfo" kindref="compound">JointElement::JointInfo</ref> &gt; &amp;</type>
@@ -41,7 +41,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/RobotElement.h" line="41" column="24" bodyfile="private/RobotElement.h" bodystart="41" bodyend="-1"/>
+        <location file="private/RobotElement.h" line="32" column="24" bodyfile="private/RobotElement.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1RobotElement_1a5bdb2f62b6c32f23aff536cefc924803" prot="private" static="no" mutable="no">
         <type>std::unordered_map&lt; std::string, <ref refid="structiDynTree_1_1JointElement_1_1JointInfo" kindref="compound">JointElement::JointInfo</ref> &gt; &amp;</type>
@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/RobotElement.h" line="42" column="24" bodyfile="private/RobotElement.h" bodystart="42" bodyend="-1"/>
+        <location file="private/RobotElement.h" line="33" column="24" bodyfile="private/RobotElement.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1RobotElement_1a7d068ed719492743aee39761979b96ff" prot="private" static="no" mutable="no">
         <type>std::unordered_map&lt; std::string, <ref refid="structiDynTree_1_1MaterialElement_1_1MaterialInfo" kindref="compound">MaterialElement::MaterialInfo</ref> &gt; &amp;</type>
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/RobotElement.h" line="43" column="24" bodyfile="private/RobotElement.h" bodystart="43" bodyend="-1"/>
+        <location file="private/RobotElement.h" line="34" column="24" bodyfile="private/RobotElement.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1RobotElement_1a500aa234fa9377902316dd72b9a3f418" prot="private" static="no" mutable="no">
         <type>std::unordered_map&lt; std::string, std::vector&lt; <ref refid="structiDynTree_1_1VisualElement_1_1VisualInfo" kindref="compound">VisualElement::VisualInfo</ref> &gt; &gt; &amp;</type>
@@ -80,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/RobotElement.h" line="44" column="24" bodyfile="private/RobotElement.h" bodystart="44" bodyend="-1"/>
+        <location file="private/RobotElement.h" line="35" column="24" bodyfile="private/RobotElement.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1RobotElement_1afef2a293604e80daab4903ec5edca168" prot="private" static="no" mutable="no">
         <type>std::unordered_map&lt; std::string, std::vector&lt; <ref refid="structiDynTree_1_1VisualElement_1_1VisualInfo" kindref="compound">VisualElement::VisualInfo</ref> &gt; &gt; &amp;</type>
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/RobotElement.h" line="45" column="24" bodyfile="private/RobotElement.h" bodystart="45" bodyend="-1"/>
+        <location file="private/RobotElement.h" line="36" column="24" bodyfile="private/RobotElement.h" bodystart="36" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -140,7 +140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/RobotElement.h" line="48" column="14"/>
+        <location file="private/RobotElement.h" line="39" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RobotElement_1a4845b8507e624a61d84b7f8211a4e3ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -153,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/RobotElement.h" line="58" column="13"/>
+        <location file="private/RobotElement.h" line="49" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RobotElement_1a5436ee589d3bb7abe8cf0dd5b314bab8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">iDynTree::XMLElement</ref> &gt;</type>
@@ -184,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/RobotElement.h" line="59" column="21"/>
+        <location file="private/RobotElement.h" line="50" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1RobotElement_1a9e40dc08778e6160b1d0088a9417b669" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -201,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/RobotElement.h" line="61" column="10"/>
+        <location file="private/RobotElement.h" line="52" column="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -232,7 +232,7 @@
         <link refid="classiDynTree_1_1XMLElement"/>
       </node>
     </collaborationgraph>
-    <location file="private/RobotElement.h" line="36" column="1" bodyfile="private/RobotElement.h" bodystart="36" bodyend="63"/>
+    <location file="private/RobotElement.h" line="27" column="1" bodyfile="private/RobotElement.h" bodystart="27" bodyend="54"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1XMLElement_1a2a182ac17f5e644b113a67e02c3595e5" prot="public" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>attributeCallback</name></member>
       <member refid="classiDynTree_1_1XMLElement_1adf74d829fbe4d3d112c0ef2eba8bd3ea" prot="public" virt="non-virtual"><scope>iDynTree::RobotElement</scope><name>attributes</name></member>

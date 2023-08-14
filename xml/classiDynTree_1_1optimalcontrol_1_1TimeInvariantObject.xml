@@ -21,7 +21,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeVaryingObject.h" line="63" column="20" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="63" bodyend="-1"/>
+        <location file="iDynTree/TimeVaryingObject.h" line="57" column="20" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="57" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeVaryingObject.h" line="65" column="13"/>
+        <location file="iDynTree/TimeVaryingObject.h" line="59" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1TimeInvariantObject_1a2a0e4aa6c899e1df7dbd96d01df33f6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -53,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeVaryingObject.h" line="67" column="13"/>
+        <location file="iDynTree/TimeVaryingObject.h" line="61" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1TimeInvariantObject_1a4c676205da6a1b360c8cc425fe8bf55a" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="non-virtual">
         <type></type>
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeVaryingObject.h" line="69" column="13"/>
+        <location file="iDynTree/TimeVaryingObject.h" line="63" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1TimeInvariantObject_1a5322c6fc03f4cc327c77aab010074ad6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Object &amp;</type>
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeVaryingObject.h" line="71" column="20"/>
+        <location file="iDynTree/TimeVaryingObject.h" line="65" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1TimeInvariantObject_1a69ee64a67eea72c04d5fcfb955eb1e52" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>const Object &amp;</type>
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeVaryingObject.h" line="73" column="34"/>
+        <location file="iDynTree/TimeVaryingObject.h" line="67" column="34"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -135,7 +135,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/TimeVaryingObject.h" line="62" column="9" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="62" bodyend="74"/>
+    <location file="iDynTree/TimeVaryingObject.h" line="56" column="9" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="56" bodyend="68"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1TimeInvariantObject_1a5322c6fc03f4cc327c77aab010074ad6" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::TimeInvariantObject</scope><name>get</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1TimeInvariantObject_1a69ee64a67eea72c04d5fcfb955eb1e52" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::TimeInvariantObject</scope><name>get</name></member>

@@ -8,6 +8,6 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/MatrixView.h" line="32" column="5"/>
+    <location file="iDynTree/Core/MatrixView.h" line="25" column="5"/>
   </compounddef>
 </doxygen>

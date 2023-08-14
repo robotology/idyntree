@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Link.h" line="31" column="19" bodyfile="iDynTree/Model/Link.h" bodystart="31" bodyend="-1"/>
+        <location file="iDynTree/Model/Link.h" line="24" column="19" bodyfile="iDynTree/Model/Link.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1Link_1a84b0da9614844a0fe40dd08c27c0521b" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref></type>
@@ -28,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Link.h" line="32" column="24" bodyfile="iDynTree/Model/Link.h" bodystart="32" bodyend="-1"/>
+        <location file="iDynTree/Model/Link.h" line="25" column="24" bodyfile="iDynTree/Model/Link.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Link.h" line="38" column="9"/>
+        <location file="iDynTree/Model/Link.h" line="31" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Link_1afc2afa5934c345524d7fb32553e66713" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref> &amp;</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Link.h" line="43" column="25"/>
+        <location file="iDynTree/Model/Link.h" line="36" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Link_1ac58569b324c87f8395d980b4930df892" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref> &amp;</type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Link.h" line="49" column="31"/>
+        <location file="iDynTree/Model/Link.h" line="42" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Link_1ae229f60dd8e8c7d3eb42c244c9620f90" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Link.h" line="58" column="14"/>
+        <location file="iDynTree/Model/Link.h" line="51" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Link_1aa1d67c0e6f2e5e696e2bb18f8e1789a6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref> &amp;</type>
@@ -109,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Link.h" line="69" column="31"/>
+        <location file="iDynTree/Model/Link.h" line="62" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Link_1ac85aab728b2a369cf169a642dbd1fdca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -127,7 +127,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Link.h" line="74" column="14"/>
+        <location file="iDynTree/Model/Link.h" line="67" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Link_1a50d8196029ce8e674a2fd57cca75d078" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>LinkIndex</type>
@@ -141,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Link.h" line="79" column="19"/>
+        <location file="iDynTree/Model/Link.h" line="72" column="19"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -149,7 +149,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Model/Link.h" line="28" column="5" bodyfile="iDynTree/Model/Link.h" bodystart="29" bodyend="80"/>
+    <location file="iDynTree/Model/Link.h" line="21" column="5" bodyfile="iDynTree/Model/Link.h" bodystart="22" bodyend="73"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1Link_1a50d8196029ce8e674a2fd57cca75d078" prot="public" virt="non-virtual"><scope>iDynTree::Link</scope><name>getIndex</name></member>
       <member refid="classiDynTree_1_1Link_1aa1d67c0e6f2e5e696e2bb18f8e1789a6" prot="public" virt="non-virtual"><scope>iDynTree::Link</scope><name>getInertia</name></member>

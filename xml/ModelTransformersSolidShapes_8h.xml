@@ -21,7 +21,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTransformersSolidShapes.h" line="22" column="1" bodyfile="iDynTree/ModelTransformersSolidShapes.h" bodystart="22" bodyend="24"/>
+        <location file="iDynTree/ModelTransformersSolidShapes.h" line="21" column="1" bodyfile="iDynTree/ModelTransformersSolidShapes.h" bodystart="21" bodyend="23"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelTransformersSolidShapes.h" line="43" column="6" declfile="iDynTree/ModelTransformersSolidShapes.h" declline="43" declcolumn="6"/>
+        <location file="iDynTree/ModelTransformersSolidShapes.h" line="42" column="6" declfile="iDynTree/ModelTransformersSolidShapes.h" declline="42" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

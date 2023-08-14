@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="131" column="17" bodyfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" bodystart="131" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="124" column="17" bodyfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" bodystart="124" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="140" column="5"/>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="133" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkUnknownWrenchContacts_1aa2eb8f43a372a3b3968a9489194d827a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="141" column="5"/>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="134" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkUnknownWrenchContacts_1ac2721f47e70d9363f649127fb6df2d36" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="147" column="10"/>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="140" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkUnknownWrenchContacts_1acdcac2a19937332a6fb9ac3c9046e8c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="153" column="10"/>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="146" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkUnknownWrenchContacts_1a8c5cec82f622f985e85a85b739ab5206" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="154" column="10"/>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="147" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkUnknownWrenchContacts_1ab02f3154578691dcae5dc469926e0716" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -139,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="159" column="12"/>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="152" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkUnknownWrenchContacts_1abeaeeee221e5ad4e8a173b5ceaba35a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -161,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="164" column="10"/>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="157" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkUnknownWrenchContacts_1ab859d42bfa350fd0d4763e426458c4c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -183,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="169" column="10"/>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="162" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkUnknownWrenchContacts_1aaeb2aa68012fde9f8e398f2fb461072a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -238,7 +238,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="181" column="10"/>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="174" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkUnknownWrenchContacts_1a9b361ddaa6343b7a0db5481434e3edcf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -282,7 +282,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="197" column="10"/>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="190" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkUnknownWrenchContacts_1a1aa14ede6e63cd1acc1e1d7da97d3f85" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structiDynTree_1_1UnknownWrenchContact" kindref="compound">UnknownWrenchContact</ref> &amp;</type>
@@ -322,7 +322,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="206" column="26"/>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="199" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkUnknownWrenchContacts_1a22d71e937b89a3b4c01c9a897b2f2e6d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="structiDynTree_1_1UnknownWrenchContact" kindref="compound">UnknownWrenchContact</ref> &amp;</type>
@@ -343,7 +343,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="208" column="32"/>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="201" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkUnknownWrenchContacts_1ab0f8855d902a74c2e2a5d7dcf0494ba2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -361,7 +361,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="214" column="17"/>
+        <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="207" column="17"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -369,7 +369,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="128" column="1" bodyfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" bodystart="129" bodyend="215"/>
+    <location file="iDynTree/Estimation/ExternalWrenchesEstimation.h" line="121" column="1" bodyfile="iDynTree/Estimation/ExternalWrenchesEstimation.h" bodystart="122" bodyend="208"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1LinkUnknownWrenchContacts_1ab859d42bfa350fd0d4763e426458c4c4" prot="public" virt="non-virtual"><scope>iDynTree::LinkUnknownWrenchContacts</scope><name>addNewContactForLink</name></member>
       <member refid="classiDynTree_1_1LinkUnknownWrenchContacts_1aaeb2aa68012fde9f8e398f2fb461072a" prot="public" virt="non-virtual"><scope>iDynTree::LinkUnknownWrenchContacts</scope><name>addNewContactInFrame</name></member>

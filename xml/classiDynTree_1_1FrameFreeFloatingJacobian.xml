@@ -21,7 +21,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="45" column="5"/>
+        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="38" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FrameFreeFloatingJacobian_1a0a8f549d50ad8f024d9d72144f43a069" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -38,7 +38,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="46" column="5"/>
+        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="39" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FrameFreeFloatingJacobian_1a436f8c7443bebd724421dfb3ebc64ee2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="48" column="10"/>
+        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="41" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FrameFreeFloatingJacobian_1aea2422f1664a9c0cdf736eec4e7fe291" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="49" column="10"/>
+        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="42" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1FrameFreeFloatingJacobian_1a2339eb47e7eb012515e29cd9ccbe6075" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -85,7 +85,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="51" column="13"/>
+        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="44" column="13"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -117,7 +117,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Model/FreeFloatingMatrices.h" line="42" column="1" bodyfile="iDynTree/Model/FreeFloatingMatrices.h" bodystart="43" bodyend="52"/>
+    <location file="iDynTree/Model/FreeFloatingMatrices.h" line="35" column="1" bodyfile="iDynTree/Model/FreeFloatingMatrices.h" bodystart="36" bodyend="45"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1MatrixDynSize_1aacda29701a42c3943a781b9876500daf" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>capacity</name></member>
       <member refid="classiDynTree_1_1MatrixDynSize_1a18a9a6232ac5c967cf541caa21586d71" prot="public" virt="non-virtual"><scope>iDynTree::FrameFreeFloatingJacobian</scope><name>cols</name></member>

@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertia.h" line="37" column="16" bodyfile="iDynTree/Core/SpatialInertia.h" bodystart="37" bodyend="37"/>
+        <location file="iDynTree/Core/SpatialInertia.h" line="30" column="16" bodyfile="iDynTree/Core/SpatialInertia.h" bodystart="30" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a894a85c0a1319ae8894c73b5298669d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertia.h" line="38" column="9"/>
+        <location file="iDynTree/Core/SpatialInertia.h" line="31" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a105dc0fc74f9c5fe6475ac3d29dc275f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertia.h" line="41" column="9"/>
+        <location file="iDynTree/Core/SpatialInertia.h" line="34" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a64175e97f51f1595870b8aff78f64839" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertia.h" line="42" column="9"/>
+        <location file="iDynTree/Core/SpatialInertia.h" line="35" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a7ac807ec779d50c39b04d37578f57e21" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x6</ref></type>
@@ -95,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertia.h" line="66" column="19"/>
+        <location file="iDynTree/Core/SpatialInertia.h" line="59" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1ac8f2cb43371716b2aeb3a893e4e14462" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Twist" kindref="compound">Twist</ref></type>
@@ -112,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertia.h" line="68" column="15"/>
+        <location file="iDynTree/Core/SpatialInertia.h" line="61" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a7a7aee5d660fcc79d46351cc250a58cf" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x6</ref></type>
@@ -125,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertia.h" line="69" column="19"/>
+        <location file="iDynTree/Core/SpatialInertia.h" line="62" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1ae27826af45cbe71fe032df901a8581ff" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref></type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertia.h" line="72" column="25"/>
+        <location file="iDynTree/Core/SpatialInertia.h" line="65" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a87e87a50bd6d6ce97333be081e5593fd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref></type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertia.h" line="73" column="28"/>
+        <location file="iDynTree/Core/SpatialInertia.h" line="66" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a8f34cacbbf37b2ed9eb9c27501b39a9c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMomentum" kindref="compound">SpatialMomentum</ref></type>
@@ -176,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertia.h" line="74" column="25"/>
+        <location file="iDynTree/Core/SpatialInertia.h" line="67" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1acae1bf059807dd9af5717034b746b699" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
@@ -193,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertia.h" line="75" column="16"/>
+        <location file="iDynTree/Core/SpatialInertia.h" line="68" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a100bc8dc58245924b2f3c3a7fbf243bc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
@@ -212,7 +212,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertia.h" line="99" column="16"/>
+        <location file="iDynTree/Core/SpatialInertia.h" line="92" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1ad623214d451123c7e435a53e13572076" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x6</ref></type>
@@ -233,7 +233,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertia.h" line="126" column="19"/>
+        <location file="iDynTree/Core/SpatialInertia.h" line="119" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1ac1bfbb66868419b1fd9fd635c8b779a1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector10</ref></type>
@@ -272,7 +272,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertia.h" line="149" column="18"/>
+        <location file="iDynTree/Core/SpatialInertia.h" line="142" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a3e9180c32b6979c2baac6b5fe836d322" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -291,7 +291,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertia.h" line="156" column="14"/>
+        <location file="iDynTree/Core/SpatialInertia.h" line="149" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a6b493d81ed9bcedb37f81d0125d1ab04" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -312,7 +312,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertia.h" line="170" column="14"/>
+        <location file="iDynTree/Core/SpatialInertia.h" line="163" column="14"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
@@ -335,7 +335,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertia.h" line="45" column="31"/>
+        <location file="iDynTree/Core/SpatialInertia.h" line="38" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1aac5e562a500942361c6d6e659719b07b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialInertia" kindref="compound">SpatialInertia</ref></type>
@@ -348,7 +348,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertia.h" line="128" column="31"/>
+        <location file="iDynTree/Core/SpatialInertia.h" line="121" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a183b97d44d255553c648236202c208a6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x10</ref></type>
@@ -368,7 +368,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertia.h" line="187" column="27"/>
+        <location file="iDynTree/Core/SpatialInertia.h" line="180" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a5b8bf854a9e99daa3d7abdacaa73c0fd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x10</ref></type>
@@ -393,7 +393,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertia.h" line="208" column="27"/>
+        <location file="iDynTree/Core/SpatialInertia.h" line="201" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertia_1a33efaebc74adccc53058177922a50370" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix6x10</ref></type>
@@ -424,7 +424,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertia.h" line="239" column="27"/>
+        <location file="iDynTree/Core/SpatialInertia.h" line="232" column="27"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -476,7 +476,7 @@
         <link refid="classiDynTree_1_1MatrixFixSize"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Core/SpatialInertia.h" line="29" column="5" bodyfile="iDynTree/Core/SpatialInertia.h" bodystart="30" bodyend="242"/>
+    <location file="iDynTree/Core/SpatialInertia.h" line="22" column="5" bodyfile="iDynTree/Core/SpatialInertia.h" bodystart="23" bodyend="235"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1SpatialInertia_1ac8f2cb43371716b2aeb3a893e4e14462" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>applyInverse</name></member>
       <member refid="classiDynTree_1_1SpatialInertia_1a7ac807ec779d50c39b04d37578f57e21" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertia</scope><name>asMatrix</name></member>

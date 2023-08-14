@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTestUtils.h" line="30" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="30" bodyend="50"/>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="23" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="23" bodyend="43"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1aea1ae47d4bec72e35885ee56cf39578b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTestUtils.h" line="55" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="55" bodyend="97"/>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="48" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="48" bodyend="90"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1abbc9efd0eed3caf7826a0f67056972f8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -92,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTestUtils.h" line="102" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="102" bodyend="105"/>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="95" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="95" bodyend="98"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1a6480b737c82af8b72b95857960254bad" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>LinkIndex</type>
@@ -109,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTestUtils.h" line="107" column="18" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="107" bodyend="112"/>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="100" column="18" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="100" bodyend="105"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1a75223c9a86126d90e70857cc48ff302e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string</type>
@@ -126,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTestUtils.h" line="114" column="20" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="114" bodyend="119"/>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="107" column="20" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="107" bodyend="112"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1a2f8e6bff5b6a359c5bb88792dde90ac3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string</type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTestUtils.h" line="121" column="20" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="121" bodyend="128"/>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="114" column="20" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="114" bodyend="121"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1ab524c8553e271868a40123e2e7d9ae7d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Model</type>
@@ -165,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTestUtils.h" line="130" column="14" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="130" bodyend="151"/>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="123" column="14" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="123" bodyend="144"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1aced0d1a54a20c982a5d1ec11f40d8b2f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>Model</type>
@@ -192,7 +192,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTestUtils.h" line="153" column="14" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="153" bodyend="175"/>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="146" column="14" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="146" bodyend="168"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1aff4391c79fb7cd4b59feed20b012d1d5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTestUtils.h" line="181" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="181" bodyend="206"/>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="174" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="174" bodyend="199"/>
       </memberdef>
       <memberdef kind="function" id="ModelTestUtils_8h_1a72bed46cd07c0617f3f59ffbbb0823a0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -245,7 +245,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTestUtils.h" line="212" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="212" bodyend="234"/>
+        <location file="iDynTree/Model/ModelTestUtils.h" line="205" column="13" bodyfile="iDynTree/Model/ModelTestUtils.h" bodystart="205" bodyend="227"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

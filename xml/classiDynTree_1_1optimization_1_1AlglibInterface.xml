@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/AlglibInterface.h" line="36" column="43" bodyfile="iDynTree/Optimizers/AlglibInterface.h" bodystart="35" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="30" column="43" bodyfile="iDynTree/Optimizers/AlglibInterface.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/AlglibInterface.h" line="40" column="13"/>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="34" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1ac4f37167d1e64a8e1aa6306afd0c52e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/AlglibInterface.h" line="42" column="13"/>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="36" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1ac698d9589486cbb49f17491f687ce60a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/AlglibInterface.h" line="44" column="21"/>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="38" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1a80ad087c14b3239acb961d927b6083cd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/AlglibInterface.h" line="46" column="26"/>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="40" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1a1dc44d7ecc5a6471d7bc917ecefb93a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/AlglibInterface.h" line="48" column="26"/>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="42" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1ac0ad93f0388c0e5e6cd056e78cda394d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/AlglibInterface.h" line="50" column="26"/>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="44" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1ad7dd69a482d4bc1089a3fed7513a3f1e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -125,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/AlglibInterface.h" line="52" column="26"/>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="46" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1ab801617d62df843d5dcf17f9be66dade" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -151,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/AlglibInterface.h" line="54" column="26"/>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="48" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1a2eb7870523596630e3227139aa156ca3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/AlglibInterface.h" line="58" column="26"/>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="52" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1a1dd9be58967c3aec2cb3dd4d4c20c6d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -187,7 +187,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/AlglibInterface.h" line="60" column="26"/>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="54" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1a8069547af492b5083bc1466e0177bc4b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -201,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/AlglibInterface.h" line="62" column="28"/>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="56" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1a41214364444e99a8d6ef2b851dad8178" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/AlglibInterface.h" line="64" column="28"/>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="58" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1a4ad21bf2abc77e0922703e4abe4c5872" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -232,7 +232,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/AlglibInterface.h" line="68" column="18"/>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="62" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1ae905e002bdf61fa04658aa37ba744df1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -249,7 +249,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/AlglibInterface.h" line="72" column="18"/>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="66" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1afcd881d4d01f47a54b6dde187bc6e3bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -266,7 +266,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/AlglibInterface.h" line="76" column="18"/>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="70" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1AlglibInterface_1a70134b5ad77e1cc3b4b8be78c4473efb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -283,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/AlglibInterface.h" line="78" column="18"/>
+        <location file="iDynTree/Optimizers/AlglibInterface.h" line="72" column="18"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -335,7 +335,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Optimizers/AlglibInterface.h" line="33" column="9" bodyfile="iDynTree/Optimizers/AlglibInterface.h" bodystart="33" bodyend="80"/>
+    <location file="iDynTree/Optimizers/AlglibInterface.h" line="27" column="9" bodyfile="iDynTree/Optimizers/AlglibInterface.h" bodystart="27" bodyend="74"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimization_1_1AlglibInterface_1af0ff7776b5d9cd8a0d5df7c5ade10f00" prot="public" virt="non-virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>AlglibInterface</name></member>
       <member refid="classiDynTree_1_1optimization_1_1AlglibInterface_1ac4f37167d1e64a8e1aa6306afd0c52e0" prot="public" virt="non-virtual"><scope>iDynTree::optimization::AlglibInterface</scope><name>AlglibInterface</name></member>

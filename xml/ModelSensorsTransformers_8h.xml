@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/ModelSensorsTransformers.h" line="32" column="6" declfile="iDynTree/Sensors/ModelSensorsTransformers.h" declline="32" declcolumn="6"/>
+        <location file="iDynTree/Sensors/ModelSensorsTransformers.h" line="25" column="6" declfile="iDynTree/Sensors/ModelSensorsTransformers.h" declline="25" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

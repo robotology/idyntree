@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="76" column="34" bodyfile="private/InverseKinematicsData.h" bodystart="76" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="69" column="34" bodyfile="private/InverseKinematicsData.h" bodystart="69" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a87c413903a500a5319abde355740b446" prot="public" static="no" mutable="no">
         <type>std::vector&lt; std::pair&lt; double, double &gt; &gt;</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="78" column="17" bodyfile="private/InverseKinematicsData.h" bodystart="78" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="71" column="17" bodyfile="private/InverseKinematicsData.h" bodystart="71" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1ae5384d50c5f3648498eaffb119b8f7dc" prot="public" static="no" mutable="no">
         <type>struct internal::kinematics::InverseKinematicsData::@1</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="90" column="13"/>
+        <location file="private/InverseKinematicsData.h" line="83" column="13"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1ae446a497e865ef158f32710de466ee65" prot="public" static="no" mutable="no">
         <type>size_t</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="92" column="12" bodyfile="private/InverseKinematicsData.h" bodystart="92" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="85" column="12" bodyfile="private/InverseKinematicsData.h" bodystart="85" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a74b39d1c7ab83b3c7e65b7f4c944ae3b" prot="public" static="no" mutable="no">
         <type>struct internal::kinematics::InverseKinematicsData::@2</type>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="97" column="28"/>
+        <location file="private/InverseKinematicsData.h" line="90" column="28"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="92" column="12" bodyfile="private/InverseKinematicsData.h" bodystart="105" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="85" column="12" bodyfile="private/InverseKinematicsData.h" bodystart="98" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1ae37acd832ddc894dbcbf6e0a7b888139" prot="public" static="no" mutable="no">
         <type>TransformMap</type>
@@ -102,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="107" column="18" bodyfile="private/InverseKinematicsData.h" bodystart="107" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="100" column="18" bodyfile="private/InverseKinematicsData.h" bodystart="100" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a7bedc79c4659da0b1fc90b082adaf1a8" prot="public" static="no" mutable="no">
         <type>TransformMap</type>
@@ -116,7 +116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="108" column="18" bodyfile="private/InverseKinematicsData.h" bodystart="108" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="101" column="18" bodyfile="private/InverseKinematicsData.h" bodystart="101" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a534f2742aad51078cf6e2b73bf6bc870" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1ConvexHullProjectionConstraint" kindref="compound">iDynTree::ConvexHullProjectionConstraint</ref></type>
@@ -130,7 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="111" column="46" bodyfile="private/InverseKinematicsData.h" bodystart="111" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="104" column="46" bodyfile="private/InverseKinematicsData.h" bodystart="104" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a0ef3c95f7ce0571c33697bcd521672bc" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref></type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="112" column="23" bodyfile="private/InverseKinematicsData.h" bodystart="112" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="105" column="23" bodyfile="private/InverseKinematicsData.h" bodystart="105" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a1d19407e8046ab52dbc34452c2934536" prot="public" static="no" mutable="no">
         <type>std::vector&lt; iDynTree::FrameIndex &gt;</type>
@@ -156,7 +156,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="113" column="17" bodyfile="private/InverseKinematicsData.h" bodystart="113" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="106" column="17" bodyfile="private/InverseKinematicsData.h" bodystart="106" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1accffb6a1b2c7d84372b3816ef1fd6938" prot="public" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classiDynTree_1_1Polygon" kindref="compound">iDynTree::Polygon</ref> &gt;</type>
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="114" column="17" bodyfile="private/InverseKinematicsData.h" bodystart="114" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="107" column="17" bodyfile="private/InverseKinematicsData.h" bodystart="107" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a0e1f2fa42cee1d5ee1c694db3e62c7b1" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Direction" kindref="compound">iDynTree::Direction</ref></type>
@@ -182,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="115" column="25" bodyfile="private/InverseKinematicsData.h" bodystart="115" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="108" column="25" bodyfile="private/InverseKinematicsData.h" bodystart="108" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a4132256ebe3a580e7bb1eda9abf33ecb" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Direction" kindref="compound">iDynTree::Direction</ref></type>
@@ -195,7 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="116" column="25" bodyfile="private/InverseKinematicsData.h" bodystart="116" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="109" column="25" bodyfile="private/InverseKinematicsData.h" bodystart="109" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a99641ebada8f16c9936bddd5af0b612d" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
@@ -208,7 +208,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="117" column="24" bodyfile="private/InverseKinematicsData.h" bodystart="117" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="110" column="24" bodyfile="private/InverseKinematicsData.h" bodystart="110" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1afd3c21e52af07cbe5eed2975f4ea1542" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
@@ -221,7 +221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="121" column="29" bodyfile="private/InverseKinematicsData.h" bodystart="121" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="114" column="29" bodyfile="private/InverseKinematicsData.h" bodystart="114" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1ace62864b8c7c036cb75e6f3596f49273" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
@@ -234,7 +234,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="122" column="29" bodyfile="private/InverseKinematicsData.h" bodystart="122" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="115" column="29" bodyfile="private/InverseKinematicsData.h" bodystart="115" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a9ad38c44a5a093e42cb9c5ebc63e5a6e" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -248,7 +248,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="124" column="10" bodyfile="private/InverseKinematicsData.h" bodystart="124" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="117" column="10" bodyfile="private/InverseKinematicsData.h" bodystart="117" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1ab79288cfd4969f3cc6a41fcb48adde48" prot="public" static="no" mutable="no">
         <type>InverseKinematicsInitialConditionType</type>
@@ -262,7 +262,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="126" column="43" bodyfile="private/InverseKinematicsData.h" bodystart="126" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="119" column="43" bodyfile="private/InverseKinematicsData.h" bodystart="119" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a1728f63ac6b45c2d6a3f73c8c4d3cae4" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
@@ -275,7 +275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="129" column="25" bodyfile="private/InverseKinematicsData.h" bodystart="129" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="122" column="25" bodyfile="private/InverseKinematicsData.h" bodystart="122" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1aba4b5878a101f3caa80bc054526b5864" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
@@ -288,7 +288,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="130" column="29" bodyfile="private/InverseKinematicsData.h" bodystart="130" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="123" column="29" bodyfile="private/InverseKinematicsData.h" bodystart="123" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a117727f00b1f90953223075c919c3a42" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
@@ -301,7 +301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="133" column="25" bodyfile="private/InverseKinematicsData.h" bodystart="133" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="126" column="25" bodyfile="private/InverseKinematicsData.h" bodystart="126" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a7adbbeff41e6897970f7630c7ec91822" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
@@ -314,7 +314,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="134" column="29" bodyfile="private/InverseKinematicsData.h" bodystart="134" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="127" column="29" bodyfile="private/InverseKinematicsData.h" bodystart="127" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a558eb1949d06bae51c90b897f50ab0c6" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
@@ -327,7 +327,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="135" column="29" bodyfile="private/InverseKinematicsData.h" bodystart="135" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="128" column="29" bodyfile="private/InverseKinematicsData.h" bodystart="128" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a7f5e2fa6e81d9fe3a3b9da4ce4a72bde" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
@@ -340,7 +340,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="136" column="29" bodyfile="private/InverseKinematicsData.h" bodystart="136" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="129" column="29" bodyfile="private/InverseKinematicsData.h" bodystart="129" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1aae45e2f08dd38410d10fd73430596b3a" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
@@ -353,7 +353,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="137" column="29" bodyfile="private/InverseKinematicsData.h" bodystart="137" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="130" column="29" bodyfile="private/InverseKinematicsData.h" bodystart="130" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -370,7 +370,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="172" column="9" bodyfile="private/InverseKinematicsData.h" bodystart="172" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="165" column="9" bodyfile="private/InverseKinematicsData.h" bodystart="165" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1aea43ac497817357c6413a69102235e16" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -384,7 +384,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="173" column="12" bodyfile="private/InverseKinematicsData.h" bodystart="173" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="166" column="12" bodyfile="private/InverseKinematicsData.h" bodystart="166" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a618a99cb734358131863f013698e6f51" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -398,7 +398,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="174" column="12" bodyfile="private/InverseKinematicsData.h" bodystart="174" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="167" column="12" bodyfile="private/InverseKinematicsData.h" bodystart="167" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a12d5cf9bda5ea843e13d7e02b7657477" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -412,7 +412,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="175" column="12" bodyfile="private/InverseKinematicsData.h" bodystart="175" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="168" column="12" bodyfile="private/InverseKinematicsData.h" bodystart="168" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a80715d198159de4560e4675f284dca24" prot="public" static="no" mutable="no">
         <type>int</type>
@@ -426,7 +426,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="176" column="9" bodyfile="private/InverseKinematicsData.h" bodystart="176" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="169" column="9" bodyfile="private/InverseKinematicsData.h" bodystart="169" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a9014bd8584d52f9d12e5d46b3702f505" prot="public" static="no" mutable="no">
         <type>std::string</type>
@@ -439,7 +439,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="177" column="17" bodyfile="private/InverseKinematicsData.h" bodystart="177" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="170" column="17" bodyfile="private/InverseKinematicsData.h" bodystart="170" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-type">
@@ -473,7 +473,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="66" column="5" bodyfile="private/InverseKinematicsData.h" bodystart="66" bodyend="70"/>
+        <location file="private/InverseKinematicsData.h" line="59" column="5" bodyfile="private/InverseKinematicsData.h" bodystart="59" bodyend="63"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="friend">
@@ -491,7 +491,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="45" column="5" bodyfile="private/InverseKinematicsData.h" bodystart="45" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="38" column="5" bodyfile="private/InverseKinematicsData.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="friend" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a2e7cf7577fbe42e01f4f1b0a29738859" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>class</type>
@@ -507,7 +507,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="47" column="5" bodyfile="private/InverseKinematicsData.h" bodystart="47" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="40" column="5" bodyfile="private/InverseKinematicsData.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-attrib">
@@ -522,7 +522,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="54" column="14" bodyfile="private/InverseKinematicsData.h" bodystart="54" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="47" column="14" bodyfile="private/InverseKinematicsData.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a58ce0860edb833e14febda610033b18b" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
@@ -535,7 +535,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="55" column="28" bodyfile="private/InverseKinematicsData.h" bodystart="55" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="48" column="28" bodyfile="private/InverseKinematicsData.h" bodystart="48" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a307f0d0ec5fe9ba5eb1ae5f52964a7a0" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -548,7 +548,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="56" column="16" bodyfile="private/InverseKinematicsData.h" bodystart="56" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="49" column="16" bodyfile="private/InverseKinematicsData.h" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1aba3c5703d491c180d01cadca1268ac45" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -561,7 +561,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="57" column="14" bodyfile="private/InverseKinematicsData.h" bodystart="57" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="50" column="14" bodyfile="private/InverseKinematicsData.h" bodystart="50" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a55ede29a25cf408ec8f466547277c0f9" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -574,7 +574,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="58" column="16" bodyfile="private/InverseKinematicsData.h" bodystart="58" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="51" column="16" bodyfile="private/InverseKinematicsData.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1ac6135b19b9e24243aa7ccc00ada69d17" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
@@ -588,7 +588,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="85" column="33" bodyfile="private/InverseKinematicsData.h" bodystart="85" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="78" column="33" bodyfile="private/InverseKinematicsData.h" bodystart="78" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a4c1131f2ada255f618fe73539c883625" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
@@ -602,7 +602,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="86" column="29" bodyfile="private/InverseKinematicsData.h" bodystart="86" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="79" column="29" bodyfile="private/InverseKinematicsData.h" bodystart="79" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a0a4751be8bec6a774b20e8b18e27aa36" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">iDynTree::VectorDynSize</ref></type>
@@ -616,7 +616,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="87" column="33" bodyfile="private/InverseKinematicsData.h" bodystart="87" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="80" column="33" bodyfile="private/InverseKinematicsData.h" bodystart="80" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a360f4630747b3002f968ae75cf86878d" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Twist" kindref="compound">iDynTree::Twist</ref></type>
@@ -630,7 +630,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="88" column="25" bodyfile="private/InverseKinematicsData.h" bodystart="88" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="81" column="25" bodyfile="private/InverseKinematicsData.h" bodystart="81" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a9dbae09b4a9023cdd1fefe40029e1766" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref></type>
@@ -644,7 +644,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="89" column="27" bodyfile="private/InverseKinematicsData.h" bodystart="89" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="82" column="27" bodyfile="private/InverseKinematicsData.h" bodystart="82" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a97cad77853f7e239528bde2569109fac" prot="public" static="no" mutable="no">
         <type>std::vector&lt; bool &gt;</type>
@@ -657,7 +657,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="94" column="21" bodyfile="private/InverseKinematicsData.h" bodystart="94" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="87" column="21" bodyfile="private/InverseKinematicsData.h" bodystart="87" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a551bf67bcc74fea5ec409ab90466fd42" prot="public" static="no" mutable="no">
         <type>std::unordered_map&lt; int, int &gt;</type>
@@ -670,7 +670,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="95" column="28" bodyfile="private/InverseKinematicsData.h" bodystart="95" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="88" column="28" bodyfile="private/InverseKinematicsData.h" bodystart="88" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a2d70e60d20f8ba389e011c9604743161" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref></type>
@@ -683,7 +683,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="96" column="25" bodyfile="private/InverseKinematicsData.h" bodystart="96" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="89" column="25" bodyfile="private/InverseKinematicsData.h" bodystart="89" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a60936bb71ca4e3ea53ca44e96fcceaeb" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -696,7 +696,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="141" column="10" bodyfile="private/InverseKinematicsData.h" bodystart="141" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="134" column="10" bodyfile="private/InverseKinematicsData.h" bodystart="134" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1ae8710ffb11c91a94f1360721b28a5adc" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -709,7 +709,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="142" column="10" bodyfile="private/InverseKinematicsData.h" bodystart="142" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="135" column="10" bodyfile="private/InverseKinematicsData.h" bodystart="135" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a90341920f5d29195751eb0931a981322" prot="public" static="no" mutable="no">
         <type>size_t</type>
@@ -722,7 +722,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="143" column="12" bodyfile="private/InverseKinematicsData.h" bodystart="143" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="136" column="12" bodyfile="private/InverseKinematicsData.h" bodystart="136" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a6b5567abc4924be678b1dc3e56fe4701" prot="public" static="no" mutable="no">
         <type>size_t</type>
@@ -735,7 +735,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="144" column="12" bodyfile="private/InverseKinematicsData.h" bodystart="144" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="137" column="12" bodyfile="private/InverseKinematicsData.h" bodystart="137" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a2dca851484e008c10320a02d7d0cade9" prot="public" static="no" mutable="no">
         <type>Ipopt::SmartPtr&lt; Ipopt::IpoptApplication &gt;</type>
@@ -749,7 +749,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="145" column="21" bodyfile="private/InverseKinematicsData.h" bodystart="145" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="138" column="21" bodyfile="private/InverseKinematicsData.h" bodystart="138" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1aad4430aa77416246314c5d41ee4988ff" prot="public" static="no" mutable="no">
         <type>Ipopt::SmartPtr&lt; <ref refid="classinternal_1_1kinematics_1_1InverseKinematicsNLP" kindref="compound">internal::kinematics::InverseKinematicsNLP</ref> &gt;</type>
@@ -762,7 +762,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="146" column="21" bodyfile="private/InverseKinematicsData.h" bodystart="146" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="139" column="21" bodyfile="private/InverseKinematicsData.h" bodystart="139" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -777,7 +777,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="59" column="17"/>
+        <location file="private/InverseKinematicsData.h" line="52" column="17"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a70535b5bdc9907132c3b6b8719905845" prot="private" static="no" mutable="no">
         <type>iDynTree::InverseKinematicsTreatTargetAsConstraint</type>
@@ -790,7 +790,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="64" column="56" bodyfile="private/InverseKinematicsData.h" bodystart="64" bodyend="-1"/>
+        <location file="private/InverseKinematicsData.h" line="57" column="56" bodyfile="private/InverseKinematicsData.h" bodystart="57" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -808,7 +808,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="50" column="5"/>
+        <location file="private/InverseKinematicsData.h" line="43" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1ae9db19904a0ce4eb1df0f46e8bfd1311" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classinternal_1_1kinematics_1_1InverseKinematicsData" kindref="compound">InverseKinematicsData</ref> &amp;</type>
@@ -824,7 +824,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="51" column="27"/>
+        <location file="private/InverseKinematicsData.h" line="44" column="27"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -840,7 +840,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="151" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="144" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1aae291af11b60f27d604ebe65de01531d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -854,7 +854,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="156" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="149" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1ab753f3bd6f02221c18f34d8fa3f4656c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -868,7 +868,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="161" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="154" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a9e48974fb8f66b5bad0c711050e17ba0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -882,7 +882,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="166" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="159" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1aad369db9c76d864b74e07d458f347687" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -896,7 +896,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="185" column="5"/>
+        <location file="private/InverseKinematicsData.h" line="178" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a4024cf4ac217ef5026669d42a2941fdb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -930,7 +930,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="192" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="185" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1afd414dae2211bf7ce1422dd6ce3d363a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -961,7 +961,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="200" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="193" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1aab5189ec5428a2f06d2bd159aca76c8f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -992,7 +992,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="208" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="201" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1af233d4272bccaf07f8bb18a601409312" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1007,7 +1007,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="217" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="210" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a6c744c6b526f138c1144e9339cc55663" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1037,7 +1037,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="225" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="218" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a35cf37e77215dd3b862f977a2dee6e05" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1067,7 +1067,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="233" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="226" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a8ebb124ee9beb562dbc38e9648e7186d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>TransformMap::iterator</type>
@@ -1086,7 +1086,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="241" column="28"/>
+        <location file="private/InverseKinematicsData.h" line="234" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a0c39acd186e7fb5f5c722540477b2a4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1112,7 +1112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="247" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="240" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a35b4a679bf622ac22edb71b01af50805" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1138,7 +1138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="253" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="246" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a1775720a85f826243379718218e8d53e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1185,7 +1185,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="269" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="262" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a8de8a8968ae6a9f79db1a97f5e34b529" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1227,7 +1227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="278" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="271" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a0cacbe18891573e85909ad4f8529a8a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1254,7 +1254,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="285" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="278" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1aa8f65f9250c8a39ae91cf01bf28a40ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>enum iDynTree::InverseKinematicsRotationParametrization</type>
@@ -1270,7 +1270,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="285" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="278" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a68221784c17bc058ab124c0b0e3bb255" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1298,7 +1298,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="298" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="291" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a6c929ce2e94a2edfe1ea6393d2c77e0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>enum iDynTree::InverseKinematicsTreatTargetAsConstraint</type>
@@ -1311,7 +1311,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="298" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="291" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1aa9604e8cabf70ec1756c26f0584f9f50" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1343,7 +1343,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="308" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="301" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1ad91ba72d38ca2329922b419a8fd506ac" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>enum iDynTree::InverseKinematicsTreatTargetAsConstraint</type>
@@ -1363,7 +1363,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="308" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="301" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1abf797e16ca56cefd1fc2bc649c7bc466" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1380,7 +1380,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="319" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="312" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1aada9e4e0110afc7d4e2e399b1baf620e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1KinDynComputations" kindref="compound">iDynTree::KinDynComputations</ref> &amp;</type>
@@ -1397,7 +1397,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="326" column="34"/>
+        <location file="private/InverseKinematicsData.h" line="319" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a4e71b9e0ec1b1dc245fb8cc57ef4d9e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1418,7 +1418,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="328" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="321" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a8ba499d6a8da51f087c2d3878217433b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1435,7 +1435,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="330" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="323" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a70d398a424a4c79ddb55922369e27d5a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1448,7 +1448,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="332" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="325" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1aacbe9650fd690849c7bcf68180ed9087" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1465,7 +1465,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="334" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="327" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1a0d53088c887338434c5bc3c6dbacc002" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1478,7 +1478,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="336" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="329" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1InverseKinematicsData_1aa0472bed5ec2d61dbcfce0d1c3d75373" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1491,7 +1491,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsData.h" line="338" column="10"/>
+        <location file="private/InverseKinematicsData.h" line="331" column="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -1854,7 +1854,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="private/InverseKinematicsData.h" line="43" column="1" bodyfile="private/InverseKinematicsData.h" bodystart="43" bodyend="340"/>
+    <location file="private/InverseKinematicsData.h" line="36" column="1" bodyfile="private/InverseKinematicsData.h" bodystart="36" bodyend="333"/>
     <listofallmembers>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a6c744c6b526f138c1144e9339cc55663" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>addFrameConstraint</name></member>
       <member refid="classinternal_1_1kinematics_1_1InverseKinematicsData_1a35cf37e77215dd3b862f977a2dee6e05" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsData</scope><name>addTarget</name></member>

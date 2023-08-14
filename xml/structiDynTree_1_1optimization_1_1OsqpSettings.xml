@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="36" column="20" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="36" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="30" column="20" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1optimization_1_1OsqpSettings_1a67aeaa5ab3a363280e4c8427b334fec1" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="37" column="20" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="37" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="31" column="20" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1optimization_1_1OsqpSettings_1ae0cd693ced905ac444a8b9977fec24c4" prot="public" static="no" mutable="no">
         <type>unsigned int</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="38" column="26" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="38" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="32" column="26" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1optimization_1_1OsqpSettings_1af9ca4167b6c18c09d3368fdad013aa32" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="39" column="20" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="39" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="33" column="20" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1optimization_1_1OsqpSettings_1a02f3c106c086e8387fade77e1d6c244d" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="40" column="20" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="40" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="34" column="20" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1optimization_1_1OsqpSettings_1a1e8aa6c7bd9359ab8a22ba5de74ea305" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="41" column="20" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="41" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="35" column="20" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1optimization_1_1OsqpSettings_1a0aeed2e24308203ffed0937432616504" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="42" column="20" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="42" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="36" column="20" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1optimization_1_1OsqpSettings_1a89bc2fe6024f88233d6930991055336b" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -114,7 +114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="43" column="20" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="43" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="37" column="20" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1optimization_1_1OsqpSettings_1a249e2b6a840e2a228e95ae0841fbea49" prot="public" static="no" mutable="no">
         <type>unsigned int</type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="44" column="26" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="44" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="38" column="26" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1optimization_1_1OsqpSettings_1ae7d688001e1ecfb9787b685d0c6cb723" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="45" column="20" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="45" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="39" column="20" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1optimization_1_1OsqpSettings_1a368863b5a7a2e246bf37919a173ab09e" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -156,7 +156,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="46" column="18" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="46" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="40" column="18" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1optimization_1_1OsqpSettings_1ade77c574481c51c9247f9d260b515390" prot="public" static="no" mutable="no">
         <type>unsigned int</type>
@@ -170,7 +170,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="47" column="26" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="47" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="41" column="26" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1optimization_1_1OsqpSettings_1a5bd4b4c018fedc1bc94c07281657d31f" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -184,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="48" column="18" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="48" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="42" column="18" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1optimization_1_1OsqpSettings_1a57c45fd89955d8beae9a287dc0b3111a" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -198,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="49" column="18" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="49" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="43" column="18" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1optimization_1_1OsqpSettings_1a0d4d403fd52cf2e4c1440a3b5c8d0c84" prot="public" static="no" mutable="no">
         <type>unsigned int</type>
@@ -212,7 +212,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="50" column="26" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="50" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="44" column="26" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1optimization_1_1OsqpSettings_1a01eada4232ef8cb60a631dba3ebdb15c" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -226,7 +226,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="51" column="18" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="51" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="45" column="18" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1optimization_1_1OsqpSettings_1a88a10410a9961dfe22e7cbcc44f6dca9" prot="public" static="no" mutable="no">
         <type>unsigned int</type>
@@ -240,7 +240,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="52" column="26" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="52" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="46" column="26" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1optimization_1_1OsqpSettings_1a78956f2d00108ddc3fe78b552719483c" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -254,7 +254,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="53" column="18" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="53" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="47" column="18" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1optimization_1_1OsqpSettings_1a891e483e688755dbd08db08f7fc24e88" prot="public" static="no" mutable="no">
         <type>unsigned int</type>
@@ -268,7 +268,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="54" column="26" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="54" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="48" column="26" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="48" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1optimization_1_1OsqpSettings_1a18936fbf53d8683af56d9ab33b3df5d1" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -282,7 +282,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="55" column="20" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="55" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="49" column="20" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1optimization_1_1OsqpSettings_1ab632aeefdaf80c829afaad8a0d0efa23" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -296,7 +296,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="56" column="20" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="56" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="50" column="20" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="50" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1optimization_1_1OsqpSettings_1acab437eb597b81c921fe2f3ff9ebb8e6" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -310,7 +310,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="57" column="20" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="57" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="51" column="20" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -320,7 +320,7 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="iDynTree/Optimizers/OsqpInterface.h" line="35" column="9" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="35" bodyend="58"/>
+    <location file="iDynTree/Optimizers/OsqpInterface.h" line="29" column="9" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="29" bodyend="52"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1optimization_1_1OsqpSettings_1a78956f2d00108ddc3fe78b552719483c" prot="public" virt="non-virtual"><scope>iDynTree::optimization::OsqpSettings</scope><name>adaptive_rho</name></member>
       <member refid="structiDynTree_1_1optimization_1_1OsqpSettings_1ab632aeefdaf80c829afaad8a0d0efa23" prot="public" virt="non-virtual"><scope>iDynTree::optimization::OsqpSettings</scope><name>adaptive_rho_fraction</name></member>

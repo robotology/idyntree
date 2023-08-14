@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/MultiBodySystem.h" line="38" column="13"/>
+        <location file="iDynTree/MultiBodySystem.h" line="32" column="13"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -53,7 +53,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/MultiBodySystem.h" line="33" column="9" bodyfile="iDynTree/MultiBodySystem.h" bodystart="34" bodyend="40"/>
+    <location file="iDynTree/MultiBodySystem.h" line="27" column="9" bodyfile="iDynTree/MultiBodySystem.h" bodystart="28" bodyend="34"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a9106ad9134ccfe7eed374dbd9e0192d2" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>controlInput</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a07c72447bba26fad4be33d3d629fb9e9" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::MultiBodySystem</scope><name>controlInput</name></member>

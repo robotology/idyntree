@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DynamicsLinearization.h" line="44" column="49" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="44" bodyend="-1"/>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="37" column="49" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1a8e8077614597ee1b792b0cdb7a3fcc65" prot="public" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers" kindref="compound">ArticulatedBodyAlgorithmInternalBuffers</ref> &gt;</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DynamicsLinearization.h" line="50" column="21" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="50" bodyend="-1"/>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="43" column="21" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1aa2864c3524539d4fa6f7e25ee7d1a708" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1LinkPositions" kindref="compound">LinkPositions</ref></type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DynamicsLinearization.h" line="55" column="23" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="55" bodyend="-1"/>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="48" column="23" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="48" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1a40496ec94c434ff7511a74c5e2d7284e" prot="public" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classiDynTree_1_1SpatialForceWrtMotionDerivative" kindref="compound">SpatialForceWrtMotionDerivative</ref> &gt;</type>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DynamicsLinearization.h" line="56" column="21" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="56" bodyend="-1"/>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="49" column="21" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1a47ec31687c5d0d6003fba8347d7e0583" prot="public" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">Matrix1x6</ref> &gt;</type>
@@ -70,7 +70,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DynamicsLinearization.h" line="57" column="21" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="57" bodyend="-1"/>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="50" column="21" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="50" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1a618ea9ee2ee5fbf8ad69f2ea79d6ce4f" prot="public" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classiDynTree_1_1SpatialMotionWrtMotionDerivative" kindref="compound">SpatialMotionWrtMotionDerivative</ref> &gt;</type>
@@ -83,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DynamicsLinearization.h" line="58" column="21" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="58" bodyend="-1"/>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="51" column="21" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1aa38ccefb07d49586aebeeaf56754be5a" prot="public" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classiDynTree_1_1SpatialMotionWrtMotionDerivative" kindref="compound">SpatialMotionWrtMotionDerivative</ref> &gt;</type>
@@ -96,7 +96,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DynamicsLinearization.h" line="59" column="21" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="59" bodyend="-1"/>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="52" column="21" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1aafc407754d41f666bd58d5d58f83c3b8" prot="public" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classiDynTree_1_1SpatialForceWrtMotionDerivative" kindref="compound">SpatialForceWrtMotionDerivative</ref> &gt;</type>
@@ -112,7 +112,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DynamicsLinearization.h" line="70" column="21" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="70" bodyend="-1"/>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="63" column="21" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="63" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1afe38324182bdde34d1fb5736adecac4c" prot="public" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers" kindref="compound">ArticulatedBodyAlgorithmInternalBuffers</ref> &gt;</type>
@@ -126,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DynamicsLinearization.h" line="77" column="21" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="77" bodyend="-1"/>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="70" column="21" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="70" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -141,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DynamicsLinearization.h" line="28" column="9" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="28" bodyend="28"/>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="21" column="9" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="21" bodyend="21"/>
       </memberdef>
       <memberdef kind="function" id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1a1816c8a74000bd02bf897a94dac61dd5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DynamicsLinearization.h" line="33" column="9"/>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="26" column="9"/>
       </memberdef>
       <memberdef kind="function" id="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1ae228e32ef93aef6fd9ad11882ab5f2fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -177,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DynamicsLinearization.h" line="39" column="14"/>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="32" column="14"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -342,7 +342,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Model/DynamicsLinearization.h" line="26" column="5" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="27" bodyend="78"/>
+    <location file="iDynTree/Model/DynamicsLinearization.h" line="19" column="5" bodyfile="iDynTree/Model/DynamicsLinearization.h" bodystart="20" bodyend="71"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1aacdc3cee9e5ab6debe145bb100fad6d5" prot="public" virt="non-virtual"><scope>iDynTree::ForwardDynamicsLinearizationInternalBuffers</scope><name>aba</name></member>
       <member refid="structiDynTree_1_1ForwardDynamicsLinearizationInternalBuffers_1a8e8077614597ee1b792b0cdb7a3fcc65" prot="public" virt="non-virtual"><scope>iDynTree::ForwardDynamicsLinearizationInternalBuffers</scope><name>dPos</name></member>

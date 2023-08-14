@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="76" column="9" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="76" bodyend="-1"/>
+        <location file="iDynTree/Core/SpatialVector.h" line="69" column="9" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="69" bodyend="-1"/>
       </memberdef>
       <memberdef kind="define" id="SpatialVector_8h_1a13ae9b40bef45da6de6dc13e80735b9d" prot="public" static="no">
         <name>SPATIALVECTOR_INSTANCE_HDR</name>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialVector.h" line="79" column="9" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="79" bodyend="-1"/>
+        <location file="iDynTree/Core/SpatialVector.h" line="72" column="9" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="72" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

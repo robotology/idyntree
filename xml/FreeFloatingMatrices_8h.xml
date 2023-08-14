@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="32" column="1" bodyfile="iDynTree/Model/FreeFloatingMatrices.h" bodystart="33" bodyend="37"/>
+        <location file="iDynTree/Model/FreeFloatingMatrices.h" line="25" column="1" bodyfile="iDynTree/Model/FreeFloatingMatrices.h" bodystart="26" bodyend="30"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

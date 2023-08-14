@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialMomentum.h" line="34" column="16" bodyfile="iDynTree/Core/SpatialMomentum.h" bodystart="34" bodyend="34"/>
+        <location file="iDynTree/Core/SpatialMomentum.h" line="27" column="16" bodyfile="iDynTree/Core/SpatialMomentum.h" bodystart="27" bodyend="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialMomentum_1a3a35ab39d70c4172dda479965294f152" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -39,7 +39,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialMomentum.h" line="35" column="9"/>
+        <location file="iDynTree/Core/SpatialMomentum.h" line="28" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialMomentum_1a75866ebbf82a596f16159d0ef8f76b0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialMomentum.h" line="36" column="9"/>
+        <location file="iDynTree/Core/SpatialMomentum.h" line="29" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialMomentum_1ab3e289ea80df9790190ef366d4ce7623" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -73,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialMomentum.h" line="37" column="9"/>
+        <location file="iDynTree/Core/SpatialMomentum.h" line="30" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialMomentum_1ab764ff72fed03fa8fae21deb6747b181" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMomentum" kindref="compound">SpatialMomentum</ref></type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialMomentum.h" line="40" column="25"/>
+        <location file="iDynTree/Core/SpatialMomentum.h" line="33" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialMomentum_1a500636f1ab58625e4ed7deac76293b39" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMomentum" kindref="compound">SpatialMomentum</ref></type>
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialMomentum.h" line="41" column="25"/>
+        <location file="iDynTree/Core/SpatialMomentum.h" line="34" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialMomentum_1aa1adc21c7c04b11507360c0fd4b669ef" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMomentum" kindref="compound">SpatialMomentum</ref></type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialMomentum.h" line="42" column="25"/>
+        <location file="iDynTree/Core/SpatialMomentum.h" line="35" column="25"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -194,7 +194,7 @@
         <link refid="classiDynTree_1_1SpatialMotionForceVectorT__traits"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Core/SpatialMomentum.h" line="26" column="5" bodyfile="iDynTree/Core/SpatialMomentum.h" bodystart="27" bodyend="43"/>
+    <location file="iDynTree/Core/SpatialMomentum.h" line="19" column="5" bodyfile="iDynTree/Core/SpatialMomentum.h" bodystart="20" bodyend="36"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1SpatialVector_1a45a617c3a2fbf58cb8f14be36a9f0ff5" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialMomentum</scope><name>angularOffset</name></member>
       <member refid="classiDynTree_1_1SpatialVector_1a7713fdb080783747a894974f5c4b44a6" prot="protected" virt="non-virtual"><scope>iDynTree::SpatialMomentum</scope><name>angularVec3</name></member>

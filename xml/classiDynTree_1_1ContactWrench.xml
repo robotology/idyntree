@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ContactWrench.h" line="36" column="18" bodyfile="iDynTree/Model/ContactWrench.h" bodystart="36" bodyend="-1"/>
+        <location file="iDynTree/Model/ContactWrench.h" line="29" column="18" bodyfile="iDynTree/Model/ContactWrench.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ContactWrench_1a8fce640ebec1a5ceb34fda13108b7338" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
@@ -28,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ContactWrench.h" line="37" column="18" bodyfile="iDynTree/Model/ContactWrench.h" bodystart="37" bodyend="-1"/>
+        <location file="iDynTree/Model/ContactWrench.h" line="30" column="18" bodyfile="iDynTree/Model/ContactWrench.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1ContactWrench_1a49705e50e9f3720503a7566b3fba1a35" prot="private" static="no" mutable="no">
         <type>std::size_t</type>
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ContactWrench.h" line="44" column="21" bodyfile="iDynTree/Model/ContactWrench.h" bodystart="44" bodyend="-1"/>
+        <location file="iDynTree/Model/ContactWrench.h" line="37" column="21" bodyfile="iDynTree/Model/ContactWrench.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -63,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ContactWrench.h" line="63" column="19"/>
+        <location file="iDynTree/Model/ContactWrench.h" line="56" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ContactWrench_1a6cfed634a1fca25e67ddf7a2506a74a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> &amp;</type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ContactWrench.h" line="72" column="19"/>
+        <location file="iDynTree/Model/ContactWrench.h" line="65" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ContactWrench_1a2d0b7ead32c4246379d69838498cb58c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::size_t &amp;</type>
@@ -91,7 +91,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ContactWrench.h" line="74" column="21"/>
+        <location file="iDynTree/Model/ContactWrench.h" line="67" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ContactWrench_1acdd900781b0eff26fa29ee67c09da16d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
@@ -104,7 +104,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ContactWrench.h" line="76" column="25"/>
+        <location file="iDynTree/Model/ContactWrench.h" line="69" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ContactWrench_1acddc7a78c4feb082421704066b11b5e9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref> &amp;</type>
@@ -117,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ContactWrench.h" line="77" column="25"/>
+        <location file="iDynTree/Model/ContactWrench.h" line="70" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ContactWrench_1ab0cdcc5736bd614f7a3c16e72b7db317" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const std::size_t &amp;</type>
@@ -130,7 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ContactWrench.h" line="78" column="27"/>
+        <location file="iDynTree/Model/ContactWrench.h" line="71" column="27"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -139,7 +139,7 @@
     <detaileddescription>
 <para>The contact wrench is represented by two quantities the contactPoint and the contactWrench . </para>
     </detaileddescription>
-    <location file="iDynTree/Model/ContactWrench.h" line="33" column="5" bodyfile="iDynTree/Model/ContactWrench.h" bodystart="34" bodyend="80"/>
+    <location file="iDynTree/Model/ContactWrench.h" line="26" column="5" bodyfile="iDynTree/Model/ContactWrench.h" bodystart="27" bodyend="73"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1ContactWrench_1a2d0b7ead32c4246379d69838498cb58c" prot="public" virt="non-virtual"><scope>iDynTree::ContactWrench</scope><name>contactId</name></member>
       <member refid="classiDynTree_1_1ContactWrench_1ab0cdcc5736bd614f7a3c16e72b7db317" prot="public" virt="non-virtual"><scope>iDynTree::ContactWrench</scope><name>contactId</name></member>

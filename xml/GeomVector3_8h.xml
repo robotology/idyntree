@@ -28,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="38" column="21" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="38" bodyend="-1"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="31" column="21" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="GeomVector3_8h_1a408c1ac9b6f50b7425becd9b7b20f351" prot="public" static="no">
         <type>LinearMotionVector3</type>
@@ -41,7 +41,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="39" column="29" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="39" bodyend="-1"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="32" column="29" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="GeomVector3_8h_1ae032ae81e0b23b33446033eefb13e629" prot="public" static="no">
         <type>LinearMotionVector3</type>
@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="40" column="29" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="40" bodyend="-1"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="33" column="29" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="GeomVector3_8h_1aff2ac4b45bb6926622fcfbf47dbe82b1" prot="public" static="no">
         <type>GeomVector3</type>
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="41" column="21" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="41" bodyend="-1"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="34" column="21" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="GeomVector3_8h_1a303a7b672a9817d74c5a6279fbfe5e34" prot="public" static="no">
         <type>AngularMotionVector3</type>
@@ -80,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="42" column="30" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="42" bodyend="-1"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="35" column="30" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="GeomVector3_8h_1adb7dac766ffa576a0213970d650eda15" prot="public" static="no">
         <type>AngularMotionVector3</type>
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="43" column="30" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="43" bodyend="-1"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="36" column="30" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="GeomVector3_8h_1a220a484dfbd1e54951ef1aaf24ecd80c" prot="public" static="no">
         <type>GeomVector3</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="44" column="21" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="44" bodyend="-1"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="37" column="21" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="GeomVector3_8h_1ac0ebd34fab318a785581c07d73cdffc4" prot="public" static="no">
         <type>LinearForceVector3</type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="45" column="28" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="45" bodyend="-1"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="38" column="28" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="GeomVector3_8h_1a4c842c5e7d2f44d3352ffd8b59203d77" prot="public" static="no">
         <type>LinearForceVector3</type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="46" column="28" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="46" bodyend="-1"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="39" column="28" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="GeomVector3_8h_1a3338ebb24d8da845c73135e66d6c6b78" prot="public" static="no">
         <type>GeomVector3</type>
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="47" column="21" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="47" bodyend="-1"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="40" column="21" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="GeomVector3_8h_1a55b4eeede0026f5a9ff630bf0e185f1a" prot="public" static="no">
         <type>AngularForceVector3</type>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="48" column="29" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="48" bodyend="-1"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="41" column="29" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="GeomVector3_8h_1a6201e5c8d3cc72533773d11302674f5c" prot="public" static="no">
         <type>AngularForceVector3</type>
@@ -171,7 +171,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="49" column="29" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="49" bodyend="-1"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="42" column="29" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="GeomVector3_8h_1aaaf9fe3261e02ce6de58a3e752e6f891" prot="public" static="no">
         <type>GeomVector3</type>
@@ -184,7 +184,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/GeomVector3.h" line="50" column="21" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="50" bodyend="-1"/>
+        <location file="iDynTree/Core/GeomVector3.h" line="43" column="21" bodyfile="iDynTree/Core/GeomVector3.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

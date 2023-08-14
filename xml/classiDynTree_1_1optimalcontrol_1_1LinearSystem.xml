@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="101" column="31" bodyfile="iDynTree/LinearSystem.h" bodystart="100" bodyend="-1"/>
+        <location file="iDynTree/LinearSystem.h" line="95" column="31" bodyfile="iDynTree/LinearSystem.h" bodystart="94" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -39,7 +39,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="41" column="13"/>
+        <location file="iDynTree/LinearSystem.h" line="35" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a3437f9e6234fc7a698d4d4a590ec419b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="43" column="13"/>
+        <location file="iDynTree/LinearSystem.h" line="37" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a29645196589d2a947368e65c851c50bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -85,7 +85,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="47" column="13"/>
+        <location file="iDynTree/LinearSystem.h" line="41" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a79af515c739a47f2c0b7ba77d2131b5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -98,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="49" column="13"/>
+        <location file="iDynTree/LinearSystem.h" line="43" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a1d874018df76571d25f2cf5b510c4467" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="52" column="18"/>
+        <location file="iDynTree/LinearSystem.h" line="46" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a36b039c6b817db400f277cfa3230802b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="54" column="18"/>
+        <location file="iDynTree/LinearSystem.h" line="48" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a8909f5f3adbe11fa54c379760b417c7a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -149,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="57" column="18"/>
+        <location file="iDynTree/LinearSystem.h" line="51" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a3fa5cbf4e9a3fa25db27edeef20ca4de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -166,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="59" column="18"/>
+        <location file="iDynTree/LinearSystem.h" line="53" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a2596766c2b5a2346fc00633b1fcebc85" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -221,7 +221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="61" column="26"/>
+        <location file="iDynTree/LinearSystem.h" line="55" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a8a775ab121adc0f62c2d2203801a331e" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -277,7 +277,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="65" column="26"/>
+        <location file="iDynTree/LinearSystem.h" line="59" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1ae6521cb2dad7a528732ea7f6933a8071" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -333,7 +333,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="69" column="26"/>
+        <location file="iDynTree/LinearSystem.h" line="63" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1ab50cd1fb480d10395eb58f5b978f0abb" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -364,7 +364,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="73" column="26"/>
+        <location file="iDynTree/LinearSystem.h" line="67" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a766c7b4d1388006e06b4e985f32c4913" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -395,7 +395,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="75" column="26"/>
+        <location file="iDynTree/LinearSystem.h" line="69" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1aad45c1bcb83441937a1724bee499f58c" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -462,7 +462,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="77" column="26"/>
+        <location file="iDynTree/LinearSystem.h" line="71" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a95d0eec0bfd0634ad3f0bf4c977b9a0b" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -529,7 +529,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="82" column="26"/>
+        <location file="iDynTree/LinearSystem.h" line="76" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a51e2fb08d78286e68b3bc15d720b943a" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -596,7 +596,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="87" column="26"/>
+        <location file="iDynTree/LinearSystem.h" line="81" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1ac7591a0eaa5140d4894f1a911a5b995f" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -629,7 +629,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="92" column="26"/>
+        <location file="iDynTree/LinearSystem.h" line="86" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a3fcadc398984a481f0509bded638bd05" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -662,7 +662,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="94" column="26"/>
+        <location file="iDynTree/LinearSystem.h" line="88" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearSystem_1a16b0a2f2acb0e0226510a15bcd578882" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -695,7 +695,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearSystem.h" line="96" column="26"/>
+        <location file="iDynTree/LinearSystem.h" line="90" column="26"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -729,7 +729,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/LinearSystem.h" line="36" column="9" bodyfile="iDynTree/LinearSystem.h" bodystart="37" bodyend="103"/>
+    <location file="iDynTree/LinearSystem.h" line="30" column="9" bodyfile="iDynTree/LinearSystem.h" bodystart="31" bodyend="97"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a9106ad9134ccfe7eed374dbd9e0192d2" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>controlInput</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a07c72447bba26fad4be33d3d629fb9e9" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearSystem</scope><name>controlInput</name></member>

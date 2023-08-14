@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="36" column="31" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="36" bodyend="-1"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="31" column="31" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a57b8870bbf02c9ec26d4ecf9c48f81da" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref></type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="36" column="51" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="36" bodyend="-1"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="31" column="51" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a6123f06bb562a3b4ec2f057e569ef5a9" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
@@ -42,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="37" column="31" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="37" bodyend="-1"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="32" column="31" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ac908a5926b081d56b2b2adb73fb91024" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="37" column="42" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="37" bodyend="-1"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="32" column="42" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ac42fa78d5e0b875ce87ca6705f409b43" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="37" column="59" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="37" bodyend="-1"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="32" column="59" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ab5d66c565ab1f8c8b07af50c0fa8ea2c" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="38" column="31" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="38" bodyend="-1"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="33" column="31" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1aeb5830d76f13b9c56099a9b46dc4d75e" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="38" column="48" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="38" bodyend="-1"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="33" column="48" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a3f90a470d545b1de2bc61ca02f163d37" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="38" column="65" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="38" bodyend="-1"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="33" column="65" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a0a82c7b5ad788115761b1d076f2131ff" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="39" column="31" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="39" bodyend="-1"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="34" column="31" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a5e939c14fc7b8310f421c62fe588e4e0" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="39" column="52" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="39" bodyend="-1"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="34" column="52" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a17b78b4db36af773e30e603e5a97d0b7" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">MatrixDynSize</ref></type>
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="39" column="75" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="39" bodyend="-1"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="34" column="75" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="34" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ada7fd6b8c04c8eb3e2f40b659e95aa5f" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref></type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="40" column="31" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="40" bodyend="-1"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="35" column="31" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="35" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a97a0b714f48d4f537470be605f3cfda3" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -173,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="41" column="22" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="41" bodyend="-1"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="36" column="22" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a3f13934987727738fe033ed283470092" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -187,7 +187,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="42" column="22" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="42" bodyend="-1"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="37" column="22" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="37" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a2574fbc5b732d4d97ae805b1e20dd48b" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">SparsityStructure</ref> &gt;</type>
@@ -200,7 +200,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="43" column="29" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="43" bodyend="-1"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="38" column="29" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a159e4447ca4ebdd513041fa6e2ab9bdd" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1SparsityStructure" kindref="compound">SparsityStructure</ref> &gt;</type>
@@ -213,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="44" column="29" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="44" bodyend="-1"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="39" column="29" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1af6f309124441aaadca41d1194b9890dc" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -227,7 +227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="45" column="22" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="45" bodyend="-1"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="40" column="22" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ae495aa983704182db09bbc271e019261" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -241,7 +241,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="46" column="22" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="46" bodyend="-1"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="41" column="22" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ad9e1e3c4b13a972a0eebc19b9a4fbb1a" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -255,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="47" column="22" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="47" bodyend="-1"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="42" column="22" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1aaf80297957dcb4699598532c58ea45d2" prot="private" static="no" mutable="no">
         <type>CollocationHessianSparsityMap</type>
@@ -268,7 +268,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="48" column="47" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="48" bodyend="-1"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="43" column="47" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a187b52e871994a6ef6de082b13b9d478" prot="private" static="no" mutable="no">
         <type>CollocationHessianSparsityMap</type>
@@ -281,7 +281,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="49" column="47" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="49" bodyend="-1"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="44" column="47" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a192cce68cfe6e63fc3c77a30b9fcad49" prot="private" static="no" mutable="no">
         <type>CollocationHessianSparsityMap</type>
@@ -294,7 +294,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="50" column="47" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="50" bodyend="-1"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="45" column="47" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -310,7 +310,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="52" column="30"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="47" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a33270f7b5cb32789062af5a84ff0c117" prot="private" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -340,7 +340,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="54" column="30"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="49" column="30"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -355,7 +355,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="58" column="17"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="53" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a706eaae151b094d5d3e58080e9b91bdb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -372,7 +372,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="60" column="17"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="55" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a25c426b2f18d74a360e8dcb1ddba855b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -385,7 +385,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="62" column="25"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="57" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a0864bcb0de92814ed05b4ffb1c1a351a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -466,7 +466,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="64" column="30"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="59" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ab7eb3b3cea697f03ee6cf104a3490d6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -504,7 +504,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="68" column="30"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="63" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1aa0c7beeea875f93ad63836ffd677a3e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -522,7 +522,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="73" column="30"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="68" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a3b74a8ce81433ba877405eb2bdeab37c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -540,7 +540,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="75" column="30"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="70" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1aab5857ef9222733fed8a2bcd155e8ac0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -586,7 +586,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="77" column="30"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="72" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a33881d4da853f92e4a96bb6b9fdaa823" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -604,7 +604,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="84" column="30"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="79" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1ad50abcf8b967813771828b858823ff9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -622,7 +622,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="86" column="30"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="81" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a04a337a768584f1d14c153fff7fdf9a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -640,7 +640,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="88" column="30"/>
+        <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="83" column="30"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -749,7 +749,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="34" column="13" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="34" bodyend="90"/>
+    <location file="iDynTree/Integrators/ImplicitTrapezoidal.h" line="29" column="13" bodyfile="iDynTree/Integrators/ImplicitTrapezoidal.h" bodystart="29" bodyend="85"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1ImplicitTrapezoidal_1a46652f280e132bf3151e8244dce719b3" prot="private" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>allocateBuffers</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a1594f1f7ce88c5d45f585130c895b0a9" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::ImplicitTrapezoidal</scope><name>clearSolution</name></member>

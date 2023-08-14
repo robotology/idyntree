@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearConstraint.h" line="108" column="44" bodyfile="iDynTree/LinearConstraint.h" bodystart="107" bodyend="-1"/>
+        <location file="iDynTree/LinearConstraint.h" line="102" column="44" bodyfile="iDynTree/LinearConstraint.h" bodystart="101" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -39,7 +39,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearConstraint.h" line="46" column="13"/>
+        <location file="iDynTree/LinearConstraint.h" line="40" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a7bf3bcd6529073e24c5f7886b50b1e47" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearConstraint.h" line="48" column="13"/>
+        <location file="iDynTree/LinearConstraint.h" line="42" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1aa1256071135738cfe1cd7a36d7dd57c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearConstraint.h" line="52" column="21"/>
+        <location file="iDynTree/LinearConstraint.h" line="46" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1ad7b55df7d1120ab2c1c8b854894933cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -98,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearConstraint.h" line="54" column="18"/>
+        <location file="iDynTree/LinearConstraint.h" line="48" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a97636ee49fcd639404f7ba3d5d0e06b7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearConstraint.h" line="56" column="18"/>
+        <location file="iDynTree/LinearConstraint.h" line="50" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a507d1dc0e3f9505cf06aa7da163133cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearConstraint.h" line="58" column="18"/>
+        <location file="iDynTree/LinearConstraint.h" line="52" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1aaf7235110d9aa561c2cff6d12f860c56" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -149,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearConstraint.h" line="60" column="18"/>
+        <location file="iDynTree/LinearConstraint.h" line="54" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1abe10de5dd153d7004ab9e613cd1d335f" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -216,7 +216,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearConstraint.h" line="62" column="26"/>
+        <location file="iDynTree/LinearConstraint.h" line="56" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1ae3ca83828d9389fffbf6fec959cd3aad" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -283,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearConstraint.h" line="67" column="26"/>
+        <location file="iDynTree/LinearConstraint.h" line="61" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1af0c90206bfbd3a85d5560f174b21c9d2" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -350,7 +350,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearConstraint.h" line="72" column="26"/>
+        <location file="iDynTree/LinearConstraint.h" line="66" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1adb1f5a0a12386abc216d6e753ad6d44b" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -383,7 +383,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearConstraint.h" line="77" column="26"/>
+        <location file="iDynTree/LinearConstraint.h" line="71" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a6abcef0d23ca5e97e8a3bd979c503364" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -416,7 +416,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearConstraint.h" line="79" column="26"/>
+        <location file="iDynTree/LinearConstraint.h" line="73" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a2901af2910fd692234b0bd498974dcbe" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -495,7 +495,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearConstraint.h" line="81" column="26"/>
+        <location file="iDynTree/LinearConstraint.h" line="75" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a98e3c9d5a91e0c9b176afa8fcafb73b8" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -574,7 +574,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearConstraint.h" line="87" column="26"/>
+        <location file="iDynTree/LinearConstraint.h" line="81" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a4125811b81075d31f422e37c53307b53" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -653,7 +653,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearConstraint.h" line="94" column="26"/>
+        <location file="iDynTree/LinearConstraint.h" line="88" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1aebd1c3a36cd6b7803dc20372de507309" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -686,7 +686,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearConstraint.h" line="100" column="26"/>
+        <location file="iDynTree/LinearConstraint.h" line="94" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a1fe0c90185a607c25b596b53997eb779" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -719,7 +719,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearConstraint.h" line="102" column="26"/>
+        <location file="iDynTree/LinearConstraint.h" line="96" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1a0f0c8a6c45220b51c744057afaf4df13" prot="public" static="no" const="no" explicit="no" inline="no" final="yes" virt="virtual">
         <type>bool</type>
@@ -752,7 +752,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/LinearConstraint.h" line="104" column="26"/>
+        <location file="iDynTree/LinearConstraint.h" line="98" column="26"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -794,7 +794,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/LinearConstraint.h" line="42" column="9" bodyfile="iDynTree/LinearConstraint.h" bodystart="43" bodyend="109"/>
+    <location file="iDynTree/LinearConstraint.h" line="36" column="9" bodyfile="iDynTree/LinearConstraint.h" bodystart="37" bodyend="103"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1Constraint_1a48bd2962ef941257545801ed45a3550e" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>Constraint</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1LinearConstraint_1af0c90206bfbd3a85d5560f174b21c9d2" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::LinearConstraint</scope><name>constraintJacobianWRTControl</name></member>

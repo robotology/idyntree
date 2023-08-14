@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Wrench.h" line="27" column="16" bodyfile="iDynTree/Core/Wrench.h" bodystart="27" bodyend="27"/>
+        <location file="iDynTree/Core/Wrench.h" line="20" column="16" bodyfile="iDynTree/Core/Wrench.h" bodystart="20" bodyend="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Wrench_1a7d3b8ee3ef7f6024acb26428a393415c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Wrench.h" line="28" column="9"/>
+        <location file="iDynTree/Core/Wrench.h" line="21" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Wrench_1a99c5191f4b6abfe0b72d1dab0a02bb0c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Wrench.h" line="29" column="9"/>
+        <location file="iDynTree/Core/Wrench.h" line="22" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Wrench_1af66e21abd0dd2721b0ca8db613355648" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Wrench.h" line="30" column="9"/>
+        <location file="iDynTree/Core/Wrench.h" line="23" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Wrench_1a2fcff32a02a287e62f3bd666b0a4328d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Wrench.h" line="33" column="16"/>
+        <location file="iDynTree/Core/Wrench.h" line="26" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Wrench_1a061d3e56d593d54bae7c1d717d70e8b6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Wrench.h" line="34" column="16"/>
+        <location file="iDynTree/Core/Wrench.h" line="27" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Wrench_1ae43f980d914019c767a6bc1e2f7d65d2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Wrench" kindref="compound">Wrench</ref></type>
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Wrench.h" line="35" column="16"/>
+        <location file="iDynTree/Core/Wrench.h" line="28" column="16"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -192,7 +192,7 @@
         <link refid="classiDynTree_1_1SpatialMotionForceVectorT__traits"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Core/Wrench.h" line="24" column="5" bodyfile="iDynTree/Core/Wrench.h" bodystart="25" bodyend="36"/>
+    <location file="iDynTree/Core/Wrench.h" line="17" column="5" bodyfile="iDynTree/Core/Wrench.h" bodystart="18" bodyend="29"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1SpatialVector_1a45a617c3a2fbf58cb8f14be36a9f0ff5" prot="protected" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>angularOffset</name></member>
       <member refid="classiDynTree_1_1SpatialVector_1a7713fdb080783747a894974f5c4b44a6" prot="protected" virt="non-virtual"><scope>iDynTree::Wrench</scope><name>angularVec3</name></member>

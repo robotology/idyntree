@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/SensorElement.h" line="92" column="5"/>
+        <location file="private/SensorElement.h" line="83" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GyroscopeSensorHelper_1a3f365581c04b435546517e02f8327e59" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> *</type>
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/SensorElement.h" line="93" column="12"/>
+        <location file="private/SensorElement.h" line="84" column="12"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -86,7 +86,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="private/SensorElement.h" line="90" column="1" bodyfile="private/SensorElement.h" bodystart="90" bodyend="94"/>
+    <location file="private/SensorElement.h" line="81" column="1" bodyfile="private/SensorElement.h" bodystart="81" bodyend="85"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1GyroscopeSensorHelper_1a3f365581c04b435546517e02f8327e59" prot="public" virt="virtual"><scope>iDynTree::GyroscopeSensorHelper</scope><name>generateSensor</name></member>
       <member refid="classiDynTree_1_1GyroscopeSensorHelper_1aa53aa5f8e18d4d3434b6ad1e510dd53d" prot="public" virt="non-virtual"><scope>iDynTree::GyroscopeSensorHelper</scope><name>GyroscopeSensorHelper</name></member>

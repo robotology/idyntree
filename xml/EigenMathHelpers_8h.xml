@@ -53,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/EigenMathHelpers.h" line="23" column="6" bodyfile="iDynTree/Core/EigenMathHelpers.h" bodystart="23" bodyend="48"/>
+        <location file="iDynTree/Core/EigenMathHelpers.h" line="16" column="6" bodyfile="iDynTree/Core/EigenMathHelpers.h" bodystart="16" bodyend="41"/>
       </memberdef>
       <memberdef kind="function" id="EigenMathHelpers_8h_1aacb98344c6221dbf5e5d7678e3e75136" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -92,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/EigenMathHelpers.h" line="52" column="6" bodyfile="iDynTree/Core/EigenMathHelpers.h" bodystart="52" bodyend="60"/>
+        <location file="iDynTree/Core/EigenMathHelpers.h" line="45" column="6" bodyfile="iDynTree/Core/EigenMathHelpers.h" bodystart="45" bodyend="53"/>
       </memberdef>
       <memberdef kind="function" id="EigenMathHelpers_8h_1a0b20a0208cab1ac6cdbd661612ca4c1b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -127,7 +127,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/EigenMathHelpers.h" line="63" column="6" bodyfile="iDynTree/Core/EigenMathHelpers.h" bodystart="63" bodyend="71"/>
+        <location file="iDynTree/Core/EigenMathHelpers.h" line="56" column="6" bodyfile="iDynTree/Core/EigenMathHelpers.h" bodystart="56" bodyend="64"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

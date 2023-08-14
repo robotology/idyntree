@@ -27,18 +27,6 @@
         <label>vector</label>
       </node>
     </incdepgraph>
-    <invincdepgraph>
-      <node id="2">
-        <label>iDynTree/BoundingBoxHelpers.h</label>
-        <link refid="BoundingBoxHelpers_8h"/>
-      </node>
-      <node id="1">
-        <label>iDynTree/ConvexHullHelpers.h</label>
-        <link refid="ConvexHullHelpers_8h"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-      </node>
-    </invincdepgraph>
     <innerclass refid="classiDynTree_1_1Polygon" prot="public">iDynTree::Polygon</innerclass>
     <innerclass refid="classiDynTree_1_1Polygon2D" prot="public">iDynTree::Polygon2D</innerclass>
     <innerclass refid="classiDynTree_1_1ConvexHullProjectionConstraint" prot="public">iDynTree::ConvexHullProjectionConstraint</innerclass>

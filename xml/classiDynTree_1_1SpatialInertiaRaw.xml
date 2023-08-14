@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="34" column="16" bodyfile="iDynTree/Core/SpatialInertiaRaw.h" bodystart="34" bodyend="-1"/>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="27" column="16" bodyfile="iDynTree/Core/SpatialInertiaRaw.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SpatialInertiaRaw_1adffed809529bfbc044e8c330374c611a" prot="protected" static="no" mutable="no">
         <type>double</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="35" column="16" bodyfile="iDynTree/Core/SpatialInertiaRaw.h" bodystart="35" bodyend="-1"/>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="28" column="16" bodyfile="iDynTree/Core/SpatialInertiaRaw.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SpatialInertiaRaw_1aae4c95f1309e827a915431c58dad3666" prot="protected" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1RotationalInertiaRaw" kindref="compound">RotationalInertiaRaw</ref></type>
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="36" column="30" bodyfile="iDynTree/Core/SpatialInertiaRaw.h" bodystart="36" bodyend="-1"/>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="29" column="30" bodyfile="iDynTree/Core/SpatialInertiaRaw.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="44" column="16" bodyfile="iDynTree/Core/SpatialInertiaRaw.h" bodystart="44" bodyend="44"/>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="37" column="16" bodyfile="iDynTree/Core/SpatialInertiaRaw.h" bodystart="37" bodyend="37"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertiaRaw_1aae32215a7b93c1f160bdf449dc76c60f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="55" column="9"/>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="48" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertiaRaw_1a5e43484f889736ad717282bb72bdac92" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="56" column="9"/>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="49" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertiaRaw_1a910d0f719839f786b22a9bcc1b945371" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="63" column="14"/>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="56" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertiaRaw_1a38d60687fb01182e2d6cc9970e697b98" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -176,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="82" column="16"/>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="75" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertiaRaw_1a37cb05817ed6e158eb96a8d5d7519941" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1PositionRaw" kindref="compound">PositionRaw</ref></type>
@@ -189,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="83" column="21"/>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="76" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertiaRaw_1ae13758f1b92ba30c1c02e5076ccb8940" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1RotationalInertiaRaw" kindref="compound">RotationalInertiaRaw</ref> &amp;</type>
@@ -202,7 +202,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="84" column="36"/>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="77" column="36"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertiaRaw_1a890bf2876d229c14b3ae24277bccebba" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1RotationalInertiaRaw" kindref="compound">RotationalInertiaRaw</ref></type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="85" column="30"/>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="78" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertiaRaw_1adda5a778ebf6d876fa24d8d8b48a49ef" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref></type>
@@ -233,7 +233,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="98" column="28"/>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="91" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SpatialInertiaRaw_1ab545a454ffbd8144ce1b13fbb280d787" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -248,7 +248,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="101" column="14"/>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="94" column="14"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
@@ -272,7 +272,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="92" column="34"/>
+        <location file="iDynTree/Core/SpatialInertiaRaw.h" line="85" column="34"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -322,7 +322,7 @@
         <link refid="classiDynTree_1_1MatrixFixSize"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Core/SpatialInertiaRaw.h" line="31" column="5" bodyfile="iDynTree/Core/SpatialInertiaRaw.h" bodystart="32" bodyend="102"/>
+    <location file="iDynTree/Core/SpatialInertiaRaw.h" line="24" column="5" bodyfile="iDynTree/Core/SpatialInertiaRaw.h" bodystart="25" bodyend="95"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1SpatialInertiaRaw_1aec240d29470a4bb7d7aebaa434ffef3c" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertiaRaw</scope><name>combine</name></member>
       <member refid="classiDynTree_1_1SpatialInertiaRaw_1a910d0f719839f786b22a9bcc1b945371" prot="public" virt="non-virtual"><scope>iDynTree::SpatialInertiaRaw</scope><name>fromRotationalInertiaWrtCenterOfMass</name></member>

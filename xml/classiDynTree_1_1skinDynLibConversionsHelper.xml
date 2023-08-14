@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/skinDynLibConversions.h" line="92" column="14" bodyfile="iDynTree/skinDynLibConversions.h" bodystart="92" bodyend="-1"/>
+        <location file="iDynTree/skinDynLibConversions.h" line="85" column="14" bodyfile="iDynTree/skinDynLibConversions.h" bodystart="85" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -59,7 +59,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/skinDynLibConversions.h" line="113" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="30" bodyend="59"/>
+        <location file="iDynTree/skinDynLibConversions.h" line="106" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="23" bodyend="52"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1skinDynLibConversionsHelper_1a55341267530b46337d2e359eb875de51" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/skinDynLibConversions.h" line="120" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="61" bodyend="89"/>
+        <location file="iDynTree/skinDynLibConversions.h" line="113" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="54" bodyend="82"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1skinDynLibConversionsHelper_1a0f89c9920c1df4564651fbb1e2b107fa" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -127,7 +127,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/skinDynLibConversions.h" line="129" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="91" bodyend="112"/>
+        <location file="iDynTree/skinDynLibConversions.h" line="122" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="84" bodyend="105"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1skinDynLibConversionsHelper_1a27867ec736ae24bb1c0ecde40cfca599" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -157,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/skinDynLibConversions.h" line="138" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="135" bodyend="157"/>
+        <location file="iDynTree/skinDynLibConversions.h" line="131" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="128" bodyend="150"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1skinDynLibConversionsHelper_1a4fef354b543feefb5de09d5fc77b4ce1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -179,7 +179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/skinDynLibConversions.h" line="145" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="114" bodyend="133"/>
+        <location file="iDynTree/skinDynLibConversions.h" line="138" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="107" bodyend="126"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1skinDynLibConversionsHelper_1a3d45ff7de330afbaedd94d07d1abf840" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -206,7 +206,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/skinDynLibConversions.h" line="153" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="242" bodyend="247"/>
+        <location file="iDynTree/skinDynLibConversions.h" line="146" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="235" bodyend="240"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1skinDynLibConversionsHelper_1a72db7b0625839e6556ef3b2d8dcd024f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -233,7 +233,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/skinDynLibConversions.h" line="163" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="249" bodyend="254"/>
+        <location file="iDynTree/skinDynLibConversions.h" line="156" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="242" bodyend="247"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1skinDynLibConversionsHelper_1aa6c96e112f58f04fb79c95e27bac5d47" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -260,7 +260,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/skinDynLibConversions.h" line="173" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="258" bodyend="313"/>
+        <location file="iDynTree/skinDynLibConversions.h" line="166" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="251" bodyend="306"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1skinDynLibConversionsHelper_1accc52dda49d5c917cea780fdde35a3cd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -287,7 +287,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/skinDynLibConversions.h" line="184" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="315" bodyend="390"/>
+        <location file="iDynTree/skinDynLibConversions.h" line="177" column="10" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="308" bodyend="383"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -300,7 +300,7 @@
 </listitem></itemizedlist>
 </para>
     </detaileddescription>
-    <location file="iDynTree/skinDynLibConversions.h" line="89" column="1" bodyfile="iDynTree/skinDynLibConversions.h" bodystart="90" bodyend="187"/>
+    <location file="iDynTree/skinDynLibConversions.h" line="82" column="1" bodyfile="iDynTree/skinDynLibConversions.h" bodystart="83" bodyend="180"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1skinDynLibConversionsHelper_1a43bea15e71e84b0012407c758e3053a0" prot="public" virt="non-virtual"><scope>iDynTree::skinDynLibConversionsHelper</scope><name>addSkinDynLibAlias</name></member>
       <member refid="classiDynTree_1_1skinDynLibConversionsHelper_1aa6c96e112f58f04fb79c95e27bac5d47" prot="public" virt="non-virtual"><scope>iDynTree::skinDynLibConversionsHelper</scope><name>fromiDynTreeToSkinDynLib</name></member>

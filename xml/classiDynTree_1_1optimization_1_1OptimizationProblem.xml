@@ -14,7 +14,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimizationProblem.h" line="131" column="29" bodyfile="iDynTree/OptimizationProblem.h" bodystart="131" bodyend="-1"/>
+        <location file="iDynTree/OptimizationProblem.h" line="125" column="29" bodyfile="iDynTree/OptimizationProblem.h" bodystart="125" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimization_1_1OptimizationProblem_1a38ea0b9e4f8d97c8fd55ef04addfad4f" prot="protected" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1optimization_1_1OptimizationProblemInfo" kindref="compound">OptimizationProblemInfo</ref></type>
@@ -27,7 +27,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimizationProblem.h" line="132" column="37" bodyfile="iDynTree/OptimizationProblem.h" bodystart="132" bodyend="-1"/>
+        <location file="iDynTree/OptimizationProblem.h" line="126" column="37" bodyfile="iDynTree/OptimizationProblem.h" bodystart="126" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -42,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimizationProblem.h" line="90" column="13"/>
+        <location file="iDynTree/OptimizationProblem.h" line="84" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblem_1a39d5795ab3ad632b45969cab78e5a864" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimizationProblem.h" line="92" column="21"/>
+        <location file="iDynTree/OptimizationProblem.h" line="86" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblem_1afb3fe650fcd500e3aced280e6b057538" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimizationProblem.h" line="94" column="26"/>
+        <location file="iDynTree/OptimizationProblem.h" line="88" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblem_1a2852f7fd29210af17660d3940f34f364" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimizationProblem.h" line="96" column="26"/>
+        <location file="iDynTree/OptimizationProblem.h" line="90" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblem_1a22f029aa5c80de956fbccec5211e65f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>unsigned int</type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimizationProblem.h" line="98" column="34"/>
+        <location file="iDynTree/OptimizationProblem.h" line="92" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblem_1a12de3560b93b479eaafea1b916a850a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>unsigned int</type>
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimizationProblem.h" line="100" column="34"/>
+        <location file="iDynTree/OptimizationProblem.h" line="94" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblem_1adc4c245e16ee473fe007f986fc6a30ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimizationProblem.h" line="102" column="26"/>
+        <location file="iDynTree/OptimizationProblem.h" line="96" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblem_1a60defdce8656c65efeb6b9f305d71236" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimizationProblem.h" line="104" column="26"/>
+        <location file="iDynTree/OptimizationProblem.h" line="98" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblem_1a822b9d5551e467371d56335934b8c43e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -162,7 +162,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimizationProblem.h" line="106" column="26"/>
+        <location file="iDynTree/OptimizationProblem.h" line="100" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblem_1a604d4bfb23a7afc976cc7f1cba849315" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -183,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimizationProblem.h" line="108" column="26"/>
+        <location file="iDynTree/OptimizationProblem.h" line="102" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblem_1aaf3322e517fc6460dfa230362cc96150" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -204,7 +204,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimizationProblem.h" line="110" column="26"/>
+        <location file="iDynTree/OptimizationProblem.h" line="104" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblem_1a8cf140476743bdd010deb174572fa28d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -221,7 +221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimizationProblem.h" line="112" column="26"/>
+        <location file="iDynTree/OptimizationProblem.h" line="106" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblem_1aaf9aae7876b4e2a4cb845b872f9b856c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -238,7 +238,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimizationProblem.h" line="114" column="26"/>
+        <location file="iDynTree/OptimizationProblem.h" line="108" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblem_1afa3c75d5d59a3b83f74779f183771c84" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -255,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimizationProblem.h" line="116" column="26"/>
+        <location file="iDynTree/OptimizationProblem.h" line="110" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblem_1a11bdc767f6cb4366f9584f5b819a5cb7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -272,7 +272,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimizationProblem.h" line="118" column="26"/>
+        <location file="iDynTree/OptimizationProblem.h" line="112" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblem_1accf9d3e93c17d79e88ac3f2a0bc735e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -289,7 +289,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimizationProblem.h" line="120" column="26"/>
+        <location file="iDynTree/OptimizationProblem.h" line="114" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblem_1a23afb6cadeb65e77424016160dacd391" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -306,7 +306,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimizationProblem.h" line="122" column="26"/>
+        <location file="iDynTree/OptimizationProblem.h" line="116" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblem_1a714bd3e0c38ed3469c832238d616bd4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -323,7 +323,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimizationProblem.h" line="124" column="26"/>
+        <location file="iDynTree/OptimizationProblem.h" line="118" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblem_1a0f7bc1722af0bc13e973b1d2fed53fa5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -344,7 +344,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimizationProblem.h" line="126" column="26"/>
+        <location file="iDynTree/OptimizationProblem.h" line="120" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OptimizationProblem_1a1e6a4099899511005bedff2ff00c4ee8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1optimization_1_1OptimizationProblemInfo" kindref="compound">OptimizationProblemInfo</ref> &amp;</type>
@@ -357,7 +357,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimizationProblem.h" line="128" column="43"/>
+        <location file="iDynTree/OptimizationProblem.h" line="122" column="43"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -395,7 +395,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/OptimizationProblem.h" line="86" column="9" bodyfile="iDynTree/OptimizationProblem.h" bodystart="86" bodyend="133"/>
+    <location file="iDynTree/OptimizationProblem.h" line="80" column="9" bodyfile="iDynTree/OptimizationProblem.h" bodystart="80" bodyend="127"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimization_1_1OptimizationProblem_1a23afb6cadeb65e77424016160dacd391" prot="public" virt="virtual"><scope>iDynTree::optimization::OptimizationProblem</scope><name>evaluateConstraints</name></member>
       <member refid="classiDynTree_1_1optimization_1_1OptimizationProblem_1a0f7bc1722af0bc13e973b1d2fed53fa5" prot="public" virt="virtual"><scope>iDynTree::optimization::OptimizationProblem</scope><name>evaluateConstraintsHessian</name></member>

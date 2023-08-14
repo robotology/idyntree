@@ -204,7 +204,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/PredictSensorsMeasurements.h" line="69" column="11" declfile="iDynTree/Sensors/PredictSensorsMeasurements.h" declline="69" declcolumn="11"/>
+        <location file="iDynTree/Sensors/PredictSensorsMeasurements.h" line="62" column="11" declfile="iDynTree/Sensors/PredictSensorsMeasurements.h" declline="62" declcolumn="11"/>
       </memberdef>
       <memberdef kind="function" id="group__iDynTreeSensors_1gaa68c8cac6b85223f729cd8855627d35e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -307,7 +307,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Sensors/PredictSensorsMeasurements.h" line="102" column="11" declfile="iDynTree/Sensors/PredictSensorsMeasurements.h" declline="102" declcolumn="11"/>
+        <location file="iDynTree/Sensors/PredictSensorsMeasurements.h" line="95" column="11" declfile="iDynTree/Sensors/PredictSensorsMeasurements.h" declline="95" declcolumn="11"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

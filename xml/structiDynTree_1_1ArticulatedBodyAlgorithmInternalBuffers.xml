@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Dynamics.h" line="131" column="31" bodyfile="iDynTree/Model/Dynamics.h" bodystart="131" bodyend="-1"/>
+        <location file="iDynTree/Model/Dynamics.h" line="124" column="31" bodyfile="iDynTree/Model/Dynamics.h" bodystart="124" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a8ad42f2fc2d272d3e7df9daa0a93d348" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1DOFSpatialForceArray" kindref="compound">DOFSpatialForceArray</ref></type>
@@ -28,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Dynamics.h" line="132" column="30" bodyfile="iDynTree/Model/Dynamics.h" bodystart="132" bodyend="-1"/>
+        <location file="iDynTree/Model/Dynamics.h" line="125" column="30" bodyfile="iDynTree/Model/Dynamics.h" bodystart="125" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a3074d9a0482a6493e0d277100fe230bc" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref></type>
@@ -41,7 +41,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Dynamics.h" line="133" column="30" bodyfile="iDynTree/Model/Dynamics.h" bodystart="133" bodyend="-1"/>
+        <location file="iDynTree/Model/Dynamics.h" line="126" column="30" bodyfile="iDynTree/Model/Dynamics.h" bodystart="126" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a18705d68a17253e373f1f414174540ba" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">JointDOFsDoubleArray</ref></type>
@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Dynamics.h" line="134" column="30" bodyfile="iDynTree/Model/Dynamics.h" bodystart="134" bodyend="-1"/>
+        <location file="iDynTree/Model/Dynamics.h" line="127" column="30" bodyfile="iDynTree/Model/Dynamics.h" bodystart="127" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1aa3575bb3e88be7382c8fb23c984c0450" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">LinkVelArray</ref></type>
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Dynamics.h" line="135" column="22" bodyfile="iDynTree/Model/Dynamics.h" bodystart="135" bodyend="-1"/>
+        <location file="iDynTree/Model/Dynamics.h" line="128" column="22" bodyfile="iDynTree/Model/Dynamics.h" bodystart="128" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a7a97b87c9dfb97f73b6e5e2a6c75f1c0" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref></type>
@@ -80,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Dynamics.h" line="136" column="22" bodyfile="iDynTree/Model/Dynamics.h" bodystart="136" bodyend="-1"/>
+        <location file="iDynTree/Model/Dynamics.h" line="129" column="22" bodyfile="iDynTree/Model/Dynamics.h" bodystart="129" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a7618ba222a09e0238d34b37921a4d2ba" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">LinkAccArray</ref></type>
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Dynamics.h" line="137" column="22" bodyfile="iDynTree/Model/Dynamics.h" bodystart="137" bodyend="-1"/>
+        <location file="iDynTree/Model/Dynamics.h" line="130" column="22" bodyfile="iDynTree/Model/Dynamics.h" bodystart="130" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a12af294aa9e5406d910c20f128899ec8" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1LinkArticulatedBodyInertias" kindref="compound">LinkArticulatedBodyInertias</ref></type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Dynamics.h" line="138" column="37" bodyfile="iDynTree/Model/Dynamics.h" bodystart="138" bodyend="-1"/>
+        <location file="iDynTree/Model/Dynamics.h" line="131" column="37" bodyfile="iDynTree/Model/Dynamics.h" bodystart="131" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1ace4d9f7246717e5cb62ac131d5dc3a09" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">LinkWrenches</ref></type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Dynamics.h" line="139" column="22" bodyfile="iDynTree/Model/Dynamics.h" bodystart="139" bodyend="-1"/>
+        <location file="iDynTree/Model/Dynamics.h" line="132" column="22" bodyfile="iDynTree/Model/Dynamics.h" bodystart="132" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -134,7 +134,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Dynamics.h" line="112" column="9" bodyfile="iDynTree/Model/Dynamics.h" bodystart="112" bodyend="112"/>
+        <location file="iDynTree/Model/Dynamics.h" line="105" column="9" bodyfile="iDynTree/Model/Dynamics.h" bodystart="105" bodyend="105"/>
       </memberdef>
       <memberdef kind="function" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a6cef99970f81b6218d27f8b71ac4bc50" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -152,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Dynamics.h" line="117" column="9"/>
+        <location file="iDynTree/Model/Dynamics.h" line="110" column="9"/>
       </memberdef>
       <memberdef kind="function" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a0051da05566db4035a0a55856c01424e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -170,7 +170,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Dynamics.h" line="123" column="14"/>
+        <location file="iDynTree/Model/Dynamics.h" line="116" column="14"/>
       </memberdef>
       <memberdef kind="function" id="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a9cc877128e38e26e00636e3b82101347" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -188,7 +188,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Dynamics.h" line="129" column="14"/>
+        <location file="iDynTree/Model/Dynamics.h" line="122" column="14"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -261,7 +261,7 @@
         <link refid="classiDynTree_1_1LinkArticulatedBodyInertias"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Model/Dynamics.h" line="110" column="5" bodyfile="iDynTree/Model/Dynamics.h" bodystart="111" bodyend="143"/>
+    <location file="iDynTree/Model/Dynamics.h" line="103" column="5" bodyfile="iDynTree/Model/Dynamics.h" bodystart="104" bodyend="136"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1aeae686f2c4221e757dbae74b611db79d" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyAlgorithmInternalBuffers</scope><name>ArticulatedBodyAlgorithmInternalBuffers</name></member>
       <member refid="structiDynTree_1_1ArticulatedBodyAlgorithmInternalBuffers_1a6cef99970f81b6218d27f8b71ac4bc50" prot="public" virt="non-virtual"><scope>iDynTree::ArticulatedBodyAlgorithmInternalBuffers</scope><name>ArticulatedBodyAlgorithmInternalBuffers</name></member>

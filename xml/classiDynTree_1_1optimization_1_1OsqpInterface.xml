@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="63" column="41" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="62" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="57" column="41" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="67" column="13"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="61" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1a80ed27f2738fbf990537472e42802b73" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="69" column="13"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="63" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1ad2146e1d86ba1cad396e9bf48dbaf483" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="71" column="21"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="65" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1af7e91800834a28c1893f457e2abd563b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="73" column="26"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="67" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1a3306110da1e7dac2351597f9845868c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -92,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="75" column="26"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="69" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1a3333c2ba38b860387f24704ebf31e32f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="77" column="26"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="71" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1a086d68565c9b9f67452f02d3f31d9baf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -124,7 +124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="79" column="26"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="73" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1a360dc0119c2019105f8c77cf0cc1762c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -150,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="81" column="26"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="75" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1af8db1bceee19d332c86b1cd2bee25f53" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -168,7 +168,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="85" column="26"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="79" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1a12dcd292967e95e732f7b0a7bbe6ad7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -186,7 +186,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="87" column="26"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="81" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1a8f33729498dbe903b9dd39a69fccd22b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -200,7 +200,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="89" column="28"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="83" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1aeda948d7a052a7dbb3bb74130b232c34" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -214,7 +214,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="91" column="28"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="85" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1OsqpInterface_1a0babdc07ee961e60837841e097fb9ab6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structiDynTree_1_1optimization_1_1OsqpSettings" kindref="compound">OsqpSettings</ref> &amp;</type>
@@ -227,7 +227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/OsqpInterface.h" line="93" column="26"/>
+        <location file="iDynTree/Optimizers/OsqpInterface.h" line="87" column="26"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -276,7 +276,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Optimizers/OsqpInterface.h" line="60" column="9" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="60" bodyend="94"/>
+    <location file="iDynTree/Optimizers/OsqpInterface.h" line="54" column="9" bodyfile="iDynTree/Optimizers/OsqpInterface.h" bodystart="54" bodyend="88"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimization_1_1OsqpInterface_1a360dc0119c2019105f8c77cf0cc1762c" prot="public" virt="virtual"><scope>iDynTree::optimization::OsqpInterface</scope><name>getDualVariables</name></member>
       <member refid="classiDynTree_1_1optimization_1_1OsqpInterface_1a12dcd292967e95e732f7b0a7bbe6ad7f" prot="public" virt="virtual"><scope>iDynTree::optimization::OsqpInterface</scope><name>getOptimalConstraintsValues</name></member>

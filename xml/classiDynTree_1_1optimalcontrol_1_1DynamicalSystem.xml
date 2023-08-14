@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="262" column="16" bodyfile="iDynTree/DynamicalSystem.h" bodystart="262" bodyend="-1"/>
+        <location file="iDynTree/DynamicalSystem.h" line="256" column="16" bodyfile="iDynTree/DynamicalSystem.h" bodystart="256" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a00d839c40133273c474849e70fce9bcf" prot="private" static="no" mutable="no">
         <type>size_t</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="263" column="16" bodyfile="iDynTree/DynamicalSystem.h" bodystart="263" bodyend="-1"/>
+        <location file="iDynTree/DynamicalSystem.h" line="257" column="16" bodyfile="iDynTree/DynamicalSystem.h" bodystart="257" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a0b4d67d17951d879a161733a1fdc303c" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref></type>
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="264" column="23" bodyfile="iDynTree/DynamicalSystem.h" bodystart="264" bodyend="-1"/>
+        <location file="iDynTree/DynamicalSystem.h" line="258" column="23" bodyfile="iDynTree/DynamicalSystem.h" bodystart="258" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a83ade897f2b42bfb09bec0e4c2d2ff5a" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref></type>
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="265" column="23" bodyfile="iDynTree/DynamicalSystem.h" bodystart="265" bodyend="-1"/>
+        <location file="iDynTree/DynamicalSystem.h" line="259" column="23" bodyfile="iDynTree/DynamicalSystem.h" bodystart="259" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="45" column="9"/>
+        <location file="iDynTree/DynamicalSystem.h" line="39" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ab82065e18425aa56e59b030519d5e123" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -111,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="53" column="9"/>
+        <location file="iDynTree/DynamicalSystem.h" line="47" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a4020c60fe630d1f5b6b4baf06e7b42a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="56" column="9"/>
+        <location file="iDynTree/DynamicalSystem.h" line="50" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a99a0776f0a23fd9a672c1be966839e81" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -141,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="58" column="17"/>
+        <location file="iDynTree/DynamicalSystem.h" line="52" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a1fdc25cc07f3bc2d02ac0cc2c74e8abc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -155,7 +155,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="63" column="16"/>
+        <location file="iDynTree/DynamicalSystem.h" line="57" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ae9048969fa6bb586f08332aa279ac01a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="68" column="16"/>
+        <location file="iDynTree/DynamicalSystem.h" line="62" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aa10bd35bc49f5dfaea48ffeecf945312" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -224,7 +224,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="81" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="75" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aa7075f1f51fa22e426b6dd94f2297530" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -254,7 +254,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="93" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="87" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a9106ad9134ccfe7eed374dbd9e0192d2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
@@ -271,7 +271,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="102" column="37"/>
+        <location file="iDynTree/DynamicalSystem.h" line="96" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a07c72447bba26fad4be33d3d629fb9e9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -301,7 +301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="112" column="24"/>
+        <location file="iDynTree/DynamicalSystem.h" line="106" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a8d4e1f2401927edd62ab3236f787bda0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>const <ref refid="classiDynTree_1_1VectorDynSize" kindref="compound">VectorDynSize</ref> &amp;</type>
@@ -318,7 +318,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="121" column="37"/>
+        <location file="iDynTree/DynamicalSystem.h" line="115" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aacad7dc34a95cc980482026aa0340ea5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -348,7 +348,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="131" column="24"/>
+        <location file="iDynTree/DynamicalSystem.h" line="125" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a5a08463a75e03ef33a3b945a47c03120" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -378,7 +378,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="141" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="135" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ae107a97a87ddc0f796e169c6de2cc39b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -434,7 +434,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="154" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="148" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1adb980635dc572a927cef8bd46e6d5fb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -490,7 +490,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="169" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="163" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a53c392202df88d48e4066a52e1ef3299" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -521,7 +521,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="179" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="173" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1adce1c8de3d7c21ff9b349337c45526bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -552,7 +552,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="186" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="180" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a7525017f74a6be06a5b33f6ab1a534de" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -619,7 +619,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="198" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="192" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a2fe62ab7639384a183bedce734aa6056" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -686,7 +686,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="213" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="207" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1aa05844446c984946204dfda39a13aa8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -753,7 +753,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="229" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="223" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a59b187545289936a58b328dd879d1804" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -786,7 +786,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="241" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="235" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1ae146dece07aaff9858da1f9ab0bb8464" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -819,7 +819,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="250" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="244" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1adde7e5979c176b76d4334635210ead91" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -852,7 +852,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/DynamicalSystem.h" line="259" column="22"/>
+        <location file="iDynTree/DynamicalSystem.h" line="253" column="22"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -881,7 +881,7 @@ It defines a continuos time dynamical system, i.e. <formula id="314">$ \dot{x} =
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="iDynTree/DynamicalSystem.h" line="41" column="5" bodyfile="iDynTree/DynamicalSystem.h" bodystart="41" bodyend="266"/>
+    <location file="iDynTree/DynamicalSystem.h" line="35" column="5" bodyfile="iDynTree/DynamicalSystem.h" bodystart="35" bodyend="260"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a9106ad9134ccfe7eed374dbd9e0192d2" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>controlInput</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem_1a07c72447bba26fad4be33d3d629fb9e9" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::DynamicalSystem</scope><name>controlInput</name></member>

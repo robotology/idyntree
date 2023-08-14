@@ -20,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/PositionRaw.h" line="75" column="21"/>
+        <location file="iDynTree/Core/PositionRaw.h" line="68" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PositionRaw_1ad9bc7d10dfcc39db22d173c18e2d28a2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/PositionRaw.h" line="77" column="21"/>
+        <location file="iDynTree/Core/PositionRaw.h" line="70" column="21"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/PositionRaw.h" line="37" column="9"/>
+        <location file="iDynTree/Core/PositionRaw.h" line="30" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PositionRaw_1a7e7bc8ca7dd0f280f948bd5b68a74be9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/PositionRaw.h" line="42" column="9"/>
+        <location file="iDynTree/Core/PositionRaw.h" line="35" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PositionRaw_1a80d840331aaff631f3a20de6c1ad058c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -98,7 +98,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/PositionRaw.h" line="47" column="9"/>
+        <location file="iDynTree/Core/PositionRaw.h" line="40" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PositionRaw_1a393b55cd191f8e7d55e1b0f01d34c593" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -116,7 +116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/PositionRaw.h" line="52" column="9"/>
+        <location file="iDynTree/Core/PositionRaw.h" line="45" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PositionRaw_1ade679b0251443c8dceb3057b296cd548" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/PositionRaw.h" line="58" column="9"/>
+        <location file="iDynTree/Core/PositionRaw.h" line="51" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PositionRaw_1a890b62a7da3fffa39225b8bffe42b082" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1PositionRaw" kindref="compound">PositionRaw</ref> &amp;</type>
@@ -155,7 +155,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/PositionRaw.h" line="63" column="28"/>
+        <location file="iDynTree/Core/PositionRaw.h" line="56" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PositionRaw_1ac9ae12237eab2576cbd7d72d69a248e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1PositionRaw" kindref="compound">PositionRaw</ref> &amp;</type>
@@ -172,7 +172,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/PositionRaw.h" line="64" column="28"/>
+        <location file="iDynTree/Core/PositionRaw.h" line="57" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PositionRaw_1aeb3d01e442c7e59b1c090119f4ee629c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -189,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/PositionRaw.h" line="67" column="29"/>
+        <location file="iDynTree/Core/PositionRaw.h" line="60" column="29"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PositionRaw_1a33ed3752652d9616246560299cd283c8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialForceVector" kindref="compound">SpatialForceVector</ref></type>
@@ -206,7 +206,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/PositionRaw.h" line="68" column="28"/>
+        <location file="iDynTree/Core/PositionRaw.h" line="61" column="28"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
@@ -229,7 +229,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/PositionRaw.h" line="65" column="28"/>
+        <location file="iDynTree/Core/PositionRaw.h" line="58" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1PositionRaw_1ad03fd4c796ef99a463767b4f36fe4661" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1PositionRaw" kindref="compound">PositionRaw</ref></type>
@@ -246,7 +246,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/PositionRaw.h" line="66" column="28"/>
+        <location file="iDynTree/Core/PositionRaw.h" line="59" column="28"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -298,7 +298,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Core/PositionRaw.h" line="29" column="5" bodyfile="iDynTree/Core/PositionRaw.h" bodystart="30" bodyend="80"/>
+    <location file="iDynTree/Core/PositionRaw.h" line="22" column="5" bodyfile="iDynTree/Core/PositionRaw.h" bodystart="23" bodyend="73"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1VectorFixSize_1ad0f06a255dc213a5904d232f703a0192" prot="public" virt="non-virtual"><scope>iDynTree::PositionRaw</scope><name>allocator_type</name></member>
       <member refid="classiDynTree_1_1VectorFixSize_1affa1eab2d54d8227d8aeb402dc2dc1f7" prot="public" virt="non-virtual"><scope>iDynTree::PositionRaw</scope><name>begin</name></member>

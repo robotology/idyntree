@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="246" column="28" bodyfile="private/InverseKinematicsNLP.h" bodystart="246" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="239" column="28" bodyfile="private/InverseKinematicsNLP.h" bodystart="239" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1COMInfo_1a0d842cd8f5943de0128b00f750b7066b" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector2</ref></type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="247" column="27" bodyfile="private/InverseKinematicsNLP.h" bodystart="247" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="240" column="27" bodyfile="private/InverseKinematicsNLP.h" bodystart="240" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1COMInfo_1afa954baa503b862ea2373b880a71e142" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
@@ -43,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="248" column="33" bodyfile="private/InverseKinematicsNLP.h" bodystart="248" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="241" column="33" bodyfile="private/InverseKinematicsNLP.h" bodystart="241" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1COMInfo_1ad4d5852c3dc23274de212bfe1dcd3fd9" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="249" column="33" bodyfile="private/InverseKinematicsNLP.h" bodystart="249" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="242" column="33" bodyfile="private/InverseKinematicsNLP.h" bodystart="242" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1COMInfo_1a0e9b458350d2bcb60d74296c4a644141" prot="public" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1MatrixDynSize" kindref="compound">iDynTree::MatrixDynSize</ref></type>
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InverseKinematicsNLP.h" line="250" column="33" bodyfile="private/InverseKinematicsNLP.h" bodystart="250" bodyend="-1"/>
+        <location file="private/InverseKinematicsNLP.h" line="243" column="33" bodyfile="private/InverseKinematicsNLP.h" bodystart="243" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -118,7 +118,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="private/InverseKinematicsNLP.h" line="245" column="5" bodyfile="private/InverseKinematicsNLP.h" bodystart="245" bodyend="251"/>
+    <location file="private/InverseKinematicsNLP.h" line="238" column="5" bodyfile="private/InverseKinematicsNLP.h" bodystart="238" bodyend="244"/>
     <listofallmembers>
       <member refid="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1COMInfo_1a41d6a2088ab38e4d65948fe335f89585" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP::COMInfo</scope><name>com</name></member>
       <member refid="structinternal_1_1kinematics_1_1InverseKinematicsNLP_1_1COMInfo_1afa954baa503b862ea2373b880a71e142" prot="public" virt="non-virtual"><scope>internal::kinematics::InverseKinematicsNLP::COMInfo</scope><name>comJacobian</name></member>

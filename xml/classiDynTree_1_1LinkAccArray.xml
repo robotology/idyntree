@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/LinkState.h" line="214" column="21" bodyfile="iDynTree/Model/LinkState.h" bodystart="214" bodyend="-1"/>
+        <location file="iDynTree/Model/LinkState.h" line="207" column="21" bodyfile="iDynTree/Model/LinkState.h" bodystart="207" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/LinkState.h" line="217" column="9"/>
+        <location file="iDynTree/Model/LinkState.h" line="210" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkAccArray_1a37aab6df89ab4d80bc5ccc3f10702b50" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -52,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/LinkState.h" line="218" column="9"/>
+        <location file="iDynTree/Model/LinkState.h" line="211" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkAccArray_1a6382be8140e8bc9118fe6457fd25698f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -69,7 +69,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/LinkState.h" line="220" column="14"/>
+        <location file="iDynTree/Model/LinkState.h" line="213" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkAccArray_1a186a11d1c6b96beb9bd9648dcd7c82ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/LinkState.h" line="221" column="14"/>
+        <location file="iDynTree/Model/LinkState.h" line="214" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkAccArray_1a4b266d1b395d205f35cf0fd2ecadc20b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/LinkState.h" line="223" column="14"/>
+        <location file="iDynTree/Model/LinkState.h" line="216" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkAccArray_1af3c2c0595bc7a866cf3e871762a42063" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">iDynTree::SpatialAcc</ref> &amp;</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/LinkState.h" line="225" column="31"/>
+        <location file="iDynTree/Model/LinkState.h" line="218" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkAccArray_1a8731a0f44d6d98783ea0006a831634be" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1SpatialAcc" kindref="compound">iDynTree::SpatialAcc</ref> &amp;</type>
@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/LinkState.h" line="226" column="37"/>
+        <location file="iDynTree/Model/LinkState.h" line="219" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkAccArray_1ad1d05536433e158acd414b13b0fc5a29" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::size_t</type>
@@ -150,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/LinkState.h" line="228" column="21"/>
+        <location file="iDynTree/Model/LinkState.h" line="221" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkAccArray_1a77ec45c0a886cc4928a02791cd0ef28c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/LinkState.h" line="230" column="21"/>
+        <location file="iDynTree/Model/LinkState.h" line="223" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1LinkAccArray_1a71fc9b738f2fb6629ea71fe281397614" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -180,7 +180,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/LinkState.h" line="232" column="9"/>
+        <location file="iDynTree/Model/LinkState.h" line="225" column="9"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -188,7 +188,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Model/LinkState.h" line="211" column="5" bodyfile="iDynTree/Model/LinkState.h" bodystart="212" bodyend="233"/>
+    <location file="iDynTree/Model/LinkState.h" line="204" column="5" bodyfile="iDynTree/Model/LinkState.h" bodystart="205" bodyend="226"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1LinkAccArray_1ad1d05536433e158acd414b13b0fc5a29" prot="public" virt="non-virtual"><scope>iDynTree::LinkAccArray</scope><name>getNrOfLinks</name></member>
       <member refid="classiDynTree_1_1LinkAccArray_1a4b266d1b395d205f35cf0fd2ecadc20b" prot="public" virt="non-virtual"><scope>iDynTree::LinkAccArray</scope><name>isConsistent</name></member>

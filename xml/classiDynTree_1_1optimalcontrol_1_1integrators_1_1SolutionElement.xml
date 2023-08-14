@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="50" column="31" bodyfile="iDynTree/Integrator.h" bodystart="50" bodyend="-1"/>
+        <location file="iDynTree/Integrator.h" line="44" column="31" bodyfile="iDynTree/Integrator.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement_1a0012c763c79c5c2e212bbfc30dca8f64" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="54" column="24" bodyfile="iDynTree/Integrator.h" bodystart="54" bodyend="-1"/>
+        <location file="iDynTree/Integrator.h" line="48" column="24" bodyfile="iDynTree/Integrator.h" bodystart="48" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -54,7 +54,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Integrator.h" line="45" column="13" bodyfile="iDynTree/Integrator.h" bodystart="45" bodyend="55"/>
+    <location file="iDynTree/Integrator.h" line="39" column="13" bodyfile="iDynTree/Integrator.h" bodystart="39" bodyend="49"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement_1a1d874717c6479a5c043b1cac0e4489f8" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::SolutionElement</scope><name>stateAtT</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement_1a0012c763c79c5c2e212bbfc30dca8f64" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::integrators::SolutionElement</scope><name>time</name></member>

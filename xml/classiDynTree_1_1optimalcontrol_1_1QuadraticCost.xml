@@ -20,7 +20,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticCost.h" line="38" column="12"/>
+        <location file="iDynTree/QuadraticCost.h" line="32" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1QuadraticCost_1a6ab8e33bb3c769c20cc61220b0987bbb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticCost.h" line="40" column="12"/>
+        <location file="iDynTree/QuadraticCost.h" line="34" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1QuadraticCost_1afc82f38e5250adee9edcd89cd1168ac4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticCost.h" line="42" column="17"/>
+        <location file="iDynTree/QuadraticCost.h" line="36" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1QuadraticCost_1a1509335a42ed6bb45f38379d4a39092f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticCost.h" line="44" column="17"/>
+        <location file="iDynTree/QuadraticCost.h" line="38" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1QuadraticCost_1a5505aefc487185f42b117137dd0502fc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -96,7 +96,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticCost.h" line="47" column="17"/>
+        <location file="iDynTree/QuadraticCost.h" line="41" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1QuadraticCost_1ac5f5e3bbb989ce5482cd2a690ed1687b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -117,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticCost.h" line="49" column="17"/>
+        <location file="iDynTree/QuadraticCost.h" line="43" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1QuadraticCost_1ad928571c75286252a7cf8e04675913c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -138,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticCost.h" line="52" column="17"/>
+        <location file="iDynTree/QuadraticCost.h" line="46" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1QuadraticCost_1a98ef09172a6249a121342f44306e77fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -159,7 +159,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticCost.h" line="54" column="17"/>
+        <location file="iDynTree/QuadraticCost.h" line="48" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1QuadraticCost_1ac26021f3cd107bb7612a34f4b079a9d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -176,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticCost.h" line="57" column="17"/>
+        <location file="iDynTree/QuadraticCost.h" line="51" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1QuadraticCost_1a80897122f5bf717243d0f454d6f702f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -193,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/QuadraticCost.h" line="59" column="17"/>
+        <location file="iDynTree/QuadraticCost.h" line="53" column="17"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -271,7 +271,7 @@
         <link refid="classiDynTree_1_1optimalcontrol_1_1Cost"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/QuadraticCost.h" line="34" column="8" bodyfile="iDynTree/QuadraticCost.h" bodystart="35" bodyend="61"/>
+    <location file="iDynTree/QuadraticCost.h" line="28" column="8" bodyfile="iDynTree/QuadraticCost.h" bodystart="29" bodyend="55"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1Cost_1a97ea5427f72a47d5abd6b37ca71a51f5" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::QuadraticCost</scope><name>Cost</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticLikeCost_1afa7aa964e0221db0c39d9eec020b1bb0" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::QuadraticCost</scope><name>costEvaluation</name></member>

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="111" column="10" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="111" bodyend="-1"/>
+        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="104" column="10" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="104" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1GravityCompensationHelper_1a390889893d61d6b7a185fea39d11ad1f" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="112" column="10" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="112" bodyend="-1"/>
+        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="105" column="10" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="105" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1GravityCompensationHelper_1aa8f44736069c187a83423fbe308f1e07" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref></type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="113" column="21" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="113" bodyend="-1"/>
+        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="106" column="21" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="106" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1GravityCompensationHelper_1a6c635f0df2541489dd9fd3db18c12d43" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Traversal" kindref="compound">iDynTree::Traversal</ref></type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="115" column="25" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="115" bodyend="-1"/>
+        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="108" column="25" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="108" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1GravityCompensationHelper_1aeb405a4a57c2b305b2b53b9049edb160" prot="private" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classiDynTree_1_1Traversal" kindref="compound">iDynTree::Traversal</ref> * &gt;</type>
@@ -73,7 +73,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="121" column="17" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="121" bodyend="-1"/>
+        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="114" column="17" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="114" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1GravityCompensationHelper_1a5d6178f2b09379aa781299a3da6f98c0" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1JointPosDoubleArray" kindref="compound">iDynTree::JointPosDoubleArray</ref></type>
@@ -87,7 +87,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="123" column="35" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="123" bodyend="-1"/>
+        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="116" column="35" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="116" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1GravityCompensationHelper_1aae77bde19e2b00f6524d8f15671dd5b9" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1JointDOFsDoubleArray" kindref="compound">iDynTree::JointDOFsDoubleArray</ref></type>
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="124" column="36" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="124" bodyend="-1"/>
+        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="117" column="36" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="117" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1GravityCompensationHelper_1af906f8bb52a0b594873e21f040c3208f" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1LinkVelArray" kindref="compound">iDynTree::LinkVelArray</ref></type>
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="125" column="28" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="125" bodyend="-1"/>
+        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="118" column="28" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="118" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1GravityCompensationHelper_1a18d75af06c5df38e81e92735545bdb8d" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1LinkAccArray" kindref="compound">iDynTree::LinkAccArray</ref></type>
@@ -129,7 +129,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="126" column="28" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="126" bodyend="-1"/>
+        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="119" column="28" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="119" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1GravityCompensationHelper_1a4c0d776c4a5cf531d22f65d7006be90e" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">iDynTree::LinkNetExternalWrenches</ref></type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="127" column="39" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="127" bodyend="-1"/>
+        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="120" column="39" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="120" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1GravityCompensationHelper_1a6d7a7bc115ed28bc60a9a8f9a7b71e96" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1LinkWrenches" kindref="compound">iDynTree::LinkInternalWrenches</ref></type>
@@ -157,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="128" column="36" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="128" bodyend="-1"/>
+        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="121" column="36" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="121" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1GravityCompensationHelper_1af24b6095bee839a53eee520a92ad0045" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1FreeFloatingGeneralizedTorques" kindref="compound">iDynTree::FreeFloatingGeneralizedTorques</ref></type>
@@ -171,7 +171,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="129" column="46" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="129" bodyend="-1"/>
+        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="122" column="46" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="122" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -187,7 +187,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="42" column="5"/>
+        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="35" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GravityCompensationHelper_1a24f682469783b3c8d45d6ebbad86c35a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -201,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="47" column="5"/>
+        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="40" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GravityCompensationHelper_1ad1eb9a519a13ec91f51ec8e0f854c1ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -226,7 +226,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="53" column="10"/>
+        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="46" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GravityCompensationHelper_1a463e3469b51d8ed052f968046bb28a57" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -283,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="71" column="10"/>
+        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="64" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GravityCompensationHelper_1a43e80215c956c765e241b5165ad6ee37" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -340,7 +340,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="89" column="10"/>
+        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="82" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GravityCompensationHelper_1a5d6fa165303efe2a4078cb663661066f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -361,7 +361,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="97" column="10"/>
+        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="90" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -391,7 +391,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="104" column="10"/>
+        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="97" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1GravityCompensationHelper_1a0fe673dad2bc1665e6843c0a0a2acfd7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -405,7 +405,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="109" column="10"/>
+        <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="102" column="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -416,7 +416,7 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="36" column="3" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="37" bodyend="130"/>
+    <location file="iDynTree/Estimation/GravityCompensationHelpers.h" line="29" column="3" bodyfile="iDynTree/Estimation/GravityCompensationHelpers.h" bodystart="30" bodyend="123"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1GravityCompensationHelper_1a72abe3246f5f6f6b28c3ed5bb7223618" prot="private" virt="non-virtual"><scope>iDynTree::GravityCompensationHelper</scope><name>allocKinematicTraversals</name></member>
       <member refid="classiDynTree_1_1GravityCompensationHelper_1a0fe673dad2bc1665e6843c0a0a2acfd7" prot="private" virt="non-virtual"><scope>iDynTree::GravityCompensationHelper</scope><name>freeKinematicTraversals</name></member>

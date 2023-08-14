@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="31" column="11" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="31" bodyend="-1"/>
+        <location file="iDynTree/Model/DenavitHartenberg.h" line="24" column="11" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1DHLink_1a8ff447e8d5dbd529df73ebe52942002f" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -28,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="32" column="11" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="32" bodyend="-1"/>
+        <location file="iDynTree/Model/DenavitHartenberg.h" line="25" column="11" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1DHLink_1ab0d1b90f8b9426ef971bb1bc9be52c40" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -41,7 +41,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="33" column="11" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="33" bodyend="-1"/>
+        <location file="iDynTree/Model/DenavitHartenberg.h" line="26" column="11" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="26" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1DHLink_1a52a155fa9a88620f759833cd1372b2eb" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="34" column="11" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="34" bodyend="-1"/>
+        <location file="iDynTree/Model/DenavitHartenberg.h" line="27" column="11" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1DHLink_1aee26eee6f5b68bc4e1df717737770ddd" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="35" column="11" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="35" bodyend="-1"/>
+        <location file="iDynTree/Model/DenavitHartenberg.h" line="28" column="11" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1DHLink_1a926a3e6338c3068e1232ad50b9a73841" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -80,7 +80,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="36" column="11" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="36" bodyend="-1"/>
+        <location file="iDynTree/Model/DenavitHartenberg.h" line="29" column="11" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -88,7 +88,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Model/DenavitHartenberg.h" line="29" column="1" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="30" bodyend="37"/>
+    <location file="iDynTree/Model/DenavitHartenberg.h" line="22" column="1" bodyfile="iDynTree/Model/DenavitHartenberg.h" bodystart="23" bodyend="30"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1DHLink_1abdf3091a9be9717958dfd34a638a36c1" prot="public" virt="non-virtual"><scope>iDynTree::DHLink</scope><name>A</name></member>
       <member refid="structiDynTree_1_1DHLink_1ab0d1b90f8b9426ef971bb1bc9be52c40" prot="public" virt="non-virtual"><scope>iDynTree::DHLink</scope><name>Alpha</name></member>

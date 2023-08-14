@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="91" column="5"/>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="84" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a6e6be84f2b3a2009d22949e4b7520de2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="93" column="5"/>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="86" column="5"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="102" column="30"/>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="95" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a1a6f86c7cc5964554458ead6242796a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="104" column="10"/>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="97" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1afefe79c0d50cfbaad54d5b076a90f00d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -123,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="118" column="10"/>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="111" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a665a7ab1c8f6749f050d8e891c586276" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -181,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="134" column="10"/>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="127" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1aa1d105cc4c13bc5c6fd90cc6f8224085" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -241,7 +241,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="156" column="10"/>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="149" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1af8431aff629c8c73db87b549d7f804b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -314,7 +314,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="181" column="10"/>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="174" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a15df3e0647d7de8fc286c37c2fdbd6d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -387,7 +387,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="206" column="10"/>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="199" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1abfea0564c6c01dc8a90bab55df13b533" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
@@ -401,7 +401,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="215" column="18"/>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="208" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a933ace452015e5dd1d0d229315aef980" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> &amp;</type>
@@ -415,7 +415,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="220" column="24"/>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="213" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelLoader_1a6b78cb43b48ab1b377b5c907f9918077" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -432,7 +432,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="227" column="10"/>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="220" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -447,7 +447,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelLoader.h" line="78" column="21" bodyfile="iDynTree/ModelIO/ModelLoader.h" bodystart="77" bodyend="-1"/>
+        <location file="iDynTree/ModelIO/ModelLoader.h" line="71" column="21" bodyfile="iDynTree/ModelIO/ModelLoader.h" bodystart="70" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -456,7 +456,7 @@
     <detaileddescription>
 <para>Unless the methods for loading a model with an explicit serialization are used, the default joint serialization of the model loaded will be a &quot;normalized&quot; joint serialization based on the default base link, see the iDynTree::createModelWithNormalizedJointNumbering function for more details. </para>
     </detaileddescription>
-    <location file="iDynTree/ModelIO/ModelLoader.h" line="73" column="1" bodyfile="iDynTree/ModelIO/ModelLoader.h" bodystart="74" bodyend="229"/>
+    <location file="iDynTree/ModelIO/ModelLoader.h" line="66" column="1" bodyfile="iDynTree/ModelIO/ModelLoader.h" bodystart="67" bodyend="222"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1ModelLoader_1a6b78cb43b48ab1b377b5c907f9918077" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>isValid</name></member>
       <member refid="classiDynTree_1_1ModelLoader_1a665a7ab1c8f6749f050d8e891c586276" prot="public" virt="non-virtual"><scope>iDynTree::ModelLoader</scope><name>loadModelFromFile</name></member>

@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="46" column="21" bodyfile="iDynTree/Model/Traversal.h" bodystart="46" bodyend="-1"/>
+        <location file="iDynTree/Model/Traversal.h" line="39" column="21" bodyfile="iDynTree/Model/Traversal.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1Traversal_1a1f6041d6cd6979509cff97cbebb2d74b" prot="private" static="no" mutable="no">
         <type>std::vector&lt; const <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> * &gt;</type>
@@ -28,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="47" column="21" bodyfile="iDynTree/Model/Traversal.h" bodystart="47" bodyend="-1"/>
+        <location file="iDynTree/Model/Traversal.h" line="40" column="21" bodyfile="iDynTree/Model/Traversal.h" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1Traversal_1ac757e3901013df9b3ae714d7be572a41" prot="private" static="no" mutable="no">
         <type>std::vector&lt; const <ref refid="classiDynTree_1_1IJoint" kindref="compound">IJoint</ref> * &gt;</type>
@@ -41,7 +41,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="48" column="21" bodyfile="iDynTree/Model/Traversal.h" bodystart="48" bodyend="-1"/>
+        <location file="iDynTree/Model/Traversal.h" line="41" column="21" bodyfile="iDynTree/Model/Traversal.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1Traversal_1ad39f554385ae05abbc7ba59ca65662dc" prot="private" static="no" mutable="no">
         <type>std::vector&lt; int &gt;</type>
@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="49" column="32" bodyfile="iDynTree/Model/Traversal.h" bodystart="49" bodyend="-1"/>
+        <location file="iDynTree/Model/Traversal.h" line="42" column="32" bodyfile="iDynTree/Model/Traversal.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="54" column="9"/>
+        <location file="iDynTree/Model/Traversal.h" line="47" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Traversal_1ab66800da2bc0b6dff8bc44142a212ba7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref> &amp;</type>
@@ -92,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="59" column="19"/>
+        <location file="iDynTree/Model/Traversal.h" line="52" column="19"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="62" column="9"/>
+        <location file="iDynTree/Model/Traversal.h" line="55" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Traversal_1a70220dfc59ce52d03d330e4fed7f11da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="64" column="9"/>
+        <location file="iDynTree/Model/Traversal.h" line="57" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Traversal_1a9399131b8326438aa1b669b5a44fb720" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>unsigned int</type>
@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="71" column="22"/>
+        <location file="iDynTree/Model/Traversal.h" line="64" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Traversal_1a5ab819796b110f8b2026aeb9d63af2fc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> *</type>
@@ -158,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="78" column="23"/>
+        <location file="iDynTree/Model/Traversal.h" line="71" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Traversal_1a4dc1f2a88ab51dc42dc7f89fab39d235" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> *</type>
@@ -177,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="87" column="23"/>
+        <location file="iDynTree/Model/Traversal.h" line="80" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Traversal_1a098638f9c2519ffed4bd2afdbf800eba" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> *</type>
@@ -198,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="94" column="23"/>
+        <location file="iDynTree/Model/Traversal.h" line="87" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Traversal_1a1b677cb37a12edc52a2255dc630b03bd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1IJoint" kindref="compound">IJoint</ref> *</type>
@@ -219,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="102" column="23"/>
+        <location file="iDynTree/Model/Traversal.h" line="95" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Traversal_1ad0d0137c30e0162f94b81f7dcde44f5f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Link" kindref="compound">Link</ref> *</type>
@@ -240,7 +240,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="109" column="23"/>
+        <location file="iDynTree/Model/Traversal.h" line="102" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Traversal_1af337bfb778303028fca6637f99dd54d2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1IJoint" kindref="compound">IJoint</ref> *</type>
@@ -261,7 +261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="117" column="23"/>
+        <location file="iDynTree/Model/Traversal.h" line="110" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Traversal_1a34685ec218439e50f5c69979eccf1a0b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>TraversalIndex</type>
@@ -282,7 +282,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="124" column="24"/>
+        <location file="iDynTree/Model/Traversal.h" line="117" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Traversal_1a3805f4b2d3ced7e603919e96520dfa14" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -313,7 +313,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="139" column="14"/>
+        <location file="iDynTree/Model/Traversal.h" line="132" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Traversal_1a50152ca9efd43c153817875717868c01" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -344,7 +344,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="154" column="14"/>
+        <location file="iDynTree/Model/Traversal.h" line="147" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Traversal_1a3f59fac9f81f21568320ee3d2e803e80" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -375,7 +375,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="166" column="14"/>
+        <location file="iDynTree/Model/Traversal.h" line="159" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Traversal_1a83d3620b6f58c32789e9911c37a9618d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -430,7 +430,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="181" column="14"/>
+        <location file="iDynTree/Model/Traversal.h" line="174" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Traversal_1afe6e4f14929306f0246609666bf7c53c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -472,7 +472,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="193" column="14"/>
+        <location file="iDynTree/Model/Traversal.h" line="186" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Traversal_1af511b057b56553be5db56e34ca17c9a9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>LinkIndex</type>
@@ -514,7 +514,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="202" column="19"/>
+        <location file="iDynTree/Model/Traversal.h" line="195" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Traversal_1a7c82fa00d69ac54fefdd89abcf1b2a5f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>LinkIndex</type>
@@ -556,7 +556,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="211" column="19"/>
+        <location file="iDynTree/Model/Traversal.h" line="204" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Traversal_1a46e66828b90f0455f3fc4c00fd112411" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -574,7 +574,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/Traversal.h" line="216" column="21"/>
+        <location file="iDynTree/Model/Traversal.h" line="209" column="21"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -590,7 +590,7 @@
 </para>
 <para>For the first link of the traversal (i.e. base of the traversal) there is not spanning tree parent, so the point to the parent link/joint are NULL. </para>
     </detaileddescription>
-    <location file="iDynTree/Model/Traversal.h" line="43" column="5" bodyfile="iDynTree/Model/Traversal.h" bodystart="44" bodyend="218"/>
+    <location file="iDynTree/Model/Traversal.h" line="36" column="5" bodyfile="iDynTree/Model/Traversal.h" bodystart="37" bodyend="211"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1Traversal_1a3f59fac9f81f21568320ee3d2e803e80" prot="public" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>addTraversalBase</name></member>
       <member refid="classiDynTree_1_1Traversal_1a83d3620b6f58c32789e9911c37a9618d" prot="public" virt="non-virtual"><scope>iDynTree::Traversal</scope><name>addTraversalElement</name></member>

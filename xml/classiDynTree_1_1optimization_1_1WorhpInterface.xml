@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/WorhpInterface.h" line="39" column="42" bodyfile="iDynTree/Optimizers/WorhpInterface.h" bodystart="38" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="33" column="42" bodyfile="iDynTree/Optimizers/WorhpInterface.h" bodystart="32" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/WorhpInterface.h" line="43" column="13"/>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="37" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1ad41aa251a914e7c6d01fa3a9d83d49c5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/WorhpInterface.h" line="45" column="13"/>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="39" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1a380963f35029659a4b3b63272a442a58" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/WorhpInterface.h" line="47" column="21"/>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="41" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1a5fd0174cb2c4419f89534b18c4a9fcb3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/WorhpInterface.h" line="49" column="26"/>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="43" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1a8f72b024854b4ad18dd14a89dfe20e10" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/WorhpInterface.h" line="51" column="26"/>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="45" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1abdabbccff079b4706428685eb6ee59bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/WorhpInterface.h" line="53" column="26"/>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="47" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1a3b68b3949f3a183f805810d6c7ac8d7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -125,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/WorhpInterface.h" line="55" column="26"/>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="49" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1aca7d7ca4b0a91054f3479a3c37889c8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -151,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/WorhpInterface.h" line="57" column="26"/>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="51" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1a6405789b10b519c1ed2c5b05d1b8ddce" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/WorhpInterface.h" line="61" column="26"/>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="55" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1a49fea1f330275cebe526e49dd1f445a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -187,7 +187,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/WorhpInterface.h" line="63" column="26"/>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="57" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1a8329541ca68964315380845bd9e7addd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -201,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/WorhpInterface.h" line="65" column="28"/>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="59" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1af2b305cba632217b158119a5d4cb368f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/WorhpInterface.h" line="67" column="28"/>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="61" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1a1cbed852c7d2c1b3147009408ea584ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -233,7 +233,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/WorhpInterface.h" line="69" column="18"/>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="63" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1af8709c37c0f9e45ebab262aaae355531" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -254,7 +254,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/WorhpInterface.h" line="71" column="18"/>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="65" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1afd129a2498c099bdb9877b206ccb8af5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -275,7 +275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/WorhpInterface.h" line="73" column="18"/>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="67" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1a33260a57883a326f91df436cd8c4a7bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -296,7 +296,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/WorhpInterface.h" line="75" column="18"/>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="69" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1a79ff408da56af2d7b1aac5285be5e20a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -317,7 +317,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/WorhpInterface.h" line="77" column="18"/>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="71" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1ab0163849248ec4317cf6defbbb175dba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -338,7 +338,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/WorhpInterface.h" line="79" column="18"/>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="73" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1WorhpInterface_1acf16805de365f3017efcd7dee1f3e2a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -359,7 +359,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/WorhpInterface.h" line="81" column="18"/>
+        <location file="iDynTree/Optimizers/WorhpInterface.h" line="75" column="18"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -411,7 +411,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Optimizers/WorhpInterface.h" line="36" column="9" bodyfile="iDynTree/Optimizers/WorhpInterface.h" bodystart="36" bodyend="82"/>
+    <location file="iDynTree/Optimizers/WorhpInterface.h" line="30" column="9" bodyfile="iDynTree/Optimizers/WorhpInterface.h" bodystart="30" bodyend="76"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimization_1_1WorhpInterface_1aca7d7ca4b0a91054f3479a3c37889c8a" prot="public" virt="virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>getDualVariables</name></member>
       <member refid="classiDynTree_1_1optimization_1_1WorhpInterface_1a49fea1f330275cebe526e49dd1f445a2" prot="public" virt="virtual"><scope>iDynTree::optimization::WorhpInterface</scope><name>getOptimalConstraintsValues</name></member>

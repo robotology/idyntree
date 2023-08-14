@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/IpoptInterface.h" line="38" column="42" bodyfile="iDynTree/Optimizers/IpoptInterface.h" bodystart="37" bodyend="-1"/>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="32" column="42" bodyfile="iDynTree/Optimizers/IpoptInterface.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/IpoptInterface.h" line="42" column="13"/>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="36" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1ac5141d4d0cc1750b5530b5b3b87a5c3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/IpoptInterface.h" line="44" column="13"/>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="38" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1a475875511043ee501bb6caed944eeb91" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -61,7 +61,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/IpoptInterface.h" line="46" column="21"/>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="40" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1a089c7f20fdce126254416f387af6c57e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/IpoptInterface.h" line="48" column="26"/>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="42" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1aca5c413a3dab3acb19e3860dc844c393" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -93,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/IpoptInterface.h" line="50" column="26"/>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="44" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1a85ecc212dde478f7855c3039a8100d8d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/IpoptInterface.h" line="52" column="26"/>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="46" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1a4e2c8b348723cd9d1cd087d609702df5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -125,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/IpoptInterface.h" line="54" column="26"/>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="48" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1ad582791ed3ce532afa7c6d925928700c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -151,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/IpoptInterface.h" line="56" column="26"/>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="50" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1aab7302666ab28fb1f1561abf56425ae2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -169,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/IpoptInterface.h" line="60" column="26"/>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="54" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1afc4e639fd1f2e0aea1ebeb5ef53122e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -187,7 +187,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/IpoptInterface.h" line="62" column="26"/>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="56" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1ac2e51e749f6b40f759120da04fa58b10" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -201,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/IpoptInterface.h" line="64" column="28"/>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="58" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1a0af5ae4b855b94e18f0128aca1c1ff4c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -215,7 +215,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/IpoptInterface.h" line="66" column="28"/>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="60" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1aed43e933635e4ad444b4f44e7b2888b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -233,7 +233,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/IpoptInterface.h" line="68" column="18"/>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="62" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1ab3ee907bc233ae9ddfded61088e6f154" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -254,7 +254,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/IpoptInterface.h" line="70" column="18"/>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="64" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1a16324d7ee5ae51ca24860e2755011d18" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -275,7 +275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/IpoptInterface.h" line="72" column="18"/>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="66" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1a8178b244c990043d6cb4c08c70ce0b00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -296,7 +296,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/IpoptInterface.h" line="74" column="18"/>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="68" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1ae0fdb7057b6378e3fbbc4994962274c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -317,7 +317,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/IpoptInterface.h" line="76" column="18"/>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="70" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1a7d231456ae1fa20f31dfca46ffb293cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -338,7 +338,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/IpoptInterface.h" line="78" column="18"/>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="72" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimization_1_1IpoptInterface_1a60b455c11875a0c87b1824d82d539da4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -359,7 +359,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Optimizers/IpoptInterface.h" line="80" column="18"/>
+        <location file="iDynTree/Optimizers/IpoptInterface.h" line="74" column="18"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -411,7 +411,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Optimizers/IpoptInterface.h" line="35" column="9" bodyfile="iDynTree/Optimizers/IpoptInterface.h" bodystart="35" bodyend="81"/>
+    <location file="iDynTree/Optimizers/IpoptInterface.h" line="29" column="9" bodyfile="iDynTree/Optimizers/IpoptInterface.h" bodystart="29" bodyend="75"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimization_1_1IpoptInterface_1ad582791ed3ce532afa7c6d925928700c" prot="public" virt="virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>getDualVariables</name></member>
       <member refid="classiDynTree_1_1optimization_1_1IpoptInterface_1ae0fdb7057b6378e3fbbc4994962274c4" prot="public" virt="non-virtual"><scope>iDynTree::optimization::IpoptInterface</scope><name>getIpoptOption</name></member>

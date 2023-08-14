@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="83" column="13"/>
+        <location file="iDynTree/Visualizer.h" line="76" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ICamera_1a1a253a1e5244c6626f97bd39cc8db538" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="88" column="18"/>
+        <location file="iDynTree/Visualizer.h" line="81" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ICamera_1a2e794876aeb9c6a2dfbf943b6ce264ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -53,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="93" column="18"/>
+        <location file="iDynTree/Visualizer.h" line="86" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ICamera_1a42dc67363b38c6f2ef75015772757df8" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
@@ -67,7 +67,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="98" column="32"/>
+        <location file="iDynTree/Visualizer.h" line="91" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ICamera_1a77884911bd56a3b0db5e212ab7036647" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref></type>
@@ -82,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="103" column="32"/>
+        <location file="iDynTree/Visualizer.h" line="96" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ICamera_1a265930a8fb324692f7775228ed61f041" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="108" column="18"/>
+        <location file="iDynTree/Visualizer.h" line="101" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ICamera_1a00fe788c2ad34ff3e8c62f18a42693ac" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classiDynTree_1_1ICameraAnimator" kindref="compound">ICameraAnimator</ref> *</type>
@@ -115,7 +115,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="115" column="29"/>
+        <location file="iDynTree/Visualizer.h" line="108" column="29"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -123,7 +123,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Visualizer.h" line="77" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="78" bodyend="117"/>
+    <location file="iDynTree/Visualizer.h" line="70" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="71" bodyend="110"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1ICamera_1a00fe788c2ad34ff3e8c62f18a42693ac" prot="public" virt="pure-virtual"><scope>iDynTree::ICamera</scope><name>animator</name></member>
       <member refid="classiDynTree_1_1ICamera_1a42dc67363b38c6f2ef75015772757df8" prot="public" virt="pure-virtual"><scope>iDynTree::ICamera</scope><name>getPosition</name></member>

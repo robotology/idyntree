@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Controller.h" line="37" column="20" bodyfile="iDynTree/Controller.h" bodystart="37" bodyend="-1"/>
+        <location file="iDynTree/Controller.h" line="31" column="20" bodyfile="iDynTree/Controller.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Controller.h" line="43" column="13"/>
+        <location file="iDynTree/Controller.h" line="37" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Controller_1adecf75b211f17d3e35035e21e3e4c7e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Controller.h" line="45" column="21"/>
+        <location file="iDynTree/Controller.h" line="39" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Controller_1a9013b3f976e2b5a9e5095d17e4a28d9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -88,7 +88,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Controller.h" line="52" column="26"/>
+        <location file="iDynTree/Controller.h" line="46" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Controller_1a5a3188e349afcb0e87632c7f12245816" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -130,7 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Controller.h" line="61" column="26"/>
+        <location file="iDynTree/Controller.h" line="55" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Controller_1a8741ab8bc10e852123c11cb87749125b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Controller.h" line="67" column="20"/>
+        <location file="iDynTree/Controller.h" line="61" column="20"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -158,7 +158,7 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="iDynTree/Controller.h" line="36" column="9" bodyfile="iDynTree/Controller.h" bodystart="36" bodyend="68"/>
+    <location file="iDynTree/Controller.h" line="30" column="9" bodyfile="iDynTree/Controller.h" bodystart="30" bodyend="62"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1Controller_1a5c6cef39543689d9432148446c299487" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::Controller</scope><name>Controller</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1Controller_1a8741ab8bc10e852123c11cb87749125b" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::Controller</scope><name>controlSpaceSize</name></member>

@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ControlledDynamicalSystem.h" line="72" column="53" bodyfile="iDynTree/ControlledDynamicalSystem.h" bodystart="71" bodyend="-1"/>
+        <location file="iDynTree/ControlledDynamicalSystem.h" line="66" column="53" bodyfile="iDynTree/ControlledDynamicalSystem.h" bodystart="65" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ControlledDynamicalSystem.h" line="41" column="13"/>
+        <location file="iDynTree/ControlledDynamicalSystem.h" line="35" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1ab52ff2a4d3b4710dcae26c474debf1e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ControlledDynamicalSystem.h" line="43" column="13"/>
+        <location file="iDynTree/ControlledDynamicalSystem.h" line="37" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1adc948b7d3046a17f7095e3f09a624d23" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ControlledDynamicalSystem.h" line="45" column="13"/>
+        <location file="iDynTree/ControlledDynamicalSystem.h" line="39" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1abb44051465e3022d2cbdd60b6fd7bea3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ControlledDynamicalSystem.h" line="54" column="18"/>
+        <location file="iDynTree/ControlledDynamicalSystem.h" line="48" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1aecd92e0995c2d54416a8f81c3e5c1426" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ControlledDynamicalSystem.h" line="61" column="18"/>
+        <location file="iDynTree/ControlledDynamicalSystem.h" line="55" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1a00d059049dda80a4c044654d5cc0fe16" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> &gt;</type>
@@ -150,7 +150,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ControlledDynamicalSystem.h" line="68" column="29"/>
+        <location file="iDynTree/ControlledDynamicalSystem.h" line="62" column="29"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -161,7 +161,7 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="iDynTree/ControlledDynamicalSystem.h" line="39" column="9" bodyfile="iDynTree/ControlledDynamicalSystem.h" bodystart="39" bodyend="73"/>
+    <location file="iDynTree/ControlledDynamicalSystem.h" line="33" column="9" bodyfile="iDynTree/ControlledDynamicalSystem.h" bodystart="33" bodyend="67"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1a00d059049dda80a4c044654d5cc0fe16" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ControlledDynamicalSystem</scope><name>asDynamicalSystem</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1ControlledDynamicalSystem_1a9a54ab23ab86a89d1385c3715dd9f74c" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::ControlledDynamicalSystem</scope><name>ControlledDynamicalSystem</name></member>

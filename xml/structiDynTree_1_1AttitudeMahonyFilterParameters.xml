@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="34" column="12" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="34" bodyend="-1"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="27" column="12" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="27" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1AttitudeMahonyFilterParameters_1a32e6e9a5a5a95d4060f7135a2b8f501c" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="35" column="12" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="35" bodyend="-1"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="28" column="12" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="28" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1AttitudeMahonyFilterParameters_1a81eeb7bbcd18f339cb1c0355be15c62a" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="36" column="12" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="36" bodyend="-1"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="29" column="12" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1AttitudeMahonyFilterParameters_1ac7cf816b7de8f77a8bb573903fd168b2" prot="public" static="no" mutable="no">
         <type>bool</type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="37" column="10" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="37" bodyend="-1"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="30" column="10" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="30" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1AttitudeMahonyFilterParameters_1a8c0089a3102447cfe9527bce9a2e7ddd" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="38" column="12" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="38" bodyend="-1"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="31" column="12" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="31" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -83,7 +83,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="33" column="1" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="33" bodyend="39"/>
+    <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="26" column="1" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="26" bodyend="32"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1AttitudeMahonyFilterParameters_1a8c0089a3102447cfe9527bce9a2e7ddd" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeMahonyFilterParameters</scope><name>confidence_magnetometer_measurements</name></member>
       <member refid="structiDynTree_1_1AttitudeMahonyFilterParameters_1a81eeb7bbcd18f339cb1c0355be15c62a" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeMahonyFilterParameters</scope><name>ki</name></member>

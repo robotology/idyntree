@@ -21,7 +21,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/JointState.h" line="32" column="9"/>
+        <location file="iDynTree/Model/JointState.h" line="25" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1JointPosDoubleArray_1a2207e3341616d0bf392aa93de89de1e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -38,7 +38,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/JointState.h" line="33" column="9"/>
+        <location file="iDynTree/Model/JointState.h" line="26" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1JointPosDoubleArray_1a0283c1bf421404a0c560e4a4a57c4490" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/JointState.h" line="35" column="14"/>
+        <location file="iDynTree/Model/JointState.h" line="28" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1JointPosDoubleArray_1a61439b6f58feac5dca9b2062c2cc1457" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/JointState.h" line="36" column="14"/>
+        <location file="iDynTree/Model/JointState.h" line="29" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1JointPosDoubleArray_1a78911c1ffd581937c6017ef74b6bbe0f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/JointState.h" line="38" column="14"/>
+        <location file="iDynTree/Model/JointState.h" line="31" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1JointPosDoubleArray_1a6927f9ed20083812efd426e917e1643f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -102,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/JointState.h" line="40" column="9"/>
+        <location file="iDynTree/Model/JointState.h" line="33" column="9"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -134,7 +134,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Model/JointState.h" line="29" column="5" bodyfile="iDynTree/Model/JointState.h" bodystart="30" bodyend="41"/>
+    <location file="iDynTree/Model/JointState.h" line="22" column="5" bodyfile="iDynTree/Model/JointState.h" bodystart="23" bodyend="34"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1VectorDynSize_1a3ea2fb7a1554fed00d992b005b6c661a" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>allocator_type</name></member>
       <member refid="classiDynTree_1_1VectorDynSize_1a5f0343d03d3920a41c1bd94d2e6ffff5" prot="public" virt="non-virtual"><scope>iDynTree::JointPosDoubleArray</scope><name>begin</name></member>

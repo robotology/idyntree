@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="281" column="24" bodyfile="iDynTree/Integrator.h" bodystart="281" bodyend="-1"/>
+        <location file="iDynTree/Integrator.h" line="275" column="24" bodyfile="iDynTree/Integrator.h" bodystart="275" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1aa9eb4f3c3a4da99f1ce27b28154e4bfb" prot="protected" static="no" mutable="no">
         <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> &gt;</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="282" column="33" bodyfile="iDynTree/Integrator.h" bodystart="282" bodyend="-1"/>
+        <location file="iDynTree/Integrator.h" line="276" column="33" bodyfile="iDynTree/Integrator.h" bodystart="276" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a25b9c2215f3bbf7940214925e3a55ede" prot="protected" static="no" mutable="no">
         <type>std::vector&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement" kindref="compound">SolutionElement</ref> &gt;</type>
@@ -42,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="283" column="29" bodyfile="iDynTree/Integrator.h" bodystart="283" bodyend="-1"/>
+        <location file="iDynTree/Integrator.h" line="277" column="29" bodyfile="iDynTree/Integrator.h" bodystart="277" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a91cc593e13d13305e81b3e7fc5ae6276" prot="protected" static="no" mutable="no">
         <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfoData" kindref="compound">IntegratorInfoData</ref> &gt;</type>
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="284" column="33" bodyfile="iDynTree/Integrator.h" bodystart="284" bodyend="-1"/>
+        <location file="iDynTree/Integrator.h" line="278" column="33" bodyfile="iDynTree/Integrator.h" bodystart="278" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a3b03ff054e91a4142240dea337524fa1" prot="protected" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfo" kindref="compound">IntegratorInfo</ref></type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="285" column="32" bodyfile="iDynTree/Integrator.h" bodystart="285" bodyend="-1"/>
+        <location file="iDynTree/Integrator.h" line="279" column="32" bodyfile="iDynTree/Integrator.h" bodystart="279" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -85,7 +85,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="151" column="17"/>
+        <location file="iDynTree/Integrator.h" line="145" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a2b692b4e55ba221411c7ab685d85afeb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -113,7 +113,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="157" column="17"/>
+        <location file="iDynTree/Integrator.h" line="151" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1aa3887eac25d4dd53962204d0503c8e06" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -130,7 +130,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="159" column="17"/>
+        <location file="iDynTree/Integrator.h" line="153" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1ab0cf81d20474d5f8737e8f8df501f464" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="161" column="25"/>
+        <location file="iDynTree/Integrator.h" line="155" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1ab95d5885f287e7364630a277d7fe8c56" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -186,7 +186,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="171" column="30"/>
+        <location file="iDynTree/Integrator.h" line="165" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a6e2b9052aa9b0638ce7d2f8347b4fe00" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -216,7 +216,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="180" column="22"/>
+        <location file="iDynTree/Integrator.h" line="174" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a0d39d3023f056364a01963b7520a7c21" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -230,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="185" column="24"/>
+        <location file="iDynTree/Integrator.h" line="179" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a72bf5f94da63280de3c2b3223cd251e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -260,7 +260,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="194" column="22"/>
+        <location file="iDynTree/Integrator.h" line="188" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a148992ef6281c95701bd33a8262eb7f9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const std::weak_ptr&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1DynamicalSystem" kindref="compound">DynamicalSystem</ref> &gt;</type>
@@ -274,7 +274,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="199" column="37"/>
+        <location file="iDynTree/Integrator.h" line="193" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a7fd966d607d393a4dfa056206cd6d003" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -317,7 +317,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="211" column="30"/>
+        <location file="iDynTree/Integrator.h" line="205" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a0b7ed351be29e3ddc4145824aec6b082" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>const std::vector&lt; <ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1SolutionElement" kindref="compound">SolutionElement</ref> &gt; &amp;</type>
@@ -335,7 +335,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="221" column="43"/>
+        <location file="iDynTree/Integrator.h" line="215" column="43"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a1594f1f7ce88c5d45f585130c895b0a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -349,7 +349,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="226" column="30"/>
+        <location file="iDynTree/Integrator.h" line="220" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a4638d9ea1c915b7220e1d9b1dfc1fd08" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -431,7 +431,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="251" column="30"/>
+        <location file="iDynTree/Integrator.h" line="245" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a481d99de3957547ce59eb738ee9257d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -470,7 +470,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="255" column="30"/>
+        <location file="iDynTree/Integrator.h" line="249" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1af435b7aec4ebd1702506a9229ff0f738" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -489,7 +489,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="260" column="30"/>
+        <location file="iDynTree/Integrator.h" line="254" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a717b37e86dd16ae7803889fc65929993" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -508,7 +508,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="262" column="30"/>
+        <location file="iDynTree/Integrator.h" line="256" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a4f4f2819f24168c576c5614f98efa1d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -555,7 +555,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="265" column="30"/>
+        <location file="iDynTree/Integrator.h" line="259" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a95763f06583ccbc1f3342673d9aa3779" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -574,7 +574,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="272" column="30"/>
+        <location file="iDynTree/Integrator.h" line="266" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1aeae704825f16a03c4a12d282fd525e42" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -593,7 +593,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="274" column="30"/>
+        <location file="iDynTree/Integrator.h" line="268" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a5867f7987daba0256adfb8d233eccbf6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -612,7 +612,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="276" column="30"/>
+        <location file="iDynTree/Integrator.h" line="270" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1acbf7100a4b6b9d9e64624bdfa1f32719" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1IntegratorInfo" kindref="compound">IntegratorInfo</ref> &amp;</type>
@@ -625,7 +625,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="278" column="38"/>
+        <location file="iDynTree/Integrator.h" line="272" column="38"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="protected-func">
@@ -656,7 +656,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="287" column="30"/>
+        <location file="iDynTree/Integrator.h" line="281" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a5490ec3615ab91d85a84b85926d43ef1" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -672,7 +672,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Integrator.h" line="291" column="30"/>
+        <location file="iDynTree/Integrator.h" line="285" column="30"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -782,7 +782,7 @@ Inherit publicly from this class in order to specify a custom integration method
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Integrator.h" line="141" column="13" bodyfile="iDynTree/Integrator.h" bodystart="141" bodyend="292"/>
+    <location file="iDynTree/Integrator.h" line="135" column="13" bodyfile="iDynTree/Integrator.h" bodystart="135" bodyend="286"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a5490ec3615ab91d85a84b85926d43ef1" prot="protected" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>allocateBuffers</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1Integrator_1a1594f1f7ce88c5d45f585130c895b0a9" prot="public" virt="virtual"><scope>iDynTree::optimalcontrol::integrators::Integrator</scope><name>clearSolution</name></member>

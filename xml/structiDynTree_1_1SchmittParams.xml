@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ContactStateMachine.h" line="32" column="16" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="32" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ContactStateMachine.h" line="17" column="16" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="17" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1SchmittParams_1af80a091c205ab2d3a9670b6c59353d4b" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -28,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ContactStateMachine.h" line="33" column="16" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="33" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ContactStateMachine.h" line="18" column="16" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="18" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1SchmittParams_1a0a5ec7d64b511eb5ef4b9290a05ce9eb" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -41,7 +41,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ContactStateMachine.h" line="34" column="16" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="34" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ContactStateMachine.h" line="19" column="16" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="19" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structiDynTree_1_1SchmittParams_1ac25e1168d03e53fabbac213037c1234d" prot="public" static="no" mutable="no">
         <type>double</type>
@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/ContactStateMachine.h" line="35" column="16" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="35" bodyend="-1"/>
+        <location file="iDynTree/Estimation/ContactStateMachine.h" line="20" column="16" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="20" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -62,7 +62,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Estimation/ContactStateMachine.h" line="30" column="5" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="31" bodyend="36"/>
+    <location file="iDynTree/Estimation/ContactStateMachine.h" line="15" column="5" bodyfile="iDynTree/Estimation/ContactStateMachine.h" bodystart="16" bodyend="21"/>
     <listofallmembers>
       <member refid="structiDynTree_1_1SchmittParams_1ac25e1168d03e53fabbac213037c1234d" prot="public" virt="non-virtual"><scope>iDynTree::SchmittParams</scope><name>contactBreakForceThreshold</name></member>
       <member refid="structiDynTree_1_1SchmittParams_1a0a5ec7d64b511eb5ef4b9290a05ce9eb" prot="public" virt="non-virtual"><scope>iDynTree::SchmittParams</scope><name>contactMakeForceThreshold</name></member>

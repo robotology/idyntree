@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/SensorElement.h" line="72" column="21" bodyfile="private/SensorElement.h" bodystart="72" bodyend="-1"/>
+        <location file="private/SensorElement.h" line="63" column="21" bodyfile="private/SensorElement.h" bodystart="63" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/SensorElement.h" line="74" column="5"/>
+        <location file="private/SensorElement.h" line="65" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorHelper_1a4ab30e6befa21a0a38f811ccfd539a38" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/SensorElement.h" line="76" column="13"/>
+        <location file="private/SensorElement.h" line="67" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SensorHelper_1a5bdee23a7596be29f49d791ee306c31e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> *</type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/SensorElement.h" line="79" column="20"/>
+        <location file="private/SensorElement.h" line="70" column="20"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -123,7 +123,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="private/SensorElement.h" line="70" column="1" bodyfile="private/SensorElement.h" bodystart="70" bodyend="80"/>
+    <location file="private/SensorElement.h" line="61" column="1" bodyfile="private/SensorElement.h" bodystart="61" bodyend="71"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1SensorHelper_1a5bdee23a7596be29f49d791ee306c31e" prot="public" virt="pure-virtual"><scope>iDynTree::SensorHelper</scope><name>generateSensor</name></member>
       <member refid="classiDynTree_1_1SensorHelper_1ac726e84fbbcc59662ab2bf0c531b1270" prot="protected" virt="non-virtual"><scope>iDynTree::SensorHelper</scope><name>m_sensorInfo</name></member>

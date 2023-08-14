@@ -64,7 +64,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InertialParametersSolidShapesHelpers.h" line="33" column="6" declfile="iDynTree/InertialParametersSolidShapesHelpers.h" declline="33" declcolumn="6"/>
+        <location file="iDynTree/InertialParametersSolidShapesHelpers.h" line="26" column="6" declfile="iDynTree/InertialParametersSolidShapesHelpers.h" declline="26" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="InertialParametersSolidShapesHelpers_8h_1a3fc080109daad044981533bc143d1bee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -110,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InertialParametersSolidShapesHelpers.h" line="48" column="6" declfile="iDynTree/InertialParametersSolidShapesHelpers.h" declline="48" declcolumn="6"/>
+        <location file="iDynTree/InertialParametersSolidShapesHelpers.h" line="41" column="6" declfile="iDynTree/InertialParametersSolidShapesHelpers.h" declline="41" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="InertialParametersSolidShapesHelpers_8h_1a22b1c506654dc8a1589bbccc2ba32deb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::vector&lt; Position &gt;</type>
@@ -140,7 +140,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InertialParametersSolidShapesHelpers.h" line="56" column="13" declfile="iDynTree/InertialParametersSolidShapesHelpers.h" declline="56" declcolumn="13"/>
+        <location file="iDynTree/InertialParametersSolidShapesHelpers.h" line="49" column="13" declfile="iDynTree/InertialParametersSolidShapesHelpers.h" declline="49" declcolumn="13"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

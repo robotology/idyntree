@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Span.h" line="364" column="9" bodyfile="iDynTree/Core/Span.h" bodystart="364" bodyend="-1"/>
+        <location file="iDynTree/Core/Span.h" line="357" column="9" bodyfile="iDynTree/Core/Span.h" bodystart="357" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Span.h" line="376" column="20" bodyfile="iDynTree/Core/Span.h" bodystart="376" bodyend="-1"/>
+        <location file="iDynTree/Core/Span.h" line="369" column="20" bodyfile="iDynTree/Core/Span.h" bodystart="369" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Span.h" line="367" column="37" bodyfile="iDynTree/Core/Span.h" bodystart="367" bodyend="369"/>
+        <location file="iDynTree/Core/Span.h" line="360" column="37" bodyfile="iDynTree/Core/Span.h" bodystart="360" bodyend="362"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1details_1_1extent__type_3_01dynamic__extent_01_4_1adaa59edeb9f9f9401b27027a94fc574f" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type>IDYNTREE_CONSTEXPR</type>
@@ -74,7 +74,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Span.h" line="371" column="37" bodyfile="iDynTree/Core/Span.h" bodystart="371" bodyend="371"/>
+        <location file="iDynTree/Core/Span.h" line="364" column="37" bodyfile="iDynTree/Core/Span.h" bodystart="364" bodyend="364"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1details_1_1extent__type_3_01dynamic__extent_01_4_1a028fc5071f3bd64d144bed369bd979bc" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>IDYNTREE_CONSTEXPR index_type</type>
@@ -87,14 +87,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/Span.h" line="373" column="39" bodyfile="iDynTree/Core/Span.h" bodystart="373" bodyend="373"/>
+        <location file="iDynTree/Core/Span.h" line="366" column="39" bodyfile="iDynTree/Core/Span.h" bodystart="366" bodyend="366"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/Span.h" line="361" column="5" bodyfile="iDynTree/Core/Span.h" bodystart="362" bodyend="377"/>
+    <location file="iDynTree/Core/Span.h" line="354" column="5" bodyfile="iDynTree/Core/Span.h" bodystart="355" bodyend="370"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1details_1_1extent__type_3_01dynamic__extent_01_4_1a01911fd63900a1bce91dd1131b4b2d55" prot="public" virt="non-virtual"><scope>iDynTree::details::extent_type&lt; dynamic_extent &gt;</scope><name>extent_type</name></member>
       <member refid="classiDynTree_1_1details_1_1extent__type_3_01dynamic__extent_01_4_1adaa59edeb9f9f9401b27027a94fc574f" prot="public" virt="non-virtual"><scope>iDynTree::details::extent_type&lt; dynamic_extent &gt;</scope><name>extent_type</name></member>

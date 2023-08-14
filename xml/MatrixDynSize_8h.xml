@@ -33,18 +33,6 @@
         </childnode>
       </node>
     </incdepgraph>
-    <invincdepgraph>
-      <node id="2">
-        <label>iDynTree/BoundingBoxHelpers.h</label>
-        <link refid="BoundingBoxHelpers_8h"/>
-      </node>
-      <node id="1">
-        <label>iDynTree/Core/MatrixDynSize.h</label>
-        <link refid="MatrixDynSize_8h"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-      </node>
-    </invincdepgraph>
     <innerclass refid="classiDynTree_1_1MatrixDynSize" prot="public">iDynTree::MatrixDynSize</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>

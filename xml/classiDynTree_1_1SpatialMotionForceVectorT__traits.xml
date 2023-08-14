@@ -26,7 +26,7 @@
         <link refid="classiDynTree_1_1SpatialMotionForceVectorT__traits"/>
       </node>
     </inheritancegraph>
-    <location file="iDynTree/Core/SpatialVector.h" line="34" column="5" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="34" bodyend="34"/>
+    <location file="iDynTree/Core/SpatialVector.h" line="27" column="5" bodyfile="iDynTree/Core/SpatialVector.h" bodystart="27" bodyend="27"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

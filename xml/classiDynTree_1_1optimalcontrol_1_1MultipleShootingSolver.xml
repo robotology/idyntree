@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="91" column="29" bodyfile="iDynTree/OCSolvers/MultipleShootingSolver.h" bodystart="89" bodyend="-1"/>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="85" column="29" bodyfile="iDynTree/OCSolvers/MultipleShootingSolver.h" bodystart="83" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a1030a109493e52edde02cc17efca5d01" prot="private" static="no" mutable="no">
         <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1optimization_1_1Optimizer" kindref="compound">optimization::Optimizer</ref> &gt;</type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="92" column="29" bodyfile="iDynTree/OCSolvers/MultipleShootingSolver.h" bodystart="92" bodyend="-1"/>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="86" column="29" bodyfile="iDynTree/OCSolvers/MultipleShootingSolver.h" bodystart="86" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="48" column="13"/>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="42" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a94138f63d63f2f163ec13c71e36fe0ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="50" column="13"/>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="44" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1aeb670ccc7f2a7c147748b1af1be8aac2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="52" column="18"/>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="46" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a25f163f5cb789f211cb91a045b8ab8a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="54" column="18"/>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="48" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a84aa978d5a2592f2e20beb7636ec8299" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="56" column="18"/>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="50" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1aae570a93425d8ab3a300d833fb95faad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="58" column="18"/>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="52" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a1a684e6a7e61aeb2e9ff3b5b20282993" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -154,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="60" column="18"/>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="54" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1acbd8b7b6842006c5e3b6b61c1ab34b2b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -171,7 +171,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="62" column="18"/>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="56" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a6caaeb1375c71114ce4457684b12976f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -188,7 +188,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="64" column="18"/>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="58" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1adfd907c9a95cb2cf47452ab80db6cb77" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -209,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="66" column="18"/>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="60" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a12110a13caf859e10a02fae98912f4c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -230,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="69" column="18"/>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="63" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a76809e064e4e4b3fdb5a9633a174ada8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -251,7 +251,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="71" column="18"/>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="65" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1ab0228c31eb5298e79cbe1bdc706cb7f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -265,7 +265,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="73" column="26"/>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="67" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1afc73c7ee29cbefd15de8cc9fd209334e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -286,7 +286,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="75" column="18"/>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="69" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a5e473d16af12540b41df4bfb05533303" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -299,7 +299,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="77" column="18"/>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="71" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a7717669f31a22bddcbf3784f22fcc2a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -316,7 +316,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="79" column="18"/>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="73" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1ac5430c0b118c9f6f3e1dc5a284ed32a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -329,7 +329,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="81" column="18"/>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="75" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1acf10bef2a044d880ae9bfd1fcbf8fcd7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -346,7 +346,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="83" column="18"/>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="77" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1adaad8f8eab76a7b91d2ff38cc8b4eac8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -359,7 +359,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="85" column="18"/>
+        <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="79" column="18"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -393,7 +393,7 @@
         <link refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="45" column="9" bodyfile="iDynTree/OCSolvers/MultipleShootingSolver.h" bodystart="45" bodyend="93"/>
+    <location file="iDynTree/OCSolvers/MultipleShootingSolver.h" line="39" column="9" bodyfile="iDynTree/OCSolvers/MultipleShootingSolver.h" bodystart="39" bodyend="87"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1a7717669f31a22bddcbf3784f22fcc2a7" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>addConstraintsHessianRegularization</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1MultipleShootingSolver_1acf10bef2a044d880ae9bfd1fcbf8fcd7" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::MultipleShootingSolver</scope><name>addCostsHessianRegularization</name></member>

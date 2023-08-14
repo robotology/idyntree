@@ -22,7 +22,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="41" column="18"/>
+        <location file="iDynTree/Visualizer.h" line="34" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ICameraAnimator_1a5c644eb315333d135c15826f00bbf822" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>double</type>
@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="46" column="20"/>
+        <location file="iDynTree/Visualizer.h" line="39" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ICameraAnimator_1a5be446b3f8698c624d8e232c20f775f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="51" column="18"/>
+        <location file="iDynTree/Visualizer.h" line="44" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ICameraAnimator_1a47afefea53aabd94b402132dc08e81be" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>double</type>
@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="56" column="20"/>
+        <location file="iDynTree/Visualizer.h" line="49" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ICameraAnimator_1a08e6ecf7bc1c72b267d9dc90fe18e65c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="61" column="18"/>
+        <location file="iDynTree/Visualizer.h" line="54" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ICameraAnimator_1a4b0bd79b5f4529a23b21ac9fc155b291" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>double</type>
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="66" column="20"/>
+        <location file="iDynTree/Visualizer.h" line="59" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ICameraAnimator_1a9c1bcceba875d62b7d2ed373cf64b6bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Visualizer.h" line="71" column="18"/>
+        <location file="iDynTree/Visualizer.h" line="64" column="18"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -126,7 +126,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Visualizer.h" line="32" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="33" bodyend="72"/>
+    <location file="iDynTree/Visualizer.h" line="25" column="1" bodyfile="iDynTree/Visualizer.h" bodystart="26" bodyend="65"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1ICameraAnimator_1ad88ae2243d7ce5123632d5cd2c16c5d1" prot="public" virt="pure-virtual"><scope>iDynTree::ICameraAnimator</scope><name>enableMouseControl</name></member>
       <member refid="classiDynTree_1_1ICameraAnimator_1a5c644eb315333d135c15826f00bbf822" prot="public" virt="pure-virtual"><scope>iDynTree::ICameraAnimator</scope><name>getMoveSpeed</name></member>

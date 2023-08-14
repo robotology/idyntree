@@ -14,7 +14,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SparseMatrix.h" line="377" column="28" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="377" bodyend="-1"/>
+        <location file="iDynTree/Core/SparseMatrix.h" line="370" column="28" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="370" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classiDynTree_1_1SparseMatrix_1_1ConstIterator_1aad1f845823d8822f4b3d91935a633e5b" prot="public" static="no">
         <type><ref refid="classiDynTree_1_1Triplet" kindref="compound">iDynTree::Triplet</ref></type>
@@ -27,7 +27,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SparseMatrix.h" line="378" column="31" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="378" bodyend="-1"/>
+        <location file="iDynTree/Core/SparseMatrix.h" line="371" column="31" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="371" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classiDynTree_1_1SparseMatrix_1_1ConstIterator_1a0b231f80bab1c0f1a21b4e01188c5d40" prot="public" static="no">
         <type>const <ref refid="classiDynTree_1_1Triplet" kindref="compound">value_type</ref> &amp;</type>
@@ -40,7 +40,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SparseMatrix.h" line="379" column="30" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="379" bodyend="-1"/>
+        <location file="iDynTree/Core/SparseMatrix.h" line="372" column="30" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="372" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classiDynTree_1_1SparseMatrix_1_1ConstIterator_1a60433660de7fa281dc14d56afe52293d" prot="public" static="no">
         <type>const <ref refid="classiDynTree_1_1Triplet" kindref="compound">value_type</ref> *</type>
@@ -53,7 +53,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SparseMatrix.h" line="380" column="30" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="380" bodyend="-1"/>
+        <location file="iDynTree/Core/SparseMatrix.h" line="373" column="30" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="373" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classiDynTree_1_1SparseMatrix_1_1ConstIterator_1a6266f402bd3d147e7b1ecb13572781da" prot="public" static="no">
         <type>std::output_iterator_tag</type>
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SparseMatrix.h" line="381" column="38" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="381" bodyend="-1"/>
+        <location file="iDynTree/Core/SparseMatrix.h" line="374" column="38" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="374" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SparseMatrix.h" line="367" column="34" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="367" bodyend="-1"/>
+        <location file="iDynTree/Core/SparseMatrix.h" line="360" column="34" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="360" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SparseMatrix_1_1ConstIterator_1a5b0a3ee94abf96c3cca58d04a2812488" prot="private" static="no" mutable="no">
         <type>int</type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SparseMatrix.h" line="369" column="9" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="369" bodyend="-1"/>
+        <location file="iDynTree/Core/SparseMatrix.h" line="362" column="9" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="362" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SparseMatrix_1_1ConstIterator_1a8ee4c44433400663d50800c506f0010d" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Triplet" kindref="compound">iDynTree::Triplet</ref></type>
@@ -107,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SparseMatrix.h" line="370" column="23" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="370" bodyend="-1"/>
+        <location file="iDynTree/Core/SparseMatrix.h" line="363" column="23" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="363" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SparseMatrix_1_1ConstIterator_1a632494d0ce67a775aaa4f047b3b1da02" prot="private" static="no" mutable="no">
         <type>int</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SparseMatrix.h" line="371" column="9" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="371" bodyend="-1"/>
+        <location file="iDynTree/Core/SparseMatrix.h" line="364" column="9" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="364" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -163,7 +163,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SparseMatrix.h" line="364" column="5"/>
+        <location file="iDynTree/Core/SparseMatrix.h" line="357" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1ConstIterator_1ad334722adac81cc75943e82b2b8173e6" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -176,7 +176,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SparseMatrix.h" line="373" column="10"/>
+        <location file="iDynTree/Core/SparseMatrix.h" line="366" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -195,7 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SparseMatrix.h" line="384" column="5"/>
+        <location file="iDynTree/Core/SparseMatrix.h" line="377" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1ConstIterator_1a7e00dba60aae9b1b9cda37b18bb54e72" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SparseMatrix_1_1ConstIterator" kindref="compound">ConstIterator</ref> &amp;</type>
@@ -208,7 +208,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SparseMatrix.h" line="387" column="19"/>
+        <location file="iDynTree/Core/SparseMatrix.h" line="380" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1ConstIterator_1aebf2df139128f7ec1f177e4695f25a24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1SparseMatrix_1_1ConstIterator" kindref="compound">ConstIterator</ref></type>
@@ -224,7 +224,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SparseMatrix.h" line="388" column="19"/>
+        <location file="iDynTree/Core/SparseMatrix.h" line="381" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1ConstIterator_1a67c5562b30001cb316279caa62fee7d6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -240,7 +240,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SparseMatrix.h" line="391" column="10"/>
+        <location file="iDynTree/Core/SparseMatrix.h" line="384" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1ConstIterator_1a9cff3c7a75e63dd5cac47a84fb65f797" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -256,7 +256,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SparseMatrix.h" line="392" column="10"/>
+        <location file="iDynTree/Core/SparseMatrix.h" line="385" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1ConstIterator_1a8f43480d8c2039bb08bb4ff6ceb858ba" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -273,7 +273,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SparseMatrix.h" line="393" column="17" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="393" bodyend="393"/>
+        <location file="iDynTree/Core/SparseMatrix.h" line="386" column="17" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="386" bodyend="386"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1ConstIterator_1a8bd7fcb7942fa190d6cfad297ec6f9b9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -290,7 +290,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SparseMatrix.h" line="394" column="17" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="394" bodyend="394"/>
+        <location file="iDynTree/Core/SparseMatrix.h" line="387" column="17" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="387" bodyend="387"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1ConstIterator_1a06e399bce2620d3b6712f27ae4660660" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Triplet" kindref="compound">reference</ref></type>
@@ -303,7 +303,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SparseMatrix.h" line="398" column="15"/>
+        <location file="iDynTree/Core/SparseMatrix.h" line="391" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1ConstIterator_1a75342abb9fc8a933bc16871541acab0b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Triplet" kindref="compound">pointer</ref></type>
@@ -316,7 +316,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SparseMatrix.h" line="399" column="13"/>
+        <location file="iDynTree/Core/SparseMatrix.h" line="392" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SparseMatrix_1_1ConstIterator_1ace38fb210dda678dba773ebf34d63cba" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -329,14 +329,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SparseMatrix.h" line="401" column="10"/>
+        <location file="iDynTree/Core/SparseMatrix.h" line="394" column="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="iDynTree/Core/SparseMatrix.h" line="354" column="1" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="355" bodyend="402"/>
+    <location file="iDynTree/Core/SparseMatrix.h" line="347" column="1" bodyfile="iDynTree/Core/SparseMatrix.h" bodystart="348" bodyend="395"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1SparseMatrix_1_1ConstIterator_1a69bf395127f050b9b4d969d7d8a534dc" prot="private" virt="non-virtual"><scope>iDynTree::SparseMatrix::ConstIterator</scope><name>ConstIterator</name></member>
       <member refid="classiDynTree_1_1SparseMatrix_1_1ConstIterator_1a7c192232a1e67c75c322d6bb144a5ac7" prot="public" virt="non-virtual"><scope>iDynTree::SparseMatrix::ConstIterator</scope><name>ConstIterator</name></member>

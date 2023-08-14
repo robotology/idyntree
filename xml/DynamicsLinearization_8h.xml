@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DynamicsLinearization.h" line="96" column="10" declfile="iDynTree/Model/DynamicsLinearization.h" declline="96" declcolumn="10"/>
+        <location file="iDynTree/Model/DynamicsLinearization.h" line="89" column="10" declfile="iDynTree/Model/DynamicsLinearization.h" declline="89" declcolumn="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

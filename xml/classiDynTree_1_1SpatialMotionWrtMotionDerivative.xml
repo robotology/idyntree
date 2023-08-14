@@ -25,7 +25,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DynamicsLinearizationHelpers.h" line="37" column="42"/>
+        <location file="iDynTree/Model/DynamicsLinearizationHelpers.h" line="30" column="42"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -57,7 +57,7 @@
         <link refid="classiDynTree_1_1MatrixFixSize"/>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Model/DynamicsLinearizationHelpers.h" line="25" column="5" bodyfile="iDynTree/Model/DynamicsLinearizationHelpers.h" bodystart="26" bodyend="39"/>
+    <location file="iDynTree/Model/DynamicsLinearizationHelpers.h" line="18" column="5" bodyfile="iDynTree/Model/DynamicsLinearizationHelpers.h" bodystart="19" bodyend="32"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1MatrixFixSize_1ae38fd55ba7321a950d4d99a215508bf2" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionWrtMotionDerivative</scope><name>cols</name></member>
       <member refid="classiDynTree_1_1MatrixFixSize_1afa9fff22a34eb198785d87ffe161488f" prot="public" virt="non-virtual"><scope>iDynTree::SpatialMotionWrtMotionDerivative</scope><name>data</name></member>

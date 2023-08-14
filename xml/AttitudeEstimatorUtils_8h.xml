@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="16" column="11" bodyfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" bodystart="16" bodyend="-1"/>
+        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="9" column="11" bodyfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" bodystart="9" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="func">
@@ -71,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="26" column="6" declfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" declline="26" declcolumn="6"/>
+        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="19" column="6" declfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" declline="19" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="AttitudeEstimatorUtils_8h_1a5178baddf6f11f110fb923bc97d82d2d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="34" column="6" declfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" declline="34" declcolumn="6"/>
+        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="27" column="6" declfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" declline="27" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="AttitudeEstimatorUtils_8h_1a699bd96c30f376d8a7faae5851cae0a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -135,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="43" column="6" declfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" declline="43" declcolumn="6"/>
+        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="36" column="6" declfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" declline="36" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="AttitudeEstimatorUtils_8h_1a369c58aadb5e813e34fc5f4c36c017d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -165,7 +165,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="52" column="6" declfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" declline="52" declcolumn="6"/>
+        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="45" column="6" declfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" declline="45" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="AttitudeEstimatorUtils_8h_1a60120ce6e1d4c5d9d436539c43d248e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref></type>
@@ -207,7 +207,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="61" column="19" declfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" declline="61" declcolumn="19"/>
+        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="54" column="19" declfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" declline="54" declcolumn="19"/>
       </memberdef>
       <memberdef kind="function" id="AttitudeEstimatorUtils_8h_1a810ee43797b075ff113b46c0b83796d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1MatrixFixSize" kindref="compound">iDynTree::Matrix3x3</ref></type>
@@ -237,7 +237,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="69" column="21" declfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" declline="69" declcolumn="21"/>
+        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="62" column="21" declfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" declline="62" declcolumn="21"/>
       </memberdef>
       <memberdef kind="function" id="AttitudeEstimatorUtils_8h_1ae22926f6b4098d795734502bfa284aff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -267,7 +267,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="77" column="6" declfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" declline="77" declcolumn="6"/>
+        <location file="iDynTree/Estimation/AttitudeEstimatorUtils.h" line="70" column="6" declfile="iDynTree/Estimation/AttitudeEstimatorUtils.h" declline="70" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

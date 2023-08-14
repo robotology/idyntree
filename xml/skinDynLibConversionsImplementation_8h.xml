@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/skinDynLibConversionsImplementation.h" line="166" column="6" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="166" bodyend="240"/>
+        <location file="iDynTree/skinDynLibConversionsImplementation.h" line="159" column="6" bodyfile="iDynTree/skinDynLibConversionsImplementation.h" bodystart="159" bodyend="233"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

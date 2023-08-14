@@ -30,13 +30,6 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<para><simplesect kind="author"><para>Jorhabib Eljaik </para>
-</simplesect>
-<simplesect kind="copyright"><para>2018 iCub Facility - Istituto Italiano di Tecnologia Released under the terms of the LGPLv2.1 or later, see LGPL.TXT </para>
-</simplesect>
-<simplesect kind="date"><para>2018 </para>
-</simplesect>
-</para>
     </detaileddescription>
     <location file="iDynTree/BoundingBoxHelpers.h"/>
   </compounddef>

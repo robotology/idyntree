@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTransformers.h" line="50" column="6" declfile="iDynTree/Model/ModelTransformers.h" declline="50" declcolumn="6"/>
+        <location file="iDynTree/Model/ModelTransformers.h" line="43" column="6" declfile="iDynTree/Model/ModelTransformers.h" declline="43" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="ModelTransformers_8h_1a0dfcb86d2d13eb1969493ee84da2f5c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTransformers.h" line="65" column="6" declfile="iDynTree/Model/ModelTransformers.h" declline="65" declcolumn="6"/>
+        <location file="iDynTree/Model/ModelTransformers.h" line="58" column="6" declfile="iDynTree/Model/ModelTransformers.h" declline="58" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="ModelTransformers_8h_1aa6a9c44d5b80ede19b30f721f88d3679" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -94,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTransformers.h" line="86" column="6" declfile="iDynTree/Model/ModelTransformers.h" declline="86" declcolumn="6"/>
+        <location file="iDynTree/Model/ModelTransformers.h" line="79" column="6" declfile="iDynTree/Model/ModelTransformers.h" declline="79" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="ModelTransformers_8h_1a3800ea0a0da713ba27da022845601b2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -124,7 +124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/ModelTransformers.h" line="101" column="6" declfile="iDynTree/Model/ModelTransformers.h" declline="101" declcolumn="6"/>
+        <location file="iDynTree/Model/ModelTransformers.h" line="94" column="6" declfile="iDynTree/Model/ModelTransformers.h" declline="94" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

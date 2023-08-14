@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/SensorElement.h" line="86" column="5"/>
+        <location file="private/SensorElement.h" line="77" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1AccelerometerSensorHelper_1af2cf5fd57df89b32b762af88837d8b75" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classiDynTree_1_1Sensor" kindref="compound">Sensor</ref> *</type>
@@ -37,7 +37,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/SensorElement.h" line="87" column="12"/>
+        <location file="private/SensorElement.h" line="78" column="12"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -86,7 +86,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="private/SensorElement.h" line="84" column="1" bodyfile="private/SensorElement.h" bodystart="84" bodyend="88"/>
+    <location file="private/SensorElement.h" line="75" column="1" bodyfile="private/SensorElement.h" bodystart="75" bodyend="79"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1AccelerometerSensorHelper_1acea72cb712142cdcf4e28cebd2927c83" prot="public" virt="non-virtual"><scope>iDynTree::AccelerometerSensorHelper</scope><name>AccelerometerSensorHelper</name></member>
       <member refid="classiDynTree_1_1AccelerometerSensorHelper_1af2cf5fd57df89b32b762af88837d8b75" prot="public" virt="virtual"><scope>iDynTree::AccelerometerSensorHelper</scope><name>generateSensor</name></member>

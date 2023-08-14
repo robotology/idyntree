@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="240" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="233" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a2e1534f0883aa48bbd7396fb03ab9cc3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>int</type>
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="246" column="9"/>
+        <location file="iDynTree/InverseKinematics.h" line="239" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a94fbd05f09b0fa2d7f98af110992dd02" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="256" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="249" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a7022f8652423611388707ad40ca71205" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -95,7 +95,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="262" column="12"/>
+        <location file="iDynTree/InverseKinematics.h" line="255" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a972eaa443d246d15a411b8b0c5e70a62" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -124,7 +124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="271" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="264" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a902ce28213d60568f68456511f57493e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -141,7 +141,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="277" column="12"/>
+        <location file="iDynTree/InverseKinematics.h" line="270" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a963881a6913d92c4a224b68af44918fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -170,7 +170,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="286" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="279" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a431451fac26b849ab7b9157170926461" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -187,7 +187,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="292" column="12"/>
+        <location file="iDynTree/InverseKinematics.h" line="285" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a7fd58eaeec333ffe4a8b1cf68f48199a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -214,7 +214,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="301" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="294" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a79c65c3b6ecb3b1de2cf84b319dbcca0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -227,7 +227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="303" column="17"/>
+        <location file="iDynTree/InverseKinematics.h" line="296" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1af45198b610d4f871a7fd0ed8b5b66846" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -244,7 +244,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="304" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="297" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -279,7 +279,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="325" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="318" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1ad32732917055324e9e43b665f10d6d89" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -322,7 +322,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="338" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="331" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a7a0e4da328fbddd0614297870557a259" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -367,7 +367,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="353" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="346" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a8247e588e7c6a6caf37a52345c58a2a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -409,7 +409,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="366" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="359" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1af1cc1ffb80358f6f2f8dbc91fe6d2ff9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -453,7 +453,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="379" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="372" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a08094142e67312af1c8dc6d43fcc5c54" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -495,7 +495,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="392" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="385" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1afe57acc1e517f7a6037bcb0205048843" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -539,7 +539,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="405" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="398" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a2581274da87dbf2b9cf8a8d1c34184fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -581,7 +581,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="418" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="411" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a77e8b8de565f8a5a72f8042b21c03039" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -625,7 +625,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="431" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="424" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a053a41c48598e472cfc5acb69a707810" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -667,7 +667,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="443" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="436" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a30de8c616c200e28c9e1a88f5a3b7bf9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -717,7 +717,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="462" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="455" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a2e2da211d3d7091ad07a0b384b3ff48d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -765,7 +765,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="480" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="473" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a71611b4b312177be7c3682164742304a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -797,7 +797,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="493" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="486" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a762635dbe437ce96d4e5e597267be87d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -827,7 +827,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="502" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="495" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1af42335e61bf9fcb4fb62a7d48904e517" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -862,7 +862,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="507" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="500" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a9bdeb6bdba32b5b98f8942bd73bdf70c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -905,7 +905,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="516" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="509" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a5b7509e262a0293039b0ca99daf6344d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -940,7 +940,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="532" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="525" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1ab430e2a8abbea4b7b02fc7535109ad9f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -955,7 +955,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="546" column="12"/>
+        <location file="iDynTree/InverseKinematics.h" line="539" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a30e3692826f3c14bc9d0948285451bfa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -987,7 +987,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="562" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="555" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -1058,7 +1058,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="583" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="576" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a5baa4df2f22184a22f2f2384add29444" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1126,7 +1126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="601" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="594" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a9f9571f744198e189b3635cf18b01fa6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1181,7 +1181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="616" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="609" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a50394481f87512001d62b14c3121e3c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1236,7 +1236,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="630" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="623" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a43517efef7345effef2c64ed792293d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1293,7 +1293,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="647" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="640" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a60929f94a8fc02358df7018b08edb145" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1356,7 +1356,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="664" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="657" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1aed8c88ba1c622755f8f6060d7c23f1b0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1411,7 +1411,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="678" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="671" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1aef054698a036960b0cd9c4201553adee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1471,7 +1471,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="703" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="696" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a4b1859df197c5937202c69f84f525bb8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1531,7 +1531,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="729" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="722" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1afc04477ad6b4db5fe0ed87eaec33a366" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1599,7 +1599,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="747" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="740" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a874ce19892a1dfdc52866b5b36f5a6ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1667,7 +1667,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="765" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="758" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a242d903b37077336e8a7401390968e6c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1722,7 +1722,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="780" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="773" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1ad60720e6e09de94935c6dc3ab5a31651" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1777,7 +1777,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="795" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="788" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a39d99a353d47eae1b831969affc69a38" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1832,7 +1832,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="809" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="802" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1af0f09a2512439c08af78248ec51b12f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1887,7 +1887,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="824" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="817" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1ac55e7751070535950a098125d6064d46" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -1919,7 +1919,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="842" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="835" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1ada2c44f94a48893d064e90c3400e593d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>enum iDynTree::InverseKinematicsTreatTargetAsConstraint</type>
@@ -1938,7 +1938,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="842" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="835" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a40c0473418948bdaeb1b002ff167e550" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -1982,7 +1982,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="867" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="860" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1ae5dff5d4891a60e0aeb2c8c66c25c43a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>enum InverseKinematicsTreatTargetAsConstraint</type>
@@ -2007,7 +2007,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="867" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="860" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -2031,7 +2031,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="1033" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="1026" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1acc82ae729ec02fa78d613c1ecec0f8aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2052,7 +2052,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="1036" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="1029" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a0fe2c9cd84677f6dfd83fdc31e6e39e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -2092,7 +2092,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="1047" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="1040" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a67177ec87abea5b38f90d9763e48f28b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2136,7 +2136,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="1060" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="1053" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -2152,7 +2152,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="1110" column="10" bodyfile="iDynTree/InverseKinematics.h" bodystart="1110" bodyend="-1"/>
+        <location file="iDynTree/InverseKinematics.h" line="1103" column="10" bodyfile="iDynTree/InverseKinematics.h" bodystart="1103" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -2168,7 +2168,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="115" column="5"/>
+        <location file="iDynTree/InverseKinematics.h" line="108" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a0d9e4d4db2a590dad2f6b530b159cd06" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -2182,7 +2182,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="120" column="5"/>
+        <location file="iDynTree/InverseKinematics.h" line="113" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1ac3e893981cbfa2afc88a231d1cace9a4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2239,7 +2239,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="135" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="128" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1abb9706235b5fe16f951731ba285582ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2277,7 +2277,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="152" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="145" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1aa6e7d22dbc79871a62a0ba4c6e79fb97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2308,7 +2308,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="161" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="154" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a1ad4371be984af63072d7f7ffa1f79ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2339,7 +2339,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="169" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="162" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a1d54045ad46403179e3cd3c076802978" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -2357,7 +2357,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="176" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="169" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a238847f4a1308b661cdf14ac4d10caf7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2374,7 +2374,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="178" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="171" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a4ed57acc6905dcaeb4596c46ab6d7a47" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2418,7 +2418,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="192" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="185" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a5fa024ea1d7ce12a6baf236c7ccd0457" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2464,7 +2464,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="209" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="202" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a321cd9fba3a93857acbf81ee7ce89d6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2506,7 +2506,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="221" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="214" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a1f3be372eb31516aeb39e3e0a6ae8724" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -2523,7 +2523,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="224" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="217" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a16f3902ff47fbafeb219c2e22529857d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>enum InverseKinematicsRotationParametrization</type>
@@ -2536,7 +2536,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="224" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="217" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a30597bf9cef5da3d0c30118a1c132a2c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2582,7 +2582,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="894" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="887" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a18df94c58e4c3fdbb1026ced7f8541db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2628,7 +2628,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="910" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="903" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a50c9eede82cbe551388baceed52240ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2673,7 +2673,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="928" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="921" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a04cc9fea6a73e234cc42c9740cf75f6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2718,7 +2718,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="945" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="938" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1af22154b11fa87fbb0be902f85e4a4a37" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2764,7 +2764,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="963" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="956" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a78719fcf5564a9f1831d109c3cc69970" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2810,7 +2810,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="980" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="973" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1ae084dff57455232ec11cfe81f9888eda" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2855,7 +2855,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="999" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="992" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a707a36a5a3a9363bf8c2a92c7b31d8a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2900,7 +2900,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="1017" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="1010" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a79edd849ba6eb8d0b549cad3c9c00106" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2921,7 +2921,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="1021" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="1014" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1af16eec79ccbccf5a180d46e874712e53" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2942,7 +2942,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="1023" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="1016" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1af4d51059431c6fed8e83983379e143d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2955,7 +2955,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="1027" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="1020" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1af672ccd4e2c30ac0ebbff58146ded4a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2976,7 +2976,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="1066" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="1059" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a23b43854dd578c1f0317488dc7c31487" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -2997,7 +2997,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="1068" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="1061" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1af53e1651988418a787b956240d9da855" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
@@ -3010,7 +3010,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="1080" column="18"/>
+        <location file="iDynTree/InverseKinematics.h" line="1073" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a08682d742b4dcbe7cc3a359d77926e15" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
@@ -3023,7 +3023,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="1082" column="18"/>
+        <location file="iDynTree/InverseKinematics.h" line="1075" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a1edaecf608d2780adea491a03fa70b2e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -3045,7 +3045,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="1084" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="1077" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a8e7d4e0d6a4f6fcc1c19d429ea0d09aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -3067,7 +3067,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="1086" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="1079" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a557041738a620f4ce2ef433083b9b3a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -3085,7 +3085,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="1088" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="1081" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1ab2776f60ee744d261552c5685bec170f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -3103,7 +3103,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="1090" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="1083" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1acc2d97dd6ed312e557fbee2a5d91e313" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -3116,7 +3116,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="1092" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="1085" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a20284b4e939d67add4a1a90bba06dc0c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -3129,7 +3129,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="1094" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="1087" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1ae834df2d99d5332143bb3ab617ea54e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -3142,7 +3142,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="1096" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="1089" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a9311a6549a06f0cf8e6e3d2dc884aa12" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -3172,7 +3172,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="1105" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="1098" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InverseKinematics_1a222d4e73db789db16adbf14d4b78442d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -3189,7 +3189,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/InverseKinematics.h" line="1107" column="10"/>
+        <location file="iDynTree/InverseKinematics.h" line="1100" column="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -3206,7 +3206,7 @@ This call is equivalent to call <programlisting><codeline><highlight class="norm
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="iDynTree/InverseKinematics.h" line="108" column="1" bodyfile="iDynTree/InverseKinematics.h" bodystart="109" bodyend="1112"/>
+    <location file="iDynTree/InverseKinematics.h" line="101" column="1" bodyfile="iDynTree/InverseKinematics.h" bodystart="102" bodyend="1105"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1InverseKinematics_1a30de8c616c200e28c9e1a88f5a3b7bf9" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>activateFrameConstraint</name></member>
       <member refid="classiDynTree_1_1InverseKinematics_1a2e2da211d3d7091ad07a0b384b3ff48d" prot="public" virt="non-virtual"><scope>iDynTree::InverseKinematics</scope><name>activateFrameConstraint</name></member>

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimalControlSolver.h" line="41" column="13"/>
+        <location file="iDynTree/OptimalControlSolver.h" line="35" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver_1a9fde83bee85fc95ed04f167faec8f5b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimalControlSolver.h" line="43" column="13"/>
+        <location file="iDynTree/OptimalControlSolver.h" line="37" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver_1ae4125c5f205ef9a6cf0cb626821f6a6a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimalControlSolver.h" line="45" column="21"/>
+        <location file="iDynTree/OptimalControlSolver.h" line="39" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver_1a03967acc8076478746703bc3582b4f3f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/OptimalControlSolver.h" line="47" column="26"/>
+        <location file="iDynTree/OptimalControlSolver.h" line="41" column="26"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -82,7 +82,7 @@
         <link refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver"/>
       </node>
     </inheritancegraph>
-    <location file="iDynTree/OptimalControlSolver.h" line="37" column="9" bodyfile="iDynTree/OptimalControlSolver.h" bodystart="38" bodyend="49"/>
+    <location file="iDynTree/OptimalControlSolver.h" line="31" column="9" bodyfile="iDynTree/OptimalControlSolver.h" bodystart="32" bodyend="43"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver_1a09fb40c47a84272706113ef950af2e54" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlSolver</scope><name>OptimalControlSolver</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1OptimalControlSolver_1a9fde83bee85fc95ed04f167faec8f5b2" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::OptimalControlSolver</scope><name>OptimalControlSolver</name></member>

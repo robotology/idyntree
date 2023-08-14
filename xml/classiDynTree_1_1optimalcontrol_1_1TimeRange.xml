@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeRange.h" line="29" column="20" bodyfile="iDynTree/TimeRange.h" bodystart="29" bodyend="-1"/>
+        <location file="iDynTree/TimeRange.h" line="23" column="20" bodyfile="iDynTree/TimeRange.h" bodystart="23" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1TimeRange_1ac3edb9e756d7976e44ea3f9b706fc482" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -28,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeRange.h" line="30" column="20" bodyfile="iDynTree/TimeRange.h" bodystart="30" bodyend="-1"/>
+        <location file="iDynTree/TimeRange.h" line="24" column="20" bodyfile="iDynTree/TimeRange.h" bodystart="24" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1optimalcontrol_1_1TimeRange_1adca536975f6a54b7fe55265ed54efad9" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -41,7 +41,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeRange.h" line="31" column="18" bodyfile="iDynTree/TimeRange.h" bodystart="31" bodyend="-1"/>
+        <location file="iDynTree/TimeRange.h" line="25" column="18" bodyfile="iDynTree/TimeRange.h" bodystart="25" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeRange.h" line="33" column="13"/>
+        <location file="iDynTree/TimeRange.h" line="27" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1TimeRange_1a1bff0f60d902de8887b89ab7b241296a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeRange.h" line="34" column="13"/>
+        <location file="iDynTree/TimeRange.h" line="28" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1TimeRange_1a8777a4422ff57f9d0e4f0c7e9b92983c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -90,7 +90,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeRange.h" line="36" column="20"/>
+        <location file="iDynTree/TimeRange.h" line="30" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1TimeRange_1aaa3e2e156c7711165572a232bc589d7d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -103,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeRange.h" line="37" column="20"/>
+        <location file="iDynTree/TimeRange.h" line="31" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1TimeRange_1abf9e5ee1e08f815bf4661216d4dd14dd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -116,7 +116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeRange.h" line="38" column="20"/>
+        <location file="iDynTree/TimeRange.h" line="32" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1TimeRange_1aa6c1fe8169f79d13ecf89aba2ce70132" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeRange.h" line="39" column="18"/>
+        <location file="iDynTree/TimeRange.h" line="33" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1TimeRange_1a4bf8b850c34c312bbb41f620015d16d7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -154,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeRange.h" line="40" column="13"/>
+        <location file="iDynTree/TimeRange.h" line="34" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1TimeRange_1ae3eab5a642f5a8101b64dc7bdd72976b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -171,7 +171,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeRange.h" line="41" column="18"/>
+        <location file="iDynTree/TimeRange.h" line="35" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1TimeRange_1a0c255e38ff0d653c9918e923a4416b9c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -188,7 +188,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeRange.h" line="42" column="18"/>
+        <location file="iDynTree/TimeRange.h" line="36" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1TimeRange_1a47c00f9bf3507d6361701b6bb5c7915e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -201,7 +201,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeRange.h" line="43" column="18"/>
+        <location file="iDynTree/TimeRange.h" line="37" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1TimeRange_1ae5c421bd30acf3a9770848e114f3b8e5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -218,7 +218,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeRange.h" line="44" column="18"/>
+        <location file="iDynTree/TimeRange.h" line="38" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1TimeRange_1ae08c84a663dbdef2bd7707794ad76b6f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -231,7 +231,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeRange.h" line="45" column="18"/>
+        <location file="iDynTree/TimeRange.h" line="39" column="18"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
@@ -246,7 +246,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeRange.h" line="46" column="30"/>
+        <location file="iDynTree/TimeRange.h" line="40" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1TimeRange_1a83905ffe68b4cc48b2d2e3c396fdb370" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1optimalcontrol_1_1TimeRange" kindref="compound">TimeRange</ref></type>
@@ -263,7 +263,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeRange.h" line="47" column="30"/>
+        <location file="iDynTree/TimeRange.h" line="41" column="30"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -273,7 +273,7 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="iDynTree/TimeRange.h" line="28" column="9" bodyfile="iDynTree/TimeRange.h" bodystart="28" bodyend="48"/>
+    <location file="iDynTree/TimeRange.h" line="22" column="9" bodyfile="iDynTree/TimeRange.h" bodystart="22" bodyend="42"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1TimeRange_1a6dcef7d7e66f35761a665b0293dd7bc1" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::TimeRange</scope><name>AnyTime</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1TimeRange_1aaa3e2e156c7711165572a232bc589d7d" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::TimeRange</scope><name>endTime</name></member>

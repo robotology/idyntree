@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/iKinConversions.h" line="56" column="5" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="87" bodyend="89"/>
+        <location file="iDynTree/iKinConversions.h" line="49" column="5" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="80" bodyend="82"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1iKinLimbImported_1a9b2de9e21aa8ef978d19a72a910df2ed" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type></type>
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/iKinConversions.h" line="61" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="91" bodyend="92"/>
+        <location file="iDynTree/iKinConversions.h" line="54" column="13" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="84" bodyend="85"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1iKinLimbImported_1abac4ec18c88cc235078afb933d55ec30" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/iKinConversions.h" line="66" column="10" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="116" bodyend="124"/>
+        <location file="iDynTree/iKinConversions.h" line="59" column="10" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="109" bodyend="117"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1iKinLimbImported_1a6f9556ef95fec1cf115c08eadbcc4910" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -75,7 +75,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/iKinConversions.h" line="73" column="10" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="94" bodyend="114"/>
+        <location file="iDynTree/iKinConversions.h" line="66" column="10" bodyfile="iDynTree/iKinConversionsImplementation.h" bodystart="87" bodyend="107"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -105,7 +105,7 @@
         <label>iCub::iKin::iKinLimb</label>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/iKinConversions.h" line="50" column="1" bodyfile="iDynTree/iKinConversions.h" bodystart="51" bodyend="74"/>
+    <location file="iDynTree/iKinConversions.h" line="43" column="1" bodyfile="iDynTree/iKinConversions.h" bodystart="44" bodyend="67"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1iKinLimbImported_1a6f9556ef95fec1cf115c08eadbcc4910" prot="public" virt="non-virtual"><scope>iDynTree::iKinLimbImported</scope><name>fromDHChain</name></member>
       <member refid="classiDynTree_1_1iKinLimbImported_1abac4ec18c88cc235078afb933d55ec30" prot="public" virt="non-virtual"><scope>iDynTree::iKinLimbImported</scope><name>fromModel</name></member>

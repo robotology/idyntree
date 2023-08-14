@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="88" column="21" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="88" bodyend="-1"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="81" column="21" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="81" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="93" column="9"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="86" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Polygon2D_1a9a1e285e865a930d6b99413a065180a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="98" column="14"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="91" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Polygon2D_1a5a48450436b7325e17165e79f0e60333" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="104" column="16"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="97" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Polygon2D_1afb76cbccbffe71b2627e0a83295d3af7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="114" column="14"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="107" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Polygon2D_1a004c610a603ed8f4445ec7cf3d27e077" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector2</ref> &amp;</type>
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="116" column="17"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="109" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Polygon2D_1a9d77bf912627c727adc6328e8d057e00" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">Vector2</ref> &amp;</type>
@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="117" column="24"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="110" column="24"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -157,7 +157,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/ConvexHullHelpers.h" line="85" column="5" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="86" bodyend="118"/>
+    <location file="iDynTree/ConvexHullHelpers.h" line="78" column="5" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="79" bodyend="111"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1Polygon2D_1a5a48450436b7325e17165e79f0e60333" prot="public" virt="non-virtual"><scope>iDynTree::Polygon2D</scope><name>getNrOfVertices</name></member>
       <member refid="classiDynTree_1_1Polygon2D_1afb76cbccbffe71b2627e0a83295d3af7" prot="public" virt="non-virtual"><scope>iDynTree::Polygon2D</scope><name>isValid</name></member>

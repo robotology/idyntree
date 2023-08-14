@@ -76,7 +76,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/yarp/YARPConfigurationsLoader.h" line="28" column="10" bodyfile="iDynTree/yarp/YARPConfigurationsLoaderImplementation.h" bodystart="16" bodyend="46" declfile="iDynTree/yarp/YARPConfigurationsLoader.h" declline="28" declcolumn="10"/>
+        <location file="iDynTree/yarp/YARPConfigurationsLoader.h" line="21" column="10" bodyfile="iDynTree/yarp/YARPConfigurationsLoaderImplementation.h" bodystart="9" bodyend="39" declfile="iDynTree/yarp/YARPConfigurationsLoader.h" declline="21" declcolumn="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

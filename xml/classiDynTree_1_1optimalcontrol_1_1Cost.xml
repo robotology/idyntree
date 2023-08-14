@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="179" column="25" bodyfile="iDynTree/Cost.h" bodystart="179" bodyend="-1"/>
+        <location file="iDynTree/Cost.h" line="173" column="25" bodyfile="iDynTree/Cost.h" bodystart="173" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="48" column="13"/>
+        <location file="iDynTree/Cost.h" line="42" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Cost_1aa956dac8cebf92d37d7682b5be30ed32" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="50" column="21"/>
+        <location file="iDynTree/Cost.h" line="44" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Cost_1aaaea0b41a2a114e1efcd42e58e9bbb78" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const std::string &amp;</type>
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="56" column="31"/>
+        <location file="iDynTree/Cost.h" line="50" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Cost_1a1bb0880783d8f4ed6baff2b922a571f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="66" column="26"/>
+        <location file="iDynTree/Cost.h" line="60" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Cost_1a632e5dfae0ce8c117ea636daf417c5bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -213,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="81" column="26"/>
+        <location file="iDynTree/Cost.h" line="75" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Cost_1acce9d7b5bb53e71d0c2e55340636d531" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -281,7 +281,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="96" column="26"/>
+        <location file="iDynTree/Cost.h" line="90" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Cost_1a79f931220587a1922770067c0833f0a9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -349,7 +349,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="111" column="26"/>
+        <location file="iDynTree/Cost.h" line="105" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Cost_1a9870c1daad9a147705e3d44be7357a2e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -417,7 +417,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="127" column="26"/>
+        <location file="iDynTree/Cost.h" line="121" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Cost_1abb75feccd10750af47e792723e187c82" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -485,7 +485,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="144" column="26"/>
+        <location file="iDynTree/Cost.h" line="138" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Cost_1a4b1d17aa266ad7bcdc421a71aa141d46" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -519,7 +519,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="156" column="26"/>
+        <location file="iDynTree/Cost.h" line="150" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Cost_1ad4a1b35416b75e61b2491152a784f175" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -553,7 +553,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="165" column="26"/>
+        <location file="iDynTree/Cost.h" line="159" column="26"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1Cost_1a983297b5309a3d379935733dcb8a5ddf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -587,7 +587,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Cost.h" line="174" column="26"/>
+        <location file="iDynTree/Cost.h" line="168" column="26"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -628,7 +628,7 @@
         <link refid="classiDynTree_1_1optimalcontrol_1_1Cost"/>
       </node>
     </inheritancegraph>
-    <location file="iDynTree/Cost.h" line="41" column="9" bodyfile="iDynTree/Cost.h" bodystart="41" bodyend="180"/>
+    <location file="iDynTree/Cost.h" line="35" column="9" bodyfile="iDynTree/Cost.h" bodystart="35" bodyend="174"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1Cost_1a97ea5427f72a47d5abd6b37ca71a51f5" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::Cost</scope><name>Cost</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1Cost_1a1bb0880783d8f4ed6baff2b922a571f0" prot="public" virt="pure-virtual"><scope>iDynTree::optimalcontrol::Cost</scope><name>costEvaluation</name></member>

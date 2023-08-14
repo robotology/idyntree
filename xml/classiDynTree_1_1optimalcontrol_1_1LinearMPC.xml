@@ -10,7 +10,7 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="iDynTree/LinearMPC.h" line="28" column="9" bodyfile="iDynTree/LinearMPC.h" bodystart="28" bodyend="31"/>
+    <location file="iDynTree/LinearMPC.h" line="22" column="9" bodyfile="iDynTree/LinearMPC.h" bodystart="22" bodyend="25"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

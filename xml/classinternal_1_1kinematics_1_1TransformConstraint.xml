@@ -39,7 +39,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="49" column="5" bodyfile="private/TransformConstraint.h" bodystart="49" bodyend="53"/>
+        <location file="private/TransformConstraint.h" line="42" column="5" bodyfile="private/TransformConstraint.h" bodystart="42" bodyend="46"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -55,7 +55,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="63" column="29" bodyfile="private/TransformConstraint.h" bodystart="63" bodyend="-1"/>
+        <location file="private/TransformConstraint.h" line="56" column="29" bodyfile="private/TransformConstraint.h" bodystart="56" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1TransformConstraint_1a3725ed0da5506706af9c60011f973a91" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
@@ -69,7 +69,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="64" column="25" bodyfile="private/TransformConstraint.h" bodystart="64" bodyend="-1"/>
+        <location file="private/TransformConstraint.h" line="57" column="25" bodyfile="private/TransformConstraint.h" bodystart="57" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1TransformConstraint_1a84a257fc4fa3c3af835162bb4d737307" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -83,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="65" column="17" bodyfile="private/TransformConstraint.h" bodystart="65" bodyend="-1"/>
+        <location file="private/TransformConstraint.h" line="58" column="17" bodyfile="private/TransformConstraint.h" bodystart="58" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1TransformConstraint_1ac0d48237a34c4af8307790bf9717be8b" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -97,7 +97,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="66" column="12" bodyfile="private/TransformConstraint.h" bodystart="66" bodyend="-1"/>
+        <location file="private/TransformConstraint.h" line="59" column="12" bodyfile="private/TransformConstraint.h" bodystart="59" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1TransformConstraint_1a5509c9a2bf257a41a54f126be1bc4ad1" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -111,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="67" column="12" bodyfile="private/TransformConstraint.h" bodystart="67" bodyend="-1"/>
+        <location file="private/TransformConstraint.h" line="60" column="12" bodyfile="private/TransformConstraint.h" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1TransformConstraint_1a37d585da74e44181f5d6eaf1764c53c2" prot="private" static="no" mutable="no">
         <type>enum iDynTree::InverseKinematicsTreatTargetAsConstraint</type>
@@ -125,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="67" column="12" bodyfile="private/TransformConstraint.h" bodystart="68" bodyend="-1"/>
+        <location file="private/TransformConstraint.h" line="60" column="12" bodyfile="private/TransformConstraint.h" bodystart="61" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classinternal_1_1kinematics_1_1TransformConstraint_1ab6c83f27bdc1a041b32441dbd3101987" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -138,7 +138,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="69" column="10" bodyfile="private/TransformConstraint.h" bodystart="69" bodyend="-1"/>
+        <location file="private/TransformConstraint.h" line="62" column="10" bodyfile="private/TransformConstraint.h" bodystart="62" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-func">
@@ -164,7 +164,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="61" column="5"/>
+        <location file="private/TransformConstraint.h" line="54" column="5"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
@@ -224,7 +224,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="82" column="32"/>
+        <location file="private/TransformConstraint.h" line="75" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1aed8ff59a350a1a980caa5665d025bb93" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classinternal_1_1kinematics_1_1TransformConstraint" kindref="compound">TransformConstraint</ref></type>
@@ -281,7 +281,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="93" column="32"/>
+        <location file="private/TransformConstraint.h" line="86" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1ae04c3fc266f323518ad2beb8a2eca611" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classinternal_1_1kinematics_1_1TransformConstraint" kindref="compound">TransformConstraint</ref></type>
@@ -364,7 +364,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="110" column="32"/>
+        <location file="private/TransformConstraint.h" line="103" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1af1b3c28c5aa19b00d0d4da6959a3d426" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classinternal_1_1kinematics_1_1TransformConstraint" kindref="compound">TransformConstraint</ref></type>
@@ -435,7 +435,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="130" column="32"/>
+        <location file="private/TransformConstraint.h" line="123" column="32"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -456,7 +456,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="141" column="14"/>
+        <location file="private/TransformConstraint.h" line="134" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1a90ece5b8b117c951e3daa618b5ad3c64" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classinternal_1_1kinematics_1_1TransformConstraint_1aae569ceeb375670f5b2121ac7da5d525" kindref="member">TransformConstraint::TransformConstraintType</ref></type>
@@ -472,7 +472,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="147" column="50"/>
+        <location file="private/TransformConstraint.h" line="140" column="50"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1a63a141104d6a958e0b406dad7da88f4f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -489,7 +489,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="153" column="10"/>
+        <location file="private/TransformConstraint.h" line="146" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1a416cb3eea28f7763135360c443dbb46e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -506,7 +506,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="159" column="10"/>
+        <location file="private/TransformConstraint.h" line="152" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1ae39e15002fe1dd9eb0e1af8c0fa580bd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">iDynTree::Position</ref> &amp;</type>
@@ -522,7 +522,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="165" column="30"/>
+        <location file="private/TransformConstraint.h" line="158" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1a7aa03cdc075ce535499bc3f38d8c129b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -540,7 +540,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="170" column="10"/>
+        <location file="private/TransformConstraint.h" line="163" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1a8f919f7c07ea7cf1af81de7eb604d64c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Rotation" kindref="compound">iDynTree::Rotation</ref> &amp;</type>
@@ -556,7 +556,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="176" column="30"/>
+        <location file="private/TransformConstraint.h" line="169" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1a0b5070a6ccb41e1fa9503aee5b266664" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -574,7 +574,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="181" column="10"/>
+        <location file="private/TransformConstraint.h" line="174" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1a2f559d66390c8bdf5a62b6c2054b8925" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref> &amp;</type>
@@ -590,7 +590,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="187" column="31"/>
+        <location file="private/TransformConstraint.h" line="180" column="31"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1a46b04f4eee5f8a88fd637492144d6806" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const std::string &amp;</type>
@@ -606,7 +606,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="193" column="23"/>
+        <location file="private/TransformConstraint.h" line="186" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1ade2c7910317b7d5373e2b668aa7e1e47" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const double</type>
@@ -622,7 +622,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="199" column="18"/>
+        <location file="private/TransformConstraint.h" line="192" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1afb45c0e46b7b181b03ac053fd054aa42" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -640,7 +640,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="204" column="10"/>
+        <location file="private/TransformConstraint.h" line="197" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1adbe7987551ef9ee0a23a8b403014c40b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const double</type>
@@ -656,7 +656,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="210" column="18"/>
+        <location file="private/TransformConstraint.h" line="203" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1add76b23dcf1cda8c712935a70f865ea7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -674,7 +674,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="215" column="10"/>
+        <location file="private/TransformConstraint.h" line="208" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1ab101059da0fea68ee61bb18f88878243" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -702,7 +702,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="223" column="10"/>
+        <location file="private/TransformConstraint.h" line="216" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1ad638c83865b64843c7c70fe2ecbd17bc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>enum iDynTree::InverseKinematicsTreatTargetAsConstraint</type>
@@ -718,7 +718,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="223" column="10"/>
+        <location file="private/TransformConstraint.h" line="216" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1a07897a0dcb1a8e50f5dc4053033c94ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -736,7 +736,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="231" column="10"/>
+        <location file="private/TransformConstraint.h" line="224" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classinternal_1_1kinematics_1_1TransformConstraint_1af305af8528a87aab8d2b85438cfde2a7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -750,7 +750,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/TransformConstraint.h" line="234" column="10"/>
+        <location file="private/TransformConstraint.h" line="227" column="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -760,7 +760,7 @@
 <para>The constraint can be of the following type, where we indicate with <formula id="147">$A$</formula> the absolute (world) frame and with <formula id="148">$C$</formula> the constrained frame.</para>
 <para>Full Transform constraint: the transform ${}^A H_C$ is constrained to a given constant value. Rotation Constraint: the rotation ${}^A R_C$ is constrained to a given constant value. Position Constraint: the linear position ${}^A o_C$ is constrained to a given constant value. </para>
     </detaileddescription>
-    <location file="private/TransformConstraint.h" line="43" column="1" bodyfile="private/TransformConstraint.h" bodystart="43" bodyend="236"/>
+    <location file="private/TransformConstraint.h" line="36" column="1" bodyfile="private/TransformConstraint.h" bodystart="36" bodyend="229"/>
     <listofallmembers>
       <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1ae04c3fc266f323518ad2beb8a2eca611" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>fullTransformConstraint</name></member>
       <member refid="classinternal_1_1kinematics_1_1TransformConstraint_1af1b3c28c5aa19b00d0d4da6959a3d426" prot="public" virt="non-virtual"><scope>internal::kinematics::TransformConstraint</scope><name>fullTransformConstraint</name></member>

@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="146" column="36" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="146" bodyend="-1"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="139" column="36" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="139" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1AttitudeMahonyFilter_1ab40c1b03d4acc60dcdf9dc9dcdb6c9d4" prot="protected" static="no" mutable="no">
         <type><ref refid="structiDynTree_1_1AttitudeEstimatorState" kindref="compound">AttitudeEstimatorState</ref></type>
@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="147" column="28" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="147" bodyend="-1"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="140" column="28" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="140" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1AttitudeMahonyFilter_1a07413b093183b85df04fdbcfa241cec3" prot="protected" static="no" mutable="no">
         <type><ref refid="structiDynTree_1_1AttitudeEstimatorState" kindref="compound">AttitudeEstimatorState</ref></type>
@@ -42,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="147" column="43" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="147" bodyend="-1"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="140" column="43" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="140" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="149" column="24" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="149" bodyend="-1"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="142" column="24" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="142" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1AttitudeMahonyFilter_1aa62a1ed049997783346677eff023c2e0" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::RPY</ref></type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="150" column="19" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="150" bodyend="-1"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="143" column="19" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="143" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1AttitudeMahonyFilter_1a31723a436e908f5e82d84e744c466d5f" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::Vector3</ref></type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="152" column="23" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="152" bodyend="-1"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="145" column="23" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="145" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1AttitudeMahonyFilter_1a06d92addd859463a0febf9d788f2a71c" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1VectorFixSize" kindref="compound">iDynTree::GyroscopeMeasurements</ref></type>
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="153" column="37" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="153" bodyend="-1"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="146" column="37" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="146" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1AttitudeMahonyFilter_1aeade846e7de685520e5a56cd89f1064d" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Direction" kindref="compound">iDynTree::Direction</ref></type>
@@ -114,7 +114,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="155" column="25" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="155" bodyend="-1"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="148" column="25" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="148" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1AttitudeMahonyFilter_1ad976d4c08caa4ff90add3cef3c9ff6e2" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Direction" kindref="compound">iDynTree::Direction</ref></type>
@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="156" column="25" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="156" bodyend="-1"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="149" column="25" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="149" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -143,7 +143,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="74" column="5"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="67" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1AttitudeMahonyFilter_1af4722cd241bbe3990de91bd3a8f29138" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -171,7 +171,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="80" column="10"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="73" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1AttitudeMahonyFilter_1ae0d9d819b5a9e7d2d4dc9ae95168c0d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -199,7 +199,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="86" column="10"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="79" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1AttitudeMahonyFilter_1a6ca15476d3c86749bce4a61230e5959d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -227,7 +227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="92" column="10"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="85" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1AttitudeMahonyFilter_1a17b6e6f323a3fc741351a68e3225a662" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -255,7 +255,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="98" column="10"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="91" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1AttitudeMahonyFilter_1aae10fdac1916d45d912763443e246500" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -283,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="104" column="10"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="97" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1AttitudeMahonyFilter_1a2d04a24c139621ec0d036a18c721b02c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -311,7 +311,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="110" column="10"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="103" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1AttitudeMahonyFilter_1aca94c3f5d2341a11d80c03914c9372a0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -341,7 +341,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="118" column="10" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="118" bodyend="122"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="111" column="10" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="111" bodyend="115"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1AttitudeMahonyFilter_1a1b7e9dc1d9d573bc739279c10487337a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -369,7 +369,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="128" column="10" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="128" bodyend="128"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="121" column="10" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="121" bodyend="121"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1AttitudeMahonyFilter_1a761c1ce98405a7bf629e1e523e3649f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -414,7 +414,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="130" column="10"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="123" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1AttitudeMahonyFilter_1aa87977f5cb6afd23f73aa526dc993ade" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -469,7 +469,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="132" column="10"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="125" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1AttitudeMahonyFilter_1af743b419ed9b87c50cc3d3bd87c09ce0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -487,7 +487,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="135" column="10"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="128" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1AttitudeMahonyFilter_1a17791aee32f963e4b1117625fb19a509" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -518,7 +518,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="136" column="10"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="129" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1AttitudeMahonyFilter_1a12b66b4f277bb7942e82eb970550878a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -553,7 +553,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="137" column="10"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="130" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1AttitudeMahonyFilter_1acae8174e86843da647341949ca29e17a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -585,7 +585,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="138" column="10"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="131" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1AttitudeMahonyFilter_1a14a59acedee3a36d1cb1a57c863f6e21" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>size_t</type>
@@ -603,7 +603,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="139" column="12"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="132" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1AttitudeMahonyFilter_1ae5f871007add5e65389039743a88ab71" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -634,7 +634,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="140" column="10"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="133" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1AttitudeMahonyFilter_1af275b53472f9fa6f5f146f1f5a302bdc" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -665,7 +665,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="141" column="10"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="134" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1AttitudeMahonyFilter_1a056cbfe2f712924c67609afcda054271" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -696,7 +696,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="142" column="10"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="135" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1AttitudeMahonyFilter_1a9f0c070353e6da5b2ad7b478de1eb7dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -727,7 +727,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="143" column="10"/>
+        <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="136" column="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -807,7 +807,7 @@ The discretized dynamics of the filter is implemented in the <ref refid="classiD
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="71" column="1" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="72" bodyend="157"/>
+    <location file="iDynTree/Estimation/AttitudeMahonyFilter.h" line="64" column="1" bodyfile="iDynTree/Estimation/AttitudeMahonyFilter.h" bodystart="65" bodyend="150"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1AttitudeMahonyFilter_1ae2a22d925e2bfac7f4c3f6a91a3a1871" prot="public" virt="non-virtual"><scope>iDynTree::AttitudeMahonyFilter</scope><name>AttitudeMahonyFilter</name></member>
       <member refid="classiDynTree_1_1AttitudeMahonyFilter_1af275b53472f9fa6f5f146f1f5a302bdc" prot="public" virt="virtual"><scope>iDynTree::AttitudeMahonyFilter</scope><name>getDefaultInternalInitialState</name></member>

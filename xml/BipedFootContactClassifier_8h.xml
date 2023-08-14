@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/BipedFootContactClassifier.h" line="30" column="5" bodyfile="iDynTree/Estimation/BipedFootContactClassifier.h" bodystart="31" bodyend="50"/>
+        <location file="iDynTree/Estimation/BipedFootContactClassifier.h" line="15" column="5" bodyfile="iDynTree/Estimation/BipedFootContactClassifier.h" bodystart="16" bodyend="35"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

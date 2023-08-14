@@ -47,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SO3Utils.h" line="40" column="10" declfile="iDynTree/Core/SO3Utils.h" declline="40" declcolumn="10"/>
+        <location file="iDynTree/Core/SO3Utils.h" line="33" column="10" declfile="iDynTree/Core/SO3Utils.h" declline="33" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="SO3Utils_8h_1a7950f68e2a23c633dc53411db5b5b573" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>double</type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SO3Utils.h" line="51" column="12" declfile="iDynTree/Core/SO3Utils.h" declline="51" declcolumn="12"/>
+        <location file="iDynTree/Core/SO3Utils.h" line="44" column="12" declfile="iDynTree/Core/SO3Utils.h" declline="44" declcolumn="12"/>
       </memberdef>
       <memberdef kind="function" id="SO3Utils_8h_1a2c019748c0b171a73279ba732546d87a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SO3Utils.h" line="65" column="10" declfile="iDynTree/Core/SO3Utils.h" declline="65" declcolumn="10"/>
+        <location file="iDynTree/Core/SO3Utils.h" line="58" column="10" declfile="iDynTree/Core/SO3Utils.h" declline="58" declcolumn="10"/>
       </memberdef>
       <memberdef kind="function" id="SO3Utils_8h_1a07cf035073cc1e3f95ef18eda4928db5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -214,7 +214,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Core/SO3Utils.h" line="81" column="10" declfile="iDynTree/Core/SO3Utils.h" declline="81" declcolumn="10"/>
+        <location file="iDynTree/Core/SO3Utils.h" line="74" column="10" declfile="iDynTree/Core/SO3Utils.h" declline="74" declcolumn="10"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

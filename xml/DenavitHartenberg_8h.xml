@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="145" column="11" declfile="iDynTree/Model/DenavitHartenberg.h" declline="145" declcolumn="11"/>
+        <location file="iDynTree/Model/DenavitHartenberg.h" line="138" column="11" declfile="iDynTree/Model/DenavitHartenberg.h" declline="138" declcolumn="11"/>
       </memberdef>
       <memberdef kind="function" id="DenavitHartenberg_8h_1a259b4c68b0f4b9ae9ce389ed14f4c712" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>Transform</type>
@@ -81,7 +81,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="156" column="11" declfile="iDynTree/Model/DenavitHartenberg.h" declline="156" declcolumn="11"/>
+        <location file="iDynTree/Model/DenavitHartenberg.h" line="149" column="11" declfile="iDynTree/Model/DenavitHartenberg.h" declline="149" declcolumn="11"/>
       </memberdef>
       <memberdef kind="function" id="DenavitHartenberg_8h_1ada11245ee6d17f4d64ccf59eeead8f07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -120,7 +120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="169" column="6" declfile="iDynTree/Model/DenavitHartenberg.h" declline="169" declcolumn="6"/>
+        <location file="iDynTree/Model/DenavitHartenberg.h" line="162" column="6" declfile="iDynTree/Model/DenavitHartenberg.h" declline="162" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="DenavitHartenberg_8h_1ac94534b93496e2703a218b38774c64a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -149,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/DenavitHartenberg.h" line="185" column="6" declfile="iDynTree/Model/DenavitHartenberg.h" declline="185" declcolumn="6"/>
+        <location file="iDynTree/Model/DenavitHartenberg.h" line="178" column="6" declfile="iDynTree/Model/DenavitHartenberg.h" declline="178" declcolumn="6"/>
       </memberdef>
       </sectiondef>
     <briefdescription>

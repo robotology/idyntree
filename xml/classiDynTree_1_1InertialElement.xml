@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InertialElement.h" line="27" column="15" bodyfile="private/InertialElement.h" bodystart="27" bodyend="-1"/>
+        <location file="private/InertialElement.h" line="18" column="15" bodyfile="private/InertialElement.h" bodystart="18" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1InertialElement_1a7683b4416677feab71ec30df7bdd83bb" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -28,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InertialElement.h" line="28" column="12" bodyfile="private/InertialElement.h" bodystart="28" bodyend="-1"/>
+        <location file="private/InertialElement.h" line="19" column="12" bodyfile="private/InertialElement.h" bodystart="19" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1InertialElement_1a9b14d54dac0825d1efccf405b6a26468" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1RotationalInertiaRaw" kindref="compound">RotationalInertiaRaw</ref></type>
@@ -41,7 +41,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InertialElement.h" line="29" column="26" bodyfile="private/InertialElement.h" bodystart="29" bodyend="-1"/>
+        <location file="private/InertialElement.h" line="20" column="26" bodyfile="private/InertialElement.h" bodystart="20" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1InertialElement_1ac18d60d227d3868dc73bbcb2034ec904" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Link" kindref="compound">iDynTree::Link</ref> &amp;</type>
@@ -54,7 +54,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InertialElement.h" line="30" column="20" bodyfile="private/InertialElement.h" bodystart="30" bodyend="-1"/>
+        <location file="private/InertialElement.h" line="21" column="20" bodyfile="private/InertialElement.h" bodystart="21" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -77,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InertialElement.h" line="33" column="14"/>
+        <location file="private/InertialElement.h" line="24" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InertialElement_1aec2e94c9ffa5a1d2aa6c2e7406cce1a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">iDynTree::XMLElement</ref> &gt;</type>
@@ -108,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InertialElement.h" line="35" column="21"/>
+        <location file="private/InertialElement.h" line="26" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1InertialElement_1a38f2684dc9bd018384a0e386bd590240" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -122,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/InertialElement.h" line="37" column="18"/>
+        <location file="private/InertialElement.h" line="28" column="18"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -153,7 +153,7 @@
         <link refid="classiDynTree_1_1XMLElement"/>
       </node>
     </collaborationgraph>
-    <location file="private/InertialElement.h" line="26" column="1" bodyfile="private/InertialElement.h" bodystart="26" bodyend="39"/>
+    <location file="private/InertialElement.h" line="17" column="1" bodyfile="private/InertialElement.h" bodystart="17" bodyend="30"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1XMLElement_1a2a182ac17f5e644b113a67e02c3595e5" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>attributeCallback</name></member>
       <member refid="classiDynTree_1_1XMLElement_1adf74d829fbe4d3d112c0ef2eba8bd3ea" prot="public" virt="non-virtual"><scope>iDynTree::InertialElement</scope><name>attributes</name></member>

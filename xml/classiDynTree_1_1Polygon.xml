@@ -15,7 +15,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="36" column="21" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="36" bodyend="-1"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="29" column="21" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="29" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -31,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="41" column="9"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="34" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Polygon_1ae219a4bc4fc2f4112f7d60f8e93f6b5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="46" column="14"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="39" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Polygon_1afcda2e1cc8bbfcebdea68245051a01d6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>size_t</type>
@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="52" column="16"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="45" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Polygon_1a0ac09dbde29030c23530ebd4d32fd9d9" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -84,7 +84,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="62" column="14"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="55" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Polygon_1a194733d9faab0c384be16b4252331b29" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Polygon" kindref="compound">Polygon</ref></type>
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="68" column="17"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="61" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Polygon_1a754dfabd189310dcd1782d999dd254cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
@@ -122,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="70" column="18"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="63" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1Polygon_1a37f732d80356a19e6e499343592342db" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Position" kindref="compound">Position</ref> &amp;</type>
@@ -139,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="71" column="25"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="64" column="25"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-static-func">
@@ -171,7 +171,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ConvexHullHelpers.h" line="78" column="24"/>
+        <location file="iDynTree/ConvexHullHelpers.h" line="71" column="24"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -230,7 +230,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/ConvexHullHelpers.h" line="33" column="5" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="34" bodyend="79"/>
+    <location file="iDynTree/ConvexHullHelpers.h" line="26" column="5" bodyfile="iDynTree/ConvexHullHelpers.h" bodystart="27" bodyend="72"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1Polygon_1a194733d9faab0c384be16b4252331b29" prot="public" virt="non-virtual"><scope>iDynTree::Polygon</scope><name>applyTransform</name></member>
       <member refid="classiDynTree_1_1Polygon_1afcda2e1cc8bbfcebdea68245051a01d6" prot="public" virt="non-virtual"><scope>iDynTree::Polygon</scope><name>getNrOfVertices</name></member>

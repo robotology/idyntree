@@ -16,7 +16,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="59" column="11" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="59" bodyend="-1"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="52" column="11" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SimpleLeggedOdometry_1ae6fb2285b81cc651d820de9b176f69d4" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Traversal" kindref="compound">Traversal</ref></type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="64" column="15" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="64" bodyend="-1"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="57" column="15" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="57" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SimpleLeggedOdometry_1aface6c5d0b430f1521340f6f72b32710" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="69" column="10" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="69" bodyend="-1"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="62" column="10" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="62" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SimpleLeggedOdometry_1a12f477dea8b2c8d9d35ad072c7f3d26b" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="74" column="10" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="74" bodyend="-1"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="67" column="10" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="67" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SimpleLeggedOdometry_1af49a63a2894a756b7531f6ffa5d3f799" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="79" column="10" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="79" bodyend="-1"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="72" column="10" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="72" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SimpleLeggedOdometry_1a2b5c00f05faa080830f9db26f4606d65" prot="private" static="no" mutable="no">
         <type>LinkIndex</type>
@@ -86,7 +86,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="84" column="15" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="84" bodyend="-1"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="77" column="15" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="77" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SimpleLeggedOdometry_1a0b78d126c5aa732c11ed963115fd0c6c" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1LinkPositions" kindref="compound">LinkPositions</ref></type>
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="91" column="19" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="91" bodyend="-1"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="84" column="19" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1SimpleLeggedOdometry_1a6493052c27a7c745c40ac2435086eeb8" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -116,7 +116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="99" column="15" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="99" bodyend="-1"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="92" column="15" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="92" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="105" column="5"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="98" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a6bacff4fe44806f3c951d952ff3374c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="110" column="5"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="103" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a98d2477422589b8c6db8aa8b9a251bd6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -177,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="119" column="10"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="112" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a7bcd1dcdd997919a6bdf16fe5eb0355a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
@@ -194,7 +194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="126" column="18"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="119" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a78a57dc95b9f1fa55c04a46d3d9b22dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -213,7 +213,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="134" column="10"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="127" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a847b99153a839d0a49d64f04c8a9c49d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -257,7 +257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="146" column="10"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="139" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a6452e51cce27c452f145a93e5a172320" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -301,7 +301,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="159" column="10"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="152" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a178be52aa8212fd7738c477b634ce5e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -357,7 +357,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="173" column="10"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="166" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a5b928f1cc685b759241d4a17cc2658ec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -413,7 +413,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="188" column="10"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="181" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1ade993eaed828dd9bd464cfc7c5eebee3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -431,7 +431,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="196" column="10"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="189" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1afa2880fc26e63213a98943041578d34d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -449,7 +449,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="202" column="10"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="195" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1aaf23541001dd123e74c42ba44d8f48e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -474,7 +474,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="210" column="10"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="203" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a8e8e64afca6ad056a22a1c245e68a0d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -499,7 +499,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="219" column="10"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="212" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1af4eba0d4270edf9a45b3057e3591dac5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -518,7 +518,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="230" column="17"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="223" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a5611d7fcba91a7a4b866a4f524b0574e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
@@ -539,7 +539,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="237" column="25"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="230" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1SimpleLeggedOdometry_1a30e3681591c3759b2eb719acafb9bfa9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
@@ -560,7 +560,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="244" column="25"/>
+        <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="237" column="25"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -582,7 +582,7 @@
 </para>
 <para>To reset the location of the world, init can simply be called again. </para>
     </detaileddescription>
-    <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="54" column="1" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="55" bodyend="245"/>
+    <location file="iDynTree/Estimation/SimpleLeggedOdometry.h" line="47" column="1" bodyfile="iDynTree/Estimation/SimpleLeggedOdometry.h" bodystart="48" bodyend="238"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1SimpleLeggedOdometry_1ade993eaed828dd9bd464cfc7c5eebee3" prot="public" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>changeFixedFrame</name></member>
       <member refid="classiDynTree_1_1SimpleLeggedOdometry_1afa2880fc26e63213a98943041578d34d" prot="public" virt="non-virtual"><scope>iDynTree::SimpleLeggedOdometry</scope><name>changeFixedFrame</name></member>

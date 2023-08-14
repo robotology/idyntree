@@ -21,7 +21,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeVaryingObject.h" line="36" column="13" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="36" bodyend="36"/>
+        <location file="iDynTree/TimeVaryingObject.h" line="30" column="13" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="30" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject_1ab8ad0577c4e724e8a91dec1447e150e7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type></type>
@@ -34,7 +34,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeVaryingObject.h" line="38" column="21" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="38" bodyend="38"/>
+        <location file="iDynTree/TimeVaryingObject.h" line="32" column="21" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="32" bodyend="32"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject_1af506565632a9133a63152880682c2b85" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>const Object &amp;</type>
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/TimeVaryingObject.h" line="40" column="34"/>
+        <location file="iDynTree/TimeVaryingObject.h" line="34" column="34"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -78,7 +78,7 @@
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="iDynTree/TimeVaryingObject.h" line="34" column="9" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="34" bodyend="41"/>
+    <location file="iDynTree/TimeVaryingObject.h" line="28" column="9" bodyfile="iDynTree/TimeVaryingObject.h" bodystart="28" bodyend="35"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject_1af506565632a9133a63152880682c2b85" prot="public" virt="pure-virtual"><scope>iDynTree::optimalcontrol::TimeVaryingObject</scope><name>get</name></member>
       <member refid="classiDynTree_1_1optimalcontrol_1_1TimeVaryingObject_1afc82e0bb632774bbb9573548be0449a1" prot="public" virt="non-virtual"><scope>iDynTree::optimalcontrol::TimeVaryingObject</scope><name>TimeVaryingObject</name></member>
