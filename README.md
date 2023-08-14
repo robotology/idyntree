@@ -1,4 +1,4 @@
-iDynTree [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0) [![License: LGPL v2](https://img.shields.io/badge/License-LGPL%20v2-blue.svg)](https://www.gnu.org/licenses/lgpl-2.1)  [![ZenHub](https://img.shields.io/badge/Shipping_faster_with-ZenHub-435198.svg)](https://zenhub.com)
+iDynTree  [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause) [![ZenHub](https://img.shields.io/badge/Shipping_faster_with-ZenHub-435198.svg)](https://zenhub.com)
 ===========
 
 iDynTree is a library of robots dynamics algorithms for control, estimation and simulation. It is specifically designed for free-floating robots, but it is possible to use it also  with fixed-base robots.
@@ -157,12 +157,5 @@ The initial development of iDynTree was supported by the FP7 EU projects [CoDyCo
 The development is now supported by the [Artificial Mechanical Intelligence research line](https://ami.iit.it/) at the [Italian Institute of Technology](https://www.iit.it/).
 
 ## License
-iDynTree is licensed under either the GNU Lesser General Public License v3.0 :
 
-https://www.gnu.org/licenses/lgpl-3.0.html
-
-or the GNU Lesser General Public License v2.1 :
-
-https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
-
-at your option.
+iDynTree is licensed under either the BSD-3-Clause license : https://spdx.org/licenses/BSD-3-Clause.html .

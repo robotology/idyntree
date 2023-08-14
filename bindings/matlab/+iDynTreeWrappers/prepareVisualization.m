@@ -32,9 +32,8 @@ function [Visualizer,Objects]=prepareVisualization(KinDynModel,meshFilePrefix,va
 %           - `map`       : Cell array having both the names of the meshes and the associated link
 %           - `linkMeshInfo` : Contains the link name and a struct (meshInfo) that contains the name of file or if is a simple geometry, the triangulation ( edges and vertices of the mesh ) and the link to geometry transform.% Author : Francisco Andrade (franciscojavier.andradechavez@iit.it)
 %
-% Copyright (C) 2019 Istituto Italiano di Tecnologia (IIT). All rights reserved.
-% This software may be modified and distributed under the terms of the
-% GNU Lesser General Public License v2.1 or any later version.
+% SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
+% SPDX-License-Identifier: BSD-3-Clause
 %% input parser section
 p = inputParser;
 p.StructExpand = false;

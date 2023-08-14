@@ -1,6 +1,6 @@
-# Copyright: (C) 2016 Fondazione Istituto Italiano di Tecnologia
-# Authors: Silvio Traversaro
-# CopyPolicy: Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
+# SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
+# SPDX-License-Identifier: BSD-3-Clause
+
 
 set(iDynTree_visualization_source src/Visualizer.cpp)
 set(iDynTree_visualization_header include/iDynTree/Visualizer.h)

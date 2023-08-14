@@ -1,8 +1,7 @@
 #!/bin/python3
 
-# Copyright (C) 2021 Istituto Italiano di Tecnologia (IIT)
-# This software may be modified and distributed under the terms of the
-# LGPL-2.1+ license. See the accompanying LICENSE file for details.
+# SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
+# SPDX-License-Identifier: BSD-3-Clause
 
 import toml
 import subprocess

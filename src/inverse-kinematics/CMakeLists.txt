@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
+# SPDX-License-Identifier: BSD-3-Clause
+
 set(libraryname idyntree-inverse-kinematics)
 
 set(IDYN_TREE_IK_SOURCES src/ConvexHullHelpers.cpp
