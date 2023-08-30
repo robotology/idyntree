@@ -25,6 +25,24 @@ namespace iDynTree
     class VectorDynSize;
     class SpatialMotionVector;
 
+    enum JointDynamicsType
+    {
+        /**
+         * NoDynamics: No joint dynamics is assumed for the joint.
+         * This joint dynamics type does not consider any parameter.
+         */
+        NoJointDynamics = 0,
+
+        /**
+         * URDFJointDynamics: Dynamics described by the URDF 1.0 specification.
+         * 
+         * This joint dynamics type consider the following parameters:
+         *  * `Damping`
+         *  * `StaticFriction`
+         */
+        URDFJointDynamics = 1    
+    };
+
     /**
      * Interface (i.e. abstract class) exposed by classes that implement a Joint.
      * A Joint is the basic representation of the motion allowed between two links.
@@ -364,58 +382,81 @@ namespace iDynTree
         virtual bool setPosLimits(const size_t _index, double & min, double & max) = 0;
 
         /**
-         * @name Dynamic parameters handling methods.
-         *  Methods for handling dynamic parameters of joints.
+         * @name Joint dynamics methods.
+         * 
+         *  Methods for handling representation of joint dynamics. 
+         *  The precise definition of "joint dynamics" is not precisely, as depending on the
+         *  specific application the kind of joint dynamics model can be different, and in some
+         *  case it may be even just instantaneous models (for example, when only the damping is considered).
          *
-         *  A joint can have dynamic parameters or not. 
-         *  Supported parameters are damping coefficient and static friction coefficient.
+         *  For the type of joint dynamics supported, see the iDynTree::JointDynamicsType enum documentation.
+         *  
+         *  The joint dynamics model are used in the following contexts:
+         *   * In methods to serialize and deserialize URDF files
+         * 
+         *  The joint dynamics are **not used at all** in classes to compute kinematics and dynamics quantities,
+         *  such as iDynTree::KinDynComputations .
          */
         ///@{
+
         /**
-         * Method to check if the joint has dynamic parameters.
+         * Method to get the specific joint dynamics type used for the joint.
+         * \note: It is assume that all the degrees of freedom of a joint share the same joint dynamics type.
          *
-         * @return true if the joints has dynamic parameters
+         * @return the specific joint dynamics type used for the joint.
          */
-        virtual bool hasDynamics() const = 0;
+        virtual JointDynamicsType getJointDynamicsType() const = 0;
          
          /**
-         * Method to enable the joint dynamics.
+         * Method to get the specific joint dynamics type used for the joint.
+         * \note: It is assume that all the degrees of freedom of a joint share the same joint dynamics type.
          *
          * @return true if everything went correctly, false otherwise
          */
-        virtual bool enableDynamics(const bool enable) = 0;
+        virtual bool setJointDynamicsType(const JointDynamicsType enable) = 0;
 
          /**
-         * Get damping and static friction parameters of the joint, for the _index dof.
+         * Set damping parameter of the joint, for the _index dof.
          * The damping coefficient is expressed in N∙s/m for a prismatic joint, N∙m∙s/rad for a revolute joint.
-         * The static friction is expressed in N for a prismatic joint, N∙m for a revolute joint.
          * 
+         * This parameter is considered in the following joint dynamics types:
+         * * `URDFJointDynamics`
+         *
          * @param[in] _index index of the dof for which the dynamic parameters are obtained.
          * @return true if everything is correct, false otherwise.
          */
-        virtual bool getDynamicParameters(const size_t _index, double& damping, double& staticFriction) const = 0;
+        virtual bool setDamping(const size_t _index, double& damping) const = 0;
+
+         /**
+         * Set static friction parameter of the joint, for the _index dof.
+         * The static friction coefficient is expressed in N for a prismatic joint, N∙m for a revolute joint.
+         * 
+         * This parameter is considered in the following joint dynamics types:
+         * * `URDFJointDynamics`
+         *
+         * @param[in] _index index of the dof for which the dynamic parameters are obtained.
+         * @return true if everything is correct, false otherwise.
+         */
+        virtual bool setStaticFriction(const size_t _index, double& staticFriction) const = 0;
 
         /**
-         * Get the damping coefficient of the joint, bindings-friendly version.
+         * Get the damping coefficient of the joint.
          * The unit is N∙s/m for a prismatic joint, N∙m∙s/rad for a revolute joint.
+         *
+         * This parameter is considered in the following joint dynamics types:
+         * * `URDFJointDynamics`
          */
         virtual double getDamping(const size_t _index) const = 0;
 
         /**
-         * Get the damping coefficient of the joint, bindings-friendly version.
+         * Get the static friction coefficient of the joint.
          * The unit is N for a prismatic joint, N∙m for a revolute joint.
+         * 
+         * This parameter is considered in the following joint dynamics types:
+         * * `URDFJointDynamics`
          */
         virtual double getStaticFriction(const size_t _index) const = 0;
 
-        /**
-         * Set the dynamic parameters for a dof the joint.
-         * The damping coefficient is expressed in N∙s/m for a prismatic joint, N∙m∙s/rad for a revolute joint.
-         * The static friction is expressed in N for a prismatic joint, N∙m for a revolute joint.
-         * 
-         * @note This just sets the internal damping and static friction of the joint.
-         *       To set them as enabled, you need to call the enableDynamics(true) method.
-         */
-        virtual bool setDynamicParameters(const size_t _index, double& damping, double& staticFriction) = 0;
 
         ///@}
     };
