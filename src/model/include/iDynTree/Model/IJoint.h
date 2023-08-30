@@ -363,11 +363,58 @@ namespace iDynTree
          */
         virtual bool setPosLimits(const size_t _index, double & min, double & max) = 0;
 
+        /**
+         * @name Dynamic parameters handling methods.
+         *  Methods for handling dynamic parameters of joints.
+         *
+         *  A joint can have dynamic parameters or not. 
+         *  Supported parameters are damping coefficient and static friction coefficient.
+         */
+        ///@{
+        /**
+         * Method to check if the joint has dynamic parameters.
+         *
+         * @return true if the joints has dynamic parameters
+         */
         virtual bool hasDynamics() const = 0;
+         
+         /**
+         * Method to enable the joint dynamics.
+         *
+         * @return true if everything went correctly, false otherwise
+         */
         virtual bool enableDynamics(const bool enable) = 0;
+
+         /**
+         * Get damping and static friction parameters of the joint, for the _index dof.
+         * The damping coefficient is expressed in N∙s/m for a prismatic joint, N∙m∙s/rad for a revolute joint.
+         * The static friction is expressed in N for a prismatic joint, N∙m for a revolute joint.
+         * 
+         * @param[in] _index index of the dof for which the dynamic parameters are obtained.
+         * @return true if everything is correct, false otherwise.
+         */
         virtual bool getDynamicParameters(const size_t _index, double& damping, double& staticFriction) const = 0;
+
+        /**
+         * Get the damping coefficient of the joint, bindings-friendly version.
+         * The unit is N∙s/m for a prismatic joint, N∙m∙s/rad for a revolute joint.
+         */
         virtual double getDamping(const size_t _index) const = 0;
+
+        /**
+         * Get the damping coefficient of the joint, bindings-friendly version.
+         * The unit is N for a prismatic joint, N∙m for a revolute joint.
+         */
         virtual double getStaticFriction(const size_t _index) const = 0;
+
+        /**
+         * Set the dynamic parameters for a dof the joint.
+         * The damping coefficient is expressed in N∙s/m for a prismatic joint, N∙m∙s/rad for a revolute joint.
+         * The static friction is expressed in N for a prismatic joint, N∙m for a revolute joint.
+         * 
+         * @note This just sets the internal damping and static friction of the joint.
+         *       To set them as enabled, you need to call the enableDynamics(true) method.
+         */
         virtual bool setDynamicParameters(const size_t _index, double& damping, double& staticFriction) = 0;
 
         ///@}
