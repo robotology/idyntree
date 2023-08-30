@@ -132,6 +132,32 @@ namespace iDynTree {
                 return true;
             });
             return std::shared_ptr<XMLElement>(element);
+
+        } else if (name == "dynamics") {
+            m_dynamic_params = std::make_shared<DyamicParams>();
+            m_dynamic_params->damping = .0;
+            m_dynamic_params->staticFriction = .0;
+
+            // TODO: check how the defaults/required works
+            XMLElement* element = new XMLElement(getParserState(), name);
+            element->setAttributeCallback([this](const std::unordered_map<std::string, std::shared_ptr<XMLAttribute>>& attributes) {
+                auto found = attributes.find("damping");
+                if (found != attributes.end()) {
+                    double value = 0;
+                    if (stringToDoubleWithClassicLocale(found->second->value(), value)) {
+                        m_dynamic_params->damping = value;
+                    }
+                }
+                found = attributes.find("friction");
+                if (found != attributes.end()) {
+                    double value = 0;
+                    if (stringToDoubleWithClassicLocale(found->second->value(), value)) {
+                        m_dynamic_params->staticFriction = value;
+                    }
+                }
+                return true;
+                });
+                return std::shared_ptr<XMLElement>(element);
         }
         return std::make_shared<XMLElement>(getParserState(), name);
     }
