@@ -41,6 +41,12 @@ namespace iDynTree
         double m_minPos;
         double m_maxPos;
 
+        // Dynamic parameters
+        void disableDynamics();
+        bool m_has_dynamics;
+        double m_damping;
+        double m_static_friction;
+        
         // Cache attributes
         mutable double q_previous;
         mutable Transform link1_X_link2;
@@ -204,6 +210,14 @@ namespace iDynTree
         virtual double getMinPosLimit(const size_t _index) const;
         virtual double getMaxPosLimit(const size_t _index) const;
         virtual bool setPosLimits(const size_t _index, double & min, double & max);
+
+        // DYNAMICS METHODS
+        virtual bool hasDynamics() const;
+        virtual bool enableDynamics(const bool enable);
+        virtual bool getDynamicParameters(const size_t _index, double& damping, double& staticFriction) const;
+        virtual double getDamping(const size_t _index) const;
+        virtual double getStaticFriction(const size_t _index) const;
+        virtual bool setDynamicParameters(const size_t _index, double& damping, double& staticFriction);
     };
 }
 

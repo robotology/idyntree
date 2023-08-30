@@ -363,6 +363,13 @@ namespace iDynTree
          */
         virtual bool setPosLimits(const size_t _index, double & min, double & max) = 0;
 
+        virtual bool hasDynamics() const = 0;
+        virtual bool enableDynamics(const bool enable) = 0;
+        virtual bool getDynamicParameters(const size_t _index, double& damping, double& staticFriction) const = 0;
+        virtual double getDamping(const size_t _index) const = 0;
+        virtual double getStaticFriction(const size_t _index) const = 0;
+        virtual bool setDynamicParameters(const size_t _index, double& damping, double& staticFriction) = 0;
+
         ///@}
     };
 

@@ -59,7 +59,13 @@ private:
         double velocity;
     };
 
+    struct DyamicParams {
+        double damping;
+        double staticFriction;
+    };
+
     std::shared_ptr<Limits> m_limits;
+    std::shared_ptr<DyamicParams> m_dynamic_params;
     
 public:
     explicit JointElement(

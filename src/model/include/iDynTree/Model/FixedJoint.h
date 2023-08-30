@@ -182,6 +182,14 @@ namespace iDynTree
         virtual double getMinPosLimit(const size_t _index) const;
         virtual double getMaxPosLimit(const size_t _index) const;
         virtual bool setPosLimits(const size_t _index, double & min, double & max);
+
+        // DYNAMICS METHODS
+        virtual bool hasDynamics() const;
+        virtual bool enableDynamics(const bool enable);
+        virtual bool getDynamicParameters(const size_t _index, double& damping, double& staticFriction) const;
+        virtual double getDamping(const size_t _index) const;
+        virtual double getStaticFriction(const size_t _index) const;
+        virtual bool setDynamicParameters(const size_t _index, double& damping, double& staticFriction);
     };
 }
 

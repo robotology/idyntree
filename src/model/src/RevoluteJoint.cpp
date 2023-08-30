@@ -66,7 +66,9 @@ RevoluteJoint::RevoluteJoint(const RevoluteJoint& other):
                              link1_X_link2_at_rest(other.link1_X_link2_at_rest),
                              rotation_axis_wrt_link1(other.rotation_axis_wrt_link1),
                              m_hasPosLimits(other.m_hasPosLimits),
-                             m_minPos(other.m_minPos), m_maxPos(other.m_maxPos)
+                             m_minPos(other.m_minPos), m_maxPos(other.m_maxPos),
+                            m_has_dynamics(other.m_has_dynamics),
+                            m_damping(other.m_damping), m_static_friction(other.m_static_friction)
 {
     this->setPosCoordsOffset(other.getPosCoordsOffset());
     this->setDOFsOffset(other.getDOFsOffset());
@@ -397,6 +399,48 @@ bool RevoluteJoint::setPosLimits(const size_t /*_index*/, double & min, double &
     return true;
 }
 
+bool RevoluteJoint::getDynamicParameters(const size_t /*_index*/, double& damping, double& staticFriction) const
+{
+    damping = m_damping;
+    staticFriction = m_static_friction;
 
+    return true;
+}
+
+void RevoluteJoint::disableDynamics()
+{
+    m_has_dynamics = false;
+    m_damping = .0;
+    m_static_friction = .0;
+}
+
+bool RevoluteJoint::hasDynamics() const
+{
+    return m_has_dynamics;
+}
+
+
+bool RevoluteJoint::enableDynamics(const bool enable)
+{
+    m_has_dynamics = enable;
+    return true;
+}
+
+double RevoluteJoint::getDamping(const size_t _index) const
+{
+    return m_damping;
+}
+double RevoluteJoint::getStaticFriction(const size_t _index) const
+{
+    return m_static_friction;
+}
+
+bool RevoluteJoint::setDynamicParameters(const size_t _index, double& damping, double& staticFriction)
+{
+    m_damping = damping;
+    m_static_friction = staticFriction;
+
+    return true;
+}
 
 }

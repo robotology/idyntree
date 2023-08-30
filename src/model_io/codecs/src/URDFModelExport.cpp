@@ -405,7 +405,18 @@ bool exportJoint(IJointConstPtr joint, LinkConstPtr parentLink, LinkConstPtr chi
         xmlNewProp(limit_xml, BAD_CAST "velocity", BAD_CAST bufStr.c_str());
     }
 
-    // TODO(traversaro) : handle friction
+    if (joint->hasDynamics() && joint->getNrOfDOFs() == 1)
+    {
+
+        xmlNodePtr dynamics_xml = xmlNewChild(joint_xml, NULL, BAD_CAST "dynamics", NULL);
+        std::string bufStr;
+        double damping, static_friction;
+        ok = ok && joint->getDynamicParameters(0, damping, static_friction);
+        ok = ok && doubleToStringWithClassicLocale(damping, bufStr);
+        xmlNewProp(dynamics_xml, BAD_CAST "damping", BAD_CAST bufStr.c_str());
+        ok = ok && doubleToStringWithClassicLocale(static_friction, bufStr);
+        xmlNewProp(dynamics_xml, BAD_CAST "friction", BAD_CAST bufStr.c_str());
+    }
 
     return ok;
 }

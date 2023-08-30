@@ -54,7 +54,9 @@ PrismaticJoint::PrismaticJoint(const PrismaticJoint& other):
                              link1_X_link2_at_rest(other.link1_X_link2_at_rest),
                              translation_axis_wrt_link1(other.translation_axis_wrt_link1),
                              m_hasPosLimits(other.m_hasPosLimits),
-                             m_minPos(other.m_minPos), m_maxPos(other.m_maxPos)
+                             m_minPos(other.m_minPos), m_maxPos(other.m_maxPos),
+                             m_has_dynamics(other.m_has_dynamics),
+                             m_damping(other.m_damping), m_static_friction(other.m_static_friction)
 {
     this->setPosCoordsOffset(other.getPosCoordsOffset());
     this->setDOFsOffset(other.getDOFsOffset());
@@ -383,6 +385,48 @@ bool PrismaticJoint::setPosLimits(const size_t /*_index*/, double & min, double 
     return true;
 }
 
+bool PrismaticJoint::getDynamicParameters(const size_t /*_index*/, double& damping, double& staticFriction) const
+{
+    damping = m_damping;
+    staticFriction = m_static_friction;
 
+    return true;
+}
+
+void PrismaticJoint::disableDynamics()
+{
+    m_has_dynamics = false;
+    m_damping = .0;
+    m_static_friction = .0;
+}
+
+bool PrismaticJoint::hasDynamics() const
+{
+    return m_has_dynamics;
+}
+
+
+bool PrismaticJoint::enableDynamics(const bool enable)
+{
+    m_has_dynamics = enable;
+    return true;
+}
+
+double PrismaticJoint::getDamping(const size_t _index) const
+{
+    return m_damping;
+}
+double PrismaticJoint::getStaticFriction(const size_t _index) const
+{
+    return m_static_friction;
+}
+
+bool PrismaticJoint::setDynamicParameters(const size_t _index, double& damping, double& staticFriction)
+{
+    m_damping = damping;
+    m_static_friction = staticFriction;
+
+    return true;
+}
 
 }
