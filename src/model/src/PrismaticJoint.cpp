@@ -34,6 +34,8 @@ PrismaticJoint::PrismaticJoint():
     this->resetAxisBuffers();
     this->resetBuffers(0);
     this->disablePosLimits();
+    this->disableDynamics();
+
 }
 
 PrismaticJoint::PrismaticJoint(const LinkIndex _link1, const LinkIndex _link2,
@@ -47,6 +49,7 @@ PrismaticJoint::PrismaticJoint(const LinkIndex _link1, const LinkIndex _link2,
     this->resetAxisBuffers();
     this->resetBuffers(0);
     this->disablePosLimits();
+    this->disableDynamics();
 }
 
 PrismaticJoint::PrismaticJoint(const PrismaticJoint& other):

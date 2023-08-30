@@ -34,6 +34,7 @@ RevoluteJoint::RevoluteJoint():
     this->resetAxisBuffers();
     this->resetBuffers(0);
     this->disablePosLimits();
+    this->disableDynamics();
 }
 
 RevoluteJoint::RevoluteJoint(const LinkIndex _link1, const LinkIndex _link2,
@@ -47,6 +48,7 @@ RevoluteJoint::RevoluteJoint(const LinkIndex _link1, const LinkIndex _link2,
     this->resetAxisBuffers();
     this->resetBuffers(0);
     this->disablePosLimits();
+    this->disableDynamics();
 }
 
 RevoluteJoint::RevoluteJoint(const Transform& _link1_X_link2, const Axis& _rotation_axis_wrt_link1):
@@ -59,6 +61,7 @@ RevoluteJoint::RevoluteJoint(const Transform& _link1_X_link2, const Axis& _rotat
     this->resetAxisBuffers();
     this->resetBuffers(0);
     this->disablePosLimits();
+    this->disableDynamics();
 }
 
 RevoluteJoint::RevoluteJoint(const RevoluteJoint& other):
