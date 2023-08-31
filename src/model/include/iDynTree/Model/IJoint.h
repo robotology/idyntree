@@ -425,7 +425,7 @@ namespace iDynTree
          * @param[in] _index index of the dof for which the dynamic parameters are obtained.
          * @return true if everything is correct, false otherwise.
          */
-        virtual bool setDamping(const size_t _index, double& damping) const = 0;
+        virtual bool setDamping(const size_t _index, double& damping) = 0;
 
          /**
          * Set static friction parameter of the joint, for the _index dof.
@@ -437,7 +437,7 @@ namespace iDynTree
          * @param[in] _index index of the dof for which the dynamic parameters are obtained.
          * @return true if everything is correct, false otherwise.
          */
-        virtual bool setStaticFriction(const size_t _index, double& staticFriction) const = 0;
+        virtual bool setStaticFriction(const size_t _index, double& staticFriction) = 0;
 
         /**
          * Get the damping coefficient of the joint.

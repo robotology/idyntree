@@ -34,8 +34,7 @@ PrismaticJoint::PrismaticJoint():
     this->resetAxisBuffers();
     this->resetBuffers(0);
     this->disablePosLimits();
-    this->disableDynamics();
-
+    this->resetJointDynamics();
 }
 
 PrismaticJoint::PrismaticJoint(const LinkIndex _link1, const LinkIndex _link2,
@@ -49,7 +48,7 @@ PrismaticJoint::PrismaticJoint(const LinkIndex _link1, const LinkIndex _link2,
     this->resetAxisBuffers();
     this->resetBuffers(0);
     this->disablePosLimits();
-    this->disableDynamics();
+    this->resetJointDynamics();
 }
 
 PrismaticJoint::PrismaticJoint(const PrismaticJoint& other):
@@ -58,7 +57,7 @@ PrismaticJoint::PrismaticJoint(const PrismaticJoint& other):
                              translation_axis_wrt_link1(other.translation_axis_wrt_link1),
                              m_hasPosLimits(other.m_hasPosLimits),
                              m_minPos(other.m_minPos), m_maxPos(other.m_maxPos),
-                             m_has_dynamics(other.m_has_dynamics),
+                             m_joint_dynamics_type(other.m_joint_dynamics_type),
                              m_damping(other.m_damping), m_static_friction(other.m_static_friction)
 {
     this->setPosCoordsOffset(other.getPosCoordsOffset());
@@ -388,30 +387,21 @@ bool PrismaticJoint::setPosLimits(const size_t /*_index*/, double & min, double 
     return true;
 }
 
-bool PrismaticJoint::getDynamicParameters(const size_t /*_index*/, double& damping, double& staticFriction) const
+void PrismaticJoint::resetJointDynamics()
 {
-    damping = m_damping;
-    staticFriction = m_static_friction;
-
-    return true;
+    m_joint_dynamics_type = NoJointDynamics;
+    m_damping = 0.0;
+    m_static_friction = 0.0;
 }
 
-void PrismaticJoint::disableDynamics()
+JointDynamicsType PrismaticJoint::getJointDynamicsType() const
 {
-    m_has_dynamics = false;
-    m_damping = .0;
-    m_static_friction = .0;
+    return m_joint_dynamics_type;
 }
 
-bool PrismaticJoint::hasDynamics() const
+bool PrismaticJoint::setJointDynamicsType(const JointDynamicsType enable)
 {
-    return m_has_dynamics;
-}
-
-
-bool PrismaticJoint::enableDynamics(const bool enable)
-{
-    m_has_dynamics = enable;
+    m_joint_dynamics_type = enable;
     return true;
 }
 
@@ -424,9 +414,15 @@ double PrismaticJoint::getStaticFriction(const size_t _index) const
     return m_static_friction;
 }
 
-bool PrismaticJoint::setDynamicParameters(const size_t _index, double& damping, double& staticFriction)
+bool PrismaticJoint::setDamping(const size_t _index, double& damping)
 {
     m_damping = damping;
+
+    return true;
+}
+
+bool PrismaticJoint::setStaticFriction(const size_t _index, double& staticFriction)
+{
     m_static_friction = staticFriction;
 
     return true;

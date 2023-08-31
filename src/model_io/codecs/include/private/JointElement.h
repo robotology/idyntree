@@ -60,6 +60,7 @@ private:
     };
 
     struct DyamicParams {
+        uint8_t jointDynamicsType;
         double damping;
         double staticFriction;
     };

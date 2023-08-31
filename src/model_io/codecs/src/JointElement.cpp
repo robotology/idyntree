@@ -135,6 +135,7 @@ namespace iDynTree {
 
         } else if (name == "dynamics") {
             m_dynamic_params = std::make_shared<DyamicParams>();
+            m_dynamic_params->jointDynamicsType = NoJointDynamics;
             m_dynamic_params->damping = .0;
             m_dynamic_params->staticFriction = .0;
 
