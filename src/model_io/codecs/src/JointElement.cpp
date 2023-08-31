@@ -135,7 +135,7 @@ namespace iDynTree {
 
         } else if (name == "dynamics") {
             m_dynamic_params = std::make_shared<DyamicParams>();
-            m_dynamic_params->jointDynamicsType = NoJointDynamics;
+            m_dynamic_params->jointDynamicsType = URDFJointDynamics;
             m_dynamic_params->damping = .0;
             m_dynamic_params->staticFriction = .0;
 
@@ -200,6 +200,15 @@ namespace iDynTree {
                 info.joint->setPosLimits(0, m_limits->positionLower, m_limits->positionUpper);
             } else if (m_jointType == "revolute" || m_jointType == "prismatic") {
                 std::string errStr = "Joint " + m_jointName + " misses the limit tag.";
+                reportWarning("JointElement", "", errStr.c_str());
+            }
+
+            if(m_dynamic_params) {
+                info.joint->setJointDynamicsType(URDFJointDynamics);
+                info.joint->setDamping(0, m_dynamic_params->damping);
+                info.joint->setStaticFriction(0, m_dynamic_params->staticFriction);
+            } else if (m_jointType == "revolute" || m_jointType == "prismatic") {
+                std::string errStr = "Joint " + m_jointName + " misses the dynamics tag.";
                 reportWarning("JointElement", "", errStr.c_str());
             }
             
