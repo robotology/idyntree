@@ -405,7 +405,7 @@ bool exportJoint(IJointConstPtr joint, LinkConstPtr parentLink, LinkConstPtr chi
         xmlNewProp(limit_xml, BAD_CAST "velocity", BAD_CAST bufStr.c_str());
     }
 
-    if (joint->getJointDynamicsType() != NoJointDynamics && joint->getNrOfDOFs() == 1)
+    if (joint->getJointDynamicsType() == URDFJointDynamics && joint->getNrOfDOFs() == 1)
     {
 
         xmlNodePtr dynamics_xml = xmlNewChild(joint_xml, NULL, BAD_CAST "dynamics", NULL);
