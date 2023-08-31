@@ -133,7 +133,7 @@ namespace iDynTree {
             return std::shared_ptr<XMLElement>(element);
 
         } else if (name == "dynamics") {
-            m_dynamic_params = std::make_shared<JointDyamicsParams>();
+            m_dynamic_params = std::make_shared<JointDynamicsParams>();
             m_dynamic_params->jointDynamicsType = URDFJointDynamics;
             m_dynamic_params->damping = .0;
             m_dynamic_params->staticFriction = .0;

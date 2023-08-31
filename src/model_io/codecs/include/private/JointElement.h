@@ -61,14 +61,14 @@ private:
         double velocity;
     };
 
-    struct JointDyamicsParams {
+    struct JointDynamicsParams {
         JointDynamicsType jointDynamicsType;
         double damping;
         double staticFriction;
     };
 
     std::shared_ptr<Limits> m_limits;
-    std::shared_ptr<JointDyamicsParams> m_dynamic_params;
+    std::shared_ptr<JointDynamicsParams> m_dynamic_params;
     
 public:
     explicit JointElement(
