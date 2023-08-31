@@ -407,7 +407,6 @@ bool exportJoint(IJointConstPtr joint, LinkConstPtr parentLink, LinkConstPtr chi
 
     if (joint->getJointDynamicsType() == URDFJointDynamics && joint->getNrOfDOFs() == 1)
     {
-
         xmlNodePtr dynamics_xml = xmlNewChild(joint_xml, NULL, BAD_CAST "dynamics", NULL);
         std::string bufStr;
         double damping = 0.0, static_friction = 0.0;

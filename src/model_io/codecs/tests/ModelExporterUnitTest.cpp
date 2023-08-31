@@ -221,6 +221,7 @@ void testFramesNotInTraversal() {
 
 int main()
 {
+    // IDYNTREE_TESTS_URDFS_NR
     for(unsigned int mdl = 0; mdl < IDYNTREE_TESTS_URDFS_NR; mdl++ )
     {
         if (std::string(IDYNTREE_TESTS_URDFS[mdl]) == "bigman.urdf")

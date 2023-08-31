@@ -34,6 +34,7 @@ RevoluteJoint::RevoluteJoint():
     this->resetAxisBuffers();
     this->resetBuffers(0);
     this->disablePosLimits();
+    this->resetJointDynamics();
 }
 
 RevoluteJoint::RevoluteJoint(const LinkIndex _link1, const LinkIndex _link2,

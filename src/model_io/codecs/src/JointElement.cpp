@@ -18,7 +18,6 @@
 #include <iDynTree/XMLAttribute.h>
 #include <iDynTree/XMLParser.h>
 
-#include <iDynTree/Model/IJoint.h>
 #include <iDynTree/Model/FixedJoint.h>
 #include <iDynTree/Model/PrismaticJoint.h>
 #include <iDynTree/Model/RevoluteJoint.h>
@@ -134,31 +133,33 @@ namespace iDynTree {
             return std::shared_ptr<XMLElement>(element);
 
         } else if (name == "dynamics") {
-            m_dynamic_params = std::make_shared<DyamicParams>();
+            m_dynamic_params = std::make_shared<JointDyamicsParams>();
             m_dynamic_params->jointDynamicsType = URDFJointDynamics;
             m_dynamic_params->damping = .0;
             m_dynamic_params->staticFriction = .0;
 
             // TODO: check how the defaults/required works
             XMLElement* element = new XMLElement(getParserState(), name);
-            element->setAttributeCallback([this](const std::unordered_map<std::string, std::shared_ptr<XMLAttribute>>& attributes) {
-                auto found = attributes.find("damping");
-                if (found != attributes.end()) {
-                    double value = 0;
-                    if (stringToDoubleWithClassicLocale(found->second->value(), value)) {
-                        m_dynamic_params->damping = value;
+            element->setAttributeCallback(
+                [this](const std::unordered_map<std::string, std::shared_ptr<XMLAttribute>>& attributes) {
+                    auto found = attributes.find("damping");
+                    if (found != attributes.end()) {
+                        double value = 0;
+                        if (stringToDoubleWithClassicLocale(found->second->value(), value)) {
+                            m_dynamic_params->damping = value;
+                        }
                     }
-                }
-                found = attributes.find("friction");
-                if (found != attributes.end()) {
-                    double value = 0;
-                    if (stringToDoubleWithClassicLocale(found->second->value(), value)) {
-                        m_dynamic_params->staticFriction = value;
+                    found = attributes.find("friction");
+                    if (found != attributes.end()) {
+                        double value = 0;
+                        if (stringToDoubleWithClassicLocale(found->second->value(), value)) {
+                            m_dynamic_params->staticFriction = value;
+                        }
                     }
-                }
-                return true;
-                });
-                return std::shared_ptr<XMLElement>(element);
+                    return true;
+                    }
+                );
+            return std::shared_ptr<XMLElement>(element);
         }
         return std::make_shared<XMLElement>(getParserState(), name);
     }
@@ -208,7 +209,7 @@ namespace iDynTree {
                 info.joint->setDamping(0, m_dynamic_params->damping);
                 info.joint->setStaticFriction(0, m_dynamic_params->staticFriction);
             }
-            
+
             if (!map->insert(std::unordered_map<std::string, JointElement::JointInfo>::value_type(m_jointName, info)).second) {
                 std::string errStr = "Duplicate joint " + m_jointName + " found.";
                 reportError("JointElement", "", errStr.c_str());
