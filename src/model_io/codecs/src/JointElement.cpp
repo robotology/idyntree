@@ -207,9 +207,6 @@ namespace iDynTree {
                 info.joint->setJointDynamicsType(URDFJointDynamics);
                 info.joint->setDamping(0, m_dynamic_params->damping);
                 info.joint->setStaticFriction(0, m_dynamic_params->staticFriction);
-            } else if (m_jointType == "revolute" || m_jointType == "prismatic") {
-                std::string errStr = "Joint " + m_jointName + " misses the dynamics tag.";
-                reportWarning("JointElement", "", errStr.c_str());
             }
             
             if (!map->insert(std::unordered_map<std::string, JointElement::JointInfo>::value_type(m_jointName, info)).second) {
