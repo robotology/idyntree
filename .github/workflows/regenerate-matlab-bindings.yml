@@ -34,8 +34,7 @@ jobs:
             sudo apt-get update
             sudo apt-get install \
             git build-essential cmake libace-dev coinor-libipopt-dev libeigen3-dev \
-            qtbase5-dev qtdeclarative5-dev qtmultimedia5-dev libqt5charts5-dev \
-            libxml2-dev liboctave-dev python-dev python3-numpy valgrind libassimp-dev libirrlicht-dev
+            libxml2-dev liboctave-dev python-dev python3-numpy valgrind libassimp-dev libirrlicht-dev libglfw3-dev
             which swig 
             swig --help
             # Remove autogenerate files to ensure that removed files are actually removed
