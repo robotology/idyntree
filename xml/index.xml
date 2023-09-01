@@ -964,6 +964,7 @@
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a5d44956cd4c5a64c2c3397fce2c9edd8" kind="function"><name>updateKinematicsFromFloatingBase</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a988f7114c5e0661ddd931d98c04645c9" kind="function"><name>updateKinematicsFromFixedBase</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a903f0fca32abdb551ffe7eda013ce462" kind="function"><name>computeExpectedFTSensorsMeasurements</name></member>
+    <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1ace39d234b8ab82cbdcce3bb49673a794" kind="function"><name>computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a9abd2346013d2a811c5336255323962b" kind="function"><name>estimateExtWrenchesAndJointTorques</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1a584e5d2ca3426529f407dbb5248f290e" kind="function"><name>checkThatTheModelIsStill</name></member>
     <member refid="classiDynTree_1_1ExtWrenchesAndJointTorquesEstimator_1ad52d10a9a145eba8d52c67ea65128554" kind="function"><name>estimateLinkNetWrenchesWithoutGravity</name></member>
