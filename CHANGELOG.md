@@ -8,9 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added the possibility of exporting additional XML elements that are added as child of the `<robot>` element in URDF ModelExporter (https://github.com/robotology/idyntree/pull/1088).
+- Added support for reading and wrting joint friction and damping values from URDF files (https://github.com/robotology/idyntree/pull/1094).
+
 ### Changed
 
 - The license of the library is changed to `BSD-3-Clause` (https://github.com/robotology/idyntree/pull/1089).
+- The `iDynTree::ModelExporterOptions` class was changed to be defined as a struct (https://github.com/robotology/idyntree/pull/1088).
+
 
 ## [9.1.0] - 2023-05-25
 
