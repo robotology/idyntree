@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structiDynTree_1_1JointElement_1_1JointDynamicsParams" kind="struct" language="C++" prot="private">
+    <compoundname>iDynTree::JointElement::JointDynamicsParams</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structiDynTree_1_1JointElement_1_1JointDynamicsParams_1ab1e8b89611e52cac89f52808e0e81c18" prot="public" static="no" mutable="no">
+        <type>JointDynamicsType</type>
+        <definition>JointDynamicsType iDynTree::JointElement::JointDynamicsParams::jointDynamicsType</definition>
+        <argsstring></argsstring>
+        <name>jointDynamicsType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="56" column="27" bodyfile="private/JointElement.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1JointElement_1_1JointDynamicsParams_1a183a00529daa7d927e0fe21035d930d9" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::JointElement::JointDynamicsParams::damping</definition>
+        <argsstring></argsstring>
+        <name>damping</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="57" column="16" bodyfile="private/JointElement.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structiDynTree_1_1JointElement_1_1JointDynamicsParams_1a442a5dbb5ce61c92e486d7be60cbed22" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double iDynTree::JointElement::JointDynamicsParams::staticFriction</definition>
+        <argsstring></argsstring>
+        <name>staticFriction</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="58" column="16" bodyfile="private/JointElement.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="private/JointElement.h" line="55" column="5" bodyfile="private/JointElement.h" bodystart="55" bodyend="59"/>
+    <listofallmembers>
+      <member refid="structiDynTree_1_1JointElement_1_1JointDynamicsParams_1a183a00529daa7d927e0fe21035d930d9" prot="public" virt="non-virtual"><scope>iDynTree::JointElement::JointDynamicsParams</scope><name>damping</name></member>
+      <member refid="structiDynTree_1_1JointElement_1_1JointDynamicsParams_1ab1e8b89611e52cac89f52808e0e81c18" prot="public" virt="non-virtual"><scope>iDynTree::JointElement::JointDynamicsParams</scope><name>jointDynamicsType</name></member>
+      <member refid="structiDynTree_1_1JointElement_1_1JointDynamicsParams_1a442a5dbb5ce61c92e486d7be60cbed22" prot="public" virt="non-virtual"><scope>iDynTree::JointElement::JointDynamicsParams</scope><name>staticFriction</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -50,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="92" column="22"/>
+        <location file="iDynTree/Model/IJoint.h" line="110" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a770aadc1a6e13bce3af213707fcf2d84" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="103" column="22"/>
+        <location file="iDynTree/Model/IJoint.h" line="121" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1abe3efda09a0c3d94c021891de447aaa8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>LinkIndex</type>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="110" column="27"/>
+        <location file="iDynTree/Model/IJoint.h" line="128" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a1c55168bcc2dbd7b1fd58737a6bb46d8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>LinkIndex</type>
@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="115" column="27"/>
+        <location file="iDynTree/Model/IJoint.h" line="133" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a7b6fb4c82687601810f3696e9605f1e0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref></type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="126" column="27"/>
+        <location file="iDynTree/Model/IJoint.h" line="144" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a2b0c23cad4da4e748ecdaf009805f767" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>const <ref refid="classiDynTree_1_1Transform" kindref="compound">Transform</ref> &amp;</type>
@@ -161,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="135" column="34"/>
+        <location file="iDynTree/Model/IJoint.h" line="153" column="34"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a0dd24dad1882bc1df35a1832275fbfbb" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classiDynTree_1_1TransformDerivative" kindref="compound">TransformDerivative</ref></type>
@@ -196,7 +196,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="151" column="37"/>
+        <location file="iDynTree/Model/IJoint.h" line="169" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a3a89b6fd2358c8435e7f794d3857045f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classiDynTree_1_1SpatialMotionVector" kindref="compound">SpatialMotionVector</ref></type>
@@ -234,7 +234,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="183" column="37"/>
+        <location file="iDynTree/Model/IJoint.h" line="201" column="37"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1aa41dbb76816e2621d6924ca052b07881" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -284,7 +284,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="196" column="22"/>
+        <location file="iDynTree/Model/IJoint.h" line="214" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a6d0853757008a1db34d41da9276df81e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -329,7 +329,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="210" column="22"/>
+        <location file="iDynTree/Model/IJoint.h" line="228" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a70c9055aafb46f65fe767664c873625e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -366,7 +366,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="222" column="22"/>
+        <location file="iDynTree/Model/IJoint.h" line="240" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a65509300297221192cb46189b2a473d1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -411,7 +411,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="232" column="22"/>
+        <location file="iDynTree/Model/IJoint.h" line="250" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a3c16a316f95e25ad0af2768cb4c991a3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -452,7 +452,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="244" column="22"/>
+        <location file="iDynTree/Model/IJoint.h" line="262" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a495a50c9623710812f49cf6258ecb68e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -531,7 +531,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="263" column="22"/>
+        <location file="iDynTree/Model/IJoint.h" line="281" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1ac0d964dac9538e66a922b1ae50e7b662" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -551,7 +551,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="273" column="22"/>
+        <location file="iDynTree/Model/IJoint.h" line="291" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a2accdcd6fbf7e222a3c7c6b99130934e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>JointIndex</type>
@@ -567,7 +567,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="278" column="28"/>
+        <location file="iDynTree/Model/IJoint.h" line="296" column="28"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a6c80be1fe40e5a71cc56c4fbe625535f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -587,7 +587,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="285" column="22"/>
+        <location file="iDynTree/Model/IJoint.h" line="303" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1afc71b67f79c9bbdd8f2925ee08ca0323" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>size_t</type>
@@ -603,7 +603,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="291" column="24"/>
+        <location file="iDynTree/Model/IJoint.h" line="309" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1af65fc0f65b8367404848bc41ea87347c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>void</type>
@@ -623,7 +623,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="297" column="22"/>
+        <location file="iDynTree/Model/IJoint.h" line="315" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a64aa264a72088da07844f25176a25bee" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>size_t</type>
@@ -639,7 +639,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="303" column="24"/>
+        <location file="iDynTree/Model/IJoint.h" line="321" column="24"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -666,7 +666,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="324" column="22"/>
+        <location file="iDynTree/Model/IJoint.h" line="342" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a4f0f02e57295ad4b0ec94fe19fc3e0c0" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -690,7 +690,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="332" column="22"/>
+        <location file="iDynTree/Model/IJoint.h" line="350" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1ab734574da90b6d2ae24169ea180a081b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -731,7 +731,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="339" column="22"/>
+        <location file="iDynTree/Model/IJoint.h" line="357" column="22"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a46dbe9dec3ef79f6d5662269f6fe8f65" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>double</type>
@@ -752,7 +752,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="344" column="24"/>
+        <location file="iDynTree/Model/IJoint.h" line="362" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a047913be4f7bdeb35d785e4ad71d5395" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>double</type>
@@ -773,7 +773,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="349" column="24"/>
+        <location file="iDynTree/Model/IJoint.h" line="367" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a63c57d91c3d80a610671f04fcbdd22ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -805,7 +805,203 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="357" column="22"/>
+        <location file="iDynTree/Model/IJoint.h" line="375" column="22"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="user-defined">
+      <header>Joint dynamics methods.</header>
+      <description><para>Methods for handling representation of joint dynamics.</para>
+<para>The precise definition of &quot;joint dynamics&quot; is not precisely, as depending on the specific application the kind of joint dynamics model can be different, and in some case it may be even just instantaneous models (for example, when only the damping is considered).</para>
+<para>For the type of joint dynamics supported, see the iDynTree::JointDynamicsType enum documentation.</para>
+<para>The joint dynamics model are used in the following contexts:<itemizedlist>
+<listitem><para>In methods to serialize and deserialize URDF files</para>
+</listitem></itemizedlist>
+</para>
+<para>The joint dynamics are <bold>not used at all</bold> in classes to compute kinematics and dynamics quantities, such as <ref refid="classiDynTree_1_1KinDynComputations" kindref="compound">iDynTree::KinDynComputations</ref> . </para>
+</description>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a88283dce433282d14bbef2923df51991" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>JointDynamicsType</type>
+        <definition>virtual JointDynamicsType iDynTree::IJoint::getJointDynamicsType</definition>
+        <argsstring>() const =0</argsstring>
+        <name>getJointDynamicsType</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a15b1b6b5394b5a8e5891d1f9c6f76eaa">getJointDynamicsType</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a5996b37c717055239c6c7004c4569ab1">getJointDynamicsType</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1a02116cee53bf5ff75e12dc74e9226f9d">getJointDynamicsType</reimplementedby>
+        <briefdescription>
+<para>Method to get the specific joint dynamics type used for the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>: It is assume that all the degrees of freedom of a joint share the same joint dynamics type.</para>
+</simplesect>
+<simplesect kind="return"><para>the specific joint dynamics type used for the joint. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="401" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a111e73d874ceb657d1dc12652d2bae59" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IJoint::setJointDynamicsType</definition>
+        <argsstring>(const JointDynamicsType enable)=0</argsstring>
+        <name>setJointDynamicsType</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1ab092513e1e87ea380c9a14ac5e2d5152">setJointDynamicsType</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a2b605313e25fe0275a26e6a2e897159f">setJointDynamicsType</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1a825b9d81e7de95679fafcb473b5d05cf">setJointDynamicsType</reimplementedby>
+        <param>
+          <type>const JointDynamicsType</type>
+          <declname>enable</declname>
+        </param>
+        <briefdescription>
+<para>Method to get the specific joint dynamics type used for the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>: It is assume that all the degrees of freedom of a joint share the same joint dynamics type.</para>
+</simplesect>
+<simplesect kind="return"><para>true if everything went correctly, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="409" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a3f7bd7d17f1b4fc9293db61491b8235b" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IJoint::setDamping</definition>
+        <argsstring>(const size_t _index, double &amp;damping)=0</argsstring>
+        <name>setDamping</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a4c3d17770fa1b70fdabccc40cd49628e">setDamping</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a19f03f6f51f848a19579caf86d63de16">setDamping</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1a17a88c97ad95a5f4bc71aedfd41fb7cf">setDamping</reimplementedby>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>damping</declname>
+        </param>
+        <briefdescription>
+<para>Set damping parameter of the joint, for the _index dof. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The damping coefficient is expressed in N∙s/m for a prismatic joint, N∙m∙s/rad for a revolute joint.</para>
+<para>This parameter is considered in the following joint dynamics types:<itemizedlist>
+<listitem><para><computeroutput>URDFJointDynamics</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>index of the dof for which the dynamic parameters are obtained. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if everything is correct, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="421" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1a6e3e9a69cb7639ba4e569cb4bf24444e" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::IJoint::setStaticFriction</definition>
+        <argsstring>(const size_t _index, double &amp;staticFriction)=0</argsstring>
+        <name>setStaticFriction</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a0912b49e9b2d5cd41c52f3218a1c24d6">setStaticFriction</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1ac69cf18efdbabe8e9da3dbd225cd02fc">setStaticFriction</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1a33a03be41e423704f17f94c0c58193db">setStaticFriction</reimplementedby>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>staticFriction</declname>
+        </param>
+        <briefdescription>
+<para>Set static friction parameter of the joint, for the _index dof. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The static friction coefficient is expressed in N for a prismatic joint, N∙m for a revolute joint.</para>
+<para>This parameter is considered in the following joint dynamics types:<itemizedlist>
+<listitem><para><computeroutput>URDFJointDynamics</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>index of the dof for which the dynamic parameters are obtained. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if everything is correct, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="433" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1ac77c3cc0888a52342049ff5436ff532d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::IJoint::getDamping</definition>
+        <argsstring>(const size_t _index) const =0</argsstring>
+        <name>getDamping</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1a1d1a2ce4b8bb1e2d8e540ab38de0d889">getDamping</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1ac97640fe2a6e88a8fc6b1f0cab245d4c">getDamping</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1a9c11645dcc7a2a5a303d7c1de5d7fb89">getDamping</reimplementedby>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Get the damping coefficient of the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The unit is N∙s/m for a prismatic joint, N∙m∙s/rad for a revolute joint.</para>
+<para>This parameter is considered in the following joint dynamics types:<itemizedlist>
+<listitem><para><computeroutput>URDFJointDynamics</computeroutput> </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="442" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1IJoint_1aa51240f3f2f74d9b9115ac679b013d6c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::IJoint::getStaticFriction</definition>
+        <argsstring>(const size_t _index) const =0</argsstring>
+        <name>getStaticFriction</name>
+        <reimplementedby refid="classiDynTree_1_1FixedJoint_1adb45cbcc83ae98382e7f8d01d5f1c864">getStaticFriction</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1PrismaticJoint_1a81ef6901743bbc19b62977d36a933949">getStaticFriction</reimplementedby>
+        <reimplementedby refid="classiDynTree_1_1RevoluteJoint_1a6e6f4824555ea71cc71834f60bc47130">getStaticFriction</reimplementedby>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Get the static friction coefficient of the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The unit is N for a prismatic joint, N∙m for a revolute joint.</para>
+<para>This parameter is considered in the following joint dynamics types:<itemizedlist>
+<listitem><para><computeroutput>URDFJointDynamics</computeroutput> </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="451" column="24"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -821,7 +1017,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="52" column="17"/>
+        <location file="iDynTree/Model/IJoint.h" line="70" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a021ac00a8b2e9e519f930baad1bc1fa2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classiDynTree_1_1IJoint" kindref="compound">IJoint</ref> *</type>
@@ -838,7 +1034,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="57" column="25"/>
+        <location file="iDynTree/Model/IJoint.h" line="75" column="25"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a149ddcf05f6328fdd3ecbe38a0fca4a0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>unsigned int</type>
@@ -858,7 +1054,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="69" column="30"/>
+        <location file="iDynTree/Model/IJoint.h" line="87" column="30"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1IJoint_1a83027b41a495e097b8cf534059516440" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>unsigned int</type>
@@ -878,7 +1074,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="78" column="30"/>
+        <location file="iDynTree/Model/IJoint.h" line="96" column="30"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -922,7 +1118,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
         </childnode>
       </node>
     </inheritancegraph>
-    <location file="iDynTree/Model/IJoint.h" line="45" column="5" bodyfile="iDynTree/Model/IJoint.h" bodystart="46" bodyend="360"/>
+    <location file="iDynTree/Model/IJoint.h" line="63" column="5" bodyfile="iDynTree/Model/IJoint.h" bodystart="64" bodyend="455"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1IJoint_1a021ac00a8b2e9e519f930baad1bc1fa2" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>clone</name></member>
       <member refid="classiDynTree_1_1IJoint_1a65509300297221192cb46189b2a473d1" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>computeChildAcc</name></member>
@@ -932,9 +1128,11 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
       <member refid="classiDynTree_1_1IJoint_1a6d0853757008a1db34d41da9276df81e" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>computeChildVelAcc</name></member>
       <member refid="classiDynTree_1_1IJoint_1a495a50c9623710812f49cf6258ecb68e" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>computeJointTorque</name></member>
       <member refid="classiDynTree_1_1IJoint_1a4f0f02e57295ad4b0ec94fe19fc3e0c0" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>enablePosLimits</name></member>
+      <member refid="classiDynTree_1_1IJoint_1ac77c3cc0888a52342049ff5436ff532d" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getDamping</name></member>
       <member refid="classiDynTree_1_1IJoint_1a64aa264a72088da07844f25176a25bee" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getDOFsOffset</name></member>
       <member refid="classiDynTree_1_1IJoint_1abe3efda09a0c3d94c021891de447aaa8" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getFirstAttachedLink</name></member>
       <member refid="classiDynTree_1_1IJoint_1a2accdcd6fbf7e222a3c7c6b99130934e" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getIndex</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a88283dce433282d14bbef2923df51991" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getJointDynamicsType</name></member>
       <member refid="classiDynTree_1_1IJoint_1a047913be4f7bdeb35d785e4ad71d5395" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getMaxPosLimit</name></member>
       <member refid="classiDynTree_1_1IJoint_1a46dbe9dec3ef79f6d5662269f6fe8f65" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getMinPosLimit</name></member>
       <member refid="classiDynTree_1_1IJoint_1a3a89b6fd2358c8435e7f794d3857045f" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getMotionSubspaceVector</name></member>
@@ -944,15 +1142,19 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1IJoint_1a83027b41a
       <member refid="classiDynTree_1_1IJoint_1ab734574da90b6d2ae24169ea180a081b" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getPosLimits</name></member>
       <member refid="classiDynTree_1_1IJoint_1a7b6fb4c82687601810f3696e9605f1e0" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getRestTransform</name></member>
       <member refid="classiDynTree_1_1IJoint_1a1c55168bcc2dbd7b1fd58737a6bb46d8" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getSecondAttachedLink</name></member>
+      <member refid="classiDynTree_1_1IJoint_1aa51240f3f2f74d9b9115ac679b013d6c" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getStaticFriction</name></member>
       <member refid="classiDynTree_1_1IJoint_1a2b0c23cad4da4e748ecdaf009805f767" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getTransform</name></member>
       <member refid="classiDynTree_1_1IJoint_1a0dd24dad1882bc1df35a1832275fbfbb" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>getTransformDerivative</name></member>
       <member refid="classiDynTree_1_1IJoint_1af4badbd5891621e847a61d767cffd25e" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>hasPosLimits</name></member>
       <member refid="classiDynTree_1_1IJoint_1aafd1101e91ea337a451d62f0160a819c" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setAttachedLinks</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a3f7bd7d17f1b4fc9293db61491b8235b" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setDamping</name></member>
       <member refid="classiDynTree_1_1IJoint_1af65fc0f65b8367404848bc41ea87347c" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setDOFsOffset</name></member>
       <member refid="classiDynTree_1_1IJoint_1ac0d964dac9538e66a922b1ae50e7b662" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setIndex</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a111e73d874ceb657d1dc12652d2bae59" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setJointDynamicsType</name></member>
       <member refid="classiDynTree_1_1IJoint_1a6c80be1fe40e5a71cc56c4fbe625535f" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setPosCoordsOffset</name></member>
       <member refid="classiDynTree_1_1IJoint_1a63c57d91c3d80a610671f04fcbdd22ff" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setPosLimits</name></member>
       <member refid="classiDynTree_1_1IJoint_1a770aadc1a6e13bce3af213707fcf2d84" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setRestTransform</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a6e3e9a69cb7639ba4e569cb4bf24444e" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>setStaticFriction</name></member>
       <member refid="classiDynTree_1_1IJoint_1ac989ee81d08959eca68666aa6740cb16" prot="public" virt="pure-virtual"><scope>iDynTree::IJoint</scope><name>~IJoint</name></member>
     </listofallmembers>
   </compounddef>

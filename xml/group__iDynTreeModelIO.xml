@@ -4,7 +4,7 @@
     <compoundname>iDynTreeModelIO</compoundname>
     <title>%iDynTree model data structures</title>
     <innerclass refid="classiDynTree_1_1ModelCalibrationHelper" prot="public">iDynTree::ModelCalibrationHelper</innerclass>
-    <innerclass refid="classiDynTree_1_1ModelExporterOptions" prot="public">iDynTree::ModelExporterOptions</innerclass>
+    <innerclass refid="structiDynTree_1_1ModelExporterOptions" prot="public">iDynTree::ModelExporterOptions</innerclass>
     <innerclass refid="classiDynTree_1_1ModelExporter" prot="public">iDynTree::ModelExporter</innerclass>
     <innerclass refid="structiDynTree_1_1ModelParserOptions" prot="public">iDynTree::ModelParserOptions</innerclass>
     <innerclass refid="classiDynTree_1_1ModelLoader" prot="public">iDynTree::ModelLoader</innerclass>
@@ -81,7 +81,7 @@
 <para>Export a <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> object to a URDF file. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="see"><para><ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref> for more details on supported and default options.</para>
+<para><simplesect kind="see"><para><ref refid="structiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref> for more details on supported and default options.</para>
 </simplesect>
 <simplesect kind="warning"><para>This function does not support exporting sensor or solid shapes at the moment.</para>
 </simplesect>
@@ -98,7 +98,7 @@
 <parametername direction="in">options</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>the <ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref> struct of options passed to the parser. </para>
+<para>the <ref refid="structiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref> struct of options passed to the parser. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -132,7 +132,7 @@
 <para>Export a <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> object to a URDF string. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="see"><para><ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref> for more details on supported and default options.</para>
+<para><simplesect kind="see"><para><ref refid="structiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref> for more details on supported and default options.</para>
 </simplesect>
 <simplesect kind="warning"><para>This function does not support exporting sensor or solid shapes at the moment.</para>
 </simplesect>
@@ -141,7 +141,7 @@
 <parametername direction="in">options</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>the <ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref> struct of options passed to the parser. </para>
+<para>the <ref refid="structiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref> struct of options passed to the parser. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>

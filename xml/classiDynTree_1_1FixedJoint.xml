@@ -988,6 +988,178 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </inbodydescription>
         <location file="iDynTree/Model/FixedJoint.h" line="177" column="22"/>
       </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a15b1b6b5394b5a8e5891d1f9c6f76eaa" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>JointDynamicsType</type>
+        <definition>virtual JointDynamicsType iDynTree::FixedJoint::getJointDynamicsType</definition>
+        <argsstring>() const</argsstring>
+        <name>getJointDynamicsType</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a88283dce433282d14bbef2923df51991">getJointDynamicsType</reimplements>
+        <briefdescription>
+<para>Method to get the specific joint dynamics type used for the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>: It is assume that all the degrees of freedom of a joint share the same joint dynamics type.</para>
+</simplesect>
+<simplesect kind="return"><para>the specific joint dynamics type used for the joint. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="180" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1ab092513e1e87ea380c9a14ac5e2d5152" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::FixedJoint::setJointDynamicsType</definition>
+        <argsstring>(const JointDynamicsType enable)</argsstring>
+        <name>setJointDynamicsType</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a111e73d874ceb657d1dc12652d2bae59">setJointDynamicsType</reimplements>
+        <param>
+          <type>const JointDynamicsType</type>
+          <declname>enable</declname>
+        </param>
+        <briefdescription>
+<para>Method to get the specific joint dynamics type used for the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>: It is assume that all the degrees of freedom of a joint share the same joint dynamics type.</para>
+</simplesect>
+<simplesect kind="return"><para>true if everything went correctly, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="181" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a1d1a2ce4b8bb1e2d8e540ab38de0d889" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::FixedJoint::getDamping</definition>
+        <argsstring>(const size_t _index) const</argsstring>
+        <name>getDamping</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1ac77c3cc0888a52342049ff5436ff532d">getDamping</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Get the damping coefficient of the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The unit is N∙s/m for a prismatic joint, N∙m∙s/rad for a revolute joint.</para>
+<para>This parameter is considered in the following joint dynamics types:<itemizedlist>
+<listitem><para><computeroutput>URDFJointDynamics</computeroutput> </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="182" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1adb45cbcc83ae98382e7f8d01d5f1c864" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>virtual double iDynTree::FixedJoint::getStaticFriction</definition>
+        <argsstring>(const size_t _index) const</argsstring>
+        <name>getStaticFriction</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1aa51240f3f2f74d9b9115ac679b013d6c">getStaticFriction</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <briefdescription>
+<para>Get the static friction coefficient of the joint. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The unit is N for a prismatic joint, N∙m for a revolute joint.</para>
+<para>This parameter is considered in the following joint dynamics types:<itemizedlist>
+<listitem><para><computeroutput>URDFJointDynamics</computeroutput> </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="183" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a4c3d17770fa1b70fdabccc40cd49628e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::FixedJoint::setDamping</definition>
+        <argsstring>(const size_t _index, double &amp;damping)</argsstring>
+        <name>setDamping</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a3f7bd7d17f1b4fc9293db61491b8235b">setDamping</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>damping</declname>
+        </param>
+        <briefdescription>
+<para>Set damping parameter of the joint, for the _index dof. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The damping coefficient is expressed in N∙s/m for a prismatic joint, N∙m∙s/rad for a revolute joint.</para>
+<para>This parameter is considered in the following joint dynamics types:<itemizedlist>
+<listitem><para><computeroutput>URDFJointDynamics</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>index of the dof for which the dynamic parameters are obtained. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if everything is correct, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="184" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classiDynTree_1_1FixedJoint_1a0912b49e9b2d5cd41c52f3218a1c24d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>virtual bool iDynTree::FixedJoint::setStaticFriction</definition>
+        <argsstring>(const size_t _index, double &amp;staticFriction)</argsstring>
+        <name>setStaticFriction</name>
+        <reimplements refid="classiDynTree_1_1IJoint_1a6e3e9a69cb7639ba4e569cb4bf24444e">setStaticFriction</reimplements>
+        <param>
+          <type>const size_t</type>
+          <declname>_index</declname>
+        </param>
+        <param>
+          <type>double &amp;</type>
+          <declname>staticFriction</declname>
+        </param>
+        <briefdescription>
+<para>Set static friction parameter of the joint, for the _index dof. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The static friction coefficient is expressed in N for a prismatic joint, N∙m for a revolute joint.</para>
+<para>This parameter is considered in the following joint dynamics types:<itemizedlist>
+<listitem><para><computeroutput>URDFJointDynamics</computeroutput></para>
+</listitem></itemizedlist>
+</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">_index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>index of the dof for which the dynamic parameters are obtained. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if everything is correct, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/FixedJoint.h" line="185" column="22"/>
+      </memberdef>
       </sectiondef>
     <briefdescription>
 <para>Class representing a fixed joint, i.e. </para>
@@ -1019,7 +1191,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="iDynTree/Model/FixedJoint.h" line="19" column="5" bodyfile="iDynTree/Model/FixedJoint.h" bodystart="20" bodyend="178"/>
+    <location file="iDynTree/Model/FixedJoint.h" line="19" column="5" bodyfile="iDynTree/Model/FixedJoint.h" bodystart="20" bodyend="186"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1FixedJoint_1ae7ca38464efead3a54939a67e7e45077" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>clone</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1aa8a7f22a0c0211286337ad6618356f01" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>computeChildAcc</name></member>
@@ -1033,9 +1205,11 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
       <member refid="classiDynTree_1_1FixedJoint_1a0cfd93dca7169f99a116c46270432b9c" prot="public" virt="non-virtual"><scope>iDynTree::FixedJoint</scope><name>FixedJoint</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1a2d8b3c4a9c19bf932775d5a83d7d2c67" prot="public" virt="non-virtual"><scope>iDynTree::FixedJoint</scope><name>FixedJoint</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1aa625db20fbc6f0683efe90b49ee8f9be" prot="public" virt="non-virtual"><scope>iDynTree::FixedJoint</scope><name>FixedJoint</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a1d1a2ce4b8bb1e2d8e540ab38de0d889" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getDamping</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1ac88c5b5c3731a56715fea48c2cf87323" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getDOFsOffset</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1a826fcc8006393854c2309de92d3fbef2" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getFirstAttachedLink</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1a2932d75d7bcb8717a7dc66de9f8f4ea4" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getIndex</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a15b1b6b5394b5a8e5891d1f9c6f76eaa" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getJointDynamicsType</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1a68f354b50ed5b9c073085f58686236e0" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getMaxPosLimit</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1a1d2f185b2a43a3efd46e3d40a90ea653" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getMinPosLimit</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1aa103b6aee2a08ed32b7688f01e3c10fe" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getMotionSubspaceVector</name></member>
@@ -1045,6 +1219,7 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
       <member refid="classiDynTree_1_1FixedJoint_1a768fb933c761bdcc63ee9d60ea1a9214" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getPosLimits</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1a11d92b8cc4f0df088f0eb972e9c70b63" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getRestTransform</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1ac7311235bf7b08357a153c1321bed081" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getSecondAttachedLink</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1adb45cbcc83ae98382e7f8d01d5f1c864" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getStaticFriction</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1a09dddd2e6d0fc043c6ffa0681b15404c" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getTransform</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1aac231749bf30745780aec0d876fd82ed" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>getTransformDerivative</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1ac14e8020830993efd145171a5c098197" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>hasPosLimits</name></member>
@@ -1056,11 +1231,14 @@ If dof_i is not &gt;= 0 and &lt; <ref refid="classiDynTree_1_1FixedJoint_1a19708
       <member refid="classiDynTree_1_1FixedJoint_1a12646ce63f11cc02abde41fe13e1487f" prot="private" virt="non-virtual"><scope>iDynTree::FixedJoint</scope><name>m_index</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1a3f18fa59745d646643153a82e76ccb24" prot="private" virt="non-virtual"><scope>iDynTree::FixedJoint</scope><name>m_posCoordsOffset</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1a252dce83332fd752932d3c112512a733" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setAttachedLinks</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a4c3d17770fa1b70fdabccc40cd49628e" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setDamping</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1ac94388992a67d161d7b6498219e26da7" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setDOFsOffset</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1aff64953756add9df5c66cb2dedd08107" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setIndex</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1ab092513e1e87ea380c9a14ac5e2d5152" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setJointDynamicsType</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1a9d0e650f359f3bfec60fffe44ae7e879" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setPosCoordsOffset</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1ab64556dab725cdd0634d3ad4fca9311b" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setPosLimits</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1a1d24cec7f90a2b916a9f3ed7d3d49dab" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setRestTransform</name></member>
+      <member refid="classiDynTree_1_1FixedJoint_1a0912b49e9b2d5cd41c52f3218a1c24d6" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>setStaticFriction</name></member>
       <member refid="classiDynTree_1_1FixedJoint_1a77f5cd096856c52a5694b7431d743d35" prot="public" virt="virtual"><scope>iDynTree::FixedJoint</scope><name>~FixedJoint</name></member>
       <member refid="classiDynTree_1_1IJoint_1ac989ee81d08959eca68666aa6740cb16" prot="public" virt="pure-virtual"><scope>iDynTree::FixedJoint</scope><name>~IJoint</name></member>
     </listofallmembers>

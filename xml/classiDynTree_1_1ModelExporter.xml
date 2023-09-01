@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelExporter.h" line="123" column="5"/>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="129" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1a0797985ef2e2cebb8bf25c0c0e4ed18b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelExporter.h" line="125" column="5"/>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="131" column="5"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="user-defined">
@@ -38,7 +38,7 @@
       <description><para>This methods are used to export the structure of your model. </para>
 </description>
       <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1ac7eee90d88819d3697225c412d6717d0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>const <ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref> &amp;</type>
+        <type>const <ref refid="structiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref> &amp;</type>
         <definition>const ModelExporterOptions&amp; iDynTree::ModelExporter::exportingOptions</definition>
         <argsstring>() const</argsstring>
         <name>exportingOptions</name>
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelExporter.h" line="134" column="32"/>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="140" column="32"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1aa7babe5fc2794ed01d3ba46c4a0ae041" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -56,7 +56,7 @@
         <argsstring>(const ModelExporterOptions &amp;options)</argsstring>
         <name>setExportingOptions</name>
         <param>
-          <type>const <ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref> &amp;</type>
+          <type>const <ref refid="structiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref> &amp;</type>
           <declname>options</declname>
         </param>
         <briefdescription>
@@ -65,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelExporter.h" line="136" column="10"/>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="142" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1a9fb6599971ddb3e6b081321952818042" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -82,9 +82,9 @@
           <defval><ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref>()</defval>
         </param>
         <param>
-          <type>const <ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref></type>
+          <type>const <ref refid="structiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref></type>
           <declname>options</declname>
-          <defval><ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref>()</defval>
+          <defval><ref refid="structiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref>()</defval>
         </param>
         <briefdescription>
 <para>Specifies the model of the robot to export. </para>
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelExporter.h" line="146" column="10"/>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="152" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1a2a8eff680e7a14c66dafe5a9360d89a8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1Model" kindref="compound">Model</ref> &amp;</type>
@@ -135,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelExporter.h" line="154" column="18"/>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="160" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1a8c208f8c87d5f6fae8faef6460a561ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>const <ref refid="classiDynTree_1_1SensorsList" kindref="compound">SensorsList</ref> &amp;</type>
@@ -149,7 +149,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelExporter.h" line="159" column="24"/>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="165" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1abcbf9a179e9f6a2da5c2fc59ea2c83e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -166,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelExporter.h" line="166" column="10"/>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="172" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1ab5523d12f0411456625313c8e51f8d8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -207,7 +207,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelExporter.h" line="175" column="10"/>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="181" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1ModelExporter_1ad528cdb40626b05dabd44ada1f322692" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -248,7 +248,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelExporter.h" line="186" column="10"/>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="192" column="10"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="private-attrib">
@@ -263,7 +263,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/ModelIO/ModelExporter.h" line="111" column="21" bodyfile="iDynTree/ModelIO/ModelExporter.h" bodystart="110" bodyend="-1"/>
+        <location file="iDynTree/ModelIO/ModelExporter.h" line="117" column="21" bodyfile="iDynTree/ModelIO/ModelExporter.h" bodystart="116" bodyend="-1"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -298,11 +298,11 @@
 <sect2 id="classiDynTree_1_1ModelExporter_1autotoc_md6">
 <title>URDF</title>
 <para>As the URDF format does not distinguish between frames and links (see <ulink url="https://discourse.ros.org/t/urdf-ng-link-and-frame-concepts/56">https://discourse.ros.org/t/urdf-ng-link-and-frame-concepts/56</ulink> for an extensive discussion on this) the URDF model exporter converts iDynTree&apos;s <emphasis>additional frames</emphasis> to mass-less and shape-less <emphasis>fake</emphasis> URDF links that are connected as child links via <computeroutput>fixed</computeroutput> joints to the corresponding <bold>real</bold> URDF links.</para>
-<para>Furthermore, it is widespread use in URDF models to never use a real link (with mass) as the root link of a model, mainly due to workaround a bug in official KDL parser used in ROS (see <ulink url="https://github.com/ros/kdl_parser/issues/27">https://github.com/ros/kdl_parser/issues/27</ulink> for more info). For this reason, if the selected base_link has at least one additional frame, by default the first additional frame of the base link is added as a <bold>parent</bold> fake URDF link, instead as a <bold>child</bold> fake URDF link as done with the rest of iDynTree&apos;s additional frames. If no additional frame is available for the base link, the base link of the URDF will have a mass, and will generate a warning then used with the ROS&apos;s <ulink url="https://github.com/ros/kdl_parser"><computeroutput>kdl_parser</computeroutput></ulink> . This behaviour can be disabled by setting to false the <computeroutput>exportFirstBaseLinkAdditionalFrameAsFakeURDFBase</computeroutput> attribute of <ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref>. </para>
+<para>Furthermore, it is widespread use in URDF models to never use a real link (with mass) as the root link of a model, mainly due to workaround a bug in official KDL parser used in ROS (see <ulink url="https://github.com/ros/kdl_parser/issues/27">https://github.com/ros/kdl_parser/issues/27</ulink> for more info). For this reason, if the selected base_link has at least one additional frame, by default the first additional frame of the base link is added as a <bold>parent</bold> fake URDF link, instead as a <bold>child</bold> fake URDF link as done with the rest of iDynTree&apos;s additional frames. If no additional frame is available for the base link, the base link of the URDF will have a mass, and will generate a warning then used with the ROS&apos;s <ulink url="https://github.com/ros/kdl_parser"><computeroutput>kdl_parser</computeroutput></ulink> . This behaviour can be disabled by setting to false the <computeroutput>exportFirstBaseLinkAdditionalFrameAsFakeURDFBase</computeroutput> attribute of <ref refid="structiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref>. </para>
 </sect2>
 </sect1>
     </detaileddescription>
-    <location file="iDynTree/ModelIO/ModelExporter.h" line="106" column="1" bodyfile="iDynTree/ModelIO/ModelExporter.h" bodystart="107" bodyend="188"/>
+    <location file="iDynTree/ModelIO/ModelExporter.h" line="112" column="1" bodyfile="iDynTree/ModelIO/ModelExporter.h" bodystart="113" bodyend="194"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1ModelExporter_1ac7eee90d88819d3697225c412d6717d0" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporter</scope><name>exportingOptions</name></member>
       <member refid="classiDynTree_1_1ModelExporter_1ad528cdb40626b05dabd44ada1f322692" prot="public" virt="non-virtual"><scope>iDynTree::ModelExporter</scope><name>exportModelToFile</name></member>

@@ -276,6 +276,32 @@
               double&amp; max) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
             </dt>
             <dd>Set the position limits for a dof the joint.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a15b1b6b5394b5a8e5891d1f9c6f76eaa" class="m-doc">getJointDynamicsType</a>(</span><span class="m-doc-wrap">) const -&gt; JointDynamicsType <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Method to get the specific joint dynamics type used for the joint.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#ab092513e1e87ea380c9a14ac5e2d5152" class="m-doc">setJointDynamicsType</a>(</span><span class="m-doc-wrap">const JointDynamicsType enable) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Method to get the specific joint dynamics type used for the joint.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a1d1a2ce4b8bb1e2d8e540ab38de0d889" class="m-doc">getDamping</a>(</span><span class="m-doc-wrap">const size_t _index) const -&gt; double <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Get the damping coefficient of the joint.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#adb45cbcc83ae98382e7f8d01d5f1c864" class="m-doc">getStaticFriction</a>(</span><span class="m-doc-wrap">const size_t _index) const -&gt; double <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Get the static friction coefficient of the joint.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a4c3d17770fa1b70fdabccc40cd49628e" class="m-doc">setDamping</a>(</span><span class="m-doc-wrap">const size_t _index,
+              double&amp; damping) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Set damping parameter of the joint, for the _index dof.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">auto <a href="#a0912b49e9b2d5cd41c52f3218a1c24d6" class="m-doc">setStaticFriction</a>(</span><span class="m-doc-wrap">const size_t _index,
+              double&amp; staticFriction) -&gt; bool <span class="m-label m-flat m-warning">virtual</span></span>
+            </dt>
+            <dd>Set static friction parameter of the joint, for the _index dof.</dd>
           </dl>
         </section>
         <section>
@@ -556,6 +582,108 @@ $q$
             </h3>
             <p>Set the position limits for a dof the joint.</p>
 <aside class="m-note m-info"><h4>Note</h4><p>This just sets the internal position limits of the joint. To set them as enabled, you need to call the enablePosLimits(true) method.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a15b1b6b5394b5a8e5891d1f9c6f76eaa"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">JointDynamicsType iDynTree::<wbr />FixedJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a15b1b6b5394b5a8e5891d1f9c6f76eaa" class="m-doc-self">getJointDynamicsType</a>(</span><span class="m-doc-wrap">) const <span class="m-label m-warning">virtual</span></span></span>
+            </h3>
+            <p>Method to get the specific joint dynamics type used for the joint.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>the specific joint dynamics type used for the joint.</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>: It is assume that all the degrees of freedom of a joint share the same joint dynamics type.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="ab092513e1e87ea380c9a14ac5e2d5152"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />FixedJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#ab092513e1e87ea380c9a14ac5e2d5152" class="m-doc-self">setJointDynamicsType</a>(</span><span class="m-doc-wrap">const JointDynamicsType enable) <span class="m-label m-warning">virtual</span></span></span>
+            </h3>
+            <p>Method to get the specific joint dynamics type used for the joint.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <tfoot>
+                <tr>
+                  <th style="width: 1%">Returns</th>
+                  <td>true if everything went correctly, false otherwise</td>
+                </tr>
+              </tfoot>
+            </table>
+<aside class="m-note m-info"><h4>Note</h4><p>: It is assume that all the degrees of freedom of a joint share the same joint dynamics type.</p></aside>
+          </div></section>
+          <section class="m-doc-details" id="a1d1a2ce4b8bb1e2d8e540ab38de0d889"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">double iDynTree::<wbr />FixedJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a1d1a2ce4b8bb1e2d8e540ab38de0d889" class="m-doc-self">getDamping</a>(</span><span class="m-doc-wrap">const size_t _index) const <span class="m-label m-warning">virtual</span></span></span>
+            </h3>
+            <p>Get the damping coefficient of the joint.</p>
+<p>The unit is N∙s/m for a prismatic joint, N∙m∙s/rad for a revolute joint.</p><p>This parameter is considered in the following joint dynamics types:</p><ul><li><code>URDFJointDynamics</code></li></ul>
+          </div></section>
+          <section class="m-doc-details" id="adb45cbcc83ae98382e7f8d01d5f1c864"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">double iDynTree::<wbr />FixedJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#adb45cbcc83ae98382e7f8d01d5f1c864" class="m-doc-self">getStaticFriction</a>(</span><span class="m-doc-wrap">const size_t _index) const <span class="m-label m-warning">virtual</span></span></span>
+            </h3>
+            <p>Get the static friction coefficient of the joint.</p>
+<p>The unit is N for a prismatic joint, N∙m for a revolute joint.</p><p>This parameter is considered in the following joint dynamics types:</p><ul><li><code>URDFJointDynamics</code></li></ul>
+          </div></section>
+          <section class="m-doc-details" id="a4c3d17770fa1b70fdabccc40cd49628e"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />FixedJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a4c3d17770fa1b70fdabccc40cd49628e" class="m-doc-self">setDamping</a>(</span><span class="m-doc-wrap">const size_t _index,
+              double&amp; damping) <span class="m-label m-warning">virtual</span></span></span>
+            </h3>
+            <p>Set damping parameter of the joint, for the _index dof.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">_index&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>index of the dof for which the dynamic parameters are obtained.</td>
+                </tr>
+                <tr>
+                  <td>damping</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if everything is correct, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The damping coefficient is expressed in N∙s/m for a prismatic joint, N∙m∙s/rad for a revolute joint.</p><p>This parameter is considered in the following joint dynamics types:</p><ul><li><code>URDFJointDynamics</code></li></ul>
+          </div></section>
+          <section class="m-doc-details" id="a0912b49e9b2d5cd41c52f3218a1c24d6"><div>
+            <h3>
+              <span class="m-doc-wrap-bumper">bool iDynTree::<wbr />FixedJoint::<wbr /></span><span class="m-doc-wrap"><span class="m-doc-wrap-bumper"><a href="#a0912b49e9b2d5cd41c52f3218a1c24d6" class="m-doc-self">setStaticFriction</a>(</span><span class="m-doc-wrap">const size_t _index,
+              double&amp; staticFriction) <span class="m-label m-warning">virtual</span></span></span>
+            </h3>
+            <p>Set static friction parameter of the joint, for the _index dof.</p>
+            <table class="m-table m-fullwidth m-flat">
+              <thead>
+                <tr><th colspan="2">Parameters</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1%">_index&nbsp;<span class="m-label m-flat m-info">in</span></td>
+                  <td>index of the dof for which the dynamic parameters are obtained.</td>
+                </tr>
+                <tr>
+                  <td>staticFriction</td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Returns</th>
+                  <td>true if everything is correct, false otherwise.</td>
+                </tr>
+              </tfoot>
+            </table>
+<p>The static friction coefficient is expressed in N for a prismatic joint, N∙m for a revolute joint.</p><p>This parameter is considered in the following joint dynamics types:</p><ul><li><code>URDFJointDynamics</code></li></ul>
           </div></section>
         </section>
       </div>

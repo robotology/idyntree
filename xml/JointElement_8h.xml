@@ -3,6 +3,7 @@
   <compounddef id="JointElement_8h" kind="file" language="C++">
     <compoundname>JointElement.h</compoundname>
     <includes refid="XMLElement_8h" local="no">iDynTree/XMLElement.h</includes>
+    <includes refid="IJoint_8h" local="no">iDynTree/Model/IJoint.h</includes>
     <includes refid="Axis_8h" local="no">iDynTree/Core/Axis.h</includes>
     <includes refid="Transform_8h" local="no">iDynTree/Core/Transform.h</includes>
     <includes local="no">memory</includes>
@@ -34,6 +35,7 @@
     <innerclass refid="classiDynTree_1_1JointElement" prot="public">iDynTree::JointElement</innerclass>
     <innerclass refid="structiDynTree_1_1JointElement_1_1JointInfo" prot="public">iDynTree::JointElement::JointInfo</innerclass>
     <innerclass refid="structiDynTree_1_1JointElement_1_1Limits" prot="private">iDynTree::JointElement::Limits</innerclass>
+    <innerclass refid="structiDynTree_1_1JointElement_1_1JointDynamicsParams" prot="private">iDynTree::JointElement::JointDynamicsParams</innerclass>
     <innernamespace refid="namespaceiDynTree">iDynTree</innernamespace>
     <briefdescription>
     </briefdescription>

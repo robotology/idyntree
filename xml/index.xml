@@ -1011,6 +1011,12 @@
     <member refid="classiDynTree_1_1FixedJoint_1a1d2f185b2a43a3efd46e3d40a90ea653" kind="function"><name>getMinPosLimit</name></member>
     <member refid="classiDynTree_1_1FixedJoint_1a68f354b50ed5b9c073085f58686236e0" kind="function"><name>getMaxPosLimit</name></member>
     <member refid="classiDynTree_1_1FixedJoint_1ab64556dab725cdd0634d3ad4fca9311b" kind="function"><name>setPosLimits</name></member>
+    <member refid="classiDynTree_1_1FixedJoint_1a15b1b6b5394b5a8e5891d1f9c6f76eaa" kind="function"><name>getJointDynamicsType</name></member>
+    <member refid="classiDynTree_1_1FixedJoint_1ab092513e1e87ea380c9a14ac5e2d5152" kind="function"><name>setJointDynamicsType</name></member>
+    <member refid="classiDynTree_1_1FixedJoint_1a1d1a2ce4b8bb1e2d8e540ab38de0d889" kind="function"><name>getDamping</name></member>
+    <member refid="classiDynTree_1_1FixedJoint_1adb45cbcc83ae98382e7f8d01d5f1c864" kind="function"><name>getStaticFriction</name></member>
+    <member refid="classiDynTree_1_1FixedJoint_1a4c3d17770fa1b70fdabccc40cd49628e" kind="function"><name>setDamping</name></member>
+    <member refid="classiDynTree_1_1FixedJoint_1a0912b49e9b2d5cd41c52f3218a1c24d6" kind="function"><name>setStaticFriction</name></member>
   </compound>
   <compound refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator" kind="class"><name>iDynTree::optimalcontrol::integrators::FixedStepIntegrator</name>
     <member refid="classiDynTree_1_1optimalcontrol_1_1integrators_1_1FixedStepIntegrator_1ab5b7266da1fad6d293766fc19a47c905" kind="function"><name>oneStepIntegration</name></member>
@@ -1337,6 +1343,12 @@
     <member refid="classiDynTree_1_1IJoint_1a46dbe9dec3ef79f6d5662269f6fe8f65" kind="function"><name>getMinPosLimit</name></member>
     <member refid="classiDynTree_1_1IJoint_1a047913be4f7bdeb35d785e4ad71d5395" kind="function"><name>getMaxPosLimit</name></member>
     <member refid="classiDynTree_1_1IJoint_1a63c57d91c3d80a610671f04fcbdd22ff" kind="function"><name>setPosLimits</name></member>
+    <member refid="classiDynTree_1_1IJoint_1a88283dce433282d14bbef2923df51991" kind="function"><name>getJointDynamicsType</name></member>
+    <member refid="classiDynTree_1_1IJoint_1a111e73d874ceb657d1dc12652d2bae59" kind="function"><name>setJointDynamicsType</name></member>
+    <member refid="classiDynTree_1_1IJoint_1a3f7bd7d17f1b4fc9293db61491b8235b" kind="function"><name>setDamping</name></member>
+    <member refid="classiDynTree_1_1IJoint_1a6e3e9a69cb7639ba4e569cb4bf24444e" kind="function"><name>setStaticFriction</name></member>
+    <member refid="classiDynTree_1_1IJoint_1ac77c3cc0888a52342049ff5436ff532d" kind="function"><name>getDamping</name></member>
+    <member refid="classiDynTree_1_1IJoint_1aa51240f3f2f74d9b9115ac679b013d6c" kind="function"><name>getStaticFriction</name></member>
     <member refid="classiDynTree_1_1IJoint_1ac989ee81d08959eca68666aa6740cb16" kind="function"><name>~IJoint</name></member>
     <member refid="classiDynTree_1_1IJoint_1a021ac00a8b2e9e519f930baad1bc1fa2" kind="function"><name>clone</name></member>
     <member refid="classiDynTree_1_1IJoint_1a149ddcf05f6328fdd3ecbe38a0fca4a0" kind="function"><name>getNrOfPosCoords</name></member>
@@ -1859,6 +1871,11 @@
     <member refid="classiDynTree_1_1JointDOFsDoubleArray_1a634466c96b990921ee045b50d269acb0" kind="function"><name>isConsistent</name></member>
     <member refid="classiDynTree_1_1JointDOFsDoubleArray_1af32950db5c4fedbd963cdc7e7a2fb982" kind="function"><name>~JointDOFsDoubleArray</name></member>
   </compound>
+  <compound refid="structiDynTree_1_1JointElement_1_1JointDynamicsParams" kind="struct"><name>iDynTree::JointElement::JointDynamicsParams</name>
+    <member refid="structiDynTree_1_1JointElement_1_1JointDynamicsParams_1ab1e8b89611e52cac89f52808e0e81c18" kind="variable"><name>jointDynamicsType</name></member>
+    <member refid="structiDynTree_1_1JointElement_1_1JointDynamicsParams_1a183a00529daa7d927e0fe21035d930d9" kind="variable"><name>damping</name></member>
+    <member refid="structiDynTree_1_1JointElement_1_1JointDynamicsParams_1a442a5dbb5ce61c92e486d7be60cbed22" kind="variable"><name>staticFriction</name></member>
+  </compound>
   <compound refid="classiDynTree_1_1JointElement" kind="class"><name>iDynTree::JointElement</name>
     <member refid="classiDynTree_1_1JointElement_1aa9e5ae922e60cabb1f039d1dfeeaa12c" kind="variable"><name>m_joints</name></member>
     <member refid="classiDynTree_1_1JointElement_1a4ddeca6abcd6d252e73380714a912b0d" kind="variable"><name>m_fixedJoints</name></member>
@@ -1869,6 +1886,7 @@
     <member refid="classiDynTree_1_1JointElement_1a640e6ef4d4464ca3d3d4552359e8d0ca" kind="variable"><name>m_parentLink</name></member>
     <member refid="classiDynTree_1_1JointElement_1a61a914cdd9f991767029c7c48f9ca90d" kind="variable"><name>m_childLink</name></member>
     <member refid="classiDynTree_1_1JointElement_1a2db2092f3d3eb70ef1eb6a638d4050ef" kind="variable"><name>m_limits</name></member>
+    <member refid="classiDynTree_1_1JointElement_1a4d137eb629b09c3b11591c4800694d8b" kind="variable"><name>m_dynamic_params</name></member>
     <member refid="classiDynTree_1_1JointElement_1a05d539f4bccba496b0453e47c58c23e9" kind="function"><name>JointElement</name></member>
     <member refid="classiDynTree_1_1JointElement_1a48e357fff5a0e1fb9899792b4192960d" kind="function"><name>setAttributes</name></member>
     <member refid="classiDynTree_1_1JointElement_1a38083484b2799575b507ba2865c6b4f3" kind="function"><name>childElementForName</name></member>
@@ -2474,11 +2492,12 @@
     <member refid="classiDynTree_1_1ModelExporter_1ad528cdb40626b05dabd44ada1f322692" kind="function"><name>exportModelToFile</name></member>
     <member refid="classiDynTree_1_1ModelExporter_1ac60db32473a7c24daac48ac9627563db" kind="variable"><name>m_pimpl</name></member>
   </compound>
-  <compound refid="classiDynTree_1_1ModelExporterOptions" kind="class"><name>iDynTree::ModelExporterOptions</name>
-    <member refid="classiDynTree_1_1ModelExporterOptions_1af9ebe6e5ba3d83f9f8bf82a793161e07" kind="variable"><name>baseLink</name></member>
-    <member refid="classiDynTree_1_1ModelExporterOptions_1a776c8f98ae5c58e038e3a1962f9fd318" kind="variable"><name>exportFirstBaseLinkAdditionalFrameAsFakeURDFBase</name></member>
-    <member refid="classiDynTree_1_1ModelExporterOptions_1acc4e1f0ecb310fca1c6c632ff52cbf8a" kind="variable"><name>robotExportedName</name></member>
-    <member refid="classiDynTree_1_1ModelExporterOptions_1a5c7580ca273c3bc9c1311e9e4e5aff3c" kind="function"><name>ModelExporterOptions</name></member>
+  <compound refid="structiDynTree_1_1ModelExporterOptions" kind="struct"><name>iDynTree::ModelExporterOptions</name>
+    <member refid="structiDynTree_1_1ModelExporterOptions_1af9ebe6e5ba3d83f9f8bf82a793161e07" kind="variable"><name>baseLink</name></member>
+    <member refid="structiDynTree_1_1ModelExporterOptions_1a776c8f98ae5c58e038e3a1962f9fd318" kind="variable"><name>exportFirstBaseLinkAdditionalFrameAsFakeURDFBase</name></member>
+    <member refid="structiDynTree_1_1ModelExporterOptions_1acc4e1f0ecb310fca1c6c632ff52cbf8a" kind="variable"><name>robotExportedName</name></member>
+    <member refid="structiDynTree_1_1ModelExporterOptions_1a3f29164afc0150a7e4bb867bb4cd87ec" kind="variable"><name>xmlBlobs</name></member>
+    <member refid="structiDynTree_1_1ModelExporterOptions_1a5c7580ca273c3bc9c1311e9e4e5aff3c" kind="function"><name>ModelExporterOptions</name></member>
   </compound>
   <compound refid="classiDynTree_1_1ModelLoader" kind="class"><name>iDynTree::ModelLoader</name>
     <member refid="classiDynTree_1_1ModelLoader_1a17284e5e46f1f2ff2d3d74a32442d362" kind="function"><name>ModelLoader</name></member>
@@ -2850,12 +2869,16 @@
     <member refid="classiDynTree_1_1PrismaticJoint_1a375259f12a9804bf9482e27a3cdca74a" kind="variable"><name>m_hasPosLimits</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a668879821383b2858ea3f9079cee842b" kind="variable"><name>m_minPos</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a1f5bdda35aa1d796773d570517693ae5" kind="variable"><name>m_maxPos</name></member>
+    <member refid="classiDynTree_1_1PrismaticJoint_1affcbbcde843f22f4a82ecd0abe8d5959" kind="variable"><name>m_joint_dynamics_type</name></member>
+    <member refid="classiDynTree_1_1PrismaticJoint_1a2127635356b5f4a94406eb48d3b4b6e2" kind="variable"><name>m_damping</name></member>
+    <member refid="classiDynTree_1_1PrismaticJoint_1a32e577b27db3673f0f46d3e90718ba0b" kind="variable"><name>m_static_friction</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1abd0f4f96717e4322fd0a786ba9197754" kind="variable"><name>q_previous</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a21357cd473ebb1ace3ad1d8be047bbc0" kind="variable"><name>link1_X_link2</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a6d884f6b58c3fab743af56a65d2ca9a4" kind="variable"><name>link2_X_link1</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a4851266f2394dc6907522ba7d0113030" kind="variable"><name>S_link1_link2</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1ae8bc56ca5557142f172e996639533131" kind="variable"><name>S_link2_link1</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1ababcade9ad1d46f97912883b78c9111c" kind="function"><name>disablePosLimits</name></member>
+    <member refid="classiDynTree_1_1PrismaticJoint_1ad5909faf79ce873324da7c5310f98e61" kind="function"><name>resetJointDynamics</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a5352289b3185771ca66b6163a32717c8" kind="function"><name>updateBuffers</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a693283039138367a864d05a97f1d48bb" kind="function"><name>resetBuffers</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a81d5439e47c00f25b57d4e7f4e351f0b" kind="function"><name>resetAxisBuffers</name></member>
@@ -2887,6 +2910,12 @@
     <member refid="classiDynTree_1_1PrismaticJoint_1a8c978202c47f891a9060c8a6c8cfbb5c" kind="function"><name>getMinPosLimit</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a8824f586b55d5a1c4c6348ed1264c7b1" kind="function"><name>getMaxPosLimit</name></member>
     <member refid="classiDynTree_1_1PrismaticJoint_1a52256e40dd9de343d01815f8b5020569" kind="function"><name>setPosLimits</name></member>
+    <member refid="classiDynTree_1_1PrismaticJoint_1a5996b37c717055239c6c7004c4569ab1" kind="function"><name>getJointDynamicsType</name></member>
+    <member refid="classiDynTree_1_1PrismaticJoint_1a2b605313e25fe0275a26e6a2e897159f" kind="function"><name>setJointDynamicsType</name></member>
+    <member refid="classiDynTree_1_1PrismaticJoint_1ac97640fe2a6e88a8fc6b1f0cab245d4c" kind="function"><name>getDamping</name></member>
+    <member refid="classiDynTree_1_1PrismaticJoint_1a81ef6901743bbc19b62977d36a933949" kind="function"><name>getStaticFriction</name></member>
+    <member refid="classiDynTree_1_1PrismaticJoint_1a19f03f6f51f848a19579caf86d63de16" kind="function"><name>setDamping</name></member>
+    <member refid="classiDynTree_1_1PrismaticJoint_1ac69cf18efdbabe8e9da3dbd225cd02fc" kind="function"><name>setStaticFriction</name></member>
   </compound>
   <compound refid="classiDynTree_1_1optimalcontrol_1_1QuadraticCost" kind="class"><name>iDynTree::optimalcontrol::QuadraticCost</name>
     <member refid="classiDynTree_1_1optimalcontrol_1_1QuadraticCost_1a6cd4faefd974997223f94df948f0dbc3" kind="function"><name>QuadraticCost</name></member>
@@ -2933,12 +2962,16 @@
     <member refid="classiDynTree_1_1RevoluteJoint_1a27aa47da74de0c6909449a815307d434" kind="variable"><name>m_hasPosLimits</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1a5c24ef0034d0c449baba2d5fec33871c" kind="variable"><name>m_minPos</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1a4acd59cca211ac385237519cc2b2c149" kind="variable"><name>m_maxPos</name></member>
+    <member refid="classiDynTree_1_1RevoluteJoint_1abf00dc550831135b1eeca356b2885613" kind="variable"><name>m_joint_dynamics_type</name></member>
+    <member refid="classiDynTree_1_1RevoluteJoint_1adf6822fcbf649a76703378142f1cefe1" kind="variable"><name>m_damping</name></member>
+    <member refid="classiDynTree_1_1RevoluteJoint_1afaed8b14a45055427ba10ca53b50a991" kind="variable"><name>m_static_friction</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1af3e89e865b6f934a00e2bfb32fee15fd" kind="variable"><name>q_previous</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1a088374402862b6993c0fc690baa0c547" kind="variable"><name>link1_X_link2</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1a98aa396b2c5880913e1a8f93c0fad716" kind="variable"><name>link2_X_link1</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1a2cd60e1fa399d50697d31977c3181fa8" kind="variable"><name>S_link1_link2</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1a63b5b07e4efcd2d3223e2b6c654a26f5" kind="variable"><name>S_link2_link1</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1affc24eb5821e46717f04db8f55314cc0" kind="function"><name>disablePosLimits</name></member>
+    <member refid="classiDynTree_1_1RevoluteJoint_1ae120b274f9c563582f9694f1a46d9de6" kind="function"><name>resetJointDynamics</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1ac9353cea48ca3448d9c3954b4fb77e56" kind="function"><name>updateBuffers</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1abea64170132558068a88804574ca7c87" kind="function"><name>resetBuffers</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1af697ff856633860ace4df9e45ad13204" kind="function"><name>resetAxisBuffers</name></member>
@@ -2971,6 +3004,12 @@
     <member refid="classiDynTree_1_1RevoluteJoint_1ad67f412133c3e07b6c49fd7b67b6c4aa" kind="function"><name>getMinPosLimit</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1a3580e3bc0eeb67b1497cbfec5945641d" kind="function"><name>getMaxPosLimit</name></member>
     <member refid="classiDynTree_1_1RevoluteJoint_1abbea73315ff8ea7f81b9c3d27d32f05c" kind="function"><name>setPosLimits</name></member>
+    <member refid="classiDynTree_1_1RevoluteJoint_1a02116cee53bf5ff75e12dc74e9226f9d" kind="function"><name>getJointDynamicsType</name></member>
+    <member refid="classiDynTree_1_1RevoluteJoint_1a825b9d81e7de95679fafcb473b5d05cf" kind="function"><name>setJointDynamicsType</name></member>
+    <member refid="classiDynTree_1_1RevoluteJoint_1a9c11645dcc7a2a5a303d7c1de5d7fb89" kind="function"><name>getDamping</name></member>
+    <member refid="classiDynTree_1_1RevoluteJoint_1a6e6f4824555ea71cc71834f60bc47130" kind="function"><name>getStaticFriction</name></member>
+    <member refid="classiDynTree_1_1RevoluteJoint_1a17a88c97ad95a5f4bc71aedfd41fb7cf" kind="function"><name>setDamping</name></member>
+    <member refid="classiDynTree_1_1RevoluteJoint_1a33a03be41e423704f17f94c0c58193db" kind="function"><name>setStaticFriction</name></member>
   </compound>
   <compound refid="classiDynTree_1_1RigidBodyInertiaNonLinearParametrization" kind="class"><name>iDynTree::RigidBodyInertiaNonLinearParametrization</name>
     <member refid="classiDynTree_1_1RigidBodyInertiaNonLinearParametrization_1ae323ec7fbb184a0d7744fa37adb427c5" kind="variable"><name>mass</name></member>
@@ -4257,6 +4296,9 @@
     <member refid="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375aaf9e6abb240a3f5f6f3eb386c21277eeb" kind="enumvalue"><name>INERTIAL_FIXED_REPRESENTATION</name></member>
     <member refid="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375aad3aa0f715d4709ae83c826d14ffb1dad" kind="enumvalue"><name>BODY_FIXED_REPRESENTATION</name></member>
     <member refid="FreeFloatingMatrices_8h_1a0089c6dac34bc6a4f623d9e9e565375aacfd8cfdeac3248d26f145bd0998f93b8" kind="enumvalue"><name>MIXED_REPRESENTATION</name></member>
+    <member refid="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515" kind="enum"><name>JointDynamicsType</name></member>
+    <member refid="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515a20857d4b69f0d31ae45d631abb786fdb" kind="enumvalue"><name>NoJointDynamics</name></member>
+    <member refid="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515a64acee9e0dd4fc665bab44e12c10917a" kind="enumvalue"><name>URDFJointDynamics</name></member>
     <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9" kind="enum"><name>SensorType</name></member>
     <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9a7006069f3fbbdb2dfdd42a73646eb0c2" kind="enumvalue"><name>SIX_AXIS_FORCE_TORQUE</name></member>
     <member refid="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9acaffc97afec9d7a74f00e940a440e27c" kind="enumvalue"><name>ACCELEROMETER</name></member>
@@ -5012,6 +5054,9 @@
   <compound refid="FreeFloatingState_8h" kind="file"><name>FreeFloatingState.h</name>
   </compound>
   <compound refid="IJoint_8h" kind="file"><name>IJoint.h</name>
+    <member refid="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515" kind="enum"><name>JointDynamicsType</name></member>
+    <member refid="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515a20857d4b69f0d31ae45d631abb786fdb" kind="enumvalue"><name>NoJointDynamics</name></member>
+    <member refid="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515a64acee9e0dd4fc665bab44e12c10917a" kind="enumvalue"><name>URDFJointDynamics</name></member>
     <member refid="IJoint_8h_1ade0c4658492d5288102a323d704a2a1c" kind="typedef"><name>IJointPtr</name></member>
     <member refid="IJoint_8h_1ac8fef24361e5d31b7bb1c5e468ea9513" kind="typedef"><name>IJointConstPtr</name></member>
   </compound>

@@ -282,9 +282,11 @@
       <member refid="classiDynTree_1_1IJoint_1a6d0853757008a1db34d41da9276df81e" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>computeChildVelAcc</name></member>
       <member refid="classiDynTree_1_1IJoint_1a495a50c9623710812f49cf6258ecb68e" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>computeJointTorque</name></member>
       <member refid="classiDynTree_1_1IJoint_1a4f0f02e57295ad4b0ec94fe19fc3e0c0" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>enablePosLimits</name></member>
+      <member refid="classiDynTree_1_1IJoint_1ac77c3cc0888a52342049ff5436ff532d" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>getDamping</name></member>
       <member refid="classiDynTree_1_1MovableJointImpl_1a593be2dc005f1580c341bc723ed36b5e" prot="public" virt="virtual"><scope>iDynTree::MovableJointImpl</scope><name>getDOFsOffset</name></member>
       <member refid="classiDynTree_1_1IJoint_1abe3efda09a0c3d94c021891de447aaa8" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>getFirstAttachedLink</name></member>
       <member refid="classiDynTree_1_1MovableJointImpl_1a717d5ccedc215f53b75e918229d98bab" prot="public" virt="virtual"><scope>iDynTree::MovableJointImpl</scope><name>getIndex</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a88283dce433282d14bbef2923df51991" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>getJointDynamicsType</name></member>
       <member refid="classiDynTree_1_1IJoint_1a047913be4f7bdeb35d785e4ad71d5395" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>getMaxPosLimit</name></member>
       <member refid="classiDynTree_1_1IJoint_1a46dbe9dec3ef79f6d5662269f6fe8f65" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>getMinPosLimit</name></member>
       <member refid="classiDynTree_1_1IJoint_1a3a89b6fd2358c8435e7f794d3857045f" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>getMotionSubspaceVector</name></member>
@@ -294,6 +296,7 @@
       <member refid="classiDynTree_1_1IJoint_1ab734574da90b6d2ae24169ea180a081b" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>getPosLimits</name></member>
       <member refid="classiDynTree_1_1IJoint_1a7b6fb4c82687601810f3696e9605f1e0" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>getRestTransform</name></member>
       <member refid="classiDynTree_1_1IJoint_1a1c55168bcc2dbd7b1fd58737a6bb46d8" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>getSecondAttachedLink</name></member>
+      <member refid="classiDynTree_1_1IJoint_1aa51240f3f2f74d9b9115ac679b013d6c" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>getStaticFriction</name></member>
       <member refid="classiDynTree_1_1IJoint_1a2b0c23cad4da4e748ecdaf009805f767" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>getTransform</name></member>
       <member refid="classiDynTree_1_1IJoint_1a0dd24dad1882bc1df35a1832275fbfbb" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>getTransformDerivative</name></member>
       <member refid="classiDynTree_1_1IJoint_1af4badbd5891621e847a61d767cffd25e" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>hasPosLimits</name></member>
@@ -301,11 +304,14 @@
       <member refid="classiDynTree_1_1MovableJointImpl_1a872555afe6bfd9b14fb6bbea08968003" prot="protected" virt="non-virtual"><scope>iDynTree::MovableJointImpl</scope><name>m_index</name></member>
       <member refid="classiDynTree_1_1MovableJointImpl_1a6332b3582ec526f58f719a90d2d00c81" prot="protected" virt="non-virtual"><scope>iDynTree::MovableJointImpl</scope><name>m_posCoordsOffset</name></member>
       <member refid="classiDynTree_1_1IJoint_1aafd1101e91ea337a451d62f0160a819c" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>setAttachedLinks</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a3f7bd7d17f1b4fc9293db61491b8235b" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>setDamping</name></member>
       <member refid="classiDynTree_1_1MovableJointImpl_1aa9cb6e7141a84e23c7d7fca9c900c6bc" prot="public" virt="virtual"><scope>iDynTree::MovableJointImpl</scope><name>setDOFsOffset</name></member>
       <member refid="classiDynTree_1_1MovableJointImpl_1a4b1807b06b92f64c41502c17b8ecd5a6" prot="public" virt="virtual"><scope>iDynTree::MovableJointImpl</scope><name>setIndex</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a111e73d874ceb657d1dc12652d2bae59" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>setJointDynamicsType</name></member>
       <member refid="classiDynTree_1_1MovableJointImpl_1afbbbe860f34622d4d8ae1d938fd65b98" prot="public" virt="virtual"><scope>iDynTree::MovableJointImpl</scope><name>setPosCoordsOffset</name></member>
       <member refid="classiDynTree_1_1IJoint_1a63c57d91c3d80a610671f04fcbdd22ff" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>setPosLimits</name></member>
       <member refid="classiDynTree_1_1IJoint_1a770aadc1a6e13bce3af213707fcf2d84" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>setRestTransform</name></member>
+      <member refid="classiDynTree_1_1IJoint_1a6e3e9a69cb7639ba4e569cb4bf24444e" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>setStaticFriction</name></member>
       <member refid="classiDynTree_1_1IJoint_1ac989ee81d08959eca68666aa6740cb16" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>~IJoint</name></member>
       <member refid="classiDynTree_1_1MovableJointImpl_1a723d226cd4e943ac3a2b5b69a3b1c833" prot="public" virt="pure-virtual"><scope>iDynTree::MovableJointImpl</scope><name>~MovableJointImpl</name></member>
     </listofallmembers>

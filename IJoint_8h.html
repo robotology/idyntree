@@ -69,6 +69,7 @@
               <ul>
                 <li><a href="#namespaces">Namespaces</a></li>
                 <li><a href="#nested-classes">Classes</a></li>
+                <li><a href="#enum-members">Enums</a></li>
                 <li><a href="#typedef-members">Typedefs</a></li>
               </ul>
             </li>
@@ -90,6 +91,16 @@
             <dd>Interface (i.e.</dd>
           </dl>
         </section>
+        <section id="enum-members">
+          <h2><a href="#enum-members">Enums</a></h2>
+          <dl class="m-doc">
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="#aaf7a7f242cce355fb311a53b2df40515" class="m-doc">JointDynamicsType</a> { </span><span class="m-doc-wrap"><a href="#aaf7a7f242cce355fb311a53b2df40515a20857d4b69f0d31ae45d631abb786fdb" class="m-doc">NoJointDynamics</a> = 0,
+              <a href="#aaf7a7f242cce355fb311a53b2df40515a64acee9e0dd4fc665bab44e12c10917a" class="m-doc">URDFJointDynamics</a> = 1 }</span>
+            </dt>
+            <dd><span></span></dd>
+          </dl>
+        </section>
         <section id="typedef-members">
           <h2><a href="#typedef-members">Typedefs</a></h2>
           <dl class="m-doc">
@@ -102,6 +113,34 @@
             </dt>
             <dd><span></span></dd>
           </dl>
+        </section>
+        <section>
+          <h2>Enum documentation</h2>
+          <section class="m-doc-details" id="aaf7a7f242cce355fb311a53b2df40515"><div>
+            <h3>
+              enum <a href="#aaf7a7f242cce355fb311a53b2df40515" class="m-doc-self">JointDynamicsType</a>
+            </h3>
+            <p><span></span></p>
+            <table class="m-table m-fullwidth m-flat m-doc">
+              <thead><tr><th style="width: 1%">Enumerators</th><th></th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><a href="#aaf7a7f242cce355fb311a53b2df40515a20857d4b69f0d31ae45d631abb786fdb" class="m-doc-self" id="aaf7a7f242cce355fb311a53b2df40515a20857d4b69f0d31ae45d631abb786fdb">NoJointDynamics</a></td>
+                  <td>
+                  <p>NoDynamics: No joint dynamics is assumed for the joint.</p>
+<p>This joint dynamics type does not consider any parameter.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="#aaf7a7f242cce355fb311a53b2df40515a64acee9e0dd4fc665bab44e12c10917a" class="m-doc-self" id="aaf7a7f242cce355fb311a53b2df40515a64acee9e0dd4fc665bab44e12c10917a">URDFJointDynamics</a></td>
+                  <td>
+                  <p>URDFJointDynamics: Dynamics described by the URDF 1.0 specification.</p>
+<p>This joint dynamics type consider the following parameters:</p><ul><li><code>Damping</code></li><li><code>StaticFriction</code></li></ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div></section>
         </section>
       </div>
     </div>

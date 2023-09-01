@@ -666,7 +666,7 @@
             </dt>
             <dd>Helper class to load a model, modify its parameters based on calibration, and save it again to file.</dd>
             <dt>
-              class <a href="classiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a>
+              struct <a href="structiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a>
             </dt>
             <dd>Options for the iDynTree exporter.</dd>
             <dt>
@@ -876,6 +876,11 @@
               <a href="#a0089c6dac34bc6a4f623d9e9e565375aacfd8cfdeac3248d26f145bd0998f93b8" class="m-doc">MIXED_REPRESENTATION</a> }</span>
             </dt>
             <dd>Possible frame velocity representation convention.</dd>
+            <dt>
+              <span class="m-doc-wrap-bumper">enum <a href="IJoint_8h.html#aaf7a7f242cce355fb311a53b2df40515" class="m-doc">JointDynamicsType</a> { </span><span class="m-doc-wrap"><a href="#aaf7a7f242cce355fb311a53b2df40515a20857d4b69f0d31ae45d631abb786fdb" class="m-doc">NoJointDynamics</a> = 0,
+              <a href="#aaf7a7f242cce355fb311a53b2df40515a64acee9e0dd4fc665bab44e12c10917a" class="m-doc">URDFJointDynamics</a> = 1 }</span>
+            </dt>
+            <dd><span></span></dd>
             <dt>
               <span class="m-doc-wrap-bumper">enum <a href="Sensors_8h.html#ad291b88efdf5262d744d33f642daf8b9" class="m-doc">SensorType</a> { </span><span class="m-doc-wrap"><a href="#ad291b88efdf5262d744d33f642daf8b9a7006069f3fbbdb2dfdd42a73646eb0c2" class="m-doc">SIX_AXIS_FORCE_TORQUE</a> = 0,
               <a href="#ad291b88efdf5262d744d33f642daf8b9acaffc97afec9d7a74f00e940a440e27c" class="m-doc">ACCELEROMETER</a> = 1,
@@ -2116,13 +2121,13 @@ $B$
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeModelIO.html#gaeaa7b0320760138dab8d2e7ba5525b2a" class="m-doc">URDFFromModel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; model,
               const std::string&amp; urdf_filename,
-              const <a href="classiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a> options = <a href="classiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a>()) -&gt; bool</span>
+              const <a href="structiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a> options = <a href="structiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a>()) -&gt; bool</span>
             </dt>
             <dd>Export a <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> object to a URDF file.</dd>
             <dt>
               <span class="m-doc-wrap-bumper">auto <a href="group__iDynTreeModelIO.html#gab9223d51ca118bea013bbbde14d6e054" class="m-doc">URDFStringFromModel</a>(</span><span class="m-doc-wrap">const <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a>&amp; output,
               std::string&amp; urdf_string,
-              const <a href="classiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a> options = <a href="classiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a>()) -&gt; bool</span>
+              const <a href="structiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a> options = <a href="structiDynTree_1_1ModelExporterOptions.html" class="m-doc">ModelExporterOptions</a>()) -&gt; bool</span>
             </dt>
             <dd>Export a <a href="classiDynTree_1_1Model.html" class="m-doc">iDynTree::<wbr />Model</a> object to a URDF string.</dd>
             <dt>

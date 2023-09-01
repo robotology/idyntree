@@ -141,7 +141,7 @@
     <innerclass refid="classiDynTree_1_1XMLParser" prot="public">iDynTree::XMLParser</innerclass>
     <innerclass refid="classiDynTree_1_1XMLParserState" prot="public">iDynTree::XMLParserState</innerclass>
     <innerclass refid="classiDynTree_1_1ModelCalibrationHelper" prot="public">iDynTree::ModelCalibrationHelper</innerclass>
-    <innerclass refid="classiDynTree_1_1ModelExporterOptions" prot="public">iDynTree::ModelExporterOptions</innerclass>
+    <innerclass refid="structiDynTree_1_1ModelExporterOptions" prot="public">iDynTree::ModelExporterOptions</innerclass>
     <innerclass refid="classiDynTree_1_1ModelExporter" prot="public">iDynTree::ModelExporter</innerclass>
     <innerclass refid="structiDynTree_1_1ModelParserOptions" prot="public">iDynTree::ModelParserOptions</innerclass>
     <innerclass refid="classiDynTree_1_1ModelLoader" prot="public">iDynTree::ModelLoader</innerclass>
@@ -651,6 +651,41 @@
         <inbodydescription>
         </inbodydescription>
         <location file="iDynTree/Model/FreeFloatingMatrices.h" line="25" column="1" bodyfile="iDynTree/Model/FreeFloatingMatrices.h" bodystart="26" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="enum" id="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515" prot="public" static="no" strong="no">
+        <type></type>
+        <name>JointDynamicsType</name>
+        <enumvalue id="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515a20857d4b69f0d31ae45d631abb786fdb" prot="public">
+          <name>NoJointDynamics</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>NoDynamics: No joint dynamics is assumed for the joint. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>This joint dynamics type does not consider any parameter. </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="IJoint_8h_1aaf7a7f242cce355fb311a53b2df40515a64acee9e0dd4fc665bab44e12c10917a" prot="public">
+          <name>URDFJointDynamics</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+<para>URDFJointDynamics: Dynamics described by the URDF 1.0 specification. </para>
+          </briefdescription>
+          <detaileddescription>
+<para>This joint dynamics type consider the following parameters:<itemizedlist>
+<listitem><para><computeroutput>Damping</computeroutput></para>
+</listitem><listitem><para><computeroutput>StaticFriction</computeroutput> </para>
+</listitem></itemizedlist>
+</para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="iDynTree/Model/IJoint.h" line="21" column="5" bodyfile="iDynTree/Model/IJoint.h" bodystart="22" bodyend="37"/>
       </memberdef>
       <memberdef kind="enum" id="Sensors_8h_1ad291b88efdf5262d744d33f642daf8b9" prot="public" static="no" strong="no">
         <type></type>
@@ -1228,7 +1263,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="362" column="21" bodyfile="iDynTree/Model/IJoint.h" bodystart="362" bodyend="-1"/>
+        <location file="iDynTree/Model/IJoint.h" line="457" column="21" bodyfile="iDynTree/Model/IJoint.h" bodystart="457" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="IJoint_8h_1ac8fef24361e5d31b7bb1c5e468ea9513" prot="public" static="no">
         <type>const <ref refid="classiDynTree_1_1IJoint" kindref="compound">IJoint</ref> *</type>
@@ -1241,7 +1276,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="iDynTree/Model/IJoint.h" line="363" column="27" bodyfile="iDynTree/Model/IJoint.h" bodystart="363" bodyend="-1"/>
+        <location file="iDynTree/Model/IJoint.h" line="458" column="27" bodyfile="iDynTree/Model/IJoint.h" bodystart="458" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="Indices_8h_1a7b1bbb834d5bf0d3c64cdf91ab3d6e72" prot="public" static="no">
         <type>std::ptrdiff_t</type>
@@ -6762,15 +6797,15 @@
           <declname>urdf_filename</declname>
         </param>
         <param>
-          <type>const <ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref></type>
+          <type>const <ref refid="structiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref></type>
           <declname>options</declname>
-          <defval><ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref>()</defval>
+          <defval><ref refid="structiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref>()</defval>
         </param>
         <briefdescription>
 <para>Export a <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> object to a URDF file. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="see"><para><ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref> for more details on supported and default options.</para>
+<para><simplesect kind="see"><para><ref refid="structiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref> for more details on supported and default options.</para>
 </simplesect>
 <simplesect kind="warning"><para>This function does not support exporting sensor or solid shapes at the moment.</para>
 </simplesect>
@@ -6787,7 +6822,7 @@
 <parametername direction="in">options</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>the <ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref> struct of options passed to the parser. </para>
+<para>the <ref refid="structiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref> struct of options passed to the parser. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -6813,15 +6848,15 @@
           <declname>urdf_string</declname>
         </param>
         <param>
-          <type>const <ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref></type>
+          <type>const <ref refid="structiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref></type>
           <declname>options</declname>
-          <defval><ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref>()</defval>
+          <defval><ref refid="structiDynTree_1_1ModelExporterOptions" kindref="compound">ModelExporterOptions</ref>()</defval>
         </param>
         <briefdescription>
 <para>Export a <ref refid="classiDynTree_1_1Model" kindref="compound">iDynTree::Model</ref> object to a URDF string. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="see"><para><ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref> for more details on supported and default options.</para>
+<para><simplesect kind="see"><para><ref refid="structiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref> for more details on supported and default options.</para>
 </simplesect>
 <simplesect kind="warning"><para>This function does not support exporting sensor or solid shapes at the moment.</para>
 </simplesect>
@@ -6830,7 +6865,7 @@
 <parametername direction="in">options</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>the <ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref> struct of options passed to the parser. </para>
+<para>the <ref refid="structiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref> struct of options passed to the parser. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>

@@ -3,6 +3,7 @@
   <compounddef id="classiDynTree_1_1JointElement" kind="class" language="C++" prot="public">
     <compoundname>iDynTree::JointElement</compoundname>
     <basecompoundref refid="classiDynTree_1_1XMLElement" prot="public" virt="non-virtual">iDynTree::XMLElement</basecompoundref>
+    <innerclass refid="structiDynTree_1_1JointElement_1_1JointDynamicsParams" prot="private">iDynTree::JointElement::JointDynamicsParams</innerclass>
     <innerclass refid="structiDynTree_1_1JointElement_1_1JointInfo" prot="public">iDynTree::JointElement::JointInfo</innerclass>
     <innerclass refid="structiDynTree_1_1JointElement_1_1Limits" prot="private">iDynTree::JointElement::Limits</innerclass>
       <sectiondef kind="private-attrib">
@@ -17,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="36" column="24" bodyfile="private/JointElement.h" bodystart="36" bodyend="-1"/>
+        <location file="private/JointElement.h" line="38" column="24" bodyfile="private/JointElement.h" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1JointElement_1a4ddeca6abcd6d252e73380714a912b0d" prot="private" static="no" mutable="no">
         <type>std::unordered_map&lt; std::string, <ref refid="structiDynTree_1_1JointElement_1_1JointInfo" kindref="compound">JointElement::JointInfo</ref> &gt; &amp;</type>
@@ -30,7 +31,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="37" column="24" bodyfile="private/JointElement.h" bodystart="37" bodyend="-1"/>
+        <location file="private/JointElement.h" line="39" column="24" bodyfile="private/JointElement.h" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1JointElement_1a7f07257c3ab3e78ac3ef00c215e5ae27" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -43,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="39" column="17" bodyfile="private/JointElement.h" bodystart="39" bodyend="-1"/>
+        <location file="private/JointElement.h" line="41" column="17" bodyfile="private/JointElement.h" bodystart="41" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1JointElement_1a539ae59c74583d647d282f7abbe9a769" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -56,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="40" column="17" bodyfile="private/JointElement.h" bodystart="40" bodyend="-1"/>
+        <location file="private/JointElement.h" line="42" column="17" bodyfile="private/JointElement.h" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1JointElement_1afc6dca76541790f0c0be47b6329c11fe" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Transform" kindref="compound">iDynTree::Transform</ref></type>
@@ -69,7 +70,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="41" column="25" bodyfile="private/JointElement.h" bodystart="41" bodyend="-1"/>
+        <location file="private/JointElement.h" line="43" column="25" bodyfile="private/JointElement.h" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1JointElement_1a2e245b018028d4042bd532a4f5300e6b" prot="private" static="no" mutable="no">
         <type><ref refid="classiDynTree_1_1Axis" kindref="compound">iDynTree::Axis</ref></type>
@@ -82,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="42" column="20" bodyfile="private/JointElement.h" bodystart="42" bodyend="-1"/>
+        <location file="private/JointElement.h" line="44" column="20" bodyfile="private/JointElement.h" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1JointElement_1a640e6ef4d4464ca3d3d4552359e8d0ca" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -95,7 +96,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="43" column="17" bodyfile="private/JointElement.h" bodystart="43" bodyend="-1"/>
+        <location file="private/JointElement.h" line="45" column="17" bodyfile="private/JointElement.h" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1JointElement_1a61a914cdd9f991767029c7c48f9ca90d" prot="private" static="no" mutable="no">
         <type>std::string</type>
@@ -108,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="44" column="17" bodyfile="private/JointElement.h" bodystart="44" bodyend="-1"/>
+        <location file="private/JointElement.h" line="46" column="17" bodyfile="private/JointElement.h" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classiDynTree_1_1JointElement_1a2db2092f3d3eb70ef1eb6a638d4050ef" prot="private" static="no" mutable="no">
         <type>std::shared_ptr&lt; Limits &gt;</type>
@@ -121,7 +122,20 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="53" column="21" bodyfile="private/JointElement.h" bodystart="53" bodyend="-1"/>
+        <location file="private/JointElement.h" line="61" column="21" bodyfile="private/JointElement.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classiDynTree_1_1JointElement_1a4d137eb629b09c3b11591c4800694d8b" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; JointDynamicsParams &gt;</type>
+        <definition>std::shared_ptr&lt;JointDynamicsParams&gt; iDynTree::JointElement::m_dynamic_params</definition>
+        <argsstring></argsstring>
+        <name>m_dynamic_params</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="private/JointElement.h" line="62" column="21" bodyfile="private/JointElement.h" bodystart="62" bodyend="-1"/>
       </memberdef>
       </sectiondef>
       <sectiondef kind="public-func">
@@ -148,7 +162,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="56" column="14"/>
+        <location file="private/JointElement.h" line="65" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1JointElement_1a48e357fff5a0e1fb9899792b4192960d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -166,7 +180,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="61" column="10"/>
+        <location file="private/JointElement.h" line="70" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1JointElement_1a38083484b2799575b507ba2865c6b4f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>std::shared_ptr&lt; <ref refid="classiDynTree_1_1XMLElement" kindref="compound">XMLElement</ref> &gt;</type>
@@ -197,7 +211,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="63" column="21"/>
+        <location file="private/JointElement.h" line="72" column="21"/>
       </memberdef>
       <memberdef kind="function" id="classiDynTree_1_1JointElement_1af69cd132219910893eb013a8d2d0d95c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -211,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="private/JointElement.h" line="65" column="18"/>
+        <location file="private/JointElement.h" line="74" column="18"/>
       </memberdef>
       </sectiondef>
     <briefdescription>
@@ -242,7 +256,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="private/JointElement.h" line="24" column="1" bodyfile="private/JointElement.h" bodystart="24" bodyend="67"/>
+    <location file="private/JointElement.h" line="26" column="1" bodyfile="private/JointElement.h" bodystart="26" bodyend="76"/>
     <listofallmembers>
       <member refid="classiDynTree_1_1XMLElement_1a2a182ac17f5e644b113a67e02c3595e5" prot="public" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>attributeCallback</name></member>
       <member refid="classiDynTree_1_1XMLElement_1adf74d829fbe4d3d112c0ef2eba8bd3ea" prot="public" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>attributes</name></member>
@@ -257,6 +271,7 @@
       <member refid="classiDynTree_1_1JointElement_1a05d539f4bccba496b0453e47c58c23e9" prot="public" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>JointElement</name></member>
       <member refid="classiDynTree_1_1JointElement_1a2e245b018028d4042bd532a4f5300e6b" prot="private" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>m_axis</name></member>
       <member refid="classiDynTree_1_1JointElement_1a61a914cdd9f991767029c7c48f9ca90d" prot="private" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>m_childLink</name></member>
+      <member refid="classiDynTree_1_1JointElement_1a4d137eb629b09c3b11591c4800694d8b" prot="private" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>m_dynamic_params</name></member>
       <member refid="classiDynTree_1_1JointElement_1a4ddeca6abcd6d252e73380714a912b0d" prot="private" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>m_fixedJoints</name></member>
       <member refid="classiDynTree_1_1JointElement_1afc6dca76541790f0c0be47b6329c11fe" prot="private" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>m_jointFrame</name></member>
       <member refid="classiDynTree_1_1JointElement_1a7f07257c3ab3e78ac3ef00c215e5ae27" prot="private" virt="non-virtual"><scope>iDynTree::JointElement</scope><name>m_jointName</name></member>

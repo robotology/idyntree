@@ -133,9 +133,9 @@
           <defval>&quot;urdf&quot;</defval>
         </param>
         <param>
-          <type>const <ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref></type>
+          <type>const <ref refid="structiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref></type>
           <declname>options</declname>
-          <defval><ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref>()</defval>
+          <defval><ref refid="structiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref>()</defval>
         </param>
         <briefdescription>
 <para>Update the inertial parameters of the loaded model. </para>
@@ -168,9 +168,9 @@
           <defval>&quot;urdf&quot;</defval>
         </param>
         <param>
-          <type>const <ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref></type>
+          <type>const <ref refid="structiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref></type>
           <declname>options</declname>
-          <defval><ref refid="classiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref>()</defval>
+          <defval><ref refid="structiDynTree_1_1ModelExporterOptions" kindref="compound">iDynTree::ModelExporterOptions</ref>()</defval>
         </param>
         <briefdescription>
 <para>Update the inertial parameters of the loaded model. </para>
