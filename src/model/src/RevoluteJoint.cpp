@@ -70,8 +70,8 @@ RevoluteJoint::RevoluteJoint(const RevoluteJoint& other):
                              rotation_axis_wrt_link1(other.rotation_axis_wrt_link1),
                              m_hasPosLimits(other.m_hasPosLimits),
                              m_minPos(other.m_minPos), m_maxPos(other.m_maxPos),
-                            m_joint_dynamics_type(other.m_joint_dynamics_type),
-                            m_damping(other.m_damping), m_static_friction(other.m_static_friction)
+                             m_joint_dynamics_type(other.m_joint_dynamics_type),
+                             m_damping(other.m_damping), m_static_friction(other.m_static_friction)
 {
     this->setPosCoordsOffset(other.getPosCoordsOffset());
     this->setDOFsOffset(other.getDOFsOffset());
