@@ -1,3 +1,3 @@
 function varargout = ComputeLinearAndAngularMomentumDerivativeBias(varargin)
-  [varargout{1:nargout}] = iDynTreeMEX(1237, varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(1265, varargin{:});
 end

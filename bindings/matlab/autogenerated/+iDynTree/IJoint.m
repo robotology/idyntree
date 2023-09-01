@@ -96,23 +96,41 @@ classdef IJoint < iDynTreeSwigRef
     function varargout = setPosLimits(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(820, self, varargin{:});
     end
-    function varargout = isRevoluteJoint(self,varargin)
+    function varargout = getJointDynamicsType(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(821, self, varargin{:});
     end
-    function varargout = isFixedJoint(self,varargin)
+    function varargout = setJointDynamicsType(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(822, self, varargin{:});
     end
-    function varargout = isPrismaticJoint(self,varargin)
+    function varargout = setDamping(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(823, self, varargin{:});
     end
-    function varargout = asRevoluteJoint(self,varargin)
+    function varargout = setStaticFriction(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(824, self, varargin{:});
     end
-    function varargout = asFixedJoint(self,varargin)
+    function varargout = getDamping(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(825, self, varargin{:});
     end
-    function varargout = asPrismaticJoint(self,varargin)
+    function varargout = getStaticFriction(self,varargin)
       [varargout{1:nargout}] = iDynTreeMEX(826, self, varargin{:});
+    end
+    function varargout = isRevoluteJoint(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(827, self, varargin{:});
+    end
+    function varargout = isFixedJoint(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(828, self, varargin{:});
+    end
+    function varargout = isPrismaticJoint(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(829, self, varargin{:});
+    end
+    function varargout = asRevoluteJoint(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(830, self, varargin{:});
+    end
+    function varargout = asFixedJoint(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(831, self, varargin{:});
+    end
+    function varargout = asPrismaticJoint(self,varargin)
+      [varargout{1:nargout}] = iDynTreeMEX(832, self, varargin{:});
     end
     function self = IJoint(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')

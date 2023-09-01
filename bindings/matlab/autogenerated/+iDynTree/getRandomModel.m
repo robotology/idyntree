@@ -1,3 +1,3 @@
 function varargout = getRandomModel(varargin)
-  [varargout{1:nargout}] = iDynTreeMEX(1161, varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(1189, varargin{:});
 end

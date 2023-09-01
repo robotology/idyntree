@@ -4,37 +4,37 @@ classdef DHChain < iDynTreeSwigRef
       this = iDynTreeMEX(3, self);
     end
     function varargout = setNrOfDOFs(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1278, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1306, self, varargin{:});
     end
     function varargout = getNrOfDOFs(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1279, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1307, self, varargin{:});
     end
     function varargout = setH0(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1280, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1308, self, varargin{:});
     end
     function varargout = getH0(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1281, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1309, self, varargin{:});
     end
     function varargout = setHN(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1282, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1310, self, varargin{:});
     end
     function varargout = getHN(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1283, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1311, self, varargin{:});
     end
     function varargout = paren(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1284, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1312, self, varargin{:});
     end
     function varargout = getDOFName(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1285, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1313, self, varargin{:});
     end
     function varargout = setDOFName(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1286, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1314, self, varargin{:});
     end
     function varargout = toModel(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1287, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1315, self, varargin{:});
     end
     function varargout = fromModel(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1288, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1316, self, varargin{:});
     end
     function self = DHChain(varargin)
       if nargin==1 && strcmp(class(varargin{1}),'iDynTreeSwigRef')
@@ -42,14 +42,14 @@ classdef DHChain < iDynTreeSwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1289, varargin{:});
+        tmp = iDynTreeMEX(1317, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1290, self);
+        iDynTreeMEX(1318, self);
         self.SwigClear();
       end
     end

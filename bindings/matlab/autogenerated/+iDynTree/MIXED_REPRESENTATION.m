@@ -1,7 +1,7 @@
 function v = MIXED_REPRESENTATION()
   persistent vInitialized;
   if isempty(vInitialized)
-    vInitialized = iDynTreeMEX(0, 4);
+    vInitialized = iDynTreeMEX(0, 6);
   end
   v = vInitialized;
 end

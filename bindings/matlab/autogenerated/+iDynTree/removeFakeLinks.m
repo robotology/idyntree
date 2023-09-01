@@ -1,3 +1,3 @@
 function varargout = removeFakeLinks(varargin)
-  [varargout{1:nargout}] = iDynTreeMEX(1165, varargin{:});
+  [varargout{1:nargout}] = iDynTreeMEX(1193, varargin{:});
 end

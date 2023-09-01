@@ -4,65 +4,65 @@ classdef DiscreteExtendedKalmanFilterHelper < iDynTreeSwigRef
       this = iDynTreeMEX(3, self);
     end
     function varargout = ekf_f(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1699, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1730, self, varargin{:});
     end
     function varargout = ekf_h(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1700, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1731, self, varargin{:});
     end
     function varargout = ekfComputeJacobianF(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1701, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1732, self, varargin{:});
     end
     function varargout = ekfComputeJacobianH(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1702, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1733, self, varargin{:});
     end
     function varargout = ekfPredict(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1703, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1734, self, varargin{:});
     end
     function varargout = ekfUpdate(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1704, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1735, self, varargin{:});
     end
     function varargout = ekfInit(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1705, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1736, self, varargin{:});
     end
     function varargout = ekfReset(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1706, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1737, self, varargin{:});
     end
     function varargout = ekfSetMeasurementVector(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1707, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1738, self, varargin{:});
     end
     function varargout = ekfSetInputVector(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1708, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1739, self, varargin{:});
     end
     function varargout = ekfSetInitialState(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1709, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1740, self, varargin{:});
     end
     function varargout = ekfSetStateCovariance(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1710, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1741, self, varargin{:});
     end
     function varargout = ekfSetSystemNoiseCovariance(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1711, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1742, self, varargin{:});
     end
     function varargout = ekfSetMeasurementNoiseCovariance(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1712, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1743, self, varargin{:});
     end
     function varargout = ekfSetStateSize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1713, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1744, self, varargin{:});
     end
     function varargout = ekfSetInputSize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1714, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1745, self, varargin{:});
     end
     function varargout = ekfSetOutputSize(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1715, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1746, self, varargin{:});
     end
     function varargout = ekfGetStates(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1716, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1747, self, varargin{:});
     end
     function varargout = ekfGetStateCovariance(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1717, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1748, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1718, self);
+        iDynTreeMEX(1749, self);
         self.SwigClear();
       end
     end

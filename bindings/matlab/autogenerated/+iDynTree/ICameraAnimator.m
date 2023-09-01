@@ -4,29 +4,29 @@ classdef ICameraAnimator < iDynTreeSwigRef
       this = iDynTreeMEX(3, self);
     end
     function varargout = enableMouseControl(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1851, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1882, self, varargin{:});
     end
     function varargout = getMoveSpeed(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1852, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1883, self, varargin{:});
     end
     function varargout = setMoveSpeed(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1853, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1884, self, varargin{:});
     end
     function varargout = getRotateSpeed(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1854, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1885, self, varargin{:});
     end
     function varargout = setRotateSpeed(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1855, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1886, self, varargin{:});
     end
     function varargout = getZoomSpeed(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1856, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1887, self, varargin{:});
     end
     function varargout = setZoomSpeed(self,varargin)
-      [varargout{1:nargout}] = iDynTreeMEX(1857, self, varargin{:});
+      [varargout{1:nargout}] = iDynTreeMEX(1888, self, varargin{:});
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1858, self);
+        iDynTreeMEX(1889, self);
         self.SwigClear();
       end
     end

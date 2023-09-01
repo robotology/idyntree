@@ -7,20 +7,20 @@ classdef ModelParserOptions < iDynTreeSwigRef
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1443, self);
+        varargout{1} = iDynTreeMEX(1471, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1444, self, varargin{1});
+        iDynTreeMEX(1472, self, varargin{1});
       end
     end
     function varargout = originalFilename(self, varargin)
       narginchk(1, 2)
       if nargin==1
         nargoutchk(0, 1)
-        varargout{1} = iDynTreeMEX(1445, self);
+        varargout{1} = iDynTreeMEX(1473, self);
       else
         nargoutchk(0, 0)
-        iDynTreeMEX(1446, self, varargin{1});
+        iDynTreeMEX(1474, self, varargin{1});
       end
     end
     function self = ModelParserOptions(varargin)
@@ -29,14 +29,14 @@ classdef ModelParserOptions < iDynTreeSwigRef
           self.swigPtr = varargin{1}.swigPtr;
         end
       else
-        tmp = iDynTreeMEX(1447, varargin{:});
+        tmp = iDynTreeMEX(1475, varargin{:});
         self.swigPtr = tmp.swigPtr;
         tmp.SwigClear();
       end
     end
     function delete(self)
       if self.swigPtr
-        iDynTreeMEX(1448, self);
+        iDynTreeMEX(1476, self);
         self.SwigClear();
       end
     end

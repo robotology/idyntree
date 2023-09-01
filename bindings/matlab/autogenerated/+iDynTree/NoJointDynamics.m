@@ -1,7 +1,7 @@
-function v = GYROSCOPE_SENSOR()
+function v = NoJointDynamics()
   persistent vInitialized;
   if isempty(vInitialized)
-    vInitialized = iDynTreeMEX(0, 28);
+    vInitialized = iDynTreeMEX(0, 2);
   end
   v = vInitialized;
 end
