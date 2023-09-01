@@ -41,6 +41,12 @@ namespace iDynTree
         double m_minPos;
         double m_maxPos;
 
+        // Dynamic parameters
+        void resetJointDynamics();
+        JointDynamicsType m_joint_dynamics_type;
+        double m_damping;
+        double m_static_friction;
+
         // Cache attributes
         mutable double q_previous;
         mutable Transform link1_X_link2;
@@ -212,6 +218,14 @@ namespace iDynTree
         virtual double getMinPosLimit(const size_t _index) const;
         virtual double getMaxPosLimit(const size_t _index) const;
         virtual bool setPosLimits(const size_t _index, double & min, double & max);
+
+        // DYNAMICS METHODS
+        virtual JointDynamicsType getJointDynamicsType() const;
+        virtual bool setJointDynamicsType(const JointDynamicsType enable);
+        virtual double getDamping(const size_t _index) const;
+        virtual double getStaticFriction(const size_t _index) const;
+        virtual bool setDamping(const size_t _index, double& damping);
+        virtual bool setStaticFriction(const size_t _index, double& staticFriction);
     };
 }
 

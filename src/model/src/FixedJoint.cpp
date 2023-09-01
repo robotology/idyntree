@@ -267,4 +267,33 @@ bool FixedJoint::setPosLimits(const size_t /*_index*/, double & /*min*/, double 
     return false;
 }
 
+JointDynamicsType FixedJoint::getJointDynamicsType() const
+{
+    return NoJointDynamics;
+}
+
+bool FixedJoint::setJointDynamicsType(const JointDynamicsType enable)
+{
+    return false;
+}
+
+double FixedJoint::getDamping(const size_t _index) const
+{
+    return 0.0;
+}
+double FixedJoint::getStaticFriction(const size_t _index) const
+{
+    return 0.0;
+}
+
+bool FixedJoint::setDamping(const size_t /*_index*/, double& /*damping*/)
+{
+    return false;
+}
+
+bool FixedJoint::setStaticFriction(const size_t /*_index*/, double& /*staticFriction*/)
+{
+    return false;
+}
+
 }

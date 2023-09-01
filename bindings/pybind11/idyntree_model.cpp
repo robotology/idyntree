@@ -95,7 +95,13 @@ void jointClassDefinition(py::class_<IJoint>& joint) {
       .def("has_pos_limits", &IJoint::hasPosLimits)
       .def("set_pos_limits", &IJoint::setPosLimits)
       .def("get_max_pos_limit", &IJoint::getMaxPosLimit)
-      .def("get_min_pos_limit", &IJoint::getMinPosLimit);
+      .def("get_min_pos_limit", &IJoint::getMinPosLimit)
+      .def("get_joint_dynamics_type", &IJoint::getJointDynamicsType)
+      .def("get_damping", &IJoint::getDamping)
+      .def("get_static_friction", &IJoint::getStaticFriction)
+      .def("set_joint_dynamics_type", &IJoint::setJointDynamicsType)
+      .def("set_damping", &IJoint::setDamping)
+      .def("set_static_friction", &IJoint::setStaticFriction);
 }
 
 void traversalClassDefinition(py::class_<Traversal>& traversal) {

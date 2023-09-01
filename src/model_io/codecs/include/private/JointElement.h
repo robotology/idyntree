@@ -15,6 +15,8 @@
 
 #include <iDynTree/XMLElement.h>
 
+#include <iDynTree/Model/IJoint.h>
+
 #include <iDynTree/Core/Axis.h>
 #include <iDynTree/Core/Transform.h>
 
@@ -59,7 +61,14 @@ private:
         double velocity;
     };
 
+    struct JointDynamicsParams {
+        JointDynamicsType jointDynamicsType;
+        double damping;
+        double staticFriction;
+    };
+
     std::shared_ptr<Limits> m_limits;
+    std::shared_ptr<JointDynamicsParams> m_dynamic_params;
     
 public:
     explicit JointElement(

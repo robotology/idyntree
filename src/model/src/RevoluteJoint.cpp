@@ -34,6 +34,7 @@ RevoluteJoint::RevoluteJoint():
     this->resetAxisBuffers();
     this->resetBuffers(0);
     this->disablePosLimits();
+    this->resetJointDynamics();
 }
 
 RevoluteJoint::RevoluteJoint(const LinkIndex _link1, const LinkIndex _link2,
@@ -47,6 +48,7 @@ RevoluteJoint::RevoluteJoint(const LinkIndex _link1, const LinkIndex _link2,
     this->resetAxisBuffers();
     this->resetBuffers(0);
     this->disablePosLimits();
+    this->resetJointDynamics();
 }
 
 RevoluteJoint::RevoluteJoint(const Transform& _link1_X_link2, const Axis& _rotation_axis_wrt_link1):
@@ -59,6 +61,7 @@ RevoluteJoint::RevoluteJoint(const Transform& _link1_X_link2, const Axis& _rotat
     this->resetAxisBuffers();
     this->resetBuffers(0);
     this->disablePosLimits();
+    this->resetJointDynamics();
 }
 
 RevoluteJoint::RevoluteJoint(const RevoluteJoint& other):
@@ -66,7 +69,9 @@ RevoluteJoint::RevoluteJoint(const RevoluteJoint& other):
                              link1_X_link2_at_rest(other.link1_X_link2_at_rest),
                              rotation_axis_wrt_link1(other.rotation_axis_wrt_link1),
                              m_hasPosLimits(other.m_hasPosLimits),
-                             m_minPos(other.m_minPos), m_maxPos(other.m_maxPos)
+                             m_minPos(other.m_minPos), m_maxPos(other.m_maxPos),
+                             m_joint_dynamics_type(other.m_joint_dynamics_type),
+                             m_damping(other.m_damping), m_static_friction(other.m_static_friction)
 {
     this->setPosCoordsOffset(other.getPosCoordsOffset());
     this->setDOFsOffset(other.getDOFsOffset());
@@ -397,6 +402,46 @@ bool RevoluteJoint::setPosLimits(const size_t /*_index*/, double & min, double &
     return true;
 }
 
+void RevoluteJoint::resetJointDynamics()
+{
+    m_joint_dynamics_type = NoJointDynamics;
+    m_damping = 0.0;
+    m_static_friction = 0.0;
+}
 
+JointDynamicsType RevoluteJoint::getJointDynamicsType() const
+{
+    return m_joint_dynamics_type;
+}
+
+bool RevoluteJoint::setJointDynamicsType(const JointDynamicsType enable)
+{
+    m_joint_dynamics_type = enable;
+    return true;
+}
+
+double RevoluteJoint::getDamping(const size_t _index) const
+{
+    return m_damping;
+}
+
+double RevoluteJoint::getStaticFriction(const size_t _index) const
+{
+    return m_static_friction;
+}
+
+bool RevoluteJoint::setDamping(const size_t _index, double& damping)
+{
+    m_damping = damping;
+
+    return true;
+}
+
+bool RevoluteJoint::setStaticFriction(const size_t _index, double& staticFriction)
+{
+    m_static_friction = staticFriction;
+
+    return true;
+}
 
 }

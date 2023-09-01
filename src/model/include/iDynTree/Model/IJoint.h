@@ -25,6 +25,24 @@ namespace iDynTree
     class VectorDynSize;
     class SpatialMotionVector;
 
+    enum JointDynamicsType
+    {
+        /**
+         * NoDynamics: No joint dynamics is assumed for the joint.
+         * This joint dynamics type does not consider any parameter.
+         */
+        NoJointDynamics = 0,
+
+        /**
+         * URDFJointDynamics: Dynamics described by the URDF 1.0 specification.
+         * 
+         * This joint dynamics type consider the following parameters:
+         *  * `Damping`
+         *  * `StaticFriction`
+         */
+        URDFJointDynamics = 1    
+    };
+
     /**
      * Interface (i.e. abstract class) exposed by classes that implement a Joint.
      * A Joint is the basic representation of the motion allowed between two links.
@@ -362,6 +380,83 @@ namespace iDynTree
          *       To set them as enabled, you need to call the enablePosLimits(true) method.
          */
         virtual bool setPosLimits(const size_t _index, double & min, double & max) = 0;
+
+        /**
+         * @name Joint dynamics methods.
+         * 
+         *  Methods for handling representation of joint dynamics. 
+         *  The precise definition of "joint dynamics" is not precisely, as depending on the
+         *  specific application the kind of joint dynamics model can be different, and in some
+         *  case it may be even just instantaneous models (for example, when only the damping is considered).
+         *
+         *  For the type of joint dynamics supported, see the iDynTree::JointDynamicsType enum documentation.
+         *  
+         *  The joint dynamics model are used in the following contexts:
+         *   * In methods to serialize and deserialize URDF files
+         * 
+         *  The joint dynamics are **not used at all** in classes to compute kinematics and dynamics quantities,
+         *  such as iDynTree::KinDynComputations .
+         */
+        ///@{
+
+        /**
+         * Method to get the specific joint dynamics type used for the joint.
+         * \note: It is assume that all the degrees of freedom of a joint share the same joint dynamics type.
+         *
+         * @return the specific joint dynamics type used for the joint.
+         */
+        virtual JointDynamicsType getJointDynamicsType() const = 0;
+         
+         /**
+         * Method to get the specific joint dynamics type used for the joint.
+         * \note: It is assume that all the degrees of freedom of a joint share the same joint dynamics type.
+         *
+         * @return true if everything went correctly, false otherwise
+         */
+        virtual bool setJointDynamicsType(const JointDynamicsType enable) = 0;
+
+         /**
+         * Set damping parameter of the joint, for the _index dof.
+         * The damping coefficient is expressed in N∙s/m for a prismatic joint, N∙m∙s/rad for a revolute joint.
+         * 
+         * This parameter is considered in the following joint dynamics types:
+         * * `URDFJointDynamics`
+         *
+         * @param[in] _index index of the dof for which the dynamic parameters are obtained.
+         * @return true if everything is correct, false otherwise.
+         */
+        virtual bool setDamping(const size_t _index, double& damping) = 0;
+
+         /**
+         * Set static friction parameter of the joint, for the _index dof.
+         * The static friction coefficient is expressed in N for a prismatic joint, N∙m for a revolute joint.
+         * 
+         * This parameter is considered in the following joint dynamics types:
+         * * `URDFJointDynamics`
+         *
+         * @param[in] _index index of the dof for which the dynamic parameters are obtained.
+         * @return true if everything is correct, false otherwise.
+         */
+        virtual bool setStaticFriction(const size_t _index, double& staticFriction) = 0;
+
+        /**
+         * Get the damping coefficient of the joint.
+         * The unit is N∙s/m for a prismatic joint, N∙m∙s/rad for a revolute joint.
+         *
+         * This parameter is considered in the following joint dynamics types:
+         * * `URDFJointDynamics`
+         */
+        virtual double getDamping(const size_t _index) const = 0;
+
+        /**
+         * Get the static friction coefficient of the joint.
+         * The unit is N for a prismatic joint, N∙m for a revolute joint.
+         * 
+         * This parameter is considered in the following joint dynamics types:
+         * * `URDFJointDynamics`
+         */
+        virtual double getStaticFriction(const size_t _index) const = 0;
+
 
         ///@}
     };
