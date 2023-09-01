@@ -1,12 +1,5 @@
-/*!
- * @file  BoundingBoxHelpers.h
- * @author Jorhabib Eljaik
- * @copyright 2018 iCub Facility - Istituto Italiano di Tecnologia
- *            Released under the terms of the LGPLv2.1 or later, see LGPL.TXT
- * @date 2018
- *
- */
-
+// SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
+// SPDX-License-Identifier: BSD-3-Clause
 
 #ifndef IDYNTREE_BOUNDINGBOXHELPERS_H
 #define IDYNTREE_BOUNDINGBOXHELPERS_H

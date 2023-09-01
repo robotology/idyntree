@@ -15,7 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- The license of the library is changed to `BSD-3-Clause` (https://github.com/robotology/idyntree/pull/1089).
 - The `iDynTree::ModelExporterOptions` class was changed to be defined as a struct (https://github.com/robotology/idyntree/pull/1088).
+
 
 ## [9.1.0] - 2023-05-25
 

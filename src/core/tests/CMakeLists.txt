@@ -1,4 +1,5 @@
-
+# SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
+# SPDX-License-Identifier: BSD-3-Clause
 
 macro(add_unit_test classname)
     set(testsrc ${classname}UnitTest.cpp)

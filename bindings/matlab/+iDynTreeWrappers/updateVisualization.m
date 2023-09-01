@@ -11,9 +11,8 @@ function []=updateVisualization(KinDynModel,Visualizer)
 %
 % Author : Francisco Andrade (franciscojavier.andradechavez@iit.it)
 %
-% Copyright (C) 2019 Istituto Italiano di Tecnologia (IIT). All rights reserved.
-% This software may be modified and distributed under the terms of the
-% GNU Lesser General Public License v2.1 or any later version.
+% SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
+% SPDX-License-Identifier: BSD-3-Clause
 
 transforms_idyn=KinDynModel.kinDynComp.getWorldTransformsAsHomogeneous(Visualizer.linkNames_idyn);
 w_H_links= transforms_idyn.toMatlab();

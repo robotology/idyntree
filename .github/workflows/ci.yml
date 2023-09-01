@@ -1,4 +1,4 @@
-name: C++ CI Workflow
+name: CI Workflow
 
 on:
   push:
