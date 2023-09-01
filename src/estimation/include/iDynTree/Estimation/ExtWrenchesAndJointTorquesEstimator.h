@@ -36,6 +36,13 @@ namespace iDynTree
  * The effect of gravity is considered by directly using the proper acceleration in the case
  * of the floating frame (proper acceleration can be directly measured by an accelerometer)
  * or by directly providing the gravity vector in the fixed frame case.
+ *
+ * Beside its main goal of estimation of external wrenches and joint torques, the class
+ * also provide methods that can be useful to calibrate the six-axis FT sensors of the robot.
+ * These methods are:
+ *   * ExtWrenchesAndJointTorquesEstimator::computeExpectedFTSensorsMeasurements
+ *   * ExtWrenchesAndJointTorquesEstimator::computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics
+ * Details of each method can be found in the method documentation
  */
 class ExtWrenchesAndJointTorquesEstimator
 {
@@ -66,7 +73,7 @@ class ExtWrenchesAndJointTorquesEstimator
 
     estimateExternalWrenchesBuffers m_calibBufs;
     estimateExternalWrenchesBuffers m_bufs;
-    
+
     /**
      * Disable copy constructor and copy operator
      */
@@ -214,6 +221,9 @@ public:
      * assumption about the simmetry of the robot configuration, the joint torques and
      * the external wrenches can be done.
      *
+     * \warning Before calling this method, either updateKinematicsFromFloatingBase or
+     *          updateKinematicsFromFixedBase must be called.
+     *
      * @param[in] unknowns the unknown external wrenches.
      * @param[out] predictedMeasures the estimate measures for the FT sensors.
      * @param[out] estimatedContactWrenches the estimated contact wrenches.
@@ -224,6 +234,70 @@ public:
                                                     SensorsMeasurements & predictedMeasures,
                                                     LinkContactWrenches & estimatedContactWrenches,
                                                     JointDOFsDoubleArray & estimatedJointTorques);
+
+    /**
+     * \brief For each submodel without any external wrench, computes the equation that relates the FT sensor measures with the kinematics-related known terms.
+     *
+     * For each submodel in which there are no external forces, we can write the following equation:
+     *
+     * \f[
+     *  A w = b
+     * \f]
+     * Where:
+     *   * \f$w\f$ is the vector of dimension 6*nrOfFTSensors obtained by stacking the FT sensors measures:
+     *   * \f$A\f$ is a matrix of size 6 x 6*nrOfFTSensors that depends on position in space of the FT sensors
+     *   * \f$b\f$ is a vector of size 6 that depends on the position, velocity, acceleration and gravity of each link in the submodel
+     *
+     * This function provides an easy way to compute A and B . Typically, these quantities are not used online
+     * during the estimation of external wrenches or  internal torques, but rather as an helper method when calibrating FT sensors.
+     *
+     * In the rest of the documentation, we will refer to this quantities:
+     *   * nrOfSubModels (\f$n_{sm}\f$): the number of submodels in which the model is divided, as induced by the FT sensors present in the model.
+     *   * nrOfSubModelsWithoutExtWrenches: the number of submodels on which there is no external wrench
+     *   * nrOfFTSensors (\f$n_{ft}\f$): the number of FT sensors present in the model
+     * In particular, the value of A and b for a given submodel is the following. First of all, for any submodel $sm$ with no external force,
+     * we can write (from Equation 4.19 of https://traversaro.github.io/traversaro-phd-thesis/traversaro-phd-thesis.pdf, modified to account
+     * for all FT sensors in the submodel and to remove external wrenches):
+     *
+     * \f[
+     *   \sum_{s=1}^{n_ft}~\mu_{sm, ft}~\sigma_{sm, ft}~{}_{B_{sm}} X^{ft} \mathrm{f}^{meas}_{ft} = \sum_{L \in \mathbb{L}_{sm}} {}_{B_{sm}} X^{L} {}_L \phi_L
+     * \f]
+     *
+     * where:
+     *  * \f$ \mu_{sm, ft} \f$ is equal to \f$1\f$ if the sensor \f$ft\f$ is attached to the submodel \f$sm\f$, and \f$0\f$ otherwise
+     *  * \f$ \sigma_{sm, ft} \f$ is equal to \f$1\f$ if the sensor \f$ft\f$ is measuring the force applied on submodel \f$sm\f$ or \f$-1\f$ if it is measuring the force that the submodel excerts on its neighbor submodel
+     *  *\f$ {B_{sm}} \f$ is a frame in which this equation is expressed, that for this function it is the base link of the submodel.
+     *
+     *
+     * With this definitions, we can see that A_sm and b_sm for a given submodel \f$sm\f$ can be simply be defined as:
+     *
+     * \f$
+     * A_{sm} = \begin{bmatrix} \mu_{sm, ft0}~\sigma_{sm, ft(0)}~{}_C X^{ft(0)}  & \hdots & \mu_{sm, ft(n_ft-1)}~\sigma_{sm, ft(n_ft-1)}~X^{ft(n_ft-1)} \end{bmatrix}
+     * \f$
+     *
+     * \f$
+     * w_{sm} = \begin{bmatrix} \mathrm{f}^{meas}_{ft(0)}  \\ \vdots \\ \mathrm{f}^{meas}_{ft(n_ft-1)}  \end{bmatrix}
+     * \f$
+     *
+     * \f$
+     * b_{sm} = \sum_{L \in \mathbb{L}_{sm}} {}_C X^{L} {}^L \phi_L
+     * \f$
+     *
+     * \warning Before calling this method, either updateKinematicsFromFloatingBase or
+     *          updateKinematicsFromFixedBase must be called.
+     *
+     * @param[in] unknowns the unknown external wrenches, that is used to understand the submodels in which no external wrench is present
+     * @param[out] A vector of nrOfSubModelsWithoutExtWrenches matrices of size 6 x 6*nrOfFTSensors
+     * @param[out] b vector of nrOfSubModelsWithoutExtWrenches vectors of size 6
+     * @param[out] subModelIDs vector of size nrOfSubModelsWithoutExtWrenches of unsigned integers from 0 to nrOfSubModels-1, subModelIDs[i] specifies to which submodel the quantities A[i]
+     * @param[out] baseLinkIndeces vector of size nrOfSubModelsWithoutExtWrenches of iDynTree::LinkIndex from 0 to nrOfLinks-1, baseLinkIndeces[i] specifies the link in which the equation i is expressed
+     * @return true if all went well, false otherwise.
+     */
+    bool computeSubModelMatrixRelatingFTSensorsMeasuresAndKinematics(const LinkUnknownWrenchContacts & unknowns,
+                                                                     std::vector<iDynTree::MatrixDynSize>& A,
+                                                                     std::vector<iDynTree::VectorDynSize>& b,
+                                                                     std::vector<size_t>& subModelID,
+                                                                     std::vector<iDynTree::LinkIndex>& baseLinkIndeces);
 
     /**
      * \brief Estimate the external wrenches and the internal joint torques using the measurement of the internal F/T sensors.
