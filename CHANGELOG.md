@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Added the possibility of exporting additional XML elements that are added as child of the `<robot>` element in URDF ModelExporter (https://github.com/robotology/idyntree/pull/1088).
+- Added support for reading and wrting joint friction and damping values from URDF files (https://github.com/robotology/idyntree/pull/1094).
 
 ### Changed
 
