@@ -20,23 +20,7 @@ jobs:
       matrix:
         build_type: [Release]
         os: [ubuntu-20.04, windows-2019, macos-latest]
-        matlab_version: [R2020a, R2020b, R2021a, latest]
-        exclude:
-          # R2020* is not supported on Windows on GitHub Actions
-          - os: windows-2019
-            matlab_version: R2020a
-            build_type: Release
-          - os: windows-2019
-            matlab_version: R2020b
-            build_type: Release
-          # R2020* is not working on macOS
-          # See https://github.com/robotology/idyntree/issues/1015
-          - os: macos-latest
-            matlab_version: R2020a
-            build_type: Release
-          - os: macos-latest
-            matlab_version: R2020b
-            build_type: Release
+        matlab_version: [R2022a, R2022b, latest]
 
     steps:
     - uses: actions/checkout@v2
