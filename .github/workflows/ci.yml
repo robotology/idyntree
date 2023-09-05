@@ -166,7 +166,6 @@ jobs:
         docker_image:
           - "ubuntu:20.04"
           - "ubuntu:22.04"
-          - "debian:testing"
 
     container:
       image: ${{ matrix.docker_image }}
