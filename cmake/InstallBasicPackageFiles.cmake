@@ -508,7 +508,9 @@ ${_IBPF_INCLUDE_CONTENT}
       unset(_set_include_dir_code)
       unset(_target_list)
       foreach(_target ${_targets})
-        list(APPEND _target_list ${_IBPF_NAMESPACE}${_target})
+        if(NOT ${_target} STREQUAL "idyntree-sensors")
+          list(APPEND _target_list ${_IBPF_NAMESPACE}${_target})
+        endif()
       endforeach()
       if(DEFINED ${_IBPF_VARS_PREFIX}_BUILD_INCLUDEDIR OR
          DEFINED BUILD_${_IBPF_VARS_PREFIX}_INCLUDEDIR OR
