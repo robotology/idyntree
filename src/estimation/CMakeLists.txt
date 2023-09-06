@@ -76,7 +76,7 @@ if(CMAKE_VERSION VERSION_GREATER 3.17)
 endif()
 
 # Install deprecated headers
-install(DIRECTORY include/iDynTree/estimation
+install(DIRECTORY include/iDynTree/Estimation
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iDynTree)
 
 if(IDYNTREE_COMPILE_TESTS)
