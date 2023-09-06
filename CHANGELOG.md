@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Since iDynTree 10, all the changes of iDynTree will go directly to the `master` branch, the `devel` branch will be deleted. Users that want to work with a stable version of iDynTree should use a tagged version of iDynTree .
 - The license of the library is changed to `BSD-3-Clause` (https://github.com/robotology/idyntree/pull/1089).
 - The `iDynTree::ModelExporterOptions` class was changed to be defined as a struct (https://github.com/robotology/idyntree/pull/1088).
 - The header structure has been shortened, from `<iDynTree/@component@/@headername@.h>` to `<iDynTree/@headername@.h>` (https://github.com/robotology/idyntree/pull/1104).
