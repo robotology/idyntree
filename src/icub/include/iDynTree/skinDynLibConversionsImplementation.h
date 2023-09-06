@@ -13,7 +13,7 @@
 #include <iDynTree/Traversal.h>
 #include <iDynTree/ContactWrench.h>
 
-#include <iDynTree/yarp/YARPConversions.h>
+#include <iDynTree/YARPConversions.h>
 
 #include <cassert>
 

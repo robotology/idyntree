@@ -43,7 +43,7 @@
 
 #include <iDynTree/ModelLoader.h>
 #include <iDynTree/ExternalWrenchesEstimation.h>
-#include <iDynTree/yarp/YARPConversions.h>
+#include <iDynTree/YARPConversions.h>
 #include <iDynTree/skinDynLibConversions.h>
 
 using namespace iCub::iDyn;

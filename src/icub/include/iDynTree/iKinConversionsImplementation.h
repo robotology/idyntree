@@ -7,7 +7,7 @@
 #include <iDynTree/iKinConversions.h>
 #include <iDynTree/DenavitHartenberg.h>
 
-#include <iDynTree/yarp/YARPConversions.h>
+#include <iDynTree/YARPConversions.h>
 
 #include <iCub/iKin/iKinFwd.h>
 

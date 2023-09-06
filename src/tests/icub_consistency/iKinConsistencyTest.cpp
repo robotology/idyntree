@@ -10,7 +10,7 @@
 #include <iDynTree/Model.h>
 #include <iDynTree/JointState.h>
 
-#include <iDynTree/yarp/YARPConversions.h>
+#include <iDynTree/YARPConversions.h>
 
 #include <iCub/iKin/iKinFwd.h>
 
