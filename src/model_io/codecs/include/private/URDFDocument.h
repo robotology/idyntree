@@ -28,7 +28,6 @@ namespace iDynTree {
 class iDynTree::URDFDocument: public iDynTree::XMLDocument {
     // This is the final output of the parsing + processing
     iDynTree::Model m_model;
-    iDynTree::SensorsList m_sensors;
 
     iDynTree::ModelParserOptions m_options;
 

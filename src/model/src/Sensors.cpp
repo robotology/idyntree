@@ -13,6 +13,7 @@
 #include <iDynTree/AccelerometerSensor.h>
 #include <iDynTree/GyroscopeSensor.h>
 
+#include <iDynTree/Model.h>
 #include <iDynTree/VectorDynSize.h>
 
 #include <cassert>

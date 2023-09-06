@@ -58,7 +58,6 @@ namespace iDynTree
                                                                        const ModelExporterOptions options)
     {
         Model exportedModel = this->model();
-        SensorsList exportedSensors = this->sensors();
         
         bool ok = exportedModel.updateInertialParameters(inertialParams);
         if (!ok) {
@@ -66,7 +65,7 @@ namespace iDynTree
             return false;
         }
         
-        ok = m_pimpl->modelExporter.init(exportedModel, exportedSensors, options);
+        ok = m_pimpl->modelExporter.init(exportedModel, options);
         ok = ok && m_pimpl->modelExporter.exportModelToString(model_string, filetype);
         if (!ok) {
             reportError("ModelCalibrationHelper", "updateModelInertialParametersToString", "Error in ModelExporter::exportModelToString method.");
@@ -83,7 +82,6 @@ namespace iDynTree
                                                                      const ModelExporterOptions options)
     {
         Model exportedModel = this->model();
-        SensorsList exportedSensors = this->sensors();
 
         bool ok = exportedModel.updateInertialParameters(inertialParams);
         if (!ok) {
@@ -91,7 +89,7 @@ namespace iDynTree
             return false;
         }
 
-        ok = m_pimpl->modelExporter.init(exportedModel, exportedSensors, options);
+        ok = m_pimpl->modelExporter.init(exportedModel, options);
         ok = ok && m_pimpl->modelExporter.exportModelToFile(filename, filetype);
         if (!ok) {
             reportError("ModelCalibrationHelper", "updateModelInertialParametersToFile", "Error in ModelExporter::exportModelToFile method.");

@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The `iDynTree::ModelExporterOptions` class was changed to be defined as a struct (https://github.com/robotology/idyntree/pull/1088).
 - The header structure has been shortened, from `<iDynTree/@component@/@headername@.h>` to `<iDynTree/@headername@.h>` (https://github.com/robotology/idyntree/pull/1104).
 - `iDynTree::idyntree-sensors` library has been merged in `iDynTree::idyntree-model` (https://github.com/robotology/idyntree/pull/1104).
+- The `iDynTree::Model` class gained a `m_sensors` attribute and `sensors()` method to access to it to store sensors information as part of the `iDynTree::Model` itself.
 
 ### Deprecated
 

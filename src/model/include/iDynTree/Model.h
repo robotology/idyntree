@@ -9,6 +9,7 @@
 #include <iDynTree/Transform.h>
 
 #include <iDynTree/Indices.h>
+#include <iDynTree/Sensors.h>
 #include <iDynTree/SolidShapes.h>
 
 #include <cstdlib>
@@ -134,6 +135,11 @@ namespace iDynTree
          * Solid shapes used for collision checking.
          */
         ModelSolidShapes m_collisionSolidShapes;
+
+        /**
+         * Sensors associated to the model.
+         */
+        SensorsList m_sensors;
 
         /**
          * Copy the structure of the model from another instance of a model.
@@ -564,11 +570,32 @@ namespace iDynTree
         const ModelSolidShapes& collisionSolidShapes() const;
 
         /**
+         * Get the (mutable) sensors associated with the model.
+         *
+         * @return a (mutable) reference to SensorsList associated with the model.
+         */
+        SensorsList& sensors();
+
+        /**
+         * Get the (const) sensors associated with the model.
+         *
+         * @return a (const) reference to SensorsList associated with the model.
+         */
+        const SensorsList& sensors() const;
+
+        /**
          * \brief Get a printable representation of the Model.
          *
          * Useful for debugging.
          */
         std::string toString() const;
+
+        /**
+         * \brief Check if the model is valid.
+         *
+         * Useful for debugging.
+         */
+        bool isValid() const;
 
     };
 

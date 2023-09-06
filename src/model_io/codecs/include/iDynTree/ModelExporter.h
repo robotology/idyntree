@@ -145,10 +145,21 @@ public:
      * Specifies the model of the robot to export.
      *
      * @param[in] model The used model.
+     * @param[in] options The used options.
+     * @return true if all went well, false otherwise.
+     */
+    bool init(const Model& model,
+              const ModelExporterOptions options=ModelExporterOptions());
+
+    /**
+     * Specifies the model of the robot to export.
+     *
+     * @param[in] model The used model.
      * @param[in] sensors The used sensors.
      * @param[in] options The used options.
      * @return true if all went well, false otherwise.
      */
+    IDYNTREE_DEPRECATED_WITH_MSG("Deprecated, please use the variant in which the sensors are passed as part of the iDynTree::Model.")
     bool init(const Model& model,
               const SensorsList& sensors=SensorsList(),
               const ModelExporterOptions options=ModelExporterOptions());
@@ -162,6 +173,7 @@ public:
     /**
      * Get the loaded sensors that will be exported.
      */
+    IDYNTREE_DEPRECATED_WITH_MSG("Deprecated, please use ModelExporter::model::sensors method.")
     const SensorsList & sensors();
 
     /**

@@ -63,6 +63,9 @@ void Model::copy(const Model& other)
     // Copy the solid shapes
     this->m_collisionSolidShapes = other.m_collisionSolidShapes;
     this->m_visualSolidShapes    = other.m_visualSolidShapes;
+
+    // Copy the sensors
+    this->m_sensors = other.m_sensors;
 }
 
 
@@ -931,6 +934,16 @@ const ModelSolidShapes& Model::collisionSolidShapes() const
     return m_collisionSolidShapes;
 }
 
+SensorsList& Model::sensors()
+{
+    return m_sensors;
+}
+
+const SensorsList& Model::sensors() const
+{
+    return m_sensors;
+}
+
 std::string Model::toString() const
 {
     std::stringstream ss;
@@ -960,4 +973,10 @@ std::string Model::toString() const
 
     return ss.str();
 }
+
+bool Model::isValid() const
+{
+    return m_sensors.isConsistent(*this);
+}
+
 }

@@ -210,6 +210,7 @@ public:
     /**
      * Get the loaded sensors.
      */
+    IDYNTREE_DEPRECATED_WITH_MSG("Deprecated, please use ModelLoader::model::sensors method.")
     const SensorsList & sensors();
 
     /**

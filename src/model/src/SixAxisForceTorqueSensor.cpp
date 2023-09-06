@@ -10,6 +10,7 @@
 
 #include <iDynTree/EigenHelpers.h>
 
+#include <iDynTree/Model.h>
 
 #include <cassert>
 

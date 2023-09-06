@@ -8,6 +8,7 @@
 
 #include <iDynTree/XMLAttribute.h>
 #include <iDynTree/Utils.h>
+#include <iDynTree/Model.h>
 #include <iDynTree/Sensors.h>
 #include <iDynTree/AccelerometerSensor.h>
 #include <iDynTree/GyroscopeSensor.h>

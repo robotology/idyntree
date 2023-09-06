@@ -19,11 +19,9 @@ namespace iDynTree {
     static std::unordered_set<std::string> processJoints(iDynTree::Model& model,
                                                          std::unordered_map<std::string, JointElement::JointInfo>& joints,
                                                          std::unordered_map<std::string, JointElement::JointInfo>& fixed_joints);
-    static bool processSensors(const Model& model,
-                               const std::vector<std::shared_ptr<SensorHelper>>& helpers,
-                               iDynTree::SensorsList& sensors);
-    static bool addSensorFramesAsAdditionalFramesToModel(Model& model,
-                                                         const SensorsList& sensors);
+    static bool processSensors(Model& model,
+                               const std::vector<std::shared_ptr<SensorHelper>>& helpers);
+    static bool addSensorFramesAsAdditionalFramesToModel(Model& model);
     static bool addVisualPropertiesToModel(const Model& model,
                                            const std::unordered_map<std::string, std::vector<VisualElement::VisualInfo>>& visuals,
                                            const std::unordered_map<std::string, MaterialElement::MaterialInfo>& materialDatabase,
@@ -41,7 +39,7 @@ namespace iDynTree {
 
     const iDynTree::SensorsList& URDFDocument::sensors() const
     {
-        return m_sensors;
+        return m_model.sensors();
     }
     
     URDFDocument::~URDFDocument() {}
@@ -129,7 +127,7 @@ namespace iDynTree {
 
         m_model = normalizedModel;
 
-        if (!processSensors(m_model, m_buffers.sensorHelpers, m_sensors))
+        if (!processSensors(m_model, m_buffers.sensorHelpers))
         {
             //TODO: error
             return false;
@@ -137,7 +135,7 @@ namespace iDynTree {
 
         if (m_options.addSensorFramesAsAdditionalFrames)
         {
-            if (!addSensorFramesAsAdditionalFramesToModel(m_model, m_sensors)) {
+            if (!addSensorFramesAsAdditionalFramesToModel(m_model)) {
                 //TODO: error
                 return false;
             }
@@ -212,27 +210,25 @@ namespace iDynTree {
         return childLinks;
     }
 
-    bool processSensors(const Model& model,
-                        const std::vector<std::shared_ptr<SensorHelper>>& helpers,
-                        iDynTree::SensorsList& sensors)
+    bool processSensors(Model& model,
+                        const std::vector<std::shared_ptr<SensorHelper>>& helpers)
     {
-        sensors = iDynTree::SensorsList();
+        model.sensors() = iDynTree::SensorsList();
         for (auto& sensorHelper : helpers) {
             Sensor *sensor = sensorHelper->generateSensor(model);
             if (!sensor) {
                 // TODO: write error
                 // Clean sensor list
-                sensors = iDynTree::SensorsList();
+                model.sensors() = iDynTree::SensorsList();
                 return false;
             }
-            sensors.addSensor(*sensor);
+            model.sensors().addSensor(*sensor);
             delete sensor;
         }
         return true;
     }
 
-    bool addSensorFramesAsAdditionalFramesToModel(Model& model,
-                                                  const SensorsList& sensors)
+    bool addSensorFramesAsAdditionalFramesToModel(Model& model)
     {
         bool ret = true;
 
@@ -244,9 +240,9 @@ namespace iDynTree {
             //        so we need a better way to iterate over them
             if (isLinkSensor(type))
             {
-                for (size_t sensIdx = 0; sensIdx < sensors.getNrOfSensors(type); ++sensIdx)
+                for (size_t sensIdx = 0; sensIdx < model.sensors().getNrOfSensors(type); ++sensIdx)
                 {
-                    LinkSensor * linkSensor = dynamic_cast<LinkSensor*>(sensors.getSensor(type,sensIdx));
+                    LinkSensor * linkSensor = dynamic_cast<LinkSensor*>(model.sensors().getSensor(type,sensIdx));
                     if (!linkSensor) {
                         //TODO: error
                         return false;
@@ -275,9 +271,9 @@ namespace iDynTree {
             {
                 // We add the sensor frame as an additional frame of the **child** link
                 // (as tipically for URDF sensors the child link frame is coincident with the F/T sensor frame
-                for (size_t sensIdx = 0; sensIdx < sensors.getNrOfSensors(type); ++sensIdx)
+                for (size_t sensIdx = 0; sensIdx < model.sensors().getNrOfSensors(type); ++sensIdx)
                 {
-                    SixAxisForceTorqueSensor * ftSensor = dynamic_cast<SixAxisForceTorqueSensor*>(sensors.getSensor(type,sensIdx));
+                    SixAxisForceTorqueSensor * ftSensor = dynamic_cast<SixAxisForceTorqueSensor*>(model.sensors().getSensor(type,sensIdx));
 
                     std::string linkToWhichTheSensorIsAttachedName = ftSensor->getSecondLinkName();
 

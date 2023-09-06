@@ -8,6 +8,7 @@
 
 
 namespace iDynTree {
+    class Model;
     class Wrench;
     typedef LinearMotionVector3 LinAcceleration;
     typedef AngularMotionVector3 AngVelocity;
@@ -17,9 +18,9 @@ namespace iDynTree {
 #include <vector>
 #include <iterator>
 
+#include <iDynTree/Transform.h>
 #include <iDynTree/VectorDynSize.h>
 
-#include <iDynTree/Model.h>
 #include <iDynTree/Indices.h>
 
 namespace iDynTree {
@@ -217,7 +218,7 @@ namespace iDynTree {
          *
          * @return the link_H_sensor transform
          */
-        virtual Transform getLinkSensorTransform() const = 0;
+        virtual iDynTree::Transform getLinkSensorTransform() const = 0;
 
         /**
          * Set the name of the parent Link.

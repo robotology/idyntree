@@ -9,6 +9,9 @@
 #include "iDynTree/SpatialAcc.h"
 #include "iDynTree/Twist.h"
 
+#include "iDynTree/Model.h"
+
+
 namespace iDynTree {
 
 struct AccelerometerSensor::AccelerometerPrivateAttributes
