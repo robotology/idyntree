@@ -12,7 +12,7 @@
 #include <iDynTree/ModelTestUtils.h>
 
 #include <iDynTree/Model.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelLoader.h>
 
 #include <iDynTree/AccelerometerSensor.h>
 #include <iDynTree/ThreeAxisAngularAccelerometerSensor.h>

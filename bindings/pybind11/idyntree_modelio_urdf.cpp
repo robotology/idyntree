@@ -5,8 +5,8 @@
 #include <string>
 #include <vector>
 #include <iDynTree/Model.h>
-#include <iDynTree/ModelIO/ModelExporter.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelExporter.h>
+#include <iDynTree/ModelLoader.h>
 #include <iDynTree/Sensors.h>
 
 #include <pybind11/operators.h>

@@ -4,13 +4,13 @@
 #include <iDynTree/Model.h>
 
 // To load models from file
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelLoader.h>
 
 // To approximate shapes of a model
 #include <iDynTree/ModelTransformersSolidShapes.h>
 
 // To write model to file
-#include <iDynTree/ModelIO/ModelExporter.h>
+#include <iDynTree/ModelExporter.h>
 
 #include "cmdline.h"
 

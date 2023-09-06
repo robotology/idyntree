@@ -10,7 +10,7 @@
 #include <iDynTree/Indices.h>
 #include <iDynTree/ModelTransformers.h>
 
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelLoader.h>
 
 #include <sstream>
 

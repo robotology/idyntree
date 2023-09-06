@@ -18,7 +18,7 @@
 
 // iDynTree headers
 #include <iDynTree/KinDynComputations.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelLoader.h>
 #include <iDynTree/InverseKinematics.h>
 
 int main(int argc, char *argv[])

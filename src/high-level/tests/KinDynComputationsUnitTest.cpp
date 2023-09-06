@@ -21,7 +21,7 @@
 #include <iDynTree/SubModel.h>
 #include <iDynTree/ModelTransformers.h>
 
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelLoader.h>
 
 
 using namespace iDynTree;

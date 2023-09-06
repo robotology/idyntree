@@ -18,7 +18,7 @@
 #include <iDynTree/JointState.h>
 #include <iDynTree/FreeFloatingState.h>
 
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelLoader.h>
 
 
 namespace Eigen

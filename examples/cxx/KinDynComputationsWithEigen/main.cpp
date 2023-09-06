@@ -19,7 +19,7 @@
 // iDynTree headers
 #include <iDynTree/FreeFloatingState.h>
 #include <iDynTree/KinDynComputations.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelLoader.h>
 
 // Helpers function to convert between
 // iDynTree datastructures

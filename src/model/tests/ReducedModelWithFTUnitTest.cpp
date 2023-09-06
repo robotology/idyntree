@@ -5,7 +5,7 @@
 #include <iDynTree/ModelSensorsTransformers.h>
 #include <iDynTree/ModelTransformers.h>
 #include <iDynTree/Model.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelLoader.h>
 #include "testModels.h"
 #include <iostream>
 #include <memory>

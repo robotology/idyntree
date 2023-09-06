@@ -5,7 +5,7 @@
 #define IDYNTREE_DEPRECATED_MODEL_EXPORTER_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/ModelIO/ModelExporter.h> is deprecated. Please use <iDynTree/ModelExporter.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/ModelExporter.h> is deprecated. Please use <iDynTree/ModelExporter.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/ModelExporter.h>

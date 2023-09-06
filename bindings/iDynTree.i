@@ -110,10 +110,10 @@
 #include "iDynTree/PredictSensorsMeasurements.h"
 
 // Model loading from external formats
-#include "iDynTree/ModelIO/URDFDofsImport.h"
-#include "iDynTree/ModelIO/ModelLoader.h"
-#include "iDynTree/ModelIO/ModelExporter.h"
-#include "iDynTree/ModelIO/ModelCalibrationHelper.h"
+#include "iDynTree/URDFDofsImport.h"
+#include "iDynTree/ModelLoader.h"
+#include "iDynTree/ModelExporter.h"
+#include "iDynTree/ModelCalibrationHelper.h"
 
 
 // Estimation related classes
@@ -286,10 +286,10 @@ namespace std {
 %include "sensors.i"
 
 // Model loading from external formats
-%include "iDynTree/ModelIO/URDFDofsImport.h"
-%include "iDynTree/ModelIO/ModelLoader.h"
-%include "iDynTree/ModelIO/ModelExporter.h"
-%include "iDynTree/ModelIO/ModelCalibrationHelper.h"
+%include "iDynTree/URDFDofsImport.h"
+%include "iDynTree/ModelLoader.h"
+%include "iDynTree/ModelExporter.h"
+%include "iDynTree/ModelCalibrationHelper.h"
 
 // Estimation related classes
 %include "iDynTree/Estimation/ExternalWrenchesEstimation.h"

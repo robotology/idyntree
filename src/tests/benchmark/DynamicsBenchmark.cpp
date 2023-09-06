@@ -10,7 +10,7 @@
 #include <kdl_codyco/undirectedtree.hpp>
 #include <kdl_codyco/KDLConversions.h>
 
-#include <iDynTree/ModelIO/impl/urdf_import.hpp>
+#include <iDynTree/impl/urdf_import.hpp>
 
 // iDynTree includes
 #include <iDynTree/Model.h>
@@ -25,7 +25,7 @@
 #include <iDynTree/FreeFloatingState.h>
 #include <iDynTree/FreeFloatingMatrices.h>
 
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelLoader.h>
 
 #include <iDynTree/TestUtils.h>
 

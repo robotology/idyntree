@@ -25,7 +25,7 @@
 #include <iDynTree/Dynamics.h>
 #include <iDynTree/Jacobians.h>
 
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelLoader.h>
 
 #include <cassert>
 #include <iostream>

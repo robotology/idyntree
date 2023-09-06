@@ -7,7 +7,7 @@
 
 #include <iDynTree/Model.h>
 #include <iDynTree/DenavitHartenberg.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelLoader.h>
 
 #include <iDynTree/KinDynComputations.h>
 

@@ -9,7 +9,7 @@
 #include <iDynTree/TestUtils.h>
 #include <iDynTree/JointState.h>
 #include <iDynTree/ModelTestUtils.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelLoader.h>
 
 #include "testModels.h"
 

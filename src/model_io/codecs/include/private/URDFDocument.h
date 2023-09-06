@@ -10,7 +10,7 @@
 #include "MaterialElement.h"
 #include "SensorElement.h"
 #include "VisualElement.h"
-#include "iDynTree/ModelIO/ModelLoader.h"
+#include "iDynTree/ModelLoader.h"
 
 #include <iDynTree/Model.h>
 #include <iDynTree/Sensors.h>

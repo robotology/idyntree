@@ -23,7 +23,7 @@
 #include <iDynTree/SixAxisForceTorqueSensor.h>
 #include <iDynTree/PredictSensorsMeasurements.h>
 
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelLoader.h>
 
 #include <iDynTree/EigenHelpers.h>
 

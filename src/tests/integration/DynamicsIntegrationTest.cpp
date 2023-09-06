@@ -8,7 +8,7 @@
 #include <iDynTree/Model.h>
 #include <iDynTree/Traversal.h>
 
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelLoader.h>
 
 #include <iDynTree/ForwardKinematics.h>
 #include <iDynTree/Dynamics.h>

@@ -3,8 +3,8 @@
 # include <iDynTree/Sensors.h>
 #include "testModels.h"
 #include <iDynTree/Model.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
-#include <iDynTree/ModelIO/URDFDofsImport.h>
+#include <iDynTree/ModelLoader.h>
+#include <iDynTree/URDFDofsImport.h>
 
 #include <iDynTree/TestUtils.h>
 #include <iDynTree/AccelerometerSensor.h>

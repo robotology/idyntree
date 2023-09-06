@@ -6,7 +6,7 @@
 
 #include <iDynTree/Model.h>
 #include <iDynTree/Sensors.h>
-#include <iDynTree/ModelIO/ModelExporter.h>
+#include <iDynTree/ModelExporter.h>
 
 #include <memory>
 #include <string>

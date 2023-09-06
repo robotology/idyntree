@@ -6,8 +6,8 @@
 #include <iDynTree/TestUtils.h>
 
 #include <iDynTree/Model.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
-#include <iDynTree/ModelIO/ModelCalibrationHelper.h>
+#include <iDynTree/ModelLoader.h>
+#include <iDynTree/ModelCalibrationHelper.h>
 
 #include <cassert>
 #include <cstdio>

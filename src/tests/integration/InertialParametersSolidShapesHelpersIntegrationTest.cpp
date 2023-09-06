@@ -6,7 +6,7 @@
 #include "testModels.h"
 
 #include <iDynTree/InertialParametersSolidShapesHelpers.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelLoader.h>
 
 
 using namespace iDynTree;

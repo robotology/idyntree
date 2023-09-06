@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #include <iDynTree/Model.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelLoader.h>
 
 #include <iDynTree/Visualizer.h>
 

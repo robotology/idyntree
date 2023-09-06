@@ -8,7 +8,7 @@
 #include <iDynTree/Twist.h>
 #include <iDynTree/ClassicalAcc.h>
 #include <iDynTree/SpatialAcc.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelLoader.h>
 #include <iDynTree/EigenHelpers.h>
 
 #include <cassert>

@@ -9,7 +9,7 @@
 #include <iDynTree/Axis.h>
 #include <iDynTree/Direction.h>
 #include <iDynTree/Transform.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
+#include <iDynTree/ModelLoader.h>
 
 #include <iDynTree/EigenHelpers.h>
 

@@ -5,7 +5,7 @@
 #define IDYNTREE_DEPRECATED_MODEL_LOADER_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/ModelIO/ModelLoader.h> is deprecated. Please use <iDynTree/ModelLoader.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/ModelLoader.h> is deprecated. Please use <iDynTree/ModelLoader.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/ModelLoader.h>

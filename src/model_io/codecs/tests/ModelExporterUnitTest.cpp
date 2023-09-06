@@ -8,8 +8,8 @@
 
 #include <iDynTree/Model.h>
 #include <iDynTree/RevoluteJoint.h>
-#include <iDynTree/ModelIO/ModelLoader.h>
-#include <iDynTree/ModelIO/ModelExporter.h>
+#include <iDynTree/ModelLoader.h>
+#include <iDynTree/ModelExporter.h>
 
 
 #include <cassert>
