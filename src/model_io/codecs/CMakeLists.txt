@@ -51,7 +51,7 @@ target_include_directories(${libraryname} PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURR
                                                  "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/private>"
                                                  "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>")
 
-target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model idyntree-sensors idyntree-modelio-xml
+target_link_libraries(${libraryname} PUBLIC idyntree-core idyntree-model idyntree-modelio-xml
                                      PRIVATE Eigen3::Eigen LibXml2::LibXml2)
 # See https://stackoverflow.com/questions/38832528/transitive-target-include-directories-on-object-libraries
 # Can be removed with CMake 3.12

@@ -7,7 +7,7 @@ macro(add_unit_test classname)
     set(testbinary ${classname}UnitTest)
     set(testname   UnitTest${classname})
     add_executable(${testbinary} ${testsrc})
-    target_link_libraries(${testbinary} PRIVATE idyntree-sensors idyntree-modelio idyntree-visualization idyntree-testmodels Eigen3::Eigen)
+    target_link_libraries(${testbinary} PRIVATE idyntree-modelio idyntree-visualization idyntree-testmodels Eigen3::Eigen)
     add_test(NAME ${testname} COMMAND ${testbinary})
 
     if(IDYNTREE_RUN_VALGRIND_TESTS)
