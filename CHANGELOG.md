@@ -19,12 +19,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The `iDynTree::ModelExporterOptions` class was changed to be defined as a struct (https://github.com/robotology/idyntree/pull/1088).
 - The header structure has been shortened, from `<iDynTree/@component@/@headername@.h>` to `<iDynTree/@headername@.h>` (https://github.com/robotology/idyntree/pull/1104).
 - `iDynTree::idyntree-sensors` library has been merged in `iDynTree::idyntree-model` (https://github.com/robotology/idyntree/pull/1104).
-- The `iDynTree::Model` class gained a `m_sensors` attribute and `sensors()` method to access to it to store sensors information as part of the `iDynTree::Model` itself.
+- The `iDynTree::Model` class gained a `m_sensors` attribute and `sensors()` method to access to it to store sensors information as part of the `iDynTree::Model` itself (https://github.com/robotology/idyntree/pull/1106).
 
 ### Deprecated
 
 - Linking `iDynTree::idyntree-sensors` is deprecated, you can just link `iDynTree::idyntree-model` instead, or just search and replace `iDynTree::idyntree-sensors` with an empty string if you are already linking `iDynTree::idyntree-model` (https://github.com/robotology/idyntree/pull/1104).
 - Including `<iDynTree/Core/@headername@.h>`, `<iDynTree/Model/@headername@.h>`, `<iDynTree/Sensors/@headername@.h>`, `<iDynTree/ModelIO/@headername@.h>`, `<iDynTree/Estimation/@headername@.h>`, `<iDynTree/yarp/@headername@.h>` is deprecated, just include `<iDynTree/@headername@.h>` . To perform this migration, just search and replace `<iDynTree/Core/` with `<iDynTree/`, `<iDynTree/Model/` with `<iDynTree/`, `<iDynTree/Sensors/` with `<iDynTree/`, `<iDynTree/ModelIO/` with `<iDynTree/`, `<iDynTree/Estimation/` with `<iDynTree/`, `<iDynTree/yarp/` with `<iDynTree/` (https://github.com/robotology/idyntree/pull/1104).
+- Several methods that take in input both a `iDynTree::Model` and a `iDynTree::SensorsList` have been deprecated, users are suggested to call the variant that takes in input only the `iDynTree::Model`, if necessary by populating correctly the sensors of the `iDynTree::Model` via the `iDynTree::Model::sensors` method (https://github.com/robotology/idyntree/pull/1106).
 
 
 ## [9.1.0] - 2023-05-25
