@@ -1,12 +1,12 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Model/RevoluteJoint.h>
+#include <iDynTree/RevoluteJoint.h>
 
 #include <iDynTree/Axis.h>
 #include <iDynTree/VectorDynSize.h>
 #include <iDynTree/TransformDerivative.h>
-#include <iDynTree/Model/LinkState.h>
+#include <iDynTree/LinkState.h>
 #include <iDynTree/Wrench.h>
 #include <iDynTree/Twist.h>
 

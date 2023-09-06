@@ -76,29 +76,29 @@
 #include "iDynTree/Span.h"
 
 // Model related data structures
-#include "iDynTree/Model/Indices.h"
-#include "iDynTree/Model/LinkState.h"
-#include "iDynTree/Model/Link.h"
-#include "iDynTree/Model/IJoint.h"
-#include "iDynTree/Model/FixedJoint.h"
-#include "iDynTree/Model/MovableJointImpl.h"
-#include "iDynTree/Model/RevoluteJoint.h"
-#include "iDynTree/Model/PrismaticJoint.h"
-#include "iDynTree/Model/Traversal.h"
-#include "iDynTree/Model/SolidShapes.h"
-#include "iDynTree/Model/Model.h"
-#include "iDynTree/Model/JointState.h"
-#include "iDynTree/Model/FreeFloatingMatrices.h"
-#include "iDynTree/Model/FreeFloatingState.h"
-#include "iDynTree/Model/ContactWrench.h"
-#include "iDynTree/Model/ModelTestUtils.h"
-#include "iDynTree/Model/ModelTransformers.h"
-#include "iDynTree/Model/SubModel.h"
+#include "iDynTree/Indices.h"
+#include "iDynTree/LinkState.h"
+#include "iDynTree/Link.h"
+#include "iDynTree/IJoint.h"
+#include "iDynTree/FixedJoint.h"
+#include "iDynTree/MovableJointImpl.h"
+#include "iDynTree/RevoluteJoint.h"
+#include "iDynTree/PrismaticJoint.h"
+#include "iDynTree/Traversal.h"
+#include "iDynTree/SolidShapes.h"
+#include "iDynTree/Model.h"
+#include "iDynTree/JointState.h"
+#include "iDynTree/FreeFloatingMatrices.h"
+#include "iDynTree/FreeFloatingState.h"
+#include "iDynTree/ContactWrench.h"
+#include "iDynTree/ModelTestUtils.h"
+#include "iDynTree/ModelTransformers.h"
+#include "iDynTree/SubModel.h"
 
 // Kinematics & Dynamics related functions
-#include "iDynTree/Model/ForwardKinematics.h"
-#include "iDynTree/Model/Dynamics.h"
-#include "iDynTree/Model/DenavitHartenberg.h"
+#include "iDynTree/ForwardKinematics.h"
+#include "iDynTree/Dynamics.h"
+#include "iDynTree/DenavitHartenberg.h"
 
 // Sensors related data structures
 #include "iDynTree/Sensors/Sensors.h"
@@ -236,12 +236,12 @@ namespace std {
 %template(DynamicMatrixView) iDynTree::MatrixView<double>;
 
 // Model related data structures
-%include "iDynTree/Model/Indices.h"
-%include "iDynTree/Model/LinkState.h"
-%include "iDynTree/Model/Link.h"
-%include "iDynTree/Model/IJoint.h"
-%include "iDynTree/Model/FixedJoint.h"
-%include "iDynTree/Model/MovableJointImpl.h"
+%include "iDynTree/Indices.h"
+%include "iDynTree/LinkState.h"
+%include "iDynTree/Link.h"
+%include "iDynTree/IJoint.h"
+%include "iDynTree/FixedJoint.h"
+%include "iDynTree/MovableJointImpl.h"
 
 %template(MovableJointImpl1) iDynTree::MovableJointImpl<1,1>;
 %template(MovableJointImpl2) iDynTree::MovableJointImpl<2,2>;
@@ -250,18 +250,18 @@ namespace std {
 %template(MovableJointImpl5) iDynTree::MovableJointImpl<5,5>;
 %template(MovableJointImpl6) iDynTree::MovableJointImpl<6,6>;
 
-%include "iDynTree/Model/RevoluteJoint.h"
-%include "iDynTree/Model/PrismaticJoint.h"
-%include "iDynTree/Model/Traversal.h"
-%include "iDynTree/Model/SolidShapes.h"
-%include "iDynTree/Model/Model.h"
-%include "iDynTree/Model/JointState.h"
-%include "iDynTree/Model/FreeFloatingMatrices.h"
-%include "iDynTree/Model/FreeFloatingState.h"
-%include "iDynTree/Model/ContactWrench.h"
-%include "iDynTree/Model/ModelTestUtils.h"
-%include "iDynTree/Model/ModelTransformers.h"
-%include "iDynTree/Model/SubModel.h"
+%include "iDynTree/RevoluteJoint.h"
+%include "iDynTree/PrismaticJoint.h"
+%include "iDynTree/Traversal.h"
+%include "iDynTree/SolidShapes.h"
+%include "iDynTree/Model.h"
+%include "iDynTree/JointState.h"
+%include "iDynTree/FreeFloatingMatrices.h"
+%include "iDynTree/FreeFloatingState.h"
+%include "iDynTree/ContactWrench.h"
+%include "iDynTree/ModelTestUtils.h"
+%include "iDynTree/ModelTransformers.h"
+%include "iDynTree/SubModel.h"
 
 %include "joints.i"
 
@@ -270,9 +270,9 @@ namespace std {
 
 
 // Kinematics & Dynamics related functions
-%include "iDynTree/Model/ForwardKinematics.h"
-%include "iDynTree/Model/Dynamics.h"
-%include "iDynTree/Model/DenavitHartenberg.h"
+%include "iDynTree/ForwardKinematics.h"
+%include "iDynTree/Dynamics.h"
+%include "iDynTree/DenavitHartenberg.h"
 
 // Sensors related data structures
 %include "iDynTree/Sensors/Sensors.h"

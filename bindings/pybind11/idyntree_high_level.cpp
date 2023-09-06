@@ -3,7 +3,7 @@
 #include <iDynTree/VectorDynSize.h>
 #include <iDynTree/VectorFixSize.h>
 #include <iDynTree/KinDynComputations.h>
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/Model.h>
 #include <pybind11/operators.h>
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>

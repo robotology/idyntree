@@ -4,10 +4,10 @@
 #ifndef GRAVITY_COMPENSATION_HELPERS_H
 #define GRAVITY_COMPENSATION_HELPERS_H
 
-#include <iDynTree/Model/FreeFloatingState.h>
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/Traversal.h>
-#include <iDynTree/Model/Dynamics.h>
+#include <iDynTree/FreeFloatingState.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/Traversal.h>
+#include <iDynTree/Dynamics.h>
 
 #include <iDynTree/EigenHelpers.h>
 #include <iDynTree/Utils.h>

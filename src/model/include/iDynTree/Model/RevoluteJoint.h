@@ -5,7 +5,7 @@
 #define IDYNTREE_MODEL_REVOLUTE_JOINT_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Model/RevoluteJoint.h> is deprecated. Please use <iDynTree/RevoluteJoint.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/RevoluteJoint.h> is deprecated. Please use <iDynTree/RevoluteJoint.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/RevoluteJoint.h>

@@ -2,13 +2,13 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#include <iDynTree/Model/ForwardKinematics.h>
+#include <iDynTree/ForwardKinematics.h>
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/Traversal.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/Traversal.h>
 
-#include <iDynTree/Model/FreeFloatingState.h>
-#include <iDynTree/Model/LinkState.h>
+#include <iDynTree/FreeFloatingState.h>
+#include <iDynTree/LinkState.h>
 
 namespace iDynTree
 {

@@ -9,13 +9,13 @@
 #include <iDynTree/MatrixFixSize.h>
 #include <iDynTree/Transform.h>
 #include <iDynTree/VectorFixSize.h>
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/SolidShapes.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/SolidShapes.h>
 #include <iDynTree/MeshcatVisualizer.h>
 #include <iDynTree/VectorDynSize.h>
-#include <iDynTree/Model/ForwardKinematics.h>
-#include <iDynTree/Model/LinkState.h>
-#include <iDynTree/Model/Traversal.h>
+#include <iDynTree/ForwardKinematics.h>
+#include <iDynTree/LinkState.h>
+#include <iDynTree/Traversal.h>
 
 #include <memory>
 #include <string_view>

@@ -16,7 +16,7 @@ namespace iDynTree
 
 #include <iDynTree/Sensors/Sensors.h>
 
-#include <iDynTree/Model/LinkState.h>
+#include <iDynTree/LinkState.h>
 
 #include <vector>
 

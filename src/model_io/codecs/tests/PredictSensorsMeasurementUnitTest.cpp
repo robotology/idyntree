@@ -5,13 +5,13 @@
 
 # include <iDynTree/Sensors/Sensors.h>
 #include "testModels.h"
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/Model.h>
 #include <iDynTree/ModelIO/ModelLoader.h>
 #include <iDynTree/ModelIO/URDFDofsImport.h>
 #include <iDynTree/Sensors/PredictSensorsMeasurements.h>
-#include <iDynTree/Model/Traversal.h>
-#include <iDynTree/Model/LinkState.h>
-#include <iDynTree/Model/FreeFloatingState.h>
+#include <iDynTree/Traversal.h>
+#include <iDynTree/LinkState.h>
+#include <iDynTree/FreeFloatingState.h>
 
 #include <iDynTree/TestUtils.h>
 const double acclTestVal = 1.5;

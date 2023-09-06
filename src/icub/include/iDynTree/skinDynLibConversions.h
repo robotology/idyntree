@@ -7,7 +7,7 @@
 #include <map>
 #include <string>
 
-#include <iDynTree/Model/Indices.h>
+#include <iDynTree/Indices.h>
 #include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
 
 #include <iCub/skinDynLib/dynContactList.h>

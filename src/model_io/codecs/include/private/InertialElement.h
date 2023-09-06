@@ -7,7 +7,7 @@
 #include <iDynTree/XMLElement.h>
 
 #include <iDynTree/Transform.h>
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/Model.h>
 
 namespace iDynTree {
     class InertialElement;

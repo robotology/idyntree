@@ -6,13 +6,13 @@
 #include <iDynTree/EigenMathHelpers.h>
 #include <iDynTree/SpatialMomentum.h>
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/Traversal.h>
-#include <iDynTree/Model/SubModel.h>
-#include <iDynTree/Model/LinkState.h>
-#include <iDynTree/Model/JointState.h>
-#include <iDynTree/Model/ContactWrench.h>
-#include <iDynTree/Model/LinkTraversalsCache.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/Traversal.h>
+#include <iDynTree/SubModel.h>
+#include <iDynTree/LinkState.h>
+#include <iDynTree/JointState.h>
+#include <iDynTree/ContactWrench.h>
+#include <iDynTree/LinkTraversalsCache.h>
 
 #include <iDynTree/Sensors/Sensors.h>
 #include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>

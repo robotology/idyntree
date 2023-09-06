@@ -5,8 +5,8 @@
 
 #include "iDynTree/Transform.h"
 
-#include <iDynTree/Model/Traversal.h>
-#include <iDynTree/Model/Link.h>
+#include <iDynTree/Traversal.h>
+#include <iDynTree/Link.h>
 
 #include <iDynTree/EigenHelpers.h>
 

@@ -10,8 +10,8 @@
 #include <iDynTree/VectorDynSize.h>
 #include <iDynTree/VectorFixSize.h>
 
-#include <iDynTree/Model/Indices.h>
-#include <iDynTree/Model/LinkState.h>
+#include <iDynTree/Indices.h>
+#include <iDynTree/LinkState.h>
 
 #include <vector>
 

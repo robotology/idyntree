@@ -2,13 +2,13 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#include <iDynTree/Model/Jacobians.h>
+#include <iDynTree/Jacobians.h>
 
 #include <iDynTree/EigenHelpers.h>
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/Traversal.h>
-#include <iDynTree/Model/LinkState.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/Traversal.h>
+#include <iDynTree/LinkState.h>
 
 namespace iDynTree
 {

@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 #include <iDynTree/Transform.h>
-#include <iDynTree/Model/Indices.h>
+#include <iDynTree/Indices.h>
 
 namespace iDynTree
 {

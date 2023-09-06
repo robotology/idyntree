@@ -7,8 +7,8 @@
 #include <iDynTree/Position.h>
 #include <iDynTree/Wrench.h>
 
-#include <iDynTree/Model/Indices.h>
-#include <iDynTree/Model/LinkState.h>
+#include <iDynTree/Indices.h>
+#include <iDynTree/LinkState.h>
 
 
 #include <vector>

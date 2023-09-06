@@ -9,7 +9,7 @@
 #include "MaterialElement.h"
 
 #include <iDynTree/Transform.h>
-#include <iDynTree/Model/SolidShapes.h>
+#include <iDynTree/SolidShapes.h>
 
 #include <memory>
 #include <string>

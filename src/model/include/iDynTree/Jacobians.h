@@ -4,7 +4,7 @@
 #ifndef IDYNTREE_JACOBIANS_H
 #define IDYNTREE_JACOBIANS_H
 
-#include <iDynTree/Model/Indices.h>
+#include <iDynTree/Indices.h>
 
 namespace iDynTree
 {

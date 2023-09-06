@@ -6,9 +6,9 @@
 
 #include <iDynTree/Estimation/SimpleLeggedOdometry.h>
 
-#include <iDynTree/Model/ForwardKinematics.h>
-#include <iDynTree/Model/Indices.h>
-#include <iDynTree/Model/ModelTransformers.h>
+#include <iDynTree/ForwardKinematics.h>
+#include <iDynTree/Indices.h>
+#include <iDynTree/ModelTransformers.h>
 
 #include <iDynTree/ModelIO/ModelLoader.h>
 

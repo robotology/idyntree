@@ -5,7 +5,7 @@
 #define IDYNTREE_MODEL_JACOBIANS_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Model/Jacobians.h> is deprecated. Please use <iDynTree/Jacobians.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/Jacobians.h> is deprecated. Please use <iDynTree/Jacobians.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/Jacobians.h>

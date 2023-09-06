@@ -4,7 +4,7 @@
 
 #include <iDynTree/ModelTransformersSolidShapes.h>
 
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/Model.h>
 #include <iDynTree/InertialParametersSolidShapesHelpers.h>
 
 #include <cassert>

@@ -5,11 +5,11 @@
 #define IDYNTREE_SIMPLE_LEGGED_ODOMETRY2_
 
 #include <iDynTree/Transform.h>
-#include <iDynTree/Model/Indices.h>
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/Traversal.h>
-#include <iDynTree/Model/JointState.h>
-#include <iDynTree/Model/LinkState.h>
+#include <iDynTree/Indices.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/Traversal.h>
+#include <iDynTree/JointState.h>
+#include <iDynTree/LinkState.h>
 
 namespace iDynTree
 {

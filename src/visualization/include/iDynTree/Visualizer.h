@@ -10,8 +10,8 @@
 #include <iDynTree/Direction.h>
 #include <iDynTree/Position.h>
 
-#include <iDynTree/Model/JointState.h>
-#include <iDynTree/Model/LinkState.h>
+#include <iDynTree/JointState.h>
+#include <iDynTree/LinkState.h>
 
 namespace iDynTree
 {

@@ -11,10 +11,10 @@
 #include <iDynTree/EigenSparseHelpers.h>
 #include <iDynTree/TestUtils.h>
 #include <iDynTree/SparseMatrix.h>
-#include <iDynTree/Model/ModelTestUtils.h>
+#include <iDynTree/ModelTestUtils.h>
 
-#include <iDynTree/Model/ForwardKinematics.h>
-#include <iDynTree/Model/Dynamics.h>
+#include <iDynTree/ForwardKinematics.h>
+#include <iDynTree/Dynamics.h>
 
 #include <cstdio>
 #include <cstdlib>

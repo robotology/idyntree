@@ -5,7 +5,7 @@
 #define IDYNTREE_MODEL_SOLID_SHAPES_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Model/SolidShapes.h> is deprecated. Please use <iDynTree/SolidShapes.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/SolidShapes.h> is deprecated. Please use <iDynTree/SolidShapes.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/SolidShapes.h>

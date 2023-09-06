@@ -6,8 +6,8 @@
 
 #include <iDynTree/Transform.h>
 
-#include <iDynTree/Model/Indices.h>
-#include <iDynTree/Model/IJoint.h>
+#include <iDynTree/Indices.h>
+#include <iDynTree/IJoint.h>
 
 namespace iDynTree
 {

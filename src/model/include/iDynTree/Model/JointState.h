@@ -5,7 +5,7 @@
 #define IDYNTREE_MODEL_JOINT_STATE_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Model/JointState.h> is deprecated. Please use <iDynTree/JointState.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/JointState.h> is deprecated. Please use <iDynTree/JointState.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/JointState.h>

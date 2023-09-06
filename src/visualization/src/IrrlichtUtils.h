@@ -5,7 +5,7 @@
 #define IDYNTREE_IRRLICHT_UTILS_H
 
 #include <EMaterialTypes.h>
-#include <iDynTree/Model/SolidShapes.h>
+#include <iDynTree/SolidShapes.h>
 #include <iDynTree/Visualizer.h>
 
 #include <irrlicht.h>

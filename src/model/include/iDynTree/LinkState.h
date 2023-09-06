@@ -10,7 +10,7 @@
 #include <iDynTree/Wrench.h>
 #include <iDynTree/ArticulatedBodyInertia.h>
 
-#include <iDynTree/Model/Indices.h>
+#include <iDynTree/Indices.h>
 
 #include <vector>
 

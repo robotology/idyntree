@@ -23,16 +23,16 @@
 #include <iCub/skinDynLib/dynContactList.h>
 #include <kdl_codyco/regressors/dirl_utils.hpp>
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/SubModel.h>
-#include <iDynTree/Model/ModelTransformers.h>
-#include <iDynTree/Model/ForwardKinematics.h>
-#include <iDynTree/Model/ContactWrench.h>
-#include <iDynTree/Model/Dynamics.h>
-#include <iDynTree/Model/Traversal.h>
-#include <iDynTree/Model/LinkState.h>
-#include <iDynTree/Model/JointState.h>
-#include <iDynTree/Model/FreeFloatingState.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/SubModel.h>
+#include <iDynTree/ModelTransformers.h>
+#include <iDynTree/ForwardKinematics.h>
+#include <iDynTree/ContactWrench.h>
+#include <iDynTree/Dynamics.h>
+#include <iDynTree/Traversal.h>
+#include <iDynTree/LinkState.h>
+#include <iDynTree/JointState.h>
+#include <iDynTree/FreeFloatingState.h>
 
 #include <iDynTree/EigenHelpers.h>
 #include <iDynTree/TestUtils.h>

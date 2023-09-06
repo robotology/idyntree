@@ -12,14 +12,14 @@
 #include <iDynTree/Utils.h>
 #include <iDynTree/Triplets.h>
 
-#include <iDynTree/Model/Indices.h>
-#include <iDynTree/Model/LinkState.h>
-#include <iDynTree/Model/Traversal.h>
-#include <iDynTree/Model/FreeFloatingState.h>
+#include <iDynTree/Indices.h>
+#include <iDynTree/LinkState.h>
+#include <iDynTree/Traversal.h>
+#include <iDynTree/FreeFloatingState.h>
 
 #include <iDynTree/Sensors/Sensors.h>
 
-#include <iDynTree/Model/LinkTraversalsCache.h>
+#include <iDynTree/LinkTraversalsCache.h>
 
 #include <vector>
 

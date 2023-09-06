@@ -1,12 +1,12 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Model/FixedJoint.h>
-#include <iDynTree/Model/RevoluteJoint.h>
-#include <iDynTree/Model/PrismaticJoint.h>
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/ModelTestUtils.h>
-#include <iDynTree/Model/Traversal.h>
+#include <iDynTree/FixedJoint.h>
+#include <iDynTree/RevoluteJoint.h>
+#include <iDynTree/PrismaticJoint.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/ModelTestUtils.h>
+#include <iDynTree/Traversal.h>
 
 #include <iDynTree/TestUtils.h>
 
@@ -16,11 +16,11 @@
 #include <cstdlib>
 
 // For modelTransformsers testing
-#include <iDynTree/Model/ModelTransformers.h>
-#include <iDynTree/Model/ForwardKinematics.h>
-#include <iDynTree/Model/Dynamics.h>
-#include <iDynTree/Model/FreeFloatingState.h>
-#include <iDynTree/Model/SubModel.h>
+#include <iDynTree/ModelTransformers.h>
+#include <iDynTree/ForwardKinematics.h>
+#include <iDynTree/Dynamics.h>
+#include <iDynTree/FreeFloatingState.h>
+#include <iDynTree/SubModel.h>
 
 using namespace iDynTree;
 

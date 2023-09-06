@@ -4,7 +4,7 @@
 #ifndef PREDICTSENSORSMEASUREMENTS_HPP
 #define PREDICTSENSORSMEASUREMENTS_HPP
 
-#include <iDynTree/Model/LinkState.h>
+#include <iDynTree/LinkState.h>
 
 #include <iDynTree/GeomVector3.h>
 

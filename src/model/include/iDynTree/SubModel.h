@@ -4,7 +4,7 @@
 #ifndef IDYNTREE_SUB_MODEL_H
 #define IDYNTREE_SUB_MODEL_H
 
-#include <iDynTree/Model/Indices.h>
+#include <iDynTree/Indices.h>
 
 #include <vector>
 #include <string>

@@ -6,7 +6,7 @@
 
 
 
-#include <iDynTree/Model/IJoint.h>
+#include <iDynTree/IJoint.h>
 
 
 namespace iDynTree

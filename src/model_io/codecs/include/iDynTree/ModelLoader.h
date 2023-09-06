@@ -4,7 +4,7 @@
 #ifndef IDYNTREE_MODEL_LOADER_H
 #define IDYNTREE_MODEL_LOADER_H
 
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/Model.h>
 #include <iDynTree/Sensors/Sensors.h>
 
 #include <memory>

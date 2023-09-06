@@ -8,7 +8,7 @@
 
 #include <iDynTree/XMLAttribute.h>
 
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/Model.h>
 
 #include <string>
 #include <unordered_map>

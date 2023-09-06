@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#include <iDynTree/Model/DynamicsLinearizationHelpers.h>
+#include <iDynTree/DynamicsLinearizationHelpers.h>
 
 #include <iDynTree/EigenHelpers.h>
 

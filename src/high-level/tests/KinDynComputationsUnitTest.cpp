@@ -14,12 +14,12 @@
 #include <iDynTree/EigenHelpers.h>
 
 #include <iDynTree/KinDynComputations.h>
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/Traversal.h>
-#include <iDynTree/Model/JointState.h>
-#include <iDynTree/Model/FreeFloatingState.h>
-#include <iDynTree/Model/SubModel.h>
-#include <iDynTree/Model/ModelTransformers.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/Traversal.h>
+#include <iDynTree/JointState.h>
+#include <iDynTree/FreeFloatingState.h>
+#include <iDynTree/SubModel.h>
+#include <iDynTree/ModelTransformers.h>
 
 #include <iDynTree/ModelIO/ModelLoader.h>
 

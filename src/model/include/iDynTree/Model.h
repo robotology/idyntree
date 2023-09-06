@@ -4,12 +4,12 @@
 #ifndef IDYNTREE_MODEL_H
 #define IDYNTREE_MODEL_H
 
-#include <iDynTree/Model/IJoint.h>
-#include <iDynTree/Model/Link.h>
+#include <iDynTree/IJoint.h>
+#include <iDynTree/Link.h>
 #include <iDynTree/Transform.h>
 
-#include <iDynTree/Model/Indices.h>
-#include <iDynTree/Model/SolidShapes.h>
+#include <iDynTree/Indices.h>
+#include <iDynTree/SolidShapes.h>
 
 #include <cstdlib>
 #include <string>

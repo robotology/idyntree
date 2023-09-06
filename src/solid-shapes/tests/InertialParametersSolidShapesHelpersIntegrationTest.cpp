@@ -7,7 +7,7 @@
 #include <iDynTree/InertialParametersSolidShapesHelpers.h>
 
 #include <iDynTree/VectorDynSize.h>
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/Model.h>
 
 
 using namespace iDynTree;

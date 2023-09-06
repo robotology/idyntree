@@ -17,7 +17,7 @@
 #include <Eigen/Core>
 
 // iDynTree headers
-#include <iDynTree/Model/FreeFloatingState.h>
+#include <iDynTree/FreeFloatingState.h>
 #include <iDynTree/KinDynComputations.h>
 #include <iDynTree/ModelIO/ModelLoader.h>
 

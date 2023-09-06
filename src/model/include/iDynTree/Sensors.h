@@ -19,8 +19,8 @@ namespace iDynTree {
 
 #include <iDynTree/VectorDynSize.h>
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/Indices.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/Indices.h>
 
 namespace iDynTree {
 

@@ -3,8 +3,8 @@
 #include <iDynTree/Sensors/Sensors.h>
 #include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
 #include <iDynTree/Sensors/ModelSensorsTransformers.h>
-#include <iDynTree/Model/ModelTransformers.h>
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/ModelTransformers.h>
+#include <iDynTree/Model.h>
 #include <iDynTree/ModelIO/ModelLoader.h>
 #include "testModels.h"
 #include <iostream>

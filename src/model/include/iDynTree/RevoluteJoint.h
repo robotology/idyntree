@@ -8,8 +8,8 @@
 #include <iDynTree/SpatialMotionVector.h>
 
 #include <iDynTree/Axis.h>
-#include <iDynTree/Model/Indices.h>
-#include <iDynTree/Model/MovableJointImpl.h>
+#include <iDynTree/Indices.h>
+#include <iDynTree/MovableJointImpl.h>
 
 namespace iDynTree
 {

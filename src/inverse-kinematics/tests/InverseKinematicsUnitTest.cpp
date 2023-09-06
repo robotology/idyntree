@@ -6,8 +6,8 @@
 
 #include <iDynTree/Transform.h>
 #include <iDynTree/TestUtils.h>
-#include <iDynTree/Model/JointState.h>
-#include <iDynTree/Model/ModelTestUtils.h>
+#include <iDynTree/JointState.h>
+#include <iDynTree/ModelTestUtils.h>
 #include <iDynTree/ModelIO/ModelLoader.h>
 
 #include "testModels.h"

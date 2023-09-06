@@ -9,7 +9,7 @@
 #include <iDynTree/VectorDynSize.h>
 #include <iDynTree/VectorFixSize.h>
 
-#include <iDynTree/Model/SolidShapes.h>
+#include <iDynTree/SolidShapes.h>
 
 #ifdef IDYNTREE_USES_ASSIMP
 #include <assimp/Importer.hpp>

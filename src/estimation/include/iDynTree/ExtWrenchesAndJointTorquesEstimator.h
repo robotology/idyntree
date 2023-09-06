@@ -6,13 +6,13 @@
 
 #include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/SubModel.h>
-#include <iDynTree/Model/ContactWrench.h>
-#include <iDynTree/Model/Traversal.h>
-#include <iDynTree/Model/JointState.h>
-#include <iDynTree/Model/FreeFloatingState.h>
-#include <iDynTree/Model/LinkTraversalsCache.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/SubModel.h>
+#include <iDynTree/ContactWrench.h>
+#include <iDynTree/Traversal.h>
+#include <iDynTree/JointState.h>
+#include <iDynTree/FreeFloatingState.h>
+#include <iDynTree/LinkTraversalsCache.h>
 
 #include <iDynTree/Sensors/Sensors.h>
 

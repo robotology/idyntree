@@ -9,9 +9,9 @@
 #include <iDynTree/TestUtils.h>
 #include <iDynTree/EigenHelpers.h>
 #include <iDynTree/EigenSparseHelpers.h>
-#include <iDynTree/Model/ModelTestUtils.h>
+#include <iDynTree/ModelTestUtils.h>
 
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/Model.h>
 #include <iDynTree/ModelIO/ModelLoader.h>
 
 #include <iDynTree/Sensors/AccelerometerSensor.h>

@@ -11,7 +11,7 @@
 #include <iDynTree/Span.h>
 #include <iDynTree/MatrixView.h>
 #include <iDynTree/VectorDynSize.h>
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/Model.h>
 
 namespace iDynTree
 {

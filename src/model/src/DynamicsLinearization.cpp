@@ -3,12 +3,12 @@
 
 
 
-#include <iDynTree/Model/DynamicsLinearization.h>
+#include <iDynTree/DynamicsLinearization.h>
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/Traversal.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/Traversal.h>
 
-#include <iDynTree/Model/FreeFloatingState.h>
+#include <iDynTree/FreeFloatingState.h>
 
 #include <iDynTree/EigenHelpers.h>
 #include <iDynTree/TransformDerivative.h>

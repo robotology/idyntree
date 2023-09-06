@@ -7,7 +7,7 @@
 
 #include <iDynTree/XMLAttribute.h>
 #include <iDynTree/Utils.h>
-#include <iDynTree/Model/SolidShapes.h>
+#include <iDynTree/SolidShapes.h>
 
 namespace iDynTree{
 

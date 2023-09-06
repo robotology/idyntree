@@ -6,8 +6,8 @@
 #include <iDynTree/TestUtils.h>
 
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/RevoluteJoint.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/RevoluteJoint.h>
 #include <iDynTree/ModelIO/ModelLoader.h>
 #include <iDynTree/ModelIO/ModelExporter.h>
 

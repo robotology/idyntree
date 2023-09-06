@@ -5,7 +5,7 @@
 #define IDYNTREE_MODEL_SUBMODEL_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Model/SubModel.h> is deprecated. Please use <iDynTree/SubModel.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/SubModel.h> is deprecated. Please use <iDynTree/SubModel.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/SubModel.h>

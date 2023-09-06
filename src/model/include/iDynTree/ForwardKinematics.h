@@ -4,7 +4,7 @@
 #ifndef IDYNTREE_FORWARD_KINEMATICS_H
 #define IDYNTREE_FORWARD_KINEMATICS_H
 
-#include <iDynTree/Model/Indices.h>
+#include <iDynTree/Indices.h>
 
 namespace iDynTree
 {

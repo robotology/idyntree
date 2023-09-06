@@ -6,7 +6,7 @@
 
 #include <iDynTree/XMLElement.h>
 
-#include <iDynTree/Model/IJoint.h>
+#include <iDynTree/IJoint.h>
 
 #include <iDynTree/Axis.h>
 #include <iDynTree/Transform.h>

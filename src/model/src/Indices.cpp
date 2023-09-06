@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Model/Indices.h>
+#include <iDynTree/Indices.h>
 
 namespace iDynTree
 {

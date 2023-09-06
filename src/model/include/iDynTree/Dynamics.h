@@ -6,9 +6,9 @@
 
 #include <iDynTree/MatrixDynSize.h>
 
-#include <iDynTree/Model/Indices.h>
-#include <iDynTree/Model/LinkState.h>
-#include <iDynTree/Model/JointState.h>
+#include <iDynTree/Indices.h>
+#include <iDynTree/LinkState.h>
+#include <iDynTree/JointState.h>
 
 namespace iDynTree
 {

@@ -8,7 +8,7 @@
 
 #include "VisualElement.h"
 
-#include <iDynTree/Model/Link.h>
+#include <iDynTree/Link.h>
 
 namespace iDynTree {
     class LinkElement;

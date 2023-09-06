@@ -5,7 +5,7 @@
 #define IDYNTREE_MODEL_LINKTRAVERSALSCACHE_H
 
 #include <vector>
-#include <iDynTree/Model/Indices.h>
+#include <iDynTree/Indices.h>
 
 namespace iDynTree {
     class Traversal;

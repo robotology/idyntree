@@ -9,11 +9,11 @@
 #include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
 #include <iDynTree/Sensors/Sensors.h>
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/Traversal.h>
-#include <iDynTree/Model/ForwardKinematics.h>
-#include <iDynTree/Model/FreeFloatingState.h>
-#include <iDynTree/Model/Dynamics.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/Traversal.h>
+#include <iDynTree/ForwardKinematics.h>
+#include <iDynTree/FreeFloatingState.h>
+#include <iDynTree/Dynamics.h>
 
 #include <iDynTree/SpatialAcc.h>
 #include <iDynTree/EigenHelpers.h>

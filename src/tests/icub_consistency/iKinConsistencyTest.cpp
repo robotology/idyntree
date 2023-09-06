@@ -7,14 +7,14 @@
 
 #include <iDynTree/KinDynComputations.h>
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/JointState.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/JointState.h>
 
 #include <iDynTree/yarp/YARPConversions.h>
 
 #include <iCub/iKin/iKinFwd.h>
 
-#include <iDynTree/Model/DenavitHartenberg.h>
+#include <iDynTree/DenavitHartenberg.h>
 
 #include <cassert>
 #include <cstdio>

@@ -13,9 +13,9 @@
 #include <iDynTree/Utils.h>
 #include <iDynTree/Span.h>
 
-#include <iDynTree/Model/Indices.h>
-#include <iDynTree/Model/FreeFloatingMatrices.h>
-#include <iDynTree/Model/LinkState.h>
+#include <iDynTree/Indices.h>
+#include <iDynTree/FreeFloatingMatrices.h>
+#include <iDynTree/LinkState.h>
 
 namespace iDynTree
 {

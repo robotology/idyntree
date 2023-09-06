@@ -6,9 +6,9 @@
 #include "IrrlichtUtils.h"
 #include "Label.h"
 
-#include <iDynTree/Model/ForwardKinematics.h>
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/Traversal.h>
+#include <iDynTree/ForwardKinematics.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/Traversal.h>
 
 namespace iDynTree
 {

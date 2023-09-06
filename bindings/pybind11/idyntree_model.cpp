@@ -2,16 +2,16 @@
 
 #include "error_utilities.h"
 
-#include <iDynTree/Model/FixedJoint.h>
-#include <iDynTree/Model/IJoint.h>
-#include <iDynTree/Model/Indices.h>
-#include <iDynTree/Model/Link.h>
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/PrismaticJoint.h>
-#include <iDynTree/Model/RevoluteJoint.h>
-#include <iDynTree/Model/SolidShapes.h>
-#include <iDynTree/Model/Traversal.h>
-#include <iDynTree/Model/ModelTestUtils.h>
+#include <iDynTree/FixedJoint.h>
+#include <iDynTree/IJoint.h>
+#include <iDynTree/Indices.h>
+#include <iDynTree/Link.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/PrismaticJoint.h>
+#include <iDynTree/RevoluteJoint.h>
+#include <iDynTree/SolidShapes.h>
+#include <iDynTree/Traversal.h>
+#include <iDynTree/ModelTestUtils.h>
 
 #include <pybind11/operators.h>
 #include <pybind11/pybind11.h>

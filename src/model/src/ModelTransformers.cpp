@@ -1,14 +1,14 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/SubModel.h>
-#include <iDynTree/Model/Traversal.h>
-#include <iDynTree/Model/FreeFloatingState.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/SubModel.h>
+#include <iDynTree/Traversal.h>
+#include <iDynTree/FreeFloatingState.h>
 
-#include <iDynTree/Model/FixedJoint.h>
-#include <iDynTree/Model/RevoluteJoint.h>
-#include <iDynTree/Model/PrismaticJoint.h>
+#include <iDynTree/FixedJoint.h>
+#include <iDynTree/RevoluteJoint.h>
+#include <iDynTree/PrismaticJoint.h>
 
 #include <cassert>
 #include <set>

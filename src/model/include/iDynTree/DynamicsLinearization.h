@@ -7,8 +7,8 @@
 #include <iDynTree/MatrixFixSize.h>
 #include <iDynTree/MatrixDynSize.h>
 
-#include <iDynTree/Model/Dynamics.h>
-#include <iDynTree/Model/DynamicsLinearizationHelpers.h>
+#include <iDynTree/Dynamics.h>
+#include <iDynTree/DynamicsLinearizationHelpers.h>
 
 namespace iDynTree
 {

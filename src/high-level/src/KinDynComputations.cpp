@@ -16,14 +16,14 @@
 
 #include <iDynTree/EigenHelpers.h>
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/Traversal.h>
-#include <iDynTree/Model/FreeFloatingState.h>
-#include <iDynTree/Model/LinkState.h>
-#include <iDynTree/Model/LinkTraversalsCache.h>
-#include <iDynTree/Model/ForwardKinematics.h>
-#include <iDynTree/Model/Dynamics.h>
-#include <iDynTree/Model/Jacobians.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/Traversal.h>
+#include <iDynTree/FreeFloatingState.h>
+#include <iDynTree/LinkState.h>
+#include <iDynTree/LinkTraversalsCache.h>
+#include <iDynTree/ForwardKinematics.h>
+#include <iDynTree/Dynamics.h>
+#include <iDynTree/Jacobians.h>
 
 #include <iDynTree/ModelIO/ModelLoader.h>
 

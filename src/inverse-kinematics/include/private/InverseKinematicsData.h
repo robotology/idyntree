@@ -9,7 +9,7 @@
 #include <iDynTree/InverseKinematics.h>
 
 #include <iDynTree/KinDynComputations.h>
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/Model.h>
 #include <iDynTree/VectorDynSize.h>
 #include <iDynTree/MatrixDynSize.h>
 #include <iDynTree/Transform.h>

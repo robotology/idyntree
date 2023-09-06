@@ -4,8 +4,8 @@
 #ifndef IDYNTREE_DENAVIT_HARTENBERG_H
 #define IDYNTREE_DENAVIT_HARTENBERG_H
 
-#include <iDynTree/Model/Indices.h>
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/Indices.h>
+#include <iDynTree/Model.h>
 
 #include <iDynTree/Transform.h>
 

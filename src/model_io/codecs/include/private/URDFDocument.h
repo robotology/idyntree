@@ -12,7 +12,7 @@
 #include "VisualElement.h"
 #include "iDynTree/ModelIO/ModelLoader.h"
 
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/Model.h>
 #include <iDynTree/Sensors/Sensors.h>
 
 #include <string>

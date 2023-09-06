@@ -5,8 +5,8 @@
 #include <iDynTree/TransformDerivative.h>
 #include <iDynTree/Utils.h>
 
-#include <iDynTree/Model/FixedJoint.h>
-#include <iDynTree/Model/LinkState.h>
+#include <iDynTree/FixedJoint.h>
+#include <iDynTree/LinkState.h>
 
 #include <cassert>
 

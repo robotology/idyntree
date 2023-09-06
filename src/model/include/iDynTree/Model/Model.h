@@ -5,7 +5,7 @@
 #define IDYNTREE_MODEL_MODEL_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Model/Model.h> is deprecated. Please use <iDynTree/Model.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/Model.h> is deprecated. Please use <iDynTree/Model.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/Model.h>

@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#include <iDynTree/Model/Traversal.h>
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/Traversal.h>
+#include <iDynTree/Model.h>
 
 #include <cassert>
 #include <sstream>

@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#include <iDynTree/Model/FreeFloatingMatrices.h>
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/FreeFloatingMatrices.h>
+#include <iDynTree/Model.h>
 
 #include <cassert>
 

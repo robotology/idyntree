@@ -8,12 +8,12 @@
 #include <iDynTree/SpatialInertia.h>
 #include <iDynTree/Transform.h>
 #include <iDynTree/VectorFixSize.h>
-#include <iDynTree/Model/FixedJoint.h>
-#include <iDynTree/Model/Indices.h>
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/PrismaticJoint.h>
-#include <iDynTree/Model/RevoluteJoint.h>
-#include <iDynTree/Model/Traversal.h>
+#include <iDynTree/FixedJoint.h>
+#include <iDynTree/Indices.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/PrismaticJoint.h>
+#include <iDynTree/RevoluteJoint.h>
+#include <iDynTree/Traversal.h>
 
 #include "URDFParsingUtils.h"
 

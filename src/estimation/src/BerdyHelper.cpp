@@ -7,10 +7,10 @@
 #include <iDynTree/EigenHelpers.h>
 #include <iDynTree/SparseMatrix.h>
 
-#include <iDynTree/Model/ForwardKinematics.h>
-#include <iDynTree/Model/Dynamics.h>
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/Traversal.h>
+#include <iDynTree/ForwardKinematics.h>
+#include <iDynTree/Dynamics.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/Traversal.h>
 #include <iDynTree/Sensors/Sensors.h>
 #include <iDynTree/Sensors/AllSensorsTypes.h>
 

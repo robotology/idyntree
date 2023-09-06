@@ -3,10 +3,10 @@
 
 
 #include <iDynTree/TestUtils.h>
-#include <iDynTree/Model/ModelTestUtils.h>
+#include <iDynTree/ModelTestUtils.h>
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/DenavitHartenberg.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/DenavitHartenberg.h>
 #include <iDynTree/ModelIO/ModelLoader.h>
 
 #include <iDynTree/KinDynComputations.h>

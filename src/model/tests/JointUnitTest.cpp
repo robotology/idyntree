@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Model/Link.h>
+#include <iDynTree/Link.h>
 
 #include <iDynTree/Position.h>
 #include <iDynTree/TestUtils.h>
@@ -10,8 +10,8 @@
 #include <iDynTree/VectorDynSize.h>
 #include <iDynTree/EigenHelpers.h>
 
-#include <iDynTree/Model/RevoluteJoint.h>
-#include <iDynTree/Model/PrismaticJoint.h>
+#include <iDynTree/RevoluteJoint.h>
+#include <iDynTree/PrismaticJoint.h>
 
 #include <cstdio>
 #include <cstdlib>

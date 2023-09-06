@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include <iDynTree/Model/Model.h>
+#include <iDynTree/Model.h>
 
 // To load models from file
 #include <iDynTree/ModelIO/ModelLoader.h>

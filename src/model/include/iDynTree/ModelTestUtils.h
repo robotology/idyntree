@@ -5,12 +5,12 @@
 #define IDYNTREE_MODEL_TEST_UTILS_H
 
 
-#include <iDynTree/Model/Model.h>
-#include <iDynTree/Model/FixedJoint.h>
-#include <iDynTree/Model/RevoluteJoint.h>
-#include <iDynTree/Model/PrismaticJoint.h>
-#include <iDynTree/Model/FreeFloatingState.h>
-#include <iDynTree/Model/LinkState.h>
+#include <iDynTree/Model.h>
+#include <iDynTree/FixedJoint.h>
+#include <iDynTree/RevoluteJoint.h>
+#include <iDynTree/PrismaticJoint.h>
+#include <iDynTree/FreeFloatingState.h>
+#include <iDynTree/LinkState.h>
 
 #include <iDynTree/TestUtils.h>
 

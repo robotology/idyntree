@@ -5,7 +5,7 @@
 #define IDYNTREE_MODEL_IJOINT_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Model/IJoint.h> is deprecated. Please use <iDynTree/IJoint.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/IJoint.h> is deprecated. Please use <iDynTree/IJoint.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/IJoint.h>

@@ -6,7 +6,7 @@
 
 #include <iDynTree/MatrixFixSize.h>
 
-#include <iDynTree/Model/Dynamics.h>
+#include <iDynTree/Dynamics.h>
 
 namespace iDynTree
 {
