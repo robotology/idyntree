@@ -7,7 +7,7 @@
 #include <iDynTree/Model.h>
 #include <iDynTree/ModelIO/ModelExporter.h>
 #include <iDynTree/ModelIO/ModelLoader.h>
-#include <iDynTree/Sensors/Sensors.h>
+#include <iDynTree/Sensors.h>
 
 #include <pybind11/operators.h>
 #include <pybind11/pybind11.h>

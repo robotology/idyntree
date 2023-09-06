@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Fondazione Istituto Italiano di Tecnologia (IIT)
 // SPDX-License-Identifier: BSD-3-Clause
 
-#include "iDynTree/Sensors/GyroscopeSensor.h"
+#include "iDynTree/GyroscopeSensor.h"
 #include "iDynTree/Transform.h"
 #include "iDynTree/Wrench.h"
 #include "iDynTree/Twist.h"

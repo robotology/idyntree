@@ -14,8 +14,8 @@
 #include <iDynTree/Model.h>
 #include <iDynTree/ModelIO/ModelLoader.h>
 
-#include <iDynTree/Sensors/AccelerometerSensor.h>
-#include <iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h>
+#include <iDynTree/AccelerometerSensor.h>
+#include <iDynTree/ThreeAxisAngularAccelerometerSensor.h>
 
 #include <iDynTree/Estimation/BerdyHelper.h>
 #include <iDynTree/Estimation/BerdySparseMAPSolver.h>

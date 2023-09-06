@@ -4,7 +4,7 @@
 #include <iDynTree/Estimation/BerdyHelper.h>
 #include <iDynTree/Estimation/ExtWrenchesAndJointTorquesEstimator.h>
 
-#include <iDynTree/Sensors/PredictSensorsMeasurements.h>
+#include <iDynTree/PredictSensorsMeasurements.h>
 
 #include "testModels.h"
 #include <iDynTree/EigenHelpers.h>

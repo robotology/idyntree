@@ -3,12 +3,12 @@
 
 #include <iostream>
 
-# include <iDynTree/Sensors/Sensors.h>
+# include <iDynTree/Sensors.h>
 #include "testModels.h"
 #include <iDynTree/Model.h>
 #include <iDynTree/ModelIO/ModelLoader.h>
 #include <iDynTree/ModelIO/URDFDofsImport.h>
-#include <iDynTree/Sensors/PredictSensorsMeasurements.h>
+#include <iDynTree/PredictSensorsMeasurements.h>
 #include <iDynTree/Traversal.h>
 #include <iDynTree/LinkState.h>
 #include <iDynTree/FreeFloatingState.h>

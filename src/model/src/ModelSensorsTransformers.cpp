@@ -4,10 +4,10 @@
 #include <iDynTree/Model.h>
 #include <iDynTree/ModelTransformers.h>
 
-#include <iDynTree/Sensors/Sensors.h>
-#include <iDynTree/Sensors/ModelSensorsTransformers.h>
+#include <iDynTree/Sensors.h>
+#include <iDynTree/ModelSensorsTransformers.h>
 
-#include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
+#include <iDynTree/SixAxisForceTorqueSensor.h>
 
 
 #include <cassert>

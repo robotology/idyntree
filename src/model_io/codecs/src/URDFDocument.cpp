@@ -7,7 +7,7 @@
 #include <iDynTree/PrismaticJoint.h>
 #include <iDynTree/RevoluteJoint.h>
 #include <iDynTree/ModelTransformers.h>
-#include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
+#include <iDynTree/SixAxisForceTorqueSensor.h>
 
 #include <algorithm>
 #include <unordered_set>

@@ -5,7 +5,7 @@
 #define IDYNTREE_SENSORS_SIX_AXIS_FT_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Sensors/SixAxisForceTorqueSensor.h> is deprecated. Please use <iDynTree/SixAxisForceTorqueSensor.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/SixAxisForceTorqueSensor.h> is deprecated. Please use <iDynTree/SixAxisForceTorqueSensor.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/SixAxisForceTorqueSensor.h>

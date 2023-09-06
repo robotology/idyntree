@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#include "iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h"
+#include "iDynTree/ThreeAxisAngularAccelerometerSensor.h"
 
 #include "iDynTree/Transform.h"
 

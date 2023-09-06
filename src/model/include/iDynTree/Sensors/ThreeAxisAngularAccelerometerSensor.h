@@ -5,7 +5,7 @@
 #define IDYNTREE_SENSORS_3D_ANG_ACC_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h> is deprecated. Please use <iDynTree/ThreeAxisAngularAccelerometerSensor.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/ThreeAxisAngularAccelerometerSensor.h> is deprecated. Please use <iDynTree/ThreeAxisAngularAccelerometerSensor.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/ThreeAxisAngularAccelerometerSensor.h>

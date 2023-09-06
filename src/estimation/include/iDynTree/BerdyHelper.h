@@ -17,7 +17,7 @@
 #include <iDynTree/Traversal.h>
 #include <iDynTree/FreeFloatingState.h>
 
-#include <iDynTree/Sensors/Sensors.h>
+#include <iDynTree/Sensors.h>
 
 #include <iDynTree/LinkTraversalsCache.h>
 

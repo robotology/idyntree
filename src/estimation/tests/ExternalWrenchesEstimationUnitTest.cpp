@@ -3,9 +3,9 @@
 
 #include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
 
-#include <iDynTree/Sensors/Sensors.h>
-#include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
-#include <iDynTree/Sensors/PredictSensorsMeasurements.h>
+#include <iDynTree/Sensors.h>
+#include <iDynTree/SixAxisForceTorqueSensor.h>
+#include <iDynTree/PredictSensorsMeasurements.h>
 
 #include <iDynTree/ContactWrench.h>
 #include <iDynTree/FreeFloatingState.h>

@@ -38,8 +38,8 @@
 #include <iDynTree/TestUtils.h>
 #include <iDynTree/ClassicalAcc.h>
 
-#include <iDynTree/Sensors/Sensors.h>
-#include <iDynTree/Sensors/PredictSensorsMeasurements.h>
+#include <iDynTree/Sensors.h>
+#include <iDynTree/PredictSensorsMeasurements.h>
 
 #include <iDynTree/ModelIO/ModelLoader.h>
 #include <iDynTree/Estimation/ExternalWrenchesEstimation.h>

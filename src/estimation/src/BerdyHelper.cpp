@@ -11,8 +11,8 @@
 #include <iDynTree/Dynamics.h>
 #include <iDynTree/Model.h>
 #include <iDynTree/Traversal.h>
-#include <iDynTree/Sensors/Sensors.h>
-#include <iDynTree/Sensors/AllSensorsTypes.h>
+#include <iDynTree/Sensors.h>
+#include <iDynTree/AllSensorsTypes.h>
 
 #include <iDynTree/Estimation/ExternalWrenchesEstimation.h>
 

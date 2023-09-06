@@ -14,7 +14,7 @@
 #include <iDynTree/FreeFloatingState.h>
 #include <iDynTree/LinkTraversalsCache.h>
 
-#include <iDynTree/Sensors/Sensors.h>
+#include <iDynTree/Sensors.h>
 
 namespace iDynTree
 {

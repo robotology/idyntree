@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 #include <iDynTree/TestUtils.h>
-#include <iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h>
+#include <iDynTree/ThreeAxisForceTorqueContactSensor.h>
 
 using namespace iDynTree;
 

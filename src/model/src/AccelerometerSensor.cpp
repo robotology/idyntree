@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 
 
-#include "iDynTree/Sensors/AccelerometerSensor.h"
+#include "iDynTree/AccelerometerSensor.h"
 
 #include "iDynTree/Transform.h"
 

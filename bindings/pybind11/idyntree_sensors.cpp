@@ -5,9 +5,9 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 
-#include <iDynTree/Sensors/AccelerometerSensor.h>
-#include <iDynTree/Sensors/Sensors.h>
-#include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
+#include <iDynTree/AccelerometerSensor.h>
+#include <iDynTree/Sensors.h>
+#include <iDynTree/SixAxisForceTorqueSensor.h>
 
 namespace iDynTree {
 namespace bindings {

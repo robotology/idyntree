@@ -15,7 +15,7 @@ namespace iDynTree
     class Twist;
 }
 
-#include <iDynTree/Sensors/Sensors.h>
+#include <iDynTree/Sensors.h>
 
 namespace iDynTree {
 

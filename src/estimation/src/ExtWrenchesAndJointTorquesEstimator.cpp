@@ -17,11 +17,11 @@
 #include <iDynTree/ContactWrench.h>
 #include <iDynTree/Dynamics.h>
 #include <iDynTree/ModelTransformers.h>
-#include <iDynTree/Sensors/ModelSensorsTransformers.h>
+#include <iDynTree/ModelSensorsTransformers.h>
 
-#include <iDynTree/Sensors/Sensors.h>
-#include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
-#include <iDynTree/Sensors/PredictSensorsMeasurements.h>
+#include <iDynTree/Sensors.h>
+#include <iDynTree/SixAxisForceTorqueSensor.h>
+#include <iDynTree/PredictSensorsMeasurements.h>
 
 #include <iDynTree/ModelIO/ModelLoader.h>
 

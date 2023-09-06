@@ -13,7 +13,7 @@
 #include "iDynTree/ModelIO/ModelLoader.h"
 
 #include <iDynTree/Model.h>
-#include <iDynTree/Sensors/Sensors.h>
+#include <iDynTree/Sensors.h>
 
 #include <string>
 #include <vector>

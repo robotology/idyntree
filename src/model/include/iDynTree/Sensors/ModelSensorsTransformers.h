@@ -5,7 +5,7 @@
 #define IDYNTREE_SENSORS_MODEL_SENSORS_TRANSFORMERS_H
 
 #ifdef __DEPRECATED
-  #warning <iDynTree/Sensors/ModelSensorsTransformers.h> is deprecated. Please use <iDynTree/ModelSensorsTransformers.h>. To disable this warning use -Wno-deprecated.
+  #warning <iDynTree/ModelSensorsTransformers.h> is deprecated. Please use <iDynTree/ModelSensorsTransformers.h>. To disable this warning use -Wno-deprecated.
 #endif
 
 #include <iDynTree/ModelSensorsTransformers.h>

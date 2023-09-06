@@ -7,7 +7,7 @@
 #include <iDynTree/XMLElement.h>
 
 #include <iDynTree/Transform.h>
-#include <iDynTree/Sensors/Sensors.h>
+#include <iDynTree/Sensors.h>
 
 #include <memory>
 #include <string>

@@ -14,8 +14,8 @@
 #include <iDynTree/ContactWrench.h>
 #include <iDynTree/LinkTraversalsCache.h>
 
-#include <iDynTree/Sensors/Sensors.h>
-#include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
+#include <iDynTree/Sensors.h>
+#include <iDynTree/SixAxisForceTorqueSensor.h>
 
 namespace iDynTree
 {

@@ -3,9 +3,9 @@
 
 #include <iDynTree/TestUtils.h>
 #include <iDynTree/Transform.h>
-#include <iDynTree/Sensors/Sensors.h>
-#include <iDynTree/Sensors/AccelerometerSensor.h>
-#include <iDynTree/Sensors/SixAxisForceTorqueSensor.h>
+#include <iDynTree/Sensors.h>
+#include <iDynTree/AccelerometerSensor.h>
+#include <iDynTree/SixAxisForceTorqueSensor.h>
 
 void checkList()
 {

@@ -6,7 +6,7 @@
 #include "URDFDocument.h"
 
 #include <iDynTree/XMLParser.h>
-#include <iDynTree/Sensors/ModelSensorsTransformers.h>
+#include <iDynTree/ModelSensorsTransformers.h>
 
 
 #include <string>

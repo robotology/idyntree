@@ -101,13 +101,13 @@
 #include "iDynTree/DenavitHartenberg.h"
 
 // Sensors related data structures
-#include "iDynTree/Sensors/Sensors.h"
-#include "iDynTree/Sensors/SixAxisForceTorqueSensor.h"
-#include "iDynTree/Sensors/AccelerometerSensor.h"
-#include "iDynTree/Sensors/GyroscopeSensor.h"
-#include "iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h"
-#include "iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h"
-#include "iDynTree/Sensors/PredictSensorsMeasurements.h"
+#include "iDynTree/Sensors.h"
+#include "iDynTree/SixAxisForceTorqueSensor.h"
+#include "iDynTree/AccelerometerSensor.h"
+#include "iDynTree/GyroscopeSensor.h"
+#include "iDynTree/ThreeAxisAngularAccelerometerSensor.h"
+#include "iDynTree/ThreeAxisForceTorqueContactSensor.h"
+#include "iDynTree/PredictSensorsMeasurements.h"
 
 // Model loading from external formats
 #include "iDynTree/ModelIO/URDFDofsImport.h"
@@ -275,13 +275,13 @@ namespace std {
 %include "iDynTree/DenavitHartenberg.h"
 
 // Sensors related data structures
-%include "iDynTree/Sensors/Sensors.h"
-%include "iDynTree/Sensors/SixAxisForceTorqueSensor.h"
-%include "iDynTree/Sensors/AccelerometerSensor.h"
-%include "iDynTree/Sensors/GyroscopeSensor.h"
-%include "iDynTree/Sensors/ThreeAxisAngularAccelerometerSensor.h"
-%include "iDynTree/Sensors/ThreeAxisForceTorqueContactSensor.h"
-%include "iDynTree/Sensors/PredictSensorsMeasurements.h"
+%include "iDynTree/Sensors.h"
+%include "iDynTree/SixAxisForceTorqueSensor.h"
+%include "iDynTree/AccelerometerSensor.h"
+%include "iDynTree/GyroscopeSensor.h"
+%include "iDynTree/ThreeAxisAngularAccelerometerSensor.h"
+%include "iDynTree/ThreeAxisForceTorqueContactSensor.h"
+%include "iDynTree/PredictSensorsMeasurements.h"
 
 %include "sensors.i"
 

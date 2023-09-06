@@ -5,7 +5,7 @@
 #define IDYNTREE_MODEL_CALIBRATION_HELPER_H
 
 #include <iDynTree/Model.h>
-#include <iDynTree/Sensors/Sensors.h>
+#include <iDynTree/Sensors.h>
 #include <iDynTree/ModelIO/ModelExporter.h>
 
 #include <memory>
