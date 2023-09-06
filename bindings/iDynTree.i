@@ -86,6 +86,7 @@
 #include "iDynTree/PrismaticJoint.h"
 #include "iDynTree/Traversal.h"
 #include "iDynTree/SolidShapes.h"
+#include "iDynTree/Sensors.h"
 #include "iDynTree/Model.h"
 #include "iDynTree/JointState.h"
 #include "iDynTree/FreeFloatingMatrices.h"
@@ -94,20 +95,17 @@
 #include "iDynTree/ModelTestUtils.h"
 #include "iDynTree/ModelTransformers.h"
 #include "iDynTree/SubModel.h"
-
-// Kinematics & Dynamics related functions
-#include "iDynTree/ForwardKinematics.h"
-#include "iDynTree/Dynamics.h"
-#include "iDynTree/DenavitHartenberg.h"
-
-// Sensors related data structures
-#include "iDynTree/Sensors.h"
 #include "iDynTree/SixAxisForceTorqueSensor.h"
 #include "iDynTree/AccelerometerSensor.h"
 #include "iDynTree/GyroscopeSensor.h"
 #include "iDynTree/ThreeAxisAngularAccelerometerSensor.h"
 #include "iDynTree/ThreeAxisForceTorqueContactSensor.h"
 #include "iDynTree/PredictSensorsMeasurements.h"
+
+// Kinematics & Dynamics related functions
+#include "iDynTree/ForwardKinematics.h"
+#include "iDynTree/Dynamics.h"
+#include "iDynTree/DenavitHartenberg.h"
 
 // Model loading from external formats
 #include "iDynTree/URDFDofsImport.h"
@@ -254,6 +252,7 @@ namespace std {
 %include "iDynTree/PrismaticJoint.h"
 %include "iDynTree/Traversal.h"
 %include "iDynTree/SolidShapes.h"
+%include "iDynTree/Sensors.h"
 %include "iDynTree/Model.h"
 %include "iDynTree/JointState.h"
 %include "iDynTree/FreeFloatingMatrices.h"
@@ -262,7 +261,14 @@ namespace std {
 %include "iDynTree/ModelTestUtils.h"
 %include "iDynTree/ModelTransformers.h"
 %include "iDynTree/SubModel.h"
+%include "iDynTree/SixAxisForceTorqueSensor.h"
+%include "iDynTree/AccelerometerSensor.h"
+%include "iDynTree/GyroscopeSensor.h"
+%include "iDynTree/ThreeAxisAngularAccelerometerSensor.h"
+%include "iDynTree/ThreeAxisForceTorqueContactSensor.h"
+%include "iDynTree/PredictSensorsMeasurements.h"
 
+%include "sensors.i"
 %include "joints.i"
 
 %template(SolidShapesVector) std::vector<iDynTree::SolidShape*>;
@@ -273,17 +279,6 @@ namespace std {
 %include "iDynTree/ForwardKinematics.h"
 %include "iDynTree/Dynamics.h"
 %include "iDynTree/DenavitHartenberg.h"
-
-// Sensors related data structures
-%include "iDynTree/Sensors.h"
-%include "iDynTree/SixAxisForceTorqueSensor.h"
-%include "iDynTree/AccelerometerSensor.h"
-%include "iDynTree/GyroscopeSensor.h"
-%include "iDynTree/ThreeAxisAngularAccelerometerSensor.h"
-%include "iDynTree/ThreeAxisForceTorqueContactSensor.h"
-%include "iDynTree/PredictSensorsMeasurements.h"
-
-%include "sensors.i"
 
 // Model loading from external formats
 %include "iDynTree/URDFDofsImport.h"
